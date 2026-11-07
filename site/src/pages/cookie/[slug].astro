@@ -10,7 +10,7 @@ const { cookie } = Astro.props as { cookie: Cookie };
 const paragraphs = (text: string) => text.split(/\n{2,}/).filter(Boolean);
 ---
 <Base
-  title={`${cookie.name}: backstory and personality | Cookie Codex`}
+  title={`${cookie.name}: backstory and personality | Alyssa's Cookie Codex`}
   description={`${cookie.name}, a ${rarityLabel(cookie.rarity)} cookie in Cookie Run: Kingdom.`}
 >
   <article class="wrap cookie" style={`--rc: var(--r-${cookie.rarity})`}>

@@ -116,5 +116,7 @@ button:disabled { cursor: not-allowed; }
 .tag:active { background: var(--plate); }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Smooth scroll keeps your place in view on the long trip back to the top; skipped for reduced motion. */
+  html { scroll-behavior: smooth; }
   .card, .tag { transition: transform 160ms ease-out, box-shadow 160ms ease-out, border-color 160ms; }
 }

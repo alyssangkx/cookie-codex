@@ -4,7 +4,7 @@ import CookieCard from '../components/CookieCard.astro';
 import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../lib/data';
 ---
 <Base
-  title="Cookie Codex: every Cookie Run: Kingdom cookie"
+  title="Alyssa's Cookie Codex: every Cookie Run: Kingdom cookie"
   description="Browse all Cookie Run: Kingdom cookies by rarity and personality, with each cookie's backstory."
 >
   <section class="wrap intro">
@@ -49,7 +49,10 @@ import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../lib/data';
   <div class="wrap shelves">
     {byRarity.map(({ rarity, cookies: list }) => (
       <section class="shelf" id={`rarity-${rarity}`} data-shelf={rarity} style={`--rc: var(--r-${rarity})`}>
-        <h2><span class="rarity-chip">{rarityLabel(rarity)}</span> <span class="shelf-count">{list.length} cookies</span></h2>
+        <div class="shelf-head">
+          <h2><span class="rarity-chip">{rarityLabel(rarity)}</span> <span class="shelf-count">{list.length} cookies</span></h2>
+          <a class="to-top" href="#top">Back to top</a>
+        </div>
         <ul class="grid">
           {list.map((c) => <CookieCard cookie={c} />)}
         </ul>
@@ -164,7 +167,13 @@ import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../lib/data';
   .status { min-height: 1.6em; margin: 0.75rem 0 0; color: var(--cocoa-soft); }
 
   .shelf { scroll-margin-top: 1rem; padding-top: 2rem; }
-  .shelf h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; font-size: 1.6rem; margin-bottom: 1rem; }
+  .shelf-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 1rem; margin-bottom: 1rem; }
+  .shelf h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; font-size: 1.6rem; }
+  .to-top {
+    display: inline-flex; align-items: center; min-height: 44px; padding-inline: 0.25rem;
+    margin-left: auto; /* stays on the far right even when it wraps under a long heading */
+    font-family: var(--font-display); font-weight: 500;
+  }
   .shelf h2 .rarity-chip { font-size: 1.6rem; font-weight: 600; }
   .shelf-count { font-family: var(--font-body); font-size: 1rem; font-weight: 400; color: var(--cocoa-soft); }
   .grid {
