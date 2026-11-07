@@ -1,0 +1,183 @@
+---
+import Base from '../layouts/Base.astro';
+import CookieCard from '../components/CookieCard.astro';
+import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../lib/data';
+---
+<Base
+  title="Cookie Codex: every Cookie Run: Kingdom cookie"
+  description="Browse all Cookie Run: Kingdom cookies by rarity and personality, with each cookie's backstory."
+>
+  <section class="wrap intro">
+    <h1>The cookie shelf</h1>
+    <p class="lede">
+      All {cookies.length} cookies, shelved from the rarest down. Open any cookie to read its backstory
+      and personality, or narrow the shelf by name, rarity or temperament.
+    </p>
+
+    <nav class="jump" aria-label="Jump to a rarity">
+      {byRarity.map(({ rarity, cookies: list }) => (
+        <a href={`#rarity-${rarity}`} class="rarity-chip" style={`--rc: var(--r-${rarity})`}>
+          {rarityLabel(rarity)} <span class="count">{list.length}</span>
+        </a>
+      ))}
+    </nav>
+
+    <form class="filters" id="filters" role="search" hidden>
+      <div class="field grow">
+        <label for="q">Name</label>
+        <input id="q" name="q" type="search" placeholder="e.g. Espresso" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="rarity">Rarity</label>
+        <select id="rarity" name="rarity">
+          <option value="">All rarities</option>
+          {byRarity.map(({ rarity }) => <option value={rarity}>{rarityLabel(rarity)}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for="tag">Personality</label>
+        <select id="tag" name="tag">
+          <option value="">Any personality</option>
+          {tags.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+      <button type="reset" id="clear" disabled>Clear filters</button>
+    </form>
+    <p class="status" id="status" aria-live="polite"></p>
+  </section>
+
+  <div class="wrap shelves">
+    {byRarity.map(({ rarity, cookies: list }) => (
+      <section class="shelf" id={`rarity-${rarity}`} data-shelf={rarity} style={`--rc: var(--r-${rarity})`}>
+        <h2><span class="rarity-chip">{rarityLabel(rarity)}</span> <span class="shelf-count">{list.length} cookies</span></h2>
+        <ul class="grid">
+          {list.map((c) => <CookieCard cookie={c} />)}
+        </ul>
+      </section>
+    ))}
+
+    <div class="empty" id="empty" hidden>
+      <h2>No cookie fits that combination</h2>
+      <p>Try a shorter name, or widen the rarity or personality.</p>
+      <button type="button" id="empty-clear">Clear filters</button>
+    </div>
+  </div>
+
+  <section class="wrap personalities">
+    <h2>Shelved by personality</h2>
+    <p>
+      Tags come from each cookie's personality write-up on the wiki. A cookie gets a tag only when its
+      text uses a matching word, so cookies without a write-up have none.
+    </p>
+    <ul class="tag-list">
+      {tags.map((t) => {
+        const n = cookies.filter((c) => c.personalityTags.includes(t)).length;
+        return <li><a class="tag" href={`/personality/${tagSlug(t)}/`}>{t} ({n})</a></li>;
+      })}
+    </ul>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('filters') as HTMLFormElement;
+  const q = form.elements.namedItem('q') as HTMLInputElement;
+  const rarity = form.elements.namedItem('rarity') as HTMLSelectElement;
+  const tag = form.elements.namedItem('tag') as HTMLSelectElement;
+  const clear = document.getElementById('clear') as HTMLButtonElement;
+  const status = document.getElementById('status')!;
+  const empty = document.getElementById('empty')!;
+  const cards = [...document.querySelectorAll<HTMLElement>('.card')];
+  const shelves = [...document.querySelectorAll<HTMLElement>('[data-shelf]')];
+
+  const params = new URLSearchParams(location.search);
+  q.value = params.get('q') ?? '';
+  rarity.value = params.get('rarity') ?? '';
+  tag.value = params.get('tag') ?? '';
+  form.hidden = false;
+
+  function apply() {
+    const term = q.value.trim().toLowerCase();
+    let shown = 0;
+    for (const card of cards) {
+      const ok =
+        (!term || card.dataset.name!.includes(term)) &&
+        (!rarity.value || card.dataset.rarity === rarity.value) &&
+        (!tag.value || card.dataset.tags!.split(',').includes(tag.value));
+      card.hidden = !ok;
+      if (ok) shown++;
+    }
+    for (const shelf of shelves) shelf.hidden = !shelf.querySelector('.card:not([hidden])');
+
+    const active = Boolean(term || rarity.value || tag.value);
+    clear.disabled = !active;
+    empty.hidden = shown > 0;
+    status.textContent = active ? `Showing ${shown} of ${cards.length} cookies` : '';
+
+    const next = new URLSearchParams();
+    if (term) next.set('q', q.value.trim());
+    if (rarity.value) next.set('rarity', rarity.value);
+    if (tag.value) next.set('tag', tag.value);
+    const qs = next.toString();
+    history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + location.hash);
+  }
+
+  form.addEventListener('input', apply);
+  form.addEventListener('submit', (e) => e.preventDefault());
+  form.addEventListener('reset', () => setTimeout(apply));
+  document.getElementById('empty-clear')!.addEventListener('click', () => {
+    form.reset();
+    q.focus();
+  });
+  apply();
+</script>
+
+<style>
+  .intro { padding-block: clamp(1.5rem, 5vw, 3rem) 1rem; }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+  .lede { max-width: 58ch; font-size: 1.15rem; margin: 0.75rem 0 1.5rem; }
+
+  .jump { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; margin-bottom: 1.5rem; }
+  .jump a { color: var(--cocoa); text-decoration: none; min-height: 44px; }
+  .jump a:hover { text-decoration: underline; }
+  .count { color: var(--cocoa-soft); font-weight: 400; }
+
+  .filters {
+    display: grid; gap: 0.75rem 1rem; align-items: end;
+    grid-template-columns: 1fr;
+    padding: 1rem; background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card);
+  }
+  @media (min-width: 640px) { .filters { grid-template-columns: 1fr 1fr; } .grow { grid-column: 1 / -1; } }
+  @media (min-width: 980px) { .filters { grid-template-columns: 2fr 1fr 1fr auto; } .grow { grid-column: auto; } }
+  .field { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+  label { font-family: var(--font-display); font-weight: 500; }
+  input, select, button {
+    font: inherit; min-height: 44px; border-radius: var(--radius-control);
+    border: 1.5px solid var(--cocoa-soft); background: var(--paper); color: var(--cocoa); padding: 0 0.75rem;
+  }
+  button {
+    font-family: var(--font-display); font-weight: 500;
+    background: var(--berry); border-color: var(--berry); color: var(--berry-ink); padding: 0 1.1rem;
+  }
+  button:hover:not(:disabled) { background: #8f2840; }
+  button:active:not(:disabled) { background: #74203a; }
+  button:disabled { background: var(--plate); border-color: var(--crust); color: var(--cocoa-soft); }
+  .status { min-height: 1.6em; margin: 0.75rem 0 0; color: var(--cocoa-soft); }
+
+  .shelf { scroll-margin-top: 1rem; padding-top: 2rem; }
+  .shelf h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; font-size: 1.6rem; margin-bottom: 1rem; }
+  .shelf h2 .rarity-chip { font-size: 1.6rem; font-weight: 600; }
+  .shelf-count { font-family: var(--font-body); font-size: 1rem; font-weight: 400; color: var(--cocoa-soft); }
+  .grid {
+    display: grid; gap: 1rem; padding: 0; margin: 0;
+    grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+
+  .empty { text-align: center; padding: 3rem 1rem; }
+  .empty p { margin: 0.5rem 0 1.25rem; }
+
+  .personalities { padding-top: 3.5rem; }
+  .personalities h2 { font-size: 1.6rem; }
+  .personalities p { max-width: 62ch; color: var(--cocoa-soft); }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; padding: 0; margin: 1rem 0 0; list-style: none; }
+</style>

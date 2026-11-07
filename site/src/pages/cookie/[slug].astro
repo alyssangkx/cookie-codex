@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import { cookies, rarityLabel, tagSlug, type Cookie } from '../../lib/data';
+
+export function getStaticPaths() {
+  return cookies.map((cookie) => ({ params: { slug: cookie.slug }, props: { cookie } }));
+}
+
+const { cookie } = Astro.props as { cookie: Cookie };
+const paragraphs = (text: string) => text.split(/\n{2,}/).filter(Boolean);
+---
+<Base
+  title={`${cookie.name}: backstory and personality | Cookie Codex`}
+  description={`${cookie.name}, a ${rarityLabel(cookie.rarity)} cookie in Cookie Run: Kingdom.`}
+>
+  <article class="wrap cookie" style={`--rc: var(--r-${cookie.rarity})`}>
+    <a class="back" href={`/#rarity-${cookie.rarity}`}>Back to the {rarityLabel(cookie.rarity)} shelf</a>
+
+    <div class="layout">
+      <div class="portrait">
+        <span class="plate">
+          {cookie.image
+            ? <img src={cookie.image} alt={`${cookie.name} portrait`} width="312" height="312" fetchpriority="high" />
+            : <span>No portrait on file</span>}
+        </span>
+      </div>
+
+      <div class="text">
+        <h1>{cookie.name}</h1>
+        <p class="rarity-chip">{rarityLabel(cookie.rarity)}</p>
+
+        {cookie.personalityTags.length > 0 && (
+          <ul class="tag-list" aria-label="Personality tags">
+            {cookie.personalityTags.map((t) => <li><a class="tag" href={`/personality/${tagSlug(t)}/`}>{t}</a></li>)}
+          </ul>
+        )}
+
+        <section>
+          <h2>Backstory</h2>
+          {cookie.backstory
+            ? paragraphs(cookie.backstory).map((p) => <p>{p}</p>)
+            : <p class="missing">No backstory recorded yet.</p>}
+        </section>
+
+        <section>
+          <h2>Personality</h2>
+          {cookie.personality
+            ? paragraphs(cookie.personality).map((p) => <p>{p}</p>)
+            : <p class="missing">No personality write-up recorded yet.</p>}
+        </section>
+
+        {cookie.wikiUrl && (
+          <p class="source">
+            Source: <a href={cookie.wikiUrl}>Cookie Run: Kingdom Wiki</a>, text under
+            <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA</a>.
+          </p>
+        )}
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .cookie { padding-top: 1.25rem; }
+  .back { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-display); font-weight: 500; }
+  .layout { display: grid; gap: 1.5rem 3rem; margin-top: 1rem; }
+  @media (min-width: 860px) {
+    .layout { grid-template-columns: minmax(280px, 380px) 1fr; align-items: start; }
+    .portrait { position: sticky; top: 1.5rem; }
+  }
+  .plate {
+    display: grid; place-items: center; aspect-ratio: 1; width: min(100%, 380px); margin-inline: auto;
+    border-radius: 50%; background: var(--plate); box-shadow: 0 0 0 6px var(--paper), 0 0 0 9px var(--rc);
+  }
+  .plate img { width: 84%; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  .text > .rarity-chip { font-size: 1.1rem; margin: 0.4rem 0 1rem; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0 0 1.5rem; list-style: none; }
+  section { max-width: 68ch; margin-bottom: 1.75rem; }
+  section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  section p { margin: 0 0 0.9rem; }
+  .missing { color: var(--cocoa-soft); font-style: italic; }
+  .source { color: var(--cocoa-soft); font-size: 0.95rem; }
+</style>

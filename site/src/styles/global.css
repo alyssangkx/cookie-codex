@@ -1,0 +1,120 @@
+/*
+  Why these choices (R-31):
+  - Cream + cocoa: the page reads like a bakery menu card; warm neutrals keep the cookie art as the color.
+  - Berry accent: one frosting color, used only for focus, active filters and links at the key moment.
+  - Rarity colors: a categorical code, always paired with the text label, never the only signal.
+  - Fredoka for names and headings: round letterforms echo the cookies' chunky shapes.
+  - Literata for lore: a book serif, because backstories are read like storybook pages.
+  - Plates: every portrait sits on a round plate, the identity motif repeated on cards and detail pages.
+*/
+:root {
+  --cream: #fbf4e6;
+  --paper: #fffbf3;
+  --crust: #ead9bd;
+  --plate: #f3e6cf;
+  --cocoa: #3a2a1e;
+  --cocoa-soft: #6b5443;
+  --berry: #a8304a;
+  --berry-ink: #ffffff;
+
+  --r-common: #7d7266;
+  --r-rare: #2f6fb0;
+  --r-special: #1f8a7a;
+  --r-epic: #9c3f8f;
+  --r-super-epic: #c2452d;
+  --r-legendary: #1e8fa6;
+  --r-dragon: #5e7d1e;
+  --r-ancient: #94700f;
+  --r-beast: #3d2b55;
+  --r-witch: #5a1e3a;
+
+  --font-display: 'Fredoka', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Literata', Georgia, 'Times New Roman', serif;
+
+  --radius-card: 18px;
+  --radius-control: 10px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --shadow-lift: 0 6px 16px rgb(58 42 30 / 0.12);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { color-scheme: light; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--cocoa);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+[hidden] { display: none !important; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+
+a { color: var(--berry); text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+
+a[href], button:not(:disabled), select, label[for], summary { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+:focus-visible {
+  outline: 3px solid var(--berry);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap { width: min(1200px, 100%); margin-inline: auto; padding-inline: var(--gutter); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 10;
+  background: var(--cocoa); color: var(--cream); padding: 0.6rem 1rem; border-radius: var(--radius-control);
+}
+.skip:focus { top: 1rem; }
+
+/* Scalloped edge: piped frosting along the bottom of the header. */
+.scallop {
+  --s: 14px;
+  height: var(--s);
+  background: radial-gradient(circle at 50% 0, var(--crust) calc(var(--s) * 0.7), transparent calc(var(--s) * 0.7 + 1px));
+  background-size: calc(var(--s) * 2) var(--s);
+  background-repeat: repeat-x;
+}
+
+.rarity-chip {
+  display: inline-flex; align-items: center; gap: 0.45em;
+  font-family: var(--font-display); font-weight: 500; font-size: 0.95rem;
+}
+.rarity-chip::before {
+  content: ''; width: 0.8em; height: 0.8em; border-radius: 50%;
+  background: var(--rc, var(--r-common));
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--rc, var(--r-common));
+}
+
+.tag {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.9rem;
+  border: 1.5px solid var(--crust); border-radius: 999px; background: var(--paper);
+  color: var(--cocoa); text-decoration: none; font-family: var(--font-display); font-weight: 500;
+}
+.tag:hover { border-color: var(--cocoa-soft); }
+.tag:active { background: var(--plate); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .card, .tag { transition: transform 160ms ease-out, box-shadow 160ms ease-out, border-color 160ms; }
+}

@@ -1,0 +1,49 @@
+---
+import type { Cookie } from '../lib/data';
+import { rarityLabel } from '../lib/data';
+
+interface Props { cookie: Cookie }
+const { cookie } = Astro.props;
+---
+<li
+  class="card"
+  data-name={cookie.name.toLowerCase()}
+  data-rarity={cookie.rarity}
+  data-tags={cookie.personalityTags.join(',')}
+  style={`--rc: var(--r-${cookie.rarity})`}
+>
+  <a href={`/cookie/${cookie.slug}/`}>
+    <span class="plate">
+      {cookie.image
+        ? <img src={cookie.image} alt="" width="312" height="312" loading="lazy" decoding="async" />
+        : <span class="no-art">No portrait</span>}
+    </span>
+    <span class="name">{cookie.name}</span>
+    <span class="meta">
+      <span class="rarity-chip">{rarityLabel(cookie.rarity)}</span>
+      {cookie.personalityTags.length > 0 && <span class="tags">{cookie.personalityTags.join(' · ')}</span>}
+    </span>
+  </a>
+</li>
+
+<style>
+  .card {
+    list-style: none; background: var(--paper); border-radius: var(--radius-card);
+    border: 1.5px solid var(--crust); border-bottom: 4px solid var(--rc);
+  }
+  .card a {
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem; height: 100%;
+    padding: 0.9rem 0.75rem 1rem; color: inherit; text-decoration: none; text-align: center;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  .card:active { transform: translateY(0); box-shadow: none; }
+  .plate {
+    display: grid; place-items: center; width: 100%; aspect-ratio: 1;
+    border-radius: 50%; background: var(--plate);
+  }
+  .plate img { width: 86%; }
+  .no-art { color: var(--cocoa-soft); font-size: 0.9rem; }
+  .name { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; line-height: 1.2; }
+  .meta { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; }
+  .tags { color: var(--cocoa-soft); font-size: 0.85rem; }
+</style>

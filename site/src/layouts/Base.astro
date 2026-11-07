@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="/">Cookie Codex</a>
+        <span class="brand-sub">Every Cookie Run: Kingdom cookie, by rarity and personality</span>
+      </div>
+      <div class="scallop" aria-hidden="true"></div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Fan project, not affiliated with Devsisters.</p>
+        <p>
+          Cookie portraits from <a href="https://www.noff.gg/cookie-run-kingdom/cookies">noff.gg</a>.
+          Backstories and personality text from the
+          <a href="https://cookierunkingdom.fandom.com/">Cookie Run: Kingdom Wiki</a>,
+          used under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header { background: var(--crust); }
+  .bar {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem;
+    padding-block: 1rem 0.4rem;
+  }
+  .brand {
+    font-family: var(--font-display); font-weight: 600; font-size: 1.6rem;
+    color: var(--cocoa); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .brand-sub { color: var(--cocoa-soft); font-size: 0.95rem; }
+  .site-header .scallop { background-color: var(--cream); }
+  .site-footer {
+    margin-top: 4rem; padding-block: 2rem; border-top: 1.5px dashed var(--crust);
+    color: var(--cocoa-soft); font-size: 0.95rem;
+  }
+  .site-footer p { margin: 0.25rem 0; max-width: 70ch; }
+</style>

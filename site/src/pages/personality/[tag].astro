@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import CookieCard from '../../components/CookieCard.astro';
+import { cookies, tags, tagSlug, rarityOrder } from '../../lib/data';
+
+export function getStaticPaths() {
+  return tags.map((tag) => ({ params: { tag: tagSlug(tag) }, props: { tag } }));
+}
+
+const { tag } = Astro.props as { tag: string };
+const list = cookies
+  .filter((c) => c.personalityTags.includes(tag))
+  .sort((a, b) => rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity));
+const others = tags.filter((t) => t !== tag);
+---
+<Base
+  title={`${tag} cookies | Cookie Codex`}
+  description={`Cookie Run: Kingdom cookies whose personality is described as ${tag.toLowerCase()}.`}
+>
+  <section class="wrap">
+    <a class="back" href="/">Back to the full shelf</a>
+    <h1>{tag} cookies</h1>
+    <p class="lede">
+      {list.length} cookies whose wiki personality write-up uses a word for {tag.toLowerCase()},
+      rarest first.
+    </p>
+    <ul class="grid">
+      {list.map((c) => <CookieCard cookie={c} />)}
+    </ul>
+
+    <h2>Other personalities</h2>
+    <ul class="tag-list">
+      {others.map((t) => <li><a class="tag" href={`/personality/${tagSlug(t)}/`}>{t}</a></li>)}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  section { padding-top: 1.25rem; }
+  .back { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-display); font-weight: 500; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); margin-top: 0.5rem; }
+  .lede { max-width: 60ch; margin: 0.5rem 0 1.5rem; }
+  .grid {
+    display: grid; gap: 1rem; padding: 0; margin: 0 0 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+  h2 { font-size: 1.4rem; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; padding: 0; margin: 1rem 0 0; list-style: none; }
+</style>

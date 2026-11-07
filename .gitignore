@@ -1,0 +1,12 @@
+# Python and Node installs (recreate with uv / npm install)
+.venv/
+node_modules/
+
+# Build output
+site/dist/
+site/.astro/
+
+# Raw scrape output; scripts/crk_images.py recreates it, and the site uses its own copy in site/public/cookies
+downloads/
+
+__pycache__/
