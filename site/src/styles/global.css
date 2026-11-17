@@ -28,8 +28,9 @@
   --r-beast: #3d2b55;
   --r-witch: #5a1e3a;
 
-  --font-display: 'Fredoka', 'Trebuchet MS', system-ui, sans-serif;
-  --font-body: 'Literata', Georgia, 'Times New Roman', serif;
+  /* Noto Sans SC supplies Chinese glyphs (华文); Latin text keeps the house fonts */
+  --font-display: 'Fredoka', 'Noto Sans SC', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Literata', 'Noto Sans SC', Georgia, 'Times New Roman', serif;
 
   --radius-card: 18px;
   --radius-control: 10px;

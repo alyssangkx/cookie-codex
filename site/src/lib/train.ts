@@ -2,6 +2,7 @@
 // per tier, the fixed rewards and the cookie cards.
 import rewards from '../data/rewards.json';
 import mathSyllabus from '../data/syllabus/math.json';
+import chineseSyllabus from '../data/syllabus/chinese.json';
 import { cookies } from './data';
 import type { School, Tier } from './store';
 
@@ -9,7 +10,7 @@ export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [
   { id: 'math', name: 'Math', ready: true },
   { id: 'science', name: 'Science', ready: false },
   { id: 'english', name: 'English', ready: false },
-  { id: 'chinese', name: 'Chinese', ready: false },
+  { id: 'chinese', name: 'Chinese', ready: true },
 ];
 export const MIN_POOL = 20; // a tier is playable only with at least 20 questions
 
@@ -67,7 +68,8 @@ export const cookieBySlug = new Map(cookies.map((c) => [c.slug, c]));
 export const cardInfo = Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }]));
 export const milestones = rewards.milestones as Record<string, string[]>;
 
-const topicName = new Map(mathSyllabus.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string])));
+const topicName = new Map([mathSyllabus, chineseSyllabus].flatMap((syl) =>
+  syl.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string]))));
 /** Topics that have a question bank, for the WA/SA paper builder. */
 export const paperTopics = banks
   .map((b) => ({ id: b.topic, name: topicName.get(b.topic) ?? b.topic, count: b.questions.length }))
