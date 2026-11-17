@@ -1,6 +1,6 @@
 # Chinese bank: PSLE syllabus and top-school coverage
 
-542 shipped questions (basic 178, intermediate 181, competent 183). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
+530 shipped questions (basic 175, intermediate 175, competent 180). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
 
 ## 1. PSLE syllabus (SEAB 0005 / 小学华文课程标准)
 
@@ -17,9 +17,9 @@
 | 词语选用 (word choice) | 辨别近义词的细微差别 (tell near-synonyms apart) | yes | 32 |
 | 成语和习用语 (idioms and common expressions) | 在语境中正确运用成语 (use idioms correctly in context) | yes | 46 |
 | 成语和习用语 (idioms and common expressions) | 在语境中正确运用习用语 (use common expressions correctly in context) | yes | 48 |
-| 句子选用 (sentence choice) | 根据句子的意思选出最适当的句子 (choose the most suitable sentence for the meaning) | yes | 40 |
-| 句子选用 (sentence choice) | 辨别句子结构是否完整、通顺 (judge whether sentence structure is complete and well-… | yes | 44 |
-| 关联词 (conjunctions) | 选用适当的关联词连接句子 (choose a suitable conjunction pair) | yes | 91 |
+| 句子选用 (sentence choice) | 根据句子的意思选出最适当的句子 (choose the most suitable sentence for the meaning) | yes | 33 |
+| 句子选用 (sentence choice) | 辨别句子结构是否完整、通顺 (judge whether sentence structure is complete and well-… | yes | 40 |
+| 关联词 (conjunctions) | 选用适当的关联词连接句子 (choose a suitable conjunction pair) | yes | 90 |
 | 句子排列 (sentence ordering) | 把句子排列成通顺的语段 (arrange sentences into a coherent paragraph) | yes | 0 **not yet** |
 | 多项选择短文填空 (MCQ cloze) | 根据短文内容和上下文，选出最适当的答案 (choose the best answer from passage content and … | yes | 0 **not yet** |
 | 多项选择短文填空 (MCQ cloze) | 理解语境以判断词语的用法 (use context to judge word usage) | yes | 0 **not yet** |
@@ -41,13 +41,13 @@
 | 形近字／同音字辨认 (choose the right character) (`chi-pat-zixing`) | 124 | 89 |
 | 选词填空：近义词辨析 (near-synonym word choice) (`chi-pat-xuanci`) | 118 | 89 |
 | 完成对话 (complete the dialogue) (`chi-pat-wancheng-duihua`) | 117 | 0 **not yet** |
-| 句子选用 (choose the clause that completes the sentence) (`chi-pat-juzi-xuanyong`) | 112 | 40 |
-| 词语运用：哪个句子正确 (which sentence uses the word correctly) (`chi-pat-ciyu-yunyong`) | 112 | 44 |
+| 句子选用 (choose the clause that completes the sentence) (`chi-pat-juzi-xuanyong`) | 112 | 33 |
+| 词语运用：哪个句子正确 (which sentence uses the word correctly) (`chi-pat-ciyu-yunyong`) | 112 | 40 |
 | 词语／成语的意思 (meaning of an underlined word or idiom) (`chi-pat-ciyuyi`) | 104 | 46 |
-| 关联词 (conjunction pair) (`chi-pat-guanlian`) | 84 | 91 |
+| 关联词 (conjunction pair) (`chi-pat-guanlian`) | 84 | 90 |
 | 短文填空：词语选用 (cloze word choice) (`chi-pat-duanwen-tiankong`) | 82 | 0 **not yet** |
 | 成语运用 (idiom used correctly) (`chi-pat-chengyu`) | 39 | 48 |
 
 ## 3. Words tested in the papers
 
-Of 454 two-to-four-character words seen at least twice in the papers' MCQ slots (OCR, noisy), **244 (53%)** appear somewhere in the shipped questions. Approximate: a plain substring match can also hit a word inside a longer word. No paper sentences are copied; only which words get tested.
+Of 454 two-to-four-character words seen at least twice in the papers' MCQ slots (OCR, noisy), **235 (51%)** appear somewhere in the shipped questions. Approximate: a plain substring match can also hit a word inside a longer word. No paper sentences are copied; only which words get tested.

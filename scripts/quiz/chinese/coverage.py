@@ -66,10 +66,14 @@ if WORDS.exists():
 
     def found(e):
         w = e["word"]
-        if "conjunction" in e.get("slots", {}):
-            # pairs are stored joined (虽然但是, 只要就, 既又): both halves must occur in the SAME question
-            return any(w[:i] in t and w[i:] in t for t in texts for i in range(1, len(w)))
-        return any(w in t for t in texts)  # substring match: approximate (can hit inside a longer word)
+        if any(w in t for t in texts):  # substring match: approximate (can hit inside a longer word)
+            return True
+        if "conjunction" in e.get("slots", {}) and len(w) >= 3:
+            # pairs are stored joined (虽然但是, 只要就): both halves, in order, in the SAME question.
+            # ponytail: a 1-char half (就, 也) can still match a stray character; good enough for a rough %
+            splits = [2] if len(w) == 4 else [1, 2]
+            return any(0 <= t.find(w[:i]) < t.find(w[i:], t.find(w[:i]) + i) for t in texts for i in splits)
+        return False
     hit = [e for e in common if found(e)]
     lines += ["", "## 3. Words tested in the papers", "",
               f"Of {len(common)} two-to-four-character words seen at least twice in the papers' MCQ slots (OCR, noisy), "
@@ -80,9 +84,13 @@ else:
     # keep the previous section 3 rather than silently dropping it
     old = (ROOT / "docs" / "quiz" / "chinese-coverage.md")
     prev = old.read_text().split("## 3.", 1) if old.exists() else []
-    print("warning: tested-word list not found; keeping the previous section 3 unchanged")
     if len(prev) == 2:
-        lines += ["", "## 3." + prev[1].rstrip("\n")]
+        body = prev[1].split("\n\n_Not refreshed", 1)[0].rstrip("\n")
+        lines += ["", "## 3." + body, "",
+                  "_Not refreshed: the tested-word list was missing on the last run, so these figures are from an earlier bank._"]
+        print("warning: tested-word list not found; kept the previous section 3, marked as not refreshed")
+    else:
+        print("warning: tested-word list not found; section 3 omitted")
 (ROOT / "docs" / "quiz" / "chinese-coverage.md").write_text("\n".join(lines) + "\n")
 print(f"{len(qs)} questions; {mcq_done}/{mcq_total} MCQ-testable outcomes; "
       f"{sum(1 for p in PATTERNS['patterns'] if by_pattern.get(p['id']))}/{len(PATTERNS['patterns'])} paper types covered")
