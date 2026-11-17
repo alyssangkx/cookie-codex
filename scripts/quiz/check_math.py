@@ -20,6 +20,7 @@ for mod in sorted((HERE / "math").glob("topic_*.py")):
 BANKS = HERE.parents[1] / "site" / "src" / "data" / "quiz" / "math"
 tpl = {(t.topic, t.key): t for ts in REGISTRY.values() for t in ts}  # names may repeat across topics
 errors, total = [], 0
+seen_ids = {}  # id -> bank file, so an id is unique across all banks (saves are keyed on it)
 for path in sorted(BANKS.glob("*.json")):
     qs = json.loads(path.read_text())["questions"]
     ids = Counter(q["id"] for q in qs)
@@ -31,6 +32,7 @@ for path in sorted(BANKS.glob("*.json")):
         if t is None:
             e("unknown template"); continue
         if ids[q["id"]] > 1: e("duplicate id")
+        elif seen_ids.setdefault(q["id"], path.name) != path.name: e(f"id also used in {seen_ids[q['id']]}")
         if stems[(q["level"], q["stem"])] > 1: e("duplicate stem in level")
         if len(q["options"]) != 4 or len(set(q["options"])) != 4: e(f"options not 4 distinct: {q['options']}")
         vals = [F(v) for v in q["optionValues"]]

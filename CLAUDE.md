@@ -23,6 +23,7 @@ Tests and checks (from the repo root):
 ```bash
 node --test site/src/lib/*.test.ts        # game logic: store, pick, suggest (Node 24 strips TS types)
 python3 scripts/quiz/math/build.py        # regenerate all Math question banks (--topic math-ratio for one)
+python3 scripts/quiz/test_stable_ids.py   # a reworded stem keeps its id
 python3 scripts/quiz/check_math.py        # must print "0 failures": re-solves every question independently
 python3 scripts/quiz/coverage.py          # top-school question types covered -> docs/quiz/coverage.md
 python3 scripts/quiz/build_rewards.py     # card reward per (sub-topic, tier) -> site/src/data/rewards.json
@@ -52,7 +53,8 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 - **Banks.**
   - `build.py` writes `site/src/data/quiz/math/<topic>.json`, with at least 25 unique questions per (sub-topic, level).
   - A question is filed under the sub-topic of its **first** outcome id.
-  - Question ids hash the stem, so adding templates never re-points a saved progress entry.
+  - Question ids are `<topic prefix>-<level letter>-sha1(topic | template key | canonical JSON of params)[:10]` (`stable_id()` in `build.py`). Rewording a stem, explanation or figure keeps the id; changing a template's numbers or param structure makes a new question. Never key progress on stem text. `check_math.py` fails on a duplicate id, and `test_stable_ids.py` proves a reword keeps ids.
+  - `build.py` also writes `site/src/data/quiz/id-aliases.json` (old stem-hash id -> new id) for the save migration. Rebuilding with `--topic` merges into it.
 - **Coverage.**
   - `patterns.json` is the catalogue of question types seen in top-school P5/P6 papers (from OCR'd PDFs).
   - A template covers a type by naming its `math-pat-...` id in its docstring.
@@ -61,7 +63,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 
 ### Game (`site/src/lib/`)
 
-- **`store.ts`** is the only code that touches localStorage (key `ccx:save`, schema `SaveV1`). Never read or write storage directly. Rules it implements:
+- **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 2`). Never read or write storage directly. Rules it implements:
   - A pass is ≥ 80% on a full 10-question tier quiz. Two passes on different days clear the tier and award its card; a duplicate card adds a star.
   - Spaced retest: a wrong answer is due again in 1, then 3, then 7 days; a new question answered correctly retires at once.
   - Practice papers never retire questions.
@@ -69,6 +71,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - The daily cap and goal.
   - The streak counts weeks with 4 or more goal days, so weekends never break it.
   - Card power reflects retention.
+  - `migrations` runs on `load()` and `importCode()`: 1→2 renames `questions` keys via `id-aliases.json` and drops unknown ids, after copying the old save to `ccx:backup`. Add a new step there for every schema bump.
   - It also handles the save code (export/import) and the PIN hash.
 - **`pick.ts`** chooses questions:
   - tier quizzes are always 10 (≤ 3 due retests from the sub-topic, then new questions, then not-due retests, then retired ones);

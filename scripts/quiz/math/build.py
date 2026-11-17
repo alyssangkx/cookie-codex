@@ -25,6 +25,7 @@ for mod in sorted(HERE.glob("topic_*.py")):  # importing registers the templates
     importlib.import_module(mod.stem)
 
 OUT = HERE.parents[2] / "site" / "src" / "data" / "quiz" / "math"
+ALIASES = HERE.parents[2] / "site" / "src" / "data" / "quiz" / "id-aliases.json"
 LEVELS = ["basic", "intermediate", "competent"]
 QUOTA = 25  # per sub-topic per level; the site needs 20 to open a tier
 
@@ -37,7 +38,23 @@ def prefix(topic):
     return topic.replace("math-", "")[:6].rstrip("-")
 
 
-def bank(topic, n, seed):
+def canonical(params):
+    """Sorted keys, no spaces; Fractions and other odd values fall back to str()."""
+    return json.dumps(params, sort_keys=True, separators=(",", ":"), ensure_ascii=False, default=str)
+
+
+def stable_id(topic, level, key, params):
+    """Id from topic | template key | params, so rewording a stem, explanation or figure keeps it."""
+    h = hashlib.sha1(f"{topic}|{key}|{canonical(params)}".encode()).hexdigest()[:10]
+    return f"{prefix(topic)}-{level[0]}-{h}"
+
+
+def old_id(topic, level, stem):
+    """The pre-v2 id (hash of the stem). Only used to build id-aliases.json."""
+    return f"{prefix(topic)}-{level[0]}-{hashlib.sha1(stem.encode()).hexdigest()[:10]}"
+
+
+def bank(topic, n, seed, aliases):
     out = []
     for level in LEVELS:
         tpls = [t for t in REGISTRY[topic] if t.level == level]
@@ -48,7 +65,7 @@ def bank(topic, n, seed):
             by_sub.setdefault(sub_of(t), []).append(t)
         quota = max(QUOTA, math.ceil(n / len(by_sub)))
         rng = random.Random(f"{topic}|{level}|{seed}")
-        stems, made = set(), []
+        stems, ids, made = set(), set(), []
         for sub, group in by_sub.items():
             got, tries = 0, 0
             while got < quota and tries < quota * 3000:
@@ -57,10 +74,13 @@ def bank(topic, n, seed):
                 q = t(rng)
                 if not q or q["stem"] in stems:
                     continue
+                qid = stable_id(topic, level, t.key, q["params"])
+                if qid in ids:
+                    continue
                 stems.add(q["stem"])
+                ids.add(qid)
                 got += 1
-                # id from the stem, so adding templates later never re-points saved progress
-                qid = f"{prefix(topic)}-{level[0]}-{hashlib.sha1(q['stem'].encode()).hexdigest()[:10]}"
+                aliases[old_id(topic, level, q["stem"])] = qid
                 made.append(finalize(q, t, rng, qid))
             if got < quota:
                 print(f"  warning: {topic}/{level}/{sub}: only {got} unique questions (wanted {quota})")
@@ -75,11 +95,15 @@ def main():
     ap.add_argument("--seed", default="2027")
     a = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
+    # a partial rebuild keeps the aliases of the topics it does not touch
+    aliases = json.loads(ALIASES.read_text()) if a.topic and ALIASES.exists() else {}
     for topic in a.topic or sorted(REGISTRY):
-        qs = bank(topic, a.n, a.seed)
+        qs = bank(topic, a.n, a.seed, aliases)
         (OUT / f"{topic}.json").write_text(json.dumps({"topic": topic, "seed": a.seed, "questions": qs},
                                                       ensure_ascii=False, indent=1))
         print(f"{topic}: {len(qs)} questions")
+    ALIASES.write_text(json.dumps(dict(sorted(aliases.items())), separators=(",", ":")))
+    print(f"{len(aliases)} id aliases -> {ALIASES.name}")
 
 
 if __name__ == "__main__":
