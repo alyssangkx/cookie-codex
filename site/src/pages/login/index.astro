@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base title="Who's playing? Cookie Codex" description="Sign in to keep your progress on every device.">
+<Base title="Who's playing? Cookie Codex" description="Sign in to keep your progress on every device." noindex>
   <section class="wrap login-page">
     <h1>Who's playing?</h1>
     <form id="login-form" class="panel" autocomplete="off" novalidate>
@@ -19,6 +19,7 @@ import Base from '../../layouts/Base.astro';
       <p id="msg" class="msg" role="alert"></p>
     </form>
     <p class="small">This site keeps the first name you play under and your quiz progress, so you can carry on from another device. No email, no ads, nothing shared.</p>
+    <p class="small"><strong>A private family revision game.</strong> Your name and PIN only work on this site; it never asks for an email, a password from another service, or payment. Fan project, not affiliated with Devsisters.</p>
     <p class="small"><a class="grown" href="/admin/">Grown-ups</a></p>
   </section>
 </Base>
