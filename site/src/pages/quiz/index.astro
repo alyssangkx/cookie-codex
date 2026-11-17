@@ -246,8 +246,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`
-        : st.cleared ? `<p class="verdict good">${res.passed ? 'Nice score! ' : ''}This tier is cleared (you keep its card). ${st.mastered ?? 0} of ${sub.count[tier] ?? st.total} questions mastered right now; any you missed come back for practice.</p>`
-        : `<p class="verdict ${res.passed ? 'good' : 'bad'}">${res.passed ? 'Nice score! ' : 'Not yet. '}${st.mastered ?? 0} of ${st.total ?? sub.count[tier]} QQQ
+        : st.cleared ? `<p class="verdict good">${res.passed ? 'Nice score! ' : ''}This tier is cleared (you keep its card). ${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered right now; any you missed come back for practice.</p>`
+        : `<p class="verdict ${res.passed ? 'good' : 'bad'}">${res.passed ? 'Nice score! ' : 'Not yet. '}${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered. Missed questions come back until you get them right.</p>`;
     }
     if (mode === 'paper') {
       const per = new Map<string, [number, number]>();
