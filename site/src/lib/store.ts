@@ -83,6 +83,27 @@ export function backupLocal() {
 }
 
 const FAILED_KEYS = ['ccx:failed:1', 'ccx:failed:2', 'ccx:failed:3']; // up to 3 distinct preserved copies of saves this site cannot read
+const LEGACY_FAILED_KEY = 'ccx:failed'; // an older single-slot key: folded into the slots once, then removed
+
+/**
+ * Keep `raw` in ccx:failed:1..3 unless a stored copy already equals it. First free slot; when all 3 are
+ * full, rotate (2 -> 1, 3 -> 2, new -> 3) so the newest broken save is always kept. A legacy
+ * ccx:failed value goes through the same steps first, then its key is removed.
+ */
+function preserveBroken(raw: string) {
+  const slots = FAILED_KEYS.map((k) => localStorage.getItem(k));
+  const legacy = localStorage.getItem(LEGACY_FAILED_KEY);
+  let changed = false;
+  for (const v of [legacy, raw]) {
+    if (v === null || slots.includes(v)) continue;
+    const free = slots.findIndex((x) => x === null);
+    if (free >= 0) slots[free] = v;
+    else { slots[0] = slots[1]; slots[1] = slots[2]; slots[2] = v; }
+    changed = true;
+  }
+  if (changed) FAILED_KEYS.forEach((k, i) => { if (slots[i] !== null && localStorage.getItem(k) !== slots[i]) localStorage.setItem(k, slots[i]!); });
+  if (legacy !== null) localStorage.removeItem(LEGACY_FAILED_KEY);
+}
 
 export function load(): SaveV1 {
   let raw: string | null = null;
@@ -99,18 +120,11 @@ export function load(): SaveV1 {
       throw new Error('Unreadable save version.'); // e.g. a newer site's save: preserve it below
     }
   } catch {
-    // Unreadable, unknown-version, newer-version or failed-migration save: keep the raw string in the
-    // first free slot of ccx:failed:1..3, only if it differs from every stored copy, so a later save()
-    // cannot destroy the only copy. When all 3 are full the 3 oldest stay and nothing is overwritten.
+    // Unreadable, unknown-version, newer-version or failed-migration save: keep the raw string in
+    // ccx:failed:1..3 (see preserveBroken) so a later save() cannot destroy the only copy.
     // ccx:save and ccx:backup are left as they were.
     if (raw) {
-      try {
-        const have = FAILED_KEYS.map((k) => localStorage.getItem(k));
-        if (!have.includes(raw)) {
-          const free = have.findIndex((v) => v === null);
-          if (free >= 0) localStorage.setItem(FAILED_KEYS[free], raw);
-        }
-      } catch { /* full or blocked */ }
+      try { preserveBroken(raw); } catch { /* full or blocked */ }
     }
   }
   return fresh();

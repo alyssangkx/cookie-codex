@@ -56,8 +56,16 @@ async function deviceMac(secret: string, childId: string, deviceId: string, iat:
   return new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(`device:${childId}:${deviceId}:${iat}:${pinSetAt}`)));
 }
 
-/** profiles.pin_set_at (timestamptz string from PostgREST) -> epoch ms for the MAC; null -> 0. */
-export const pinSetAtMs = (v: string | null | undefined) => (v ? Date.parse(v) : 0);
+/**
+ * A timestamptz string from PostgREST / the lock RPC -> epoch ms; null or empty -> 0. Anything that does
+ * not parse THROWS (fail closed): a token must never be signed or verified over 'NaN'.
+ */
+export const tsMs = (v: string | null | undefined) => {
+  if (!v) return 0;
+  const t = Date.parse(v);
+  if (Number.isNaN(t)) throw new Error('unparseable timestamp');
+  return t;
+};
 
 export async function issueDeviceToken(
   secret: string, childId: string, deviceId: string, pinSetAt: number, nowSec = Math.floor(Date.now() / 1000),

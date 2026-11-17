@@ -74,9 +74,10 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - `migrations` runs on `load()` and `importCode()`. Add a new step there for every schema bump.
     - 1→2 keeps progress, cards, attempts, days, streak and settings, and clears `questions` (old stem-hash ids cannot be matched).
     - `load()` copies the pre-migration save string to `ccx:backup`.
-    - If a migration fails (no step, or a throw), `load()` copies the raw string to `ccx:failed-<epoch ms>` before returning `fresh()`, and leaves `ccx:save` alone until a real save.
+    - If a save is unreadable or a migration fails (no step, or a throw), `load()` keeps the raw string in `ccx:failed:1..3` before returning `fresh()`, and leaves `ccx:save` alone until a real save. A string already stored is not added again; when all 3 slots are full they rotate (2 to 1, 3 to 2, new into 3) so the newest broken save is kept; a legacy `ccx:failed` key is folded into the slots once and removed. Recover a save by copying a slot's value back into `ccx:save`.
     - `importCode()` writes no backup. The parent page calls `backupLocal()` only after the user confirms the import.
   - It also handles the save code (export/import) and the PIN hash.
+- **PIN login** (`supabase/functions/pin-login`, SQL in `supabase/migrations/001_init.sql`; source only, untested: needs a Supabase project). One atomic RPC checks then counts a device key (5 tries) and a `name:` (20, no token) or `trust:` (30, valid token) key; any locked key counts nothing. Locks double from 15 min to 24 h. Fail counts reset after 15 min with no failure, escalation after 24 h with no new lock, success clears the device, name and trust keys. There is no IP limit. Worst case is a paced attacker (about 1,800 guesses a day with no token, about 4,600 with many copied tokens); details in `docs/accounts-plan.md` section 5.
 - **`pick.ts`** chooses questions:
   - tier quizzes are always 10 (≤ 3 due retests from the sub-topic, then new questions, then not-due retests, then retired ones);
   - Daily Review takes 5–15 due retests;

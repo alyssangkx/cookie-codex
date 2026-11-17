@@ -69,7 +69,7 @@ Alyssa's `parent_id` is the admin's user id for now.
   by a trigger, so the server clock decides, not the phone's. Size capped at 2 MB.
 - `private.pin_attempts(key, fails, strikes, locked_until, updated_at)`: lockout counters (`device:`, `name:`, `trust:` keys), no client access.
 - `public.push_save(...)`: compare-and-set write on `rev` for sync (section 6). It decides write permission first: the child itself or the owning non-admin parent, or an admin on a `test` profile; anything else returns `status: 'denied'` on both the update and insert paths. It calls the same helpers the RLS policies use (`private.is_admin`, `private.is_test_profile`, `private.owns_child`, and `private.is_self` for the child's own session) instead of repeating the rules.
-- `public.pin_reserve_attempt(device_key, name_key, trusted) / pin_clear`: lockout, **service role only**. `pin_reserve_attempt` checks the locks and counts the attempt atomically under row locks, before the PIN is verified.
+- `public.pin_reserve_attempt(device_key, name_key, trusted) / pin_clear(device_key, name_key)`: lockout, **service role only**. `pin_reserve_attempt` is ONE call with both keys: under row locks it checks both locks, and only if neither is locked counts both, before the PIN is verified. `pin_clear` resets the device key and the child's `name:` and `trust:` keys.
 - `public.pin_clear_name_lock(child_id)`: admin only (checked from the JWT inside); clears a child's per-name and trusted-name locks from `/admin/`.
 
 ### RLS
@@ -117,12 +117,18 @@ PIN guards a child's quiz progress, not money or contact data.
 **Name checks.** The name is trimmed (`trim()`), lowercased, and must match `^[A-Za-z][A-Za-z -]{0,19}$` (ASCII only; non-ASCII names later need NFC normalisation on both sides). Anything else is rejected before any lookup, counts against the device limit, and answers
 like a wrong PIN. The lookup is `eq('name_key', key)`: no pattern matching anywhere.
 
-**Lockout.** Counters live in `private.pin_attempts`. `pin_reserve_attempt` takes row locks, checks the
-locks, and **counts the attempt before the PIN is verified**, so concurrent requests cannot exceed a
-limit. On a wrong PIN the counters stand; on success `pin_clear` resets the ones the request used. A
-lock is applied the moment a limit is reached (the attempt that reaches it still runs; the next is
-refused). Every lock doubles each time it trips: 15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h,
-and resets on a successful login. A fail count older than 24 hours restarts.
+**Lockout.** Counters live in `private.pin_attempts`. `pin_reserve_attempt` is **one** RPC per request, taking
+the device key and the name key (`name:` for an untrusted request, `trust:` for one with a valid token). Under
+row locks it checks BOTH locks first: if either is locked it answers `locked` and counts **nothing** (no device
+try is spent while the name is locked). Otherwise it counts both, **before the PIN is verified**, so concurrent
+requests cannot exceed a limit. On a wrong PIN the counters stand; on success `pin_clear` resets the device key
+and the child's `name:` and `trust:` keys, fails and strikes alike. A lock is applied the moment a limit is
+reached (the attempt that reaches it still runs; the next is refused). Every lock doubles each time it trips:
+15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h. Two windows, the same for device, name and trust keys:
+a failure counter restarts after **15 minutes with no failure**; the escalation level (`strikes`) returns to 0
+once **24 hours** pass after the last lock ended with no new lock (measured from the lock's expiry, so a 24 h
+lock cannot decay itself). `private.pin_bump` does this with plpgsql variables: `SELECT ... FOR UPDATE`,
+compute once, one `UPDATE`.
 
 | Key | Limit | Why |
 |---|---|---|
@@ -146,25 +152,36 @@ issued under 180 days ago, skips the per-name lock and does not feed it, but cou
 limit and the separate `trust:` limit. A request without a valid token stays under the per-name
 escalating lock. Because `pin_set_at` is in the message, **any PIN set or reset voids every token issued
 before it** (the admin resets the PIN if a device is lost). Rotating `PIN_DEVICE_SECRET` does the same for all children.
+A `pin_set_at` (or lock expiry) that does not parse makes the function throw, answered as 500 `server_error`:
+a token is never signed or verified over `NaN`.
 
-**Worst-case guessing rates.** The lock after batch k is 15 min x 2^(k-1), so batch 8 opens after
-31.75 hours; after that each 24-hour lock allows one more batch.
+**Worst-case guessing rates.** Method: the `name:`, `trust:` and `device:` budgets are separate rows, so an
+attacker who holds tokens spends the untrusted budget with forged device ids **and** the trusted budget with
+the tokens, at the same time. A device id can be forged freely only on untrusted requests; a token is bound
+to its own device id, so one token reaches the trusted path with one device id (limit 5). A *batch* is the
+tries before a key locks; the lock after batch k is 15 min x 2^(k-1), so batch 8 opens after 31.75 hours,
+then one batch per 24 hours.
 
-| Attacker | Binding limit | Rate |
-|---|---|---|
-| Untrusted, forging every device id and address | `name:` 20 | 160 guesses in 31.75 h, then 20 per day; all 10,000 PINs in about 500 days (about 250 expected) |
-| One copied token (fixed device id) | `device:` 5 | 40 guesses in 31.75 h, then 5 per day |
-| Many copied tokens (each with its own device id) | `trust:` 30 | 240 guesses in 31.75 h, then 30 per day; about 330 days for all 10,000. A PIN reset voids them all |
+| Attacker | First 31.75 h | Then, per day | Expected time to hit the PIN (5,000 guesses) |
+|---|---|---|---|
+| (a) Stranger, no token | `name:` 8 batches x 20 = **160** | **20** | about 240 days |
+| (b) One or many copied tokens | `name:` 160 + `trust:` 8 x 30 = 240, so **400** | 20 + 30 = **50** | about 92 days; a PIN reset voids every token at once |
 
-Each guess costs a 600,000-iteration PBKDF2. A locked key answers 429 without comparing the PIN
-and without counting further, so parallel requests cannot escalate it.
+Pacing does not help: the `name:` and `trust:` fail counts reset only after **24 hours** with no failure, so
+guessing slowly under the limit still trips the lock and escalates. Only the `device:` count resets after 15
+quiet minutes (to forgive a child's scattered typos); it is forgeable on untrusted requests anyway, so it is a
+usability limit, not the security bound. With one token, the trusted path is also capped by that token's
+device limit (5 per batch, escalating), which never exceeds the `trust:` budget. Each guess costs a
+600,000-iteration PBKDF2. A locked key answers 429 without comparing the PIN and without counting, so
+parallel requests cannot escalate it.
 
-**Order.** (1) Reserve the device attempt: one cheap RPC, so a locked device is refused before any profile
-lookup. (2) Look up the profile. (3) Verify the token HMAC (against a dummy profile for an unknown name).
-(4) Reserve the name attempt (`name:` or `trust:` by token validity), still before the PIN. (5) Compute the PIN
-hash (dummy hash for an unknown name or a profile without a PIN) and compare. On failure the counters
-stand; on success clear them. The token HMAC and the PIN hash always run, so response time does not
-reveal whether a name exists.
+**Order.** (1) Look up the profile (exact `name_key`; dummy profile for an unknown name). (2) Verify the token
+HMAC (against the dummy profile for an unknown name). (3) ONE reservation RPC for the device and the
+`name:` / `trust:` key, still before the PIN. A locked key is refused here, before the expensive PIN hash,
+and counts nothing. (4) Compute the PIN hash (dummy hash for an unknown name or a profile without a PIN) and
+compare. On failure the counters stand; on success clear them. The token HMAC and the PIN hash always run, so
+response time does not reveal whether a name exists. A locked device still costs one cheap profile lookup, the
+price of having only one round trip.
 
 **Threat model.** A stranger who knows her name can lock the name by guessing 20 times, for up to 24
 hours if they repeat it, but that lock applies to **untrusted devices only**. Alyssa's own devices hold
@@ -172,7 +189,7 @@ a trusted-device token and keep working (limited only by the device limit); a ne
 has to wait out the lock, or the admin clears it with `pin_clear_name_lock(child_id)` from `/admin/`.
 Strangers cannot learn the per-name count: `attemptsLeft` reflects only the requesting device, and a
 name lock answers a plain `locked`. A stolen token is bound to one child and device id, is void after a PIN reset, expires
-after 180 days, and is bounded by the device and `trust:` limits above. If trusted access for a name is locked (30 wrong
+after 180 days, and is bounded by the device and `trust:` limits above (see the worst-case table: copied tokens add the `trust:` budget on top of the `name:` one). If trusted access for a name is locked (30 wrong
 trusted tries), the admin clears it with the same `pin_clear_name_lock`. Untested: needs a Supabase project.
 
 **Issuing the session.** After a correct PIN the function signs in as the child's own auth user
@@ -222,7 +239,7 @@ interface StorageAdapter {
     merge (union of `days` and `attempts`, max `stars`, later `due` per question); see open questions.
   - **Offline:** writes only hit the cache and stay pending; on the next load or `online` event
     the push retries. The cache is always playable.
-- **Backup:** the migration already copies the pre-migration save to `ccx:backup`. A save this site cannot read (corrupt, unknown or newer version, failed migration) is kept in `ccx:failed:1`..`ccx:failed:3` (up to 3 distinct copies; a new one is added only if it differs from all stored copies, and when all 3 are full the 3 oldest stay and nothing is overwritten); `ccx:save` and `ccx:backup` are left alone.
+- **Backup:** the migration already copies the pre-migration save to `ccx:backup`. A save this site cannot read (corrupt, unknown or newer version, failed migration) is kept in `ccx:failed:1`..`ccx:failed:3` (up to 3 distinct copies; a new one is added only if it differs from all stored copies, and when all 3 are full the slots rotate: 2 to 1, 3 to 2, the new one into 3, so the newest broken save is always kept; a legacy `ccx:failed` key is folded into the slots once and removed); `ccx:save` and `ccx:backup` are left alone.
 - **First login migration:** if `ccx:save` (the anonymous browser save) has progress and the server
   has none for this profile, offer "Copy this browser's progress to Alyssa". If both have progress,
   the user chooses which to keep; the other goes to `ccx:backup`. After copying, the old key is

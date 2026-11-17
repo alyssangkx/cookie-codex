@@ -151,15 +151,32 @@ test('two loads of the same broken save write ccx:failed:1 once and create no ex
   }
 });
 
-test('up to 3 distinct broken saves are kept; a 4th does not overwrite the 3 oldest', () => {
+test('with all 3 slots full a new broken save rotates in: 2->1, 3->2, new->3', () => {
   const data = mockStorage({});
-  const raws = ['{bad1', '{bad2', '{bad3', '{bad4'];
-  for (const raw of raws) { data['ccx:save'] = raw; load(); }
-  data['ccx:save'] = '{bad2'; load(); // duplicate: no new slot
-  assert.equal(data['ccx:failed:1'], '{bad1');
-  assert.equal(data['ccx:failed:2'], '{bad2');
-  assert.equal(data['ccx:failed:3'], '{bad3');
+  for (const raw of ['{bad1', '{bad2', '{bad3', '{bad4']) { data['ccx:save'] = raw; load(); }
+  assert.equal(data['ccx:failed:1'], '{bad2');
+  assert.equal(data['ccx:failed:2'], '{bad3');
+  assert.equal(data['ccx:failed:3'], '{bad4');
+  data['ccx:save'] = '{bad3'; load(); // duplicate of a stored copy: no change
+  assert.equal(data['ccx:failed:1'], '{bad2');
+  assert.equal(data['ccx:failed:3'], '{bad4');
   assert.equal(Object.keys(data).filter((k) => k.startsWith('ccx:failed')).length, 3);
+});
+
+test('a legacy ccx:failed key is deduped against, folded into the slots once, then removed', () => {
+  const data = mockStorage({ 'ccx:failed': '{old', 'ccx:save': '{old' });
+  load(); // same as the legacy copy: folds it, adds nothing else
+  assert.equal(data['ccx:failed:1'], '{old');
+  assert.equal(data['ccx:failed:2'], undefined);
+  assert.equal('ccx:failed' in data, false);
+  data['ccx:save'] = '{new'; load();
+  assert.equal(data['ccx:failed:1'], '{old');
+  assert.equal(data['ccx:failed:2'], '{new');
+  // legacy value folded even when the current save is different, and rotation keeps the newest
+  const d2 = mockStorage({ 'ccx:failed': '{L', 'ccx:failed:1': '{a', 'ccx:failed:2': '{b', 'ccx:save': '{c' });
+  load();
+  assert.deepEqual([d2['ccx:failed:1'], d2['ccx:failed:2'], d2['ccx:failed:3']], ['{b', '{L', '{c']);
+  assert.equal('ccx:failed' in d2, false);
 });
 
 test('importCode migrates a v1 code, refuses a newer one, and writes no backup', async () => {

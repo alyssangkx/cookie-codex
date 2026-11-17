@@ -47,7 +47,7 @@ create table public.saves (
 create table private.pin_attempts (
   key           text primary key,          -- 'device:<id>' | 'name:<name_key>' (untrusted) | 'trust:<name_key>' (trusted)
   fails         int not null default 0,
-  strikes       int not null default 0,    -- times this key has locked since its last success (escalation)
+  strikes       int not null default 0,    -- escalation level: locks tripped; back to 0 24 h after the last lock ended, or on success
   locked_until  timestamptz,
   updated_at    timestamptz not null default now()
 );
@@ -210,44 +210,58 @@ grant execute on function public.push_save(uuid, jsonb, int, bigint, boolean) to
 
 -- ---------------------------------------------------------------- PIN lockout (service role only)
 
--- One atomic step: check the locks, then count this attempt BEFORE the PIN is verified. Concurrent
--- requests serialise on the row locks, so no more than p_max attempts per key can ever pass.
+-- One atomic step with row locks on BOTH keys: check both locks first, then count both.
 --
--- Three kinds of key, each with its own limit; a lock doubles each time the key trips
--- (base, 2x, 4x, ... capped at 24 h); strikes reset only in pin_clear (a successful login):
---   device:<id>     5 tries, base 15 min   every request
---   name:<name_key> 20 tries, base 15 min  requests WITHOUT a valid trusted-device token
---   trust:<name_key> 30 tries, base 15 min requests WITH a valid trusted-device token (bounds a copied token)
--- p_device_key and p_name_key are each optional (null / '' skips that key). pin-login calls it twice:
--- first (device_key, null, false) so a locked device costs one cheap call before any profile lookup,
--- then (null, name_key, trusted) once the token has been verified against the profile.
--- Rows are locked in key order (device < name < trust), so two calls cannot deadlock.
--- Returns allowed = false (and scope 'device' or 'name') with the lock expiry if a key is locked: nothing
--- is counted. Otherwise every given key is incremented; reaching its limit applies the lock NOW (the
--- attempt that reaches the limit is still allowed, the next one is refused), and the expiry is returned
--- in device_until / name_until so the caller can answer 'locked' straight after a wrong PIN.
--- On a wrong PIN the incremented counters simply stand; on success the caller runs pin_clear.
--- A fail count older than 24 h restarts, as does the first try after a lock has expired (strikes stay).
--- Worst-case rates are documented in docs/accounts-plan.md section 5. UNTESTED: needs a Supabase project.
-create function private.pin_bump(p_key text, p_max int, p_base interval)
-returns table (fails int, locked_until timestamptz)
-language sql security definer set search_path = '' as $$
-  insert into private.pin_attempts as a (key, fails, strikes, locked_until, updated_at)
-  values (p_key, 1, 0, null, now())
-  on conflict (key) do update set
-    fails = case when a.updated_at < now() - interval '24 hours' or a.locked_until is not null then 1 else a.fails + 1 end,
-    strikes = a.strikes + case
-      when (case when a.updated_at < now() - interval '24 hours' or a.locked_until is not null then 1 else a.fails + 1 end) >= p_max
-      then 1 else 0 end,
-    locked_until = case
-      when (case when a.updated_at < now() - interval '24 hours' or a.locked_until is not null then 1 else a.fails + 1 end) >= p_max
-      then now() + least(p_base * power(2::double precision, least(a.strikes, 20)), interval '24 hours')
-      else null end,
-    updated_at = now()
-  returning a.fails, a.locked_until
-$$;
+-- Two keys per call (pin-login calls this once per request):
+--   p_device_key   'device:<id>'  5 tries, base 15 min   every request (the id is client-chosen)
+--   p_name_key     the child's name_key; the row is 'name:<key>' (20 tries) for requests WITHOUT a valid
+--                  trusted-device token, or 'trust:<key>' (30 tries) for requests WITH one
+-- Either key may be null / '' (skipped). A lock doubles each time the key trips (base, 2x, 4x, ...
+-- capped at 24 h).
+-- If EITHER key is locked the call returns allowed = false (scope 'device' wins over 'name') with the
+-- expiry and counts NOTHING: no device try is spent while the name is locked, and vice versa.
+-- Otherwise BOTH counters go up and allowed = true. Reaching a limit applies the lock NOW (the attempt
+-- that reaches it is still allowed, the next is refused); the expiry comes back in device_until /
+-- name_until so the caller can answer 'locked' straight after a wrong PIN.
+-- Windows (private.pin_bump): the DEVICE fail count restarts after 15 minutes with no failure (forgives a
+-- child's scattered typos); the NAME and TRUST counts restart only after 24 hours with no failure, so pacing
+-- guesses under the limit gains nothing and the escalating locks stay the real bound. The escalation level
+-- (strikes) returns to 0 once 24 hours pass after a lock ended with no new lock.
+-- Rows are locked device first, then name (key order), so two calls cannot deadlock.
+-- On a wrong PIN the incremented counters stand; on success the caller runs pin_clear.
+-- Worst-case rates: docs/accounts-plan.md section 5. UNTESTED: needs a Supabase project.
+create function private.pin_bump(p_key text, p_max int, p_base interval, p_window interval)
+returns table (o_fails int, o_locked_until timestamptz)
+language plpgsql security definer set search_path = '' as $$
+declare
+  a private.pin_attempts;
+  v_fails int; v_strikes int; v_until timestamptz; v_stored int;
+  v_tripped boolean;
+begin
+  insert into private.pin_attempts (key) values (p_key) on conflict (key) do nothing;
+  select * into a from private.pin_attempts t where t.key = p_key for update;
+  -- window 1: fails restart after p_window with no failure (15 min for a device, 24 h for a name)
+  v_fails := (case when a.updated_at < now() - p_window then 0 else a.fails end) + 1;
+  -- window 2: strikes restart 24 h after the last lock ended with no new lock
+  v_strikes := case when a.locked_until is not null and a.locked_until < now() - interval '24 hours'
+                    then 0 else a.strikes end;
+  v_until := a.locked_until;
+  v_stored := v_fails;
+  v_tripped := v_fails >= p_max;
+  if v_tripped then
+    v_until := now() + least(p_base * power(2::double precision, least(v_strikes, 20)), interval '24 hours');
+    v_strikes := v_strikes + 1;
+    v_stored := 0;            -- the next batch starts clean once the lock ends
+  end if;
+  update private.pin_attempts t
+     set fails = v_stored, strikes = v_strikes, locked_until = v_until, updated_at = now()
+   where t.key = p_key;
+  o_fails := v_fails;         -- the count including this attempt (= p_max when it tripped)
+  o_locked_until := case when v_tripped then v_until else null end;
+  return next;
+end $$;
 
-revoke execute on function private.pin_bump(text, int, interval) from public, anon, authenticated;
+revoke execute on function private.pin_bump(text, int, interval, interval) from public, anon, authenticated;
 
 create function public.pin_reserve_attempt(p_device_key text, p_name_key text, p_trusted boolean)
 returns table (allowed boolean, scope text, device_until timestamptz, name_until timestamptz, attempts_left int)
@@ -263,6 +277,7 @@ begin
   if v_dev is not null then select * into d from private.pin_attempts a where a.key = v_dev for update; end if;
   if v_nm  is not null then select * into n from private.pin_attempts a where a.key = v_nm  for update; end if;
 
+  -- check BOTH locks before counting anything
   if d.locked_until > now() then
     allowed := false; scope := 'device'; device_until := d.locked_until; name_until := null; attempts_left := 0;
     return next; return;
@@ -274,23 +289,27 @@ begin
 
   allowed := true; scope := null; device_until := null; name_until := null; attempts_left := null;
   if v_dev is not null then
-    select * into r from private.pin_bump(v_dev, 5, interval '15 minutes');
-    device_until := r.locked_until; attempts_left := greatest(0, 5 - r.fails);
+    select * into r from private.pin_bump(v_dev, 5, interval '15 minutes', interval '15 minutes');
+    device_until := r.o_locked_until; attempts_left := greatest(0, 5 - r.o_fails);
   end if;
   if v_nm is not null then
-    select * into r from private.pin_bump(v_nm, case when p_trusted then 30 else 20 end, interval '15 minutes');
-    name_until := r.locked_until;
+    select * into r from private.pin_bump(v_nm, case when p_trusted then 30 else 20 end, interval '15 minutes', interval '24 hours');
+    name_until := r.o_locked_until;
   end if;
   return next;
 end $$;
 
-create function public.pin_clear(p_keys text[]) returns void
+-- Success: reset this device AND the child's name and trust keys (fails and strikes alike).
+create function public.pin_clear(p_device_key text, p_name_key text) returns void
 language sql security definer set search_path = '' as $$
-  delete from private.pin_attempts where key = any (p_keys)
+  delete from private.pin_attempts
+   where key = p_device_key
+      or key = 'name:'  || p_name_key
+      or key = 'trust:' || p_name_key
 $$;
 
-revoke execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text[]) from public, anon, authenticated;
-grant execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text[]) to service_role;
+revoke execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text, text) from public, anon, authenticated;
+grant execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text, text) to service_role;
 
 -- Admin only: clear a child's per-name and trusted-name locks (and their escalation) so a stranger's guessing cannot keep
 -- her out. Called from /admin/ with the admin's own session; the caller's app_metadata role is checked
