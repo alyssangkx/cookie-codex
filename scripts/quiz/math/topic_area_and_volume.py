@@ -1006,7 +1006,7 @@ def corner_two_points(r):
     t1, t2, t3 = F(H * p_, 2), F((Wd - p_) * q, 2), F(Wd * (H - q), 2)
     ans = Wd * H - t1 - t2 - t3
     name = nm(r)
-    stem = (f"ABCD is a rectangle. P is on DC and Q is on BC. Find the area of the shaded triangle APQ. ({plural(name, 'mark')} the lengths shown.)")
+    stem = (f"ABCD is a rectangle. P is on DC and Q is on BC. Find the area of the shaded triangle APQ. ({name} marks the lengths shown.)")
     return build(corner_two_points, stem, ans, [
         (t1 + t2 + t3, "gave_unshaded_area", "Gave the total area of the three unshaded triangles."),
         (Wd * H - t1 - t2, "left_out_a_triangle", "Took away only two of the unshaded triangles."),

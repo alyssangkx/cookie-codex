@@ -937,9 +937,9 @@ def mixed_add_context(r):
     p, q = r.randint(1, 5), r.randint(1, 5)
     ans = p + q + F(a + c, b)
     name = r.choice(NAMES)
-    stem = f"{name} poured {p} {a}/{plural(b, 'litre')} of water into a pail, then another {q} {c}/{plural(b, 'litre')}. How much water was in the pail?"
+    stem = f"{name} poured {p} {a}/{b} litres of water into a pail, then another {q} {c}/{b} litres. How much water was in the pail?"
     return build(mixed_add_context, stem, ans, [
-        ((f"{p + q} {a + c}/{plural(b, 'litre')}", ans), "did_not_rename_improper_fraction",
+        ((f"{p + q} {a + c}/{b} litres", ans), "did_not_rename_improper_fraction",
          f"Left {a + c}/{b} as it is instead of changing it to 1 {a + c - b}/{b}."),
         (p + q + F(a + c - b, b), "lost_the_carried_whole", "Changed the fraction part but forgot to add the 1 whole."),
         (p + q + F(a + c, 2 * b), "added_denominators", "Added the denominators too."),
@@ -1257,7 +1257,7 @@ def equivalent_two_strips(r):
     a = r.randint(1, n - 1)
     b = r.randint(1, a * k - 1)
     name = r.choice(NAMES)
-    stem = (f"{name} has two strips of paper of the same length. Strip A is cut into {n} equal parts and {plural(a, 'part')} are "
+    stem = (f"{name} has two strips of paper of the same length. Strip A is cut into {n} equal parts and {plural(a, 'part')} {'is' if a == 1 else 'are'} "
             f"shaded. Strip B is cut into {N} equal parts and {plural(b, 'part')} {'is' if b == 1 else 'are'} shaded. How many more parts of Strip B "
             f"must be shaded so that both strips have the same fraction shaded?")
     fig = fraction_bars([("A", n, a), ("B", N, b)], title=f"Strip A: {a} of {plural(n, 'part')} shaded; strip B: {b} of {plural(N, 'part')} shaded")

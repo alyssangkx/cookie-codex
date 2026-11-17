@@ -3,12 +3,14 @@
     python scripts/quiz/check_math.py
 """
 import json
+import os
 import sys
 from collections import Counter
 from fractions import Fraction as F
 from pathlib import Path
 
 HERE = Path(__file__).parent
+SHOW = int(os.environ.get("SHOW", 40))  # how many failures to print
 sys.path.insert(0, str(HERE / "math"))
 import importlib  # noqa: E402
 import re  # noqa: E402
@@ -19,19 +21,20 @@ for mod in sorted((HERE / "math").glob("topic_*.py")):
     importlib.import_module(mod.stem)
 
 # ---- wording check: counts and articles must be right at the source (no after-the-fact rewriting) ----
+# real words that end in -s / -ss and are fine after '1' or as a plural-looking token
 SING_S = {"glass", "class", "bus", "address", "grass", "dress", "mass", "cross", "across", "less", "miss", "pass", "press",
           "process", "business", "unless", "guess", "boss", "plus", "minus", "thus", "this", "bonus", "status", "focus",
-          "axis", "basis", "analysis", "chassis", "pairs of", "success", "princess", "fitness", "darkness", "kindness"}
-ONE_PLURAL = re.compile(r"(?<![\d.,/×x*+−-])(?<![\d.,/×x*+−-] )\b1 ([a-z]+s)\b")
+          "axis", "basis", "analysis", "chassis", "success", "princess", "fitness", "darkness", "kindness"}
+# a 1 directly after a bigger number, a multiplier or a divisor is not a count ('11 units', '2.1 units', '3 x 1 units'... )
+ONE_PLURAL = re.compile(r"(?<![\d.,])(?<![×*/] )(?<![×*/])(?<! x )\b1 ([a-z]+s)\b")
 ONE_OK = {"more", "less", "times"} | SING_S
 ARTICLE = re.compile(r"\b([Aa]n?) ([^\s.,;:?!)]+)")
 NOT_NOUN = {"and", "or", "is", "are", "to", "was", "has", "have", "can", "then", "in", "on", "at", "of", "as", "if", "an", "a"}
-SLIP_ES = re.compile(r"\b[a-z]*(?:ch|sh|x|z|ss)s\b")
-SLIP_SS = re.compile(r"\b[a-z]+ss\b")
-SS_OK = {"class", "glass", "mass", "grass", "dress", "cross", "across", "less", "miss", "pass", "press", "process", "business",
-         "unless", "guess", "boss", "success", "princess", "fitness", "address", "possess", "assess", "express", "progress",
-         "dessert", "kindness", "darkness", "unbiased", "compass", "bypass", "stress", "witness", "illness", "loss", "gross",
-         "brass", "bass", "mess", "toss", "moss", "floss", "chess", "stiffness"}
+# real plural slips in this bank: watchs, wishs, headphoness, classs (a singular fed to a plain +s / +es)
+SLIP_ES = re.compile(r"\b[a-z]*(?:ch|sh)s\b|\b[a-z]*phoness\b|\bclasss\b")
+# a singular subject with 'are' (a sentence about 'the average mass of 4 parcels is' has a singular subject, so it is skipped), or a plural count with 'is' ('1 part are shaded', '3 parts is shaded')
+VERB_ONE = re.compile(r"(?<![\d.,/])\b1 [a-z]+ are\b")
+VERB_MANY = re.compile(r"(?<![\d.,/])\b(?:[2-9]|\d{2,}) [a-z]+s is\b")
 
 
 def wording_problems(text):
@@ -42,22 +45,24 @@ def wording_problems(text):
         if w not in ONE_OK and not w.endswith(("ss", "us", "is")):
             out.append(f"'{m.group(0)}' should be singular")
     for m in ARTICLE.finditer(text):
-        art, tok = m.group(1), m.group(2).lstrip("$(\"'").rstrip("%")
-        if not tok or len(tok) == 1 and tok.isalpha() or tok.lower() in NOT_NOUN or tok.isupper():
+        art, tok = m.group(1), m.group(2)
+        bare = tok.lstrip("$£€¥(\"'")
+        if not bare or len(bare) == 1 and bare.isalpha() or bare.lower() in NOT_NOUN or bare.isupper() and len(bare) < 2:
             continue
-        if art[0] == "A" and (tok[0].isupper() or not (m.start() == 0 or text[:m.start()].rstrip().endswith((".", "?", "!", ":")))):
+        if art[0] == "A" and (bare[0].isupper() and not bare.isupper() or not (m.start() == 0 or text[:m.start()].rstrip().endswith((".", "?", "!", ":")))):
             continue  # a capital A mid-sentence is a figure label, not an article
-        if not (tok[0].isalnum()):
-            continue
         want = a_an(tok)
+        if want is None:
+            continue  # cannot judge
         if art.lower() != want:
             out.append(f"'{m.group(0)}' should be '{want} {tok}'")
     for m in SLIP_ES.finditer(text):
-        if m.group(0) not in SS_OK and not m.group(0).endswith(("ss", "ess")):
-            out.append(f"plural slip '{m.group(0)}'")
-    for m in SLIP_SS.finditer(text):
-        if m.group(0) not in SS_OK and not m.group(0).endswith("less"):
-            out.append(f"plural slip '{m.group(0)}'")
+        out.append(f"plural slip '{m.group(0)}'")
+    for rx in (VERB_ONE, VERB_MANY):
+        for m in rx.finditer(text):
+            if rx is VERB_MANY and re.search(r"\b(average|mean)\b[^.?!]*$", text[:m.start()]):
+                continue
+            out.append(f"subject-verb disagreement '{m.group(0)}'")
     return out
 
 
@@ -106,7 +111,7 @@ for path in sorted(BANKS.glob("*.json")):
             if i != q["answer"] and v == F(expected) and not t.same_value_ok:
                 e("a distractor equals the checked answer")
 print(f"checked {total} questions in {len(list(BANKS.glob('*.json')))} banks")
-for m in errors[:int(__import__('os').environ.get('SHOW', 40))]:
+for m in errors[:SHOW]:
     print("FAIL", m)
 print(f"{len(errors)} failures")
 sys.exit(1 if errors else 0)

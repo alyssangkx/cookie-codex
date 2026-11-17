@@ -24,7 +24,7 @@ Tests and checks (from the repo root):
 node --test site/src/lib/*.test.ts        # game logic: store, pick, suggest (Node 24 strips TS types)
 python3 scripts/quiz/math/build.py        # regenerate all Math question banks (--topic math-ratio for one)
 python3 scripts/quiz/test_stable_ids.py   # a reworded stem keeps its id
-python3 scripts/quiz/check_math.py        # must print "0 failures": re-solves every question independently
+python3 scripts/quiz/check_math.py        # must print "0 failures": re-solves every question independently (SHOW=n prints n failures, default 40)
 python3 scripts/quiz/coverage.py          # top-school question types covered -> docs/quiz/coverage.md
 python3 scripts/quiz/build_rewards.py     # card reward per (sub-topic, tier) -> site/src/data/rewards.json
 python3 scripts/quiz/build_progression.py # P1-P5 sub-topics (tries per day) -> site/src/data/progression.json

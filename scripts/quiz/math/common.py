@@ -73,23 +73,40 @@ def ordinal(n):
     return f"{n}{suf}"
 
 
+_VOWEL_LETTERS = set("aefhilmnorsx")  # letters whose NAME starts with a vowel sound: ay, ef, aitch, el, em, en, oh, ar, es, ex
+_A_WORDS = ("one", "once", "ewe", "euro", "eu", "use", "usu", "uti", "ubiq", "uran")
+_AN_WORDS = ("hour", "honest", "honour", "heir")
+_UNI_A = re.compile(r"uni[tfoqvcslp]")  # unit, uniform, union, unique, universe... ; but unimportant, unidentified, unintended are 'an'
+
+
 def a_an(n_or_word):
-    """'a' or 'an' by how it is spoken. Numbers: an 8, 11, 18, 80-89, 800-899, 8000, 11000, 18000
-    (commas or not; 1800 is 'one thousand ...' so 'a'). Words go by sound: an hour, a unit, a one."""
-    s = str(n_or_word).strip().split()[0].replace(",", "")
-    if s[:1].isdigit():
+    """'a' or 'an' by how the first word is SPOKEN. Numbers: an 8, 11, 18, 80-89, 800-899, 8000, 11000, 18000
+    (commas or not; 1800 is 'one thousand ...' so 'a'). Letters by name: an L-shaped, an x-axis, an MRT, a UFO.
+    Words by sound: an hour, a unit, a useful, an unusual, a one. A leading $, quote or bracket is ignored.
+    Returns None for a token it cannot judge (no letter or digit to start with)."""
+    parts = str(n_or_word).strip().split()
+    s = parts[0].lstrip("$£€¥(\"'\u201c\u2018[~").replace(",", "") if parts else ""
+    if not s or not s[0].isalnum():
+        return None
+    if s[0].isdigit():
         digits = re.match(r"\d+", s).group()
         g = len(digits) % 3 or 3  # size of the leading spoken group
         lead = int(digits[:g])
         if g == 3:
             return "an" if digits[0] == "8" else "a"
         return "an" if lead in (8, 11, 18) or 80 <= lead <= 89 else "a"
-    w = s.lower()
-    if w.startswith(("hour", "honest", "honour", "heir")):
+    word = re.match(r"[A-Za-z]+", s).group()
+    rest = s[len(word):]
+    if len(word) == 1 and (rest[:1] == "-" or len(parts) > 1 or not rest):  # a letter said by its name: L-shaped, x-axis
+        return "an" if word.lower() in _VOWEL_LETTERS else "a"
+    if len(word) >= 2 and word.isupper():  # acronym spelled out: MRT, UFO, SMS
+        return "an" if word[0].lower() in _VOWEL_LETTERS else "a"
+    w = word.lower()
+    if w.startswith(_AN_WORDS):
         return "an"
-    if w.startswith(("uni", "use", "usu", "uti", "eu", "one", "once", "ubiq")):
+    if w.startswith(_A_WORDS) or _UNI_A.match(w):
         return "a"
-    return "an" if w[:1] in "aeiou" else "a"
+    return "an" if w[0] in "aeiou" else "a"
 
 
 _COUNT_WORDS = {"units", "pens", "parts", "slices", "shapes", "divisions", "marks", "cents", "weeks", "wholes", "litres",
@@ -204,5 +221,12 @@ if __name__ == "__main__":
         assert a_an(x) == "a", x
     assert a_an("hour") == "an" and a_an("unit") == "a" and a_an("umbrella") == "an" and a_an("pair of shoes") == "a"
     assert a_an("apple") == "an" and a_an("watch") == "a" and a_an("one") == "a"
+    for x in ("L-shaped", "x-axis", "MRT", "unusual", "unimportant", "unidentified", "hour", "honest", "$8", "$85.50", "(8",
+              "8%", "umbrella", "SMS", "F-test", "R-shaped"):
+        assert a_an(x) == "an", x
+    for x in ("UFO", "unit", "uniform", "useful", "ewe", "one", "euro", "unique", "universe", "$1.50", "U-shaped", "D-shaped",
+              "B-flat", "watch", "hotel"):
+        assert a_an(x) == "a", x
+    assert a_an("$") is None and a_an("") is None and a_an("-") is None
     assert plural(1, "note") == "1 note" and plural(2, "watch", "watches") == "2 watches" and noun(3, "coin") == "coins"
     print("common.py self-check ok")

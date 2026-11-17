@@ -2911,7 +2911,7 @@ def prism_reverse(r):
         gv = {"edges": E, "vertices": V}[given]
         av = {"faces": Fc, "vertices": V, "edges": E}[want]
         stem = f"{nm}'s prism has {gv} {given}. How many {want} does it have?"
-        wr = [W(n, "gave_base_sides", "Stopped at the number of sides of the base."), W(n + 1, "forgot_the_two_bases", "Used base sides + 1 faces."),
+        wr = [W(n, "gave_base_sides", "Stopped at the number of sides of the base."), W(n + 1, "forgot_the_two_bases", "Gave the number of base sides plus one for the faces."),
               W(gv // 2 if gv % 2 == 0 else None, "halved", "Halved the number."), W(n + 3, "x", "")]
     else:
         V, E, Fc = n + 1, 2 * n, n + 1
@@ -2924,7 +2924,7 @@ def prism_reverse(r):
               W(gv + 1 if gv + 1 != av else None, "off_by_one", "Added one."), W(2 * n if 2 * n != av else None, "used_wrong_edge_rule", "Used 2 × base sides.")]
     wr = [w_ for w_ in wr if w_[0] and w_[1] != "x"]
     ans = av
-    steps = [f"Base has n sides: {a_an(kind)} {kind} has {'3n edges, 2n vertices, n + 2 faces' if kind == 'prism' else '2n edges, n + 1 vertices, n + 1 faces'}.",
+    steps = [f"Base has n sides: {a_an(kind)} {kind} has {'edges 3n, vertices 2n, faces n + 2' if kind == 'prism' else 'edges 2n, vertices n + 1, faces n + 1'}.",
              f"Given: {gv} {given} → n = {n}", f"{want.title()} = {ans}"]
     return mk(prism_reverse, stem, ans, wr, steps, {"n": n, "kind": kind, "given": given, "want": want, "gv": gv}, None,
               show=lambda v: str(int(v)), maxv=60)
@@ -3708,7 +3708,7 @@ def which_scale_was_used(r):
     side = "left" if use_outer else "right"
     zero = "right" if use_outer else "left"
     stem = (f"{name} wants to draw ∠PQR = {th}°, with QP along the baseline of the protractor pointing to the {side}. "
-            f"{plural(name, 'mark')} R at {th} on the {sc} scale (the scale that starts at 0 on the {zero}). "
+            f"{name} marks R at {th} on the {sc} scale (the scale that starts at 0 on the {zero}). "
             f"What is the actual size of ∠PQR in the drawing?")
     fig = protractor_fig(act, base_right=base_right)
     wr = [W(th, "read_the_wrong_scale", f"Took the {sc} scale reading as the angle even though QP is not on its 0°."),

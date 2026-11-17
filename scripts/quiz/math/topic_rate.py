@@ -291,7 +291,7 @@ def rate_unit_change(r):
         (ans - 10, "careless_slip", "Made a slip in the calculation."),
         (F(per_min) * 60 * (h + 1), "extra_hour", "Counted one hour too many."),
     ], [f"{plural(h, 'hour')} = {plural(h * 60, 'minute')}", f"{ps} × {h * 60} = {float(ans):g} litres"],
-        {"p2": int(per_min * 4), "h": h}, lambda x: f"{float(x):g} {noun(F(x).limit_denominator(), 'litre')}", auto_slips=False)
+        {"p2": int(per_min * 4), "h": h}, lambda x: f"{float(x):g} {noun(float(f'{float(x):g}'), 'litre')}", auto_slips=False)
 
 
 @checker(rate_unit_change)
