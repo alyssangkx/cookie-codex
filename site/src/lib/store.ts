@@ -386,9 +386,9 @@ export function finishQuiz(
   const key = dayKey(now);
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
   if (a.mode === 'tier' || a.mode === 'paper') dropOpen(s, a.mode, a.sub, a.tier);
-  // "First" = no other Basic attempt for this sub at all, finished OR abandoned (this quiz's own open record
+  // "First" = no other attempt for this sub|tier at all (Basic and Intermediate only), finished OR abandoned (this quiz's own open record
   // was dropped above). Counting abandoned tries closes the "quit after a mistake, retry until perfect" loophole.
-  const firstEver = a.mode === 'tier' && a.tier === 'b' && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && x.sub === a.sub && x.tier === 'b');
+  const firstEver = a.mode === 'tier' && (a.tier === 'b' || a.tier === 'i') && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && x.sub === a.sub && x.tier === a.tier);
   s.attempts.push({ ...a, ts: now });
   const d = (s.days[key] ??= { quizzes: 0, min: 0, correct: 0, total: 0 });
   d.quizzes++;
@@ -413,9 +413,9 @@ export function finishQuiz(
   }
   const early: QuizResult['newlyCleared'] = [];
   let autoPromoted = false;
-  if (firstEver && a.tier === 'b' && a.sub && a.total >= QUIZ_SIZE && a.score === a.total && !tierState(s, a.sub, 'b').cleared) {
-    // owner's rule: a perfect first Basic quiz clears Basic now (before syncTiers, so Intermediate opens)
-    early.push({ sub: a.sub, tier: 'b', reward: award(s, a.sub, 'b', rewardFor, now) });
+  if (firstEver && a.tier && a.sub && a.total >= QUIZ_SIZE && a.score === a.total && !tierState(s, a.sub, a.tier).cleared) {
+    // owner's rule: a perfect first Basic or Intermediate quiz clears that tier now (before syncTiers, so the next tier opens)
+    early.push({ sub: a.sub, tier: a.tier, reward: award(s, a.sub, a.tier, rewardFor, now) });
     autoPromoted = true;
   }
   const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now)];

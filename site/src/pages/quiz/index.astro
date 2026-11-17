@@ -77,7 +77,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
   // the asked cloze blank (four ＿) is marked and kept on one line; other blanks have two
   const fmt = (x: string) =>
-    esc(x).replace(/（(\d+)）＿＿＿＿/g, '<mark class="ask">（$1）＿＿＿＿</mark>').replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
+    esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>').replace(/（(\d+)）＿＿＿＿/g, '<mark class="ask">（$1）＿＿＿＿</mark>').replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
       `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`);
 
   // dialogue sets: shown disabled when already answered correctly for an earlier blank (a hint only; scoring is unchanged)
@@ -283,7 +283,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     let html = timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '';
     if (mode === 'tier') {
       const st = tierState(s, subId, tier);
-      html += res.autoPromoted ? `<p class="verdict good">Perfect first try! Basic cleared, and the next tier is open.</p>`
+      html += res.autoPromoted ? `<p class="verdict good">Perfect first try! ${{ b: 'Basic', i: 'Intermediate', c: 'Competent' }[tier] ?? 'Tier'} cleared, and the next tier is open.</p>`
         : res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`
         : st.cleared ? `<p class="verdict good">${res.passed ? 'Nice score! ' : ''}This tier is cleared (you keep its card). ${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered right now; any you missed come back for practice.</p>`
         : `<p class="verdict ${res.passed ? 'good' : 'bad'}">${res.passed ? 'Nice score! ' : 'Not yet. '}${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered. Missed questions come back until you get them right.</p>`;

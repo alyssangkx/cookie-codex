@@ -313,10 +313,33 @@ test('perfect first-ever Basic quiz clears Basic and awards the card; only that 
   assert.equal(finishQuiz(s, q('b', 9), reward, t0, ids).autoPromoted, false);
   assert.equal(s.progress.x.b.cleared, false);
 
-  // an Intermediate first try at 10/10 does not
+  // Competent first try at 10/10 does not
   s = fresh();
-  assert.equal(finishQuiz(s, q('i', 10), reward, t0, ids).autoPromoted, false);
-  assert.equal(s.progress.x.i.cleared, false);
+  assert.equal(finishQuiz(s, q('c', 10), reward, t0, { ...ids, 'x|c': ['c1', 'c2'] }).autoPromoted, false);
+  assert.equal(s.progress.x.c.cleared, false);
+
+  // a first-ever Intermediate 10/10 clears it, awards the card, and opens Competent
+  const ids3 = { ...ids, 'x|c': ['c1', 'c2'] };
+  s = fresh();
+  answer(s, 'b1', true, t0); answer(s, 'b2', true, t0); // Basic cleared so Intermediate is a real play
+  finishQuiz(s, q('b', 10), reward, t0 - 1000, ids3); // perfect first Basic clears it
+  answer(s, 'i1', true, t0); answer(s, 'i2', false, t0);
+  r = finishQuiz(s, q('i', 10), reward, t0, ids3);
+  assert.equal(r.autoPromoted, true);
+  assert.equal(r.reward?.slug, 'x-i');
+  assert.equal(s.progress.x.i.cleared, true);
+  assert.equal(tierOpen(s, 'x', 'c'), true);
+  // a second Intermediate try does not, 9/10 does not
+  s = fresh();
+  finishQuiz(s, q('i', 8), reward, t0, ids3);
+  assert.equal(finishQuiz(s, q('i', 10), reward, t0 + 1000, ids3).autoPromoted, false);
+  s = fresh();
+  assert.equal(finishQuiz(s, q('i', 9), reward, t0, ids3).autoPromoted, false);
+  // an abandoned earlier Intermediate try blocks it
+  s = fresh();
+  openAttempt(s, { sub: 'x', tier: 'i', total: 10 }, t0 - 9000);
+  openAttempt(s, { sub: 'x', tier: 'i', total: 10 }, t0 - 5000);
+  assert.equal(finishQuiz(s, q('i', 10), reward, t0, ids3).autoPromoted, false);
 
   // this quiz's own open record is not an earlier try
   s = fresh();

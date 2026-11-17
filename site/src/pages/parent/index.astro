@@ -221,7 +221,7 @@ const data = {
       const dueTxt = late
         ? (dayKey(q.due) === dayKey(now) ? 'due today' : '<span class="due-late">overdue</span>')
         : `due ${esc(fmtDate(q.due))}`;
-      return `<li>${esc(stems.get(id) ?? id)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
+      return `<li>${esc(stems.get(id) ?? id).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>')}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
     }).join('') + '</ol>';
   }
 
