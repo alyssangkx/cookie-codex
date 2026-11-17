@@ -6522,46 +6522,6 @@
    }
   },
   {
-   "id": "enggram-aeb3acb201",
-   "topic": "eng-gram-wps",
-   "level": "competent",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-wps-items-7"
-   ],
-   "stem": "I cannot find ____ my pen or my ruler.",
-   "options": [
-    "neither",
-    "either",
-    "any",
-    "both"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "double_negative",
-     "why": "'cannot ... neither' makes a double negative."
-    },
-    null,
-    {
-     "tag": "wrong_correlative",
-     "why": "'any' does not combine with 'or' to join two named items."
-    },
-    {
-     "tag": "wrong_correlative",
-     "why": "'both' is used with 'and', not 'or'."
-    }
-   ],
-   "solution": [
-    "I cannot find either my pen or my ruler.",
-    "'either ... or' joins two items after a negative: cannot find either ... or ...."
-   ],
-   "params": {
-    "key": "gram-quant-013",
-    "subtopic": "eng-gram-wps-items"
-   }
-  },
-  {
    "id": "enggram-f75cf4b56f",
    "topic": "eng-gram-wps",
    "level": "competent",
@@ -8798,46 +8758,6 @@
    ],
    "params": {
     "key": "gram-cond-004",
-    "subtopic": "eng-gram-wps-items"
-   }
-  },
-  {
-   "id": "enggram-3492f0f86f",
-   "topic": "eng-gram-wps",
-   "level": "competent",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-wps-items-1"
-   ],
-   "stem": "If only I ____ more time yesterday, I would have finished the project.",
-   "options": [
-    "had had",
-    "would have",
-    "had",
-    "have had"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "conditional_form",
-     "why": "'would have' belongs in the result clause, not in the 'if' clause."
-    },
-    {
-     "tag": "conditional_form",
-     "why": "The past unreal condition needs 'had had' (past perfect of 'have'), not just 'had'."
-    },
-    {
-     "tag": "conditional_form",
-     "why": "Present perfect 'have had' does not fit a condition about yesterday."
-    }
-   ],
-   "solution": [
-    "If only I had had more time yesterday, I would have finished the project.",
-    "Past unreal condition: 'had' + past participle, here 'had had'."
-   ],
-   "params": {
-    "key": "gram-cond-005",
     "subtopic": "eng-gram-wps-items"
    }
   },

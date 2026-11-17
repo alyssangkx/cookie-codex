@@ -1,6 +1,6 @@
 # Chinese bank: PSLE syllabus and top-school coverage
 
-1030 shipped questions (basic 340, intermediate 364, competent 326). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
+1015 shipped questions (basic 336, intermediate 363, competent 316). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
 
 ## 1. PSLE syllabus (SEAB 0005 / 小学华文课程标准)
 
@@ -16,15 +16,15 @@
 | 词语选用 (word choice) | 辨别词语搭配 (identify correct word collocations) | yes | 18 |
 | 词语选用 (word choice) | 辨别近义词的细微差别 (tell near-synonyms apart) | yes | 35 |
 | 成语和习用语 (idioms and common expressions) | 在语境中正确运用成语 (use idioms correctly in context) | yes | 55 |
-| 成语和习用语 (idioms and common expressions) | 在语境中正确运用习用语 (use common expressions correctly in context) | yes | 57 |
+| 成语和习用语 (idioms and common expressions) | 在语境中正确运用习用语 (use common expressions correctly in context) | yes | 56 |
 | 句子选用 (sentence choice) | 根据句子的意思选出最适当的句子 (choose the most suitable sentence for the meaning) | yes | 47 |
 | 句子选用 (sentence choice) | 辨别句子结构是否完整、通顺 (judge whether sentence structure is complete and well-… | yes | 49 |
-| 关联词 (conjunctions) | 选用适当的关联词连接句子 (choose a suitable conjunction pair) | yes | 99 |
+| 关联词 (conjunctions) | 选用适当的关联词连接句子 (choose a suitable conjunction pair) | yes | 98 |
 | 句子排列 (sentence ordering) | 把句子排列成通顺的语段 (arrange sentences into a coherent paragraph) | yes | 80 |
 | 多项选择短文填空 (MCQ cloze) | 根据短文内容和上下文，选出最适当的答案 (choose the best answer from passage content and … | yes | 22 |
-| 多项选择短文填空 (MCQ cloze) | 理解语境以判断词语的用法 (use context to judge word usage) | yes | 82 |
-| 对话填答 (dialogue completion) | 根据对话内容，选出最适当的答案 (choose the best response from the dialogue content) | yes | 40 |
-| 对话填答 (dialogue completion) | 判断对话中的情境和语气 (judge situation and tone in a dialogue) | yes | 48 |
+| 多项选择短文填空 (MCQ cloze) | 理解语境以判断词语的用法 (use context to judge word usage) | yes | 77 |
+| 对话填答 (dialogue completion) | 根据对话内容，选出最适当的答案 (choose the best response from the dialogue content) | yes | 36 |
+| 对话填答 (dialogue completion) | 判断对话中的情境和语气 (judge situation and tone in a dialogue) | yes | 44 |
 | 篇章理解 (passage understanding) | 根据篇章内容选出最适当的答案 (choose the best answer from passage content) | yes | 61 |
 | 篇章理解 (passage understanding) | 理解词句在篇章中的意思 (understand words and sentences in the passage) | yes | 16 |
 | 实用文与篇章 (practical text and passage) | 根据实用文和篇章的内容回答问题 (answer questions on a practical text and passage) | no | 0 |
@@ -41,13 +41,13 @@
 | 汉语拼音 (pinyin of an underlined word) (`chi-pat-pinyin`) | 124 | 111 |
 | 形近字／同音字辨认 (choose the right character) (`chi-pat-zixing`) | 124 | 112 |
 | 选词填空：近义词辨析 (near-synonym word choice) (`chi-pat-xuanci`) | 118 | 151 |
-| 完成对话 (complete the dialogue) (`chi-pat-wancheng-duihua`) | 117 | 88 |
+| 完成对话 (complete the dialogue) (`chi-pat-wancheng-duihua`) | 117 | 80 |
 | 句子选用 (choose the clause that completes the sentence) (`chi-pat-juzi-xuanyong`) | 112 | 47 |
 | 词语运用：哪个句子正确 (which sentence uses the word correctly) (`chi-pat-ciyu-yunyong`) | 112 | 49 |
 | 词语／成语的意思 (meaning of an underlined word or idiom) (`chi-pat-ciyuyi`) | 104 | 55 |
-| 关联词 (conjunction pair) (`chi-pat-guanlian`) | 84 | 99 |
-| 短文填空：词语选用 (cloze word choice) (`chi-pat-duanwen-tiankong`) | 82 | 104 |
-| 成语运用 (idiom used correctly) (`chi-pat-chengyu`) | 39 | 57 |
+| 关联词 (conjunction pair) (`chi-pat-guanlian`) | 84 | 98 |
+| 短文填空：词语选用 (cloze word choice) (`chi-pat-duanwen-tiankong`) | 82 | 99 |
+| 成语运用 (idiom used correctly) (`chi-pat-chengyu`) | 39 | 56 |
 | 句子排列 (sentence ordering) (`chi-pat-juzi-paixu`) | 0 | 80 |
 
 ## 3. Words tested in the papers

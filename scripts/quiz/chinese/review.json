@@ -1442,11 +1442,14 @@
   "fingerprint": "db15afe198e6ad33"
  },
  "chi-ciyu-idiom|idiom-040": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: '把碎屑挂在嘴边' is not natural: 挂在嘴边 means 'often says', not crumbs left on the mouth."
+  ],
   "notes": [
    "掩耳盗铃",
-   "Same scenario as meaning-038 (leak)."
+   "Same scenario as meaning-038 (leak).",
+   "audit fix suggestion: Use '把偷吃饼干留下的碎屑留在嘴边' (as meaning-038 does)."
   ],
   "fingerprint": "d4e48d512b2e9502"
  },
@@ -3273,10 +3276,13 @@
   "fingerprint": "7734164027220396"
  },
  "chi-juzi-guanlian|guanlian-033": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: 「没有捷径可走」只说没有捷径，「只要天天下水练习，就能掌握技巧」同样通顺，「只要……就」也可接受，不是唯一答案。"
+  ],
   "notes": [
-   "只有天天练习才能"
+   "只有天天练习才能",
+   "audit fix suggestion: 把线索写成必要条件，例如：「要想学好游泳，＿＿＿＿天天下水练习，＿＿＿＿能掌握技巧，别的办法都没有用。」"
   ],
   "fingerprint": "599cee471dab5e95"
  },
@@ -5506,11 +5512,14 @@
   "round": "phase1b-2026-11-17"
  },
  "chi-cloze-mcq|cloze-13-4": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: '大显身手' also fits '在数百名选手中____，夺得了冠军', so 脱颖而出 is not the only acceptable answer."
+  ],
   "notes": [
    "脱颖而出夺冠",
-   "ok"
+   "ok",
+   "audit fix suggestion: Replace the distractor 大显身手 with a clearly wrong one such as 不堪一击."
   ],
   "fingerprint": "efb3c08242c620c0",
   "round": "phase1b-2026-11-17"
@@ -10153,13 +10162,16 @@
   "round": "dialogue-2026-11-17"
  },
  "chi-dialogue-mcq|duihua-04-4": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: Auntie has only just been handed the zongzi, so telling Mum 'the taste is great' is odd (she has not eaten it), and '向妈妈"
+  ],
   "notes": [
    "请转告妈妈粽子味道好极了，是称赞答谢",
    "ok; opt3 reason somewhat generic.",
    "Phrase matches options[answer]; turn and neighbouring lines match stem.",
-   "explanations generated from the verified answers (other blank / fits no blank)"
+   "explanations generated from the verified answers (other blank / fits no blank)",
+   "audit fix suggestion: Change the key option to '谢谢她的粽子，我们会好好享用' (or '声谢谢'), and drop '粽子的味道好极了'."
   ],
   "fingerprint": "c88027ab1dce24c2",
   "round": "dialogue-2026-11-17"
@@ -10751,12 +10763,15 @@
   "round": "dialogue-extra-2026-11-17"
  },
  "chi-dialogue-mcq|duihua-24-4": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: '虽然那天不能到场，我可以提前…' has no 但是/可是, so the 虽然 clause is incomplete for a PSLE marker."
+  ],
   "notes": [
    "虽然不能到场，我可以提前画海报（让步转折）",
    "ok",
-   "explanations generated from the verified answers"
+   "explanations generated from the verified answers",
+   "audit fix suggestion: Change the option to '虽然那天不能到场，但是' or write '那天我虽然不能到场，但是我可以提前…'."
   ],
   "fingerprint": "4f484d285a85e660",
   "round": "dialogue-extra-2026-11-17"

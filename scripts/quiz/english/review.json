@@ -814,10 +814,13 @@
   "round": "eng-1-2026-11-17"
  },
  "eng-gram-wps-items|gram-quant-013": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: Technically grammatical but a P6 marker expects neither...nor; reads as a trick (point 2/5)"
+  ],
   "notes": [
-   "\"either ... or\" after cannot; \"any\" cannot precede \"my pen\""
+   "\"either ... or\" after cannot; \"any\" cannot precede \"my pen\"",
+   "audit fix suggestion: Rewrite as \"____ my pen nor my ruler could be found.\" with options Neither/Either/Both/Any (key Neither), and update explain/solution"
   ],
   "fingerprint": "eddca82fead7774e",
   "round": "eng-1-2026-11-17"
@@ -1366,11 +1369,14 @@
   "round": "eng-1-2026-11-17"
  },
  "eng-gram-wps-items|gram-cond-005": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: \"If only ... would have finished\" mixes a wish with a conditional result; unnatural and \"had had\" is awkward (point 1/2)"
+  ],
   "notes": [
    "if only + had had for past regret",
-   "Stem 'If only I had had more time ..., I would have finished' mixes a wish ('If only') with a result clause; unnatural. Key 'had had' is right. Suggest 'If I ____ more time yesterday'."
+   "Stem 'If only I had had more time ..., I would have finished' mixes a wish ('If only') with a result clause; unnatural. Key 'had had' is right. Suggest 'If I ____ more time yesterday'.",
+   "audit fix suggestion: Use \"If I ____ more time yesterday, I would have finished the project.\" (key had had), or \"I wish I had had...\"; update explain/solution"
   ],
   "fingerprint": "905b3c1d2a6c9494",
   "round": "eng-1-2026-11-17"
@@ -1565,11 +1571,14 @@
   "round": "eng-1-2026-11-17"
  },
  "eng-vocab-use-appropriate|phrasal-020": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: Unnatural word order: \"keep down your voice\"; the idiomatic phrase is \"keep your voice down\"."
+  ],
   "notes": [
    "keep down your voice = make it quieter",
-   "Natural order is 'keep your voice down'; 'keep down your voice' is acceptable but awkward. Consider rewording the stem."
+   "Natural order is 'keep your voice down'; 'keep down your voice' is acceptable but awkward. Consider rewording the stem.",
+   "audit fix suggestion: Reword stem: \"Please ___ the noise; the baby is sleeping.\" (keep down) or use \"turn down\"/\"lower your voice\"."
   ],
   "fingerprint": "cc13d13fd018c0f2",
   "round": "eng-1-2026-11-17"
@@ -3816,10 +3825,13 @@
   "round": "eng-1-2026-11-17"
  },
  "eng-vocab-use-appropriate|vocab-choice-072": {
-  "ship": true,
-  "reasons": [],
+  "ship": false,
+  "reasons": [
+   "owner-standard audit: \"subsist on\" is a rare, formal verb not expected of a PSLE P6 pupil."
+  ],
   "notes": [
-   "Subsist on fish and fruit to stay alive."
+   "Subsist on fish and fruit to stay alive.",
+   "audit fix suggestion: Replace key/stem with a common verb, e.g. \"to ___ on fish and wild fruit\" with live / survive options, or use \"survive on\" vs distractors."
   ],
   "fingerprint": "f935b6f9e3f0d210",
   "round": "eng-1-2026-11-17"

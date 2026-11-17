@@ -658,47 +658,6 @@
    }
   },
   {
-   "id": "engvoca-d4816c06f9",
-   "topic": "eng-vocab-use",
-   "level": "basic",
-   "template": "eng-pat-vocab-phrasal",
-   "outcomes": [
-    "eng-vocab-use-appropriate-2"
-   ],
-   "stem": "Please ___ your voice; the baby is sleeping.",
-   "options": [
-    "keep away",
-    "keep off",
-    "keep down",
-    "keep out"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "same_verb_wrong_particle",
-     "why": "means to stay at a distance; it does not mean lowering the voice."
-    },
-    {
-     "tag": "same_verb_wrong_particle",
-     "why": "means to stay away from; it does not describe lowering a voice."
-    },
-    null,
-    {
-     "tag": "same_verb_wrong_particle",
-     "why": "means to stop someone entering; it does not describe lowering a voice."
-    }
-   ],
-   "solution": [
-    "'keep down' means to make quieter, not loud.",
-    "Filled in: Please keep down your voice; the baby is sleeping.",
-    "keep down = to make quieter, not loud"
-   ],
-   "params": {
-    "key": "phrasal-020",
-    "subtopic": "eng-vocab-use-appropriate"
-   }
-  },
-  {
    "id": "engvoca-ab97bc21eb",
    "topic": "eng-vocab-use",
    "level": "basic",
@@ -7304,46 +7263,6 @@
    ],
    "params": {
     "key": "vocab-choice-071",
-    "subtopic": "eng-vocab-use-appropriate"
-   }
-  },
-  {
-   "id": "engvoca-b9351b9499",
-   "topic": "eng-vocab-use",
-   "level": "competent",
-   "template": "eng-pat-vocab-word",
-   "outcomes": [
-    "eng-vocab-use-appropriate-1"
-   ],
-   "stem": "The explorers had to ______ on fish and wild fruit to stay alive.",
-   "options": [
-    "subsist",
-    "consist",
-    "insist",
-    "persist"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong_collocation",
-     "why": "'consist of' is used for things made of parts, not people staying alive"
-    },
-    {
-     "tag": "wrong_collocation",
-     "why": "'insist on' means demand; it does not mean survive on food"
-    },
-    {
-     "tag": "wrong_collocation",
-     "why": "'persist in' means keep going, not live on food"
-    }
-   ],
-   "solution": [
-    "'subsist on' means stay alive on little food.",
-    "subsist = survive"
-   ],
-   "params": {
-    "key": "vocab-choice-072",
     "subtopic": "eng-vocab-use-appropriate"
    }
   },

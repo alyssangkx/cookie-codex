@@ -82,7 +82,7 @@ def fill_cloze(bank, items, review, dropped):
             continue
         for n, (it, st) in sibs.items():
             if st == "fill":
-                q["stem"] = q["stem"].replace(f"（{n}）＿＿", f"（{n}）{it['options'][it['answer']]}")
+                q["stem"] = q["stem"].replace(f"（{n}）＿＿", it["options"][it["answer"]])  # a filled blank reads as plain text (a numbered gap with the answer in it looked unfinished)
         keep.append(q)
     bank[:] = keep
 
