@@ -40,41 +40,51 @@ export function pickTier(
     const id = spare.shift()!;
     if (!out.includes(id)) out.push(id);
   }
-  return passage && out.some((id) => passage(id)) ? wholePassages(out, ids, passage, size) : shuffle(out, rand);
+  return passage && out.some((id) => passage(id)) ? wholePassages(out, ids, passage, size, new Set(take)) : shuffle(out, rand);
 }
 
 /**
  * Passage sub-topics (cloze, reading): a quiz is whole passages, read once, questions in order.
- * Passages come in the priority order of the picked questions (due retests first, then new). Whole
- * passages are taken while they fit; a passage too big for the space left is skipped for a later,
- * smaller one; only if nothing fits exactly is one passage cut to make `size`.
- * A picked question outside this tier's passages (a retest from another level) counts on its own.
- * ponytail: due retests in a third passage wait for the next quiz (they stay first in line by due date)
+ * Passages holding a due retest (`must`) go first and are never skipped: if one is too big for the
+ * space left it is cut, keeping its due questions. Then other passages in picked order, whole while
+ * they fit; one too big gives way to a later, smaller one; only if nothing fits exactly is one cut.
+ * A picked question outside this tier's passages (a retest from another level) is a unit of its own.
+ * ponytail: due retests beyond the space left wait for the next quiz (they stay first in line by due date)
  */
 export function wholePassages(
   picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined, size: number,
+  must: Set<string> = new Set(),
 ): string[] {
   const members = new Map<string, string[]>();
   for (const id of ids) {
-    const g = passage(id)?.group ?? id;
-    (members.get(g) ?? members.set(g, []).get(g)!).push(id);
+    const g = passage(id)?.group ?? id; // an ungrouped question is a passage of one
+    if (!members.has(g)) members.set(g, []);
+    members.get(g)!.push(id);
   }
   const seq = (id: string) => passage(id)?.seq ?? 0;
-  const units: string[][] = [];
-  const seen = new Set<string>();
+  const unitKey = (id: string) => { const g = passage(id)?.group; return g && members.get(g)?.includes(id) ? g : id; };
+  const units = new Map<string, string[]>();
   for (const id of picked) {
-    const g = passage(id)?.group ?? id;
-    if (seen.has(g)) continue;
-    seen.add(g);
-    units.push(members.has(g) && members.get(g)!.includes(id) ? [...members.get(g)!].sort((a, b) => seq(a) - seq(b)) : [id]);
+    const k = unitKey(id);
+    if (!units.has(k)) units.set(k, k === id ? [id] : [...members.get(k)!].sort((a, b) => seq(a) - seq(b)));
   }
+  const all = [...units.values()];
+  const isMust = (u: string[]) => u.some((id) => must.has(id));
+  const cut = (u: string[], n: number) => {
+    const keep = new Set([...u.filter((id) => must.has(id)).slice(0, n)]);
+    for (const id of u) if (keep.size < n) keep.add(id);
+    return u.filter((id) => keep.has(id)); // passage order
+  };
   const out: string[] = [];
   const skipped: string[][] = [];
-  for (const u of units) {
-    if (out.length + u.length <= size) out.push(...u);
+  for (const u of [...all.filter(isMust), ...all.filter((u) => !isMust(u))]) {
+    const room = size - out.length;
+    if (room <= 0) break;
+    if (u.length <= room) out.push(...u);
+    else if (isMust(u)) out.push(...cut(u, room));
     else skipped.push(u);
   }
-  for (const u of skipped) if (out.length < size) out.push(...u.slice(0, size - out.length));
+  for (const u of skipped) if (out.length < size) out.push(...cut(u, size - out.length));
   return out;
 }
 

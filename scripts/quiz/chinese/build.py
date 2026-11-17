@@ -62,24 +62,30 @@ def fill_cloze(bank, items, review, dropped):
             return "unknown"
         if v.get("ship") is True:
             return "asked"
-        return "fill" if v.get("reasons") and all("explanation" in r for r in v["reasons"]) else "unknown"
+        # held for its explanation alone, and no reviewer note doubts the answer itself
+        only_explain = v.get("reasons") and all(r in ("explanation wrong", "explanation or wrong form implausible")
+                                                 for r in v["reasons"])
+        doubt = any(w in " ".join(v.get("notes", [])) for w in ("arguable", "acceptable", "not airtight", "also fits",
+                                                                 "also works", "defensible", "也可以", "也行"))
+        return "fill" if only_explain and not doubt else "unknown"
 
     sets = {}
     for k, it in by_key.items():
         if (m := PASSAGE.match(k)):
             sets.setdefault(m[2], {})[int(m[3])] = it
+    states = {k: state(it) for k, it in by_key.items()}
     keep = []
     for q in bank:
         m = PASSAGE.match(q["params"]["key"]) if q["params"]["subtopic"] == "chi-cloze-mcq" else None
         if not m:
             keep.append(q)
             continue
-        sibs = {n: it for n, it in sets[m[2]].items() if n != int(m[3])}
-        if any(state(it) == "unknown" for it in sibs.values()):
+        sibs = {n: (it, states[it["key"]]) for n, it in sets[m[2]].items() if n != int(m[3])}
+        if any(st == "unknown" for _, st in sibs.values()):
             dropped.append(f"chi-cloze-mcq|{q['params']['key']} (passage set held: a sibling blank cannot be shown)")
             continue
-        for n, it in sibs.items():
-            if state(it) == "fill":
+        for n, (it, st) in sibs.items():
+            if st == "fill":
                 q["stem"] = q["stem"].replace(f"（{n}）＿＿", f"（{n}）{it['options'][it['answer']]}")
         keep.append(q)
     bank[:] = keep
@@ -129,6 +135,13 @@ def main():
             })
         if sub == "chi-cloze-mcq":
             fill_cloze(banks.get(topic, []), data["items"], review, dropped)
+    levels = {}
+    for qs in banks.values():
+        for q in qs:
+            if "group" in q:
+                levels.setdefault(q["group"], set()).add(q["level"])
+    mixed = [g for g, ls in levels.items() if len(ls) > 1]
+    assert not mixed, f"passage sets must sit at one level: {mixed}"
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*.json"):  # never leave a bank behind that the current items no longer produce
         old.unlink()

@@ -98,3 +98,16 @@ test('passage tiers: a passage too big for the space left gives way to one that 
   const out2 = wholePassages(['a1', 'b1', 'd1', 'c1'], ids, (id) => meta[id], 11);
   assert.deepEqual(out2, ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4', 'b5', 'd1', 'd2']); // c (3) skipped, d (2) fits
 });
+
+test('passage tiers: a due retest is never skipped for a passage that fits better', () => {
+  const meta: Record<string, { group: string; seq: number }> = {}; const ids: string[] = [];
+  const add = (g: string, n: number) => { for (let k = 1; k <= n; k++) { ids.push(`${g}${k}`); meta[`${g}${k}`] = { group: g, seq: k }; } };
+  add('a', 5); add('b', 6); add('c', 5);
+  const out = wholePassages(['b5', 'a1', 'c1'], ids, (id) => meta[id], 10, new Set(['b5']));
+  assert.ok(out.includes('b5'));
+  assert.equal(out.length, 10);
+  // two due retests from the same other-level passage both stay
+  meta['x2'] = { group: 'x', seq: 2 }; meta['x4'] = { group: 'x', seq: 4 };
+  const out2 = wholePassages(['x2', 'x4', 'a1', 'c1'], ids, (id) => meta[id], 10, new Set(['x2', 'x4']));
+  assert.ok(out2.includes('x2') && out2.includes('x4'));
+});
