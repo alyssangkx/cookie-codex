@@ -48,6 +48,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
   const root = document.querySelector<HTMLElement>('.sub-page')!;
   const sub = root.dataset.sub!;
   const cap = capReached(s);
+  const playable = Object.fromEntries([...root.querySelectorAll<HTMLElement>('.tier-card')].map((c) => [c.dataset.tier, c.dataset.playable === 'true'])) as Record<Tier, boolean>;
   document.getElementById('cap')!.hidden = !cap;
   root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
     // the preview always matches the real reward: a star only if the card is already owned
@@ -60,7 +61,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     card.querySelector('.meta')!.textContent = card.querySelector('.meta')!.textContent!.replace(/^\d+(\.\d+)? minutes/, `${minutesFor(s, t)} minutes`);
     let block = '';
     if (st.cleared) msg.textContent = `Cleared ✓ (best ${st.best}%). You can keep practising.`;
-    else if (!tierOpen(s, sub, t)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
+    else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
     else msg.textContent = st.passes.length ? `1 of 2 passes (best ${st.best}%). Pass again on another day.` : st.best ? `Best so far: ${st.best}%. Not yet, keep going!` : 'Ready when you are.';
     if (!block && attemptsToday(s, sub, t) >= ATTEMPTS_PER_DAY) block = 'You have had 3 tries at this tier today. Try again tomorrow.';
     if (!block && cap) block = 'Done for today.';

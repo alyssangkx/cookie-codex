@@ -80,7 +80,7 @@ export function suggestions(
 
   const today = dayKey(ctx.now);
   const canStart = (sub: SubInfo, t: Tier) =>
-    sub.playable[t] && tierOpen(s, sub.id, t) && attemptsToday(s, sub.id, t) < ATTEMPTS_PER_DAY;
+    sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && attemptsToday(s, sub.id, t) < ATTEMPTS_PER_DAY;
   const taken = new Set<string>();
   const out: Suggestion[] = [];
   const add = (x: Suggestion) => {

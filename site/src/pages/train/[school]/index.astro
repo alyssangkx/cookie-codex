@@ -109,7 +109,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       if (!playable) return { state: 'none', text: `${TIER_NAME[t]}: no questions yet` };
       const st = tierState(s, sub, t);
       if (st.cleared) return { state: 'cleared', text: `${TIER_NAME[t]}: cleared ✓` };
-      if (!tierOpen(s, sub, t)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
+      if (!tierOpen(s, sub, t, subs.find((y) => y.id === sub)?.playable)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
       if (st.passes.length) return { state: 'pass1', text: `${TIER_NAME[t]}: 1 of 2` };
       return { state: 'open', text: `${TIER_NAME[t]}: open` };
     };

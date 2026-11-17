@@ -15,7 +15,7 @@ export const MIN_POOL = 20; // a tier is playable only with at least 20 question
 
 export interface BankQ {
   id: string; sub: string; level: 'basic' | 'intermediate' | 'competent';
-  stem: string; options: string[]; answer: number;
+  stem: string; options: string[]; answer: number; figure?: string;
   explain: ({ tag: string; why: string } | null)[]; solution: string[];
 }
 
@@ -29,6 +29,7 @@ export const banks = Object.values(files).map((f) => ({
   questions: f.questions.map((q) => ({
     id: q.id, sub: (q.outcomes[0] as string).replace(/-\d+$/, ''), level: q.level,
     stem: q.stem, options: q.options, answer: q.answer, explain: q.explain, solution: q.solution,
+    ...(q.figure ? { figure: q.figure } : {}),
   })) as BankQ[],
 }));
 

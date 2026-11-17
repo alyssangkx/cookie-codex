@@ -61,3 +61,19 @@ test('streak: weeks with 4+ goal days; weekends never break it; a thin week does
   assert.deepEqual([s.streak.best, s.streak.studyDays], [2, 10]);
   assert.equal(s.days[dayKey(day(15))].quizzes, 2);
 });
+
+test('review fixes: tiers skip unplayable lower tiers; goal days keep their status; short quizzes count', async () => {
+  const { tierOpen, fresh: f, finishQuiz: fq, liveStreak: ls, today } = await import('./store.ts');
+  const s = f();
+  assert.equal(tierOpen(s, 'x', 'i'), false);
+  assert.equal(tierOpen(s, 'x', 'i', { b: false, i: true, c: true }), true); // Basic unplayable: Intermediate opens
+  assert.equal(tierOpen(s, 'x', 'c', { b: false, i: true, c: true }), false); // still needs Intermediate
+  const quiz = { mode: 'review' as const, score: 5, total: 5, ms: 25_000, tags: [] };
+  for (let d = 0; d < 4; d++) { fq(s, quiz, () => undefined, t0 + d * DAY); fq(s, quiz, () => undefined, t0 + d * DAY); }
+  assert.equal(ls(s, t0 + 4 * DAY), 1);
+  s.settings.dailyGoalQuizzes = 3; // a parent raises the goal: past goal days still count
+  assert.equal(ls(s, t0 + 4 * DAY), 1);
+  const s2 = f();
+  for (let k = 0; k < 10; k++) fq(s2, quiz, () => undefined); // ten 25-second quizzes today
+  assert.equal(today(s2).min, 4); // 250 s, not 10 x round(0.4 min) = 0
+});

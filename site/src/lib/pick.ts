@@ -63,7 +63,7 @@ export function pickPaper(
   qs: { id: string; topic: string; level: keyof Mix }[], seen: Record<string, Seen | undefined>,
   n: number, mix: Mix, now = Date.now(), rand = Math.random,
 ): string[] {
-  const topics = [...new Set(qs.map((q) => q.topic))];
+  const topics = shuffle([...new Set(qs.map((q) => q.topic))], rand); // random start, so every topic gets a turn
   const rank = (id: string) => (!seen[id] ? 0 : (seen[id]!.s > 0 && seen[id]!.due <= now) ? 1 : 2);
   const levels = Object.keys(mix) as (keyof Mix)[];
   const want = levels.map((l) => Math.round(n * mix[l]));
@@ -72,13 +72,15 @@ export function pickPaper(
   levels.forEach((level, li) => {
     const pools = topics.map((t) =>
       shuffle(qs.filter((q) => q.topic === t && q.level === level).map((q) => q.id), rand).sort((a, b) => rank(a) - rank(b)));
-    for (let k = 0; out.length < n && k < want[li] * 4; k++) {
+    // round-robin over topics until this level has its share or every pool is empty
+    for (let got = 0, k = 0; got < want[li] && pools.some((p) => p.length); k++) {
       const pool = pools[k % pools.length];
-      if (pool.length && out.filter((id) => qs.find((q) => q.id === id)!.level === level).length < want[li]) out.push(pool.shift()!);
+      if (pool.length) { out.push(pool.shift()!); got++; }
     }
   });
   // top up from any level if some level ran short
-  const rest = shuffle(qs.filter((q) => !out.includes(q.id)).map((q) => q.id), rand).sort((a, b) => rank(a) - rank(b));
+  const taken = new Set(out);
+  const rest = shuffle(qs.filter((q) => !taken.has(q.id)).map((q) => q.id), rand).sort((a, b) => rank(a) - rank(b));
   while (out.length < n && rest.length) out.push(rest.shift()!);
   return out; // ordered Basic -> Intermediate -> Competent, like a real paper
 }

@@ -55,3 +55,13 @@ test('paper: spreads topics, follows the mix, prefers unseen questions', async (
   assert.equal(p.filter((id) => id.startsWith('a-')).length, 10);
   assert.ok(!p.includes('a-basic-0')); // retired question only used when nothing else is left
 });
+
+test('paper: every topic gets a turn when many topics are chosen', async () => {
+  const { pickPaper, MIXES } = await import('./pick.ts');
+  const topics = Array.from({ length: 12 }, (_, i) => `t${i}`);
+  const qs = topics.flatMap((t) => (['basic', 'intermediate', 'competent'] as const).flatMap((l) =>
+    Array.from({ length: 5 }, (_, k) => ({ id: `${t}-${l}-${k}`, topic: t, level: l }))));
+  const used = new Set<string>();
+  for (let r = 0; r < 20; r++) pickPaper(qs, {}, 10, MIXES.wa.mix, NOW).forEach((id) => used.add(id.split('-')[0]));
+  assert.equal(used.size, 12);
+});

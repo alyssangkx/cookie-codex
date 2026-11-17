@@ -130,8 +130,10 @@ test('blocked: locked tiers and unplayable tiers are never suggested', () => {
   const s = real();
   onePass(s, 'math-a', 'c'); // a pass on a tier whose predecessor is not cleared: locked
   tierAttempt(s, 'math-a', 'c', 1); tierAttempt(s, 'math-a', 'c', 1);
-  const subs = [mk('math-a', 't', { b: false, i: true, c: true })];
-  assert.deepEqual(run(s, subs), []); // i is open? b not cleared so i locked; c locked
+  // Basic playable but not cleared: Intermediate and Competent are locked, so only Basic is suggested
+  assert.deepEqual(run(s, [mk('math-a', 't', { b: true, i: true, c: true })]).map((x) => x.tier), ['b']);
+  // Basic unplayable: Intermediate opens instead of being locked forever; Competent stays locked
+  assert.deepEqual(run(s, [mk('math-a', 't', { b: false, i: true, c: true })]).map((x) => x.tier), ['i']);
   const open = [mk('math-b', 't', { b: false, i: false, c: false })];
   assert.deepEqual(run(real(), open), []);
 });

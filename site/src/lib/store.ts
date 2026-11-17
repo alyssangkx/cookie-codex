@@ -24,7 +24,7 @@ export interface SaveV1 {
   questions: Record<string, QState>;
   cards: Record<string, { stars: number; srcSub: string; srcTier: Tier; acc: number; last?: number }>;
   attempts: Attempt[];
-  days: Record<string, { quizzes: number; min: number; correct: number; total: number }>;
+  days: Record<string, { quizzes: number; min: number; correct: number; total: number; ms?: number; goal?: boolean }>;
   streak: { current: number; best: number; lastDay: string | null; freezeUsedWeek: string | null; studyDays: number };
   last: { sub: string; tier: Tier } | null;
 }
@@ -92,8 +92,9 @@ export const capReached = (s: SaveV1) => today(s).min >= s.settings.dailyCapMin;
 export const goalMet = (s: SaveV1) => today(s).quizzes >= s.settings.dailyGoalQuizzes;
 
 /** Goal-met days (YYYY-MM-DD), judged against the current daily goal. */
+// a day keeps the goal it met at the time; days saved before `goal` existed are judged by quiz count
 const goalDays = (s: SaveV1) =>
-  Object.entries(s.days).filter(([, d]) => d.quizzes >= s.settings.dailyGoalQuizzes).map(([k]) => k);
+  Object.entries(s.days).filter(([, d]) => d.goal ?? d.quizzes >= s.settings.dailyGoalQuizzes).map(([k]) => k);
 
 /**
  * Weekly streak: consecutive weeks (Monday start) with at least 4 goal days. The week in progress
@@ -138,8 +139,16 @@ export const isRetired = (s: SaveV1, id: string) => s.questions[id]?.s === 0;
 export const tierState = (s: SaveV1, sub: string, t: Tier): TierState =>
   s.progress[sub]?.[t] ?? { passes: [], scores: [], best: 0, cleared: false };
 
-export const tierOpen = (s: SaveV1, sub: string, t: Tier) =>
-  t === 'b' || tierState(s, sub, t === 'i' ? 'b' : 'i').cleared;
+/** A tier opens when the tier below is cleared. Tiers with too few questions to play are skipped,
+ *  so a tier is never locked behind one that cannot be cleared. Pass `playable` when known. */
+export function tierOpen(s: SaveV1, sub: string, t: Tier, playable?: Record<Tier, boolean>): boolean {
+  for (let i = TIERS.indexOf(t) - 1; i >= 0; i--) {
+    const lower = TIERS[i];
+    if (playable && !playable[lower]) continue;
+    return tierState(s, sub, lower).cleared;
+  }
+  return true;
+}
 
 export const attemptsToday = (s: SaveV1, sub: string, t: Tier) =>
   s.attempts.filter((a) => a.mode === 'tier' && a.sub === sub && a.tier === t && dayKey(a.ts) === dayKey()).length;
@@ -179,7 +188,8 @@ export function finishQuiz(
   s.attempts.push({ ...a, ts: now });
   const d = (s.days[key] ??= { quizzes: 0, min: 0, correct: 0, total: 0 });
   d.quizzes++;
-  d.min += Math.round(a.ms / 60000);
+  d.ms = (d.ms ?? d.min * 60000) + a.ms; // keep milliseconds so short quizzes still count toward the cap
+  d.min = Math.round(d.ms / 60000);
   d.correct += a.score;
   d.total += a.total;
 
@@ -198,11 +208,12 @@ export function finishQuiz(
     (s.progress[a.sub] ??= {})[a.tier] = st;
     if (!st.cleared && st.passes.length >= 2) {
       cleared = true;
-      reward = award(s, a.sub, a.tier, rewardFor);
+      reward = award(s, a.sub, a.tier, rewardFor, now);
     }
   }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
+  if (d.quizzes >= s.settings.dailyGoalQuizzes) d.goal = true;
   if (goalJustMet) bumpStreak(s, now);
   return { passed, cleared, reward, goalJustMet };
 }
@@ -210,7 +221,7 @@ export function finishQuiz(
 type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | undefined;
 
 /** Mark a tier cleared and give its fixed card; a card already owned gains a star (max 5). */
-function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor): QuizResult['reward'] {
+function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor, now = Date.now()): QuizResult['reward'] {
   const st = tierState(s, sub, t);
   st.cleared = true;
   (s.progress[sub] ??= {})[t] = st;
@@ -220,7 +231,7 @@ function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor): QuizResul
   const acc = top2.length ? Math.round(top2.reduce((x, y) => x + y, 0) / top2.length) : 100;
   const card = s.cards[r.slug];
   if (card) card.stars = Math.min(5, card.stars + 1);
-  else s.cards[r.slug] = { stars: 1, srcSub: sub, srcTier: t, acc, last: Date.now() };
+  else s.cards[r.slug] = { stars: 1, srcSub: sub, srcTier: t, acc, last: now };
   return { slug: r.slug, dup: !!card, stars: s.cards[r.slug].stars };
 }
 
@@ -248,7 +259,11 @@ export const actualReward = (s: SaveV1, slug: string) => (s.cards[slug] ? 'star'
 
 // ---------------------------------------------------------------- save code
 
-const b64url = (u: Uint8Array) => btoa(String.fromCharCode(...u)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const b64url = (u: Uint8Array) => {
+  let bin = '';
+  for (let i = 0; i < u.length; i += 0x8000) bin += String.fromCharCode(...u.subarray(i, i + 0x8000)); // chunked: no stack overflow
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+};
 const unb64url = (t: string) => Uint8Array.from(atob(t.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
 
 async function pipe(data: Uint8Array, stream: CompressionStream | DecompressionStream) {
@@ -258,9 +273,7 @@ async function pipe(data: Uint8Array, stream: CompressionStream | DecompressionS
 
 export async function exportCode(s: SaveV1) {
   const packed = await pipe(new TextEncoder().encode(JSON.stringify(s)), new CompressionStream('deflate'));
-  let bin = '';
-  for (let i = 0; i < packed.length; i += 0x8000) bin += String.fromCharCode(...packed.subarray(i, i + 0x8000));
-  return 'CCX1:' + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return 'CCX1:' + b64url(packed);
 }
 
 export async function importCode(code: string): Promise<SaveV1> {
@@ -270,6 +283,7 @@ export async function importCode(code: string): Promise<SaveV1> {
   const s = JSON.parse(json);
   if (typeof s?.schemaVersion !== 'number') throw new Error('The save code is damaged.');
   if (s.schemaVersion > SCHEMA) throw new Error('This save code comes from a newer version of the site.');
+  if (s.schemaVersion !== SCHEMA) throw new Error('This save code is from an older version and cannot be loaded.');
   return normalise(s);
 }
 

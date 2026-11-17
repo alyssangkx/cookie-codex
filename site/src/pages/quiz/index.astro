@@ -108,7 +108,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       $('title').textContent = 'Daily Review';
     }
     if (capReached(s)) return stop("Done for today! You have reached today's training time. Come back tomorrow.", '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
-    if (mode === 'tier' && !tierOpen(s, subId, tier)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
+    const playable = { b: sub?.count.b >= 20, i: sub?.count.i >= 20, c: sub?.count.c >= 20 };
+    if (mode === 'tier' && !tierOpen(s, subId, tier, playable)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
     if (mode === 'tier' && attemptsToday(s, subId, tier) >= ATTEMPTS_PER_DAY) return stop('You have had 3 tries at this tier today. Try again tomorrow.');
 
     try {
@@ -132,7 +133,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const x = s.settings.extraTime ? 1.5 : 1;
     const mins = mode === 'tier' ? minutesFor(s, tier)
       : mode === 'paper' ? Math.ceil(quiz.reduce((m, id) => m + PER_Q[byId.get(id)!.level], 0) * x)
-      : quiz.length * 1.5 * x;
+      : Math.ceil(quiz.length * 1.5 * x);
     deadline = mins * 60_000;
     $('start-info').textContent = mode === 'tier'
       ? `${quiz.length} questions in ${mins} minutes. Score at least 80% to pass.`
@@ -143,6 +144,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   }
 
   function begin() {
+    if (!quiz.length) return; // nothing to play (locked, capped or empty tier)
     i = 0; score = 0; wrongs = []; over = false; pausedAt = 0;
     if (mode === 'tier') { const s0 = load(); openAttempt(s0, { sub: subId, tier, total: quiz.length }); save(s0); }
     startedAt = Date.now();
