@@ -18,7 +18,7 @@ export interface SaveV1 {
   schemaVersion: 2;
   createdAt: number;
   settings: {
-    pinHash: string | null; dailyCapMin: number; dailyGoalQuizzes: number;
+    dailyCapMin: number; dailyGoalQuizzes: number;
     extraTime: boolean; psleDate: string; playerName: string;
   };
   progress: Record<string, Partial<Record<Tier, TierState>>>;
@@ -44,7 +44,7 @@ export const ATTEMPTS_PER_DAY = 3;
 export const fresh = (): SaveV1 => ({
   schemaVersion: 2,
   createdAt: Date.now(),
-  settings: { pinHash: null, dailyCapMin: 45, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: 'Alyssa' },
+  settings: { dailyCapMin: 45, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: 'Alyssa' },
   progress: {}, questions: {}, cards: {}, attempts: [], days: {},
   streak: { current: 0, best: 0, lastDay: null, freezeUsedWeek: null, studyDays: 0 },
   last: null,
@@ -155,6 +155,10 @@ export function readLocalRaw(): string | null {
 /** Replace the local save with a copy from the server. Does not mark it unsynced and does not fire the hook. */
 export function replaceLocal(data: unknown) {
   try { localStorage.setItem(KEY, JSON.stringify(data)); localStorage.removeItem(DIRTY_KEY); } catch { /* full or blocked */ }
+}
+/** Put a raw save back as the local save and mark it unsynced (a child's stashed save, on their next sign-in). */
+export function restoreDirty(raw: string) {
+  try { localStorage.setItem(KEY, raw); localStorage.setItem(DIRTY_KEY, '1'); } catch { /* full or blocked */ }
 }
 /** Remove the local save (it was another child's). The caller backs it up first. */
 export function clearLocal() { try { localStorage.removeItem(KEY); localStorage.removeItem(DIRTY_KEY); } catch { /* ignore */ } }
@@ -388,9 +392,4 @@ export async function importCode(code: string): Promise<SaveV1> {
   if (s.schemaVersion > SCHEMA) throw new Error('This save code comes from a newer version of the site.');
   if (s.schemaVersion < SCHEMA) s = migrate(s); // writes nothing; the caller backs up before replacing
   return normalise(s);
-}
-
-export async function hashPin(pin: string) {
-  const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('ccx:' + pin));
-  return b64url(new Uint8Array(h));
 }

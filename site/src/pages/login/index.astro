@@ -50,7 +50,7 @@ import Base from '../../layouts/Base.astro';
 
 <script>
   import { supabase, callFunction, touch } from '../../lib/supabase';
-  import { hydrate, isChildSession } from '../../lib/sync';
+  import { initSync, isChildSession, onConflictResolved } from '../../lib/sync';
   import { kv } from '../../lib/store';
 
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -81,9 +81,15 @@ import Base from '../../layouts/Base.astro';
         const { error } = await supabase.auth.setSession({ access_token: body.session.access_token, refresh_token: body.session.refresh_token });
         if (error) throw error;
         if (body.deviceToken) kv.set('device-token', body.deviceToken);
+        kv.del('sync:signedout');
         touch();
         const { data } = await supabase.auth.getSession();
-        if (data.session && isChildSession(data.session.user)) await hydrate(data.session.user.id).catch(() => false);
+        if (data.session && isChildSession(data.session.user)) {
+          // initSync sets the child id before hydrating and waits (up to 3 s) for the first push
+          onConflictResolved(() => { location.href = '/'; });
+          const state = await initSync({ reload: false }).catch(() => 'ok');
+          if (state === 'conflict') return; // the banner decides; its buttons navigate (or reload to here, which redirects)
+        }
         location.href = '/';
         return;
       }

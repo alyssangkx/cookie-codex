@@ -1,7 +1,7 @@
 // Progress sync over store.ts. load()/save() stay synchronous for the pages; this module watches save(),
 // pushes the local save to the server (push_save, compare-and-set on rev) and pulls a newer server copy.
 // The pure decisions are at the top and are tested in sync.test.ts; the rest talks to Supabase and the DOM.
-import { backupLocal, clearDirty, clearLocal, hasProgress, isDirty, kv, readLocalRaw, replaceLocal, setSaveHook, SCHEMA } from './store.ts';
+import { backupLocal, clearDirty, clearLocal, hasProgress, isDirty, kv, readLocalRaw, replaceLocal, restoreDirty, setSaveHook, SCHEMA } from './store.ts';
 
 // ---------------------------------------------------------------- pure decisions
 
@@ -58,6 +58,28 @@ export const idleExpired = (lastSeenMs: number, now = Date.now()) =>
 
 export const PUSH_DELAY_MS = 2000;
 
+const pendingKey = (id: string) => `sync:pending:${id}`;
+
+/**
+ * Before deciding what to do for `id`: (1) an unsynced save that belongs to ANOTHER child is stashed under that child's
+ * own key, so a later backup or adoption cannot overwrite it; (2) a save stashed earlier for `id` becomes the local save
+ * again (unsynced), so it is pushed, or raises the conflict banner, like any local save.
+ */
+export function prepareLocal(id: string) {
+  const owner = kv.get('sync:owner');
+  const raw = readLocalRaw();
+  if (owner !== null && owner !== id && raw && isDirty()) {
+    kv.set(pendingKey(owner), raw);
+    clearLocal();
+  }
+  const mine = kv.get(pendingKey(id));
+  if (mine) {
+    restoreDirty(mine);
+    kv.set('sync:owner', id);
+    kv.del(pendingKey(id));
+  }
+}
+
 // ---------------------------------------------------------------- runtime
 
 let childId: string | null = null;
@@ -66,6 +88,13 @@ let inflight = false;
 let version = 0; // counts saves, so a push can tell whether more happened while it was in flight
 let timer: ReturnType<typeof setTimeout> | undefined;
 let wired = false;
+let accessToken: string | null = null; // cached so the page-close flush needs no await
+let inflightSeen = -1; // the version the in-flight push started from
+let conflicted = false;
+let afterConflict: (() => void) | null = null;
+let firstPush: Promise<void> | null = null;
+/** Called once the user keeps this device's copy and it was pushed (the login page navigates then). */
+export const onConflictResolved = (fn: (() => void) | null) => { afterConflict = fn; };
 
 const revKey = (id: string) => `sync:rev:${id}`;
 const lastRev = (id: string) => { const v = kv.get(revKey(id)); return v === null ? null : Number(v); };
@@ -108,7 +137,7 @@ async function push(force = false) {
   const raw = readLocalRaw();
   if (!raw) return;
   const id = childId, seen = version;
-  inflight = true;
+  inflight = true; inflightSeen = seen;
   let out: PushOutcome;
   try {
     const r = await (await sb()).rpc('push_save', {
@@ -132,14 +161,18 @@ async function push(force = false) {
 }
 
 function showConflict(id: string, c: { rev: number; data: unknown }) {
+  conflicted = true;
   stopped = true; // no pushes until the user chooses
   clearTimeout(timer);
   banner('Progress on another device is newer:', [
     ['Use the newer one', () => {
-      if (resolveConflict('newer') === 'adopt-server') { adoptServer(id, c.rev, c.data); location.reload(); }
+      if (resolveConflict('newer') === 'adopt-server') { conflicted = false; adoptServer(id, c.rev, c.data); location.reload(); }
     }],
     ["Keep this device's", () => {
-      if (resolveConflict('mine') === 'force-push') { kv.set(revKey(id), String(c.rev)); stopped = false; void push(true); }
+      if (resolveConflict('mine') === 'force-push') {
+        kv.set(revKey(id), String(c.rev)); stopped = false; conflicted = false;
+        void push(true).then(() => afterConflict?.());
+      }
     }],
   ]);
 }
@@ -147,6 +180,7 @@ function showConflict(id: string, c: { rev: number; data: unknown }) {
 /** Pull the child's server save and reconcile it with the local one. Returns true when the local save was replaced. */
 export async function hydrate(id: string): Promise<boolean> {
   const client = await sb();
+  prepareLocal(id);
   const r = await client.from('saves').select('rev, data').eq('child_id', id).maybeSingle();
   if (r.error) return false; // offline: play from the local copy; pushes retry later
   const local = readLocalRaw();
@@ -160,27 +194,54 @@ export async function hydrate(id: string): Promise<boolean> {
     case 'use-server': adoptServer(id, Number(r.data!.rev), r.data!.data); return true;
     case 'reset-local': backupLocal(); clearLocal(); kv.set('sync:owner', id); return true;
     case 'conflict': showConflict(id, { rev: Number(r.data!.rev), data: r.data!.data }); return false;
-    case 'push-local': kv.set('sync:owner', id); schedule(0); return false;
+    case 'push-local': kv.set('sync:owner', id); firstPush = push(); return false;
     default: kv.set('sync:owner', id); return false;
   }
 }
 
-/** Start syncing for the current session, if it is a child's. Resolves once the first pull is done. */
-export async function initSync(): Promise<void> {
-  const client = await sb();
+/** Page close: browsers cancel a normal request, so send the save with a keepalive fetch (the rev check makes a duplicate harmless). */
+function flushOnClose() {
+  if (stopped || !childId || !accessToken || !isDirty()) return;
+  if (inflight && version === inflightSeen) return; // the push in flight already carries this save
+  const raw = readLocalRaw();
+  if (!raw) return;
+  try {
+    void fetch(`${supaUrl}/rest/v1/rpc/push_save`, {
+      method: 'POST', keepalive: true,
+      headers: { apikey: anonKey, Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_child: childId, p_data: JSON.parse(raw), p_version: SCHEMA, p_base_rev: lastRev(childId), p_force: false }),
+    }).catch(() => {});
+  } catch { /* best effort */ }
+}
+let supaUrl = '', anonKey = '';
+
+/**
+ * Start syncing for the current session, if it is a child's. Resolves once the first pull (and, when the local save
+ * was newer, the first push, up to 3 s) is done. Returns 'conflict' while the conflict banner is waiting for an answer.
+ * reload: reload the page when the local save was replaced (off on the login page, which navigates itself).
+ */
+export async function initSync(opts: { reload?: boolean } = {}): Promise<'ok' | 'conflict' | 'skip'> {
+  const mod = await import('./supabase.ts');
+  const client = mod.supabase;
+  supaUrl = mod.SUPABASE_URL; anonKey = mod.ANON_KEY;
   const { data } = await client.auth.getSession();
   const user = data.session?.user;
-  if (!user || !isChildSession(user)) return;
-  childId = user.id;
+  if (!user || !isChildSession(user)) return 'skip';
+  childId = user.id; // set before hydrating, so the push-local branch can push
+  accessToken = data.session!.access_token;
   stopped = false;
   if (!wired) {
     wired = true;
+    client.auth.onAuthStateChange((_e, s) => { accessToken = s?.access_token ?? null; });
     setSaveHook(() => { version++; schedule(); });
     window.addEventListener('online', () => { if (!stopped) void push(); });
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && isDirty()) void push(); });
-    window.addEventListener('pagehide', () => { if (isDirty()) void push(); });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushOnClose(); });
+    window.addEventListener('pagehide', flushOnClose);
   }
-  if (await hydrate(childId)) location.reload();
+  firstPush = null;
+  if (await hydrate(childId) && opts.reload !== false) { location.reload(); return 'ok'; }
+  if (firstPush) await Promise.race([firstPush, new Promise((res) => setTimeout(res, 3000))]);
+  return conflicted ? 'conflict' : 'ok';
 }
 
 /** Push what is pending (best effort, short wait), then sign out of this browser only and go to /login. */
@@ -191,5 +252,6 @@ export async function logout() {
   } catch { /* leave anyway */ }
   try { await client.auth.signOut({ scope: 'local' }); } catch { /* the local session is cleared regardless */ }
   kv.del('lastSeen');
+  kv.set('sync:signedout', '1'); // a logged-out device never gets offline access
   location.href = '/login';
 }

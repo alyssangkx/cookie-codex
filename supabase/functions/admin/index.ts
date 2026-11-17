@@ -78,7 +78,8 @@ Deno.serve(async (req) => {
       return body.child_id.toLowerCase();
     };
     const profileOf = async (id: string) => {
-      const r = await svc.from('profiles').select('id, name, role').eq('id', id).maybeSingle();
+      // scoped: only this admin's own profiles; anyone else's is a 404
+      const r = await svc.from('profiles').select('id, name, role').eq('id', id).eq('parent_id', caller.id).maybeSingle();
       if (r.error) throw r.error;
       if (!r.data) throw new Refuse(404, 'not_found');
       return r.data as { id: string; name: string; role: 'child' | 'test' };
@@ -103,7 +104,10 @@ Deno.serve(async (req) => {
         });
         if (fixed.error) throw fixed.error;
         const ins = await svc.from('profiles').insert({ id, parent_id: caller.id, name, role });
-        if (ins.error) throw ins.error;
+        if (ins.error) {
+          if (ins.error.code === '23505' || /profiles_name_key_uq/.test(ins.error.message ?? '')) throw new Refuse(409, 'name_taken');
+          throw ins.error;
+        }
       } catch (e) {
         await svc.auth.admin.deleteUser(id); // roll back: no orphan auth user
         throw e;
@@ -138,7 +142,7 @@ Deno.serve(async (req) => {
         return json({ ok: true });
       }
       case 'list_children': {
-        const r = await svc.from('profiles').select('id, name, role, pin_set_at, created_at').order('created_at');
+        const r = await svc.from('profiles').select('id, name, role, pin_set_at, created_at').eq('parent_id', caller.id).order('created_at');
         if (r.error) throw r.error;
         return json({ children: r.data });
       }
@@ -167,9 +171,13 @@ Deno.serve(async (req) => {
         const id = childId();
         const p = await profileOf(id);
         if (p.role !== 'test' && body.confirm !== p.name) throw new Refuse(400, 'confirm_required');
+        // clear the lock rows first: if that fails nothing is deleted and the admin can retry
+        for (const trusted of [false, true]) {
+          const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: nameKey(p.name), p_trusted: trusted });
+          if (c.error) throw c.error;
+        }
         const del = await svc.auth.admin.deleteUser(id); // profiles and saves cascade
         if (del.error) throw del.error;
-        for (const trusted of [false, true]) await svc.rpc('pin_clear', { p_device_key: '', p_name_key: nameKey(p.name), p_trusted: trusted });
         return json({ ok: true });
       }
       default:

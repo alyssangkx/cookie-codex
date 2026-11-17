@@ -1,8 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decideHydrate, decidePush, resolveConflict, isChildSession, idleExpired } from './sync.ts';
+// an in-memory localStorage, so the store.ts-backed helpers run under node
+const mem = new Map<string, string>();
+Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: {
+  getItem: (k: string) => (mem.has(k) ? mem.get(k)! : null), setItem: (k: string, v: string) => { mem.set(k, String(v)); },
+  removeItem: (k: string) => { mem.delete(k); }, clear: () => mem.clear(), key: (i: number) => [...mem.keys()][i] ?? null,
+  get length() { return mem.size; },
+} });
+import { prepareLocal, decideHydrate, decidePush, resolveConflict, isChildSession, idleExpired } from './sync.ts';
 import { jumpClock, resetTier, grantCard, shiftKey } from './testtools.ts';
-import { fresh, finishQuiz } from './store.ts';
+import { fresh, finishQuiz, save, load, kv, isDirty, readLocalRaw, replaceLocal, clearDirty } from './store.ts';
 
 const base = { serverRev: 5, lastRev: 5, owner: 'c1', childId: 'c1', dirty: false, localHasProgress: true };
 
@@ -105,4 +112,43 @@ test('grantCard adds a card, then a star up to 5', () => {
   assert.equal(s.cards.x.stars, 1);
   for (let i = 0; i < 6; i++) s = grantCard(s, 'x', 'sub-a', 'b');
   assert.equal(s.cards.x.stars, 5);
+});
+
+test('another child signing in does not lose the first child\'s unsynced attempts', () => {
+  mem.clear();
+  // A plays offline: owner A, a dirty save with an attempt
+  kv.set('sync:owner', 'A'); kv.set('sync:rev:A', '3');
+  const a = fresh();
+  finishQuiz(a, { mode: 'tier', sub: 'sub-a', tier: 'b', score: 9, total: 10, ms: 60000, tags: [] }, () => ({ slug: 'muscle-cookie', dup: false }), Date.now());
+  save(a);
+  assert.equal(isDirty(), true);
+  const attempts = a.attempts.length;
+  assert.ok(attempts > 0);
+
+  // B signs in on the same browser: A's dirty save is stashed under A, B takes the server copy
+  prepareLocal('B');
+  assert.equal(readLocalRaw(), null);
+  assert.ok(kv.get('sync:pending:A'));
+  assert.equal(decideHydrate({ serverRev: 8, lastRev: null, owner: kv.get('sync:owner'), childId: 'B', dirty: isDirty(), localHasProgress: false }), 'use-server');
+  replaceLocal(fresh()); kv.set('sync:owner', 'B'); kv.set('sync:rev:B', '8'); // adoptServer for B
+  // B's own backup slot being overwritten later cannot touch A's stash
+  assert.ok(kv.get('sync:pending:A'));
+
+  // A signs in again: the stash is their local save again, unsynced, with every attempt
+  prepareLocal('A');
+  assert.equal(kv.get('sync:pending:A'), null);
+  assert.equal(kv.get('sync:owner'), 'A');
+  assert.equal(isDirty(), true);
+  assert.equal(load().attempts.length, attempts);
+  // server unchanged since A's last sync (rev 3): push it; server moved on: conflict banner
+  const base2 = { serverRev: 3, lastRev: 3, owner: 'A', childId: 'A', dirty: true, localHasProgress: true };
+  assert.equal(decideHydrate(base2), 'push-local');
+  assert.equal(decideHydrate({ ...base2, serverRev: 4 }), 'conflict');
+});
+test('a clean save of another child is not stashed, and a stash for nobody changes nothing', () => {
+  mem.clear();
+  kv.set('sync:owner', 'A'); replaceLocal(fresh()); clearDirty();
+  prepareLocal('B');
+  assert.equal(kv.get('sync:pending:A'), null);
+  assert.ok(readLocalRaw());
 });
