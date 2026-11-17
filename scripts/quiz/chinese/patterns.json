@@ -7849,6 +7849,885 @@
    },
    "syllabusTopicId": "chi-dialogue-mcq-1",
    "note": "Observed format is a list of 8 phrases with 4 blanks (answers written in the booklet), not a 4-option MCQ; the 117-paper count is papers whose OCR contains the 完成对话 heading. Per-item types were sampled by reading about 6 dialogues, not parsed."
+  },
+  {
+   "id": "chi-pat-yuedu-mcq",
+   "name": "阅读理解一 (passage MCQ)",
+   "section": "阅读理解一",
+   "level": "intermediate",
+   "structure": "A passage of about 200-350 characters (a story, notice, email, letter or short expository piece) followed by about 5 multiple-choice questions with 4 statements each.",
+   "distractorTraps": [
+    {
+     "tag": "misread-detail",
+     "description": "the option changes one detail of the passage (a person, number, colour or time)"
+    },
+    {
+     "tag": "true-but-irrelevant",
+     "description": "the option is true in the passage but does not answer the question"
+    },
+    {
+     "tag": "over-generalise",
+     "description": "the option stretches one case to everyone or always"
+    },
+    {
+     "tag": "unsupported",
+     "description": "the option sounds reasonable but the passage never says it"
+    },
+    {
+     "tag": "opposite",
+     "description": "the option says the opposite of the passage"
+    }
+   ],
+   "frequency": 139,
+   "seenIn": [
+    {
+     "school": "ACSJ",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "ACSJ",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "ACSJ",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2024
+    },
+    {
+     "school": "ACSJ",
+     "level": "P5",
+     "exam": "WA3",
+     "year": 2024
+    },
+    {
+     "school": "ACSJ",
+     "level": "P5",
+     "exam": "WA3",
+     "year": 2025
+    },
+    {
+     "school": "ACSP",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "AiTong",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "AiTong",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "AiTong",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "AiTong",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2025
+    },
+    {
+     "school": "AiTong",
+     "level": "P5",
+     "exam": "WA3",
+     "year": 2025
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "HenryPark",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "HenryPark",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "HenryPark",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "HenryPark",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2024
+    },
+    {
+     "school": "HenryPark",
+     "level": "P5",
+     "exam": "WA3",
+     "year": 2024
+    },
+    {
+     "school": "MahaBodhi",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "MahaBodhi",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "MahaBodhi",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "MarisStella",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "MarisStella",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "NanHua",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "NanHua",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "NanHua",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "NanHua",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "NanHua",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "NanHua",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2025
+    },
+    {
+     "school": "Nanyang",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "Nanyang",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "Nanyang",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "Nanyang",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2024
+    },
+    {
+     "school": "Nanyang",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "Nanyang",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2025
+    },
+    {
+     "school": "PLMGS",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "PLMGS",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "Raffles",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "Raffles",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2024
+    },
+    {
+     "school": "Rosyth",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "Rosyth",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "Rosyth",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "Rosyth",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "Rosyth",
+     "level": "P5",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "Rulang",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "StHilda",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "StNicholas",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "TaoNan",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2023
+    },
+    {
+     "school": "TaoNan",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2024
+    },
+    {
+     "school": "TaoNan",
+     "level": "P5",
+     "exam": "EOY",
+     "year": 2025
+    },
+    {
+     "school": "TaoNan",
+     "level": "P5",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "BA1",
+     "year": 2022
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2025
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "ACSJ",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "ACSP",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "ACSP",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "AiTong",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "AiTong",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "CatholicHigh",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2025
+    },
+    {
+     "school": "HenryPark",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "HenryPark",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "HenryPark",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "MGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "MGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "MGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "MGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "MGS",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "MahaBodhi",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "MarisStella",
+     "level": "P6",
+     "exam": "CA1",
+     "year": 2022
+    },
+    {
+     "school": "MarisStella",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "MarisStella",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "MarisStella",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "NanHua",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2024
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2025
+    },
+    {
+     "school": "Nanyang",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "PLMGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "PLMGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "PeiChun",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "PeiHwa",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "Raffles",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "Raffles",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "Raffles",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "Raffles",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "Raffles",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "RedSwastika",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2024
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2025
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2023
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2024
+    },
+    {
+     "school": "Rosyth",
+     "level": "P6",
+     "exam": "WA2",
+     "year": 2025
+    },
+    {
+     "school": "SCGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "SCGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "SCGS",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "SCGS",
+     "level": "P6",
+     "exam": "WA1",
+     "year": 2023
+    },
+    {
+     "school": "StNicholas",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "StNicholas",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "StNicholas",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "StNicholas",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "TaoNan",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2022
+    },
+    {
+     "school": "TaoNan",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2023
+    },
+    {
+     "school": "TaoNan",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2024
+    },
+    {
+     "school": "TaoNan",
+     "level": "P6",
+     "exam": "Prelim",
+     "year": 2025
+    },
+    {
+     "school": "TaoNan",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2022
+    },
+    {
+     "school": "TaoNan",
+     "level": "P6",
+     "exam": "SA1",
+     "year": 2024
+    }
+   ],
+   "example": {
+    "stem": "每天放学，我都会到巷口的鸡饭摊买晚餐。摊主陈叔叔话不多，总是低着头切鸡肉。那天，我数了数口袋里的钱，只够买一份最便宜的鸡饭。陈叔叔看了我一眼，没有说话，却在饭上多放了半只鸡腿。我愣住了，小声说：“叔叔，我没有多付钱。”他摆摆手，说：“天气热，小孩子要吃饱。”后来我才知道，那天的鸡腿，正是他留给自己的午餐。从此，我每次经过那个摊位，都会停下来帮他收拾桌子，再说一声“叔叔辛苦了”。陈叔叔依然话不多，只是嘴角总会微微向上扬。\n\n「嘴角总会微微向上扬」暗示了什么？",
+    "options": [
+     "他在笑话作者，觉得很好笑",
+     "他很高兴，只是不善于表达",
+     "他想催促作者，快点离开",
+     "他对作者的帮忙，很不耐烦"
+    ],
+    "answer": "(2) 他很高兴，只是不善于表达",
+    "explanation": "原文：「陈叔叔依然话不多，只是嘴角总会微微向上扬。」 (He is pleased but not talkative.)"
+   },
+   "syllabusTopicId": "chi-yuedu-mcq-text-1",
+   "note": "Counted by script over both OCR passes (ocr_text and ocr_text_hi, 171 papers): a paper counts if it has a 阅读理解 heading and at least 8 option markers ((1)-(4) or A-D) after the first such heading; 139 of 171 papers matched. OCR is noisy, so this is approximate. Papers typically have one 阅读理解一 passage with 5 questions."
   }
  ],
  "unclassified": 98

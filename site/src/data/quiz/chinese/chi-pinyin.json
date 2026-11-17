@@ -3888,6 +3888,1029 @@
     "key": "pinyin-096",
     "subtopic": "chi-pinyin-sound"
    }
+  },
+  {
+   "id": "chipinyi-858b19fb11",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "这家店卖的食物很有「营养」。「营养」的正确汉语拼音是：",
+   "options": [
+    "yín yǎng",
+    "yīng yǎng",
+    "yíng yáng",
+    "yíng yǎng"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "similar_sound_final",
+     "why": "「营」读 yíng，韵母不是 yín。 (The final is wrong: 营 is read yíng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「营」读 yíng，声调不是 yīng。 (The tone is wrong: 营 is read yíng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「养」读 yǎng，声调不是 yáng。 (The tone is wrong: 养 is read yǎng.)"
+    },
+    null
+   ],
+   "solution": [
+    "「营养」读作 yíng yǎng。",
+    "(营养 is read yíng yǎng.)",
+    "营养 = nutrition"
+   ],
+   "params": {
+    "key": "v1b-pinyin-001",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-9528dabc80",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "班长负责「统计」全班同学的人数。「统计」的正确汉语拼音是：",
+   "options": [
+    "tǒng qì",
+    "tóng jì",
+    "tǒng jí",
+    "tǒng jì"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "similar_sound_initial",
+     "why": "「计」读 jì，声母不是 qì。 (The initial is wrong: 计 is read jì.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「统」读 tǒng，声调不是 tóng。 (The tone is wrong: 统 is read tǒng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「计」读 jì，声调不是 jí。 (The tone is wrong: 计 is read jì.)"
+    },
+    null
+   ],
+   "solution": [
+    "「统计」读作 tǒng jì。",
+    "(统计 is read tǒng jì.)",
+    "统计 = to tally up"
+   ],
+   "params": {
+    "key": "v1b-pinyin-002",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-22e923e8a3",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "这个字帖「缺少」了一页。「缺少」的正确汉语拼音是：",
+   "options": [
+    "quē shǎo",
+    "quē shào",
+    "qué shǎo",
+    "què shǎo"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「少」读 shǎo，声调不是 shào。 (The tone is wrong: 少 is read shǎo.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「缺」读 quē，声调不是 qué。 (The tone is wrong: 缺 is read quē.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「缺」读 quē，声调不是 què。 (The tone is wrong: 缺 is read quē.)"
+    }
+   ],
+   "solution": [
+    "「缺少」读作 quē shǎo。",
+    "(缺少 is read quē shǎo.)",
+    "缺少 = to lack"
+   ],
+   "params": {
+    "key": "v1b-pinyin-003",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-c843535d36",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "弟弟收到礼物，露出「惊喜」的表情。「惊喜」的正确汉语拼音是：",
+   "options": [
+    "jīng xǐ",
+    "jīn xǐ",
+    "jīng xì",
+    "jīng xī"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "similar_sound_final",
+     "why": "「惊」读 jīng，韵母不是 jīn。 (The final is wrong: 惊 is read jīng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「喜」读 xǐ，声调不是 xì。 (The tone is wrong: 喜 is read xǐ.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「喜」读 xǐ，声调不是 xī。 (The tone is wrong: 喜 is read xǐ.)"
+    }
+   ],
+   "solution": [
+    "「惊喜」读作 jīng xǐ。",
+    "(惊喜 is read jīng xǐ.)",
+    "惊喜 = pleasant surprise"
+   ],
+   "params": {
+    "key": "v1b-pinyin-004",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-2d5bad48e3",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "听到火警，大家「迅速」跑到操场。「迅速」的正确汉语拼音是：",
+   "options": [
+    "xùn sú",
+    "xùn sù",
+    "xún sù",
+    "xùn shù"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「速」读 sù，声调不是 sú。 (The tone is wrong: 速 is read sù.)"
+    },
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「迅」读 xùn，声调不是 xún。 (The tone is wrong: 迅 is read xùn.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「速」读 sù，声母不是 shù。 (The initial is wrong: 速 is read sù.)"
+    }
+   ],
+   "solution": [
+    "「迅速」读作 xùn sù。",
+    "(迅速 is read xùn sù.)",
+    "迅速 = swift"
+   ],
+   "params": {
+    "key": "v1b-pinyin-005",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-333d3b083a",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "同学们不应该「嘲笑」别人。「嘲笑」的正确汉语拼音是：",
+   "options": [
+    "zhāo xiào",
+    "cháo xiào",
+    "cháo xiǎo",
+    "cháo xiāo"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「嘲」在这个词里读 cháo，不读 zhāo。 (In this word 嘲 is read cháo, not zhāo.)"
+    },
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「笑」读 xiào，声调不是 xiǎo。 (The tone is wrong: 笑 is read xiào.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「笑」读 xiào，声调不是 xiāo。 (The tone is wrong: 笑 is read xiào.)"
+    }
+   ],
+   "solution": [
+    "「嘲笑」读作 cháo xiào。",
+    "(嘲笑 is read cháo xiào.)",
+    "嘲笑 = to mock"
+   ],
+   "params": {
+    "key": "v1b-pinyin-006",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-41b549352c",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "比赛前，他的心情十分「激动」。「激动」的正确汉语拼音是：",
+   "options": [
+    "jī dòng",
+    "jí dòng",
+    "jī tòng",
+    "jī dǒng"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「激」读 jī，声调不是 jí。 (The tone is wrong: 激 is read jī.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「动」读 dòng，声母不是 tòng。 (The initial is wrong: 动 is read dòng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「动」读 dòng，声调不是 dǒng。 (The tone is wrong: 动 is read dòng.)"
+    }
+   ],
+   "solution": [
+    "「激动」读作 jī dòng。",
+    "(激动 is read jī dòng.)",
+    "激动 = excited, stirred"
+   ],
+   "params": {
+    "key": "v1b-pinyin-007",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-0958c82b44",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "病好了，爸爸的体力慢慢「恢复」。「恢复」的正确汉语拼音是：",
+   "options": [
+    "huī fù",
+    "huī fǔ",
+    "huī fú",
+    "huí fù"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「复」读 fù，声调不是 fǔ。 (The tone is wrong: 复 is read fù.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「复」读 fù，声调不是 fú。 (The tone is wrong: 复 is read fù.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「恢」读 huī，声调不是 huí。 (The tone is wrong: 恢 is read huī.)"
+    }
+   ],
+   "solution": [
+    "「恢复」读作 huī fù。",
+    "(恢复 is read huī fù.)",
+    "恢复 = to recover"
+   ],
+   "params": {
+    "key": "v1b-pinyin-008",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-af933e3152",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "姐姐把这篇文章「翻译」成英文。「翻译」的正确汉语拼音是：",
+   "options": [
+    "fān yǐ",
+    "fán yì",
+    "fān yì",
+    "fān yí"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「译」读 yì，声调不是 yǐ。 (The tone is wrong: 译 is read yì.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「翻」读 fān，声调不是 fán。 (The tone is wrong: 翻 is read fān.)"
+    },
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「译」读 yì，声调不是 yí。 (The tone is wrong: 译 is read yì.)"
+    }
+   ],
+   "solution": [
+    "「翻译」读作 fān yì。",
+    "(翻译 is read fān yì.)",
+    "翻译 = to translate"
+   ],
+   "params": {
+    "key": "v1b-pinyin-009",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-c9c8573548",
+   "topic": "chi-pinyin",
+   "level": "basic",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "勤洗手可以「预防」疾病。「预防」的正确汉语拼音是：",
+   "options": [
+    "yù fáng",
+    "yù fāng",
+    "yù fǎng",
+    "yǔ fáng"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「防」读 fáng，声调不是 fāng。 (The tone is wrong: 防 is read fáng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「防」读 fáng，声调不是 fǎng。 (The tone is wrong: 防 is read fáng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「预」读 yù，声调不是 yǔ。 (The tone is wrong: 预 is read yù.)"
+    }
+   ],
+   "solution": [
+    "「预防」读作 yù fáng。",
+    "(预防 is read yù fáng.)",
+    "预防 = to prevent"
+   ],
+   "params": {
+    "key": "v1b-pinyin-010",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-b39fa0144f",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "邻居之间相处得很「和谐」。「和谐」的正确汉语拼音是：",
+   "options": [
+    "hé xiè",
+    "hé xié",
+    "hé jié",
+    "hè xié"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「谐」读 xié，声调不是 xiè。 (The tone is wrong: 谐 is read xié.)"
+    },
+    null,
+    {
+     "tag": "similar_sound_initial",
+     "why": "「谐」读 xié，声母不是 jié。 (The initial is wrong: 谐 is read xié.)"
+    },
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「和」在这个词里读 hé，不读 hè。 (In this word 和 is read hé, not hè.)"
+    }
+   ],
+   "solution": [
+    "「和谐」读作 hé xié。",
+    "(和谐 is read hé xié.)",
+    "和谐 = harmonious"
+   ],
+   "params": {
+    "key": "v1b-pinyin-011",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-0d60ae73c5",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "富商十分「慷慨」，捐了很多钱。「慷慨」的正确汉语拼音是：",
+   "options": [
+    "kāng kài",
+    "káng kǎi",
+    "kāng kāi",
+    "kāng kǎi"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「慨」读 kǎi，声调不是 kài。 (The tone is wrong: 慨 is read kǎi.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「慷」读 kāng，声调不是 káng。 (The tone is wrong: 慷 is read kāng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「慨」读 kǎi，声调不是 kāi。 (The tone is wrong: 慨 is read kǎi.)"
+    },
+    null
+   ],
+   "solution": [
+    "「慷慨」读作 kāng kǎi。",
+    "(慷慨 is read kāng kǎi.)",
+    "慷慨 = generous"
+   ],
+   "params": {
+    "key": "v1b-pinyin-012",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-c9bf2ce496",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "医生「劝告」爷爷少吃盐。「劝告」的正确汉语拼音是：",
+   "options": [
+    "quàn gào",
+    "quān gào",
+    "quàn gāo",
+    "quàn gǎo"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「劝」读 quàn，声调不是 quān。 (The tone is wrong: 劝 is read quàn.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「告」读 gào，声调不是 gāo。 (The tone is wrong: 告 is read gào.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「告」读 gào，声调不是 gǎo。 (The tone is wrong: 告 is read gào.)"
+    }
+   ],
+   "solution": [
+    "「劝告」读作 quàn gào。",
+    "(劝告 is read quàn gào.)",
+    "劝告 = to advise"
+   ],
+   "params": {
+    "key": "v1b-pinyin-013",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-6a540bde09",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "放了很久的苹果已经「腐烂」了。「腐烂」的正确汉语拼音是：",
+   "options": [
+    "fǔ lán",
+    "fǔ làn",
+    "fù làn",
+    "fú làn"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「烂」读 làn，声调不是 lán。 (The tone is wrong: 烂 is read làn.)"
+    },
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「腐」读 fǔ，声调不是 fù。 (The tone is wrong: 腐 is read fǔ.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「腐」读 fǔ，声调不是 fú。 (The tone is wrong: 腐 is read fǔ.)"
+    }
+   ],
+   "solution": [
+    "「腐烂」读作 fǔ làn。",
+    "(腐烂 is read fǔ làn.)",
+    "腐烂 = to rot"
+   ],
+   "params": {
+    "key": "v1b-pinyin-014",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-36c22858a0",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "他看到别人得奖，心里有点「妒忌」。「妒忌」的正确汉语拼音是：",
+   "options": [
+    "dù jì",
+    "dǔ jì",
+    "dù jí",
+    "dù qì"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「妒」读 dù，声调不是 dǔ。 (The tone is wrong: 妒 is read dù.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「忌」读 jì，声调不是 jí。 (The tone is wrong: 忌 is read jì.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「忌」读 jì，声母不是 qì。 (The initial is wrong: 忌 is read jì.)"
+    }
+   ],
+   "solution": [
+    "「妒忌」读作 dù jì。",
+    "(妒忌 is read dù jì.)"
+   ],
+   "params": {
+    "key": "v1b-pinyin-015",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-99094675f4",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "警察「阻拦」了闯红灯的车子。「阻拦」的正确汉语拼音是：",
+   "options": [
+    "zhǔ lán",
+    "zǔ lǎn",
+    "zú lán",
+    "zǔ lán"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "similar_sound_initial",
+     "why": "「阻」读 zǔ，声母不是 zhǔ。 (The initial is wrong: 阻 is read zǔ.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「拦」读 lán，声调不是 lǎn。 (The tone is wrong: 拦 is read lán.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「阻」读 zǔ，声调不是 zú。 (The tone is wrong: 阻 is read zǔ.)"
+    },
+    null
+   ],
+   "solution": [
+    "「阻拦」读作 zǔ lán。",
+    "(阻拦 is read zǔ lán.)",
+    "阻拦 = to block"
+   ],
+   "params": {
+    "key": "v1b-pinyin-016",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-c81d0bbb5b",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "乐队的「指挥」站在台前挥动指挥棒。「指挥」的正确汉语拼音是：",
+   "options": [
+    "zhǐ huí",
+    "zhǐ fēi",
+    "zhí huī",
+    "zhǐ huī"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「挥」读 huī，声调不是 huí。 (The tone is wrong: 挥 is read huī.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「挥」读 huī，声母不是 fēi。 (The initial is wrong: 挥 is read huī.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「指」读 zhǐ，声调不是 zhí。 (The tone is wrong: 指 is read zhǐ.)"
+    },
+    null
+   ],
+   "solution": [
+    "「指挥」读作 zhǐ huī。",
+    "(指挥 is read zhǐ huī.)"
+   ],
+   "params": {
+    "key": "v1b-pinyin-018",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-1cf93d876d",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "这幅画的构思很有「创意」。「创意」的正确汉语拼音是：",
+   "options": [
+    "chuāng yì",
+    "cuàng yì",
+    "chuàng yí",
+    "chuàng yì"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「创」读 chuàng，声调不是 chuāng。 (The tone is wrong: 创 is read chuàng.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「创」读 chuàng，声母不是 cuàng。 (The initial is wrong: 创 is read chuàng.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「意」读 yì，声调不是 yí。 (The tone is wrong: 意 is read yì.)"
+    },
+    null
+   ],
+   "solution": [
+    "「创意」读作 chuàng yì。",
+    "(创意 is read chuàng yì.)",
+    "创意 = creative idea"
+   ],
+   "params": {
+    "key": "v1b-pinyin-019",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-092d7de836",
+   "topic": "chi-pinyin",
+   "level": "intermediate",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "小华第一次「单独」坐地铁。「单独」的正确汉语拼音是：",
+   "options": [
+    "dān tú",
+    "dān dǔ",
+    "dān dú",
+    "dàn dú"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "similar_sound_initial",
+     "why": "「独」读 dú，声母不是 tú。 (The initial is wrong: 独 is read dú.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「独」读 dú，声调不是 dǔ。 (The tone is wrong: 独 is read dú.)"
+    },
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「单」读 dān，声调不是 dàn。 (The tone is wrong: 单 is read dān.)"
+    }
+   ],
+   "solution": [
+    "「单独」读作 dān dú。",
+    "(单独 is read dān dú.)",
+    "单独 = alone"
+   ],
+   "params": {
+    "key": "v1b-pinyin-020",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-e90de89a89",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-2"
+   ],
+   "stem": "空调可以「调节」房间的温度。「调节」的正确汉语拼音是：",
+   "options": [
+    "tiáo jiè",
+    "tiāo jié",
+    "diào jié",
+    "tiáo jié"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「节」读 jié，声调不是 jiè。 (The tone is wrong: 节 is read jié.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「调」读 tiáo，声调不是 tiāo。 (The tone is wrong: 调 is read tiáo.)"
+    },
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「调」在这个词里读 tiáo，不读 diào。 (In this word 调 is read tiáo, not diào.)"
+    },
+    null
+   ],
+   "solution": [
+    "「调节」读作 tiáo jié。",
+    "(调节 is read tiáo jié.)",
+    "调节 = to adjust, to regulate"
+   ],
+   "params": {
+    "key": "v1b-pinyin-023",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-196a915bc2",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-2"
+   ],
+   "stem": "这条路我小时候「曾经」走过很多次。「曾经」的正确汉语拼音是：",
+   "options": [
+    "céng jìng",
+    "zēng jīng",
+    "cén jīng",
+    "céng jīng"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「经」读 jīng，声调不是 jìng。 (The tone is wrong: 经 is read jīng.)"
+    },
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「曾」在这个词里读 céng，不读 zēng。 (In this word 曾 is read céng, not zēng.)"
+    },
+    {
+     "tag": "similar_sound_final",
+     "why": "「曾」读 céng，韵母不是 cén。 (The final is wrong: 曾 is read céng.)"
+    },
+    null
+   ],
+   "solution": [
+    "「曾经」读作 céng jīng。",
+    "(曾经 is read céng jīng.)",
+    "曾经 = once, formerly"
+   ],
+   "params": {
+    "key": "v1b-pinyin-026",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-9f5439b131",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "他低着头不说话，「似乎」有心事。「似乎」的正确汉语拼音是：",
+   "options": [
+    "sì hū",
+    "sī hū",
+    "shì hū",
+    "sì hú"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「似」读 sì，声调不是 sī。 (The tone is wrong: 似 is read sì.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「似」读 sì，声母不是 shì。 (The initial is wrong: 似 is read sì.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「乎」读 hū，声调不是 hú。 (The tone is wrong: 乎 is read hū.)"
+    }
+   ],
+   "solution": [
+    "「似乎」读作 sì hū。",
+    "(似乎 is read sì hū.)",
+    "似乎 = seemingly"
+   ],
+   "params": {
+    "key": "v1b-pinyin-027",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-8633aadaaf",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-2"
+   ],
+   "stem": "你说得「的确」没错。「的确」的正确汉语拼音是：",
+   "options": [
+    "dí què",
+    "dí qiè",
+    "dì què",
+    "de què"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "similar_sound_initial",
+     "why": "「确」读 què，声母不是 qiè。 (The initial is wrong: 确 is read què.)"
+    },
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「的」在这个词里读 dí，不读 dì。 (In this word 的 is read dí, not dì.)"
+    },
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「的」在这个词里读 dí，不读 de。 (In this word 的 is read dí, not de.)"
+    }
+   ],
+   "solution": [
+    "「的确」读作 dí què。",
+    "(的确 is read dí què.)",
+    "的确 = indeed"
+   ],
+   "params": {
+    "key": "v1b-pinyin-029",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-144518c35c",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-2"
+   ],
+   "stem": "这位「著名」的作家来学校演讲。「著名」的正确汉语拼音是：",
+   "options": [
+    "zhù míng",
+    "zhuó míng",
+    "zhù mín",
+    "zhe míng"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「著」在这个词里读 zhù，不读 zhuó。 (In this word 著 is read zhù, not zhuó.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「名」读 míng，声调不是 mín。 (The tone is wrong: 名 is read míng.)"
+    },
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「著」在这个词里读 zhù，不读 zhe。 (In this word 著 is read zhù, not zhe.)"
+    }
+   ],
+   "solution": [
+    "「著名」读作 zhù míng。",
+    "(著名 is read zhù míng.)",
+    "著名 = famous"
+   ],
+   "params": {
+    "key": "v1b-pinyin-030",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
+   "id": "chipinyi-f8000d0e28",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "这次郊游「大约」有五十人参加。「大约」的正确汉语拼音是：",
+   "options": [
+    "dà yuē",
+    "dà yāo",
+    "dà yuè",
+    "dá yuē"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「约」读 yuē，声调不是 yāo。 (The tone is wrong: 约 is read yuē.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「约」读 yuē，声调不是 yuè。 (The tone is wrong: 约 is read yuē.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「大」读 dà，声调不是 dá。 (The tone is wrong: 大 is read dà.)"
+    }
+   ],
+   "solution": [
+    "「大约」读作 dà yuē。",
+    "(大约 is read dà yuē.)",
+    "大约 = approximately"
+   ],
+   "params": {
+    "key": "v1b-pinyin-031",
+    "subtopic": "chi-pinyin-sound"
+   }
   }
  ]
 }

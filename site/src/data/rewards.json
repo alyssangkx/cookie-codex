@@ -765,15 +765,6 @@
     "capstone": false
    },
    {
-    "id": "chi-juzi-order",
-    "name": "句子排列 (sentence ordering)",
-    "topic": "chi-juzi-yunyong",
-    "topicName": "句子的认识和运用 (Sentences and usage)",
-    "home": 6,
-    "i": 6,
-    "capstone": true
-   },
-   {
     "id": "chi-cloze-mcq",
     "name": "多项选择短文填空 (MCQ cloze)",
     "topic": "chi-cloze",
@@ -783,21 +774,30 @@
     "capstone": true
    },
    {
-    "id": "chi-dialogue-mcq",
-    "name": "对话填答 (dialogue completion)",
-    "topic": "chi-dialogue",
-    "topicName": "完成对话 (Complete the dialogue)",
-    "home": 6,
-    "i": 8,
-    "capstone": true
-   },
-   {
     "id": "chi-yuedu-mcq-text",
     "name": "篇章理解 (passage understanding)",
     "topic": "chi-yuedu-mcq",
     "topicName": "阅读理解一 (Comprehension 1, MCQ)",
     "home": 6,
     "i": 9,
+    "capstone": true
+   },
+   {
+    "id": "chi-juzi-order",
+    "name": "句子排列 (sentence ordering)",
+    "topic": "chi-juzi-yunyong",
+    "topicName": "句子的认识和运用 (Sentences and usage)",
+    "home": 6,
+    "i": 6,
+    "capstone": true
+   },
+   {
+    "id": "chi-dialogue-mcq",
+    "name": "对话填答 (dialogue completion)",
+    "topic": "chi-dialogue",
+    "topicName": "完成对话 (Complete the dialogue)",
+    "home": 6,
+    "i": 8,
     "capstone": true
    },
    {
@@ -1781,19 +1781,19 @@
    "slug": "rumi-cookie",
    "dup": false
   },
-  "chi-juzi-order|b": {
+  "chi-cloze-mcq|b": {
    "slug": "asphodel-cookie",
    "dup": false
   },
-  "chi-cloze-mcq|b": {
+  "chi-yuedu-mcq-text|b": {
    "slug": "rumi-cookie",
    "dup": true
   },
-  "chi-dialogue-mcq|b": {
+  "chi-juzi-order|b": {
    "slug": "affogato-cookie",
    "dup": true
   },
-  "chi-yuedu-mcq-text|b": {
+  "chi-dialogue-mcq|b": {
    "slug": "tarte-tatin-cookie",
    "dup": true
   },
@@ -1829,19 +1829,19 @@
    "slug": "red-osmanthus-cookie",
    "dup": false
   },
-  "chi-juzi-order|i": {
+  "chi-cloze-mcq|i": {
    "slug": "pulpo-cookie",
    "dup": false
   },
-  "chi-cloze-mcq|i": {
+  "chi-yuedu-mcq-text|i": {
+   "slug": "red-osmanthus-cookie",
+   "dup": true
+  },
+  "chi-juzi-order|i": {
    "slug": "red-osmanthus-cookie",
    "dup": true
   },
   "chi-dialogue-mcq|i": {
-   "slug": "red-osmanthus-cookie",
-   "dup": true
-  },
-  "chi-yuedu-mcq-text|i": {
    "slug": "devil-cookie",
    "dup": false
   },
@@ -1877,19 +1877,19 @@
    "slug": "croissant-cookie",
    "dup": false
   },
-  "chi-juzi-order|c": {
+  "chi-cloze-mcq|c": {
    "slug": "doughael-cookie",
    "dup": false
   },
-  "chi-cloze-mcq|c": {
+  "chi-yuedu-mcq-text|c": {
    "slug": "millenial-tree-cookie",
    "dup": true
   },
-  "chi-dialogue-mcq|c": {
+  "chi-juzi-order|c": {
    "slug": "wind-archer-cookie",
    "dup": true
   },
-  "chi-yuedu-mcq-text|c": {
+  "chi-dialogue-mcq|c": {
    "slug": "clotted-cream-cookie",
    "dup": true
   },
