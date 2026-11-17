@@ -13,20 +13,7 @@ const data = {
   <section class="wrap parent-page">
     <h1>Parent view</h1>
 
-    <div id="gate" class="panel" hidden>
-      <h2 id="gate-title">Parent PIN</h2>
-      <p id="gate-note" class="note">The PIN only keeps your child out of the settings. It is not security.</p>
-      <form id="gate-form" autocomplete="off">
-        <label for="pin1" id="pin1-label">PIN</label>
-        <input id="pin1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
-        <div id="pin2-wrap" hidden>
-          <label for="pin2">Enter it again</label>
-          <input id="pin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
-        </div>
-        <button type="submit" class="btn" id="gate-btn">Unlock</button>
-        <p class="err" id="gate-err" role="alert"></p>
-      </form>
-    </div>
+    <p class="note">Signed in as the grown-up. This page shows the progress saved on this device.</p>
 
     <noscript><p class="note">This page needs JavaScript to read the saved progress.</p></noscript>
 
@@ -51,14 +38,6 @@ const data = {
           <input id="psle" type="date" />
           <p class="note" id="weeks"></p>
         </div>
-        <h3>Change PIN</h3>
-        <form id="pin-form" class="fields" autocomplete="off">
-          <label for="npin1">New PIN (4 to 6 digits)</label>
-          <input id="npin1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
-          <label for="npin2">New PIN again</label>
-          <input id="npin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
-          <button type="submit" class="btn">Change PIN</button>
-        </form>
         <p class="saved" id="saved" role="status" aria-live="polite"></p>
       </section>
       <section class="panel" aria-labelledby="h-bak"><h2 id="h-bak">Backup</h2>
@@ -126,7 +105,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, exportCode, importCode, hashPin, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
@@ -136,38 +115,6 @@ const data = {
   const DAY = 86_400_000;
 
   let s: SaveV1 = load();
-  const SKEY = 'ccx:parent-unlocked';
-
-  // ------------------------------------------------------------ gate
-  const validPin = (p: string) => /^\d{4,6}$/.test(p);
-  function unlocked() { try { return sessionStorage.getItem(SKEY) === '1'; } catch { return false; } }
-  function markUnlocked() { try { sessionStorage.setItem(SKEY, '1'); } catch { /* ignore */ } }
-
-  function showGate() {
-    const setting = s.settings.pinHash === null;
-    $('gate').hidden = false;
-    $('gate-title').textContent = setting ? 'Set a 4–6 digit PIN' : 'Enter the parent PIN';
-    $('pin1-label').textContent = setting ? 'New PIN' : 'PIN';
-    $('pin2-wrap').hidden = !setting;
-    $('gate-btn').textContent = setting ? 'Set PIN and unlock' : 'Unlock';
-  }
-  $('gate-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const err = $('gate-err'); err.textContent = '';
-    const p1 = $<HTMLInputElement>('pin1').value;
-    if (s.settings.pinHash === null) {
-      if (!validPin(p1)) { err.textContent = 'Use 4 to 6 digits.'; return; }
-      if (p1 !== $<HTMLInputElement>('pin2').value) { err.textContent = 'The two PINs do not match.'; return; }
-      s.settings.pinHash = await hashPin(p1);
-      save(s);
-    } else if ((await hashPin(p1)) !== s.settings.pinHash) {
-      err.textContent = 'That PIN is not right.'; return;
-    }
-    markUnlocked();
-    $<HTMLInputElement>('pin1').value = ''; $<HTMLInputElement>('pin2').value = '';
-    $('gate').hidden = true;
-    start();
-  });
 
   // ------------------------------------------------------------ helpers
   const TAG_LABELS: Record<string, string> = {
@@ -313,14 +260,6 @@ const data = {
       commit();
       cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
     });
-    $('pin-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const a = $<HTMLInputElement>('npin1'), b = $<HTMLInputElement>('npin2');
-      if (!validPin(a.value)) { flashSaved('Use 4 to 6 digits.'); return; }
-      if (a.value !== b.value) { flashSaved('The two PINs do not match.'); return; }
-      s = load(); s.settings.pinHash = await hashPin(a.value); save(s);
-      a.value = ''; b.value = ''; flashSaved('Saved: PIN changed');
-    });
   }
 
   // backup
@@ -365,6 +304,5 @@ const data = {
     initSettings(); initBackup();
   }
 
-  if (unlocked() && s.settings.pinHash !== null) start();
-  else showGate();
+  start(); // the page itself is gated by the admin session (Base.astro); the old PIN screen is gone
 </script>

@@ -14,6 +14,22 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <!-- Login gate, step 1 (instant): game pages need a stored session, /parent needs an admin one. The module
+         script below does the real check (idle limit, admin and authenticator level). -->
+    <script is:inline>
+      (function () {
+        var p = location.pathname.replace(/\/+$/, ''), g = '';
+        if (p === '' || /^\/(train|quiz|paper|collection)(\/|$)/.test(p)) g = 'game';
+        else if (p === '/parent') g = 'admin';
+        document.documentElement.setAttribute('data-gate', g);
+        if (!g) return;
+        var has = false;
+        try { for (var i = 0; i < localStorage.length; i++) if (/^sb-.+-auth-token$/.test(localStorage.key(i))) has = true; } catch (e) {}
+        document.documentElement.className += ' gate-pending';
+        if (!has) location.replace('/login');
+      })();
+    </script>
+    <noscript><style>html.gate-pending body { visibility: visible !important; }</style></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,6 +47,7 @@ const { title, description } = Astro.props;
           <a href="/codex/">Library</a>
           <a href="/collection/">My House</a>
           <a href="/parent/">Parents</a>
+          <button type="button" id="logout" class="logout" hidden>Log out</button>
         </nav>
       </div>
       <div class="scallop" aria-hidden="true"></div>
@@ -49,8 +66,41 @@ const { title, description } = Astro.props;
         </p>
       </div>
     </footer>
+    <script>
+      import { currentSession, supabase } from '../lib/supabase';
+      import { initSync, logout, isChildSession } from '../lib/sync';
+
+      const root = document.documentElement;
+      const gate = root.getAttribute('data-gate');
+      const release = () => root.classList.remove('gate-pending');
+      document.getElementById('logout')?.addEventListener('click', () => { void logout(); });
+
+      (async () => {
+        let session = null;
+        try { session = await currentSession(); } catch { /* unreachable storage: treated as signed out */ }
+        if (session) document.getElementById('logout')!.hidden = false;
+        if (gate && !session) { location.replace('/login'); return; }
+        if (gate === 'admin') {
+          let ok = false;
+          try {
+            const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+            ok = session!.user.app_metadata?.role === 'admin' && aal.data?.currentLevel === 'aal2';
+          } catch { /* fail closed */ }
+          if (!ok) { location.replace('/admin/'); return; }
+        }
+        if (session && isChildSession(session.user)) {
+          // hold the page back (up to 4 s) while the newer server save is pulled, so it never shows stale progress
+          await Promise.race([initSync().catch(() => {}), new Promise((r) => setTimeout(r, 4000))]);
+        }
+        release();
+      })();
+    </script>
   </body>
 </html>
+
+<style is:global>
+  html.gate-pending body { visibility: hidden; }
+</style>
 
 <style>
   .site-header { background: var(--crust); }
@@ -67,6 +117,10 @@ const { title, description } = Astro.props;
   .nav a {
     font-family: var(--font-display); font-weight: 600; color: var(--berry);
     min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .logout {
+    font-family: var(--font-display); font-weight: 600; color: var(--berry); background: none; cursor: pointer;
+    border: 1.5px solid var(--berry); border-radius: 10px; padding: 0 14px; min-height: 44px; align-self: center;
   }
   .site-header .scallop { background-color: var(--cream); }
   .site-footer {

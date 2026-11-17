@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Who's playing? Alyssa's Cookie Codex" description="Sign in to keep your progress on every device.">
+  <section class="wrap login-page">
+    <h1>Who's playing?</h1>
+    <form id="login-form" class="panel" autocomplete="off" novalidate>
+      <label for="who">Your name</label>
+      <input id="who" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" />
+
+      <p class="label" id="pin-label">Your PIN</p>
+      <div id="dots" class="dots" role="img" aria-labelledby="pin-label" aria-live="polite"><i></i><i></i><i></i><i></i></div>
+      <div class="pad" role="group" aria-label="PIN pad">
+        {['1','2','3','4','5','6','7','8','9'].map((d) => <button type="button" class="key" data-k={d}>{d}</button>)}
+        <button type="button" class="key aux" data-k="back" aria-label="Delete the last digit">&#9003;</button>
+        <button type="button" class="key" data-k="0">0</button>
+        <button type="submit" class="key go" id="go">Go</button>
+      </div>
+      <p id="msg" class="msg" role="alert"></p>
+    </form>
+    <p class="small">This site keeps the first name you play under and your quiz progress, so you can carry on from another device. No email, no ads, nothing shared.</p>
+    <p class="small"><a class="grown" href="/admin/">Grown-ups</a></p>
+  </section>
+</Base>
+
+<style is:global>
+  .login-page { padding-block: 1.5rem 3rem; max-width: 26rem; }
+  .login-page .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1.2rem; }
+  .login-page label, .login-page .label { display: block; font-family: var(--font-display); font-weight: 500; margin: 0.6rem 0 0.3rem; }
+  .login-page input {
+    display: block; width: 100%; min-height: 48px; padding: 0.4rem 0.8rem; font: inherit; font-size: 1.1rem;
+    color: var(--cocoa); background: #fff; border: 1.5px solid var(--crust); border-radius: var(--radius-control);
+  }
+  .login-page .dots { display: flex; gap: 0.8rem; justify-content: center; margin: 0.4rem 0 0.9rem; min-height: 28px; }
+  .login-page .dots i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--cocoa-soft); background: transparent; }
+  .login-page .dots i.on { background: var(--cocoa); border-color: var(--cocoa); }
+  .login-page .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .login-page .key {
+    min-height: 64px; min-width: 44px; font: 600 1.6rem var(--font-display); color: var(--cocoa); background: #fff;
+    border: 1.5px solid var(--crust); border-radius: var(--radius-control); cursor: pointer;
+  }
+  .login-page .key:active { background: var(--plate); }
+  .login-page .key.aux { color: var(--cocoa-soft); }
+  .login-page .key.go { background: var(--berry); color: var(--berry-ink); border-color: var(--berry); }
+  .login-page .key:disabled { opacity: 0.6; }
+  .login-page .msg { color: var(--berry); min-height: 1.5em; margin: 0.8rem 0 0; font-weight: 600; text-align: center; }
+  .login-page .small { color: var(--cocoa-soft); font-size: 0.9rem; margin-top: 1rem; }
+  .login-page .grown { display: inline-flex; align-items: center; min-height: 44px; }
+</style>
+
+<script>
+  import { supabase, callFunction, touch } from '../../lib/supabase';
+  import { hydrate, isChildSession } from '../../lib/sync';
+  import { kv } from '../../lib/store';
+
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const who = $<HTMLInputElement>('who'), msg = $('msg');
+  const dots = [...$('dots').querySelectorAll('i')];
+  let pin = '', busy = false;
+
+  const deviceId = () => {
+    let id = kv.get('device-id');
+    if (!id) { id = crypto.randomUUID(); kv.set('device-id', id); }
+    return id;
+  };
+  const paint = () => dots.forEach((d, i) => d.classList.toggle('on', i < pin.length));
+  const say = (t: string) => { msg.textContent = t; };
+  const setBusy = (b: boolean) => { busy = b; document.querySelectorAll<HTMLButtonElement>('.login-page .key').forEach((k) => (k.disabled = b)); };
+
+  async function submit() {
+    if (busy) return;
+    if (!who.value.trim()) { say('Type your name first.'); who.focus(); return; }
+    if (pin.length < 4) { say('Your PIN has 4 digits.'); return; }
+    say(''); setBusy(true);
+    const tryPin = pin;
+    try {
+      const { status, body } = await callFunction('pin-login', {
+        name: who.value, pin: tryPin, deviceId: deviceId(), deviceToken: kv.get('device-token') ?? undefined,
+      });
+      if (status === 200 && body?.session) {
+        const { error } = await supabase.auth.setSession({ access_token: body.session.access_token, refresh_token: body.session.refresh_token });
+        if (error) throw error;
+        if (body.deviceToken) kv.set('device-token', body.deviceToken);
+        touch();
+        const { data } = await supabase.auth.getSession();
+        if (data.session && isChildSession(data.session.user)) await hydrate(data.session.user.id).catch(() => false);
+        location.href = '/';
+        return;
+      }
+      pin = ''; paint();
+      if (status === 401) {
+        const n = Number(body?.attemptsLeft);
+        say(Number.isFinite(n) ? `Not quite, try again (${n} ${n === 1 ? 'try' : 'tries'} left on this device)` : 'Not quite, try again');
+      } else if (status === 429) {
+        const sec = Number(body?.retryAfterSec);
+        say(Number.isFinite(sec) && sec > 0
+          ? `Too many tries, please wait ${Math.ceil(sec / 60)} ${Math.ceil(sec / 60) === 1 ? 'minute' : 'minutes'}`
+          : 'Too many tries, please wait a while or ask a grown-up');
+      } else if (status === 400) {
+        say('Check your name (letters only) and your 4-digit PIN.');
+      } else {
+        say("Can't reach the server, try again");
+      }
+    } catch {
+      pin = ''; paint();
+      say("Can't reach the server, try again");
+    } finally { setBusy(false); }
+  }
+
+  function press(k: string) {
+    if (busy) return;
+    if (k === 'back') pin = pin.slice(0, -1);
+    else if (pin.length < 4) pin += k;
+    paint();
+    if (pin.length === 4 && who.value.trim()) void submit();
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.login-page .key[data-k]').forEach((b) => b.addEventListener('click', () => press(b.dataset.k!)));
+  $('login-form').addEventListener('submit', (e) => { e.preventDefault(); void submit(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const inName = e.target === who;
+    if (/^\d$/.test(e.key) && !inName) { e.preventDefault(); press(e.key); }
+    else if (e.key === 'Backspace' && !inName) { e.preventDefault(); press('back'); }
+    else if (e.key === 'Enter' && inName) { e.preventDefault(); if (pin.length === 4) void submit(); else (document.querySelector('.login-page .key[data-k="1"]') as HTMLElement).focus(); }
+  });
+
+  // already signed in as a child: nothing to do here
+  void (async () => {
+    const { data } = await supabase.auth.getSession();
+    if (data.session && isChildSession(data.session.user)) location.replace('/');
+    else who.focus();
+  })();
+</script>

@@ -1,6 +1,6 @@
 # Accounts plan: Supabase login for Alyssa's Cookie Codex
 
-Status: **Phase A, awaiting approval.** Nothing in this plan has been applied, deployed or created.
+Status: **Implemented: yes (Phase B, 2026-11-17).** Schema applied, `pin-login` and `admin` deployed, `/login/`, `/admin/`, sync and the login gate built and live-tested against the real project with throwaway users (see "Phase B as built" at the end). The original Phase A text below is kept as written.
 The SQL is in `supabase/migrations/001_init.sql`, the PIN function source is in
 `supabase/functions/pin-login/index.ts` (with `_shared/pin.ts`). Neither has been run: there was no
 Postgres or Deno on the dev machine, so the SQL and the Deno code are **untested: needs a Supabase project**.
@@ -328,3 +328,19 @@ so CORS is not `*`. Do not deploy until approved.
 | Sync conflict | Newer save wins, with a visible warning; no field merge yet. |
 | Child names | Globally unique for now (one family). |
 | `/parent/` PIN screen | Dropped once the admin session gates the page. |
+
+
+## Phase B as built (2026-11-17)
+
+Implemented: yes. What differs from the plan above:
+
+- **`admin` function** replaces the planned `admin-pin`. Actions: `create_child`, `set_pin`, `clear_name_lock`, `list_children` (never `pin_hash`), `create_test_player`, `test_login`, `delete_child`. Requires admin role (read from the Auth server) and an `aal2` token; deployed with JWT verification on; every error fails closed (500 `server_error`).
+- **Playing as the Test Player** uses the admin action `test_login` (a session for a `test` profile only), because `pin-login` refuses the `test` role. The random PIN is still created and shown once, but is not needed.
+- **Admin has no clock offset.** The "jump the clock a day" tool shifts the Test Player's day keys, pass days, due dates and timestamps back one day inside its save (pushed with `push_save`), instead of the planned `ccx:clock-offset` in `store.ts`.
+- **Sync** debounces 2 s (not 5 s). There is no `StorageAdapter` interface: `store.ts` gained `setSaveHook`, `replaceLocal`, `kv`, and sync listens to `save()`. One local key `ccx:save` is kept (not per profile); `ccx:sync:owner` records whose save it is, so a different child on the same device never pushes the first child's progress. First sign-in with an anonymous local save and an empty server row adopts the local save automatically (no prompt); with progress on both sides the server copy wins and the local one goes to `ccx:backup`.
+- A newer server copy with unsynced local changes shows the conflict banner instead of overwriting.
+- **Log out** signs out this browser only (`scope: local`) so it does not end the child's other devices; it keeps the device id and token. It does not clear the cached save.
+- **Login page** has no remembered-name tiles yet; it always asks for the name.
+- **`/parent/`** shows the save on this device (an admin session has no child save of its own); the PIN screen and the Change-PIN form are removed.
+- **Browser calls** use plain `fetch` to the functions (the CORS allow-list has no `x-client-info`). `SITE_ORIGIN` is `http://localhost:4321`, so the live test served the site on 4321, not 4331.
+- Not built: privacy page, `delete-account`, field-merge on conflict.

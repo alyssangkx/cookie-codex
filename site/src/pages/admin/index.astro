@@ -1,0 +1,334 @@
+---
+import Base from '../../layouts/Base.astro';
+import { subs, hasContent, slots, cardInfo } from '../../lib/train';
+
+const data = {
+  subs: subs.filter((s) => s.school === 'math' && hasContent(s)).map((s) => ({
+    id: s.id, name: s.name, tiers: (['b', 'i', 'c'] as const).filter((t) => s.playable[t]),
+    cards: Object.fromEntries((['b', 'i', 'c'] as const).filter((t) => s.playable[t] && slots[`${s.id}|${t}`])
+      .map((t) => [t, { slug: slots[`${s.id}|${t}`].slug, name: cardInfo[slots[`${s.id}|${t}`].slug]?.name ?? slots[`${s.id}|${t}`].slug }])),
+  })),
+};
+---
+<Base title="Grown-ups: Alyssa's Cookie Codex" description="Children, PINs and test tools for the grown-up.">
+  <section class="wrap admin-page">
+    <h1>Grown-ups</h1>
+    <p id="flash" class="flash" role="status" aria-live="polite"></p>
+
+    <div id="v-signin" class="panel" hidden>
+      <h2>Sign in</h2>
+      <form id="f-signin" autocomplete="on">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required />
+        <label for="pw">Password</label>
+        <input id="pw" type="password" autocomplete="current-password" required />
+        <button class="btn" type="submit">Sign in</button>
+      </form>
+    </div>
+
+    <div id="v-enroll" class="panel" hidden>
+      <h2>Set up your authenticator app</h2>
+      <p class="note">Scan this with an authenticator app (Google Authenticator, Authy, 1Password), then type the 6-digit code it shows.</p>
+      <img id="qr" alt="QR code for your authenticator app" width="200" height="200" />
+      <p class="note">Or type this key into the app: <code id="secret"></code></p>
+      <form id="f-enroll" autocomplete="off">
+        <label for="code1">6-digit code</label>
+        <input id="code1" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" required />
+        <button class="btn" type="submit">Verify and continue</button>
+      </form>
+    </div>
+
+    <div id="v-challenge" class="panel" hidden>
+      <h2>Authenticator code</h2>
+      <p class="note">Open your authenticator app and type the current 6-digit code.</p>
+      <form id="f-challenge" autocomplete="off">
+        <label for="code2">6-digit code</label>
+        <input id="code2" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" required />
+        <button class="btn" type="submit">Continue</button>
+      </form>
+    </div>
+
+    <div id="bar" class="bar2" hidden>
+      <span>Signed in as <b id="me"></b></span>
+      <button id="signout" class="btn out" type="button">Sign out</button>
+    </div>
+    <button id="signout2" class="btn out" type="button" hidden>Sign out</button>
+
+    <div id="v-console" hidden>
+      <section class="panel" aria-labelledby="h-kids">
+        <h2 id="h-kids">Children</h2>
+        <div id="kids"></div>
+        <h3>Create child</h3>
+        <form id="f-create" class="row" autocomplete="off">
+          <label for="newname" class="sr">Name</label>
+          <input id="newname" type="text" maxlength="20" value="Alyssa" />
+          <button class="btn" type="submit">Create child</button>
+        </form>
+        <p class="note">Then set a 4-digit PIN for her below. Names are letters only and unique.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="h-test">
+        <h2 id="h-test">Test Player</h2>
+        <p class="note">A pretend child for trying things out. The tools below change only the Test Player's save; the server refuses an admin write to a real child.</p>
+        <div id="test"></div>
+      </section>
+    </div>
+    <script type="application/json" id="adata" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+  </section>
+</Base>
+
+<style is:global>
+  .admin-page { padding-block: 1.5rem 3rem; max-width: 46rem; }
+  .admin-page .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1rem; margin-top: 1rem; }
+  .admin-page h2 { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .admin-page h3 { font-size: 1.1rem; margin: 1.2rem 0 0.4rem; }
+  .admin-page .note { color: var(--cocoa-soft); font-size: 0.95rem; margin: 0.3rem 0 0.8rem; }
+  .admin-page label { display: block; font-family: var(--font-display); font-weight: 500; margin-top: 0.7rem; }
+  .admin-page .sr { position: absolute; left: -9999px; }
+  .admin-page input, .admin-page select {
+    display: block; width: 100%; max-width: 22rem; min-height: 44px; padding: 0.4rem 0.7rem; margin-top: 0.25rem;
+    font: inherit; color: var(--cocoa); background: #fff; border: 1.5px solid var(--crust); border-radius: var(--radius-control);
+  }
+  .admin-page .btn {
+    min-height: 44px; padding: 0 1.1rem; margin-top: 0.8rem; border: 0; border-radius: var(--radius-control);
+    background: var(--cocoa); color: var(--cream); font: 500 1rem var(--font-display); cursor: pointer;
+  }
+  .admin-page .btn.small { margin-top: 0; padding: 0 0.8rem; font-size: 0.95rem; }
+  .admin-page .btn.out { background: var(--berry); }
+  .admin-page .btn.danger { background: #fff; color: var(--berry); border: 1.5px solid var(--berry); }
+  .admin-page .row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  .admin-page .row input { margin-top: 0; }
+  .admin-page .flash { min-height: 1.5em; font-weight: 600; color: var(--berry); }
+  .admin-page .flash.ok { color: #1f6b3a; }
+  .admin-page .bar2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: 1rem; padding: 0.4rem 0.8rem; background: var(--cream); border-radius: var(--radius-control); }
+  .admin-page .bar2 .btn { margin-top: 0; }
+  .admin-page .kid { border-top: 1px dashed var(--crust); padding: 0.7rem 0; }
+  .admin-page .kid:first-child { border-top: 0; }
+  .admin-page .kid .row { margin-top: 0.4rem; }
+  .admin-page .kid input.pin { max-width: 7rem; letter-spacing: 0.3em; text-align: center; }
+  .admin-page .tag { font-size: 0.8rem; background: var(--plate); border-radius: 999px; padding: 0.1rem 0.6rem; margin-left: 0.4rem; }
+  .admin-page code { word-break: break-all; }
+  .admin-page #signout2 { margin-top: 1rem; }
+</style>
+
+<script>
+  import { supabase, callFunction, touch } from '../../lib/supabase';
+  import { decidePush } from '../../lib/sync';
+  import { fresh, migrate, SCHEMA } from '../../lib/store';
+  import type { SaveV1, Tier } from '../../lib/store';
+  import { jumpClock, resetTier, grantCard } from '../../lib/testtools';
+
+  interface Kid { id: string; name: string; role: 'child' | 'test'; pin_set_at: string | null; created_at: string }
+  const D = JSON.parse(document.getElementById('adata')!.textContent!) as {
+    subs: { id: string; name: string; tiers: Tier[]; cards: Record<string, { slug: string; name: string }> }[];
+  };
+  const TIER_LABEL: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', c: 'Competent' };
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  const flash = (t: string, ok = false) => { const f = $('flash'); f.textContent = t; f.className = 'flash' + (ok ? ' ok' : ''); };
+  const views = ['v-signin', 'v-enroll', 'v-challenge', 'v-console'];
+  const show = (v: string | null) => { for (const id of views) $(id).hidden = id !== v; };
+  const signedInChrome = (email: string | null) => {
+    $('bar').hidden = email === null || $('v-console').hidden;
+    $('signout2').hidden = email === null || !$('v-console').hidden;
+    if (email) $('me').textContent = email;
+  };
+
+  const ERR: Record<string, string> = {
+    name_taken: 'A child with that name already exists.', exists: 'There is already a Test Player.', bad_request: 'That input is not valid.',
+    mfa_required: 'Verify your authenticator code first.', forbidden: 'This account is not allowed to do that.',
+    unauthorized: 'Please sign in again.', not_found: 'That child no longer exists.', confirm_required: 'Type the child\'s name to confirm.',
+    server_error: 'The server had a problem. Nothing was changed; try again.',
+  };
+
+  async function admin(body: Record<string, unknown>) {
+    const { data } = await supabase.auth.getSession();
+    if (!data.session) { await render(); throw new Error('signed out'); }
+    const r = await callFunction('admin', body, data.session.access_token);
+    if (r.status !== 200) throw new Error(ERR[r.body?.error] ?? "Can't reach the server, try again.");
+    return r.body;
+  }
+  const guard = (fn: () => Promise<void>) => async () => { try { await fn(); } catch (e) { flash(e instanceof Error ? e.message : 'Something went wrong.'); } };
+
+  // ------------------------------------------------------------ sign-in and the authenticator
+  let factorId = '';
+  async function render() {
+    const { data } = await supabase.auth.getSession();
+    const user = data.session?.user;
+    if (!user) { show('v-signin'); signedInChrome(null); return; }
+    if (user.app_metadata?.role !== 'admin') {
+      await supabase.auth.signOut({ scope: 'local' });
+      flash('That account is not a grown-up account. Children sign in on the Who\'s playing page.');
+      show('v-signin'); signedInChrome(null); return;
+    }
+    touch();
+    const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal.data?.currentLevel === 'aal2') { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); return; }
+    const fl = await supabase.auth.mfa.listFactors();
+    const verified = fl.data?.totp?.[0]; // listFactors().totp holds verified factors only
+    if (verified) { factorId = verified.id; show('v-challenge'); signedInChrome(user.email ?? ''); $('code2').focus(); return; }
+    // not enrolled: clear any half-finished enrolment, then start a new one
+    for (const f of fl.data?.all ?? []) if (f.factor_type === 'totp' && f.status !== 'verified') await supabase.auth.mfa.unenroll({ factorId: f.id });
+    const en = await supabase.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Authenticator' });
+    if (en.error || !en.data) { flash("Couldn't start authenticator setup. Try again."); show('v-signin'); return; }
+    factorId = en.data.id;
+    ($('qr') as HTMLImageElement).src = en.data.totp.qr_code;
+    $('secret').textContent = en.data.totp.secret;
+    show('v-enroll'); signedInChrome(user.email ?? ''); $('code1').focus();
+  }
+
+  $('f-signin').addEventListener('submit', async (e) => {
+    e.preventDefault(); flash('');
+    const { error } = await supabase.auth.signInWithPassword({ email: $<HTMLInputElement>('email').value.trim(), password: $<HTMLInputElement>('pw').value });
+    $<HTMLInputElement>('pw').value = '';
+    if (error) { flash('That email or password is not right.'); return; }
+    await render();
+  });
+  const verify = (inputId: string) => async (e: Event) => {
+    e.preventDefault(); flash('');
+    const input = $<HTMLInputElement>(inputId);
+    const code = input.value.trim(); input.value = '';
+    const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code });
+    if (error) { flash('That code did not work. Wait for the next code and try again.'); return; }
+    await render();
+  };
+  $('f-enroll').addEventListener('submit', verify('code1'));
+  $('f-challenge').addEventListener('submit', verify('code2'));
+  const signOut = async () => { await supabase.auth.signOut({ scope: 'local' }); flash('Signed out.', true); await render(); };
+  $('signout').addEventListener('click', signOut);
+  $('signout2').addEventListener('click', signOut);
+
+  // ------------------------------------------------------------ children
+  let kids: Kid[] = [];
+  async function refreshKids() {
+    try { kids = (await admin({ action: 'list_children' })).children as Kid[]; } catch (e) { flash(e instanceof Error ? e.message : 'Could not load children.'); return; }
+    const real = kids.filter((k) => k.role === 'child');
+    $('kids').innerHTML = real.length ? real.map((k) => `
+      <div class="kid" data-id="${esc(k.id)}" data-name="${esc(k.name)}">
+        <b>${esc(k.name)}</b><span class="tag">${k.pin_set_at ? 'PIN set ' + esc(new Date(k.pin_set_at).toLocaleDateString()) : 'no PIN yet'}</span>
+        <div class="row">
+          <label class="sr" for="pin-${esc(k.id)}">New PIN for ${esc(k.name)}</label>
+          <input class="pin" id="pin-${esc(k.id)}" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" placeholder="PIN" />
+          <button class="btn small" data-do="setpin" type="button">Set or reset PIN</button>
+          <button class="btn small" data-do="unlock" type="button">Clear name lock</button>
+          <button class="btn small danger" data-do="delete" type="button">Delete</button>
+        </div>
+      </div>`).join('') : '<p class="note">No children yet.</p>';
+    renderTest();
+  }
+  $('kids').addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest('button[data-do]') as HTMLButtonElement | null;
+    if (!b) return;
+    const row = b.closest('.kid') as HTMLElement, id = row.dataset.id!, name = row.dataset.name!;
+    void guard(async () => {
+      if (b.dataset.do === 'setpin') {
+        const inp = row.querySelector<HTMLInputElement>('input.pin')!;
+        const pin = inp.value;
+        if (!/^\d{4}$/.test(pin)) { flash('A PIN is exactly 4 digits.'); return; }
+        await admin({ action: 'set_pin', child_id: id, pin });
+        inp.value = ''; // never shown again
+        flash(`PIN set for ${name}. Any device that was remembered must use the new PIN.`, true);
+        await refreshKids();
+      } else if (b.dataset.do === 'unlock') {
+        await admin({ action: 'clear_name_lock', child_id: id });
+        flash(`Name lock cleared for ${name}.`, true);
+      } else if (b.dataset.do === 'delete') {
+        const typed = prompt(`This permanently deletes ${name} and all of their progress.\nType the name to confirm:`);
+        if (typed === null) return;
+        await admin({ action: 'delete_child', child_id: id, confirm: typed.trim() });
+        flash(`${name} was deleted.`, true);
+        await refreshKids();
+      }
+    })();
+  });
+  $('f-create').addEventListener('submit', (e) => {
+    e.preventDefault();
+    void guard(async () => {
+      const name = $<HTMLInputElement>('newname').value.trim();
+      if (!/^[A-Za-z][A-Za-z -]{0,19}$/.test(name)) { flash('Use letters only for the name (up to 20).'); return; }
+      await admin({ action: 'create_child', name });
+      flash(`${name} was created. Now set a PIN for her.`, true);
+      await refreshKids();
+    })();
+  });
+
+  // ------------------------------------------------------------ Test Player
+  let shownPin: string | null = null; // the random PIN, shown once after creating
+  const subOptions = D.subs.map((s) => `<option value="${esc(s.id)}">${esc(s.name)}</option>`).join('');
+  function renderTest() {
+    const t = kids.find((k) => k.role === 'test');
+    const el = $('test');
+    if (!t) {
+      el.innerHTML = '<button class="btn" id="t-create" type="button">Create Test Player</button>';
+      $('t-create').addEventListener('click', guard(async () => {
+        const r = await admin({ action: 'create_test_player' });
+        shownPin = r.pin as string;
+        flash('Test Player created.', true);
+        await refreshKids();
+      }));
+      return;
+    }
+    el.innerHTML = `
+      ${shownPin ? `<p class="note"><b>Random PIN, shown once:</b> <code>${esc(shownPin)}</code>. You do not need it: "Play as Test Player" signs in directly.</p>` : ''}
+      <div class="row">
+        <button class="btn" id="t-play" type="button">Play as Test Player</button>
+        <button class="btn danger" id="t-del" type="button">Delete Test Player</button>
+      </div>
+      <p class="note">Playing as it signs this browser in as the Test Player (you will need to sign in here again afterwards).</p>
+      <h3>Test tools</h3>
+      <div class="row"><button class="btn small" id="t-jump" type="button">Jump the clock a day</button></div>
+      <div class="row" style="margin-top:.6rem">
+        <select id="t-sub" aria-label="Sub-topic">${subOptions}</select>
+        <select id="t-tier" aria-label="Tier"></select>
+        <button class="btn small" id="t-reset" type="button">Reset tier</button>
+        <button class="btn small" id="t-grant" type="button">Grant card</button>
+      </div>`;
+    const subSel = $<HTMLSelectElement>('t-sub'), tierSel = $<HTMLSelectElement>('t-tier');
+    const fillTiers = () => {
+      const s = D.subs.find((x) => x.id === subSel.value);
+      tierSel.innerHTML = (s?.tiers ?? []).map((tr) => `<option value="${tr}">${TIER_LABEL[tr]}</option>`).join('');
+    };
+    subSel.addEventListener('change', fillTiers); fillTiers();
+
+    $('t-play').addEventListener('click', guard(async () => {
+      const r = await admin({ action: 'test_login', child_id: t.id });
+      const { error } = await supabase.auth.setSession({ access_token: r.session.access_token, refresh_token: r.session.refresh_token });
+      if (error) throw new Error('Could not sign in as the Test Player.');
+      touch();
+      location.href = '/';
+    }));
+    $('t-del').addEventListener('click', guard(async () => {
+      if (!confirm('Delete the Test Player and its save?')) return;
+      await admin({ action: 'delete_child', child_id: t.id });
+      shownPin = null;
+      flash('Test Player deleted.', true);
+      await refreshKids();
+    }));
+    $('t-jump').addEventListener('click', guard(() => editTest(t.id, (s) => jumpClock(s, 1), 'Clock jumped forward one day.')));
+    $('t-reset').addEventListener('click', guard(() =>
+      editTest(t.id, (s) => resetTier(s, subSel.value, tierSel.value as Tier), 'Tier reset.')));
+    $('t-grant').addEventListener('click', guard(async () => {
+      const sub = D.subs.find((x) => x.id === subSel.value), tier = tierSel.value as Tier;
+      const card = sub?.cards[tier];
+      if (!card) throw new Error('That tier has no card.');
+      await editTest(t.id, (s) => grantCard(s, card.slug, subSel.value, tier), `Granted ${card.name}.`);
+    }));
+  }
+
+  /** Read the Test Player's save, change it, and write it back with push_save (compare-and-set). Only the Test Player's id is ever used. */
+  async function editTest(testId: string, change: (s: SaveV1) => SaveV1, done: string) {
+    const r = await supabase.from('saves').select('rev, data').eq('child_id', testId).maybeSingle();
+    if (r.error) throw new Error('Could not read the Test Player\'s save.');
+    let s: SaveV1 = r.data ? (r.data.data as SaveV1) : fresh();
+    if (typeof s.schemaVersion === 'number' && s.schemaVersion < SCHEMA) s = migrate(s);
+    const next = change(s);
+    const p = await supabase.rpc('push_save', { p_child: testId, p_data: next, p_version: SCHEMA, p_base_rev: r.data ? Number(r.data.rev) : null, p_force: false });
+    const out = decidePush(p.data, p.error);
+    if (out.kind === 'ok') flash(done + ' The Test Player sees it on its next page load.', true);
+    else if (out.kind === 'conflict') flash('The Test Player\'s save changed meanwhile. Try again.');
+    else if (out.kind === 'denied') flash('The server refused that write.');
+    else throw new Error("Can't reach the server, try again.");
+  }
+
+  void render();
+</script>

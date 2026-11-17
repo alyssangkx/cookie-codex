@@ -138,9 +138,39 @@ export function load(): SaveV1 {
   return fresh();
 }
 
+const DIRTY_KEY = 'ccx:sync:dirty'; // set by every save(); sync.ts clears it once the server has the copy
+let saveHook: (() => void) | null = null;
+/** sync.ts registers a callback that runs after every save(). */
+export function setSaveHook(fn: (() => void) | null) { saveHook = fn; }
+
 export function save(s: SaveV1) {
-  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch { /* full or blocked */ }
+  try { localStorage.setItem(KEY, JSON.stringify(s)); localStorage.setItem(DIRTY_KEY, '1'); } catch { /* full or blocked */ }
+  try { saveHook?.(); } catch { /* sync must never break a save */ }
 }
+
+/** The raw save string, for sync. */
+export function readLocalRaw(): string | null {
+  try { return localStorage.getItem(KEY); } catch { return null; }
+}
+/** Replace the local save with a copy from the server. Does not mark it unsynced and does not fire the hook. */
+export function replaceLocal(data: unknown) {
+  try { localStorage.setItem(KEY, JSON.stringify(data)); localStorage.removeItem(DIRTY_KEY); } catch { /* full or blocked */ }
+}
+/** Remove the local save (it was another child's). The caller backs it up first. */
+export function clearLocal() { try { localStorage.removeItem(KEY); localStorage.removeItem(DIRTY_KEY); } catch { /* ignore */ } }
+export const isDirty = () => { try { return localStorage.getItem(DIRTY_KEY) === '1'; } catch { return false; } };
+export function clearDirty() { try { localStorage.removeItem(DIRTY_KEY); } catch { /* ignore */ } }
+/** True when a save holds any real progress (used to decide whether replacing it needs a backup). */
+export const hasProgress = (s: Partial<SaveV1> | null | undefined) =>
+  !!s && (Object.keys(s.progress ?? {}).length > 0 || Object.keys(s.cards ?? {}).length > 0 ||
+    (s.attempts?.length ?? 0) > 0 || Object.keys(s.days ?? {}).length > 0);
+
+/** Small string store for sync and login metadata (device id, tokens, revs). This module stays the only code that touches localStorage. */
+export const kv = {
+  get(k: string): string | null { try { return localStorage.getItem('ccx:' + k); } catch { return null; } },
+  set(k: string, v: string) { try { localStorage.setItem('ccx:' + k, v); } catch { /* full or blocked */ } },
+  del(k: string) { try { localStorage.removeItem('ccx:' + k); } catch { /* ignore */ } },
+};
 
 // ---------------------------------------------------------------- dates
 

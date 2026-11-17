@@ -6,7 +6,7 @@ Alyssa's Cookie Codex is a static Astro site with two parts:
 - **A PSLE revision game.** A Primary 6 student answers timed multiple-choice quizzes (PSLE 2027 syllabus; only Math has questions so far) and earns Cookie Run: Kingdom cookie cards.
 - **The Codex.** A reference library of all 186 cookies.
 
-Python scripts in `scripts/` generate all the data. The Astro site in `site/` renders it. There is no backend: game progress lives in the browser.
+Python scripts in `scripts/` generate all the data. The Astro site in `site/` renders it. Accounts and sync use Supabase (project `kxxnipzejmyctnziojzd`, Singapore): progress is cached in the browser and synced to the server for a signed-in child (see Accounts below).
 
 ## Commands
 
@@ -77,7 +77,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
     - If a save is unreadable or a migration fails (no step, or a throw), `load()` keeps the raw string in `ccx:failed:1..3` before returning `fresh()`, and leaves `ccx:save` alone until a real save. A string already stored is not added again; when all 3 slots are full they rotate (2 to 1, 3 to 2, new into 3) so the newest broken save is kept; a legacy `ccx:failed` key is folded into the slots once and removed. Recover a save by copying a slot's value back into `ccx:save`.
     - `importCode()` writes no backup. The parent page calls `backupLocal()` only after the user confirms the import.
   - It also handles the save code (export/import) and the PIN hash.
-- **PIN login** (`supabase/functions/pin-login`, SQL in `supabase/migrations/001_init.sql`; source only, untested: needs a Supabase project). One atomic RPC checks then counts a device key (5 tries) and a `name:` (20, no token) or `trust:` (30, valid token) key; any locked key counts nothing. Locks double from 15 min to 24 h. The device fail count resets after 15 quiet minutes (forgives typos); name and trust counts only after 24 h, so pacing does not avoid escalation; escalation decays after 7 quiet days. Success clears the device and only the name-side key it used (a trusted login never resets a stranger's `name:` escalation; the admin can clear it). There is no IP limit. Worst case: about 240 days (stranger) or about 92 days (copied tokens) to 5,000 guesses; details in `docs/accounts-plan.md` section 5.
+- **PIN login** (`supabase/functions/pin-login`, SQL in `supabase/migrations/001_init.sql`; applied and deployed, live-tested in Phase B). One atomic RPC checks then counts a device key (5 tries) and a `name:` (20, no token) or `trust:` (30, valid token) key; any locked key counts nothing. Locks double from 15 min to 24 h. The device fail count resets after 15 quiet minutes (forgives typos); name and trust counts only after 24 h, so pacing does not avoid escalation; escalation decays after 7 quiet days. Success clears the device and only the name-side key it used (a trusted login never resets a stranger's `name:` escalation; the admin can clear it). There is no IP limit. Worst case: about 240 days (stranger) or about 92 days (copied tokens) to 5,000 guesses; details in `docs/accounts-plan.md` section 5.
 - **`pick.ts`** chooses questions:
   - tier quizzes are always 10 (≤ 3 due retests from the sub-topic, then new questions, then not-due retests, then retired ones);
   - Daily Review takes 5–15 due retests;
@@ -97,12 +97,22 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 | `/quiz/?sub=&tier=` | The quiz runner; also `?mode=review` and `?mode=paper&topics=` |
 | `/paper/` | WA/SA paper builder |
 | `/collection/` | My House |
-| `/parent/` | PIN-gated parent page |
+| `/parent/` | Parent page, gated by an admin session at aal2 (the old PIN screen is gone); shows the save on this device |
+| `/login/` | "Who's playing?": name + 4-digit PIN pad, calls `pin-login` |
+| `/admin/` | Admin email + password, TOTP (aal2), children, PINs, name locks, Test Player and its test tools |
 | `/codex/` | The Library (cookie shelf) |
 | `/cookie/<slug>/`, `/personality/<tag>/` | Codex detail pages |
 
 - `/data/quiz/<topic>.json` is a static endpoint serving the slim banks, which the quiz page fetches.
 - Markup built with innerHTML needs `<style is:global>` with page-prefixed selectors, because scoped styles don't reach it.
+
+### Accounts (`supabase/functions/admin`, `site/src/lib/{supabase,sync,testtools}.ts`)
+
+- **`admin` Edge Function** (JWT verification ON; needs `app_metadata.role = 'admin'` and `aal2`): `create_child`, `set_pin` (shares `_shared/pin.ts` hashing), `clear_name_lock`, `list_children`, `create_test_player`, `test_login` (a session for the Test Player only), `delete_child` (non-test needs `confirm` = the name). Redeploy: `supabase functions deploy admin --use-api --yes`.
+- **`supabase.ts`** is the one browser client (session persists in localStorage; 90-day idle sign-out; `callFunction` uses plain fetch because the CORS allow-list has no `x-client-info`).
+- **`sync.ts`** sits under `store.ts` (`save()` calls a hook; `store.ts` stays the only code touching localStorage, incl. `kv` for device id/token/revs). Pure decisions (`decideHydrate`, `decidePush`, ...) are tested in `sync.test.ts`. Push is debounced 2 s with the base rev; a conflict shows a banner (use the newer one, or force-push with `p_force`); `denied` stops syncing quietly.
+- **Login gate** is in `Base.astro`: game pages (`/`, `/train`, `/quiz`, `/paper`, `/collection`) redirect to `/login` without a session; `/parent` needs an admin at aal2; the Library stays public. Header "Log out" ends this browser's session only.
+- Test tools (`testtools.ts`) edit only the Test Player's save through `push_save`; the database refuses an admin write to anyone else.
 
 ### Cookie data
 
