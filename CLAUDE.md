@@ -60,6 +60,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - `patterns.json` is the catalogue of question types seen in top-school P5/P6 papers (from OCR'd PDFs).
   - A template covers a type by naming its `math-pat-...` id in its docstring.
   - Speed types are excluded because Speed is not in the 2021 syllabus.
+- **English passage sets and visual text.** English keys `vis-NN-K` (visual text), `read-NN-K` (comprehension) and `ecloze-NN-K` (cloze) form sets: `english/build.py` emits `group`/`seq` and ships a set only if every item shipped (`hold_sets`). Cloze blanks are `(1) ____`; the asked one is `(N) ________` (8 underscores) and the quiz page highlights it. An item may carry `"visual": {kind: poster|notice|brochure|timetable|email, title, subtitle?, blocks: [{heading?, lines[]}], footer?}` (plain strings; all items of a `vis-` set share it, `check_english.py` enforces). The quiz page draws it as a CSS card above the stem (timetable lines with ` | ` become a table; email `From:/To:/Subject:` lines become the header) and the review screen shows it collapsed.
 - **Syllabus.** `site/src/data/syllabus/<subject>.json` is strands → topics → sub-topics → outcomes, surveyed from SEAB/MOE (sources in `docs/syllabus/`).
 
 ### Chinese banks (`scripts/quiz/chinese/`)

@@ -3,7 +3,9 @@
     python3 scripts/quiz/english/build.py
 
 Items live in scripts/quiz/english/items/<subtopic>.json (hand-written, curated), shaped
-{"subtopic": ..., "items": [{key, level, outcome, pattern, stem, options[4], answer, explain[4], solution[], gloss?}]}.
+{"subtopic": ..., "items": [{key, level, outcome, pattern, stem, options[4], answer, explain[4], solution[], gloss?, visual?}]}.
+Keys vis-NN-K, read-NN-K and ecloze-NN-K form passage sets (group/seq in the bank); a set ships whole or not at all.
+An optional "visual" (poster/notice/brochure/timetable/email card) is copied into the bank question.
 An item ships only if scripts/quiz/english/review.json records, under "<subtopic>|<key>", ship: true for exactly the
 current content (fingerprint). Fail closed: no verdict, ship not true, or an edited item means it does not ship.
 Question ids hash topic | item key, so editing an item's wording keeps its id.
@@ -25,6 +27,9 @@ SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "english.json").
 OUT = ROOT / "site" / "src" / "data" / "quiz" / "english"
 REVIEW = HERE / "review.json"
 
+# passage sets: vis-NN-K (visual text), read-NN-K (comprehension), ecloze-NN-K (cloze). A set ships whole or not at all.
+PASSAGE = re.compile(r"^(vis|read|ecloze)-(\d+)-(\d+)$")
+
 TOPIC_OF = {sb["id"]: t["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
 
 
@@ -40,15 +45,38 @@ def gloss_line(it):
     return [g] if g and g not in " ".join(it["solution"]) else []
 
 
+def hold_sets(banks, all_keys, dropped):
+    """A passage set ships only when every item of it shipped: a missing blank or question would leave the
+    passage unanswerable or a blank unexplained. Held sets go to `dropped`."""
+    for topic, qs in banks.items():
+        total, shipped = {}, {}
+        for sub, key in all_keys:
+            if TOPIC_OF[sub] == topic and (m := PASSAGE.match(key)):
+                total.setdefault((sub, m[1], m[2]), set()).add(key)
+        for q in qs:
+            if (m := PASSAGE.match(q["params"]["key"])):
+                shipped.setdefault((q["params"]["subtopic"], m[1], m[2]), set()).add(q["params"]["key"])
+        held = {g for g, ks in shipped.items() if ks != total.get(g)}
+        keep = []
+        for q in qs:
+            m = PASSAGE.match(q["params"]["key"])
+            if m and (q["params"]["subtopic"], m[1], m[2]) in held:
+                dropped.append(f"{q['params']['subtopic']}|{q['params']['key']} (passage set held: not every item shipped)")
+            else:
+                keep.append(q)
+        qs[:] = keep
+
+
 def main():
     review = json.loads(REVIEW.read_text()) if REVIEW.exists() else {}
-    banks, dropped, unreviewed, stale = {}, [], [], []
+    banks, dropped, unreviewed, stale, all_keys = {}, [], [], [], []
     for f in sorted((HERE / "items").glob("*.json")):
         data = json.loads(f.read_text())
         sub = data["subtopic"]
         topic = TOPIC_OF[sub]
         for it in data["items"]:
             rk = f"{sub}|{it['key']}"
+            all_keys.append((sub, it["key"]))
             verdict = review.get(rk)
             if verdict is None:
                 unreviewed.append(rk)
@@ -75,7 +103,17 @@ def main():
                 "explain": [it["explain"][i] for i in order],
                 "solution": list(it["solution"]) + gloss_line(it),
                 "params": {"key": it["key"], "subtopic": sub},
+                **({"visual": it["visual"]} if it.get("visual") else {}),
+                **({"group": f"{sub}:{m[1]}-{m[2]}", "seq": int(m[3])} if (m := PASSAGE.match(it["key"])) else {}),
             })
+    hold_sets(banks, all_keys, dropped)
+    levels = {}
+    for qs in banks.values():
+        for q in qs:
+            if "group" in q:
+                levels.setdefault(q["group"], set()).add(q["level"])
+    mixed = [g for g, ls in levels.items() if len(ls) > 1]
+    assert not mixed, f"passage sets must sit at one level: {mixed}"
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*.json"):  # never leave a bank behind that the current items no longer produce
         old.unlink()

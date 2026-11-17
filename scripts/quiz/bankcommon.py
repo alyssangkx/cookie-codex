@@ -6,5 +6,7 @@ import json
 def fingerprint(it):
     """Hash of everything a reviewer judged; an item edited after review no longer matches its verdict."""
     body = json.dumps([it["stem"], it["options"], it["answer"], it["explain"], it["solution"],
-                       it.get("gloss"), it.get("level"), it.get("outcome"), it.get("pattern")], ensure_ascii=False)
+                       it.get("gloss"), it.get("level"), it.get("outcome"), it.get("pattern")]
+                      + ([it["visual"]] if it.get("visual") else []),  # appended only when present: old fingerprints stay valid
+                      ensure_ascii=False)
     return hashlib.sha1(body.encode()).hexdigest()[:16]

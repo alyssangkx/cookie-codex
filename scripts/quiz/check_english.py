@@ -17,6 +17,37 @@ PATTERNS = {p["id"] for p in json.loads((HERE / "english" / "patterns.json").rea
 LEVELS = {"basic", "intermediate", "competent"}
 BLANK = "____"
 errors = []
+PASSAGE = re.compile(r"^(vis|read|ecloze)-(\d+)-(\d+)$")
+VISUAL_KINDS = {"poster", "notice", "brochure", "timetable", "email"}
+
+
+def visual_errors(v):
+    """Schema of an item's "visual": plain strings only (the page escapes them, but HTML has no place in them)."""
+    if not isinstance(v, dict): return ["visual is not an object"]
+    out = []
+    extra = set(v) - {"kind", "title", "subtitle", "blocks", "footer"}
+    if extra: out.append(f"visual has unknown fields {sorted(extra)}")
+    if v.get("kind") not in VISUAL_KINDS: out.append(f"visual kind {v.get('kind')!r} not in {sorted(VISUAL_KINDS)}")
+    texts = []
+    for f in ("title", "subtitle", "footer"):
+        if f in v:
+            if not isinstance(v[f], str) or not v[f].strip(): out.append(f"visual {f} must be a non-empty string")
+            else: texts.append(v[f])
+    if not isinstance(v.get("title"), str): out.append("visual needs a title")
+    b = v.get("blocks")
+    if not isinstance(b, list) or not b: out.append("visual blocks must be a non-empty list")
+    else:
+        for blk in b:
+            if not isinstance(blk, dict) or set(blk) - {"heading", "lines"}: out.append("visual block must be {heading?, lines}"); continue
+            if "heading" in blk:
+                if not isinstance(blk["heading"], str) or not blk["heading"].strip(): out.append("visual block heading must be a non-empty string")
+                else: texts.append(blk["heading"])
+            ln = blk.get("lines")
+            if not isinstance(ln, list) or not ln or any(not isinstance(x, str) or not x.strip() for x in ln):
+                out.append("visual block lines must be a non-empty list of non-empty strings")
+            else: texts += ln
+    if any(re.search(r"<[A-Za-z/!]|&[#A-Za-z0-9]+;", t) for t in texts): out.append("visual text must be plain (no HTML or entities)")
+    return out
 
 
 def end_punct(s):
@@ -29,6 +60,7 @@ _all = [(f, json.loads(f.read_text())) for f in sorted((HERE / "english" / "item
 sub_keys = Counter((d.get("subtopic"), it.get("key")) for _, d in _all for it in d["items"])
 sub_stems = Counter((d.get("subtopic"), it.get("stem")) for _, d in _all for it in d["items"])
 
+sets = {}
 for f in sorted((HERE / "english" / "items").glob("*.json")):
     data = json.loads(f.read_text())
     sub = data.get("subtopic")
@@ -59,6 +91,21 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
         elif len(ex) != 4 or ex[a] is not None or any(not (x and x.get("tag") and x.get("why")) for i, x in enumerate(ex) if i != a):
             e("explain must be null for the answer and {tag, why} for each wrong option")
         if not it.get("solution"): e("missing solution")
+        m = PASSAGE.match(str(it.get("key", "")))
+        if m:
+            sets.setdefault((sub, m[1], m[2]), []).append(it)
+        if "visual" in it:
+            if not (m and m[1] == "vis"): e("visual is only for vis-NN-K set items")
+            for msg in visual_errors(it["visual"]): e(msg)
+        elif m and m[1] == "vis": e("vis- item has no visual")
+        if m and m[1] == "ecloze" and not re.search(r"\(\d+\) _{8}(?!_)", stem): e("ecloze stem has no asked blank written (N) ________ (8 underscores)")
+
+for (sub, kind, nn), its in sets.items():
+    nums = sorted(int(PASSAGE.match(i["key"])[3]) for i in its)
+    if nums != list(range(1, len(nums) + 1)): errors.append(f"{sub} {kind}-{nn}: set numbers {nums} are not 1..N")
+    if len({i.get("level") for i in its}) > 1: errors.append(f"{sub} {kind}-{nn}: a set must sit at one level")
+    if kind == "vis" and len({json.dumps(i.get("visual"), sort_keys=True) for i in its}) > 1:
+        errors.append(f"{sub} vis-{nn}: items of a set must share an identical visual")
 
 # compiled banks: unique ids, 4-option shape
 ids = Counter()
@@ -67,6 +114,9 @@ for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "english").glob("*.js
         ids[q["id"]] += 1
         if len(q["options"]) != 4 or not 0 <= q["answer"] < 4 or q["explain"][q["answer"]] is not None:
             errors.append(f"{f.name} {q['id']}: bad compiled shape")
+        if "visual" in q:
+            errors += [f"{f.name} {q['id']}: {m}" for m in visual_errors(q["visual"])]
+        if ("group" in q) != ("seq" in q): errors.append(f"{f.name} {q['id']}: group and seq go together")
 errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
 
 print(f"checked {sum(1 for _ in (HERE / 'english' / 'items').glob('*.json'))} item files, {sum(ids.values())} shipped questions")
