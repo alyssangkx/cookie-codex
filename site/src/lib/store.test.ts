@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -101,6 +101,7 @@ test('review fixes: tiers skip unplayable lower tiers; goal days keep their stat
 
 function mockStorage(initial: Record<string, string> = {}) {
   const data = { ...initial };
+  resetUnlimitedCache(); // isUnlimited() caches the player name per page load
   Object.defineProperty(globalThis, 'localStorage', {
     configurable: true,
     value: {
@@ -382,21 +383,48 @@ test('time cap still works at the 120-minute default; review is blocked too', ()
 });
 
 test('Admin: no time cap, no quiz cap, unlimited tries per day', () => {
-  mockStorage({ 'ccx:player-name': 'Admin' });
-  assert.equal(isUnlimited(), true);
-  const s = fresh();
-  finish(s, 'tier', 12, 20 * 60_000); // 240 minutes, 12 quizzes
-  for (let i = 0; i < 9; i++) openAttempt(s, { sub: 'x', tier: 'b', total: 10 });
-  assert.equal(capReached(s), false);
-  assert.equal(quizCapReached(s), false);
-  assert.equal(dayBlock(s, 'tier'), null);
-  assert.equal(triesUsedUp(s, 'x', 'b'), false);
-  assert.equal(attemptsLeft(s, 'x', 'b'), Infinity);
-  mockStorage({ 'ccx:player-name': 'Alyssa' });
-  assert.equal(isUnlimited(), false);
-  assert.equal(triesUsedUp(s, 'x', 'b'), true);
-  assert.equal(isUnlimited('Admin'), true);
+  try {
+    mockStorage({ 'ccx:player-name': 'Admin' });
+    assert.equal(isUnlimited(), true);
+    const s = fresh();
+    finish(s, 'tier', 12, 20 * 60_000); // 240 minutes, 12 quizzes
+    for (let i = 0; i < 9; i++) openAttempt(s, { sub: 'x', tier: 'b', total: 10 });
+    assert.equal(capReached(s), false);
+    assert.equal(quizCapReached(s), false);
+    assert.equal(dayBlock(s, 'tier'), null);
+    assert.equal(triesUsedUp(s, 'x', 'b'), false);
+    assert.equal(attemptsLeft(s, 'x', 'b'), Infinity);
+    mockStorage({ 'ccx:player-name': 'Alyssa' });
+    assert.equal(isUnlimited(), false);
+    assert.equal(triesUsedUp(s, 'x', 'b'), true);
+    assert.equal(isUnlimited('Admin'), true);
+  } finally {
+    mockStorage({});
+  }
+});
+
+test('beginQuiz is blocked at the cap and records nothing', () => {
   mockStorage({});
+  const s = fresh();
+  finish(s, 'tier', 10);
+  const n = s.attempts.length;
+  assert.equal(beginQuiz(s, 'tier', { sub: 'x', tier: 'b', total: 10 }), 'quizzes');
+  assert.equal(beginQuiz(s, 'paper', { total: 10 }), 'quizzes');
+  assert.equal(s.attempts.length, n);
+  assert.equal(beginQuiz(s, 'review', { total: 5 }), null); // review is exempt
+});
+
+test('a started paper counts toward the 10; an abandoned one still counts; finishing does not double-count', () => {
+  mockStorage({});
+  const s = fresh();
+  finish(s, 'tier', 8);
+  assert.equal(beginQuiz(s, 'paper', { total: 10 }), null);
+  assert.equal(quizzesToday(s), 9); // abandoned paper counts
+  assert.equal(beginQuiz(s, 'paper', { total: 10 }), null);
+  assert.equal(quizzesToday(s), 10);
+  finish(s, 'paper', 1); // finishing replaces one open record
+  assert.equal(quizzesToday(s), 10);
+  assert.equal(dayBlock(s, 'paper'), 'quizzes');
 });
 
 test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () => {
@@ -408,10 +436,13 @@ test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () 
 
 test('Admin: every tier is open with nothing cleared; a normal player is locked', () => {
   const s = fresh();
-  mockStorage({ 'ccx:player-name': 'Admin' });
-  assert.equal(tierOpen(s, 'x', 'c'), true);
-  assert.equal(tierOpen(s, 'x', 'i'), true);
-  mockStorage({ 'ccx:player-name': 'Alyssa' });
-  assert.equal(tierOpen(s, 'x', 'c'), false);
-  mockStorage({});
+  try {
+    mockStorage({ 'ccx:player-name': 'Admin' });
+    assert.equal(tierOpen(s, 'x', 'c'), true);
+    assert.equal(tierOpen(s, 'x', 'i'), true);
+    mockStorage({ 'ccx:player-name': 'Alyssa' });
+    assert.equal(tierOpen(s, 'x', 'c'), false);
+  } finally {
+    mockStorage({});
+  }
 });

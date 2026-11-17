@@ -36,7 +36,7 @@ const schools = SCHOOLS.map((s) => {
 </Base>
 
 <script>
-  import { load, today, liveStreak, capReached, quizCapReached, blockMessage, isDue, TIERS } from '../../lib/store';
+  import { load, today, liveStreak, dayBlock, blockMessage, isDue, TIERS } from '../../lib/store';
   const s = load();
   const t = today(s);
   document.getElementById('goal')!.textContent =
@@ -46,11 +46,11 @@ const schools = SCHOOLS.map((s) => {
   document.getElementById('streak')!.textContent = st ? `${st}-week streak` : 'Meet your goal on 4 days this week to start a streak';
   const due = Object.keys(s.questions).filter((id) => isDue(s, id)).length;
   const review = document.getElementById('review') as HTMLAnchorElement;
-  if (due && !capReached(s)) { review.hidden = false; review.textContent = `Daily Review (${Math.min(due, 5)} questions)`; }
+  if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = `Daily Review (${Math.min(due, 5)} questions)`; }
   const doneEl = document.getElementById('done')!;
-  const reason = capReached(s) ? 'time' : quizCapReached(s) ? 'quizzes' : null;
+  const reason = dayBlock(s, 'tier');
   doneEl.hidden = !reason;
-  if (reason) doneEl.textContent = `${blockMessage(reason)} You can still browse the Codex and your cards.`;
+  if (reason) doneEl.textContent = reason === 'time' ? `${blockMessage(reason)} You can still browse the Codex and your cards.` : blockMessage(reason);
   document.querySelectorAll<HTMLElement>('.school-progress').forEach((el) => {
     const subs: string[] = JSON.parse(el.dataset.subs!);
     const cleared = subs.reduce((n, id) => n + TIERS.filter((k) => s.progress[id]?.[k]?.cleared).length, 0);

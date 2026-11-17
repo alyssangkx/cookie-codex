@@ -44,12 +44,12 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 </Base>
 
 <script>
-  import { load, tierState, tierOpen, triesUsedUp, capReached, quizCapReached, blockMessage, minutesFor, actualReward, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, type Tier } from '../../../lib/store';
   const s = load();
   const root = document.querySelector<HTMLElement>('.sub-page')!;
   const sub = root.dataset.sub!;
   const tries = Number(root.dataset.tries);
-  const reason = capReached(s) ? 'time' : quizCapReached(s) ? 'quizzes' : null;
+  const reason = dayBlock(s, 'tier');
   const playable = Object.fromEntries([...root.querySelectorAll<HTMLElement>('.tier-card')].map((c) => [c.dataset.tier, c.dataset.playable === 'true'])) as Record<Tier, boolean>;
   const capEl = document.getElementById('cap')!;
   capEl.hidden = !reason;
@@ -68,7 +68,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
     else msg.textContent = st.mastered ? `${st.mastered} of ${st.total} questions mastered. Keep going!` : 'Ready when you are.';
     if (!block && triesUsedUp(s, sub, t)) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
-    if (!block && reason) block = reason === 'time' ? "Done for today: you've reached today's training time." : "Done for today: you've done 10 quizzes.";
+    if (!block && reason) block = blockMessage(reason);
     if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
   });
 </script>

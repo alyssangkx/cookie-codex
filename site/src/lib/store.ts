@@ -87,7 +87,8 @@ export const migrations: Record<number, (s: any) => any> = {
   // Consequence: an already fully-retired tier clears only after its next quiz, not at load time
   // (deliberately no load-time sync).
   2: (s) => s,
-  // 3 -> 4: the default daily cap rose from 45 to 120 minutes. Only the old default (exactly 45) moves;
+  // 3 -> 4: the default daily cap rose from 45 to 120 minutes (deliberate: the owner asked for a 2-hour cap
+  // for the existing child). Only the old default (exactly 45) moves;
   // any other value was chosen by a parent and stays.
   3: (s) => (s.settings?.dailyCapMin === 45 ? { ...s, settings: { ...s.settings, dailyCapMin: DEFAULT_CAP_MIN } } : s),
 };
@@ -230,7 +231,14 @@ export const today = (s: SaveV1) => s.days[dayKey()] ?? { quizzes: 0, min: 0, co
  * the signed-in profile's name (login stores it in kv `player-name`). A name-based check is deliberate:
  * signing in as Admin needs its PIN. `name` is injectable for tests.
  */
-export const isUnlimited = (name: string | null = kv.get('player-name')) => name === 'Admin';
+let adminCache: boolean | undefined;
+export const isUnlimited = (name?: string | null) => {
+  if (name !== undefined) return name === 'Admin';
+  // Read once per page load. Login and logout both navigate, so the page reloads and the cache is fresh.
+  return (adminCache ??= kv.get('player-name') === 'Admin');
+};
+/** Tests only: forget the cached player name. */
+export const resetUnlimitedCache = () => { adminCache = undefined; };
 
 /** Time cap: today's minutes have reached the parent's daily limit. Daily Review is blocked too. */
 export const capReached = (s: SaveV1) => !isUnlimited() && today(s).min >= s.settings.dailyCapMin;
@@ -249,7 +257,7 @@ export function dayBlock(s: SaveV1, mode: Attempt['mode']): 'time' | 'quizzes' |
 }
 export const blockMessage = (r: 'time' | 'quizzes') =>
   r === 'time' ? "Done for today! You have reached today's training time. Come back tomorrow."
-    : `Done for today! You've done ${DAILY_QUIZ_CAP} quizzes today. Come back tomorrow.`;
+    : `${DAILY_QUIZ_CAP} quizzes done today. Daily Review is still open.`;
 export const goalMet = (s: SaveV1) => today(s).quizzes >= s.settings.dailyGoalQuizzes;
 
 /** Goal-met days (YYYY-MM-DD), judged against the current daily goal. */
@@ -324,12 +332,27 @@ export const triesUsedUp = (s: SaveV1, sub: string, t: Tier) => !isUnlimited() &
 export const attemptsToday = (s: SaveV1, sub: string, t: Tier) =>
   s.attempts.filter((a) => a.mode === 'tier' && a.sub === sub && a.tier === t && dayKey(a.ts) === dayKey()).length;
 
-/** Record a tier quiz as started, so walking away still uses one of the daily tries. */
-export function openAttempt(s: SaveV1, a: { sub: string; tier: Tier; total: number }, now = Date.now()) {
-  s.attempts.push({ ts: now, mode: 'tier', sub: a.sub, tier: a.tier, score: 0, total: a.total, ms: 0, tags: [], open: true });
+/** Record a tier quiz or practice paper as started, so walking away still uses one of the daily tries
+ *  (tier) and counts toward the daily quiz cap (tier and paper). */
+export function openAttempt(
+  s: SaveV1, a: { mode?: 'tier' | 'paper'; sub?: string; tier?: Tier; total: number }, now = Date.now(),
+) {
+  s.attempts.push({ ts: now, mode: a.mode ?? 'tier', sub: a.sub, tier: a.tier, score: 0, total: a.total, ms: 0, tags: [], open: true });
 }
-const dropOpen = (s: SaveV1, sub?: string, tier?: Tier) => {
-  const i = s.attempts.findLastIndex((x) => x.open && x.sub === sub && x.tier === tier);
+/**
+ * Start a quiz: re-checks the daily block (the page may have sat open past the cap) and, for tier quizzes and
+ * papers, records the open attempt. Returns the block reason and records nothing when blocked.
+ */
+export function beginQuiz(
+  s: SaveV1, mode: Attempt['mode'], a: { sub?: string; tier?: Tier; total: number }, now = Date.now(),
+): 'time' | 'quizzes' | null {
+  const b = dayBlock(s, mode);
+  if (b) return b;
+  if (mode === 'tier' || mode === 'paper') openAttempt(s, { mode, ...a }, now);
+  return null;
+}
+const dropOpen = (s: SaveV1, mode: Attempt['mode'], sub?: string, tier?: Tier) => {
+  const i = s.attempts.findLastIndex((x) => x.open && x.mode === mode && x.sub === sub && x.tier === tier);
   if (i >= 0) s.attempts.splice(i, 1);
 };
 
@@ -362,7 +385,7 @@ export function finishQuiz(
 ): QuizResult {
   const key = dayKey(now);
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
-  if (a.mode === 'tier') dropOpen(s, a.sub, a.tier);
+  if (a.mode === 'tier' || a.mode === 'paper') dropOpen(s, a.mode, a.sub, a.tier);
   // "First" = no other Basic attempt for this sub at all, finished OR abandoned (this quiz's own open record
   // was dropped above). Counting abandoned tries closes the "quit after a mistake, retry until perfect" loophole.
   const firstEver = a.mode === 'tier' && a.tier === 'b' && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && x.sub === a.sub && x.tier === 'b');

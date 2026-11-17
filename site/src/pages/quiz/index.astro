@@ -47,7 +47,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
 <script>
   import { MIN_POOL,
-    load, save, answer, finishQuiz, openAttempt, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
+    load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
   import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
@@ -173,9 +173,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   function begin() {
     if (!quiz.length) return; // nothing to play (locked, capped or empty tier)
+    // re-check the daily block right before starting: the page may have been open since before the cap was reached
+    const s0 = load();
+    const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined, total: quiz.length });
+    if (blocked) { quiz = []; return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>'); }
+    save(s0);
     i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
     inQuiz = new Set(quiz);
-    if (mode === 'tier') { const s0 = load(); openAttempt(s0, { sub: subId, tier, total: quiz.length }); save(s0); }
     startedAt = Date.now();
     deadline += startedAt;
     tick = window.setInterval(clock, 250);
