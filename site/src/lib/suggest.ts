@@ -1,10 +1,11 @@
 // Pure logic for the "What do you want to train today?" page: power numbers and the
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
-import { TIERS, TIER_NAME, ATTEMPTS_PER_DAY, tierState, tierOpen, attemptsToday, capReached, dayKey, isDue, type SaveV1, type Tier } from './store.ts';
+import { TIERS, TIER_NAME, triesPerDay, tierState, tierOpen, attemptsToday, capReached, dayKey, isDue, type SaveV1, type Tier } from './store.ts';
 
 export interface SubInfo {
   id: string; topic: string; topicName: string; name: string; slug: string;
   playable: Record<Tier, boolean>;
+  count?: Record<Tier, number>; // questions per tier, for the "N of M mastered" wording
 }
 export interface Suggestion {
   kind: 'review' | 'one-more' | 'weak' | 'next' | 'done';
@@ -78,9 +79,8 @@ export function suggestions(
   if (capReached(s))
     return [{ kind: 'done', title: 'Done for today!', reason: "You have used today's training time. See your cards and come back tomorrow.", href: '/collection/' }];
 
-  const today = dayKey(ctx.now);
   const canStart = (sub: SubInfo, t: Tier) =>
-    sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && attemptsToday(s, sub.id, t) < ATTEMPTS_PER_DAY;
+    sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && attemptsToday(s, sub.id, t) < triesPerDay(sub.id);
   const taken = new Set<string>();
   const out: Suggestion[] = [];
   const add = (x: Suggestion) => {
@@ -97,16 +97,16 @@ export function suggestions(
       href: '/quiz/?mode=review',
     });
 
-  // 2. One more pass: exactly 1 pass, not cleared, last pass before today
+  // 2. Keep going: a tier that is part-mastered (at least 1 question mastered, not cleared)
   for (const sub of subs) {
     const hit = TIERS.find((t) => {
       const st = tierState(s, sub.id, t);
-      return canStart(sub, t) && !st.cleared && st.passes.length === 1 && st.passes[st.passes.length - 1] < today;
+      return canStart(sub, t) && !st.cleared && (st.mastered ?? 0) > 0;
     });
     if (hit) {
       add({
-        kind: 'one-more', title: `One more pass! ${sub.name}`, sub: sub.id, tier: hit,
-        reason: `${TIER_NAME[hit]}: you passed once. Pass again to clear it.`, href: tierHref(sub.id, hit),
+        kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
+        reason: `${TIER_NAME[hit]}: ${tierState(s, sub.id, hit).mastered} of ${sub.count?.[hit] ?? tierState(s, sub.id, hit).total} questions mastered.`, href: tierHref(sub.id, hit),
       });
       break;
     }

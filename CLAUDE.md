@@ -27,9 +27,10 @@ python3 scripts/quiz/test_stable_ids.py   # a reworded stem keeps its id
 python3 scripts/quiz/check_math.py        # must print "0 failures": re-solves every question independently
 python3 scripts/quiz/coverage.py          # top-school question types covered -> docs/quiz/coverage.md
 python3 scripts/quiz/build_rewards.py     # card reward per (sub-topic, tier) -> site/src/data/rewards.json
+python3 scripts/quiz/build_progression.py # P1-P5 sub-topics (tries per day) -> site/src/data/progression.json
 ```
 
-After changing generators, run build → check_math → coverage → build_rewards. The rewards depend on which sub-topics have questions.
+After changing generators, run build → check_math → coverage → build_rewards → build_progression. The rewards depend on which sub-topics have questions.
 
 Cookie data refresh (needs `requests`; both scripts hit live sites with a delay per cookie):
 
@@ -63,15 +64,17 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 
 ### Game (`site/src/lib/`)
 
-- **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 2`). Never read or write storage directly. Rules it implements:
-  - A pass is ≥ 80% on a full 10-question tier quiz. Two passes on different days clear the tier and award its card; a duplicate card adds a star.
+- **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 3`). Never read or write storage directly. Rules it implements:
+  - **Clearing is mastery.** A tier is cleared when every question in it is retired (`questions[id].s === 0`), for all tiers (P1-P6, Math and Chinese). A question answered right the first time retires at once; a wrong one retires after its 1, 3, 7 day retests are answered right. The score and the ≥ 80% pass flag on a full 10-question quiz are kept for display only. `store.ts` has no question ids, so `finishQuiz(..., tierIds)` takes a `"sub|tier" -> ids` map from the quiz page (which has the banks loaded) and `syncTiers()` stores `mastered`/`total` on the tier state and clears a tier when they match, awarding its card (a duplicate adds a star). Other pages show `mastered` of the build-time question count. A cleared tier is never un-cleared. A Daily Review can clear a tier too (`newlyCleared`).
+  - **Tries per tier per day** depend on the sub-topic's P-level (highest outcome `level` in the syllabus JSON): 5 for P1-P5, 3 for P6 and all Chinese (`triesPerDay(sub)`). `site/src/data/progression.json` (from `scripts/quiz/build_progression.py`, run after `build_rewards.py`) lists only the P1-P5 sub-topics, so `store.ts` imports no big JSON; an unlisted sub-topic counts as P6. The daily cap is a parent setting, 45 to 120 minutes in steps of 15.
   - Spaced retest: a wrong answer is due again in 1, then 3, then 7 days; a new question answered correctly retires at once.
   - Practice papers never retire questions.
-  - A started quiz counts toward the 3 tries per day.
+  - A started quiz counts toward the daily tries (5 for P1-P5, 3 for P6).
   - The daily cap and goal.
   - The streak counts weeks with 4 or more goal days, so weekends never break it.
   - Card power reflects retention.
   - `migrations` runs on `load()` and `importCode()`. Add a new step there for every schema bump.
+    - 2→3 changes no field: every already-cleared tier stays cleared with its card. A tier whose questions are all retired but not yet marked is cleared lazily, by `syncTiers()` at the end of the next quiz that touches it (the ids come from the quiz page).
     - 1→2 keeps progress, cards, attempts, days, streak and settings, and clears `questions` (old stem-hash ids cannot be matched).
     - `load()` copies the pre-migration save string to `ccx:backup`.
     - If a save is unreadable or a migration fails (no step, or a throw), `load()` keeps the raw string in `ccx:failed:1..3` before returning `fresh()`, and leaves `ccx:save` alone until a real save. A string already stored is not added again; when all 3 slots are full they rotate (2 to 1, 3 to 2, new into 3) so the newest broken save is kept; a legacy `ccx:failed` key is folded into the slots once and removed. Recover a save by copying a slot's value back into `ccx:save`.

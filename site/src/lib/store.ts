@@ -1,11 +1,15 @@
 // Client-side save (docs/game-design.md section 8). Every page reads and writes progress
 // through this module, so a backend can replace localStorage later.
+import progression from '../data/progression.json' with { type: 'json' };
+
 export type School = 'math' | 'science' | 'english' | 'chinese';
 export type Tier = 'b' | 'i' | 'c';
 export const TIERS: Tier[] = ['b', 'i', 'c'];
 export const TIER_NAME: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', c: 'Competent' };
 
-export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean };
+// passes/scores/best are history for display only; `cleared` is set by syncTiers (all questions retired).
+// mastered/total are the last count seen when a quiz ended.
+export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number };
 // s: 0 retired, 1-3 retest step (due in 1, 3, 7 days)
 export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number };
 export interface Attempt {
@@ -13,9 +17,9 @@ export interface Attempt {
   score: number; total: number; ms: number; tags: string[];
   open?: boolean; // started but not finished: still counts as a try
 }
-// The interface keeps its v1 name so imports stay unchanged; schemaVersion is now 2 (see `migrations`).
+// The interface keeps its v1 name so imports stay unchanged; schemaVersion is now 3 (see `migrations`).
 export interface SaveV1 {
-  schemaVersion: 2;
+  schemaVersion: 3;
   createdAt: number;
   settings: {
     dailyCapMin: number; dailyGoalQuizzes: number;
@@ -32,17 +36,29 @@ export interface SaveV1 {
 
 const KEY = 'ccx:save';
 const BACKUP_KEY = 'ccx:backup'; // copy of a save taken just before a migration rewrites it
-export const SCHEMA = 2;
+export const SCHEMA = 3;
 const DAY = 86_400_000;
 const STEP_DAYS = [0, 1, 3, 7];
 export const TIER_MIN: Record<Tier, number> = { b: 12, i: 15, c: 20 };
 export const PASS = 0.8;
 export const QUIZ_SIZE = 10; // a pass needs a full 10-question quiz
 export const WEEK_GOAL_DAYS = 4; // a streak week needs 4 goal days; rest days never break it
-export const ATTEMPTS_PER_DAY = 3;
+export const ATTEMPTS_PER_DAY = 3; // tries per tier per day for P6 sub-topics (and any sub-topic with no listed P-level)
+export const ATTEMPTS_PER_DAY_LOW = 5; // P1-P5 sub-topics
+
+// P-level rule: tries per tier per day depend on the sub-topic's P-level (highest outcome level in the
+// syllabus JSON). The generated progression.json (scripts/quiz/build_progression.py) lists only the P1-P5
+// sub-topics, so store.ts never imports the big syllabus; an unlisted sub-topic (all P6, all Chinese)
+// counts as P6. Clearing does not depend on the level: every tier clears when all its questions are mastered.
+let levels: Record<string, number> = progression.levels;
+/** Tests replace the map; pages never need to. */
+export function setProgression(l: Record<string, number>) { levels = l; }
+export const subLevel = (sub: string) => levels[sub] ?? 6;
+export const isLow = (sub: string) => subLevel(sub) <= 5;
+export const triesPerDay = (sub: string) => (isLow(sub) ? ATTEMPTS_PER_DAY_LOW : ATTEMPTS_PER_DAY);
 
 export const fresh = (): SaveV1 => ({
-  schemaVersion: 2,
+  schemaVersion: 3,
   createdAt: Date.now(),
   settings: { dailyCapMin: 45, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: '' },
   progress: {}, questions: {}, cards: {}, attempts: [], days: {},
@@ -61,6 +77,11 @@ export const migrations: Record<number, (s: any) => any> = {
   // 1 -> 2: question ids were stem hashes, now they hash topic | template | params. No alias map
   // (the site was never deployed with v1 saves), so retest states are cleared; everything else stays.
   1: (s) => ({ ...s, questions: {} }),
+  // 2 -> 3: tiers clear by mastery (every question retired) instead of two passes. A cleared tier stays
+  // cleared and keeps its card (nothing is ever taken away). A tier whose questions are all retired but
+  // not yet marked is cleared lazily: store.ts has no question ids, so syncTiers() runs at the end of the
+  // next quiz that touches the tier (the quiz page passes the ids). Saves need no field changes.
+  2: (s) => s,
 };
 
 /** Run every migration from the save's version up to SCHEMA. Does not touch storage. */
@@ -257,10 +278,11 @@ export function tierOpen(s: SaveV1, sub: string, t: Tier, playable?: Record<Tier
   return true;
 }
 
+export const attemptsLeft = (s: SaveV1, sub: string, t: Tier) => Math.max(0, triesPerDay(sub) - attemptsToday(s, sub, t));
 export const attemptsToday = (s: SaveV1, sub: string, t: Tier) =>
   s.attempts.filter((a) => a.mode === 'tier' && a.sub === sub && a.tier === t && dayKey(a.ts) === dayKey()).length;
 
-/** Record a tier quiz as started, so walking away still uses one of the 3 daily tries. */
+/** Record a tier quiz as started, so walking away still uses one of the daily tries. */
 export function openAttempt(s: SaveV1, a: { sub: string; tier: Tier; total: number }, now = Date.now()) {
   s.attempts.push({ ts: now, mode: 'tier', sub: a.sub, tier: a.tier, score: 0, total: a.total, ms: 0, tags: [], open: true });
 }
@@ -276,18 +298,23 @@ export interface QuizResult {
   cleared: boolean;
   reward: { slug: string; dup: boolean; stars: number } | null;
   goalJustMet: boolean;
+  newlyCleared: { sub: string; tier: Tier; reward: QuizResult['reward'] }[];
 }
 
 /**
- * Record a finished quiz. Tier quizzes: >= 80% is a pass; two passes on different days clear the
- * tier and award its fixed card (a duplicate adds a star, max 5). Review quizzes count toward the
- * daily goal but never toward a pass.
+ * Record a finished quiz (answer() has already been called for each question). A tier quiz scoring >= 80%
+ * on a full 10 is still logged as a pass, but only for display. A tier is cleared when every one of its
+ * questions is retired (mastered): `tierIds` maps "sub|tier" to that tier's question ids, which the quiz
+ * page knows and store.ts does not. syncTiers() then marks tiers cleared and awards the fixed card (a
+ * duplicate adds a star, max 5). `cleared`/`reward` describe the quiz's own tier; `newlyCleared` lists
+ * every tier this call cleared (a Daily Review can retire the last question of another tier).
  */
 export function finishQuiz(
   s: SaveV1,
   a: Omit<Attempt, 'ts'>,
   rewardFor: RewardFor,
   now = Date.now(),
+  tierIds: Record<string, string[]> = {},
 ): QuizResult {
   const key = dayKey(now);
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
@@ -313,16 +340,34 @@ export function finishQuiz(
       if (!st.passes.includes(key)) st.passes.push(key);
     }
     (s.progress[a.sub] ??= {})[a.tier] = st;
-    if (!st.cleared && st.passes.length >= 2) {
-      cleared = true;
-      reward = award(s, a.sub, a.tier, rewardFor, now);
-    }
   }
+  const newlyCleared = syncTiers(s, tierIds, rewardFor, now);
+  const own = newlyCleared.find((x) => x.sub === a.sub && x.tier === a.tier);
+  if (own) { cleared = true; reward = own.reward; }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
   if (d.quizzes >= s.settings.dailyGoalQuizzes) d.goal = true;
   if (goalJustMet) bumpStreak(s, now);
-  return { passed, cleared, reward, goalJustMet };
+  return { passed, cleared, reward, goalJustMet, newlyCleared };
+}
+
+/**
+ * Count mastered (retired) questions for each tier in `tierIds` ("sub|tier" -> ids), store the count, and
+ * clear a tier whose questions are all retired, awarding its card. A cleared tier is never un-cleared, even
+ * if a question later slips back to retest. Returns the tiers cleared by this call.
+ */
+export function syncTiers(s: SaveV1, tierIds: Record<string, string[]>, rewardFor: RewardFor, now = Date.now()): QuizResult['newlyCleared'] {
+  const out: QuizResult['newlyCleared'] = [];
+  for (const [key, ids] of Object.entries(tierIds)) {
+    const [sub, tier] = key.split('|') as [string, Tier];
+    if (!ids.length) continue;
+    const st = tierState(s, sub, tier);
+    st.total = ids.length;
+    st.mastered = ids.filter((id) => isRetired(s, id)).length;
+    (s.progress[sub] ??= {})[tier] = st;
+    if (!st.cleared && st.mastered === st.total) out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now) });
+  }
+  return out;
 }
 
 type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | undefined;
@@ -335,7 +380,7 @@ function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor, now = Date
   const r = rewardFor(sub, t);
   if (!r) return null;
   const top2 = [...st.scores].sort((x, y) => y - x).slice(0, 2);
-  const acc = top2.length ? Math.round(top2.reduce((x, y) => x + y, 0) / top2.length) : 100;
+  const acc = top2.length ? Math.round(top2.reduce((x, y) => x + y, 0) / top2.length) : st.best || 100;
   const card = s.cards[r.slug];
   if (card) card.stars = Math.min(5, card.stars + 1);
   else s.cards[r.slug] = { stars: 1, srcSub: sub, srcTier: t, acc, last: now };

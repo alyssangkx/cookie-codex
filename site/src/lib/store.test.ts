@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, load, importCode, exportCode } from './store.ts';
+import { setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -22,21 +22,40 @@ test('spaced retest: wrong -> 1, 3, 7 days -> retired; wrong at any step resets'
   assert.equal(s.questions.b.s, 0);
 });
 
-test('two passes on different days clear the tier and award the card; a duplicate adds a star', () => {
+test('a tier clears only when all its ids are retired; a wrong answer delays it; a duplicate card adds a star', () => {
   const s = fresh();
   const reward = () => ({ slug: 'muscle-cookie', dup: false });
-  const q = { mode: 'tier' as const, sub: 'x', tier: 'b' as const, total: 10, ms: 600_000, tags: [] };
-  assert.equal(finishQuiz(s, { ...q, score: 9 }, reward, t0).cleared, false);
-  assert.equal(finishQuiz(s, { ...q, score: 10 }, reward, t0 + 3600_000).cleared, false); // same day
-  assert.equal(finishQuiz(s, { ...q, score: 7 }, reward, t0 + DAY).passed, false); // 70% fails
-  const r = finishQuiz(s, { ...q, score: 8 }, reward, t0 + DAY);
+  const ids = ['q1', 'q2', 'q3'];
+  const tierIds = { 'x|b': ids };
+  const q = { mode: 'tier' as const, sub: 'x', tier: 'b' as const, total: 10, ms: 600_000, tags: [], score: 9 };
+  answer(s, 'q1', true, t0); answer(s, 'q2', false, t0); answer(s, 'q3', true, t0);
+  let r = finishQuiz(s, q, reward, t0, tierIds);
+  assert.equal(r.cleared, false); // q2 is wrong: not retired yet
+  assert.deepEqual([s.progress.x.b.mastered, s.progress.x.b.total], [2, 3]);
+  answer(s, 'q2', true, t0 + DAY); // step 2 (due in 3 days): still not retired
+  assert.equal(finishQuiz(s, q, reward, t0 + DAY, tierIds).cleared, false);
+  answer(s, 'q2', true, t0 + 4 * DAY);
+  assert.equal(finishQuiz(s, q, reward, t0 + 4 * DAY, tierIds).cleared, false); // step 3
+  answer(s, 'q2', true, t0 + 11 * DAY);
+  r = finishQuiz(s, { ...q, score: 3 }, reward, t0 + 11 * DAY, tierIds); // a low score does not matter
   assert.ok(r.cleared);
   assert.deepEqual(r.reward, { slug: 'muscle-cookie', dup: false, stars: 1 });
-  assert.equal(s.cards['muscle-cookie'].acc, 95); // best two passes: 100, 90
+  assert.equal(r.newlyCleared.length, 1);
+  assert.equal(finishQuiz(s, q, reward, t0 + 12 * DAY, tierIds).cleared, false); // already cleared: no second award
+  assert.equal(s.cards['muscle-cookie'].stars, 1);
+  // a cleared tier is never un-cleared by a later wrong answer
+  answer(s, 'q1', false, t0 + 13 * DAY);
+  finishQuiz(s, q, reward, t0 + 13 * DAY, tierIds);
+  assert.equal(s.progress.x.b.cleared, true);
   assert.equal(power({ acc: 95, stars: 2, last: t0 }, t0), 100);
   assert.equal(power({ acc: 80, stars: 1, last: t0 }, t0 + 5 * 7 * DAY), 70); // 2 idle weeks past 3: -10
-  // a short quiz never passes, even at 100%
-  assert.equal(finishQuiz(s, { ...q, sub: 'z', score: 5, total: 5 }, reward, t0).passed, false);
+  // a duplicate card adds a star
+  const s2 = fresh();
+  answer(s2, 'r1', true, t0);
+  finishQuiz(s2, { ...q, sub: 'y' }, reward, t0, { 'y|b': ['r1'] });
+  answer(s2, 'r2', true, t0);
+  const d = finishQuiz(s2, { ...q, sub: 'z' }, () => ({ slug: 'muscle-cookie', dup: true }), t0, { 'z|b': ['r2'] });
+  assert.equal(d.reward?.stars, 2);
   // papers do not retire new questions
   answer(s, 'p', true, t0, false);
   assert.equal(s.questions.p, undefined);
@@ -107,14 +126,14 @@ test('v1 -> v2 keeps cards, progress and streak, clears questions, backs up the 
   const v1 = v1Save();
   const data = mockStorage({ 'ccx:save': JSON.stringify(v1) });
   const s = load();
-  assert.equal(s.schemaVersion, 2);
+  assert.equal(s.schemaVersion, 3);
   assert.deepEqual(s.questions, {});
   assert.deepEqual(s.cards, v1.cards);
   assert.deepEqual(s.progress, v1.progress);
   assert.deepEqual(s.streak, v1.streak);
   assert.equal(s.settings.playerName, 'Kept');
   assert.deepEqual(JSON.parse(data['ccx:backup']), v1);
-  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 2);
+  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 3);
 });
 
 test('a v2 save loads untouched and writes no backup', () => {
@@ -129,7 +148,7 @@ test('a failed migration preserves the raw save in ccx:failed:1 and leaves ccx:s
   const raw = JSON.stringify({ ...fresh(), schemaVersion: 0 }); // no migration from 0
   const data = mockStorage({ 'ccx:save': raw });
   const s = load();
-  assert.equal(s.schemaVersion, 2);
+  assert.equal(s.schemaVersion, 3);
   assert.deepEqual(s.cards, {});
   assert.equal(data['ccx:failed:1'], raw);
   assert.equal(data['ccx:failed:2'], undefined);
@@ -138,7 +157,7 @@ test('a failed migration preserves the raw save in ccx:failed:1 and leaves ccx:s
 });
 
 test('two loads of the same broken save write ccx:failed:1 once and create no extra keys', () => {
-  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: 3 })]) {
+  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: 4 })]) {
     const data = mockStorage({ 'ccx:save': raw, 'ccx:backup': 'old-backup' });
     let writes = 0;
     const set = (localStorage as any).setItem;
@@ -182,11 +201,47 @@ test('a legacy ccx:failed key is deduped against, folded into the slots once, th
 test('importCode migrates a v1 code, refuses a newer one, and writes no backup', async () => {
   const data = mockStorage({ 'ccx:save': 'current-save' });
   const s = await importCode(await exportCode(v1Save() as any));
-  assert.equal(s.schemaVersion, 2);
+  assert.equal(s.schemaVersion, 3);
   assert.deepEqual(s.questions, {});
   assert.equal(data['ccx:backup'], undefined);
   assert.equal(data['ccx:save'], 'current-save');
-  const newer: any = { ...fresh(), schemaVersion: 3 };
+  const newer: any = { ...fresh(), schemaVersion: 4 };
   await assert.rejects(importCode(await exportCode(newer)), /newer version/);
   assert.equal(data['ccx:backup'], undefined);
+});
+
+// ---- P-level progression: P1-P5 clear on one pass with 5 tries a day; P6 keeps 2 passes and 3 tries
+// ---- P-level tries: P1-P5 get 5 tries a day per tier, P6 keeps 3
+setProgression({ 'p5-sub': 5, 'p4-sub': 4 });
+
+test('a P5 tier allows 5 tries a day; a P6 (or unlisted) tier allows 3', () => {
+  const s = fresh();
+  for (let i = 0; i < 3; i++) { openAttempt(s, { sub: 'p5-sub', tier: 'b', total: 10 }); openAttempt(s, { sub: 'p6-sub', tier: 'b', total: 10 }); }
+  assert.equal(triesPerDay('p5-sub'), 5);
+  assert.equal(triesPerDay('p6-sub'), 3);
+  assert.equal(attemptsLeft(s, 'p5-sub', 'b'), 2);
+  assert.equal(attemptsLeft(s, 'p6-sub', 'b'), 0);
+  openAttempt(s, { sub: 'p5-sub', tier: 'b', total: 10 }); openAttempt(s, { sub: 'p5-sub', tier: 'b', total: 10 });
+  assert.equal(attemptsLeft(s, 'p5-sub', 'b'), 0);
+});
+
+test('migration 2 -> 3 keeps cleared tiers, cards and everything else', () => {
+  const v2: any = fresh();
+  v2.schemaVersion = 2;
+  v2.questions = { q1: { s: 1, due: t0, w: 1 } };
+  v2.settings.playerName = 'Kept';
+  v2.progress = {
+    'p4-sub': { b: { passes: ['2026-11-14', '2026-11-15'], scores: [90, 90], best: 90, cleared: true } },
+    'p6-sub': { b: { passes: ['2026-11-15'], scores: [90], best: 90, cleared: false } },
+  };
+  v2.cards = { 'muscle-cookie': { stars: 1, srcSub: 'p4-sub', srcTier: 'b', acc: 90 } };
+  const before = JSON.stringify(v2);
+  const s = migrate(v2);
+  assert.equal(JSON.stringify(v2), before);
+  assert.equal(s.schemaVersion, 3);
+  assert.equal(s.progress['p4-sub'].b.cleared, true);
+  assert.equal(s.progress['p6-sub'].b.cleared, false); // lazily judged from its questions at the next quiz
+  assert.deepEqual(s.cards, v2.cards);
+  assert.deepEqual(s.questions, v2.questions);
+  assert.equal(s.settings.playerName, 'Kept');
 });

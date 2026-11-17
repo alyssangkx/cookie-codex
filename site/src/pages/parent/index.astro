@@ -20,7 +20,7 @@ const data = {
     <div id="content" hidden>
       <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
       <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Mastery: Math</h2>
-        <p class="note">Each tier needs two passes (80% or more) on different days to clear.</p>
+        <p class="note">A tier clears when every question in it is mastered (answered right first time, or right after its 1, 3 and 7 day retests). P1 to P5 topics allow 5 tries a day per tier; P6 topics allow 3.</p>
         <div id="mastery"></div></section>
       <section class="panel" aria-labelledby="h-days"><h2 id="h-days">Last 14 days</h2><div id="days" class="scroll"></div></section>
       <section class="panel" aria-labelledby="h-mis"><h2 id="h-mis">Most common mistakes</h2><div id="mistakes"></div></section>
@@ -28,7 +28,7 @@ const data = {
       <section class="panel" aria-labelledby="h-set"><h2 id="h-set">Settings</h2>
         <div class="fields">
           <label for="cap">Daily cap (minutes)</label>
-          <input id="cap" type="number" min="15" max="90" step="5" inputmode="numeric" />
+          <input id="cap" type="number" min="45" max="120" step="15" inputmode="numeric" />
           <label for="goal">Daily goal (quizzes)</label>
           <input id="goal" type="number" min="1" max="5" step="1" inputmode="numeric" />
           <label class="check" for="extra"><input id="extra" type="checkbox" /> Extra time (×1.5, for accessibility)</label>
@@ -153,7 +153,7 @@ const data = {
           if (sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
           const ts = tierState(s, sub.id, t);
           if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
-          else if (ts.passes.length > 0) html += `<div class="cell prog">${name}<small>Passes ${ts.passes.length}/2, best ${ts.best}%</small></div>`;
+          else if (ts.mastered) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
           else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
         }
         html += '</div></div>';
@@ -245,7 +245,7 @@ const data = {
     };
     const commit = () => {
       s = load();
-      s.settings.dailyCapMin = clamp(cap.value, 15, 90, 5, s.settings.dailyCapMin);
+      s.settings.dailyCapMin = clamp(cap.value, 45, 120, 15, s.settings.dailyCapMin);
       s.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, s.settings.dailyGoalQuizzes);
       s.settings.extraTime = extra.checked;
       if (psle.value) s.settings.psleDate = psle.value;

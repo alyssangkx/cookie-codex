@@ -14,7 +14,7 @@ const clear = (s: SaveV1, sub: string, t: Tier) => {
   (s.progress[sub] ??= {})[t] = { passes: [PAST, PAST + 'x'], scores: [90, 90], best: 90, cleared: true };
 };
 const onePass = (s: SaveV1, sub: string, t: Tier, day = PAST) => {
-  (s.progress[sub] ??= {})[t] = { passes: [day], scores: [80], best: 80, cleared: false };
+  (s.progress[sub] ??= {})[t] = { passes: [day], scores: [80], best: 80, cleared: false, mastered: 5, total: 20 };
 };
 const tierAttempt = (s: SaveV1, sub: string, tier: Tier, score: number, ageDays = 1, total = 10) =>
   s.attempts.push({ ts: NOW - ageDays * DAY, mode: 'tier', sub, tier, score, total, ms: 1000, tags: [] });
@@ -77,16 +77,15 @@ test('dueCount uses isDue and the optional question map', () => {
   assert.equal(dueCount(s, NOW, { q1: 'math-a' }), 1);
 });
 
-test('one more pass: 1 pass on an earlier day, not today', () => {
+test('keep going: a part-mastered tier is suggested with N of M mastered', () => {
   const subs = [mk('math-a', 't'), mk('math-b', 't')];
   const s = real(); clear(s, 'math-a', 'b'); onePass(s, 'math-b', 'b');
   const r = run(s, subs);
   assert.equal(r[0].kind, 'one-more');
   assert.equal(r[0].sub, 'math-b');
-  const t = real(); onePass(t, 'math-a', 'b', TODAY);
-  assert.ok(!run(t, subs).some((x) => x.kind === 'one-more'));
-  const u = real(); u.progress['math-a'] = { b: { passes: [PAST, PAST + 'x'], scores: [], best: 0, cleared: false } };
-  assert.ok(!run(u, subs).some((x) => x.kind === 'one-more'));
+  assert.match(r[0].reason, /5 of 20 questions mastered/);
+  const u = real(); u.progress['math-a'] = { b: { passes: [], scores: [], best: 0, cleared: false } };
+  assert.ok(!run(u, subs).some((x) => x.kind === 'one-more')); // nothing mastered yet
 });
 
 test('weak spot: lowest accuracy in 14 days, at least 10 answered, states accuracy', () => {

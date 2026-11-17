@@ -11,7 +11,7 @@ const { school } = Astro.props as { school: (typeof SCHOOLS)[number] };
 const list = subsOf(school.id as School);
 const infos: (SubInfo & { file: string | null; home: number })[] = list.map((s) => ({
   id: s.id, topic: s.topic, topicName: s.topicName, name: s.name, slug: subSlug(s.id),
-  playable: s.playable, file: s.file, home: s.home,
+  playable: s.playable, count: s.count, file: s.file, home: s.home,
 }));
 const groups = groupByTopic(infos) as { topic: string; name: string; subs: typeof infos }[];
 const clientData = JSON.stringify(infos).replace(/</g, '\\u003c');
@@ -108,7 +108,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       const st = tierState(s, sub, t);
       if (st.cleared) return { state: 'cleared', text: `${TIER_NAME[t]}: cleared ✓` };
       if (!tierOpen(s, sub, t, subs.find((y) => y.id === sub)?.playable)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
-      if (st.passes.length) return { state: 'pass1', text: `${TIER_NAME[t]}: 1 of 2` };
+      if (st.mastered) return { state: 'pass1', text: `${TIER_NAME[t]}: ${st.mastered} of ${st.total} mastered` };
       return { state: 'open', text: `${TIER_NAME[t]}: open` };
     };
     root.querySelectorAll<HTMLElement>('.th-chip').forEach((el) => {

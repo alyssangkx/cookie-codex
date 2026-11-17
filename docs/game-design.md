@@ -15,7 +15,7 @@ flowchart TB
   E --> F{Score 8 or more?}
   F -- yes --> G[Correct questions retired]
   F -- no --> H[Wrong questions to retest queue]
-  G --> I{2 passes on different days?}
+  G --> I{Every question in the tier mastered?}
   I -- yes --> J[Tier cleared: card or star]
   I -- no --> C
   H --> K[Retest at 1, 3, 7 days]
@@ -42,14 +42,14 @@ Ordering within a school:
 
 | | Basic | Intermediate | Competent |
 |---|---|---|---|
-| Pass | 8/10 on two quizzes, different calendar days | same | same |
+| Clear | every question retired (mastered); 8/10 is only a score to show | same | same |
 | Time limit | 12 min (1.2 min/Q, 1-mark MCQ pace) | 15 min (1.5 min/Q) | 20 min (2 min/Q, multi-step, 2-mark pace) |
 | Chinese | +25% (reading load) | | |
 
 Paper 1 MCQs run about 1-2 minutes; Paper 2 long questions 3-5 minutes. A 10-MCQ quiz cannot test Paper 2 pacing, so Competent uses the top of the MCQ range and the boss quiz carries "PSLE style" pressure. A parent switch gives x1.5 time for accessibility.
 
-- **Pass details:** the two passing quizzes use disjoint questions; the second must be on a later day. Passes need not be consecutive. A timeout marks unanswered questions wrong with the tag `ran_out_of_time`.
-- **Fail:** nothing is lost. Wrong questions go to the retest queue, and the result screen says "next time, aim for these three". Up to 3 attempts per tier per day (the daily cap still applies). After two fails under 5/10 the screen suggests re-reading the worked solutions and trying the lower tier.
+- **Clearing is mastery (all tiers, P1-P6, Math and Chinese):** a tier is cleared when every question in it is retired. A question answered right the first time retires at once; a wrong one retires once its 1, 3 and 7 day retests are answered right. There is no pass percentage and no second day needed; the 8/10 score is shown as history only, and screens say "N of M questions mastered". A cleared tier stays cleared. Saves from before this rule keep every cleared tier and card; a tier whose questions are all retired is cleared at the end of the next quiz that touches it. A timeout marks unanswered questions wrong with the tag `ran_out_of_time`.
+- **Fail:** nothing is lost. Wrong questions go to the retest queue, and the result screen says "next time, aim for these three". Up to 5 attempts per tier per day for P1-P5 sub-topics, 3 for P6 and Chinese (the daily cap still applies). After two quizzes under 5/10 the screen suggests re-reading the worked solutions and trying the lower tier.
 - **Retest mixing:** each tier quiz includes up to 3 due retest questions from the same sub-topic (never more than 30%), replacing new ones. Due items from other sub-topics go into a 5-question **Daily Review** that counts toward the goal but never toward a pass.
 - **Retest steps:** wrong -> due in 1 day; correct at step 1 -> 3 days; correct at 3 -> 7 days; correct at 7 -> retired for good. A wrong answer at any step returns to step 1.
 - **Thin pools:** a tier is playable only if it has at least 20 unretired questions. If fewer than 10 remain mid-way, the tier fills from its retest queue; if that is empty, the tier is auto-credited.
@@ -147,7 +147,7 @@ A **monster** is a boss standing for the student's current competency in a schoo
 - **No loot boxes at all** (not even with disclosed odds). Every outcome is deterministic and previewed.
 - No leaderboards, no public comparison, no shaming copy ("You failed" is replaced by "Not yet").
 - Losing a streak removes nothing the student owns.
-- **No infinite play:** the parent sets a daily session cap (default 45 minutes, range 15 to 90). The quiz in progress finishes, then the app shows **"Done for today"** and offers only the Codex and collection.
+- **No infinite play:** the parent sets a daily session cap (default 45 minutes, range 45 to 120 in steps of 15). The quiz in progress finishes, then the app shows **"Done for today"** and offers only the Codex and collection.
 - No notifications, no timed rewards, and no "limited-time" events.
 
 ## 7. Parent view
