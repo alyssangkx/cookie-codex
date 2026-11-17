@@ -1,6 +1,6 @@
 # English bank: PSLE syllabus and top-school coverage
 
-400 shipped questions (basic 134, intermediate 132, competent 134). Regenerate with `python3 scripts/quiz/english/coverage.py`.
+480 shipped questions (basic 160, intermediate 158, competent 162). Regenerate with `python3 scripts/quiz/english/coverage.py`.
 
 ## 1. PSLE syllabus (English Language Syllabus 2020)
 
@@ -10,10 +10,10 @@
 | Applying grammatical knowledge | Revisit and strengthen previously learnt grammatical knowledge; ident… | yes | 0 **not yet** |
 | Applying grammatical knowledge | Use appropriate language structures learnt previously to convey thoug… | yes | 0 **not yet** |
 | Applying grammatical knowledge | Understand that varying the form of a construction conveys different … | yes | 0 **not yet** |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Verb tenses and forms in context | yes | 51 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Verb tenses and forms in context | yes | 103 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Subject-verb agreement | yes | 14 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Prepositions | yes | 19 |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Conjunctions and connectors | yes | 12 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Conjunctions and connectors | yes | 40 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Pronouns including relative pronouns | yes | 18 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Question tags | yes | 14 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Quantifiers and determiners | yes | 14 |
@@ -41,7 +41,7 @@
 | Type | Papers it appears in | Shipped questions |
 |---|---|---|
 | Vocabulary MCQ: single-word choice (`eng-pat-vocab-word`) | 152 | 72 |
-| Grammar MCQ (one blank in a sentence, four options) (`eng-pat-grammar-mcq`) | 131 | 142 |
+| Grammar MCQ (one blank in a sentence, four options) (`eng-pat-grammar-mcq`) | 131 | 222 |
 | Visual-text comprehension MCQ (poster, brochure or notice, often paired with a second text) (`eng-pat-visual-mcq`) | 126 | 0 **not yet** |
 | Vocabulary-in-context MCQ (closest in meaning to a marked word in a passage) (`eng-pat-vocab-passage-mcq`) | 117 | 74 |
 | Vocabulary MCQ: phrasal verb choice (`eng-pat-vocab-phrasal`) | 90 | 70 |

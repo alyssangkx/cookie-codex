@@ -1,0 +1,2975 @@
+{
+  "subtopic": "eng-gram-wps-items",
+  "items": [
+    {
+      "key": "gram-pass-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The window in our classroom ____ by a football yesterday.",
+      "options": [
+        "was broken",
+        "broke",
+        "is broken",
+        "were broken"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'broke' is active, but the window did not do the breaking; the football did, so a passive form is needed."
+        },
+        {
+          "tag": "wrong_tense_present",
+          "why": "'yesterday' is a finished past time, so the present 'is broken' does not fit."
+        },
+        {
+          "tag": "wrong_agreement",
+          "why": "'The window' is singular, so 'were broken' does not agree with it."
+        }
+      ],
+      "solution": [
+        "The window in our classroom was broken by a football yesterday.",
+        "The window receives the action and 'yesterday' is past, so use the simple past passive 'was broken' (singular subject)."
+      ]
+    },
+    {
+      "key": "gram-pass-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "English ____ in all Singapore schools.",
+      "options": [
+        "are taught",
+        "is taught",
+        "teaches",
+        "is teaching"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_agreement",
+          "why": "'English' is a singular subject, so 'are taught' does not agree."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'teaches' is active, but English does not teach anyone; it is the subject being taught, so the passive is needed."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'is teaching' is active, but English is not the one doing the teaching."
+        }
+      ],
+      "solution": [
+        "English is taught in all Singapore schools.",
+        "English receives the action and the sentence states a general fact, so use the simple present passive 'is taught'."
+      ]
+    },
+    {
+      "key": "gram-pass-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The new MRT station ____ by the Prime Minister last week.",
+      "options": [
+        "opened",
+        "is opened",
+        "was opened",
+        "has opened"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'opened' is active, so it cannot be followed by 'by the Prime Minister' naming the doer."
+        },
+        {
+          "tag": "wrong_tense_present",
+          "why": "'last week' is past time, so the present 'is opened' does not fit."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'has opened' is active and also clashes with 'last week'; the station was opened by someone."
+        }
+      ],
+      "solution": [
+        "The new MRT station was opened by the Prime Minister last week.",
+        "'by the Prime Minister' names the doer of the action and 'last week' is past, so use the simple past passive 'was opened'."
+      ]
+    },
+    {
+      "key": "gram-pass-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "These cookies ____ by my grandmother every Chinese New Year.",
+      "options": [
+        "is baked",
+        "baked",
+        "are baking",
+        "are baked"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_agreement",
+          "why": "'These cookies' is plural, so 'is baked' does not agree."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'baked' is active, so it cannot take 'by my grandmother' as the doer."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'are baking' is active, so it cannot take 'by my grandmother' as the doer."
+        },
+        null
+      ],
+      "solution": [
+        "These cookies are baked by my grandmother every Chinese New Year.",
+        "The cookies receive the action and 'every Chinese New Year' shows a habit, so use the simple present passive 'are baked' (plural subject)."
+      ]
+    },
+    {
+      "key": "gram-pass-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The library books must ____ back by Friday.",
+      "options": [
+        "return",
+        "returned",
+        "be returned",
+        "being returned"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "after 'must', 'return' is active, but the books do not return themselves; they are returned by pupils."
+        },
+        {
+          "tag": "wrong_form_after_modal",
+          "why": "after the modal 'must' the verb must start with the base form, so 'returned' alone is wrong."
+        },
+        null,
+        {
+          "tag": "wrong_form_after_modal",
+          "why": "after the modal 'must' the passive needs 'be', not 'being'."
+        }
+      ],
+      "solution": [
+        "The library books must be returned back by Friday.",
+        "A modal such as 'must' is followed by 'be' + past participle in the passive: 'must be returned'."
+      ]
+    },
+    {
+      "key": "gram-pass-006",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "A new playground ____ in our estate next month.",
+      "options": [
+        "will be built",
+        "will build",
+        "will be building",
+        "has been built"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'will build' is active, but a playground cannot build itself; it is built by workers."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'will be building' is active continuous, but the playground is not doing the building."
+        },
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'next month' is future, so the present perfect passive 'has been built' does not fit."
+        }
+      ],
+      "solution": [
+        "A new playground will be built in our estate next month.",
+        "The playground receives the action and 'next month' is future, so use the future passive 'will be built'."
+      ]
+    },
+    {
+      "key": "gram-pass-007",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My bicycle ____ from the void deck, so I reported it to the police.",
+      "options": [
+        "stole",
+        "was stealing",
+        "had stolen",
+        "was stolen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'stole' is active, but the bicycle did not steal anything; it was taken from the owner."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'was stealing' is active, and the bicycle is not the thief."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'had stolen' is active, so it would mean the bicycle was the thief."
+        },
+        null
+      ],
+      "solution": [
+        "My bicycle was stolen from the void deck, so I reported it to the police.",
+        "The bicycle receives the action of stealing, so use the simple past passive 'was stolen'."
+      ]
+    },
+    {
+      "key": "gram-pass-008",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Rice ____ by farmers in many parts of Asia.",
+      "options": [
+        "grows",
+        "is grown",
+        "grew",
+        "are grown"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'grows' is active, so it cannot be followed by 'by farmers' naming the doer."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'grew' is active (and past), so it cannot take 'by farmers' as the doer."
+        },
+        {
+          "tag": "wrong_agreement",
+          "why": "'Rice' is an uncountable, singular subject, so 'are grown' does not agree."
+        }
+      ],
+      "solution": [
+        "Rice is grown by farmers in many parts of Asia.",
+        "'by farmers' names the doer, so the verb is passive; 'Rice' is singular, so 'is grown'."
+      ]
+    },
+    {
+      "key": "gram-pass-009",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The principal ____ the new library at the assembly yesterday morning.",
+      "options": [
+        "opens",
+        "opened",
+        "was opened",
+        "has been opened"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_present",
+          "why": "'yesterday morning' is past, so the simple present 'opens' does not fit."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'was opened' is passive and cannot be followed by the object 'the new library'; the principal did the opening."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'has been opened' is passive and cannot take the object 'the new library'."
+        }
+      ],
+      "solution": [
+        "The principal opened the new library at the assembly yesterday morning.",
+        "The subject 'The principal' does the action and the object 'the new library' follows, so the verb is active; 'yesterday morning' needs the simple past 'opened'."
+      ]
+    },
+    {
+      "key": "gram-pass-010",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The school fair ____ every year in November.",
+      "options": [
+        "holds",
+        "is holding",
+        "is held",
+        "hold"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'holds' is active, but the fair does not hold anything here; people hold the fair."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'is holding' is active, and the fair is not doing the holding."
+        },
+        null,
+        {
+          "tag": "wrong_agreement",
+          "why": "'hold' is a plural active form, but 'The school fair' is singular and receives the action."
+        }
+      ],
+      "solution": [
+        "The school fair is held every year in November.",
+        "The fair receives the action and 'every year' shows a regular event, so use the simple present passive 'is held'."
+      ]
+    },
+    {
+      "key": "gram-pass-011",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Don't go in! The floor ____ at the moment.",
+      "options": [
+        "is mopped",
+        "is being mopped",
+        "was mopped",
+        "has been mopping"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_simple",
+          "why": "'at the moment' shows the action is in progress, but 'is mopped' is the simple present passive for habits or facts."
+        },
+        null,
+        {
+          "tag": "wrong_tense_past",
+          "why": "'at the moment' means now, so the past 'was mopped' does not fit."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'has been mopping' is active, but the floor does not do the mopping."
+        }
+      ],
+      "solution": [
+        "Don't go in! The floor is being mopped at the moment.",
+        "An action in progress now, done to the floor, takes the present continuous passive 'is being mopped'."
+      ]
+    },
+    {
+      "key": "gram-pass-012",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Our school's new science lab ____ since June.",
+      "options": [
+        "is used",
+        "was used",
+        "has been used",
+        "has been using"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_simple",
+          "why": "'since June' links the past to now, so the simple present 'is used' does not fit."
+        },
+        {
+          "tag": "wrong_tense_past",
+          "why": "'since June' covers a period up to now, so the simple past 'was used' does not fit."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'has been using' is active, but the lab does not use anything; it is used by pupils."
+        }
+      ],
+      "solution": [
+        "Our school's new science lab has been used since June.",
+        "'since June' needs the present perfect, and the lab receives the action, so use the present perfect passive 'has been used'."
+      ]
+    },
+    {
+      "key": "gram-pass-013",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ten new members ____ for the school choir so far.",
+      "options": [
+        "has been chosen",
+        "have been choosing",
+        "were chosen",
+        "have been chosen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_agreement",
+          "why": "'Ten new members' is plural, so 'has been chosen' does not agree."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'have been choosing' is active, but the members are the ones being chosen."
+        },
+        {
+          "tag": "wrong_tense_past",
+          "why": "'so far' links the past to now, so the simple past 'were chosen' does not fit."
+        },
+        null
+      ],
+      "solution": [
+        "Ten new members have been chosen for the school choir so far.",
+        "'so far' needs the present perfect and the members receive the action, so use 'have been chosen' (plural subject)."
+      ]
+    },
+    {
+      "key": "gram-pass-014",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The litter must ____ before the principal's visit tomorrow.",
+      "options": [
+        "be cleared",
+        "clear",
+        "have cleared",
+        "be clearing"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'clear' is active, but the litter cannot clear itself; it is cleared by someone."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'have cleared' is active, and the litter is not the one doing the clearing."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'be clearing' is active continuous, but the litter does not do the clearing."
+        }
+      ],
+      "solution": [
+        "The litter must be cleared before the principal's visit tomorrow.",
+        "After the modal 'must', the passive is 'be' + past participle: 'must be cleared'."
+      ]
+    },
+    {
+      "key": "gram-pass-015",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Several cars ____ in the car park last night, but nobody knows who did it.",
+      "options": [
+        "damaged",
+        "have damaged",
+        "were damaging",
+        "were damaged"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'damaged' is active and would need an object after it, but none follows; the cars received the damage."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'have damaged' is active and clashes with 'last night'; the cars were the ones harmed."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'were damaging' is active, but the cars did not do the damaging."
+        },
+        null
+      ],
+      "solution": [
+        "Several cars were damaged in the car park last night, but nobody knows who did it.",
+        "The cars receive the action and the doer is unknown, so use the agentless simple past passive 'were damaged'."
+      ]
+    },
+    {
+      "key": "gram-pass-016",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The results ____ at the end of the week.",
+      "options": [
+        "will announce",
+        "will be announced",
+        "have announced",
+        "will be announcing"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'will announce' is active, but results cannot announce anything; they are announced by the school."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'have announced' is active and past-linked, but 'at the end of the week' is future."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'will be announcing' is active continuous, but the results are not the ones announcing."
+        }
+      ],
+      "solution": [
+        "The results will be announced at the end of the week.",
+        "The results receive the action and the time is future, so use the future passive 'will be announced'."
+      ]
+    },
+    {
+      "key": "gram-pass-017",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The cleaners ____ the floor when the bell rang.",
+      "options": [
+        "were mopping",
+        "were mopped",
+        "was mopped",
+        "had been mopped"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'were mopped' is passive and cannot take the object 'the floor'; the cleaners did the mopping."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'was mopped' is passive and does not agree with the plural 'cleaners'."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'had been mopped' is passive and cannot take the object 'the floor'."
+        }
+      ],
+      "solution": [
+        "The cleaners were mopping the floor when the bell rang.",
+        "The cleaners do the action and 'the floor' is the object, so the verb is active; an action in progress when the bell rang takes the past continuous 'were mopping'."
+      ]
+    },
+    {
+      "key": "gram-pass-018",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "By the time we arrived, all the tickets ____.",
+      "options": [
+        "have been sold",
+        "was sold",
+        "had been sold",
+        "will have been sold"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'By the time we arrived' is in the past, so the present perfect 'have been sold' does not fit."
+        },
+        {
+          "tag": "wrong_agreement",
+          "why": "'all the tickets' is plural, so 'was sold' does not agree."
+        },
+        null,
+        {
+          "tag": "wrong_tense_future",
+          "why": "'we arrived' is past, so the future perfect 'will have been sold' does not fit."
+        }
+      ],
+      "solution": [
+        "By the time we arrived, all the tickets had been sold.",
+        "'By the time we arrived' (past) needs the past perfect for an earlier action; the tickets receive the action, so 'had been sold'."
+      ]
+    },
+    {
+      "key": "gram-pass-019",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The suspect ____ by the police at Changi Airport yesterday.",
+      "options": [
+        "arrested",
+        "has been arrested",
+        "was arrested",
+        "was arresting"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'arrested' is active, but 'by the police' names the doer, so the suspect must be the receiver."
+        },
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'yesterday' is a finished time, so the present perfect passive does not fit."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'was arresting' is active, but the suspect did not do the arresting."
+        }
+      ],
+      "solution": [
+        "The suspect was arrested by the police at Changi Airport yesterday.",
+        "'by the police' names the doer and 'yesterday' is past, so use the simple past passive 'was arrested'."
+      ]
+    },
+    {
+      "key": "gram-pass-020",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Tickets for the school concert ____ online from tomorrow.",
+      "options": [
+        "can buy",
+        "can be buying",
+        "can have bought",
+        "can be bought"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'can buy' is active, but tickets cannot buy anything; people buy them."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'can be buying' is active continuous, and tickets are not doing the buying."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'can have bought' is active and past-looking, but 'from tomorrow' is future."
+        },
+        null
+      ],
+      "solution": [
+        "Tickets for the school concert can be bought online from tomorrow.",
+        "After the modal 'can', the passive is 'be' + past participle: 'can be bought'."
+      ]
+    },
+    {
+      "key": "gram-pass-021",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The old school hall needs ____ before the concert.",
+      "options": [
+        "to repair",
+        "to be repairing",
+        "to be repaired",
+        "to have repaired"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'to repair' is active, but the hall does not repair anything; it receives the repair."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'to be repairing' is active continuous, but the hall is not doing the repairing."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'to have repaired' is active perfect, and it does not make the hall the receiver of the repair."
+        }
+      ],
+      "solution": [
+        "The old school hall needs to be repaired before the concert.",
+        "The hall receives the action, so the passive infinitive 'to be repaired' follows 'needs'."
+      ]
+    },
+    {
+      "key": "gram-pass-022",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The new cafeteria is said ____ by a famous chef.",
+      "options": [
+        "to have designed",
+        "to be designing",
+        "to have been designing",
+        "to have been designed"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'to have designed' is active, but 'by a famous chef' names the designer, so the cafeteria receives the action."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'to be designing' is active, but the cafeteria did not do the designing."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'to have been designing' is active continuous, but the cafeteria is not the designer."
+        },
+        null
+      ],
+      "solution": [
+        "The new cafeteria is said to have been designed by a famous chef.",
+        "The design was done earlier and the cafeteria receives it, so use the perfect passive infinitive 'to have been designed'."
+      ]
+    },
+    {
+      "key": "gram-pass-023",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mum had the broken tap ____ by a plumber yesterday.",
+      "options": [
+        "fixed",
+        "fix",
+        "fixing",
+        "to fix"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_form_causative",
+          "why": "in 'had + object + base form' the object does the action, but the tap does not fix itself; 'by a plumber' needs the past participle."
+        },
+        {
+          "tag": "wrong_form_causative",
+          "why": "'fixing' would mean the tap was doing the fixing; the tap receives the action."
+        },
+        {
+          "tag": "wrong_form_causative",
+          "why": "'had' + object is followed by the base form or a past participle, not by 'to fix'."
+        }
+      ],
+      "solution": [
+        "Mum had the broken tap fixed by a plumber yesterday.",
+        "'have + object + past participle' means someone else does the action to the object: 'had the tap fixed'."
+      ]
+    },
+    {
+      "key": "gram-pass-024",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mei Ling was delighted about ____ the lead role by the drama teacher.",
+      "options": [
+        "giving",
+        "being given",
+        "having given",
+        "to give"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'giving' is active, which would make Mei Ling the giver; 'by the drama teacher' shows she received the role."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'having given' is active, which would make Mei Ling the giver."
+        },
+        {
+          "tag": "wrong_form_after_preposition",
+          "why": "'about' is a preposition here, so the verb takes an -ing form, and 'to give' is also active."
+        }
+      ],
+      "solution": [
+        "Mei Ling was delighted about being given the lead role by the drama teacher.",
+        "After the preposition 'about' use an -ing form, and Mei Ling receives the role, so the passive gerund 'being given'."
+      ]
+    },
+    {
+      "key": "gram-pass-025",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Nobody enjoys ____ by the teacher in front of the whole class.",
+      "options": [
+        "being scolded",
+        "to be scolded",
+        "scolding",
+        "to scold"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'enjoy' is followed by an -ing form, not a to-infinitive."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'scolding' is active, but 'by the teacher' shows the person is the one scolded."
+        },
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'enjoy' does not take a to-infinitive, and 'to scold' is active."
+        }
+      ],
+      "solution": [
+        "Nobody enjoys being scolded by the teacher in front of the whole class.",
+        "'enjoy' is followed by an -ing form, and the person receives the scolding, so the passive gerund 'being scolded'."
+      ]
+    },
+    {
+      "key": "gram-pass-026",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The temple is believed ____ over 200 years ago.",
+      "options": [
+        "to be built",
+        "to have built",
+        "to have been built",
+        "to have been building"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_infinitive",
+          "why": "'over 200 years ago' refers to a time before now, so the present infinitive 'to be built' does not fit."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'to have built' is active, but a temple does not build itself."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'to have been building' is active continuous, but the temple is not the builder."
+        }
+      ],
+      "solution": [
+        "The temple is believed to have been built over 200 years ago.",
+        "An earlier event that the temple receives needs the perfect passive infinitive 'to have been built'."
+      ]
+    },
+    {
+      "key": "gram-pass-027",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The school ____ that the concert has been cancelled.",
+      "options": [
+        "has been announced",
+        "has announced",
+        "is announced",
+        "was announced"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'has been announced' is passive and cannot be followed by the object clause 'that the concert has been cancelled'; the school is the one announcing."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'is announced' is passive and cannot take the 'that' clause as its object."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'was announced' is passive and cannot take the 'that' clause as its object."
+        }
+      ],
+      "solution": [
+        "The school has announced that the concert has been cancelled.",
+        "The school does the announcing and 'that the concert has been cancelled' is the object, so the verb is active: 'has announced'."
+      ]
+    },
+    {
+      "key": "gram-pass-028",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "By 2030, many more HDB flats ____ in Punggol.",
+      "options": [
+        "will have built",
+        "would have been built",
+        "had been built",
+        "will have been built"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'will have built' is active, but flats do not build themselves."
+        },
+        {
+          "tag": "wrong_modal",
+          "why": "'would have been built' refers to an unreal past, but 'By 2030' is a real future deadline."
+        },
+        {
+          "tag": "wrong_tense_past_perfect",
+          "why": "'By 2030' is in the future, so the past perfect 'had been built' does not fit."
+        },
+        null
+      ],
+      "solution": [
+        "By 2030, many more HDB flats will have been built in Punggol.",
+        "'By 2030' (a future deadline) takes the future perfect, and the flats receive the action, so 'will have been built'."
+      ]
+    },
+    {
+      "key": "gram-pass-029",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "If the road ____ earlier, the accident would not have happened.",
+      "options": [
+        "had repaired",
+        "would have been repaired",
+        "has been repaired",
+        "had been repaired"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_voice",
+          "why": "'had repaired' is active, but a road does not repair itself."
+        },
+        {
+          "tag": "wrong_conditional",
+          "why": "the 'if' clause cannot contain 'would'; it takes the past perfect."
+        },
+        {
+          "tag": "wrong_conditional",
+          "why": "'would not have happened' signals an unreal past, so the 'if' clause needs the past perfect, not the present perfect."
+        },
+        null
+      ],
+      "solution": [
+        "If the road had been repaired earlier, the accident would not have happened.",
+        "A past unreal condition uses 'if' + past perfect, and the road receives the action, so 'had been repaired'."
+      ]
+    },
+    {
+      "key": "gram-pass-030",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I am looking forward to ____ to the Science Olympiad.",
+      "options": [
+        "being invited",
+        "be invited",
+        "inviting",
+        "having invited"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_form_after_preposition",
+          "why": "'to' is a preposition in 'look forward to', so it takes an -ing form, not the base form."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'inviting' is active and would need an object; here the speaker is the one who receives the invitation."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'having invited' is active and past-looking, but the speaker looks forward to receiving an invitation."
+        }
+      ],
+      "solution": [
+        "I am looking forward to being invited to the Science Olympiad.",
+        "'look forward to' takes an -ing form because 'to' is a preposition, and the speaker receives the invitation, so 'being invited'."
+      ]
+    },
+    {
+      "key": "gram-rep-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Yesterday, Daniel said, \"I am too tired to play.\" (He is fine today.)\nYesterday, Daniel said that he ____ too tired to play.",
+      "options": [
+        "is",
+        "was",
+        "were",
+        "will be"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_backshift",
+          "why": "he spoke yesterday and is fine today, so the reported verb is shifted back; 'is' would put the tiredness in the present."
+        },
+        null,
+        {
+          "tag": "wrong_agreement",
+          "why": "'he' is singular, so 'were' does not agree."
+        },
+        {
+          "tag": "wrong_tense_future",
+          "why": "he described how he felt then, not a future state, so 'will be' is wrong."
+        }
+      ],
+      "solution": [
+        "Yesterday, Daniel said that he was too tired to play.",
+        "The state is over and the report is about the past, so 'am' shifts back to 'was'."
+      ]
+    },
+    {
+      "key": "gram-rep-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last Monday, Alicia said, \"I will visit my grandma tomorrow.\"\nLast Monday, Alicia said that she would visit her grandma ____.",
+      "options": [
+        "tomorrow",
+        "yesterday",
+        "the next day",
+        "the day before"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_time_word",
+          "why": "'tomorrow' would point to the day after the reporter speaks; the report is about the day after last Monday."
+        },
+        {
+          "tag": "wrong_time_word",
+          "why": "'yesterday' points backwards, but the visit was planned for the day after she spoke."
+        },
+        null,
+        {
+          "tag": "wrong_time_word",
+          "why": "'the day before' points backwards, but the visit was planned for the day after she spoke."
+        }
+      ],
+      "solution": [
+        "Last Monday, Alicia said that she would visit her grandma the next day.",
+        "In reported speech about a past occasion, 'tomorrow' becomes 'the next day' (or 'the following day')."
+      ]
+    },
+    {
+      "key": "gram-rep-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mei Ling said, \"My brother will fetch me.\"\nMei Ling said that ____ brother would fetch her.",
+      "options": [
+        "my",
+        "his",
+        "their",
+        "her"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_pronoun",
+          "why": "'my' would refer to the person reporting, but the brother belongs to Mei Ling."
+        },
+        {
+          "tag": "wrong_pronoun",
+          "why": "Mei Ling is a girl, so her own brother is 'her brother', not 'his brother'."
+        },
+        {
+          "tag": "wrong_pronoun",
+          "why": "Mei Ling is one person, so the plural 'their' does not fit."
+        },
+        null
+      ],
+      "solution": [
+        "Mei Ling said that her brother would fetch her.",
+        "'my' (the speaker's) becomes 'her' when we report what Mei Ling said."
+      ]
+    },
+    {
+      "key": "gram-rep-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mrs Tan asked Kai, \"Where do you live?\"\nMrs Tan asked Kai where ____.",
+      "options": [
+        "he lived",
+        "did he live",
+        "does he live",
+        "lived he"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_word_order",
+          "why": "a reported question keeps statement order, so the question form 'did he live' is wrong."
+        },
+        {
+          "tag": "wrong_word_order",
+          "why": "a reported question keeps statement order, so the question form 'does he live' is wrong."
+        },
+        {
+          "tag": "wrong_word_order",
+          "why": "the subject 'he' must come before the verb in a reported question."
+        }
+      ],
+      "solution": [
+        "Mrs Tan asked Kai where he lived.",
+        "A reported question uses statement word order (subject + verb) with the tense shifted back: 'where he lived'."
+      ]
+    },
+    {
+      "key": "gram-rep-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Please sit down,\" the teacher said to us.\nThe teacher ____ us to sit down.",
+      "options": [
+        "said",
+        "spoke",
+        "talked",
+        "told"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'say' is not followed by a person and a to-infinitive; the pattern 'told us to sit' is needed."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'speak' is not used with a person object plus a to-infinitive."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'talk' is not used with a person object plus a to-infinitive."
+        },
+        null
+      ],
+      "solution": [
+        "The teacher told us to sit down.",
+        "'tell + person + to-infinitive' reports an instruction; 'say' cannot take that pattern."
+      ]
+    },
+    {
+      "key": "gram-rep-006",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last Tuesday, Jun Hao said, \"I have finished my homework.\"\nLast Tuesday, Jun Hao said that he ____ his homework.",
+      "options": [
+        "has finished",
+        "had finished",
+        "would finish",
+        "was finished"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_backshift",
+          "why": "the report is about last Tuesday, so the present perfect shifts back to the past perfect."
+        },
+        null,
+        {
+          "tag": "wrong_tense_future",
+          "why": "'would finish' looks forward, but he said the homework was already finished."
+        },
+        {
+          "tag": "wrong_form",
+          "why": "'was finished his homework' is ungrammatical; the past perfect 'had finished' is needed."
+        }
+      ],
+      "solution": [
+        "Last Tuesday, Jun Hao said that he had finished his homework.",
+        "In reported speech, the present perfect 'have finished' shifts back to the past perfect 'had finished'."
+      ]
+    },
+    {
+      "key": "gram-rep-007",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Yesterday, the driver said, \"The bus will arrive soon.\" (It arrived five minutes later.)\nYesterday, the driver said that the bus ____ soon.",
+      "options": [
+        "would arrive",
+        "will arrive",
+        "arrived",
+        "would have arrived"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_backshift",
+          "why": "the driver spoke yesterday and the bus has already arrived, so 'will' is shifted back to 'would'."
+        },
+        {
+          "tag": "wrong_tense_past",
+          "why": "'arrived' says the arrival had happened, but he spoke before the bus came."
+        },
+        {
+          "tag": "wrong_modal",
+          "why": "'would have arrived' is an unreal past, but the bus really did arrive later."
+        }
+      ],
+      "solution": [
+        "Yesterday, the driver said that the bus would arrive soon.",
+        "In reported speech about a past occasion, 'will' shifts back to 'would'."
+      ]
+    },
+    {
+      "key": "gram-rep-008",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last year, Priya said, \"I can't swim.\" (She has learnt since then.)\nLast year, Priya said that she ____ swim.",
+      "options": [
+        "can't",
+        "wouldn't",
+        "couldn't",
+        "may not"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "no_backshift",
+          "why": "she has learnt to swim since then, so 'can't' would still be reported as true; the report shifts back."
+        },
+        {
+          "tag": "wrong_modal",
+          "why": "'wouldn't' is the shift of 'won't', not 'can't'."
+        },
+        null,
+        {
+          "tag": "wrong_modal",
+          "why": "'may not' changes the meaning from lack of ability to possibility."
+        }
+      ],
+      "solution": [
+        "Last year, Priya said that she couldn't swim.",
+        "In reported speech, 'can't' shifts back to 'couldn't'."
+      ]
+    },
+    {
+      "key": "gram-rep-009",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Do you want some water?\" Aunty asked me.\nAunty asked me ____ I wanted some water.",
+      "options": [
+        "that",
+        "do",
+        "if",
+        "what"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_conjunction",
+          "why": "'that' introduces a reported statement, not a yes/no question."
+        },
+        {
+          "tag": "wrong_conjunction",
+          "why": "a reported question does not use 'do' as a link word; the joining word is 'if' or 'whether'."
+        },
+        null,
+        {
+          "tag": "wrong_conjunction",
+          "why": "'what' asks for a thing, but the original question could be answered yes or no."
+        }
+      ],
+      "solution": [
+        "Aunty asked me if I wanted some water.",
+        "A yes/no question is reported with 'if' (or 'whether') and statement word order."
+      ]
+    },
+    {
+      "key": "gram-rep-010",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Don't run in the corridor,\" the prefect told us.\nThe prefect told us ____ in the corridor.",
+      "options": [
+        "don't run",
+        "not run",
+        "didn't run",
+        "not to run"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_form_command",
+          "why": "a reported command uses the to-infinitive; 'don't run' keeps the original direct form."
+        },
+        {
+          "tag": "wrong_form_command",
+          "why": "after 'told us' the verb needs 'to', so 'not run' is incomplete."
+        },
+        {
+          "tag": "wrong_form_command",
+          "why": "'didn't run' is a past statement, not a reported command."
+        },
+        null
+      ],
+      "solution": [
+        "The prefect told us not to run in the corridor.",
+        "A negative command is reported as 'told + person + not to + verb'."
+      ]
+    },
+    {
+      "key": "gram-rep-011",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Yesterday, Mr Lim asked Aisha, \"Did you finish the project?\"\nYesterday, Mr Lim asked Aisha ____ the project.",
+      "options": [
+        "if had she finished",
+        "did she finish",
+        "if she had finished",
+        "if she has finished"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_word_order",
+          "why": "a reported question uses statement order, so 'had she' is wrong."
+        },
+        {
+          "tag": "wrong_word_order",
+          "why": "the direct-question form 'did she finish' is not used in a reported question; it also lacks a link word."
+        },
+        null,
+        {
+          "tag": "no_backshift",
+          "why": "the question was asked yesterday about an earlier event, so the verb shifts back to the past perfect."
+        }
+      ],
+      "solution": [
+        "Yesterday, Mr Lim asked Aisha if she had finished the project.",
+        "A reported yes/no question takes 'if' + statement order, and the past simple shifts back to the past perfect."
+      ]
+    },
+    {
+      "key": "gram-rep-012",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "On Monday, Zara said, \"I have a test today.\"\nOn Monday, Zara said that she had a test ____.",
+      "options": [
+        "today",
+        "the day before",
+        "the next day",
+        "that day"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_time_word",
+          "why": "'today' would mean the day of the report, not Monday."
+        },
+        {
+          "tag": "wrong_time_word",
+          "why": "'the day before' points to a day earlier than Monday, but 'today' was Monday itself."
+        },
+        {
+          "tag": "wrong_time_word",
+          "why": "'the next day' points to the day after Monday, but 'today' was Monday itself."
+        },
+        null
+      ],
+      "solution": [
+        "On Monday, Zara said that she had a test that day.",
+        "In reported speech about a past occasion, 'today' becomes 'that day'."
+      ]
+    },
+    {
+      "key": "gram-rep-013",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "On Friday, Mum said, \"I bought these mooncakes yesterday.\"\nOn Friday, Mum said that she ____ those mooncakes the day before.",
+      "options": [
+        "had bought",
+        "has bought",
+        "was buying",
+        "would buy"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_backshift",
+          "why": "the report is about a Friday statement, so the past simple shifts back to the past perfect, not the present perfect."
+        },
+        {
+          "tag": "wrong_tense_continuous",
+          "why": "'was buying' would mean the buying was in progress, but she said the buying was finished."
+        },
+        {
+          "tag": "wrong_tense_future",
+          "why": "'would buy' looks forward, but 'the day before' is earlier."
+        }
+      ],
+      "solution": [
+        "On Friday, Mum said that she had bought those mooncakes the day before.",
+        "'yesterday' becomes 'the day before' and the past simple 'bought' shifts back to 'had bought'."
+      ]
+    },
+    {
+      "key": "gram-rep-014",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last week, the residents asked, \"When will the lift be repaired?\" (It was repaired the next day.)\nThe residents asked when the lift ____.",
+      "options": [
+        "will be repaired",
+        "would be repaired",
+        "would repair",
+        "had been repaired"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_backshift",
+          "why": "the repair has already happened and the question was asked last week, so 'will' is shifted back to 'would'."
+        },
+        null,
+        {
+          "tag": "wrong_voice",
+          "why": "'would repair' is active, but the lift receives the repair."
+        },
+        {
+          "tag": "wrong_tense_past_perfect",
+          "why": "'had been repaired' says the repair was already done, but the question was about a future time."
+        }
+      ],
+      "solution": [
+        "The residents asked when the lift would be repaired.",
+        "'will be repaired' shifts back to 'would be repaired' in a reported question."
+      ]
+    },
+    {
+      "key": "gram-rep-015",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I'm sorry I broke your pencil box,\" said Jia Wei to Ken.\nJia Wei ____ for breaking Ken's pencil box.",
+      "options": [
+        "apologised",
+        "suggested",
+        "complained",
+        "refused"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'suggested' does not fit 'for breaking'; Jia Wei was saying sorry, not offering an idea."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'complained' needs 'about', and Jia Wei was saying sorry, not blaming anyone."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'refused' takes a to-infinitive and contradicts the apology."
+        }
+      ],
+      "solution": [
+        "Jia Wei apologised for breaking Ken's pencil box.",
+        "'I'm sorry' is reported with 'apologised for + -ing'."
+      ]
+    },
+    {
+      "key": "gram-rep-016",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Let's have a picnic at East Coast Park,\" said Wei Xin.\nWei Xin ____ having a picnic at East Coast Park.",
+      "options": [
+        "promised",
+        "complained",
+        "suggested",
+        "insisted"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'promised' takes a to-infinitive, not '-ing', and 'Let's' is an idea, not a promise."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'complained' needs 'about', and 'Let's' is an idea, not a complaint."
+        },
+        null,
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'insisted' needs 'on' before 'having', and 'Let's' is a gentle idea, not a demand."
+        }
+      ],
+      "solution": [
+        "Wei Xin suggested having a picnic at East Coast Park.",
+        "'Let's ...' is reported with 'suggested + -ing'."
+      ]
+    },
+    {
+      "key": "gram-rep-017",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last year, Siti said, \"I was late because the bus broke down.\"\nSiti said that she was late because the bus ____ down.",
+      "options": [
+        "has broken",
+        "had broken",
+        "would break",
+        "will break"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_backshift",
+          "why": "the report is about last year, so the past simple shifts back to the past perfect."
+        },
+        null,
+        {
+          "tag": "wrong_tense_future",
+          "why": "'would break' looks forward, but the breakdown was the reason for being late, so it came earlier."
+        },
+        {
+          "tag": "wrong_tense_future",
+          "why": "'will break' is future, but the breakdown had already happened."
+        }
+      ],
+      "solution": [
+        "Siti said that she was late because the bus had broken down.",
+        "The earlier action 'broke down' shifts back to the past perfect 'had broken down'."
+      ]
+    },
+    {
+      "key": "gram-rep-018",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Shall I carry your bag?\" Daniel asked Mrs Lee.\nDaniel ____ to carry Mrs Lee's bag.",
+      "options": [
+        "demanded",
+        "refused",
+        "reminded",
+        "offered"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'Shall I ...?' is a polite offer, not a demand."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'refused to carry' would mean he would not carry it, which is the opposite of the offer."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'reminded' needs a person object before 'to', so 'reminded to carry' is incomplete."
+        },
+        null
+      ],
+      "solution": [
+        "Daniel offered to carry Mrs Lee's bag.",
+        "'Shall I ...?' offering help is reported with 'offered to + verb'."
+      ]
+    },
+    {
+      "key": "gram-rep-019",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I will help you,\" Jun Wei said to me.\nJun Wei ____ me that he would help.",
+      "options": [
+        "said",
+        "spoke",
+        "explained",
+        "told"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'said' cannot take a person directly; it would need 'said to me'."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'spoke' is not followed by a person and a 'that' clause."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'explained' needs 'to me', so 'explained me that' is wrong."
+        },
+        null
+      ],
+      "solution": [
+        "Jun Wei told me that he would help.",
+        "'tell' takes a person object directly before a 'that' clause."
+      ]
+    },
+    {
+      "key": "gram-rep-020",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last year, Mr Goh said, \"I have lived here for ten years.\"\nLast year, Mr Goh said that he ____ there for ten years.",
+      "options": [
+        "had lived",
+        "has lived",
+        "will live",
+        "would have lived"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_backshift",
+          "why": "the report is about last year's statement, so the present perfect shifts back to the past perfect."
+        },
+        {
+          "tag": "wrong_tense_future",
+          "why": "'will live' is future, but he was counting years already lived."
+        },
+        {
+          "tag": "wrong_modal",
+          "why": "'would have lived' is an unreal past, not a report of a real fact."
+        }
+      ],
+      "solution": [
+        "Last year, Mr Goh said that he had lived there for ten years.",
+        "The present perfect 'have lived' shifts back to 'had lived'."
+      ]
+    },
+    {
+      "key": "gram-rep-021",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "That evening, the usher asked us, \"How long have you been waiting?\"\nThe usher asked us how long we ____.",
+      "options": [
+        "have been waiting",
+        "would be waiting",
+        "had we been waiting",
+        "had been waiting"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "no_backshift",
+          "why": "the question was asked in the past, so the present perfect continuous shifts back to the past perfect continuous."
+        },
+        {
+          "tag": "wrong_tense_future",
+          "why": "'would be waiting' looks forward, but the usher asked about waiting already done."
+        },
+        {
+          "tag": "wrong_word_order",
+          "why": "a reported question uses statement order, so 'had we been waiting' is wrong."
+        },
+        null
+      ],
+      "solution": [
+        "That evening, the usher asked us how long we had been waiting.",
+        "The present perfect continuous shifts back to the past perfect continuous, in statement order."
+      ]
+    },
+    {
+      "key": "gram-rep-022",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last month, Mr Yap said to Dev, \"If I find your wallet, I will call you.\"\nMr Yap told Dev that if he ____ his wallet, he would call him.",
+      "options": [
+        "found",
+        "finds",
+        "will find",
+        "would find"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_backshift",
+          "why": "the report is about last month and 'would call' is shifted, so the 'if' verb must shift to the past too."
+        },
+        {
+          "tag": "wrong_if_clause",
+          "why": "an 'if' clause does not take 'will' here; the verb shifts to the past."
+        },
+        {
+          "tag": "wrong_if_clause",
+          "why": "an 'if' clause does not contain 'would'; the verb shifts to the simple past."
+        }
+      ],
+      "solution": [
+        "Mr Yap told Dev that if he found his wallet, he would call him.",
+        "In a reported 'if' sentence, 'find' shifts to 'found' and 'will' shifts to 'would'."
+      ]
+    },
+    {
+      "key": "gram-rep-023",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Give me your ticket,\" said Mr Lau, the conductor, to Raj.\nMr Lau told Raj to give ____ his ticket.",
+      "options": [
+        "me",
+        "him",
+        "you",
+        "them"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_pronoun",
+          "why": "'me' referred to Mr Lau when he spoke; the reporter is a different person, so 'me' is wrong."
+        },
+        null,
+        {
+          "tag": "wrong_pronoun",
+          "why": "'you' referred to Raj when spoken; in a report about Raj, this becomes 'him', and the receiver of the ticket is Mr Lau."
+        },
+        {
+          "tag": "wrong_pronoun",
+          "why": "Mr Lau is one person, so the plural 'them' does not fit."
+        }
+      ],
+      "solution": [
+        "Mr Lau told Raj to give him his ticket.",
+        "'me' (Mr Lau speaking) becomes 'him' in the report."
+      ]
+    },
+    {
+      "key": "gram-rep-024",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I didn't take your eraser,\" said Hui Min.\nHui Min denied ____ the eraser.",
+      "options": [
+        "to take",
+        "take",
+        "taking",
+        "having took"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'deny' is followed by an -ing form, not a to-infinitive."
+        },
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'deny' is followed by an -ing form, so the bare 'take' is wrong."
+        },
+        null,
+        {
+          "tag": "wrong_form",
+          "why": "'took' is the simple past; after 'having' the past participle 'taken' is needed."
+        }
+      ],
+      "solution": [
+        "Hui Min denied taking the eraser.",
+        "'deny' is followed by an -ing form."
+      ]
+    },
+    {
+      "key": "gram-rep-025",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"You copied my answers!\" Ming said to Jo.\nMing ____ Jo of copying his answers.",
+      "options": [
+        "blamed",
+        "accused",
+        "criticised",
+        "warned"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_preposition",
+          "why": "'blame' is followed by 'for', not 'of'."
+        },
+        null,
+        {
+          "tag": "wrong_preposition",
+          "why": "'criticise' is followed by 'for', not 'of'."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'warned' does not fit; Ming was charging Jo with something already done, not warning about a danger."
+        }
+      ],
+      "solution": [
+        "Ming accused Jo of copying his answers.",
+        "'accuse someone of + -ing' reports a charge of wrongdoing."
+      ]
+    },
+    {
+      "key": "gram-rep-026",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"You should see a doctor,\" Mum said to me.\nMum advised me ____ a doctor.",
+      "options": [
+        "seeing",
+        "see",
+        "should see",
+        "to see"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'advise + person' is followed by a to-infinitive, not an -ing form."
+        },
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'advise + person' needs 'to' before the verb."
+        },
+        {
+          "tag": "wrong_verb_pattern",
+          "why": "'advised me should see' is ungrammatical; 'advise + person' needs a to-infinitive."
+        },
+        null
+      ],
+      "solution": [
+        "Mum advised me to see a doctor.",
+        "'advise + person + to-infinitive' reports advice."
+      ]
+    },
+    {
+      "key": "gram-rep-027",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Vik said, \"Had I known, I would have come.\"\nVik said that if he ____ known, he would have come.",
+      "options": [
+        "have",
+        "has",
+        "had",
+        "did"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_if_clause",
+          "why": "'if he have known' is ungrammatical; the subject 'he' with a past perfect needs 'had'."
+        },
+        {
+          "tag": "wrong_if_clause",
+          "why": "'if he has known' is a present perfect, which does not fit an unreal past condition."
+        },
+        null,
+        {
+          "tag": "wrong_if_clause",
+          "why": "'did known' is not a verb form; the past perfect 'had known' is needed."
+        }
+      ],
+      "solution": [
+        "Vik said that if he had known, he would have come.",
+        "A past unreal condition keeps 'if + had + past participle' in reported speech."
+      ]
+    },
+    {
+      "key": "gram-rep-028",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Last Saturday, Su Lin asked Joel, \"Are you coming to the party or not?\"\nSu Lin asked Joel whether ____ to the party or not.",
+      "options": [
+        "he was coming",
+        "was he coming",
+        "he were coming",
+        "he coming"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_word_order",
+          "why": "a reported question uses statement order, so 'was he coming' is wrong."
+        },
+        {
+          "tag": "wrong_agreement",
+          "why": "'he' is singular, so 'were' does not agree."
+        },
+        {
+          "tag": "missing_verb",
+          "why": "'he coming' has no finite verb after 'whether'."
+        }
+      ],
+      "solution": [
+        "Su Lin asked Joel whether he was coming to the party or not.",
+        "'are coming' shifts back to 'was coming', in statement order after 'whether'."
+      ]
+    },
+    {
+      "key": "gram-rep-029",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I'll definitely finish the model by Monday,\" Aaron said.\nAaron ____ to finish the model by Monday.",
+      "options": [
+        "promised",
+        "admitted",
+        "denied",
+        "regretted"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'admitted' means owning up to something done, not a plan for the future."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'denied' takes an -ing form and means saying 'no' to a claim."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'regretted' means feeling sorry, and does not fit a promise."
+        }
+      ],
+      "solution": [
+        "Aaron promised to finish the model by Monday.",
+        "'I'll definitely ...' is a promise, reported with 'promised to + verb'."
+      ]
+    },
+    {
+      "key": "gram-rep-030",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Don't forget to bring your passes,\" Mr Lee said to us.\nMr Lee ____ us to bring our passes.",
+      "options": [
+        "remembered",
+        "reminded",
+        "forgot",
+        "recalled"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'remembered' means recalling something himself; it does not take 'us to bring'."
+        },
+        null,
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'forgot' means he failed to remember, which is the opposite of what he said."
+        },
+        {
+          "tag": "wrong_reporting_verb",
+          "why": "'recalled' means bringing something back to mind, and it does not take 'us to bring'."
+        }
+      ],
+      "solution": [
+        "Mr Lee reminded us to bring our passes.",
+        "'Don't forget to ...' is reported with 'reminded + person + to-infinitive'."
+      ]
+    },
+    {
+      "key": "gram-inv-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Kai swam in the pool, and so ____ his sister.",
+      "options": [
+        "does",
+        "was",
+        "did",
+        "had"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense",
+          "why": "'swam' is past, so the matching auxiliary is 'did', not present 'does'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'swam' is an ordinary verb, so the echo uses 'did', not a form of 'be'."
+        },
+        null,
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'swam' is the simple past, so the echo uses 'did', not 'had'."
+        }
+      ],
+      "solution": [
+        "Kai swam in the pool, and so did his sister.",
+        "'so + auxiliary + subject' echoes the first clause; the simple past 'swam' is echoed by 'did'."
+      ]
+    },
+    {
+      "key": "gram-inv-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I can't speak Malay.\" \"Neither ____ I.\"",
+      "options": [
+        "can't",
+        "do",
+        "am",
+        "can"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "double_negative",
+          "why": "'Neither' is already negative, so 'can't' makes a double negative."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'can't' is echoed with the same modal 'can', not 'do'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'can't speak' is echoed with 'can', not with a form of 'be'."
+        },
+        null
+      ],
+      "solution": [
+        "\"I can't speak Malay.\" \"Neither can I.\"",
+        "'Neither + auxiliary + subject' agrees with a negative statement; the auxiliary repeats the modal 'can'."
+      ]
+    },
+    {
+      "key": "gram-inv-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My brother doesn't eat durian, nor ____ my father.",
+      "options": [
+        "does",
+        "do",
+        "is",
+        "will"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_agreement",
+          "why": "'my father' is singular, so 'do' does not agree; 'does' is needed."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'doesn't eat' is echoed with 'does', not a form of 'be'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'doesn't eat' is present simple, so the echo is 'does', not 'will'."
+        }
+      ],
+      "solution": [
+        "My brother doesn't eat durian, nor does my father.",
+        "'nor + auxiliary + subject' echoes a negative; 'doesn't' is echoed by 'does' with a singular subject."
+      ]
+    },
+    {
+      "key": "gram-inv-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not only ____ the first prize, but she also broke the school record.",
+      "options": [
+        "she won",
+        "did she win",
+        "she did win",
+        "won she"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Not only' at the start, the auxiliary comes before the subject; 'she won' does not invert."
+        },
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "'she did' has the subject first, but after 'Not only' the auxiliary must come first."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion uses an auxiliary before the subject, not the main verb 'won' alone."
+        }
+      ],
+      "solution": [
+        "Not only did she win the first prize, but she also broke the school record.",
+        "A sentence starting with 'Not only' inverts: auxiliary + subject + base verb ('did she win')."
+      ]
+    },
+    {
+      "key": "gram-inv-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "No sooner had we reached the bus stop ____ it began to rain.",
+      "options": [
+        "than",
+        "when",
+        "then",
+        "that"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_pair",
+          "why": "'No sooner' is paired with 'than'; 'when' belongs with 'Hardly' or 'Scarcely'."
+        },
+        {
+          "tag": "wrong_word_class",
+          "why": "'then' is a time adverb and cannot link the two clauses here."
+        },
+        {
+          "tag": "wrong_pair",
+          "why": "'that' does not complete 'No sooner'; the partner word is 'than'."
+        }
+      ],
+      "solution": [
+        "No sooner had we reached the bus stop than it began to rain.",
+        "'No sooner' + past perfect is completed by 'than'."
+      ]
+    },
+    {
+      "key": "gram-inv-006",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Hardly had I sat down ____ the bell rang.",
+      "options": [
+        "that",
+        "then",
+        "when",
+        "while"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_pair",
+          "why": "'Hardly' is paired with 'when', not 'that'."
+        },
+        {
+          "tag": "wrong_word_class",
+          "why": "'then' is an adverb and cannot link the two clauses."
+        },
+        null,
+        {
+          "tag": "wrong_pair",
+          "why": "'while' means 'during the time that', but the bell rang right after sitting down; 'Hardly' is paired with 'when'."
+        }
+      ],
+      "solution": [
+        "Hardly had I sat down when the bell rang.",
+        "'Hardly' + past perfect is completed by 'when'."
+      ]
+    },
+    {
+      "key": "gram-inv-007",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Only after the guests left ____ the mess in the hall.",
+      "options": [
+        "we noticed",
+        "did we notice",
+        "we did notice",
+        "noticed we"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Only after ...', the auxiliary comes before the subject; 'we noticed' does not invert."
+        },
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "the subject 'we' is before the auxiliary, but 'Only after' needs 'did' first."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion needs an auxiliary before the subject, not the main verb alone."
+        }
+      ],
+      "solution": [
+        "Only after the guests left did we notice the mess in the hall.",
+        "A sentence starting with 'Only after ...' inverts: 'did we notice'."
+      ]
+    },
+    {
+      "key": "gram-inv-008",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Never ____ such a delicious laksa before.",
+      "options": [
+        "I have eaten",
+        "I ate",
+        "ate I",
+        "have I eaten"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Never' at the start, the auxiliary comes before the subject; 'I have eaten' does not invert."
+        },
+        {
+          "tag": "no_inversion",
+          "why": "after 'Never' at the start the sentence inverts, and 'before' needs the perfect form."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion uses an auxiliary before the subject, not the main verb alone."
+        },
+        null
+      ],
+      "solution": [
+        "Never have I eaten such a delicious laksa before.",
+        "A sentence starting with 'Never' inverts; 'before' with an experience takes the present perfect: 'have I eaten'."
+      ]
+    },
+    {
+      "key": "gram-inv-009",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Amir is a punctual boy. Rarely ____ late for school.",
+      "options": [
+        "he is",
+        "does he",
+        "he was",
+        "is he"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Rarely' at the start, the verb comes before the subject; 'he is' does not invert."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'be' needs no 'do': 'does he late' has no main verb."
+        },
+        {
+          "tag": "no_inversion",
+          "why": "after 'Rarely' at the start the verb comes before the subject, so 'he was' is not inverted."
+        },
+        null
+      ],
+      "solution": [
+        "Amir is a punctual boy. Rarely is he late for school.",
+        "A sentence starting with 'Rarely' inverts; with 'be' the verb simply moves before the subject: 'is he'."
+      ]
+    },
+    {
+      "key": "gram-inv-010",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I can ride a bike.\" \"So ____ I.\"",
+      "options": [
+        "can",
+        "do",
+        "am",
+        "have"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'can ride' is echoed with the same modal 'can', not 'do'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'can ride' is echoed with 'can', not with a form of 'be'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'can ride' is echoed with 'can', not 'have'."
+        }
+      ],
+      "solution": [
+        "\"I can ride a bike.\" \"So can I.\"",
+        "'So + auxiliary + subject' agrees with a positive statement; the auxiliary repeats the modal 'can'."
+      ]
+    },
+    {
+      "key": "gram-inv-011",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not only does the library lend books, ____ it also offers free workshops.",
+      "options": [
+        "so",
+        "or",
+        "then",
+        "but"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_pair",
+          "why": "'Not only' is paired with 'but (also)', not 'so'."
+        },
+        {
+          "tag": "wrong_pair",
+          "why": "'or' gives a choice, but the library does both things."
+        },
+        {
+          "tag": "wrong_word_class",
+          "why": "'then' is an adverb, and 'Not only' needs the conjunction 'but'."
+        },
+        null
+      ],
+      "solution": [
+        "Not only does the library lend books, but it also offers free workshops.",
+        "'Not only ... but also ...' links two things done by the same subject."
+      ]
+    },
+    {
+      "key": "gram-inv-012",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Hardly ____ the shop when the fire alarm rang.",
+      "options": [
+        "had we entered",
+        "we had entered",
+        "did we enter",
+        "have we entered"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "after 'Hardly' at the start, 'had' comes before the subject; 'we had' does not invert."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "'Hardly ... when' uses the past perfect 'had entered', not 'did enter'."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "the alarm rang in the past, so the past perfect 'had we entered' is needed, not 'have'."
+        }
+      ],
+      "solution": [
+        "Hardly had we entered the shop when the fire alarm rang.",
+        "'Hardly' at the start inverts the past perfect: 'had + subject + past participle'."
+      ]
+    },
+    {
+      "key": "gram-inv-013",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "No sooner ____ off the lights than the baby started to cry.",
+      "options": [
+        "I had switched",
+        "had I switched",
+        "did I switch",
+        "have I switched"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'No sooner' at the start, 'had' comes before the subject; 'I had' does not invert."
+        },
+        null,
+        {
+          "tag": "wrong_tense",
+          "why": "'No sooner ... than' uses the past perfect 'had switched', not 'did switch'."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "the baby started to cry in the past, so the past perfect 'had I switched' is needed."
+        }
+      ],
+      "solution": [
+        "No sooner had I switched off the lights than the baby started to cry.",
+        "'No sooner' at the start inverts the past perfect: 'had + subject + past participle'."
+      ]
+    },
+    {
+      "key": "gram-inv-014",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Su Ling waited nervously. Only after the results were announced ____ how well she had done.",
+      "options": [
+        "she realised",
+        "realised she",
+        "did she realise",
+        "she did realise"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Only after ...' the auxiliary comes before the subject; 'she realised' does not invert."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion needs an auxiliary before the subject, not the main verb alone."
+        },
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "the subject is before 'did', but 'Only after' needs 'did' first."
+        }
+      ],
+      "solution": [
+        "Su Ling waited nervously. Only after the results were announced did she realise how well she had done.",
+        "'Only after ...' at the start inverts the main clause: 'did + subject + base verb'."
+      ]
+    },
+    {
+      "key": "gram-inv-015",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Only when you finish your homework ____ allowed to play games.",
+      "options": [
+        "you will be",
+        "will you be",
+        "are you",
+        "be you"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Only when ...' the auxiliary comes before the subject; 'you will be' does not invert."
+        },
+        null,
+        {
+          "tag": "wrong_tense",
+          "why": "'are you allowed' is a present question form that misses the future meaning 'will'."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion needs the auxiliary 'will' before the subject, not a bare 'be'."
+        }
+      ],
+      "solution": [
+        "Only when you finish your homework will you be allowed to play games.",
+        "'Only when ...' at the start inverts the main clause: 'will + subject + be'."
+      ]
+    },
+    {
+      "key": "gram-inv-016",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Alicia didn't go to the concert.\" \"Neither ____ Wen Hui.\"",
+      "options": [
+        "does",
+        "was",
+        "didn't",
+        "did"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_tense",
+          "why": "'didn't go' is past, so the echo uses 'did', not present 'does'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'didn't go' is echoed with 'did', not a form of 'be'."
+        },
+        {
+          "tag": "double_negative",
+          "why": "'Neither' is already negative, so 'didn't' makes a double negative."
+        },
+        null
+      ],
+      "solution": [
+        "\"Alicia didn't go to the concert.\" \"Neither did Wen Hui.\"",
+        "'Neither + auxiliary + subject' echoes a negative; 'didn't go' is echoed by 'did'."
+      ]
+    },
+    {
+      "key": "gram-inv-017",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Scarcely ____ the stage when the audience began to clap.",
+      "options": [
+        "she had reached",
+        "has she reached",
+        "had she reached",
+        "did she reach"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Scarcely' at the start, 'had' comes before the subject; 'she had' does not invert."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "the audience clapped in the past, so the past perfect 'had she reached' is needed."
+        },
+        null,
+        {
+          "tag": "wrong_tense",
+          "why": "'Scarcely ... when' uses the past perfect 'had reached', not 'did reach'."
+        }
+      ],
+      "solution": [
+        "Scarcely had she reached the stage when the audience began to clap.",
+        "'Scarcely' at the start inverts the past perfect: 'had + subject + past participle'."
+      ]
+    },
+    {
+      "key": "gram-inv-018",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not until the guests arrived ____ the cake.",
+      "options": [
+        "did we cut",
+        "we cut",
+        "we did cut",
+        "cut we"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "after 'Not until ...' the auxiliary comes before the subject; 'we cut' does not invert."
+        },
+        {
+          "tag": "no_inversion",
+          "why": "the subject is before 'did', but 'Not until' needs 'did' first."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion needs an auxiliary before the subject, not the main verb alone."
+        }
+      ],
+      "solution": [
+        "Not until the guests arrived did we cut the cake.",
+        "'Not until ...' at the start inverts the main clause: 'did + subject + base verb'."
+      ]
+    },
+    {
+      "key": "gram-inv-019",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "So heavy ____ that the match was cancelled.",
+      "options": [
+        "was the rain",
+        "the rain was",
+        "did the rain",
+        "is the rain"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "after 'So heavy' at the start, the verb comes before the subject; 'the rain was' does not invert."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'be' does not take 'do'; 'did the rain' has no main verb."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "the match was cancelled in the past, so the past 'was the rain' is needed."
+        }
+      ],
+      "solution": [
+        "So heavy was the rain that the match was cancelled.",
+        "'So + adjective' at the start inverts the verb 'be' before the subject: 'was the rain'."
+      ]
+    },
+    {
+      "key": "gram-inv-020",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Seldom ____ such a large crowd at this hawker centre.",
+      "options": [
+        "we see",
+        "do we see",
+        "see we",
+        "we do see"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Seldom' at the start, the auxiliary comes before the subject; 'we see' does not invert."
+        },
+        null,
+        {
+          "tag": "wrong_inversion",
+          "why": "inversion needs an auxiliary before the subject, not the main verb alone."
+        },
+        {
+          "tag": "no_inversion",
+          "why": "the subject is before 'do', but 'Seldom' needs 'do' first."
+        }
+      ],
+      "solution": [
+        "Seldom do we see such a large crowd at this hawker centre.",
+        "'Seldom' at the start inverts the main clause: 'do + subject + base verb'."
+      ]
+    },
+    {
+      "key": "gram-inv-021",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"I wasn't at the meeting.\" \"Neither ____ I.\"",
+      "options": [
+        "was",
+        "did",
+        "were",
+        "am"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'wasn't' is a form of 'be', so the echo uses 'was', not 'did'."
+        },
+        {
+          "tag": "wrong_agreement",
+          "why": "'I' takes 'was', not 'were'."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "'wasn't' is past, so the echo is 'was', not present 'am'."
+        }
+      ],
+      "solution": [
+        "\"I wasn't at the meeting.\" \"Neither was I.\"",
+        "'Neither + auxiliary + subject' echoes a negative; 'wasn't' is echoed by 'was'."
+      ]
+    },
+    {
+      "key": "gram-inv-022",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Mum doesn't like spicy food.\" \"Neither ____ Dad.\"",
+      "options": [
+        "do",
+        "does",
+        "doesn't",
+        "is"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_agreement",
+          "why": "'Dad' is singular, so 'do' does not agree; 'does' is needed."
+        },
+        null,
+        {
+          "tag": "double_negative",
+          "why": "'Neither' is already negative, so 'doesn't' makes a double negative."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'doesn't like' is echoed with 'does', not a form of 'be'."
+        }
+      ],
+      "solution": [
+        "\"Mum doesn't like spicy food.\" \"Neither does Dad.\"",
+        "'Neither + auxiliary + subject' echoes a negative; 'doesn't like' is echoed by 'does' with a singular subject."
+      ]
+    },
+    {
+      "key": "gram-inv-023",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not only the students but also the teacher ____ finished the project.",
+      "options": [
+        "have",
+        "is",
+        "has",
+        "are"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_agreement",
+          "why": "with 'Not only ... but also', the verb agrees with the nearer subject 'the teacher', which is singular."
+        },
+        {
+          "tag": "wrong_form",
+          "why": "'is finished the project' is ungrammatical; the perfect needs 'has finished'."
+        },
+        null,
+        {
+          "tag": "wrong_form",
+          "why": "'are finished the project' is ungrammatical; the perfect needs 'has finished'."
+        }
+      ],
+      "solution": [
+        "Not only the students but also the teacher has finished the project.",
+        "With 'Not only ... but also ...' the verb agrees with the subject nearer to it: 'the teacher' takes 'has'."
+      ]
+    },
+    {
+      "key": "gram-inv-024",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Only by practising every day ____ the violin well.",
+      "options": [
+        "you can play",
+        "can play you",
+        "do you can play",
+        "can you play"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Only by ...' the modal comes before the subject; 'you can play' does not invert."
+        },
+        {
+          "tag": "wrong_inversion",
+          "why": "the subject must follow the modal, not come after the main verb."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'can' is already an auxiliary, so 'do' is not added."
+        },
+        null
+      ],
+      "solution": [
+        "Only by practising every day can you play the violin well.",
+        "'Only by ...' at the start inverts the main clause: modal + subject + base verb."
+      ]
+    },
+    {
+      "key": "gram-inv-025",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "____ I known about the road closure, I would have taken the MRT.",
+      "options": [
+        "Have",
+        "Did",
+        "Had",
+        "Would"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_form",
+          "why": "'Have I known' does not form an unreal past condition; the past perfect needs 'Had'."
+        },
+        {
+          "tag": "wrong_form",
+          "why": "'Did I known' is ungrammatical; 'Did' takes the base form."
+        },
+        null,
+        {
+          "tag": "wrong_form",
+          "why": "'Would I known' is ungrammatical; 'would' needs a base verb."
+        }
+      ],
+      "solution": [
+        "Had I known about the road closure, I would have taken the MRT.",
+        "'Had + subject + past participle' replaces 'If I had known' in a past unreal condition."
+      ]
+    },
+    {
+      "key": "gram-inv-026",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "\"Siti has never been late.\" \"Nor ____ Hui Min.\"",
+      "options": [
+        "has",
+        "is",
+        "does",
+        "have"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'has been' is a present perfect, so the echo uses 'has', not 'is'."
+        },
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'has been' is echoed with 'has', not 'does'."
+        },
+        {
+          "tag": "wrong_agreement",
+          "why": "'Hui Min' is singular, so 'have' does not agree."
+        }
+      ],
+      "solution": [
+        "\"Siti has never been late.\" \"Nor has Hui Min.\"",
+        "'Nor + auxiliary + subject' echoes a negative; 'has been' is echoed by 'has'."
+      ]
+    },
+    {
+      "key": "gram-inv-027",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not only did the volunteers clean the beach, but they ____ the old signboards.",
+      "options": [
+        "also repair",
+        "also repairing",
+        "also had repair",
+        "also repaired"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_tense",
+          "why": "after 'did' in the first part, the second part needs a past verb 'repaired', not the base form."
+        },
+        {
+          "tag": "wrong_form",
+          "why": "'repairing' without 'were' is not a finite past verb."
+        },
+        {
+          "tag": "wrong_form",
+          "why": "'had repair' is not a verb form; the simple past 'repaired' is needed."
+        },
+        null
+      ],
+      "solution": [
+        "Not only did the volunteers clean the beach, but they also repaired the old signboards.",
+        "In the 'but' part of 'Not only ... but also', the verb is in the normal order and in the same past tense: 'also repaired'."
+      ]
+    },
+    {
+      "key": "gram-inv-028",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Only after the final bell had rung ____ the classroom.",
+      "options": [
+        "the pupils left",
+        "did the pupils leave",
+        "the pupils did leave",
+        "had the pupils left"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Only after ...' the auxiliary comes before the subject; 'the pupils left' does not invert."
+        },
+        null,
+        {
+          "tag": "no_inversion",
+          "why": "the subject is before 'did', but 'Only after' needs 'did' first."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "the leaving came after the bell, so the main clause uses the simple past 'did ... leave', not the past perfect."
+        }
+      ],
+      "solution": [
+        "Only after the final bell had rung did the pupils leave the classroom.",
+        "'Only after ...' at the start inverts the main clause: 'did + subject + base verb'."
+      ]
+    },
+    {
+      "key": "gram-inv-029",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ben missed the start of the briefing. Not only ____ late, but he also forgot his notes.",
+      "options": [
+        "he was",
+        "was he",
+        "did he",
+        "he did"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "no_inversion",
+          "why": "after 'Not only' at the start the verb comes before the subject; 'he was' does not invert."
+        },
+        null,
+        {
+          "tag": "wrong_auxiliary",
+          "why": "'be' does not take 'do'; 'did he late' has no main verb."
+        },
+        {
+          "tag": "no_inversion",
+          "why": "'did' is the wrong auxiliary for 'be', and the subject is also before it."
+        }
+      ],
+      "solution": [
+        "Ben missed the start of the briefing. Not only was he late, but he also forgot his notes.",
+        "'Not only' at the start inverts 'be' before the subject: 'was he'."
+      ]
+    },
+    {
+      "key": "gram-inv-030",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "At no time during last term ____ the pupils allowed to use phones in class.",
+      "options": [
+        "was",
+        "are",
+        "were",
+        "have"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_agreement",
+          "why": "'the pupils' is plural, so 'was' does not agree."
+        },
+        {
+          "tag": "wrong_tense",
+          "why": "'last term' is past, so 'are' does not fit."
+        },
+        null,
+        {
+          "tag": "wrong_form",
+          "why": "'have the pupils allowed' needs 'been' to be passive."
+        }
+      ],
+      "solution": [
+        "At no time during last term were the pupils allowed to use phones in class.",
+        "'At no time' at the start inverts: verb 'be' before the subject, here past and plural: 'were the pupils'."
+      ]
+    }
+  ]
+}
