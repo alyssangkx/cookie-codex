@@ -1,6 +1,6 @@
 # English bank: PSLE syllabus and top-school coverage
 
-476 shipped questions (basic 159, intermediate 158, competent 159). Regenerate with `python3 scripts/quiz/english/coverage.py`.
+590 shipped questions (basic 159, intermediate 158, competent 273). Regenerate with `python3 scripts/quiz/english/coverage.py`.
 
 ## 1. PSLE syllabus (English Language Syllabus 2020)
 
@@ -10,18 +10,18 @@
 | Applying grammatical knowledge | Revisit and strengthen previously learnt grammatical knowledge; ident… | yes | 0 **not yet** |
 | Applying grammatical knowledge | Use appropriate language structures learnt previously to convey thoug… | yes | 0 **not yet** |
 | Applying grammatical knowledge | Understand that varying the form of a construction conveys different … | yes | 0 **not yet** |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Verb tenses and forms in context | yes | 102 |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Subject-verb agreement | yes | 14 |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Prepositions | yes | 19 |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Conjunctions and connectors | yes | 40 |
-| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Pronouns including relative pronouns | yes | 18 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Verb tenses and forms in context | yes | 122 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Subject-verb agreement | yes | 24 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Prepositions | yes | 25 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Conjunctions and connectors | yes | 44 |
+| Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Pronouns including relative pronouns | yes | 25 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Question tags | yes | 14 |
 | Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags) | Quantifiers and determiners | yes | 13 |
 | Cohesion in texts | Apply knowledge of cohesive devices and grammatical structures to cre… | yes | 0 **not yet** |
 | Language features of text types | Identify language features in different types of texts and recognise … | yes | 0 **not yet** |
 | Word study | Examine how words are formed, how words relate to one another and how… | yes | 0 **not yet** |
-| Word study | Use vocabulary and learner strategies to work out and learn new vocab… | yes | 74 |
-| Appropriate use | Use words suitable for purpose, audience, context and culture. | yes | 71 |
+| Word study | Use vocabulary and learner strategies to work out and learn new vocab… | yes | 108 |
+| Appropriate use | Use words suitable for purpose, audience, context and culture. | yes | 104 |
 | Appropriate use | Use fixed expressions accurately and appropriately. | yes | 111 |
 | Appropriate use | Recognise, appreciate and use words for literary effect. | yes | 0 **not yet** |
 | Appropriate use | Use words meaningfully in conjunction with semiotic modes. | yes | 0 **not yet** |
@@ -40,10 +40,10 @@
 
 | Type | Papers it appears in | Shipped questions |
 |---|---|---|
-| Vocabulary MCQ: single-word choice (`eng-pat-vocab-word`) | 152 | 71 |
-| Grammar MCQ (one blank in a sentence, four options) (`eng-pat-grammar-mcq`) | 131 | 220 |
+| Vocabulary MCQ: single-word choice (`eng-pat-vocab-word`) | 152 | 104 |
+| Grammar MCQ (one blank in a sentence, four options) (`eng-pat-grammar-mcq`) | 131 | 267 |
 | Visual-text comprehension MCQ (poster, brochure or notice, often paired with a second text) (`eng-pat-visual-mcq`) | 126 | 0 **not yet** |
-| Vocabulary-in-context MCQ (closest in meaning to a marked word in a passage) (`eng-pat-vocab-passage-mcq`) | 117 | 74 |
+| Vocabulary-in-context MCQ (closest in meaning to a marked word in a passage) (`eng-pat-vocab-passage-mcq`) | 117 | 108 |
 | Vocabulary MCQ: phrasal verb choice (`eng-pat-vocab-phrasal`) | 90 | 69 |
 | Vocabulary MCQ: idiom or fixed-expression choice (`eng-pat-vocab-idiom`) | 48 | 42 |
 | Passage comprehension MCQ (non-visual text in Booklet A) (`eng-pat-reading-mcq`) | 11 | 0 **not yet** |
