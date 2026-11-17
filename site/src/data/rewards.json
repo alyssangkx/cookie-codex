@@ -601,6 +601,33 @@
   ],
   "english": [
    {
+    "id": "eng-gram-terms-meta",
+    "name": "Metalanguage",
+    "topic": "eng-gram-terms",
+    "topicName": "Use of terms (grammatical metalanguage)",
+    "home": 5,
+    "i": 0,
+    "capstone": true
+   },
+   {
+    "id": "eng-gram-text-cohesion",
+    "name": "Cohesion in texts",
+    "topic": "eng-gram-text",
+    "topicName": "Grammar at text level",
+    "home": 5,
+    "i": 3,
+    "capstone": false
+   },
+   {
+    "id": "eng-gram-text-features",
+    "name": "Language features of text types",
+    "topic": "eng-gram-text",
+    "topicName": "Grammar at text level",
+    "home": 5,
+    "i": 4,
+    "capstone": true
+   },
+   {
     "id": "eng-vocab-rich-words",
     "name": "Word study",
     "topic": "eng-vocab-rich",
@@ -628,51 +655,6 @@
     "capstone": false
    },
    {
-    "id": "eng-gram-terms-meta",
-    "name": "Metalanguage",
-    "topic": "eng-gram-terms",
-    "topicName": "Use of terms (grammatical metalanguage)",
-    "home": 5,
-    "i": 0,
-    "capstone": true
-   },
-   {
-    "id": "eng-gram-wps-apply",
-    "name": "Applying grammatical knowledge",
-    "topic": "eng-gram-wps",
-    "topicName": "Grammar at word, phrase and sentence levels",
-    "home": 5,
-    "i": 1,
-    "capstone": true
-   },
-   {
-    "id": "eng-gram-text-cohesion",
-    "name": "Cohesion in texts",
-    "topic": "eng-gram-text",
-    "topicName": "Grammar at text level",
-    "home": 5,
-    "i": 3,
-    "capstone": false
-   },
-   {
-    "id": "eng-gram-text-features",
-    "name": "Language features of text types",
-    "topic": "eng-gram-text",
-    "topicName": "Grammar at text level",
-    "home": 5,
-    "i": 4,
-    "capstone": true
-   },
-   {
-    "id": "eng-listen-close",
-    "name": "Listening closely",
-    "topic": "eng-listen-core",
-    "topicName": "Listening and viewing",
-    "home": 5,
-    "i": 10,
-    "capstone": false
-   },
-   {
     "id": "eng-read-close-lit",
     "name": "Literal and inferential comprehension",
     "topic": "eng-read-close",
@@ -689,6 +671,24 @@
     "home": 6,
     "i": 8,
     "capstone": true
+   },
+   {
+    "id": "eng-gram-wps-apply",
+    "name": "Applying grammatical knowledge",
+    "topic": "eng-gram-wps",
+    "topicName": "Grammar at word, phrase and sentence levels",
+    "home": 5,
+    "i": 1,
+    "capstone": true
+   },
+   {
+    "id": "eng-listen-close",
+    "name": "Listening closely",
+    "topic": "eng-listen-core",
+    "topicName": "Listening and viewing",
+    "home": 5,
+    "i": 10,
+    "capstone": false
    },
    {
     "id": "eng-read-crit-eval",
@@ -1613,43 +1613,43 @@
    "slug": "stardust-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|b": {
+  "eng-gram-terms-meta|b": {
    "slug": "poison-mushroom-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|b": {
-   "slug": "sonic-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-items|b": {
-   "slug": "black-lemonade-cookie",
-   "dup": false
-  },
-  "eng-gram-terms-meta|b": {
-   "slug": "peach-blossom-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-apply|b": {
-   "slug": "silverbell-cookie",
-   "dup": false
-  },
   "eng-gram-text-cohesion|b": {
-   "slug": "milky-way-cookie",
+   "slug": "sonic-cookie",
    "dup": false
   },
   "eng-gram-text-features|b": {
+   "slug": "black-lemonade-cookie",
+   "dup": false
+  },
+  "eng-vocab-rich-words|b": {
+   "slug": "peach-blossom-cookie",
+   "dup": false
+  },
+  "eng-vocab-use-appropriate|b": {
+   "slug": "silverbell-cookie",
+   "dup": false
+  },
+  "eng-gram-wps-items|b": {
+   "slug": "milky-way-cookie",
+   "dup": false
+  },
+  "eng-read-close-lit|b": {
    "slug": "zoey-cookie",
    "dup": false
   },
-  "eng-listen-close|b": {
+  "eng-read-close-visual|b": {
    "slug": "peach-blossom-cookie",
    "dup": true
   },
-  "eng-read-close-lit|b": {
+  "eng-gram-wps-apply|b": {
    "slug": "sonic-cookie",
    "dup": true
   },
-  "eng-read-close-visual|b": {
+  "eng-listen-close|b": {
    "slug": "black-lemonade-cookie",
    "dup": true
   },
@@ -1661,43 +1661,43 @@
    "slug": "candy-diver-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|i": {
-   "slug": "sorbet-shark-cookie",
-   "dup": false
-  },
-  "eng-vocab-use-appropriate|i": {
-   "slug": "snow-sugar-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-items|i": {
-   "slug": "choco-drizzle-cookie",
-   "dup": false
-  },
   "eng-gram-terms-meta|i": {
-   "slug": "raspberry-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-apply|i": {
-   "slug": "vampire-cookie",
+   "slug": "sorbet-shark-cookie",
    "dup": false
   },
   "eng-gram-text-cohesion|i": {
-   "slug": "cotton-cookie",
+   "slug": "snow-sugar-cookie",
    "dup": false
   },
   "eng-gram-text-features|i": {
-   "slug": "squid-ink-cookie",
+   "slug": "choco-drizzle-cookie",
    "dup": false
   },
-  "eng-listen-close|i": {
-   "slug": "sorbet-shark-cookie",
-   "dup": true
+  "eng-vocab-rich-words|i": {
+   "slug": "raspberry-cookie",
+   "dup": false
+  },
+  "eng-vocab-use-appropriate|i": {
+   "slug": "vampire-cookie",
+   "dup": false
+  },
+  "eng-gram-wps-items|i": {
+   "slug": "cotton-cookie",
+   "dup": false
   },
   "eng-read-close-lit|i": {
    "slug": "squid-ink-cookie",
-   "dup": true
+   "dup": false
   },
   "eng-read-close-visual|i": {
+   "slug": "sorbet-shark-cookie",
+   "dup": true
+  },
+  "eng-gram-wps-apply|i": {
+   "slug": "squid-ink-cookie",
+   "dup": true
+  },
+  "eng-listen-close|i": {
    "slug": "pancake-cookie",
    "dup": false
   },
@@ -1709,48 +1709,48 @@
    "slug": "cherry-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|c": {
+  "eng-gram-terms-meta|c": {
    "slug": "manju-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|c": {
+  "eng-gram-text-cohesion|c": {
    "slug": "fig-cookie",
+   "dup": false
+  },
+  "eng-gram-text-features|c": {
+   "slug": "elder-faerie-cookie",
+   "dup": false
+  },
+  "eng-vocab-rich-words|c": {
+   "slug": "venom-dough-cookie",
+   "dup": false
+  },
+  "eng-vocab-use-appropriate|c": {
+   "slug": "moonlight-cookie",
    "dup": false
   },
   "eng-gram-wps-items|c": {
    "slug": "pudding-a-la-mode-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|c": {
-   "slug": "elder-faerie-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-apply|c": {
-   "slug": "venom-dough-cookie",
-   "dup": false
-  },
-  "eng-gram-text-cohesion|c": {
+  "eng-read-close-lit|c": {
    "slug": "sugarfly-cookie",
    "dup": false
   },
-  "eng-gram-text-features|c": {
-   "slug": "moonlight-cookie",
-   "dup": false
+  "eng-read-close-visual|c": {
+   "slug": "sugarfly-cookie",
+   "dup": true
+  },
+  "eng-gram-wps-apply|c": {
+   "slug": "elder-faerie-cookie",
+   "dup": true
   },
   "eng-listen-close|c": {
    "slug": "moonlight-cookie",
    "dup": true
   },
-  "eng-read-close-lit|c": {
-   "slug": "pudding-a-la-mode-cookie",
-   "dup": true
-  },
-  "eng-read-close-visual|c": {
-   "slug": "venom-dough-cookie",
-   "dup": true
-  },
   "eng-read-crit-eval|c": {
-   "slug": "pudding-a-la-mode-cookie",
+   "slug": "elder-faerie-cookie",
    "dup": true
   },
   "eng-listen-understand|c": {

@@ -4354,6 +4354,1761 @@
     "key": "vocab-mean-075",
     "subtopic": "eng-vocab-rich-words"
    }
+  },
+  {
+   "id": "engvoca-6aac58920b",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "It is ____ to run along the wet corridor.",
+   "options": [
+    "dissafe",
+    "unsafe",
+    "missafe",
+    "insafe"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'dissafe' is not a word; 'dis-' does not go with 'safe'"
+    },
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'missafe' is not a word; 'mis-' means 'wrongly' and does not go with 'safe'"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'insafe' is not a word; 'safe' takes 'un-' to mean 'not safe'"
+    }
+   ],
+   "solution": [
+    "'un-' means 'not', so 'unsafe' means 'not safe'."
+   ],
+   "params": {
+    "key": "wst-001",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-bf7d2a5b6c",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Mei Lin ____ the instructions and put the model together the wrong way.",
+   "options": [
+    "inread",
+    "misread",
+    "unread",
+    "disread"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'inread' is not a word"
+    },
+    null,
+    {
+     "tag": "wrong_meaning",
+     "why": "'unread' means not yet read, but she did read them wrongly"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'disread' is not a word"
+    }
+   ],
+   "solution": [
+    "'mis-' means 'wrongly', so 'misread' means 'read wrongly'."
+   ],
+   "params": {
+    "key": "wst-002",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-bcb17f3c11",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The pupils were punished for ____ the school rules.",
+   "options": [
+    "unobeying",
+    "misobeying",
+    "disobeying",
+    "inobeying"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'unobeying' is not a word; the opposite of 'obey' uses 'dis-'"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'misobeying' is not a word"
+    },
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'inobeying' is not a word"
+    }
+   ],
+   "solution": [
+    "'dis-' gives the opposite meaning, so 'disobey' means 'not to obey'."
+   ],
+   "params": {
+    "key": "wst-003",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-d24dec120e",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The ____ kites filled the sky at Pasir Ris Park.",
+   "options": [
+    "colourtion",
+    "colourment",
+    "colourful",
+    "colourly"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'colourtion' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'colourment' is not a word"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'-ly' makes adverbs, but a noun like 'kites' needs an adjective"
+    }
+   ],
+   "solution": [
+    "'-ful' means 'full of', so 'colourful' means 'full of colour'."
+   ],
+   "params": {
+    "key": "wst-004",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-f6edef6a19",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The puppy was ____ until the animal shelter took it in.",
+   "options": [
+    "homement",
+    "homeful",
+    "hometion",
+    "homeless"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'homement' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'homeful' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'hometion' is not a word"
+    },
+    null
+   ],
+   "solution": [
+    "'-less' means 'without', so 'homeless' means 'without a home'."
+   ],
+   "params": {
+    "key": "wst-005",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-8210b2980f",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The principal made an ____ about the new canteen stall.",
+   "options": [
+    "announcement",
+    "announceless",
+    "announcetion",
+    "announceful"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'announceless' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'announcetion' is not a word; '-tion' is not added to 'announce'"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'announceful' is not a word"
+    }
+   ],
+   "solution": [
+    "'-ment' makes a noun from a verb, so 'announce' becomes 'announcement'."
+   ],
+   "params": {
+    "key": "wst-006",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-dffbfd6fe5",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Please follow the ____ carefully before you start the experiment.",
+   "options": [
+    "instructless",
+    "instructions",
+    "instructments",
+    "instructfuls"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'instructless' is not a word"
+    },
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'instructments' is not a word; the noun uses '-tion'"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'instructfuls' is not a word"
+    }
+   ],
+   "solution": [
+    "'-tion' makes a noun from the verb 'instruct', giving 'instruction'."
+   ],
+   "params": {
+    "key": "wst-007",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-9176fcdcf7",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word is formed correctly to mean 'not able to be seen'?",
+   "options": [
+    "invisible",
+    "misvisible",
+    "disvisible",
+    "unvisible"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'misvisible' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'disvisible' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'unvisible' is not a word; 'visible' takes 'in-'"
+    }
+   ],
+   "solution": [
+    "'in-' can mean 'not', so 'invisible' means 'not able to be seen'."
+   ],
+   "params": {
+    "key": "wst-008",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-34c841404e",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word means 'to fill again'?",
+   "options": [
+    "misfill",
+    "unfill",
+    "disfill",
+    "refill"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'misfill' would mean to fill wrongly, not again"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'unfill' is not a standard word and 'un-' would mean to undo"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'disfill' is not a word"
+    },
+    null
+   ],
+   "solution": [
+    "'re-' means 'again', so 'refill' means 'fill again'."
+   ],
+   "params": {
+    "key": "wst-009",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-fe99f04d1e",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word is a compound word?",
+   "options": [
+    "careless",
+    "beautiful",
+    "quickly",
+    "sunflower"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'careless' is made from 'care' and '-less', so it is not a compound"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'beautiful' is made from 'beauty' and '-ful', so it is not a compound"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'quickly' is made from 'quick' and '-ly', so it is not a compound"
+    },
+    null
+   ],
+   "solution": [
+    "'sunflower' joins two whole words, 'sun' and 'flower'."
+   ],
+   "params": {
+    "key": "wst-010",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-1ecf33b6a0",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word is formed by joining 'sun' and 'light'?",
+   "options": [
+    "sunslight",
+    "lightsun",
+    "sunlighting",
+    "sunlight"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'sunslight' adds an extra letter and is not a word"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'lightsun' puts the words in the wrong order"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'sunlighting' adds an ending that changes the word"
+    },
+    null
+   ],
+   "solution": [
+    "Joining 'sun' and 'light' in that order makes 'sunlight'."
+   ],
+   "params": {
+    "key": "wst-011",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-85f3122a83",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Meiyi ran ____ to catch the bus.",
+   "options": [
+    "quickly",
+    "quickness",
+    "quicker",
+    "quick"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'quickness' is a noun and cannot describe how she ran"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'quicker' is a comparison, but nothing is compared"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'quick' is an adjective, but 'ran' needs an adverb"
+    }
+   ],
+   "solution": [
+    "An adverb describes the verb 'ran', so 'quickly' is correct."
+   ],
+   "params": {
+    "key": "wst-012",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-9aeb3c3f34",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Zhi Wei is a very ____ boy who always tells the truth.",
+   "options": [
+    "honestness",
+    "honest",
+    "honestly",
+    "honesty"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'honestness' is not the usual word"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'honestly' is an adverb, but 'boy' needs an adjective"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'honesty' is a noun and cannot describe a boy"
+    }
+   ],
+   "solution": [
+    "An adjective is needed before 'boy', so 'honest' is correct."
+   ],
+   "params": {
+    "key": "wst-013",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-d876e3f7a4",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The boy answered the question ____.",
+   "options": [
+    "correction",
+    "correct",
+    "correctly",
+    "correctness"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'correction' is a noun and does not describe how he answered"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'correct' is an adjective, but 'answered' needs an adverb"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'correctness' is a noun and does not describe how he answered"
+    }
+   ],
+   "solution": [
+    "An adverb describes how he answered, so 'correctly' is right."
+   ],
+   "params": {
+    "key": "wst-014",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-f2b2f037e4",
+   "topic": "eng-vocab-rich",
+   "level": "basic",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "We should show ____ to our elderly neighbours.",
+   "options": [
+    "kindful",
+    "kinder",
+    "kindly",
+    "kindness"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'kindful' is not a word"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'kinder' is a comparison, but nothing is compared"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'kindly' is an adverb, but 'show' needs a noun here"
+    },
+    null
+   ],
+   "solution": [
+    "A noun is needed after 'show', so 'kindness' is correct."
+   ],
+   "params": {
+    "key": "wst-015",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-1a2bf71d14",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The committee was unable to reach a ____ after the long discussion.",
+   "options": [
+    "decisively",
+    "decisive",
+    "decide",
+    "decision"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'decisively' is an adverb, but 'a' needs a noun"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'decisive' is an adjective, but 'a' needs a noun"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'decide' is a verb, but 'a' needs a noun"
+    },
+    null
+   ],
+   "solution": [
+    "After 'a', a noun is needed, so 'decision' is correct."
+   ],
+   "params": {
+    "key": "wst-016",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-090b88518c",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The captain's ____ leadership helped the team win the match.",
+   "options": [
+    "decisively",
+    "decision",
+    "decisive",
+    "decide"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'decisively' is an adverb, but 'leadership' needs an adjective"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'decision' is a noun, but an adjective is needed before 'leadership'"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'decide' is a verb, but an adjective is needed here"
+    }
+   ],
+   "solution": [
+    "An adjective describes the noun 'leadership', so 'decisive' is correct."
+   ],
+   "params": {
+    "key": "wst-017",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-cd5176a27f",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "When the ball came towards him, the goalkeeper reacted ____ and saved the penalty.",
+   "options": [
+    "decision",
+    "decisive",
+    "decided",
+    "decisively"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'decision' is a noun and cannot describe how he reacted"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'decisive' is an adjective, but 'reacted' needs an adverb"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'decided' is a verb form, not an adverb"
+    },
+    null
+   ],
+   "solution": [
+    "An adverb describes the verb 'reacted', so 'decisively' is correct."
+   ],
+   "params": {
+    "key": "wst-018",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-f0ecc0cddc",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The doctor's ____ helped Mr Tan recover quickly.",
+   "options": [
+    "treatment",
+    "treatful",
+    "treated",
+    "treatable"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'treatful' is not a word"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'treated' is a verb form, but a noun is needed after 'doctor's'"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'treatable' is an adjective, but a noun is needed"
+    }
+   ],
+   "solution": [
+    "A noun follows 'doctor's', and the noun for 'treat' is 'treatment'."
+   ],
+   "params": {
+    "key": "wst-019",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-8b7b9ac63a",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word means 'a person who works for a company'?",
+   "options": [
+    "employment",
+    "employer",
+    "employable",
+    "employee"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'employment' means having a job, not a person"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'employer' means the person or company that gives the job"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'employable' describes someone suitable for a job"
+    },
+    null
+   ],
+   "solution": [
+    "The suffix '-ee' marks the person who receives the action, so 'employee' works for the company."
+   ],
+   "params": {
+    "key": "wst-020",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-56d814c66c",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word means 'not honest'?",
+   "options": [
+    "mishonest",
+    "unhonest",
+    "inhonest",
+    "dishonest"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'mishonest' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'unhonest' is not a word; 'honest' takes 'dis-'"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'inhonest' is not a word"
+    },
+    null
+   ],
+   "solution": [
+    "'dis-' gives the opposite, so 'dishonest' means 'not honest'."
+   ],
+   "params": {
+    "key": "wst-021",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-4e4297fa16",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Aiman was so sorry that he went to ____ to his teacher.",
+   "options": [
+    "apologise",
+    "apologetically",
+    "apologetic",
+    "apology"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'apologetically' is an adverb, but 'to' here needs a verb"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'apologetic' is an adjective, but 'to' here needs a verb"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'apology' is a noun, but 'to' here needs a verb"
+    }
+   ],
+   "solution": [
+    "After 'to' a verb is needed, so 'apologise' is correct."
+   ],
+   "params": {
+    "key": "wst-022",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-f1467deace",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The scientist made an important ____ about plastic waste in the sea.",
+   "options": [
+    "discoverable",
+    "discovery",
+    "discovering",
+    "discover"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'discoverable' is an adjective, but a noun is needed"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'discovering' is a verb form and is not the usual noun here"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'discover' is a verb, but 'an important' needs a noun"
+    }
+   ],
+   "solution": [
+    "After 'an important', a noun is needed, so 'discovery' is correct."
+   ],
+   "params": {
+    "key": "wst-023",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-584914a5df",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The ____ of the new library was completed last month.",
+   "options": [
+    "construct",
+    "construction",
+    "constructive",
+    "constructively"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'construct' is a verb, but 'The' needs a noun"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'constructive' is an adjective, but 'The' needs a noun"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'constructively' is an adverb, but 'The' needs a noun"
+    }
+   ],
+   "solution": [
+    "After 'The', a noun is needed, so 'construction' is correct."
+   ],
+   "params": {
+    "key": "wst-024",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-6131eea3f1",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The librarian was very ____ and found the book for us.",
+   "options": [
+    "helpless",
+    "help",
+    "helping",
+    "helpful"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'helpless' means unable to help oneself, which does not describe a librarian who found the book"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'help' is a verb or noun, but 'very' needs an adjective"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'helping' does not make sense after 'very'"
+    },
+    null
+   ],
+   "solution": [
+    "'-ful' means 'full of', so 'helpful' means 'giving help'."
+   ],
+   "params": {
+    "key": "wst-025",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-6885d539d4",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word means 'to understand wrongly'?",
+   "options": [
+    "disunderstand",
+    "ununderstand",
+    "reunderstand",
+    "misunderstand"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'disunderstand' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'ununderstand' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'reunderstand' is not a word"
+    },
+    null
+   ],
+   "solution": [
+    "'mis-' means 'wrongly', so 'misunderstand' means 'understand wrongly'."
+   ],
+   "params": {
+    "key": "wst-026",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-374806ad3c",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word means 'to arrange again'?",
+   "options": [
+    "rearrange",
+    "inarrange",
+    "dearrange",
+    "unarrange"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'inarrange' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'dearrange' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'unarrange' is not a word"
+    }
+   ],
+   "solution": [
+    "'re-' means 'again', so 'rearrange' means 'arrange again'."
+   ],
+   "params": {
+    "key": "wst-027",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-80293c5d5d",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which compound word means 'a place where aeroplanes land and take off'?",
+   "options": [
+    "portair",
+    "airy",
+    "airport",
+    "airing"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'portair' puts the two words in the wrong order"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'airy' means with plenty of fresh air, and it is not a compound"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'airing' is made from 'air' and '-ing', so it is not a compound"
+    }
+   ],
+   "solution": [
+    "'air' and 'port' join to make 'airport'."
+   ],
+   "params": {
+    "key": "wst-028",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-3e41fab344",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word is spelt correctly?",
+   "options": [
+    "happinness",
+    "happines",
+    "happiness",
+    "happyness"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'happinness' has an extra 'n'"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'happines' is missing an 's'"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'happyness' keeps the 'y'; it changes to 'i' before '-ness'"
+    }
+   ],
+   "solution": [
+    "The 'y' changes to 'i' before '-ness', giving 'happiness'."
+   ],
+   "params": {
+    "key": "wst-029",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-2d7a6d49f9",
+   "topic": "eng-vocab-rich",
+   "level": "intermediate",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The class was full of ____ when the Primary 6 camp was announced.",
+   "options": [
+    "exciting",
+    "excite",
+    "excitement",
+    "excitedly"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'exciting' is an adjective, but 'full of' needs a noun"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'excite' is a verb, but 'full of' needs a noun"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'excitedly' is an adverb, but 'full of' needs a noun"
+    }
+   ],
+   "solution": [
+    "After 'full of', a noun is needed, so 'excitement' is correct."
+   ],
+   "params": {
+    "key": "wst-030",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-9e6d33c437",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The company's rapid ____ has created many new jobs in Jurong.",
+   "options": [
+    "expand",
+    "expansively",
+    "expansive",
+    "expansion"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'expand' is a verb, but 'rapid' needs a noun after it"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'expansively' is an adverb, but a noun is needed after 'rapid'"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'expansive' is an adjective, but a noun is needed after 'rapid'"
+    },
+    null
+   ],
+   "solution": [
+    "The noun form of 'expand' is 'expansion'."
+   ],
+   "params": {
+    "key": "wst-031",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-10c5de08a6",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The minister gave an ____ speech that moved the audience.",
+   "options": [
+    "inspiration",
+    "inspire",
+    "inspiring",
+    "inspiringly"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'inspiration' is a noun and does not describe a speech here"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'inspire' is a verb, but an adjective is needed"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'inspiringly' is an adverb, but 'speech' needs an adjective"
+    }
+   ],
+   "solution": [
+    "An adjective describes the noun 'speech', so 'inspiring' is correct."
+   ],
+   "params": {
+    "key": "wst-032",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-a6d697f9e6",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "He explained the plan so ____ that nobody could disagree.",
+   "options": [
+    "conviction",
+    "convincing",
+    "convincingly",
+    "convince"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'conviction' is a noun and cannot describe how he explained"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'convincing' is an adjective, but 'explained' needs an adverb"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'convince' is a verb, but 'so' needs an adverb here"
+    }
+   ],
+   "solution": [
+    "An adverb describes 'explained', so 'convincingly' is correct."
+   ],
+   "params": {
+    "key": "wst-033",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-cea1757455",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The ____ of the old shophouses is important to our heritage.",
+   "options": [
+    "preservative",
+    "preserve",
+    "preserved",
+    "preservation"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'preservative' means a substance that keeps food from spoiling"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'preserve' is a verb, but 'The' needs a noun"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'preserved' is an adjective or verb form, but a noun is needed"
+    },
+    null
+   ],
+   "solution": [
+    "After 'The', a noun is needed, so 'preservation' is correct."
+   ],
+   "params": {
+    "key": "wst-034",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-9216271ba6",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word is formed correctly to mean 'unable to be avoided'?",
+   "options": [
+    "inavoidable",
+    "unavoidable",
+    "unavoidible",
+    "disavoidable"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_affix",
+     "why": "'inavoidable' is not a word; 'avoidable' takes 'un-'"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'unavoidible' is misspelt; the ending is '-able'"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'disavoidable' is not a word"
+    }
+   ],
+   "solution": [
+    "'un-' means 'not' and '-able' means 'able to be', so 'unavoidable' is correct."
+   ],
+   "params": {
+    "key": "wst-035",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-43176a9c66",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Reporters must not ____ readers by printing false information.",
+   "options": [
+    "reinform",
+    "misinform",
+    "uninform",
+    "preinform"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'reinform' would mean to inform again, which does not fit"
+    },
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'uninform' is not a word"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'preinform' is not a word"
+    }
+   ],
+   "solution": [
+    "'mis-' means 'wrongly', so 'misinform' means 'give wrong information'."
+   ],
+   "params": {
+    "key": "wst-036",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-a38fd2c977",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "He ____ the distance and fell into the stream.",
+   "options": [
+    "misjudged",
+    "unjudged",
+    "dejudged",
+    "rejudged"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_affix",
+     "why": "'unjudged' means not yet judged, which does not fit"
+    },
+    {
+     "tag": "wrong_affix",
+     "why": "'dejudged' is not a word"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'rejudged' means judged again, which does not fit"
+    }
+   ],
+   "solution": [
+    "'mis-' means 'wrongly', so 'misjudged' means 'judged wrongly'."
+   ],
+   "params": {
+    "key": "wst-037",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-a68278081c",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The volunteers will ____ the playground with colourful murals.",
+   "options": [
+    "beautiful",
+    "beautifully",
+    "beautify",
+    "beautifies"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'beautiful' is an adjective, but a verb is needed after 'will'"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'beautifully' is an adverb, but a verb is needed after 'will'"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'beautifies' has the wrong ending after 'will'"
+    }
+   ],
+   "solution": [
+    "After 'will', a base verb is needed, and '-ify' makes 'beautify'."
+   ],
+   "params": {
+    "key": "wst-038",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-fded22c2fe",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word means 'a person who competes'?",
+   "options": [
+    "competition",
+    "competitor",
+    "competitively",
+    "competitive"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'competition' is the event, not the person"
+    },
+    null,
+    {
+     "tag": "wrong_meaning",
+     "why": "'competitively' is an adverb, not a person"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'competitive' is an adjective, not a person"
+    }
+   ],
+   "solution": [
+    "'-or' marks a person who does something, so 'competitor' is the person who competes."
+   ],
+   "params": {
+    "key": "wst-039",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-9f509d3f6f",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "The doctor's ____ was that Zack should rest for a week.",
+   "options": [
+    "recommendable",
+    "recommend",
+    "recommendation",
+    "recommended"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'recommendable' is an adjective, but a noun is needed"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'recommend' is a verb, but a noun follows 'doctor's'"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'recommended' is a verb form, but a noun is needed"
+    }
+   ],
+   "solution": [
+    "A noun follows 'doctor's', and the noun is 'recommendation'."
+   ],
+   "params": {
+    "key": "wst-040",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-6903439ba8",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word has a suffix that means 'without'?",
+   "options": [
+    "caring",
+    "careful",
+    "careless",
+    "carefully"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'caring' has '-ing', which does not mean 'without'"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'careful' has '-ful', which means 'full of'"
+    },
+    null,
+    {
+     "tag": "wrong_meaning",
+     "why": "'carefully' has '-ly', which makes an adverb"
+    }
+   ],
+   "solution": [
+    "'-less' means 'without', so 'careless' means 'without care'."
+   ],
+   "params": {
+    "key": "wst-041",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-9453322c03",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word has a prefix that means 'not'?",
+   "options": [
+    "impossible",
+    "impress",
+    "improve",
+    "important"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_meaning",
+     "why": "in 'impress', 'im-' is not a prefix meaning 'not'"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "in 'improve', 'im-' is not a prefix meaning 'not'"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "in 'important', 'im-' is not a prefix meaning 'not'"
+    }
+   ],
+   "solution": [
+    "'im-' in 'impossible' means 'not', so it means 'not possible'."
+   ],
+   "params": {
+    "key": "wst-042",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-f4c21aa57f",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Aisha's ____ to help others made her a popular class monitor.",
+   "options": [
+    "willingness",
+    "willing",
+    "willed",
+    "willingly"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'willing' is an adjective, but 'Aisha's' needs a noun"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'willed' is a verb form, but a noun is needed"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'willingly' is an adverb, but 'Aisha's' needs a noun"
+    }
+   ],
+   "solution": [
+    "A noun follows 'Aisha's', so 'willingness' is correct."
+   ],
+   "params": {
+    "key": "wst-043",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-ee6e8d8f5a",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "We use a ____ to clean our teeth.",
+   "options": [
+    "brushtooth",
+    "teethbrush",
+    "toothbrush",
+    "toothsbrush"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "'brushtooth' puts the two words in the wrong order"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "a compound uses the singular 'tooth', not 'teeth'"
+    },
+    null,
+    {
+     "tag": "wrong_form",
+     "why": "'toothsbrush' adds an extra 's' and is not a word"
+    }
+   ],
+   "solution": [
+    "'tooth' and 'brush' join to make 'toothbrush'."
+   ],
+   "params": {
+    "key": "wst-044",
+    "subtopic": "eng-vocab-rich-words"
+   }
+  },
+  {
+   "id": "engvoca-8cee2d06ee",
+   "topic": "eng-vocab-rich",
+   "level": "competent",
+   "template": "eng-pat-vocab-word",
+   "outcomes": [
+    "eng-vocab-rich-words-1"
+   ],
+   "stem": "Which word belongs to the same word family as 'child'?",
+   "options": [
+    "chilled",
+    "childhood",
+    "chilly",
+    "chill"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_meaning",
+     "why": "'chilled' comes from 'chill' and means made cold"
+    },
+    null,
+    {
+     "tag": "wrong_meaning",
+     "why": "'chilly' comes from 'chill' and means rather cold"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "'chill' means a cold feeling and is not from 'child'"
+    }
+   ],
+   "solution": [
+    "'childhood' is formed from 'child' plus '-hood', so they are in one word family."
+   ],
+   "params": {
+    "key": "wst-045",
+    "subtopic": "eng-vocab-rich-words"
+   }
   }
  ]
 }
