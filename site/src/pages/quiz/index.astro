@@ -51,12 +51,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
+  import type { Visual } from '../../lib/train';
   import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
 
   type Q = { id: string; sub: string; level: string; figure?: string; topic?: string; stem: string; options: string[]; answer: number;
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual };
-  type Visual = { kind: 'poster' | 'notice' | 'brochure' | 'timetable' | 'email'; title: string; subtitle?: string;
-    blocks: { heading?: string; lines: string[] }[]; footer?: string };
   type Meta = {
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
     files: string[]; slots: Record<string, { slug: string; dup: boolean }>;
@@ -85,23 +84,25 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`);
 
   // Visual text (English): a poster, notice, brochure, timetable or email drawn as a styled card. Every string goes
-  // through fmt (which escapes first), so the data can never inject markup. No images: CSS only.
+  // through vfmt (escape + **bold** only, so "12/5" and "24/7" stay as written), so the data can never inject markup.
+  const vfmt = (x: string) => esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   const visualCard = (v: Visual) => {
-    const rows = v.blocks.flatMap((b) => b.lines);
-    const table = v.kind === 'timetable' && rows.some((l) => l.includes(' | '));
     const hdr = /^(From|To|Cc|Date|Subject):\s/;
-    const head = v.kind === 'email' ? rows.filter((l) => hdr.test(l)) : [];
+    const head = v.kind === 'email' ? v.blocks.flatMap((b) => b.lines).filter((l) => hdr.test(l)) : [];
     const body = (b: Visual['blocks'][number]) => {
-      const h = b.heading ? `<h4>${fmt(b.heading)}</h4>` : '';
-      if (table) return `${h}<table>${b.lines.map((l) => `<tr>${l.split(' | ').map((c) => `<td>${fmt(c)}</td>`).join('')}</tr>`).join('')}</table>`;
-      return `${h}${b.lines.filter((l) => !head.includes(l)).map((l) => `<p>${fmt(l)}</p>`).join('')}`;
+      const h = b.heading ? `<h4>${vfmt(b.heading)}</h4>` : '';
+      if (v.kind === 'timetable' && b.lines.some((l) => l.includes(' | ')))
+        return `${h}<table>${b.lines.map((l) => `<tr>${l.split(' | ').map((c) => `<td>${vfmt(c)}</td>`).join('')}</tr>`).join('')}</table>`;
+      return `${h}${b.lines.filter((l) => !head.includes(l)).map((l) => `<p>${vfmt(l)}</p>`).join('')}`;
     };
+    // one Subject row only: a Subject: line among the header lines wins over the title
+    const subj = head.some((l) => l.startsWith('Subject:')) ? '' : /^Subject:\s/.test(v.title) ? v.title : `Subject: ${v.title}`;
     const mail = v.kind === 'email'
-      ? `<div class="vt-mail">${head.map((l) => `<p><strong>${fmt(l.split(':')[0])}:</strong> ${fmt(l.slice(l.indexOf(':') + 1).trim())}</p>`).join('')}${head.some((l) => l.startsWith('Subject:')) ? '' : `<p><strong>Subject:</strong> ${fmt(v.title)}</p>`}</div>` : '';
+      ? `<div class="vt-mail">${v.subtitle ? `<p>${vfmt(v.subtitle)}</p>` : ''}${head.map((l) => `<p><strong>${vfmt(l.split(':')[0])}:</strong> ${vfmt(l.slice(l.indexOf(':') + 1).trim())}</p>`).join('')}${subj ? `<p><strong>Subject:</strong> ${vfmt(subj.replace(/^Subject:\s*/, ''))}</p>` : ''}</div>` : '';
     return `<div class="vt vt-${v.kind}" role="group" aria-label="${esc(v.kind)}: ${esc(v.title)}">`
-      + (v.kind === 'email' ? mail : `<div class="vt-title">${fmt(v.title)}</div>${v.subtitle ? `<div class="vt-sub">${fmt(v.subtitle)}</div>` : ''}`)
+      + (v.kind === 'email' ? mail : `<div class="vt-title">${vfmt(v.title)}</div>${v.subtitle ? `<div class="vt-sub">${vfmt(v.subtitle)}</div>` : ''}`)
       + v.blocks.map((b) => `<div class="vt-block">${body(b)}</div>`).join('')
-      + (v.footer ? `<div class="vt-foot">${fmt(v.footer)}</div>` : '') + '</div>';
+      + (v.footer ? `<div class="vt-foot">${vfmt(v.footer)}</div>` : '') + '</div>';
   };
 
   // dialogue sets: shown disabled when already answered correctly for an earlier blank (a hint only; scoring is unchanged)
@@ -331,11 +332,15 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (res.goalJustMet) html += '<p class="verdict good">Daily goal met! Your streak grows.</p>';
     { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b)}</p>`; }
     $('verdict').innerHTML = html;
-    $('review').innerHTML = wrongs.map(({ q, chose }) =>
-      `<details class="rev"><summary>${fmt(q.stem)}</summary>
-       ${q.visual ? `<details class="rev-vis"><summary>Show the ${esc(q.visual.kind)}: ${fmt(q.visual.title)}</summary>${visualCard(q.visual)}</details>` : ''}
+    const seenVis = new Set<string>(); // a visual card shows once per set, with the first missed question of that group
+    $('review').innerHTML = wrongs.map(({ q, chose }) => {
+      const showVis = q.visual && !(q.group && seenVis.has(q.group));
+      if (q.group) seenVis.add(q.group);
+      return `<details class="rev"><summary>${fmt(q.stem)}</summary>
+       ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
        <p>${chose >= 0 ? `You chose ${LETTERS[chose]} (${fmt(q.options[chose])}). ` : 'Not answered. '}Answer: ${LETTERS[q.answer]} (${fmt(q.options[q.answer])}).</p>
-       <ol class="steps">${q.solution.map((st) => `<li>${fmt(st)}</li>`).join('')}</ol></details>`).join('');
+       <ol class="steps">${q.solution.map((st) => `<li>${fmt(st)}</li>`).join('')}</ol></details>`;
+    }).join('');
     const back = mode === 'tier' ? `<a href="/train/${sub.school}/${sub.slug}/">Back to ${esc(sub.name)}</a>`
       : mode === 'paper' ? '<a href="/paper/">Build another paper</a>' : '<a href="/train/">Back to the Schools</a>';
     $('actions').innerHTML = `${back} · <a href="/collection/">My cards</a>`;

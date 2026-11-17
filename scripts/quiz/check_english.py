@@ -9,6 +9,8 @@ from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).parent
+sys.path.insert(0, str(HERE))
+from bankcommon import PASSAGE  # noqa: E402
 ROOT = HERE.parents[1]
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "english.json").read_text())
 OUTCOMES = {o["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
@@ -17,7 +19,6 @@ PATTERNS = {p["id"] for p in json.loads((HERE / "english" / "patterns.json").rea
 LEVELS = {"basic", "intermediate", "competent"}
 BLANK = "____"
 errors = []
-PASSAGE = re.compile(r"^(vis|read|ecloze)-(\d+)-(\d+)$")
 VISUAL_KINDS = {"poster", "notice", "brochure", "timetable", "email"}
 
 
@@ -27,6 +28,13 @@ def visual_errors(v):
     out = []
     extra = set(v) - {"kind", "title", "subtitle", "blocks", "footer"}
     if extra: out.append(f"visual has unknown fields {sorted(extra)}")
+    if v.get("kind") == "email":
+        lines = [l for blk in v.get("blocks") or [] if isinstance(blk, dict) for l in blk.get("lines") or [] if isinstance(l, str)]
+        if not (str(v.get("subtitle", "")).startswith("From:") or any(l.startswith("From:") for l in lines)):
+            out.append("email visual must show its sender (subtitle or a From: line)")
+    if v.get("kind") == "timetable":
+        if not any(isinstance(blk, dict) and any(isinstance(l, str) and " | " in l for l in blk.get("lines") or []) for blk in v.get("blocks") or []):
+            out.append("timetable visual needs at least one block with ' | ' rows")
     if v.get("kind") not in VISUAL_KINDS: out.append(f"visual kind {v.get('kind')!r} not in {sorted(VISUAL_KINDS)}")
     texts = []
     for f in ("title", "subtitle", "footer"):
@@ -98,7 +106,11 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
             if not (m and m[1] == "vis"): e("visual is only for vis-NN-K set items")
             for msg in visual_errors(it["visual"]): e(msg)
         elif m and m[1] == "vis": e("vis- item has no visual")
-        if m and m[1] == "ecloze" and not re.search(r"\(\d+\) _{8}(?!_)", stem): e("ecloze stem has no asked blank written (N) ________ (8 underscores)")
+        if m and m[1] == "ecloze":
+            asked = re.findall(r"\((\d+)\) _{8}(?!_)", stem)
+            if len(asked) != 1 or int(asked[0]) != int(m[3]): e(f"ecloze stem needs exactly one asked blank (N) ________ with N = {m[3]}, found {asked}")
+            if any(len(u) != 4 for n, u in re.findall(r"\((\d+)\) (_+)", stem) if int(n) != int(m[3])):
+                e("ecloze: every blank other than the asked one must be written (k) ____ (4 underscores)")
 
 for (sub, kind, nn), its in sets.items():
     nums = sorted(int(PASSAGE.match(i["key"])[3]) for i in its)

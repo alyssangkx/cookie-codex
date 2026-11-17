@@ -1,6 +1,10 @@
 """Helpers shared by the reviewed-item bank builds (Chinese, English)."""
 import hashlib
 import json
+import re
+
+# passage sets: vis-NN-K (visual text), read-NN-K (comprehension), ecloze-NN-K (cloze). A set ships whole or not at all.
+PASSAGE = re.compile(r"^(vis|read|ecloze)-(\d+)-(\d+)$")
 
 
 def fingerprint(it):

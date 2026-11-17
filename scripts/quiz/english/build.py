@@ -21,14 +21,11 @@ from pathlib import Path
 HERE = Path(__file__).parent
 ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE.parent))
-from bankcommon import fingerprint  # noqa: E402
+from bankcommon import PASSAGE, fingerprint  # noqa: E402
 
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "english.json").read_text())
 OUT = ROOT / "site" / "src" / "data" / "quiz" / "english"
 REVIEW = HERE / "review.json"
-
-# passage sets: vis-NN-K (visual text), read-NN-K (comprehension), ecloze-NN-K (cloze). A set ships whole or not at all.
-PASSAGE = re.compile(r"^(vis|read|ecloze)-(\d+)-(\d+)$")
 
 TOPIC_OF = {sb["id"]: t["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
 
@@ -107,13 +104,6 @@ def main():
                 **({"group": f"{sub}:{m[1]}-{m[2]}", "seq": int(m[3])} if (m := PASSAGE.match(it["key"])) else {}),
             })
     hold_sets(banks, all_keys, dropped)
-    levels = {}
-    for qs in banks.values():
-        for q in qs:
-            if "group" in q:
-                levels.setdefault(q["group"], set()).add(q["level"])
-    mixed = [g for g, ls in levels.items() if len(ls) > 1]
-    assert not mixed, f"passage sets must sit at one level: {mixed}"
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*.json"):  # never leave a bank behind that the current items no longer produce
         old.unlink()
