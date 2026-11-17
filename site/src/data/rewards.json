@@ -783,21 +783,21 @@
     "capstone": true
    },
    {
-    "id": "chi-yuedu-mcq-text",
-    "name": "篇章理解 (passage understanding)",
-    "topic": "chi-yuedu-mcq",
-    "topicName": "阅读理解一 (Comprehension 1, MCQ)",
-    "home": 6,
-    "i": 9,
-    "capstone": true
-   },
-   {
     "id": "chi-dialogue-mcq",
     "name": "对话填答 (dialogue completion)",
     "topic": "chi-dialogue",
     "topicName": "完成对话 (Complete the dialogue)",
     "home": 6,
     "i": 8,
+    "capstone": true
+   },
+   {
+    "id": "chi-yuedu-mcq-text",
+    "name": "篇章理解 (passage understanding)",
+    "topic": "chi-yuedu-mcq",
+    "topicName": "阅读理解一 (Comprehension 1, MCQ)",
+    "home": 6,
+    "i": 9,
     "capstone": true
    },
    {
@@ -1789,11 +1789,11 @@
    "slug": "rumi-cookie",
    "dup": true
   },
-  "chi-yuedu-mcq-text|b": {
+  "chi-dialogue-mcq|b": {
    "slug": "affogato-cookie",
    "dup": true
   },
-  "chi-dialogue-mcq|b": {
+  "chi-yuedu-mcq-text|b": {
    "slug": "tarte-tatin-cookie",
    "dup": true
   },
@@ -1837,11 +1837,11 @@
    "slug": "red-osmanthus-cookie",
    "dup": true
   },
-  "chi-yuedu-mcq-text|i": {
+  "chi-dialogue-mcq|i": {
    "slug": "red-osmanthus-cookie",
    "dup": true
   },
-  "chi-dialogue-mcq|i": {
+  "chi-yuedu-mcq-text|i": {
    "slug": "devil-cookie",
    "dup": false
   },
@@ -1885,11 +1885,11 @@
    "slug": "millenial-tree-cookie",
    "dup": true
   },
-  "chi-yuedu-mcq-text|c": {
+  "chi-dialogue-mcq|c": {
    "slug": "wind-archer-cookie",
    "dup": true
   },
-  "chi-dialogue-mcq|c": {
+  "chi-yuedu-mcq-text|c": {
    "slug": "clotted-cream-cookie",
    "dup": true
   },

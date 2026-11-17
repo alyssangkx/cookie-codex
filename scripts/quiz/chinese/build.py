@@ -155,7 +155,7 @@ def main():
                 "answer": answer,
                 "explain": explain,
                 # add the gloss line only when the solution does not already say the same thing
-                "solution": it["solution"] + gloss_line(it),
+                "solution": [re.sub(r"[。，]([；;])", r"\1", line) for line in it["solution"]] + gloss_line(it),  # tidy "。；" joins
                 "params": {"key": it["key"], "subtopic": sub},
                 **({"group": f"{sub}:{m[2]}", "seq": int(m[3])} if (m := PASSAGE.match(it["key"])) else {}),
             })
