@@ -11,8 +11,9 @@ import { SCHOOLS } from '../lib/train';
 type Box = [number, number, number, number];
 // Art follows which schools are open: construction comes off a school once it opens.
 // a school shows open only when its hotspot says so AND its banks have a playable tier (train.ts SCHOOLS.ready)
+const SCHOOL_IDS = new Set(['math', 'english', 'science', 'chinese']); // library, house, tower are not schools
 const buildings = spots.buildings.map((b) =>
-  b.status === 'open' && SCHOOLS.find((x) => x.id === b.id)?.ready === false ? { ...b, status: 'soon' } : b);
+  b.status === 'open' && SCHOOL_IDS.has(b.id) && !SCHOOLS.find((x) => x.id === b.id)?.ready ? { ...b, status: 'soon' } : b);
 const isOpen = (id: string) => buildings.find((b) => b.id === id)?.status === 'open';
 const schools = ['chinese', 'science', 'english'].filter(isOpen);
 // suffix from the open set in a fixed order; no art for the combination falls back to the base map

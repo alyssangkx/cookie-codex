@@ -34,8 +34,6 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
     sub = data.get("subtopic")
     if sub not in SUBS:
         errors.append(f"{f.name}: unknown subtopic {sub}")
-    keys = Counter(it.get("key") for it in data["items"])
-    stems = Counter(it.get("stem") for it in data["items"])
     for it in data["items"]:
         e = lambda m: errors.append(f"{f.name} {it.get('key')}: {m}")
         if sub_keys[(sub, it.get("key"))] > 1: e("duplicate key in this sub-topic")

@@ -8,9 +8,3 @@ def fingerprint(it):
     body = json.dumps([it["stem"], it["options"], it["answer"], it["explain"], it["solution"],
                        it.get("gloss"), it.get("level"), it.get("outcome"), it.get("pattern")], ensure_ascii=False)
     return hashlib.sha1(body.encode()).hexdigest()[:16]
-
-
-def fingerprint_v1(it):
-    """The pre-2026-11-17 fingerprint (content only), kept for re-stamping old verdicts."""
-    body = json.dumps([it["stem"], it["options"], it["answer"], it["explain"], it["solution"]], ensure_ascii=False)
-    return hashlib.sha1(body.encode()).hexdigest()[:16]
