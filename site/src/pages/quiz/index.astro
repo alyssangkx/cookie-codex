@@ -83,9 +83,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // dialogue sets: shown disabled when already answered correctly for an earlier blank (a hint only; scoring is unchanged)
   const usedRight = new Map<string, Set<number>>();
   // the asked dialogue blank (the K in the last line 第（K）空…) is marked, like an asked cloze blank
+  // blanks the child answered correctly in this quiz (group -> seq -> phrase) are shown filled in later questions
+  const filledBlanks = new Map<string, Map<number, string>>();
   const dialogueStem = (q: Q) => {
     const k = /第（(\d+)）空[^\n]*$/.exec(q.stem)?.[1];
-    return k ? fmt(q.stem).replace(new RegExp(`（${k}）＿＿`), (m) => `<mark class="ask">${m}</mark>`) : fmt(q.stem);
+    let h = fmt(q.stem);
+    for (const [n, phrase] of (q.group && filledBlanks.get(q.group)) || []) {
+      if (String(n) === k) continue; // never fill the blank being asked
+      h = h.replace(`（${n}）＿＿`, `（${n}）<span class="filled">${esc(phrase)}</span>`);
+    }
+    return k ? h.replace(`（${k}）＿＿`, (m) => `<mark class="ask">${m}</mark>`) : h;
   };
 
   let byId = new Map<string, Q>();
@@ -158,7 +165,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   function begin() {
     if (!quiz.length) return; // nothing to play (locked, capped or empty tier)
-    i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear();
+    i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
     if (mode === 'tier') { const s0 = load(); openAttempt(s0, { sub: subId, tier, total: quiz.length }); save(s0); }
     startedAt = Date.now();
     deadline += startedAt;
@@ -210,6 +217,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const ok = k === q.answer;
     record(q.id, ok);
     if (ok && q.group) { if (!usedRight.has(q.group)) usedRight.set(q.group, new Set()); usedRight.get(q.group)!.add(k); }
+    if (ok && q.group && q.sub === 'chi-dialogue-mcq' && q.seq != null) {
+      if (!filledBlanks.has(q.group)) filledBlanks.set(q.group, new Map());
+      filledBlanks.get(q.group)!.set(q.seq, q.options[k]);
+    }
     if (ok) score++; else wrongs.push({ q, chose: k, tag: q.explain[k]!.tag });
     $('options').querySelectorAll<HTMLButtonElement>('button').forEach((b, j) => {
       b.disabled = true;
@@ -259,7 +270,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     let html = timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '';
     if (mode === 'tier') {
       const st = tierState(s, subId, tier);
-      html += res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`
+      html += res.autoPromoted ? `<p class="verdict good">Perfect first try! Basic cleared, Intermediate is open.</p>`
+        : res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`
         : st.cleared ? `<p class="verdict good">${res.passed ? 'Nice score! ' : ''}This tier is cleared (you keep its card). ${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered right now; any you missed come back for practice.</p>`
         : `<p class="verdict ${res.passed ? 'good' : 'bad'}">${res.passed ? 'Nice score! ' : 'Not yet. '}${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered. Missed questions come back until you get them right.</p>`;
     }
@@ -322,6 +334,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .stem { font-size: 1.2rem; margin: 1rem 0; white-space: pre-line; }
   .quiz .stem mark.ask { white-space: nowrap; color: inherit; font-weight: 700; padding: 0 0.15em; border-radius: 0.3em;
     background: color-mix(in srgb, currentColor 14%, transparent); }
+  .quiz .stem .filled { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em;
+    background: color-mix(in srgb, var(--r-rare, #2a8) 18%, transparent); border-radius: 0.2em; padding: 0 0.1em; }
   .quiz .rev summary { white-space: pre-line; }
   .quiz .options { display: grid; gap: 0.6rem; }
   .quiz .opt {

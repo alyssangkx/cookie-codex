@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
+import { tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -282,4 +282,47 @@ test('syncTiers clears only open tiers, in b-i-c order within one pass', () => {
   answer(s, 'b2', true, t0 + DAY); answer(s, 'b2', true, t0 + 4 * DAY); answer(s, 'b2', true, t0 + 11 * DAY);
   out = syncTiers(s, { 'x|i': ['i1'], 'x|b': ['b1', 'b2'] }, reward, t0 + 11 * DAY);
   assert.deepEqual(out.map((o) => o.tier), ['b', 'i']);
+});
+
+test('perfect first-ever Basic quiz clears Basic and awards the card; only that case', () => {
+  const reward = (sub: string, t: string) => ({ slug: `${sub}-${t}`, dup: false });
+  const q = (tier: 'b' | 'i' | 'c', score: number) => ({ mode: 'tier' as const, sub: 'x', tier, total: 10, ms: 1, tags: [], score });
+  const ids = { 'x|b': ['b1', 'b2'], 'x|i': ['i1', 'i2'] };
+
+  // 10/10 on the first Basic attempt: cleared at once, card awarded, Intermediate open
+  let s = fresh();
+  answer(s, 'b1', true, t0); answer(s, 'b2', false, t0); // not all retired: only the rule can clear it
+  let r = finishQuiz(s, q('b', 10), reward, t0, ids);
+  assert.equal(r.autoPromoted, true);
+  assert.equal(r.cleared, true);
+  assert.equal(r.reward?.slug, 'x-b');
+  assert.equal(s.cards['x-b'].stars, 1);
+  assert.equal(s.progress.x.b.cleared, true);
+  assert.equal(tierOpen(s, 'x', 'i'), true);
+
+  // a second attempt at 10/10 does not auto-clear
+  s = fresh();
+  finishQuiz(s, q('b', 8), reward, t0, ids);
+  r = finishQuiz(s, q('b', 10), reward, t0 + 1000, ids);
+  assert.equal(r.autoPromoted, false);
+  assert.equal(s.progress.x.b.cleared, false);
+
+  // 9/10 on the first try does not
+  s = fresh();
+  assert.equal(finishQuiz(s, q('b', 9), reward, t0, ids).autoPromoted, false);
+  assert.equal(s.progress.x.b.cleared, false);
+
+  // an Intermediate first try at 10/10 does not
+  s = fresh();
+  assert.equal(finishQuiz(s, q('i', 10), reward, t0, ids).autoPromoted, false);
+  assert.equal(s.progress.x.i.cleared, false);
+
+  // an abandoned (open) Basic attempt does not block it
+  s = fresh();
+  openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0 - 5000);
+  assert.equal(finishQuiz(s, q('b', 10), reward, t0, ids).autoPromoted, true);
+  // ...and neither does an open attempt for this very quiz
+  s = fresh();
+  openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0);
+  assert.equal(finishQuiz(s, q('b', 10), reward, t0 + 1, ids).cleared, true);
 });

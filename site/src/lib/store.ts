@@ -306,6 +306,8 @@ export interface QuizResult {
   cleared: boolean;
   reward: { slug: string; dup: boolean; stars: number } | null;
   goalJustMet: boolean;
+  /** Basic cleared at once by a perfect first-ever Basic quiz on this sub-topic. */
+  autoPromoted?: boolean;
   newlyCleared: { sub: string; tier: Tier; reward: QuizResult['reward'] }[];
 }
 
@@ -327,6 +329,9 @@ export function finishQuiz(
   const key = dayKey(now);
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
   if (a.mode === 'tier') dropOpen(s, a.sub, a.tier);
+  // "First" = no earlier FINISHED tier attempt for this sub|b. An abandoned open attempt is dropped above
+  // (it never finished), so it does not count. Must be read before this attempt is pushed.
+  const firstEver = a.mode === 'tier' && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && !x.open && x.sub === a.sub && x.tier === 'b');
   s.attempts.push({ ...a, ts: now });
   const d = (s.days[key] ??= { quizzes: 0, min: 0, correct: 0, total: 0 });
   d.quizzes++;
@@ -349,14 +354,21 @@ export function finishQuiz(
     }
     (s.progress[a.sub] ??= {})[a.tier] = st;
   }
-  const newlyCleared = syncTiers(s, tierIds, rewardFor, now);
+  const early: QuizResult['newlyCleared'] = [];
+  let autoPromoted = false;
+  if (firstEver && a.tier === 'b' && a.sub && a.total >= QUIZ_SIZE && a.score === a.total && !tierState(s, a.sub, 'b').cleared) {
+    // owner's rule: a perfect first Basic quiz clears Basic now (before syncTiers, so Intermediate opens)
+    early.push({ sub: a.sub, tier: 'b', reward: award(s, a.sub, 'b', rewardFor, now) });
+    autoPromoted = true;
+  }
+  const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now)];
   const own = newlyCleared.find((x) => x.sub === a.sub && x.tier === a.tier);
   if (own) { cleared = true; reward = own.reward; }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
   if (d.quizzes >= s.settings.dailyGoalQuizzes) d.goal = true;
   if (goalJustMet) bumpStreak(s, now);
-  return { passed, cleared, reward, goalJustMet, newlyCleared };
+  return { passed, cleared, reward, goalJustMet, autoPromoted, newlyCleared };
 }
 
 /**
