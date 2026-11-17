@@ -4,12 +4,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  noindex?: boolean; // sign-in and parent pages: kept out of search results
 }
-const { title, description, noindex = false } = Astro.props;
-// private pages (game, parent, sign-in) stay out of search results; the Library stays indexable
+const { title, description } = Astro.props;
+// One list of private routes: the login gate below guards GAME and PARENT; all of them (plus the sign-in
+// pages) are kept out of search results with "noindex, follow", so the Library stays findable through them.
+const GAME = '^/(train|quiz|paper|collection)(/|$)';
 const path = Astro.url.pathname.replace(/\/+$/, '');
-const hidden = noindex || path === '' || /^\/(train|quiz|paper|collection|parent|login|admin)(\/|$)/.test(path);
+const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|admin)(\/|$)/.test(path);
 ---
 <!doctype html>
 <html lang="en">
@@ -18,13 +19,13 @@ const hidden = noindex || path === '' || /^\/(train|quiz|paper|collection|parent
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {hidden && <meta name="robots" content="noindex, nofollow" />}
+    {hidden && <meta name="robots" content="noindex, follow" />}
     <!-- Login gate, step 1 (instant): game pages need a stored session, /parent needs an admin one. The module
          script below does the real check (idle limit, admin and authenticator level). -->
-    <script is:inline>
+    <script is:inline define:vars={{ GAME }}>
       (function () {
         var p = location.pathname.replace(/\/+$/, ''), g = '';
-        if (p === '' || /^\/(train|quiz|paper|collection)(\/|$)/.test(p)) g = 'game';
+        if (p === '' || new RegExp(GAME).test(p)) g = 'game';
         else if (p === '/parent') g = 'admin';
         document.documentElement.setAttribute('data-gate', g);
         if (!g) return;

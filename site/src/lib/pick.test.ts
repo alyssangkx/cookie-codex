@@ -111,3 +111,15 @@ test('passage tiers: a due retest is never skipped for a passage that fits bette
   const out2 = wholePassages(['x2', 'x4', 'a1', 'c1'], ids, (id) => meta[id], 10, new Set(['x2', 'x4']));
   assert.ok(out2.includes('x2') && out2.includes('x4'));
 });
+
+test('passage tiers: three due retests in three passages all fit; a cut keeps new over retired', () => {
+  const meta: Record<string, { group: string; seq: number }> = {}; const ids: string[] = [];
+  const add = (g: string, n: number) => { for (let k = 1; k <= n; k++) { ids.push(`${g}${k}`); meta[`${g}${k}`] = { group: g, seq: k }; } };
+  add('a', 5); add('b', 5); add('c', 5);
+  const out = wholePassages(['a3', 'b2', 'c4'], ids, (id) => meta[id], 10, new Set(['a3', 'b2', 'c4']));
+  assert.equal(out.length, 10);
+  for (const id of ['a3', 'b2', 'c4']) assert.ok(out.includes(id));
+  add('d', 6);
+  const cutOut = wholePassages(['d5', 'd6'], ids, (id) => meta[id], 4, new Set(['d5'])); // d6 picked as new
+  assert.deepEqual(cutOut, ['d1', 'd2', 'd5', 'd6']);
+});

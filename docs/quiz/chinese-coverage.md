@@ -1,6 +1,6 @@
 # Chinese bank: PSLE syllabus and top-school coverage
 
-831 shipped questions (basic 268, intermediate 297, competent 266). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
+827 shipped questions (basic 264, intermediate 297, competent 266). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
 
 ## 1. PSLE syllabus (SEAB 0005 / 小学华文课程标准)
 
@@ -21,8 +21,8 @@
 | 句子选用 (sentence choice) | 辨别句子结构是否完整、通顺 (judge whether sentence structure is complete and well-… | yes | 49 |
 | 关联词 (conjunctions) | 选用适当的关联词连接句子 (choose a suitable conjunction pair) | yes | 99 |
 | 句子排列 (sentence ordering) | 把句子排列成通顺的语段 (arrange sentences into a coherent paragraph) | yes | 0 **not yet** |
-| 多项选择短文填空 (MCQ cloze) | 根据短文内容和上下文，选出最适当的答案 (choose the best answer from passage content and … | yes | 16 |
-| 多项选择短文填空 (MCQ cloze) | 理解语境以判断词语的用法 (use context to judge word usage) | yes | 57 |
+| 多项选择短文填空 (MCQ cloze) | 根据短文内容和上下文，选出最适当的答案 (choose the best answer from passage content and … | yes | 15 |
+| 多项选择短文填空 (MCQ cloze) | 理解语境以判断词语的用法 (use context to judge word usage) | yes | 54 |
 | 对话填答 (dialogue completion) | 根据对话内容，选出最适当的答案 (choose the best response from the dialogue content) | yes | 0 **not yet** |
 | 对话填答 (dialogue completion) | 判断对话中的情境和语气 (judge situation and tone in a dialogue) | yes | 0 **not yet** |
 | 篇章理解 (passage understanding) | 根据篇章内容选出最适当的答案 (choose the best answer from passage content) | yes | 61 |
@@ -46,7 +46,7 @@
 | 词语运用：哪个句子正确 (which sentence uses the word correctly) (`chi-pat-ciyu-yunyong`) | 112 | 49 |
 | 词语／成语的意思 (meaning of an underlined word or idiom) (`chi-pat-ciyuyi`) | 104 | 55 |
 | 关联词 (conjunction pair) (`chi-pat-guanlian`) | 84 | 99 |
-| 短文填空：词语选用 (cloze word choice) (`chi-pat-duanwen-tiankong`) | 82 | 73 |
+| 短文填空：词语选用 (cloze word choice) (`chi-pat-duanwen-tiankong`) | 82 | 69 |
 | 成语运用 (idiom used correctly) (`chi-pat-chengyu`) | 39 | 57 |
 
 ## 3. Words tested in the papers

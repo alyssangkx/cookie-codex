@@ -45,16 +45,17 @@ export function pickTier(
 
 /**
  * Passage sub-topics (cloze, reading): a quiz is whole passages, read once, questions in order.
- * Passages holding a due retest (`must`) go first and are never skipped: if one is too big for the
- * space left it is cut, keeping its due questions. Then other passages in picked order, whole while
- * they fit; one too big gives way to a later, smaller one; only if nothing fits exactly is one cut.
+ * Every due retest (`must`, at most 3) is always included: passages holding one go first and are cut
+ * if needed so that the due questions of later passages still fit. Then other passages in picked
+ * order, whole while they fit; one too big gives way to a later, smaller one; only if nothing fits
+ * exactly is one cut. A cut keeps due questions, then picked ones, then passage order.
  * A picked question outside this tier's passages (a retest from another level) is a unit of its own.
- * ponytail: due retests beyond the space left wait for the next quiz (they stay first in line by due date)
  */
 export function wholePassages(
   picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined, size: number,
   must: Set<string> = new Set(),
 ): string[] {
+  const tier = new Set(ids);
   const members = new Map<string, string[]>();
   for (const id of ids) {
     const g = passage(id)?.group ?? id; // an ungrouped question is a passage of one
@@ -62,26 +63,31 @@ export function wholePassages(
     members.get(g)!.push(id);
   }
   const seq = (id: string) => passage(id)?.seq ?? 0;
-  const unitKey = (id: string) => { const g = passage(id)?.group; return g && members.get(g)?.includes(id) ? g : id; };
+  const unitKey = (id: string) => (tier.has(id) ? passage(id)?.group ?? id : id);
   const units = new Map<string, string[]>();
   for (const id of picked) {
     const k = unitKey(id);
     if (!units.has(k)) units.set(k, k === id ? [id] : [...members.get(k)!].sort((a, b) => seq(a) - seq(b)));
   }
-  const all = [...units.values()];
-  const isMust = (u: string[]) => u.some((id) => must.has(id));
+  const want = new Set(picked);
+  const rank = (id: string) => (must.has(id) ? 0 : want.has(id) ? 1 : 2);
   const cut = (u: string[], n: number) => {
-    const keep = new Set([...u.filter((id) => must.has(id)).slice(0, n)]);
-    for (const id of u) if (keep.size < n) keep.add(id);
+    const keep = new Set([...u].sort((a, b) => rank(a) - rank(b) || seq(a) - seq(b)).slice(0, Math.max(0, n)));
     return u.filter((id) => keep.has(id)); // passage order
   };
+  const all = [...units.values()];
+  const mustUnits = all.filter((u) => u.some((id) => must.has(id)));
   const out: string[] = [];
+  mustUnits.forEach((u, i) => {
+    const later = mustUnits.slice(i + 1).reduce((n, v) => n + v.filter((id) => must.has(id)).length, 0);
+    const room = size - out.length - later; // keep space for the due questions still to come
+    out.push(...(u.length <= room ? u : cut(u, room)));
+  });
   const skipped: string[][] = [];
-  for (const u of [...all.filter(isMust), ...all.filter((u) => !isMust(u))]) {
+  for (const u of all.filter((u) => !mustUnits.includes(u))) {
     const room = size - out.length;
     if (room <= 0) break;
     if (u.length <= room) out.push(...u);
-    else if (isMust(u)) out.push(...cut(u, room));
     else skipped.push(u);
   }
   for (const u of skipped) if (out.length < size) out.push(...cut(u, size - out.length));

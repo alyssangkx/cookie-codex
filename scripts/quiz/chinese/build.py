@@ -50,8 +50,8 @@ def gloss_line(it):
 
 def fill_cloze(bank, items, review, dropped):
     """A cloze passage shows every blank. A sibling blank that is not asked is shown filled with its answer,
-    but only when that answer is known good: the sibling was reviewed, its blind answer matched and nobody
-    doubted the answer (it was held only for its explanation). Any other unasked sibling (doubted answer,
+    but only when review.json records "fill_ok": true for it (an explicit decision that its answer is sound;
+    it was held for its explanation only). Any other unasked sibling (doubted answer,
     unreviewed, or edited since review) holds the whole passage set, so a child never sees a blank that is
     never asked, or a doubted word written into the passage."""
     by_key = {it["key"]: it for it in items}
@@ -62,12 +62,9 @@ def fill_cloze(bank, items, review, dropped):
             return "unknown"
         if v.get("ship") is True:
             return "asked"
-        # held for its explanation alone, and no reviewer note doubts the answer itself
-        only_explain = v.get("reasons") and all(r in ("explanation wrong", "explanation or wrong form implausible")
-                                                 for r in v["reasons"])
-        doubt = any(w in " ".join(v.get("notes", [])) for w in ("arguable", "acceptable", "not airtight", "also fits",
-                                                                 "also works", "defensible", "也可以", "也行"))
-        return "fill" if only_explain and not doubt else "unknown"
+        # filled only on an explicit, recorded decision that the answer itself is sound (review.json
+        # "fill_ok": true, set by hand after reading the notes); anything else holds the passage set
+        return "fill" if v.get("fill_ok") is True else "unknown"
 
     sets = {}
     for k, it in by_key.items():
