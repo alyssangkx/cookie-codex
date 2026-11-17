@@ -2612,8 +2612,8 @@ def iso_which_cuboid(r):
         return None
     vol = a * b * h
     decoys = [((a, b, h + 1) if h < 4 else (a, b, h - 1), "miscounted_layers", "Counted one layer too many or too few."),
-              ((a + 1, b, h) if a < 4 else (a - 1, b, h), "miscounted_base", "Miscounted a side of the base by one."),
-              ((a, b + 1, h) if b < 4 else (a, b - 1, h), "miscounted_base", "Miscounted a side of the base by one."),
+              ((a + 1, b, h) if a < 4 else (a - 1, b, h), "miscounted_base_length", "Miscounted the length of the base by one cube."),
+              ((a, b + 1, h) if b < 4 else (a, b - 1, h), "miscounted_base_width", "Miscounted the width of the base by one cube."),
               ((a, b, h + 2) if h < 3 else (a, b, h - 2), "miscounted_layers", "Counted two layers too many or too few.")]
     seen, outs = {(tuple(sorted((a, b))), h)}, []
     for dims, tag, why in decoys:

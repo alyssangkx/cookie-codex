@@ -1526,11 +1526,12 @@ def which_line_is_n_cm(r):
             ("counted_one_too_many", f"Picked the line that is {n + 1} cm long."),
             ("counted_one_too_few", f"Picked the line that is {n - 1} cm long.")]
     wrong = []
+    kinds = [0, 1, 2]  # dec[0] ends at N, dec[1] is N+1 long, dec[2] is N-1 long
+    kinds.insert(pos, None)
     for i in range(4):
         if i == pos:
             continue
-        ln = allv[i][1] - allv[i][0]
-        k = 0 if ln != n and allv[i][1] == n else (1 if ln == n + 1 else 2)
+        k = kinds[i]
         wrong.append((i + 1, tags[k][0], tags[k][1]))
     wrong.sort(key=lambda w: [t[0] for t in tags].index(w[1]))
     stem = f"{name} measures four lines, A to D, with a ruler. Which line is exactly {n} cm long?"

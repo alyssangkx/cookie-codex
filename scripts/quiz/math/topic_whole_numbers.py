@@ -1890,7 +1890,8 @@ def ga_digit_cards_sum(r):
     most = r.random() < 0.5
     ans = 10 * (a + b) + (c + d) if most else 10 * (c + d) + (a + b)
     alt1 = (10 * a + b) + (10 * c + d) if most else (10 * d + c) + (10 * b + a)
-    alt2 = 10 * (a + d) + (b + c)
+    # a realistic wrong pairing: the second-best card in the tens with the best, or the second-smallest with the smallest
+    alt2 = 10 * (a + c) + (b + d) if most else 10 * (b + d) + (a + c)
     r.shuffle(ds)
     stem = (f"{r.choice(NAMES)} has four digit cards: {', '.join(map(str, ds))}. Two 2-digit numbers are made using all four cards. "
             f"What is the {'greatest' if most else 'smallest'} possible sum of the two numbers?")
@@ -1899,7 +1900,7 @@ def ga_digit_cards_sum(r):
         (alt2, "put_the_wrong_cards_in_the_tens", "Put the wrong pair of cards in the tens place."),
         (a + b + c + d, "added_the_digits", "Added the four digits only."),
         *slip_set(ans, 9)],
-        [f"Cards in order: {a}, {b}, {c}, {d}", f"Tens digits: {(a, b) if most else (d, c)}", f"Sum = {ans}"],
+        [f"Cards in order: {a}, {b}, {c}, {d}", f"Tens digits: {a} and {b}" if most else f"Tens digits: {d} and {c}", f"Sum = {ans}"],
         {"ds": ds, "most": most}, whole=True, auto_slips=False)
 
 
@@ -2893,7 +2894,6 @@ def ga_table_story(r):
             f"The chairs left are arranged in rows of {t3}. How many rows are there?")
     return build(ga_table_story, stem, ans, [
         (tot // t3, "forgot_the_chairs_taken_out", "Forgot to take the chairs out first."),
-        (rem // t3 + 1, "counted_one_row_too_many", "Counted one row too many."),
         (r1 + r2, "counted_the_original_rows", "Gave the number of rows at the start."), *slip_set(ans, 1)],
         [f"{r1} × {t1} + {r2} × {t2} = {tot}", f"{tot} − {s} = {rem}", f"{rem} ÷ {t3} = {ans}"],
         {"r1": r1, "t1": t1, "r2": r2, "t2": t2, "s": s, "t3": t3}, whole=True, auto_slips=False)

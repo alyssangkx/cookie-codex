@@ -3863,10 +3863,10 @@ def line_perp_par_grid_slope(r):
         decoys = [(perp, "chose_perpendicular_for_parallel", "Chose a perpendicular line instead."),
                   ((b, a), "swapped_the_steps", "Swapped the across and up steps."),
                   ((a, -b), "chose_the_mirror_image", "Chose the mirror image of PQ, which slopes the other way.")]
-    ok = [d for d in decoys if all(abs(x) <= 4 and abs(y) <= 4 for x, y in [d[0]])]
-    if len(ok) < 3 or any((_dot(d[0], pq) == 0 if kind == "perp" else _cross(d[0], pq) == 0) for d in decoys):
+    # steps are at most 3, so every decoy fits the grid; still refuse a decoy that is also a correct answer
+    if any((_dot(d[0], pq) == 0 if kind == "perp" else _cross(d[0], pq) == 0) for d in decoys):
         return None
-    return _lines_question(r, line_perp_par_grid_slope, kind, pq, good, ok, name)
+    return _lines_question(r, line_perp_par_grid_slope, kind, pq, good, decoys, name)
 
 
 checker(line_perp_par_grid_slope)(_lines_check)

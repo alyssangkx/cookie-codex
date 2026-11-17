@@ -10054,26 +10054,26 @@
    ],
    "stem": "Wei Jie has four digit cards: 7, 4, 8, 3. Two 2-digit numbers are made using all four cards. What is the greatest possible sum of the two numbers?",
    "options": [
+    "166",
     "22",
-    "121",
     "157",
     "130"
    ],
    "optionValues": [
+    "166",
     "22",
-    "121",
     "157",
     "130"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "added_the_digits",
-     "why": "Added the four digits only."
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
     },
     {
-     "tag": "put_the_wrong_cards_in_the_tens",
-     "why": "Put the wrong pair of cards in the tens place."
+     "tag": "added_the_digits",
+     "why": "Added the four digits only."
     },
     null,
     {
@@ -10083,7 +10083,7 @@
    ],
    "solution": [
     "Cards in order: 8, 7, 4, 3",
-    "Tens digits: (8, 7)",
+    "Tens digits: 8 and 7",
     "Sum = 157"
    ],
    "params": {
@@ -10605,14 +10605,14 @@
    "options": [
     "70",
     "43",
-    "97",
-    "16"
+    "16",
+    "52"
    ],
    "optionValues": [
     "70",
     "43",
-    "97",
-    "16"
+    "16",
+    "52"
    ],
    "answer": 1,
    "explain": [
@@ -10622,17 +10622,17 @@
     },
     null,
     {
-     "tag": "put_the_wrong_cards_in_the_tens",
-     "why": "Put the wrong pair of cards in the tens place."
-    },
-    {
      "tag": "added_the_digits",
      "why": "Added the four digits only."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
     }
    ],
    "solution": [
     "Cards in order: 8, 5, 2, 1",
-    "Tens digits: (1, 2)",
+    "Tens digits: 1 and 2",
     "Sum = 43"
    ],
    "params": {
@@ -11152,26 +11152,26 @@
    ],
    "stem": "Xin Yi has four digit cards: 3, 5, 2, 4. Two 2-digit numbers are made using all four cards. What is the smallest possible sum of the two numbers?",
    "options": [
-    "77",
     "14",
+    "50",
     "59",
     "68"
    ],
    "optionValues": [
-    "77",
     "14",
+    "50",
     "59",
     "68"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "put_the_wrong_cards_in_the_tens",
-     "why": "Put the wrong pair of cards in the tens place."
-    },
-    {
      "tag": "added_the_digits",
      "why": "Added the four digits only."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
     },
     null,
     {
@@ -11181,7 +11181,7 @@
    ],
    "solution": [
     "Cards in order: 5, 4, 3, 2",
-    "Tens digits: (2, 3)",
+    "Tens digits: 2 and 3",
     "Sum = 59"
    ],
    "params": {
@@ -12892,30 +12892,30 @@
    ],
    "stem": "A hall has 6 rows of 10 chairs and 7 rows of 10 chairs. 10 chairs are taken out. The chairs left are arranged in rows of 4. How many rows are there?",
    "options": [
-    "13",
-    "32",
     "31",
+    "32",
+    "13",
     "30"
    ],
    "optionValues": [
-    "13",
-    "32",
     "31",
+    "32",
+    "13",
     "30"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "counted_the_original_rows",
-     "why": "Gave the number of rows at the start."
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
     },
     {
      "tag": "forgot_the_chairs_taken_out",
      "why": "Forgot to take the chairs out first."
     },
     {
-     "tag": "counted_one_row_too_many",
-     "why": "Counted one row too many."
+     "tag": "counted_the_original_rows",
+     "why": "Gave the number of rows at the start."
     },
     null
    ],

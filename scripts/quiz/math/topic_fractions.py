@@ -1469,8 +1469,8 @@ def related_money_three_parts(r):
         return None
     name = r.choice(NAMES)
     ans = 1 - spent
-    stem = (f"{name} spent {a}/{b} of the money on a book and {c}/{d} of the money on a pen. {name} gave {e}/{d} of the "
-            f"money to a cousin. What fraction of the money was left? Give your answer in its simplest form.")
+    stem = (f"{name} had some money. {name} spent {a}/{b} of it on a book and {c}/{d} of it on a pen, and gave {e}/{d} "
+            f"of it to a cousin. What fraction of the money was left? Give your answer in its simplest form.")
     return build(related_money_three_parts, stem, ans, [
         (1 - F(a, b) - F(c, d), "forgot_the_gift", "Left out the money given to the cousin."),
         (spent, "gave_the_part_spent", "Found the fraction spent and gave it as the fraction left."),
