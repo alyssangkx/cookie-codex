@@ -35,6 +35,61 @@ PASSAGE = re.compile(r"^(cloze|yuedu|duihua)-(\d+)-(\d+)$")  # passage sets: 5 q
 DIALOGUE = "chi-dialogue-mcq"  # 8 shared phrases (A-H) for 4 blanks; every other sub-topic has 4 options
 
 
+PINYIN_SUB = "chi-ciyu-choose"
+PINYIN = json.loads((HERE / "pinyin.json").read_text())  # {"word": "pīn yīn", "word|key": override for one item}
+ZH_RUN = re.compile(r"[\u4e00-\u9fff]+(?:……[\u4e00-\u9fff]+)*")
+EN = re.compile(r"[A-Za-z]")
+
+
+def _py(word, key):
+    py = PINYIN.get(f"{word}|{key}") or PINYIN.get(word)
+    if not py:
+        raise SystemExit(f"pinyin.json has no reading for {word!r} (item {key}); add it")
+    return py
+
+
+def add_pinyin(text, key):
+    """Pinyin for the Chinese words in the ENGLISH parts of a line only: "词 = meaning" becomes "词 (pīn yīn) = meaning",
+    and a Chinese run inside an English parenthetical gets " pīn yīn" after it (after the closing 」 when quoted).
+    Chinese-only text is never touched. Applied to the built bank, so item files, review.json and fingerprints stay as they are."""
+    out, i = [], 0
+    if " = " in text:  # gloss line: segments joined by "；"
+        segs = []
+        for seg in text.split("；"):
+            if " = " in seg:
+                w, m = seg.split(" = ", 1)
+                seg = f"{w.strip()} ({_py(w.strip(), key)}) = {m}"
+            segs.append(seg)
+        text = "；".join(segs)
+    depth, start, spans = 0, 0, []
+    for j, c in enumerate(text):
+        if c == "(":
+            if depth == 0:
+                start = j
+            depth += 1
+        elif c == ")" and depth:
+            depth -= 1
+            if depth == 0:
+                spans.append((start, j + 1))
+    for a, b in spans:
+        out.append(text[i:a])
+        sp = text[a:b]
+        if EN.search(sp):
+            sp = re.sub(ZH_RUN.pattern + "」?", lambda m: _pyrun(m, key), sp)  # "「词」" keeps its quote; the pinyin follows it
+        out.append(sp)
+        i = b
+    out.append(text[i:])
+    return "".join(out)
+
+
+def _pyrun(m, key):
+    g = m.group()
+    quoted = g.endswith("」")
+    w = g[:-1] if quoted else g
+    nxt = m.string[m.end():m.end() + 1]
+    return f"{w}{'」' if quoted else ''} {_py(w, key)}{' ' if nxt.isascii() and nxt.isalnum() else ''}"
+
+
 def gloss_line(it):
     """The gloss as an extra solution line, only when it carries a meaning ("词 = meaning") not already said."""
     g = it.get("gloss") or ""
@@ -131,6 +186,10 @@ def main():
             if verdict.get("fingerprint") != fingerprint(it):
                 stale.append(rk)
                 continue
+            if sub == PINYIN_SUB:
+                it = {**it, "explain": [x and {**x, "why": add_pinyin(x["why"], it["key"])} for x in it["explain"]],
+                      "solution": [add_pinyin(l, it["key"]) for l in it["solution"]],
+                      "gloss": add_pinyin(it["gloss"], it["key"]) if it.get("gloss") else it.get("gloss")}
             # writers cycle the answer A-D in item order; shuffle each item's options with a seed from its key,
             # so the order is random to a child but identical on every rebuild
             # a dialogue set shares one list of 8 phrases across its 4 blanks: ONE seed per set, so the

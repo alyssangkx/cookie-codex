@@ -63,6 +63,28 @@ for f in sorted((HERE / "chinese" / "items").glob("*.json")):
                 for j in range(1, 5):
                     if f"（{j}）＿＿" not in x.get("stem", ""): e(f"blank {k}: stem lacks （{j}）＿＿")
 
+# pinyin.json: every reading is syllables with a tone mark, or neutral tone (no mark)
+INIT = "b p m f d t n l g k h j q x zh ch sh r z c s y w".split()
+FIN = ("a o e ai ei ao ou an en ang eng ong er i ia ie iao iu ian in iang ing iong u ua uo uai ui uan un uang ueng ue "
+       "ü üe üan ün").split()
+TONED = {"a": "āáǎà", "e": "ēéěè", "i": "īíǐì", "o": "ōóǒò", "u": "ūúǔù", "ü": "ǖǘǚǜ"}
+MARKED = "".join("".join(v) for v in TONED.values())
+SYL = re.compile(r"^(?:%s)?(?:%s)$" % ("|".join(sorted(INIT, key=len, reverse=True)), "|".join(sorted(FIN, key=len, reverse=True))))
+PLAIN = str.maketrans({c: k for k, v in TONED.items() for c in v})
+pyfile = HERE / "chinese" / "pinyin.json"
+for word, py in json.loads(pyfile.read_text()).items():
+    sy = py.split(" ")
+    zh = re.findall(r"[\u4e00-\u9fff]", word.split("|")[0])
+    for s in sy:
+        if s == "…":
+            continue
+        base = s.translate(PLAIN)
+        ok = bool(SYL.match(base))
+        if not ok or sum(c in MARKED for c in s) > 1 or s != s.lower():
+            errors.append(f"pinyin.json {word}: bad syllable {s!r} in {py!r}")
+    if len(sy) - sy.count("…") != len(zh):
+        errors.append(f"pinyin.json {word}: {len(sy)} syllables for {len(zh)} characters")
+
 # compiled banks: unique ids across all Chinese banks
 ids = Counter()
 for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "chinese").glob("*.json")):
