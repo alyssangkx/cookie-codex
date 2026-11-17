@@ -16,16 +16,16 @@ Solution: 「络绎不绝」的意思是：人、车、马接连不断。 (络�
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chizixin-43b2de60b3** (basic, chi-zixing-form-2)  
+**chizixin-92d327f052** (basic, chi-zixing-form-3)  
 
-上课时不要随便「说＿」。「说＿」的空格应填入：
+「春＿」到了，小草都绿了。「春＿」的空格应填入：
 
-- A. 舌: *「舌」和「话」字形相近，都有「舌」，但「说舌」不是这里要用的词语。(舌 looks like 话, both containing 舌. But 说舌 is not the word needed here.)*
-- B. 话 ✔
-- C. 括: *「括」和「话」字形相近，都有「舌」，但「说括」不是这里要用的词语。(括 looks like 话, both containing 舌. But 说括 is not the word needed here.)*
-- D. 活: *「活」和「话」字形相近，都有「舌」，但「说活」不是这里要用的词语。(活 looks like 话, both containing 舌. But 说活 is not the word needed here.)*
+- A. 夫: *「夫」和「天」字形相近，都有「大」，但「春夫」不是这里要用的词语。(夫 looks like 天, both containing 大. But 春夫 is not the word needed here.)*
+- B. 大: *「大」和「天」字形相近，都有「大」，但「春大」不是这里要用的词语。(大 looks like 天, both containing 大. But 春大 is not the word needed here.)*
+- C. 天 ✔
+- D. 夭: *「夭」和「天」字形相近，都有「大」，但「春夭」不是这里要用的词语。(夭 looks like 天, both containing 大. But 春夭 is not the word needed here.)*
 
-Solution: 正确的词语是「说话」。 (The correct word is 说话.) 说话 = to speak
+Solution: 正确的词语是「春天」。 (The correct word is 春天.) 春天 = spring
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -57,56 +57,56 @@ Solution: 清洁牙齿用「刷」，说刷牙。 (Teeth are brushed: 刷牙.) �
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--4d61ad4bb3** (intermediate, chi-juzi-guanlian-1)  
+**chijuzi--8393fea9aa** (competent, chi-juzi-guanlian-1)  
 
-这位医生＿＿＿＿医术高明，＿＿＿＿待人亲切，深受病人爱戴。  
+小李＿＿＿＿迟到，＿＿＿＿他的闹钟坏了。  
 应选哪一组关联词？
 
-- A. 与其……不如: *「与其……不如」表示取舍：比较后选择后者；而这句话的意思是：医术高明和待人亲切是并列的两个优点。 (「与其……不如」expresses comparing and preferring the second, but in this sentence skilled and kind are two parallel merits.)*
-- B. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：医术高明和待人亲切是并列的两个优点。 (「只有……才」expresses a necessary, only condition, but in this sentence skilled and kind are two parallel merits.)*
-- C. 宁可……也不: *「宁可……也不」表示取舍：选择前者，坚决不要后者；而这句话的意思是：医术高明和待人亲切是并列的两个优点。 (「宁可……也不」expresses choosing the first and rejecting the second, but in this sentence skilled and kind are two parallel merits.)*
-- D. 既……又 ✔
+- A. 之所以……是因为 ✔
+- B. 因为……所以: *迟到是结果，闹钟坏了才是原因，因果颠倒。(Being late is the result; the broken clock is the reason.)*
+- C. 与其说……不如说: *「与其说……不如说」表示比较说法，不表示原因。(与其说…不如说 compares two descriptions, not a reason.)*
+- D. 不但不……反而: *后半句是原因，不是相反的情况。(The second clause is a reason, not an opposite.)*
 
-Solution: 这句话的意思是：医术高明和待人亲切是并列的两个优点，所以应选「既……又」（并列：两个特点同时具备）。 (In this sentence skilled and kind are two parallel merits, so choose 「既……又」, which expresses two parallel traits.) 既……又 = both...and
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chipinyi-1d6dcb7ab1** (intermediate, chi-pinyin-sound-1)  
-
-科学家不断「创造」新的发明，让生活更方便。「创造」的正确汉语拼音是：
-
-- A. chuàng zhào: *「造」的声母是 z，不是 zh。(The initial is z, not zh.)*
-- B. chuàng zào ✔
-- C. cuàng zào: *「创」的声母是 ch，不是 c。(The initial is ch, not c.)*
-- D. chuāng zào: *「创」是 chuàng，声调不是 chuāng。(The tone is wrong: 创 is chuàng.)*
-
-Solution: 「创造」读作 chuàng zào。 (创造 is read chuàng zào.) 创造 = to create
+Solution: 这句话的意思是：迟到是结果，闹钟坏了是原因，所以应选「之所以……是因为」（因果：先说结果，再说原因）。 (In this sentence being late is the result and the broken alarm the cause, so choose 「之所以……是因为」, which expresses result first, then the reason.) 之所以……是因为 = the reason...is because
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--4936668217** (basic, chi-juzi-choose-2)  
+**chipinyi-c2cf7a1d39** (intermediate, chi-pinyin-sound-1)  
 
-下面哪一个句子把「参加」用得正确？
+教室里「充满」了欢声笑语。「充满」的正确汉语拼音是：
 
-- A. 我在茶座里「参加」了一杯热茶水。: *「参加」用于活动或组织，不能搭配「一杯茶」。(参加 goes with activities or groups, not a cup of tea.)*
-- B. 他「参加」了妈妈一起去菜市场买东西。: *「参加」是加入活动，不能表示陪同某人，应该用「陪」。(参加 means to join an activity, not to accompany someone; use 陪.)*
-- C. 我报名「参加」了学校的合唱团。 ✔
-- D. 弟弟「参加」地笑着走进了课室里面。: *「参加」是动词，不能当作方式词来修饰「笑」。(参加 is a verb and cannot describe how he smiled.)*
+- A. chōng màn: *「满」是 mǎn，声调不是 màn。(The tone is wrong: 满 is mǎn.)*
+- B. cōng mǎn: *「充」的声母是 ch，不是 c。(The initial is ch, not c.)*
+- C. chōng mǎn ✔
+- D. chōng mán: *「满」是 mǎn，声调不是 mán。(The tone is wrong: 满 is mǎn.)*
 
-Solution: 只有这句话中「参加」的搭配和意思都正确：我报名参加了学校的合唱团。 (参加: to take part in. In the other sentences it is used with a wrong object, sense or logic.)
+Solution: 「充满」读作 chōng mǎn。 (充满 is read chōng mǎn.) 充满 = to be full of
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-69731b8d6d** (intermediate, chi-pinyin-sound-1)  
+**chijuzi--647372f025** (basic, chi-juzi-choose-2)  
 
-进场时，大家要遵守「秩序」，不要推挤。「秩序」的正确汉语拼音是：
+下面哪一个句子把「帮助」用得正确？
 
-- A. zì xù: *「秩」的声母是 zh，不是 z。(The initial is zh, not z.)*
-- B. zhì xú: *「序」是 xù，声调不是 xú。(The tone is wrong: 序 is xù.)*
-- C. zhí xù: *「秩」是 zhì，声调不是 zhí。(The tone is wrong: 秩 is zhì.)*
-- D. zhì xù ✔
+- A. 妈妈「帮助」我三个苹果放在桌子上。: *「帮助」是协助，不能表示给予，应该用「给」。(帮助 means to help, not to give; use 给.)*
+- B. 我们的班长是个非常「帮助」的好人。: *「帮助」是动作，形容人热心要说「乐于助人」或「热心」。(帮助 is an action; to describe a helpful person say 乐于助人.)*
+- C. 小明「帮助」那辆自行车修好了轮子。: *「帮助」的对象应是人，不能是一辆自行车。(The object of 帮助 should be a person, not a bicycle.)*
+- D. 同学们「帮助」清洁工叔叔打扫操场。 ✔
 
-Solution: 「秩序」读作 zhì xù。 (秩序 is read zhì xù.) 秩序 = order
+Solution: 只有这句话中「帮助」的搭配和意思都正确：同学们帮助清洁工叔叔打扫操场。 (帮助: to help. In the other sentences it is used with a wrong object, sense or logic.)
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chipinyi-d422b5e451** (intermediate, chi-pinyin-sound-1)  
+
+大家都「赞美」她的歌声甜美动听。「赞美」的正确汉语拼音是：
+
+- A. zān měi: *「赞」是 zàn，声调不是 zān。(The tone is wrong: 赞 is zàn.)*
+- B. zàn měi ✔
+- C. zàn mǐ: *「美」的韵母是 ei，不是 i。(The final is ei, not i.)*
+- D. zàn méi: *「美」是 měi，声调不是 méi。(The tone is wrong: 美 is měi.)*
+
+Solution: 「赞美」读作 zàn měi。 (赞美 is read zàn měi.) 赞美 = to praise
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -116,24 +116,24 @@ Solution: 「秩序」读作 zhì xù。 (秩序 is read zhì xù.) 秩序 = ord
 
 - A. 雨停以后，天空「收拾」得又蓝又亮。: *「收拾」是整理，不能表示天空变得又蓝又亮。(收拾 means to tidy up, not to describe the sky turning blue.)*
 - B. 吃完饭后，他「收拾」了一首好听的歌。: *「收拾」的对象是东西，不能搭配「歌」。(收拾 is used with objects to tidy, not with a song.)*
-- C. 吃完饭后，我帮妈妈「收拾」碗筷。 ✔
-- D. 看见主人，小狗「收拾」地摇着尾巴。: *「收拾」是动词，不能当作方式词来修饰「摇」。(收拾 is a verb and cannot describe how the dog wagged its tail.)*
+- C. 吃完饭后，我主动帮妈妈「收拾」碗筷。 ✔
+- D. 得了奖，老师「收拾」了他一朵红花。: *「收拾」是整理或打扫，不能表示把东西送给别人，应该用「送」。(收拾 means to tidy up, not to give something to someone; use 送.)*
 
-Solution: 只有这句话中「收拾」的搭配和意思都正确：吃完饭后，我帮妈妈收拾碗筷。 (收拾: to tidy up. In the other sentences it is used with a wrong object, sense or logic.)
+Solution: 只有这句话中「收拾」的搭配和意思都正确：吃完饭后，我主动帮妈妈收拾碗筷。 (收拾: to tidy up. In the other sentences it is used with a wrong object, sense or logic.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--97ceb35e65** (competent, chi-juzi-guanlian-1)  
+**chijuzi--cf0bf95b78** (competent, chi-juzi-guanlian-1)  
 
-这位志愿者＿＿＿＿利用假期去敬老院，＿＿＿＿把自己的零用钱捐了出来。  
+话＿＿＿＿说出口，＿＿＿＿再也收不回来了。  
 应选哪一组关联词？
 
-- A. 与其……不如: *「与其……不如」表示取舍：比较后选择后者；而这句话的意思是：去敬老院之外，还捐出零用钱，更进一层。 (「与其……不如」expresses comparing and preferring the second, but in this sentence besides visiting the home, donating pocket money goes a step further.)*
-- B. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：去敬老院之外，还捐出零用钱，更进一层。 (「因为……所以」expresses cause then result, but in this sentence besides visiting the home, donating pocket money goes a step further.)*
-- C. 不但……而且 ✔
-- D. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：去敬老院之外，还捐出零用钱，更进一层。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence besides visiting the home, donating pocket money goes a step further.)*
+- A. 一旦……就 ✔
+- B. 既然……就: *「既然……就」表示推论：根据已知的事实得出结论；而这句话的意思是：话一旦说出口，就收不回来了。 (「既然……就」expresses an inference from an established fact, but in this sentence once words are spoken they cannot be taken back.)*
+- C. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：话一旦说出口，就收不回来了。 (「只有……才」expresses a necessary, only condition, but in this sentence once words are spoken they cannot be taken back.)*
+- D. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：话一旦说出口，就收不回来了。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence once words are spoken they cannot be taken back.)*
 
-Solution: 这句话的意思是：去敬老院之外，还捐出零用钱，更进一层，所以应选「不但……而且」（递进：后一项比前一项更进一层）。 (In this sentence besides visiting the home, donating pocket money goes a step further, so choose 「不但……而且」, which expresses progression to a further point.) 不但……而且 = not only...but also
+Solution: 这句话的意思是：话一旦说出口，就收不回来了，所以应选「一旦……就」（假设：某情况一旦出现，结果马上发生）。 (In this sentence once words are spoken they cannot be taken back, so choose 「一旦……就」, which expresses a supposition whose result follows at once.) 一旦……就 = once...then
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -142,39 +142,39 @@ Solution: 这句话的意思是：去敬老院之外，还捐出零用钱，更�
 下面哪一个句子把「爱护」用得正确？
 
 - A. 我们要「爱护」公物，不可以随便乱画。 ✔
-- B. 他「爱护」了一场精彩的足球赛，很开心。: *「爱护」的对象应是人或物，不能是一场比赛。(The object of 爱护 should be a person or thing, not a match.)*
+- B. 这场大雨很「爱护」，路上都是积水。: *「爱护」是爱惜保护的动作，不能用来形容大雨。(爱护 is an action of caring for something; it cannot describe heavy rain.)*
 - C. 妈妈每天「爱护」我坐车去学校，很辛苦。: *「爱护」是爱惜保护，不能表示接送。(爱护 means to cherish and protect, not to take someone to school.)*
-- D. 弟弟「爱护」地跑进了教室，满头大汗。: *「爱护」是动词，不能当作方式词来修饰「跑」。(爱护 is a verb and cannot describe how he ran.)*
+- D. 他「爱护」小狗，所以天天用棍子打它。: *「爱护」是爱惜保护，和「用棍子打」的做法相反。(爱护 means to cherish and protect, the opposite of hitting it with a stick.)*
 
 Solution: 只有这句话中「爱护」的搭配和意思都正确：我们要爱护公物，不可以随便乱画。 (爱护: to cherish and protect. In the other sentences it is used with a wrong object, sense or logic.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--8b6c3071fa** (basic, chi-juzi-guanlian-1)  
+**chijuzi--277d4ac85d** (basic, chi-juzi-guanlian-1)  
 
-爸爸＿＿＿＿会煮饭，＿＿＿＿会修电器。  
+＿＿＿＿大家互相帮助，＿＿＿＿没有克服不了的困难。  
 应选哪一组关联词？
 
-- A. 只要……就: *「只要……就」表示充分条件：具备这个条件就够了；而这句话的意思是：会修电器是在会煮饭之外更进一层。 (「只要……就」expresses a sufficient condition, but in this sentence repairing appliances goes a step beyond cooking.)*
-- B. 不仅……还 ✔
-- C. 越……越: *「越……越」表示程度递变：一方加深，另一方随着加深；而这句话的意思是：会修电器是在会煮饭之外更进一层。 (「越……越」expresses degrees rising together, but in this sentence repairing appliances goes a step beyond cooking.)*
-- D. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：会修电器是在会煮饭之外更进一层。 (「因为……所以」expresses cause then result, but in this sentence repairing appliances goes a step beyond cooking.)*
+- A. 只要……就 ✔
+- B. 先……再: *「先……再」表示顺承：按先后顺序做事；而这句话的意思是：大家互相帮助是克服困难的充分条件。 (「先……再」expresses one step after another in sequence, but in this sentence helping one another is a sufficient condition for overcoming difficulty.)*
+- C. 越……越: *「越……越」表示程度递变：一方加深，另一方随着加深；而这句话的意思是：大家互相帮助是克服困难的充分条件。 (「越……越」expresses degrees rising together, but in this sentence helping one another is a sufficient condition for overcoming difficulty.)*
+- D. 虽然……但是: *「虽然……但是」表示转折：先让步，再说相反的结果；而这句话的意思是：大家互相帮助是克服困难的充分条件。 (「虽然……但是」expresses concession then contrast, but in this sentence helping one another is a sufficient condition for overcoming difficulty.)*
 
-Solution: 这句话的意思是：会修电器是在会煮饭之外更进一层，所以应选「不仅……还」（递进：后一项比前一项更进一层）。 (In this sentence repairing appliances goes a step beyond cooking, so choose 「不仅……还」, which expresses progression to a further point.) 不仅……还 = not only...but also
+Solution: 这句话的意思是：大家互相帮助是克服困难的充分条件，所以应选「只要……就」（充分条件：具备这个条件就够了）。 (In this sentence helping one another is a sufficient condition for overcoming difficulty, so choose 「只要……就」, which expresses a sufficient condition.) 只要……就 = as long as...then
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--252a2d43ae** (basic, chi-juzi-guanlian-1)  
+**chijuzi--86d027287e** (basic, chi-juzi-guanlian-1)  
 
-她＿＿＿＿聪明，＿＿＿＿勤奋，成绩一直很好。  
+这个故事＿＿＿＿读＿＿＿＿有趣。  
 应选哪一组关联词？
 
-- A. 先……再: *「先……再」表示顺承：按先后顺序做事；而这句话的意思是：聪明和勤奋是并列的两个优点。 (「先……再」expresses one step after another in sequence, but in this sentence clever and diligent are two parallel merits.)*
-- B. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：聪明和勤奋是并列的两个优点。 (「因为……所以」expresses cause then result, but in this sentence clever and diligent are two parallel merits.)*
-- C. 既……又 ✔
-- D. 只要……就: *「只要……就」表示充分条件：具备这个条件就够了；而这句话的意思是：聪明和勤奋是并列的两个优点。 (「只要……就」expresses a sufficient condition, but in this sentence clever and diligent are two parallel merits.)*
+- A. 越……越 ✔
+- B. 如果……就: *「如果……就」表示假设：假设一个情况，推出结果；而这句话的意思是：读得越多，越觉得有趣，程度随之加深。 (「如果……就」expresses a supposition and its result, but in this sentence the more one reads, the more interesting it gets, a rising degree.)*
+- C. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：读得越多，越觉得有趣，程度随之加深。 (「因为……所以」expresses cause then result, but in this sentence the more one reads, the more interesting it gets, a rising degree.)*
+- D. 先……再: *「先……再」表示顺承：按先后顺序做事；而这句话的意思是：读得越多，越觉得有趣，程度随之加深。 (「先……再」expresses one step after another in sequence, but in this sentence the more one reads, the more interesting it gets, a rising degree.)*
 
-Solution: 这句话的意思是：聪明和勤奋是并列的两个优点，所以应选「既……又」（并列：两个特点同时具备）。 (In this sentence clever and diligent are two parallel merits, so choose 「既……又」, which expresses two parallel traits.) 既……又 = both...and
+Solution: 这句话的意思是：读得越多，越觉得有趣，程度随之加深，所以应选「越……越」（程度递变：一方加深，另一方随着加深）。 (In this sentence the more one reads, the more interesting it gets, a rising degree, so choose 「越……越」, which expresses degrees rising together.) 越……越 = the more...the more
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -192,31 +192,31 @@ Solution: 内容空洞，所以缺乏事例和感情。 (Empty content lacks exa
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--4fb6f08e35** (competent, chi-juzi-guanlian-1)  
+**chijuzi--259a00e256** (competent, chi-juzi-guanlian-1)  
 
-这件事＿＿＿＿让别人帮你解决，＿＿＿＿自己想办法来得痛快。  
+＿＿＿＿只有一个观众，他＿＿＿＿认真地演完了整场戏。  
 应选哪一组关联词？
 
-- A. 不是……而是: *「不是……而是」表示否定前者，肯定后者；而这句话的意思是：比较让别人解决与自己想办法，认为后者更好。 (「不是……而是」expresses denying the first and affirming the second, but in this sentence compares leaving it to others with solving it yourself and prefers the latter.)*
-- B. 与其……不如 ✔
-- C. 宁可……也不: *「宁可……也不」表示取舍：选择前者，坚决不要后者；而这句话的意思是：比较让别人解决与自己想办法，认为后者更好。 (「宁可……也不」expresses choosing the first and rejecting the second, but in this sentence compares leaving it to others with solving it yourself and prefers the latter.)*
-- D. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：比较让别人解决与自己想办法，认为后者更好。 (「只有……才」expresses a necessary, only condition, but in this sentence compares leaving it to others with solving it yourself and prefers the latter.)*
+- A. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：只有一个观众也认真演完，是让步。 (「只有……才」expresses a necessary, only condition, but in this sentence even with one spectator he performed fully, a concession.)*
+- B. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：只有一个观众也认真演完，是让步。 (「因为……所以」expresses cause then result, but in this sentence even with one spectator he performed fully, a concession.)*
+- C. 哪怕……也 ✔
+- D. 一旦……就: *「一旦……就」表示假设：某情况一旦出现，结果马上发生；而这句话的意思是：只有一个观众也认真演完，是让步。 (「一旦……就」expresses a supposition whose result follows at once, but in this sentence even with one spectator he performed fully, a concession.)*
 
-Solution: 这句话的意思是：比较让别人解决与自己想办法，认为后者更好，所以应选「与其……不如」（取舍：比较后选择后者）。 (In this sentence compares leaving it to others with solving it yourself and prefers the latter, so choose 「与其……不如」, which expresses comparing and preferring the second.) 与其……不如 = rather than...better to
+Solution: 这句话的意思是：只有一个观众也认真演完，是让步，所以应选「哪怕……也」（让步假设：就算出现某情况，结果也不变）。 (In this sentence even with one spectator he performed fully, a concession, so choose 「哪怕……也」, which expresses a concession: even in that case the result stays.) 哪怕……也 = even if...still
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--3db81db86e** (intermediate, chi-juzi-guanlian-1)  
+**chijuzi--0813dd5f4f** (intermediate, chi-juzi-guanlian-1)  
 
-＿＿＿＿前面的路再困难，我们＿＿＿＿不能放弃。  
+他自尊心很强，＿＿＿＿饿着肚子，＿＿＿＿向别人乞讨一口饭吃。  
 应选哪一组关联词？
 
-- A. 不是……而是: *「不是……而是」表示否定前者，肯定后者；而这句话的意思是：路再困难也不能放弃，是让步式的假设。 (「不是……而是」expresses denying the first and affirming the second, but in this sentence however hard the road, we must not give up, a concessive supposition.)*
-- B. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：路再困难也不能放弃，是让步式的假设。 (「只有……才」expresses a necessary, only condition, but in this sentence however hard the road, we must not give up, a concessive supposition.)*
-- C. 即使……也 ✔
-- D. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：路再困难也不能放弃，是让步式的假设。 (「因为……所以」expresses cause then result, but in this sentence however hard the road, we must not give up, a concessive supposition.)*
+- A. 宁可……也不 ✔
+- B. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：他自尊心强，在饿肚子和乞讨之间选择前者。 (「只有……才」expresses a necessary, only condition, but in this sentence being proud, he chooses hunger over begging.)*
+- C. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：他自尊心强，在饿肚子和乞讨之间选择前者。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence being proud, he chooses hunger over begging.)*
+- D. 与其……不如: *「与其……不如」表示取舍：比较后选择后者；而这句话的意思是：他自尊心强，在饿肚子和乞讨之间选择前者。 (「与其……不如」expresses comparing and preferring the second, but in this sentence being proud, he chooses hunger over begging.)*
 
-Solution: 这句话的意思是：路再困难也不能放弃，是让步式的假设，所以应选「即使……也」（让步假设：就算出现某情况，结果也不变）。 (In this sentence however hard the road, we must not give up, a concessive supposition, so choose 「即使……也」, which expresses a concession: even in that case the result stays.) 即使……也 = even if...still
+Solution: 这句话的意思是：他自尊心强，在饿肚子和乞讨之间选择前者，所以应选「宁可……也不」（取舍：选择前者，坚决不要后者）。 (In this sentence being proud, he chooses hunger over begging, so choose 「宁可……也不」, which expresses choosing the first and rejecting the second.) 宁可……也不 = would rather...than
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -234,71 +234,71 @@ Solution: 再三说明重点用「强调」。 (Stressing a point is 强调.) �
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--e9f3ddbf94** (competent, chi-juzi-choose-1)  
+**chijuzi--5699501596** (competent, chi-juzi-choose-1)  
 
 下面哪一句最适合填入空格？  
-一个人的力量是有限的，＿＿＿＿。
+小明答错了题目，同学们都笑了。老师却说：“＿＿＿＿。”
 
-- A. 因为力量很大，所以一个人不需要别人帮忙: *与「力量有限」矛盾。(It contradicts 'limited strength'.)*
-- B. 只有大家团结合作，才能完成更大的任务 ✔
-- C. 所以一个人努力，就能完成所有的任务: *前文说一个人力量有限，不可能做所有的事。(The context says one person's strength is limited.)*
-- D. 只有一个人努力，才能完成更大的任务: *与前一句「力量有限」矛盾。(It contradicts 'limited strength'.)*
+- A. 大家笑得真开心，我们再一起笑一次吧: *老师不会带头笑一个答错的同学。(A teacher would not lead the laughter at a pupil's mistake.)*
+- B. 小明答得非常正确，请大家热烈地给他鼓掌: *小明答错了，说他答得正确，和事实矛盾。(Xiao Ming answered wrongly, so calling it correct contradicts the facts.)*
+- C. 小明答错了，可是他今天比谁都聪明: *他答错了，说他比谁都聪明前后矛盾。(He answered wrongly, so claiming he is the cleverest contradicts that.)*
+- D. 能勇敢举手就是进步，我们看看错在哪里 ✔
 
-Solution: 力量有限，所以要靠合作。 (Limited strength means we need cooperation.) consistent argument
+Solution: 老师用鼓励的话回应，符合教育的语气。 (The teacher responds encouragingly.) tone consistency
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--009e0d7aef** (competent, chi-juzi-choose-1)  
+**chijuzi--b12ba35b8e** (competent, chi-juzi-choose-1)  
 
 下面哪一句最适合填入空格？  
-小莉第一次上台演讲，手心全是汗。她深吸一口气，＿＿＿＿。
+新加坡虽然是个小国家，＿＿＿＿。
 
-- A. 低着头看着地面一句话也不说: *深吸一口气后应开口，不是继续沉默。(After the deep breath she should begin, not stay silent.)*
-- B. 转身请老师代替她上台演讲: *她要自己演讲，不是请人代替。(She is the speaker, not someone who asks others to take over.)*
-- C. 开口说出了准备好的第一句话 ✔
-- D. 转身走下台去不再演讲了: *她深吸一口气是为了鼓起勇气，不是放弃。(She breathes in to gather courage, not to quit.)*
+- A. 却拥有着非常辽阔的国土面积: *新加坡是小国，国土不辽阔，与事实矛盾。(Singapore is small, so a vast territory is false.)*
+- B. 却有着多元种族和丰富的文化 ✔
+- C. 所以有着多元种族和丰富的文化: *「虽然」要搭配「却」或「但是」，不能用「所以」。(虽然 pairs with 却/但是, not 所以.)*
+- D. 但是还是一个很小的国家呀: *「虽然小」后面不能只重复「很小」，没有转折。(After 虽然 small, merely repeating small gives no contrast.)*
 
-Solution: 她深吸一口气后，下一步是开口。 (After a deep breath she begins speaking.) coherent narrative
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chipinyi-7a3bb2ba25** (competent, chi-pinyin-sound-2)  
-
-老师请班长「处理」同学之间的小纠纷。「处理」的正确汉语拼音是：
-
-- A. cǔ lǐ: *「处」的声母是 ch，不是 c。(The initial is ch, not c.)*
-- B. chǔ lǐ ✔
-- C. chù lǐ: *「处」在「处理」中读 chǔ，不读 chù。(In this word 处 is read chǔ, not chù.)*
-- D. chǔ lí: *「理」是 lǐ，声调不是 lí。(The tone is wrong: 理 is lǐ.)*
-
-Solution: 「处理」是办理，「处」读 chǔ。 (In 处理, 处 means 'to handle' and is read chǔ.) 处理 = to deal with
+Solution: 「虽然……却……」表示转折。 (虽然 ... 却 expresses a turn.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chizixin-bb8ac0f14b** (intermediate, chi-zixing-form-3)  
+**chipinyi-0c901ad0c7** (competent, chi-pinyin-sound-2)  
 
-取得好成绩后，他仍然很「谦＿」。「谦＿」的空格应填入：
+妈妈带我到「银行」开了一个储蓄户口。「银行」的正确汉语拼音是：
 
-- A. 墟: *「墟」和「虚」读音相同，都读 xū，字形也相近，都有「虚」，但「谦墟」不是这里要用的词语。(墟 and 虚 are both read xū; they also look alike, both containing 虚. But 谦墟 is not the word needed here.)*
-- B. 虚 ✔
-- C. 须: *「须」和「虚」读音相同，都读 xū，但「谦须」不是这里要用的词语。(须 and 虚 are both read xū. But 谦须 is not the word needed here.)*
-- D. 需: *「需」和「虚」读音相同，都读 xū，但「谦需」不是这里要用的词语。(需 and 虚 are both read xū. But 谦需 is not the word needed here.)*
+- A. yín hàng: *「行」是 háng，声调不是 hàng。(The tone is wrong: 行 is háng.)*
+- B. yín xíng: *「行」在「银行」中读 háng，不读 xíng。(In this word 行 is read háng, not xíng.)*
+- C. yíng háng: *「银」的韵母是 in，不是 ing。(The final is in, not ing.)*
+- D. yín háng ✔
 
-Solution: 正确的词语是「谦虚」。 (The correct word is 谦虚.) 谦虚 = modest
+Solution: 「银行」是金融机构，「行」读 háng。 (In 银行, 行 means 'firm/trade' and is read háng.) 银行 = bank
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--3de6009fc7** (basic, chi-juzi-choose-1)  
+**chizixin-f6c1a50a89** (competent, chi-zixing-form-3)  
+
+小丽的成绩一直「名列前＿」。「名列前＿」的空格应填入：
+
+- A. 茂: *「茂」(mào)和「茅」(máo)音节相同，只是声调不同，字形也相近，都有「艹」，但「名列前茂」不是这里要用的词语。(茂 (mào) and 茅 (máo) have the same syllable but a different tone; they also look alike, both containing 艹. But 名列前茂 is not the word needed here.)*
+- B. 芽: *「芽」和「茅」字形相近，都有「艹」，但「名列前芽」不是这里要用的词语。(芽 looks like 茅, both containing 艹. But 名列前芽 is not the word needed here.)*
+- C. 矛: *「矛」和「茅」读音相同，都读 máo，字形也相近，都有「矛」，但「名列前矛」不是这里要用的词语。(矛 and 茅 are both read máo; they also look alike, both containing 矛. But 名列前矛 is not the word needed here.)*
+- D. 茅 ✔
+
+Solution: 正确的词语是「名列前茅」。 (The correct word is 名列前茅.) 名列前茅 = to rank among the top
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chijuzi--08c4e17ff1** (basic, chi-juzi-choose-1)  
 
 下面哪一句最适合填入空格？  
-这朵花不但漂亮，＿＿＿＿。
+因为我没带伞，＿＿＿＿。
 
-- A. 但是很香: *「不但」要配「而且」，不能配转折的「但是」。(不但 pairs with 而且, not 但是.)*
-- B. 所以很香: *「所以」表示结果，而漂亮并不是香的原因。(所以 marks a result; being pretty does not cause scent.)*
-- C. 因为很香: *「因为」表示原因，和「不但」的递进关系不合。(因为 gives a reason and breaks the 不但 progression.)*
-- D. 而且很香 ✔
+- A. 所以被雨淋湿了 ✔
+- B. 虽然下大雨: *「虽然」表示转折，不能作为「因为……」的结果。(虽然 concedes and cannot be the result of 因为.)*
+- C. 我很喜欢吃面: *吃面和没带伞无关。(Liking noodles is unrelated.)*
+- D. 但是没有被淋湿: *没带伞又下雨，被淋湿是合理结果，「没有淋湿」不合因果。(Without an umbrella in the rain, getting wet is the result.)*
 
-Solution: 「不但……而且……」表示递进。 (不但 ... 而且 expresses progression.) 不但……而且…… = not only ... but also
+Solution: 「因为……所以……」表示因果。 (因为 ... 所以 expresses cause and effect.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -316,83 +316,83 @@ Solution: 「事半功倍」指用力少，收效大，最适合这个句子：�
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--9633d5750e** (competent, chi-juzi-guanlian-1)  
+**chijuzi--fce09bec20** (competent, chi-juzi-guanlian-1)  
 
-＿＿＿＿是富人还是穷人，在法律面前＿＿＿＿是平等的。  
+他的画被选中，＿＿＿＿靠运气，＿＿＿＿靠多年的苦练。  
 应选哪一组关联词？
 
-- A. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：富人还是穷人，结果都一样，是无条件。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence rich or poor, the result is the same, regardless of condition.)*
-- B. 一旦……就: *「一旦……就」表示假设：某情况一旦出现，结果马上发生；而这句话的意思是：富人还是穷人，结果都一样，是无条件。 (「一旦……就」expresses a supposition whose result follows at once, but in this sentence rich or poor, the result is the same, regardless of condition.)*
-- C. 只要……就: *「只要……就」表示充分条件：具备这个条件就够了；而这句话的意思是：富人还是穷人，结果都一样，是无条件。 (「只要……就」expresses a sufficient condition, but in this sentence rich or poor, the result is the same, regardless of condition.)*
-- D. 无论……都 ✔
+- A. 宁可……也不: *「宁可……也不」表示取舍：选择前者，坚决不要后者；而这句话的意思是：否定「靠运气」，肯定「靠苦练」。 (「宁可……也不」expresses choosing the first and rejecting the second, but in this sentence it denies luck and affirms years of training.)*
+- B. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：否定「靠运气」，肯定「靠苦练」。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence it denies luck and affirms years of training.)*
+- C. 既……又: *「既……又」表示并列：两个特点同时具备；而这句话的意思是：否定「靠运气」，肯定「靠苦练」。 (「既……又」expresses two parallel traits, but in this sentence it denies luck and affirms years of training.)*
+- D. 不是……而是 ✔
 
-Solution: 这句话的意思是：富人还是穷人，结果都一样，是无条件，所以应选「无论……都」（无条件：不管情况怎样，结果都一样）。 (In this sentence rich or poor, the result is the same, regardless of condition, so choose 「无论……都」, which expresses no condition: the result is the same either way.) 无论……都 = no matter...all
+Solution: 这句话的意思是：否定「靠运气」，肯定「靠苦练」，所以应选「不是……而是」（否定前者，肯定后者）。 (In this sentence it denies luck and affirms years of training, so choose 「不是……而是」, which expresses denying the first and affirming the second.) 不是……而是 = not...but rather
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--725a8f16f4** (competent, chi-juzi-guanlian-1)  
+**chijuzi--c130d7f684** (competent, chi-juzi-guanlian-1)  
 
-这间教室太小，＿＿＿＿换一间大的，＿＿＿＿减少参加人数，二选一。  
+他是个爱面子的人，＿＿＿＿做错了，＿＿＿＿不肯承认。  
 应选哪一组关联词？
 
-- A. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：教室太小，换大教室或减人数，二选一。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence the room is too small, so choose one of two remedies.)*
-- B. 不是……而是: *「不是……而是」表示否定前者，肯定后者；而这句话的意思是：教室太小，换大教室或减人数，二选一。 (「不是……而是」expresses denying the first and affirming the second, but in this sentence the room is too small, so choose one of two remedies.)*
-- C. 要么……要么 ✔
-- D. 既……又: *「既……又」表示并列：两个特点同时具备；而这句话的意思是：教室太小，换大教室或减人数，二选一。 (「既……又」expresses two parallel traits, but in this sentence the room is too small, so choose one of two remedies.)*
+- A. 既然……就: *「既然……就」表示推论：根据已知的事实得出结论；而这句话的意思是：他爱面子，即使做错也不肯承认，是让步。 (「既然……就」expresses an inference from an established fact, but in this sentence he loves face, so even when wrong he refuses to admit it, a concession.)*
+- B. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：他爱面子，即使做错也不肯承认，是让步。 (「只有……才」expresses a necessary, only condition, but in this sentence he loves face, so even when wrong he refuses to admit it, a concession.)*
+- C. 与其……不如: *「与其……不如」表示取舍：比较后选择后者；而这句话的意思是：他爱面子，即使做错也不肯承认，是让步。 (「与其……不如」expresses comparing and preferring the second, but in this sentence he loves face, so even when wrong he refuses to admit it, a concession.)*
+- D. 即使……也 ✔
 
-Solution: 这句话的意思是：教室太小，换大教室或减人数，二选一，所以应选「要么……要么」（选择：两个选项中选一个）。 (In this sentence the room is too small, so choose one of two remedies, so choose 「要么……要么」, which expresses a choice between two options.) 要么……要么 = either...or (choose one)
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chijuzi--fa1e2b8ddb** (competent, chi-juzi-choose-2)  
-
-下面哪一个句子把「与其」用得正确？
-
-- A. 「与其」在家玩电脑，而且我们还要出去运动。: *「与其」要搭配「不如」，不能用「而且」。(与其 pairs with 不如, not 而且.)*
-- B. 「与其」在家玩电脑，不如出去运动运动。 ✔
-- C. 「与其」出去运动，所以我们在家玩电脑。: *「与其」要搭配「不如」，不能用「所以」。(与其 pairs with 不如, not 所以.)*
-- D. 「与其」在家玩电脑，因此就出去运动运动。: *「与其」要搭配「不如」，不能用「因此」。(与其 pairs with 不如, not 因此.)*
-
-Solution: 只有这句话中「与其」的搭配和意思都正确：与其在家玩电脑，不如出去运动运动。 (与其: rather than. In the other sentences it is used with a wrong object, sense or logic.)
+Solution: 这句话的意思是：他爱面子，即使做错也不肯承认，是让步，所以应选「即使……也」（让步假设：就算出现某情况，结果也不变）。 (In this sentence he loves face, so even when wrong he refuses to admit it, a concession, so choose 「即使……也」, which expresses a concession: even in that case the result stays.) 即使……也 = even if...still
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-ded30b0887** (intermediate, chi-pinyin-sound-1)  
+**chijuzi--417167d124** (competent, chi-juzi-choose-2)  
 
-春天来了，院子里开满了「灿烂」的花朵。「灿烂」的正确汉语拼音是：
+下面哪一个句子把「宁可」用得正确？
 
-- A. cān làn: *「灿」是 càn，声调不是 cān。(The tone is wrong: 灿 is càn.)*
-- B. chàn làn: *「灿」的声母是 c，不是 ch。(The initial is c, not ch.)*
-- C. càn làn ✔
-- D. càn nàn: *「烂」的声母是 l，不是 n。(The initial is l, not n.)*
+- A. 他「宁可」考得很差，也一定要得到第一名。: *「宁可」后面是愿意付出的代价，考得很差和第一名互相矛盾。(宁可 names an acceptable cost; doing badly contradicts being first.)*
+- B. 他「宁可」自己少睡一点，也要把功课做完。 ✔
+- C. 他「宁可」早点出门，所以最后还是迟到了。: *「宁可……也要」表示取舍，不能接「所以」，意思也不合。(宁可 expresses a trade-off and does not take 所以.)*
+- D. 「宁可」天空下雨，因此我们仍然去爬山。: *「宁可」要搭配「也」，不能用「因此」。(宁可 pairs with 也, not 因此.)*
 
-Solution: 「灿烂」读作 càn làn。 (灿烂 is read càn làn.) 灿烂 = brilliant, bright
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chizixin-76f2c95a16** (basic, chi-zixing-form-3)  
-
-跑了一圈后，我们坐下来「休＿」。「休＿」的空格应填入：
-
-- A. 媳: *「媳」(xí)和「息」(xī)音节相同，只是声调不同，字形也相近，都有「息」，但「休媳」不是这里要用的词语。(媳 (xí) and 息 (xī) have the same syllable but a different tone; they also look alike, both containing 息. But 休媳 is not the word needed here.)*
-- B. 惜: *「惜」和「息」读音相同，都读 xī，但「休惜」不是这里要用的词语。(惜 and 息 are both read xī. But 休惜 is not the word needed here.)*
-- C. 熄: *「熄」和「息」读音相同，都读 xī，字形也相近，都有「息」，但「休熄」不是这里要用的词语。(熄 and 息 are both read xī; they also look alike, both containing 息. But 休熄 is not the word needed here.)*
-- D. 息 ✔
-
-Solution: 正确的词语是「休息」。 (The correct word is 休息.) 休息 = to rest
+Solution: 只有这句话中「宁可」的搭配和意思都正确：他宁可自己少睡一点，也要把功课做完。 (宁可: would rather. In the other sentences it is used with a wrong object, sense or logic.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-f1843a8794** (basic, chi-pinyin-sound-1)  
+**chipinyi-3f5ce5f56f** (intermediate, chi-pinyin-sound-1)  
 
-见到长辈要问好，这是基本的「礼貌」。「礼貌」的正确汉语拼音是：
+检查答案时要「仔细」，别漏掉任何一题。「仔细」的正确汉语拼音是：
 
-- A. lǐ máo: *「貌」是 mào，声调不是 máo。(The tone is wrong: 貌 is mào.)*
-- B. lǐ mào ✔
-- C. lí mào: *「礼」是 lǐ，声调不是 lí。(The tone is wrong: 礼 is lǐ.)*
-- D. lǐ mòu: *「貌」的韵母是 ao，不是 ou。(The final is ao, not ou.)*
+- A. zī xì: *「仔」是 zǐ，声调不是 zī。(The tone is wrong: 仔 is zǐ.)*
+- B. zǐ xí: *「细」是 xì，声调不是 xí。(The tone is wrong: 细 is xì.)*
+- C. zǐ xì ✔
+- D. zhǐ xì: *「仔」的声母是 z，不是 zh。(The initial is z, not zh.)*
 
-Solution: 「礼貌」读作 lǐ mào。 (礼貌 is read lǐ mào.) 礼貌 = politeness
+Solution: 「仔细」读作 zǐ xì。 (仔细 is read zǐ xì.) 仔细 = careful
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chizixin-cee150ea9c** (basic, chi-zixing-form-3)  
+
+我和「同＿」一起做科学实验。「同＿」的空格应填入：
+
+- A. 字: *「字」和「学」字形相近，都有「子」，但「同字」不是这里要用的词语。(字 looks like 学, both containing 子. But 同字 is not the word needed here.)*
+- B. 觉: *「觉」和「学」字形相近，都有「⺍」，但「同觉」不是这里要用的词语。(觉 looks like 学, both containing ⺍. But 同觉 is not the word needed here.)*
+- C. 学 ✔
+- D. 孝: *「孝」和「学」字形相近，都有「子」，但「同孝」不是这里要用的词语。(孝 looks like 学, both containing 子. But 同孝 is not the word needed here.)*
+
+Solution: 正确的词语是「同学」。 (The correct word is 同学.) 同学 = classmate
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chipinyi-144234a9b5** (intermediate, chi-pinyin-sound-1)  
+
+同学们在贺卡上写下对毕业生的「祝福」。「祝福」的正确汉语拼音是：
+
+- A. zhù hú: *「福」的声母是 f，不是 h。(The initial is f, not h.)*
+- B. zhù fú ✔
+- C. zhú fú: *「祝」是 zhù，声调不是 zhú。(The tone is wrong: 祝 is zhù.)*
+- D. zhù fù: *「福」是 fú，声调不是 fù。(The tone is wrong: 福 is fú.)*
+
+Solution: 「祝福」读作 zhù fú。 (祝福 is read zhù fú.) 祝福 = blessing, good wishes
 
 - [ ] correct    - [ ] needs a fix: ________
 

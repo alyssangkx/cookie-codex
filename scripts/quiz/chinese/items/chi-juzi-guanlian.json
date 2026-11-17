@@ -384,7 +384,7 @@
    "options": [
     "虽然……但是",
     "不但……而且",
-    "一边……一边",
+    "先……再",
     "如果……就"
    ],
    "answer": 3,
@@ -399,7 +399,7 @@
     },
     {
      "tag": "wrong_logic",
-     "why": "「一边……一边」表示同时：两个动作同时进行；而这句话的意思是：明天天气好是尚未发生的假设，去海边取决于它。 (「一边……一边」expresses two actions at the same time, but in this sentence good weather tomorrow is a supposition and the trip depends on it.)"
+     "why": "「先……再」表示顺承：按先后顺序做事；而这句话的意思是：明天天气好是尚未发生的假设，去海边取决于它。 (「先……再」expresses one step after another in sequence, but in this sentence good weather tomorrow is a supposition and the trip depends on it.)"
     },
     null
    ],
@@ -452,7 +452,7 @@
    "options": [
     "因为……所以",
     "如果……就",
-    "虽然……但是",
+    "先……再",
     "不但……而且"
    ],
    "answer": 1,
@@ -464,7 +464,7 @@
     null,
     {
      "tag": "wrong_logic",
-     "why": "「虽然……但是」表示转折：先让步，再说相反的结果；而这句话的意思是：我是一只小鸟只是想象出来的假设。 (「虽然……但是」expresses concession then contrast, but in this sentence being a bird is only an imagined supposition.)"
+     "why": "「先……再」表示顺承：按先后顺序做事；而这句话的意思是：我是一只小鸟只是想象出来的假设。 (「先……再」expresses one step after another in sequence, but in this sentence being a bird is only an imagined supposition.)"
     },
     {
      "tag": "wrong_logic",
@@ -487,7 +487,7 @@
     "虽然……但是",
     "因为……所以",
     "要是……就",
-    "不但……而且"
+    "一……就"
    ],
    "answer": 2,
    "explain": [
@@ -502,7 +502,7 @@
     null,
     {
      "tag": "wrong_logic",
-     "why": "「不但……而且」表示递进：后一项比前一项更进一层；而这句话的意思是：时间再多一点是与事实相反的愿望式假设。 (「不但……而且」expresses progression to a further point, but in this sentence having more time is a wish contrary to fact.)"
+     "why": "「一……就」表示紧接：前一件事一发生，后一件马上跟着发生；而这句话的意思是：时间再多一点是与事实相反的愿望式假设。 (「一……就」expresses the second follows immediately on the first, but in this sentence having more time is a wish contrary to fact.)"
     }
    ],
    "solution": [
@@ -520,7 +520,7 @@
    "options": [
     "虽然……但是",
     "不但……而且",
-    "一边……一边",
+    "先……再",
     "只要……就"
    ],
    "answer": 3,
@@ -535,7 +535,7 @@
     },
     {
      "tag": "wrong_logic",
-     "why": "「一边……一边」表示同时：两个动作同时进行；而这句话的意思是：天天坚持练习是写好字的充分条件。 (「一边……一边」expresses two actions at the same time, but in this sentence daily practice is enough of a condition to write well.)"
+     "why": "「先……再」表示顺承：按先后顺序做事；而这句话的意思是：天天坚持练习是写好字的充分条件。 (「先……再」expresses one step after another in sequence, but in this sentence daily practice is enough of a condition to write well.)"
     },
     null
    ],
@@ -588,7 +588,7 @@
    "options": [
     "虽然……但是",
     "只要……就",
-    "一边……一边",
+    "先……再",
     "不是……而是"
    ],
    "answer": 1,
@@ -600,7 +600,7 @@
     null,
     {
      "tag": "wrong_logic",
-     "why": "「一边……一边」表示同时：两个动作同时进行；而这句话的意思是：按时服药是病会好的充分条件。 (「一边……一边」expresses two actions at the same time, but in this sentence taking medicine on time is the sufficient condition for recovery.)"
+     "why": "「先……再」表示顺承：按先后顺序做事；而这句话的意思是：按时服药是病会好的充分条件。 (「先……再」expresses one step after another in sequence, but in this sentence taking medicine on time is the sufficient condition for recovery.)"
     },
     {
      "tag": "wrong_logic",
@@ -722,7 +722,7 @@
    "pattern": "chi-pat-guanlian",
    "stem": "这座公园＿＿＿＿大＿＿＿＿美，吸引了许多游客。\n应选哪一组关联词？",
    "options": [
-    "如果……就",
+    "先……再",
     "既……又",
     "虽然……但是",
     "一边……一边"
@@ -731,7 +731,7 @@
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "「如果……就」表示假设：假设一个情况，推出结果；而这句话的意思是：公园又大又美，是并列的两个特点。 (「如果……就」expresses a supposition and its result, but in this sentence the park is both big and beautiful, two parallel traits.)"
+     "why": "「先……再」表示顺承：按先后顺序做事；而这句话的意思是：公园又大又美，是并列的两个特点。 (「先……再」expresses one step after another in sequence, but in this sentence the park is both big and beautiful, two parallel traits.)"
     },
     null,
     {
@@ -790,7 +790,7 @@
    "pattern": "chi-pat-guanlian",
    "stem": "夏天的海风＿＿＿＿凉＿＿＿＿爽，让人舒服极了。\n应选哪一组关联词？",
    "options": [
-    "如果……就",
+    "一……就",
     "虽然……但是",
     "因为……所以",
     "又……又"
@@ -799,7 +799,7 @@
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "「如果……就」表示假设：假设一个情况，推出结果；而这句话的意思是：凉和爽是并列的两种感觉。 (「如果……就」expresses a supposition and its result, but in this sentence cool and refreshing are two parallel feelings.)"
+     "why": "「一……就」表示紧接：前一件事一发生，后一件马上跟着发生；而这句话的意思是：凉和爽是并列的两种感觉。 (「一……就」expresses the second follows immediately on the first, but in this sentence cool and refreshing are two parallel feelings.)"
     },
     {
      "tag": "wrong_logic",
@@ -825,7 +825,7 @@
    "stem": "过马路时，要＿＿＿＿看左右，＿＿＿＿通过。\n应选哪一组关联词？",
    "options": [
     "先……再",
-    "虽然……但是",
+    "越……越",
     "不但……而且",
     "因为……所以"
    ],
@@ -834,7 +834,7 @@
     null,
     {
      "tag": "wrong_logic",
-     "why": "「虽然……但是」表示转折：先让步，再说相反的结果；而这句话的意思是：看左右在前，通过在后，有先后顺序。 (「虽然……但是」expresses concession then contrast, but in this sentence looking comes first and crossing after, a fixed order.)"
+     "why": "「越……越」表示程度递变：一方加深，另一方随着加深；而这句话的意思是：看左右在前，通过在后，有先后顺序。 (「越……越」expresses degrees rising together, but in this sentence looking comes first and crossing after, a fixed order.)"
     },
     {
      "tag": "wrong_logic",
@@ -1404,7 +1404,7 @@
    "options": [
     "因为……所以",
     "无论……都",
-    "与其……不如",
+    "越……越",
     "宁可……也不"
    ],
    "answer": 1,
@@ -1416,7 +1416,7 @@
     null,
     {
      "tag": "wrong_logic",
-     "why": "「与其……不如」表示取舍：比较后选择后者；而这句话的意思是：不论是谁，结果都一样，是无条件。 (「与其……不如」expresses comparing and preferring the second, but in this sentence whoever it is, the result is the same, regardless of condition.)"
+     "why": "「越……越」表示程度递变：一方加深，另一方随着加深；而这句话的意思是：不论是谁，结果都一样，是无条件。 (「越……越」expresses degrees rising together, but in this sentence whoever it is, the result is the same, regardless of condition.)"
     },
     {
      "tag": "wrong_logic",
@@ -2049,7 +2049,7 @@
    "stem": "这位医生＿＿＿＿医术高明，＿＿＿＿待人亲切，深受病人爱戴。\n应选哪一组关联词？",
    "options": [
     "既……又",
-    "只有……才",
+    "一……就",
     "宁可……也不",
     "与其……不如"
    ],
@@ -2058,7 +2058,7 @@
     null,
     {
      "tag": "wrong_logic",
-     "why": "「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：医术高明和待人亲切是并列的两个优点。 (「只有……才」expresses a necessary, only condition, but in this sentence skilled and kind are two parallel merits.)"
+     "why": "「一……就」表示紧接：前一件事一发生，后一件马上跟着发生；而这句话的意思是：医术高明和待人亲切是并列的两个优点。 (「一……就」expresses the second follows immediately on the first, but in this sentence skilled and kind are two parallel merits.)"
     },
     {
      "tag": "wrong_logic",
@@ -2082,7 +2082,7 @@
    "pattern": "chi-pat-guanlian",
    "stem": "我们＿＿＿＿了解他，＿＿＿＿发现他有许多优点。\n应选哪一组关联词？",
    "options": [
-    "即使……也",
+    "或……或",
     "越……越",
     "只有……才",
     "不是……而是"
@@ -2091,7 +2091,7 @@
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：越了解他，越发现他的优点，程度随之加深。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence the more one knows him, the more merits one finds, a rising degree.)"
+     "why": "「或……或」表示选择：在几种情况中选一种；而这句话的意思是：越了解他，越发现他的优点，程度随之加深。 (「或……或」expresses choosing one among alternatives, but in this sentence the more one knows him, the more merits one finds, a rising degree.)"
     },
     null,
     {
