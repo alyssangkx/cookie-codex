@@ -1648,9 +1648,6 @@ def _(p):
 # Early skills, revised at P6 standard: quick and direct at basic, multi-step at intermediate and competent.
 import re as _re
 
-GA_SLIP = "Made a careless slip in the last step."
-
-
 def _unwords(s):
     n = 0
     for p in _re.split(r"[- ]", s):
@@ -1893,7 +1890,7 @@ def ga_digit_cards_sum(r):
     most = r.random() < 0.5
     ans = 10 * (a + b) + (c + d) if most else 10 * (c + d) + (a + b)
     alt1 = (10 * a + b) + (10 * c + d) if most else (10 * d + c) + (10 * b + a)
-    alt2 = (10 * (a + c) + (b + d)) if most else (10 * (d + b) + (c + a))
+    alt2 = 10 * (a + d) + (b + c)
     r.shuffle(ds)
     stem = (f"{r.choice(NAMES)} has four digit cards: {', '.join(map(str, ds))}. Two 2-digit numbers are made using all four cards. "
             f"What is the {'greatest' if most else 'smallest'} possible sum of the two numbers?")
@@ -2382,7 +2379,6 @@ def ga_number_bond(r):
     part = r.randint(11, whole - 8)
     other = whole - part
     form = r.randrange(3)
-    eqs = [f"x + {part} = {whole}", f"{whole} − x = {part}", f"x − {part} = {other}"]
     if form == 0:
         stem = f"In a number bond, the whole is {whole} and one part is {part}. What is the other part?"
         ans, eq = other, f"x + {part} = {whole}"
@@ -2654,7 +2650,6 @@ def ga_mental_chain(r):
         return None
     txt = ", then ".join(f"{'adds' if s == '+' else 'subtracts'} {a}" for s, a in steps)
     stem = f"{who} thinks of the number {v}. {who} {txt}. What number does {who} get at the end?"
-    last_wrong = ans - steps[-1][1] if steps[-1][0] == "+" else ans + steps[-1][1]
     flip = v + sum(a if s == "+" else -a for s, a in steps[:-1]) + (steps[-1][1] if steps[-1][0] == "-" else -steps[-1][1])
     ones_as_tens = v + sum((a * 10 if a < 10 else a) * (1 if s == "+" else -1) for s, a in steps)
     return build(ga_mental_chain, stem, ans, [
@@ -2898,7 +2893,7 @@ def ga_table_story(r):
             f"The chairs left are arranged in rows of {t3}. How many rows are there?")
     return build(ga_table_story, stem, ans, [
         (tot // t3, "forgot_the_chairs_taken_out", "Forgot to take the chairs out first."),
-        (rem // t3 + 1 if rem % t3 == 0 else rem // t3 + 1, "counted_one_row_too_many", "Counted one row too many."),
+        (rem // t3 + 1, "counted_one_row_too_many", "Counted one row too many."),
         (r1 + r2, "counted_the_original_rows", "Gave the number of rows at the start."), *slip_set(ans, 1)],
         [f"{r1} × {t1} + {r2} × {t2} = {tot}", f"{tot} − {s} = {rem}", f"{rem} ÷ {t3} = {ans}"],
         {"r1": r1, "t1": t1, "r2": r2, "t2": t2, "s": s, "t3": t3}, whole=True, auto_slips=False)

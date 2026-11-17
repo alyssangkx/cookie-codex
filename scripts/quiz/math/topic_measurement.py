@@ -1435,7 +1435,7 @@ def cm_chain_lengths(r):
     return build(cm_chain_lengths, stem, ans, [
         (d1 + d2, "added_both_changes", "Added the two differences without finding each length."),
         (abs(d1 - d2) if abs(d1 - d2) != ans else None, "compared_only_piece_1_and_3", "Compared Piece 1 with Piece 3 only."),
-        (max(b - a, b - c), "compared_with_the_wrong_piece", "Compared the longest piece with the wrong piece."),
+        (min(b - a, b - c), "compared_with_the_wrong_piece", "Compared the longest piece with the wrong piece instead of the shortest."),
         (ans + 5, "arithmetic_slip", "Made a small arithmetic slip."),
         (ans - 1, "arithmetic_slip", "Made a small arithmetic slip."),
     ], [f"Piece 2 = {a} + {d1} = {b} cm", f"Piece 3 = {b} - {d2} = {c} cm", f"Longest - shortest = {hi} - {lo} = {ans} cm"],
@@ -1522,7 +1522,7 @@ def which_line_is_n_cm(r):
     if len({b - a for a, b in allv}) < 4:
         return None
     lines = [("ABCD"[i], a, b) for i, (a, b) in enumerate(allv)]
-    tags = [("read_only_the_right_end", "Read the end mark (it is N) without subtracting where the line starts."),
+    tags = [("read_only_the_right_end", f"Read the end mark (it is {n}) without subtracting where the line starts."),
             ("counted_one_too_many", f"Picked the line that is {n + 1} cm long."),
             ("counted_one_too_few", f"Picked the line that is {n - 1} cm long.")]
     wrong = []

@@ -56,7 +56,7 @@ for topic in sorted(rows):
     detail.append("")
 lines += ["", f"**{done} of {total} question types covered.**", "",
           "Not counted (outside the 2021 syllabus, which has no Speed): " + (", ".join(p["id"] for p in OUT) or "none"), ""] + detail
-# ---- outcome coverage: every syllabus outcome should be the FIRST outcome of some template
+# ---- outcome coverage: every syllabus outcome should be practised by some template, as its first or a secondary outcome (or be in SKIP)
 SKIP = {  # outcome id -> why it has no generator
     "math-area-and-volume-volume-of-cube-and-cuboid-11":
         "Placeholder: the syllabus line lost its symbols in PDF extraction (marked unverified).",
@@ -86,5 +86,5 @@ lines += ["## Syllabus outcomes", "",
 (ROOT / "docs" / "quiz").mkdir(parents=True, exist_ok=True)
 (ROOT / "docs" / "quiz" / "coverage.md").write_text("\n".join(lines))
 print(f"coverage: {done}/{total} question types, {o_done}/{o_total} syllabus outcomes -> docs/quiz/coverage.md")
-if "--strict" in sys.argv and done < total:
+if "--strict" in sys.argv and (done < total or o_done < o_total):
     sys.exit(1)

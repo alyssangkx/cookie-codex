@@ -619,9 +619,6 @@ def _(p):
 def counters_three_colours(r):
     """Read a:b:c from three rows of counters, in the order asked."""
     xs = _distinct_terms(r, 3, 1, 6)
-    g = 0
-    for x in xs:
-        g = gcd(g, x)
     k = r.choice([1, 1, 2])
     cols = r.sample(COLOURS, 3)
     counts = [x * k for x in xs]

@@ -4600,8 +4600,8 @@
    "explain": [
     null,
     {
-     "tag": "drew_a_rhombus_not_a_square",
-     "why": "Drew a slanted four-sided shape with equal sides but no right angles."
+     "tag": "drew_a_slanted_shape_not_a_square",
+     "why": "Drew a slanted shape: its corners are not right angles and its slanted sides are longer than the grid count."
     },
     {
      "tag": "sides_not_equal",
@@ -5271,8 +5271,8 @@
    "answer": 3,
    "explain": [
     {
-     "tag": "drew_a_rhombus_not_a_square",
-     "why": "Drew a slanted four-sided shape with equal sides but no right angles."
+     "tag": "drew_a_slanted_shape_not_a_square",
+     "why": "Drew a slanted shape: its corners are not right angles and its slanted sides are longer than the grid count."
     },
     {
      "tag": "sides_not_equal",
@@ -5495,8 +5495,8 @@
    "explain": [
     null,
     {
-     "tag": "drew_a_rhombus_not_a_square",
-     "why": "Drew a slanted four-sided shape with equal sides but no right angles."
+     "tag": "drew_a_slanted_shape_not_a_square",
+     "why": "Drew a slanted shape: its corners are not right angles and its slanted sides are longer than the grid count."
     },
     {
      "tag": "sides_not_equal",
@@ -5718,8 +5718,8 @@
    "answer": 1,
    "explain": [
     {
-     "tag": "drew_a_rhombus_not_a_square",
-     "why": "Drew a slanted four-sided shape with equal sides but no right angles."
+     "tag": "drew_a_slanted_shape_not_a_square",
+     "why": "Drew a slanted shape: its corners are not right angles and its slanted sides are longer than the grid count."
     },
     null,
     {
@@ -15838,7 +15838,7 @@
    "explain": [
     {
      "tag": "same_base_and_height_but_slanted",
-     "why": "Chose a slanted shape with sides of the right length; it is not a rectangle."
+     "why": "Chose a slanted shape with the right base and height; its corners are not right angles and its slanted sides are longer than the grid count."
     },
     {
      "tag": "other_side_one_too_long",

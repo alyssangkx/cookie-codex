@@ -5276,7 +5276,7 @@
     null,
     {
      "tag": "read_only_the_right_end",
-     "why": "Read the end mark (it is N) without subtracting where the line starts."
+     "why": "Read the end mark (it is 5) without subtracting where the line starts."
     },
     {
      "tag": "counted_one_too_many",
@@ -5777,7 +5777,7 @@
    "explain": [
     {
      "tag": "read_only_the_right_end",
-     "why": "Read the end mark (it is N) without subtracting where the line starts."
+     "why": "Read the end mark (it is 9) without subtracting where the line starts."
     },
     {
      "tag": "counted_one_too_many",
@@ -6279,7 +6279,7 @@
    "explain": [
     {
      "tag": "read_only_the_right_end",
-     "why": "Read the end mark (it is N) without subtracting where the line starts."
+     "why": "Read the end mark (it is 5) without subtracting where the line starts."
     },
     {
      "tag": "counted_one_too_many",
@@ -6781,7 +6781,7 @@
    "explain": [
     {
      "tag": "read_only_the_right_end",
-     "why": "Read the end mark (it is N) without subtracting where the line starts."
+     "why": "Read the end mark (it is 4) without subtracting where the line starts."
     },
     null,
     {
@@ -7284,7 +7284,7 @@
     null,
     {
      "tag": "read_only_the_right_end",
-     "why": "Read the end mark (it is N) without subtracting where the line starts."
+     "why": "Read the end mark (it is 8) without subtracting where the line starts."
     },
     {
      "tag": "counted_one_too_many",
@@ -9989,13 +9989,13 @@
     "11 cm",
     "17 cm",
     "23 cm",
-    "22 cm"
+    "6 cm"
    ],
    "optionValues": [
     "11",
     "17",
     "23",
-    "22"
+    "6"
    ],
    "answer": 1,
    "explain": [
@@ -10009,8 +10009,8 @@
      "why": "Added the two differences without finding each length."
     },
     {
-     "tag": "arithmetic_slip",
-     "why": "Made a small arithmetic slip."
+     "tag": "compared_with_the_wrong_piece",
+     "why": "Compared the longest piece with the wrong piece instead of the shortest."
     }
    ],
    "solution": [
@@ -10380,13 +10380,13 @@
    "stem": "Arjun cuts three pieces of rope. Piece 1 is 31 cm long. Piece 2 is 9 cm longer than Piece 1. Piece 3 is 21 cm shorter than Piece 2. How much longer is the longest piece than the shortest piece, in cm?",
    "options": [
     "12 cm",
-    "26 cm",
+    "9 cm",
     "21 cm",
     "30 cm"
    ],
    "optionValues": [
     "12",
-    "26",
+    "9",
     "21",
     "30"
    ],
@@ -10397,8 +10397,8 @@
      "why": "Compared Piece 1 with Piece 3 only."
     },
     {
-     "tag": "arithmetic_slip",
-     "why": "Made a small arithmetic slip."
+     "tag": "compared_with_the_wrong_piece",
+     "why": "Compared the longest piece with the wrong piece instead of the shortest."
     },
     null,
     {
@@ -10775,13 +10775,13 @@
     "28 cm",
     "14 cm",
     "21 cm",
-    "26 cm"
+    "7 cm"
    ],
    "optionValues": [
     "28",
     "14",
     "21",
-    "26"
+    "7"
    ],
    "answer": 2,
    "explain": [
@@ -10795,8 +10795,8 @@
     },
     null,
     {
-     "tag": "arithmetic_slip",
-     "why": "Made a small arithmetic slip."
+     "tag": "compared_with_the_wrong_piece",
+     "why": "Compared the longest piece with the wrong piece instead of the shortest."
     }
    ],
    "solution": [
@@ -11167,13 +11167,13 @@
    "options": [
     "21 cm",
     "3 cm",
-    "17 cm",
+    "9 cm",
     "12 cm"
    ],
    "optionValues": [
     "21",
     "3",
-    "17",
+    "9",
     "12"
    ],
    "answer": 3,
@@ -11187,8 +11187,8 @@
      "why": "Compared Piece 1 with Piece 3 only."
     },
     {
-     "tag": "arithmetic_slip",
-     "why": "Made a small arithmetic slip."
+     "tag": "compared_with_the_wrong_piece",
+     "why": "Compared the longest piece with the wrong piece instead of the shortest."
     },
     null
    ],
@@ -11559,13 +11559,13 @@
    "stem": "Xin Yi cuts three pieces of rope. Piece 1 is 27 cm long. Piece 2 is 7 cm longer than Piece 1. Piece 3 is 16 cm shorter than Piece 2. How much longer is the longest piece than the shortest piece, in cm?",
    "options": [
     "9 cm",
-    "21 cm",
+    "7 cm",
     "23 cm",
     "16 cm"
    ],
    "optionValues": [
     "9",
-    "21",
+    "7",
     "23",
     "16"
    ],
@@ -11576,8 +11576,8 @@
      "why": "Compared Piece 1 with Piece 3 only."
     },
     {
-     "tag": "arithmetic_slip",
-     "why": "Made a small arithmetic slip."
+     "tag": "compared_with_the_wrong_piece",
+     "why": "Compared the longest piece with the wrong piece instead of the shortest."
     },
     {
      "tag": "added_both_changes",
@@ -11953,13 +11953,13 @@
    "options": [
     "10 cm",
     "18 cm",
-    "19 cm",
+    "4 cm",
     "14 cm"
    ],
    "optionValues": [
     "10",
     "18",
-    "19",
+    "4",
     "14"
    ],
    "answer": 3,
@@ -11973,8 +11973,8 @@
      "why": "Added the two differences without finding each length."
     },
     {
-     "tag": "arithmetic_slip",
-     "why": "Made a small arithmetic slip."
+     "tag": "compared_with_the_wrong_piece",
+     "why": "Compared the longest piece with the wrong piece instead of the shortest."
     },
     null
    ],

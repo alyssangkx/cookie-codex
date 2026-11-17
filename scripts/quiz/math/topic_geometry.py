@@ -3866,7 +3866,7 @@ def line_perp_par_grid_slope(r):
     ok = [d for d in decoys if all(abs(x) <= 4 and abs(y) <= 4 for x, y in [d[0]])]
     if len(ok) < 3 or any((_dot(d[0], pq) == 0 if kind == "perp" else _cross(d[0], pq) == 0) for d in decoys):
         return None
-    return _lines_question(r, line_perp_par_grid_slope, kind, pq, good, decoys, name)
+    return _lines_question(r, line_perp_par_grid_slope, kind, pq, good, ok, name)
 
 
 checker(line_perp_par_grid_slope)(_lines_check)
@@ -3976,7 +3976,7 @@ def which_drawing_rect_square(r):
     else:
         s = r.randint(2, 4)
         correct = _rect(s, s)
-        bad = [(_slant(s, s), "drew_a_rhombus_not_a_square", "Drew a slanted four-sided shape with equal sides but no right angles."),
+        bad = [(_slant(s, s), "drew_a_slanted_shape_not_a_square", "Drew a slanted shape: its corners are not right angles and its slanted sides are longer than the grid count."),
                (_rect(s + 1, s), "sides_not_equal", "Drew a rectangle whose sides are not all equal."),
                (_rect(s + 1, s + 1) if s < 4 else _rect(s - 1, s - 1), "wrong_size", "Drew a square but with the wrong side length.")]
         stem = f"{name} wants to draw a square with sides of {s} units on a square grid. Which drawing shows the square?"
@@ -4008,7 +4008,7 @@ def rect_given_area_or_perimeter(r):
     else:
         stem = (f"{name} draws a rectangle on a square grid. One side is {L} units long and the perimeter is {2 * (L + Wd)} units. "
                 f"Which drawing shows {name}'s rectangle?")
-        bad_tags = [(_slant(L, Wd), "same_base_and_height_but_slanted", "Chose a slanted shape with sides of the right length; it is not a rectangle.")]
+        bad_tags = [(_slant(L, Wd), "same_base_and_height_but_slanted", "Chose a slanted shape with the right base and height; its corners are not right angles and its slanted sides are longer than the grid count.")]
         params = {"mode": mode, "L": L, "val": 2 * (L + Wd)}
         steps = [f"Half the perimeter = {L + Wd}, so the other side = {L + Wd} - {L} = {Wd} units.", f"The rectangle is {L} by {Wd}."]
     bad = bad_tags + [(_rect(L, Wd + 1), "other_side_one_too_long", "Made the other side one unit too long."),

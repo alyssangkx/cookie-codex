@@ -1469,10 +1469,10 @@ def related_money_three_parts(r):
         return None
     name = r.choice(NAMES)
     ans = 1 - spent
-    stem = (f"{name} spent {a}/{b} of his money on a book and {c}/{d} of his money on a pen. He gave {e}/{d} of his "
-            f"money to his sister. What fraction of his money was left? Give your answer in its simplest form.")
+    stem = (f"{name} spent {a}/{b} of the money on a book and {c}/{d} of the money on a pen. {name} gave {e}/{d} of the "
+            f"money to a cousin. What fraction of the money was left? Give your answer in its simplest form.")
     return build(related_money_three_parts, stem, ans, [
-        (1 - F(a, b) - F(c, d), "forgot_the_gift", "Left out the money given to his sister."),
+        (1 - F(a, b) - F(c, d), "forgot_the_gift", "Left out the money given to the cousin."),
         (spent, "gave_the_part_spent", "Found the fraction spent and gave it as the fraction left."),
         (1 - F(a + c + e, b + d + d), "added_numerators_and_denominators", "Added all the tops and all the bottoms."),
         (1 - F(c + e, d), "forgot_the_book", "Left out the money spent on the book."),
@@ -1540,7 +1540,7 @@ def improper_times_improper_cancel(r):
         (F(a * c, b + d), "added_the_denominators", "Multiplied the tops but added the bottoms."),
         (F(a * d, b * c), "inverted_second_fraction", "Turned the second fraction upside down, as for division."),
         (F(a * c, b), "kept_one_denominator", f"Multiplied the numerators but kept only the denominator {b}."),
-        (F(a, b) + F(c, d) - 1, "added_instead_of_multiplied", "Added the fractions instead of multiplying."),
+        (F(a, b) + F(c, d), "added_instead_of_multiplied", "Added the fractions instead of multiplying."),
     ], [f"Cancel the common factor between {a if a % d == 0 else c} and {d if a % d == 0 else b}.",
         f"{a}/{b} × {c}/{d} = {a * c}/{b * d} = {frac(ans)}"], {"a": a, "b": b, "c": c, "d": d})
 

@@ -10054,26 +10054,26 @@
    ],
    "stem": "Wei Jie has four digit cards: 7, 4, 8, 3. Two 2-digit numbers are made using all four cards. What is the greatest possible sum of the two numbers?",
    "options": [
-    "166",
     "22",
+    "121",
     "157",
     "130"
    ],
    "optionValues": [
-    "166",
     "22",
+    "121",
     "157",
     "130"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "careless_slip",
-     "why": "Made a careless slip in the last step."
-    },
-    {
      "tag": "added_the_digits",
      "why": "Added the four digits only."
+    },
+    {
+     "tag": "put_the_wrong_cards_in_the_tens",
+     "why": "Put the wrong pair of cards in the tens place."
     },
     null,
     {
@@ -10605,14 +10605,14 @@
    "options": [
     "70",
     "43",
-    "16",
-    "52"
+    "97",
+    "16"
    ],
    "optionValues": [
     "70",
     "43",
-    "16",
-    "52"
+    "97",
+    "16"
    ],
    "answer": 1,
    "explain": [
@@ -10622,12 +10622,12 @@
     },
     null,
     {
-     "tag": "added_the_digits",
-     "why": "Added the four digits only."
+     "tag": "put_the_wrong_cards_in_the_tens",
+     "why": "Put the wrong pair of cards in the tens place."
     },
     {
-     "tag": "careless_slip",
-     "why": "Made a careless slip in the last step."
+     "tag": "added_the_digits",
+     "why": "Added the four digits only."
     }
    ],
    "solution": [
@@ -11152,26 +11152,26 @@
    ],
    "stem": "Xin Yi has four digit cards: 3, 5, 2, 4. Two 2-digit numbers are made using all four cards. What is the smallest possible sum of the two numbers?",
    "options": [
+    "77",
     "14",
-    "50",
     "59",
     "68"
    ],
    "optionValues": [
+    "77",
     "14",
-    "50",
     "59",
     "68"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "added_the_digits",
-     "why": "Added the four digits only."
+     "tag": "put_the_wrong_cards_in_the_tens",
+     "why": "Put the wrong pair of cards in the tens place."
     },
     {
-     "tag": "careless_slip",
-     "why": "Made a careless slip in the last step."
+     "tag": "added_the_digits",
+     "why": "Added the four digits only."
     },
     null,
     {
