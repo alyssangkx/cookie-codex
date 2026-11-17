@@ -33,7 +33,8 @@ def fingerprint(it):
     return hashlib.sha1(body.encode()).hexdigest()[:16]
 
 
-PASSAGE = re.compile(r"^(cloze|yuedu)-(\d+)-(\d+)$")  # passage sets: 5 questions on one passage
+PASSAGE = re.compile(r"^(cloze|yuedu|duihua)-(\d+)-(\d+)$")  # passage sets: 5 questions on one passage (4 for a dialogue)
+DIALOGUE = "chi-dialogue-mcq"  # 8 shared phrases (A-H) for 4 blanks; every other sub-topic has 4 options
 
 
 def gloss_line(it):
@@ -88,6 +89,29 @@ def fill_cloze(bank, items, review, dropped):
     bank[:] = keep
 
 
+def hold_dialogues(bank, items, dropped):
+    """A dialogue set ships whole or not at all: its 4 blanks share one stem and one list of 8 phrases, and a
+    blank that is never asked would sit in the dialogue unanswerable. Any blank held, stale or unreviewed
+    holds its set."""
+    total = {}
+    for it in items:
+        if (m := PASSAGE.match(it["key"])):
+            total[m[2]] = total.get(m[2], 0) + 1
+    shipped = {}
+    for q in bank:
+        if q["params"]["subtopic"] == DIALOGUE and (m := PASSAGE.match(q["params"]["key"])):
+            shipped[m[2]] = shipped.get(m[2], 0) + 1
+    whole = {k for k, n in shipped.items() if n == total.get(k) == 4}
+    keep = []
+    for q in bank:
+        m = PASSAGE.match(q["params"]["key"]) if q["params"]["subtopic"] == DIALOGUE else None
+        if m and m[2] not in whole:
+            dropped.append(f"{DIALOGUE}|{q['params']['key']} (dialogue set held: not all 4 blanks shipped)")
+        else:
+            keep.append(q)
+    bank[:] = keep
+
+
 def main():
     review = json.loads(REVIEW.read_text()) if REVIEW.exists() else {}
     banks, dropped, unreviewed, stale = {}, [], [], []
@@ -110,8 +134,12 @@ def main():
                 continue
             # writers cycle the answer A-D in item order; shuffle each item's options with a seed from its key,
             # so the order is random to a child but identical on every rebuild
-            order = list(range(4))
-            random.Random(f"{sub}|{it['key']}").shuffle(order)
+            # a dialogue set shares one list of 8 phrases across its 4 blanks: ONE seed per set, so the
+            # shuffled list stays identical on all four items (the seed is the set key, not the item key)
+            m = PASSAGE.match(it["key"])
+            n_opt = 8 if sub == DIALOGUE else 4
+            order = list(range(n_opt))
+            random.Random(f"{sub}|{m[1]}-{m[2]}" if sub == DIALOGUE and m else f"{sub}|{it['key']}").shuffle(order)
             options = [it["options"][i] for i in order]
             explain = [it["explain"][i] for i in order]
             answer = order.index(it["answer"])
@@ -132,6 +160,8 @@ def main():
             })
         if sub == "chi-cloze-mcq":
             fill_cloze(banks.get(topic, []), data["items"], review, dropped)
+        if sub == DIALOGUE:
+            hold_dialogues(banks.get(topic, []), data["items"], dropped)
     levels = {}
     for qs in banks.values():
         for q in qs:

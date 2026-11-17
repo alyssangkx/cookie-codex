@@ -8728,6 +8728,46 @@
    },
    "syllabusTopicId": "chi-yuedu-mcq-text-1",
    "note": "Counted by script over both OCR passes (ocr_text and ocr_text_hi, 171 papers): a paper counts if it has a 阅读理解 heading and at least 8 option markers ((1)-(4) or A-D) after the first such heading; 139 of 171 papers matched. OCR is noisy, so this is approximate. Papers typically have one 阅读理解一 passage with 5 questions."
+  },
+  {
+   "id": "chi-pat-juzi-paixu",
+   "name": "句子排列 (sentence ordering)",
+   "section": "语文应用",
+   "level": "intermediate",
+   "structure": "4-5 numbered sentences of a short paragraph in scrambled order; choose the option giving the order that makes the paragraph coherent (4 numeral orders).",
+   "distractorTraps": [
+    {
+     "tag": "time_order",
+     "description": "a time word (先/然后/最后/后来) or event sequence is reversed"
+    },
+    {
+     "tag": "cause_effect",
+     "description": "a result is placed before its cause"
+    },
+    {
+     "tag": "topic_first",
+     "description": "a detail or example is put before the topic sentence"
+    },
+    {
+     "tag": "pronoun_ref",
+     "description": "a pronoun or 这/那 phrase is placed before the noun it refers to"
+    }
+   ],
+   "frequency": 0,
+   "seenIn": [],
+   "example": {
+    "stem": "下面的句子应该怎样排列才通顺？\n①然后，我吃了妈妈做的早餐。\n②早上六点，闹钟响了。\n③最后，我背起书包去上学。\n④我马上起床刷牙洗脸。",
+    "options": [
+     "②④①③",
+     "②①④③",
+     "④②①③",
+     "②④③①"
+    ],
+    "answer": "(1) ②④①③",
+    "explanation": "闹钟响了才起床；「然后」在洗漱之后；「最后」放在最后。"
+   },
+   "syllabusTopicId": "chi-juzi-order-1",
+   "note": "Syllabus-driven, not seen as a separate question type in the OCR'd papers: frequency 0. The word 排列 appears in the OCR text in only about 14 files, almost all as a vocabulary item (e.g. 排列整齐), not as an ordering task. Items are original."
   }
  ],
  "unclassified": 98

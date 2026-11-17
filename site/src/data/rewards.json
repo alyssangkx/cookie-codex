@@ -765,6 +765,15 @@
     "capstone": false
    },
    {
+    "id": "chi-juzi-order",
+    "name": "句子排列 (sentence ordering)",
+    "topic": "chi-juzi-yunyong",
+    "topicName": "句子的认识和运用 (Sentences and usage)",
+    "home": 6,
+    "i": 6,
+    "capstone": true
+   },
+   {
     "id": "chi-cloze-mcq",
     "name": "多项选择短文填空 (MCQ cloze)",
     "topic": "chi-cloze",
@@ -780,15 +789,6 @@
     "topicName": "阅读理解一 (Comprehension 1, MCQ)",
     "home": 6,
     "i": 9,
-    "capstone": true
-   },
-   {
-    "id": "chi-juzi-order",
-    "name": "句子排列 (sentence ordering)",
-    "topic": "chi-juzi-yunyong",
-    "topicName": "句子的认识和运用 (Sentences and usage)",
-    "home": 6,
-    "i": 6,
     "capstone": true
    },
    {
@@ -1781,15 +1781,15 @@
    "slug": "rumi-cookie",
    "dup": false
   },
-  "chi-cloze-mcq|b": {
+  "chi-juzi-order|b": {
    "slug": "asphodel-cookie",
    "dup": false
   },
-  "chi-yuedu-mcq-text|b": {
+  "chi-cloze-mcq|b": {
    "slug": "rumi-cookie",
    "dup": true
   },
-  "chi-juzi-order|b": {
+  "chi-yuedu-mcq-text|b": {
    "slug": "affogato-cookie",
    "dup": true
   },
@@ -1829,15 +1829,15 @@
    "slug": "red-osmanthus-cookie",
    "dup": false
   },
-  "chi-cloze-mcq|i": {
+  "chi-juzi-order|i": {
    "slug": "pulpo-cookie",
    "dup": false
   },
-  "chi-yuedu-mcq-text|i": {
+  "chi-cloze-mcq|i": {
    "slug": "red-osmanthus-cookie",
    "dup": true
   },
-  "chi-juzi-order|i": {
+  "chi-yuedu-mcq-text|i": {
    "slug": "red-osmanthus-cookie",
    "dup": true
   },
@@ -1877,15 +1877,15 @@
    "slug": "croissant-cookie",
    "dup": false
   },
-  "chi-cloze-mcq|c": {
+  "chi-juzi-order|c": {
    "slug": "doughael-cookie",
    "dup": false
   },
-  "chi-yuedu-mcq-text|c": {
+  "chi-cloze-mcq|c": {
    "slug": "millenial-tree-cookie",
    "dup": true
   },
-  "chi-juzi-order|c": {
+  "chi-yuedu-mcq-text|c": {
    "slug": "wind-archer-cookie",
    "dup": true
   },

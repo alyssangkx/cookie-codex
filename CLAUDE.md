@@ -48,6 +48,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - `build()` takes two method mistakes first, then one careless slip.
   - `whole=True` drops non-integer distractors.
   - `auto_slips=False` turns off the automatic fraction slips (use it for decimals and money).
+- **Chinese 完成对话 (`scripts/quiz/chinese/`).** Sub-topic `chi-dialogue-mcq` has 8 options (A-H), not 4: a set is one dialogue with 4 blanks, one item per blank (keys `duihua-NN-K`), all sharing the same stem text and the same 8 phrases (4 used once each, 4 distractors). `build.py` shuffles the 8 with one seed per set, emits `group`/`seq`, and ships a set only if all 4 blanks pass review. `check_chinese.py` checks the shared stem/options, 4 different answers, explain length 8. The quiz page shows more than 4 options in a 2-column grid, and greys out a phrase already answered correctly for an earlier blank in the same quiz (a hint only). WA/SA papers skip 8-option items.
 - **Independent check.** Every template needs `@checker(fn)`: a second solver (brute force, plug-back, or exact `Fraction`) that `check_math.py` compares with the stored answer.
   - Template names can repeat across topics. Lookups are by `(topic, key)`.
 - **Diagrams.** Use `figures.py` (SVG with `currentColor`) plus `figures_<group>.py` helpers. A figure must agree with the stem's numbers and never show the answer.
