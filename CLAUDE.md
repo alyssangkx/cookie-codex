@@ -66,6 +66,22 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 
 - **完成对话 (8-option dialogue sets).** Sub-topic `chi-dialogue-mcq` has 8 options (A-H), not 4: a set is one dialogue with 4 blanks, one item per blank (keys `duihua-NN-K`), all sharing the same stem text and the same 8 phrases (4 used once each, 4 distractors). `build.py` shuffles the 8 with one seed per set, emits `group`/`seq`, and ships a set only if all 4 blanks pass review. `check_chinese.py` checks the shared stem/options, 4 different answers, explain length 8. The quiz page shows `chi-dialogue-mcq` questions in a 2-column grid, and greys out a phrase already answered correctly for an earlier blank in the same quiz (a hint only). WA/SA papers skip 8-option items.
 
+### English banks (`scripts/quiz/english/`)
+
+Same contract as the Chinese banks, with 4 options per item and no passage sets yet.
+
+```bash
+python3 scripts/quiz/english/build.py     # items/<subtopic>.json + review.json -> site/src/data/quiz/english/<topic>.json
+python3 scripts/quiz/check_english.py     # must print "0 failures"
+python3 scripts/quiz/english/coverage.py  # -> docs/quiz/english-coverage.md
+python3 scripts/quiz/build_rewards.py     # after the banks change
+```
+
+- **Items** are `{key, level, outcome, pattern, stem, options[4], answer, explain[4], solution[], gloss?}`. `pattern` is an id from `patterns.json`; `outcome` is a syllabus outcome id under the file's sub-topic.
+- **Review gate.** An item ships only if `review.json` has `"<subtopic>|<key>": {"ship": true, "fingerprint": ...}` for its current stem, options, answer, explain and solution (`fingerprint()` in `scripts/quiz/bankcommon.py`, shared with the Chinese build). Anything else is dropped, unreviewed or stale. Options are shuffled with a seed from the key; ids are `eng<strand>-<sha1(topic|key)>` and ignore the level. Empty and stale banks are not written or are deleted.
+- **Checks.** Stem has a `____` blank or a `?`; options are 4 distinct strings with the same first-letter case and end punctuation; explain is null only for the answer.
+- **Site.** `train.ts` marks English `ready` once a sub-topic has a playable tier (20 questions). `build_rewards.py` already lists English sub-topics (playable ones first within English), so Math and Chinese rewards do not move. The home map English hotspot stays "soon" in `home-hotspots.json`: `index.astro` throws without a `chinese-english-open` map art, so generate that art before flipping it.
+
 ### Game (`site/src/lib/`)
 
 - **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 3`). Never read or write storage directly. Rules it implements:

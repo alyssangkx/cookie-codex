@@ -10,7 +10,11 @@ import hashlib
 import json
 import random
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from bankcommon import fingerprint  # noqa: E402  (shared with the English build)
 
 HERE = Path(__file__).parent
 ROOT = HERE.parents[2]
@@ -25,12 +29,6 @@ def qid(topic, key):
     # no level in the id: moving an item between levels must not orphan a child's retest history
     prefix = topic.replace("chi-", "chi")[:8]
     return f"{prefix}-{hashlib.sha1(f'{topic}|{key}'.encode()).hexdigest()[:10]}"
-
-
-def fingerprint(it):
-    """Hash of everything a reviewer judged; an item edited after review no longer matches its verdict."""
-    body = json.dumps([it["stem"], it["options"], it["answer"], it["explain"], it["solution"]], ensure_ascii=False)
-    return hashlib.sha1(body.encode()).hexdigest()[:16]
 
 
 PASSAGE = re.compile(r"^(cloze|yuedu|duihua)-(\d+)-(\d+)$")  # passage sets: 5 questions on one passage (4 for a dialogue)

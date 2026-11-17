@@ -6,12 +6,6 @@ import chineseSyllabus from '../data/syllabus/chinese.json';
 import { cookies } from './data';
 import { MIN_POOL, type School, type Tier } from './store';
 
-export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [
-  { id: 'math', name: 'Math', ready: true },
-  { id: 'science', name: 'Science', ready: false },
-  { id: 'english', name: 'English', ready: false },
-  { id: 'chinese', name: 'Chinese', ready: true },
-];
 export { MIN_POOL };
 
 export interface BankQ {
@@ -63,6 +57,14 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
 export const subsOf = (school: School) => subs.filter((s) => s.school === school);
 export const subSlug = (id: string) => id.replace(/^(math|sci|eng|chi)-/, '');
 export const hasContent = (s: Sub) => s.playable.b || s.playable.i || s.playable.c;
+
+// English goes live as soon as its banks have a playable tier; Math and Chinese are always on.
+export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [
+  { id: 'math', name: 'Math', ready: true },
+  { id: 'science', name: 'Science', ready: false },
+  { id: 'english', name: 'English', ready: subs.some((s) => s.school === 'english' && hasContent(s)) },
+  { id: 'chinese', name: 'Chinese', ready: true },
+];
 
 export const slots = rewards.slots as Record<string, { slug: string; dup: boolean }>;
 export const cookieBySlug = new Map(cookies.map((c) => [c.slug, c]));
