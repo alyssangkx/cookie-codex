@@ -172,10 +172,10 @@ def round_decimal(r):
     for odp in [d for d in (0, 1, 2, 3) if d != dp]:
         v = rnd(x, odp)
         if v != ans:
-            wrong.append(((fx(odp)(v), v), "rounded_to_wrong_number_of_places", f"Rounded to {odp} decimal places."))
+            wrong.append(((fx(odp)(v), v), "rounded_to_wrong_number_of_places", f"Rounded to {plural(odp, 'decimal place')}."))
     wrong += [(ans + F(1, 10 ** dp), "rounding_slip", "Made a slip with the last digit."),
               (ans - F(1, 10 ** dp), "rounding_slip", "Made a slip with the last digit.")]
-    return build(round_decimal, stem, ans, wrong, [f"Look at the next digit after the {dp}-th decimal place.", f"Answer: {show(ans)}"],
+    return build(round_decimal, stem, ans, wrong, [f"Look at the next digit after the {'ones place' if dp == 0 else ordinal(dp) + ' decimal place'}.", f"Answer: {show(ans)}"],
                  {"n": n, "dp": dp}, show, auto_slips=False)
 
 
@@ -433,7 +433,7 @@ def mult_by_digit(r):
         (ans / 10, "misplaced_decimal_point", "Put the decimal point one place too far left."),
         (ans - A, "missed_one_group", "Missed one copy of the number."),
         (ans + F(1, 10 ** dp) * 10, "carry_slip", "Slip with a carry."), (ans - F(1, 10 ** dp) * 10, "carry_slip", "Slip with a carry.")],
-        [f"{a} × {d} = {a * d}", f"Put back {dp} decimal places: {dec(ans)}"], {"a": a, "dp": dp, "d": d}, dec, auto_slips=False)
+        [f"{a} × {d} = {a * d}", f"Put back {plural(dp, 'decimal place')}: {dec(ans)}"], {"a": a, "dp": dp, "d": d}, dec, auto_slips=False)
 
 
 @checker(mult_by_digit)
@@ -457,7 +457,7 @@ def div_by_digit(r):
         (ans / 10, "misplaced_decimal_point", "Put the decimal point one place too far left."),
         (ans + F(1, 10), "slip", "Slip in the tenths."), (ans - F(1, 10), "slip", "Slip in the tenths."),
         (ans + F(1, 100), "slip", "Slip in the hundredths.")],
-        [f"{n} ÷ {d} = {q}", f"Put back {dp} decimal places: {dec(ans)}"], {"n": n, "dp": dp, "d": d}, dec, auto_slips=False)
+        [f"{n} ÷ {d} = {q}", f"Put back {plural(dp, 'decimal place')}: {dec(ans)}"], {"n": n, "dp": dp, "d": d}, dec, auto_slips=False)
 
 
 @checker(div_by_digit)
@@ -746,17 +746,16 @@ def _(p):
 def jug_backwards(r):
     x = r.choice(NAMES)
     n = r.randint(3, 6)
-    c = r.randint(15, 45) * 5
+    c = r.randint(20, 60) * 5
     spill = r.randint(20, 90)
     rem = r.randint(60, 250)
     start = rem + n * c + spill
     ans = H(start)
-    item = r.choice([("litres of juice", "cups")])
-    stem = (f"A jug had some juice. {x} poured {n} cups of {c / 100:.2f} litres each, and then {spill / 100:.2f} litres were spilled. "
-            f"{rem / 100:.2f} litres were left in the jug. How many litres of juice were in the jug at first?")
+    stem = (f"A container had some water. {x} used {n} pails of {c / 100:.2f} litres each to water the plants, and then {spill / 100:.2f} litres were spilled. "
+            f"{rem / 100:.2f} litres were left in the container. How many litres of water were in the container at first?")
     return build(jug_backwards, stem, ans, [
-        (H(rem + c + spill), "forgot_to_multiply_cups", "Added the amount of only one cup."),
-        (H(rem + n * c), "forgot_the_spill", "Forgot the juice that was spilled."),
+        (H(rem + c + spill), "forgot_to_multiply_cups", "Added the amount of only one pail."),
+        (H(rem + n * c), "forgot_the_spill", "Forgot the water that was spilled."),
         (H(abs(rem - n * c - spill)) if abs(rem - n * c - spill) > 0 else None, "subtracted_instead_of_added", "Subtracted when working backwards."),
         (ans + F(1, 10), "slip", "Slip."), (ans - F(1, 10), "slip", "Slip.")],
         [f"Poured: {n} × {c / 100:.2f} = {n * c / 100:.2f} l", f"At first: {rem / 100:.2f} + {spill / 100:.2f} + {n * c / 100:.2f} = {fx(2)(ans)} l"],

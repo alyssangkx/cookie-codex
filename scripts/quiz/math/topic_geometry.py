@@ -1835,7 +1835,7 @@ def square_rect_perimeter(r):
     """A square joined to a rectangle: perimeter of the compound figure"""
     s = r.randint(6, 16)
     b = r.randint(2, s - 2)
-    L = r.randint(4, 15)
+    L = r.choice([x for x in range(4, 16) if x != b])  # unequal, so it really is a rectangle
     nm = r.choice(NAMES)
     sc = Scene(w=340, h=200, pad=46)
     pts = [(0, 0), (L + s, 0), (L + s, s), (L, s), (L, b), (0, b)]
@@ -1964,7 +1964,6 @@ SHAPES = {
     "rectangle (not a square)": (lambda r: [(0, 0), (1.7, 0), (1.7, 1), (0, 1)], 2),
     "rhombus (not a square)": (lambda r: [(-1.2, 0), (0, -0.8), (1.2, 0), (0, 0.8)], 2),
     "isosceles triangle (not equilateral)": (lambda r: [(-1, 0), (1, 0), (0, 1.7)], 1),
-    "kite": (lambda r: [(0, 1.5), (0.9, 0.4), (0, -0.9), (-0.9, 0.4)], 1),
     "isosceles trapezium": (lambda r: [(-1.4, 0), (1.4, 0), (0.8, 1), (-0.8, 1)], 1),
 }
 
@@ -2024,7 +2023,7 @@ def symmetric_letters(r):
           W(k + 2, "miscount", "Miscounted."), W(k + 3, "miscount", "Miscounted.")]
     return mk(symmetric_letters, stem, k, wr,
               ["A letter has a line of symmetry if it can be folded so the halves match.",
-               "Symmetric letters: " + ", ".join(l for l in letters if l in SYM_L), f"There are {k}."],
+               "Symmetric letters: " + ", ".join(l for l in letters if l in SYM_L), f"The number of letters with a line of symmetry is {k}."],
               {"letters": letters}, None, show=lambda v: str(int(v)), maxv=6)
 
 
@@ -2052,7 +2051,7 @@ def draw_line_panel(poly, a, b, size=150):
     return sc.f
 
 
-PICK = ["rectangle (not a square)", "isosceles triangle (not equilateral)", "rhombus (not a square)", "kite",
+PICK = ["rectangle (not a square)", "isosceles triangle (not equilateral)", "rhombus (not a square)",
         "isosceles trapezium", "regular pentagon", "regular hexagon"]
 
 
@@ -2226,7 +2225,7 @@ def shade_to_symmetry(r):
     line = ("v", nc // 2) if vertical else ("h", nr // 2)
     f, svg = grid_fig(nc, nr, cells, line=line)
     nm = r.choice(NAMES)
-    stem = (f"{nm} shades {k} squares of a {nc} by {nr} grid (columns by rows). The dotted line is meant to be a line of symmetry. "
+    stem = (f"{nm} shades {k} squares of {a_an(nc)} {nc} by {nr} grid (columns by rows). The dotted line is meant to be a line of symmetry. "
             f"What is the smallest number of extra squares to shade so that the figure is symmetrical about the dotted line?")
     mine = sum(1 for (c, rr) in cells if (c < nc // 2 if vertical else rr < nr // 2))
     wr = [W(k, "gave_number_shaded", "Gave the number of squares already shaded."),
@@ -2269,7 +2268,7 @@ def symmetry_axes_pattern(r):
         return None
     f, svg = grid_fig(n, n, cells)
     nm = r.choice(NAMES)
-    stem = (f"{nm} shades {len(cells)} squares of a {n} by {n} grid, as shown. How many lines of symmetry does the whole shaded figure have? "
+    stem = (f"{nm} shades {len(cells)} squares of {a_an(n)} {n} by {n} grid, as shown. How many lines of symmetry does the whole shaded figure have? "
             f"(The lines of symmetry may be vertical, horizontal or diagonal.)")
     wr = [W(1 if ans != 1 else 2, "x", ""), W(2 if ans != 2 else 4, "forgot_diagonals_or_extra", "Counted too few or too many types of line."),
           W(4 if ans != 4 else 2, "counted_all_four", "Counted all four possible lines."),
@@ -2309,7 +2308,7 @@ def shade_two_lines(r):
     f, svg = grid_fig(n, n, cells, line=lines, cell=24 if n == 8 else 28)
     nm = r.choice(NAMES)
     desc = "all four dotted lines (the vertical, horizontal and both diagonal lines)" if four else "both dotted lines (the vertical and the horizontal)"
-    stem = (f"{nm} has shaded {k} squares of a {n} by {n} grid. What is the smallest number of extra squares that must be shaded "
+    stem = (f"{nm} has shaded {k} squares of {a_an(n)} {n} by {n} grid. What is the smallest number of extra squares that must be shaded "
             f"so that {desc} become lines of symmetry of the figure?")
     one = len(closure(cells, ["v"], n, n)) - len(cells)
     wr = [W(one, "used_one_line_only", "Made the figure symmetric about the vertical line only."),
@@ -2494,7 +2493,7 @@ def cut_into_triangles(r):
     mode = r.choice(["rect_diag", "square_both"])
     nm = r.choice(NAMES)
     if mode == "rect_diag":
-        a, b = r.randint(2, 9), r.randint(2, 9)
+        a, b = r.sample(range(2, 10), 2)  # unequal sides, so it really is a rectangle
         stem = (f"{nm} cuts a rectangle that is {a} cm by {b} cm into 1 cm squares. Each square is then cut along one diagonal into 2 triangles. "
                 f"How many triangles are there?")
         ans = 2 * a * b
@@ -2740,7 +2739,7 @@ def faces_of_kind(r):
     tot = SOLIDS[name][0]
     wr = [W(tot, "gave_total_faces", "Gave the total number of faces."), W(tot - ans if tot - ans != ans else None, "counted_the_other_faces", "Counted the faces of the other shape."),
           W(ans + 1, "off_by_one", "Counted one too many."), W(ans - 1 if ans > 1 else None, "off_by_one", "Missed one."), W(ans + 2, "miscount", "Miscounted.")]
-    return mk(faces_of_kind, ph, ans, wr, [f"A {name} has " + " and ".join(f"{v} {k} faces" for k, v in kinds.items()) + ".", f"Answer: {ans}"],
+    return mk(faces_of_kind, ph, ans, wr, [f"A {name} has " + " and ".join(plural(v, f"{k} face") for k, v in kinds.items()) + ".", f"Answer: {ans}"],
               {"name": name, "kind": kind}, None, show=lambda v: str(int(v)), maxv=12)
 
 
@@ -3172,12 +3171,12 @@ def _(p):
     return F(SOL_LIST.index(p["name"]) + 1)
 
 
-SHP = ["rectangle", "square", "rhombus", "parallelogram", "trapezium", "kite"]
+SHP = ["rectangle", "square", "rhombus", "parallelogram", "trapezium"]  # kite is not in the MOE primary syllabus
 SHP_PTS = {"rectangle": [(0, 0), (3, 0), (3, 2), (0, 2)], "square": [(0, 0), (2, 0), (2, 2), (0, 2)],
            "rhombus": [(0, 0), (5, 0), (8, 4), (3, 4)], "parallelogram": [(0, 0), (4, 0), (5, 2), (1, 2)],
-           "trapezium": [(0, 0), (5, 0), (4, 2), (1, 2)], "kite": [(0, 4), (3, 0), (0, -2), (-3, 0)]}
+           "trapezium": [(0, 0), (5, 0), (4, 2), (1, 2)]}
 SHP_PROP = {
-    "exactly one pair of parallel sides": lambda g: g["pairs"] == 1, "no parallel sides": lambda g: g["pairs"] == 0,
+    "exactly one pair of parallel sides": lambda g: g["pairs"] == 1,
     "two pairs of parallel sides but no right angles": lambda g: g["pairs"] == 2 and g["right"] == 0,
     "four equal sides": lambda g: g["eq4"], "four right angles and sides that are not all equal": lambda g: g["right"] == 4 and not g["eq4"],
     "diagonals of equal length and sides that are not all equal": lambda g: g["eqdiag"] and not g["eq4"],

@@ -831,7 +831,7 @@ def base_from_area(r):
     if (b * h) % 2:
         b += 1
     A = b * h // 2
-    name, obj = nm(r), r.choice(TOBJ)
+    name, obj = nm(r), r.choice(["triangular flag", "triangular tile", "triangular card", "triangular scarf", "triangular signboard"])
     stem = f"The area of {name}'s {obj} is {A} cm² and its height is {h} cm. What is the length of its base?"
     off = r.randint(1, b - 1)
     fig = tri_fig(b, h, off, base_lab="? cm", h_lab=f"{h} cm", names=None)

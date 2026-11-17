@@ -30,8 +30,10 @@ def count_money(r):
     x = r.choice(NAMES)
     n5, n2, n50, n20, n10 = r.randint(1, 4), r.randint(1, 5), r.randint(1, 6), r.randint(2, 7), r.randint(1, 6)
     total = n5 * 500 + n2 * 200 + n50 * 50 + n20 * 20 + n10 * 10
-    stem = (f"{x} has {n5} $5 note{'s' if n5 > 1 else ''}, {n2} $2 note{'s' if n2 > 1 else ''}, {n50} 50-cent coin{'s' if n50 > 1 else ''}, "
-            f"{n20} 20-cent coins and {n10} 10-cent coin{'s' if n10 > 1 else ''}. How much money does {x} have altogether?")
+    w = ["zero", "one", "two", "three", "four", "five", "six", "seven"]  # words, so '4 $5' never reads as one number
+    stem = (f"{x} has {w[n5]} $5 note{'s' if n5 > 1 else ''}, {w[n2]} $2 note{'s' if n2 > 1 else ''}, "
+            f"{w[n50]} 50-cent coin{'s' if n50 > 1 else ''}, {w[n20]} 20-cent coin{'s' if n20 > 1 else ''} and "
+            f"{w[n10]} 10-cent coin{'s' if n10 > 1 else ''}. How much money does {x} have altogether?")
     return build(count_money, stem, H(total), [
         (H(total - n20 * 20), "forgot_one_kind_of_coin", "Left out the 20-cent coins."),
         (H(total - n10 * 10 + n10 * 100), "counted_10_cent_coins_as_dollars", "Counted each 10-cent coin as $1."),

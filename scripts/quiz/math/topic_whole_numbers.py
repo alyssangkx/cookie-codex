@@ -1108,7 +1108,8 @@ def legs_assumption(r):
     if what == "dollars":
         stem = f"{nm} has {Nn} notes. Some are $5 notes and the rest are $2 notes. The notes are worth ${L} altogether. How many $5 notes does {nm} have?"
     else:
-        stem = f"A shop sells {A} and {B}. There are {Nn} altogether, with {L} {what}. How many {A} are there?"
+        stem = (f"A shop sells {A} and {B}. Each {A[:-1]} has {a} {what} and each {B[:-1]} has {b} {what}. "
+                f"There are {Nn} altogether, with {L} {what} in all. How many {A} are there?")
     return build(legs_assumption, stem, x, [
         (y, "gave_other_type", f"Gave the number of {B}."),
         (F(L, a + b), "divided_by_sum", "Divided the total by the sum of the numbers per item."),
@@ -1336,7 +1337,7 @@ def multiples_below_limit(r):
         L = lcm(a, b)
         lim = r.randint(L * 3 + 1, L * 12)
         ans = (lim - 1) // L * L if True else None
-        stem = f"What is the greatest common multiple of {a} and {b} that is smaller than {lim}?"
+        stem = f"What is the greatest number smaller than {lim} that is a multiple of both {a} and {b}?"
         return build(multiples_below_limit, stem, ans, [
             ((lim - 1) // max(a, b) * max(a, b), "used_only_the_larger_number", f"Used multiples of {max(a, b)} only."),
             (ans + L, "went_over_the_limit", "Gave a common multiple that is over the limit."),
@@ -1476,6 +1477,7 @@ def big_four_ops(r):
         b = r.choice([12, 15, 18, 25, 24, 35, 45, 16, 22, 36, 64])
         ans = a * b
         stem = f"Find the value of {num(a)} × {b}."
+        expr = f"{num(a)} × {b}"
         u, t = b % 10, b // 10
         wrong = [(a * u + a * t, "forgot_place_holder_zero", "Forgot the zero when multiplying by the tens digit."),
                  (a * u + a * t * 100, "shifted_two_places", "Shifted the second row two places."),
@@ -1488,12 +1490,13 @@ def big_four_ops(r):
         a = q * b
         ans = q
         stem = f"Find the value of {num(a)} ÷ {b}."
+        expr = f"{num(a)} ÷ {b}"
         wrong = [(int(str(q).replace("0", "", 1)) if "0" in str(q) else None, "dropped_zero_in_quotient", "Left out a zero in the quotient."),
                  (q + 10, "careless_slip", "Slip in the tens."), (q - 10, "careless_slip", "Slip in the tens."),
                  (q * 10 if q * 10 < a else None, "misplaced_digit", "Put the quotient digits one place too high."),
                  (q + 1, "careless_slip", "Slip in the ones.")]
         prm = {"a": a, "b": b, "mul": False}
-    return build(big_four_ops, stem, ans, wrong, [stem[14:-1] + f" = {num(ans)}"], prm, num, whole=True)
+    return build(big_four_ops, stem, ans, wrong, [f"{expr} = {num(ans)}"], prm, num, whole=True)
 
 
 @checker(big_four_ops)
@@ -2807,9 +2810,9 @@ def ga_groups_markers(r):
     ans = total - x
     if ans < 3:
         return None
-    who = r.choice(NAMES)
+    who = r.choice(["Mrs Tan", "Mr Lim", "Miss Chua", "Mr Raj", "Madam Aisha"])
     stem = (f"A class of {n} children is put into groups of {g}. Each group is given {p_} markers. "
-            f"{who}, the teacher, finds that {x} of the markers are dried up. How many working markers are there?")
+            f"The teacher, {who}, finds that {x} of the markers are dried up. How many working markers are there?")
     return build(ga_groups_markers, stem, ans, [
         (n * p_ - x, "gave_markers_to_each_child", "Gave markers to every child instead of every group."),
         (q + p_ - x if q + p_ - x > 0 else total + x, "added_instead_of_multiplied", "Added the number of groups and the markers."),

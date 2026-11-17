@@ -13,6 +13,19 @@ EXPR, PART, DISC, WHOLE, CHANGE = (O + f"0{i}" for i in range(1, 6))
 ITEMS = ["school bag", "jacket", "watch", "pair of shoes", "bicycle", "calculator", "tennis racket",
          "set of headphones", "water bottle", "reading lamp", "keyboard", "board game", "football",
          "umbrella", "backpack"]
+ITEM_PRICE = {"school bag": (25, 120), "jacket": (30, 150), "watch": (20, 300), "pair of shoes": (30, 150),
+              "bicycle": (100, 800), "calculator": (10, 60), "tennis racket": (30, 250),
+              "set of headphones": (20, 300), "water bottle": (5, 40), "reading lamp": (15, 100),
+              "keyboard": (20, 200), "board game": (15, 80), "football": (10, 80), "umbrella": (8, 40),
+              "backpack": (30, 150)}
+
+
+def item_for(r, price):
+    """An item that really sells for about this price in Singapore (no $500 water bottles)."""
+    ok = [i for i in ITEMS if ITEM_PRICE[i][0] <= price <= ITEM_PRICE[i][1]]
+    return r.choice(ok or ["bicycle"])
+
+
 GROUPS = ["pupils", "stamps", "cookies", "stickers", "marbles", "books", "cards", "beads"]
 
 
@@ -108,7 +121,7 @@ def _(q):
 def discount_amount(r):
     price = 20 * r.randint(2, 30)
     d = r.choice([5, 10, 15, 20, 25, 30, 40, 50])
-    item = r.choice(ITEMS)
+    item = item_for(r, price)
     ans = F(price * d, 100)
     stem = f"A {item} usually costs ${price}. It is on sale at a discount of {d}%. How much is the discount, in dollars?"
     return build(discount_amount, stem, ans, [
@@ -130,7 +143,7 @@ def _(q):
 @template(T, "basic", DISC)
 def gst_amount(r):
     price = 10 * r.randint(2, 40)
-    item = r.choice(ITEMS)
+    item = item_for(r, price)
     ans = F(price * 9, 100)
     stem = f"A {item} costs ${price} before GST. GST is 9%. How much is the GST on the {item}?"
     return build(gst_amount, stem, ans, [
@@ -213,7 +226,7 @@ def _(q):
 def sale_price(r):
     price = 20 * r.randint(3, 40)
     d = r.choice([10, 15, 20, 25, 30, 35, 40, 50])
-    item = r.choice(ITEMS)
+    item = item_for(r, price)
     ans = F(price * (100 - d), 100)
     n = r.choice(NAMES)
     stem = f"{n} bought a {item} with a {d}% discount. The usual price was ${price}. How much did {n} pay?"
@@ -237,7 +250,7 @@ def _(q):
 @template(T, "intermediate", DISC)
 def price_with_gst(r):
     price = 10 * r.randint(3, 60)
-    item = r.choice(ITEMS)
+    item = item_for(r, price)
     ans = F(price * 109, 100)
     n = r.choice(NAMES)
     stem = f"The price of a {item} is ${price} before GST. {n} pays 9% GST on it. How much does {n} pay altogether?"
@@ -266,7 +279,7 @@ def discount_then_gst(r):
     ans = sale * F(109, 100)
     if not cents(ans) or not cents(sale):
         return None
-    item = r.choice(ITEMS)
+    item = item_for(r, price)
     stem = (f"A {item} is marked ${price}. The shop gives a {d}% discount and then adds 9% GST on the discounted price. "
             f"How much must the customer pay?")
     gst_first = F(price * 109, 100) * F(100 - d, 100)
@@ -338,7 +351,7 @@ def find_original_after_discount(r):
     paid = F(orig * (100 - d), 100)
     if paid.denominator != 1:
         return None
-    item = r.choice(ITEMS)
+    item = item_for(r, orig)
     n = r.choice(NAMES)
     stem = f"After a {d}% discount, {n} paid ${paid} for a {item}. What was the price of the {item} before the discount?"
     return build(find_original_after_discount, stem, orig, [
@@ -480,9 +493,10 @@ def constant_part_add(r):
     x = N2 - N
     if x <= 0:
         return None
-    part, other = r.choice([("boys", "girls"), ("red beads", "blue beads"), ("fiction books", "non-fiction books")])
-    stem = (f"{p}% of the items in a club's library are {part}. After {int(x)} more {other} join, "
-            f"the {part} make up {q}% of all the items. How many items were there at first?")
+    part, other, noun = r.choice([("boys", "girls", "members of a club"), ("girls", "boys", "members of a choir"),
+                                  ("boys", "girls", "pupils in a class")])
+    stem = (f"{p}% of the {noun} are {part}. After {int(x)} more {other} join, "
+            f"the {part} make up {q}% of all the {noun.split(' ')[0]}. How many {noun.split(' ')[0]} were there at first?")
     return build(constant_part_add, stem, N, [
         (N2, "gave_the_new_total", "Gave the total after the new items joined."),
         (F(N * p, 100), "gave_the_unchanged_part", f"Gave the number of {part}."),
@@ -492,7 +506,7 @@ def constant_part_add(r):
         (N - 20, "careless_slip", "Made a slip in the calculation."),
     ], [f"The {part} stay the same: {p}% of the old total = {q}% of the new total",
         f"Old total : new total = {q} : {p} = {q // gcd(p, q)} : {p // gcd(p, q)}",
-        f"Difference = {(p - q) // gcd(p, q)} units = {int(x)}", f"Old total = {q // gcd(p, q)} × {int(x) // ((p - q) // gcd(p, q))} = {N}"],
+        f"Difference = {plural((p - q) // gcd(p, q), 'unit')} = {int(x)}", f"Old total = {q // gcd(p, q)} × {int(x) // ((p - q) // gcd(p, q))} = {N}"],
         {"p": p, "q": q, "x": int(x)}, whole=True, auto_slips=False)
 
 
@@ -513,18 +527,18 @@ def constant_part_remove(r):
     x = N - N2
     if x <= 0:
         return None
-    part, other = r.choice([("red", "blue"), ("girls", "boys"), ("sweet", "sour")])
+    part, other = r.choice([("chocolates", "mints"), ("red sweets", "green sweets"), ("strawberry sweets", "orange sweets")])
     nm = r.choice(NAMES)
-    stem = (f"{nm} had {N} sweets in a bag. {p}% of them were {part}. {nm} then ate some of the {other} sweets, "
-            f"so the {part} sweets became {q}% of what was left. How many sweets did {nm} eat?")
+    stem = (f"{nm} had {N} sweets in a bag. {p}% of them were {part}, and the rest were {other}. {nm} then ate some of the {other}, "
+            f"so the {part} became {q}% of the sweets left. How many sweets did {nm} eat?")
     return build(constant_part_remove, stem, x, [
         (N2, "gave_the_number_left", "Gave the number of sweets left in the bag."),
         (F(N * (q - p), 100), "took_percent_difference_of_total", f"Found {q - p}% of {N}."),
-        (F(N * p, 100), "gave_the_unchanged_part", f"Gave the number of {part} sweets."),
+        (F(N * p, 100), "gave_the_unchanged_part", f"Gave the number of {part}."),
         (x + 5, "careless_slip", "Made a slip in the calculation."),
         (x - 5, "careless_slip", "Made a slip in the calculation."),
-        (N - F(N * p, 100), "gave_the_other_sweets", f"Gave the number of {other} sweets at first."),
-    ], [f"{part.capitalize()} sweets = {p}% of {N} = {int(F(N * p, 100))}", f"This is {q}% of the sweets left",
+        (N - F(N * p, 100), "gave_the_other_sweets", f"Gave the number of {other} at first."),
+    ], [f"Number of {part} = {p}% of {N} = {int(F(N * p, 100))}", f"This is {q}% of the sweets left",
         f"Sweets left = {int(F(N * p, 100))} ÷ {q} × 100 = {int(N2)}", f"Sweets eaten = {N} − {int(N2)} = {int(x)}"],
         {"p": p, "q": q, "N": N}, whole=True, auto_slips=False)
 
@@ -546,7 +560,7 @@ def reverse_items_affordable(r):
     B = orig * k + r.randint(0, orig - 1)
     if B // paid == k:
         return None
-    item = r.choice(ITEMS)
+    item = item_for(r, orig)
     n = r.choice(NAMES)
     stem = (f"During a sale, a {item} was sold at a {d}% discount for ${paid}. "
             f"{n} has ${B}. How many of these {item}s can {n} buy at the usual price?")
@@ -684,7 +698,7 @@ def reverse_gst(r):
     P = r.randint(20, 400)
     T_ = F(P * 109, 100)
     n = r.choice(NAMES)
-    item = r.choice(ITEMS)
+    item = item_for(r, P)
     stem = f"{n} paid {money(T_)} for a {item}. This amount included 9% GST. What was the price of the {item} before GST?"
     return build(reverse_gst, stem, P, [
         (r2(T_ - T_ * F(9, 100)), "took_gst_off_the_total", "Took 9% off the total: the GST is 9% of the price before GST."),

@@ -170,7 +170,7 @@ def ratio_difference_to_total(r):
         (a * m, "gave_first_person_only", f"Gave {x}'s marbles only."),
         (D + b * m, "added_difference_to_smaller", "Added the difference to the smaller amount only."),
         (b * m, "gave_second_person_only", f"Gave {y}'s marbles only."),
-    ], [f"Difference = {a} − {b} = {a - b} units → {D}", f"1 unit = {D} ÷ {a - b} = {m}",
+    ], [f"Difference = {a} − {b} = {plural(a - b, 'unit')} → {D}", f"1 unit = {D} ÷ {a - b} = {m}",
         f"Altogether = {a + b} × {m} = {total}"], {"a": a, "b": b, "D": D}, unit("marbles"), unit_size=m, whole=True)
 
 
@@ -359,9 +359,9 @@ def ages_constant_difference(r):
         (F(n * a, c - a) if c > a else (F(n * a, a - c) if a != c else None), "compared_terms_without_matching_difference",
          "Compared the ratios without keeping the age difference the same."),
         (A + B, "gave_total", "Gave the sum of their ages."),
-    ], [f"The age difference does not change. Make it the same: {a - b} and {c - d} → {L} units",
+    ], [f"The age difference does not change. Make it the same: {a - b} and {c - d} → {plural(L, 'unit')}",
         f"Now {now_units} : {b * L // (a - b)}, later {later_units} : {d * L // (c - d)}",
-        f"{later_units - now_units} units → {n} years, so 1 unit = {u}", f"{x} now = {now_units} × {u} = {A}"],
+        f"{plural(later_units - now_units, 'unit')} → {n} years, so 1 unit = {u}", f"{x} now = {now_units} × {u} = {A}"],
         {"a": a, "b": b, "c": c, "d": d, "n": n}, unit("years old"), unit_size=u, whole=True)
 
 
@@ -525,7 +525,7 @@ def triangle_area_shared_height(r):
         (X + (n - m) if n > m else None, "added_ratio_difference", "Added the difference in ratio terms to the area."),
         (X // m, "found_one_unit_only", "Found 1 unit of area only."),
     ], ["The triangles share the same height from A, so their areas are in the ratio of their bases.",
-        f"{m} units → {X} cm², so 1 unit = {X // m} cm²", f"Area ACD = {n} × {X // m} = {ans} cm²"],
+        f"{plural(m, 'unit')} → {X} cm², so 1 unit = {X // m} cm²", f"Area ACD = {n} × {X // m} = {ans} cm²"],
         {"m": m, "n": n, "X": X}, unit("cm²"), unit_size=X // m, whole=True, figure=f.svg("Triangle ABD with C on BD"))
 
 
@@ -732,7 +732,7 @@ def units_difference_total(r):
         (D * (a + b + c), "multiplied_by_total_units", f"Multiplied the difference {D} by all {a + b + c} units."),
         ((b + c) * m, "left_out_a_person", f"Left out {n1}'s {item}."),
         (m * (b - a + c), "used_the_wrong_units", "Added the difference in units to the third person's units only."),
-    ], [f"{n2} has {b} − {a} = {b - a} more units, so {b - a} units = {D}", f"1 unit = {D} ÷ {b - a} = {m}",
+    ], [f"{n2} has {b} − {a} = {plural(b - a, 'more unit')}, so {plural(b - a, 'unit')} = {D}", f"1 unit = {D} ÷ {b - a} = {m}",
         f"Total = {a + b + c} × {m} = {ans}"], {"a": a, "b": b, "c": c, "D": D}, unit_size=m, whole=True, figure=fig)
 
 

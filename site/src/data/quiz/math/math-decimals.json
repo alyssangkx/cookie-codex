@@ -241,7 +241,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 2-th decimal place.",
+    "Look at the next digit after the 2nd decimal place.",
     "Answer: 5.70"
    ],
    "params": {
@@ -535,7 +535,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 1-th decimal place.",
+    "Look at the next digit after the 1st decimal place.",
     "Answer: 82.2"
    ],
    "params": {
@@ -817,7 +817,7 @@
     null,
     {
      "tag": "rounded_to_wrong_number_of_places",
-     "why": "Rounded to 1 decimal places."
+     "why": "Rounded to 1 decimal place."
     },
     {
      "tag": "cut_off_instead_of_rounding",
@@ -829,7 +829,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 0-th decimal place.",
+    "Look at the next digit after the ones place.",
     "Answer: 32"
    ],
    "params": {
@@ -1123,7 +1123,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 2-th decimal place.",
+    "Look at the next digit after the 2nd decimal place.",
     "Answer: 16.00"
    ],
    "params": {
@@ -1417,7 +1417,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 1-th decimal place.",
+    "Look at the next digit after the 1st decimal place.",
     "Answer: 92.3"
    ],
    "params": {
@@ -1711,7 +1711,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 1-th decimal place.",
+    "Look at the next digit after the 1st decimal place.",
     "Answer: 55.0"
    ],
    "params": {
@@ -1992,7 +1992,7 @@
    "explain": [
     {
      "tag": "rounded_to_wrong_number_of_places",
-     "why": "Rounded to 1 decimal places."
+     "why": "Rounded to 1 decimal place."
     },
     {
      "tag": "rounded_to_wrong_number_of_places",
@@ -2005,7 +2005,7 @@
     null
    ],
    "solution": [
-    "Look at the next digit after the 0-th decimal place.",
+    "Look at the next digit after the ones place.",
     "Answer: 35"
    ],
    "params": {
@@ -2299,7 +2299,7 @@
     }
    ],
    "solution": [
-    "Look at the next digit after the 1-th decimal place.",
+    "Look at the next digit after the 1st decimal place.",
     "Answer: 69.2"
    ],
    "params": {
@@ -2549,7 +2549,7 @@
    ],
    "solution": [
     "76 × 6 = 456",
-    "Put back 1 decimal places: 45.6"
+    "Put back 1 decimal place: 45.6"
    ],
    "params": {
     "a": 76,
@@ -2836,7 +2836,7 @@
    ],
    "solution": [
     "78 × 5 = 390",
-    "Put back 1 decimal places: 39"
+    "Put back 1 decimal place: 39"
    ],
    "params": {
     "a": 78,
@@ -2883,7 +2883,7 @@
    ],
    "solution": [
     "176 ÷ 8 = 22",
-    "Put back 1 decimal places: 2.2"
+    "Put back 1 decimal place: 2.2"
    ],
    "params": {
     "n": 176,
@@ -3123,7 +3123,7 @@
    ],
    "solution": [
     "34 × 6 = 204",
-    "Put back 1 decimal places: 20.4"
+    "Put back 1 decimal place: 20.4"
    ],
    "params": {
     "a": 34,
@@ -3170,7 +3170,7 @@
    ],
    "solution": [
     "636 ÷ 4 = 159",
-    "Put back 1 decimal places: 15.9"
+    "Put back 1 decimal place: 15.9"
    ],
    "params": {
     "n": 636,
@@ -3744,7 +3744,7 @@
    ],
    "solution": [
     "664 ÷ 8 = 83",
-    "Put back 1 decimal places: 8.3"
+    "Put back 1 decimal place: 8.3"
    ],
    "params": {
     "n": 664,
@@ -3984,7 +3984,7 @@
    ],
    "solution": [
     "76 × 9 = 684",
-    "Put back 1 decimal places: 68.4"
+    "Put back 1 decimal place: 68.4"
    ],
    "params": {
     "a": 76,
@@ -4318,7 +4318,7 @@
    ],
    "solution": [
     "602 ÷ 7 = 86",
-    "Put back 1 decimal places: 8.6"
+    "Put back 1 decimal place: 8.6"
    ],
    "params": {
     "n": 602,
@@ -4558,7 +4558,7 @@
    ],
    "solution": [
     "84 × 7 = 588",
-    "Put back 1 decimal places: 58.8"
+    "Put back 1 decimal place: 58.8"
    ],
    "params": {
     "a": 84,
@@ -4845,7 +4845,7 @@
    ],
    "solution": [
     "41 × 6 = 246",
-    "Put back 1 decimal places: 24.6"
+    "Put back 1 decimal place: 24.6"
    ],
    "params": {
     "a": 41,
@@ -12401,7 +12401,7 @@
    }
   },
   {
-   "id": "decima-c-13577bf63a",
+   "id": "decima-c-8bdf9d2953",
    "topic": "math-decimals",
    "level": "competent",
    "template": "jug_backwards",
@@ -12409,29 +12409,29 @@
     "math-decimals-four-operations-with-decimals-01",
     "math-decimals-four-operations-with-decimals-02"
    ],
-   "stem": "A jug had some juice. Ali poured 4 cups of 2.05 litres each, and then 0.32 litres were spilled. 1.45 litres were left in the jug. How many litres of juice were in the jug at first?",
+   "stem": "A container had some water. Ali used 4 pails of 1.30 litres each to water the plants, and then 0.62 litres were spilled. 0.88 litres were left in the container. How many litres of water were in the container at first?",
    "options": [
-    "9.97",
-    "3.82",
-    "9.65",
-    "7.07"
+    "6.70",
+    "2.80",
+    "6.08",
+    "4.94"
    ],
    "optionValues": [
-    "997/100",
-    "191/50",
-    "193/20",
-    "707/100"
+    "67/10",
+    "14/5",
+    "152/25",
+    "247/50"
    ],
    "answer": 0,
    "explain": [
     null,
     {
      "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
+     "why": "Added the amount of only one pail."
     },
     {
      "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
+     "why": "Forgot the water that was spilled."
     },
     {
      "tag": "subtracted_instead_of_added",
@@ -12439,14 +12439,14 @@
     }
    ],
    "solution": [
-    "Poured: 4 × 2.05 = 8.20 l",
-    "At first: 1.45 + 0.32 + 8.20 = 9.97 l"
+    "Poured: 4 × 1.30 = 5.20 l",
+    "At first: 0.88 + 0.62 + 5.20 = 6.70 l"
    ],
    "params": {
     "n": 4,
-    "c": 205,
-    "spill": 32,
-    "rem": 145
+    "c": 130,
+    "spill": 62,
+    "rem": 88
    }
   },
   {
@@ -12600,7 +12600,7 @@
    }
   },
   {
-   "id": "decima-c-a4f2c9269c",
+   "id": "decima-c-b3177b1e12",
    "topic": "math-decimals",
    "level": "competent",
    "template": "jug_backwards",
@@ -12608,48 +12608,48 @@
     "math-decimals-four-operations-with-decimals-01",
     "math-decimals-four-operations-with-decimals-02"
    ],
-   "stem": "A jug had some juice. Arjun poured 6 cups of 0.75 litres each, and then 0.88 litres were spilled. 1.38 litres were left in the jug. How many litres of juice were in the jug at first?",
+   "stem": "A container had some water. Arjun used 6 pails of 1.05 litres each to water the plants, and then 0.88 litres were spilled. 1.38 litres were left in the container. How many litres of water were in the container at first?",
    "options": [
-    "5.88",
-    "4.00",
-    "6.76",
-    "3.01"
+    "3.31",
+    "7.68",
+    "8.56",
+    "5.80"
    ],
    "optionValues": [
-    "147/25",
-    "4",
-    "169/25",
-    "301/100"
+    "331/100",
+    "192/25",
+    "214/25",
+    "29/5"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
     },
     {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
     },
     null,
     {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
     }
    ],
    "solution": [
-    "Poured: 6 × 0.75 = 4.50 l",
-    "At first: 1.38 + 0.88 + 4.50 = 6.76 l"
+    "Poured: 6 × 1.05 = 6.30 l",
+    "At first: 1.38 + 0.88 + 6.30 = 8.56 l"
    ],
    "params": {
     "n": 6,
-    "c": 75,
+    "c": 105,
     "spill": 88,
     "rem": 138
    }
   },
   {
-   "id": "decima-c-5667a501ee",
+   "id": "decima-c-b85ffc252e",
    "topic": "math-decimals",
    "level": "competent",
    "template": "ribbon_remaining_pieces",
@@ -12657,1411 +12657,18 @@
     "math-decimals-four-operations-with-decimals-02",
     "math-decimals-four-operations-with-decimals-01"
    ],
-   "stem": "Xin Yi had a ribbon 10.05 m long. Xin Yi cut 5 pieces of 1.86 m each. The rest was cut into pieces of 0.15 m each. How many of these shorter pieces were there?",
+   "stem": "Nurul had a ribbon 12.70 m long. Nurul cut 4 pieces of 2.05 m each. The rest was cut into pieces of 0.45 m each. How many of these shorter pieces were there?",
    "options": [
-    "5",
-    "10",
-    "67",
-    "54"
-   ],
-   "optionValues": [
-    "5",
-    "10",
-    "67",
-    "54"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    },
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    }
-   ],
-   "solution": [
-    "Long pieces: 5 × 1.86 = 9.30 m",
-    "Rest: 10.05 − 9.30 = 0.75 m",
-    "0.75 ÷ 0.15 = 5"
-   ],
-   "params": {
-    "T": 1005,
-    "n": 5,
-    "pa": 186,
-    "pb": 15
-   }
-  },
-  {
-   "id": "decima-c-275470df13",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Wei Jie's rope and Farid's rope have a total length of 13.40 m. Wei Jie's is 5.86 m more than Farid's. What is the length of Farid's rope, in m?",
-   "options": [
-    "6.70",
-    "9.63",
-    "3.87",
-    "3.77"
-   ],
-   "optionValues": [
-    "67/10",
-    "963/100",
-    "387/100",
-    "377/100"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    {
-     "tag": "slip",
-     "why": "Slip."
-    },
-    null
-   ],
-   "solution": [
-    "Two equal parts: 13.40 − 5.86 = 7.54",
-    "Farid's = 3.77",
-    "Wei Jie's = 9.63"
-   ],
-   "params": {
-    "S": 1340,
-    "d": 586,
-    "big": false
-   }
-  },
-  {
-   "id": "decima-c-d8599f4f51",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 10.1 litres of water. The water is poured into bottles that each hold 450 ml. How many bottles can be completely filled?",
-   "options": [
-    "224",
     "23",
-    "2",
-    "22"
-   ],
-   "optionValues": [
-    "224",
-    "23",
-    "2",
-    "22"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    null
-   ],
-   "solution": [
-    "10.1 l = 10100 ml",
-    "10100 ÷ 450 = 22 remainder 200",
-    "Full bottles = 22"
-   ],
-   "params": {
-    "L": [
-     101,
-     10
-    ],
-    "ml": 450
-   }
-  },
-  {
-   "id": "decima-c-847322d722",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Ravi poured 5 cups of 1.25 litres each, and then 0.40 litres were spilled. 1.13 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "5.52",
-    "7.78",
-    "2.78",
-    "7.38"
-   ],
-   "optionValues": [
-    "138/25",
-    "389/50",
-    "139/50",
-    "369/50"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    },
-    null,
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    },
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    }
-   ],
-   "solution": [
-    "Poured: 5 × 1.25 = 6.25 l",
-    "At first: 1.13 + 0.40 + 6.25 = 7.78 l"
-   ],
-   "params": {
-    "n": 5,
-    "c": 125,
-    "spill": 40,
-    "rem": 113
-   }
-  },
-  {
-   "id": "decima-c-077e30a542",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Shu Fen had a ribbon 8.67 m long. Shu Fen cut 3 pieces of 1.14 m each. The rest was cut into pieces of 0.35 m each. How many of these shorter pieces were there?",
-   "options": [
-    "15",
-    "24",
-    "18",
-    "21"
-   ],
-   "optionValues": [
-    "15",
-    "24",
-    "18",
-    "21"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    },
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    }
-   ],
-   "solution": [
-    "Long pieces: 3 × 1.14 = 3.42 m",
-    "Rest: 8.67 − 3.42 = 5.25 m",
-    "5.25 ÷ 0.35 = 15"
-   ],
-   "params": {
-    "T": 867,
-    "n": 3,
-    "pa": 114,
-    "pb": 35
-   }
-  },
-  {
-   "id": "decima-c-bdde75150d",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Ravi's rope and Ali's rope have a total length of 21.69 m. Ravi's is 6.51 m more than Ali's. What is the length of Ali's rope, in m?",
-   "options": [
-    "14.10",
-    "10.85",
-    "7.69",
-    "7.59"
-   ],
-   "optionValues": [
-    "141/10",
-    "2169/200",
-    "769/100",
-    "759/100"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "slip",
-     "why": "Slip."
-    },
-    null
-   ],
-   "solution": [
-    "Two equal parts: 21.69 − 6.51 = 15.18",
-    "Ali's = 7.59",
-    "Ravi's = 14.10"
-   ],
-   "params": {
-    "S": 2169,
-    "d": 651,
-    "big": false
-   }
-  },
-  {
-   "id": "decima-c-09a271dead",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 16.4 litres of water. The water is poured into bottles that each hold 250 ml. How many bottles can be completely filled?",
-   "options": [
-    "6",
-    "66",
-    "65",
-    "656"
-   ],
-   "optionValues": [
-    "6",
-    "66",
-    "65",
-    "656"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    null,
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    }
-   ],
-   "solution": [
-    "16.4 l = 16400 ml",
-    "16400 ÷ 250 = 65 remainder 150",
-    "Full bottles = 65"
-   ],
-   "params": {
-    "L": [
-     82,
-     5
-    ],
-    "ml": 250
-   }
-  },
-  {
-   "id": "decima-c-09d7b20150",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Arjun poured 5 cups of 1.90 litres each, and then 0.61 litres were spilled. 1.39 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "10.89",
-    "11.50",
-    "8.72",
-    "3.90"
-   ],
-   "optionValues": [
-    "1089/100",
-    "23/2",
-    "218/25",
-    "39/10"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    null,
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    },
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    }
-   ],
-   "solution": [
-    "Poured: 5 × 1.90 = 9.50 l",
-    "At first: 1.39 + 0.61 + 9.50 = 11.50 l"
-   ],
-   "params": {
-    "n": 5,
-    "c": 190,
-    "spill": 61,
-    "rem": 139
-   }
-  },
-  {
-   "id": "decima-c-700ba2893c",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Shu Fen had a ribbon 13.60 m long. Shu Fen cut 5 pieces of 2.48 m each. The rest was cut into pieces of 0.15 m each. How many of these shorter pieces were there?",
-   "options": [
-    "74",
-    "90",
-    "8",
-    "13"
-   ],
-   "optionValues": [
-    "74",
-    "90",
-    "8",
-    "13"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    },
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    null,
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    }
-   ],
-   "solution": [
-    "Long pieces: 5 × 2.48 = 12.40 m",
-    "Rest: 13.60 − 12.40 = 1.20 m",
-    "1.20 ÷ 0.15 = 8"
-   ],
-   "params": {
-    "T": 1360,
-    "n": 5,
-    "pa": 248,
-    "pb": 15
-   }
-  },
-  {
-   "id": "decima-c-3362e29556",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Hui Min's rope and Kumar's rope have a total length of 23.82 m. Hui Min's is 3.58 m more than Kumar's. What is the length of Hui Min's rope, in m?",
-   "options": [
-    "11.91",
-    "20.24",
-    "13.70",
-    "10.12"
-   ],
-   "optionValues": [
-    "1191/100",
-    "506/25",
-    "137/10",
-    "253/25"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    null,
-    {
-     "tag": "gave_the_other_person",
-     "why": "Gave the other person's amount."
-    }
-   ],
-   "solution": [
-    "Two equal parts: 23.82 − 3.58 = 20.24",
-    "Kumar's = 10.12",
-    "Hui Min's = 13.70"
-   ],
-   "params": {
-    "S": 2382,
-    "d": 358,
-    "big": true
-   }
-  },
-  {
-   "id": "decima-c-59be27acdc",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 20.9 litres of water. The water is poured into bottles that each hold 120 ml. How many bottles can be completely filled?",
-   "options": [
-    "175",
-    "17",
-    "1741",
-    "174"
-   ],
-   "optionValues": [
-    "175",
-    "17",
-    "1741",
-    "174"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    null
-   ],
-   "solution": [
-    "20.9 l = 20900 ml",
-    "20900 ÷ 120 = 174 remainder 20",
-    "Full bottles = 174"
-   ],
-   "params": {
-    "L": [
-     209,
-     10
-    ],
-    "ml": 120
-   }
-  },
-  {
-   "id": "decima-c-d8214e95ac",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Kumar poured 4 cups of 2.25 litres each, and then 0.45 litres were spilled. 1.54 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "4.24",
-    "10.54",
-    "10.99",
-    "7.91"
-   ],
-   "optionValues": [
-    "106/25",
-    "527/50",
-    "1099/100",
-    "791/100"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    },
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    null,
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    }
-   ],
-   "solution": [
-    "Poured: 4 × 2.25 = 9.00 l",
-    "At first: 1.54 + 0.45 + 9.00 = 10.99 l"
-   ],
-   "params": {
-    "n": 4,
-    "c": 225,
-    "spill": 45,
-    "rem": 154
-   }
-  },
-  {
-   "id": "decima-c-78670022bb",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Xin Yi had a ribbon 9.61 m long. Xin Yi cut 3 pieces of 2.12 m each. The rest was cut into pieces of 0.25 m each. How many of these shorter pieces were there?",
-   "options": [
-    "16",
-    "13",
-    "29",
-    "38"
-   ],
-   "optionValues": [
-    "16",
-    "13",
-    "29",
-    "38"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    },
-    null,
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    },
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    }
-   ],
-   "solution": [
-    "Long pieces: 3 × 2.12 = 6.36 m",
-    "Rest: 9.61 − 6.36 = 3.25 m",
-    "3.25 ÷ 0.25 = 13"
-   ],
-   "params": {
-    "T": 961,
-    "n": 3,
-    "pa": 212,
-    "pb": 25
-   }
-  },
-  {
-   "id": "decima-c-bddce9532f",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Ravi's rope and Aisha's rope have a total length of 24.44 m. Ravi's is 8.88 m more than Aisha's. What is the length of Aisha's rope, in m?",
-   "options": [
-    "7.78",
-    "12.22",
-    "16.66",
-    "7.88"
-   ],
-   "optionValues": [
-    "389/50",
-    "611/50",
-    "833/50",
-    "197/25"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    {
-     "tag": "slip",
-     "why": "Slip."
-    }
-   ],
-   "solution": [
-    "Two equal parts: 24.44 − 8.88 = 15.56",
-    "Aisha's = 7.78",
-    "Ravi's = 16.66"
-   ],
-   "params": {
-    "S": 2444,
-    "d": 888,
-    "big": false
-   }
-  },
-  {
-   "id": "decima-c-1b7839e5c7",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 15.7 litres of water. The water is poured into bottles that each hold 250 ml. How many bottles can be completely filled?",
-   "options": [
-    "628",
-    "6",
-    "63",
-    "62"
-   ],
-   "optionValues": [
-    "628",
-    "6",
-    "63",
-    "62"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    null
-   ],
-   "solution": [
-    "15.7 l = 15700 ml",
-    "15700 ÷ 250 = 62 remainder 200",
-    "Full bottles = 62"
-   ],
-   "params": {
-    "L": [
-     157,
-     10
-    ],
-    "ml": 250
-   }
-  },
-  {
-   "id": "decima-c-53de6895b2",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Siti poured 5 cups of 1.75 litres each, and then 0.32 litres were spilled. 1.57 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "10.64",
-    "10.32",
-    "3.64",
-    "7.50"
-   ],
-   "optionValues": [
-    "266/25",
-    "258/25",
-    "91/25",
-    "15/2"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    },
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    }
-   ],
-   "solution": [
-    "Poured: 5 × 1.75 = 8.75 l",
-    "At first: 1.57 + 0.32 + 8.75 = 10.64 l"
-   ],
-   "params": {
-    "n": 5,
-    "c": 175,
-    "spill": 32,
-    "rem": 157
-   }
-  },
-  {
-   "id": "decima-c-6d591db681",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Siti had a ribbon 17.85 m long. Siti cut 5 pieces of 2.13 m each. The rest was cut into pieces of 0.45 m each. How many of these shorter pieces were there?",
-   "options": [
-    "16",
-    "39",
-    "34",
-    "21"
-   ],
-   "optionValues": [
-    "16",
-    "39",
-    "34",
-    "21"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    },
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    }
-   ],
-   "solution": [
-    "Long pieces: 5 × 2.13 = 10.65 m",
-    "Rest: 17.85 − 10.65 = 7.20 m",
-    "7.20 ÷ 0.45 = 16"
-   ],
-   "params": {
-    "T": 1785,
-    "n": 5,
-    "pa": 213,
-    "pb": 45
-   }
-  },
-  {
-   "id": "decima-c-afc93f32bb",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Ravi's rope and Shu Fen's rope have a total length of 12.23 m. Ravi's is 6.99 m more than Shu Fen's. What is the length of Shu Fen's rope, in m?",
-   "options": [
-    "6.12",
-    "2.72",
-    "2.62",
-    "9.61"
-   ],
-   "optionValues": [
-    "1223/200",
-    "68/25",
-    "131/50",
-    "961/100"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "slip",
-     "why": "Slip."
-    },
-    null,
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    }
-   ],
-   "solution": [
-    "Two equal parts: 12.23 − 6.99 = 5.24",
-    "Shu Fen's = 2.62",
-    "Ravi's = 9.61"
-   ],
-   "params": {
-    "S": 1223,
-    "d": 699,
-    "big": false
-   }
-  },
-  {
-   "id": "decima-c-6294dfe991",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 8 litres of water. The water is poured into bottles that each hold 350 ml. How many bottles can be completely filled?",
-   "options": [
-    "22",
-    "228",
-    "2",
-    "23"
-   ],
-   "optionValues": [
-    "22",
-    "228",
-    "2",
-    "23"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    }
-   ],
-   "solution": [
-    "8 l = 8000 ml",
-    "8000 ÷ 350 = 22 remainder 300",
-    "Full bottles = 22"
-   ],
-   "params": {
-    "L": [
-     8,
-     1
-    ],
-    "ml": 350
-   }
-  },
-  {
-   "id": "decima-c-54252e0d7a",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Hui Min poured 3 cups of 1.85 litres each, and then 0.50 litres were spilled. 1.93 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "7.48",
-    "7.98",
-    "4.12",
-    "4.28"
-   ],
-   "optionValues": [
-    "187/25",
-    "399/50",
-    "103/25",
-    "107/25"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    null,
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    },
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    }
-   ],
-   "solution": [
-    "Poured: 3 × 1.85 = 5.55 l",
-    "At first: 1.93 + 0.50 + 5.55 = 7.98 l"
-   ],
-   "params": {
-    "n": 3,
-    "c": 185,
-    "spill": 50,
-    "rem": 193
-   }
-  },
-  {
-   "id": "decima-c-9f25149c13",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Ali had a ribbon 8.70 m long. Ali cut 3 pieces of 1.90 m each. The rest was cut into pieces of 0.25 m each. How many of these shorter pieces were there?",
-   "options": [
-    "12",
-    "34",
-    "27",
-    "15"
-   ],
-   "optionValues": [
-    "12",
-    "34",
-    "27",
-    "15"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    },
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    }
-   ],
-   "solution": [
-    "Long pieces: 3 × 1.90 = 5.70 m",
-    "Rest: 8.70 − 5.70 = 3.00 m",
-    "3.00 ÷ 0.25 = 12"
-   ],
-   "params": {
-    "T": 870,
-    "n": 3,
-    "pa": 190,
-    "pb": 25
-   }
-  },
-  {
-   "id": "decima-c-e65ab22715",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Priya's bag and Jun Wei's bag have a total mass of 38.14 kg. Priya's is 6.32 kg more than Jun Wei's. What is the mass of Jun Wei's bag, in kg?",
-   "options": [
-    "16.01",
-    "22.23",
-    "15.91",
-    "19.07"
-   ],
-   "optionValues": [
-    "1601/100",
-    "2223/100",
-    "1591/100",
-    "1907/100"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "slip",
-     "why": "Slip."
-    },
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    null,
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    }
-   ],
-   "solution": [
-    "Two equal parts: 38.14 − 6.32 = 31.82",
-    "Jun Wei's = 15.91",
-    "Priya's = 22.23"
-   ],
-   "params": {
-    "S": 3814,
-    "d": 632,
-    "big": false
-   }
-  },
-  {
-   "id": "decima-c-6776fb9371",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 10.9 litres of water. The water is poured into bottles that each hold 120 ml. How many bottles can be completely filled?",
-   "options": [
-    "90",
-    "908",
-    "9",
-    "91"
-   ],
-   "optionValues": [
-    "90",
-    "908",
-    "9",
-    "91"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    }
-   ],
-   "solution": [
-    "10.9 l = 10900 ml",
-    "10900 ÷ 120 = 90 remainder 100",
-    "Full bottles = 90"
-   ],
-   "params": {
-    "L": [
-     109,
-     10
-    ],
-    "ml": 120
-   }
-  },
-  {
-   "id": "decima-c-509cc77171",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Daniel poured 4 cups of 1.35 litres each, and then 0.38 litres were spilled. 1.35 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "3.08",
-    "7.13",
-    "6.75",
-    "4.43"
-   ],
-   "optionValues": [
-    "77/25",
-    "713/100",
-    "27/4",
-    "443/100"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    },
-    null,
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    }
-   ],
-   "solution": [
-    "Poured: 4 × 1.35 = 5.40 l",
-    "At first: 1.35 + 0.38 + 5.40 = 7.13 l"
-   ],
-   "params": {
-    "n": 4,
-    "c": 135,
-    "spill": 38,
-    "rem": 135
-   }
-  },
-  {
-   "id": "decima-c-e13c16754a",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Farid had a ribbon 11.36 m long. Farid cut 4 pieces of 1.99 m each. The rest was cut into pieces of 0.20 m each. How many of these shorter pieces were there?",
-   "options": [
-    "56",
-    "17",
-    "21",
-    "46"
-   ],
-   "optionValues": [
-    "56",
-    "17",
-    "21",
-    "46"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    null,
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    },
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    }
-   ],
-   "solution": [
-    "Long pieces: 4 × 1.99 = 7.96 m",
-    "Rest: 11.36 − 7.96 = 3.40 m",
-    "3.40 ÷ 0.20 = 17"
-   ],
-   "params": {
-    "T": 1136,
-    "n": 4,
-    "pa": 199,
-    "pb": 20
-   }
-  },
-  {
-   "id": "decima-c-ed92877ae4",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Nurul's bag and Aisha's bag have a total mass of 27.63 kg. Nurul's is 4.63 kg more than Aisha's. What is the mass of Nurul's bag, in kg?",
-   "options": [
-    "23.00",
-    "16.13",
-    "13.81",
-    "11.50"
+    "28",
+    "14",
+    "10"
    ],
    "optionValues": [
     "23",
-    "1613/100",
-    "2763/200",
-    "23/2"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    null,
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "gave_the_other_person",
-     "why": "Gave the other person's amount."
-    }
-   ],
-   "solution": [
-    "Two equal parts: 27.63 − 4.63 = 23.00",
-    "Aisha's = 11.50",
-    "Nurul's = 16.13"
-   ],
-   "params": {
-    "S": 2763,
-    "d": 463,
-    "big": true
-   }
-  },
-  {
-   "id": "decima-c-308a4cf78f",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 13.6 litres of water. The water is poured into bottles that each hold 180 ml. How many bottles can be completely filled?",
-   "options": [
-    "7",
-    "755",
-    "76",
-    "75"
-   ],
-   "optionValues": [
-    "7",
-    "755",
-    "76",
-    "75"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    null
-   ],
-   "solution": [
-    "13.6 l = 13600 ml",
-    "13600 ÷ 180 = 75 remainder 100",
-    "Full bottles = 75"
-   ],
-   "params": {
-    "L": [
-     68,
-     5
-    ],
-    "ml": 180
-   }
-  },
-  {
-   "id": "decima-c-dce1cab56f",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Ali poured 6 cups of 2.25 litres each, and then 0.52 litres were spilled. 1.40 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "15.42",
-    "4.17",
-    "14.90",
-    "12.62"
-   ],
-   "optionValues": [
-    "771/50",
-    "417/100",
-    "149/10",
-    "631/50"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    },
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    }
-   ],
-   "solution": [
-    "Poured: 6 × 2.25 = 13.50 l",
-    "At first: 1.40 + 0.52 + 13.50 = 15.42 l"
-   ],
-   "params": {
-    "n": 6,
-    "c": 225,
-    "spill": 52,
-    "rem": 140
-   }
-  },
-  {
-   "id": "decima-c-a5c2488aa7",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Nurul had a ribbon 13.77 m long. Nurul cut 4 pieces of 2.48 m each. The rest was cut into pieces of 0.35 m each. How many of these shorter pieces were there?",
-   "options": [
-    "32",
-    "39",
-    "15",
-    "11"
-   ],
-   "optionValues": [
-    "32",
-    "39",
-    "15",
-    "11"
+    "28",
+    "14",
+    "10"
    ],
    "answer": 3,
    "explain": [
@@ -14076,421 +12683,23 @@
     {
      "tag": "added_the_pieces",
      "why": "Added the numbers of pieces."
-    },
-    null
-   ],
-   "solution": [
-    "Long pieces: 4 × 2.48 = 9.92 m",
-    "Rest: 13.77 − 9.92 = 3.85 m",
-    "3.85 ÷ 0.35 = 11"
-   ],
-   "params": {
-    "T": 1377,
-    "n": 4,
-    "pa": 248,
-    "pb": 35
-   }
-  },
-  {
-   "id": "decima-c-6d6f7eaae0",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Xin Yi's rope and Jun Wei's rope have a total length of 29.74 m. Xin Yi's is 2.42 m more than Jun Wei's. What is the length of Xin Yi's rope, in m?",
-   "options": [
-    "13.66",
-    "14.87",
-    "16.08",
-    "27.32"
-   ],
-   "optionValues": [
-    "683/50",
-    "1487/100",
-    "402/25",
-    "683/25"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "gave_the_other_person",
-     "why": "Gave the other person's amount."
-    },
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    null,
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    }
-   ],
-   "solution": [
-    "Two equal parts: 29.74 − 2.42 = 27.32",
-    "Jun Wei's = 13.66",
-    "Xin Yi's = 16.08"
-   ],
-   "params": {
-    "S": 2974,
-    "d": 242,
-    "big": true
-   }
-  },
-  {
-   "id": "decima-c-ff374d4171",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 18.3 litres of water. The water is poured into bottles that each hold 120 ml. How many bottles can be completely filled?",
-   "options": [
-    "153",
-    "1525",
-    "15",
-    "152"
-   ],
-   "optionValues": [
-    "153",
-    "1525",
-    "15",
-    "152"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    null
-   ],
-   "solution": [
-    "18.3 l = 18300 ml",
-    "18300 ÷ 120 = 152 remainder 60",
-    "Full bottles = 152"
-   ],
-   "params": {
-    "L": [
-     183,
-     10
-    ],
-    "ml": 120
-   }
-  },
-  {
-   "id": "decima-c-c7b92eca89",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Xin Yi poured 3 cups of 1.15 litres each, and then 0.81 litres were spilled. 2.35 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "1.91",
-    "4.31",
-    "5.80",
-    "6.61"
-   ],
-   "optionValues": [
-    "191/100",
-    "431/100",
-    "29/5",
-    "661/100"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    },
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    },
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    null
-   ],
-   "solution": [
-    "Poured: 3 × 1.15 = 3.45 l",
-    "At first: 2.35 + 0.81 + 3.45 = 6.61 l"
-   ],
-   "params": {
-    "n": 3,
-    "c": 115,
-    "spill": 81,
-    "rem": 235
-   }
-  },
-  {
-   "id": "decima-c-ff66dafcd8",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Priya had a ribbon 8.09 m long. Priya cut 2 pieces of 1.77 m each. The rest was cut into pieces of 0.35 m each. How many of these shorter pieces were there?",
-   "options": [
-    "18",
-    "13",
-    "23",
-    "15"
-   ],
-   "optionValues": [
-    "18",
-    "13",
-    "23",
-    "15"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    },
-    null,
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
-    },
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    }
-   ],
-   "solution": [
-    "Long pieces: 2 × 1.77 = 3.54 m",
-    "Rest: 8.09 − 3.54 = 4.55 m",
-    "4.55 ÷ 0.35 = 13"
-   ],
-   "params": {
-    "T": 809,
-    "n": 2,
-    "pa": 177,
-    "pb": 35
-   }
-  },
-  {
-   "id": "decima-c-9bc7df05cb",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "sum_and_difference_decimals",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "Jun Wei's bag and Priya's bag have a total mass of 26.04 kg. Jun Wei's is 6.88 kg more than Priya's. What is the mass of Jun Wei's bag, in kg?",
-   "options": [
-    "19.16",
-    "13.02",
-    "9.58",
-    "16.46"
-   ],
-   "optionValues": [
-    "479/25",
-    "651/50",
-    "479/50",
-    "823/50"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "subtracted_without_halving",
-     "why": "Subtracted the difference without halving."
-    },
-    {
-     "tag": "halved_the_total",
-     "why": "Divided the total by 2 only."
-    },
-    {
-     "tag": "gave_the_other_person",
-     "why": "Gave the other person's amount."
-    },
-    null
-   ],
-   "solution": [
-    "Two equal parts: 26.04 − 6.88 = 19.16",
-    "Priya's = 9.58",
-    "Jun Wei's = 16.46"
-   ],
-   "params": {
-    "S": 2604,
-    "d": 688,
-    "big": true
-   }
-  },
-  {
-   "id": "decima-c-4d268672ef",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "bottles_filled",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-06"
-   ],
-   "stem": "A tank has 14.2 litres of water. The water is poured into bottles that each hold 450 ml. How many bottles can be completely filled?",
-   "options": [
-    "315",
-    "32",
-    "3",
-    "31"
-   ],
-   "optionValues": [
-    "315",
-    "32",
-    "3",
-    "31"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
-    {
-     "tag": "rounded_up",
-     "why": "Counted the bottle that is not full."
-    },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
-    },
-    null
-   ],
-   "solution": [
-    "14.2 l = 14200 ml",
-    "14200 ÷ 450 = 31 remainder 250",
-    "Full bottles = 31"
-   ],
-   "params": {
-    "L": [
-     71,
-     5
-    ],
-    "ml": 450
-   }
-  },
-  {
-   "id": "decima-c-91f4acacba",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "jug_backwards",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-01",
-    "math-decimals-four-operations-with-decimals-02"
-   ],
-   "stem": "A jug had some juice. Aisha poured 6 cups of 1.50 litres each, and then 0.30 litres were spilled. 1.88 litres were left in the jug. How many litres of juice were in the jug at first?",
-   "options": [
-    "11.18",
-    "7.42",
-    "10.88",
-    "3.68"
-   ],
-   "optionValues": [
-    "559/50",
-    "371/50",
-    "272/25",
-    "92/25"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "subtracted_instead_of_added",
-     "why": "Subtracted when working backwards."
-    },
-    {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
-    },
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    }
-   ],
-   "solution": [
-    "Poured: 6 × 1.50 = 9.00 l",
-    "At first: 1.88 + 0.30 + 9.00 = 11.18 l"
-   ],
-   "params": {
-    "n": 6,
-    "c": 150,
-    "spill": 30,
-    "rem": 188
-   }
-  },
-  {
-   "id": "decima-c-d6664b7ddb",
-   "topic": "math-decimals",
-   "level": "competent",
-   "template": "ribbon_remaining_pieces",
-   "outcomes": [
-    "math-decimals-four-operations-with-decimals-02",
-    "math-decimals-four-operations-with-decimals-01"
-   ],
-   "stem": "Jun Wei had a ribbon 11.70 m long. Jun Wei cut 4 pieces of 2.05 m each. The rest was cut into pieces of 0.25 m each. How many of these shorter pieces were there?",
-   "options": [
-    "38",
-    "18",
-    "46",
-    "14"
-   ],
-   "optionValues": [
-    "38",
-    "18",
-    "46",
-    "14"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "subtracted_one_long_piece_only",
-     "why": "Subtracted only one long piece."
-    },
-    {
-     "tag": "added_the_pieces",
-     "why": "Added the numbers of pieces."
-    },
-    {
-     "tag": "forgot_the_first_cuts",
-     "why": "Divided the whole length by the short piece."
     },
     null
    ],
    "solution": [
     "Long pieces: 4 × 2.05 = 8.20 m",
-    "Rest: 11.70 − 8.20 = 3.50 m",
-    "3.50 ÷ 0.25 = 14"
+    "Rest: 12.70 − 8.20 = 4.50 m",
+    "4.50 ÷ 0.45 = 10"
    ],
    "params": {
-    "T": 1170,
+    "T": 1270,
     "n": 4,
     "pa": 205,
-    "pb": 25
+    "pb": 45
    }
   },
   {
-   "id": "decima-c-5947168904",
+   "id": "decima-c-ce42613972",
    "topic": "math-decimals",
    "level": "competent",
    "template": "sum_and_difference_decimals",
@@ -14498,22 +12707,419 @@
     "math-decimals-four-operations-with-decimals-01",
     "math-decimals-four-operations-with-decimals-02"
    ],
-   "stem": "Daniel's bag and Shu Fen's bag have a total mass of 23.90 kg. Daniel's is 2.84 kg more than Shu Fen's. What is the mass of Daniel's bag, in kg?",
+   "stem": "Mei Ling's rope and Farid's rope have a total length of 30.45 m. Mei Ling's is 5.25 m more than Farid's. What is the length of Farid's rope, in m?",
    "options": [
-    "13.37",
-    "10.53",
-    "21.06",
-    "11.95"
+    "12.60",
+    "15.22",
+    "17.85",
+    "12.70"
    ],
    "optionValues": [
-    "1337/100",
-    "1053/100",
-    "1053/50",
-    "239/20"
+    "63/5",
+    "609/40",
+    "357/20",
+    "127/10"
    ],
    "answer": 0,
    "explain": [
     null,
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    },
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    {
+     "tag": "slip",
+     "why": "Slip."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 30.45 − 5.25 = 25.20",
+    "Farid's = 12.60",
+    "Mei Ling's = 17.85"
+   ],
+   "params": {
+    "S": 3045,
+    "d": 525,
+    "big": false
+   }
+  },
+  {
+   "id": "decima-c-28f651f49b",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 20.2 litres of water. The water is poured into bottles that each hold 250 ml. How many bottles can be completely filled?",
+   "options": [
+    "808",
+    "80",
+    "8",
+    "81"
+   ],
+   "optionValues": [
+    "808",
+    "80",
+    "8",
+    "81"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    null,
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    }
+   ],
+   "solution": [
+    "20.2 l = 20200 ml",
+    "20200 ÷ 250 = 80 remainder 200",
+    "Full bottles = 80"
+   ],
+   "params": {
+    "L": [
+     101,
+     5
+    ],
+    "ml": 250
+   }
+  },
+  {
+   "id": "decima-c-806f088073",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Siti used 4 pails of 1.50 litres each to water the plants, and then 0.78 litres were spilled. 0.62 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "6.16",
+    "2.90",
+    "7.40",
+    "6.62"
+   ],
+   "optionValues": [
+    "154/25",
+    "29/10",
+    "37/5",
+    "331/50"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    null,
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    }
+   ],
+   "solution": [
+    "Poured: 4 × 1.50 = 6.00 l",
+    "At first: 0.62 + 0.78 + 6.00 = 7.40 l"
+   ],
+   "params": {
+    "n": 4,
+    "c": 150,
+    "spill": 78,
+    "rem": 62
+   }
+  },
+  {
+   "id": "decima-c-9d7c377fe7",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Aisha had a ribbon 8.24 m long. Aisha cut 3 pieces of 1.58 m each. The rest was cut into pieces of 0.35 m each. How many of these shorter pieces were there?",
+   "options": [
+    "13",
+    "23",
+    "10",
+    "19"
+   ],
+   "optionValues": [
+    "13",
+    "23",
+    "10",
+    "19"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    null,
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    }
+   ],
+   "solution": [
+    "Long pieces: 3 × 1.58 = 4.74 m",
+    "Rest: 8.24 − 4.74 = 3.50 m",
+    "3.50 ÷ 0.35 = 10"
+   ],
+   "params": {
+    "T": 824,
+    "n": 3,
+    "pa": 158,
+    "pb": 35
+   }
+  },
+  {
+   "id": "decima-c-871d08b48e",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Wei Jie's rope and Aisha's rope have a total length of 11.67 m. Wei Jie's is 1.41 m more than Aisha's. What is the length of Aisha's rope, in m?",
+   "options": [
+    "5.83",
+    "6.54",
+    "5.13",
+    "5.23"
+   ],
+   "optionValues": [
+    "1167/200",
+    "327/50",
+    "513/100",
+    "523/100"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    },
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Slip."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 11.67 − 1.41 = 10.26",
+    "Aisha's = 5.13",
+    "Wei Jie's = 6.54"
+   ],
+   "params": {
+    "S": 1167,
+    "d": 141,
+    "big": false
+   }
+  },
+  {
+   "id": "decima-c-7e80aaa38f",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 6.8 litres of water. The water is poured into bottles that each hold 450 ml. How many bottles can be completely filled?",
+   "options": [
+    "1",
+    "16",
+    "151",
+    "15"
+   ],
+   "optionValues": [
+    "1",
+    "16",
+    "151",
+    "15"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    null
+   ],
+   "solution": [
+    "6.8 l = 6800 ml",
+    "6800 ÷ 450 = 15 remainder 50",
+    "Full bottles = 15"
+   ],
+   "params": {
+    "L": [
+     34,
+     5
+    ],
+    "ml": 450
+   }
+  },
+  {
+   "id": "decima-c-fa312da005",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Nurul used 3 pails of 2.55 litres each to water the plants, and then 0.25 litres were spilled. 1.79 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "9.69",
+    "4.59",
+    "9.44",
+    "6.11"
+   ],
+   "optionValues": [
+    "969/100",
+    "459/100",
+    "236/25",
+    "611/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    },
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    }
+   ],
+   "solution": [
+    "Poured: 3 × 2.55 = 7.65 l",
+    "At first: 1.79 + 0.25 + 7.65 = 9.69 l"
+   ],
+   "params": {
+    "n": 3,
+    "c": 255,
+    "spill": 25,
+    "rem": 179
+   }
+  },
+  {
+   "id": "decima-c-640360c51a",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Aisha had a ribbon 10.96 m long. Aisha cut 4 pieces of 2.39 m each. The rest was cut into pieces of 0.20 m each. How many of these shorter pieces were there?",
+   "options": [
+    "42",
+    "54",
+    "7",
+    "11"
+   ],
+   "optionValues": [
+    "42",
+    "54",
+    "7",
+    "11"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    null,
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    }
+   ],
+   "solution": [
+    "Long pieces: 4 × 2.39 = 9.56 m",
+    "Rest: 10.96 − 9.56 = 1.40 m",
+    "1.40 ÷ 0.20 = 7"
+   ],
+   "params": {
+    "T": 1096,
+    "n": 4,
+    "pa": 239,
+    "pb": 20
+   }
+  },
+  {
+   "id": "decima-c-f1f87a1fc2",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Wei Jie's rope and Kumar's rope have a total length of 41.97 m. Wei Jie's is 6.81 m more than Kumar's. What is the length of Wei Jie's rope, in m?",
+   "options": [
+    "17.58",
+    "35.16",
+    "20.98",
+    "24.39"
+   ],
+   "optionValues": [
+    "879/50",
+    "879/25",
+    "4197/200",
+    "2439/100"
+   ],
+   "answer": 3,
+   "explain": [
     {
      "tag": "gave_the_other_person",
      "why": "Gave the other person's amount."
@@ -14525,21 +13131,22 @@
     {
      "tag": "halved_the_total",
      "why": "Divided the total by 2 only."
-    }
+    },
+    null
    ],
    "solution": [
-    "Two equal parts: 23.90 − 2.84 = 21.06",
-    "Shu Fen's = 10.53",
-    "Daniel's = 13.37"
+    "Two equal parts: 41.97 − 6.81 = 35.16",
+    "Kumar's = 17.58",
+    "Wei Jie's = 24.39"
    ],
    "params": {
-    "S": 2390,
-    "d": 284,
+    "S": 4197,
+    "d": 681,
     "big": true
    }
   },
   {
-   "id": "decima-c-f1afe77a63",
+   "id": "decima-c-ad98c820d3",
    "topic": "math-decimals",
    "level": "competent",
    "template": "bottles_filled",
@@ -14547,21 +13154,25 @@
     "math-decimals-four-operations-with-decimals-02",
     "math-decimals-four-operations-with-decimals-06"
    ],
-   "stem": "A tank has 11.5 litres of water. The water is poured into bottles that each hold 150 ml. How many bottles can be completely filled?",
+   "stem": "A tank has 12.3 litres of water. The water is poured into bottles that each hold 350 ml. How many bottles can be completely filled?",
    "options": [
-    "77",
-    "7",
-    "766",
-    "76"
+    "351",
+    "36",
+    "3",
+    "35"
    ],
    "optionValues": [
-    "77",
-    "7",
-    "766",
-    "76"
+    "351",
+    "36",
+    "3",
+    "35"
    ],
    "answer": 3,
    "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
     {
      "tag": "rounded_up",
      "why": "Counted the bottle that is not full."
@@ -14570,27 +13181,23 @@
      "tag": "used_wrong_conversion",
      "why": "Used 1 litre = 100 ml."
     },
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 10 000 ml."
-    },
     null
    ],
    "solution": [
-    "11.5 l = 11500 ml",
-    "11500 ÷ 150 = 76 remainder 100",
-    "Full bottles = 76"
+    "12.3 l = 12300 ml",
+    "12300 ÷ 350 = 35 remainder 50",
+    "Full bottles = 35"
    ],
    "params": {
     "L": [
-     23,
-     2
+     123,
+     10
     ],
-    "ml": 150
+    "ml": 350
    }
   },
   {
-   "id": "decima-c-c097297fbb",
+   "id": "decima-c-0af98413fb",
    "topic": "math-decimals",
    "level": "competent",
    "template": "jug_backwards",
@@ -14598,48 +13205,48 @@
     "math-decimals-four-operations-with-decimals-01",
     "math-decimals-four-operations-with-decimals-02"
    ],
-   "stem": "A jug had some juice. Nurul poured 5 cups of 1.60 litres each, and then 0.53 litres were spilled. 1.62 litres were left in the jug. How many litres of juice were in the jug at first?",
+   "stem": "A container had some water. Nurul used 3 pails of 1.75 litres each to water the plants, and then 0.89 litres were spilled. 1.98 litres were left in the container. How many litres of water were in the container at first?",
    "options": [
-    "9.62",
-    "10.15",
-    "6.91",
-    "3.75"
+    "4.62",
+    "7.23",
+    "4.16",
+    "8.12"
    ],
    "optionValues": [
-    "481/50",
-    "203/20",
-    "691/100",
-    "15/4"
+    "231/50",
+    "723/100",
+    "104/25",
+    "203/25"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
     },
-    null,
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    },
     {
      "tag": "subtracted_instead_of_added",
      "why": "Subtracted when working backwards."
     },
-    {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
-    }
+    null
    ],
    "solution": [
-    "Poured: 5 × 1.60 = 8.00 l",
-    "At first: 1.62 + 0.53 + 8.00 = 10.15 l"
+    "Poured: 3 × 1.75 = 5.25 l",
+    "At first: 1.98 + 0.89 + 5.25 = 8.12 l"
    ],
    "params": {
-    "n": 5,
-    "c": 160,
-    "spill": 53,
-    "rem": 162
+    "n": 3,
+    "c": 175,
+    "spill": 89,
+    "rem": 198
    }
   },
   {
-   "id": "decima-c-fe20577871",
+   "id": "decima-c-c2440f2fda",
    "topic": "math-decimals",
    "level": "competent",
    "template": "ribbon_remaining_pieces",
@@ -14647,18 +13254,18 @@
     "math-decimals-four-operations-with-decimals-02",
     "math-decimals-four-operations-with-decimals-01"
    ],
-   "stem": "Wei Jie had a ribbon 9.36 m long. Wei Jie cut 4 pieces of 1.44 m each. The rest was cut into pieces of 0.45 m each. How many of these shorter pieces were there?",
+   "stem": "Kumar had a ribbon 6.68 m long. Kumar cut 3 pieces of 1.56 m each. The rest was cut into pieces of 0.25 m each. How many of these shorter pieces were there?",
    "options": [
+    "26",
     "20",
-    "17",
     "8",
-    "12"
+    "11"
    ],
    "optionValues": [
+    "26",
     "20",
-    "17",
     "8",
-    "12"
+    "11"
    ],
    "answer": 2,
    "explain": [
@@ -14677,19 +13284,19 @@
     }
    ],
    "solution": [
-    "Long pieces: 4 × 1.44 = 5.76 m",
-    "Rest: 9.36 − 5.76 = 3.60 m",
-    "3.60 ÷ 0.45 = 8"
+    "Long pieces: 3 × 1.56 = 4.68 m",
+    "Rest: 6.68 − 4.68 = 2.00 m",
+    "2.00 ÷ 0.25 = 8"
    ],
    "params": {
-    "T": 936,
-    "n": 4,
-    "pa": 144,
-    "pb": 45
+    "T": 668,
+    "n": 3,
+    "pa": 156,
+    "pb": 25
    }
   },
   {
-   "id": "decima-c-1574dd8bc5",
+   "id": "decima-c-cd2c2b32ab",
    "topic": "math-decimals",
    "level": "competent",
    "template": "sum_and_difference_decimals",
@@ -14697,20 +13304,617 @@
     "math-decimals-four-operations-with-decimals-01",
     "math-decimals-four-operations-with-decimals-02"
    ],
-   "stem": "Wei Jie's bag and Xin Yi's bag have a total mass of 19.62 kg. Wei Jie's is 3.90 kg more than Xin Yi's. What is the mass of Xin Yi's bag, in kg?",
+   "stem": "Hui Min's bag and Nurul's bag have a total mass of 33.58 kg. Hui Min's is 4.20 kg more than Nurul's. What is the mass of Hui Min's bag, in kg?",
    "options": [
-    "7.96",
-    "9.81",
-    "11.76",
-    "7.86"
+    "29.38",
+    "18.89",
+    "14.69",
+    "16.79"
    ],
    "optionValues": [
-    "199/25",
-    "981/100",
-    "294/25",
-    "393/50"
+    "1469/50",
+    "1889/100",
+    "1469/100",
+    "1679/100"
    ],
-   "answer": 3,
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    null,
+    {
+     "tag": "gave_the_other_person",
+     "why": "Gave the other person's amount."
+    },
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 33.58 − 4.20 = 29.38",
+    "Nurul's = 14.69",
+    "Hui Min's = 18.89"
+   ],
+   "params": {
+    "S": 3358,
+    "d": 420,
+    "big": true
+   }
+  },
+  {
+   "id": "decima-c-60af47da5f",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 22.3 litres of water. The water is poured into bottles that each hold 450 ml. How many bottles can be completely filled?",
+   "options": [
+    "49",
+    "495",
+    "50",
+    "4"
+   ],
+   "optionValues": [
+    "49",
+    "495",
+    "50",
+    "4"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    }
+   ],
+   "solution": [
+    "22.3 l = 22300 ml",
+    "22300 ÷ 450 = 49 remainder 250",
+    "Full bottles = 49"
+   ],
+   "params": {
+    "L": [
+     223,
+     10
+    ],
+    "ml": 450
+   }
+  },
+  {
+   "id": "decima-c-246f7d1cc4",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Wei Jie used 3 pails of 2.95 litres each to water the plants, and then 0.29 litres were spilled. 1.44 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "4.68",
+    "10.58",
+    "7.70",
+    "10.29"
+   ],
+   "optionValues": [
+    "117/25",
+    "529/50",
+    "77/10",
+    "1029/100"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    null,
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    }
+   ],
+   "solution": [
+    "Poured: 3 × 2.95 = 8.85 l",
+    "At first: 1.44 + 0.29 + 8.85 = 10.58 l"
+   ],
+   "params": {
+    "n": 3,
+    "c": 295,
+    "spill": 29,
+    "rem": 144
+   }
+  },
+  {
+   "id": "decima-c-ce9ffe9495",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Xin Yi had a ribbon 6.74 m long. Xin Yi cut 2 pieces of 2.02 m each. The rest was cut into pieces of 0.15 m each. How many of these shorter pieces were there?",
+   "options": [
+    "18",
+    "31",
+    "44",
+    "20"
+   ],
+   "optionValues": [
+    "18",
+    "31",
+    "44",
+    "20"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    }
+   ],
+   "solution": [
+    "Long pieces: 2 × 2.02 = 4.04 m",
+    "Rest: 6.74 − 4.04 = 2.70 m",
+    "2.70 ÷ 0.15 = 18"
+   ],
+   "params": {
+    "T": 674,
+    "n": 2,
+    "pa": 202,
+    "pb": 15
+   }
+  },
+  {
+   "id": "decima-c-be3861488c",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Arjun's rope and Hui Min's rope have a total length of 28.68 m. Arjun's is 2.10 m more than Hui Min's. What is the length of Hui Min's rope, in m?",
+   "options": [
+    "14.34",
+    "15.39",
+    "13.29",
+    "13.39"
+   ],
+   "optionValues": [
+    "717/50",
+    "1539/100",
+    "1329/100",
+    "1339/100"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    },
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Slip."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 28.68 − 2.10 = 26.58",
+    "Hui Min's = 13.29",
+    "Arjun's = 15.39"
+   ],
+   "params": {
+    "S": 2868,
+    "d": 210,
+    "big": false
+   }
+  },
+  {
+   "id": "decima-c-925c62104b",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 10.4 litres of water. The water is poured into bottles that each hold 250 ml. How many bottles can be completely filled?",
+   "options": [
+    "4",
+    "41",
+    "42",
+    "416"
+   ],
+   "optionValues": [
+    "4",
+    "41",
+    "42",
+    "416"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    null,
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    }
+   ],
+   "solution": [
+    "10.4 l = 10400 ml",
+    "10400 ÷ 250 = 41 remainder 150",
+    "Full bottles = 41"
+   ],
+   "params": {
+    "L": [
+     52,
+     5
+    ],
+    "ml": 250
+   }
+  },
+  {
+   "id": "decima-c-936ae6a91c",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Jun Wei used 3 pails of 1.10 litres each to water the plants, and then 0.30 litres were spilled. 1.13 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "4.73",
+    "2.47",
+    "4.43",
+    "2.53"
+   ],
+   "optionValues": [
+    "473/100",
+    "247/100",
+    "443/100",
+    "253/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    },
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    }
+   ],
+   "solution": [
+    "Poured: 3 × 1.10 = 3.30 l",
+    "At first: 1.13 + 0.30 + 3.30 = 4.73 l"
+   ],
+   "params": {
+    "n": 3,
+    "c": 110,
+    "spill": 30,
+    "rem": 113
+   }
+  },
+  {
+   "id": "decima-c-fc1533a0fe",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Hui Min had a ribbon 7.37 m long. Hui Min cut 2 pieces of 1.66 m each. The rest was cut into pieces of 0.45 m each. How many of these shorter pieces were there?",
+   "options": [
+    "12",
+    "9",
+    "11",
+    "16"
+   ],
+   "optionValues": [
+    "12",
+    "9",
+    "11",
+    "16"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    },
+    null,
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    }
+   ],
+   "solution": [
+    "Long pieces: 2 × 1.66 = 3.32 m",
+    "Rest: 7.37 − 3.32 = 4.05 m",
+    "4.05 ÷ 0.45 = 9"
+   ],
+   "params": {
+    "T": 737,
+    "n": 2,
+    "pa": 166,
+    "pb": 45
+   }
+  },
+  {
+   "id": "decima-c-ca64892fd0",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Priya's rope and Wei Jie's rope have a total length of 12.45 m. Priya's is 6.99 m more than Wei Jie's. What is the length of Priya's rope, in m?",
+   "options": [
+    "9.72",
+    "6.22",
+    "5.46",
+    "2.73"
+   ],
+   "optionValues": [
+    "243/25",
+    "249/40",
+    "273/50",
+    "273/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    },
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    {
+     "tag": "gave_the_other_person",
+     "why": "Gave the other person's amount."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 12.45 − 6.99 = 5.46",
+    "Wei Jie's = 2.73",
+    "Priya's = 9.72"
+   ],
+   "params": {
+    "S": 1245,
+    "d": 699,
+    "big": true
+   }
+  },
+  {
+   "id": "decima-c-329cd9263d",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 22.7 litres of water. The water is poured into bottles that each hold 120 ml. How many bottles can be completely filled?",
+   "options": [
+    "18",
+    "189",
+    "1891",
+    "190"
+   ],
+   "optionValues": [
+    "18",
+    "189",
+    "1891",
+    "190"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    null,
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    }
+   ],
+   "solution": [
+    "22.7 l = 22700 ml",
+    "22700 ÷ 120 = 189 remainder 20",
+    "Full bottles = 189"
+   ],
+   "params": {
+    "L": [
+     227,
+     10
+    ],
+    "ml": 120
+   }
+  },
+  {
+   "id": "decima-c-430bc382dd",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Priya used 4 pails of 2.85 litres each to water the plants, and then 0.44 litres were spilled. 1.09 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "12.93",
+    "10.75",
+    "12.49",
+    "4.38"
+   ],
+   "optionValues": [
+    "1293/100",
+    "43/4",
+    "1249/100",
+    "219/50"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    },
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    }
+   ],
+   "solution": [
+    "Poured: 4 × 2.85 = 11.40 l",
+    "At first: 1.09 + 0.44 + 11.40 = 12.93 l"
+   ],
+   "params": {
+    "n": 4,
+    "c": 285,
+    "spill": 44,
+    "rem": 109
+   }
+  },
+  {
+   "id": "decima-c-3dd7792960",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Daniel had a ribbon 9.33 m long. Daniel cut 3 pieces of 2.06 m each. The rest was cut into pieces of 0.45 m each. How many of these shorter pieces were there?",
+   "options": [
+    "7",
+    "10",
+    "20",
+    "16"
+   ],
+   "optionValues": [
+    "7",
+    "10",
+    "20",
+    "16"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    }
+   ],
+   "solution": [
+    "Long pieces: 3 × 2.06 = 6.18 m",
+    "Rest: 9.33 − 6.18 = 3.15 m",
+    "3.15 ÷ 0.45 = 7"
+   ],
+   "params": {
+    "T": 933,
+    "n": 3,
+    "pa": 206,
+    "pb": 45
+   }
+  },
+  {
+   "id": "decima-c-e43eb83d3d",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Farid's rope and Aisha's rope have a total length of 43.01 m. Farid's is 7.87 m more than Aisha's. What is the length of Aisha's rope, in m?",
+   "options": [
+    "17.67",
+    "21.50",
+    "17.57",
+    "25.44"
+   ],
+   "optionValues": [
+    "1767/100",
+    "4301/200",
+    "1757/100",
+    "636/25"
+   ],
+   "answer": 2,
    "explain": [
     {
      "tag": "slip",
@@ -14720,25 +13924,25 @@
      "tag": "halved_the_total",
      "why": "Divided the total by 2 only."
     },
+    null,
     {
      "tag": "subtracted_without_halving",
      "why": "Subtracted the difference without halving."
-    },
-    null
+    }
    ],
    "solution": [
-    "Two equal parts: 19.62 − 3.90 = 15.72",
-    "Xin Yi's = 7.86",
-    "Wei Jie's = 11.76"
+    "Two equal parts: 43.01 − 7.87 = 35.14",
+    "Aisha's = 17.57",
+    "Farid's = 25.44"
    ],
    "params": {
-    "S": 1962,
-    "d": 390,
+    "S": 4301,
+    "d": 787,
     "big": false
    }
   },
   {
-   "id": "decima-c-ac8749e72d",
+   "id": "decima-c-a80ea87006",
    "topic": "math-decimals",
    "level": "competent",
    "template": "bottles_filled",
@@ -14746,21 +13950,26 @@
     "math-decimals-four-operations-with-decimals-02",
     "math-decimals-four-operations-with-decimals-06"
    ],
-   "stem": "A tank has 14.9 litres of water. The water is poured into bottles that each hold 180 ml. How many bottles can be completely filled?",
+   "stem": "A tank has 19.7 litres of water. The water is poured into bottles that each hold 350 ml. How many bottles can be completely filled?",
    "options": [
-    "83",
-    "827",
-    "82",
-    "8"
+    "56",
+    "5",
+    "57",
+    "562"
    ],
    "optionValues": [
-    "83",
-    "827",
-    "82",
-    "8"
+    "56",
+    "5",
+    "57",
+    "562"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
     {
      "tag": "rounded_up",
      "why": "Counted the bottle that is not full."
@@ -14768,28 +13977,23 @@
     {
      "tag": "used_wrong_conversion",
      "why": "Used 1 litre = 10 000 ml."
-    },
-    null,
-    {
-     "tag": "used_wrong_conversion",
-     "why": "Used 1 litre = 100 ml."
     }
    ],
    "solution": [
-    "14.9 l = 14900 ml",
-    "14900 ÷ 180 = 82 remainder 140",
-    "Full bottles = 82"
+    "19.7 l = 19700 ml",
+    "19700 ÷ 350 = 56 remainder 100",
+    "Full bottles = 56"
    ],
    "params": {
     "L": [
-     149,
+     197,
      10
     ],
-    "ml": 180
+    "ml": 350
    }
   },
   {
-   "id": "decima-c-1d2fe8671e",
+   "id": "decima-c-c91527f2d1",
    "topic": "math-decimals",
    "level": "competent",
    "template": "jug_backwards",
@@ -14797,28 +14001,28 @@
     "math-decimals-four-operations-with-decimals-01",
     "math-decimals-four-operations-with-decimals-02"
    ],
-   "stem": "A jug had some juice. Nurul poured 3 cups of 2.10 litres each, and then 0.43 litres were spilled. 1.29 litres were left in the jug. How many litres of juice were in the jug at first?",
+   "stem": "A container had some water. Daniel used 6 pails of 1.25 litres each to water the plants, and then 0.70 litres were spilled. 1.65 litres were left in the container. How many litres of water were in the container at first?",
    "options": [
-    "3.82",
-    "7.59",
-    "5.44",
-    "8.02"
+    "9.15",
+    "3.60",
+    "6.55",
+    "9.85"
    ],
    "optionValues": [
-    "191/50",
-    "759/100",
-    "136/25",
-    "401/50"
+    "183/20",
+    "18/5",
+    "131/20",
+    "197/20"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "forgot_to_multiply_cups",
-     "why": "Added the amount of only one cup."
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
     },
     {
-     "tag": "forgot_the_spill",
-     "why": "Forgot the juice that was spilled."
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
     },
     {
      "tag": "subtracted_instead_of_added",
@@ -14827,14 +14031,810 @@
     null
    ],
    "solution": [
-    "Poured: 3 × 2.10 = 6.30 l",
-    "At first: 1.29 + 0.43 + 6.30 = 8.02 l"
+    "Poured: 6 × 1.25 = 7.50 l",
+    "At first: 1.65 + 0.70 + 7.50 = 9.85 l"
+   ],
+   "params": {
+    "n": 6,
+    "c": 125,
+    "spill": 70,
+    "rem": 165
+   }
+  },
+  {
+   "id": "decima-c-17801abb0d",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Ali had a ribbon 10.00 m long. Ali cut 5 pieces of 1.64 m each. The rest was cut into pieces of 0.15 m each. How many of these shorter pieces were there?",
+   "options": [
+    "12",
+    "17",
+    "66",
+    "55"
+   ],
+   "optionValues": [
+    "12",
+    "17",
+    "66",
+    "55"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    }
+   ],
+   "solution": [
+    "Long pieces: 5 × 1.64 = 8.20 m",
+    "Rest: 10.00 − 8.20 = 1.80 m",
+    "1.80 ÷ 0.15 = 12"
+   ],
+   "params": {
+    "T": 1000,
+    "n": 5,
+    "pa": 164,
+    "pb": 15
+   }
+  },
+  {
+   "id": "decima-c-404dab0f93",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Kumar's rope and Arjun's rope have a total length of 40.92 m. Kumar's is 5.66 m more than Arjun's. What is the length of Kumar's rope, in m?",
+   "options": [
+    "35.26",
+    "23.29",
+    "20.46",
+    "17.63"
+   ],
+   "optionValues": [
+    "1763/50",
+    "2329/100",
+    "1023/50",
+    "1763/100"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    null,
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    },
+    {
+     "tag": "gave_the_other_person",
+     "why": "Gave the other person's amount."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 40.92 − 5.66 = 35.26",
+    "Arjun's = 17.63",
+    "Kumar's = 23.29"
+   ],
+   "params": {
+    "S": 4092,
+    "d": 566,
+    "big": true
+   }
+  },
+  {
+   "id": "decima-c-0751b1fb7d",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 10.4 litres of water. The water is poured into bottles that each hold 150 ml. How many bottles can be completely filled?",
+   "options": [
+    "69",
+    "6",
+    "693",
+    "70"
+   ],
+   "optionValues": [
+    "69",
+    "6",
+    "693",
+    "70"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    }
+   ],
+   "solution": [
+    "10.4 l = 10400 ml",
+    "10400 ÷ 150 = 69 remainder 50",
+    "Full bottles = 69"
+   ],
+   "params": {
+    "L": [
+     52,
+     5
+    ],
+    "ml": 150
+   }
+  },
+  {
+   "id": "decima-c-d68f547f8d",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Kumar used 6 pails of 2.05 litres each to water the plants, and then 0.33 litres were spilled. 1.33 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "3.71",
+    "13.96",
+    "13.63",
+    "11.30"
+   ],
+   "optionValues": [
+    "371/100",
+    "349/25",
+    "1363/100",
+    "113/10"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    null,
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    },
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    }
+   ],
+   "solution": [
+    "Poured: 6 × 2.05 = 12.30 l",
+    "At first: 1.33 + 0.33 + 12.30 = 13.96 l"
+   ],
+   "params": {
+    "n": 6,
+    "c": 205,
+    "spill": 33,
+    "rem": 133
+   }
+  },
+  {
+   "id": "decima-c-96f493d2c2",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Mei Ling had a ribbon 7.52 m long. Mei Ling cut 4 pieces of 1.13 m each. The rest was cut into pieces of 0.25 m each. How many of these shorter pieces were there?",
+   "options": [
+    "25",
+    "30",
+    "16",
+    "12"
+   ],
+   "optionValues": [
+    "25",
+    "30",
+    "16",
+    "12"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    },
+    null
+   ],
+   "solution": [
+    "Long pieces: 4 × 1.13 = 4.52 m",
+    "Rest: 7.52 − 4.52 = 3.00 m",
+    "3.00 ÷ 0.25 = 12"
+   ],
+   "params": {
+    "T": 752,
+    "n": 4,
+    "pa": 113,
+    "pb": 25
+   }
+  },
+  {
+   "id": "decima-c-c55d40433e",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Xin Yi's rope and Hui Min's rope have a total length of 14.34 m. Xin Yi's is 2.20 m more than Hui Min's. What is the length of Hui Min's rope, in m?",
+   "options": [
+    "8.27",
+    "6.07",
+    "6.17",
+    "7.17"
+   ],
+   "optionValues": [
+    "827/100",
+    "607/100",
+    "617/100",
+    "717/100"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Slip."
+    },
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 14.34 − 2.20 = 12.14",
+    "Hui Min's = 6.07",
+    "Xin Yi's = 8.27"
+   ],
+   "params": {
+    "S": 1434,
+    "d": 220,
+    "big": false
+   }
+  },
+  {
+   "id": "decima-c-36733214b7",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 17.2 litres of water. The water is poured into bottles that each hold 180 ml. How many bottles can be completely filled?",
+   "options": [
+    "96",
+    "9",
+    "955",
+    "95"
+   ],
+   "optionValues": [
+    "96",
+    "9",
+    "955",
+    "95"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    null
+   ],
+   "solution": [
+    "17.2 l = 17200 ml",
+    "17200 ÷ 180 = 95 remainder 100",
+    "Full bottles = 95"
+   ],
+   "params": {
+    "L": [
+     86,
+     5
+    ],
+    "ml": 180
+   }
+  },
+  {
+   "id": "decima-c-113f11797a",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Nurul used 5 pails of 2.20 litres each to water the plants, and then 0.23 litres were spilled. 2.38 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "13.61",
+    "8.85",
+    "4.81",
+    "13.38"
+   ],
+   "optionValues": [
+    "1361/100",
+    "177/20",
+    "481/100",
+    "669/50"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    }
+   ],
+   "solution": [
+    "Poured: 5 × 2.20 = 11.00 l",
+    "At first: 2.38 + 0.23 + 11.00 = 13.61 l"
+   ],
+   "params": {
+    "n": 5,
+    "c": 220,
+    "spill": 23,
+    "rem": 238
+   }
+  },
+  {
+   "id": "decima-c-3945ed1f8d",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Shu Fen had a ribbon 7.21 m long. Shu Fen cut 2 pieces of 2.33 m each. The rest was cut into pieces of 0.15 m each. How many of these shorter pieces were there?",
+   "options": [
+    "17",
+    "19",
+    "32",
+    "48"
+   ],
+   "optionValues": [
+    "17",
+    "19",
+    "32",
+    "48"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    },
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    },
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    }
+   ],
+   "solution": [
+    "Long pieces: 2 × 2.33 = 4.66 m",
+    "Rest: 7.21 − 4.66 = 2.55 m",
+    "2.55 ÷ 0.15 = 17"
+   ],
+   "params": {
+    "T": 721,
+    "n": 2,
+    "pa": 233,
+    "pb": 15
+   }
+  },
+  {
+   "id": "decima-c-fddb0e6138",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Wei Jie's rope and Jun Wei's rope have a total length of 15.00 m. Wei Jie's is 4.48 m more than Jun Wei's. What is the length of Jun Wei's rope, in m?",
+   "options": [
+    "9.74",
+    "5.26",
+    "5.36",
+    "7.50"
+   ],
+   "optionValues": [
+    "487/50",
+    "263/50",
+    "134/25",
+    "15/2"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Slip."
+    },
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 15.00 − 4.48 = 10.52",
+    "Jun Wei's = 5.26",
+    "Wei Jie's = 9.74"
+   ],
+   "params": {
+    "S": 1500,
+    "d": 448,
+    "big": false
+   }
+  },
+  {
+   "id": "decima-c-0cf7530b57",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 15.1 litres of water. The water is poured into bottles that each hold 180 ml. How many bottles can be completely filled?",
+   "options": [
+    "838",
+    "83",
+    "8",
+    "84"
+   ],
+   "optionValues": [
+    "838",
+    "83",
+    "8",
+    "84"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    null,
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    }
+   ],
+   "solution": [
+    "15.1 l = 15100 ml",
+    "15100 ÷ 180 = 83 remainder 160",
+    "Full bottles = 83"
+   ],
+   "params": {
+    "L": [
+     151,
+     10
+    ],
+    "ml": 180
+   }
+  },
+  {
+   "id": "decima-c-be468288f5",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Farid used 6 pails of 1.65 litres each to water the plants, and then 0.61 litres were spilled. 0.64 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "2.90",
+    "9.87",
+    "10.54",
+    "11.15"
+   ],
+   "optionValues": [
+    "29/10",
+    "987/100",
+    "527/50",
+    "223/20"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    },
+    null
+   ],
+   "solution": [
+    "Poured: 6 × 1.65 = 9.90 l",
+    "At first: 0.64 + 0.61 + 9.90 = 11.15 l"
+   ],
+   "params": {
+    "n": 6,
+    "c": 165,
+    "spill": 61,
+    "rem": 64
+   }
+  },
+  {
+   "id": "decima-c-6bd81e6ef3",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "ribbon_remaining_pieces",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-01"
+   ],
+   "stem": "Nurul had a ribbon 13.93 m long. Nurul cut 4 pieces of 2.42 m each. The rest was cut into pieces of 0.25 m each. How many of these shorter pieces were there?",
+   "options": [
+    "17",
+    "55",
+    "46",
+    "21"
+   ],
+   "optionValues": [
+    "17",
+    "55",
+    "46",
+    "21"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "forgot_the_first_cuts",
+     "why": "Divided the whole length by the short piece."
+    },
+    {
+     "tag": "subtracted_one_long_piece_only",
+     "why": "Subtracted only one long piece."
+    },
+    {
+     "tag": "added_the_pieces",
+     "why": "Added the numbers of pieces."
+    }
+   ],
+   "solution": [
+    "Long pieces: 4 × 2.42 = 9.68 m",
+    "Rest: 13.93 − 9.68 = 4.25 m",
+    "4.25 ÷ 0.25 = 17"
+   ],
+   "params": {
+    "T": 1393,
+    "n": 4,
+    "pa": 242,
+    "pb": 25
+   }
+  },
+  {
+   "id": "decima-c-2de1d43f57",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "sum_and_difference_decimals",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "Xin Yi's rope and Ali's rope have a total length of 35.98 m. Xin Yi's is 3.50 m more than Ali's. What is the length of Ali's rope, in m?",
+   "options": [
+    "16.34",
+    "16.24",
+    "19.74",
+    "17.99"
+   ],
+   "optionValues": [
+    "817/50",
+    "406/25",
+    "987/50",
+    "1799/100"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "slip",
+     "why": "Slip."
+    },
+    null,
+    {
+     "tag": "subtracted_without_halving",
+     "why": "Subtracted the difference without halving."
+    },
+    {
+     "tag": "halved_the_total",
+     "why": "Divided the total by 2 only."
+    }
+   ],
+   "solution": [
+    "Two equal parts: 35.98 − 3.50 = 32.48",
+    "Ali's = 16.24",
+    "Xin Yi's = 19.74"
+   ],
+   "params": {
+    "S": 3598,
+    "d": 350,
+    "big": false
+   }
+  },
+  {
+   "id": "decima-c-772de463bb",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "bottles_filled",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-02",
+    "math-decimals-four-operations-with-decimals-06"
+   ],
+   "stem": "A tank has 17.4 litres of water. The water is poured into bottles that each hold 250 ml. How many bottles can be completely filled?",
+   "options": [
+    "696",
+    "6",
+    "70",
+    "69"
+   ],
+   "optionValues": [
+    "696",
+    "6",
+    "70",
+    "69"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 10 000 ml."
+    },
+    {
+     "tag": "used_wrong_conversion",
+     "why": "Used 1 litre = 100 ml."
+    },
+    {
+     "tag": "rounded_up",
+     "why": "Counted the bottle that is not full."
+    },
+    null
+   ],
+   "solution": [
+    "17.4 l = 17400 ml",
+    "17400 ÷ 250 = 69 remainder 150",
+    "Full bottles = 69"
+   ],
+   "params": {
+    "L": [
+     87,
+     5
+    ],
+    "ml": 250
+   }
+  },
+  {
+   "id": "decima-c-f291068349",
+   "topic": "math-decimals",
+   "level": "competent",
+   "template": "jug_backwards",
+   "outcomes": [
+    "math-decimals-four-operations-with-decimals-01",
+    "math-decimals-four-operations-with-decimals-02"
+   ],
+   "stem": "A container had some water. Wei Jie used 3 pails of 1.35 litres each to water the plants, and then 0.53 litres were spilled. 1.49 litres were left in the container. How many litres of water were in the container at first?",
+   "options": [
+    "3.37",
+    "3.09",
+    "6.07",
+    "5.54"
+   ],
+   "optionValues": [
+    "337/100",
+    "309/100",
+    "607/100",
+    "277/50"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "forgot_to_multiply_cups",
+     "why": "Added the amount of only one pail."
+    },
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted when working backwards."
+    },
+    null,
+    {
+     "tag": "forgot_the_spill",
+     "why": "Forgot the water that was spilled."
+    }
+   ],
+   "solution": [
+    "Poured: 3 × 1.35 = 4.05 l",
+    "At first: 1.49 + 0.53 + 4.05 = 6.07 l"
    ],
    "params": {
     "n": 3,
-    "c": 210,
-    "spill": 43,
-    "rem": 129
+    "c": 135,
+    "spill": 53,
+    "rem": 149
    }
   }
  ]

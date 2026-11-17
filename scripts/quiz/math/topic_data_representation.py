@@ -185,7 +185,7 @@ def picture_read(r):
              (h // 2 * key if h % 2 else None, "ignored_half_symbol", "Left out the half symbol.")]
     stem = f"{lead(r, 'picture graph', c['intro'])} {c['one'].format(a=labs[i])}"
     return build(picture_read, stem, ans, wrong,
-                 [f"Each symbol stands for {key}.", f"{labs[i]} has {h / 2:g} symbols.", f"{h / 2:g} x {key} = {ans}"],
+                 [f"Each symbol stands for {key}.", f"{labs[i]} has {plural(f'{h / 2:g}', 'symbol')}.", f"{h / 2:g} x {key} = {ans}"],
                  {"labs": labs, "counts": counts, "key": key, "i": i}, whole=True, unit_size=key,
                  figure=picture_graph(labs, counts, key, unit_name, c["title"]))
 
@@ -454,7 +454,7 @@ def picture_total(r):
     n = r.randint(4, 5)
     labs = r.sample(c["cats"], n)
     key = r.choice([2, 4, 5, 10])
-    halves = r.sample(range(2, 15), n)
+    halves = r.sample(range(2, 15), n) if key % 2 == 0 else r.sample(range(2, 15, 2), n)  # whole counts only
     counts = [h * key // 2 for h in halves]
     mode = r.choice(["tot", "diff"])
     i, j = r.sample(range(n), 2)
@@ -969,7 +969,7 @@ def bar_profit(r):
     ans = (vals[i] + vals[j]) * price - 2 * cost
     if ans <= 0:
         return None
-    stem = (f"{lead(r, 'bar graph', c['intro'])} {c['sell'][0].format(p=price)} The cost of running the business is "
+    stem = (f"{lead(r, 'bar graph', c['intro'])} {c['sell'][0].format(p=price)} The expenses are "
             f"${cost} each {c['per']}. What was the total profit for {labs[i]} and {labs[j]}?")
     rev = (vals[i] + vals[j]) * price
     wrong = [(rev - cost, "cost_counted_once", f"Took away the cost for one {c['per']} only."),
@@ -1024,7 +1024,7 @@ PCT_OK = [(a, b) for a, b in PCT_PAIRS if (100 * (b - a)) % a == 0]
 @template(T, "competent", MIX)
 def line_pct_increase(r):
     """Percentage increase between two readings of a line graph."""
-    c = r.choice(LINE[:4])
+    c = r.choice([LINE[0], LINE[1], LINE[3]])  # not temperature: a % change of a deg C reading is meaningless
     step = r.choice(c["steps"])
     n = len(c["xs"])
     a, b = r.choice(PCT_OK)

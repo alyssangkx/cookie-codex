@@ -7,12 +7,12 @@ T = "math-data-analysis"
 O = "math-data-analysis-average-of-a-set-of-data-"
 AVG, REL = O + "01", O + "02"
 
-CONTEXTS = [("the time taken by a pupil to run 100 m on each of the days", "seconds"),
-            ("the marks scored in a test by a group of pupils", "marks"),
-            ("the masses of a group of parcels", "kg"),
-            ("the heights of a group of plants", "cm"),
-            ("the amounts of pocket money saved by a group of children", "dollars"),
-            ("the numbers of books read by a group of pupils in a month", "books")]
+CONTEXTS = [("the time taken by a pupil to run 100 m on each of the days", "seconds", (14, 24)),
+            ("the marks scored in a test by a group of pupils", "marks", (30, 95)),
+            ("the masses of a group of parcels", "kg", (8, 60)),
+            ("the heights of a group of plants", "cm", (20, 150)),
+            ("the amounts of pocket money saved by a group of children", "dollars", (15, 90)),
+            ("the numbers of books read by a group of pupils in a month", "books", (3, 25))]
 
 
 def brute(pred, hi=20000):
@@ -42,12 +42,11 @@ def sample_list(r, n, lo, hi):
 def average_direct(r):
     """math-pat-average-direct"""
     n = r.choice([4, 5, 6])
-    lo, hi = r.choice([(8, 30), (40, 95), (100, 250)])
+    what, u, (lo, hi) = r.choice(CONTEXTS)
     xs = sample_list(r, n, lo, hi)
     avg = sum(xs) // n
-    what, u = r.choice(CONTEXTS)
     if r.random() < 0.5:
-        stem = f"The following numbers show {what}: {listing(xs)}. What is the average of these numbers?"
+        stem = f"The following numbers show {what} (in {u}): {listing(xs)}. What is the average of these numbers?"
     else:
         stem = f"What is the average of {listing(xs)}?"
     med = sorted(xs)[n // 2] if n % 2 else F(sorted(xs)[n // 2 - 1] + sorted(xs)[n // 2], 2)
@@ -200,12 +199,15 @@ def _(q):
 @template(T, "intermediate", REL)
 def item_joins_or_leaves(r):
     n = r.randint(4, 9)
-    A = r.randint(30, 70)
     join = r.random() < 0.5
     nm = r.choice(NAMES)
-    th = r.choice([("pupils", "mass", "kg"), ("players", "height", "cm"), ("workers", "age", "years")])
+    th = r.choice([("pupils", "mass", "kg", (34, 46), (28, 60)),
+                   ("players", "height", "cm", (150, 168), (140, 185)),
+                   ("workers", "age", "years", (30, 45), (22, 62))])
+    A = r.randint(*th[3])
+    lo_v, hi_v = th[4]
     if join:
-        newv = r.randint(A + 3, A + 40)
+        newv = r.randint(max(lo_v, A + 3), hi_v)
         A2 = F(A * n + newv, n + 1)
         if A2.denominator != 1:
             return None
@@ -219,7 +221,7 @@ def item_joins_or_leaves(r):
                  *slipn(ans, 1), *slipn(ans, 2)]
         steps = [f"Old total = {A} × {n} = {A * n}", f"New total = {A2} × {n + 1} = {A2 * (n + 1)}", f"New person = {A2 * (n + 1)} − {A * n} = {ans}"]
     else:
-        gone = r.randint(max(5, A - 30), A + 30)
+        gone = r.randint(lo_v, hi_v)
         A2 = F(A * n - gone, n - 1)
         if A2.denominator != 1 or gone == A:
             return None
@@ -232,7 +234,8 @@ def item_joins_or_leaves(r):
                  (A * n - A2 * n, "used_wrong_count", f"Used {n} instead of {n - 1} for the new total."),
                  *slipn(ans, 1), *slipn(ans, 2)]
         steps = [f"Old total = {A} × {n} = {A * n}", f"New total = {A2} × {n - 1} = {A2 * (n - 1)}", f"Person who left = {A * n} − {A2 * (n - 1)} = {ans}"]
-    return build(item_joins_or_leaves, stem, ans, wrong, steps, {"n": n, "A": A, "A2": A2, "join": join}, unit(th[2]),
+    return build(item_joins_or_leaves, stem, ans, wrong, steps, {"n": n, "A": A, "A2": A2, "join": join},
+                 lambda x: f"{frac(x)} {th[2][:-1] if th[2] == 'years' and x == 1 else th[2]}",
                  whole=True, auto_slips=False)
 
 

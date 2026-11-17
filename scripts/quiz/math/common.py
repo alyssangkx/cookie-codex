@@ -6,6 +6,7 @@ It returns the stem, the correct value, a priority-ordered list of wrong answers
 Each template also has a .check(params) that recomputes the answer by a different
 route (brute force or plug-back), used by check_math.py.
 """
+import re
 from fractions import Fraction as F
 from math import gcd, lcm
 
@@ -49,6 +50,26 @@ def frac(x, mixed=True):
 def money(x):
     x = F(x)
     return f"${x.numerator}" if x.denominator == 1 else f"${float(x):.2f}"
+
+
+def plural(n, word, many=None):
+    """'1 unit', '2 units'. Pass many= for irregular plurals. n may be int or Fraction (1 only is singular)."""
+    return f"{n} {word if F(n) == 1 else (many or word + 's')}"
+
+
+def ordinal(n):
+    """1st, 2nd, 3rd, 4th, 11th, 12th, 22nd."""
+    n = int(n)
+    suf = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suf}"
+
+
+def a_an(n_or_word):
+    """'a' or 'an' by how it is spoken: an 8, an 11, an 18, an 80, but a 9, a 100."""
+    s = str(n_or_word).strip().split()[0].replace(",", "")
+    if s[:1].isdigit():
+        return "an" if s[0] == "8" or s in ("11", "18") else "a"
+    return "an" if s[:1].lower() in "aeiou" else "a"
 
 
 def unit(u):
@@ -113,7 +134,21 @@ def build(fn, stem, correct, wrong, steps, params, show=frac, unit_size=None, wh
             "params": params, "figure": figure}
 
 
+_ONE_PLURAL = re.compile(r"(?<![\d/.×−+*-] )(?<![\d/.×−+*-])\b1 ((?:compass )?)(pens|parts|pages|faces|units|squares|hours|minutes|litres|"
+                         r"shapes|slices|wholes|divisions|vertices|cents|weeks|points|sums|steps|marks)\b")
+
+
+def fix_one(text):
+    """Safety net: '1 units' -> '1 unit' (a bare 1 only, not 1/2, 2 1/4 or 1 × 1 squares)."""
+    if not isinstance(text, str):
+        return text
+    return _ONE_PLURAL.sub(lambda m: "1 " + m.group(1) + m.group(2)[:-1] if m.group(2) != "vertices" else "1 " + m.group(1) + "vertex", text)
+
+
 def finalize(q, fn, rng, qid):
+    q = {**q, "stem": fix_one(q["stem"]), "steps": [fix_one(x) for x in q["steps"]],
+         "correct": (fix_one(q["correct"][0]), q["correct"][1]),
+         "wrong": [(fix_one(d), v, t, fix_one(w)) for d, v, t, w in q["wrong"]]}
     opts = [(*q["correct"], None)] + [(d, v, {"tag": t, "why": w}) for d, v, t, w in q["wrong"]]
     rng.shuffle(opts)
     if sorted(d for d, _, _ in opts) == ["A", "B", "C", "D"]:
@@ -144,4 +179,4 @@ def coprime_pair(rng, lo, hi, proper=True):
 
 
 __all__ = ["F", "gcd", "lcm", "template", "checker", "build", "finalize", "frac", "money",
-           "unit", "two_names", "coprime_pair", "REGISTRY", "NAMES"]
+           "unit", "plural", "ordinal", "a_an", "two_names", "coprime_pair", "REGISTRY", "NAMES"]

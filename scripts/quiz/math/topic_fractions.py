@@ -513,7 +513,7 @@ def share_remainder(r):
     rest = L * F(b - a, b)
     ans = rest / n
     name = r.choice(NAMES)
-    stem = (f"{name} used {a}/{b} of a {L} m long rope. The rest of the rope was cut into {n} equal pieces. "
+    stem = (f"{name} used {a}/{b} of {a_an(L)} {L} m long rope. The rest of the rope was cut into {n} equal pieces. "
             f"How long is each piece?")
     return build(share_remainder, stem, ans, [
         (L * F(a, b) / n, "shared_the_used_part", f"Shared the {a}/{b} that was used instead of the rest."),
@@ -1020,7 +1020,7 @@ def division_as_fraction(r):
     k = r.randint(2, 12)
     if k % n == 0:
         return None
-    thing = r.choice(["pizzas", "cakes", "loaves of bread", "watermelons"])
+    thing, sing = r.choice([("pizzas", "pizza"), ("cakes", "cake"), ("loaves of bread", "loaf of bread"), ("watermelons", "watermelon")])
     stem = f"{k} {thing} are shared equally among {n} children. How many {thing} does each child get?"
     ans = F(k, n)
     return build(division_as_fraction, stem, ans, [
@@ -1028,7 +1028,7 @@ def division_as_fraction(r):
         (F(k // n) if k // n else None, "dropped_the_remainder", "Gave only the whole number part."),
         (F(k, n * 2), "halved_wrongly", "Divided by twice the number of children."),
         (ans + 1, "slip_converting_to_mixed_number", "Made a slip changing the improper fraction to a mixed number."),
-    ], [f"{k} ÷ {n} = {k}/{n}", f"= {frac(ans)}"], {"k": k, "n": n}, unit(thing.split()[0] if ' ' in thing else thing),
+    ], [f"{k} ÷ {n} = {k}/{n}", f"= {frac(ans)}"], {"k": k, "n": n}, lambda x: f"{frac(x)} {sing.split()[0] if x == 1 else thing.split()[0]}",
         auto_slips=False)
 
 
@@ -1198,7 +1198,7 @@ def equivalent_bar_parts(r):
             f"{N} equal parts. How many parts of the bottom bar must be shaded to show a fraction equal to {a}/{n}?")
     fig = fraction_bars([("Top", n, a), ("Bottom", N, None)], title=f"Top bar with {a} of {n} parts shaded, bottom bar with {N} parts")
     return build(equivalent_bar_parts, stem, a * k, [
-        (a, "kept_the_same_numerator", f"Shaded {a} parts, the same number as the top bar, but the parts are smaller."),
+        (a, "kept_the_same_numerator", f"Shaded {plural(a, 'part')}, the same number as the top bar, but the parts are smaller."),
         (a + N - n, "added_the_same_to_both", f"Added {N - n} to both the numerator and the denominator."),
         (N - a * k, "gave_unshaded_parts", "Found the number of parts NOT shaded."),
         (a * k + 1, "careless_slip", "Counted one part too many."),
@@ -1252,7 +1252,7 @@ def equivalent_two_strips(r):
     b = r.randint(1, a * k - 1)
     name = r.choice(NAMES)
     stem = (f"{name} has two strips of paper of the same length. Strip A is cut into {n} equal parts and {a} parts are "
-            f"shaded. Strip B is cut into {N} equal parts and {b} parts are shaded. How many more parts of Strip B "
+            f"shaded. Strip B is cut into {N} equal parts and {plural(b, 'part')} {'is' if b == 1 else 'are'} shaded. How many more parts of Strip B "
             f"must be shaded so that both strips have the same fraction shaded?")
     fig = fraction_bars([("A", n, a), ("B", N, b)], title=f"Strip A: {a} of {n} parts shaded; strip B: {b} of {N} parts shaded")
     ans = a * k - b
