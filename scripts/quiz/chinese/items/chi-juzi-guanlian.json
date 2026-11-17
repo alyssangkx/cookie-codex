@@ -76,25 +76,25 @@
    "pattern": "chi-pat-guanlian",
    "stem": "弟弟＿＿＿＿年纪小，＿＿＿＿很懂事。\n应选哪一组关联词？",
    "options": [
-    "一……就",
-    "先……再",
+    "因为……所以",
+    "不但……而且",
     "虽然……但是",
-    "如果……就"
+    "宁可……也不"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "「一……就」表示紧接：前一件事一发生，后一件马上跟着发生；而这句话的意思是：年纪小与很懂事形成出人意料的对比。 (「一……就」expresses the second follows immediately on the first, but in this sentence being young versus being sensible is an unexpected contrast.)"
+     "why": "「年纪小」不是「懂事」的原因。(Being young is not the reason for being sensible.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "「先……再」表示顺承：按先后顺序做事；而这句话的意思是：年纪小与很懂事形成出人意料的对比。 (「先……再」expresses one step after another in sequence, but in this sentence being young versus being sensible is an unexpected contrast.)"
+     "why": "年纪小和懂事是转折对比，不是递进。(Young versus sensible is a contrast, not an addition.)"
     },
     null,
     {
      "tag": "wrong_logic",
-     "why": "「如果……就」表示假设：假设一个情况，推出结果；而这句话的意思是：年纪小与很懂事形成出人意料的对比。 (「如果……就」expresses a supposition and its result, but in this sentence being young versus being sensible is an unexpected contrast.)"
+     "why": "这句话没有取舍的意思。(The sentence expresses no trade-off.)"
     }
    ],
    "solution": [
@@ -2253,24 +2253,24 @@
    "stem": "他＿＿＿＿能考第一，＿＿＿＿每天都比别人多花两小时复习。\n应选哪一组关联词？",
    "options": [
     "因为……所以",
-    "即使……也",
+    "与其说……不如说",
     "之所以……是因为",
-    "只要……就"
+    "不但不……反而"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "similar_relation",
-     "why": "「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：考第一是结果，多花时间复习是原因。 (「因为……所以」expresses cause then result, but in this sentence coming first is the result and the extra study the cause.)"
+     "tag": "wrong_logic",
+     "why": "考第一是结果，不是「因为」的原因，因果颠倒。(Coming first is the result; the cause and effect are reversed.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：考第一是结果，多花时间复习是原因。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence coming first is the result and the extra study the cause.)"
+     "tag": "wrong_connective",
+     "why": "「与其说……不如说」表示比较说法，不表示原因。(与其说…不如说 compares two descriptions, not a reason.)"
     },
     null,
     {
      "tag": "wrong_logic",
-     "why": "「只要……就」表示充分条件：具备这个条件就够了；而这句话的意思是：考第一是结果，多花时间复习是原因。 (「只要……就」expresses a sufficient condition, but in this sentence coming first is the result and the extra study the cause.)"
+     "why": "后半句是原因，不是相反的情况。(The second clause is a reason, not an opposite.)"
     }
    ],
    "solution": [
@@ -2287,23 +2287,23 @@
    "stem": "小李＿＿＿＿迟到，＿＿＿＿他的闹钟坏了。\n应选哪一组关联词？",
    "options": [
     "因为……所以",
-    "即使……也",
-    "不但……而且",
+    "与其说……不如说",
+    "不但不……反而",
     "之所以……是因为"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "similar_relation",
-     "why": "「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：迟到是结果，闹钟坏了是原因。 (「因为……所以」expresses cause then result, but in this sentence being late is the result and the broken alarm the cause.)"
+     "tag": "wrong_logic",
+     "why": "迟到是结果，闹钟坏了才是原因，因果颠倒。(Being late is the result; the broken clock is the reason.)"
+    },
+    {
+     "tag": "wrong_connective",
+     "why": "「与其说……不如说」表示比较说法，不表示原因。(与其说…不如说 compares two descriptions, not a reason.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：迟到是结果，闹钟坏了是原因。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence being late is the result and the broken alarm the cause.)"
-    },
-    {
-     "tag": "wrong_logic",
-     "why": "「不但……而且」表示递进：后一项比前一项更进一层；而这句话的意思是：迟到是结果，闹钟坏了是原因。 (「不但……而且」expresses progression to a further point, but in this sentence being late is the result and the broken alarm the cause.)"
+     "why": "后半句是原因，不是相反的情况。(The second clause is a reason, not an opposite.)"
     },
     null
    ],
@@ -2322,23 +2322,23 @@
    "options": [
     "之所以……是因为",
     "因为……所以",
-    "虽然……但是",
-    "只有……才"
+    "与其说……不如说",
+    "之所以……所以"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "similar_relation",
-     "why": "「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：被称为花园城市是结果，种满树木是原因。 (「因为……所以」expresses cause then result, but in this sentence the nickname is the result and the trees the reason.)"
+     "tag": "wrong_logic",
+     "why": "「被称为花园城市」是结果，因果颠倒。(Being called a garden city is the result; the cause and effect are reversed.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「虽然……但是」表示转折：先让步，再说相反的结果；而这句话的意思是：被称为花园城市是结果，种满树木是原因。 (「虽然……但是」expresses concession then contrast, but in this sentence the nickname is the result and the trees the reason.)"
+     "tag": "wrong_connective",
+     "why": "「与其说……不如说」表示比较说法，不表示原因。(与其说…不如说 compares two descriptions, not a reason.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：被称为花园城市是结果，种满树木是原因。 (「只有……才」expresses a necessary, only condition, but in this sentence the nickname is the result and the trees the reason.)"
+     "tag": "wrong_connective",
+     "why": "「之所以」要搭配「是因为」，不能用「所以」。(之所以 pairs with 是因为, not 所以.)"
     }
    ],
    "solution": [
@@ -3239,23 +3239,23 @@
    "stem": "这次实验＿＿＿＿成功，＿＿＿＿同学们分工合作，各司其职。\n应选哪一组关联词？",
    "options": [
     "因为……所以",
-    "只要……就",
-    "宁可……也不",
+    "与其说……不如说",
+    "之所以……所以",
     "之所以……是因为"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "similar_relation",
-     "why": "「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：实验成功是结果，分工合作是原因。 (「因为……所以」expresses cause then result, but in this sentence the experiment's success is the result and the teamwork the reason.)"
+     "tag": "wrong_logic",
+     "why": "「成功」是结果，因果颠倒。(Success is the result; the cause and effect are reversed.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「只要……就」表示充分条件：具备这个条件就够了；而这句话的意思是：实验成功是结果，分工合作是原因。 (「只要……就」expresses a sufficient condition, but in this sentence the experiment's success is the result and the teamwork the reason.)"
+     "tag": "wrong_connective",
+     "why": "「与其说……不如说」表示比较说法，不表示原因。(与其说…不如说 compares two descriptions, not a reason.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「宁可……也不」表示取舍：选择前者，坚决不要后者；而这句话的意思是：实验成功是结果，分工合作是原因。 (「宁可……也不」expresses choosing the first and rejecting the second, but in this sentence the experiment's success is the result and the teamwork the reason.)"
+     "tag": "wrong_connective",
+     "why": "「之所以」要搭配「是因为」，不能用「所以」。(之所以 pairs with 是因为, not 所以.)"
     },
     null
    ],

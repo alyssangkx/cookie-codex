@@ -9,16 +9,16 @@
    "stem": "下面哪一个句子把「爱护」用得正确？",
    "options": [
     "我们要「爱护」公物，不可以随便乱画。",
-    "妈妈每天「爱护」我坐车去学校。",
-    "弟弟「爱护」地跑进了教室。",
-    "他「爱护」了一场精彩的足球赛。"
+    "妈妈每天「爱护」我坐车去学校，很辛苦。",
+    "弟弟「爱护」地跑进了教室，满头大汗。",
+    "他「爱护」了一场精彩的足球赛，很开心。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_collocation",
-     "why": "「爱护」是爱惜保护，不能用来表示接送。(爱护 means to care for and protect; it cannot mean taking someone to school.)"
+     "tag": "wrong_meaning",
+     "why": "「爱护」是爱惜保护，不能表示接送。(爱护 means to cherish and protect, not to take someone to school.)"
     },
     {
      "tag": "wrong_word_class",
@@ -42,25 +42,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「收拾」用得正确？",
    "options": [
-    "他「收拾」了一首好听的歌。",
+    "吃完饭后，他「收拾」了一首好听的歌。",
     "吃完饭后，我帮妈妈「收拾」碗筷。",
-    "天空「收拾」得又蓝又亮。",
-    "小狗「收拾」地摇着尾巴。"
+    "雨停以后，天空「收拾」得又蓝又亮。",
+    "看见主人，小狗「收拾」地摇着尾巴。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「收拾」是整理东西，不能和「歌」搭配。(收拾 means to tidy things; it cannot take 'a song'.)"
+     "why": "「收拾」的对象是东西，不能搭配「歌」。(收拾 is used with objects to tidy, not with a song.)"
     },
     null,
     {
-     "tag": "wrong_word_class",
-     "why": "「收拾」是人的动作，不能说天空被收拾得又蓝又亮。(收拾 is an action by a person; the sky is not tidied.)"
+     "tag": "wrong_meaning",
+     "why": "「收拾」是整理，不能表示天空变得又蓝又亮。(收拾 means to tidy up, not to describe the sky turning blue.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「收拾」是动词，不能修饰「摇尾巴」。(收拾 is a verb and cannot modify 'wagged its tail'.)"
+     "tag": "wrong_word_class",
+     "why": "「收拾」是动词，不能当作方式词来修饰「摇」。(收拾 is a verb and cannot describe how the dog wagged its tail.)"
     }
    ],
    "solution": [
@@ -110,24 +110,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「观察」用得正确？",
    "options": [
-    "他「观察」了一首很好听的歌。",
-    "妈妈「观察」我去市场买菜。",
-    "同学们「观察」地排好队。",
+    "他在电台里「观察」了一首很好听的歌。",
+    "妈妈周末「观察」我一起去市场买菜。",
+    "同学们「观察」地在操场上排好队伍。",
     "我用放大镜「观察」蚂蚁怎样搬食物。"
    ],
    "answer": 3,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「观察」是仔细地看，不能和「歌」搭配。(观察 means to look carefully; it cannot take 'a song'.)"
+     "why": "「观察」是仔细地看，对象不能是歌。(观察 means to look carefully; a song cannot be observed.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「观察」不能表示「带」我去。(观察 cannot mean 'take me along to'.)"
+     "tag": "wrong_meaning",
+     "why": "「观察」是仔细看，不能表示陪伴，应该用「带」或「陪」。(观察 means to watch closely, not to accompany; use 带 or 陪.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「观察」是动词，不能当作方式词来描述排队。(观察 is a verb and cannot describe how they lined up.)"
+     "why": "「观察」是动词，不能当作方式词来修饰「排」。(观察 is a verb and cannot describe how they lined up.)"
     },
     null
    ],
@@ -145,24 +145,24 @@
    "stem": "下面哪一个句子把「参加」用得正确？",
    "options": [
     "我报名「参加」了学校的合唱团。",
-    "我「参加」了一杯热茶。",
-    "他「参加」了妈妈去菜市场。",
-    "弟弟「参加」得很高兴地笑了。"
+    "我在茶座里「参加」了一杯热茶水。",
+    "他「参加」了妈妈一起去菜市场买东西。",
+    "弟弟「参加」地笑着走进了课室里面。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
      "tag": "wrong_collocation",
-     "why": "「参加」是加入活动或组织，不能和饮料搭配。(参加 means joining an activity or group; it cannot take a drink.)"
+     "why": "「参加」用于活动或组织，不能搭配「一杯茶」。(参加 goes with activities or groups, not a cup of tea.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「参加」后面应是活动或组织，不能接一个动作。(参加 needs an activity or group as its object.)"
+     "tag": "wrong_meaning",
+     "why": "「参加」是加入活动，不能表示陪同某人，应该用「陪」。(参加 means to join an activity, not to accompany someone; use 陪.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「参加」是动词，句子结构不通。(参加 is a verb and the sentence structure is broken.)"
+     "why": "「参加」是动词，不能当作方式词来修饰「笑」。(参加 is a verb and cannot describe how he smiled.)"
     }
    ],
    "solution": [
@@ -178,25 +178,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「帮助」用得正确？",
    "options": [
-    "我「帮助」了一件很漂亮的衣服。",
+    "他在商店里「帮助」了一件漂亮的衣服。",
     "同学们「帮助」清洁工叔叔打扫操场。",
-    "他「帮助」地大声唱歌。",
-    "妈妈「帮助」我三个苹果。"
+    "他「帮助」地大声唱歌给大家听见了。",
+    "妈妈「帮助」我三个苹果放在桌子上。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「帮助」的对象应是人，不是衣服。(The object of 帮助 should be a person.)"
+     "why": "「帮助」的对象是人，不能搭配衣服，买衣服应用「买」。(帮助 takes a person as its object; for clothes use 买.)"
     },
     null,
     {
      "tag": "wrong_word_class",
-     "why": "「帮助」是动词，不能当作方式词来修饰「唱歌」。(帮助 is a verb and cannot describe how he sang.)"
+     "why": "「帮助」是动词，不能当作方式词来修饰「唱」。(帮助 is a verb and cannot describe how he sang.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「帮助」不能表示「给」东西，应该说「给」。(帮助 cannot mean 'give'.)"
+     "tag": "wrong_meaning",
+     "why": "「帮助」是协助，不能表示给予，应该用「给」。(帮助 means to help, not to give; use 给.)"
     }
    ],
    "solution": [
@@ -246,24 +246,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「安静」用得正确？",
    "options": [
-    "他「安静」了一个苹果。",
-    "操场上「安静」得非常热闹。",
-    "考试时请你「安静」我们的笔。",
+    "他吃饭很快，一口气「安静」了一个苹果。",
+    "操场上「安静」得非常热闹，同学们在玩耍。",
+    "考试时请你「安静」我们的课桌，不要说话。",
     "图书馆里很「安静」，只听得见翻书的声音。"
    ],
    "answer": 3,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「安静」是形容词，不能当动词后面接苹果。(安静 is an adjective and cannot take 'an apple'.)"
+     "why": "「安静」是形容词，不能带宾语表示吃东西。(安静 is an adjective and cannot take an object meaning to eat.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「安静」和「热闹」意思相反，不能同时描写操场。(安静 and 热闹 are opposites.)"
+     "tag": "contradicts_context",
+     "why": "「安静」和「热闹」意思相反，前后矛盾。(安静 and 热闹 are opposites, so the sentence contradicts itself.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「安静」是形容词，不能直接带宾语「笔」。(安静 is an adjective and cannot take an object.)"
+     "tag": "wrong_meaning",
+     "why": "「安静」是形容词，不能当动词带宾语。(安静 is an adjective and cannot take an object like a verb.)"
     },
     null
    ],
@@ -314,24 +314,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「愉快」用得正确？",
    "options": [
-    "他「愉快」了一碗饭。",
+    "他在食堂里很快「愉快」了一碗饭。",
     "周末我们一家人度过了「愉快」的一天。",
-    "他「愉快」地大哭起来。",
-    "同学们「愉快」老师的话。"
+    "他听到好消息后「愉快」地大哭了起来。",
+    "同学们都「愉快」老师说的每句话。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「愉快」是形容词，不能带宾语「一碗饭」。(愉快 is an adjective and cannot take 'a bowl of rice'.)"
+     "why": "「愉快」是形容词，不能表示吃饭。(愉快 is an adjective and cannot mean to eat.)"
     },
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「愉快」是高兴，和「大哭」意思矛盾。(愉快 means happy; it conflicts with crying loudly.)"
+     "tag": "contradicts_context",
+     "why": "「愉快」是高兴，和「大哭」的意思不合。(愉快 means happy, which does not fit crying loudly.)"
     },
     {
-     "tag": "wrong_collocation",
+     "tag": "wrong_word_class",
      "why": "「愉快」是形容词，不能带宾语。(愉快 is an adjective and cannot take an object.)"
     }
    ],
@@ -382,24 +382,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「突然」用得正确？",
    "options": [
-    "他每天「突然」六点起床。",
-    "我们「突然」地在慢慢散步。",
-    "「突然」的老师天天来上课。",
+    "他每天都很守时，「突然」六点起床。",
+    "公园里很宁静，我们「突然」地慢慢散步。",
+    "学校放假了，「突然」的老师天天来上课。",
     "我们正在聊天，「突然」下起了大雨。"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "「突然」表示出乎意料，每天六点起床是习惯。(突然 means unexpectedly; a daily habit is not sudden.)"
+     "tag": "wrong_meaning",
+     "why": "「突然」表示意想不到，不能形容每天的习惯。(突然 means unexpectedly; it cannot describe a daily habit.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「突然」和「慢慢」意思矛盾。(突然 conflicts with 慢慢.)"
+     "tag": "contradicts_context",
+     "why": "「突然」是很快发生，和「慢慢」互相矛盾。(突然 means suddenly, which contradicts slowly.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「突然」不能修饰「老师」，天天来也不是突然。(突然 cannot modify 'the teacher', and daily is not sudden.)"
+     "why": "「突然」不能用来修饰人，这里意思不通。(突然 describes events, not a person like a teacher.)"
     },
     null
    ],
@@ -417,24 +417,24 @@
    "stem": "下面哪一个句子把「认真」用得正确？",
    "options": [
     "他上课「认真」听讲，笔记也记得很详细。",
-    "天气「认真」得下起了雨。",
-    "他「认真」了老师的话。",
-    "弟弟「认真」一碗饭。"
+    "天气很闷热，天空「认真」地下起了大雨。",
+    "他上课「认真」玩手机，笔记也一个字没写。",
+    "弟弟放学回家，「认真」了一碗热汤。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_collocation",
-     "why": "「认真」形容人的态度，不能形容天气。(认真 describes a person's attitude, not the weather.)"
+     "tag": "wrong_meaning",
+     "why": "「认真」只能形容人的态度，不能形容天气。(认真 describes a person's attitude, not the weather.)"
+    },
+    {
+     "tag": "contradicts_context",
+     "why": "「认真」是褒义词，不能用在不专心的事情上。(认真 is positive and does not fit playing with a phone.)"
     },
     {
      "tag": "wrong_collocation",
-     "why": "「认真」是形容词，不能直接带宾语。(认真 is an adjective and cannot take an object.)"
-    },
-    {
-     "tag": "wrong_collocation",
-     "why": "「认真」不能和「饭」这样搭配。(认真 cannot take 'a bowl of rice'.)"
+     "why": "「认真」是形容词，不能表示喝汤。(认真 is an adjective and cannot mean to drink soup.)"
     }
    ],
    "solution": [
@@ -450,25 +450,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「节约」用得正确？",
    "options": [
-    "他「节约」了一场比赛。",
+    "哥哥想赢得冠军，在场上「节约」了一场比赛。",
     "我们要「节约」用水，随手关好水龙头。",
-    "妈妈「节约」我们去公园。",
-    "他「节约」地跑起来。"
+    "周末到了，妈妈「节约」我们去公园玩。",
+    "运动会上，他「节约」地跑起来，很快。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「节约」是节省资源，不能和「比赛」搭配。(节约 means saving resources; it cannot take 'a match'.)"
+     "why": "「节约」是少用资源，不能搭配比赛。(节约 means to save resources, not with a match.)"
     },
     null,
     {
-     "tag": "wrong_collocation",
-     "why": "「节约」不能表示「带」。(节约 cannot mean 'take'.)"
+     "tag": "wrong_meaning",
+     "why": "「节约」是节省，不能表示带领。(节约 means to economise, not to take someone along.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「节约」是动词，不能修饰「跑」。(节约 is a verb and cannot describe how he ran.)"
+     "why": "「节约」是动词，不能当作方式词来修饰「跑」。(节约 is a verb and cannot describe how he ran.)"
     }
    ],
    "solution": [
@@ -484,25 +484,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「小心」用得正确？",
    "options": [
-    "他「小心」了一次满分。",
-    "「小心」的书包很重。",
+    "他这次考试「小心」了一个满分。",
+    "那个「小心」的书包重得背不动。",
     "过马路时要「小心」来往的车辆。",
-    "我们「小心」了一张电影票。"
+    "我们在售票处「小心」了一张电影票。"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「小心」是留意、谨慎，不能和「满分」搭配。(小心 means to be cautious; it does not go with 'full marks'.)"
+     "why": "「小心」是留意，不能搭配「满分」，应该用「得到」。(小心 means to be careful; with 满分 use 得到.)"
     },
     {
-     "tag": "wrong_word_class",
-     "why": "「小心」不能这样修饰「书包」。(小心 cannot modify 'a school bag'.)"
+     "tag": "wrong_meaning",
+     "why": "「小心」形容人谨慎，不能形容书包。(小心 describes a careful person, not a bag.)"
     },
     null,
     {
      "tag": "wrong_collocation",
-     "why": "「小心」不能和「电影票」搭配。(小心 does not go with 'a movie ticket'.)"
+     "why": "「小心」是留意，买票应该用「买」。(小心 means to be careful; to buy a ticket use 买.)"
     }
    ],
    "solution": [
@@ -553,24 +553,24 @@
    "stem": "下面哪一个句子把「养成」用得正确？",
    "options": [
     "老师教我们「养成」每天阅读的习惯。",
-    "妈妈在家里「养成」了一只小猫。",
-    "他「养成」了一场精彩的表演。",
-    "我们「养成」了一杯鲜牛奶。"
+    "妈妈在家里「养成」了一只小猫咪。",
+    "他在舞台上「养成」了一场精彩的表演。",
+    "我们在早餐时「养成」了一杯鲜牛奶。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
      "tag": "wrong_collocation",
-     "why": "「养成」用于习惯、能力，养动物要说「养」。(养成 is for habits; for pets say 养.)"
+     "why": "「养成」用于习惯或能力，养动物应该用「养」。(养成 goes with habits or abilities; for pets use 养.)"
     },
     {
      "tag": "wrong_collocation",
-     "why": "「养成」不能和「表演」搭配。(养成 cannot take 'a performance'.)"
+     "why": "「养成」不能搭配「表演」，应该用「完成」或「进行」。(养成 does not go with a performance.)"
     },
     {
      "tag": "wrong_collocation",
-     "why": "「养成」不能和饮料搭配。(养成 cannot take a drink.)"
+     "why": "「养成」不能表示喝东西，应该用「喝」。(养成 cannot mean to drink; use 喝.)"
     }
    ],
    "solution": [
@@ -586,25 +586,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「培养」用得正确？",
    "options": [
-    "他「培养」了一锅热汤。",
+    "他在厨房里「培养」了一锅热汤。",
     "学校「培养」我们热爱大自然的兴趣。",
-    "同学们「培养」地认真学习。",
-    "妈妈「培养」小狗跑下楼。"
+    "学校「培养」我们浪费粮食的习惯。",
+    "同学们「培养」地认真学习了一整天。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「培养」的对象是人才、兴趣，不是汤。(培养 takes people, talents, interests; not soup.)"
+     "why": "「培养」的对象是人才、兴趣等，煮汤应该用「煮」。(培养 goes with talents or interests; for soup use 煮.)"
     },
     null,
     {
-     "tag": "wrong_word_class",
-     "why": "「培养」是动词，不能修饰「学习」。(培养 is a verb and cannot describe how they studied.)"
+     "tag": "wrong_meaning",
+     "why": "「培养」是褒义词，只用于好的习惯，不能搭配「浪费」。(培养 is positive and only goes with good habits, not wasting food.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「培养」不能表示「带」小狗跑。(培养 cannot mean leading a dog downstairs.)"
+     "tag": "wrong_word_class",
+     "why": "「培养」是动词，不能当作方式词来修饰「学习」。(培养 is a verb and cannot describe how they studied.)"
     }
    ],
    "solution": [
@@ -620,25 +620,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「发明」用得正确？",
    "options": [
-    "哥伦布「发明」了美洲新大陆。",
-    "我在抽屉里「发明」了一个旧钱包。",
+    "哥伦布「发明」了美洲新大陆，改变了历史。",
+    "我在抽屉里「发明」了一个旧钱包，真开心。",
     "爱迪生「发明」了电灯，改变了人们的生活。",
-    "老师「发明」我们的作业写错了。"
+    "老师「发明」我们的作业写错了，叫我们改。"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_sense",
-     "why": "美洲本来就存在，应该说「发现」，不能说「发明」。(America already existed, so it is 发现 (discovered).)"
+     "tag": "wrong_meaning",
+     "why": "大陆本来就存在，只能「发现」，不能「发明」。(A continent already existed, so it is discovered, not invented.)"
     },
     {
-     "tag": "wrong_sense",
-     "why": "钱包本来就有，找到它是「发现」。(The wallet already existed; finding it is 发现.)"
+     "tag": "wrong_meaning",
+     "why": "找到原本就有的东西应该用「发现」，不能用「发明」。(Finding an existing item is 发现, not 发明.)"
     },
     null,
     {
-     "tag": "wrong_sense",
-     "why": "察觉到作业错了应说「发现」，不是创造出新东西。(Noticing an error is 发现, not creating something new.)"
+     "tag": "wrong_meaning",
+     "why": "发觉错误应该用「发现」，「发明」是创造新事物。(Noticing a mistake is 发现; 发明 means to invent something new.)"
     }
    ],
    "solution": [
@@ -689,24 +689,24 @@
    "stem": "下面哪一个句子把「爱惜」用得正确？",
    "options": [
     "我们要「爱惜」粮食，不能随便浪费。",
-    "他「爱惜」地对小狗大声吼叫。",
-    "妈妈「爱惜」我们早点回家。",
-    "弟弟「爱惜」了两个小时才起床。"
+    "他「爱惜」地对小狗大声吼叫，很凶。",
+    "妈妈「爱惜」我们早点回家，不要贪玩。",
+    "弟弟「爱惜」了两个小时才起床，真懒。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「爱惜」是珍爱，和大声吼叫的态度矛盾。(爱惜 means to cherish; it conflicts with shouting at a dog.)"
+     "tag": "contradicts_context",
+     "why": "「爱惜」是疼爱珍惜，和「大声吼叫」意思相反。(爱惜 means to cherish, which contradicts shouting at the dog.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「爱惜」不能表示「叮嘱」。(爱惜 cannot mean 'urge'.)"
+     "tag": "wrong_meaning",
+     "why": "「爱惜」的对象是东西或人，不能表示要求，应该用「要求」。(爱惜 takes a thing or person as object, not a request; use 要求.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「爱惜」不能表示拖延。(爱惜 cannot mean dawdling.)"
+     "tag": "wrong_meaning",
+     "why": "「爱惜」不能表示赖在床上，应该用「赖床」。(爱惜 cannot mean to stay in bed.)"
     }
    ],
    "solution": [
@@ -756,25 +756,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「珍惜」用得正确？",
    "options": [
-    "他「珍惜」地把旧玩具全部丢掉。",
-    "妹妹「珍惜」了一阵大雨。",
+    "他「珍惜」地把旧玩具全部都丢掉了。",
+    "妹妹在窗前「珍惜」了一阵大雨。",
     "我们要「珍惜」和家人在一起的时间。",
-    "我们要「珍惜」浪费时间。"
+    "我们要「珍惜」浪费时间的每一天。"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "「珍惜」是爱护，和「丢掉」矛盾。(珍惜 means to treasure; it conflicts with throwing away.)"
+     "tag": "contradicts_context",
+     "why": "「珍惜」是重视爱护，和「丢掉」互相矛盾。(珍惜 means to treasure, which contradicts throwing things away.)"
     },
     {
      "tag": "wrong_collocation",
-     "why": "「珍惜」不能和「大雨」搭配。(珍惜 does not go with 'a downpour'.)"
+     "why": "「珍惜」的对象是宝贵的东西，不能搭配「大雨」。(珍惜 takes something precious, not a heavy rain.)"
     },
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「珍惜」和「浪费」意思矛盾。(珍惜 contradicts 浪费.)"
+     "tag": "contradicts_context",
+     "why": "「珍惜」时间就不能浪费，前后矛盾。(To treasure time means not to waste it.)"
     }
    ],
    "solution": [
@@ -790,24 +790,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「缺乏」用得正确？",
    "options": [
-    "桌子上「缺乏」了一本书。",
-    "他「缺乏」地走进教室。",
-    "弟弟「缺乏」吃光了蛋糕。",
+    "桌子上「缺乏」了一本书，是我的课本。",
+    "他「缺乏」地走进教室，坐在座位上。",
+    "弟弟「缺乏」吃了一整个蛋糕，肚子很饱。",
     "他「缺乏」自信，不敢在同学面前说话。"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_collocation",
-     "why": "「缺乏」多用于自信、经验等抽象事物，桌上少一本书应说「少了」。(缺乏 is used with abstract things like confidence; for a missing book say 少了.)"
+     "tag": "wrong_meaning",
+     "why": "「缺乏」表示不足，不能表示放着东西。(缺乏 means a lack, not that something is placed there.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「缺乏」是动词，不能修饰「走」。(缺乏 is a verb and cannot describe walking.)"
+     "why": "「缺乏」是动词，不能当作方式词来修饰「走」。(缺乏 is a verb and cannot describe how he walked.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「缺乏」不能表示「吃光」。(缺乏 cannot mean 'finished eating'.)"
+     "tag": "wrong_meaning",
+     "why": "「缺乏」后面应接名词，不能表示吃了东西。(缺乏 should be followed by a noun, not describe eating.)"
     },
     null
    ],
@@ -825,24 +825,24 @@
    "stem": "下面哪一个句子把「体谅」用得正确？",
    "options": [
     "我们应该「体谅」父母工作的辛苦。",
-    "他「体谅」了一盘炒饭。",
-    "老师「体谅」我们大声吵闹。",
-    "同学「体谅」地跑过去。"
+    "他在饭馆里「体谅」了一盘炒饭。",
+    "老师「体谅」我们明天一定要交作业。",
+    "同学「体谅」地跑过去帮助了别人。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
      "tag": "wrong_collocation",
-     "why": "「体谅」的对象应是人的处境，不是食物。(体谅 takes a person's situation, not food.)"
+     "why": "「体谅」的对象是人的处境，不能搭配食物。(体谅 goes with someone's situation, not food.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "体谅是理解别人的难处，大声吵闹不是需要体谅的难处。(体谅 is understanding someone's difficulty; noisy behaviour is not.)"
+     "tag": "wrong_meaning",
+     "why": "「体谅」是理解别人，不能表示要求。(体谅 means to be understanding, not to demand.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「体谅」是动词，不能修饰「跑」。(体谅 is a verb and cannot describe running.)"
+     "why": "「体谅」是动词，不能当作方式词来修饰「跑」。(体谅 is a verb and cannot describe how he ran.)"
     }
    ],
    "solution": [
@@ -858,25 +858,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「经历」用得正确？",
    "options": [
-    "他「经历」了一碗热汤。",
+    "他在食堂里「经历」了一碗热汤。",
     "奶奶一生「经历」了许多风风雨雨。",
-    "我「经历」作业做完才去玩。",
-    "弟弟「经历」地唱歌。"
+    "我要「经历」把作业全做完才去玩。",
+    "弟弟「经历」地唱着歌走进来了。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「经历」是亲身遇到的事，不能和「汤」搭配。(经历 takes events lived through, not soup.)"
+     "why": "「经历」是亲身遇到的事，不能搭配食物。(经历 goes with experiences, not food.)"
     },
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「经历」不能表示「等到」。(经历 cannot mean 'once'.)"
+     "tag": "wrong_meaning",
+     "why": "「经历」不能表示先完成，应该用「先」。(经历 cannot mean to do first; use 先.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「经历」是动词，不能修饰「唱歌」。(经历 is a verb and cannot describe singing.)"
+     "why": "「经历」是动词，不能当作方式词来修饰「唱」。(经历 is a verb and cannot describe how he sang.)"
     }
    ],
    "solution": [
@@ -926,24 +926,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「增加」用得正确？",
    "options": [
-    "他「增加」了回家。",
-    "我们「增加」了冷。",
-    "妈妈「增加」地做饭。",
+    "放学后，他「增加」回家吃午饭了。",
+    "天气变冷，我们「增加」得很冷。",
+    "快到中午，妈妈「增加」地做饭。",
     "天气变热，冷饮的销量「增加」了。"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_collocation",
-     "why": "「增加」不能和「回家」搭配。(增加 cannot take 'going home'.)"
+     "tag": "wrong_meaning",
+     "why": "「增加」是数量变多，不能表示去做某事。(增加 means an increase in amount, not doing something.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「增加」的对象应是数量，不能是「冷」这个感觉。(增加 takes quantities, not a feeling like 'cold'.)"
+     "tag": "wrong_meaning",
+     "why": "「增加」是数量变多，不能表示感觉，应该用「觉得」。(增加 means to increase; for a feeling use 觉得.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「增加」是动词，不能修饰「做饭」。(增加 is a verb and cannot describe cooking.)"
+     "why": "「增加」是动词，不能当作方式词来修饰「做」。(增加 is a verb and cannot describe how she cooked.)"
     },
     null
    ],
@@ -961,24 +961,24 @@
    "stem": "下面哪一个句子把「鼓励」用得正确？",
    "options": [
     "老师「鼓励」我们勇敢地举手发言。",
-    "我「鼓励」了一棵大树。",
-    "他「鼓励」自己的书包进教室。",
-    "老师「鼓励」我们害怕考试。"
+    "我在花园里「鼓励」了一棵大树。",
+    "他「鼓励」书包自己走进了教室里。",
+    "老师「鼓励」我们害怕每一次考试。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
      "tag": "wrong_collocation",
-     "why": "「鼓励」的对象应是人，不是树。(The object of 鼓励 should be a person.)"
+     "why": "「鼓励」的对象是人，不能是大树。(鼓励 takes a person as its object, not a tree.)"
     },
     {
      "tag": "wrong_collocation",
-     "why": "「鼓励」的对象是人，书包不能被鼓励。(A school bag cannot be encouraged.)"
+     "why": "「鼓励」的对象是人，不能是书包。(鼓励 takes a person as its object, not a bag.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「鼓励」是给人信心，不会鼓励人害怕。(鼓励 gives confidence; it does not encourage fear.)"
+     "tag": "contradicts_context",
+     "why": "「鼓励」是让人有勇气，不能让人害怕。(鼓励 gives courage; it cannot mean to make people afraid.)"
     }
    ],
    "solution": [
@@ -994,25 +994,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「提高」用得正确？",
    "options": [
-    "他「提高」了一碗饭。",
+    "他在食堂里「提高」了一碗热饭。",
     "多练习可以「提高」我们的阅读能力。",
-    "我们「提高」地走上楼。",
-    "老师「提高」我们坐下来。"
+    "我们「提高」地走上楼梯去了。",
+    "上课铃响后老师「提高」我们坐下来。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「提高」不能和「饭」搭配。(提高 cannot take 'a bowl of rice'.)"
+     "why": "「提高」的对象是水平或能力，不能搭配食物。(提高 goes with levels or abilities, not food.)"
     },
     null,
     {
      "tag": "wrong_word_class",
-     "why": "「提高」是动词，不能修饰「走」。(提高 is a verb and cannot describe walking.)"
+     "why": "「提高」是动词，不能当作方式词来修饰「走」。(提高 is a verb and cannot describe how we walked.)"
     },
     {
-     "tag": "wrong_collocation",
-     "why": "「提高」不能表示「叫」人做事。(提高 cannot mean 'tell us to'.)"
+     "tag": "wrong_meaning",
+     "why": "「提高」不能表示叫人做某事，应该用「请」或「叫」。(提高 cannot mean to ask someone to do something.)"
     }
    ],
    "solution": [
@@ -1028,25 +1028,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「改变」用得正确？",
    "options": [
-    "他「改变」了一块巧克力。",
-    "天气「改变」地下起雨。",
+    "他在商店里「改变」了一块巧克力。",
+    "天气「改变」地下起了一场大雨。",
     "这件事「改变」了他对学习的看法。",
-    "我「改变」了老师去上课。"
+    "我「改变」老师到办公室去上课。"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「改变」用于情况、看法，不能这样搭配一块具体食物。(改变 takes situations or views, not a piece of chocolate.)"
+     "why": "「改变」是变得不同，买东西应该用「买」。(改变 means to change; to buy use 买.)"
     },
     {
      "tag": "wrong_word_class",
-     "why": "「改变」是动词，不能修饰「下雨」。(改变 is a verb and cannot describe raining.)"
+     "why": "「改变」是动词，不能当作方式词来修饰「下」。(改变 is a verb and cannot describe how it rained.)"
     },
     null,
     {
-     "tag": "wrong_collocation",
-     "why": "「改变」后面的内容不通。(The object after 改变 does not make sense.)"
+     "tag": "wrong_meaning",
+     "why": "「改变」不能表示陪同，应该用「陪」。(改变 cannot mean to accompany; use 陪.)"
     }
    ],
    "solution": [
@@ -1062,24 +1062,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「坚持」用得正确？",
    "options": [
-    "他「坚持」了一件新衣服。",
-    "我们「坚持」放弃比赛。",
-    "他「坚持」地看了一个苹果。",
+    "他在商场里，「坚持」了一件新外套。",
+    "虽然很累，他们「坚持」放弃了比赛。",
+    "吃完午饭，他「坚持」了一个苹果。",
     "虽然很累，他仍然「坚持」跑完全程。"
    ],
    "answer": 3,
    "explain": [
     {
      "tag": "wrong_collocation",
-     "why": "「坚持」不能和「衣服」搭配。(坚持 cannot take 'a new shirt'.)"
+     "why": "「坚持」是不放弃，不能搭配衣服，应该用「买」。(坚持 means to persist; with clothes use 买.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「坚持」和「放弃」意思矛盾。(坚持 contradicts 放弃.)"
+     "tag": "contradicts_context",
+     "why": "「坚持」是不放弃，和「放弃」互相矛盾。(坚持 means to keep going, which contradicts giving up.)"
     },
     {
      "tag": "wrong_collocation",
-     "why": "「坚持」不能这样搭配「看苹果」。(坚持 does not fit 'looked at an apple'.)"
+     "why": "「坚持」不能表示吃东西，应该用「吃」。(坚持 cannot mean to eat; use 吃.)"
     },
     null
    ],
@@ -1097,24 +1097,24 @@
    "stem": "下面哪一个句子把「果然」用得正确？",
    "options": [
     "气象局预报今天有雷雨，下午「果然」下起了大雨。",
-    "我以为他会迟到，没想到他「果然」早到了。",
-    "他从来不说谎，今天「果然」说了谎。",
-    "他「果然」不用功，所以考了第一名。"
+    "我还以为他今天会迟到，没想到他「果然」早到了。",
+    "他平时从来不说谎，今天却「果然」说了谎。",
+    "气象局预报今天天晴，下午「果然」下起了大雨。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「果然」表示结果和预料相同；这里「没想到」说明出乎意料，应用「居然」。(果然 means as expected; 没想到 signals a surprise, so 居然 is needed.)"
+     "tag": "contradicts_context",
+     "why": "「果然」表示结果和预料一样，这里结果出乎意料，应该用「居然」。(果然 means as expected, but here it is a surprise; use 居然.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "说谎和平时的表现相反，不是意料之中，不能用「果然」。(Lying contradicts his record, so it is not 'as expected'.)"
+     "tag": "contradicts_context",
+     "why": "「果然」表示和预料相符，这里结果出乎意料。(果然 means as expected, but this result is against expectation.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "不用功却考第一名，前因后果不通。(Not studying hardly leads to first place.)"
+     "tag": "contradicts_context",
+     "why": "预报天晴，结果下雨，和预料不符，不能用「果然」。(Sunny was forecast but it rained, so 果然 cannot be used.)"
     }
    ],
    "solution": [
@@ -1164,25 +1164,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「反而」用得正确？",
    "options": [
-    "他每天努力复习，成绩「反而」进步了。",
-    "天气很冷，我们「反而」觉得很冷。",
+    "他每天努力复习，成绩「反而」进步了很多。",
+    "天气很冷，我们「反而」穿上了厚外套。",
     "我好心安慰她，她「反而」哭得更厉害了。",
-    "弟弟吃完饭，「反而」去洗碗了。"
+    "弟弟吃完饭，「反而」去洗碗帮妈妈。"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "努力就进步是正常结果，「反而」要表示与预料相反。(Progress after hard work is expected; 反而 needs the opposite of expectation.)"
+     "why": "努力复习进步是正常结果，没有相反的意思，不能用「反而」。(Improving after studying is expected, so there is no contrast for 反而.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "结果和预料一致，不能用「反而」。(The result matches expectation, so 反而 is wrong.)"
+     "why": "天冷穿厚衣服是正常结果，不能用「反而」。(Wearing a thick coat in cold weather is expected, so 反而 is wrong.)"
     },
     null,
     {
      "tag": "wrong_logic",
-     "why": "吃完饭洗碗并不违反常理，没有「相反」的意思。(Washing up after eating is not contrary to expectation.)"
+     "why": "前文没有交代原本该做的事，没有相反的对比，不能用「反而」。(There is no expected action to contrast with, so 反而 does not fit.)"
     }
    ],
    "solution": [
@@ -1300,25 +1300,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「毕竟」用得正确？",
    "options": [
-    "他「毕竟」是个冠军，所以天天都输。",
-    "天气很冷，「毕竟」我们穿了短袖。",
-    "他「毕竟」只是个一年级的孩子，做错了也该原谅。",
-    "他「毕竟」生病了，毕竟跑得很快。"
+    "他「毕竟」是全校的冠军，所以每场比赛都输了。",
+    "天气非常冷，「毕竟」我们都穿着短袖上学。",
+    "他「毕竟」只是个一年级的孩子，做错了该原谅。",
+    "他「毕竟」年纪还小，所以做错了事一定要重罚。"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "冠军和天天输矛盾，「毕竟」强调的理由不成立。(Being a champion contradicts always losing.)"
+     "tag": "contradicts_context",
+     "why": "「毕竟」强调事实，冠军却每场都输，前后矛盾。(毕竟 stresses a fact, but a champion losing every match contradicts it.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "「毕竟」提出的理由「穿短袖」不能解释天气冷。(Wearing short sleeves does not explain cold weather.)"
+     "why": "「毕竟」引出理由，穿短袖不能成为天冷的理由。(毕竟 introduces a reason, but short sleeves are no reason for cold.)"
     },
     null,
     {
      "tag": "wrong_logic",
-     "why": "「毕竟」后面的理由要能解释前一句，这里没有因果。(The clauses have no explanatory link.)"
+     "why": "「毕竟」强调年纪小应被原谅，后面的结果相反。(毕竟 stresses leniency for a child, but the result is the opposite.)"
     }
    ],
    "solution": [
@@ -1369,24 +1369,24 @@
    "stem": "下面哪一个句子把「简直」用得正确？",
    "options": [
     "他把画画得太像了，「简直」就像照片一样。",
-    "他的画不太像，「简直」不像。",
-    "我昨天「简直」去了公园。",
-    "这道题「简直」是我做对了。"
+    "他这幅画画得一般，「简直」比照片还好看。",
+    "我昨天下午「简直」去了公园，玩得很开心。",
+    "这道题很简单，「简直」是我做对了。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
+     "tag": "contradicts_context",
+     "why": "画得一般却说比照片好看，夸张得前后矛盾。(An average drawing cannot be better than a photo; the exaggeration contradicts itself.)"
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "「简直」用来强调夸张的程度，不能直接修饰普通的动作。(简直 stresses an exaggeration and cannot simply modify an ordinary action.)"
+    },
+    {
      "tag": "wrong_logic",
-     "why": "「简直」用于夸张地强调，句子前后重复，语气不通。(简直 exaggerates for emphasis; the repetition makes no sense.)"
-    },
-    {
-     "tag": "wrong_collocation",
-     "why": "「简直」需要夸张的比喻或程度，不能修饰一般的事实。(简直 needs exaggeration, not a plain fact.)"
-    },
-    {
-     "tag": "wrong_collocation",
-     "why": "「简直」后面应是夸张的描述，不是普通陈述。(简直 needs an exaggerated description.)"
+     "why": "「简直」要接夸张的比喻或程度，这里没有。(简直 needs an exaggerated comparison or degree, which is missing here.)"
     }
    ],
    "solution": [
@@ -1402,25 +1402,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「难怪」用得正确？",
    "options": [
-    "他今天很有精神，「难怪」昨晚没睡好。",
+    "他今天特别有精神，「难怪」昨晚一夜都没睡好。",
     "原来他昨晚没睡好，「难怪」今天这么没精神。",
-    "「难怪」他没来，所以我很意外。",
-    "我不知道他为什么哭，「难怪」他哭了。"
+    "他一直没有来，「难怪」我觉得非常意外。",
+    "我还不知道他为什么哭，「难怪」他哭了起来。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "「难怪」要先知道原因，再说结果，这里前后颠倒。(难怪 follows the explanation; here the order is reversed.)"
+     "why": "「难怪」要先说原因再说结果，这里的因果颠倒了。(难怪 needs the reason first and then the result; here they are reversed.)"
     },
     null,
     {
      "tag": "wrong_logic",
-     "why": "知道原因后就不再意外，句子自相矛盾。(Once you know the reason you are no longer surprised.)"
+     "why": "「难怪」表示明白原因后不再奇怪，这里仍然感到意外。(难怪 means no longer surprised once the reason is known, but here the surprise remains.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "「难怪」用于明白原因之后，这里并不知道原因。(难怪 is used after understanding the cause; here the cause is unknown.)"
+     "why": "还不知道原因，就不能用表示明白原因的「难怪」。(You cannot use 难怪 when the reason is still unknown.)"
     }
    ],
    "solution": [
@@ -1470,24 +1470,24 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「尽管」用得正确？",
    "options": [
-    "「尽管」天气很热，所以他买了冷饮。",
-    "「尽管」他很努力，因此取得了好成绩。",
-    "「尽管」他累了，他就休息了。",
+    "「尽管」天气很热，所以他买了一杯冷饮来喝。",
+    "「尽管」他很努力，因此取得了很好的成绩。",
+    "「尽管」他已经很累了，他就坐下来休息了。",
     "「尽管」天气很热，他还是坚持跑完了全程。"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "「尽管」表示让步转折，后面不能接顺承的「所以」。(尽管 concedes and turns; it cannot be followed by 所以.)"
+     "tag": "wrong_connective",
+     "why": "「尽管」后面应转折，不能接「所以」。(尽管 needs a contrast afterwards, not 所以.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「尽管」后面应转折，不能用因果的「因此」。(尽管 needs a turn, not 因此.)"
+     "tag": "wrong_connective",
+     "why": "「尽管」表示让步，后面应是相反的结果，不能用「因此」。(尽管 concedes a point, so the result should be a contrast, not 因此.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「尽管」后面应转折（如「还是」），这里是顺承。(尽管 needs a contrast such as 还是.)"
+     "tag": "wrong_connective",
+     "why": "「尽管」后面应该转折，用「就」表示顺承，不对。(尽管 needs a contrast, but 就 gives a plain sequence.)"
     },
     null
    ],
@@ -1505,24 +1505,24 @@
    "stem": "下面哪一个句子把「与其」用得正确？",
    "options": [
     "「与其」在家玩电脑，不如出去运动运动。",
-    "「与其」出去运动，所以在家玩电脑。",
-    "「与其」在家玩电脑，而且出去运动。",
-    "「与其」在家玩电脑，就出去运动。"
+    "「与其」出去运动，所以我们在家玩电脑。",
+    "「与其」在家玩电脑，而且我们还要出去运动。",
+    "「与其」在家玩电脑，因此就出去运动运动。"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「与其」要配「不如」，不能配「所以」。(与其 pairs with 不如, not 所以.)"
+     "tag": "wrong_connective",
+     "why": "「与其」要搭配「不如」，不能用「所以」。(与其 pairs with 不如, not 所以.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「与其」要配「不如」，不能配「而且」。(与其 pairs with 不如, not 而且.)"
+     "tag": "wrong_connective",
+     "why": "「与其」要搭配「不如」，不能用「而且」。(与其 pairs with 不如, not 而且.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「与其」要配「不如」，这里缺少比较选择的意思。(与其 needs 不如 to express choosing one over the other.)"
+     "tag": "wrong_connective",
+     "why": "「与其」要搭配「不如」，不能用「因此」。(与其 pairs with 不如, not 因此.)"
     }
    ],
    "solution": [
@@ -1538,25 +1538,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「宁可」用得正确？",
    "options": [
-    "他「宁可」考得很差，也要得到第一名。",
+    "他「宁可」考得很差，也一定要得到第一名。",
     "他「宁可」自己少睡一点，也要把功课做完。",
-    "他「宁可」早点出门，所以迟到了。",
-    "「宁可」下雨，因此我们去爬山。"
+    "他「宁可」早点出门，所以最后还是迟到了。",
+    "「宁可」天空下雨，因此我们仍然去爬山。"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "「宁可」后面是愿意接受的代价，考得差和得第一矛盾。(The accepted cost cannot contradict the goal.)"
+     "why": "「宁可」后面是愿意付出的代价，考得很差和第一名互相矛盾。(宁可 names an acceptable cost; doing badly contradicts being first.)"
     },
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「宁可」要配「也」，不能配「所以」。(宁可 pairs with 也, not 所以.)"
+     "tag": "wrong_connective",
+     "why": "「宁可……也要」表示取舍，不能接「所以」，意思也不合。(宁可 expresses a trade-off and does not take 所以.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「宁可」要配「也」，且因果不通。(宁可 pairs with 也, and the cause-effect is wrong.)"
+     "tag": "wrong_connective",
+     "why": "「宁可」要搭配「也」，不能用「因此」。(宁可 pairs with 也, not 因此.)"
     }
    ],
    "solution": [
@@ -1572,25 +1572,25 @@
    "pattern": "chi-pat-ciyu-yunyong",
    "stem": "下面哪一个句子把「即使」用得正确？",
    "options": [
-    "「即使」他很用功，所以考得很好。",
-    "「即使」天气晴朗，我们就出去玩了。",
+    "「即使」他很用功，所以考得非常好。",
+    "「即使」天气晴朗，我们就出去玩了一天。",
     "「即使」明天下雨，我们也要去参加活动。",
-    "「即使」明天下雨，因此我们取消活动。"
+    "「即使」明天下雨，因此我们取消了活动。"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "「即使」要配「也」，不能配「所以」。(即使 pairs with 也, not 所以.)"
+     "tag": "wrong_connective",
+     "why": "「即使」表示让步，后面应转折，不能用「所以」。(即使 is a concession and needs a contrast, not 所以.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "「即使」要配「也」，不能配「就」。(即使 pairs with 也, not 就.)"
+     "tag": "wrong_connective",
+     "why": "「即使」表示假设让步，要搭配「也」，不能用「就」。(即使 pairs with 也, not 就.)"
     },
     null,
     {
-     "tag": "wrong_logic",
-     "why": "「即使」要配「也」，不能配「因此」。(即使 pairs with 也, not 因此.)"
+     "tag": "wrong_connective",
+     "why": "「即使」后面应转折，不能接「因此」。(即使 needs a contrast, not 因此.)"
     }
    ],
    "solution": [
@@ -1777,24 +1777,24 @@
    "stem": "下面哪一句最适合填入空格？\n小明把水杯打翻了，＿＿＿＿。",
    "options": [
     "妈妈叫他拿抹布把桌子擦干净",
-    "爸爸买了一辆新车",
-    "老师表扬他很细心",
-    "我们去了动物园"
+    "妈妈叫他赶紧把杯里的水喝光",
+    "妈妈叫他拿抹布把窗户玻璃擦亮",
+    "妈妈叫他去超市买一个新的水杯"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "off_topic",
-     "why": "买车和打翻水杯无关。(Buying a car has nothing to do with the spilled cup.)"
+     "tag": "contradicts_context",
+     "why": "水已经打翻了，杯里没有水可喝。(The water has spilled, so there is none left to drink.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "打翻水杯不是细心的表现，不会因此被表扬。(Spilling a cup is not carefulness worth praising.)"
+     "why": "要清理的是打翻的水，不是窗户。(What needs cleaning is the spill, not the window.)"
     },
     {
-     "tag": "off_topic",
-     "why": "去动物园和打翻水杯无关。(A zoo trip is unrelated.)"
+     "tag": "wrong_logic",
+     "why": "杯子只是打翻，没有坏，不必买新的。(The cup was only knocked over, not broken.)"
     }
    ],
    "solution": [
@@ -1812,23 +1812,23 @@
    "options": [
     "同学们跑到操场上玩耍",
     "同学们赶紧回到座位坐好",
-    "妈妈开始煮晚饭",
-    "天空飞着一群小鸟"
+    "同学们赶紧收拾书包走出校门",
+    "同学们慢慢走到食堂去吃饭"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "上课铃响了应该回教室，不是去玩。(The bell calls students to class, not to play.)"
+     "tag": "contradicts_context",
+     "why": "上课铃响表示要上课，不是玩耍。(The bell means class is starting, not playtime.)"
     },
     null,
     {
-     "tag": "off_topic",
-     "why": "妈妈煮饭与上课铃无关。(Mum cooking dinner is unrelated.)"
+     "tag": "contradicts_context",
+     "why": "上课铃是开始上课，不是放学。(It is a class-start bell, not dismissal.)"
     },
     {
-     "tag": "off_topic",
-     "why": "这是另一件事，和铃响后的行动没有关系。(Birds flying is unrelated to what students do after the bell.)"
+     "tag": "contradicts_context",
+     "why": "上课铃响了应该进课室，不是去食堂。(After the class bell they should be in class, not the canteen.)"
     }
    ],
    "solution": [
@@ -1946,25 +1946,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n他不但会弹钢琴，＿＿＿＿。",
    "options": [
-    "所以不会唱歌",
+    "所以他也会拉小提琴",
     "而且会拉小提琴",
-    "但是不喜欢",
-    "因为很好听"
+    "但是不喜欢弹琴",
+    "反而不会拉小提琴"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_connector",
-     "why": "「不但」要配「而且」，且「会弹琴」不是「不会唱歌」的原因。(不但 needs 而且, and playing piano does not cause not singing.)"
+     "tag": "wrong_connective",
+     "why": "「不但」要搭配「而且」，不能用「所以」。(不但 pairs with 而且, not 所以.)"
     },
     null,
     {
-     "tag": "wrong_connector",
-     "why": "「不但」要配「而且」，不能用转折。(不但 does not pair with 但是.)"
+     "tag": "wrong_connective",
+     "why": "「不但」要搭配「而且」，不能用「但是」。(不但 pairs with 而且, not 但是.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「因为」不能接在「不但」后面表示递进。(因为 cannot continue the progression.)"
+     "tag": "wrong_connective",
+     "why": "「不但」要搭配「而且」，不能用「反而」。(不但 pairs with 而且, not 反而.)"
     }
    ],
    "solution": [
@@ -2014,24 +2014,24 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n公园里的花开了，＿＿＿＿。",
    "options": [
-    "因为妈妈不在家",
-    "我今天没吃早餐",
-    "所以我们要考试了",
+    "蜜蜂都飞走了，一朵花也看不见",
+    "地上堆着厚厚的雪，白茫茫一片",
+    "因为花开了，所以大家都要考试",
     "红的、黄的、紫的，漂亮极了"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_connector",
-     "why": "「因为」引出的原因与花开无关。(The reason has no link to the flowers.)"
+     "tag": "contradicts_context",
+     "why": "前文说花开了，不可能一朵花也看不见。(The flowers have bloomed, so none cannot be seen.)"
     },
     {
-     "tag": "off_topic",
-     "why": "没吃早餐与花开无关。(Skipping breakfast is unrelated.)"
+     "tag": "contradicts_context",
+     "why": "花开是春天的景象，不会有厚厚的雪。(Flowers bloom in spring, not in thick snow.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「所以」引出的结果与花开无关。(The result is unrelated to the flowers.)"
+     "tag": "wrong_logic",
+     "why": "花开和考试之间没有因果关系。(There is no causal link between flowers and exams.)"
     },
     null
    ],
@@ -2082,25 +2082,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n这家餐馆的饭菜又好吃又便宜，＿＿＿＿。",
    "options": [
-    "所以没有一个人去",
+    "所以每到中午都冷冷清清的",
     "所以每到中午都挤满了客人",
-    "但是很多人喜欢",
-    "因为它很便宜"
+    "但是每到中午都挤满了客人",
+    "因为每到中午都挤满了客人"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "饭菜好又便宜，应该吸引客人，不会没人去。(Good, cheap food attracts customers.)"
+     "tag": "contradicts_context",
+     "why": "饭菜又好吃又便宜，不会冷清。(Tasty and cheap food would not leave it empty.)"
     },
     null,
     {
-     "tag": "wrong_connector",
-     "why": "又好吃又便宜后面不需要转折「但是」。(No contrast is needed after two good points.)"
+     "tag": "wrong_connective",
+     "why": "前后意思顺承，不能用转折的「但是」。(The two parts follow each other; 但是 is wrong.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "前面已经说了便宜，这样是重复，且「因为」不是结果。(This repeats the cause rather than giving the result.)"
+     "tag": "wrong_logic",
+     "why": "挤满客人是结果，不是原因，因果颠倒。(Being crowded is the result, not the reason.)"
     }
    ],
    "solution": [
@@ -2185,24 +2185,24 @@
    "stem": "下面哪一句最适合填入空格？\n弟弟跌倒了，膝盖流血了，妈妈＿＿＿＿。",
    "options": [
     "连忙帮他清洗伤口并贴上胶布",
-    "开心地称赞他做得好",
-    "问他今天晚餐想吃什么",
-    "要他继续在地上跑"
+    "开心地称赞他跌得好看极了",
+    "问他今天的功课做完了没有",
+    "叫他不要管伤口继续去踢足球"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_logic",
-     "why": "弟弟受伤，称赞他做得好不合情理。(Praising an injured child makes no sense.)"
-    },
-    {
-     "tag": "off_topic",
-     "why": "没有处理受伤，答非所问。(It ignores the injury.)"
+     "tag": "contradicts_context",
+     "why": "弟弟受伤流血，妈妈不会开心称赞。(He is bleeding, so mum would not cheerfully praise it.)"
     },
     {
      "tag": "wrong_logic",
-     "why": "受伤后应先处理伤口。(An injury should be treated first.)"
+     "why": "弟弟流血了，应先处理伤口。(He is bleeding, so the wound comes first.)"
+    },
+    {
+     "tag": "contradicts_context",
+     "why": "流血了不处理还去踢球，不合常理。(Ignoring bleeding to play football is unreasonable.)"
     }
    ],
    "solution": [
@@ -2218,25 +2218,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n只要每天坚持练习，＿＿＿＿。",
    "options": [
-    "你的字就永远写不好",
+    "你的字就会越写越难看",
     "你的字就会越写越漂亮",
-    "所以你的字不会进步",
-    "因为你的字很漂亮"
+    "你的字才会越写越漂亮",
+    "但是你的字会越写越漂亮"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "坚持练习与「永远写不好」矛盾。(Persistent practice contradicts 'never improve'.)"
+     "tag": "contradicts_context",
+     "why": "「只要每天坚持练习」的结果应该是进步。(Daily practice should lead to improvement.)"
     },
     null,
     {
-     "tag": "wrong_connector",
-     "why": "「只要……就……」后面不能接「所以」，且结果与坚持练习矛盾。(只要 pairs with 就, and the result contradicts practice.)"
+     "tag": "wrong_connective",
+     "why": "「只要」要搭配「就」，「才」是「只有」的搭配。(只要 pairs with 就; 才 pairs with 只有.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「只要」后面应是结果，不是原因。(After 只要 comes a result, not a reason.)"
+     "tag": "wrong_connective",
+     "why": "「只要」要搭配「就」，不能用「但是」。(只要 pairs with 就, not 但是.)"
     }
    ],
    "solution": [
@@ -2286,24 +2286,24 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n即使明天下大雨，＿＿＿＿。",
    "options": [
-    "我们就不去了",
-    "所以我们取消比赛",
-    "因为我们要上课",
+    "我们就可以不去学校",
+    "所以我们不用到学校了",
+    "因为我们要准时上课",
     "我们也要准时到学校"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_connector",
-     "why": "「即使」要配「也」，用「就不去了」不符搭配。(即使 pairs with 也, not 就不去了.)"
+     "tag": "wrong_connective",
+     "why": "「即使」要搭配「也」，不能用「就」。(即使 pairs with 也, not 就.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「即使」不能配表示结果的「所以」。(即使 does not pair with 所以.)"
+     "tag": "wrong_connective",
+     "why": "「即使」要搭配「也」，不能用「所以」。(即使 pairs with 也, not 所以.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「即使」不能配表示原因的「因为」。(即使 does not pair with 因为.)"
+     "tag": "wrong_connective",
+     "why": "「即使」要搭配「也」，不能用「因为」。(即使 pairs with 也, not 因为.)"
     },
     null
    ],
@@ -2354,25 +2354,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n与其抱怨天气太热，＿＿＿＿。",
    "options": [
-    "所以我们去游泳",
+    "所以去打开风扇凉快一下",
     "不如打开风扇凉快一下",
-    "不如继续抱怨下去",
-    "因为天气很热"
+    "不如一直不停抱怨下去",
+    "而且打开风扇凉快一下"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_connector",
-     "why": "「与其」要配「不如」，不能配「所以」。(与其 pairs with 不如, not 所以.)"
+     "tag": "wrong_connective",
+     "why": "「与其」要搭配「不如」，不能用「所以」。(与其 pairs with 不如, not 所以.)"
     },
     null,
     {
      "tag": "wrong_logic",
-     "why": "不如继续抱怨，与前面「与其抱怨」自相矛盾。(This contradicts 与其抱怨.)"
+     "why": "「与其抱怨」就是不要抱怨，不如抱怨相互矛盾。(与其 rejects complaining, so choosing to complain contradicts it.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「与其」要配「不如」，这里只是重复原因。(与其 pairs with 不如; this just restates the reason.)"
+     "tag": "wrong_connective",
+     "why": "「与其」要搭配「不如」，不能用「而且」。(与其 pairs with 不如, not 而且.)"
     }
    ],
    "solution": [
@@ -2388,25 +2388,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n他的书包里除了课本，＿＿＿＿。",
    "options": [
-    "没有任何一本书",
-    "所以很重",
+    "但是还有一本漫画书和水壶",
+    "因此装了一本漫画书和水壶",
     "还有一本漫画书和一个水壶",
-    "因此是红色的"
+    "还是没有一本漫画书和水壶"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "前面说有课本，后面说没有书，自相矛盾。(The textbook contradicts 'no books at all'.)"
+     "tag": "wrong_connective",
+     "why": "「除了……还有」是补充，不是转折，不能用「但是」。(除了…还有 adds items; it is not a contrast.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「除了……」后面应是「还有/都」，不是「所以」。(除了 should be followed by 还有 or 都.)"
+     "tag": "wrong_connective",
+     "why": "前后没有因果关系，不能用「因此」。(There is no cause and effect, so 因此 is wrong.)"
     },
     null,
     {
-     "tag": "wrong_connector",
-     "why": "「因此」引出的结果与「除了课本」无关。(The result has no link.)"
+     "tag": "wrong_logic",
+     "why": "「除了……」后面应补充另外的东西，这里意思不通。(After 除了 the sentence should add items, but this does not follow.)"
     }
    ],
    "solution": [
@@ -2457,24 +2457,24 @@
    "stem": "下面哪一句最适合填入空格？\n虽然这道题很难，＿＿＿＿。",
    "options": [
     "但是他没有放弃，终于想出了答案",
-    "所以他一下子就放弃了",
-    "因为他不会做",
-    "而且他放弃了"
+    "所以他没有放弃，终于想出了答案",
+    "而且他很快放弃，最后没想出答案",
+    "但是他很快就放弃，决定不做了"
    ],
    "answer": 0,
    "explain": [
     null,
     {
+     "tag": "wrong_connective",
+     "why": "「虽然」要搭配「但是」，不能用「所以」。(虽然 pairs with 但是, not 所以.)"
+    },
+    {
+     "tag": "wrong_connective",
+     "why": "「虽然」要搭配「但是」，不能用「而且」。(虽然 pairs with 但是, not 而且.)"
+    },
+    {
      "tag": "wrong_logic",
-     "why": "「虽然」要转折，「所以」是顺承，不合。(虽然 needs a turn; 所以 follows on.)"
-    },
-    {
-     "tag": "wrong_connector",
-     "why": "「虽然」要转折，「因为」不合搭配。(虽然 does not pair with 因为.)"
-    },
-    {
-     "tag": "wrong_connector",
-     "why": "「虽然」后要有「但是」类转折，「而且」是递进。(虽然 needs a turn such as 但是; 而且 adds.)"
+     "why": "题很难所以放弃，没有转折，不符合「虽然……但是」。(Giving up on a hard question is no contrast, so it does not fit 虽然…但是.)"
     }
    ],
    "solution": [
@@ -2558,24 +2558,24 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n大家都在认真看书，只有他＿＿＿＿。",
    "options": [
-    "也在认真看书",
-    "因为他想看书",
-    "所以他也看书",
+    "在座位上认真看书",
+    "因此在座位上吵吵闹闹",
+    "也在座位上吵吵闹闹",
     "在座位上吵吵闹闹"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "「只有他」表示与大家不同，「也」与它矛盾。(只有他 means he differs; 也 contradicts that.)"
+     "tag": "contradicts_context",
+     "why": "「只有他」应与「大家」不同，这里却相同。(只有他 should differ from everyone else.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「只有他」后面应是他的不同做法，不是原因。(After 只有他 comes what he does differently.)"
+     "tag": "wrong_connective",
+     "why": "前文没有原因，不能用「因此」。(Nothing before gives a cause, so 因此 is wrong.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「所以」不合，且「也」与「只有他」矛盾。(所以 and 也 conflict with 只有他.)"
+     "tag": "contradicts_context",
+     "why": "「只有他」后面不能用「也」，意思互相矛盾。(只有他 cannot take 也; it contradicts itself.)"
     },
     null
    ],
@@ -2593,24 +2593,24 @@
    "stem": "下面哪一句最适合填入空格？\n这个故事告诉我们，＿＿＿＿。",
    "options": [
     "做人要诚实，不能说谎",
-    "他骑自行车去了学校",
-    "小兔子住在森林里",
-    "公园里有很多人"
+    "做人要骄傲，不能向人学习",
+    "做人要小气，不能帮助别人",
+    "做人要偷懒，不能太努力"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "off_topic",
-     "why": "这是故事内容，不是道理。(This is a plot detail, not a moral.)"
+     "tag": "contradicts_context",
+     "why": "这是错误的道理，故事不会教人骄傲。(This is a wrong lesson; a story would not teach arrogance.)"
     },
     {
-     "tag": "off_topic",
-     "why": "这是故事背景，不是道理。(This is setting, not a moral.)"
+     "tag": "contradicts_context",
+     "why": "这是错误的道理，故事不会教人小气。(This is a wrong lesson; a story would not teach stinginess.)"
     },
     {
-     "tag": "off_topic",
-     "why": "与故事的道理无关。(Unrelated to a moral.)"
+     "tag": "contradicts_context",
+     "why": "这是错误的道理，故事不会教人偷懒。(This is a wrong lesson; a story would not teach laziness.)"
     }
    ],
    "solution": [
@@ -2626,25 +2626,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n由于交通堵塞，＿＿＿＿。",
    "options": [
-    "我们提早半小时到达",
+    "我们比预定时间早了半小时到达",
     "我们比预定时间晚了半小时到达",
-    "所以我们很准时",
-    "但是路上车很多"
+    "但是我们比预定时间晚了半小时",
+    "我们到达时已经非常准时了"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "交通堵塞会耽误时间，不会提早到。(A traffic jam delays arrival.)"
+     "tag": "contradicts_context",
+     "why": "交通堵塞会让人迟到，不会提早。(A traffic jam delays people; it does not make them early.)"
     },
     null,
     {
-     "tag": "wrong_connector",
-     "why": "「由于」后面本身已是结果，且堵塞不会使人准时。(A jam does not make you punctual.)"
+     "tag": "wrong_connective",
+     "why": "「由于」要接结果，不能用「但是」转折。(由于 leads to a result, not a contrast with 但是.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「由于」要接结果，不是转折。(由于 needs a result, not a turn.)"
+     "tag": "contradicts_context",
+     "why": "堵车会造成迟到，不会准时。(A jam causes lateness, not punctuality.)"
     }
    ],
    "solution": [
@@ -2728,17 +2728,17 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合接在这句话后面？\n这家老字号咖啡店在小贩中心开了三十年。",
    "options": [
-    "每天清晨，店主都会亲自磨咖啡豆，老顾客一闻到香味就知道是他家",
-    "新开的购物中心里有很多国际品牌",
-    "咖啡其实起源于非洲，后来才传到亚洲",
-    "可是这里一直没有顾客，三十年来生意冷清"
+    "每天清晨，店主亲自磨咖啡豆，老顾客一闻香味就认得",
+    "新开的购物中心里，有很多国际品牌的咖啡连锁店铺呢",
+    "咖啡其实起源于非洲，后来才慢慢传到了亚洲各地",
+    "可是这里一直没有顾客，三十年来生意都很冷清"
    ],
    "answer": 0,
    "explain": [
     null,
     {
      "tag": "off_topic",
-     "why": "话题转到购物中心，没有承接咖啡店。(It switches to a shopping mall.)"
+     "why": "话题转到购物中心，没有承接咖啡店。(It switches to a shopping mall instead of the coffee shop.)"
     },
     {
      "tag": "off_topic",
@@ -2746,7 +2746,7 @@
     },
     {
      "tag": "wrong_logic",
-     "why": "开了三十年的老店不可能一直没有顾客，这与前一句矛盾，也没有写出店的特色。(Thirty years of operation does not fit 'always empty'.)"
+     "why": "开了三十年的老店不可能一直没有顾客，与前一句矛盾，也没有写出店的特色。(A shop open for thirty years cannot always be empty.)"
     }
    ],
    "solution": [
@@ -2831,8 +2831,8 @@
    "stem": "下面哪一句最适合填入空格？\n一个人的力量是有限的，＿＿＿＿。",
    "options": [
     "只有一个人努力，才能完成更大的任务",
-    "所以一个人可以做所有的事",
-    "因为力量很大，所以不需要别人",
+    "所以一个人努力，就能完成所有的任务",
+    "因为力量很大，所以一个人不需要别人帮忙",
     "只有大家团结合作，才能完成更大的任务"
    ],
    "answer": 3,
@@ -2842,11 +2842,11 @@
      "why": "与前一句「力量有限」矛盾。(It contradicts 'limited strength'.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "与「力量有限」矛盾。(It contradicts 'limited strength'.)"
+     "tag": "contradicts_context",
+     "why": "前文说一个人力量有限，不可能做所有的事。(The context says one person's strength is limited.)"
     },
     {
-     "tag": "wrong_logic",
+     "tag": "contradicts_context",
      "why": "与「力量有限」矛盾。(It contradicts 'limited strength'.)"
     },
     null
@@ -2865,24 +2865,24 @@
    "stem": "下面哪一句最适合填入空格？\n小莉第一次上台演讲，手心全是汗。她深吸一口气，＿＿＿＿。",
    "options": [
     "开口说出了准备好的第一句话",
-    "高兴地冲出了教室",
-    "把所有的汗都吃掉",
-    "她的父母都是教师"
+    "转身走下台去不再演讲了",
+    "低着头看着地面一句话也不说",
+    "转身请老师代替她上台演讲"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_logic",
-     "why": "紧张的她没有理由冲出教室，也不符合上台演讲。(Rushing out does not fit giving a speech.)"
+     "tag": "contradicts_context",
+     "why": "她深吸一口气是为了鼓起勇气，不是放弃。(She breathes in to gather courage, not to quit.)"
     },
     {
-     "tag": "off_topic",
-     "why": "荒谬，与情景无关。(Absurd and unrelated.)"
+     "tag": "contradicts_context",
+     "why": "深吸一口气后应开口，不是继续沉默。(After the deep breath she should begin, not stay silent.)"
     },
     {
-     "tag": "off_topic",
-     "why": "与当前的紧张情景无关，没有承接动作。(It does not continue the scene.)"
+     "tag": "contradicts_context",
+     "why": "她要自己演讲，不是请人代替。(She is the speaker, not someone who asks others to take over.)"
     }
    ],
    "solution": [
@@ -2900,23 +2900,23 @@
    "options": [
     "孩子们在河里快乐地游泳",
     "村民们赶紧把家具搬到高处",
-    "河水反而变得很浅",
-    "因为农民很高兴"
+    "河水反而一下子变得很浅",
+    "村民们悠闲地到河边去野餐"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "河水暴涨很危险，不会快乐游泳。(Rising flood water is dangerous.)"
+     "tag": "contradicts_context",
+     "why": "河水暴涨很危险，孩子不会去游泳。(The river is dangerously high; children would not swim.)"
     },
     null,
     {
-     "tag": "wrong_logic",
-     "why": "大雨使河水暴涨，不会变浅。(Heavy rain does not make the river shallow.)"
+     "tag": "contradicts_context",
+     "why": "大雨后河水暴涨，不会变浅。(After heavy rain the river rises, not falls.)"
     },
     {
-     "tag": "off_topic",
-     "why": "与暴涨的情景不合。(It does not fit the flood.)"
+     "tag": "contradicts_context",
+     "why": "河水暴涨很危险，不会去野餐。(It is dangerous to picnic at a flooding river.)"
     }
    ],
    "solution": [
@@ -2932,25 +2932,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n他为了准备华文听写，＿＿＿＿。",
    "options": [
-    "打开电视看了一整晚的卡通",
-    "听写是一种测验",
+    "每天睡前打开电视，看了两个钟头的卡通",
+    "每天睡前都玩游戏，再请妈妈陪他玩",
     "每天睡前抄写两遍生词，再请妈妈考他",
-    "华文是我们的母语"
+    "每天睡前抄写两遍数学公式，再请妈妈考他"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "看电视不是准备听写。(Watching TV is not preparation.)"
+     "tag": "contradicts_context",
+     "why": "看卡通不是为听写做准备。(Watching cartoons is not preparing for dictation.)"
     },
     {
-     "tag": "off_topic",
-     "why": "重复说明，没有回答他怎么做。(It only restates the topic.)"
+     "tag": "contradicts_context",
+     "why": "玩游戏不是为听写做准备。(Playing games is not preparing for dictation.)"
     },
     null,
     {
-     "tag": "off_topic",
-     "why": "没有写出准备的做法。(It does not state what he did.)"
+     "tag": "wrong_logic",
+     "why": "他准备的是华文听写，应抄写生词，不是数学公式。(He prepares for Chinese dictation, so he copies words, not maths formulas.)"
     }
    ],
    "solution": [
@@ -2966,24 +2966,24 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n图书馆里不能大声说话，＿＿＿＿。",
    "options": [
-    "否则大家会更安静",
-    "所以要大声说话",
-    "但是读者很多",
+    "否则读者们会觉得更加安静",
+    "所以我们可以大声聊天",
+    "但是会影响其他读者看书",
     "否则会影响其他读者看书"
    ],
    "answer": 3,
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "大声说话不会更安静，逻辑相反。(Talking loudly does not make it quieter.)"
+     "why": "「否则」要接不好的结果，安静不是坏结果。(否则 introduces a bad result, and quiet is not bad.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "前一句说不能大声说话，这里却说要大声说话，自相矛盾。(The first sentence forbids loud talk; this demands it.)"
+     "tag": "contradicts_context",
+     "why": "前文说不能大声说话，这里却说可以。(The context forbids loud talk; this allows it.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "「但是」转折不合，没有解释规定的原因。(It does not explain the rule.)"
+     "tag": "wrong_connective",
+     "why": "前后顺承，不能用转折的「但是」，应该用「否则」。(The two parts follow each other; use 否则, not 但是.)"
     },
     null
    ],
@@ -3001,24 +3001,24 @@
    "stem": "下面哪一句最适合填入空格？\n这张照片已经泛黄了，＿＿＿＿。",
    "options": [
     "但照片里奶奶年轻时的笑容仍然清晰",
-    "所以照片是崭新的",
-    "因为刚刚拍摄的",
-    "而且色彩十分鲜艳"
+    "所以照片里奶奶年轻的笑容仍很清晰",
+    "因为这张照片是昨天刚刚拍摄的",
+    "而且照片的色彩依然十分鲜艳明亮"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_logic",
-     "why": "泛黄说明很旧，与崭新矛盾。(Yellowed means old, not brand new.)"
+     "tag": "wrong_connective",
+     "why": "前后是转折关系，不能用「所以」。(The two parts contrast; 所以 is wrong.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "泛黄说明年代久远，不是刚拍的。(Yellowing means it is old.)"
+     "tag": "contradicts_context",
+     "why": "照片已经泛黄，不会是刚拍的。(A yellowed photo cannot be freshly taken.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "泛黄的照片不会色彩鲜艳，且递进不合。(A yellowed photo is not vivid.)"
+     "tag": "contradicts_context",
+     "why": "照片泛黄，色彩不会依然鲜艳。(A yellowed photo does not keep bright colours.)"
     }
    ],
    "solution": [
@@ -3034,25 +3034,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n小明答错了题目，同学们都笑了。老师却说：“＿＿＿＿。”",
    "options": [
-    "你太笨了，下次别举手",
-    "能勇敢举手就是进步，我们来看看错在哪里",
-    "今天的天气真好",
-    "谁笑得最大声，谁就是第一名"
+    "你怎么这么粗心，下次别再举手了好吗",
+    "能勇敢举手就是进步，我们看看错在哪里",
+    "大家笑得对，这题答案本来就很简单啊",
+    "谁笑得最大声，谁就可以先回答下一道题"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "带有讽刺，不符合老师「却说」的鼓励语气。(It is mocking, not the encouraging tone 却 signals.)"
+     "tag": "contradicts_context",
+     "why": "老师「却」说，应与同学的嘲笑不同，应该鼓励而不是责备。(The teacher should encourage, not scold.)"
     },
     null,
     {
-     "tag": "off_topic",
-     "why": "没有回应答错的事。(It ignores the mistake.)"
+     "tag": "contradicts_context",
+     "why": "老师不应赞同同学嘲笑答错的人。(A teacher should not endorse laughing at a wrong answer.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "荒谬，也没有解决答错的问题。(Absurd and does not address the error.)"
+     "tag": "contradicts_context",
+     "why": "老师不应奖励嘲笑别人的行为。(A teacher should not reward mocking.)"
     }
    ],
    "solution": [
@@ -3068,25 +3068,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n新加坡虽然是个小国家，＿＿＿＿。",
    "options": [
-    "所以国土面积很大",
-    "但是国家很小",
+    "却拥有着非常辽阔的国土面积",
+    "但是还是一个很小的国家呀",
     "却有着多元种族和丰富的文化",
-    "因为人口很多"
+    "所以有着多元种族和丰富的文化"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "与「小国家」矛盾，「所以」也不合。(It contradicts 'small country'.)"
+     "tag": "contradicts_context",
+     "why": "新加坡是小国，国土不辽阔，与事实矛盾。(Singapore is small, so a vast territory is false.)"
     },
     {
-     "tag": "wrong_connector",
-     "why": "重复前半句，没有转折。(It repeats rather than turns.)"
+     "tag": "wrong_logic",
+     "why": "「虽然小」后面不能只重复「很小」，没有转折。(After 虽然 small, merely repeating small gives no contrast.)"
     },
     null,
     {
-     "tag": "wrong_connector",
-     "why": "「虽然」后需要转折，这里是解释原因。(It gives a reason instead of turning.)"
+     "tag": "wrong_connective",
+     "why": "「虽然」要搭配「却」或「但是」，不能用「所以」。(虽然 pairs with 却/但是, not 所以.)"
     }
    ],
    "solution": [
@@ -3102,24 +3102,24 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n为了保护海洋，我们应该少用塑料袋。＿＿＿＿。",
    "options": [
-    "海里的鱼儿喜欢游泳",
-    "塑料袋是用来装东西的",
-    "所以海龟很快乐",
-    "因为海龟常常把飘在水中的塑料袋误当成水母吃下去"
+    "因为海龟常常把水母误当成塑料袋吃下肚去",
+    "因为塑料袋能让海水变得更加清澈干净",
+    "因为海龟吃了塑料袋以后会变得健康",
+    "因为海龟常把飘着的塑料袋当成水母吃下去"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "off_topic",
-     "why": "没有解释为什么要少用塑料袋。(It does not explain why.)"
+     "tag": "contradicts_context",
+     "why": "与事实相反，是海龟误吃塑料袋。(It is the reverse of the fact; turtles eat bags, mistaking them for jellyfish.)"
     },
     {
-     "tag": "off_topic",
-     "why": "没有回答原因。(It does not give the reason.)"
+     "tag": "contradicts_context",
+     "why": "塑料袋会污染海水，不能成为少用的理由。(Plastic bags pollute, so this is no reason to use fewer.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "塑料袋对海龟有害，不会让它快乐。(Plastic harms turtles.)"
+     "tag": "contradicts_context",
+     "why": "吃塑料袋对海龟有害，不是理由。(Eating plastic harms turtles, so it is no reason.)"
     },
     null
    ],
@@ -3137,24 +3137,24 @@
    "stem": "下面哪一句最适合填入空格？\n小华没考好，一路上闷闷不乐。妈妈＿＿＿＿。",
    "options": [
     "摸摸他的头，轻声说：“下次努力就好。”",
-    "大声骂他：“你真让我高兴！”",
-    "开心地哼着歌",
-    "买了一个大蛋糕庆祝他考不好"
+    "大声骂他，说：“你真让我失望透了！”",
+    "没有理会他，只顾着在厨房里开心地哼歌",
+    "笑嘻嘻地说：“考得不好，我们去庆祝吧！”"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_tone",
-     "why": "语气与「闷闷不乐」的情景不合，也是反话。(The tone does not suit a sad child.)"
+     "tag": "contradicts_context",
+     "why": "孩子已经难过，妈妈不该责骂，不合情境。(The child is already sad; scolding does not fit.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "妈妈没有关心小华的心情。(It ignores his mood.)"
+     "tag": "contradicts_context",
+     "why": "孩子闷闷不乐，妈妈不会不理他。(The child is sad, so mum would not ignore him.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "庆祝考不好不合情理。(Celebrating failing makes no sense.)"
+     "tag": "contradicts_context",
+     "why": "没考好不值得庆祝，语气不合。(Doing badly is not something to celebrate.)"
     }
    ],
    "solution": [
@@ -3170,25 +3170,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n科学家发现，经常运动的人比不运动的人更不容易生病。这说明＿＿＿＿。",
    "options": [
-    "生病的人最喜欢运动",
+    "生病的人都特别喜欢运动",
     "运动对身体健康很有好处",
-    "科学家都喜欢运动",
-    "运动会让人容易生病"
+    "科学家一定每天都在运动",
+    "运动会让人更容易生病"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_logic",
-     "why": "与研究的结果无关，也不能由此推出。(This does not follow.)"
+     "why": "因果颠倒，说明不了运动的作用。(The cause and effect are reversed.)"
     },
     null,
     {
-     "tag": "off_topic",
-     "why": "不是结论，与研究结果无关。(Not a conclusion.)"
+     "tag": "wrong_logic",
+     "why": "与实验结论无关。(It does not follow from the finding.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "与研究发现相反。(It reverses the finding.)"
+     "tag": "contradicts_context",
+     "why": "与科学家的发现相反。(It is the opposite of the finding.)"
     }
    ],
    "solution": [
@@ -3204,25 +3204,25 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合填入空格？\n他说话总是慢条斯理的，＿＿＿＿。",
    "options": [
-    "所以说话像连珠炮一样快",
-    "因此大家听不懂他说得太快",
+    "所以他说话像连珠炮一样，又快又急",
+    "因此大家常常嫌他说话太快，听不懂",
     "即使事情再紧急，也不见他着急",
-    "我对天气预报很感兴趣"
+    "无论事情多紧急，他说话都像连珠炮"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "与「慢条斯理」矛盾。(It contradicts 'slow and unhurried'.)"
+     "tag": "contradicts_context",
+     "why": "慢条斯理是说话慢，与「像连珠炮」矛盾。(慢条斯理 means slow and calm, which contradicts rapid-fire speech.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "与「慢条斯理」矛盾。(It contradicts 'slow and unhurried'.)"
+     "tag": "contradicts_context",
+     "why": "他说话慢，不会太快。(He speaks slowly, not too fast.)"
     },
     null,
     {
-     "tag": "off_topic",
-     "why": "与他说话的特点无关。(Unrelated.)"
+     "tag": "contradicts_context",
+     "why": "与慢条斯理的性格矛盾。(It contradicts his slow, calm manner.)"
     }
    ],
    "solution": [
@@ -3238,24 +3238,24 @@
    "pattern": "chi-pat-juzi-xuanyong",
    "stem": "下面哪一句最适合接在这句话后面？\n早餐时间，小贩中心里挤满了人。",
    "options": [
-    "安静得连一根针掉在地上都听得见",
-    "老板在睡觉，没有一个客人",
-    "这是一间旧教室",
-    "有人排队买鸡蛋面，有人端着咖啡找座位，十分热闹"
+    "四周静悄悄的，连一根针掉下来都听得见",
+    "摊主们在打瞌睡，一个客人也没有来",
+    "课室里很安静，同学们正在专心上课",
+    "有人排队买鸡蛋面，有人端着咖啡找座位"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_logic",
-     "why": "与「挤满了人」矛盾。(It contradicts 'packed with people'.)"
+     "tag": "contradicts_context",
+     "why": "挤满了人，不会安静。(A crowded place is not silent.)"
     },
     {
-     "tag": "wrong_logic",
-     "why": "与「挤满了人」矛盾。(It contradicts 'packed with people'.)"
+     "tag": "contradicts_context",
+     "why": "挤满了人，不会没有客人。(It is crowded, so there are customers.)"
     },
     {
-     "tag": "off_topic",
-     "why": "说的是另一处地方。(It is about another place.)"
+     "tag": "contradicts_context",
+     "why": "场景是小贩中心，不是课室。(The scene is a hawker centre, not a classroom.)"
     },
     null
    ],
