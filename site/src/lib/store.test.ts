@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -126,14 +126,14 @@ test('v1 -> v2 keeps cards, progress and streak, clears questions, backs up the 
   const v1 = v1Save();
   const data = mockStorage({ 'ccx:save': JSON.stringify(v1) });
   const s = load();
-  assert.equal(s.schemaVersion, 3);
+  assert.equal(s.schemaVersion, 4);
   assert.deepEqual(s.questions, {});
   assert.deepEqual(s.cards, v1.cards);
   assert.deepEqual(s.progress, v1.progress);
   assert.deepEqual(s.streak, v1.streak);
   assert.equal(s.settings.playerName, 'Kept');
   assert.deepEqual(JSON.parse(data['ccx:backup']), v1);
-  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 3);
+  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 4);
 });
 
 test('a v2 save loads untouched and writes no backup', () => {
@@ -148,7 +148,7 @@ test('a failed migration preserves the raw save in ccx:failed:1 and leaves ccx:s
   const raw = JSON.stringify({ ...fresh(), schemaVersion: 0 }); // no migration from 0
   const data = mockStorage({ 'ccx:save': raw });
   const s = load();
-  assert.equal(s.schemaVersion, 3);
+  assert.equal(s.schemaVersion, 4);
   assert.deepEqual(s.cards, {});
   assert.equal(data['ccx:failed:1'], raw);
   assert.equal(data['ccx:failed:2'], undefined);
@@ -157,7 +157,7 @@ test('a failed migration preserves the raw save in ccx:failed:1 and leaves ccx:s
 });
 
 test('two loads of the same broken save write ccx:failed:1 once and create no extra keys', () => {
-  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: 4 })]) {
+  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: 5 })]) {
     const data = mockStorage({ 'ccx:save': raw, 'ccx:backup': 'old-backup' });
     let writes = 0;
     const set = (localStorage as any).setItem;
@@ -201,11 +201,11 @@ test('a legacy ccx:failed key is deduped against, folded into the slots once, th
 test('importCode migrates a v1 code, refuses a newer one, and writes no backup', async () => {
   const data = mockStorage({ 'ccx:save': 'current-save' });
   const s = await importCode(await exportCode(v1Save() as any));
-  assert.equal(s.schemaVersion, 3);
+  assert.equal(s.schemaVersion, 4);
   assert.deepEqual(s.questions, {});
   assert.equal(data['ccx:backup'], undefined);
   assert.equal(data['ccx:save'], 'current-save');
-  const newer: any = { ...fresh(), schemaVersion: 4 };
+  const newer: any = { ...fresh(), schemaVersion: 5 };
   await assert.rejects(importCode(await exportCode(newer)), /newer version/);
   assert.equal(data['ccx:backup'], undefined);
 });
@@ -237,7 +237,7 @@ test('migration 2 -> 3 keeps cleared tiers, cards and everything else', () => {
   const before = JSON.stringify(v2);
   const s = migrate(v2);
   assert.equal(JSON.stringify(v2), before);
-  assert.equal(s.schemaVersion, 3);
+  assert.equal(s.schemaVersion, 4);
   assert.equal(s.progress['p4-sub'].b.cleared, true);
   assert.equal(s.progress['p6-sub'].b.cleared, false); // lazily judged from its questions at the next quiz
   assert.deepEqual(s.cards, v2.cards);
@@ -330,4 +330,88 @@ test('perfect first-ever Basic quiz clears Basic and awards the card; only that 
   s = fresh();
   openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0);
   assert.equal(finishQuiz(s, q('b', 10), reward, t0 + 1, ids).cleared, true);
+});
+
+// ---- daily limits: 120 minutes or 10 quizzes; Admin has none
+const rw = () => null;
+const finish = (s: any, mode: 'tier' | 'paper' | 'review', n = 1, ms = 1000) => {
+  for (let i = 0; i < n; i++) {
+    const a: any = { mode, score: 5, total: 10, ms, tags: [] };
+    if (mode === 'tier') { a.sub = 'x'; a.tier = 'b'; }
+    finishQuiz(s, a, rw as any);
+  }
+};
+
+test('quiz cap: the 11th tier quiz is blocked; Daily Review after 10 is allowed and does not count', () => {
+  mockStorage({});
+  const s = fresh();
+  finish(s, 'tier', 9);
+  assert.equal(dayBlock(s, 'tier'), null);
+  finish(s, 'paper', 1); // papers count too: 10 now
+  assert.equal(quizzesToday(s), DAILY_QUIZ_CAP);
+  assert.equal(quizCapReached(s), true);
+  assert.equal(dayBlock(s, 'tier'), 'quizzes');
+  assert.equal(dayBlock(s, 'paper'), 'quizzes');
+  assert.equal(dayBlock(s, 'review'), null);
+  finish(s, 'review', 3);
+  assert.equal(quizzesToday(s), DAILY_QUIZ_CAP); // reviews never count
+  assert.equal(dayBlock(s, 'review'), null);
+});
+
+test('an open (started, unfinished) tier quiz counts toward the quiz cap once, not twice', () => {
+  mockStorage({});
+  const s = fresh();
+  finish(s, 'tier', 9);
+  openAttempt(s, { sub: 'x', tier: 'b', total: 10 });
+  assert.equal(quizzesToday(s), 10);
+  finish(s, 'tier', 1); // finishing replaces the open record
+  assert.equal(quizzesToday(s), 10);
+});
+
+test('time cap still works at the 120-minute default; review is blocked too', () => {
+  mockStorage({});
+  const s = fresh();
+  assert.equal(s.settings.dailyCapMin, DEFAULT_CAP_MIN);
+  assert.equal(DEFAULT_CAP_MIN, 120);
+  finish(s, 'tier', 1, 119 * 60_000);
+  assert.equal(capReached(s), false);
+  finish(s, 'tier', 1, 60_000);
+  assert.equal(capReached(s), true);
+  assert.equal(dayBlock(s, 'tier'), 'time');
+  assert.equal(dayBlock(s, 'review'), 'time');
+});
+
+test('Admin: no time cap, no quiz cap, unlimited tries per day', () => {
+  mockStorage({ 'ccx:player-name': 'Admin' });
+  assert.equal(isUnlimited(), true);
+  const s = fresh();
+  finish(s, 'tier', 12, 20 * 60_000); // 240 minutes, 12 quizzes
+  for (let i = 0; i < 9; i++) openAttempt(s, { sub: 'x', tier: 'b', total: 10 });
+  assert.equal(capReached(s), false);
+  assert.equal(quizCapReached(s), false);
+  assert.equal(dayBlock(s, 'tier'), null);
+  assert.equal(triesUsedUp(s, 'x', 'b'), false);
+  assert.equal(attemptsLeft(s, 'x', 'b'), Infinity);
+  mockStorage({ 'ccx:player-name': 'Alyssa' });
+  assert.equal(isUnlimited(), false);
+  assert.equal(triesUsedUp(s, 'x', 'b'), true);
+  assert.equal(isUnlimited('Admin'), true);
+  mockStorage({});
+});
+
+test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () => {
+  const v3 = (cap: number): any => { const x: any = fresh(); x.schemaVersion = 3; x.settings.dailyCapMin = cap; return x; };
+  assert.equal(migrate(v3(45)).settings.dailyCapMin, 120);
+  assert.equal(migrate(v3(60)).settings.dailyCapMin, 60);
+  assert.equal(migrate(v3(90)).schemaVersion, 4);
+});
+
+test('Admin: every tier is open with nothing cleared; a normal player is locked', () => {
+  const s = fresh();
+  mockStorage({ 'ccx:player-name': 'Admin' });
+  assert.equal(tierOpen(s, 'x', 'c'), true);
+  assert.equal(tierOpen(s, 'x', 'i'), true);
+  mockStorage({ 'ccx:player-name': 'Alyssa' });
+  assert.equal(tierOpen(s, 'x', 'c'), false);
+  mockStorage({});
 });

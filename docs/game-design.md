@@ -148,7 +148,7 @@ A **monster** is a boss standing for the student's current competency in a schoo
 - **No loot boxes at all** (not even with disclosed odds). Every outcome is deterministic and previewed.
 - No leaderboards, no public comparison, no shaming copy ("You failed" is replaced by "Not yet").
 - Losing a streak removes nothing the student owns.
-- **No infinite play:** the parent sets a daily session cap (default 45 minutes, range 45 to 120 in steps of 15). The quiz in progress finishes, then the app shows **"Done for today"** and offers only the Codex and collection.
+- **No infinite play:** the day ends at whichever comes first of two limits. **Time:** the parent sets a daily training time (default 120 minutes, range 45 to 180 in steps of 15). **Quizzes:** 10 a day; tier quizzes and WA/SA papers count, Daily Review does not, and retests inside a tier quiz do not change the count. The quiz in progress finishes, then the app shows **"Done for today"** (saying which limit) and offers only the Codex and collection. After the quiz limit, Daily Review (retests only) stays open; after the time limit it does not. The owner's test account "Admin" has no limits and every tier unlocked.
 - No notifications, no timed rewards, and no "limited-time" events.
 
 ## 7. Parent view
@@ -223,7 +223,7 @@ The index shelf gets an "owned only" toggle and a small owned badge. Locked cook
 
 ## 11. Open questions
 
-1. **Daily cap default?** Recommend 45 minutes, goal 2 quizzes.
+1. **Daily cap default?** Recommend 120 minutes and 10 quizzes, goal 2 quizzes.
 2. **PSLE date for the countdown?** Recommend a parent-editable default of 30 Sep 2027, shown as "about N weeks".
 3. **Is the Basic-to-common deviation acceptable?** Recommend yes (class mapping with first 7 Basics literally common).
 4. **Should Chinese and English MCQs get extra time?** Recommend +25% for Chinese, none for English.

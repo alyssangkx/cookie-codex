@@ -90,11 +90,13 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
   - Spaced retest: a wrong answer is due again in 1, then 3, then 7 days; a new question answered correctly retires at once.
   - Practice papers never retire questions.
   - A started quiz counts toward the daily tries (5 for P1-P5, 3 for P6).
-  - The daily cap and goal.
+  - The daily limits: the day ends at `dailyCapMin` minutes (default 120, parent range 45-180) or 10 quizzes (`DAILY_QUIZ_CAP`), whichever comes first. Tier quizzes (started or finished) and WA/SA papers count; Daily Review and retests inside a tier quiz do not. After the quiz limit only Daily Review stays open; after the time limit nothing does. `dayBlock(s, mode)` gives the reason and `blockMessage()` the text. There is also a daily goal.
+  - **Admin test account:** `isUnlimited()` is true when kv `player-name` is `Admin` (a deliberate name-based check; signing in as it needs its PIN). It has no time cap, no quiz cap, no tries-per-day limit, and `tierOpen()` is always true so every tier is unlocked. Tiers under `MIN_POOL` are still unplayable; clearing, cards and mastery work normally.
   - The streak counts weeks with 4 or more goal days, so weekends never break it.
   - Card power reflects retention.
   - `migrations` runs on `load()` and `importCode()`. Add a new step there for every schema bump.
     - 2→3 changes no field: every already-cleared tier stays cleared with its card. A tier whose questions are all retired but not yet marked is cleared lazily, by `syncTiers()` at the end of the next quiz that touches it (the ids come from the quiz page).
+    - 3→4 sets `dailyCapMin` to 120 only if it is exactly 45 (the old default); other values were a parent's choice and stay.
     - 1→2 keeps progress, cards, attempts, days, streak and settings, and clears `questions` (old stem-hash ids cannot be matched).
     - 2→3 changes no fields. A tier whose questions are all retired but not yet marked cleared only clears after its next quiz (`syncTiers` needs the question ids, which only the quiz page has). There is deliberately no load-time sync.
     - `load()` copies the pre-migration save string to `ccx:backup`.

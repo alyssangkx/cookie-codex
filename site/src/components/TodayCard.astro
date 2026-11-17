@@ -12,21 +12,21 @@
 </aside>
 
 <script>
-  import { load, today, liveStreak, capReached, TIER_NAME } from '../lib/store';
+  import { load, today, liveStreak, capReached, quizCapReached, TIER_NAME } from '../lib/store';
   const s = load();
   const t = today(s);
   const goal = s.settings.dailyGoalQuizzes;
   const done = Math.min(t.quizzes, goal);
   document.getElementById('tc-ring')!.textContent = `${done}/${goal}`;
   document.querySelector<HTMLElement>('.today-card .ring')!.style.setProperty('--p', `${(100 * done) / goal}%`);
-  document.getElementById('tc-goal')!.textContent = capReached(s)
+  document.getElementById('tc-goal')!.textContent = capReached(s) || quizCapReached(s)
     ? 'Done for today! See you tomorrow.'
     : done >= goal ? "Today's goal met ✓" : `Today's goal: ${goal - done} more quiz${goal - done === 1 ? '' : 'zes'}`;
   const streak = liveStreak(s), cards = Object.keys(s.cards).length;
   document.getElementById('tc-meta')!.textContent =
     `${streak ? `${streak}-week streak` : 'Streak: 4 goal days in a week'} · ${cards} card${cards === 1 ? '' : 's'} collected`;
   const go = document.getElementById('tc-go') as HTMLAnchorElement;
-  if (s.last && !capReached(s)) {
+  if (s.last && !capReached(s) && !quizCapReached(s)) {
     const [prefix, ...rest] = s.last.sub.split('-');
     const school = ({ math: 'math', sci: 'science', eng: 'english', chi: 'chinese' } as Record<string, string>)[prefix];
     go.textContent = `Continue: ${TIER_NAME[s.last.tier]}`;

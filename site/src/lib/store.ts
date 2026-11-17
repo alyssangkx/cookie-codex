@@ -17,9 +17,9 @@ export interface Attempt {
   score: number; total: number; ms: number; tags: string[];
   open?: boolean; // started but not finished: still counts as a try
 }
-// The interface keeps its v1 name so imports stay unchanged; schemaVersion is now 3 (see `migrations`).
+// The interface keeps its v1 name so imports stay unchanged; schemaVersion is now 4 (see `migrations`).
 export interface SaveV1 {
-  schemaVersion: 3;
+  schemaVersion: 4;
   createdAt: number;
   settings: {
     dailyCapMin: number; dailyGoalQuizzes: number;
@@ -36,7 +36,7 @@ export interface SaveV1 {
 
 const KEY = 'ccx:save';
 const BACKUP_KEY = 'ccx:backup'; // copy of a save taken just before a migration rewrites it
-export const SCHEMA = 3;
+export const SCHEMA = 4;
 const DAY = 86_400_000;
 const STEP_DAYS = [0, 1, 3, 7];
 export const TIER_MIN: Record<Tier, number> = { b: 12, i: 15, c: 20 };
@@ -44,6 +44,8 @@ export const MIN_POOL = 20; // a tier is playable (and can clear) only with at l
 export const PASS = 0.8;
 export const QUIZ_SIZE = 10; // a pass needs a full 10-question quiz
 export const WEEK_GOAL_DAYS = 4; // a streak week needs 4 goal days; rest days never break it
+export const DEFAULT_CAP_MIN = 120; // default daily training time, in minutes (parent range 45-180)
+export const DAILY_QUIZ_CAP = 10; // tier quizzes + WA/SA papers per day; Daily Review does not count
 export const ATTEMPTS_PER_DAY = 3; // tries per tier per day for P6 sub-topics (and any sub-topic with no listed P-level)
 export const ATTEMPTS_PER_DAY_LOW = 5; // P1-P5 sub-topics
 
@@ -59,9 +61,9 @@ export const isLow = (sub: string) => subLevel(sub) <= 5;
 export const triesPerDay = (sub: string) => (isLow(sub) ? ATTEMPTS_PER_DAY_LOW : ATTEMPTS_PER_DAY);
 
 export const fresh = (): SaveV1 => ({
-  schemaVersion: 3,
+  schemaVersion: 4,
   createdAt: Date.now(),
-  settings: { dailyCapMin: 45, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: '' },
+  settings: { dailyCapMin: DEFAULT_CAP_MIN, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: '' },
   progress: {}, questions: {}, cards: {}, attempts: [], days: {},
   streak: { current: 0, best: 0, lastDay: null, freezeUsedWeek: null, studyDays: 0 },
   last: null,
@@ -85,6 +87,9 @@ export const migrations: Record<number, (s: any) => any> = {
   // Consequence: an already fully-retired tier clears only after its next quiz, not at load time
   // (deliberately no load-time sync).
   2: (s) => s,
+  // 3 -> 4: the default daily cap rose from 45 to 120 minutes. Only the old default (exactly 45) moves;
+  // any other value was chosen by a parent and stays.
+  3: (s) => (s.settings?.dailyCapMin === 45 ? { ...s, settings: { ...s.settings, dailyCapMin: DEFAULT_CAP_MIN } } : s),
 };
 
 /** Run every migration from the save's version up to SCHEMA. Does not touch storage. */
@@ -219,7 +224,32 @@ export const weekId = (key: string) => {
 };
 
 export const today = (s: SaveV1) => s.days[dayKey()] ?? { quizzes: 0, min: 0, correct: 0, total: 0 };
-export const capReached = (s: SaveV1) => today(s).min >= s.settings.dailyCapMin;
+
+/**
+ * The owner's test account "Admin" has no limits: no time cap, no quiz cap, no tries per day. The check is
+ * the signed-in profile's name (login stores it in kv `player-name`). A name-based check is deliberate:
+ * signing in as Admin needs its PIN. `name` is injectable for tests.
+ */
+export const isUnlimited = (name: string | null = kv.get('player-name')) => name === 'Admin';
+
+/** Time cap: today's minutes have reached the parent's daily limit. Daily Review is blocked too. */
+export const capReached = (s: SaveV1) => !isUnlimited() && today(s).min >= s.settings.dailyCapMin;
+
+/** Quizzes started today that count toward the quiz cap: tier quizzes (started or finished) and WA/SA papers.
+ *  Daily Review never counts, and retests inside a tier quiz do not change the count. */
+export const quizzesToday = (s: SaveV1) =>
+  s.attempts.filter((a) => (a.mode === 'tier' || a.mode === 'paper') && dayKey(a.ts) === dayKey()).length;
+export const quizCapReached = (s: SaveV1) => !isUnlimited() && quizzesToday(s) >= DAILY_QUIZ_CAP;
+
+/** Why a quiz of this mode cannot start now, or null. Review is exempt from the quiz cap only. */
+export function dayBlock(s: SaveV1, mode: Attempt['mode']): 'time' | 'quizzes' | null {
+  if (capReached(s)) return 'time';
+  if (mode !== 'review' && quizCapReached(s)) return 'quizzes';
+  return null;
+}
+export const blockMessage = (r: 'time' | 'quizzes') =>
+  r === 'time' ? "Done for today! You have reached today's training time. Come back tomorrow."
+    : `Done for today! You've done ${DAILY_QUIZ_CAP} quizzes today. Come back tomorrow.`;
 export const goalMet = (s: SaveV1) => today(s).quizzes >= s.settings.dailyGoalQuizzes;
 
 /** Goal-met days (YYYY-MM-DD), judged against the current daily goal. */
@@ -278,6 +308,7 @@ export const tierState = (s: SaveV1, sub: string, t: Tier): TierState =>
 /** A tier opens when the tier below is cleared. Tiers with too few questions to play are skipped,
  *  so a tier is never locked behind one that cannot be cleared. Pass `playable` when known. */
 export function tierOpen(s: SaveV1, sub: string, t: Tier, playable?: Record<Tier, boolean>): boolean {
+  if (isUnlimited()) return true; // Admin test account: every tier is open (playability is checked by the callers)
   for (let i = TIERS.indexOf(t) - 1; i >= 0; i--) {
     const lower = TIERS[i];
     if (playable && !playable[lower]) continue;
@@ -286,7 +317,10 @@ export function tierOpen(s: SaveV1, sub: string, t: Tier, playable?: Record<Tier
   return true;
 }
 
-export const attemptsLeft = (s: SaveV1, sub: string, t: Tier) => Math.max(0, triesPerDay(sub) - attemptsToday(s, sub, t));
+export const attemptsLeft = (s: SaveV1, sub: string, t: Tier) =>
+  isUnlimited() ? Infinity : Math.max(0, triesPerDay(sub) - attemptsToday(s, sub, t));
+/** True when no more tries are allowed at this tier today (never for Admin). */
+export const triesUsedUp = (s: SaveV1, sub: string, t: Tier) => !isUnlimited() && attemptsToday(s, sub, t) >= triesPerDay(sub);
 export const attemptsToday = (s: SaveV1, sub: string, t: Tier) =>
   s.attempts.filter((a) => a.mode === 'tier' && a.sub === sub && a.tier === t && dayKey(a.ts) === dayKey()).length;
 

@@ -47,7 +47,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
 <script>
   import { MIN_POOL,
-    load, save, answer, finishQuiz, openAttempt, capReached, attemptsToday, tierOpen, minutesFor,
+    load, save, answer, finishQuiz, openAttempt, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
   import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
@@ -130,10 +130,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     } else {
       $('title').textContent = 'Daily Review';
     }
-    if (capReached(s)) return stop("Done for today! You have reached today's training time. Come back tomorrow.", '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
+    const blocked = dayBlock(s, mode);
+    if (blocked) return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
     const playable = { b: sub?.count.b >= MIN_POOL, i: sub?.count.i >= MIN_POOL, c: sub?.count.c >= MIN_POOL };
+    if (mode === 'tier' && !playable[tier]) return stop('This tier has no questions yet.');
     if (mode === 'tier' && !tierOpen(s, subId, tier, playable)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
-    if (mode === 'tier' && attemptsToday(s, subId, tier) >= sub.tries) return stop(`You have had ${sub.tries} tries at this tier today. Try again tomorrow.`);
+    if (mode === 'tier' && triesUsedUp(s, subId, tier)) return stop(`You have had ${sub.tries} tries at this tier today. Try again tomorrow.`);
 
     try {
       const files = mode === 'tier' ? [sub.file] : mode === 'paper' ? paperTopics : meta.files;
@@ -297,7 +299,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         ${esc(c.name)} ${'★'.repeat(cl.reward.stars)}</span></a>`;
     }
     if (res.goalJustMet) html += '<p class="verdict good">Daily goal met! Your streak grows.</p>';
-    if (capReached(s)) html += "<p>Done for today! You have reached today's training time.</p>";
+    { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b)}</p>`; }
     $('verdict').innerHTML = html;
     $('review').innerHTML = wrongs.map(({ q, chose }) =>
       `<details class="rev"><summary>${fmt(q.stem)}</summary>

@@ -44,14 +44,16 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 </Base>
 
 <script>
-  import { load, tierState, tierOpen, attemptsToday, capReached, minutesFor, actualReward, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, triesUsedUp, capReached, quizCapReached, blockMessage, minutesFor, actualReward, type Tier } from '../../../lib/store';
   const s = load();
   const root = document.querySelector<HTMLElement>('.sub-page')!;
   const sub = root.dataset.sub!;
   const tries = Number(root.dataset.tries);
-  const cap = capReached(s);
+  const reason = capReached(s) ? 'time' : quizCapReached(s) ? 'quizzes' : null;
   const playable = Object.fromEntries([...root.querySelectorAll<HTMLElement>('.tier-card')].map((c) => [c.dataset.tier, c.dataset.playable === 'true'])) as Record<Tier, boolean>;
-  document.getElementById('cap')!.hidden = !cap;
+  const capEl = document.getElementById('cap')!;
+  capEl.hidden = !reason;
+  if (reason) capEl.textContent = blockMessage(reason);
   root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
     // the preview always matches the real reward: a star only if the card is already owned
     card.querySelector('.reward-label')!.textContent = actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
@@ -65,8 +67,8 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     if (st.cleared) msg.textContent = `Cleared ✓ Every question mastered. You can keep practising.`;
     else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
     else msg.textContent = st.mastered ? `${st.mastered} of ${st.total} questions mastered. Keep going!` : 'Ready when you are.';
-    if (!block && attemptsToday(s, sub, t) >= tries) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
-    if (!block && cap) block = 'Done for today.';
+    if (!block && triesUsedUp(s, sub, t)) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
+    if (!block && reason) block = reason === 'time' ? "Done for today: you've reached today's training time." : "Done for today: you've done 10 quizzes.";
     if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
   });
 </script>

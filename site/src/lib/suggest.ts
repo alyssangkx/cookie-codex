@@ -1,6 +1,6 @@
 // Pure logic for the "What do you want to train today?" page: power numbers and the
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
-import { TIERS, TIER_NAME, triesPerDay, tierState, tierOpen, attemptsToday, capReached, isDue, type SaveV1, type Tier } from './store.ts';
+import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, capReached, quizCapReached, isDue, type SaveV1, type Tier } from './store.ts';
 
 export interface SubInfo {
   id: string; topic: string; topicName: string; name: string; slug: string;
@@ -79,8 +79,17 @@ export function suggestions(
   if (capReached(s))
     return [{ kind: 'done', title: 'Done for today!', reason: "You have used today's training time. See your cards and come back tomorrow.", href: '/collection/' }];
 
+  if (quizCapReached(s)) {
+    // 10 quizzes done: only Daily Review (retests) is still open
+    const out: Suggestion[] = [];
+    if (ctx.dueCount > 0)
+      out.push({ kind: 'review', title: 'Daily Review', reason: `${ctx.dueCount} question${ctx.dueCount === 1 ? ' is' : 's are'} ready to retest`, href: '/quiz/?mode=review' });
+    out.push({ kind: 'done', title: 'Done for today!', reason: "You've done 10 quizzes today. See your cards and come back tomorrow.", href: '/collection/' });
+    return out;
+  }
+
   const canStart = (sub: SubInfo, t: Tier) =>
-    sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && attemptsToday(s, sub.id, t) < triesPerDay(sub.id);
+    sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && !triesUsedUp(s, sub.id, t);
   const taken = new Set<string>();
   const out: Suggestion[] = [];
   const add = (x: Suggestion) => {

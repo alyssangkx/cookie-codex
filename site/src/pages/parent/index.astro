@@ -27,8 +27,9 @@ const data = {
       <section class="panel" aria-labelledby="h-ret"><h2 id="h-ret">Retest queue</h2><div id="retest"></div></section>
       <section class="panel" aria-labelledby="h-set"><h2 id="h-set">Settings</h2>
         <div class="fields">
-          <label for="cap">Daily cap (minutes)</label>
-          <input id="cap" type="number" min="45" max="120" step="15" inputmode="numeric" />
+          <label for="cap">Daily training time: <output id="cap-out"></output></label>
+          <input id="cap" type="range" min="45" max="180" step="15" />
+          <p class="note" id="cap-note"></p>
           <label for="goal">Daily goal (quizzes)</label>
           <input id="goal" type="number" min="1" max="5" step="1" inputmode="numeric" />
           <label class="check" for="extra"><input id="extra" type="checkbox" /> Extra time (×1.5, for accessibility)</label>
@@ -103,7 +104,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
@@ -130,7 +131,8 @@ const data = {
   function renderSummary() {
     const t = today(s), st = s.streak;
     const items: [string, string][] = [
-      [`${t.min} / ${s.settings.dailyCapMin} min`, 'Today vs daily cap'],
+      [`${t.min} / ${s.settings.dailyCapMin} min`, 'Today vs time limit'],
+      [`${quizzesToday(s)} / ${DAILY_QUIZ_CAP} quizzes`, 'Today vs quiz limit (Daily Review not counted)'],
       [`${t.quizzes} / ${s.settings.dailyGoalQuizzes} quizzes`, 'Today vs daily goal'],
       [`${liveStreak(s)} week${liveStreak(s) === 1 ? '' : 's'}`, 'Streak (weeks with 4+ goal days)'],
       [`${st.best} week${st.best === 1 ? '' : 's'}`, 'Best streak'],
@@ -237,7 +239,12 @@ const data = {
   }
   function initSettings() {
             const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
-    cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
+    const showCap = () => {
+      $('cap-out').textContent = `${cap.value} minutes`;
+      $('cap-note').textContent = `The day ends when ${cap.value} minutes of training or ${DAILY_QUIZ_CAP} quizzes are reached, whichever comes first. Tier quizzes and practice papers count; Daily Review does not count as a quiz, but stops at the time limit.`;
+    };
+    cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); showCap();
+    cap.addEventListener('input', showCap);
     extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; weeksText();
     const clamp = (v: string, lo: number, hi: number, step: number, fb: number) => {
       const n = Math.round(Number(v) / step) * step;
@@ -245,7 +252,7 @@ const data = {
     };
     const commit = () => {
       s = load();
-      s.settings.dailyCapMin = clamp(cap.value, 45, 120, 15, s.settings.dailyCapMin);
+      s.settings.dailyCapMin = clamp(cap.value, 45, 180, 15, s.settings.dailyCapMin);
       s.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, s.settings.dailyGoalQuizzes);
       s.settings.extraTime = extra.checked;
       if (psle.value) s.settings.psleDate = psle.value;
@@ -253,7 +260,7 @@ const data = {
     };
     for (const el of [cap, goal, extra, psle]) el.addEventListener('change', () => {
       commit();
-      cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
+      cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); showCap();
     });
   }
 
