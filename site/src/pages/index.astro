@@ -49,7 +49,7 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
           b.status === 'open' ? (
             <a class={`spot spot-${b.id} open`} href={b.href}
               style={`left:${b.box[0]}%;top:${b.box[1]}%;width:${b.box[2]}%;height:${b.box[3]}%`}>
-              <span class="pill" lang={b.lang}>{b.label}{b.sub && <small>{b.sub}</small>}{b.id === 'math' && <em class="badge">Open</em>}</span>
+              <span class="pill" lang={b.lang}>{b.label}{b.sub && <small>{b.sub}</small>}{SCHOOL_IDS.has(b.id) && <em class="badge">Open</em>}</span>
             </a>
           ) : (
             <span class={`spot spot-${b.id} soon`} role="link" aria-disabled="true" tabindex="0"
