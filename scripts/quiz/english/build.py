@@ -69,7 +69,7 @@ def main():
                 "level": it["level"],
                 "template": it["pattern"],
                 "outcomes": [it["outcome"]],
-                "stem": it["stem"],
+                "stem": re.sub(r"\s+(Which option is closest in meaning)", r"\n\1", it["stem"]),  # the question on its own line
                 "options": [it["options"][i] for i in order],
                 "answer": order.index(it["answer"]),
                 "explain": [it["explain"][i] for i in order],

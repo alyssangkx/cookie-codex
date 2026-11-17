@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { cookies, rarityLabel } from '../../lib/data';
-import { subs, slots, milestones } from '../../lib/train';
+import { subs, slots, milestones, SCHOOLS } from '../../lib/train';
 import { TIER_NAME } from '../../lib/store';
 
 const ORDER = ['ancient', 'witch', 'beast', 'dragon', 'legendary', 'super-epic', 'epic', 'special', 'rare', 'common'];
@@ -37,6 +37,8 @@ const meta = {
   subs: Object.fromEntries(subs.map((s) => [s.id, { n: s.name, sc: SCHOOL_NAME[s.school] }])),
   tiers: TIER_NAME,
 };
+// a school's shelf is open once it has playable questions (train.ts SCHOOLS.ready), same as the home map
+const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
 ---
 <Base title="My House · Cookie Codex" description="Your cards from each School of Mastery, the monsters you have beaten, and every card still to earn.">
   <section class="wrap col-page">
@@ -45,9 +47,9 @@ const meta = {
 
     <div class="house" aria-label="Cards by school">
       {Object.entries(SCHOOL_NAME).map(([id, name]) => (
-        <article class={`school-shelf ${id === 'math' ? '' : 'later'}`} data-school={id}>
+        <article class={`school-shelf ${isOpen(id) ? '' : 'later'}`} data-school={id}>
           <h2>{name}{id === 'chinese' && <span lang="zh-Hans"> 华文</span>}</h2>
-          {id === 'math'
+          {isOpen(id)
             ? <p class="school-n"><strong class="sn">0</strong> cards · <span class="st">0</span> tiers cleared</p>
             : <p class="school-n">Opens soon</p>}
           <div class="mini-cards" aria-hidden="true"></div>
