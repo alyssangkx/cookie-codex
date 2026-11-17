@@ -27,8 +27,6 @@ const data = {
       <section class="panel" aria-labelledby="h-ret"><h2 id="h-ret">Retest queue</h2><div id="retest"></div></section>
       <section class="panel" aria-labelledby="h-set"><h2 id="h-set">Settings</h2>
         <div class="fields">
-          <label for="pname">Player name (shown on the home page)</label>
-          <input id="pname" type="text" maxlength="20" autocomplete="off" />
           <label for="cap">Daily cap (minutes)</label>
           <input id="cap" type="number" min="15" max="90" step="5" inputmode="numeric" />
           <label for="goal">Daily goal (quizzes)</label>
@@ -238,9 +236,7 @@ const data = {
     $('weeks').textContent = w > 0 ? `About ${w} week${w === 1 ? '' : 's'} left.` : 'That date has passed.';
   }
   function initSettings() {
-    const pname = $<HTMLInputElement>('pname');
-    pname.value = s.settings.playerName || '';
-    const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
+            const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
     cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
     extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; weeksText();
     const clamp = (v: string, lo: number, hi: number, step: number, fb: number) => {
@@ -253,10 +249,9 @@ const data = {
       s.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, s.settings.dailyGoalQuizzes);
       s.settings.extraTime = extra.checked;
       if (psle.value) s.settings.psleDate = psle.value;
-      s.settings.playerName = pname.value.trim().slice(0, 20);
       save(s); weeksText(); renderSummary(); flashSaved();
     };
-    for (const el of [pname, cap, goal, extra, psle]) el.addEventListener('change', () => {
+    for (const el of [cap, goal, extra, psle]) el.addEventListener('change', () => {
       commit();
       cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
     });

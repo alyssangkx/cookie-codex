@@ -76,20 +76,19 @@ const { title, description } = Astro.props;
     <script>
       import { currentSession, offlineAllowed, supabase } from '../lib/supabase';
       import { initSync, logout, isChildSession } from '../lib/sync';
-      import { kv, load, save } from '../lib/store';
+      import { kv } from '../lib/store';
 
-      // the signed-in child's name (set at login from their profile) in the header, tab title, every .player
-      // element and the save's playerName; signed-out pages stay a plain "Cookie Codex"
+      // The one place the signed-in child's name is shown: header brand, tab title, and every
+      // <span class="player-sep"> (becomes ", <Name>"). It comes from the profile at login (kv player-name,
+      // cleared on logout) and is never written into the save. Signed-out pages stay a plain "Cookie Codex".
+      // ponytail: a profile rename shows after the child's next PIN login
       const showName = () => {
         const name = kv.get('player-name');
         if (!name) return;
-        const s = load();
-        if (s.settings.playerName !== name) { s.settings.playerName = name; save(s); }
         const brand = document.querySelector('.brand-name');
         if (brand) brand.textContent = `${name}'s `;
-        if (!document.title.includes(`${name}'s`)) document.title = document.title.replace('Cookie Codex', `${name}'s Cookie Codex`);
-        document.querySelectorAll('.player-sep').forEach((el) => { if (!el.textContent) el.innerHTML = ', <span class="player"></span>'; });
-        document.querySelectorAll('.player').forEach((el) => (el.textContent = name));
+        if (document.title.endsWith('Cookie Codex')) document.title = document.title.replace(/Cookie Codex$/, `${name}'s Cookie Codex`);
+        document.querySelectorAll('.player-sep').forEach((el) => (el.textContent = `, ${name}`));
       };
 
       const root = document.documentElement;

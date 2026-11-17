@@ -252,6 +252,7 @@ export async function logout() {
   } catch { /* leave anyway */ }
   try { await client.auth.signOut({ scope: 'local' }); } catch { /* the local session is cleared regardless */ }
   kv.del('lastSeen');
+  kv.del('player-name');
   kv.set('sync:signedout', '1'); // a logged-out device never gets offline access
   location.href = '/login';
 }

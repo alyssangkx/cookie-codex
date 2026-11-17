@@ -58,8 +58,6 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
   import { load } from '../lib/store';
   const s = load();
   const { commons, cards } = JSON.parse(document.getElementById('home-data')!.textContent!);
-  if (s.settings.playerName) document.querySelector('.player-sep')!.innerHTML = ', <span class="player"></span>';
-  document.querySelectorAll('.player').forEach((el) => (el.textContent = s.settings.playerName));
   // cookie friends: the cards the player owns, most recently practised first, topped up with the commons
   const owned = Object.entries(s.cards)
     .sort(([, a], [, b]) => (b.last ?? 0) - (a.last ?? 0))

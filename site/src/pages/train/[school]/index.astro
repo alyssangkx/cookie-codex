@@ -21,7 +21,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 <Base title={`Train ${school.name} · Cookie Codex`} description={`Pick what to train today in ${school.name}: suggestions, your power and every sub-topic.`}>
   <div class="wrap train-home" data-school={school.id}>
     <p class="th-crumbs"><a href="/">Home</a></p>
-    <h1 class="th-title">What do you want to train today<span id="th-name"></span>?</h1>
+    <h1 class="th-title">What do you want to train today<span class="player-sep"></span>?</h1>
 
     <div class="th-power" id="th-power">
       <span class="th-power-label">School power: <strong id="th-power-n">0</strong></span>
@@ -101,8 +101,6 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     const now = Date.now();
     const esc = (t: string) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 
-    const name = s.settings.playerName;
-    document.getElementById('th-name')!.innerHTML = name ? `, <span class="player">${esc(name)}</span>` : '';
 
     // chips
     const chipState = (sub: string, t: Tier, playable: boolean) => {
