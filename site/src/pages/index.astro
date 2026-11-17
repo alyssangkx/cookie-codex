@@ -7,9 +7,15 @@ import spots from '../data/home-hotspots.json';
 import { cookies } from '../lib/data';
 
 type Box = [number, number, number, number];
+// Art follows which schools are open: construction comes off a school once it opens.
+const isOpen = (id: string) => spots.buildings.find((b) => b.id === id)?.status === 'open';
+const schools = ['chinese', 'science', 'english'].filter(isOpen);
+const artState = schools.length === 3 ? 'all-open'
+  : schools.length === 2 && !schools.includes('english') ? 'chinese-science-open'
+  : schools.length === 1 && schools[0] === 'chinese' ? 'chinese-open' : '';
 const layouts = (['wide', 'tall'] as const).map((k) => ({
   k,
-  img: `/home/map-${k}.webp`,
+  img: `/home/map-${k}${artState ? '-' + artState : ''}.webp`,
   size: k === 'wide' ? [1920, 1072] : [1080, 1935],
   items: spots.buildings.map((b) => ({ ...b, box: (spots[k] as Record<string, unknown>)[b.id] as Box })),
   companions: spots[k].companions as [number, number][],
