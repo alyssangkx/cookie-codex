@@ -15,7 +15,9 @@ const schools = ['chinese', 'science', 'english'].filter(isOpen);
 const suffix = schools.length === 3 ? 'all-open' : schools.length ? `${schools.join('-')}-open` : '';
 const missing = ['wide', 'tall'].map((k) => `public/home/map-${k}-${suffix}.webp`).filter((f) => !existsSync(f));
 const artState = suffix && !missing.length ? suffix : '';
-if (suffix && missing.length) console.warn(`index.astro: missing home art ${missing.join(', ')}; using the base map.`);
+// a combination of open schools with no art fails the build: generate the art before opening the school
+// (paths are relative to site/, where the build runs)
+if (suffix && missing.length) throw new Error(`index.astro: missing home art ${missing.join(', ')}`);
 const layouts = (['wide', 'tall'] as const).map((k) => ({
   k,
   img: `/home/map-${k}${artState ? '-' + artState : ''}.webp`,

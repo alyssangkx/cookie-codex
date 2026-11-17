@@ -105,7 +105,7 @@ export function suggestions(
     });
     if (hit) {
       const st = tierState(s, sub.id, hit);
-      const total = st.total ?? sub.count?.[hit];
+      const total = sub.count?.[hit] ?? st.total; // the current bank, not the size at the last sync
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
         reason: `${TIER_NAME[hit]}: ${total ? `${st.mastered} of ${total} questions mastered.` : `${st.mastered} questions mastered.`}`, href: tierHref(sub.id, hit),
