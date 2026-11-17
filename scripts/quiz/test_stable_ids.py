@@ -21,7 +21,6 @@ TMP_ROOT = Path("/data/alvin/tmp/cookie-codex/accounts")
 
 def rebuild(tmp, name):
     build.OUT = tmp / name
-    build.ALIASES = tmp / f"{name}-aliases.json"
     sys.argv = ["build.py", "--topic", TOPIC]
     build.main()
     return json.loads((build.OUT / f"{TOPIC}.json").read_text())["questions"]

@@ -58,13 +58,15 @@ Alyssa's `parent_id` is the admin's user id for now.
 
 ## 4. Schema (`001_init.sql`)
 
-- `profiles(id pk -> auth.users, parent_id -> auth.users, name, role child|test, pin_hash, pin_set_at, created_at)`.
-  The spec's columns plus `role` and `pin_set_at`. Child names are unique (case-insensitive) while
-  login is by name; when a second family joins, add a family code and make it unique per parent.
-- `saves(child_id pk -> profiles, data jsonb, schema_version int, updated_at timestamptz)`.
-  `updated_at` is set by a trigger, so the server clock decides, not the phone's. Size capped at 2 MB.
-- `private.pin_attempts(key, fails, locked_until, updated_at)`: lockout counters, no client access.
-- `public.push_save(...)`: compare-and-set write for sync (section 6).
+- `profiles(id pk -> auth.users, parent_id -> auth.users, name, name_key, role child|test, pin_hash, pin_set_at, created_at)`.
+  The spec's columns plus `role` and `pin_set_at`. `name` is 1-20 letters, spaces or hyphens.
+  `name_key` is `lower(btrim(name))`, generated and stored, with a unique index: login does an
+  exact `eq('name_key', ...)`, never `ilike`/`like`. Names are globally unique while login is by name; when a second family joins, add a family code and make it unique per parent.
+- `saves(child_id pk -> profiles, data jsonb, schema_version int, rev bigint, updated_at timestamptz)`.
+  `rev` starts at 0 and goes up by one on every write (a trigger enforces it too). `updated_at` is set
+  by a trigger, so the server clock decides, not the phone's. Size capped at 2 MB.
+- `private.pin_attempts(key, fails, strikes, locked_until, updated_at)`: lockout counters, no client access.
+- `public.push_save(...)`: compare-and-set write on `rev` for sync (section 6).
 - `public.pin_locked_until / pin_record_failure / pin_clear`: lockout helpers, **service role only**.
 
 ### RLS
@@ -74,9 +76,12 @@ Both tables have RLS on. Access is by `auth.uid()`:
 | | profiles | saves |
 |---|---|---|
 | select | `parent_id = uid` or `id = uid` (the child) or admin | owning parent, the child itself, or admin |
-| insert | `parent_id = uid` (a profile also needs an auth user, so creation really goes through a function) | owning parent or the child |
-| update | `parent_id = uid`, **name column only** | owning parent or the child |
-| delete | `parent_id = uid` | owning parent |
+| insert | **admin only** (`private.is_admin()`); a profile also needs an auth user, so creation really goes through `admin-pin` | owning parent or the child |
+| update | **admin only**, name column only | owning parent or the child |
+| delete | **admin only** | owning parent |
+
+Profile writes are admin-only, so no child or parent session can create, rename or delete a profile
+from the browser. A child reads only its own row, a parent only its own children's rows.
 
 Two guards beyond the spec:
 
@@ -107,19 +112,35 @@ database **and** the pepper both leaked the PIN would fall instantly. The pepper
 are the real protection; the hash only stops casual exposure. This is acceptable because the
 PIN guards a child's quiz progress, not money or contact data.
 
+**Name checks.** The name is trimmed of spaces, lowercased, and must be 1-20 letters, spaces or
+hyphens. Anything else is rejected before any lookup, counts against the device limit, and answers
+like a wrong PIN. The lookup is `eq('name_key', key)`: no pattern matching anywhere.
+
 **Lockout.** Counters live in `private.pin_attempts`, updated atomically by `pin_record_failure`.
-Three keys per attempt:
 
 | Key | Limit | Why |
 |---|---|---|
-| `device:<deviceId>` | 5 wrong, then 15 min | the spec's per-device lock |
-| `name:<lowercase name>` | 5 wrong, then 15 min | the spec's per-child lock; keyed by typed name so a nonexistent name behaves identically |
-| `ip:<sha256 of address>` | 20 wrong, then 15 min | stops rotating `deviceId` (client-controlled); looser for shared Wi-Fi; stored hashed |
+| `device:<deviceId>` | 5 wrong, then 15 min | the spec's per-device lock. `deviceId` is client-chosen, so this only stops a well-behaved browser |
+| `name:<name_key>` | 20 wrong from anywhere, then a lock that doubles each time it trips: 15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, 24 h, then 24 h | the **real brute-force bound**, because headers and device ids can be forged. Keyed by the typed name, so an unknown name behaves identically. A successful login resets the count and the escalation |
+| IP | **none** | see below |
 
-Order: check locks first (a locked key returns 429 without comparing the PIN), then compare, then
-on failure increment all three; on success clear device and name. A failure older than 15 minutes
-restarts the count. Known trade-off: anyone who knows her name can lock her out for 15 minutes by
-guessing. That is accepted; the admin can see lock state and the lock expires on its own.
+**Why no IP limit.** Supabase documents no client-IP header for Edge Functions that a caller cannot
+forge: `x-forwarded-for` can be supplied by the caller (reported in
+[supabase/discussions/34647](https://github.com/orgs/supabase/discussions/34647)), and `x-real-ip` /
+`cf-connecting-ip` are not documented for Edge Functions. A limit on a forgeable value adds nothing,
+and a shared `unknown` bucket would let one stranger lock everyone out. If Supabase later documents a
+trustworthy header, add it as a third, looser key.
+
+**Worst-case guessing rate.** An attacker who forges every device id and address is still bound by
+the name lock: 20 tries, then locks of 15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h and 24 h, so about 160
+guesses in 2.3 days and then 20 per day. The 10,000 PINs take about 500 days, about 250 expected,
+and each guess costs a 600,000-iteration PBKDF2. A locked key answers 429 without comparing the PIN
+and without counting further, so parallel requests cannot escalate it.
+
+Order: check locks first, then compare, then on failure increment device and name; on success clear
+both. Known trade-off: anyone who knows her name can lock her out by guessing 20 times, for up to 24
+hours if they repeat it; the admin can clear a lock (`pin_clear`) from `/admin/`. Accepted. Untested:
+needs a Supabase project.
 
 **Issuing the session.** After a correct PIN the function signs in as the child's own auth user
 with the derived password (`signInWithPassword` using the anon key) and returns the session tokens.
@@ -158,10 +179,12 @@ interface StorageAdapter {
   - **Push:** `write()` updates the cache, marks pending and debounces a `push_save` call about
     5 seconds out, plus an immediate flush after each finished quiz and on `pagehide` /
     `visibilitychange`.
-  - **Conflict:** the push sends the `updated_at` the client last saw. If the server row has moved
-    on (another device played), nothing is overwritten and the server copy comes back with
-    `status: 'conflict'`. The client shows a plain warning ("Alyssa played on another device")
-    and offers the newer copy. The default is the **newer `updated_at`, i.e. last write wins**, as
+  - **Conflict:** the push sends the `rev` the client last saw (an integer, `null` before the first
+    sync). `push_save` updates only `where rev = p_base_rev` and sets `rev = rev + 1`, returning the new
+    `rev`; the first save is `insert ... on conflict do nothing` then the same compare-and-set, so two
+    devices creating the row cannot both win. If the server row has moved on (another device
+    played), nothing is overwritten and the server copy comes back with `status: 'conflict'`. The client shows a plain warning ("Alyssa played on another device")
+    and offers the newer copy. The default is the **higher `rev`, i.e. last write wins**, as
     decided, but it is chosen consciously by the user, not silently. A later improvement is a field
     merge (union of `days` and `attempts`, max `stars`, later `due` per question); see open questions.
   - **Offline:** writes only hit the cache and stay pending; on the next load or `online` event
@@ -245,4 +268,16 @@ so CORS is not `*`. Do not deploy until approved.
 5. **Same account, same device:** should the parent gate (`/parent/` PIN screen) remain once the
    admin session gates it, or be removed?
 6. **Hosting:** confirm Vercel, and the production domain.
-7. **Lockout of Alyssa by others:** acceptable that a guessed name can lock her for 15 minutes?
+7. **Lockout of Alyssa by others:** accepted: a guessed name can lock her, escalating up to 24 hours; the admin can clear it.
+
+## Decisions (2026-11-17, approved at Checkpoint A)
+
+| Question | Decision |
+|---|---|
+| Free-tier pausing | Stay on the free plan; a scheduled keep-alive pings the project every 3 days. Revisit Pro when more children join. |
+| PIN lockout | Per device: 5 wrong PINs lock it for 15 minutes. A name locks after 20 wrong tries from anywhere, with the lock doubling each time (15 min up to 24 h) and resetting on a successful login; that name limit is the real bound. No IP limit: no trustworthy client-IP header exists on Edge Functions (section 5). |
+| Admin second factor | Required: Supabase TOTP (authenticator app) on the admin account. |
+| Hosting | Vercel, free `*.vercel.app` subdomain, deployed from the GitHub repo; custom domain later. |
+| Sync conflict | Newer save wins, with a visible warning; no field merge yet. |
+| Child names | Globally unique for now (one family). |
+| `/parent/` PIN screen | Dropped once the admin session gates the page. |

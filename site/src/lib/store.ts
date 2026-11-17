@@ -1,6 +1,5 @@
 // Client-side save (docs/game-design.md section 8). Every page reads and writes progress
 // through this module, so a backend can replace localStorage later.
-import ID_ALIASES from '../data/quiz/id-aliases.json' with { type: 'json' };
 export type School = 'math' | 'science' | 'english' | 'chinese';
 export type Tier = 'b' | 'i' | 'c';
 export const TIERS: Tier[] = ['b', 'i', 'c'];
@@ -57,51 +56,55 @@ function normalise(s: any): SaveV1 {
   return { ...base, ...s, settings: { ...base.settings, ...s.settings }, streak: { ...base.streak, ...s.streak } };
 }
 
-export type IdAliases = Record<string, string>;
-
 /** One step per schema version: migrations[n] turns a version-n save into version n+1. */
-export const migrations: Record<number, (s: any, aliases: IdAliases) => any> = {
-  // 1 -> 2: question ids were stem hashes, now they hash topic | template | params.
-  // Rename the keys in `questions`; ids the alias map does not know are dropped.
-  1: (s, aliases) => {
-    const questions: Record<string, QState> = {};
-    for (const [id, q] of Object.entries<QState>(s.questions ?? {})) {
-      const nid = Object.hasOwn(aliases, id) ? aliases[id] : undefined;
-      if (!nid) continue;
-      if (!questions[nid] || q.s > 0) questions[nid] = q; // on a clash keep the one still due for retest
-    }
-    return { ...s, questions };
-  },
+export const migrations: Record<number, (s: any) => any> = {
+  // 1 -> 2: question ids were stem hashes, now they hash topic | template | params. No alias map
+  // (the site was never deployed with v1 saves), so retest states are cleared; everything else stays.
+  1: (s) => ({ ...s, questions: {} }),
 };
 
 /** Run every migration from the save's version up to SCHEMA. Does not touch storage. */
-export function migrate(s: any, aliases: IdAliases = ID_ALIASES): any {
+export function migrate(s: any): any {
   let v = s.schemaVersion;
   while (v < SCHEMA) {
     const step = migrations[v];
     if (!step) throw new Error(`No migration from save version ${v}.`);
-    s = { ...step(s, aliases), schemaVersion: ++v };
+    s = { ...step(s), schemaVersion: ++v };
   }
   return s;
 }
 
-function backup(s: unknown) {
-  try { localStorage.setItem(BACKUP_KEY, JSON.stringify(s)); } catch { /* full or blocked */ }
-}
-
-export function load(aliases: IdAliases = ID_ALIASES): SaveV1 {
+/** Copy the current save string to `ccx:backup`. The parent page calls this just before an import replaces it. */
+export function backupLocal() {
   try {
     const raw = localStorage.getItem(KEY);
+    if (raw !== null) localStorage.setItem(BACKUP_KEY, raw);
+  } catch { /* full or blocked */ }
+}
+
+function backupRaw(raw: string) {
+  try { localStorage.setItem(BACKUP_KEY, raw); } catch { /* full or blocked */ }
+}
+
+export function load(): SaveV1 {
+  let raw: string | null = null;
+  try {
+    raw = localStorage.getItem(KEY);
     if (raw) {
       let s = JSON.parse(raw);
       if (typeof s?.schemaVersion === 'number' && s.schemaVersion < SCHEMA) {
-        backup(s);
-        s = migrate(s, aliases);
+        backupRaw(raw);
+        s = migrate(s);
         save(normalise(s)); // a failed write must not lose the migrated save in memory
       }
       if (s?.schemaVersion === SCHEMA) return normalise(s);
+      throw new Error('Unreadable save version.'); // e.g. a newer site's save: preserve it below
     }
-  } catch { /* private mode or corrupt save: start fresh */ }
+  } catch {
+    // Failed migration or corrupt save: keep the raw string under its own key before returning a
+    // fresh save, so a later save() cannot destroy the only copy. ccx:save is left as it was.
+    if (raw) { try { localStorage.setItem(`ccx:failed-${Date.now()}`, raw); } catch { /* full or blocked */ } }
+  }
   return fresh();
 }
 
@@ -316,14 +319,14 @@ export async function exportCode(s: SaveV1) {
   return 'CCX1:' + b64url(packed);
 }
 
-export async function importCode(code: string, aliases: IdAliases = ID_ALIASES): Promise<SaveV1> {
+export async function importCode(code: string): Promise<SaveV1> {
   const t = code.trim();
   if (!t.startsWith('CCX1:')) throw new Error('This is not a Cookie Codex save code.');
   const json = new TextDecoder().decode(await pipe(unb64url(t.slice(5)), new DecompressionStream('deflate')));
   let s = JSON.parse(json);
   if (typeof s?.schemaVersion !== 'number') throw new Error('The save code is damaged.');
   if (s.schemaVersion > SCHEMA) throw new Error('This save code comes from a newer version of the site.');
-  if (s.schemaVersion < SCHEMA) { backup(s); s = migrate(s, aliases); }
+  if (s.schemaVersion < SCHEMA) s = migrate(s); // writes nothing; the caller backs up before replacing
   return normalise(s);
 }
 

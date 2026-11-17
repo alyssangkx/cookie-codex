@@ -54,7 +54,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - `build.py` writes `site/src/data/quiz/math/<topic>.json`, with at least 25 unique questions per (sub-topic, level).
   - A question is filed under the sub-topic of its **first** outcome id.
   - Question ids are `<topic prefix>-<level letter>-sha1(topic | template key | canonical JSON of params)[:10]` (`stable_id()` in `build.py`). Rewording a stem, explanation or figure keeps the id; changing a template's numbers or param structure makes a new question. Never key progress on stem text. `check_math.py` fails on a duplicate id, and `test_stable_ids.py` proves a reword keeps ids.
-  - `build.py` also writes `site/src/data/quiz/id-aliases.json` (old stem-hash id -> new id) for the save migration. Rebuilding with `--topic` merges into it.
+  - There is no id alias map: the site was never deployed with v1 saves, so the v1→v2 migration simply clears `questions`.
 - **Coverage.**
   - `patterns.json` is the catalogue of question types seen in top-school P5/P6 papers (from OCR'd PDFs).
   - A template covers a type by naming its `math-pat-...` id in its docstring.
@@ -71,7 +71,11 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - The daily cap and goal.
   - The streak counts weeks with 4 or more goal days, so weekends never break it.
   - Card power reflects retention.
-  - `migrations` runs on `load()` and `importCode()`: 1→2 renames `questions` keys via `id-aliases.json` and drops unknown ids, after copying the old save to `ccx:backup`. Add a new step there for every schema bump.
+  - `migrations` runs on `load()` and `importCode()`. Add a new step there for every schema bump.
+    - 1→2 keeps progress, cards, attempts, days, streak and settings, and clears `questions` (old stem-hash ids cannot be matched).
+    - `load()` copies the pre-migration save string to `ccx:backup`.
+    - If a migration fails (no step, or a throw), `load()` copies the raw string to `ccx:failed-<epoch ms>` before returning `fresh()`, and leaves `ccx:save` alone until a real save.
+    - `importCode()` writes no backup. The parent page calls `backupLocal()` only after the user confirms the import.
   - It also handles the save code (export/import) and the PIN hash.
 - **`pick.ts`** chooses questions:
   - tier quizzes are always 10 (≤ 3 due retests from the sub-topic, then new questions, then not-due retests, then retired ones);

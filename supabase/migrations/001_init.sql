@@ -14,7 +14,10 @@ create schema if not exists private;
 create table public.profiles (
   id          uuid primary key references auth.users (id) on delete cascade,
   parent_id   uuid not null references auth.users (id) on delete cascade,
-  name        text not null check (char_length(btrim(name)) between 1 and 30),
+  -- 1-20 letters, spaces or hyphens: the same rule pin-login applies before any lookup
+  name        text not null check (btrim(name) ~ '^[[:alpha:] -]{1,20}$'),
+  -- the exact-match key pin-login queries; pin-login normalises its input the same way
+  name_key    text generated always as (lower(btrim(name))) stored,
   role        text not null default 'child' check (role in ('child', 'test')),
   -- 'pbkdf2-sha256$<iterations>$<salt b64>$<hash b64>'; null = no PIN set, login refused
   pin_hash    text,
@@ -23,20 +26,22 @@ create table public.profiles (
 );
 -- A child logs in by typing their name, so child names are unique for now. When a second family
 -- joins, add a family code and make this unique per parent instead (see the plan).
-create unique index profiles_child_name_uq on public.profiles (lower(btrim(name))) where role = 'child';
+create unique index profiles_name_key_uq on public.profiles (name_key);
 create index profiles_parent_idx on public.profiles (parent_id);
 
 create table public.saves (
   child_id        uuid primary key references public.profiles (id) on delete cascade,
   data            jsonb not null check (octet_length(data::text) < 2000000),
   schema_version  int not null,
+  rev             bigint not null default 0,   -- bumped by every write; the sync compare-and-set key
   updated_at      timestamptz not null default now()
 );
 
 -- Lockout counters. Only the pin-login function (service role) touches this; RLS on, no policies.
 create table private.pin_attempts (
-  key           text primary key,          -- 'device:<id>' | 'name:<lowercase name>' | 'ip:<sha256>'
+  key           text primary key,          -- 'device:<id>' | 'name:<name_key>'
   fails         int not null default 0,
+  strikes       int not null default 0,    -- times this key has locked since its last success (escalation)
   locked_until  timestamptz,
   updated_at    timestamptz not null default now()
 );
@@ -47,6 +52,8 @@ create function private.touch_updated_at() returns trigger
 language plpgsql set search_path = '' as $$
 begin
   new.updated_at := now();
+  -- every write advances rev, even one that bypassed push_save
+  if tg_op = 'UPDATE' and new.rev <= old.rev then new.rev := old.rev + 1; end if;
   return new;
 end $$;
 create trigger saves_touch before insert or update on public.saves
@@ -80,18 +87,22 @@ alter table public.profiles enable row level security;
 
 create policy profiles_select on public.profiles for select to authenticated
   using (parent_id = (select auth.uid()) or id = (select auth.uid()) or (select private.is_admin()));
+-- Only an admin session writes profiles. A child or a parent never inserts, renames or deletes one
+-- from the browser; creating a child needs an auth user anyway, so it goes through admin-pin
+-- (service role). Reads: a child sees only its own row, a parent only its children, and the column
+-- grants below keep pin_hash out of every response.
 create policy profiles_insert on public.profiles for insert to authenticated
-  with check (parent_id = (select auth.uid()));
+  with check ((select private.is_admin()));
 create policy profiles_update on public.profiles for update to authenticated
-  using (parent_id = (select auth.uid())) with check (parent_id = (select auth.uid()));
+  using ((select private.is_admin())) with check ((select private.is_admin()));
 create policy profiles_delete on public.profiles for delete to authenticated
-  using (parent_id = (select auth.uid()));
+  using ((select private.is_admin()));
 
 -- Column grants keep pin_hash out of every client response, even to the owning parent.
 -- Do not add a table-wide GRANT SELECT later: it would expose pin_hash again.
 revoke all on public.profiles from anon, authenticated;
 grant select (id, parent_id, name, role, pin_set_at, created_at) on public.profiles to authenticated;
-grant insert (id, parent_id, name) on public.profiles to authenticated;
+grant insert (id, parent_id, name, role) on public.profiles to authenticated;
 grant update (name) on public.profiles to authenticated;
 grant delete on public.profiles to authenticated;
 
@@ -125,32 +136,40 @@ revoke all on public.saves from anon;
 
 -- ---------------------------------------------------------------- sync: compare-and-set push
 
--- The browser sends the updated_at it last saw (p_base). If the server row has moved on, nothing is
--- written and the server copy comes back with status 'conflict', so the client can warn instead of
--- silently overwriting. p_force overwrites after the user chose "keep this device". Security
--- invoker: every read and write goes through the RLS policies above.
+-- The browser sends the rev it last saw (p_base_rev; null = never synced). The update succeeds only
+-- where rev = p_base_rev and sets rev = rev + 1, returning the new rev. Otherwise nothing is written
+-- and the server copy comes back with status 'conflict', so the client can warn instead of silently
+-- overwriting. p_force overwrites after the user chose "keep this device". A first save inserts with
+-- on conflict do nothing, so two devices racing to create the row cannot both win: the loser falls
+-- through to the compare-and-set and conflicts. Security invoker: RLS applies to every statement;
+-- status 'denied' means RLS hid the row. UNTESTED: needs a Supabase project.
 create function public.push_save(
-  p_child uuid, p_data jsonb, p_version int, p_base timestamptz default null, p_force boolean default false
-) returns table (status text, updated_at timestamptz, data jsonb, schema_version int)
+  p_child uuid, p_data jsonb, p_version int, p_base_rev bigint default null, p_force boolean default false
+) returns table (status text, rev bigint, updated_at timestamptz, data jsonb, schema_version int)
 language plpgsql security invoker set search_path = '' as $$
-declare cur public.saves;
 begin
-  select * into cur from public.saves where child_id = p_child for update;
+  insert into public.saves as s (child_id, data, schema_version) values (p_child, p_data, p_version)
+    on conflict (child_id) do nothing
+    returning 'ok', s.rev, s.updated_at, null::jsonb, s.schema_version
+    into status, rev, updated_at, data, schema_version;
+  if found then return next; return; end if;
+
+  update public.saves s set data = p_data, schema_version = p_version, rev = s.rev + 1
+   where s.child_id = p_child and (p_force or s.rev = p_base_rev)
+  returning 'ok', s.rev, s.updated_at, null::jsonb, s.schema_version
+    into status, rev, updated_at, data, schema_version;
+  if found then return next; return; end if;
+
+  select 'conflict', s.rev, s.updated_at, s.data, s.schema_version
+    into status, rev, updated_at, data, schema_version
+    from public.saves s where s.child_id = p_child;
   if not found then
-    insert into public.saves (child_id, data, schema_version) values (p_child, p_data, p_version)
-      returning 'ok', saves.updated_at, null::jsonb, saves.schema_version into status, updated_at, data, schema_version;
-    return next; return;
+    status := 'denied'; rev := null; updated_at := null; data := null; schema_version := null;
   end if;
-  if p_force or (p_base is not null and cur.updated_at = p_base) then
-    update public.saves s set data = p_data, schema_version = p_version where s.child_id = p_child
-      returning 'ok', s.updated_at, null::jsonb, s.schema_version into status, updated_at, data, schema_version;
-    return next; return;
-  end if;
-  status := 'conflict'; updated_at := cur.updated_at; data := cur.data; schema_version := cur.schema_version;
   return next;
 end $$;
-revoke execute on function public.push_save(uuid, jsonb, int, timestamptz, boolean) from public, anon;
-grant execute on function public.push_save(uuid, jsonb, int, timestamptz, boolean) to authenticated;
+revoke execute on function public.push_save(uuid, jsonb, int, bigint, boolean) from public, anon;
+grant execute on function public.push_save(uuid, jsonb, int, bigint, boolean) to authenticated;
 
 -- ---------------------------------------------------------------- PIN lockout (service role only)
 
@@ -160,23 +179,36 @@ language sql stable security definer set search_path = '' as $$
   select locked_until from private.pin_attempts where key = p_key and locked_until > now()
 $$;
 
--- Count one wrong try. Fails older than the lock window start a new count; reaching p_max locks the
--- key for p_lock. Atomic per key. Returns (fails, locked_until).
-create function public.pin_record_failure(p_key text, p_max int default 5, p_lock interval default '15 minutes')
+-- Count one wrong try. A count older than p_window (default: the lock length) restarts, as does the
+-- first try after a lock has expired. Reaching p_max locks the key for p_lock; with p_escalate the
+-- lock doubles on each trip (p_lock, 2x, 4x, ...) up to p_cap, and strikes only reset in pin_clear
+-- (a successful login). A key that is already locked is returned unchanged, so parallel requests
+-- cannot push the escalation further. Atomic per key. Returns (fails, locked_until).
+create function public.pin_record_failure(
+  p_key text, p_max int default 5, p_lock interval default '15 minutes',
+  p_window interval default null, p_escalate boolean default false, p_cap interval default '24 hours')
 returns table (fails int, locked_until timestamptz)
 language plpgsql security definer set search_path = '' as $$
-declare cur private.pin_attempts; n int;
+declare cur private.pin_attempts; n int; k int; lock_for interval;
 begin
   insert into private.pin_attempts (key) values (p_key) on conflict (key) do nothing;
-  select * into cur from private.pin_attempts where key = p_key for update;
-  if cur.updated_at < now() - p_lock or (cur.locked_until is not null and cur.locked_until <= now()) then
-    n := 1;
+  select * into cur from private.pin_attempts a where a.key = p_key for update;
+  if cur.locked_until is not null and cur.locked_until > now() then
+    fails := cur.fails; locked_until := cur.locked_until; return next; return;
+  end if;
+  if cur.updated_at < now() - coalesce(p_window, p_lock) or cur.locked_until is not null then
+    n := 1;   -- stale count, or the previous lock has expired
   else
     n := cur.fails + 1;
   end if;
+  k := cur.strikes;
+  if n >= p_max then
+    lock_for := case when p_escalate then least(p_lock * power(2::double precision, least(k, 20)), p_cap) else p_lock end;
+    k := k + 1;
+  end if;
   update private.pin_attempts a
-     set fails = n, updated_at = now(),
-         locked_until = case when n >= p_max then now() + p_lock else null end
+     set fails = n, strikes = k, updated_at = now(),
+         locked_until = case when n >= p_max then now() + lock_for else null end
    where a.key = p_key
   returning a.fails, a.locked_until into fails, locked_until;
   return next;
@@ -187,7 +219,7 @@ language sql security definer set search_path = '' as $$
   delete from private.pin_attempts where key = any (p_keys)
 $$;
 
-revoke execute on function public.pin_locked_until(text), public.pin_record_failure(text, int, interval),
+revoke execute on function public.pin_locked_until(text), public.pin_record_failure(text, int, interval, interval, boolean, interval),
   public.pin_clear(text[]) from public, anon, authenticated;
-grant execute on function public.pin_locked_until(text), public.pin_record_failure(text, int, interval),
+grant execute on function public.pin_locked_until(text), public.pin_record_failure(text, int, interval, interval, boolean, interval),
   public.pin_clear(text[]) to service_role;

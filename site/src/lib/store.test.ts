@@ -1,7 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, load, importCode, exportCode, migrate } from './store.ts';
-import ALIASES from '../data/quiz/id-aliases.json' with { type: 'json' };
+import { fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -93,57 +92,59 @@ function mockStorage(initial: Record<string, string> = {}) {
   });
   return data;
 }
-const small = { 'old-a': 'new-a', 'old-b': 'new-b', 'old-c': 'new-c' };
 const v1Save = () => {
   const s: any = fresh();
   s.schemaVersion = 1;
-  s.questions = {
-    'old-a': { s: 2, due: t0 + 3 * DAY, w: 2 },
-    'old-b': { s: 0, due: 0, w: 1 },
-    'old-gone': { s: 1, due: t0, w: 1 },
-  };
+  s.questions = { 'old-a': { s: 2, due: t0 + 3 * DAY, w: 2 }, 'old-b': { s: 0, due: 0, w: 1 } };
+  s.progress = { x: { b: { passes: ['2026-11-15'], scores: [90], best: 90, cleared: false } } };
+  s.cards = { 'muscle-cookie': { stars: 2, srcSub: 'x', srcTier: 'b', acc: 90 } };
+  s.streak = { current: 3, best: 5, lastDay: '2026-11-15', freezeUsedWeek: null, studyDays: 12 };
   s.settings.playerName = 'Kept';
   return s;
 };
 
-test('a v1 save loads as v2: same retest states under the new ids, unknown ids dropped, backup written', () => {
+test('v1 -> v2 keeps cards, progress and streak, clears questions, backs up the old save', () => {
   const v1 = v1Save();
   const data = mockStorage({ 'ccx:save': JSON.stringify(v1) });
-  const s = load(small);
+  const s = load();
   assert.equal(s.schemaVersion, 2);
-  assert.deepEqual(s.questions, {
-    'new-a': { s: 2, due: t0 + 3 * DAY, w: 2 },
-    'new-b': { s: 0, due: 0, w: 1 },
-  });
+  assert.deepEqual(s.questions, {});
+  assert.deepEqual(s.cards, v1.cards);
+  assert.deepEqual(s.progress, v1.progress);
+  assert.deepEqual(s.streak, v1.streak);
   assert.equal(s.settings.playerName, 'Kept');
-  assert.deepEqual(JSON.parse(data['ccx:backup']), v1); // pre-migration copy, old ids intact
-  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 2); // migrated save is stored
-  assert.deepEqual(load(small).questions, s.questions); // a second load is a plain v2 load
+  assert.deepEqual(JSON.parse(data['ccx:backup']), v1);
+  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 2);
 });
 
 test('a v2 save loads untouched and writes no backup', () => {
   const v2: any = fresh();
   v2.questions = { 'new-a': { s: 1, due: t0, w: 1 } };
   const data = mockStorage({ 'ccx:save': JSON.stringify(v2) });
-  assert.deepEqual(load(small).questions, v2.questions);
+  assert.deepEqual(load().questions, v2.questions);
   assert.equal(data['ccx:backup'], undefined);
 });
 
-test('importCode accepts a v1 code and migrates it; a newer code is still refused', async () => {
-  const data = mockStorage();
-  const code = await exportCode(v1Save() as any);
-  const s = await importCode(code, small);
+test('a failed migration preserves the raw save under ccx:failed-* and leaves ccx:save alone', () => {
+  const raw = JSON.stringify({ ...fresh(), schemaVersion: 0 }); // no migration from 0
+  const data = mockStorage({ 'ccx:save': raw });
+  const s = load();
   assert.equal(s.schemaVersion, 2);
-  assert.deepEqual(Object.keys(s.questions).sort(), ['new-a', 'new-b']);
-  assert.ok(data['ccx:backup']);
-  const newer: any = { ...fresh(), schemaVersion: 3 };
-  await assert.rejects(importCode(await exportCode(newer), small), /newer version/);
+  assert.deepEqual(s.cards, {});
+  const keys = Object.keys(data).filter((k) => k.startsWith('ccx:failed-'));
+  assert.equal(keys.length, 1);
+  assert.equal(data[keys[0]], raw);
+  assert.equal(data['ccx:save'], raw);
 });
 
-test('the real alias map renames ids and maps to unique new ids', () => {
-  const entries = Object.entries(ALIASES as Record<string, string>);
-  assert.ok(entries.length > 1000);
-  const [oldId, newId] = entries[0];
-  const s: any = { ...fresh(), schemaVersion: 1, questions: { [oldId]: { s: 1, due: 5, w: 1 } } };
-  assert.deepEqual(migrate(s).questions, { [newId]: { s: 1, due: 5, w: 1 } });
+test('importCode migrates a v1 code, refuses a newer one, and writes no backup', async () => {
+  const data = mockStorage({ 'ccx:save': 'current-save' });
+  const s = await importCode(await exportCode(v1Save() as any));
+  assert.equal(s.schemaVersion, 2);
+  assert.deepEqual(s.questions, {});
+  assert.equal(data['ccx:backup'], undefined);
+  assert.equal(data['ccx:save'], 'current-save');
+  const newer: any = { ...fresh(), schemaVersion: 3 };
+  await assert.rejects(importCode(await exportCode(newer)), /newer version/);
+  assert.equal(data['ccx:backup'], undefined);
 });

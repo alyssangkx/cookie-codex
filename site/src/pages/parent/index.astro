@@ -126,7 +126,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, tierState, liveStreak, today, dayKey, exportCode, importCode, hashPin, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, exportCode, importCode, hashPin, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
@@ -348,6 +348,7 @@ const data = {
       try { next = await importCode(code); }
       catch (e) { err.textContent = e instanceof Error ? e.message : 'That save code could not be read.'; return; }
       if (!confirm('This replaces all current progress on this browser with the save code. Continue?')) return;
+      backupLocal();
       save(next);
       location.reload();
     });
