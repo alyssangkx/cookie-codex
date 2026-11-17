@@ -74,8 +74,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const rewardFor = (sid: string, t: Tier) => meta.slots[`${sid}|${t}`];
 
   const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  // the asked cloze blank (four ＿) is marked and kept on one line; other blanks have two
   const fmt = (x: string) =>
-    esc(x).replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
+    esc(x).replace(/（(\d+)）＿＿＿＿/g, '<mark class="ask">（$1）＿＿＿＿</mark>').replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
       `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`);
 
   let byId = new Map<string, Q>();
@@ -289,6 +290,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .timer.low { color: var(--berry); }
   .quiz .timer.paused { opacity: 0.6; }
   .quiz .stem { font-size: 1.2rem; margin: 1rem 0; white-space: pre-line; }
+  .quiz .stem mark.ask { white-space: nowrap; color: inherit; font-weight: 700; padding: 0 0.15em; border-radius: 0.3em;
+    background: color-mix(in srgb, currentColor 14%, transparent); }
   .quiz .rev summary { white-space: pre-line; }
   .quiz .options { display: grid; gap: 0.6rem; }
   .quiz .opt {

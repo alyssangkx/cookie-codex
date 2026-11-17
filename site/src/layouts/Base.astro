@@ -92,7 +92,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         const name = kv.get('player-name');
         if (!name) return;
         const brand = document.querySelector('.brand-name');
-        if (brand) brand.textContent = `${name}'s `;
+        if (brand) brand.textContent = `${name}'s\u00a0`; // no-break space: the header's layout drops a plain one
         if (document.title.endsWith('Cookie Codex')) document.title = document.title.replace(/Cookie Codex$/, `${name}'s Cookie Codex`);
         document.querySelectorAll('.player-sep').forEach((el) => (el.textContent = `, ${name}`));
       };
