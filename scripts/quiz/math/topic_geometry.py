@@ -3282,3 +3282,775 @@ def _(p):
     for t, c in ((p["t1"], p["c1"]), (p["t2"], p["c2"])):
         b = (b + t) % 360 if c else (b - t) % 360
     return F(b // 45 + 1)
+
+
+# ================================================================ Group C gap fills: drawing outcomes as A-D / reading MCQs
+from figures_gapC import (shape_grid, source_and_panels, solid_fig, solid_edges, mini_protractor)  # noqa: E402
+
+
+def _L(v):
+    return "ABCD"[int(v) - 1]
+
+
+def _norm(poly):
+    mx, my = min(x for x, y in poly), min(y for x, y in poly)
+    return frozenset((x - mx, y - my) for x, y in poly)
+
+
+def _place(poly, cols, rows, r):
+    xs, ys = [x for x, y in poly], [y for x, y in poly]
+    ox, oy = r.randint(-min(xs), cols - max(xs)), r.randint(-min(ys), rows - max(ys))
+    return [(x + ox, y + oy) for x, y in poly]
+
+
+def _area2(poly):
+    return abs(sum(poly[i][0] * poly[(i + 1) % len(poly)][1] - poly[(i + 1) % len(poly)][0] * poly[i][1]
+                   for i in range(len(poly))))
+
+
+# ---------------------------------------------------------------- 2D shapes: copying figures on a grid
+
+def _shape(kind, p):
+    if kind == "tri":
+        w, h = p
+        return [(0, 0), (w, 0), (0, h)]
+    if kind == "L":
+        a, h, t = p
+        return [(0, 0), (a, 0), (a, t), (t, t), (t, h), (0, h)]
+    if kind == "trap":
+        w, top, h = p
+        return [(0, 0), (top, 0), (w, h), (0, h)]
+    if kind == "para":
+        w, k, h = p
+        return [(k, 0), (k + w, 0), (w, h), (0, h)]
+    if kind == "stairs":
+        w1, w2, w3, h1, h2, h3 = p
+        W_, H_ = w1 + w2 + w3, h3
+        return [(0, H_), (0, H_ - h1), (w1, H_ - h1), (w1, H_ - h2), (w1 + w2, H_ - h2), (w1 + w2, H_ - h3), (W_, H_ - h3), (W_, H_)]
+    if kind == "S":
+        a, b = p
+        return [(0, 0), (a, 0), (a, 1), (a + b, 1), (a + b, 2), (b, 2), (b, 1), (0, 1)]
+
+
+def _valid(kind, p):
+    if kind == "tri":
+        return 2 <= p[0] <= 5 and 2 <= p[1] <= 5 and p[0] != p[1]
+    if kind == "L":
+        a, h, t = p
+        return 3 <= a <= 5 and 3 <= h <= 5 and 1 <= t <= 2 and t < a and t < h and a != h
+    if kind == "trap":
+        w, top, h = p
+        return 3 <= w <= 5 and 1 <= top < w and 2 <= h <= 4
+    if kind == "para":
+        w, k, h = p
+        return 2 <= w <= 3 and 1 <= k <= 2 and 2 <= h <= 3
+    if kind == "stairs":
+        w1, w2, w3, h1, h2, h3 = p
+        return all(1 <= x <= 2 for x in (w1, w2, w3)) and 1 <= h1 < h2 < h3 <= 4
+    if kind == "S":
+        return p[0] >= 1 and p[1] >= 1 and p[0] + p[1] <= 5 and p[0] != p[1]
+
+
+def _rand_params(kind, r):
+    for _ in range(300):
+        p = {"tri": lambda: (r.randint(2, 5), r.randint(2, 5)),
+             "L": lambda: (r.randint(3, 5), r.randint(3, 5), r.randint(1, 2)),
+             "trap": lambda: (r.randint(3, 5), r.randint(1, 4), r.randint(2, 4)),
+             "para": lambda: (r.randint(2, 3), r.randint(1, 2), r.randint(2, 3)),
+             "stairs": lambda: tuple(r.randint(1, 2) for _ in range(3)) + tuple(sorted(r.sample(range(1, 5), 3))),
+             "S": lambda: (r.randint(1, 3), r.randint(1, 3))}[kind]()
+        if _valid(kind, p):
+            return p
+    return None
+
+
+def _mirror(poly):
+    mx = max(x for x, y in poly)
+    return [(mx - x, y) for x, y in poly]
+
+
+def _turn(poly):
+    my = max(y for x, y in poly)
+    return [(my - y, x) for x, y in poly]
+
+
+def _resize(kind, p, r):
+    idx = list(range(len(p)))
+    r.shuffle(idx)
+    for i in idx:
+        for d in r.sample([1, -1], 2):
+            q = list(p)
+            q[i] += d
+            if _valid(kind, tuple(q)):
+                return _shape(kind, tuple(q))
+    return None
+
+
+def _copy_q(r, fn, kinds):
+    name = r.choice(NAMES)
+    kind = r.choice(kinds)
+    p = _rand_params(kind, r)
+    if p is None:
+        return None
+    src = _shape(kind, p)
+    bad = [("flip", _mirror(src), "flipped_the_figure", "Drew the mirror image of the figure."),
+           ("turn", _turn(src), "turned_the_figure", "Drew the figure turned a quarter-turn."),
+           ("size", _resize(kind, p, r), "changed_a_length", "Changed the length of one side when copying.")]
+    if bad[2][1] is None:
+        return None
+    ns = [_norm(src)] + [_norm(b[1]) for b in bad]
+    if len(set(ns)) < 4:
+        return None
+    dots = r.random() < 0.5
+    pos = r.randrange(4)
+    cols = rows = 6
+    polys = [_place(b[1], cols, rows, r) for b in bad]
+    polys.insert(pos, _place(src, cols, rows, r))
+    figs = [shape_grid(cols, rows, [pl], cell=15, dots=dots) for pl in polys]
+    srcf = shape_grid(cols, rows, [_place(src, cols, rows, r)], cell=15, dots=dots)
+    grid = "dot" if dots else "square"
+    ph = r.choice(["Which drawing, A to D, is an exact copy of the figure?",
+                   "Which of A to D is a correct copy of the figure?"])
+    stem = f"{name} copies the figure on a {grid} grid. {ph}"
+    wrong = [(i + 1 if i < pos else i + 1, tag, why) for i, (_, _, tag, why) in zip([x for x in range(4) if x != pos], bad)]
+    return build(fn, stem, pos + 1, wrong,
+                 ["A copy has the same shape, the same side lengths and faces the same way.",
+                  f"Drawing {'ABCD'[pos]} matches the figure side for side."],
+                 {"src": [list(v) for v in src], "opts": [[list(v) for v in pl] for pl in polys]}, _L, whole=True,
+                 auto_slips=False, figure=source_and_panels(srcf, figs))
+
+
+def _copy_check(p):
+    s = _norm([tuple(v) for v in p["src"]])
+    ok = [i + 1 for i, o in enumerate(p["opts"]) if _norm([tuple(v) for v in o]) == s]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "basic", G2 + "04")
+def copy_figure_basic(r):
+    """Which of four drawings on a dot/square grid is an exact copy of the figure (basic shapes)."""
+    return _copy_q(r, copy_figure_basic, ["tri", "L", "trap"])
+
+
+checker(copy_figure_basic)(_copy_check)
+
+
+@template(T, "intermediate", G2 + "04")
+def copy_figure_harder(r):
+    """Which of four drawings on a dot/square grid is an exact copy of the figure (steps, slants, S shapes)."""
+    return _copy_q(r, copy_figure_harder, ["para", "stairs", "S", "L", "trap"])
+
+
+checker(copy_figure_harder)(_copy_check)
+
+
+@template(T, "competent", G2 + "04")
+def copy_to_bigger_grid_area(r):
+    """Copy a figure onto a grid of larger squares, then find its area."""
+    name = r.choice(NAMES)
+    kind = r.choice(["L", "stairs"])
+    p = _rand_params(kind, r)
+    if p is None:
+        return None
+    src = _place(_shape(kind, p), 6, 6, r)
+    cells = _area2(src) // 2
+    k = r.choice([2, 3])
+    ans = cells * k * k
+    ph = r.choice(["copies the figure square for square", "copies the figure exactly, square for square"])
+    stem = (f"The figure is drawn on a grid of 1 cm squares. {name} {ph} onto a grid where each square is {k} cm by {k} cm. "
+            f"What is the area of {name}'s copy, in cm²?")
+    return build(copy_to_bigger_grid_area, stem, ans, [
+        (cells * k, "scaled_area_like_length", f"Multiplied the number of squares by {k} instead of {k} x {k}."),
+        (cells, "did_not_scale_the_squares", "Found the area of the original figure."),
+        (ans + k * k, "miscounted_a_square", "Counted one square too many."),
+        (ans - k * k, "miscounted_a_square", "Counted one square too few."),
+    ], [f"The figure covers {cells} squares.", f"Each square is {k} x {k} = {k * k} cm².", f"{cells} x {k * k} = {ans} cm²"],
+        {"src": [list(v) for v in src], "k": k}, lambda v: f"{int(v)} cm²", whole=True, auto_slips=False,
+        figure=shape_grid(6, 6, [src], cell=22, dots=False, pad_tl=12).svg("Figure on a square grid"))
+
+
+@checker(copy_to_bigger_grid_area)
+def _(p):
+    poly = [tuple(v) for v in p["src"]]
+
+    def inside(x, y):
+        c = False
+        n = len(poly)
+        for i in range(n):
+            x1, y1 = poly[i]
+            x2, y2 = poly[(i + 1) % n]
+            if (y1 > y) != (y2 > y) and x < x1 + (y - y1) * (x2 - x1) / (y2 - y1):
+                c = not c
+        return c
+    squares = sum(1 for cx in range(6) for cy in range(6) if inside(cx + 0.5, cy + 0.5))
+    return F(squares * p["k"] * p["k"])
+
+
+# ---------------------------------------------------------------- 3D shapes: 2D drawings of solids
+
+KINDS_3D = {"cube": "cube", "cuboid": "cuboid", "tri_prism": "triangular prism", "sq_pyr": "square-based pyramid",
+            "tri_pyr": "triangular pyramid", "pent_prism": "pentagonal prism", "hex_prism": "hexagonal prism"}
+FAM = {"cube": "prism", "cuboid": "prism", "tri_prism": "prism", "pent_prism": "prism", "hex_prism": "prism",
+       "sq_pyr": "pyramid", "tri_pyr": "pyramid"}
+DIMS = {"cube": (1, 1, 1), "cuboid": (1.7, 1.0, 1.2), "tri_prism": (1.5, 1.2, 1.1), "sq_pyr": (1.4, 1.2, 1.4),
+        "tri_pyr": (1.6, 1.3, 1.1), "pent_prism": (1.3, 1.3, 1.0), "hex_prism": (1.3, 1.3, 1.0)}
+VFE = {"cuboid": (8, 6), "tri_prism": (6, 5), "sq_pyr": (5, 5), "tri_pyr": (4, 4), "pent_prism": (10, 7), "hex_prism": (12, 8)}
+
+
+def _solid_panel(kind, r):
+    a, b, c = DIMS[kind]
+    j = r.uniform(0.9, 1.1)
+    return solid_fig(kind, a * j, b, c)
+
+
+@template(T, "basic", G3 + "03")
+def which_drawing_shows_solid(r):
+    """Which 2D drawing (hidden edges dashed) represents a cube / cuboid / prism / pyramid."""
+    name = r.choice(NAMES)
+    pool = list(KINDS_3D)
+    ks = r.sample(pool, 4)
+    if "cube" in ks and "cuboid" in ks:
+        ks.remove("cuboid" if r.random() < 0.5 else "cube")
+        extra = [k for k in pool if k not in ks and k not in ("cube", "cuboid")]
+        ks.append(r.choice(extra))
+    target = r.randrange(4)
+    ask = ks[target]
+    others = [k for i, k in enumerate(ks) if i != target]
+    tg = {k: ("confused_prism_with_pyramid" if FAM[k] != FAM[ask] else "confused_with_similar_solid") for k in others}
+    why = {"confused_prism_with_pyramid": "Mixed up a prism with a pyramid.",
+           "confused_with_similar_solid": "Chose a similar-looking solid with a different number of faces."}
+    others.sort(key=lambda k: 0 if FAM[k] == FAM[ask] else 1)
+    wrong = [(ks.index(k) + 1, tg[k], why[tg[k]]) for k in others]
+    figs = [_solid_panel(k, r) for k in ks]
+    nm_ = KINDS_3D[ask]
+    stem = f"{name} draws four solids. Hidden edges are shown as dashed lines. Which drawing shows {art(nm_)} {nm_}?"
+    return build(which_drawing_shows_solid, stem, target + 1, wrong,
+                 [f"A {nm_} has " + {"cube": "6 square faces and 12 edges.", "cuboid": "6 rectangular faces and 12 edges.",
+                                     "tri_prism": "2 triangular faces and 3 rectangular faces.", "sq_pyr": "a square base and 4 triangular faces meeting at a point.",
+                                     "tri_pyr": "4 triangular faces.", "pent_prism": "2 pentagonal faces and 5 rectangular faces.",
+                                     "hex_prism": "2 hexagonal faces and 6 rectangular faces."}[ask],
+                  f"Drawing {'ABCD'[target]} shows it."], {"kinds": ks, "ask": ask}, _L, whole=True, auto_slips=False,
+                 figure=panels(figs, "ABCD", cols=2, title="Four drawings of solids"))
+
+
+@checker(which_drawing_shows_solid)
+def _(p):
+    ok = [i + 1 for i, k in enumerate(p["kinds"]) if k == p["ask"]]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "intermediate", G3 + "03")
+def which_drawing_has_edges(r):
+    """Which drawing shows a solid with exactly E edges (hidden edges are dashed)."""
+    name = r.choice(NAMES)
+    pool = list(VFE)
+    ks = r.sample(pool, 4)
+    target = r.randrange(4)
+    ask = ks[target]
+    E = lambda k: VFE[k][0] + VFE[k][1] - 2  # noqa: E731  (Euler: E = V + F - 2)
+    e = E(ask)
+    vis = {k: sum(1 for _, _, v in solid_edges(k, *DIMS[k])[1] if v) for k in ks}
+
+    def why(k):
+        if vis[k] == e:
+            return ("counted_only_visible_edges", "Counted only the solid lines and left out the dashed hidden edges.")
+        if VFE[k][1] == e:
+            return ("counted_faces_not_edges", "Counted the faces instead of the edges.")
+        if VFE[k][0] == e:
+            return ("counted_corners_not_edges", "Counted the corners instead of the edges.")
+        return ("miscounted_edges", "Miscounted the edges of the solid.")
+    others = [k for i, k in enumerate(ks) if i != target]
+    pri = {"counted_only_visible_edges": 0, "counted_faces_not_edges": 1, "counted_corners_not_edges": 2, "miscounted_edges": 3}
+    others.sort(key=lambda k: pri[why(k)[0]])
+    wrong = [(ks.index(k) + 1, *why(k)) for k in others]
+    figs = [_solid_panel(k, r) for k in ks]
+    stem = (f"{name} draws four solids, with hidden edges dashed. Which drawing shows a solid with exactly {e} edges?")
+    return build(which_drawing_has_edges, stem, target + 1, wrong,
+                 [f"Count every edge, including the dashed ones.", f"The {KINDS_3D[ask]} has {e} edges.",
+                  f"That is drawing {'ABCD'[target]}."], {"kinds": ks, "e": e}, _L, whole=True, auto_slips=False,
+                 figure=panels(figs, "ABCD", cols=2, title="Four drawings of solids"))
+
+
+@checker(which_drawing_has_edges)
+def _(p):
+    ok = [i + 1 for i, k in enumerate(p["kinds"]) if VFE[k][0] + VFE[k][1] - 2 == p["e"]]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+def _edge_len(kind, v, i, j, dims):
+    """Length class of edge (i, j) for the labelled solids."""
+    if kind == "cuboid":
+        d = [abs(v[i][k] - v[j][k]) > 1e-9 for k in range(3)]
+        return dims[d.index(True)]
+    if kind == "cube":
+        return dims[0]
+    return dims[0] if (i < 4 and j < 4) else dims[1]
+
+
+@template(T, "competent", G3 + "03")
+def total_edge_length_drawing(r):
+    """Total length of all edges of a solid from a drawing with labelled edges (hidden edges dashed)."""
+    name = r.choice(NAMES)
+    kind = r.choice(["cuboid", "cuboid", "cube", "sq_pyr"])
+    if kind == "cuboid":
+        l, w, h = r.sample(range(2, 10), 3)
+        v, edges = solid_edges("cuboid", l, h, w)
+        fig = solid_fig("cuboid", l, h, w, W=210, H=170, labels=[(0, 1, f"{l} cm"), (1, 2, f"{h} cm"), (1, 5, f"{w} cm")])
+        ans = 4 * (l + w + h)
+        vis_sum = sum(_edge_len("cuboid", v, i, j, (l, h, w)) for i, j, vv in edges if vv)
+        wrong = [(vis_sum, "added_only_visible_edges", "Added only the solid lines and left out the dashed hidden edges."),
+                 (l + w + h, "counted_one_edge_of_each_length", "Added one edge of each length only."),
+                 (2 * (l + w + h), "counted_each_length_twice", "Counted each length only twice instead of four times."),
+                 (ans + 4, "arithmetic_slip", "Made a small arithmetic slip.")]
+        stem = (f"{name} draws a cuboid that is {l} cm long, {w} cm wide and {h} cm high. Hidden edges are dashed. "
+                f"What is the total length of all the edges of the cuboid, in cm?")
+        steps = ["A cuboid has 12 edges: 4 of each length.", f"4 x ({l} + {w} + {h}) = {ans} cm"]
+        params = {"kind": kind, "dims": [l, w, h]}
+    elif kind == "cube":
+        s = r.randint(2, 12)
+        v, edges = solid_edges("cube", 1, 1, 1)
+        fig = solid_fig("cube", 1, 1, 1, W=210, H=170, labels=[(0, 1, f"{s} cm")])
+        ans = 12 * s
+        vis_sum = s * sum(1 for _, _, vv in edges if vv)
+        wrong = [(vis_sum, "added_only_visible_edges", "Counted only the solid lines and left out the hidden edges."),
+                 (6 * s, "counted_faces_not_edges", "Used the 6 faces instead of the 12 edges."),
+                 (8 * s, "counted_corners_not_edges", "Used the 8 corners instead of the 12 edges."),
+                 (ans + s, "miscounted_one_edge", "Counted one edge too many.")]
+        stem = (f"{name} draws a cube with edges of {s} cm. Hidden edges are dashed. "
+                f"What is the total length of all the edges of the cube, in cm?")
+        steps = ["A cube has 12 equal edges.", f"12 x {s} = {ans} cm"]
+        params = {"kind": kind, "dims": [s]}
+    else:
+        a, e = r.randint(3, 9), r.randint(4, 12)
+        if e * 2 <= a * 1.5:
+            return None
+        v, edges = solid_edges("sq_pyr", *DIMS["sq_pyr"])
+        slant_vis = [(i, j) for i, j, vv in edges if vv and j == 4]
+        fig = solid_fig("sq_pyr", 1.4, 1.3, 1.4, W=210, H=170, labels=[(0, 1, f"{a} cm"), (slant_vis[0][0], 4, f"{e} cm")])
+        ans = 4 * a + 4 * e
+        vis_sum = sum(_edge_len("sq_pyr", v, i, j, (a, e)) for i, j, vv in edges if vv)
+        wrong = [(vis_sum, "added_only_visible_edges", "Added only the solid lines and left out the dashed hidden edges."),
+                 (4 * a + e, "counted_one_slant_edge", "Counted only one slant edge."),
+                 (4 * e + a, "counted_one_base_edge", "Counted only one base edge."),
+                 (ans + 4, "arithmetic_slip", "Made a small arithmetic slip.")]
+        stem = (f"{name} draws a square-based pyramid. Each side of the base is {a} cm and each of the 4 slant edges is {e} cm. "
+                f"Hidden edges are dashed. The figure is not drawn to scale. What is the total length of all the edges, in cm?")
+        steps = ["The pyramid has 4 base edges and 4 slant edges.", f"4 x {a} + 4 x {e} = {ans} cm"]
+        params = {"kind": kind, "dims": [a, e]}
+    return build(total_edge_length_drawing, stem, ans, wrong, steps, params, lambda v: f"{int(v)} cm", whole=True,
+                 auto_slips=False, figure=fig.svg("Drawing of a solid with labelled edges"))
+
+
+@checker(total_edge_length_drawing)
+def _(p):
+    d = p["dims"]
+    if p["kind"] == "cuboid":
+        return F(sum([d[0]] * 4 + [d[1]] * 4 + [d[2]] * 4))
+    if p["kind"] == "cube":
+        return F(sum([d[0]] * 12))
+    return F(sum([d[0]] * 4 + [d[1]] * 4))
+
+
+# ---------------------------------------------------------------- angles: drawing with a protractor
+
+@template(T, "basic", GA + "04")
+def which_angle_is_drawn(r):
+    """Which protractor drawing (A-D) shows an angle of the given size, reading the correct scale."""
+    name = r.choice(NAMES)
+    th = r.randrange(25, 156, 5)
+    alphas = [th, 180 - th, th + 10, th - 10]
+    if any(abs(a - b) < 10 for i, a in enumerate(alphas) for b in alphas[i + 1:]) or min(alphas) < 15 or max(alphas) > 165:
+        return None
+    pos = r.randrange(4)
+    others = alphas[1:]
+    bases = [r.random() < 0.5 for _ in range(4)]
+    allv = others[:]
+    allv.insert(pos, th)
+    br = list(bases)
+    for i, a in enumerate(allv):
+        if a == 180 - th:
+            br[i] = False  # arm points at the outer-scale mark th, but QP is on the left
+    figs = [mini_protractor(a, b) for a, b in zip(allv, br)]
+    wr_order = [(180 - th, "read_the_wrong_scale", "Read the scale that starts at 0 on the other side."),
+                (th + 10, "misread_by_one_interval", "Was one 10° interval out."),
+                (th - 10, "misread_by_one_interval", "Was one 10° interval out.")]
+    wrong = [(allv.index(a) + 1, t, w) for a, t, w in wr_order]
+    stem = (f"{name} needs to draw ∠PQR = {th}° with a protractor. In each drawing, ray QP lies along the baseline of the "
+            f"protractor. Which drawing shows an angle of {th}°?")
+    return build(which_angle_is_drawn, stem, pos + 1, wrong,
+                 ["Start at the 0° mark that QP lies on and read along that scale.", f"Only drawing {'ABCD'[pos]} reaches {th}°."],
+                 {"th": th, "alphas": allv, "base_right": br}, _L, whole=True, auto_slips=False,
+                 figure=panels(figs, "ABCD", cols=2, title="Four protractor drawings"))
+
+
+@checker(which_angle_is_drawn)
+def _(p):
+    res = []
+    for i, (a, b) in enumerate(zip(p["alphas"], p["base_right"])):
+        base_dir = 0 if b else 180
+        arm_dir = a if b else 180 - a
+        got = abs(arm_dir - base_dir)
+        if got == p["th"]:
+            res.append(i + 1)
+    return F(res[0]) if len(res) == 1 else None
+
+
+@template(T, "intermediate", GA + "04")
+def which_scale_was_used(r):
+    """A child marked R on the wrong scale of the protractor: what angle was actually drawn."""
+    name = r.choice(NAMES)
+    th = r.randrange(20, 161, 5)
+    if th == 90:
+        return None
+    use_outer = r.random() < 0.5
+    act = 180 - th
+    base_right = not use_outer  # outer scale starts at 0 on the right: the mistake happens when QP is on the left
+    sc = "outer" if use_outer else "inner"
+    side = "left" if use_outer else "right"
+    zero = "right" if use_outer else "left"
+    stem = (f"{name} wants to draw ∠PQR = {th}°, with QP along the baseline of the protractor pointing to the {side}. "
+            f"{name} marks R at {th} on the {sc} scale (the scale that starts at 0 on the {zero}). "
+            f"What is the actual size of ∠PQR in the drawing?")
+    fig = protractor_fig(act, base_right=base_right)
+    wr = [W(th, "read_the_wrong_scale", f"Took the {sc} scale reading as the angle even though QP is not on its 0°."),
+          W(act + 10, "misread_by_one_interval", "Was one 10° interval out."),
+          W(act - 10, "misread_by_one_interval", "Was one 10° interval out.")]
+    return mk(which_scale_was_used, stem, act, wr,
+              [f"QP is on the {side}, so the 0° mark for this angle is on the {side}.",
+               f"The mark R is at {th} on the {sc} scale, so on the other scale it reads 180° - {th}° = {act}°.", f"∠PQR = {act}°"],
+              {"th": th, "outer": use_outer}, fig)
+
+
+@checker(which_scale_was_used)
+def _(p):
+    base_dir = 180 if p["outer"] else 0  # QP on the left for the outer-scale slip, on the right otherwise
+    arm_dir = p["th"] if p["outer"] else 180 - p["th"]  # direction of R measured from the right-hand baseline
+    return F(abs(arm_dir - base_dir))
+
+
+@template(T, "competent", GA + "04")
+def protractor_then_extend(r):
+    """Read ∠PQR from a protractor, then find the angle between QR and the extension of PQ."""
+    name = r.choice(NAMES)
+    th = r.randrange(25, 156, 5)
+    if th == 90:
+        return None
+    right = r.random() < 0.5
+    side = "right" if right else "left"
+    ans = 180 - th
+    stem = (f"{name} draws ∠PQR with a protractor, with ray QP along the baseline pointing to the {side}. "
+            f"Ray QS is drawn so that PQS is a straight line. What is the size of ∠RQS?")
+    fig = protractor_fig(th, base_right=right)
+    wr = [W(th, "gave_the_angle_read_off", "Gave ∠PQR instead of the angle on the other side."),
+          W(abs(th - 90), "used_90_not_180", "Used 90° instead of 180° for a straight line."),
+          W(ans + 10, "misread_by_one_interval", "Was one 10° interval out."),
+          W(ans - 10, "misread_by_one_interval", "Was one 10° interval out.")]
+    return mk(protractor_then_extend, stem, ans, wr,
+              [f"Read ∠PQR from the scale that starts at 0° on QP: {th}°.", "Angles on a straight line add up to 180°.",
+               f"∠RQS = 180° - {th}° = {ans}°"], {"th": th, "right": right}, fig)
+
+
+@checker(protractor_then_extend)
+def _(p):
+    import math as _m
+    base = (1, 0) if p["right"] else (-1, 0)
+    arm = (_m.cos(_m.radians(p["th"] if p["right"] else 180 - p["th"])), _m.sin(_m.radians(p["th"] if p["right"] else 180 - p["th"])))
+    pqr = _m.degrees(_m.acos(base[0] * arm[0] + base[1] * arm[1]))
+    ext = (-base[0], -base[1])
+    rqs = _m.degrees(_m.acos(ext[0] * arm[0] + ext[1] * arm[1]))
+    return F(round(rqs)) if abs(pqr + rqs - 180) < 1e-6 else None
+
+
+# ---------------------------------------------------------------- perpendicular and parallel lines on a grid
+
+def _seg_in_region(r, region, v, cols_per=5):
+    """Place a segment with direction v inside a 5x5 region (lattice 0..4), returning absolute endpoints."""
+    c0, r0 = (region % 3) * cols_per, (region // 3) * cols_per
+    dx, dy = v
+    sx = r.randint(max(0, -dx), min(4, 4 - dx))
+    sy = r.randint(max(0, -dy), min(4, 4 - dy))
+    return (c0 + sx, r0 + sy), (c0 + sx + dx, r0 + sy + dy)
+
+
+def _dot(u, v):
+    return u[0] * v[0] + u[1] * v[1]
+
+
+def _cross(u, v):
+    return u[0] * v[1] - u[1] * v[0]
+
+
+def _line_figure(pq, cands):
+    segs = [("Q", pq[0], pq[1], True)] if pq else []
+    segs += [("ABCD"[i], a, b, False) for i, (a, b) in enumerate(cands)]
+    return shape_grid(15, 10, [], cell=17, pad_tl=14, pad_br=14, segs=segs).svg("Lines on a grid")
+
+
+def _lines_question(r, fn, kind, pq_vec, correct_vec, decoys, name):
+    """Build a Which-line-is-perpendicular/parallel question. decoys: [(vec, tag, why)] (3 needed)."""
+    regions = r.sample(range(6), 5)
+    pq = _seg_in_region(r, regions[0], pq_vec)
+    vecs = [correct_vec] + [d[0] for d in decoys[:3]]
+    vecs = [(-x, -y) if r.random() < 0.5 else (x, y) for x, y in vecs]
+    pos = r.randrange(4)
+    slots = [None] * 4
+    slots[pos] = 0
+    rest = [i for i in range(4) if i != pos]
+    for slot, vi in zip(rest, [1, 2, 3]):
+        slots[slot] = vi
+    cands = [_seg_in_region(r, regions[1 + s], vecs[slots[s]]) for s in range(4)]
+    wrong = [(slots.index(i + 1) + 1, decoys[i][1], decoys[i][2]) for i in range(3)]
+    word = "perpendicular to" if kind == "perp" else "parallel to"
+    stem = f"{name} draws line PQ and four other lines, A, B, C and D, on a square grid. Which line is {word} line PQ?"
+    return build(fn, stem, pos + 1, wrong,
+                 ["Compare how far each line goes across and up/down for each step on the grid.",
+                  "Perpendicular lines turn the 'across' and 'up' steps round, with one direction reversed." if kind == "perp"
+                  else "Parallel lines go across and up/down by the same amounts, so they slope the same way.",
+                  f"Line {'ABCD'[pos]} is {word} PQ."],
+                 {"pq": [list(pq[0]), list(pq[1])], "cands": [[list(a), list(b)] for a, b in cands], "kind": kind},
+                 _L, whole=True, auto_slips=False, figure=_line_figure(pq, cands))
+
+
+def _lines_check(p):
+    v = (p["pq"][1][0] - p["pq"][0][0], p["pq"][1][1] - p["pq"][0][1])
+    ok = []
+    for i, (a, b) in enumerate(p["cands"]):
+        u = (b[0] - a[0], b[1] - a[1])
+        if (p["kind"] == "perp" and _dot(u, v) == 0) or (p["kind"] == "par" and _cross(u, v) == 0):
+            ok.append(i + 1)
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "basic", GP + "02")
+def line_perp_par_grid_basic(r):
+    """Which line on the grid is perpendicular / parallel to a horizontal or vertical line PQ."""
+    name = r.choice(NAMES)
+    kind = r.choice(["perp", "par"])
+    horiz = r.random() < 0.5
+    n1 = r.randint(2, 4)
+    pq = (n1, 0) if horiz else (0, n1)
+    if kind == "perp":
+        good = (0, r.randint(2, 4)) if horiz else (r.randint(2, 4), 0)
+        decoys = [((r.randint(2, 4), 0) if horiz else (0, r.randint(2, 4)), "chose_parallel_for_perpendicular", "Chose a parallel line instead."),
+                  ((2, 2) if r.random() < 0.5 else (3, 3), "chose_a_slanting_line", "Chose a line slanting at about 45°, not a right angle."),
+                  (((1, 4) if horiz else (4, 1)), "chose_a_nearly_perpendicular_line", "Chose a line that leans slightly, so it is not at a right angle.")]
+    else:
+        good = (r.randint(2, 4), 0) if horiz else (0, r.randint(2, 4))
+        decoys = [((0, r.randint(2, 4)) if horiz else (r.randint(2, 4), 0), "chose_perpendicular_for_parallel", "Chose a perpendicular line instead."),
+                  ((2, 2), "chose_a_slanting_line", "Chose a slanting line that is not parallel."),
+                  (((4, 1) if horiz else (1, 4)), "chose_a_nearly_parallel_line", "Chose a line that leans slightly, so it is not parallel.")]
+    return _lines_question(r, line_perp_par_grid_basic, kind, pq, good, decoys, name)
+
+
+checker(line_perp_par_grid_basic)(_lines_check)
+
+
+@template(T, "intermediate", GP + "02")
+def line_perp_par_grid_slope(r):
+    """Which line on the grid is perpendicular / parallel to a sloping line PQ."""
+    name = r.choice(NAMES)
+    kind = r.choice(["perp", "par"])
+    a, b = r.choice([(1, 2), (2, 1), (1, 3), (3, 1), (2, 3), (3, 2)])
+    pq = (a, b)
+    perp = (-b, a)
+    if kind == "perp":
+        good = perp
+        decoys = [((a, b), "chose_parallel_for_perpendicular", "Chose a parallel line instead."),
+                  ((b, a), "swapped_the_steps", "Swapped the across and up steps without reversing one."),
+                  ((a, -b), "chose_the_mirror_image", "Chose the mirror image of PQ, which is not at a right angle to it.")]
+    else:
+        good = pq
+        decoys = [(perp, "chose_perpendicular_for_parallel", "Chose a perpendicular line instead."),
+                  ((b, a), "swapped_the_steps", "Swapped the across and up steps."),
+                  ((a, -b), "chose_the_mirror_image", "Chose the mirror image of PQ, which slopes the other way.")]
+    ok = [d for d in decoys if all(abs(x) <= 4 and abs(y) <= 4 for x, y in [d[0]])]
+    if len(ok) < 3 or any((_dot(d[0], pq) == 0 if kind == "perp" else _cross(d[0], pq) == 0) for d in decoys):
+        return None
+    return _lines_question(r, line_perp_par_grid_slope, kind, pq, good, decoys, name)
+
+
+checker(line_perp_par_grid_slope)(_lines_check)
+
+
+@template(T, "competent", GP + "02")
+def count_perpendicular_pairs(r):
+    """Count the pairs of perpendicular lines among four lines drawn on a grid."""
+    name = r.choice(NAMES)
+    pool = [(1, 0), (0, 1), (1, 1), (1, -1), (1, 2), (2, -1), (2, 1), (-1, 2)]
+    vecs = [r.choice(pool) for _ in range(4)]
+    pairs = [(i, j) for i in range(4) for j in range(i + 1, 4)]
+    perp = sum(1 for i, j in pairs if _dot(vecs[i], vecs[j]) == 0)
+    par = sum(1 for i, j in pairs if _cross(vecs[i], vecs[j]) == 0)
+    if perp < 1 or par == perp or len({perp, par, 2 * perp}) < 3:
+        return None
+    ks = [r.choice([1, 2]) if abs(v[0]) + abs(v[1]) <= 2 else 1 for v in vecs]
+    vecs = [(v[0] * k, v[1] * k) for v, k in zip(vecs, ks)]
+    vecs = [(-x, -y) if r.random() < 0.5 else (x, y) for x, y in vecs]
+    regions = r.sample(range(6), 4)
+    segs = []
+    for rg, v in zip(regions, vecs):
+        if abs(v[0]) > 4 or abs(v[1]) > 4:
+            return None
+        segs.append(_seg_in_region(r, rg, v))
+    ph = r.choice(["How many pairs of perpendicular lines are there among lines A, B, C and D?",
+                   "Looking at all four lines, how many pairs of lines are perpendicular to each other?"])
+    stem = f"{name} draws four lines on a square grid. {ph}"
+    return build(count_perpendicular_pairs, stem, perp, [
+        (par, "counted_parallel_pairs", "Counted the parallel pairs instead of the perpendicular pairs."),
+        (2 * perp, "counted_each_pair_twice", "Counted each pair of lines twice (A with B, then B with A)."),
+        (perp + 1, "counted_one_pair_too_many", "Counted one pair too many."),
+        (perp - 1, "missed_one_pair", "Missed one pair."),
+    ], ["Check each pair of lines: do the steps across and up/down turn into each other with one reversed?",
+        f"There are {perp} perpendicular pair(s)."],
+        {"segs": [[list(a), list(b)] for a, b in segs]}, str, whole=True, auto_slips=False,
+        figure=_line_figure(None, segs))
+
+
+@checker(count_perpendicular_pairs)
+def _(p):
+    vs = [(b[0] - a[0], b[1] - a[1]) for a, b in p["segs"]]
+    n = 0
+    for i in range(4):
+        for j in range(i + 1, 4):
+            if _dot(vs[i], vs[j]) == 0:
+                n += 1
+    return F(n)
+
+
+# ---------------------------------------------------------------- rectangles and squares drawn on a grid
+
+def _rect(w, h):
+    return [(0, 0), (w, 0), (w, h), (0, h)]
+
+
+def _slant(w, h, k=1):
+    return [(k, 0), (k + w, 0), (w, h), (0, h)]
+
+
+def _rect_check_shape(poly):
+    """(w, h) if poly is an axis-free rectangle (4 right angles), else None."""
+    if len(poly) != 4:
+        return None
+    e = [(poly[(i + 1) % 4][0] - poly[i][0], poly[(i + 1) % 4][1] - poly[i][1]) for i in range(4)]
+    if all(_dot(e[i], e[(i + 1) % 4]) == 0 for i in range(4)):
+        a, b = abs(e[0][0]) + abs(e[0][1]), abs(e[1][0]) + abs(e[1][1])
+        return tuple(sorted((a, b)))
+    return None
+
+
+def _grid_panels(r, polys, cols, rows, cell, title="Four drawings on a grid"):
+    figs = [shape_grid(cols, rows, [_place(pl, cols, rows, r)], cell=cell, shade=0.0) for pl in polys]
+    return panels(figs, "ABCD", cols=2, title=title)
+
+
+def _rect_options(r, fn, correct, bad, stem, steps, params, ans_check_params, cols=8, rows=7, cell=12):
+    """correct: polygon; bad: [(poly, tag, why)] (3). Builds the question with a random answer position."""
+    pos = r.randrange(4)
+    polys = [b[0] for b in bad[:3]]
+    polys.insert(pos, correct)
+    rest = [i for i in range(4) if i != pos]
+    wrong = [(i + 1, b[1], b[2]) for i, b in zip(rest, bad[:3])]
+    params = dict(params, opts=[[list(v) for v in pl] for pl in polys])
+    return build(fn, stem, pos + 1, wrong, steps, params, _L, whole=True, auto_slips=False,
+                 figure=_grid_panels(r, polys, cols, rows, cell))
+
+
+@template(T, "basic", GR + "02")
+def which_drawing_rect_square(r):
+    """Which drawing on the grid shows a rectangle w by h, or a square of side s."""
+    name = r.choice(NAMES)
+    if r.random() < 0.6:
+        w, h = r.randint(3, 6), r.randint(2, 4)
+        if w == h:
+            return None
+        flip = r.random() < 0.5
+        pw, ph = (h, w) if flip else (w, h)
+        correct = _rect(pw, ph)
+        bad = [(_slant(pw, ph), "drew_a_slanted_shape", "Drew a parallelogram with slanted sides instead of a rectangle."),
+               (_rect(pw + 1, ph), "side_one_unit_too_long", "Made one side one unit too long."),
+               (_rect(pw, ph + 1) if ph + 1 <= 5 else _rect(pw, ph - 1), "side_one_unit_wrong", "Made one side one unit out.")]
+        stem = (f"{name} wants to draw a rectangle that is {w} units long and {h} units wide on a square grid. "
+                f"Which drawing shows the rectangle?")
+        params = {"kind": "rect", "w": w, "h": h}
+        steps = [f"A rectangle has 4 right angles and opposite sides equal: {w} units by {h} units.", "Check the sides of each drawing against the grid squares."]
+    else:
+        s = r.randint(2, 4)
+        correct = _rect(s, s)
+        bad = [(_slant(s, s), "drew_a_rhombus_not_a_square", "Drew a slanted four-sided shape with equal sides but no right angles."),
+               (_rect(s + 1, s), "sides_not_equal", "Drew a rectangle whose sides are not all equal."),
+               (_rect(s + 1, s + 1) if s < 4 else _rect(s - 1, s - 1), "wrong_size", "Drew a square but with the wrong side length.")]
+        stem = f"{name} wants to draw a square with sides of {s} units on a square grid. Which drawing shows the square?"
+        params = {"kind": "sq", "w": s, "h": s}
+        steps = [f"A square has 4 right angles and 4 equal sides of {s} units."]
+    return _rect_options(r, which_drawing_rect_square, correct, bad, stem, steps, params, None)
+
+
+@checker(which_drawing_rect_square)
+def _(p):
+    ok = [i + 1 for i, o in enumerate(p["opts"]) if _rect_check_shape([tuple(v) for v in o]) == tuple(sorted((p["w"], p["h"])))]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "intermediate", GR + "02")
+def rect_given_area_or_perimeter(r):
+    """Which drawing shows a rectangle with a given side and a given area, or a given side and perimeter."""
+    name = r.choice(NAMES)
+    mode = r.choice(["area", "perimeter"])
+    L, Wd = r.randint(3, 6), r.randint(2, 4)
+    if L == Wd:
+        return None
+    if mode == "area":
+        stem = (f"{name} draws a rectangle on a square grid. One side is {L} units long and the area is {L * Wd} square units. "
+                f"Which drawing shows {name}'s rectangle?")
+        bad_tags = [(_slant(L, Wd), "same_base_and_height_but_slanted", "Chose a slanted shape with the same base and height; it is not a rectangle.")]
+        params = {"mode": mode, "L": L, "val": L * Wd}
+        steps = [f"Other side = {L * Wd} ÷ {L} = {Wd} units.", f"The rectangle is {L} by {Wd}."]
+    else:
+        stem = (f"{name} draws a rectangle on a square grid. One side is {L} units long and the perimeter is {2 * (L + Wd)} units. "
+                f"Which drawing shows {name}'s rectangle?")
+        bad_tags = [(_slant(L, Wd), "same_base_and_height_but_slanted", "Chose a slanted shape with sides of the right length; it is not a rectangle.")]
+        params = {"mode": mode, "L": L, "val": 2 * (L + Wd)}
+        steps = [f"Half the perimeter = {L + Wd}, so the other side = {L + Wd} - {L} = {Wd} units.", f"The rectangle is {L} by {Wd}."]
+    bad = bad_tags + [(_rect(L, Wd + 1), "other_side_one_too_long", "Made the other side one unit too long."),
+                      (_rect(L, Wd - 1) if Wd > 1 else _rect(L + 1, Wd), "other_side_one_too_short", "Made the other side one unit too short.")]
+    return _rect_options(r, rect_given_area_or_perimeter, _rect(L, Wd), bad, stem, steps, params, None)
+
+
+@checker(rect_given_area_or_perimeter)
+def _(p):
+    ok = []
+    for i, o in enumerate(p["opts"]):
+        sh = _rect_check_shape([tuple(v) for v in o])
+        if sh and p["L"] in sh:
+            other = sh[0] if sh[1] == p["L"] else sh[1]
+            val = p["L"] * other if p["mode"] == "area" else 2 * (p["L"] + other)
+            if val == p["val"]:
+                ok.append(i + 1)
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "competent", GR + "02")
+def rect_perimeter_and_ratio(r):
+    """Which drawing shows a rectangle with a given perimeter whose length is twice its width."""
+    name = r.choice(NAMES)
+    a = r.choice([2, 3])
+    P = 6 * a
+    correct = _rect(2 * a, a)
+    bad = [(_rect(2 * a + 2, a + 1), "right_shape_wrong_perimeter", "Used the ratio but not the perimeter: this rectangle is too big."),
+           (_rect(a + 1, 2 * a - 1), "right_perimeter_wrong_shape", "Matched the perimeter but the length is not twice the width."),
+           (_rect(2 * a + 1, a), "slip_in_length", "Made the length one unit out.")]
+    stem = (f"{name} wants to draw a rectangle on a 1 cm square grid. Its perimeter is {P} cm and its length is twice its width. "
+            f"Which drawing shows {name}'s rectangle?")
+    return _rect_options(r, rect_perimeter_and_ratio, correct, bad, stem,
+                         [f"Half the perimeter = {P // 2} cm = length + width = 3 widths.", f"Width = {a} cm and length = {2 * a} cm."],
+                         {"P": P}, None, cols=9, rows=6, cell=12)
+
+
+@checker(rect_perimeter_and_ratio)
+def _(p):
+    ok = []
+    for i, o in enumerate(p["opts"]):
+        sh = _rect_check_shape([tuple(v) for v in o])
+        if sh and sh[1] == 2 * sh[0] and 2 * (sh[0] + sh[1]) == p["P"]:
+            ok.append(i + 1)
+    return F(ok[0]) if len(ok) == 1 else None

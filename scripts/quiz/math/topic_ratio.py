@@ -566,3 +566,180 @@ def _(p):
         rest = n - n * F(p["fn"], p["fd"])
         return rest * p["c"] == p["C"] * (p["a"] + p["b"] + p["c"])
     return F(brute(ok, 50000))
+
+
+# ---------------------------------------------------------------- gap group B: notation and representation of a:b and a:b:c
+
+from figures_gapB import counters, unit_rows  # noqa: E402
+
+COLOURS = ["red", "blue", "green", "yellow", "white", "black"]
+
+
+def _distinct_terms(r, parts, lo=1, hi=6):
+    """parts distinct-ish whole numbers with at least two different values and no ratio that is all equal."""
+    while True:
+        xs = [r.randint(lo, hi) for _ in range(parts)]
+        if len(set(xs)) >= 2:
+            return xs
+
+
+@template(T, "basic", NOTATION)
+def counters_two_colours(r):
+    """Read a:b from two rows of counters (a model of coloured units), simplest form."""
+    a, b = simplify(r.randint(1, 7), r.randint(1, 7))
+    if a == b:
+        return None
+    k = r.choice([1, 1, 2, 3])
+    if k * max(a, b) > 14:
+        k = 1
+    c1, c2 = r.sample(COLOURS, 2)
+    name = r.choice(NAMES)
+    ra, rb = k * a, k * b
+    stem = (f"{name} put {ra + rb} counters in two rows, as shown. "
+            f"What is the ratio of the number of {c1} counters to the number of {c2} counters? "
+            f"Give your answer in its simplest form.")
+    fig = counters([(c1.capitalize(), ra), (c2.capitalize(), rb)], title=f"{ra} {c1} counters and {rb} {c2} counters")
+    return build(counters_two_colours, stem, rcode(a, b), [
+        (ropt(ra, rb) if k > 1 else None, "stopped_before_simplest", f"Wrote {ra} : {rb} and did not simplify."),
+        (ropt(b, a), "reversed_order", "Wrote the ratio the wrong way round."),
+        (ropt(a, a + b), "gave_part_to_total", f"Compared {c1} counters with all the counters."),
+        (ropt(a + 1, b), "careless_slip", "Miscounted one counter."),
+        (ropt(a, b + 1), "careless_slip", "Miscounted one counter."),
+    ], [f"{c1.capitalize()}: {ra}, {c2}: {rb}", f"{ra} : {rb} = {a} : {b}"],
+        {"ra": ra, "rb": rb}, lambda c: ratio_text(a, b), auto_slips=False, figure=fig)
+
+
+@checker(counters_two_colours)
+def _(p):
+    g = next(g for g in range(min(p["ra"], p["rb"]), 0, -1) if p["ra"] % g == 0 and p["rb"] % g == 0)
+    return F(rcode(p["ra"] // g, p["rb"] // g))
+
+
+@template(T, "intermediate", NOTATION)
+def counters_three_colours(r):
+    """Read a:b:c from three rows of counters, in the order asked."""
+    xs = _distinct_terms(r, 3, 1, 6)
+    g = 0
+    for x in xs:
+        g = gcd(g, x)
+    k = r.choice([1, 1, 2])
+    cols = r.sample(COLOURS, 3)
+    counts = [x * k for x in xs]
+    order = r.sample([0, 1, 2], 3)
+    if order == [0, 1, 2] and r.random() < 0.7:
+        return None
+    asked = [counts[i] for i in order]
+    ans = simplify(*asked)
+    name = r.choice(NAMES)
+    stem = (f"{name} arranged {sum(counts)} counters in three rows, as shown. What is the ratio of the number of "
+            f"{cols[order[0]]} counters to the number of {cols[order[1]]} counters to the number of "
+            f"{cols[order[2]]} counters? Give your answer in its simplest form.")
+    fig = counters([(c.capitalize(), n) for c, n in zip(cols, counts)], title="Three rows of counters")
+    shown = simplify(*counts)
+    return build(counters_three_colours, stem, rcode(*ans), [
+        (ropt(*asked) if asked != list(ans) else None, "stopped_before_simplest", "Wrote the counts without simplifying."),
+        (ropt(*simplify(*counts)) if list(shown) != list(ans) else None, "used_the_order_of_the_rows", "Wrote the ratio in the order of the rows, not the order asked."),
+        (ropt(*ans[::-1]) if ans[::-1] != ans else None, "reversed_order", "Wrote the ratio backwards."),
+        (ropt(ans[0], ans[1]), "left_out_a_term", "Wrote only the first two terms."),
+        (ropt(ans[0] + 1, ans[1], ans[2]), "careless_slip", "Miscounted one counter."),
+    ], [", ".join(f"{cols[i]}: {counts[i]}" for i in order), f"{ratio_text(*asked)} = {ratio_text(*ans)}"],
+        {"counts": counts, "order": order}, lambda c: ratio_text(*ans), auto_slips=False, figure=fig)
+
+
+@checker(counters_three_colours)
+def _(p):
+    asked = [p["counts"][i] for i in p["order"]]
+    g = next(g for g in range(min(asked), 0, -1) if all(x % g == 0 for x in asked))
+    return F(rcode(*[x // g for x in asked]))
+
+
+@template(T, "intermediate", NOTATION)
+def counters_part_to_total(r):
+    """Read one colour to the total from rows of counters (part : whole as a ratio)."""
+    xs = _distinct_terms(r, 3, 1, 6)
+    k = r.choice([1, 1, 2])
+    cols = r.sample(COLOURS, 3)
+    counts = [x * k for x in xs]
+    i = r.randrange(3)
+    tot = sum(counts)
+    a, t = simplify(counts[i], tot)
+    name = r.choice(NAMES)
+    stem = (f"{name} used {tot} counters to make the three rows shown. What is the ratio of the number of "
+            f"{cols[i]} counters to the total number of counters? Give your answer in its simplest form.")
+    fig = counters([(c.capitalize(), n) for c, n in zip(cols, counts)], title="Three rows of counters")
+    others = tot - counts[i]
+    return build(counters_part_to_total, stem, rcode(a, t), [
+        (ropt(*simplify(counts[i], others)), "compared_with_the_others_only", f"Compared the {cols[i]} counters with the other counters, not the total."),
+        (ropt(t, a), "reversed_order", "Wrote the ratio backwards."),
+        (ropt(counts[i], tot) if counts[i] != a else None, "stopped_before_simplest", "Did not simplify."),
+        (ropt(*simplify(counts[i], counts[(i + 1) % 3])), "compared_with_one_other_colour", "Compared with only one other colour."),
+    ], [f"Total = {' + '.join(str(c) for c in counts)} = {tot}", f"{cols[i].capitalize()} : total = {counts[i]} : {tot} = {a} : {t}"],
+        {"counts": counts, "i": i}, lambda c: ratio_text(a, t), auto_slips=False, figure=fig)
+
+
+@checker(counters_part_to_total)
+def _(p):
+    part, tot = p["counts"][p["i"]], sum(p["counts"])
+    g = next(g for g in range(part, 0, -1) if part % g == 0 and tot % g == 0)
+    return F(rcode(part // g, tot // g))
+
+
+@template(T, "competent", NOTATION)
+def units_three_people_total(r):
+    """Bar model with a : b : c units; two people's total is given, find the third person's amount."""
+    while True:
+        a, b, c = [r.randint(1, 6) for _ in range(3)]
+        if len({a, b, c}) >= 2 and b not in (a + c,):
+            break
+    m = r.randint(3, 12)
+    T_ = (a + c) * m
+    n1, n2, n3 = r.sample(NAMES, 3)
+    item = r.choice(["stickers", "marbles", "cards", "stamps"])
+    stem = (f"The model shows the number of {item} that {n1}, {n2} and {n3} have. {n1} and {n3} have {T_} {item} "
+            f"altogether. How many {item} does {n2} have?")
+    fig = unit_rows([(n1.split()[0], a), (n2.split()[0], b), (n3.split()[0], c)], title=f"Bar model with {a}, {b} and {c} equal units")
+    ans = b * m
+    return build(units_three_people_total, stem, ans, [
+        (m, "found_one_unit_only", f"Found 1 unit ({T_} ÷ {a + c} = {m}) but did not multiply by {b}."),
+        (F(b * T_, a + b + c), "used_all_the_units", f"Divided {T_} by all {a + b + c} units instead of {a + c}."),
+        (F(T_ * b, a) if (T_ * b) % a == 0 else None, "compared_with_one_person_only", f"Treated {T_} as {n1}'s amount only."),
+        (T_ - ans if T_ - ans != ans else None, "subtracted_from_the_total", f"Subtracted {n2}'s share from {T_}."),
+    ], [f"{n1} and {n3}: {a} + {c} = {a + c} units", f"1 unit = {T_} ÷ {a + c} = {m}", f"{n2}: {b} × {m} = {ans}"],
+        {"a": a, "b": b, "c": c, "T": T_}, unit_size=m, whole=True, figure=fig)
+
+
+@checker(units_three_people_total)
+def _(p):
+    # brute force: find the unit size m with (a + c) * m == T, then Ben has b * m
+    m = brute(lambda m: (p["a"] + p["c"]) * m == p["T"])
+    return F(p["b"] * m)
+
+
+@template(T, "competent", NOTATION)
+def units_difference_total(r):
+    """Bar model with a : b : c units; the difference between two people is given, find the total."""
+    while True:
+        a, b, c = [r.randint(1, 6) for _ in range(3)]
+        if b > a:
+            break
+    m = r.randint(2, 12)
+    D = (b - a) * m
+    n1, n2, n3 = r.sample(NAMES, 3)
+    item = r.choice(["stickers", "marbles", "cards", "stamps"])
+    stem = (f"The model shows the number of {item} that {n1}, {n2} and {n3} have. {n2} has {D} more {item} than {n1}. "
+            f"How many {item} do the three children have altogether?")
+    fig = unit_rows([(n1.split()[0], a), (n2.split()[0], b), (n3.split()[0], c)], title=f"Bar model with {a}, {b} and {c} equal units")
+    ans = (a + b + c) * m
+    return build(units_difference_total, stem, ans, [
+        (D, "gave_the_difference", f"Gave the {D} difference, not the total."),
+        (D * (a + b + c), "multiplied_by_total_units", f"Multiplied the difference {D} by all {a + b + c} units."),
+        ((b + c) * m, "left_out_a_person", f"Left out {n1}'s {item}."),
+        (m * (b - a + c), "used_the_wrong_units", "Added the difference in units to the third person's units only."),
+    ], [f"{n2} has {b} − {a} = {b - a} more units, so {b - a} units = {D}", f"1 unit = {D} ÷ {b - a} = {m}",
+        f"Total = {a + b + c} × {m} = {ans}"], {"a": a, "b": b, "c": c, "D": D}, unit_size=m, whole=True, figure=fig)
+
+
+@checker(units_difference_total)
+def _(p):
+    m = brute(lambda m: (p["b"] - p["a"]) * m == p["D"])
+    return F(m * p["a"] + m * p["b"] + m * p["c"])

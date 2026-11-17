@@ -1061,3 +1061,601 @@ def division_share_compare(r):
 @checker(division_share_compare)
 def _(p):
     return abs(F(p["k1"]) / p["n1"] - F(p["k2"]) / p["n2"])
+
+
+# ---------------------------------------------------------------- gap group B (missing outcomes)
+
+from figures_gapB import fraction_bars  # noqa: E402
+
+CMP = O + "fraction-of-a-whole-and-of-a-set-02"
+EQ1 = O + "equivalent-fractions-and-simplest-form-01"
+AS1 = O + "addition-and-subtraction-of-fractions-01"
+AS2 = O + "addition-and-subtraction-of-fractions-02"
+MI3 = O + "multiplication-and-division-of-fractions-03"
+MI4 = O + "multiplication-and-division-of-fractions-04"
+SF = lambda x: frac(x, mixed=False)  # noqa: E731
+
+
+def _seq_code(nums):
+    v = 0
+    for x in nums:
+        v = v * 100 + x
+    return v
+
+
+def _seq_nums(code):
+    code, out = int(code), []
+    while code:
+        out.append(code % 100)
+        code //= 100
+    return out[::-1]
+
+
+# ---- comparing and ordering unit fractions and like fractions
+
+@template(T, "basic", CMP)
+def compare_unit_fractions(r):
+    """Which unit fraction is greatest or smallest (denominators up to 12)."""
+    ds = r.sample(range(2, 13), 4)
+    want = r.choice(["greatest", "smallest"])
+    show_ds = ds[:]
+    r.shuffle(show_ds)
+    ans_d = min(ds) if want == "greatest" else max(ds)
+    others = sorted((d for d in ds if d != ans_d), reverse=(want == "greatest"))
+    stem = f"Which of these unit fractions is the {want}? " + ", ".join(f"1/{d}" for d in show_ds)
+    why = ("Thought a bigger denominator means a bigger fraction." if want == "greatest"
+           else "Thought a smaller denominator means a smaller fraction.")
+    q = build(compare_unit_fractions, stem, F(1, ans_d), [
+        (F(1, others[0]), "bigger_denominator_means_bigger", why),
+        (F(1, others[1]), "compared_denominators_the_wrong_way", "Ordered the denominators the wrong way round."),
+        (F(1, others[2]), "guessed_from_the_look_of_the_numbers", "Did not think about the size of the equal parts."),
+    ], [f"Unit fractions: the more equal parts the whole is cut into, the smaller each part.",
+        f"The {want} is 1/{ans_d}."], {"ds": show_ds, "want": want}, SF, auto_slips=False)
+    return q
+
+
+@checker(compare_unit_fractions)
+def _(p):
+    vals = {d: F(1, d) for d in p["ds"]}
+    pick = max(vals.values()) if p["want"] == "greatest" else min(vals.values())
+    return pick
+
+
+@template(T, "intermediate", CMP)
+def order_like_fractions(r):
+    """Arrange like fractions from smallest to greatest (or the reverse)."""
+    n = r.randint(5, 12)
+    nums = r.sample(range(1, n), 4)
+    way = r.choice(["smallest to greatest", "greatest to smallest"])
+    s = sorted(nums, reverse=(way == "greatest to smallest"))
+    rev = s[::-1]
+    sw1 = [s[1], s[0], s[2], s[3]]
+    sw2 = [s[0], s[1], s[3], s[2]]
+    rot = s[1:] + s[:1]
+    show = lambda c: ", ".join(f"{x}/{n}" for x in _seq_nums(c))  # noqa: E731
+    stem = f"Arrange these fractions in order, from {way}: " + ", ".join(f"{x}/{n}" for x in nums)
+    return build(order_like_fractions, stem, _seq_code(s), [
+        (_seq_code(rev), "ordered_the_wrong_way_round", "Wrote the order backwards."),
+        (_seq_code(sw1), "swapped_two_neighbours", "Swapped two fractions that are next to each other."),
+        (_seq_code(sw2), "swapped_two_neighbours", "Swapped two fractions that are next to each other."),
+        (_seq_code(rot), "moved_one_fraction_wrongly", "Put one fraction in the wrong place."),
+    ], [f"The denominators are the same ({n}), so compare the numerators.",
+        f"Numerators {way}: " + ", ".join(str(x) for x in s)], {"nums": nums, "n": n, "way": way}, show,
+        auto_slips=False)
+
+
+@checker(order_like_fractions)
+def _(p):
+    # bubble sort by cross-multiplication, independent of sorted()
+    xs = [F(x, p["n"]) for x in p["nums"]]
+    for i in range(len(xs)):
+        for j in range(len(xs) - 1 - i):
+            if xs[j] > xs[j + 1]:
+                xs[j], xs[j + 1] = xs[j + 1], xs[j]
+    if p["way"] == "greatest to smallest":
+        xs = xs[::-1]
+    return F(_seq_code([int(x * p["n"]) for x in xs]))
+
+
+@template(T, "competent", CMP)
+def compare_like_story(r):
+    """Three children eat slices of identical cakes: how much more did the most eat than the least?"""
+    n = r.randint(6, 12)
+    x, y, z = r.sample(range(1, n), 3)
+    na, nb, nc = r.sample(NAMES, 3)
+    big, mid, small = sorted([x, y, z], reverse=True)
+    ans = F(big - small, n)
+    stem = (f"Three identical cakes were each cut into {n} equal slices. {na} ate {x}/{n} of a cake, "
+            f"{nb} ate {y}/{n} of a cake and {nc} ate {z}/{n} of a cake. How much more cake did the child who ate "
+            f"the most eat than the child who ate the least? Give your answer in its simplest form.")
+    return build(compare_like_story, stem, ans, [
+        (F(big - mid, n), "compared_the_wrong_pair", "Compared the child who ate the most with the middle child."),
+        (F(mid - small, n), "compared_the_wrong_pair", "Compared the middle child with the child who ate the least."),
+        (big - small, "gave_slices_not_fraction", "Gave the number of slices without the denominator."),
+        (F(big + small, n), "added_instead_of_subtracted", "Added the most and the least."),
+    ], [f"Most: {big}/{n}. Least: {small}/{n}.", f"{big}/{n} − {small}/{n} = {big - small}/{n}"
+        + ("" if frac(ans) == f"{big - small}/{n}" else f" = {frac(ans)}")],
+        {"vals": [x, y, z], "n": n}, SF)
+
+
+@checker(compare_like_story)
+def _(p):
+    xs = [F(v, p["n"]) for v in p["vals"]]
+    return max(xs) - min(xs)
+
+
+# ---- equivalent fractions (with bars)
+
+@template(T, "basic", EQ1)
+def equivalent_bar_parts(r):
+    """Two bars of equal length: how many parts of the finer bar equal the shaded fraction of the coarser bar."""
+    n = r.randint(2, 6)
+    k = r.randint(2, 12 // n) if 12 // n >= 2 else 2
+    N = n * k
+    a = r.randint(1, n - 1)
+    name = r.choice(NAMES)
+    stem = (f"{name} drew two bars of the same length. The top bar has {a}/{n} shaded. The bottom bar is cut into "
+            f"{N} equal parts. How many parts of the bottom bar must be shaded to show a fraction equal to {a}/{n}?")
+    fig = fraction_bars([("Top", n, a), ("Bottom", N, None)], title=f"Top bar with {a} of {n} parts shaded, bottom bar with {N} parts")
+    return build(equivalent_bar_parts, stem, a * k, [
+        (a, "kept_the_same_numerator", f"Shaded {a} parts, the same number as the top bar, but the parts are smaller."),
+        (a + N - n, "added_the_same_to_both", f"Added {N - n} to both the numerator and the denominator."),
+        (N - a * k, "gave_unshaded_parts", "Found the number of parts NOT shaded."),
+        (a * k + 1, "careless_slip", "Counted one part too many."),
+        (a * k - 1, "careless_slip", "Counted one part too few."),
+    ], [f"{N} ÷ {n} = {k}, so each part of the top bar is {k} parts of the bottom bar.",
+        f"{a} × {k} = {a * k} parts"], {"a": a, "n": n, "N": N}, whole=True, auto_slips=False, figure=fig)
+
+
+@checker(equivalent_bar_parts)
+def _(p):
+    return F(next(s for s in range(1, p["N"] + 1) if F(s, p["N"]) == F(p["a"], p["n"])))
+
+
+@template(T, "intermediate", EQ1)
+def equivalent_read_bar(r):
+    """Read the shaded part of a bar and give an equal fraction in simplest form."""
+    while True:
+        N = r.randint(4, 12)
+        s = r.randint(2, N - 2)
+        g = gcd(s, N)
+        if g > 1:
+            break
+    p_, q_ = s // g, N // g
+    name = r.choice(NAMES)
+    stem = (f"{name} shaded part of a strip of paper that was cut into {N} equal parts. "
+            f"Which fraction is equal to the part of the strip that is shaded?")
+    fig = fraction_bars([("Strip", N, s)], title=f"Strip of {N} equal parts, some shaded")
+    return build(equivalent_read_bar, stem, F(p_, q_), [
+        (F(q_ - p_, q_), "gave_the_unshaded_fraction", "Found the fraction that is NOT shaded."),
+        (F(q_, p_), "inverted_fraction", "Turned the fraction upside down."),
+        (F(p_, N), "divided_numerator_only", f"Divided only the numerator by {g}."),
+        (F(s, N - s), "compared_part_with_other_part", "Compared the shaded part with the unshaded part."),
+    ], [f"{s} of the {N} parts are shaded: {s}/{N}.", f"Divide top and bottom by {g}: {p_}/{q_}."],
+        {"s": s, "N": N}, SF, auto_slips=False, figure=fig)
+
+
+@checker(equivalent_read_bar)
+def _(p):
+    s, N = p["s"], p["N"]
+    d = next(d for d in range(N, 0, -1) if s % d == 0 and N % d == 0)  # highest common factor by search
+    return F(s // d, N // d)
+
+
+@template(T, "competent", EQ1)
+def equivalent_two_strips(r):
+    """Two strips of the same length cut into different numbers of parts: how many more parts to shade."""
+    n = r.randint(2, 6)
+    k = r.randint(2, 4)
+    N = n * k
+    a = r.randint(1, n - 1)
+    b = r.randint(1, a * k - 1)
+    name = r.choice(NAMES)
+    stem = (f"{name} has two strips of paper of the same length. Strip A is cut into {n} equal parts and {a} parts are "
+            f"shaded. Strip B is cut into {N} equal parts and {b} parts are shaded. How many more parts of Strip B "
+            f"must be shaded so that both strips have the same fraction shaded?")
+    fig = fraction_bars([("A", n, a), ("B", N, b)], title=f"Strip A: {a} of {n} parts shaded; strip B: {b} of {N} parts shaded")
+    ans = a * k - b
+    return build(equivalent_two_strips, stem, ans, [
+        (a * k, "forgot_parts_already_shaded", f"Found the {a * k} parts needed but did not subtract the {b} already shaded."),
+        (a + N - n - b, "added_the_same_to_both", f"Added {N - n} to both the numerator and the denominator of {a}/{n}."),
+        (N - b, "gave_unshaded_parts", "Found the number of parts of Strip B not shaded."),
+        (a - b if a > b else None, "compared_part_counts", "Compared the number of shaded parts without noticing the parts are different sizes."),
+        (ans + 1, "careless_slip", "Counted one part too many."),
+    ], [f"{a}/{n} = {a * k}/{N}", f"Strip B needs {a * k} parts shaded.", f"{a * k} − {b} = {ans} more parts"],
+        {"a": a, "n": n, "N": N, "b": b}, whole=True, auto_slips=False, figure=fig)
+
+
+@checker(equivalent_two_strips)
+def _(p):
+    need = next(s for s in range(1, p["N"] + 1) if F(s, p["N"]) == F(p["a"], p["n"]))
+    return F(need - p["b"])
+
+
+# ---- adding and subtracting like fractions within one whole
+
+@template(T, "basic", AS1)
+def like_add_sub(r):
+    """Add or subtract two like fractions (denominator up to 12); the answer is within one whole."""
+    n = r.randint(4, 12)
+    op = r.choice(["+", "−"])
+    if op == "+":
+        a = r.randint(1, n - 2)
+        b = r.randint(1, n - 1 - a)
+        ans = F(a + b, n)
+        wrongs = [
+            (F(a + b, 2 * n), "added_the_denominators_too", "Added the denominators as well as the numerators."),
+            (a + b, "dropped_the_denominator", "Added the numerators and forgot the denominator."),
+            (F(a * b, n), "multiplied_the_numerators", "Multiplied the numerators."),
+        ]
+        steps = [f"The denominators are the same, so add the numerators: {a} + {b} = {a + b}.", f"{a}/{n} + {b}/{n} = {a + b}/{n}"]
+    else:
+        a = r.randint(2, n - 1)
+        b = r.randint(1, a - 1)
+        ans = F(a - b, n)
+        wrongs = [
+            (F(a + b, n), "added_instead_of_subtracted", "Added instead of subtracting."),
+            (a - b, "dropped_the_denominator", "Subtracted the numerators and forgot the denominator."),
+            (F(a - b, n - b), "subtracted_from_the_denominator", f"Subtracted {b} from the denominator too."),
+        ]
+        steps = [f"The denominators are the same, so subtract the numerators: {a} − {b} = {a - b}.", f"{a}/{n} − {b}/{n} = {a - b}/{n}"]
+    if ans != F(ans.numerator, n):
+        steps[-1] += f" = {SF(ans)}"
+    verb = "Add" if op == "+" else "Subtract"
+    stem = (f"{verb} {b}/{n} {'to' if op == '+' else 'from'} {a}/{n}. Give your answer in its simplest form."
+            if op == "+" else f"Subtract {b}/{n} from {a}/{n}. Give your answer in its simplest form.")
+    return build(like_add_sub, stem, ans, wrongs, steps, {"a": a, "b": b, "n": n, "op": op}, SF)
+
+
+@checker(like_add_sub)
+def _(p):
+    # count slices: start with a slices of size 1/n, add or remove b of them
+    slices = p["a"] + p["b"] if p["op"] == "+" else p["a"] - p["b"]
+    return F(1, p["n"]) * slices
+
+
+@template(T, "intermediate", AS1)
+def like_story_left(r):
+    """A fraction of a book is read over two days: what fraction is not yet read."""
+    n = r.randint(5, 12)
+    a = r.randint(1, n - 3)
+    b = r.randint(1, n - 1 - a)
+    name = r.choice(NAMES)
+    ans = F(n - a - b, n)
+    stem = (f"{name} read {a}/{n} of a book on Saturday and {b}/{n} of the book on Sunday. "
+            f"What fraction of the book has {name} not read? Give your answer in its simplest form.")
+    return build(like_story_left, stem, ans, [
+        (F(a + b, n), "gave_the_part_read", "Found the fraction already read, not the fraction left."),
+        (F(n - a, n), "used_one_day_only", "Took away the fraction for Saturday only."),
+        (F(abs(a - b), n) if a != b else None, "subtracted_the_two_days", "Subtracted one day from the other."),
+    ], [f"Read: {a}/{n} + {b}/{n} = {a + b}/{n}", f"Not read: {n}/{n} − {a + b}/{n} = {n - a - b}/{n}"
+        + ("" if frac(ans) == f"{n - a - b}/{n}" else f" = {SF(ans)}")], {"a": a, "b": b, "n": n}, SF)
+
+
+@checker(like_story_left)
+def _(p):
+    left = p["n"]
+    for part in (p["a"], p["b"]):
+        left -= part
+    return F(left, p["n"])
+
+
+@template(T, "competent", AS1)
+def like_tank_three_steps(r):
+    """Tank filled, topped up, then some used: a three-step story with like fractions."""
+    n = r.randint(6, 12)
+    a = r.randint(2, n - 3)
+    b = r.randint(1, n - a)
+    c = r.randint(1, a + b - 1)
+    name = r.choice(NAMES)
+    ans = F(a + b - c, n)
+    stem = (f"A tank was {a}/{n} full of water. {name} poured in water that filled another {b}/{n} of the tank. "
+            f"Then {c}/{n} of the tank was used to water plants. What fraction of the tank was full at the end? "
+            f"Give your answer in its simplest form.")
+    return build(like_tank_three_steps, stem, ans, [
+        (F(a + b + c, n), "added_the_amount_used", "Added the water used instead of taking it away."),
+        (F(a - b - c, n) if a > b + c else None, "subtracted_the_water_poured_in", "Took away the water poured in."),
+        (F(a + b, n), "forgot_the_water_used", "Forgot to take away the water that was used."),
+        (F(a - c + b - 1, n), "careless_slip", "Made a slip in the numerator."),
+    ], [f"After pouring: {a}/{n} + {b}/{n} = {a + b}/{n}", f"After using: {a + b}/{n} − {c}/{n} = {a + b - c}/{n}"
+        + ("" if frac(ans) == f"{a + b - c}/{n}" else f" = {SF(ans)}")], {"a": a, "b": b, "c": c, "n": n}, SF)
+
+
+@checker(like_tank_three_steps)
+def _(p):
+    level = 0
+    for step in (p["a"], p["b"], -p["c"]):
+        level += step
+    return F(level, p["n"])
+
+
+# ---- adding and subtracting two related fractions within one whole
+
+def _related(r, lo_b=2, hi_b=6):
+    b = r.randint(lo_b, hi_b)
+    k = r.randint(2, 12 // b) if 12 // b >= 2 else None
+    if k is None:
+        return None
+    return b, b * k, k
+
+
+@template(T, "basic", AS2)
+def related_add_sub(r):
+    """Add or subtract two related fractions (one denominator is a multiple of the other), within one whole."""
+    rel = _related(r)
+    if rel is None:
+        return None
+    b, d, k = rel
+    a = r.randint(1, b - 1)
+    op = r.choice(["+", "−"])
+    if op == "+":
+        c = r.randint(1, d - 1)
+        if F(a, b) + F(c, d) >= 1:
+            return None
+        ans = F(a, b) + F(c, d)
+        wrongs = [
+            (F(a + c, b + d), "added_numerators_and_denominators", "Added the tops and added the bottoms."),
+            (F(a + c, d), "forgot_to_rename", f"Used denominator {d} but did not change the numerator {a}."),
+            (abs(F(a, b) - F(c, d)), "subtracted_instead_of_added", "Subtracted instead of adding."),
+        ]
+        steps = [f"{a}/{b} = {a * k}/{d}", f"{a * k}/{d} + {c}/{d} = {a * k + c}/{d}"]
+        stem = f"Work out {a}/{b} + {c}/{d}. Write your answer as a fraction in its simplest form."
+    else:
+        c = r.randint(1, a * k - 1)
+        ans = F(a, b) - F(c, d)
+        wrongs = [
+            (F(a - c, d) if a > c else None, "forgot_to_rename", f"Used denominator {d} but did not change the numerator {a}."),
+            (F(a, b) + F(c, d) if F(a, b) + F(c, d) != 1 else None, "added_instead_of_subtracted", "Added instead of subtracting."),
+            (F(abs(a * k - c), b), "kept_the_wrong_denominator", f"Subtracted {a * k} − {c} but kept denominator {b}."),
+        ]
+        steps = [f"{a}/{b} = {a * k}/{d}", f"{a * k}/{d} − {c}/{d} = {a * k - c}/{d}"]
+        stem = f"Work out {a}/{b} − {c}/{d}. Write your answer as a fraction in its simplest form."
+    if frac(ans) != steps[-1].split("= ")[-1]:
+        steps[-1] += f" = {SF(ans)}"
+    return build(related_add_sub, stem, ans, wrongs, steps, {"a": a, "b": b, "c": c, "d": d, "op": op}, SF)
+
+
+@checker(related_add_sub)
+def _(p):
+    L = p["d"]  # the larger denominator is a multiple of b
+    top_a = p["a"] * (L // p["b"])
+    top = top_a + p["c"] if p["op"] == "+" else top_a - p["c"]
+    return F(top, L)
+
+
+@template(T, "intermediate", AS2)
+def related_pizza_left(r):
+    """Two people eat related fractions of one pizza: what fraction is left."""
+    rel = _related(r)
+    if rel is None:
+        return None
+    b, d, k = rel
+    a = r.randint(1, b - 1)
+    c = r.randint(1, d - 1)
+    eaten = F(a, b) + F(c, d)
+    if eaten >= 1:
+        return None
+    n1, n2 = r.sample(NAMES, 2)
+    ans = 1 - eaten
+    stem = (f"{n1} ate {a}/{b} of a pizza and {n2} ate {c}/{d} of the same pizza. "
+            f"What fraction of the pizza was left? Give your answer in its simplest form.")
+    return build(related_pizza_left, stem, ans, [
+        (eaten, "gave_the_part_eaten", "Found the fraction eaten instead of the fraction left."),
+        (1 - F(a + c, d), "forgot_to_rename", f"Added {a}/{d} + {c}/{d} without renaming {a}/{b}."),
+        (1 - F(a + c, b + d), "added_numerators_and_denominators", "Added the tops and added the bottoms."),
+        (1 - F(a, b), "used_one_person_only", f"Took away only {n1}'s share."),
+    ], [f"Eaten: {a * k}/{d} + {c}/{d} = {a * k + c}/{d}", f"Left: {d}/{d} − {a * k + c}/{d} = {d - a * k - c}/{d}"
+        + ("" if frac(ans) == f"{d - a * k - c}/{d}" else f" = {SF(ans)}")], {"a": a, "b": b, "c": c, "d": d}, SF)
+
+
+@checker(related_pizza_left)
+def _(p):
+    L = p["d"]
+    return F(L - p["a"] * (L // p["b"]) - p["c"], L)
+
+
+@template(T, "competent", AS2)
+def related_money_three_parts(r):
+    """Money spent on three things with related fractions: what fraction is left."""
+    rel = _related(r)
+    if rel is None:
+        return None
+    b, d, k = rel
+    a = r.randint(1, b - 1)
+    c = r.randint(1, d - 2)
+    e = r.randint(1, d - 1)
+    spent = F(a, b) + F(c, d) + F(e, d)
+    if spent >= 1:
+        return None
+    name = r.choice(NAMES)
+    ans = 1 - spent
+    stem = (f"{name} spent {a}/{b} of his money on a book and {c}/{d} of his money on a pen. He gave {e}/{d} of his "
+            f"money to his sister. What fraction of his money was left? Give your answer in its simplest form.")
+    return build(related_money_three_parts, stem, ans, [
+        (1 - F(a, b) - F(c, d), "forgot_the_gift", "Left out the money given to his sister."),
+        (spent, "gave_the_part_spent", "Found the fraction spent and gave it as the fraction left."),
+        (1 - F(a + c + e, b + d + d), "added_numerators_and_denominators", "Added all the tops and all the bottoms."),
+        (1 - F(c + e, d), "forgot_the_book", "Left out the money spent on the book."),
+    ], [f"Spent altogether: {a * k}/{d} + {c}/{d} + {e}/{d} = {a * k + c + e}/{d}", f"Left: {d - a * k - c - e}/{d}"
+        + ("" if frac(ans) == f"{d - a * k - c - e}/{d}" else f" = {SF(ans)}")], {"a": a, "b": b, "c": c, "d": d, "e": e}, SF)
+
+
+@checker(related_money_three_parts)
+def _(p):
+    L = p["d"]
+    gone = p["a"] * (L // p["b"]) + p["c"] + p["e"]
+    return F(L - gone, L)
+
+
+# ---- multiplying two improper fractions
+
+def _improper(r, lo=2, hi=8):
+    while True:
+        b = r.randint(lo, hi)
+        a = r.randint(b + 1, 2 * b + 3)
+        if gcd(a, b) == 1:
+            return a, b
+
+
+@template(T, "basic", MI3)
+def improper_times_improper(r):
+    """Multiply two improper fractions; answer as a mixed number or whole number in simplest form."""
+    a, b = _improper(r)
+    c, d = _improper(r)
+    ans = F(a * c, b * d)
+    stem = f"Work out {a}/{b} × {c}/{d}. Give your answer as a mixed number in its simplest form."
+    return build(improper_times_improper, stem, ans, [
+        (F(a * c, b + d), "added_the_denominators", "Multiplied the tops but added the bottoms."),
+        (F(a * d, b * c), "inverted_second_fraction", "Turned the second fraction upside down, as for division."),
+        (F(a * c, b), "kept_one_denominator", f"Multiplied the numerators but kept only the denominator {b}."),
+    ], [f"Numerators: {a} × {c} = {a * c}", f"Denominators: {b} × {d} = {b * d}",
+        f"{a * c}/{b * d} = {frac(ans)}"], {"a": a, "b": b, "c": c, "d": d})
+
+
+@checker(improper_times_improper)
+def _(p):
+    # route through mixed numbers: (w1 + r1) * (w2 + r2) expanded
+    w1, r1 = divmod(p["a"], p["b"])
+    w2, r2 = divmod(p["c"], p["d"])
+    x, y = F(r1, p["b"]), F(r2, p["d"])
+    return w1 * w2 + w1 * y + w2 * x + x * y
+
+
+@template(T, "intermediate", MI3)
+def improper_times_improper_cancel(r):
+    """Multiply two improper fractions where a numerator cancels with a denominator."""
+    while True:
+        b = r.randint(2, 6)
+        d = r.randint(2, 6)
+        m = r.randint(1, 3)
+        a = d * m
+        c = r.randint(d + 1, 2 * d + 3)
+        if a > b and gcd(a, b) == 1 and gcd(c, d) == 1 and F(a, b) > 1:
+            break
+    if r.random() < 0.5:
+        a, b, c, d = c, d, a, b
+    ans = F(a * c, b * d)
+    stem = f"Find the value of {a}/{b} × {c}/{d}. Give your answer in its simplest form."
+    return build(improper_times_improper_cancel, stem, ans, [
+        (F(a * c, b + d), "added_the_denominators", "Multiplied the tops but added the bottoms."),
+        (F(a * d, b * c), "inverted_second_fraction", "Turned the second fraction upside down, as for division."),
+        (F(a * c, b), "kept_one_denominator", f"Multiplied the numerators but kept only the denominator {b}."),
+        (F(a, b) + F(c, d) - 1, "added_instead_of_multiplied", "Added the fractions instead of multiplying."),
+    ], [f"Cancel the common factor between {a if a % d == 0 else c} and {d if a % d == 0 else b}.",
+        f"{a}/{b} × {c}/{d} = {a * c}/{b * d} = {frac(ans)}"], {"a": a, "b": b, "c": c, "d": d})
+
+
+@checker(improper_times_improper_cancel)
+def _(p):
+    num, den = p["a"] * p["c"], p["b"] * p["d"]
+    g = next(g for g in range(min(num, den), 0, -1) if num % g == 0 and den % g == 0)
+    return F(num // g, den // g)
+
+
+@template(T, "competent", MI3)
+def improper_times_improper_story(r):
+    """A jug holds an improper fraction times as much as a bottle that holds an improper amount: find the total."""
+    a, b = _improper(r, 2, 6)
+    c, d = _improper(r, 2, 6)
+    name = r.choice(NAMES)
+    bottle = F(a, b)
+    jug = bottle * F(c, d)
+    ans = bottle + jug
+    stem = (f"A bottle holds {a}/{b} L of juice. A jug holds {c}/{d} times as much juice as the bottle. "
+            f"{name} poured all the juice from the bottle and the jug into a tank. How much juice was in the tank?")
+    return build(improper_times_improper_story, stem, ans, [
+        (jug, "forgot_the_bottle", "Found only the juice in the jug."),
+        (bottle + F(c, d), "added_instead_of_multiplied", f"Added {c}/{d} L to the bottle instead of multiplying."),
+        (bottle * F(c, d) * 2, "counted_the_jug_twice", "Added the juice in the jug twice."),
+        (bottle / F(c, d) + bottle, "divided_instead_of_multiplied", "Divided by the fraction instead of multiplying."),
+    ], [f"Juice in the jug: {a}/{b} × {c}/{d} = {frac(jug)} L", f"Juice in the tank: {frac(bottle)} + {frac(jug)} = {frac(ans)} L"],
+        {"a": a, "b": b, "c": c, "d": d}, unit("L"))
+
+
+@checker(improper_times_improper_story)
+def _(p):
+    bottle = F(p["a"], p["b"])
+    factor = F(p["c"], p["d"])
+    return bottle * (1 + factor)  # 1 bottle + factor bottles
+
+
+# ---- multiplying a mixed number by a whole number
+
+def _mixed(r, hi_b=8):
+    a, b = coprime_pair(r, 2, hi_b)
+    return r.randint(1, 5), a, b
+
+
+@template(T, "basic", MI4)
+def mixed_times_whole(r):
+    """Multiply a mixed number by a whole number; answer in simplest form."""
+    w, a, b = _mixed(r)
+    n = r.randint(2, 9)
+    mixed = w + F(a, b)
+    ans = mixed * n
+    stem = f"Work out {w} {a}/{b} × {n}. Give your answer as a mixed number in its simplest form."
+    return build(mixed_times_whole, stem, ans, [
+        (w * n + F(a, b), "multiplied_only_the_whole_number", f"Multiplied {w} by {n} but did not multiply {a}/{b}."),
+        (w + F(a * n, b), "multiplied_only_the_fraction", f"Multiplied {a}/{b} by {n} but did not multiply {w}."),
+        (mixed, "multiplied_top_and_bottom", f"Multiplied the top and the bottom of {a}/{b} by {n}, which does not change it."),
+    ], [f"{w} {a}/{b} = {w * b + a}/{b}", f"{w * b + a}/{b} × {n} = {(w * b + a) * n}/{b} = {frac(ans)}"],
+        {"w": w, "a": a, "b": b, "n": n})
+
+
+@checker(mixed_times_whole)
+def _(p):
+    total = F(0)
+    for _i in range(p["n"]):  # repeated addition
+        total += p["w"] + F(p["a"], p["b"])
+    return total
+
+
+@template(T, "intermediate", MI4)
+def mixed_times_whole_cancel(r):
+    """Multiply a mixed number by a whole number that cancels with the denominator."""
+    w, a, b = _mixed(r)
+    n = b * r.randint(1, 3) if r.random() < 0.7 else r.choice([x for x in range(2, 13) if gcd(x, b) > 1] or [b])
+    mixed = w + F(a, b)
+    ans = mixed * n
+    stem = f"Find the value of {n} × {w} {a}/{b}. Give your answer in its simplest form."
+    return build(mixed_times_whole_cancel, stem, ans, [
+        (w * n + F(a, b), "multiplied_only_the_whole_number", f"Multiplied {w} by {n} but did not multiply {a}/{b}."),
+        (w + F(a * n, b), "multiplied_only_the_fraction", f"Multiplied {a}/{b} by {n} but did not multiply {w}."),
+        (F(w * b + a, b * n) if (w * b + a) * 1 > 0 else None, "divided_instead_of_multiplied", f"Divided by {n} instead of multiplying."),
+    ], [f"{w} {a}/{b} = {w * b + a}/{b}", f"{n} × {w * b + a}/{b} = {n * (w * b + a)}/{b} = {frac(ans)}"],
+        {"w": w, "a": a, "b": b, "n": n})
+
+
+@checker(mixed_times_whole_cancel)
+def _(p):
+    return F(p["n"] * p["w"] * p["b"] + p["n"] * p["a"], p["b"])
+
+
+@template(T, "competent", MI4)
+def mixed_times_whole_shelves(r):
+    """Shelves of mixed-number length cut from a plank: how much plank is left."""
+    w, a, b = _mixed(r, 6)
+    n = r.randint(3, 8)
+    each = w + F(a, b)
+    used = each * n
+    left = r.randint(1, 4)
+    plank = int(used) + 1 + left
+    name = r.choice(NAMES)
+    ans = plank - used
+    stem = (f"{name} needs {n} shelves. Each shelf is {w} {a}/{b} m long. {name} has a plank that is {plank} m long. "
+            f"How much of the plank will be left after the {n} shelves are cut?")
+    return build(mixed_times_whole_shelves, stem, ans, [
+        (plank - (w * n + F(a, b)), "multiplied_only_the_whole_number", f"Multiplied {w} by {n} but not the {a}/{b}."),
+        (used, "gave_the_length_used", "Found the length used instead of the length left."),
+        (plank - each, "used_one_shelf_only", "Took away the length of one shelf only."),
+        (plank + used, "added_instead_of_subtracted", "Added the length used to the plank."),
+    ], [f"Length needed: {w} {a}/{b} × {n} = {frac(used)} m", f"Left: {plank} − {frac(used)} = {frac(ans)} m"],
+        {"w": w, "a": a, "b": b, "n": n, "plank": plank}, unit("m"), auto_slips=False)
+
+
+@checker(mixed_times_whole_shelves)
+def _(p):
+    need = F(0)
+    for _i in range(p["n"]):
+        need += F(p["w"] * p["b"] + p["a"], p["b"])
+    return p["plank"] - need

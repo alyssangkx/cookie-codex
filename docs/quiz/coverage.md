@@ -183,3 +183,193 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | math-pat-equal-total-two-ways | competent | 10 |  | equal_total_two_ways (competent) |
 | math-pat-number-pattern-grid | intermediate | 10 | yes | number_grid_column (intermediate) |
 | math-pat-assumption-guess-and-check | competent | 9 |  | legs_assumption (competent) |
+
+## Syllabus outcomes
+
+**181 of 181 outcomes** are practised by at least one generator (or documented as skipped).
+
+'secondary only' means the outcome is practised inside templates filed under another outcome of the same or a related sub-topic.
+
+| Outcome | Level | Generators |
+|---|---|---|
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-01 | P1 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-02 | P1 | secondary only (1 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-03 | P1 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-04 | P1 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-05 | P1 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-06 | P1 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-07 | P2 | 4 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-08 | P2 | 4 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-09 | P2 | secondary only (1 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-10 | P2 | secondary only (1 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-11 | P2 | secondary only (2 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-12 | P2 | 1 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-13 | P3 | secondary only (1 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-14 | P3 | secondary only (2 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-15 | P3 | 1 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-16 | P3 | secondary only (3 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-17 | P3 | secondary only (2 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-18 | P4 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19 | P4 | secondary only (2 templates) |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20 | P4 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-21 | P4 | 2 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22 | P4 | 2 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23 | P4 | 2 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24 | P5 | 2 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-01 | P1 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-02 | P1 | 4 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-03 | P1 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-04 | P1 | 4 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-05 | P2 | secondary only (1 templates) |
+| whole-numbers-addition-subtraction-multiplication-and-division-06 | P2 | secondary only (1 templates) |
+| whole-numbers-addition-subtraction-multiplication-and-division-07 | P2 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-08 | P2 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-09 | P3 | 1 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-10 | P3 | 1 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-11 | P3 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-12 | P3 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-13 | P3 | 2 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-14 | P3 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-15 | P4 | 12 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-16 | P4 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-17 | P5 | 1 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-18 | P5 | 1 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-19 | P5 | 3 templates |
+| whole-numbers-factors-and-multiples-01 | P4 | secondary only (6 templates) |
+| whole-numbers-factors-and-multiples-02 | P4 | 1 templates |
+| whole-numbers-factors-and-multiples-03 | P4 | 4 templates |
+| whole-numbers-factors-and-multiples-04 | P4 | 1 templates |
+| whole-numbers-factors-and-multiples-05 | P4 | 6 templates |
+| fractions-fraction-of-a-whole-and-of-a-set-01 | P2 | 1 templates |
+| fractions-fraction-of-a-whole-and-of-a-set-02 | P2 | 3 templates |
+| fractions-fraction-of-a-whole-and-of-a-set-03 | P4 | 10 templates |
+| fractions-equivalent-fractions-and-simplest-form-01 | P3 | 3 templates |
+| fractions-equivalent-fractions-and-simplest-form-02 | P3 | 2 templates |
+| fractions-equivalent-fractions-and-simplest-form-03 | P3 | 1 templates |
+| fractions-equivalent-fractions-and-simplest-form-04 | P3 | 1 templates |
+| fractions-mixed-numbers-and-improper-fractions-01 | P4 | 3 templates |
+| fractions-addition-and-subtraction-of-fractions-01 | P2 | 3 templates |
+| fractions-addition-and-subtraction-of-fractions-02 | P3 | 3 templates |
+| fractions-addition-and-subtraction-of-fractions-03 | P4 | 2 templates |
+| fractions-addition-and-subtraction-of-fractions-04 | P5 | 1 templates |
+| fractions-multiplication-and-division-of-fractions-01 | P5 | 1 templates |
+| fractions-multiplication-and-division-of-fractions-02 | P5 | 5 templates |
+| fractions-multiplication-and-division-of-fractions-03 | P5 | 3 templates |
+| fractions-multiplication-and-division-of-fractions-04 | P5 | 3 templates |
+| fractions-multiplication-and-division-of-fractions-05 | P6 | 3 templates |
+| fractions-multiplication-and-division-of-fractions-06 | P6 | 2 templates |
+| fractions-fraction-and-division-01 | P5 | 2 templates |
+| fractions-fraction-and-division-02 | P5 | 1 templates |
+| decimals-decimal-notation-and-comparison-01 | P4 | 2 templates |
+| decimals-decimal-notation-and-comparison-02 | P4 | 5 templates |
+| decimals-decimal-notation-and-comparison-03 | P4 | 2 templates |
+| decimals-decimal-notation-and-comparison-04 | P4 | 2 templates |
+| decimals-decimal-notation-and-comparison-05 | P4 | 2 templates |
+| decimals-four-operations-with-decimals-01 | P4 | 5 templates |
+| decimals-four-operations-with-decimals-02 | P4 | 6 templates |
+| decimals-four-operations-with-decimals-03 | P4 | 1 templates |
+| decimals-four-operations-with-decimals-04 | P4 | 1 templates |
+| decimals-four-operations-with-decimals-05 | P5 | 1 templates |
+| decimals-four-operations-with-decimals-06 | P5 | 2 templates |
+| money-money-01 | P1 | secondary only (3 templates) |
+| money-money-02 | P2 | 3 templates |
+| money-money-03 | P2 | 1 templates |
+| money-money-04 | P2 | 2 templates |
+| money-money-05 | P2 | 1 templates |
+| money-money-06 | P3 | 10 templates |
+| percentage-percentage-01 | P5 | 3 templates |
+| percentage-percentage-02 | P5 | 6 templates |
+| percentage-percentage-03 | P5 | 7 templates |
+| percentage-percentage-04 | P6 | 6 templates |
+| percentage-percentage-05 | P6 | 2 templates |
+| rate-rate-01 | P5 | 4 templates |
+| rate-rate-02 | P5 | 13 templates |
+| ratio-ratio-01 | P6 | 5 templates |
+| ratio-ratio-02 | P6 | 6 templates |
+| ratio-ratio-03 | P6 | 6 templates |
+| ratio-ratio-04 | P6 | 1 templates |
+| ratio-ratio-05 | P6 | 2 templates |
+| ratio-ratio-06 | P6 | 1 templates |
+| ratio-ratio-07 | P6 | 2 templates |
+| algebra-algebra-01 | P6 | 2 templates |
+| algebra-algebra-02 | P6 | 1 templates |
+| algebra-algebra-03 | P6 | 3 templates |
+| algebra-algebra-04 | P6 | 3 templates |
+| algebra-algebra-05 | P6 | 11 templates |
+| measurement-length-mass-and-volume-01 | P1 | 1 templates |
+| measurement-length-mass-and-volume-02 | P1 | 4 templates |
+| measurement-length-mass-and-volume-03 | P1 | 4 templates |
+| measurement-length-mass-and-volume-04 | P2 | 1 templates |
+| measurement-length-mass-and-volume-05 | P2 | 1 templates |
+| measurement-length-mass-and-volume-06 | P3 | 3 templates |
+| measurement-length-mass-and-volume-07 | P3 | 11 templates |
+| measurement-length-mass-and-volume-08 | P3 | 3 templates |
+| measurement-time-01 | P1 | 1 templates |
+| measurement-time-02 | P2 | 1 templates |
+| measurement-time-03 | P2 | 2 templates |
+| measurement-time-04 | P3 | 2 templates |
+| measurement-time-05 | P3 | 10 templates |
+| measurement-time-06 | P3 | 2 templates |
+| area-and-volume-area-and-perimeter-01 | P3 | secondary only (1 templates) |
+| area-and-volume-area-and-perimeter-02 | P3 | 1 templates |
+| area-and-volume-area-and-perimeter-03 | P3 | 3 templates |
+| area-and-volume-area-and-perimeter-04 | P3 | 3 templates |
+| area-and-volume-area-and-perimeter-05 | P4 | 3 templates |
+| area-and-volume-area-and-perimeter-06 | P4 | 1 templates |
+| area-and-volume-area-and-perimeter-07 | P4 | 6 templates |
+| area-and-volume-area-of-triangle-01 | P5 | 1 templates |
+| area-and-volume-area-of-triangle-02 | P5 | 7 templates |
+| area-and-volume-area-of-triangle-03 | P5 | 5 templates |
+| area-and-volume-volume-of-cube-and-cuboid-01 | P5 | 2 templates |
+| area-and-volume-volume-of-cube-and-cuboid-02 | P5 | secondary only (4 templates) |
+| area-and-volume-volume-of-cube-and-cuboid-03 | P5 | 4 templates |
+| area-and-volume-volume-of-cube-and-cuboid-04 | P5 | 4 templates |
+| area-and-volume-volume-of-cube-and-cuboid-05 | P5 | 7 templates |
+| area-and-volume-volume-of-cube-and-cuboid-06 | P5 | 2 templates |
+| area-and-volume-volume-of-cube-and-cuboid-07 | P6 | 1 templates |
+| area-and-volume-volume-of-cube-and-cuboid-08 | P6 | 1 templates |
+| area-and-volume-volume-of-cube-and-cuboid-09 | P6 | 1 templates |
+| area-and-volume-volume-of-cube-and-cuboid-10 | P6 | 1 templates |
+| area-and-volume-volume-of-cube-and-cuboid-11 | P6 | skipped: Placeholder: the syllabus line lost its symbols in PDF extraction (marked unverified). |
+| area-and-volume-area-and-circumference-of-circle-01 | P6 | 6 templates |
+| area-and-volume-area-and-circumference-of-circle-02 | P6 | 2 templates |
+| area-and-volume-area-and-circumference-of-circle-03 | P6 | 8 templates |
+| geometry-2d-shapes-01 | P1 | 2 templates |
+| geometry-2d-shapes-02 | P1 | 1 templates |
+| geometry-2d-shapes-03 | P1 | 5 templates |
+| geometry-2d-shapes-04 | P1 | 3 templates |
+| geometry-2d-shapes-05 | P2 | 2 templates |
+| geometry-3d-shapes-and-nets-01 | P2 | 5 templates |
+| geometry-3d-shapes-and-nets-02 | P4 | 2 templates |
+| geometry-3d-shapes-and-nets-03 | P4 | 3 templates |
+| geometry-3d-shapes-and-nets-04 | P4 | 2 templates |
+| geometry-3d-shapes-and-nets-05 | P4 | 1 templates |
+| geometry-angles-01 | P3 | 3 templates |
+| geometry-angles-02 | P4 | 1 templates |
+| geometry-angles-03 | P4 | 1 templates |
+| geometry-angles-04 | P4 | 3 templates |
+| geometry-angles-05 | P5 | 2 templates |
+| geometry-angles-06 | P5 | 2 templates |
+| geometry-angles-07 | P5 | 3 templates |
+| geometry-angles-08 | P5 | 4 templates |
+| geometry-perpendicular-and-parallel-lines-01 | P3 | 4 templates |
+| geometry-perpendicular-and-parallel-lines-02 | P3 | 3 templates |
+| geometry-rectangle-and-square-01 | P4 | 8 templates |
+| geometry-rectangle-and-square-02 | P4 | 3 templates |
+| geometry-line-symmetry-01 | P4 | 5 templates |
+| geometry-line-symmetry-02 | P4 | 3 templates |
+| geometry-line-symmetry-03 | P4 | secondary only (2 templates) |
+| geometry-triangles-parallelogram-rhombus-and-trapezium-01 | P5 | 2 templates |
+| geometry-triangles-parallelogram-rhombus-and-trapezium-02 | P5 | 1 templates |
+| geometry-triangles-parallelogram-rhombus-and-trapezium-03 | P5 | 2 templates |
+| geometry-triangles-parallelogram-rhombus-and-trapezium-04 | P5 | 3 templates |
+| geometry-triangles-parallelogram-rhombus-and-trapezium-05 | P5 | 2 templates |
+| geometry-triangles-parallelogram-rhombus-and-trapezium-06 | P6 | 4 templates |
+| data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-01 | P1 | 1 templates |
+| data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-02 | P2 | 2 templates |
+| data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-03 | P3 | 9 templates |
+| data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-04 | P3 | secondary only (4 templates) |
+| data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-05 | P4 | 3 templates |
+| data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-06 | P4 | 11 templates |
+| data-analysis-average-of-a-set-of-data-01 | P6 | 4 templates |
+| data-analysis-average-of-a-set-of-data-02 | P6 | 12 templates |

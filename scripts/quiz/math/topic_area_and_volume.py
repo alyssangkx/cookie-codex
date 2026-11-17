@@ -2541,3 +2541,178 @@ def _(p):
     s = F(p["s"])
     return {"quarter_sq": s + s + (2 * pi * s) / 4, "semi_sq": s + s + s + (2 * pi * (s / 2)) / 2,
             "four_quarters": 4 * ((2 * pi * (s / 2)) / 4)}[p["kind"]]
+
+
+# ================================================================ Group C gap fills: isometric drawings of cubes and cuboids
+from figures_D import stack_fig, panels  # noqa: E402
+from figures_gapC import iso_fig  # noqa: E402
+
+VC3 = VC_ + "03"
+
+
+def _heights(r, ni, nj, top):
+    """Random stack heights, non-increasing in i and j (so the isometric picture is valid), tallest = top."""
+    for _ in range(200):
+        h = [[0] * nj for _ in range(ni)]
+        for i in range(ni):
+            for j in range(nj):
+                cap = min(top if i == 0 and j == 0 else top, h[i - 1][j] if i else top, h[i][j - 1] if j else top)
+                h[i][j] = r.randint(1, cap)
+        h[0][0] = top
+        return h
+    return None
+
+
+def _visible(h):
+    ni, nj = len(h), len(h[0])
+    have = {(i, j, k) for i in range(ni) for j in range(nj) for k in range(h[i][j])}
+    return sum(1 for (i, j, k) in have if (i, j, k + 1) not in have or (i + 1, j, k) not in have or (i, j + 1, k) not in have)
+
+
+def _total(h):
+    return sum(sum(row) for row in h)
+
+
+@template(T, "basic", VC3)
+def iso_count_cubes(r):
+    """Count the unit cubes in an isometric drawing (hidden ones included)."""
+    name = nm(r)
+    ni, nj, top = r.choice([2, 3]), r.choice([2, 3]), r.choice([2, 3])
+    h = _heights(r, ni, nj, top)
+    tot, vis = _total(h), _visible(h)
+    if vis >= tot or tot < 5:
+        return None
+    ctx = r.choice(["builds this solid from 1-cm cubes", "stacks 1-cm cubes to make this solid",
+                    "glues 1-cm cubes together to make this solid"])
+    stem = (f"{name} {ctx}. The base is {ni} cubes by {nj} cubes. There are no gaps inside, "
+            f"and some cubes cannot be seen. How many cubes did {name} use?")
+    return build(iso_count_cubes, stem, tot, [
+        (vis, "counted_only_visible_cubes", "Counted only the cubes that can be seen and left out the hidden ones."),
+        (ni * nj * top, "assumed_a_full_cuboid", "Assumed every stack is as tall as the tallest one."),
+        (tot + 1, "miscounted_one_cube", "Counted one cube too many."),
+        (tot - 1, "miscounted_one_cube", "Counted one cube too few."),
+    ], ["Count the cubes stack by stack, including the ones hidden behind.", " + ".join(str(x) for row in h for x in row) + f" = {tot}"],
+        {"h": h}, str, whole=True, auto_slips=False, figure=stack_fig(h))
+
+
+@checker(iso_count_cubes)
+def _(p):
+    n = 0
+    for i, row in enumerate(p["h"]):
+        for j, hh in enumerate(row):
+            for _k in range(hh):
+                n += 1
+    return F(n)
+
+
+@template(T, "intermediate", VC3)
+def iso_which_cuboid(r):
+    """Which isometric drawing (A-D) shows a cuboid with the given base and number of layers."""
+    name = nm(r)
+    a, b, h = r.randint(2, 4), r.randint(2, 4), r.randint(2, 4)
+    if a == b == h:
+        return None
+    vol = a * b * h
+    decoys = []
+    if h != a:
+        decoys.append(((h, b, a), "mixed_up_height_and_base", "Swapped the number of layers with a side of the base."))
+    if h != b:
+        decoys.append(((a, h, b), "mixed_up_height_and_base", "Swapped the number of layers with a side of the base."))
+    decoys += [((a, b, h + 1) if h < 4 else (a, b, h - 1), "miscounted_layers", "Counted one layer too many or too few."),
+               ((a + 1, b, h) if a < 4 else (a - 1, b, h), "miscounted_base", "Miscounted a side of the base by one.")]
+    seen, outs = {(tuple(sorted((a, b))), h)}, []
+    for dims, tag, why in decoys:
+        key = (tuple(sorted(dims[:2])), dims[2])
+        if key in seen or min(dims) < 1 or max(dims) > 5:
+            continue
+        seen.add(key)
+        outs.append((dims, tag, why))
+    if len(outs) < 3:
+        return None
+    outs = outs[:3]
+    pos = r.randrange(4)
+    allv = [o[0] for o in outs]
+    ca, cb = (a, b) if r.random() < 0.5 else (b, a)
+    allv.insert(pos, (ca, cb, h))
+    figs = [iso_fig([[d[2]] * d[1] for _ in range(d[0])], W=150, H=140) for d in allv]
+    wrong = [(i + 1, tag, why) for i, (_, tag, why) in zip([x for x in range(4) if x != pos], outs)]
+    stem = (f"{name} stacks unit cubes to make a cuboid. Its base is {a} cubes by {b} cubes and it is {h} layers high. "
+            f"Which drawing shows {name}'s cuboid?")
+    return build(iso_which_cuboid, stem, pos + 1, wrong,
+                 [f"The cuboid has {a} x {b} cubes in each layer and {h} layers.", f"Its volume is {vol} cubes.",
+                  f"Only drawing {'ABCD'[pos]} has a {a} by {b} base and {h} layers."],
+                 {"a": a, "b": b, "h": h, "opts": [list(d) for d in allv]}, lambda v: "ABCD"[int(v) - 1], whole=True,
+                 auto_slips=False, figure=panels(figs, "ABCD", cols=2, title="Four isometric drawings"))
+
+
+@checker(iso_which_cuboid)
+def _(p):
+    ok = [i + 1 for i, (x, y, z) in enumerate(p["opts"]) if z == p["h"] and sorted((x, y)) == sorted((p["a"], p["b"]))]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "competent", VC3)
+def iso_cubes_to_complete(r):
+    """How many more cubes are needed to complete the box around an isometric stack."""
+    name = nm(r)
+    ni, nj, top = r.choice([2, 3]), r.choice([2, 3]), r.choice([2, 3])
+    h = _heights(r, ni, nj, top)
+    tot, vis = _total(h), _visible(h)
+    box = ni * nj * top
+    ans = box - tot
+    if ans < 1 or vis >= tot or box - vis == ans:
+        return None
+    ctx = r.choice(["has built the solid shown", "made the solid shown", "stuck cubes together to make the solid shown"])
+    stem = (f"{name} {ctx} using 1-cm cubes (there are no gaps inside). {name} wants to add cubes to make a complete "
+            f"cuboid with the same {ni} by {nj} base and the same height as the tallest part. How many more cubes does {name} need?")
+    return build(iso_cubes_to_complete, stem, ans, [
+        (box - vis, "forgot_the_hidden_cubes", "Counted only the cubes you can see in the solid."),
+        (tot, "gave_the_cubes_already_used", "Gave the number of cubes already in the solid."),
+        (box, "gave_the_cuboid_volume", "Gave the number of cubes in the complete cuboid."),
+        (ans + 1, "miscounted_one_cube", "Was one cube out."),
+        (ans - 1, "miscounted_one_cube", "Was one cube out."),
+    ], [f"Complete cuboid: {ni} x {nj} x {top} = {box} cubes.", f"Cubes in the solid: {tot}.", f"{box} - {tot} = {ans}"],
+        {"h": h, "ni": ni, "nj": nj, "top": top}, str, whole=True, auto_slips=False, figure=stack_fig(h))
+
+
+@checker(iso_cubes_to_complete)
+def _(p):
+    missing = 0
+    for i in range(p["ni"]):
+        for j in range(p["nj"]):
+            for k in range(p["top"]):
+                if k >= p["h"][i][j]:
+                    missing += 1
+    return F(missing)
+
+
+@template(T, "competent", VC3)
+def iso_cuboid_volume_edge(r):
+    """Volume (cm3) of a cuboid shown in an isometric drawing, each cube having an edge of s cm."""
+    name = nm(r)
+    a, b, hh = r.randint(2, 4), r.randint(2, 4), r.randint(2, 3)
+    s = r.choice([2, 3, 4])
+    n = a * b * hh
+    ans = n * s ** 3
+    ctx = r.choice(["made this cuboid", "built this cuboid", "stacked these cubes into this cuboid"])
+    stem = (f"{name} {ctx} using identical cubes. Each cube has an edge of {s} cm. "
+            f"What is the volume of the cuboid, in cm³?")
+    return build(iso_cuboid_volume_edge, stem, ans, [
+        (n, "gave_the_number_of_cubes", "Counted the cubes but did not find the volume of each cube."),
+        (n * s, "used_edge_instead_of_cube_volume", f"Multiplied the number of cubes by {s} instead of {s} x {s} x {s}."),
+        (n * s * s, "used_face_area_of_a_cube", "Used the area of a face instead of the volume of a cube."),
+        (ans + s ** 3, "miscounted_one_cube", "Counted one cube too many."),
+        (ans - s ** 3, "miscounted_one_cube", "Counted one cube too few."),
+    ], [f"Number of cubes = {a} x {b} x {hh} = {n}.", f"Volume of one cube = {s} x {s} x {s} = {s ** 3} cm³.", f"{n} x {s ** 3} = {ans} cm³"],
+        {"a": a, "b": b, "h": hh, "s": s}, lambda v: f"{int(v)} cm³", whole=True, auto_slips=False,
+        figure=stack_fig([[hh] * b for _ in range(a)]))
+
+
+@checker(iso_cuboid_volume_edge)
+def _(p):
+    total = 0
+    for _i in range(p["a"]):
+        for _j in range(p["b"]):
+            for _k in range(p["h"]):
+                total += p["s"] ** 3
+    return F(total)

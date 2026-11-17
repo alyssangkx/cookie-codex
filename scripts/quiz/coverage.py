@@ -56,8 +56,35 @@ for topic in sorted(rows):
     detail.append("")
 lines += ["", f"**{done} of {total} question types covered.**", "",
           "Not counted (outside the 2021 syllabus, which has no Speed): " + (", ".join(p["id"] for p in OUT) or "none"), ""] + detail
+# ---- outcome coverage: every syllabus outcome should be the FIRST outcome of some template
+SKIP = {  # outcome id -> why it has no generator
+    "math-area-and-volume-volume-of-cube-and-cuboid-11":
+        "Placeholder: the syllabus line lost its symbols in PDF extraction (marked unverified).",
+}
+first, anywhere = defaultdict(list), defaultdict(list)
+for ts in REGISTRY.values():
+    for t in ts:
+        first[t.outcomes[0]].append(f"{t.key} ({t.level})")
+        for o in t.outcomes[1:]:
+            anywhere[o].append(t.key)
+syl = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "math.json").read_text())
+orows, o_done, o_total = [], 0, 0
+for st in syl["strands"]:
+    for tp in st["topics"]:
+        for sb in tp["subtopics"]:
+            for o in sb["outcomes"]:
+                o_total += 1
+                g = first.get(o["id"], [])
+                o_done += bool(g) or bool(anywhere.get(o["id"])) or o["id"] in SKIP
+                status = (f"{len(g)} templates" if g else f"skipped: {SKIP[o['id']]}" if o["id"] in SKIP
+                          else f"secondary only ({len(anywhere[o['id']])} templates)" if anywhere.get(o["id"]) else "**missing**")
+                orows.append(f"| {o['id'].replace('math-', '')} | {o['level']} | {status} |")
+lines += ["## Syllabus outcomes", "",
+           f"**{o_done} of {o_total} outcomes** are practised by at least one generator (or documented as skipped).", "",
+           "'secondary only' means the outcome is practised inside templates filed under another outcome of the same or a related sub-topic.", "",
+           "| Outcome | Level | Generators |", "|---|---|---|"] + orows + [""]
 (ROOT / "docs" / "quiz").mkdir(parents=True, exist_ok=True)
 (ROOT / "docs" / "quiz" / "coverage.md").write_text("\n".join(lines))
-print(f"coverage: {done}/{total} question types -> docs/quiz/coverage.md")
+print(f"coverage: {done}/{total} question types, {o_done}/{o_total} syllabus outcomes -> docs/quiz/coverage.md")
 if "--strict" in sys.argv and done < total:
     sys.exit(1)

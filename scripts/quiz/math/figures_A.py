@@ -79,5 +79,59 @@ def number_grid_fig(c, rows=3):
     return f.svg("Numbers written in a table with columns A onwards")
 
 
+def count_shapes_fig(counts, seed=0):
+    """Scattered shapes on a grid: counts = (circles, squares, triangles). Shapes are placed in random cells."""
+    import random
+    rr = random.Random(seed)
+    cols, rows, cell = 8, 4, 34
+    cells = [(i, j) for i in range(cols) for j in range(rows)]
+    rr.shuffle(cells)
+    f = Fig(cols * cell + 16, rows * cell + 16)
+    kinds = ["c"] * counts[0] + ["s"] * counts[1] + ["t"] * counts[2]
+    for kind, (i, j) in zip(kinds, cells):
+        cx, cy = 8 + i * cell + cell / 2, 8 + j * cell + cell / 2
+        if kind == "c":
+            f.circle(cx, cy, 10, shade=0.0, width=1.6)
+        elif kind == "s":
+            f.rect(cx - 9, cy - 9, 18, 18, shade=0.35, width=1.4)
+        else:
+            f.poly([(cx, cy - 11), (cx + 11, cy + 9), (cx - 11, cy + 9)], shade=0.0, width=1.6)
+    return f.svg("Circles, squares and triangles scattered in a box")
+
+
+def dot_boxes_fig(counts, labels):
+    """Boxes of dots in rows of 5 (last row partly filled), one box per label."""
+    gap, bw = 18, 5 * 16 + 16
+    rows = max((c + 4) // 5 for c in counts)
+    bh = rows * 16 + 16
+    n = len(counts)
+    f = Fig(n * bw + (n - 1) * gap + 20, bh + 40)
+    for k, (c, lab) in enumerate(zip(counts, labels)):
+        x0 = 10 + k * (bw + gap)
+        f.rect(x0, 8, bw, bh, width=1.4)
+        for i in range(c):
+            f.circle(x0 + 16 + (i % 5) * 16, 8 + 16 + (i // 5) * 16, 5.5, shade=0.45, width=1.0)
+        f.text(x0 + bw / 2, bh + 26, lab, size=14, bold=True)
+    return f.svg("Boxes of counters")
+
+
+def number_line_fig(lo, step, ticks, k):
+    """Number line with `ticks` equal gaps of size `step` from lo; only the two ends are labelled;
+    an arrow points at tick k (not labelled)."""
+    w, x0, gapw = 330, 25, 280 / ticks
+    f = Fig(w, 90)
+    y = 52
+    f.line(x0 - 10, y, x0 + 280 + 10, y, width=1.6)
+    for i in range(ticks + 1):
+        x = x0 + i * gapw
+        f.line(x, y - 6, x, y + 6, width=1.4 if i in (0, ticks) else 1.0)
+    f.text(x0, y + 22, lo, size=13)
+    f.text(x0 + 280, y + 22, lo + ticks * step, size=13)
+    xa = x0 + k * gapw
+    f.line(xa, y - 30, xa, y - 9, width=1.8)
+    f.poly([(xa, y - 7), (xa - 5, y - 15), (xa + 5, y - 15)], shade=1.0, width=1.0)
+    return f.svg("Number line with an arrow")
+
+
 if __name__ == "__main__":
     print(len(growing_rows_fig(2)), len(overlap_cards_fig(10, 3, 100)))

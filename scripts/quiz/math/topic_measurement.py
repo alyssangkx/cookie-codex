@@ -1309,3 +1309,272 @@ def _(p):
         for _ in range(p["y"]):
             total += p["x"]
     return F(cc(total // 60, total % 60))
+
+
+# ================================================================ Group C gap fills: lengths in cm (ordering, ruler drawing)
+from figures_gapC import ruler_line_svg, ruler_lines_svg  # noqa: E402
+
+LEN_OBJ = ["pencil", "ribbon", "rope", "stick", "strip of paper", "string", "straw", "eraser", "crayon", "leaf",
+           "twig", "spring", "scarf", "wire", "bookmark", "ruler"]
+LONG_WORDS = {"longest": max, "shortest": min}
+
+
+def _first_digit_pick(vals, ask):
+    """The item a child picks by looking only at the first digit of each number."""
+    key = [int(str(v)[0]) for v in vals]
+    pick = max(key) if ask == "longest" else min(key)
+    idx = [i for i, k in enumerate(key) if k == pick]
+    return idx[0] if len(idx) == 1 else None
+
+
+@template(T, "basic", LM + "02")
+def cm_longest_shortest(r):
+    """Compare four lengths in cm: which is the longest / shortest."""
+    name = nm(r)
+    objs = r.sample(LEN_OBJ, 4)
+    vals = r.sample(range(4, 49), 4)
+    ask = r.choice(["longest", "shortest"])
+    t = vals.index(max(vals) if ask == "longest" else min(vals))
+    fd = _first_digit_pick(vals, ask)
+    if fd is None or fd == t:
+        return None
+    opp = vals.index(min(vals) if ask == "longest" else max(vals))
+    rest = [i for i in range(4) if i not in (t, fd, opp)]
+    order = [fd, opp] + rest
+    why = ["Compared only the first digit of each number.", f"Picked the {'shortest' if ask == 'longest' else 'longest'} instead.",
+           "Did not compare all the lengths."]
+    tags = ["compared_first_digits_only", "picked_the_opposite", "did_not_compare_all"]
+    stem = (f"{name} measures four things: the {objs[0]} is {vals[0]} cm long, the {objs[1]} is {vals[1]} cm, "
+            f"the {objs[2]} is {vals[2]} cm and the {objs[3]} is {vals[3]} cm. Which one is the {ask}?")
+    wrong = [(i + 1, tags[n] if n < 2 else tags[2], why[n] if n < 2 else why[2]) for n, i in enumerate(order)]
+    return build(cm_longest_shortest, stem, t + 1, wrong,
+                 [f"Compare the whole numbers: {', '.join(str(v) for v in vals)}.",
+                  f"The {ask} length is {max(vals) if ask == 'longest' else min(vals)} cm, the {objs[t]}."],
+                 {"vals": vals, "ask": ask}, lambda v: objs[int(v) - 1], whole=True, auto_slips=False)
+
+
+@checker(cm_longest_shortest)
+def _(p):
+    order = sorted(range(4), key=lambda i: p["vals"][i])
+    return F((order[-1] if p["ask"] == "longest" else order[0]) + 1)
+
+
+@template(T, "intermediate", LM + "02")
+def cm_second_longest(r):
+    """Second longest / second shortest of four lengths in cm."""
+    name = nm(r)
+    objs = r.sample(LEN_OBJ, 4)
+    vals = r.sample(range(5, 60), 4)
+    ask = r.choice(["second longest", "second shortest"])
+    srt = sorted(range(4), key=lambda i: vals[i])
+    t = srt[-2] if ask == "second longest" else srt[1]
+    other = srt[1] if ask == "second longest" else srt[-2]
+    ext = srt[-1] if ask == "second longest" else srt[0]
+    far = srt[0] if ask == "second longest" else srt[-1]
+    stem = (f"The lengths of four things in {name}'s pencil case are: {objs[0]} {vals[0]} cm, {objs[1]} {vals[1]} cm, "
+            f"{objs[2]} {vals[2]} cm and {objs[3]} {vals[3]} cm. Which is the {ask}?")
+    wrong = [(other + 1, "counted_from_the_wrong_end", "Counted from the wrong end of the ordered list."),
+             (ext + 1, "gave_the_extreme_one", f"Gave the {'longest' if ask == 'second longest' else 'shortest'} instead of the second."),
+             (far + 1, "gave_the_other_extreme", "Gave the item at the other end of the list.")]
+    return build(cm_second_longest, stem, t + 1, wrong,
+                 [f"Order from shortest to longest: {', '.join(f'{vals[i]} cm' for i in srt)}.",
+                  f"The {ask} is the {objs[t]}, {vals[t]} cm."], {"vals": vals, "ask": ask},
+                 lambda v: objs[int(v) - 1], whole=True, auto_slips=False)
+
+
+@checker(cm_second_longest)
+def _(p):
+    v = p["vals"]
+    ranked = sorted(range(4), key=lambda i: -v[i])  # longest first
+    return F((ranked[1] if p["ask"] == "second longest" else ranked[2]) + 1)
+
+
+@template(T, "intermediate", LM + "02")
+def cm_how_much_longer(r):
+    """How much longer is the longest than the shortest of three lengths in cm."""
+    name = nm(r)
+    objs = r.sample(LEN_OBJ, 3)
+    vals = r.sample(range(6, 60), 3)
+    s = sorted(vals)
+    ans = s[2] - s[0]
+    i_long, i_short = vals.index(s[2]), vals.index(s[0])
+    stem = (f"{name} has a {objs[0]} that is {vals[0]} cm long, a {objs[1]} that is {vals[1]} cm long and a "
+            f"{objs[2]} that is {vals[2]} cm long. How much longer is the {objs[i_long]} than the {objs[i_short]}, in cm?")
+    return build(cm_how_much_longer, stem, ans, [
+        (s[2] + s[0], "added_instead_of_subtracting", "Added the two lengths."),
+        (s[1] - s[0], "used_the_middle_length", "Compared the shortest with the middle one."),
+        (s[2] - s[1], "used_the_middle_length", "Compared the longest with the middle one."),
+        (ans + 10, "slip_ten_out", "Made a slip of 10 when subtracting."),
+        (ans - 10, "slip_ten_out", "Made a slip of 10 when subtracting."),
+    ], [f"{s[2]} - {s[0]} = {ans} cm"], {"vals": vals}, usd("cm"), whole=True, auto_slips=False)
+
+
+@checker(cm_how_much_longer)
+def _(p):
+    best = 0
+    for a in p["vals"]:
+        for b in p["vals"]:
+            best = max(best, a - b)
+    return F(best)
+
+
+@template(T, "competent", LM + "02")
+def cm_chain_lengths(r):
+    """Three pieces defined by 'longer than' and 'shorter than' steps; find the gap between longest and shortest."""
+    name = nm(r)
+    obj = r.choice(["ribbon", "rope", "string", "wire", "strip of cloth"])
+    a = r.randint(12, 40)
+    d1, d2 = r.randint(4, 15), r.randint(4, 24)
+    b, c = a + d1, a + d1 - d2
+    if c <= 0 or d1 == d2:
+        return None
+    lo, hi = min(a, b, c), max(a, b, c)
+    ans = hi - lo
+    stem = (f"{name} cuts three pieces of {obj}. Piece 1 is {a} cm long. Piece 2 is {d1} cm longer than Piece 1. "
+            f"Piece 3 is {d2} cm shorter than Piece 2. How much longer is the longest piece than the shortest piece, in cm?")
+    return build(cm_chain_lengths, stem, ans, [
+        (d1 + d2, "added_both_changes", "Added the two differences without finding each length."),
+        (abs(d1 - d2) if abs(d1 - d2) != ans else None, "compared_only_piece_1_and_3", "Compared Piece 1 with Piece 3 only."),
+        (max(b - a, b - c), "compared_with_the_wrong_piece", "Compared the longest piece with the wrong piece."),
+        (ans + 5, "arithmetic_slip", "Made a small arithmetic slip."),
+        (ans - 1, "arithmetic_slip", "Made a small arithmetic slip."),
+    ], [f"Piece 2 = {a} + {d1} = {b} cm", f"Piece 3 = {b} - {d2} = {c} cm", f"Longest - shortest = {hi} - {lo} = {ans} cm"],
+        {"a": a, "d1": d1, "d2": d2}, usd("cm"), whole=True, auto_slips=False)
+
+
+@checker(cm_chain_lengths)
+def _(p):
+    ps = [p["a"]]
+    ps.append(ps[0] + p["d1"])
+    ps.append(ps[1] - p["d2"])
+    return F(max(ps) - min(ps))
+
+
+def _ruler_q(r, fn, start_choices, stem_fmt):
+    name = nm(r)
+    obj = r.choice(["pencil", "strip of paper", "ribbon", "eraser", "matchstick", "feather", "leaf", "straw", "twig"])
+    start = r.choice(start_choices)
+    whole_cm = r.randint(3, 11)
+    off = r.choice([1, 2, 3, 7, 8, 9])
+    end10 = (start + whole_cm) * 10 + off
+    if end10 > 150 - 4:
+        return None
+    ln = whole_cm + (1 if off > 5 else 0)
+    end_round = start + ln
+    nb = ln - 1 if off > 5 else ln + 1  # the neighbouring whole number a careless rounding gives
+    stem = stem_fmt.format(name=name, obj=obj)
+    wrong = [(nb, "rounded_the_wrong_way", "Rounded to the wrong whole number of centimetres."),
+             (end_round if start else ln + 1, "read_only_the_right_end" if start else "counted_marks_not_gaps",
+              "Read the right end of the line without subtracting the start mark." if start else "Counted the marks instead of the gaps."),
+             (ln - 1 if ln - 1 != nb else ln + 1, "counted_gaps_off_by_one", "Counted one gap too few or too many."),
+             (ln + 2, "misread_scale", "Misread the end mark.")]
+    return build(fn, stem, ln, wrong,
+                 [f"The line starts at {start} cm. Its right end is at about {end10 / 10:g} cm.",
+                  f"Length = {end10 / 10:g} - {start} = {(end10 - start * 10) / 10:g} cm, which is {ln} cm to the nearest cm."],
+                 {"start": start, "end10": end10}, usd("cm"), whole=True, auto_slips=False,
+                 figure=ruler_line_svg(start, end10))
+
+
+def _ruler_check(p):
+    length10 = p["end10"] - 10 * p["start"]
+    return F(min(range(0, 16), key=lambda k: abs(10 * k - length10)))
+
+
+@template(T, "basic", LM + "03")
+def ruler_nearest_cm(r):
+    """Measure a line segment from 0 on a ruler, to the nearest cm."""
+    return _ruler_q(r, ruler_nearest_cm, [0],
+                    "{name} measures a {obj} with a ruler, starting from the 0 mark, as shown. What is the length of the {obj} to the nearest cm?")
+
+
+checker(ruler_nearest_cm)(_ruler_check)
+
+
+@template(T, "intermediate", LM + "03")
+def ruler_nearest_cm_offset(r):
+    """Measure a line segment that starts away from 0, to the nearest cm."""
+    return _ruler_q(r, ruler_nearest_cm_offset, [1, 2, 3, 4, 5],
+                    "{name} measures a {obj} with a ruler but starts from a mark that is not 0, as shown. "
+                    "What is the length of the {obj} to the nearest cm?")
+
+
+checker(ruler_nearest_cm_offset)(_ruler_check)
+
+
+@template(T, "intermediate", LM + "03")
+def which_line_is_n_cm(r):
+    """Four lines drawn against a ruler: which one is exactly N cm long."""
+    name = nm(r)
+    n = r.randint(4, 10)
+    lines = []
+
+    def mk_line(length, start=None):
+        s = r.randint(0, 15 - length) if start is None else start
+        return (s, s + length)
+    right = mk_line(n)
+    dec = [(r.randint(1, n - 1), n),  # ends at N but starts away from 0
+           mk_line(n + 1), mk_line(n - 1)]
+    if dec[0][0] < 1 or n - dec[0][0] == n:
+        return None
+    pos = r.randrange(4)
+    allv = dec[:]
+    allv.insert(pos, right)
+    if len({b - a for a, b in allv}) < 4:
+        return None
+    lines = [("ABCD"[i], a, b) for i, (a, b) in enumerate(allv)]
+    tags = [("read_only_the_right_end", "Read the end mark (it is N) without subtracting where the line starts."),
+            ("counted_one_too_many", f"Picked the line that is {n + 1} cm long."),
+            ("counted_one_too_few", f"Picked the line that is {n - 1} cm long.")]
+    wrong = []
+    for i in range(4):
+        if i == pos:
+            continue
+        ln = allv[i][1] - allv[i][0]
+        k = 0 if ln != n and allv[i][1] == n else (1 if ln == n + 1 else 2)
+        wrong.append((i + 1, tags[k][0], tags[k][1]))
+    wrong.sort(key=lambda w: [t[0] for t in tags].index(w[1]))
+    stem = f"{name} measures four lines, A to D, with a ruler. Which line is exactly {n} cm long?"
+    return build(which_line_is_n_cm, stem, pos + 1, wrong,
+                 [f"Length = right end - left end for each line.", f"Only line {'ABCD'[pos]} has right end - left end = {n} cm."],
+                 {"lines": [list(x) for x in allv], "n": n}, lambda v: "ABCD"[int(v) - 1], whole=True, auto_slips=False,
+                 figure=ruler_lines_svg(lines))
+
+
+@checker(which_line_is_n_cm)
+def _(p):
+    ok = [i + 1 for i, (a, b) in enumerate(p["lines"]) if len(range(a, b)) == p["n"]]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+@template(T, "competent", LM + "03")
+def ruler_then_total(r):
+    """Read a line off the ruler to the nearest cm, then use it in a two-step length problem."""
+    name = nm(r)
+    start = r.choice([0, 1, 2, 3])
+    whole_cm = r.randint(3, 9)
+    off = r.choice([1, 2, 3, 7, 8, 9])
+    end10 = (start + whole_cm) * 10 + off
+    ln = whole_cm + (1 if off > 5 else 0)
+    k = r.randint(2, 4)
+    d = r.randint(3, 12)
+    ans = ln + k * ln + d
+    stem = (f"{name} measures the line on the ruler to the nearest cm. {name} then draws a second line that is {k} times as long "
+            f"and a third line that is {d} cm long. {name} joins all three lines end to end. What is the total length, in cm?")
+    return build(ruler_then_total, stem, ans, [
+        (end10 // 10 + k * (end10 // 10) + d, "read_only_the_right_end", "Used the right-end mark as the length of the line."),
+        (k * ln + d, "left_out_the_first_line", "Left out the first line."),
+        (ln + k + d, "added_k_instead_of_multiplying", "Added the number of times instead of multiplying."),
+        (ans + 10, "slip_ten_out", "Made a slip of 10."),
+        (ans - 1, "arithmetic_slip", "Made a small arithmetic slip."),
+    ], [f"The first line is {ln} cm.", f"Second line = {k} x {ln} = {k * ln} cm.", f"Total = {ln} + {k * ln} + {d} = {ans} cm"],
+        {"start": start, "end10": end10, "k": k, "d": d}, usd("cm"), whole=True, auto_slips=False,
+        figure=ruler_line_svg(start, end10))
+
+
+@checker(ruler_then_total)
+def _(p):
+    first = _ruler_check(p)
+    total = first
+    for _ in range(p["k"]):
+        total += first
+    return total + p["d"]
