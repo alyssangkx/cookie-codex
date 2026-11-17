@@ -4,7 +4,7 @@ import rewards from '../data/rewards.json';
 import mathSyllabus from '../data/syllabus/math.json';
 import chineseSyllabus from '../data/syllabus/chinese.json';
 import { cookies } from './data';
-import type { School, Tier } from './store';
+import { MIN_POOL, type School, type Tier } from './store';
 
 export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [
   { id: 'math', name: 'Math', ready: true },
@@ -12,7 +12,7 @@ export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [
   { id: 'english', name: 'English', ready: false },
   { id: 'chinese', name: 'Chinese', ready: true },
 ];
-export const MIN_POOL = 20; // a tier is playable only with at least 20 questions
+export { MIN_POOL };
 
 export interface BankQ {
   id: string; sub: string; level: 'basic' | 'intermediate' | 'competent';

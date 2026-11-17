@@ -1,6 +1,7 @@
 ---
 // Home base: a map of the cookie kingdom with the Schools of Mastery, the Library (Codex),
 // My House (collection) and the Ranking Tower. The map art has no text; every label is HTML.
+import { existsSync } from 'node:fs';
 import Base from '../layouts/Base.astro';
 import TodayCard from '../components/TodayCard.astro';
 import spots from '../data/home-hotspots.json';
@@ -10,9 +11,11 @@ type Box = [number, number, number, number];
 // Art follows which schools are open: construction comes off a school once it opens.
 const isOpen = (id: string) => spots.buildings.find((b) => b.id === id)?.status === 'open';
 const schools = ['chinese', 'science', 'english'].filter(isOpen);
-const artState = schools.length === 3 ? 'all-open'
-  : schools.length === 2 && !schools.includes('english') ? 'chinese-science-open'
-  : schools.length === 1 && schools[0] === 'chinese' ? 'chinese-open' : '';
+// suffix from the open set in a fixed order; no art for the combination falls back to the base map
+const suffix = schools.length === 3 ? 'all-open' : schools.length ? `${schools.join('-')}-open` : '';
+const missing = ['wide', 'tall'].map((k) => `public/home/map-${k}-${suffix}.webp`).filter((f) => !existsSync(f));
+const artState = suffix && !missing.length ? suffix : '';
+if (suffix && missing.length) console.warn(`index.astro: missing home art ${missing.join(', ')}; using the base map.`);
 const layouts = (['wide', 'tall'] as const).map((k) => ({
   k,
   img: `/home/map-${k}${artState ? '-' + artState : ''}.webp`,

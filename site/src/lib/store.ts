@@ -40,6 +40,7 @@ export const SCHEMA = 3;
 const DAY = 86_400_000;
 const STEP_DAYS = [0, 1, 3, 7];
 export const TIER_MIN: Record<Tier, number> = { b: 12, i: 15, c: 20 };
+export const MIN_POOL = 20; // a tier is playable (and can clear) only with at least this many questions
 export const PASS = 0.8;
 export const QUIZ_SIZE = 10; // a pass needs a full 10-question quiz
 export const WEEK_GOAL_DAYS = 4; // a streak week needs 4 goal days; rest days never break it
@@ -81,6 +82,8 @@ export const migrations: Record<number, (s: any) => any> = {
   // cleared and keeps its card (nothing is ever taken away). A tier whose questions are all retired but
   // not yet marked is cleared lazily: store.ts has no question ids, so syncTiers() runs at the end of the
   // next quiz that touches the tier (the quiz page passes the ids). Saves need no field changes.
+  // Consequence: an already fully-retired tier clears only after its next quiz, not at load time
+  // (deliberately no load-time sync).
   2: (s) => s,
 };
 
@@ -241,17 +244,22 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
 // ---------------------------------------------------------------- questions
 
 /** Spaced retest: a new question answered correctly retires at once; a wrong one is due in 1 day,
- *  then 3, then 7; correct at the 7-day step retires it; wrong at any step goes back to 1 day. */
+ *  then 3, then 7; correct at the 7-day step retires it; wrong at any step goes back to 1 day.
+ *  A correct answer to a retest that is not yet due changes nothing (no progress, no penalty), so
+ *  the spacing cannot be skipped by repeating questions on the same day. */
 export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true) {
   const q = s.questions[id];
   if (ok && !q && !retireNew) return; // practice papers never drain tier pools
   if (!ok) {
     s.questions[id] = { s: 1, due: now + DAY, w: (q?.w ?? 0) + 1 };
-  } else if (!q || q.s === 3) {
-    s.questions[id] = { s: 0, due: 0, w: q?.w ?? 0 };
-  } else if (q.s > 0) {
-    const next = (q.s + 1) as 2 | 3;
-    s.questions[id] = { s: next, due: now + STEP_DAYS[next] * DAY, w: q.w };
+  } else if (!q) {
+    s.questions[id] = { s: 0, due: 0, w: 0 };
+  } else if (q.s > 0 && q.due <= now) {
+    if (q.s === 3) s.questions[id] = { s: 0, due: 0, w: q.w };
+    else {
+      const next = (q.s + 1) as 2 | 3;
+      s.questions[id] = { s: next, due: now + STEP_DAYS[next] * DAY, w: q.w };
+    }
   }
 }
 
@@ -358,14 +366,20 @@ export function finishQuiz(
  */
 export function syncTiers(s: SaveV1, tierIds: Record<string, string[]>, rewardFor: RewardFor, now = Date.now()): QuizResult['newlyCleared'] {
   const out: QuizResult['newlyCleared'] = [];
-  for (const [key, ids] of Object.entries(tierIds)) {
-    const [sub, tier] = key.split('|') as [string, Tier];
-    if (!ids.length) continue;
+  const entries = Object.entries(tierIds)
+    .map(([key, ids]) => { const [sub, tier] = key.split('|') as [string, Tier]; return { sub, tier, ids }; })
+    .filter((e) => e.ids.length && TIERS.includes(e.tier))
+    .sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier)); // b, i, c: clearing Basic can open Intermediate in the same pass
+  const playable = (sub: string): Record<Tier, boolean> => ({
+    b: !!tierIds[`${sub}|b`]?.length, i: !!tierIds[`${sub}|i`]?.length, c: !!tierIds[`${sub}|c`]?.length,
+  });
+  for (const { sub, tier, ids } of entries) {
     const st = tierState(s, sub, tier);
     st.total = ids.length;
     st.mastered = ids.filter((id) => isRetired(s, id)).length;
     (s.progress[sub] ??= {})[tier] = st;
-    if (!st.cleared && st.mastered === st.total) out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now) });
+    if (!st.cleared && st.mastered === st.total && tierOpen(s, sub, tier, playable(sub)))
+      out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now) });
   }
   return out;
 }

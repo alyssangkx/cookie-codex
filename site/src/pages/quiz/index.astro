@@ -46,7 +46,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 </Base>
 
 <script>
-  import {
+  import { MIN_POOL,
     load, save, answer, finishQuiz, openAttempt, capReached, attemptsToday, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
@@ -110,7 +110,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       $('title').textContent = 'Daily Review';
     }
     if (capReached(s)) return stop("Done for today! You have reached today's training time. Come back tomorrow.", '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
-    const playable = { b: sub?.count.b >= 20, i: sub?.count.i >= 20, c: sub?.count.c >= 20 };
+    const playable = { b: sub?.count.b >= MIN_POOL, i: sub?.count.i >= MIN_POOL, c: sub?.count.c >= MIN_POOL };
     if (mode === 'tier' && !tierOpen(s, subId, tier, playable)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
     if (mode === 'tier' && attemptsToday(s, subId, tier) >= sub.tries) return stop(`You have had ${sub.tries} tries at this tier today. Try again tomorrow.`);
 
@@ -214,13 +214,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   }
 
   // "sub|tier" -> every question id of that tier, for the subs in this quiz. store.ts clears a tier when
-  // all of these are retired. Only tiers with a full pool (20+ questions) can be cleared.
+  // all of these are retired. Only tiers with a full pool (MIN_POOL+ questions) can be cleared.
   function tierIds(): Record<string, string[]> {
     const subsInQuiz = new Set(quiz.map((id) => byId.get(id)!.sub));
     const tierOf = Object.fromEntries(Object.entries(LEVEL).map(([t, l]) => [l, t]));
     const out: Record<string, string[]> = {};
-    for (const q of byId.values()) if (subsInQuiz.has(q.sub)) (out[`${q.sub}|${tierOf[q.level]}`] ??= []).push(q.id);
-    for (const k of Object.keys(out)) if (out[k].length < 20) delete out[k];
+    for (const q of byId.values()) if (subsInQuiz.has(q.sub) && tierOf[q.level]) (out[`${q.sub}|${tierOf[q.level]}`] ??= []).push(q.id);
+    for (const k of Object.keys(out)) if (out[k].length < MIN_POOL) delete out[k];
     return out;
   }
 
@@ -246,6 +246,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`
+        : st.cleared ? `<p class="verdict good">This tier is already cleared. ${st.mastered ?? 0} of ${st.total ?? sub.count[tier]} questions mastered right now.</p>`
         : `<p class="verdict ${res.passed ? 'good' : 'bad'}">${res.passed ? 'Nice score! ' : 'Not yet. '}${st.mastered ?? 0} of ${st.total ?? sub.count[tier]} questions mastered. Missed questions come back until you get them right.</p>`;
     }
     if (mode === 'paper') {

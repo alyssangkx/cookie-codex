@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, load, importCode, exportCode } from './store.ts';
+import { setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -18,7 +18,7 @@ test('spaced retest: wrong -> 1, 3, 7 days -> retired; wrong at any step resets'
   assert.equal(s.questions.b.s, 3);
   answer(s, 'b', false, t0 + 11 * DAY);
   assert.deepEqual([s.questions.b.s, s.questions.b.w], [1, 2]);
-  answer(s, 'b', true); answer(s, 'b', true); answer(s, 'b', true);
+  answer(s, 'b', true, t0 + 12 * DAY); answer(s, 'b', true, t0 + 15 * DAY); answer(s, 'b', true, t0 + 22 * DAY);
   assert.equal(s.questions.b.s, 0);
 });
 
@@ -210,7 +210,6 @@ test('importCode migrates a v1 code, refuses a newer one, and writes no backup',
   assert.equal(data['ccx:backup'], undefined);
 });
 
-// ---- P-level progression: P1-P5 clear on one pass with 5 tries a day; P6 keeps 2 passes and 3 tries
 // ---- P-level tries: P1-P5 get 5 tries a day per tier, P6 keeps 3
 setProgression({ 'p5-sub': 5, 'p4-sub': 4 });
 
@@ -244,4 +243,43 @@ test('migration 2 -> 3 keeps cleared tiers, cards and everything else', () => {
   assert.deepEqual(s.cards, v2.cards);
   assert.deepEqual(s.questions, v2.questions);
   assert.equal(s.settings.playerName, 'Kept');
+});
+
+test('a correct answer to a retest that is not due leaves it unchanged; a due one advances; a wrong one resets', () => {
+  const s = fresh();
+  answer(s, 'a', false, t0);
+  const before = { ...s.questions.a };
+  answer(s, 'a', true, t0 + 1000); // not due yet
+  assert.deepEqual(s.questions.a, before);
+  answer(s, 'a', true, t0 + DAY); // due
+  assert.deepEqual([s.questions.a.s, s.questions.a.due], [2, t0 + 4 * DAY]);
+  answer(s, 'a', true, t0 + DAY + 1000); // not due again
+  assert.equal(s.questions.a.s, 2);
+  answer(s, 'a', false, t0 + DAY + 2000); // wrong still resets
+  assert.equal(s.questions.a.s, 1);
+});
+
+test('a tier cannot clear on the day a wrong answer happened', () => {
+  const s = fresh();
+  const reward = () => ({ slug: 'muscle-cookie', dup: false });
+  const q = { mode: 'tier' as const, sub: 'x', tier: 'b' as const, total: 10, ms: 1, tags: [], score: 9 };
+  answer(s, 'q1', false, t0);
+  for (let i = 0; i < 5; i++) answer(s, 'q1', true, t0 + i * 1000);
+  assert.equal(finishQuiz(s, q, reward, t0 + 5000, { 'x|b': ['q1'] }).cleared, false);
+  assert.equal(s.questions.q1.s, 1);
+});
+
+test('syncTiers clears only open tiers, in b-i-c order within one pass', () => {
+  const s = fresh();
+  const reward = (sub: string, t: string) => ({ slug: `${sub}-${t}`, dup: false });
+  answer(s, 'b1', true, t0); answer(s, 'i1', true, t0);
+  // Intermediate is fully retired but Basic is not: Intermediate must stay uncleared
+  answer(s, 'b2', false, t0);
+  let out = syncTiers(s, { 'x|i': ['i1'], 'x|b': ['b1', 'b2'] }, reward, t0);
+  assert.deepEqual(out, []);
+  assert.equal(s.progress.x.i?.cleared, false);
+  // Basic completes; listed after Intermediate, both clear in the same pass
+  answer(s, 'b2', true, t0 + DAY); answer(s, 'b2', true, t0 + 4 * DAY); answer(s, 'b2', true, t0 + 11 * DAY);
+  out = syncTiers(s, { 'x|i': ['i1'], 'x|b': ['b1', 'b2'] }, reward, t0 + 11 * DAY);
+  assert.deepEqual(out.map((o) => o.tier), ['b', 'i']);
 });

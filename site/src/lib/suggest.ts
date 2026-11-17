@@ -1,6 +1,6 @@
 // Pure logic for the "What do you want to train today?" page: power numbers and the
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
-import { TIERS, TIER_NAME, triesPerDay, tierState, tierOpen, attemptsToday, capReached, dayKey, isDue, type SaveV1, type Tier } from './store.ts';
+import { TIERS, TIER_NAME, triesPerDay, tierState, tierOpen, attemptsToday, capReached, isDue, type SaveV1, type Tier } from './store.ts';
 
 export interface SubInfo {
   id: string; topic: string; topicName: string; name: string; slug: string;
@@ -104,9 +104,11 @@ export function suggestions(
       return canStart(sub, t) && !st.cleared && (st.mastered ?? 0) > 0;
     });
     if (hit) {
+      const st = tierState(s, sub.id, hit);
+      const total = st.total ?? sub.count?.[hit];
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
-        reason: `${TIER_NAME[hit]}: ${tierState(s, sub.id, hit).mastered} of ${sub.count?.[hit] ?? tierState(s, sub.id, hit).total} questions mastered.`, href: tierHref(sub.id, hit),
+        reason: `${TIER_NAME[hit]}: ${total ? `${st.mastered} of ${total} questions mastered.` : `${st.mastered} questions mastered.`}`, href: tierHref(sub.id, hit),
       });
       break;
     }

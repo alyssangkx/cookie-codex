@@ -76,6 +76,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - `migrations` runs on `load()` and `importCode()`. Add a new step there for every schema bump.
     - 2→3 changes no field: every already-cleared tier stays cleared with its card. A tier whose questions are all retired but not yet marked is cleared lazily, by `syncTiers()` at the end of the next quiz that touches it (the ids come from the quiz page).
     - 1→2 keeps progress, cards, attempts, days, streak and settings, and clears `questions` (old stem-hash ids cannot be matched).
+    - 2→3 changes no fields. A tier whose questions are all retired but not yet marked cleared only clears after its next quiz (`syncTiers` needs the question ids, which only the quiz page has). There is deliberately no load-time sync.
     - `load()` copies the pre-migration save string to `ccx:backup`.
     - If a save is unreadable or a migration fails (no step, or a throw), `load()` keeps the raw string in `ccx:failed:1..3` before returning `fresh()`, and leaves `ccx:save` alone until a real save. A string already stored is not added again; when all 3 slots are full they rotate (2 to 1, 3 to 2, new into 3) so the newest broken save is kept; a legacy `ccx:failed` key is folded into the slots once and removed. Recover a save by copying a slot's value back into `ccx:save`.
     - `importCode()` writes no backup. The parent page calls `backupLocal()` only after the user confirms the import.
