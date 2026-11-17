@@ -121,5 +121,5 @@ test('passage tiers: three due retests in three passages all fit; a cut keeps ne
   for (const id of ['a3', 'b2', 'c4']) assert.ok(out.includes(id));
   add('d', 6);
   const cutOut = wholePassages(['d5', 'd6'], ids, (id) => meta[id], 4, new Set(['d5'])); // d6 picked as new
-  assert.deepEqual(cutOut, ['d1', 'd2', 'd5', 'd6']);
+  assert.deepEqual(cutOut, ['d3', 'd4', 'd5', 'd6']); // a consecutive run holding the due d5 and the new d6
 });

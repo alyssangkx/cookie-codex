@@ -88,7 +88,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const dialogueStem = (q: Q) => {
     const k = /第（(\d+)）空[^\n]*$/.exec(q.stem)?.[1];
     let h = fmt(q.stem);
-    for (const [n, phrase] of (q.group && filledBlanks.get(q.group)) || []) {
+    const fill = new Map(q.group ? filledBlanks.get(q.group) ?? [] : []);
+    // blanks of this dialogue that are not in this quiz (a cut set, or already mastered) show their answer,
+    // so only the blanks being asked are open and nothing looks skipped
+    if (q.group) for (const o of byId.values())
+      if (o.group === q.group && o.seq != null && !inQuiz.has(o.id)) fill.set(o.seq, o.options[o.answer]);
+    for (const [n, phrase] of fill) {
       if (String(n) === k) continue; // never fill the blank being asked
       h = h.replace(`（${n}）＿＿`, () => `（${n}）<span class="filled">${esc(phrase)}</span>`); // a function, so '$' in a phrase stays literal
     }
@@ -96,6 +101,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   };
 
   let byId = new Map<string, Q>();
+  let inQuiz = new Set<string>(); // ids in the current quiz
   let quiz: string[] = [], i = 0, score = 0, deadline = 0, tick = 0, startedAt = 0, answered = false, over = false;
   let pausedAt = 0; // the clock stops while the worked solution is on screen
   let wrongs: { q: Q; chose: number; tag: string }[] = [];
@@ -166,6 +172,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   function begin() {
     if (!quiz.length) return; // nothing to play (locked, capped or empty tier)
     i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
+    inQuiz = new Set(quiz);
     if (mode === 'tier') { const s0 = load(); openAttempt(s0, { sub: subId, tier, total: quiz.length }); save(s0); }
     startedAt = Date.now();
     deadline += startedAt;

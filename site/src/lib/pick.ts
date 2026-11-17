@@ -71,9 +71,19 @@ export function wholePassages(
   }
   const want = new Set(picked);
   const rank = (id: string) => (must.has(id) ? 0 : want.has(id) ? 1 : 2);
+  // A cut passage keeps a CONSECUTIVE run of its questions (blanks 1-2, never 1 and 3, which reads as a
+  // skipped question). The run is chosen to hold the due retests first, then picked (new) ones, as early
+  // in the passage as possible.
   const cut = (u: string[], n: number) => {
-    const keep = new Set([...u].sort((a, b) => rank(a) - rank(b) || seq(a) - seq(b)).slice(0, Math.max(0, n)));
-    return u.filter((id) => keep.has(id)); // passage order
+    if (n <= 0) return [];
+    if (n >= u.length) return u;
+    let best = 0, bestScore = -Infinity;
+    for (let s = 0; s + n <= u.length; s++) {
+      const w = u.slice(s, s + n);
+      const score = w.filter((id) => rank(id) === 0).length * 100 + w.filter((id) => rank(id) === 1).length - s * 0.5;
+      if (score > bestScore) { bestScore = score; best = s; }
+    }
+    return u.slice(best, best + n);
   };
   const all = [...units.values()];
   const mustUnits = all.filter((u) => u.some((id) => must.has(id)));
