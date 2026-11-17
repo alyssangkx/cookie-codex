@@ -402,7 +402,7 @@ def rect_from_clues(r):
             ((P // (k + 1)) * w if P % (k + 1) == 0 else None, "forgot_to_halve", f"Divided the perimeter by {k + 1} without halving."),
             (Lg * w + w, "slip_in_working", "Made a slip in the working."),
             (Lg * Lg, "used_length_twice", "Used the length twice."),
-        ], [f"Half the perimeter = {P // 2} cm = {k + 1} units", f"Width = {w} cm, length = {Lg} cm", f"Area = {Lg} × {w} = {Lg * w} cm²"],
+        ], [f"Half the perimeter = {P // 2} cm = {plural(k + 1, 'unit')}", f"Width = {w} cm, length = {Lg} cm", f"Area = {Lg} × {w} = {Lg * w} cm²"],
             {"k": k, "P": P, "mode": "k"}, U("cm²"), whole=True, auto_slips=False)
     d = r.randint(2, 9)
     Lg = w + d
@@ -676,7 +676,7 @@ def two_squares_step(r):
                  ((k * a) ** 2 + a, "slip_in_working", "Made a slip in the working."),
                  ((P // 4) ** 2, "treated_as_a_square", "Treated the figure as one square.")]
     return build(two_squares_step, stem, ans, wrong,
-                 [f"The perimeter is the same as that of a rectangle {1 + k} units by {k} units: 2 × ({1 + k} + {k}) = {2 * (1 + 2 * k)} units", f"1 unit = {P} ÷ {2 * (1 + 2 * k)} = {a} cm",
+                 [f"The perimeter is the same as that of a rectangle {plural(1 + k, 'unit')} by {plural(k, 'unit')}: 2 × ({1 + k} + {k}) = {plural(2 * (1 + 2 * k), 'unit')}", f"1 unit = {P} ÷ {2 * (1 + 2 * k)} = {a} cm",
                   f"Small square side {a} cm, large square side {k * a} cm"], {"k": k, "P": P, "ask": ask}, U("cm²"), whole=True,
                  auto_slips=False, figure=u.svg("Two squares"))
 
@@ -1006,7 +1006,7 @@ def corner_two_points(r):
     t1, t2, t3 = F(H * p_, 2), F((Wd - p_) * q, 2), F(Wd * (H - q), 2)
     ans = Wd * H - t1 - t2 - t3
     name = nm(r)
-    stem = (f"ABCD is a rectangle. P is on DC and Q is on BC. Find the area of the shaded triangle APQ. ({name} marks the lengths shown.)")
+    stem = (f"ABCD is a rectangle. P is on DC and Q is on BC. Find the area of the shaded triangle APQ. ({plural(name, 'mark')} the lengths shown.)")
     return build(corner_two_points, stem, ans, [
         (t1 + t2 + t3, "gave_unshaded_area", "Gave the total area of the three unshaded triangles."),
         (Wd * H - t1 - t2, "left_out_a_triangle", "Took away only two of the unshaded triangles."),
@@ -1671,8 +1671,8 @@ def tap_fill_time(r):
         (l * w * h // 1000 // rate if d and (l * w * h) % (1000 * rate) == 0 else None, "ignored_the_water_already_there", "Filled the whole tank, ignoring the water already in it."),
         (lit * rate, "multiplied_instead_of_divided", "Multiplied by the rate."),
         (t + 2, "slip_in_division", "Made a slip in the division.")],
-        [f"Space to fill = {l} × {w} × {h - d} = {vol} cm³ = {lit} l", f"Time = {lit} ÷ {rate} = {t} minutes"],
-        {"l": l, "w": w, "h": h, "d": d, "rate": rate}, lambda v: f"{num(v)} minutes", whole=True, auto_slips=False,
+        [f"Space to fill = {l} × {w} × {h - d} = {vol} cm³ = {lit} l", f"Time = {lit} ÷ {rate} = {plural(t, 'minute')}"],
+        {"l": l, "w": w, "h": h, "d": d, "rate": rate}, lambda v: f"{plural(num(v), 'minute')}", whole=True, auto_slips=False,
         figure=box(l, w, h, water=d if d else None, dl=f"{d} cm" if d else None))
 
 
@@ -1820,7 +1820,7 @@ def circle_circumference(r):
     C = pi * d
     given = rad if mode == "radius" else d
     name = nm(r)
-    stem = f"The figure shows {name}'s circular plate with a {mode} of {num(given)} cm. Find its circumference. Take π = {ps}."
+    stem = f"The figure shows {name}'s circular plate with {a_an(mode)} {mode} of {num(given)} cm. Find its circumference. Take π = {ps}."
     return build(circle_circumference, stem, C, [
         (pi * rad * rad, "found_area_instead", "Used the area formula."),
         (pi * d * 2 if mode == "diameter" else pi * rad, "used_wrong_length_in_formula",
@@ -1847,7 +1847,7 @@ def circle_area(r):
     given = rad if mode == "radius" else 2 * rad
     A = pi * rad * rad
     name = nm(r)
-    stem = f"The figure shows {name}'s circular rug with a {mode} of {num(given)} cm. Find its area. Take π = {ps}."
+    stem = f"The figure shows {name}'s circular rug with {a_an(mode)} {mode} of {num(given)} cm. Find its area. Take π = {ps}."
     return build(circle_area, stem, A, [
         (2 * pi * rad, "found_circumference_instead", "Used the circumference formula."),
         (pi * 2 * rad * 2 * rad if mode == "diameter" else pi * rad, "used_diameter_as_radius" if mode == "diameter" else "forgot_to_square",
@@ -2441,7 +2441,7 @@ def loops_around(r):
     C = pi * d
     ln = k * C
     obj = r.choice(["tin", "pipe", "drum", "round cake tin"])
-    stem = (f"{name} winds a string {k} times exactly around a {obj} of diameter {d} cm, with no overlap and no spare string. "
+    stem = (f"{name} winds a string {k} times exactly around {a_an(obj)} {obj} of diameter {d} cm, with no overlap and no spare string. "
             f"How long is the string, in cm? Take π = 3.14.")
     return build(loops_around, stem, ln, [
         (k * pi * F(d, 2), "used_the_radius", "Used the radius instead of the diameter."),
@@ -2635,7 +2635,7 @@ def iso_which_cuboid(r):
             f"Which drawing shows {name}'s cuboid?")
     return build(iso_which_cuboid, stem, pos + 1, wrong,
                  [f"The cuboid has {a} x {b} cubes in each layer and {h} layers.", f"Its volume is {vol} cubes.",
-                  f"Only drawing {'ABCD'[pos]} has a {a} by {b} base and {h} layers."],
+                  f"Only drawing {'ABCD'[pos]} has {a_an(a)} {a} by {b} base and {h} layers."],
                  {"a": a, "b": b, "h": h, "opts": [list(d) for d in allv]}, lambda v: "ABCD"[int(v) - 1], whole=True,
                  auto_slips=False, figure=panels(figs, "ABCD", cols=2, title="Four isometric drawings"))
 

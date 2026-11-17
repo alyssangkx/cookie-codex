@@ -116,7 +116,7 @@ def ratio_with_units(r):
     mins = r.choice([15, 20, 25, 30, 35, 40, 45, 50])
     hrs = r.randint(1, 4)
     a, b = simplify(mins, hrs * 60)
-    stem = f"Find the ratio of {mins} minutes to {hrs} hours. Give your answer in its simplest form."
+    stem = f"Find the ratio of {plural(mins, 'minute')} to {plural(hrs, 'hour')}. Give your answer in its simplest form."
     return build(ratio_with_units, stem, rcode(a, b), [
         (ropt(*simplify(mins, hrs)), "forgot_to_convert_units", f"Compared {mins} with {hrs} without changing hours to minutes."),
         (ropt(b, a), "reversed_order", "Wrote the terms in the wrong order."),
@@ -219,9 +219,9 @@ def part_to_total(r):
     return build(part_to_total, stem, total, [
         (girls * (a + b), "did_not_find_one_unit", f"Multiplied {girls} by {a + b} without finding 1 unit."),
         (a * m, "gave_number_of_boys", "Gave the number of boys."),
-        (F(girls * (a + b), a), "used_wrong_part", f"Took {girls} as {a} units."),
+        (F(girls * (a + b), a), "used_wrong_part", f"Took {girls} as {plural(a, 'unit')}."),
         (girls + a, "added_ratio_term", f"Added {a} to {girls}."),
-    ], [f"{b} units → {girls}", f"1 unit = {girls} ÷ {b} = {m}", f"Total = {a + b} × {m} = {total}"],
+    ], [f"{plural(b, 'unit')} → {girls}", f"1 unit = {girls} ÷ {b} = {m}", f"Total = {a + b} × {m} = {total}"],
         {"a": a, "b": b, "girls": girls}, unit("children"), unit_size=m, whole=True)
 
 
@@ -279,9 +279,9 @@ def transfer_total_unchanged(r):
         (A0 + B0, "gave_total", "Gave the total number of cards."),
         (F(x * a, a - c) if a > c else None, "compared_terms_without_matching_totals",
          "Compared the ratios without making the totals the same."),
-    ], [f"The total does not change. Make the totals equal: {a + b} and {c + d} → {L} units",
+    ], [f"The total does not change. Make the totals equal: {a + b} and {c + d} → {plural(L, 'unit')}",
         f"Before {a * k1} : {b * k1}, after {c * k2} : {d * k2}",
-        f"{p_} lost {dx} units → {x} cards, so 1 unit = {u}", f"{p_} at first = {a * k1} × {u} = {A0}"],
+        f"{p_} lost {plural(dx, 'unit')} → {x} cards, so 1 unit = {u}", f"{p_} at first = {a * k1} × {u} = {A0}"],
         {"a": a, "b": b, "c": c, "d": d, "x": x}, unit("cards"), unit_size=u, whole=True)
 
 
@@ -317,9 +317,9 @@ def one_quantity_unchanged(r):
         (L * u, "gave_blue_only", "Gave the blue balloons only."),
         (F(x * (a + b), c - a) if c > a else None, "compared_terms_without_matching_blue",
          "Compared the ratios without keeping the blue balloons the same."),
-    ], [f"Blue does not change. Make blue the same: {b} and {d} → {L} units",
+    ], [f"Blue does not change. Make blue the same: {b} and {d} → {plural(L, 'unit')}",
         f"Before {A_units} : {L}, after {A2_units} : {L}",
-        f"Red increased by {A2_units - A_units} units → {x}, so 1 unit = {u}",
+        f"Red increased by {plural(A2_units - A_units, 'unit')} → {x}, so 1 unit = {u}",
         f"At first = ({A_units} + {L}) × {u} = {total0}"],
         {"a": a, "b": b, "c": c, "d": d, "x": x}, unit("balloons"), unit_size=u, whole=True)
 
@@ -391,7 +391,7 @@ def fraction_to_ratio(r):
         (ropt(*simplify(a, abs(b - a))) if b != a else None, "subtracted_instead_of_added",
          f"Used {b} − {a} for the total."),
         (ropt(a + b, a), "reversed_order", "Wrote the ratio backwards."),
-    ], [f"Boys : girls = {a} : {b}", f"Total = {a} + {b} = {a + b} units", f"Boys : total = {a} : {a + b}"],
+    ], [f"Boys : girls = {a} : {b}", f"Total = {a} + {b} = {plural(a + b, 'unit')}", f"Boys : total = {a} : {a + b}"],
         {"a": a, "b": b}, lambda c: ratio_text(a, a + b))
 
 
@@ -419,7 +419,7 @@ def multiple_and_ratio(r):
         (A * u, "gave_first_person", f"Gave {x}'s share."),
         (B * u, "gave_second_person", f"Gave {y}'s share."),
         (F(total, A + B + C), "found_one_unit_only", "Found 1 unit only."),
-    ], [f"{y} : {z} = {p_} : {q_}, so {x} = {k} × {p_} = {k * p_} units",
+    ], [f"{y} : {z} = {p_} : {q_}, so {x} = {k} × {p_} = {plural(k * p_, 'unit')}",
         f"{x} : {y} : {z} = {ratio_text(A, B, C)}", f"1 unit = ${total} ÷ {A + B + C} = ${u}",
         f"{z} = {C} × ${u} = ${C * u}"], {"k": k, "p": p_, "q": q_, "total": total}, money,
         unit_size=u, whole=True)
@@ -449,10 +449,10 @@ def give_fraction_new_ratio(r):
         (ropt(*simplify(a * (q_ - p_), b * q_)), "forgot_to_add_to_other_person", f"Took the stickers from {x} but did not add them to {y}."),
         (ropt(*simplify(*naive)) if naive[0] > 0 else None, "took_fraction_of_total", f"Took {p_}/{q_} of all the stickers."),
         (ropt(*simplify(a - p_, b + p_)) if a > p_ and (a - p_, b + p_) != (A1, B1) else None,
-         "moved_numerator_as_units", f"Moved {p_} units instead of {p_}/{q_} of {x}'s share."),
+         "moved_numerator_as_units", f"Moved {plural(p_, 'unit')} instead of {p_}/{q_} of {x}'s share."),
         (ropt(B1, A1), "reversed_order", "Wrote the ratio backwards."),
-    ], [f"Let {x} = {a * q_} units and {y} = {b * q_} units (multiply by {q_})",
-        f"{x} gives {p_}/{q_} × {a * q_} = {a * p_} units", f"New: {a * q_ - a * p_} : {b * q_ + a * p_} = {ratio_text(A1, B1)}"],
+    ], [f"Let {x} = {plural(a * q_, 'unit')} and {y} = {plural(b * q_, 'unit')} (multiply by {q_})",
+        f"{x} gives {p_}/{q_} × {a * q_} = {plural(a * p_, 'unit')}", f"New: {a * q_ - a * p_} : {b * q_ + a * p_} = {ratio_text(A1, B1)}"],
         {"a": a, "b": b, "p": p_, "q": q_}, lambda c: ratio_text(A1, B1))
 
 
@@ -479,7 +479,7 @@ def square_sides_area(r):
         (small, "gave_smaller_square", "Gave the area of the smaller square."),
         (big + small, "gave_total_area", "Gave the total area."),
         (F(D, b * b - a * a) * b, "forgot_to_square_units", "Found 1 unit but multiplied by the side ratio term."),
-    ], [f"Areas are in the ratio {a}² : {b}² = {a * a} : {b * b}", f"Difference = {b * b - a * a} units → {D} cm²",
+    ], [f"Areas are in the ratio {a}² : {b}² = {a * a} : {b * b}", f"Difference = {plural(b * b - a * a, 'unit')} → {D} cm²",
         f"1 unit = {u} cm²", f"Bigger square = {b * b} × {u} = {big} cm²"], {"a": a, "b": b, "D": D},
         unit("cm²"), unit_size=u, whole=True)
 
@@ -555,7 +555,7 @@ def three_way_share_remainder(r):
         (F(rest * (f_d + f_n), f_d), "added_fraction_of_the_rest", f"Added {f_n}/{f_d} of the shared money instead of working back."),
         (F(c * u * (a + b + c), a) * F(f_d, f_d - f_n), "used_wrong_share", f"Took ${c * u} as {x}'s share."),
         (total + u, "miscounted_units", "Counted one unit too many."),
-    ], [f"{c} units → ${c * u}, so 1 unit = ${u}", f"Money shared = {a + b + c} × ${u} = ${rest}",
+    ], [f"{plural(c, 'unit')} → ${c * u}, so 1 unit = ${u}", f"Money shared = {a + b + c} × ${u} = ${rest}",
         f"Money shared = {f_d - f_n}/{f_d} of the money", f"At first = ${rest} ÷ {f_d - f_n} × {f_d} = ${total}"],
         {"fn": f_n, "fd": f_d, "a": a, "b": b, "c": c, "C": c * u}, money, whole=True)
 
@@ -698,10 +698,10 @@ def units_three_people_total(r):
     ans = b * m
     return build(units_three_people_total, stem, ans, [
         (m, "found_one_unit_only", f"Found 1 unit ({T_} ÷ {a + c} = {m}) but did not multiply by {b}."),
-        (F(b * T_, a + b + c), "used_all_the_units", f"Divided {T_} by all {a + b + c} units instead of {a + c}."),
+        (F(b * T_, a + b + c), "used_all_the_units", f"Divided {T_} by all {plural(a + b + c, 'unit')} instead of {a + c}."),
         (F(T_ * b, a) if (T_ * b) % a == 0 else None, "compared_with_one_person_only", f"Treated {T_} as {n1}'s amount only."),
         (T_ - ans if T_ - ans != ans else None, "subtracted_from_the_total", f"Subtracted {n2}'s share from {T_}."),
-    ], [f"{n1} and {n3}: {a} + {c} = {a + c} units", f"1 unit = {T_} ÷ {a + c} = {m}", f"{n2}: {b} × {m} = {ans}"],
+    ], [f"{n1} and {n3}: {a} + {c} = {plural(a + c, 'unit')}", f"1 unit = {T_} ÷ {a + c} = {m}", f"{n2}: {b} × {m} = {ans}"],
         {"a": a, "b": b, "c": c, "T": T_}, unit_size=m, whole=True, figure=fig)
 
 
@@ -729,7 +729,7 @@ def units_difference_total(r):
     ans = (a + b + c) * m
     return build(units_difference_total, stem, ans, [
         (D, "gave_the_difference", f"Gave the {D} difference, not the total."),
-        (D * (a + b + c), "multiplied_by_total_units", f"Multiplied the difference {D} by all {a + b + c} units."),
+        (D * (a + b + c), "multiplied_by_total_units", f"Multiplied the difference {D} by all {plural(a + b + c, 'unit')}."),
         ((b + c) * m, "left_out_a_person", f"Left out {n1}'s {item}."),
         (m * (b - a + c), "used_the_wrong_units", "Added the difference in units to the third person's units only."),
     ], [f"{n2} has {b} − {a} = {plural(b - a, 'more unit')}, so {plural(b - a, 'unit')} = {D}", f"1 unit = {D} ÷ {b - a} = {m}",

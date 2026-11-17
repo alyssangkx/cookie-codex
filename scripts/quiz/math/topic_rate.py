@@ -20,12 +20,12 @@ def slip(v, d):
 
 # ---------------------------------------------------------------- basic
 
-FLOWS = [("A tap fills {tot} litres of water in {t} minutes", "litres per minute", "litres"),
-         ("A machine packs {tot} boxes in {t} minutes", "boxes per minute", "boxes"),
-         ("A printer prints {tot} pages in {t} minutes", "pages per minute", "pages"),
-         ("A baker makes {tot} buns in {t} hours", "buns per hour", "buns"),
-         ("A factory makes {tot} toys in {t} hours", "toys per hour", "toys"),
-         ("A pump removes {tot} litres of water in {t} minutes", "litres per minute", "litres")]
+FLOWS = [(lambda tot, t: f"A tap fills {plural(tot, 'litre')} of water in {plural(t, 'minute')}", "litres per minute", "litres"),
+         (lambda tot, t: f"A machine packs {plural(tot, 'box', 'boxes')} in {plural(t, 'minute')}", "boxes per minute", "boxes"),
+         (lambda tot, t: f"A printer prints {plural(tot, 'page')} in {plural(t, 'minute')}", "pages per minute", "pages"),
+         (lambda tot, t: f"A baker makes {plural(tot, 'bun')} in {plural(t, 'hour')}", "buns per hour", "buns"),
+         (lambda tot, t: f"A factory makes {plural(tot, 'toy')} in {plural(t, 'hour')}", "toys per hour", "toys"),
+         (lambda tot, t: f"A pump removes {plural(tot, 'litre')} of water in {plural(t, 'minute')}", "litres per minute", "litres")]
 
 
 @template(T, "basic", PER)
@@ -34,7 +34,7 @@ def rate_per_unit(r):
     t = r.randint(3, 15)
     tot = rate * t
     stem0, unit_, _ = r.choice(FLOWS)
-    stem = f"{stem0.format(tot=tot, t=t)}. How many {unit_} is that?"
+    stem = f"{stem0(tot, t)}. How many {unit_} is that?"
     return build(rate_per_unit, stem, rate, [
         (tot * t, "multiplied_instead_of_divided", f"Multiplied {tot} by {t}."),
         (F(t, tot) if False else tot - t, "subtracted", f"Subtracted {t} from {tot}."),
@@ -80,8 +80,8 @@ def time_from_rate(r):
     t = r.randint(4, 24)
     tot = rate * t
     ctx = r.choice([
-        (f"A tap flows at {rate} litres per minute. How many minutes does it take to fill a pail that holds {tot} litres?", "min"),
-        (f"A printer prints {rate} pages per minute. How many minutes does it take to print {tot} pages?", "min"),
+        (f"A tap flows at {plural(rate, 'litre')} per minute. How many minutes does it take to fill a pail that holds {plural(tot, 'litre')}?", "min"),
+        (f"A printer prints {plural(rate, 'page')} per minute. How many minutes does it take to print {plural(tot, 'page')}?", "min"),
         (f"A worker packs {rate} boxes per hour. How many hours does it take to pack {tot} boxes?", "h"),
     ])
     return build(time_from_rate, ctx[0], t, [
@@ -131,7 +131,7 @@ def pay_from_rate(r):
     h = r.randint(3, 12)
     n = r.choice(NAMES)
     ans = rate * h
-    stem = f"{n} earns ${rate} per hour at a part-time job. How much does {n} earn in {h} hours?"
+    stem = f"{n} earns ${rate} per hour at a part-time job. How much does {n} earn in {plural(h, 'hour')}?"
     return build(pay_from_rate, stem, ans, [
         (F(rate, h) if False else rate + h, "added", f"Added {rate} and {h}."),
         (F(ans, 2) if ans % 2 == 0 else rate * (h - 1), "halved_or_missed_an_hour", "Made a slip with the number of hours."),
@@ -160,7 +160,7 @@ def tank_litres_time(r):
         return None
     t = L // rate
     thing = r.choice(["rectangular fish tank", "water tank", "rectangular container"])
-    stem = (f"An empty {thing} is {a} cm long, {b} cm wide and {c} cm high. A tap fills it at {rate} litres per minute. "
+    stem = (f"An empty {thing} is {a} cm long, {b} cm wide and {c} cm high. A tap fills it at {plural(rate, 'litre')} per minute. "
             f"How many minutes does it take to fill the {thing} completely? (1 litre = 1000 cm³)")
     return build(tank_litres_time, stem, t, [
         (F(vol, rate), "forgot_to_convert_to_litres", "Used the volume in cm³ without changing it to litres."),
@@ -169,7 +169,7 @@ def tank_litres_time(r):
         (t + 1, "careless_slip", "Made a slip in the calculation."),
         (t - 1, "careless_slip", "Made a slip in the calculation."),
         (t * 2, "doubled", "Made a slip with the capacity."),
-    ], [f"Volume = {a} × {b} × {c} = {vol} cm³ = {L} litres", f"Time = {L} ÷ {rate} = {t} minutes"],
+    ], [f"Volume = {a} × {b} × {c} = {vol} cm³ = {plural(L, 'litre')}", f"Time = {L} ÷ {rate} = {plural(t, 'minute')}"],
         {"a": a, "b": b, "c": c, "rate": rate}, unit("minutes"), whole=True, auto_slips=False)
 
 
@@ -192,7 +192,7 @@ def rate_compare_difference(r):
     A, B = ra * ta, rb * tb
     x, y = two_names(r)
     thing = r.choice([("words", "typed"), ("sums", "solved"), ("bookmarks", "made")])
-    stem = (f"{x} {thing[1]} {A} {thing[0]} in {ta} minutes. {y} {thing[1]} {B} {thing[0]} in {tb} minutes. "
+    stem = (f"{x} {thing[1]} {A} {thing[0]} in {plural(ta, 'minute')}. {y} {thing[1]} {B} {thing[0]} in {plural(tb, 'minute')}. "
             f"How many more {thing[0]} per minute did the faster person manage than the other person?")
     ans = abs(ra - rb)
     return build(rate_compare_difference, stem, ans, [
@@ -218,8 +218,8 @@ def combined_taps_time(r):
     ra, rb = r.sample(range(3, 30), 2)
     t = r.randint(4, 20)
     V = (ra + rb) * t
-    stem = (f"Tap A fills a tub at {ra} litres per minute and Tap B fills it at {rb} litres per minute. "
-            f"How many minutes do the two taps take to fill an empty tub of {V} litres when both are turned on together?")
+    stem = (f"Tap A fills a tub at {plural(ra, 'litre')} per minute and Tap B fills it at {plural(rb, 'litre')} per minute. "
+            f"How many minutes do the two taps take to fill an empty tub of {plural(V, 'litre')} when both are turned on together?")
     return build(combined_taps_time, stem, t, [
         (F(V, ra) if V % ra == 0 else None, "used_one_tap_only", "Used Tap A only."),
         (F(V, abs(ra - rb)) if V % abs(ra - rb) == 0 else None, "subtracted_the_rates", "Subtracted the rates."),
@@ -227,7 +227,7 @@ def combined_taps_time(r):
         (t + 1, "careless_slip", "Made a slip in the calculation."),
         (t - 1, "careless_slip", "Made a slip in the calculation."),
         (t + 2, "careless_slip", "Made a slip in the calculation."),
-    ], [f"Together: {ra} + {rb} = {ra + rb} litres per minute", f"Time = {V} ÷ {ra + rb} = {t} minutes"],
+    ], [f"Together: {ra} + {rb} = {plural(ra + rb, 'litre')} per minute", f"Time = {V} ÷ {ra + rb} = {plural(t, 'minute')}"],
         {"ra": ra, "rb": rb, "V": V}, unit("minutes"), whole=True, auto_slips=False)
 
 
@@ -251,8 +251,8 @@ def printing_cost(r):
     if mins is None:
         return None
     n = r.choice(NAMES)
-    stem = (f"{n}'s printer prints {rate} pages per minute. A pack of {pages} sheets of paper costs ${cost}. "
-            f"How much does the paper cost to print for {mins} minutes (assume one page per sheet)?")
+    stem = (f"{n}'s printer prints {plural(rate, 'page')} per minute. A pack of {pages} sheets of paper costs ${cost}. "
+            f"How much does the paper cost to print for {plural(mins, 'minute')} (assume one page per sheet)?")
     ans = reams * cost
     return build(printing_cost, stem, ans, [
         (P * cost, "multiplied_pages_by_price", "Multiplied the number of pages by the price of a pack."),
@@ -282,7 +282,7 @@ def rate_unit_change(r):
     thing = r.choice([("A leaking tap loses", "litres of water"), ("A machine uses", "litres of oil"),
                       ("A fountain sprays", "litres of water")])
     ps = f"{float(per_min):g}"
-    stem = f"{thing[0]} {ps} litres per minute. How many {thing[1]} is that in {h} hours?"
+    stem = f"{thing[0]} {plural(ps, 'litre')} per minute. How many {thing[1]} is that in {plural(h, 'hour')}?"
     return build(rate_unit_change, stem, ans, [
         (per_min * h, "forgot_to_change_hours_to_minutes", "Used the number of hours as minutes."),
         (F(per_min) * 100 * h, "used_100_minutes_in_an_hour", "Used 100 minutes in an hour."),
@@ -290,8 +290,8 @@ def rate_unit_change(r):
         (ans + 10, "careless_slip", "Made a slip in the calculation."),
         (ans - 10, "careless_slip", "Made a slip in the calculation."),
         (F(per_min) * 60 * (h + 1), "extra_hour", "Counted one hour too many."),
-    ], [f"{h} hours = {h * 60} minutes", f"{ps} × {h * 60} = {float(ans):g} litres"],
-        {"p2": int(per_min * 4), "h": h}, lambda x: f"{float(x):g} litres", auto_slips=False)
+    ], [f"{plural(h, 'hour')} = {plural(h * 60, 'minute')}", f"{ps} × {h * 60} = {float(ans):g} litres"],
+        {"p2": int(per_min * 4), "h": h}, lambda x: f"{float(x):g} {noun(F(x).limit_denominator(), 'litre')}", auto_slips=False)
 
 
 @checker(rate_unit_change)
@@ -308,8 +308,8 @@ def time_to_fill_rest(r):
     if s < 10:
         return None
     thing = r.choice(["pool", "water tank", "drum"])
-    stem = (f"A {thing} holds {C} litres when full. It now has {s} litres of water. "
-            f"A tap fills it at {rate} litres per minute. How many more minutes will it take to fill the {thing}?")
+    stem = (f"{a_an(thing).capitalize()} {thing} holds {plural(C, 'litre')} when full. It now has {plural(s, 'litre')} of water. "
+            f"A tap fills it at {plural(rate, 'litre')} per minute. How many more minutes will it take to fill the {thing}?")
     return build(time_to_fill_rest, stem, t, [
         (F(C, rate) if C % rate == 0 else None, "forgot_water_already_in", "Ignored the water already in the container."),
         (F(s, rate) if s % rate == 0 else None, "used_the_water_already_in", "Divided the water already there by the rate."),
@@ -317,7 +317,7 @@ def time_to_fill_rest(r):
         (t - 1, "careless_slip", "Made a slip in the calculation."),
         (F(C + s, rate) if (C + s) % rate == 0 else None, "added_instead_of_subtracted", "Added the water already in."),
         (t + 2, "careless_slip", "Made a slip in the calculation."),
-    ], [f"Water needed = {C} − {s} = {C - s} litres", f"Time = {C - s} ÷ {rate} = {t} minutes"],
+    ], [f"Water needed = {C} − {s} = {plural(C - s, 'litre')}", f"Time = {C - s} ÷ {rate} = {plural(t, 'minute')}"],
         {"C": C, "s": s, "rate": rate}, unit("minutes"), whole=True, auto_slips=False)
 
 
@@ -349,8 +349,8 @@ def tank_fill_drain(r):
     V = start + (fill - drain) * t
     if V > L:
         return None
-    stem = (f"A tank {a} cm by {b} cm by {c} cm was {fr[0]}/{fr[1]} full of water. A tap running at {fill} litres per minute "
-            f"filled it while a drain emptied it at the same time. After {t} minutes there were {int(V)} litres of water in the tank. "
+    stem = (f"A tank {a} cm by {b} cm by {c} cm was {fr[0]}/{fr[1]} full of water. A tap running at {plural(fill, 'litre')} per minute "
+            f"filled it while a drain emptied it at the same time. After {plural(t, 'minute')} there were {plural(int(V), 'litre')} of water in the tank. "
             f"What was the rate of the drain in litres per minute? (1 litre = 1000 cm³)")
     net = (V - start) / t
     return build(tank_fill_drain, stem, drain, [
@@ -360,9 +360,9 @@ def tank_fill_drain(r):
         (drain + 1, "careless_slip", "Made a slip in the calculation."),
         (drain + 2, "careless_slip", "Made a slip in the calculation."),
         (F(V, t) if V % t == 0 else None, "forgot_the_starting_volume", "Forgot the water already in the tank."),
-    ], [f"Capacity = {a} × {b} × {c} ÷ 1000 = {L} litres", f"Water at first = {fr[0]}/{fr[1]} × {L} = {int(start)} litres",
-        f"Net gain = {int(V)} − {int(start)} = {int(V - start)} litres in {t} min = {net} litres per minute",
-        f"Drain = {fill} − {net} = {drain} litres per minute"],
+    ], [f"Capacity = {a} × {b} × {c} ÷ 1000 = {plural(L, 'litre')}", f"Water at first = {fr[0]}/{fr[1]} × {L} = {plural(int(start), 'litre')}",
+        f"Net gain = {int(V)} − {int(start)} = {plural(int(V - start), 'litre')} in {t} min = {plural(net, 'litre')} per minute",
+        f"Drain = {fill} − {net} = {plural(drain, 'litre')} per minute"],
         {"a": a, "b": b, "c": c, "fr": list(fr), "fill": fill, "t": t, "V": int(V)}, unit("litres per minute"),
         whole=True, auto_slips=False)
 
@@ -405,10 +405,10 @@ def two_machines(r):
     tail = ("how many litres of water does the tank hold?" if ask == "size" else "how many minutes do they take to fill the tank?") \
         if what == "tank" else ("how many items are in the job?" if ask == "size" else "how many minutes do they take together?")
     verb = "fills a tank" if what == "tank" else "completes a job"
-    stem = (f"{name1} {verb} in {tA} minutes and {name2} {'fills the same tank' if what == 'tank' else 'completes the same job'} in {tB} minutes. "
+    stem = (f"{name1} {verb} in {plural(tA, 'minute')} and {name2} {'fills the same tank' if what == 'tank' else 'completes the same job'} in {plural(tB, 'minute')}. "
             f"{name1} works {D} {'litres' if what == 'tank' else 'items'} per minute faster than {name2}. "
             f"If both work together, {tail}" if ask == "time" else
-            f"{name1} {verb} in {tA} minutes and {name2} {'fills the same tank' if what == 'tank' else 'completes the same job'} in {tB} minutes. "
+            f"{name1} {verb} in {plural(tA, 'minute')} and {name2} {'fills the same tank' if what == 'tank' else 'completes the same job'} in {plural(tB, 'minute')}. "
             f"{name1} works {D} {'litres' if what == 'tank' else 'items'} per minute faster than {name2}. {tail[0].upper() + tail[1:]}")
     if ask == "time":
         ans = int(together)
@@ -419,7 +419,7 @@ def two_machines(r):
                  (ans - 2, "careless_slip", "Made a slip in the calculation."),
                  (F(job, rb), "used_the_slower_machine_only", "Used the slower one only.")]
         steps = [f"Rates are in the ratio {tB} : {tA} = {u} : {v}", f"{u - v} unit(s) = {D}, so rate B = {rb} and rate A = {ra} per minute",
-                 f"Job = {ra} × {tA} = {job}", f"Time together = {job} ÷ {ra + rb} = {ans} minutes"]
+                 f"Job = {ra} × {tA} = {job}", f"Time together = {job} ÷ {ra + rb} = {plural(ans, 'minute')}"]
         sh = unit("minutes")
     else:
         ans = job
@@ -455,9 +455,9 @@ def relay_taps(r):
         return None
     t2 = V // 2 // (ra + rb)
     ans = t1 + t2
-    stem = (f"Tap A fills a tank at {ra} litres per minute. It runs alone until the tank is half full. "
-            f"Tap B, which fills at {rb} litres per minute, is then turned on as well. "
-            f"The tank holds {V} litres. How many minutes does it take to fill the tank from empty?")
+    stem = (f"Tap A fills a tank at {plural(ra, 'litre')} per minute. It runs alone until the tank is half full. "
+            f"Tap B, which fills at {plural(rb, 'litre')} per minute, is then turned on as well. "
+            f"The tank holds {plural(V, 'litre')}. How many minutes does it take to fill the tank from empty?")
     return build(relay_taps, stem, ans, [
         (F(V, ra + rb), "used_both_taps_all_the_time", "Used both taps from the start."),
         (F(V, ra) if V % ra == 0 else None, "used_tap_a_all_the_time", "Used Tap A for the whole job."),
@@ -465,8 +465,8 @@ def relay_taps(r):
         (ans + 2, "careless_slip", "Made a slip in the calculation."),
         (ans - 1, "careless_slip", "Made a slip in the calculation."),
         (t2 * 2 if t2 * 2 != ans else None, "doubled_the_second_stage", "Found the second stage and doubled it."),
-    ], [f"Half the tank = {V // 2} litres", f"Tap A alone: {V // 2} ÷ {ra} = {t1} minutes",
-        f"Both taps: {V // 2} ÷ {ra + rb} = {t2} minutes", f"Total = {t1} + {t2} = {ans} minutes"],
+    ], [f"Half the tank = {plural(V // 2, 'litre')}", f"Tap A alone: {V // 2} ÷ {ra} = {plural(t1, 'minute')}",
+        f"Both taps: {V // 2} ÷ {ra + rb} = {plural(t2, 'minute')}", f"Total = {t1} + {t2} = {plural(ans, 'minute')}"],
         {"ra": ra, "rb": rb, "V": V}, unit("minutes"), whole=True, auto_slips=False)
 
 
@@ -489,8 +489,8 @@ def leaking_tank(r):
     t = r.randint(5, 25)
     s = r.randint(5, 60)
     C = s + (F_ - leak) * t
-    stem = (f"A tank holds {C} litres when full and now has {s} litres. A tap fills it at {F_} litres per minute, "
-            f"but a crack in the tank lets out {leak} litres per minute. How many minutes will it take for the tank to be full?")
+    stem = (f"A tank holds {plural(C, 'litre')} when full and now has {plural(s, 'litre')}. A tap fills it at {plural(F_, 'litre')} per minute, "
+            f"but a crack in the tank lets out {plural(leak, 'litre')} per minute. How many minutes will it take for the tank to be full?")
     return build(leaking_tank, stem, t, [
         (F(C - s, F_) if (C - s) % F_ == 0 else None, "ignored_the_leak", "Ignored the leak."),
         (F(C - s, F_ + leak) if (C - s) % (F_ + leak) == 0 else None, "added_the_leak", "Added the leak to the tap's rate."),
@@ -498,8 +498,8 @@ def leaking_tank(r):
         (t + 1, "careless_slip", "Made a slip in the calculation."),
         (t - 1, "careless_slip", "Made a slip in the calculation."),
         (t + 3, "careless_slip", "Made a slip in the calculation."),
-    ], [f"Net rate = {F_} − {leak} = {F_ - leak} litres per minute", f"Water needed = {C} − {s} = {C - s} litres",
-        f"Time = {C - s} ÷ {F_ - leak} = {t} minutes"], {"C": C, "s": s, "F": F_, "leak": leak}, unit("minutes"),
+    ], [f"Net rate = {F_} − {leak} = {plural(F_ - leak, 'litre')} per minute", f"Water needed = {C} − {s} = {plural(C - s, 'litre')}",
+        f"Time = {C - s} ÷ {F_ - leak} = {plural(t, 'minute')}"], {"C": C, "s": s, "F": F_, "leak": leak}, unit("minutes"),
         whole=True, auto_slips=False)
 
 
@@ -524,16 +524,16 @@ def rate_ratio_share(r):
     ans = u * per * t2
     thing = r.choice(["pages", "leaflets", "cards"])
     x, y = two_names(r)
-    stem = (f"Machine A prints {u} pages for every {v} pages that Machine B prints. Together they print {T_} {thing} in {t} minutes. "
-            f"How many {thing} does Machine A print in {t2} minutes?")
+    stem = (f"Machine A prints {plural(u, 'page')} for every {plural(v, 'page')} that Machine B prints. Together they print {T_} {thing} in {plural(t, 'minute')}. "
+            f"How many {thing} does Machine A print in {plural(t2, 'minute')}?")
     return build(rate_ratio_share, stem, ans, [
         (v * per * t2, "used_machine_b", "Found Machine B's pages."),
-        (F(T_ * u, u + v) if (T_ * u) % (u + v) == 0 else None, "forgot_to_scale_the_time", f"Found A's share of the {t}-minute total, not {t2} minutes."),
+        (F(T_ * u, u + v) if (T_ * u) % (u + v) == 0 else None, "forgot_to_scale_the_time", f"Found A's share of the {t}-minute total, not {plural(t2, 'minute')}."),
         (F(T_ * t2, t) if (T_ * t2) % t == 0 else None, "gave_the_total_for_both", "Gave the pages printed by both machines."),
         (ans + per, "careless_slip", "Made a slip in the calculation."),
         (ans - per, "careless_slip", "Made a slip in the calculation."),
-    ], [f"Together: {T_} ÷ {t} = {T_ // t} per minute", f"{u + v} units = {T_ // t}, so 1 unit = {per} per minute",
-        f"Machine A: {u} × {per} = {u * per} per minute", f"In {t2} minutes: {u * per} × {t2} = {ans}"],
+    ], [f"Together: {T_} ÷ {t} = {T_ // t} per minute", f"{plural(u + v, 'unit')} = {T_ // t}, so 1 unit = {per} per minute",
+        f"Machine A: {u} × {per} = {u * per} per minute", f"In {plural(t2, 'minute')}: {u * per} × {t2} = {ans}"],
         {"u": u, "v": v, "T": T_, "t": t, "t2": t2}, unit(thing), whole=True, auto_slips=False)
 
 
@@ -551,8 +551,8 @@ def two_stage_rate(r):
     t1 = r.randint(3, 12)
     t2 = r.randint(3, 15)
     C = a * t1 + b * t2
-    stem = (f"A pump fills an empty tank at {a} litres per minute for the first {t1} minutes. It is then set to a faster rate "
-            f"of {b} litres per minute until the tank, which holds {C} litres, is full. "
+    stem = (f"A pump fills an empty tank at {plural(a, 'litre')} per minute for the first {plural(t1, 'minute')}. It is then set to a faster rate "
+            f"of {plural(b, 'litre')} per minute until the tank, which holds {plural(C, 'litre')}, is full. "
             f"How many minutes does it take to fill the tank altogether?")
     ans = t1 + t2
     return build(two_stage_rate, stem, ans, [
@@ -562,8 +562,8 @@ def two_stage_rate(r):
         (ans + 1, "careless_slip", "Made a slip in the calculation."),
         (ans - 1, "careless_slip", "Made a slip in the calculation."),
         (ans + 2, "careless_slip", "Made a slip in the calculation."),
-    ], [f"First stage: {a} × {t1} = {a * t1} litres", f"Left to fill = {C} − {a * t1} = {C - a * t1} litres",
-        f"Second stage: {C - a * t1} ÷ {b} = {t2} minutes", f"Total = {t1} + {t2} = {ans} minutes"],
+    ], [f"First stage: {a} × {t1} = {plural(a * t1, 'litre')}", f"Left to fill = {C} − {a * t1} = {plural(C - a * t1, 'litre')}",
+        f"Second stage: {C - a * t1} ÷ {b} = {plural(t2, 'minute')}", f"Total = {t1} + {t2} = {plural(ans, 'minute')}"],
         {"a": a, "b": b, "t1": t1, "C": C}, unit("minutes"), whole=True, auto_slips=False)
 
 

@@ -71,7 +71,7 @@ def ruler_length(r):
     end = start + ln
     if end > 15:
         return None
-    stem = f"{name} places a {obj} along a ruler as shown. What is the length of the {obj}?"
+    stem = f"{name} places {a_an(obj)} {obj} along a ruler as shown. What is the length of the {obj}?"
     return build(ruler_length, stem, ln, [
         (end, "read_only_the_right_end", "Read the right end of the object without subtracting the starting mark."),
         (ln + 1, "counted_marks_not_gaps", "Counted the marks instead of the centimetre gaps."),
@@ -309,7 +309,7 @@ def read_beaker(r):
         (level + minor, "misread_scale_by_one_division", "Counted one small division too many."),
         (level - minor, "misread_scale_by_one_division", "Counted one small division too few."),
         (below + major, "read_the_nearest_numbered_mark", "Read the numbered mark just above the level."),
-    ], [f"Each small division is {minor} ml.", f"The level is {(level - below) // minor} divisions above {below} ml.",
+    ], [f"Each small division is {minor} ml.", f"The level is {plural((level - below) // minor, 'division')} above {below} ml.",
         f"{below} + {level - below} = {level} ml"], {"level": level, "minor": minor},
         usd("ml"), whole=True, auto_slips=False, figure=beaker_svg(level, vmax, minor, major))
 
@@ -480,7 +480,7 @@ def share_equally(r):
     name = nm(r)
     stem = f"{name} has {a} {u1} {b} {u2} of {thing.split(' ')[0]}, " if False else \
         f"{name} shares {a} {u1} {b} {u2} equally among {n} {pcs[:-1] if pcs.endswith('s') else pcs}s. " if False else \
-        f"A total of {a} {u1} {b} {u2} is divided equally into {n} parts. How many {u2} are in each part?"
+        f"A total of {a} {u1} {b} {u2} is divided equally into {plural(n, 'part')}. How many {u2} are in each part?"
     return build(share_equally, stem, each, [
         (F(a * k, n) + b if (a * k) % n == 0 else None, "divided_only_the_big_unit", f"Divided only the {a} {u1} and added the {b} {u2}."),
         (T_ // (n + 1), "wrong_number_of_parts", f"Divided by {n + 1}."),
@@ -572,7 +572,7 @@ def fill_and_pour(r):
         return None
     left = C * 1000 - used
     name = nm(r)
-    stem = (f"{name} wants to fill a {C} l container with water. {name} pours in {cm} cups of {c} ml each and "
+    stem = (f"{name} wants to fill {a_an(C)} {C} l container with water. {name} pours in {cm} cups of {c} ml each and "
             f"{bn} bottle{'s' if bn > 1 else ''} of {b} ml each. How much more water, in ml, is needed to fill the container?")
     return build(fill_and_pour, stem, left, [
         (used, "gave_the_amount_poured", "Gave the amount already poured in."),
@@ -643,7 +643,7 @@ def tap_and_leak(r):
         (ans + 5, "slip_in_division", "Made a slip in the division."),
         (ans - 5, "slip_in_division", "Made a slip in the division."),
         (ans + 10, "slip_in_division", "Made a slip in the division."),
-    ], [f"Net rate = {a} - {b} = {a - b} l per minute", f"{cap} ÷ {a - b} = {ans} minutes"],
+    ], [f"Net rate = {a} - {b} = {a - b} l per minute", f"{cap} ÷ {a - b} = {plural(ans, 'minute')}"],
         {"cap": cap, "a": a, "b": b}, usd("minutes"), whole=True, auto_slips=False)
 
 
@@ -768,7 +768,7 @@ def read_clock_5(r):
         (h * 60 + (m + 5) % 60 or None, "misread_minute_mark", "Counted one mark too far on the minute hand."),
         (h * 60 + (m - 5) % 60, "misread_minute_mark", "Counted one mark too few on the minute hand."),
         ((hr(h - 1) or 12) * 60 + m, "read_wrong_hour", "Read the hour for the previous hour mark."),
-    ], [f"The short hand points near {h}, so the hour is {h}.", f"The long hand points to {m // 5}, so {m} minutes past.",
+    ], [f"The short hand points near {h}, so the hour is {h}.", f"The long hand points to {m // 5}, so {plural(m, 'minute')} past.",
         f"The time is {fmtclk(ans)}."], {"h": h, "m": m}, fmtclk, whole=True, auto_slips=False,
         figure=clock_svg(h, m))
 
@@ -791,7 +791,7 @@ def read_clock_minute(r):
         (h * 60 + m + 1, "misread_minute_mark", "Counted one minute mark too many."),
         (h * 60 + m - 1 if m > 1 else None, "misread_minute_mark", "Counted one minute mark too few."),
         (h * 60 + (m // 5 * 5), "read_nearest_five", "Read only the nearest numbered minute mark."),
-    ], [f"Hour: {h}.", f"Minutes: the long hand is {m} marks after the 12.", f"Time: {fmtclk(ans)}."],
+    ], [f"Hour: {h}.", f"Minutes: the long hand is {plural(m, 'mark')} after the 12.", f"Time: {fmtclk(ans)}."],
         {"h": h, "m": m}, fmtclk, whole=True, auto_slips=False, figure=clock_svg(h, m))
 
 
@@ -884,7 +884,7 @@ def clock_plus_duration(r):
         return None
     name = nm(r)
     act = r.choice(["started reading", "began homework", "started a swimming lesson", "started cooking dinner"])
-    stem = f"The clock shows the time when {name} {act}. The activity lasted {d} minutes. What time did it end?"
+    stem = f"The clock shows the time when {name} {act}. The activity lasted {plural(d, 'minute')}. What time did it end?"
     ans = clock_add(h, m, d)
     hr = lambda x: (x - 1) % 12 + 1
     return build(clock_plus_duration, stem, ans, [
@@ -893,7 +893,7 @@ def clock_plus_duration(r):
         (hr(h + 1) * 60 + (m + d) % 60 + 10 if False else hr(h + 2) * 60 + (m + d) % 60, "carried_too_many_hours", "Added one hour too many."),
         (ans + 5, "slip_in_addition", "Made a slip in the addition."),
         (ans - 10, "slip_in_addition", "Made a slip in the addition."),
-    ], [f"Start: {fmtclk(h * 60 + m)}", f"{m} + {d} = {m + d} minutes = 1 h {m + d - 60} min", f"Finish: {fmtclk(ans)}"],
+    ], [f"Start: {fmtclk(h * 60 + m)}", f"{m} + {d} = {plural(m + d, 'minute')} = 1 h {m + d - 60} min", f"Finish: {fmtclk(ans)}"],
         {"h": h, "m": m, "d": d}, fmtclk, whole=True, auto_slips=False, figure=clock_svg(h, m))
 
 
@@ -915,7 +915,7 @@ def time_after_simple(r):
     if m + d < 60 and r.random() < 0.8:
         return None
     thing = r.choice(["bus journey", "lesson", "film", "football match", "concert"])
-    stem = f"A {thing} starts at {fmt12(start)} and lasts {d} minutes. At what time does it end?"
+    stem = f"{a_an(thing).capitalize()} {thing} starts at {fmt12(start)} and lasts {plural(d, 'minute')}. At what time does it end?"
     return build(time_after_simple, stem, end, [
         (start + d % 60 + (d // 60) * 60 if False else (start - d), "subtracted_instead_of_added", "Subtracted the minutes."),
         (day(start + (d // 60) * 60 + (m + d % 60) % 60 - m + 0) if False else (end - (60 if m + d >= 60 else -60)), "carry_error", "Made an error with the hour carried over."),
@@ -1261,7 +1261,7 @@ def film_schedule(r):
         return None
     name = nm(r)
     stem = (f"{name} watches two films at the cinema. The first film starts at {fmt12(s)} and lasts {d1 // 60} h {d1 % 60} min. "
-            f"After a {gap}-minute break, the second film starts and lasts {d2 // 60} h {d2 % 60} min. At what time does the second film end?")
+            f"After {a_an(gap)} {gap}-minute break, the second film starts and lasts {d2 // 60} h {d2 % 60} min. At what time does the second film end?")
     return build(film_schedule, stem, e, [
         (day(e - gap), "left_out_the_break", "Left out the break between the films."),
         (day(e - d1), "left_out_a_film", "Left out the first film."),
@@ -1292,7 +1292,7 @@ def training_total(r):
         return None
     sh = cshow("h", "min")
     name = nm(r)
-    stem = f"{name} trains for {x} min a day on {y} days every week. How long does {name} train in {w} weeks, in hours and minutes?"
+    stem = f"{name} trains for {x} min a day on {y} days every week. How long does {name} train in {plural(w, 'week')}, in hours and minutes?"
     return build(training_total, stem, cc(q, rem), [
         (cc(T_ // 100, T_ % 100), "used_100_for_60", "Divided by 100 instead of 60."),
         (cc((x * y) // 60, (x * y) % 60), "forgot_the_weeks", "Worked out one week only."),

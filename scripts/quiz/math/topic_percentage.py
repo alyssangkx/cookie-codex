@@ -20,10 +20,20 @@ ITEM_PRICE = {"school bag": (25, 120), "jacket": (30, 150), "watch": (20, 300), 
               "backpack": (30, 150)}
 
 
+ITEM_PLURAL = {"school bag": "school bags", "jacket": "jackets", "watch": "watches", "pair of shoes": "pairs of shoes",
+               "bicycle": "bicycles", "calculator": "calculators", "tennis racket": "tennis rackets",
+               "set of headphones": "sets of headphones", "water bottle": "water bottles",
+               "reading lamp": "reading lamps", "keyboard": "keyboards", "board game": "board games",
+               "football": "footballs", "umbrella": "umbrellas", "backpack": "backpacks"}
+assert set(ITEM_PLURAL) == set(ITEMS) == set(ITEM_PRICE)
+
+
 def item_for(r, price):
     """An item that really sells for about this price in Singapore (no $500 water bottles)."""
     ok = [i for i in ITEMS if ITEM_PRICE[i][0] <= price <= ITEM_PRICE[i][1]]
-    return r.choice(ok or ["bicycle"])
+    if not ok:
+        raise ValueError(f"no item in ITEM_PRICE sells for ${price}")
+    return r.choice(ok)
 
 
 GROUPS = ["pupils", "stamps", "cookies", "stickers", "marbles", "books", "cards", "beads"]
@@ -98,7 +108,7 @@ def part_as_percent(r):
     ctx = r.choice([
         f"{n} answered {s} out of {t} questions correctly. What percentage of the questions did {n} answer correctly?",
         f"{s} of the {t} pupils in a class wear spectacles. What percentage of the class wears spectacles?",
-        f"A tank holds {t} litres. It has {s} litres of water. What percentage of the tank is full?",
+        f"A tank holds {plural(t, 'litre')}. It has {plural(s, 'litre')} of water. What percentage of the tank is full?",
         f"{n} saved ${s} of ${t}. What percentage of ${t} did {n} save?",
     ])
     return build(part_as_percent, ctx, ans, [
@@ -123,7 +133,7 @@ def discount_amount(r):
     d = r.choice([5, 10, 15, 20, 25, 30, 40, 50])
     item = item_for(r, price)
     ans = F(price * d, 100)
-    stem = f"A {item} usually costs ${price}. It is on sale at a discount of {d}%. How much is the discount, in dollars?"
+    stem = f"{a_an(item).capitalize()} {item} usually costs ${price}. It is on sale at a discount of {d}%. How much is the discount, in dollars?"
     return build(discount_amount, stem, ans, [
         (price - ans, "gave_the_sale_price", "Gave the selling price instead of the discount."),
         (d, "gave_the_percent", f"Gave {d} as the number of dollars."),
@@ -145,7 +155,7 @@ def gst_amount(r):
     price = 10 * r.randint(2, 40)
     item = item_for(r, price)
     ans = F(price * 9, 100)
-    stem = f"A {item} costs ${price} before GST. GST is 9%. How much is the GST on the {item}?"
+    stem = f"{a_an(item).capitalize()} {item} costs ${price} before GST. GST is 9%. How much is the GST on the {item}?"
     return build(gst_amount, stem, ans, [
         (price + ans, "added_gst_to_the_price", "Gave the price including GST instead of the GST."),
         (price - ans, "subtracted_instead_of_added", "Took the GST off the price."),
@@ -229,7 +239,7 @@ def sale_price(r):
     item = item_for(r, price)
     ans = F(price * (100 - d), 100)
     n = r.choice(NAMES)
-    stem = f"{n} bought a {item} with a {d}% discount. The usual price was ${price}. How much did {n} pay?"
+    stem = f"{n} bought {a_an(item)} {item} with {a_an(d)} {d}% discount. The usual price was ${price}. How much did {n} pay?"
     return build(sale_price, stem, ans, [
         (F(price * d, 100), "gave_the_discount", "Gave the discount instead of the price paid."),
         (price + F(price * d, 100), "added_instead_of_subtracted", "Added the discount to the usual price."),
@@ -253,7 +263,7 @@ def price_with_gst(r):
     item = item_for(r, price)
     ans = F(price * 109, 100)
     n = r.choice(NAMES)
-    stem = f"The price of a {item} is ${price} before GST. {n} pays 9% GST on it. How much does {n} pay altogether?"
+    stem = f"The price of {a_an(item)} {item} is ${price} before GST. {n} pays 9% GST on it. How much does {n} pay altogether?"
     return build(price_with_gst, stem, ans, [
         (F(price * 9, 100), "gave_gst_only", "Gave only the GST."),
         (price - F(price * 9, 100), "subtracted_instead_of_added", "Took 9% off instead of adding 9%."),
@@ -280,7 +290,7 @@ def discount_then_gst(r):
     if not cents(ans) or not cents(sale):
         return None
     item = item_for(r, price)
-    stem = (f"A {item} is marked ${price}. The shop gives a {d}% discount and then adds 9% GST on the discounted price. "
+    stem = (f"{a_an(item).capitalize()} {item} is marked ${price}. The shop gives {a_an(d)} {d}% discount and then adds 9% GST on the discounted price. "
             f"How much must the customer pay?")
     gst_first = F(price * 109, 100) * F(100 - d, 100)
     return build(discount_then_gst, stem, ans, [
@@ -353,7 +363,7 @@ def find_original_after_discount(r):
         return None
     item = item_for(r, orig)
     n = r.choice(NAMES)
-    stem = f"After a {d}% discount, {n} paid ${paid} for a {item}. What was the price of the {item} before the discount?"
+    stem = f"After {a_an(d)} {d}% discount, {n} paid ${paid} for {a_an(item)} {item}. What was the price of the {item} before the discount?"
     return build(find_original_after_discount, stem, orig, [
         (paid + F(paid * d, 100), "took_percent_of_the_given", f"Added {d}% of ${paid} to ${paid}: the {d}% is of the original price."),
         (paid + d, "added_percent_as_dollars", f"Added ${d} instead of finding the original."),
@@ -562,8 +572,8 @@ def reverse_items_affordable(r):
         return None
     item = item_for(r, orig)
     n = r.choice(NAMES)
-    stem = (f"During a sale, a {item} was sold at a {d}% discount for ${paid}. "
-            f"{n} has ${B}. How many of these {item}s can {n} buy at the usual price?")
+    stem = (f"During a sale, {a_an(item)} {item} was sold at {a_an(d)} {d}% discount for ${paid}. "
+            f"{n} has ${B}. How many of these {ITEM_PLURAL[item]} can {n} buy at the usual price?")
     return build(reverse_items_affordable, stem, k, [
         (int(B // paid), "used_the_sale_price", "Divided by the sale price, not the usual price."),
         (F(B, orig + 0) if B % orig == 0 and False else int(B // (paid + F(paid * d, 100))), "added_percent_of_given", f"Added {d}% of ${paid} to find the usual price."),
@@ -699,7 +709,7 @@ def reverse_gst(r):
     T_ = F(P * 109, 100)
     n = r.choice(NAMES)
     item = item_for(r, P)
-    stem = f"{n} paid {money(T_)} for a {item}. This amount included 9% GST. What was the price of the {item} before GST?"
+    stem = f"{n} paid {money(T_)} for {a_an(item)} {item}. This amount included 9% GST. What was the price of the {item} before GST?"
     return build(reverse_gst, stem, P, [
         (r2(T_ - T_ * F(9, 100)), "took_gst_off_the_total", "Took 9% off the total: the GST is 9% of the price before GST."),
         (T_ - 9, "subtracted_percent_as_dollars", "Subtracted $9 from the total."),

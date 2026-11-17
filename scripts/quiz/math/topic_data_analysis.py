@@ -75,7 +75,7 @@ def average_from_total(r):
     nm = r.choice(NAMES)
     ctx = r.choice([
         (f"The total mass of {n} bags of rice is {tot} kg. What is the average mass of a bag, in kg?", "kg"),
-        (f"{nm} scored a total of {tot} points in {n} games. What was the average number of points per game?", "points"),
+        (f"{nm} scored a total of {plural(tot, 'point')} in {n} games. What was the average number of points per game?", "points"),
         (f"{n} children saved ${tot} altogether. What is the average amount saved by a child, in dollars?", "dollars"),
         (f"A bakery sold {tot} cakes in {n} days. What was the average number of cakes sold per day?", "cakes"),
     ])
@@ -100,7 +100,7 @@ def total_from_average(r):
     nm = r.choice(NAMES)
     ctx = r.choice([
         f"The average mass of {n} boxes is {avg} kg. What is the total mass of the {n} boxes, in kg?",
-        f"{nm} read an average of {avg} pages a day for {n} days. How many pages did {nm} read altogether?",
+        f"{nm} read an average of {plural(avg, 'page')} a day for {n} days. How many pages did {nm} read altogether?",
         f"The average mark of {n} pupils in a quiz is {avg}. What is the total of their marks?",
         f"The average cost of {n} meals is ${avg}. How much do the {n} meals cost altogether, in dollars?",
     ])
@@ -127,7 +127,7 @@ def count_from_total_average(r):
     nm = r.choice(NAMES)
     ctx = r.choice([
         f"The total mass of some boxes is {tot} kg. The average mass of a box is {avg} kg. How many boxes are there?",
-        f"{nm} read {tot} pages in some days. {nm} read an average of {avg} pages a day. For how many days did {nm} read?",
+        f"{nm} read {plural(tot, 'page')} in some days. {nm} read an average of {plural(avg, 'page')} a day. For how many days did {nm} read?",
         f"A group of children saved ${tot} altogether. Each child saved ${avg} on average. How many children are in the group?",
     ])
     return build(count_from_total_average, ctx, n, [
@@ -235,7 +235,7 @@ def item_joins_or_leaves(r):
                  *slipn(ans, 1), *slipn(ans, 2)]
         steps = [f"Old total = {A} × {n} = {A * n}", f"New total = {A2} × {n - 1} = {A2 * (n - 1)}", f"Person who left = {A * n} − {A2 * (n - 1)} = {ans}"]
     return build(item_joins_or_leaves, stem, ans, wrong, steps, {"n": n, "A": A, "A2": A2, "join": join},
-                 lambda x: f"{frac(x)} {th[2][:-1] if th[2] == 'years' and x == 1 else th[2]}",
+                 lambda x: f"{frac(x)} {noun(x, th[2][:-1], th[2]) if th[2] == 'years' else th[2]}",
                  whole=True, auto_slips=False)
 
 
@@ -279,7 +279,7 @@ def two_classes_average(r):
     if ab == ag or nb == ng or F(nb * ab + ng * ag, nb + ng).denominator != 1:
         return None
     avg = (nb * ab + ng * ag) // (nb + ng)
-    stem = (f"In a class, {nb} boys scored an average of {ab} marks in a test and {ng} girls scored an average of {ag} marks. "
+    stem = (f"In a class, {nb} boys scored an average of {plural(ab, 'mark')} in a test and {ng} girls scored an average of {plural(ag, 'mark')}. "
             f"What was the average mark of the whole class?")
     return build(two_classes_average, stem, avg, [
         (F(ab + ag, 2) if (ab + ag) % 2 == 0 else None, "averaged_the_averages", "Found the average of the two averages."),

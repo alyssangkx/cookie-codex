@@ -480,7 +480,7 @@ def always_true_statement(r):
     if r.random() < 0.5:
         a, c = r.randint(2, 5), r.randint(3, 30)
         kind, p = "tank", {"a": a, "c": c}
-        stem = (f"Tank A holds {lin(a, 0, 'x')} litres of water and Tank B holds ({lin(1, c, 'x')}) litres, where x is a whole number "
+        stem = (f"Tank A holds {plural(lin(a, 0, 'x'), 'litre')} of water and Tank B holds ({lin(1, c, 'x')}) litres, where x is a whole number "
                 f"greater than 0. Which one of the following statements must be true?")
     else:
         b = r.randint(2, 5)

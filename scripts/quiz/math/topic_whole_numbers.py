@@ -1313,14 +1313,14 @@ def lcm_word(r):
     h, m = r.randint(6, 9), r.choice([0, 15, 30, 45])
     nm = r.choice(["bus A", "light A", "bell A"])
     L = lcm(a, b)
-    stem = (f"Bus A leaves a stop every {a} minutes and Bus B leaves every {b} minutes. They both leave together at {h}:{m:02d} a.m. "
+    stem = (f"Bus A leaves a stop every {plural(a, 'minute')} and Bus B leaves every {plural(b, 'minute')}. They both leave together at {h}:{m:02d} a.m. "
             f"After how many minutes will they next leave together?")
     return build(lcm_word, stem, L, [
         (a * b, "multiplied_the_numbers", "Multiplied the two times."),
         (gcd(a, b), "used_hcf", "Used the highest common factor."),
         (a + b, "added_times", "Added the two times."),
         (L + min(a, b), "slip", "Slip."), (L - min(a, b), "slip", "Slip.")],
-        [f"LCM of {a} and {b} is {L}."], {"a": a, "b": b}, whole=True, show=lambda x: f"{int(x)} minutes")
+        [f"LCM of {a} and {b} is {L}."], {"a": a, "b": b}, whole=True, show=lambda x: f"{plural(int(x), 'minute')}")
 
 
 @checker(lcm_word)
@@ -1408,7 +1408,7 @@ def flash_together(r):
         return None
     ans = secs // L
     stem = (f"Three lights flash every {a} seconds, {b} seconds and {c} seconds. They flash together at 8:00 p.m. "
-            f"How many times will they flash together in the next {mins} minutes, not counting the one at 8:00 p.m.?")
+            f"How many times will they flash together in the next {plural(mins, 'minute')}, not counting the one at 8:00 p.m.?")
     return build(flash_together, stem, ans, [
         (ans + 1, "counted_the_start", "Counted the flash at the start as well."),
         (secs // lcm(a, b), "used_two_lights_only", "Used only two of the lights."),
@@ -1541,7 +1541,7 @@ def form_with_condition(r):
     stem = (f"Use all the digits {', '.join(map(str, sorted(ds)))} once each to form the {'greatest' if big else 'smallest'} "
             f"4-digit {cond if cond != 'multiple of 5' else 'multiple of 5'} number. What is the number?")
     return build(form_with_condition, stem, ans, [
-        (other if other != ans else None, "ignored_the_condition", f"Formed the {'greatest' if big else 'smallest'} number but it is not a {cond} number."),
+        (other if other != ans else None, "ignored_the_condition", f"Formed the {'greatest' if big else 'smallest'} number but it is not {a_an(cond)} {cond} number."),
         (opposite if opposite != ans else None, "gave_the_opposite", f"Gave the {'smallest' if big else 'greatest'} number that works."),
         (int(str(ans)[:2] + str(ans)[3] + str(ans)[2]), "swapped_last_two_digits", "Swapped the last two digits."),
         (int(str(ans)[1] + str(ans)[0] + str(ans)[2:]), "swapped_first_two_digits", "Swapped the first two digits.")],
@@ -1602,7 +1602,7 @@ def age_problem(r):
         (F(d, k - 1), "forgot_the_years_passed", "Divided the age gap by one less than the multiple without allowing for the years."),
         (F(d, k), "divided_by_the_multiple", "Divided the age gap by the multiple."),
         (s + 1, "slip", "Off by 1."), (s - 1 if s > 1 else s + 2, "slip", "Off by 1.")],
-        [f"The age gap stays {d} years.", f"In {n} years: son = 1 unit, {a} = {k} units, so {k - 1} units = {d}", f"1 unit = {F(d, k - 1)}, so the son will be {s + n}; now he is {s + n} − {n} = {s}"],
+        [f"The age gap stays {d} years.", f"In {n} years: son = 1 unit, {a} = {plural(k, 'unit')}, so {plural(k - 1, 'unit')} = {d}", f"1 unit = {F(d, k - 1)}, so the son will be {s + n}; now he is {s + n} − {n} = {s}"],
         {"d": d, "n": n, "k": k}, whole=True, show=str)
 
 
@@ -1691,7 +1691,7 @@ def ga_count_one_shape(r):
     total = sum(cs)
     who = r.choice(NAMES)
     n = cs[kind]
-    stem = (f"{who} drew {total} shapes in a box: circles, squares and triangles, as shown. "
+    stem = (f"{who} drew {plural(total, 'shape')} in a box: circles, squares and triangles, as shown. "
             f"How many {nm[kind]} did {who} draw?")
     return build(ga_count_one_shape, stem, n, [
         (total, "counted_every_shape", "Counted all the shapes instead of only one kind."),
@@ -2558,8 +2558,8 @@ def ga_game_scores(r):
     ans = S - L + G
     if S - L < 5:
         return None
-    stem = (f"In a game, {who} scored {xs[0]}, {xs[1]}, {xs[2]} and {xs[3]} points in the first four rounds. "
-            f"{who} lost {L} points in the fifth round and won {G} points in the sixth round. What is {who}'s score after six rounds?")
+    stem = (f"In a game, {who} scored {xs[0]}, {xs[1]}, {xs[2]} and {plural(xs[3], 'point')} in the first four rounds. "
+            f"{who} lost {plural(L, 'point')} in the fifth round and won {plural(G, 'point')} in the sixth round. What is {who}'s score after six rounds?")
     return build(ga_game_scores, stem, ans, [
         (S + L + G, "added_the_lost_points", "Added the points lost."), (S - L - G, "subtracted_the_won_points", "Subtracted the points won."),
         (S + L - G if S + L - G > 0 else S + 2 * L, "mixed_up_gain_and_loss", "Swapped the gain and the loss."), *slip_set(ans, 10)],
@@ -3027,7 +3027,7 @@ def ga_two_pack_sizes(r):
         return None
     tot = a * s1 + b * s2
     who = r.choice(NAMES)
-    stem = f"{who} buys {a} packs of {s1} pens and {b} packs of {s2} pens. How many pens does {who} buy altogether?"
+    stem = f"{who} buys {a} packs of {plural(s1, 'pen')} and {b} packs of {plural(s2, 'pen')}. How many pens does {who} buy altogether?"
     return build(ga_two_pack_sizes, stem, tot, [
         (a * s2 + b * s1, "swapped_the_pack_sizes", "Matched the numbers of packs with the wrong pack sizes."),
         (a * s1, "left_out_the_second_kind", "Left out the second kind of pack."),

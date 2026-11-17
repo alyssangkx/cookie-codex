@@ -119,7 +119,7 @@ def step_vals(r, n, steps=STEPS, kmin=2, kmax=8):
 
 
 def lead(r, kind, intro):
-    return r.choice([f"The {kind} shows {intro}.", f"{r.choice(NAMES)} drew a {kind} to show {intro}.",
+    return r.choice([f"The {kind} shows {intro}.", f"{r.choice(NAMES)} drew {a_an(kind)} {kind} to show {intro}.",
                      f"Study the {kind} below. It shows {intro}."])
 
 
@@ -297,9 +297,9 @@ LINE = [
          meas="the number of visitors at the fair", intro="the number of visitors at a fair at each hour", pre="", suf="",
          steps=(20, 50), when=None),
     dict(title="Water in tank (litres) vs minutes", xs=[0, 5, 10, 15, 20, 25, 30], xlab=str,
-         at=lambda x: f"after {x} minutes", meas="the volume of water in the tank", intro="the volume of water in a tank over 30 minutes",
+         at=lambda x: f"after {plural(x, 'minute')}", meas="the volume of water in the tank", intro="the volume of water in a tank over 30 minutes",
          pre="", suf=" litres", steps=(10, 20),
-         when=lambda V: f"After how many minutes did the tank first hold {V} litres of water?"),
+         when=lambda V: f"After how many minutes did the tank first hold {plural(V, 'litre')} of water?"),
 ]
 RATE = [
     dict(title="Water in tank (litres) vs minutes", intro="the volume of water in a tank", flow="water flowed into the tank", up=True),
@@ -561,7 +561,7 @@ def line_rate(r):
     p = r.choice([q for q in range(3) if ds[q]])
     t1, t2 = MINS[2 * p], MINS[2 * p + 2]
     rate = abs(ds[p]) * step // 5
-    stem = (f"{lead(r, 'line graph', c['intro'])} Between {t1} and {t2} minutes, {c['flow']} at a steady rate. "
+    stem = (f"{lead(r, 'line graph', c['intro'])} Between {t1} and {plural(t2, 'minute')}, {c['flow']} at a steady rate. "
             "Find this rate in litres per minute.")
     chg = abs(ds[p]) * 2 * step
     wrong = [(chg, "forgot_to_divide_by_time", "Gave the change in volume and did not divide by the time."),
@@ -822,7 +822,7 @@ def line_extend(r):
     m = r.randint(2, 12)
     V = vals[-1] + R * m
     stem = (f"{lead(r, 'line graph', c['intro'])} After 30 minutes, {c['flow']} at the same rate as between 20 and 30 minutes. "
-            f"After how many more minutes will the volume reach {V} litres?")
+            f"After how many more minutes will the volume reach {plural(V, 'litre')}?")
     need = V - vals[-1]
     wrong = [(need, "forgot_to_divide_by_rate", "Gave the extra litres needed, not the time."),
              (V // R if V % R == 0 else None, "measured_from_zero", "Divided the target volume by the rate, as if starting from empty."),
@@ -831,7 +831,7 @@ def line_extend(r):
              (F(need, ds[2] * step), "used_change_per_interval", "Divided by the change over 5 minutes instead of the rate per minute.")]
     return build(line_extend, stem, m, wrong,
                  [f"Rate = {vals[-1] - vals[-3]} L / 10 min = {R} L per minute.", f"Still needed: {V} - {vals[-1]} = {need} L.",
-                  f"Time = {need} / {R} = {m} minutes"],
+                  f"Time = {need} / {R} = {plural(m, 'minute')}"],
                  {"v1": vals[-3], "v2": vals[-1], "V": V}, whole=True,
                  figure=line_graph([str(x) for x in MINS], vals, c["title"], step=step))
 

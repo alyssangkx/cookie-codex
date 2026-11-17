@@ -278,7 +278,7 @@ def how_many_cups(r):
         return None
     n = a * r.randint(2, 6)
     ans = F(n * b, a)
-    stem = f"A jug holds {n} litres of juice. How many cups of {a}/{b} litre can be filled completely?"
+    stem = f"A jug holds {plural(n, 'litre')} of juice. How many cups of {a}/{b} litre can be filled completely?"
     return build(how_many_cups, stem, ans, [
         (F(n * a, b), "multiplied_instead_of_dividing", f"Worked out {n} × {a}/{b}."),
         (F(n * b), "ignored_numerator", f"Multiplied by {b} but did not divide by {a}."),
@@ -415,7 +415,7 @@ def equal_fractions(r):
         (B, "gave_second_person_only", f"Gave {y}'s stickers only."),
     ], [f"Make the numerators the same: {p_}/{q_} of {x} = {r_}/{s_} of {y}",
         f"{x} : {y} = {r_ * q_} : {s_ * p_} = {u} : {v}",
-        f"{u - v} units → {D}, so 1 unit → {m}", f"Altogether = {u + v} × {m} = {A + B}"],
+        f"{plural(u - v, 'unit')} → {D}, so 1 unit → {m}", f"Altogether = {u + v} × {m} = {A + B}"],
         {"p": p_, "q": q_, "r": r_, "s": s_, "D": D}, unit("stickers"),
         unit_size=m, whole=True)
 
@@ -578,8 +578,8 @@ def constant_part_new_fraction(r):
         (red, "gave_red_beads", "Gave the number of red beads."),
         (T0 - red, "gave_blue_beads_at_first", "Gave the number of blue beads at first."),
     ], [f"The red beads do not change. Make red the same number of units: LCM of {a} and {c} is {lcm(a, c)}",
-        f"Before: red {lcm(a, c)} units of {lcm(a, c) * b // a}; after: red {lcm(a, c)} units of {lcm(a, c) * d // c}",
-        f"{lcm(a, c) * d // c - lcm(a, c) * b // a} units → {x}, so 1 unit = {red // lcm(a, c)}",
+        f"Before: red {plural(lcm(a, c), 'unit')} of {lcm(a, c) * b // a}; after: red {plural(lcm(a, c), 'unit')} of {lcm(a, c) * d // c}",
+        f"{plural(lcm(a, c) * d // c - lcm(a, c) * b // a, 'unit')} → {x}, so 1 unit = {red // lcm(a, c)}",
         f"At first = {lcm(a, c) * b // a} × {red // lcm(a, c)} = {T0}"],
         {"a": a, "b": b, "c": c, "d": d, "x": x}, unit("beads"), unit_size=red // lcm(a, c), whole=True)
 
@@ -616,7 +616,7 @@ def unequal_wholes_same_remainder(r):
          f"Took ${D} as {a}/{b} − {c}/{d} of the money."),
     ], [f"Left: {b - a}/{b} of {x}'s = {d - c}/{d} of {y}'s money",
         f"{x} : {y} = {frac(F(d - c, d))} : {frac(F(b - a, b))} = {A // gcd(A, B)} : {B // gcd(A, B)}",
-        f"Difference {A // gcd(A, B) - B // gcd(A, B)} units → ${D}, so 1 unit = ${gcd(A, B)}",
+        f"Difference {plural(A // gcd(A, B) - B // gcd(A, B), 'unit')} → ${D}, so 1 unit = ${gcd(A, B)}",
         f"Altogether = ({A // gcd(A, B)} + {B // gcd(A, B)}) × ${gcd(A, B)} = ${A + B}"],
         {"a": a, "b": b, "c": c, "d": d, "D": D}, money, unit_size=gcd(A, B), whole=True)
 
@@ -734,7 +734,7 @@ def improper_mixed(r):
         (F(w * d - rem, d), "subtracted_numerator", f"Worked out {w} × {d} − {rem}."),
         (F(w * rem + d, d) if F(w * rem + d, d) != val else None, "multiplied_wrong_numbers", f"Worked out {w} × {rem} + {d}."),
         (val + F(1, d), "careless_slip_in_numerator", "Careless slip working out the numerator."),
-    ], [f"{w} wholes = {w * d}/{d}", f"{w * d}/{d} + {rem}/{d} = {w * d + rem}/{d}"],
+    ], [f"{plural(w, 'whole')} = {w * d}/{d}", f"{w * d}/{d} + {rem}/{d} = {w * d + rem}/{d}"],
         {"w": w, "rem": rem, "d": d, "dir": "to_improper"}, show, auto_slips=False)
 
 
@@ -937,15 +937,15 @@ def mixed_add_context(r):
     p, q = r.randint(1, 5), r.randint(1, 5)
     ans = p + q + F(a + c, b)
     name = r.choice(NAMES)
-    stem = f"{name} poured {p} {a}/{b} litres of water into a pail, then another {q} {c}/{b} litres. How much water was in the pail?"
+    stem = f"{name} poured {p} {a}/{plural(b, 'litre')} of water into a pail, then another {q} {c}/{plural(b, 'litre')}. How much water was in the pail?"
     return build(mixed_add_context, stem, ans, [
-        ((f"{p + q} {a + c}/{b} litres", ans), "did_not_rename_improper_fraction",
+        ((f"{p + q} {a + c}/{plural(b, 'litre')}", ans), "did_not_rename_improper_fraction",
          f"Left {a + c}/{b} as it is instead of changing it to 1 {a + c - b}/{b}."),
         (p + q + F(a + c - b, b), "lost_the_carried_whole", "Changed the fraction part but forgot to add the 1 whole."),
         (p + q + F(a + c, 2 * b), "added_denominators", "Added the denominators too."),
         (ans + 1, "careless_slip", "Made a slip adding the whole numbers."),
     ], [f"Wholes: {p} + {q} = {p + q}", f"Fractions: {a}/{b} + {c}/{b} = {a + c}/{b} = 1 {a + c - b}/{b}",
-        f"Total = {frac(ans)} litres"], {"p": p, "q": q, "a": a, "c": c, "b": b}, unit("litres"), auto_slips=False)
+        f"Total = {plural(frac(ans), 'litre')}"], {"p": p, "q": q, "a": a, "c": c, "b": b}, unit("litres"), auto_slips=False)
 
 
 @checker(mixed_add_context)
@@ -1004,13 +1004,19 @@ def add_subtract_story(r):
         (slices * (1 - F(a, b)), "subtracted_only_one_fraction", f"Took away only {x}'s share."),
         (left + 1, "miscounted_units", "Counted one slice too many."),
     ], [f"Eaten = {a}/{b} + {c}/{d} = {frac(F(a, b) + F(c, d))}", f"Left = 1 − {frac(F(a, b) + F(c, d))} = {frac(rest)}",
-        f"{frac(rest)} × {slices} = {left} slices"], {"a": a, "b": b, "c": c, "d": d, "slices": slices}, unit("slices"),
+        f"{frac(rest)} × {slices} = {plural(left, 'slice')}"], {"a": a, "b": b, "c": c, "d": d, "slices": slices}, unit("slices"),
         whole=True)
 
 
 @checker(add_subtract_story)
 def _(p):
     return p["slices"] - p["slices"] * F(p["a"], p["b"]) - p["slices"] * F(p["c"], p["d"])
+
+
+def share_amount(x, sing, many):
+    """'3/5 of a pizza', '1 pizza', '1 1/2 pizzas': a share at or below 1 takes the singular."""
+    x = F(x)
+    return f"{frac(x)} of {a_an(sing)} {sing}" if x < 1 else f"{frac(x)} {noun(x, sing, many)}"
 
 
 @template(T, "intermediate", FRAC_DIV)
@@ -1028,7 +1034,7 @@ def division_as_fraction(r):
         (F(k // n) if k // n else None, "dropped_the_remainder", "Gave only the whole number part."),
         (F(k, n * 2), "halved_wrongly", "Divided by twice the number of children."),
         (ans + 1, "slip_converting_to_mixed_number", "Made a slip changing the improper fraction to a mixed number."),
-    ], [f"{k} ÷ {n} = {k}/{n}", f"= {frac(ans)}"], {"k": k, "n": n}, lambda x: f"{frac(x)} {sing.split()[0] if x == 1 else thing.split()[0]}",
+    ], [f"{k} ÷ {n} = {k}/{n}", f"= {frac(ans)}"], {"k": k, "n": n}, lambda x: share_amount(x, sing, thing),
         auto_slips=False)
 
 
@@ -1048,7 +1054,7 @@ def division_share_compare(r):
     stem = (f"In {x}'s group, {k1} pizzas are shared equally among {n1} pupils. In {y}'s group, {k2} pizzas are "
             f"shared equally among {n2} pupils. How much more pizza does each pupil in the group with the bigger share get?")
     diff = abs(F(k1, n1) - F(k2, n2))
-    show = lambda v: frac(v) + " pizza" if v != 1 else "1 pizza"
+    show = lambda v: share_amount(v, "pizza", "pizzas")
     return build(division_share_compare, stem, diff, [
         (abs(F(n1, k1) - F(n2, k2)), "divided_the_wrong_way", "Worked out pupils ÷ pizzas."),
         (F(abs(k1 - k2), abs(n1 - n2)), "subtracted_tops_and_bottoms", "Subtracted pizzas and pupils separately."),
@@ -1196,15 +1202,15 @@ def equivalent_bar_parts(r):
     name = r.choice(NAMES)
     stem = (f"{name} drew two bars of the same length. The top bar has {a}/{n} shaded. The bottom bar is cut into "
             f"{N} equal parts. How many parts of the bottom bar must be shaded to show a fraction equal to {a}/{n}?")
-    fig = fraction_bars([("Top", n, a), ("Bottom", N, None)], title=f"Top bar with {a} of {n} parts shaded, bottom bar with {N} parts")
+    fig = fraction_bars([("Top", n, a), ("Bottom", N, None)], title=f"Top bar with {a} of {plural(n, 'part')} shaded, bottom bar with {plural(N, 'part')}")
     return build(equivalent_bar_parts, stem, a * k, [
         (a, "kept_the_same_numerator", f"Shaded {plural(a, 'part')}, the same number as the top bar, but the parts are smaller."),
         (a + N - n, "added_the_same_to_both", f"Added {N - n} to both the numerator and the denominator."),
         (N - a * k, "gave_unshaded_parts", "Found the number of parts NOT shaded."),
         (a * k + 1, "careless_slip", "Counted one part too many."),
         (a * k - 1, "careless_slip", "Counted one part too few."),
-    ], [f"{N} ÷ {n} = {k}, so each part of the top bar is {k} parts of the bottom bar.",
-        f"{a} × {k} = {a * k} parts"], {"a": a, "n": n, "N": N}, whole=True, auto_slips=False, figure=fig)
+    ], [f"{N} ÷ {n} = {k}, so each part of the top bar is {plural(k, 'part')} of the bottom bar.",
+        f"{a} × {k} = {plural(a * k, 'part')}"], {"a": a, "n": n, "N": N}, whole=True, auto_slips=False, figure=fig)
 
 
 @checker(equivalent_bar_parts)
@@ -1231,7 +1237,7 @@ def equivalent_read_bar(r):
         (F(q_, p_), "inverted_fraction", "Turned the fraction upside down."),
         (F(p_, N), "divided_numerator_only", f"Divided only the numerator by {g}."),
         (F(s, N - s), "compared_part_with_other_part", "Compared the shaded part with the unshaded part."),
-    ], [f"{s} of the {N} parts are shaded: {s}/{N}.", f"Divide top and bottom by {g}: {p_}/{q_}."],
+    ], [f"{s} of the {plural(N, 'part')} are shaded: {s}/{N}.", f"Divide top and bottom by {g}: {p_}/{q_}."],
         {"s": s, "N": N}, SF, auto_slips=False, figure=fig)
 
 
@@ -1251,18 +1257,18 @@ def equivalent_two_strips(r):
     a = r.randint(1, n - 1)
     b = r.randint(1, a * k - 1)
     name = r.choice(NAMES)
-    stem = (f"{name} has two strips of paper of the same length. Strip A is cut into {n} equal parts and {a} parts are "
+    stem = (f"{name} has two strips of paper of the same length. Strip A is cut into {n} equal parts and {plural(a, 'part')} are "
             f"shaded. Strip B is cut into {N} equal parts and {plural(b, 'part')} {'is' if b == 1 else 'are'} shaded. How many more parts of Strip B "
             f"must be shaded so that both strips have the same fraction shaded?")
-    fig = fraction_bars([("A", n, a), ("B", N, b)], title=f"Strip A: {a} of {n} parts shaded; strip B: {b} of {N} parts shaded")
+    fig = fraction_bars([("A", n, a), ("B", N, b)], title=f"Strip A: {a} of {plural(n, 'part')} shaded; strip B: {b} of {plural(N, 'part')} shaded")
     ans = a * k - b
     return build(equivalent_two_strips, stem, ans, [
-        (a * k, "forgot_parts_already_shaded", f"Found the {a * k} parts needed but did not subtract the {b} already shaded."),
+        (a * k, "forgot_parts_already_shaded", f"Found the {plural(a * k, 'part')} needed but did not subtract the {b} already shaded."),
         (a + N - n - b, "added_the_same_to_both", f"Added {N - n} to both the numerator and the denominator of {a}/{n}."),
         (N - b, "gave_unshaded_parts", "Found the number of parts of Strip B not shaded."),
         (a - b if a > b else None, "compared_part_counts", "Compared the number of shaded parts without noticing the parts are different sizes."),
         (ans + 1, "careless_slip", "Counted one part too many."),
-    ], [f"{a}/{n} = {a * k}/{N}", f"Strip B needs {a * k} parts shaded.", f"{a * k} − {b} = {ans} more parts"],
+    ], [f"{a}/{n} = {a * k}/{N}", f"Strip B needs {plural(a * k, 'part')} shaded.", f"{a * k} − {b} = {ans} more parts"],
         {"a": a, "n": n, "N": N, "b": b}, whole=True, auto_slips=False, figure=fig)
 
 

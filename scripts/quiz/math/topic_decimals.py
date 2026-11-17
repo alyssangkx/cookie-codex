@@ -345,7 +345,7 @@ def count_decimals_between(r):
         (B - A - 1 if incl else B - A, "forgot_the_ends_rule", "Used the difference without handling the ends correctly."),
         (F(B - A, 10) if (B - A) % 10 == 0 else None, "divided_by_ten", "Thought there are only tenths."),
         (ans + 2, "slip", "Counted the ends twice."), (ans * 10, "slip", "Counted tenths of tenths.")],
-        [f"{a} = {A} units and {b} = {B} units of 0.{'1' if dp == 1 else '01'}.", f"Count = {ans}"],
+        [f"{a} = {plural(A, 'unit')} and {b} = {plural(B, 'unit')} of 0.{'1' if dp == 1 else '01'}.", f"Count = {ans}"],
         {"A": A, "B": B, "incl": incl}, str, whole=True, auto_slips=False)
 
 
@@ -596,7 +596,7 @@ def rounded_share(r):
     x = F(Tm, d)
     ans = rnd(x, 2)
     thing = r.choice(["rope", "ribbon", "pipe"])
-    stem = f"A {thing} {t / 10:.1f} m long is cut into {d} equal pieces. What is the length of each piece, correct to 2 decimal places?"
+    stem = f"{a_an(thing).capitalize()} {thing} {t / 10:.1f} m long is cut into {d} equal pieces. What is the length of each piece, correct to 2 decimal places?"
     tr = trunc(x, 2)
     return build(rounded_share, stem, ans, [
         (tr if tr != ans else None, "cut_off_instead_of_rounding", "Cut the decimal off instead of rounding."),
@@ -622,7 +622,7 @@ def mixed_units_total(r):
     in_small = r.random() < 0.5
     total_small = a * f_ + g
     ans = total_small if in_small else total_small / f_
-    stem = (f"A {thing} has a {noun} of {dec(a)} {big}. {x} adds {g} {small} more. What is the total {noun}, in {small if in_small else big}?")
+    stem = (f"{a_an(thing).capitalize()} {thing} has {a_an(noun)} {noun} of {dec(a)} {big}. {x} adds {g} {small} more. What is the total {noun}, in {small if in_small else big}?")
     sh = (lambda v: f"{dec(v)} {small}") if in_small else (lambda v: f"{dec(v)} {big}")
     if in_small:
         wrong = [(a + g, "added_without_converting", f"Added {dec(a)} and {g} without changing units."),
@@ -676,7 +676,7 @@ def share_convert(r):
     if Tt.denominator > 100:
         return None
     ans = each
-    stem = f"A {thing} of {dec(Tt)} {big} is shared equally among {n} people. How many {small} does each person get?"
+    stem = f"{a_an(thing).capitalize()} {thing} of {dec(Tt)} {big} is shared equally among {n} people. How many {small} does each person get?"
     return build(share_convert, stem, ans, [
         (F(each, 1000), "forgot_to_convert", f"Gave the answer in {big}."),
         (each * 10, "used_wrong_conversion", f"Used 1 {big} = {10000} {small}."), (F(each, 10), "used_wrong_conversion", f"Used 1 {big} = 100 {small}."),
@@ -722,7 +722,7 @@ def bottles_filled(r):
     full = int(L * 1000) // ml
     if (L * 1000) % ml == 0:
         return None
-    stem = f"A tank has {dec(L)} litres of water. The water is poured into bottles that each hold {ml} ml. How many bottles can be completely filled?"
+    stem = f"A tank has {plural(dec(L), 'litre')} of water. The water is poured into bottles that each hold {ml} ml. How many bottles can be completely filled?"
     return build(bottles_filled, stem, full, [
         (full + 1, "rounded_up", "Counted the bottle that is not full."),
         (int(L * 100) // ml if int(L * 100) // ml else None, "used_wrong_conversion", "Used 1 litre = 100 ml."),

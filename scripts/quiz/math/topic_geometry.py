@@ -409,7 +409,7 @@ def angle_ratio(r):
           W(tot // 2 // S * ps[k] if not line else tot * 2 // S * ps[k], "used_wrong_total", "Used the wrong total for the angles.")]
     return mk(angle_ratio, stem, ans, wr,
               [f"The three angles add up to {tot}° ({'straight line' if line else 'angles at a point'}).",
-               f"{ratio.replace(' : ', ' + ')} = {S} units; 1 unit = {tot}° ÷ {S} = {u}°",
+               f"{ratio.replace(' : ', ' + ')} = {plural(S, 'unit')}; 1 unit = {tot}° ÷ {S} = {u}°",
                f"{nm[k]} = {ps[k]} × {u}° = {ans}°"],
               {"ps": ps, "tot": tot, "k": k}, sc.svg("Angles in a ratio"))
 
@@ -2391,7 +2391,7 @@ def shape_sides(r):
     stem = f"{nm} draws {art} {name}, as shown. How many {what} does it have?"
     wr = [W(n + 1, "off_by_one", "Counted one too many."), W(n - 1, "off_by_one", "Missed one."), W(n + 2, "miscount", "Miscounted."),
           W(n - 2, "miscount", "Miscounted."), W(n + 3, "miscount", "Miscounted.")]
-    return mk(shape_sides, stem, n, wr, [f"A {name} has {n} sides and {n} corners.", f"Answer: {n}"], {"name": name},
+    return mk(shape_sides, stem, n, wr, [f"{a_an(name).capitalize()} {name} has {n} sides and {n} corners.", f"Answer: {n}"], {"name": name},
               sc.svg(name.title()), show=lambda v: str(int(v)), maxv=11)
 
 
@@ -2410,8 +2410,8 @@ def count_shapes_row(r):
     if not 2 <= c <= 6:
         return None
     nm = r.choice(NAMES)
-    ph = r.choice([f"{nm} lines up {n} shapes in a row. How many of them are {tgt}s?",
-                   f"The picture shows {n} shapes. Count the {tgt}s.", f"How many {tgt}s are there among the {n} shapes {nm} has arranged?"])
+    ph = r.choice([f"{nm} lines up {plural(n, 'shape')} in a row. How many of them are {tgt}s?",
+                   f"The picture shows {plural(n, 'shape')}. Count the {tgt}s.", f"How many {tgt}s are there among the {plural(n, 'shape')} {nm} has arranged?"])
     ph = ph.replace("half circles", "half circles").replace("circles", "circles")
     wr = [W(n - c, "counted_the_other_shapes", "Counted the shapes that are not " + tgt + "s."),
           W(c + 1, "miscount", "Counted one extra."), W(c - 1, "miscount", "Missed one."), W(c + 2, "miscount", "Miscounted."), W(c - 2, "miscount", "Miscounted.")]
@@ -2449,7 +2449,7 @@ def shape_pattern_nth(r):
     for k in KINDS:
         wr.append(W(KINDS.index(k) + 1, "guessed_a_shape", "Picked a shape without working out the position."))
     return build(shape_pattern_nth, stem, code, wr,
-                 [f"The pattern has {p} shapes: {', '.join(pat)}.", f"{n} ÷ {p} = {n // p} remainder {n % p}",
+                 [f"The pattern has {plural(p, 'shape')}: {', '.join(pat)}.", f"{n} ÷ {p} = {n // p} remainder {n % p}",
                   f"The remainder is {n % p}, so the shape is {'the last shape of the pattern' if n % p == 0 else 'shape number ' + str(n % p) + ' of the pattern'}: {ans}."],
                  {"pat": pat, "n": n}, show=lambda v: KINDS[int(v) - 1], whole=True, auto_slips=False, figure=row_fig(seq))
 
@@ -2476,7 +2476,7 @@ def classify_count(r):
     wr = [W(7 - cnt, "counted_the_other_shapes", "Counted the shapes that do not fit."),
           W(cnt + 1, "miscount", "Counted one extra."), W(cnt - 1, "miscount", "Missed one."), W(cnt + 2, "miscount", "Miscounted.")]
     return mk(classify_count, stem, cnt, wr,
-              ["Sides: triangle 3, square 4, rectangle 4, pentagon 5, hexagon 6, octagon 8.", f"{cnt} shapes have {crit[0]}."],
+              ["Sides: triangle 3, square 4, rectangle 4, pentagon 5, hexagon 6, octagon 8.", f"{plural(cnt, 'shape')} have {crit[0]}."],
               {"names": names, "crit": crit[0]}, None, show=lambda v: str(int(v)), maxv=7)
 
 
@@ -2636,7 +2636,7 @@ def pattern_first_n(r):
     nm = r.choice(NAMES)
     show_seq = [pat[i % p] for i in range(p * 2)]
     stem = (f"{nm} makes a long row of shapes in the repeating pattern {', '.join(show_seq)}, ... "
-            f"How many {tgt}s are there in the first {N} shapes?")
+            f"How many {tgt}s are there in the first {plural(N, 'shape')}?")
     per = pat.count(tgt)
     full, rem = divmod(N, p)
     wr = [W(full * per, "ignored_the_remainder", "Counted only the complete patterns."),
@@ -2644,8 +2644,8 @@ def pattern_first_n(r):
           W(N // p, "counted_patterns_not_shapes", "Gave the number of complete patterns."),
           W(ans - 1, "off_by_one", "Was one out with the leftover shapes."), W(ans + 1, "off_by_one", "Was one out with the leftover shapes.")]
     return mk(pattern_first_n, stem, ans, wr,
-              [f"The pattern has {p} shapes and {per} of them {'is' if per == 1 else 'are'} {tgt}.", f"{N} ÷ {p} = {full} remainder {rem}",
-               f"Complete patterns: {full} × {per} = {full * per}", f"Leftover {rem} shapes: " + (", ".join(pat[:rem]) if rem else "none"), f"Total = {ans}"],
+              [f"The pattern has {plural(p, 'shape')} and {per} of them {'is' if per == 1 else 'are'} {tgt}.", f"{N} ÷ {p} = {full} remainder {rem}",
+               f"Complete patterns: {full} × {per} = {full * per}", f"Leftover {plural(rem, 'shape')}: " + (", ".join(pat[:rem]) if rem else "none"), f"Total = {ans}"],
               {"pat": pat, "p": p, "N": N, "tgt": tgt}, row_fig(show_seq), show=lambda v: str(int(v)), maxv=200)
 
 
@@ -2676,8 +2676,8 @@ def triangles_from_apex(r):
           W(ans + k, "counted_extra", "Counted extra triangles."), W(ans - 1, "missed_one", "Missed one triangle."), W(2 * k + 1, "x", "")]
     wr = [w_ for w_ in wr if w_[1] != "x"]
     return mk(triangles_from_apex, stem, ans, wr,
-              [f"Points on the base: B, C and the {k} new points = {k + 2} points", "Each pair of points on the base makes one triangle with A.",
-               f"{k + 2} points → {k + 2} × {k + 1} ÷ 2 = {ans} triangles"], {"k": k}, sc.svg("Triangle with lines from A"), show=lambda v: str(int(v)), maxv=60)
+              [f"Points on the base: B, C and the {k} new points = {plural(k + 2, 'point')}", "Each pair of points on the base makes one triangle with A.",
+               f"{plural(k + 2, 'point')} → {k + 2} × {k + 1} ÷ 2 = {ans} triangles"], {"k": k}, sc.svg("Triangle with lines from A"), show=lambda v: str(int(v)), maxv=60)
 
 
 @checker(triangles_from_apex)
@@ -2711,7 +2711,7 @@ def solid_counts(r):
     others = [fcs, eds, vts]
     wr = [W(v, "gave_a_different_count", "Gave the number of faces, edges or vertices that was not asked.") for v in others if v != ans]
     wr += [W(ans + 1, "off_by_one", "Counted one too many."), W(ans - 1, "off_by_one", "Missed one."), W(ans + 2, "miscount", "Miscounted.")]
-    return mk(solid_counts, stem, ans, wr, [f"A {name} has {fcs} faces, {eds} edges and {vts} vertices.", f"Answer: {ans}"],
+    return mk(solid_counts, stem, ans, wr, [f"{a_an(name).capitalize()} {name} has {fcs} faces, {eds} edges and {vts} vertices.", f"Answer: {ans}"],
               {"name": name, "what": what}, None, show=lambda v: str(int(v)), maxv=20)
 
 
@@ -2735,11 +2735,11 @@ def faces_of_kind(r):
     kind = r.choice(list(kinds))
     ans = kinds[kind]
     nm = r.choice(NAMES)
-    ph = r.choice([f"How many {kind} faces does a {name} have?", f"{nm} looks at a {name}. How many of its faces are {kind}?"])
+    ph = r.choice([f"How many {kind} faces does {a_an(name)} {name} have?", f"{nm} looks at {a_an(name)} {name}. How many of its faces are {kind}?"])
     tot = SOLIDS[name][0]
     wr = [W(tot, "gave_total_faces", "Gave the total number of faces."), W(tot - ans if tot - ans != ans else None, "counted_the_other_faces", "Counted the faces of the other shape."),
           W(ans + 1, "off_by_one", "Counted one too many."), W(ans - 1 if ans > 1 else None, "off_by_one", "Missed one."), W(ans + 2, "miscount", "Miscounted.")]
-    return mk(faces_of_kind, ph, ans, wr, [f"A {name} has " + " and ".join(plural(v, f"{k} face") for k, v in kinds.items()) + ".", f"Answer: {ans}"],
+    return mk(faces_of_kind, ph, ans, wr, [f"{a_an(name).capitalize()} {name} has " + " and ".join(plural(v, f"{k} face") for k, v in kinds.items()) + ".", f"Answer: {ans}"],
               {"name": name, "kind": kind}, None, show=lambda v: str(int(v)), maxv=12)
 
 
@@ -2780,7 +2780,7 @@ def net_to_solid(r):
     code = SOL_LIST.index(ans) + 1
     wr = [W(SOL_LIST.index(c) + 1, "confused_similar_solid", "Chose a solid with a similar-looking net.") for c in CONFUSE[kind]]
     fig = solid_net(kind) if kind != "cube" else net_fig(next(h for h in HEX_VALID_SAMPLE), cell=30)
-    return build(net_to_solid, stem, code, wr, [f"Count and name the faces of the net: it folds into a {ans}."], {"kind": kind},
+    return build(net_to_solid, stem, code, wr, [f"Count and name the faces of the net: it folds into {a_an(ans)} {ans}."], {"kind": kind},
                  show=lambda v: SOL_LIST[int(v) - 1], whole=True, auto_slips=False, figure=fig)
 
 
@@ -2883,7 +2883,7 @@ def opposite_face(r):
     wr = [W(n, "chose_adjacent_face", "Chose a face that touches the given face.") for n in nbrs if n != ans]
     wr += [W(n, "guessed_a_face", "Guessed a face.") for n in nums if n not in (ans, t)]
     return mk(opposite_face, stem, ans, wr,
-              [f"Picture folding the net: the face numbered {t} ends up opposite the face numbered {ans}."], {"cells": [list(c) for c in cells], "lab": [lab[c] for c in cells], "t": t},
+              [f"Picture folding the net: the face numbered {t} is opposite the face numbered {ans}."], {"cells": [list(c) for c in cells], "lab": [lab[c] for c in cells], "t": t},
               net_fig(net, cell=34, numbers=lab), show=lambda v: str(int(v)), maxv=6)
 
 
@@ -2924,7 +2924,7 @@ def prism_reverse(r):
               W(gv + 1 if gv + 1 != av else None, "off_by_one", "Added one."), W(2 * n if 2 * n != av else None, "used_wrong_edge_rule", "Used 2 × base sides.")]
     wr = [w_ for w_ in wr if w_[0] and w_[1] != "x"]
     ans = av
-    steps = [f"Base has n sides: a {kind} has {'3n edges, 2n vertices, n + 2 faces' if kind == 'prism' else '2n edges, n + 1 vertices, n + 1 faces'}.",
+    steps = [f"Base has n sides: {a_an(kind)} {kind} has {'3n edges, 2n vertices, n + 2 faces' if kind == 'prism' else '2n edges, n + 1 vertices, n + 1 faces'}.",
              f"Given: {gv} {given} → n = {n}", f"{want.title()} = {ans}"]
     return mk(prism_reverse, stem, ans, wr, steps, {"n": n, "kind": kind, "given": given, "want": want, "gv": gv}, None,
               show=lambda v: str(int(v)), maxv=60)
@@ -3410,7 +3410,7 @@ def _copy_q(r, fn, kinds):
     grid = "dot" if dots else "square"
     ph = r.choice(["Which drawing, A to D, is an exact copy of the figure?",
                    "Which of A to D is a correct copy of the figure?"])
-    stem = f"{name} copies the figure on a {grid} grid. {ph}"
+    stem = f"{name} copies the figure on {a_an(grid)} {grid} grid. {ph}"
     wrong = [(i + 1 if i < pos else i + 1, tag, why) for i, (_, _, tag, why) in zip([x for x in range(4) if x != pos], bad)]
     return build(fn, stem, pos + 1, wrong,
                  ["A copy has the same shape, the same side lengths and faces the same way.",
@@ -3524,7 +3524,7 @@ def which_drawing_shows_solid(r):
     nm_ = KINDS_3D[ask]
     stem = f"{name} draws four solids. Hidden edges are shown as dashed lines. Which drawing shows {art(nm_)} {nm_}?"
     return build(which_drawing_shows_solid, stem, target + 1, wrong,
-                 [f"A {nm_} has " + {"cube": "6 square faces and 12 edges.", "cuboid": "6 rectangular faces and 12 edges.",
+                 [f"{a_an(nm_).capitalize()} {nm_} has " + {"cube": "6 square faces and 12 edges.", "cuboid": "6 rectangular faces and 12 edges.",
                                      "tri_prism": "2 triangular faces and 3 rectangular faces.", "sq_pyr": "a square base and 4 triangular faces meeting at a point.",
                                      "tri_pyr": "4 triangular faces.", "pent_prism": "2 pentagonal faces and 5 rectangular faces.",
                                      "hex_prism": "2 hexagonal faces and 6 rectangular faces."}[ask],
@@ -3708,7 +3708,7 @@ def which_scale_was_used(r):
     side = "left" if use_outer else "right"
     zero = "right" if use_outer else "left"
     stem = (f"{name} wants to draw ∠PQR = {th}°, with QP along the baseline of the protractor pointing to the {side}. "
-            f"{name} marks R at {th} on the {sc} scale (the scale that starts at 0 on the {zero}). "
+            f"{plural(name, 'mark')} R at {th} on the {sc} scale (the scale that starts at 0 on the {zero}). "
             f"What is the actual size of ∠PQR in the drawing?")
     fig = protractor_fig(act, base_right=base_right)
     wr = [W(th, "read_the_wrong_scale", f"Took the {sc} scale reading as the angle even though QP is not on its 0°."),
@@ -3968,19 +3968,19 @@ def which_drawing_rect_square(r):
         bad = [(_slant(pw, ph), "drew_a_slanted_shape", "Drew a parallelogram with slanted sides instead of a rectangle."),
                (_rect(pw + 1, ph), "side_one_unit_too_long", "Made one side one unit too long."),
                (_rect(pw, ph + 1) if ph + 1 <= 5 else _rect(pw, ph - 1), "side_one_unit_wrong", "Made one side one unit out.")]
-        stem = (f"{name} wants to draw a rectangle that is {w} units long and {h} units wide on a square grid. "
+        stem = (f"{name} wants to draw a rectangle that is {plural(w, 'unit')} long and {plural(h, 'unit')} wide on a square grid. "
                 f"Which drawing shows the rectangle?")
         params = {"kind": "rect", "w": w, "h": h}
-        steps = [f"A rectangle has 4 right angles and opposite sides equal: {w} units by {h} units.", "Check the sides of each drawing against the grid squares."]
+        steps = [f"A rectangle has 4 right angles and opposite sides equal: {plural(w, 'unit')} by {plural(h, 'unit')}.", "Check the sides of each drawing against the grid squares."]
     else:
         s = r.randint(2, 4)
         correct = _rect(s, s)
         bad = [(_slant(s, s), "drew_a_slanted_shape_not_a_square", "Drew a slanted shape: its corners are not right angles and its slanted sides are longer than the grid count."),
                (_rect(s + 1, s), "sides_not_equal", "Drew a rectangle whose sides are not all equal."),
                (_rect(s + 1, s + 1) if s < 4 else _rect(s - 1, s - 1), "wrong_size", "Drew a square but with the wrong side length.")]
-        stem = f"{name} wants to draw a square with sides of {s} units on a square grid. Which drawing shows the square?"
+        stem = f"{name} wants to draw a square with sides of {plural(s, 'unit')} on a square grid. Which drawing shows the square?"
         params = {"kind": "sq", "w": s, "h": s}
-        steps = [f"A square has 4 right angles and 4 equal sides of {s} units."]
+        steps = [f"A square has 4 right angles and 4 equal sides of {plural(s, 'unit')}."]
     return _rect_options(r, which_drawing_rect_square, correct, bad, stem, steps, params, None)
 
 
@@ -3999,17 +3999,17 @@ def rect_given_area_or_perimeter(r):
     if L == Wd:
         return None
     if mode == "area":
-        stem = (f"{name} draws a rectangle on a square grid. One side is {L} units long and the area is {L * Wd} square units. "
+        stem = (f"{name} draws a rectangle on a square grid. One side is {plural(L, 'unit')} long and the area is {L * Wd} square units. "
                 f"Which drawing shows {name}'s rectangle?")
         bad_tags = [(_slant(L, Wd), "same_base_and_height_but_slanted", "Chose a slanted shape with the same base and height; it is not a rectangle.")]
         params = {"mode": mode, "L": L, "val": L * Wd}
-        steps = [f"Other side = {L * Wd} ÷ {L} = {Wd} units.", f"The rectangle is {L} by {Wd}."]
+        steps = [f"Other side = {L * Wd} ÷ {L} = {plural(Wd, 'unit')}.", f"The rectangle is {L} by {Wd}."]
     else:
-        stem = (f"{name} draws a rectangle on a square grid. One side is {L} units long and the perimeter is {2 * (L + Wd)} units. "
+        stem = (f"{name} draws a rectangle on a square grid. One side is {plural(L, 'unit')} long and the perimeter is {plural(2 * (L + Wd), 'unit')}. "
                 f"Which drawing shows {name}'s rectangle?")
         bad_tags = [(_slant(L, Wd), "same_base_and_height_but_slanted", "Chose a slanted shape with the right base and height; its corners are not right angles and its slanted sides are longer than the grid count.")]
         params = {"mode": mode, "L": L, "val": 2 * (L + Wd)}
-        steps = [f"Half the perimeter = {L + Wd}, so the other side = {L + Wd} - {L} = {Wd} units.", f"The rectangle is {L} by {Wd}."]
+        steps = [f"Half the perimeter = {L + Wd}, so the other side = {L + Wd} - {L} = {plural(Wd, 'unit')}.", f"The rectangle is {L} by {Wd}."]
     bad = bad_tags + [(_rect(L, Wd + 1), "other_side_one_too_long", "Made the other side one unit too long."),
                       (_rect(L, Wd - 1) if Wd > 1 else _rect(L + 1, Wd), "other_side_one_too_short", "Made the other side one unit too short.")]
     return _rect_options(r, rect_given_area_or_perimeter, _rect(L, Wd), bad, stem, steps, params, None)

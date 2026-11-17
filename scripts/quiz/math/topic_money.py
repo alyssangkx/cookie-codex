@@ -31,15 +31,15 @@ def count_money(r):
     n5, n2, n50, n20, n10 = r.randint(1, 4), r.randint(1, 5), r.randint(1, 6), r.randint(2, 7), r.randint(1, 6)
     total = n5 * 500 + n2 * 200 + n50 * 50 + n20 * 20 + n10 * 10
     w = ["zero", "one", "two", "three", "four", "five", "six", "seven"]  # words, so '4 $5' never reads as one number
-    stem = (f"{x} has {w[n5]} $5 note{'s' if n5 > 1 else ''}, {w[n2]} $2 note{'s' if n2 > 1 else ''}, "
-            f"{w[n50]} 50-cent coin{'s' if n50 > 1 else ''}, {w[n20]} 20-cent coin{'s' if n20 > 1 else ''} and "
-            f"{w[n10]} 10-cent coin{'s' if n10 > 1 else ''}. How much money does {x} have altogether?")
+    stem = (f"{x} has {w[n5]} $5 {noun(n5, 'note')}, {w[n2]} $2 {noun(n2, 'note')}, "
+            f"{w[n50]} 50-cent {noun(n50, 'coin')}, {w[n20]} 20-cent {noun(n20, 'coin')} and "
+            f"{w[n10]} 10-cent {noun(n10, 'coin')}. How much money does {x} have altogether?")
     return build(count_money, stem, H(total), [
         (H(total - n20 * 20), "forgot_one_kind_of_coin", "Left out the 20-cent coins."),
         (H(total - n10 * 10 + n10 * 100), "counted_10_cent_coins_as_dollars", "Counted each 10-cent coin as $1."),
         (H(total - n50 * 50 + n50 * 5), "mixed_up_coin_values", "Counted each 50-cent coin as 5 cents."),
         (H(total + 10), "slip", "Slip in adding the cents."), (H(total - 100), "slip", "Slip in adding the dollars.")],
-        [f"Notes: {n5} × $5 + {n2} × $2 = ${n5 * 5 + n2 * 2}", f"Coins: {n50 * 50 + n20 * 20 + n10 * 10} cents", f"Total = {dp(total)}"],
+        [f"Notes: {n5} × $5 + {n2} × $2 = ${n5 * 5 + n2 * 2}", f"Coins: {plural(n50 * 50 + n20 * 20 + n10 * 10, 'cent')}", f"Total = {dp(total)}"],
         {"n": [n5, n2, n50, n20, n10]}, money, auto_slips=False)
 
 
@@ -65,8 +65,8 @@ def dollars_cents_convert(r):
             (c // 10, "used_10_cents_in_a_dollar", "Used 1 dollar = 10 cents."), (c * 10, "used_1000_cents_in_a_dollar", "Used 1 dollar = 1 000 cents."),
             (c // 100 * 10 + c % 100 // 10 if False else (c // 100) * 100 + (c % 100) * 10, "wrong_place_for_cents", "Put the cents in the wrong place."),
             (c + 100, "slip", "Slip."), (c - 100, "slip", "Slip.")],
-            ["1 dollar = 100 cents", f"{dp(c)} = {c} cents"], {"c": c, "to_cents": True}, lambda v: f"{int(v)} cents", whole=True, auto_slips=False)
-    stem = f"Express {c} cents in dollars."
+            ["1 dollar = 100 cents", f"{dp(c)} = {plural(c, 'cent')}"], {"c": c, "to_cents": True}, lambda v: f"{plural(int(v), 'cent')}", whole=True, auto_slips=False)
+    stem = f"Express {plural(c, 'cent')} in dollars."
     return build(dollars_cents_convert, stem, H(c), [
         (H(c) * 10, "used_10_cents_in_a_dollar", "Divided by 10 instead of 100."), (H(c) / 10, "used_1000_cents_in_a_dollar", "Divided by 1 000."),
         (H(c) + F(9, 100) if False else H((c // 100) * 100 + (c % 100) // 10 + (c % 10) * 10), "swapped_cents_digits", "Swapped the digits in the cents."),
@@ -93,7 +93,7 @@ def write_money_decimal(r):
         (H(c * 100 + d) if c < 100 else None, "swapped_dollars_and_cents", "Swapped the dollars and the cents."),
         (F(d, 10) + F(c, 100), "dollars_in_wrong_place", "Put the dollars in the tenths place."),
         (H(ans + 100), "slip", "Slip.")],
-        [f"{d} dollars = ${d}", f"{c} cents = ${c / 100:.2f}", f"Total = {dp(ans)}"], {"d": d, "c": c}, money, auto_slips=False)
+        [f"{d} dollars = ${d}", f"{plural(c, 'cent')} = ${c / 100:.2f}", f"Total = {dp(ans)}"], {"d": d, "c": c}, money, auto_slips=False)
 
 
 @checker(write_money_decimal)
@@ -292,7 +292,7 @@ def most_minus_least(r):
     a, b, c = cs
     ans = max(cs) - min(cs)
     mid = sorted(cs)[1]
-    stem = f"{x} has {dp(a)}, {y} has {b} cents and {z} has {dp(c)}. How much more money does the person with the most have than the person with the least?"
+    stem = f"{x} has {dp(a)}, {y} has {plural(b, 'cent')} and {z} has {dp(c)}. How much more money does the person with the most have than the person with the least?"
     return build(most_minus_least, stem, H(ans), [
         (H(max(cs) - mid), "used_wrong_pair", "Compared the most with the middle amount."),
         (H(mid - min(cs)), "used_wrong_pair", "Compared the middle with the least amount."),
@@ -332,7 +332,7 @@ def weekly_saving_cycle(r):
         ((W + 1) * 7, "whole_weeks_only", "Counted whole weeks only."),
         (ans - 1, "slip", "Did not count the last day."), (ans + 1, "slip", "Counted one extra day."),
         (7 * W + 5 if d != 5 else 7 * W + 7, "stopped_after_weekdays", "Stopped at the end of a school week.")],
-        [f"Saved in one week: 5 × {dp(g * 100 - s)} + 2 × ${g} = {dp(wk)}", f"After {W} weeks: {dp(W * wk)}; still need {dp(rem)}", f"Days = {7 * W} + {d} = {ans}"],
+        [f"Saved in one week: 5 × {dp(g * 100 - s)} + 2 × ${g} = {dp(wk)}", f"After {plural(W, 'week')}: {dp(W * wk)}; still need {dp(rem)}", f"Days = {7 * W} + {d} = {ans}"],
         {"g": g, "s": s, "X": X}, whole=True, show=str, auto_slips=False)
 
 
@@ -416,7 +416,7 @@ def money_backwards(r):
     b = r.randint(80, 350)
     left = r.randint(150, 1500)
     ans = a + n * b + left
-    stem = (f"{x} spent {dp(a)} on lunch. Then {x} bought {n} pens at {dp(b)} each. {x} had {dp(left)} left. "
+    stem = (f"{x} spent {dp(a)} on lunch. Then {x} bought {plural(n, 'pen')} at {dp(b)} each. {x} had {dp(left)} left. "
             f"How much money did {x} have at first?")
     return build(money_backwards, stem, H(ans), [
         (H(a + b + left), "forgot_to_multiply_pens", "Added the price of only one pen."),
@@ -445,11 +445,11 @@ def coins_same_number(r):
     total = n * (a + b)
     stem = f"{x} has the same number of {a}-cent coins and {b}-cent coins. The coins are worth {dp(total)} altogether. How many {a}-cent coins does {x} have?"
     return build(coins_same_number, stem, n, [
-        (F(total, a), "used_one_coin_only", f"Divided by {a} cents only."),
-        (F(total, b), "used_one_coin_only", f"Divided by {b} cents only."),
+        (F(total, a), "used_one_coin_only", f"Divided by {plural(a, 'cent')} only."),
+        (F(total, b), "used_one_coin_only", f"Divided by {plural(b, 'cent')} only."),
         (F(total, a + b) * 2 if total % (a + b) == 0 else None, "counted_all_the_coins", "Found the total number of coins."),
         (n + 1, "slip", "Off by 1."), (n - 1, "slip", "Off by 1.")],
-        [f"One of each: {a} + {b} = {a + b} cents", f"{total} ÷ {a + b} = {n}"], {"a": a, "b": b, "total": total}, whole=True, show=str, auto_slips=False)
+        [f"One of each: {a} + {b} = {plural(a + b, 'cent')}", f"{total} ÷ {a + b} = {n}"], {"a": a, "b": b, "total": total}, whole=True, show=str, auto_slips=False)
 
 
 @checker(coins_same_number)
@@ -473,7 +473,7 @@ def price_two_equations(r):
     A = k * pn + m1 * pp
     B = k * pn + m2 * pp
     ask = r.choice(["pen", "notebook"])
-    stem = (f"{k} notebooks and {m1} pens cost {dp(A)}. {k} notebooks and {m2} pens cost {dp(B)}. "
+    stem = (f"{k} notebooks and {plural(m1, 'pen')} cost {dp(A)}. {k} notebooks and {plural(m2, 'pen')} cost {dp(B)}. "
             f"What is the cost of one {ask}?")
     if ask == "pen":
         ans = pp
@@ -481,14 +481,14 @@ def price_two_equations(r):
                  (H(B // (k + m2)) if B % (k + m2) == 0 else H(round(B / (k + m2))), "divided_by_number_of_items", "Divided the total by the number of items."),
                  (H(round((B - A) / (m2 + m1))), "divided_by_wrong_number", "Divided by the total number of pens."),
                  (H(ans + 10), "slip", "Slip."), (H(ans - 10), "slip", "Slip.")]
-        steps = [f"Extra {m2 - m1} pens cost {dp(B)} − {dp(A)} = {dp(B - A)}", f"1 pen = {dp(B - A)} ÷ {m2 - m1} = {dp(pp)}"]
+        steps = [f"Extra {plural(m2 - m1, 'pen')} cost {dp(B)} − {dp(A)} = {dp(B - A)}", f"1 pen = {dp(B - A)} ÷ {m2 - m1} = {dp(pp)}"]
     else:
         ans = pn
         wrong = [(H(round(A / k)), "ignored_the_pens", "Divided the first total by the number of notebooks."),
                  (H(round(A / (k + m1))), "divided_by_number_of_items", "Divided the total by the number of items."),
                  (H(pn + pp), "added_a_pen", "Forgot to take away the cost of all the pens."),
                  (H(ans + 10), "slip", "Slip."), (H(ans - 10), "slip", "Slip.")]
-        steps = [f"1 pen = {dp((B - A) // (m2 - m1))}", f"{m1} pens = {dp(m1 * pp)}", f"{k} notebooks = {dp(A)} − {dp(m1 * pp)} = {dp(k * pn)}", f"1 notebook = {dp(pn)}"]
+        steps = [f"1 pen = {dp((B - A) // (m2 - m1))}", f"{plural(m1, 'pen')} = {dp(m1 * pp)}", f"{k} notebooks = {dp(A)} − {dp(m1 * pp)} = {dp(k * pn)}", f"1 notebook = {dp(pn)}"]
     return build(price_two_equations, stem, H(ans), wrong, steps, {"k": k, "m1": m1, "m2": m2, "A": A, "B": B, "ask": ask}, money, auto_slips=False)
 
 
@@ -519,15 +519,15 @@ def coins_relationship(r):
     stem = f"{x} has {rel}. The total value of the coins is {dp(total)}. How many {b}-cent coins does {x} have?"
     if kind == "times":
         unit_v = k * a + b
-        wrong = [(F(total, a), "divided_by_one_coin_value", f"Divided by {a} cents only."), (F(total, b), "divided_by_one_coin_value", f"Divided by {b} cents only."),
+        wrong = [(F(total, a), "divided_by_one_coin_value", f"Divided by {plural(a, 'cent')} only."), (F(total, b), "divided_by_one_coin_value", f"Divided by {plural(b, 'cent')} only."),
                  (F(total, a + b), "added_the_coin_values", "Added the two coin values without using the ratio."), (k * n, "gave_the_other_coin", f"Gave the number of {a}-cent coins."),
                  (n + 1, "slip", "Off by 1.")]
-        steps = [f"Each group: {k} × {a} + {b} = {unit_v} cents", f"{total} ÷ {unit_v} = {n}"]
+        steps = [f"Each group: {k} × {a} + {b} = {plural(unit_v, 'cent')}", f"{total} ÷ {unit_v} = {n}"]
     else:
         wrong = [(F(total, a + b), "ignored_the_extra_coins", "Divided by the sum of the coin values without removing the extra coins."),
-                 (F(total, b), "divided_by_one_coin_value", f"Divided by {b} cents only."), (n + mo, "gave_the_other_coin", f"Gave the number of {a}-cent coins."),
+                 (F(total, b), "divided_by_one_coin_value", f"Divided by {plural(b, 'cent')} only."), (n + mo, "gave_the_other_coin", f"Gave the number of {a}-cent coins."),
                  (n + 1, "slip", "Off by 1."), (n - 1, "slip", "Off by 1.")]
-        steps = [f"Extra coins: {mo} × {a} = {mo * a} cents", f"Equal groups: {total} − {mo * a} = {total - mo * a} cents", f"{total - mo * a} ÷ {a + b} = {n}"]
+        steps = [f"Extra coins: {mo} × {a} = {plural(mo * a, 'cent')}", f"Equal groups: {total} − {mo * a} = {plural(total - mo * a, 'cent')}", f"{total - mo * a} ÷ {a + b} = {n}"]
     return build(coins_relationship, stem, n, wrong, steps, {"a": a, "b": b, "kind": kind, "k": k, "mo": mo, "total": total}, whole=True, show=str, auto_slips=False)
 
 

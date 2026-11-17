@@ -52,9 +52,18 @@ def money(x):
     return f"${x.numerator}" if x.denominator == 1 else f"${float(x):.2f}"
 
 
+def noun(n, word, many=None):
+    """Just the noun form for a count: noun(1, 'note') -> 'note', noun(2, 'note') -> 'notes'."""
+    try:
+        one = F(n) == 1
+    except (ValueError, TypeError, ZeroDivisionError):
+        one = str(n) == "1"  # e.g. a mixed-number string such as '1 1/2'
+    return word if one else (many or word + 's')
+
+
 def plural(n, word, many=None):
     """'1 unit', '2 units'. Pass many= for irregular plurals. n may be int or Fraction (1 only is singular)."""
-    return f"{n} {word if F(n) == 1 else (many or word + 's')}"
+    return f"{n} {noun(n, word, many)}"
 
 
 def ordinal(n):
@@ -65,14 +74,34 @@ def ordinal(n):
 
 
 def a_an(n_or_word):
-    """'a' or 'an' by how it is spoken: an 8, an 11, an 18, an 80, but a 9, a 100."""
+    """'a' or 'an' by how it is spoken. Numbers: an 8, 11, 18, 80-89, 800-899, 8000, 11000, 18000
+    (commas or not; 1800 is 'one thousand ...' so 'a'). Words go by sound: an hour, a unit, a one."""
     s = str(n_or_word).strip().split()[0].replace(",", "")
     if s[:1].isdigit():
-        return "an" if s[0] == "8" or s in ("11", "18") else "a"
-    return "an" if s[:1].lower() in "aeiou" else "a"
+        digits = re.match(r"\d+", s).group()
+        g = len(digits) % 3 or 3  # size of the leading spoken group
+        lead = int(digits[:g])
+        if g == 3:
+            return "an" if digits[0] == "8" else "a"
+        return "an" if lead in (8, 11, 18) or 80 <= lead <= 89 else "a"
+    w = s.lower()
+    if w.startswith(("hour", "honest", "honour", "heir")):
+        return "an"
+    if w.startswith(("uni", "use", "usu", "uti", "eu", "one", "once", "ubiq")):
+        return "a"
+    return "an" if w[:1] in "aeiou" else "a"
+
+
+_COUNT_WORDS = {"units", "pens", "parts", "slices", "shapes", "divisions", "marks", "cents", "weeks", "wholes", "litres",
+                "minutes", "hours", "pages", "sums", "points", "words", "bookmarks", "cards", "leaflets"}
 
 
 def unit(u):
+    """Formatter for option text: '1 slice', '3 slices'. A plural counting word at the start of u
+    takes its singular for exactly 1 (so 'litres per minute' gives '1 litre per minute')."""
+    head, _, tail = u.partition(" ")
+    if head in _COUNT_WORDS:
+        return lambda x: f"{frac(x)} {noun(x, head[:-1], head)}" + (f" {tail}" if tail else "")
     return lambda x: f"{frac(x)} {u}"
 
 
@@ -134,21 +163,7 @@ def build(fn, stem, correct, wrong, steps, params, show=frac, unit_size=None, wh
             "params": params, "figure": figure}
 
 
-_ONE_PLURAL = re.compile(r"(?<![\d/.×−+*-] )(?<![\d/.×−+*-])\b1 ((?:compass )?)(pens|parts|pages|faces|units|squares|hours|minutes|litres|"
-                         r"shapes|slices|wholes|divisions|vertices|cents|weeks|points|sums|steps|marks)\b")
-
-
-def fix_one(text):
-    """Safety net: '1 units' -> '1 unit' (a bare 1 only, not 1/2, 2 1/4 or 1 × 1 squares)."""
-    if not isinstance(text, str):
-        return text
-    return _ONE_PLURAL.sub(lambda m: "1 " + m.group(1) + m.group(2)[:-1] if m.group(2) != "vertices" else "1 " + m.group(1) + "vertex", text)
-
-
 def finalize(q, fn, rng, qid):
-    q = {**q, "stem": fix_one(q["stem"]), "steps": [fix_one(x) for x in q["steps"]],
-         "correct": (fix_one(q["correct"][0]), q["correct"][1]),
-         "wrong": [(fix_one(d), v, t, fix_one(w)) for d, v, t, w in q["wrong"]]}
     opts = [(*q["correct"], None)] + [(d, v, {"tag": t, "why": w}) for d, v, t, w in q["wrong"]]
     rng.shuffle(opts)
     if sorted(d for d, _, _ in opts) == ["A", "B", "C", "D"]:
@@ -179,4 +194,15 @@ def coprime_pair(rng, lo, hi, proper=True):
 
 
 __all__ = ["F", "gcd", "lcm", "template", "checker", "build", "finalize", "frac", "money",
-           "unit", "plural", "ordinal", "a_an", "two_names", "coprime_pair", "REGISTRY", "NAMES"]
+           "unit", "plural", "noun", "ordinal", "a_an", "two_names", "coprime_pair", "REGISTRY", "NAMES"]
+
+
+if __name__ == "__main__":
+    for x in (8, 11, 18, 80, 85, 89, 800, 899, 8000, 8500, "11,000", 11000, "18,000", 800000, "8.5"):
+        assert a_an(x) == "an", x
+    for x in (1, 7, 9, 10, 180000, 12, 17, 19, 79, 90, 100, 118, 180, 799, 900, 1800, 1100, 7000, 12000, 188000, 118000, "0.8", "9.5"):
+        assert a_an(x) == "a", x
+    assert a_an("hour") == "an" and a_an("unit") == "a" and a_an("umbrella") == "an" and a_an("pair of shoes") == "a"
+    assert a_an("apple") == "an" and a_an("watch") == "a" and a_an("one") == "a"
+    assert plural(1, "note") == "1 note" and plural(2, "watch", "watches") == "2 watches" and noun(3, "coin") == "coins"
+    print("common.py self-check ok")
