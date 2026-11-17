@@ -1,0 +1,4955 @@
+{
+  "subtopic": "eng-gram-wps-items",
+  "items": [
+    {
+      "key": "gram-tense-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Our class ____ a science project last Friday.",
+      "options": [
+        "completed",
+        "completes",
+        "will complete",
+        "is completing"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_tense_present",
+          "why": "'last Friday' is a finished past time, but 'completes' is simple present."
+        },
+        {
+          "tag": "wrong_tense_future",
+          "why": "'last Friday' is already past, so the future 'will complete' cannot be used."
+        },
+        {
+          "tag": "wrong_tense_continuous",
+          "why": "'is completing' is present continuous, but 'last Friday' needs the simple past."
+        }
+      ],
+      "solution": [
+        "Our class completed a science project last Friday.",
+        "'last Friday' marks a finished time in the past, so use the simple past 'completed'."
+      ]
+    },
+    {
+      "key": "gram-tense-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Look! The pupils ____ towards the school bus.",
+      "options": [
+        "ran",
+        "were running",
+        "are running",
+        "run"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_past",
+          "why": "'Look!' signals something happening now, so the simple past 'ran' does not fit."
+        },
+        {
+          "tag": "wrong_tense_past_continuous",
+          "why": "'Look!' shows the action is happening now, so past continuous 'were running' is wrong."
+        },
+        null,
+        {
+          "tag": "wrong_tense_simple_present",
+          "why": "'Look!' points to an action happening now, which needs the present continuous, not the simple present for habits."
+        }
+      ],
+      "solution": [
+        "Look! The pupils are running towards the school bus.",
+        "'Look!' signals an action in progress now, so use the present continuous 'are running'."
+      ]
+    },
+    {
+      "key": "gram-tense-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My father ____ to work by MRT every morning.",
+      "options": [
+        "has gone",
+        "goes",
+        "is going",
+        "went"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'has gone' means he has left and is not here; it does not describe a daily habit."
+        },
+        null,
+        {
+          "tag": "wrong_tense_continuous",
+          "why": "'every morning' shows a habit, which uses the simple present, not the present continuous."
+        },
+        {
+          "tag": "wrong_tense_past",
+          "why": "'every morning' with the present 'My father' is a habit now, not a finished past event."
+        }
+      ],
+      "solution": [
+        "My father goes to work by MRT every morning.",
+        "'every morning' shows a habit, so use the simple present 'goes'."
+      ]
+    },
+    {
+      "key": "gram-tense-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ben ____ his lunch when the fire alarm rang.",
+      "options": [
+        "is eating",
+        "were eating",
+        "eats",
+        "was eating"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_tense_present",
+          "why": "'rang' is past, so the action in progress at that time must be past continuous, not 'is eating'."
+        },
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'were' is plural, but the subject 'Ben' is singular."
+        },
+        {
+          "tag": "wrong_tense_present",
+          "why": "'eats' is simple present, but 'rang' puts the story in the past."
+        },
+        null
+      ],
+      "solution": [
+        "Ben was eating his lunch when the fire alarm rang.",
+        "A longer past action interrupted by a shorter one uses the past continuous: 'was eating' when the alarm rang."
+      ]
+    },
+    {
+      "key": "gram-tense-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "By the time we arrived, the film ____ already started.",
+      "options": [
+        "did",
+        "have",
+        "has",
+        "had"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_aux_form",
+          "why": "'did' must be followed by the base form 'start', but the sentence has 'started'."
+        },
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'the film' is singular, so 'have' does not agree; the past perfect also needs 'had'."
+        },
+        {
+          "tag": "wrong_aux_perfect_tense",
+          "why": "'arrived' is past, so the earlier action needs past perfect 'had started', not present perfect 'has started'."
+        },
+        null
+      ],
+      "solution": [
+        "By the time we arrived, the film had already started.",
+        "'By the time we arrived' needs the past perfect 'had started' for the earlier action."
+      ]
+    },
+    {
+      "key": "gram-tense-006",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Tomorrow, our teacher ____ us the results of the spelling test.",
+      "options": [
+        "has given",
+        "will give",
+        "gave",
+        "was giving"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'has given' is present perfect and cannot go with the future time 'Tomorrow'."
+        },
+        null,
+        {
+          "tag": "wrong_tense_past",
+          "why": "'Tomorrow' points to the future, so the simple past 'gave' is wrong."
+        },
+        {
+          "tag": "wrong_tense_past_continuous",
+          "why": "'was giving' is past continuous, but 'Tomorrow' needs a future form."
+        }
+      ],
+      "solution": [
+        "Tomorrow, our teacher will give us the results of the spelling test.",
+        "'Tomorrow' needs the future 'will give'."
+      ]
+    },
+    {
+      "key": "gram-tense-007",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Aisha ____ in this HDB block since she was born.",
+      "options": [
+        "lived",
+        "lives",
+        "has lived",
+        "is living"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_past",
+          "why": "'since she was born' links the past to now, so the present perfect 'has lived' is needed, not the simple past."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since' with a starting point needs a perfect tense; simple present 'lives' does not fit."
+        },
+        null,
+        {
+          "tag": "wrong_tense_since",
+          "why": "'is living' is present continuous and does not combine with 'since' to show a period up to now."
+        }
+      ],
+      "solution": [
+        "Aisha has lived in this HDB block since she was born.",
+        "'since' + a past starting point takes the present perfect 'has lived'."
+      ]
+    },
+    {
+      "key": "gram-tense-008",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "____ you finished your homework yet?",
+      "options": [
+        "Have",
+        "Did",
+        "Will",
+        "Has"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_aux_form",
+          "why": "'Did' must be followed by the base form 'finish', but the sentence has 'finished'."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'Will' must be followed by the base form 'finish', but the sentence has 'finished'."
+        },
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'you' takes 'have', not 'has'."
+        }
+      ],
+      "solution": [
+        "Have you finished your homework yet?",
+        "'yet' with 'finished' needs the present perfect, so 'Have you finished'."
+      ]
+    },
+    {
+      "key": "gram-tense-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The bus ____ by the time Wei Ling reached the stop.",
+      "options": [
+        "is already leaving",
+        "had already left",
+        "has already left",
+        "would already leave"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_present",
+          "why": "'is leaving' is present continuous, which clashes with the past 'reached'."
+        },
+        null,
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'reached' is past, so the earlier action needs past perfect, not present perfect 'has left'."
+        },
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would leave' looks forward from the past; here the bus left before she reached the stop."
+        }
+      ],
+      "solution": [
+        "The bus had already left by the time Wei Ling reached the stop.",
+        "'By the time' + simple past takes the past perfect for the earlier event: 'had already left'."
+      ]
+    },
+    {
+      "key": "gram-tense-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Since the new library opened, the number of visitors ____ steadily.",
+      "options": [
+        "have been rising",
+        "is rising",
+        "was rising",
+        "has been rising"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'The number' is singular, so 'has' is needed, not 'have'."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since' needs a perfect tense; simple present continuous 'is rising' does not connect to the starting point."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'Since the library opened' covers a period up to now, so past continuous 'was rising' does not fit."
+        },
+        null
+      ],
+      "solution": [
+        "Since the new library opened, the number of visitors has been rising steadily.",
+        "'Since' + a past event needs the present perfect, and 'the number' is singular: 'has been rising'."
+      ]
+    },
+    {
+      "key": "gram-tense-011",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mrs Tan ____ at this school for twenty years when she retired last month.",
+      "options": [
+        "had been teaching",
+        "would teach",
+        "was teaching",
+        "has been teaching"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would teach' does not show a completed period of twenty years before she retired."
+        },
+        {
+          "tag": "wrong_tense_duration",
+          "why": "'for twenty years' before another past event needs a perfect form, not past continuous."
+        },
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'retired last month' is past, so present perfect continuous 'has been teaching' does not fit."
+        }
+      ],
+      "solution": [
+        "Mrs Tan had been teaching at this school for twenty years when she retired last month.",
+        "A period lasting up to an earlier past moment uses the past perfect continuous: 'had been teaching'."
+      ]
+    },
+    {
+      "key": "gram-tense-012",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "While I ____ for the bus, it started to rain heavily.",
+      "options": [
+        "have been waiting",
+        "would wait",
+        "was waiting",
+        "wait"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'started' is past, so present perfect continuous 'have been waiting' clashes with it."
+        },
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would wait' does not show an action in progress when the rain started."
+        },
+        null,
+        {
+          "tag": "wrong_tense_present",
+          "why": "'started' is past, so simple present 'wait' is inconsistent."
+        }
+      ],
+      "solution": [
+        "While I was waiting for the bus, it started to rain heavily.",
+        "'While' with a past interruption takes the past continuous 'was waiting'."
+      ]
+    },
+    {
+      "key": "gram-tense-013",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ravi ____ his keys, so he could not enter the house.",
+      "options": [
+        "has lost",
+        "loses",
+        "had lost",
+        "was losing"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'could not enter' is past, so the earlier loss needs 'had lost', not 'has lost'."
+        },
+        {
+          "tag": "wrong_tense_present",
+          "why": "'loses' is simple present, but 'could not enter' is past."
+        },
+        null,
+        {
+          "tag": "wrong_tense_continuous",
+          "why": "'was losing' describes a process, but the keys were already gone before he reached the door."
+        }
+      ],
+      "solution": [
+        "Ravi had lost his keys, so he could not enter the house.",
+        "The loss happened before 'could not enter', so use the past perfect 'had lost'."
+      ]
+    },
+    {
+      "key": "gram-tense-014",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "How long ____ you been learning the violin?",
+      "options": [
+        "have",
+        "did",
+        "will",
+        "has"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_aux_form",
+          "why": "'did' cannot be followed by 'been learning'; 'been' needs 'have' before it."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'will been' is ungrammatical; 'been learning' needs 'have' before it."
+        },
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'you' takes 'have', not 'has'."
+        }
+      ],
+      "solution": [
+        "How long have you been learning the violin?",
+        "'been learning' is present perfect continuous, so the auxiliary is 'have' after 'you'."
+      ]
+    },
+    {
+      "key": "gram-tense-015",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I ____ my cousin tomorrow, so I cannot come for the CCA session.",
+      "options": [
+        "was visiting",
+        "visited",
+        "have visited",
+        "am visiting"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_tense_past_continuous",
+          "why": "'was visiting' is past, but the plan is for tomorrow."
+        },
+        {
+          "tag": "wrong_tense_past",
+          "why": "'tomorrow' is in the future, so simple past 'visited' is wrong."
+        },
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'tomorrow' needs a future form; present perfect 'have visited' is wrong."
+        },
+        null
+      ],
+      "solution": [
+        "I am visiting my cousin tomorrow, so I cannot come for the CCA session.",
+        "A fixed plan for the future can use the present continuous: 'am visiting ... tomorrow'."
+      ]
+    },
+    {
+      "key": "gram-tense-016",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My brother ____ the guitar for three years now.",
+      "options": [
+        "plays",
+        "has been playing",
+        "have been playing",
+        "had played"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_duration",
+          "why": "'for three years now' shows a period up to now, so simple present 'plays' does not fit."
+        },
+        null,
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'My brother' is singular, so 'has' is needed, not 'have'."
+        },
+        {
+          "tag": "wrong_tense_past_perfect",
+          "why": "'now' links to the present, so past perfect 'had played' is wrong."
+        }
+      ],
+      "solution": [
+        "My brother has been playing the guitar for three years now.",
+        "'for three years now' needs the present perfect continuous 'has been playing'."
+      ]
+    },
+    {
+      "key": "gram-tense-017",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "By next June, Kai Wen ____ in this choir for four years.",
+      "options": [
+        "would sing",
+        "had been singing",
+        "will have been singing",
+        "would have been singing"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would sing' cannot express the total length of time reached by next June."
+        },
+        {
+          "tag": "wrong_tense_past_perfect",
+          "why": "'By next June' is future; 'had been singing' belongs to the past."
+        },
+        null,
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would have been singing' is an unreal past form and does not give the real total reached by next June."
+        }
+      ],
+      "solution": [
+        "By next June, Kai Wen will have been singing in this choir for four years.",
+        "'By next June' + a length of time takes the future perfect (continuous): 'will have been singing'."
+      ]
+    },
+    {
+      "key": "gram-tense-018",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The museum guide explained that the ship ____ in 1850 and had sailed to Singapore many times since.",
+      "options": [
+        "was built",
+        "has been built",
+        "is built",
+        "had been building"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_tense_perfect",
+          "why": "'in 1850' is a fixed past time, which cannot be used with the present perfect."
+        },
+        {
+          "tag": "wrong_tense_present",
+          "why": "'in 1850' is a past date, and the clause after 'explained' is in the past, so 'is built' is inconsistent."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "The ship did not do the building; it needs the passive 'was built'."
+        }
+      ],
+      "solution": [
+        "The museum guide explained that the ship was built in 1850 and had sailed to Singapore many times since.",
+        "A ship is built by people, so the passive 'was built', with the past date 'in 1850'."
+      ]
+    },
+    {
+      "key": "gram-tense-019",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Although it ____ heavily since morning, the football match went on as planned.",
+      "options": [
+        "has been raining",
+        "was raining",
+        "rained",
+        "had been raining"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_tense_consistency",
+          "why": "'went on' is past, so present perfect continuous 'has been raining' is inconsistent."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since morning' needs a perfect form; 'was raining' cannot take 'since'."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since morning' cannot go with the simple past 'rained'."
+        },
+        null
+      ],
+      "solution": [
+        "Although it had been raining heavily since morning, the football match went on as planned.",
+        "'since morning' before a past event ('went on') needs the past perfect continuous 'had been raining'."
+      ]
+    },
+    {
+      "key": "gram-tense-020",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The runner collapsed at the finish line because he ____ without stopping for two hours.",
+      "options": [
+        "is running",
+        "had been running",
+        "runs",
+        "has been running"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_tense_present",
+          "why": "'is running' is present, but the whole sentence is in the past."
+        },
+        null,
+        {
+          "tag": "wrong_tense_present",
+          "why": "'runs' is simple present and clashes with 'collapsed'."
+        },
+        {
+          "tag": "wrong_tense_consistency",
+          "why": "'collapsed' is past, so present perfect continuous 'has been running' does not match."
+        }
+      ],
+      "solution": [
+        "The runner collapsed at the finish line because he had been running without stopping for two hours.",
+        "A long action before a past event takes the past perfect continuous: 'had been running'."
+      ]
+    },
+    {
+      "key": "gram-tense-021",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Next week, when the P6 pupils ____ their oral exam, they will take a short break.",
+      "options": [
+        "will have finished",
+        "have finished",
+        "will finish",
+        "would finish"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "future_in_time_clause",
+          "why": "'will' is not used inside a 'when' clause about the future."
+        },
+        null,
+        {
+          "tag": "future_in_time_clause",
+          "why": "After 'when' for a future event, the verb stays in a present form; 'will' is not used inside the clause."
+        },
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would finish' is a past-based form and does not fit 'Next week ... will take'."
+        }
+      ],
+      "solution": [
+        "Next week, when the P6 pupils have finished their oral exam, they will take a short break.",
+        "After 'when' in a future sentence, use a present form; 'have finished' shows it is done first."
+      ]
+    },
+    {
+      "key": "gram-tense-022",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Whenever the haze got bad, my grandfather ____ the windows and switched on the air purifier.",
+      "options": [
+        "will close",
+        "would closed",
+        "had closed",
+        "would close"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_tense_future",
+          "why": "'got' and 'switched' are past, so 'will close' is inconsistent."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'would' must be followed by the base form 'close', not 'closed'."
+        },
+        {
+          "tag": "wrong_tense_past_perfect",
+          "why": "A repeated habit in the past uses 'would', not past perfect, which shows an earlier action."
+        },
+        null
+      ],
+      "solution": [
+        "Whenever the haze got bad, my grandfather would close the windows and switched on the air purifier.",
+        "'Whenever ... got' describes a repeated past habit, so use 'would close'."
+      ]
+    },
+    {
+      "key": "gram-tense-023",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Jia Hui ____ the piano since Primary 3, and she is now preparing for her Grade 5 exam.",
+      "options": [
+        "has played",
+        "plays",
+        "had played",
+        "played"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since' needs the present perfect; simple present 'plays' cannot take 'since'."
+        },
+        {
+          "tag": "wrong_tense_past_perfect",
+          "why": "'is now preparing' is present, so past perfect 'had played' is inconsistent."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since Primary 3' and 'is now' need a perfect tense, not the simple past."
+        }
+      ],
+      "solution": [
+        "Jia Hui has played the piano since Primary 3, and she is now preparing for her Grade 5 exam.",
+        "'since Primary 3' up to the present takes the present perfect 'has played'."
+      ]
+    },
+    {
+      "key": "gram-tense-024",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I wish I ____ more attention during yesterday's lesson.",
+      "options": [
+        "have paid",
+        "paid",
+        "had paid",
+        "would pay"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_wish_tense",
+          "why": "'wish' is followed by a past form, not present perfect 'have paid'."
+        },
+        {
+          "tag": "wrong_wish_tense",
+          "why": "A wish about the past ('yesterday') needs the past perfect, not simple past."
+        },
+        null,
+        {
+          "tag": "wrong_wish_tense",
+          "why": "'would pay' expresses a wish about the future, not a regret about yesterday."
+        }
+      ],
+      "solution": [
+        "I wish I had paid more attention during yesterday's lesson.",
+        "A wish about a past event takes the past perfect: 'I wish I had paid'."
+      ]
+    },
+    {
+      "key": "gram-tense-025",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "It was only after the guests had left that Mum realised she ____ to buy dessert.",
+      "options": [
+        "has forgotten",
+        "would forget",
+        "had forgotten",
+        "was forgetting"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_tense_consistency",
+          "why": "'realised' is past, so present perfect 'has forgotten' is inconsistent."
+        },
+        {
+          "tag": "wrong_modal_tense",
+          "why": "'would forget' looks forward; the forgetting happened before she realised."
+        },
+        null,
+        {
+          "tag": "wrong_tense_continuous",
+          "why": "'was forgetting' shows a process, but the forgetting was a completed earlier event."
+        }
+      ],
+      "solution": [
+        "It was only after the guests had left that Mum realised she had forgotten to buy dessert.",
+        "The forgetting came before 'realised', so use the past perfect 'had forgotten'."
+      ]
+    },
+    {
+      "key": "gram-prep-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The school fair will be held ____ Saturday.",
+      "options": [
+        "on",
+        "in",
+        "by",
+        "at"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_prep_time",
+          "why": "'in' is used for months, years and parts of a day, not a named day."
+        },
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'by' means 'no later than', not the day on which an event is held."
+        },
+        {
+          "tag": "wrong_prep_time",
+          "why": "'at' is used for clock times and points, not for days of the week."
+        }
+      ],
+      "solution": [
+        "The school fair will be held on Saturday.",
+        "Days of the week take 'on': on Saturday."
+      ]
+    },
+    {
+      "key": "gram-prep-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The accident happened ____ midnight.",
+      "options": [
+        "by",
+        "on",
+        "at",
+        "in"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'by midnight' means 'before midnight', not the moment it happened."
+        },
+        {
+          "tag": "wrong_prep_time",
+          "why": "'on' is used with days and dates, not with an exact time like midnight."
+        },
+        null,
+        {
+          "tag": "wrong_prep_time",
+          "why": "'in' is used with longer periods such as 'in the morning', not an exact time."
+        }
+      ],
+      "solution": [
+        "The accident happened at midnight.",
+        "A point in time such as midnight takes 'at'."
+      ]
+    },
+    {
+      "key": "gram-prep-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "She has been learning the piano ____ three years.",
+      "options": [
+        "since",
+        "for",
+        "at",
+        "during"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "for_vs_since",
+          "why": "'since' needs a starting point such as 'Primary 3', but 'three years' is a length of time."
+        },
+        null,
+        {
+          "tag": "wrong_prep_time",
+          "why": "'at' cannot introduce a length of time."
+        },
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'during' needs a named period (during the holidays), not a number of years."
+        }
+      ],
+      "solution": [
+        "She has been learning the piano for three years.",
+        "A length of time ('three years') takes 'for'."
+      ]
+    },
+    {
+      "key": "gram-prep-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "He has been absent ____ Monday.",
+      "options": [
+        "at",
+        "during",
+        "for",
+        "since"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_prep_time",
+          "why": "'at' is used for clock times, not for a starting day."
+        },
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'during' needs a named period or event, not a starting day like 'Monday'."
+        },
+        {
+          "tag": "for_vs_since",
+          "why": "'for' needs a length of time such as 'three days', but 'Monday' is a starting point."
+        },
+        null
+      ],
+      "solution": [
+        "He has been absent since Monday.",
+        "A starting point in time ('Monday') takes 'since'."
+      ]
+    },
+    {
+      "key": "gram-prep-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Wei Jie is very good ____ drawing.",
+      "options": [
+        "on",
+        "in",
+        "with",
+        "at"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'good on' does not describe a skill."
+        },
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "The adjective 'good' takes 'at' for a skill, not 'in'."
+        },
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'good with' is used for handling people or things, not for a skill like drawing."
+        },
+        null
+      ],
+      "solution": [
+        "Wei Jie is very good at drawing.",
+        "'good at' + a skill or activity."
+      ]
+    },
+    {
+      "key": "gram-prep-006",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I am afraid ____ spiders.",
+      "options": [
+        "from",
+        "of",
+        "for",
+        "to"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "The adjective 'afraid' takes 'of', not 'from'."
+        },
+        null,
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'afraid for' means worried about someone's safety, not a fear of spiders."
+        },
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'afraid to' needs a verb after it, not a noun like 'spiders'."
+        }
+      ],
+      "solution": [
+        "I am afraid of spiders.",
+        "'afraid of' + the thing feared."
+      ]
+    },
+    {
+      "key": "gram-prep-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Our team is responsible ____ keeping the classroom tidy.",
+      "options": [
+        "to",
+        "for",
+        "with",
+        "of"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'responsible to' means answerable to a person, not in charge of a task."
+        },
+        null,
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'responsible with' is not the usual collocation for a duty."
+        },
+        {
+          "tag": "wrong_prep_adjective",
+          "why": "'responsible' takes 'for' when it names the job, not 'of'."
+        }
+      ],
+      "solution": [
+        "Our team is responsible for keeping the classroom tidy.",
+        "'responsible for' + the duty."
+      ]
+    },
+    {
+      "key": "gram-prep-008",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I have been looking forward ____ the school camp.",
+      "options": [
+        "on",
+        "for",
+        "at",
+        "to"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_prep_phrasal",
+          "why": "'look forward on' is not an English phrase."
+        },
+        {
+          "tag": "wrong_prep_phrasal",
+          "why": "The phrase is 'look forward to', not 'look forward for'."
+        },
+        {
+          "tag": "wrong_prep_phrasal",
+          "why": "'look forward at' is not an English phrase."
+        },
+        null
+      ],
+      "solution": [
+        "I have been looking forward to the school camp.",
+        "'look forward to' + a noun or gerund."
+      ]
+    },
+    {
+      "key": "gram-prep-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The hawker was fined ____ selling food without a licence.",
+      "options": [
+        "for",
+        "of",
+        "on",
+        "with"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'fined of' is not used; the reason for a fine takes 'for'."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'fined on' is not used for the offence."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'fined with' is not used for the offence."
+        }
+      ],
+      "solution": [
+        "The hawker was fined for selling food without a licence.",
+        "'fined for' + the offence."
+      ]
+    },
+    {
+      "key": "gram-prep-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Please return the library books ____ next Monday.",
+      "options": [
+        "on",
+        "during",
+        "by",
+        "until"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'on' names a day an event happens, and 'on next Monday' is not used; a deadline needs 'by'."
+        },
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'during' needs a period of time that something happens within, not a deadline day."
+        },
+        null,
+        {
+          "tag": "by_vs_until",
+          "why": "'until' is used for an action that continues up to a time, but returning is a one-time action with a deadline."
+        }
+      ],
+      "solution": [
+        "Please return the library books by next Monday.",
+        "A deadline ('no later than next Monday') takes 'by'."
+      ]
+    },
+    {
+      "key": "gram-prep-011",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The cat hid ____ the sofa and the wall.",
+      "options": [
+        "beside",
+        "among",
+        "between",
+        "against"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'beside' means next to one thing, but the cat is in the gap between two."
+        },
+        {
+          "tag": "between_vs_among",
+          "why": "'among' is used for three or more things; here there are only two, the sofa and the wall."
+        },
+        null,
+        {
+          "tag": "wrong_prep_meaning",
+          "why": "'against' means pressed on something and does not fit two objects with 'and'."
+        }
+      ],
+      "solution": [
+        "The cat hid between the sofa and the wall.",
+        "Two objects joined by 'and' take 'between'."
+      ]
+    },
+    {
+      "key": "gram-prep-012",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "She cut the cake ____ a knife.",
+      "options": [
+        "with",
+        "by",
+        "in",
+        "through"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_prep_instrument",
+          "why": "'by' is used for means like 'by bus', not for a tool."
+        },
+        {
+          "tag": "wrong_prep_instrument",
+          "why": "'in' does not show the tool used."
+        },
+        {
+          "tag": "wrong_prep_instrument",
+          "why": "'through' means passing from one side to another, not using a tool."
+        }
+      ],
+      "solution": [
+        "She cut the cake with a knife.",
+        "A tool or instrument takes 'with'."
+      ]
+    },
+    {
+      "key": "gram-prep-013",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ali insisted ____ paying for everyone's drinks at the hawker centre.",
+      "options": [
+        "on",
+        "for",
+        "with",
+        "to"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'insist for' is not used in English."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'insist with' is not used in English."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'insist' takes 'on' before a gerund, not 'to'."
+        }
+      ],
+      "solution": [
+        "Ali insisted on paying for everyone's drinks at the hawker centre.",
+        "'insist on' + gerund."
+      ]
+    },
+    {
+      "key": "gram-prep-014",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Whether the school camp can go ahead after weeks of planning depends entirely ____ the weather.",
+      "options": [
+        "with",
+        "from",
+        "to",
+        "on"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'depend with' is not used in English."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'depend' takes 'on', not 'from'."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'depend to' is not used in English."
+        },
+        null
+      ],
+      "solution": [
+        "Whether the school camp can go ahead after weeks of planning depends entirely on the weather.",
+        "'depend on' + the factor."
+      ]
+    },
+    {
+      "key": "gram-prep-015",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Despite the heavy rain, the volunteers carried on ____ clearing the drains.",
+      "options": [
+        "from",
+        "with",
+        "for",
+        "by"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_prep_phrasal",
+          "why": "'carry on from' means continuing from a point, not continuing with a task."
+        },
+        null,
+        {
+          "tag": "wrong_prep_phrasal",
+          "why": "'carry on for' is not used for continuing a task."
+        },
+        {
+          "tag": "wrong_prep_phrasal",
+          "why": "'carry on by clearing' would mean the way they continued, not the same task."
+        }
+      ],
+      "solution": [
+        "Despite the heavy rain, the volunteers carried on with clearing the drains.",
+        "'carry on with' + the task."
+      ]
+    },
+    {
+      "key": "gram-prep-016",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Instead ____ complaining about the long queue, Mei Xin chatted with the stallholder.",
+      "options": [
+        "for",
+        "of",
+        "to",
+        "from"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_prep_phrase",
+          "why": "The phrase is 'instead of', not 'instead for'."
+        },
+        null,
+        {
+          "tag": "wrong_prep_phrase",
+          "why": "The phrase is 'instead of', not 'instead to'."
+        },
+        {
+          "tag": "wrong_prep_phrase",
+          "why": "The phrase is 'instead of', not 'instead from'."
+        }
+      ],
+      "solution": [
+        "Instead of complaining about the long queue, Mei Xin chatted with the stallholder.",
+        "'instead of' + gerund."
+      ]
+    },
+    {
+      "key": "gram-prep-017",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I would like to apologise ____ keeping you waiting.",
+      "options": [
+        "from",
+        "of",
+        "at",
+        "for"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'apologise from' is not used; the fault takes 'for'."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'apologise' takes 'for' before the reason, not 'of'."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'apologise at' is not used for the reason."
+        },
+        null
+      ],
+      "solution": [
+        "I would like to apologise for keeping you waiting.",
+        "'apologise for' + the fault."
+      ]
+    },
+    {
+      "key": "gram-prep-018",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Tom was accused ____ cheating, though he had done nothing wrong.",
+      "options": [
+        "of",
+        "for",
+        "with",
+        "on"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'accused' takes 'of' before the offence, not 'for'."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'accused with' is not used; 'charged with' is a different phrase."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'accused on' is not used for the offence."
+        }
+      ],
+      "solution": [
+        "Tom was accused of cheating, though he had done nothing wrong.",
+        "'accuse someone of' + the offence."
+      ]
+    },
+    {
+      "key": "gram-prep-019",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-3",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Pupils must refrain ____ running along the corridors.",
+      "options": [
+        "at",
+        "to",
+        "from",
+        "with"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'refrain at' is not used in English."
+        },
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'refrain to' is not used; the verb takes 'from' before a gerund."
+        },
+        null,
+        {
+          "tag": "wrong_prep_verb",
+          "why": "'refrain with' is not used in English; 'refrain' takes 'from'."
+        }
+      ],
+      "solution": [
+        "Pupils must refrain from running along the corridors.",
+        "'refrain from' + gerund."
+      ]
+    },
+    {
+      "key": "gram-vform-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mei Ling enjoys ____ in the school choir.",
+      "options": [
+        "sang",
+        "to sing",
+        "singing",
+        "sing"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_verb_form",
+          "why": "'sang' is a past tense and cannot follow 'enjoys'."
+        },
+        {
+          "tag": "verb_pattern_enjoy",
+          "why": "'enjoy' is followed by a gerund (-ing), not 'to' + verb."
+        },
+        null,
+        {
+          "tag": "verb_pattern_enjoy",
+          "why": "'enjoy' needs the -ing form; the base form 'sing' is ungrammatical here."
+        }
+      ],
+      "solution": [
+        "Mei Ling enjoys singing in the school choir.",
+        "'enjoy' + gerund: enjoys singing."
+      ]
+    },
+    {
+      "key": "gram-vform-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "We decided ____ the zoo on Saturday.",
+      "options": [
+        "to visit",
+        "visiting",
+        "visited",
+        "visit"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "verb_pattern_decide",
+          "why": "'decide' is followed by 'to' + verb, not a gerund."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'decided' must be followed by an infinitive, not a past tense."
+        },
+        {
+          "tag": "verb_pattern_decide",
+          "why": "'decide' needs 'to' before the verb."
+        }
+      ],
+      "solution": [
+        "We decided to visit the zoo on Saturday.",
+        "'decide' + to-infinitive: decided to visit."
+      ]
+    },
+    {
+      "key": "gram-vform-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My mother asked me ____ the rubbish out.",
+      "options": [
+        "to take",
+        "took",
+        "to taking",
+        "taking"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_verb_form",
+          "why": "'asked me' cannot be followed by a past tense verb."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "After 'to' the base form is used, not -ing, so 'to taking' is wrong."
+        },
+        {
+          "tag": "verb_pattern_ask",
+          "why": "'asked me' is followed by 'to' + verb, not -ing."
+        }
+      ],
+      "solution": [
+        "My mother asked me to take the rubbish out.",
+        "'ask someone' + to-infinitive: asked me to take."
+      ]
+    },
+    {
+      "key": "gram-vform-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Jun is looking forward to ____ his grandparents.",
+      "options": [
+        "to see",
+        "see",
+        "seeing",
+        "saw"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "verb_pattern_preposition",
+          "why": "'look forward to' already has 'to'; another 'to' is not added."
+        },
+        {
+          "tag": "verb_pattern_preposition",
+          "why": "'to' here is a preposition, so the verb after it must be -ing."
+        },
+        null,
+        {
+          "tag": "wrong_verb_form",
+          "why": "A preposition cannot be followed by a past tense verb."
+        }
+      ],
+      "solution": [
+        "Jun is looking forward to seeing his grandparents.",
+        "'look forward to' + gerund: looking forward to seeing."
+      ]
+    },
+    {
+      "key": "gram-vform-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I am tired of ____ the same food every day.",
+      "options": [
+        "eat",
+        "eating",
+        "to eat",
+        "ate"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "verb_pattern_preposition",
+          "why": "After the preposition 'of', the verb takes -ing."
+        },
+        null,
+        {
+          "tag": "verb_pattern_preposition",
+          "why": "'tired of' is followed by a gerund, not 'to' + verb."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "A preposition cannot be followed by a past tense verb."
+        }
+      ],
+      "solution": [
+        "I am tired of eating the same food every day.",
+        "Preposition + gerund: tired of eating."
+      ]
+    },
+    {
+      "key": "gram-vform-006",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Would you mind ____ the window?",
+      "options": [
+        "close",
+        "closed",
+        "to close",
+        "closing"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "verb_pattern_mind",
+          "why": "'Would you mind' needs the -ing form."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'mind' cannot be followed by a past tense verb."
+        },
+        {
+          "tag": "verb_pattern_mind",
+          "why": "'mind' is followed by a gerund, not 'to' + verb."
+        },
+        null
+      ],
+      "solution": [
+        "Would you mind closing the window?",
+        "'mind' + gerund: Would you mind closing...?"
+      ]
+    },
+    {
+      "key": "gram-vform-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The boys were seen ____ in the playground after the bell.",
+      "options": [
+        "plays",
+        "to played",
+        "played",
+        "playing"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "subject_verb_agreement",
+          "why": "A finite verb 'plays' cannot follow 'were seen'."
+        },
+        {
+          "tag": "wrong_infinitive",
+          "why": "After 'to' the verb must be in the base form, so 'to played' is wrong."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'were seen played' is not a correct passive pattern; it needs 'playing'."
+        },
+        null
+      ],
+      "solution": [
+        "The boys were seen playing in the playground after the bell.",
+        "'be seen' + -ing shows an action in progress: were seen playing."
+      ]
+    },
+    {
+      "key": "gram-vform-008",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The vase, ____ by a naughty puppy, lay in pieces on the floor.",
+      "options": [
+        "breaking",
+        "broken",
+        "break",
+        "to break"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_participle",
+          "why": "The vase was broken by the puppy, so the passive participle is needed, not -ing."
+        },
+        null,
+        {
+          "tag": "wrong_verb_form",
+          "why": "The base form 'break' cannot follow a noun here."
+        },
+        {
+          "tag": "wrong_participle",
+          "why": "'to break' shows purpose and does not say who broke the vase."
+        }
+      ],
+      "solution": [
+        "The vase, broken by a naughty puppy, lay in pieces on the floor.",
+        "A past participle gives a passive meaning: the vase, broken by a puppy."
+      ]
+    },
+    {
+      "key": "gram-vform-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My teacher made us ____ the school song three times.",
+      "options": [
+        "sang",
+        "sing",
+        "singing",
+        "to sing"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_verb_form",
+          "why": "After 'made us' the base form is needed, not the past tense."
+        },
+        null,
+        {
+          "tag": "verb_pattern_make",
+          "why": "'made us' is followed by the base verb, not -ing."
+        },
+        {
+          "tag": "verb_pattern_make",
+          "why": "'make' someone do something takes the bare verb, without 'to'."
+        }
+      ],
+      "solution": [
+        "My teacher made us sing the school song three times.",
+        "'make someone' + bare infinitive: made us sing."
+      ]
+    },
+    {
+      "key": "gram-vform-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Rina was too shy ____ her hand to answer the question.",
+      "options": [
+        "raise",
+        "raising",
+        "to raised",
+        "to raise"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "verb_pattern_too_to",
+          "why": "'too + adjective' needs 'to' before the verb."
+        },
+        {
+          "tag": "verb_pattern_too_to",
+          "why": "'too shy' is followed by 'to' + verb, not -ing."
+        },
+        {
+          "tag": "wrong_infinitive",
+          "why": "After 'to' the verb must be in the base form, so 'to raised' is wrong."
+        },
+        null
+      ],
+      "solution": [
+        "Rina was too shy to raise her hand to answer the question.",
+        "'too + adjective + to-infinitive': too shy to raise."
+      ]
+    },
+    {
+      "key": "gram-vform-011",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "We could not help ____ when the clown slipped on the banana skin.",
+      "options": [
+        "laughing",
+        "to laugh",
+        "laugh",
+        "laughed"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "verb_pattern_cannot_help",
+          "why": "'cannot help' is followed by -ing, not 'to' + verb."
+        },
+        {
+          "tag": "verb_pattern_cannot_help",
+          "why": "'could not help' needs the -ing form."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'help' cannot be followed by a past tense verb."
+        }
+      ],
+      "solution": [
+        "We could not help laughing when the clown slipped on the banana skin.",
+        "'cannot help' + gerund: could not help laughing."
+      ]
+    },
+    {
+      "key": "gram-vform-012",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Having ____ his homework, Jun Jie went out to play basketball.",
+      "options": [
+        "finishing",
+        "been finished",
+        "finished",
+        "finish"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_perfect_participle",
+          "why": "'Having finishing' is not a correct form; 'having' takes the past participle."
+        },
+        {
+          "tag": "wrong_voice",
+          "why": "'Having been finished' is passive, but Jun Jie did the finishing."
+        },
+        null,
+        {
+          "tag": "wrong_perfect_participle",
+          "why": "'Having' must be followed by a past participle."
+        }
+      ],
+      "solution": [
+        "Having finished his homework, Jun Jie went out to play basketball.",
+        "'Having' + past participle shows the earlier action: Having finished..."
+      ]
+    },
+    {
+      "key": "gram-vform-013",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The coach suggested ____ an extra training session before the match.",
+      "options": [
+        "having",
+        "had",
+        "to have",
+        "have"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_verb_form",
+          "why": "'suggested' cannot be followed directly by a past tense verb."
+        },
+        {
+          "tag": "verb_pattern_suggest",
+          "why": "'suggest' is followed by a gerund, not 'to' + verb."
+        },
+        {
+          "tag": "verb_pattern_suggest",
+          "why": "'suggested have' is wrong; 'suggest' needs the -ing form here."
+        }
+      ],
+      "solution": [
+        "The coach suggested having an extra training session before the match.",
+        "'suggest' + gerund: suggested having."
+      ]
+    },
+    {
+      "key": "gram-vform-014",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The old shophouse, ____ in 1920, is now a museum.",
+      "options": [
+        "building",
+        "was built",
+        "build",
+        "built"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_participle",
+          "why": "The shophouse did not build itself, so the passive participle 'built' is needed."
+        },
+        {
+          "tag": "extra_finite_verb",
+          "why": "'was built' would add a second finite verb between commas, making the sentence ungrammatical."
+        },
+        {
+          "tag": "wrong_participle",
+          "why": "'build' is the base form; the passive meaning needs the past participle 'built'."
+        },
+        null
+      ],
+      "solution": [
+        "The old shophouse, built in 1920, is now a museum.",
+        "A past participle phrase gives a passive meaning: the shophouse, built in 1920."
+      ]
+    },
+    {
+      "key": "gram-vform-015",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I would rather ____ in the shade than play in this heat.",
+      "options": [
+        "sat",
+        "sit",
+        "sitting",
+        "to sit"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_verb_form",
+          "why": "'would rather' is followed by the base form, not the past tense, for a present preference."
+        },
+        null,
+        {
+          "tag": "verb_pattern_would_rather",
+          "why": "'would rather' needs the base form, not -ing."
+        },
+        {
+          "tag": "verb_pattern_would_rather",
+          "why": "'would rather' is followed by the bare infinitive, without 'to'."
+        }
+      ],
+      "solution": [
+        "I would rather sit in the shade than play in this heat.",
+        "'would rather' + bare infinitive: would rather sit."
+      ]
+    },
+    {
+      "key": "gram-vform-016",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Rain or shine, the hawker is used to ____ up at four in the morning.",
+      "options": [
+        "to wake",
+        "waking",
+        "wake",
+        "woke"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "verb_pattern_used_to",
+          "why": "'is used to' already contains 'to'; another 'to' is not added."
+        },
+        null,
+        {
+          "tag": "verb_pattern_used_to",
+          "why": "In 'be used to', 'to' is a preposition, so the verb must be -ing."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'used to' (be accustomed) cannot be followed by a past tense verb."
+        }
+      ],
+      "solution": [
+        "Rain or shine, the hawker is used to waking up at four in the morning.",
+        "'be used to' + gerund: is used to waking up."
+      ]
+    },
+    {
+      "key": "gram-vform-017",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not ____ what to say, Hui Min kept quiet.",
+      "options": [
+        "know",
+        "known",
+        "to know",
+        "knowing"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_participle",
+          "why": "A participle phrase at the start needs -ing, not the base form."
+        },
+        {
+          "tag": "wrong_participle",
+          "why": "'known' is passive; Hui Min was the one who did not know."
+        },
+        {
+          "tag": "wrong_participle",
+          "why": "'Not to know' changes the meaning to a purpose and does not explain why she kept quiet."
+        },
+        null
+      ],
+      "solution": [
+        "Not knowing what to say, Hui Min kept quiet.",
+        "A participial phrase of reason takes -ing: Not knowing..."
+      ]
+    },
+    {
+      "key": "gram-sva-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The boys ____ playing football on the field.",
+      "options": [
+        "was",
+        "has",
+        "is",
+        "are"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'was' goes with a singular subject, but 'The boys' is plural."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'has' cannot be followed by 'playing' as a continuous form; 'are playing' is needed."
+        },
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'is' needs a singular subject, but the subject here is 'The boys'."
+        },
+        null
+      ],
+      "solution": [
+        "The boys are playing football on the field.",
+        "'The boys' is plural, so use 'are'."
+      ]
+    },
+    {
+      "key": "gram-sva-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Everyone in my class ____ a library card.",
+      "options": [
+        "having",
+        "has",
+        "have",
+        "are"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_verb_form",
+          "why": "'having' is not a finite verb, so the sentence has no main verb."
+        },
+        null,
+        {
+          "tag": "subject_verb_agreement",
+          "why": "'Everyone' is singular, so it takes 'has', not 'have'."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'are' cannot be followed by 'a library card' and does not agree with 'Everyone'."
+        }
+      ],
+      "solution": [
+        "Everyone in my class has a library card.",
+        "'Everyone' is singular, so 'has'."
+      ]
+    },
+    {
+      "key": "gram-sva-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "My brother and my sister ____ the same tuition teacher.",
+      "options": [
+        "has",
+        "does",
+        "have",
+        "is"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "subject_verb_agreement",
+          "why": "Two subjects joined by 'and' make a plural subject, so 'has' is wrong."
+        },
+        {
+          "tag": "wrong_verb_meaning",
+          "why": "'does' is an auxiliary and does not mean 'possess' here."
+        },
+        null,
+        {
+          "tag": "wrong_aux_form",
+          "why": "'is' cannot link to 'the same tuition teacher' as an action verb, and it is singular."
+        }
+      ],
+      "solution": [
+        "My brother and my sister have the same tuition teacher.",
+        "'My brother and my sister' is a plural subject, so 'have'."
+      ]
+    },
+    {
+      "key": "gram-sva-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The water in those bottles ____ still cold.",
+      "options": [
+        "is",
+        "be",
+        "were",
+        "are"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_verb_form",
+          "why": "'be' is not a finite verb and does not agree with 'The water'; 'is' is needed."
+        },
+        {
+          "tag": "nearest_noun_agreement",
+          "why": "'were' is plural; the subject is 'The water'."
+        },
+        {
+          "tag": "nearest_noun_agreement",
+          "why": "'are' agrees with the nearby 'bottles', but the subject is 'The water', which is singular."
+        }
+      ],
+      "solution": [
+        "The water in those bottles is still cold.",
+        "The subject is 'The water' (singular), so 'is', not agreeing with 'bottles'."
+      ]
+    },
+    {
+      "key": "gram-sva-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The news about the school trip ____ exciting.",
+      "options": [
+        "is",
+        "were",
+        "are",
+        "be"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "uncountable_news",
+          "why": "'news' is treated as singular, so 'were' is wrong."
+        },
+        {
+          "tag": "uncountable_news",
+          "why": "'news' looks plural but is an uncountable noun and takes a singular verb."
+        },
+        {
+          "tag": "wrong_verb_form",
+          "why": "'be' is not a finite verb and does not agree with 'The news'; 'is' is needed."
+        }
+      ],
+      "solution": [
+        "The news about the school trip is exciting.",
+        "'news' is singular, so 'is'."
+      ]
+    },
+    {
+      "key": "gram-sva-006",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Neither Ali nor his friends ____ finished the project.",
+      "options": [
+        "has",
+        "were",
+        "have",
+        "was"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "neither_nor_nearer_subject",
+          "why": "With 'neither ... nor', the verb agrees with the nearer subject 'his friends', which is plural."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'were' cannot be followed by 'finished' to form the perfect tense; 'have finished' is needed."
+        },
+        null,
+        {
+          "tag": "wrong_aux_form",
+          "why": "'was' cannot be followed by 'finished' to form a perfect tense."
+        }
+      ],
+      "solution": [
+        "Neither Ali nor his friends have finished the project.",
+        "'neither ... nor' follows the nearer subject: 'his friends' is plural, so 'have'."
+      ]
+    },
+    {
+      "key": "gram-sva-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Each of the P6 pupils ____ a copy of the revision notes.",
+      "options": [
+        "are",
+        "do",
+        "has",
+        "have"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_aux_form",
+          "why": "'are' does not suit 'a copy of the notes' and does not agree with 'Each'."
+        },
+        {
+          "tag": "wrong_verb_meaning",
+          "why": "'do' is an auxiliary and cannot mean 'possess' here."
+        },
+        null,
+        {
+          "tag": "each_of_singular",
+          "why": "'Each' is singular, even though 'pupils' comes right before the blank."
+        }
+      ],
+      "solution": [
+        "Each of the P6 pupils has a copy of the revision notes.",
+        "'Each of' + plural noun takes a singular verb: has."
+      ]
+    },
+    {
+      "key": "gram-sva-008",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "A number of pupils ____ absent today because of the flu.",
+      "options": [
+        "are",
+        "has been",
+        "is",
+        "was"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "a_number_of_plural",
+          "why": "'has been' is singular; 'a number of pupils' is plural."
+        },
+        {
+          "tag": "a_number_of_plural",
+          "why": "'A number of' means 'several', so the verb is plural."
+        },
+        {
+          "tag": "a_number_of_plural",
+          "why": "'was' is singular, but 'a number of pupils' is plural; the time 'today' also needs present."
+        }
+      ],
+      "solution": [
+        "A number of pupils are absent today because of the flu.",
+        "'A number of' + plural noun takes a plural verb: are."
+      ]
+    },
+    {
+      "key": "gram-sva-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The number of pupils in the choir ____ increased this year.",
+      "options": [
+        "have",
+        "were",
+        "are",
+        "has"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "the_number_of_singular",
+          "why": "'The number of' is singular, so it takes 'has', not 'have'."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'were' cannot be followed by 'increased' to form a perfect tense."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'are' cannot be followed by 'increased' to form a perfect tense."
+        },
+        null
+      ],
+      "solution": [
+        "The number of pupils in the choir has increased this year.",
+        "'The number of' is singular, so 'has increased'."
+      ]
+    },
+    {
+      "key": "gram-sva-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The police ____ questioning two men outside the shopping centre.",
+      "options": [
+        "has been",
+        "are",
+        "was",
+        "is"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "collective_police_plural",
+          "why": "'has been' is singular; 'the police' is plural."
+        },
+        null,
+        {
+          "tag": "collective_police_plural",
+          "why": "'police' takes a plural verb, and 'was' is singular."
+        },
+        {
+          "tag": "collective_police_plural",
+          "why": "'police' is always plural, so 'is' is wrong."
+        }
+      ],
+      "solution": [
+        "The police are questioning two men outside the shopping centre.",
+        "'The police' is plural, so 'are'."
+      ]
+    },
+    {
+      "key": "gram-sva-011",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The quality of the cookies sold at the school fair ____ improved a great deal.",
+      "options": [
+        "has",
+        "are",
+        "have",
+        "were"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_aux_form",
+          "why": "'are' cannot be followed by 'improved' to form the perfect tense."
+        },
+        {
+          "tag": "nearest_noun_agreement",
+          "why": "'have' agrees with the nearby 'cookies', but the subject is 'The quality', which is singular."
+        },
+        {
+          "tag": "wrong_aux_form",
+          "why": "'were' cannot be followed by 'improved' to form the perfect tense."
+        }
+      ],
+      "solution": [
+        "The quality of the cookies sold at the school fair has improved a great deal.",
+        "The subject is 'The quality' (singular), so 'has improved'."
+      ]
+    },
+    {
+      "key": "gram-sva-012",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Either the teacher or the prefects ____ going to announce the winners.",
+      "options": [
+        "is",
+        "was",
+        "are",
+        "has"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "either_or_nearer_subject",
+          "why": "With 'either ... or', the verb agrees with the nearer subject 'the prefects', which is plural."
+        },
+        {
+          "tag": "either_or_nearer_subject",
+          "why": "'was' is singular, and the tense does not match 'going to announce'."
+        },
+        null,
+        {
+          "tag": "wrong_aux_form",
+          "why": "'has' cannot be followed by 'going' as a continuous form."
+        }
+      ],
+      "solution": [
+        "Either the teacher or the prefects are going to announce the winners.",
+        "'either ... or' agrees with the nearer subject: 'prefects' is plural, so 'are'."
+      ]
+    },
+    {
+      "key": "gram-sva-013",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The list of items to bring for the camp ____ pinned on the notice board for a week, so check it before you pack.",
+      "options": [
+        "are",
+        "were",
+        "has been",
+        "have been"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "nearest_noun_agreement",
+          "why": "'are' agrees with the nearby 'items', and 'for a week' needs a perfect tense."
+        },
+        {
+          "tag": "nearest_noun_agreement",
+          "why": "'were' is plural, but the subject is 'The list' (singular)."
+        },
+        null,
+        {
+          "tag": "nearest_noun_agreement",
+          "why": "'have been' agrees with the nearby 'items', but the subject is 'The list', which is singular."
+        }
+      ],
+      "solution": [
+        "The list of items to bring for the camp has been pinned on the notice board for a week, so check it before you pack.",
+        "The subject is 'The list' (singular), so 'has been pinned'."
+      ]
+    },
+    {
+      "key": "gram-sva-014",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not only the pupils but also their form teacher ____ excited about the camp for weeks.",
+      "options": [
+        "has been",
+        "were",
+        "have been",
+        "are"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "not_only_but_also_nearer_subject",
+          "why": "'were' is plural, and 'for weeks' needs a perfect tense."
+        },
+        {
+          "tag": "not_only_but_also_nearer_subject",
+          "why": "With 'not only ... but also', the verb agrees with the nearer subject 'their form teacher', which is singular."
+        },
+        {
+          "tag": "not_only_but_also_nearer_subject",
+          "why": "'are' is plural, and 'for weeks' needs a perfect tense."
+        }
+      ],
+      "solution": [
+        "Not only the pupils but also their form teacher has been excited about the camp for weeks.",
+        "'not only ... but also' agrees with the nearer subject (singular): has been."
+      ]
+    },
+    {
+      "key": "gram-sva-015",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-2",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The teacher, together with her P6 pupils, ____ at the MRT station since 7 a.m.",
+      "options": [
+        "have been waiting",
+        "was waiting",
+        "is waiting",
+        "has been waiting"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "together_with_no_effect",
+          "why": "'together with her P6 pupils' does not make the subject plural; the subject is only 'The teacher'."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since 7 a.m.' needs a perfect tense, not past continuous."
+        },
+        {
+          "tag": "wrong_tense_since",
+          "why": "'since 7 a.m.' needs a perfect tense, not simple present continuous."
+        },
+        null
+      ],
+      "solution": [
+        "The teacher, together with her P6 pupils, has been waiting at the MRT station since 7 a.m.",
+        "'together with' does not change the subject; 'since' needs the perfect: has been waiting."
+      ]
+    },
+    {
+      "key": "gram-quant-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "There is ____ juice left in the jug.",
+      "options": [
+        "a number of",
+        "many",
+        "a little",
+        "a few"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a number of' goes with plural countable nouns, but 'juice' is uncountable."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'many' is used with countable plural nouns, not with uncountable 'juice'."
+        },
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a few' is used with countable nouns, but 'juice' is uncountable."
+        }
+      ],
+      "solution": [
+        "There is a little juice left in the jug.",
+        "'juice' is uncountable, so 'a little'."
+      ]
+    },
+    {
+      "key": "gram-quant-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "How ____ pupils are there in your class?",
+      "options": [
+        "little",
+        "many",
+        "much",
+        "a little"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'little' goes with uncountable nouns, not 'pupils'."
+        },
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'much' is for uncountable nouns, but 'pupils' is countable."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a little' goes with uncountable nouns, not 'pupils'."
+        }
+      ],
+      "solution": [
+        "How many pupils are there in your class?",
+        "'pupils' is countable, so 'How many'."
+      ]
+    },
+    {
+      "key": "gram-quant-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Could I have ____ apple from the basket, please?",
+      "options": [
+        "a",
+        "many",
+        "few",
+        "an"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "article_a_an",
+          "why": "'apple' begins with a vowel sound, so it takes 'an', not 'a'."
+        },
+        {
+          "tag": "wrong_quantifier",
+          "why": "'many' needs a plural noun, but 'apple' is singular."
+        },
+        {
+          "tag": "wrong_quantifier",
+          "why": "'few' needs a plural noun, but 'apple' is singular."
+        },
+        null
+      ],
+      "solution": [
+        "Could I have an apple from the basket, please?",
+        "Before a vowel sound, use 'an': an apple."
+      ]
+    },
+    {
+      "key": "gram-quant-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "She drank ____ water after the run.",
+      "options": [
+        "many",
+        "few",
+        "a",
+        "some"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'many' is used with countable plural nouns, not uncountable 'water'."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'few' is used with countable plural nouns, not uncountable 'water'."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a' is used before a singular countable noun, but 'water' is uncountable."
+        },
+        null
+      ],
+      "solution": [
+        "She drank some water after the run.",
+        "'water' is uncountable, so 'some'."
+      ]
+    },
+    {
+      "key": "gram-quant-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "We have ____ time left, so we must hurry.",
+      "options": [
+        "a few",
+        "little",
+        "few",
+        "several"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a few' goes with countable nouns, but 'time' here is uncountable."
+        },
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'few' goes with countable nouns, but 'time' here is uncountable."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'several' goes with plural countable nouns, but 'time' here is uncountable."
+        }
+      ],
+      "solution": [
+        "We have little time left, so we must hurry.",
+        "'time' is uncountable and the meaning is 'not enough', so 'little'."
+      ]
+    },
+    {
+      "key": "gram-quant-006",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "There were so ____ people at the hawker centre that we had to wait for a table.",
+      "options": [
+        "much",
+        "many",
+        "little",
+        "few"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'much' is for uncountable nouns, but 'people' is a countable plural."
+        },
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'little' is for uncountable nouns, and it would mean there were hardly any people."
+        },
+        {
+          "tag": "wrong_quantifier_meaning",
+          "why": "'so few' would mean there were hardly any people, which does not explain the wait."
+        }
+      ],
+      "solution": [
+        "There were so many people at the hawker centre that we had to wait for a table.",
+        "'people' is countable and the meaning is 'a large number', so 'so many'."
+      ]
+    },
+    {
+      "key": "gram-quant-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "He has ____ friends, so he often feels lonely.",
+      "options": [
+        "a little",
+        "any",
+        "a few",
+        "few"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a little' goes with uncountable nouns, but 'friends' is countable."
+        },
+        {
+          "tag": "any_in_positive",
+          "why": "'any' is used mainly in negatives and questions, not in a positive statement like this."
+        },
+        {
+          "tag": "few_vs_a_few",
+          "why": "'a few' means some, which is positive; 'feels lonely' needs the negative 'few'."
+        },
+        null
+      ],
+      "solution": [
+        "He has few friends, so he often feels lonely.",
+        "'friends' is countable and the meaning is 'hardly any', so 'few'."
+      ]
+    },
+    {
+      "key": "gram-quant-008",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "We have ____ sugar left, so we can still bake a small cake.",
+      "options": [
+        "a little",
+        "few",
+        "a few",
+        "a number of"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'few' goes with countable nouns, but 'sugar' is uncountable."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a few' goes with countable nouns, but 'sugar' is uncountable."
+        },
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a number of' goes with plural countable nouns, but 'sugar' is uncountable."
+        }
+      ],
+      "solution": [
+        "We have a little sugar left, so we can still bake a small cake.",
+        "'sugar' is uncountable and 'can still bake' is positive, so 'a little'."
+      ]
+    },
+    {
+      "key": "gram-quant-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I have two pens, but ____ of them works.",
+      "options": [
+        "none",
+        "either",
+        "neither",
+        "everyone"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "neither_vs_none",
+          "why": "'none' is used for three or more things; here there are only two pens."
+        },
+        {
+          "tag": "wrong_quantifier_meaning",
+          "why": "'either of them works' means at least one works, which contradicts 'but'."
+        },
+        null,
+        {
+          "tag": "wrong_quantifier_meaning",
+          "why": "'everyone of them' is not used, and it would contradict 'but'."
+        }
+      ],
+      "solution": [
+        "I have two pens, but neither of them works.",
+        "For two things, 'neither of them' means 'not one and not the other'."
+      ]
+    },
+    {
+      "key": "gram-quant-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "____ pupil in the class must hand in the form by Friday.",
+      "options": [
+        "Several",
+        "Many",
+        "Every",
+        "All"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "singular_vs_plural_determiner",
+          "why": "'Several' needs a plural noun, but 'pupil' is singular."
+        },
+        {
+          "tag": "singular_vs_plural_determiner",
+          "why": "'Many' needs a plural noun, but 'pupil' is singular."
+        },
+        null,
+        {
+          "tag": "singular_vs_plural_determiner",
+          "why": "'All' needs a plural noun, but 'pupil' is singular."
+        }
+      ],
+      "solution": [
+        "Every pupil in the class must hand in the form by Friday.",
+        "'pupil' is singular, so 'Every'."
+      ]
+    },
+    {
+      "key": "gram-quant-011",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The more homework Kiara had, ____ time she had to play.",
+      "options": [
+        "the least",
+        "the less",
+        "the fewer",
+        "less"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_degree",
+          "why": "'the least' is a superlative, but the sentence compares two changes."
+        },
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'fewer' is used with countable nouns, but 'time' is uncountable."
+        },
+        {
+          "tag": "missing_the_comparative",
+          "why": "'The more ..., the less ...' needs 'the' before the second comparative."
+        }
+      ],
+      "solution": [
+        "The more homework Kiara had, the less time she had to play.",
+        "'time' is uncountable, so 'the less' in 'the more ..., the less ...'."
+      ]
+    },
+    {
+      "key": "gram-quant-012",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Hardly ____ pupils came to the extra class because of the rain, so it was cancelled.",
+      "options": [
+        "no",
+        "any",
+        "a little",
+        "a few"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "double_negative",
+          "why": "'hardly' is already negative, so adding 'no' makes a double negative."
+        },
+        null,
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'a little' goes with uncountable nouns, but 'pupils' is countable."
+        },
+        {
+          "tag": "hardly_with_any",
+          "why": "'hardly a few' is not used; 'hardly' goes with 'any'."
+        }
+      ],
+      "solution": [
+        "Hardly any pupils came to the extra class because of the rain, so it was cancelled.",
+        "'hardly' is followed by 'any': Hardly any pupils came."
+      ]
+    },
+    {
+      "key": "gram-quant-013",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I cannot find ____ my pen or my ruler.",
+      "options": [
+        "any",
+        "both",
+        "neither",
+        "either"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_correlative",
+          "why": "'any' does not combine with 'or' to join two named items."
+        },
+        {
+          "tag": "wrong_correlative",
+          "why": "'both' is used with 'and', not 'or'."
+        },
+        {
+          "tag": "double_negative",
+          "why": "'cannot ... neither' makes a double negative."
+        },
+        null
+      ],
+      "solution": [
+        "I cannot find either my pen or my ruler.",
+        "'either ... or' joins two items after a negative: cannot find either ... or ...."
+      ]
+    },
+    {
+      "key": "gram-quant-014",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not all the answers were correct; ____ were wrong.",
+      "options": [
+        "some",
+        "no",
+        "any",
+        "every"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_quantifier_meaning",
+          "why": "'no' would say none were wrong, which contradicts 'Not all'."
+        },
+        {
+          "tag": "any_in_positive",
+          "why": "'any' is used mainly in negatives and questions, but this is a positive statement."
+        },
+        {
+          "tag": "singular_vs_plural_determiner",
+          "why": "'every' needs a singular noun, and 'every were' is ungrammatical."
+        }
+      ],
+      "solution": [
+        "Not all the answers were correct; some were wrong.",
+        "'Not all were correct' means some were wrong, so 'some'."
+      ]
+    },
+    {
+      "key": "gram-quant-015",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-7",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "We spent so ____ money on the gift that we had none left for the card.",
+      "options": [
+        "many",
+        "such",
+        "much",
+        "too"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "countable_vs_uncountable",
+          "why": "'many' is used with countable nouns, but 'money' is uncountable."
+        },
+        {
+          "tag": "so_vs_such",
+          "why": "'so such money' is ungrammatical; 'such' cannot follow 'so'."
+        },
+        null,
+        {
+          "tag": "too_vs_so",
+          "why": "'too' would need 'to' after it, not 'that'."
+        }
+      ],
+      "solution": [
+        "We spent so much money on the gift that we had none left for the card.",
+        "'money' is uncountable, so 'so much ... that ...'."
+      ]
+    },
+    {
+      "key": "gram-tag-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "You like chicken rice, ____?",
+      "options": [
+        "aren't you",
+        "didn't you",
+        "don't you",
+        "do you"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "'like' uses 'do', so the tag needs 'don't', not 'aren't'."
+        },
+        {
+          "tag": "tag_wrong_tense",
+          "why": "The sentence is in the present, so the tag needs 'don't', not past 'didn't'."
+        },
+        null,
+        {
+          "tag": "tag_polarity",
+          "why": "The statement is positive, so the tag must be negative."
+        }
+      ],
+      "solution": [
+        "You like chicken rice, don't you?",
+        "Positive present statement with 'like': the tag is 'don't you'."
+      ]
+    },
+    {
+      "key": "gram-tag-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ben can swim, ____?",
+      "options": [
+        "can't he",
+        "isn't he",
+        "can he",
+        "doesn't he"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement has the modal 'can', so the tag needs 'can't', not 'isn't'."
+        },
+        {
+          "tag": "tag_polarity",
+          "why": "The statement is positive, so the tag must be negative."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'can', so the tag repeats 'can', not 'does'."
+        }
+      ],
+      "solution": [
+        "Ben can swim, can't he?",
+        "The tag repeats the modal 'can' in the opposite polarity: can't he."
+      ]
+    },
+    {
+      "key": "gram-tag-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The pupils aren't late, ____?",
+      "options": [
+        "are they",
+        "aren't they",
+        "is it",
+        "do they"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "tag_polarity",
+          "why": "The statement is negative, so the tag must be positive."
+        },
+        {
+          "tag": "tag_wrong_pronoun",
+          "why": "'The pupils' is plural, so the pronoun must be 'they', not 'it'."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'are', so the tag repeats 'are', not 'do'."
+        }
+      ],
+      "solution": [
+        "The pupils aren't late, are they?",
+        "Negative statement with 'are': the tag is positive 'are they'."
+      ]
+    },
+    {
+      "key": "gram-tag-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Let's go to the library after school, ____?",
+      "options": [
+        "let us",
+        "don't we",
+        "shall we",
+        "will we"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "tag_after_lets",
+          "why": "'let us' is not a question tag."
+        },
+        {
+          "tag": "tag_after_lets",
+          "why": "After 'Let's' the tag is 'shall we', not a negative 'don't we'."
+        },
+        null,
+        {
+          "tag": "tag_after_lets",
+          "why": "After 'Let's', the tag is 'shall we'."
+        }
+      ],
+      "solution": [
+        "Let's go to the library after school, shall we?",
+        "'Let's ...' takes the tag 'shall we?'."
+      ]
+    },
+    {
+      "key": "gram-tag-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "She didn't finish her homework, ____?",
+      "options": [
+        "does she",
+        "did she",
+        "is she",
+        "hadn't she"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "tag_wrong_tense",
+          "why": "The statement is past, so the tag must use 'did', not 'does'."
+        },
+        null,
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'didn't', so the tag repeats 'did', not 'is'."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement has 'didn't', so the tag uses 'did', not 'had'."
+        }
+      ],
+      "solution": [
+        "She didn't finish her homework, did she?",
+        "Negative past statement: the tag is positive 'did she'."
+      ]
+    },
+    {
+      "key": "gram-tag-006",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Everyone is ready for the performance, ____?",
+      "options": [
+        "aren't they",
+        "weren't they",
+        "are they",
+        "don't they"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "tag_wrong_tense",
+          "why": "The statement is present ('is'), so the tag cannot be past 'weren't'."
+        },
+        {
+          "tag": "tag_polarity",
+          "why": "The statement is positive, so the tag must be negative."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'is', so the tag repeats 'be' as 'aren't', not 'don't'."
+        }
+      ],
+      "solution": [
+        "Everyone is ready for the performance, aren't they?",
+        "'Everyone' takes 'they' in the tag; positive statement gives negative 'aren't they'."
+      ]
+    },
+    {
+      "key": "gram-tag-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I am the tallest in the class, ____?",
+      "options": [
+        "don't I",
+        "haven't I",
+        "isn't it",
+        "aren't I"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'am', so the tag uses 'be', not 'do'."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'am', so the tag uses 'be', not 'have'."
+        },
+        {
+          "tag": "tag_wrong_pronoun",
+          "why": "The subject is 'I', so the tag pronoun must be 'I', not 'it'."
+        },
+        null
+      ],
+      "solution": [
+        "I am the tallest in the class, aren't I?",
+        "After 'I am', the standard tag is 'aren't I'."
+      ]
+    },
+    {
+      "key": "gram-tag-008",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Nothing was wrong with the lift, ____?",
+      "options": [
+        "wasn't there",
+        "was it",
+        "wasn't it",
+        "is it"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "tag_polarity",
+          "why": "'Nothing' makes the statement negative, so the tag must be positive, and the pronoun should be 'it'."
+        },
+        null,
+        {
+          "tag": "tag_polarity",
+          "why": "'Nothing' makes the statement negative, so the tag must be positive."
+        },
+        {
+          "tag": "tag_wrong_tense",
+          "why": "The statement is past ('was'), so the tag needs 'was', not 'is'."
+        }
+      ],
+      "solution": [
+        "Nothing was wrong with the lift, was it?",
+        "'Nothing' is a negative word, so the tag is positive: was it."
+      ]
+    },
+    {
+      "key": "gram-tag-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "There is a queue outside the shop, ____?",
+      "options": [
+        "isn't it",
+        "isn't there",
+        "aren't there",
+        "is there"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "tag_wrong_pronoun",
+          "why": "After 'There is', the tag repeats 'there', not 'it'."
+        },
+        null,
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "'There is' is singular, so the tag uses 'isn't', not 'aren't'."
+        },
+        {
+          "tag": "tag_polarity",
+          "why": "The statement is positive, so the tag must be negative."
+        }
+      ],
+      "solution": [
+        "There is a queue outside the shop, isn't there?",
+        "'There is ...' takes the tag 'isn't there'."
+      ]
+    },
+    {
+      "key": "gram-tag-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Your parents have never been to Sentosa, ____?",
+      "options": [
+        "had they",
+        "did they",
+        "haven't they",
+        "have they"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "tag_wrong_tense",
+          "why": "The statement is present perfect, so the tag needs 'have', not 'had'."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement uses 'have', so the tag repeats 'have', not 'did'."
+        },
+        {
+          "tag": "tag_polarity",
+          "why": "'never' makes the statement negative, so the tag must be positive."
+        },
+        null
+      ],
+      "solution": [
+        "Your parents have never been to Sentosa, have they?",
+        "'never' is negative, so the tag is positive: have they."
+      ]
+    },
+    {
+      "key": "gram-tag-011",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "She used to take the school bus, ____?",
+      "options": [
+        "wasn't she",
+        "usedn't she",
+        "didn't she",
+        "doesn't she"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "'used to take' has no 'was', so 'wasn't' does not fit."
+        },
+        {
+          "tag": "tag_used_to",
+          "why": "'used to' takes the past 'did' in the tag, not 'usedn't'."
+        },
+        null,
+        {
+          "tag": "tag_wrong_tense",
+          "why": "'used to' is past, so the tag needs 'didn't', not 'doesn't'."
+        }
+      ],
+      "solution": [
+        "She used to take the school bus, didn't she?",
+        "'used to' takes 'didn't' in the tag."
+      ]
+    },
+    {
+      "key": "gram-tag-012",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "You wouldn't mind waiting outside, ____?",
+      "options": [
+        "would you",
+        "wouldn't you",
+        "do you",
+        "will you"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "tag_polarity",
+          "why": "The statement is negative, so the tag must be positive."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement has the modal 'would', so the tag repeats 'would'."
+        },
+        {
+          "tag": "tag_wrong_auxiliary",
+          "why": "The statement has 'would', so the tag repeats 'would', not 'will'."
+        }
+      ],
+      "solution": [
+        "You wouldn't mind waiting outside, would you?",
+        "The tag repeats 'would' in the opposite polarity: would you."
+      ]
+    },
+    {
+      "key": "gram-tag-013",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Hardly anyone came to the meeting, ____?",
+      "options": [
+        "did he",
+        "didn't he",
+        "didn't they",
+        "did they"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "tag_wrong_pronoun",
+          "why": "'anyone' is referred to with 'they' in a tag, not 'he'."
+        },
+        {
+          "tag": "tag_polarity",
+          "why": "'Hardly' is negative, so the tag must be positive, and 'anyone' takes 'they'."
+        },
+        {
+          "tag": "tag_polarity",
+          "why": "'Hardly' makes the statement negative, so the tag must be positive."
+        },
+        null
+      ],
+      "solution": [
+        "Hardly anyone came to the meeting, did they?",
+        "'Hardly' is a negative word, so the tag is positive: did they."
+      ]
+    },
+    {
+      "key": "gram-tag-014",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-6",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Neither of them wanted to join the CCA, ____?",
+      "options": [
+        "did it",
+        "did they",
+        "didn't they",
+        "do they"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "tag_wrong_pronoun",
+          "why": "'Neither of them' refers to people, so the tag pronoun is 'they', not 'it'."
+        },
+        null,
+        {
+          "tag": "tag_polarity",
+          "why": "'Neither' makes the statement negative, so the tag must be positive."
+        },
+        {
+          "tag": "tag_wrong_tense",
+          "why": "The statement is past ('wanted'), so the tag needs 'did', not 'do'."
+        }
+      ],
+      "solution": [
+        "Neither of them wanted to join the CCA, did they?",
+        "'Neither' is negative, so the tag is positive: did they."
+      ]
+    },
+    {
+      "key": "gram-conj-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "We stayed indoors ____ it was raining heavily.",
+      "options": [
+        "although",
+        "so",
+        "unless",
+        "because"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'although' shows contrast, but the rain is the reason."
+        },
+        {
+          "tag": "wrong_connector_position",
+          "why": "'so' introduces a result, but 'it was raining' is the cause."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'unless' means 'if not', which does not fit a past reason."
+        },
+        null
+      ],
+      "solution": [
+        "We stayed indoors because it was raining heavily.",
+        "The rain is the reason, so use 'because'."
+      ]
+    },
+    {
+      "key": "gram-conj-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I wanted to buy the toy, ____ I did not have enough money.",
+      "options": [
+        "or",
+        "because",
+        "so",
+        "but"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'or' shows a choice, not a contrast."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'because' would say that wanting the toy was caused by having no money."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'so' shows result, but not having money is a contrast to wanting."
+        },
+        null
+      ],
+      "solution": [
+        "I wanted to buy the toy, but I did not have enough money.",
+        "Contrast between wanting and being unable: 'but'."
+      ]
+    },
+    {
+      "key": "gram-conj-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Please wash your hands ____ you eat.",
+      "options": [
+        "although",
+        "before",
+        "unless",
+        "so"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'although' shows contrast, but this is a sequence."
+        },
+        null,
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'unless' means 'if not', which does not fit the sequence of washing and eating."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'so' shows result and cannot join the two actions this way."
+        }
+      ],
+      "solution": [
+        "Please wash your hands before you eat.",
+        "Washing comes first, then eating: 'before'."
+      ]
+    },
+    {
+      "key": "gram-conj-004",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "____ it was very hot, we played outside.",
+      "options": [
+        "Because",
+        "Nevertheless",
+        "Although",
+        "But"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'Because' would make the heat the reason for playing outside."
+        },
+        {
+          "tag": "conjunction_vs_adverb",
+          "why": "'Nevertheless' links separate sentences; it is not a conjunction that joins the clause 'it was very hot' to the next one."
+        },
+        null,
+        {
+          "tag": "wrong_connector_position",
+          "why": "'But' joins two clauses and cannot begin a sentence like this, where 'it was very hot' is the contrast clause."
+        }
+      ],
+      "solution": [
+        "Although it was very hot, we played outside.",
+        "A contrast at the start of the sentence: 'Although it was very hot, we played outside.'"
+      ]
+    },
+    {
+      "key": "gram-conj-005",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Hurry up, ____ you will miss the bus.",
+      "options": [
+        "or",
+        "but",
+        "so",
+        "and"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'but' shows contrast, not a warning of a result."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'so' would say that missing the bus is the aim of hurrying."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'and' would say that hurrying causes missing the bus."
+        }
+      ],
+      "solution": [
+        "Hurry up, or you will miss the bus.",
+        "A command followed by a warning: 'or'."
+      ]
+    },
+    {
+      "key": "gram-conj-006",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "You cannot enter the lab ____ you wear safety goggles.",
+      "options": [
+        "unless",
+        "though",
+        "if",
+        "as"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'though' shows contrast, not a condition."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'if' would say you cannot enter when you wear goggles, which is the opposite."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'as' gives a reason and does not state a condition."
+        }
+      ],
+      "solution": [
+        "You cannot enter the lab unless you wear safety goggles.",
+        "'unless' means 'if you do not': cannot enter unless you wear goggles."
+      ]
+    },
+    {
+      "key": "gram-conj-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "He worked hard; ____, he did not pass the test.",
+      "options": [
+        "therefore",
+        "besides",
+        "however",
+        "moreover"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'therefore' shows result, but failing is the opposite of what was expected."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'besides' adds a point and does not show contrast."
+        },
+        null,
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'moreover' adds a similar point, not a contrast."
+        }
+      ],
+      "solution": [
+        "He worked hard; however, he did not pass the test.",
+        "A contrast between two sentences needs 'however'."
+      ]
+    },
+    {
+      "key": "gram-conj-008",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The stall was closed; ____, we went to another one.",
+      "options": [
+        "otherwise",
+        "nevertheless",
+        "therefore",
+        "however"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'otherwise' means 'if not', which does not fit a past event."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'nevertheless' shows contrast, but going elsewhere is a result."
+        },
+        null,
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'however' shows contrast, but going elsewhere is a result."
+        }
+      ],
+      "solution": [
+        "The stall was closed; therefore, we went to another one.",
+        "The closing caused the choice, so 'therefore'."
+      ]
+    },
+    {
+      "key": "gram-conj-009",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Not only did she win the race, ____ she also broke the school record.",
+      "options": [
+        "but",
+        "or",
+        "and",
+        "so"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong_correlative",
+          "why": "'Not only' pairs with 'but', not 'or'."
+        },
+        {
+          "tag": "wrong_correlative",
+          "why": "'Not only' pairs with 'but', not 'and'."
+        },
+        {
+          "tag": "wrong_correlative",
+          "why": "'Not only' pairs with 'but', not 'so'."
+        }
+      ],
+      "solution": [
+        "Not only did she win the race, but she also broke the school record.",
+        "'not only ... but also ...' is a fixed pair."
+      ]
+    },
+    {
+      "key": "gram-conj-010",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I will wait here ____ you come back.",
+      "options": [
+        "unless",
+        "because",
+        "since",
+        "until"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'unless' means 'if not', which does not fit waiting up to a time."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'because' gives a reason, but the sentence gives a time limit."
+        },
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'since' looks back to a past starting point, but this is about the future."
+        },
+        null
+      ],
+      "solution": [
+        "I will wait here until you come back.",
+        "Waiting up to a time takes 'until'."
+      ]
+    },
+    {
+      "key": "gram-conj-011",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "____ the heavy rain, the match was not cancelled.",
+      "options": [
+        "Because",
+        "Despite",
+        "However",
+        "Although"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'Because' would give a reason for not cancelling, which is the wrong logic."
+        },
+        null,
+        {
+          "tag": "conjunction_vs_preposition",
+          "why": "'However' links separate sentences and cannot start a phrase like this."
+        },
+        {
+          "tag": "conjunction_vs_preposition",
+          "why": "'Although' must be followed by a clause, but 'the heavy rain' is a noun phrase."
+        }
+      ],
+      "solution": [
+        "Despite the heavy rain, the match was not cancelled.",
+        "'Despite' + noun phrase shows contrast."
+      ]
+    },
+    {
+      "key": "gram-conj-012",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The school fair was a success ____ the poor weather.",
+      "options": [
+        "because of",
+        "even though",
+        "although",
+        "in spite of"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_connector_meaning",
+          "why": "'because of' would say the weather caused the success."
+        },
+        {
+          "tag": "conjunction_vs_preposition",
+          "why": "'even though' must be followed by a clause, not a noun phrase."
+        },
+        {
+          "tag": "conjunction_vs_preposition",
+          "why": "'although' must be followed by a clause, not a noun phrase."
+        },
+        null
+      ],
+      "solution": [
+        "The school fair was a success in spite of the poor weather.",
+        "'in spite of' + noun phrase shows contrast."
+      ]
+    },
+    {
+      "key": "gram-conj-013",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "He studied hard ____ that he could pass the test.",
+      "options": [
+        "so",
+        "such",
+        "as",
+        "very"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "so_that_pattern",
+          "why": "'such that' is a different pattern and does not express purpose here."
+        },
+        {
+          "tag": "so_that_pattern",
+          "why": "'as that' is not a pattern for purpose; 'so that' is needed."
+        },
+        {
+          "tag": "so_that_pattern",
+          "why": "'very that' is not a correct pattern."
+        }
+      ],
+      "solution": [
+        "He studied hard so that he could pass the test.",
+        "'so that' expresses purpose."
+      ]
+    },
+    {
+      "key": "gram-conj-014",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-4",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Rina ran so fast ____ she overtook all the other runners.",
+      "options": [
+        "than",
+        "as",
+        "that",
+        "which"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "so_that_pattern",
+          "why": "'than' is used with comparatives, not with 'so ... '."
+        },
+        {
+          "tag": "so_that_pattern",
+          "why": "'so fast as' is used for comparison, not a result."
+        },
+        null,
+        {
+          "tag": "so_that_pattern",
+          "why": "'so fast ____' needs 'that' to show the result, not 'which'."
+        }
+      ],
+      "solution": [
+        "Rina ran so fast that she overtook all the other runners.",
+        "'so + adjective/adverb + that + result'."
+      ]
+    },
+    {
+      "key": "gram-rel-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The girl ____ sits beside me is my cousin.",
+      "options": [
+        "who",
+        "whose",
+        "which",
+        "why"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' shows possession and needs a noun after it, but here it is followed by the verb 'sits'."
+        },
+        {
+          "tag": "relative_person_vs_thing",
+          "why": "'which' is for things, but 'The girl' is a person."
+        },
+        {
+          "tag": "wh_word_wrong",
+          "why": "'why' asks for a reason and cannot refer back to 'The girl'."
+        }
+      ],
+      "solution": [
+        "The girl who sits beside me is my cousin.",
+        "For a person as subject, use 'who'."
+      ]
+    },
+    {
+      "key": "gram-rel-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "This is the book ____ I borrowed from the library.",
+      "options": [
+        "who",
+        "whose",
+        "that",
+        "where"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "relative_person_vs_thing",
+          "why": "'who' is for people, but 'book' is a thing."
+        },
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' shows possession, but the clause is about the thing that was borrowed."
+        },
+        null,
+        {
+          "tag": "relative_place_misuse",
+          "why": "'where' is used for places, but 'book' is not a place."
+        }
+      ],
+      "solution": [
+        "This is the book that I borrowed from the library.",
+        "For a thing as object, use 'that' (or 'which')."
+      ]
+    },
+    {
+      "key": "gram-rel-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "That is the boy ____ bicycle was stolen.",
+      "options": [
+        "whom",
+        "whose",
+        "which",
+        "who"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whom' cannot show possession."
+        },
+        null,
+        {
+          "tag": "relative_person_vs_thing",
+          "why": "'which' is for things, but 'the boy' is a person."
+        },
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'who' cannot be followed directly by the noun 'bicycle'; possession needs 'whose'."
+        }
+      ],
+      "solution": [
+        "That is the boy whose bicycle was stolen.",
+        "Possession by a person: 'whose bicycle'."
+      ]
+    },
+    {
+      "key": "gram-rel-004",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The hawker centre ____ we have lunch every Friday is very crowded.",
+      "options": [
+        "whose",
+        "where",
+        "which",
+        "who"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' shows possession, but the clause tells where we have lunch."
+        },
+        null,
+        {
+          "tag": "relative_missing_preposition",
+          "why": "'which' would need a preposition, as in 'at which', to show the place."
+        },
+        {
+          "tag": "relative_person_vs_thing",
+          "why": "'who' is for people, but 'hawker centre' is a place."
+        }
+      ],
+      "solution": [
+        "The hawker centre where we have lunch every Friday is very crowded.",
+        "A place where an action happens takes 'where'."
+      ]
+    },
+    {
+      "key": "gram-rel-005",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I do not know ____ left the lights on.",
+      "options": [
+        "whom",
+        "who",
+        "why",
+        "whose"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "who_vs_whom",
+          "why": "'whom' is for the object, but here the unknown person is the subject of 'left'."
+        },
+        null,
+        {
+          "tag": "wh_word_wrong",
+          "why": "'why' asks for a reason, but 'left' needs a subject that tells who left."
+        },
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' needs a noun after it to show ownership."
+        }
+      ],
+      "solution": [
+        "I do not know who left the lights on.",
+        "The missing person is the subject of 'left', so 'who'."
+      ]
+    },
+    {
+      "key": "gram-rel-006",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Mrs Lee, ____ taught me in Primary 4, retired last year.",
+      "options": [
+        "whom",
+        "whose",
+        "she",
+        "who"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "who_vs_whom",
+          "why": "'whom' is for the object, but Mrs Lee is the subject of 'taught'."
+        },
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' needs a noun after it, but 'taught' follows."
+        },
+        {
+          "tag": "relative_missing",
+          "why": "'she' repeats the subject instead of joining the clauses; a relative pronoun is needed."
+        },
+        null
+      ],
+      "solution": [
+        "Mrs Lee, who taught me in Primary 4, retired last year.",
+        "Extra information about a named person, subject of the clause: 'who'."
+      ]
+    },
+    {
+      "key": "gram-rel-007",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The pupil to ____ I lent my pencil case forgot to return it.",
+      "options": [
+        "whom",
+        "whose",
+        "who",
+        "which"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' shows possession, but the clause is about who received the pencil case."
+        },
+        {
+          "tag": "who_vs_whom",
+          "why": "After a preposition ('to'), 'whom' is used, not 'who'."
+        },
+        {
+          "tag": "relative_person_vs_thing",
+          "why": "'which' is for things, but 'The pupil' is a person."
+        }
+      ],
+      "solution": [
+        "The pupil to whom I lent my pencil case forgot to return it.",
+        "After a preposition, use 'whom' for a person."
+      ]
+    },
+    {
+      "key": "gram-rel-008",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "She told us about the trip, ____ we found very interesting.",
+      "options": [
+        "what",
+        "whose",
+        "which",
+        "that"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "relative_what_misuse",
+          "why": "'what' cannot add information about the trip after a comma."
+        },
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' shows possession and needs a noun after it, but the clause is not about owning."
+        },
+        null,
+        {
+          "tag": "relative_that_nonrestrictive",
+          "why": "'that' is not used after a comma to add extra information."
+        }
+      ],
+      "solution": [
+        "She told us about the trip, which we found very interesting.",
+        "After a comma, extra information about a thing takes 'which'."
+      ]
+    },
+    {
+      "key": "gram-rel-009",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "He asked me ____ I would like to join the chess club.",
+      "options": [
+        "whether",
+        "what",
+        "whatever",
+        "that"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "indirect_question_wrong_word",
+          "why": "'what' would need to be the object of 'join', but 'to join the chess club' already has its object."
+        },
+        {
+          "tag": "indirect_question_wrong_word",
+          "why": "'whatever' does not introduce a yes/no reported question."
+        },
+        {
+          "tag": "indirect_question_wrong_word",
+          "why": "'asked me that' does not introduce a yes/no question."
+        }
+      ],
+      "solution": [
+        "He asked me whether I would like to join the chess club.",
+        "A yes/no reported question uses 'whether' (or 'if')."
+      ]
+    },
+    {
+      "key": "gram-rel-010",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Everything ____ the guide told us about the old temple was fascinating.",
+      "options": [
+        "whose",
+        "what",
+        "who",
+        "that"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "relative_possessive_misuse",
+          "why": "'whose' shows possession, but the clause is not about owning."
+        },
+        {
+          "tag": "relative_what_misuse",
+          "why": "'what' cannot follow 'Everything'; after 'everything' use 'that'."
+        },
+        {
+          "tag": "relative_person_vs_thing",
+          "why": "'who' is for people, but 'Everything' is not a person."
+        },
+        null
+      ],
+      "solution": [
+        "Everything that the guide told us about the old temple was fascinating.",
+        "After 'everything', the relative pronoun is 'that'."
+      ]
+    },
+    {
+      "key": "gram-pron-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ali hurt ____ while playing basketball.",
+      "options": [
+        "him",
+        "his",
+        "themselves",
+        "himself"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reflexive_needed",
+          "why": "The subject and object are the same person, so the reflexive 'himself' is needed."
+        },
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'his' is a possessive and needs a noun after it."
+        },
+        {
+          "tag": "pronoun_number",
+          "why": "'Ali' is one person, so 'themselves' does not agree."
+        },
+        null
+      ],
+      "solution": [
+        "Ali hurt himself while playing basketball.",
+        "When the object is the same person as the subject, use the reflexive: himself."
+      ]
+    },
+    {
+      "key": "gram-pron-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Ali and Ben forgot ____ lunch boxes at home.",
+      "options": [
+        "they",
+        "theirs",
+        "them",
+        "their"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'they' is a subject pronoun and cannot come before a noun to show ownership."
+        },
+        {
+          "tag": "possessive_vs_possessive_pronoun",
+          "why": "'theirs' stands alone and cannot come before a noun."
+        },
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'them' is an object pronoun and cannot come before a noun to show ownership."
+        },
+        null
+      ],
+      "solution": [
+        "Ali and Ben forgot their lunch boxes at home.",
+        "A possessive determiner before a noun: their lunch boxes."
+      ]
+    },
+    {
+      "key": "gram-pron-003",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "That pencil case is not mine; it belongs to Siti. It is ____.",
+      "options": [
+        "her",
+        "hers",
+        "she",
+        "herself"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "possessive_vs_possessive_pronoun",
+          "why": "'her' must be followed by a noun; without one, use 'hers'."
+        },
+        null,
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'she' is a subject pronoun, but the blank needs a possessive."
+        },
+        {
+          "tag": "reflexive_misuse",
+          "why": "'herself' means she did something to herself, not ownership."
+        }
+      ],
+      "solution": [
+        "That pencil case is not mine; it belongs to Siti. It is hers.",
+        "A possessive pronoun that stands alone: hers."
+      ]
+    },
+    {
+      "key": "gram-pron-004",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Between you and ____, I think the quiz will be difficult.",
+      "options": [
+        "I",
+        "myself",
+        "me",
+        "mine"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "After the preposition 'between', an object pronoun 'me' is needed, not 'I'."
+        },
+        {
+          "tag": "reflexive_misuse",
+          "why": "'myself' is used only when 'I' is the subject of the same clause."
+        },
+        null,
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'mine' is a possessive pronoun, not an object after 'between'."
+        }
+      ],
+      "solution": [
+        "Between you and me, I think the quiz will be difficult.",
+        "A pronoun after a preposition takes the object form: between you and me."
+      ]
+    },
+    {
+      "key": "gram-pron-005",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The teacher asked the pupils to do the task by ____, without any help.",
+      "options": [
+        "theirs",
+        "their",
+        "themselves",
+        "their own selves"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong_pronoun_form",
+          "why": "'theirs' is a possessive pronoun and does not mean 'alone'."
+        },
+        {
+          "tag": "wrong_pronoun_form",
+          "why": "'their' is a possessive determiner and needs a noun after it."
+        },
+        null,
+        {
+          "tag": "wrong_pronoun_form",
+          "why": "'their own selves' is not the standard phrase; the idiom is 'by themselves'."
+        }
+      ],
+      "solution": [
+        "The teacher asked the pupils to do the task by themselves, without any help.",
+        "'by + reflexive' means alone: by themselves."
+      ]
+    },
+    {
+      "key": "gram-pron-006",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The puppy kept chasing ____ tail round the garden.",
+      "options": [
+        "it",
+        "its",
+        "it's",
+        "their"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'it' cannot come before a noun to show ownership; the possessive form is needed."
+        },
+        null,
+        {
+          "tag": "its_vs_its",
+          "why": "'it's' means 'it is' or 'it has'; the possessive is 'its'."
+        },
+        {
+          "tag": "pronoun_number",
+          "why": "The puppy is one animal, so 'their' does not agree."
+        }
+      ],
+      "solution": [
+        "The puppy kept chasing its tail round the garden.",
+        "The possessive of 'it' has no apostrophe: its tail."
+      ]
+    },
+    {
+      "key": "gram-pron-007",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Nobody except Tom and ____ knew about the surprise.",
+      "options": [
+        "I",
+        "me",
+        "mine",
+        "myself"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'except' is a preposition, so the object pronoun 'me' is needed, not 'I'."
+        },
+        null,
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'mine' is a possessive pronoun, not an object after 'except'."
+        },
+        {
+          "tag": "reflexive_misuse",
+          "why": "'myself' cannot be used when there is no 'I' as the subject of the clause."
+        }
+      ],
+      "solution": [
+        "Nobody except Tom and me knew about the surprise.",
+        "After 'except', use the object form: Tom and me."
+      ]
+    },
+    {
+      "key": "gram-pron-008",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-5",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The principal praised Kai Xin and ____ for helping to organise the fair.",
+      "options": [
+        "mine",
+        "myself",
+        "I",
+        "me"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'mine' is a possessive pronoun and cannot be the object of 'praised'."
+        },
+        {
+          "tag": "reflexive_misuse",
+          "why": "'myself' is used when the subject is 'I', but the subject here is 'The principal'."
+        },
+        {
+          "tag": "wrong_pronoun_case",
+          "why": "'I' is a subject pronoun, but here the pronoun is the object of 'praised'."
+        },
+        null
+      ],
+      "solution": [
+        "The principal praised Kai Xin and me for helping to organise the fair.",
+        "The object of 'praised' takes the object form: Kai Xin and me."
+      ]
+    },
+    {
+      "key": "gram-modal-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "You ____ wear your school badge every day.",
+      "options": [
+        "might",
+        "may",
+        "must",
+        "could"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "modal_meaning",
+          "why": "'might' shows a weak possibility, not a rule."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'may' gives permission or shows a possibility, but a school rule needs 'must'."
+        },
+        null,
+        {
+          "tag": "modal_meaning",
+          "why": "'could' shows ability or possibility, not an obligation."
+        }
+      ],
+      "solution": [
+        "You must wear your school badge every day.",
+        "A rule or duty uses 'must'."
+      ]
+    },
+    {
+      "key": "gram-modal-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "____ I borrow your eraser, please?",
+      "options": [
+        "May",
+        "Do",
+        "Shall",
+        "Would"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "modal_meaning",
+          "why": "'Do I borrow' asks about a habit, not permission."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'Shall I borrow' does not ask permission to take something."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'Would I borrow' asks about a possible situation, not permission."
+        }
+      ],
+      "solution": [
+        "May I borrow your eraser, please?",
+        "Asking permission politely uses 'May I'."
+      ]
+    },
+    {
+      "key": "gram-modal-003",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "You ____ run in the corridor; it is dangerous.",
+      "options": [
+        "mustn't",
+        "couldn't",
+        "wouldn't",
+        "needn't"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "modal_meaning",
+          "why": "'couldn't' shows past inability or doubt, not a rule."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'wouldn't' shows an unwillingness or a hypothetical, not a prohibition."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'needn't' means 'it is not necessary', but running is forbidden."
+        }
+      ],
+      "solution": [
+        "You mustn't run in the corridor; it is dangerous.",
+        "A prohibition uses 'mustn't'."
+      ]
+    },
+    {
+      "key": "gram-modal-004",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "The lights are off, so the shop ____ be closed.",
+      "options": [
+        "shall",
+        "can",
+        "would",
+        "must"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "modal_meaning",
+          "why": "'shall' is used for offers or suggestions, not for guessing."
+        },
+        {
+          "tag": "modal_deduction",
+          "why": "'can be closed' does not express a strong guess from evidence."
+        },
+        {
+          "tag": "modal_deduction",
+          "why": "'would be closed' does not express a conclusion from evidence."
+        },
+        null
+      ],
+      "solution": [
+        "The lights are off, so the shop must be closed.",
+        "A strong conclusion from evidence uses 'must'."
+      ]
+    },
+    {
+      "key": "gram-modal-005",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "You ____ bring an umbrella; the forecast says it will be sunny all day.",
+      "options": [
+        "mustn't",
+        "needn't",
+        "couldn't",
+        "wouldn't"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "modal_meaning",
+          "why": "'mustn't' would forbid bringing an umbrella, but it is only unnecessary."
+        },
+        null,
+        {
+          "tag": "modal_meaning",
+          "why": "'couldn't' shows inability, not lack of need."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'wouldn't bring' does not say there is no need."
+        }
+      ],
+      "solution": [
+        "You needn't bring an umbrella; the forecast says it will be sunny all day.",
+        "No need to do something uses 'needn't'."
+      ]
+    },
+    {
+      "key": "gram-modal-006",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "When I was young, I ____ swim, but now I swim like a fish.",
+      "options": [
+        "couldn't",
+        "needn't",
+        "shouldn't",
+        "can't"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "modal_meaning",
+          "why": "'needn't' means 'no need to', not inability."
+        },
+        {
+          "tag": "modal_meaning",
+          "why": "'shouldn't' gives advice and does not describe a past inability."
+        },
+        {
+          "tag": "modal_tense",
+          "why": "'can't' is present, but 'when I was young' needs the past."
+        }
+      ],
+      "solution": [
+        "When I was young, I couldn't swim, but now I swim like a fish.",
+        "Past inability uses 'couldn't'."
+      ]
+    },
+    {
+      "key": "gram-modal-007",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "If you had told me earlier, I ____ have helped you.",
+      "options": [
+        "can",
+        "will",
+        "would",
+        "shall"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "modal_conditional",
+          "why": "'can have helped' does not fit a past unreal condition."
+        },
+        {
+          "tag": "modal_conditional",
+          "why": "'will have' does not fit a past unreal condition."
+        },
+        null,
+        {
+          "tag": "modal_conditional",
+          "why": "'shall have helped' is not used in an unreal past condition."
+        }
+      ],
+      "solution": [
+        "If you had told me earlier, I would have helped you.",
+        "A past unreal condition ('had told') takes 'would have' in the result."
+      ]
+    },
+    {
+      "key": "gram-cond-001",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "If it rains tomorrow, we ____ the picnic.",
+      "options": [
+        "will cancel",
+        "would cancel",
+        "cancelled",
+        "had cancelled"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "conditional_type",
+          "why": "'would cancel' belongs to an unlikely situation, but a rainy day tomorrow is a real possibility."
+        },
+        {
+          "tag": "conditional_type",
+          "why": "The simple past 'cancelled' does not fit a future real possibility."
+        },
+        {
+          "tag": "conditional_type",
+          "why": "'had cancelled' is past perfect and does not fit a future situation."
+        }
+      ],
+      "solution": [
+        "If it rains tomorrow, we will cancel the picnic.",
+        "Real possibility: 'If' + present, 'will' + verb."
+      ]
+    },
+    {
+      "key": "gram-cond-002",
+      "level": "basic",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "If I were you, I ____ the teacher for help.",
+      "options": [
+        "asked",
+        "had asked",
+        "would ask",
+        "will ask"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "conditional_type",
+          "why": "The result of an imaginary condition needs 'would', not the simple past."
+        },
+        {
+          "tag": "conditional_type",
+          "why": "'had asked' is past perfect and does not fit this present imaginary situation."
+        },
+        null,
+        {
+          "tag": "conditional_type",
+          "why": "'If I were you' is an imaginary situation, so 'would' is needed, not 'will'."
+        }
+      ],
+      "solution": [
+        "If I were you, I would ask the teacher for help.",
+        "Imaginary present condition: 'If I were', 'would' + verb."
+      ]
+    },
+    {
+      "key": "gram-cond-003",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "If the bus had come earlier, we ____ late for the show.",
+      "options": [
+        "had not been",
+        "would not have been",
+        "would not have being",
+        "will not be"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "conditional_type",
+          "why": "The result clause needs 'would not have been', not past perfect."
+        },
+        null,
+        {
+          "tag": "wrong_participle",
+          "why": "'would not have being' is wrong; the participle needed is 'been'."
+        },
+        {
+          "tag": "conditional_type",
+          "why": "'will not be' is a future form and does not fit a condition about the past."
+        }
+      ],
+      "solution": [
+        "If the bus had come earlier, we would not have been late for the show.",
+        "Past unreal condition: 'If' + past perfect, 'would have' + participle."
+      ]
+    },
+    {
+      "key": "gram-cond-004",
+      "level": "intermediate",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "Unless you ____ faster, you will miss the bus.",
+      "options": [
+        "ran",
+        "do not run",
+        "will run",
+        "run"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "conditional_type",
+          "why": "A real future condition needs the simple present, not the simple past."
+        },
+        {
+          "tag": "double_negative_unless",
+          "why": "'unless' already means 'if not', so adding 'not' makes a double negative."
+        },
+        {
+          "tag": "future_in_condition",
+          "why": "After 'unless', the verb stays in the present, not 'will'."
+        },
+        null
+      ],
+      "solution": [
+        "Unless you run faster, you will miss the bus.",
+        "'Unless' + simple present (positive form): Unless you run faster ..."
+      ]
+    },
+    {
+      "key": "gram-cond-005",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "If only I ____ more time yesterday, I would have finished the project.",
+      "options": [
+        "have had",
+        "would have",
+        "had had",
+        "had"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "conditional_form",
+          "why": "Present perfect 'have had' does not fit a condition about yesterday."
+        },
+        {
+          "tag": "conditional_form",
+          "why": "'would have' belongs in the result clause, not in the 'if' clause."
+        },
+        null,
+        {
+          "tag": "conditional_form",
+          "why": "The past unreal condition needs 'had had' (past perfect of 'have'), not just 'had'."
+        }
+      ],
+      "solution": [
+        "If only I had had more time yesterday, I would have finished the project.",
+        "Past unreal condition: 'had' + past participle, here 'had had'."
+      ]
+    },
+    {
+      "key": "gram-cond-006",
+      "level": "competent",
+      "outcome": "eng-gram-wps-items-1",
+      "pattern": "eng-pat-grammar-mcq",
+      "stem": "I would not have been scolded if I ____ my homework.",
+      "options": [
+        "had done",
+        "would do",
+        "did",
+        "have done"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "conditional_form",
+          "why": "'would do' belongs in the result clause, not after 'if'."
+        },
+        {
+          "tag": "conditional_form",
+          "why": "A past unreal condition needs past perfect, not the simple past."
+        },
+        {
+          "tag": "conditional_form",
+          "why": "'have done' does not fit a condition about the past."
+        }
+      ],
+      "solution": [
+        "I would not have been scolded if I had done my homework.",
+        "Past unreal condition: 'if' + past perfect: had done."
+      ]
+    }
+  ]
+}

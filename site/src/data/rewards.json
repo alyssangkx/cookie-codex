@@ -601,6 +601,33 @@
   ],
   "english": [
    {
+    "id": "eng-vocab-rich-words",
+    "name": "Word study",
+    "topic": "eng-vocab-rich",
+    "topicName": "Developing rich vocabulary knowledge",
+    "home": 5,
+    "i": 5,
+    "capstone": true
+   },
+   {
+    "id": "eng-vocab-use-appropriate",
+    "name": "Appropriate use",
+    "topic": "eng-vocab-use",
+    "topicName": "Using vocabulary",
+    "home": 5,
+    "i": 6,
+    "capstone": true
+   },
+   {
+    "id": "eng-gram-wps-items",
+    "name": "Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags)",
+    "topic": "eng-gram-wps",
+    "topicName": "Grammar at word, phrase and sentence levels",
+    "home": 6,
+    "i": 2,
+    "capstone": false
+   },
+   {
     "id": "eng-gram-terms-meta",
     "name": "Metalanguage",
     "topic": "eng-gram-terms",
@@ -616,7 +643,7 @@
     "topicName": "Grammar at word, phrase and sentence levels",
     "home": 5,
     "i": 1,
-    "capstone": false
+    "capstone": true
    },
    {
     "id": "eng-gram-text-cohesion",
@@ -637,24 +664,6 @@
     "capstone": true
    },
    {
-    "id": "eng-vocab-rich-words",
-    "name": "Word study",
-    "topic": "eng-vocab-rich",
-    "topicName": "Developing rich vocabulary knowledge",
-    "home": 5,
-    "i": 5,
-    "capstone": true
-   },
-   {
-    "id": "eng-vocab-use-appropriate",
-    "name": "Appropriate use",
-    "topic": "eng-vocab-use",
-    "topicName": "Using vocabulary",
-    "home": 5,
-    "i": 6,
-    "capstone": true
-   },
-   {
     "id": "eng-listen-close",
     "name": "Listening closely",
     "topic": "eng-listen-core",
@@ -662,15 +671,6 @@
     "home": 5,
     "i": 10,
     "capstone": false
-   },
-   {
-    "id": "eng-gram-wps-items",
-    "name": "Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags)",
-    "topic": "eng-gram-wps",
-    "topicName": "Grammar at word, phrase and sentence levels",
-    "home": 6,
-    "i": 2,
-    "capstone": true
    },
    {
     "id": "eng-read-close-lit",
@@ -1613,35 +1613,35 @@
    "slug": "stardust-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|b": {
+  "eng-vocab-rich-words|b": {
    "slug": "poison-mushroom-cookie",
    "dup": false
   },
-  "eng-gram-wps-apply|b": {
+  "eng-vocab-use-appropriate|b": {
    "slug": "sonic-cookie",
    "dup": false
   },
-  "eng-gram-text-cohesion|b": {
+  "eng-gram-wps-items|b": {
    "slug": "black-lemonade-cookie",
    "dup": false
   },
-  "eng-gram-text-features|b": {
+  "eng-gram-terms-meta|b": {
    "slug": "peach-blossom-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|b": {
+  "eng-gram-wps-apply|b": {
    "slug": "silverbell-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|b": {
+  "eng-gram-text-cohesion|b": {
    "slug": "milky-way-cookie",
    "dup": false
   },
-  "eng-listen-close|b": {
+  "eng-gram-text-features|b": {
    "slug": "zoey-cookie",
    "dup": false
   },
-  "eng-gram-wps-items|b": {
+  "eng-listen-close|b": {
    "slug": "peach-blossom-cookie",
    "dup": true
   },
@@ -1661,35 +1661,35 @@
    "slug": "candy-diver-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|i": {
+  "eng-vocab-rich-words|i": {
    "slug": "sorbet-shark-cookie",
    "dup": false
   },
-  "eng-gram-wps-apply|i": {
+  "eng-vocab-use-appropriate|i": {
    "slug": "snow-sugar-cookie",
    "dup": false
   },
-  "eng-gram-text-cohesion|i": {
+  "eng-gram-wps-items|i": {
    "slug": "choco-drizzle-cookie",
    "dup": false
   },
-  "eng-gram-text-features|i": {
+  "eng-gram-terms-meta|i": {
    "slug": "raspberry-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|i": {
+  "eng-gram-wps-apply|i": {
    "slug": "vampire-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|i": {
+  "eng-gram-text-cohesion|i": {
    "slug": "cotton-cookie",
    "dup": false
   },
-  "eng-listen-close|i": {
+  "eng-gram-text-features|i": {
    "slug": "squid-ink-cookie",
    "dup": false
   },
-  "eng-gram-wps-items|i": {
+  "eng-listen-close|i": {
    "slug": "sorbet-shark-cookie",
    "dup": true
   },
@@ -1709,36 +1709,36 @@
    "slug": "cherry-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|c": {
+  "eng-vocab-rich-words|c": {
    "slug": "manju-cookie",
    "dup": false
   },
-  "eng-gram-wps-apply|c": {
+  "eng-vocab-use-appropriate|c": {
    "slug": "fig-cookie",
    "dup": false
   },
-  "eng-gram-text-cohesion|c": {
+  "eng-gram-wps-items|c": {
    "slug": "pudding-a-la-mode-cookie",
    "dup": false
   },
-  "eng-gram-text-features|c": {
+  "eng-gram-terms-meta|c": {
    "slug": "elder-faerie-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|c": {
+  "eng-gram-wps-apply|c": {
    "slug": "venom-dough-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|c": {
+  "eng-gram-text-cohesion|c": {
+   "slug": "sugarfly-cookie",
+   "dup": false
+  },
+  "eng-gram-text-features|c": {
    "slug": "moonlight-cookie",
    "dup": false
   },
   "eng-listen-close|c": {
-   "slug": "sugarfly-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-items|c": {
-   "slug": "sugarfly-cookie",
+   "slug": "moonlight-cookie",
    "dup": true
   },
   "eng-read-close-lit|c": {
