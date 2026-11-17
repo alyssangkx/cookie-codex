@@ -329,9 +329,9 @@ export function finishQuiz(
   const key = dayKey(now);
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
   if (a.mode === 'tier') dropOpen(s, a.sub, a.tier);
-  // "First" = no earlier FINISHED tier attempt for this sub|b. An abandoned open attempt is dropped above
-  // (it never finished), so it does not count. Must be read before this attempt is pushed.
-  const firstEver = a.mode === 'tier' && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && !x.open && x.sub === a.sub && x.tier === 'b');
+  // "First" = no other Basic attempt for this sub at all, finished OR abandoned (this quiz's own open record
+  // was dropped above). Counting abandoned tries closes the "quit after a mistake, retry until perfect" loophole.
+  const firstEver = a.mode === 'tier' && a.tier === 'b' && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && x.sub === a.sub && x.tier === 'b');
   s.attempts.push({ ...a, ts: now });
   const d = (s.days[key] ??= { quizzes: 0, min: 0, correct: 0, total: 0 });
   d.quizzes++;

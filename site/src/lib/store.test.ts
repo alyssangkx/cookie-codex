@@ -317,10 +317,15 @@ test('perfect first-ever Basic quiz clears Basic and awards the card; only that 
   assert.equal(finishQuiz(s, q('i', 10), reward, t0, ids).autoPromoted, false);
   assert.equal(s.progress.x.i.cleared, false);
 
-  // an abandoned (open) Basic attempt does not block it
+  // this quiz's own open record is not an earlier try
   s = fresh();
   openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0 - 5000);
   assert.equal(finishQuiz(s, q('b', 10), reward, t0, ids).autoPromoted, true);
+  // but an earlier ABANDONED try does count: quitting after a mistake and retrying until perfect gets no promote
+  s = fresh();
+  openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0 - 9000); // abandoned
+  openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0 - 5000); // this quiz
+  assert.equal(finishQuiz(s, q('b', 10), reward, t0, ids).autoPromoted, false);
   // ...and neither does an open attempt for this very quiz
   s = fresh();
   openAttempt(s, { sub: 'x', tier: 'b', total: 10 }, t0);
