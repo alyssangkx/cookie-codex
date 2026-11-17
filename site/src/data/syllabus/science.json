@@ -1,0 +1,1223 @@
+{
+  "subject": "science",
+  "psleYear": 2027,
+  "syllabus": {
+    "name": "Science Teaching & Learning Syllabus, Primary Three to Six (Standard Science)",
+    "revision": "2023 Primary Science Syllabus (implementation from 2023 P3 cohort), MOE PDF Updated Jan 2026; SEAB PSLE Science (0009) for examination from 2026",
+    "appliesTo2027Evidence": "SEAB: \"PSLE SCIENCE For examination from 2026. ... The PSLE Science Paper assesses candidates' attainment in Science as stated in the 2023 primary science syllabus.\" MOE cover: \"Implementation starting with 2023 Primary Three Cohort\" (the 2027 PSLE cohort started P3 in 2024).",
+    "evidenceUrl": "https://isomer-user-content.by.gov.sg/334/24bb2fea-a0e0-4aaf-9a11-ae1ef1b8840e/0009_y26_sy.pdf",
+    "unverified": true
+  },
+  "paperFormat": {
+    "papers": [
+      {
+        "name": "Science (Booklet A + Booklet B, one written paper)",
+        "durationMin": 105,
+        "items": [
+          {
+            "type": "MCQ",
+            "count": 30,
+            "marksEach": 2
+          },
+          {
+            "type": "Structured (open-ended)",
+            "count": "10-11",
+            "marksEach": "2-5"
+          }
+        ],
+        "totalMarks": 100,
+        "calculator": false
+      }
+    ],
+    "notes": "Booklet A: 30 four-option MCQ x 2 = 60 marks. Booklet B: 10-11 structured questions of 2, 3, 4 or 5 marks = 40 marks. Duration 1 h 45 min. Assessment objectives: I Knowledge with Understanding; II Application of Knowledge and Scientific Inquiry (a. apply facts, concepts, principles; b. apply scientific inquiry: predictions/hypotheses, interpreting/analysing information, evaluating observations/information/methods, communicating explanations and reasoning). No AO weightings published. Foundation Science (0039) is a separate paper, not covered here."
+  },
+  "strands": [
+    {
+      "id": "sci-diversity",
+      "name": "Diversity",
+      "topics": [
+        {
+          "id": "sci-diversity-living-nonliving",
+          "name": "Diversity of Living and Non-Living Things (General characteristics and classification)",
+          "subtopics": [
+            {
+              "id": "sci-diversity-living-characteristics",
+              "name": "Characteristics of living things",
+              "outcomes": [
+                {
+                  "text": "Describe the characteristics of living things: need water, food and air to survive; grow, respond and reproduce",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-diversity-living-characteristics-1"
+                },
+                {
+                  "text": "Observe a variety of living and non-living things and infer differences between them",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-diversity-living-characteristics-2"
+                }
+              ]
+            },
+            {
+              "id": "sci-diversity-living-classification",
+              "name": "Broad groups of living things",
+              "outcomes": [
+                {
+                  "text": "Recognise broad groups of living things based on similarities and differences: plants (flowering, non-flowering); animals (amphibians, birds, fish, insects, mammals, reptiles); fungi (mould, mushroom, yeast); bacteria",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-diversity-living-classification-1"
+                },
+                {
+                  "text": "Classify living things into plants and animals based on similarities and differences of common observable characteristics",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-diversity-living-classification-2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-diversity-materials",
+          "name": "Diversity of Materials",
+          "subtopics": [
+            {
+              "id": "sci-diversity-materials-properties",
+              "name": "Properties and uses of materials",
+              "outcomes": [
+                {
+                  "text": "Relate the use of materials (wood, metal, ceramic, rubber, glass, plastic, fabric) to their physical properties",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-diversity-materials-properties-1"
+                },
+                {
+                  "text": "Compare physical properties of materials: strength, flexibility, ability to float/sink in water, waterproof, transparency",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-diversity-materials-properties-2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci-cycles",
+      "name": "Cycles",
+      "topics": [
+        {
+          "id": "sci-cycles-life-cycles",
+          "name": "Cycles in Plants and Animals (Life Cycles)",
+          "subtopics": [
+            {
+              "id": "sci-cycles-life-cycles-compare",
+              "name": "Life cycles of plants and animals",
+              "outcomes": [
+                {
+                  "text": "Show an understanding that different living things have different life cycles (plants, animals)",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-life-cycles-compare-1"
+                },
+                {
+                  "text": "Observe and compare life cycles of flowering plants grown from seeds (seed, young plant, adult plant)",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-life-cycles-compare-2"
+                },
+                {
+                  "text": "Observe and compare life cycles of animals (chicken, cockroach, frog, grasshopper, beetle, butterfly, mosquito)",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-life-cycles-compare-3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-cycles-reproduction",
+          "name": "Cycles in Plants and Animals (Reproduction)",
+          "subtopics": [
+            {
+              "id": "sci-cycles-repro-cell",
+              "name": "Cell and continuity of kind",
+              "outcomes": [
+                {
+                  "text": "Recognise that a cell is a basic unit of life [Standard Science only; not in Foundation syllabus]",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-repro-cell-1"
+                },
+                {
+                  "text": "Show an understanding that living things reproduce to ensure continuity of their kind and that many characteristics are passed from parents to offspring [Standard Science only; not in Foundation syllabus]",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-repro-cell-2"
+                }
+              ]
+            },
+            {
+              "id": "sci-cycles-repro-plants",
+              "name": "Plant reproduction",
+              "outcomes": [
+                {
+                  "text": "Investigate the ways in which plants reproduce: spores, seeds",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-repro-plants-1"
+                },
+                {
+                  "text": "Describe processes in sexual reproduction of flowering plants: pollination, fertilisation (seed production), seed dispersal, germination",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-repro-plants-2"
+                },
+                {
+                  "text": "Recognise structural adaptations of fruits and seeds for dispersal (link to Interactions within the Environment)",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": true,
+                  "id": "sci-cycles-repro-plants-3"
+                }
+              ]
+            },
+            {
+              "id": "sci-cycles-repro-humans",
+              "name": "Human reproduction",
+              "outcomes": [
+                {
+                  "text": "Recognise the process of fertilisation in human sexual reproduction (sperm fuses with egg; fertilised egg develops in the womb; ovaries produce eggs, testes produce sperms)",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-repro-humans-1"
+                },
+                {
+                  "text": "Recognise the similarity in fertilisation in sexual reproduction of flowering plants and humans [Standard Science only; not in Foundation syllabus]",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-repro-humans-2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-cycles-matter",
+          "name": "Cycles in Matter and Water (Matter)",
+          "subtopics": [
+            {
+              "id": "sci-cycles-matter-states",
+              "name": "Matter and states of matter",
+              "outcomes": [
+                {
+                  "text": "State that matter is anything that has mass and occupies space",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-matter-states-1"
+                },
+                {
+                  "text": "Differentiate among solid, liquid and gas in terms of shape and volume",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-matter-states-2"
+                },
+                {
+                  "text": "Measure mass and volume using appropriate apparatus",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-matter-states-3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-cycles-water",
+          "name": "Cycles in Matter and Water (Water)",
+          "subtopics": [
+            {
+              "id": "sci-cycles-water-states",
+              "name": "States of water and changes of state",
+              "outcomes": [
+                {
+                  "text": "Recognise that water can exist in three interchangeable states of matter; compare water in 3 states",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-water-states-1"
+                },
+                {
+                  "text": "Show an understanding of melting, freezing, boiling/evaporation and condensation",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-water-states-2"
+                },
+                {
+                  "text": "Show an understanding of melting point of ice (freezing point of water, 0 degrees C) and boiling point of water (100 degrees C)",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-water-states-3"
+                },
+                {
+                  "text": "Investigate the effect of heat gain or loss on the temperature and state of water",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-water-states-4"
+                }
+              ]
+            },
+            {
+              "id": "sci-cycles-water-evaporation",
+              "name": "Rate of evaporation",
+              "outcomes": [
+                {
+                  "text": "Investigate the factors that affect the rate of evaporation: wind, temperature, exposed surface area",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-water-evaporation-1"
+                }
+              ]
+            },
+            {
+              "id": "sci-cycles-water-cycle",
+              "name": "Water cycle and conservation",
+              "outcomes": [
+                {
+                  "text": "Show an understanding of the roles of evaporation and condensation in the water cycle; recognise the importance of the water cycle",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-cycles-water-cycle-1"
+                },
+                {
+                  "text": "Recognise the importance of water to life processes [Standard Science only; not in Foundation syllabus]",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-water-cycle-2"
+                },
+                {
+                  "text": "Describe the impact of water pollution on Earth's water resources [Standard Science only; not in Foundation syllabus]",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-cycles-water-cycle-3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci-systems",
+      "name": "Systems",
+      "topics": [
+        {
+          "id": "sci-systems-plant-parts",
+          "name": "Plant System (Plant parts and functions)",
+          "subtopics": [
+            {
+              "id": "sci-systems-plant-parts-fn",
+              "name": "Parts of a plant",
+              "outcomes": [
+                {
+                  "text": "Identify the different parts of plants (leaf, stem, root) and state their functions",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-plant-parts-fn-1"
+                },
+                {
+                  "text": "Observe plant parts",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-plant-parts-fn-2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-systems-human-digestive",
+          "name": "Human System (Digestive system)",
+          "subtopics": [
+            {
+              "id": "sci-systems-human-overview",
+              "name": "Overview of human systems",
+              "outcomes": [
+                {
+                  "text": "Identify the human systems in the body and state their functions (digestive, respiratory, circulatory, skeletal, muscular); detailed knowledge of skeletal/muscular systems not required",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-systems-human-overview-1"
+                }
+              ]
+            },
+            {
+              "id": "sci-systems-digestive-parts",
+              "name": "Digestive system",
+              "outcomes": [
+                {
+                  "text": "Identify the parts of the human digestive system (mouth, gullet, stomach, small intestine, large intestine) and describe their functions",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-digestive-parts-1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-systems-human-resp-circ",
+          "name": "Human System (Respiratory and circulatory systems)",
+          "subtopics": [
+            {
+              "id": "sci-systems-air-gases",
+              "name": "Gases in air",
+              "outcomes": [
+                {
+                  "text": "Recognise that air is made up of gases such as nitrogen, carbon dioxide, oxygen and water vapour",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-systems-air-gases-1"
+                }
+              ]
+            },
+            {
+              "id": "sci-systems-resp-circ-parts",
+              "name": "Respiratory and circulatory systems",
+              "outcomes": [
+                {
+                  "text": "Identify the parts of the human respiratory system (nose, windpipe, lungs) and circulatory system (heart, blood, blood vessels) and describe their functions",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-resp-circ-parts-1"
+                },
+                {
+                  "text": "Compare how plants, fish and humans take in oxygen and give out carbon dioxide (Foundation: plants and humans only)",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-resp-circ-parts-2"
+                },
+                {
+                  "text": "Compare the ways substances are transported within plants and humans (plants: tubes for food and water; humans: blood vessels carrying digested food, oxygen, carbon dioxide)",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-resp-circ-parts-3"
+                },
+                {
+                  "text": "Recognise the integration of the digestive, respiratory and circulatory systems in carrying out life processes [Standard Science only; not in Foundation syllabus]",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-systems-resp-circ-parts-4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-systems-plant-transport",
+          "name": "Plant System (Respiratory and circulatory systems)",
+          "subtopics": [
+            {
+              "id": "sci-systems-plant-transport-parts",
+              "name": "Plant transport system",
+              "outcomes": [
+                {
+                  "text": "Identify the parts of the plant transport system and describe their functions",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-plant-transport-parts-1"
+                },
+                {
+                  "text": "Investigate how food and water are transported in the plant",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-plant-transport-parts-2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-systems-electrical",
+          "name": "Electrical System",
+          "subtopics": [
+            {
+              "id": "sci-systems-circuit",
+              "name": "Electric circuits",
+              "outcomes": [
+                {
+                  "text": "Recognise that a circuit with an energy source (battery) and components (wire, bulb, switch) forms an electrical system",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-circuit-1"
+                },
+                {
+                  "text": "Show an understanding that a closed circuit allows current to flow",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-circuit-2"
+                },
+                {
+                  "text": "Construct simple circuits from circuit diagrams",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-circuit-3"
+                }
+              ]
+            },
+            {
+              "id": "sci-systems-circuit-vars",
+              "name": "Variables affecting current; conductors",
+              "outcomes": [
+                {
+                  "text": "Investigate the effect on current of number of batteries (in series) and number of bulbs (series and parallel; Foundation: series only)",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-systems-circuit-vars-1"
+                },
+                {
+                  "text": "Identify electrical conductors and insulators",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-systems-circuit-vars-2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci-interactions",
+      "name": "Interactions",
+      "topics": [
+        {
+          "id": "sci-interactions-magnets",
+          "name": "Interaction of Forces (Magnets)",
+          "subtopics": [
+            {
+              "id": "sci-interactions-magnet-props",
+              "name": "Magnets",
+              "outcomes": [
+                {
+                  "text": "Recognise that a magnet can exert a push or a pull",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-magnet-props-1"
+                },
+                {
+                  "text": "Identify characteristics of magnets: made of iron or steel; two poles (N-S direction when freely suspended); unlike poles attract, like poles repel; attract magnetic materials",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-magnet-props-2"
+                },
+                {
+                  "text": "Compare magnets, non-magnetic materials and magnetic materials",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-magnet-props-3"
+                },
+                {
+                  "text": "Make a magnet by the stroke method and the electrical method",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-magnet-props-4"
+                },
+                {
+                  "text": "Recognise uses of magnets in everyday objects",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-magnet-props-5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-interactions-forces",
+          "name": "Interaction of Forces (Frictional force, gravitational force, elastic spring force)",
+          "subtopics": [
+            {
+              "id": "sci-interactions-forces-effects",
+              "name": "Forces and their effects",
+              "outcomes": [
+                {
+                  "text": "Identify a force as a push or a pull",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-forces-effects-1"
+                },
+                {
+                  "text": "Show an understanding of the effects of a force: move a stationary object; speed up, slow down or change direction; stop a moving object; change shape",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-forces-effects-2"
+                },
+                {
+                  "text": "Recognise and give examples of types of forces: magnetic, gravitational, frictional, elastic spring (elastic spring force is Standard only)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-forces-effects-3"
+                }
+              ]
+            },
+            {
+              "id": "sci-interactions-forces-investigate",
+              "name": "Friction, elastic spring force, weight",
+              "outcomes": [
+                {
+                  "text": "Investigate the effect of frictional force on the motion of objects",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-forces-investigate-1"
+                },
+                {
+                  "text": "Investigate the effects of elastic spring force [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-forces-investigate-2"
+                },
+                {
+                  "text": "Recognise that objects have weight because of the gravitational force acting on them",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-forces-investigate-3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-interactions-environment",
+          "name": "Interactions within the Environment",
+          "subtopics": [
+            {
+              "id": "sci-interactions-env-survival",
+              "name": "Factors affecting survival; food chains",
+              "outcomes": [
+                {
+                  "text": "Identify factors affecting survival of an organism: temperature, light, water; availability of food; other organisms present (producers, consumers, decomposers)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-env-survival-1"
+                },
+                {
+                  "text": "Show an understanding of the effect on organisms when the environment becomes unfavourable (adapt and survive, move to other places, or die) [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-env-survival-2"
+                },
+                {
+                  "text": "Show an understanding of the energy pathway from the Sun through living things; roles of producers, consumers, predators, prey in a food chain (food web is Standard only)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-env-survival-3"
+                },
+                {
+                  "text": "Observe, collect and record information on interacting factors within an environment",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-interactions-env-survival-4"
+                }
+              ]
+            },
+            {
+              "id": "sci-interactions-env-community",
+              "name": "Organism, population, community, habitats",
+              "outcomes": [
+                {
+                  "text": "Differentiate among organism, population and community [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-env-community-1"
+                },
+                {
+                  "text": "Show an understanding that different habitats support different communities (garden, field, pond, seashore, tree, mangrove swamp)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-env-community-2"
+                }
+              ]
+            },
+            {
+              "id": "sci-interactions-env-adapt",
+              "name": "Adaptations and human impact",
+              "outcomes": [
+                {
+                  "text": "Show an understanding that adaptations (structural or behavioural) enhance survival: cope with physical factors, obtain food, escape predators, reproduce by finding mates or dispersing seeds/fruits",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-env-adapt-1"
+                },
+                {
+                  "text": "Give examples of man's positive (conservation, reforestation) and negative (depleting resources, deforestation, pollution, global warming) impact on the environment",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-interactions-env-adapt-2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci-energy",
+      "name": "Energy",
+      "topics": [
+        {
+          "id": "sci-energy-light",
+          "name": "Energy Forms and Uses (Light)",
+          "subtopics": [
+            {
+              "id": "sci-energy-light-seeing",
+              "name": "Seeing and shadows",
+              "outcomes": [
+                {
+                  "text": "Recognise that an object can be seen when it reflects light or is a source of light",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-light-seeing-1"
+                },
+                {
+                  "text": "Recognise that light travels in straight lines and a shadow forms when light is completely or partially blocked",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-light-seeing-2"
+                },
+                {
+                  "text": "Investigate variables affecting shadows: shape, size, position of object; distances light source-object and object-screen",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-light-seeing-3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-energy-heat",
+          "name": "Energy Forms and Uses (Heat)",
+          "subtopics": [
+            {
+              "id": "sci-energy-heat-temp",
+              "name": "Heat and temperature",
+              "outcomes": [
+                {
+                  "text": "Identify common sources of heat",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-heat-temp-1"
+                },
+                {
+                  "text": "State that temperature is a measurement of degree of hotness; that heat is a form of energy; differentiate between heat and temperature",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-heat-temp-2"
+                },
+                {
+                  "text": "Measure temperature using a thermometer and a datalogger with temperature/heat sensors",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-heat-temp-3"
+                },
+                {
+                  "text": "Show an understanding that heat flows from a hotter to a colder object until both reach the same temperature; relate temperature change to heat gain or loss",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-heat-temp-4"
+                }
+              ]
+            },
+            {
+              "id": "sci-energy-heat-effects",
+              "name": "Effects of heat and conductors",
+              "outcomes": [
+                {
+                  "text": "List effects of heat gain/loss in everyday life: contraction/expansion (solid, liquid, gas); change in state",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-heat-effects-1"
+                },
+                {
+                  "text": "Identify good conductors (metals) and poor conductors (wood, plastics, air, rubber) of heat",
+                  "level": "P4",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-heat-effects-2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-energy-photosynthesis",
+          "name": "Energy Forms and Uses (Photosynthesis)",
+          "subtopics": [
+            {
+              "id": "sci-energy-photo-respiration",
+              "name": "Respiration and the Sun",
+              "outcomes": [
+                {
+                  "text": "Recognise that living things need energy from respiration to carry out life processes [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-photo-respiration-1"
+                },
+                {
+                  "text": "Recognise that the Sun is our primary source of energy (light and heat)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-photo-respiration-2"
+                },
+                {
+                  "text": "Differentiate between the ways plants and animals obtain energy [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-photo-respiration-3"
+                }
+              ]
+            },
+            {
+              "id": "sci-energy-photo-requirements",
+              "name": "Photosynthesis",
+              "outcomes": [
+                {
+                  "text": "Investigate the requirements (water, light energy, carbon dioxide) for photosynthesis (production of sugar and oxygen)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-photo-requirements-1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci-energy-conversion",
+          "name": "Energy Conversion",
+          "subtopics": [
+            {
+              "id": "sci-energy-conv-forms",
+              "name": "Forms and conversion of energy",
+              "outcomes": [
+                {
+                  "text": "Recognise that energy from most of our energy resources is derived in some ways from the Sun [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-conv-forms-1"
+                },
+                {
+                  "text": "Recognise and give examples of forms of energy: kinetic, potential, light, electrical, sound, heat [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-energy-conv-forms-2"
+                },
+                {
+                  "text": "Investigate energy conversion from one form to another [Standard Science only; not in Foundation syllabus]",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-energy-conv-forms-3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci-inquiry",
+      "name": "Scientific inquiry (skills and processes)",
+      "topics": [
+        {
+          "id": "sci-inquiry-skills",
+          "name": "Scientific inquiry skills assessed in PSLE (AO II b)",
+          "subtopics": [
+            {
+              "id": "sci-inquiry-predict-hyp",
+              "name": "Predicting and hypothesising",
+              "outcomes": [
+                {
+                  "text": "Make predictions and formulate hypotheses (predict: assess likelihood of an outcome from prior knowledge; formulate hypothesis: general explanation for a set of observations)",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-inquiry-predict-hyp-1"
+                },
+                {
+                  "text": "Observe (use the senses) and infer (explain or draw a conclusion from observations, data or information)",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-inquiry-predict-hyp-2"
+                }
+              ]
+            },
+            {
+              "id": "sci-inquiry-analyse",
+              "name": "Interpreting and analysing information",
+              "outcomes": [
+                {
+                  "text": "Interpret and analyse information presented in diagrams, tables and graphs, identifying patterns and relationships",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-inquiry-analyse-1"
+                },
+                {
+                  "text": "Compare and classify objects or events based on similarities and differences",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false,
+                  "id": "sci-inquiry-analyse-2"
+                }
+              ]
+            },
+            {
+              "id": "sci-inquiry-evaluate",
+              "name": "Evaluating observations, information and methods",
+              "outcomes": [
+                {
+                  "text": "Evaluate observations, information and methods (assess reasonableness, accuracy and quality); includes reasoning about investigation design such as which variables to change, measure or keep constant",
+                  "level": "P5",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": true,
+                  "id": "sci-inquiry-evaluate-1"
+                }
+              ]
+            },
+            {
+              "id": "sci-inquiry-communicate",
+              "name": "Communicating explanations and reasoning",
+              "outcomes": [
+                {
+                  "text": "Communicate explanations and reasoning using words, diagrams, tables and graphs",
+                  "level": "P3",
+                  "psleExaminable": true,
+                  "mcqTestable": false,
+                  "needsDiagram": false,
+                  "unverified": false,
+                  "id": "sci-inquiry-communicate-1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nonMcqComponents": [
+    "Booklet B structured questions (10-11 questions, 40 marks): written explanations, reasoning, data interpretation",
+    "Communicating explanations and reasoning (AO II b) in words, diagrams, tables, graphs",
+    "Hands-on practicals and performance-based assessment (school-based only, not in PSLE paper)"
+  ],
+  "unverified": [
+    {
+      "item": "sci-cycles-repro-plants-3",
+      "reason": "Outcome wording or level synthesised rather than quoted: fruit/seed dispersal adaptations are only cross-referenced in a Note under Interactions (P6); introduced in P5 Reproduction"
+    },
+    {
+      "item": "sci-inquiry-evaluate-1",
+      "reason": "Outcome wording or level synthesised rather than quoted: SEAB AO II(b) lists 'evaluating observations, information and methods'; the MOE syllabus has no explicit fair-test/variable-control outcome, so the fair-test wording is the compiler's reading"
+    },
+    {
+      "item": "syllabus.appliesTo2027",
+      "reason": "No SEAB document specifically for the 2027 PSLE was found. The only SEAB document found says 'For examination from 2026' with no end date and names the 2023 syllabus; 2027 applicability is inferred from that open-ended wording and the 2023 P3 implementation start."
+    },
+    {
+      "item": "MOE syllabus revision",
+      "reason": "The MOE PDF (87 pp) says 'Updated Jan 2026' and implementation from the 2023 P3 cohort. Earlier versions (Oct 2022, May 2024) were reported by search snippets but not retrieved, so what changed in Jan 2026 is unknown."
+    },
+    {
+      "item": "Underlined topics (Foundation exemptions)",
+      "reason": "Table 2 says underlined topics are not required for Foundation Science, but underlining is lost in text extraction. Standard-only tags here are inferred from topics/outcomes missing on the Foundation learning-outcome pages (e.g. Energy Conversion has no Foundation page)."
+    },
+    {
+      "item": "psleExaminable by level",
+      "reason": "SEAB states the paper assesses the 2023 primary science syllabus (P3-P6) and does not split P3/P4 from P5/P6 content; all outcomes are therefore tagged examinable. The syllabus is spiral, so P3/P4 content is assumed testable at P6."
+    },
+    {
+      "item": "Paper weighting by assessment objective",
+      "reason": "SEAB lists AO I (Knowledge with Understanding) and AO II (Application of Knowledge and Scientific Inquiry) but gives no percentage weightings."
+    },
+    {
+      "item": "Calculator policy",
+      "reason": "The SEAB format page does not mention calculators; recorded as false (not stated)."
+    },
+    {
+      "item": "mcqTestable / needsDiagram tags",
+      "reason": "These are the compiler's judgement, not stated by the syllabus."
+    },
+    {
+      "item": "Foundation Science",
+      "reason": "Foundation Science (SEAB code 0039) exists as a separate paper with a reduced syllabus; out of scope here."
+    },
+    {
+      "item": "Level of inquiry-skill outcomes",
+      "reason": "The syllabus has no standalone skills strand; skills sit in the 'Practices' column per topic. Level tag P3 means first appearing at P3 and spiralling to P6."
+    }
+  ],
+  "sources": [
+    {
+      "title": "PSLE Science (0009) - For examination from 2026",
+      "url": "https://isomer-user-content.by.gov.sg/334/24bb2fea-a0e0-4aaf-9a11-ae1ef1b8840e/0009_y26_sy.pdf",
+      "publisher": "SEAB (Singapore Examinations and Assessment Board)",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "Science Teaching & Learning Syllabus, Primary Three to Six, Standard / Foundation (Updated Jan 2026)",
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf",
+      "publisher": "MOE Curriculum Planning and Development Division",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "PSLE Foundation Science (0039) - For examination from 2026 (noted only)",
+      "url": "https://isomer-user-content.by.gov.sg/334/b82de225-d960-4a2a-8762-8413ac521524/0039_y26_sy.pdf",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    }
+  ]
+}

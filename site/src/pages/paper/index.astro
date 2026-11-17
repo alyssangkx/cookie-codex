@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { paperTopics } from '../../lib/train';
+import { MIXES } from '../../lib/pick';
+---
+<Base title="Practice paper · PSLE training" description="Build a WA or SA style Math practice paper from the topics you choose.">
+  <section class="wrap paper">
+    <p class="crumbs"><a href="/train/">Schools of Mastery</a> › Practice paper</p>
+    <h1>Build a practice paper</h1>
+    <p class="lede">Weighted Assessments and Semestral exams mix several topics. Pick the topics your class has covered and the paper will mix them, from easier to harder, against the clock. Papers count toward today's goal but not toward clearing tiers.</p>
+    <form action="/quiz/" method="get" id="paper-form">
+      <input type="hidden" name="mode" value="paper" />
+      <input type="hidden" name="topics" id="topics" />
+      <fieldset>
+        <legend>Topics</legend>
+        <p><button type="button" id="all">Select all</button></p>
+        <div class="topics">
+          {paperTopics.map((t) => (
+            <label class="topic"><input type="checkbox" value={t.id} /> {t.name} <span class="n">{t.count} questions</span></label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Paper</legend>
+        <label>Questions
+          <select name="n">
+            <option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="40">40</option>
+          </select>
+        </label>
+        {Object.entries(MIXES).map(([k, m], i) => (
+          <label class="mix"><input type="radio" name="mix" value={k} checked={i === 0} /> {m.label}</label>
+        ))}
+      </fieldset>
+      <p id="err" class="err" role="alert" hidden>Choose at least one topic.</p>
+      <button class="primary" type="submit">Start paper</button>
+    </form>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('paper-form') as HTMLFormElement;
+  const boxes = () => [...form.querySelectorAll<HTMLInputElement>('.topic input')];
+  document.getElementById('all')!.addEventListener('click', () => boxes().forEach((b) => (b.checked = true)));
+  form.addEventListener('submit', (e) => {
+    const picked = boxes().filter((b) => b.checked).map((b) => b.value);
+    (document.getElementById('topics') as HTMLInputElement).value = picked.join(',');
+    document.getElementById('err')!.hidden = picked.length > 0;
+    if (!picked.length) e.preventDefault();
+  });
+</script>
+
+<style>
+  .paper { padding-block: 1.5rem 2rem; max-width: 760px; }
+  .crumbs { margin: 0; font-size: 0.95rem; color: var(--cocoa-soft); }
+  .lede { color: var(--cocoa-soft); }
+  fieldset { border: 1.5px solid var(--crust); border-radius: var(--radius-card); background: var(--paper); margin: 1rem 0; padding: 0.75rem 1rem 1rem; }
+  legend { font: 600 1.1rem var(--font-display); padding: 0 0.4rem; }
+  .topics { display: grid; gap: 0.25rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  label { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; }
+  .n { color: var(--cocoa-soft); font-size: 0.85rem; }
+  select { font: inherit; min-height: 40px; }
+  button { font: 600 1rem var(--font-display); min-height: 44px; padding: 0.4rem 1rem; border-radius: var(--radius-control); border: 1.5px solid var(--crust); background: var(--cream); color: var(--cocoa); }
+  .primary { background: var(--berry); color: var(--berry-ink); border: 0; }
+  .err { color: var(--berry); font-weight: 600; }
+</style>

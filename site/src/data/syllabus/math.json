@@ -1,0 +1,2032 @@
+{
+ "subject": "math",
+ "psleYear": 2027,
+ "syllabus": {
+  "name": "Primary Mathematics Syllabus (Standard Mathematics), implementation starting with 2021 Primary One cohort; SEAB PSLE Mathematics (0008) for Examination from 2026",
+  "revision": "MOE 2021 Primary Mathematics Syllabus (document updated Oct 2025); SEAB 0008 \"For Examination from 2026\"",
+  "appliesTo2027Evidence": "In 2025, the 2021 primary mathematics syllabus applies to Primary 1 to Primary 5 only. Students in Primary 6 will continue to use the 2013 syllabus. The 2021 mathematics syllabus will be applicable to Primary 6 from 2026 onwards.",
+  "evidenceUrl": "https://www.moe.gov.sg/media/files/primary/92bff26d-b2b4-4535-b868-b8415c744b91.pdf",
+  "unverified": false
+ },
+ "paperFormat": {
+  "papers": [
+   {
+    "name": "Paper 1 (Booklet A: multiple-choice; Booklet B: short-answer)",
+    "durationMin": 70,
+    "items": [
+     {
+      "type": "MCQ",
+      "count": 10,
+      "marksEach": 1
+     },
+     {
+      "type": "MCQ",
+      "count": 8,
+      "marksEach": 2
+     },
+     {
+      "type": "Short-answer",
+      "count": 12,
+      "marksEach": 2
+     }
+    ],
+    "totalMarks": 50,
+    "calculator": false
+   },
+   {
+    "name": "Paper 2 (one booklet)",
+    "durationMin": 80,
+    "items": [
+     {
+      "type": "Short-answer",
+      "count": 5,
+      "marksEach": 2
+     },
+     {
+      "type": "Structured/Long-answer",
+      "count": 10,
+      "marksEach": 4
+     }
+    ],
+    "totalMarks": 50,
+    "calculator": true
+   }
+  ],
+  "notes": "Structured/long-answer questions carry 3, 4 or 5 marks each (40 marks over 10 questions); marksEach=4 is the mean, not an official per-question value. Total 45 questions, 100 marks, 2 h 30 min (SEAB). Both papers on the same day with a break between. MCQ has four options, one correct. Short-answer: 2 marks, or 1 mark per part for two-part questions; 1 mark for correct method on one-part questions with a wrong answer. Foundation Mathematics (PSLE 0038 in SEAB listing) also exists; out of scope here."
+ },
+ "strands": [
+  {
+   "id": "math-number-and-algebra",
+   "name": "Number and Algebra",
+   "topics": [
+    {
+     "id": "math-whole-numbers",
+     "name": "Whole Numbers",
+     "subtopics": [
+      {
+       "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million",
+       "name": "Numbers up to 100, 1000, 10 000, 100 000 and 10 million",
+       "outcomes": [
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-01",
+         "text": "counting to tell the number of objects in a given set; comparing the number of objects in two or more sets",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-02",
+         "text": "number notation, representations and place values up to 100 (tens, ones)",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-03",
+         "text": "reading and writing numbers up to 100 in numerals and in words",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-04",
+         "text": "comparing and ordering numbers up to 100",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-05",
+         "text": "patterns in number sequences up to 100",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-06",
+         "text": "ordinal numbers (first to tenth) and symbols 1st, 2nd, 3rd etc.",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-07",
+         "text": "counting in tens/hundreds",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-08",
+         "text": "number notation, representations and place values up to 1000 (hundreds, tens, ones)",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-09",
+         "text": "reading and writing numbers up to 1000 in numerals and in words",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-10",
+         "text": "comparing and ordering numbers up to 1000",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-11",
+         "text": "patterns in number sequences up to 1000",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-12",
+         "text": "odd and even numbers",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-13",
+         "text": "counting in hundreds/thousands",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-14",
+         "text": "number notation, representations and place values up to 10 000",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-15",
+         "text": "reading and writing numbers up to 10 000 in numerals and in words",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-16",
+         "text": "comparing and ordering numbers up to 10 000",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-17",
+         "text": "patterns in number sequences up to 10 000",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-18",
+         "text": "number notation, representations and place values up to 100 000",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19",
+         "text": "reading and writing numbers up to 100 000 in numerals and in words",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20",
+         "text": "comparing and ordering numbers up to 100 000",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-21",
+         "text": "patterns in number sequences up to 100 000",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22",
+         "text": "rounding numbers to the nearest 10, 100 or 1000",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23",
+         "text": "use of the approximately-equal-to symbol",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+         "text": "reading and writing numbers up to 10 million in numerals and in words",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-whole-numbers-addition-subtraction-multiplication-and-division",
+       "name": "Addition, subtraction, multiplication and division",
+       "outcomes": [
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-01",
+         "text": "concepts of addition and subtraction; use of +, - and =; relationship between addition and subtraction",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-02",
+         "text": "adding more than two 1-digit numbers; adding and subtracting within 100, including by algorithms",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-03",
+         "text": "mental calculation involving addition and subtraction within 20, of a 2-digit number and ones without renaming, and of a 2-digit number and tens",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-04",
+         "text": "concepts of multiplication and division; use of the multiplication sign; multiplying within 40 and dividing within 20",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-05",
+         "text": "addition and subtraction algorithms (up to 3 digits)",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-06",
+         "text": "mental calculation involving addition and subtraction of a 3-digit number and ones/tens/hundreds",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-07",
+         "text": "multiplication tables of 2, 3, 4, 5 and 10; use of the division sign; relationship between multiplication and division",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-08",
+         "text": "multiplying and dividing within the multiplication tables; mental calculation within tables of 2, 3, 4, 5 and 10",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-09",
+         "text": "addition and subtraction algorithms (up to 4 digits)",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-10",
+         "text": "mental calculation involving addition and subtraction of two 2-digit numbers",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-11",
+         "text": "multiplication tables of 6, 7, 8 and 9; multiplying and dividing within the multiplication tables",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-12",
+         "text": "division with remainder",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-13",
+         "text": "multiplication and division algorithms (up to 3 digits by 1 digit)",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-14",
+         "text": "mental calculation involving multiplication and division within multiplication tables",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-15",
+         "text": "multiplication algorithm (up to 4 digits by 1 digit; up to 3 digits by 2 digits)",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-16",
+         "text": "division algorithm (up to 4 digits by 1 digit)",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-17",
+         "text": "multiplying and dividing by 10, 100, 1000 and their multiples without calculator",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-18",
+         "text": "order of operations without calculator",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-addition-subtraction-multiplication-and-division-19",
+         "text": "use of brackets without calculator",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-whole-numbers-factors-and-multiples",
+       "name": "Factors and multiples",
+       "outcomes": [
+        {
+         "id": "math-whole-numbers-factors-and-multiples-01",
+         "text": "factors, multiples and their relationship",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-factors-and-multiples-02",
+         "text": "determining if a 1-digit number is a factor of a given number within 100",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-factors-and-multiples-03",
+         "text": "finding the common factors of two given numbers",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-factors-and-multiples-04",
+         "text": "determining if a number is a multiple of a given 1-digit number",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-whole-numbers-factors-and-multiples-05",
+         "text": "finding the common multiples of two given 1-digit numbers",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-fractions",
+     "name": "Fractions",
+     "subtopics": [
+      {
+       "id": "math-fractions-fraction-of-a-whole-and-of-a-set",
+       "name": "Fraction of a whole and of a set",
+       "outcomes": [
+        {
+         "id": "math-fractions-fraction-of-a-whole-and-of-a-set-01",
+         "text": "fraction as part of a whole; notation and representations of fractions",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-fraction-of-a-whole-and-of-a-set-02",
+         "text": "comparing and ordering unit fractions and like fractions (denominators not exceeding 12)",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-fraction-of-a-whole-and-of-a-set-03",
+         "text": "fraction as part of a set",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-fractions-equivalent-fractions-and-simplest-form",
+       "name": "Equivalent fractions and simplest form",
+       "outcomes": [
+        {
+         "id": "math-fractions-equivalent-fractions-and-simplest-form-01",
+         "text": "equivalent fractions",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-equivalent-fractions-and-simplest-form-02",
+         "text": "expressing a fraction in its simplest form",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-equivalent-fractions-and-simplest-form-03",
+         "text": "comparing and ordering unlike fractions (denominators not exceeding 12)",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-equivalent-fractions-and-simplest-form-04",
+         "text": "writing the equivalent fraction of a fraction given the denominator or the numerator",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-fractions-mixed-numbers-and-improper-fractions",
+       "name": "Mixed numbers and improper fractions",
+       "outcomes": [
+        {
+         "id": "math-fractions-mixed-numbers-and-improper-fractions-01",
+         "text": "mixed numbers, improper fractions and their relationship",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-fractions-addition-and-subtraction-of-fractions",
+       "name": "Addition and subtraction of fractions",
+       "outcomes": [
+        {
+         "id": "math-fractions-addition-and-subtraction-of-fractions-01",
+         "text": "adding and subtracting like fractions within one whole (denominators not exceeding 12)",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-addition-and-subtraction-of-fractions-02",
+         "text": "adding and subtracting two related fractions within one whole (denominators not exceeding 12)",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-addition-and-subtraction-of-fractions-03",
+         "text": "adding and subtracting fractions with denominators not exceeding 12 and not more than two different denominators",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-addition-and-subtraction-of-fractions-04",
+         "text": "adding and subtracting mixed numbers",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-fractions-multiplication-and-division-of-fractions",
+       "name": "Multiplication and division of fractions",
+       "outcomes": [
+        {
+         "id": "math-fractions-multiplication-and-division-of-fractions-01",
+         "text": "multiplying a proper/improper fraction and a whole number without calculator",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-multiplication-and-division-of-fractions-02",
+         "text": "multiplying a proper fraction and a proper/improper fraction without calculator",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-multiplication-and-division-of-fractions-03",
+         "text": "multiplying two improper fractions",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-multiplication-and-division-of-fractions-04",
+         "text": "multiplying a mixed number and a whole number",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-multiplication-and-division-of-fractions-05",
+         "text": "dividing a proper fraction by a whole number without calculator",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-multiplication-and-division-of-fractions-06",
+         "text": "dividing a whole number/proper fraction by a proper fraction without calculator",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-fractions-fraction-and-division",
+       "name": "Fraction and division",
+       "outcomes": [
+        {
+         "id": "math-fractions-fraction-and-division-01",
+         "text": "dividing a whole number by a whole number with quotient as a fraction",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-fractions-fraction-and-division-02",
+         "text": "expressing fractions as decimals",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-decimals",
+     "name": "Decimals",
+     "subtopics": [
+      {
+       "id": "math-decimals-decimal-notation-and-comparison",
+       "name": "Decimal notation and comparison",
+       "outcomes": [
+        {
+         "id": "math-decimals-decimal-notation-and-comparison-01",
+         "text": "decimal notation, representations and place values up to 3 decimal places (tenths, hundredths, thousandths)",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-decimal-notation-and-comparison-02",
+         "text": "comparing and ordering decimals",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-decimal-notation-and-comparison-03",
+         "text": "expressing decimals as fractions",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-decimal-notation-and-comparison-04",
+         "text": "expressing fractions as decimals when the denominator is a factor of 10 or 100",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-decimal-notation-and-comparison-05",
+         "text": "rounding decimals to the nearest whole number, 1 decimal place and 2 decimal places",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-decimals-four-operations-with-decimals",
+       "name": "Four operations with decimals",
+       "outcomes": [
+        {
+         "id": "math-decimals-four-operations-with-decimals-01",
+         "text": "adding and subtracting decimals (up to 2 decimal places)",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-four-operations-with-decimals-02",
+         "text": "multiplying and dividing decimals (up to 2 decimal places) by a 1-digit whole number",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-four-operations-with-decimals-03",
+         "text": "dividing a whole number by a whole number with quotient as a decimal",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-four-operations-with-decimals-04",
+         "text": "rounding answers to a specified degree of accuracy",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-four-operations-with-decimals-05",
+         "text": "multiplying and dividing decimals (up to 3 decimal places) by 10, 100, 1000 and their multiples without calculator",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-decimals-four-operations-with-decimals-06",
+         "text": "converting a measurement from a smaller unit to a larger unit in decimal form, and vice versa (km/m, m/cm, kg/g, l/ml)",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-money",
+     "name": "Money",
+     "subtopics": [
+      {
+       "id": "math-money-money",
+       "name": "Money",
+       "outcomes": [
+        {
+         "id": "math-money-money-01",
+         "text": "counting amount of money in cents up to $1 and in dollars up to $100",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-money-money-02",
+         "text": "counting amount of money in dollars and cents",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-money-money-03",
+         "text": "reading and writing money in decimal notation",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-money-money-04",
+         "text": "comparing two or three amounts of money",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-money-money-05",
+         "text": "converting an amount of money in decimal notation to cents only, and vice versa",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-money-money-06",
+         "text": "adding and subtracting money in decimal notation",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-percentage",
+     "name": "Percentage",
+     "subtopics": [
+      {
+       "id": "math-percentage-percentage",
+       "name": "Percentage",
+       "outcomes": [
+        {
+         "id": "math-percentage-percentage-01",
+         "text": "expressing a part of a whole as a percentage; use of %",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-percentage-percentage-02",
+         "text": "finding a percentage part of a whole",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-percentage-percentage-03",
+         "text": "finding discount, GST and annual interest",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-percentage-percentage-04",
+         "text": "finding the whole given a part and the percentage",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-percentage-percentage-05",
+         "text": "finding percentage increase/decrease",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-rate",
+     "name": "Rate",
+     "subtopics": [
+      {
+       "id": "math-rate-rate",
+       "name": "Rate",
+       "outcomes": [
+        {
+         "id": "math-rate-rate-01",
+         "text": "rate as the amount of a quantity per unit of another quantity",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-rate-rate-02",
+         "text": "finding rate, total amount or number of units given the other two quantities",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-ratio",
+     "name": "Ratio",
+     "subtopics": [
+      {
+       "id": "math-ratio-ratio",
+       "name": "Ratio",
+       "outcomes": [
+        {
+         "id": "math-ratio-ratio-01",
+         "text": "notation, representations and interpretation of a:b and a:b:c where a, b and c are whole numbers (excluding ratios involving fractions and decimals)",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-ratio-ratio-02",
+         "text": "equivalent ratios",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-ratio-ratio-03",
+         "text": "dividing a quantity in a given ratio",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-ratio-ratio-04",
+         "text": "expressing a ratio in its simplest form",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-ratio-ratio-05",
+         "text": "finding the ratio of two or three given quantities",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-ratio-ratio-06",
+         "text": "finding the missing term in a pair of equivalent ratios",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-ratio-ratio-07",
+         "text": "relationship between fraction and ratio",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-algebra",
+     "name": "Algebra",
+     "subtopics": [
+      {
+       "id": "math-algebra-algebra",
+       "name": "Algebra",
+       "outcomes": [
+        {
+         "id": "math-algebra-algebra-01",
+         "text": "using a letter to represent an unknown number",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-algebra-algebra-02",
+         "text": "notation, representations and interpretation of simple algebraic expressions such as a+3, a-3, 3a and a divided by 3",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-algebra-algebra-03",
+         "text": "simplifying simple linear expressions excluding brackets",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-algebra-algebra-04",
+         "text": "evaluating simple linear expressions by substitution",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-algebra-algebra-05",
+         "text": "simple linear equations involving whole number coefficient only",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "math-measurement-and-geometry",
+   "name": "Measurement and Geometry",
+   "topics": [
+    {
+     "id": "math-measurement",
+     "name": "Measurement",
+     "subtopics": [
+      {
+       "id": "math-measurement-length-mass-and-volume",
+       "name": "Length, mass and volume",
+       "outcomes": [
+        {
+         "id": "math-measurement-length-mass-and-volume-01",
+         "text": "measuring length in centimetres; use of abbreviation cm",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-02",
+         "text": "comparing and ordering lengths in cm",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-03",
+         "text": "measuring and drawing a line segment to the nearest cm",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-04",
+         "text": "measuring length in metres, mass in kilograms/grams, volume of liquid in litres; using appropriate units and abbreviations m, g, kg, l",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-05",
+         "text": "comparing and ordering lengths, masses and volumes",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-06",
+         "text": "measuring length in kilometres and volume of liquid in millilitres",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-07",
+         "text": "measuring length/mass/volume (of liquid) in compound units",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-length-mass-and-volume-08",
+         "text": "converting a measurement in compound units to the smaller unit, and vice versa (km/m, m/cm, kg/g, l/ml)",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-measurement-time",
+       "name": "Time",
+       "outcomes": [
+        {
+         "id": "math-measurement-time-01",
+         "text": "telling time to 5 minutes; use of am and pm; abbreviations h and min; duration of one hour/half hour",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-time-02",
+         "text": "telling time to the minute",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-time-03",
+         "text": "measuring time in hours and minutes; converting time in hours and minutes to minutes only, and vice versa",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-time-04",
+         "text": "measuring time in seconds",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-time-05",
+         "text": "finding the starting time, finishing time or duration given the other two quantities",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-measurement-time-06",
+         "text": "24-hour clock",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-area-and-volume",
+     "name": "Area and Volume",
+     "subtopics": [
+      {
+       "id": "math-area-and-volume-area-and-perimeter",
+       "name": "Area and perimeter",
+       "outcomes": [
+        {
+         "id": "math-area-and-volume-area-and-perimeter-01",
+         "text": "concepts of area and perimeter of a plane figure",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-perimeter-02",
+         "text": "measuring area in square units, cm2 and m2, excluding conversion between cm2 and m2",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-perimeter-03",
+         "text": "perimeter of rectilinear figure, rectangle and square",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-perimeter-04",
+         "text": "area of rectangle and square",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-perimeter-05",
+         "text": "finding one dimension of a rectangle given the other dimension and its area/perimeter",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-perimeter-06",
+         "text": "finding the length of one side of a square given its area/perimeter",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-perimeter-07",
+         "text": "finding the area and perimeter of composite figures made up of rectangles and squares",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-area-and-volume-area-of-triangle",
+       "name": "Area of triangle",
+       "outcomes": [
+        {
+         "id": "math-area-and-volume-area-of-triangle-01",
+         "text": "concepts of base and height of a triangle",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-of-triangle-02",
+         "text": "area of triangle",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-of-triangle-03",
+         "text": "finding the area of composite figures made up of rectangles, squares and triangles",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-area-and-volume-volume-of-cube-and-cuboid",
+       "name": "Volume of cube and cuboid",
+       "outcomes": [
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-01",
+         "text": "building solids with unit cubes",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-02",
+         "text": "measuring volume in cubic units, cm3 and m3, excluding conversion between cm3 and m3",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-03",
+         "text": "drawing cubes and cuboids on isometric grid",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-04",
+         "text": "volume of a cube/cuboid",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-05",
+         "text": "finding the volume of liquid in a rectangular tank",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-06",
+         "text": "relationship between litre (or ml) and cm3",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-07",
+         "text": "finding one dimension of a cuboid given its volume and the other dimensions",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-08",
+         "text": "finding the length of one edge of a cube given its volume",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-09",
+         "text": "finding the height of a cuboid given its volume and base area",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-10",
+         "text": "finding the area of a face of a cuboid given its volume and one dimension",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-volume-of-cube-and-cuboid-11",
+         "text": "use of symbols/notation in volume work (syllabus line 'use of ..., 3': symbols did not extract from the PDF)",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": false,
+         "unverified": true
+        }
+       ]
+      },
+      {
+       "id": "math-area-and-volume-area-and-circumference-of-circle",
+       "name": "Area and circumference of circle",
+       "outcomes": [
+        {
+         "id": "math-area-and-volume-area-and-circumference-of-circle-01",
+         "text": "area and circumference of circle",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-circumference-of-circle-02",
+         "text": "finding the area and perimeter of semicircle and quarter circle",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-area-and-volume-area-and-circumference-of-circle-03",
+         "text": "finding the area and perimeter of composite figures made up of square, rectangle, triangle, semicircle and quarter circle",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-geometry",
+     "name": "Geometry",
+     "subtopics": [
+      {
+       "id": "math-geometry-2d-shapes",
+       "name": "2D shapes",
+       "outcomes": [
+        {
+         "id": "math-geometry-2d-shapes-01",
+         "text": "identifying, naming, describing and classifying 2D shapes (rectangle, square, triangle, circle, half circle, quarter circle)",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-2d-shapes-02",
+         "text": "forming different 2D figures with rectangle, square, triangle, half circle and quarter circle",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-2d-shapes-03",
+         "text": "identifying the 2D shapes that make up a given figure",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-2d-shapes-04",
+         "text": "copying figures on dot grid or square grid",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-2d-shapes-05",
+         "text": "making/completing patterns with 2D shapes according to size, shape, colour or orientation",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-geometry-3d-shapes-and-nets",
+       "name": "3D shapes and nets",
+       "outcomes": [
+        {
+         "id": "math-geometry-3d-shapes-and-nets-01",
+         "text": "identifying, naming, describing and classifying 3D shapes (cube, cuboid, cone, cylinder, sphere)",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-3d-shapes-and-nets-02",
+         "text": "identifying 2D representations of cube, cuboid, cone, cylinder, prism and pyramid",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-3d-shapes-and-nets-03",
+         "text": "drawing 2D representations of cube, cuboid, prism and pyramid",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-3d-shapes-and-nets-04",
+         "text": "identifying the nets of cube, cuboid, prism and pyramid",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-3d-shapes-and-nets-05",
+         "text": "identifying the solid which can be formed by a given net",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-geometry-angles",
+       "name": "Angles",
+       "outcomes": [
+        {
+         "id": "math-geometry-angles-01",
+         "text": "concepts of angle; right angles, angles greater than/smaller than a right angle",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-02",
+         "text": "using notation such as angle ABC and angle a to name angles",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-03",
+         "text": "measuring angles in degrees",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-04",
+         "text": "drawing an angle of given size",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-05",
+         "text": "angles on a straight line",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-06",
+         "text": "angles at a point",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-07",
+         "text": "vertically opposite angles",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-angles-08",
+         "text": "finding unknown angles",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-geometry-perpendicular-and-parallel-lines",
+       "name": "Perpendicular and parallel lines",
+       "outcomes": [
+        {
+         "id": "math-geometry-perpendicular-and-parallel-lines-01",
+         "text": "perpendicular and parallel lines",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-perpendicular-and-parallel-lines-02",
+         "text": "drawing perpendicular and parallel lines",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-geometry-rectangle-and-square",
+       "name": "Rectangle and square",
+       "outcomes": [
+        {
+         "id": "math-geometry-rectangle-and-square-01",
+         "text": "properties of rectangle and square, excluding diagonal properties",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-rectangle-and-square-02",
+         "text": "drawing rectangles and squares",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-geometry-line-symmetry",
+       "name": "Line symmetry",
+       "outcomes": [
+        {
+         "id": "math-geometry-line-symmetry-01",
+         "text": "identifying symmetric figures",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-line-symmetry-02",
+         "text": "determining whether a straight line is a line of symmetry of a symmetric figure",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-line-symmetry-03",
+         "text": "completing a symmetric figure with respect to a given line of symmetry on square grid",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": false,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      },
+      {
+       "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium",
+       "name": "Triangles, parallelogram, rhombus and trapezium",
+       "outcomes": [
+        {
+         "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium-01",
+         "text": "properties of isosceles, equilateral and right-angled triangles",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium-02",
+         "text": "angle sum of a triangle",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium-03",
+         "text": "finding unknown angles in triangles without additional construction of lines",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium-04",
+         "text": "properties of parallelogram, rhombus and trapezium",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium-05",
+         "text": "finding unknown angles in parallelogram, rhombus and trapezium without additional construction of lines",
+         "level": "P5",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06",
+         "text": "finding unknown angles, without additional construction of lines, in composite geometric figures involving square, rectangle, triangle, parallelogram, rhombus and trapezium",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "math-statistics",
+   "name": "Statistics",
+   "topics": [
+    {
+     "id": "math-data-representation-and-interpretation",
+     "name": "Data Representation and Interpretation",
+     "subtopics": [
+      {
+       "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts",
+       "name": "Picture graphs, bar graphs, tables, line graphs and pie charts",
+       "outcomes": [
+        {
+         "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-01",
+         "text": "reading and interpreting data from picture graphs",
+         "level": "P1",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-02",
+         "text": "reading and interpreting data from picture graphs with scales",
+         "level": "P2",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-03",
+         "text": "reading and interpreting data from bar graphs",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-04",
+         "text": "using different scales on the axis of bar graphs",
+         "level": "P3",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-05",
+         "text": "completing a table from given data",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        },
+        {
+         "id": "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts-06",
+         "text": "reading and interpreting data from tables, line graphs and pie charts",
+         "level": "P4",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": true,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "math-data-analysis",
+     "name": "Data Analysis",
+     "subtopics": [
+      {
+       "id": "math-data-analysis-average-of-a-set-of-data",
+       "name": "Average of a set of data",
+       "outcomes": [
+        {
+         "id": "math-data-analysis-average-of-a-set-of-data-01",
+         "text": "average as total value divided by number of data",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        },
+        {
+         "id": "math-data-analysis-average-of-a-set-of-data-02",
+         "text": "relationship between average, total value and number of data",
+         "level": "P6",
+         "psleExaminable": true,
+         "mcqTestable": true,
+         "needsDiagram": false,
+         "unverified": false
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "nonMcqComponents": [
+  {
+   "name": "Paper 1 Booklet B short-answer",
+   "marks": 24
+  },
+  {
+   "name": "Paper 2 short-answer",
+   "marks": 10
+  },
+  {
+   "name": "Paper 2 structured/long-answer",
+   "marks": 40
+  }
+ ],
+ "unverified": [
+  {
+   "item": "syllabus.psleYear2027",
+   "reason": "No SEAB \"2027 PSLE\" Mathematics syllabus document was found on seab.gov.sg (retrieved 2026-11-17). The latest SEAB document is \"For Examination from 2026\" (0008_y26_sy.pdf), whose wording is open-ended. Applying it to 2027 rests on the MOE sentence that the 2021 syllabus applies to P6 from 2026 onwards, plus the SEAB page title \"PSLE formats examined in 2026\". A 2027-specific SEAB file may be published later."
+  },
+  {
+   "item": "paperFormat",
+   "reason": "Format taken from the SEAB \"For Examination from 2026\" document. No 2027-specific format statement was found; treat as unchanged unless SEAB publishes otherwise."
+  },
+  {
+   "item": "outcomes.psleExaminable",
+   "reason": "SEAB states the exam assesses attainment against the Primary Mathematics syllabus; it does not list examinable content per level or per outcome. All Standard Mathematics outcomes P1-P6 are marked psleExaminable=true on that basis; P1-P3 outcomes are assessed implicitly as prerequisite skills, and the \"1-mark MCQ assess basic concepts and skills\" sentence is the only explicit hint."
+  },
+  {
+   "item": "outcomes.mcqTestable / needsDiagram",
+   "reason": "These two flags are the author's judgement, not stated by any official source. Drawing/construction outcomes are marked mcqTestable=false."
+  },
+  {
+   "item": "math-area-and-volume-volume-of-cube-and-cuboid-11",
+   "reason": "Syllabus line \"use of ..., 3\" under P6 Volume of Cube and Cuboid: symbols were lost in PDF text extraction, so the exact notation is unknown; outcome text is a placeholder and not quiz-ready."
+  }
+ ],
+ "sources": [
+  {
+   "title": "PSLE Mathematics (0008) For Examination from 2026",
+   "url": "https://isomer-user-content.by.gov.sg/334/fe51f29b-04ae-4fcb-a907-8db04c028510/0008_y26_sy.pdf",
+   "publisher": "SEAB",
+   "retrieved": "2026-11-17"
+  },
+  {
+   "title": "PSLE formats examined in 2026",
+   "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/",
+   "publisher": "SEAB",
+   "retrieved": "2026-11-17"
+  },
+  {
+   "title": "Mathematics Syllabus Primary One to Six (implementation from 2021 P1 cohort; updated Oct 2025)",
+   "url": "https://www.moe.gov.sg/media/files/primary/92bff26d-b2b4-4535-b868-b8415c744b91.pdf",
+   "publisher": "MOE",
+   "retrieved": "2026-11-17"
+  },
+  {
+   "title": "Primary syllabuses index page",
+   "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+   "publisher": "MOE",
+   "retrieved": "2026-11-17"
+  }
+ ]
+}

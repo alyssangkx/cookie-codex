@@ -1,0 +1,549 @@
+{
+  "subject": "chinese",
+  "psleYear": 2027,
+  "syllabus": {
+    "name": "PSLE Chinese Language (0005), Standard",
+    "revision": "SEAB 0005_y26_sy.pdf, 'For Examination from 2017' (2026 edition; page last updated 24 April 2026)",
+    "appliesTo2027Evidence": "本科考试是遵照《小学华文课程标准》的相关教学目标及教学内容而编制的。 (SEAB PSLE Chinese Language 0005, 2026 syllabus; no 2027-specific document found)",
+    "evidenceUrl": "https://isomer-user-content.by.gov.sg/334/60adffb8-be52-41da-b09e-cdcc9130ffc7/0005_y26_sy.pdf",
+    "unverified": true
+  },
+  "paperFormat": {
+    "papers": [
+      {
+        "name": "试卷一 写作 (Paper 1 Writing)",
+        "durationMin": 50,
+        "items": [
+          {
+            "type": "开放式 命题作文/看图作文 2选1 (min 100 characters)",
+            "count": 1,
+            "marksEach": 40
+          }
+        ],
+        "totalMarks": 40,
+        "calculator": false
+      },
+      {
+        "name": "试卷二 语文应用与阅读理解 (Paper 2)",
+        "durationMin": 100,
+        "items": [
+          {
+            "type": "MCQ 语文应用",
+            "count": 15,
+            "marksEach": 2
+          },
+          {
+            "type": "MCQ 短文填空",
+            "count": 5,
+            "marksEach": 2
+          },
+          {
+            "type": "MCQ 阅读理解一",
+            "count": 5,
+            "marksEach": 2
+          },
+          {
+            "type": "MCQ 完成对话",
+            "count": 4,
+            "marksEach": 2
+          },
+          {
+            "type": "开放式 阅读理解二 (2 passages, incl. 书面互动)",
+            "count": 11,
+            "marksEach": 0
+          }
+        ],
+        "totalMarks": 90,
+        "calculator": false
+      },
+      {
+        "name": "试卷三 口试 (Paper 3 Oral, ~10 min)",
+        "durationMin": 10,
+        "items": [
+          {
+            "type": "朗读篇章",
+            "count": 1,
+            "marksEach": 20
+          },
+          {
+            "type": "会话 (video stimulus)",
+            "count": 1,
+            "marksEach": 30
+          }
+        ],
+        "totalMarks": 50,
+        "calculator": false
+      },
+      {
+        "name": "试卷三 听力理解 (Paper 3 Listening, ~30 min)",
+        "durationMin": 30,
+        "items": [
+          {
+            "type": "MCQ 听力理解",
+            "count": 10,
+            "marksEach": 2
+          }
+        ],
+        "totalMarks": 20,
+        "calculator": false
+      }
+    ],
+    "notes": "Total 200 marks: 写作 40 (20%), 试卷二 90 (45%), 口试 50 (25%), 听力 20 (10%). 阅读理解二 is 11 open-ended items worth 32 marks in total (per-item marks vary, so marksEach is 0). MCQ-testable text-only marks: 58/200 (29%); with listening (audio) 78/200 (39%). Paper 2 duration 1h40 matches the 0005_y26 syllabus; the 2023 secondary reference of 1h30 is outdated. Foundation: 试卷一 语文应用与阅读理解 40 min 15 marks (15%; 5 MCQ 语文应用 + 5 MCQ/open 阅读理解), 口试 55 marks (55%), 听力 30 marks (30%, 15 items). Higher Chinese (0015): 试卷一 写作 50 min 40 (40%), 试卷二 语文应用与阅读理解 1h20 60 (60%; 5 MCQ 综合填空, 5 字词改正 objective, 6+7 open reading items); no oral or listening paper. Foundation and Higher are recorded as notes only."
+  },
+  "strands": [
+    {
+      "id": "chi-zi-ci",
+      "name": "汉字与词语 (Characters and Vocabulary)",
+      "topics": [
+        {
+          "id": "chi-pinyin",
+          "name": "汉语拼音 (Hanyu Pinyin)",
+          "subtopics": [
+            {
+              "id": "chi-pinyin-sound",
+              "name": "字音辨认 (character sound)",
+              "outcomes": [
+                {
+                  "id": "chi-pinyin-sound-1",
+                  "text": "根据句子的意思，选出字词的正确汉语拼音 (choose the correct pinyin for a character or word in a sentence)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-pinyin-sound-2",
+                  "text": "辨别多音字在语境中的读音 (identify the reading of a polyphonic character in context)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chi-zixing",
+          "name": "字形与字义 (Character form and meaning)",
+          "subtopics": [
+            {
+              "id": "chi-zixing-form",
+              "name": "字形辨认 (character form)",
+              "outcomes": [
+                {
+                  "id": "chi-zixing-form-1",
+                  "text": "根据句意选出正确的字 (choose the correct character for the sentence meaning)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-zixing-form-2",
+                  "text": "辨别同音字 (distinguish homophones)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "chi-zixing-form-3",
+                  "text": "辨别形近字 (distinguish look-alike characters)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chi-ciyu",
+          "name": "词语的认识和运用 (Words and usage)",
+          "subtopics": [
+            {
+              "id": "chi-ciyu-choose",
+              "name": "词语选用 (word choice)",
+              "outcomes": [
+                {
+                  "id": "chi-ciyu-choose-1",
+                  "text": "根据句子的意思选出最适当的词语 (choose the most suitable word for the sentence meaning)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-ciyu-choose-2",
+                  "text": "选出最适当的短语 (choose the most suitable phrase)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-ciyu-choose-3",
+                  "text": "辨别词语搭配 (identify correct word collocations)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "chi-ciyu-choose-4",
+                  "text": "辨别近义词的细微差别 (tell near-synonyms apart)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            },
+            {
+              "id": "chi-ciyu-idiom",
+              "name": "成语和习用语 (idioms and common expressions)",
+              "outcomes": [
+                {
+                  "id": "chi-ciyu-idiom-1",
+                  "text": "在语境中正确运用成语 (use idioms correctly in context)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-ciyu-idiom-2",
+                  "text": "在语境中正确运用习用语 (use common expressions correctly in context)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chi-juzi",
+      "name": "句子结构 (Sentence Structure)",
+      "topics": [
+        {
+          "id": "chi-juzi-yunyong",
+          "name": "句子的认识和运用 (Sentences and usage)",
+          "subtopics": [
+            {
+              "id": "chi-juzi-choose",
+              "name": "句子选用 (sentence choice)",
+              "outcomes": [
+                {
+                  "id": "chi-juzi-choose-1",
+                  "text": "根据句子的意思选出最适当的句子 (choose the most suitable sentence for the meaning)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-juzi-choose-2",
+                  "text": "辨别句子结构是否完整、通顺 (judge whether sentence structure is complete and well-formed)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            },
+            {
+              "id": "chi-juzi-guanlian",
+              "name": "关联词 (conjunctions)",
+              "outcomes": [
+                {
+                  "id": "chi-juzi-guanlian-1",
+                  "text": "选用适当的关联词连接句子 (choose a suitable conjunction pair)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            },
+            {
+              "id": "chi-juzi-order",
+              "name": "句子排列 (sentence ordering)",
+              "outcomes": [
+                {
+                  "id": "chi-juzi-order-1",
+                  "text": "把句子排列成通顺的语段 (arrange sentences into a coherent paragraph)",
+                  "level": "P6",
+                  "psleExaminable": false,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chi-yuwen-yingyong",
+      "name": "语文应用 (Language Use)",
+      "topics": [
+        {
+          "id": "chi-cloze",
+          "name": "短文填空 (Cloze passage)",
+          "subtopics": [
+            {
+              "id": "chi-cloze-mcq",
+              "name": "多项选择短文填空 (MCQ cloze)",
+              "outcomes": [
+                {
+                  "id": "chi-cloze-mcq-1",
+                  "text": "根据短文内容和上下文，选出最适当的答案 (choose the best answer from passage content and context)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-cloze-mcq-2",
+                  "text": "理解语境以判断词语的用法 (use context to judge word usage)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chi-dialogue",
+          "name": "完成对话 (Complete the dialogue)",
+          "subtopics": [
+            {
+              "id": "chi-dialogue-mcq",
+              "name": "对话填答 (dialogue completion)",
+              "outcomes": [
+                {
+                  "id": "chi-dialogue-mcq-1",
+                  "text": "根据对话内容，选出最适当的答案 (choose the best response from the dialogue content)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-dialogue-mcq-2",
+                  "text": "判断对话中的情境和语气 (judge situation and tone in a dialogue)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chi-yuedu",
+      "name": "阅读理解 (Reading Comprehension)",
+      "topics": [
+        {
+          "id": "chi-yuedu-mcq",
+          "name": "阅读理解一 (Comprehension 1, MCQ)",
+          "subtopics": [
+            {
+              "id": "chi-yuedu-mcq-text",
+              "name": "篇章理解 (passage understanding)",
+              "outcomes": [
+                {
+                  "id": "chi-yuedu-mcq-text-1",
+                  "text": "根据篇章内容选出最适当的答案 (choose the best answer from passage content)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-yuedu-mcq-text-2",
+                  "text": "理解词句在篇章中的意思 (understand words and sentences in the passage)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chi-yuedu-open",
+          "name": "阅读理解二 (Comprehension 2, open-ended)",
+          "subtopics": [
+            {
+              "id": "chi-yuedu-open-text",
+              "name": "实用文与篇章 (practical text and passage)",
+              "outcomes": [
+                {
+                  "id": "chi-yuedu-open-text-1",
+                  "text": "根据实用文和篇章的内容回答问题 (answer questions on a practical text and passage)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": false,
+                  "needsDiagram": true,
+                  "unverified": false
+                },
+                {
+                  "id": "chi-yuedu-open-text-2",
+                  "text": "书面互动 (written interaction)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": false,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chi-tingli",
+      "name": "听力理解 (Listening Comprehension)",
+      "topics": [
+        {
+          "id": "chi-tingli-types",
+          "name": "听力材料类型 (Listening text types)",
+          "subtopics": [
+            {
+              "id": "chi-tingli-text",
+              "name": "听后选答 (listen then choose)",
+              "outcomes": [
+                {
+                  "id": "chi-tingli-text-1",
+                  "text": "听对话、通告、广告、说明、介绍、故事后选出最适当的答案 (listen to dialogues, announcements, ads, instructions, introductions, stories and choose the best answer; needs audio)",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nonMcqComponents": [
+    {
+      "name": "试卷一 写作 (命题作文/看图作文)",
+      "marks": 40,
+      "note": "Open composition; not MCQ-convertible (could only test composition-language items such as picking the best sentence)."
+    },
+    {
+      "name": "试卷二 阅读理解二 (open-ended, incl. 书面互动)",
+      "marks": 32,
+      "note": "Open-ended; partially convertible to MCQ by turning questions into answer choices, but loses written-answer skill."
+    },
+    {
+      "name": "试卷三 口试 朗读篇章",
+      "marks": 20,
+      "note": "Spoken; not MCQ-convertible."
+    },
+    {
+      "name": "试卷三 口试 会话",
+      "marks": 30,
+      "note": "Spoken with video stimulus; not MCQ-convertible."
+    }
+  ],
+  "unverified": [
+    {
+      "item": "Syllabus/format applying to the 2027 PSLE",
+      "reason": "No 'PSLE Formats Examined in 2027' page or 0005_y27 document was found (URL 404). The SEAB 2026 syllabus (0005_y26_sy.pdf, 'For Examination from 2017') is the latest available; no format change announced was found."
+    },
+    {
+      "item": "MOE 小学华文课程标准 (full text)",
+      "reason": "The MOE 2015 primary syllabus PDF (NIE library copy) and MOE syllabus pages returned 404; the fine-grained topic tree could not be checked against it. Only SEAB syllabus 1.4 and blueprint were used."
+    },
+    {
+      "item": "同音字, 形近字, 多音字",
+      "reason": "SEAB 1.4 only states 对汉字形、音、义的辨认 and 汉语拼音/字 in 语文应用; these specific sub-skills are not named."
+    },
+    {
+      "item": "词语搭配, 近义词",
+      "reason": "SEAB 1.4 only states 词语的认识和运用（包括成语和习用语）."
+    },
+    {
+      "item": "关联词, 句子结构完整性",
+      "reason": "SEAB 1.4 only states 句子结构的认识和运用."
+    },
+    {
+      "item": "句子排列",
+      "reason": "Not in the SEAB Paper 2 blueprint (items: 语文应用, 短文填空, 阅读理解一, 完成对话, 阅读理解二); set psleExaminable false."
+    },
+    {
+      "item": "Reading comprehension MCQ sub-skills, dialogue tone",
+      "reason": "Blueprint only says 'choose the most suitable answer from content'; finer skills inferred."
+    },
+    {
+      "item": "Whether 阅读理解二 uses diagrams",
+      "reason": "Syllabus says 实用文 (practical texts) but does not say they include graphics; needsDiagram flagged as likely."
+    }
+  ],
+  "sources": [
+    {
+      "title": "PSLE Chinese Language (0005) syllabus, 2026",
+      "url": "https://isomer-user-content.by.gov.sg/334/60adffb8-be52-41da-b09e-cdcc9130ffc7/0005_y26_sy.pdf",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "PSLE Formats Examined in 2026",
+      "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "PSLE Foundation Chinese Language (0025) syllabus, 2026",
+      "url": "https://isomer-user-content.by.gov.sg/334/3b39adaa-5c92-4032-9796-8fefe30ecbae/0025_y26_sy.pdf",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "PSLE Higher Chinese Language (0015) syllabus, 2026",
+      "url": "https://isomer-user-content.by.gov.sg/334/fab96888-7d2b-4203-8424-d82aad41d039/0015_y26_sy.pdf",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    }
+  ]
+}

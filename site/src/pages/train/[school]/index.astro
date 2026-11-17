@@ -1,0 +1,237 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SCHOOLS, subsOf, subSlug } from '../../../lib/train';
+import { groupByTopic, type SubInfo } from '../../../lib/suggest';
+import { TIERS, TIER_NAME, type School } from '../../../lib/store';
+
+export function getStaticPaths() {
+  return SCHOOLS.map((s) => ({ params: { school: s.id }, props: { school: s } }));
+}
+const { school } = Astro.props as { school: (typeof SCHOOLS)[number] };
+const list = subsOf(school.id as School);
+const infos: (SubInfo & { file: string | null; home: number })[] = list.map((s) => ({
+  id: s.id, topic: s.topic, topicName: s.topicName, name: s.name, slug: subSlug(s.id),
+  playable: s.playable, file: s.file, home: s.home,
+}));
+const groups = groupByTopic(infos) as { topic: string; name: string; subs: typeof infos }[];
+const clientData = JSON.stringify(infos).replace(/</g, '\\u003c');
+const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n + TIERS.filter((t) => s.playable[t]).length, 0);
+---
+{school.ready ? (
+<Base title={`Train ${school.name} · Alyssa's Cookie Codex`} description={`Pick what to train today in ${school.name}: suggestions, your power and every sub-topic.`}>
+  <div class="wrap train-home" data-school={school.id}>
+    <p class="th-crumbs"><a href="/">Home</a></p>
+    <h1 class="th-title">What do you want to train today<span id="th-name">, Alyssa</span>?</h1>
+
+    <div class="th-power" id="th-power">
+      <span class="th-power-label">School power: <strong id="th-power-n">0</strong></span>
+      <div class="th-bar" role="progressbar" aria-label="School power" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="th-power-fill" style="width:0%"></span></div>
+    </div>
+
+    <section class="th-sugg" aria-labelledby="th-sugg-h">
+      <h2 id="th-sugg-h">Suggested for you</h2>
+      <div id="th-cards" class="th-cards" aria-live="polite">
+        <p class="th-muted">Pick a sub-topic below to start a quiz.</p>
+      </div>
+    </section>
+
+    <section class="th-syl" aria-labelledby="th-syl-h">
+      <h2 id="th-syl-h">All sub-topics</h2>
+      {groups.map((g) => (
+        <details class="th-topic" data-topic={g.topic}>
+          <summary>
+            <span class="th-topic-name">{g.name}</span>
+            <span class="th-topic-meta">
+              <span class="th-mini" aria-hidden="true"><span class="th-topic-fill" style="width:0%"></span></span>
+              <span class="th-topic-count"><span class="th-cleared">0</span>/{playableCount(g)} tiers cleared</span>
+            </span>
+          </summary>
+          <ul class="th-subs">
+            {g.subs.map((s) => (
+              <li class="th-sub">
+                <a class="th-sub-name" href={`/train/${school.id}/${s.slug}/`}>{s.name}</a>
+                <span class="th-home">P{s.home}</span>
+                <span class="th-chips">
+                  {TIERS.map((t) => (
+                    <a class="th-chip" href={`/train/${school.id}/${s.slug}/`} data-sub={s.id} data-tier={t} data-playable={String(s.playable[t])}>
+                      {TIER_NAME[t]}{s.playable[t] ? '' : ': no questions yet'}
+                    </a>
+                  ))}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ))}
+    </section>
+
+    <p class="th-paper"><a class="th-paper-link" href="/paper/">Practice paper (WA / SA)</a></p>
+    <script type="application/json" id="th-subs" set:html={clientData} />
+  </div>
+</Base>
+) : (
+<Base title={`${school.name} School · opens soon`} description={`${school.name} questions are coming soon.`}>
+  <div class="wrap train-home train-soon">
+    <p class="th-crumbs"><a href="/">Home</a></p>
+    <h1 class="th-title">{school.name} School opens soon</h1>
+    <p class="th-muted">We are still writing the {school.name} questions. Here is what you will be able to train when it opens.</p>
+    {groups.map((g) => (
+      <section class="th-soon-topic">
+        <h2>{g.name}</h2>
+        <ul class="th-soon-list">
+          {g.subs.map((s) => <li>{s.name} <span class="th-home">P{s.home}</span></li>)}
+        </ul>
+      </section>
+    ))}
+    <p><a class="th-paper-link" href="/train/math/">Train Math meanwhile</a></p>
+  </div>
+</Base>
+)}
+
+<script>
+  import { load, tierState, tierOpen, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
+  import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, type SubInfo, type Suggestion } from '../../../lib/suggest';
+
+  const root = document.querySelector<HTMLElement>('.train-home[data-school]');
+  const dataEl = document.getElementById('th-subs');
+  if (root && dataEl) {
+    type Info = SubInfo & { file: string | null; home: number };
+    const subs: Info[] = JSON.parse(dataEl.textContent || '[]');
+    const s = load();
+    const now = Date.now();
+    const esc = (t: string) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
+    const name = s.settings.playerName || 'Alyssa';
+    document.getElementById('th-name')!.textContent = `, ${name}`;
+
+    // chips
+    const chipState = (sub: string, t: Tier, playable: boolean) => {
+      if (!playable) return { state: 'none', text: `${TIER_NAME[t]}: no questions yet` };
+      const st = tierState(s, sub, t);
+      if (st.cleared) return { state: 'cleared', text: `${TIER_NAME[t]}: cleared ✓` };
+      if (!tierOpen(s, sub, t)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
+      if (st.passes.length) return { state: 'pass1', text: `${TIER_NAME[t]}: 1 of 2` };
+      return { state: 'open', text: `${TIER_NAME[t]}: open` };
+    };
+    root.querySelectorAll<HTMLElement>('.th-chip').forEach((el) => {
+      const r = chipState(el.dataset.sub!, el.dataset.tier as Tier, el.dataset.playable === 'true');
+      el.dataset.state = r.state;
+      el.textContent = r.text;
+    });
+
+    // power
+    const setBar = (n: number) => {
+      document.getElementById('th-power-n')!.textContent = String(n);
+      document.getElementById('th-power-fill')!.style.width = `${n}%`;
+      document.querySelector('#th-power .th-bar')!.setAttribute('aria-valuenow', String(n));
+    };
+    setBar(schoolPower(s, subs));
+    const groups = groupByTopic(subs);
+    root.querySelectorAll<HTMLDetailsElement>('.th-topic').forEach((d) => {
+      const g = groups.find((x) => x.topic === d.dataset.topic);
+      if (!g) return;
+      const p = topicPower(s, g.subs);
+      d.querySelector<HTMLElement>('.th-topic-fill')!.style.width = `${p}%`;
+      let n = 0;
+      for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && tierState(s, sub.id, t).cleared) n++;
+      d.querySelector('.th-cleared')!.textContent = String(n);
+    });
+
+    // suggestions
+    const cards = document.getElementById('th-cards')!;
+    const kindLabel: Record<Suggestion['kind'], string> = { review: 'Review', 'one-more': 'One more pass', weak: 'Weak spot', next: 'Next up', done: 'All done' };
+    const render = (list: Suggestion[]) => {
+      if (!list.length) { cards.innerHTML = '<p class="th-muted">Pick a sub-topic below to start a quiz.</p>'; return; }
+      cards.innerHTML = list.map((x) => `
+        <article class="th-card" data-kind="${x.kind}">
+          <span class="th-card-kind">${kindLabel[x.kind]}</span>
+          <h3>${esc(x.title)}</h3>
+          <p>${esc(x.reason)}</p>
+          <a class="th-start" href="${esc(x.href)}">${x.kind === 'done' ? 'See my collection' : 'Start'}<span class="th-sr"> ${esc(x.title)}</span></a>
+        </article>`).join('');
+      for (const x of list) {
+        if (!x.sub) continue;
+        const sub = subs.find((y) => y.id === x.sub);
+        if (sub) root.querySelector<HTMLDetailsElement>(`.th-topic[data-topic="${sub.topic}"]`)!.open = true;
+      }
+    };
+    const run = (due: number, qs?: Record<string, string>) => render(suggestions(s, subs, { now, dueCount: due, questionSub: qs }));
+
+    const anyDue = Object.keys(s.questions).length > 0 && dueCount(s, now) > 0;
+    if (!anyDue) run(0);
+    else {
+      // map question ids to sub-topics (math banks only) so the review count matches this school
+      const files = [...new Set(subs.map((x) => x.file).filter(Boolean))] as string[];
+      Promise.all(files.map((f) => fetch(`/data/quiz/${f}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])))
+        .then((banks) => {
+          const qs: Record<string, string> = {};
+          for (const b of banks as { id: string; sub: string }[][]) for (const q of b) qs[q.id] = q.sub;
+          run(dueCount(s, now, qs), qs);
+        })
+        .catch(() => run(dueCount(s, now)));
+    }
+  }
+</script>
+
+<style is:global>
+  .train-home { padding-block: 1.25rem 2.5rem; }
+  .train-home a:focus-visible, .train-home summary:focus-visible { outline: 3px solid var(--berry); outline-offset: 2px; }
+  .train-home .th-crumbs { margin: 0; font-size: 0.95rem; }
+  .train-home .th-crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--cocoa-soft); }
+  .train-home .th-title { margin: 0 0 0.75rem; font-size: clamp(1.5rem, 5vw, 2.25rem); line-height: 1.2; }
+  .train-home h2 { font-size: 1.25rem; margin: 1.75rem 0 0.6rem; }
+  .train-home .th-muted { color: var(--cocoa-soft); margin: 0; }
+
+  .train-home .th-power { display: grid; gap: 0.35rem; max-width: 32rem; }
+  .train-home .th-power-label { font-family: var(--font-display); font-weight: 600; }
+  .train-home .th-power-label strong { font-size: 1.4em; color: var(--berry); }
+  .train-home .th-bar { height: 14px; background: var(--plate); border: 1.5px solid var(--crust); border-radius: 999px; overflow: hidden; }
+  .train-home .th-bar > span { display: block; height: 100%; background: var(--berry); border-radius: 999px; transition: width 0.4s; }
+
+  .train-home .th-cards { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .train-home .th-card {
+    background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card);
+    padding: 1rem 1.1rem; display: grid; gap: 0.4rem; align-content: start; box-shadow: var(--shadow-lift);
+  }
+  .train-home .th-card h3 { margin: 0; font-size: 1.15rem; line-height: 1.25; }
+  .train-home .th-card p { margin: 0; color: var(--cocoa-soft); }
+  .train-home .th-card-kind { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--berry); }
+  .train-home .th-start, .train-home .th-paper-link {
+    justify-self: start; margin-top: 0.3rem; font: 600 1rem var(--font-display); background: var(--berry); color: var(--berry-ink);
+    border-radius: var(--radius-control); padding: 0.5rem 1.25rem; min-height: 44px; display: inline-flex; align-items: center; text-decoration: none;
+  }
+  .train-home .th-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  .train-home .th-topic { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); margin-bottom: 0.6rem; }
+  .train-home .th-topic summary {
+    cursor: pointer; list-style: none; display: grid; gap: 0.3rem; padding: 0.6rem 1rem; min-height: 44px; align-content: center;
+  }
+  .train-home .th-topic summary::-webkit-details-marker { display: none; }
+  .train-home .th-topic-name { font: 600 1.05rem var(--font-display); }
+  .train-home .th-topic-name::before { content: '▸ '; color: var(--cocoa-soft); }
+  .train-home .th-topic[open] .th-topic-name::before { content: '▾ '; }
+  .train-home .th-topic-meta { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--cocoa-soft); }
+  .train-home .th-mini { flex: 0 0 6rem; height: 8px; background: var(--plate); border-radius: 999px; overflow: hidden; }
+  .train-home .th-topic-fill { display: block; height: 100%; background: var(--berry); }
+
+  .train-home .th-subs { list-style: none; margin: 0; padding: 0 0.75rem 0.75rem; display: grid; gap: 0.5rem; }
+  .train-home .th-sub {
+    display: grid; grid-template-columns: 1fr auto; gap: 0.1rem 0.75rem; align-items: center;
+    background: var(--cream); border: 1px solid var(--crust); border-radius: var(--radius-control); padding: 0.4rem 0.75rem 0.6rem;
+  }
+  .train-home .th-sub-name { font: 600 1rem var(--font-display); min-height: 44px; display: inline-flex; align-items: center; color: var(--cocoa); }
+  .train-home .th-home { color: var(--cocoa-soft); font-size: 0.85rem; }
+  .train-home .th-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .train-home .th-chip {
+    font-size: 0.85rem; min-height: 44px; display: inline-flex; align-items: center; padding: 0 0.8rem; border-radius: 999px;
+    border: 1.5px solid var(--crust); color: var(--cocoa-soft); text-decoration: none; background: var(--paper);
+  }
+  .train-home .th-chip[data-state='cleared'] { background: #e6f4ea; border-color: #2e7d4f; color: #1f5b37; }
+  .train-home .th-chip[data-state='pass1'] { border-color: var(--berry); color: var(--berry); }
+  .train-home .th-chip[data-state='open'] { color: var(--cocoa); border-color: var(--cocoa-soft); }
+  .train-home .th-chip[data-state='locked'], .train-home .th-chip[data-state='none'] { opacity: 0.7; border-style: dashed; }
+  .train-home .th-paper { margin-top: 1.75rem; }
+
+  .train-home .th-soon-list { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.2rem; }
+  .train-home .th-soon-topic h2 { margin-top: 1.25rem; }
+</style>

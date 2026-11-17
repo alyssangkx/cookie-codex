@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SCHOOLS, subsOf, hasContent } from '../../lib/train';
+
+const schools = SCHOOLS.map((s) => {
+  const list = subsOf(s.id);
+  return { ...s, total: list.length, withQs: list.filter(hasContent).map((x) => x.id) };
+});
+---
+<Base title="Schools of Mastery · PSLE training" description="Daily PSLE practice in four Schools of Mastery: Math, Science, English and Chinese.">
+  <section class="wrap train-hub">
+    <h1>Schools of Mastery</h1>
+    <p class="lede">Train every day, clear tiers and earn cookie cards. Each sub-topic has three tiers: Basic, Intermediate and Competent.</p>
+
+    <div class="today-strip" id="today" aria-live="polite">
+      <p><strong id="goal">Today: 0 of 2 quizzes</strong> · <span id="streak">No streak yet</span></p>
+      <a id="review" class="btn-review" href="/quiz/?mode=review" hidden>Daily Review</a>
+      <p id="done" class="done" hidden>Done for today! Come back tomorrow. You can still browse the Codex and your cards.</p>
+    </div>
+
+    <ul class="schools">
+      {schools.map((s) => (
+        <li class={`school ${s.ready ? '' : 'soon'}`}>
+          <a href={`/train/${s.id}/`}>
+            <span class="school-name">{s.name}</span>
+            <span class="school-meta">
+              {s.ready ? `${s.withQs.length} of ${s.total} sub-topics have questions` : `${s.total} sub-topics · questions coming soon`}
+            </span>
+            {s.ready && <span class="school-progress" data-subs={JSON.stringify(s.withQs)}></span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="links"><a href="/paper/">Practice paper (WA / SA style)</a> · <a href="/collection/">My cards</a> · <a href="/parent/">For parents</a></p>
+  </section>
+</Base>
+
+<script>
+  import { load, today, liveStreak, capReached, isDue, TIERS } from '../../lib/store';
+  const s = load();
+  const t = today(s);
+  document.getElementById('goal')!.textContent =
+    `Today: ${Math.min(t.quizzes, s.settings.dailyGoalQuizzes)} of ${s.settings.dailyGoalQuizzes} quizzes` +
+    (t.quizzes >= s.settings.dailyGoalQuizzes ? ' ✓ goal met' : '');
+  const st = liveStreak(s);
+  document.getElementById('streak')!.textContent = st ? `${st}-week streak` : 'Meet your goal on 4 days this week to start a streak';
+  const due = Object.keys(s.questions).filter((id) => isDue(s, id)).length;
+  const review = document.getElementById('review') as HTMLAnchorElement;
+  if (due && !capReached(s)) { review.hidden = false; review.textContent = `Daily Review (${Math.min(due, 5)} questions)`; }
+  document.getElementById('done')!.hidden = !capReached(s);
+  document.querySelectorAll<HTMLElement>('.school-progress').forEach((el) => {
+    const subs: string[] = JSON.parse(el.dataset.subs!);
+    const cleared = subs.reduce((n, id) => n + TIERS.filter((k) => s.progress[id]?.[k]?.cleared).length, 0);
+    el.textContent = `${cleared} tiers cleared`;
+  });
+</script>
+
+<style>
+  .train-hub { padding-block: 2rem; }
+  .lede { color: var(--cocoa-soft); max-width: 60ch; }
+  .today-strip {
+    background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card);
+    padding: 0.75rem 1rem; margin: 1rem 0 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem;
+  }
+  .today-strip p { margin: 0; }
+  .btn-review {
+    font: 600 1rem var(--font-display); background: var(--berry); color: var(--berry-ink);
+    border-radius: var(--radius-control); padding: 0.5rem 1rem; min-height: 44px; display: inline-flex; align-items: center;
+    text-decoration: none;
+  }
+  .done { color: var(--berry); font-weight: 600; flex-basis: 100%; }
+  .schools { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .school a {
+    display: grid; gap: 0.25rem; padding: 1.25rem; min-height: 44px; border-radius: var(--radius-card);
+    background: var(--paper); border: 1.5px solid var(--crust); color: var(--cocoa); text-decoration: none;
+  }
+  .school a:hover, .school a:focus-visible { border-color: var(--berry); }
+  .school.soon a { opacity: 0.7; }
+  .school-name { font: 600 1.5rem var(--font-display); }
+  .school-meta, .school-progress { color: var(--cocoa-soft); font-size: 0.95rem; }
+  .links { margin-top: 1.5rem; }
+</style>

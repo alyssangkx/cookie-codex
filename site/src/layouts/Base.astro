@@ -26,7 +26,12 @@ const { title, description } = Astro.props;
     <header class="site-header" id="top">
       <div class="wrap bar">
         <a class="brand" href="/">Alyssa's Cookie Codex</a>
-        <span class="brand-sub">Every Cookie Run: Kingdom cookie, by rarity and personality</span>
+        <nav class="nav" aria-label="Main">
+          <a href="/">Home</a>
+          <a href="/codex/">Library</a>
+          <a href="/collection/">My House</a>
+          <a href="/parent/">Parents</a>
+        </nav>
       </div>
       <div class="scallop" aria-hidden="true"></div>
     </header>
@@ -58,6 +63,11 @@ const { title, description } = Astro.props;
     color: var(--cocoa); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center;
   }
   .brand-sub { color: var(--cocoa-soft); font-size: 0.95rem; }
+  .nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 0 1rem; }
+  .nav a {
+    font-family: var(--font-display); font-weight: 600; color: var(--berry);
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
   .site-header .scallop { background-color: var(--cream); }
   .site-footer {
     margin-top: 4rem; padding-block: 2rem; border-top: 1.5px dashed var(--crust);

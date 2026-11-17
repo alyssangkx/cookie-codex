@@ -1,0 +1,58 @@
+---
+// Homepage "Today" card: daily goal, streak, cards owned and a continue button (design section 9).
+---
+<aside class="today-card" aria-label="Today's PSLE training">
+  <div class="ring" aria-hidden="true"><span id="tc-ring">0/2</span></div>
+  <div class="tc-text">
+    <p class="tc-title">PSLE training</p>
+    <p id="tc-goal">Today's goal: 2 quizzes</p>
+    <p id="tc-meta" class="tc-meta"></p>
+  </div>
+  <a id="tc-go" class="tc-go" href="/train/math/">Start training</a>
+</aside>
+
+<script>
+  import { load, today, liveStreak, capReached, TIER_NAME } from '../lib/store';
+  const s = load();
+  const t = today(s);
+  const goal = s.settings.dailyGoalQuizzes;
+  const done = Math.min(t.quizzes, goal);
+  document.getElementById('tc-ring')!.textContent = `${done}/${goal}`;
+  document.querySelector<HTMLElement>('.today-card .ring')!.style.setProperty('--p', `${(100 * done) / goal}%`);
+  document.getElementById('tc-goal')!.textContent = capReached(s)
+    ? 'Done for today! See you tomorrow.'
+    : done >= goal ? "Today's goal met ✓" : `Today's goal: ${goal - done} more quiz${goal - done === 1 ? '' : 'zes'}`;
+  const streak = liveStreak(s), cards = Object.keys(s.cards).length;
+  document.getElementById('tc-meta')!.textContent =
+    `${streak ? `${streak}-week streak` : 'Streak: 4 goal days in a week'} · ${cards} card${cards === 1 ? '' : 's'} collected`;
+  const go = document.getElementById('tc-go') as HTMLAnchorElement;
+  if (s.last && !capReached(s)) {
+    const [prefix, ...rest] = s.last.sub.split('-');
+    const school = ({ math: 'math', sci: 'science', eng: 'english', chi: 'chinese' } as Record<string, string>)[prefix];
+    go.textContent = `Continue: ${TIER_NAME[s.last.tier]}`;
+    go.href = `/train/${school}/${rest.join('-')}/`;
+  }
+</script>
+
+<style>
+  .today-card {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin: 0 0 1.5rem;
+    padding: 0.9rem 1.1rem; background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card);
+  }
+  .ring {
+    --p: 0%; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; flex: none;
+    background: conic-gradient(var(--berry) var(--p), var(--plate) 0);
+  }
+  .ring span {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--paper); display: grid; place-items: center;
+    font: 600 1rem var(--font-display);
+  }
+  .tc-text { flex: 1 1 12rem; }
+  .tc-text p { margin: 0; }
+  .tc-title { font: 600 1.15rem var(--font-display); }
+  .tc-meta { color: var(--cocoa-soft); font-size: 0.95rem; }
+  .tc-go {
+    font: 600 1rem var(--font-display); background: var(--berry); color: var(--berry-ink); text-decoration: none;
+    border-radius: var(--radius-control); padding: 0.5rem 1rem; min-height: 44px; display: inline-flex; align-items: center;
+  }
+</style>

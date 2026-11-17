@@ -1,0 +1,175 @@
+{
+  "_note": "Building hotspots as % of each map image (left, top, width, height). Set by eye from site/public/home/map-*.webp; re-check with screenshots whenever an image changes.",
+  "buildings": [
+    {
+      "id": "math",
+      "label": "Math School",
+      "href": "/train/math/",
+      "status": "open"
+    },
+    {
+      "id": "science",
+      "label": "Science School",
+      "status": "soon"
+    },
+    {
+      "id": "english",
+      "label": "English School",
+      "status": "soon"
+    },
+    {
+      "id": "chinese",
+      "label": "华文学堂",
+      "sub": "Chinese School",
+      "lang": "zh-Hans",
+      "status": "soon"
+    },
+    {
+      "id": "library",
+      "label": "Library",
+      "sub": "All the cards",
+      "href": "/codex/",
+      "status": "open"
+    },
+    {
+      "id": "house",
+      "label": "My House",
+      "sub": "My cards",
+      "href": "/collection/",
+      "status": "open"
+    },
+    {
+      "id": "tower",
+      "label": "Ranking Tower",
+      "status": "soon"
+    }
+  ],
+  "wide": {
+    "math": [
+      2,
+      34,
+      21,
+      41
+    ],
+    "science": [
+      22,
+      24,
+      20,
+      30
+    ],
+    "english": [
+      44,
+      15,
+      16,
+      34
+    ],
+    "chinese": [
+      47,
+      51,
+      18,
+      33
+    ],
+    "library": [
+      67,
+      18,
+      16,
+      30
+    ],
+    "tower": [
+      86,
+      3,
+      12,
+      45
+    ],
+    "house": [
+      76,
+      56,
+      21,
+      31
+    ],
+    "companions": [
+      [
+        21,
+        83
+      ],
+      [
+        40,
+        57
+      ],
+      [
+        67,
+        60
+      ],
+      [
+        88,
+        60
+      ],
+      [
+        33,
+        92
+      ]
+    ]
+  },
+  "tall": {
+    "math": [
+      3,
+      71,
+      40,
+      22
+    ],
+    "science": [
+      57,
+      63,
+      39,
+      17
+    ],
+    "english": [
+      9,
+      41,
+      33,
+      22
+    ],
+    "chinese": [
+      58,
+      46,
+      32,
+      17
+    ],
+    "library": [
+      12,
+      21,
+      30,
+      17
+    ],
+    "tower": [
+      46,
+      10,
+      19,
+      26
+    ],
+    "house": [
+      60,
+      28,
+      38,
+      17
+    ],
+    "companions": [
+      [
+        47,
+        93
+      ],
+      [
+        38,
+        67
+      ],
+      [
+        52,
+        49
+      ],
+      [
+        44,
+        58
+      ]
+    ]
+  }
+}

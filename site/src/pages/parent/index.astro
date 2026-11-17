@@ -1,0 +1,369 @@
+---
+import Base from '../../layouts/Base.astro';
+import { subsOf, hasContent, cookieBySlug, MIN_POOL } from '../../lib/train';
+
+const math = subsOf('math');
+const data = {
+  total: cookieBySlug.size,
+  min: MIN_POOL,
+  subs: math.map((s) => ({ id: s.id, name: s.name, topic: s.topicName, file: s.file, count: s.count, content: hasContent(s) })),
+};
+---
+<Base title="Parent view: Alyssa's Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
+  <section class="wrap parent-page">
+    <h1>Parent view</h1>
+
+    <div id="gate" class="panel" hidden>
+      <h2 id="gate-title">Parent PIN</h2>
+      <p id="gate-note" class="note">The PIN only keeps your child out of the settings. It is not security.</p>
+      <form id="gate-form" autocomplete="off">
+        <label for="pin1" id="pin1-label">PIN</label>
+        <input id="pin1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
+        <div id="pin2-wrap" hidden>
+          <label for="pin2">Enter it again</label>
+          <input id="pin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
+        </div>
+        <button type="submit" class="btn" id="gate-btn">Unlock</button>
+        <p class="err" id="gate-err" role="alert"></p>
+      </form>
+    </div>
+
+    <noscript><p class="note">This page needs JavaScript to read the saved progress.</p></noscript>
+
+    <div id="content" hidden>
+      <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
+      <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Mastery: Math</h2>
+        <p class="note">Each tier needs two passes (80% or more) on different days to clear.</p>
+        <div id="mastery"></div></section>
+      <section class="panel" aria-labelledby="h-days"><h2 id="h-days">Last 14 days</h2><div id="days" class="scroll"></div></section>
+      <section class="panel" aria-labelledby="h-mis"><h2 id="h-mis">Most common mistakes</h2><div id="mistakes"></div></section>
+      <section class="panel" aria-labelledby="h-ret"><h2 id="h-ret">Retest queue</h2><div id="retest"></div></section>
+      <section class="panel" aria-labelledby="h-set"><h2 id="h-set">Settings</h2>
+        <div class="fields">
+          <label for="pname">Player name (shown on the home page)</label>
+          <input id="pname" type="text" maxlength="20" autocomplete="off" />
+          <label for="cap">Daily cap (minutes)</label>
+          <input id="cap" type="number" min="15" max="90" step="5" inputmode="numeric" />
+          <label for="goal">Daily goal (quizzes)</label>
+          <input id="goal" type="number" min="1" max="5" step="1" inputmode="numeric" />
+          <label class="check" for="extra"><input id="extra" type="checkbox" /> Extra time (×1.5, for accessibility)</label>
+          <label for="psle">PSLE date</label>
+          <input id="psle" type="date" />
+          <p class="note" id="weeks"></p>
+        </div>
+        <h3>Change PIN</h3>
+        <form id="pin-form" class="fields" autocomplete="off">
+          <label for="npin1">New PIN (4 to 6 digits)</label>
+          <input id="npin1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
+          <label for="npin2">New PIN again</label>
+          <input id="npin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" />
+          <button type="submit" class="btn">Change PIN</button>
+        </form>
+        <p class="saved" id="saved" role="status" aria-live="polite"></p>
+      </section>
+      <section class="panel" aria-labelledby="h-bak"><h2 id="h-bak">Backup</h2>
+        <p class="note">A save code holds all progress. Keep a copy in case this browser is cleared.</p>
+        <div class="row">
+          <button type="button" class="btn" id="copy">Copy save code</button>
+          <button type="button" class="btn" id="download">Download save code</button>
+        </div>
+        <p class="saved" id="bak-msg" role="status" aria-live="polite"></p>
+        <label for="import">Import save code</label>
+        <textarea id="import" rows="4" spellcheck="false" placeholder="CCX1:..."></textarea>
+        <button type="button" class="btn" id="do-import">Import</button>
+        <p class="err" id="imp-err" role="alert"></p>
+      </section>
+    </div>
+  </section>
+  <script type="application/json" id="pdata" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+</Base>
+
+<style is:global>
+  .parent-page { padding-block: 1.5rem 3rem; }
+  .parent-page .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1rem; margin-top: 1rem; }
+  .parent-page h2 { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .parent-page h3 { font-size: 1.1rem; margin: 1.2rem 0 0.4rem; }
+  .parent-page .note { color: var(--cocoa-soft); font-size: 0.95rem; margin: 0.3rem 0 0.8rem; }
+  .parent-page label { display: block; font-family: var(--font-display); font-weight: 500; margin-top: 0.7rem; }
+  .parent-page label.check { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; }
+  .parent-page input[type='checkbox'] { width: 24px; height: 24px; accent-color: var(--berry); }
+  .parent-page input:not([type='checkbox']), .parent-page textarea {
+    display: block; width: 100%; max-width: 22rem; min-height: 44px; padding: 0.4rem 0.7rem; margin-top: 0.25rem;
+    font: inherit; color: var(--cocoa); background: #fff; border: 1.5px solid var(--crust); border-radius: var(--radius-control);
+  }
+  .parent-page textarea { max-width: 100%; font-family: monospace; font-size: 0.85rem; }
+  .parent-page .btn {
+    min-height: 44px; padding: 0 1.1rem; margin-top: 0.8rem; border: 0; border-radius: var(--radius-control);
+    background: var(--cocoa); color: var(--cream); font: 500 1rem var(--font-display);
+  }
+  .parent-page .btn:active { background: var(--berry); }
+  .parent-page .row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .parent-page .err { color: var(--berry); min-height: 1.4em; margin: 0.5rem 0 0; }
+  .parent-page .saved { color: #1f6b3a; min-height: 1.4em; margin: 0.5rem 0 0; font-weight: 600; }
+  .parent-page .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; }
+  .parent-page .stat { background: var(--cream); border-radius: var(--radius-control); padding: 0.6rem 0.8rem; }
+  .parent-page .stat b { display: block; font: 600 1.4rem var(--font-display); }
+  .parent-page .stat span { color: var(--cocoa-soft); font-size: 0.9rem; }
+  .parent-page .scroll { overflow-x: auto; }
+  .parent-page table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  .parent-page th, .parent-page td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--crust); vertical-align: top; }
+  .parent-page th { font-family: var(--font-display); font-weight: 500; }
+  .parent-page .topic { margin-top: 1rem; }
+  .parent-page .topic h3 { margin: 0 0 0.3rem; }
+  .parent-page .sub { padding: 0.5rem 0; border-top: 1px solid var(--crust); }
+  .parent-page .sub.off { opacity: 0.55; }
+  .parent-page .sub .nm { font-weight: 600; }
+  .parent-page .tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin-top: 0.3rem; }
+  .parent-page .cell { border: 1.5px solid var(--crust); border-radius: 8px; padding: 0.3rem 0.4rem; font-size: 0.85rem; line-height: 1.3; background: var(--cream); }
+  .parent-page .cell small { display: block; color: var(--cocoa-soft); }
+  .parent-page .cell.done { border-color: #1f6b3a; background: #e7f3ea; }
+  .parent-page .cell.prog { border-color: var(--r-ancient); background: #fbf0d4; }
+  .parent-page .cell.none { border-style: dashed; color: var(--cocoa-soft); }
+  .parent-page ol.list { padding-left: 1.2rem; margin: 0; }
+  .parent-page ol.list li { margin-bottom: 0.7rem; }
+  .parent-page .meta { display: block; color: var(--cocoa-soft); font-size: 0.88rem; }
+  .parent-page .due-late { color: var(--berry); font-weight: 600; }
+</style>
+
+<script>
+  import { load, save, tierState, liveStreak, today, dayKey, exportCode, importCode, hashPin, TIER_NAME, TIERS } from '../../lib/store';
+  import type { SaveV1, Tier } from '../../lib/store';
+
+  interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
+  const P = JSON.parse(document.getElementById('pdata')!.textContent!) as { total: number; min: number; subs: PSub[] };
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  const DAY = 86_400_000;
+
+  let s: SaveV1 = load();
+  const SKEY = 'ccx:parent-unlocked';
+
+  // ------------------------------------------------------------ gate
+  const validPin = (p: string) => /^\d{4,6}$/.test(p);
+  function unlocked() { try { return sessionStorage.getItem(SKEY) === '1'; } catch { return false; } }
+  function markUnlocked() { try { sessionStorage.setItem(SKEY, '1'); } catch { /* ignore */ } }
+
+  function showGate() {
+    const setting = s.settings.pinHash === null;
+    $('gate').hidden = false;
+    $('gate-title').textContent = setting ? 'Set a 4–6 digit PIN' : 'Enter the parent PIN';
+    $('pin1-label').textContent = setting ? 'New PIN' : 'PIN';
+    $('pin2-wrap').hidden = !setting;
+    $('gate-btn').textContent = setting ? 'Set PIN and unlock' : 'Unlock';
+  }
+  $('gate-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = $('gate-err'); err.textContent = '';
+    const p1 = $<HTMLInputElement>('pin1').value;
+    if (s.settings.pinHash === null) {
+      if (!validPin(p1)) { err.textContent = 'Use 4 to 6 digits.'; return; }
+      if (p1 !== $<HTMLInputElement>('pin2').value) { err.textContent = 'The two PINs do not match.'; return; }
+      s.settings.pinHash = await hashPin(p1);
+      save(s);
+    } else if ((await hashPin(p1)) !== s.settings.pinHash) {
+      err.textContent = 'That PIN is not right.'; return;
+    }
+    markUnlocked();
+    $<HTMLInputElement>('pin1').value = ''; $<HTMLInputElement>('pin2').value = '';
+    $('gate').hidden = true;
+    start();
+  });
+
+  // ------------------------------------------------------------ helpers
+  const TAG_LABELS: Record<string, string> = {
+    miscounted_units: 'Counted the units wrongly',
+    reversed_order: 'Wrote the ratio the wrong way round',
+    gave_other_person: 'Answered for the wrong person',
+    took_second_fraction_of_total: 'Took a fraction of the total instead of the remainder',
+    ran_out_of_time: 'Ran out of time',
+  };
+  const humanise = (t: string) => TAG_LABELS[t] ?? (t.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()));
+  const subName = new Map(P.subs.map((x) => [x.id, x.name]));
+  const fmtDate = (t: number) => new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+
+  // ------------------------------------------------------------ sections
+  function renderSummary() {
+    const t = today(s), st = s.streak;
+    const items: [string, string][] = [
+      [`${t.min} / ${s.settings.dailyCapMin} min`, 'Today vs daily cap'],
+      [`${t.quizzes} / ${s.settings.dailyGoalQuizzes} quizzes`, 'Today vs daily goal'],
+      [`${liveStreak(s)} week${liveStreak(s) === 1 ? '' : 's'}`, 'Streak (weeks with 4+ goal days)'],
+      [`${st.best} week${st.best === 1 ? '' : 's'}`, 'Best streak'],
+      [`${st.studyDays}`, 'Total study days'],
+      [`${Object.keys(s.cards).length} of ${P.total}`, 'Cards owned'],
+    ];
+    $('summary').innerHTML = items.map(([b, l]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(l)}</span></div>`).join('');
+  }
+
+  function renderMastery() {
+    const topics = new Map<string, PSub[]>();
+    for (const sub of P.subs) (topics.get(sub.topic) ?? topics.set(sub.topic, []).get(sub.topic)!).push(sub);
+    let html = '';
+    for (const [topic, list] of topics) {
+      html += `<div class="topic"><h3>${esc(topic)}</h3>`;
+      for (const sub of list) {
+        html += `<div class="sub${sub.content ? '' : ' off'}"><span class="nm">${esc(sub.name)}</span>${sub.content ? '' : ' <small>(no questions yet)</small>'}<div class="tiers">`;
+        for (const t of TIERS) {
+          const name = TIER_NAME[t];
+          if (sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
+          const ts = tierState(s, sub.id, t);
+          if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
+          else if (ts.passes.length > 0) html += `<div class="cell prog">${name}<small>Passes ${ts.passes.length}/2, best ${ts.best}%</small></div>`;
+          else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
+        }
+        html += '</div></div>';
+      }
+      html += '</div>';
+    }
+    $('mastery').innerHTML = html;
+  }
+
+  function renderDays() {
+    let rows = '';
+    const now = new Date();
+    for (let i = 0; i < 14; i++) {
+      const key = dayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - i).getTime());
+      const d = s.days[key];
+      const acc = d && d.total ? Math.round((100 * d.correct) / d.total) + '%' : '–';
+      rows += `<tr><td>${esc(key)}</td><td>${d?.quizzes ?? 0}</td><td>${d?.min ?? 0}</td><td>${acc}</td></tr>`;
+    }
+    $('days').innerHTML = `<table><thead><tr><th>Date</th><th>Quizzes</th><th>Minutes</th><th>Accuracy</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }
+
+  function renderMistakes() {
+    const counts = new Map<string, { n: number; subs: Map<string, number> }>();
+    for (const a of s.attempts) for (const tag of a.tags ?? []) {
+      const e = counts.get(tag) ?? { n: 0, subs: new Map() };
+      e.n++;
+      if (a.sub) e.subs.set(a.sub, (e.subs.get(a.sub) ?? 0) + 1);
+      counts.set(tag, e);
+    }
+    const top = [...counts].sort((a, b) => b[1].n - a[1].n).slice(0, 8);
+    if (!top.length) { $('mistakes').innerHTML = '<p class="note">No mistakes recorded yet.</p>'; return; }
+    $('mistakes').innerHTML = '<ol class="list">' + top.map(([tag, e]) => {
+      const from = [...e.subs].sort((a, b) => b[1] - a[1]).map(([id]) => subName.get(id) ?? id).join(', ');
+      return `<li><b>${esc(humanise(tag))}</b> (${e.n} time${e.n > 1 ? 's' : ''})<span class="meta">${from ? 'From: ' + esc(from) : ''}</span></li>`;
+    }).join('') + '</ol>';
+  }
+
+  let bankLoad: Promise<Map<string, string>> | null = null;
+  function banks() {
+    return (bankLoad ??= (async () => {
+      const stems = new Map<string, string>();
+      const files = [...new Set(P.subs.map((x) => x.file).filter(Boolean))] as string[];
+      await Promise.all(files.map(async (f) => {
+        try {
+          const r = await fetch(`/data/quiz/${f}.json`);
+          if (!r.ok) return;
+          for (const q of (await r.json()) as { id: string; stem: string }[]) stems.set(q.id, q.stem);
+        } catch { /* offline: show ids */ }
+      }));
+      return stems;
+    })());
+  }
+
+  async function renderRetest() {
+    const now = Date.now();
+    const due = Object.entries(s.questions).filter(([, q]) => q.s > 0).sort((a, b) => a[1].due - b[1].due);
+    if (!due.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
+    $('retest').innerHTML = '<p class="note">Loading questions…</p>';
+    const stems = await banks();
+    const step = [0, '1-day', '3-day', '7-day'];
+    $('retest').innerHTML = `<p class="note">${due.length} question${due.length > 1 ? 's' : ''} waiting.</p><ol class="list">` + due.map(([id, q]) => {
+      const late = q.due <= now;
+      const dueTxt = late
+        ? (dayKey(q.due) === dayKey(now) ? 'due today' : '<span class="due-late">overdue</span>')
+        : `due ${esc(fmtDate(q.due))}`;
+      return `<li>${esc(stems.get(id) ?? id)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
+    }).join('') + '</ol>';
+  }
+
+  // settings
+  let savedTimer: number | undefined;
+  function flashSaved(msg = 'Saved') {
+    const el = $('saved'); el.textContent = msg;
+    clearTimeout(savedTimer); savedTimer = window.setTimeout(() => (el.textContent = ''), 2500);
+  }
+  function weeksText() {
+    const d = new Date(s.settings.psleDate + 'T00:00:00').getTime();
+    if (isNaN(d)) { $('weeks').textContent = ''; return; }
+    const w = Math.ceil((d - Date.now()) / (7 * DAY));
+    $('weeks').textContent = w > 0 ? `About ${w} week${w === 1 ? '' : 's'} left.` : 'That date has passed.';
+  }
+  function initSettings() {
+    const pname = $<HTMLInputElement>('pname');
+    pname.value = s.settings.playerName || 'Alyssa';
+    const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
+    cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
+    extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; weeksText();
+    const clamp = (v: string, lo: number, hi: number, step: number, fb: number) => {
+      const n = Math.round(Number(v) / step) * step;
+      return isFinite(n) && v !== '' ? Math.min(hi, Math.max(lo, n)) : fb;
+    };
+    const commit = () => {
+      s = load();
+      s.settings.dailyCapMin = clamp(cap.value, 15, 90, 5, s.settings.dailyCapMin);
+      s.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, s.settings.dailyGoalQuizzes);
+      s.settings.extraTime = extra.checked;
+      if (psle.value) s.settings.psleDate = psle.value;
+      s.settings.playerName = pname.value.trim().slice(0, 20) || 'Alyssa';
+      save(s); weeksText(); renderSummary(); flashSaved();
+    };
+    for (const el of [pname, cap, goal, extra, psle]) el.addEventListener('change', () => {
+      commit();
+      cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
+    });
+    $('pin-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const a = $<HTMLInputElement>('npin1'), b = $<HTMLInputElement>('npin2');
+      if (!validPin(a.value)) { flashSaved('Use 4 to 6 digits.'); return; }
+      if (a.value !== b.value) { flashSaved('The two PINs do not match.'); return; }
+      s = load(); s.settings.pinHash = await hashPin(a.value); save(s);
+      a.value = ''; b.value = ''; flashSaved('Saved: PIN changed');
+    });
+  }
+
+  // backup
+  function initBackup() {
+    const msg = $('bak-msg');
+    $('copy').addEventListener('click', async () => {
+      const code = await exportCode(load());
+      try { await navigator.clipboard.writeText(code); msg.textContent = 'Copied.'; }
+      catch { msg.textContent = 'Copy was blocked. Use Download instead.'; }
+    });
+    $('download').addEventListener('click', async () => {
+      const code = await exportCode(load());
+      const url = URL.createObjectURL(new Blob([code], { type: 'text/plain' }));
+      const a = document.createElement('a');
+      a.href = url; a.download = `cookie-codex-save-${dayKey()}.txt`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      msg.textContent = 'Downloaded.';
+    });
+    $('do-import').addEventListener('click', async () => {
+      const err = $('imp-err'); err.textContent = '';
+      const code = $<HTMLTextAreaElement>('import').value;
+      if (!code.trim()) { err.textContent = 'Paste a save code first.'; return; }
+      let next: SaveV1;
+      try { next = await importCode(code); }
+      catch (e) { err.textContent = e instanceof Error ? e.message : 'That save code could not be read.'; return; }
+      if (!confirm('This replaces all current progress on this browser with the save code. Continue?')) return;
+      save(next);
+      location.reload();
+    });
+  }
+
+  // ------------------------------------------------------------ start
+  let started = false;
+  function start() {
+    $('content').hidden = false;
+    if (started) return;
+    started = true;
+    s = load();
+    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderRetest();
+    initSettings(); initBackup();
+  }
+
+  if (unlocked() && s.settings.pinHash !== null) start();
+  else showGate();
+</script>

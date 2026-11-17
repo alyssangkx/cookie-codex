@@ -14,7 +14,7 @@ const paragraphs = (text: string) => text.split(/\n{2,}/).filter(Boolean);
   description={`${cookie.name}, a ${rarityLabel(cookie.rarity)} cookie in Cookie Run: Kingdom.`}
 >
   <article class="wrap cookie" style={`--rc: var(--r-${cookie.rarity})`}>
-    <a class="back" href={`/#rarity-${cookie.rarity}`}>Back to the {rarityLabel(cookie.rarity)} shelf</a>
+    <a class="back" href={`/codex/#rarity-${cookie.rarity}`}>Back to the {rarityLabel(cookie.rarity)} shelf</a>
 
     <div class="layout">
       <div class="portrait">

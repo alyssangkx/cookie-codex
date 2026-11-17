@@ -1,0 +1,322 @@
+---
+import Base from '../../layouts/Base.astro';
+import { subs, hasContent, slots, cardInfo, banks, subSlug } from '../../lib/train';
+
+// Everything the runner needs, small enough to inline; question banks are fetched on demand.
+const meta = {
+  subs: Object.fromEntries(subs.filter(hasContent).map((s) => [s.id, {
+    name: s.name, topicName: s.topicName, school: s.school, file: s.file, slug: subSlug(s.id), count: s.count,
+  }])),
+  files: banks.map((b) => b.topic),
+  slots,
+  cards: cardInfo,
+};
+const data = JSON.stringify(meta).replace(/</g, '\\u003c');
+---
+<Base title="Quiz · PSLE training" description="Timed PSLE practice quiz.">
+  <section class="wrap quiz" id="quiz">
+    <p class="crumbs" id="crumbs"><a href="/train/">Schools of Mastery</a></p>
+    <h1 id="title">Quiz</h1>
+
+    <div id="start" class="panel">
+      <p id="start-info">Loading…</p>
+      <button id="start-btn" class="primary" type="button" hidden>Start quiz</button>
+    </div>
+
+    <div id="play" class="panel" hidden>
+      <div class="status">
+        <span id="count"></span>
+        <span id="timer" class="timer" role="timer" aria-label="Time left"></span>
+      </div>
+      <p id="stem" class="stem"></p>
+      <div id="options" class="options" role="group" aria-label="Answer options"></div>
+      <div id="feedback" class="feedback" aria-live="polite" hidden></div>
+      <button id="next" class="primary" type="button" hidden>Next question</button>
+    </div>
+
+    <div id="done" class="panel" hidden>
+      <h2 id="score"></h2>
+      <div id="verdict" aria-live="polite"></div>
+      <div id="review"></div>
+      <p class="actions" id="actions"></p>
+    </div>
+  </section>
+  <script type="application/json" id="meta" set:html={data} />
+</Base>
+
+<script>
+  import {
+    load, save, answer, finishQuiz, openAttempt, capReached, attemptsToday, tierOpen, minutesFor,
+    ATTEMPTS_PER_DAY, QUIZ_SIZE, TIER_NAME, type Tier, type SaveV1,
+  } from '../../lib/store';
+  import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
+
+  type Q = { id: string; sub: string; level: string; figure?: string; topic?: string; stem: string; options: string[]; answer: number;
+    explain: ({ tag: string; why: string } | null)[]; solution: string[] };
+  type Meta = {
+    subs: Record<string, { name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
+    files: string[]; slots: Record<string, { slug: string; dup: boolean }>;
+    cards: Record<string, { name: string; image: string; rarity: string }>;
+  };
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const meta: Meta = JSON.parse($('meta').textContent!);
+  const params = new URLSearchParams(location.search);
+  const mode = (['review', 'paper'].includes(params.get('mode') ?? '') ? params.get('mode') : 'tier') as 'tier' | 'review' | 'paper';
+  const paperTopics = (params.get('topics') ?? '').split(',').filter((t) => meta.files.includes(t));
+  const paperN = Math.min(40, Math.max(5, Number(params.get('n')) || 20));
+  const paperMix = MIXES[params.get('mix') ?? 'wa'] ?? MIXES.wa;
+  const PER_Q: Record<string, number> = { basic: 1.2, intermediate: 1.5, competent: 2 };
+  const subId = params.get('sub') ?? '';
+  const tier = (params.get('tier') ?? 'b') as Tier;
+  const sub = meta.subs[subId];
+  const LETTERS = 'ABCD';
+  const LEVEL: Record<Tier, string> = { b: 'basic', i: 'intermediate', c: 'competent' };
+  const rewardFor = (sid: string, t: Tier) => meta.slots[`${sid}|${t}`];
+
+  const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  const fmt = (x: string) =>
+    esc(x).replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
+      `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`);
+
+  let byId = new Map<string, Q>();
+  let quiz: string[] = [], i = 0, score = 0, deadline = 0, tick = 0, startedAt = 0, answered = false, over = false;
+  let pausedAt = 0; // the clock stops while the worked solution is on screen
+  let wrongs: { q: Q; chose: number; tag: string }[] = [];
+
+  const show = (p: 'start' | 'play' | 'done') => ['start', 'play', 'done'].forEach((x) => ($(x).hidden = x !== p));
+  const stop = (msg: string, links = '<a href="/train/">Back to the Schools</a>') => {
+    $('start-info').innerHTML = `${msg}<br>${links}`;
+    show('start');
+  };
+
+  async function fetchBank(file: string): Promise<Q[]> {
+    const r = await fetch(`/data/quiz/${file}.json`);
+    if (!r.ok) throw new Error(`Could not load questions (${r.status}).`);
+    return r.json();
+  }
+
+  async function init() {
+    const s = load();
+    if (mode === 'tier') {
+      if (!sub) return stop('This quiz does not exist.');
+      $('title').textContent = `${sub.name}: ${TIER_NAME[tier]}`;
+      $('crumbs').innerHTML = `<a href="/train/">Schools</a> › <a href="/train/${sub.school}/">${sub.school[0].toUpperCase() + sub.school.slice(1)}</a> › <a href="/train/${sub.school}/${sub.slug}/">${esc(sub.name)}</a>`;
+    } else if (mode === 'paper') {
+      $('title').textContent = 'Practice paper';
+      if (!paperTopics.length) return stop('Choose at least one topic.', '<a href="/paper/">Build a paper</a>');
+    } else {
+      $('title').textContent = 'Daily Review';
+    }
+    if (capReached(s)) return stop("Done for today! You have reached today's training time. Come back tomorrow.", '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
+    if (mode === 'tier' && !tierOpen(s, subId, tier)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
+    if (mode === 'tier' && attemptsToday(s, subId, tier) >= ATTEMPTS_PER_DAY) return stop('You have had 3 tries at this tier today. Try again tomorrow.');
+
+    try {
+      const files = mode === 'tier' ? [sub.file] : mode === 'paper' ? paperTopics : meta.files;
+      const all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
+      byId = new Map(all.map((q) => [q.id, q]));
+      if (mode === 'tier') {
+        const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
+        const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
+        quiz = pickTier(ids, s.questions, QUIZ_SIZE, Date.now(), Math.random, side);
+        if (quiz.length < QUIZ_SIZE) return stop('This tier does not have enough questions yet. Try another tier.');
+      } else if (mode === 'paper') {
+        quiz = pickPaper(all as any, s.questions, paperN, paperMix.mix);
+      } else {
+        quiz = pickReview(all.map((q) => q.id), s.questions);
+        if (!quiz.length) return stop('Nothing to review today. Great work!');
+      }
+    } catch (e) {
+      return stop((e as Error).message);
+    }
+    const x = s.settings.extraTime ? 1.5 : 1;
+    const mins = mode === 'tier' ? minutesFor(s, tier)
+      : mode === 'paper' ? Math.ceil(quiz.reduce((m, id) => m + PER_Q[byId.get(id)!.level], 0) * x)
+      : quiz.length * 1.5 * x;
+    deadline = mins * 60_000;
+    $('start-info').textContent = mode === 'tier'
+      ? `${quiz.length} questions in ${mins} minutes. Score at least 80% to pass.`
+      : mode === 'paper' ? `${paperMix.label}: ${quiz.length} questions from ${paperTopics.length} topic${paperTopics.length > 1 ? 's' : ''} in ${mins} minutes, ordered from easier to harder.`
+      : `${quiz.length} questions you got wrong before, in ${mins} minutes. Review counts toward today's goal.`;
+    $('start-btn').hidden = false;
+    show('start');
+  }
+
+  function begin() {
+    i = 0; score = 0; wrongs = []; over = false; pausedAt = 0;
+    if (mode === 'tier') { const s0 = load(); openAttempt(s0, { sub: subId, tier, total: quiz.length }); save(s0); }
+    startedAt = Date.now();
+    deadline += startedAt;
+    tick = window.setInterval(clock, 250);
+    clock();
+    show('play');
+    render();
+  }
+
+  function clock() {
+    if (pausedAt) return;
+    const left = Math.max(0, deadline - Date.now());
+    $('timer').textContent = `${Math.floor(left / 60000)}:${String(Math.floor((left % 60000) / 1000)).padStart(2, '0')}`;
+    $('timer').classList.toggle('low', left < 60000);
+    if (left === 0) finish(true);
+  }
+
+  function render() {
+    const q = byId.get(quiz[i])!;
+    if (pausedAt) { deadline += Date.now() - pausedAt; pausedAt = 0; $('timer').classList.remove('paused'); clock(); }
+    answered = false;
+    $('count').textContent = `Question ${i + 1} of ${quiz.length}`;
+    // figures are SVG generated by our own build scripts (scripts/quiz/math/figures.py)
+    $('stem').innerHTML = fmt(q.stem) + (q.figure ? `<span class="qfig-wrap">${q.figure}</span>` : '');
+    $('options').innerHTML = q.options
+      .map((o, k) => `<button type="button" class="opt" data-k="${k}"><span class="letter">${LETTERS[k]}</span> <span>${fmt(o)}</span></button>`)
+      .join('');
+    $('feedback').hidden = true;
+    $('next').hidden = true;
+    $('options').querySelector('button')!.focus();
+  }
+
+  function record(id: string, ok: boolean) {
+    const s = load();
+    answer(s, id, ok, Date.now(), mode !== 'paper'); // papers never retire questions from tier pools
+    save(s);
+  }
+
+  function choose(k: number) {
+    if (answered || over) return;
+    answered = true;
+    pausedAt = Date.now();
+    $('timer').classList.add('paused');
+    $('timer').textContent += ' paused';
+    const q = byId.get(quiz[i])!;
+    const ok = k === q.answer;
+    record(q.id, ok);
+    if (ok) score++; else wrongs.push({ q, chose: k, tag: q.explain[k]!.tag });
+    $('options').querySelectorAll<HTMLButtonElement>('button').forEach((b, j) => {
+      b.disabled = true;
+      if (j === q.answer) b.classList.add('right');
+      else if (j === k) b.classList.add('wrong');
+    });
+    $('feedback').innerHTML =
+      (ok ? '<p class="verdict good">Correct!</p>'
+          : `<p class="verdict bad">Not yet. The answer is ${LETTERS[q.answer]}.</p>
+             <p class="mistake"><strong>Why ${LETTERS[k]} is tempting:</strong> ${fmt(q.explain[k]!.why)}</p>`) +
+      `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st)}</li>`).join('')}</ol>`;
+    $('feedback').hidden = false;
+    $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
+    $('next').hidden = false;
+    $('next').focus();
+  }
+
+  function finish(timeUp = false) {
+    if (over) return;
+    over = true;
+    clearInterval(tick);
+    // unanswered questions count as wrong when time runs out (design section 3)
+    const unanswered = quiz.slice(i + (answered ? 1 : 0));
+    for (const id of unanswered) { record(id, false); wrongs.push({ q: byId.get(id)!, chose: -1, tag: 'ran_out_of_time' }); }
+    const ms = (pausedAt || Date.now()) - startedAt;
+    const s: SaveV1 = load();
+    const res = finishQuiz(s, {
+      mode, sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined,
+      topics: mode === 'paper' ? paperTopics : undefined,
+      score, total: quiz.length, ms, tags: wrongs.map((w) => w.tag),
+    }, rewardFor);
+    if (mode === 'tier') s.last = { sub: subId, tier };
+    save(s);
+
+    $('score').textContent = `${score} / ${quiz.length}`;
+    let html = timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '';
+    if (mode === 'tier') {
+      html += res.passed ? `<p class="verdict good">Pass! ${res.cleared ? 'Tier cleared!' : 'Pass once more on another day to clear this tier.'}</p>`
+                         : `<p class="verdict bad">Not yet. You need 8 out of 10. The questions you missed will come back.</p>`;
+    }
+    if (mode === 'paper') {
+      const per = new Map<string, [number, number]>();
+      quiz.forEach((id) => { const t = byId.get(id)!.topic!; const v = per.get(t) ?? [0, 0]; v[1]++; per.set(t, v); });
+      const wrongIds = new Set(wrongs.map((w) => w.q.id));
+      quiz.forEach((id) => { if (!wrongIds.has(id)) per.get(byId.get(id)!.topic!)![0]++; });
+      html += `<table class="per-topic"><tr><th>Topic</th><th>Score</th></tr>${[...per].map(([t, [c, n]]) =>
+        `<tr><td>${esc(t.replace('math-', '').replace(/-/g, ' '))}</td><td>${c} / ${n}</td></tr>`).join('')}</table>`;
+    }
+    if (res.reward) {
+      const c = meta.cards[res.reward.slug];
+      html += `<a class="won" href="/cookie/${res.reward.slug}/" style="--rc: var(--r-${c.rarity})">
+        <img src="${c.image}" alt="" width="96" height="96"><span><strong>${res.reward.dup ? '+1 star' : 'New card!'}</strong>
+        ${esc(c.name)} ${'★'.repeat(res.reward.stars)}</span></a>`;
+    }
+    if (res.goalJustMet) html += '<p class="verdict good">Daily goal met! Your streak grows.</p>';
+    if (capReached(s)) html += "<p>Done for today! You have reached today's training time.</p>";
+    $('verdict').innerHTML = html;
+    $('review').innerHTML = wrongs.map(({ q, chose }) =>
+      `<details class="rev"><summary>${fmt(q.stem)}</summary>
+       <p>${chose >= 0 ? `You chose ${LETTERS[chose]} (${fmt(q.options[chose])}). ` : 'Not answered. '}Answer: ${LETTERS[q.answer]} (${fmt(q.options[q.answer])}).</p>
+       <ol class="steps">${q.solution.map((st) => `<li>${fmt(st)}</li>`).join('')}</ol></details>`).join('');
+    const back = mode === 'tier' ? `<a href="/train/${sub.school}/${sub.slug}/">Back to ${esc(sub.name)}</a>`
+      : mode === 'paper' ? '<a href="/paper/">Build another paper</a>' : '<a href="/train/">Back to the Schools</a>';
+    $('actions').innerHTML = `${back} · <a href="/collection/">My cards</a>`;
+    show('done');
+  }
+
+  $('options').addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest('button');
+    if (b) choose(Number(b.dataset.k));
+  });
+  document.addEventListener('keydown', (e) => {
+    if ($('play').hidden || answered || e.altKey || e.ctrlKey || e.metaKey) return;
+    const k = 'abcd'.indexOf(e.key.toLowerCase()), n = '1234'.indexOf(e.key);
+    if (k >= 0 || n >= 0) choose(k >= 0 ? k : n);
+  });
+  $('next').addEventListener('click', () => (++i < quiz.length ? render() : finish()));
+  $('start-btn').addEventListener('click', begin);
+  init();
+</script>
+
+<style is:global>
+  /* global: the quiz markup is built with innerHTML, which scoped styles cannot reach */
+  .quiz { padding-block: 1.5rem 2rem; max-width: 760px; }
+  .quiz .crumbs { margin: 0; font-size: 0.95rem; color: var(--cocoa-soft); }
+  .quiz .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1.25rem; margin-top: 1rem; }
+  .quiz .primary {
+    font: 600 1.05rem var(--font-display); min-height: 44px; padding: 0.5rem 1.25rem;
+    border: 0; border-radius: var(--radius-control); background: var(--berry); color: var(--berry-ink);
+  }
+  .quiz .status { display: flex; justify-content: space-between; color: var(--cocoa-soft); font-family: var(--font-display); }
+  .quiz .timer { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .quiz .timer.low { color: var(--berry); }
+  .quiz .timer.paused { opacity: 0.6; }
+  .quiz .stem { font-size: 1.2rem; margin: 1rem 0; }
+  .quiz .options { display: grid; gap: 0.6rem; }
+  .quiz .opt {
+    display: flex; gap: 0.75rem; align-items: center; text-align: left; min-height: 48px; padding: 0.6rem 0.9rem;
+    font: inherit; font-size: 1.1rem; color: var(--cocoa); background: var(--cream);
+    border: 1.5px solid var(--crust); border-radius: var(--radius-control);
+  }
+  .quiz .opt:not(:disabled):hover, .quiz .opt:focus-visible { border-color: var(--berry); }
+  .quiz .opt:disabled { cursor: default; color: var(--cocoa); }
+  .quiz .letter { font-family: var(--font-display); font-weight: 600; min-width: 1.2em; }
+  .quiz .opt.right { border-color: #2e7d4f; background: #e6f4ea; }
+  .quiz .opt.wrong { border-color: var(--berry); background: #fbe9ec; }
+  .quiz .opt.right .letter::after { content: ' ✓'; }
+  .quiz .opt.wrong .letter::after { content: ' ✗'; }
+  .quiz .feedback { margin-top: 1rem; }
+  .quiz .verdict { font-family: var(--font-display); font-weight: 600; margin: 0 0 0.5rem; }
+  .quiz .verdict.good { color: #2e7d4f; }
+  .quiz .verdict.bad { color: var(--berry); }
+  .quiz .steps { margin: 0.5rem 0 1rem; padding-left: 1.4rem; }
+  .quiz .actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .quiz .rev { border-top: 1px dashed var(--crust); padding: 0.5rem 0; }
+  .quiz .won {
+    display: flex; gap: 0.75rem; align-items: center; margin: 0.75rem 0; padding: 0.75rem; text-decoration: none; color: var(--cocoa);
+    border: 2px solid var(--rc); border-radius: var(--radius-card); background: var(--cream);
+  }
+  .quiz .won img { width: 80px; height: 80px; object-fit: contain; }
+  .quiz .won span { display: grid; font-family: var(--font-display); }
+  .quiz .qfig-wrap { display: block; margin: 0.75rem 0 0; max-width: 380px; color: var(--cocoa); }
+  .quiz .qfig-wrap svg { width: 100%; height: auto; display: block; }
+  .quiz .per-topic { border-collapse: collapse; margin: 0.5rem 0 1rem; }
+  .quiz .per-topic td, .quiz .per-topic th { border-bottom: 1px solid var(--crust); padding: 0.25rem 0.75rem 0.25rem 0; text-align: left; text-transform: capitalize; }
+  .quiz .fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; font-size: 0.85em; line-height: 1.05; margin: 0 0.1em; }
+  .quiz .fr .n { border-bottom: 1.5px solid currentColor; padding: 0 0.15em; }
+  .quiz .fr .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>

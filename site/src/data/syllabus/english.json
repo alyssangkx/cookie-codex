@@ -1,0 +1,593 @@
+{
+  "subject": "english",
+  "psleYear": 2027,
+  "syllabus": {
+    "name": "SEAB PSLE English Language (Standard), assessing the MOE English Language Teaching and Learning Syllabus 2020 (Primary)",
+    "revision": "SEAB format implemented from Year of Examination 2025 (document 0001_y26_sy); MOE EL Syllabus 2020 implemented from 2020 Primary One cohort",
+    "appliesTo2027Evidence": "Implemented from the Year of Examination 2025 (SEAB PSLE English Language syllabus 0001_y26_sy, cover). \"The purpose of the examination is to assess the candidates' attainment in English Language based on the Learning Outcomes stated in the English Language Teaching and Learning Syllabus 2020 (Primary).\" No explicit statement naming PSLE 2027 was found.",
+    "evidenceUrl": "https://isomer-user-content.by.gov.sg/334/6c4dc7cf-bf0b-4d79-9005-1b1f7fa68cc9/0001_y26_sy.pdf",
+    "unverified": true
+  },
+  "paperFormat": {
+    "papers": [
+      {
+        "name": "Paper 1 Writing (25%)",
+        "durationMin": 70,
+        "items": [
+          {
+            "type": "Situational Writing (OE)",
+            "count": 1,
+            "marksEach": 14
+          },
+          {
+            "type": "Continuous Writing (OE)",
+            "count": 1,
+            "marksEach": 36
+          }
+        ],
+        "totalMarks": 50,
+        "calculator": false
+      },
+      {
+        "name": "Paper 2 Language Use and Comprehension (45%) - Booklet A and B, 1 h 50 min combined",
+        "durationMin": 110,
+        "items": [
+          {
+            "type": "Grammar MCQ",
+            "count": 10,
+            "marksEach": 1
+          },
+          {
+            "type": "Vocabulary MCQ",
+            "count": 5,
+            "marksEach": 1
+          },
+          {
+            "type": "Vocabulary Cloze MCQ",
+            "count": 5,
+            "marksEach": 1
+          },
+          {
+            "type": "Visual Text Comprehension MCQ",
+            "count": 5,
+            "marksEach": 1
+          },
+          {
+            "type": "Grammar Cloze (OE)",
+            "count": 10,
+            "marksEach": 1
+          },
+          {
+            "type": "Editing for Spelling and Grammar (OE)",
+            "count": 10,
+            "marksEach": 1
+          },
+          {
+            "type": "Comprehension Cloze (OE)",
+            "count": 15,
+            "marksEach": 1
+          },
+          {
+            "type": "Synthesis / Transformation (OE)",
+            "count": 5,
+            "marksEach": 2
+          },
+          {
+            "type": "Comprehension OE",
+            "count": 10,
+            "marksEach": 2
+          }
+        ],
+        "totalMarks": 90,
+        "calculator": false
+      },
+      {
+        "name": "Paper 3 Listening Comprehension (10%), about 35 min",
+        "durationMin": 35,
+        "items": [
+          {
+            "type": "Listening Comprehension MCQ",
+            "count": 20,
+            "marksEach": 1
+          }
+        ],
+        "totalMarks": 20,
+        "calculator": false
+      },
+      {
+        "name": "Paper 4 Oral Communication (20%), about 10 min (5 min prep, about 5 min exam)",
+        "durationMin": 10,
+        "items": [
+          {
+            "type": "Reading Aloud (OE)",
+            "count": 1,
+            "marksEach": 15
+          },
+          {
+            "type": "Stimulus-based Conversation (OE, 1 photo stimulus)",
+            "count": 1,
+            "marksEach": 25
+          }
+        ],
+        "totalMarks": 40,
+        "calculator": false
+      }
+    ],
+    "notes": "Total 200 marks. Paper 2: 25 MCQ (Booklet A, 25 marks) plus 50 open-ended items (Booklet B, 65 marks). Paper 3: 20 MCQ, graphics for first seven items, each text read twice. MCQ-assessed marks: 45 of 200 (22.5%). Foundation English is a separate syllabus (one-line note only)."
+  },
+  "strands": [
+    {
+      "id": "eng-grammar",
+      "name": "Grammar",
+      "topics": [
+        {
+          "id": "eng-gram-terms",
+          "name": "Use of terms (grammatical metalanguage)",
+          "subtopics": [
+            {
+              "id": "eng-gram-terms-meta",
+              "name": "Metalanguage",
+              "outcomes": [
+                {
+                  "id": "eng-gram-terms-meta-1",
+                  "text": "Use grammatical metalanguage to talk about how language works at the text level and during editing and self-correction (P4-P6).",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-gram-wps",
+          "name": "Grammar at word, phrase and sentence levels",
+          "subtopics": [
+            {
+              "id": "eng-gram-wps-apply",
+              "name": "Applying grammatical knowledge",
+              "outcomes": [
+                {
+                  "id": "eng-gram-wps-apply-1",
+                  "text": "Revisit and strengthen previously learnt grammatical knowledge; identify and address recurring language errors for control of language.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-gram-wps-apply-2",
+                  "text": "Use appropriate language structures learnt previously to convey thoughts and opinions accurately.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-gram-wps-apply-3",
+                  "text": "Understand that varying the form of a construction conveys different meanings in different contexts.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            },
+            {
+              "id": "eng-gram-wps-items",
+              "name": "Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags)",
+              "outcomes": [
+                {
+                  "id": "eng-gram-wps-items-1",
+                  "text": "Verb tenses and forms in context",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "eng-gram-wps-items-2",
+                  "text": "Subject-verb agreement",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "eng-gram-wps-items-3",
+                  "text": "Prepositions",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "eng-gram-wps-items-4",
+                  "text": "Conjunctions and connectors",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "eng-gram-wps-items-5",
+                  "text": "Pronouns including relative pronouns",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                },
+                {
+                  "id": "eng-gram-wps-items-6",
+                  "text": "Question tags",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-gram-text",
+          "name": "Grammar at text level",
+          "subtopics": [
+            {
+              "id": "eng-gram-text-cohesion",
+              "name": "Cohesion in texts",
+              "outcomes": [
+                {
+                  "id": "eng-gram-text-cohesion-1",
+                  "text": "Apply knowledge of cohesive devices and grammatical structures to create links across clauses, sentences and paragraphs.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            },
+            {
+              "id": "eng-gram-text-features",
+              "name": "Language features of text types",
+              "outcomes": [
+                {
+                  "id": "eng-gram-text-features-1",
+                  "text": "Identify language features in different types of texts and recognise how purposeful use of language shapes meaning.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eng-vocabulary",
+      "name": "Vocabulary",
+      "topics": [
+        {
+          "id": "eng-vocab-rich",
+          "name": "Developing rich vocabulary knowledge",
+          "subtopics": [
+            {
+              "id": "eng-vocab-rich-words",
+              "name": "Word study",
+              "outcomes": [
+                {
+                  "id": "eng-vocab-rich-words-1",
+                  "text": "Examine how words are formed, how words relate to one another and how words are used in context.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-vocab-rich-words-2",
+                  "text": "Use vocabulary and learner strategies to work out and learn new vocabulary items.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-vocab-use",
+          "name": "Using vocabulary",
+          "subtopics": [
+            {
+              "id": "eng-vocab-use-appropriate",
+              "name": "Appropriate use",
+              "outcomes": [
+                {
+                  "id": "eng-vocab-use-appropriate-1",
+                  "text": "Use words suitable for purpose, audience, context and culture.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-vocab-use-appropriate-2",
+                  "text": "Use fixed expressions accurately and appropriately.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-vocab-use-appropriate-3",
+                  "text": "Recognise, appreciate and use words for literary effect.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-vocab-use-appropriate-4",
+                  "text": "Use words meaningfully in conjunction with semiotic modes.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eng-reading",
+      "name": "Reading and Viewing (Comprehension)",
+      "topics": [
+        {
+          "id": "eng-read-close",
+          "name": "Reading and viewing closely",
+          "subtopics": [
+            {
+              "id": "eng-read-close-lit",
+              "name": "Literal and inferential comprehension",
+              "outcomes": [
+                {
+                  "id": "eng-read-close-lit-1",
+                  "text": "Strengthen close reading and viewing using a range of comprehension, information and media literacy skills and strategies to construct meaning from diverse texts.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-read-close-lit-2",
+                  "text": "Show understanding of written texts at literal and inferential levels (Paper 2 AO1).",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            },
+            {
+              "id": "eng-read-close-visual",
+              "name": "Multimodal and visual texts",
+              "outcomes": [
+                {
+                  "id": "eng-read-close-visual-1",
+                  "text": "Show understanding of multimodal (visual) texts at literal, inferential and evaluative levels.",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-read-crit",
+          "name": "Reading and viewing critically",
+          "subtopics": [
+            {
+              "id": "eng-read-crit-eval",
+              "name": "Critical response",
+              "outcomes": [
+                {
+                  "id": "eng-read-crit-eval-1",
+                  "text": "Respond critically to and appreciate implied meaning by applying analysis, judgement and metacognitive strategies; show awareness of how writers' style can influence meaning.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-read-crit-eval-2",
+                  "text": "Evaluate texts at the evaluative level (Paper 2 AO1).",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eng-listening",
+      "name": "Listening and Viewing",
+      "topics": [
+        {
+          "id": "eng-listen-core",
+          "name": "Listening and viewing",
+          "subtopics": [
+            {
+              "id": "eng-listen-close",
+              "name": "Listening closely",
+              "outcomes": [
+                {
+                  "id": "eng-listen-close-1",
+                  "text": "Strengthen perception and recognition of words in context through key words and prosodic features of spoken language.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            },
+            {
+              "id": "eng-listen-understand",
+              "name": "Listening for understanding",
+              "outcomes": [
+                {
+                  "id": "eng-listen-understand-1",
+                  "text": "Show understanding of spoken texts at literal, inferential and evaluative levels, including main ideas and details (Paper 3 AO1).",
+                  "level": "P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": true,
+                  "unverified": false
+                },
+                {
+                  "id": "eng-listen-understand-2",
+                  "text": "Listen critically: analyse semiotic features, judge credibility and relevance of information, and use comprehension monitoring strategies.",
+                  "level": "P5-P6",
+                  "psleExaminable": true,
+                  "mcqTestable": true,
+                  "needsDiagram": false,
+                  "unverified": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nonMcqComponents": [
+    {
+      "name": "Situational Writing (Paper 1)",
+      "marks": 14,
+      "note": "Open-ended functional writing; not convertible, though 'choose the best opening or tone for this email' MCQs could rehearse purpose/audience/register."
+    },
+    {
+      "name": "Continuous Writing (Paper 1)",
+      "marks": 36,
+      "note": "Composition from pictures; not convertible; only idea-selection or sentence-improvement MCQs could support."
+    },
+    {
+      "name": "Grammar Cloze (Paper 2 Booklet B)",
+      "marks": 10,
+      "note": "Open-ended single-word fill; convertible to 4-option grammar MCQ practice."
+    },
+    {
+      "name": "Editing for Spelling and Grammar (Paper 2 Booklet B)",
+      "marks": 10,
+      "note": "Convertible to 'which underlined part is wrong' MCQs."
+    },
+    {
+      "name": "Comprehension Cloze (Paper 2 Booklet B)",
+      "marks": 15,
+      "note": "Convertible to MCQ cloze practice."
+    },
+    {
+      "name": "Synthesis / Transformation (Paper 2 Booklet B)",
+      "marks": 10,
+      "note": "Partly convertible: choose the best combined or transformed sentence from 4 options."
+    },
+    {
+      "name": "Comprehension OE (Paper 2 Booklet B)",
+      "marks": 20,
+      "note": "Written answers; could be practised as MCQ literal/inferential questions on short passages, not a true equivalent."
+    },
+    {
+      "name": "Reading Aloud (Paper 4)",
+      "marks": 15,
+      "note": "Spoken; not convertible."
+    },
+    {
+      "name": "Stimulus-based Conversation (Paper 4)",
+      "marks": 25,
+      "note": "Spoken; not convertible."
+    }
+  ],
+  "unverified": [
+    {
+      "item": "Syllabus/format applicability to PSLE 2027",
+      "reason": "No SEAB 'PSLE Formats Examined in 2027' page or 2027 PSLE English syllabus PDF was found (2026 page last updated 24 April 2026; the 2027 URL returns 404). The most recent SEAB document says 'Implemented from the Year of Examination 2025' with no end date, and no replacement primary EL syllabus was found; 2027 applicability is therefore inferred, not stated."
+    },
+    {
+      "item": "Specific testable grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags)",
+      "reason": "Specific grammar items are not named in the SEAB PSLE English syllabus or the MOE EL Syllabus 2020 (Primary) text; the Grammar 'Items and Structures' detail is not in the published PDF text. Listed as unverified placeholders only."
+    },
+    {
+      "item": "Paper 2 Booklet A and B separate durations",
+      "reason": "SEAB gives one combined duration of 1 h 50 min for Paper 2; booklet split is not stated."
+    },
+    {
+      "item": "Oral duration and Paper 3 duration",
+      "reason": "SEAB states 'About 10 min' and 'About 35 min', so durationMin is approximate."
+    },
+    {
+      "item": "Foundation English",
+      "reason": "Exists (separate SEAB syllabus 0031 and MOE Foundation syllabus); not surveyed here, out of scope."
+    }
+  ],
+  "sources": [
+    {
+      "title": "PSLE English Language syllabus (0001_y26_sy), Implemented from Year of Examination 2025",
+      "url": "https://isomer-user-content.by.gov.sg/334/6c4dc7cf-bf0b-4d79-9005-1b1f7fa68cc9/0001_y26_sy.pdf",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "PSLE Formats Examined in 2026",
+      "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/",
+      "publisher": "SEAB",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "English Language Syllabus 2020 Primary",
+      "url": "https://www.moe.gov.sg/media/files/primary/b8eb0437-67fb-4042-a26c-64fef2af12df.pdf",
+      "publisher": "MOE",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "title": "Primary school subjects and syllabuses",
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "publisher": "MOE",
+      "retrieved": "2026-11-17"
+    }
+  ]
+}

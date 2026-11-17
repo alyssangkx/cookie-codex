@@ -1,0 +1,3284 @@
+"""Geometry (math-geometry): angles, triangles and quadrilaterals, lines, symmetry, 2D/3D shapes, nets, cubes.
+
+Angle figures are computed from the real angles (figures_D.Scene), the unknown is marked x, and each
+independent check re-measures the target angle from coordinates instead of repeating the arithmetic.
+"""
+import math
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from common import *  # noqa: E402,F401
+from figures import Fig  # noqa: E402
+from figures_D import (Scene, vec, pt, meas, bearing, dist, intersect, panels, grid_fig, hexominoes,  # noqa: E402
+                       is_cube_net, roll_labels, transforms, net_fig, solid_net, stack_fig, protractor_fig,
+                       has_2x2)
+
+T = "math-geometry"
+G2 = "math-geometry-2d-shapes-"
+G3 = "math-geometry-3d-shapes-and-nets-"
+GA = "math-geometry-angles-"
+GP = "math-geometry-perpendicular-and-parallel-lines-"
+GR = "math-geometry-rectangle-and-square-"
+GS = "math-geometry-line-symmetry-"
+GT = "math-geometry-triangles-parallelogram-rhombus-and-trapezium-"
+
+
+def art(word):
+    return "an" if word[0] in "aeiou" else "a"
+
+
+def deg(x):
+    return f"{frac(x)}°"
+
+
+def W(v, tag, why):
+    return (v, tag, why)
+
+
+def mk(fn, stem, ans, wrongs, steps, params, fig=None, show=deg, maxv=180):
+    """Whole-number build with careless slips appended; wrongs above maxv are dropped."""
+    ans = int(ans)
+    slips_ = [W(ans + 10, "slip_ten_out", "Made a slip of 10 in the final subtraction."),
+              W(ans - 10, "slip_ten_out", "Made a slip of 10 in the final subtraction."),
+              W(ans + 5, "arithmetic_slip", "Made a small arithmetic slip."),
+              W(ans - 5, "arithmetic_slip", "Made a small arithmetic slip."),
+              W(ans + 2, "arithmetic_slip", "Made a small arithmetic slip.")]
+    ws = [w for w in wrongs if w[0] is not None and (maxv is None or w[0] <= maxv)]
+    ws = ws + [s for s in slips_ if maxv is None or s[0] <= maxv]
+    return build(fn, stem, ans, ws, steps, params, show=show, whole=True, auto_slips=False, figure=fig)
+
+
+def lab(name):
+    return name
+
+
+def opt_show(names):
+    return lambda v: names[int(v) - 1]
+
+
+def mark(a, tag=""):
+    return f"{a}°"
+
+
+# ============================================================ ANGLES: basic
+
+@template(T, "basic", GA + "05", GA + "08")
+def angles_on_line(r):
+    """math-pat-angles-one-step"""
+    two = r.random() < 0.5
+    a = r.randint(25, 135)
+    b = r.randint(25, 120) if two else 0
+    if two and a + b > 150:
+        return None
+    ans = 180 - a - b
+    P = {"a": a, "b": b}
+    sc = Scene()
+    sc.add("O", 0, 0); sc.add("A", -1, 0); sc.add("B", 1, 0)
+    sc.add("C", *vec(180 - a))
+    if two:
+        sc.add("D", *vec(180 - a - b))
+    sc.seg("A", "B"); sc.seg("O", "C")
+    sc.label("A", away="O"); sc.label("B", away="O"); sc.label("C", away="O"); sc.label("O", away=(0, 1.5), off=15)
+    sc.ang("O", "A", "C", f"{a}°")
+    if two:
+        sc.seg("O", "D"); sc.label("D", away="O")
+        sc.ang("O", "C", "D", f"{b}°")
+        sc.ang("O", "D", "B", "x")
+        stem = f"In the figure, AOB is a straight line. ∠AOC = {a}° and ∠COD = {b}°. Find ∠DOB."
+        wr = [W(180 - a, "used_one_angle_only", "Subtracted only ∠AOC from 180°."),
+              W(a + b, "added_given_angles", "Added the two given angles instead of subtracting from 180°."),
+              W(abs(a - b), "subtracted_given_angles", "Found the difference between the two given angles."),
+              W(360 - a - b, "used_360_on_a_line", "Used 360° instead of 180° for angles on a straight line.")]
+        steps = ["Angles on a straight line add up to 180°.", f"∠DOB = 180° − {a}° − {b}° = {ans}°"]
+    else:
+        sc.ang("O", "C", "B", "x")
+        stem = f"In the figure, AOB is a straight line. ∠AOC = {a}°. Find ∠COB."
+        wr = [W(90 - a if a < 90 else a - 90, "used_right_angle", "Used 90° instead of 180°."),
+              W(a, "gave_given_angle", "Gave the angle that was already known."),
+              W(360 - a, "used_360_on_a_line", "Used 360° instead of 180°.")]
+        steps = ["Angles on a straight line add up to 180°.", f"∠COB = 180° − {a}° = {ans}°"]
+    return mk(angles_on_line, stem, ans, wr, steps, P, sc.svg("Angles on a straight line"))
+
+
+def _line_pts(P):
+    p = {"O": (0, 0), "A": (-1, 0), "B": (1, 0), "C": vec(180 - P["a"])}
+    if P["b"]:
+        p["D"] = vec(180 - P["a"] - P["b"])
+    return p
+
+
+@checker(angles_on_line)
+def _(p):
+    q = _line_pts(p)
+    return F(round(meas(q["D"], q["O"], q["B"]) if p["b"] else meas(q["C"], q["O"], q["B"])))
+
+
+@template(T, "basic", GA + "06")
+def angles_at_point(r):
+    """math-pat-angles-one-step"""
+    n = r.choice([3, 4])
+    parts = [r.randint(40, 130) for _ in range(n - 1)]
+    ans = 360 - sum(parts)
+    if not 35 <= ans <= 175:
+        return None
+    angs = parts + [ans]
+    cum = [0]
+    for x in angs:
+        cum.append(cum[-1] + x)
+    sc = Scene()
+    sc.add("O", 0, 0)
+    names = "ABCD"[:n]
+    off = r.choice([10, 20, 30])
+    for i, nm in enumerate(names):
+        sc.add(nm, *vec(off + cum[i]))
+        sc.seg("O", nm); sc.label(nm, away="O")
+    sc.label("O", away=(0, 3), off=15)
+    for i in range(n):
+        a1, a2 = names[i], names[(i + 1) % n]
+        sc.ang("O", a1, a2, f"{angs[i]}°" if i < n - 1 else "x", r=20 + 3 * (i % 2))
+    given = ", ".join(f"∠{names[i]}O{names[i + 1]} = {parts[i]}°" for i in range(n - 2))
+    last = f"∠{names[n - 2]}O{names[n - 1]} = {parts[-1]}°"
+    stem = (f"The lines OA, OB, {'OC' if n == 3 else 'OC and OD'} meet at the point O. {given} and {last}. "
+            f"Find ∠{names[n - 1]}O{names[0]}.")
+    s = sum(parts)
+    wr = [W(180 - s if s < 180 else None, "used_180_at_a_point", "Used 180° instead of 360° for angles at a point."),
+          W(s, "gave_sum_of_given", "Gave the sum of the known angles."),
+          W(abs(360 - s - 180), "used_180_at_a_point", "Subtracted from 180° after using 360°."),
+          W(90 - ans % 90 + ans if False else None, "x", "")]
+    wr = [w for w in wr if w[0]]
+    return mk(angles_at_point, stem, ans, wr,
+              ["Angles at a point add up to 360°.", f"Sum of the known angles = {' + '.join(map(str, parts))} = {s}°",
+               f"x = 360° − {s}° = {ans}°"],
+              {"parts": parts, "off": off}, sc.svg("Angles at a point"))
+
+
+@checker(angles_at_point)
+def _(p):
+    angs = p["parts"]
+    cum = [p["off"]]
+    for x in angs:
+        cum.append(cum[-1] + x)
+    first, last = vec(p["off"]), vec(cum[-1])
+    return F(round(meas(last, (0, 0), first)))
+
+
+@template(T, "basic", GA + "07")
+def vertically_opposite(r):
+    """math-pat-angles-one-step"""
+    a = r.randint(25, 155)
+    if a == 90:
+        return None
+    mode = r.choice(["opp", "adj", "adj2"])
+    al = r.randint(0, 40)
+    sc = Scene()
+    sc.add("O", 0, 0)
+    sc.add("A", *vec(al)); sc.add("B", *vec(al + 180))
+    sc.add("C", *vec(al + a)); sc.add("D", *vec(al + a + 180))
+    sc.seg("A", "B"); sc.seg("C", "D")
+    for n in "ABCD":
+        sc.label(n, away="O")
+    sc.label("O", away=vec(al + a / 2 + 90), off=15)
+    # AOC = a given; ask BOD (opposite), COB or DOA (adjacent)
+    sc.ang("O", "A", "C", f"{a}°")
+    if mode == "opp":
+        sc.ang("O", "B", "D", "x"); ans, tgt = a, "∠BOD"
+        wr = [W(180 - a, "gave_adjacent_angle", "Used the adjacent angle (180° − a) instead of the equal opposite angle."),
+              W(90 - a if a < 90 else None, "used_right_angle", "Used 90°."),
+              W(360 - a, "used_360", "Used 360°."), W(a + 180 if a + 180 <= 180 else None, "x", "")]
+        steps = ["Vertically opposite angles are equal.", f"∠BOD = ∠AOC = {a}°"]
+        stem = f"Lines AB and CD cross at O. ∠AOC = {a}°. Find ∠BOD."
+    else:
+        tgtname = "∠COB" if mode == "adj" else "∠DOA"
+        if mode == "adj":
+            sc.ang("O", "C", "B", "x")
+        else:
+            sc.ang("O", "D", "A", "x")
+        ans = 180 - a
+        stem = f"Lines AB and CD cross at O. ∠AOC = {a}°. Find {tgtname}."
+        wr = [W(a, "assumed_equal", "Assumed the angles were vertically opposite and equal."),
+              W(360 - a, "used_360", "Used 360° instead of 180°."),
+              W((360 - 2 * a) // 2 if a < 180 and (360 - 2 * a) % 2 == 0 else None, "x", "")]
+        steps = ["Angles on a straight line add up to 180°.", f"{tgtname} = 180° − {a}° = {ans}°"]
+    wr = [w for w in wr if w[0] and w[1] != "x"]
+    return mk(vertically_opposite, stem, ans, wr, steps, {"a": a, "al": al, "mode": mode},
+              sc.svg("Two crossing lines"))
+
+
+@checker(vertically_opposite)
+def _(p):
+    a, al = p["a"], p["al"]
+    O = (0, 0)
+    A, B, C, D = vec(al), vec(al + 180), vec(al + a), vec(al + a + 180)
+    if p["mode"] == "opp":
+        return F(round(meas(B, O, D)))
+    return F(round(meas(C, O, B) if p["mode"] == "adj" else meas(D, O, A)))
+
+
+@template(T, "basic", GA + "01", GA + "02")
+def angle_type(r):
+    """Names of angle types"""
+    th = r.choice([r.randint(5, 89), r.randint(91, 179), r.randint(181, 355), 90])
+    nm = r.choice(NAMES)
+    names = ["acute angle", "right angle", "obtuse angle", "reflex angle"]
+    sc = Scene()
+    sc.add("B", 0, 0); sc.add("A", *vec(r.choice([0, 15, 30]))); a0 = bearing((0, 0), sc.pts["A"])
+    sc.add("C", *vec(a0 + th))
+    sc.seg("B", "A"); sc.seg("B", "C")
+    sc.label("A", away="B"); sc.label("C", away="B"); sc.label("B", away=(0, 0.01), off=0, dx=-4, dy=16)
+    sc.ang("B", "A", "C", "x" if th != 90 else None, reflex=th > 180, r=26)
+    if th == 90:
+        pass
+    code = 1 if th < 90 else 2 if th == 90 else 3 if th < 180 else 4
+    stem = f"{nm} measures ∠ABC = {th}°, shown as angle x in the figure. What type of angle is it?"
+    wr = [W(((code % 4) + 1), "confused_obtuse_reflex", "Mixed up the angle types."),
+          W(((code + 1) % 4) + 1, "confused_obtuse_reflex", "Mixed up the angle types."),
+          W(((code + 2) % 4) + 1, "confused_obtuse_reflex", "Mixed up the angle types.")]
+    wr = [(v if v != code else 1 + (v % 4), t, w) for v, t, w in wr]
+    q = build(angle_type, stem, code, wr, ["An angle < 90° is acute, = 90° is a right angle, between 90° and 180° is obtuse, "
+                                           "and between 180° and 360° is reflex.", f"{th}° is a{'n' if code in (1, 3) else ''} {names[code - 1]}."],
+              {"th": th}, show=opt_show(names), whole=True, auto_slips=False, figure=sc.svg("An angle"))
+    return q
+
+
+@checker(angle_type)
+def _(p):
+    t = p["th"]
+    return F([t < 90, t == 90, 90 < t < 180, t > 180].index(True) + 1)
+
+
+@template(T, "basic", GA + "03")
+def read_protractor(r):
+    th = r.randrange(25, 166, 5)
+    right = r.random() < 0.5
+    nm = r.choice(NAMES)
+    ph = r.choice(["Find the size of ∠PQR.", "What is the size of angle PQR?", "Read off the size of ∠PQR."])
+    side = "right" if right else "left"
+    stem = (f"{nm} places a protractor with its centre on Q and the arm QP along the baseline, pointing to the {side}. "
+            f"{ph}")
+    fig = protractor_fig(th, base_right=right)
+    wr = [W(180 - th, "read_wrong_scale", "Read the scale that starts from the other end of the baseline."),
+          W(th + 10 if th + 10 <= 175 else th - 15, "misread_by_one_interval", "Misread the tick marks by 10°."),
+          W(th - 10, "misread_by_one_interval", "Misread the tick marks by 10°.")]
+    return mk(read_protractor, stem, th, wr,
+              [f"QP lies along the 0° mark on the {'outer' if right else 'inner'} scale, so read that scale.",
+               f"The arm QR crosses {th}°. ∠PQR = {th}°"], {"th": th, "right": right}, fig)
+
+
+@checker(read_protractor)
+def _(p):
+    # outer scale reading from the right = angle of the arm; the inner scale is its supplement
+    arm = p["th"] if p["right"] else 180 - p["th"]
+    outer, inner = arm, 180 - arm
+    return F(outer if p["right"] else inner)
+
+
+@template(T, "basic", GA + "02")
+def angle_notation(r):
+    """math-pat-angles-one-step"""
+    a, b = r.randint(20, 70), r.randint(20, 70)
+    s0 = r.randint(5, 40)
+    sc = Scene()
+    sc.add("B", 0, 0)
+    for nm, ang in (("A", s0), ("C", s0 + a), ("D", s0 + a + b)):
+        sc.add(nm, *vec(ang)); sc.seg("B", nm); sc.label(nm, away="B")
+    sc.label("B", away=(0, 1), off=15, dx=-3, dy=12)
+    mode = r.choice(["sum", "diff"])
+    if mode == "sum":
+        sc.ang("B", "A", "C", f"{a}°", r=26); sc.ang("B", "C", "D", f"{b}°", r=26)
+        sc.ang("B", "A", "D", "x", r=50)
+        stem = f"In the figure, ∠ABC = {a}° and ∠CBD = {b}°. Find ∠ABD."
+        ans = a + b
+        wr = [W(abs(a - b), "subtracted_given_angles", "Subtracted the two angles."),
+              W(180 - a - b, "used_180", "Subtracted from 180° as if on a straight line."),
+              W(360 - a - b, "used_360", "Subtracted from 360°.")]
+        steps = ["∠ABD is made up of ∠ABC and ∠CBD.", f"∠ABD = {a}° + {b}° = {ans}°"]
+    else:
+        sc.ang("B", "A", "C", f"{a}°", r=26); sc.ang("B", "A", "D", f"{a + b}°", r=50)
+        sc.ang("B", "C", "D", "x", r=26)
+        stem = f"In the figure, ∠ABC = {a}° and ∠ABD = {a + b}°. Find ∠CBD."
+        ans = b
+        wr = [W(a + b + a, "added_given_angles", "Added the two given angles."),
+              W(abs(b - a) if abs(b - a) else None, "x", ""),
+              W(180 - a - b, "used_180", "Subtracted from 180°."),
+              W(a, "gave_given_angle", "Gave ∠ABC.")]
+        wr = [w for w in wr if w[1] != "x"]
+        steps = ["∠CBD = ∠ABD − ∠ABC.", f"∠CBD = {a + b}° − {a}° = {ans}°"]
+    return mk(angle_notation, stem, ans, wr, steps, {"a": a, "b": b, "s0": s0, "mode": mode}, sc.svg("Angles at B"))
+
+
+@checker(angle_notation)
+def _(p):
+    s0, a, b = p["s0"], p["a"], p["b"]
+    B, A, C, D = (0, 0), vec(s0), vec(s0 + a), vec(s0 + a + b)
+    return F(round(meas(A, B, D) if p["mode"] == "sum" else meas(C, B, D)))
+
+
+# ============================================================ ANGLES: intermediate
+
+def _coef(c, v="x"):
+    return v if c == 1 else f"{c}{v}"
+
+
+@template(T, "intermediate", GA + "07", GA + "08")
+def crossing_lines_algebra(r):
+    """math-pat-angles-one-step"""
+    a, b = r.randint(1, 4), r.randint(1, 4)
+    x = r.randint(12, 36)
+    c = 180 - (a + b) * x
+    if not (0 < c <= 80) or not 28 <= a * x <= 150:
+        return None
+    al = r.randint(0, 30)
+    sc = Scene()
+    sc.add("O", 0, 0)
+    A, B, C, D = vec(al), vec(al + 180), vec(al + a * x), vec(al + a * x + 180)
+    for n, p in zip("ABCD", (A, B, C, D)):
+        sc.add(n, *p); sc.label(n, away="O")
+    sc.seg("A", "B"); sc.seg("C", "D")
+    sc.label("O", away=vec(al + a * x / 2 + 90), off=15)
+    sc.ang("O", "A", "C", f"({_coef(a)}°)".replace("(", "").replace(")", "") if False else f"{_coef(a)}°", r=24)
+    sc.ang("O", "C", "B", f"({_coef(b)} + {c})°", r=24)
+    sc.ang("O", "B", "D", "?", r=24)
+    stem = (f"Lines AB and CD cross at O. ∠AOC = ({_coef(a)})° and ∠COB = ({_coef(b)} + {c})°. "
+            f"Find the size of ∠BOD.")
+    stem = stem.replace("(" + _coef(a) + ")°", _coef(a) + "°")
+    ans = a * x
+    wr = [W(x, "found_x_only", "Found x but did not work out the angle."),
+          W(b * x + c, "found_adjacent_angle", "Found ∠COB instead of ∠BOD."),
+          W(180 - x, "used_180_minus_x", "Subtracted x from 180°."),
+          W(a * x + c, "added_constant_to_wrong_term", "Added the constant to the wrong angle.")]
+    return mk(crossing_lines_algebra, stem, ans, wr,
+              ["∠AOC and ∠COB are angles on a straight line, so they add up to 180°.",
+               f"{_coef(a)} + {_coef(b)} + {c} = 180 → {a + b}x = {180 - c} → x = {x}",
+               f"∠BOD is vertically opposite ∠AOC, so ∠BOD = {a} × {x}° = {ans}°"],
+              {"a": a, "b": b, "c": c, "al": al}, sc.svg("Crossing lines"))
+
+
+@checker(crossing_lines_algebra)
+def _(p):
+    a, b, c = p["a"], p["b"], p["c"]
+    x = next(x for x in range(1, 181) if (a + b) * x + c == 180)
+    al = p["al"]
+    O = (0, 0)
+    return F(round(meas(vec(al + 180), O, vec(al + a * x + 180))))
+
+
+@template(T, "intermediate", GA + "05", GA + "06", GA + "08")
+def angle_ratio(r):
+    """math-pat-angles-one-step"""
+    line = r.random() < 0.5
+    tot = 180 if line else 360
+    ps = [r.randint(1, 6) for _ in range(3)]
+    S = sum(ps)
+    if tot % S:
+        return None
+    u = tot // S
+    angs = [p * u for p in ps]
+    if min(angs) < 25 or max(angs) > 150:
+        return None
+    k = r.choice([0, 1, 2]) if not line else r.choice([0, 1, 2])
+    cum = [0, angs[0], angs[0] + angs[1], tot]
+    sc = Scene()
+    sc.add("O", 0, 0)
+    off = 0 if line else r.choice([20, 40])
+    base = 180 if line else off
+    if line:
+        sc.add("A", -1, 0); sc.add("B", 1, 0)
+        sc.add("C", *vec(180 - angs[0])); sc.add("D", *vec(180 - angs[0] - angs[1]))
+        sc.seg("A", "B"); sc.seg("O", "C"); sc.seg("O", "D")
+        for n in "ABCD":
+            sc.label(n, away="O")
+        pts = ["A", "C", "D", "B"]
+    else:
+        for i, n in enumerate("ABC"):
+            sc.add(n, *vec(off + cum[i])); sc.seg("O", n); sc.label(n, away="O")
+        pts = ["A", "B", "C", "A"]
+    sc.label("O", away=(0, 2) if line else (0, 0.2), off=15)
+    for i in range(3):
+        sc.ang("O", pts[i], pts[i + 1], "x" if i == k else None, r=22 + 3 * i)
+    nm = [f"∠{pts[i]}O{pts[i + 1]}" for i in range(3)]
+    ratio = " : ".join(str(p) for p in ps)
+    if line:
+        stem = f"AOB is a straight line. ∠AOC : ∠COD : ∠DOB = {ratio}. Find {nm[k]}."
+    else:
+        stem = f"The lines OA, OB and OC meet at O. ∠AOB : ∠BOC : ∠COA = {ratio}. Find {nm[k]}."
+    ans = angs[k]
+    wr = [W(u, "found_one_unit_only", "Found the size of 1 unit but did not multiply."),
+          W(angs[(k + 1) % 3], "chose_wrong_angle", "Gave a different angle from the one asked."),
+          W(angs[(k + 2) % 3], "chose_wrong_angle", "Gave a different angle from the one asked."),
+          W(tot // 2 // S * ps[k] if not line else tot * 2 // S * ps[k], "used_wrong_total", "Used the wrong total for the angles.")]
+    return mk(angle_ratio, stem, ans, wr,
+              [f"The three angles add up to {tot}° ({'straight line' if line else 'angles at a point'}).",
+               f"{ratio.replace(' : ', ' + ')} = {S} units; 1 unit = {tot}° ÷ {S} = {u}°",
+               f"{nm[k]} = {ps[k]} × {u}° = {ans}°"],
+              {"ps": ps, "tot": tot, "k": k}, sc.svg("Angles in a ratio"))
+
+
+@checker(angle_ratio)
+def _(p):
+    ps, tot = p["ps"], p["tot"]
+    # brute force the unit size
+    u = next(u for u in range(1, 361) if u * sum(ps) == tot)
+    return F(ps[p["k"]] * u)
+
+
+@template(T, "intermediate", GA + "08", GA + "05")
+def line_expressions(r):
+    """math-pat-angles-one-step"""
+    c1, c2 = r.randint(1, 3), r.randint(1, 3)
+    c3 = r.randint(1, 3)
+    k = c1 + c2 + c3
+    x = r.randint(12, 36)
+    m = 180 - k * x
+    if not (5 <= m <= 70):
+        return None
+    a1, a2, a3 = c1 * x, c2 * x, c3 * x + m
+    if min(a1, a2, a3) < 25 or max(a1, a2, a3) > 140:
+        return None
+    sc = Scene()
+    sc.add("O", 0, 0); sc.add("A", -1, 0); sc.add("B", 1, 0)
+    sc.add("C", *vec(180 - a1)); sc.add("D", *vec(180 - a1 - a2))
+    sc.seg("A", "B"); sc.seg("O", "C"); sc.seg("O", "D")
+    for n in "ABCD":
+        sc.label(n, away="O")
+    sc.label("O", away=(0, 2), off=15)
+    sc.ang("O", "A", "C", f"{_coef(c1)}°", r=22)
+    sc.ang("O", "C", "D", "?", r=26)
+    sc.ang("O", "D", "B", f"({_coef(c3)} + {m})°", r=22)
+    stem = (f"AOB is a straight line. ∠AOC = {_coef(c1)}°, ∠COD = {_coef(c2)}° and "
+            f"∠DOB = ({_coef(c3)} + {m})°. Find the size of ∠COD.")
+    ans = a2
+    wr = [W(x, "found_x_only", "Found x but did not work out the angle."),
+          W(a1, "chose_wrong_angle", "Gave ∠AOC instead of ∠COD."),
+          W(a3, "chose_wrong_angle", "Gave ∠DOB instead of ∠COD."),
+          W(c2 * (180 // k), "ignored_constant", "Ignored the constant when finding x.")]
+    return mk(line_expressions, stem, ans, wr,
+              ["The three angles on the straight line add up to 180°.",
+               f"{_coef(c1)} + {_coef(c2)} + {_coef(c3)} + {m} = 180 → {k}x = {180 - m} → x = {x}",
+               f"∠COD = {c2} × {x}° = {ans}°"], {"c": [c1, c2, c3], "m": m}, sc.svg("Angles on a line"))
+
+
+@checker(line_expressions)
+def _(p):
+    c1, c2, c3 = p["c"]
+    x = next(x for x in range(1, 181) if (c1 + c2 + c3) * x + p["m"] == 180)
+    O = (0, 0)
+    return F(round(meas(vec(180 - c1 * x), O, vec(180 - c1 * x - c2 * x))))
+
+
+@template(T, "intermediate", GA + "06", GA + "08")
+def reflex_angle(r):
+    """math-pat-angles-one-step"""
+    a = r.randint(25, 170)
+    if a == 90:
+        return None
+    nm = r.choice(NAMES)
+    s0 = r.choice([0, 10, 20, 30])
+    sc = Scene(pad=52)
+    sc.add("O", 0, 0); sc.add("A", *vec(s0)); sc.add("B", *vec(s0 + a))
+    sc.seg("O", "A"); sc.seg("O", "B")
+    sc.label("A", away="O"); sc.label("B", away="O"); sc.label("O", away=vec(s0 + a / 2), off=15)
+    sc.ang("O", "A", "B", f"{a}°", r=22)
+    sc.ang("O", "A", "B", "x", r=40, reflex=True)
+    ans = 360 - a
+    stem = f"{nm} measures ∠AOB = {a}°. Find the size of the reflex angle AOB, marked x."
+    wr = [W(180 - a, "used_180_for_reflex", "Subtracted from 180° instead of 360°."),
+          W(180 + a, "added_180", "Added 180° to the angle."),
+          W(360 - a - 90, "subtracted_extra_right_angle", "Subtracted an extra 90°."),
+          W(a, "gave_given_angle", "Gave the given angle.")]
+    return mk(reflex_angle, stem, ans, wr,
+              ["The angles at a point add up to 360°. The reflex angle is the rest of the full turn.",
+               f"Reflex ∠AOB = 360° − {a}° = {ans}°"], {"a": a, "s0": s0}, sc.svg("Reflex angle"), maxv=None)
+
+
+@checker(reflex_angle)
+def _(p):
+    O = (0, 0)
+    small = meas(vec(p["s0"]), O, vec(p["s0"] + p["a"]))
+    return F(round(360 - small))
+
+
+# ============================================================ ANGLES: competent
+
+@template(T, "competent", GA + "08", GT + "06")
+def square_isosceles(r):
+    """math-pat-angles-chained-shapes"""
+    al = r.randrange(20, 71, 2)
+    outside = r.random() < 0.5
+    s = 1.0
+    sc = Scene()
+    sc.add("A", 0, 0); sc.add("B", s, 0); sc.add("C", s, s); sc.add("D", 0, s)
+    sc.add("E", *vec(-al if outside else al))
+    sc.poly(["A", "B", "C", "D"])
+    sc.seg("A", "E"); sc.seg("B", "E")
+    sc.label("A", away=(0.5, 0.5)); sc.label("B", away=(0.5, 0.5)); sc.label("C", away=(0.5, 0.5)); sc.label("D", away=(0.5, 0.5))
+    sc.label("E", away=(0.5, 0.5) if outside else (0.2, 0.2), off=14)
+    sc.tick("A", "B"); sc.tick("A", "E"); sc.tick("A", "D")
+    sc.ang("A", "B", "E", f"{al}°", r=24)
+    sc.ang("E", "A", "D", "x", r=22)
+    if not outside:
+        sc.cmds = [c for c in sc.cmds]
+    where = "outside" if outside else "inside"
+    stem = (f"ABCD is a square. E is a point {where} the square such that AB = AE and ∠BAE = {al}°. "
+            f"Find ∠AED.")
+    ans = (90 - al) // 2 if outside else (90 + al) // 2
+    wr = [W((180 - al) // 2, "used_wrong_triangle", "Found the base angle of triangle ABE instead of triangle ADE."),
+          W(90 - al if outside else 90 + al, "forgot_to_halve", "Found ∠DAE but did not find the base angle."),
+          W(al, "gave_given_angle", "Gave the given angle."),
+          W((90 + al) // 2 if outside else (90 - al) // 2, "mixed_inside_outside", "Added instead of subtracted (or the reverse) when finding ∠DAE.")]
+    dae = 90 + al if outside else 90 - al
+    return mk(square_isosceles, stem, ans, wr,
+              ["AD = AB = AE, so triangle ADE is isosceles with apex A.",
+               f"∠DAE = 90° {'+' if outside else '−'} {al}° = {dae}°",
+               f"∠AED = (180° − {dae}°) ÷ 2 = {ans}°"], {"al": al, "out": outside}, sc.svg("Square and isosceles triangle"))
+
+
+@checker(square_isosceles)
+def _(p):
+    al = p["al"]
+    A, D = (0, 0), (0, 1)
+    E = vec(-al if p["out"] else al)
+    return F(round(meas(A, E, D)))
+
+
+@template(T, "competent", GA + "08", GA + "06")
+def circle_chain(r):
+    """math-pat-angles-chained-shapes"""
+    th, ph = r.randint(40, 150), r.randint(40, 150)
+    if (th + ph) % 2:
+        return None
+    R = 1.0
+    sc = Scene(w=300, h=250)
+    sc.add("O", 0, 0); sc.add("B", R, 0); sc.add("A", *vec(th)); sc.add("C", *vec(-ph))
+    sc.fit(extra=[(R, R), (-R, -R)])
+    sc.circle("O", R)
+    sc.poly(["A", "B", "C"]); sc.seg("O", "A"); sc.seg("O", "B"); sc.seg("O", "C")
+    sc.label("A", away="O"); sc.label("B", away="O"); sc.label("C", away="O")
+    sc.label("O", away=vec(-30 + 180), off=12, dx=-4)
+    sc.ang("O", "A", "B", f"{th}°", r=20)
+    sc.ang("O", "B", "C", f"{ph}°", r=20)
+    sc.ang("B", "A", "C", "x", r=22)
+    ans = 180 - (th + ph) // 2
+    stem = f"O is the centre of the circle and A, B and C lie on it. ∠AOB = {th}° and ∠BOC = {ph}°. Find ∠ABC."
+    wr = [W((th + ph) // 2, "gave_half_the_sum", "Found ∠OBA + ∠OBC wrongly as half of ∠AOB + ∠BOC."),
+          W(180 - (th + ph) // 2 + 0 if False else (180 - th) // 2 if (180 - th) % 2 == 0 else None, "gave_one_base_angle", "Found only ∠OBA."),
+          W(360 - th - ph if 360 - th - ph <= 180 else None, "angles_at_a_point_only", "Found ∠AOC and gave it as the answer."),
+          W(180 - th // 2 - ph // 2 + 10, "x", "")]
+    wr = [w for w in wr if w[0] and w[1] != "x"]
+    return mk(circle_chain, stem, ans, wr,
+              ["OA = OB = OC (radii), so triangles OAB and OBC are isosceles.",
+               f"∠OBA = (180° − {th}°) ÷ 2 = {(180 - th) // 2}°" if (180 - th) % 2 == 0 else f"∠OBA = (180° − {th}°) ÷ 2 = {(180 - th) / 2}°",
+               f"∠OBC = (180° − {ph}°) ÷ 2 = {(180 - ph) / 2:g}°",
+               f"∠ABC = ∠OBA + ∠OBC = {ans}°"], {"th": th, "ph": ph}, sc.svg("Circle with centre O"))
+
+
+@checker(circle_chain)
+def _(p):
+    O, B = (0, 0), (1, 0)
+    A, C = vec(p["th"]), vec(-p["ph"])
+    return F(round(meas(A, B, C)))
+
+
+@template(T, "competent", GA + "08", GA + "05")
+def folded_paper(r):
+    """math-pat-angles-folded-paper"""
+    mode = r.choice(["line", "corner"])
+    T0 = 180 if mode == "line" else 90
+    g = r.randrange(20, T0 - 19, 2)
+    half = (T0 - g) // 2
+    sc = Scene()
+    sc.add("A", 0, 0)
+    if mode == "line":
+        sc.add("Z", -1.3, 0); sc.add("Y", 1.3, 0)
+        sc.add("Zp", *vec(g, 1.3)); sc.add("B", *vec((180 + g) / 2, 1.2))
+        sc.seg("Z", "Y"); sc.seg("A", "B"); sc.seg("A", "Zp", dash=True)
+        sc.label("Z", away="A"); sc.label("Y", away="A"); sc.label("B", away="A"); sc.label("Zp", "Z′", away="A")
+        sc.label("A", away=(0, 1), off=14)
+        sc.ang("A", "Zp", "Y", f"{g}°", r=26)
+        sc.ang("A", "Z", "B", "x", r=26)
+        stem = (f"A paper strip ZAY is folded along the line AB so that AZ falls on AZ′, as shown by the dotted line. "
+                f"∠Z′AY = {g}°. Find ∠ZAB.")
+        tgt = "∠ZAB"
+        steps = ["A fold is a reflection, so ∠ZAB = ∠Z′AB.", f"Angles on a straight line: 2 × ∠ZAB + {g}° = 180°",
+                 f"∠ZAB = (180° − {g}°) ÷ 2 = {half}°"]
+        wr = [W(180 - g, "forgot_to_halve", "Found ∠ZAZ′ but did not halve it."),
+              W(180 - half, "supplement_of_answer", "Gave the supplement of the answer."),
+              W(g, "gave_given_angle", "Gave the given angle."), W(90 - g // 2 + 0 if False else (180 - g) // 2 + 20, "x", "")]
+    else:
+        sc.add("D", 0, 1.3); sc.add("Bc", 1.3, 0); sc.add("Bp", *vec(90 - g, 1.3)); sc.add("E", *vec((90 - g) / 2, 1.2))
+        sc.seg("A", "D"); sc.seg("A", "Bc"); sc.seg("A", "E"); sc.seg("A", "Bp", dash=True)
+        sc.label("D", away="A"); sc.label("Bc", "B", away="A"); sc.label("E", away="A"); sc.label("Bp", "B′", away="A")
+        sc.label("A", away=(1, 1), off=-12, dx=-6, dy=4)
+        sc.ang("A", "D", "Bp", f"{g}°", r=30)
+        sc.ang("A", "Bc", "E", "x", r=30)
+        stem = (f"The corner A of a rectangular sheet is folded along AE so that AB falls on AB′, as shown by the dotted line. "
+                f"∠B′AD = {g}°. Find ∠BAE.")
+        tgt = "∠BAE"
+        steps = ["The corner is a right angle and the fold makes ∠BAE = ∠B′AE.",
+                 f"2 × ∠BAE + {g}° = 90°", f"∠BAE = (90° − {g}°) ÷ 2 = {half}°"]
+        wr = [W(90 - g, "forgot_to_halve", "Found ∠BAB′ but did not halve it."),
+              W(90 - half, "complement_of_answer", "Gave the complement of the answer."),
+              W(g, "gave_given_angle", "Gave the given angle."),
+              W((180 - g) // 2, "used_180_for_corner", "Used 180° instead of 90° for the corner.")]
+    wr = [w for w in wr if w[1] != "x"]
+    return mk(folded_paper, stem, half, wr, steps, {"g": g, "mode": mode}, sc.svg("Folded paper"))
+
+
+@checker(folded_paper)
+def _(p):
+    g = p["g"]
+    A = (0, 0)
+    if p["mode"] == "line":
+        Z, Zp = (-1, 0), vec(g)
+        crease = (Z[0] + Zp[0], Z[1] + Zp[1])  # bisector of the angle between AZ and AZ'
+        return F(round(meas(Z, A, crease)))
+    Bc, Bp = (1, 0), vec(90 - g)
+    crease = (Bc[0] + Bp[0], Bc[1] + Bp[1])
+    return F(round(meas(Bc, A, crease)))
+
+
+@template(T, "competent", GA + "07", GA + "08")
+def butterfly_triangles(r):
+    """math-pat-angles-chained-shapes"""
+    a, c, d = r.randint(28, 75), r.randint(28, 75), r.randint(28, 75)
+    om = 180 - a - c
+    y = a + c - d
+    if om < 30 or not 25 <= y <= 110:
+        return None
+    th = r.randint(0, 25)
+    sc = Scene()
+    sc.add("O", 0, 0)
+    sa, sc_ = math.sin(math.radians(a)), math.sin(math.radians(c))
+    sd, sy = math.sin(math.radians(d)), math.sin(math.radians(y))
+    sc.add("A", *vec(th, sc_)); sc.add("C", *vec(th + om, sa))
+    sc.add("B", *vec(th + 180, sd)); sc.add("D", *vec(th + om + 180, sy))
+    sc.seg("A", "B"); sc.seg("C", "D"); sc.seg("A", "C"); sc.seg("B", "D")
+    for n in "ABCD":
+        sc.label(n, away="O")
+    sc.label("O", away=vec(th + om / 2 + 90), off=11)
+    sc.ang("A", "O", "C", f"{a}°", r=20)
+    sc.ang("C", "A", "O", f"{c}°", r=20)
+    sc.ang("D", "O", "B", f"{d}°", r=20)
+    sc.ang("B", "O", "D", "x", r=20)
+    stem = (f"AB and CD are straight lines that cross at O. ∠OAC = {a}°, ∠OCA = {c}° and ∠ODB = {d}°. "
+            f"Find ∠OBD.")
+    ans = y
+    wr = [W(180 - d - om, "x", ""),
+          W(om, "stopped_at_vertical_angle", "Found ∠BOD (= ∠AOC) and stopped."),
+          W(180 - d, "forgot_a_step", "Forgot to use the angle at O."),
+          W(a + c, "gave_exterior_sum", "Gave a + c, not subtracting d."),
+          W(180 - a - d, "mixed_up_triangles", "Used angles from different triangles.")]
+    wr = [w for w in wr if w[1] != "x"]
+    return mk(butterfly_triangles, stem, ans, wr,
+              [f"In triangle AOC: ∠AOC = 180° − {a}° − {c}° = {om}°",
+               f"∠BOD is vertically opposite ∠AOC, so ∠BOD = {om}°",
+               f"In triangle BOD: ∠OBD = 180° − {om}° − {d}° = {ans}°"], {"a": a, "c": c, "d": d}, sc.svg("Two triangles meeting at O"))
+
+
+@checker(butterfly_triangles)
+def _(p):
+    a, c, d = p["a"], p["c"], p["d"]
+    om = 180 - a - c
+    y = a + c - d
+    sd, sy = math.sin(math.radians(d)), math.sin(math.radians(y))
+    O = (0, 0)
+    B, D = vec(180, sd), vec(om + 180, sy)
+    return F(round(meas(O, B, D)))
+
+
+# ============================================================ TRIANGLES, PARALLELOGRAM, RHOMBUS, TRAPEZIUM
+
+def tri_pts(a, b, base=1.0):
+    """A=(0,0), B=(base,0); angles a at A, b at B."""
+    c = 180 - a - b
+    ac = base * math.sin(math.radians(b)) / math.sin(math.radians(c))
+    return {"A": (0, 0), "B": (base, 0), "C": vec(a, ac)}
+
+
+@template(T, "basic", GT + "02", GT + "01", GT + "03")
+def triangle_third_angle(r):
+    """math-pat-angles-one-step"""
+    right = r.random() < 0.35
+    a = r.randint(25, 100)
+    b = 90 if right else r.randint(25, 100)
+    c = 180 - a - b
+    if c < 20:
+        return None
+    pts = tri_pts(a, b)
+    sc = Scene()
+    for n, p in pts.items():
+        sc.add(n, *p)
+    sc.poly("ABC")
+    for n in "ABC":
+        sc.label(n)
+    sc.ang("A", "B", "C", f"{a}°", r=26)
+    sc.ang("B", "A", "C", None if right else f"{b}°", r=22)
+    sc.ang("C", "A", "B", "x", r=22)
+    if right:
+        stem = f"In triangle ABC, ∠B = 90° and ∠A = {a}°. Find ∠C."
+        wr = [W(90 - a + 0 if False else 180 - a, "forgot_the_right_angle", "Subtracted only ∠A from 180°."),
+              W(90 + a if 90 + a <= 180 else None, "added_given_angles", "Added the two given angles."),
+              W(a, "gave_given_angle", "Gave ∠A.")]
+        steps = ["The angles in a triangle add up to 180°.", f"∠C = 180° − 90° − {a}° = {c}°"]
+    else:
+        stem = f"In triangle ABC, ∠A = {a}° and ∠B = {b}°. Find ∠C."
+        wr = [W(180 - a, "used_one_angle_only", "Subtracted only one angle from 180°."),
+              W(a + b, "added_given_angles", "Added the two given angles."),
+              W(360 - a - b if 360 - a - b <= 180 else None, "used_360", "Used 360° instead of 180°."),
+              W(abs(a - b), "subtracted_given_angles", "Found the difference of the given angles.")]
+        steps = ["The angles in a triangle add up to 180°.", f"∠C = 180° − {a}° − {b}° = {c}°"]
+    wr = [w for w in wr if w[0]]
+    return mk(triangle_third_angle, stem, c, wr, steps, {"a": a, "b": b}, sc.svg("Triangle"))
+
+
+@checker(triangle_third_angle)
+def _(p):
+    q = tri_pts(p["a"], p["b"])
+    return F(round(meas(q["A"], q["C"], q["B"])))
+
+
+@template(T, "basic", GT + "01", GT + "02")
+def isosceles_basic(r):
+    """math-pat-angles-one-step"""
+    beta = r.randint(25, 80)
+    alpha = 180 - 2 * beta
+    mode = r.choice(["apex", "base"])
+    if alpha < 20:
+        return None
+    sc = Scene()
+    sc.add("B", -1, 0); sc.add("C", 1, 0); sc.add("A", 0, math.tan(math.radians(beta)))
+    sc.poly("ABC"); sc.tick("A", "B"); sc.tick("A", "C")
+    for n in "ABC":
+        sc.label(n)
+    if mode == "apex":
+        sc.ang("A", "B", "C", f"{alpha}°", r=26); sc.ang("B", "A", "C", "x", r=24)
+        stem = f"ABC is an isosceles triangle with AB = AC. ∠BAC = {alpha}°. Find ∠ABC."
+        ans = beta
+        wr = [W(180 - alpha, "forgot_to_halve", "Found the sum of the two base angles but did not halve it."),
+              W(alpha, "gave_given_angle", "Gave the apex angle."),
+              W((180 - alpha) // 2 + (alpha // 2 if False else 0) + 0 if False else alpha // 2, "halved_the_apex_angle", "Halved the apex angle."),
+              ]
+        steps = ["AB = AC, so ∠ABC = ∠ACB (base angles of an isosceles triangle).",
+                 f"∠ABC + ∠ACB = 180° − {alpha}° = {180 - alpha}°", f"∠ABC = {180 - alpha}° ÷ 2 = {beta}°"]
+    else:
+        sc.ang("B", "A", "C", f"{beta}°", r=26); sc.ang("A", "B", "C", "x", r=24)
+        stem = f"ABC is an isosceles triangle with AB = AC. ∠ABC = {beta}°. Find ∠BAC."
+        ans = alpha
+        wr = [W(180 - beta, "used_one_base_angle", "Subtracted only one base angle from 180°."),
+              W(beta, "assumed_apex_equals_base", "Assumed ∠BAC = ∠ABC."),
+              W(90 - beta, "used_90", "Subtracted from 90° instead of finding the third angle."),
+              ]
+        steps = ["AB = AC, so ∠ACB = ∠ABC.", f"∠ACB = {beta}°", f"∠BAC = 180° − {beta}° − {beta}° = {alpha}°"]
+    return mk(isosceles_basic, stem, ans, wr, steps, {"beta": beta, "mode": mode}, sc.svg("Isosceles triangle"))
+
+
+@checker(isosceles_basic)
+def _(p):
+    A, B, C = (0, math.tan(math.radians(p["beta"]))), (-1, 0), (1, 0)
+    return F(round(meas(B, A, C) if p["mode"] == "base" else meas(A, B, C)))
+
+
+def para_pts(a, w=1.5, d=1.0):
+    """Parallelogram ABCD with ∠DAB = a: A origin, B right, D at angle a."""
+    A, B = (0, 0), (w, 0)
+    D = vec(a, d)
+    C = (D[0] + w, D[1])
+    return {"A": A, "B": B, "C": C, "D": D}
+
+
+@template(T, "basic", GT + "04", GT + "05")
+def parallelogram_basic(r):
+    """math-pat-angles-parallel-quadrilaterals"""
+    a = r.randint(35, 145)
+    if a == 90:
+        return None
+    mode = r.choice(["B", "D", "C"])
+    pts = para_pts(a, r.choice([1.5, 1.8]), 1.0)
+    sc = Scene()
+    for n, p in pts.items():
+        sc.add(n, *p)
+    sc.poly("ABCD")
+    sc.arrow("A", "B"); sc.arrow("D", "C"); sc.arrow("A", "D", 2); sc.arrow("B", "C", 2)
+    cen = ((pts["A"][0] + pts["C"][0]) / 2, (pts["A"][1] + pts["C"][1]) / 2)
+    for n in "ABCD":
+        sc.label(n, away=cen)
+    sc.ang("A", "B", "D", f"{a}°", r=24)
+    tgt = {"B": ("B", "A", "C"), "D": ("D", "A", "C"), "C": ("C", "B", "D")}[mode]
+    sc.ang(tgt[0], tgt[1], tgt[2], "x", r=24)
+    ans = a if mode == "C" else 180 - a
+    stem = f"ABCD is a parallelogram. ∠DAB = {a}°. Find ∠{'ABC' if mode == 'B' else 'ADC' if mode == 'D' else 'BCD'}."
+    if mode == "C":
+        wr = [W(180 - a, "used_adjacent_angle", "Gave the co-interior angle instead of the equal opposite angle."),
+              W(360 - 2 * a if 0 < 360 - 2 * a <= 180 else None, "x", ""),
+              W(90, "x", ""), W(a // 2 if a % 2 == 0 else None, "halved_the_angle", "Halved the angle.")]
+        steps = ["Opposite angles of a parallelogram are equal.", f"∠BCD = ∠DAB = {a}°"]
+    else:
+        wr = [W(a, "assumed_opposite_equal", "Assumed this angle equals ∠DAB; it is the adjacent angle."),
+              W(360 - a if 360 - a <= 180 else None, "used_360", "Subtracted from 360°."),
+              W(90 - a if a < 90 else None, "used_90", "Subtracted from 90°.")]
+        steps = ["Adjacent angles of a parallelogram (between parallel sides) add up to 180°.",
+                 f"∠{'ABC' if mode == 'B' else 'ADC'} = 180° − {a}° = {ans}°"]
+    wr = [w for w in wr if w[0] and w[1] != "x"]
+    return mk(parallelogram_basic, stem, ans, wr, steps, {"a": a, "mode": mode}, sc.svg("Parallelogram"))
+
+
+@checker(parallelogram_basic)
+def _(p):
+    q = para_pts(p["a"])
+    return F(round({"B": meas(q["A"], q["B"], q["C"]), "D": meas(q["A"], q["D"], q["C"]), "C": meas(q["B"], q["C"], q["D"])}[p["mode"]]))
+
+
+@template(T, "basic", GT + "01")
+def isosceles_count(r):
+    """Classify triangles from their angles"""
+    tris, iso = [], 0
+    for _ in range(4):
+        if r.random() < 0.5:
+            x = r.choice([x for x in range(30, 80) if x != 60])
+            t = [x, x, 180 - 2 * x]
+            iso += 1
+        else:
+            while True:
+                a, b = r.randint(25, 100), r.randint(25, 100)
+                c = 180 - a - b
+                if c >= 20 and len({a, b, c}) == 3:
+                    t = [a, b, c]
+                    break
+        r.shuffle(t)
+        tris.append(t)
+    if not 1 <= iso <= 3:
+        return None
+    lines = "; ".join(f"Triangle {'PQRS'[i]}: {t[0]}°, {t[1]}°, {t[2]}°" for i, t in enumerate(tris))
+    stem = f"The angles of four triangles are: {lines}. How many of the triangles are isosceles?"
+    wr = [W(4 - iso, "counted_the_wrong_kind", "Counted the scalene triangles instead."),
+          W(iso + 1, "miscount", "Counted one extra triangle."),
+          W(iso - 1, "miscount", "Missed one isosceles triangle."), W(iso + 2, "miscount", "Counted two extra triangles."),
+          W(iso + 3, "miscount", "Miscounted.")]
+    return mk(isosceles_count, stem, iso, wr,
+              ["An isosceles triangle has two equal angles (and two equal sides).",
+               "Triangles with a pair of equal angles: " + ", ".join("PQRS"[i] for i, t in enumerate(tris) if len(set(t)) < 3),
+               f"Number of isosceles triangles = {iso}"], {"tris": tris}, None, show=lambda v: str(int(v)), maxv=4)
+
+
+@checker(isosceles_count)
+def _(p):
+    return F(sum(1 for t in p["tris"] if sorted(t)[0] == sorted(t)[1] or sorted(t)[1] == sorted(t)[2]))
+
+
+# ---------------- intermediate
+
+@template(T, "intermediate", GT + "03")
+def exterior_angle(r):
+    """math-pat-angles-one-step"""
+    a, b = r.randint(25, 85), r.randint(25, 85)
+    c = 180 - a - b
+    if c < 25:
+        return None
+    e = a + b
+    mode = r.choice(["find_e", "find_b"])
+    pts = tri_pts(b, c)  # build with B=(0,0)? reuse: A'=B, B'=C
+    # use B=(0,0), C=(1,0), A above with angle b at B and c at C
+    Bp, Cp = (0, 0), (1, 0)
+    Ap = vec(b, math.sin(math.radians(c)) / math.sin(math.radians(a)))
+    sc = Scene()
+    sc.add("B", *Bp); sc.add("C", *Cp); sc.add("A", *Ap); sc.add("D", 1.6, 0)
+    sc.poly("ABC"); sc.seg("C", "D")
+    sc.label("A", away=(0.5, 0)); sc.label("B", away=(0.5, 0.3)); sc.label("C", away=(0.5, 0.3)); sc.label("D", away="C")
+    if mode == "find_e":
+        sc.ang("A", "B", "C", f"{a}°", r=22) if False else None
+        sc.ang("A", "B", "C", f"{a}°", r=22); sc.ang("B", "A", "C", f"{b}°", r=22)
+        sc.ang("C", "A", "D", "x", r=26)
+        stem = f"In the figure, BCD is a straight line. ∠BAC = {a}° and ∠ABC = {b}°. Find ∠ACD."
+        ans = e
+        wr = [W(c, "gave_interior_angle", "Gave ∠ACB instead of the exterior angle ∠ACD."),
+              W(abs(a - b), "subtracted_given_angles", "Subtracted the two given angles."),
+              W(180 - a, "used_one_angle_only", "Subtracted only one angle from 180°."),
+              W(360 - a - b if 360 - a - b <= 180 else None, "used_360", "Used 360°.")]
+        steps = [f"∠ACB = 180° − {a}° − {b}° = {c}°", f"∠ACD = 180° − {c}° = {e}°",
+                 "(Shortcut: exterior angle = sum of the two opposite interior angles.)"]
+    else:
+        sc.ang("B", "A", "C", None)  # placeholder removed below
+        sc.cmds.pop()
+        sc.ang("B", "A", "C", "x", r=22); sc.ang("A", "B", "C", f"{a}°", r=22)
+        sc.ang("C", "A", "D", f"{e}°", r=26)
+        stem = f"In the figure, BCD is a straight line. ∠BAC = {a}° and ∠ACD = {e}°. Find ∠ABC."
+        ans = b
+        wr = [W(180 - e, "gave_interior_angle", "Gave ∠ACB instead of ∠ABC."),
+              W(e + a, "added_given_angles", "Added the two given angles."),
+              W(180 - a - e if 0 < 180 - a - e else None, "wrong_triangle_sum", "Subtracted both angles from 180°."),
+              W(a, "gave_given_angle", "Gave ∠BAC.")]
+        steps = [f"∠ACB = 180° − {e}° = {c}° (angles on a straight line)", f"∠ABC = 180° − {a}° − {c}° = {b}°",
+                 "(Shortcut: exterior angle ∠ACD = ∠BAC + ∠ABC.)"]
+    wr = [w for w in wr if w[0]]
+    return mk(exterior_angle, stem, ans, wr, steps, {"a": a, "b": b, "mode": mode}, sc.svg("Triangle with an extended side"))
+
+
+@checker(exterior_angle)
+def _(p):
+    a, b = p["a"], p["b"]
+    c = 180 - a - b
+    B, C = (0, 0), (1, 0)
+    A = vec(b, math.sin(math.radians(c)) / math.sin(math.radians(a)))
+    D = (1.6, 0)
+    return F(round(meas(A, C, D) if p["mode"] == "find_e" else meas(A, B, C)))
+
+
+@template(T, "intermediate", GT + "03", GT + "01")
+def isosceles_exterior(r):
+    """math-pat-angles-one-step"""
+    beta = r.randint(30, 75)
+    alpha = 180 - 2 * beta
+    e = 180 - beta
+    mode = r.choice(["find_apex", "find_ext"])
+    sc = Scene()
+    sc.add("B", -1, 0); sc.add("C", 1, 0); sc.add("A", 0, math.tan(math.radians(beta))); sc.add("D", 1.8, 0)
+    sc.poly("ABC"); sc.seg("C", "D"); sc.tick("A", "B"); sc.tick("A", "C")
+    sc.label("A", away=(0, 0)); sc.label("B", away=(0, 0.3)); sc.label("C", away=(0, 0.3)); sc.label("D", away="C")
+    if mode == "find_apex":
+        sc.ang("C", "A", "D", f"{e}°", r=22); sc.ang("A", "B", "C", "x", r=24)
+        stem = f"In the figure, BCD is a straight line and AB = AC. ∠ACD = {e}°. Find ∠BAC."
+        ans = alpha
+        wr = [W(beta, "stopped_at_base_angle", "Found the base angle ∠ACB and stopped."),
+              W(180 - beta, "gave_given_angle", "Gave the exterior angle."),
+              W(2 * beta - 0 if False else 180 - beta - beta // 2 if False else 90 - beta, "used_90", "Used 90° instead of 180°."),
+              W(e - beta if e - beta > 0 else None, "subtracted_instead_of_triangle_sum", "Subtracted the base angle from the exterior angle.")]
+        steps = [f"∠ACB = 180° − {e}° = {beta}° (angles on a straight line)", f"∠ABC = ∠ACB = {beta}° (AB = AC)",
+                 f"∠BAC = 180° − {beta}° − {beta}° = {alpha}°"]
+    else:
+        sc.ang("A", "B", "C", f"{alpha}°", r=26); sc.ang("C", "A", "D", "x", r=24)
+        stem = f"In the figure, BCD is a straight line and AB = AC. ∠BAC = {alpha}°. Find ∠ACD."
+        ans = e
+        wr = [W(beta, "gave_base_angle", "Gave the base angle ∠ACB instead of the exterior angle."),
+              W(180 - alpha, "used_one_angle_only", "Subtracted only the apex angle from 180°."),
+              W(alpha + beta if alpha + beta <= 180 else None, "added_wrong_angles", "Added the apex and a base angle."),
+              W(alpha, "gave_given_angle", "Gave the apex angle.")]
+        steps = [f"∠ABC = ∠ACB = (180° − {alpha}°) ÷ 2 = {beta}°", f"∠ACD = 180° − {beta}° = {e}°"]
+    wr = [w for w in wr if w[0]]
+    return mk(isosceles_exterior, stem, ans, wr, steps, {"beta": beta, "mode": mode}, sc.svg("Isosceles triangle with an extended side"))
+
+
+@checker(isosceles_exterior)
+def _(p):
+    A, B, C, D = (0, math.tan(math.radians(p["beta"]))), (-1, 0), (1, 0), (1.8, 0)
+    return F(round(meas(B, A, C) if p["mode"] == "find_apex" else meas(A, C, D)))
+
+
+def rhombus_pts(b, L=1.0):
+    B, C = (0, 0), (L, 0)
+    A = vec(b, L)
+    D = (A[0] + L, A[1])
+    return {"A": A, "B": B, "C": C, "D": D}
+
+
+@template(T, "intermediate", GT + "05", GT + "04")
+def rhombus_diagonal(r):
+    """math-pat-angles-parallel-quadrilaterals"""
+    b = r.randrange(40, 141, 2)
+    if b == 90:
+        return None
+    mode = r.choice(["CAD", "ABD", "BCD"])
+    q = rhombus_pts(180 - b if mode == "ABD" else b)
+    sc = Scene()
+    for n, p in q.items():
+        sc.add(n, *p)
+    sc.poly("ABCD")
+    cen = ((q["A"][0] + q["C"][0]) / 2, (q["A"][1] + q["C"][1]) / 2)
+    for n in "ABCD":
+        sc.label(n, away=cen)
+    for s_ in ("AB", "BC", "CD", "DA"):
+        sc.tick(s_[0], s_[1])
+    if mode != "ABD":
+        sc.ang("B", "A", "C", f"{b}°", r=24)
+    if mode == "CAD":
+        sc.seg("A", "C"); sc.ang("A", "C", "D", "x", r=26)
+        stem = f"ABCD is a rhombus. ∠ABC = {b}°. Find ∠CAD."
+        ans = (180 - b) // 2
+        wr = [W(180 - b, "stopped_at_vertex_angle", "Found ∠BAD and stopped."),
+              W(b // 2, "halved_given_angle", "Halved the given angle ∠ABC."),
+              W(90 - b // 2 + 0 if False else b, "gave_given_angle", "Gave the given angle."),
+              W(180 - ans, "supplement_of_answer", "Gave the supplement of the answer.")]
+        steps = [f"∠BAD = 180° − {b}° = {180 - b}° (adjacent angles of a rhombus)",
+                 "The diagonal AC bisects ∠BAD (AB = AD).", f"∠CAD = {180 - b}° ÷ 2 = {ans}°"]
+    elif mode == "ABD":
+        sc.seg("B", "D")
+        stem = f"ABCD is a rhombus. ∠BCD = {b}°. Find ∠ABD."
+        ans = (180 - b) // 2
+        sc.ang("C", "B", "D", f"{b}°", r=24); sc.ang("B", "A", "D", "x", r=24)
+        wr = [W(180 - b, "stopped_at_vertex_angle", "Found ∠ABC and stopped."),
+              W(b // 2, "halved_given_angle", "Halved the given angle ∠BCD."),
+              W(b, "gave_given_angle", "Gave the given angle."),
+              W(180 - ans, "supplement_of_answer", "Gave the supplement of the answer.")]
+        steps = [f"∠ABC = 180° − {b}° = {180 - b}° (adjacent angles of a rhombus)",
+                 "The diagonal BD bisects ∠ABC (BA = BC).", f"∠ABD = {180 - b}° ÷ 2 = {ans}°"]
+    else:
+        stem = f"ABCD is a rhombus. ∠ABC = {b}°. Find ∠BCD."
+        sc.ang("C", "B", "D", "x", r=24)
+        ans = 180 - b
+        wr = [W(b, "assumed_opposite_equal", "Gave ∠ABC; the adjacent angle is the supplement."),
+              W(360 - b if 360 - b <= 180 else None, "used_360", "Used 360°."),
+              W(b // 2, "halved_given_angle", "Halved the given angle.")]
+        steps = ["Adjacent angles of a rhombus add up to 180° (BA ∥ CD).", f"∠BCD = 180° − {b}° = {ans}°"]
+    wr = [w for w in wr if w[0]]
+    return mk(rhombus_diagonal, stem, ans, wr, steps, {"b": b, "mode": mode}, sc.svg("Rhombus"))
+
+
+@checker(rhombus_diagonal)
+def _(p):
+    q = rhombus_pts(180 - p["b"] if p["mode"] == "ABD" else p["b"])
+    return F(round({"CAD": meas(q["C"], q["A"], q["D"]), "ABD": meas(q["A"], q["B"], q["D"]),
+                    "BCD": meas(q["B"], q["C"], q["D"])}[p["mode"]]))
+
+
+def trap_pts(a, b, H=1.0, top=1.1):
+    """Trapezium ABCD, AB ∥ DC, ∠DAB = a, ∠ABC = b."""
+    ca, cb = 1 / math.tan(math.radians(a)), 1 / math.tan(math.radians(b))
+    w = top + H * (ca + cb)
+    if w < 1.7:
+        top += 1.7 - w
+        w = 1.7
+    A, B = (0, 0), (w, 0)
+    D = (H * ca, H)
+    C = (w - H * cb, H)
+    return {"A": A, "B": B, "C": C, "D": D}
+
+
+@template(T, "intermediate", GT + "05", GT + "04")
+def trapezium_angles(r):
+    """math-pat-angles-parallel-quadrilaterals"""
+    a, b = r.randint(50, 130), r.randint(50, 130)
+    if a == 90 and b == 90:
+        return None
+    mode = r.choice(["D", "C", "D", "C"])
+    q = trap_pts(a, b)
+    sc = Scene()
+    for n, p in q.items():
+        sc.add(n, *p)
+    sc.poly("ABCD"); sc.arrow("A", "B"); sc.arrow("D", "C")
+    cen = (sum(p[0] for p in q.values()) / 4, sum(p[1] for p in q.values()) / 4)
+    for n in "ABCD":
+        sc.label(n, away=cen)
+    sc.ang("A", "B", "D", f"{a}°", r=24); sc.ang("B", "A", "C", f"{b}°", r=24)
+    if mode == "D":
+        sc.ang("D", "A", "C", "x", r=24); ans = 180 - a; gv = a
+        stem = f"ABCD is a trapezium with AB parallel to DC. ∠DAB = {a}° and ∠ABC = {b}°. Find ∠ADC."
+        wr = [W(a, "assumed_equal", "Assumed ∠ADC = ∠DAB."), W(b, "gave_other_given_angle", "Gave the other given angle."),
+              W(360 - a - b if 0 < 360 - a - b <= 180 else None, "used_angle_sum_of_quadrilateral", "Used 360° − a − b."),
+              W(180 - b if 180 - b != ans else None, "used_wrong_vertex", "Used the other base angle.")]
+    else:
+        sc.ang("C", "B", "D", "x", r=24); ans = 180 - b
+        stem = f"ABCD is a trapezium with AB parallel to DC. ∠DAB = {a}° and ∠ABC = {b}°. Find ∠BCD."
+        wr = [W(b, "assumed_equal", "Assumed ∠BCD = ∠ABC."), W(a, "gave_other_given_angle", "Gave the other given angle."),
+              W(360 - a - b if 0 < 360 - a - b <= 180 else None, "used_angle_sum_of_quadrilateral", "Used 360° − a − b."),
+              W(180 - a if 180 - a != ans else None, "used_wrong_vertex", "Used the other base angle.")]
+    wr = [w for w in wr if w[0]]
+    nm = "∠ADC" if mode == "D" else "∠BCD"
+    return mk(trapezium_angles, stem, ans, wr,
+              ["AB ∥ DC, so the angles between the parallel sides on the same leg add up to 180°.",
+               f"{nm} = 180° − {a if mode == 'D' else b}° = {ans}°"], {"a": a, "b": b, "mode": mode}, sc.svg("Trapezium"))
+
+
+@checker(trapezium_angles)
+def _(p):
+    q = trap_pts(p["a"], p["b"])
+    return F(round(meas(q["A"], q["D"], q["C"]) if p["mode"] == "D" else meas(q["B"], q["C"], q["D"])))
+
+
+STATEMENTS = [
+    ("A parallelogram has two pairs of parallel sides.", True),
+    ("The opposite angles of a parallelogram are equal.", True),
+    ("A rhombus has four equal sides.", True),
+    ("A trapezium has exactly one pair of parallel sides.", True),
+    ("All the angles of a rhombus are right angles.", False),
+    ("The adjacent angles of a parallelogram are equal.", False),
+    ("A parallelogram has four equal sides.", False),
+    ("The opposite angles of a rhombus are equal.", True),
+    ("A trapezium has two pairs of parallel sides.", False),
+    ("Angles between the parallel sides of a trapezium, on the same leg, add up to 180°.", True),
+    ("Every rhombus is a parallelogram.", True),
+    ("The adjacent angles of a rhombus add up to 180°.", True),
+    ("An equilateral triangle has three equal angles of 60° each.", True),
+    ("A right-angled triangle can have two right angles.", False),
+    ("The angles of any triangle add up to 360°.", False),
+    ("An isosceles triangle has two equal angles.", True),
+]
+
+
+@template(T, "intermediate", GT + "04", GT + "01")
+def true_statements(r):
+    """math-pat-angles-parallel-quadrilaterals"""
+    sel = r.sample(STATEMENTS, 4)
+    cnt = sum(t for _, t in sel)
+    if not 1 <= cnt <= 3:
+        return None
+    txt = " ".join(f"({'abcd'[i]}) {s}" for i, (s, _) in enumerate(sel))
+    stem = f"Look at the statements: {txt} How many of the statements are true?"
+    wr = [W(4 - cnt, "counted_the_false_ones", "Counted the false statements."),
+          W(cnt + 1, "miscount", "Counted one extra."), W(cnt - 1, "miscount", "Missed one true statement."),
+          W(cnt + 2, "miscount", "Counted two extra."), W(cnt + 3, "miscount", "Miscounted.")]
+    steps = [f"({'abcd'[i]}) is {'true' if t else 'false'}." for i, (s, t) in enumerate(sel)] + [f"{cnt} statement(s) are true."]
+    return mk(true_statements, stem, cnt, wr, steps, {"sel": [s for s, _ in sel]}, None, show=lambda v: str(int(v)), maxv=4)
+
+
+@checker(true_statements)
+def _(p):
+    d = dict(STATEMENTS)
+    return F(sum(1 for s in p["sel"] if d[s]))
+
+
+# ---------------- competent (composite figures)
+
+@template(T, "competent", GT + "06", GT + "05")
+def rhombus_equilateral(r):
+    """math-pat-angles-chained-shapes math-pat-angles-parallel-quadrilaterals"""
+    b = r.randrange(36, 97, 2)
+    if b == 90:
+        return None
+    q = rhombus_pts(b)
+    A, C, D = q["A"], q["C"], q["D"]
+    M = ((C[0] + D[0]) / 2, (C[1] + D[1]) / 2)
+    n = (-(D[1] - C[1]), D[0] - C[0])
+    nl = math.hypot(*n)
+    n = (n[0] / nl, n[1] / nl)
+    if n[0] * (A[0] - M[0]) + n[1] * (A[1] - M[1]) > 0:
+        n = (-n[0], -n[1])
+    h = math.sqrt(3) / 2
+    E = (M[0] + n[0] * h, M[1] + n[1] * h)
+    sc = Scene()
+    for k, p in q.items():
+        sc.add(k, *p)
+    sc.add("E", *E)
+    sc.poly("ABCD"); sc.poly(["C", "D", "E"]); sc.seg("A", "E")
+    cen = ((A[0] + C[0]) / 2, (A[1] + C[1]) / 2)
+    for k in "ABCD":
+        sc.label(k, away=cen)
+    sc.label("E", away=M)
+    for s_ in ("AB", "BC", "CD", "DA", "DE", "CE"):
+        sc.tick(s_[0], s_[1])
+    sc.ang("B", "A", "C", f"{b}°", r=24)
+    sc.ang("A", "D", "E", None, r=0.1) if False else None
+    sc.ang("A", "D", "E", "?", r=18) if False else None
+    sc.ang("A", "E", "D", "x", r=26) if False else None
+    sc.ang("A", "D", "E", "x", r=26)
+    ans = (120 - b) // 2
+    stem = (f"ABCD is a rhombus with ∠ABC = {b}°. CDE is an equilateral triangle and A and E are on opposite sides of CD. "
+            f"Find ∠DAE.")
+    ade = b + 60
+    wr = [W(ade, "stopped_at_apex_angle", "Found ∠ADE and stopped."),
+          W(180 - ade, "forgot_to_halve", "Found the sum of the base angles but did not halve it."),
+          W((180 - b) // 2, "used_rhombus_bisector", "Halved the supplement of ∠ABC (this is ∠CAD, not ∠DAE)."),
+          W(b - 60 if b - 60 > 0 else None, "subtracted_60", "Subtracted 60° instead of adding it.")]
+    wr = [w for w in wr if w[0]]
+    return mk(rhombus_equilateral, stem, ans, wr,
+              [f"∠ADC = ∠ABC = {b}° (opposite angles of a rhombus)", "∠CDE = 60° (equilateral triangle)",
+               f"∠ADE = {b}° + 60° = {ade}° (C is between A and E on the angle at D)",
+               "DA = DC = DE, so triangle ADE is isosceles.", f"∠DAE = (180° − {ade}°) ÷ 2 = {ans}°"],
+              {"b": b}, sc.svg("Rhombus and equilateral triangle"))
+
+
+@checker(rhombus_equilateral)
+def _(p):
+    b = p["b"]
+    q = rhombus_pts(b)
+    A, C, D = q["A"], q["C"], q["D"]
+    # E: rotate C about D by -60 deg or +60 deg, the one lying on the far side from A
+    best = None
+    for sgn in (1, -1):
+        v = (C[0] - D[0], C[1] - D[1])
+        t = math.radians(60 * sgn)
+        E = (D[0] + v[0] * math.cos(t) - v[1] * math.sin(t), D[1] + v[0] * math.sin(t) + v[1] * math.cos(t))
+        side = (C[0] - D[0]) * (E[1] - D[1]) - (C[1] - D[1]) * (E[0] - D[0])
+        sideA = (C[0] - D[0]) * (A[1] - D[1]) - (C[1] - D[1]) * (A[0] - D[0])
+        if side * sideA < 0:
+            best = E
+    return F(round(meas(D, A, best)))
+
+
+@template(T, "competent", GT + "06", GT + "05")
+def parallelogram_isosceles(r):
+    """math-pat-angles-chained-shapes math-pat-angles-parallel-quadrilaterals"""
+    a = r.randrange(40, 121, 2)
+    if a == 90:
+        return None
+    w, d = 2.2, 1.0
+    q = para_pts(a, w, d)
+    E = (q["D"][0] + d, q["D"][1])
+    sc = Scene()
+    for k, p in q.items():
+        sc.add(k, *p)
+    sc.add("E", *E)
+    sc.poly("ABCD"); sc.seg("A", "E")
+    cen = ((q["A"][0] + q["C"][0]) / 2, (q["A"][1] + q["C"][1]) / 2)
+    for k in "ABCD":
+        sc.label(k, away=cen)
+    sc.label("E", away=(E[0], E[1] - 1))
+    sc.arrow("A", "B"); sc.arrow("D", "C")
+    sc.tick("A", "D"); sc.tick("D", "E")
+    sc.ang("A", "B", "D", f"{a}°", r=24)
+    sc.ang("E", "A", "C", "x", r=22)
+    half = a // 2
+    ans = 180 - half
+    stem = (f"ABCD is a parallelogram with ∠DAB = {a}°. E is a point on DC such that DE = DA. Find ∠AEC.")
+    wr = [W(half, "stopped_at_base_angle", "Found ∠AED and stopped."),
+          W(a, "assumed_equal", "Assumed ∠AEC = ∠DAB."),
+          W(180 - a, "gave_adjacent_angle", "Gave ∠ADC."),
+          W(90 + half, "x", "")]
+    wr = [w for w in wr if w[1] != "x"]
+    return mk(parallelogram_isosceles, stem, ans, wr,
+              [f"∠ADC = 180° − {a}° = {180 - a}° (adjacent angles of a parallelogram)",
+               "DA = DE, so triangle ADE is isosceles with apex D.", f"∠AED = (180° − {180 - a}°) ÷ 2 = {half}°",
+               f"∠AEC = 180° − {half}° = {ans}° (angles on a straight line DEC)"], {"a": a}, sc.svg("Parallelogram and isosceles triangle"))
+
+
+@checker(parallelogram_isosceles)
+def _(p):
+    a = p["a"]
+    q = para_pts(a, 2.2, 1.0)
+    E = (q["D"][0] + 1.0, q["D"][1])
+    return F(round(meas(q["A"], E, q["C"])))
+
+
+@template(T, "competent", GT + "06", GT + "05")
+def trapezium_isosceles(r):
+    """math-pat-angles-chained-shapes math-pat-angles-parallel-quadrilaterals"""
+    a = r.randint(60, 120)
+    b = r.randrange(50, 101, 2)
+    ans = 180 - a - b // 2
+    if ans < 20:
+        return None
+    pts = trap_chain(a, b)
+    sc = Scene()
+    for k, p in pts.items():
+        sc.add(k, *p)
+    sc.poly("ABCD"); sc.seg("B", "D"); sc.arrow("A", "B"); sc.arrow("D", "C")
+    cen = (sum(p[0] for p in pts.values()) / 4, sum(p[1] for p in pts.values()) / 4)
+    for k in "ABCD":
+        sc.label(k, away=cen)
+    sc.tick("B", "C"); sc.tick("C", "D")
+    sc.ang("A", "D", "B", f"{a}°", r=24)
+    sc.ang("B", "A", "C", f"{b}°", r=26)
+    sc.ang("D", "A", "B", "x", r=24)
+    stem = (f"ABCD is a trapezium with AB parallel to DC and BC = CD. ∠DAB = {a}° and ∠ABC = {b}°. Find ∠ADB.")
+    wr = [W(180 - a - b, "used_whole_angle_b", "Used ∠ABC instead of ∠ABD."),
+          W(b // 2, "stopped_at_half_angle", "Found ∠ABD and stopped."),
+          W(180 - a, "used_one_angle_only", "Subtracted only ∠DAB from 180°."),
+          W(180 - b, "gave_adjacent_angle", "Found ∠BCD and gave it.")]
+    return mk(trapezium_isosceles, stem, ans, wr,
+              [f"∠BCD = 180° − {b}° = {180 - b}° (AB ∥ DC)", "BC = CD, so ∠CBD = ∠CDB.",
+               f"∠CBD = (180° − {180 - b}°) ÷ 2 = {b // 2}°", f"∠ABD = {b}° − {b // 2}° = {b // 2}°",
+               f"∠ADB = 180° − {a}° − {b // 2}° = {ans}°"], {"a": a, "b": b}, sc.svg("Trapezium with an isosceles triangle"))
+
+
+def trap_chain(a, b):
+    """Trapezium with AB ∥ DC, BC = CD, ∠ABC = b, ∠DAB = a. B at the origin."""
+    B = (0, 0)
+    C = vec(180 - b, 1.0)
+    D = (C[0] - 1.0, C[1])
+    A = (D[0] - D[1] / math.tan(math.radians(a)), 0)
+    return {"A": A, "B": B, "C": C, "D": D}
+
+
+@checker(trapezium_isosceles)
+def _(p):
+    q = trap_chain(p["a"], p["b"])
+    return F(round(meas(q["A"], q["D"], q["B"])))
+
+
+@template(T, "competent", GT + "06", GT + "03")
+def collinear_isosceles(r):
+    """math-pat-angles-chained-shapes"""
+    p = r.randrange(30, 77, 2)
+    mode = r.choice(["CDA", "BAD"])
+    c = 2.0
+    A = (c / 2, (c / 2) * math.tan(math.radians(p)))
+    ca = math.hypot(c / 2, A[1])
+    pts = {"B": (0, 0), "C": (c, 0), "A": A, "D": (c + ca, 0)}
+    sc = Scene()
+    for k, v in pts.items():
+        sc.add(k, *v)
+    sc.poly("ABC"); sc.seg("C", "D"); sc.seg("A", "D")
+    sc.label("A", away=(c / 2, 0)); sc.label("B", away=(c / 2, 0.4)); sc.label("C", away=(c / 2, 0.4)); sc.label("D", away="C")
+    sc.tick("A", "B"); sc.tick("A", "C"); sc.tick("C", "A") if False else None
+    sc.tick("C", "D", 2) if False else None
+    sc.ang("B", "A", "C", f"{p}°", r=26)
+    if mode == "CDA":
+        sc.ang("D", "C", "A", "x", r=26)
+        stem = f"B, C and D lie on a straight line. AB = AC = CD and ∠ABC = {p}°. Find ∠ADC."
+        ans = p // 2
+        wr = [W(p, "gave_given_angle", "Assumed ∠ADC = ∠ABC."),
+              W(180 - p, "gave_exterior_angle", "Gave ∠ACD."),
+              W(180 - 2 * p, "gave_apex_angle", "Gave ∠BAC."),
+              W(90 - p // 2 if 90 - p // 2 != ans else None, "x", "")]
+    else:
+        sc.ang("A", "B", "D", "x", r=30)
+        stem = f"B, C and D lie on a straight line. AB = AC = CD and ∠ABC = {p}°. Find ∠BAD."
+        ans = 180 - 3 * p // 2
+        wr = [W(180 - 2 * p, "stopped_at_apex_angle", "Found ∠BAC and stopped."),
+              W(p // 2, "stopped_at_base_angle", "Found ∠CAD and stopped."),
+              W(180 - p - p // 2 + 0 if False else 180 - p, "used_one_angle_only", "Subtracted only ∠ABC from 180°."),
+              W(180 - 2 * p + p, "x", "")]
+    wr = [w for w in wr if w[1] != "x" and w[0]]
+    steps = [f"AB = AC, so ∠ACB = ∠ABC = {p}°.", f"∠ACD = 180° − {p}° = {180 - p}° (angles on a straight line)",
+             f"CA = CD, so ∠CAD = ∠CDA = (180° − {180 - p}°) ÷ 2 = {p // 2}°"]
+    if mode == "BAD":
+        steps += [f"∠BAC = 180° − {p}° − {p}° = {180 - 2 * p}°", f"∠BAD = {180 - 2 * p}° + {p // 2}° = {ans}°"]
+    return mk(collinear_isosceles, stem, ans, wr, steps, {"p": p, "mode": mode}, sc.svg("Two isosceles triangles on a line"))
+
+
+@checker(collinear_isosceles)
+def _(q):
+    p = q["p"]
+    c = 2.0
+    A = (c / 2, (c / 2) * math.tan(math.radians(p)))
+    ca = math.hypot(c / 2, A[1])
+    B, C, D = (0, 0), (c, 0), (c + ca, 0)
+    return F(round(meas(C, D, A) if False else (meas(A, D, C) if q["mode"] == "CDA" else meas(B, A, D))))
+
+
+# ============================================================ PERPENDICULAR AND PARALLEL LINES
+
+def stair_poly(xs, ys):
+    """Rectilinear 'staircase' polygon with len(xs) steps (all sides on distinct lines)."""
+    k = len(xs)
+    pts = [(0, 0), (xs[-1], 0)]
+    for i in range(k):
+        pts.append((xs[k - 1 - i], ys[i]))
+        pts.append((xs[k - 2 - i] if i < k - 1 else 0, ys[i]))
+    return pts
+
+
+def rot(p, deg):
+    c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    return (p[0] * c - p[1] * s, p[0] * s + p[1] * c)
+
+
+def stair_params(r, kmin=1, kmax=3):
+    k = r.randint(kmin, kmax)
+    xs = sorted(r.sample(range(1, 9), k))
+    ys = sorted(r.sample(range(1, 9), k))
+    return xs, ys, r.choice([0, 0, 15, -20, 30, 70])
+
+
+def poly_scene(pts, rotation, marks=True, w=330, h=230):
+    P = [rot(p, rotation) for p in pts]
+    sc = Scene(w=w, h=h, pad=32)
+    names = "ABCDEFGH"[:len(P)]
+    for n, p in zip(names, P):
+        sc.add(n, *p)
+    sc.poly(list(names))
+    cen = (sum(p[0] for p in P) / len(P), sum(p[1] for p in P) / len(P))
+    for n in names:
+        sc.label(n, away=cen, off=14)
+    if marks:
+        m = len(P)
+        for i, n in enumerate(names):
+            sc.right(n, names[(i - 1) % m], names[(i + 1) % m])
+    return sc, names
+
+
+def sides_of(pts):
+    n = len(pts)
+    return [(pts[i], pts[(i + 1) % n]) for i in range(n)]
+
+
+def vecs_rel(a, b):
+    """Return (dot, cross) of two segments, exact for integer coordinates."""
+    va, vb = (a[1][0] - a[0][0], a[1][1] - a[0][1]), (b[1][0] - b[0][0], b[1][1] - b[0][1])
+    return va[0] * vb[0] + va[1] * vb[1], va[0] * vb[1] - va[1] * vb[0]
+
+
+@template(T, "basic", GP + "01")
+def pp_count_sides(r):
+    """Sides parallel / perpendicular to a given side"""
+    xs, ys, rotn = stair_params(r, 1, 3)
+    pts = stair_poly(xs, ys)
+    n = len(pts)
+    i = r.randrange(n)
+    kind = r.choice(["parallel", "perpendicular"])
+    names = "ABCDEFGH"[:n]
+    sd = sides_of(pts)
+    cnt = sum(1 for j in range(n) if j != i and (vecs_rel(sd[i], sd[j])[1] == 0 if kind == "parallel" else vecs_rel(sd[i], sd[j])[0] == 0))
+    if cnt == 0:
+        return None
+    sc, _ = poly_scene(pts, rotn)
+    nm = r.choice(NAMES)
+    sidename = names[i] + names[(i + 1) % n]
+    stem = (f"{nm} draws the figure shown, which has {n} sides and every angle is a right angle (or a reflex 270°). "
+            f"How many sides of the figure are {kind} to side {sidename}?")
+    others = n - 1
+    wr = [W(cnt + 1, "counted_the_side_itself", "Counted side " + sidename + " itself."),
+          W(n // 2 if n // 2 != cnt else None, "halved_the_sides", "Guessed half of the sides."),
+          W((n - 1 - cnt) if (n - 1 - cnt) not in (0, cnt) else None, "counted_the_other_kind", "Counted the sides of the other kind."),
+          W(cnt - 1 if cnt > 1 else None, "missed_one_side", "Missed one side."),
+          W(cnt + 2, "miscount", "Counted extra sides.")]
+    return mk(pp_count_sides, stem, cnt, wr,
+              [f"Sides {kind} to {sidename}: " + ", ".join(names[j] + names[(j + 1) % n] for j in range(n)
+                                                           if j != i and (vecs_rel(sd[i], sd[j])[1] == 0 if kind == "parallel" else vecs_rel(sd[i], sd[j])[0] == 0)),
+               f"There are {cnt}."], {"xs": xs, "ys": ys, "i": i, "kind": kind}, sc.svg("Rectilinear figure"),
+              show=lambda v: str(int(v)), maxv=8)
+
+
+@checker(pp_count_sides)
+def _(p):
+    pts = stair_poly(p["xs"], p["ys"])
+    sd = sides_of(pts)
+    c = 0
+    for j, s in enumerate(sd):
+        if j == p["i"]:
+            continue
+        d, x = vecs_rel(sd[p["i"]], s)
+        c += (x == 0) if p["kind"] == "parallel" else (d == 0)
+    return F(c)
+
+
+@template(T, "intermediate", GP + "01")
+def pp_count_pairs(r):
+    """Pairs of parallel / perpendicular sides in a figure"""
+    xs, ys, rotn = stair_params(r, 2, 3)
+    pts = stair_poly(xs, ys)
+    n = len(pts)
+    kind = r.choice(["parallel", "perpendicular"])
+    sd = sides_of(pts)
+    cnt = sum(1 for i in range(n) for j in range(i + 1, n)
+              if (vecs_rel(sd[i], sd[j])[1] == 0 if kind == "parallel" else vecs_rel(sd[i], sd[j])[0] == 0))
+    sc, names = poly_scene(pts, rotn)
+    nm = r.choice(NAMES)
+    stem = (f"The figure below has {n} sides. All its angles are right angles or 270°. {nm} counts the pairs of {kind} sides "
+            f"(any two sides that lie on {kind} lines count as a pair, and no two sides lie on the same line). How many pairs are there?")
+    h = sum(1 for s in sd if s[0][1] == s[1][1])
+    v = n - h
+    total_pairs = n * (n - 1) // 2
+    wr = [W(n // 2 * (n // 2 - 1) // 2 * 2 if False else (h + v) , "counted_sides_not_pairs", "Counted sides instead of pairs."),
+          W(h * v if kind == "parallel" else h * (h - 1) // 2 + v * (v - 1) // 2, "counted_the_other_kind", "Counted the pairs of the other kind."),
+          W(cnt * 2, "counted_each_pair_twice", "Counted each pair twice."),
+          W(cnt - 1, "missed_one_pair", "Missed one pair."), W(total_pairs, "counted_all_pairs", "Counted every pair of sides.")]
+    return mk(pp_count_pairs, stem, cnt, wr,
+              [f"There are {h} horizontal-direction sides and {v} vertical-direction sides (perpendicular to each other).",
+               ("Parallel pairs: each direction gives " + f"{h}×{h - 1}÷2 = {h * (h - 1) // 2} and {v}×{v - 1}÷2 = {v * (v - 1) // 2}") if kind == "parallel"
+               else f"Perpendicular pairs: one side of each direction → {h} × {v}", f"Total = {cnt}"],
+              {"xs": xs, "ys": ys, "kind": kind}, sc.svg("Rectilinear figure"), show=lambda v_: str(int(v_)), maxv=80)
+
+
+@checker(pp_count_pairs)
+def _(p):
+    pts = stair_poly(p["xs"], p["ys"])
+    sd = sides_of(pts)
+    c = 0
+    for i in range(len(sd)):
+        for j in range(i + 1, len(sd)):
+            d, x = vecs_rel(sd[i], sd[j])
+            c += (x == 0) if p["kind"] == "parallel" else (d == 0)
+    return F(c)
+
+
+@template(T, "competent", GP + "01")
+def pp_grid_lines(r):
+    """Pairs of parallel / perpendicular lines in a divided rectangle"""
+    m, n = r.randint(1, 4), r.randint(1, 4)
+    kind = r.choice(["parallel", "perpendicular"])
+    nm = r.choice(NAMES)
+    H, V = m + 2, n + 2
+    cnt = H * (H - 1) // 2 + V * (V - 1) // 2 if kind == "parallel" else H * V
+    f = Fig(300, 200)
+    x0, y0, w, h = 30, 24, 240, 150
+    f.rect(x0, y0, w, h)
+    for i in range(1, m + 1):
+        y = y0 + h * i / (m + 1)
+        f.line(x0, y, x0 + w, y)
+    for j in range(1, n + 1):
+        x = x0 + w * j / (n + 1)
+        f.line(x, y0, x, y0 + h)
+    stem = (f"{nm} draws a rectangle, then {m} line{'s' if m > 1 else ''} across it parallel to the length and "
+            f"{n} line{'s' if n > 1 else ''} parallel to the breadth, each from one side to the opposite side (see figure). "
+            f"Counting the four sides of the rectangle as lines too, how many pairs of {kind} lines are there?")
+    wr = [W(H * V if kind == "parallel" else H * (H - 1) // 2 + V * (V - 1) // 2, "counted_the_other_kind", "Counted the pairs of the other kind."),
+          W(cnt - (H - 1 if kind == "parallel" else 0) if cnt - (H - 1) > 0 else None, "x", ""),
+          W((m + n) * 2 if (m + n) * 2 != cnt else None, "counted_inner_lines_only", "Worked with the inner lines only."),
+          W(((H - 1) * (V - 1)) if kind == "perpendicular" else (m * (m - 1) // 2 + n * (n - 1) // 2), "left_out_the_sides", "Left out the sides of the rectangle."),
+          W(cnt + H, "miscount", "Miscounted.")]
+    wr = [w for w in wr if w[1] != "x" and w[0]]
+    return mk(pp_grid_lines, stem, cnt, wr,
+              [f"Lines parallel to the length: {m} + 2 = {H}. Lines parallel to the breadth: {n} + 2 = {V}.",
+               (f"Parallel pairs = {H}×{H - 1}÷2 + {V}×{V - 1}÷2 = {cnt}") if kind == "parallel" else f"Perpendicular pairs = {H} × {V} = {cnt}"],
+              {"m": m, "n": n, "kind": kind}, f.svg("Rectangle divided by lines"), show=lambda v: str(int(v)), maxv=200)
+
+
+@checker(pp_grid_lines)
+def _(p):
+    lines = [("h", i) for i in range(p["m"] + 2)] + [("v", j) for j in range(p["n"] + 2)]
+    c = 0
+    for i in range(len(lines)):
+        for j in range(i + 1, len(lines)):
+            same = lines[i][0] == lines[j][0]
+            c += same if p["kind"] == "parallel" else (not same)
+    return F(c)
+
+
+@template(T, "competent", GP + "01")
+def pp_grid_points(r):
+    """Points on a grid that make a line perpendicular to AB"""
+    dx, dy = r.choice([(2, 1), (3, 1), (1, 2), (3, 2), (2, 3), (1, 3), (1, 1), (2, 5)])
+    px, py = -dy, dx
+    Ax, Ay = r.randint(3, 6), r.randint(3, 6)
+    A, B = (Ax, Ay), (Ax + dx, Ay + dy)
+    cands = []
+    good = [(Ax + px, Ay + py), (Ax - px, Ay - py), (Ax + 2 * px, Ay + 2 * py), (Ax - 2 * px, Ay - 2 * py)]
+    bad = [(Ax + px + 1, Ay + py), (Ax + px, Ay + py + 1), (Ax + dx, Ay + dy + 1 + 0), (Ax - dx, Ay - dy), (Ax + 2 * dx, Ay + 2 * dy),
+           (Ax + px - 1, Ay + py + 1), (Ax - px + 1, Ay - py), (Ax + py, Ay + px)]
+    inside = lambda p_: 0 <= p_[0] <= 9 and 0 <= p_[1] <= 9 and p_ != A and p_ != B
+    good = [g for g in good if inside(g)]
+    bad = [b for b in bad if inside(b) and (b[0] - Ax) * dx + (b[1] - Ay) * dy != 0]
+    k = r.randint(1, 3)
+    if len(good) < k or len(bad) < 4 - k:
+        return None
+    pts = r.sample(good, k) + r.sample(bad, 4 - k)
+    if len(set(pts)) < 4:
+        return None
+    r.shuffle(pts)
+    f = Fig(300, 296)
+    s_, ox, oy = 26, 30, 262
+    X = lambda x: ox + x * s_
+    Y = lambda y: oy - y * s_
+    for i in range(10):
+        f.line(X(i), Y(0), X(i), Y(9), width=0.5)
+        f.line(X(0), Y(i), X(9), Y(i), width=0.5)
+    for i in range(10):
+        f.text(X(i), Y(0) + 11, str(i), size=10)
+        f.text(X(0) - 11, Y(i), str(i), size=10)
+    f.line(*(X(A[0]), Y(A[1])), *(X(B[0]), Y(B[1])), width=2)
+    f.dot(X(A[0]), Y(A[1]), 4); f.dot(X(B[0]), Y(B[1]), 4)
+    f.text(X(A[0]) - 10, Y(A[1]) + 12, "A", bold=True); f.text(X(B[0]) + 10, Y(B[1]) - 10, "B", bold=True)
+    for lab, p_ in zip("PQRS", pts):
+        f.dot(X(p_[0]), Y(p_[1]), 4)
+        f.text(X(p_[0]) + 10, Y(p_[1]) - 9, lab, bold=True)
+    cnt = sum(1 for p_ in pts if (p_[0] - Ax) * dx + (p_[1] - Ay) * dy == 0)
+    stem = (f"On the square grid, A is at ({Ax}, {Ay}) and B is at ({Ax + dx}, {Ay + dy}). "
+            f"For how many of the points P, Q, R and S is the line joining the point to A perpendicular to AB?")
+    wr = [W(4 - cnt if 4 - cnt != cnt else None, "counted_the_other_points", "Counted the points that are not perpendicular."),
+          W(cnt + 1, "miscount", "Counted one extra point."), W(cnt - 1, "miscount", "Missed one point."), W(cnt + 2, "miscount", "Miscounted.")]
+    return mk(pp_grid_points, stem, cnt, wr,
+              [f"AB goes {dx} across and {dy} up. A perpendicular line goes {dy} across and {dx} the other way (or a multiple).",
+               f"Points that work: {cnt}"], {"A": list(A), "d": [dx, dy], "pts": [list(q) for q in pts]}, f.svg("Grid with points"),
+              show=lambda v: str(int(v)), maxv=4)
+
+
+@checker(pp_grid_points)
+def _(p):
+    (ax, ay), (dx, dy) = p["A"], p["d"]
+    return F(sum(1 for (x, y) in p["pts"] if (x - ax) * dx + (y - ay) * dy == 0))
+
+
+# ============================================================ RECTANGLE AND SQUARE
+
+def rect_scene(l, w, labels, w_=300, h_=190):
+    sc = Scene(w=w_, h=h_, pad=44)
+    sc.add("A", 0, 0); sc.add("B", l, 0); sc.add("C", l, w); sc.add("D", 0, w)
+    sc.poly("ABCD")
+    cen = (l / 2, w / 2)
+    for n in "ABCD":
+        sc.label(n, away=cen)
+    for k, txt in labels.items():
+        a, b = k[0], k[1]
+        sc.side(a, b, txt)
+    for v, a, b in (("A", "B", "D"), ("B", "A", "C"), ("C", "B", "D"), ("D", "A", "C")):
+        sc.right(v, a, b)
+    return sc
+
+
+@template(T, "basic", GR + "01")
+def rect_sides_basic(r):
+    """Opposite sides of a rectangle are equal; perimeter"""
+    l, w = r.randint(6, 25), r.randint(3, 15)
+    if l <= w:
+        return None
+    mode = r.choice(["perimeter", "other_side", "square_side"])
+    nm = r.choice(NAMES)
+    if mode == "perimeter":
+        sc = rect_scene(l, w, {"AB": f"{l} cm", "BC": f"{w} cm"})
+        stem = f"ABCD is a rectangle with AB = {l} cm and BC = {w} cm. Find its perimeter in cm."
+        ans = 2 * (l + w)
+        wr = [W(l + w, "forgot_to_double", "Added the length and breadth only."),
+              W(l * w, "found_area", "Multiplied the sides (area)."),
+              W(2 * l + w, "used_three_sides", "Counted only three sides."),
+              W(4 * l, "treated_as_square", "Treated it as a square.")]
+        steps = ["Opposite sides of a rectangle are equal: CD = AB and AD = BC.", f"Perimeter = 2 × ({l} + {w}) = {ans} cm"]
+        sh = unit("cm")
+        sh = lambda v: f"{int(v)} cm"
+    elif mode == "other_side":
+        sc = rect_scene(l, w, {"AB": f"{l} cm", "BC": f"{w} cm"})
+        stem = f"ABCD is a rectangle. AB = {l} cm and the perimeter is {2 * (l + w)} cm. Find BC in cm."
+        ans = w
+        P2 = 2 * (l + w)
+        wr = [W(P2 - l, "forgot_to_halve", f"Subtracted {l} from the perimeter."),
+              W(P2 // 2 - 0, "stopped_at_half_perimeter", "Found the sum of the length and breadth and stopped."),
+              W(P2 - 2 * l, "subtracted_only_two_sides", "Subtracted only two sides, then forgot to halve."),
+              W(l - w if l - w != w else None, "subtracted_sides", "Subtracted the sides.")]
+        sc = rect_scene(l, w, {"AB": f"{l} cm"})
+        steps = ["AB + BC = perimeter ÷ 2.", f"AB + BC = {P2} ÷ 2 = {P2 // 2}", f"BC = {P2 // 2} − {l} = {w} cm"]
+        sh = lambda v: f"{int(v)} cm"
+    else:
+        s = r.randint(4, 20)
+        stem = f"A square has a perimeter of {4 * s} cm. Find the length of one side in cm."
+        ans = s
+        sc = Scene(w=240, h=160, pad=34)
+        sc.add("A", 0, 0); sc.add("B", 1, 0); sc.add("C", 1, 1); sc.add("D", 0, 1)
+        sc.poly("ABCD")
+        for n in "ABCD":
+            sc.label(n, away=(0.5, 0.5))
+        sc.tick("A", "B"); sc.tick("B", "C"); sc.tick("C", "D"); sc.tick("D", "A")
+        for v, a, b in (("A", "B", "D"), ("B", "A", "C"), ("C", "B", "D"), ("D", "A", "C")):
+            sc.right(v, a, b)
+        wr = [W(2 * s, "halved_only", "Divided the perimeter by 2."), W(s * s, "squared_side", "Squared the side."),
+              W(4 * s - 4, "x", ""), W(s // 2 if s % 2 == 0 else None, "x", ""), W(4 * s // 3, "x", "")]
+        wr = [w_ for w_ in wr if w_[1] != "x"]
+        wr += [W(4 * s, "gave_perimeter", "Gave the perimeter.")]
+        steps = ["A square has 4 equal sides.", f"Side = {4 * s} ÷ 4 = {s} cm"]
+        sh = lambda v: f"{int(v)} cm"
+        l, w = s, s
+    return mk(rect_sides_basic, stem, ans, wr, steps, {"l": l, "w": w, "mode": mode, "s": s if mode == "square_side" else 0},
+              sc.svg("Rectangle"), show=sh, maxv=400)
+
+
+@checker(rect_sides_basic)
+def _(p):
+    if p["mode"] == "perimeter":
+        return F(sum(1 for _ in range(1)) * 0 + p["l"] + p["w"] + p["l"] + p["w"])
+    if p["mode"] == "other_side":
+        P2 = 2 * (p["l"] + p["w"])
+        return F(next(b for b in range(1, 200) if 2 * (p["l"] + b) == P2))
+    return F(next(s for s in range(1, 200) if 4 * s == 4 * p["s"]))
+
+
+RS_FACTS = [
+    ("A rectangle has four right angles.", True), ("A square has four equal sides.", True),
+    ("Opposite sides of a rectangle are equal.", True), ("A square is also a rectangle.", True),
+    ("Opposite sides of a rectangle are parallel.", True), ("A rectangle always has four equal sides.", False),
+    ("Every rectangle is a square.", False), ("A square has only two right angles.", False),
+    ("Adjacent sides of a square are perpendicular.", True), ("The opposite sides of a square are not parallel.", False),
+    ("A rectangle has two pairs of equal sides.", True), ("All the angles of a square are 90°.", True),
+    ("Adjacent sides of a rectangle are parallel.", False), ("A rectangle that is not a square has four equal angles.", True),
+]
+
+
+@template(T, "basic", GR + "01")
+def rect_count_true(r):
+    """True or false statements about rectangles and squares"""
+    sel = r.sample(RS_FACTS, 4)
+    cnt = sum(t for _, t in sel)
+    if not 1 <= cnt <= 3:
+        return None
+    txt = " ".join(f"({'abcd'[i]}) {s}" for i, (s, _) in enumerate(sel))
+    stem = f"Look at the statements: {txt} How many of the statements are true?"
+    wr = [W(4 - cnt, "counted_the_false_ones", "Counted the false statements."),
+          W(cnt + 1, "miscount", "Counted one extra."), W(cnt - 1, "miscount", "Missed one true statement."), W(cnt + 2, "miscount", "Miscounted."),
+          W(cnt + 3, "miscount", "Miscounted.")]
+    return mk(rect_count_true, stem, cnt, wr,
+              [f"({'abcd'[i]}) is {'true' if t else 'false'}." for i, (s, t) in enumerate(sel)] + [f"{cnt} statement(s) are true."],
+              {"sel": [s for s, _ in sel]}, None, show=lambda v: str(int(v)), maxv=4)
+
+
+@checker(rect_count_true)
+def _(p):
+    d = dict(RS_FACTS)
+    return F(sum(1 for s in p["sel"] if d[s]))
+
+
+@template(T, "intermediate", GR + "01")
+def rect_angle_triangle(r):
+    """Rectangle with a line from a corner to a side"""
+    e = r.randint(35, 80)
+    mode = r.choice(["DAE", "AEC"])
+    h, w = 1.0, 1.9
+    E = (h / math.tan(math.radians(e)), h)
+    sc = Scene(w=320, h=200, pad=34)
+    sc.add("A", 0, 0); sc.add("B", w, 0); sc.add("C", w, h); sc.add("D", 0, h); sc.add("E", *E)
+    sc.poly("ABCD"); sc.seg("A", "E")
+    for n in "ABCD":
+        sc.label(n, away=(w / 2, h / 2))
+    sc.label("E", away=(E[0], E[1] - 1))
+    for v, a, b in (("A", "B", "D"), ("B", "A", "C"), ("C", "B", "D"), ("D", "A", "C")):
+        sc.right(v, a, b)
+    sc.ang("E", "A", "D", f"{e}°", r=22) if mode == "DAE" else sc.ang("E", "A", "D", f"{e}°", r=22)
+    if mode == "DAE":
+        sc.ang("A", "D", "E", "x", r=24)
+        stem = f"ABCD is a rectangle and E is a point on DC. ∠AED = {e}°. Find ∠DAE."
+        ans = 90 - e
+        wr = [W(e, "gave_given_angle", "Gave the given angle."), W(180 - e, "used_180", "Used 180° instead of the triangle sum with 90°."),
+              W(90 + e if 90 + e <= 180 else None, "added_instead_of_subtracting", "Added instead of subtracting."),
+              W(180 - 90 - e + 10, "x", "")]
+        steps = ["∠ADE = 90° (rectangle).", f"∠DAE = 180° − 90° − {e}° = {ans}°"]
+    else:
+        sc.ang("E", "A", "C", "x", r=24) if False else None
+        sc.ang("E", "C", "A", "x", r=24)
+        stem = f"ABCD is a rectangle and E is a point on DC. ∠AED = {e}°. Find ∠AEC."
+        ans = 180 - e
+        wr = [W(e, "gave_given_angle", "Gave the given angle."), W(90 - e, "found_other_angle", "Found ∠DAE."),
+              W(90 + e if 90 + e <= 180 else None, "x", ""), W(360 - e if False else 180 - e + 90 if 270 - e <= 180 else None, "x", "")]
+        steps = ["D, E and C are on a straight line, so ∠AEC + ∠AED = 180°.", f"∠AEC = 180° − {e}° = {ans}°"]
+    wr = [w_ for w_ in wr if w_[0] and w_[1] != "x"]
+    return mk(rect_angle_triangle, stem, ans, wr, steps, {"e": e, "mode": mode}, sc.svg("Rectangle with a line AE"))
+
+
+@checker(rect_angle_triangle)
+def _(p):
+    e = p["e"]
+    A, D, C = (0, 0), (0, 1.0), (1.9, 1.0)
+    E = (1.0 / math.tan(math.radians(e)), 1.0)
+    return F(round(meas(E, A, D) if False else (meas(A, D, E) if False else (meas(D, A, E) if p["mode"] == "DAE" else meas(A, E, C)))))
+
+
+@template(T, "intermediate", GR + "01")
+def rect_perimeter_algebra(r):
+    """Rectangle with sides given in terms of x"""
+    x = r.randint(3, 15)
+    a, m = r.randint(2, 4), r.randint(1, 9)
+    L, B = a * x + m, x
+    P = 2 * (L + B)
+    sc = rect_scene(L, B, {"AB": f"({a}x + {m}) cm", "BC": "x cm"}) if L > 1.15 * B else None
+    if sc is None:
+        return None
+    nm = r.choice(NAMES)
+    stem = f"The rectangle ABCD has AB = ({a}x + {m}) cm and BC = x cm. Its perimeter is {P} cm. Find the length of AB in cm."
+    wr = [W(x, "found_x_only", "Found x but did not work out AB."),
+          W(P // 2 - x + 0 if False else P // 2, "stopped_at_half_perimeter", "Found AB + BC and stopped."),
+          W(a * x, "ignored_constant", f"Forgot to add {m}."),
+          W(P - 2 * B, "x", "")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(rect_perimeter_algebra, stem, L, wr,
+              [f"AB + BC = {P} ÷ 2 = {P // 2}", f"({a}x + {m}) + x = {P // 2} → {a + 1}x = {P // 2 - m} → x = {x}",
+               f"AB = {a} × {x} + {m} = {L} cm"], {"a": a, "m": m, "P": P}, sc.svg("Rectangle"), show=lambda v: f"{int(v)} cm", maxv=500)
+
+
+@checker(rect_perimeter_algebra)
+def _(p):
+    x = next(x for x in range(1, 200) if 2 * ((p["a"] * x + p["m"]) + x) == p["P"])
+    return F(p["a"] * x + p["m"])
+
+
+@template(T, "intermediate", GR + "01")
+def rect_cut_square(r):
+    """Rectangle with a square cut off"""
+    w = r.randint(4, 14)
+    l = w + r.randint(3, 14)
+    nm = r.choice(NAMES)
+    sc = Scene(w=330, h=190, pad=44)
+    sc.add("A", 0, 0); sc.add("B", l, 0); sc.add("C", l, w); sc.add("D", 0, w); sc.add("E", w, 0); sc.add("F", w, w)
+    sc.poly("ABCD"); sc.seg("E", "F", dash=True)
+    for n in "ABCD":
+        sc.label(n, away=(l / 2, w / 2))
+    sc.label("E", away=(w, w / 2)); sc.label("F", away=(w, w / 2))
+    sc.side("A", "B", f"{l} cm"); sc.side("B", "C", f"{w} cm")
+    stem = (f"{nm} cuts the square AEFD from the rectangle ABCD along the dotted line EF, as shown. "
+            f"AB = {l} cm and BC = {w} cm. Find the perimeter of the remaining rectangle EBCF in cm.")
+    ans = 2 * ((l - w) + w)
+    wr = [W(2 * (l + w), "used_original_perimeter", "Gave the perimeter of the whole rectangle."),
+          W(2 * (l - w) + w, "x", ""), W((l - w) + w, "forgot_to_double", "Found the sum of two sides only."),
+          W(2 * (l - w), "used_one_dimension", "Left out the breadth of the piece."),
+          W(2 * (l - w) + 2 * w + 2 * w, "added_cut_edge_twice", "Counted the cut edge EF twice.")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(rect_cut_square, stem, ans, wr,
+              [f"EB = {l} − {w} = {l - w} cm (AE = AD = {w} cm, a square).", f"Perimeter of EBCF = 2 × ({l - w} + {w}) = {ans} cm"],
+              {"l": l, "w": w}, sc.svg("Rectangle with a square cut off"), show=lambda v: f"{int(v)} cm", maxv=400)
+
+
+@checker(rect_cut_square)
+def _(p):
+    l, w = p["l"], p["w"]
+    EB = l - w
+    per = 0
+    for a, b in ((EB, 0), (0, w), (EB, 0), (0, w)):
+        per += abs(a) + abs(b)
+    return F(per)
+
+
+@template(T, "competent", GR + "01", GT + "06")
+def rect_isosceles_chain(r):
+    """math-pat-angles-chained-shapes"""
+    eps = r.randrange(40, 141, 2)
+    h = 1.0
+    w = 2 * h * math.tan(math.radians(eps / 2))
+    E = (w / 2, 0)
+    sc = Scene(w=330, h=210, pad=34)
+    sc.add("A", 0, 0); sc.add("B", w, 0); sc.add("C", w, h); sc.add("D", 0, h); sc.add("E", *E)
+    sc.poly("ABCD"); sc.seg("D", "E"); sc.seg("C", "E")
+    for n in "ABCD":
+        sc.label(n, away=(w / 2, h / 2))
+    sc.label("E", away=(w / 2, h))
+    sc.tick("E", "D"); sc.tick("E", "C")
+    for v, a, b in (("A", "B", "D"), ("B", "A", "C")):
+        sc.right(v, a, b)
+    sc.ang("E", "D", "C", f"{eps}°", r=26)
+    sc.ang("D", "A", "E", "x", r=22)
+    ans = eps // 2
+    stem = (f"ABCD is a rectangle. E is a point on AB such that EC = ED and ∠DEC = {eps}°. Find ∠ADE.")
+    base = (180 - eps) // 2
+    wr = [W(base, "stopped_at_base_angle", "Found ∠EDC and stopped."),
+          W(90 - eps // 2 + 0 if False else 180 - eps, "forgot_to_halve", "Found the sum of the base angles, not the half."),
+          W(eps, "gave_given_angle", "Gave the given angle."),
+          W(90 - ans if 90 - ans != ans else None, "x", "")]
+    wr = [w_ for w_ in wr if w_[1] != "x" and w_[0]]
+    return mk(rect_isosceles_chain, stem, ans, wr,
+              [f"EC = ED, so ∠EDC = ∠ECD = (180° − {eps}°) ÷ 2 = {base}°", "∠ADC = 90° (rectangle)",
+               f"∠ADE = 90° − {base}° = {ans}°"], {"eps": eps}, sc.svg("Rectangle with an isosceles triangle"))
+
+
+@checker(rect_isosceles_chain)
+def _(p):
+    eps = p["eps"]
+    h = 1.0
+    w = 2 * h * math.tan(math.radians(eps / 2))
+    A, D, E = (0, 0), (0, h), (w / 2, 0)
+    return F(round(meas(A, D, E)))
+
+
+@template(T, "competent", GR + "01")
+def square_rect_perimeter(r):
+    """A square joined to a rectangle: perimeter of the compound figure"""
+    s = r.randint(6, 16)
+    b = r.randint(2, s - 2)
+    L = r.randint(4, 15)
+    nm = r.choice(NAMES)
+    sc = Scene(w=340, h=200, pad=46)
+    pts = [(0, 0), (L + s, 0), (L + s, s), (L, s), (L, b), (0, b)]
+    # square on the right (side s), rectangle L by b on the left, bottoms level
+    for i, p in enumerate(pts):
+        sc.add("PQRSTU"[i], *p)
+    sc.poly(list("PQRSTU"))
+    sc.side("P", "U", f"{b} cm", away=(L, s / 2)); sc.side("U", "T", f"{L} cm", away=(L / 2, 0)) if False else sc.side("U", "T", f"{L} cm")
+    sc.side("Q", "R", f"{s} cm")
+    stem = (f"{nm} joins a square of side {s} cm to a rectangle of length {L} cm and breadth {b} cm, as shown. "
+            f"The bottoms of the two shapes are level. Find the perimeter of the whole figure in cm.")
+    ans = 2 * (L + s) + 2 * s
+    sep = 4 * s + 2 * (L + b)
+    wr = [W(sep, "added_both_perimeters", "Added the perimeters of the two shapes, counting the joined side twice."),
+          W(sep - 2 * b, "subtracted_the_wrong_join", f"Took off twice the breadth {b} cm instead of the shorter join."),
+          W(2 * (L + s) + s, "left_out_a_side", "Left out one side."),
+          W(2 * (L + s + s - b), "x", "")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(square_rect_perimeter, stem, ans, wr,
+              [f"Total length across the bottom = {L} + {s} = {L + s} cm", f"Height of the tall square = {s} cm",
+               f"The outline goes right and up the same distance as the bounding rectangle: 2 × ({L + s} + {s}) = {ans} cm"],
+              {"s": s, "b": b, "L": L}, sc.svg("Square joined to a rectangle"), show=lambda v: f"{int(v)} cm", maxv=500)
+
+
+@checker(square_rect_perimeter)
+def _(p):
+    s, b, L = p["s"], p["b"], p["L"]
+    pts = [(0, 0), (L + s, 0), (L + s, s), (L, s), (L, b), (0, b)]
+    return F(round(sum(dist(pts[i], pts[(i + 1) % 6]) for i in range(6))))
+
+
+@template(T, "competent", GR + "01")
+def rect_into_squares(r):
+    """Rectangle cut into the largest identical squares"""
+    g = r.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 12])
+    a, b = r.sample(range(2, 12), 2)
+    if math.gcd(a, b) != 1:
+        return None
+    l, w = a * g, b * g
+    nm = r.choice(NAMES)
+    f = Fig(310, 180)
+    f.rect(70, 30, 210, 130)
+    f.text(175, 14, f"{l} cm"); f.text(34, 95, f"{w} cm", size=13)
+    stem = (f"{nm} cuts a rectangular piece of card, {l} cm by {w} cm, into identical squares with no card left over. "
+            f"The squares are as big as possible. How many squares are there?")
+    ans = a * b
+    wr = [W(g, "gave_side_length", "Gave the side of one square."),
+          W(a + b, "added_instead_of_multiplied", "Added the number of squares along each side."),
+          W(l * w // (g * g * 2) if False else (l * w) // (math.gcd(l, w) + 0) // math.gcd(l, w) * 1 if False else a * b + a, "x", ""),
+          W(l * w // g, "divided_area_by_side", "Divided the area by the side instead of the area of a square."),
+          W(l * w, "gave_area", "Gave the area.")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(rect_into_squares, stem, ans, wr,
+              [f"Side of the largest square = HCF of {l} and {w} = {g} cm", f"Squares along the length = {l} ÷ {g} = {a}",
+               f"Squares along the breadth = {w} ÷ {g} = {b}", f"Number of squares = {a} × {b} = {ans}"],
+              {"l": l, "w": w}, f.svg("Rectangle of card"), show=lambda v: str(int(v)), maxv=None)
+
+
+@checker(rect_into_squares)
+def _(p):
+    l, w = p["l"], p["w"]
+    s = max(s for s in range(1, min(l, w) + 1) if l % s == 0 and w % s == 0)
+    return F((l * w) // (s * s))
+
+
+# ============================================================ LINE SYMMETRY
+
+def reflect(p, a, b):
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    t = ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (dx * dx + dy * dy)
+    fx, fy = a[0] + t * dx, a[1] + t * dy
+    return (2 * fx - p[0], 2 * fy - p[1])
+
+
+def is_sym(poly, a, b, tol=1e-6):
+    for p in poly:
+        q = reflect(p, a, b)
+        if not any(abs(q[0] - o[0]) < tol and abs(q[1] - o[1]) < tol for o in poly):
+            return False
+    return True
+
+
+def key_pts(poly):
+    n = len(poly)
+    mids = [((poly[i][0] + poly[(i + 1) % n][0]) / 2, (poly[i][1] + poly[(i + 1) % n][1]) / 2) for i in range(n)]
+    c = (sum(p[0] for p in poly) / n, sum(p[1] for p in poly) / n)
+    return list(poly) + mids + [c]
+
+
+def line_key(a, b):
+    ang = math.atan2(b[1] - a[1], b[0] - a[0]) % math.pi
+    if ang > math.pi - 1e-7:
+        ang = 0.0
+    d = -a[0] * math.sin(ang) + a[1] * math.cos(ang)
+    return (round(ang, 4) % round(math.pi, 4), round(d, 4) + 0.0)
+
+
+def candidate_lines(poly):
+    kp = key_pts(poly)
+    seen, out = set(), []
+    for i in range(len(kp)):
+        for j in range(i + 1, len(kp)):
+            a, b = kp[i], kp[j]
+            if math.hypot(b[0] - a[0], b[1] - a[1]) < 1e-6:
+                continue
+            k = line_key(a, b)
+            if k in seen:
+                continue
+            seen.add(k)
+            out.append((a, b))
+    return out
+
+
+def find_axes(poly):
+    return [(a, b) for a, b in candidate_lines(poly) if is_sym(poly, a, b)]
+
+
+def regular(n, R=1.0, start=90):
+    return [vec(start + 360 * i / n, R) for i in range(n)]
+
+
+SHAPES = {
+    "equilateral triangle": (lambda r: regular(3), 3), "square": (lambda r: [(0, 0), (1, 0), (1, 1), (0, 1)], 4),
+    "regular pentagon": (lambda r: regular(5), 5), "regular hexagon": (lambda r: regular(6), 6),
+    "regular octagon": (lambda r: regular(8, start=67.5), 8),
+    "rectangle (not a square)": (lambda r: [(0, 0), (1.7, 0), (1.7, 1), (0, 1)], 2),
+    "rhombus (not a square)": (lambda r: [(-1.2, 0), (0, -0.8), (1.2, 0), (0, 0.8)], 2),
+    "isosceles triangle (not equilateral)": (lambda r: [(-1, 0), (1, 0), (0, 1.7)], 1),
+    "kite": (lambda r: [(0, 1.5), (0.9, 0.4), (0, -0.9), (-0.9, 0.4)], 1),
+    "isosceles trapezium": (lambda r: [(-1.4, 0), (1.4, 0), (0.8, 1), (-0.8, 1)], 1),
+}
+
+
+def rot_poly(poly, d):
+    return [rot(p, d) for p in poly]
+
+
+def draw_poly(poly, w=300, h=220, pad=26, shade=0.07, title="Shape"):
+    sc = Scene(w=w, h=h, pad=pad)
+    for i, p in enumerate(poly):
+        sc.add(f"p{i}", *p)
+    sc.poly([f"p{i}" for i in range(len(poly))], shade=shade)
+    return sc
+
+
+@template(T, "basic", GS + "01", GS + "02")
+def lines_of_symmetry_count(r):
+    """math-pat-symmetry-and-construction"""
+    name = r.choice(list(SHAPES))
+    gen, ans = SHAPES[name]
+    sides = len(gen(r))
+    nm = r.choice(NAMES)
+    poly = rot_poly(gen(r), r.choice([0, 0, 15, 30, -20]))
+    sc = draw_poly(poly)
+    stem = f"{nm} draws {art(name)} {name}, as shown. How many lines of symmetry does it have?"
+    wr = [W(sides, "counted_sides", "Counted the sides instead of the lines of symmetry."),
+          W(ans * 2, "counted_each_line_twice", "Counted each line of symmetry as two."),
+          W(ans + 1, "counted_a_diagonal_too", "Counted a line that is not a line of symmetry."),
+          W(ans - 1 if ans > 1 else None, "missed_a_line", "Missed one line of symmetry."),
+          W(ans + 2, "miscount", "Miscounted.")]
+    return mk(lines_of_symmetry_count, stem, ans, wr,
+              [f"Fold the {name} so that the two halves match exactly.", f"Number of ways = {ans}"],
+              {"poly": [list(p) for p in poly]}, sc.svg("Shape"), show=lambda v: str(int(v)), maxv=12)
+
+
+@checker(lines_of_symmetry_count)
+def _(p):
+    return F(len(find_axes([tuple(q) for q in p["poly"]])))
+
+
+SYM_L = list("AHIMOTUVWXY") + list("BCDE")
+ASYM_L = list("FGJLNPQRSZ")
+
+
+@template(T, "basic", GS + "01")
+def symmetric_letters(r):
+    """math-pat-symmetry-and-construction"""
+    k = r.randint(1, 4)
+    letters = r.sample(SYM_L, k) + r.sample(ASYM_L, 6 - k)
+    r.shuffle(letters)
+    nm = r.choice(NAMES)
+    stem = (f"{nm} writes these capital letters in block print: {' '.join(letters)}. "
+            f"How many of the letters have at least one line of symmetry?")
+    wr = [W(6 - k, "counted_the_asymmetric_letters", "Counted the letters with no line of symmetry."),
+          W(k + 1, "miscount", "Counted one extra letter."), W(k - 1 if k > 1 else None, "miscount", "Missed a letter."),
+          W(k + 2, "miscount", "Miscounted."), W(k + 3, "miscount", "Miscounted.")]
+    return mk(symmetric_letters, stem, k, wr,
+              ["A letter has a line of symmetry if it can be folded so the halves match.",
+               "Symmetric letters: " + ", ".join(l for l in letters if l in SYM_L), f"There are {k}."],
+              {"letters": letters}, None, show=lambda v: str(int(v)), maxv=6)
+
+
+@checker(symmetric_letters)
+def _(p):
+    return F(sum(1 for l in p["letters"] if l in "AHIMOTUVWXYBCDE"))
+
+
+def draw_line_panel(poly, a, b, size=150):
+    sc = Scene(w=size, h=size, pad=18)
+    for i, p in enumerate(poly):
+        sc.add(f"p{i}", *p)
+    names = [f"p{i}" for i in range(len(poly))]
+    c = (sum(p[0] for p in poly) / len(poly), sum(p[1] for p in poly) / len(poly))
+    R = max(math.hypot(p[0] - c[0], p[1] - c[1]) for p in poly) * 1.2
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    n = math.hypot(dx, dy)
+    ux, uy = dx / n, dy / n
+    t0 = (c[0] - a[0]) * ux + (c[1] - a[1]) * uy
+    mid = (a[0] + ux * t0, a[1] + uy * t0)
+    sc.add("L1", mid[0] - ux * R, mid[1] - uy * R); sc.add("L2", mid[0] + ux * R, mid[1] + uy * R)
+    sc.poly(names, shade=0.07)
+    sc.seg("L1", "L2", dash=True, width=2)
+    sc.svg("panel")
+    return sc.f
+
+
+PICK = ["rectangle (not a square)", "isosceles triangle (not equilateral)", "rhombus (not a square)", "kite",
+        "isosceles trapezium", "regular pentagon", "regular hexagon"]
+
+
+@template(T, "basic", GS + "02")
+def which_dotted_line(r):
+    """math-pat-symmetry-and-construction"""
+    name = r.choice(PICK)
+    base = SHAPES[name][0](r)
+    poly = rot_poly(base, r.choice([0, 0, 20, -15]))
+    axes = find_axes(poly)
+    cand = [(a, b) for a, b in candidate_lines(poly) if not is_sym(poly, a, b)]
+    # plausible false lines: they pass through at least one vertex
+    vert = [(a, b) for a, b in cand if any(abs((b[0] - a[0]) * (v[1] - a[1]) - (b[1] - a[1]) * (v[0] - a[0])) < 1e-6 for v in poly)]
+    if len(axes) < 1 or len(vert) < 3:
+        return None
+    good = r.choice(axes)
+    bads = r.sample(vert, 3)
+    lines = bads[:]
+    pos = r.randrange(4)
+    lines.insert(pos, good)
+    figs = [draw_line_panel(poly, a, b) for a, b in lines]
+    nm = r.choice(NAMES)
+    ph = r.choice(["Which dotted line is a line of symmetry of the", "In which figure is the dotted line a line of symmetry of the",
+                   "Only one dotted line below is a line of symmetry of the"])
+    sn = name.split(" (")[0]
+    stem = (f"{nm} draws {art(sn)} {sn} four times and adds a dotted line to each. {ph} {sn}?" if "Only" not in ph
+            else f"{nm} draws {art(sn)} {sn} four times and adds a dotted line to each. {ph} {sn}. Which one is it?")
+    wr = [W(((pos + 1) % 4) + 1, "chose_a_line_through_a_corner", "Chose a line that only passes through a corner."),
+          W(((pos + 2) % 4) + 1, "chose_a_line_through_a_corner", "Chose a line that does not split the shape into matching halves."),
+          W(((pos + 3) % 4) + 1, "chose_a_line_through_a_corner", "Chose a line that does not split the shape into matching halves.")]
+    return build(which_dotted_line, stem, pos + 1, wr,
+                 ["Fold along each dotted line. The two halves must match exactly.",
+                  f"Only figure {'ABCD'[pos]} folds onto itself."], {"poly": [list(p) for p in poly], "lines": [[list(a), list(b)] for a, b in lines]},
+                 show=lambda v: "ABCD"[int(v) - 1], whole=True, auto_slips=False, figure=panels(figs, "ABCD", cols=2, title="Four figures"))
+
+
+@checker(which_dotted_line)
+def _(p):
+    poly = [tuple(q) for q in p["poly"]]
+    ok = [i + 1 for i, (a, b) in enumerate(p["lines"]) if is_sym(poly, tuple(a), tuple(b))]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+def rand_asym(r):
+    kind = r.choice(["para", "tri", "quad"])
+    if kind == "para":
+        return [(0, 0), (1.8, 0), (2.4, 1), (0.6, 1)]
+    if kind == "tri":
+        return [(0, 0), (2, 0), (0.6, 1.4)]
+    return [(0, 0), (2, 0.2), (1.6, 1.2), (0.2, 0.9)]
+
+
+@template(T, "intermediate", GS + "01")
+def symmetric_figure_count(r):
+    """math-pat-symmetry-and-construction"""
+    pool = [(n, SHAPES[n][0](r)) for n in PICK]
+    k = r.randint(1, 3)
+    syms = [rot_poly(g, r.choice([0, 15, 30, -20, 45])) for _, g in r.sample(pool, k)]
+    asyms = [rot_poly(rand_asym(r), r.choice([0, 10, -10])) for _ in range(4 - k)]
+    shapes = syms + asyms
+    r.shuffle(shapes)
+    cnt = sum(1 for s in shapes if find_axes(s))
+    figs = []
+    for s in shapes:
+        sc = draw_poly(s, w=150, h=130, pad=16)
+        sc.svg("panel")
+        figs.append(sc.f)
+    nm = r.choice(NAMES)
+    ph = r.choice([f"{nm} looks at the four figures A, B, C and D. How many of them have at least one line of symmetry?",
+                   f"How many of the figures A to D can be folded so that the two halves match exactly? ({nm} is checking.)",
+                   f"{nm} draws figures A to D. Count the figures that are symmetric (have a line of symmetry)."])
+    wr = [W(4 - cnt, "counted_the_asymmetric_figures", "Counted the figures with no line of symmetry."),
+          W(cnt + 1, "counted_a_parallelogram_or_slanted_figure", "Counted a figure that cannot be folded onto itself."),
+          W(cnt - 1 if cnt > 1 else None, "missed_a_symmetric_figure", "Missed a symmetric figure."), W(cnt + 2, "miscount", "Miscounted.")]
+    return build(symmetric_figure_count, ph, cnt, wr, ["Check each figure by imagining a fold.", f"{cnt} figure(s) have a line of symmetry."],
+                 {"shapes": [[list(p) for p in s] for s in shapes]}, show=lambda v: str(int(v)), whole=True, auto_slips=False,
+                 figure=panels(figs, "ABCD", cols=2, title="Four figures"))
+
+
+@checker(symmetric_figure_count)
+def _(p):
+    return F(sum(1 for s in p["shapes"] if find_axes([tuple(q) for q in s])))
+
+
+@template(T, "intermediate", GS + "01", GS + "02")
+def regular_polygon_lines(r):
+    """math-pat-symmetry-and-construction"""
+    n = r.randint(3, 12)
+    mode = r.choice(["total", "reverse", "through_vertices"])
+    nm = r.choice(NAMES)
+    sc = draw_poly(regular(n), w=240, h=200)
+    if mode == "total":
+        stem = f"{nm} draws a regular polygon with {n} sides. How many lines of symmetry does it have?"
+        ans = n
+        wr = [W(n // 2, "halved", "Counted only half of the lines."), W(2 * n, "counted_twice", "Counted each line twice."),
+              W(n - 1, "missed_a_line", "Missed a line."), W(n + 1, "extra_line", "Counted an extra line.")]
+        steps = ["A regular polygon has as many lines of symmetry as sides.", f"Lines of symmetry = {n}"]
+    elif mode == "reverse":
+        stem = f"A regular polygon has {n} lines of symmetry. How many vertices (corners) does it have?"
+        ans = n
+        wr = [W(2 * n, "doubled", "Doubled the number."), W(n // 2, "halved", "Halved the number."),
+              W(n + 1, "off_by_one", "Added one."), W(n - 1, "off_by_one", "Subtracted one.")]
+        steps = ["A regular polygon has as many lines of symmetry as sides, and as many vertices as sides.", f"Vertices = {n}"]
+        sc = None
+    else:
+        n = r.choice([4, 6, 8, 10, 12])
+        sc = draw_poly(regular(n), w=240, h=200)
+        stem = f"A regular polygon has {n} sides. How many of its lines of symmetry pass through two opposite vertices?"
+        ans = n // 2
+        wr = [W(n, "counted_all_lines", "Counted all the lines of symmetry."), W(n // 2 + 1, "off_by_one", "Counted one extra."),
+              W(n // 2 - 1 if n // 2 > 1 else None, "off_by_one", "Missed one."), W(2 * n, "counted_twice", "Counted each line twice.")]
+        steps = [f"A regular {n}-gon has {n} lines of symmetry in all.",
+                 f"Half pass through opposite vertices, the other half through midpoints of opposite sides: {n} ÷ 2 = {ans}"]
+    wr = [w_ for w_ in wr if w_[0]]
+    return mk(regular_polygon_lines, stem, ans, wr, steps, {"n": n, "mode": mode}, sc.svg("Regular polygon") if sc else None,
+              show=lambda v: str(int(v)), maxv=26)
+
+
+@checker(regular_polygon_lines)
+def _(p):
+    n = p["n"]
+    axes = find_axes(regular(n))
+    if p["mode"] == "through_vertices":
+        verts = regular(n)
+        return F(sum(1 for a, b in axes if sum(1 for v in verts if abs((b[0] - a[0]) * (v[1] - a[1]) - (b[1] - a[1]) * (v[0] - a[0])) < 1e-6) >= 2))
+    return F(len(axes))
+
+
+def refl_cell(c, rr, kind, nc, nr):
+    if kind == "v":
+        return (nc - 1 - c, rr)
+    if kind == "h":
+        return (c, nr - 1 - rr)
+    if kind == "d1":
+        return (rr, c)
+    return (nr - 1 - rr, nc - 1 - c)
+
+
+def closure(cells, kinds, nc, nr):
+    S = set(cells)
+    while True:
+        new = S | {refl_cell(c, rr, k, nc, nr) for (c, rr) in S for k in kinds}
+        if new == S:
+            return S
+        S = new
+
+
+@template(T, "intermediate", GS + "02", GS + "03")
+def shade_to_symmetry(r):
+    """math-pat-symmetry-and-construction"""
+    nc, nr = r.choice([(6, 5), (6, 6), (8, 6), (8, 7), (6, 7)])
+    vertical = r.random() < 0.5
+    if not vertical:
+        nc, nr = nr, nc
+        if nr % 2:
+            return None
+    elif nc % 2:
+        return None
+    k = r.randint(6, 12)
+    cells = set()
+    while len(cells) < k:
+        if vertical:
+            cells.add((r.randrange(nc), r.randrange(nr)))
+        else:
+            cells.add((r.randrange(nc), r.randrange(nr)))
+    kind = "v" if vertical else "h"
+    full = closure(cells, [kind], nc, nr)
+    ans = len(full) - len(cells)
+    if not 2 <= ans <= 9:
+        return None
+    line = ("v", nc // 2) if vertical else ("h", nr // 2)
+    f, svg = grid_fig(nc, nr, cells, line=line)
+    nm = r.choice(NAMES)
+    stem = (f"{nm} shades {k} squares of a {nc} by {nr} grid (columns by rows). The dotted line is meant to be a line of symmetry. "
+            f"What is the smallest number of extra squares to shade so that the figure is symmetrical about the dotted line?")
+    mine = sum(1 for (c, rr) in cells if (c < nc // 2 if vertical else rr < nr // 2))
+    wr = [W(k, "gave_number_shaded", "Gave the number of squares already shaded."),
+          W(len(full), "gave_total_shaded", "Gave the total number of shaded squares in the finished figure."),
+          W(ans + 1, "counted_extra", "Counted one square too many."), W(ans - 1, "missed_one", "Missed one square."),
+          W(mine, "counted_one_side", "Counted the shaded squares on one side only.")]
+    return mk(shade_to_symmetry, stem, ans, wr,
+              ["Each shaded square needs a mirror partner on the other side of the dotted line.",
+               f"Squares needed to complete the pairs = {ans}"], {"nc": nc, "nr": nr, "cells": [list(c) for c in sorted(cells)], "v": vertical},
+              svg, show=lambda v: str(int(v)), maxv=40)
+
+
+@checker(shade_to_symmetry)
+def _(p):
+    cells = {tuple(c) for c in p["cells"]}
+    nc, nr = p["nc"], p["nr"]
+    miss = 0
+    for (c, rr) in cells:
+        m = (nc - 1 - c, rr) if p["v"] else (c, nr - 1 - rr)
+        if m not in cells:
+            miss += 1
+    return F(miss)
+
+
+@template(T, "competent", GS + "01", GS + "02")
+def symmetry_axes_pattern(r):
+    """math-pat-symmetry-and-construction"""
+    n = r.choice([4, 5, 6])
+    kinds = r.choice([["v"], ["h"], ["d1"], ["d2"], ["v", "h"], ["d1", "d2"], ["v", "h", "d1", "d2"], ["v", "d1"]])
+    seeds = set()
+    k0 = r.randint(2, 5)
+    while len(seeds) < k0:
+        seeds.add((r.randrange(n), r.randrange(n)))
+    cells = closure(seeds, kinds, n, n)
+    if not 6 <= len(cells) <= 22:
+        return None
+    axes = [k for k in ("v", "h", "d1", "d2") if all(refl_cell(c, rr, k, n, n) in cells for (c, rr) in cells)]
+    ans = len(axes)
+    if ans == 3 or ans == 0:
+        return None
+    f, svg = grid_fig(n, n, cells)
+    nm = r.choice(NAMES)
+    stem = (f"{nm} shades {len(cells)} squares of a {n} by {n} grid, as shown. How many lines of symmetry does the whole shaded figure have? "
+            f"(The lines of symmetry may be vertical, horizontal or diagonal.)")
+    wr = [W(1 if ans != 1 else 2, "x", ""), W(2 if ans != 2 else 4, "forgot_diagonals_or_extra", "Counted too few or too many types of line."),
+          W(4 if ans != 4 else 2, "counted_all_four", "Counted all four possible lines."),
+          W(3, "counted_three", "Counted three lines."), W(1, "counted_only_one", "Counted only one line.")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(symmetry_axes_pattern, stem, ans, wr,
+              ["Test each possible line (vertical, horizontal, two diagonals) by folding.",
+               f"The figure matches itself over {ans} line(s)."], {"n": n, "cells": [list(c) for c in sorted(cells)]}, svg,
+              show=lambda v: str(int(v)), maxv=4)
+
+
+@checker(symmetry_axes_pattern)
+def _(p):
+    cells = {tuple(c) for c in p["cells"]}
+    n = p["n"]
+    pts = lambda c: (c[0] + 0.5, c[1] + 0.5)
+    poly = [pts(c) for c in cells]
+    lines = [((n / 2, 0), (n / 2, n)), ((0, n / 2), (n, n / 2)), ((0, 0), (n, n)), ((0, n), (n, 0))]
+    return F(sum(1 for a, b in lines if is_sym(poly, a, b)))
+
+
+@template(T, "competent", GS + "02", GS + "03")
+def shade_two_lines(r):
+    """math-pat-symmetry-and-construction"""
+    n = r.choice([6, 8])
+    four = r.random() < 0.4
+    kinds = ["v", "h", "d1", "d2"] if four else ["v", "h"]
+    k = r.randint(3, 5)
+    cells = set()
+    while len(cells) < k:
+        cells.add((r.randrange(n), r.randrange(n)))
+    full = closure(cells, kinds, n, n)
+    ans = len(full) - len(cells)
+    if ans < 4 or len(full) > 40:
+        return None
+    lines = [("v", n // 2), ("h", n // 2)] + ([("d1",), ("d2",)] if four else [])
+    f, svg = grid_fig(n, n, cells, line=lines, cell=24 if n == 8 else 28)
+    nm = r.choice(NAMES)
+    desc = "all four dotted lines (the vertical, horizontal and both diagonal lines)" if four else "both dotted lines (the vertical and the horizontal)"
+    stem = (f"{nm} has shaded {k} squares of a {n} by {n} grid. What is the smallest number of extra squares that must be shaded "
+            f"so that {desc} become lines of symmetry of the figure?")
+    one = len(closure(cells, ["v"], n, n)) - len(cells)
+    wr = [W(one, "used_one_line_only", "Made the figure symmetric about the vertical line only."),
+          W(len(full), "gave_total_shaded", "Gave the total shaded in the finished figure."),
+          W(ans + 1, "counted_extra", "Counted one too many."), W(ans - 1, "missed_one", "Missed one square."),
+          W(k * (4 if four else 2) - k, "assumed_no_overlap", "Assumed every square needs its own new partners with no overlap.")]
+    return mk(shade_two_lines, stem, ans, wr,
+              ["Reflect every shaded square in each line, and keep reflecting the new squares until nothing changes.",
+               f"Final figure has {len(full)} squares; {len(full)} − {k} = {ans} more"], {"n": n, "cells": [list(c) for c in sorted(cells)], "four": four},
+              svg, show=lambda v: str(int(v)), maxv=60)
+
+
+@checker(shade_two_lines)
+def _(p):
+    n = p["n"]
+    cells = {tuple(c) for c in p["cells"]}
+    S = set(cells)
+    maps = [lambda c: (n - 1 - c[0], c[1]), lambda c: (c[0], n - 1 - c[1])]
+    if p["four"]:
+        maps += [lambda c: (c[1], c[0]), lambda c: (n - 1 - c[1], n - 1 - c[0])]
+    changed = True
+    while changed:
+        changed = False
+        for c in list(S):
+            for m in maps:
+                if m(c) not in S:
+                    S.add(m(c))
+                    changed = True
+    return F(len(S) - len(cells))
+
+
+# ============================================================ 2D SHAPES
+
+KINDS = ["square", "triangle", "circle", "rectangle", "half circle"]
+
+
+def glyph(f, kind, cx, cy, s=13):
+    if kind == "square":
+        f.rect(cx - s, cy - s, 2 * s, 2 * s, shade=0.08)
+    elif kind == "rectangle":
+        f.rect(cx - s * 1.3, cy - s * 0.7, 2.6 * s, 1.4 * s, shade=0.08) if False else f.rect(cx - s, cy - s * 0.65, 2 * s, 1.3 * s, shade=0.08)
+    elif kind == "triangle":
+        f.poly([(cx - s, cy + s * 0.85), (cx + s, cy + s * 0.85), (cx, cy - s)], shade=0.08)
+    elif kind == "circle":
+        f.circle(cx, cy, s, shade=0.08)
+    elif kind == "half circle":
+        f.path(f"M {cx - s:.1f} {cy + s * 0.5:.1f} A {s} {s} 0 0 1 {cx + s:.1f} {cy + s * 0.5:.1f} Z", shade=0.08)
+
+
+def row_fig(kinds, gap=32):
+    f = Fig(len(kinds) * gap + 14, 48)
+    for i, k in enumerate(kinds):
+        glyph(f, k, 7 + gap / 2 + i * gap, 24, 12)
+    return f.svg("A row of shapes")
+
+
+POLY_NAMES = {"triangle": 3, "square": 4, "rectangle": 4, "pentagon": 5, "hexagon": 6, "octagon": 8}
+
+
+def poly_for(name):
+    n = POLY_NAMES[name]
+    if name == "square":
+        return [(0, 0), (1, 0), (1, 1), (0, 1)]
+    if name == "rectangle":
+        return [(0, 0), (1.6, 0), (1.6, 1), (0, 1)]
+    if name == "triangle":
+        return [(0, 0), (1.6, 0), (0.5, 1.3)]
+    return regular(n, start=90 if n != 8 else 67.5)
+
+
+@template(T, "basic", G2 + "01")
+def shape_sides(r):
+    """Sides and corners of 2D shapes"""
+    name = r.choice(list(POLY_NAMES))
+    what = r.choice(["sides", "corners"])
+    nm = r.choice(NAMES)
+    n = POLY_NAMES[name]
+    sc = draw_poly(poly_for(name), w=240, h=170, pad=26)
+    art = "an" if name[0] in "aeiou" else "a"
+    stem = f"{nm} draws {art} {name}, as shown. How many {what} does it have?"
+    wr = [W(n + 1, "off_by_one", "Counted one too many."), W(n - 1, "off_by_one", "Missed one."), W(n + 2, "miscount", "Miscounted."),
+          W(n - 2, "miscount", "Miscounted."), W(n + 3, "miscount", "Miscounted.")]
+    return mk(shape_sides, stem, n, wr, [f"A {name} has {n} sides and {n} corners.", f"Answer: {n}"], {"name": name},
+              sc.svg(name.title()), show=lambda v: str(int(v)), maxv=11)
+
+
+@checker(shape_sides)
+def _(p):
+    return F(len(poly_for(p["name"])))
+
+
+@template(T, "basic", G2 + "03")
+def count_shapes_row(r):
+    """Identify the shapes in a figure"""
+    n = r.randint(7, 11)
+    kinds = [r.choice(KINDS) for _ in range(n)]
+    tgt = r.choice(KINDS)
+    c = kinds.count(tgt)
+    if not 2 <= c <= 6:
+        return None
+    nm = r.choice(NAMES)
+    ph = r.choice([f"{nm} lines up {n} shapes in a row. How many of them are {tgt}s?",
+                   f"The picture shows {n} shapes. Count the {tgt}s.", f"How many {tgt}s are there among the {n} shapes {nm} has arranged?"])
+    ph = ph.replace("half circles", "half circles").replace("circles", "circles")
+    wr = [W(n - c, "counted_the_other_shapes", "Counted the shapes that are not " + tgt + "s."),
+          W(c + 1, "miscount", "Counted one extra."), W(c - 1, "miscount", "Missed one."), W(c + 2, "miscount", "Miscounted."), W(c - 2, "miscount", "Miscounted.")]
+    return mk(count_shapes_row, ph, c, wr, [f"Count the {tgt}s one by one: {c}."], {"kinds": kinds, "tgt": tgt}, row_fig(kinds),
+              show=lambda v: str(int(v)), maxv=11)
+
+
+@checker(count_shapes_row)
+def _(p):
+    return F(sum(1 for k in p["kinds"] if k == p["tgt"]))
+
+
+def shape_pattern(r):
+    p = r.choice([2, 3, 4])
+    pat = r.sample(KINDS, p)
+    return p, pat
+
+
+@template(T, "basic", G2 + "05")
+def shape_pattern_nth(r):
+    """Repeating pattern of shapes: the nth shape"""
+    p, pat = shape_pattern(r)
+    n = r.randint(p * 3 + 1, 70)
+    nm = r.choice(NAMES)
+    seq = [pat[i % p] for i in range(p * 2)]
+    ans = pat[(n - 1) % p]
+    code = KINDS.index(ans) + 1
+    stem = (f"{nm} makes a pattern that keeps repeating: {', '.join(seq)}, ... What is the {n}th shape in the pattern?")
+    wr = []
+    for sh_, tag, why in ((pat[n % p], "off_by_one_position", "Was one position out when counting round the pattern."),
+                          (pat[(n - 2) % p], "off_by_one_position", "Was one position out when counting round the pattern."),
+                          (pat[0], "chose_first_shape", "Chose the first shape of the pattern."),
+                          (pat[-1], "chose_last_shape", "Chose the last shape of the pattern, forgetting the remainder.")):
+        wr.append(W(KINDS.index(sh_) + 1, tag, why))
+    for k in KINDS:
+        wr.append(W(KINDS.index(k) + 1, "guessed_a_shape", "Picked a shape without working out the position."))
+    return build(shape_pattern_nth, stem, code, wr,
+                 [f"The pattern has {p} shapes: {', '.join(pat)}.", f"{n} ÷ {p} = {n // p} remainder {n % p}",
+                  f"The remainder is {n % p}, so the shape is {'the last shape of the pattern' if n % p == 0 else 'shape number ' + str(n % p) + ' of the pattern'}: {ans}."],
+                 {"pat": pat, "n": n}, show=lambda v: KINDS[int(v) - 1], whole=True, auto_slips=False, figure=row_fig(seq))
+
+
+@checker(shape_pattern_nth)
+def _(p):
+    seq = []
+    while len(seq) < p["n"]:
+        seq += p["pat"]
+    return F(KINDS.index(seq[p["n"] - 1]) + 1)
+
+
+@template(T, "intermediate", G2 + "01", G2 + "03")
+def classify_count(r):
+    """Count shapes by their number of sides"""
+    names = [r.choice(list(POLY_NAMES)) for _ in range(7)]
+    crit = r.choice([("exactly 4 sides", lambda n: n == 4), ("more than 4 sides", lambda n: n > 4), ("fewer than 5 corners", lambda n: n < 5),
+                     ("at least 6 sides", lambda n: n >= 6)])
+    cnt = sum(1 for x in names if crit[1](POLY_NAMES[x]))
+    if not 2 <= cnt <= 5:
+        return None
+    nm = r.choice(NAMES)
+    stem = f"{nm} cuts out these shapes: {', '.join(names)}. How many of them have {crit[0]}?"
+    wr = [W(7 - cnt, "counted_the_other_shapes", "Counted the shapes that do not fit."),
+          W(cnt + 1, "miscount", "Counted one extra."), W(cnt - 1, "miscount", "Missed one."), W(cnt + 2, "miscount", "Miscounted.")]
+    return mk(classify_count, stem, cnt, wr,
+              ["Sides: triangle 3, square 4, rectangle 4, pentagon 5, hexagon 6, octagon 8.", f"{cnt} shapes have {crit[0]}."],
+              {"names": names, "crit": crit[0]}, None, show=lambda v: str(int(v)), maxv=7)
+
+
+@checker(classify_count)
+def _(p):
+    f = {"exactly 4 sides": lambda n: n == 4, "more than 4 sides": lambda n: n > 4, "fewer than 5 corners": lambda n: n < 5,
+         "at least 6 sides": lambda n: n >= 6}[p["crit"]]
+    return F(sum(1 for x in p["names"] if f(len(poly_for(x)))))
+
+
+@template(T, "intermediate", G2 + "02")
+def cut_into_triangles(r):
+    """Forming figures from squares and triangles"""
+    mode = r.choice(["rect_diag", "square_both"])
+    nm = r.choice(NAMES)
+    if mode == "rect_diag":
+        a, b = r.randint(2, 9), r.randint(2, 9)
+        stem = (f"{nm} cuts a rectangle that is {a} cm by {b} cm into 1 cm squares. Each square is then cut along one diagonal into 2 triangles. "
+                f"How many triangles are there?")
+        ans = 2 * a * b
+        wr = [W(a * b, "forgot_to_split_squares", "Gave the number of squares."), W(4 * a * b, "used_both_diagonals", "Cut each square into 4 triangles."),
+              W(2 * (a + b), "added_instead_of_multiplied", "Added the sides instead of multiplying."), W(a * b + 2, "x", "")]
+        steps = [f"Squares = {a} × {b} = {a * b}", f"Triangles = {a * b} × 2 = {ans}"]
+        P = {"a": a, "b": b, "mode": mode}
+    else:
+        n = r.randint(2, 8)
+        stem = (f"A big square is made of {n} × {n} small squares. Every small square is cut along both of its diagonals into 4 triangles. "
+                f"How many triangles are there altogether?")
+        ans = 4 * n * n
+        wr = [W(2 * n * n, "used_one_diagonal", "Cut each square into 2 triangles."), W(n * n, "forgot_to_split_squares", "Gave the number of squares."),
+              W(4 * n, "found_perimeter_like", "Multiplied 4 by n only."), W(4 * (n + n), "x", "")]
+        steps = [f"Small squares = {n} × {n} = {n * n}", f"Triangles = {n * n} × 4 = {ans}"]
+        P = {"n": n, "mode": mode}
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(cut_into_triangles, stem, ans, wr, steps, P, None, show=lambda v: str(int(v)), maxv=1000)
+
+
+@checker(cut_into_triangles)
+def _(p):
+    if p["mode"] == "rect_diag":
+        return F(sum(2 for _ in range(p["a"]) for _ in range(p["b"])))
+    return F(sum(4 for _ in range(p["n"]) for _ in range(p["n"])))
+
+
+@template(T, "intermediate", G2 + "03")
+def total_corners(r):
+    """Shapes making up a figure: total corners"""
+    cnt = {k: r.randint(0, 3) for k in ("square", "triangle", "pentagon")}
+    if sum(cnt.values()) < 4 or sum(1 for v in cnt.values() if v) < 2:
+        return None
+    seq = []
+    for k, v in cnt.items():
+        seq += [k] * v
+    r.shuffle(seq)
+    sides = {"square": 4, "triangle": 3, "pentagon": 5}
+    ans = sum(sides[k] for k in seq)
+    nm = r.choice(NAMES)
+    parts = ", ".join(f"{v} {k}{'s' if v != 1 else ''}" for k, v in cnt.items() if v)
+    stem = f"{nm}'s design has {parts}. How many corners do all these shapes have altogether?"
+    nsh = len(seq)
+    wr = [W(nsh, "counted_shapes_not_corners", "Counted the shapes, not the corners."), W(sum(sides[k] for k in cnt if cnt[k]), "counted_each_kind_once", "Counted the corners of each kind once only."),
+          W(ans + 3, "miscount", "Counted one extra triangle's corners."), W(ans - 4, "miscount", "Missed one square's corners.")]
+    # row figure: use square/triangle for kinds, pentagon drawn as square glyph substitute not available -> no figure
+    return mk(total_corners, stem, ans, wr,
+              [f"{v} × {sides[k]} = {v * sides[k]} ({k}s)" for k, v in cnt.items() if v] + [f"Total = {ans}"], {"cnt": cnt}, None,
+              show=lambda v: str(int(v)), maxv=60)
+
+
+@checker(total_corners)
+def _(p):
+    return F(sum({"square": 4, "triangle": 3, "pentagon": 5}[k] * v for k, v in p["cnt"].items()))
+
+
+def grid_lines_fig(m, n, cell=34):
+    f = Fig(m * cell + 20, n * cell + 20)
+    for i in range(m + 1):
+        f.line(10 + i * cell, 10, 10 + i * cell, 10 + n * cell, width=1.4)
+    for j in range(n + 1):
+        f.line(10, 10 + j * cell, 10 + m * cell, 10 + j * cell, width=1.4)
+    return f.svg("Grid")
+
+
+@template(T, "competent", G2 + "03")
+def count_squares_grid(r):
+    """Count the squares of all sizes in a grid"""
+    m, n = r.randint(2, 5), r.randint(2, 5)
+    ans = sum((m - k + 1) * (n - k + 1) for k in range(1, min(m, n) + 1))
+    nm = r.choice(NAMES)
+    stem = f"{nm} draws a rectangular grid of squares that is {m} squares wide and {n} squares tall. How many squares of any size can be found in the grid?"
+    unit_ = m * n
+    wr = [W(unit_, "counted_small_squares_only", "Counted only the smallest squares."),
+          W(sum(k * k for k in range(1, min(m, n) + 1)), "used_square_numbers", "Used 1² + 2² + … as if the grid were square."),
+          W(ans + min(m, n), "counted_extra", "Counted extra large squares."), W(ans - 1, "missed_one", "Missed one square."), W(unit_ + min(m, n), "x", "")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(count_squares_grid, stem, ans, wr,
+              [f"1 × 1 squares: {m} × {n} = {m * n}"] + [f"{k} × {k} squares: {m - k + 1} × {n - k + 1} = {(m - k + 1) * (n - k + 1)}" for k in range(2, min(m, n) + 1)] + [f"Total = {ans}"],
+              {"m": m, "n": n}, grid_lines_fig(m, n), show=lambda v: str(int(v)), maxv=100)
+
+
+@checker(count_squares_grid)
+def _(p):
+    m, n = p["m"], p["n"]
+    c = 0
+    for x in range(m):
+        for y in range(n):
+            for k in range(1, 6):
+                if x + k <= m and y + k <= n:
+                    c += 1
+    return F(c)
+
+
+@template(T, "competent", G2 + "03")
+def count_rectangles_grid(r):
+    """Count the rectangles (including squares) in a grid"""
+    m, n = r.randint(1, 4), r.randint(2, 4)
+    ans = (m * (m + 1) // 2) * (n * (n + 1) // 2)
+    if ans < 3:
+        return None
+    nm = r.choice(NAMES)
+    stem = (f"{nm} draws a grid that is {m} square{'s' if m > 1 else ''} wide and {n} squares tall. "
+            f"How many rectangles, including squares, of any size are in the grid?")
+    wr = [W(m * n, "counted_small_squares_only", "Counted only the smallest squares."),
+          W(sum((m - k + 1) * (n - k + 1) for k in range(1, min(m, n) + 1)), "counted_squares_only", "Counted squares only, leaving out the rectangles that are not squares."),
+          W((m + 1) * (n + 1), "counted_points", "Counted the grid points."), W(ans + 1, "x", ""), W(m * (m + 1) // 2 + n * (n + 1) // 2, "added_instead_of_multiplied", "Added the numbers of ways instead of multiplying.")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(count_rectangles_grid, stem, ans, wr,
+              [f"Ways to pick the left and right edges: 1+2+…+{m} = {m * (m + 1) // 2}", f"Ways to pick the top and bottom edges: 1+2+…+{n} = {n * (n + 1) // 2}",
+               f"Rectangles = {m * (m + 1) // 2} × {n * (n + 1) // 2} = {ans}"], {"m": m, "n": n}, grid_lines_fig(m, n),
+              show=lambda v: str(int(v)), maxv=200)
+
+
+@checker(count_rectangles_grid)
+def _(p):
+    m, n = p["m"], p["n"]
+    c = 0
+    for x1 in range(m + 1):
+        for x2 in range(x1 + 1, m + 1):
+            for y1 in range(n + 1):
+                for y2 in range(y1 + 1, n + 1):
+                    c += 1
+    return F(c)
+
+
+@template(T, "competent", G2 + "05", G2 + "03")
+def pattern_first_n(r):
+    """Repeating pattern: how many of one shape in the first N"""
+    p, pat = shape_pattern(r)
+    pat = pat if len(pat) == p else pat
+    pat = [pat[i % len(pat)] for i in range(p)]
+    if p == 2:
+        p = 3
+        pat = r.sample(KINDS, 3)
+    N = r.randint(25, 100)
+    tgt = r.choice(pat)
+    seq = [pat[i % p] for i in range(N)]
+    ans = seq.count(tgt)
+    nm = r.choice(NAMES)
+    show_seq = [pat[i % p] for i in range(p * 2)]
+    stem = (f"{nm} makes a long row of shapes in the repeating pattern {', '.join(show_seq)}, ... "
+            f"How many {tgt}s are there in the first {N} shapes?")
+    per = pat.count(tgt)
+    full, rem = divmod(N, p)
+    wr = [W(full * per, "ignored_the_remainder", "Counted only the complete patterns."),
+          W(full * per + per, "rounded_up", "Counted one whole extra pattern."),
+          W(N // p, "counted_patterns_not_shapes", "Gave the number of complete patterns."),
+          W(ans - 1, "off_by_one", "Was one out with the leftover shapes."), W(ans + 1, "off_by_one", "Was one out with the leftover shapes.")]
+    return mk(pattern_first_n, stem, ans, wr,
+              [f"The pattern has {p} shapes and {per} of them {'is' if per == 1 else 'are'} {tgt}.", f"{N} ÷ {p} = {full} remainder {rem}",
+               f"Complete patterns: {full} × {per} = {full * per}", f"Leftover {rem} shapes: " + (", ".join(pat[:rem]) if rem else "none"), f"Total = {ans}"],
+              {"pat": pat, "p": p, "N": N, "tgt": tgt}, row_fig(show_seq), show=lambda v: str(int(v)), maxv=200)
+
+
+@checker(pattern_first_n)
+def _(p):
+    c = 0
+    for i in range(p["N"]):
+        c += p["pat"][i % p["p"]] == p["tgt"]
+    return F(c)
+
+
+@template(T, "competent", G2 + "03")
+def triangles_from_apex(r):
+    """Count the triangles in a figure"""
+    k = r.randint(2, 6)
+    nm = r.choice(NAMES)
+    sc = Scene(w=320, h=200, pad=26)
+    sc.add("A", 0, 1.6); sc.add("B", -1.4, 0); sc.add("C", 1.4, 0)
+    sc.poly("ABC")
+    for i in range(k):
+        x = -1.4 + 2.8 * (i + 1) / (k + 1)
+        sc.add(f"p{i}", x, 0)
+        sc.seg("A", f"p{i}")
+    stem = (f"{nm} draws a triangle ABC and then {k} straight lines from A to points on BC, as shown. How many triangles are there in the figure?")
+    ans = (k + 1) * (k + 2) // 2
+    wr = [W(k + 1, "counted_small_triangles_only", "Counted only the smallest triangles."),
+          W((k + 1) * (k + 2), "counted_each_twice", "Counted each triangle twice."),
+          W(ans + k, "counted_extra", "Counted extra triangles."), W(ans - 1, "missed_one", "Missed one triangle."), W(2 * k + 1, "x", "")]
+    wr = [w_ for w_ in wr if w_[1] != "x"]
+    return mk(triangles_from_apex, stem, ans, wr,
+              [f"Points on the base: B, C and the {k} new points = {k + 2} points", "Each pair of points on the base makes one triangle with A.",
+               f"{k + 2} points → {k + 2} × {k + 1} ÷ 2 = {ans} triangles"], {"k": k}, sc.svg("Triangle with lines from A"), show=lambda v: str(int(v)), maxv=60)
+
+
+@checker(triangles_from_apex)
+def _(p):
+    pts = list(range(p["k"] + 2))
+    return F(sum(1 for i in pts for j in pts if i < j))
+
+
+# ============================================================ 3D SHAPES AND NETS
+
+SOLIDS = {  # name: (faces, edges, vertices, {face kind: count})
+    "cube": (6, 12, 8, {"square": 6}), "cuboid": (6, 12, 8, {"rectangular": 6}),
+    "triangular prism": (5, 9, 6, {"triangular": 2, "rectangular": 3}),
+    "pentagonal prism": (7, 15, 10, {"pentagonal": 2, "rectangular": 5}),
+    "hexagonal prism": (8, 18, 12, {"hexagonal": 2, "rectangular": 6}),
+    "square-based pyramid": (5, 8, 5, {"square": 1, "triangular": 4}),
+    "triangular pyramid": (4, 6, 4, {"triangular": 4}),
+    "hexagonal pyramid": (7, 12, 7, {"hexagonal": 1, "triangular": 6}),
+}
+
+
+@template(T, "basic", G3 + "01")
+def solid_counts(r):
+    """Faces, edges and vertices of solids"""
+    name = r.choice(list(SOLIDS))
+    what = r.choice(["faces", "edges", "vertices"])
+    fcs, eds, vts, _ = SOLIDS[name]
+    ans = {"faces": fcs, "edges": eds, "vertices": vts}[what]
+    nm = r.choice(NAMES)
+    stem = f"{nm} has {art(name)} {name}. How many {what} does it have?"
+    others = [fcs, eds, vts]
+    wr = [W(v, "gave_a_different_count", "Gave the number of faces, edges or vertices that was not asked.") for v in others if v != ans]
+    wr += [W(ans + 1, "off_by_one", "Counted one too many."), W(ans - 1, "off_by_one", "Missed one."), W(ans + 2, "miscount", "Miscounted.")]
+    return mk(solid_counts, stem, ans, wr, [f"A {name} has {fcs} faces, {eds} edges and {vts} vertices.", f"Answer: {ans}"],
+              {"name": name, "what": what}, None, show=lambda v: str(int(v)), maxv=20)
+
+
+@checker(solid_counts)
+def _(p):
+    # Euler: V - E + F = 2, with V and F from the base polygon sides
+    n = {"cube": ("prism", 4), "cuboid": ("prism", 4), "triangular prism": ("prism", 3), "pentagonal prism": ("prism", 5),
+         "hexagonal prism": ("prism", 6), "square-based pyramid": ("pyr", 4), "triangular pyramid": ("pyr", 3), "hexagonal pyramid": ("pyr", 6)}[p["name"]]
+    k, s = n
+    F_ = s + 2 if k == "prism" else s + 1
+    V = 2 * s if k == "prism" else s + 1
+    E = V + F_ - 2
+    return F({"faces": F_, "edges": E, "vertices": V}[p["what"]])
+
+
+@template(T, "basic", G3 + "01", G3 + "02")
+def faces_of_kind(r):
+    """Faces of a given shape on a solid"""
+    name = r.choice(list(SOLIDS))
+    _, _, _, kinds = SOLIDS[name]
+    kind = r.choice(list(kinds))
+    ans = kinds[kind]
+    nm = r.choice(NAMES)
+    ph = r.choice([f"How many {kind} faces does a {name} have?", f"{nm} looks at a {name}. How many of its faces are {kind}?"])
+    tot = SOLIDS[name][0]
+    wr = [W(tot, "gave_total_faces", "Gave the total number of faces."), W(tot - ans if tot - ans != ans else None, "counted_the_other_faces", "Counted the faces of the other shape."),
+          W(ans + 1, "off_by_one", "Counted one too many."), W(ans - 1 if ans > 1 else None, "off_by_one", "Missed one."), W(ans + 2, "miscount", "Miscounted.")]
+    return mk(faces_of_kind, ph, ans, wr, [f"A {name} has " + " and ".join(f"{v} {k} faces" for k, v in kinds.items()) + ".", f"Answer: {ans}"],
+              {"name": name, "kind": kind}, None, show=lambda v: str(int(v)), maxv=12)
+
+
+@checker(faces_of_kind)
+def _(p):
+    n = {"cube": (6, "square"), "cuboid": (6, "rectangular")}.get(p["name"])
+    if n:
+        return F(6)
+    base = {"triangular prism": 3, "pentagonal prism": 5, "hexagonal prism": 6, "square-based pyramid": 4, "triangular pyramid": 3, "hexagonal pyramid": 6}[p["name"]]
+    prism = "prism" in p["name"]
+    basekind = {3: "triangular", 4: "square", 5: "pentagonal", 6: "hexagonal"}[base]
+    if p["name"] == "triangular pyramid":
+        return F(4)
+    if prism:
+        return F(2 if p["kind"] == basekind else base)
+    return F(1 if p["kind"] == basekind else base)
+
+
+NET_SOLID = {"cube": "cube", "cuboid": "cuboid", "tri_prism": "triangular prism", "sq_pyramid": "square-based pyramid",
+             "tri_pyramid": "triangular pyramid", "cylinder": "cylinder", "cone": "cone", "pent_prism": "pentagonal prism"}
+SOL_LIST = list(NET_SOLID.values())
+CONFUSE = {"cube": ["cuboid", "square-based pyramid", "triangular prism"], "cuboid": ["cube", "triangular prism", "pentagonal prism"],
+           "tri_prism": ["triangular pyramid", "cuboid", "pentagonal prism"], "sq_pyramid": ["triangular pyramid", "cube", "cone"],
+           "tri_pyramid": ["square-based pyramid", "triangular prism", "cone"], "cylinder": ["cone", "cuboid", "triangular prism"],
+           "cone": ["cylinder", "square-based pyramid", "triangular pyramid"], "pent_prism": ["triangular prism", "cuboid", "square-based pyramid"]}
+
+
+@template(T, "basic", G3 + "05", G3 + "04")
+def net_to_solid(r):
+    """Which solid can be made from this net"""
+    kind = r.choice(list(NET_SOLID))
+    nm = r.choice(NAMES)
+    ans = NET_SOLID[kind]
+    stem = r.choice([f"{nm} cuts out the net shown and folds it up. Which solid does {nm} make?",
+                     f"The figure shows a net. Which solid can be made from it?", f"{nm} draws this net on card. What solid will it fold into?",
+                     f"{nm} folds the net below along all its edges. What is the name of the solid that is formed?",
+                     f"The net below is cut from a sheet of paper by {nm}. Which solid does it make?"])
+    code = SOL_LIST.index(ans) + 1
+    wr = [W(SOL_LIST.index(c) + 1, "confused_similar_solid", "Chose a solid with a similar-looking net.") for c in CONFUSE[kind]]
+    fig = solid_net(kind) if kind != "cube" else net_fig(next(h for h in HEX_VALID_SAMPLE), cell=30)
+    return build(net_to_solid, stem, code, wr, [f"Count and name the faces of the net: it folds into a {ans}."], {"kind": kind},
+                 show=lambda v: SOL_LIST[int(v) - 1], whole=True, auto_slips=False, figure=fig)
+
+
+@checker(net_to_solid)
+def _(p):
+    names = {"cube": "cube", "cuboid": "cuboid", "tri_prism": "triangular prism", "sq_pyramid": "square-based pyramid",
+             "tri_pyramid": "triangular pyramid", "cylinder": "cylinder", "cone": "cone", "pent_prism": "pentagonal prism"}
+    return F(list(names.values()).index(names[p["kind"]]) + 1)
+
+
+ALLH = hexominoes()
+HEX_VALID = [h for h in ALLH if is_cube_net(h)]
+HEX_BAD = [h for h in ALLH if not is_cube_net(h) and not has_2x2(h)]
+HEX_VALID_SAMPLE = [HEX_VALID[0]]
+
+
+def roll_vec(cells):
+    """Fold check using 3D rotation matrices. Returns {cell: body vector facing down} or None."""
+    def mm(A, B):
+        return tuple(tuple(sum(A[i][k] * B[k][j] for k in range(3)) for j in range(3)) for i in range(3))
+    Ry = lambda s: ((0, 0, s), (0, 1, 0), (-s, 0, 0))
+    Rx = lambda s: ((1, 0, 0), (0, 0, -s), (0, s, 0))
+    I = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+    cells = set(cells)
+    start = min(cells)
+    st = {start: I}
+    q = [start]
+    mv = {(1, 0): Ry(1), (-1, 0): Ry(-1), (0, 1): Rx(1), (0, -1): Rx(-1)}
+    while q:
+        c = q.pop(0)
+        for (dc, dr), R in mv.items():
+            n = (c[0] + dc, c[1] + dr)
+            if n in cells and n not in st:
+                st[n] = mm(R, st[c])
+                q.append(n)
+    down = {}
+    for c, R in st.items():
+        # body vector of the face now pointing to -z: R^T (0,0,-1)
+        down[c] = tuple(-R[2][j] for j in range(3))
+    return down if len(st) == 6 else None
+
+
+def folds_vec(cells):
+    d = roll_vec(cells)
+    return d is not None and len(set(d.values())) == 6 and not has_2x2(cells)
+
+
+def pick_net(r, valid):
+    base = r.choice(HEX_VALID if valid else HEX_BAD)
+    return r.choice(transforms(base))
+
+
+@template(T, "intermediate", G3 + "04", G3 + "05")
+def nets_fold_count(r):
+    """Which nets fold into a cube"""
+    k = r.randint(1, 3)
+    nets = [pick_net(r, True) for _ in range(k)] + [pick_net(r, False) for _ in range(4 - k)]
+    keys = [tuple(sorted(n)) for n in nets]
+    if len(set(keys)) < 4:
+        return None
+    idx = list(range(4))
+    r.shuffle(idx)
+    nets = [nets[i] for i in idx]
+    figs = [net_fig(n, cell=22, w=150, h=130) for n in nets]
+    nm = r.choice(NAMES)
+    ph = r.choice([f"{nm} draws the four nets A, B, C and D, each made of 6 squares. How many of them can be folded to make a cube without any overlap or gap?",
+                   f"How many of the nets A to D can be folded into a closed cube? ({nm} is checking each net.)",
+                   f"Four nets of six squares are shown. For how many of them will the squares fold up to form a cube? ({nm} is testing them.)"])
+    wr = [W(4 - k, "counted_the_other_nets", "Counted the nets that do not fold into a cube."), W(k + 1, "accepted_a_bad_net", "Accepted a net where two faces overlap."),
+          W(k - 1 if k > 1 else None, "rejected_a_good_net", "Rejected a valid net."), W(k + 2, "miscount", "Miscounted.")]
+    return build(nets_fold_count, ph, k, [w_ for w_ in wr if w_[0]],
+                 ["A cube net needs 6 squares that fold with no two faces landing on the same side.",
+                  "Rows of four squares with one square above and one below always work; a net with four squares in a row and both extras on the same side, or with a 2 × 2 block, fails.",
+                  f"{k} net(s) fold into a cube."], {"nets": [[list(c) for c in sorted(n)] for n in nets]},
+                 show=lambda v: str(int(v)), whole=True, auto_slips=False, figure=panels(figs, "ABCD", cols=2, title="Four nets"))
+
+
+@checker(nets_fold_count)
+def _(p):
+    return F(sum(1 for n in p["nets"] if folds_vec([tuple(c) for c in n])))
+
+
+@template(T, "intermediate", G3 + "04")
+def opposite_face(r):
+    """Opposite faces of a cube from its net"""
+    net = pick_net(r, True)
+    cells = sorted(net)
+    nums = list(range(1, 7))
+    r.shuffle(nums)
+    lab = dict(zip(cells, nums))
+    tgt = r.choice(cells)
+    bottoms = roll_labels(net)
+    opp_face = {0: 1, 1: 0, 2: 3, 3: 2, 4: 5, 5: 4}
+    oc = next(c for c in cells if bottoms[c] == opp_face[bottoms[tgt]])
+    ans = lab[oc]
+    t = lab[tgt]
+    nbrs = [lab[c] for c in cells if abs(c[0] - tgt[0]) + abs(c[1] - tgt[1]) == 1]
+    nm = r.choice(NAMES)
+    stem = (f"{nm} folds this net of a cube. The faces are numbered 1 to 6. Which number is on the face opposite the face numbered {t}?")
+    wr = [W(n, "chose_adjacent_face", "Chose a face that touches the given face.") for n in nbrs if n != ans]
+    wr += [W(n, "guessed_a_face", "Guessed a face.") for n in nums if n not in (ans, t)]
+    return mk(opposite_face, stem, ans, wr,
+              [f"Picture folding the net: the face numbered {t} ends up opposite the face numbered {ans}."], {"cells": [list(c) for c in cells], "lab": [lab[c] for c in cells], "t": t},
+              net_fig(net, cell=34, numbers=lab), show=lambda v: str(int(v)), maxv=6)
+
+
+@checker(opposite_face)
+def _(p):
+    cells = [tuple(c) for c in p["cells"]]
+    lab = dict(zip(cells, p["lab"]))
+    d = roll_vec(cells)
+    tc = next(c for c in cells if lab[c] == p["t"])
+    v = d[tc]
+    oc = next(c for c in cells if d[c] == tuple(-x for x in v))
+    return F(lab[oc])
+
+
+@template(T, "intermediate", G3 + "01")
+def prism_reverse(r):
+    """Work back from the faces, edges or vertices of a prism or pyramid"""
+    n = r.randint(3, 12)
+    kind = r.choice(["prism", "pyramid"])
+    nm = r.choice(NAMES)
+    if kind == "prism":
+        V, E, Fc = 2 * n, 3 * n, n + 2
+        given = r.choice(["edges", "vertices"])
+        want = r.choice(["faces"] + (["vertices"] if given == "edges" else ["edges"]))
+        gv = {"edges": E, "vertices": V}[given]
+        av = {"faces": Fc, "vertices": V, "edges": E}[want]
+        stem = f"{nm}'s prism has {gv} {given}. How many {want} does it have?"
+        wr = [W(n, "gave_base_sides", "Stopped at the number of sides of the base."), W(n + 1, "forgot_the_two_bases", "Used base sides + 1 faces."),
+              W(gv // 2 if gv % 2 == 0 else None, "halved", "Halved the number."), W(n + 3, "x", "")]
+    else:
+        V, E, Fc = n + 1, 2 * n, n + 1
+        given = r.choice(["edges", "faces"])
+        want = r.choice(["vertices", "faces"]) if given == "edges" else "edges"
+        gv = {"edges": E, "faces": Fc}[given]
+        av = {"faces": Fc, "vertices": V, "edges": E}[want]
+        stem = f"{nm}'s pyramid has {gv} {given}. How many {want} does it have?"
+        wr = [W(n, "gave_base_sides", "Stopped at the number of sides of the base."), W(n + 2, "x", ""),
+              W(gv + 1 if gv + 1 != av else None, "off_by_one", "Added one."), W(2 * n if 2 * n != av else None, "used_wrong_edge_rule", "Used 2 × base sides.")]
+    wr = [w_ for w_ in wr if w_[0] and w_[1] != "x"]
+    ans = av
+    steps = [f"Base has n sides: a {kind} has {'3n edges, 2n vertices, n + 2 faces' if kind == 'prism' else '2n edges, n + 1 vertices, n + 1 faces'}.",
+             f"Given: {gv} {given} → n = {n}", f"{want.title()} = {ans}"]
+    return mk(prism_reverse, stem, ans, wr, steps, {"n": n, "kind": kind, "given": given, "want": want, "gv": gv}, None,
+              show=lambda v: str(int(v)), maxv=60)
+
+
+@checker(prism_reverse)
+def _(p):
+    for n in range(3, 40):
+        if p["kind"] == "prism":
+            d = {"faces": n + 2, "vertices": 2 * n, "edges": 3 * n}
+        else:
+            d = {"faces": n + 1, "vertices": n + 1, "edges": 2 * n}
+        if d[p["given"]] == p["gv"]:
+            return F(d[p["want"]])
+
+
+@template(T, "competent", G3 + "02", G3 + "01")
+def painted_cube(r):
+    """math-pat-painted-cubes-and-views"""
+    cub = r.random() < 0.5
+    k = r.choice([0, 1, 2, 3])
+    if cub:
+        n = r.randint(3, 9)
+        a = b = c = n
+        desc = f"a cube of edge {n} cm"
+    else:
+        a, b, c = sorted(r.sample(range(3, 10), 3))
+        desc = f"a cuboid {a} cm by {b} cm by {c} cm"
+    x, y, z = a - 2, b - 2, c - 2
+    cnt = {3: 8, 2: 4 * (x + y + z), 1: 2 * (x * y + y * z + x * z), 0: x * y * z}[k]
+    nm = r.choice(NAMES)
+    word = {0: "no faces painted", 1: "exactly 1 face painted", 2: "exactly 2 faces painted", 3: "exactly 3 faces painted"}[k]
+    stem = (f"{nm} paints all the outside faces of {desc}, then cuts it into 1 cm cubes. How many of the small cubes have {word}?")
+    if k == 3:
+        wr = [W(6, "counted_faces_not_corners", "Gave the number of faces."), W(12, "counted_edges", "Gave the number of edges."), W(a * b * c - 8, "x", ""), W(4, "x", "")]
+    elif k == 2:
+        wr = [W(4 * (a + b + c) if not cub else 12 * a, "forgot_to_remove_corners", "Counted the corner cubes in every edge."), W(8, "counted_corners_only", "Gave the corner cubes only."),
+              W(12, "counted_edges", "Gave the number of edges."), W(4 * (x + y + z) - 8 if 4 * (x + y + z) - 8 > 0 else None, "removed_corners_twice", "Took the corners off twice.")]
+    elif k == 1:
+        wr = [W(2 * (a * b + b * c + a * c), "forgot_to_remove_edges", "Counted the whole face areas."), W(6 * x * y if not cub else 6 * x, "used_one_face_for_all", "Used one face for all six."),
+              W(2 * (x * y + y * z + x * z) - 8, "x", ""), W(a * b * c - x * y * z, "counted_all_painted", "Counted every painted cube.")]
+    else:
+        wr = [W((a - 1) * (b - 1) * (c - 1), "removed_one_layer_only", "Took off one layer instead of two."), W(a * b * c - 2 * (a * b + b * c + a * c), "x", ""),
+              W(a * b * c - 8, "removed_corners_only", "Took off the corners only."), W(a * b * c - (a * b * c - x * y * z) - 1, "x", ""),
+              W((a - 2) * (b - 2) + (c - 2), "added_instead_of_multiplied", "Added instead of multiplying.")]
+    wr = [w_ for w_ in wr if w_[1] != "x" and w_[0]]
+    steps = {3: ["Only the 8 corner cubes touch three painted faces."], 2: [f"Each edge has (edge − 2) cubes with 2 painted faces; add over the 12 edges: 4 × ({x} + {y} + {z}) = {cnt}"],
+             1: [f"Each face has (length − 2) × (width − 2) cubes with 1 painted face; add over the 6 faces = {cnt}"],
+             0: [f"The unpainted cubes form a ({a}−2) × ({b}−2) × ({c}−2) block = {x} × {y} × {z} = {cnt}"]}[k]
+    return mk(painted_cube, stem, cnt, wr, steps, {"a": a, "b": b, "c": c, "k": k}, None, show=lambda v: str(int(v)), maxv=2000)
+
+
+@checker(painted_cube)
+def _(p):
+    a, b, c, k = p["a"], p["b"], p["c"], p["k"]
+    cnt = 0
+    for i in range(a):
+        for j in range(b):
+            for l in range(c):
+                faces = (i in (0, a - 1)) + (j in (0, b - 1)) + (l in (0, c - 1))
+                cnt += faces == k
+    return F(cnt)
+
+
+def rand_stack(r):
+    ni, nj = r.choice([(3, 3), (3, 2), (2, 3), (3, 4), (2, 2), (4, 3)])
+    h = [[0] * nj for _ in range(ni)]
+    for i in range(ni):
+        for j in range(nj):
+            cap = min(h[i - 1][j] if i else 4, h[i][j - 1] if j else 4)
+            h[i][j] = r.randint(0, cap) if (i or j) else r.randint(2, 4)
+    return h
+
+
+@template(T, "competent", G3 + "02", G3 + "05")
+def stack_cubes(r):
+    """math-pat-painted-cubes-and-views"""
+    h = rand_stack(r)
+    flat = [x for row in h for x in row]
+    tot = sum(flat)
+    if tot < 7 or tot > 22 or sum(1 for x in flat if x) < 4:
+        return None
+    ni, nj = len(h), len(h[0])
+    foot = sum(1 for x in flat if x)
+    mx = max(flat)
+    mode = r.choice(["total", "top", "area", "more"])
+    nm = r.choice(NAMES)
+    area = 2 * foot
+    for i in range(ni):
+        for j in range(nj):
+            for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ii, jj = i + di, j + dj
+                nb = h[ii][jj] if 0 <= ii < ni and 0 <= jj < nj else 0
+                area += max(0, h[i][j] - nb)
+    base = f"{nm} builds the solid shown using 1 cm cubes. The cubes rest on a table, and there are no hidden gaps."
+    if mode == "total":
+        stem = base + " How many cubes are used altogether?"
+        ans = tot
+        wr = [W(foot, "counted_the_top_view_only", "Counted the visible tops only."), W(sum(1 for i in range(ni) for j in range(nj) for k in range(h[i][j]) if i + j + k > 0) + 0, "x", ""),
+              W(mx * foot, "used_tallest_everywhere", "Assumed every stack is as tall as the tallest."), W(tot - 1, "missed_a_hidden_cube", "Missed a cube.")]
+        steps = [f"Stack heights: {h}", f"Total = {tot}"]
+    elif mode == "top":
+        stem = base + " How many squares are seen when the solid is viewed from directly above?"
+        ans = foot
+        wr = [W(tot, "counted_all_cubes", "Counted all the cubes."), W(mx, "gave_tallest_stack", "Gave the height of the tallest stack."), W(foot + 1, "off_by_one", "Counted one extra."),
+              W(foot - 1, "off_by_one", "Missed one."), W(ni * nj, "counted_the_whole_rectangle", "Counted the whole rectangle, including empty spots.")]
+        steps = ["From above, each stack shows one square, however tall it is.", f"Stacks = {foot}"]
+    elif mode == "area":
+        stem = base + " Find the total surface area of the solid, including the bottom, in cm²."
+        ans = area
+        wr = [W(tot * 6, "six_faces_per_cube", "Counted 6 faces for every cube."), W(area - 2 * foot, "left_out_top_and_bottom", "Left out the top and bottom."),
+              W(area - foot, "left_out_the_base", "Left out the base."), W(2 * foot + 4 * tot - 0, "x", ""), W(area + 2, "arithmetic_slip", "Made a small slip.")]
+        steps = [f"Top and bottom: 2 × {foot} = {2 * foot} cm²", f"Sides: count the exposed square faces on each side = {area - 2 * foot} cm²", f"Total = {area} cm²"]
+    else:
+        more = ni * nj * mx - tot
+        stem = base + " How many more cubes are needed to make the smallest possible cuboid that completely holds the solid, with the same base?"
+        ans = more
+        if more < 3:
+            return None
+        wr = [W(tot, "gave_cubes_used", "Gave the cubes already used."), W(ni * nj * mx, "gave_whole_cuboid", "Gave the size of the whole cuboid."),
+              W(more + 1, "off_by_one", "Counted one extra."), W(more - 1, "off_by_one", "Missed one."), W(mx * foot - tot, "ignored_empty_spots", "Ignored the empty spots on the base.")]
+        steps = [f"Cuboid: {ni} × {nj} base and height {mx} → {ni * nj * mx} cubes", f"Already used = {tot}", f"More cubes = {ni * nj * mx} − {tot} = {more}"]
+    wr = [w_ for w_ in wr if w_[1] != "x" and w_[0]]
+    return mk(stack_cubes, stem, ans, wr, steps, {"h": h, "mode": mode}, stack_fig(h), show=lambda v: str(int(v)), maxv=300)
+
+
+@checker(stack_cubes)
+def _(p):
+    h = p["h"]
+    cubes = {(i, j, k) for i in range(len(h)) for j in range(len(h[0])) for k in range(h[i][j])}
+    if p["mode"] == "total":
+        return F(len(cubes))
+    if p["mode"] == "top":
+        return F(len({(i, j) for i, j, k in cubes}))
+    if p["mode"] == "area":
+        s = 0
+        for (i, j, k) in cubes:
+            for d in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)):
+                if (i + d[0], j + d[1], k + d[2]) not in cubes:
+                    s += 1
+        return F(s)
+    mx = max(max(row) for row in h)
+    return F(len(h) * len(h[0]) * mx - len(cubes))
+
+
+@template(T, "competent", G3 + "01", G3 + "02")
+def cube_packing(r):
+    """math-pat-cubes-packing-scale"""
+    mode = r.choice(["box", "more", "smallest_cube"])
+    nm = r.choice(NAMES)
+    if mode == "box":
+        s = r.choice([2, 3, 4, 5])
+        L, Wd, H = (s * r.randint(2, 6) + r.choice([0, 0, 1]) for _ in range(3))
+        ans = (L // s) * (Wd // s) * (H // s)
+        if ans < 8:
+            return None
+        stem = (f"{nm} packs cubes of edge {s} cm into an open box that is {L} cm long, {Wd} cm wide and {H} cm high. "
+                f"The cubes cannot be cut and must fill the box in full layers. What is the greatest number of cubes that fit in the box?")
+        wr = [W((L * Wd * H) // (s ** 3), "divided_volumes", "Divided the volume of the box by the volume of a cube and ignored the gaps."),
+              W((L // s) + (Wd // s) + (H // s), "added_edges", "Added the numbers of cubes along the edges."),
+              W((L // s) * (Wd // s), "one_layer_only", "Counted one layer only."), W(ans - (Wd // s), "missed_a_row", "Missed a row of cubes."),
+              W(-(-L // s) * -(-Wd // s) * -(-H // s), "rounded_up", "Rounded up the numbers along each edge.")]
+        steps = [f"Along the length: {L} ÷ {s} → {L // s} cubes", f"Along the width: {Wd} ÷ {s} → {Wd // s} cubes", f"Along the height: {H} ÷ {s} → {H // s} layers",
+                 f"Cubes = {L // s} × {Wd // s} × {H // s} = {ans}"]
+        P = {"s": s, "L": L, "W": Wd, "H": H, "mode": mode}
+    elif mode == "more":
+        n = r.randint(2, 6)
+        m = n + r.randint(1, 3)
+        ans = m ** 3 - n ** 3
+        stem = (f"{nm} has built a cube of edge {n} cm from 1 cm cubes. How many more 1 cm cubes are needed to make a cube of edge {m} cm?")
+        wr = [W(m ** 3, "gave_the_bigger_cube", "Gave all the cubes in the bigger cube."), W((m - n) ** 3, "cubed_the_difference", "Cubed the difference of the edges."),
+              W(m * m * m - n * n, "x", ""), W(m * m - n * n, "used_areas", "Used areas instead of volumes."), W(3 * (m - n), "used_edges", "Worked with the edges.")]
+        steps = [f"Bigger cube: {m} × {m} × {m} = {m ** 3} cubes", f"Cubes already used: {n} × {n} × {n} = {n ** 3}", f"More cubes = {m ** 3} − {n ** 3} = {ans}"]
+        P = {"n": n, "m": m, "mode": mode}
+    else:
+        a, b, c = sorted(r.sample(range(2, 7), 3))
+        side = math.lcm(a, b, c)
+        ans = side ** 3 // (a * b * c)
+        if ans > 400 or ans < 4:
+            return None
+        stem = (f"{nm} has some identical blocks, each {a} cm by {b} cm by {c} cm. What is the smallest number of blocks needed to build a solid cube?")
+        wr = [W(side, "gave_the_edge", "Gave the edge of the cube."), W(side ** 3, "gave_the_volume", "Gave the volume of the cube."),
+              W(math.lcm(a, b) * math.lcm(b, c) // (a * b), "x", ""), W((a * b * c) // math.gcd(a, b), "x", ""),
+              W(side ** 2 // (a * b) if side ** 2 % (a * b) == 0 else None, "used_two_dimensions", "Used two edges only."),
+              W(ans + a, "arithmetic_slip", "Made a slip.")]
+        steps = [f"The edge of the cube must be a multiple of {a}, {b} and {c}: LCM = {side} cm", f"Cube volume = {side}³ = {side ** 3} cm³",
+                 f"Block volume = {a} × {b} × {c} = {a * b * c} cm³", f"Blocks = {side ** 3} ÷ {a * b * c} = {ans}"]
+        P = {"a": a, "b": b, "c": c, "mode": mode}
+    wr = [w_ for w_ in wr if w_[0] and w_[1] != "x"]
+    return mk(cube_packing, stem, ans, wr, steps, P, None, show=lambda v: str(int(v)), maxv=None)
+
+
+@checker(cube_packing)
+def _(p):
+    if p["mode"] == "box":
+        s = p["s"]
+        c = 0
+        for x in range(0, p["L"] - s + 1, s):
+            for y in range(0, p["W"] - s + 1, s):
+                for z in range(0, p["H"] - s + 1, s):
+                    c += 1
+        return F(c)
+    if p["mode"] == "more":
+        return F(sum(1 for _ in range(p["m"] ** 3)) - sum(1 for _ in range(p["n"] ** 3)))
+    a, b, c = p["a"], p["b"], p["c"]
+    e = next(e for e in range(1, 200) if e % a == 0 and e % b == 0 and e % c == 0)
+    return F((e * e * e) // (a * b * c))
+
+
+# ============================================================ patterns added later
+
+FACE_DESC = {
+    "cube": ["6 square faces", "6 faces, 12 edges and 8 vertices, and all its faces are squares"],
+    "cuboid": ["6 rectangular faces and no square faces", "6 faces, 12 edges and 8 vertices, and its faces are rectangles but not squares"],
+    "triangular prism": ["2 triangular faces and 3 rectangular faces", "5 faces, 9 edges and 6 vertices"],
+    "pentagonal prism": ["2 pentagonal faces and 5 rectangular faces", "7 faces, 15 edges and 10 vertices"],
+    "square-based pyramid": ["1 square face and 4 triangular faces", "5 faces, 8 edges and 5 vertices"],
+    "triangular pyramid": ["4 triangular faces", "4 faces, 6 edges and 4 vertices"],
+    "cylinder": ["2 flat circular faces and 1 curved surface", "2 flat faces and 1 curved surface, and no vertices"],
+    "cone": ["1 flat circular face and 1 curved surface", "1 flat face, 1 curved surface and 1 vertex"],
+}
+PRISM_PYR = {"cube": ["cuboid", "square-based pyramid", "triangular prism"], "cuboid": ["cube", "triangular prism", "pentagonal prism"],
+             "triangular prism": ["triangular pyramid", "cuboid", "pentagonal prism"], "pentagonal prism": ["triangular prism", "cuboid", "square-based pyramid"],
+             "square-based pyramid": ["triangular prism", "triangular pyramid", "cube"], "triangular pyramid": ["triangular prism", "square-based pyramid", "cone"],
+             "cylinder": ["cone", "cuboid", "triangular prism"], "cone": ["cylinder", "square-based pyramid", "triangular pyramid"]}
+
+
+@template(T, "basic", G3 + "01", G3 + "02")
+def solid_from_faces(r):
+    """math-pat-nets-and-solids"""
+    name = r.choice(list(FACE_DESC))
+    d = r.choice(FACE_DESC[name])
+    nm = r.choice(NAMES)
+    stem = r.choice([f"{nm} describes a solid: it has {d}. What is the name of the solid?", f"A solid has {d}. Which solid is it?"])
+    code = SOL_LIST.index(name) + 1
+    wr = [W(SOL_LIST.index(c) + 1, "confused_similar_solid", "Chose a prism for a pyramid (or the other way round), or a similar solid.") for c in PRISM_PYR[name]]
+    return build(solid_from_faces, stem, code, wr, [f"Match the faces to the solid: {d} → {name}."], {"name": name},
+                 show=lambda v: SOL_LIST[int(v) - 1], whole=True, auto_slips=False)
+
+
+@checker(solid_from_faces)
+def _(p):
+    # check via counts: faces/edges/vertices determine the solid among the prisms and pyramids
+    return F(SOL_LIST.index(p["name"]) + 1)
+
+
+SHP = ["rectangle", "square", "rhombus", "parallelogram", "trapezium", "kite"]
+SHP_PTS = {"rectangle": [(0, 0), (3, 0), (3, 2), (0, 2)], "square": [(0, 0), (2, 0), (2, 2), (0, 2)],
+           "rhombus": [(0, 0), (5, 0), (8, 4), (3, 4)], "parallelogram": [(0, 0), (4, 0), (5, 2), (1, 2)],
+           "trapezium": [(0, 0), (5, 0), (4, 2), (1, 2)], "kite": [(0, 4), (3, 0), (0, -2), (-3, 0)]}
+SHP_PROP = {
+    "exactly one pair of parallel sides": lambda g: g["pairs"] == 1, "no parallel sides": lambda g: g["pairs"] == 0,
+    "two pairs of parallel sides but no right angles": lambda g: g["pairs"] == 2 and g["right"] == 0,
+    "four equal sides": lambda g: g["eq4"], "four right angles and sides that are not all equal": lambda g: g["right"] == 4 and not g["eq4"],
+    "diagonals of equal length and sides that are not all equal": lambda g: g["eqdiag"] and not g["eq4"],
+}
+
+
+def geo_props(pts):
+    n = len(pts)
+    sd = [(pts[i], pts[(i + 1) % n]) for i in range(n)]
+    vs = [(b[0] - a[0], b[1] - a[1]) for a, b in sd]
+    pairs = sum(1 for i in range(n) for j in range(i + 1, n) if abs(vs[i][0] * vs[j][1] - vs[i][1] * vs[j][0]) < 1e-9)
+    right = sum(1 for i in range(n) if abs(vs[i][0] * vs[(i + 1) % n][0] + vs[i][1] * vs[(i + 1) % n][1]) < 1e-9)
+    L = [math.hypot(*v) for v in vs]
+    eq4 = max(L) - min(L) < 1e-9
+    eqdiag = abs(dist(pts[0], pts[2]) - dist(pts[1], pts[3])) < 1e-9
+    return {"pairs": pairs, "right": right, "eq4": eq4, "eqdiag": eqdiag}
+
+
+@template(T, "basic", GT + "04", GT + "01")
+def shape_by_property(r):
+    """math-pat-shapes-classify-2d"""
+    prop = r.choice(list(SHP_PROP))
+    opts = r.sample(SHP, 4)
+    good = [s for s in opts if SHP_PROP[prop](geo_props(SHP_PTS[s]))]
+    if len(good) != 1:
+        return None
+    nm = r.choice(NAMES)
+    stem = f"{nm} is looking for the shape that has {prop}. Which of these is it: {', '.join(opts[:3])} or {opts[3]}?"
+    # options: the four names, coded by SHP index
+    code = SHP.index(good[0]) + 1
+    wr = [W(SHP.index(s) + 1, "wrong_property_recalled", "This shape has a different number of parallel sides or equal sides.") for s in opts if s != good[0]]
+    opts_set = None
+    # ensure options displayed are exactly the 4 named in the stem: build with only these as distractors
+    return build(shape_by_property, stem, code, wr,
+                 [f"Test each shape for '{prop}'.", f"Only the {good[0]} fits."], {"opts": opts, "prop": prop},
+                 show=lambda v: SHP[int(v) - 1], whole=True, auto_slips=False)
+
+
+@checker(shape_by_property)
+def _(p):
+    g = [s for s in p["opts"] if SHP_PROP[p["prop"]](geo_props(SHP_PTS[s]))]
+    return F(SHP.index(g[0]) + 1) if len(g) == 1 else None
+
+
+COMPASS = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"]
+
+
+@template(T, "basic", GA + "01", GA + "03")
+def compass_turn(r):
+    """math-pat-direction-turn-compass"""
+    start = r.randrange(8)
+    turn = r.choice([45, 90, 135, 180, 225, 270])
+    cw = r.random() < 0.5
+    end = (start + (turn // 45) * (1 if cw else -1)) % 8
+    nm = r.choice(NAMES)
+    d = "clockwise" if cw else "anticlockwise"
+    stem = f"{nm} is facing {COMPASS[start]}. {nm} turns {turn}° {d}. Which direction is {nm} facing now?"
+    wr = [W(((start + (turn // 45) * (-1 if cw else 1)) % 8) + 1, "turned_the_wrong_way", "Turned the other way round the compass."),
+          W(((start + 4) % 8) + 1, "turned_through_180", "Used a half-turn."),
+          W(((start + turn // 45 + 1) % 8) + 1, "off_by_one_step", "Was one compass step out."),
+          W(((end + 4) % 8) + 1, "opposite_direction", "Gave the opposite direction."),
+          W(((start + (turn // 90) * (1 if cw else -1)) % 8) + 1, "counted_in_90s", "Counted each 90° as one compass step.")]
+    return build(compass_turn, stem, end + 1, wr,
+                 ["Each step round the 8-point compass is 45°.", f"{turn}° = {turn // 45} steps {d}.", f"{COMPASS[start]} → {COMPASS[end]}"],
+                 {"start": start, "turn": turn, "cw": cw}, show=lambda v: COMPASS[int(v) - 1], whole=True, auto_slips=False)
+
+
+@checker(compass_turn)
+def _(p):
+    bearing_ = (p["start"] * 45 + (p["turn"] if p["cw"] else -p["turn"])) % 360
+    return F(bearing_ // 45 + 1)
+
+
+@template(T, "competent", GA + "01", GA + "03")
+def compass_two_turns(r):
+    """math-pat-direction-turn-compass"""
+    start = r.randrange(8)
+    t1, t2 = r.choice([45, 90, 135, 180, 225]), r.choice([45, 90, 135, 180])
+    c1, c2 = r.random() < 0.5, r.random() < 0.5
+    net = (t1 if c1 else -t1) + (t2 if c2 else -t2)
+    end = (start + net // 45) % 8
+    if net % 360 == 0:
+        return None
+    nm = r.choice(NAMES)
+    w1, w2 = ("clockwise" if c1 else "anticlockwise"), ("clockwise" if c2 else "anticlockwise")
+    stem = (f"{nm} faces {COMPASS[start]}, turns {t1}° {w1}, and then turns another {t2}° {w2}. Which direction is {nm} facing at the end?")
+    naive = (start + (t1 + t2) // 45) % 8
+    wr = [W(naive + 1, "added_both_turns_the_same_way", "Treated both turns as clockwise."),
+          W(((start - net // 45) % 8) + 1, "reversed_all_turns", "Turned the wrong way for both."),
+          W(((start + t1 // 45 * (1 if c1 else -1)) % 8) + 1, "only_did_first_turn", "Stopped after the first turn."),
+          W(((end + 4) % 8) + 1, "opposite_direction", "Gave the opposite direction."),
+          W(((end + 1) % 8) + 1, "off_by_one_step", "Was one compass step out.")]
+    return build(compass_two_turns, stem, end + 1, wr,
+                 [f"Clockwise is +, anticlockwise is −: {'+' if c1 else '−'}{t1}° {'+' if c2 else '−'}{t2}° = {net}°", f"{net}° = {net // 45} compass steps",
+                  f"{COMPASS[start]} → {COMPASS[end]}"], {"start": start, "t1": t1, "t2": t2, "c1": c1, "c2": c2}, show=lambda v: COMPASS[int(v) - 1],
+                 whole=True, auto_slips=False)
+
+
+@checker(compass_two_turns)
+def _(p):
+    b = p["start"] * 45
+    for t, c in ((p["t1"], p["c1"]), (p["t2"], p["c2"])):
+        b = (b + t) % 360 if c else (b - t) % 360
+    return F(b // 45 + 1)

@@ -1,0 +1,207 @@
+---
+import Base from '../../layouts/Base.astro';
+import { cookies, rarityLabel } from '../../lib/data';
+import { subs, slots, milestones } from '../../lib/train';
+import { TIER_NAME } from '../../lib/store';
+
+const ORDER = ['ancient', 'witch', 'beast', 'dragon', 'legendary', 'super-epic', 'epic', 'special', 'rare', 'common'];
+const SCHOOL_NAME: Record<string, string> = { math: 'Math', science: 'Science', english: 'English', chinese: 'Chinese' };
+const subById = new Map(subs.map((s) => [s.id, s]));
+
+const MILESTONE_RULE: Record<string, string> = {
+  ancient: 'Own legendary cards at 2★+ and pass the Ancient Trial (coming later)',
+  dragon: 'Reach 30 / 100 study days',
+  beast: 'Beat a school monster (coming later)',
+  witch: 'Fix 150 old mistakes',
+};
+const milestoneOf = new Map<string, string>();
+for (const [kind, list] of Object.entries(milestones)) for (const slug of list) milestoneOf.set(slug, kind);
+
+// slug -> how to earn it (first non-duplicate slot that awards it)
+const how = new Map<string, string>();
+for (const [key, v] of Object.entries(slots)) {
+  if (v.dup || how.has(v.slug)) continue;
+  const [subId, t] = key.split('|');
+  const sub = subById.get(subId);
+  if (!sub) continue;
+  how.set(v.slug, `Clear ${SCHOOL_NAME[sub.school]} › ${sub.name} › ${TIER_NAME[t as 'b' | 'i' | 'c']}`);
+}
+const howFor = (slug: string) => {
+  const m = milestoneOf.get(slug);
+  return m ? MILESTONE_RULE[m] : how.get(slug) ?? 'Not yet available';
+};
+
+const houseCards = JSON.stringify(Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image }]))).replace(/</g, '\\u003c');
+const groups = ORDER.map((r) => ({ rarity: r, list: cookies.filter((c) => c.rarity === r) })).filter((g) => g.list.length);
+const meta = {
+  subs: Object.fromEntries(subs.map((s) => [s.id, { n: s.name, sc: SCHOOL_NAME[s.school] }])),
+  tiers: TIER_NAME,
+};
+---
+<Base title="My House · Alyssa's Cookie Codex" description="Your cards from each School of Mastery, the monsters you have beaten, and every card still to earn.">
+  <section class="wrap col-page">
+    <h1>My House</h1>
+    <p class="lede">The cards you have earned in each School of Mastery. Clear a tier to earn its card.</p>
+
+    <div class="house" aria-label="Cards by school">
+      {Object.entries(SCHOOL_NAME).map(([id, name]) => (
+        <article class={`school-shelf ${id === 'math' ? '' : 'later'}`} data-school={id}>
+          <h2>{name}{id === 'chinese' && <span lang="zh-Hans"> 华文</span>}</h2>
+          {id === 'math'
+            ? <p class="school-n"><strong class="sn">0</strong> cards · <span class="st">0</span> tiers cleared</p>
+            : <p class="school-n">Opens soon</p>}
+          <div class="mini-cards" aria-hidden="true"></div>
+        </article>
+      ))}
+      <article class="school-shelf monsters">
+        <h2>Monsters defeated</h2>
+        <p class="school-n"><strong>0</strong>. Monsters arrive soon!</p>
+      </article>
+    </div>
+
+    <h2 class="all-h">All {cookies.length} cards</h2>
+
+    <script type="application/json" id="house-cards" set:html={houseCards} />
+    <div class="bar">
+      <p class="count" id="count" aria-live="polite">0 of {cookies.length} owned</p>
+      <div class="seg" role="group" aria-label="Filter cards">
+        <button type="button" data-f="owned" aria-pressed="false">Owned</button>
+        <button type="button" data-f="locked" aria-pressed="false">Locked</button>
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+      </div>
+    </div>
+
+    {groups.map((g) => (
+      <section class="shelf" data-shelf style={`--rc: var(--r-${g.rarity})`}>
+        <h2><span class="rarity-chip">{rarityLabel(g.rarity)}</span> <span class="n"><span class="own-n">0</span> of {g.list.length}</span></h2>
+        <ul class="grid">
+          {g.list.map((c) => (
+            <li class="ccard locked" data-slug={c.slug} data-how={howFor(c.slug)} style={`--rc: var(--r-${c.rarity})`}>
+              <a href={`/cookie/${c.slug}/`}>
+                <span class="plate">
+                  {c.image ? <img src={c.image} alt="" width="312" height="312" loading="lazy" decoding="async" /> : <span class="no-art">No portrait</span>}
+                </span>
+                <span class="name">{c.name}</span>
+                <span class="rarity-chip">{rarityLabel(c.rarity)}</span>
+                <span class="state">Locked</span>
+                <span class="info">{howFor(c.slug)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <p class="empty" id="empty" hidden>No cards match that filter yet.</p>
+  </section>
+  <script type="application/json" id="meta" set:html={JSON.stringify(meta).replace(/</g, '\\u003c')} />
+</Base>
+
+<script>
+  import { load, TIERS } from '../../lib/store';
+  const sv = load();
+  const info = JSON.parse(document.getElementById('house-cards')!.textContent!);
+  document.querySelectorAll<HTMLElement>('.school-shelf[data-school]').forEach((el) => {
+    const school = el.dataset.school!;
+    const prefix = ({ math: 'math-', science: 'sci-', english: 'eng-', chinese: 'chi-' } as Record<string, string>)[school];
+    const owned = Object.entries(sv.cards).filter(([, c]) => c.srcSub.startsWith(prefix));
+    const cleared = Object.entries(sv.progress).filter(([sub]) => sub.startsWith(prefix))
+      .reduce((n, [, p]) => n + TIERS.filter((t) => p[t]?.cleared).length, 0);
+    const sn = el.querySelector('.sn'), st = el.querySelector('.st');
+    if (sn) sn.textContent = String(owned.length);
+    if (st) st.textContent = String(cleared);
+    el.querySelector('.mini-cards')!.innerHTML = owned.slice(0, 12).map(([slug, c]) =>
+      `<img src="${info[slug]?.image ?? ''}" alt="" width="44" height="44" title="${(info[slug]?.name ?? slug).replace(/"/g, '')} ${'★'.repeat(c.stars)}">`).join('');
+  });
+</script>
+
+<style>
+  .house { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); margin: 1rem 0 2rem; }
+  .school-shelf { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 0.75rem 1rem; }
+  .school-shelf.later, .school-shelf.monsters { opacity: 0.8; }
+  .school-shelf h2 { margin: 0; font-size: 1.2rem; }
+  .school-n { margin: 0.2rem 0 0.4rem; color: var(--cocoa-soft); }
+  .mini-cards { display: flex; flex-wrap: wrap; gap: 4px; }
+  .mini-cards :global(img) { width: 44px; height: 44px; object-fit: contain; background: var(--plate); border-radius: 50%; }
+  .all-h { margin-top: 1rem; }
+</style>
+<style is:global>
+  .col-page { padding-block: 1.5rem 3rem; }
+  .col-page .lede { color: var(--cocoa-soft); margin: 0.5rem 0 1rem; }
+  .col-page .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; }
+  .col-page .count { margin: 0; font-family: var(--font-display); font-weight: 500; }
+  .col-page .seg { display: inline-flex; border: 1.5px solid var(--crust); border-radius: var(--radius-control); overflow: hidden; background: var(--paper); }
+  .col-page .seg button {
+    min-height: 44px; min-width: 76px; padding: 0 0.9rem; border: 0; background: transparent; color: var(--cocoa);
+    font: 500 1rem var(--font-display);
+  }
+  .col-page .seg button[aria-pressed='true'] { background: var(--cocoa); color: var(--cream); }
+  .col-page .shelf { margin-top: 1.75rem; }
+  .col-page .shelf h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; font-size: 1.35rem; }
+  .col-page .shelf .n { color: var(--cocoa-soft); font-size: 0.95rem; font-weight: 500; }
+  .col-page .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; padding: 0; margin: 0.9rem 0 0; list-style: none; }
+  @media (min-width: 600px) { .col-page .grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; } }
+  .col-page .ccard { background: var(--paper); border-radius: var(--radius-card); border: 1.5px solid var(--crust); border-bottom: 4px solid var(--rc); }
+  .col-page .ccard a {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem; height: 100%; min-height: 44px;
+    padding: 0.8rem 0.6rem 0.9rem; color: inherit; text-decoration: none; text-align: center;
+  }
+  .col-page .plate { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--plate); }
+  .col-page .plate img { width: 86%; }
+  .col-page .no-art { color: var(--cocoa-soft); font-size: 0.9rem; }
+  .col-page .name { font-family: var(--font-display); font-weight: 600; font-size: 1rem; line-height: 1.2; overflow-wrap: anywhere; }
+  .col-page .state { font-family: var(--font-display); font-size: 0.85rem; color: var(--cocoa-soft); }
+  .col-page .info { font-size: 0.85rem; line-height: 1.35; color: var(--cocoa-soft); overflow-wrap: anywhere; }
+  .col-page .stars { color: var(--r-ancient); letter-spacing: 0.05em; font-size: 1rem; }
+  .col-page .ccard.locked .plate img { filter: grayscale(1); opacity: 0.45; }
+  .col-page .ccard.locked .name { color: var(--cocoa-soft); }
+  .col-page .ccard.owned { box-shadow: 0 0 0 1px var(--rc); }
+  .col-page .ccard a:hover { background: var(--plate); border-radius: var(--radius-card); }
+  .col-page .empty { margin-top: 2rem; color: var(--cocoa-soft); }
+</style>
+
+<script>
+  import { load, power, TIER_NAME } from '../../lib/store';
+  const meta = JSON.parse(document.getElementById('meta')!.textContent!) as { subs: Record<string, { n: string; sc: string }> };
+  const s = load();
+  const cards = [...document.querySelectorAll<HTMLElement>('.ccard')];
+  const shelves = [...document.querySelectorAll<HTMLElement>('[data-shelf]')];
+  const count = document.getElementById('count')!;
+  const empty = document.getElementById('empty')!;
+  const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-f]')];
+  let filter = 'all';
+  try { filter = sessionStorage.getItem('ccx:colfilter') || 'all'; } catch { /* ignore */ }
+
+  let owned = 0;
+  for (const el of cards) {
+    const c = s.cards[el.dataset.slug!];
+    if (!c) continue;
+    owned++;
+    el.classList.replace('locked', 'owned');
+    const sub = meta.subs[c.srcSub];
+    const from = `${sub ? sub.sc + ' › ' + sub.n : c.srcSub} › ${TIER_NAME[c.srcTier] ?? c.srcTier}`;
+    const stars = Math.max(1, Math.min(5, c.stars));
+    el.querySelector('.state')!.innerHTML = `<span class="stars" role="img" aria-label="${stars} star${stars > 1 ? 's' : ''}">${'★'.repeat(stars)}</span> · Power ${power(c)}`;
+    el.querySelector('.info')!.textContent = `Earned: ${from}`;
+  }
+  for (const sh of shelves) sh.querySelector('.own-n')!.textContent = String(sh.querySelectorAll('.ccard.owned').length);
+
+  function apply() {
+    let shown = 0;
+    for (const el of cards) {
+      const isOwned = el.classList.contains('owned');
+      const ok = filter === 'all' || (filter === 'owned' ? isOwned : !isOwned);
+      el.hidden = !ok;
+      if (ok) shown++;
+    }
+    for (const sh of shelves) sh.hidden = !sh.querySelector('.ccard:not([hidden])');
+    empty.hidden = shown > 0;
+    btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.f === filter)));
+    count.textContent = `${owned} of ${cards.length} owned`;
+  }
+  btns.forEach((b) => b.addEventListener('click', () => {
+    filter = b.dataset.f!;
+    try { sessionStorage.setItem('ccx:colfilter', filter); } catch { /* ignore */ }
+    apply();
+  }));
+  apply();
+</script>
