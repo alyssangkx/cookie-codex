@@ -45,23 +45,36 @@ export function pickTier(
 
 /**
  * Passage sub-topics (cloze, reading): a quiz is whole passages, read once, questions in order.
- * Passages are taken in the priority order of the picked questions (retests first, then new), whole
- * while they fit, and the last one is cut to make exactly `size`.
+ * Passages come in the priority order of the picked questions (due retests first, then new). Whole
+ * passages are taken while they fit; a passage too big for the space left is skipped for a later,
+ * smaller one; only if nothing fits exactly is one passage cut to make `size`.
+ * A picked question outside this tier's passages (a retest from another level) counts on its own.
+ * ponytail: due retests in a third passage wait for the next quiz (they stay first in line by due date)
  */
 export function wholePassages(
   picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined, size: number,
 ): string[] {
   const members = new Map<string, string[]>();
   for (const id of ids) {
-    const g = passage(id)?.group ?? id; // an ungrouped question is a passage of one
-    members.set(g, [...(members.get(g) ?? []), id]);
+    const g = passage(id)?.group ?? id;
+    (members.get(g) ?? members.set(g, []).get(g)!).push(id);
+  }
+  const seq = (id: string) => passage(id)?.seq ?? 0;
+  const units: string[][] = [];
+  const seen = new Set<string>();
+  for (const id of picked) {
+    const g = passage(id)?.group ?? id;
+    if (seen.has(g)) continue;
+    seen.add(g);
+    units.push(members.has(g) && members.get(g)!.includes(id) ? [...members.get(g)!].sort((a, b) => seq(a) - seq(b)) : [id]);
   }
   const out: string[] = [];
-  for (const g of new Set(picked.map((id) => passage(id)?.group ?? id))) {
-    if (out.length >= size) break;
-    const qs = (members.get(g) ?? [g]).sort((a, b) => (passage(a)?.seq ?? 0) - (passage(b)?.seq ?? 0));
-    out.push(...qs.slice(0, size - out.length));
+  const skipped: string[][] = [];
+  for (const u of units) {
+    if (out.length + u.length <= size) out.push(...u);
+    else skipped.push(u);
   }
+  for (const u of skipped) if (out.length < size) out.push(...u.slice(0, size - out.length));
   return out;
 }
 

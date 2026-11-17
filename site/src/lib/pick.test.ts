@@ -76,3 +76,25 @@ test('passage tiers: whole passages, questions in order, exactly size', () => {
   const out2 = wholePassages(['p2q1', 'p4q2', 'p1q1'], ids, (id) => meta[id], 10);
   assert.deepEqual(out2, ['p2q1', 'p2q2', 'p2q3', 'p4q1', 'p4q2', 'p4q3', 'p4q4', 'p4q5', 'p1q1', 'p1q2']);
 });
+
+test('passage tiers: a side retest from another level is a question, never a group name', () => {
+  const ids: string[] = []; const meta: Record<string, { group: string; seq: number }> = {};
+  for (const p of [1, 2, 3]) for (let n = 1; n <= 5; n++) { const id = `i${p}q${n}`; ids.push(id); meta[id] = { group: `i${p}`, seq: n }; }
+  meta['b9q2'] = { group: 'b9', seq: 2 }; // a Basic-level question, due for retest
+  const now = 1e12;
+  const seen = { b9q2: { s: 1, due: now - 1 } };
+  const out = pickTier(ids, seen, 10, now, () => 0.5, ['b9q2'], (id) => meta[id]);
+  assert.equal(out.length, 10);
+  assert.ok(out.includes('b9q2'));
+  assert.ok(out.every((id) => id === 'b9q2' || ids.includes(id)));
+});
+
+test('passage tiers: a passage too big for the space left gives way to one that fits', () => {
+  const meta: Record<string, { group: string; seq: number }> = {}; const ids: string[] = [];
+  const add = (g: string, n: number) => { for (let k = 1; k <= n; k++) { ids.push(`${g}${k}`); meta[`${g}${k}`] = { group: g, seq: k }; } };
+  add('a', 4); add('b', 5); add('c', 3); add('d', 2);
+  const out = wholePassages(['a1', 'b1', 'c1', 'd1'], ids, (id) => meta[id], 10);
+  assert.deepEqual(out, ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4', 'b5', 'c1']); // 4+5 then c cut (no exact fit left)
+  const out2 = wholePassages(['a1', 'b1', 'd1', 'c1'], ids, (id) => meta[id], 11);
+  assert.deepEqual(out2, ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4', 'b5', 'd1', 'd2']); // c (3) skipped, d (2) fits
+});

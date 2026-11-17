@@ -49,24 +49,38 @@ def gloss_line(it):
 
 
 def fill_cloze(bank, items, review, dropped):
-    """A cloze passage shows every blank. A blank whose question was held is shown filled with its answer,
-    so the passage reads whole; if a held blank's answer itself is wrong, the whole passage set is held."""
+    """A cloze passage shows every blank. A sibling blank that is not asked is shown filled with its answer,
+    but only when that answer is known good: the sibling was reviewed, its blind answer matched and nobody
+    doubted the answer (it was held only for its explanation). Any other unasked sibling (doubted answer,
+    unreviewed, or edited since review) holds the whole passage set, so a child never sees a blank that is
+    never asked, or a doubted word written into the passage."""
     by_key = {it["key"]: it for it in items}
-    bad_sets = {PASSAGE.match(k)[2] for k in by_key if PASSAGE.match(k)
-                and "answer wrong" in review.get(f"chi-cloze-mcq|{k}", {}).get("reasons", [])}
+
+    def state(it):
+        v = review.get(f"chi-cloze-mcq|{it['key']}")
+        if v is None or v.get("fingerprint") != fingerprint(it):
+            return "unknown"
+        if v.get("ship") is True:
+            return "asked"
+        return "fill" if v.get("reasons") and all("explanation" in r for r in v["reasons"]) else "unknown"
+
+    sets = {}
+    for k, it in by_key.items():
+        if (m := PASSAGE.match(k)):
+            sets.setdefault(m[2], {})[int(m[3])] = it
     keep = []
     for q in bank:
         m = PASSAGE.match(q["params"]["key"]) if q["params"]["subtopic"] == "chi-cloze-mcq" else None
         if not m:
             keep.append(q)
             continue
-        if m[2] in bad_sets:
-            dropped.append(f"chi-cloze-mcq|{q['params']['key']} (passage set held)")
+        sibs = {n: it for n, it in sets[m[2]].items() if n != int(m[3])}
+        if any(state(it) == "unknown" for it in sibs.values()):
+            dropped.append(f"chi-cloze-mcq|{q['params']['key']} (passage set held: a sibling blank cannot be shown)")
             continue
-        for n in range(1, 6):
-            sib = by_key.get(f"cloze-{m[2]}-{n}")
-            if str(n) != m[3] and sib and not review.get(f"chi-cloze-mcq|{sib['key']}", {}).get("ship"):
-                q["stem"] = q["stem"].replace(f"（{n}）＿＿", f"（{n}）{sib['options'][sib['answer']]}")
+        for n, it in sibs.items():
+            if state(it) == "fill":
+                q["stem"] = q["stem"].replace(f"（{n}）＿＿", f"（{n}）{it['options'][it['answer']]}")
         keep.append(q)
     bank[:] = keep
 
