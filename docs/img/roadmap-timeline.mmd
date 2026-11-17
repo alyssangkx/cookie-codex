@@ -1,0 +1,20 @@
+%%{init: {"gantt": {"leftPadding": 230, "barHeight": 34, "barGap": 10, "topPadding": 60, "sectionFontSize": 20, "fontSize": 20, "numberSectionStyles": 2, "axisFormat": "%b %y"}}}%%
+gantt
+    dateFormat YYYY-MM-DD
+    axisFormat %b %y
+    tickInterval 1month
+    section Math P2-P5
+    348 quizzes, 3-4 a day        :active, m1, 2026-11-17, 2027-03-31
+    Target met 31 Mar               :milestone, 2027-03-31, 0d
+    section Chinese gaps
+    Cloze top-up                    :c1, 2026-11-18, 2d
+    句子排列 ordering               :c2, 2026-11-23, 5d
+    对话填答 matching               :c3, 2026-11-30, 5d
+    听后选答 audio                  :c4, 2026-12-07, 5d
+    section Other subjects
+    Science                         :s1, 2027-01-04, 2027-02-26
+    English Booklet A               :e1, 2027-03-01, 2027-04-30
+    section Fixed dates
+    Prelims                         :crit, p1, 2027-08-01, 2027-08-31
+    Content freeze 15 Aug           :milestone, 2027-08-15, 0d
+    PSLE written papers             :crit, milestone, 2027-09-30, 0d
