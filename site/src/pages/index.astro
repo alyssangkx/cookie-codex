@@ -6,10 +6,14 @@ import Base from '../layouts/Base.astro';
 import TodayCard from '../components/TodayCard.astro';
 import spots from '../data/home-hotspots.json';
 import { cookies } from '../lib/data';
+import { SCHOOLS } from '../lib/train';
 
 type Box = [number, number, number, number];
 // Art follows which schools are open: construction comes off a school once it opens.
-const isOpen = (id: string) => spots.buildings.find((b) => b.id === id)?.status === 'open';
+// a school shows open only when its hotspot says so AND its banks have a playable tier (train.ts SCHOOLS.ready)
+const buildings = spots.buildings.map((b) =>
+  b.status === 'open' && SCHOOLS.find((x) => x.id === b.id)?.ready === false ? { ...b, status: 'soon' } : b);
+const isOpen = (id: string) => buildings.find((b) => b.id === id)?.status === 'open';
 const schools = ['chinese', 'science', 'english'].filter(isOpen);
 // suffix from the open set in a fixed order; no art for the combination falls back to the base map
 const suffix = schools.length === 3 ? 'all-open' : schools.length ? `${schools.join('-')}-open` : '';
@@ -22,7 +26,7 @@ const layouts = (['wide', 'tall'] as const).map((k) => ({
   k,
   img: `/home/map-${k}${artState ? '-' + artState : ''}.webp`,
   size: k === 'wide' ? [1920, 1072] : [1080, 1935],
-  items: spots.buildings.map((b) => ({ ...b, box: (spots[k] as Record<string, unknown>)[b.id] as Box })),
+  items: buildings.map((b) => ({ ...b, box: (spots[k] as Record<string, unknown>)[b.id] as Box })),
   companions: spots[k].companions as [number, number][],
 }));
 // companions: owned cards (filled in by the client), falling back to the 7 commons

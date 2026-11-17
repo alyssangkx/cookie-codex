@@ -10,6 +10,8 @@ Question ids hash topic | item key, so editing an item's wording keeps its id.
 """
 import hashlib
 import json
+import re
+from collections import Counter
 import random
 import sys
 from pathlib import Path
@@ -82,6 +84,10 @@ def main():
             continue  # an empty bank is not written
         (OUT / f"{topic}.json").write_text(json.dumps({"topic": topic, "questions": qs}, ensure_ascii=False, indent=1))
         print(f"{topic}: {len(qs)} questions")
+    per_tier = Counter((re.sub(r"-\d+$", "", q["outcomes"][0]), q["level"]) for qs in banks.values() for q in qs)
+    for (sb, lv), n in sorted(per_tier.items()):
+        if n < 25:
+            print(f"  warning: {sb} {lv} has {n} questions (aim for 25+; 20 is the playable minimum)")
     print(f"dropped by review: {len(dropped)}, not yet reviewed: {len(unreviewed)}, "
           f"edited since review (not shipped until re-reviewed): {len(stale)}")
     if stale:

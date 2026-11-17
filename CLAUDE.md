@@ -71,7 +71,7 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 Same contract as the Chinese banks, with 4 options per item and no passage sets yet.
 
 ```bash
-python3 scripts/quiz/english/build.py     # items/<subtopic>.json + review.json -> site/src/data/quiz/english/<topic>.json
+python3 scripts/quiz/english/build.py     # items/*.json (the sub-topic is each file's "subtopic" field; several files may share one) + review.json -> site/src/data/quiz/english/<topic>.json
 python3 scripts/quiz/check_english.py     # must print "0 failures"
 python3 scripts/quiz/english/coverage.py  # -> docs/quiz/english-coverage.md
 python3 scripts/quiz/build_rewards.py     # after the banks change
@@ -80,7 +80,7 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
 - **Items** are `{key, level, outcome, pattern, stem, options[4], answer, explain[4], solution[], gloss?}`. `pattern` is an id from `patterns.json`; `outcome` is a syllabus outcome id under the file's sub-topic.
 - **Review gate.** An item ships only if `review.json` has `"<subtopic>|<key>": {"ship": true, "fingerprint": ...}` for its current stem, options, answer, explain and solution (`fingerprint()` in `scripts/quiz/bankcommon.py`, shared with the Chinese build). Anything else is dropped, unreviewed or stale. Options are shuffled with a seed from the key; ids are `eng<strand>-<sha1(topic|key)>` and ignore the level. Empty and stale banks are not written or are deleted.
 - **Checks.** Stem has a `____` blank or a `?`; options are 4 distinct strings with the same first-letter case and end punctuation; explain is null only for the answer.
-- **Site.** `train.ts` marks English `ready` once a sub-topic has a playable tier (20 questions). `build_rewards.py` already lists English sub-topics (playable ones first within English), so Math and Chinese rewards do not move. The home map English hotspot stays "soon" in `home-hotspots.json`: `index.astro` throws without a `chinese-english-open` map art, so generate that art before flipping it.
+- **Site.** `train.ts` marks English `ready` once a sub-topic has a playable tier (20 questions). `build_rewards.py` already lists English sub-topics (playable ones first within English), so Math and Chinese rewards do not move. English is open on the home map (`home-hotspots.json`), with the `chinese-english-open` art; `index.astro` shows a school open only when its hotspot says "open" AND `SCHOOLS.ready` is true, and throws if the art for the open set is missing.
 
 ### Game (`site/src/lib/`)
 

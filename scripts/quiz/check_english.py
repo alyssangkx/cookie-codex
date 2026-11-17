@@ -23,6 +23,12 @@ def end_punct(s):
     return s.rstrip()[-1] if s.rstrip()[-1:] in ".?!," else ""
 
 
+# keys and stems must be unique per SUB-TOPIC across files (several files can share one sub-topic, and the
+# review verdict, shuffle seed and question id are all keyed by sub-topic|key)
+_all = [(f, json.loads(f.read_text())) for f in sorted((HERE / "english" / "items").glob("*.json"))]
+sub_keys = Counter((d.get("subtopic"), it.get("key")) for _, d in _all for it in d["items"])
+sub_stems = Counter((d.get("subtopic"), it.get("stem")) for _, d in _all for it in d["items"])
+
 for f in sorted((HERE / "english" / "items").glob("*.json")):
     data = json.loads(f.read_text())
     sub = data.get("subtopic")
@@ -32,8 +38,8 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
     stems = Counter(it.get("stem") for it in data["items"])
     for it in data["items"]:
         e = lambda m: errors.append(f"{f.name} {it.get('key')}: {m}")
-        if keys[it.get("key")] > 1: e("duplicate key")
-        if stems[it.get("stem")] > 1: e("duplicate stem")
+        if sub_keys[(sub, it.get("key"))] > 1: e("duplicate key in this sub-topic")
+        if sub_stems[(sub, it.get("stem"))] > 1: e("duplicate stem in this sub-topic")
         if it.get("level") not in LEVELS: e(f"bad level {it.get('level')}")
         if it.get("outcome") not in OUTCOMES or not str(it.get("outcome", "")).startswith(str(sub)): e(f"bad outcome {it.get('outcome')}")
         if it.get("pattern") not in PATTERNS: e(f"unknown pattern {it.get('pattern')}")
