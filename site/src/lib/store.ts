@@ -84,6 +84,7 @@ export function backupLocal() {
 
 const FAILED_KEYS = ['ccx:failed:1', 'ccx:failed:2', 'ccx:failed:3']; // up to 3 distinct preserved copies of saves this site cannot read
 const LEGACY_FAILED_KEY = 'ccx:failed'; // an older single-slot key: folded into the slots once, then removed
+const SPARE_FAILED_KEY = 'ccx:failed:spare'; // staging slot while rotating
 
 /**
  * Keep `raw` in ccx:failed:1..3 unless a stored copy already equals it. First free slot; when all 3 are
@@ -93,16 +94,23 @@ const LEGACY_FAILED_KEY = 'ccx:failed'; // an older single-slot key: folded into
 function preserveBroken(raw: string) {
   const slots = FAILED_KEYS.map((k) => localStorage.getItem(k));
   const legacy = localStorage.getItem(LEGACY_FAILED_KEY);
-  let changed = false;
   for (const v of [legacy, raw]) {
     if (v === null || slots.includes(v)) continue;
     const free = slots.findIndex((x) => x === null);
-    if (free >= 0) slots[free] = v;
-    else { slots[0] = slots[1]; slots[1] = slots[2]; slots[2] = v; }
-    changed = true;
+    if (free >= 0) {
+      localStorage.setItem(FAILED_KEYS[free], v);
+      slots[free] = v;
+    } else {
+      // write the new copy to a spare key first; only once it is stored, drop the oldest and shift
+      localStorage.setItem(SPARE_FAILED_KEY, v); // throws on quota: nothing has been lost yet
+      localStorage.setItem(FAILED_KEYS[0], slots[1]!);
+      localStorage.setItem(FAILED_KEYS[1], slots[2]!);
+      localStorage.setItem(FAILED_KEYS[2], v);
+      localStorage.removeItem(SPARE_FAILED_KEY);
+      slots.splice(0, 3, slots[1], slots[2], v);
+    }
   }
-  if (changed) FAILED_KEYS.forEach((k, i) => { if (slots[i] !== null && localStorage.getItem(k) !== slots[i]) localStorage.setItem(k, slots[i]!); });
-  if (legacy !== null) localStorage.removeItem(LEGACY_FAILED_KEY);
+  if (legacy !== null && slots.includes(legacy)) localStorage.removeItem(LEGACY_FAILED_KEY);
 }
 
 export function load(): SaveV1 {

@@ -124,10 +124,7 @@ try is spent while the name is locked). Otherwise it counts both, **before the P
 requests cannot exceed a limit. On a wrong PIN the counters stand; on success `pin_clear` resets the device key
 and the child's `name:` and `trust:` keys, fails and strikes alike. A lock is applied the moment a limit is
 reached (the attempt that reaches it still runs; the next is refused). Every lock doubles each time it trips:
-15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h. Two windows, the same for device, name and trust keys:
-a failure counter restarts after **15 minutes with no failure**; the escalation level (`strikes`) returns to 0
-once **24 hours** pass after the last lock ended with no new lock (measured from the lock's expiry, so a 24 h
-lock cannot decay itself). `private.pin_bump` does this with plpgsql variables: `SELECT ... FOR UPDATE`,
+15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h. Windows differ by key: the **device** failure counter restarts after **15 minutes** with no failure (it forgives a child's scattered typos); the **name** and **trust** counters restart only after **24 hours**, so pacing guesses under the limit still escalates. The escalation level (`strikes`) returns to 0 only after **7 days** with no new lock. A success clears the device and only the name-side key the request used, so a trusted login never resets a stranger's `name:` escalation. `private.pin_bump` does this with plpgsql variables: `SELECT ... FOR UPDATE`,
 compute once, one `UPDATE`.
 
 | Key | Limit | Why |
@@ -325,7 +322,7 @@ so CORS is not `*`. Do not deploy until approved.
 | Question | Decision |
 |---|---|
 | Free-tier pausing | Stay on the free plan; a scheduled keep-alive pings the project every 3 days. Revisit Pro when more children join. |
-| PIN lockout | Per device: 5 wrong PINs lock it for 15 minutes. Every lock doubles each time it trips (15 min up to 24 h) and resets on a successful login. A device locks after 5 wrong tries. A name locks after 20 wrong tries from untrusted requests; that name limit is the real bound. Trusted devices (HMAC token, 180 days, void after a PIN reset) skip the name lock but keep the device limit and a separate trusted limit of 30 wrong tries per name. Attempts are counted before the PIN is checked. No IP limit: no trustworthy client-IP header exists on Edge Functions (section 5). |
+| PIN lockout | Per device: 5 wrong PINs lock it for 15 minutes. Every lock doubles each time it trips (15 min up to 24 h) and resets on a successful login for the key that login used. A device locks after 5 wrong tries. A name locks after 20 wrong tries from untrusted requests; that name limit is the real bound. Trusted devices (HMAC token, 180 days, void after a PIN reset) skip the name lock but keep the device limit and a separate trusted limit of 30 wrong tries per name. Attempts are counted before the PIN is checked. No IP limit: no trustworthy client-IP header exists on Edge Functions (section 5). |
 | Admin second factor | Required: Supabase TOTP (authenticator app) on the admin account. |
 | Hosting | Vercel, free `*.vercel.app` subdomain, deployed from the GitHub repo; custom domain later. |
 | Sync conflict | Newer save wins, with a visible warning; no field merge yet. |

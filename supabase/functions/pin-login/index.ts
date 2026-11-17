@@ -21,8 +21,8 @@ import {
 // file calls it ONCE per request with two keys. In one transaction with row locks it checks BOTH locks
 // first (a locked key means nothing is counted at all), then counts BOTH, all before the PIN is checked,
 // so concurrent requests can never exceed a limit. Every lock doubles each time it trips (15 min, 30 min,
-// 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h). Windows: a fail count restarts after 15 minutes with no failure;
-// the escalation level decays to 0 after 24 h with no new lock; success clears all of the child's keys.
+// 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h). Windows: the device fail count restarts after 15 quiet minutes; name and trust counts only after 24 h;
+// escalation decays after 7 quiet days. Success clears the device and only the name-side key used.
 //   device:  5 tries per lock. Applies to every request. The deviceId is chosen by the client, so alone
 //            it only stops a well-behaved browser (or one copied token, which has one device id).
 //   name:    20 tries, for requests WITHOUT a valid trusted-device token. The brute-force bound against a
@@ -135,8 +135,8 @@ Deno.serve(async (req) => {
       return json({ error: 'wrong_name_or_pin', attemptsLeft }, 401); // this device only
     }
 
-    // 6. Success: reset the device and the child's name and trust keys, then sign in as the child's own auth user.
-    const cleared = await admin.rpc('pin_clear', { p_device_key: deviceKey, p_name_key: key });
+    // 6. Success: reset this device and the name-side key this request used (trust: or name:), then sign in.
+    const cleared = await admin.rpc('pin_clear', { p_device_key: deviceKey, p_name_key: key, p_trusted: trusted });
     if (cleared.error) throw new Unavailable();
     const anon = createClient(url, Deno.env.get('SUPABASE_ANON_KEY')!, { auth: { persistSession: false } });
     const { data, error } = await anon.auth.signInWithPassword({
@@ -153,6 +153,7 @@ Deno.serve(async (req) => {
     });
   } catch (e) {
     if (e instanceof Unavailable) return json({ error: 'try_again_later' }, 503);
+    console.error('pin-login failed', e); // visible in the function logs; never echoed to the client
     return json({ error: 'server_error' }, 500); // includes a timestamp that does not parse
   }
 });

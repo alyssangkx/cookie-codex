@@ -243,7 +243,8 @@ begin
   -- window 1: fails restart after p_window with no failure (15 min for a device, 24 h for a name)
   v_fails := (case when a.updated_at < now() - p_window then 0 else a.fails end) + 1;
   -- window 2: strikes restart 24 h after the last lock ended with no new lock
-  v_strikes := case when a.locked_until is not null and a.locked_until < now() - interval '24 hours'
+  -- strikes decay only after 7 quiet days: waiting out escalation then costs an attacker a week
+  v_strikes := case when a.locked_until is not null and a.locked_until < now() - interval '7 days'
                     then 0 else a.strikes end;
   v_until := a.locked_until;
   v_stored := v_fails;
@@ -300,16 +301,19 @@ begin
 end $$;
 
 -- Success: reset this device AND the child's name and trust keys (fails and strikes alike).
-create function public.pin_clear(p_device_key text, p_name_key text) returns void
+-- Success clears this device and ONLY the name-side key the request used: trust: for a trusted device,
+-- name: for an untrusted one. A trusted login must not reset a stranger's escalation on name:, or the
+-- child's daily logins would keep restarting the attacker at the short locks. The admin can clear name:
+-- with pin_clear_name_lock if a stranger's guessing ever blocks a new device.
+create function public.pin_clear(p_device_key text, p_name_key text, p_trusted boolean) returns void
 language sql security definer set search_path = '' as $$
   delete from private.pin_attempts
    where key = p_device_key
-      or key = 'name:'  || p_name_key
-      or key = 'trust:' || p_name_key
+      or key = (case when p_trusted then 'trust:' else 'name:' end) || p_name_key
 $$;
 
-revoke execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text, text) from public, anon, authenticated;
-grant execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text, text) to service_role;
+revoke execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text, text, boolean) from public, anon, authenticated;
+grant execute on function public.pin_reserve_attempt(text, text, boolean), public.pin_clear(text, text, boolean) to service_role;
 
 -- Admin only: clear a child's per-name and trusted-name locks (and their escalation) so a stranger's guessing cannot keep
 -- her out. Called from /admin/ with the admin's own session; the caller's app_metadata role is checked
