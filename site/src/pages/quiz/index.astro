@@ -287,7 +287,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .timer { font-variant-numeric: tabular-nums; font-weight: 600; }
   .quiz .timer.low { color: var(--berry); }
   .quiz .timer.paused { opacity: 0.6; }
-  .quiz .stem { font-size: 1.2rem; margin: 1rem 0; }
+  .quiz .stem { font-size: 1.2rem; margin: 1rem 0; white-space: pre-line; }
+  .quiz .rev summary { white-space: pre-line; }
   .quiz .options { display: grid; gap: 0.6rem; }
   .quiz .opt {
     display: flex; gap: 0.75rem; align-items: center; text-align: left; min-height: 48px; padding: 0.6rem 0.9rem;

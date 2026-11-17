@@ -160,7 +160,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     const anyDue = Object.keys(s.questions).length > 0 && dueCount(s, now) > 0;
     if (!anyDue) run(0);
     else {
-      // map question ids to sub-topics (math banks only) so the review count matches this school
+      // map question ids to sub-topics using this school's banks, so the review count matches this school
       const files = [...new Set(subs.map((x) => x.file).filter(Boolean))] as string[];
       Promise.all(files.map((f) => fetch(`/data/quiz/${f}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])))
         .then((banks) => {

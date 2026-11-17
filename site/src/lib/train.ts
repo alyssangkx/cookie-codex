@@ -72,5 +72,6 @@ const topicName = new Map([mathSyllabus, chineseSyllabus].flatMap((syl) =>
   syl.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string]))));
 /** Topics that have a question bank, for the WA/SA paper builder. */
 export const paperTopics = banks
+  .filter((b) => b.topic.startsWith('math-')) // the WA/SA builder is Math-only for now
   .map((b) => ({ id: b.topic, name: topicName.get(b.topic) ?? b.topic, count: b.questions.length }))
   .sort((a, b) => a.name.localeCompare(b.name));

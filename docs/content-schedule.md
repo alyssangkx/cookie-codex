@@ -44,6 +44,8 @@ Counts are approximate: OCR of Chinese scans is imperfect (about 73% of items fu
 
 ## Risks
 
+- **Guessable 词语运用 items:** in about 64 of the 183 sentence-usage items the correct option is the longest, best-formed sentence, so a child can sometimes pick it without knowing the word. Rewrite those distractors to the same length and shape as the answer in Chinese Phase 2 (May 2027).
+
 - **Language accuracy:** Chinese and English items are written by a model. Every item is blind-answered by a second agent, and a parent spot-checks 30 random items per batch before release.
 - **Copyright:** papers are used only to learn types and difficulty; no paper text enters the repo.
 - **OCR limits:** Chinese tone marks OCR poorly, so 汉语拼音 items are written from dictionary pinyin, never from OCR text.

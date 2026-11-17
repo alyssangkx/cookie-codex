@@ -21,14 +21,21 @@ REVIEW = HERE / "review.json"
 TOPIC_OF = {sb["id"]: t["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
 
 
-def qid(topic, level, key):
+def qid(topic, key):
+    # no level in the id: moving an item between levels must not orphan a child's retest history
     prefix = topic.replace("chi-", "chi")[:8]
-    return f"{prefix}-{level[0]}-{hashlib.sha1(f'{topic}|{key}'.encode()).hexdigest()[:10]}"
+    return f"{prefix}-{hashlib.sha1(f'{topic}|{key}'.encode()).hexdigest()[:10]}"
+
+
+def fingerprint(it):
+    """Hash of everything a reviewer judged; an item edited after review no longer matches its verdict."""
+    body = json.dumps([it["stem"], it["options"], it["answer"], it["explain"], it["solution"]], ensure_ascii=False)
+    return hashlib.sha1(body.encode()).hexdigest()[:16]
 
 
 def main():
     review = json.loads(REVIEW.read_text()) if REVIEW.exists() else {}
-    banks, dropped, unreviewed = {}, [], []
+    banks, dropped, unreviewed, stale = {}, [], [], []
     for f in sorted((HERE / "items").glob("*.json")):
         data = json.loads(f.read_text())
         sub = data["subtopic"]
@@ -39,8 +46,12 @@ def main():
             if verdict is None:
                 unreviewed.append(rk)
                 continue
-            if not verdict.get("agree") or verdict.get("ambiguous") or verdict.get("bad") or verdict.get("explain_ok") is False:
+            # fail closed: ship only an explicit yes for exactly the content that was reviewed
+            if verdict.get("ship") is not True:
                 dropped.append(rk)
+                continue
+            if verdict.get("fingerprint") != fingerprint(it):
+                stale.append(rk)
                 continue
             # writers cycle the answer A-D in item order; shuffle each item's options with a seed from its key,
             # so the order is random to a child but identical on every rebuild
@@ -50,7 +61,7 @@ def main():
             explain = [it["explain"][i] for i in order]
             answer = order.index(it["answer"])
             banks.setdefault(topic, []).append({
-                "id": qid(topic, it["level"], it["key"]),
+                "id": qid(topic, it["key"]),
                 "topic": topic,
                 "level": it["level"],
                 "template": it["pattern"],
@@ -59,14 +70,21 @@ def main():
                 "options": options,
                 "answer": answer,
                 "explain": explain,
-                "solution": it["solution"] + ([it["gloss"]] if it.get("gloss") else []),
+                # add the gloss line only when the solution does not already say the same thing
+                "solution": it["solution"] + ([it["gloss"]] if it.get("gloss") and it["gloss"].split("=")[-1].strip()
+                                              not in " ".join(it["solution"]) else []),
                 "params": {"key": it["key"], "subtopic": sub},
             })
     OUT.mkdir(parents=True, exist_ok=True)
+    for old in OUT.glob("*.json"):  # never leave a bank behind that the current items no longer produce
+        old.unlink()
     for topic, qs in banks.items():
         (OUT / f"{topic}.json").write_text(json.dumps({"topic": topic, "questions": qs}, ensure_ascii=False, indent=1))
         print(f"{topic}: {len(qs)} questions")
-    print(f"dropped by review: {len(dropped)}, not yet reviewed (not shipped): {len(unreviewed)}")
+    print(f"dropped by review: {len(dropped)}, not yet reviewed: {len(unreviewed)}, "
+          f"edited since review (not shipped until re-reviewed): {len(stale)}")
+    if stale:
+        print("  stale:", ", ".join(stale[:10]))
 
 
 if __name__ == "__main__":
