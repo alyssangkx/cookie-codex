@@ -9,7 +9,7 @@ const data = {
   subs: math.map((s) => ({ id: s.id, name: s.name, topic: s.topicName, file: s.file, count: s.count, content: hasContent(s) })),
 };
 ---
-<Base title="Parent view: Alyssa's Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
+<Base title="Parent view: Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
   <section class="wrap parent-page">
     <h1>Parent view</h1>
 
@@ -239,7 +239,7 @@ const data = {
   }
   function initSettings() {
     const pname = $<HTMLInputElement>('pname');
-    pname.value = s.settings.playerName || 'Alyssa';
+    pname.value = s.settings.playerName || '';
     const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
     cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes);
     extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; weeksText();
@@ -253,7 +253,7 @@ const data = {
       s.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, s.settings.dailyGoalQuizzes);
       s.settings.extraTime = extra.checked;
       if (psle.value) s.settings.psleDate = psle.value;
-      s.settings.playerName = pname.value.trim().slice(0, 20) || 'Alyssa';
+      s.settings.playerName = pname.value.trim().slice(0, 20);
       save(s); weeksText(); renderSummary(); flashSaved();
     };
     for (const el of [pname, cap, goal, extra, psle]) el.addEventListener('change', () => {

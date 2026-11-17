@@ -48,7 +48,7 @@ const { title, description } = Astro.props;
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header" id="top">
       <div class="wrap bar">
-        <a class="brand" href="/">Alyssa's Cookie Codex</a>
+        <a class="brand" href="/"><span class="brand-name"></span>Cookie Codex</a>
         <nav class="nav" aria-label="Main">
           <a href="/">Home</a>
           <a href="/codex/">Library</a>
@@ -76,6 +76,21 @@ const { title, description } = Astro.props;
     <script>
       import { currentSession, offlineAllowed, supabase } from '../lib/supabase';
       import { initSync, logout, isChildSession } from '../lib/sync';
+      import { kv, load, save } from '../lib/store';
+
+      // the signed-in child's name (set at login from their profile) in the header, tab title, every .player
+      // element and the save's playerName; signed-out pages stay a plain "Cookie Codex"
+      const showName = () => {
+        const name = kv.get('player-name');
+        if (!name) return;
+        const s = load();
+        if (s.settings.playerName !== name) { s.settings.playerName = name; save(s); }
+        const brand = document.querySelector('.brand-name');
+        if (brand) brand.textContent = `${name}'s `;
+        if (!document.title.includes(`${name}'s`)) document.title = document.title.replace('Cookie Codex', `${name}'s Cookie Codex`);
+        document.querySelectorAll('.player-sep').forEach((el) => { if (!el.textContent) el.innerHTML = ', <span class="player"></span>'; });
+        document.querySelectorAll('.player').forEach((el) => (el.textContent = name));
+      };
 
       const root = document.documentElement;
       const gate = root.getAttribute('data-gate');
@@ -84,6 +99,7 @@ const { title, description } = Astro.props;
 
       (async () => {
         let leaving = false; // a redirect is under way: keep the body hidden
+        let child = false; // a child is playing (signed in, or offline on a remembered device)
         const go = (to: string) => { leaving = true; location.replace(to); };
         try {
           let session = null;
@@ -93,6 +109,7 @@ const { title, description } = Astro.props;
             if (gate === 'game' && await offlineAllowed()) {
               // offline with an expired token: play from the local save; sync resumes on reconnect
               document.getElementById('logout')!.hidden = false;
+              child = true;
               return;
             }
             go('/login');
@@ -107,13 +124,14 @@ const { title, description } = Astro.props;
             if (!ok) { go('/admin/'); return; }
           }
           if (session && isChildSession(session.user)) {
+            child = true;
             // hold the page back (up to 4 s) while the newer server save is pulled, so it never shows stale progress
             await Promise.race([initSync().catch(() => {}), new Promise((r) => setTimeout(r, 4000))]);
           }
         } catch {
           if (gate === 'admin') go('/admin/'); // fail closed
         } finally {
-          if (!leaving) release();
+          if (!leaving) { if (child) { try { showName(); } catch { /* storage unavailable */ } } release(); }
         }
       })();
     </script>

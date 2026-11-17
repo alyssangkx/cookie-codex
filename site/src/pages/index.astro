@@ -19,14 +19,14 @@ const commons = cookies.filter((c) => c.rarity === 'common').map((c) => ({ slug:
 const cards = Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image }]));
 const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
 ---
-<Base title="Home · Alyssa's Cookie Codex" description="Your cookie kingdom home base: train in the Schools of Mastery, visit the Library of cards and see your collection.">
+<Base title="Home · Cookie Codex" description="Your cookie kingdom home base: train in the Schools of Mastery, visit the Library of cards and see your collection.">
   <section class="home">
     {layouts.map((L) => (
       <div class={`scene scene-${L.k}`}>
         <img class="map" src={L.img} width={L.size[0]} height={L.size[1]}
           alt="A cartoon cookie kingdom with seven buildings: the Math, Science, English and Chinese schools, the Library, My House and the Ranking Tower." />
         <div class="banner">
-          <p class="welcome">Welcome back, <span class="player">Alyssa</span>!</p>
+          <p class="welcome">Welcome back<span class="player-sep"></span>!</p>
           <p class="hint">Tap a building to begin.</p>
         </div>
         {L.items.map((b) =>
@@ -58,8 +58,9 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
   import { load } from '../lib/store';
   const s = load();
   const { commons, cards } = JSON.parse(document.getElementById('home-data')!.textContent!);
-  document.querySelectorAll('.player').forEach((el) => (el.textContent = s.settings.playerName || 'Alyssa'));
-  // cookie friends: the cards Alyssa owns, most recently practised first, topped up with the commons
+  if (s.settings.playerName) document.querySelector('.player-sep')!.innerHTML = ', <span class="player"></span>';
+  document.querySelectorAll('.player').forEach((el) => (el.textContent = s.settings.playerName));
+  // cookie friends: the cards the player owns, most recently practised first, topped up with the commons
   const owned = Object.entries(s.cards)
     .sort(([, a], [, b]) => (b.last ?? 0) - (a.last ?? 0))
     .map(([slug]) => ({ slug, ...cards[slug] }))

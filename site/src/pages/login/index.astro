@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base title="Who's playing? Alyssa's Cookie Codex" description="Sign in to keep your progress on every device.">
+<Base title="Who's playing? Cookie Codex" description="Sign in to keep your progress on every device.">
   <section class="wrap login-page">
     <h1>Who's playing?</h1>
     <form id="login-form" class="panel" autocomplete="off" novalidate>
@@ -81,6 +81,7 @@ import Base from '../../layouts/Base.astro';
         const { error } = await supabase.auth.setSession({ access_token: body.session.access_token, refresh_token: body.session.refresh_token });
         if (error) throw error;
         if (body.deviceToken) kv.set('device-token', body.deviceToken);
+        if (body.profile?.name) kv.set('player-name', body.profile.name);
         kv.del('sync:signedout');
         touch();
         const { data } = await supabase.auth.getSession();

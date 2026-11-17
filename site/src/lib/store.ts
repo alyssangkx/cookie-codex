@@ -44,7 +44,7 @@ export const ATTEMPTS_PER_DAY = 3;
 export const fresh = (): SaveV1 => ({
   schemaVersion: 2,
   createdAt: Date.now(),
-  settings: { dailyCapMin: 45, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: 'Alyssa' },
+  settings: { dailyCapMin: 45, dailyGoalQuizzes: 2, extraTime: false, psleDate: '2027-09-30', playerName: '' },
   progress: {}, questions: {}, cards: {}, attempts: [], days: {},
   streak: { current: 0, best: 0, lastDay: null, freezeUsedWeek: null, studyDays: 0 },
   last: null,
