@@ -1,6 +1,6 @@
 # Chinese bank: PSLE syllabus and top-school coverage
 
-1006 shipped questions (basic 332, intermediate 356, competent 318). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
+1030 shipped questions (basic 340, intermediate 364, competent 326). Regenerate with `python3 scripts/quiz/chinese/coverage.py`.
 
 ## 1. PSLE syllabus (SEAB 0005 / 小学华文课程标准)
 
@@ -23,8 +23,8 @@
 | 句子排列 (sentence ordering) | 把句子排列成通顺的语段 (arrange sentences into a coherent paragraph) | yes | 80 |
 | 多项选择短文填空 (MCQ cloze) | 根据短文内容和上下文，选出最适当的答案 (choose the best answer from passage content and … | yes | 22 |
 | 多项选择短文填空 (MCQ cloze) | 理解语境以判断词语的用法 (use context to judge word usage) | yes | 82 |
-| 对话填答 (dialogue completion) | 根据对话内容，选出最适当的答案 (choose the best response from the dialogue content) | yes | 28 |
-| 对话填答 (dialogue completion) | 判断对话中的情境和语气 (judge situation and tone in a dialogue) | yes | 36 |
+| 对话填答 (dialogue completion) | 根据对话内容，选出最适当的答案 (choose the best response from the dialogue content) | yes | 40 |
+| 对话填答 (dialogue completion) | 判断对话中的情境和语气 (judge situation and tone in a dialogue) | yes | 48 |
 | 篇章理解 (passage understanding) | 根据篇章内容选出最适当的答案 (choose the best answer from passage content) | yes | 61 |
 | 篇章理解 (passage understanding) | 理解词句在篇章中的意思 (understand words and sentences in the passage) | yes | 16 |
 | 实用文与篇章 (practical text and passage) | 根据实用文和篇章的内容回答问题 (answer questions on a practical text and passage) | no | 0 |
@@ -41,7 +41,7 @@
 | 汉语拼音 (pinyin of an underlined word) (`chi-pat-pinyin`) | 124 | 111 |
 | 形近字／同音字辨认 (choose the right character) (`chi-pat-zixing`) | 124 | 112 |
 | 选词填空：近义词辨析 (near-synonym word choice) (`chi-pat-xuanci`) | 118 | 151 |
-| 完成对话 (complete the dialogue) (`chi-pat-wancheng-duihua`) | 117 | 64 |
+| 完成对话 (complete the dialogue) (`chi-pat-wancheng-duihua`) | 117 | 88 |
 | 句子选用 (choose the clause that completes the sentence) (`chi-pat-juzi-xuanyong`) | 112 | 47 |
 | 词语运用：哪个句子正确 (which sentence uses the word correctly) (`chi-pat-ciyu-yunyong`) | 112 | 49 |
 | 词语／成语的意思 (meaning of an underlined word or idiom) (`chi-pat-ciyuyi`) | 104 | 55 |
