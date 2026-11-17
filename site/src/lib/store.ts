@@ -82,7 +82,7 @@ export function backupLocal() {
   } catch { /* full or blocked */ }
 }
 
-const FAILED_KEY = 'ccx:failed'; // one preserved copy of a save this site cannot read
+const FAILED_KEYS = ['ccx:failed:1', 'ccx:failed:2', 'ccx:failed:3']; // up to 3 distinct preserved copies of saves this site cannot read
 
 export function load(): SaveV1 {
   let raw: string | null = null;
@@ -99,11 +99,18 @@ export function load(): SaveV1 {
       throw new Error('Unreadable save version.'); // e.g. a newer site's save: preserve it below
     }
   } catch {
-    // Unreadable, unknown-version, newer-version or failed-migration save: keep the raw string once
-    // under ccx:failed (only if absent or different), so a later save() cannot destroy the only
-    // copy. ccx:save and ccx:backup are left as they were.
+    // Unreadable, unknown-version, newer-version or failed-migration save: keep the raw string in the
+    // first free slot of ccx:failed:1..3, only if it differs from every stored copy, so a later save()
+    // cannot destroy the only copy. When all 3 are full the 3 oldest stay and nothing is overwritten.
+    // ccx:save and ccx:backup are left as they were.
     if (raw) {
-      try { if (localStorage.getItem(FAILED_KEY) !== raw) localStorage.setItem(FAILED_KEY, raw); } catch { /* full or blocked */ }
+      try {
+        const have = FAILED_KEYS.map((k) => localStorage.getItem(k));
+        if (!have.includes(raw)) {
+          const free = have.findIndex((v) => v === null);
+          if (free >= 0) localStorage.setItem(FAILED_KEYS[free], raw);
+        }
+      } catch { /* full or blocked */ }
     }
   }
   return fresh();

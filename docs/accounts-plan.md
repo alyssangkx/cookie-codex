@@ -3,7 +3,8 @@
 Status: **Phase A, awaiting approval.** Nothing in this plan has been applied, deployed or created.
 The SQL is in `supabase/migrations/001_init.sql`, the PIN function source is in
 `supabase/functions/pin-login/index.ts` (with `_shared/pin.ts`). Neither has been run: there was no
-Postgres or Deno on the dev machine, so both are untested until the Supabase project exists.
+Postgres or Deno on the dev machine, so the SQL and the Deno code are **untested: needs a Supabase project**.
+`001_init.sql` has never been applied anywhere, so it is edited in place; after the first apply, every change is a new migration.
 
 Goal: progress is saved on a server so Alyssa can play from any phone or computer, and more users
 can be added later without a schema rewrite. The site stays a static Astro build; the browser talks
@@ -60,16 +61,16 @@ Alyssa's `parent_id` is the admin's user id for now.
 ## 4. Schema (`001_init.sql`)
 
 - `profiles(id pk -> auth.users, parent_id -> auth.users, name, name_key, role child|test, pin_hash, pin_set_at, created_at)`.
-  The spec's columns plus `role` and `pin_set_at`. `name` is ASCII only for now: `^[A-Za-z][A-Za-z -]{0,19}$` (the same regex in JS and in the SQL CHECK). Non-ASCII names later need NFC normalisation on both sides.
+  The spec's columns plus `role` and `pin_set_at` (a trigger sets it whenever the PIN is set or reset; it goes into the trusted-device token's HMAC). `name` is ASCII only for now: `^[A-Za-z][A-Za-z -]{0,19}$` (the same regex in JS and in the SQL CHECK). Non-ASCII names later need NFC normalisation on both sides.
   `name_key` is `lower(btrim(name))` (JS: `name.trim().toLowerCase()`; collation-independent for ASCII), generated and stored, with a partial unique index `where role = 'child'`: login does an
   exact `eq('name_key', ...)`, never `ilike`/`like`. Names are globally unique while login is by name; when a second family joins, add a family code and make it unique per parent.
 - `saves(child_id pk -> profiles, data jsonb, schema_version int, rev bigint, updated_at timestamptz)`.
   `rev` starts at 0 and goes up by one on every write (a trigger enforces it too). `updated_at` is set
   by a trigger, so the server clock decides, not the phone's. Size capped at 2 MB.
-- `private.pin_attempts(key, fails, strikes, locked_until, updated_at)`: lockout counters, no client access.
-- `public.push_save(...)`: compare-and-set write on `rev` for sync (section 6). It decides write permission first: the child itself or the owning non-admin parent, or an admin on a `test` profile; anything else returns `status: 'denied'` on both the update and insert paths.
-- `public.pin_locked_until / pin_record_failure / pin_clear`: lockout helpers, **service role only**.
-- `public.pin_clear_name_lock(child_id)`: admin only (checked from the JWT inside); clears a child's per-name lock from `/admin/`.
+- `private.pin_attempts(key, fails, strikes, locked_until, updated_at)`: lockout counters (`device:`, `name:`, `trust:` keys), no client access.
+- `public.push_save(...)`: compare-and-set write on `rev` for sync (section 6). It decides write permission first: the child itself or the owning non-admin parent, or an admin on a `test` profile; anything else returns `status: 'denied'` on both the update and insert paths. It calls the same helpers the RLS policies use (`private.is_admin`, `private.is_test_profile`, `private.owns_child`, and `private.is_self` for the child's own session) instead of repeating the rules.
+- `public.pin_reserve_attempt(device_key, name_key, trusted) / pin_clear`: lockout, **service role only**. `pin_reserve_attempt` checks the locks and counts the attempt atomically under row locks, before the PIN is verified.
+- `public.pin_clear_name_lock(child_id)`: admin only (checked from the JWT inside); clears a child's per-name and trusted-name locks from `/admin/`.
 
 ### RLS
 
@@ -103,7 +104,7 @@ an admin session must fail to update Alyssa's save and succeed on the Test Playe
 **Input:** `POST { name, pin: "dddd", deviceId }`, JSON. Bad shape returns 400.
 
 **Output:** 200 with `{ session, profile: { id, name } }`; 401 `wrong_name_or_pin` with
-`attemptsLeft` (identical for an unknown name, so names cannot be enumerated; it is **this device's own** remaining tries only, never the per-name count); 429 `locked` (plain, no counts) when the name is locked for an untrusted device, or `locked` with `retryAfterSec` for this device's own lock; 503 `try_again_later` if any lock or failure-recording RPC errors (**fail closed**: the PIN is not checked, and a null result is never read as 0 failures). On success the body also carries `deviceToken`.
+`attemptsLeft` (identical for an unknown name, so names cannot be enumerated; it is **this device's own** remaining tries only, never the per-name count); 429 `locked` (plain, no counts) when the name is locked for an untrusted device, or `locked` with `retryAfterSec` for this device's own lock; 503 `try_again_later` if any reservation or clear RPC errors (**fail closed**: the PIN is not checked, and a null result is never read as 0 failures). On success the body also carries `deviceToken`.
 
 **Hashing.** PBKDF2-HMAC-SHA256, 600,000 iterations, a random 16-byte salt per child, stored as
 `pbkdf2-sha256$iterations$salt$hash`. The PIN is mixed with `PIN_PEPPER`, a function secret that is
@@ -116,12 +117,18 @@ PIN guards a child's quiz progress, not money or contact data.
 **Name checks.** The name is trimmed (`trim()`), lowercased, and must match `^[A-Za-z][A-Za-z -]{0,19}$` (ASCII only; non-ASCII names later need NFC normalisation on both sides). Anything else is rejected before any lookup, counts against the device limit, and answers
 like a wrong PIN. The lookup is `eq('name_key', key)`: no pattern matching anywhere.
 
-**Lockout.** Counters live in `private.pin_attempts`, updated atomically by `pin_record_failure`.
+**Lockout.** Counters live in `private.pin_attempts`. `pin_reserve_attempt` takes row locks, checks the
+locks, and **counts the attempt before the PIN is verified**, so concurrent requests cannot exceed a
+limit. On a wrong PIN the counters stand; on success `pin_clear` resets the ones the request used. A
+lock is applied the moment a limit is reached (the attempt that reaches it still runs; the next is
+refused). Every lock doubles each time it trips: 15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, then 24 h,
+and resets on a successful login. A fail count older than 24 hours restarts.
 
 | Key | Limit | Why |
 |---|---|---|
-| `device:<deviceId>` | 5 wrong, then 15 min | the spec's per-device lock. `deviceId` is client-chosen, so this only stops a well-behaved browser |
-| `name:<name_key>` | 20 wrong from untrusted requests, then a lock that doubles each time it trips: 15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h, 24 h, then 24 h | the **real brute-force bound**, because headers and device ids can be forged. Keyed by the typed name, so an unknown name behaves identically. A successful login resets the count and the escalation. **Skipped by a request with a valid trusted-device token** |
+| `device:<deviceId>` | 5 wrong, then the escalating lock | every request. `deviceId` is client-chosen, so alone it only stops a well-behaved browser, or one copied token (a token is bound to one device id) |
+| `name:<name_key>` | 20 wrong from untrusted requests, then the escalating lock | the **real brute-force bound**, because headers and device ids can be forged. Keyed by the typed name, so an unknown name behaves identically |
+| `trust:<name_key>` | 30 wrong from requests with a valid trusted-device token, then the escalating lock | bounds copied tokens; locks trusted access for that name only |
 | IP | **none** | see below |
 
 **Why no IP limit.** Supabase documents no client-IP header for Edge Functions that a caller cannot
@@ -132,34 +139,46 @@ and a shared `unknown` bucket would let one stranger lock everyone out. If Supab
 trustworthy header, add it as a third, looser key.
 
 **Trusted devices.** On every successful PIN login the function issues a token: HMAC-SHA256 over
-(child id, device id, issued-at), signed with the function secret `PIN_DEVICE_SECRET` (read from env,
+(child id, device id, issued-at, `pin_set_at`), signed with the function secret `PIN_DEVICE_SECRET` (read from env,
 never hard-coded; the function refuses to run without it). The client keeps it in localStorage next to
 its device id and sends it as `deviceToken`. A request carrying a valid token for that child and device,
-issued under 180 days ago, skips the per-name lock and does not feed it, but is still bound by its own
-device limit (5 wrong tries, 15 minutes). A request without a valid token stays under the per-name
-escalating lock. Rotating `PIN_DEVICE_SECRET` makes every device sign in with the PIN again.
+issued under 180 days ago, skips the per-name lock and does not feed it, but counts against the device
+limit and the separate `trust:` limit. A request without a valid token stays under the per-name
+escalating lock. Because `pin_set_at` is in the message, **any PIN set or reset voids every token issued
+before it** (the admin resets the PIN if a device is lost). Rotating `PIN_DEVICE_SECRET` does the same for all children.
 
-**Worst-case guessing rate.** An attacker who forges every device id and address is still bound by
-the name lock: 20 tries, then locks of 15 min, 30 min, 1 h, 2 h, 4 h, 8 h, 16 h and 24 h, so about 160
-guesses in 2.3 days and then 20 per day. The 10,000 PINs take about 500 days, about 250 expected,
-and each guess costs a 600,000-iteration PBKDF2. A locked key answers 429 without comparing the PIN
+**Worst-case guessing rates.** The lock after batch k is 15 min x 2^(k-1), so batch 8 opens after
+31.75 hours; after that each 24-hour lock allows one more batch.
+
+| Attacker | Binding limit | Rate |
+|---|---|---|
+| Untrusted, forging every device id and address | `name:` 20 | 160 guesses in 31.75 h, then 20 per day; all 10,000 PINs in about 500 days (about 250 expected) |
+| One copied token (fixed device id) | `device:` 5 | 40 guesses in 31.75 h, then 5 per day |
+| Many copied tokens (each with its own device id) | `trust:` 30 | 240 guesses in 31.75 h, then 30 per day; about 330 days for all 10,000. A PIN reset voids them all |
+
+Each guess costs a 600,000-iteration PBKDF2. A locked key answers 429 without comparing the PIN
 and without counting further, so parallel requests cannot escalate it.
 
-Order: look up the profile, verify the token, check locks (device, then name unless trusted), then
-compare, then on failure increment the device (and the name, unless trusted); on success clear both.
+**Order.** (1) Reserve the device attempt: one cheap RPC, so a locked device is refused before any profile
+lookup. (2) Look up the profile. (3) Verify the token HMAC (against a dummy profile for an unknown name).
+(4) Reserve the name attempt (`name:` or `trust:` by token validity), still before the PIN. (5) Compute the PIN
+hash (dummy hash for an unknown name or a profile without a PIN) and compare. On failure the counters
+stand; on success clear them. The token HMAC and the PIN hash always run, so response time does not
+reveal whether a name exists.
 
 **Threat model.** A stranger who knows her name can lock the name by guessing 20 times, for up to 24
 hours if they repeat it, but that lock applies to **untrusted devices only**. Alyssa's own devices hold
 a trusted-device token and keep working (limited only by the device limit); a new or cleared browser
 has to wait out the lock, or the admin clears it with `pin_clear_name_lock(child_id)` from `/admin/`.
 Strangers cannot learn the per-name count: `attemptsLeft` reflects only the requesting device, and a
-name lock answers a plain `locked`. A stolen token is bound to one child and device id and expires
-after 180 days. Untested: needs a Supabase project.
+name lock answers a plain `locked`. A stolen token is bound to one child and device id, is void after a PIN reset, expires
+after 180 days, and is bounded by the device and `trust:` limits above. If trusted access for a name is locked (30 wrong
+trusted tries), the admin clears it with the same `pin_clear_name_lock`. Untested: needs a Supabase project.
 
 **Issuing the session.** After a correct PIN the function signs in as the child's own auth user
 with the derived password (`signInWithPassword` using the anon key) and returns the session tokens.
 No custom JWT signing, so Supabase's own refresh and revocation work unchanged. Unknown names run
-a full dummy hash compare so timing does not reveal which names exist.
+a full dummy token check and hash compare so timing does not reveal which names exist.
 
 **Secrets:** `PIN_PEPPER`, `CHILD_PW_SECRET`, `PIN_DEVICE_SECRET` (function secrets), optional `SITE_ORIGIN` for CORS.
 The service-role key is available only inside the function and is never in the client or `site/.env`.
@@ -203,7 +222,7 @@ interface StorageAdapter {
     merge (union of `days` and `attempts`, max `stars`, later `due` per question); see open questions.
   - **Offline:** writes only hit the cache and stay pending; on the next load or `online` event
     the push retries. The cache is always playable.
-- **Backup:** the migration already copies the pre-migration save to `ccx:backup`. A save this site cannot read (corrupt, unknown or newer version, failed migration) is kept once under `ccx:failed`, written only if absent or different; `ccx:save` and `ccx:backup` are left alone.
+- **Backup:** the migration already copies the pre-migration save to `ccx:backup`. A save this site cannot read (corrupt, unknown or newer version, failed migration) is kept in `ccx:failed:1`..`ccx:failed:3` (up to 3 distinct copies; a new one is added only if it differs from all stored copies, and when all 3 are full the 3 oldest stay and nothing is overwritten); `ccx:save` and `ccx:backup` are left alone.
 - **First login migration:** if `ccx:save` (the anonymous browser save) has progress and the server
   has none for this profile, offer "Copy this browser's progress to Alyssa". If both have progress,
   the user chooses which to keep; the other goes to `ccx:backup`. After copying, the old key is
@@ -282,14 +301,14 @@ so CORS is not `*`. Do not deploy until approved.
 5. **Same account, same device:** should the parent gate (`/parent/` PIN screen) remain once the
    admin session gates it, or be removed?
 6. **Hosting:** confirm Vercel, and the production domain.
-7. **Lockout of Alyssa by others:** a guessed name can lock the name for untrusted devices, escalating up to 24 hours; her trusted devices keep working and the admin can clear the lock.
+7. **Lockout of Alyssa by others:** a guessed name can lock the name for untrusted devices, escalating up to 24 hours; her trusted devices keep working (until 30 wrong trusted tries, which lock trusted access too) and the admin can clear the locks.
 
 ## Decisions (2026-11-17, approved at Checkpoint A)
 
 | Question | Decision |
 |---|---|
 | Free-tier pausing | Stay on the free plan; a scheduled keep-alive pings the project every 3 days. Revisit Pro when more children join. |
-| PIN lockout | Per device: 5 wrong PINs lock it for 15 minutes. A name locks after 20 wrong tries from untrusted requests, with the lock doubling each time (15 min up to 24 h) and resetting on a successful login; that name limit is the real bound. Trusted devices (HMAC token, 180 days) skip the name lock but keep the device limit. No IP limit: no trustworthy client-IP header exists on Edge Functions (section 5). |
+| PIN lockout | Per device: 5 wrong PINs lock it for 15 minutes. Every lock doubles each time it trips (15 min up to 24 h) and resets on a successful login. A device locks after 5 wrong tries. A name locks after 20 wrong tries from untrusted requests; that name limit is the real bound. Trusted devices (HMAC token, 180 days, void after a PIN reset) skip the name lock but keep the device limit and a separate trusted limit of 30 wrong tries per name. Attempts are counted before the PIN is checked. No IP limit: no trustworthy client-IP header exists on Edge Functions (section 5). |
 | Admin second factor | Required: Supabase TOTP (authenticator app) on the admin account. |
 | Hosting | Vercel, free `*.vercel.app` subdomain, deployed from the GitHub repo; custom domain later. |
 | Sync conflict | Newer save wins, with a visible warning; no field merge yet. |

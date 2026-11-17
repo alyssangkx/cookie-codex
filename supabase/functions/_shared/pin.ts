@@ -44,26 +44,42 @@ export async function childPassword(profileId: string, secret: string): Promise<
   return b64(new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(`child-pw:${profileId}`))));
 }
 
-/** Trusted-device token: HMAC-SHA256 over (child id, device id, issued-at seconds), signed with PIN_DEVICE_SECRET. Format: <iat>.<b64url mac> */
+/**
+ * Trusted-device token: HMAC-SHA256 over (child id, device id, issued-at seconds, pin_set_at), signed with
+ * PIN_DEVICE_SECRET. Format: <iat>.<b64url mac>. pin_set_at (epoch ms; 0 if never set) is in the message, so
+ * resetting a PIN changes it and every token issued before the reset stops verifying.
+ * UNTESTED: needs a Supabase project.
+ */
 const b64url = (u: Uint8Array) => b64(u).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-async function deviceMac(secret: string, childId: string, deviceId: string, iat: number) {
+async function deviceMac(secret: string, childId: string, deviceId: string, iat: number, pinSetAt: number) {
   const key = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  return new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(`device:${childId}:${deviceId}:${iat}`)));
+  return new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(`device:${childId}:${deviceId}:${iat}:${pinSetAt}`)));
 }
 
-export async function issueDeviceToken(secret: string, childId: string, deviceId: string, nowSec = Math.floor(Date.now() / 1000)) {
-  return `${nowSec}.${b64url(await deviceMac(secret, childId, deviceId, nowSec))}`;
+/** profiles.pin_set_at (timestamptz string from PostgREST) -> epoch ms for the MAC; null -> 0. */
+export const pinSetAtMs = (v: string | null | undefined) => (v ? Date.parse(v) : 0);
+
+export async function issueDeviceToken(
+  secret: string, childId: string, deviceId: string, pinSetAt: number, nowSec = Math.floor(Date.now() / 1000),
+) {
+  return `${nowSec}.${b64url(await deviceMac(secret, childId, deviceId, nowSec, pinSetAt))}`;
 }
 
 export const DEVICE_TOKEN_MAX_AGE_SEC = 180 * 86_400;
 
+/**
+ * Always computes one HMAC, even for a missing or malformed token or a dummy child, so the time taken
+ * does not depend on whether the name exists or the token is well-formed.
+ */
 export async function verifyDeviceToken(
-  secret: string, token: unknown, childId: string, deviceId: string, nowSec = Math.floor(Date.now() / 1000),
+  secret: string, token: unknown, childId: string, deviceId: string, pinSetAt: number,
+  nowSec = Math.floor(Date.now() / 1000),
 ): Promise<boolean> {
-  if (typeof token !== 'string' || token.length > 200) return false;
-  const [iatText, mac] = token.split('.');
-  const iat = Number(iatText);
-  if (!/^\d{1,12}$/.test(iatText ?? '') || !mac || iat > nowSec + 300 || nowSec - iat > DEVICE_TOKEN_MAX_AGE_SEC) return false;
-  const want = b64url(await deviceMac(secret, childId, deviceId, iat));
-  return timingSafeEqual(enc.encode(want), enc.encode(mac));
+  const text = typeof token === 'string' && token.length <= 200 ? token : '';
+  const [iatText, mac] = text.split('.');
+  const shapeOk = /^\d{1,12}$/.test(iatText ?? '') && !!mac;
+  const iat = shapeOk ? Number(iatText) : 0;
+  const want = b64url(await deviceMac(secret, childId, deviceId, iat, pinSetAt));
+  const macOk = timingSafeEqual(enc.encode(want), enc.encode(mac ?? ''));
+  return shapeOk && macOk && iat <= nowSec + 300 && nowSec - iat <= DEVICE_TOKEN_MAX_AGE_SEC;
 }
