@@ -82,9 +82,7 @@ export function backupLocal() {
   } catch { /* full or blocked */ }
 }
 
-function backupRaw(raw: string) {
-  try { localStorage.setItem(BACKUP_KEY, raw); } catch { /* full or blocked */ }
-}
+const FAILED_KEY = 'ccx:failed'; // one preserved copy of a save this site cannot read
 
 export function load(): SaveV1 {
   let raw: string | null = null;
@@ -93,17 +91,20 @@ export function load(): SaveV1 {
     if (raw) {
       let s = JSON.parse(raw);
       if (typeof s?.schemaVersion === 'number' && s.schemaVersion < SCHEMA) {
-        backupRaw(raw);
-        s = migrate(s);
+        s = migrate(s); // may throw: then nothing below runs and ccx:backup is untouched
+        backupLocal();
         save(normalise(s)); // a failed write must not lose the migrated save in memory
       }
       if (s?.schemaVersion === SCHEMA) return normalise(s);
       throw new Error('Unreadable save version.'); // e.g. a newer site's save: preserve it below
     }
   } catch {
-    // Failed migration or corrupt save: keep the raw string under its own key before returning a
-    // fresh save, so a later save() cannot destroy the only copy. ccx:save is left as it was.
-    if (raw) { try { localStorage.setItem(`ccx:failed-${Date.now()}`, raw); } catch { /* full or blocked */ } }
+    // Unreadable, unknown-version, newer-version or failed-migration save: keep the raw string once
+    // under ccx:failed (only if absent or different), so a later save() cannot destroy the only
+    // copy. ccx:save and ccx:backup are left as they were.
+    if (raw) {
+      try { if (localStorage.getItem(FAILED_KEY) !== raw) localStorage.setItem(FAILED_KEY, raw); } catch { /* full or blocked */ }
+    }
   }
   return fresh();
 }

@@ -14,8 +14,9 @@ create schema if not exists private;
 create table public.profiles (
   id          uuid primary key references auth.users (id) on delete cascade,
   parent_id   uuid not null references auth.users (id) on delete cascade,
-  -- 1-20 letters, spaces or hyphens: the same rule pin-login applies before any lookup
-  name        text not null check (btrim(name) ~ '^[[:alpha:] -]{1,20}$'),
+  -- ASCII only for now: the same regex pin-login applies before any lookup. Non-ASCII names later
+  -- need NFC normalisation on both sides.
+  name        text not null check (btrim(name) ~ '^[A-Za-z][A-Za-z -]{0,19}$'),
   -- the exact-match key pin-login queries; pin-login normalises its input the same way
   name_key    text generated always as (lower(btrim(name))) stored,
   role        text not null default 'child' check (role in ('child', 'test')),
@@ -24,9 +25,10 @@ create table public.profiles (
   pin_set_at  timestamptz,
   created_at  timestamptz not null default now()
 );
--- A child logs in by typing their name, so child names are unique for now. When a second family
--- joins, add a family code and make this unique per parent instead (see the plan).
-create unique index profiles_name_key_uq on public.profiles (name_key);
+-- A child logs in by typing their name, so child names are unique among children for now (the Test
+-- Player is excluded). When a second family joins, add a family code and make this unique per
+-- parent instead (see the plan).
+create unique index profiles_name_key_uq on public.profiles (name_key) where role = 'child';
 create index profiles_parent_idx on public.profiles (parent_id);
 
 create table public.saves (
@@ -141,13 +143,28 @@ revoke all on public.saves from anon;
 -- and the server copy comes back with status 'conflict', so the client can warn instead of silently
 -- overwriting. p_force overwrites after the user chose "keep this device". A first save inserts with
 -- on conflict do nothing, so two devices racing to create the row cannot both win: the loser falls
--- through to the compare-and-set and conflicts. Security invoker: RLS applies to every statement;
--- status 'denied' means RLS hid the row. UNTESTED: needs a Supabase project.
+-- through to the compare-and-set and conflicts.
+-- Write permission is decided FIRST, before any row is touched: the caller may write if it is the
+-- child itself (profiles.id = auth.uid()) or the owning parent (profiles.parent_id = auth.uid()) and
+-- is not an admin session, or if it is an admin AND the profile's role is 'test'. This mirrors the
+-- RLS policies on saves (admin sessions never write a real child). Otherwise status 'denied' comes
+-- back on both the update and the insert path, never 'conflict' or an RLS exception.
+-- Security invoker: RLS still applies as a second layer. UNTESTED: needs a Supabase project.
 create function public.push_save(
   p_child uuid, p_data jsonb, p_version int, p_base_rev bigint default null, p_force boolean default false
 ) returns table (status text, rev bigint, updated_at timestamptz, data jsonb, schema_version int)
 language plpgsql security invoker set search_path = '' as $$
+declare allowed boolean;
 begin
+  select case when private.is_admin() then p.role = 'test'
+              else (p.id = (select auth.uid()) or p.parent_id = (select auth.uid())) end
+    into allowed
+    from public.profiles p where p.id = p_child;
+  if not coalesce(allowed, false) then
+    status := 'denied'; rev := null; updated_at := null; data := null; schema_version := null;
+    return next; return;
+  end if;
+
   insert into public.saves as s (child_id, data, schema_version) values (p_child, p_data, p_version)
     on conflict (child_id) do nothing
     returning 'ok', s.rev, s.updated_at, null::jsonb, s.schema_version
@@ -223,3 +240,18 @@ revoke execute on function public.pin_locked_until(text), public.pin_record_fail
   public.pin_clear(text[]) from public, anon, authenticated;
 grant execute on function public.pin_locked_until(text), public.pin_record_failure(text, int, interval, interval, boolean, interval),
   public.pin_clear(text[]) to service_role;
+
+-- Admin only: clear a child's per-name lock (and its escalation) so a stranger's guessing cannot keep
+-- her out. Called from /admin/ with the admin's own session; the caller's app_metadata role is checked
+-- inside. Device keys are not touched. UNTESTED: needs a Supabase project.
+create function public.pin_clear_name_lock(p_child uuid) returns void
+language plpgsql security definer set search_path = '' as $$
+begin
+  if not private.is_admin() then
+    raise exception 'admin only' using errcode = '42501';
+  end if;
+  delete from private.pin_attempts
+   where key = 'name:' || (select p.name_key from public.profiles p where p.id = p_child);
+end $$;
+revoke execute on function public.pin_clear_name_lock(uuid) from public, anon;
+grant execute on function public.pin_clear_name_lock(uuid) to authenticated, service_role;

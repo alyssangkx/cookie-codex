@@ -44,7 +44,26 @@ export async function childPassword(profileId: string, secret: string): Promise<
   return b64(new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(`child-pw:${profileId}`))));
 }
 
-export async function sha256Hex(text: string) {
-  return [...new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(text)))]
-    .map((x) => x.toString(16).padStart(2, '0')).join('');
+/** Trusted-device token: HMAC-SHA256 over (child id, device id, issued-at seconds), signed with PIN_DEVICE_SECRET. Format: <iat>.<b64url mac> */
+const b64url = (u: Uint8Array) => b64(u).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+async function deviceMac(secret: string, childId: string, deviceId: string, iat: number) {
+  const key = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(`device:${childId}:${deviceId}:${iat}`)));
+}
+
+export async function issueDeviceToken(secret: string, childId: string, deviceId: string, nowSec = Math.floor(Date.now() / 1000)) {
+  return `${nowSec}.${b64url(await deviceMac(secret, childId, deviceId, nowSec))}`;
+}
+
+export const DEVICE_TOKEN_MAX_AGE_SEC = 180 * 86_400;
+
+export async function verifyDeviceToken(
+  secret: string, token: unknown, childId: string, deviceId: string, nowSec = Math.floor(Date.now() / 1000),
+): Promise<boolean> {
+  if (typeof token !== 'string' || token.length > 200) return false;
+  const [iatText, mac] = token.split('.');
+  const iat = Number(iatText);
+  if (!/^\d{1,12}$/.test(iatText ?? '') || !mac || iat > nowSec + 300 || nowSec - iat > DEVICE_TOKEN_MAX_AGE_SEC) return false;
+  const want = b64url(await deviceMac(secret, childId, deviceId, iat));
+  return timingSafeEqual(enc.encode(want), enc.encode(mac));
 }

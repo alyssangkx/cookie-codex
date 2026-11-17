@@ -125,16 +125,29 @@ test('a v2 save loads untouched and writes no backup', () => {
   assert.equal(data['ccx:backup'], undefined);
 });
 
-test('a failed migration preserves the raw save under ccx:failed-* and leaves ccx:save alone', () => {
+test('a failed migration preserves the raw save once under ccx:failed and leaves ccx:save and ccx:backup alone', () => {
   const raw = JSON.stringify({ ...fresh(), schemaVersion: 0 }); // no migration from 0
   const data = mockStorage({ 'ccx:save': raw });
   const s = load();
   assert.equal(s.schemaVersion, 2);
   assert.deepEqual(s.cards, {});
-  const keys = Object.keys(data).filter((k) => k.startsWith('ccx:failed-'));
-  assert.equal(keys.length, 1);
-  assert.equal(data[keys[0]], raw);
+  assert.equal(data['ccx:failed'], raw);
   assert.equal(data['ccx:save'], raw);
+  assert.equal(data['ccx:backup'], undefined);
+});
+
+test('two loads of the same broken save write ccx:failed once and create no extra keys', () => {
+  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: 3 })]) {
+    const data = mockStorage({ 'ccx:save': raw, 'ccx:backup': 'old-backup' });
+    let writes = 0;
+    const set = (localStorage as any).setItem;
+    (localStorage as any).setItem = (k: string, v: string) => { writes++; set(k, v); };
+    load(); load();
+    assert.equal(writes, 1);
+    assert.deepEqual(Object.keys(data).sort(), ['ccx:backup', 'ccx:failed', 'ccx:save']);
+    assert.equal(data['ccx:failed'], raw);
+    assert.equal(data['ccx:backup'], 'old-backup');
+  }
 });
 
 test('importCode migrates a v1 code, refuses a newer one, and writes no backup', async () => {
