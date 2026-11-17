@@ -93,15 +93,16 @@ def hold_dialogues(bank, items, dropped):
     """A dialogue set ships whole or not at all: its 4 blanks share one stem and one list of 8 phrases, and a
     blank that is never asked would sit in the dialogue unanswerable. Any blank held, stale or unreviewed
     holds its set."""
-    total = {}
+    want = {1, 2, 3, 4}
+    total, shipped = {}, {}
     for it in items:
         if (m := PASSAGE.match(it["key"])):
-            total[m[2]] = total.get(m[2], 0) + 1
-    shipped = {}
+            total.setdefault(m[2], []).append(int(m[3]))
     for q in bank:
         if q["params"]["subtopic"] == DIALOGUE and (m := PASSAGE.match(q["params"]["key"])):
-            shipped[m[2]] = shipped.get(m[2], 0) + 1
-    whole = {k for k, n in shipped.items() if n == total.get(k) == 4}
+            shipped.setdefault(m[2], []).append(int(m[3]))
+    # exactly blanks 1-4, each once, in the items and in what ships
+    whole = {k for k, s in shipped.items() if sorted(s) == sorted(want) and sorted(total.get(k, [])) == sorted(want)}
     keep = []
     for q in bank:
         m = PASSAGE.match(q["params"]["key"]) if q["params"]["subtopic"] == DIALOGUE else None
@@ -137,7 +138,7 @@ def main():
             # a dialogue set shares one list of 8 phrases across its 4 blanks: ONE seed per set, so the
             # shuffled list stays identical on all four items (the seed is the set key, not the item key)
             m = PASSAGE.match(it["key"])
-            n_opt = 8 if sub == DIALOGUE else 4
+            n_opt = len(it["options"])  # 4, or 8 for dialogue sets (check_chinese.py enforces which)
             order = list(range(n_opt))
             random.Random(f"{sub}|{m[1]}-{m[2]}" if sub == DIALOGUE and m else f"{sub}|{it['key']}").shuffle(order)
             options = [it["options"][i] for i in order]
@@ -173,6 +174,8 @@ def main():
     for old in OUT.glob("*.json"):  # never leave a bank behind that the current items no longer produce
         old.unlink()
     for topic, qs in banks.items():
+        if not qs:
+            continue  # an empty bank (e.g. every dialogue set held) is not written
         (OUT / f"{topic}.json").write_text(json.dumps({"topic": topic, "questions": qs}, ensure_ascii=False, indent=1))
         print(f"{topic}: {len(qs)} questions")
     print(f"dropped by review: {len(dropped)}, not yet reviewed: {len(unreviewed)}, "
