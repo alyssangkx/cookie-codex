@@ -16,17 +16,17 @@ Solution: 「消失」的意思是不再出现，逐渐没有，最适合这个�
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--d49bc851cb** (intermediate, chi-juzi-guanlian-1)  
+**chijuzi--6774f2a6c1** (intermediate, chi-juzi-guanlian-1)  
 
-＿＿＿＿你把答案告诉我，我＿＿＿＿不会抄的。  
+＿＿＿＿晴天还是雨天，爷爷＿＿＿＿坚持到公园打太极。  
 应选哪一组关联词？
 
-- A. 与其……不如: *「与其……不如」表示取舍：比较后选择后者；而这句话的意思是：即使得到答案也不抄，是让步式的假设。 (「与其……不如」expresses comparing and preferring the second, but in this sentence even if given the answer he will not copy, a concessive supposition.)*
-- B. 只要……就: *「只要……就」表示充分条件：具备这个条件就够了；而这句话的意思是：即使得到答案也不抄，是让步式的假设。 (「只要……就」expresses a sufficient condition, but in this sentence even if given the answer he will not copy, a concessive supposition.)*
-- C. 即使……也 ✔
-- D. 不但……而且: *「不但……而且」表示递进：后一项比前一项更进一层；而这句话的意思是：即使得到答案也不抄，是让步式的假设。 (「不但……而且」expresses progression to a further point, but in this sentence even if given the answer he will not copy, a concessive supposition.)*
+- A. 即使……也: *「即使……也」表示让步假设：就算出现某情况，结果也不变；而这句话的意思是：晴天或雨天，结果都一样，是无条件。 (「即使……也」expresses a concession: even in that case the result stays, but in this sentence whether sunny or rainy, the result is the same, regardless of condition.)*
+- B. 无论……都 ✔
+- C. 因为……所以: *「因为……所以」表示因果：先说原因，再说结果；而这句话的意思是：晴天或雨天，结果都一样，是无条件。 (「因为……所以」expresses cause then result, but in this sentence whether sunny or rainy, the result is the same, regardless of condition.)*
+- D. 只有……才: *「只有……才」表示必要条件：必须具备这个条件，别的不行；而这句话的意思是：晴天或雨天，结果都一样，是无条件。 (「只有……才」expresses a necessary, only condition, but in this sentence whether sunny or rainy, the result is the same, regardless of condition.)*
 
-Solution: 这句话的意思是：即使得到答案也不抄，是让步式的假设，所以应选「即使……也」（让步假设：就算出现某情况，结果也不变）。 (In this sentence even if given the answer he will not copy, a concessive supposition, so choose 「即使……也」, which expresses a concession: even in that case the result stays.) 即使……也 = even if...still
+Solution: 这句话的意思是：晴天或雨天，结果都一样，是无条件，所以应选「无论……都」（无条件：不管情况怎样，结果都一样）。 (In this sentence whether sunny or rainy, the result is the same, regardless of condition, so choose 「无论……都」, which expresses no condition: the result is the same either way.) 无论……都 = no matter...all
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -58,24 +58,24 @@ Solution: 清洁牙齿用「刷」，说刷牙。 (Teeth are brushed: 刷牙.) �
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chiyuedu-da2c3c2719** (basic, chi-yuedu-mcq-text-1)  
+**chiyuedu-5ac98b8e3a** (intermediate, chi-yuedu-mcq-text-2)  
 
-放学的时候，天空突然黑了下来，接着下起大雨。我站在学校门口，看着同学们一个个撑着伞离开，心里又急又怕，因为我早上忘了带伞，而妈妈今天要加班，不能来接我。就在这时，坐在我旁边的小丽走过来，问我：“你怎么不回家？”我低着头说：“我没有带伞。”小丽想了想，把她的伞递给我，说：“我可以跟姐姐一起走，她有伞。你先用我的吧，明天再还给我。”我接过伞，鼻子有点酸，小声地说了一句：“谢谢你。”回家的路上，雨还在下，我的心里却暖暖的。  
+我家后面有一小块空地，阿嬷在那里种了青菜、辣椒和几棵番茄。每天傍晚，她都会戴上旧草帽，提着水桶去浇水。有一次，我看见番茄苗长得慢，就趁阿嬷不在，偷偷多浇了好几桶水，心想这样它们会长得快一点。没想到第二天，番茄的叶子都黄了。阿嬷蹲在菜园边，轻轻摸着叶子说：“植物和人一样，吃得太多也会生病。”我红着脸承认了自己做的事。阿嬷没有骂我，只是笑着说：“种菜要有耐心，急不来的。”从那以后，我学会了每天看看叶子的变化，再决定要不要浇水。过了两个月，我们终于吃到了自己种的番茄，那味道特别甜。  
   
-小丽把伞借给作者以后，她自己会怎么回家？
+阿嬷说「急不来」，在这里是什么意思？
 
-- A. 和姐姐共用一把伞 ✔
-- B. 在学校等雨停了才回家: *短文没有说她要等雨停。(No waiting for the rain is mentioned.)*
-- C. 淋着雨跑回家: *她说姐姐有伞，可以一起走。(Her sister has an umbrella.)*
-- D. 请妈妈送一把伞来: *小丽说的是和姐姐一起走。(She says she will walk with her sister.)*
+- A. 没有别人帮忙，不能完成: *阿嬷没有谈到帮忙。(Help is not the point.)*
+- B. 事情很困难，做不到: *这里不是做不到，而是不能急。(It is not impossible, just cannot be rushed.)*
+- C. 事情不能着急，要慢慢等 ✔
+- D. 要赶快做，不然会错过: *意思正好相反，阿嬷要他有耐心。(Opposite: she asks for patience.)*
 
-Solution: 原文：「我可以跟姐姐一起走，她有伞。」 (She will share her sister's umbrella.) 共用 = to share
+Solution: 原文：「种菜要有耐心，急不来的。」 (Gardening needs patience; it cannot be hurried.) 急不来 = cannot be rushed
 
 - [ ] correct    - [ ] needs a fix: ________
 
 **chicloze-fdfdb9a5ef** (competent, chi-cloze-mcq-2)  
 
-去年，我和同学参加了学校的科学展览，主题是“节约能源”。为了做出一个能用太阳能发电的小风扇，我们翻阅了许多书籍，（1）＿＿＿＿地研究了好几个星期。实验刚开始并不顺利，风扇（2）＿＿也不转，大家都有些灰心。后来，我们发现是电线接错了位置，重新接好后，风扇终于转动起来，大家高兴得（3）＿＿。评审老师称赞我们的作品构思（4）＿＿，很有创意。这次经历让我明白，做任何事都要有（5）＿＿的精神，不能怕失败。  
+去年，我和同学参加了学校的科学展览，主题是“节约能源”。为了做出一个能用太阳能发电的小风扇，我们翻阅了许多书籍，（1）＿＿＿＿地研究了好几个星期。实验刚开始并不顺利，风扇（2）＿＿也不转，大家都有些灰心。后来，我们发现是电线接错了位置，重新接好后，风扇终于转动起来，大家高兴得（3）＿＿。评审老师称赞我们的作品构思（4）＿＿，很有创意。这次经历让我明白，做任何事都要有（5）锲而不舍的精神，不能怕失败。  
 第（1）题应该填哪一个？
 
 - A. 敷衍了事: *「敷衍了事」是应付。 (敷衍了事 means perfunctory.)*
@@ -83,60 +83,62 @@ Solution: 原文：「我可以跟姐姐一起走，她有伞。」 (She will sh
 - C. 漫不经心: *研究了好几个星期，不会漫不经心。 (Weeks of research is not careless.)*
 - D. 孜孜不倦 ✔
 
-Solution: 应填「孜孜不倦」。整句是：为了做出一个能用太阳能发电的小风扇，我们翻阅了许多书籍，孜孜不倦地研究了好几个星期。 (Studying tirelessly.) 漫不经心、无所事事、敷衍了事、孜孜不倦
+Solution: 应填「孜孜不倦」。整句是：为了做出一个能用太阳能发电的小风扇，我们翻阅了许多书籍，孜孜不倦地研究了好几个星期。 (Studying tirelessly.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chizixin-6c0e9dea73** (competent, chi-zixing-form-3)  
+**chizixin-4540b1014b** (basic, chi-zixing-form-2)  
 
-观众「目不转＿」地盯着舞台。「目不转＿」的空格应填入：
+警察伸手＿＿＿＿了闯红灯的车子。  
+填入＿＿＿＿且字形完全正确的词语是：
 
-- A. 清: *「清」和「睛」字形相近，都有「青」，但「目不转清」不是这里要用的词语。(清 looks like 睛, both containing 青. But 目不转清 is not the word needed here.)*
-- B. 晴: *「晴」和「睛」字形相近，都有「青」，但「目不转晴」不是这里要用的词语。(晴 looks like 睛, both containing 青. But 目不转晴 is not the word needed here.)*
-- C. 情: *「情」和「睛」字形相近，都有「青」，但「目不转情」不是这里要用的词语。(情 looks like 睛, both containing 青. But 目不转情 is not the word needed here.)*
-- D. 睛 ✔
+- A. 阻拦 ✔
+- B. 租拦: *「租拦」写错了，这里的字应是「阻」，不是「租」。 (租拦 is a wrong spelling; the character should be 阻, not 租.)*
+- C. 阻揽: *「阻揽」写错了，这里的字应是「拦」，不是「揽」。 (阻揽 is a wrong spelling; the character should be 拦, not 揽.)*
+- D. 阻栏: *「阻栏」写错了，这里的字应是「拦」，不是「栏」。 (阻栏 is a wrong spelling; the character should be 拦, not 栏.)*
 
-Solution: 正确的词语是「目不转睛」。 (The correct word is 目不转睛.) 目不转睛 = to stare without blinking
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chijuzi--519b8dab78** (intermediate, chi-juzi-choose-1)  
-
-下面哪一句最适合填入空格？  
-由于交通堵塞，＿＿＿＿。
-
-- A. 我们比预定时间晚了半小时到达 ✔
-- B. 我们到达时已经非常准时了: *堵车会造成迟到，不会准时。(A jam causes lateness, not punctuality.)*
-- C. 我们比预定时间早了半小时到达: *交通堵塞会让人迟到，不会提早。(A traffic jam delays people; it does not make them early.)*
-- D. 但是我们比预定时间晚了半小时: *「由于」要接结果，不能用「但是」转折。(由于 leads to a result, not a contrast with 但是.)*
-
-Solution: 「由于」引出原因，后面是结果：晚到。 (由于 gives the cause; the result is being late.) 由于……(所以)……
+Solution: 正确的词语是「阻拦」。 (The correct word is 阻拦.) 阻拦 = to block
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-af933e3152** (basic, chi-pinyin-sound-1)  
+**chijuzi--98aca49f1f** (competent, chi-juzi-choose-1)  
 
-姐姐把这篇文章「翻译」成英文。「翻译」的正确汉语拼音是：
+下面哪一句最适合接在这句话后面？  
+这家老字号咖啡店在小贩中心开了三十年。
 
-- A. fān yǐ: *「译」读 yì，声调不是 yǐ。 (The tone is wrong: 译 is read yì.)*
-- B. fán yì: *「翻」读 fān，声调不是 fán。 (The tone is wrong: 翻 is read fān.)*
-- C. fān yì ✔
-- D. fān yí: *「译」读 yì，声调不是 yí。 (The tone is wrong: 译 is read yì.)*
+- A. 每天清晨店主亲自磨咖啡豆，老顾客一闻香味就认得 ✔
+- B. 新开的购物中心里，有很多国际品牌的咖啡连锁店铺呢: *话题转到购物中心，没有承接咖啡店。(It switches to a shopping mall instead of the coffee shop.)*
+- C. 咖啡其实起源于非洲，后来才慢慢传到了亚洲各地: *话题转到咖啡的历史，离开了这家店。(It drifts to coffee history, away from the shop.)*
+- D. 可是这里一直没有顾客，三十年来生意都很冷清: *开了三十年的老店不可能一直没有顾客，与前一句矛盾，也没有写出店的特色。(A shop open for thirty years cannot always be empty.)*
 
-Solution: 「翻译」读作 fān yì。 (翻译 is read fān yì.) 翻译 = to translate
+Solution: 接着应继续写这家咖啡店，用细节说明它有特色。 (The next sentence should stay on the shop.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chizixin-853cc155f6** (competent, chi-zixing-form-1)  
+**chipinyi-200bda6421** (competent, chi-pinyin-sound-1)  
 
-老师耐心「＿」解答同学们的问题。空格中应填入的字是：
+没戴眼镜，黑板上的字看起来很「模糊」。「模糊」的正确汉语拼音是：
 
-- A. 地 ✔
-- B. 过: *「过」读 guò，表示经历，不是结构助词，放进句子里不通。(过 is read guò and marks experience; it is not a structural particle and makes no sense here.)*
-- C. 得: *「得」(de)用在动词后面连接补语。这里「耐心」在动词前面修饰动作，要用「地」。(得 follows a verb to link a complement; here 耐心 modifies the verb from in front, so 地 is needed.)*
-- D. 的: *「的」(de)用在名词前面。这里「解答」是动词，前面的修饰语要用「地」。(的 goes before a noun; 解答 is a verb, so the modifier needs 地.)*
+- A. mú hu: *「模」在「模糊」中读 mó，不读 mú（模样的读音）。(模 is mó in this word; mú is for 模样.)*
+- B. mó hu ✔
+- C. mú hù: *两处都错：「模」读 mó，不是 mú；「糊」读轻声 hu，不是 hù。(Both wrong: 模 is mó and 糊 is neutral hu.)*
+- D. mó hù: *「糊」在「模糊」中读轻声 hu，不读第四声 hù。(糊 is neutral hu in this word, not hù as in 糊弄.)*
 
-Solution: 这里应填「地」。 (The correct character here is 地.) 地 marks the manner of 解答
+Solution: 「模糊」读作 mó hu。 (模糊 is read mó hu.) 模糊 = blurry
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chizixin-29e2a4a4d3** (competent, chi-zixing-form-3)  
+
+牛奶含有丰富的＿＿＿＿。  
+填入＿＿＿＿且字形完全正确的词语是：
+
+- A. 营氧: *「营氧」写错了，这里的字应是「养」，不是「氧」。 (营氧 is a wrong spelling; the character should be 养, not 氧.)*
+- B. 营养 ✔
+- C. 荣养: *「荣养」写错了，这里的字应是「营」，不是「荣」。 (荣养 is a wrong spelling; the character should be 营, not 荣.)*
+- D. 菅养: *「菅养」写错了，这里的字应是「营」，不是「菅」。 (菅养 is a wrong spelling; the character should be 营, not 菅.)*
+
+Solution: 正确的词语是「营养」。 (The correct word is 营养.) 营养 = nutrition
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -154,17 +156,17 @@ Solution: 「刻舟求剑」的意思是：不知变通，固执地照老办法�
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--395e8365d9** (intermediate, chi-juzi-choose-1)  
+**chijuzi--2439337775** (intermediate, chi-juzi-choose-1)  
 
 下面哪一句最适合填入空格？  
-与其抱怨天气太热，＿＿＿＿。
+虽然这道题很难，＿＿＿＿。
 
-- A. 不如继续抱怨下去: *「与其抱怨」就是不要抱怨，「不如继续抱怨」前后矛盾。(与其 rejects complaining, so choosing to keep complaining contradicts it.)*
-- B. 不如打开风扇凉快一下 ✔
-- C. 不如把窗户都关起来，让屋里更闷热: *关起窗户会让屋里更热，不能解决太热的问题。(Closing the windows makes it hotter and does not solve the heat.)*
-- D. 所以大家都坐着不动，越来越热: *「与其」要搭配「不如」，不能用「所以」。(与其 pairs with 不如, not 所以.)*
+- A. 所以他没有放弃，终于想出了答案: *「虽然」要搭配「但是」，不能用「所以」。(虽然 pairs with 但是, not 所以.)*
+- B. 但是他没有放弃，终于想出了答案 ✔
+- C. 但是他很快就放弃，决定不做了: *题很难所以放弃，没有转折，不符合「虽然……但是」。(Giving up on a hard question is no contrast, so it does not fit 虽然…但是.)*
+- D. 而且他很快放弃，最后没想出答案: *「虽然」要搭配「但是」，不能用「而且」。(虽然 pairs with 但是, not 而且.)*
 
-Solution: 「与其……不如……」选择后者：与其抱怨，不如打开风扇凉快一下。 (与其 ... 不如 prefers the latter: 不如打开风扇凉快一下.)
+Solution: 「虽然……但是……」表示转折。 (虽然 ... 但是 expresses a turn.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -182,29 +184,29 @@ Solution: 「井底之蛙」的意思是：见识狭窄的人。 (井底之蛙 m
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--1cbcf1ffe2** (basic, chi-juzi-choose-2)  
+**chijuzi--bf5c996fec** (intermediate, chi-juzi-choose-2)  
 
-下面哪一个句子把「热闹」用得正确？
+下面哪一个句子把「发明」用得正确？
 
-- A. 我家的小狗，长得很「热闹」。: *「热闹」形容场面或地方，不能形容小狗的样子。(热闹 describes a scene or a place, not how a puppy looks.)*
-- B. 过年的时候，街上「热闹」极了。 ✔
-- C. 夜深了，街上「热闹」得很安静。: *「热闹」和「安静」意思相反，前后矛盾。(热闹 and 安静 are opposites.)*
-- D. 新年快到了，大家都「热闹」礼物。: *「热闹」是场面热烈，不能表示送礼物，应该用「送」。(热闹 means lively; it cannot mean giving gifts, use 送.)*
+- A. 哥伦布「发明」了美洲新大陆，改变了历史。: *大陆本来就存在，只能「发现」，不能「发明」。(A continent already existed, so it is discovered, not invented.)*
+- B. 我在抽屉里「发明」了一个旧钱包，真开心。: *找到原本就有的东西应该用「发现」，不能用「发明」。(Finding an existing item is 发现, not 发明.)*
+- C. 爱迪生「发明」了电灯，改变了人们的生活。 ✔
+- D. 老师「发明」我们的作业写错了，叫我们改。: *发觉错误应该用「发现」，「发明」是创造新事物。(Noticing a mistake is 发现; 发明 means to invent something new.)*
 
-Solution: 只有这句话中「热闹」的搭配和意思都正确：过年的时候，街上热闹极了。 (热闹: lively, bustling. In the other sentences it is used with a wrong object, sense or logic.)
+Solution: 只有这句话中「发明」的搭配和意思都正确：爱迪生发明了电灯，改变了人们的生活。 (发明: to invent. In the other sentences it is used with a wrong object, sense or logic.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-747ea300c9** (competent, chi-pinyin-sound-2)  
+**chipinyi-046896668a** (competent, chi-pinyin-sound-2)  
 
-下课后，操场上「到处」都是玩耍的孩子。「到处」的正确汉语拼音是：
+天快黑了，我们「得」赶紧回家了。「得」的正确汉语拼音是：
 
-- A. dào chū: *「处」是 chù，声调不是 chū。(The tone is wrong: 处 is chù.)*
-- B. dǎo chù: *「到」是 dào，声调不是 dǎo。(The tone is wrong: 到 is dào.)*
-- C. dào chù ✔
-- D. dào chǔ: *「处」在「到处」中读 chù，不读 chǔ。(In this word 处 is read chù, not chǔ.)*
+- A. dēi: *「得」是 děi，声调不是 dēi。(The tone is wrong: 得 is děi.)*
+- B. dé: *「得」在「得」中读 děi，不读 dé。(In this word 得 is read děi, not dé.)*
+- C. děi ✔
+- D. de: *「得」的韵母是 ei，不是 e。(The final is ei, not e.)*
 
-Solution: 「到处」指各个地方，「处」读 chù。 (In 到处, 处 means 'place' and is read chù.) 到处 = everywhere
+Solution: 这里的「得」表示必须，读 děi。 (Here 得 means 'must' and is read děi.) 得 = must, have to
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -224,7 +226,7 @@ Solution: 「亡羊补牢」的意思是：出了问题后赶快补救，防止�
 
 **chicloze-9b76afe9a2** (basic, chi-cloze-mcq-2)  
 
-星期日中午，天气炎热，爸爸带我到家附近的小贩中心吃饭。小贩中心里（1）＿＿，我们找了很久才找到空位。爸爸（2）＿＿去买鸡饭，我负责（3）＿＿位子。摊主阿姨很（4）＿＿＿＿，多给了我们一碗汤。吃完饭，我们喝光了汤，把碗筷放回回收处，这样做不但方便了清洁工人，（5）＿＿保持了环境整洁。  
+星期日中午，天气炎热，爸爸带我到家附近的小贩中心吃饭。小贩中心里（1）＿＿，我们找了很久才找到空位。爸爸（2）先去买鸡饭，我负责（3）＿＿位子。摊主阿姨很（4）＿＿＿＿，多给了我们一碗汤。吃完饭，我们喝光了汤，把碗筷放回回收处，这样做不但方便了清洁工人，（5）＿＿保持了环境整洁。  
 第（4）题应该填哪一个？
 
 - A. 吵闹: *多给汤和吵闹没有关系。 (Noisiness has nothing to do with giving extra.)*
@@ -232,13 +234,13 @@ Solution: 「亡羊补牢」的意思是：出了问题后赶快补救，防止�
 - C. 小气: *多给汤是大方，「小气」相反。 (Giving extra soup is generous, opposite to stingy.)*
 - D. 害羞: *多给汤和害羞没有关系。 (Giving extra soup has nothing to do with shyness.)*
 
-Solution: 应填「大方」。整句是：摊主阿姨很大方，多给了我们一碗汤。 (The auntie was generous.) 小气、害羞、吵闹、大方
+Solution: 应填「大方」。整句是：摊主阿姨很大方，多给了我们一碗汤。 (The auntie was generous.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
 **chicloze-bcc1b4ccc9** (intermediate, chi-cloze-mcq-2)  
 
-八月九日是新加坡的国庆日。一大早，我和家人（1）＿＿电视机前，观看国庆庆典。街上到处挂着红白相间的国旗，（2）＿＿着节日的气氛。晚上，烟花冲上夜空，五彩缤纷，令人（3）＿＿＿＿。我们一家人看得入了迷，连妈妈准备好的点心都忘了吃。爸爸说，我们能过着和平安定的日子，是前人用汗水（4）＿＿的成果，大家要懂得（5）＿＿。  
+八月九日是新加坡的国庆日。一大早，我和家人（1）围坐在电视机前，观看国庆庆典。街上到处挂着红白相间的国旗，（2）＿＿着节日的气氛。晚上，烟花冲上夜空，五彩缤纷，令人（3）＿＿＿＿。我们一家人看得入了迷，连妈妈准备好的点心都忘了吃。爸爸说，我们能过着和平安定的日子，是前人用汗水（4）＿＿的成果，大家要懂得（5）珍惜。  
 第（3）题应该填哪一个？
 
 - A. 目不暇接 ✔
@@ -246,35 +248,35 @@ Solution: 应填「大方」。整句是：摊主阿姨很大方，多给了我�
 - C. 一目了然: *「一目了然」是一眼看清楚，和「五彩缤纷」不合。 (一目了然 means clear at a glance.)*
 - D. 目中无人: *「目中无人」是骄傲看不起人。 (目中无人 means arrogant.)*
 
-Solution: 应填「目不暇接」。整句是：晚上，烟花冲上夜空，五彩缤纷，令人目不暇接。 (Too many fireworks to take in.) 一目了然、目不暇接、目中无人、刮目相看
+Solution: 应填「目不暇接」。整句是：晚上，烟花冲上夜空，五彩缤纷，令人目不暇接。 (Too many fireworks to take in.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chiyuedu-66e417aab8** (intermediate, chi-yuedu-mcq-text-1)  
+**chiyuedu-c4f3333508** (competent, chi-yuedu-mcq-text-2)  
 
-今年的校运会，我报名参加了六百米赛跑。比赛前一个星期，我每天放学后都到操场练习，可是速度还是比别人慢。比赛那天，枪声一响，同学们像箭一样冲了出去，我很快就落在最后。跑到一半，我的腿又酸又痛，好几次都想停下来。这时，我听到跑道旁有人大声喊：“加油！别放弃！”原来是班主任和同学们。我咬紧牙关，一步一步地向前跑。最后，我是第十二名，也是最后一名冲过终点线。虽然没有得到奖牌，但是老师拍拍我的肩膀说：“你跑完了全程，这比奖牌更宝贵。”我听了，眼眶热热的，心里觉得很踏实。  
+超市里的塑料袋非常方便，轻便又便宜，所以很多人买东西时总是随手拿几个。可是，大部分塑料袋用过一两次就被丢弃，而它们在大自然里要经过几百年才能分解。有些塑料袋被风吹到海里，海龟误以为是水母，吞下去后就生病了。有些国家已经规定，商店不能免费提供塑料袋，结果人们开始自备购物袋，垃圾的数量也明显减少。当然，要改变习惯并不容易。有人说，没有塑料袋，买菜不方便。其实，只要出门前把环保袋放进背包，这点麻烦很快就会变成习惯。少用一个塑料袋，也许只是一小步，但是当大家都这样做，我们的地球就会多一分干净。  
   
-老师说「这比奖牌更宝贵」，意思是什么？
+「它们在大自然里要经过几百年才能分解」，「分解」是什么意思？
 
-- A. 坚持跑完全程比得奖更有意义 ✔
-- B. 奖牌其实没有什么真正价值: *老师没有说奖牌没有价值，只是说坚持更宝贵。(She does not say medals are worthless.)*
-- C. 作者应该把得到的奖牌送给老师: *没有这样的意思。(No such meaning.)*
-- D. 跑得慢的人也一样能得到奖牌: *老师没有这样说。(Not stated.)*
+- A. 被分成几份，交给不同的人: *这是字面的误解。(A literal misreading.)*
+- B. 被冲到海里，不再出现: *这和消失在自然中是两回事。(Washing away is not breaking down.)*
+- C. 慢慢变成小块，最后消失 ✔
+- D. 被人收集起来，重新使用: *这是回收，不是分解。(That is recycling.)*
 
-Solution: 原文：「你跑完了全程，这比奖牌更宝贵。」 (Finishing matters more than winning.) 宝贵 = precious
+Solution: 原文：「它们在大自然里要经过几百年才能分解。」 (Bags take centuries to break down and disappear.) 分解 = to decompose
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-218f014382** (competent, chi-pinyin-sound-2)  
+**chipinyi-c843535d36** (basic, chi-pinyin-sound-1)  
 
-周末我「空闲」的时候，会帮妈妈做家务。「空闲」的正确汉语拼音是：
+生日那天，同学们给了我一个大「惊喜」。「惊喜」的正确汉语拼音是：
 
-- A. kòng xiàn: *「闲」是 xián，声调不是 xiàn。(The tone is wrong: 闲 is xián.)*
-- B. kōng xián: *「空」在「空闲」中读 kòng，不读 kōng。(In this word 空 is read kòng, not kōng.)*
-- C. kòng xián ✔
-- D. kōng xiān: *「空」是 kòng，声调不是 kōng。(The tone is wrong: 空 is kòng.)*
+- A. jīng qǐ: *「喜」的声母是 x，不是 q。(The initial is x, not q.)*
+- B. jīng xǐ ✔
+- C. jīn qǐ: *两处都错：「惊」读 jīng，韵母不是 jīn。 (The final is wrong: 惊 is read jīng.) 「喜」的声母是 x，不是 q。(The initial is x, not q.)*
+- D. jīn xǐ: *「惊」读 jīng，韵母不是 jīn。 (The final is wrong: 惊 is read jīng.)*
 
-Solution: 「空闲」指没有事做，「空」读 kòng。 (In 空闲, 空 means 'free/spare' and is read kòng.) 空闲 = free (time)
+Solution: 「惊喜」读作 jīng xǐ。 (惊喜 is read jīng xǐ.) 惊喜 = pleasant surprise
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -292,50 +294,54 @@ Solution: 内容空洞，所以缺乏事例和感情。 (Empty content lacks exa
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chipinyi-8633aadaaf** (competent, chi-pinyin-sound-2)  
+**chiyuedu-97ee20eb2c** (basic, chi-yuedu-mcq-text-1)  
 
-你说得「的确」没错。「的确」的正确汉语拼音是：
-
-- A. dí què ✔
-- B. dí qiè: *「确」读 què，声母不是 qiè。 (The initial is wrong: 确 is read què.)*
-- C. dì què: *「的」在这个词里读 dí，不读 dì。 (In this word 的 is read dí, not dì.)*
-- D. de què: *「的」在这个词里读 dí，不读 de。 (In this word 的 is read dí, not de.)*
-
-Solution: 「的确」读作 dí què。 (的确 is read dí què.) 的确 = indeed
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chiyuedu-b6e53e7959** (basic, chi-yuedu-mcq-text-1)  
-
-妈妈的生日到了，我想给她一个惊喜。那天早上，我比闹钟早起，轻手轻脚地走进厨房。我先把两片面包放进烤面包机，再煮了一杯热牛奶。烤面包机发出“叮”的一声，面包的香味飘满了厨房。可是，我一不小心把牛奶洒在地上，还摔破了一个盘子。“砰”的一声，妈妈被吵醒了。她走进厨房，看到地上的碎片，吓了一跳。我低着头说：“对不起，我想给您做早餐……”妈妈没有生气，她蹲下来抱住我，笑着说：“这是我吃过最特别的早餐。”后来，我们一起收拾厨房，再一起坐下来吃面包。  
+社区图书馆通告  
+暑假期间，社区图书馆将举办“夏日阅读乐”活动，欢迎小学三年级至六年级的同学参加。活动日期是六月十五日至七月二十日，每个星期六上午十点至十二点，地点在图书馆二楼的儿童阅读室。每次活动，志愿者哥哥姐姐会为同学讲故事，并带领大家玩阅读游戏。参加的同学每次借阅三本书，并写下一句读后感，就能得到一枚印章。集满五枚印章，可以换一份小礼物。报名请在六月十日以前到柜台登记，名额只有四十个，先报先得。请同学们带上自己的借书证。  
   
-作者为什么比闹钟早起？
+这则通告的目的是什么？
 
-- A. 他想练习怎样煮热牛奶: *短文没有说他要练习。(No practice is mentioned.)*
-- B. 闹钟的声音实在太吵了: *他是比闹钟还早起，没有被吵醒。(He woke before the alarm.)*
-- C. 他要在妈妈起床前出门: *短文没有说他要出门。(He did not plan to go out.)*
-- D. 他想做早餐给妈妈惊喜 ✔
+- A. 通知同学暑假期间图书馆关门: *图书馆还要办活动，没有关门。(The library is running an event, not closing.)*
+- B. 邀请同学参加暑假的阅读活动 ✔
+- C. 介绍图书馆新买的各种故事书: *通告没有提到新书。(No new books are mentioned.)*
+- D. 招募志愿者到图书馆帮忙讲故事: *志愿者已经安排好，通告对象是同学。(Volunteers are already arranged; pupils are the audience.)*
 
-Solution: 原文：「妈妈的生日到了，我想给她一个惊喜。」 (It is mum's birthday and he wants to surprise her.)
+Solution: 原文：「暑假期间，社区图书馆将举办“夏日阅读乐”活动，欢迎小学三年级至六年级的同学参加。」 (It invites pupils to join the holiday reading programme.) 通告 = notice
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chijuzi--0cf6db8822** (basic, chi-juzi-choose-2)  
+**chiyuedu-e242004707** (intermediate, chi-yuedu-mcq-text-1)  
 
-下面哪一个句子把「安静」用得正确？
+校园华乐团招收新团员  
+本校华乐团将在下个学期招收二十名新团员。凡是三年级和四年级的同学，只要喜欢音乐，都可以报名，不必会演奏乐器。报名的同学需要参加试听，老师会让大家跟着节奏拍手，并唱一小段歌，以了解同学的节奏感和音感。入团后，团员每星期二和星期四下午两点半至四点练习，学校会免费借乐器给团员，但不能带回家。团员要认真练习，每个月至少参加一次表演，不得无故缺席。报名表可向林老师索取，并须在三月二十日前交回。  
+  
+关于乐器，下面哪一项是对的？
 
-- A. 他吃饭很快，一口气「安静」了一个苹果。: *「安静」是形容词，不能带宾语表示吃东西。(安静 is an adjective and cannot take an object meaning to eat.)*
-- B. 操场上「安静」得非常热闹，同学们在玩耍。: *「安静」和「热闹」意思相反，前后矛盾。(安静 and 热闹 are opposites, so the sentence contradicts itself.)*
-- C. 图书馆里很「安静」，只听得见翻书的声音。 ✔
-- D. 考试时请你「安静」我们的课桌，不要说话。: *「安静」是形容词，不能当动词带宾语。(安静 is an adjective and cannot take an object like a verb.)*
+- A. 只有表现好的团员，才能借乐器: *通告没有这样的条件。(No such condition.)*
+- B. 团员要自己买乐器，自己保管: *学校会免费借乐器。(The school lends them free.)*
+- C. 学校免费借出，但不能带回家 ✔
+- D. 团员可以把乐器，带回家练习: *通告说不能带回家。(They cannot be taken home.)*
 
-Solution: 只有这句话中「安静」的搭配和意思都正确：图书馆里很安静，只听得见翻书的声音。 (安静: quiet. In the other sentences it is used with a wrong object, sense or logic.)
+Solution: 原文：「学校会免费借乐器给团员，但不能带回家。」 (Instruments are lent free but not taken home.) 免费 = free of charge
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chijuzi--983d06f8fd** (basic, chi-juzi-choose-2)  
+
+下面哪一个句子把「突然」用得正确？
+
+- A. 他「突然」了一个下午的数学题。: *「突然」不是动词，不能表示「做了」。(突然 is not a verb; it cannot stand for doing something.)*
+- B. 今天的功课很「突然」，我们很快就做完了。: *「突然」说明事情来得很快、没有预料到，不能形容功课的多少。(突然 means sudden and unexpected; it cannot describe how much homework there is.)*
+- C. 我们正在聊天，「突然」下起了大雨。 ✔
+- D. 学校放假了，「突然」的老师天天来上课。: *「突然的」要修饰「消息、变化」这类事情，不能修饰「老师」。(突然的 should describe an event such as news or a change, not a teacher.)*
+
+Solution: 只有这句话中「突然」的搭配和意思都正确：我们正在聊天，突然下起了大雨。 (突然: suddenly. In the other sentences it is used with a wrong object, sense or logic.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
 **chicloze-169a0451c4** (intermediate, chi-cloze-mcq-1)  
 
-我家隔壁住着一位独居的陈婆婆，她的子女都在国外工作。每次在走廊碰见她，我都会（1）＿＿向她问好。有一天，我发现婆婆家的门口堆着几天的报纸，心里觉得（2）＿＿，便赶紧告诉妈妈。妈妈（3）＿＿地敲了敲门，却没有人回应，于是请管理员打开了门。原来婆婆在浴室里滑倒了，幸亏我们发现得早，（4）＿＿＿＿后果不堪设想。婆婆常说：“远亲不如（5）＿＿。”我们是比亲人还亲的好邻居。  
+我家隔壁住着一位独居的陈婆婆，她的子女都在国外工作。每次在走廊碰见她，我都会（1）主动向她问好。有一天，我发现婆婆家的门口堆着几天的报纸，心里觉得（2）＿＿，便赶紧告诉妈妈。妈妈（3）＿＿地敲了敲门，却没有人回应，于是请管理员打开了门。原来婆婆在浴室里滑倒了，幸亏我们发现得早，（4）＿＿＿＿后果不堪设想。婆婆常说：“远亲不如（5）＿＿。”我们是比亲人还亲的好邻居。  
 第（4）题应该填哪一个？
 
 - A. 虽然: *没有转折。 (There is no contrast.)*
@@ -343,7 +349,7 @@ Solution: 只有这句话中「安静」的搭配和意思都正确：图书馆�
 - C. 否则 ✔
 - D. 因此: *不是因为发现得早所以后果严重。 (Not 'so the outcome was serious'.)*
 
-Solution: 应填「否则」。整句是：原来婆婆在浴室里滑倒了，幸亏我们发现得早，否则后果不堪设想。 (Otherwise the outcome would have been unthinkable.) 因此、否则、而且、虽然
+Solution: 应填「否则」。整句是：原来婆婆在浴室里滑倒了，幸亏我们发现得早，否则后果不堪设想。 (Otherwise the outcome would have been unthinkable.)
 
 - [ ] correct    - [ ] needs a fix: ________
 
@@ -375,44 +381,44 @@ Solution: 「不慌不忙」的意思是：不紧张也不着急，从容镇定�
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chizixin-82c3295c76** (intermediate, chi-zixing-form-3)  
+**chizixin-5f86ea65a6** (intermediate, chi-zixing-form-3)  
 
-他「坚＿」不肯放弃自己的梦想。「坚＿」的空格应填入：
+同学们都很「爱＿」这位亲切的老师。「爱＿」的空格应填入：
 
-- A. 决 ✔
-- B. 绝: *「绝」和「决」读音相同，都读 jué，但「坚绝」不是这里要用的词语。(绝 and 决 are both read jué. But 坚绝 is not the word needed here.)*
-- C. 觉: *「觉」和「决」读音相同，都读 jué，但「坚觉」不是这里要用的词语。(觉 and 决 are both read jué. But 坚觉 is not the word needed here.)*
-- D. 诀: *「诀」和「决」读音相同，都读 jué，字形也相近，都有「夬」，但「坚诀」不是这里要用的词语。(诀 and 决 are both read jué; they also look alike, both containing 夬. But 坚诀 is not the word needed here.)*
+- A. 戴 ✔
+- B. 载: *「载」(zài)和「戴」(dài)韵母相同，读音相近，但「爱载」不是这里要用的词语。(载 (zài) and 戴 (dài) share the same final and sound alike. But 爱载 is not the word needed here.)*
+- C. 带: *「带」和「戴」读音相同，都读 dài，但「爱带」不是这里要用的词语。(带 and 戴 are both read dài. But 爱带 is not the word needed here.)*
+- D. 代: *「代」和「戴」读音相同，都读 dài，但「爱代」不是这里要用的词语。(代 and 戴 are both read dài. But 爱代 is not the word needed here.)*
 
-Solution: 正确的词语是「坚决」。 (The correct word is 坚决.) 坚决 = resolute
-
-- [ ] correct    - [ ] needs a fix: ________
-
-**chizixin-a288d84996** (competent, chi-zixing-form-3)  
-
-把照片＿＿＿＿以后才放得进相框。  
-填入＿＿＿＿且字形完全正确的词语是：
-
-- A. 宿小: *「宿小」写错了，这里的字应是「缩」，不是「宿」。 (宿小 is a wrong spelling; the character should be 缩, not 宿.)*
-- B. 缩肖: *「缩肖」写错了，这里的字应是「小」，不是「肖」。 (缩肖 is a wrong spelling; the character should be 小, not 肖.)*
-- C. 缩小 ✔
-- D. 缩少: *「缩少」写错了，这里的字应是「小」，不是「少」。 (缩少 is a wrong spelling; the character should be 小, not 少.)*
-
-Solution: 正确的词语是「缩小」。 (The correct word is 缩小.) 缩小 = to make smaller
+Solution: 正确的词语是「爱戴」。 (The correct word is 爱戴.) 爱戴 = to hold in esteem
 
 - [ ] correct    - [ ] needs a fix: ________
 
-**chiyuedu-675eea786e** (basic, chi-yuedu-mcq-text-2)  
+**chiyuedu-d11eb6ca19** (intermediate, chi-yuedu-mcq-text-1)  
 
-放学的时候，天空突然黑了下来，接着下起大雨。我站在学校门口，看着同学们一个个撑着伞离开，心里又急又怕，因为我早上忘了带伞，而妈妈今天要加班，不能来接我。就在这时，坐在我旁边的小丽走过来，问我：“你怎么不回家？”我低着头说：“我没有带伞。”小丽想了想，把她的伞递给我，说：“我可以跟姐姐一起走，她有伞。你先用我的吧，明天再还给我。”我接过伞，鼻子有点酸，小声地说了一句：“谢谢你。”回家的路上，雨还在下，我的心里却暖暖的。  
+我家后面有一小块空地，阿嬷在那里种了青菜、辣椒和几棵番茄。每天傍晚，她都会戴上旧草帽，提着水桶去浇水。有一次，我看见番茄苗长得慢，就趁阿嬷不在，偷偷多浇了好几桶水，心想这样它们会长得快一点。没想到第二天，番茄的叶子都黄了。阿嬷蹲在菜园边，轻轻摸着叶子说：“植物和人一样，吃得太多也会生病。”我红着脸承认了自己做的事。阿嬷没有骂我，只是笑着说：“种菜要有耐心，急不来的。”从那以后，我学会了每天看看叶子的变化，再决定要不要浇水。过了两个月，我们终于吃到了自己种的番茄，那味道特别甜。  
   
-「我的心里却暖暖的」是什么意思？
+番茄的叶子为什么变黄了？
 
-- A. 感到别人的关心，觉得温暖 ✔
-- B. 回到家了，觉得非常安心: *这句话写在回家的路上，不是回到家以后。(It happens on the way home, not after arriving.)*
-- C. 走了很久，身体渐渐发热了: *这里写的是心里的感觉，不是身体发热。(It describes feeling, not body heat.)*
-- D. 雨停了，天气变得暖和了: *雨还在下，这里说的是心情。(It was still raining; this is about feeling.)*
+- A. 天气太热，阳光太强: *短文没有提到天气。(Weather is not mentioned.)*
+- B. 阿嬷这几天忘了浇水: *作者是多浇了水，不是没浇水。(He over-watered, not under-watered.)*
+- C. 有虫子咬坏了叶子: *短文没有提到虫子。(No pests are mentioned.)*
+- D. 作者浇了太多的水 ✔
 
-Solution: 原文：「回家的路上，雨还在下，我的心里却暖暖的。」 (Although it still rained, he felt warm inside from her kindness.) 暖 = warm (feeling cared for)
+Solution: 原文：「偷偷多浇了好几桶水……没想到第二天，番茄的叶子都黄了。」 (Extra water yellowed the leaves.) 浇水 = to water
+
+- [ ] correct    - [ ] needs a fix: ________
+
+**chiciyu-53fbb740e8** (competent, chi-ciyu-idiom-1)  
+
+吃完妈妈做的生日面，他「心满意足」地笑了。  
+句中「心满意足」的意思是：
+
+- A. 愿望已经实现，心里十分满足 ✔
+- B. 还想要更多，仍然不太满意: *这是不满足，和成语相反。 (That is wanting more; it is the opposite.)*
+- C. 对结果无所谓，丝毫不放在心上: *成语指很满足，不是无所谓。 (It means well satisfied, not indifferent.)*
+- D. 心里很难过，勉强装作高兴: *成语是真心满足，不是装的。 (The idiom is real contentment, not pretence.)*
+
+Solution: 「心满意足」的意思是：愿望已经实现，心里十分满足。 (心满意足 means: fully content.)
 
 - [ ] correct    - [ ] needs a fix: ________

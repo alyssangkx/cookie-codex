@@ -18,6 +18,7 @@ export interface BankQ {
   id: string; sub: string; level: 'basic' | 'intermediate' | 'competent';
   stem: string; options: string[]; answer: number; figure?: string;
   explain: ({ tag: string; why: string } | null)[]; solution: string[];
+  group?: string; seq?: number; // passage sets: questions sharing one passage
 }
 
 const files = import.meta.glob<{ topic: string; questions: any[] }>('../data/quiz/*/*.json', {
@@ -31,6 +32,7 @@ export const banks = Object.values(files).map((f) => ({
     id: q.id, sub: (q.outcomes[0] as string).replace(/-\d+$/, ''), level: q.level,
     stem: q.stem, options: q.options, answer: q.answer, explain: q.explain, solution: q.solution,
     ...(q.figure ? { figure: q.figure } : {}),
+    ...(q.group ? { group: q.group, seq: q.seq } : {}), // passage sets (cloze, reading)
   })) as BankQ[],
 }));
 

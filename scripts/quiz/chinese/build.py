@@ -33,6 +33,44 @@ def fingerprint(it):
     return hashlib.sha1(body.encode()).hexdigest()[:16]
 
 
+PASSAGE = re.compile(r"^(cloze|yuedu)-(\d+)-(\d+)$")  # passage sets: 5 questions on one passage
+
+
+def gloss_line(it):
+    """The gloss as an extra solution line, only when it carries a meaning ("词 = meaning") not already said."""
+    g = it.get("gloss") or ""
+    if "=" not in g:
+        return []  # e.g. a bare list of the options: says nothing
+    meaning = g.split("=", 1)[1].strip()
+    if not meaning:
+        print(f"  warning: empty gloss meaning in {it['key']}")
+        return []
+    return [] if meaning in " ".join(it["solution"]) else [g]
+
+
+def fill_cloze(bank, items, review, dropped):
+    """A cloze passage shows every blank. A blank whose question was held is shown filled with its answer,
+    so the passage reads whole; if a held blank's answer itself is wrong, the whole passage set is held."""
+    by_key = {it["key"]: it for it in items}
+    bad_sets = {PASSAGE.match(k)[2] for k in by_key if PASSAGE.match(k)
+                and "answer wrong" in review.get(f"chi-cloze-mcq|{k}", {}).get("reasons", [])}
+    keep = []
+    for q in bank:
+        m = PASSAGE.match(q["params"]["key"]) if q["params"]["subtopic"] == "chi-cloze-mcq" else None
+        if not m:
+            keep.append(q)
+            continue
+        if m[2] in bad_sets:
+            dropped.append(f"chi-cloze-mcq|{q['params']['key']} (passage set held)")
+            continue
+        for n in range(1, 6):
+            sib = by_key.get(f"cloze-{m[2]}-{n}")
+            if str(n) != m[3] and sib and not review.get(f"chi-cloze-mcq|{sib['key']}", {}).get("ship"):
+                q["stem"] = q["stem"].replace(f"（{n}）＿＿", f"（{n}）{sib['options'][sib['answer']]}")
+        keep.append(q)
+    bank[:] = keep
+
+
 def main():
     review = json.loads(REVIEW.read_text()) if REVIEW.exists() else {}
     banks, dropped, unreviewed, stale = {}, [], [], []
@@ -71,10 +109,12 @@ def main():
                 "answer": answer,
                 "explain": explain,
                 # add the gloss line only when the solution does not already say the same thing
-                "solution": it["solution"] + ([it["gloss"]] if it.get("gloss") and it["gloss"].split("=")[-1].strip()
-                                              not in " ".join(it["solution"]) else []),
+                "solution": it["solution"] + gloss_line(it),
                 "params": {"key": it["key"], "subtopic": sub},
+                **({"group": f"{sub}:{m[2]}", "seq": int(m[3])} if (m := PASSAGE.match(it["key"])) else {}),
             })
+        if sub == "chi-cloze-mcq":
+            fill_cloze(banks.get(topic, []), data["items"], review, dropped)
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*.json"):  # never leave a bank behind that the current items no longer produce
         old.unlink()

@@ -11,25 +11,25 @@
    ],
    "stem": "哥哥每天早上都「坚持」跑步。「坚持」的正确汉语拼音是：",
    "options": [
-    "jiàn chí",
     "jiān chí",
-    "jiān shí",
-    "jiān qí"
+    "jiāng chí",
+    "jiàng chí",
+    "jiàn chí"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "similar_sound_final",
+     "why": "「坚」的韵母是 ian，不是 iang。(The final is ian, not iang.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「坚」是 jiān，声调不是 jiàn。(The tone is wrong: 坚 is jiān.) 「坚」的韵母是 ian，不是 iang。(The final is ian, not iang.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「坚」是 jiān，声调不是 jiàn。(The tone is wrong: 坚 is jiān.)"
-    },
-    null,
-    {
-     "tag": "similar_sound_initial",
-     "why": "「持」的声母是 ch，不是 sh。(The initial is ch, not sh.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「持」的声母是 ch，不是 q。(The initial is ch, not q.)"
     }
    ],
    "solution": [
@@ -53,25 +53,25 @@
    "stem": "妈妈让我把桌子上的东西「收拾」好。「收拾」的正确汉语拼音是：",
    "options": [
     "shòu shi",
-    "sōu shi",
-    "shōu shi",
-    "shōu shí"
+    "shòu si",
+    "shōu si",
+    "shōu shi"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「收」是 shōu，声调不是 shòu。(The tone is wrong: 收 is shōu.)"
+     "tag": "wrong_syllable_a",
+     "why": "「收」读第一声 shōu，不读第四声 shòu。(收 is first tone, not fourth.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「收」的声母是 sh，不是 s。(The initial is sh, not s.)"
+     "tag": "double_error",
+     "why": "两处都错：「收」读第一声 shōu，不是 shòu；「拾」的声母是 sh，不是 s。(Both wrong: 收 is shōu, and 拾 starts with sh, not s.)"
     },
-    null,
     {
-     "tag": "wrong_neutral_tone",
-     "why": "「拾」在「收拾」中读轻声 shi，不读 shí。(In this word 拾 takes the neutral tone, shi, not shí.)"
-    }
+     "tag": "wrong_syllable_b",
+     "why": "「拾」的声母是 sh，不是 s，读轻声 shi。(The initial of 拾 is sh, not s.)"
+    },
+    null
    ],
    "solution": [
     "「收拾」读作 shōu shi。",
@@ -93,25 +93,25 @@
    ],
    "stem": "小明很「勇敢」，敢一个人走夜路。「勇敢」的正确汉语拼音是：",
    "options": [
-    "yǒng gǎn",
+    "yǒng kān",
     "yǒng gān",
-    "yǒng kǎn",
-    "yòng gǎn"
+    "yǒng gǎn",
+    "yǒng kǎn"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「敢」是 gǎn，声调不是 gān。(The tone is wrong: 敢 is gǎn.) 「敢」的声母是 g，不是 k。(The initial is g, not k.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「敢」是 gǎn，声调不是 gān。(The tone is wrong: 敢 is gǎn.)"
     },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「敢」的声母是 g，不是 k。(The initial is g, not k.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「勇」是 yǒng，声调不是 yòng。(The tone is wrong: 勇 is yǒng.)"
     }
    ],
    "solution": [
@@ -134,26 +134,26 @@
    ],
    "stem": "值日生负责打扫教室，保持课室「清洁」。「清洁」的正确汉语拼音是：",
    "options": [
+    "qīn jiè",
+    "qīng jié",
     "qīng jiè",
-    "xīng jié",
-    "qīn jié",
-    "qīng jié"
+    "qīn jié"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「洁」是 jié，声调不是 jiè。(The tone is wrong: 洁 is jié.) 「清」的韵母是 ing，不是 in。(The final is ing, not in.)"
+    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「洁」是 jié，声调不是 jiè。(The tone is wrong: 洁 is jié.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「清」的声母是 q，不是 x。(The initial is q, not x.)"
-    },
-    {
      "tag": "similar_sound_final",
      "why": "「清」的韵母是 ing，不是 in。(The final is ing, not in.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「清洁」读作 qīng jié。",
@@ -176,25 +176,25 @@
    "stem": "同学们排成「整齐」的队伍走进礼堂。「整齐」的正确汉语拼音是：",
    "options": [
     "zhěn qí",
-    "zěng qí",
+    "zhěng qí",
     "zhěng jí",
-    "zhěng qí"
+    "zhěn jí"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
      "tag": "similar_sound_final",
      "why": "「整」的韵母是 eng，不是 en。(The final is eng, not en.)"
     },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「整」的声母是 zh，不是 z。(The initial is zh, not z.)"
-    },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「齐」的声母是 q，不是 j。(The initial is q, not j.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「整」的韵母是 eng，不是 en。(The final is eng, not en.) 「齐」的声母是 q，不是 j。(The initial is q, not j.)"
+    }
    ],
    "solution": [
     "「整齐」读作 zhěng qí。",
@@ -217,25 +217,25 @@
    "stem": "我报名「参加」学校的华文演讲比赛。「参加」的正确汉语拼音是：",
    "options": [
     "cān qiā",
-    "cān jiā",
-    "cāng jiā",
-    "cān jiǎ"
+    "cān jiǎ",
+    "cān qiǎ",
+    "cān jiā"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
      "tag": "similar_sound_initial",
      "why": "「加」的声母是 j，不是 q。(The initial is j, not q.)"
     },
-    null,
-    {
-     "tag": "similar_sound_final",
-     "why": "「参」的韵母是 an，不是 ang。(The final is an, not ang.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「加」是 jiā，声调不是 jiǎ。(The tone is wrong: 加 is jiā.)"
-    }
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「加」的声母是 j，不是 q。(The initial is j, not q.) 「加」是 jiā，声调不是 jiǎ。(The tone is wrong: 加 is jiā.)"
+    },
+    null
    ],
    "solution": [
     "「参加」读作 cān jiā。",
@@ -257,26 +257,26 @@
    ],
    "stem": "今天下午有一场足球「比赛」。「比赛」的正确汉语拼音是：",
    "options": [
+    "pí sài",
     "bí sài",
-    "bǐ sài",
-    "bǐ shài",
-    "pǐ sài"
+    "pǐ sài",
+    "bǐ sài"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「比」是 bǐ，声调不是 bí。(The tone is wrong: 比 is bǐ.) 「比」的声母是 b，不是 p。(The initial is b, not p.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「比」是 bǐ，声调不是 bí。(The tone is wrong: 比 is bǐ.)"
     },
-    null,
-    {
-     "tag": "similar_sound_initial",
-     "why": "「赛」的声母是 s，不是 sh。(The initial is s, not sh.)"
-    },
     {
      "tag": "similar_sound_initial",
      "why": "「比」的声母是 b，不是 p。(The initial is b, not p.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「比赛」读作 bǐ sài。",
@@ -298,25 +298,25 @@
    ],
    "stem": "周末我常去「图书馆」借书。「图书馆」的正确汉语拼音是：",
    "options": [
-    "tǔ shū guǎn",
-    "tú sū guǎn",
     "tú shū guǎn",
-    "tú shū kuǎn"
+    "tǔ shū guǎn",
+    "tǔ sū guǎn",
+    "tú sū guǎn"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_tone",
      "why": "「图」是 tú，声调不是 tǔ。(The tone is wrong: 图 is tú.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「书」的声母是 sh，不是 s。(The initial is sh, not s.)"
+     "tag": "double_error",
+     "why": "两处都错：「书」的声母是 sh，不是 s。(The initial is sh, not s.) 「图」是 tú，声调不是 tǔ。(The tone is wrong: 图 is tú.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
-     "why": "「馆」的声母是 g，不是 k。(The initial is g, not k.)"
+     "why": "「书」的声母是 sh，不是 s。(The initial is sh, not s.)"
     }
    ],
    "solution": [
@@ -339,26 +339,26 @@
    ],
    "stem": "清洁工人每天清早工作，非常「辛苦」。「辛苦」的正确汉语拼音是：",
    "options": [
-    "xīn kǔ",
-    "qīn kǔ",
+    "xīng kǔ",
+    "xīng gǔ",
     "xīn gǔ",
-    "xīng kǔ"
+    "xīn kǔ"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "similar_sound_initial",
-     "why": "「辛」的声母是 x，不是 q。(The initial is x, not q.)"
+     "tag": "similar_sound_final",
+     "why": "「辛」的韵母是 in，不是 ing。(The final is in, not ing.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「辛」的韵母是 in，不是 ing。(The final is in, not ing.) 「苦」的声母是 k，不是 g。(The initial is k, not g.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「苦」的声母是 k，不是 g。(The initial is k, not g.)"
     },
-    {
-     "tag": "similar_sound_final",
-     "why": "「辛」的韵母是 in，不是 ing。(The final is in, not ing.)"
-    }
+    null
    ],
    "solution": [
     "「辛苦」读作 xīn kǔ。",
@@ -380,25 +380,25 @@
    ],
    "stem": "我要「感谢」老师这一年来的教导。「感谢」的正确汉语拼音是：",
    "options": [
-    "gān xiè",
     "kǎn xiè",
     "gǎn xiè",
-    "gǎn xié"
+    "kān xiè",
+    "gān xiè"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「感」是 gǎn，声调不是 gān。(The tone is wrong: 感 is gǎn.)"
-    },
     {
      "tag": "similar_sound_initial",
      "why": "「感」的声母是 g，不是 k。(The initial is g, not k.)"
     },
     null,
     {
+     "tag": "double_error",
+     "why": "两处都错：「感」的声母是 g，不是 k。(The initial is g, not k.) 「感」是 gǎn，声调不是 gān。(The tone is wrong: 感 is gǎn.)"
+    },
+    {
      "tag": "wrong_tone",
-     "why": "「谢」是 xiè，声调不是 xié。(The tone is wrong: 谢 is xiè.)"
+     "why": "「感」是 gǎn，声调不是 gān。(The tone is wrong: 感 is gǎn.)"
     }
    ],
    "solution": [
@@ -421,26 +421,26 @@
    ],
    "stem": "他上课时听讲很「认真」。「认真」的正确汉语拼音是：",
    "options": [
-    "rèn zhēng",
+    "lèn zhén",
     "lèn zhēn",
-    "rèn zhēn",
-    "rèn zhén"
+    "rèn zhén",
+    "rèn zhēn"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "similar_sound_final",
-     "why": "「真」的韵母是 en，不是 eng。(The final is en, not eng.)"
+     "tag": "double_error",
+     "why": "两处都错：「认」的声母是 r，不是 l。(The initial is r, not l.) 「真」是 zhēn，声调不是 zhén。(The tone is wrong: 真 is zhēn.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「认」的声母是 r，不是 l。(The initial is r, not l.)"
     },
-    null,
     {
      "tag": "wrong_tone",
      "why": "「真」是 zhēn，声调不是 zhén。(The tone is wrong: 真 is zhēn.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「认真」读作 rèn zhēn。",
@@ -462,26 +462,26 @@
    ],
    "stem": "我们在营地度过了一个「愉快」的周末。「愉快」的正确汉语拼音是：",
    "options": [
-    "yú guài",
-    "yǔ kuài",
+    "yǔ kuàn",
     "yú kuàn",
-    "yú kuài"
+    "yú kuài",
+    "yǔ kuài"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「快」的声母是 k，不是 g。(The initial is k, not g.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「愉」是 yú，声调不是 yǔ。(The tone is wrong: 愉 is yú.)"
+     "tag": "double_error",
+     "why": "两处都错：「愉」是 yú，声调不是 yǔ。(The tone is wrong: 愉 is yú.) 「快」的韵母是 uai，不是 uan。(The final is uai, not uan.)"
     },
     {
      "tag": "similar_sound_final",
      "why": "「快」的韵母是 uai，不是 uan。(The final is uai, not uan.)"
     },
-    null
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「愉」是 yú，声调不是 yǔ。(The tone is wrong: 愉 is yú.)"
+    }
    ],
    "solution": [
     "「愉快」读作 yú kuài。",
@@ -503,25 +503,25 @@
    ],
    "stem": "邻居经常「帮助」年纪大的婆婆提菜篮。「帮助」的正确汉语拼音是：",
    "options": [
-    "bāng zhù",
     "bāng zhú",
-    "bān zhù",
-    "bāng zù"
+    "bān zhú",
+    "bāng zhù",
+    "bān zhù"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
      "tag": "wrong_tone",
      "why": "「助」是 zhù，声调不是 zhú。(The tone is wrong: 助 is zhù.)"
     },
     {
+     "tag": "double_error",
+     "why": "两处都错：「帮」的韵母是 ang，不是 an。(The final is ang, not an.) 「助」是 zhù，声调不是 zhú。(The tone is wrong: 助 is zhù.)"
+    },
+    null,
+    {
      "tag": "similar_sound_final",
      "why": "「帮」的韵母是 ang，不是 an。(The final is ang, not an.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「助」的声母是 zh，不是 z。(The initial is zh, not z.)"
     }
    ],
    "solution": [
@@ -544,25 +544,25 @@
    ],
    "stem": "图书馆里很「安静」，大家都在看书。「安静」的正确汉语拼音是：",
    "options": [
-    "āng jìng",
     "ān jìng",
+    "ān jīng",
     "ān qìng",
-    "ān jīng"
+    "ān qīng"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "similar_sound_final",
-     "why": "「安」的韵母是 an，不是 ang。(The final is an, not ang.)"
-    },
     null,
+    {
+     "tag": "wrong_tone",
+     "why": "「静」是 jìng，声调不是 jīng。(The tone is wrong: 静 is jìng.)"
+    },
     {
      "tag": "similar_sound_initial",
      "why": "「静」的声母是 j，不是 q。(The initial is j, not q.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「静」是 jìng，声调不是 jīng。(The tone is wrong: 静 is jìng.)"
+     "tag": "double_error",
+     "why": "两处都错：「静」是 jìng，声调不是 jīng。(The tone is wrong: 静 is jìng.) 「静」的声母是 j，不是 q。(The initial is j, not q.)"
     }
    ],
    "solution": [
@@ -586,25 +586,25 @@
    "stem": "多运动、少吃零食对「健康」有好处。「健康」的正确汉语拼音是：",
    "options": [
     "jiàn gāng",
-    "jiàn kāng",
-    "jiān kāng",
-    "jiàn kān"
+    "jiàn gān",
+    "jiàn kān",
+    "jiàn kāng"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
      "tag": "similar_sound_initial",
      "why": "「康」的声母是 k，不是 g。(The initial is k, not g.)"
     },
-    null,
     {
-     "tag": "wrong_tone",
-     "why": "「健」是 jiàn，声调不是 jiān。(The tone is wrong: 健 is jiàn.)"
+     "tag": "double_error",
+     "why": "两处都错：「康」的声母是 k，不是 g。(The initial is k, not g.) 「康」的韵母是 ang，不是 an。(The final is ang, not an.)"
     },
     {
      "tag": "similar_sound_final",
      "why": "「康」的韵母是 ang，不是 an。(The final is ang, not an.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「健康」读作 jiàn kāng。",
@@ -613,47 +613,6 @@
    ],
    "params": {
     "key": "pinyin-015",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
-   "id": "chipinyi-5516860e11",
-   "topic": "chi-pinyin",
-   "level": "basic",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-1"
-   ],
-   "stem": "今天是我的生日，我过得很「快乐」。「快乐」的正确汉语拼音是：",
-   "options": [
-    "kuǎi lè",
-    "kuài luè",
-    "kuài lè",
-    "kuài yuè"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「快」是 kuài，声调不是 kuǎi。(The tone is wrong: 快 is kuài.)"
-    },
-    {
-     "tag": "similar_sound_final",
-     "why": "「乐」的韵母是 e，不是 ue。(The final is e, not ue.)"
-    },
-    null,
-    {
-     "tag": "wrong_syllable",
-     "why": "「乐」读 lè，不读 yuè。(乐 is read lè, not yuè.)"
-    }
-   ],
-   "solution": [
-    "「快乐」读作 kuài lè。",
-    "(快乐 is read kuài lè.)",
-    "快乐 = happy (here 乐 = lè)"
-   ],
-   "params": {
-    "key": "pinyin-016",
     "subtopic": "chi-pinyin-sound"
    }
   },
@@ -667,26 +626,26 @@
    ],
    "stem": "爷爷喜欢收集各国的「邮票」。「邮票」的正确汉语拼音是：",
    "options": [
+    "yóu piào",
     "yóu biào",
-    "yóu pào",
     "yòu piào",
-    "yóu piào"
+    "yòu biào"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「票」的声母是 p，不是 b。(The initial is p, not b.)"
     },
     {
-     "tag": "similar_sound_final",
-     "why": "「票」的韵母是 iao，不是 ao。(The final is iao, not ao.)"
-    },
-    {
      "tag": "wrong_tone",
      "why": "「邮」是 yóu，声调不是 yòu。(The tone is wrong: 邮 is yóu.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「票」的声母是 p，不是 b。(The initial is p, not b.) 「邮」是 yóu，声调不是 yòu。(The tone is wrong: 邮 is yóu.)"
+    }
    ],
    "solution": [
     "「邮票」读作 yóu piào。",
@@ -708,26 +667,26 @@
    ],
    "stem": "停电了，妈妈点起一支「蜡烛」。「蜡烛」的正确汉语拼音是：",
    "options": [
-    "là zú",
-    "là zhú",
+    "lá zhū",
+    "là zhū",
     "lá zhú",
-    "là zhū"
+    "là zhú"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「烛」的声母是 zh，不是 z。(The initial is zh, not z.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「蜡」是 là，声调不是 lá。(The tone is wrong: 蜡 is là.)"
+     "tag": "double_error",
+     "why": "两处都错：「蜡」是 là，声调不是 lá。(The tone is wrong: 蜡 is là.) 「烛」是 zhú，声调不是 zhū。(The tone is wrong: 烛 is zhú.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「烛」是 zhú，声调不是 zhū。(The tone is wrong: 烛 is zhú.)"
-    }
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「蜡」是 là，声调不是 lá。(The tone is wrong: 蜡 is là.)"
+    },
+    null
    ],
    "solution": [
     "「蜡烛」读作 là zhú。",
@@ -749,26 +708,26 @@
    ],
    "stem": "奶奶的手又软又「温暖」。「温暖」的正确汉语拼音是：",
    "options": [
-    "wén nuǎn",
-    "wēng nuǎn",
+    "wén luǎn",
     "wēn luǎn",
-    "wēn nuǎn"
+    "wēn nuǎn",
+    "wén nuǎn"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「温」是 wēn，声调不是 wén。(The tone is wrong: 温 is wēn.)"
-    },
-    {
-     "tag": "similar_sound_final",
-     "why": "「温」的韵母是 en，不是 eng。(The final is en, not eng.)"
+     "tag": "double_error",
+     "why": "两处都错：「温」是 wēn，声调不是 wén。(The tone is wrong: 温 is wēn.) 「暖」的声母是 n，不是 l。(The initial is n, not l.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「暖」的声母是 n，不是 l。(The initial is n, not l.)"
     },
-    null
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「温」是 wēn，声调不是 wén。(The tone is wrong: 温 is wēn.)"
+    }
    ],
    "solution": [
     "「温暖」读作 wēn nuǎn。",
@@ -790,26 +749,26 @@
    ],
    "stem": "我们到「森林」公园观察小鸟。「森林」的正确汉语拼音是：",
    "options": [
-    "sēn lín",
+    "shēn lìn",
     "shēn lín",
-    "sēn líng",
-    "sēng lín"
+    "sēn lìn",
+    "sēn lín"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「森」的声母是 s，不是 sh。(The initial is s, not sh.) 「林」是 lín，声调不是 lìn。(The tone is wrong: 林 is lín.)"
+    },
     {
      "tag": "similar_sound_initial",
      "why": "「森」的声母是 s，不是 sh。(The initial is s, not sh.)"
     },
     {
-     "tag": "similar_sound_final",
-     "why": "「林」的韵母是 in，不是 ing。(The final is in, not ing.)"
+     "tag": "wrong_tone",
+     "why": "「林」是 lín，声调不是 lìn。(The tone is wrong: 林 is lín.)"
     },
-    {
-     "tag": "similar_sound_final",
-     "why": "「森」的韵母是 en，不是 eng。(The final is en, not eng.)"
-    }
+    null
    ],
    "solution": [
     "「森林」读作 sēn lín。",
@@ -831,25 +790,25 @@
    ],
    "stem": "我们要用心「学习」，不要浪费时间。「学习」的正确汉语拼音是：",
    "options": [
-    "xué qí",
     "xué xí",
-    "xuē xí",
-    "xué xì"
+    "xué qí",
+    "xué xì",
+    "xué qì"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「习」的声母是 x，不是 q。(The initial is x, not q.)"
     },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「学」是 xué，声调不是 xuē。(The tone is wrong: 学 is xué.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「习」是 xí，声调不是 xì。(The tone is wrong: 习 is xí.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「习」的声母是 x，不是 q。(The initial is x, not q.) 「习」是 xí，声调不是 xì。(The tone is wrong: 习 is xí.)"
     }
    ],
    "solution": [
@@ -872,25 +831,25 @@
    ],
    "stem": "「老师」走进课室，同学们马上站起来问好。「老师」的正确汉语拼音是：",
    "options": [
-    "lǎo sī",
+    "lǎo shí",
+    "láo shí",
     "lǎo shī",
-    "láo shī",
-    "lǎo shí"
+    "láo shī"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「师」的声母是 sh，不是 s。(The initial is sh, not s.)"
+     "tag": "wrong_tone",
+     "why": "「师」是 shī，声调不是 shí。(The tone is wrong: 师 is shī.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「老」是 lǎo，声调不是 láo。(The tone is wrong: 老 is lǎo.) 「师」是 shī，声调不是 shí。(The tone is wrong: 师 is shī.)"
     },
     null,
     {
      "tag": "wrong_tone",
      "why": "「老」是 lǎo，声调不是 láo。(The tone is wrong: 老 is lǎo.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「师」是 shī，声调不是 shí。(The tone is wrong: 师 is shī.)"
     }
    ],
    "solution": [
@@ -913,26 +872,26 @@
    ],
    "stem": "多吃「水果」和蔬菜，身体才会棒。「水果」的正确汉语拼音是：",
    "options": [
-    "shuí guǒ",
-    "shuǐ guǒ",
     "shuǐ kuǒ",
-    "shuǐ guō"
+    "shuí guǒ",
+    "shuí kuǒ",
+    "shuǐ guǒ"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「水」是 shuǐ，声调不是 shuí。(The tone is wrong: 水 is shuǐ.)"
-    },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「果」的声母是 g，不是 k。(The initial is g, not k.)"
     },
     {
      "tag": "wrong_tone",
-     "why": "「果」是 guǒ，声调不是 guō。(The tone is wrong: 果 is guǒ.)"
-    }
+     "why": "「水」是 shuǐ，声调不是 shuí。(The tone is wrong: 水 is shuǐ.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「果」的声母是 g，不是 k。(The initial is g, not k.) 「水」是 shuǐ，声调不是 shuí。(The tone is wrong: 水 is shuǐ.)"
+    },
+    null
    ],
    "solution": [
     "「水果」读作 shuǐ guǒ。",
@@ -954,26 +913,26 @@
    ],
    "stem": "放学回家，我们全家一起「吃饭」。「吃饭」的正确汉语拼音是：",
    "options": [
+    "cí fàn",
+    "chí fàn",
     "cī fàn",
-    "chī fàng",
-    "chī fàn",
-    "chí fàn"
+    "chī fàn"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「吃」的声母是 ch，不是 c。(The initial is ch, not c.) 「吃」是 chī，声调不是 chí。(The tone is wrong: 吃 is chī.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「吃」是 chī，声调不是 chí。(The tone is wrong: 吃 is chī.)"
+    },
     {
      "tag": "similar_sound_initial",
      "why": "「吃」的声母是 ch，不是 c。(The initial is ch, not c.)"
     },
-    {
-     "tag": "similar_sound_final",
-     "why": "「饭」的韵母是 an，不是 ang。(The final is an, not ang.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「吃」是 chī，声调不是 chí。(The tone is wrong: 吃 is chī.)"
-    }
+    null
    ],
    "solution": [
     "「吃饭」读作 chī fàn。",
@@ -995,25 +954,25 @@
    ],
    "stem": "傍晚，爸爸带我到「公园」散步。「公园」的正确汉语拼音是：",
    "options": [
-    "gōng yuàn",
-    "gōng yán",
     "gōng yuán",
-    "gōng yuǎn"
+    "kōng yán",
+    "kōng yuán",
+    "gōng yán"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「园」是 yuán，声调不是 yuàn。(The tone is wrong: 园 is yuán.)"
+     "tag": "double_error",
+     "why": "两处都错：「园」的韵母是 uan，不是 an。(The final is uan, not an.) 「公」的声母是 g，不是 k。(The initial is g, not k.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「公」的声母是 g，不是 k。(The initial is g, not k.)"
     },
     {
      "tag": "similar_sound_final",
      "why": "「园」的韵母是 uan，不是 an。(The final is uan, not an.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「园」是 yuán，声调不是 yuǎn。(The tone is wrong: 园 is yuán.)"
     }
    ],
    "solution": [
@@ -1036,13 +995,17 @@
    ],
    "stem": "我们要「节约」用水，不浪费一滴水。「节约」的正确汉语拼音是：",
    "options": [
+    "jiē yuè",
     "jiē yuē",
     "jié yuē",
-    "jié yuè",
-    "jié yē"
+    "jié yuè"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「节」是 jié，声调不是 jiē。(The tone is wrong: 节 is jié.) 「约」是 yuē，声调不是 yuè。(The tone is wrong: 约 is yuē.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「节」是 jié，声调不是 jiē。(The tone is wrong: 节 is jié.)"
@@ -1051,10 +1014,6 @@
     {
      "tag": "wrong_tone",
      "why": "「约」是 yuē，声调不是 yuè。(The tone is wrong: 约 is yuē.)"
-    },
-    {
-     "tag": "similar_sound_final",
-     "why": "「约」的韵母是 ue，不是 e。(The final is ue, not e.)"
     }
    ],
    "solution": [
@@ -1077,26 +1036,26 @@
    ],
    "stem": "见到长辈要问好，这是基本的「礼貌」。「礼貌」的正确汉语拼音是：",
    "options": [
-    "lǐ máo",
-    "lǐ mào",
     "lí mào",
-    "lǐ mòu"
+    "lí mòu",
+    "lǐ mòu",
+    "lǐ mào"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「貌」是 mào，声调不是 máo。(The tone is wrong: 貌 is mào.)"
-    },
-    null,
     {
      "tag": "wrong_tone",
      "why": "「礼」是 lǐ，声调不是 lí。(The tone is wrong: 礼 is lǐ.)"
     },
     {
+     "tag": "double_error",
+     "why": "两处都错：「礼」是 lǐ，声调不是 lí。(The tone is wrong: 礼 is lǐ.) 「貌」的韵母是 ao，不是 ou。(The final is ao, not ou.)"
+    },
+    {
      "tag": "similar_sound_final",
      "why": "「貌」的韵母是 ao，不是 ou。(The final is ao, not ou.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「礼貌」读作 lǐ mào。",
@@ -1118,26 +1077,26 @@
    ],
    "stem": "我们班发起「环保」活动，回收旧报纸。「环保」的正确汉语拼音是：",
    "options": [
+    "huán pāo",
     "huán bāo",
-    "huán pǎo",
-    "huàn bǎo",
-    "huán bǎo"
+    "huán bǎo",
+    "huán pǎo"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「保」是 bǎo，声调不是 bāo。(The tone is wrong: 保 is bǎo.) 「保」的声母是 b，不是 p。(The initial is b, not p.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「保」是 bǎo，声调不是 bāo。(The tone is wrong: 保 is bǎo.)"
     },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「保」的声母是 b，不是 p。(The initial is b, not p.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「环」是 huán，声调不是 huàn。(The tone is wrong: 环 is huán.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「环保」读作 huán bǎo。",
@@ -1159,21 +1118,21 @@
    ],
    "stem": "我们要「珍惜」时间，好好把握每一天。「珍惜」的正确汉语拼音是：",
    "options": [
-    "zhēng xī",
     "zhēn xī",
-    "zhēn shī",
+    "zēn xí",
+    "zēn xī",
     "zhēn xí"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "similar_sound_final",
-     "why": "「珍」的韵母是 en，不是 eng。(The final is en, not eng.)"
-    },
     null,
     {
+     "tag": "double_error",
+     "why": "两处都错：「惜」是 xī，声调不是 xí。(The tone is wrong: 惜 is xī.) 「珍」的声母是 zh，不是 z。(The initial is zh, not z.)"
+    },
+    {
      "tag": "similar_sound_initial",
-     "why": "「惜」的声母是 x，不是 sh。(The initial is x, not sh.)"
+     "why": "「珍」的声母是 zh，不是 z。(The initial is zh, not z.)"
     },
     {
      "tag": "wrong_tone",
@@ -1200,13 +1159,18 @@
    ],
    "stem": "姐姐学习很「勤奋」，成绩一直很好。「勤奋」的正确汉语拼音是：",
    "options": [
-    "xín fèn",
-    "qín fèng",
+    "xín fèng",
     "qín fèn",
-    "qíng fèn"
+    "xín fèn",
+    "qín fèng"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「奋」的韵母是 en，不是 eng。(The final is en, not eng.) 「勤」的声母是 q，不是 x。(The initial is q, not x.)"
+    },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「勤」的声母是 q，不是 x。(The initial is q, not x.)"
@@ -1214,11 +1178,6 @@
     {
      "tag": "similar_sound_final",
      "why": "「奋」的韵母是 en，不是 eng。(The final is en, not eng.)"
-    },
-    null,
-    {
-     "tag": "similar_sound_final",
-     "why": "「勤」的韵母是 in，不是 ing。(The final is in, not ing.)"
     }
    ],
    "solution": [
@@ -1241,25 +1200,25 @@
    ],
    "stem": "我到「商店」买了一支铅笔。「商店」的正确汉语拼音是：",
    "options": [
-    "shāng diǎn",
-    "shāng diàn",
+    "shǎng diàn",
     "shān diàn",
-    "sāng diàn"
+    "shāng diàn",
+    "shǎn diàn"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong_tone",
-     "why": "「店」是 diàn，声调不是 diǎn。(The tone is wrong: 店 is diàn.)"
+     "why": "「商」是 shāng，声调不是 shǎng。(The tone is wrong: 商 is shāng.)"
     },
-    null,
     {
      "tag": "similar_sound_final",
      "why": "「商」的韵母是 ang，不是 an。(The final is ang, not an.)"
     },
+    null,
     {
-     "tag": "similar_sound_initial",
-     "why": "「商」的声母是 sh，不是 s。(The initial is sh, not s.)"
+     "tag": "double_error",
+     "why": "两处都错：「商」的韵母是 ang，不是 an。(The final is ang, not an.) 「商」是 shāng，声调不是 shǎng。(The tone is wrong: 商 is shāng.)"
     }
    ],
    "solution": [
@@ -1282,25 +1241,25 @@
    ],
    "stem": "我每天坐「地铁」上学，很方便。「地铁」的正确汉语拼音是：",
    "options": [
-    "dì tiě",
-    "dì diě",
+    "dí diě",
     "dí tiě",
-    "dì tié"
+    "dì tiě",
+    "dì diě"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
-     "tag": "similar_sound_initial",
-     "why": "「铁」的声母是 t，不是 d。(The initial is t, not d.)"
+     "tag": "double_error",
+     "why": "两处都错：「铁」的声母是 t，不是 d。(The initial is t, not d.) 「地」是 dì，声调不是 dí。(The tone is wrong: 地 is dì.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「地」是 dì，声调不是 dí。(The tone is wrong: 地 is dì.)"
     },
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「铁」是 tiě，声调不是 tié。(The tone is wrong: 铁 is tiě.)"
+     "tag": "similar_sound_initial",
+     "why": "「铁」的声母是 t，不是 d。(The initial is t, not d.)"
     }
    ],
    "solution": [
@@ -1323,26 +1282,26 @@
    ],
    "stem": "同学们在贺卡上写下对毕业生的「祝福」。「祝福」的正确汉语拼音是：",
    "options": [
+    "zhù hù",
+    "zhù fù",
     "zhù hú",
-    "zhù fú",
-    "zhú fú",
-    "zhù fù"
+    "zhù fú"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「福」的声母是 f，不是 h。(The initial is f, not h.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「祝」是 zhù，声调不是 zhú。(The tone is wrong: 祝 is zhù.)"
+     "tag": "double_error",
+     "why": "两处都错：「福」是 fú，声调不是 fù。(The tone is wrong: 福 is fú.) 「福」的声母是 f，不是 h。(The initial is f, not h.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「福」是 fú，声调不是 fù。(The tone is wrong: 福 is fú.)"
-    }
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「福」的声母是 f，不是 h。(The initial is f, not h.)"
+    },
+    null
    ],
    "solution": [
     "「祝福」读作 zhù fú。",
@@ -1351,47 +1310,6 @@
    ],
    "params": {
     "key": "pinyin-033",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
-   "id": "chipinyi-c99a1d3129",
-   "topic": "chi-pinyin",
-   "level": "intermediate",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-1"
-   ],
-   "stem": "遇到困难时，光是「抱怨」解决不了问题。「抱怨」的正确汉语拼音是：",
-   "options": [
-    "bào yuān",
-    "bāo yuàn",
-    "bào wàn",
-    "bào yuàn"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「怨」是 yuàn，声调不是 yuān。(The tone is wrong: 怨 is yuàn.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「抱」是 bào，声调不是 bāo。(The tone is wrong: 抱 is bào.)"
-    },
-    {
-     "tag": "wrong_syllable",
-     "why": "「怨」读 yuàn，不读 wàn。(怨 is read yuàn, not wàn.)"
-    },
-    null
-   ],
-   "solution": [
-    "「抱怨」读作 bào yuàn。",
-    "(抱怨 is read bào yuàn.)",
-    "抱怨 = to complain"
-   ],
-   "params": {
-    "key": "pinyin-034",
     "subtopic": "chi-pinyin-sound"
    }
   },
@@ -1405,26 +1323,26 @@
    ],
    "stem": "我没有完成任务，心里感到十分「惭愧」。「惭愧」的正确汉语拼音是：",
    "options": [
-    "càn kuì",
-    "cán kuì",
+    "càn guì",
     "cán guì",
-    "chán kuì"
+    "càn kuì",
+    "cán kuì"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「惭」是 cán，声调不是 càn。(The tone is wrong: 惭 is cán.)"
+     "tag": "double_error",
+     "why": "两处都错：「惭」是 cán，声调不是 càn。(The tone is wrong: 惭 is cán.) 「愧」的声母是 k，不是 g。(The initial is k, not g.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「愧」的声母是 k，不是 g。(The initial is k, not g.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「惭」的声母是 c，不是 ch。(The initial is c, not ch.)"
-    }
+     "tag": "wrong_tone",
+     "why": "「惭」是 cán，声调不是 càn。(The tone is wrong: 惭 is cán.)"
+    },
+    null
    ],
    "solution": [
     "「惭愧」读作 cán kuì。",
@@ -1446,26 +1364,26 @@
    ],
    "stem": "他「诚恳」地向同学道歉，大家原谅了他。「诚恳」的正确汉语拼音是：",
    "options": [
-    "céng kěn",
-    "chéng kěn",
+    "céng kěng",
     "chéng kěng",
-    "chéng gěn"
+    "céng kěn",
+    "chéng kěn"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「诚」的声母是 ch，不是 c。(The initial is ch, not c.)"
+     "tag": "double_error",
+     "why": "两处都错：「恳」的韵母是 en，不是 eng。(The final is en, not eng.) 「诚」的声母是 ch，不是 c。(The initial is ch, not c.)"
     },
-    null,
     {
      "tag": "similar_sound_final",
      "why": "「恳」的韵母是 en，不是 eng。(The final is en, not eng.)"
     },
     {
      "tag": "similar_sound_initial",
-     "why": "「恳」的声母是 k，不是 g。(The initial is k, not g.)"
-    }
+     "why": "「诚」的声母是 ch，不是 c。(The initial is ch, not c.)"
+    },
+    null
    ],
    "solution": [
     "「诚恳」读作 chéng kěn。",
@@ -1487,13 +1405,18 @@
    ],
    "stem": "学校举办科学「竞赛」，鼓励同学动脑筋。「竞赛」的正确汉语拼音是：",
    "options": [
+    "jìng sài",
+    "jìn shài",
     "jìn sài",
-    "jìng shài",
-    "jīng sài",
-    "jìng sài"
+    "jìng shài"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「竞」的韵母是 ing，不是 in。(The final is ing, not in.) 「赛」的声母是 s，不是 sh。(The initial is s, not sh.)"
+    },
     {
      "tag": "similar_sound_final",
      "why": "「竞」的韵母是 ing，不是 in。(The final is ing, not in.)"
@@ -1501,12 +1424,7 @@
     {
      "tag": "similar_sound_initial",
      "why": "「赛」的声母是 s，不是 sh。(The initial is s, not sh.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「竞」是 jìng，声调不是 jīng。(The tone is wrong: 竞 is jìng.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「竞赛」读作 jìng sài。",
@@ -1528,22 +1446,22 @@
    ],
    "stem": "退休后，爷爷每天过着「悠闲」的生活。「悠闲」的正确汉语拼音是：",
    "options": [
-    "yóu xián",
-    "yōu xiān",
+    "yōu qiān",
     "yōu xián",
+    "yōu xiān",
     "yōu qián"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「悠」是 yōu，声调不是 yóu。(The tone is wrong: 悠 is yōu.)"
+     "tag": "double_error",
+     "why": "两处都错：「闲」是 xián，声调不是 xiān。(The tone is wrong: 闲 is xián.) 「闲」的声母是 x，不是 q。(The initial is x, not q.)"
     },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「闲」是 xián，声调不是 xiān。(The tone is wrong: 闲 is xián.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「闲」的声母是 x，不是 q。(The initial is x, not q.)"
@@ -1569,26 +1487,26 @@
    ],
    "stem": "小女孩「凝视」着窗外的雨滴，若有所思。「凝视」的正确汉语拼音是：",
    "options": [
-    "líng shì",
+    "níng shì",
     "nín shì",
-    "níng sì",
-    "níng shì"
+    "líng shì",
+    "lín shì"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "similar_sound_initial",
-     "why": "「凝」的声母是 n，不是 l。(The initial is n, not l.)"
-    },
+    null,
     {
      "tag": "similar_sound_final",
      "why": "「凝」的韵母是 ing，不是 in。(The final is ing, not in.)"
     },
     {
      "tag": "similar_sound_initial",
-     "why": "「视」的声母是 sh，不是 s。(The initial is sh, not s.)"
+     "why": "「凝」的声母是 n，不是 l。(The initial is n, not l.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「凝」的韵母是 ing，不是 in。(The final is ing, not in.) 「凝」的声母是 n，不是 l。(The initial is n, not l.)"
+    }
    ],
    "solution": [
     "「凝视」读作 níng shì。",
@@ -1610,25 +1528,25 @@
    ],
    "stem": "输了比赛，队员们都很「沮丧」。「沮丧」的正确汉语拼音是：",
    "options": [
+    "jǔ sāng",
     "jù sàng",
     "jǔ sàng",
-    "zǔ sàng",
-    "jǔ sāng"
+    "jù sāng"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「丧」是 sàng，声调不是 sāng。(The tone is wrong: 丧 is sàng.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「沮」是 jǔ，声调不是 jù。(The tone is wrong: 沮 is jǔ.)"
     },
     null,
     {
-     "tag": "similar_sound_initial",
-     "why": "「沮」的声母是 j，不是 z。(The initial is j, not z.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「丧」是 sàng，声调不是 sāng。(The tone is wrong: 丧 is sàng.)"
+     "tag": "double_error",
+     "why": "两处都错：「丧」是 sàng，声调不是 sāng。(The tone is wrong: 丧 is sàng.) 「沮」是 jǔ，声调不是 jù。(The tone is wrong: 沮 is jǔ.)"
     }
    ],
    "solution": [
@@ -1651,25 +1569,25 @@
    ],
    "stem": "魔术表演十分「精彩」，观众掌声不断。「精彩」的正确汉语拼音是：",
    "options": [
-    "jīn cǎi",
-    "jīng cài",
     "jīng cǎi",
-    "jīng chǎi"
+    "jīng cài",
+    "jīn cài",
+    "jīn cǎi"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "similar_sound_final",
-     "why": "「精」的韵母是 ing，不是 in。(The final is ing, not in.)"
-    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「彩」是 cǎi，声调不是 cài。(The tone is wrong: 彩 is cǎi.)"
     },
-    null,
     {
-     "tag": "similar_sound_initial",
-     "why": "「彩」的声母是 c，不是 ch。(The initial is c, not ch.)"
+     "tag": "double_error",
+     "why": "两处都错：「精」的韵母是 ing，不是 in。(The final is ing, not in.) 「彩」是 cǎi，声调不是 cài。(The tone is wrong: 彩 is cǎi.)"
+    },
+    {
+     "tag": "similar_sound_final",
+     "why": "「精」的韵母是 ing，不是 in。(The final is ing, not in.)"
     }
    ],
    "solution": [
@@ -1692,26 +1610,26 @@
    ],
    "stem": "忙了一整天，爸爸回到家显得很「疲倦」。「疲倦」的正确汉语拼音是：",
    "options": [
-    "pí quàn",
+    "pī juàn",
+    "pī juǎn",
     "pí juǎn",
-    "pí juàn",
-    "pī juàn"
+    "pí juàn"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「倦」的声母是 j，不是 q。(The initial is j, not q.)"
+     "tag": "wrong_tone",
+     "why": "「疲」是 pí，声调不是 pī。(The tone is wrong: 疲 is pí.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「疲」是 pí，声调不是 pī。(The tone is wrong: 疲 is pí.) 「倦」是 juàn，声调不是 juǎn。(The tone is wrong: 倦 is juàn.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「倦」是 juàn，声调不是 juǎn。(The tone is wrong: 倦 is juàn.)"
     },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「疲」是 pí，声调不是 pī。(The tone is wrong: 疲 is pí.)"
-    }
+    null
    ],
    "solution": [
     "「疲倦」读作 pí juàn。",
@@ -1733,25 +1651,25 @@
    ],
    "stem": "新加坡的经济十分「繁荣」。「繁荣」的正确汉语拼音是：",
    "options": [
-    "fán róng",
-    "fán lóng",
     "fān róng",
-    "fán rōng"
+    "fán róng",
+    "fān lóng",
+    "fán lóng"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
-    {
-     "tag": "similar_sound_initial",
-     "why": "「荣」的声母是 r，不是 l。(The initial is r, not l.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「繁」是 fán，声调不是 fān。(The tone is wrong: 繁 is fán.)"
     },
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「荣」是 róng，声调不是 rōng。(The tone is wrong: 荣 is róng.)"
+     "tag": "double_error",
+     "why": "两处都错：「繁」是 fán，声调不是 fān。(The tone is wrong: 繁 is fán.) 「荣」的声母是 r，不是 l。(The initial is r, not l.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「荣」的声母是 r，不是 l。(The initial is r, not l.)"
     }
    ],
    "solution": [
@@ -1775,24 +1693,24 @@
    "stem": "春天来了，院子里开满了「灿烂」的花朵。「灿烂」的正确汉语拼音是：",
    "options": [
     "cān làn",
-    "chàn làn",
     "càn làn",
-    "càn nàn"
+    "chān làn",
+    "chàn làn"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
      "tag": "wrong_tone",
      "why": "「灿」是 càn，声调不是 cān。(The tone is wrong: 灿 is càn.)"
     },
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「灿」是 càn，声调不是 cān。(The tone is wrong: 灿 is càn.) 「灿」的声母是 c，不是 ch。(The initial is c, not ch.)"
+    },
     {
      "tag": "similar_sound_initial",
      "why": "「灿」的声母是 c，不是 ch。(The initial is c, not ch.)"
-    },
-    null,
-    {
-     "tag": "similar_sound_initial",
-     "why": "「烂」的声母是 l，不是 n。(The initial is l, not n.)"
     }
    ],
    "solution": [
@@ -1815,26 +1733,26 @@
    ],
    "stem": "进场时，大家要遵守「秩序」，不要推挤。「秩序」的正确汉语拼音是：",
    "options": [
-    "zì xù",
+    "zhí xú",
     "zhì xú",
-    "zhí xù",
-    "zhì xù"
+    "zhì xù",
+    "zhí xù"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「秩」的声母是 zh，不是 z。(The initial is zh, not z.)"
+     "tag": "double_error",
+     "why": "两处都错：「秩」是 zhì，声调不是 zhí。(The tone is wrong: 秩 is zhì.) 「序」是 xù，声调不是 xú。(The tone is wrong: 序 is xù.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「序」是 xù，声调不是 xú。(The tone is wrong: 序 is xù.)"
     },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「秩」是 zhì，声调不是 zhí。(The tone is wrong: 秩 is zhì.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「秩序」读作 zhì xù。",
@@ -1856,13 +1774,14 @@
    ],
    "stem": "在老师的带领下，华乐团发展得很「蓬勃」。「蓬勃」的正确汉语拼音是：",
    "options": [
+    "péng bó",
     "pēng bó",
     "péng pó",
-    "péng bò",
-    "péng bó"
+    "pēng pó"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_tone",
      "why": "「蓬」是 péng，声调不是 pēng。(The tone is wrong: 蓬 is péng.)"
@@ -1872,10 +1791,9 @@
      "why": "「勃」的声母是 b，不是 p。(The initial is b, not p.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「勃」是 bó，声调不是 bò。(The tone is wrong: 勃 is bó.)"
-    },
-    null
+     "tag": "double_error",
+     "why": "两处都错：「蓬」是 péng，声调不是 pēng。(The tone is wrong: 蓬 is péng.) 「勃」的声母是 b，不是 p。(The initial is b, not p.)"
+    }
    ],
    "solution": [
     "「蓬勃」读作 péng bó。",
@@ -1897,25 +1815,25 @@
    ],
    "stem": "取得好成绩后，我们不能「骄傲」自满。「骄傲」的正确汉语拼音是：",
    "options": [
-    "jiào ào",
     "jiāo ào",
+    "jiào ào",
     "qiāo ào",
-    "jiāo āo"
+    "qiào ào"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_tone",
      "why": "「骄」是 jiāo，声调不是 jiào。(The tone is wrong: 骄 is jiāo.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「骄」的声母是 j，不是 q。(The initial is j, not q.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「傲」是 ào，声调不是 āo。(The tone is wrong: 傲 is ào.)"
+     "tag": "double_error",
+     "why": "两处都错：「骄」的声母是 j，不是 q。(The initial is j, not q.) 「骄」是 jiāo，声调不是 jiào。(The tone is wrong: 骄 is jiāo.)"
     }
    ],
    "solution": [
@@ -1938,25 +1856,25 @@
    ],
    "stem": "他得了冠军，却依然很「谦虚」。「谦虚」的正确汉语拼音是：",
    "options": [
-    "qiān qū",
     "qiān xū",
     "qiān xú",
-    "qián xū"
+    "qiān qū",
+    "qiān qú"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "similar_sound_initial",
-     "why": "「虚」的声母是 x，不是 q。(The initial is x, not q.)"
-    },
     null,
     {
      "tag": "wrong_tone",
      "why": "「虚」是 xū，声调不是 xú。(The tone is wrong: 虚 is xū.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「谦」是 qiān，声调不是 qián。(The tone is wrong: 谦 is qiān.)"
+     "tag": "similar_sound_initial",
+     "why": "「虚」的声母是 x，不是 q。(The initial is x, not q.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「虚」是 xū，声调不是 xú。(The tone is wrong: 虚 is xū.) 「虚」的声母是 x，不是 q。(The initial is x, not q.)"
     }
    ],
    "solution": [
@@ -1966,47 +1884,6 @@
    ],
    "params": {
     "key": "pinyin-048",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
-   "id": "chipinyi-f39108edf6",
-   "topic": "chi-pinyin",
-   "level": "intermediate",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-1"
-   ],
-   "stem": "他「犹豫」了很久，才决定举手发言。「犹豫」的正确汉语拼音是：",
-   "options": [
-    "yóu yù",
-    "yóu yú",
-    "yōu yù",
-    "yóu rù"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「豫」是 yù，声调不是 yú。(The tone is wrong: 豫 is yù.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「犹」是 yóu，声调不是 yōu。(The tone is wrong: 犹 is yóu.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「豫」的声母是 y，不是 r。(The initial is y, not r.)"
-    }
-   ],
-   "solution": [
-    "「犹豫」读作 yóu yù。",
-    "(犹豫 is read yóu yù.)",
-    "犹豫 = to hesitate"
-   ],
-   "params": {
-    "key": "pinyin-049",
     "subtopic": "chi-pinyin-sound"
    }
   },
@@ -2021,25 +1898,25 @@
    "stem": "检查答案时要「仔细」，别漏掉任何一题。「仔细」的正确汉语拼音是：",
    "options": [
     "zī xì",
-    "zǐ xí",
-    "zǐ xì",
-    "zhǐ xì"
+    "zhī xì",
+    "zhǐ xì",
+    "zǐ xì"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
      "tag": "wrong_tone",
      "why": "「仔」是 zǐ，声调不是 zī。(The tone is wrong: 仔 is zǐ.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「细」是 xì，声调不是 xí。(The tone is wrong: 细 is xì.)"
+     "tag": "double_error",
+     "why": "两处都错：「仔」的声母是 z，不是 zh。(The initial is z, not zh.) 「仔」是 zǐ，声调不是 zī。(The tone is wrong: 仔 is zǐ.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「仔」的声母是 z，不是 zh。(The initial is z, not zh.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「仔细」读作 zǐ xì。",
@@ -2062,25 +1939,25 @@
    "stem": "大家都「赞美」她的歌声甜美动听。「赞美」的正确汉语拼音是：",
    "options": [
     "zān měi",
-    "zàn měi",
+    "zān mǐ",
     "zàn mǐ",
-    "zàn méi"
+    "zàn měi"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
      "tag": "wrong_tone",
      "why": "「赞」是 zàn，声调不是 zān。(The tone is wrong: 赞 is zàn.)"
     },
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「美」的韵母是 ei，不是 i。(The final is ei, not i.) 「赞」是 zàn，声调不是 zān。(The tone is wrong: 赞 is zàn.)"
+    },
     {
      "tag": "similar_sound_final",
      "why": "「美」的韵母是 ei，不是 i。(The final is ei, not i.)"
     },
-    {
-     "tag": "wrong_tone",
-     "why": "「美」是 měi，声调不是 méi。(The tone is wrong: 美 is měi.)"
-    }
+    null
    ],
    "solution": [
     "「赞美」读作 zàn měi。",
@@ -2103,24 +1980,24 @@
    "stem": "科学家不断「创造」新的发明，让生活更方便。「创造」的正确汉语拼音是：",
    "options": [
     "chuàng zhào",
-    "chuàng zào",
     "cuàng zào",
-    "chuāng zào"
+    "chuàng zào",
+    "cuàng zhào"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "similar_sound_initial",
      "why": "「造」的声母是 z，不是 zh。(The initial is z, not zh.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「创」的声母是 ch，不是 c。(The initial is ch, not c.)"
     },
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「创」是 chuàng，声调不是 chuāng。(The tone is wrong: 创 is chuàng.)"
+     "tag": "double_error",
+     "why": "两处都错：「造」的声母是 z，不是 zh。(The initial is z, not zh.) 「创」的声母是 ch，不是 c。(The initial is ch, not c.)"
     }
    ],
    "solution": [
@@ -2143,25 +2020,25 @@
    ],
    "stem": "志愿者为社区做出了很大的「贡献」。「贡献」的正确汉语拼音是：",
    "options": [
-    "gòng xiàn",
-    "kòng xiàn",
+    "kòng xiǎn",
     "gòng xiǎn",
-    "gōng xiàn"
+    "gòng xiàn",
+    "kòng xiàn"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
-     "tag": "similar_sound_initial",
-     "why": "「贡」的声母是 g，不是 k。(The initial is g, not k.)"
+     "tag": "double_error",
+     "why": "两处都错：「献」是 xiàn，声调不是 xiǎn。(The tone is wrong: 献 is xiàn.) 「贡」的声母是 g，不是 k。(The initial is g, not k.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「献」是 xiàn，声调不是 xiǎn。(The tone is wrong: 献 is xiàn.)"
     },
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「贡」是 gòng，声调不是 gōng。(The tone is wrong: 贡 is gòng.)"
+     "tag": "similar_sound_initial",
+     "why": "「贡」的声母是 g，不是 k。(The initial is g, not k.)"
     }
    ],
    "solution": [
@@ -2184,26 +2061,26 @@
    ],
    "stem": "那部电影情节「恐怖」，弟弟看了睡不着觉。「恐怖」的正确汉语拼音是：",
    "options": [
-    "gǒng bù",
-    "kōng bù",
+    "gǒng pù",
     "kǒng pù",
-    "kǒng bù"
+    "kǒng bù",
+    "gǒng bù"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「恐」的声母是 k，不是 g。(The initial is k, not g.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「恐」是 kǒng，声调不是 kōng。(The tone is wrong: 恐 is kǒng.)"
+     "tag": "double_error",
+     "why": "两处都错：「怖」的声母是 b，不是 p。(The initial is b, not p.) 「恐」的声母是 k，不是 g。(The initial is k, not g.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「怖」的声母是 b，不是 p。(The initial is b, not p.)"
     },
-    null
+    null,
+    {
+     "tag": "similar_sound_initial",
+     "why": "「恐」的声母是 k，不是 g。(The initial is k, not g.)"
+    }
    ],
    "solution": [
     "「恐怖」读作 kǒng bù。",
@@ -2225,25 +2102,25 @@
    ],
    "stem": "他从小就「热爱」大自然。「热爱」的正确汉语拼音是：",
    "options": [
-    "rě ài",
     "rè ài",
+    "rě āi",
     "rè āi",
-    "lè ài"
+    "rě ài"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「热」是 rè，声调不是 rě。(The tone is wrong: 热 is rè.)"
-    },
     null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「爱」是 ài，声调不是 āi。(The tone is wrong: 爱 is ài.) 「热」是 rè，声调不是 rě。(The tone is wrong: 热 is rè.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「爱」是 ài，声调不是 āi。(The tone is wrong: 爱 is ài.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「热」的声母是 r，不是 l。(The initial is r, not l.)"
+     "tag": "wrong_tone",
+     "why": "「热」是 rè，声调不是 rě。(The tone is wrong: 热 is rè.)"
     }
    ],
    "solution": [
@@ -2257,88 +2134,6 @@
    }
   },
   {
-   "id": "chipinyi-c204f878d2",
-   "topic": "chi-pinyin",
-   "level": "intermediate",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-1"
-   ],
-   "stem": "雨季来临，空气变得非常「潮湿」。「潮湿」的正确汉语拼音是：",
-   "options": [
-    "cháo shī",
-    "chāo shī",
-    "zhāo shī",
-    "cháo xī"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「潮」是 cháo，声调不是 chāo。(The tone is wrong: 潮 is cháo.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「潮」的声母是 ch，不是 zh。(The initial is ch, not zh.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「湿」的声母是 sh，不是 x。(The initial is sh, not x.)"
-    }
-   ],
-   "solution": [
-    "「潮湿」读作 cháo shī。",
-    "(潮湿 is read cháo shī.)",
-    "潮湿 = damp"
-   ],
-   "params": {
-    "key": "pinyin-057",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
-   "id": "chipinyi-112d19d441",
-   "topic": "chi-pinyin",
-   "level": "intermediate",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-1"
-   ],
-   "stem": "小明每天「观察」豆苗的生长情况。「观察」的正确汉语拼音是：",
-   "options": [
-    "guān chá",
-    "guàn chá",
-    "guān cā",
-    "guān zhá"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「观」是 guān，声调不是 guàn。(The tone is wrong: 观 is guān.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「察」的声母是 ch，不是 c。(The initial is ch, not c.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「察」的声母是 ch，不是 zh。(The initial is ch, not zh.)"
-    }
-   ],
-   "solution": [
-    "「观察」读作 guān chá。",
-    "(观察 is read guān chá.)",
-    "观察 = to observe"
-   ],
-   "params": {
-    "key": "pinyin-058",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
    "id": "chipinyi-c2cf7a1d39",
    "topic": "chi-pinyin",
    "level": "intermediate",
@@ -2348,25 +2143,25 @@
    ],
    "stem": "教室里「充满」了欢声笑语。「充满」的正确汉语拼音是：",
    "options": [
-    "chōng màn",
-    "cōng mǎn",
     "chōng mǎn",
-    "chōng mán"
+    "chōng mán",
+    "cōng mǎn",
+    "cōng mán"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_tone",
-     "why": "「满」是 mǎn，声调不是 màn。(The tone is wrong: 满 is mǎn.)"
+     "why": "「满」是 mǎn，声调不是 mán。(The tone is wrong: 满 is mǎn.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「充」的声母是 ch，不是 c。(The initial is ch, not c.)"
     },
-    null,
     {
-     "tag": "wrong_tone",
-     "why": "「满」是 mǎn，声调不是 mán。(The tone is wrong: 满 is mǎn.)"
+     "tag": "double_error",
+     "why": "两处都错：「满」是 mǎn，声调不是 mán。(The tone is wrong: 满 is mǎn.) 「充」的声母是 ch，不是 c。(The initial is ch, not c.)"
     }
    ],
    "solution": [
@@ -2389,25 +2184,25 @@
    ],
    "stem": "校长的表情很「严肃」，大家都不敢出声。「严肃」的正确汉语拼音是：",
    "options": [
-    "yàn sù",
-    "yán xù",
     "yán sù",
-    "yán sū"
+    "yàn xù",
+    "yán xù",
+    "yàn sù"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「严」是 yán，声调不是 yàn。(The tone is wrong: 严 is yán.)"
+     "tag": "double_error",
+     "why": "两处都错：「肃」的声母是 s，不是 x。(The initial is s, not x.) 「严」是 yán，声调不是 yàn。(The tone is wrong: 严 is yán.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「肃」的声母是 s，不是 x。(The initial is s, not x.)"
     },
-    null,
     {
      "tag": "wrong_tone",
-     "why": "「肃」是 sù，声调不是 sū。(The tone is wrong: 肃 is sù.)"
+     "why": "「严」是 yán，声调不是 yàn。(The tone is wrong: 严 is yán.)"
     }
    ],
    "solution": [
@@ -2421,47 +2216,6 @@
    }
   },
   {
-   "id": "chipinyi-3e3213de82",
-   "topic": "chi-pinyin",
-   "level": "intermediate",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-1"
-   ],
-   "stem": "体操选手的动作又轻巧又「灵活」。「灵活」的正确汉语拼音是：",
-   "options": [
-    "líng kuó",
-    "lín huó",
-    "líng huó",
-    "líng huò"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "similar_sound_initial",
-     "why": "「活」的声母是 h，不是 k。(The initial is h, not k.)"
-    },
-    {
-     "tag": "similar_sound_final",
-     "why": "「灵」的韵母是 ing，不是 in。(The final is ing, not in.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「活」是 huó，声调不是 huò。(The tone is wrong: 活 is huó.)"
-    }
-   ],
-   "solution": [
-    "「灵活」读作 líng huó。",
-    "(灵活 is read líng huó.)",
-    "灵活 = agile"
-   ],
-   "params": {
-    "key": "pinyin-061",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
    "id": "chipinyi-851b1ff7df",
    "topic": "chi-pinyin",
    "level": "intermediate",
@@ -2471,21 +2225,21 @@
    ],
    "stem": "我们站在山顶「欣赏」日出的美景。「欣赏」的正确汉语拼音是：",
    "options": [
-    "xīn shǎng",
-    "xīng shǎng",
     "xīn sǎng",
+    "xīn shǎng",
+    "xīn sàng",
     "xīn shàng"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
-    {
-     "tag": "similar_sound_final",
-     "why": "「欣」的韵母是 in，不是 ing。(The final is in, not ing.)"
-    },
     {
      "tag": "similar_sound_initial",
      "why": "「赏」的声母是 sh，不是 s。(The initial is sh, not s.)"
+    },
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「赏」的声母是 sh，不是 s。(The initial is sh, not s.) 「赏」是 shǎng，声调不是 shàng。(The tone is wrong: 赏 is shǎng.)"
     },
     {
      "tag": "wrong_tone",
@@ -2512,14 +2266,17 @@
    ],
    "stem": "他勇敢地接受了这个「挑战」。「挑战」的正确汉语拼音是：",
    "options": [
-    "tiǎo zhàn",
+    "tiāo zhǎn",
     "tiǎo zhǎn",
     "tiāo zhàn",
-    "tiǎo chàn"
+    "tiǎo zhàn"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「挑」在「挑战」中读 tiǎo，不读 tiāo。(In this word 挑 is read tiǎo, not tiāo.) 「战」是 zhàn，声调不是 zhǎn。(The tone is wrong: 战 is zhàn.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「战」是 zhàn，声调不是 zhǎn。(The tone is wrong: 战 is zhàn.)"
@@ -2528,10 +2285,7 @@
      "tag": "wrong_polyphone_reading",
      "why": "「挑」在「挑战」中读 tiǎo，不读 tiāo。(In this word 挑 is read tiǎo, not tiāo.)"
     },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「战」的声母是 zh，不是 ch。(The initial is zh, not ch.)"
-    }
+    null
    ],
    "solution": [
     "「挑战」的「挑」读 tiǎo，指激起对方较量；读 tiāo 是挑选、挑担。",
@@ -2540,47 +2294,6 @@
    ],
    "params": {
     "key": "pinyin-063",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
-   "id": "chipinyi-5c8e395d53",
-   "topic": "chi-pinyin",
-   "level": "intermediate",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-2"
-   ],
-   "stem": "船在海浪中不停地「摇晃」。「摇晃」的正确汉语拼音是：",
-   "options": [
-    "yāo huàng",
-    "yáo huàng",
-    "yáo huǎng",
-    "yáo kuàng"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「摇」是 yáo，声调不是 yāo。(The tone is wrong: 摇 is yáo.)"
-    },
-    null,
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「晃」在「摇晃」中读 huàng，不读 huǎng。(In this word 晃 is read huàng, not huǎng.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「晃」的声母是 h，不是 k。(The initial is h, not k.)"
-    }
-   ],
-   "solution": [
-    "「摇晃」的「晃」读 huàng，指摇动；读 huǎng 是一闪而过。",
-    "(晃 in 摇晃 is huàng, 'to shake'; huǎng means 'a flash'.)",
-    "摇晃 = to sway"
-   ],
-   "params": {
-    "key": "pinyin-064",
     "subtopic": "chi-pinyin-sound"
    }
   },
@@ -2596,10 +2309,10 @@
    "options": [
     "jiào zhǎng",
     "xiào chǎng",
-    "xiào zhǎng",
-    "xiào cháng"
+    "jiào chǎng",
+    "xiào zhǎng"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
      "tag": "similar_sound_initial",
@@ -2609,11 +2322,11 @@
      "tag": "similar_sound_initial",
      "why": "「长」的声母是 zh，不是 ch。(The initial is zh, not ch.)"
     },
-    null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「长」在「校长」中读 zhǎng，不读 cháng。(In this word 长 is read zhǎng, not cháng.)"
-    }
+     "tag": "double_error",
+     "why": "两处都错：「长」的声母是 zh，不是 ch。(The initial is zh, not ch.) 「校」的声母是 x，不是 j。(The initial is x, not j.)"
+    },
+    null
    ],
    "solution": [
     "「校长」是学校的负责人，「长」读 zhǎng。",
@@ -2635,25 +2348,25 @@
    ],
    "stem": "我「长大」以后想当一名医生。「长大」的正确汉语拼音是：",
    "options": [
-    "zhàng dà",
-    "cháng dà",
     "zhǎng dà",
-    "zhāng dà"
+    "zhāng dà",
+    "zǎng dà",
+    "zāng dà"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「长」是 zhǎng，声调不是 zhàng。(The tone is wrong: 长 is zhǎng.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「长」在「长大」中读 zhǎng，不读 cháng。(In this word 长 is read zhǎng, not cháng.)"
-    },
     null,
     {
      "tag": "wrong_tone",
      "why": "「长」是 zhǎng，声调不是 zhāng。(The tone is wrong: 长 is zhǎng.)"
+    },
+    {
+     "tag": "similar_sound_initial",
+     "why": "「长」的声母是 zh，不是 z。(The initial is zh, not z.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「长」是 zhǎng，声调不是 zhāng。(The tone is wrong: 长 is zhǎng.) 「长」的声母是 zh，不是 z。(The initial is zh, not z.)"
     }
    ],
    "solution": [
@@ -2677,25 +2390,25 @@
    "stem": "计划有变，我们必须「重新」安排时间表。「重新」的正确汉语拼音是：",
    "options": [
     "chóng xīng",
-    "chóng xīn",
-    "zhòng xīn",
-    "zhōng xīn"
+    "chóng xìng",
+    "chóng xìn",
+    "chóng xīn"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
      "tag": "similar_sound_final",
      "why": "「新」的韵母是 in，不是 ing。(The final is in, not ing.)"
     },
-    null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「重」在「重新」中读 chóng，不读 zhòng。(In this word 重 is read chóng, not zhòng.)"
+     "tag": "double_error",
+     "why": "两处都错：「新」读第一声，不是第四声；韵母是 in，不是 ing。(Both wrong: 新 is first tone, and its final is in, not ing.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「重」的声母是 ch，不是 zh。(The initial is ch, not zh.)"
-    }
+     "tag": "wrong_tone",
+     "why": "「新」是第一声 xīn，不读第四声 xìn。(新 is first tone xīn, not xìn.)"
+    },
+    null
    ],
    "solution": [
     "「重新」指再一次，「重」读 chóng。",
@@ -2718,21 +2431,21 @@
    "stem": "这个箱子的「重量」超过十公斤。「重量」的正确汉语拼音是：",
    "options": [
     "zhòng liáng",
-    "zhōng liàng",
     "zhòng liàng",
+    "chóng liáng",
     "chóng liàng"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
      "tag": "wrong_tone",
      "why": "「量」是 liàng，声调不是 liáng。(The tone is wrong: 量 is liàng.)"
     },
-    {
-     "tag": "wrong_tone",
-     "why": "「重」是 zhòng，声调不是 zhōng。(The tone is wrong: 重 is zhòng.)"
-    },
     null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「重」在「重量」中读 zhòng，不读 chóng。(In this word 重 is read zhòng, not chóng.) 「量」是 liàng，声调不是 liáng。(The tone is wrong: 量 is liàng.)"
+    },
     {
      "tag": "wrong_polyphone_reading",
      "why": "「重」在「重量」中读 zhòng，不读 chóng。(In this word 重 is read zhòng, not chóng.)"
@@ -2758,17 +2471,13 @@
    ],
    "stem": "明天是最后一天，我得去图书馆「还书」。「还书」的正确汉语拼音是：",
    "options": [
-    "hái shū",
     "huán shū",
     "huán sū",
-    "huàn shū"
+    "huán shù",
+    "huán sù"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「还」在「还书」中读 huán，不读 hái。(In this word 还 is read huán, not hái.)"
-    },
     null,
     {
      "tag": "similar_sound_initial",
@@ -2776,7 +2485,11 @@
     },
     {
      "tag": "wrong_tone",
-     "why": "「还」是 huán，声调不是 huàn。(The tone is wrong: 还 is huán.)"
+     "why": "「书」是 shū，声调不是 shù。(The tone is wrong: 书 is shū.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「书」的声母是 sh，不是 s。(The initial is sh, not s.) 「书」是 shū，声调不是 shù。(The tone is wrong: 书 is shū.)"
     }
    ],
    "solution": [
@@ -2799,26 +2512,26 @@
    ],
    "stem": "桌子上有笔，「还有」一把尺子。「还有」的正确汉语拼音是：",
    "options": [
-    "hài yǒu",
-    "hái yòu",
     "huán yǒu",
-    "hái yǒu"
+    "hái yǒu",
+    "hái yòu",
+    "huán yòu"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「还」是 hái，声调不是 hài。(The tone is wrong: 还 is hái.)"
+     "tag": "wrong_polyphone_reading",
+     "why": "「还」在「还有」中读 hái，不读 huán。(In this word 还 is read hái, not huán.)"
     },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「有」是 yǒu，声调不是 yòu。(The tone is wrong: 有 is yǒu.)"
     },
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「还」在「还有」中读 hái，不读 huán。(In this word 还 is read hái, not huán.)"
-    },
-    null
+     "tag": "double_error",
+     "why": "两处都错：「还」在「还有」中读 hái，不读 huán。(In this word 还 is read hái, not huán.) 「有」是 yǒu，声调不是 yòu。(The tone is wrong: 有 is yǒu.)"
+    }
    ],
    "solution": [
     "「还有」表示补充，「还」读 hái。",
@@ -2840,25 +2553,25 @@
    ],
    "stem": "住在地铁站附近，出门很「方便」。「方便」的正确汉语拼音是：",
    "options": [
-    "fāng biǎn",
-    "fāng biàn",
+    "fāng pián",
     "fān biàn",
-    "fāng pián"
+    "fāng biàn",
+    "fān pián"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「便」是 biàn，声调不是 biǎn。(The tone is wrong: 便 is biàn.)"
+     "tag": "wrong_polyphone_reading",
+     "why": "「便」在「方便」中读 biàn，不读 pián。(In this word 便 is read biàn, not pián.)"
     },
-    null,
     {
      "tag": "similar_sound_final",
      "why": "「方」的韵母是 ang，不是 an。(The final is ang, not an.)"
     },
+    null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「便」在「方便」中读 biàn，不读 pián。(In this word 便 is read biàn, not pián.)"
+     "tag": "double_error",
+     "why": "两处都错：「便」在「方便」中读 biàn，不读 pián。(In this word 便 is read biàn, not pián.) 「方」的韵母是 ang，不是 an。(The final is ang, not an.)"
     }
    ],
    "solution": [
@@ -2880,25 +2593,25 @@
    ],
    "stem": "这家小贩中心的鸡饭又好吃又「便宜」。「便宜」的正确汉语拼音是：",
    "options": [
+    "biàn yi",
+    "piān yi",
     "pián yi",
-    "pián yí",
-    "piàn yi",
-    "biàn yi"
+    "piàn yi"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
-     "tag": "wrong_neutral_tone",
-     "why": "「宜」在「便宜」中读轻声 yi，不读 yí。(In this word 宜 takes the neutral tone, yi, not yí.)"
+     "tag": "polyphone_misread",
+     "why": "「便宜」的「便」读 pián，不读 biàn（方便才读 biàn）。(便 is pián in 便宜; biàn is for 方便.)"
     },
     {
      "tag": "wrong_tone",
-     "why": "「便」是 pián，声调不是 piàn。(The tone is wrong: 便 is pián.)"
+     "why": "「便」读第二声 pián，不读第一声 piān（不要读成「偏」）。(便 is pián, not piān like 偏.)"
     },
+    null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「便」在「便宜」中读 pián，不读 biàn。(In this word 便 is read pián, not biàn.)"
+     "tag": "wrong_tone",
+     "why": "「便」在「便宜」中读第二声 pián，不读第四声 piàn。(便 is second tone pián here.)"
     }
    ],
    "solution": [
@@ -2921,25 +2634,25 @@
    ],
    "stem": "老师请班长「处理」同学之间的小纠纷。「处理」的正确汉语拼音是：",
    "options": [
+    "chǔ lí",
     "cǔ lǐ",
     "chǔ lǐ",
-    "chù lǐ",
-    "chǔ lí"
+    "cǔ lí"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「理」是 lǐ，声调不是 lí。(The tone is wrong: 理 is lǐ.)"
+    },
     {
      "tag": "similar_sound_initial",
      "why": "「处」的声母是 ch，不是 c。(The initial is ch, not c.)"
     },
     null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「处」在「处理」中读 chǔ，不读 chù。(In this word 处 is read chǔ, not chù.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「理」是 lǐ，声调不是 lí。(The tone is wrong: 理 is lǐ.)"
+     "tag": "double_error",
+     "why": "两处都错：「理」是 lǐ，声调不是 lí。(The tone is wrong: 理 is lǐ.) 「处」的声母是 ch，不是 c。(The initial is ch, not c.)"
     }
    ],
    "solution": [
@@ -2962,17 +2675,13 @@
    ],
    "stem": "下课后，操场上「到处」都是玩耍的孩子。「到处」的正确汉语拼音是：",
    "options": [
-    "dào chū",
     "dǎo chù",
     "dào chù",
-    "dào chǔ"
+    "dào chǔ",
+    "dǎo chǔ"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「处」是 chù，声调不是 chū。(The tone is wrong: 处 is chù.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「到」是 dào，声调不是 dǎo。(The tone is wrong: 到 is dào.)"
@@ -2981,6 +2690,10 @@
     {
      "tag": "wrong_polyphone_reading",
      "why": "「处」在「到处」中读 chù，不读 chǔ。(In this word 处 is read chù, not chǔ.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「处」在「到处」中读 chù，不读 chǔ。(In this word 处 is read chù, not chǔ.) 「到」是 dào，声调不是 dǎo。(The tone is wrong: 到 is dào.)"
     }
    ],
    "solution": [
@@ -3003,22 +2716,22 @@
    ],
    "stem": "我的「爱好」是集邮和画画。「爱好」的正确汉语拼音是：",
    "options": [
-    "ài hāo",
-    "ài hǎo",
     "ài hào",
+    "ài hǎo",
+    "āi hǎo",
     "āi hào"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「好」是 hào，声调不是 hāo。(The tone is wrong: 好 is hào.)"
-    },
+    null,
     {
      "tag": "wrong_polyphone_reading",
      "why": "「好」在「爱好」中读 hào，不读 hǎo。(In this word 好 is read hào, not hǎo.)"
     },
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「好」在「爱好」中读 hào，不读 hǎo。(In this word 好 is read hào, not hǎo.) 「爱」是 ài，声调不是 āi。(The tone is wrong: 爱 is ài.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「爱」是 ài，声调不是 āi。(The tone is wrong: 爱 is ài.)"
@@ -3044,25 +2757,25 @@
    ],
    "stem": "他从小就很「好学」，常常追着老师问问题。「好学」的正确汉语拼音是：",
    "options": [
+    "hào xuē",
+    "hǎo xuē",
     "hào xué",
-    "hǎo xué",
-    "hāo xué",
-    "hào xuē"
+    "hǎo xué"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_tone",
+     "why": "「学」是 xué，声调不是 xuē。(The tone is wrong: 学 is xué.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「好」在「好学」中读 hào，不读 hǎo。(In this word 好 is read hào, not hǎo.) 「学」是 xué，声调不是 xuē。(The tone is wrong: 学 is xué.)"
+    },
     null,
     {
      "tag": "wrong_polyphone_reading",
      "why": "「好」在「好学」中读 hào，不读 hǎo。(In this word 好 is read hào, not hǎo.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「好」是 hào，声调不是 hāo。(The tone is wrong: 好 is hào.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「学」是 xué，声调不是 xuē。(The tone is wrong: 学 is xué.)"
     }
    ],
    "solution": [
@@ -3085,17 +2798,14 @@
    ],
    "stem": "我们每周有两节「音乐」课。「音乐」的正确汉语拼音是：",
    "options": [
-    "yīn lè",
+    "yīn yuè",
     "yīn yuē",
     "yīng yuè",
-    "yīn yuè"
+    "yīng yuē"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「乐」在「音乐」中读 yuè，不读 lè。(In this word 乐 is read yuè, not lè.)"
-    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「乐」是 yuè，声调不是 yuē。(The tone is wrong: 乐 is yuè.)"
@@ -3104,7 +2814,10 @@
      "tag": "similar_sound_final",
      "why": "「音」的韵母是 in，不是 ing。(The final is in, not ing.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「音」的韵母是 in，不是 ing。(The final is in, not ing.) 「乐」是 yuè，声调不是 yuē。(The tone is wrong: 乐 is yuè.)"
+    }
    ],
    "solution": [
     "「音乐」的「乐」读 yuè。",
@@ -3125,25 +2838,25 @@
    ],
    "stem": "面对困难，我们要保持「乐观」的态度。「乐观」的正确汉语拼音是：",
    "options": [
-    "lè guàn",
     "lè guān",
+    "lè kuān",
     "yuè guān",
-    "lè kuān"
+    "yuè kuān"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「观」是 guān，声调不是 guàn。(The tone is wrong: 观 is guān.)"
-    },
     null,
+    {
+     "tag": "similar_sound_initial",
+     "why": "「观」的声母是 g，不是 k。(The initial is g, not k.)"
+    },
     {
      "tag": "wrong_polyphone_reading",
      "why": "「乐」在「乐观」中读 lè，不读 yuè。(In this word 乐 is read lè, not yuè.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「观」的声母是 g，不是 k。(The initial is g, not k.)"
+     "tag": "double_error",
+     "why": "两处都错：「乐」在「乐观」中读 lè，不读 yuè。(In this word 乐 is read lè, not yuè.) 「观」的声母是 g，不是 k。(The initial is g, not k.)"
     }
    ],
    "solution": [
@@ -3166,26 +2879,26 @@
    ],
    "stem": "妈妈带我到「银行」开了一个储蓄户口。「银行」的正确汉语拼音是：",
    "options": [
-    "yín hàng",
-    "yín xíng",
+    "yíng hàng",
     "yíng háng",
-    "yín háng"
+    "yín háng",
+    "yín hàng"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「行」是 háng，声调不是 hàng。(The tone is wrong: 行 is háng.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「行」在「银行」中读 háng，不读 xíng。(In this word 行 is read háng, not xíng.)"
+     "tag": "double_error",
+     "why": "两处都错：「行」是 háng，声调不是 hàng。(The tone is wrong: 行 is háng.) 「银」的韵母是 in，不是 ing。(The final is in, not ing.)"
     },
     {
      "tag": "similar_sound_final",
      "why": "「银」的韵母是 in，不是 ing。(The final is in, not ing.)"
     },
-    null
+    null,
+    {
+     "tag": "wrong_tone",
+     "why": "「行」是 háng，声调不是 hàng。(The tone is wrong: 行 is háng.)"
+    }
    ],
    "solution": [
     "「银行」是金融机构，「行」读 háng。",
@@ -3207,17 +2920,14 @@
    ],
    "stem": "盲人靠着导盲杖在街上「行走」。「行走」的正确汉语拼音是：",
    "options": [
-    "xīng zǒu",
+    "xíng zǒu",
     "xíng zhǒu",
     "háng zǒu",
-    "xíng zǒu"
+    "háng zhǒu"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「行」是 xíng，声调不是 xīng。(The tone is wrong: 行 is xíng.)"
-    },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「走」的声母是 z，不是 zh。(The initial is z, not zh.)"
@@ -3226,7 +2936,10 @@
      "tag": "wrong_polyphone_reading",
      "why": "「行」在「行走」中读 xíng，不读 háng。(In this word 行 is read xíng, not háng.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「行」在「行走」中读 xíng，不读 háng。(In this word 行 is read xíng, not háng.) 「走」的声母是 z，不是 zh。(The initial is z, not zh.)"
+    }
    ],
    "solution": [
     "「行走」是走路，「行」读 xíng。",
@@ -3247,26 +2960,26 @@
    ],
    "stem": "快迟到了，弟弟心里很「着急」。「着急」的正确汉语拼音是：",
    "options": [
-    "zhuó jí",
     "zháo jǐ",
-    "zhe jí",
-    "zháo jí"
+    "zhuó jǐ",
+    "zháo jí",
+    "zhuó jí"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
-    {
-     "tag": "similar_sound_final",
-     "why": "「着」的韵母是 ao，不是 uo。(The final is ao, not uo.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「急」是 jí，声调不是 jǐ。(The tone is wrong: 急 is jí.)"
     },
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「着」在「着急」中读 zháo，不读 zhe。(In this word 着 is read zháo, not zhe.)"
+     "tag": "double_error",
+     "why": "两处都错：「着」的韵母是 ao，不是 uo。(The final is ao, not uo.) 「急」是 jí，声调不是 jǐ。(The tone is wrong: 急 is jí.)"
     },
-    null
+    null,
+    {
+     "tag": "similar_sound_final",
+     "why": "「着」的韵母是 ao，不是 uo。(The final is ao, not uo.)"
+    }
    ],
    "solution": [
     "「着急」的「着」读 zháo。",
@@ -3288,26 +3001,26 @@
    ],
    "stem": "昨晚太累了，我一躺下就「睡着」了。「睡着」的正确汉语拼音是：",
    "options": [
-    "shuí zháo",
     "shuì zhuó",
-    "shuì zhe",
-    "shuì zháo"
+    "shuì zháo",
+    "shuí zháo",
+    "shuí zhuó"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "similar_sound_final",
+     "why": "「着」的韵母是 ao，不是 uo。(The final is ao, not uo.)"
+    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「睡」是 shuì，声调不是 shuí。(The tone is wrong: 睡 is shuì.)"
     },
     {
-     "tag": "similar_sound_final",
-     "why": "「着」的韵母是 ao，不是 uo。(The final is ao, not uo.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「着」在「睡着」中读 zháo，不读 zhe。(In this word 着 is read zháo, not zhe.)"
-    },
-    null
+     "tag": "double_error",
+     "why": "两处都错：「着」的韵母是 ao，不是 uo。(The final is ao, not uo.) 「睡」是 shuì，声调不是 shuí。(The tone is wrong: 睡 is shuì.)"
+    }
    ],
    "solution": [
     "「睡着」表示进入睡眠，「着」读 zháo。",
@@ -3329,26 +3042,26 @@
    ],
    "stem": "努力的人才能「得到」成功。「得到」的正确汉语拼音是：",
    "options": [
-    "dé dǎo",
-    "de dào",
+    "dé dào",
     "děi dào",
-    "dé dào"
+    "děi dǎo",
+    "dé dǎo"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「到」是 dào，声调不是 dǎo。(The tone is wrong: 到 is dào.)"
-    },
-    {
-     "tag": "wrong_neutral_tone",
-     "why": "「得」在「得到」中读 dé，不读轻声 de。(In this word 得 is dé, not the neutral tone.)"
-    },
+    null,
     {
      "tag": "wrong_polyphone_reading",
      "why": "「得」在「得到」中读 dé，不读 děi。(In this word 得 is read dé, not děi.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「得」在「得到」中读 dé，不读 děi。(In this word 得 is read dé, not děi.) 「到」是 dào，声调不是 dǎo。(The tone is wrong: 到 is dào.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「到」是 dào，声调不是 dǎo。(The tone is wrong: 到 is dào.)"
+    }
    ],
    "solution": [
     "「得到」的「得」读 dé。",
@@ -3411,26 +3124,26 @@
    ],
    "stem": "我最喜欢上「数学」课，喜欢解难题。「数学」的正确汉语拼音是：",
    "options": [
-    "shù xuē",
-    "sù xué",
     "shǔ xué",
-    "shù xué"
+    "shù xué",
+    "sù xué",
+    "sǔ xué"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「学」是 xué，声调不是 xuē。(The tone is wrong: 学 is xué.)"
+     "tag": "wrong_polyphone_reading",
+     "why": "「数」在「数学」中读 shù，不读 shǔ。(In this word 数 is read shù, not shǔ.)"
     },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「数」的声母是 sh，不是 s。(The initial is sh, not s.)"
     },
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「数」在「数学」中读 shù，不读 shǔ。(In this word 数 is read shù, not shǔ.)"
-    },
-    null
+     "tag": "double_error",
+     "why": "两处都错：「数」在「数学」中读 shù，不读 shǔ。(In this word 数 is read shù, not shǔ.) 「数」的声母是 sh，不是 s。(The initial is sh, not s.)"
+    }
    ],
    "solution": [
     "「数学」的「数」读 shù。",
@@ -3493,25 +3206,25 @@
    "stem": "学校的年终「假期」从十一月底开始。「假期」的正确汉语拼音是：",
    "options": [
     "jià qí",
-    "jià qī",
+    "xià qí",
     "xià qī",
-    "jiǎ qī"
+    "jià qī"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
      "tag": "wrong_tone",
      "why": "「期」是 qī，声调不是 qí。(The tone is wrong: 期 is qī.)"
     },
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「期」是 qī，声调不是 qí。(The tone is wrong: 期 is qī.) 「假」的声母是 j，不是 x。(The initial is j, not x.)"
+    },
     {
      "tag": "similar_sound_initial",
      "why": "「假」的声母是 j，不是 x。(The initial is j, not x.)"
     },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「假」在「假期」中读 jià，不读 jiǎ。(In this word 假 is read jià, not jiǎ.)"
-    }
+    null
    ],
    "solution": [
     "「假期」指放假的日子，「假」读 jià。",
@@ -3533,13 +3246,18 @@
    ],
    "stem": "弟弟「假装」睡着了，想躲过洗碗。「假装」的正确汉语拼音是：",
    "options": [
+    "jiǎ zhuāng",
+    "jià zhuǎng",
     "jià zhuāng",
-    "jiǎ zhuǎng",
-    "jiǎ chuāng",
-    "jiǎ zhuāng"
+    "jiǎ zhuǎng"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「假」在「假装」中读 jiǎ，不读 jià。(In this word 假 is read jiǎ, not jià.) 「装」是 zhuāng，声调不是 zhuǎng。(The tone is wrong: 装 is zhuāng.)"
+    },
     {
      "tag": "wrong_polyphone_reading",
      "why": "「假」在「假装」中读 jiǎ，不读 jià。(In this word 假 is read jiǎ, not jià.)"
@@ -3547,12 +3265,7 @@
     {
      "tag": "wrong_tone",
      "why": "「装」是 zhuāng，声调不是 zhuǎng。(The tone is wrong: 装 is zhuāng.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「装」的声母是 zh，不是 ch。(The initial is zh, not ch.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「假装」的「假」是不真实，读 jiǎ。",
@@ -3574,25 +3287,25 @@
    ],
    "stem": "周末我「空闲」的时候，会帮妈妈做家务。「空闲」的正确汉语拼音是：",
    "options": [
-    "kòng xiàn",
-    "kōng xián",
     "kòng xián",
-    "kōng xiān"
+    "kòng qiàn",
+    "kòng xiàn",
+    "kòng qián"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「闲」是 xián，声调不是 xiàn。(The tone is wrong: 闲 is xián.) 「闲」的声母是 x，不是 q。(The initial is x, not q.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「闲」是 xián，声调不是 xiàn。(The tone is wrong: 闲 is xián.)"
     },
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「空」在「空闲」中读 kòng，不读 kōng。(In this word 空 is read kòng, not kōng.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「空」是 kòng，声调不是 kōng。(The tone is wrong: 空 is kòng.)"
+     "tag": "similar_sound_initial",
+     "why": "「闲」的声母是 x，不是 q。(The initial is x, not q.)"
     }
    ],
    "solution": [
@@ -3615,17 +3328,16 @@
    ],
    "stem": "雨过天晴，「天空」出现了美丽的彩虹。「天空」的正确汉语拼音是：",
    "options": [
-    "tiān kōng",
-    "tiān kòng",
+    "tián kǒng",
     "tiān kǒng",
-    "tián kōng"
+    "tián kōng",
+    "tiān kōng"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「空」在「天空」中读 kōng，不读 kòng。(In this word 空 is read kōng, not kòng.)"
+     "tag": "double_error",
+     "why": "两处都错：「空」是 kōng，声调不是 kǒng。(The tone is wrong: 空 is kōng.) 「天」是 tiān，声调不是 tián。(The tone is wrong: 天 is tiān.)"
     },
     {
      "tag": "wrong_tone",
@@ -3634,7 +3346,8 @@
     {
      "tag": "wrong_tone",
      "why": "「天」是 tiān，声调不是 tián。(The tone is wrong: 天 is tiān.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「天空」指天上，「空」读 kōng。",
@@ -3655,25 +3368,25 @@
    ],
    "stem": "爷爷在后院「种菜」，收成很好。「种菜」的正确汉语拼音是：",
    "options": [
-    "zhǒng cài",
     "zhòng cài",
-    "zhòng cái",
-    "zhōng cài"
+    "zhōng cài",
+    "zhèng cài",
+    "zhēng cài"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「种」在「种菜」中读 zhòng，不读 zhǒng。(In this word 种 is read zhòng, not zhǒng.)"
-    },
     null,
     {
      "tag": "wrong_tone",
-     "why": "「菜」是 cài，声调不是 cái。(The tone is wrong: 菜 is cài.)"
+     "why": "「种」是 zhòng，声调不是 zhōng。(The tone is wrong: 种 is zhòng.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「种」是 zhòng，声调不是 zhōng。(The tone is wrong: 种 is zhòng.)"
+     "tag": "similar_sound_final",
+     "why": "「种」的韵母是 ong，不是 eng。(The final is ong, not eng.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「种」是 zhòng，声调不是 zhōng。(The tone is wrong: 种 is zhòng.) 「种」的韵母是 ong，不是 eng。(The final is ong, not eng.)"
     }
    ],
    "solution": [
@@ -3696,26 +3409,26 @@
    ],
    "stem": "这家商店卖的文具「种类」很多。「种类」的正确汉语拼音是：",
    "options": [
-    "zhòng lèi",
+    "zhǒng lèi",
     "zhǒng léi",
-    "zhōng lèi",
-    "zhǒng lèi"
+    "zǒng lèi",
+    "zǒng léi"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「种」在「种类」中读 zhǒng，不读 zhòng。(In this word 种 is read zhǒng, not zhòng.)"
-    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「类」是 lèi，声调不是 léi。(The tone is wrong: 类 is lèi.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「种」是 zhǒng，声调不是 zhōng。(The tone is wrong: 种 is zhǒng.)"
+     "tag": "similar_sound_initial",
+     "why": "「种」的声母是 zh，不是 z。(The initial is zh, not z.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「类」是 lèi，声调不是 léi。(The tone is wrong: 类 is lèi.) 「种」的声母是 zh，不是 z。(The initial is zh, not z.)"
+    }
    ],
    "solution": [
     "「种类」指类别，「种」读 zhǒng。",
@@ -3737,26 +3450,26 @@
    ],
    "stem": "他在话剧里扮演一个重要的「角色」。「角色」的正确汉语拼音是：",
    "options": [
-    "jiǎo sè",
-    "jué sè",
-    "jiào sè",
-    "jué shè"
+    "jué shè",
+    "juē sè",
+    "juē shè",
+    "jué sè"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「角」在「角色」中读 jué，不读 jiǎo。(In this word 角 is read jué, not jiǎo.)"
-    },
-    null,
-    {
-     "tag": "similar_sound_final",
-     "why": "「角」的韵母是 ue，不是 iao。(The final is ue, not iao.)"
-    },
     {
      "tag": "similar_sound_initial",
      "why": "「色」的声母是 s，不是 sh。(The initial is s, not sh.)"
-    }
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「角」是 jué，声调不是 juē。(The tone is wrong: 角 is jué.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「色」的声母是 s，不是 sh。(The initial is s, not sh.) 「角」是 jué，声调不是 juē。(The tone is wrong: 角 is jué.)"
+    },
+    null
    ],
    "solution": [
     "「角色」指戏剧里的人物，「角」读 jué。",
@@ -3777,26 +3490,26 @@
    ],
    "stem": "这个路标的形状是「三角形」。「三角形」的正确汉语拼音是：",
    "options": [
-    "sān jiǎo xìng",
-    "sān jiǎo xíng",
+    "sān jué xìng",
     "sān jué xíng",
-    "sān jiào xíng"
+    "sān jiǎo xìng",
+    "sān jiǎo xíng"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「形」是 xíng，声调不是 xìng。(The tone is wrong: 形 is xíng.)"
+     "tag": "double_error",
+     "why": "两处都错：「角」在「三角形」中读 jiǎo，不读 jué。(In this word 角 is read jiǎo, not jué.) 「形」是 xíng，声调不是 xìng。(The tone is wrong: 形 is xíng.)"
     },
-    null,
     {
      "tag": "wrong_polyphone_reading",
      "why": "「角」在「三角形」中读 jiǎo，不读 jué。(In this word 角 is read jiǎo, not jué.)"
     },
     {
      "tag": "wrong_tone",
-     "why": "「角」是 jiǎo，声调不是 jiào。(The tone is wrong: 角 is jiǎo.)"
-    }
+     "why": "「形」是 xíng，声调不是 xìng。(The tone is wrong: 形 is xíng.)"
+    },
+    null
    ],
    "solution": [
     "「三角形」的「角」指角度，读 jiǎo。",
@@ -3818,16 +3531,17 @@
    ],
    "stem": "双胞胎长得很像，几乎看不出「差别」。「差别」的正确汉语拼音是：",
    "options": [
-    "chà bié",
+    "chā bié",
+    "chāi biè",
     "chā biè",
-    "chāi bié",
-    "chā bié"
+    "chāi bié"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「差」在「差别」中读 chā，不读 chà。(In this word 差 is read chā, not chà.)"
+     "tag": "double_error",
+     "why": "两处都错：「别」是 bié，声调不是 biè。(The tone is wrong: 别 is bié.) 「差」的韵母是 a，不是 ai。(The final is a, not ai.)"
     },
     {
      "tag": "wrong_tone",
@@ -3836,8 +3550,7 @@
     {
      "tag": "similar_sound_final",
      "why": "「差」的韵母是 a，不是 ai。(The final is a, not ai.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「差别」指不同的地方，「差」读 chā。",
@@ -3849,47 +3562,6 @@
    }
   },
   {
-   "id": "chipinyi-0077880bc6",
-   "topic": "chi-pinyin",
-   "level": "competent",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-2"
-   ],
-   "stem": "爸爸下个星期要去外国「出差」。「出差」的正确汉语拼音是：",
-   "options": [
-    "chū chà",
-    "chú chāi",
-    "chū chā",
-    "chū chāi"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "similar_sound_final",
-     "why": "「差」的韵母是 ai，不是 a。(The final is ai, not a.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「出」是 chū，声调不是 chú。(The tone is wrong: 出 is chū.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「差」在「出差」中读 chāi，不读 chā。(In this word 差 is read chāi, not chā.)"
-    },
-    null
-   ],
-   "solution": [
-    "「出差」指外出办公事，「差」读 chāi。",
-    "(In 出差, 差 means 'errand/mission' and is read chāi.)",
-    "出差 = business trip"
-   ],
-   "params": {
-    "key": "pinyin-096",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
    "id": "chipinyi-858b19fb11",
    "topic": "chi-pinyin",
    "level": "basic",
@@ -3897,14 +3569,14 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "这家店卖的食物很有「营养」。「营养」的正确汉语拼音是：",
+   "stem": "妈妈说蔬菜和水果的「营养」很丰富。「营养」的正确汉语拼音是：",
    "options": [
     "yín yǎng",
     "yīng yǎng",
-    "yíng yáng",
-    "yíng yǎng"
+    "yíng yǎng",
+    "yīn yǎng"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
      "tag": "similar_sound_final",
@@ -3914,11 +3586,11 @@
      "tag": "wrong_tone",
      "why": "「营」读 yíng，声调不是 yīng。 (The tone is wrong: 营 is read yíng.)"
     },
+    null,
     {
-     "tag": "wrong_tone",
-     "why": "「养」读 yǎng，声调不是 yáng。 (The tone is wrong: 养 is read yǎng.)"
-    },
-    null
+     "tag": "double_error",
+     "why": "两处都错：「营」读 yíng，声调不是 yīng。 (The tone is wrong: 营 is read yíng.) 「营」读 yíng，韵母不是 yín。 (The final is wrong: 营 is read yíng.)"
+    }
    ],
    "solution": [
     "「营养」读作 yíng yǎng。",
@@ -3938,28 +3610,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "班长负责「统计」全班同学的人数。「统计」的正确汉语拼音是：",
+   "stem": "老师请我们「统计」每种颜色的气球有多少个。「统计」的正确汉语拼音是：",
    "options": [
-    "tǒng qì",
+    "tǒng jì",
     "tóng jì",
-    "tǒng jí",
-    "tǒng jì"
+    "tóng jí",
+    "tǒng jí"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "similar_sound_initial",
-     "why": "「计」读 jì，声母不是 qì。 (The initial is wrong: 计 is read jì.)"
-    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「统」读 tǒng，声调不是 tóng。 (The tone is wrong: 统 is read tǒng.)"
     },
     {
+     "tag": "double_error",
+     "why": "两处都错：「统」读 tǒng，声调不是 tóng。 (The tone is wrong: 统 is read tǒng.) 「计」读 jì，声调不是 jí。 (The tone is wrong: 计 is read jì.)"
+    },
+    {
      "tag": "wrong_tone",
      "why": "「计」读 jì，声调不是 jí。 (The tone is wrong: 计 is read jì.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「统计」读作 tǒng jì。",
@@ -3979,19 +3651,18 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "这个字帖「缺少」了一页。「缺少」的正确汉语拼音是：",
+   "stem": "这道菜「缺少」一点盐，味道很淡。「缺少」的正确汉语拼音是：",
    "options": [
-    "quē shǎo",
-    "quē shào",
+    "qué shào",
     "qué shǎo",
-    "què shǎo"
+    "quē shào",
+    "quē shǎo"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_tone",
-     "why": "「少」读 shǎo，声调不是 shào。 (The tone is wrong: 少 is read shǎo.)"
+     "tag": "double_error",
+     "why": "两处都错：「少」读 shǎo，声调不是 shào。 (The tone is wrong: 少 is read shǎo.) 「缺」读 quē，声调不是 qué。 (The tone is wrong: 缺 is read quē.)"
     },
     {
      "tag": "wrong_tone",
@@ -3999,8 +3670,9 @@
     },
     {
      "tag": "wrong_tone",
-     "why": "「缺」读 quē，声调不是 què。 (The tone is wrong: 缺 is read quē.)"
-    }
+     "why": "「少」读 shǎo，声调不是 shào。 (The tone is wrong: 少 is read shǎo.)"
+    },
+    null
    ],
    "solution": [
     "「缺少」读作 quē shǎo。",
@@ -4020,27 +3692,27 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "弟弟收到礼物，露出「惊喜」的表情。「惊喜」的正确汉语拼音是：",
+   "stem": "生日那天，同学们给了我一个大「惊喜」。「惊喜」的正确汉语拼音是：",
    "options": [
+    "jīng qǐ",
     "jīng xǐ",
-    "jīn xǐ",
-    "jīng xì",
-    "jīng xī"
+    "jīn qǐ",
+    "jīn xǐ"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "similar_sound_initial",
+     "why": "「喜」的声母是 x，不是 q。(The initial is x, not q.)"
+    },
     null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「惊」读 jīng，韵母不是 jīn。 (The final is wrong: 惊 is read jīng.) 「喜」的声母是 x，不是 q。(The initial is x, not q.)"
+    },
     {
      "tag": "similar_sound_final",
      "why": "「惊」读 jīng，韵母不是 jīn。 (The final is wrong: 惊 is read jīng.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「喜」读 xǐ，声调不是 xì。 (The tone is wrong: 喜 is read xǐ.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「喜」读 xǐ，声调不是 xī。 (The tone is wrong: 喜 is read xǐ.)"
     }
    ],
    "solution": [
@@ -4061,28 +3733,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "听到火警，大家「迅速」跑到操场。「迅速」的正确汉语拼音是：",
+   "stem": "救护车「迅速」赶到了现场。「迅速」的正确汉语拼音是：",
    "options": [
-    "xùn sú",
-    "xùn sù",
+    "xún sú",
     "xún sù",
-    "xùn shù"
+    "xùn sú",
+    "xùn sù"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「速」读 sù，声调不是 sú。 (The tone is wrong: 速 is read sù.)"
+     "tag": "double_error",
+     "why": "两处都错：「迅」读 xùn，声调不是 xún。 (The tone is wrong: 迅 is read xùn.) 「速」读 sù，声调不是 sú。 (The tone is wrong: 速 is read sù.)"
     },
-    null,
     {
      "tag": "wrong_tone",
      "why": "「迅」读 xùn，声调不是 xún。 (The tone is wrong: 迅 is read xùn.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「速」读 sù，声母不是 shù。 (The initial is wrong: 速 is read sù.)"
-    }
+     "tag": "wrong_tone",
+     "why": "「速」读 sù，声调不是 sú。 (The tone is wrong: 速 is read sù.)"
+    },
+    null
    ],
    "solution": [
     "「迅速」读作 xùn sù。",
@@ -4102,27 +3774,27 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "同学们不应该「嘲笑」别人。「嘲笑」的正确汉语拼音是：",
+   "stem": "看到小明唱错了歌词，没有人「嘲笑」他。「嘲笑」的正确汉语拼音是：",
    "options": [
-    "zhāo xiào",
+    "cháo xiāo",
+    "zhāo xiāo",
     "cháo xiào",
-    "cháo xiǎo",
-    "cháo xiāo"
+    "zhāo xiào"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「嘲」在这个词里读 cháo，不读 zhāo。 (In this word 嘲 is read cháo, not zhāo.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「笑」读 xiào，声调不是 xiǎo。 (The tone is wrong: 笑 is read xiào.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「笑」读 xiào，声调不是 xiāo。 (The tone is wrong: 笑 is read xiào.)"
+    },
+    {
+     "tag": "double_error",
+     "why": "两处都错：「嘲」在这个词里读 cháo，不读 zhāo。 (In this word 嘲 is read cháo, not zhāo.) 「笑」读 xiào，声调不是 xiāo。 (The tone is wrong: 笑 is read xiào.)"
+    },
+    null,
+    {
+     "tag": "wrong_polyphone_reading",
+     "why": "「嘲」在这个词里读 cháo，不读 zhāo。 (In this word 嘲 is read cháo, not zhāo.)"
     }
    ],
    "solution": [
@@ -4143,27 +3815,27 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "比赛前，他的心情十分「激动」。「激动」的正确汉语拼音是：",
+   "stem": "听到自己得了奖，她「激动」得说不出话来。「激动」的正确汉语拼音是：",
    "options": [
-    "jī dòng",
-    "jí dòng",
     "jī tòng",
-    "jī dǒng"
+    "jí tòng",
+    "jī dòng",
+    "jí dòng"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「激」读 jī，声调不是 jí。 (The tone is wrong: 激 is read jī.)"
-    },
     {
      "tag": "similar_sound_initial",
      "why": "「动」读 dòng，声母不是 tòng。 (The initial is wrong: 动 is read dòng.)"
     },
     {
+     "tag": "double_error",
+     "why": "两处都错：「动」读 dòng，声母不是 tòng。 (The initial is wrong: 动 is read dòng.) 「激」读 jī，声调不是 jí。 (The tone is wrong: 激 is read jī.)"
+    },
+    null,
+    {
      "tag": "wrong_tone",
-     "why": "「动」读 dòng，声调不是 dǒng。 (The tone is wrong: 动 is read dòng.)"
+     "why": "「激」读 jī，声调不是 jí。 (The tone is wrong: 激 is read jī.)"
     }
    ],
    "solution": [
@@ -4184,24 +3856,24 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "病好了，爸爸的体力慢慢「恢复」。「恢复」的正确汉语拼音是：",
+   "stem": "经过几天休息，小猫的精神渐渐「恢复」了。「恢复」的正确汉语拼音是：",
    "options": [
-    "huī fù",
-    "huī fǔ",
+    "huí fú",
     "huī fú",
+    "huī fù",
     "huí fù"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
-     "tag": "wrong_tone",
-     "why": "「复」读 fù，声调不是 fǔ。 (The tone is wrong: 复 is read fù.)"
+     "tag": "double_error",
+     "why": "两处都错：「恢」读 huī，声调不是 huí。 (The tone is wrong: 恢 is read huī.) 「复」读 fù，声调不是 fú。 (The tone is wrong: 复 is read fù.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「复」读 fù，声调不是 fú。 (The tone is wrong: 复 is read fù.)"
     },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「恢」读 huī，声调不是 huí。 (The tone is wrong: 恢 is read huī.)"
@@ -4225,28 +3897,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "姐姐把这篇文章「翻译」成英文。「翻译」的正确汉语拼音是：",
+   "stem": "导游替游客把中文「翻译」成马来语。「翻译」的正确汉语拼音是：",
    "options": [
-    "fān yǐ",
     "fán yì",
-    "fān yì",
-    "fān yí"
+    "fán yǐ",
+    "fān yǐ",
+    "fān yì"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「译」读 yì，声调不是 yǐ。 (The tone is wrong: 译 is read yì.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「翻」读 fān，声调不是 fán。 (The tone is wrong: 翻 is read fān.)"
     },
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「翻」读 fān，声调不是 fán。 (The tone is wrong: 翻 is read fān.) 「译」读 yì，声调不是 yǐ。 (The tone is wrong: 译 is read yì.)"
+    },
     {
      "tag": "wrong_tone",
-     "why": "「译」读 yì，声调不是 yí。 (The tone is wrong: 译 is read yì.)"
-    }
+     "why": "「译」读 yì，声调不是 yǐ。 (The tone is wrong: 译 is read yì.)"
+    },
+    null
    ],
    "solution": [
     "「翻译」读作 fān yì。",
@@ -4266,27 +3938,27 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "勤洗手可以「预防」疾病。「预防」的正确汉语拼音是：",
+   "stem": "接种疫苗能够「预防」流行感冒。「预防」的正确汉语拼音是：",
    "options": [
+    "yǔ fáng",
     "yù fáng",
-    "yù fāng",
     "yù fǎng",
-    "yǔ fáng"
+    "yǔ fǎng"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
     {
      "tag": "wrong_tone",
-     "why": "「防」读 fáng，声调不是 fāng。 (The tone is wrong: 防 is read fáng.)"
+     "why": "「预」读 yù，声调不是 yǔ。 (The tone is wrong: 预 is read yù.)"
     },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「防」读 fáng，声调不是 fǎng。 (The tone is wrong: 防 is read fáng.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「预」读 yù，声调不是 yǔ。 (The tone is wrong: 预 is read yù.)"
+     "tag": "double_error",
+     "why": "两处都错：「预」读 yù，声调不是 yǔ。 (The tone is wrong: 预 is read yù.) 「防」读 fáng，声调不是 fǎng。 (The tone is wrong: 防 is read fáng.)"
     }
    ],
    "solution": [
@@ -4307,28 +3979,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "邻居之间相处得很「和谐」。「和谐」的正确汉语拼音是：",
+   "stem": "我们班同学互相帮助，气氛十分「和谐」。「和谐」的正确汉语拼音是：",
    "options": [
-    "hé xiè",
-    "hé xié",
+    "hè xié",
     "hé jié",
-    "hè xié"
+    "hè jié",
+    "hé xié"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「谐」读 xié，声调不是 xiè。 (The tone is wrong: 谐 is read xié.)"
+     "tag": "wrong_polyphone_reading",
+     "why": "「和」在这个词里读 hé，不读 hè。 (In this word 和 is read hé, not hè.)"
     },
-    null,
     {
      "tag": "similar_sound_initial",
      "why": "「谐」读 xié，声母不是 jié。 (The initial is wrong: 谐 is read xié.)"
     },
     {
-     "tag": "wrong_polyphone_reading",
-     "why": "「和」在这个词里读 hé，不读 hè。 (In this word 和 is read hé, not hè.)"
-    }
+     "tag": "double_error",
+     "why": "两处都错：「和」在这个词里读 hé，不读 hè。 (In this word 和 is read hé, not hè.) 「谐」读 xié，声母不是 jié。 (The initial is wrong: 谐 is read xié.)"
+    },
+    null
    ],
    "solution": [
     "「和谐」读作 hé xié。",
@@ -4348,28 +4020,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "富商十分「慷慨」，捐了很多钱。「慷慨」的正确汉语拼音是：",
+   "stem": "张叔叔「慷慨」地把新书送给了图书馆。「慷慨」的正确汉语拼音是：",
    "options": [
-    "kāng kài",
-    "káng kǎi",
     "kāng kāi",
-    "kāng kǎi"
+    "kāng kǎi",
+    "káng kāi",
+    "káng kǎi"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「慨」读 kǎi，声调不是 kài。 (The tone is wrong: 慨 is read kǎi.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「慷」读 kāng，声调不是 káng。 (The tone is wrong: 慷 is read kāng.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「慨」读 kǎi，声调不是 kāi。 (The tone is wrong: 慨 is read kǎi.)"
     },
-    null
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「慷」读 kāng，声调不是 káng。 (The tone is wrong: 慷 is read kāng.) 「慨」读 kǎi，声调不是 kāi。 (The tone is wrong: 慨 is read kǎi.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「慷」读 kāng，声调不是 káng。 (The tone is wrong: 慷 is read kāng.)"
+    }
    ],
    "solution": [
     "「慷慨」读作 kāng kǎi。",
@@ -4389,24 +4061,24 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "医生「劝告」爷爷少吃盐。「劝告」的正确汉语拼音是：",
+   "stem": "老师「劝告」我们过马路要小心。「劝告」的正确汉语拼音是：",
    "options": [
-    "quàn gào",
+    "quān gǎo",
     "quān gào",
-    "quàn gāo",
+    "quàn gào",
     "quàn gǎo"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「劝」读 quàn，声调不是 quān。 (The tone is wrong: 劝 is read quàn.) 「告」读 gào，声调不是 gǎo。 (The tone is wrong: 告 is read gào.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「劝」读 quàn，声调不是 quān。 (The tone is wrong: 劝 is read quàn.)"
     },
-    {
-     "tag": "wrong_tone",
-     "why": "「告」读 gào，声调不是 gāo。 (The tone is wrong: 告 is read gào.)"
-    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「告」读 gào，声调不是 gǎo。 (The tone is wrong: 告 is read gào.)"
@@ -4430,28 +4102,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "放了很久的苹果已经「腐烂」了。「腐烂」的正确汉语拼音是：",
+   "stem": "掉在地上的落叶慢慢「腐烂」，变成了泥土。「腐烂」的正确汉语拼音是：",
    "options": [
+    "fú lán",
+    "fú làn",
     "fǔ lán",
-    "fǔ làn",
-    "fù làn",
-    "fú làn"
+    "fǔ làn"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「烂」读 làn，声调不是 lán。 (The tone is wrong: 烂 is read làn.)"
-    },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「腐」读 fǔ，声调不是 fù。 (The tone is wrong: 腐 is read fǔ.)"
+     "tag": "double_error",
+     "why": "两处都错：「烂」读 làn，声调不是 lán。 (The tone is wrong: 烂 is read làn.) 「腐」读 fǔ，声调不是 fú。 (The tone is wrong: 腐 is read fǔ.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「腐」读 fǔ，声调不是 fú。 (The tone is wrong: 腐 is read fǔ.)"
-    }
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「烂」读 làn，声调不是 lán。 (The tone is wrong: 烂 is read làn.)"
+    },
+    null
    ],
    "solution": [
     "「腐烂」读作 fǔ làn。",
@@ -4471,27 +4143,27 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "他看到别人得奖，心里有点「妒忌」。「妒忌」的正确汉语拼音是：",
+   "stem": "妹妹得到新玩具，哥哥一点也不「妒忌」。「妒忌」的正确汉语拼音是：",
    "options": [
+    "dǔ jí",
     "dù jì",
-    "dǔ jì",
     "dù jí",
-    "dù qì"
+    "dǔ jì"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
     {
-     "tag": "wrong_tone",
-     "why": "「妒」读 dù，声调不是 dǔ。 (The tone is wrong: 妒 is read dù.)"
+     "tag": "double_error",
+     "why": "两处都错：「妒」读 dù，声调不是 dǔ。 (The tone is wrong: 妒 is read dù.) 「忌」读 jì，声调不是 jí。 (The tone is wrong: 忌 is read jì.)"
     },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「忌」读 jì，声调不是 jí。 (The tone is wrong: 忌 is read jì.)"
     },
     {
-     "tag": "similar_sound_initial",
-     "why": "「忌」读 jì，声母不是 qì。 (The initial is wrong: 忌 is read jì.)"
+     "tag": "wrong_tone",
+     "why": "「妒」读 dù，声调不是 dǔ。 (The tone is wrong: 妒 is read dù.)"
     }
    ],
    "solution": [
@@ -4511,28 +4183,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "警察「阻拦」了闯红灯的车子。「阻拦」的正确汉语拼音是：",
+   "stem": "大雨「阻拦」不了我们去露营的决心。「阻拦」的正确汉语拼音是：",
    "options": [
-    "zhǔ lán",
-    "zǔ lǎn",
     "zú lán",
-    "zǔ lán"
+    "zǔ lán",
+    "zú lǎn",
+    "zǔ lǎn"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
-    {
-     "tag": "similar_sound_initial",
-     "why": "「阻」读 zǔ，声母不是 zhǔ。 (The initial is wrong: 阻 is read zǔ.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「拦」读 lán，声调不是 lǎn。 (The tone is wrong: 拦 is read lán.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「阻」读 zǔ，声调不是 zú。 (The tone is wrong: 阻 is read zǔ.)"
     },
-    null
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「阻」读 zǔ，声调不是 zú。 (The tone is wrong: 阻 is read zǔ.) 「拦」读 lán，声调不是 lǎn。 (The tone is wrong: 拦 is read lán.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「拦」读 lán，声调不是 lǎn。 (The tone is wrong: 拦 is read lán.)"
+    }
    ],
    "solution": [
     "「阻拦」读作 zǔ lán。",
@@ -4552,28 +4224,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "乐队的「指挥」站在台前挥动指挥棒。「指挥」的正确汉语拼音是：",
+   "stem": "交通警察站在路口「指挥」车辆通行。「指挥」的正确汉语拼音是：",
    "options": [
-    "zhǐ huí",
-    "zhǐ fēi",
+    "zhǐ huī",
     "zhí huī",
-    "zhǐ huī"
+    "zhí huí",
+    "zhǐ huí"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_tone",
-     "why": "「挥」读 huī，声调不是 huí。 (The tone is wrong: 挥 is read huī.)"
-    },
-    {
-     "tag": "similar_sound_initial",
-     "why": "「挥」读 huī，声母不是 fēi。 (The initial is wrong: 挥 is read huī.)"
-    },
+    null,
     {
      "tag": "wrong_tone",
      "why": "「指」读 zhǐ，声调不是 zhí。 (The tone is wrong: 指 is read zhǐ.)"
     },
-    null
+    {
+     "tag": "double_error",
+     "why": "两处都错：「指」读 zhǐ，声调不是 zhí。 (The tone is wrong: 指 is read zhǐ.) 「挥」读 huī，声调不是 huí。 (The tone is wrong: 挥 is read huī.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「挥」读 huī，声调不是 huí。 (The tone is wrong: 挥 is read huī.)"
+    }
    ],
    "solution": [
     "「指挥」读作 zhǐ huī。",
@@ -4592,19 +4264,20 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "这幅画的构思很有「创意」。「创意」的正确汉语拼音是：",
+   "stem": "他用旧报纸做了一个很有「创意」的灯罩。「创意」的正确汉语拼音是：",
    "options": [
-    "chuāng yì",
+    "cuàng yí",
+    "chuàng yì",
     "cuàng yì",
-    "chuàng yí",
-    "chuàng yì"
+    "chuàng yí"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_tone",
-     "why": "「创」读 chuàng，声调不是 chuāng。 (The tone is wrong: 创 is read chuàng.)"
+     "tag": "double_error",
+     "why": "两处都错：「意」读 yì，声调不是 yí。 (The tone is wrong: 意 is read yì.) 「创」读 chuàng，声母不是 cuàng。 (The initial is wrong: 创 is read chuàng.)"
     },
+    null,
     {
      "tag": "similar_sound_initial",
      "why": "「创」读 chuàng，声母不是 cuàng。 (The initial is wrong: 创 is read chuàng.)"
@@ -4612,8 +4285,7 @@
     {
      "tag": "wrong_tone",
      "why": "「意」读 yì，声调不是 yí。 (The tone is wrong: 意 is read yì.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「创意」读作 chuàng yì。",
@@ -4633,28 +4305,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "小华第一次「单独」坐地铁。「单独」的正确汉语拼音是：",
+   "stem": "妈妈让姐姐「单独」留在家里看书。「单独」的正确汉语拼音是：",
    "options": [
-    "dān tú",
+    "dàn dǔ",
+    "dàn dú",
     "dān dǔ",
-    "dān dú",
-    "dàn dú"
+    "dān dú"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "similar_sound_initial",
-     "why": "「独」读 dú，声母不是 tú。 (The initial is wrong: 独 is read dú.)"
+     "tag": "double_error",
+     "why": "两处都错：「单」读 dān，声调不是 dàn。 (The tone is wrong: 单 is read dān.) 「独」读 dú，声调不是 dǔ。 (The tone is wrong: 独 is read dú.)"
+    },
+    {
+     "tag": "wrong_tone",
+     "why": "「单」读 dān，声调不是 dàn。 (The tone is wrong: 单 is read dān.)"
     },
     {
      "tag": "wrong_tone",
      "why": "「独」读 dú，声调不是 dǔ。 (The tone is wrong: 独 is read dú.)"
     },
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「单」读 dān，声调不是 dàn。 (The tone is wrong: 单 is read dān.)"
-    }
+    null
    ],
    "solution": [
     "「单独」读作 dān dú。",
@@ -4667,6 +4339,47 @@
    }
   },
   {
+   "id": "chipinyi-200bda6421",
+   "topic": "chi-pinyin",
+   "level": "competent",
+   "template": "chi-pat-pinyin",
+   "outcomes": [
+    "chi-pinyin-sound-1"
+   ],
+   "stem": "没戴眼镜，黑板上的字看起来很「模糊」。「模糊」的正确汉语拼音是：",
+   "options": [
+    "mú hu",
+    "mó hu",
+    "mú hù",
+    "mó hù"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_syllable_a",
+     "why": "「模」在「模糊」中读 mó，不读 mú（模样的读音）。(模 is mó in this word; mú is for 模样.)"
+    },
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「模」读 mó，不是 mú；「糊」读轻声 hu，不是 hù。(Both wrong: 模 is mó and 糊 is neutral hu.)"
+    },
+    {
+     "tag": "wrong_syllable_b",
+     "why": "「糊」在「模糊」中读轻声 hu，不读第四声 hù。(糊 is neutral hu in this word, not hù as in 糊弄.)"
+    }
+   ],
+   "solution": [
+    "「模糊」读作 mó hu。",
+    "(模糊 is read mó hu.)",
+    "模糊 = blurry"
+   ],
+   "params": {
+    "key": "v1b-pinyin-021",
+    "subtopic": "chi-pinyin-sound"
+   }
+  },
+  {
    "id": "chipinyi-e90de89a89",
    "topic": "chi-pinyin",
    "level": "competent",
@@ -4674,28 +4387,28 @@
    "outcomes": [
     "chi-pinyin-sound-2"
    ],
-   "stem": "空调可以「调节」房间的温度。「调节」的正确汉语拼音是：",
+   "stem": "我们要学会「调节」自己的情绪。「调节」的正确汉语拼音是：",
    "options": [
+    "tiáo jié",
+    "diào jiè",
     "tiáo jiè",
-    "tiāo jié",
-    "diào jié",
-    "tiáo jié"
+    "diào jié"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "double_error",
+     "why": "两处都错：「调」在这个词里读 tiáo，不读 diào。 (In this word 调 is read tiáo, not diào.) 「节」读 jié，声调不是 jiè。 (The tone is wrong: 节 is read jié.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「节」读 jié，声调不是 jiè。 (The tone is wrong: 节 is read jié.)"
     },
     {
-     "tag": "wrong_tone",
-     "why": "「调」读 tiáo，声调不是 tiāo。 (The tone is wrong: 调 is read tiáo.)"
-    },
-    {
      "tag": "wrong_polyphone_reading",
      "why": "「调」在这个词里读 tiáo，不读 diào。 (In this word 调 is read tiáo, not diào.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「调节」读作 tiáo jié。",
@@ -4715,28 +4428,28 @@
    "outcomes": [
     "chi-pinyin-sound-2"
    ],
-   "stem": "这条路我小时候「曾经」走过很多次。「曾经」的正确汉语拼音是：",
+   "stem": "外公年轻时「曾经」在海边工作过。「曾经」的正确汉语拼音是：",
    "options": [
+    "cén jìng",
     "céng jìng",
-    "zēng jīng",
-    "cén jīng",
-    "céng jīng"
+    "céng jīng",
+    "cén jīng"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "double_error",
+     "why": "两处都错：「经」读 jīng，声调不是 jìng。 (The tone is wrong: 经 is read jīng.) 「曾」读 céng，韵母不是 cén。 (The final is wrong: 曾 is read céng.)"
+    },
     {
      "tag": "wrong_tone",
      "why": "「经」读 jīng，声调不是 jìng。 (The tone is wrong: 经 is read jīng.)"
     },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「曾」在这个词里读 céng，不读 zēng。 (In this word 曾 is read céng, not zēng.)"
-    },
+    null,
     {
      "tag": "similar_sound_final",
      "why": "「曾」读 céng，韵母不是 cén。 (The final is wrong: 曾 is read céng.)"
-    },
-    null
+    }
    ],
    "solution": [
     "「曾经」读作 céng jīng。",
@@ -4756,27 +4469,27 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "他低着头不说话，「似乎」有心事。「似乎」的正确汉语拼音是：",
+   "stem": "天空乌云密布，「似乎」快要下雨了。「似乎」的正确汉语拼音是：",
    "options": [
-    "sì hū",
-    "sī hū",
+    "shī hū",
     "shì hū",
-    "sì hú"
+    "sì hū",
+    "sī hū"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
-     "tag": "wrong_tone",
-     "why": "「似」读 sì，声调不是 sī。 (The tone is wrong: 似 is read sì.)"
+     "tag": "double_error",
+     "why": "两处都错：「似」读 sì，声母不是 shì。 (The initial is wrong: 似 is read sì.) 「似」读 sì，声调不是 sī。 (The tone is wrong: 似 is read sì.)"
     },
     {
      "tag": "similar_sound_initial",
      "why": "「似」读 sì，声母不是 shì。 (The initial is wrong: 似 is read sì.)"
     },
+    null,
     {
      "tag": "wrong_tone",
-     "why": "「乎」读 hū，声调不是 hú。 (The tone is wrong: 乎 is read hū.)"
+     "why": "「似」读 sì，声调不是 sī。 (The tone is wrong: 似 is read sì.)"
     }
    ],
    "solution": [
@@ -4790,88 +4503,6 @@
    }
   },
   {
-   "id": "chipinyi-8633aadaaf",
-   "topic": "chi-pinyin",
-   "level": "competent",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-2"
-   ],
-   "stem": "你说得「的确」没错。「的确」的正确汉语拼音是：",
-   "options": [
-    "dí què",
-    "dí qiè",
-    "dì què",
-    "de què"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "similar_sound_initial",
-     "why": "「确」读 què，声母不是 qiè。 (The initial is wrong: 确 is read què.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「的」在这个词里读 dí，不读 dì。 (In this word 的 is read dí, not dì.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「的」在这个词里读 dí，不读 de。 (In this word 的 is read dí, not de.)"
-    }
-   ],
-   "solution": [
-    "「的确」读作 dí què。",
-    "(的确 is read dí què.)",
-    "的确 = indeed"
-   ],
-   "params": {
-    "key": "v1b-pinyin-029",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
-   "id": "chipinyi-144518c35c",
-   "topic": "chi-pinyin",
-   "level": "competent",
-   "template": "chi-pat-pinyin",
-   "outcomes": [
-    "chi-pinyin-sound-2"
-   ],
-   "stem": "这位「著名」的作家来学校演讲。「著名」的正确汉语拼音是：",
-   "options": [
-    "zhù míng",
-    "zhuó míng",
-    "zhù mín",
-    "zhe míng"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「著」在这个词里读 zhù，不读 zhuó。 (In this word 著 is read zhù, not zhuó.)"
-    },
-    {
-     "tag": "wrong_tone",
-     "why": "「名」读 míng，声调不是 mín。 (The tone is wrong: 名 is read míng.)"
-    },
-    {
-     "tag": "wrong_polyphone_reading",
-     "why": "「著」在这个词里读 zhù，不读 zhe。 (In this word 著 is read zhù, not zhe.)"
-    }
-   ],
-   "solution": [
-    "「著名」读作 zhù míng。",
-    "(著名 is read zhù míng.)",
-    "著名 = famous"
-   ],
-   "params": {
-    "key": "v1b-pinyin-030",
-    "subtopic": "chi-pinyin-sound"
-   }
-  },
-  {
    "id": "chipinyi-f8000d0e28",
    "topic": "chi-pinyin",
    "level": "competent",
@@ -4879,28 +4510,28 @@
    "outcomes": [
     "chi-pinyin-sound-1"
    ],
-   "stem": "这次郊游「大约」有五十人参加。「大约」的正确汉语拼音是：",
+   "stem": "从学校走到车站「大约」需要十分钟。「大约」的正确汉语拼音是：",
    "options": [
-    "dà yuē",
-    "dà yāo",
     "dà yuè",
-    "dá yuē"
+    "dá yuè",
+    "dá yuē",
+    "dà yuē"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
-    {
-     "tag": "wrong_tone",
-     "why": "「约」读 yuē，声调不是 yāo。 (The tone is wrong: 约 is read yuē.)"
-    },
     {
      "tag": "wrong_tone",
      "why": "「约」读 yuē，声调不是 yuè。 (The tone is wrong: 约 is read yuē.)"
     },
     {
+     "tag": "double_error",
+     "why": "两处都错：「约」读 yuē，声调不是 yuè。 (The tone is wrong: 约 is read yuē.) 「大」读 dà，声调不是 dá。 (The tone is wrong: 大 is read dà.)"
+    },
+    {
      "tag": "wrong_tone",
      "why": "「大」读 dà，声调不是 dá。 (The tone is wrong: 大 is read dà.)"
-    }
+    },
+    null
    ],
    "solution": [
     "「大约」读作 dà yuē。",

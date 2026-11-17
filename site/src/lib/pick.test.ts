@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pickTier, pickReview, type Seen } from './pick.ts';
+import { pickTier, pickReview, wholePassages, type Seen } from './pick.ts';
 
 const ids = Array.from({ length: 30 }, (_, i) => `q${i}`);
 const NOW = 1_000_000;
@@ -64,4 +64,15 @@ test('paper: every topic gets a turn when many topics are chosen', async () => {
   const used = new Set<string>();
   for (let r = 0; r < 20; r++) pickPaper(qs, {}, 10, MIXES.wa.mix, NOW).forEach((id) => used.add(id.split('-')[0]));
   assert.equal(used.size, 12);
+});
+
+test('passage tiers: whole passages, questions in order, exactly size', () => {
+  // 4 passages x 5 questions; p2 has only 3 shipped questions
+  const ids: string[] = []; const meta: Record<string, { group: string; seq: number }> = {};
+  for (const p of [1, 2, 3, 4]) for (let n = 1; n <= (p === 2 ? 3 : 5); n++) { const id = `p${p}q${n}`; ids.push(id); meta[id] = { group: `p${p}`, seq: n }; }
+  const picked = ['p3q4', 'p1q2', 'p3q1', 'p2q3', 'p4q1']; // priority order from pickTier
+  const out = wholePassages(picked, ids, (id) => meta[id], 10);
+  assert.deepEqual(out, ['p3q1', 'p3q2', 'p3q3', 'p3q4', 'p3q5', 'p1q1', 'p1q2', 'p1q3', 'p1q4', 'p1q5']);
+  const out2 = wholePassages(['p2q1', 'p4q2', 'p1q1'], ids, (id) => meta[id], 10);
+  assert.deepEqual(out2, ['p2q1', 'p2q2', 'p2q3', 'p4q1', 'p4q2', 'p4q3', 'p4q4', 'p4q5', 'p1q1', 'p1q2']);
 });

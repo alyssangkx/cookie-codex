@@ -24,6 +24,7 @@ const shuffle = <T>(xs: T[], rand: () => number) => {
 export function pickTier(
   ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now(), rand = Math.random,
   sideRetests: string[] = [],
+  passage?: (id: string) => { group: string; seq: number } | undefined,
 ): string[] {
   const byDue = (a: string, b: string) => seen[a]!.due - seen[b]!.due;
   const retest = ids.filter((id) => (seen[id]?.s ?? 0) > 0).sort(byDue);
@@ -39,7 +40,29 @@ export function pickTier(
     const id = spare.shift()!;
     if (!out.includes(id)) out.push(id);
   }
-  return shuffle(out, rand);
+  return passage && out.some((id) => passage(id)) ? wholePassages(out, ids, passage, size) : shuffle(out, rand);
+}
+
+/**
+ * Passage sub-topics (cloze, reading): a quiz is whole passages, read once, questions in order.
+ * Passages are taken in the priority order of the picked questions (retests first, then new), whole
+ * while they fit, and the last one is cut to make exactly `size`.
+ */
+export function wholePassages(
+  picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined, size: number,
+): string[] {
+  const members = new Map<string, string[]>();
+  for (const id of ids) {
+    const g = passage(id)?.group ?? id; // an ungrouped question is a passage of one
+    members.set(g, [...(members.get(g) ?? []), id]);
+  }
+  const out: string[] = [];
+  for (const g of new Set(picked.map((id) => passage(id)?.group ?? id))) {
+    if (out.length >= size) break;
+    const qs = (members.get(g) ?? [g]).sort((a, b) => (passage(a)?.seq ?? 0) - (passage(b)?.seq ?? 0));
+    out.push(...qs.slice(0, size - out.length));
+  }
+  return out;
 }
 
 /** Daily Review: due retests from anywhere, oldest first; 5 questions, growing to 15 with the backlog. */
