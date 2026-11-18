@@ -3,7 +3,6 @@
 // My House (collection) and the Ranking Tower. The map art has no text; every label is HTML.
 import { existsSync } from 'node:fs';
 import Base from '../layouts/Base.astro';
-import TodayCard from '../components/TodayCard.astro';
 import spots from '../data/home-hotspots.json';
 import { cookies } from '../lib/data';
 import { SCHOOLS } from '../lib/train';
@@ -65,7 +64,6 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
         ))}
       </div>
     ))}
-    <div class="wrap below"><TodayCard /></div>
   </section>
   <script type="application/json" id="home-data" set:html={data} />
 </Base>
@@ -135,7 +133,6 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
   .home .buddy img { width: 100%; height: auto; filter: drop-shadow(0 4px 3px rgb(58 42 30 / 0.35)); }
   .home .scene-tall .buddy { width: clamp(44px, 13vw, 72px); }
   .home .nudge { animation: nudge 0.45s ease-in-out; }
-  .home .below { padding-block: 1rem 0; }
   @keyframes bob { 50% { transform: translate(-50%, -95%); } }
   @keyframes glow { 50% { box-shadow: 0 0 56px 18px rgb(255 214 120 / 0.75); } }
   @keyframes nudge { 25% { transform: rotate(-2deg); } 75% { transform: rotate(2deg); } }
