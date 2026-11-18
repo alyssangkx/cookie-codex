@@ -17,3 +17,10 @@ test('an answer with & < > " matches its escaped form', () => {
 test('an entity is never matched from inside', () => {
   assert.equal(boldAns(esc('a & b'), '38'), 'a &#38; b');
 });
+
+test('letter answers: B-D standalone, A only in letter contexts, never the C in °C', () => {
+  assert.equal(boldAns('it is stage B; the pupa (B) does not eat', 'B'), 'it is stage <strong>B</strong>; the pupa (<strong>B</strong>) does not eat');
+  assert.equal(boldAns('kept at 30 °C, so C is the leaf', 'C'), 'kept at 30 °C, so <strong>C</strong> is the leaf');
+  assert.equal(boldAns('A pupa does not eat, so stage A is the pupa (A)', 'A'), 'A pupa does not eat, so stage <strong>A</strong> is the pupa (<strong>A</strong>)');
+  assert.equal(boldAns('DNA and BC', 'B'), 'DNA and BC');
+});

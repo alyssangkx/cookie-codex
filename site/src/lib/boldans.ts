@@ -7,6 +7,13 @@ export const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(
 // larger number or expression ("3/4" in "1 3/4", "36" in "136") is never bolded.
 export const boldAns = (h: string, opt: string) => {
   const raw = opt.trim();
+  // a letter answer (figure labels A-D): bold the standalone capital; "A" only in letter contexts, since it is also an article
+  if (/^[A-D]$/.test(raw)) {
+    const re = raw === 'A'
+      ? /(?<=\()A(?=\))|(?<=\b(?:[Ss]tage|[Pp]art|[Ll]etter|[Ll]abel|[Ll]abelled|[Mm]arked|[Ss]et-up) )A(?![A-Za-z0-9_])/g
+      : new RegExp(`(?<![A-Za-z0-9_#°])${raw}(?![A-Za-z0-9_])`, 'g');
+    return h.split(/(<strong>[\s\S]*?<\/strong>|<[^>]+>)/).map((p, n) => (n % 2 ? p : p.replace(re, (m) => `<strong>${m}</strong>`))).join('');
+  }
   const cjk = /[㐀-鿿]/.test(raw);
   if (raw.length < 2 || (raw.length === 2 && !cjk && !/^\d+$/.test(raw))) return h;
   const body = esc(raw).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
