@@ -1221,6 +1221,16 @@ def _(p):
     return F(p["N"]) if p["N"] % p["k"] == 0 else F(-1)
 
 
+def mlist(n, upto):
+    """'n, 2n, ... , **upto**': every multiple of n up to and including `upto` (the answer is bold)."""
+    return ", ".join(f"**{n * i}**" if n * i == upto else str(n * i) for i in range(1, upto // n + 1))
+
+
+def flist(n, bold=None):
+    """Complete factor list of n; `bold` (the answer) is marked."""
+    return ", ".join(f"**{d}**" if d == bold else str(d) for d in factors(n))
+
+
 @template(T, "basic", FM + "03", FM + "01")
 def count_common_factors(r):
     a, b = r.sample([12, 16, 18, 20, 24, 30, 36, 40, 42, 48, 54, 60], 2)
@@ -1251,7 +1261,8 @@ def small_lcm(r):
         (L + max(a, b), "next_common_multiple_slip", "Gave a later common multiple."),
         (gcd(a, b) if gcd(a, b) > 1 else None, "gave_the_hcf", "Gave the highest common factor."),
         (L - min(a, b), "slip", "Slip.")],
-        [f"Multiples of {a}: {', '.join(str(a * i) for i in range(1, 8))}", f"Multiples of {b}: {', '.join(str(b * i) for i in range(1, 8))}", f"Smallest common: {L}"],
+        [f"Multiples of {a}: {mlist(a, L)}", f"Multiples of {b}: {mlist(b, L)}",
+         f"The first number in both lists is **{L}**.", f"Smallest common multiple: **{L}**"],
         {"a": a, "b": b}, whole=True, show=str)
 
 
@@ -1273,7 +1284,7 @@ def small_hcf(r):
         (abs(A - B), "found_difference", "Gave the difference of the numbers."),
         (min(A, B) if min(A, B) % max(g, 1) == 0 and min(A, B) != g else None, "gave_smaller_number", "Gave the smaller number."),
         (g + 1, "slip", "Slip."), (max(1, g - 1), "slip", "Slip.")],
-        [f"Factors of {A}: {', '.join(map(str, factors(A)))}", f"Factors of {B}: {', '.join(map(str, factors(B)))}", f"Greatest common: {g}"],
+        [f"Factors of {A}: {flist(A, g)}", f"Factors of {B}: {flist(B, g)}", f"Greatest common factor: **{g}**"],
         {"A": A, "B": B}, whole=True, show=str)
 
 

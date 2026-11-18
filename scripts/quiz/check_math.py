@@ -66,6 +66,8 @@ def wording_problems(text):
     return out
 
 
+# 'Multiples of N: a, b, ...' / 'Factors of N: ...' solution lines (bold ** markers allowed)
+LISTING = re.compile(r"^(Multiples|Factors) of (\d+): ((?:\*\*)?\d+(?:\*\*)?(?:, (?:\*\*)?\d+(?:\*\*)?)*)$")
 BANKS = HERE.parents[1] / "site" / "src" / "data" / "quiz" / "math"
 tpl = {(t.topic, t.key): t for ts in REGISTRY.values() for t in ts}  # names may repeat across topics
 errors, total = [], 0
@@ -94,6 +96,23 @@ for path in sorted(BANKS.glob("*.json")):
         for where, text in texts:
             for prob in wording_problems(text):
                 e(f"wording in {where}: {prob}")
+        for line in q["solution"]:
+            m = LISTING.match(line)
+            if not m:
+                continue
+            kind, n = m.group(1), int(m.group(2))
+            nums = [int(x) for x in re.findall(r"\d+", m.group(3).replace("**", ""))]
+            ans = vals[q["answer"]]
+            if ans.denominator == 1 and ans > 0:
+                a = int(ans)
+                if kind == "Multiples" and a % n == 0 and a not in nums:
+                    e(f"listing '{line[:40]}' stops before the answer {a}")
+                if kind == "Factors" and n % a == 0 and a not in nums:
+                    e(f"listing '{line[:40]}' omits the answer {a}")
+            if kind == "Factors" and nums != [d for d in range(1, n + 1) if n % d == 0]:
+                e(f"factor list of {n} is not complete: {nums}")
+            if kind == "Multiples" and nums != [n * i for i in range(1, len(nums) + 1)]:
+                e(f"multiples list of {n} is not consecutive from {n}: {nums}")
         if "figure" in q:
             try:
                 xml.dom.minidom.parseString(q["figure"])
