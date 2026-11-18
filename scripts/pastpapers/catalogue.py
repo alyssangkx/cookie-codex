@@ -332,6 +332,11 @@ if __name__ == "__main__":
     ap.add_argument("--jobs", type=int, default=max(1, (os.cpu_count() or 2) - 4))
     a = ap.parse_args()
     if a.cmd == "selftest":
-        selftest(); import subject_chinese; subject_chinese.selftest(); sys.exit()
+        selftest()
+        import importlib
+        for subj in SUBJECTS:  # every subject module's own checks, where it has them
+            mod = importlib.import_module(f"subject_{subj}")
+            if hasattr(mod, "selftest"): mod.selftest()
+        sys.exit()
     if a.cmd in ("ocr", "all"): run_ocr(a)
     if a.cmd in ("catalogue", "all"): run_catalogue(a)
