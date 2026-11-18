@@ -1,0 +1,16 @@
+flowchart LR
+    Q["Planned Science question"] --> K{"What does the stem show?"}
+    K -->|"words only"| N["none<br/>text-only question"]
+    K -->|"circuit, graph, table,<br/>set-up, food web,<br/>force or ray diagram"| S["svg<br/>drawn in code<br/>black and white<br/>exact labels"]
+    K -->|"plant, animal, organ,<br/>life-cycle stage"| L["lineart<br/>AI-generated<br/>black and white<br/>NO text in image"]
+    S --> SC["Check: matches stem,<br/>hides the answer"]
+    L --> LC["Check: no letters.<br/>Labels overlaid in HTML"]
+    N --> D["In the bank"]
+    SC --> D
+    LC --> D
+    classDef none fill:#f2f2f2,stroke:#666,color:#111
+    classDef svg fill:#dbe9f7,stroke:#2b6cb0,color:#111
+    classDef line fill:#fde8cf,stroke:#c05621,color:#111
+    class N none
+    class S,SC svg
+    class L,LC line
