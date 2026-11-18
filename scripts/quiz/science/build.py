@@ -8,7 +8,7 @@ An optional "figure" is either an inline SVG string (code-made, currentColor) or
 {"img": "/science/<file>.webp", "alt": ..., "labels": [{"x": %, "y": %, "text": ...}]}; it is copied into the bank question.
 An item ships only if scripts/quiz/science/review.json records, under "<subtopic>|<key>", ship: true for exactly the
 current content (fingerprint). Fail closed: no verdict, ship not true, or an edited item means it does not ship.
-Question ids hash topic | item key, so editing an item's wording keeps its id.
+Question ids hash sub-topic | item key, so editing an item's wording keeps its id.
 """
 import hashlib
 import json
@@ -30,10 +30,11 @@ REVIEW = HERE / "review.json"
 TOPIC_OF = {sb["id"]: t["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
 
 
-def qid(topic, key):
-    # no level in the id: moving an item between levels must not orphan a child's retest history
+def qid(topic, sub, key):
+    # hash sub-topic | key (keys are unique per sub-topic, not per topic); no level, so moving an item
+    # between levels must not orphan a child's retest history
     prefix = "sci" + topic.split("-")[1][:4]  # sci-cycles-water -> scicycl
-    return f"{prefix}-{hashlib.sha1(f'{topic}|{key}'.encode()).hexdigest()[:10]}"
+    return f"{prefix}-{hashlib.sha1(f'{sub}|{key}'.encode()).hexdigest()[:10]}"
 
 
 def gloss_line(it):
@@ -47,7 +48,9 @@ def main():
     banks, dropped, unreviewed, stale = {}, [], [], []
     for f in sorted((HERE / "items").glob("*.json")):
         data = json.loads(f.read_text())
-        sub = data["subtopic"]
+        sub = data.get("subtopic")
+        if sub not in TOPIC_OF:
+            sys.exit(f"{f.name}: unknown or missing subtopic {sub!r} (must be a sub-topic id in site/src/data/syllabus/science.json)")
         topic = TOPIC_OF[sub]
         for it in data["items"]:
             rk = f"{sub}|{it['key']}"
@@ -66,7 +69,7 @@ def main():
             order = list(range(len(it["options"])))
             random.Random(f"{sub}|{it['key']}").shuffle(order)
             banks.setdefault(topic, []).append({
-                "id": qid(topic, it["key"]),
+                "id": qid(topic, sub, it["key"]),
                 "topic": topic,
                 "level": it["level"],
                 "template": it["pattern"],

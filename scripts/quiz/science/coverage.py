@@ -49,7 +49,7 @@ for st in SYL["strands"]:
                 lines.append(f"| {cell(sb['name'])} | {cell(o['text'], 70)} | {'yes' if o.get('mcqTestable') else 'no'} | "
                              f"{'yes' if o.get('needsDiagram') else 'no'} | {n}{flag} |")
 lines += ["", f"**{mcq_done} of {mcq_total} MCQ-testable outcomes have questions.** Not yet covered: "
-          + ("; ".join(missing_subs) or "none") + ""]
+          + ("; ".join(missing_subs) or "none")]
 n_types = n_done = 0
 if PATTERNS:
     pats = PATTERNS["patterns"]

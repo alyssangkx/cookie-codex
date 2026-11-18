@@ -107,8 +107,6 @@ for path in sorted(BANKS.glob("*.json")):
                 a = int(ans)
                 if kind == "Multiples" and a % n == 0 and a not in nums:
                     e(f"listing '{line[:40]}' stops before the answer {a}")
-                if kind == "Factors" and n % a == 0 and a not in nums:
-                    e(f"listing '{line[:40]}' omits the answer {a}")
             if kind == "Factors" and nums != [d for d in range(1, n + 1) if n % d == 0]:
                 e(f"factor list of {n} is not complete: {nums}")
             if kind == "Multiples" and nums != [n * i for i in range(1, len(nums) + 1)]:

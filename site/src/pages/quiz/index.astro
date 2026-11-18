@@ -53,6 +53,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
+  import { esc, boldAns } from '../../lib/boldans';
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual };
@@ -76,26 +77,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const LEVEL: Record<Tier, string> = { b: 'basic', i: 'intermediate', c: 'competent' };
   const rewardFor = (sid: string, t: Tier) => meta.slots[`${sid}|${t}`];
 
-  const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
   // the asked cloze blank (four ＿, or English "(N) " + 8 underscores) is marked and kept on one line; other blanks have fewer
-  // bold the correct option's text inside an explanation (already escaped, ** already turned into <strong>).
-  // Text outside tags only, never inside an existing <strong> or an &#NN; entity. Skips 1-char options and 2-char non-CJK ones.
-  const boldAns = (h: string, opt: string) => {
-    const raw = opt.trim();
-    const cjk = /[㐀-鿿]/.test(raw);
-    if (raw.length < 2 || (raw.length === 2 && !cjk)) return h;
-    const body = esc(raw).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const make = (flags: string) => new RegExp(cjk ? body : `(?<![A-Za-z0-9_])(?<!\\d[.,/])${body}(?![A-Za-z0-9_])(?![.,/]\\d)`, flags);
-    const parts = h.split(/(<strong>[\s\S]*?<\/strong>|<[^>]+>|&#\d+;)/);
-    const hit = (re: RegExp) => parts.some((p, n) => n % 2 === 0 && re.test(p));
-    let re = make('g');
-    if (!cjk && !hit(make(''))) re = make('gi');
-    return parts.map((p, n) => (n % 2 ? p : p.replace(re, (m) => `<strong>${m}</strong>`))).join('');
-  };
   const fmt = (x: string, ans?: string) =>
     (ans ? boldAns(esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>'), ans) : esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>')).replace(/（(\d+)）＿＿＿＿/g, '<mark class="ask">（$1）＿＿＿＿</mark>')
-      .replace(/\((\d+)\) (_{8})(?!_)/g, '<mark class="ask">($1) $2</mark>').replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
-      `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`);
+      .replace(/\((\d+)\) (_{8})(?!_)/g, '<mark class="ask">($1) $2</mark>').split(/(<[^>]+>)/).map((p, n) => n % 2 ? p : p.replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
+      `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`)).join('');
 
   // Visual text (English): a poster, notice, brochure, timetable or email drawn as a styled card. Every string goes
   // through vfmt (escape + **bold** only, so "12/5" and "24/7" stay as written), so the data can never inject markup.
@@ -141,6 +127,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   // cloze passage sets: a blank answered earlier in this quiz (right or wrong) reads as the correct text in later questions;
   // right = green, wrong = amber "correct answer". reveal = feedback state, the asked blank is filled too.
+  // ponytail: the cloze sub-topic set is hard-coded here; extend it when a new passage set is added
   const CLOZE = new Set(['chi-cloze-mcq', 'eng-gram-text-cohesion']);
   const clozeStem = (q: Q, reveal: boolean) => {
     const zh = q.sub === 'chi-cloze-mcq';
@@ -389,7 +376,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('review').innerHTML = wrongs.map(({ q, chose }) => {
       const showVis = q.visual && !(q.group && seenVis.has(q.group));
       if (q.group) seenVis.add(q.group);
-      return `<details class="rev"><summary>${fmt(q.stem)}</summary>
+      return `<details class="rev"><summary>${stemHtml(q, true)}</summary>
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
        <p>${chose >= 0 ? `You chose ${LETTERS[chose]} (${fmt(q.options[chose])}). ` : 'Not answered. '}Answer: ${LETTERS[q.answer]} (${fmt(q.options[q.answer])}).</p>
        <ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol></details>`;

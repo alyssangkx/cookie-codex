@@ -236,7 +236,7 @@ Positive: no money, no leaderboard, no push, "Not yet" copy, nothing is taken aw
   Replace with weeks and "best".
 - **Daily cap:** good in principle; default 45 min exceeds the pacing plan (20-30). Default to 30 min, goal 20 questions.
   The cap is checked by `localStorage`, so a child can clear it; the parent should know it is a convenience, not security.
-- **"Done for today" wording** (quiz index, `TodayCard.astro`): "Done for today! You have reached today's training time.
+- **"Done for today" wording** (quiz index, `quiz/index.astro`): "Done for today! You have reached today's training time.
   Come back tomorrow." tells the child what they cannot do. Suggest: "Great work. You did N questions today. Your brain
   needs rest to remember them. See you tomorrow, and your review questions will be waiting." Avoid "you have reached" (reads as a limit).
 - **Reward for failing** (H1): a child who fails repeatedly gets a card on pool exhaustion, which teaches that persistence

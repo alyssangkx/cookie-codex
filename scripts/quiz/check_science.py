@@ -24,8 +24,15 @@ LEVELS = {"basic", "intermediate", "competent"}
 IMG = re.compile(r"^/science/[\w.-]+\.webp$")
 OK_PAINT = {"currentcolor", "none", "transparent", "white", "black", "#fff", "#ffffff", "#000", "#000000"}
 BAD_TAGS = {"script", "foreignobject", "iframe", "object", "embed", "image", "use", "a", "animate", "set", "audio", "video"}
+PAINT_ATTRS = {"fill", "stroke", "color", "stop-color", "flood-color", "lighting-color"}
 MAX_SVG = 30_000
 errors = []
+SELF_TESTS = [  # (svg, must fail?)
+    ("<svg viewBox='0 0 1 1'><path d='M0 0' fill='currentColor' style='stroke:black'/></svg>", False),
+    ("<svg viewBox='0 0 1 1'><path d='M0 0' style='color:red'/></svg>", True),
+    ("<svg viewBox='0 0 1 1'><stop stop-color='#f00'/></svg>", True),
+    ("<svg viewBox='0 0 1 1'><style>path{fill:#f00}</style><path d='M0 0'/></svg>", True),
+]
 
 
 def svg_errors(s):
@@ -43,7 +50,7 @@ def svg_errors(s):
     for el in root.iter():
         tag = el.tag.split("}")[-1].lower()
         if tag in BAD_TAGS: out.append(f"svg figure has a <{tag}> element")
-        if tag == "style" and re.search(r"@import|url\((?!\s*['\"]?#)", el.text or "", re.I): out.append("svg <style> references something external")
+        if tag == "style": out.append("svg figure has a <style> element (set paint with fill/stroke attributes)")
         for k, v in el.attrib.items():
             name = k.split("}")[-1].lower()
             if name.startswith("on"): out.append(f"svg figure has an {name} handler")
@@ -51,10 +58,13 @@ def svg_errors(s):
                 if not (name == "href" and v.startswith("#")): out.append(f"svg figure has external attribute {name}")
             if re.search(r"javascript:|data:|https?:|//", v, re.I): out.append(f"svg attribute {name} has a URL or script")
             if re.search(r"url\((?!\s*['\"]?#)", v, re.I): out.append(f"svg attribute {name} has a non-local url()")
-            if name in ("fill", "stroke") and v.strip().lower() not in OK_PAINT and not v.strip().lower().startswith("url(#"):
+            if name in PAINT_ATTRS and v.strip().lower() not in OK_PAINT and not v.strip().lower().startswith("url(#"):
                 out.append(f"svg {name}={v!r}: use currentColor (black and white only)")
-            if name == "style" and re.search(r"(fill|stroke)\s*:\s*(?!currentcolor|none|white|black|#fff|#000|url\(#)", v, re.I):
-                out.append("svg style sets a colour other than currentColor")
+            if name == "style":
+                for prop, val in re.findall(r"([\w-]+)\s*:\s*([^;]+)", v):
+                    val = val.strip().lower()
+                    if prop.lower() in PAINT_ATTRS and val not in OK_PAINT and not val.startswith("url(#"):
+                        out.append(f"svg style sets {prop.lower()}:{val} (use currentColor, black and white only)")
     return sorted(set(out))
 
 
@@ -82,8 +92,8 @@ def figure_errors(fig, answer_text=None):
     return out
 
 
-# keys and stems must be unique per SUB-TOPIC across files (several files can share one sub-topic, and the
-# review verdict, shuffle seed and question id are all keyed by sub-topic|key)
+# keys and stems must be unique per SUB-TOPIC across files (several files can share one sub-topic; the
+# review verdict, shuffle seed and question id (build.py qid) are all keyed by sub-topic|key, never topic|key)
 _all = [(f, json.loads(f.read_text())) for f in sorted((HERE / "science" / "items").glob("*.json"))]
 sub_keys = Counter((d.get("subtopic"), it.get("key")) for _, d in _all for it in d["items"])
 sub_stems = Counter((d.get("subtopic"), it.get("stem")) for _, d in _all for it in d["items"])
@@ -129,6 +139,9 @@ for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "science").glob("*.js
         if "figure" in q:
             errors += [f"{f.name} {q['id']}: {m}" for m in figure_errors(q["figure"], q["options"][q["answer"]])]
 errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
+
+for svg, must_fail in SELF_TESTS:
+    if bool(svg_errors(svg)) != must_fail: errors.append(f"svg rule self-test failed for {svg}")
 
 print(f"checked {len(_all)} item files, {sum(ids.values())} shipped questions")
 for m in errors[:40]:

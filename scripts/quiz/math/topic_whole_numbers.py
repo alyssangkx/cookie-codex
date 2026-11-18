@@ -1241,7 +1241,7 @@ def count_common_factors(r):
         (len(factors(a)), "counted_factors_of_one_number", f"Counted the factors of {a} only."),
         (ans - 1, "left_out_1", "Left out the factor 1."), (ans + 1, "slip", "Counted one extra."),
         (len(factors(b)), "counted_factors_of_one_number", f"Counted the factors of {b} only.")],
-        [f"Factors of {a}: {', '.join(map(str, factors(a)))}", f"Factors of {b}: {', '.join(map(str, factors(b)))}",
+        [f"Factors of {a}: {flist(a)}", f"Factors of {b}: {flist(b)}",
          f"Common: {', '.join(map(str, sorted(set(factors(a)) & set(factors(b)))))}"], {"a": a, "b": b}, whole=True, show=str)
 
 
