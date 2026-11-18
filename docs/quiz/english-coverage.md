@@ -1,6 +1,6 @@
 # English bank: PSLE syllabus and top-school coverage
 
-1036 shipped questions (basic 309, intermediate 309, competent 418). Regenerate with `python3 scripts/quiz/english/coverage.py`.
+1036 shipped questions (basic 307, intermediate 306, competent 423). Regenerate with `python3 scripts/quiz/english/coverage.py`.
 
 ## 1. PSLE syllabus (English Language Syllabus 2020)
 

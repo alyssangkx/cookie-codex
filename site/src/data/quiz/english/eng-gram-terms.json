@@ -9,31 +9,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The tall boy ran quickly.', which word is an adverb?",
+   "stem": "In 'Hui Min ate her noodles slowly at the hawker centre.', which word is an adverb?",
    "options": [
-    "boy",
-    "tall",
-    "ran",
-    "quickly"
+    "ate",
+    "noodles",
+    "centre",
+    "slowly"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'boy' names a person, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'ate' is what Hui Min did, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'tall' describes the noun 'boy', so it is an adjective"
+     "tag": "wrong_class",
+     "why": "'noodles' names the food, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'ran' is a doing word, so it is a verb"
+     "tag": "wrong_class",
+     "why": "'centre' names a place, so it is a noun"
     },
     null
    ],
    "solution": [
-    "'quickly' tells how the boy ran, so it is an adverb."
+    "'slowly' tells how Hui Min ate, so it is an adverb."
    ],
    "params": {
     "key": "txf-101",
@@ -48,31 +48,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Wei Jie kicked the ball.', which word is a verb?",
+   "stem": "In 'The bus stops outside our school.', which word is a verb?",
    "options": [
-    "'ball'",
-    "'Wei Jie'",
-    "'kicked'",
-    "'the'"
+    "outside",
+    "bus",
+    "school",
+    "stops"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'ball' names a thing, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'outside' links 'stops' to 'our school' and shows where, so it is a preposition here"
     },
     {
-     "tag": "wrong_term",
-     "why": "'Wei Jie' names a person, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'bus' names a vehicle, so it is a noun"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'the' is an article that introduces a noun"
-    }
+     "tag": "wrong_class",
+     "why": "'school' names a place, so it is a noun"
+    },
+    null
    ],
    "solution": [
-    "'kicked' is the action word, so it is a verb."
+    "'stops' is the action the bus does, so it is the verb."
    ],
    "params": {
     "key": "txf-102",
@@ -87,31 +87,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'She bought a red umbrella.', which word is an adjective?",
+   "stem": "In 'The noisy canteen opened at seven.', which word is an adjective?",
    "options": [
-    "'umbrella'",
-    "'bought'",
-    "'She'",
-    "'red'"
+    "at",
+    "opened",
+    "noisy",
+    "canteen"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'umbrella' names a thing, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'at' links 'opened' to the time 'seven', so it is a preposition"
     },
     {
-     "tag": "wrong_term",
-     "why": "'bought' is an action, so it is a verb"
+     "tag": "wrong_class",
+     "why": "'opened' is the action, so it is a verb"
     },
+    null,
     {
-     "tag": "wrong_term",
-     "why": "'She' stands for a person, so it is a pronoun"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "'canteen' names a place, so it is a noun"
+    }
    ],
    "solution": [
-    "'red' describes the umbrella, so it is an adjective."
+    "'noisy' describes the noun 'canteen', so it is an adjective."
    ],
    "params": {
     "key": "txf-103",
@@ -126,31 +126,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'I wanted to go out, but it was raining.', which word is a conjunction?",
+   "stem": "In 'Ravi found a seat, and he sat down quietly.', which word is a pronoun?",
    "options": [
-    "out",
-    "wanted",
-    "but",
-    "raining"
+    "seat",
+    "found",
+    "quietly",
+    "he"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'out' tells where, so it is an adverb here"
+     "tag": "wrong_class",
+     "why": "'seat' names a thing, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'wanted' is an action, so it is a verb"
+     "tag": "wrong_class",
+     "why": "'found' is an action, so it is a verb"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'raining' is a verb form"
-    }
+     "tag": "wrong_class",
+     "why": "'quietly' tells how Ravi sat, so it is an adverb"
+    },
+    null
    ],
    "solution": [
-    "'but' joins two parts of the sentence, so it is a conjunction."
+    "'he' stands in for 'Ravi', so it is a pronoun."
    ],
    "params": {
     "key": "txf-104",
@@ -165,73 +165,34 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is used in 'Mum cooked dinner last night.'?",
+   "stem": "In 'Anna put her bag on the chair.', which word is a preposition?",
    "options": [
-    "simple present tense",
-    "present continuous tense",
-    "simple past tense",
-    "simple future tense"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'cooked' is a past form and 'last night' shows past time"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "there is no 'is' or 'are' with an '-ing' verb"
-    },
-    null,
-    {
-     "tag": "wrong_term",
-     "why": "there is no 'will', and 'last night' is already past"
-    }
-   ],
-   "solution": [
-    "'cooked' and 'last night' show an action finished in the past."
-   ],
-   "params": {
-    "key": "txf-105",
-    "subtopic": "eng-gram-terms-meta"
-   }
-  },
-  {
-   "id": "enggram-a20cb13590",
-   "topic": "eng-gram-terms",
-   "level": "basic",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-terms-meta-1"
-   ],
-   "stem": "In the sentence 'Ben said that he was tired.', which word is a pronoun?",
-   "options": [
-    "'he'",
-    "'said'",
-    "'Ben'",
-    "'tired'"
+    "on",
+    "chair",
+    "put",
+    "bag"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "'said' is a doing word, so it is a verb"
+     "tag": "wrong_class",
+     "why": "'chair' names a thing, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'Ben' is a name, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'put' is an action, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'tired' describes how Ben felt, so it is an adjective"
+     "tag": "wrong_class",
+     "why": "'bag' names a thing, so it is a noun"
     }
    ],
    "solution": [
-    "'he' stands in for 'Ben', so it is a pronoun."
+    "'on' shows where the bag was put, so it is a preposition."
    ],
    "params": {
-    "key": "txf-106",
+    "key": "txf-105",
     "subtopic": "eng-gram-terms-meta"
    }
   },
@@ -243,31 +204,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The book is on the table.', which word is a preposition?",
+   "stem": "In 'My cousin lives in Singapore.', which word is a proper noun?",
    "options": [
-    "on",
-    "book",
-    "is",
-    "table"
+    "In",
+    "Cousin",
+    "Lives",
+    "Singapore"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'book' names a thing, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'in' links 'lives' to a place, so it is a preposition"
     },
     {
-     "tag": "wrong_term",
-     "why": "'is' is a verb"
+     "tag": "wrong_class",
+     "why": "'cousin' is a common noun because it is not the name of one particular person"
     },
     {
-     "tag": "wrong_term",
-     "why": "'table' names a thing, so it is a noun"
-    }
+     "tag": "wrong_class",
+     "why": "'lives' is an action, so it is a verb"
+    },
+    null
    ],
    "solution": [
-    "'on' shows where the book is, so it is a preposition."
+    "'Singapore' is the name of a particular country, so it is a proper noun."
    ],
    "params": {
     "key": "txf-107",
@@ -277,36 +238,36 @@
   {
    "id": "enggram-34bff4d21b",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is used in 'The children are playing in the park.'?",
+   "stem": "In 'Mum quickly cooked dinner for us.', which word is a noun?",
    "options": [
-    "simple present tense",
-    "past continuous tense",
-    "present continuous tense",
-    "simple future tense"
+    "quickly",
+    "cooked",
+    "dinner",
+    "for"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'are playing' is more than the simple present form"
+     "tag": "wrong_class",
+     "why": "'quickly' tells how Mum cooked, so it is an adverb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'are' is present, not 'were'"
+     "tag": "wrong_class",
+     "why": "'cooked' is an action, so it is a verb"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "there is no 'will' in the sentence"
+     "tag": "wrong_class",
+     "why": "'for' links 'dinner' to 'us', so it is a preposition"
     }
    ],
    "solution": [
-    "'are' with 'playing' shows an action in progress now."
+    "'dinner' names the meal that Mum cooked, so it is a noun."
    ],
    "params": {
     "key": "txf-108",
@@ -316,36 +277,36 @@
   {
    "id": "enggram-aa80270dd3",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Although it was late, Ravi kept studying.', which word is a conjunction?",
+   "stem": "In 'Grandma sleeps early on weekdays.', which word is a verb?",
    "options": [
-    "'late'",
-    "'kept'",
-    "'studying'",
-    "'Although'"
+    "Grandma",
+    "Early",
+    "Weekdays",
+    "Sleeps"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'late' describes the time, so it is an adjective"
+     "tag": "wrong_class",
+     "why": "'Grandma' names a person, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'kept' is a verb"
+     "tag": "wrong_class",
+     "why": "'early' tells when Grandma sleeps, so it is an adverb here"
     },
     {
-     "tag": "wrong_term",
-     "why": "'studying' is a verb form"
+     "tag": "wrong_class",
+     "why": "'weekdays' names days, so it is a noun"
     },
     null
    ],
    "solution": [
-    "'Although' joins the two clauses, so it is a conjunction."
+    "'sleeps' is what Grandma does, so it is the verb."
    ],
    "params": {
     "key": "txf-109",
@@ -355,36 +316,36 @@
   {
    "id": "enggram-4df5337407",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is used in 'She has finished her homework.'?",
+   "stem": "In 'Ben carried a heavy bag up the stairs.', which word is an adjective?",
    "options": [
-    "present perfect tense",
-    "simple past tense",
-    "present continuous tense",
-    "past perfect tense"
+    "heavy",
+    "carried",
+    "stairs",
+    "up"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "'has finished' uses 'has' with a past participle, not a simple past form"
+     "tag": "wrong_class",
+     "why": "'carried' is an action, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "there is no '-ing' verb in the sentence"
+     "tag": "wrong_class",
+     "why": "'stairs' names a thing, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "the past perfect uses 'had', not 'has'"
+     "tag": "wrong_class",
+     "why": "'up' links 'carried' to 'the stairs', so it is a preposition"
     }
    ],
    "solution": [
-    "'has' with 'finished' is the present perfect."
+    "'heavy' describes the noun 'bag', so it is an adjective."
    ],
    "params": {
     "key": "txf-110",
@@ -394,36 +355,36 @@
   {
    "id": "enggram-82e0f879f4",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Ali is taller than Ben.', what kind of word is 'taller'?",
+   "stem": "In 'The baby slept soundly.', which word is an adverb?",
    "options": [
-    "a superlative adjective",
-    "an adverb",
-    "a noun",
-    "a comparative adjective"
+    "Baby",
+    "Soundly",
+    "The",
+    "Slept"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "a superlative would end in '-est' and be used with 'the'"
+     "tag": "wrong_class",
+     "why": "'baby' names a person, so it is a noun"
+    },
+    null,
+    {
+     "tag": "wrong_class",
+     "why": "'The' points to the noun 'baby'; it is not a word that tells how the baby slept"
     },
     {
-     "tag": "wrong_term",
-     "why": "'taller' describes Ali, a noun, so it is not an adverb"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'taller' describes a person and does not name one"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "'slept' is an action, so it is a verb"
+    }
    ],
    "solution": [
-    "'taller' compares two people, so it is a comparative adjective."
+    "'soundly' tells how the baby slept, so it is an adverb."
    ],
    "params": {
     "key": "txf-111",
@@ -433,36 +394,36 @@
   {
    "id": "enggram-ab4bfbcc5b",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'After school, Mei Ling feeds the stray cats.', which word is the subject?",
+   "stem": "In 'We will visit the zoo tomorrow.', which word is an adverb?",
    "options": [
-    "'feeds'",
-    "'school'",
-    "'cats'",
-    "'Mei Ling'"
+    "tomorrow",
+    "zoo",
+    "will",
+    "visit"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
-     "tag": "wrong_term",
-     "why": "'feeds' is the verb, the action"
+     "tag": "wrong_class",
+     "why": "'zoo' names a place, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'school' is part of the phrase 'After school', which tells when"
+     "tag": "wrong_class",
+     "why": "'will' helps the verb 'visit' show the future; it is a helping verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'cats' is the object, receiving the action"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "'visit' is an action, so it is a verb"
+    }
    ],
    "solution": [
-    "'Mei Ling' is the one doing the action, so she is the subject."
+    "'tomorrow' tells when we will visit, so it is an adverb here."
    ],
    "params": {
     "key": "txf-112",
@@ -472,36 +433,36 @@
   {
    "id": "enggram-f51279ebc9",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which voice is used in 'The cake was eaten by the children.'?",
+   "stem": "In 'Please give the book to me.', which word is a pronoun?",
    "options": [
-    "direct speech",
-    "active voice",
-    "passive voice",
-    "future tense"
+    "book",
+    "give",
+    "me",
+    "to"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "there are no speech marks or spoken words"
+     "tag": "wrong_class",
+     "why": "'book' names a thing, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "in the active voice the children would come first, as in 'The children ate the cake'"
+     "tag": "wrong_class",
+     "why": "'give' is an action, so it is a verb"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'was eaten' is past, not future"
+     "tag": "wrong_class",
+     "why": "'to' links 'give' to 'me', so it is a preposition"
     }
    ],
    "solution": [
-    "The cake receives the action, so the sentence is passive."
+    "'me' stands in for the speaker, so it is a pronoun."
    ],
    "params": {
     "key": "txf-113",
@@ -511,36 +472,36 @@
   {
    "id": "enggram-0f6ea01636",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'Hana's bag', what does the apostrophe show?",
+   "stem": "In 'The ball rolled under the bench.', which word is a preposition?",
    "options": [
-    "a plural",
-    "direct speech",
-    "a missing letter",
-    "ownership"
+    "ball",
+    "under",
+    "rolled",
+    "bench"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "a plural noun is made with 's' and no apostrophe"
+     "tag": "wrong_class",
+     "why": "'ball' names a thing, so it is a noun"
+    },
+    null,
+    {
+     "tag": "wrong_class",
+     "why": "'rolled' is an action, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "direct speech is shown with speech marks"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "here it is not a short form of 'Hana is'"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "'bench' names a thing, so it is a noun"
+    }
    ],
    "solution": [
-    "The apostrophe and 's' show that the bag belongs to Hana."
+    "'under' shows where the ball rolled, so it is a preposition."
    ],
    "params": {
     "key": "txf-114",
@@ -550,36 +511,36 @@
   {
    "id": "enggram-0f33edb5ed",
    "topic": "eng-gram-terms",
-   "level": "competent",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'The pianist played surprisingly beautiful music.', which word is an adverb?",
+   "stem": "In 'Jun Wei stayed home because he was ill.', which word is a conjunction?",
    "options": [
-    "surprisingly",
-    "music",
-    "played",
-    "pianist"
+    "home",
+    "he",
+    "because",
+    "stayed"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_class",
+     "why": "'home' tells where Jun Wei stayed, so it is an adverb here"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'he' stands in for Jun Wei, so it is a pronoun"
+    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'music' names a thing, so it is a noun"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'played' is an action, so it is a verb"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'pianist' names a person, so it is a noun"
+     "tag": "wrong_class",
+     "why": "'stayed' is what Jun Wei did, so it is a verb"
     }
    ],
    "solution": [
-    "'surprisingly' describes the adjective 'beautiful', so it is an adverb."
+    "'because' joins 'Jun Wei stayed home' and 'he was ill', so it is a conjunction."
    ],
    "params": {
     "key": "txf-115",
@@ -589,36 +550,36 @@
   {
    "id": "enggram-32b1067e96",
    "topic": "eng-gram-terms",
-   "level": "competent",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'The boy who lives next door is my classmate.', what is 'who lives next door'?",
+   "stem": "In 'Siti kicked the ball into the net.', which word names the subject?",
    "options": [
-    "a simple sentence",
-    "a relative clause",
-    "a conjunction",
-    "an adverb phrase"
+    "Net",
+    "Kicked",
+    "Siti",
+    "Ball"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "it cannot stand alone as a sentence"
+     "tag": "wrong_role",
+     "why": "'net' comes after the preposition 'into', so it is not the subject"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'kicked' is the verb, the action itself"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "a conjunction is one joining word, not a whole group of words"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "it describes the noun 'boy', not a verb"
+     "tag": "wrong_role",
+     "why": "'ball' receives the kick, so it is the object, not the subject"
     }
    ],
    "solution": [
-    "It begins with 'who' and describes the boy, so it is a relative clause."
+    "'Siti' does the kicking, so 'Siti' is the subject."
    ],
    "params": {
     "key": "txf-116",
@@ -626,38 +587,77 @@
    }
   },
   {
-   "id": "enggram-3a188dcf9f",
+   "id": "enggram-afee42fa18",
    "topic": "eng-gram-terms",
-   "level": "competent",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "What type of sentence is 'If I were you, I would apologise.'?",
+   "stem": "In 'The new librarian smiled at the pupils.', what is the subject?",
    "options": [
-    "a conditional sentence",
-    "a command",
-    "a passive sentence",
-    "a question"
+    "At the pupils",
+    "The new librarian",
+    "The pupils",
+    "Smiled"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "wrong_role",
+     "why": "'at the pupils' is a phrase that tells who was smiled at, not who smiled"
+    },
+    null,
+    {
+     "tag": "wrong_role",
+     "why": "'the pupils' come after the preposition 'at', so they are not the subject"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'smiled' is the verb, the action itself"
+    }
+   ],
+   "solution": [
+    "'The new librarian' is the one who smiled, so it is the subject."
+   ],
+   "params": {
+    "key": "txf-117",
+    "subtopic": "eng-gram-terms-meta"
+   }
+  },
+  {
+   "id": "enggram-3a188dcf9f",
+   "topic": "eng-gram-terms",
+   "level": "basic",
+   "template": "eng-pat-grammar-mcq",
+   "outcomes": [
+    "eng-gram-terms-meta-1"
+   ],
+   "stem": "In 'The girl bought a drink at the canteen.', what is the object?",
+   "options": [
+    "A drink",
+    "Bought",
+    "The girl",
+    "At the canteen"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not order someone to do something"
+     "tag": "wrong_role",
+     "why": "'bought' is the verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "the subject does the action, so it is not passive"
+     "tag": "wrong_role",
+     "why": "'The girl' does the buying, so it is the subject"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not ask anything"
+     "tag": "wrong_role",
+     "why": "'at the canteen' tells where, so it is a phrase beginning with a preposition and not the object"
     }
    ],
    "solution": [
-    "It says what would happen under an imagined condition, so it is conditional."
+    "The girl bought 'a drink', so 'a drink' is the object."
    ],
    "params": {
     "key": "txf-118",
@@ -667,36 +667,36 @@
   {
    "id": "enggram-82bb3eabe9",
    "topic": "eng-gram-terms",
-   "level": "competent",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which word is a modal verb in 'You should wear a helmet when you cycle.'?",
+   "stem": "In 'Dad is repairing the bicycle carefully.', what is the object?",
    "options": [
-    "should",
-    "cycle",
-    "wear",
-    "helmet"
+    "Is repairing",
+    "Carefully",
+    "Dad",
+    "The bicycle"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'cycle' is a main verb"
+     "tag": "wrong_role",
+     "why": "'is repairing' is the verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'wear' is a main verb"
+     "tag": "wrong_role",
+     "why": "'carefully' tells how, so it is an adverb and not the object"
     },
     {
-     "tag": "wrong_term",
-     "why": "'helmet' is a noun"
-    }
+     "tag": "wrong_role",
+     "why": "'Dad' does the repairing, so he is the subject"
+    },
+    null
    ],
    "solution": [
-    "'should' is a helping verb that shows advice, so it is a modal verb."
+    "Dad is repairing 'the bicycle', so 'the bicycle' is the object."
    ],
    "params": {
     "key": "txf-119",
@@ -706,36 +706,36 @@
   {
    "id": "enggram-e9d459bcb1",
    "topic": "eng-gram-terms",
-   "level": "competent",
+   "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'Neither the teacher nor the pupils were ready.', what type of word is 'nor'?",
+   "stem": "Which word is the plural form of the noun 'box'?",
    "options": [
-    "a conjunction",
-    "a preposition",
-    "an adverb",
-    "a pronoun"
+    "boxs",
+    "boxies",
+    "box's",
+    "boxes"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'nor' does not show place or time before a noun"
+     "tag": "wrong_form",
+     "why": "nouns ending in -x add -es, not just -s"
     },
     {
-     "tag": "wrong_term",
-     "why": "'nor' links two nouns and does not describe a verb"
+     "tag": "wrong_form",
+     "why": "'-ies' is used only for nouns ending in a consonant plus -y"
     },
     {
-     "tag": "wrong_term",
-     "why": "'nor' does not stand in for a noun"
-    }
+     "tag": "wrong_form",
+     "why": "'box's' shows that something belongs to the box; it is not a plural"
+    },
+    null
    ],
    "solution": [
-    "'nor' joins 'the teacher' and 'the pupils', so it is a conjunction."
+    "There are two 'boxes' on the shelf: a noun ending in -x adds -es."
    ],
    "params": {
     "key": "txf-120",
@@ -745,78 +745,39 @@
   {
    "id": "enggram-3015fa2ff0",
    "topic": "eng-gram-terms",
-   "level": "competent",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-terms-meta-1"
-   ],
-   "stem": "Which of these is a complex sentence?",
-   "options": [
-    "The match was cancelled.",
-    "It rained heavily and the field flooded.",
-    "It rained, and the match was cancelled.",
-    "Because it rained, the match was cancelled."
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "this has one clause, so it is simple"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this joins two equal clauses, so it is compound"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this joins two equal clauses, so it is compound"
-    },
-    null
-   ],
-   "solution": [
-    "It has a main clause and a clause beginning with 'Because', so it is complex."
-   ],
-   "params": {
-    "key": "txf-121",
-    "subtopic": "eng-gram-terms-meta"
-   }
-  },
-  {
-   "id": "enggram-3afbcd6469",
-   "topic": "eng-gram-terms",
    "level": "basic",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The brown dog barked loudly.', which word is an adjective?",
+   "stem": "Which word is the plural form of the noun 'child'?",
    "options": [
-    "brown",
-    "barked",
-    "loudly",
-    "dog"
+    "childrens",
+    "childen",
+    "childs",
+    "children"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'barked' is a verb, not an adjective"
+     "tag": "wrong_form",
+     "why": "'children' is already plural; adding -s is wrong"
     },
     {
-     "tag": "wrong_term",
-     "why": "'loudly' is an adverb, not an adjective"
+     "tag": "wrong_form",
+     "why": "this is a misspelling of 'children'"
     },
     {
-     "tag": "wrong_term",
-     "why": "'dog' is a noun, not an adjective"
-    }
+     "tag": "wrong_form",
+     "why": "'child' has an irregular plural, so adding -s is wrong"
+    },
+    null
    ],
    "solution": [
-    "'brown' is an adjective in this sentence."
+    "'The children lined up' uses 'children', the irregular plural of 'child'."
    ],
    "params": {
-    "key": "txf-122",
+    "key": "txf-121",
     "subtopic": "eng-gram-terms-meta"
    }
   },
@@ -828,31 +789,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The girl sang happily.', which word is a noun?",
+   "stem": "Which sentence is in the past tense?",
    "options": [
-    "'sang'",
-    "'happily'",
-    "'girl'",
-    "'The'"
+    "We will clean the classroom after school.",
+    "We cleaned the classroom after school.",
+    "We are cleaning the classroom after school.",
+    "We clean the classroom after school."
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'sang' is a verb, not a noun"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'happily' is an adverb, not a noun"
+     "tag": "wrong_tense",
+     "why": "'will clean' is the future tense"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'The' is an article, not a noun"
+     "tag": "wrong_tense",
+     "why": "'are cleaning' is the present continuous tense"
+    },
+    {
+     "tag": "wrong_tense",
+     "why": "'clean' is the present tense"
     }
    ],
    "solution": [
-    "'girl' is a noun in this sentence."
+    "'We cleaned the classroom after school.' uses 'cleaned', the past tense."
    ],
    "params": {
     "key": "txf-123",
@@ -867,31 +828,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Siti draws beautiful pictures.', which word is a verb?",
+   "stem": "Which sentence is in the future tense?",
    "options": [
-    "'beautiful'",
-    "'Siti'",
-    "'pictures'",
-    "'draws'"
+    "Our class visits the museum every year.",
+    "Our class visited the museum last week.",
+    "Our class will visit the museum next week.",
+    "Our class has visited the museum before."
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'beautiful' is an adjective, not a verb"
+     "tag": "wrong_tense",
+     "why": "'visits' is the present tense"
     },
     {
-     "tag": "wrong_term",
-     "why": "'Siti' is a noun, not a verb"
+     "tag": "wrong_tense",
+     "why": "'visited' is the past tense"
     },
+    null,
     {
-     "tag": "wrong_term",
-     "why": "'pictures' is a noun, not a verb"
-    },
-    null
+     "tag": "wrong_tense",
+     "why": "'has visited' is the present perfect tense"
+    }
    ],
    "solution": [
-    "'draws' is a verb in this sentence."
+    "'Our class will visit the museum next week.' uses 'will visit', the future tense."
    ],
    "params": {
     "key": "txf-124",
@@ -906,31 +867,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The old man walked slowly home.', which word is an adverb?",
+   "stem": "Which sentence has its verb in the present tense?",
    "options": [
-    "old",
-    "slowly",
-    "walked",
-    "man"
+    "Mei Ling walks to school every day.",
+    "Mei Ling was walking to school.",
+    "Mei Ling will walk to school tomorrow.",
+    "Mei Ling walked to school yesterday."
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'old' is an adjective, not an adverb"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'walked' is a verb, not an adverb"
+     "tag": "wrong_tense",
+     "why": "'was walking' is the past continuous tense"
     },
     {
-     "tag": "wrong_term",
-     "why": "'man' is a noun, not an adverb"
+     "tag": "wrong_tense",
+     "why": "'will walk' is the future tense"
+    },
+    {
+     "tag": "wrong_tense",
+     "why": "'walked' is the past tense"
     }
    ],
    "solution": [
-    "'slowly' is an adverb in this sentence."
+    "'Mei Ling walks to school every day.' uses 'walks', the present tense."
    ],
    "params": {
     "key": "txf-125",
@@ -945,31 +906,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Aunty Lily gave her a gift.', which word is a pronoun?",
+   "stem": "Which word is the comparative form of the adjective 'tall'?",
    "options": [
-    "'gave'",
-    "'gift'",
-    "'Lily'",
-    "'her'"
+    "more tall",
+    "tallish",
+    "tallest",
+    "taller"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'gave' is a verb, not a pronoun"
+     "tag": "wrong_form",
+     "why": "short adjectives like 'tall' add -er instead of using 'more'"
     },
     {
-     "tag": "wrong_term",
-     "why": "'gift' is a noun, not a pronoun"
+     "tag": "wrong_form",
+     "why": "'tallish' means rather tall; it does not compare two things"
     },
     {
-     "tag": "wrong_term",
-     "why": "'Lily' is a noun, not a pronoun"
+     "tag": "wrong_form",
+     "why": "'tallest' is the superlative form"
     },
     null
    ],
    "solution": [
-    "'her' is a pronoun in this sentence."
+    "'My brother is taller than I am.' compares two people, so 'taller' is the comparative."
    ],
    "params": {
     "key": "txf-126",
@@ -984,31 +945,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The cat hid under the sofa.', which word is a preposition?",
+   "stem": "Which word is the superlative form of the adjective 'good'?",
    "options": [
-    "cat",
-    "hid",
-    "under",
-    "sofa"
+    "better",
+    "goodest",
+    "most good",
+    "best"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'cat' is a noun, not a preposition"
+     "tag": "wrong_form",
+     "why": "'better' is the comparative form"
     },
     {
-     "tag": "wrong_term",
-     "why": "'hid' is a verb, not a preposition"
+     "tag": "wrong_form",
+     "why": "'good' has an irregular superlative, so adding -est is wrong"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'sofa' is a noun, not a preposition"
-    }
+     "tag": "wrong_form",
+     "why": "'good' has an irregular superlative, so 'most' is wrong"
+    },
+    null
    ],
    "solution": [
-    "'under' is a preposition in this sentence."
+    "'Ali is the best player in the team.' compares him with all the others, so 'best' is the superlative."
    ],
    "params": {
     "key": "txf-127",
@@ -1023,31 +984,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Mei Ling likes tea and Ravi likes juice.', which word is a conjunction?",
+   "stem": "In 'The brave firefighter rescued the kitten.', which word is an adjective?",
    "options": [
-    "juice",
-    "tea",
-    "likes",
-    "and"
+    "brave",
+    "kitten",
+    "rescued",
+    "firefighter"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
-     "tag": "wrong_term",
-     "why": "'juice' is a noun, not a conjunction"
+     "tag": "wrong_class",
+     "why": "'kitten' names an animal, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'tea' is a noun, not a conjunction"
+     "tag": "wrong_class",
+     "why": "'rescued' is an action, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'likes' is a verb, not a conjunction"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "'firefighter' names a person, so it is a noun"
+    }
    ],
    "solution": [
-    "'and' is a conjunction in this sentence."
+    "'brave' describes the noun 'firefighter', so it is an adjective."
    ],
    "params": {
     "key": "txf-128",
@@ -1057,36 +1018,36 @@
   {
    "id": "enggram-5ea13e364e",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'A bird sang loudly.', which word is an article?",
+   "stem": "Which sentence uses 'home' as an adverb?",
    "options": [
-    "'sang'",
-    "'bird'",
-    "'loudly'",
-    "'A'"
+    "Ali drew a picture of his home.",
+    "Mei Ling walked home after school.",
+    "They bought a new home last year.",
+    "Her home is near the MRT station in Bishan."
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'sang' is a verb, not an article"
+     "tag": "wrong_class",
+     "why": "here 'home' follows 'of his' and names a place, so it is a noun"
+    },
+    null,
+    {
+     "tag": "wrong_class",
+     "why": "here 'home' is the thing bought, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'bird' is a noun, not an article"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'loudly' is an adverb, not an article"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "here 'home' names a place, so it is a noun"
+    }
    ],
    "solution": [
-    "'A' is an article in this sentence."
+    "In 'Mei Ling walked home after school.', 'home' tells where she walked, so it is an adverb."
    ],
    "params": {
     "key": "txf-129",
@@ -1096,36 +1057,36 @@
   {
    "id": "enggram-775a84bba1",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'We flew to Penang last week.', which word is a proper noun?",
+   "stem": "In which sentence is 'fast' an adjective?",
    "options": [
-    "'flew'",
-    "'Penang'",
-    "'week'",
-    "'last'"
+    "Ben is a fast swimmer.",
+    "Ben swims fast.",
+    "Ben pedalled fast down the slope.",
+    "Ben ran fast to catch the bus."
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'flew' is a verb, not a proper noun"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'week' is a common noun, not a proper noun"
+     "tag": "wrong_class",
+     "why": "'fast' tells how Ben swims, so it is an adverb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'last' is an adjective, not a proper noun"
+     "tag": "wrong_class",
+     "why": "'fast' tells how Ben pedalled, so it is an adverb"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'fast' tells how Ben ran, so it is an adverb"
     }
    ],
    "solution": [
-    "'Penang' is a proper noun in this sentence."
+    "In 'Ben is a fast swimmer.', 'fast' describes the noun 'swimmer', so it is an adjective."
    ],
    "params": {
     "key": "txf-130",
@@ -1135,36 +1096,36 @@
   {
    "id": "enggram-e28c995017",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which word shows the sentence 'We visited the zoo.' is in the past tense?",
+   "stem": "Which sentence uses 'well' as an adverb?",
    "options": [
-    "'We'",
-    "'visited'",
-    "'the'",
-    "'zoo'"
+    "We drew some water from the old well.",
+    "Mei sings well in the school choir.",
+    "Grandma is not well today.",
+    "The water in the well is deep."
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'We' is a pronoun and does not show tense"
+     "tag": "wrong_class",
+     "why": "here 'well' names a thing, so it is a noun"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'the' is an article and does not show tense"
+     "tag": "wrong_class",
+     "why": "here 'well' describes Grandma's health, so it is an adjective"
     },
     {
-     "tag": "wrong_term",
-     "why": "'zoo' is a noun and does not show tense"
+     "tag": "wrong_class",
+     "why": "here 'well' names a thing, so it is a noun"
     }
    ],
    "solution": [
-    "The verb 'visited' is a past form."
+    "In 'Mei sings well in the school choir.', 'well' tells how she sings, so it is an adverb."
    ],
    "params": {
     "key": "txf-131",
@@ -1174,36 +1135,36 @@
   {
    "id": "enggram-086199306a",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which type of sentence is 'Close the door.'?",
+   "stem": "Which sentence uses 'hard' as an adverb?",
    "options": [
-    "an exclamation",
-    "a statement",
-    "a command",
-    "a question"
+    "The team trained hard for the finals.",
+    "It was a hard exam for most pupils.",
+    "Sam found the Maths paper hard.",
+    "The wooden bench at the park was hard and cold."
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "it does not show strong feeling"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "it does not tell a fact"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not ask anything"
+     "tag": "wrong_class",
+     "why": "'hard' describes the noun 'exam', so it is an adjective"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'hard' describes the noun 'paper', so it is an adjective"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'hard' describes the noun 'bench', so it is an adjective"
     }
    ],
    "solution": [
-    "It tells someone to do something, so it is a command."
+    "In 'The team trained hard for the finals.', 'hard' tells how they trained, so it is an adverb."
    ],
    "params": {
     "key": "txf-132",
@@ -1211,77 +1172,38 @@
    }
   },
   {
-   "id": "enggram-cc4c5efcb5",
-   "topic": "eng-gram-terms",
-   "level": "basic",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-terms-meta-1"
-   ],
-   "stem": "Which type of sentence is 'What time does the bus leave?'?",
-   "options": [
-    "a statement",
-    "a command",
-    "an exclamation",
-    "a question"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "it does not tell a fact"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "it does not order anyone to do something"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "it does not show strong feeling"
-    },
-    null
-   ],
-   "solution": [
-    "It asks for information, so it is a question."
-   ],
-   "params": {
-    "key": "txf-133",
-    "subtopic": "eng-gram-terms-meta"
-   }
-  },
-  {
    "id": "enggram-67448d74f1",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which type of sentence is 'The sea is calm today.'?",
+   "stem": "In 'The girl who won the race is my cousin.', what is the word 'who'?",
    "options": [
-    "a statement",
-    "a question",
-    "a command",
-    "an exclamation"
+    "a preposition",
+    "a relative pronoun",
+    "an adverb",
+    "a main verb"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "wrong_class",
+     "why": "'who' does not link a noun to another word to show place or time"
+    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not ask anything"
+     "tag": "wrong_class",
+     "why": "'who' stands for a person, 'the girl', so it is not an adverb"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not order anyone to do something"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "it does not show strong feeling"
+     "tag": "wrong_class",
+     "why": "'who' is not an action word"
     }
    ],
    "solution": [
-    "It tells a fact, so it is a statement."
+    "'who' stands for 'the girl' and joins the clause 'who won the race' to her, so it is a relative pronoun."
    ],
    "params": {
     "key": "txf-134",
@@ -1291,36 +1213,36 @@
   {
    "id": "enggram-b7a4b1ee7c",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which type of sentence is 'How lovely this garden is!'?",
+   "stem": "Which word is the past participle of the verb 'write' in 'Sam has ___ to his pen pal.'?",
    "options": [
-    "an exclamation",
-    "a command",
-    "a statement",
-    "a question"
+    "written",
+    "writing",
+    "writes",
+    "wrote"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not order anyone to do something"
+     "tag": "wrong_form",
+     "why": "'writing' is the -ing form"
     },
     {
-     "tag": "wrong_term",
-     "why": "it shows strong feeling, which a plain statement does not"
+     "tag": "wrong_form",
+     "why": "'writes' is the present tense"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not ask anything"
+     "tag": "wrong_form",
+     "why": "'wrote' is the simple past tense and does not follow 'has'"
     }
    ],
    "solution": [
-    "It shows strong feeling, so it is an exclamation."
+    "'Sam has written to his pen pal.' needs the past participle after 'has'."
    ],
    "params": {
     "key": "txf-135",
@@ -1330,36 +1252,36 @@
   {
    "id": "enggram-d2ba32afd0",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which punctuation mark ends a question?",
+   "stem": "Which word is the past participle of the verb 'eat' in 'The children have ___ all the cake.'?",
    "options": [
-    "a comma",
-    "an exclamation mark",
-    "a question mark",
-    "a full stop"
+    "eating",
+    "eated",
+    "eaten",
+    "ate"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "a comma separates parts of a sentence"
+     "tag": "wrong_form",
+     "why": "'eating' is the -ing form"
     },
     {
-     "tag": "wrong_term",
-     "why": "an exclamation mark shows strong feeling"
+     "tag": "wrong_form",
+     "why": "'eat' is irregular, so adding -ed is wrong"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "a full stop ends a statement"
+     "tag": "wrong_form",
+     "why": "'ate' is the simple past tense and does not follow 'have'"
     }
    ],
    "solution": [
-    "A question ends with a question mark."
+    "'The children have eaten all the cake.' needs the past participle after 'have'."
    ],
    "params": {
     "key": "txf-136",
@@ -1367,77 +1289,38 @@
    }
   },
   {
-   "id": "enggram-b277d40f30",
-   "topic": "eng-gram-terms",
-   "level": "basic",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-terms-meta-1"
-   ],
-   "stem": "Which tense is 'I will visit my cousin tomorrow.'?",
-   "options": [
-    "simple present tense",
-    "simple future tense",
-    "present perfect tense",
-    "simple past tense"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'will' shows the action has not yet happened"
-    },
-    null,
-    {
-     "tag": "wrong_term",
-     "why": "there is no 'have' or 'has' with a past form"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'will' and 'tomorrow' look ahead"
-    }
-   ],
-   "solution": [
-    "'will' shows the action is yet to happen."
-   ],
-   "params": {
-    "key": "txf-137",
-    "subtopic": "eng-gram-terms-meta"
-   }
-  },
-  {
    "id": "enggram-57a88bbf89",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is 'The sun rises in the east.'?",
+   "stem": "Which word is the simple past tense of 'swim' in 'Yesterday, Lina ___ twenty laps.'?",
    "options": [
-    "simple past tense",
-    "past continuous tense",
-    "simple present tense",
-    "simple future tense"
+    "swum",
+    "swimming",
+    "swimmed",
+    "swam"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'rises' is not a past form"
+     "tag": "wrong_form",
+     "why": "'swum' is the past participle and is used after 'have' or 'had'"
     },
     {
-     "tag": "wrong_term",
-     "why": "there is no 'was' or 'were' with an '-ing' verb"
+     "tag": "wrong_form",
+     "why": "'swimming' is the -ing form and cannot be used alone here"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "there is no 'will'"
-    }
+     "tag": "wrong_form",
+     "why": "'swim' is irregular, so adding -ed is wrong"
+    },
+    null
    ],
    "solution": [
-    "It states a fact that is always true."
+    "'Yesterday, Lina swam twenty laps.' needs the simple past tense."
    ],
    "params": {
     "key": "txf-138",
@@ -1447,36 +1330,36 @@
   {
    "id": "enggram-2677d14836",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is 'Dad is washing the car.'?",
+   "stem": "Which sentence is in the present perfect tense?",
    "options": [
-    "simple present tense",
-    "present continuous tense",
-    "simple past tense",
-    "simple future tense"
+    "Rina finished her homework.",
+    "Rina is finishing her homework.",
+    "Rina has finished her homework.",
+    "Rina will finish her homework."
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'is washing' shows an action in progress"
+     "tag": "wrong_tense",
+     "why": "'finished' is the simple past tense"
+    },
+    {
+     "tag": "wrong_tense",
+     "why": "'is finishing' is the present continuous tense"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'is' is present, not past"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "there is no 'will'"
+     "tag": "wrong_tense",
+     "why": "'will finish' is the future tense"
     }
    ],
    "solution": [
-    "'is' with 'washing' shows an action in progress now."
+    "'Rina has finished her homework.' uses 'has' plus the past participle, so it is the present perfect."
    ],
    "params": {
     "key": "txf-139",
@@ -1486,36 +1369,36 @@
   {
    "id": "enggram-2554788670",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'She spoke softly.', what kind of word is 'softly'?",
+   "stem": "Which sentence uses the past continuous tense?",
    "options": [
-    "a verb",
-    "a noun",
-    "an adjective",
-    "an adverb"
+    "I am reading a comic now.",
+    "I have read the comic twice.",
+    "I read a comic before the lights went out.",
+    "I was reading a comic when the lights went out."
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'softly' is not an action"
+     "tag": "wrong_tense",
+     "why": "'am reading' is the present continuous tense"
     },
     {
-     "tag": "wrong_term",
-     "why": "'softly' does not name anything"
+     "tag": "wrong_tense",
+     "why": "'have read' is the present perfect tense"
     },
     {
-     "tag": "wrong_term",
-     "why": "'softly' describes the verb 'spoke', not a noun"
+     "tag": "wrong_tense",
+     "why": "'read' is the simple past tense"
     },
     null
    ],
    "solution": [
-    "'softly' tells how she spoke."
+    "'was reading' in 'I was reading a comic when the lights went out.' is the past continuous."
    ],
    "params": {
     "key": "txf-140",
@@ -1525,36 +1408,36 @@
   {
    "id": "enggram-be412daaad",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Kids love playgrounds.', what kind of word is 'playgrounds'?",
+   "stem": "Which sentence is in the passive voice?",
    "options": [
-    "a noun",
-    "a verb",
-    "an adjective",
-    "an adverb"
+    "The window was broken by the ball.",
+    "The ball broke the window.",
+    "Jun Wei kicked the ball across the field.",
+    "The boys are playing football."
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "'love' is the verb"
+     "tag": "wrong_voice",
+     "why": "the subject 'The ball' does the action, so it is active"
     },
     {
-     "tag": "wrong_term",
-     "why": "'playgrounds' does not describe a noun"
+     "tag": "wrong_voice",
+     "why": "the subject 'Jun Wei' does the action, so it is active"
     },
     {
-     "tag": "wrong_term",
-     "why": "'playgrounds' does not describe a verb"
+     "tag": "wrong_voice",
+     "why": "the subject 'The boys' does the action, so it is active"
     }
    ],
    "solution": [
-    "'playgrounds' names places, so it is a noun."
+    "In 'The window was broken by the ball.', the subject receives the action, so it is passive."
    ],
    "params": {
     "key": "txf-141",
@@ -1564,36 +1447,36 @@
   {
    "id": "enggram-9c6cb30a3a",
    "topic": "eng-gram-terms",
-   "level": "basic",
+   "level": "intermediate",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The little girl smiled shyly.', which word is an adjective?",
+   "stem": "Which sentence is in the active voice?",
    "options": [
-    "shyly",
-    "smiled",
-    "little",
-    "girl"
+    "The papers are being collected.",
+    "Mrs Tan marked our test papers.",
+    "The papers have been returned.",
+    "Our test papers were marked by Mrs Tan."
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'shyly' is an adverb, not an adjective"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'smiled' is a verb, not an adjective"
+     "tag": "wrong_voice",
+     "why": "the subject 'papers' receives the action, so it is passive"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'girl' is a noun, not an adjective"
+     "tag": "wrong_voice",
+     "why": "the subject 'papers' receives the action, so it is passive"
+    },
+    {
+     "tag": "wrong_voice",
+     "why": "the subject 'papers' receives the action, so it is passive"
     }
    ],
    "solution": [
-    "'little' describes the noun 'girl'."
+    "In 'Mrs Tan marked our test papers.', the subject 'Mrs Tan' does the action, so it is active."
    ],
    "params": {
     "key": "txf-142",
@@ -1608,31 +1491,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is 'was reading' in 'Mei Ling was reading when the phone rang.'?",
+   "stem": "Which sentence is the passive form of 'The cook baked the cake.'?",
    "options": [
-    "past perfect tense",
-    "past continuous tense",
-    "present continuous tense",
-    "simple past tense"
+    "The cake was baked by the cook.",
+    "The cake baked by the cook.",
+    "The cook was baked by the cake.",
+    "The cake is baked by the cook."
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "the past perfect uses 'had'"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'was' is past, not present"
+     "tag": "wrong_voice",
+     "why": "this has no verb to go with 'The cake', so it is not a complete sentence"
     },
     {
-     "tag": "wrong_term",
-     "why": "'was reading' is more than a simple past form"
+     "tag": "wrong_voice",
+     "why": "this makes the cook the one who was baked, which changes the meaning"
+    },
+    {
+     "tag": "wrong_tense",
+     "why": "this changes the past tense to the present tense"
     }
    ],
    "solution": [
-    "'was' with 'reading' shows an action in progress in the past."
+    "'The cake was baked by the cook.' keeps the past tense and the meaning."
    ],
    "params": {
     "key": "txf-143",
@@ -1647,31 +1530,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is 'had left' in 'They had left before the rain started.'?",
+   "stem": "Which word completes 'This bag is ___ than that one.' with the comparative form of 'heavy'?",
    "options": [
-    "present perfect tense",
-    "simple past tense",
-    "past perfect tense",
-    "past continuous tense"
+    "heaviest",
+    "heavyer",
+    "more heavy",
+    "heavier"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'had' is past, not present"
+     "tag": "wrong_form",
+     "why": "'heaviest' is the superlative, but 'than' needs a comparative"
     },
     {
-     "tag": "wrong_term",
-     "why": "'had left' is more than a simple past form"
+     "tag": "wrong_form",
+     "why": "adjectives ending in a consonant plus -y change the y to i before -er"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "there is no '-ing' verb"
-    }
+     "tag": "wrong_form",
+     "why": "'heavy' is a short adjective, so it takes -ier, not 'more'"
+    },
+    null
    ],
    "solution": [
-    "'had' with 'left' shows an action finished before another past action."
+    "'This bag is heavier than that one.' compares two bags."
    ],
    "params": {
     "key": "txf-144",
@@ -1686,73 +1569,34 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is 'have lived' in 'I have lived here since 2018.'?",
+   "stem": "Which phrase completes 'This is the ___ garden I have ever seen.' with the superlative form of 'beautiful'?",
    "options": [
-    "simple past tense",
-    "present continuous tense",
-    "present perfect tense",
-    "past perfect tense"
+    "more beautiful",
+    "beautifulest",
+    "most beautiful",
+    "beautifullest"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'have lived' is more than a simple past form"
+     "tag": "wrong_form",
+     "why": "'more beautiful' is the comparative, used for two things"
     },
     {
-     "tag": "wrong_term",
-     "why": "there is no '-ing' verb"
+     "tag": "wrong_form",
+     "why": "long adjectives use 'most', not -est"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "the past perfect uses 'had'"
+     "tag": "wrong_form",
+     "why": "long adjectives use 'most', not -est"
     }
    ],
    "solution": [
-    "'have' with 'lived' links the past to now."
+    "'This is the most beautiful garden I have ever seen.' compares the garden with all others."
    ],
    "params": {
     "key": "txf-145",
-    "subtopic": "eng-gram-terms-meta"
-   }
-  },
-  {
-   "id": "enggram-01aea113a5",
-   "topic": "eng-gram-terms",
-   "level": "intermediate",
-   "template": "eng-pat-grammar-mcq",
-   "outcomes": [
-    "eng-gram-terms-meta-1"
-   ],
-   "stem": "Which tense is used in 'He walks to school every day.'?",
-   "options": [
-    "simple past tense",
-    "simple future tense",
-    "present continuous tense",
-    "simple present tense"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'walks' is not a past form"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "there is no 'will'"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "there is no 'is' with an '-ing' verb"
-    },
-    null
-   ],
-   "solution": [
-    "It states a habit, so it is the simple present."
-   ],
-   "params": {
-    "key": "txf-146",
     "subtopic": "eng-gram-terms-meta"
    }
   },
@@ -1764,31 +1608,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The girls quietly entered the hall.', which word is an adverb?",
+   "stem": "In 'Her kindness touched the whole class.', what is the word 'kindness'?",
    "options": [
-    "quietly",
-    "girls",
-    "entered",
-    "hall"
+    "a verb",
+    "an adjective",
+    "an adverb",
+    "an abstract noun"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'girls' is a noun, not an adverb"
+     "tag": "wrong_class",
+     "why": "'kindness' is not an action"
     },
     {
-     "tag": "wrong_term",
-     "why": "'entered' is a verb, not an adverb"
+     "tag": "wrong_class",
+     "why": "the adjective is 'kind'; 'kindness' names a quality"
     },
     {
-     "tag": "wrong_term",
-     "why": "'hall' is a noun, not an adverb"
-    }
+     "tag": "wrong_class",
+     "why": "the adverb is 'kindly'; 'kindness' is not used to tell how"
+    },
+    null
    ],
    "solution": [
-    "'quietly' is an adverb in this sentence."
+    "'kindness' names a quality that we cannot touch, so it is an abstract noun."
    ],
    "params": {
     "key": "txf-147",
@@ -1803,31 +1647,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'She hid the present beneath her bed.', which word is a preposition?",
+   "stem": "In 'A swarm of bees flew over the playground.', which word is a collective noun?",
    "options": [
-    "hid",
-    "bed",
-    "beneath",
-    "present"
+    "flew",
+    "swarm",
+    "playground",
+    "bees"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'hid' is a verb, not a preposition"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'bed' is a noun, not a preposition"
+     "tag": "wrong_class",
+     "why": "'flew' is an action, so it is a verb"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'present' is a noun, not a preposition"
+     "tag": "wrong_class",
+     "why": "'playground' names a place, so it is a common noun"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'bees' names the insects that make up the group, so it is a plural noun, not the name of the group"
     }
    ],
    "solution": [
-    "'beneath' is a preposition in this sentence."
+    "'swarm' is the name of a group of bees, so it is a collective noun."
    ],
    "params": {
     "key": "txf-148",
@@ -1842,31 +1686,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "What is the subject of 'The smiling baby clapped her hands.'?",
+   "stem": "Which word completes 'The books on the table ___ mine.' so that the verb agrees with the subject?",
    "options": [
-    "clapped",
-    "the smiling baby",
-    "her hands",
-    "smiling"
+    "is",
+    "am",
+    "are",
+    "be"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'clapped' is the verb"
+     "tag": "wrong_form",
+     "why": "'is' is singular, but the subject 'books' is plural"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'am' goes only with 'I'"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'her hands' is the object that receives the action"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'smiling' only describes the baby"
+     "tag": "wrong_form",
+     "why": "'be' cannot stand alone as the verb here"
     }
    ],
    "solution": [
-    "The subject is the one doing the action, which is 'the smiling baby'."
+    "In 'The books on the table are mine.', the plural subject 'books' needs 'are'."
    ],
    "params": {
     "key": "txf-149",
@@ -1881,31 +1725,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "What is the object of 'Mrs Goh baked a chocolate cake.'?",
+   "stem": "Which pronoun correctly completes 'Mr Lim gave Amy and ___ some advice.'?",
    "options": [
-    "'baked'",
-    "'a chocolate cake'",
-    "'Mrs Goh'",
-    "'Mrs Goh baked'"
+    "Myself",
+    "I",
+    "Me",
+    "Mine"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'baked' is the verb"
+     "tag": "wrong_form",
+     "why": "'myself' is used only when 'I' is also the doer of the action"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'I' is a subject pronoun, but here the pronoun is the object of 'gave'"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'Mrs Goh' is the subject doing the action"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this is not a single object"
+     "tag": "wrong_form",
+     "why": "'mine' shows ownership and cannot be the object here"
     }
    ],
    "solution": [
-    "The object receives the action, which is 'a chocolate cake'."
+    "'Mr Lim gave Amy and me some advice.' needs the object pronoun 'me'."
    ],
    "params": {
     "key": "txf-150",
@@ -1920,31 +1764,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which sentence is in the active voice?",
+   "stem": "In 'That seat is mine.', what is the word 'mine'?",
    "options": [
-    "The ball is being kicked.",
-    "The ball was kicked by the boy.",
-    "The boy kicked the ball.",
-    "The ball was kicked."
+    "a possessive pronoun",
+    "a proper noun",
+    "an adverb",
+    "a past tense verb"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "this is passive"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this is passive"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "this is passive"
+     "tag": "wrong_class",
+     "why": "'mine' is not the name of a particular person or place"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'mine' does not tell how, when or where"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'mine' is not an action word here"
     }
    ],
    "solution": [
-    "The subject does the action, so the sentence is active."
+    "'mine' stands in for 'my seat' and shows ownership, so it is a possessive pronoun."
    ],
    "params": {
     "key": "txf-151",
@@ -1959,31 +1803,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which sentence is in the passive voice?",
+   "stem": "In which sentence is 'down' a preposition?",
    "options": [
-    "The storm will break the window.",
-    "The storm broke the window.",
-    "The window was broken by the storm.",
-    "The storm is breaking the window."
+    "The cat ran down the stairs.",
+    "Please sit down and wait here.",
+    "The lift went down.",
+    "He put his bag down."
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "this is active"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this is active"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "this is active"
+     "tag": "wrong_class",
+     "why": "'down' is not followed by a noun, so it is an adverb"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'down' is not followed by a noun, so it is an adverb"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'down' is not followed by a noun, so it is an adverb"
     }
    ],
    "solution": [
-    "The subject receives the action, so the sentence is passive."
+    "In 'The cat ran down the stairs.', 'down' is followed by 'the stairs' and shows direction, so it is a preposition."
    ],
    "params": {
     "key": "txf-152",
@@ -1998,31 +1842,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'Ravi is the tallest boy in his class.', what kind of word is 'tallest'?",
+   "stem": "In which sentence is 'run' a noun?",
    "options": [
-    "a superlative adjective",
-    "an adverb",
-    "a comparative adjective",
-    "a noun"
+    "Dad goes for a run every morning.",
+    "They run a stall at the fair.",
+    "I run to school with my brother every day.",
+    "Please run to the office."
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "'tallest' describes a noun, not a verb"
+     "tag": "wrong_class",
+     "why": "'run' means 'manage' here, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "a comparative would be 'taller' and compare two"
+     "tag": "wrong_class",
+     "why": "'run' is the action the speaker does, so it is a verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'tallest' describes and does not name"
+     "tag": "wrong_class",
+     "why": "'run' is the action being asked for, so it is a verb"
     }
    ],
    "solution": [
-    "'tallest' compares one boy with all the others."
+    "In 'Dad goes for a run every morning.', 'run' follows 'a' and names an activity, so it is a noun."
    ],
    "params": {
     "key": "txf-153",
@@ -2037,31 +1881,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'A flock of birds flew over the field.', which word is a collective noun?",
+   "stem": "In 'You must wear your badge in school.', what is the word 'must'?",
    "options": [
-    "flock",
-    "field",
-    "flew",
-    "birds"
+    "a main verb",
+    "a preposition",
+    "an adjective",
+    "a modal verb"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'field' is a common noun, not a collective noun"
+     "tag": "wrong_class",
+     "why": "the main verb is 'wear'; 'must' only helps it"
     },
     {
-     "tag": "wrong_term",
-     "why": "'flew' is a verb, not a collective noun"
+     "tag": "wrong_class",
+     "why": "'must' does not link a noun to another word"
     },
     {
-     "tag": "wrong_term",
-     "why": "'birds' is a plural noun, not a collective noun"
-    }
+     "tag": "wrong_class",
+     "why": "'must' does not describe a noun"
+    },
+    null
    ],
    "solution": [
-    "'flock' is a collective noun in this sentence."
+    "'must' helps the main verb 'wear' show that something is necessary, so it is a modal verb."
    ],
    "params": {
     "key": "txf-154",
@@ -2076,31 +1920,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The red umbrella is hers.', which word is a possessive pronoun?",
+   "stem": "Which group of words is a phrase and not a clause?",
    "options": [
-    "umbrella",
-    "is",
-    "hers",
-    "red"
+    "After the long recess",
+    "Ali waited patiently",
+    "Pupils lined up quickly",
+    "The bell rang loudly"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'umbrella' is a noun, not a possessive pronoun"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'is' is a verb, not a possessive pronoun"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'red' is an adjective, not a possessive pronoun"
+     "tag": "wrong_role",
+     "why": "this has a subject, 'Ali', and a verb, 'waited', so it is a clause"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "this has a subject, 'pupils', and a verb, 'lined up', so it is a clause"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "this has a subject, 'the bell', and a verb, 'rang', so it is a clause"
     }
    ],
    "solution": [
-    "'hers' is a possessive pronoun in this sentence."
+    "'after the long recess' has no subject and verb, so it is a phrase."
    ],
    "params": {
     "key": "txf-155",
@@ -2115,31 +1959,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'Wow! That was amazing!', what kind of word is 'Wow'?",
+   "stem": "Which sentence uses the past perfect tense?",
    "options": [
-    "an interjection",
-    "a conjunction",
-    "a preposition",
-    "an adverb"
+    "I have finished my lunch.",
+    "I was finishing my lunch.",
+    "I had finished my lunch before the bell rang.",
+    "I finished my lunch quickly."
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_tense",
+     "why": "'have finished' is the present perfect tense"
+    },
+    {
+     "tag": "wrong_tense",
+     "why": "'was finishing' is the past continuous tense"
+    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'Wow' does not join anything"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'Wow' does not show place or time"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'Wow' does not describe a verb"
+     "tag": "wrong_tense",
+     "why": "'finished' is the simple past tense"
     }
    ],
    "solution": [
-    "'Wow' shows sudden feeling, so it is an interjection."
+    "'had finished' in 'I had finished my lunch before the bell rang.' is the past perfect."
    ],
    "params": {
     "key": "txf-156",
@@ -2149,36 +1993,36 @@
   {
    "id": "enggram-7cf54b1147",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'She finished her work quickly.', what kind of adverb is 'quickly'?",
+   "stem": "Which conjunction best joins the clauses in 'Ali studied hard every night, ___ he did not pass the test.'?",
    "options": [
-    "an adverb of time",
-    "an adjective",
-    "an adverb of manner",
-    "an adverb of place"
+    "because",
+    "if",
+    "so",
+    "but"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "it does not tell when"
+     "tag": "wrong_role",
+     "why": "'because' gives a reason, but not passing is not the reason for studying"
     },
     {
-     "tag": "wrong_term",
-     "why": "it describes the verb, not a noun"
+     "tag": "wrong_role",
+     "why": "'if' gives a condition, which does not fit a fact that already happened"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "it does not tell where"
-    }
+     "tag": "wrong_role",
+     "why": "'so' shows a result, but not passing is the opposite of what we expect"
+    },
+    null
    ],
    "solution": [
-    "'quickly' tells how she finished."
+    "'but' shows the contrast between studying hard and not passing."
    ],
    "params": {
     "key": "txf-157",
@@ -2188,36 +2032,36 @@
   {
    "id": "enggram-210fe4fa56",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'We visited the museum yesterday.', what kind of word is 'yesterday'?",
+   "stem": "Which conjunction best joins the clauses in 'The match was cancelled ___ it rained heavily.'?",
    "options": [
-    "an adverb of manner",
-    "an adjective",
-    "an adverb of time",
-    "an adverb of place"
+    "although",
+    "until",
+    "unless",
+    "because"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "it does not tell how"
+     "tag": "wrong_role",
+     "why": "'although' shows a contrast, but the rain is the reason for the cancellation"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not describe a noun"
+     "tag": "wrong_role",
+     "why": "'until' shows time up to a point, which does not give a reason"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "it does not tell where"
-    }
+     "tag": "wrong_role",
+     "why": "'unless' gives a condition that is not met, which does not fit a past fact"
+    },
+    null
    ],
    "solution": [
-    "'yesterday' tells when they visited."
+    "'because' gives the reason why the match was cancelled."
    ],
    "params": {
     "key": "txf-158",
@@ -2227,36 +2071,36 @@
   {
    "id": "enggram-c0dd41d3d6",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'He is afraid of the dark.', what kind of word is 'afraid'?",
+   "stem": "In 'We will go to the park if it stops raining.', which word joins the two clauses?",
    "options": [
-    "a verb",
-    "a preposition",
-    "an adjective",
-    "an adverb"
+    "to",
+    "stops",
+    "if",
+    "will"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'afraid' is not an action"
+     "tag": "wrong_role",
+     "why": "'to' is a preposition that links 'go' to 'the park'"
     },
     {
-     "tag": "wrong_term",
-     "why": "'of' is the preposition, not 'afraid'"
+     "tag": "wrong_role",
+     "why": "'stops' is the verb in the second clause"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'afraid' describes 'He', not a verb"
+     "tag": "wrong_role",
+     "why": "'will' is a helping verb in the first clause"
     }
    ],
    "solution": [
-    "'afraid' describes how he feels."
+    "'if' joins 'We will go to the park' and 'it stops raining'."
    ],
    "params": {
     "key": "txf-159",
@@ -2266,36 +2110,36 @@
   {
    "id": "enggram-ce228eea31",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which type of sentence is 'Please pass me the salt.'?",
+   "stem": "In which sentence is 'that' a conjunction?",
    "options": [
-    "a command",
-    "a statement",
-    "an exclamation",
-    "a question"
+    "I do not want that.",
+    "Mum said that dinner was ready.",
+    "The book that I borrowed is overdue.",
+    "That bag is mine."
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "wrong_class",
+     "why": "'that' stands in for a thing, so it is a pronoun"
+    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not tell a fact"
+     "tag": "wrong_class",
+     "why": "'that' refers back to 'the book', so it is a relative pronoun"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not show strong feeling"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "it does not ask for information"
+     "tag": "wrong_class",
+     "why": "'That' points to the noun 'bag'"
     }
    ],
    "solution": [
-    "It tells someone to do something, so it is a command."
+    "In 'Mum said that dinner was ready.', 'that' joins 'Mum said' to 'dinner was ready', so it is a conjunction."
    ],
    "params": {
     "key": "txf-160",
@@ -2305,36 +2149,36 @@
   {
    "id": "enggram-31113c6410",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'Don't touch the wet paint.', what is 'Don't' short for?",
+   "stem": "In which sentence is 'before' a conjunction?",
    "options": [
-    "does not",
-    "did not",
-    "do not",
-    "will not"
+    "Please finish your work before the bell rings.",
+    "Please finish your work before recess.",
+    "Wash up before dinner.",
+    "I have never been here before."
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'does' goes with 'he', 'she' or 'it'"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'did' is past tense"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'will' is future"
+     "tag": "wrong_class",
+     "why": "'before' is followed by the noun 'recess', so it is a preposition"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'before' is followed by the noun 'dinner', so it is a preposition"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'before' tells when and is followed by no clause, so it is an adverb"
     }
    ],
    "solution": [
-    "The apostrophe replaces the 'o' in 'do not'."
+    "In 'Please finish your work before the bell rings.', 'before' joins two clauses, so it is a conjunction."
    ],
    "params": {
     "key": "txf-161",
@@ -2344,36 +2188,36 @@
   {
    "id": "enggram-785f928527",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "What does the apostrophe show in 'It's raining.'?",
+   "stem": "In which sentence is 'since' a preposition?",
    "options": [
-    "a shortened form of 'it is'",
-    "ownership of something by 'it'",
-    "a plural form of the word",
-    "words that someone is speaking"
+    "I have not seen him since.",
+    "Since it was late, we took a taxi.",
+    "We have lived here since 2015.",
+    "He has been ill since he came back from camp."
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_class",
+     "why": "'since' stands alone at the end, so it is an adverb"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'Since' is followed by a clause and gives a reason, so it is a conjunction"
+    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "here nothing belongs to 'it'"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "a plural does not need an apostrophe"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "speech needs speech marks"
+     "tag": "wrong_class",
+     "why": "'since' is followed by a clause, so it is a conjunction"
     }
    ],
    "solution": [
-    "'It's' is short for 'it is'."
+    "In 'We have lived here since 2015.', 'since' is followed by the noun '2015', so it is a preposition."
    ],
    "params": {
     "key": "txf-162",
@@ -2383,36 +2227,36 @@
   {
    "id": "enggram-7818229fa1",
    "topic": "eng-gram-terms",
-   "level": "intermediate",
+   "level": "competent",
    "template": "eng-pat-grammar-mcq",
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which word is a verb in 'The baby's laughter filled the room.'?",
+   "stem": "In 'The box of pencils was on the desk.', which word decides that the verb is 'was' and not 'were'?",
    "options": [
-    "room",
-    "laughter",
-    "filled",
-    "baby's"
+    "box",
+    "desk",
+    "was",
+    "pencils"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "'room' is a noun"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'laughter' is a noun"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'baby's' is a noun showing ownership"
+     "tag": "wrong_role",
+     "why": "'desk' follows the preposition 'on' and is not the subject"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'was' is the verb, not the subject"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'pencils' is plural, but it sits inside 'of pencils' and is not the head of the subject"
     }
    ],
    "solution": [
-    "'filled' is the action word."
+    "The subject is 'The box of pencils', and its main noun 'box' is singular, so the verb is 'was'."
    ],
    "params": {
     "key": "txf-163",
@@ -2427,31 +2271,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'The book that I borrowed is overdue.', which word is a relative pronoun?",
+   "stem": "In 'A group of boys was waiting at the gate.', which noun is the main word of the subject?",
    "options": [
-    "book",
-    "that",
-    "overdue",
-    "borrowed"
+    "gate",
+    "boys",
+    "group",
+    "waiting"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'book' is a noun, not a relative pronoun"
+     "tag": "wrong_role",
+     "why": "'gate' follows the preposition 'at' and is not part of the subject"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'boys' sits inside 'of boys' and only says who is in the group"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'overdue' is an adjective, not a relative pronoun"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'borrowed' is a verb, not a relative pronoun"
+     "tag": "wrong_role",
+     "why": "'waiting' is part of the verb, not a noun"
     }
    ],
    "solution": [
-    "'that' is a relative pronoun in this sentence."
+    "The main word of the subject 'A group of boys' is 'group'."
    ],
    "params": {
     "key": "txf-164",
@@ -2466,31 +2310,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'We stayed indoors because it was raining.', what does 'because it was raining' tell us?",
+   "stem": "In 'Mrs Lim gave the class a surprise quiz.', which words are the thing that was given?",
    "options": [
-    "the time",
-    "the reason",
-    "the place",
-    "the manner"
+    "A surprise quiz",
+    "The class",
+    "Mrs Lim",
+    "Gave"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "it does not tell when"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not tell where"
+     "tag": "wrong_role",
+     "why": "'the class' are the people who received it"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not tell how"
+     "tag": "wrong_role",
+     "why": "'Mrs Lim' is the subject, the one who gave"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'gave' is the verb"
     }
    ],
    "solution": [
-    "It explains why they stayed indoors."
+    "Mrs Lim gave 'a surprise quiz', so that is the object that was given."
    ],
    "params": {
     "key": "txf-165",
@@ -2505,31 +2349,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which word is a co-ordinating conjunction?",
+   "stem": "In 'The vase was knocked over by the puppy.', what is the grammatical subject?",
    "options": [
-    "although",
-    "because",
-    "unless",
-    "and"
+    "The puppy",
+    "The vase",
+    "Was knocked",
+    "Over"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'although' is a subordinating conjunction"
+     "tag": "wrong_role",
+     "why": "'the puppy' is the doer, but it comes after 'by' and is not the subject"
+    },
+    null,
+    {
+     "tag": "wrong_role",
+     "why": "'was knocked' is the verb"
     },
     {
-     "tag": "wrong_term",
-     "why": "'because' is a subordinating conjunction"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'unless' is a subordinating conjunction"
-    },
-    null
+     "tag": "wrong_role",
+     "why": "'over' is a word that goes with the verb, not the subject"
+    }
    ],
    "solution": [
-    "'and' joins two equal parts."
+    "In 'The vase was knocked over by the puppy.', 'The vase' comes before the verb and receives the action, so it is the subject."
    ],
    "params": {
     "key": "txf-166",
@@ -2544,31 +2388,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which word is a subordinating conjunction?",
+   "stem": "Which sentence is the passive form of 'The caretaker locked the gate at six.'?",
    "options": [
-    "or",
-    "but",
-    "because",
-    "and"
+    "The gate was lock by the caretaker at six.",
+    "The gate was locked by the caretaker at six.",
+    "The caretaker was locked by the gate at six.",
+    "The gate is locked by the caretaker at six."
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'or' is a co-ordinating conjunction"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'but' is a co-ordinating conjunction"
+     "tag": "wrong_form",
+     "why": "after 'was', the verb must be the past participle 'locked'"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'and' is a co-ordinating conjunction"
+     "tag": "wrong_voice",
+     "why": "this makes the caretaker the one who was locked, which changes the meaning"
+    },
+    {
+     "tag": "wrong_tense",
+     "why": "this changes the past tense to the present tense"
     }
    ],
    "solution": [
-    "'because' begins a clause that depends on a main clause."
+    "'The gate was locked by the caretaker at six.' keeps the past tense and the meaning."
    ],
    "params": {
     "key": "txf-167",
@@ -2583,31 +2427,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'We might visit Sentosa tomorrow.', which word is a modal verb?",
+   "stem": "Which sentence is the passive form of 'The school has repaired the roof.'?",
    "options": [
-    "'tomorrow'",
-    "'Sentosa'",
-    "'visit'",
-    "'might'"
+    "The roof has been repaired by the school.",
+    "The roof had been repaired by the school.",
+    "The roof was repaired by the school.",
+    "The roof is being repaired by the school."
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
-     "tag": "wrong_term",
-     "why": "'tomorrow' is an adverb, not a modal verb"
+     "tag": "wrong_tense",
+     "why": "this changes the tense to the past perfect"
     },
     {
-     "tag": "wrong_term",
-     "why": "'Sentosa' is a proper noun, not a modal verb"
+     "tag": "wrong_tense",
+     "why": "this changes the present perfect tense to the simple past tense"
     },
     {
-     "tag": "wrong_term",
-     "why": "'visit' is a main verb, not a modal verb"
-    },
-    null
+     "tag": "wrong_tense",
+     "why": "this changes the tense to the present continuous"
+    }
    ],
    "solution": [
-    "'might' is a modal verb in this sentence."
+    "'The roof has been repaired by the school.' keeps the present perfect tense."
    ],
    "params": {
     "key": "txf-168",
@@ -2622,31 +2466,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which type of speech is 'He said, \"I am tired.\"'?",
+   "stem": "In 'Although it was raining, the pupils went on the field trip.', which group of words is the main clause?",
    "options": [
-    "direct speech",
-    "a question",
-    "reported speech",
-    "passive voice"
+    "The pupils went on the field trip",
+    "Although it was raining, the pupils",
+    "Although it was raining",
+    "It was raining"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not ask anything"
+     "tag": "wrong_role",
+     "why": "this cuts across both clauses and leaves out the verb of the main clause"
     },
     {
-     "tag": "wrong_term",
-     "why": "reported speech has no speech marks and changes the tense"
+     "tag": "wrong_role",
+     "why": "this begins with 'Although', so it is a subordinate clause that cannot stand alone"
     },
     {
-     "tag": "wrong_term",
-     "why": "the subject is doing the action"
+     "tag": "wrong_role",
+     "why": "this is part of the subordinate clause, which begins with 'Although'"
     }
    ],
    "solution": [
-    "The exact words are in speech marks."
+    "'the pupils went on the field trip' can stand alone, so it is the main clause."
    ],
    "params": {
     "key": "txf-169",
@@ -2661,34 +2505,73 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which type of speech is 'He said that he was tired.'?",
+   "stem": "In 'We stayed indoors because the haze was thick.', which group of words is the subordinate clause?",
    "options": [
-    "passive voice",
-    "a question",
-    "reported speech",
-    "direct speech"
+    "Because the haze was thick",
+    "The haze",
+    "Stayed indoors because",
+    "We stayed indoors"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong_role",
+     "why": "this has no verb, so it is not a clause"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "this cuts across the two clauses"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "this can stand alone, so it is the main clause"
+    }
+   ],
+   "solution": [
+    "'because the haze was thick' cannot stand alone and gives the reason, so it is the subordinate clause."
+   ],
+   "params": {
+    "key": "txf-170",
+    "subtopic": "eng-gram-terms-meta"
+   }
+  },
+  {
+   "id": "enggram-f0f16c35fd",
+   "topic": "eng-gram-terms",
+   "level": "competent",
+   "template": "eng-pat-grammar-mcq",
+   "outcomes": [
+    "eng-gram-terms-meta-1"
+   ],
+   "stem": "In 'The children waited under the shelter.', what is 'under the shelter'?",
+   "options": [
+    "a main clause",
+    "a noun phrase",
+    "a prepositional phrase",
+    "a verb phrase"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "the subject is doing the action"
+     "tag": "wrong_role",
+     "why": "it has no subject and verb of its own"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not ask anything"
+     "tag": "wrong_role",
+     "why": "a noun phrase does not begin with a preposition such as 'under'"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "there are no speech marks"
+     "tag": "wrong_role",
+     "why": "the verb of the sentence is 'waited', which is not part of this group"
     }
    ],
    "solution": [
-    "It tells what was said without the exact words."
+    "'under the shelter' begins with the preposition 'under' and has no verb, so it is a prepositional phrase."
    ],
    "params": {
-    "key": "txf-170",
+    "key": "txf-171",
     "subtopic": "eng-gram-terms-meta"
    }
   },
@@ -2700,34 +2583,112 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'The tired runners finally reached the finish line.', which word does 'finally' describe?",
+   "stem": "In 'The soup was extremely hot.', which word is an adverb?",
    "options": [
-    "runners",
-    "tired",
-    "reached",
-    "line"
+    "was",
+    "hot",
+    "soup",
+    "extremely"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_class",
+     "why": "'was' links 'soup' to 'hot', so it is a verb"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'hot' describes the noun 'soup', so it is an adjective"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'soup' names a thing, so it is a noun"
+    },
+    null
+   ],
+   "solution": [
+    "'extremely' tells how hot the soup was, so it is an adverb."
+   ],
+   "params": {
+    "key": "txf-172",
+    "subtopic": "eng-gram-terms-meta"
+   }
+  },
+  {
+   "id": "enggram-f2d5595e49",
+   "topic": "eng-gram-terms",
+   "level": "competent",
+   "template": "eng-pat-grammar-mcq",
+   "outcomes": [
+    "eng-gram-terms-meta-1"
+   ],
+   "stem": "Which sentence uses 'light' as an adjective?",
+   "options": [
+    "Please switch off the light.",
+    "We light the candles at dusk.",
+    "Mum bought a light jacket for the trip.",
+    "A light flashed in the distance."
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'runners' is a noun, and adverbs do not describe nouns"
+     "tag": "wrong_class",
+     "why": "here 'light' names a thing, so it is a noun"
     },
     {
-     "tag": "wrong_term",
-     "why": "'tired' is an adjective"
+     "tag": "wrong_class",
+     "why": "here 'light' is an action, so it is a verb"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "'line' is a noun"
+     "tag": "wrong_class",
+     "why": "here 'light' names the thing that flashed, so it is a noun"
     }
    ],
    "solution": [
-    "'finally' tells when the runners reached."
+    "In 'Mum bought a light jacket for the trip.', 'light' describes the noun 'jacket', so it is an adjective."
    ],
    "params": {
-    "key": "txf-172",
+    "key": "txf-173",
+    "subtopic": "eng-gram-terms-meta"
+   }
+  },
+  {
+   "id": "enggram-dcd51d2437",
+   "topic": "eng-gram-terms",
+   "level": "competent",
+   "template": "eng-pat-grammar-mcq",
+   "outcomes": [
+    "eng-gram-terms-meta-1"
+   ],
+   "stem": "Which sentence uses 'early' as an adjective?",
+   "options": [
+    "Dad left early today.",
+    "We arrived early at the airport.",
+    "We took the early train to school.",
+    "Mum woke up early."
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_class",
+     "why": "'early' tells when Dad left, so it is an adverb"
+    },
+    {
+     "tag": "wrong_class",
+     "why": "'early' tells when we arrived, so it is an adverb"
+    },
+    null,
+    {
+     "tag": "wrong_class",
+     "why": "'early' tells when Mum woke up, so it is an adverb"
+    }
+   ],
+   "solution": [
+    "In 'We took the early train to school.', 'early' describes the noun 'train', so it is an adjective."
+   ],
+   "params": {
+    "key": "txf-174",
     "subtopic": "eng-gram-terms-meta"
    }
   },
@@ -2739,31 +2700,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "What job does 'broken' do in 'The broken vase lay on the floor.'?",
+   "stem": "In which sentence is 'past' a preposition?",
    "options": [
-    "it names a person in the sentence",
-    "it shows the time of the action",
-    "it describes the noun 'vase'",
-    "it joins two clauses in the sentence"
+    "The bus drove past.",
+    "The past week was busy.",
+    "In the past, our school was smaller.",
+    "We walked past the library."
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "it does not name anything"
+     "tag": "wrong_class",
+     "why": "'past' is not followed by a noun, so it is an adverb"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not tell when"
+     "tag": "wrong_class",
+     "why": "'past' describes the noun 'week', so it is an adjective"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "it does not join clauses"
-    }
+     "tag": "wrong_class",
+     "why": "'past' names a time, so it is a noun"
+    },
+    null
    ],
    "solution": [
-    "'broken' tells what kind of vase it is."
+    "In 'We walked past the library.', 'past' is followed by 'the library' and shows movement, so it is a preposition."
    ],
    "params": {
     "key": "txf-175",
@@ -2778,34 +2739,73 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In the sentence 'Hana taught herself to swim.', which word is a reflexive pronoun?",
+   "stem": "Which group of words is the verb in 'The pupils were singing a song.'?",
    "options": [
-    "'herself'",
-    "'Hana'",
-    "'swim'",
-    "'taught'"
+    "singing a song",
+    "singing",
+    "were singing",
+    "were"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_role",
+     "why": "'a song' is the object, not part of the verb"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'singing' needs 'were' before it to show the tense"
+    },
+    null,
+    {
+     "tag": "wrong_role",
+     "why": "'were' is only the helping verb"
+    }
+   ],
+   "solution": [
+    "The verb in 'The pupils were singing a song.' is 'were singing', in the past continuous tense."
+   ],
+   "params": {
+    "key": "txf-176",
+    "subtopic": "eng-gram-terms-meta"
+   }
+  },
+  {
+   "id": "enggram-4fa5bdec75",
+   "topic": "eng-gram-terms",
+   "level": "competent",
+   "template": "eng-pat-grammar-mcq",
+   "outcomes": [
+    "eng-gram-terms-meta-1"
+   ],
+   "stem": "Which word completes 'The man ___ lives next door is a pilot.' as a relative pronoun?",
+   "options": [
+    "who",
+    "which",
+    "whom",
+    "whose"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "wrong_term",
-     "why": "'Hana' is a proper noun, not a reflexive pronoun"
+     "tag": "wrong_form",
+     "why": "'which' is used for things, but the sentence is about a man"
     },
     {
-     "tag": "wrong_term",
-     "why": "'swim' is a verb, not a reflexive pronoun"
+     "tag": "wrong_form",
+     "why": "'whom' is used for the object, but here the pronoun is the subject of 'lives'"
     },
     {
-     "tag": "wrong_term",
-     "why": "'taught' is a verb, not a reflexive pronoun"
+     "tag": "wrong_form",
+     "why": "'whose' shows ownership, which does not fit here"
     }
    ],
    "solution": [
-    "'herself' is a reflexive pronoun in this sentence."
+    "'The man who lives next door is a pilot.' needs 'who' for a person as subject."
    ],
    "params": {
-    "key": "txf-176",
+    "key": "txf-177",
     "subtopic": "eng-gram-terms-meta"
    }
   },
@@ -2817,31 +2817,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'You are tired, aren't you?', what is 'aren't you'?",
+   "stem": "Which word completes 'The girl ___ bag was stolen reported it.' as a relative pronoun?",
    "options": [
-    "an exclamation",
-    "a question tag",
-    "a relative clause",
-    "a conjunction"
+    "whose",
+    "which",
+    "whom",
+    "who"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_term",
-     "why": "it does not show strong feeling"
-    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "it does not describe a noun"
+     "tag": "wrong_form",
+     "why": "'which' is used for things, but the sentence is about a girl"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not join clauses"
+     "tag": "wrong_form",
+     "why": "'whom' cannot be followed by 'bag' to show ownership"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'who' cannot be followed by 'bag' to show ownership"
     }
    ],
    "solution": [
-    "It is a short question added to check a statement."
+    "'The girl whose bag was stolen reported it.' needs 'whose' to show that the bag belongs to the girl."
    ],
    "params": {
     "key": "txf-178",
@@ -2856,31 +2856,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which sentence contains an adverbial clause of time?",
+   "stem": "Which sentence uses the comparative form of the adjective correctly?",
    "options": [
-    "After we ate, we washed the dishes.",
-    "We ate rice and fish.",
-    "We ate the food that Mum cooked.",
-    "The dishes were very dirty."
+    "This exam was more difficult as the last one.",
+    "This exam was difficulter than the last one.",
+    "This exam was more difficult than the last one.",
+    "This exam was most difficult than the last one."
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong_form",
+     "why": "a comparative is followed by 'than', not 'as'"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "long adjectives use 'more', not -er"
+    },
     null,
     {
-     "tag": "wrong_term",
-     "why": "this has no time clause"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "'that Mum cooked' is a relative clause"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this has no time clause"
+     "tag": "wrong_form",
+     "why": "'most' is the superlative, but 'than' needs a comparative"
     }
    ],
    "solution": [
-    "'After we ate' tells when they washed the dishes."
+    "'more difficult than' is the correct comparative form for a long adjective."
    ],
    "params": {
     "key": "txf-179",
@@ -2895,31 +2895,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which sentence is a compound sentence?",
+   "stem": "Which sentence uses the comparative form of the adverb correctly?",
    "options": [
-    "Because Ravi practised daily, he improved.",
-    "Ravi plays the guitar, and his sister plays the piano.",
-    "Ravi, who is rather shy, plays the guitar.",
-    "Ravi plays the guitar every Friday."
+    "Ali runs faster as Ben.",
+    "Ali runs fastest than Ben.",
+    "Ali runs faster than Ben.",
+    "Ali runs more fast than Ben."
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "this has a dependent clause, so it is complex"
+     "tag": "wrong_form",
+     "why": "a comparative is followed by 'than', not 'as'"
+    },
+    {
+     "tag": "wrong_form",
+     "why": "'fastest' is the superlative, but 'than' needs a comparative"
     },
     null,
     {
-     "tag": "wrong_term",
-     "why": "this has a relative clause, so it is complex"
-    },
-    {
-     "tag": "wrong_term",
-     "why": "this has one clause, so it is simple"
+     "tag": "wrong_form",
+     "why": "'fast' is short, so it takes -er, not 'more'"
     }
    ],
    "solution": [
-    "Two equal clauses are joined by 'and'."
+    "'Ali runs faster than Ben.' compares two people using the comparative 'faster'."
    ],
    "params": {
     "key": "txf-180",
@@ -2934,31 +2934,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which sentence is a simple sentence?",
+   "stem": "In 'Mum poured some water into three cups for the guests.', which word is an uncountable noun?",
    "options": [
-    "When the clown appeared, the children laughed.",
-    "The children laughed, and the clown bowed.",
-    "The children laughed because the clown was funny.",
-    "The children laughed loudly in the playground."
+    "three",
+    "cups",
+    "water",
+    "guests"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "this has a dependent clause, so it is complex"
+     "tag": "wrong_class",
+     "why": "'three' is a number word, not a noun here"
     },
     {
-     "tag": "wrong_term",
-     "why": "this joins two equal clauses, so it is compound"
+     "tag": "wrong_class",
+     "why": "'cups' can be counted, as in 'three cups'"
     },
+    null,
     {
-     "tag": "wrong_term",
-     "why": "this has a dependent clause, so it is complex"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "'guests' can be counted"
+    }
    ],
    "solution": [
-    "It has only one clause."
+    "'water' cannot be counted as 'one water, two waters', so it is an uncountable noun."
    ],
    "params": {
     "key": "txf-181",
@@ -2973,31 +2973,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "Which tense is 'had begun' in 'By the time we arrived, the show had begun.'?",
+   "stem": "Which sentence has a verb that agrees with its subject?",
    "options": [
-    "simple past tense",
-    "past continuous tense",
-    "past perfect tense",
-    "present perfect tense"
+    "Each of the pupils have a locker.",
+    "The pupils has a locker.",
+    "Every pupils have a locker.",
+    "Each of the pupils has a locker."
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "'had begun' is more than a simple past form"
+     "tag": "wrong_form",
+     "why": "'Each' is singular, so the verb must be 'has'"
     },
     {
-     "tag": "wrong_term",
-     "why": "there is no '-ing' verb"
+     "tag": "wrong_form",
+     "why": "'The pupils' is plural, so the verb must be 'have'"
     },
-    null,
     {
-     "tag": "wrong_term",
-     "why": "'had' is past, not present"
-    }
+     "tag": "wrong_form",
+     "why": "'Every' goes with a singular noun, so 'pupils' is wrong"
+    },
+    null
    ],
    "solution": [
-    "'had' with 'begun' shows an action finished before another past action."
+    "In 'Each of the pupils has a locker.', the singular subject 'Each' takes 'has'."
    ],
    "params": {
     "key": "txf-182",
@@ -3012,31 +3012,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "What kind of phrase is 'in the park' in 'The children played in the park.'?",
+   "stem": "In 'The twins showed their mother the painting they had made.', who does 'they' refer to?",
    "options": [
-    "a noun phrase",
-    "a prepositional phrase",
-    "a verb phrase",
-    "a relative clause"
+    "their mother",
+    "the twins' mother and the painting",
+    "the painting",
+    "the twins"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "it begins with a preposition"
-    },
-    null,
-    {
-     "tag": "wrong_term",
-     "why": "it does not contain a main verb"
+     "tag": "wrong_role",
+     "why": "'mother' is singular, but 'they' is plural"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not begin with a relative pronoun"
-    }
+     "tag": "wrong_role",
+     "why": "'the painting' did not make anything"
+    },
+    {
+     "tag": "wrong_role",
+     "why": "'painting' is a thing that was made, not who made it"
+    },
+    null
    ],
    "solution": [
-    "It begins with the preposition 'in'."
+    "'they' is plural and made the painting, so it refers to 'the twins'."
    ],
    "params": {
     "key": "txf-183",
@@ -3051,31 +3051,31 @@
    "outcomes": [
     "eng-gram-terms-meta-1"
    ],
-   "stem": "In 'Honesty is the best policy.', what kind of noun is 'honesty'?",
+   "stem": "In 'Despite the rain, the match went on.', what is the word 'despite'?",
    "options": [
-    "a proper noun",
-    "a collective noun",
-    "a concrete noun",
-    "an abstract noun"
+    "a conjunction",
+    "a verb",
+    "a preposition",
+    "an adverb"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
-     "tag": "wrong_term",
-     "why": "it is not the name of a person or place"
+     "tag": "wrong_class",
+     "why": "a conjunction is followed by a clause, but 'despite' is followed by the noun 'the rain'"
     },
     {
-     "tag": "wrong_term",
-     "why": "it does not name a group"
+     "tag": "wrong_class",
+     "why": "'despite' is not an action word"
     },
+    null,
     {
-     "tag": "wrong_term",
-     "why": "you cannot see or touch honesty"
-    },
-    null
+     "tag": "wrong_class",
+     "why": "an adverb does not take a noun after it, but 'despite' does"
+    }
    ],
    "solution": [
-    "It names a quality, not a thing you can touch."
+    "'despite' is followed by the noun phrase 'the rain', so it is a preposition."
    ],
    "params": {
     "key": "txf-184",
