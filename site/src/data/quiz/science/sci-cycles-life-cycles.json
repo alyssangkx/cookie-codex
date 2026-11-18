@@ -1,0 +1,3477 @@
+{
+ "topic": "sci-cycles-life-cycles",
+ "questions": [
+  {
+   "id": "scicycl-24e7796533",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which stage of a butterfly hatches from the egg?",
+   "options": [
+    "Larva",
+    "Nymph",
+    "Adult",
+    "Pupa"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A nymph is a stage in the life cycle of a cockroach, not a butterfly."
+    },
+    {
+     "tag": "stage-skipped",
+     "why": "The adult is the last stage. The egg first hatches into a larva."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The pupa forms after the larva has grown; it does not hatch straight from the egg."
+    }
+   ],
+   "solution": [
+    "A butterfly's life cycle is egg, larva, pupa, adult.",
+    "The larva (caterpillar) hatches from the egg."
+   ],
+   "params": {
+    "key": "lc-001",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-36dca65ece",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "How many stages are there in the life cycle of a frog?",
+   "options": [
+    "Five",
+    "Three",
+    "Four",
+    "Two"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-count",
+     "why": "A frog has no fifth stage. Its stages are egg, tadpole, young frog and adult."
+    },
+    {
+     "tag": "stage-count",
+     "why": "Three stages (egg, young, adult) fits a cockroach or a chicken. A frog also has the tadpole and young frog stages."
+    },
+    null,
+    {
+     "tag": "stage-count",
+     "why": "A frog has more than an egg and an adult; it also has a tadpole and a young frog."
+    }
+   ],
+   "solution": [
+    "The stages of a frog are egg, tadpole, young frog and adult.",
+    "That makes four stages."
+   ],
+   "params": {
+    "key": "lc-002",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-f76d3ebccd",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which of these animals has a pupa stage in its life cycle?",
+   "options": [
+    "Beetle",
+    "Chicken",
+    "Cockroach",
+    "Grasshopper"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A chicken goes from egg to chick to adult. It has no pupa."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach goes from egg to nymph to adult. It has no pupa."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A grasshopper goes from egg to nymph to adult. It has no pupa."
+    }
+   ],
+   "solution": [
+    "A beetle's life cycle is egg, larva, pupa, adult.",
+    "The other three animals go from egg to a young that looks like the adult, so they have no pupa."
+   ],
+   "params": {
+    "key": "lc-003",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-fe244d6136",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a mosquito. Which stage is missing in the box marked '?'",
+   "options": [
+    "Larva",
+    "Tadpole",
+    "Nymph",
+    "Caterpillar"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A tadpole is the young of a frog, not of a mosquito."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A nymph is found in insects with no pupa stage, such as the cockroach. A mosquito has a larva."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A caterpillar is the larva of a butterfly. The larva of a mosquito is called a wriggler."
+    }
+   ],
+   "solution": [
+    "The life cycle of a mosquito is egg, larva, pupa, adult.",
+    "The missing stage comes between the egg and the pupa, so it is the larva."
+   ],
+   "params": {
+    "key": "lc-004",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 98\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"10.0\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"46.8\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><line x1=\"85.5\" y1=\"49.0\" x2=\"103.5\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"105.5\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"142.2\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">?</text><line x1=\"181.0\" y1=\"49.0\" x2=\"199.0\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"201.0\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"237.8\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Pupa</text><line x1=\"276.5\" y1=\"49.0\" x2=\"294.5\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"296.5\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"333.2\" y=\"45.5\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Adult</text><text x=\"333.2\" y=\"62.5\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">mosquito</text></svg>"
+  },
+  {
+   "id": "scicycl-0010ece663",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The young of a frog lives in water. It has a tail but no legs. It is called a ____.",
+   "options": [
+    "chick",
+    "nymph",
+    "tadpole",
+    "caterpillar"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A chick is the young of a chicken."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A nymph is the young of an insect such as a cockroach."
+    },
+    null,
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A caterpillar is the larva of a butterfly."
+    }
+   ],
+   "solution": [
+    "The young of a frog that lives in water and has a tail but no legs is a tadpole."
+   ],
+   "params": {
+    "key": "lc-005",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-fe6e830337",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which list shows the life cycle of a chicken in the correct order?",
+   "options": [
+    "Chick, egg, adult hen",
+    "Egg, chick, adult hen",
+    "Egg, larva, pupa, adult",
+    "Egg, adult hen, chick"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "A chick hatches from an egg, so the egg comes first."
+    },
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "Larva and pupa are stages of some insects. A chicken has neither."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The chick grows into the adult hen, so the adult comes last."
+    }
+   ],
+   "solution": [
+    "A hen lays an egg. A chick hatches from the egg and grows into an adult hen."
+   ],
+   "params": {
+    "key": "lc-006",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-4922f5fbf9",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "A bean plant starts its life cycle as a seed. Which list shows the stages in the correct order?",
+   "options": [
+    "Seed, young plant, seedling, adult plant",
+    "Seed, seedling, young plant, adult plant",
+    "Seed, adult plant, seedling, young plant",
+    "Seed, seedling, adult plant, young plant"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "A seedling is the tiny plant that first grows out of the seed, so it comes before the young plant."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "A seed cannot grow straight into an adult plant. It becomes a seedling first."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The plant grows from a young plant into an adult plant, not the other way round."
+    }
+   ],
+   "solution": [
+    "The seed germinates and grows into a seedling.",
+    "The seedling grows into a young plant, then an adult plant."
+   ],
+   "params": {
+    "key": "lc-007",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-3475f89d8e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "Which stage of a flowering plant makes the flowers that later form fruits with seeds?",
+   "options": [
+    "Seedling",
+    "Adult plant",
+    "Young plant",
+    "Seed"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-misplaced",
+     "why": "A seedling is too young to make flowers."
+    },
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "A young plant is still growing. Flowers are made by the adult plant."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "A seed has not started to grow yet, so it cannot make flowers."
+    }
+   ],
+   "solution": [
+    "Only the adult plant makes flowers.",
+    "The flowers form fruits that hold new seeds."
+   ],
+   "params": {
+    "key": "lc-008",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-c82dcc792a",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a butterfly. Which letter shows the egg?",
+   "options": [
+    "C",
+    "D",
+    "B",
+    "A"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "letter-misread",
+     "why": "C shows the adult butterfly."
+    },
+    null,
+    {
+     "tag": "letter-misread",
+     "why": "B shows the caterpillar (larva), which hatches from the egg."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "A shows the pupa, which forms after the caterpillar has stopped feeding."
+    }
+   ],
+   "solution": [
+    "The egg is the first stage, which is shown by D.",
+    "The arrows go from D to the caterpillar (B), the pupa (A) and the adult (C)."
+   ],
+   "params": {
+    "key": "lc-009",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/butterfly-ring.webp",
+    "alt": "Life cycle of a butterfly drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 72.8,
+      "y": 88.4,
+      "text": "A"
+     },
+     {
+      "x": 84.5,
+      "y": 52.2,
+      "text": "B"
+     },
+     {
+      "x": 24.9,
+      "y": 35.6,
+      "text": "C"
+     },
+     {
+      "x": 45.4,
+      "y": 21.0,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-c3d2280f6f",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a frog. Which letter shows the tadpole?",
+   "options": [
+    "B",
+    "D",
+    "A",
+    "C"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "letter-misread",
+     "why": "B shows the adult frog, which has four legs and no tail."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "D shows the young frog, which already has legs."
+    },
+    null,
+    {
+     "tag": "letter-misread",
+     "why": "C shows the eggs, which are laid in a jelly-like mass."
+    }
+   ],
+   "solution": [
+    "The tadpole has a tail and no legs, so it is stage A.",
+    "It hatches from the eggs (C) and later grows into the young frog (D)."
+   ],
+   "params": {
+    "key": "lc-010",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/frog-ring.webp",
+    "alt": "Life cycle of a frog drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 78.1,
+      "y": 57.1,
+      "text": "A"
+     },
+     {
+      "x": 18.6,
+      "y": 37.1,
+      "text": "B"
+     },
+     {
+      "x": 67.4,
+      "y": 14.6,
+      "text": "C"
+     },
+     {
+      "x": 39.1,
+      "y": 68.4,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-ac0b97cefc",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a chicken. Which shows the stages in the correct order, starting from the egg?",
+   "options": [
+    "C, A, B",
+    "B, C, A",
+    "C, B, A",
+    "A, C, B"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "B is the adult hen. The list must start from the egg, which is C."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The egg hatches into the chick (A) first, not straight into the adult hen (B)."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "A is the chick. The chick hatches from the egg (C), so it cannot come before the egg."
+    }
+   ],
+   "solution": [
+    "C is the egg, A is the chick and B is the adult hen.",
+    "Starting from the egg, the order is C, A, B."
+   ],
+   "params": {
+    "key": "lc-011",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/chicken-ring.webp",
+    "alt": "Life cycle of a chicken drawn as a ring of three stages joined by arrows, marked A to C.",
+    "labels": [
+     {
+      "x": 87.9,
+      "y": 39.1,
+      "text": "A"
+     },
+     {
+      "x": 37.1,
+      "y": 43.0,
+      "text": "B"
+     },
+     {
+      "x": 62.5,
+      "y": 11.7,
+      "text": "C"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-4deee3c206",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which stage of a butterfly feeds on leaves and grows quickly?",
+   "options": [
+    "Egg",
+    "Pupa",
+    "Larva",
+    "Adult"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-misplaced",
+     "why": "An egg does not feed."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "A pupa does not feed. Its body is changing into the adult."
+    },
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "An adult butterfly sips nectar. It does not eat leaves or grow bigger."
+    }
+   ],
+   "solution": [
+    "The larva (caterpillar) eats a lot of leaves and grows quickly.",
+    "The other stages either do not feed or feed on nectar."
+   ],
+   "params": {
+    "key": "lc-012",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-5077c82640",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which stage of a butterfly has wings and can fly?",
+   "options": [
+    "Adult",
+    "Larva",
+    "Pupa",
+    "Egg"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "A caterpillar crawls. It has no wings."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "The wings are still forming inside the pupa, so it cannot fly."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "An egg cannot move."
+    }
+   ],
+   "solution": [
+    "Only the adult butterfly has fully formed wings and can fly."
+   ],
+   "params": {
+    "key": "lc-013",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-77cc00d7d7",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Where does a female mosquito lay her eggs?",
+   "options": [
+    "On the skin of people",
+    "In or near stagnant water",
+    "Inside the nests of birds",
+    "On dry leaves high in trees"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "habitat-mix",
+     "why": "An adult mosquito bites people for blood, but she does not lay her eggs on their skin."
+    },
+    null,
+    {
+     "tag": "habitat-mix",
+     "why": "Mosquito eggs are laid where there is water, not in bird nests."
+    },
+    {
+     "tag": "habitat-mix",
+     "why": "The eggs, larvae and pupae need water to develop, and dry leaves have none."
+    }
+   ],
+   "solution": [
+    "Mosquito eggs hatch into larvae that live in water.",
+    "So the female lays her eggs in or near stagnant water."
+   ],
+   "params": {
+    "key": "lc-014",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-ff45c6b894",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Where do tadpoles live?",
+   "options": [
+    "On tree branches",
+    "In dry soil",
+    "In water",
+    "Under logs on land"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "habitat-mix",
+     "why": "A tadpole swims with its tail and cannot live out of water."
+    },
+    {
+     "tag": "habitat-mix",
+     "why": "A tadpole breathes with gills, which only work in water."
+    },
+    null,
+    {
+     "tag": "habitat-mix",
+     "why": "A tadpole needs water to breathe and swim."
+    }
+   ],
+   "solution": [
+    "A tadpole has gills and a tail, so it lives in water."
+   ],
+   "params": {
+    "key": "lc-015",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-55444ede1e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which of these animals has only three stages in its life cycle?",
+   "options": [
+    "Frog",
+    "Mosquito",
+    "Cockroach",
+    "Butterfly"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-count",
+     "why": "A frog has four stages: egg, tadpole, young frog and adult."
+    },
+    {
+     "tag": "stage-count",
+     "why": "A mosquito has four stages: egg, larva, pupa and adult."
+    },
+    null,
+    {
+     "tag": "stage-count",
+     "why": "A butterfly has four stages: egg, larva, pupa and adult."
+    }
+   ],
+   "solution": [
+    "A cockroach goes from egg to nymph to adult.",
+    "That is three stages. The other animals have four."
+   ],
+   "params": {
+    "key": "lc-016",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-a3d3653b01",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "What do we call the stage between the larva and the adult in which an insect does not feed?",
+   "options": [
+    "Egg",
+    "Nymph",
+    "Tadpole",
+    "Pupa"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "The egg is the first stage, not the one between the larva and the adult."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A nymph is a young stage of insects such as the cockroach. It feeds and comes before the adult."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A tadpole is a stage of a frog, not of an insect."
+    },
+    null
+   ],
+   "solution": [
+    "After feeding as a larva, the insect becomes a pupa.",
+    "The pupa does not feed while its body changes into the adult."
+   ],
+   "params": {
+    "key": "lc-017",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-f972d364d2",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-1"
+   ],
+   "stem": "Which of these living things begins its life cycle as a seed?",
+   "options": [
+    "Chicken",
+    "Frog",
+    "Cockroach",
+    "Chilli plant"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "A chicken begins its life as an egg."
+    },
+    {
+     "tag": "false-fact",
+     "why": "A frog begins its life as an egg."
+    },
+    {
+     "tag": "false-fact",
+     "why": "A cockroach begins its life as an egg in an egg case."
+    },
+    null
+   ],
+   "solution": [
+    "A chilli plant is a flowering plant, and it grows from a seed.",
+    "The animals start as eggs."
+   ],
+   "params": {
+    "key": "lc-019",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-71c6d8dfd8",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The young of which animal looks like a small adult but has no wings?",
+   "options": [
+    "Beetle",
+    "Mosquito",
+    "Butterfly",
+    "Cockroach"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A beetle grub looks very different from the adult beetle."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A mosquito larva lives in water and looks very different from the adult."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A caterpillar looks very different from an adult butterfly."
+    },
+    null
+   ],
+   "solution": [
+    "A cockroach nymph looks like a small adult without wings.",
+    "The young of the other three look very different from their adults."
+   ],
+   "params": {
+    "key": "lc-020",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-466303d192",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a cockroach. What is the missing stage?",
+   "options": [
+    "Pupa",
+    "Tadpole",
+    "Larva",
+    "Adult"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach has no pupa stage."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A tadpole is a stage of a frog."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "The young of a cockroach is called a nymph, not a larva."
+    },
+    null
+   ],
+   "solution": [
+    "A cockroach goes from egg to nymph to adult.",
+    "The missing stage is the adult."
+   ],
+   "params": {
+    "key": "lc-021",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 98\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"10.0\" y=\"18\" width=\"105.3\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"62.7\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><line x1=\"117.3\" y1=\"49.0\" x2=\"135.3\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"137.3\" y=\"18\" width=\"105.3\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"190.0\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Nymph</text><line x1=\"244.7\" y1=\"49.0\" x2=\"262.7\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"264.7\" y=\"18\" width=\"105.3\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"317.3\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">?</text></svg>"
+  },
+  {
+   "id": "scicycl-33048ed575",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which stage of the mosquito's life cycle can bite people?",
+   "options": [
+    "Adult",
+    "Pupa",
+    "Larva",
+    "Egg"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "A pupa does not feed."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "A larva lives in water and feeds on tiny living things, not on blood."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "An egg cannot move or feed."
+    }
+   ],
+   "solution": [
+    "Only the adult mosquito has a mouth that can pierce skin.",
+    "The egg, larva and pupa live in water."
+   ],
+   "params": {
+    "key": "lc-023",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-aa96fedbd9",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which stage is the first stage in the life cycles of the cockroach, the chicken and the frog?",
+   "options": [
+    "Larva",
+    "Egg",
+    "Tadpole",
+    "Nymph"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "None of these three animals has a larva stage."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "A tadpole hatches from an egg, so it is not the first stage."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "A nymph hatches from an egg, so it is not the first stage."
+    }
+   ],
+   "solution": [
+    "All three animals lay eggs.",
+    "So the first stage of each life cycle is the egg."
+   ],
+   "params": {
+    "key": "lc-024",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-18bdb6ccf9",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which list shows the life cycle of a beetle in the correct order?",
+   "options": [
+    "Egg, nymph, adult",
+    "Egg, larva, pupa, adult",
+    "Egg, pupa, larva, adult",
+    "Larva, egg, pupa, adult"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A beetle has a larva and a pupa, not a nymph."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "The larva feeds and grows first. It then becomes a pupa."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The larva hatches from the egg, so the egg comes first."
+    }
+   ],
+   "solution": [
+    "A beetle goes from egg to larva (grub) to pupa to adult."
+   ],
+   "params": {
+    "key": "lc-025",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-1e1540eefe",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "The diagram shows the life cycle of a flowering plant. Which letter shows the seed?",
+   "options": [
+    "D",
+    "A",
+    "C",
+    "B"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "letter-misread",
+     "why": "D shows the young plant."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "A shows the adult plant with flowers and fruits."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "C shows the seedling that has just grown from the seed."
+    },
+    null
+   ],
+   "solution": [
+    "The seed is the first stage of the life cycle, shown by B.",
+    "It grows into the seedling (C), the young plant (D) and the adult plant (A)."
+   ],
+   "params": {
+    "key": "lc-026",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/plant-ring.webp",
+    "alt": "Life cycle of a flowering plant drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 10.7,
+      "y": 34.2,
+      "text": "A"
+     },
+     {
+      "x": 62.5,
+      "y": 6.8,
+      "text": "B"
+     },
+     {
+      "x": 83.0,
+      "y": 25.4,
+      "text": "C"
+     },
+     {
+      "x": 48.3,
+      "y": 64.9,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-be64003e3e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a mosquito. Which letter shows the adult mosquito?",
+   "options": [
+    "D",
+    "B",
+    "A",
+    "C"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "letter-misread",
+     "why": "D shows the pupa."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "B shows the larva that hangs below the water surface."
+    },
+    null,
+    {
+     "tag": "letter-misread",
+     "why": "C shows the eggs floating on the water."
+    }
+   ],
+   "solution": [
+    "The adult mosquito has wings and long legs, which are shown by A.",
+    "The other three stages live in water."
+   ],
+   "params": {
+    "key": "lc-027",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/mosquito-ring.webp",
+    "alt": "Life cycle of a mosquito drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 24.4,
+      "y": 33.7,
+      "text": "A"
+     },
+     {
+      "x": 70.1,
+      "y": 54.7,
+      "text": "B"
+     },
+     {
+      "x": 67.4,
+      "y": 10.7,
+      "text": "C"
+     },
+     {
+      "x": 65.9,
+      "y": 75.7,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-b98b928224",
+   "topic": "sci-cycles-life-cycles",
+   "level": "basic",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a beetle. Which letter shows the pupa?",
+   "options": [
+    "C",
+    "B",
+    "D",
+    "A"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "letter-misread",
+     "why": "C shows the eggs."
+    },
+    null,
+    {
+     "tag": "letter-misread",
+     "why": "D shows the adult beetle."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "A shows the larva (grub), which feeds and grows."
+    }
+   ],
+   "solution": [
+    "The pupa comes after the larva and before the adult, so it is stage B.",
+    "The arrows go from the eggs (C) to the grub (A), the pupa (B) and the adult (D)."
+   ],
+   "params": {
+    "key": "lc-028",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/beetle-ring.webp",
+    "alt": "Life cycle of a beetle drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 85.9,
+      "y": 34.7,
+      "text": "A"
+     },
+     {
+      "x": 54.7,
+      "y": 67.4,
+      "text": "B"
+     },
+     {
+      "x": 41.0,
+      "y": 9.8,
+      "text": "C"
+     },
+     {
+      "x": 14.6,
+      "y": 37.1,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-71039378c0",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A student watched a butterfly pupa for several days. What did the pupa do during this time?",
+   "options": [
+    "It did not feed and hardly moved.",
+    "It flew from plant to plant.",
+    "It drank nectar from flowers.",
+    "It ate leaves to grow bigger."
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "The pupa has no working wings, so it cannot fly."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "Only the adult butterfly drinks nectar."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "Eating leaves is what the larva does before it becomes a pupa."
+    }
+   ],
+   "solution": [
+    "The pupa is a stage in which the insect does not feed.",
+    "Its body changes into the adult inside, and it hardly moves."
+   ],
+   "params": {
+    "key": "lc-029",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-94a24dda88",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statement about the larva of a mosquito is correct?",
+   "options": [
+    "It lives on land and drinks blood.",
+    "It lives in water and feeds on tiny living things.",
+    "It lives in water and does not feed.",
+    "It has wings and can fly."
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "habitat-mix",
+     "why": "The larva lives in water. Only the adult female drinks blood."
+    },
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "The larva feeds and grows. It is the pupa that does not feed."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "Only the adult mosquito has wings."
+    }
+   ],
+   "solution": [
+    "A mosquito larva (wriggler) lives in water and feeds on tiny living things to grow.",
+    "Wings and blood-feeding belong to the adult."
+   ],
+   "params": {
+    "key": "lc-030",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-7b1ac34fc0",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which pair of animals both have a pupa stage?",
+   "options": [
+    "Mosquito and beetle",
+    "Butterfly and grasshopper",
+    "Frog and mosquito",
+    "Cockroach and beetle"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A grasshopper has no pupa. It goes from egg to nymph to adult."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A frog has a tadpole and a young frog, but no pupa."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach goes from egg to nymph to adult, so it has no pupa."
+    }
+   ],
+   "solution": [
+    "A mosquito goes from egg to larva to pupa to adult.",
+    "A beetle does too. The other animals in the options each lack a pupa."
+   ],
+   "params": {
+    "key": "lc-031",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-eb20ecb8ec",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which pair of animals both have young that look similar to the adult?",
+   "options": [
+    "Beetle and cockroach",
+    "Cockroach and chicken",
+    "Mosquito and chicken",
+    "Butterfly and frog"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A beetle grub looks very different from the adult beetle."
+    },
+    null,
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A mosquito larva looks very different from the adult mosquito."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A caterpillar and a tadpole both look very different from their adults."
+    }
+   ],
+   "solution": [
+    "A cockroach nymph and a chick both look like smaller versions of the adult.",
+    "The larvae and tadpoles in the other pairs look very different from their adults."
+   ],
+   "params": {
+    "key": "lc-032",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-ed42726fbd",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a frog. Which are the missing stages, in order?",
+   "options": [
+    "Larva, pupa",
+    "Nymph, young frog",
+    "Young frog, tadpole",
+    "Tadpole, young frog"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "Larva and pupa are insect stages. A frog is not an insect."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A nymph is an insect stage. The young of a frog is a tadpole."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The tadpole has no legs. It grows legs and becomes the young frog afterwards."
+    },
+    null
+   ],
+   "solution": [
+    "An egg hatches into a tadpole.",
+    "The tadpole grows legs and becomes a young frog, which then grows into the adult frog."
+   ],
+   "params": {
+    "key": "lc-033",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 98\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"10.0\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"46.8\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><line x1=\"85.5\" y1=\"49.0\" x2=\"103.5\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"105.5\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"142.2\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">?</text><line x1=\"181.0\" y1=\"49.0\" x2=\"199.0\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"201.0\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"237.8\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">?</text><line x1=\"276.5\" y1=\"49.0\" x2=\"294.5\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"296.5\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"333.2\" y=\"45.5\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Adult</text><text x=\"333.2\" y=\"62.5\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">frog</text></svg>"
+  },
+  {
+   "id": "scicycl-a71baf985d",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a butterfly. Which two letters show the stages in which the butterfly feeds?",
+   "options": [
+    "A and C",
+    "B and C",
+    "A and B",
+    "C and D"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-misplaced",
+     "why": "A is the pupa, which does not feed."
+    },
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "A is the pupa, which does not feed."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "D is the egg, which does not feed."
+    }
+   ],
+   "solution": [
+    "B is the caterpillar, which feeds on leaves. C is the adult, which feeds on nectar.",
+    "The pupa (A) and the egg (D) do not feed."
+   ],
+   "params": {
+    "key": "lc-034",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/butterfly-ring.webp",
+    "alt": "Life cycle of a butterfly drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 72.8,
+      "y": 88.4,
+      "text": "A"
+     },
+     {
+      "x": 84.5,
+      "y": 52.2,
+      "text": "B"
+     },
+     {
+      "x": 24.9,
+      "y": 35.6,
+      "text": "C"
+     },
+     {
+      "x": 45.4,
+      "y": 21.0,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-8f995dc7a3",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a butterfly. Which letter shows the stage that comes just before the adult?",
+   "options": [
+    "B",
+    "D",
+    "A",
+    "C"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "B is the caterpillar, which comes two stages before the adult."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "D is the egg, which is the first stage."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "C is the adult butterfly itself."
+    }
+   ],
+   "solution": [
+    "The arrows go from the egg (D) to the caterpillar (B), the pupa (A) and then the adult (C).",
+    "The stage just before the adult is the pupa, A."
+   ],
+   "params": {
+    "key": "lc-035",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/butterfly-ring.webp",
+    "alt": "Life cycle of a butterfly drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 72.8,
+      "y": 88.4,
+      "text": "A"
+     },
+     {
+      "x": 84.5,
+      "y": 52.2,
+      "text": "B"
+     },
+     {
+      "x": 24.9,
+      "y": 35.6,
+      "text": "C"
+     },
+     {
+      "x": 45.4,
+      "y": 21.0,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-f4e3e7f891",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a frog. Which letter shows the stage that comes straight after the tadpole?",
+   "options": [
+    "A",
+    "C",
+    "D",
+    "B"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "A is the tadpole itself."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "C shows the eggs, which come before the tadpole."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "B is the adult frog, which comes after the young frog."
+    }
+   ],
+   "solution": [
+    "The arrows go from the eggs (C) to the tadpole (A) and then to the young frog (D).",
+    "So the stage after the tadpole is D."
+   ],
+   "params": {
+    "key": "lc-036",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/frog-ring.webp",
+    "alt": "Life cycle of a frog drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 78.1,
+      "y": 57.1,
+      "text": "A"
+     },
+     {
+      "x": 18.6,
+      "y": 37.1,
+      "text": "B"
+     },
+     {
+      "x": 67.4,
+      "y": 14.6,
+      "text": "C"
+     },
+     {
+      "x": 39.1,
+      "y": 68.4,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-82e861bfcf",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a grasshopper. Which shows the stages in the correct order, starting from the egg?",
+   "options": [
+    "A, B, C",
+    "B, C, A",
+    "C, B, A",
+    "B, A, C"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "A is the adult. The list must start from the egg, which is B."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "C is the nymph. The egg (B) has to come first."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The egg hatches into the nymph (C) first, not straight into the adult (A)."
+    }
+   ],
+   "solution": [
+    "B is the egg in the soil, C is the nymph and A is the adult.",
+    "Starting from the egg, the order is B, C, A."
+   ],
+   "params": {
+    "key": "lc-037",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/grasshopper-ring.webp",
+    "alt": "Life cycle of a grasshopper drawn as a ring of three stages joined by arrows, marked A to C.",
+    "labels": [
+     {
+      "x": 17.6,
+      "y": 68.4,
+      "text": "A"
+     },
+     {
+      "x": 48.8,
+      "y": 5.4,
+      "text": "B"
+     },
+     {
+      "x": 68.4,
+      "y": 40.0,
+      "text": "C"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-0c6c01c4b8",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The table shows the stages in the life cycles of four animals. Which animal's life cycle is shown wrongly?",
+   "options": [
+    "Cockroach",
+    "Beetle",
+    "Chicken",
+    "Frog"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "table-misread",
+     "why": "The table correctly shows egg, nymph and adult for a cockroach."
+    },
+    null,
+    {
+     "tag": "table-misread",
+     "why": "A chicken goes from egg to chick to adult, as the table shows."
+    },
+    {
+     "tag": "table-misread",
+     "why": "The table correctly shows the tadpole and young frog stages of a frog."
+    }
+   ],
+   "solution": [
+    "A beetle has a pupa stage, but the table leaves it out.",
+    "The other three rows are correct."
+   ],
+   "params": {
+    "key": "lc-038",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 156\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"15.0\" y=\"8\" width=\"100\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Animal</text><rect x=\"115.0\" y=\"8\" width=\"250\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"240.0\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Stages</text><rect x=\"15.0\" y=\"36\" width=\"100\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"54.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Chicken</text><rect x=\"115.0\" y=\"36\" width=\"250\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"240.0\" y=\"54.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Egg, chick, adult</text><rect x=\"15.0\" y=\"64\" width=\"100\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"82.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Beetle</text><rect x=\"115.0\" y=\"64\" width=\"250\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"240.0\" y=\"82.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Egg, larva, adult</text><rect x=\"15.0\" y=\"92\" width=\"100\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"110.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Frog</text><rect x=\"115.0\" y=\"92\" width=\"250\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"240.0\" y=\"110.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Egg, tadpole, young frog, adult</text><rect x=\"15.0\" y=\"120\" width=\"100\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"138.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Cockroach</text><rect x=\"115.0\" y=\"120\" width=\"250\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"240.0\" y=\"138.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Egg, nymph, adult</text></svg>"
+  },
+  {
+   "id": "scicycl-2ef8739066",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The table describes four animals. Which animal is most likely a mosquito?",
+   "options": [
+    "S",
+    "Q",
+    "P",
+    "R"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "table-misread",
+     "why": "S has no pupa and its young do not live in water, so it fits a cockroach or a chicken."
+    },
+    {
+     "tag": "table-misread",
+     "why": "Q has a pupa stage but its young do not live in water, so it fits a butterfly or a beetle."
+    },
+    null,
+    {
+     "tag": "table-misread",
+     "why": "R has no pupa but its young live in water, so it fits a frog."
+    }
+   ],
+   "solution": [
+    "A mosquito has a pupa stage, and its larva and pupa live in water.",
+    "Only P matches both."
+   ],
+   "params": {
+    "key": "lc-039",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 178\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"35.0\" y=\"8\" width=\"90\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"80.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Animal</text><rect x=\"125.0\" y=\"8\" width=\"110\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"180.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Has a</text><text x=\"180.0\" y=\"44.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">pupa stage</text><rect x=\"235.0\" y=\"8\" width=\"110\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"290.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Young live</text><text x=\"290.0\" y=\"44.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">in water</text><rect x=\"35.0\" y=\"54\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"80.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">P</text><rect x=\"125.0\" y=\"54\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"180.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"235.0\" y=\"54\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"290.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"35.0\" y=\"83\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"80.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Q</text><rect x=\"125.0\" y=\"83\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"180.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"235.0\" y=\"83\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"290.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"35.0\" y=\"112\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"80.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">R</text><rect x=\"125.0\" y=\"112\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"180.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"235.0\" y=\"112\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"290.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"35.0\" y=\"141\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"80.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">S</text><rect x=\"125.0\" y=\"141\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"180.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"235.0\" y=\"141\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"290.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text></svg>"
+  },
+  {
+   "id": "scicycl-f3c59d1c70",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which stage of a cockroach eats the same kind of food as the adult cockroach?",
+   "options": [
+    "Nymph",
+    "Egg",
+    "Larva",
+    "Pupa"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "An egg does not feed."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach has a nymph, not a larva."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach has no pupa stage."
+    }
+   ],
+   "solution": [
+    "The nymph looks like a small adult and eats similar food to it.",
+    "A cockroach has no larva or pupa."
+   ],
+   "params": {
+    "key": "lc-040",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-d19afb88bd",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A caterpillar eats many leaves. Then it stops eating and hangs from a twig. Which stage does it become next?",
+   "options": [
+    "Pupa",
+    "Nymph",
+    "Egg",
+    "Adult"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A nymph is a stage of insects such as the cockroach, not of the butterfly."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The egg is the first stage. The caterpillar has already hatched from it."
+    },
+    {
+     "tag": "stage-skipped",
+     "why": "The caterpillar becomes a pupa first. The adult emerges from the pupa."
+    }
+   ],
+   "solution": [
+    "After feeding, the larva stops eating and becomes a pupa.",
+    "The adult butterfly comes out of the pupa later."
+   ],
+   "params": {
+    "key": "lc-041",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-e260f92cf6",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statement about a tadpole and an adult frog is correct?",
+   "options": [
+    "A tadpole and an adult frog both breathe with gills.",
+    "A tadpole has gills and a tail, but an adult frog has lungs and legs.",
+    "A tadpole has four legs, but an adult frog has none.",
+    "A tadpole breathes with lungs and lives on land."
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "An adult frog breathes with lungs and through its skin."
+    },
+    null,
+    {
+     "tag": "false-fact",
+     "why": "A tadpole has no legs at first. The adult frog has four."
+    },
+    {
+     "tag": "habitat-mix",
+     "why": "A tadpole lives in water and breathes with gills."
+    }
+   ],
+   "solution": [
+    "A tadpole lives in water and breathes with gills. It has a tail and no legs.",
+    "An adult frog has lungs and four legs."
+   ],
+   "params": {
+    "key": "lc-042",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-3ac916857a",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A cockroach nymph moults several times. Why does it do so?",
+   "options": [
+    "To grow bigger, because its hard outer skin cannot stretch.",
+    "To change into a pupa.",
+    "To find food in a new place.",
+    "To lay eggs."
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach has no pupa stage. A nymph moults into a bigger nymph, and finally an adult."
+    },
+    {
+     "tag": "false-fact",
+     "why": "Moulting is about growing, not about finding food."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "Only the adult lays eggs, and moulting does not do that."
+    }
+   ],
+   "solution": [
+    "The hard outer skin of a nymph does not stretch.",
+    "The nymph sheds it (moults) so that it can grow bigger."
+   ],
+   "params": {
+    "key": "lc-043",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-2d6c604641",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "The diagram shows the life cycle of a flowering plant. Which stage belongs in the box marked '?'",
+   "options": [
+    "Fruit",
+    "Egg",
+    "Larva",
+    "Young plant"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "part-not-stage",
+     "why": "A fruit is part of the adult plant. It holds seeds but is not a stage between seedling and adult."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "Flowering plants grow from seeds, not eggs."
+    },
+    {
+     "tag": "wrong-animal-stage",
+     "why": "A larva is an insect stage, not a plant stage."
+    },
+    null
+   ],
+   "solution": [
+    "A seed grows into a seedling, then a young plant.",
+    "The young plant grows into the adult plant with flowers."
+   ],
+   "params": {
+    "key": "lc-044",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 98\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"10.0\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"46.8\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Seed</text><line x1=\"85.5\" y1=\"49.0\" x2=\"103.5\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"105.5\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"142.2\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Seedling</text><line x1=\"181.0\" y1=\"49.0\" x2=\"199.0\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"201.0\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"237.8\" y=\"54.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">?</text><line x1=\"276.5\" y1=\"49.0\" x2=\"294.5\" y2=\"49.0\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><rect x=\"296.5\" y=\"18\" width=\"73.5\" height=\"62\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"333.2\" y=\"45.5\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Adult</text><text x=\"333.2\" y=\"62.5\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">plant</text></svg>"
+  },
+  {
+   "id": "scicycl-c5ce4c34a0",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-1"
+   ],
+   "stem": "Which of these is a difference between the life cycles of a frog and a bean plant?",
+   "options": [
+    "A frog has stages, but a bean plant does not.",
+    "A bean plant has an adult stage, but a frog does not.",
+    "A frog starts as an egg, but a bean plant starts as a seed.",
+    "A frog grows bigger, but a bean plant stays the same size."
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "overgeneralised",
+     "why": "A bean plant also has stages: seed, seedling, young plant and adult plant."
+    },
+    {
+     "tag": "false-fact",
+     "why": "Both of them grow into adults."
+    },
+    null,
+    {
+     "tag": "false-fact",
+     "why": "A bean plant also grows bigger as it develops."
+    }
+   ],
+   "solution": [
+    "A frog begins as an egg that is laid in water.",
+    "A bean plant begins as a seed. Both then grow through stages into adults."
+   ],
+   "params": {
+    "key": "lc-045",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-1d55cf079a",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a beetle. Which two letters show stages in which the beetle does not feed?",
+   "options": [
+    "A and B",
+    "C and D",
+    "B and C",
+    "A and D"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-misplaced",
+     "why": "A is the larva (grub), which feeds a lot."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "D is the adult beetle, which feeds."
+    },
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "Both the larva (A) and the adult (D) feed."
+    }
+   ],
+   "solution": [
+    "The pupa (B) and the eggs (C) do not feed.",
+    "The larva (A) and adult beetle (D) feed."
+   ],
+   "params": {
+    "key": "lc-046",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/beetle-ring.webp",
+    "alt": "Life cycle of a beetle drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 85.9,
+      "y": 34.7,
+      "text": "A"
+     },
+     {
+      "x": 54.7,
+      "y": 67.4,
+      "text": "B"
+     },
+     {
+      "x": 41.0,
+      "y": 9.8,
+      "text": "C"
+     },
+     {
+      "x": 14.6,
+      "y": 37.1,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-3ff1e1f089",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The graph shows how many days a certain butterfly spent in each stage. How many days did it spend as a larva and a pupa together?",
+   "options": [
+    "28",
+    "48",
+    "14",
+    "24"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "count-slip",
+     "why": "28 days includes the 4 days of the egg stage as well."
+    },
+    {
+     "tag": "count-slip",
+     "why": "48 days is the total for all four stages."
+    },
+    {
+     "tag": "count-slip",
+     "why": "14 days is the time as a larva only. The pupa stage must be added."
+    },
+    null
+   ],
+   "solution": [
+    "The larva stage lasted 14 days and the pupa stage lasted 10 days.",
+    "14 + 10 = 24 days."
+   ],
+   "params": {
+    "key": "lc-047",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 270\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><line x1=\"52\" y1=\"14\" x2=\"52\" y2=\"220\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"52\" y1=\"220\" x2=\"366\" y2=\"220\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"220.0\" x2=\"52\" y2=\"220.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"224.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">0</text><line x1=\"48\" y1=\"168.5\" x2=\"52\" y2=\"168.5\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"173.0\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">5</text><line x1=\"52\" y1=\"168.5\" x2=\"366\" y2=\"168.5\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"117.0\" x2=\"52\" y2=\"117.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"121.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">10</text><line x1=\"52\" y1=\"117.0\" x2=\"366\" y2=\"117.0\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"65.5\" x2=\"52\" y2=\"65.5\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"70.0\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">15</text><line x1=\"52\" y1=\"65.5\" x2=\"366\" y2=\"65.5\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"14.0\" x2=\"52\" y2=\"14.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"18.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">20</text><line x1=\"52\" y1=\"14.0\" x2=\"366\" y2=\"14.0\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><rect x=\"71.6\" y=\"178.8\" width=\"39.2\" height=\"41.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"91.2\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><rect x=\"150.1\" y=\"75.8\" width=\"39.2\" height=\"144.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"169.8\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Larva</text><rect x=\"228.6\" y=\"117.0\" width=\"39.2\" height=\"103.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"248.2\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Pupa</text><rect x=\"307.1\" y=\"14.0\" width=\"39.2\" height=\"206.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"326.8\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Adult</text><text x=\"209.0\" y=\"262\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Stage of butterfly</text><text transform=\"translate(14 117.0) rotate(-90)\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Number of days</text></svg>"
+  },
+  {
+   "id": "scicycl-ed5371cd34",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a chicken. Which letter shows the stage that is able to lay eggs?",
+   "options": [
+    "C",
+    "A",
+    "B",
+    "A and B"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "stage-misplaced",
+     "why": "C is the egg, which cannot lay eggs."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "A is the chick, which is too young to lay eggs."
+    },
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "The chick (A) cannot lay eggs. Only the adult hen (B) can."
+    }
+   ],
+   "solution": [
+    "Only the adult hen can lay eggs.",
+    "The adult hen is stage B."
+   ],
+   "params": {
+    "key": "lc-048",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/chicken-ring.webp",
+    "alt": "Life cycle of a chicken drawn as a ring of three stages joined by arrows, marked A to C.",
+    "labels": [
+     {
+      "x": 87.9,
+      "y": 39.1,
+      "text": "A"
+     },
+     {
+      "x": 37.1,
+      "y": 43.0,
+      "text": "B"
+     },
+     {
+      "x": 62.5,
+      "y": 11.7,
+      "text": "C"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-eef59b416b",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Why is stagnant water in a flower pot plate a problem?",
+   "options": [
+    "Adult mosquitoes need to drink the water to grow.",
+    "Mosquitoes lay eggs only in fast-flowing drains.",
+    "Mosquitoes can lay eggs there, and the larvae and pupae live in the water.",
+    "The water turns mosquito larvae into caterpillars."
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "Adult mosquitoes do not grow. The young stages grow in the water."
+    },
+    {
+     "tag": "false-fact",
+     "why": "Mosquitoes lay eggs in still water such as water in pot plates."
+    },
+    null,
+    {
+     "tag": "wrong-animal-stage",
+     "why": "Caterpillars are young butterflies. Mosquito larvae are wrigglers."
+    }
+   ],
+   "solution": [
+    "The eggs, larvae and pupae of a mosquito develop in water.",
+    "Stagnant water gives the mosquitoes a place to breed."
+   ],
+   "params": {
+    "key": "lc-049",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-63216c6223",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "A student plants a green bean seed and watches it for several weeks. Which list shows what she will see, in order?",
+   "options": [
+    "Seed, adult plant with flowers, seedling with small leaves, young plant",
+    "Seedling with small leaves, seed, young plant, adult plant with flowers",
+    "Seed, young plant, seedling with small leaves, adult plant with flowers",
+    "Seed, seedling with small leaves, young plant, adult plant with flowers"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "The plant cannot flower before it has grown from a seedling."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The seed has to be there before it can grow into a seedling."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The seedling is the first small plant that grows from the seed, so it comes before the young plant."
+    },
+    null
+   ],
+   "solution": [
+    "The seed grows into a seedling with small leaves.",
+    "The seedling becomes a young plant and then an adult plant that makes flowers."
+   ],
+   "params": {
+    "key": "lc-050",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-76ffc0635d",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which animal belongs in the overlap of the diagram, marked '?'",
+   "options": [
+    "Cockroach",
+    "Grasshopper",
+    "Chicken",
+    "Mosquito"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach has no pupa and its young do not live in water."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A grasshopper has no pupa and its young do not live in water."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A chicken has no pupa and its young do not live in water."
+    },
+    null
+   ],
+   "solution": [
+    "The overlap needs an animal with a pupa stage whose young also live in water.",
+    "Only the mosquito does both."
+   ],
+   "params": {
+    "key": "lc-051",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 260\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><circle cx=\"135\" cy=\"150\" r=\"98\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"245\" cy=\"150\" r=\"98\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"95\" y=\"18\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Has a</text><text x=\"95\" y=\"35\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">pupa stage</text><text x=\"285\" y=\"18\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Young live</text><text x=\"285\" y=\"35\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">in water</text><text x=\"95\" y=\"130\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Butterfly</text><text x=\"95\" y=\"152\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Beetle</text><text x=\"292\" y=\"140\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Frog</text><text x=\"190\" y=\"158\" font-size=\"22\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">?</text></svg>"
+  },
+  {
+   "id": "scicycl-3bcd7dc094",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "How is the life cycle of a chicken different from that of a butterfly?",
+   "options": [
+    "A chicken has no pupa stage, but a butterfly has one.",
+    "The young of a chicken look different from the adult, but the young of a butterfly look the same.",
+    "A chicken has more stages than a butterfly.",
+    "A chicken has no egg stage, but a butterfly has one."
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "young-looks-like-adult",
+     "why": "It is the other way round. A chick looks like the adult, but a caterpillar does not."
+    },
+    {
+     "tag": "stage-count",
+     "why": "A chicken has three stages and a butterfly has four."
+    },
+    {
+     "tag": "false-fact",
+     "why": "Both animals begin as eggs."
+    }
+   ],
+   "solution": [
+    "A chicken goes from egg to chick to adult, which is three stages.",
+    "A butterfly has four stages, including the pupa."
+   ],
+   "params": {
+    "key": "lc-053",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-137ce42d3f",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which of these is the same for the life cycles of the butterfly and the frog?",
+   "options": [
+    "Both have only three stages.",
+    "Their young look very different from the adults.",
+    "Both lay their eggs in water.",
+    "Both have a pupa stage."
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-count",
+     "why": "Each has four stages."
+    },
+    null,
+    {
+     "tag": "habitat-mix",
+     "why": "A butterfly lays its eggs on leaves, not in water."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A frog has no pupa stage."
+    }
+   ],
+   "solution": [
+    "A caterpillar looks very different from a butterfly, and a tadpole looks very different from a frog.",
+    "Both life cycles have four stages, but only the butterfly has a pupa."
+   ],
+   "params": {
+    "key": "lc-054",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-621973c705",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A farmer found the insect in the picture eating the leaves of his vegetables. At which stage of its life cycle is the insect?",
+   "options": [
+    "Larva",
+    "Nymph",
+    "Pupa",
+    "Adult"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A nymph looks like a small adult and belongs to insects with no pupa stage. This insect looks nothing like an adult."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "A pupa does not feed."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "The adult has wings and does not eat leaves."
+    }
+   ],
+   "solution": [
+    "The insect has a soft worm-like body, feeds on leaves and has no wings.",
+    "This is the larva stage."
+   ],
+   "params": {
+    "key": "lc-055",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/caterpillar-leaf.webp",
+    "alt": "A vegetable leaf with holes in it and a soft, worm-like insect with several pairs of legs feeding on the leaf.",
+    "labels": []
+   }
+  },
+  {
+   "id": "scicycl-cf318d96f2",
+   "topic": "sci-cycles-life-cycles",
+   "level": "intermediate",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a cockroach. Which letter shows the stage that hatches from the egg case?",
+   "options": [
+    "A",
+    "B and C",
+    "C",
+    "B"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "letter-misread",
+     "why": "Neither the egg case (B) nor the adult (C) hatches from the egg case."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "C shows the adult cockroach, which comes after the nymph."
+    },
+    {
+     "tag": "letter-misread",
+     "why": "B shows the egg case itself."
+    }
+   ],
+   "solution": [
+    "The egg case hatches into a nymph.",
+    "The nymph is stage A. It looks like a small adult without wings."
+   ],
+   "params": {
+    "key": "lc-056",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/cockroach-ring.webp",
+    "alt": "Life cycle of a cockroach drawn as a ring of three stages joined by arrows, marked A to C.",
+    "labels": [
+     {
+      "x": 72.1,
+      "y": 50.8,
+      "text": "A"
+     },
+     {
+      "x": 62.5,
+      "y": 9.8,
+      "text": "B"
+     },
+     {
+      "x": 48.8,
+      "y": 62.5,
+      "text": "C"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-e2a4be702e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The table shows four stages in the life cycle of animal X. Which animal is X?",
+   "options": [
+    "Frog",
+    "Beetle",
+    "Butterfly",
+    "Mosquito"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "table-misread",
+     "why": "The young frog (stage 3) feeds, but the table says stage 3 does not feed."
+    },
+    {
+     "tag": "table-misread",
+     "why": "The eggs, larvae and pupae of a beetle do not live in water."
+    },
+    {
+     "tag": "table-misread",
+     "why": "The eggs of a butterfly are laid on leaves, not in water, so stage 1 would not be in water."
+    },
+    null
+   ],
+   "solution": [
+    "Stage 1 (egg) and stage 3 (pupa) do not feed, and stages 1 to 3 live in water.",
+    "The larva (stage 2) feeds and the pupa moves but does not feed. Only a mosquito fits."
+   ],
+   "params": {
+    "key": "lc-057",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 178\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"30.0\" y=\"8\" width=\"70\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Stage</text><rect x=\"100.0\" y=\"8\" width=\"80\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Feeds</text><rect x=\"180.0\" y=\"8\" width=\"80\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"220.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Moves</text><rect x=\"260.0\" y=\"8\" width=\"90\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"305.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Lives</text><text x=\"305.0\" y=\"44.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">in water</text><rect x=\"30.0\" y=\"54\" width=\"70\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">1</text><rect x=\"100.0\" y=\"54\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"180.0\" y=\"54\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"220.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"260.0\" y=\"54\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"305.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"30.0\" y=\"83\" width=\"70\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">2</text><rect x=\"100.0\" y=\"83\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"180.0\" y=\"83\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"220.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"260.0\" y=\"83\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"305.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"30.0\" y=\"112\" width=\"70\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">3</text><rect x=\"100.0\" y=\"112\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"180.0\" y=\"112\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"220.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"260.0\" y=\"112\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"305.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"30.0\" y=\"141\" width=\"70\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"65.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">4</text><rect x=\"100.0\" y=\"141\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"180.0\" y=\"141\" width=\"80\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"220.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"260.0\" y=\"141\" width=\"90\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"305.0\" y=\"160.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">No</text></svg>"
+  },
+  {
+   "id": "scicycl-f8c080356e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The table describes four animals. Which animal is most likely a frog?",
+   "options": [
+    "Q",
+    "P",
+    "S",
+    "R"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "table-misread",
+     "why": "Q has a pupa stage but its young do not live in water, so it fits a butterfly or a beetle."
+    },
+    {
+     "tag": "table-misread",
+     "why": "P has young that look like the adult and no pupa, so it fits a cockroach or a chicken."
+    },
+    {
+     "tag": "table-misread",
+     "why": "S has a pupa stage, so it is an insect such as a mosquito."
+    },
+    null
+   ],
+   "solution": [
+    "A frog has no pupa, its young look different from the adult and its young live in water.",
+    "Only R matches all of these."
+   ],
+   "params": {
+    "key": "lc-058",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 172\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"5.0\" y=\"8\" width=\"60\" height=\"44\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"35.0\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Animal</text><rect x=\"65.0\" y=\"8\" width=\"60\" height=\"44\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"95.0\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Egg</text><text x=\"95.0\" y=\"42.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">stage</text><rect x=\"125.0\" y=\"8\" width=\"95\" height=\"44\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"172.5\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Young looks</text><text x=\"172.5\" y=\"42.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">like adult</text><rect x=\"220.0\" y=\"8\" width=\"60\" height=\"44\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"250.0\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Pupa</text><text x=\"250.0\" y=\"42.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">stage</text><rect x=\"280.0\" y=\"8\" width=\"95\" height=\"44\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"327.5\" y=\"26.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Young live</text><text x=\"327.5\" y=\"42.5\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">in water</text><rect x=\"5.0\" y=\"52\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"35.0\" y=\"70.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">P</text><rect x=\"65.0\" y=\"52\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"95.0\" y=\"70.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"125.0\" y=\"52\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"172.5\" y=\"70.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"220.0\" y=\"52\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"250.0\" y=\"70.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"280.0\" y=\"52\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"327.5\" y=\"70.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"5.0\" y=\"80\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"35.0\" y=\"98.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Q</text><rect x=\"65.0\" y=\"80\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"95.0\" y=\"98.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"125.0\" y=\"80\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"172.5\" y=\"98.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"220.0\" y=\"80\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"250.0\" y=\"98.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"280.0\" y=\"80\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"327.5\" y=\"98.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"5.0\" y=\"108\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"35.0\" y=\"126.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">R</text><rect x=\"65.0\" y=\"108\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"95.0\" y=\"126.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"125.0\" y=\"108\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"172.5\" y=\"126.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"220.0\" y=\"108\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"250.0\" y=\"126.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"280.0\" y=\"108\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"327.5\" y=\"126.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"5.0\" y=\"136\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"35.0\" y=\"154.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">S</text><rect x=\"65.0\" y=\"136\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"95.0\" y=\"154.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"125.0\" y=\"136\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"172.5\" y=\"154.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">No</text><rect x=\"220.0\" y=\"136\" width=\"60\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"250.0\" y=\"154.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text><rect x=\"280.0\" y=\"136\" width=\"95\" height=\"28\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"327.5\" y=\"154.5\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Yes</text></svg>"
+  },
+  {
+   "id": "scicycl-ca6e8ddaf5",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statement correctly compares a cockroach and a butterfly?",
+   "options": [
+    "Both have a pupa stage before becoming adults.",
+    "The adult cockroach lays eggs, but the adult butterfly does not.",
+    "The young of a cockroach look like the adult, but the young of a butterfly do not.",
+    "A butterfly has three stages, but a cockroach has four."
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A cockroach has no pupa stage."
+    },
+    {
+     "tag": "false-fact",
+     "why": "Both adults lay eggs."
+    },
+    null,
+    {
+     "tag": "stage-count",
+     "why": "It is the other way round. A cockroach has three stages and a butterfly has four."
+    }
+   ],
+   "solution": [
+    "A cockroach nymph looks like a small adult.",
+    "A caterpillar looks very different from the adult butterfly."
+   ],
+   "params": {
+    "key": "lc-059",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-aed26a4f46",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which animal has the same number of stages in its life cycle as a beetle?",
+   "options": [
+    "Grasshopper",
+    "Frog",
+    "Chicken",
+    "Cockroach"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-count",
+     "why": "A grasshopper has three stages."
+    },
+    null,
+    {
+     "tag": "stage-count",
+     "why": "A chicken has three stages."
+    },
+    {
+     "tag": "stage-count",
+     "why": "A cockroach has three stages."
+    }
+   ],
+   "solution": [
+    "A beetle has four stages: egg, larva, pupa and adult.",
+    "A frog also has four: egg, tadpole, young frog and adult.",
+    "The others have three stages each."
+   ],
+   "params": {
+    "key": "lc-060",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-468ec5ec49",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The picture shows the plate under a flower pot at a home in Singapore. It holds some water. Which action best stops mosquitoes from breeding here?",
+   "options": [
+    "Put on mosquito repellent when going outside",
+    "Switch on a fan near the flower pot",
+    "Empty the water and scrub the plate every week",
+    "Keep the windows closed at all times"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "protects-not-prevents",
+     "why": "Repellent protects a person from bites but does nothing to stop mosquitoes breeding."
+    },
+    {
+     "tag": "protects-not-prevents",
+     "why": "A fan may blow adults away, but eggs, larvae and pupae still develop in the water."
+    },
+    null,
+    {
+     "tag": "protects-not-prevents",
+     "why": "This keeps adults out of the house but does not stop breeding in the water."
+    }
+   ],
+   "solution": [
+    "Mosquito eggs, larvae and pupae develop in water.",
+    "Removing the water and scrubbing off any eggs breaks the life cycle."
+   ],
+   "params": {
+    "key": "lc-062",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/pot-plate.webp",
+    "alt": "A flower pot standing in a plate that holds a little water, seen from the side.",
+    "labels": []
+   }
+  },
+  {
+   "id": "scicycl-a5bdebdd4a",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The table shows the least number of days a mosquito spends at each stage in water. Eggs are laid in a plate of water. What is the earliest number of days after which an adult mosquito can come out of the water?",
+   "options": [
+    "4",
+    "9",
+    "5",
+    "7"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "count-slip",
+     "why": "4 days is the egg and pupa stages only. The larva stage has been left out."
+    },
+    null,
+    {
+     "tag": "count-slip",
+     "why": "5 days is the larva stage only. The egg and pupa stages must be added."
+    },
+    {
+     "tag": "count-slip",
+     "why": "7 days adds the egg and larva stages but leaves out the 2 days of the pupa."
+    }
+   ],
+   "solution": [
+    "The egg lasts at least 2 days, the larva 5 days and the pupa 2 days.",
+    "2 + 5 + 2 = 9 days."
+   ],
+   "params": {
+    "key": "lc-063",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 149\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"55.0\" y=\"8\" width=\"110\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Stage</text><rect x=\"165.0\" y=\"8\" width=\"160\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Least number</text><text x=\"245.0\" y=\"44.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">of days in water</text><rect x=\"55.0\" y=\"54\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><rect x=\"165.0\" y=\"54\" width=\"160\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">2</text><rect x=\"55.0\" y=\"83\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Larva</text><rect x=\"165.0\" y=\"83\" width=\"160\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">5</text><rect x=\"55.0\" y=\"112\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Pupa</text><rect x=\"165.0\" y=\"112\" width=\"160\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">2</text></svg>"
+  },
+  {
+   "id": "scicycl-44f1410210",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A student says that emptying the water from a pot plate every 7 days helps to stop mosquitoes. Using the table, which statement best explains why?",
+   "options": [
+    "The pupae change back into larvae after 7 days in the water.",
+    "Adult mosquitoes drink all of the water in the pot plate in 7 days.",
+    "No adult comes out in under 9 days, so the eggs, larvae and pupae are removed first.",
+    "Mosquito eggs take 7 days to hatch, so only the eggs are in the water until then."
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "A pupa changes into an adult, never back into a larva."
+    },
+    {
+     "tag": "false-fact",
+     "why": "Adult mosquitoes do not use up the water in a pot plate."
+    },
+    null,
+    {
+     "tag": "table-misread",
+     "why": "The table shows that eggs take at least 2 days, and larvae and pupae follow."
+    }
+   ],
+   "solution": [
+    "The table shows that an adult needs at least 2 + 5 + 2 = 9 days.",
+    "If the water is emptied within 7 days, the eggs, larvae and pupae are thrown away before any adult comes out."
+   ],
+   "params": {
+    "key": "lc-064",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 149\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"55.0\" y=\"8\" width=\"110\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Stage</text><rect x=\"165.0\" y=\"8\" width=\"160\" height=\"46\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Least number</text><text x=\"245.0\" y=\"44.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">of days in water</text><rect x=\"55.0\" y=\"54\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><rect x=\"165.0\" y=\"54\" width=\"160\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"73.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">2</text><rect x=\"55.0\" y=\"83\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Larva</text><rect x=\"165.0\" y=\"83\" width=\"160\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"102.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">5</text><rect x=\"55.0\" y=\"112\" width=\"110\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"110.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Pupa</text><rect x=\"165.0\" y=\"112\" width=\"160\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"245.0\" y=\"131.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">2</text></svg>"
+  },
+  {
+   "id": "scicycl-37fa87c989",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statement about the pupa stage is correct?",
+   "options": [
+    "The pupa lays eggs for the next life cycle.",
+    "The pupa does not feed, but its body changes into that of the adult.",
+    "The pupa is the same as the nymph of a cockroach.",
+    "The pupa feeds a lot so that it can grow bigger."
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-misplaced",
+     "why": "Only the adult lays eggs."
+    },
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A nymph feeds and looks like a small adult. A pupa does not feed and looks different."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "Feeding and growing is what the larva does."
+    }
+   ],
+   "solution": [
+    "The pupa is a stage in which the insect does not feed.",
+    "Inside it, the body changes into the body of the adult."
+   ],
+   "params": {
+    "key": "lc-065",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-214e5ad397",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a frog. Which letters show stages that have a tail?",
+   "options": [
+    "A and D",
+    "C and D",
+    "B and C",
+    "A and B"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-misplaced",
+     "why": "The eggs (C) have no tail you can see."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "The adult frog (B) has no tail, and the eggs (C) have not grown a tail you can see."
+    },
+    {
+     "tag": "stage-misplaced",
+     "why": "B is the adult frog, which has no tail."
+    }
+   ],
+   "solution": [
+    "The tadpole (A) has a long tail.",
+    "The young frog (D) still has a short tail that gets smaller as it grows."
+   ],
+   "params": {
+    "key": "lc-067",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/frog-ring.webp",
+    "alt": "Life cycle of a frog drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 78.1,
+      "y": 57.1,
+      "text": "A"
+     },
+     {
+      "x": 18.6,
+      "y": 37.1,
+      "text": "B"
+     },
+     {
+      "x": 67.4,
+      "y": 14.6,
+      "text": "C"
+     },
+     {
+      "x": 39.1,
+      "y": 68.4,
+      "text": "D"
+     }
+    ]
+   }
+  },
+  {
+   "id": "scicycl-bd73f7a219",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A student finds a young insect. Which observation shows that it is a nymph and not a larva?",
+   "options": [
+    "It will become a pupa next.",
+    "It stops eating and forms a case around itself.",
+    "It looks very different from the adult.",
+    "It looks like a smaller adult, but its wings are not fully grown."
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "Only a larva becomes a pupa. A nymph becomes an adult."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "This is what a larva does before it becomes a pupa."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A young insect that looks very different from the adult is a larva."
+    },
+    null
+   ],
+   "solution": [
+    "A nymph looks like a small adult, so it does not look very different.",
+    "A larva looks very different and becomes a pupa."
+   ],
+   "params": {
+    "key": "lc-069",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-136a8d9cc7",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statement about the mosquito and the frog is correct?",
+   "options": [
+    "Both have a pupa stage.",
+    "Only the frog has four stages in its life cycle.",
+    "Only the mosquito's young live in water.",
+    "Both have four stages, and their young live in water."
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A frog has no pupa. It has a tadpole and a young frog."
+    },
+    {
+     "tag": "stage-count",
+     "why": "A mosquito has four stages: egg, larva, pupa and adult."
+    },
+    {
+     "tag": "habitat-mix",
+     "why": "Tadpoles live in water too."
+    },
+    null
+   ],
+   "solution": [
+    "A mosquito has four stages and a frog has four stages.",
+    "The young of both live in water."
+   ],
+   "params": {
+    "key": "lc-070",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-6f9a5975a3",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which list contains only animals whose young look very different from the adult?",
+   "options": [
+    "Chicken, frog, beetle",
+    "Mosquito, grasshopper, butterfly",
+    "Butterfly, cockroach, frog",
+    "Butterfly, frog, beetle"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A chick looks like a small adult."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A grasshopper nymph looks like a small adult."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A cockroach nymph looks like a small adult."
+    },
+    null
+   ],
+   "solution": [
+    "A caterpillar, a tadpole and a grub all look very different from the adult.",
+    "Each of the other lists has an animal with young that looks like the adult."
+   ],
+   "params": {
+    "key": "lc-071",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-757b0cc15e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Jun Wei says that all insects have a pupa stage. Which animal shows that he is wrong?",
+   "options": [
+    "Cockroach",
+    "Butterfly",
+    "Mosquito",
+    "Beetle"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A butterfly is an insect with a pupa stage, so it does not show he is wrong."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A mosquito is an insect with a pupa stage, so it does not show he is wrong."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "A beetle is an insect with a pupa stage, so it does not show he is wrong."
+    }
+   ],
+   "solution": [
+    "A cockroach is an insect that goes from egg to nymph to adult.",
+    "It has no pupa stage, so Jun Wei is wrong."
+   ],
+   "params": {
+    "key": "lc-072",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-b742f83681",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "A student measured the height of a bean plant every 2 weeks. During which period did the plant grow the fastest?",
+   "options": [
+    "Week 6 to week 8",
+    "Week 0 to week 2",
+    "Week 4 to week 6",
+    "Week 2 to week 4"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "table-misread",
+     "why": "The plant grew 12 cm in this period, which is less than in weeks 4 to 6."
+    },
+    {
+     "tag": "table-misread",
+     "why": "The plant grew only 4 cm in this period."
+    },
+    null,
+    {
+     "tag": "table-misread",
+     "why": "The plant grew 8 cm in this period, which is less than in weeks 4 to 6."
+    }
+   ],
+   "solution": [
+    "From week 4 to week 6 the height went from 12 cm to 30 cm, a growth of 18 cm.",
+    "That is more than in any other period."
+   ],
+   "params": {
+    "key": "lc-073",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 270\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><line x1=\"52\" y1=\"14\" x2=\"52\" y2=\"220\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"52\" y1=\"220\" x2=\"360\" y2=\"220\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"220.0\" x2=\"52\" y2=\"220.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"224.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">0</text><line x1=\"48\" y1=\"174.22222222222223\" x2=\"52\" y2=\"174.22222222222223\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"178.7\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">10</text><line x1=\"52\" y1=\"174.22222222222223\" x2=\"360\" y2=\"174.22222222222223\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"128.44444444444446\" x2=\"52\" y2=\"128.44444444444446\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"132.9\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">20</text><line x1=\"52\" y1=\"128.44444444444446\" x2=\"360\" y2=\"128.44444444444446\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"82.66666666666666\" x2=\"52\" y2=\"82.66666666666666\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"87.2\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">30</text><line x1=\"52\" y1=\"82.66666666666666\" x2=\"360\" y2=\"82.66666666666666\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"36.888888888888886\" x2=\"52\" y2=\"36.888888888888886\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"41.4\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">40</text><line x1=\"52\" y1=\"36.888888888888886\" x2=\"360\" y2=\"36.888888888888886\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"52.0\" y1=\"220\" x2=\"52.0\" y2=\"224\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"52.0\" y=\"240\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">0</text><line x1=\"129.0\" y1=\"220\" x2=\"129.0\" y2=\"224\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"129.0\" y=\"240\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">2</text><line x1=\"206.0\" y1=\"220\" x2=\"206.0\" y2=\"224\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"206.0\" y=\"240\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">4</text><line x1=\"283.0\" y1=\"220\" x2=\"283.0\" y2=\"224\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"283.0\" y=\"240\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">6</text><line x1=\"360.0\" y1=\"220\" x2=\"360.0\" y2=\"224\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"360.0\" y=\"240\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">8</text><polyline points=\"52.0,220.0 129.0,201.7 206.0,165.1 283.0,82.7 360.0,27.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"/><circle cx=\"52.0\" cy=\"220.0\" r=\"3.5\" fill=\"currentColor\"/><circle cx=\"129.0\" cy=\"201.7\" r=\"3.5\" fill=\"currentColor\"/><circle cx=\"206.0\" cy=\"165.1\" r=\"3.5\" fill=\"currentColor\"/><circle cx=\"283.0\" cy=\"82.7\" r=\"3.5\" fill=\"currentColor\"/><circle cx=\"360.0\" cy=\"27.7\" r=\"3.5\" fill=\"currentColor\"/><text x=\"206.0\" y=\"262\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Week</text><text transform=\"translate(14 117.0) rotate(-90)\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Height (cm)</text></svg>"
+  },
+  {
+   "id": "scicycl-98d1167b6d",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A student says that a chick is the same as the larva of a butterfly. Why is she wrong?",
+   "options": [
+    "A chick stops growing, but a butterfly larva keeps on growing.",
+    "A chick looks like a small adult, but a butterfly larva does not.",
+    "A chick hatches from a seed, but a butterfly larva hatches from an egg.",
+    "A chick is an adult chicken, but a butterfly larva is a young animal."
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "A chick keeps growing until it becomes an adult hen."
+    },
+    null,
+    {
+     "tag": "false-fact",
+     "why": "A chick hatches from an egg."
+    },
+    {
+     "tag": "false-fact",
+     "why": "A chick is the young of a chicken."
+    }
+   ],
+   "solution": [
+    "A chick looks like a smaller version of the adult hen.",
+    "A butterfly larva (caterpillar) looks very different from the adult butterfly."
+   ],
+   "params": {
+    "key": "lc-074",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-310945f7f0",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The diagram shows the life cycle of a butterfly. Stage D is the adult. Which letter shows the pupa?",
+   "options": [
+    "B",
+    "A",
+    "D",
+    "C"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "B is the stage after the egg, which is the larva."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "A is the stage that comes just after the adult, which is the egg."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "D is the adult butterfly."
+    },
+    null
+   ],
+   "solution": [
+    "The arrows go clockwise from A to B to C to D and back to A.",
+    "D is the adult, so A is the egg, B is the larva and C is the pupa."
+   ],
+   "params": {
+    "key": "lc-075",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 250\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><circle cx=\"190\" cy=\"40\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"190\" y=\"46\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">A</text><circle cx=\"300\" cy=\"125\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"300\" y=\"131\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">B</text><circle cx=\"190\" cy=\"210\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"190\" y=\"216\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">C</text><circle cx=\"80\" cy=\"125\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"80\" y=\"131\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">D</text><line x1=\"213.7\" y1=\"58.3\" x2=\"274.7\" y2=\"105.4\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><line x1=\"276.3\" y1=\"143.3\" x2=\"215.3\" y2=\"190.4\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><line x1=\"166.3\" y1=\"191.7\" x2=\"105.3\" y2=\"144.6\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/><line x1=\"103.7\" y1=\"106.7\" x2=\"164.7\" y2=\"59.6\" stroke=\"currentColor\" stroke-width=\"1.5\" marker-end=\"url(#ah)\"/></svg>"
+  },
+  {
+   "id": "scicycl-b17548e95c",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "A student draws the life cycle of a cockroach as: egg, larva, pupa, adult. What is wrong with it?",
+   "options": [
+    "The larva and pupa should be replaced by one stage called the nymph.",
+    "The pupa should come before the larva.",
+    "The egg stage should be removed because cockroaches give birth to young.",
+    "The adult should come before the egg."
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "A pupa never comes before a larva, and a cockroach has neither."
+    },
+    {
+     "tag": "false-fact",
+     "why": "A cockroach starts its life as an egg."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "The adult lays the eggs, but the life cycle of a cockroach starts from the egg."
+    }
+   ],
+   "solution": [
+    "A cockroach goes from egg to nymph to adult.",
+    "It has no larva or pupa stage."
+   ],
+   "params": {
+    "key": "lc-076",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-7ea7ee001e",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The table shows how a student sorted six animals into two groups. Which feature did she use to sort them?",
+   "options": [
+    "Whether the life cycle has four stages",
+    "Whether the young look like the adult",
+    "Whether the young live in water",
+    "Whether the animal has a pupa stage"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "stage-count",
+     "why": "The frog has four stages but is in Group P with the cockroach and chicken, which have three."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A frog's young does not look like the adult, but the frog is in Group P with the cockroach and chicken."
+    },
+    {
+     "tag": "habitat-mix",
+     "why": "Both the frog (Group P) and the mosquito (Group Q) have young that live in water."
+    },
+    null
+   ],
+   "solution": [
+    "Butterfly, beetle and mosquito all have a pupa stage.",
+    "Cockroach, chicken and frog have none."
+   ],
+   "params": {
+    "key": "lc-077",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 132\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><rect x=\"50.0\" y=\"8\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"120.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Group P</text><rect x=\"190.0\" y=\"8\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"260.0\" y=\"27.0\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\" fill=\"currentColor\">Group Q</text><rect x=\"50.0\" y=\"37\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"120.0\" y=\"56.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Cockroach</text><rect x=\"190.0\" y=\"37\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"260.0\" y=\"56.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Butterfly</text><rect x=\"50.0\" y=\"66\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"120.0\" y=\"85.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Chicken</text><rect x=\"190.0\" y=\"66\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"260.0\" y=\"85.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Beetle</text><rect x=\"50.0\" y=\"95\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"120.0\" y=\"114.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Frog</text><rect x=\"190.0\" y=\"95\" width=\"140\" height=\"29\" rx=\"0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"260.0\" y=\"114.0\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\">Mosquito</text></svg>"
+  },
+  {
+   "id": "scicycl-2fd121f8c2",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statements about the nymph of a cockroach are correct? A: It looks like a small adult. B: It does not have fully grown wings. C: It becomes a pupa before it becomes an adult.",
+   "options": [
+    "A and C only",
+    "A and B only",
+    "B and C only",
+    "A, B and C"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "C is wrong. A cockroach has no pupa stage."
+    },
+    null,
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "C is wrong. A cockroach has no pupa stage."
+    },
+    {
+     "tag": "complete-vs-incomplete",
+     "why": "C is wrong. A nymph becomes an adult without a pupa stage."
+    }
+   ],
+   "solution": [
+    "A and B are correct. The nymph looks like a small adult and its wings are not fully grown.",
+    "C is wrong because a cockroach has no pupa."
+   ],
+   "params": {
+    "key": "lc-078",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-61801900cb",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which statements about the larva of a butterfly are correct? A: It feeds on leaves. B: It has wings. C: It sheds its skin as it grows.",
+   "options": [
+    "A and B only",
+    "A, B and C",
+    "B and C only",
+    "A and C only"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "B is wrong. A butterfly larva has no wings."
+    },
+    {
+     "tag": "false-fact",
+     "why": "B is wrong. Only the adult butterfly has wings."
+    },
+    {
+     "tag": "false-fact",
+     "why": "B is wrong. A butterfly larva has no wings."
+    },
+    null
+   ],
+   "solution": [
+    "A and C are correct. The caterpillar eats leaves and moults as it grows bigger.",
+    "B is wrong because wings belong to the adult."
+   ],
+   "params": {
+    "key": "lc-079",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-585698eb79",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "The graph shows how long a cockroach spends in each stage. How many days does it take from the time the egg is laid until it becomes an adult?",
+   "options": [
+    "330",
+    "30",
+    "120",
+    "150"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "count-slip",
+     "why": "330 days includes the whole adult stage as well."
+    },
+    {
+     "tag": "count-slip",
+     "why": "30 days is the egg stage only. The nymph stage must be added."
+    },
+    {
+     "tag": "count-slip",
+     "why": "120 days is the nymph stage only. The egg stage must be added."
+    },
+    null
+   ],
+   "solution": [
+    "The egg stage lasts 30 days and the nymph stage lasts 120 days.",
+    "30 + 120 = 150 days."
+   ],
+   "params": {
+    "key": "lc-081",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 270\" font-family=\"Arial, sans-serif\"><defs><marker id=\"ah\" markerWidth=\"9\" markerHeight=\"9\" refX=\"8\" refY=\"4.5\" orient=\"auto\"><path d=\"M0,0 L9,4.5 L0,9 z\" fill=\"currentColor\"/></marker></defs><line x1=\"52\" y1=\"14\" x2=\"52\" y2=\"220\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"52\" y1=\"220\" x2=\"366\" y2=\"220\" stroke=\"currentColor\" stroke-width=\"1.5\"/><line x1=\"48\" y1=\"220.0\" x2=\"52\" y2=\"220.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"224.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">0</text><line x1=\"48\" y1=\"168.5\" x2=\"52\" y2=\"168.5\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"173.0\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">50</text><line x1=\"52\" y1=\"168.5\" x2=\"366\" y2=\"168.5\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"117.0\" x2=\"52\" y2=\"117.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"121.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">100</text><line x1=\"52\" y1=\"117.0\" x2=\"366\" y2=\"117.0\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"65.5\" x2=\"52\" y2=\"65.5\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"70.0\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">150</text><line x1=\"52\" y1=\"65.5\" x2=\"366\" y2=\"65.5\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><line x1=\"48\" y1=\"14.0\" x2=\"52\" y2=\"14.0\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"44\" y=\"18.5\" font-size=\"13\" text-anchor=\"end\" fill=\"currentColor\">200</text><line x1=\"52\" y1=\"14.0\" x2=\"366\" y2=\"14.0\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-dasharray=\"3 4\"/><rect x=\"78.2\" y=\"189.1\" width=\"52.3\" height=\"30.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"104.3\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Egg</text><rect x=\"182.8\" y=\"96.4\" width=\"52.3\" height=\"123.6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"209.0\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Nymph</text><rect x=\"287.5\" y=\"34.6\" width=\"52.3\" height=\"185.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><text x=\"313.7\" y=\"238\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Adult</text><text x=\"209.0\" y=\"262\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Stage of cockroach</text><text transform=\"translate(14 117.0) rotate(-90)\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">Number of days</text></svg>"
+  },
+  {
+   "id": "scicycl-8139a9d7f6",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-1"
+   ],
+   "stem": "Which statement about the life cycles of living things is correct?",
+   "options": [
+    "All living things begin their life cycles as eggs.",
+    "Every young animal looks like its parents when it hatches.",
+    "Adults of the same kind produce young that go through the same stages.",
+    "Every stage of a life cycle lasts the same number of days."
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "false-fact",
+     "why": "A flowering plant begins its life cycle as a seed."
+    },
+    {
+     "tag": "young-looks-like-adult",
+     "why": "A caterpillar and a tadpole look very different from their parents."
+    },
+    null,
+    {
+     "tag": "false-fact",
+     "why": "A chicken egg takes about three weeks to hatch, but a hen lives for years, so stages differ in length."
+    }
+   ],
+   "solution": [
+    "Adults of the same kind lay eggs or make seeds that grow into new adults.",
+    "The young go through the same stages as their parents did."
+   ],
+   "params": {
+    "key": "lc-082",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-93ae333d88",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-3"
+   ],
+   "stem": "Which of these is true for the chicken and the cockroach, but not for the frog?",
+   "options": [
+    "Their young look like smaller versions of the adult.",
+    "Their young live in water.",
+    "Their life cycles have an adult stage.",
+    "Their life cycles begin with an egg."
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "habitat-mix",
+     "why": "Neither the chick nor the nymph lives in water."
+    },
+    {
+     "tag": "overgeneralised",
+     "why": "This is also true for the frog, so it does not tell them apart."
+    },
+    {
+     "tag": "overgeneralised",
+     "why": "This is also true for the frog, so it does not tell them apart."
+    }
+   ],
+   "solution": [
+    "A chick and a cockroach nymph look like small adults.",
+    "A tadpole does not look like the adult frog."
+   ],
+   "params": {
+    "key": "lc-083",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   }
+  },
+  {
+   "id": "scicycl-6a9aa92855",
+   "topic": "sci-cycles-life-cycles",
+   "level": "competent",
+   "template": "sci-pat-life-cycle-stages",
+   "outcomes": [
+    "sci-cycles-life-cycles-compare-2"
+   ],
+   "stem": "The diagram shows the life cycle of a flowering plant. Which shows the stages in the correct order, starting from the seed?",
+   "options": [
+    "B, D, C, A",
+    "B, C, D, A",
+    "B, A, C, D",
+    "A, B, C, D"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "stage-order-swap",
+     "why": "D is the young plant. It comes after the seedling (C), not before."
+    },
+    null,
+    {
+     "tag": "stage-order-swap",
+     "why": "A is the adult plant, which is the last stage and not the second."
+    },
+    {
+     "tag": "stage-order-swap",
+     "why": "A is the adult plant. The list must start from the seed, which is B."
+    }
+   ],
+   "solution": [
+    "B is the seed, C is the seedling, D is the young plant and A is the adult plant.",
+    "Starting from the seed, the order is B, C, D, A."
+   ],
+   "params": {
+    "key": "lc-084",
+    "subtopic": "sci-cycles-life-cycles-compare"
+   },
+   "figure": {
+    "img": "/science/plant-ring.webp",
+    "alt": "Life cycle of a flowering plant drawn as a ring of four stages joined by arrows, marked A to D.",
+    "labels": [
+     {
+      "x": 10.7,
+      "y": 34.2,
+      "text": "A"
+     },
+     {
+      "x": 62.5,
+      "y": 6.8,
+      "text": "B"
+     },
+     {
+      "x": 83.0,
+      "y": 25.4,
+      "text": "C"
+     },
+     {
+      "x": 48.3,
+      "y": 64.9,
+      "text": "D"
+     }
+    ]
+   }
+  }
+ ]
+}

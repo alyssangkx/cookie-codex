@@ -68,7 +68,7 @@ def svg_errors(s):
     return sorted(set(out))
 
 
-def figure_errors(fig, answer_text=None):
+def figure_errors(fig, answer_text=None, options=()):
     if isinstance(fig, str): return svg_errors(fig)
     if not isinstance(fig, dict): return ["figure is neither an svg string nor a line-art object"]
     out = []
@@ -78,6 +78,8 @@ def figure_errors(fig, answer_text=None):
     if not isinstance(img, str) or not IMG.match(img): out.append(f"figure img {img!r} must look like /science/<file>.webp")
     elif not (ROOT / "site" / "public" / img.lstrip("/")).is_file(): out.append(f"figure image site/public{img} does not exist")
     if not isinstance(fig.get("alt"), str) or not fig["alt"].strip(): out.append("figure needs a non-empty alt")
+    label_texts = {str(lb.get("text", "")).strip().lower() for lb in fig.get("labels") or [] if isinstance(lb, dict)}
+    other_opts = {str(o).strip().lower() for o in options} - {str(answer_text or "").strip().lower()}
     labels = fig.get("labels", [])
     if not isinstance(labels, list): return out + ["figure labels must be a list"]
     for lb in labels:
@@ -88,7 +90,10 @@ def figure_errors(fig, answer_text=None):
         t = lb["text"]
         if not isinstance(t, str) or not t.strip() or len(t) > 40: out.append("figure label text must be 1-40 characters")
         elif re.search(r"<[A-Za-z/!]|&[#A-Za-z0-9]+;", t): out.append(f"figure label {t!r} must be plain text (no HTML or entities)")
-        elif answer_text and t.strip().lower() == answer_text.strip().lower(): out.append(f"figure label {t!r} gives away the answer")
+        elif answer_text and t.strip().lower() == answer_text.strip().lower() and not (other_opts & label_texts):
+            # a label equal to the answer gives it away only when no OTHER option is also a label
+            # (letter questions label every choice A-D on the picture, which reveals nothing)
+            out.append(f"figure label {t!r} gives away the answer")
     return out
 
 
@@ -127,7 +132,7 @@ for f, data in _all:
         if not it.get("solution"): e("missing solution")
         if "figure" in it:
             ans = opts[a] if isinstance(a, int) and not isinstance(a, bool) and 0 <= a < len(opts) and isinstance(opts[a], str) else None
-            for msg in figure_errors(it["figure"], ans): e(msg)
+            for msg in figure_errors(it["figure"], ans, opts if isinstance(opts, list) else ()): e(msg)
 
 # compiled banks: unique ids, 4-option shape, figure schema
 ids = Counter()
@@ -137,7 +142,7 @@ for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "science").glob("*.js
         if len(q["options"]) != 4 or not 0 <= q["answer"] < 4 or q["explain"][q["answer"]] is not None:
             errors.append(f"{f.name} {q['id']}: bad compiled shape")
         if "figure" in q:
-            errors += [f"{f.name} {q['id']}: {m}" for m in figure_errors(q["figure"], q["options"][q["answer"]])]
+            errors += [f"{f.name} {q['id']}: {m}" for m in figure_errors(q["figure"], q["options"][q["answer"]], q["options"])]
 errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
 
 for svg, must_fail in SELF_TESTS:

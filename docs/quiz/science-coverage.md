@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-0 shipped questions (basic 0, intermediate 0, competent 0), 0 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+228 shipped questions (basic 78, intermediate 77, competent 73), 90 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -12,9 +12,9 @@
 | Broad groups of living things | Classify living things into plants and animals based on similarities … | yes | yes | 0 **not yet** |
 | Properties and uses of materials | Relate the use of materials (wood, metal, ceramic, rubber, glass, pla… | yes | no | 0 **not yet** |
 | Properties and uses of materials | Compare physical properties of materials: strength, flexibility, abil… | yes | yes | 0 **not yet** |
-| Life cycles of plants and animals | Show an understanding that different living things have different lif… | yes | no | 0 **not yet** |
-| Life cycles of plants and animals | Observe and compare life cycles of flowering plants grown from seeds … | yes | yes | 0 **not yet** |
-| Life cycles of plants and animals | Observe and compare life cycles of animals (chicken, cockroach, frog,… | yes | yes | 0 **not yet** |
+| Life cycles of plants and animals | Show an understanding that different living things have different lif… | yes | no | 3 |
+| Life cycles of plants and animals | Observe and compare life cycles of flowering plants grown from seeds … | yes | yes | 7 |
+| Life cycles of plants and animals | Observe and compare life cycles of animals (chicken, cockroach, frog,… | yes | yes | 67 |
 | Cell and continuity of kind | Recognise that a cell is a basic unit of life [Standard Science only;… | yes | no | 0 **not yet** |
 | Cell and continuity of kind | Show an understanding that living things reproduce to ensure continui… | yes | no | 0 **not yet** |
 | Plant reproduction | Investigate the ways in which plants reproduce: spores, seeds | yes | no | 0 **not yet** |
@@ -33,8 +33,8 @@
 | Water cycle and conservation | Show an understanding of the roles of evaporation and condensation in… | yes | yes | 0 **not yet** |
 | Water cycle and conservation | Recognise the importance of water to life processes [Standard Science… | yes | no | 0 **not yet** |
 | Water cycle and conservation | Describe the impact of water pollution on Earth's water resources [St… | yes | no | 0 **not yet** |
-| Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 0 **not yet** |
-| Parts of a plant | Observe plant parts | yes | yes | 0 **not yet** |
+| Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 41 |
+| Parts of a plant | Observe plant parts | yes | yes | 34 |
 | Overview of human systems | Identify the human systems in the body and state their functions (dig… | yes | no | 0 **not yet** |
 | Digestive system | Identify the parts of the human digestive system (mouth, gullet, stom… | yes | yes | 0 **not yet** |
 | Gases in air | Recognise that air is made up of gases such as nitrogen, carbon dioxi… | yes | no | 0 **not yet** |
@@ -42,8 +42,8 @@
 | Respiratory and circulatory systems | Compare how plants, fish and humans take in oxygen and give out carbo… | yes | yes | 0 **not yet** |
 | Respiratory and circulatory systems | Compare the ways substances are transported within plants and humans … | yes | yes | 0 **not yet** |
 | Respiratory and circulatory systems | Recognise the integration of the digestive, respiratory and circulato… | yes | no | 0 **not yet** |
-| Plant transport system | Identify the parts of the plant transport system and describe their f… | yes | yes | 0 **not yet** |
-| Plant transport system | Investigate how food and water are transported in the plant | yes | yes | 0 **not yet** |
+| Plant transport system | Identify the parts of the plant transport system and describe their f… | yes | yes | 22 |
+| Plant transport system | Investigate how food and water are transported in the plant | yes | yes | 54 |
 | Electric circuits | Recognise that a circuit with an energy source (battery) and componen… | yes | yes | 0 **not yet** |
 | Electric circuits | Show an understanding that a closed circuit allows current to flow | yes | yes | 0 **not yet** |
 | Electric circuits | Construct simple circuits from circuit diagrams | yes | yes | 0 **not yet** |
@@ -91,8 +91,42 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**0 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Life cycles of plants and animals; Cell and continuity of kind; Plant reproduction; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Parts of a plant; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Plant transport system; Electric circuits; Variables affecting current; conductors; Magnets; Forces and their effects; Friction, elastic spring force, weight; Factors affecting survival; food chains; Organism, population, community, habitats; Adaptations and human impact; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Forms and conversion of energy; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**7 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Plant reproduction; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Forces and their effects; Friction, elastic spring force, weight; Factors affecting survival; food chains; Organism, population, community, habitats; Adaptations and human impact; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Forms and conversion of energy; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
-## 2. Top-school question types
+## 2. Top-school question types (214 P5/P6 papers)
 
-`scripts/quiz/science/patterns.json` does not exist yet.
+| Type | Papers it appears in | Shipped questions |
+|---|---|---|
+| Properties of solids, liquids and gases (mass, volume, shape) (`sci-pat-states-of-matter`) | 129 | 0 **not yet** |
+| Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 0 **not yet** |
+| Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 0 **not yet** |
+| Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 28 |
+| Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 0 **not yet** |
+| Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 12 |
+| Classify organisms into broad groups (plants, animals, fungi, bacteria) (`sci-pat-classify-groups`) | 99 | 0 **not yet** |
+| Respiratory and circulatory systems (lungs, heart, blood) (`sci-pat-resp-circulatory`) | 98 | 0 **not yet** |
+| Properties and uses of materials (`sci-pat-material-properties`) | 97 | 0 **not yet** |
+| Magnets: poles, magnetic materials, attraction and repulsion (`sci-pat-magnet-properties`) | 93 | 0 **not yet** |
+| Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
+| Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
+| Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 0 **not yet** |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 3 |
+| Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
+| Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 77 |
+| Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
+| Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 0 **not yet** |
+| Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 0 **not yet** |
+| Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 5 |
+| Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 9 |
+| Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 0 **not yet** |
+| Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 0 **not yet** |
+| Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
+| Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 14 |
+| Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
+| Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
+| Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 0 **not yet** |
+| Gases in air and tests for gases (`sci-pat-gases-in-air`) | 12 | 0 **not yet** |
+| Current strength, conductors and insulators (`sci-pat-circuit-variables`) | 11 | 0 **not yet** |
+| Respiration and the Sun as the source of energy (`sci-pat-respiration-sun`) | 9 | 0 **not yet** |
+| Rate of evaporation: factors and fair set-ups (`sci-pat-evaporation-rate`) | 5 | 0 **not yet** |
