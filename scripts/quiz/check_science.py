@@ -1,0 +1,137 @@
+"""Validate the Science item files and the compiled banks; exits non-zero on any failure.
+
+    python3 scripts/quiz/check_science.py
+
+Figures: an item's "figure" is an inline SVG string (code-made, currentColor, no scripts or external references)
+or line art {"img": "/science/<file>.webp", "alt", "labels": [{"x", "y", "text"}]} whose file must exist under site/public/.
+"""
+import json
+import re
+import sys
+import xml.etree.ElementTree as ET
+from collections import Counter
+from pathlib import Path
+
+HERE = Path(__file__).parent
+ROOT = HERE.parents[1]
+SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "science.json").read_text())
+OUTCOMES = {o["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
+SUBS = {sb["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
+PAT_FILE = HERE / "science" / "patterns.json"
+# the pattern catalogue is written separately; until it exists only "a non-empty string" is required
+PATTERNS = {p["id"] for p in json.loads(PAT_FILE.read_text())["patterns"]} if PAT_FILE.exists() else None
+LEVELS = {"basic", "intermediate", "competent"}
+IMG = re.compile(r"^/science/[\w.-]+\.webp$")
+OK_PAINT = {"currentcolor", "none", "transparent", "white", "black", "#fff", "#ffffff", "#000", "#000000"}
+BAD_TAGS = {"script", "foreignobject", "iframe", "object", "embed", "image", "use", "a", "animate", "set", "audio", "video"}
+MAX_SVG = 30_000
+errors = []
+
+
+def svg_errors(s):
+    """An inline SVG must be one well-formed <svg> with a viewBox, black/white or currentColor paint, nothing active or external."""
+    if not isinstance(s, str) or not s.strip(): return ["svg figure is empty"]
+    if len(s) > MAX_SVG: return [f"svg figure is {len(s)} chars (limit {MAX_SVG})"]
+    if re.search(r"<!(DOCTYPE|ENTITY)|<\?", s, re.I): return ["svg figure has a DOCTYPE, ENTITY or processing instruction"]
+    try:
+        root = ET.fromstring(s)
+    except ET.ParseError as ex:
+        return [f"svg figure is not well-formed: {ex}"]
+    out = []
+    if root.tag not in ("svg", "{http://www.w3.org/2000/svg}svg"): out.append(f"svg figure root is <{root.tag}>")
+    if not root.get("viewBox"): out.append("svg figure has no viewBox")
+    for el in root.iter():
+        tag = el.tag.split("}")[-1].lower()
+        if tag in BAD_TAGS: out.append(f"svg figure has a <{tag}> element")
+        if tag == "style" and re.search(r"@import|url\((?!\s*['\"]?#)", el.text or "", re.I): out.append("svg <style> references something external")
+        for k, v in el.attrib.items():
+            name = k.split("}")[-1].lower()
+            if name.startswith("on"): out.append(f"svg figure has an {name} handler")
+            if name == "href" or k.startswith("{"):
+                if not (name == "href" and v.startswith("#")): out.append(f"svg figure has external attribute {name}")
+            if re.search(r"javascript:|data:|https?:|//", v, re.I): out.append(f"svg attribute {name} has a URL or script")
+            if re.search(r"url\((?!\s*['\"]?#)", v, re.I): out.append(f"svg attribute {name} has a non-local url()")
+            if name in ("fill", "stroke") and v.strip().lower() not in OK_PAINT and not v.strip().lower().startswith("url(#"):
+                out.append(f"svg {name}={v!r}: use currentColor (black and white only)")
+            if name == "style" and re.search(r"(fill|stroke)\s*:\s*(?!currentcolor|none|white|black|#fff|#000|url\(#)", v, re.I):
+                out.append("svg style sets a colour other than currentColor")
+    return sorted(set(out))
+
+
+def figure_errors(fig, answer_text=None):
+    if isinstance(fig, str): return svg_errors(fig)
+    if not isinstance(fig, dict): return ["figure is neither an svg string nor a line-art object"]
+    out = []
+    extra = set(fig) - {"img", "alt", "labels"}
+    if extra: out.append(f"figure has unknown fields {sorted(extra)}")
+    img = fig.get("img")
+    if not isinstance(img, str) or not IMG.match(img): out.append(f"figure img {img!r} must look like /science/<file>.webp")
+    elif not (ROOT / "site" / "public" / img.lstrip("/")).is_file(): out.append(f"figure image site/public{img} does not exist")
+    if not isinstance(fig.get("alt"), str) or not fig["alt"].strip(): out.append("figure needs a non-empty alt")
+    labels = fig.get("labels", [])
+    if not isinstance(labels, list): return out + ["figure labels must be a list"]
+    for lb in labels:
+        if not isinstance(lb, dict) or set(lb) != {"x", "y", "text"}: out.append("figure label must be exactly {x, y, text}"); continue
+        for ax in ("x", "y"):
+            if isinstance(lb[ax], bool) or not isinstance(lb[ax], (int, float)) or not 0 <= lb[ax] <= 100:
+                out.append(f"figure label {ax} must be a number from 0 to 100")
+        t = lb["text"]
+        if not isinstance(t, str) or not t.strip() or len(t) > 40: out.append("figure label text must be 1-40 characters")
+        elif re.search(r"<[A-Za-z/!]|&[#A-Za-z0-9]+;", t): out.append(f"figure label {t!r} must be plain text (no HTML or entities)")
+        elif answer_text and t.strip().lower() == answer_text.strip().lower(): out.append(f"figure label {t!r} gives away the answer")
+    return out
+
+
+# keys and stems must be unique per SUB-TOPIC across files (several files can share one sub-topic, and the
+# review verdict, shuffle seed and question id are all keyed by sub-topic|key)
+_all = [(f, json.loads(f.read_text())) for f in sorted((HERE / "science" / "items").glob("*.json"))]
+sub_keys = Counter((d.get("subtopic"), it.get("key")) for _, d in _all for it in d["items"])
+sub_stems = Counter((d.get("subtopic"), it.get("stem")) for _, d in _all for it in d["items"])
+
+for f, data in _all:
+    sub = data.get("subtopic")
+    if sub not in SUBS:
+        errors.append(f"{f.name}: unknown subtopic {sub}")
+    for it in data["items"]:
+        e = lambda m: errors.append(f"{f.name} {it.get('key')}: {m}")
+        if not str(it.get("key", "")).strip(): e("missing key")
+        if sub_keys[(sub, it.get("key"))] > 1: e("duplicate key in this sub-topic")
+        if sub_stems[(sub, it.get("stem"))] > 1: e("duplicate stem in this sub-topic")
+        if it.get("level") not in LEVELS: e(f"bad level {it.get('level')}")
+        oc = str(it.get("outcome", ""))
+        if oc not in OUTCOMES or re.sub(r"-\d+$", "", oc) != sub: e(f"bad outcome {it.get('outcome')}")
+        pat = it.get("pattern")
+        if not isinstance(pat, str) or not pat.strip() or (PATTERNS is not None and pat not in PATTERNS): e(f"unknown pattern {pat}")
+        stem = str(it.get("stem", ""))
+        opts = it.get("options", [])
+        if not stem.strip(): e("empty stem")
+        elif not re.search(r"_{3,}", stem) and "?" not in stem: e("stem has no blank (____) and asks no question")
+        if len(opts) != 4 or any(not isinstance(o, str) or not o.strip() for o in opts) or len(set(opts)) != 4:
+            e(f"options not 4 distinct non-empty strings: {opts}")
+        elif len({o.strip().lower() for o in opts}) != 4: e(f"options differ only by case: {opts}")
+        a = it.get("answer")
+        ex = it.get("explain", [])
+        if not isinstance(a, int) or isinstance(a, bool) or not 0 <= a < 4: e("answer out of range")
+        elif len(ex) != 4 or ex[a] is not None or any(not (x and x.get("tag") and x.get("why")) for i, x in enumerate(ex) if i != a):
+            e("explain must be null for the answer and {tag, why} for each wrong option")
+        if not it.get("solution"): e("missing solution")
+        if "figure" in it:
+            ans = opts[a] if isinstance(a, int) and not isinstance(a, bool) and 0 <= a < len(opts) and isinstance(opts[a], str) else None
+            for msg in figure_errors(it["figure"], ans): e(msg)
+
+# compiled banks: unique ids, 4-option shape, figure schema
+ids = Counter()
+for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "science").glob("*.json")):
+    for q in json.loads(f.read_text())["questions"]:
+        ids[q["id"]] += 1
+        if len(q["options"]) != 4 or not 0 <= q["answer"] < 4 or q["explain"][q["answer"]] is not None:
+            errors.append(f"{f.name} {q['id']}: bad compiled shape")
+        if "figure" in q:
+            errors += [f"{f.name} {q['id']}: {m}" for m in figure_errors(q["figure"], q["options"][q["answer"]])]
+errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
+
+print(f"checked {len(_all)} item files, {sum(ids.values())} shipped questions")
+for m in errors[:40]:
+    print("FAIL", m)
+print(f"{len(errors)} failures")
+sys.exit(1 if errors else 0)

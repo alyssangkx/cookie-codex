@@ -10,11 +10,13 @@ export { MIN_POOL };
 
 export interface BankQ {
   id: string; sub: string; level: 'basic' | 'intermediate' | 'competent';
-  stem: string; options: string[]; answer: number; figure?: string;
+  stem: string; options: string[]; answer: number; figure?: Figure;
   explain: ({ tag: string; why: string } | null)[]; solution: string[];
   group?: string; seq?: number; // passage sets: questions sharing one passage
   visual?: Visual; // English visual text (poster, notice...) drawn as a card above the stem
 }
+/** Inline SVG (code-made, currentColor) or Science line art with HTML labels placed at x/y percent of the image. */
+export type Figure = string | { img: string; alt: string; labels?: { x: number; y: number; text: string }[] };
 export interface Visual {
   kind: 'poster' | 'notice' | 'brochure' | 'timetable' | 'email'; title: string; subtitle?: string;
   blocks: { heading?: string; lines: string[] }[]; footer?: string;
@@ -64,10 +66,10 @@ export const subsOf = (school: School) => subs.filter((s) => s.school === school
 export const subSlug = (id: string) => id.replace(/^(math|sci|eng|chi)-/, '');
 export const hasContent = (s: Sub) => s.playable.b || s.playable.i || s.playable.c;
 
-// English goes live as soon as its banks have a playable tier; Math and Chinese are always on.
+// English and Science go live as soon as their banks have a playable tier; Math and Chinese are always on.
 export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [
   { id: 'math', name: 'Math', ready: true },
-  { id: 'science', name: 'Science', ready: false },
+  { id: 'science', name: 'Science', ready: subs.some((s) => s.school === 'science' && hasContent(s)) },
   { id: 'english', name: 'English', ready: subs.some((s) => s.school === 'english' && hasContent(s)) },
   { id: 'chinese', name: 'Chinese', ready: true },
 ];

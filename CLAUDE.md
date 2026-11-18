@@ -83,6 +83,20 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
 - **Checks.** Stem has a `____` blank or a `?`; options are 4 distinct strings with the same first-letter case and end punctuation; explain is null only for the answer.
 - **Site.** `train.ts` marks English `ready` once a sub-topic has a playable tier (20 questions). `build_rewards.py` already lists English sub-topics (playable ones first within English), so Math and Chinese rewards do not move. English is open on the home map (`home-hotspots.json`), with the `chinese-english-open` art; `index.astro` shows a school open only when its hotspot says "open" AND `SCHOOLS.ready` is true, and throws if the art for the open set is missing.
 
+### Science banks (`scripts/quiz/science/`)
+
+Same contract as English (4 options, items + `review.json` with fingerprints, fail-closed, key-seeded shuffle, ids `sci<strand>-<sha1>`), reusing `scripts/quiz/bankcommon.py`. No passage sets.
+
+```bash
+python3 scripts/quiz/science/build.py     # items/*.json (each file has "subtopic") + review.json -> site/src/data/quiz/science/<topic>.json
+python3 scripts/quiz/check_science.py     # must print "0 failures"
+python3 scripts/quiz/science/coverage.py  # -> docs/quiz/science-coverage.md
+python3 scripts/quiz/build_rewards.py     # after the banks change
+```
+
+- **Figures.** An item may carry `"figure"`, copied into the bank question and part of the review fingerprint: (a) an inline SVG string made by code (black and white, `currentColor`, with a `viewBox`; no scripts, handlers, external refs or other colours), drawn like Math figures; or (b) line art `{"img": "/science/<file>.webp", "alt": "...", "labels": [{"x": 0-100, "y": 0-100, "text": "..."}]}` with the file under `site/public/science/`. The quiz page shows (b) as the image with the labels placed on it as escaped HTML (`figureHtml` in `quiz/index.astro`). `check_science.py` validates both, and fails a label that equals the correct option.
+- **Site.** `train.ts` marks Science `ready` once a sub-topic has a playable tier. The home map shows a school open only when its hotspot says "open" AND `SCHOOLS.ready`; flip the Science hotspot in `home-hotspots.json` only after the content passes review (the `all-open` art exists). When the first Science sub-topic becomes playable, `build_rewards.py` moves it to the front of Science, so Science slots shift; Math, Chinese and English do not.
+
 ### Game (`site/src/lib/`)
 
 - **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 3`). Never read or write storage directly. Rules it implements:

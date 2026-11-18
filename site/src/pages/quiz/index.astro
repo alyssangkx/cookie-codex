@@ -51,10 +51,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
-  import type { Visual } from '../../lib/train';
+  import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
 
-  type Q = { id: string; sub: string; level: string; figure?: string; topic?: string; stem: string; options: string[]; answer: number;
+  type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual };
   type Meta = {
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
@@ -78,8 +78,22 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
   // the asked cloze blank (four ＿, or English "(N) " + 8 underscores) is marked and kept on one line; other blanks have fewer
-  const fmt = (x: string) =>
-    esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>').replace(/（(\d+)）＿＿＿＿/g, '<mark class="ask">（$1）＿＿＿＿</mark>')
+  // bold the correct option's text inside an explanation (already escaped, ** already turned into <strong>).
+  // Text outside tags only, never inside an existing <strong> or an &#NN; entity. Skips 1-char options and 2-char non-CJK ones.
+  const boldAns = (h: string, opt: string) => {
+    const raw = opt.trim();
+    const cjk = /[㐀-鿿]/.test(raw);
+    if (raw.length < 2 || (raw.length === 2 && !cjk)) return h;
+    const body = esc(raw).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const make = (flags: string) => new RegExp(cjk ? body : `(?<![A-Za-z0-9_])(?<!\\d[.,/])${body}(?![A-Za-z0-9_])(?![.,/]\\d)`, flags);
+    const parts = h.split(/(<strong>[\s\S]*?<\/strong>|<[^>]+>|&#\d+;)/);
+    const hit = (re: RegExp) => parts.some((p, n) => n % 2 === 0 && re.test(p));
+    let re = make('g');
+    if (!cjk && !hit(make(''))) re = make('gi');
+    return parts.map((p, n) => (n % 2 ? p : p.replace(re, (m) => `<strong>${m}</strong>`))).join('');
+  };
+  const fmt = (x: string, ans?: string) =>
+    (ans ? boldAns(esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>'), ans) : esc(x).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>')).replace(/（(\d+)）＿＿＿＿/g, '<mark class="ask">（$1）＿＿＿＿</mark>')
       .replace(/\((\d+)\) (_{8})(?!_)/g, '<mark class="ask">($1) $2</mark>').replace(/(?:(\d+) )?(\d+)\/(\d+)/g, (_, w, n, d) =>
       `${w ? `${w}&#8239;` : ''}<span class="fr"><span class="n">${n}</span><span class="sr">/</span><span class="d">${d}</span></span>`);
 
@@ -109,7 +123,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const usedRight = new Map<string, Set<number>>();
   // the asked dialogue blank (the K in the last line 第（K）空…) is marked, like an asked cloze blank
   // blanks the child answered correctly in this quiz (group -> seq -> phrase) are shown filled in later questions
-  const filledBlanks = new Map<string, Map<number, string>>();
+  const filledBlanks = new Map<string, Map<number, { t: string; ok: boolean }>>();
   const dialogueStem = (q: Q) => {
     const k = /第（(\d+)）空[^\n]*$/.exec(q.stem)?.[1];
     let h = fmt(q.stem);
@@ -117,12 +131,39 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     // blanks of this dialogue that are not in this quiz (a cut set, or already mastered) show their answer,
     // so only the blanks being asked are open and nothing looks skipped
     if (q.group) for (const o of byId.values())
-      if (o.group === q.group && o.seq != null && !inQuiz.has(o.id)) fill.set(o.seq, o.options[o.answer]);
-    for (const [n, phrase] of fill) {
+      if (o.group === q.group && o.seq != null && !inQuiz.has(o.id)) fill.set(o.seq, { t: o.options[o.answer], ok: true });
+    for (const [n, f] of fill) {
       if (String(n) === k) continue; // never fill the blank being asked
-      h = h.replace(`（${n}）＿＿`, () => `（${n}）<span class="filled">${esc(phrase)}</span>`); // a function, so '$' in a phrase stays literal
+      h = h.replace(`（${n}）＿＿`, () => `（${n}）<span class="filled">${esc(f.t)}</span>`); // a function, so '$' in a phrase stays literal
     }
     return k ? h.replace(`（${k}）＿＿`, (m) => `<mark class="ask">${m}</mark>`) : h;
+  };
+
+  // cloze passage sets: a blank answered earlier in this quiz (right or wrong) reads as the correct text in later questions;
+  // right = green, wrong = amber "correct answer". reveal = feedback state, the asked blank is filled too.
+  const CLOZE = new Set(['chi-cloze-mcq', 'eng-gram-text-cohesion']);
+  const clozeStem = (q: Q, reveal: boolean) => {
+    const zh = q.sub === 'chi-cloze-mcq';
+    const asked = zh ? /（(\d+)）＿＿＿＿/.exec(q.stem)?.[1] : /\((\d+)\) _{8}(?!_)/.exec(q.stem)?.[1];
+    let h = fmt(q.stem);
+    const span = (f: { t: string; ok: boolean }) => f.ok ? `<span class="filled">${esc(f.t)}</span>`
+      : `<span class="filled fixed" title="correct answer">${esc(f.t)}</span>`;
+    for (const [n, f] of filledBlanks.get(q.group ?? '') ?? []) {
+      if (String(n) === asked) continue;
+      const lead = zh ? `（${n}）` : `(${n}) `;
+      h = h.replace(zh ? `（${n}）＿＿` : `(${n}) ____`, () => lead + span(f)); // a function, so '$' stays literal
+    }
+    const mine = filledBlanks.get(q.group ?? '')?.get(Number(asked));
+    if (reveal && asked && mine) {
+      h = h.replace(zh ? `<mark class="ask">（${asked}）＿＿＿＿</mark>` : `<mark class="ask">(${asked}) ________</mark>`,
+        () => `<mark class="ask">${zh ? `（${asked}）` : `(${asked}) `}${span(mine)}</mark>`);
+    }
+    return h;
+  };
+  const stemHtml = (q: Q, reveal = false) => {
+    const many = q.sub === 'chi-dialogue-mcq';
+    const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal) : fmt(q.stem);
+    return t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '');
   };
 
   let byId = new Map<string, Q>();
@@ -221,6 +262,17 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (left === 0) finish(true);
   }
 
+  // a figure is either inline SVG made by our own build scripts (a string) or line art with HTML labels over it
+  // (Science): the image path is limited to /science/ and every text and the alt go through esc()
+  const figureHtml = (f: Figure) => {
+    if (typeof f === 'string') return f;
+    if (!/^\/science\/[\w.-]+\.webp$/.test(f.img)) return '';
+    const pct = (n: number) => Math.min(100, Math.max(0, Number(n) || 0));
+    const tags = (f.labels ?? []).map((l) =>
+      `<span class="qfig-label" style="left:${pct(l.x)}%;top:${pct(l.y)}%">${esc(l.text)}</span>`).join('');
+    return `<span class="qfig-art"><img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy" decoding="async">${tags}</span>`;
+  };
+
   function render() {
     const q = byId.get(quiz[i])!;
     if (pausedAt) { deadline += Date.now() - pausedAt; pausedAt = 0; $('timer').classList.remove('paused'); clock(); }
@@ -230,7 +282,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const many = q.sub === 'chi-dialogue-mcq'; // the 8-phrase dialogue sets (grid, struck-through used phrases)
     $('visual').hidden = !q.visual;
     $('visual').innerHTML = q.visual ? visualCard(q.visual) : '';
-    $('stem').innerHTML = (many ? dialogueStem(q) : fmt(q.stem)) + (q.figure ? `<span class="qfig-wrap">${q.figure}</span>` : '');
+    $('stem').innerHTML = stemHtml(q);
     const used = (many && q.group && usedRight.get(q.group)) || new Set<number>();
     $('options').classList.toggle('many', many);
     $('options').innerHTML = q.options
@@ -257,9 +309,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const ok = k === q.answer;
     record(q.id, ok);
     if (ok && q.group) { if (!usedRight.has(q.group)) usedRight.set(q.group, new Set()); usedRight.get(q.group)!.add(k); }
-    if (ok && q.group && q.sub === 'chi-dialogue-mcq' && q.seq != null) {
+    if (q.group && q.seq != null && (CLOZE.has(q.sub) || (ok && q.sub === 'chi-dialogue-mcq'))) {
       if (!filledBlanks.has(q.group)) filledBlanks.set(q.group, new Map());
-      filledBlanks.get(q.group)!.set(q.seq, q.options[k]);
+      filledBlanks.get(q.group)!.set(q.seq, { t: q.options[q.answer], ok });
+      if (CLOZE.has(q.sub)) $('stem').innerHTML = stemHtml(q, true);
     }
     if (ok) score++; else wrongs.push({ q, chose: k, tag: q.explain[k]!.tag });
     $('options').querySelectorAll<HTMLButtonElement>('button').forEach((b, j) => {
@@ -270,8 +323,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('feedback').innerHTML =
       (ok ? '<p class="verdict good">Correct!</p>'
           : `<p class="verdict bad">Not yet. The answer is ${LETTERS[q.answer]}.</p>
-             <p class="mistake"><strong>Why ${LETTERS[k]} is tempting:</strong> ${fmt(q.explain[k]!.why)}</p>`) +
-      `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st)}</li>`).join('')}</ol>`;
+             <p class="mistake"><strong>Why ${LETTERS[k]} is tempting:</strong> ${fmt(q.explain[k]!.why, q.options[q.answer])}</p>`) +
+      `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`;
     $('feedback').hidden = false;
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
@@ -339,7 +392,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       return `<details class="rev"><summary>${fmt(q.stem)}</summary>
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
        <p>${chose >= 0 ? `You chose ${LETTERS[chose]} (${fmt(q.options[chose])}). ` : 'Not answered. '}Answer: ${LETTERS[q.answer]} (${fmt(q.options[q.answer])}).</p>
-       <ol class="steps">${q.solution.map((st) => `<li>${fmt(st)}</li>`).join('')}</ol></details>`;
+       <ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol></details>`;
     }).join('');
     const back = mode === 'tier' ? `<a href="/train/${sub.school}/${sub.slug}/">Back to ${esc(sub.name)}</a>`
       : mode === 'paper' ? '<a href="/paper/">Build another paper</a>' : '<a href="/train/">Back to the Schools</a>';
@@ -381,6 +434,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     background: color-mix(in srgb, currentColor 14%, transparent); }
   .quiz .stem .filled { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em;
     background: color-mix(in srgb, var(--r-rare, #2a8) 18%, transparent); border-radius: 0.2em; padding: 0 0.1em; }
+  .quiz .stem .filled { background: color-mix(in srgb, #2e9e5b 20%, transparent); text-decoration-color: #2e9e5b; }
+  .quiz .stem .filled.fixed { background: color-mix(in srgb, #e8a317 22%, transparent); text-decoration-color: #c98a0a; }
   .quiz .rev-vis { margin: 0.4rem 0; font-size: 0.95rem; }
   .quiz .rev-vis > summary { cursor: pointer; color: var(--cocoa-soft); }
   /* visual text cards: theme variables only, no images */
@@ -438,6 +493,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .won img { width: 80px; height: 80px; object-fit: contain; }
   .quiz .won span { display: grid; font-family: var(--font-display); }
   .quiz .qfig-wrap { display: block; margin: 0.75rem 0 0; max-width: 380px; color: var(--cocoa); }
+  .quiz .qfig-art { position: relative; display: block; line-height: 0; }
+  .quiz .qfig-art img { width: 100%; height: auto; display: block; border-radius: var(--radius-control); background: #fff; }
+  .quiz .qfig-label { position: absolute; transform: translate(-50%, -50%); padding: 0.1rem 0.35rem; border-radius: 0.3rem;
+    font: 700 0.85rem/1.2 var(--font-display); color: #1a1a1a; background: rgb(255 255 255 / 0.9); border: 1px solid #1a1a1a;
+    max-width: 45%; text-align: center; overflow-wrap: anywhere; }
   .quiz .qfig-wrap svg { width: 100%; height: auto; display: block; }
   .quiz .per-topic { border-collapse: collapse; margin: 0.5rem 0 1rem; }
   .quiz .per-topic td, .quiz .per-topic th { border-bottom: 1px solid var(--crust); padding: 0.25rem 0.75rem 0.25rem 0; text-align: left; text-transform: capitalize; }
