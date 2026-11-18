@@ -13,6 +13,9 @@ type Box = [number, number, number, number];
 const SCHOOL_IDS = new Set(['math', 'english', 'science', 'chinese']); // library, house, tower are not schools
 const buildings = spots.buildings.map((b) =>
   b.status === 'open' && SCHOOL_IDS.has(b.id) && !SCHOOLS.find((x) => x.id === b.id)?.ready ? { ...b, status: 'soon' } : b);
+// an open building with no link is a dead tap on the map: fail the build instead
+const deadLinks = buildings.filter((b) => b.status === 'open' && !b.href).map((b) => b.id);
+if (deadLinks.length) throw new Error(`index.astro: open buildings with no href: ${deadLinks.join(', ')}`);
 const isOpen = (id: string) => buildings.find((b) => b.id === id)?.status === 'open';
 const schools = ['chinese', 'science', 'english'].filter(isOpen);
 // suffix from the open set in a fixed order; no art for the combination falls back to the base map
