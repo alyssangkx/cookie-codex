@@ -40,8 +40,10 @@ COVERWORD = re.compile(r"instruction|name\s*[:;]|class\s*[:;]|index|duration|tim
 SCHOOLWORD = re.compile(r"school|pri\.?\s*sch|convent|institution|\bacs\b|\bchij\b|anglo|academy|小学|学校", re.I)
 ANSWER_TITLE = re.compile(r"answer\s*key|^\s*answers?\s*$|marking\s*scheme|suggested\s*answers?|答案", re.I)
 QSTART = re.compile(r"^\s*Q?\s*(\d{1,2})(?:\s*[.．、)]|\s+|$)")  # "12 ...", "12. ...", "Q12"; never "(12)"
+STEM = re.compile(r"\s*(The|Which|What|Why|How|Study|Look|Refer|In|An?|Some|Two|Three|Four|Each|When|[A-Z][a-z]+ (?:placed|put|carried|wanted|set|conducted|used|had|has|filled|poured|tested|observed|measured|added|kept|left|prepared|investigated|made|built|connected))\b")
+FOOTER = re.compile(r"examination|\bexam\b|prelim|page\s*\d|go on|continue|turn over|booklet|school|\b20\d\d\b", re.I)
 OPTION = re.compile(r"\(\s*([1-4])\s*\)")
-MARK_WORD = re.compile(r"^[\[(]\s*(\d{1,2})\s*(?:m|mk|mks|marks?)?\s*[\])]$|^\[(\d{1,2})$|^(\d{1,2})\]$", re.I)
+MARK_WORD = re.compile(r"^\[\s*(\d{1,2})\s*(?:m|mk|mks|marks?)?\s*\]$|^\(\s*(\d{1,2})\s*(?:m|mk|mks|marks?)\s*\)$|^\[(\d{1,2})$|^(\d{1,2})\]$", re.I)
 SEC_MARKS = [
     re.compile(r"questions?\s*(\d{1,2})\s*(?:to|-|–)\s*(\d{1,2})\s*(?:carry|carries)\s*(\d)\s*marks?\s*each", re.I | re.S),
     re.compile(r"(?:questions?|from)\s*(\d{1,2})\s*(?:to|-|–)\s*(\d{1,2}).{0,300}?\((\d{1,3})\s*marks?\)", re.I | re.S),
@@ -138,6 +140,8 @@ def page_kind(lines, H, pageno):
     if len(c) <= 1: return "blank"
     top = " ".join(l["text"] for l in c if l["top"] < 0.5 * H)
     if P6.search(top) and EXAMWORD.search(top) and COVERWORD.search(text): return "cover"
+    for l in c[:3]:  # "Nanyang Primary School P6 SCIENCE Prelim 2024 Suggested Answers"
+        if re.search(r"suggested\s*answers?|answer\s*key|marking\s*scheme", l["text"], re.I): return "answers"
     for l in c[:6]:
         title = len(l["text"].split()) <= 5 and len(re.sub(r"\s", "", l["text"])) <= 30  # a heading, not an instruction
         if title and ANSWER_TITLE.search(l["text"]) and not re.search(r"optical|sheet|写|填|涂", l["text"], re.I):
@@ -273,7 +277,7 @@ def catalogue_pdf(job):
     base = OUT / subject / str(year); pdir = base / "pages"; cdir = base / "crops"; cdir.mkdir(exist_ok=True)
     pages = [p for p in page_range(pages_spec, npages(pdf)) if (pdir / f"p{p:04d}.tsv").exists()]
     papers, questions, kinds = [], [], {}
-    paper = None; section = None; open_q = None
+    paper = None; section = None; open_q = None; opt4 = None
 
     def new_question(qno, page, line):
         nonlocal open_q
@@ -319,14 +323,14 @@ def catalogue_pdf(job):
                          "parts": [part], "first_page": page, "last_page": page, "answer_pages": [], "last_q": 0,
                          "sec_marks": [], "file": pdf.name}
                 papers.append(paper)
-            section = None; open_q = None
+            section = None; open_q = None; paper["in_answers"] = False; opt4 = None
             if part and paper["last_q"] and re.search(r"paper", part, re.I): paper["last_q"] = 0  # Paper 2 restarts at 1
             continue
         if paper is None or kind in ("index", "blank", "oas"): continue
         paper["last_page"] = page
-        if kind == "answers" or paper["answer_pages"] and paper["answer_pages"][-1] == page - 1 and kind == "content" \
-                and not any(QSTART.match(l["text"]) and l["left"] < 0.16 * W for l in c[:3]):
-            paper["answer_pages"].append(page); open_q = None
+        # a key runs until the next cover ("Q33 | a) ..." lines look like questions but are answers)
+        if kind == "answers" or paper.get("in_answers"):
+            paper["answer_pages"].append(page); paper["in_answers"] = True; open_q = None
             continue
         page_text = "\n".join(l["text"] for l in c)
         for rx in SEC_MARKS:
@@ -338,9 +342,21 @@ def catalogue_pdf(job):
         # the question-number column: the leftmost line that starts with a number (scans shift left/right,
         # and footers sit further left than the numbers, so the page's leftmost line is no guide)
         min_left = min((l["left"] for l in c if QSTART.match(l["text"]) and l["left"] < 0.35 * W), default=0)
-        starts = []  # (line index, qno)
+        starts = []  # (line index, kind, value): kind q | qi (inferred number) | cont | section | part
         for i, l in enumerate(c):
+            mc = re.match(r"\s*continued?\s*(?:from|of)\s*question\s*(\d{1,2})", l["text"], re.I)
+            if mc:
+                starts.append((i, "cont", int(mc.group(1)))); continue
             m = QSTART.match(l["text"])
+            if re.match(r"\s*\(\s*4\s*\)", l["text"]):
+                opt4 = l["left"]
+            elif opt4 is not None and not m and subject != "chinese" and not l["text"].lstrip().startswith("(") \
+                    and len(l["words"]) >= 4 and l["left"] < opt4 + 40 and STEM.match(l["text"]) \
+                    and not FOOTER.search(l["text"]):
+                # an MCQ ended at option (4) and a stem starts at the stem column with no number read:
+                # the next question (ponytail: inferred, flagged; step B confirms the number)
+                last = paper["last_q"] if not any(s[1] in ("q", "qi") for s in starts) else [s for s in starts if s[1] in ("q", "qi")][-1][2]
+                starts.append((i, "qi", last + 1)); opt4 = None; continue
             short = len(l["text"].split()) <= 8 or (subject == "chinese" and len(l["text"]) <= 20)
             if not m and short:
                 s = section_of(subject, l["text"])
@@ -348,10 +364,13 @@ def catalogue_pdf(job):
                 p = part_of(l["text"]) if len(l["text"]) < 40 else None
                 if p: starts.append((i, "part", p)); continue
             if not m or l["left"] > min_left + 0.04 * W: continue
-            qno = int(m.group(1)); last = paper["last_q"] if not starts or starts[-1][1] != "q" else starts[-1][2]
+            qs_ = [s for s in starts if s[1] in ("q", "qi")]
+            qno = int(m.group(1)); last = qs_[-1][2] if qs_ else paper["last_q"]
             fresh = not last or any(s[1] in ("section", "part") for s in starts[-1:])
+            if qs_ and qs_[-1][1] == "qi" and qno == qs_[-1][2]:  # the number turned up after all: drop the guess
+                starts.remove(qs_[-1]); last = qno - 1
             if last < qno <= last + 3 or (qno == 1 and fresh) or (qno == last + 1):
-                starts.append((i, "q", qno))
+                starts.append((i, "q", qno)); opt4 = None
         # walk the page: lines before the first start continue the open question
         cur = open_q; seg_top = c[0]["top"] if c else 0; segments = []
         for idx, (i, kind_, val) in enumerate(starts + [(len(c), "end", None)]):
@@ -359,9 +378,12 @@ def catalogue_pdf(job):
             if cur is not None:
                 segments.append((cur, seg_top, top))
             if kind_ == "section": section = val; cur = None
-            elif kind_ == "part": paper["part"] = val; cur = None
-            elif kind_ == "q":
+            elif kind_ == "part": paper["part"] = val
+            elif kind_ == "cont":
+                cur = next((q for q in reversed(questions) if q["paper"] == paper["paper_id"] and q["qno"] == val), cur)
+            elif kind_ in ("q", "qi"):
                 cur = new_question(val, page, c[i])
+                if kind_ == "qi": cur["flags"].append("qno_inferred")
             seg_top = top
         open_q = cur
         for q, y0, y1 in segments:
@@ -387,11 +409,13 @@ def catalogue_pdf(job):
             pap = next(p for p in papers if p["paper_id"] == q["paper"])
             hit = [per for a, b, per in pap["sec_marks"] if a <= q["qno"] <= b]
             if hit: q["marks"], q["marks_source"] = hit[-1], "section instruction"
+            elif subject == "science" and q["format"] == "mcq" and q["qno"] <= 28:
+                q["marks"], q["marks_source"] = 2, "PSLE format (Booklet A MCQ = 2)"
             else: q["flags"].append("marks_unknown")
         if not q["text"].strip(): q["flags"].append("no_text")
     for p in papers:
         p["questions"] = sum(q["paper"] == p["paper_id"] for q in questions)
-        for k in ("n", "last_q", "part"): p.pop(k)
+        for k in ("n", "last_q", "part", "in_answers"): p.pop(k, None)
         p["sec_marks"] = sorted(set(map(tuple, p["sec_marks"])))
     with open(base / "papers.jsonl", "w") as f:
         for p in papers: f.write(json.dumps(p, ensure_ascii=False) + "\n")
@@ -423,7 +447,7 @@ def selftest():
     assert not QSTART.match("(1) Both need light to grow.")
     assert not QSTART.match("(12)")
     assert sorted(set(OPTION.findall("(1) a (2) b ( 3 ) c (4) d"))) == ["1", "2", "3", "4"]
-    for w, v in [("[2]", 2), ("(3m)", 3), ("[1", 1), ("2]", 2), ("(2 marks)", 2), ("(4)", 4), ("[2m]", 2)]:
+    for w, v in [("[2]", 2), ("(3m)", 3), ("[1", 1), ("2]", 2), ("(2 marks)", 2), ("(4)", None), ("(6)", None), ("[2m]", 2)]:
         m = MARK_WORD.match(w)
         assert (next(g for g in m.groups() if g) if m else None) == (str(v) if v else None), w
     assert exam_of("PRELIMINARY EXAMINATION (2024)") == "Prelim"
