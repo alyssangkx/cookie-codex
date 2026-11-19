@@ -593,3 +593,5 @@ lock that username for new-device logins. Still in place: the CAPTCHA on every u
 lockouts (the section 5 bound, about 240 days to 5,000 guesses), weak-PIN refusal, the trusted-device `trust:` key
 (a stranger's failures never lock a child's own devices), and the parent's "Clear lock". `name_taken` at child
 creation tells a signed-in parent that a username exists (rate-limited to 60 actions an hour per parent).
+
+Applied 20 Nov 2026 00:11 SGT (new pin-login first, then 003, then parent-api and admin, then the site); live checks: `families.code` gone, site-wide index in place, no family-scoped lock rows left.
