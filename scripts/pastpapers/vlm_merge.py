@@ -11,8 +11,9 @@ Rules (ponytail: plain rules from the 2026 pilot; revisit when the truth scores 
 - One question per printed number: consecutive entries with the same number are its parts; "cont" joins the previous.
 - The VLM and step A number sequences are aligned (longest common subsequence). Matched questions keep step A's id,
   section and format.
-- Marks: step A's value first (section rules are reliable; the VLM copies section labels and totals). With no step A
-  value, other subjects use the VLM's printed marks when every part has one and the sum is 1-10; Chinese gets none."""
+- Marks: step A's value first (section rules are reliable; the VLM copies section labels and totals), except Science
+  open questions, where the VLM's printed per-part sum (every part has one, sum 1-10) comes first. With no step A value:
+  an MCQ takes the paper's usual MCQ mark; other questions (not Chinese) the VLM's printed sum, else none."""
 import argparse, json, re, sys
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -93,16 +94,24 @@ def merge_paper(subject, paper, stepa, vdir):
     pair = {}
     for blk in sm.get_matching_blocks():
         for k in range(blk.size): pair[blk.b + k] = blk.a + k
+    mm = [q["marks"] for q in stepa if q.get("format") == "mcq" and q.get("marks") is not None]
+    mcq_mark = max(set(mm), key=mm.count) if mm else None
     used, out, key = set(), [], []
     for j, v in enumerate(vq):
         a = stepa[pair[j]] if j in pair else None
         if a: used.add(pair[j])
         pm = [p["marks"] for p in v["parts"]]
         printed = sum(pm) if pm and all(m is not None for m in pm) else None
-        # step A first: on the 2026 maths truth papers it was right 29 times where the VLM was wrong, and wrong 5 times
-        # where the VLM was right (the VLM often copies a section's "2 marks each" label onto every question)
-        if a and a.get("marks") is not None:
+        # Step A first, except Science open questions. Where the two disagree on the 2026 truth papers: maths step A
+        # right 29 vs VLM 5 (the VLM copies "2 marks each" labels); science open VLM right 8 vs step A 1 (step A moves
+        # a part's [n] to the next question). An MCQ with no step A mark takes the paper's usual MCQ mark.
+        fmt = (a.get("format") if a else None) or ("mcq" if len(v["options"]) >= 3 else "open")
+        if subject == "science" and fmt != "mcq" and printed and 1 <= printed <= 10:
+            marks, src = printed, "vlm_printed"
+        elif a and a.get("marks") is not None:
             marks, src = a["marks"], "stepA"
+        elif fmt == "mcq" and mcq_mark:
+            marks, src = mcq_mark, "paper_mcq_mode"
         elif subject != "chinese" and printed and 1 <= printed <= 10:
             marks, src = printed, "vlm_printed"
         else:
@@ -111,8 +120,8 @@ def merge_paper(subject, paper, stepa, vdir):
         out.append({"id": a["id"] if a else f"{paper['paper_id']}-v{j:03d}", "paper": paper["paper_id"],
                     "school": paper.get("school"), "exam": paper.get("exam"), "qno": v["qno"],
                     "part": a.get("part") if a else None, "section": a.get("section") if a else None,
-                    "format": (a.get("format") if a else None) or ("mcq" if len(v["options"]) >= 3 else "open"),
-                    "marks": marks, "marks_from": src, "stepA_marks": a.get("marks") if a else None,
+                    "format": fmt,
+                    "marks": marks, "marks_from": src, "stepA_marks": a.get("marks") if a else None, "vlm_marks": printed,
                     "text": text, "options": v["options"], "figures": v["figures"], "pages": v["pages"],
                     "parts": len(v["parts"]), "flags": [] if a else ["vlm_only"]})
         key.append(j)
@@ -123,7 +132,7 @@ def merge_paper(subject, paper, stepa, vdir):
             key.append((a2v[prev] if prev is not None else -1) + (i - (prev if prev is not None else -1)) / 1000)
             out.append({**{k: a.get(k) for k in ("id", "paper", "school", "exam", "qno", "part", "section", "format",
                                                   "marks", "text", "pages")},
-                        "marks_from": "stepA", "stepA_marks": a.get("marks"), "options": [], "figures": [],
+                        "marks_from": "stepA", "stepA_marks": a.get("marks"), "vlm_marks": None, "options": [], "figures": [],
                         "parts": None, "flags": ["stepA_only"]})
     out = [r for _, r in sorted(zip(key, out), key=lambda x: x[0])]
     attach_answers(out, key_answers(vdir, paper))
