@@ -1,0 +1,44 @@
+# DRAFT - not applied. Phase 2 patch for supabase/functions/admin/index.ts (docs/accounts-plan.md section 12).
+# Four changes: CORS fails closed; the duplicate-name check and error match use the per-parent index
+# profiles_family_name_uq; delete_child clears the family-scoped lock keys. Everything else is unchanged.
+--- admin/index.ts	2026-11-17 15:27:56.413540376 +0800
++++ admin/index.ts	2026-11-19 19:06:46.580293439 +0800
+@@ -24,8 +24,9 @@
+ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+ const nameKey = (n: string) => n.trim().toLowerCase();
+ 
+-const CORS = {
+-  'access-control-allow-origin': Deno.env.get('SITE_ORIGIN') ?? '*',
++const ORIGIN = Deno.env.get('SITE_ORIGIN');
++const CORS: Record<string, string> = {
++  ...(ORIGIN ? { 'access-control-allow-origin': ORIGIN } : {}), // fail closed (audit F14)
+   'access-control-allow-headers': 'authorization, apikey, content-type, x-client-info',
+   'access-control-allow-methods': 'POST, OPTIONS',
+ };
+@@ -105,7 +106,7 @@
+         if (fixed.error) throw fixed.error;
+         const ins = await svc.from('profiles').insert({ id, parent_id: caller.id, name, role });
+         if (ins.error) {
+-          if (ins.error.code === '23505' || /profiles_name_key_uq/.test(ins.error.message ?? '')) throw new Refuse(409, 'name_taken');
++          if (ins.error.code === '23505' || /profiles_family_name_uq/.test(ins.error.message ?? '')) throw new Refuse(409, 'name_taken');
+           throw ins.error;
+         }
+       } catch (e) {
+@@ -120,7 +121,7 @@
+         if (typeof body.name !== 'string') throw new Refuse(400, 'bad_request');
+         const name = body.name.trim();
+         if (!NAME_RE.test(name)) throw new Refuse(400, 'bad_request');
+-        const dup = await svc.from('profiles').select('id').eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle();
++        const dup = await svc.from('profiles').select('id').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle(); // unique per parent
+         if (dup.error) throw dup.error;
+         if (dup.data) throw new Refuse(409, 'name_taken');
+         return json({ child: await makeChild(name, 'child') });
+@@ -173,7 +174,7 @@
+         if (p.role !== 'test' && body.confirm !== p.name) throw new Refuse(400, 'confirm_required');
+         // clear the lock rows first: if that fails nothing is deleted and the admin can retry
+         for (const trusted of [false, true]) {
+-          const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: nameKey(p.name), p_trusted: trusted });
++          const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: `${caller.id}:${nameKey(p.name)}`, p_trusted: trusted });
+           if (c.error) throw c.error;
+         }
+         const del = await svc.auth.admin.deleteUser(id); // profiles and saves cascade

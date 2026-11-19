@@ -344,3 +344,165 @@ Implemented: yes. What differs from the plan above:
 - **`/parent/`** shows the save on this device (an admin session has no child save of its own); the PIN screen and the Change-PIN form are removed.
 - **Browser calls** use plain `fetch` to the functions (the CORS allow-list has no `x-client-info`). `SITE_ORIGIN` is `http://localhost:4321`, so the live test served the site on 4321, not 4331.
 - Not built: privacy page, `delete-account`, field-merge on conflict.
+
+
+## 12. Open parent sign-up
+
+Status: **design draft (Phase 1, 19 Nov 2026). Nothing is applied or deployed.** Owner's decision: any parent can register with an email address and add their own children; PINs are never emailed, the parent sets each PIN on the site after verifying their email. Drafts written for this section: `supabase/migrations/002_parents.sql`, `supabase/functions/_drafts/{parent-api.ts, pin-login.family.ts, admin.family.patch.txt}`, `supabase/functions/_shared/{weakpin.ts, captcha.ts}`. The security audit (F1-F20, `/data/alvin/tmp/cookie-codex/site-review/security.md`) is the checklist: every finding marked "worse under open sign-up" is in the table in 12.10.
+
+### 12.1 Sign-up and verify flow
+
+1. **`/signup/`**: email, password (10+ characters), CAPTCHA, and two ticked boxes on the consent screen (12.9: "I am the parent or guardian of the children I will add", "I have read the privacy notice"). The browser calls `supabase.auth.signUp` with the CAPTCHA token and `emailRedirectTo = /signup/verify/`. Supabase sends the verification email through the custom SMTP provider (12.8). The page then says "Check your email" and nothing else (the same words whether or not the address already exists; Supabase already hides that).
+2. **Verify.** The link opens `/signup/verify/` with a session. The page calls `parent-api` `register { consent_version }`. The function (service role) checks the email is confirmed and is not a `@children.invalid` address, creates the `families` row (random family code, consent version, server timestamp), and only then sets `app_metadata.role = 'parent'` (the client can never write it). The page refreshes its session so the token carries the role.
+3. **`/parent/`** opens on "Add your first child": name, PIN typed twice (weak PINs are refused with a reason), then a card showing the **family code** ("Alyssa logs in at the Cookie Codex with this code, her name and her PIN") with Copy and Print.
+4. **Child login** (`/login/`): family code + name + PIN pad. The code is remembered on that device. New devices pass the CAPTCHA once; a trusted device (valid device token) does not.
+5. **Later**: the parent signs in at `/grownups/` (email + password, authenticator code if enrolled), manages children, and can delete the account.
+
+An unverified sign-up is purged after 3 days (`private.purge_unconfirmed`). A parent who never reaches `register` has an auth user and no family row and can do nothing.
+
+### 12.2 Roles
+
+| Role | Where it lives | Powers |
+|---|---|---|
+| admin | `app_metadata.role = 'admin'`, aal2 required, by hand | unchanged: the `admin` function, all-profile reads, test tools, read-only Alyssa's save (restrictive RLS) |
+| parent | `app_metadata.role = 'parent'`, set only by `parent-api register` | their own family only: list/add/rename/delete children, set PIN, clear locks, rotate the code, read their children's saves (existing RLS `owns_child`), delete the account |
+| child | no role; synthetic address and derived password | read/write own save only |
+| test | `profiles.role = 'test'` | unchanged; admin's own profile only (a trigger refuses it under any other parent) |
+
+`is_admin()` is untouched, so a parent never gains a global read (F7). `parent-api` refuses an admin session (403 `use_admin`) and the `admin` function refuses a parent, so neither role can borrow the other's door. All parent writes still go through an Edge Function with the service role scoped by `parent_id = caller.id`: **RLS on `profiles` and `saves` is not widened**; the browser only reads, as today (parent: own children via `parent_id = uid`, own saves via `owns_child`).
+
+### 12.3 Parent login and 2FA
+
+Email + password at `/grownups/`. aal1 is enough to view and manage children. **TOTP for parents is optional and enforced once enrolled**: `parent-api` returns 403 `mfa_required` for a parent with a verified factor whose token is not aal2, and the page then asks for the code (same flow as `/admin/`). `/signup/verify/` and `/parent/` offer "Add an authenticator app" after sign-up. Why not required: the families are parents of Primary 6 children, a forced second factor will cost sign-ups and password-reset support, and a parent account protects a quiz save and a first name, not money. Why not nothing: F8 (credential stuffing). Compensations: password 10+ characters, leaked-password check (Supabase Pro only, see 12.8), the CAPTCHA and Auth's own rate limits, a 60-per-hour cap on parent actions, `delete_account` needs the typed email. **Owner decision: optional-if-enrolled (draft default) or required.** Password reset by email (`/reset/`, CAPTCHA on the request) is the recovery path; there is no admin override for a parent's password.
+
+### 12.4 Parent page scope (`/parent/`)
+
+Own children only. The page gate becomes: admin at aal2 (as today) **or** parent (aal2 if enrolled). For a parent it shows the family code (copy, print, "Make a new code" if it leaked), the child list with PIN-set date and lock state, per-child: Rename, Set PIN, Clear lock, Delete (type the name), the save on this device and the picked child's save summary and "Questions answered wrong" (the existing code, reading through RLS), and "Delete account and all data" (12.9). Adding a child: name (same ASCII rule, unique inside the family; "Admin" and "Test Player" are reserved), PIN twice, at most **6 children per parent**. A renamed child keeps their save; the lock rows of the old name are cleared first. `set_pin` also voids every trusted-device token of that child (existing `pin_set_at` rule). The admin keeps managing Alyssa, the Admin player and the Test Player in `/admin/` with the same functions as today.
+
+### 12.5 Family code and login lockout keys
+
+- **Format** (draft, owner may change): 8 symbols from `23456789ABCDEFGHJKMNPQRSTUVWXYZ` (no 0, 1, I, L, O), shown as `K7M4-QX2P`; input ignores case, hyphen and spaces. 31^8 = 8.5e11 values, unique, random, rotatable. It is a **locator, not a secret**: children share it. The secret is still the PIN, bounded by the lockouts.
+- **Login** is `{ familyCode, name, pin, deviceId, deviceToken?, captchaToken? }`. The function finds the family by exact code, then the child by exact `(parent_id, name_key)`. Names are unique **per parent** (index `profiles_family_name_uq` replaces the global one). Unknown code, unknown name and wrong PIN all answer `wrong_name_or_pin`, with the same work (dummy hash), as today.
+- **Lockout keys** become `name:<parent_id>:<name_key>` and `trust:<parent_id>:<name_key>`; `device:<id>` is unchanged. The SQL RPCs (`pin_reserve_attempt`, `pin_clear`) are **not changed**: the key is a text built by the function, so limits, windows, escalation and the worst-case table in section 5 stand. What changes is who can reach a key: an attacker now needs the family code plus the name, and one family's "Emma" no longer collides with another's. Unknown code or malformed name: only the device key is counted.
+- **Weak PINs** (`_shared/weakpin.ts`) are refused when a parent sets one: repeats, runs (1234, 9876), `abab` pairs, a short list of the most common PINs, years 1990-2035. That is 171 of 10,000 values: it removes the first guesses, it does not change the bound. The honest bound against a classmate who knows the code and the name is unchanged, the section 5 numbers (about 240 days to 5,000 guesses).
+- **No global name lookup remains**, so the code, not the name, is what an attacker lacks (F1). A stranger who learns a code can only affect that family, and the parent can rotate the code or clear a lock themselves (F5).
+- **CAPTCHA on untrusted logins** (12.8): checked after the cheap lookups and before the lock RPC and the 600,000-iteration hash; a failed CAPTCHA counts against no lock. A trusted device skips it, so a child on a known tablet is never asked.
+
+### 12.6 Role-based unlimited play
+
+`isUnlimited()` (store.ts) stops comparing the name to `Admin`. New column `profiles.unlimited boolean` (default false; **no client write grant**; readable by the owner and the child). A trigger sets it for `role = 'test'` and refuses it unless the profile's `parent_id` is an admin account; names `admin` and `test player` are refused for any non-admin parent. `login/` and `sync.hydrate` store the flag in kv `profile-unlimited` from the profile row; `isUnlimited()` reads that. The live "Admin" player keeps working: the migration sets `unlimited = true` on the admin-owned profile with `name_key = 'admin'` and on the Test Player. No save-schema change, so no `store.ts` migration step. Honest limit (F11): the daily cap, tries and tier locks live in the client-writable save and kv, so a child with devtools can still lift them; the flag only removes the "name your child Admin" route. Server-side enforcement of the caps in `push_save` is out of scope (open decision 9).
+
+### 12.7 Changes by file
+
+**SQL (`supabase/migrations/002_parents.sql`, draft written)**
+
+| Change | Why |
+|---|---|
+| `public.families(parent_id pk, code unique, consent_version, consented_at)`; RLS: select own row only, no client write; backfill a row for the admin; 500-row cap trigger | family code, consent record, free-tier backstop (F6) |
+| drop `profiles_name_key_uq`, add `profiles_family_name_uq (parent_id, name_key) where role = 'child'` | names per parent (F1) |
+| `profiles.unlimited` + `private.profiles_guard` (reserved names, 6 children per parent, test/unlimited admin-only) | 12.6, F6, F11 |
+| `pin_clear_name_lock(uuid)` replaced: admin **or owning parent**; keys `<parent_id>:<name_key>` | F5, F7 |
+| `push_save` replaced: object, at most 40 keys, numeric `schemaVersion`, under 512 KB, else status `invalid`; `saves_size_cap` check `NOT VALID` | F6, F2 server side |
+| `public.rate_hit()` + `private.rate_hits` | parent action cap, register cap (F4) |
+| `private.purge_pin_attempts()`, `private.purge_unconfirmed()`; `cron.schedule` lines commented out (needs pg_cron enabled) | F4 table growth, unverified sign-ups |
+| backfill: families row for the existing grown-up; `unlimited` for the Test Player and the Admin player | 12.11 |
+
+**Edge Functions** (drafts in `supabase/functions/_drafts/`; underscore directories are never deployed by `supabase functions deploy`)
+
+| File | Change |
+|---|---|
+| `_drafts/parent-api.ts` -> `functions/parent-api/index.ts` | new: `register`, `me`, `create_child`, `rename_child`, `set_pin`, `clear_name_lock`, `delete_child`, `rotate_family_code`, `delete_account`; JWT verification ON; parent role, aal2-if-enrolled, per-parent scope and 60/hour cap; `set_pin` re-asserts the child's synthetic email and derived password (F13) |
+| `_drafts/pin-login.family.ts` -> `functions/pin-login/index.ts` | family code, family-scoped keys, CAPTCHA for untrusted requests, CORS fails closed (F14) |
+| `_drafts/admin.family.patch.txt` -> `functions/admin/index.ts` | per-parent duplicate check and error match, family-scoped `pin_clear` in `delete_child`, CORS fails closed |
+| `_shared/weakpin.ts`, `_shared/captcha.ts` | new, used by the above (written, `weakpin` run under Node for the counts above) |
+
+New secrets, typed by the owner with `supabase secrets set` and never in the repo: `CAPTCHA_SECRET`; config values `CAPTCHA_REQUIRED=true`, `CONSENT_VERSION`; `SITE_ORIGIN` must be the production origin before deploy (the old value is `http://localhost:4321`).
+
+**Auth settings** (dashboard, only these; each needs the owner's "go")
+
+1. Allow new users to sign up: ON (today `disable_signup: true`). Confirm email: stays ON (`mailer_autoconfirm: false`). Anonymous sign-ins: OFF.
+2. Custom SMTP (12.8), sender name and address, email subject and body for the confirm, reset and change-email templates (plain, no tracking links).
+3. CAPTCHA protection: ON, provider and secret from the owner (12.8).
+4. Password: minimum length 10; leaked-password protection ON if the plan allows it (Pro).
+5. Rate limits: emails per hour raised to the SMTP provider's allowance; sign-ups and sign-ins per IP lowered (draft: 10 per 5 minutes); keep OTP/link expiry at 1 hour.
+6. URL Configuration: Site URL = production; redirect allow-list `/signup/verify/` and `/reset/` for production only (no wildcard for previews unless needed).
+7. MFA: TOTP stays enabled (already on for the admin); no phone MFA.
+8. Secure email change ON, so a child session cannot attach an address (F13).
+9. Extensions: enable `pg_cron`, then schedule the two purge jobs.
+
+**Site pages** (Phase 2)
+
+| File | Change |
+|---|---|
+| `site/src/pages/signup/index.astro`, `signup/verify.astro` (new) | sign-up form, CAPTCHA widget, consent screen, verify -> `register` -> `/parent/` |
+| `site/src/pages/grownups/index.astro`, `reset/index.astro` (new) | parent and admin email login with TOTP step; password reset |
+| `site/src/pages/privacy/index.astro` (new) | notice (12.9); linked from `/signup/`, `/login/`, `/parent/` |
+| `site/src/pages/login/index.astro` | family code field (remembered), CAPTCHA widget reset after every try, new `captcha_failed` message |
+| `site/src/pages/parent/index.astro` | gate: admin aal2 or parent; children manager, family code, delete account; every dynamic value through `esc(String(x))` |
+| `site/src/layouts/Base.astro` | public routes add `/signup`, `/signup/verify`, `/grownups`, `/reset`, `/privacy`; `/parent` allows `role === 'parent'` (aal2 when `nextLevel === 'aal2'`) or admin at aal2 |
+| `site/src/lib/supabase.ts` | `callParentApi()`, `roleOf(session)` helper |
+| `site/src/lib/sync.ts` | **validate once at hydrate** (below); store `profile-unlimited`; `decidePush` handles status `invalid` like `denied` |
+| `site/src/lib/store.ts` | `isUnlimited()` reads kv `profile-unlimited` (no name check) |
+| `vercel.json` (F3, same release) | CSP with the CAPTCHA provider's script and frame origins allowed, `frame-ancestors 'none'`, `nosniff`, referrer policy |
+
+**F2 follow-up (the parent page is fixed; the other pages are not).** `site/src/lib/cleansave.ts` (`cleanSave`) already renders a clean copy for the parent page and My House. The remaining readers (quiz, train, collection, paper, home) read the synced save through `store.load()`. Build plan: run `cleanSave` **once at hydrate time in `sync.ts`** (`adoptServer`, the conflict copy, and the picked-child read), before the save reaches `localStorage`, and discard or flag a save that does not clean (keep the raw string in `ccx:failed:n`, as `load()` already does). Then every page reads validated data without each call site validating. Add tests to `sync.test.ts` (a tampered server save is cleaned before it is stored; the cleaned copy is what `load()` returns).
+
+### 12.8 Choices the owner must make
+
+| Choice | Options and recommendation |
+|---|---|
+| **SMTP provider** | Supabase's built-in sender allows only a few emails an hour and is not for production. Recommend **Resend** (free 3,000/month, simple SMTP) or **Brevo** (free 300/day) or AWS SES (cheapest at scale, needs a verified domain and leaving the sandbox). All need a sender **domain** with SPF, DKIM and DMARC records: the free `*.vercel.app` host cannot send from its own address, so a sender domain (any cheap one) is needed. |
+| **CAPTCHA** | Recommend **Cloudflare Turnstile** (free, invisible mostly, no puzzle for children, supported natively by Supabase Auth). hCaptcha is the alternative. Applies to sign-up, password reset, and untrusted child logins. |
+| **Parent 2FA** | Optional and enforced once enrolled (draft) vs required (12.3). |
+| **Family-code format** | 8 symbols, `XXXX-XXXX` (draft) vs shorter 6 symbols (easier to type, 31^6 = 8.9e8, still unique and rotatable). |
+| **Sign-up cap and cost** | 500 families (trigger), 6 children each, 512 KB per save. Free Supabase is 500 MB and 50,000 monthly active users but pauses after inactivity and has no backups; with real families, move to Pro (also unlocks leaked-password protection and session limits). |
+| **Privacy and contact** | Who is named as the contact for access, correction and deletion requests, and the notice text. |
+| **Existing family** | OK that Alyssa's new devices need the family code once (her signed-in devices keep working)? |
+| **Server-side caps** | Enforce the daily cap in `push_save` (F11) or leave the limits advisory? |
+| **Delete retention** | Hard delete now (draft) or a 14-day undo window? |
+
+### 12.9 PDPA screens and deletion
+
+- **Consent screen at sign-up** (before the form submits): what is collected (the parent's email; each child's first name, a hashed PIN and quiz progress), why (saving progress across devices), where (Supabase, Singapore, no overseas transfer of stored data), who sees it (the parent; the site's operator can read it to run the service; nothing is shared, sold or used for ads or analytics), how long (until deleted), and two required, unticked boxes: parent or guardian of the children added; has read the privacy notice. `consent_version` and a server timestamp are stored in `families`; a changed notice gets a new version and a re-consent screen at the next parent sign-in.
+- **`/privacy/`**: the plain-language notice (extends the draft in section 7): no child email, birthday, school, photo or location; no tracking; data access (the save code export), correction (rename, PIN change), withdrawal and deletion (below), contact for requests, breach handling (notify the parent, and the PDPC where required).
+- **Delete account and all data**: `parent-api delete_account`, confirmed by typing the email. It clears each child's lock rows, deletes each child's auth user (profile and save cascade), then the parent's auth user (`families` cascades). Children first, so a failure leaves the account intact and the button can be pressed again. A parent can also delete one child (type the name). The admin can delete any profile as today.
+- **Data minimisation stays**: no new personal fields; the only new personal datum is the parent's email, held by Supabase Auth, never copied into a table of ours.
+
+### 12.10 Audit findings and how this design answers them
+
+| ID | Handled by |
+|---|---|
+| F1 | family code, names unique per parent, family-scoped lockouts, weak-PIN refusal (12.5). Residual: a classmate who knows code + name keeps the section 5 bound. Option: 6-digit PIN (decision) |
+| F2 | parent page fixed and pushed; the rest by validating the save at hydrate (12.7) and the `push_save` shape gate |
+| F3 | `vercel.json` headers in the same release; the CAPTCHA origins are allowed in the CSP |
+| F4 | CAPTCHA before the hash on untrusted logins, the 60/hour parent cap, `purge_pin_attempts`, Auth sign-up limits |
+| F5 | parent clears their own child's lock (`clear_name_lock`), the code gates who can lock, rotating the code cuts off a stranger |
+| F6 | 6 children per parent, 500 families, save under 512 KB, shape check in `push_save` |
+| F7 | separate `parent` role and function scoped by `parent_id`; `is_admin()` untouched; `pin_clear_name_lock` checks the owner. The cross-family test (12.12) is the proof |
+| F8 | optional TOTP enforced once enrolled, CAPTCHA, email confirmation, leaked-password check (Pro), rate limits. **Open decision**: required 2FA |
+| F9 | open: refresh-token lifetime needs Pro. Mitigated by the CSP and by `signOut` scope. Listed in 12.8 (Pro) |
+| F11 | `profiles.unlimited` replaces the name check; caps stay advisory (decision) |
+| F12 | unchanged; add the rotation runbook in Phase 2 docs. More children now sit behind one secret |
+| F13 | `set_pin` re-asserts the synthetic email and derived password; Secure email change ON |
+| F14 | `SITE_ORIGIN` unset means no CORS header, in all three functions |
+| F15 | 001 is frozen (this is 002); fix its header comment when 002 is applied; add the RLS isolation script |
+
+### 12.11 Migration of existing data and apply order
+
+Existing: the admin (also parent of Alyssa), Alyssa, the Admin player, the Test Player. `002` gives the admin a `families` row (the admin sees the code in `/admin/`, a new line to add), sets `unlimited` on the Test Player and the Admin player, keeps all `profiles` and `saves` rows, and changes no save. Alyssa's existing sessions and trusted-device tokens keep working (the token binds child id, device id and `pin_set_at`, none of which change); a **new** device needs the code once. Order, each step after the owner says so: (1) read-only checks: one admin-owned profile named Admin; the Test Player's save size and key count against the 512 KB and 40-key limits; (2) apply `002` and deploy the new `pin-login` back to back (the lock-key format changes; Alyssa's lock rows under the old keys are dead and purged); (3) deploy `admin` (patched) and `parent-api`; (4) set secrets and CAPTCHA/SMTP, then flip Auth sign-up on **last**; (5) site release with the pages above. Rollback of 002: drop `families`, `rate_hit`, the new triggers and column, restore the 001 index and functions; the draft keeps all data.
+
+### 12.12 Test plan
+
+- **Unit** (`node --test site/src/lib/*.test.ts`, in the style of `sync.test.ts`): `weakPin` table; family-code normalisation; lock-key builder; `isUnlimited` reads the flag and ignores the name `Admin`; `decidePush` with `invalid`; hydrate cleans a tampered server save; the parent gate decision (role, aal, enrolled factor).
+- **Isolation script** (live, exit 0, two throwaway parent accounts created and deleted afterwards, never Alyssa or `baziadmin@gmail.com`): parent A and B each create a child. Each sees only its own `profiles`, `families` row and `saves` through RLS; A's `push_save` on B's child returns `denied`; A's direct `update/delete` on B's `profiles` and `saves` change nothing; `parent-api` `set_pin`, `rename_child`, `delete_child`, `clear_name_lock` on B's child as A return 404; a child session of A cannot call `parent-api` (403); neither parent reads `pin_hash` or the other's family code; the same child name in both families is allowed and each logs in only with its own code; a seventh child, the name `Admin` and `unlimited` are refused; an admin session still fails to write Alyssa's save and succeeds on the Test Player's (the section 4 check); `delete_account` leaves no auth user, profile, save or lock row. Cleanup runs in a `finally`.
+- **Live browser checks** with the Admin player only: family-code login, CAPTCHA on a new device and not on a trusted one, lock then parent clear, sign-up end to end with an owner-controlled address.
+- **Gates**: `node --test site/src/lib/*.test.ts`, `cd site && npm run build`, the isolation script, each by real exit code.
+
+### 12.x Owner's decisions (19 Nov 2026)
+
+- **Email (SMTP):** Resend, with a sender domain the owner owns (SPF and DKIM records set up before sign-up opens).
+- **CAPTCHA:** Cloudflare Turnstile (Supabase Auth native; also used by `pin-login` on untrusted devices).
+- **Parent 2FA:** optional, enforced once a parent enrols an authenticator. The admin keeps required TOTP.
+- **Family code and PIN:** 8-symbol family code, 4-digit PIN (weak PINs refused).
+- **Still open:** Supabase Pro (leaked-password check, session limits, backups), the privacy contact and notice text,
+  server-side daily caps or advisory, delete now or with a 14-day undo, and the pre-apply checks in this section.
