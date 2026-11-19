@@ -87,16 +87,19 @@ def main():
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--parts", type=int, default=1, help="split pages into N interleaved parts...")
     ap.add_argument("--mine", default="0", help="...and read these parts, e.g. 1,2 (run one process per GPU)")
-    ap.add_argument("--tag", default="vlm32", help="output folder name, e.g. vlm32 for a second model")
+    ap.add_argument("--tag", default=None, help="output folder name (default vlm32, or ans32 with --page-list)")
     ap.add_argument("--max-seqs", type=int, default=16)
     ap.add_argument("--max-tokens", type=int, default=3000, help="raise (e.g. 6000) to re-read a dense page that was cut off")
     ap.add_argument("--page-list", help="file of 'subject year page' lines: answer pages, read with the answer prompt")
     a = ap.parse_args()
+    a.tag = a.tag or ("ans32" if a.page_list else "vlm32")
     sets = [(x.split(":")[0], int(x.split(":")[1])) for x in a.sets.split(",")] if a.sets else [(a.subject, a.year)]
     mine = {int(x) for x in a.mine.split(",")}
     todo = []
     for line in open(a.page_list) if a.page_list else []:
+        if len(line.split()) != 3 or line.lstrip().startswith("#"): continue
         subject, year, p = line.split()
+        if int(p) % a.parts not in mine: continue  # same sharding as the page-range mode
         pdir, vdir = OUT / subject / year / "pages", OUT / subject / year / a.tag
         vdir.mkdir(exist_ok=True)
         if (pdir / f"p{int(p):04d}.jpg").exists() and not (vdir / f"p{int(p):04d}.json").exists():

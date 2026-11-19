@@ -58,6 +58,8 @@ def examples(subject):
 def check(rec, subs, pats):
     """-> problem text, or None if the record is valid."""
     if not isinstance(rec, dict): return "not a JSON object"
+    if not isinstance(rec.get("st"), str): return "st must be one id string"
+    if rec.get("pat") is not None and not isinstance(rec.get("pat"), str): return "pat must be one id string or null"
     if rec.get("st") not in subs: return f"st {rec.get('st')!r} is not a sub-topic id from the list"
     if rec.get("pat") not in pats and rec.get("pat") is not None: return f"pat {rec.get('pat')!r} is not a pattern id from the list (use null)"
     if rec.get("difficulty") not in (1, 2, 3): return "difficulty must be 1, 2 or 3"
@@ -95,7 +97,9 @@ def run(sets, batch, tp):
                     r = r if isinstance(r, dict) else {}
                     rec = {"id": q["id"], **{k: r.get(k) for k in ("st", "pat", "method", "difficulty", "ans_check", "conf")},
                            "flags": ["invalid"] if bad else []}
-                    if bad: rec["st"] = rec["st"] if rec["st"] in subs else None
+                    if bad:
+                        rec["st"] = rec["st"] if isinstance(rec["st"], str) and rec["st"] in subs else None
+                        rec["pat"] = rec["pat"] if isinstance(rec["pat"], str) and rec["pat"] in pats else None
                     f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             print(f"done {i + len(chunk)}/{len(todo)}", flush=True)
 
@@ -119,6 +123,7 @@ def selftest():
     assert "sub-topic" in check({"st": "x", "pat": None, "difficulty": 2, "conf": 1}, subs, pats)
     assert "pattern" in check({"st": "s1", "pat": "x", "difficulty": 2, "conf": 1}, subs, pats)
     assert check("text", subs, pats) == "not a JSON object"
+    assert check({"st": ["s1", "s2"], "pat": None, "difficulty": 2, "conf": 1}, subs, pats) == "st must be one id string"
     q = {"format": "mcq", "marks": 2, "section": "Booklet A", "text": "Which is a mammal?", "options": ["(1) a", "(2) b"], "answer": "2"}
     p = TASK.format(tax=taxonomy("science")[0], examples="", question=show(q))
     assert "Options: (1) a | (2) b" in p and "Given answer: 2" in p and "sci-pat-" in p
