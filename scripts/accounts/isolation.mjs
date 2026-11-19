@@ -2,10 +2,14 @@
 // deployed. Creates two throwaway parent accounts and their children, checks that neither family can see or change
 // the other's, then deletes everything it made (finally). Never touches any other account.
 //
-//   SUPABASE_URL=... SUPABASE_ANON_KEY=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/accounts/isolation.mjs
+//   set -a; . site/.env; set +a                     # the public URL and anon key
+//   read -rs SUPABASE_SERVICE_ROLE_KEY; export SUPABASE_SERVICE_ROLE_KEY   # paste, nothing is shown
+//   node scripts/accounts/isolation.mjs; unset SUPABASE_SERVICE_ROLE_KEY
 //
 // The service-role key is read from the environment and never printed. Exit 0 = every check passed.
-const URL_ = process.env.SUPABASE_URL, ANON = process.env.SUPABASE_ANON_KEY, SVC = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const URL_ = process.env.SUPABASE_URL ?? process.env.PUBLIC_SUPABASE_URL;
+const ANON = process.env.SUPABASE_ANON_KEY ?? process.env.PUBLIC_SUPABASE_ANON_KEY;
+const SVC = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!URL_ || !ANON || !SVC) { console.error('set SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY'); process.exit(2); }
 
 let failed = 0;
@@ -29,7 +33,8 @@ async function parent() {
   const u = await admin('/users', { method: 'POST', body: { email, password, email_confirm: true } });
   if (u.status !== 200) throw new Error(`create parent ${u.status}`);
   made.push(u.body.id);
-  const signIn = async () => (await req('/auth/v1/token?grant_type=password', { method: 'POST', body: { email, password } })).body.access_token;
+  // Auth CAPTCHA is on: a password grant with the service-role key is exempt (as in pin-login); the token is the parent's
+  const signIn = async () => (await req('/auth/v1/token?grant_type=password', { method: 'POST', token: SVC, key: SVC, body: { email, password } })).body.access_token;
   let token = await signIn();
   const reg = await fn(token, { action: 'register', consent_version: '1' });
   if (reg.status !== 200) throw new Error(`register ${reg.status} ${reg.body?.error}`);
