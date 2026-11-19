@@ -343,6 +343,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     over = true;
     clearInterval(tick);
     if (history.state?.quiz) history.back(); // drop the guard entry so Back on the result screen leaves at once
+    const dlg = $('leave-dlg') as HTMLDialogElement;
+    if (dlg.open) dlg.close(); // the quiz ended (time up) while "Leave this quiz?" was showing: it no longer applies
     // unanswered questions count as wrong when time runs out (design section 3)
     const unanswered = quiz.slice(i + (answered ? 1 : 0));
     for (const id of unanswered) { record(id, false); wrongs.push({ q: byId.get(id)!, chose: -1, tag: 'ran_out_of_time' }); }
@@ -435,10 +437,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     e.stopPropagation();
     confirmLeave().then((go) => { if (go) { leaving = true; location.href = a.href; } });
   }, true);
+  // Back pops the guard entry, so we are on the quiz's own entry: Stay pushes the guard again; Leave goes back one
+  // more step, or to the Schools page when the quiz was the tab's first page (back() then has nowhere to go).
   window.addEventListener('popstate', () => {
     if (!inProgress()) return;
-    history.pushState({ quiz: 1 }, ''); // stay put unless confirmed
-    confirmLeave().then((go) => { if (go) { leaving = true; history.go(-2); } });
+    confirmLeave().then((go) => {
+      if (!go) { if (inProgress()) history.pushState({ quiz: 1 }, ''); return; }
+      leaving = true;
+      history.back();
+      window.setTimeout(() => { location.href = '/train/'; }, 400); // only runs if back() did not leave the page
+    });
   });
   window.addEventListener('beforeunload', (e) => {
     if (inProgress() && !leaving) { e.preventDefault(); e.returnValue = ''; }

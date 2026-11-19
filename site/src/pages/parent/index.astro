@@ -252,21 +252,25 @@ const data = {
       $('wrong-pick').hidden = false;
       $('wrong-who').addEventListener('change', async () => {
         const id = $<HTMLSelectElement>('wrong-who').value;
-        if (!id) return renderWrong();
+        const my = ++wrongSeq; // a later pick wins even if this one's fetch finishes last
+        if (!id) return renderWrong(s.questions, my);
         $('wrong').innerHTML = '<p class="note">Loading…</p>';
         const res = await supabase.from('saves').select('data').eq('child_id', id).maybeSingle();
+        if (my !== wrongSeq) return;
         if (res.error) { $('wrong').innerHTML = '<p class="note">Could not load that save.</p>'; return; }
-        renderWrong((res.data?.data as SaveV1 | undefined)?.questions ?? {});
+        renderWrong((res.data?.data as SaveV1 | undefined)?.questions ?? {}, my);
       });
     } catch { /* no picker: this device only */ }
   }
 
-  async function renderWrong(questions: SaveV1['questions'] = s.questions) {
+  let wrongSeq = 0;
+  async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq) {
     const now = Date.now();
     const wrong = Object.entries(questions).filter(([, q]) => q.w > 0);
     if (!wrong.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
     $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
     const bank = await banks();
+    if (my !== wrongSeq) return; // the picker changed while the banks loaded
     const subOf = new Map(P.all.map((x) => [x.id, x]));
     const schoolName = new Map(P.schools.map((x) => [x.id, x.name]));
     // subject -> sub-topic -> [id, state]; ids no longer in any bank are listed as retired, never dropped
@@ -285,7 +289,8 @@ const data = {
       const head = bq ? `<div class="wq-stem">${bold(bq.stem)}</div>${figHtml(bq)}`
         : `<div class="wq-stem">Question retired from the bank <code>${esc(id)}</code></div>`;
       const right = bq ? `Right answer: <b>${bold(bq.options[bq.answer])}</b>` : '';
-      const theirs = q.a != null ? `Their answer: ${bold(q.a)}` : 'Their answer: not recorded (before 19 Nov 2026)';
+      const theirs = q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
+        : q.a === '' ? 'Their answer: none (time ran out)' : `Their answer: ${bold(q.a)}`;
       return `<li>${head}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
         + `<span class="meta">Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ${status}</span></li>`;
     };

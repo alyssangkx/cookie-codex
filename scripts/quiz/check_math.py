@@ -21,6 +21,9 @@ from common import REGISTRY, a_an, hand_problems  # noqa: E402
 assert hand_problems(["6000 ÷ 1200 = 5", "2 × 176.625 = 353.25", "35 ÷ 25 = 1.4", "4523 × 67 = 303041", "84 ÷ 12 = 7"]) == []
 assert hand_problems(["299 ÷ 15 = 19.93", "615.44 ÷ 3.14 = 196", "12345 × 678 = 8369910"]) \
     == ["299 ÷ 15", "615.44 ÷ 3.14", "12345 × 678"]
+assert hand_problems(["15 × 3.14 × 123.4 = 5812.14"]) == ["47.1 × 123.4"]  # chains are worked left to right
+assert hand_problems(["Height = 108 × 2 ÷ 24 = 9 cm"]) == []  # 216 ÷ 24, not 2 ÷ 24
+assert hand_problems(["2 3/4 × 1234 = 3393.5", "1234 ÷ 1/2 = 2468"]) == []  # fraction operands are not judged
 
 for mod in sorted((HERE / "math").glob("topic_*.py")):
     importlib.import_module(mod.stem)

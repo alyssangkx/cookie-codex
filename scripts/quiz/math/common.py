@@ -212,8 +212,13 @@ def finalize(q, fn, rng, qid):
 #   divide (after cancelling common trailing zeros): by a power of 10, by a 1-significant-digit number (3, 40, 0.5),
 #   by a whole number up to 12, or by a 2-significant-digit number when the quotient is under 1000 with at most
 #   2 decimal places (35 ÷ 25 = 1.4, 1350 ÷ 45 = 30).
-# ponytail: reads the x × y and x ÷ y in the worked solution only; a step written another way is not checked.
-_OP = re.compile(r"\$?(\d[\d,]*(?:\.\d+)?)\s*([×÷])\s*\$?(\d[\d,]*(?:\.\d+)?)")
+# ponytail: reads the × and ÷ chains in the worked solution only. A chain a × b ÷ c is worked left to right and each
+# step is judged on its running value (108 × 2 ÷ 24 checks 108 × 2, then 216 ÷ 24). An operand that is part of a
+# fraction or mixed number (3/4, 2 3/4) ends the chain, since its true size is not the digits next to the sign.
+# A step written another way is not checked.
+_N = r"\$?\d[\d,]*(?:\.\d+)?(?![\d/])"
+_CHAIN = re.compile(r"(?<![\d/.,])" + _N + r"(?:\s*[×÷]\s*" + _N + r")+")
+_PART = re.compile(r"([×÷])?\s*\$?(\d[\d,]*(?:\.\d+)?)")
 
 
 def _sig(x):
@@ -226,26 +231,34 @@ def _pow10(x):
     return x > 0 and format(x.normalize(), "f").replace(".", "").strip("0") == "1"
 
 
+def _step_ok(x, op, y):
+    if op == "×":
+        return _pow10(x) or _pow10(y) or min(_sig(x), _sig(y)) == 1 \
+            or min(_sig(x), _sig(y)) <= 2 and max(_sig(x), _sig(y)) <= 4
+    while x == x.to_integral() and y == y.to_integral() and x % 10 == 0 and y % 10 == 0:
+        x, y = x / 10, y / 10  # 6000 ÷ 1200 is worked as 60 ÷ 12
+    q = x / y
+    return _pow10(y) or _sig(y) == 1 or (y == y.to_integral() and y <= 12) \
+        or (_sig(y) == 2 and q * 100 == (q * 100).to_integral() and q < 1000)
+
+
 def hand_problems(lines):
     """-> the steps in these lines that are not workable by hand under the rule above."""
-    from decimal import Decimal as D
+    from decimal import Decimal as D, getcontext
+    getcontext().prec = 28
     bad = []
     for line in lines:
-        for a, op, b in _OP.findall(line.replace("**", "")):
-            x, y = D(a.replace(",", "")), D(b.replace(",", ""))
-            if x == 0 or y == 0:
-                continue
-            if op == "×":
-                ok = _pow10(x) or _pow10(y) or min(_sig(x), _sig(y)) == 1 \
-                    or min(_sig(x), _sig(y)) <= 2 and max(_sig(x), _sig(y)) <= 4
-            else:
-                while x == x.to_integral() and y == y.to_integral() and x % 10 == 0 and y % 10 == 0:
-                    x, y = x / 10, y / 10  # 6000 ÷ 1200 is worked as 60 ÷ 12
-                q = x / y
-                ok = _pow10(y) or _sig(y) == 1 or (y == y.to_integral() and y <= 12) \
-                    or (_sig(y) == 2 and q * 100 == (q * 100).to_integral() and q < 1000)
-            if not ok:
-                bad.append(f"{a} {op} {b}")
+        for m in _CHAIN.finditer(line.replace("**", "")):
+            parts = _PART.findall(m.group(0))
+            run = D(parts[0][1].replace(",", ""))
+            for op, b in parts[1:]:
+                y = D(b.replace(",", ""))
+                if run == 0 or y == 0:
+                    break
+                if not _step_ok(run, op, y):
+                    bad.append(f"{format(run.normalize(), 'f')} {op} {b}")
+                    break
+                run = run * y if op == "×" else run / y
     return bad
 
 

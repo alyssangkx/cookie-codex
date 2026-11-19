@@ -492,8 +492,10 @@ test('a wrong answer keeps the picked option text (capped), through retests and 
   assert.equal(s.questions.q.w, 2);
   answer(s, 'q', true, t0 + DAY); answer(s, 'q', true, t0 + 4 * DAY); answer(s, 'q', true, t0 + 11 * DAY);
   assert.deepEqual(s.questions.q, { s: 0, due: 0, w: 2, a: 'wrong again' }); // retired, still shows the last pick
-  answer(s, 't', false, t0); // ran out of time: no pick recorded
-  assert.equal('a' in s.questions.t, false);
+  answer(s, 't', false, t0); // ran out of time: a blank answer
+  assert.equal(s.questions.t.a, '');
+  answer(s, 'q', false, t0 + 12 * DAY); // a later blank answer replaces the old pick
+  assert.equal(s.questions.q.a, '');
   answer(s, 'n', true, t0);
   assert.deepEqual(s.questions.n, { s: 0, due: 0, w: 0 });
   const old = fresh(); old.questions.z = { s: 1, due: t0, w: 1 }; // a save from before the field existed
