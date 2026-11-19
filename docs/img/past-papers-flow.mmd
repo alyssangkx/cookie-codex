@@ -1,0 +1,28 @@
+flowchart TB
+  subgraph R1["Extraction (outside git)"]
+    direction LR
+    PDF["PDF books"] --> REN["Render"]
+    REN --> SA["Step A OCR"]
+    REN --> VLM["VLM read"]
+    SA --> MRG["Merge"]
+    VLM --> MRG
+  end
+  subgraph R2["Catalogue"]
+    direction LR
+    SB["Step B tags"] --> DB[("SQLite master")] --> DES["Design outputs"]
+  end
+  subgraph R3["Original items"]
+    direction LR
+    G1["Generate"] --> G2["Review gate"] --> BANK["Game banks"]
+  end
+  subgraph R4["Student loop"]
+    direction LR
+    PLAY["Student plays"] --> EV["Evidence"] --> COMP["Competency"] --> LOOP["Drill weak types:<br>back to Generate"]
+  end
+  R1 --> R2 --> R3 --> R4
+  classDef store fill:#eef,stroke:#446
+  classDef gate fill:#fde,stroke:#a36
+  class DB store
+  class G2 gate
+  classDef loop fill:#efe,stroke:#363,stroke-dasharray: 4 3
+  class LOOP loop
