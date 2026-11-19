@@ -11,9 +11,9 @@ Rules (ponytail: plain rules from the 2026 pilot; revisit when the truth scores 
 - One question per printed number: consecutive entries with the same number are its parts; "cont" joins the previous.
 - The VLM and step A number sequences are aligned (longest common subsequence). Matched questions keep step A's id,
   section and format.
-- Marks: Chinese uses step A (section headings are reliable, the VLM copies section totals). Other subjects use the
-  VLM's printed marks when every part has one and the sum is 1-10, else step A's value."""
-import argparse, json, re
+- Marks: step A's value first (section rules are reliable; the VLM copies section labels and totals). With no step A
+  value, other subjects use the VLM's printed marks when every part has one and the sum is 1-10; Chinese gets none."""
+import argparse, json, re, sys
 from difflib import SequenceMatcher
 from pathlib import Path
 
@@ -52,7 +52,29 @@ def vlm_questions(vdir, pages, stepa_pages):
             o["options"] += [x for x in (q.get("options") or []) if isinstance(x, str)]
             if q.get("figure"): o["figures"].append(q["figure"])
             if pg not in o["pages"]: o["pages"].append(pg)
-    return out
+    return dedupe(out)
+
+
+def dedupe(out):
+    """A passage page often lists the question numbers it serves (the section instruction read once per number), and
+    the questions follow on the next page or the one after: one qno within 2 pages is one question. Keep the copy with options,
+    else the longer text, with both pages. Numbers that restart in a later booklet are pages apart and stay."""
+    keep = []
+    for o in out:
+        twin = next((k for k in reversed(keep[-12:]) if k["qno"] == o["qno"] and 1 <= min(o["pages"]) - max(k["pages"]) <= 2), None)
+        if twin is None: keep.append(o); continue
+        score = lambda q: (len(q["options"]), sum(len(p["text"]) for p in q["parts"]))
+        best = o if score(o) > score(twin) else twin
+        keep[keep.index(twin)] = {**best, "pages": sorted(set(twin["pages"]) | set(o["pages"]))}
+    return keep
+
+
+def _selftest():
+    q = lambda n, pg, opts=0, text="x": {"qno": n, "parts": [{"text": text}], "options": ["o"] * opts, "pages": [pg]}
+    got = dedupe([q(21, 92, text="instruction"), q(22, 92), q(21, 93, 4, "real"), q(22, 93, 4), q(1, 98), q(1, 99, 4)])
+    assert [(g["qno"], g["pages"], len(g["options"])) for g in got] == [(21, [92, 93], 4), (22, [92, 93], 4), (1, [98, 99], 4)]
+    assert len(dedupe([q(1, 3), q(1, 12)])) == 2  # booklet B restarts at 1
+    print("vlm_merge selftest ok")
 
 
 def merge_paper(subject, paper, stepa, vdir):
@@ -71,10 +93,12 @@ def merge_paper(subject, paper, stepa, vdir):
         if a: used.add(pair[j])
         pm = [p["marks"] for p in v["parts"]]
         printed = sum(pm) if pm and all(m is not None for m in pm) else None
-        if subject != "chinese" and printed and 1 <= printed <= 10:
-            marks, src = printed, "vlm_printed"
-        elif a and a.get("marks") is not None:
+        # step A first: on the 2026 maths truth papers it was right 29 times where the VLM was wrong, and wrong 5 times
+        # where the VLM was right (the VLM often copies a section's "2 marks each" label onto every question)
+        if a and a.get("marks") is not None:
             marks, src = a["marks"], "stepA"
+        elif subject != "chinese" and printed and 1 <= printed <= 10:
+            marks, src = printed, "vlm_printed"
         else:
             marks, src = None, None  # a printed sum outside 1-10, or any Chinese one, is a section total, not trusted
         text = "\n".join((f"({p['sub']}) " if p["sub"] and p["sub"] != "null" else "") + p["text"] for p in v["parts"])
@@ -113,4 +137,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    _selftest() if sys.argv[1:2] == ["selftest"] else main()
