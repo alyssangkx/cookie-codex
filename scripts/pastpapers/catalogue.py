@@ -165,6 +165,31 @@ def page_kind(lines, H, pageno):
 
 # ---------------------------------------------------------------- figures
 
+def not_a_figure(img, ink, lines, box, y0):
+    """Ink blobs that look like pictures but are not: specks, the per-page score box, text lines OCR could not read.
+    ponytail: three fixed thresholds from the 2026 leads' false figures; tune if real figures go missing."""
+    x0, t, x1, b = box
+    raw = ink[t - y0:b - y0, x0:x1]
+    dark = img[t:b, x0:x1] < 140  # the page's own ink, before text and rules were masked out of `ink`
+    if raw.mean() < 0.015 or raw.sum() < 2000:  # sparse ink is specks unless it holds a long stroke (a thin-line table)
+        from scipy import ndimage
+        # strokes measured on the unmasked ink, so a table whose text and long rules were masked still counts
+        objs = ndimage.find_objects(ndimage.label(dark)[0])
+        if max((max(sl[0].stop - sl[0].start, sl[1].stop - sl[1].start) for sl in objs), default=0) < 120:
+            return "specks"
+    rows, cols = dark.mean(axis=1), dark.mean(axis=0)
+    framed = (rows[:len(rows) // 4].max() > 0.8 and rows[-len(rows) // 4:].max() > 0.8
+              and cols[:len(cols) // 4].max() > 0.8 and cols[-len(cols) // 4:].max() > 0.8)
+    if framed and (x1 - x0) < 500 and (b - t) < 400 and dark.mean() < 0.08: return "score box"
+    import numpy as np
+    covered = np.zeros(dark.shape, bool)  # union of text-line boxes, so overlapping lines are not counted twice
+    for l in lines:
+        if len("".join(w["text"] for w in l["words"])) >= 6:
+            covered[max(0, l["top"] - t):max(0, l["bottom"] - t), max(0, l["left"] - x0):max(0, l["right"] - x0)] = True
+    if covered.mean() > 0.75: return "text"
+    return None
+
+
 def figure_box(img, words, lines, y0, y1, W):
     """Bounding box of the non-text ink between y0 and y1 (pictures, diagrams, tables), or None.
     ponytail: one union box per question per page; split into several boxes if step B needs them separately."""
@@ -193,7 +218,9 @@ def figure_box(img, words, lines, y0, y1, W):
     for sl in ndimage.find_objects(lab):
         bh, bw = (sl[0].stop - sl[0].start) * B, (sl[1].stop - sl[1].start) * B
         if bh >= 150 and bw >= 150:
-            boxes.append((sl[1].start * B, sl[0].start * B + y0, sl[1].stop * B, sl[0].stop * B + y0))
+            box = (sl[1].start * B, sl[0].start * B + y0, sl[1].stop * B, sl[0].stop * B + y0)
+            if not not_a_figure(img, ink, lines, box, y0):
+                boxes.append(box)
     if not boxes: return None
     x0, t, x1, b = min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes)
     for _ in range(2):  # take in the labels beside or inside the picture: short lines (<= 4 words) next to the box
@@ -308,6 +335,19 @@ def selftest():
     assert exam_of("PRELIMINARY EXAMINATION (2024)") == "Prelim"
     assert exam_of("SEMESTRAL ASSESSMENT 2") == "SA2" and exam_of("SA1 2023") == "SA1"
     assert part_of("SCIENCE (BOOKLET A)") == "Booklet A" and part_of("MATHEMATICS PAPER 2") == "Paper 2"
+    import numpy as np  # false figures: a score box (frame + diagonal), specks, a real filled picture
+    img = np.full((600, 600), 255, np.uint8)
+    img[100:105, 100:400] = img[346:351, 100:400] = 0; img[100:351, 100:105] = img[100:351, 395:400] = 0
+    for i in range(250): img[350 - i, 100 + int(i * 1.2):105 + int(i * 1.2)] = 0
+    assert not_a_figure(img, img < 140, [], (90, 90, 410, 360), 0) == "score box"
+    specks = np.full((600, 600), 255, np.uint8); specks[::40, ::40] = 0
+    assert not_a_figure(specks, specks < 140, [], (0, 0, 400, 300), 0) == "specks"
+    table = np.full((600, 600), 255, np.uint8); table[100:400:100, 50:550] = 0; table[100:301, 50:550:250] = 0
+    assert not_a_figure(table, table < 140, [], (40, 90, 560, 310), 0) is None
+    masked = np.zeros_like(table, bool); masked[150:160:3, 60:70] = True  # its text and rules masked out of `ink`
+    assert not_a_figure(table, masked, [], (40, 90, 560, 310), 0) is None
+    pic = np.full((600, 600), 255, np.uint8); pic[100:300, 100:400:3] = 0
+    assert not_a_figure(pic, pic < 140, [], (90, 90, 410, 310), 0) is None
     assert part_of("试卷一 甲卷") == "Paper 1/Booklet A"
     assert section_of("english", "Grammar Cloze (10 marks)") == "Grammar Cloze"
     assert section_of("english", "Section B: Vocabulary") == "Vocabulary MCQ"
