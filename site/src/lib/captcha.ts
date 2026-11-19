@@ -14,7 +14,7 @@ const load = () => (loading ??= new Promise<Turnstile>((ok, fail) => {
   document.head.append(s);
 }));
 
-export type Captcha = { token(): string | undefined; reset(): void };
+export type Captcha = { shown: boolean; token(): string | undefined; reset(): void };
 
 /** Show the widget in `el` (once). token() is undefined until it is solved; reset() after every server try. */
 export async function mountCaptcha(el: HTMLElement): Promise<Captcha> {
@@ -26,5 +26,5 @@ export async function mountCaptcha(el: HTMLElement): Promise<Captcha> {
       callback: (v: string) => { tok = v; }, 'expired-callback': () => { tok = undefined; }, 'error-callback': () => { tok = undefined; },
     });
   }
-  return { token: () => tok, reset: () => { tok = undefined; if (t && id) t.reset(id); } };
+  return { shown: !!(t && id), token: () => tok, reset: () => { tok = undefined; if (t && id) t.reset(id); } };
 }

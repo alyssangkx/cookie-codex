@@ -420,8 +420,10 @@ const data = {
       if (psle.value) x.settings.psleDate = psle.value;
     };
     const commit = async () => {
-      if (child) { // a parent edits the picked child's synced save; their device picks it up on its next page load
+      if (isParentView) { // a parent edits the picked child's synced save; their device picks it up on its next page load
+        if (!child) { flashSaved("Couldn't save. Reload the page."); return; }
         if (!(await pushChild(apply).catch(() => false))) { flashSaved("Couldn't save. Try again."); return; }
+        return void flashSaved();
       } else { s = load(); apply(s); save(s); s = cleanSave(s); }
       weeksText(); renderSummary(); flashSaved();
     };
@@ -512,6 +514,7 @@ const data = {
     $('fam-deleted').hidden = true; $('family').hidden = false;
     $('fam-code').textContent = fmtCode(me.code);
     $('fam-kids').innerHTML = me.children.length ? me.children.map(kidHtml).join('') : '<p class="note">No children yet. Add your first child below.</p>';
+    if (pickerReady) await buildKidPicker(me.children).catch(() => { $('content').hidden = true; });
   }
 
   async function initFamily() {
@@ -597,42 +600,52 @@ const data = {
   // ------------------------------------------------------------ a parent's view of one child (their synced save)
   // RLS lets a parent read and push_save their own children's saves (owns_child). Every section renders `s`, so a
   // picked child's cleaned save replaces the device's save; settings are written back with the rev check.
-  let child: { id: string; rev: number | null } | null = null;
+  // `child.raw` is the migrated server save as stored (pushed back with only the settings changed); `s` is its cleaned
+  // copy for display. `pick` guards against out-of-order replies: a reply for an older pick is dropped.
+  let child: { id: string; rev: number | null; raw: SaveV1 } | null = null;
+  let pick = 0, isParentView = false, pickerReady = false;
   let fillSettings = () => {};
-  const readChild = async (id: string) => {
-    const r = await supabase.from('saves').select('rev, data').eq('child_id', id).maybeSingle();
-    if (r.error) throw r.error;
-    return { rev: r.data ? Number(r.data.rev) : null, data: r.data ? (migrate(r.data.data) as SaveV1) : null };
-  };
+  const renderAll = () => { wrongSeq++; renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
+  const asSave = (d: unknown) => (d ? (migrate(d) as SaveV1) : (cleanSave(null) as SaveV1));
   async function showChild(id: string) {
-    const c = await readChild(id);
-    child = { id, rev: c.rev };
-    s = c.data ? cleanSave(c.data) : cleanSave(null);
-    wrongSeq++;
-    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings();
+    const my = ++pick;
+    const r = await supabase.from('saves').select('rev, data').eq('child_id', id).maybeSingle();
+    if (my !== pick) return;
+    if (r.error) throw r.error;
+    child = { id, rev: r.data ? Number(r.data.rev) : null, raw: asSave(r.data?.data) };
+    s = cleanSave(child.raw);
+    renderAll();
   }
-  /** Change the child's server save with the rev check; one retry on a conflict (the child played meanwhile). */
+  /** Change the child's server save with the rev check; on a conflict (the child played meanwhile) apply the change to
+   *  the server copy push_save returned and try once more. */
   async function pushChild(change: (x: SaveV1) => void): Promise<boolean> {
-    if (!child) return false;
+    const target = child, my = pick;
+    if (!target) return false;
+    let base = target.rev, data = target.raw;
     for (let i = 0; i < 2; i++) {
-      const c = await readChild(child.id);
-      const next = c.data ?? (cleanSave(null) as SaveV1);
+      const next = JSON.parse(JSON.stringify(data)) as SaveV1;
       change(next);
-      const r = await supabase.rpc('push_save', { p_child: child.id, p_data: next, p_version: SCHEMA, p_base_rev: c.rev });
-      const st = (r.data as { status: string; rev: number }[] | null)?.[0];
-      if (!r.error && st?.status === 'ok') { child.rev = st.rev; s = cleanSave(next); return true; }
+      const r = await supabase.rpc('push_save', { p_child: target.id, p_data: next, p_version: SCHEMA, p_base_rev: base });
+      const st = (r.data as { status: string; rev: number; data: unknown }[] | null)?.[0];
+      if (!r.error && st?.status === 'ok') {
+        if (my === pick && child === target) { target.rev = st.rev; target.raw = next; s = cleanSave(next); renderAll(); }
+        return true;
+      }
       if (r.error || st?.status !== 'conflict') return false;
+      base = st.rev; data = asSave(st.data);
     }
     return false;
   }
-  async function initKidPicker(kids: FKid[]) {
+  /** (Re)build the "Showing" list from the family; keeps the current pick when that child is still there. */
+  async function buildKidPicker(kids: FKid[]) {
     const live = kids.filter((k) => !k.deleted_at);
     $('bak-panel').hidden = true; // the save code is the child's device's own backup
-    if (!live.length) { $('content').hidden = true; return; }
-    $<HTMLSelectElement>('kid-who').innerHTML = live.map((k) => `<option value="${esc(k.id)}">${esc(k.name)}</option>`).join('');
+    $('content').hidden = !live.length;
+    if (!live.length) { child = null; return; }
+    const sel = $<HTMLSelectElement>('kid-who'), keep = live.some((k) => k.id === child?.id) ? child!.id : live[0].id;
+    sel.innerHTML = live.map((k) => `<option value="${esc(k.id)}"${k.id === keep ? ' selected' : ''}>${esc(k.name)}</option>`).join('');
     $('kid-pick').hidden = false;
-    $('kid-who').addEventListener('change', () => { void showChild($<HTMLSelectElement>('kid-who').value).catch(() => flashSaved("Couldn't load that save.")); });
-    await showChild(live[0].id);
+    if (keep !== child?.id) await showChild(keep);
   }
 
   // ------------------------------------------------------------ start
@@ -643,6 +656,7 @@ const data = {
     // the page is gated (Base.astro): an admin at aal2, or a parent (aal2 once they enrolled an authenticator)
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';
+    isParentView = isParent;
     if (isParent) {
       try { await initFamily(); } catch (e) { famFail(e); $('family').hidden = false; }
       if (me?.deleted_at) return;
@@ -650,8 +664,13 @@ const data = {
     $('content').hidden = false;
     s = cleanSave(load());
     initSettings(); initBackup();
-    if (isParent) { // everything shows the picked child's synced save, not this device's
-      try { await initKidPicker(me?.children ?? []); } catch { flashSaved("Couldn't load your child's progress."); }
+    if (isParent) { // everything shows the picked child's synced save, never this device's
+      $('kid-who').addEventListener('change', () => {
+        void showChild($<HTMLSelectElement>('kid-who').value).catch(() => { $('content').hidden = true; famSay('', "Couldn't load that child's progress. Reload the page."); });
+      });
+      pickerReady = true;
+      try { await buildKidPicker(me?.children ?? []); }
+      catch { child = null; $('content').hidden = true; famSay('', "Couldn't load your child's progress. Reload the page."); }
       return;
     }
     renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();

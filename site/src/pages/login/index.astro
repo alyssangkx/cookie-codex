@@ -121,8 +121,9 @@ import Base from '../../layouts/Base.astro';
           ? `Too many tries, please wait ${Math.ceil(sec / 60)} ${Math.ceil(sec / 60) === 1 ? 'minute' : 'minutes'}`
           : 'Too many tries, please wait a while or ask a grown-up');
       } else if (status === 400 && body?.error === 'captcha_failed') {
-        void showCaptcha();
-        say('Tick the "I am human" box, then type your PIN again.');
+        await showCaptcha();
+        say(captcha?.shown ? 'Tick the "I am human" box, then type your PIN again.'
+          : 'The "I am human" check could not load. Check the internet connection and reload the page.');
       } else if (status === 400) {
         say('Check your family code, your name (letters only) and your 4-digit PIN.');
       } else {

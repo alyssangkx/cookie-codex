@@ -128,9 +128,9 @@ Deno.serve(async (req) => {
     if (cleared.error) throw new Unavailable();
     // a fresh client with the service-role key: Supabase Auth skips its CAPTCHA for an admin-role key
     // (auth middleware verifyCaptcha), so this server-side sign-in keeps working once Auth CAPTCHA is on;
-    // the human check for this login is our own Turnstile check above (pin-login) or the admin's aal2 (admin)
-    const anon = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, { auth: { persistSession: false, autoRefreshToken: false } });
-    const { data, error } = await anon.auth.signInWithPassword({
+    // the human check is pin-login's own Turnstile check / the admin's aal2. Tested live before Auth CAPTCHA goes on.
+    const signer = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, { auth: { persistSession: false, autoRefreshToken: false } });
+    const { data, error } = await signer.auth.signInWithPassword({
       email: `child-${prof.id}@children.invalid`,
       password: await childPassword(prof.id, Deno.env.get('CHILD_PW_SECRET')!),
     });
