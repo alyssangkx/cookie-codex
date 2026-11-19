@@ -43,6 +43,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       <p class="actions" id="actions"></p>
     </div>
   </section>
+  <dialog id="leave-dlg" class="leave-dlg" aria-labelledby="leave-title">
+    <h2 id="leave-title">Leave this quiz?</h2>
+    <p>It still counts as today's try and your answers so far are lost.</p>
+    <p class="leave-actions"><button id="leave-stay" class="primary" type="button">Stay</button>
+      <button id="leave-go" type="button">Leave</button></p>
+  </dialog>
   <script type="application/json" id="meta" set:html={data} />
 </Base>
 
@@ -233,6 +239,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     save(s0);
     i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
     inQuiz = new Set(quiz);
+    history.pushState({ quiz: 1 }, ''); // a back press lands here first, so the leave guard can ask
     startedAt = Date.now();
     deadline += startedAt;
     tick = window.setInterval(clock, 250);
@@ -333,6 +340,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (over) return;
     over = true;
     clearInterval(tick);
+    if (history.state?.quiz) history.back(); // drop the guard entry so Back on the result screen leaves at once
     // unanswered questions count as wrong when time runs out (design section 3)
     const unanswered = quiz.slice(i + (answered ? 1 : 0));
     for (const id of unanswered) { record(id, false); wrongs.push({ q: byId.get(id)!, chose: -1, tag: 'ran_out_of_time' }); }
@@ -400,12 +408,49 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   });
   $('next').addEventListener('click', () => (++i < quiz.length ? render() : finish()));
   $('start-btn').addEventListener('click', begin);
+
+  // Leaving mid-quiz asks first: links (capture phase, before any other handler), the back button (the guard
+  // history entry pushed in begin()) and reload/close (beforeunload, the browser's own wording). In progress =
+  // started and not finished; nothing is asked before the first question or on the result screen.
+  const inProgress = () => !$('play').hidden && !over;
+  let leaving = false;
+  function confirmLeave(): Promise<boolean> {
+    const dlg = $('leave-dlg') as HTMLDialogElement;
+    if (dlg.open) return Promise.resolve(false);
+    return new Promise((done) => {
+      const end = (go: boolean) => { dlg.close(); done(go); };
+      $('leave-stay').onclick = () => end(false);
+      $('leave-go').onclick = () => end(true);
+      dlg.oncancel = (e) => { e.preventDefault(); end(false); }; // Esc means Stay
+      dlg.showModal(); // modal: the page behind is inert, so focus stays in the dialog
+      $('leave-stay').focus();
+    });
+  }
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+    if (!a || !inProgress() || a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    e.preventDefault();
+    e.stopPropagation();
+    confirmLeave().then((go) => { if (go) { leaving = true; location.href = a.href; } });
+  }, true);
+  window.addEventListener('popstate', () => {
+    if (!inProgress()) return;
+    history.pushState({ quiz: 1 }, ''); // stay put unless confirmed
+    confirmLeave().then((go) => { if (go) { leaving = true; history.go(-2); } });
+  });
+  window.addEventListener('beforeunload', (e) => {
+    if (inProgress() && !leaving) { e.preventDefault(); e.returnValue = ''; }
+  });
   init();
 </script>
 
 <style is:global>
   /* global: the quiz markup is built with innerHTML, which scoped styles cannot reach */
   .quiz { padding-block: 1.5rem 2rem; max-width: 760px; }
+  .leave-dlg { max-width: min(26rem, calc(100vw - 2rem)); border: 2px solid var(--cocoa-soft); border-radius: 12px; padding: 1.25rem; }
+  .leave-dlg::backdrop { background: rgb(0 0 0 / 0.45); }
+  .leave-dlg h2 { margin: 0 0 0.5rem; font-size: 1.2rem; }
+  .leave-dlg .leave-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin: 1rem 0 0; }
   .quiz .crumbs { margin: 0; font-size: 0.95rem; color: var(--cocoa-soft); }
   .quiz .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1.25rem; margin-top: 1rem; }
   .quiz .primary {
