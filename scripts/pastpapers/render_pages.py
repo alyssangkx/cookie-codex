@@ -35,12 +35,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src"); ap.add_argument("out"); ap.add_argument("--jobs", type=int, default=60)
     a = ap.parse_args()
-    jobs = []
+    jobs, seen = [], {}
     for subject, folder in SUBJECTS.items():
         for pdf in sorted((Path(a.src) / folder).glob("*.pdf")):
             year = re.search(r"(20\d\d)", pdf.name)
             if not year: continue
             d = Path(a.out) / subject / year.group(1) / "pages"
+            if d in seen: sys.exit(f"{pdf} and {seen[d]} would both render into {d}: one book per subject-year")
+            seen[d] = pdf
             d.mkdir(parents=True, exist_ok=True)
             n = npages(pdf)
             jobs += [(pdf, s, min(s + CHUNK - 1, n), d) for s in range(1, n + 1, CHUNK)]

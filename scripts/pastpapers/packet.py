@@ -85,10 +85,10 @@ def build(subject, year):
         crops = [f["crop"] for q in pq for f in (q.get("figures") or [])]
         lab = dict((c, l) for l, c in sheets([c for c in crops if Path(c).exists()], folder))
         keys = (p.get("answer_pages") or [])[:MAX_KEY]
-        for n in keys: small(base / "pages" / f"p{n:04d}.jpg", folder / f"key-{n:04d}.jpg", 1000)
+        for n in [n for n in keys if (base / "pages" / f"p{n:04d}.jpg").exists()]: small(base / "pages" / f"p{n:04d}.jpg", folder / f"key-{n:04d}.jpg", 1000)
         need = sorted({pg for q in pq if any(f.startswith(("qno_gap", "no_text")) for f in q.get("flags", []))
                        for pg in q["pages"][-1:]})[:MAX_PG]
-        for n in need: small(base / "pages" / f"p{n:04d}.jpg", folder / f"pg-{n:04d}.jpg", 1100)
+        for n in [n for n in need if (base / "pages" / f"p{n:04d}.jpg").exists()]: small(base / "pages" / f"p{n:04d}.jpg", folder / f"pg-{n:04d}.jpg", 1100)
         head = {k: p.get(k) for k in ("school", "exam", "part", "first_page", "last_page", "printed_total", "marks_sum")
                 if p.get(k) is not None}
         lines = [f"PAPER {pid} {json.dumps(head, ensure_ascii=False)}",
@@ -119,10 +119,13 @@ def check_out(out, qids, subs, pats):
     if miss: bad.append(f"{len(miss)} questions missing, e.g. {miss[:3]}")
     for i, r in q.items():
         if i not in qids: bad.append(f"unknown id {i}"); continue
+        if not isinstance(r, dict): bad.append(f"{i}: not an object"); continue
         if r.get("st") not in subs: bad.append(f"{i}: bad sub-topic {r.get('st')!r}")
         if r.get("pat") is not None and r.get("pat") not in pats: bad.append(f"{i}: bad pattern {r.get('pat')!r}")
         if not isinstance(r.get("marks"), (int, float)) or r["marks"] <= 0: bad.append(f"{i}: marks {r.get('marks')!r}")
-    for a in out.get("added", []):
+    added = out.get("added") or []
+    if not isinstance(added, list) or not all(isinstance(a, dict) for a in added): return bad + ["added is not a list of objects"]
+    for a in added:
         if a.get("st") not in subs: bad.append(f"added q{a.get('qno')}: bad sub-topic {a.get('st')!r}")
     return bad
 
@@ -136,18 +139,20 @@ def merge(subject, year):
     done = bad_papers = 0
     with open(d / f"{subject}-{year}-stepB.jsonl", "w") as f:
         for pid, pq in by.items():
+            # every question is written; a paper whose output is missing, unreadable or invalid gets stepB=null and a
+            # stepB_problems list, so nothing vanishes and nothing bad passes as a tag
             o = d / "out" / f"{pid}.json"
-            if not o.exists(): print(f"{pid}: no output"); continue
-            out = json.loads(o.read_text())
-            probs = check_out(out, {q["id"] for q in pq}, subs, pats)
+            try: out = json.loads(o.read_text()) if o.exists() else None
+            except json.JSONDecodeError: out = {}
+            probs = ["no output"] if out is None else check_out(out, {q["id"] for q in pq}, subs, pats) if isinstance(out, dict) else ["not an object"]
             if probs: bad_papers += 1; print(f"{pid}: " + "; ".join(probs[:5]))
             for q in pq:
-                r = out.get("questions", {}).get(q["id"])
-                f.write(json.dumps({**q, "stepB": r}, ensure_ascii=False) + "\n")
-            for a in out.get("added", []):
+                r = None if probs else out["questions"][q["id"]]
+                f.write(json.dumps({**q, "stepB": r, **({"stepB_problems": probs} if probs else {})}, ensure_ascii=False) + "\n")
+            for a in ([] if probs else out.get("added") or []):
                 f.write(json.dumps({"paper": pid, "added": True, **a}, ensure_ascii=False) + "\n")
-            done += 1
-    print(f"{subject} {year}: {done}/{len(by)} papers merged, {bad_papers} with problems")
+            done += not probs
+    print(f"{subject} {year}: {done}/{len(by)} papers merged cleanly, {bad_papers} written with stepB=null")
 
 
 def selftest():
@@ -157,6 +162,8 @@ def selftest():
     assert check_out({"questions": {}}, {"a"}, subs, pats)[0].startswith("1 questions missing")
     assert any("bad pattern" in b for b in check_out({"questions": {"a": {"st": "s1", "pat": "x", "marks": 1}}}, {"a"}, subs, pats))
     assert any("marks" in b for b in check_out({"questions": {"a": {"st": "s1", "pat": None, "marks": 0}}}, {"a"}, subs, pats))
+    assert check_out({"questions": {"a": None}, "added": None}, {"a"}, subs, pats) == ["a: not an object"]
+    assert check_out({"questions": {"a": {"st": "s1", "marks": 1}}, "added": [None]}, {"a"}, subs, pats) == ["added is not a list of objects"]
     t, s, p = taxonomy("science")
     assert len(s) > 20 and len(p) > 20 and "sci-pat-" in t
     print("packet selftest ok")

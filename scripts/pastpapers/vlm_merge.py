@@ -76,7 +76,7 @@ def merge_paper(subject, paper, stepa, vdir):
         elif a and a.get("marks") is not None:
             marks, src = a["marks"], "stepA"
         else:
-            marks, src = printed, "vlm_printed" if printed else None
+            marks, src = None, None  # a printed sum outside 1-10, or any Chinese one, is a section total, not trusted
         text = "\n".join((f"({p['sub']}) " if p["sub"] and p["sub"] != "null" else "") + p["text"] for p in v["parts"])
         out.append({"id": a["id"] if a else f"{paper['paper_id']}-v{j:03d}", "paper": paper["paper_id"],
                     "school": paper.get("school"), "exam": paper.get("exam"), "qno": v["qno"],
@@ -89,7 +89,8 @@ def merge_paper(subject, paper, stepa, vdir):
         if i not in used:
             out.append({**{k: a.get(k) for k in ("id", "paper", "school", "exam", "qno", "part", "section", "format",
                                                   "marks", "text", "pages")},
-                        "marks_from": "stepA", "flags": ["stepA_only"]})
+                        "marks_from": "stepA", "stepA_marks": a.get("marks"), "options": [], "figures": [],
+                        "parts": None, "flags": ["stepA_only"]})
     return out
 
 

@@ -39,11 +39,16 @@ def page_list(spec, n):
     return [p for p in out if 1 <= p <= n]
 
 
+# ponytail: the LaTeX commands seen on maths/science pages; add one here if a page shows up unparsed or with a stray newline
+LATEX_TAILS = r"(?:rac|imes|ext|extbf|heta|au|riangle|herefore|o\b|frac|eq|e\b|abla|u\b|ight|ho|angle|eta|ar|oxed|egin|ullet)"
+
+
 def parse(raw):
     m = re.search(r"\{.*\}", raw, re.S)
     if not m: return None
-    # LaTeX (\\( \\frac \\times) is not JSON: escape a backslash unless it starts a real one-letter escape
-    loose = re.sub(r'\\(?!["\\/]|u[0-9a-fA-F]{4}|[bfnrt](?![A-Za-z]))', r"\\\\", m.group(0))
+    # LaTeX (\\( \\frac \\times) is not JSON: escape a backslash unless it starts a real JSON escape.
+    # \\n \\t \\r \\b \\f count as LaTeX only when a known command follows (\\frac, \\neq ...), so "\\nHow" stays a newline.
+    loose = re.sub(r'\\(?!["\\/]|u[0-9a-fA-F]{4}|[bfnrt](?!' + LATEX_TAILS + '))', r"\\\\", m.group(0))
     for text in (m.group(0), loose):
         try: return json.loads(text)
         except json.JSONDecodeError: pass
@@ -70,7 +75,7 @@ def main():
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--parts", type=int, default=1, help="split pages into N interleaved parts...")
     ap.add_argument("--mine", default="0", help="...and read these parts, e.g. 1,2 (run one process per GPU)")
-    ap.add_argument("--tag", default="vlm", help="output folder name, e.g. vlm32 for a second model")
+    ap.add_argument("--tag", default="vlm32", help="output folder name, e.g. vlm32 for a second model")
     ap.add_argument("--max-seqs", type=int, default=16)
     a = ap.parse_args()
     sets = [(x.split(":")[0], int(x.split(":")[1])) for x in a.sets.split(",")] if a.sets else [(a.subject, a.year)]
@@ -81,7 +86,7 @@ def main():
         vdir.mkdir(exist_ok=True)
         n = max((int(f.stem[1:]) for f in pdir.glob("p[0-9][0-9][0-9][0-9].jpg")), default=0)  # highest page, not a count
         pages = [p for p in page_list(a.pages or f"1-{n}", n) if not (vdir / f"p{p:04d}.json").exists()]
-        todo += [(subject, pdir, vdir, p) for k, p in enumerate(pages) if k % a.parts in mine]
+        todo += [(subject, pdir, vdir, p) for p in pages if p % a.parts in mine]  # by page number: stable across restarts
     print(f"{len(todo)} pages to read", flush=True)
     if not todo: return
 
@@ -105,6 +110,11 @@ def main():
 
 
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["selftest"]:
+        # raw LaTeX as the model writes it (\( is not JSON, so the loose pass runs)
+        assert parse(r'{"t": "\(\frac{1}{2} \times 3 \neq \theta\)"}')["t"] == r"\(\frac{1}{2} \times 3 \neq \theta\)"
+        assert parse(r'{"t": "\(x\) apples.\nHow many?"}')["t"] == "\\(x\\) apples.\nHow many?"
+        print("vlm_read selftest ok"); sys.exit()
     if sys.argv[1:2] == ["repair"]:
         print(sum(repair(d) for d in sys.argv[2:]), "pages repaired"); sys.exit()
     main()
