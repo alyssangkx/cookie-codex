@@ -7,7 +7,7 @@ Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: {
   removeItem: (k: string) => { mem.delete(k); }, clear: () => mem.clear(), key: (i: number) => [...mem.keys()][i] ?? null,
   get length() { return mem.size; },
 } });
-import { prepareLocal, decideHydrate, decidePush, resolveConflict, isChildSession, idleExpired } from './sync.ts';
+import { prepareLocal, decideHydrate, hydrateRead, decidePush, resolveConflict, isChildSession, idleExpired } from './sync.ts';
 import { jumpClock, resetTier, grantCard, shiftKey } from './testtools.ts';
 import { fresh, finishQuiz, save, load, kv, isDirty, readLocalRaw, replaceLocal, clearDirty } from './store.ts';
 
@@ -151,4 +151,23 @@ test('a clean save of another child is not stashed, and a stash for nobody chang
   prepareLocal('B');
   assert.equal(kv.get('sync:pending:A'), null);
   assert.ok(readLocalRaw());
+});
+
+test('hydrateRead fetches the save only when the decision needs it, and decides again from that read', async () => {
+  const decide = (lastRev: number | null) => (serverRev: number | null) =>
+    decideHydrate({ serverRev, lastRev, owner: 'c1', childId: 'c1', dirty: false, localHasProgress: true });
+  let full = 0;
+  const readFull = (row: any) => async () => { full++; return row; };
+  // unchanged rev: no download
+  let r = await hydrateRead(async () => ({ rev: 4 }), readFull({ rev: 4, data: 'x' }), decide(4));
+  assert.deepEqual([r!.action, full], ['keep', 0]);
+  // newer rev: download, adopt the full read's own rev and data
+  r = await hydrateRead(async () => ({ rev: 5 }), readFull({ rev: 6, data: 'new' }), decide(4));
+  assert.deepEqual([r!.action, r!.row, full], ['use-server', { rev: 6, data: 'new' }, 1]);
+  // row deleted between the reads: decided again as "no row", never adopted
+  r = await hydrateRead(async () => ({ rev: 5 }), readFull(null), decide(4));
+  assert.deepEqual([r!.action, r!.row], ['push-local', null]);
+  // offline on either read: null
+  assert.equal(await hydrateRead(async () => undefined, readFull(null), decide(4)), null);
+  assert.equal(await hydrateRead(async () => ({ rev: 5 }), async () => undefined, decide(4)), null);
 });

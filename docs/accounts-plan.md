@@ -504,5 +504,66 @@ Existing: the admin (also parent of Alyssa), Alyssa, the Admin player, the Test 
 - **CAPTCHA:** Cloudflare Turnstile (Supabase Auth native; also used by `pin-login` on untrusted devices).
 - **Parent 2FA:** optional, enforced once a parent enrols an authenticator. The admin keeps required TOTP.
 - **Family code and PIN:** 8-symbol family code, 4-digit PIN (weak PINs refused).
-- **Still open:** Supabase Pro (leaked-password check, session limits, backups), the privacy contact and notice text,
-  server-side daily caps or advisory, delete now or with a 14-day undo, and the pre-apply checks in this section.
+- **Supabase plan:** stay on Free. Accepted costs: no leaked-password check (the 10-character minimum and the
+  CAPTCHA stay), no refresh-token lifetime limit (F9 stays mitigated by the CSP only), no automatic backups (a weekly
+  `pg_dump` of `profiles`, `families` and `saves` to the owner's machine is the only copy; keep the last 4), and the project pauses after 7 quiet
+  days (the keep-alive already covers it). Limits that bite first: 500 MB database and 5 GB egress a month. Hydrate
+  must fetch `rev` first and `data` only when it changed, or egress caps the site at roughly 100 daily players (done 19 Nov 2026: `hydrate()` in `sync.ts`).
+- **Daily caps:** advisory for now (not enforced in `push_save`).
+- **Delete retention:** 7-day undo. `delete_account` and `delete_child` set `deleted_at`; the children's logins stop
+  at once. The parent can still sign in, but sees only a "Restore" page until the purge. A daily `pg_cron` job
+  hard-deletes rows older than 7 days (the steps in 12.9); old dumps age out after 4 weeks. Apart from that
+  dump, this window is the only undo.
+- **Email sender:** Gmail SMTP for now (a domain may come later, then switch to Resend). Sender and privacy contact:
+  `baziadmin@gmail.com` (owner's choice). `smtp.gmail.com:587` with an app password the owner creates and types into
+  the Supabase SMTP settings; about 500 emails a day. Note: this is also the admin sign-in email, so it becomes public
+  (notice and every verification mail); the admin's required TOTP is what protects that account.
+- **Privacy contact:** the same address, named in the notice (12.13). Notice text drafted below.
+- **Still open:** the pre-apply checks in this section.
+
+### 12.13 Privacy notice (draft for `/privacy/`)
+
+The contact is `baziadmin@gmail.com`. Version 1, to be stored as `consent_version = 1`.
+
+> **Privacy notice: Alyssa's Cookie Codex**
+>
+> Cookie Codex is a free PSLE revision game run by a parent in Singapore. This notice says what we keep about you
+> and your children, why, and how to have it changed or deleted.
+>
+> **What we keep**
+> - About you (the parent or guardian): your email address and a password, held by our sign-in service. We use your
+>   email only to confirm your account and to reset your password. We never send newsletters or ads.
+> - About each child you add: a first name or nickname, a 4-digit PIN (stored only in scrambled form, so nobody can
+>   read it back), and their game progress: quiz scores, which questions they got wrong and the answer they chose,
+>   cards earned, and time played each day.
+> - We do **not** ask for a child's email, birthday, school, photo, phone number or location.
+>
+> **Why:** only so your child's progress is saved and follows them across devices, and so you can see it on the
+> parent page. No analytics, no tracking cookies, no advertising, and nothing is sold or shared with anyone.
+>
+> **Where:** your children's names and progress are kept in a database in Singapore run by Supabase. The website is
+> served by Vercel from servers around the world, sign-in emails are sent through Google's Gmail, and the operator keeps
+> a weekly backup copy on their own computer. These services store or deliver the data for us and may
+> not use it for anything else.
+>
+> **Who can see it:** you, for your own children only. The site's operator can read it to run and fix the service.
+> Other families cannot see your children, and the game never compares children.
+>
+> **Your choices**
+> - **See it:** the parent page shows each child's progress, and "Save code" exports a child's full progress. For
+>   a copy of everything else we hold (names, account email, sign-in records), email us.
+> - **Correct it:** rename a child or change their PIN on the parent page.
+> - **Delete it:** "Delete account and all data" on the parent page removes you and every child. You can delete one
+>   child the same way. Your children can no longer sign in, and everything is erased after 7 days, and from
+>   backup copies within a further 4 weeks. Within those 7 days you can sign in as the parent and restore it.
+> - **Withdraw consent:** deleting the account withdraws it.
+>
+> **Keeping it safe:** encrypted connections only, each family can reach only its own rows, and the site has
+> no access keys in your browser that could read other families. If data were ever exposed, we would tell affected
+> parents and, where the law requires, the Personal Data Protection Commission.
+>
+> **Questions or requests:** email baziadmin@gmail.com. We reply within 30 days.
+>
+> **Changes:** if this notice changes, you will be asked to read and agree to it again the next time you sign in.
+>
+> Last updated: `<date of release>`.

@@ -187,23 +187,47 @@ function showConflict(id: string, c: { rev: number; data: unknown }) {
   ]);
 }
 
+type SaveRow = { rev: unknown; data?: unknown } | null;
+/**
+ * Every game page hydrates, so read only the rev first; the save itself comes down only when the decision needs it
+ * (use-server, conflict). Free-plan egress is the limit this protects. The final decision is always made again from
+ * the full read's own snapshot, so a write or delete between the two reads cannot leave a stale decision.
+ * A read returns undefined on error (offline): the result is then null.
+ */
+export async function hydrateRead(
+  readRev: () => Promise<SaveRow | undefined>, readFull: () => Promise<SaveRow | undefined>,
+  decide: (serverRev: number | null) => HydrateAction,
+): Promise<{ action: HydrateAction; row: SaveRow } | null> {
+  const needsData = (a: HydrateAction) => a === 'use-server' || a === 'conflict';
+  const revOf = (r: SaveRow) => (r ? Number(r.rev) : null);
+  const head = await readRev();
+  if (head === undefined) return null;
+  if (!needsData(decide(revOf(head)))) return { action: decide(revOf(head)), row: head };
+  const full = await readFull();
+  if (full === undefined) return null;
+  return { action: decide(revOf(full)), row: full };
+}
+
 /** Pull the child's server save and reconcile it with the local one. Returns true when the local save was replaced. */
 export async function hydrate(id: string): Promise<boolean> {
   const client = await sb();
   prepareLocal(id);
-  const r = await client.from('saves').select('rev, data').eq('child_id', id).maybeSingle();
-  if (r.error) return false; // offline: play from the local copy; pushes retry later
   const local = readLocalRaw();
   let parsed: any = null;
   try { parsed = local ? JSON.parse(local) : null; } catch { /* unreadable: treated as no progress */ }
-  const action = decideHydrate({
-    serverRev: r.data ? Number(r.data.rev) : null, lastRev: lastRev(id), owner: kv.get('sync:owner'), childId: id,
-    dirty: isDirty(), localHasProgress: hasProgress(parsed),
-  });
+  const base = { lastRev: lastRev(id), owner: kv.get('sync:owner'), childId: id, dirty: isDirty(), localHasProgress: hasProgress(parsed) };
+  const q = () => client.from('saves');
+  const h = await hydrateRead(
+    async () => { const r = await q().select('rev').eq('child_id', id).maybeSingle(); return r.error ? undefined : r.data; },
+    async () => { const r = await q().select('rev, data').eq('child_id', id).maybeSingle(); return r.error ? undefined : r.data; },
+    (serverRev) => decideHydrate({ ...base, serverRev }),
+  );
+  if (!h) return false; // offline: play from the local copy; pushes retry later
+  const { action, row } = h;
   switch (action) {
-    case 'use-server': adoptServer(id, Number(r.data!.rev), r.data!.data); return true;
+    case 'use-server': adoptServer(id, Number(row!.rev), row!.data); return true;
+    case 'conflict': showConflict(id, { rev: Number(row!.rev), data: row!.data }); return false;
     case 'reset-local': backupLocal(); clearLocal(); kv.set('sync:owner', id); return true;
-    case 'conflict': showConflict(id, { rev: Number(r.data!.rev), data: r.data!.data }); return false;
     case 'push-local': kv.set('sync:owner', id); firstPush = push(); return false;
     default: kv.set('sync:owner', id); return false;
   }
