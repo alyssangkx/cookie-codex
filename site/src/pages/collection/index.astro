@@ -100,7 +100,8 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
 
 <script>
   import { load, TIERS } from '../../lib/store';
-  const sv = load();
+  import { cleanSave } from '../../lib/cleansave'; // a synced save may be tampered: render a well-formed copy
+  const sv = cleanSave(load());
   const info = JSON.parse(document.getElementById('house-cards')!.textContent!);
   document.querySelectorAll<HTMLElement>('.school-shelf[data-school]').forEach((el) => {
     const school = el.dataset.school!;
@@ -164,7 +165,7 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
 <script>
   import { load, power, TIER_NAME } from '../../lib/store';
   const meta = JSON.parse(document.getElementById('meta')!.textContent!) as { subs: Record<string, { n: string; sc: string }> };
-  const s = load();
+  const s = cleanSave(load());
   const cards = [...document.querySelectorAll<HTMLElement>('.ccard')];
   const shelves = [...document.querySelectorAll<HTMLElement>('[data-shelf]')];
   const count = document.getElementById('count')!;
