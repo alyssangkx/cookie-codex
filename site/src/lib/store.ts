@@ -10,8 +10,11 @@ export const TIER_NAME: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', 
 // passes/scores/best are history for display only; `cleared` is set by syncTiers (all questions retired).
 // mastered/total are the last count seen when a quiz ended.
 export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number };
-// s: 0 retired, 1-3 retest step (due in 1, 3, 7 days)
-export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number };
+// s: 0 retired, 1-3 retest step (due in 1, 3, 7 days); w: times answered wrong
+// a: the option text picked on the latest wrong answer (optional, added 19 Nov 2026 for the parent page; older
+// saves simply lack it, so no schema bump). Kept after the question retires, so the parent still sees it.
+export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string };
+export const PICK_MAX = 120; // characters of a picked option kept in the save
 export interface Attempt {
   ts: number; mode: 'tier' | 'review' | 'paper'; sub?: string; tier?: Tier; topics?: string[];
   score: number; total: number; ms: number; tags: string[];
@@ -287,18 +290,21 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
  *  then 3, then 7; correct at the 7-day step retires it; wrong at any step goes back to 1 day.
  *  A correct answer to a retest that is not yet due changes nothing (no progress, no penalty), so
  *  the spacing cannot be skipped by repeating questions on the same day. */
-export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true) {
+/** Record one answer. `picked` is the option text chosen on a wrong answer (omit when unanswered). */
+export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string) {
   const q = s.questions[id];
   if (ok && !q && !retireNew) return; // practice papers never drain tier pools
+  const a = !ok && picked != null ? picked.slice(0, PICK_MAX) : q?.a;
+  const keep = a != null ? { a } : {};
   if (!ok) {
-    s.questions[id] = { s: 1, due: now + DAY, w: (q?.w ?? 0) + 1 };
+    s.questions[id] = { s: 1, due: now + DAY, w: (q?.w ?? 0) + 1, ...keep };
   } else if (!q) {
     s.questions[id] = { s: 0, due: 0, w: 0 };
   } else if (q.s > 0 && q.due <= now) {
-    if (q.s === 3) s.questions[id] = { s: 0, due: 0, w: q.w };
+    if (q.s === 3) s.questions[id] = { s: 0, due: 0, w: q.w, ...keep };
     else {
       const next = (q.s + 1) as 2 | 3;
-      s.questions[id] = { s: next, due: now + STEP_DAYS[next] * DAY, w: q.w };
+      s.questions[id] = { s: next, due: now + STEP_DAYS[next] * DAY, w: q.w, ...keep };
     }
   }
 }

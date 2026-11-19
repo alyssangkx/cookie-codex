@@ -287,9 +287,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('options').querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();
   }
 
-  function record(id: string, ok: boolean) {
+  function record(id: string, ok: boolean, picked?: string) {
     const s = load();
-    answer(s, id, ok, Date.now(), mode !== 'paper'); // papers never retire questions from tier pools
+    answer(s, id, ok, Date.now(), mode !== 'paper', picked); // papers never retire questions from tier pools
     save(s);
   }
 
@@ -301,7 +301,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('timer').textContent += ' paused';
     const q = byId.get(quiz[i])!;
     const ok = k === q.answer;
-    record(q.id, ok);
+    record(q.id, ok, ok ? undefined : q.options[k]); // the option text: options are shuffled, letters are not stable
     if (ok && q.group) { if (!usedRight.has(q.group)) usedRight.set(q.group, new Set()); usedRight.get(q.group)!.add(k); }
     if (q.group && q.seq != null && (CLOZE.has(q.sub) || (ok && q.sub === 'chi-dialogue-mcq'))) {
       if (!filledBlanks.has(q.group)) filledBlanks.set(q.group, new Map());

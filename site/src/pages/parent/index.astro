@@ -1,12 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { subsOf, hasContent, cookieBySlug, MIN_POOL } from '../../lib/train';
+import { subs as allSubs, subsOf, hasContent, cookieBySlug, MIN_POOL, SCHOOLS } from '../../lib/train';
 
 const math = subsOf('math');
 const data = {
   total: cookieBySlug.size,
   min: MIN_POOL,
   subs: math.map((s) => ({ id: s.id, name: s.name, topic: s.topicName, file: s.file, count: s.count, content: hasContent(s) })),
+  // every subject's sub-topics with a bank file: the wrong-answer list and the retest queue look questions up in them
+  all: allSubs.filter((s) => s.file).map((s) => ({ id: s.id, name: s.name, school: s.school, file: s.file })),
+  schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
 };
 ---
 <Base title="Parent view: Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
@@ -24,6 +27,11 @@ const data = {
         <div id="mastery"></div></section>
       <section class="panel" aria-labelledby="h-days"><h2 id="h-days">Last 14 days</h2><div id="days" class="scroll"></div></section>
       <section class="panel" aria-labelledby="h-mis"><h2 id="h-mis">Most common mistakes</h2><div id="mistakes"></div></section>
+      <section class="panel" aria-labelledby="h-wrong"><h2 id="h-wrong">Questions answered wrong</h2>
+        <p class="note">Every question answered wrong, by subject and sub-topic, with the right answer and the answer picked last time (recorded from 19 Nov 2026).</p>
+        <p class="fields" id="wrong-pick" hidden><label for="wrong-who">Show for</label>
+          <select id="wrong-who"><option value="">This device</option></select></p>
+        <div id="wrong"></div></section>
       <section class="panel" aria-labelledby="h-ret"><h2 id="h-ret">Retest queue</h2><div id="retest"></div></section>
       <section class="panel" aria-labelledby="h-set"><h2 id="h-set">Settings</h2>
         <div class="fields">
@@ -101,14 +109,23 @@ const data = {
   .parent-page ol.list li { margin-bottom: 0.7rem; }
   .parent-page .meta { display: block; color: var(--cocoa-soft); font-size: 0.88rem; }
   .parent-page .due-late { color: var(--berry); font-weight: 600; }
+  .parent-page .wq-subject { border-top: 1px solid var(--crust); padding: 0.4rem 0; }
+  .parent-page .wq-subject > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 0.3rem; }
+  .parent-page .wq-sub { font-size: 1rem; margin: 0.8rem 0 0.4rem; }
+  .parent-page .wq-stem { white-space: pre-line; }
+  .parent-page .wq-fig { margin: 0.4rem 0; max-width: 22rem; }
+  .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
 </style>
 
 <script>
   import { load, save, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
+  import { supabase, callFunction } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
-  const P = JSON.parse(document.getElementById('pdata')!.textContent!) as { total: number; min: number; subs: PSub[] };
+  interface ASub { id: string; name: string; school: string; file: string }
+  const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
+    { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[] };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
   const DAY = 86_400_000;
@@ -194,20 +211,89 @@ const data = {
     }).join('') + '</ol>';
   }
 
-  let bankLoad: Promise<Map<string, string>> | null = null;
+  type BQ = { id: string; sub: string; stem: string; options: string[]; answer: number;
+    figure?: string | { img: string; alt: string; labels?: { text: string }[] }; visual?: { kind: string; title: string } };
+  let bankLoad: Promise<Map<string, BQ>> | null = null;
   function banks() {
     return (bankLoad ??= (async () => {
-      const stems = new Map<string, string>();
-      const files = [...new Set(P.subs.map((x) => x.file).filter(Boolean))] as string[];
+      const qs = new Map<string, BQ>();
+      const files = [...new Set(P.all.map((x) => x.file))];
       await Promise.all(files.map(async (f) => {
         try {
           const r = await fetch(`/data/quiz/${f}.json`);
           if (!r.ok) return;
-          for (const q of (await r.json()) as { id: string; stem: string }[]) stems.set(q.id, q.stem);
+          for (const q of (await r.json()) as BQ[]) qs.set(q.id, q);
         } catch { /* offline: show ids */ }
       }));
-      return stems;
+      return qs;
     })());
+  }
+  const bold = (t: string) => esc(t).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
+  // figures: Math SVG strings come from our own build scripts (as on the quiz page); Science line art is shown as the
+  // image with its labels listed underneath; a visual text (poster, notice...) is named, not drawn
+  const figHtml = (q: BQ) => {
+    const f = q.figure;
+    if (typeof f === 'string') return `<div class="wq-fig">${f}</div>`;
+    if (f && /^\/science\/[\w.-]+\.webp$/.test(f.img)) return `<div class="wq-fig"><img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy">`
+      + `${f.labels?.length ? `<span class="meta">Labels: ${esc(f.labels.map((l) => l.text).join(', '))}</span>` : ''}</div>`;
+    return q.visual ? `<span class="meta">With a ${esc(q.visual.kind)}: ${esc(q.visual.title)}</span>` : '';
+  };
+
+  // Each child's saved progress: the admin function lists the children, and the saves table already lets an admin
+  // read (select only) any child's save under RLS (private.is_admin()). Nothing here writes to another save.
+  async function initWrongPicker() {
+    try {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) return;
+      const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
+      const kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string }[] | null;
+      if (!kids?.length) return;
+      $('wrong-who').innerHTML += kids.map((k) => `<option value="${esc(k.id)}">${esc(k.name)}</option>`).join('');
+      $('wrong-pick').hidden = false;
+      $('wrong-who').addEventListener('change', async () => {
+        const id = $<HTMLSelectElement>('wrong-who').value;
+        if (!id) return renderWrong();
+        $('wrong').innerHTML = '<p class="note">Loading…</p>';
+        const res = await supabase.from('saves').select('data').eq('child_id', id).maybeSingle();
+        if (res.error) { $('wrong').innerHTML = '<p class="note">Could not load that save.</p>'; return; }
+        renderWrong((res.data?.data as SaveV1 | undefined)?.questions ?? {});
+      });
+    } catch { /* no picker: this device only */ }
+  }
+
+  async function renderWrong(questions: SaveV1['questions'] = s.questions) {
+    const now = Date.now();
+    const wrong = Object.entries(questions).filter(([, q]) => q.w > 0);
+    if (!wrong.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
+    $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
+    const bank = await banks();
+    const subOf = new Map(P.all.map((x) => [x.id, x]));
+    const schoolName = new Map(P.schools.map((x) => [x.id, x.name]));
+    // subject -> sub-topic -> [id, state]; ids no longer in any bank are listed as retired, never dropped
+    const tree = new Map<string, Map<string, [string, SaveV1['questions'][string]][]>>();
+    for (const [id, q] of wrong) {
+      const bq = bank.get(id), sub = bq ? subOf.get(bq.sub) : undefined;
+      const subject = sub ? schoolName.get(sub.school) ?? sub.school : 'Retired from the bank';
+      const subName = sub ? sub.name : 'Questions no longer in any bank';
+      const bySub = tree.get(subject) ?? tree.set(subject, new Map()).get(subject)!;
+      (bySub.get(subName) ?? bySub.set(subName, []).get(subName)!).push([id, q]);
+    }
+    const item = ([id, q]: [string, SaveV1['questions'][string]]) => {
+      const bq = bank.get(id);
+      const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
+        : 'answered right since (mastered)';
+      const head = bq ? `<div class="wq-stem">${bold(bq.stem)}</div>${figHtml(bq)}`
+        : `<div class="wq-stem">Question retired from the bank <code>${esc(id)}</code></div>`;
+      const right = bq ? `Right answer: <b>${bold(bq.options[bq.answer])}</b>` : '';
+      const theirs = q.a != null ? `Their answer: ${bold(q.a)}` : 'Their answer: not recorded (before 19 Nov 2026)';
+      return `<li>${head}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
+        + `<span class="meta">Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ${status}</span></li>`;
+    };
+    $('wrong').innerHTML = `<p class="note">${wrong.length} question${wrong.length === 1 ? '' : 's'} in all.</p>` + [...tree].map(([subject, bySub]) => {
+      const n = [...bySub.values()].reduce((k, l) => k + l.length, 0);
+      return `<details class="wq-subject"><summary><b>${esc(subject)}</b> (${n})</summary>` + [...bySub].sort((a, b) => a[0].localeCompare(b[0])).map(([name, list]) =>
+        `<h3 class="wq-sub">${esc(name)} (${list.length})</h3><ol class="list">${list.sort((a, b) => b[1].w - a[1].w).map(item).join('')}</ol>`).join('') + '</details>';
+    }).join('');
   }
 
   async function renderRetest() {
@@ -222,7 +308,7 @@ const data = {
       const dueTxt = late
         ? (dayKey(q.due) === dayKey(now) ? 'due today' : '<span class="due-late">overdue</span>')
         : `due ${esc(fmtDate(q.due))}`;
-      return `<li>${esc(stems.get(id) ?? id).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>')}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
+      return `<li>${bold(stems.get(id)?.stem ?? id)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
     }).join('') + '</ol>';
   }
 
@@ -305,7 +391,7 @@ const data = {
     if (started) return;
     started = true;
     s = load();
-    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderRetest();
+    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); void initWrongPicker();
     initSettings(); initBackup();
   }
 
