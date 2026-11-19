@@ -208,3 +208,16 @@ running on bank items alone (with a parent-page note that it is not yet exam-cal
 9. **Drawn answers:** self-check only in v1, with no competency weight? Recommended: yes; photo marking can come later.
 10. **Starting check and rewards:** one subject a day in the December holidays, cards staying on tier mastery and a
     "Competent" badge added? Recommended: yes; awarded cards never move or disappear.
+
+## Owner decisions (20 Nov 2026)
+
+Questions 1 to 10 above: all accepted as recommended. Changes to the build order:
+
+- **The tutor chat (item 3) is low priority.** It waits until most of the site is redesigned, including the open-answer
+  marker it would build on.
+- **The open-answer marker comes before the chat**, with a marking scheme per question: Science key points and
+  explanations of facts and processes, and Math Paper 2 method marks (working, model drawings, steps). See
+  [marking-framework.md](marking-framework.md).
+
+Build order now: affirmations, submit-then-review for papers, the assessment cycle, the open-answer marker
+(Science first, then Math Paper 2), and later the tutor chat.
