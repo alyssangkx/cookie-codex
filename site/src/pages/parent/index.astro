@@ -118,7 +118,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, migrate, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { supabase, callFunction } from '../../lib/supabase';
@@ -132,7 +132,8 @@ const data = {
   const DAY = 86_400_000;
 
   // A save is written by the child's browser and synced, so this page renders only a cleanSave() copy (well-formed,
-  // numbers finite and in range); saving still writes the raw loaded save.
+  // numbers finite and in range). NEVER save(s): s is the cleaned copy. Writes reload the raw save first (see commit()).
+  // ponytail: cleaned on display pages only (parent, My House); validate in sync hydrate if more pages render saves.
   let s: SaveV1 = cleanSave(load());
 
   // ------------------------------------------------------------ helpers
@@ -193,7 +194,7 @@ const data = {
       const key = dayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - i).getTime());
       const d = s.days[key];
       const acc = d && d.total ? Math.round((100 * d.correct) / d.total) + '%' : '–';
-      rows += `<tr><td>${esc(key)}</td><td>${d?.quizzes}</td><td>${d?.min}</td><td>${acc}</td></tr>`;
+      rows += `<tr><td>${esc(key)}</td><td>${d?.quizzes ?? 0}</td><td>${d?.min ?? 0}</td><td>${acc}</td></tr>`;
     }
     $('days').innerHTML = `<table><thead><tr><th>Date</th><th>Quizzes</th><th>Minutes</th><th>Accuracy</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
@@ -261,7 +262,9 @@ const data = {
         const res = await supabase.from('saves').select('data').eq('child_id', id).maybeSingle();
         if (my !== wrongSeq) return;
         if (res.error) { $('wrong').innerHTML = '<p class="note">Could not load that save.</p>'; return; }
-        renderWrong(cleanSave(res.data?.data).questions, my);
+        let data: unknown = res.data?.data;
+        try { data = migrate(structuredClone(data)); } catch { data = null; } // an old-format server save: migrate first
+        renderWrong(cleanSave(data).questions, my);
       });
     } catch { /* no picker: this device only */ }
   }

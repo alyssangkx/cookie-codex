@@ -164,6 +164,7 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
 
 <script>
   import { load, power, TIER_NAME } from '../../lib/store';
+  import { cleanSave } from '../../lib/cleansave'; // each <script> is its own module: import here too
   const meta = JSON.parse(document.getElementById('meta')!.textContent!) as { subs: Record<string, { n: string; sc: string }> };
   const s = cleanSave(load());
   const cards = [...document.querySelectorAll<HTMLElement>('.ccard')];

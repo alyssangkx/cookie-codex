@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { cleanSave } from './cleansave.ts';
-import { fresh } from './store.ts';
+import { fresh, SCHEMA } from './store.ts';
 
 test('a well-formed save comes through unchanged', () => {
   const s = fresh();
@@ -39,6 +39,13 @@ test('a tampered save cannot carry markup or crash the page', () => {
   assert.ok(!JSON.stringify(c).includes('<img'), 'no markup survives in any number field');
 });
 
+test('a __proto__ key in a save cannot reach the prototype', () => {
+  const c = cleanSave(JSON.parse('{"questions": {"__proto__": {"s": 1, "due": 0, "w": 3}, "q1": {"s": 1, "due": 5, "w": 1}}}'));
+  assert.deepEqual(Object.keys(c.questions), ['q1']);
+  assert.equal(Object.getPrototypeOf(c.questions), Object.prototype);
+  assert.equal((c.questions as Record<string, unknown>).w, undefined);
+});
+
 test('garbage in gives a fresh save, never a throw', () => {
-  for (const g of [null, undefined, 5, 'x', [], { questions: [] }]) assert.equal(cleanSave(g).schemaVersion, 4);
+  for (const g of [null, undefined, 5, 'x', [], { questions: [] }]) assert.equal(cleanSave(g).schemaVersion, SCHEMA);
 });
