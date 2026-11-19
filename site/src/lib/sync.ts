@@ -105,9 +105,10 @@ function banner(text: string, buttons: [string, () => void][] = []) {
   const el = document.createElement('div');
   el.id = 'sync-banner';
   el.setAttribute('role', 'status');
-  el.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:50;max-width:min(92vw,560px);' +
-    'background:var(--cream,#fff8ee);color:var(--cocoa,#4b2e1e);border:1.5px solid var(--crust,#d9b88f);border-radius:12px;' +
-    'padding:10px 14px;font-size:0.95rem;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;flex-wrap:wrap;gap:8px;align-items:center';
+  // An in-flow bar above the page content (never fixed over it), so it can never cover quiz answers.
+  el.style.cssText = 'position:relative;z-index:1;width:100%;box-sizing:border-box;' +
+    'background:var(--paper,#fff8ee);color:var(--cocoa,#4b2e1e);border-bottom:2px solid var(--berry,#a3365b);' +
+    'padding:10px var(--gutter,16px);font-size:0.95rem;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center';
   const t = document.createElement('span'); t.textContent = text; el.append(t);
   for (const [label, fn] of buttons) {
     const b = document.createElement('button');
@@ -116,7 +117,15 @@ function banner(text: string, buttons: [string, () => void][] = []) {
     b.addEventListener('click', () => { el.remove(); fn(); });
     el.append(b);
   }
-  document.body.append(el);
+  if (!buttons.length) { // an information-only bar can be closed
+    const x = document.createElement('button');
+    x.type = 'button'; x.textContent = 'Got it';
+    x.style.cssText = 'min-height:44px;padding:0 14px;border-radius:10px;border:1.5px solid var(--berry,#a3365b);background:#fff;color:var(--berry,#a3365b);font:inherit;font-weight:600;cursor:pointer';
+    x.addEventListener('click', () => el.remove());
+    el.append(x);
+  }
+  const main = document.getElementById('main');
+  main?.parentNode ? main.parentNode.insertBefore(el, main) : document.body.prepend(el);
 }
 
 function schedule(ms = PUSH_DELAY_MS) {
@@ -164,11 +173,11 @@ function showConflict(id: string, c: { rev: number; data: unknown }) {
   conflicted = true;
   stopped = true; // no pushes until the user chooses
   clearTimeout(timer);
-  banner('Progress on another device is newer:', [
-    ['Use the newer one', () => {
+  banner('Another device has newer progress. Which one do you want?', [
+    ['Use that one', () => {
       if (resolveConflict('newer') === 'adopt-server') { conflicted = false; adoptServer(id, c.rev, c.data); location.reload(); }
     }],
-    ["Keep this device's", () => {
+    ['Keep this one', () => {
       if (resolveConflict('mine') === 'force-push') {
         kv.set(revKey(id), String(c.rev)); stopped = false; conflicted = false;
         void push(true).then(() => afterConflict?.());

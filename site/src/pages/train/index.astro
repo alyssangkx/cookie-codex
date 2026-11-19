@@ -14,6 +14,7 @@ const schools = SCHOOLS.map((s) => {
 
     <div class="today-strip" id="today" aria-live="polite">
       <p><strong id="goal">Today: 0 of 2 quizzes</strong> · <span id="streak">No streak yet</span></p>
+      <p class="goal-help" id="goal-help">Finish your quizzes each day to meet your daily goal.</p>
       <a id="review" class="btn-review" href="/quiz/?mode=review" hidden>Daily Review</a>
       <p id="done" class="done" hidden>Done for today! Come back tomorrow. You can still browse the Codex and your cards.</p>
     </div>
@@ -31,22 +32,24 @@ const schools = SCHOOLS.map((s) => {
         </li>
       ))}
     </ul>
-    <p class="links"><a href="/paper/">Practice paper (WA / SA style)</a> · <a href="/collection/">My cards</a> · <a href="/parent/">For parents</a></p>
+    <p class="links"><a href="/paper/">Practice test paper</a><a href="/collection/">My cards</a><a href="/parent/">For parents</a></p>
   </section>
 </Base>
 
 <script>
   import { load, today, liveStreak, dayBlock, blockMessage, isDue, TIERS } from '../../lib/store';
+  import { reviewSize } from '../../lib/pick';
   const s = load();
   const t = today(s);
   document.getElementById('goal')!.textContent =
     `Today: ${Math.min(t.quizzes, s.settings.dailyGoalQuizzes)} of ${s.settings.dailyGoalQuizzes} quizzes` +
     (t.quizzes >= s.settings.dailyGoalQuizzes ? ' ✓ goal met' : '');
+  document.getElementById('goal-help')!.textContent = `Your daily goal is ${s.settings.dailyGoalQuizzes} quiz${s.settings.dailyGoalQuizzes === 1 ? '' : 'zes'} a day.`;
   const st = liveStreak(s);
   document.getElementById('streak')!.textContent = st ? `${st}-week streak` : 'Meet your goal on 4 days this week to start a streak';
   const due = Object.keys(s.questions).filter((id) => isDue(s, id)).length;
   const review = document.getElementById('review') as HTMLAnchorElement;
-  if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = `Daily Review (${Math.min(due, 5)} questions)`; }
+  if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = `Daily Review (${reviewSize(due)} question${reviewSize(due) === 1 ? '' : 's'})`; }
   const doneEl = document.getElementById('done')!;
   const reason = dayBlock(s, 'tier');
   doneEl.hidden = !reason;
@@ -81,5 +84,7 @@ const schools = SCHOOLS.map((s) => {
   .school.soon a { opacity: 0.7; }
   .school-name { font: 600 1.5rem var(--font-display); }
   .school-meta, .school-progress { color: var(--cocoa-soft); font-size: 0.95rem; }
-  .links { margin-top: 1.5rem; }
+  .links { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+  .links a { display: inline-flex; align-items: center; min-height: 44px; }
+  .goal-help { color: var(--cocoa-soft); font-size: 0.9rem; flex-basis: 100%; }
 </style>

@@ -28,6 +28,8 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         if (p === '' || new RegExp(GAME).test(p)) g = 'game';
         else if (p === '/parent') g = 'admin';
         document.documentElement.setAttribute('data-gate', g);
+        // signed-out visitors do not see the links that only lead to the sign-in page
+        try { if (localStorage.getItem('ccx:auth') !== null) document.documentElement.className += ' has-auth'; } catch (e) {}
         if (!g) return;
         var has = false;
         // the one allowed storage read outside store.ts; the key is AUTH_KEY in lib/supabase.ts
@@ -43,11 +45,28 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
       })();
     </script>
     <noscript><style>html.gate-pending body { visibility: visible !important; }</style></noscript>
+    <!-- Noto Sans SC (Chinese glyphs) is only fetched when a page shows Chinese text: ccxZh() is called on load
+         when the page has any, and by the quiz page when a Chinese question is drawn. -->
+    <script is:inline>
+      window.ccxZh = function () {
+        if (window.ccxZhDone) return; window.ccxZhDone = true;
+        var l = document.createElement('link'); l.rel = 'stylesheet';
+        l.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap';
+        document.head.appendChild(l);
+      };
+      document.addEventListener('DOMContentLoaded', function () {
+        var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (n) {
+          var t = n.parentNode && n.parentNode.nodeName;
+          return t === 'SCRIPT' || t === 'STYLE' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+        } });
+        while (w.nextNode()) if (/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/.test(w.currentNode.nodeValue)) { window.ccxZh(); break; }
+      });
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Noto+Sans+SC:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap"
     />
   </head>
   <body>
@@ -58,8 +77,8 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         <nav class="nav" aria-label="Main">
           <a href="/">Home</a>
           <a href="/codex/">Library</a>
-          <a href="/collection/">My House</a>
-          <a href="/parent/">Parents</a>
+          <a class="gated" href="/collection/">My House</a>
+          <a class="gated" href="/parent/">Parents</a>
           <button type="button" id="logout" class="logout" hidden>Log out</button>
         </nav>
       </div>
@@ -145,6 +164,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
 
 <style is:global>
   html.gate-pending body { visibility: hidden; }
+  html:not(.has-auth) .nav .gated { display: none; }
 </style>
 
 <style>
@@ -173,4 +193,5 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
     color: var(--cocoa-soft); font-size: 0.95rem;
   }
   .site-footer p { margin: 0.25rem 0; max-width: 70ch; }
+  .site-footer a { display: inline-block; padding-block: 0.85rem; margin-block: -0.85rem; }
 </style>

@@ -11,7 +11,7 @@ import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../../lib/data';
     <h1>The Library: every Cookie Run: Kingdom card</h1>
     <p class="lede">
       All {cookies.length} cookies, shelved from the rarest down. Open any cookie to read its backstory
-      and personality, or narrow the shelf by name, rarity or temperament.
+      and personality, or narrow the shelf by name, rarity or personality.
     </p>
 
     <nav class="jump" aria-label="Jump to a rarity">
@@ -140,7 +140,7 @@ import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../../lib/data';
   .lede { max-width: 58ch; font-size: 1.15rem; margin: 0.75rem 0 1.5rem; }
 
   .jump { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; margin-bottom: 1.5rem; }
-  .jump a { color: var(--cocoa); text-decoration: none; min-height: 44px; }
+  .jump a { color: var(--cocoa); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
   .jump a:hover { text-decoration: underline; }
   .count { color: var(--cocoa-soft); font-weight: 400; }
 

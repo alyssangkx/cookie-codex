@@ -9,7 +9,7 @@ const SCHOOL_NAME: Record<string, string> = { math: 'Math', science: 'Science', 
 const subById = new Map(subs.map((s) => [s.id, s]));
 
 const MILESTONE_RULE: Record<string, string> = {
-  ancient: 'Own legendary cards at 2★+ and pass the Ancient Trial (coming later)',
+  ancient: 'Get your legendary cards to 2 stars or more, then pass the Ancient Trial (coming later)',
   dragon: 'Reach 30 / 100 study days',
   beast: 'Beat a school monster (coming later)',
   witch: 'Fix 150 old mistakes',
@@ -50,7 +50,7 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
         <article class={`school-shelf ${isOpen(id) ? '' : 'later'}`} data-school={id}>
           <h2>{name}{id === 'chinese' && <span lang="zh-Hans"> 华文</span>}</h2>
           {isOpen(id)
-            ? <p class="school-n"><strong class="sn">0</strong> cards · <span class="st">0</span> tiers cleared</p>
+            ? <p class="school-n"><strong class="sn">0</strong> <span class="sn-l">cards</span> · <span class="st">0</span> <span class="st-l">tiers</span> cleared</p>
             : <p class="school-n">Opens soon</p>}
           <div class="mini-cards" aria-hidden="true"></div>
         </article>
@@ -73,8 +73,13 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
       </div>
     </div>
 
+    <nav class="jump" aria-label="Jump to a rarity">
+      <span>Jump to:</span>
+      {groups.map((g) => <a class="tag" href={`#shelf-${g.rarity}`}>{rarityLabel(g.rarity)}</a>)}
+    </nav>
+
     {groups.map((g) => (
-      <section class="shelf" data-shelf style={`--rc: var(--r-${g.rarity})`}>
+      <section class="shelf" id={`shelf-${g.rarity}`} data-shelf style={`--rc: var(--r-${g.rarity})`}>
         <h2><span class="rarity-chip">{rarityLabel(g.rarity)}</span> <span class="n"><span class="own-n">0</span> of {g.list.length}</span></h2>
         <ul class="grid">
           {g.list.map((c) => (
@@ -91,6 +96,7 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
             </li>
           ))}
         </ul>
+        <p class="to-top-row"><a class="to-top" href="#top">Back to top</a></p>
       </section>
     ))}
     <p class="empty" id="empty" hidden>No cards match that filter yet.</p>
@@ -110,8 +116,8 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
     const cleared = Object.entries(sv.progress).filter(([sub]) => sub.startsWith(prefix))
       .reduce((n, [, p]) => n + TIERS.filter((t) => p[t]?.cleared).length, 0);
     const sn = el.querySelector('.sn'), st = el.querySelector('.st');
-    if (sn) sn.textContent = String(owned.length);
-    if (st) st.textContent = String(cleared);
+    if (sn) { sn.textContent = String(owned.length); el.querySelector('.sn-l')!.textContent = owned.length === 1 ? 'card' : 'cards'; }
+    if (st) { st.textContent = String(cleared); el.querySelector('.st-l')!.textContent = cleared === 1 ? 'tier' : 'tiers'; }
     el.querySelector('.mini-cards')!.innerHTML = owned.slice(0, 12).map(([slug, c]) =>
       `<img src="${info[slug]?.image ?? ''}" alt="" width="44" height="44" title="${(info[slug]?.name ?? slug).replace(/"/g, '')} ${'★'.repeat(c.stars)}">`).join('');
   });
@@ -154,12 +160,17 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
   .col-page .name { font-family: var(--font-display); font-weight: 600; font-size: 1rem; line-height: 1.2; overflow-wrap: anywhere; }
   .col-page .state { font-family: var(--font-display); font-size: 0.85rem; color: var(--cocoa-soft); }
   .col-page .info { font-size: 0.85rem; line-height: 1.35; color: var(--cocoa-soft); overflow-wrap: anywhere; }
-  .col-page .stars { color: var(--r-ancient); letter-spacing: 0.05em; font-size: 1rem; }
+  .col-page .stars { color: #7f5f0b; letter-spacing: 0.05em; font-size: 1rem; }
   .col-page .ccard.locked .plate img { filter: grayscale(1); opacity: 0.45; }
   .col-page .ccard.locked .name { color: var(--cocoa-soft); }
   .col-page .ccard.owned { box-shadow: 0 0 0 1px var(--rc); }
   .col-page .ccard a:hover { background: var(--plate); border-radius: var(--radius-card); }
   .col-page .empty { margin-top: 2rem; color: var(--cocoa-soft); }
+  .jump { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0.5rem 0 1rem; font-family: var(--font-display); }
+  .jump .tag { font-size: 0.95rem; }
+  .shelf { scroll-margin-top: 1rem; }
+  .to-top-row { margin: 0.5rem 0 0; }
+  .to-top { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-display); font-weight: 600; }
 </style>
 
 <script>

@@ -105,9 +105,12 @@ export function wholePassages(
 }
 
 /** Daily Review: due retests from anywhere, oldest first; 5 questions, growing to 15 with the backlog. */
+/** How many questions one Daily Review asks when `due` are waiting: half of them, between 5 and 15, never more than are due. */
+export const reviewSize = (due: number) => Math.min(due, 15, Math.max(5, Math.ceil(due / 2)));
+
 export function pickReview(ids: string[], seen: Record<string, Seen | undefined>, size?: number, now = Date.now()) {
   const due = ids.filter((id) => (seen[id]?.s ?? 0) > 0 && seen[id]!.due <= now).sort((a, b) => seen[a]!.due - seen[b]!.due);
-  return due.slice(0, size ?? Math.min(15, Math.max(5, Math.ceil(due.length / 2))));
+  return due.slice(0, size ?? reviewSize(due.length));
 }
 
 /**
@@ -129,8 +132,8 @@ export function reviewPassages(picked: string[], passage: (id: string) => { grou
 
 export type Mix = Record<'basic' | 'intermediate' | 'competent', number>;
 export const MIXES: Record<string, { label: string; mix: Mix }> = {
-  wa: { label: 'Weighted Assessment (more Basic)', mix: { basic: 0.4, intermediate: 0.4, competent: 0.2 } },
-  sa: { label: 'Semestral / Prelim (more Competent)', mix: { basic: 0.2, intermediate: 0.4, competent: 0.4 } },
+  wa: { label: 'Quick test (more Basic questions)', mix: { basic: 0.4, intermediate: 0.4, competent: 0.2 } },
+  sa: { label: 'Exam paper (more Competent questions)', mix: { basic: 0.2, intermediate: 0.4, competent: 0.4 } },
 };
 
 /**

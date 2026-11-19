@@ -418,7 +418,7 @@ def two_machines(r):
                  (ans + 2, "careless_slip", "Made a slip in the calculation."),
                  (ans - 2, "careless_slip", "Made a slip in the calculation."),
                  (F(job, rb), "used_the_slower_machine_only", "Used the slower one only.")]
-        steps = [f"Rates are in the ratio {tB} : {tA} = {u} : {v}", f"{u - v} unit(s) = {D}, so rate B = {rb} and rate A = {ra} per minute",
+        steps = [f"Rates are in the ratio {tB} : {tA} = {u} : {v}", f"{plural(u - v, 'unit')} = {D}, so rate B = {rb} and rate A = {ra} per minute",
                  f"Job = {ra} × {tA} = {job}", f"Time together = {job} ÷ {ra + rb} = {plural(ans, 'minute')}"]
         sh = unit("minutes")
     else:
@@ -429,7 +429,7 @@ def two_machines(r):
                  (ans + 10, "careless_slip", "Made a slip in the calculation."),
                  (ans - 10, "careless_slip", "Made a slip in the calculation."),
                  ((ra + rb) * tA, "added_rates_before_multiplying", "Used the combined rate with one time.")]
-        steps = [f"Rates are in the ratio {tB} : {tA} = {u} : {v}", f"{u - v} unit(s) = {D}, so rate B = {rb} and rate A = {ra} per minute",
+        steps = [f"Rates are in the ratio {tB} : {tA} = {u} : {v}", f"{plural(u - v, 'unit')} = {D}, so rate B = {rb} and rate A = {ra} per minute",
                  f"Job = {ra} × {tA} = {job}"]
         sh = unit("litres" if what == "tank" else "items")
     return build(two_machines, stem, ans, wrong, steps, {"tA": tA, "tB": tB, "D": D, "ask": ask}, sh,

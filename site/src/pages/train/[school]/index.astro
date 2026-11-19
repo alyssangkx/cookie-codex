@@ -21,7 +21,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 <Base title={`Train ${school.name} · Cookie Codex`} description={`Pick what to train today in ${school.name}: suggestions, your power and every sub-topic.`}>
   <div class="wrap train-home" data-school={school.id}>
     <p class="th-crumbs"><a href="/">Home</a></p>
-    <h1 class="th-title">What do you want to train today<span class="player-sep"></span>?</h1>
+    <h1 class="th-title">What do you want to train in {school.name} today<span class="player-sep"></span>?</h1>
 
     <div class="th-power" id="th-power">
       <span class="th-power-label">School power: <strong id="th-power-n">0</strong></span>
@@ -44,21 +44,24 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
             <span class="th-topic-name">{g.name}</span>
             <span class="th-topic-meta">
               <span class="th-mini" aria-hidden="true"><span class="th-topic-fill" style="width:0%"></span></span>
-              <span class="th-topic-count"><span class="th-cleared">0</span>/{playableCount(g)} tiers cleared</span>
+              {playableCount(g) > 0
+                ? <span class="th-topic-count"><span class="th-cleared">0</span>/{playableCount(g)} tiers cleared</span>
+                : <span class="th-topic-count">Coming soon</span>}
             </span>
           </summary>
           <ul class="th-subs">
             {g.subs.map((s) => (
-              <li class="th-sub">
+              <li class={`th-sub${TIERS.some((t) => s.playable[t]) ? '' : ' th-sub-soon'}`}>
                 <a class="th-sub-name" href={`/train/${school.id}/${s.slug}/`}>{s.name}</a>
-                <span class="th-home">P{s.home}</span>
-                <span class="th-chips">
+                <span class="th-home">Primary {s.home}</span>
+                {!TIERS.some((t) => s.playable[t]) && <span class="th-chips"><span class="th-soon-tag">Coming soon: no questions yet</span></span>}
+                {TIERS.some((t) => s.playable[t]) && <span class="th-chips">
                   {TIERS.map((t) => (
                     <a class="th-chip" href={`/train/${school.id}/${s.slug}/`} data-sub={s.id} data-tier={t} data-playable={String(s.playable[t])}>
                       {TIER_NAME[t]}{s.playable[t] ? '' : ': no questions yet'}
                     </a>
                   ))}
-                </span>
+                </span>}
               </li>
             ))}
           </ul>
@@ -67,7 +70,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       </div>
     </section>
 
-    <p class="th-paper"><a class="th-paper-link" href="/paper/">Practice paper (WA / SA)</a></p>
+    <p class="th-paper"><a class="th-paper-link" href="/paper/">Practice test paper</a></p>
     <script type="application/json" id="th-subs" set:html={clientData} />
   </div>
 </Base>
@@ -81,7 +84,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       <section class="th-soon-topic">
         <h2>{g.name}</h2>
         <ul class="th-soon-list">
-          {g.subs.map((s) => <li>{s.name} <span class="th-home">P{s.home}</span></li>)}
+          {g.subs.map((s) => <li>{s.name} <span class="th-home">Primary {s.home}</span></li>)}
         </ul>
       </section>
     ))}
@@ -134,7 +137,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       d.querySelector<HTMLElement>('.th-topic-fill')!.style.width = `${p}%`;
       let n = 0;
       for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && tierState(s, sub.id, t).cleared) n++;
-      d.querySelector('.th-cleared')!.textContent = String(n);
+      const c = d.querySelector('.th-cleared'); if (c) c.textContent = String(n);
     });
 
     // suggestions
@@ -234,6 +237,9 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
   .train-home .th-chip[data-state='open'] { color: var(--cocoa); border-color: var(--cocoa-soft); }
   .train-home .th-chip[data-state='locked'], .train-home .th-chip[data-state='none'] { opacity: 0.7; border-style: dashed; }
   .train-home .th-paper { margin-top: 1.75rem; }
+  .train-home .th-sub-soon { background: var(--plate); border-style: dashed; }
+  .train-home .th-sub-soon .th-sub-name { color: var(--cocoa-soft); }
+  .train-home .th-soon-tag { font-size: 0.85rem; font-style: italic; color: var(--cocoa-soft); }
 
   .train-home .th-soon-list { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.2rem; }
   .train-home .th-soon-topic h2 { margin-top: 1.25rem; }

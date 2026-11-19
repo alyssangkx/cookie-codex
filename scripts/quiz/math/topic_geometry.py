@@ -1115,7 +1115,7 @@ def true_statements(r):
     wr = [W(4 - cnt, "counted_the_false_ones", "Counted the false statements."),
           W(cnt + 1, "miscount", "Counted one extra."), W(cnt - 1, "miscount", "Missed one true statement."),
           W(cnt + 2, "miscount", "Counted two extra."), W(cnt + 3, "miscount", "Miscounted.")]
-    steps = [f"({'abcd'[i]}) is {'true' if t else 'false'}." for i, (s, t) in enumerate(sel)] + [f"{cnt} statement(s) are true."]
+    steps = [f"({'abcd'[i]}) is {'true' if t else 'false'}." for i, (s, t) in enumerate(sel)] + [(f"{cnt} statement is true." if cnt == 1 else f"{cnt} statements are true.")]
     return mk(true_statements, stem, cnt, wr, steps, {"sel": [s for s, _ in sel]}, None, show=lambda v: str(int(v)), maxv=4)
 
 
@@ -1672,7 +1672,7 @@ def rect_count_true(r):
           W(cnt + 1, "miscount", "Counted one extra."), W(cnt - 1, "miscount", "Missed one true statement."), W(cnt + 2, "miscount", "Miscounted."),
           W(cnt + 3, "miscount", "Miscounted.")]
     return mk(rect_count_true, stem, cnt, wr,
-              [f"({'abcd'[i]}) is {'true' if t else 'false'}." for i, (s, t) in enumerate(sel)] + [f"{cnt} statement(s) are true."],
+              [f"({'abcd'[i]}) is {'true' if t else 'false'}." for i, (s, t) in enumerate(sel)] + [(f"{cnt} statement is true." if cnt == 1 else f"{cnt} statements are true.")],
               {"sel": [s for s, _ in sel]}, None, show=lambda v: str(int(v)), maxv=4)
 
 
@@ -2120,15 +2120,15 @@ def symmetric_figure_count(r):
         sc.svg("panel")
         figs.append(sc.f)
     nm = r.choice(NAMES)
-    ph = r.choice([f"{nm} looks at the four figures A, B, C and D. How many of them have at least one line of symmetry?",
-                   f"How many of the figures A to D can be folded so that the two halves match exactly? ({nm} is checking.)",
-                   f"{nm} draws figures A to D. Count the figures that are symmetric (have a line of symmetry)."])
+    ph = r.choice([f"{nm} looks at the four figures P, Q, R and S. How many of them have at least one line of symmetry?",
+                   f"How many of the figures P to S can be folded so that the two halves match exactly? ({nm} is checking.)",
+                   f"{nm} draws figures P to S. Count the figures that are symmetric (have a line of symmetry)."])
     wr = [W(4 - cnt, "counted_the_asymmetric_figures", "Counted the figures with no line of symmetry."),
           W(cnt + 1, "counted_a_parallelogram_or_slanted_figure", "Counted a figure that cannot be folded onto itself."),
           W(cnt - 1 if cnt > 1 else None, "missed_a_symmetric_figure", "Missed a symmetric figure."), W(cnt + 2, "miscount", "Miscounted.")]
-    return build(symmetric_figure_count, ph, cnt, wr, ["Check each figure by imagining a fold.", f"{cnt} figure(s) have a line of symmetry."],
+    return build(symmetric_figure_count, ph, cnt, wr, ["Check each figure by imagining a fold.", f"{cnt} figure{'s' if cnt != 1 else ''} {'have' if cnt != 1 else 'has'} a line of symmetry."],
                  {"shapes": [[list(p) for p in s] for s in shapes]}, show=lambda v: str(int(v)), whole=True, auto_slips=False,
-                 figure=panels(figs, "ABCD", cols=2, title="Four figures"))
+                 figure=panels(figs, "PQRS", cols=2, title="Four figures"))
 
 
 @checker(symmetric_figure_count)
@@ -2276,7 +2276,7 @@ def symmetry_axes_pattern(r):
     wr = [w_ for w_ in wr if w_[1] != "x"]
     return mk(symmetry_axes_pattern, stem, ans, wr,
               ["Test each possible line (vertical, horizontal, two diagonals) by folding.",
-               f"The figure matches itself over {ans} line(s)."], {"n": n, "cells": [list(c) for c in sorted(cells)]}, svg,
+               f"The figure matches itself over {plural(ans, 'line')}."], {"n": n, "cells": [list(c) for c in sorted(cells)]}, svg,
               show=lambda v: str(int(v)), maxv=4)
 
 
@@ -2709,7 +2709,7 @@ def solid_counts(r):
     nm = r.choice(NAMES)
     stem = f"{nm} has {art(name)} {name}. How many {what} does it have?"
     others = [fcs, eds, vts]
-    wr = [W(v, "gave_a_different_count", "Gave the number of faces, edges or vertices that was not asked.") for v in others if v != ans]
+    wr = [W(v, "gave_a_different_count", "Gave a different count (faces, edges or vertices) from the one asked for.") for v in others if v != ans]
     wr += [W(ans + 1, "off_by_one", "Counted one too many."), W(ans - 1, "off_by_one", "Missed one."), W(ans + 2, "miscount", "Miscounted.")]
     return mk(solid_counts, stem, ans, wr, [f"{a_an(name).capitalize()} {name} has {fcs} faces, {eds} edges and {vts} vertices.", f"Answer: {ans}"],
               {"name": name, "what": what}, None, show=lambda v: str(int(v)), maxv=20)
@@ -2846,16 +2846,16 @@ def nets_fold_count(r):
     nets = [nets[i] for i in idx]
     figs = [net_fig(n, cell=22, w=150, h=130) for n in nets]
     nm = r.choice(NAMES)
-    ph = r.choice([f"{nm} draws the four nets A, B, C and D, each made of 6 squares. How many of them can be folded to make a cube without any overlap or gap?",
-                   f"How many of the nets A to D can be folded into a closed cube? ({nm} is checking each net.)",
+    ph = r.choice([f"{nm} draws the four nets P, Q, R and S, each made of 6 squares. How many of them can be folded to make a cube without any overlap or gap?",
+                   f"How many of the nets P to S can be folded into a closed cube? ({nm} is checking each net.)",
                    f"Four nets of six squares are shown. For how many of them will the squares fold up to form a cube? ({nm} is testing them.)"])
     wr = [W(4 - k, "counted_the_other_nets", "Counted the nets that do not fold into a cube."), W(k + 1, "accepted_a_bad_net", "Accepted a net where two faces overlap."),
           W(k - 1 if k > 1 else None, "rejected_a_good_net", "Rejected a valid net."), W(k + 2, "miscount", "Miscounted.")]
     return build(nets_fold_count, ph, k, [w_ for w_ in wr if w_[0]],
                  ["A cube net needs 6 squares that fold with no two faces landing on the same side.",
                   "Rows of four squares with one square above and one below always work; a net with four squares in a row and both extras on the same side, or with a 2 × 2 block, fails.",
-                  f"{k} net(s) fold into a cube."], {"nets": [[list(c) for c in sorted(n)] for n in nets]},
-                 show=lambda v: str(int(v)), whole=True, auto_slips=False, figure=panels(figs, "ABCD", cols=2, title="Four nets"))
+                  f"{k} net{'s' if k != 1 else ''} fold{'' if k != 1 else 's'} into a cube."], {"nets": [[list(c) for c in sorted(n)] for n in nets]},
+                 show=lambda v: str(int(v)), whole=True, auto_slips=False, figure=panels(figs, "PQRS", cols=2, title="Four nets"))
 
 
 @checker(nets_fold_count)
@@ -3900,7 +3900,7 @@ def count_perpendicular_pairs(r):
         (perp + 1, "counted_one_pair_too_many", "Counted one pair too many."),
         (perp - 1, "missed_one_pair", "Missed one pair."),
     ], ["Check each pair of lines: do the steps across and up/down turn into each other with one reversed?",
-        f"There are {perp} perpendicular pair(s)."],
+        f"There {'is' if perp == 1 else 'are'} {plural(perp, 'perpendicular pair')}."],
         {"segs": [[list(a), list(b)] for a, b in segs]}, str, whole=True, auto_slips=False,
         figure=_line_figure(None, segs))
 

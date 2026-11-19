@@ -3,11 +3,11 @@ import Base from '../../layouts/Base.astro';
 import { paperTopics } from '../../lib/train';
 import { MIXES } from '../../lib/pick';
 ---
-<Base title="Practice paper · PSLE training" description="Build a WA or SA style Math practice paper from the topics you choose.">
+<Base title="Practice paper · PSLE training" description="Build a Math practice test or exam paper from the topics you choose.">
   <section class="wrap paper">
     <p class="crumbs"><a href="/train/">Schools of Mastery</a> › Practice paper</p>
     <h1>Build a practice paper</h1>
-    <p class="lede">Weighted Assessments and Semestral exams mix several topics. Pick the topics your class has covered and the paper will mix them, from easier to harder, against the clock. Papers count toward today's goal but not toward clearing tiers.</p>
+    <p class="lede">School tests (Weighted Assessments) and exams (Semestral and Prelim papers) mix several topics. This builder is for Math only for now. Pick the topics your class has covered and the paper will mix them, from easier to harder, against the clock. Papers count toward today's goal but not toward clearing tiers.</p>
     <form action="/quiz/" method="get" id="paper-form">
       <input type="hidden" name="mode" value="paper" />
       <input type="hidden" name="topics" id="topics" />
@@ -56,9 +56,17 @@ import { MIXES } from '../../lib/pick';
   fieldset { border: 1.5px solid var(--crust); border-radius: var(--radius-card); background: var(--paper); margin: 1rem 0; padding: 0.75rem 1rem 1rem; }
   legend { font: 600 1.1rem var(--font-display); padding: 0 0.4rem; }
   .topics { display: grid; gap: 0.25rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
-  label { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; }
+  label { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; }
+  input[type='checkbox'], input[type='radio'] { width: 24px; height: 24px; flex: none; accent-color: var(--berry); margin: 0; }
+  .topic { padding: 0.15rem 0.25rem; border-radius: var(--radius-control); }
+  .topic:hover { background: var(--plate); }
   .n { color: var(--cocoa-soft); font-size: 0.85rem; }
-  select { font: inherit; min-height: 40px; }
+  select {
+    font: inherit; min-height: 44px; padding: 0 2.2rem 0 0.75rem; color: var(--cocoa); background-color: var(--cream);
+    border: 1.5px solid var(--crust); border-radius: var(--radius-control); appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--cocoa) 50%), linear-gradient(135deg, var(--cocoa) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%; background-size: 6px 6px; background-repeat: no-repeat;
+  }
   button { font: 600 1rem var(--font-display); min-height: 44px; padding: 0.4rem 1rem; border-radius: var(--radius-control); border: 1.5px solid var(--crust); background: var(--cream); color: var(--cocoa); }
   .primary { background: var(--berry); color: var(--berry-ink); border: 0; }
   .err { color: var(--berry); font-weight: 600; }

@@ -76,6 +76,8 @@ button:disabled { cursor: not-allowed; }
   border-radius: 4px;
 }
 
+.crumbs a { display: inline-flex; align-items: center; min-height: 44px; }
+
 .wrap { width: min(1200px, 100%); margin-inline: auto; padding-inline: var(--gutter); }
 
 .sr-only {

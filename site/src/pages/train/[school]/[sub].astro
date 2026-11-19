@@ -26,6 +26,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
       {tiers.map((t) => (
         <article class="tier-card" data-tier={t.k} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
           <h2>{t.name}</h2>
+          <p class="tier-help">{{ b: 'The main ideas, step by step.', i: 'Trickier, mixed questions.', c: 'The hardest, exam-style questions.' }[t.k]}</p>
           <a class="reward" href={`/cookie/${t.cookie.slug}/`} style={`--rc: var(--r-${t.cookie.rarity})`}>
             <img src={t.cookie.image} alt="" width="96" height="96" loading="lazy" />
             <span>
@@ -84,6 +85,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
   .tier-card[data-state='cleared'] { border-color: #2e7d4f; }
   .tier-card[data-state='cleared'] .state { color: #1f6b3a; font-weight: 700; }
   .tier-card h2 { margin: 0; }
+  .tier-help { margin: 0; font-size: 0.9rem; color: var(--cocoa-soft); }
   .reward { display: flex; gap: 0.75rem; align-items: center; color: var(--cocoa); text-decoration: none; }
   .reward img { width: 72px; height: 72px; object-fit: contain; background: var(--plate); border-radius: 50%; box-shadow: 0 0 0 3px var(--rc); }
   .reward > span { display: grid; }
