@@ -125,6 +125,9 @@ def merge_paper(subject, paper, stepa, vdir):
     return out
 
 
+ANS_TAG = "ans32"
+
+
 def key_answers(vdir, paper):
     """The VLM's answer-key pages (and step A's answer pages) for this paper, in page order -> [(qno, "answer")], parts joined:
     26a "18" + 26b "$60" -> (26, "(a) 18; (b) $60")."""
@@ -133,6 +136,9 @@ def key_answers(vdir, paper):
         f = vdir / f"p{pg:04d}.json"
         if not f.exists(): continue
         d = json.loads(f.read_text())
+        af = vdir.parent / ANS_TAG / f.name  # the answer-only re-read (vlm_read --page-list) wins where it exists
+        if af.exists() and "error" not in (ad := json.loads(af.read_text())):
+            d, keypages = ad, keypages - {pg}
         # worked-solution pages (step A's answer_pages) come back as kind "questions" with the solution as the text
         entries = d.get("answers") or [] if d.get("kind") == "answers" else []
         if pg in keypages and d.get("kind") in ("answers", "questions"):
@@ -172,7 +178,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--subject", required=True); ap.add_argument("--year", type=int, required=True)
     ap.add_argument("--tag", default="vlm32")
+    ap.add_argument("--ans-tag", default="ans32", help="folder of the answer-page re-read, used where present")
     a = ap.parse_args()
+    global ANS_TAG
+    ANS_TAG = a.ans_tag
     base = OUT / a.subject / str(a.year)
     qs = [json.loads(l) for l in open(base / "questions.jsonl")]
     papers = [json.loads(l) for l in open(base / "papers.jsonl")]

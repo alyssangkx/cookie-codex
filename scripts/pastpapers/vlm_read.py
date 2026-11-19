@@ -30,6 +30,16 @@ printed number; one entry per printed part (a), (b) with its own marks. A questi
 previous page with no number: qno "cont". Keep Chinese text in Chinese characters. "answers" only on answer-key pages.
 Do not solve the questions. Output the JSON compact on one line: no code fences, no indentation."""
 
+# --page-list mode: pages already known to be answer keys or worked solutions
+PROMPT_ANS = """This scanned page is from the answer key or worked solutions of a Singapore Primary 6 {subject} exam paper.
+List every answer on the page in reading order, as JSON only:
+{{"answers": [{{"qno": "<printed question number>", "sub": "<part label like a, b, i, else null>", "answer": "<short answer>"}}]}}
+Rules: an answer table or grid for multiple-choice questions gives one entry per question number with the option exactly as
+printed (1, 2, 3, 4 or A-D); read across each row and match every number to the answer below or beside it. For worked
+solutions give only the final answer with its unit (e.g. "48 cm²", "$15"), not the working. For an explanation question
+give the key answer in at most 30 words. Keep Chinese in Chinese characters. Do not solve anything yourself; copy what is
+printed. Output the JSON compact on one line: no code fences, no indentation."""
+
 
 def page_list(spec, n):
     out = []
@@ -80,11 +90,18 @@ def main():
     ap.add_argument("--tag", default="vlm32", help="output folder name, e.g. vlm32 for a second model")
     ap.add_argument("--max-seqs", type=int, default=16)
     ap.add_argument("--max-tokens", type=int, default=3000, help="raise (e.g. 6000) to re-read a dense page that was cut off")
+    ap.add_argument("--page-list", help="file of 'subject year page' lines: answer pages, read with the answer prompt")
     a = ap.parse_args()
     sets = [(x.split(":")[0], int(x.split(":")[1])) for x in a.sets.split(",")] if a.sets else [(a.subject, a.year)]
     mine = {int(x) for x in a.mine.split(",")}
     todo = []
-    for subject, year in sets:
+    for line in open(a.page_list) if a.page_list else []:
+        subject, year, p = line.split()
+        pdir, vdir = OUT / subject / year / "pages", OUT / subject / year / a.tag
+        vdir.mkdir(exist_ok=True)
+        if (pdir / f"p{int(p):04d}.jpg").exists() and not (vdir / f"p{int(p):04d}.json").exists():
+            todo.append((subject, pdir, vdir, int(p)))
+    for subject, year in ([] if a.page_list else sets):
         pdir, vdir = OUT / subject / str(year) / "pages", OUT / subject / str(year) / a.tag
         vdir.mkdir(exist_ok=True)
         n = max((int(f.stem[1:]) for f in pdir.glob("p[0-9][0-9][0-9][0-9].jpg")), default=0)  # highest page, not a count
@@ -102,11 +119,12 @@ def main():
         chunk = todo[i:i + a.batch]
         msgs = [[{"role": "user", "content": [
             {"type": "image_url", "image_url": {"url": f"file://{pdir}/p{p:04d}.jpg"}},
-            {"type": "text", "text": PROMPT.format(subject=subject)}]}] for subject, pdir, _, p in chunk]
+            {"type": "text", "text": (PROMPT_ANS if a.page_list else PROMPT).format(subject=subject)}]}] for subject, pdir, _, p in chunk]
         outs = llm.chat(msgs, sp, use_tqdm=False)
         for (_, _, vdir, p), o in zip(chunk, outs):
             raw = o.outputs[0].text
             d = parse(raw)
+            if isinstance(d, dict) and a.page_list: d = {"kind": "answers", **d}
             rec = {"page": p, **d} if isinstance(d, dict) else {"page": p, "error": "unparsed", "raw": raw[:4000]}
             (vdir / f"p{p:04d}.json").write_text(json.dumps(rec, ensure_ascii=False))
         print(f"done {i + len(chunk)}/{len(todo)}", flush=True)
