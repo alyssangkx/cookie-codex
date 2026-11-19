@@ -37,6 +37,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 
     <section class="th-syl" aria-labelledby="th-syl-h">
       <h2 id="th-syl-h">All sub-topics</h2>
+      <div class="th-topics">
       {groups.map((g) => (
         <details class="th-topic" data-topic={g.topic}>
           <summary>
@@ -63,6 +64,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
           </ul>
         </details>
       ))}
+      </div>
     </section>
 
     <p class="th-paper"><a class="th-paper-link" href="/paper/">Practice paper (WA / SA)</a></p>
@@ -200,7 +202,10 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
   }
   .train-home .th-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-  .train-home .th-topic { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); margin-bottom: 0.6rem; }
+  /* two columns of topics from 720px so the whole list fits without scrolling; topics keep their order, row by row */
+  .train-home .th-topics { display: grid; gap: 0.6rem; align-items: start; }
+  @media (min-width: 720px) { .train-home .th-topics { grid-template-columns: 1fr 1fr; } }
+  .train-home .th-topic { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); }
   .train-home .th-topic summary {
     cursor: pointer; list-style: none; display: grid; gap: 0.3rem; padding: 0.6rem 1rem; min-height: 44px; align-content: center;
   }
