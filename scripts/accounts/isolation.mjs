@@ -7,10 +7,10 @@
 //   node scripts/accounts/isolation.mjs; unset SUPABASE_SERVICE_ROLE_KEY
 //
 // The service-role key is read from the environment and never printed. Exit 0 = every check passed.
-const URL_ = process.env.SUPABASE_URL ?? process.env.PUBLIC_SUPABASE_URL;
-const ANON = process.env.SUPABASE_ANON_KEY ?? process.env.PUBLIC_SUPABASE_ANON_KEY;
+const URL_ = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL;
+const ANON = process.env.SUPABASE_ANON_KEY || process.env.PUBLIC_SUPABASE_ANON_KEY;
 const SVC = process.env.SUPABASE_SERVICE_ROLE_KEY;
-if (!URL_ || !ANON || !SVC) { console.error('set SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY'); process.exit(2); }
+if (!URL_ || !ANON || !SVC) { console.error('set SUPABASE_SERVICE_ROLE_KEY, and SUPABASE_URL / SUPABASE_ANON_KEY (or PUBLIC_ ones from site/.env)'); process.exit(2); }
 if (SVC.startsWith('sb_publishable_') || SVC === ANON) { console.error('that is the public key; paste the secret (service_role / sb_secret_) key'); process.exit(2); }
 
 let failed = 0;
@@ -19,6 +19,8 @@ const ok = (c, what) => { console.log(`${c ? 'ok  ' : 'FAIL'} ${what}`); if (!c)
 // a Bearer header must then be a real JWT or be left out. Legacy keys are JWTs and work either way.
 const isJwt = (t) => typeof t === 'string' && t.split('.').length === 3;
 const req = async (path, { method = 'GET', token = ANON, key = ANON, body, headers = {} } = {}) => {
+  // a user token that is not a JWT means a sign-in failed: stop, never fall back to an anonymous request
+  if (token !== ANON && token !== SVC && !isJwt(token)) throw new Error(`no user token for ${path}`);
   const r = await fetch(`${URL_}${path}`, {
     method, headers: { apikey: key, ...(isJwt(token) ? { authorization: `Bearer ${token}` } : {}), 'content-type': 'application/json', ...headers },
     body: body === undefined ? undefined : JSON.stringify(body),
@@ -38,7 +40,11 @@ async function parent() {
   if (u.status !== 200) throw new Error(`create parent ${u.status}`);
   made.push(u.body.id);
   // Auth CAPTCHA is on: a password grant with the service-role key is exempt (as in pin-login); the token is the parent's
-  const signIn = async () => (await req('/auth/v1/token?grant_type=password', { method: 'POST', token: SVC, key: SVC, body: { email, password } })).body.access_token;
+  const signIn = async () => {
+    const r = await req('/auth/v1/token?grant_type=password', { method: 'POST', token: SVC, key: SVC, body: { email, password } });
+    if (r.status !== 200 || !isJwt(r.body?.access_token)) throw new Error(`sign-in ${r.status} ${r.body?.error_code ?? ''} (service-role CAPTCHA exemption?)`);
+    return r.body.access_token;
+  };
   let token = await signIn();
   const reg = await fn(token, { action: 'register', consent_version: '1' });
   if (reg.status !== 200) throw new Error(`register ${reg.status} ${reg.body?.error}`);
