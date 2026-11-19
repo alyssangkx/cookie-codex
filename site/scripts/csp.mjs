@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const EXEC = /^(|module|text\/javascript)$/; // script types the browser runs; JSON / ld+json data blocks need no hash
+const EXEC = /^(|module|(text|application)\/(java|ecma)script)$/i; // types the browser runs; JSON data blocks need no hash
 export function policy(html) {
   const hashes = new Set();
   for (const [, attrs, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
@@ -17,8 +17,11 @@ export function policy(html) {
 }
 
 export function addPolicy(html) {
-  if (!/<head>/.test(html)) return /<script\b/.test(html) ? null : html; // e.g. the Google verification file: no scripts
-  return html.replace('<head>', `<head><meta http-equiv="Content-Security-Policy" content="${policy(html)}">`);
+  if (html.includes('http-equiv="Content-Security-Policy"')) return html; // already done (a second run adds nothing)
+  const at = html.match(/<meta charset="[^"]*">/) ?? html.match(/<head\b[^>]*>/); // after charset: keep it in the first 1 KB
+  if (!at) return /<script\b/.test(html) ? null : html; // e.g. the Google verification file: no scripts
+  const i = at.index + at[0].length;
+  return `${html.slice(0, i)}<meta http-equiv="Content-Security-Policy" content="${policy(html)}">${html.slice(i)}`;
 }
 
 const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]));

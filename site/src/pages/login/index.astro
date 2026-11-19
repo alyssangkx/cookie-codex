@@ -73,14 +73,15 @@ import Base from '../../layouts/Base.astro';
     return id;
   };
   const paint = () => dots.forEach((d, i) => d.classList.toggle('on', i < pin.length));
-  const say = (t: string) => { msg.textContent = t; };
+  let replied = false; // the message on screen is the server's wrong-PIN / locked reply
+  const say = (t: string, server = false) => { msg.textContent = t; replied = server; };
   const setBusy = (b: boolean) => { busy = b; document.querySelectorAll<HTMLButtonElement>('.login-page .key').forEach((k) => (k.disabled = b)); };
 
   async function submit() {
     if (busy) return;
     if (!who.value.trim()) { say('Type your username first.'); who.focus(); return; }
     // the 4th digit already submitted: a Go tap after the reply (dots cleared) must not hide "Not quite" / "Too many tries"
-    if (pin.length < 4) { if (pin || !msg.textContent) say('Your PIN has 4 digits.'); return; }
+    if (pin.length < 4) { if (pin || !replied) say('Your PIN has 4 digits.'); return; }
     say(''); setBusy(true);
     const tryPin = pin;
     try {
@@ -111,12 +112,12 @@ import Base from '../../layouts/Base.astro';
       pin = ''; paint();
       if (status === 401) {
         const n = Number(body?.attemptsLeft);
-        say(Number.isFinite(n) ? `Not quite, try again (${n} ${n === 1 ? 'try' : 'tries'} left on this device)` : 'Not quite, try again');
+        say(Number.isFinite(n) ? `Not quite, try again (${n} ${n === 1 ? 'try' : 'tries'} left on this device)` : 'Not quite, try again', true);
       } else if (status === 429) {
         const sec = Number(body?.retryAfterSec);
         say(Number.isFinite(sec) && sec > 0
           ? `Too many tries, please wait ${Math.ceil(sec / 60)} ${Math.ceil(sec / 60) === 1 ? 'minute' : 'minutes'}`
-          : 'Too many tries, please wait a while or ask a grown-up');
+          : 'Too many tries, please wait a while or ask a grown-up', true);
       } else if (status === 400 && body?.error === 'captcha_failed') {
         await showCaptcha();
         say(captcha?.shown ? 'Tick the "I am human" box, then type your PIN again.'

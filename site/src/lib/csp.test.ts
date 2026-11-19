@@ -11,6 +11,10 @@ test('inline scripts are hashed, external and JSON ones are not', () => {
   assert.ok(p.startsWith("script-src 'self' ") && p.includes(h('a()')) && p.includes(h('b()')));
   assert.ok(!p.includes(h('{}')) && p.endsWith("object-src 'none'; base-uri 'self'"));
   assert.match(addPolicy(html)!, /^<head><meta http-equiv="Content-Security-Policy" content="script-src/);
+  const page = '<head data-x><meta charset="utf-8"><script>a()</script></head>';
+  const once = addPolicy(page)!;
+  assert.ok(once.startsWith('<head data-x><meta charset="utf-8"><meta http-equiv="Content-Security-Policy"'));
+  assert.equal(addPolicy(once), once);
   assert.equal(addPolicy('<html><script>x()</script></html>'), null);
   assert.equal(addPolicy('<html>verify</html>'), '<html>verify</html>');
 });
