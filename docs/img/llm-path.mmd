@@ -1,0 +1,24 @@
+flowchart TB
+    subgraph PH["Browser"]
+        direction LR
+        Q["Child: wrong answer,<br/>paper review or<br/>typed answer"] ~~~ PA["Parent page:<br/>marks, chat log,<br/>flags"]
+    end
+    subgraph SB["Supabase"]
+        direction LR
+        EF["Edge Function:<br/>session check, rate limit,<br/>builds the prompt"] <--> DB[("items, rubrics,<br/>answers, chat log")]
+    end
+    subgraph HS["Home server"]
+        direction LR
+        CF["Tunnel<br/>outbound, TLS"] --> M["Instruct model<br/>on one GPU"]
+        W["Drain worker:<br/>retries pending marks"] --> M
+    end
+    Q -->|"item id + answer<br/>or chat turn"| EF
+    DB --> PA
+    EF -->|"HTTPS + access token<br/>+ API key"| CF
+    W -->|"pulls pending"| DB
+    classDef sb fill:#dbe9f7,stroke:#2b6cb0,color:#111
+    classDef hs fill:#fde8cf,stroke:#c05621,color:#111
+    classDef ph fill:#f2f2f2,stroke:#666,color:#111
+    class EF,DB sb
+    class CF,M,W hs
+    class Q,PA ph
