@@ -123,8 +123,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const fill = new Map(q.group ? filledBlanks.get(q.group) ?? [] : []);
     // blanks of this dialogue that are not in this quiz (a cut set, or already mastered) show their answer,
     // so only the blanks being asked are open and nothing looks skipped
-    if (q.group) for (const o of byId.values())
-      if (o.group === q.group && o.seq != null && !inQuiz.has(o.id)) fill.set(o.seq, { t: o.options[o.answer], ok: true });
+    if (q.group) for (const o of members.get(q.group) ?? [])
+      if (o.seq != null && !inQuiz.has(o.id)) fill.set(o.seq, { t: o.options[o.answer], ok: true });
     for (const [n, f] of fill) {
       if (String(n) === k) continue; // never fill the blank being asked
       h = h.replace(`（${n}）＿＿`, () => `（${n}）<span class="filled">${esc(f.t)}</span>`); // a function, so '$' in a phrase stays literal
@@ -149,11 +149,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     }
     // the other blanks of this passage: not in this quiz -> shown with their answer (grey, nothing looks skipped);
     // in this quiz and not answered yet -> a button that jumps to that question
-    if (q.group) for (const o of byId.values()) {
-      if (o.group !== q.group || o.seq == null || String(o.seq) === asked || filledBlanks.get(q.group)?.has(o.seq)) continue;
+    if (q.group) for (const o of members.get(q.group) ?? []) {
+      if (o.seq == null || String(o.seq) === asked || filledBlanks.get(q.group)?.has(o.seq)) continue;
       const lead = zh ? `（${o.seq}）` : `(${o.seq}) `, blank = zh ? `（${o.seq}）＿＿` : `(${o.seq}) ____`;
       if (!inQuiz.has(o.id)) h = h.replace(blank, () => `${lead}<span class="filled given" title="not in this quiz">${esc(o.options[o.answer])}</span>`);
-      else if (!reveal) h = h.replace(blank, () => `<button type="button" class="blank-jump" data-id="${esc(o.id)}" aria-label="Go to blank ${o.seq}">${blank}</button>`);
+      else if (!reveal && quiz.indexOf(o.id) > i) h = h.replace(blank, () => `<button type="button" class="blank-jump" data-id="${esc(o.id)}" aria-label="Go to blank ${o.seq}">${blank}</button>`);
     }
     const mine = filledBlanks.get(q.group ?? '')?.get(Number(asked));
     if (reveal && asked && mine) {
@@ -169,6 +169,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   };
 
   let byId = new Map<string, Q>();
+  let members = new Map<string, Q[]>(); // passage group -> its questions (built once per quiz, not per render)
   let inQuiz = new Set<string>(); // ids in the current quiz
   let quiz: string[] = [], i = 0, score = 0, deadline = 0, tick = 0, startedAt = 0, answered = false, over = false;
   let pausedAt = 0; // the clock stops while the worked solution is on screen
@@ -211,6 +212,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       // practice papers are Math-only and assume 4 options; never mix in an 8-option dialogue item
       if (mode === 'paper') all = all.filter((q) => q.options.length === 4);
       byId = new Map(all.map((q) => [q.id, q]));
+      members = new Map();
+      for (const q of all) if (q.group) members.set(q.group, [...(members.get(q.group) ?? []), q]);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
@@ -220,8 +223,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       } else if (mode === 'paper') {
         quiz = pickPaper(all as any, s.questions, paperN, paperMix.mix);
       } else {
-        // a passage's due blanks come as one consecutive run in passage order (no hole that reads as a skipped blank)
-        quiz = reviewPassages(pickReview(all.map((q) => q.id), s.questions), all.map((q) => q.id), passage);
+        // a passage's due blanks are asked together in passage order; its other blanks show their answer (clozeStem)
+        quiz = reviewPassages(pickReview(all.map((q) => q.id), s.questions), passage);
         if (!quiz.length) return stop('Nothing to review today. Great work!');
       }
     } catch (e) {

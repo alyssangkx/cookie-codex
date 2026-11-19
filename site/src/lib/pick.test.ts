@@ -124,14 +124,12 @@ test('passage tiers: three due retests in three passages all fit; a cut keeps ne
   assert.deepEqual(cutOut, ['d3', 'd4', 'd5', 'd6']); // a consecutive run holding the due d5 and the new d6
 });
 
-test('Daily Review fills the gap between due blanks of one passage and keeps passage order', () => {
+test('Daily Review groups a passage\'s due blanks in passage order and adds nothing', () => {
   const P: Record<string, { group: string; seq: number }> = {
-    c1: { group: 'cz', seq: 1 }, c2: { group: 'cz', seq: 2 }, c3: { group: 'cz', seq: 3 }, c4: { group: 'cz', seq: 4 }, c5: { group: 'cz', seq: 5 },
+    c1: { group: 'cz', seq: 1 }, c2: { group: 'cz', seq: 2 }, c4: { group: 'cz', seq: 4 },
   };
   const passage = (id: string) => P[id];
-  const ids = ['m1', 'c1', 'c2', 'c3', 'c4', 'c5', 'm2'];
-  // due in this order (oldest first): c4, m1, c1, c2; c3 retired, c5 not due
-  assert.deepEqual(reviewPassages(['c4', 'm1', 'c1', 'c2'], ids, passage), ['c1', 'c2', 'c3', 'c4', 'm1']);
-  assert.deepEqual(reviewPassages(['m1', 'm2'], ids, passage), ['m1', 'm2']); // no passages: unchanged
-  assert.deepEqual(reviewPassages(['c5'], ids, passage), ['c5']); // one blank: just that blank
+  // due in this order (oldest first): c4, m1, c1, c2; c3 retired and c5 not due are NOT added
+  assert.deepEqual(reviewPassages(['c4', 'm1', 'c1', 'c2'], passage), ['c1', 'c2', 'c4', 'm1']);
+  assert.deepEqual(reviewPassages(['m1', 'm2'], passage), ['m1', 'm2']);
 });

@@ -111,31 +111,18 @@ export function pickReview(ids: string[], seen: Record<string, Seen | undefined>
 }
 
 /**
- * Daily Review keeps passage sets readable: when due questions share a passage (a cloze), the review asks the
- * consecutive run of that passage's blanks from the first due one to the last, in passage order, placed where the
- * passage first appears (blanks 1, 2 and 4 due -> 1, 2, 3, 4: never a hole that reads as a skipped question).
- * The gap fillers are retired or not-yet-due questions; answering them follows the normal retest rules.
+ * Daily Review keeps passage sets readable: due questions that share a passage are asked together, in passage order,
+ * where the passage first comes up (due order c4, m1, c1, c2 -> c1, c2, c4, m1). Only due questions are asked; a
+ * passage blank that is not due is shown with its answer by the quiz page, so nothing reads as skipped.
  */
-export function reviewPassages(
-  picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined,
-): string[] {
-  const span = new Map<string, [number, number]>();
-  for (const id of picked) {
-    const p = passage(id);
-    if (!p) continue;
-    const [lo, hi] = span.get(p.group) ?? [p.seq, p.seq];
-    span.set(p.group, [Math.min(lo, p.seq), Math.max(hi, p.seq)]);
-  }
-  const run = (g: string) => {
-    const [lo, hi] = span.get(g)!;
-    return ids.filter((id) => { const p = passage(id); return p?.group === g && p.seq >= lo && p.seq <= hi; })
-      .sort((a, b) => passage(a)!.seq - passage(b)!.seq);
-  };
+export function reviewPassages(picked: string[], passage: (id: string) => { group: string; seq: number } | undefined): string[] {
+  const byGroup = new Map<string, string[]>();
+  for (const id of picked) { const g = passage(id)?.group; if (g) byGroup.set(g, [...(byGroup.get(g) ?? []), id]); }
   const out: string[] = [], done = new Set<string>();
   for (const id of picked) {
     const g = passage(id)?.group;
-    if (!g) { out.push(id); continue; }
-    if (!done.has(g)) { done.add(g); out.push(...run(g)); }
+    if (!g) out.push(id);
+    else if (!done.has(g)) { done.add(g); out.push(...byGroup.get(g)!.sort((a, b) => passage(a)!.seq - passage(b)!.seq)); }
   }
   return out;
 }
