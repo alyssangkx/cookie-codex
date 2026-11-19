@@ -35,7 +35,8 @@ const rnd = () => Math.random().toString(36).slice(2, 10);
 
 const made = []; // auth user ids to delete
 // usernames are unique across the site: each run uses fresh ones (letters only, so the guard trigger accepts them)
-const tag = () => Array.from({ length: 6 }, () => 'abcdefghijkmnpqrstuvwxyz'[Math.floor(Math.random() * 23)]).join('');
+const ABC = 'abcdefghijkmnpqrstuvwxyz';
+const tag = () => Array.from({ length: 6 }, () => ABC[Math.floor(Math.random() * ABC.length)]).join('');
 async function parent(childName) {
   const email = `ccx-iso-${rnd()}@example.com`, password = `${rnd()}${rnd()}Aa1!`;
   const u = await admin('/users', { method: 'POST', body: { email, password, email_confirm: true } });

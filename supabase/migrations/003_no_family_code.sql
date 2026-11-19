@@ -39,9 +39,14 @@ grant execute on function public.pin_clear_name_lock(uuid) to authenticated, ser
 
 delete from private.pin_attempts where key ~ '^(name|trust):[0-9a-f-]{36}:';
 
--- purge_deleted no longer has family-scoped lock rows to clean
+-- purge_deleted: also drop the lock rows of the usernames it frees, so the next child to take one starts clean
 create or replace function private.purge_deleted() returns void
 language sql security definer set search_path = '' as $$
+  delete from private.pin_attempts a using public.profiles p
+   where p.role = 'child' and a.key in ('name:' || p.name_key, 'trust:' || p.name_key)
+     and (p.deleted_at < now() - interval '7 days'
+          or exists (select 1 from public.families f
+                      where f.parent_id = p.parent_id and f.deleted_at < now() - interval '7 days'));
   delete from auth.users u using public.profiles p
    where u.id = p.id and p.role = 'child'
      and (p.deleted_at < now() - interval '7 days'

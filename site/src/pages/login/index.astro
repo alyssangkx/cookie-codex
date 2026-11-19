@@ -95,6 +95,7 @@ import Base from '../../layouts/Base.astro';
         if (body.profile?.name) kv.set('player-name', body.profile.name);
         if (body.profile?.unlimited === true) kv.set('profile-unlimited', '1'); else kv.del('profile-unlimited');
         kv.del('sync:signedout');
+        kv.del('family-code'); // left by the family-code login (removed 20 Nov 2026)
         touch();
         const { data } = await supabase.auth.getSession();
         if (data.session && isChildSession(data.session.user)) {

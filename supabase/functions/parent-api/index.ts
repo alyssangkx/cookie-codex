@@ -190,6 +190,7 @@ Deno.serve(async (req) => {
             throw ins.error;
           }
           await setPin(id, pin); // also moves the auth user to the synthetic address and derived password
+          await clearLocks(name); // the lock key is the username: a new child never inherits a stranger's lock-out
         } catch (e) {
           await svc.auth.admin.deleteUser(id); // no orphan auth user, no profile (cascade)
           throw e;
@@ -207,6 +208,7 @@ Deno.serve(async (req) => {
         if (u.error) { if (u.error.code === '23505') throw new Refuse(409, 'name_taken'); throw u.error; }
         if (!u.data?.length) throw new Refuse(404, 'not_found');
         await clearLocks(old.name); // only after the rename: a failed rename must not reset an attacker's lock
+        await clearLocks(name); // nor start the new username with someone else's lock-out
         return json({ ok: true });
       }
       case 'set_pin': {

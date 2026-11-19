@@ -121,8 +121,10 @@ update profiles set deleted_at = now() - interval '6 days' where id = 'a1111111-
 select private.purge_deleted();
 select pg_temp.ok((select count(*) = 0 from auth.users where id in ('22222222-2222-2222-2222-222222222222', 'b2222222-2222-2222-2222-222222222222')), 'family deleted 8 days ago: parent and child purged');
 select pg_temp.ok((select count(*) = 1 from profiles where id = 'a1111111-1111-1111-1111-111111111111'), 'child deleted 6 days ago kept (still restorable)');
+insert into private.pin_attempts (key) values ('name:emma'), ('trust:emma');
 update profiles set deleted_at = now() - interval '8 days' where id = 'a1111111-1111-1111-1111-111111111111';
 select private.purge_deleted();
+select pg_temp.ok((select count(*) = 0 from private.pin_attempts where key in ('name:emma', 'trust:emma')), 'purge frees the username with no lock rows left');
 select pg_temp.ok((select count(*) = 0 from auth.users where id = 'a1111111-1111-1111-1111-111111111111'), 'child deleted 8 days ago purged');
 select pg_temp.ok((select count(*) = 1 from auth.users where id = '11111111-1111-1111-1111-111111111111'), 'their parent kept');
 select pg_temp.ok((select count(*) = 3 from profiles p join auth.users u on u.id = p.parent_id where u.email = 'admin@x.test'), 'admin''s profiles untouched by the purge');
