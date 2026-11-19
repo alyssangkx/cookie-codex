@@ -93,7 +93,7 @@ def merge_paper(subject, paper, stepa, vdir):
     pair = {}
     for blk in sm.get_matching_blocks():
         for k in range(blk.size): pair[blk.b + k] = blk.a + k
-    used, out = set(), []
+    used, out, key = set(), [], []
     for j, v in enumerate(vq):
         a = stepa[pair[j]] if j in pair else None
         if a: used.add(pair[j])
@@ -115,12 +115,17 @@ def merge_paper(subject, paper, stepa, vdir):
                     "marks": marks, "marks_from": src, "stepA_marks": a.get("marks") if a else None,
                     "text": text, "options": v["options"], "figures": v["figures"], "pages": v["pages"],
                     "parts": len(v["parts"]), "flags": [] if a else ["vlm_only"]})
+        key.append(j)
+    a2v = {i: j for j, i in pair.items()}
     for i, a in enumerate(stepa):
-        if i not in used:
+        if i not in used:  # reading order: right after the nearest earlier step A question that was matched
+            prev = max((k for k in a2v if k < i), default=None)
+            key.append((a2v[prev] if prev is not None else -1) + (i - (prev if prev is not None else -1)) / 1000)
             out.append({**{k: a.get(k) for k in ("id", "paper", "school", "exam", "qno", "part", "section", "format",
                                                   "marks", "text", "pages")},
                         "marks_from": "stepA", "stepA_marks": a.get("marks"), "options": [], "figures": [],
                         "parts": None, "flags": ["stepA_only"]})
+    out = [r for _, r in sorted(zip(key, out), key=lambda x: x[0])]
     attach_answers(out, key_answers(vdir, paper))
     return out
 
@@ -165,7 +170,7 @@ def attach_answers(qs, keys):
     1, 2, 3 ... matches any other run, and on 2026 maths a paper's MCQs had picked up another paper's worked solutions."""
     for q in qs: q["answer"] = None
     is_opt = lambda q, ans: bool(OPTION.fullmatch(ans.strip())) or ans.strip() in [o.strip() for o in q.get("options") or []]
-    order = sorted(range(len(qs)), key=lambda i: (min(qs[i].get("pages") or [0]), i))
+    order = range(len(qs))  # merge_paper returns questions in reading order
     for mcq in (True, False):
         qi = [i for i in order if (qs[i].get("format") == "mcq") == mcq]
         ks = [(n, a) for n, a in keys if bool(OPTION.fullmatch(a.strip())) == mcq or (mcq and any(is_opt(qs[i], a) for i in qi))]
