@@ -79,7 +79,8 @@ import Base from '../../layouts/Base.astro';
   async function submit() {
     if (busy) return;
     if (!who.value.trim()) { say('Type your username first.'); who.focus(); return; }
-    if (pin.length < 4) { say('Your PIN has 4 digits.'); return; }
+    // the 4th digit already submitted: a Go tap after the reply (dots cleared) must not hide "Not quite" / "Too many tries"
+    if (pin.length < 4) { if (pin || !msg.textContent) say('Your PIN has 4 digits.'); return; }
     say(''); setBusy(true);
     const tryPin = pin;
     try {

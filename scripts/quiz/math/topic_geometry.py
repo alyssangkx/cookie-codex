@@ -3779,9 +3779,9 @@ def _cross(u, v):
     return u[0] * v[1] - u[1] * v[0]
 
 
-def _line_figure(pq, cands):
+def _line_figure(pq, cands, names="ABCD"):
     segs = [("Q", pq[0], pq[1], True)] if pq else []
-    segs += [("ABCD"[i], a, b, False) for i, (a, b) in enumerate(cands)]
+    segs += [(names[i], a, b, False) for i, (a, b) in enumerate(cands)]
     return shape_grid(15, 10, [], cell=17, pad_tl=14, pad_br=14, segs=segs).svg("Lines on a grid")
 
 
@@ -3891,18 +3891,19 @@ def count_perpendicular_pairs(r):
         if abs(v[0]) > 4 or abs(v[1]) > 4:
             return None
         segs.append(_seg_in_region(r, rg, v))
-    ph = r.choice(["How many pairs of perpendicular lines are there among lines A, B, C and D?",
+    # lines P-S, not A-D: the answers are numbers on buttons lettered A-D (site review row 3)
+    ph = r.choice(["How many pairs of perpendicular lines are there among lines P, Q, R and S?",
                    "Looking at all four lines, how many pairs of lines are perpendicular to each other?"])
     stem = f"{name} draws four lines on a square grid. {ph}"
     return build(count_perpendicular_pairs, stem, perp, [
         (par, "counted_parallel_pairs", "Counted the parallel pairs instead of the perpendicular pairs."),
-        (2 * perp, "counted_each_pair_twice", "Counted each pair of lines twice (A with B, then B with A)."),
+        (2 * perp, "counted_each_pair_twice", "Counted each pair of lines twice (P with Q, then Q with P)."),
         (perp + 1, "counted_one_pair_too_many", "Counted one pair too many."),
         (perp - 1, "missed_one_pair", "Missed one pair."),
     ], ["Check each pair of lines: do the steps across and up/down turn into each other with one reversed?",
         f"There {'is' if perp == 1 else 'are'} {plural(perp, 'perpendicular pair')}."],
         {"segs": [[list(a), list(b)] for a, b in segs]}, str, whole=True, auto_slips=False,
-        figure=_line_figure(None, segs))
+        figure=_line_figure(None, segs, "PQRS"))
 
 
 @checker(count_perpendicular_pairs)

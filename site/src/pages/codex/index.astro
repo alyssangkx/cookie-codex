@@ -16,7 +16,7 @@ import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../../lib/data';
 
     <nav class="jump" aria-label="Jump to a rarity">
       {byRarity.map(({ rarity, cookies: list }) => (
-        <a href={`#rarity-${rarity}`} class="rarity-chip" style={`--rc: var(--r-${rarity})`}>
+        <a href={`#rarity-${rarity}`} class="rarity-chip" data-jump={rarity} style={`--rc: var(--r-${rarity})`}>
           {rarityLabel(rarity)} <span class="count">{list.length}</span>
         </a>
       ))}
@@ -110,6 +110,9 @@ import { cookies, byRarity, tags, rarityLabel, tagSlug } from '../../lib/data';
       if (ok) shown++;
     }
     for (const shelf of shelves) shelf.hidden = !shelf.querySelector('.card:not([hidden])');
+    // a jump chip whose shelf the filter hid would lead nowhere
+    for (const chip of document.querySelectorAll<HTMLElement>('[data-jump]'))
+      chip.hidden = !!document.querySelector<HTMLElement>(`[data-shelf="${chip.dataset.jump}"]`)?.hidden;
 
     const active = Boolean(term || rarity.value || tag.value);
     clear.disabled = !active;
