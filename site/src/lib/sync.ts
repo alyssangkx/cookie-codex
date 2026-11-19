@@ -105,27 +105,28 @@ function banner(text: string, buttons: [string, () => void][] = []) {
   const el = document.createElement('div');
   el.id = 'sync-banner';
   el.setAttribute('role', 'status');
-  // An in-flow bar above the page content (never fixed over it), so it can never cover quiz answers.
-  el.style.cssText = 'position:relative;z-index:1;width:100%;box-sizing:border-box;' +
-    'background:var(--paper,#fff8ee);color:var(--cocoa,#4b2e1e);border-bottom:2px solid var(--berry,#a3365b);' +
+  // Fixed to the bottom of the screen (always visible, never moves the page while a child is about to tap); the page
+  // gets matching bottom padding while it shows, so the last answer can always be scrolled above it.
+  el.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:50;width:100%;box-sizing:border-box;' +
+    'background:var(--paper,#fff8ee);color:var(--cocoa,#4b2e1e);border-top:2px solid var(--berry,#a3365b);box-shadow:0 -4px 14px rgba(0,0,0,.12);' +
     'padding:10px var(--gutter,16px);font-size:0.95rem;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center';
   const t = document.createElement('span'); t.textContent = text; el.append(t);
   for (const [label, fn] of buttons) {
     const b = document.createElement('button');
     b.type = 'button'; b.textContent = label;
     b.style.cssText = 'min-height:44px;padding:0 14px;border-radius:10px;border:1.5px solid var(--berry,#a3365b);background:#fff;color:var(--berry,#a3365b);font:inherit;font-weight:600;cursor:pointer';
-    b.addEventListener('click', () => { el.remove(); fn(); });
+    b.addEventListener('click', () => { el.remove(); document.body.style.paddingBottom = ''; fn(); });
     el.append(b);
   }
   if (!buttons.length) { // an information-only bar can be closed
     const x = document.createElement('button');
     x.type = 'button'; x.textContent = 'Got it';
     x.style.cssText = 'min-height:44px;padding:0 14px;border-radius:10px;border:1.5px solid var(--berry,#a3365b);background:#fff;color:var(--berry,#a3365b);font:inherit;font-weight:600;cursor:pointer';
-    x.addEventListener('click', () => el.remove());
+    x.addEventListener('click', () => { el.remove(); document.body.style.paddingBottom = ''; });
     el.append(x);
   }
-  const main = document.getElementById('main');
-  main?.parentNode ? main.parentNode.insertBefore(el, main) : document.body.prepend(el);
+  document.body.append(el);
+  document.body.style.paddingBottom = `${el.offsetHeight + 16}px`;
 }
 
 function schedule(ms = PUSH_DELAY_MS) {

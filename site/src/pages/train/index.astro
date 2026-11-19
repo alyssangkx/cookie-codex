@@ -38,8 +38,7 @@ const schools = SCHOOLS.map((s) => {
 
 <script>
   import { load, today, liveStreak, dayBlock, blockMessage, isDue, TIERS } from '../../lib/store';
-  import { reviewSize } from '../../lib/pick';
-  const s = load();
+    const s = load();
   const t = today(s);
   document.getElementById('goal')!.textContent =
     `Today: ${Math.min(t.quizzes, s.settings.dailyGoalQuizzes)} of ${s.settings.dailyGoalQuizzes} quizzes` +
@@ -49,7 +48,7 @@ const schools = SCHOOLS.map((s) => {
   document.getElementById('streak')!.textContent = st ? `${st}-week streak` : 'Meet your goal on 4 days this week to start a streak';
   const due = Object.keys(s.questions).filter((id) => isDue(s, id)).length;
   const review = document.getElementById('review') as HTMLAnchorElement;
-  if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = `Daily Review (${reviewSize(due)} question${reviewSize(due) === 1 ? '' : 's'})`; }
+  if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = 'Daily Review'; } // the exact count (bank ids only) is on each school page and the quiz start screen
   const doneEl = document.getElementById('done')!;
   const reason = dayBlock(s, 'tier');
   doneEl.hidden = !reason;

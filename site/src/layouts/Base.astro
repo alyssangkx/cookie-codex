@@ -59,7 +59,13 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
           var t = n.parentNode && n.parentNode.nodeName;
           return t === 'SCRIPT' || t === 'STYLE' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
         } });
-        while (w.nextNode()) if (/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/.test(w.currentNode.nodeValue)) { window.ccxZh(); break; }
+        while (w.nextNode()) if (/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/.test(w.currentNode.nodeValue)) { window.ccxZh(); return; }
+        // Chinese drawn later by scripts (parent lists, suggestions, review details) loads the font when it appears
+        var mo = new MutationObserver(function (ms) {
+          for (var i = 0; i < ms.length; i++) for (var j = 0; j < ms[i].addedNodes.length; j++)
+            if (/[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/.test(ms[i].addedNodes[j].textContent || '')) { mo.disconnect(); window.ccxZh(); return; }
+        });
+        mo.observe(document.body, { childList: true, subtree: true, characterData: true });
       });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
