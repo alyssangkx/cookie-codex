@@ -46,6 +46,8 @@ export const QUIZ_SIZE = 10; // a pass needs a full 10-question quiz
 export const WEEK_GOAL_DAYS = 4; // a streak week needs 4 goal days; rest days never break it
 export const DEFAULT_CAP_MIN = 120; // default daily training time, in minutes (parent range 45-180)
 export const DAILY_QUIZ_CAP = 10; // tier quizzes + WA/SA papers per day; Daily Review does not count
+// Owner, 19 Nov 2026: the quiz-count limit is off for now; set this to true to bring it back (time cap unaffected).
+export const QUIZ_CAP_ON = false;
 export const ATTEMPTS_PER_DAY = 3; // tries per tier per day for P6 sub-topics (and any sub-topic with no listed P-level)
 export const ATTEMPTS_PER_DAY_LOW = 5; // P1-P5 sub-topics
 
@@ -247,12 +249,12 @@ export const capReached = (s: SaveV1) => !isUnlimited() && today(s).min >= s.set
  *  Daily Review never counts, and retests inside a tier quiz do not change the count. */
 export const quizzesToday = (s: SaveV1) =>
   s.attempts.filter((a) => (a.mode === 'tier' || a.mode === 'paper') && dayKey(a.ts) === dayKey()).length;
-export const quizCapReached = (s: SaveV1) => !isUnlimited() && quizzesToday(s) >= DAILY_QUIZ_CAP;
+export const quizCapReached = (s: SaveV1, on = QUIZ_CAP_ON) => on && !isUnlimited() && quizzesToday(s) >= DAILY_QUIZ_CAP;
 
 /** Why a quiz of this mode cannot start now, or null. Review is exempt from the quiz cap only. */
-export function dayBlock(s: SaveV1, mode: Attempt['mode']): 'time' | 'quizzes' | null {
+export function dayBlock(s: SaveV1, mode: Attempt['mode'], quizCap = QUIZ_CAP_ON): 'time' | 'quizzes' | null {
   if (capReached(s)) return 'time';
-  if (mode !== 'review' && quizCapReached(s)) return 'quizzes';
+  if (mode !== 'review' && quizCapReached(s, quizCap)) return 'quizzes';
   return null;
 }
 export const blockMessage = (r: 'time' | 'quizzes') =>

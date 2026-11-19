@@ -104,7 +104,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
@@ -132,7 +132,8 @@ const data = {
     const t = today(s), st = s.streak;
     const items: [string, string][] = [
       [`${t.min} / ${s.settings.dailyCapMin} min`, 'Today vs time limit'],
-      [`${quizzesToday(s)} / ${DAILY_QUIZ_CAP} quizzes`, 'Today vs quiz limit (Daily Review not counted)'],
+      QUIZ_CAP_ON ? [`${quizzesToday(s)} / ${DAILY_QUIZ_CAP} quizzes`, 'Today vs quiz limit (Daily Review not counted)']
+        : [`${quizzesToday(s)} quizzes`, 'Today (no quiz limit for now; Daily Review not counted)'],
       [`${t.quizzes} / ${s.settings.dailyGoalQuizzes} quizzes`, 'Today vs daily goal'],
       [`${liveStreak(s)} week${liveStreak(s) === 1 ? '' : 's'}`, 'Streak (weeks with 4+ goal days)'],
       [`${st.best} week${st.best === 1 ? '' : 's'}`, 'Best streak'],
@@ -241,7 +242,9 @@ const data = {
             const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
     const showCap = () => {
       $('cap-out').textContent = `${cap.value} minutes`;
-      $('cap-note').textContent = `The day ends when ${cap.value} minutes of training or ${DAILY_QUIZ_CAP} quizzes are reached, whichever comes first. Tier quizzes and practice papers count; Daily Review does not count as a quiz, but stops at the time limit.`;
+      $('cap-note').textContent = QUIZ_CAP_ON
+        ? `The day ends when ${cap.value} minutes of training or ${DAILY_QUIZ_CAP} quizzes are reached, whichever comes first. Tier quizzes and practice papers count; Daily Review does not count as a quiz, but stops at the time limit.`
+        : `The day ends after ${cap.value} minutes of training. There is no limit on the number of quizzes for now; Daily Review also stops at the time limit.`;
     };
     cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); showCap();
     cap.addEventListener('input', showCap);

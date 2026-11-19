@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -366,20 +366,32 @@ const finish = (s: any, mode: 'tier' | 'paper' | 'review', n = 1, ms = 1000) => 
   }
 };
 
-test('quiz cap: the 11th tier quiz is blocked; Daily Review after 10 is allowed and does not count', () => {
+test('quiz cap (when switched on): the 11th tier quiz is blocked; Daily Review after 10 is allowed and does not count', () => {
   mockStorage({});
   const s = fresh();
   finish(s, 'tier', 9);
-  assert.equal(dayBlock(s, 'tier'), null);
+  assert.equal(dayBlock(s, 'tier', true), null);
   finish(s, 'paper', 1); // papers count too: 10 now
   assert.equal(quizzesToday(s), DAILY_QUIZ_CAP);
-  assert.equal(quizCapReached(s), true);
-  assert.equal(dayBlock(s, 'tier'), 'quizzes');
-  assert.equal(dayBlock(s, 'paper'), 'quizzes');
-  assert.equal(dayBlock(s, 'review'), null);
+  assert.equal(quizCapReached(s, true), true);
+  assert.equal(dayBlock(s, 'tier', true), 'quizzes');
+  assert.equal(dayBlock(s, 'paper', true), 'quizzes');
+  assert.equal(dayBlock(s, 'review', true), null);
   finish(s, 'review', 3);
   assert.equal(quizzesToday(s), DAILY_QUIZ_CAP); // reviews never count
-  assert.equal(dayBlock(s, 'review'), null);
+  assert.equal(dayBlock(s, 'review', true), null);
+});
+
+test('quiz cap is off for now (owner, 19 Nov 2026): 10+ quizzes do not block; the time cap still does', () => {
+  mockStorage({});
+  const s = fresh();
+  assert.equal(QUIZ_CAP_ON, false);
+  finish(s, 'tier', 12, 60_000);
+  assert.equal(quizCapReached(s), false);
+  assert.equal(dayBlock(s, 'tier'), null);
+  assert.equal(beginQuiz(s, 'paper', { total: 10 }), null);
+  finish(s, 'tier', 1, 120 * 60_000);
+  assert.equal(dayBlock(s, 'tier'), 'time');
 });
 
 test('an open (started, unfinished) tier quiz counts toward the quiz cap once, not twice', () => {
@@ -426,15 +438,15 @@ test('Admin: no time cap, no quiz cap, unlimited tries per day', () => {
   }
 });
 
-test('beginQuiz is blocked at the cap and records nothing', () => {
+test('beginQuiz is blocked at the time cap and records nothing', () => {
   mockStorage({});
   const s = fresh();
-  finish(s, 'tier', 10);
+  finish(s, 'tier', 10, 12 * 60_000); // 120 minutes
   const n = s.attempts.length;
-  assert.equal(beginQuiz(s, 'tier', { sub: 'x', tier: 'b', total: 10 }), 'quizzes');
-  assert.equal(beginQuiz(s, 'paper', { total: 10 }), 'quizzes');
+  assert.equal(beginQuiz(s, 'tier', { sub: 'x', tier: 'b', total: 10 }), 'time');
+  assert.equal(beginQuiz(s, 'paper', { total: 10 }), 'time');
+  assert.equal(beginQuiz(s, 'review', { total: 5 }), 'time');
   assert.equal(s.attempts.length, n);
-  assert.equal(beginQuiz(s, 'review', { total: 5 }), null); // review is exempt
 });
 
 test('a started paper counts toward the 10; an abandoned one still counts; finishing does not double-count', () => {
@@ -447,7 +459,7 @@ test('a started paper counts toward the 10; an abandoned one still counts; finis
   assert.equal(quizzesToday(s), 10);
   finish(s, 'paper', 1); // finishing replaces one open record
   assert.equal(quizzesToday(s), 10);
-  assert.equal(dayBlock(s, 'paper'), 'quizzes');
+  assert.equal(dayBlock(s, 'paper', true), 'quizzes');
 });
 
 test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () => {
