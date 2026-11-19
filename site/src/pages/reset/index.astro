@@ -18,6 +18,10 @@ import Base from '../../layouts/Base.astro';
       <form id="f-new" autocomplete="on">
         <label for="pw">New password (at least 10 characters)</label>
         <input id="pw" type="password" autocomplete="new-password" minlength="10" required />
+        <div id="mfa" hidden>
+          <label for="code">6-digit code from your authenticator app</label>
+          <input id="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" />
+        </div>
         <button type="submit" class="btn">Save the new password</button>
       </form>
     </div>
@@ -54,9 +58,19 @@ import Base from '../../layouts/Base.astro';
     e.preventDefault(); say('');
     const pw = $<HTMLInputElement>('pw');
     if (pw.value.length < 10) { say('The password needs at least 10 characters.'); return; }
+    // an account with an authenticator must reach aal2 before its password can change
+    const aal = (await supabase.auth.mfa.getAuthenticatorAssuranceLevel()).data;
+    if (aal?.nextLevel === 'aal2' && aal.currentLevel !== 'aal2') {
+      const code = $<HTMLInputElement>('code');
+      if ($('mfa').hidden) { $('mfa').hidden = false; code.focus(); say('This account has an authenticator app: type its code too.'); return; }
+      const factorId = (await supabase.auth.mfa.listFactors()).data?.totp?.[0]?.id ?? '';
+      const v = await supabase.auth.mfa.challengeAndVerify({ factorId, code: code.value.trim() });
+      code.value = '';
+      if (v.error) { say('That code did not work. Wait for the next code and try again.'); return; }
+    }
     const { error } = await supabase.auth.updateUser({ password: pw.value });
-    pw.value = '';
     if (error) { say('That did not work. Pick a longer or less common password, or ask for a new link.'); return; }
+    pw.value = '';
     say('Password saved. Taking you to the parent page…', true);
     setTimeout(() => { location.href = '/grownups/'; }, 1200);
   });

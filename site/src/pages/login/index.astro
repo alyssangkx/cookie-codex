@@ -62,9 +62,11 @@ import Base from '../../layouts/Base.astro';
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const who = $<HTMLInputElement>('who'), code = $<HTMLInputElement>('code'), msg = $('msg');
   code.value = kv.get('family-code') ?? '';
-  // a trusted device (it has a device token) is never asked; a new one solves the CAPTCHA once per try
-  let captcha: Captcha | null = null;
-  if (!kv.get('device-token')) mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => { /* no widget: the server decides */ });
+  // a trusted device (a device token valid for this child) is never asked. A new device shows the CAPTCHA at once;
+  // on a device whose token does not fit (a sibling, or a PIN the parent changed) it appears when the server asks.
+  let captcha: Captcha | null = null, mounting: Promise<void> | null = null;
+  const showCaptcha = () => (mounting ??= mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => { mounting = null; }));
+  if (!kv.get('device-token')) void showCaptcha();
   const dots = [...$('dots').querySelectorAll('i')];
   let pin = '', busy = false;
 
@@ -119,7 +121,8 @@ import Base from '../../layouts/Base.astro';
           ? `Too many tries, please wait ${Math.ceil(sec / 60)} ${Math.ceil(sec / 60) === 1 ? 'minute' : 'minutes'}`
           : 'Too many tries, please wait a while or ask a grown-up');
       } else if (status === 400 && body?.error === 'captcha_failed') {
-        say('Tick the "I am human" box first, then type your PIN again.');
+        void showCaptcha();
+        say('Tick the "I am human" box, then type your PIN again.');
       } else if (status === 400) {
         say('Check your family code, your name (letters only) and your 4-digit PIN.');
       } else {

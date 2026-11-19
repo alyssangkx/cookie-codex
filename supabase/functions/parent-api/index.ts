@@ -25,7 +25,8 @@
 //   rotate_family_code   {}                               -> { code }       old code stops working at once
 //   delete_account       { confirm }                      -> { ok: true }   confirm = the parent's email; undo for 7 days
 //   restore_account      {}                               -> { ok: true }
-// Secrets: PIN_PEPPER, CHILD_PW_SECRET, SITE_ORIGIN. Env: CONSENT_VERSION (the current notice id), MAX_FAMILIES unused (DB trigger caps at 500).
+// Secrets: PIN_PEPPER, CHILD_PW_SECRET, SITE_ORIGIN, CONSENT_VERSION (= CONSENT_VERSION in site/src/lib/supabase.ts;
+// register fails closed without it). The 500-family cap is a DB trigger.
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { childPassword, hashPin } from '../_shared/pin.ts';
 import { weakPin } from '../_shared/weakpin.ts';
@@ -152,7 +153,9 @@ Deno.serve(async (req) => {
     switch (body.action) {
       case 'register': {
         if (role === 'parent') return json({ code: await familyCode() }); // idempotent
-        if (typeof body.consent_version !== 'string' || body.consent_version !== (Deno.env.get('CONSENT_VERSION') ?? body.consent_version)) {
+        const consent = Deno.env.get('CONSENT_VERSION');
+        if (!consent) throw new Error('missing configuration'); // fail closed: never record a notice that does not exist
+        if (typeof body.consent_version !== 'string' || body.consent_version !== consent) {
           throw new Refuse(400, 'consent_required');
         }
         let code = '';
@@ -209,10 +212,10 @@ Deno.serve(async (req) => {
         const dup = await svc.from('profiles').select('id').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).neq('id', id).maybeSingle();
         if (dup.error) throw dup.error;
         if (dup.data) throw new Refuse(409, 'name_taken');
-        await clearLocks(old.name); // the lock keys follow the name: leave none behind
         const u = await svc.from('profiles').update({ name }).eq('id', id).eq('parent_id', caller.id).select('id');
         if (u.error) { if (u.error.code === '23505') throw new Refuse(409, 'name_taken'); throw u.error; }
         if (!u.data?.length) throw new Refuse(404, 'not_found');
+        await clearLocks(old.name); // only after the rename: a failed rename must not reset an attacker's lock
         return json({ ok: true });
       }
       case 'set_pin': {
@@ -233,7 +236,7 @@ Deno.serve(async (req) => {
       case 'delete_child': {
         const id = childId();
         const p = await profileOf(id);
-        if (body.confirm !== p.name) throw new Refuse(400, 'confirm_required');
+        if (typeof body.confirm !== 'string' || nameKey(body.confirm) !== nameKey(p.name)) throw new Refuse(400, 'confirm_required');
         await clearLocks(p.name);
         await ban(id, true); // first: if the mark below fails, the child is only locked out, nothing is lost
         const u = await svc.from('profiles').update({ deleted_at: new Date().toISOString() }).eq('id', id).eq('parent_id', caller.id);
@@ -243,7 +246,7 @@ Deno.serve(async (req) => {
       case 'restore_child': {
         const id = childId();
         const p = await profileOf(id, true);
-        if (!p.deleted_at) return json({ ok: true });
+        if (!p.deleted_at) { await ban(id, false); return json({ ok: true }); } // a delete that failed after its ban
         if ((await activeCount()) >= 6) throw new Refuse(409, 'child_limit');
         const u = await svc.from('profiles').update({ deleted_at: null }).eq('id', id).eq('parent_id', caller.id);
         if (u.error) throw u.error;
@@ -267,7 +270,7 @@ Deno.serve(async (req) => {
         if (kids.error) throw kids.error;
         // lock every child out first; the family mark is what pin-login and push_save check, so set it last and
         // a failure part-way leaves an account that still works and a button that can be pressed again
-        for (const k of kids.data ?? []) { await clearLocks(k.name); await ban(k.id, true); }
+        await Promise.all((kids.data ?? []).map(async (k) => { await clearLocks(k.name); await ban(k.id, true); }));
         const u = await svc.from('families').update({ deleted_at: new Date().toISOString() }).eq('parent_id', caller.id);
         if (u.error) throw u.error;
         return json({ ok: true });
@@ -277,7 +280,7 @@ Deno.serve(async (req) => {
         if (u.error) throw u.error;
         const kids = await svc.from('profiles').select('id').eq('parent_id', caller.id).is('deleted_at', null);
         if (kids.error) throw kids.error;
-        for (const k of kids.data ?? []) await ban(k.id, false); // a child deleted on its own stays deleted
+        await Promise.all((kids.data ?? []).map((k) => ban(k.id, false))); // a child deleted on its own stays deleted
         return json({ ok: true });
       }
       default:

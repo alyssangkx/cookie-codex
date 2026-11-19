@@ -71,6 +71,8 @@ const data = {
     <noscript><p class="note">This page needs JavaScript to read the saved progress.</p></noscript>
 
     <div id="content" hidden>
+      <p class="fields" id="kid-pick" hidden><label for="kid-who">Showing</label>
+        <select id="kid-who"></select></p>
       <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
       <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Mastery: Math</h2>
         <p class="note">A tier clears when every question in it is mastered (answered right first time, or right after its 1, 3 and 7 day retests). P1 to P5 topics allow 5 tries a day per tier; P6 topics allow 3.</p>
@@ -97,7 +99,7 @@ const data = {
         </div>
         <p class="saved" id="saved" role="status" aria-live="polite"></p>
       </section>
-      <section class="panel" aria-labelledby="h-bak"><h2 id="h-bak">Backup</h2>
+      <section class="panel" id="bak-panel" aria-labelledby="h-bak"><h2 id="h-bak">Backup</h2>
         <p class="note">A save code holds all progress. Keep a copy in case this browser is cleared.</p>
         <div class="row">
           <button type="button" class="btn" id="copy">Copy save code</button>
@@ -177,7 +179,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
@@ -302,18 +304,14 @@ const data = {
     return q.visual ? `<span class="meta">With a ${esc(q.visual.kind)}: ${esc(q.visual.title)}</span>` : '';
   };
 
-  // Each child's saved progress: the admin function (or parent-api `me` for a parent) lists the children, and RLS
-  // already lets an admin read any save and a parent their own children's saves (select only). Nothing here writes
-  // to another save.
-  async function initWrongPicker(parentKids?: { id: string; name: string }[]) {
+  // Admin only: each child's saved progress for the wrong-answer list. The admin function lists the children and RLS
+  // lets an admin read (select only) any save. Nothing here writes to another save. (A parent uses the "Showing" picker.)
+  async function initWrongPicker() {
     try {
-      let kids = parentKids ?? null;
-      if (!kids) {
-        const { data } = await supabase.auth.getSession();
-        if (!data.session) return;
-        const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
-        kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string }[] | null;
-      }
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) return;
+      const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
+      const kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string }[] | null;
       if (!kids?.length) return;
       $('wrong-who').innerHTML += kids.map((k) => `<option value="${esc(k.id)}">${esc(k.name)}</option>`).join('');
       $('wrong-pick').hidden = false;
@@ -415,18 +413,20 @@ const data = {
       const n = Math.round(Number(v) / step) * step;
       return isFinite(n) && v !== '' ? Math.min(hi, Math.max(lo, n)) : fb;
     };
-    const commit = () => {
-      s = load();
-      s.settings.dailyCapMin = clamp(cap.value, 45, 180, 15, s.settings.dailyCapMin);
-      s.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, s.settings.dailyGoalQuizzes);
-      s.settings.extraTime = extra.checked;
-      if (psle.value) s.settings.psleDate = psle.value;
-      save(s); s = cleanSave(s); weeksText(); renderSummary(); flashSaved();
+    const apply = (x: SaveV1) => {
+      x.settings.dailyCapMin = clamp(cap.value, 45, 180, 15, x.settings.dailyCapMin);
+      x.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, x.settings.dailyGoalQuizzes);
+      x.settings.extraTime = extra.checked;
+      if (psle.value) x.settings.psleDate = psle.value;
     };
-    for (const el of [cap, goal, extra, psle]) el.addEventListener('change', () => {
-      commit();
-      cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); showCap();
-    });
+    const commit = async () => {
+      if (child) { // a parent edits the picked child's synced save; their device picks it up on its next page load
+        if (!(await pushChild(apply).catch(() => false))) { flashSaved("Couldn't save. Try again."); return; }
+      } else { s = load(); apply(s); save(s); s = cleanSave(s); }
+      weeksText(); renderSummary(); flashSaved();
+    };
+    fillSettings = () => { cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; showCap(); weeksText(); };
+    for (const el of [cap, goal, extra, psle]) el.addEventListener('change', async () => { await commit(); fillSettings(); });
   }
 
   // backup
@@ -594,6 +594,47 @@ const data = {
     });
   }
 
+  // ------------------------------------------------------------ a parent's view of one child (their synced save)
+  // RLS lets a parent read and push_save their own children's saves (owns_child). Every section renders `s`, so a
+  // picked child's cleaned save replaces the device's save; settings are written back with the rev check.
+  let child: { id: string; rev: number | null } | null = null;
+  let fillSettings = () => {};
+  const readChild = async (id: string) => {
+    const r = await supabase.from('saves').select('rev, data').eq('child_id', id).maybeSingle();
+    if (r.error) throw r.error;
+    return { rev: r.data ? Number(r.data.rev) : null, data: r.data ? (migrate(r.data.data) as SaveV1) : null };
+  };
+  async function showChild(id: string) {
+    const c = await readChild(id);
+    child = { id, rev: c.rev };
+    s = c.data ? cleanSave(c.data) : cleanSave(null);
+    wrongSeq++;
+    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings();
+  }
+  /** Change the child's server save with the rev check; one retry on a conflict (the child played meanwhile). */
+  async function pushChild(change: (x: SaveV1) => void): Promise<boolean> {
+    if (!child) return false;
+    for (let i = 0; i < 2; i++) {
+      const c = await readChild(child.id);
+      const next = c.data ?? (cleanSave(null) as SaveV1);
+      change(next);
+      const r = await supabase.rpc('push_save', { p_child: child.id, p_data: next, p_version: SCHEMA, p_base_rev: c.rev });
+      const st = (r.data as { status: string; rev: number }[] | null)?.[0];
+      if (!r.error && st?.status === 'ok') { child.rev = st.rev; s = cleanSave(next); return true; }
+      if (r.error || st?.status !== 'conflict') return false;
+    }
+    return false;
+  }
+  async function initKidPicker(kids: FKid[]) {
+    const live = kids.filter((k) => !k.deleted_at);
+    $('bak-panel').hidden = true; // the save code is the child's device's own backup
+    if (!live.length) { $('content').hidden = true; return; }
+    $<HTMLSelectElement>('kid-who').innerHTML = live.map((k) => `<option value="${esc(k.id)}">${esc(k.name)}</option>`).join('');
+    $('kid-pick').hidden = false;
+    $('kid-who').addEventListener('change', () => { void showChild($<HTMLSelectElement>('kid-who').value).catch(() => flashSaved("Couldn't load that save.")); });
+    await showChild(live[0].id);
+  }
+
   // ------------------------------------------------------------ start
   let started = false;
   async function start() {
@@ -608,9 +649,13 @@ const data = {
     }
     $('content').hidden = false;
     s = cleanSave(load());
-    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
-    void initWrongPicker(isParent ? me?.children.filter((k) => !k.deleted_at) ?? [] : undefined);
     initSettings(); initBackup();
+    if (isParent) { // everything shows the picked child's synced save, not this device's
+      try { await initKidPicker(me?.children ?? []); } catch { flashSaved("Couldn't load your child's progress."); }
+      return;
+    }
+    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
+    void initWrongPicker();
   }
 
   void start();
