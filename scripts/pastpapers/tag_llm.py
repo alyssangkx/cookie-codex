@@ -6,7 +6,7 @@
 
 Record: {id, st, pat, method, difficulty 1-3, ans_check, conf, flags}. st/pat must be ids from the subject's taxonomy
 (packet.taxonomy); an invalid answer is asked again once, then kept with st null and flag "invalid".
-Gold key (outside the repo): PP_ROOT/gold/science-2024-gold.jsonl, {id, st, ok: [acceptable ids], use: example|eval},
+Gold key (outside the repo): PP_ROOT/gold/science-2024-gold.jsonl, {id, st, ok: [acceptable ids], use: example|eval, pat?},
 from a blind Sonnet tagging of 110 Science 2024 questions, adjudicated against the Haiku step B and first 72B tags.
 "example" rows are the few-shot examples (Science only); "eval" rows are the gate."""
 import argparse, json, os, sys
@@ -48,10 +48,11 @@ def examples(subject):
     """-> prompt text: the gold "example" rows (Science only), each with its question."""
     merged = PP / "science" / "2024" / "merged.jsonl"
     if subject != "science" or not GOLD.exists() or not merged.exists(): return ""
-    rows = [g for g in map(json.loads, open(GOLD)) if g["use"] == "example"]
+    rows = [g for g in map(json.loads, open(GOLD)) if g.get("use") == "example"][:15]  # ponytail: 15 keeps prompts < 16k
     want = {g["id"] for g in rows}
-    text = {r["id"]: r for r in map(json.loads, open(merged)) if r["id"] in want}
-    out = [f"Example\n{show(text[g['id']])}\nJSON: " + json.dumps({"st": g["st"], "pat": None, "method": "...", "difficulty": 2,
+    text = {r["id"]: r for r in map(json.loads, open(merged)) if r.get("id") in want and r.get("text")}
+    # each example carries a real pattern: examples all showing null made the 72B leave pat null on 85% of Science
+    out = [f"Example\n{show(text[g['id']])}\nJSON: " + json.dumps({"st": g["st"], "pat": g.get("pat"), "method": "...", "difficulty": 2,
                                                                   "ans_check": None, "conf": 0.9})
            for g in rows if g["id"] in text]
     return "\n\n".join(out) + "\n\nNow the real question.\n" if out else ""
@@ -109,16 +110,19 @@ def run(sets, batch, tp):
 def score(tags, gold):
     """-> (eval rows scored, acceptable, exact, misses [(id, gold st, tag st)])."""
     g = [r for r in gold if r["use"] == "eval" and r["id"] in tags]
-    miss = [(r["id"], r["st"], tags[r["id"]]) for r in g if tags[r["id"]] not in r["ok"]]
+    miss = [(r["id"], r["st"], tags[r["id"]]) for r in g if tags[r["id"]] not in r["ok"] + [r["st"]]]
     return len(g), len(g) - len(miss), sum(tags[r["id"]] == r["st"] for r in g), miss
 
 
 def compare(tags, gold=GOLD):
-    t = {r["id"]: r["st"] for r in map(json.loads, open(tags))}
+    rows = [json.loads(l) for l in open(tags)]
+    t = {r["id"]: r["st"] for r in rows}
     n, ok, exact, miss = score(t, [json.loads(l) for l in open(gold)])
-    print(f"gold eval rows {n} | acceptable sub-topic {ok}/{n} = {100 * ok / max(n, 1):.0f}% | exact {exact}/{n} | gate {GATE:.0%}")
+    nullpat = sum(r.get("pat") is None for r in rows)  # no gold patterns: a null-rate check stands in (first run: 5 of 1229)
+    print(f"gold eval rows {n} | acceptable sub-topic {ok}/{n} = {100 * ok / max(n, 1):.0f}% | exact {exact}/{n} | gate {GATE:.0%}"
+          f" | pat null {nullpat}/{len(rows)}")
     for i, want, got in miss: print(f"{i} | gold {want} | 72b {got}")
-    return n >= 80 and ok >= GATE * n
+    return n >= 80 and ok >= GATE * n and nullpat <= 0.1 * len(rows)
 
 
 def selftest():
@@ -134,6 +138,7 @@ def selftest():
     gold = [{"id": "a", "st": "s1", "ok": ["s1", "s2"], "use": "eval"}, {"id": "b", "st": "s1", "ok": ["s1"], "use": "eval"},
             {"id": "c", "st": "s3", "ok": ["s3"], "use": "example"}]
     assert score({"a": "s2", "b": "s2", "c": "x"}, gold) == (2, 1, 0, [("b", "s1", "s2")])
+    assert score({"a": "s1", "b": "s1"}, [{"id": "a", "st": "s1", "ok": ["s2"], "use": "eval"}, gold[1]])[1] == 2
     print("tag_llm selftest ok")
 
 

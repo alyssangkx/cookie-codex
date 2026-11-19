@@ -69,10 +69,12 @@ def parse(raw):
 
 def parse_ans(raw):
     """Answer-page reply: the object asked for, or a bare [...] list of answers (the 32B often drops the wrapper)."""
-    d = parse(raw)
-    if isinstance(d, dict): return {"kind": "answers", **d}
-    m = re.search(r"\[.*\]", raw, re.S)
-    d = parse('{"answers": ' + m.group(0) + '}') if m else None
+    m = re.search(r"[\[{]", raw)
+    if m and m.group(0) == "[":  # bare list first: parse() would take a one-item list's object as the whole page
+        m = re.search(r"\[.*\]", raw, re.S)
+        d = parse('{"answers": ' + m.group(0) + '}')
+    else:
+        d = parse(raw)
     return {"kind": "answers", **d} if isinstance(d, dict) else None
 
 
@@ -81,8 +83,8 @@ def repair(folder):
     n, fn = 0, parse_ans if Path(folder).name.startswith("ans") else parse
     for f in Path(folder).glob("p*.json"):
         d = json.loads(f.read_text())
-        if "error" in d and isinstance(fn(d.get("raw", "")), dict):
-            f.write_text(json.dumps({"page": d["page"], **fn(d["raw"])}, ensure_ascii=False)); n += 1
+        r = fn(d.get("raw", "")) if "error" in d else None
+        if isinstance(r, dict): f.write_text(json.dumps({"page": d["page"], **r}, ensure_ascii=False)); n += 1
     return n
 
 
@@ -149,6 +151,7 @@ if __name__ == "__main__":
         assert parse(r'{"t": "Express \(3\\frac{1}{50}\) as a decimal"}')["t"] == r"Express \(3\frac{1}{50}\) as a decimal"
         # answer pages: a bare list (wrapper dropped, code fences) is still read
         assert len(parse_ans('```json\n[{"qno": "17", "sub": "a", "answer": "x"}, {"qno": "18", "answer": "y"}]\n```')["answers"]) == 2
+        assert parse_ans('[{"qno": "5", "answer": "3"}]')["answers"] == [{"qno": "5", "answer": "3"}]
         assert parse_ans("no json") is None
         print("vlm_read selftest ok"); sys.exit()
     if sys.argv[1:2] == ["repair"]:
