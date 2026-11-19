@@ -74,6 +74,12 @@ def _selftest():
     got = dedupe([q(21, 92, text="instruction"), q(22, 92), q(21, 93, 4, "real"), q(22, 93, 4), q(1, 98), q(1, 99, 4)])
     assert [(g["qno"], g["pages"], len(g["options"])) for g in got] == [(21, [92, 93], 4), (22, [92, 93], 4), (1, [98, 99], 4)]
     assert len(dedupe([q(1, 3), q(1, 12)])) == 2  # booklet B restarts at 1
+    qs = [{"qno": n, "pages": [pg], "format": f} for n, pg, f in [(1, 3, "mcq"), (2, 3, "mcq"), (3, 4, "open"), (1, 9, "open"), (2, 9, "open")]]
+    attach_answers(qs, [(1, "A"), (2, "B"), (3, "x = 7"), (1, "(a) 5; (b) 6"), (2, "7 cm")])  # booklet B restarts at 1
+    assert [q["answer"] for q in qs] == ["A", "B", "x = 7", "(a) 5; (b) 6", "7 cm"]
+    mc = [{"qno": 1, "pages": [3], "format": "mcq"}, {"qno": 2, "pages": [3], "format": "mcq"}]
+    attach_answers(mc, [(1, "Let n be the boxes. 8n < 50"), (2, "y = 7")])  # another paper's working: no option, no answer
+    assert [q["answer"] for q in mc] == [None, None]
     print("vlm_merge selftest ok")
 
 
@@ -115,7 +121,51 @@ def merge_paper(subject, paper, stepa, vdir):
                                                   "marks", "text", "pages")},
                         "marks_from": "stepA", "stepA_marks": a.get("marks"), "options": [], "figures": [],
                         "parts": None, "flags": ["stepA_only"]})
+    attach_answers(out, key_answers(vdir, paper))
     return out
+
+
+def key_answers(vdir, paper):
+    """The VLM's answer-key pages (and step A's answer pages) for this paper, in page order -> [(qno, "answer")], parts joined:
+    26a "18" + 26b "$60" -> (26, "(a) 18; (b) $60")."""
+    rows, keypages = [], set(paper.get("answer_pages") or [])
+    for pg in sorted(set(range(paper["first_page"], paper["last_page"] + 1)) | keypages):
+        f = vdir / f"p{pg:04d}.json"
+        if not f.exists(): continue
+        d = json.loads(f.read_text())
+        # worked-solution pages (step A's answer_pages) come back as kind "questions" with the solution as the text
+        entries = d.get("answers") or [] if d.get("kind") == "answers" else []
+        if pg in keypages and d.get("kind") in ("answers", "questions"):
+            entries = entries + [{"qno": q.get("qno"), "sub": q.get("sub"), "answer": q.get("text")} for q in d.get("questions") or []]
+        for a in entries:
+            m = re.match(r"\D*(\d+)\s*\(?([a-z]{1,4})?", str(a.get("qno") or ""))
+            if not m or not str(a.get("answer") or "").strip(): continue
+            sub = (m.group(2) or str(a.get("sub") or "").strip("() ") or "").lower()
+            rows.append((int(m.group(1)), sub, str(a["answer"]).strip()))
+    out = []
+    for n, sub, ans in rows:
+        text = f"({sub}) {ans}" if sub else ans
+        if out and out[-1][0] == n: out[-1] = (n, out[-1][1] + "; " + text)
+        else: out.append((n, text))
+    return out
+
+
+OPTION = re.compile(r"\(?[1-4A-Da-d]\)?\.?")
+
+
+def attach_answers(qs, keys):
+    """Align key answers to questions by question number in order (handles a second booklet restarting at 1). MCQs
+    only take option-like answers ("3", "(B)", or an option's text) and other questions only take the rest: a run of
+    1, 2, 3 ... matches any other run, and on 2026 maths a paper's MCQs had picked up another paper's worked solutions."""
+    for q in qs: q["answer"] = None
+    is_opt = lambda q, ans: bool(OPTION.fullmatch(ans.strip())) or ans.strip() in [o.strip() for o in q.get("options") or []]
+    order = sorted(range(len(qs)), key=lambda i: (min(qs[i].get("pages") or [0]), i))
+    for mcq in (True, False):
+        qi = [i for i in order if (qs[i].get("format") == "mcq") == mcq]
+        ks = [(n, a) for n, a in keys if bool(OPTION.fullmatch(a.strip())) == mcq or (mcq and any(is_opt(qs[i], a) for i in qi))]
+        sm = SequenceMatcher(None, [qs[i]["qno"] for i in qi], [n for n, _ in ks], autojunk=False)
+        for b in sm.get_matching_blocks():
+            for k in range(b.size): qs[qi[b.a + k]]["answer"] = ks[b.b + k][1]
 
 
 def main():

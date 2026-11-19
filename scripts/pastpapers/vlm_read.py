@@ -48,7 +48,9 @@ def parse(raw):
     if not m: return None
     # LaTeX (\\( \\frac \\times) is not JSON: escape a backslash unless it starts a real JSON escape.
     # \\n \\t \\r \\b \\f count as LaTeX only when a known command follows (\\frac, \\neq ...), so "\\nHow" stays a newline.
-    loose = re.sub(r'\\(?!["\\/]|u[0-9a-fA-F]{4}|[bfnrt](?!' + LATEX_TAILS + '))', r"\\\\", m.group(0))
+    # An existing "\\\\" pair is consumed whole, so a page mixing \\( with \\\\frac keeps the escaped pair.
+    loose = re.sub(r'\\\\|\\(?!["\\/]|u[0-9a-fA-F]{4}|[bfnrt](?!' + LATEX_TAILS + '))',
+                   lambda x: x.group(0) if len(x.group(0)) == 2 else "\\\\", m.group(0))
     for text in (m.group(0), loose):
         try: return json.loads(text)
         except json.JSONDecodeError: pass
@@ -77,6 +79,7 @@ def main():
     ap.add_argument("--mine", default="0", help="...and read these parts, e.g. 1,2 (run one process per GPU)")
     ap.add_argument("--tag", default="vlm32", help="output folder name, e.g. vlm32 for a second model")
     ap.add_argument("--max-seqs", type=int, default=16)
+    ap.add_argument("--max-tokens", type=int, default=3000, help="raise (e.g. 6000) to re-read a dense page that was cut off")
     a = ap.parse_args()
     sets = [(x.split(":")[0], int(x.split(":")[1])) for x in a.sets.split(",")] if a.sets else [(a.subject, a.year)]
     mine = {int(x) for x in a.mine.split(",")}
@@ -91,10 +94,10 @@ def main():
     if not todo: return
 
     from vllm import LLM, SamplingParams
-    llm = LLM(model=MODEL, tensor_parallel_size=int(os.environ.get("PP_TP", "1")), gpu_memory_utilization=a.gpu_mem, max_model_len=8192, max_num_seqs=a.max_seqs,
+    llm = LLM(model=MODEL, tensor_parallel_size=int(os.environ.get("PP_TP", "1")), gpu_memory_utilization=a.gpu_mem, max_model_len=max(8192, a.max_tokens + 5000), max_num_seqs=a.max_seqs,
               limit_mm_per_prompt={"image": 1}, mm_processor_kwargs={"max_pixels": a.max_pixels},
               allowed_local_media_path=str(OUT), enforce_eager=bool(os.environ.get("PP_EAGER")))
-    sp = SamplingParams(temperature=0, max_tokens=3000)
+    sp = SamplingParams(temperature=0, max_tokens=a.max_tokens)
     for i in range(0, len(todo), a.batch):
         chunk = todo[i:i + a.batch]
         msgs = [[{"role": "user", "content": [
@@ -114,6 +117,7 @@ if __name__ == "__main__":
         # raw LaTeX as the model writes it (\( is not JSON, so the loose pass runs)
         assert parse(r'{"t": "\(\frac{1}{2} \times 3 \neq \theta\)"}')["t"] == r"\(\frac{1}{2} \times 3 \neq \theta\)"
         assert parse(r'{"t": "\(x\) apples.\nHow many?"}')["t"] == "\\(x\\) apples.\nHow many?"
+        assert parse(r'{"t": "Express \(3\\frac{1}{50}\) as a decimal"}')["t"] == r"Express \(3\frac{1}{50}\) as a decimal"
         print("vlm_read selftest ok"); sys.exit()
     if sys.argv[1:2] == ["repair"]:
         print(sum(repair(d) for d in sys.argv[2:]), "pages repaired"); sys.exit()
