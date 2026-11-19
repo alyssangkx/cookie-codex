@@ -59,7 +59,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
-  import { pickTier, pickReview, pickPaper, MIXES } from '../../lib/pick';
+  import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
   import { esc, boldAns } from '../../lib/boldans';
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
@@ -147,6 +147,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const lead = zh ? `（${n}）` : `(${n}) `;
       h = h.replace(zh ? `（${n}）＿＿` : `(${n}) ____`, () => lead + span(f)); // a function, so '$' stays literal
     }
+    // the other blanks of this passage: not in this quiz -> shown with their answer (grey, nothing looks skipped);
+    // in this quiz and not answered yet -> a button that jumps to that question
+    if (q.group) for (const o of byId.values()) {
+      if (o.group !== q.group || o.seq == null || String(o.seq) === asked || filledBlanks.get(q.group)?.has(o.seq)) continue;
+      const lead = zh ? `（${o.seq}）` : `(${o.seq}) `, blank = zh ? `（${o.seq}）＿＿` : `(${o.seq}) ____`;
+      if (!inQuiz.has(o.id)) h = h.replace(blank, () => `${lead}<span class="filled given" title="not in this quiz">${esc(o.options[o.answer])}</span>`);
+      else if (!reveal) h = h.replace(blank, () => `<button type="button" class="blank-jump" data-id="${esc(o.id)}" aria-label="Go to blank ${o.seq}">${blank}</button>`);
+    }
     const mine = filledBlanks.get(q.group ?? '')?.get(Number(asked));
     if (reveal && asked && mine) {
       h = h.replace(zh ? `<mark class="ask">（${asked}）＿＿＿＿</mark>` : `<mark class="ask">(${asked}) ________</mark>`,
@@ -203,16 +211,17 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       // practice papers are Math-only and assume 4 options; never mix in an 8-option dialogue item
       if (mode === 'paper') all = all.filter((q) => q.options.length === 4);
       byId = new Map(all.map((q) => [q.id, q]));
+      const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
-        const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
         quiz = pickTier(ids, s.questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
         if (quiz.length < QUIZ_SIZE) return stop('This tier does not have enough questions yet. Try another tier.');
       } else if (mode === 'paper') {
         quiz = pickPaper(all as any, s.questions, paperN, paperMix.mix);
       } else {
-        quiz = pickReview(all.map((q) => q.id), s.questions);
+        // a passage's due blanks come as one consecutive run in passage order (no hole that reads as a skipped blank)
+        quiz = reviewPassages(pickReview(all.map((q) => q.id), s.questions), all.map((q) => q.id), passage);
         if (!quiz.length) return stop('Nothing to review today. Great work!');
       }
     } catch (e) {
@@ -411,6 +420,15 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (pick >= 0 && btn && !btn.disabled) choose(pick); // keys past this question's options do nothing
   });
   $('next').addEventListener('click', () => (++i < quiz.length ? render() : finish()));
+  // tapping an open blank of the passage asks that blank now; the current question moves to just after it
+  $('stem').addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.blank-jump');
+    if (!b || answered || over) return;
+    const j = quiz.indexOf(b.dataset.id ?? '', i + 1);
+    if (j < 0) return;
+    quiz.splice(i, 0, ...quiz.splice(j, 1));
+    render();
+  });
   $('start-btn').addEventListener('click', begin);
 
   // Leaving mid-quiz asks first: links (capture phase, before any other handler), the back button (the guard
@@ -478,6 +496,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .stem .filled { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em;
     background: color-mix(in srgb, var(--r-rare, #2a8) 18%, transparent); border-radius: 0.2em; padding: 0 0.1em; }
   .quiz .stem .filled { background: color-mix(in srgb, #2e9e5b 20%, transparent); text-decoration-color: #2e9e5b; }
+  .quiz .stem .filled.given { background: color-mix(in srgb, currentColor 8%, transparent); text-decoration: none; opacity: 0.75; }
+  .quiz .stem .blank-jump { font: inherit; color: inherit; background: color-mix(in srgb, currentColor 6%, transparent);
+    border: 1px dashed currentColor; border-radius: 0.3em; padding: 0 0.25em; line-height: inherit; cursor: pointer;
+    position: relative; }
+  .quiz .stem .blank-jump::before { content: ''; position: absolute; inset: -10px -4px; } /* a bigger tap target, same line height */
+  .quiz .stem .blank-jump:hover, .quiz .stem .blank-jump:focus-visible { background: color-mix(in srgb, currentColor 14%, transparent); }
   .quiz .stem .filled.fixed { background: color-mix(in srgb, #e8a317 22%, transparent); text-decoration-color: #c98a0a; }
   .quiz .rev-vis { margin: 0.4rem 0; font-size: 0.95rem; }
   .quiz .rev-vis > summary { cursor: pointer; color: var(--cocoa-soft); }

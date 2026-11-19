@@ -110,6 +110,36 @@ export function pickReview(ids: string[], seen: Record<string, Seen | undefined>
   return due.slice(0, size ?? Math.min(15, Math.max(5, Math.ceil(due.length / 2))));
 }
 
+/**
+ * Daily Review keeps passage sets readable: when due questions share a passage (a cloze), the review asks the
+ * consecutive run of that passage's blanks from the first due one to the last, in passage order, placed where the
+ * passage first appears (blanks 1, 2 and 4 due -> 1, 2, 3, 4: never a hole that reads as a skipped question).
+ * The gap fillers are retired or not-yet-due questions; answering them follows the normal retest rules.
+ */
+export function reviewPassages(
+  picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined,
+): string[] {
+  const span = new Map<string, [number, number]>();
+  for (const id of picked) {
+    const p = passage(id);
+    if (!p) continue;
+    const [lo, hi] = span.get(p.group) ?? [p.seq, p.seq];
+    span.set(p.group, [Math.min(lo, p.seq), Math.max(hi, p.seq)]);
+  }
+  const run = (g: string) => {
+    const [lo, hi] = span.get(g)!;
+    return ids.filter((id) => { const p = passage(id); return p?.group === g && p.seq >= lo && p.seq <= hi; })
+      .sort((a, b) => passage(a)!.seq - passage(b)!.seq);
+  };
+  const out: string[] = [], done = new Set<string>();
+  for (const id of picked) {
+    const g = passage(id)?.group;
+    if (!g) { out.push(id); continue; }
+    if (!done.has(g)) { done.add(g); out.push(...run(g)); }
+  }
+  return out;
+}
+
 export type Mix = Record<'basic' | 'intermediate' | 'competent', number>;
 export const MIXES: Record<string, { label: string; mix: Mix }> = {
   wa: { label: 'Weighted Assessment (more Basic)', mix: { basic: 0.4, intermediate: 0.4, competent: 0.2 } },

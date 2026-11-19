@@ -122,7 +122,7 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
 - **PIN login** (`supabase/functions/pin-login`, SQL in `supabase/migrations/001_init.sql`; applied and deployed, live-tested in Phase B). One atomic RPC checks then counts a device key (5 tries) and a `name:` (20, no token) or `trust:` (30, valid token) key; any locked key counts nothing. Locks double from 15 min to 24 h. The device fail count resets after 15 quiet minutes (forgives typos); name and trust counts only after 24 h, so pacing does not avoid escalation; escalation decays after 7 quiet days. Success clears the device and only the name-side key it used (a trusted login never resets a stranger's `name:` escalation; the admin can clear it). There is no IP limit. Worst case: about 240 days (stranger) or about 92 days (copied tokens) to 5,000 guesses; details in `docs/accounts-plan.md` section 5.
 - **`pick.ts`** chooses questions:
   - tier quizzes are always 10 (≤ 3 due retests from the sub-topic, then new questions, then not-due retests, then retired ones);
-  - Daily Review takes 5–15 due retests;
+  - Daily Review takes 5–15 due retests; due blanks of one passage come as a consecutive run in passage order (`reviewPassages`: blanks 1, 2, 4 due -> 1-4), so nothing reads as skipped. In a cloze, blanks not in the quiz show their answer in grey, and an open blank of the quiz is a button that jumps to that question (the current one moves after it);
   - WA/SA papers are mixed across chosen topics.
 - **`suggest.ts`** works out power (tier weights 1/2/3) and the "train today" suggestions.
 - **`train.ts`** (build time only) holds sub-topics in reward order, question counts and the playable flag per tier (20 or more questions), rewards and card info.

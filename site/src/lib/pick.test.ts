@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pickTier, pickReview, wholePassages, type Seen } from './pick.ts';
+import { pickTier, pickReview, wholePassages, reviewPassages, type Seen } from './pick.ts';
 
 const ids = Array.from({ length: 30 }, (_, i) => `q${i}`);
 const NOW = 1_000_000;
@@ -122,4 +122,16 @@ test('passage tiers: three due retests in three passages all fit; a cut keeps ne
   add('d', 6);
   const cutOut = wholePassages(['d5', 'd6'], ids, (id) => meta[id], 4, new Set(['d5'])); // d6 picked as new
   assert.deepEqual(cutOut, ['d3', 'd4', 'd5', 'd6']); // a consecutive run holding the due d5 and the new d6
+});
+
+test('Daily Review fills the gap between due blanks of one passage and keeps passage order', () => {
+  const P: Record<string, { group: string; seq: number }> = {
+    c1: { group: 'cz', seq: 1 }, c2: { group: 'cz', seq: 2 }, c3: { group: 'cz', seq: 3 }, c4: { group: 'cz', seq: 4 }, c5: { group: 'cz', seq: 5 },
+  };
+  const passage = (id: string) => P[id];
+  const ids = ['m1', 'c1', 'c2', 'c3', 'c4', 'c5', 'm2'];
+  // due in this order (oldest first): c4, m1, c1, c2; c3 retired, c5 not due
+  assert.deepEqual(reviewPassages(['c4', 'm1', 'c1', 'c2'], ids, passage), ['c1', 'c2', 'c3', 'c4', 'm1']);
+  assert.deepEqual(reviewPassages(['m1', 'm2'], ids, passage), ['m1', 'm2']); // no passages: unchanged
+  assert.deepEqual(reviewPassages(['c5'], ids, passage), ['c5']); // one blank: just that blank
 });
