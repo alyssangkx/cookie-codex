@@ -23,6 +23,7 @@ const data = {
         <input id="email" type="email" autocomplete="username" required />
         <label for="pw">Password</label>
         <input id="pw" type="password" autocomplete="current-password" required />
+        <div id="captcha" class="captcha"></div>
         <button class="btn" type="submit">Sign in</button>
       </form>
     </div>
@@ -110,6 +111,7 @@ const data = {
   .admin-page .tag { font-size: 0.8rem; background: var(--plate); border-radius: 999px; padding: 0.1rem 0.6rem; margin-left: 0.4rem; }
   .admin-page code { word-break: break-all; }
   .admin-page #signout2 { margin-top: 1rem; }
+  .admin-page .captcha:not(:empty) { margin-top: 0.9rem; }
 </style>
 
 <script>
@@ -118,6 +120,7 @@ const data = {
   import { fresh, migrate, SCHEMA } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { jumpClock, resetTier, grantCard } from '../../lib/testtools';
+  import { mountCaptcha, type Captcha } from '../../lib/captcha';
 
   interface Kid { id: string; name: string; role: 'child' | 'test'; pin_set_at: string | null; created_at: string }
   const D = JSON.parse(document.getElementById('adata')!.textContent!) as {
@@ -180,9 +183,13 @@ const data = {
 
   $('f-signin').addEventListener('submit', async (e) => {
     e.preventDefault(); flash('');
-    const { error } = await supabase.auth.signInWithPassword({ email: $<HTMLInputElement>('email').value.trim(), password: $<HTMLInputElement>('pw').value });
+    const { error } = await supabase.auth.signInWithPassword({
+      email: $<HTMLInputElement>('email').value.trim(), password: $<HTMLInputElement>('pw').value,
+      options: { captchaToken: captcha?.token() }, // Supabase Auth CAPTCHA (ignored while that setting is off)
+    });
+    captcha?.reset();
     $<HTMLInputElement>('pw').value = '';
-    if (error) { flash('That email or password is not right.'); return; }
+    if (error) { flash(/captcha/i.test(error.message) ? 'Tick the "I am human" box, then sign in again.' : 'That email or password is not right.'); return; }
     await render();
   });
   const verify = (inputId: string) => async (e: Event) => {
@@ -332,4 +339,6 @@ const data = {
   }
 
   void render();
+  let captcha: Captcha | null = null;
+  mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => { /* no widget: sign-in still works while Auth CAPTCHA is off */ });
 </script>

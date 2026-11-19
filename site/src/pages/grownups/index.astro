@@ -11,6 +11,7 @@ import Base from '../../layouts/Base.astro';
         <input id="email" type="email" autocomplete="username" required />
         <label for="pw">Password</label>
         <input id="pw" type="password" autocomplete="current-password" required />
+        <div id="captcha" class="captcha"></div>
         <button type="submit" class="btn">Sign in</button>
       </form>
       <div class="links"><a href="/signup/">New here? Create a parent account</a><a href="/reset/">Forgot your password?</a></div>
@@ -31,10 +32,13 @@ import Base from '../../layouts/Base.astro';
 <script>
   import { supabase, touch, roleOf } from '../../lib/supabase';
   import { isChildSession } from '../../lib/sync';
+  import { mountCaptcha, type Captcha } from '../../lib/captcha';
 
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const say = (t: string) => { $('msg').textContent = t; };
   let factorId = '';
+  let captcha: Captcha | null = null;
+  mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => say('The "I am human" check did not load. Reload the page.'));
 
   // after sign-in: an admin goes to the admin console (it asks for its own code); a parent needs aal2 only once they
   // enrolled an authenticator; a confirmed account with no role has not finished sign-up (verify page registers it)
@@ -59,9 +63,16 @@ import Base from '../../layouts/Base.astro';
   $('f-signin').addEventListener('submit', async (e) => {
     e.preventDefault(); say('');
     const pw = $<HTMLInputElement>('pw');
-    const { error } = await supabase.auth.signInWithPassword({ email: $<HTMLInputElement>('email').value.trim(), password: pw.value });
+    const { error } = await supabase.auth.signInWithPassword({
+      email: $<HTMLInputElement>('email').value.trim(), password: pw.value, options: { captchaToken: captcha?.token() },
+    });
+    captcha?.reset();
     pw.value = '';
-    if (error) { say(/confirm/i.test(error.message) ? 'Open the link in the email we sent you first.' : 'That email or password is not right.'); return; }
+    if (error) {
+      say(/captcha/i.test(error.message) ? 'Tick the "I am human" box, then sign in again.'
+        : /confirm/i.test(error.message) ? 'Open the link in the email we sent you first.' : 'That email or password is not right.');
+      return;
+    }
     await route();
   });
   $('f-code').addEventListener('submit', async (e) => {

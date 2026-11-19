@@ -491,6 +491,18 @@ New secrets, typed by the owner with `supabase secrets set` and never in the rep
 
 Existing: the admin (also parent of Alyssa), Alyssa, the Admin player, the Test Player. `002` gives the admin a `families` row (the admin sees the code in `/admin/`, a new line to add), sets `unlimited` on the Test Player and the Admin player, keeps all `profiles` and `saves` rows, and changes no save. Alyssa's existing sessions and trusted-device tokens keep working (the token binds child id, device id and `pin_set_at`, none of which change); a **new** device needs the code once. Order, each step after the owner says so: (1) read-only checks: one admin-owned profile named Admin; the Test Player's save size and key count against the 512 KB and 40-key limits; (2) apply `002` and deploy the new `pin-login` back to back (the lock-key format changes; Alyssa's lock rows under the old keys are dead and purged); (3) deploy `admin` (patched) and `parent-api`; (4) set secrets and CAPTCHA/SMTP, then flip Auth sign-up on **last**; (5) site release with the pages above. Rollback of 002: drop `families`, `rate_hit`, the new triggers and column, restore the 001 index and functions; the draft keeps all data.
 
+### 12.11a Apply checklist (19 Nov 2026)
+
+Done by the owner: Gmail SMTP; Turnstile widget; Vercel `PUBLIC_TURNSTILE_SITE_KEY`; function secrets
+`CAPTCHA_SECRET`, `CAPTCHA_REQUIRED=true`, `CONSENT_VERSION=1`. Still to do: enable `pg_cron`.
+
+Supabase Auth CAPTCHA ("Attack Protection") also guards **password sign-in**, so: the `/admin/` and `/grownups/`
+forms send a Turnstile token, and `pin-login` / `admin test_login` sign the child in with a service-role client
+(Auth skips its CAPTCHA for an admin-role key: `verifyCaptcha` in supabase/auth `internal/api/middleware.go`).
+Order at "apply": read-only checks -> 002 -> deploy `pin-login`, `admin`, `parent-api` -> push the site ->
+check child, admin and Test Player logins -> turn Auth CAPTCHA on -> check the three logins again (off at once if
+any fails) -> `pg_cron` jobs -> Auth sign-up on -> `isolation.mjs` -> a real sign-up end to end.
+
 ### 12.12 Test plan
 
 - **Unit** (`node --test site/src/lib/*.test.ts`, in the style of `sync.test.ts`): `weakPin` table; family-code normalisation; lock-key builder; `isUnlimited` reads the flag and ignores the name `Admin`; `decidePush` with `invalid`; hydrate cleans a tampered server save; the parent gate decision (role, aal, enrolled factor).

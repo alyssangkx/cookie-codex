@@ -126,7 +126,10 @@ Deno.serve(async (req) => {
     // 5. Success: clear this device and the name-side key this request used.
     const cleared = await admin.rpc('pin_clear', { p_device_key: deviceKey, p_name_key: lockKey, p_trusted: trusted });
     if (cleared.error) throw new Unavailable();
-    const anon = createClient(url, Deno.env.get('SUPABASE_ANON_KEY')!, { auth: { persistSession: false } });
+    // a fresh client with the service-role key: Supabase Auth skips its CAPTCHA for an admin-role key
+    // (auth middleware verifyCaptcha), so this server-side sign-in keeps working once Auth CAPTCHA is on;
+    // the human check for this login is our own Turnstile check above (pin-login) or the admin's aal2 (admin)
+    const anon = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, { auth: { persistSession: false, autoRefreshToken: false } });
     const { data, error } = await anon.auth.signInWithPassword({
       email: `child-${prof.id}@children.invalid`,
       password: await childPassword(prof.id, Deno.env.get('CHILD_PW_SECRET')!),
