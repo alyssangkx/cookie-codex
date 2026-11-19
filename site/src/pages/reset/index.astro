@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Reset your password: Cookie Codex" description="Parents reset their account password.">
+  <section class="wrap gu">
+    <h1>Reset your password</h1>
+    <div id="v-ask" class="panel">
+      <form id="f-ask" autocomplete="on" novalidate>
+        <label for="email">Your email</label>
+        <input id="email" type="email" autocomplete="email" required />
+        <div id="captcha" class="captcha"></div>
+        <button type="submit" class="btn">Send me a link</button>
+      </form>
+      <p class="note">Children's PINs are reset by their parent on the parent page, not here.</p>
+    </div>
+    <div id="v-sent" class="panel" hidden><p>If that address has an account, a link is on its way. It works for 1 hour.</p></div>
+    <div id="v-new" class="panel" hidden>
+      <form id="f-new" autocomplete="on">
+        <label for="pw">New password (at least 10 characters)</label>
+        <input id="pw" type="password" autocomplete="new-password" minlength="10" required />
+        <button type="submit" class="btn">Save the new password</button>
+      </form>
+    </div>
+    <p id="msg" class="msg" role="alert"></p>
+  </section>
+</Base>
+
+<script>
+  import { supabase, sessionFromLink } from '../../lib/supabase';
+  import { mountCaptcha, type Captcha } from '../../lib/captcha';
+
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const say = (t: string, ok = false) => { $('msg').textContent = t; $('msg').classList.toggle('ok', ok); };
+  let captcha: Captcha | null = null;
+
+  void (async () => {
+    const link = await sessionFromLink();
+    if (link.error) say('That link has expired or was already used. Ask for a new one.');
+    if (link.type === 'recovery' && !link.error) { $('v-ask').hidden = true; $('v-new').hidden = false; $('pw').focus(); return; }
+    mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => say('The "I am human" check did not load. Reload the page.'));
+  })();
+
+  $('f-ask').addEventListener('submit', async (e) => {
+    e.preventDefault(); say('');
+    const email = $<HTMLInputElement>('email').value.trim();
+    if (!email) { say('Type your email address.'); return; }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${location.origin}/reset/`, captchaToken: captcha?.token() });
+    captcha?.reset();
+    if (error && /captcha/i.test(error.message)) { say('Tick the "I am human" box, then try again.'); return; }
+    if (error && /rate|too many/i.test(error.message)) { say('Too many tries. Wait a few minutes.'); return; }
+    $('v-ask').hidden = true; $('v-sent').hidden = false; // same answer whether or not the address exists
+  });
+  $('f-new').addEventListener('submit', async (e) => {
+    e.preventDefault(); say('');
+    const pw = $<HTMLInputElement>('pw');
+    if (pw.value.length < 10) { say('The password needs at least 10 characters.'); return; }
+    const { error } = await supabase.auth.updateUser({ password: pw.value });
+    pw.value = '';
+    if (error) { say('That did not work. Pick a longer or less common password, or ask for a new link.'); return; }
+    say('Password saved. Taking you to the parent page…', true);
+    setTimeout(() => { location.href = '/grownups/'; }, 1200);
+  });
+</script>

@@ -1,4 +1,4 @@
-// DRAFT (docs/accounts-plan.md section 12): not used by any deployed function yet.
+// Used by parent-api (create_child, set_pin); see docs/accounts-plan.md 12.5.
 // Weak 4-digit PIN check, applied when a parent SETS a PIN (existing PINs are never re-checked).
 // Honest limit: this blocks about 1.7% (171) of the 10,000 values. The real bounds are the family code and the
 // escalating lockouts; this only removes the guesses an attacker would try first. Pure, no I/O.

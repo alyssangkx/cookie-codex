@@ -56,3 +56,45 @@ export async function callFunction(name: string, body: unknown, token?: string) 
   try { json = await res.json(); } catch { /* not JSON */ }
   return { status: res.status, body: json };
 }
+
+/** The signed-in grown-up's role from the session's app_metadata (set only by the server): admin, parent or none. */
+export const roleOf = (s: Session | null): 'admin' | 'parent' | null => {
+  const r = s?.user?.app_metadata?.role;
+  return r === 'admin' || r === 'parent' ? r : null;
+};
+
+/** parent-api with the current session; throws an Error whose message is the function's error code. */
+export async function callParentApi<T = any>(body: Record<string, unknown>): Promise<T> {
+  const { data } = await supabase.auth.getSession();
+  if (!data.session) throw new Error('unauthorized');
+  const r = await callFunction('parent-api', body, data.session.access_token);
+  if (r.status !== 200) throw new Error(r.body?.error ?? 'server_error');
+  return r.body as T;
+}
+
+/** The privacy notice version a parent accepts at sign-up (parent-api checks it against its CONSENT_VERSION). */
+export const CONSENT_VERSION = '1';
+
+/**
+ * Pick up the session from an emailed link (sign-up confirmation, password reset). The client has
+ * detectSessionInUrl off, so the verify and reset pages call this: it reads the implicit-flow fragment
+ * (#access_token=...&refresh_token=...&type=...) or a PKCE ?code=, sets the session, and removes the tokens from
+ * the address bar. `type` is 'signup' or 'recovery' when the link said so.
+ */
+export async function sessionFromLink(): Promise<{ type: string | null; error: string | null }> {
+  const q = new URLSearchParams(location.search), h = new URLSearchParams(location.hash.slice(1));
+  const clear = () => history.replaceState(null, '', location.pathname);
+  const err = h.get('error_description') ?? q.get('error_description');
+  if (err) { clear(); return { type: null, error: err }; }
+  const code = q.get('code');
+  if (code) {
+    const r = await supabase.auth.exchangeCodeForSession(code); clear();
+    return { type: q.get('type'), error: r.error?.message ?? null };
+  }
+  const at = h.get('access_token'), rt = h.get('refresh_token');
+  if (at && rt) {
+    const r = await supabase.auth.setSession({ access_token: at, refresh_token: rt }); clear();
+    return { type: h.get('type'), error: r.error?.message ?? null };
+  }
+  return { type: null, error: null };
+}

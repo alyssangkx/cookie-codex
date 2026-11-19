@@ -101,7 +101,7 @@ test('review fixes: tiers skip unplayable lower tiers; goal days keep their stat
 
 function mockStorage(initial: Record<string, string> = {}) {
   const data = { ...initial };
-  resetUnlimitedCache(); // isUnlimited() caches the player name per page load
+  resetUnlimitedCache(); // isUnlimited() caches the flag per page load
   Object.defineProperty(globalThis, 'localStorage', {
     configurable: true,
     value: {
@@ -419,7 +419,7 @@ test('time cap still works at the 120-minute default; review is blocked too', ()
 
 test('Admin: no time cap, no quiz cap, unlimited tries per day', () => {
   try {
-    mockStorage({ 'ccx:player-name': 'Admin' });
+    mockStorage({ 'ccx:profile-unlimited': '1', 'ccx:player-name': 'Admin' });
     assert.equal(isUnlimited(), true);
     const s = fresh();
     finish(s, 'tier', 12, 20 * 60_000); // 240 minutes, 12 quizzes
@@ -429,10 +429,10 @@ test('Admin: no time cap, no quiz cap, unlimited tries per day', () => {
     assert.equal(dayBlock(s, 'tier'), null);
     assert.equal(triesUsedUp(s, 'x', 'b'), false);
     assert.equal(attemptsLeft(s, 'x', 'b'), Infinity);
-    mockStorage({ 'ccx:player-name': 'Alyssa' });
+    mockStorage({ 'ccx:player-name': 'Admin' }); // the name alone gives nothing
     assert.equal(isUnlimited(), false);
     assert.equal(triesUsedUp(s, 'x', 'b'), true);
-    assert.equal(isUnlimited('Admin'), true);
+    assert.equal(isUnlimited(true), true);
   } finally {
     mockStorage({});
   }
@@ -472,10 +472,10 @@ test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () 
 test('Admin: every tier is open with nothing cleared; a normal player is locked', () => {
   const s = fresh();
   try {
-    mockStorage({ 'ccx:player-name': 'Admin' });
+    mockStorage({ 'ccx:profile-unlimited': '1', 'ccx:player-name': 'Admin' });
     assert.equal(tierOpen(s, 'x', 'c'), true);
     assert.equal(tierOpen(s, 'x', 'i'), true);
-    mockStorage({ 'ccx:player-name': 'Alyssa' });
+    mockStorage({ 'ccx:player-name': 'Admin' }); // the name alone gives nothing
     assert.equal(tierOpen(s, 'x', 'c'), false);
   } finally {
     mockStorage({});

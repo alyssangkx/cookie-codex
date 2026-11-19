@@ -1,6 +1,6 @@
--- DRAFT - not applied. Cookie Codex accounts, migration 002: open parent sign-up.
--- Design: docs/accounts-plan.md section 12. Do NOT apply until the owner says "apply" and has answered
--- the decisions listed there. 001_init.sql is applied and frozen: every change is in this file.
+-- NOT APPLIED. Cookie Codex accounts, migration 002: open parent sign-up.
+-- Design: docs/accounts-plan.md section 12 (owner's decisions in 12.x). Apply only when the owner says "apply",
+-- after the read-only checks in 12.11. 001_init.sql is applied and frozen: every change is in this file.
 --
 -- What it does
 --   1. families: one row per parent with the FAMILY CODE a child types at login (+ consent record).
@@ -10,7 +10,8 @@
 --   5. pin_clear_name_lock: the owning parent may clear a lock, lock keys carry the family (parent id).
 --   6. push_save: shape and size check on the jsonb (audit F6). Lower size cap on saves.
 --   7. rate_hit(): small fixed-window counter for parent-side actions (service role only).
---   8. purge jobs for pin_attempts and unconfirmed sign-ups (pg_cron lines are commented out).
+--   8. purge jobs for pin_attempts, unconfirmed sign-ups and deleted accounts (pg_cron lines commented out).
+--  10. 7-day delete undo: families.deleted_at, profiles.deleted_at; push_save refuses a deleted child.
 --   9. Backfill: a families row for the existing grown-up (the admin: Alyssa, Admin player, Test Player).
 -- Apply order with the functions (docs section 12.11): this migration and the new pin-login go live
 -- together, because the lockout key format changes from '<name_key>' to '<parent_id>:<name_key>'.
@@ -41,14 +42,15 @@ create table public.families (
   code              text not null unique check (code ~ '^[2-9A-HJKMNP-Z]{8}$'),
   consent_version   text not null,                       -- which privacy notice the parent accepted
   consented_at      timestamptz not null default now(),  -- server clock
-  created_at        timestamptz not null default now()
+  created_at        timestamptz not null default now(),
+  deleted_at        timestamptz                          -- "Delete account": purged 7 days later unless restored
 );
 alter table public.families enable row level security;
 create policy families_select on public.families for select to authenticated
   using (parent_id = (select auth.uid()));
 -- No client write policy: rows are created, rotated and deleted by parent-api / admin (service role).
 revoke all on public.families from anon, authenticated;
-grant select (parent_id, code, consent_version, consented_at) on public.families to authenticated;
+grant select (parent_id, code, consent_version, consented_at, deleted_at) on public.families to authenticated;
 
 -- Backstop for the sign-up cap (free-tier database size). Raise it with a new migration.
 create function private.families_cap() returns trigger
@@ -71,7 +73,18 @@ create unique index profiles_family_name_uq on public.profiles (parent_id, name_
 -- Server-set. No client column grant, so no browser session can set it. Only the admin's own profiles
 -- (Test Player, the Admin player) may carry it, enforced in the trigger below.
 alter table public.profiles add column unlimited boolean not null default false;
-grant select (unlimited) on public.profiles to authenticated;
+-- "Delete child" / "Delete account": login stops at once (pin-login, push_save), rows purged after 7 days.
+alter table public.profiles add column deleted_at timestamptz;
+grant select (unlimited, deleted_at) on public.profiles to authenticated;
+
+-- A child whose profile or family is marked deleted. Used by push_save; pin-login checks the same columns.
+create function private.is_deleted_child(p_child uuid) returns boolean
+language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.profiles p left join public.families f on f.parent_id = p.parent_id
+                  where p.id = p_child and (p.deleted_at is not null or f.deleted_at is not null))
+$$;
+revoke execute on function private.is_deleted_child(uuid) from public, anon;
+grant execute on function private.is_deleted_child(uuid) to authenticated;
 
 create function private.profiles_guard() returns trigger
 language plpgsql security definer set search_path = '' as $$
@@ -91,7 +104,8 @@ begin
       raise exception 'reserved name' using errcode = 'P0001';
     end if;
     if tg_op = 'INSERT' and new.role = 'child' then
-      select count(*) into v_n from public.profiles p where p.parent_id = new.parent_id and p.role = 'child';
+      select count(*) into v_n from public.profiles p
+       where p.parent_id = new.parent_id and p.role = 'child' and p.deleted_at is null;
       if v_n >= 6 then raise exception 'child limit reached' using errcode = 'P0001'; end if;
     end if;
   end if;
@@ -136,7 +150,7 @@ declare allowed boolean;
 begin
   allowed := case when private.is_admin() then private.is_test_profile(p_child)
                   else private.is_self(p_child) or private.owns_child(p_child) end;
-  if not coalesce(allowed, false) then
+  if not coalesce(allowed, false) or private.is_deleted_child(p_child) then
     status := 'denied'; rev := null; updated_at := null; data := null; schema_version := null;
     return next; return;
   end if;
@@ -219,11 +233,28 @@ language sql security definer set search_path = '' as $$
      and u.email not like '%@children.invalid'
      and not exists (select 1 from public.profiles p where p.parent_id = u.id);
 $$;
-revoke execute on function private.purge_pin_attempts(), private.purge_unconfirmed() from public, anon, authenticated;
+-- Deleted more than 7 days ago and not restored: delete the auth users; profiles, saves and families cascade.
+-- Children of a deleted family go first (profiles.parent_id cascades too, but their auth users would remain).
+create function private.purge_deleted() returns void
+language sql security definer set search_path = '' as $$
+  delete from auth.users u using public.profiles p
+   where u.id = p.id and p.role = 'child'
+     and (p.deleted_at < now() - interval '7 days'
+          or exists (select 1 from public.families f
+                      where f.parent_id = p.parent_id and f.deleted_at < now() - interval '7 days'));
+  delete from auth.users u using public.families f
+   where u.id = f.parent_id and f.deleted_at < now() - interval '7 days';
+  delete from private.pin_attempts a
+   where a.key ~ '^(name|trust):[0-9a-f-]{36}:'
+     and not exists (select 1 from public.families f where f.parent_id::text = split_part(a.key, ':', 2));
+$$;
+revoke execute on function private.purge_pin_attempts(), private.purge_unconfirmed(), private.purge_deleted()
+  from public, anon, authenticated;
 
 -- pg_cron must first be enabled by the owner (Dashboard > Database > Extensions). Then:
 -- select cron.schedule('purge-pin-attempts', '17 3 * * *', $$select private.purge_pin_attempts()$$);
 -- select cron.schedule('purge-unconfirmed',  '37 3 * * *', $$select private.purge_unconfirmed()$$);
+-- select cron.schedule('purge-deleted',      '57 3 * * *', $$select private.purge_deleted()$$);
 
 -- ---------------------------------------------------------------- backfill (existing data)
 

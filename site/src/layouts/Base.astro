@@ -10,7 +10,7 @@ const { title, description } = Astro.props;
 // pages) are kept out of search results with "noindex, follow", so the Library stays findable through them.
 const GAME = '^/(train|quiz|paper|collection)(/|$)';
 const path = Astro.url.pathname.replace(/\/+$/, '');
-const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|admin)(\/|$)/.test(path);
+const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|admin|grownups|signup|reset)(\/|$)/.test(path);
 ---
 <!doctype html>
 <html lang="en">
@@ -20,8 +20,8 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
     <title>{title}</title>
     <meta name="description" content={description} />
     {hidden && <meta name="robots" content="noindex, follow" />}
-    <!-- Login gate, step 1 (instant): game pages need a stored session, /parent needs an admin one. The module
-         script below does the real check (idle limit, admin and authenticator level). -->
+    <!-- Login gate, step 1 (instant): game pages need a stored session, /parent a grown-up one. The module
+         script below does the real check (idle limit, role and authenticator level). -->
     <script is:inline define:vars={{ GAME }}>
       (function () {
         var p = location.pathname.replace(/\/+$/, ''), g = '';
@@ -35,11 +35,11 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         // the one allowed storage read outside store.ts; the key is AUTH_KEY in lib/supabase.ts
         try { has = localStorage.getItem('ccx:auth') !== null; } catch (e) {}
         document.documentElement.className += ' gate-pending';
-        if (!has) { location.replace('/login'); return; }
-        // fail-safe: never leave the page blank. A game page is shown; an admin page goes to the admin sign-in.
+        if (!has) { location.replace(g === 'admin' ? '/grownups/' : '/login'); return; }
+        // fail-safe: never leave the page blank. A game page is shown; the parent page goes to the grown-ups sign-in.
         setTimeout(function () {
           if (!document.documentElement.classList.contains('gate-pending')) return;
-          if (g === 'admin') location.replace('/admin/');
+          if (g === 'admin') location.replace('/grownups/');
           else document.documentElement.classList.remove('gate-pending');
         }, 5000);
       })();
@@ -142,16 +142,19 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
               child = true;
               return;
             }
-            go('/login');
+            go(gate === 'admin' ? '/grownups/' : '/login');
             return;
           }
           if (gate === 'admin') {
+            // the admin always at aal2; a parent at aal1, or aal2 once they have enrolled an authenticator
             let ok = false;
             try {
-              const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-              ok = session!.user.app_metadata?.role === 'admin' && aal.data?.currentLevel === 'aal2';
+              const aal = (await supabase.auth.mfa.getAuthenticatorAssuranceLevel()).data;
+              const role = session!.user.app_metadata?.role;
+              ok = role === 'admin' ? aal?.currentLevel === 'aal2'
+                : role === 'parent' && (aal?.nextLevel !== 'aal2' || aal?.currentLevel === 'aal2');
             } catch { /* fail closed */ }
-            if (!ok) { go('/admin/'); return; }
+            if (!ok) { go('/grownups/'); return; }
           }
           if (session && isChildSession(session.user)) {
             child = true;
@@ -159,7 +162,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
             await Promise.race([initSync().catch(() => {}), new Promise((r) => setTimeout(r, 4000))]);
           }
         } catch {
-          if (gate === 'admin') go('/admin/'); // fail closed
+          if (gate === 'admin') go('/grownups/'); // fail closed
         } finally {
           if (!leaving) { if (child) { try { showName(); } catch { /* storage unavailable */ } } release(); }
         }

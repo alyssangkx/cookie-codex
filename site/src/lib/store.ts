@@ -233,17 +233,18 @@ export const weekId = (key: string) => {
 export const today = (s: SaveV1) => s.days[dayKey()] ?? { quizzes: 0, min: 0, correct: 0, total: 0 };
 
 /**
- * The owner's test account "Admin" has no limits: no time cap, no quiz cap, no tries per day. The check is
- * the signed-in profile's name (login stores it in kv `player-name`). A name-based check is deliberate:
- * signing in as Admin needs its PIN. `name` is injectable for tests.
+ * A profile the server marks `unlimited` (the owner's "Admin" player; migration 002, profiles.unlimited) has no
+ * limits: no time cap, no quiz cap, no tries per day, every tier open. pin-login returns the flag and the login page
+ * stores it in kv `profile-unlimited`; no name check, so a family cannot get it by naming a child "Admin".
+ * `flag` is injectable for tests.
  */
 let adminCache: boolean | undefined;
-export const isUnlimited = (name?: string | null) => {
-  if (name !== undefined) return name === 'Admin';
+export const isUnlimited = (flag?: boolean) => {
+  if (flag !== undefined) return flag;
   // Read once per page load. Login and logout both navigate, so the page reloads and the cache is fresh.
-  return (adminCache ??= kv.get('player-name') === 'Admin');
+  return (adminCache ??= kv.get('profile-unlimited') === '1');
 };
-/** Tests only: forget the cached player name. */
+/** Tests only: forget the cached flag. */
 export const resetUnlimitedCache = () => { adminCache = undefined; };
 
 /** Time cap: today's minutes have reached the parent's daily limit. Daily Review is blocked too. */

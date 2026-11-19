@@ -123,3 +123,31 @@ button:disabled { cursor: not-allowed; }
   html { scroll-behavior: smooth; }
   .card, .tag { transition: transform 160ms ease-out, box-shadow 160ms ease-out, border-color 160ms; }
 }
+
+/* Grown-up account pages: /grownups/, /signup/, /signup/verify/, /reset/, /privacy/ */
+.gu { padding-block: 1.5rem 3rem; max-width: 34rem; }
+.gu .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1.1rem; margin-top: 1rem; }
+.gu h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.gu .note { color: var(--cocoa-soft); font-size: 0.95rem; margin: 0.4rem 0 0.8rem; }
+.gu label { display: block; font-family: var(--font-display); font-weight: 500; margin-top: 0.8rem; }
+.gu label.check { display: flex; gap: 0.6rem; align-items: flex-start; font-family: inherit; font-weight: 400; min-height: 44px; }
+.gu label.check input { width: 24px; height: 24px; flex: none; accent-color: var(--berry); margin-top: 0.1rem; }
+.gu input:not([type='checkbox']) {
+  display: block; width: 100%; min-height: 44px; padding: 0.4rem 0.7rem; margin-top: 0.25rem;
+  font: inherit; color: var(--cocoa); background: #fff; border: 1.5px solid var(--crust); border-radius: var(--radius-control);
+}
+.gu .btn {
+  min-height: 44px; padding: 0 1.1rem; margin-top: 1rem; border: 0; border-radius: var(--radius-control);
+  background: var(--cocoa); color: var(--cream); font: 500 1rem var(--font-display); cursor: pointer;
+}
+.gu .btn:disabled { opacity: 0.6; }
+.gu .captcha:not(:empty) { margin-top: 1rem; }
+.gu .msg { min-height: 1.5em; margin-top: 0.8rem; font-weight: 600; color: var(--berry); }
+.gu .msg.ok { color: #1f6b3a; }
+.gu .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin-top: 1rem; }
+.gu .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.gu .famcode { font: 600 2rem var(--font-display); letter-spacing: 0.12em; }
+.gu blockquote { margin: 0; }
+.gu.privacy h2 { margin-top: 1.4rem; }
+.gu.privacy ul { padding-left: 1.2rem; }
+.gu.privacy li { margin-bottom: 0.4rem; }

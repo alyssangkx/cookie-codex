@@ -1,4 +1,4 @@
-// DRAFT (docs/accounts-plan.md section 12): CAPTCHA check for pin-login (Cloudflare Turnstile by default;
+// CAPTCHA check for pin-login (docs/accounts-plan.md 12.5, 12.8): Cloudflare Turnstile by default;
 // hCaptcha uses the same shape with CAPTCHA_VERIFY_URL=https://hcaptcha.com/siteverify).
 // Secrets (supabase secrets set, typed by the owner, never in the repo): CAPTCHA_SECRET.
 // Config: CAPTCHA_REQUIRED=true turns the check on. Fails CLOSED: required + secret missing -> throws;

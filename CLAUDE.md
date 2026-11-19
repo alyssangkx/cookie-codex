@@ -107,7 +107,7 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
   - Practice papers never retire questions.
   - A started quiz counts toward the daily tries (5 for P1-P5, 3 for P6).
   - The daily limits: the day ends at `dailyCapMin` minutes (default 120, parent range 45-180). The 10-quiz limit (`DAILY_QUIZ_CAP`) is **switched off for now** (`QUIZ_CAP_ON = false`, owner's request, 19 Nov 2026); set it to `true` to restore the rule below, where the day also ends at 10 quizzes, whichever comes first. The tests pass `true` to keep the cap logic covered. Tier quizzes and WA/SA papers count from the moment they start (`beginQuiz()` records an open attempt, replaced when the quiz finishes, so an abandoned one still counts); Daily Review and retests inside a tier quiz do not. After the quiz limit only Daily Review stays open; after the time limit nothing does. `dayBlock(s, mode)` gives the reason and `blockMessage()` the text; the quiz page re-checks it in `begin()`. There is also a daily goal.
-  - **Admin test account:** `isUnlimited()` is true when kv `player-name` is `Admin` (a deliberate name-based check; signing in as it needs its PIN; cached once per page load, since login and logout navigate). It has no time cap, no quiz cap, no tries-per-day limit, and `tierOpen()` is always true so every tier is unlocked. Tiers under `MIN_POOL` are still unplayable; clearing, cards and mastery work normally.
+  - **Unlimited test account:** `isUnlimited()` is true when kv `profile-unlimited` is `1`, which the login page stores from pin-login's `profile.unlimited` (the server flag `profiles.unlimited`, migration 002; only the admin's own profiles may carry it, so naming a child "Admin" gives nothing; cached once per page load). It has no time cap, no quiz cap, no tries-per-day limit, and `tierOpen()` is always true so every tier is unlocked. Tiers under `MIN_POOL` are still unplayable; clearing, cards and mastery work normally.
   - The streak counts weeks with 4 or more goal days, so weekends never break it.
   - Card power reflects retention.
   - `migrations` runs on `load()` and `importCode()`. Add a new step there for every schema bump.
@@ -139,9 +139,11 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
 | `/quiz/?sub=&tier=` | The quiz runner; also `?mode=review` and `?mode=paper&topics=` |
 | `/paper/` | WA/SA paper builder |
 | `/collection/` | My House |
-| `/parent/` | Parent page, gated by an admin session at aal2 (the old PIN screen is gone); shows the save on this device |
-| `/login/` | "Who's playing?": name + 4-digit PIN pad, calls `pin-login` |
+| `/parent/` | Parent page: an admin at aal2, or a parent (aal2 once they enrol an authenticator). A parent also gets "Your family" (family code, children, PINs, rename, delete with a 7-day undo, delete account) through `parent-api`; shows the save on this device |
+| `/login/` | "Who's playing?": family code (remembered) + name + 4-digit PIN pad, Turnstile CAPTCHA on a device without a device token, calls `pin-login` |
 | `/admin/` | Admin email + password, TOTP (aal2), children, PINs, name locks, Test Player and its test tools |
+| `/grownups/`, `/signup/`, `/signup/verify/`, `/reset/` | Parent sign-in (TOTP step if enrolled), open sign-up (consent boxes, CAPTCHA, email confirmation), verify link -> `parent-api register` (family code), password reset |
+| `/privacy/` | Privacy notice (version `CONSENT_VERSION` in `supabase.ts`) |
 | `/codex/` | The Library (cookie shelf) |
 | `/cookie/<slug>/`, `/personality/<tag>/` | Codex detail pages |
 
@@ -150,10 +152,12 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
 
 ### Accounts (`supabase/functions/admin`, `site/src/lib/{supabase,sync,testtools}.ts`)
 
+- **Open parent sign-up** (docs/accounts-plan.md section 12; migration `002_parents.sql` and the new `pin-login`/`parent-api` are written and tested but **not applied or deployed** until the owner says "apply"; apply order in 12.11). Families have an 8-symbol code (`_shared/family.ts`); child names are unique per parent; lock keys are `name:<parent_id>:<name_key>`; deletes are soft for 7 days (`deleted_at`, purged by `private.purge_deleted()`). Tests: `scripts/accounts/sqltest.sh` (001 + 002 in a Postgres container, 40+ checks, needs docker) and, after apply, `scripts/accounts/isolation.mjs` (two throwaway families against the live project). The site changes (family-code login) must go live together with 002 and the new `pin-login`, never before.
+
 - **`admin` Edge Function** (JWT verification ON; needs `app_metadata.role = 'admin'` and `aal2`): `create_child`, `set_pin` (shares `_shared/pin.ts` hashing), `clear_name_lock`, `list_children`, `create_test_player`, `test_login` (a session for the Test Player only), `delete_child` (non-test needs `confirm` = the name). Redeploy: `supabase functions deploy admin --use-api --yes`.
 - **`supabase.ts`** is the one browser client (session persists in localStorage; 90-day idle sign-out; `callFunction` uses plain fetch because the CORS allow-list has no `x-client-info`).
 - **`sync.ts`** sits under `store.ts` (`save()` calls a hook; `store.ts` stays the only code touching localStorage, incl. `kv` for device id/token/revs). Pure decisions (`decideHydrate`, `decidePush`, ...) are tested in `sync.test.ts`. Push is debounced 2 s with the base rev; a conflict shows a banner (use the newer one, or force-push with `p_force`); `denied` stops syncing quietly.
-- **Login gate** is in `Base.astro`: game pages (`/`, `/train`, `/quiz`, `/paper`, `/collection`) redirect to `/login` without a session; `/parent` needs an admin at aal2; the Library stays public. Header "Log out" ends this browser's session only.
+- **Login gate** is in `Base.astro`: game pages (`/`, `/train`, `/quiz`, `/paper`, `/collection`) redirect to `/login` without a session; `/parent` needs an admin at aal2 or a parent (else `/grownups/`); the Library stays public. Header "Log out" ends this browser's session only.
 - Test tools (`testtools.ts`) edit only the Test Player's save through `push_save`; the database refuses an admin write to anyone else.
 
 ### Cookie data

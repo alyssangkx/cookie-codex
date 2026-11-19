@@ -1,6 +1,6 @@
-// DRAFT - not deployed. In Phase 2 this becomes supabase/functions/parent-api/index.ts (deploy WITH JWT
-// verification, never --no-verify-jwt), only after the owner says "apply". Design: docs/accounts-plan.md
-// section 12. The parent's tool for their OWN children. The admin keeps the `admin` function.
+// NOT YET DEPLOYED. Deploy WITH JWT verification (never --no-verify-jwt), after migration 002, only when the owner
+// says "apply". Design: docs/accounts-plan.md section 12. The parent's tool for their OWN children. The admin keeps
+// the `admin` function.
 //
 // POST /functions/v1/parent-api  { action, ...args }   Authorization: Bearer <parent session access token>
 // Caller rules (the Auth server validates the token; claims are read only after that):
@@ -10,26 +10,32 @@
 //   * if the parent has a VERIFIED TOTP factor, the token must be aal2 (403 mfa_required). Parent 2FA is
 //     optional and enforced once enrolled (section 12.3: the owner may choose "required" instead);
 //   * every action is scoped by parent_id = caller.id; another family's child is a 404;
-//   * a per-parent counter (rate_hit) caps hashing and child changes at 60 per hour (429 slow_down).
+//   * a per-parent counter (rate_hit) caps every action except `me` at 60 per hour (429 slow_down);
+//   * deletes are soft (7-day undo, owner's decision): deleted_at is set, the child's auth user is banned (its
+//     refresh token stops working) and pin-login / push_save refuse it; private.purge_deleted() removes the rows
+//     after 7 days. A parent whose account is marked deleted may only call `me` and `restore_account` (410 deleted).
 //   register             { consent_version }              -> { code }   family row + consent record + role
-//   me                   {}                               -> { code, children: [{ id, name, pin_set_at, created_at }] }
+//   me                   {}                               -> { code, deleted_at, children: [{ id, name, pin_set_at, created_at, deleted_at }] }
 //   create_child         { name, pin }                    -> { child: { id, name } }   409 name_taken|child_limit, 400 weak_pin|name_reserved
 //   rename_child         { child_id, name }               -> { ok: true }
 //   set_pin              { child_id, pin }                -> { ok: true }   voids device tokens; 400 weak_pin
 //   clear_name_lock      { child_id }                     -> { ok: true }
-//   delete_child         { child_id, confirm }            -> { ok: true }   confirm = the child's name
+//   delete_child         { child_id, confirm }            -> { ok: true }   confirm = the child's name; undo for 7 days
+//   restore_child        { child_id }                     -> { ok: true }   409 child_limit
 //   rotate_family_code   {}                               -> { code }       old code stops working at once
-//   delete_account       { confirm }                      -> { ok: true }   confirm = the parent's email; everything is removed
+//   delete_account       { confirm }                      -> { ok: true }   confirm = the parent's email; undo for 7 days
+//   restore_account      {}                               -> { ok: true }
 // Secrets: PIN_PEPPER, CHILD_PW_SECRET, SITE_ORIGIN. Env: CONSENT_VERSION (the current notice id), MAX_FAMILIES unused (DB trigger caps at 500).
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { childPassword, hashPin } from '../_shared/pin.ts';
 import { weakPin } from '../_shared/weakpin.ts';
+import { lockKey, newCode } from '../_shared/family.ts';
 
 const NAME_RE = /^[A-Za-z][A-Za-z -]{0,19}$/;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const CODE_ALPHA = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
 const RESERVED = new Set(['admin', 'test player']);
 const nameKey = (n: string) => n.trim().toLowerCase();
+const BAN = '876000h'; // until the purge deletes the user; 'none' lifts it
 
 const ORIGIN = Deno.env.get('SITE_ORIGIN');
 const CORS: Record<string, string> = {
@@ -47,17 +53,6 @@ function aalOf(token: string): string {
   const pad = '='.repeat((4 - (part.length % 4)) % 4);
   const payload = JSON.parse(atob(part.replace(/-/g, '+').replace(/_/g, '/') + pad));
   return typeof payload?.aal === 'string' ? payload.aal : '';
-}
-
-/** 8 symbols, rejection sampling (no modulo bias). */
-function newCode(): string {
-  let out = '';
-  while (out.length < 8) {
-    for (const b of crypto.getRandomValues(new Uint8Array(16))) {
-      if (b < 248 && out.length < 8) out += CODE_ALPHA[b % 31]; // 248 = 31 * 8
-    }
-  }
-  return out;
 }
 
 Deno.serve(async (req) => {
@@ -89,9 +84,11 @@ Deno.serve(async (req) => {
     if (role === 'parent' && (caller.factors ?? []).some((f) => f.status === 'verified') && aalOf(token) !== 'aal2') {
       throw new Refuse(403, 'mfa_required');
     }
-    const hit = await svc.rpc('rate_hit', { p_key: `parent:${caller.id}`, p_max: 60, p_window: '1 hour' });
-    if (hit.error) throw hit.error;
-    if (hit.data !== true) throw new Refuse(429, 'slow_down');
+    if (body.action !== 'me') {
+      const hit = await svc.rpc('rate_hit', { p_key: `parent:${caller.id}`, p_max: 60, p_window: '1 hour' });
+      if (hit.error) throw hit.error;
+      if (hit.data !== true) throw new Refuse(429, 'slow_down');
+    }
 
     const childId = () => {
       if (typeof body.child_id !== 'string' || !UUID_RE.test(body.child_id)) throw new Refuse(400, 'bad_request');
@@ -109,11 +106,22 @@ Deno.serve(async (req) => {
       if (weakPin(v)) throw new Refuse(400, 'weak_pin');
       return v;
     };
-    const profileOf = async (id: string) => {
-      const r = await svc.from('profiles').select('id, name, role').eq('id', id).eq('parent_id', caller.id).eq('role', 'child').maybeSingle();
+    type Kid = { id: string; name: string; role: 'child'; deleted_at: string | null };
+    const profileOf = async (id: string, deletedOk = false) => {
+      const r = await svc.from('profiles').select('id, name, role, deleted_at').eq('id', id).eq('parent_id', caller.id).eq('role', 'child').maybeSingle();
       if (r.error) throw r.error;
-      if (!r.data) throw new Refuse(404, 'not_found');
-      return r.data as { id: string; name: string; role: 'child' };
+      if (!r.data || (r.data.deleted_at && !deletedOk)) throw new Refuse(404, 'not_found');
+      return r.data as Kid;
+    };
+    const ban = async (id: string, on: boolean) => {
+      const b = await svc.auth.admin.updateUserById(id, { ban_duration: on ? BAN : 'none' });
+      if (b.error) throw b.error;
+    };
+    const activeCount = async () => {
+      const r = await svc.from('profiles').select('id', { count: 'exact', head: true })
+        .eq('parent_id', caller.id).eq('role', 'child').is('deleted_at', null);
+      if (r.error) throw r.error;
+      return r.count ?? 0;
     };
     const setPin = async (id: string, pin: string) => {
       const r = await svc.from('profiles').update({ pin_hash: await hashPin(pin, pepper) }).eq('id', id).select('id');
@@ -126,16 +134,20 @@ Deno.serve(async (req) => {
     };
     const clearLocks = async (name: string) => {
       for (const trusted of [false, true]) {
-        const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: `${caller.id}:${nameKey(name)}`, p_trusted: trusted });
+        const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: lockKey(caller.id, nameKey(name)), p_trusted: trusted });
         if (c.error) throw c.error;
       }
     };
-    const familyCode = async () => {
-      const f = await svc.from('families').select('code').eq('parent_id', caller.id).maybeSingle();
+    const family = async () => {
+      const f = await svc.from('families').select('code, deleted_at').eq('parent_id', caller.id).maybeSingle();
       if (f.error) throw f.error;
       if (!f.data) throw new Refuse(404, 'not_found');
-      return f.data.code as string;
+      return f.data as { code: string; deleted_at: string | null };
     };
+    const familyCode = async () => (await family()).code;
+    if (role === 'parent' && !['me', 'register', 'restore_account'].includes(String(body.action)) && (await family()).deleted_at) {
+      throw new Refuse(410, 'deleted');
+    }
 
     switch (body.action) {
       case 'register': {
@@ -158,16 +170,18 @@ Deno.serve(async (req) => {
         return json({ code });
       }
       case 'me': {
-        const r = await svc.from('profiles').select('id, name, pin_set_at, created_at').eq('parent_id', caller.id).eq('role', 'child').order('created_at');
+        const r = await svc.from('profiles').select('id, name, pin_set_at, created_at, deleted_at').eq('parent_id', caller.id).eq('role', 'child').order('created_at');
         if (r.error) throw r.error;
-        return json({ code: await familyCode(), children: r.data });
+        const f = await family();
+        return json({ code: f.code, deleted_at: f.deleted_at, children: r.data });
       }
       case 'create_child': {
         const name = goodName(body.name);
         const pin = goodPin(body.pin);
-        const dup = await svc.from('profiles').select('id').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle();
+        const dup = await svc.from('profiles').select('id, deleted_at').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle();
         if (dup.error) throw dup.error;
-        if (dup.data) throw new Refuse(409, 'name_taken');
+        if (dup.data) throw new Refuse(409, dup.data.deleted_at ? 'name_deleted' : 'name_taken'); // deleted: restore instead
+        if ((await activeCount()) >= 6) throw new Refuse(409, 'child_limit');
         const created = await svc.auth.admin.createUser({
           email: `new-${crypto.randomUUID()}@children.invalid`, password: crypto.randomUUID() + crypto.randomUUID(), email_confirm: true,
         });
@@ -221,8 +235,19 @@ Deno.serve(async (req) => {
         const p = await profileOf(id);
         if (body.confirm !== p.name) throw new Refuse(400, 'confirm_required');
         await clearLocks(p.name);
-        const del = await svc.auth.admin.deleteUser(id); // profile and save cascade
-        if (del.error) throw del.error;
+        await ban(id, true); // first: if the mark below fails, the child is only locked out, nothing is lost
+        const u = await svc.from('profiles').update({ deleted_at: new Date().toISOString() }).eq('id', id).eq('parent_id', caller.id);
+        if (u.error) throw u.error;
+        return json({ ok: true });
+      }
+      case 'restore_child': {
+        const id = childId();
+        const p = await profileOf(id, true);
+        if (!p.deleted_at) return json({ ok: true });
+        if ((await activeCount()) >= 6) throw new Refuse(409, 'child_limit');
+        const u = await svc.from('profiles').update({ deleted_at: null }).eq('id', id).eq('parent_id', caller.id);
+        if (u.error) throw u.error;
+        await ban(id, false);
         return json({ ok: true });
       }
       case 'rotate_family_code': {
@@ -240,14 +265,19 @@ Deno.serve(async (req) => {
         }
         const kids = await svc.from('profiles').select('id, name').eq('parent_id', caller.id);
         if (kids.error) throw kids.error;
-        // children first (their auth users do not cascade from the parent); a failure stops before the parent goes
-        for (const k of kids.data ?? []) {
-          await clearLocks(k.name);
-          const d = await svc.auth.admin.deleteUser(k.id);
-          if (d.error) throw d.error;
-        }
-        const d = await svc.auth.admin.deleteUser(caller.id); // families cascades
-        if (d.error) throw d.error;
+        // lock every child out first; the family mark is what pin-login and push_save check, so set it last and
+        // a failure part-way leaves an account that still works and a button that can be pressed again
+        for (const k of kids.data ?? []) { await clearLocks(k.name); await ban(k.id, true); }
+        const u = await svc.from('families').update({ deleted_at: new Date().toISOString() }).eq('parent_id', caller.id);
+        if (u.error) throw u.error;
+        return json({ ok: true });
+      }
+      case 'restore_account': {
+        const u = await svc.from('families').update({ deleted_at: null }).eq('parent_id', caller.id);
+        if (u.error) throw u.error;
+        const kids = await svc.from('profiles').select('id').eq('parent_id', caller.id).is('deleted_at', null);
+        if (kids.error) throw kids.error;
+        for (const k of kids.data ?? []) await ban(k.id, false); // a child deleted on its own stays deleted
         return json({ ok: true });
       }
       default:

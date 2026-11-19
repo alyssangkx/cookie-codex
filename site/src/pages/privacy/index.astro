@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+// Version 1 (docs/accounts-plan.md 12.13). A changed notice needs a new CONSENT_VERSION (lib/supabase.ts and the
+// parent-api secret) so parents are asked to agree again.
+const UPDATED = '19 November 2026';
+const CONTACT = 'psleadmin@gmail.com';
+---
+<Base title="Privacy notice: Cookie Codex" description="What Cookie Codex keeps about parents and children, why, and how to change or delete it.">
+  <section class="wrap gu privacy">
+    <h1>Privacy notice</h1>
+    <p>Cookie Codex is a free PSLE revision game run by a parent in Singapore. This notice says what we keep about you and your children, why, and how to have it changed or deleted.</p>
+
+    <h2>What we keep</h2>
+    <ul>
+      <li><b>About you</b> (the parent or guardian): your email address and a password, held by our sign-in service. We use your email only to confirm your account and to reset your password. We never send newsletters or ads.</li>
+      <li><b>About each child you add</b>: a first name or nickname, a 4-digit PIN (stored only in scrambled form, so nobody can read it back), and their game progress: quiz scores, which questions they got wrong and the answer they chose, cards earned, and time played each day.</li>
+      <li>We do <b>not</b> ask for a child's email, birthday, school, photo, phone number or location.</li>
+    </ul>
+
+    <h2>Why</h2>
+    <p>Only so your child's progress is saved and follows them across devices, and so you can see it on the parent page. No analytics, no tracking cookies, no advertising, and nothing is sold or shared with anyone.</p>
+
+    <h2>Where</h2>
+    <p>Your children's names and progress are kept in a database in Singapore run by Supabase. The website is served by Vercel from servers around the world, sign-in emails are sent through Google's Gmail, and the operator keeps a weekly backup copy on their own computer. These services store or deliver the data for us and may not use it for anything else.</p>
+
+    <h2>Who can see it</h2>
+    <p>You, for your own children only. The site's operator can read it to run and fix the service. Other families cannot see your children, and the game never compares children.</p>
+
+    <h2>Your choices</h2>
+    <ul>
+      <li><b>See it:</b> the parent page shows each child's progress, and "Save code" exports a child's full progress. For a copy of everything else we hold (names, account email, sign-in records), email us.</li>
+      <li><b>Correct it:</b> rename a child or change their PIN on the parent page.</li>
+      <li><b>Delete it:</b> "Delete account and all data" on the parent page removes you and every child. You can delete one child the same way. Your children can no longer sign in, and everything is erased after 7 days, and from backup copies within a further 4 weeks. Within those 7 days you can sign in as the parent and restore it.</li>
+      <li><b>Withdraw consent:</b> deleting the account withdraws it.</li>
+    </ul>
+
+    <h2>Keeping it safe</h2>
+    <p>Encrypted connections only, each family can reach only its own records, and nothing in your browser can read other families' data. If data were ever exposed, we would tell affected parents and, where the law requires, the Personal Data Protection Commission.</p>
+
+    <h2>Questions or requests</h2>
+    <p>Email <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. We reply within 30 days.</p>
+
+    <h2>Changes</h2>
+    <p>If this notice changes, you will be asked to read and agree to it again the next time you sign in.</p>
+    <p class="note">Last updated: {UPDATED}. Fan project, not affiliated with Devsisters.</p>
+  </section>
+</Base>

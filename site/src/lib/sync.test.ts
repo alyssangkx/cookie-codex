@@ -7,7 +7,7 @@ Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: {
   removeItem: (k: string) => { mem.delete(k); }, clear: () => mem.clear(), key: (i: number) => [...mem.keys()][i] ?? null,
   get length() { return mem.size; },
 } });
-import { prepareLocal, decideHydrate, hydrateRead, decidePush, resolveConflict, isChildSession, idleExpired } from './sync.ts';
+import { prepareLocal, decideHydrate, hydrateRead, decidePush, cleanServerSave, resolveConflict, isChildSession, idleExpired } from './sync.ts';
 import { jumpClock, resetTier, grantCard, shiftKey } from './testtools.ts';
 import { fresh, finishQuiz, save, load, kv, isDirty, readLocalRaw, replaceLocal, clearDirty } from './store.ts';
 
@@ -170,4 +170,20 @@ test('hydrateRead fetches the save only when the decision needs it, and decides 
   // offline on either read: null
   assert.equal(await hydrateRead(async () => undefined, readFull(null), decide(4)), null);
   assert.equal(await hydrateRead(async () => ({ rev: 5 }), async () => undefined, decide(4)), null);
+});
+
+test('push_save "invalid" stops syncing like "denied"', () => {
+  assert.deepEqual(decidePush([{ status: 'invalid', rev: null, data: null, schema_version: null }], null), { kind: 'denied' });
+});
+
+test('a tampered server save is migrated and cleaned before it is stored; garbage is left for load() to quarantine', () => {
+  const s: any = fresh();
+  s.days['2026-11-19'] = { quizzes: '<img src=x onerror=alert(1)>', min: 30, correct: 9, total: 5 };
+  const c: any = cleanServerSave(JSON.parse(JSON.stringify(s)));
+  assert.deepEqual(c.days['2026-11-19'], { quizzes: 0, min: 30, correct: 5, total: 5 });
+  assert.equal(c.schemaVersion, s.schemaVersion);
+  const old: any = { ...JSON.parse(JSON.stringify(s)), schemaVersion: 3, settings: { ...s.settings, dailyCapMin: 45 } };
+  assert.equal((cleanServerSave(old) as any).settings.dailyCapMin, 120); // the 3->4 step still runs
+  assert.equal(cleanServerSave('junk'), 'junk');
+  assert.deepEqual(cleanServerSave({ questions: 5 }), { questions: 5 });
 });

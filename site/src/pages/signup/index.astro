@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Create a parent account: Cookie Codex" description="Parents create an account to add their children.">
+  <section class="wrap gu">
+    <h1>Create a parent account</h1>
+    <div id="v-form" class="panel">
+      <p class="note">For parents and guardians. You add your children after you confirm your email; they sign in with a family code, their first name and a PIN you choose. We never ask for a child's email, birthday or school.</p>
+      <form id="f-signup" autocomplete="on" novalidate>
+        <label for="email">Your email</label>
+        <input id="email" type="email" autocomplete="email" required />
+        <label for="pw">Password (at least 10 characters)</label>
+        <input id="pw" type="password" autocomplete="new-password" minlength="10" required />
+        <h2 class="consent-h">Before you sign up</h2>
+        <p class="note">We keep your email (to confirm the account and reset your password), and for each child you add: a first name or nickname, a scrambled PIN and their quiz progress. It is stored in Singapore, used only to save progress, and never sold, shared or used for ads. You can delete everything at any time. <a href="/privacy/" target="_blank" rel="noopener">Read the privacy notice</a>.</p>
+        <label class="check"><input id="c1" type="checkbox" /> I am the parent or guardian of the children I will add.</label>
+        <label class="check"><input id="c2" type="checkbox" /> I have read the privacy notice and agree to it.</label>
+        <div id="captcha" class="captcha"></div>
+        <button type="submit" class="btn" id="go">Create account</button>
+      </form>
+      <div class="links"><a href="/grownups/">Already have an account? Sign in</a></div>
+    </div>
+    <div id="v-sent" class="panel" hidden>
+      <h2>Check your email</h2>
+      <p>If the address can be used, we have sent a link to it. Open it on any device to confirm your account. The link works for 1 hour; check the spam folder if it does not arrive.</p>
+    </div>
+    <p id="msg" class="msg" role="alert"></p>
+  </section>
+</Base>
+
+<script>
+  import { supabase } from '../../lib/supabase';
+  import { mountCaptcha, type Captcha } from '../../lib/captcha';
+
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const say = (t: string) => { $('msg').textContent = t; };
+  let captcha: Captcha | null = null;
+  mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => say('The "I am human" check did not load. Reload the page.'));
+
+  $('f-signup').addEventListener('submit', async (e) => {
+    e.preventDefault(); say('');
+    const email = $<HTMLInputElement>('email').value.trim(), pw = $<HTMLInputElement>('pw').value;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Type your email address.'); return; }
+    if (pw.length < 10) { say('The password needs at least 10 characters.'); return; }
+    if (!$<HTMLInputElement>('c1').checked || !$<HTMLInputElement>('c2').checked) { say('Tick both boxes to go on.'); return; }
+    $<HTMLButtonElement>('go').disabled = true;
+    const { error } = await supabase.auth.signUp({
+      email, password: pw,
+      options: { emailRedirectTo: `${location.origin}/signup/verify/`, captchaToken: captcha?.token() },
+    });
+    captcha?.reset();
+    $<HTMLButtonElement>('go').disabled = false;
+    if (error) {
+      say(/captcha/i.test(error.message) ? 'Tick the "I am human" box, then try again.'
+        : /password/i.test(error.message) ? 'Pick a longer or less common password.'
+        : /rate|too many/i.test(error.message) ? 'Too many tries. Wait a few minutes and try again.'
+        : 'That did not work. Check the email address and try again.');
+      return;
+    }
+    $('v-form').hidden = true; $('v-sent').hidden = false;
+  });
+</script>

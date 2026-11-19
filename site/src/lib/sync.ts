@@ -1,7 +1,8 @@
 // Progress sync over store.ts. load()/save() stay synchronous for the pages; this module watches save(),
 // pushes the local save to the server (push_save, compare-and-set on rev) and pulls a newer server copy.
 // The pure decisions are at the top and are tested in sync.test.ts; the rest talks to Supabase and the DOM.
-import { backupLocal, clearDirty, clearLocal, hasProgress, isDirty, kv, readLocalRaw, replaceLocal, restoreDirty, setSaveHook, SCHEMA } from './store.ts';
+import { backupLocal, clearDirty, clearLocal, hasProgress, isDirty, kv, migrate, readLocalRaw, replaceLocal, restoreDirty, setSaveHook, SCHEMA } from './store.ts';
+import { cleanSave } from './cleansave.ts';
 
 // ---------------------------------------------------------------- pure decisions
 
@@ -32,6 +33,7 @@ export type PushOutcome =
   | { kind: 'conflict'; rev: number; data: unknown }
   | { kind: 'denied' }
   | { kind: 'error' };
+// 'invalid' (push_save's shape/size gate, migration 002) is handled like 'denied': stop quietly, never retry-loop.
 
 /** Read the one row push_save returns. Anything unexpected is an error (retry later), never a success. */
 export function decidePush(rows: unknown, error: unknown): PushOutcome {
@@ -40,7 +42,7 @@ export function decidePush(rows: unknown, error: unknown): PushOutcome {
   if (!row || typeof row.status !== 'string') return { kind: 'error' };
   if (row.status === 'ok' && row.rev !== null && row.rev !== undefined) return { kind: 'ok', rev: Number(row.rev) };
   if (row.status === 'conflict' && row.rev !== null && row.rev !== undefined) return { kind: 'conflict', rev: Number(row.rev), data: row.data };
-  if (row.status === 'denied') return { kind: 'denied' };
+  if (row.status === 'denied' || row.status === 'invalid') return { kind: 'denied' };
   return { kind: 'error' };
 }
 
@@ -135,9 +137,20 @@ function schedule(ms = PUSH_DELAY_MS) {
   timer = setTimeout(() => { void push(); }, ms);
 }
 
+/**
+ * A server save was written by some browser, so it is not trusted: bring it to the current schema and clean it
+ * (cleanSave) before it reaches localStorage, so every page reads a well-formed save. A save with no numeric
+ * schemaVersion, or one that cannot migrate, is stored as it came: load() keeps it in ccx:failed:n and starts fresh.
+ */
+export function cleanServerSave(data: unknown): unknown {
+  const v = (data as { schemaVersion?: unknown } | null)?.schemaVersion;
+  if (typeof v !== 'number') return data;
+  try { return cleanSave(migrate(JSON.parse(JSON.stringify(data)))); } catch { return data; }
+}
+
 function adoptServer(id: string, rev: number, data: unknown) {
   backupLocal();
-  replaceLocal(data);
+  replaceLocal(cleanServerSave(data));
   kv.set(revKey(id), String(rev));
   kv.set('sync:owner', id);
 }
@@ -287,6 +300,7 @@ export async function logout() {
   try { await client.auth.signOut({ scope: 'local' }); } catch { /* the local session is cleared regardless */ }
   kv.del('lastSeen');
   kv.del('player-name');
+  kv.del('profile-unlimited');
   kv.set('sync:signedout', '1'); // a logged-out device never gets offline access
   location.href = '/login';
 }

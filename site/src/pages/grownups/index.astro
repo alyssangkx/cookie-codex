@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Grown-ups: Cookie Codex" description="Parents sign in to manage their children's accounts.">
+  <section class="wrap gu">
+    <h1>Grown-ups</h1>
+    <div id="v-signin" class="panel">
+      <h2>Sign in</h2>
+      <form id="f-signin" autocomplete="on">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required />
+        <label for="pw">Password</label>
+        <input id="pw" type="password" autocomplete="current-password" required />
+        <button type="submit" class="btn">Sign in</button>
+      </form>
+      <div class="links"><a href="/signup/">New here? Create a parent account</a><a href="/reset/">Forgot your password?</a></div>
+    </div>
+    <div id="v-code" class="panel" hidden>
+      <h2>Authenticator code</h2>
+      <form id="f-code" autocomplete="off">
+        <label for="code">6-digit code from your authenticator app</label>
+        <input id="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" required />
+        <button type="submit" class="btn">Continue</button>
+      </form>
+    </div>
+    <p id="msg" class="msg" role="alert"></p>
+    <p class="note">Children do not sign in here: they use <a href="/login/">Who's playing?</a> with the family code, their name and PIN. <a href="/privacy/">Privacy</a></p>
+  </section>
+</Base>
+
+<script>
+  import { supabase, touch, roleOf } from '../../lib/supabase';
+  import { isChildSession } from '../../lib/sync';
+
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const say = (t: string) => { $('msg').textContent = t; };
+  let factorId = '';
+
+  // after sign-in: an admin goes to the admin console (it asks for its own code); a parent needs aal2 only once they
+  // enrolled an authenticator; a confirmed account with no role has not finished sign-up (verify page registers it)
+  async function route() {
+    const { data } = await supabase.auth.getSession();
+    const session = data.session;
+    if (!session || isChildSession(session.user)) { $('v-signin').hidden = false; return; }
+    touch();
+    const role = roleOf(session);
+    if (role === 'admin') { location.href = '/admin/'; return; }
+    if (!role) { location.href = '/signup/verify/'; return; }
+    const aal = (await supabase.auth.mfa.getAuthenticatorAssuranceLevel()).data;
+    if (aal?.nextLevel === 'aal2' && aal.currentLevel !== 'aal2') {
+      const fl = await supabase.auth.mfa.listFactors();
+      factorId = fl.data?.totp?.[0]?.id ?? '';
+      $('v-signin').hidden = true; $('v-code').hidden = false; $('code').focus();
+      return;
+    }
+    location.href = '/parent/';
+  }
+
+  $('f-signin').addEventListener('submit', async (e) => {
+    e.preventDefault(); say('');
+    const pw = $<HTMLInputElement>('pw');
+    const { error } = await supabase.auth.signInWithPassword({ email: $<HTMLInputElement>('email').value.trim(), password: pw.value });
+    pw.value = '';
+    if (error) { say(/confirm/i.test(error.message) ? 'Open the link in the email we sent you first.' : 'That email or password is not right.'); return; }
+    await route();
+  });
+  $('f-code').addEventListener('submit', async (e) => {
+    e.preventDefault(); say('');
+    const input = $<HTMLInputElement>('code'), code = input.value.trim(); input.value = '';
+    const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code });
+    if (error) { say('That code did not work. Wait for the next code and try again.'); return; }
+    await route();
+  });
+  void route();
+</script>

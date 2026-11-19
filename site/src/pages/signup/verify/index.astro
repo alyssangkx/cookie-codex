@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+---
+<Base title="Confirming your account: Cookie Codex" description="Finishing your parent account.">
+  <section class="wrap gu">
+    <h1>Your parent account</h1>
+    <div class="panel">
+      <p id="status">Confirming your account…</p>
+      <div id="done" hidden>
+        <p>Your family code is</p>
+        <p class="famcode" id="code"></p>
+        <p class="note">Your children type this code, their name and their PIN to sign in. You can always see it on the parent page.</p>
+        <a class="btn" href="/parent/" style="display:inline-flex;align-items:center;text-decoration:none">Add your first child</a>
+      </div>
+    </div>
+    <p id="msg" class="msg" role="alert"></p>
+  </section>
+</Base>
+
+<script>
+  import { supabase, sessionFromLink, callParentApi, CONSENT_VERSION, roleOf, touch } from '../../../lib/supabase';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  void (async () => {
+    try {
+      const link = await sessionFromLink();
+      if (link.error) { $('status').textContent = 'That link has expired or was already used.'; $('msg').innerHTML = 'Sign in at <a href="/grownups/">Grown-ups</a> to try again.'; return; }
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) { $('status').textContent = 'Please sign in first.'; $('msg').innerHTML = '<a href="/grownups/">Go to Grown-ups</a>'; return; }
+      if (roleOf(data.session) === 'admin') { location.href = '/admin/'; return; }
+      touch();
+      // creates the family (code + consent record) and the parent role; idempotent, so a reload is harmless
+      const r = await callParentApi<{ code: string }>({ action: 'register', consent_version: CONSENT_VERSION });
+      await supabase.auth.refreshSession(); // the new role is in the next token
+      $('code').textContent = `${r.code.slice(0, 4)}-${r.code.slice(4)}`;
+      $('status').textContent = 'Your account is ready.';
+      $('done').hidden = false;
+    } catch (e) {
+      const code = e instanceof Error ? e.message : '';
+      $('status').textContent = code === 'forbidden' ? 'This account cannot be used here.' : code === 'slow_down' ? 'Too many tries. Wait a while and reload.' : "Couldn't finish setting up. Reload the page to try again.";
+    }
+  })();
+</script>

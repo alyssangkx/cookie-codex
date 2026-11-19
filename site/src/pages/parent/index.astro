@@ -18,6 +18,56 @@ const data = {
 
     <p class="note">Signed in as the grown-up. This page shows the progress saved on this device.</p>
 
+    <div id="fam-deleted" class="panel" hidden>
+      <h2>This account is being deleted</h2>
+      <p class="note" id="fam-deleted-note"></p>
+      <button type="button" class="btn" id="fam-restore">Restore my account</button>
+      <p class="err" id="fam-deleted-err" role="alert"></p>
+    </div>
+
+    <section id="family" class="panel" aria-labelledby="h-fam" hidden>
+      <h2 id="h-fam">Your family</h2>
+      <p class="note">Your children sign in at <b>Who's playing?</b> with this family code, their name and their PIN.</p>
+      <p class="famcode" id="fam-code"></p>
+      <div class="row">
+        <button type="button" class="btn" id="fam-copy">Copy code</button>
+        <button type="button" class="btn" id="fam-print">Print</button>
+        <button type="button" class="btn danger" id="fam-rotate">Make a new code</button>
+      </div>
+      <h3>Children</h3>
+      <div id="fam-kids"></div>
+      <h3 id="h-add">Add a child</h3>
+      <form id="fam-add" autocomplete="off" aria-labelledby="h-add">
+        <label for="add-name">First name or nickname (letters only)</label>
+        <input id="add-name" type="text" maxlength="20" autocomplete="off" />
+        <label for="add-pin">4-digit PIN</label>
+        <input id="add-pin" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" />
+        <label for="add-pin2">Type the PIN again</label>
+        <input id="add-pin2" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" />
+        <button type="submit" class="btn">Add child</button>
+      </form>
+      <p class="saved" id="fam-msg" role="status" aria-live="polite"></p>
+      <p class="err" id="fam-err" role="alert"></p>
+      <details class="fam-more">
+        <summary>Sign-in safety and your account</summary>
+        <h3>Authenticator app (optional)</h3>
+        <p class="note" id="mfa-note">Adds a 6-digit code from an app such as Google Authenticator when you sign in.</p>
+        <button type="button" class="btn" id="mfa-start">Add an authenticator app</button>
+        <div id="mfa-box" hidden>
+          <img id="mfa-qr" alt="QR code to scan with the authenticator app" width="180" height="180" />
+          <p class="note">Or type this key: <code id="mfa-secret"></code></p>
+          <label for="mfa-code">Code from the app</label>
+          <input id="mfa-code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" />
+          <button type="button" class="btn" id="mfa-verify">Turn it on</button>
+        </div>
+        <h3>Delete account and all data</h3>
+        <p class="note">Removes you and every child. Your children can no longer sign in; everything is erased after 7 days. Sign in within 7 days to undo. <a href="/privacy/">Privacy notice</a></p>
+        <label for="del-email">Type your email to confirm</label>
+        <input id="del-email" type="email" autocomplete="off" />
+        <button type="button" class="btn danger" id="del-account">Delete account and all data</button>
+      </details>
+    </section>
+
     <noscript><p class="note">This page needs JavaScript to read the saved progress.</p></noscript>
 
     <div id="content" hidden>
@@ -115,13 +165,22 @@ const data = {
   .parent-page .wq-stem { white-space: pre-line; }
   .parent-page .wq-fig { margin: 0.4rem 0; max-width: 22rem; }
   .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
+  .parent-page .btn.danger { background: #fff; color: var(--berry); border: 1.5px solid var(--berry); }
+  .parent-page .famcode { font: 600 2rem var(--font-display); letter-spacing: 0.12em; margin: 0.2rem 0; }
+  .parent-page .kid { border-top: 1px dashed var(--crust); padding: 0.7rem 0; }
+  .parent-page .kid .row { align-items: center; margin-top: 0.3rem; }
+  .parent-page .kid .row input, .parent-page .kid .row .btn { margin-top: 0; }
+  .parent-page input.pin { max-width: 8rem; letter-spacing: 0.3em; }
+  .parent-page .fam-more { margin-top: 1rem; }
+  .parent-page .fam-more > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; }
+  @media print { body * { visibility: hidden; } .parent-page .famcode, .parent-page .famcode * { visibility: visible; } .parent-page .famcode { position: absolute; top: 2rem; left: 2rem; } }
 </style>
 
 <script>
   import { load, save, migrate, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { supabase, callFunction } from '../../lib/supabase';
+  import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
   interface ASub { id: string; name: string; school: string; file: string }
@@ -243,14 +302,18 @@ const data = {
     return q.visual ? `<span class="meta">With a ${esc(q.visual.kind)}: ${esc(q.visual.title)}</span>` : '';
   };
 
-  // Each child's saved progress: the admin function lists the children, and the saves table already lets an admin
-  // read (select only) any child's save under RLS (private.is_admin()). Nothing here writes to another save.
-  async function initWrongPicker() {
+  // Each child's saved progress: the admin function (or parent-api `me` for a parent) lists the children, and RLS
+  // already lets an admin read any save and a parent their own children's saves (select only). Nothing here writes
+  // to another save.
+  async function initWrongPicker(parentKids?: { id: string; name: string }[]) {
     try {
-      const { data } = await supabase.auth.getSession();
-      if (!data.session) return;
-      const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
-      const kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string }[] | null;
+      let kids = parentKids ?? null;
+      if (!kids) {
+        const { data } = await supabase.auth.getSession();
+        if (!data.session) return;
+        const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
+        kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string }[] | null;
+      }
       if (!kids?.length) return;
       $('wrong-who').innerHTML += kids.map((k) => `<option value="${esc(k.id)}">${esc(k.name)}</option>`).join('');
       $('wrong-pick').hidden = false;
@@ -397,16 +460,158 @@ const data = {
     });
   }
 
+
+  // ------------------------------------------------------------ family (parent accounts; parent-api, docs 12.4)
+  type FKid = { id: string; name: string; pin_set_at: string | null; created_at: string; deleted_at: string | null };
+  type Me = { code: string; deleted_at: string | null; children: FKid[] };
+  const ERR: Record<string, string> = {
+    weak_pin: 'That PIN is too easy to guess (like 1234 or 1111). Pick another.',
+    name_taken: 'You already have a child with that name.',
+    name_deleted: 'A child with that name was deleted in the last 7 days. Restore them instead.',
+    name_reserved: 'That name is reserved. Pick another.',
+    child_limit: 'You can have up to 6 children.',
+    confirm_required: 'The confirmation did not match.',
+    slow_down: 'Too many changes in an hour. Try again later.',
+    mfa_required: 'Enter your authenticator code first.',
+    bad_request: 'Check the name (letters, spaces and hyphens, up to 20) and the 4-digit PIN.',
+    not_found: 'That child was not found.', deleted: 'This account is being deleted.',
+  };
+  const famSay = (ok: string, err = '') => { $('fam-msg').textContent = ok; $('fam-err').textContent = err; };
+  const famFail = (e: unknown) => {
+    const code = e instanceof Error ? e.message : '';
+    if (code === 'mfa_required' || code === 'unauthorized') { location.href = '/grownups/'; return; }
+    famSay('', ERR[code] ?? "Can't reach the server, try again.");
+  };
+  const fmtCode = (c: string) => `${c.slice(0, 4)}-${c.slice(4)}`;
+  const purgeDay = (iso: string) => fmtDate(new Date(iso).getTime() + 7 * DAY);
+  const goodPin = (a: string, b: string) => (!/^\d{4}$/.test(a) ? 'The PIN has 4 digits.' : a !== b ? 'The two PINs are different.' : '');
+
+  function kidHtml(k: FKid) {
+    const id = esc(k.id), nm = esc(k.name);
+    if (k.deleted_at) {
+      return `<div class="kid"><b>${nm}</b> <span class="meta">deleted; erased on ${esc(purgeDay(k.deleted_at))}</span>
+        <div class="row"><button type="button" class="btn" data-act="restore" data-id="${id}">Restore ${nm}</button></div></div>`;
+    }
+    return `<div class="kid"><b>${nm}</b> <span class="meta">${k.pin_set_at ? `PIN set ${esc(fmtDate(Date.parse(k.pin_set_at)))}` : 'no PIN yet'}</span>
+      <div class="row"><input class="pin" id="pin-${id}" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" placeholder="New PIN" aria-label="New PIN for ${nm}" />
+        <button type="button" class="btn" data-act="pin" data-id="${id}">Set PIN</button>
+        <button type="button" class="btn" data-act="unlock" data-id="${id}">Clear lock</button></div>
+      <div class="row"><input id="nm-${id}" type="text" maxlength="20" placeholder="New name" aria-label="New name for ${nm}" />
+        <button type="button" class="btn" data-act="rename" data-id="${id}">Rename</button>
+        <button type="button" class="btn danger" data-act="delete" data-id="${id}" data-name="${nm}">Delete</button></div></div>`;
+  }
+
+  let me: Me | null = null;
+  async function refreshFamily() {
+    me = await callParentApi<Me>({ action: 'me' });
+    if (me.deleted_at) {
+      $('family').hidden = true; $('content').hidden = true; $('fam-deleted').hidden = false;
+      $('fam-deleted-note').textContent = `Your children cannot sign in. Everything will be erased on ${purgeDay(me.deleted_at)} unless you restore it.`;
+      return;
+    }
+    $('fam-deleted').hidden = true; $('family').hidden = false;
+    $('fam-code').textContent = fmtCode(me.code);
+    $('fam-kids').innerHTML = me.children.length ? me.children.map(kidHtml).join('') : '<p class="note">No children yet. Add your first child below.</p>';
+  }
+
+  async function initFamily() {
+    $('fam-copy').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(fmtCode(me!.code)); famSay('Copied.'); } catch { famSay('', 'Copy was blocked.'); }
+    });
+    $('fam-print').addEventListener('click', () => window.print());
+    $('fam-rotate').addEventListener('click', async () => {
+      if (!confirm('Make a new family code? The old one stops working at once; your children type the new one next time.')) return;
+      try { await callParentApi({ action: 'rotate_family_code' }); await refreshFamily(); famSay('New code made.'); } catch (e) { famFail(e); }
+    });
+    $('fam-add').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = $<HTMLInputElement>('add-name').value.trim(), a = $<HTMLInputElement>('add-pin').value, b = $<HTMLInputElement>('add-pin2').value;
+      const bad = !name ? 'Type a name.' : goodPin(a, b);
+      if (bad) { famSay('', bad); return; }
+      try {
+        await callParentApi({ action: 'create_child', name, pin: a });
+        for (const id of ['add-name', 'add-pin', 'add-pin2']) $<HTMLInputElement>(id).value = '';
+        await refreshFamily(); famSay(`${name} added. They sign in with code ${fmtCode(me!.code)}, their name and the PIN.`);
+      } catch (err) { famFail(err); }
+    });
+    $('fam-kids').addEventListener('click', async (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-act]');
+      if (!btn) return;
+      const id = btn.dataset.id!, act = btn.dataset.act!;
+      try {
+        if (act === 'pin') {
+          const pin = $<HTMLInputElement>(`pin-${id}`).value;
+          if (!/^\d{4}$/.test(pin)) { famSay('', 'The PIN has 4 digits.'); return; }
+          await callParentApi({ action: 'set_pin', child_id: id, pin }); famSay('PIN changed. Their other devices need the new PIN.');
+        } else if (act === 'unlock') {
+          await callParentApi({ action: 'clear_name_lock', child_id: id }); famSay('Lock cleared.');
+        } else if (act === 'rename') {
+          const name = $<HTMLInputElement>(`nm-${id}`).value.trim();
+          if (!name) { famSay('', 'Type the new name.'); return; }
+          await callParentApi({ action: 'rename_child', child_id: id, name }); famSay('Renamed.');
+        } else if (act === 'delete') {
+          const typed = prompt(`Type ${btn.dataset.name} to delete this child. They cannot sign in from now on; their progress is erased after 7 days unless you restore them.`);
+          if (typed === null) return;
+          await callParentApi({ action: 'delete_child', child_id: id, confirm: typed }); famSay('Deleted. You can restore them for 7 days.');
+        } else if (act === 'restore') {
+          await callParentApi({ action: 'restore_child', child_id: id }); famSay('Restored.');
+        }
+        await refreshFamily();
+      } catch (err) { famFail(err); }
+    });
+    $('del-account').addEventListener('click', async () => {
+      const email = $<HTMLInputElement>('del-email').value;
+      if (!confirm('Delete your account and all your children\'s data? You have 7 days to undo.')) return;
+      try { await callParentApi({ action: 'delete_account', confirm: email }); await refreshFamily(); } catch (e) { famFail(e); }
+    });
+    $('fam-restore').addEventListener('click', async () => {
+      try { await callParentApi({ action: 'restore_account' }); location.reload(); }
+      catch (e) { $('fam-deleted-err').textContent = ERR[e instanceof Error ? e.message : ''] ?? "Can't reach the server, try again."; }
+    });
+    initMfa();
+    await refreshFamily();
+  }
+
+  // optional authenticator for a parent: once a factor is verified, parent-api and the page gate ask for aal2
+  let mfaFactor = '';
+  async function initMfa() {
+    const fl = await supabase.auth.mfa.listFactors();
+    if (fl.data?.totp?.length) { $('mfa-note').textContent = 'An authenticator app is on for this account.'; $('mfa-start').hidden = true; return; }
+    $('mfa-start').addEventListener('click', async () => {
+      for (const f of fl.data?.all ?? []) if (f.factor_type === 'totp' && f.status !== 'verified') await supabase.auth.mfa.unenroll({ factorId: f.id });
+      const en = await supabase.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Authenticator' });
+      if (en.error || !en.data) { famSay('', "Couldn't start the setup. Try again."); return; }
+      mfaFactor = en.data.id;
+      $<HTMLImageElement>('mfa-qr').src = en.data.totp.qr_code;
+      $('mfa-secret').textContent = en.data.totp.secret;
+      $('mfa-box').hidden = false; $('mfa-start').hidden = true; $('mfa-code').focus();
+    });
+    $('mfa-verify').addEventListener('click', async () => {
+      const input = $<HTMLInputElement>('mfa-code'), code = input.value.trim(); input.value = '';
+      const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: mfaFactor, code });
+      if (error) { famSay('', 'That code did not work. Wait for the next code and try again.'); return; }
+      $('mfa-box').hidden = true; $('mfa-note').textContent = 'An authenticator app is on for this account.'; famSay('Authenticator app turned on.');
+    });
+  }
+
   // ------------------------------------------------------------ start
   let started = false;
-  function start() {
-    $('content').hidden = false;
+  async function start() {
     if (started) return;
     started = true;
+    // the page is gated (Base.astro): an admin at aal2, or a parent (aal2 once they enrolled an authenticator)
+    const { data } = await supabase.auth.getSession();
+    const isParent = roleOf(data.session) === 'parent';
+    if (isParent) {
+      try { await initFamily(); } catch (e) { famFail(e); $('family').hidden = false; }
+      if (me?.deleted_at) return;
+    }
+    $('content').hidden = false;
     s = cleanSave(load());
-    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); void initWrongPicker();
+    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
+    void initWrongPicker(isParent ? me?.children.filter((k) => !k.deleted_at) ?? [] : undefined);
     initSettings(); initBackup();
   }
 
-  start(); // the page itself is gated by the admin session (Base.astro); the old PIN screen is gone
+  void start();
 </script>
