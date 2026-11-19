@@ -22,8 +22,8 @@ TILE, COLS, PER_SHEET = (420, 300), 3, 12
 MAX_KEY, MAX_PG, TEXT_CAP = 4, 6, 420
 
 
-def taxonomy(subject):
-    """-> (text, subtopic ids, pattern ids)."""
+def taxonomy(subject, outcomes=False):
+    """-> (text, subtopic ids, pattern ids). outcomes=True lists each sub-topic's syllabus outcomes under it."""
     s = SYL[subject]
     syl = json.loads((ROOT / f"site/src/data/syllabus/{s}.json").read_text())
     pat = json.loads((ROOT / f"scripts/quiz/{s}/patterns.json").read_text())["patterns"]
@@ -32,6 +32,7 @@ def taxonomy(subject):
         for t in st["topics"]:
             for sb in t.get("subtopics", []):
                 subs.add(sb["id"]); out.append(f"{sb['id']}  {sb['name']}  [{t['name']}]")
+                out += [f"    - {o['text']}" for o in sb.get("outcomes", []) if outcomes]
     out.append(f"\n# {subject}: question-type pattern ids (pick one or null)")
     for p in pat:
         pats.add(p["id"])

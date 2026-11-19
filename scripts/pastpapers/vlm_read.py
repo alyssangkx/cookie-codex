@@ -67,13 +67,22 @@ def parse(raw):
     return None
 
 
+def parse_ans(raw):
+    """Answer-page reply: the object asked for, or a bare [...] list of answers (the 32B often drops the wrapper)."""
+    d = parse(raw)
+    if isinstance(d, dict): return {"kind": "answers", **d}
+    m = re.search(r"\[.*\]", raw, re.S)
+    d = parse('{"answers": ' + m.group(0) + '}') if m else None
+    return {"kind": "answers", **d} if isinstance(d, dict) else None
+
+
 def repair(folder):
-    """Re-parse saved pages that failed (after a parser fix). -> number fixed."""
-    n = 0
+    """Re-parse saved pages that failed (after a parser fix). An ans* folder uses the answer parser. -> number fixed."""
+    n, fn = 0, parse_ans if Path(folder).name.startswith("ans") else parse
     for f in Path(folder).glob("p*.json"):
         d = json.loads(f.read_text())
-        if "error" in d and isinstance(parse(d.get("raw", "")), dict):
-            f.write_text(json.dumps({"page": d["page"], **parse(d["raw"])}, ensure_ascii=False)); n += 1
+        if "error" in d and isinstance(fn(d.get("raw", "")), dict):
+            f.write_text(json.dumps({"page": d["page"], **fn(d["raw"])}, ensure_ascii=False)); n += 1
     return n
 
 
@@ -126,8 +135,7 @@ def main():
         outs = llm.chat(msgs, sp, use_tqdm=False)
         for (_, _, vdir, p), o in zip(chunk, outs):
             raw = o.outputs[0].text
-            d = parse(raw)
-            if isinstance(d, dict) and a.page_list: d = {"kind": "answers", **d}
+            d = parse_ans(raw) if a.page_list else parse(raw)
             rec = {"page": p, **d} if isinstance(d, dict) else {"page": p, "error": "unparsed", "raw": raw[:4000]}
             (vdir / f"p{p:04d}.json").write_text(json.dumps(rec, ensure_ascii=False))
         print(f"done {i + len(chunk)}/{len(todo)}", flush=True)
@@ -139,6 +147,9 @@ if __name__ == "__main__":
         assert parse(r'{"t": "\(\frac{1}{2} \times 3 \neq \theta\)"}')["t"] == r"\(\frac{1}{2} \times 3 \neq \theta\)"
         assert parse(r'{"t": "\(x\) apples.\nHow many?"}')["t"] == "\\(x\\) apples.\nHow many?"
         assert parse(r'{"t": "Express \(3\\frac{1}{50}\) as a decimal"}')["t"] == r"Express \(3\frac{1}{50}\) as a decimal"
+        # answer pages: a bare list (wrapper dropped, code fences) is still read
+        assert len(parse_ans('```json\n[{"qno": "17", "sub": "a", "answer": "x"}, {"qno": "18", "answer": "y"}]\n```')["answers"]) == 2
+        assert parse_ans("no json") is None
         print("vlm_read selftest ok"); sys.exit()
     if sys.argv[1:2] == ["repair"]:
         print(sum(repair(d) for d in sys.argv[2:]), "pages repaired"); sys.exit()

@@ -1,12 +1,14 @@
 """Tag merged past-paper questions with a local text LLM (vLLM, Qwen2.5-72B-Instruct-AWQ), no Claude tokens.
 
   tag_llm.py --sets science:2024,chinese:2026        -> PP_ROOT/<subject>/<year>/tags72.jsonl (resumes by id)
-  tag_llm.py compare <tags72.jsonl> <stepB.jsonl>     -> sub-topic and pattern agreement on shared ids
+  tag_llm.py compare <tags72.jsonl> [<gold.jsonl>]    -> sub-topic agreement with the checked key (exit 3 below the gate)
   tag_llm.py selftest
 
 Record: {id, st, pat, method, difficulty 1-3, ans_check, conf, flags}. st/pat must be ids from the subject's taxonomy
 (packet.taxonomy); an invalid answer is asked again once, then kept with st null and flag "invalid".
-Few-shot examples come from the Science 2024 Haiku step B file at run time (outside the repo), for Science only."""
+Gold key (outside the repo): PP_ROOT/gold/science-2024-gold.jsonl, {id, st, ok: [acceptable ids], use: example|eval},
+from a blind Sonnet tagging of 110 Science 2024 questions, adjudicated against the Haiku step B and first 72B tags.
+"example" rows are the few-shot examples (Science only); "eval" rows are the gate."""
 import argparse, json, os, sys
 from pathlib import Path
 
@@ -16,13 +18,15 @@ from packet import taxonomy  # noqa: E402
 
 PP = Path(os.environ.get("PP_ROOT", "/data/alvin/tmp/cookie-codex/pastpapers"))
 MODEL = os.environ.get("PP_MODEL", "Qwen/Qwen2.5-72B-Instruct-AWQ")
-GATE = 0.8  # owner's gate: the full run starts only if sub-topic agreement with Haiku step B is at least 80%
-HAIKU = PP / "stepB-2024" / "science-2024-stepB.jsonl"
+GATE = 0.8  # owner's gate: the full run starts only if at least 80% of the gold eval rows get an acceptable sub-topic
+GOLD = PP / "gold" / "science-2024-gold.jsonl"
 SYSTEM = ("You are an experienced Singapore primary school {subject} teacher who classifies PSLE prelim exam questions "
           "against the P6 syllabus. Reply with one JSON object only, no code fences.")
 TASK = """{tax}
 Classify the question below.
-- st: exactly one sub-topic id from the list above: the main thing the question tests.
+- st: exactly one sub-topic id from the list above: the idea the marks reward, i.e. what the correct answer has to know
+  or explain. The setting is not the topic: a garden question whose answer is about evaporation is a water question,
+  not a plants question. An experiment question (fair test, variable, aim, conclusion) gets the concept it investigates.
 - pat: one question-type pattern id from the list, or null if none fits.
 - method: the method or skill a strong pupil uses, at most 8 words (e.g. "model drawing, before-after", "claim-evidence-reasoning", "subject-verb agreement", "inference from context").
 - difficulty: 1 easy, 2 medium, 3 hard, for a P6 pupil.
@@ -41,18 +45,16 @@ def show(q):
 
 
 def examples(subject):
-    """-> (prompt text, ids used). 3 Haiku-tagged Science 2024 questions with different sub-topics."""
+    """-> prompt text: the gold "example" rows (Science only), each with its question."""
     merged = PP / "science" / "2024" / "merged.jsonl"
-    if subject != "science" or not HAIKU.exists() or not merged.exists(): return "", set()
-    text = {r["id"]: r for r in map(json.loads, open(merged)) if r.get("text")}
-    out, ids, seen = [], set(), set()
-    for h in map(json.loads, open(HAIKU)):
-        q = text.get(h.get("id"))
-        if not q or h.get("subtopic") in seen or len(out) == 3: continue
-        seen.add(h["subtopic"]); ids.add(h["id"])
-        out.append(f"Example\n{show(q)}\nJSON: " + json.dumps({"st": h["subtopic"], "pat": h.get("pattern"), "method": "...",
-                                                             "difficulty": 2, "ans_check": None, "conf": 0.9}))
-    return "\n\n".join(out) + "\n\nNow the real question.\n", ids
+    if subject != "science" or not GOLD.exists() or not merged.exists(): return ""
+    rows = [g for g in map(json.loads, open(GOLD)) if g["use"] == "example"]
+    want = {g["id"] for g in rows}
+    text = {r["id"]: r for r in map(json.loads, open(merged)) if r["id"] in want}
+    out = [f"Example\n{show(text[g['id']])}\nJSON: " + json.dumps({"st": g["st"], "pat": None, "method": "...", "difficulty": 2,
+                                                                  "ans_check": None, "conf": 0.9})
+           for g in rows if g["id"] in text]
+    return "\n\n".join(out) + "\n\nNow the real question.\n" if out else ""
 
 
 def check(rec, subs, pats):
@@ -69,13 +71,13 @@ def check(rec, subs, pats):
 
 def run(sets, batch, tp):
     from vllm import LLM, SamplingParams
-    llm = LLM(model=MODEL, tensor_parallel_size=tp, gpu_memory_utilization=0.9, max_model_len=12288,
+    llm = LLM(model=MODEL, tensor_parallel_size=tp, gpu_memory_utilization=0.9, max_model_len=16384,
               enable_prefix_caching=True, max_num_seqs=64)
     sp = SamplingParams(temperature=0, max_tokens=200)
     for subject, year in sets:
         base = PP / subject / str(year)
-        tax, subs, pats = taxonomy(subject)
-        ex, _ = examples(subject)
+        tax, subs, pats = taxonomy(subject, outcomes=True)
+        ex = examples(subject)
         out = base / "tags72.jsonl"
         done = {json.loads(l)["id"] for l in open(out)} if out.exists() else set()
         todo = [q for q in map(json.loads, open(base / "merged.jsonl")) if q["id"] not in done]
@@ -104,17 +106,19 @@ def run(sets, batch, tp):
             print(f"done {i + len(chunk)}/{len(todo)}", flush=True)
 
 
-def compare(tags, haiku):
-    _, used = examples("science")
-    t = {r["id"]: r for r in map(json.loads, open(tags))}
-    h = {r["id"]: r for r in map(json.loads, open(haiku)) if r.get("id") in t and r["id"] not in used}
-    st = sum(t[i]["st"] == r.get("subtopic") for i, r in h.items())
-    pat = [(t[i]["pat"], r.get("pattern")) for i, r in h.items() if r.get("pattern")]
-    print(f"shared ids {len(h)} (3 example ids left out) | sub-topic agree {st}/{len(h)} = {100 * st / max(len(h), 1):.0f}% | "
-          f"pattern agree {sum(a == b for a, b in pat)}/{len(pat)}")
-    for i, r in [(i, r) for i, r in h.items() if t[i]["st"] != r.get("subtopic")][:30]:
-        print(f"{i} | haiku {r.get('subtopic')} | 72b {t[i]['st']} (conf {t[i].get('conf')})")
-    return st >= GATE * len(h) and len(h) >= 100
+def score(tags, gold):
+    """-> (eval rows scored, acceptable, exact, misses [(id, gold st, tag st)])."""
+    g = [r for r in gold if r["use"] == "eval" and r["id"] in tags]
+    miss = [(r["id"], r["st"], tags[r["id"]]) for r in g if tags[r["id"]] not in r["ok"]]
+    return len(g), len(g) - len(miss), sum(tags[r["id"]] == r["st"] for r in g), miss
+
+
+def compare(tags, gold=GOLD):
+    t = {r["id"]: r["st"] for r in map(json.loads, open(tags))}
+    n, ok, exact, miss = score(t, [json.loads(l) for l in open(gold)])
+    print(f"gold eval rows {n} | acceptable sub-topic {ok}/{n} = {100 * ok / max(n, 1):.0f}% | exact {exact}/{n} | gate {GATE:.0%}")
+    for i, want, got in miss: print(f"{i} | gold {want} | 72b {got}")
+    return n >= 80 and ok >= GATE * n
 
 
 def selftest():
@@ -125,8 +129,11 @@ def selftest():
     assert check("text", subs, pats) == "not a JSON object"
     assert check({"st": ["s1", "s2"], "pat": None, "difficulty": 2, "conf": 1}, subs, pats) == "st must be one id string"
     q = {"format": "mcq", "marks": 2, "section": "Booklet A", "text": "Which is a mammal?", "options": ["(1) a", "(2) b"], "answer": "2"}
-    p = TASK.format(tax=taxonomy("science")[0], examples="", question=show(q))
-    assert "Options: (1) a | (2) b" in p and "Given answer: 2" in p and "sci-pat-" in p
+    p = TASK.format(tax=taxonomy("science", outcomes=True)[0], examples="", question=show(q))
+    assert "Options: (1) a | (2) b" in p and "Given answer: 2" in p and "sci-pat-" in p and "    - " in p
+    gold = [{"id": "a", "st": "s1", "ok": ["s1", "s2"], "use": "eval"}, {"id": "b", "st": "s1", "ok": ["s1"], "use": "eval"},
+            {"id": "c", "st": "s3", "ok": ["s3"], "use": "example"}]
+    assert score({"a": "s2", "b": "s2", "c": "x"}, gold) == (2, 1, 0, [("b", "s1", "s2")])
     print("tag_llm selftest ok")
 
 
