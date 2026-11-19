@@ -532,7 +532,7 @@ def _(p):
     return F(next(E for E in range(0, p["M"]) if (p["M"] - E) * (1 - f) + E == p["M2"]))
 
 
-@template(T, "intermediate", LM_ML, LM_COMPOUND)
+@template(T, "intermediate", LM_ML, LM_COMPOUND, calc=True)
 def cups_from_jug(r):
     z = r.choice([150, 200, 250, 300, 350, 120])
     a = r.randint(2, 6)
@@ -594,7 +594,7 @@ def _(p):
     return F(left)
 
 
-@template(T, "competent", LM_COMPOUND)
+@template(T, "competent", LM_COMPOUND, calc=True)
 def rope_cut_pieces(r):
     L = r.randint(6, 12)
     n, p_ = r.randint(2, 4), r.choice([60, 75, 85, 95, 110])

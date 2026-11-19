@@ -14,6 +14,7 @@ export interface BankQ {
   explain: ({ tag: string; why: string } | null)[]; solution: string[];
   group?: string; seq?: number; // passage sets: questions sharing one passage
   visual?: Visual; // English visual text (poster, notice...) drawn as a card above the stem
+  calc?: false; // Math only: false = no calculator (PSLE Paper 1 style); absent = a calculator is allowed or n/a
 }
 /** Inline SVG (code-made, currentColor) or Science line art with HTML labels placed at x/y percent of the image. */
 export type Figure = string | { img: string; alt: string; labels?: { x: number; y: number; text: string }[] };
@@ -35,6 +36,7 @@ export const banks = Object.values(files).map((f) => ({
     ...(q.figure ? { figure: q.figure } : {}),
     ...(q.visual ? { visual: q.visual } : {}),
     ...(q.group ? { group: q.group, seq: q.seq } : {}), // passage sets (cloze, reading)
+    ...(q.calc === false ? { calc: false } : {}), // Math Paper 1 style: no calculator (shown as a badge)
   })) as BankQ[],
 }));
 

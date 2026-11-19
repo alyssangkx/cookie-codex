@@ -1399,7 +1399,7 @@ def _(p):
     return F(p["l"] * p["w"] * p["d"], 1000)
 
 
-@template(T, "intermediate", VC7, VC9)
+@template(T, "intermediate", VC7, VC9, calc=True)
 def find_dimension(r):
     """math-pat-volume-cube-cuboid-direct"""
     l, w, h = r.randint(4, 15), r.randint(3, 12), r.randint(3, 12)
@@ -1865,7 +1865,7 @@ def _(p):
     return pi * F(2 * p["r"]) ** 2 / 4
 
 
-@template(T, "basic", CI1)
+@template(T, "basic", CI1, calc=True)
 def radius_from_circumference(r):
     pi, ps = pick_pi(r)
     d = r.choice(lens_for(ps, half=True))
@@ -1890,7 +1890,7 @@ def _(p):
     return d / 2 if p["ask"] == "radius" else d
 
 
-@template(T, "basic", CI1)
+@template(T, "basic", CI1, calc=True)
 def radius_from_area(r):
     pi, ps = pick_pi(r)
     rad = r.choice(lens_for(ps))
@@ -2330,7 +2330,7 @@ def _(p):
     return (pi * 2 * p["s"] / 4) * 2
 
 
-@template(T, "competent", CI3)
+@template(T, "competent", CI3, calc=True)
 def semis_area(r):
     """math-pat-circle-area-composite-shaded"""
     pi, ps = pick_pi(r)
@@ -2367,7 +2367,7 @@ def _(p):
     return pi * (a * b) / 4
 
 
-@template(T, "competent", CI1, CI3)
+@template(T, "competent", CI1, CI3, calc=True)
 def wheel_revolutions(r):
     """math-pat-circumference-in-context"""
     ps = "22/7"

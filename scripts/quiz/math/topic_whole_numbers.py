@@ -778,7 +778,7 @@ def _(p):
     return F(left)
 
 
-@template(T, "intermediate", OPS + "12", OPS + "16")
+@template(T, "intermediate", OPS + "12", OPS + "16", calc=True)
 def buses_needed(r):
     seats = r.randint(25, 55)
     people = r.randint(100, 900)
@@ -804,7 +804,7 @@ def _(p):
     return F(k)
 
 
-@template(T, "intermediate", OPS + "16", OPS + "15")
+@template(T, "intermediate", OPS + "16", OPS + "15", calc=True)
 def cutting_pieces(r):
     """math-pat-cutting-pieces-no-joining"""
     L = r.randint(7, 19)
@@ -1027,7 +1027,7 @@ def _(p):
     return F(a + p["g"])
 
 
-@template(T, "competent", OPS + "15", OPS + "19")
+@template(T, "competent", OPS + "15", OPS + "19", calc=True)
 def two_prices_difference(r):
     """math-pat-two-quantities-two-prices-difference"""
     x = r.choice(NAMES)
@@ -1124,7 +1124,7 @@ def _(p):
     return F(next(k for k in range(p["N"] + 1) if p["a"] * k + p["b"] * (p["N"] - k) == p["L"]))
 
 
-@template(T, "competent", OPS + "15", OPS + "19")
+@template(T, "competent", OPS + "15", OPS + "19", calc=True)
 def set_cost(r):
     """math-pat-grouping-as-a-set"""
     nm = r.choice(NAMES)
@@ -1339,7 +1339,7 @@ def _(p):
     return F(brute(lambda n: n % p["a"] == 0 and n % p["b"] == 0, 1, 2000))
 
 
-@template(T, "intermediate", FM + "05", FM + "04")
+@template(T, "intermediate", FM + "05", FM + "04", calc=True)
 def multiples_below_limit(r):
     """math-pat-multiples-factors-direct"""
     mode = r.choice(["largest_below", "smallest_above", "common_below"])

@@ -46,7 +46,8 @@
    "params": {
     "p": 30,
     "W": 260
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-14fe802227",
@@ -92,7 +93,8 @@
    "params": {
     "s": 30,
     "t": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-5759ccff53",
@@ -138,7 +140,8 @@
    "params": {
     "price": 140,
     "d": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-e6359334a8",
@@ -183,7 +186,8 @@
    ],
    "params": {
     "price": 130
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-4993bc7773",
@@ -230,7 +234,8 @@
    "params": {
     "p": 5,
     "v": 70
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-c572370aec",
@@ -276,7 +281,8 @@
    "params": {
     "old": 40,
     "new": 48
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-00bb820b2e",
@@ -323,6 +329,7 @@
     "ask": 8,
     "total": 40
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 224 146\" role=\"img\" aria-label=\"Grid of 40 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,8.0 164.0,8.0 164.0,34.0 138.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,8.0 190.0,8.0 190.0,34.0 164.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,8.0 216.0,8.0 216.0,34.0 190.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,34.0 164.0,34.0 164.0,60.0 138.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,34.0 190.0,34.0 190.0,60.0 164.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,34.0 216.0,34.0 216.0,60.0 190.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,60.0 164.0,60.0 164.0,86.0 138.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,60.0 190.0,60.0 190.0,86.0 164.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,60.0 216.0,60.0 216.0,86.0 190.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,86.0 164.0,86.0 164.0,112.0 138.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,86.0 190.0,86.0 190.0,112.0 164.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,86.0 216.0,86.0 216.0,112.0 190.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,112.0 164.0,112.0 164.0,138.0 138.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,112.0 190.0,112.0 190.0,138.0 164.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,112.0 216.0,112.0 216.0,138.0 190.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -369,7 +376,8 @@
    "params": {
     "p": 75,
     "W": 120
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-f2526d5de2",
@@ -415,7 +423,8 @@
    "params": {
     "s": 11,
     "t": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-8d514868fc",
@@ -461,7 +470,8 @@
    "params": {
     "price": 500,
     "d": 15
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-01e129432b",
@@ -506,7 +516,8 @@
    ],
    "params": {
     "price": 220
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-0dd13e9987",
@@ -553,7 +564,8 @@
    "params": {
     "p": 10,
     "v": 14
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2fb9308c29",
@@ -599,7 +611,8 @@
    "params": {
     "old": 200,
     "new": 349
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-3e6e51d2ee",
@@ -646,6 +659,7 @@
     "ask": 8,
     "total": 50
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 276 146\" role=\"img\" aria-label=\"Grid of 50 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,8.0 164.0,8.0 164.0,34.0 138.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,8.0 190.0,8.0 190.0,34.0 164.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,8.0 216.0,8.0 216.0,34.0 190.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,8.0 242.0,8.0 242.0,34.0 216.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,8.0 268.0,8.0 268.0,34.0 242.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,34.0 164.0,34.0 164.0,60.0 138.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,34.0 190.0,34.0 190.0,60.0 164.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,34.0 216.0,34.0 216.0,60.0 190.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,34.0 242.0,34.0 242.0,60.0 216.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,34.0 268.0,34.0 268.0,60.0 242.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,60.0 164.0,60.0 164.0,86.0 138.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,60.0 190.0,60.0 190.0,86.0 164.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,60.0 216.0,60.0 216.0,86.0 190.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,60.0 242.0,60.0 242.0,86.0 216.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,60.0 268.0,60.0 268.0,86.0 242.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,86.0 164.0,86.0 164.0,112.0 138.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,86.0 190.0,86.0 190.0,112.0 164.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,86.0 216.0,86.0 216.0,112.0 190.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,86.0 242.0,86.0 242.0,112.0 216.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,86.0 268.0,86.0 268.0,112.0 242.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,112.0 164.0,112.0 164.0,138.0 138.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,112.0 190.0,112.0 190.0,138.0 164.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,112.0 216.0,112.0 216.0,138.0 190.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,112.0 242.0,112.0 242.0,138.0 216.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,112.0 268.0,112.0 268.0,138.0 242.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -692,7 +706,8 @@
    "params": {
     "p": 15,
     "W": 220
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-f0bc8703f8",
@@ -738,7 +753,8 @@
    "params": {
     "s": 25,
     "t": 250
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-638d0a502d",
@@ -784,7 +800,8 @@
    "params": {
     "price": 200,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-990a6a072d",
@@ -829,7 +846,8 @@
    ],
    "params": {
     "price": 250
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-67efc11803",
@@ -876,7 +894,8 @@
    "params": {
     "p": 50,
     "v": 13
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-1a6efad30c",
@@ -922,7 +941,8 @@
    "params": {
     "old": 200,
     "new": 353
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-ad0e30aaad",
@@ -969,6 +989,7 @@
     "ask": 16,
     "total": 20
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 146 120\" role=\"img\" aria-label=\"Grid of 20 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -1015,7 +1036,8 @@
    "params": {
     "p": 30,
     "W": 660
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2465ca550e",
@@ -1061,7 +1083,8 @@
    "params": {
     "s": 20,
     "t": 250
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-44c78681e9",
@@ -1107,7 +1130,8 @@
    "params": {
     "price": 440,
     "d": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-d9757fad75",
@@ -1152,7 +1176,8 @@
    ],
    "params": {
     "price": 360
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-a1869bc84d",
@@ -1199,7 +1224,8 @@
    "params": {
     "p": 20,
     "v": 34
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-0a9c68525c",
@@ -1245,7 +1271,8 @@
    "params": {
     "old": 200,
     "new": 210
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-30ad2f03ae",
@@ -1292,6 +1319,7 @@
     "ask": 21,
     "total": 50
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 276 146\" role=\"img\" aria-label=\"Grid of 50 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,8.0 164.0,8.0 164.0,34.0 138.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,8.0 190.0,8.0 190.0,34.0 164.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,8.0 216.0,8.0 216.0,34.0 190.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,8.0 242.0,8.0 242.0,34.0 216.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,8.0 268.0,8.0 268.0,34.0 242.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,34.0 164.0,34.0 164.0,60.0 138.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,34.0 190.0,34.0 190.0,60.0 164.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,34.0 216.0,34.0 216.0,60.0 190.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,34.0 242.0,34.0 242.0,60.0 216.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,34.0 268.0,34.0 268.0,60.0 242.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,60.0 164.0,60.0 164.0,86.0 138.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,60.0 190.0,60.0 190.0,86.0 164.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,60.0 216.0,60.0 216.0,86.0 190.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,60.0 242.0,60.0 242.0,86.0 216.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,60.0 268.0,60.0 268.0,86.0 242.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,86.0 164.0,86.0 164.0,112.0 138.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,86.0 190.0,86.0 190.0,112.0 164.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,86.0 216.0,86.0 216.0,112.0 190.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,86.0 242.0,86.0 242.0,112.0 216.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,86.0 268.0,86.0 268.0,112.0 242.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,112.0 164.0,112.0 164.0,138.0 138.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,112.0 190.0,112.0 190.0,138.0 164.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,112.0 216.0,112.0 216.0,138.0 190.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"216.0,112.0 242.0,112.0 242.0,138.0 216.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"242.0,112.0 268.0,112.0 268.0,138.0 242.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -1338,7 +1366,8 @@
    "params": {
     "p": 25,
     "W": 860
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-4ee09be16f",
@@ -1384,7 +1413,8 @@
    "params": {
     "s": 37,
     "t": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-85fe79a303",
@@ -1430,7 +1460,8 @@
    "params": {
     "price": 40,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-ce80aed4ec",
@@ -1475,7 +1506,8 @@
    ],
    "params": {
     "price": 120
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2810b041aa",
@@ -1522,7 +1554,8 @@
    "params": {
     "p": 25,
     "v": 26
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-071d040493",
@@ -1568,7 +1601,8 @@
    "params": {
     "old": 25,
     "new": 46
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-13efe7dc93",
@@ -1615,6 +1649,7 @@
     "ask": 10,
     "total": 25
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 146 146\" role=\"img\" aria-label=\"Grid of 25 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -1661,7 +1696,8 @@
    "params": {
     "p": 40,
     "W": 560
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-134fc5b9b8",
@@ -1707,7 +1743,8 @@
    "params": {
     "s": 19,
     "t": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-8c14fc78ce",
@@ -1753,7 +1790,8 @@
    "params": {
     "price": 40,
     "d": 15
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-7731cfd939",
@@ -1798,7 +1836,8 @@
    ],
    "params": {
     "price": 390
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-7f761f48c0",
@@ -1845,7 +1884,8 @@
    "params": {
     "p": 5,
     "v": 80
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-21973943dd",
@@ -1891,7 +1931,8 @@
    "params": {
     "old": 50,
     "new": 81
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-364c47fd0e",
@@ -1938,6 +1979,7 @@
     "ask": 9,
     "total": 40
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 224 146\" role=\"img\" aria-label=\"Grid of 40 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,8.0 164.0,8.0 164.0,34.0 138.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,8.0 190.0,8.0 190.0,34.0 164.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,8.0 216.0,8.0 216.0,34.0 190.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,34.0 164.0,34.0 164.0,60.0 138.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,34.0 190.0,34.0 190.0,60.0 164.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,34.0 216.0,34.0 216.0,60.0 190.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,60.0 164.0,60.0 164.0,86.0 138.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,60.0 190.0,60.0 190.0,86.0 164.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,60.0 216.0,60.0 216.0,86.0 190.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,86.0 164.0,86.0 164.0,112.0 138.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,86.0 190.0,86.0 190.0,112.0 164.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,86.0 216.0,86.0 216.0,112.0 190.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"138.0,112.0 164.0,112.0 164.0,138.0 138.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"164.0,112.0 190.0,112.0 190.0,138.0 164.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"190.0,112.0 216.0,112.0 216.0,138.0 190.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -1984,7 +2026,8 @@
    "params": {
     "p": 25,
     "W": 720
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-bd152119b9",
@@ -2030,7 +2073,8 @@
    "params": {
     "s": 17,
     "t": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-303d456981",
@@ -2076,7 +2120,8 @@
    "params": {
     "price": 180,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-1235dbe70c",
@@ -2121,7 +2166,8 @@
    ],
    "params": {
     "price": 190
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-10f23f8c6d",
@@ -2168,7 +2214,8 @@
    "params": {
     "p": 5,
     "v": 38
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-053a1622b0",
@@ -2214,7 +2261,8 @@
    "params": {
     "old": 200,
     "new": 325
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-8fad55a83a",
@@ -2261,6 +2309,7 @@
     "ask": 6,
     "total": 20
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 146 120\" role=\"img\" aria-label=\"Grid of 20 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -2307,7 +2356,8 @@
    "params": {
     "p": 5,
     "W": 480
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2849045877",
@@ -2353,7 +2403,8 @@
    "params": {
     "s": 3,
     "t": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-f44a723818",
@@ -2399,7 +2450,8 @@
    "params": {
     "price": 600,
     "d": 5
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-48c854a04d",
@@ -2444,7 +2496,8 @@
    ],
    "params": {
     "price": 70
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-935a2edc74",
@@ -2491,7 +2544,8 @@
    "params": {
     "p": 50,
     "v": 28
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-606cf782c2",
@@ -2537,7 +2591,8 @@
    "params": {
     "old": 40,
     "new": 73
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-a1b9204cc4",
@@ -2584,6 +2639,7 @@
     "ask": 17,
     "total": 25
    },
+   "calc": false,
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 146 146\" role=\"img\" aria-label=\"Grid of 25 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
@@ -2630,7 +2686,8 @@
    "params": {
     "p": 5,
     "W": 580
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-1e534451a2",
@@ -2676,7 +2733,8 @@
    "params": {
     "s": 3,
     "t": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-0f7cd3552b",
@@ -2722,7 +2780,8 @@
    "params": {
     "price": 360,
     "d": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-58bd250daf",
@@ -2767,7 +2826,8 @@
    ],
    "params": {
     "price": 180
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-647a02fcbd",
@@ -2814,7 +2874,8 @@
    "params": {
     "p": 50,
     "v": 27
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-e493df127b",
@@ -2860,7 +2921,8 @@
    "params": {
     "old": 50,
     "new": 92
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-7d0eef9e3c",
@@ -2906,7 +2968,8 @@
    "params": {
     "old": 200,
     "new": 245
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-5f8cd95584",
@@ -2952,7 +3015,8 @@
    "params": {
     "p": 5,
     "W": 560
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-1ff6f3cdba",
@@ -2997,7 +3061,8 @@
    ],
    "params": {
     "price": 350
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-3fc998e277",
@@ -3043,7 +3108,8 @@
    "params": {
     "p": 35,
     "W": 720
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-377e3744dc",
@@ -3089,7 +3155,8 @@
    "params": {
     "p": 30,
     "W": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-6c49a5cece",
@@ -3135,7 +3202,8 @@
    "params": {
     "price": 260,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-60f1d3c843",
@@ -3182,7 +3250,8 @@
    "params": {
     "p": 20,
     "v": 31
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-bca0c3c56b",
@@ -3228,7 +3297,8 @@
    "params": {
     "old": 400,
     "new": 686
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-ed47cca2a7",
@@ -3274,7 +3344,8 @@
    "params": {
     "p": 15,
     "W": 160
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-d58821e4b1",
@@ -3320,7 +3391,8 @@
    "params": {
     "p": 80,
     "W": 160
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-328338bb5b",
@@ -3366,7 +3438,8 @@
    "params": {
     "price": 320,
     "d": 5
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-0e9407367e",
@@ -3413,7 +3486,8 @@
    "params": {
     "p": 50,
     "v": 29
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2957301243",
@@ -3459,7 +3533,8 @@
    "params": {
     "price": 260,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-a88e34e841",
@@ -3505,7 +3580,8 @@
    "params": {
     "old": 20,
     "new": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-0935092d96",
@@ -3550,7 +3626,8 @@
    ],
    "params": {
     "price": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-bea7667c67",
@@ -3596,7 +3673,8 @@
    "params": {
     "s": 90,
     "t": 250
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-40759d549a",
@@ -3643,7 +3721,8 @@
    "params": {
     "p": 5,
     "v": 54
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-ffd317a154",
@@ -3690,7 +3769,8 @@
    "params": {
     "p": 5,
     "v": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-64c2d34549",
@@ -3737,7 +3817,8 @@
    "params": {
     "p": 20,
     "v": 13
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-a761aa7abb",
@@ -3783,7 +3864,8 @@
    "params": {
     "old": 20,
     "new": 23
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-ca746737cd",
@@ -3829,7 +3911,8 @@
    "params": {
     "price": 80,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-563f2bca62",
@@ -3875,7 +3958,8 @@
    "params": {
     "price": 240,
     "d": 5
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2342765598",
@@ -3922,7 +4006,8 @@
    "params": {
     "p": 25,
     "v": 23
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-49265da909",
@@ -3968,7 +4053,8 @@
    "params": {
     "price": 520,
     "d": 5
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-54dfc38079",
@@ -4015,7 +4101,8 @@
    "params": {
     "p": 10,
     "v": 26
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-0c09497f81",
@@ -4061,7 +4148,8 @@
    "params": {
     "s": 4,
     "t": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-07a94a743a",
@@ -4108,7 +4196,8 @@
    "params": {
     "p": 10,
     "v": 35
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-2ba85dd3a3",
@@ -4153,7 +4242,8 @@
    ],
    "params": {
     "price": 260
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-bd0496fd01",
@@ -4199,7 +4289,8 @@
    "params": {
     "price": 60,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-d8cd1d5b12",
@@ -4245,7 +4336,8 @@
    "params": {
     "old": 80,
     "new": 158
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-39caa300b8",
@@ -4291,7 +4383,8 @@
    "params": {
     "p": 80,
     "W": 740
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-e531f9446c",
@@ -4336,7 +4429,8 @@
    ],
    "params": {
     "price": 240
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-d56c792779",
@@ -4383,7 +4477,8 @@
    "params": {
     "p": 5,
     "v": 76
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-98cb293357",
@@ -4430,7 +4525,8 @@
    "params": {
     "p": 50,
     "v": 18
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-45ffc42746",
@@ -4476,7 +4572,8 @@
    "params": {
     "price": 40,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-7010abb597",
@@ -4522,7 +4619,8 @@
    "params": {
     "old": 200,
     "new": 247
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-32753726ff",
@@ -4568,7 +4666,8 @@
    "params": {
     "s": 7,
     "t": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-b-d330ca4df8",
@@ -4614,7 +4713,8 @@
    "params": {
     "old": 20,
     "new": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-60bdb22e6f",
@@ -4661,7 +4761,8 @@
    "params": {
     "price": 780,
     "d": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-2de7ab3b43",
@@ -4707,7 +4808,8 @@
    ],
    "params": {
     "price": 170
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-0527795e85",
@@ -4755,7 +4857,8 @@
    "params": {
     "price": 340,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-604dc6f81f",
@@ -4801,7 +4904,8 @@
    "params": {
     "old": 400,
     "new": 280
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e98b24915c",
@@ -4849,7 +4953,8 @@
    "params": {
     "d": 60,
     "paid": 120
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-64ab4bd2d4",
@@ -4897,7 +5002,8 @@
     "M": 500,
     "a": 40,
     "b": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e216f34b1f",
@@ -4945,7 +5051,8 @@
     "P": 6000,
     "rate": 4,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-6193f55b26",
@@ -4993,7 +5100,8 @@
     "P": 16000,
     "r2": 6,
     "yrs": 6
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-447c0eef39",
@@ -5040,7 +5148,8 @@
    "params": {
     "price": 300,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-9b7844cb0f",
@@ -5086,7 +5195,8 @@
    ],
    "params": {
     "price": 180
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-508162451a",
@@ -5134,7 +5244,8 @@
    "params": {
     "price": 320,
     "d": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-b58b1ef129",
@@ -5180,7 +5291,8 @@
    "params": {
     "old": 400,
     "new": 240
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-023bed1d86",
@@ -5228,7 +5340,8 @@
    "params": {
     "d": 20,
     "paid": 240
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-eb065d189a",
@@ -5276,7 +5389,8 @@
     "M": 1400,
     "a": 30,
     "b": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-d3816bc8eb",
@@ -5324,7 +5438,8 @@
     "P": 36000,
     "rate": 4,
     "yrs": 2
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-a846ac7bf0",
@@ -5372,7 +5487,8 @@
     "P": 20000,
     "r2": 5,
     "yrs": 5
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-52b62290bf",
@@ -5419,7 +5535,8 @@
    "params": {
     "price": 100,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e227fbe84f",
@@ -5465,7 +5582,8 @@
    ],
    "params": {
     "price": 430
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-f1c975ba19",
@@ -5513,7 +5631,8 @@
    "params": {
     "price": 165,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-a52cfeeaa4",
@@ -5559,7 +5678,8 @@
    "params": {
     "old": 200,
     "new": 190
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-5a7b5b9090",
@@ -5607,7 +5727,8 @@
    "params": {
     "d": 50,
     "paid": 390
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-742392c9d9",
@@ -5655,7 +5776,8 @@
     "M": 1500,
     "a": 10,
     "b": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-ea22f887b3",
@@ -5703,7 +5825,8 @@
     "P": 36000,
     "rate": 4,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-e552ad75b4",
@@ -5751,7 +5874,8 @@
     "P": 4000,
     "r2": 5,
     "yrs": 4
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-984afec608",
@@ -5798,7 +5922,8 @@
    "params": {
     "price": 220,
     "d": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-9e953eb0de",
@@ -5844,7 +5969,8 @@
    ],
    "params": {
     "price": 470
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-05b34a57b9",
@@ -5892,7 +6018,8 @@
    "params": {
     "price": 335,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-04521dd5ad",
@@ -5938,7 +6065,8 @@
    "params": {
     "old": 50,
     "new": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-2b9e8f8110",
@@ -5986,7 +6114,8 @@
    "params": {
     "d": 60,
     "paid": 136
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-c88330eaea",
@@ -6034,7 +6163,8 @@
     "M": 300,
     "a": 30,
     "b": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-8230e8defb",
@@ -6082,7 +6212,8 @@
     "P": 45000,
     "rate": 4,
     "yrs": 2
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-e0faa0a548",
@@ -6130,7 +6261,8 @@
     "P": 9000,
     "r2": 8,
     "yrs": 3
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-2cbc7c4a47",
@@ -6177,7 +6309,8 @@
    "params": {
     "price": 440,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-eaced91da1",
@@ -6223,7 +6356,8 @@
    ],
    "params": {
     "price": 210
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-8a7983ed23",
@@ -6271,7 +6405,8 @@
    "params": {
     "price": 80,
     "d": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-3b00c0e34d",
@@ -6317,7 +6452,8 @@
    "params": {
     "old": 60,
     "new": 69
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-6188d8613b",
@@ -6365,7 +6501,8 @@
    "params": {
     "d": 20,
     "paid": 624
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-435b4d1260",
@@ -6413,7 +6550,8 @@
     "M": 1300,
     "a": 20,
     "b": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-5de623e7f6",
@@ -6461,7 +6599,8 @@
     "P": 24000,
     "rate": 5,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-12fbebe26f",
@@ -6509,7 +6648,8 @@
     "P": 17000,
     "r2": 8,
     "yrs": 6
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-34f9467389",
@@ -6556,7 +6696,8 @@
    "params": {
     "price": 660,
     "d": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-7d526382de",
@@ -6602,7 +6743,8 @@
    ],
    "params": {
     "price": 70
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-07b8abb04c",
@@ -6650,7 +6792,8 @@
    "params": {
     "price": 85,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-38be135ecd",
@@ -6696,7 +6839,8 @@
    "params": {
     "old": 200,
     "new": 320
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-c449a048ca",
@@ -6744,7 +6888,8 @@
    "params": {
     "d": 60,
     "paid": 312
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-68be5e552c",
@@ -6792,7 +6937,8 @@
     "M": 500,
     "a": 40,
     "b": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-329027b6b0",
@@ -6840,7 +6986,8 @@
     "P": 18000,
     "rate": 5,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-4fed702fd0",
@@ -6888,7 +7035,8 @@
     "P": 15000,
     "r2": 7,
     "yrs": 6
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-92d1799bf3",
@@ -6935,7 +7083,8 @@
    "params": {
     "price": 540,
     "d": 15
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-51d4eb84ae",
@@ -6981,7 +7130,8 @@
    ],
    "params": {
     "price": 460
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-ec35cdb6fb",
@@ -7029,7 +7179,8 @@
    "params": {
     "price": 305,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-94ad8ce497",
@@ -7075,7 +7226,8 @@
    "params": {
     "old": 120,
     "new": 138
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-ebfe24ebf1",
@@ -7123,7 +7275,8 @@
    "params": {
     "d": 30,
     "paid": 84
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-a0ff7e541c",
@@ -7171,7 +7324,8 @@
     "M": 400,
     "a": 10,
     "b": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-d0fcd34bac",
@@ -7219,7 +7373,8 @@
     "P": 6000,
     "rate": 2,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-dbb222ba6c",
@@ -7267,7 +7422,8 @@
     "P": 17000,
     "r2": 6,
     "yrs": 5
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-2f22589916",
@@ -7314,7 +7470,8 @@
    "params": {
     "price": 140,
     "d": 35
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-65bf7c5a1a",
@@ -7360,7 +7517,8 @@
    ],
    "params": {
     "price": 150
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-06641ad53d",
@@ -7408,7 +7566,8 @@
    "params": {
     "price": 180,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-433035d8c8",
@@ -7454,7 +7613,8 @@
    "params": {
     "old": 60,
     "new": 96
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-a2f23aef87",
@@ -7502,7 +7662,8 @@
    "params": {
     "d": 60,
     "paid": 200
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-a15052978b",
@@ -7550,7 +7711,8 @@
     "M": 900,
     "a": 20,
     "b": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-7122549af7",
@@ -7598,7 +7760,8 @@
     "P": 18000,
     "rate": 2,
     "yrs": 5
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-219428d3c1",
@@ -7646,7 +7809,8 @@
     "P": 4000,
     "r2": 5,
     "yrs": 6
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e9335cac7b",
@@ -7693,7 +7857,8 @@
    "params": {
     "price": 440,
     "d": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-899a7a1a40",
@@ -7739,7 +7904,8 @@
    ],
    "params": {
     "price": 300
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-c6a41f6392",
@@ -7787,7 +7953,8 @@
    "params": {
     "price": 55,
     "d": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-9134e55622",
@@ -7833,7 +8000,8 @@
    "params": {
     "old": 40,
     "new": 16
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e6ee8820fd",
@@ -7881,7 +8049,8 @@
    "params": {
     "d": 25,
     "paid": 345
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-242ef4ed45",
@@ -7929,7 +8098,8 @@
     "M": 1300,
     "a": 20,
     "b": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-04ece75c3c",
@@ -7977,7 +8147,8 @@
     "P": 30000,
     "rate": 3,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-8f9ed2ff8c",
@@ -8025,7 +8196,8 @@
     "P": 18000,
     "r2": 5,
     "yrs": 4
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-b212092b94",
@@ -8072,7 +8244,8 @@
    "params": {
     "price": 520,
     "d": 15
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-c35af4a543",
@@ -8118,7 +8291,8 @@
    ],
    "params": {
     "price": 570
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-50f9ab9335",
@@ -8166,7 +8340,8 @@
    "params": {
     "price": 160,
     "d": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e2d85bccf4",
@@ -8212,7 +8387,8 @@
    "params": {
     "old": 80,
     "new": 96
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-fe223488eb",
@@ -8260,7 +8436,8 @@
    "params": {
     "d": 25,
     "paid": 285
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-555e37241c",
@@ -8308,7 +8485,8 @@
     "M": 1500,
     "a": 40,
     "b": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-d5f94b7be1",
@@ -8356,7 +8534,8 @@
     "P": 42000,
     "rate": 3,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-5c94ed6ff6",
@@ -8404,7 +8583,8 @@
     "P": 3000,
     "r2": 3,
     "yrs": 4
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-5c39275f51",
@@ -8451,7 +8631,8 @@
    "params": {
     "price": 300,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-4b2ea783cd",
@@ -8497,7 +8678,8 @@
    ],
    "params": {
     "price": 530
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-c75cd497a2",
@@ -8545,7 +8727,8 @@
    "params": {
     "price": 295,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-d39acb44ea",
@@ -8591,7 +8774,8 @@
    "params": {
     "old": 20,
     "new": 15
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-c75647deb4",
@@ -8639,7 +8823,8 @@
    "params": {
     "d": 20,
     "paid": 144
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-d1f656cd64",
@@ -8687,7 +8872,8 @@
     "M": 300,
     "a": 40,
     "b": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-345b8ba448",
@@ -8735,7 +8921,8 @@
     "P": 54000,
     "rate": 4,
     "yrs": 3
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-6bd128fc23",
@@ -8783,7 +8970,8 @@
     "P": 18000,
     "r2": 7,
     "yrs": 6
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-8de5b3e737",
@@ -8830,7 +9018,8 @@
    "params": {
     "price": 120,
     "d": 15
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-3b5783a804",
@@ -8876,7 +9065,8 @@
    ],
    "params": {
     "price": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-4356e3386a",
@@ -8924,7 +9114,8 @@
    "params": {
     "price": 255,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-55ca806c44",
@@ -8970,7 +9161,8 @@
    "params": {
     "old": 80,
     "new": 64
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-e7710f18a4",
@@ -9018,7 +9210,8 @@
    "params": {
     "d": 50,
     "paid": 330
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-1abd1c86ce",
@@ -9066,7 +9259,8 @@
     "M": 800,
     "a": 10,
     "b": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-5a6e941e76",
@@ -9114,7 +9308,8 @@
     "P": 30000,
     "rate": 5,
     "yrs": 4
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-i-caf11bf250",
@@ -9162,7 +9357,8 @@
     "P": 20000,
     "r2": 7,
     "yrs": 4
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-2a8c7df1b1",
@@ -9209,7 +9405,8 @@
    "params": {
     "price": 120,
     "d": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-4ed1237bce",
@@ -9255,7 +9452,8 @@
    ],
    "params": {
     "price": 590
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-1667753bcf",
@@ -9303,7 +9501,8 @@
    "params": {
     "price": 85,
     "d": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-i-15d571cd09",
@@ -9349,7 +9548,8 @@
    "params": {
     "old": 400,
     "new": 600
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-b2c2831e27",
@@ -9401,7 +9601,8 @@
     "p": 20,
     "g": 20,
     "final": 414
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-9911db63cf",
@@ -9451,7 +9652,8 @@
     "p": 75,
     "q": 20,
     "x": 55
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-5de0363801",
@@ -9501,7 +9703,8 @@
     "p": 25,
     "q": 75,
     "N": 240
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-36ec466533",
@@ -9550,7 +9753,8 @@
     "d": 25,
     "paid": 390,
     "B": 3254
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-b0d6628a21",
@@ -9600,7 +9804,8 @@
     "a": 25,
     "b": 40,
     "fin": 300
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-9ee422c092",
@@ -9649,7 +9854,8 @@
    "params": {
     "a": 40,
     "b": 25
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-f2cfe76275",
@@ -9702,7 +9908,8 @@
     "a": 25,
     "b": 40,
     "left": 360
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-bb39a219a7",
@@ -9750,7 +9957,8 @@
    ],
    "params": {
     "P": 297
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-d3a1335ecd",
@@ -9798,7 +10006,8 @@
    "params": {
     "p": 900,
     "kind": "more"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-0643071c84",
@@ -9850,7 +10059,8 @@
     "p": 20,
     "g": 30,
     "final": 637
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-786655047f",
@@ -9900,7 +10110,8 @@
     "p": 40,
     "q": 20,
     "x": 60
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-17fb3c0d4b",
@@ -9950,7 +10161,8 @@
     "p": 40,
     "q": 75,
     "N": 60
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-c5e82c0638",
@@ -9999,7 +10211,8 @@
     "d": 30,
     "paid": 70,
     "B": 778
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-6391915e10",
@@ -10049,7 +10262,8 @@
     "a": 30,
     "b": 50,
     "fin": 195
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-57c50fe983",
@@ -10098,7 +10312,8 @@
    "params": {
     "a": 20,
     "b": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-6a21d4deb8",
@@ -10151,7 +10366,8 @@
     "a": 10,
     "b": 40,
     "left": 594
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-acf183d770",
@@ -10199,7 +10415,8 @@
    ],
    "params": {
     "P": 212
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-130368206d",
@@ -10247,7 +10464,8 @@
    "params": {
     "p": 50,
     "kind": "less"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-882a8c3bd7",
@@ -10299,7 +10517,8 @@
     "p": 10,
     "g": 60,
     "final": 160
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-ed4af22450",
@@ -10349,7 +10568,8 @@
     "p": 50,
     "q": 40,
     "x": 35
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-d979a45f86",
@@ -10399,7 +10619,8 @@
     "p": 20,
     "q": 50,
     "N": 280
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-1de3372096",
@@ -10448,7 +10669,8 @@
     "d": 30,
     "paid": 126,
     "B": 1393
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-05c5638590",
@@ -10498,7 +10720,8 @@
     "a": 25,
     "b": 40,
     "fin": 480
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-c93442fd10",
@@ -10547,7 +10770,8 @@
    "params": {
     "a": 40,
     "b": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-67a31d6f70",
@@ -10600,7 +10824,8 @@
     "a": 30,
     "b": 20,
     "left": 1008
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-076e77e510",
@@ -10648,7 +10873,8 @@
    ],
    "params": {
     "P": 397
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-b0c189d786",
@@ -10696,7 +10922,8 @@
    "params": {
     "p": 150,
     "kind": "more"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-288e155617",
@@ -10748,7 +10975,8 @@
     "p": 20,
     "g": 25,
     "final": 60
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-bc128b334f",
@@ -10798,7 +11026,8 @@
     "p": 80,
     "q": 50,
     "x": 12
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-51082e6cad",
@@ -10848,7 +11077,8 @@
     "p": 25,
     "q": 50,
     "N": 360
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-efe62a704f",
@@ -10897,7 +11127,8 @@
     "d": 20,
     "paid": 448,
     "B": 3821
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-6f8cbdd9d8",
@@ -10947,7 +11178,8 @@
     "a": 25,
     "b": 50,
     "fin": 150
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-d38e579416",
@@ -10996,7 +11228,8 @@
    "params": {
     "a": 10,
     "b": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-3a4fcf6273",
@@ -11049,7 +11282,8 @@
     "a": 40,
     "b": 25,
     "left": 180
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-43252e5bec",
@@ -11097,7 +11331,8 @@
    ],
    "params": {
     "P": 68
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-9b2a6c3a8d",
@@ -11145,7 +11380,8 @@
    "params": {
     "p": 25,
     "kind": "more"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-b4bcc88e8f",
@@ -11197,7 +11433,8 @@
     "p": 50,
     "g": 60,
     "final": 920
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-ae8a4ca3f2",
@@ -11247,7 +11484,8 @@
     "p": 60,
     "q": 30,
     "x": 280
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-35d91e264e",
@@ -11297,7 +11535,8 @@
     "p": 30,
     "q": 50,
     "N": 220
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-c5f469067c",
@@ -11346,7 +11585,8 @@
     "d": 30,
     "paid": 322,
     "B": 3462
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-2c65046bc9",
@@ -11396,7 +11636,8 @@
     "a": 25,
     "b": 20,
     "fin": 500
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-c0c6efc782",
@@ -11445,7 +11686,8 @@
    "params": {
     "a": 20,
     "b": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-ec67051089",
@@ -11498,7 +11740,8 @@
     "a": 10,
     "b": 40,
     "left": 864
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-cc6bbacc85",
@@ -11546,7 +11789,8 @@
    ],
    "params": {
     "P": 151
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-a6c0aec3d0",
@@ -11594,7 +11838,8 @@
    "params": {
     "p": 90,
     "kind": "less"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-9fb37ed80f",
@@ -11646,7 +11891,8 @@
     "p": 30,
     "g": 10,
     "final": 495
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-d2ac8296c6",
@@ -11696,7 +11942,8 @@
     "p": 80,
     "q": 30,
     "x": 100
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-f8e40fe389",
@@ -11746,7 +11993,8 @@
     "p": 40,
     "q": 60,
     "N": 180
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-240dc64705",
@@ -11795,7 +12043,8 @@
     "d": 30,
     "paid": 154,
     "B": 1075
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-4318e8cf39",
@@ -11845,7 +12094,8 @@
     "a": 50,
     "b": 40,
     "fin": 252
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-5c424b93bd",
@@ -11894,7 +12144,8 @@
    "params": {
     "a": 50,
     "b": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-807a2a02cf",
@@ -11947,7 +12198,8 @@
     "a": 50,
     "b": 10,
     "left": 270
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-405e32100e",
@@ -11995,7 +12247,8 @@
    ],
    "params": {
     "P": 93
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-57e3403934",
@@ -12043,7 +12296,8 @@
    "params": {
     "p": 60,
     "kind": "less"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-3beb3f209e",
@@ -12095,7 +12349,8 @@
     "p": 50,
     "g": 25,
     "final": 675
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-8623acfc21",
@@ -12145,7 +12400,8 @@
     "p": 80,
     "q": 25,
     "x": 88
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-140a1e1e6d",
@@ -12195,7 +12451,8 @@
     "p": 25,
     "q": 50,
     "N": 380
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-e4393904d9",
@@ -12244,7 +12501,8 @@
     "d": 20,
     "paid": 80,
     "B": 596
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-dcba332bf4",
@@ -12294,7 +12552,8 @@
     "a": 30,
     "b": 50,
     "fin": 390
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-1bf604a84a",
@@ -12343,7 +12602,8 @@
    "params": {
     "a": 40,
     "b": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-d22dac5381",
@@ -12396,7 +12656,8 @@
     "a": 20,
     "b": 50,
     "left": 240
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-9d21d00551",
@@ -12444,7 +12705,8 @@
    ],
    "params": {
     "P": 157
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-5096a0eb55",
@@ -12492,7 +12754,8 @@
    "params": {
     "p": 300,
     "kind": "more"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-36bc019c86",
@@ -12544,7 +12807,8 @@
     "p": 20,
     "g": 20,
     "final": 360
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-0f9d4b0068",
@@ -12594,7 +12858,8 @@
     "p": 75,
     "q": 20,
     "x": 660
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-5ab4b9eac0",
@@ -12644,7 +12909,8 @@
     "p": 30,
     "q": 40,
     "N": 380
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-a33959370a",
@@ -12693,7 +12959,8 @@
     "d": 40,
     "paid": 108,
     "B": 1166
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-fc194c1036",
@@ -12743,7 +13010,8 @@
     "a": 25,
     "b": 40,
     "fin": 360
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-649ef2aec2",
@@ -12792,7 +13060,8 @@
    "params": {
     "a": 30,
     "b": 10
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-ad84c693d7",
@@ -12845,7 +13114,8 @@
     "a": 50,
     "b": 25,
     "left": 600
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-630f20e948",
@@ -12893,7 +13163,8 @@
    ],
    "params": {
     "P": 374
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-0a0e0738ad",
@@ -12941,7 +13212,8 @@
    "params": {
     "p": 20,
     "kind": "less"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-7247e04622",
@@ -12993,7 +13265,8 @@
     "p": 10,
     "g": 50,
     "final": 144
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-bf334b6006",
@@ -13043,7 +13316,8 @@
     "p": 50,
     "q": 20,
     "x": 150
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-4134efa58b",
@@ -13093,7 +13367,8 @@
     "p": 20,
     "q": 40,
     "N": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-c97d1d49fd",
@@ -13142,7 +13417,8 @@
     "d": 40,
     "paid": 48,
     "B": 352
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-4bb8a86ad5",
@@ -13192,7 +13468,8 @@
     "a": 50,
     "b": 10,
     "fin": 216
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-782aa5e01c",
@@ -13241,7 +13518,8 @@
    "params": {
     "a": 30,
     "b": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-3a613dfaea",
@@ -13294,7 +13572,8 @@
     "a": 30,
     "b": 25,
     "left": 630
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-6709e178e4",
@@ -13342,7 +13621,8 @@
    ],
    "params": {
     "P": 234
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-a94da63f5a",
@@ -13390,7 +13670,8 @@
    "params": {
     "p": 80,
     "kind": "less"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-795396fffa",
@@ -13442,7 +13723,8 @@
     "p": 20,
     "g": 30,
     "final": 416
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-4d20e0e323",
@@ -13492,7 +13774,8 @@
     "p": 40,
     "q": 20,
     "x": 20
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-2ce9a260dc",
@@ -13542,7 +13825,8 @@
     "p": 25,
     "q": 40,
     "N": 200
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-ab4389503c",
@@ -13591,7 +13875,8 @@
     "d": 50,
     "paid": 50,
     "B": 518
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-4ba146d6b6",
@@ -13641,7 +13926,8 @@
     "a": 25,
     "b": 40,
     "fin": 540
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-486a69c1f8",
@@ -13690,7 +13976,8 @@
    "params": {
     "a": 50,
     "b": 50
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-160b292a04",
@@ -13743,7 +14030,8 @@
     "a": 50,
     "b": 10,
     "left": 495
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-938c66934e",
@@ -13791,7 +14079,8 @@
    ],
    "params": {
     "P": 197
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-b8278f5438",
@@ -13839,7 +14128,8 @@
    "params": {
     "p": 100,
     "kind": "more"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-bb3e5e3cc8",
@@ -13891,7 +14181,8 @@
     "p": 10,
     "g": 60,
     "final": 24
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-1bb58bbe77",
@@ -13941,7 +14232,8 @@
     "p": 80,
     "q": 25,
     "x": 528
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-d2c2b8ce60",
@@ -13991,7 +14283,8 @@
     "p": 30,
     "q": 60,
     "N": 40
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-b9a5f30ab2",
@@ -14040,7 +14333,8 @@
     "d": 25,
     "paid": 405,
     "B": 3529
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-f67779734f",
@@ -14090,7 +14384,8 @@
     "a": 50,
     "b": 20,
     "fin": 696
-   }
+   },
+   "calc": true
   },
   {
    "id": "percen-c-5486896cf5",
@@ -14139,7 +14434,8 @@
    "params": {
     "a": 50,
     "b": 30
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-83fff2071a",
@@ -14192,7 +14488,8 @@
     "a": 25,
     "b": 40,
     "left": 270
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-93529f3253",
@@ -14240,7 +14537,8 @@
    ],
    "params": {
     "P": 317
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-a7ad195a1c",
@@ -14288,7 +14586,8 @@
    "params": {
     "p": 400,
     "kind": "more"
-   }
+   },
+   "calc": false
   },
   {
    "id": "percen-c-ed1050456b",
@@ -14340,7 +14639,8 @@
     "p": 40,
     "g": 25,
     "final": 770
-   }
+   },
+   "calc": false
   }
  ]
 }

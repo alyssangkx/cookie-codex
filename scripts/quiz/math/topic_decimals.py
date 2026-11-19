@@ -715,7 +715,7 @@ def _(p):
 
 # ================================================================ OPERATIONS: competent
 
-@template(T, "competent", DO + "02", DO + "06")
+@template(T, "competent", DO + "02", DO + "06", calc=True)
 def bottles_filled(r):
     L = F(r.randint(60, 250), 10)
     ml = r.choice([250, 350, 150, 450, 120, 180])

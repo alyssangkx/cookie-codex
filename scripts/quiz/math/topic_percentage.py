@@ -411,7 +411,7 @@ def _(q):
     return c
 
 
-@template(T, "intermediate", DISC)
+@template(T, "intermediate", DISC, calc=True)
 def simple_interest_loan(r):
     """math-pat-simple-interest-loan"""
     P = 1000 * r.randint(6, 60)
@@ -558,7 +558,7 @@ def _(q):
     return brute(lambda x: q["N"] * q["p"] == q["q"] * (q["N"] - x), q["N"])
 
 
-@template(T, "competent", WHOLE, DISC)
+@template(T, "competent", WHOLE, DISC, calc=True)
 def reverse_items_affordable(r):
     """math-pat-percent-reverse-find-original"""
     d = r.choice([10, 20, 25, 30, 40, 50])
@@ -594,7 +594,7 @@ def _(q):
     return F(count)
 
 
-@template(T, "competent", WHOLE, CHANGE)
+@template(T, "competent", WHOLE, CHANGE, calc=True)
 def successive_changes_original(r):
     a = r.choice([10, 20, 25, 30, 50])
     b = r.choice([10, 20, 25, 40, 50])

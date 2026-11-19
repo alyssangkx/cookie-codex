@@ -16,11 +16,13 @@ NAMES = ["Ali", "Mei Ling", "Ravi", "Siti", "Jun Wei", "Priya", "Hui Min", "Fari
          "Kumar", "Xin Yi", "Aisha", "Daniel", "Wei Jie", "Nurul", "Arjun", "Shu Fen"]
 
 
-def template(topic, level, *outcomes, same_value_ok=False):
+def template(topic, level, *outcomes, same_value_ok=False, calc=False):
     """Register a generator. The first outcome decides which sub-topic the question is filed under.
-    Put the top-school pattern ids it covers (math-pat-...) in the docstring for the coverage report."""
+    Put the top-school pattern ids it covers (math-pat-...) in the docstring for the coverage report.
+    calc=True: a calculator is allowed (PSLE Paper 2 style). The default False means Paper 1 style, and
+    check_math.py then requires every step to be workable by hand (hand_problems below)."""
     def deco(fn):
-        fn.topic, fn.level, fn.outcomes, fn.same_value_ok = topic, level, list(outcomes), same_value_ok
+        fn.topic, fn.level, fn.outcomes, fn.same_value_ok, fn.calc = topic, level, list(outcomes), same_value_ok, calc
         fn.key = fn.__name__
         REGISTRY.setdefault(topic, []).append(fn)
         return fn
@@ -198,8 +200,53 @@ def finalize(q, fn, rng, qid):
         "explain": [e for _, _, e in opts],
         "solution": q["steps"],
         "params": q["params"],
+        "calc": fn.calc,  # not part of the id (stable_id hashes topic, template and params only)
         **({"figure": q["figure"]} if q.get("figure") else {}),
     }
+
+
+# ---------------------------------------------------------------- by hand (no calculator)
+# The MOE primary syllabus's written-computation limits, as a check on Paper 1 style (calc=False) questions:
+#   multiply: by a power of 10, by a 1-significant-digit number (any other factor), or one factor up to 2
+#   significant digits and the other up to 4 (4-digit by 2-digit);
+#   divide (after cancelling common trailing zeros): by a power of 10, by a 1-significant-digit number (3, 40, 0.5),
+#   by a whole number up to 12, or by a 2-significant-digit number when the quotient is under 1000 with at most
+#   2 decimal places (35 ÷ 25 = 1.4, 1350 ÷ 45 = 30).
+# ponytail: reads the x × y and x ÷ y in the worked solution only; a step written another way is not checked.
+_OP = re.compile(r"\$?(\d[\d,]*(?:\.\d+)?)\s*([×÷])\s*\$?(\d[\d,]*(?:\.\d+)?)")
+
+
+def _sig(x):
+    """Significant digits of a positive number: 3200 -> 2, 0.05 -> 1, 3.14 -> 3."""
+    t = format(x.normalize(), "f").replace(".", "").strip("0")
+    return len(t) or 1
+
+
+def _pow10(x):
+    return x > 0 and format(x.normalize(), "f").replace(".", "").strip("0") == "1"
+
+
+def hand_problems(lines):
+    """-> the steps in these lines that are not workable by hand under the rule above."""
+    from decimal import Decimal as D
+    bad = []
+    for line in lines:
+        for a, op, b in _OP.findall(line.replace("**", "")):
+            x, y = D(a.replace(",", "")), D(b.replace(",", ""))
+            if x == 0 or y == 0:
+                continue
+            if op == "×":
+                ok = _pow10(x) or _pow10(y) or min(_sig(x), _sig(y)) == 1 \
+                    or min(_sig(x), _sig(y)) <= 2 and max(_sig(x), _sig(y)) <= 4
+            else:
+                while x == x.to_integral() and y == y.to_integral() and x % 10 == 0 and y % 10 == 0:
+                    x, y = x / 10, y / 10  # 6000 ÷ 1200 is worked as 60 ÷ 12
+                q = x / y
+                ok = _pow10(y) or _sig(y) == 1 or (y == y.to_integral() and y <= 12) \
+                    or (_sig(y) == 2 and q * 100 == (q * 100).to_integral() and q < 1000)
+            if not ok:
+                bad.append(f"{a} {op} {b}")
+    return bad
 
 
 def coprime_pair(rng, lo, hi, proper=True):
@@ -210,7 +257,7 @@ def coprime_pair(rng, lo, hi, proper=True):
             return a, b
 
 
-__all__ = ["F", "gcd", "lcm", "template", "checker", "build", "finalize", "frac", "money",
+__all__ = ["F", "gcd", "lcm", "template", "hand_problems", "checker", "build", "finalize", "frac", "money",
            "unit", "plural", "noun", "ordinal", "a_an", "two_names", "coprime_pair", "REGISTRY", "NAMES"]
 
 

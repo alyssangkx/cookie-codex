@@ -15,7 +15,12 @@ sys.path.insert(0, str(HERE / "math"))
 import importlib  # noqa: E402
 import re  # noqa: E402
 import xml.dom.minidom  # noqa: E402
-from common import REGISTRY, a_an  # noqa: E402
+from common import REGISTRY, a_an, hand_problems  # noqa: E402
+
+# the "by hand" rule for Paper 1 style (calc=False) questions; its own examples first
+assert hand_problems(["6000 ÷ 1200 = 5", "2 × 176.625 = 353.25", "35 ÷ 25 = 1.4", "4523 × 67 = 303041", "84 ÷ 12 = 7"]) == []
+assert hand_problems(["299 ÷ 15 = 19.93", "615.44 ÷ 3.14 = 196", "12345 × 678 = 8369910"]) \
+    == ["299 ÷ 15", "615.44 ÷ 3.14", "12345 × 678"]
 
 for mod in sorted((HERE / "math").glob("topic_*.py")):
     importlib.import_module(mod.stem)
@@ -118,6 +123,10 @@ for path in sorted(BANKS.glob("*.json")):
                 e(f"figure is not valid SVG: {ex}")
             if len(q["figure"]) > 12000:
                 e("figure larger than 12 KB")
+        if q.get("calc") is not t.calc: e(f"calc is {q.get('calc')!r}, template says {t.calc}")
+        if not t.calc:
+            for step in hand_problems([q["stem"]] + q["solution"]):
+                e(f"no-calculator question has a step that is not workable by hand: {step} (set calc=True or change the numbers)")
         if not hasattr(t, "check"):
             e("template has no independent check"); continue
         expected = t.check(q["params"])

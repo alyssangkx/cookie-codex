@@ -473,7 +473,7 @@ def round2(a, b):
     return F((200 * a + b) // (2 * b), 100)
 
 
-@template(T, "basic", DEC)
+@template(T, "basic", DEC, calc=True)
 def fraction_to_decimal(r):
     """math-pat-fraction-to-decimal-rounded"""
     b = r.choice([3, 6, 7, 9, 11, 12, 13])

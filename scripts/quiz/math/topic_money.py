@@ -348,7 +348,7 @@ def _(p):
 
 # ================================================================ competent
 
-@template(T, "competent", M + "06", M + "02")
+@template(T, "competent", M + "06", M + "02", calc=True)
 def weeks_to_save(r):
     x = r.choice(NAMES)
     P = r.randint(60, 480)
