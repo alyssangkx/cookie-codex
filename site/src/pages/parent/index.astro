@@ -128,6 +128,9 @@ const data = {
     { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[] };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  // Save fields are written by the child's own browser and synced, so a tampered save can hold strings where numbers
+  // belong. Every save number that reaches innerHTML goes through num(): a real finite number, else 0.
+  const num = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
   const DAY = 86_400_000;
 
   let s: SaveV1 = load();
@@ -173,8 +176,8 @@ const data = {
           if (sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
           const ts = tierState(s, sub.id, t);
           if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
-          else if (ts.mastered) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
-          else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
+          else if (num(ts.mastered)) html += `<div class="cell prog">${name}<small>${num(ts.mastered)}/${sub.count[t]} mastered, best ${num(ts.best)}%</small></div>`;
+          else html += `<div class="cell">${name}<small>Open${num(ts.best) ? `, best ${num(ts.best)}%` : ''}</small></div>`;
         }
         html += '</div></div>';
       }
@@ -189,8 +192,8 @@ const data = {
     for (let i = 0; i < 14; i++) {
       const key = dayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() - i).getTime());
       const d = s.days[key];
-      const acc = d && d.total ? Math.round((100 * d.correct) / d.total) + '%' : '–';
-      rows += `<tr><td>${esc(key)}</td><td>${d?.quizzes ?? 0}</td><td>${d?.min ?? 0}</td><td>${acc}</td></tr>`;
+      const acc = d && num(d.total) ? Math.round((100 * num(d.correct)) / num(d.total)) + '%' : '–';
+      rows += `<tr><td>${esc(key)}</td><td>${num(d?.quizzes)}</td><td>${num(d?.min)}</td><td>${acc}</td></tr>`;
     }
     $('days').innerHTML = `<table><thead><tr><th>Date</th><th>Quizzes</th><th>Minutes</th><th>Accuracy</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
@@ -292,7 +295,7 @@ const data = {
       const theirs = q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
         : q.a === '' ? 'Their answer: none (time ran out)' : `Their answer: ${bold(q.a)}`;
       return `<li>${head}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
-        + `<span class="meta">Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ${status}</span></li>`;
+        + `<span class="meta">Wrong ${num(q.w)} time${num(q.w) === 1 ? '' : 's'} · ${status}</span></li>`;
     };
     $('wrong').innerHTML = `<p class="note">${wrong.length} question${wrong.length === 1 ? '' : 's'} in all.</p>` + [...tree].map(([subject, bySub]) => {
       const n = [...bySub.values()].reduce((k, l) => k + l.length, 0);
@@ -313,7 +316,7 @@ const data = {
       const dueTxt = late
         ? (dayKey(q.due) === dayKey(now) ? 'due today' : '<span class="due-late">overdue</span>')
         : `due ${esc(fmtDate(q.due))}`;
-      return `<li>${bold(stems.get(id)?.stem ?? id)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
+      return `<li>${bold(stems.get(id)?.stem ?? id)}<span class="meta">${esc(step[num(q.s)] ?? '')} step · ${dueTxt} · wrong ${num(q.w)} time${num(q.w) === 1 ? '' : 's'}</span></li>`;
     }).join('') + '</ol>';
   }
 
