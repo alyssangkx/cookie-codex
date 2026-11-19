@@ -12,9 +12,8 @@ const str = (v: unknown, max = 200) => (typeof v === 'string' ? v.slice(0, max) 
 const strOrNull = (v: unknown) => (typeof v === 'string' ? v.slice(0, 40) : null);
 const strs = (v: unknown, max = 50) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string').slice(0, max).map((x) => x.slice(0, 120)) : []);
 const tier = (v: unknown): Tier | undefined => (TIERS.includes(v as Tier) ? (v as Tier) : undefined);
-// keys come from the save: never let one reach a prototype slot
-const BAD_KEY = new Set(['__proto__', 'constructor', 'prototype']);
-const entries = (v: unknown, max = 200000) => Object.entries(obj(v)).filter(([k]) => !BAD_KEY.has(k)).slice(0, max);
+// keys come from the save: obj['__proto__'] = x would set the prototype, every other key is a plain own property
+const entries = (v: unknown, max = 200000) => Object.entries(obj(v)).filter(([k]) => k !== '__proto__').slice(0, max);
 
 function cleanTier(v: unknown): TierState | null {
   const t = obj(v);
@@ -49,8 +48,10 @@ export function cleanSave(raw: unknown): SaveV1 {
 
   const st = obj(r.settings);
   s.settings = {
-    dailyCapMin: typeof st.dailyCapMin === 'number' ? num(st.dailyCapMin, 45, 180) : f.settings.dailyCapMin, // parent range
-    dailyGoalQuizzes: typeof st.dailyGoalQuizzes === 'number' ? num(st.dailyGoalQuizzes, 1, 5) : f.settings.dailyGoalQuizzes,
+    // settings stay as the game sees them (only made finite), so the parent page never shows or writes back a value the
+    // game does not use; the parent controls apply their own ranges on change
+    dailyCapMin: typeof st.dailyCapMin === 'number' ? num(st.dailyCapMin, 0, 1440) : f.settings.dailyCapMin,
+    dailyGoalQuizzes: typeof st.dailyGoalQuizzes === 'number' ? num(st.dailyGoalQuizzes, 0, 1000) : f.settings.dailyGoalQuizzes,
     extraTime: st.extraTime === true, psleDate: str(st.psleDate, 20) || f.settings.psleDate, playerName: str(st.playerName, 40),
   };
 

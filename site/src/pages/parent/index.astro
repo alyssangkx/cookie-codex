@@ -262,8 +262,10 @@ const data = {
         const res = await supabase.from('saves').select('data').eq('child_id', id).maybeSingle();
         if (my !== wrongSeq) return;
         if (res.error) { $('wrong').innerHTML = '<p class="note">Could not load that save.</p>'; return; }
-        let data: unknown = res.data?.data;
-        try { data = migrate(structuredClone(data)); } catch { data = null; } // an old-format server save: migrate first
+        // an older server save is migrated first, as load() would on the child's device (v1 saves had no usable ids)
+        let data: unknown;
+        try { data = res.data ? migrate(res.data.data) : null; }
+        catch { if (my === wrongSeq) $('wrong').innerHTML = '<p class="note">Could not read that save (unknown format).</p>'; return; }
         renderWrong(cleanSave(data).questions, my);
       });
     } catch { /* no picker: this device only */ }
