@@ -11,12 +11,16 @@ const URL_ = process.env.SUPABASE_URL ?? process.env.PUBLIC_SUPABASE_URL;
 const ANON = process.env.SUPABASE_ANON_KEY ?? process.env.PUBLIC_SUPABASE_ANON_KEY;
 const SVC = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!URL_ || !ANON || !SVC) { console.error('set SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY'); process.exit(2); }
+if (SVC.startsWith('sb_publishable_') || SVC === ANON) { console.error('that is the public key; paste the secret (service_role / sb_secret_) key'); process.exit(2); }
 
 let failed = 0;
 const ok = (c, what) => { console.log(`${c ? 'ok  ' : 'FAIL'} ${what}`); if (!c) failed++; };
+// New-style keys (sb_publishable_..., sb_secret_...) go in the apikey header only (the gateway turns them into a JWT);
+// a Bearer header must then be a real JWT or be left out. Legacy keys are JWTs and work either way.
+const isJwt = (t) => typeof t === 'string' && t.split('.').length === 3;
 const req = async (path, { method = 'GET', token = ANON, key = ANON, body, headers = {} } = {}) => {
   const r = await fetch(`${URL_}${path}`, {
-    method, headers: { apikey: key, authorization: `Bearer ${token}`, 'content-type': 'application/json', ...headers },
+    method, headers: { apikey: key, ...(isJwt(token) ? { authorization: `Bearer ${token}` } : {}), 'content-type': 'application/json', ...headers },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   let json = null; try { json = await r.json(); } catch { /* empty */ }
