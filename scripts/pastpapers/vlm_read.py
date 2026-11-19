@@ -69,13 +69,17 @@ def parse(raw):
 
 def parse_ans(raw):
     """Answer-page reply: the object asked for, or a bare [...] list of answers (the 32B often drops the wrapper)."""
-    m = re.search(r"[\[{]", raw)
-    if m and m.group(0) == "[":  # bare list first: parse() would take a one-item list's object as the whole page
+    def as_list():
         m = re.search(r"\[.*\]", raw, re.S)
-        d = parse('{"answers": ' + m.group(0) + '}')
-    else:
-        d = parse(raw)
-    return {"kind": "answers", **d} if isinstance(d, dict) else None
+        return parse('{"answers": ' + m.group(0) + '}') if m else None
+    first = re.search(r"[\[{]", raw)
+    # a reply opening with [ is a bare list (parse() would take a one-item list's object as the page); else the object.
+    # Each falls back to the other; a cut-off reply gives None (saved as unparsed), never an exception.
+    order = (as_list, lambda: parse(raw)) if first and first.group(0) == "[" else (lambda: parse(raw), as_list)
+    for fn in order:
+        d = fn()
+        if isinstance(d, dict): return {"kind": "answers", **d}
+    return None
 
 
 def repair(folder):
@@ -152,6 +156,8 @@ if __name__ == "__main__":
         # answer pages: a bare list (wrapper dropped, code fences) is still read
         assert len(parse_ans('```json\n[{"qno": "17", "sub": "a", "answer": "x"}, {"qno": "18", "answer": "y"}]\n```')["answers"]) == 2
         assert parse_ans('[{"qno": "5", "answer": "3"}]')["answers"] == [{"qno": "5", "answer": "3"}]
+        assert parse_ans('[{"qno": "1", "answer": "abc') is None  # cut off at max_tokens
+        assert parse_ans('Answers [p3]: {"answers": [{"qno": "1"}]}')["answers"] == [{"qno": "1"}]
         assert parse_ans("no json") is None
         print("vlm_read selftest ok"); sys.exit()
     if sys.argv[1:2] == ["repair"]:

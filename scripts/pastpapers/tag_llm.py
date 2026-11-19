@@ -48,9 +48,10 @@ def examples(subject):
     """-> prompt text: the gold "example" rows (Science only), each with its question."""
     merged = PP / "science" / "2024" / "merged.jsonl"
     if subject != "science" or not GOLD.exists() or not merged.exists(): return ""
-    rows = [g for g in map(json.loads, open(GOLD)) if g.get("use") == "example"][:15]  # ponytail: 15 keeps prompts < 16k
+    rows = [g for g in map(json.loads, open(GOLD)) if g.get("use") == "example"]
     want = {g["id"] for g in rows}
     text = {r["id"]: r for r in map(json.loads, open(merged)) if r.get("id") in want and r.get("text")}
+    rows = [g for g in rows if g["id"] in text][:15]  # ponytail: 15 examples fit max_model_len 16384 (Science run 20 Nov)
     # each example carries a real pattern: examples all showing null made the 72B leave pat null on 85% of Science
     out = [f"Example\n{show(text[g['id']])}\nJSON: " + json.dumps({"st": g["st"], "pat": g.get("pat"), "method": "...", "difficulty": 2,
                                                                   "ans_check": None, "conf": 0.9})
