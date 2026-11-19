@@ -34,7 +34,9 @@ const fn = (token, body) => req('/functions/v1/parent-api', { method: 'POST', to
 const rnd = () => Math.random().toString(36).slice(2, 10);
 
 const made = []; // auth user ids to delete
-async function parent() {
+// usernames are unique across the site: each run uses fresh ones (letters only, so the guard trigger accepts them)
+const tag = () => Array.from({ length: 6 }, () => 'abcdefghijkmnpqrstuvwxyz'[Math.floor(Math.random() * 23)]).join('');
+async function parent(childName) {
   const email = `ccx-iso-${rnd()}@example.com`, password = `${rnd()}${rnd()}Aa1!`;
   const u = await admin('/users', { method: 'POST', body: { email, password, email_confirm: true } });
   if (u.status !== 200) throw new Error(`create parent ${u.status}`);
@@ -49,19 +51,20 @@ async function parent() {
   const reg = await fn(token, { action: 'register', consent_version: '1' });
   if (reg.status !== 200) throw new Error(`register ${reg.status} ${reg.body?.error}`);
   token = await signIn(); // the role is in the new token
-  const kid = await fn(token, { action: 'create_child', name: 'Emma', pin: '3817' });
+  const kid = await fn(token, { action: 'create_child', name: childName, pin: '3817' });
   if (kid.status !== 200) throw new Error(`create_child ${kid.status} ${kid.body?.error}`);
   made.push(kid.body.child.id);
-  return { id: u.body.id, email, token, code: reg.body.code, child: kid.body.child.id };
+  return { id: u.body.id, email, token, child: kid.body.child.id, name: childName };
 }
 
 try {
-  const A = await parent(), B = await parent();
-  ok(A.code !== B.code, 'two families, two codes; the same child name in both');
+  const A = await parent(`Iso${tag()}`), B = await parent(`Iso${tag()}`);
+  const clash = await fn(B.token, { action: 'create_child', name: A.name.toLowerCase(), pin: '5049' });
+  ok(clash.status === 409 && clash.body?.error === 'name_taken', 'a username already used by another family is refused');
   for (const [me, other, n] of [[A, B, 'A'], [B, A, 'B']]) {
     const prof = await rest(me.token, 'profiles?select=id,parent_id');
     ok(prof.status === 200 && prof.body.length === 1 && prof.body[0].id === me.child, `${n} sees only its own child`);
-    const fam = await rest(me.token, 'families?select=parent_id,code');
+    const fam = await rest(me.token, 'families?select=parent_id');
     ok(fam.status === 200 && fam.body.length === 1 && fam.body[0].parent_id === me.id, `${n} sees only its own family row`);
     const pin = await rest(me.token, 'profiles?select=pin_hash');
     ok(pin.status !== 200, `${n} cannot read pin_hash`);
@@ -74,7 +77,7 @@ try {
     await rest(me.token, `profiles?id=eq.${other.child}`, { method: 'PATCH', body: { name: 'Hacked' } });
     await rest(me.token, `saves?child_id=eq.${other.child}`, { method: 'DELETE' });
     for (const action of ['set_pin', 'rename_child', 'clear_name_lock', 'delete_child']) {
-      const r = await fn(me.token, { action, child_id: other.child, pin: '5049', name: 'Zed', confirm: 'Emma' });
+      const r = await fn(me.token, { action, child_id: other.child, pin: '5049', name: `Zed${tag()}`, confirm: other.name });
       ok(r.status === 404, `${n} parent-api ${action} on the other child is 404`);
     }
     for (const bad of [{ action: 'create_child', name: 'Admin', pin: '5049' }]) {
@@ -85,13 +88,13 @@ try {
     ok(weak.status === 400 && weak.body?.error === 'weak_pin', `${n} weak PIN refused`);
   }
   const svcProf = await rest(SVC, `profiles?select=name&id=in.(${A.child},${B.child})`, { key: SVC });
-  ok(svcProf.body?.every((p) => p.name === 'Emma'), 'neither child was renamed by the other parent');
+  ok(svcProf.body?.length === 2 && svcProf.body.every((p) => p.name === A.name || p.name === B.name), 'neither child was renamed by the other parent');
   const svcSaves = await rest(SVC, `saves?select=child_id&child_id=in.(${A.child},${B.child})`, { key: SVC });
   ok(svcSaves.body?.length === 2, 'neither save was deleted by the other parent');
   // delete and undo (soft delete, 7 days)
   const del = await fn(A.token, { action: 'delete_account', confirm: A.email });
   ok(del.status === 200, 'A deletes the account');
-  const after = await fn(A.token, { action: 'create_child', name: 'Mia', pin: '5049' });
+  const after = await fn(A.token, { action: 'create_child', name: `Mia${tag()}`, pin: '5049' });
   ok(after.status === 410, 'a deleted account can only restore');
   const pushDel = await rest(A.token, 'rpc/push_save', { method: 'POST', body: { p_child: A.child, p_data: { schemaVersion: 4 }, p_version: 4, p_force: true } });
   ok(pushDel.body?.[0]?.status === 'denied', "A's child can no longer be written");

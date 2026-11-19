@@ -1,20 +1,11 @@
-// Child PIN login, family version (docs/accounts-plan.md sections 5 and 12). NOT YET DEPLOYED: it needs
-// migration 002 (families, family-scoped lock keys), so deploy it right after 002 is applied, never before.
-// The previous version is in git history (commit before "Parent sign-up").
-//
-// Differences from the previous pin-login:
-//   * input gains familyCode (8 symbols, hyphen/spaces/case ignored) and captchaToken;
-//   * the profile is looked up inside the family (families.code -> parent_id, then parent_id + name_key);
-//   * lockout keys are '<parent_id>:<name_key>' (name: / trust:), so the same first name in two families
-//     never shares a lock, and a stranger needs the family code to lock anyone (audit F1, F5);
-//   * an UNTRUSTED request (no valid device token) must carry a CAPTCHA token, checked after the cheap
-//     steps and BEFORE the lock RPC and the 600,000-iteration hash (audit F4). A trusted device skips it.
+// Child PIN login (docs/accounts-plan.md sections 5, 12 and 12.14): username + 4-digit PIN, on any device.
+// Usernames are unique across the site (migration 003). Lock keys are 'name:<name_key>' / 'trust:<name_key>'.
+//   * an UNTRUSTED request (no device token valid for this child) must carry a CAPTCHA token, checked after the
+//     cheap lookups and BEFORE the lock RPC and the 600,000-iteration hash (audit F4). A trusted device skips it.
 //     Off unless CAPTCHA_REQUIRED=true. A failed CAPTCHA counts nothing against any lock;
-//   * unknown family code behaves like a malformed name: only the device is counted, the full hash still
-//     runs, the answer is the same wrong_name_or_pin;
-//   * CORS fails closed when SITE_ORIGIN is unset (audit F14);
-//   * a child or family marked deleted (7-day undo) is treated as unknown: same answer, same work.
-// Errors added: 400 { error: 'captcha_failed' }, 503 try_again_later also when the CAPTCHA provider is down.
+//   * unknown, malformed or deleted (7-day undo) usernames get the same answer and the same work as a wrong PIN;
+//   * CORS fails closed when SITE_ORIGIN is unset (audit F14).
+// Errors: 400 bad_request | captcha_failed, 401 wrong_name_or_pin, 429 locked, 503 try_again_later.
 // Secrets: PIN_PEPPER, CHILD_PW_SECRET, PIN_DEVICE_SECRET, SITE_ORIGIN, CAPTCHA_SECRET (+ CAPTCHA_REQUIRED).
 // The lockout limits, windows and escalation are unchanged (docs section 5): they live in SQL.
 import { createClient } from 'npm:@supabase/supabase-js@2';
@@ -22,9 +13,8 @@ import {
   childPassword, DUMMY_HASH, issueDeviceToken, tsMs, verifyDeviceToken, verifyPin,
 } from '../_shared/pin.ts';
 import { captchaRequired, CaptchaUnavailable, verifyCaptcha } from '../_shared/captcha.ts';
-import { CODE_RE, lockKey as familyLockKey, normaliseCode } from '../_shared/family.ts';
 
-const NAME_RE = /^[A-Za-z][A-Za-z -]{0,19}$/;
+const NAME_RE = /^[a-z][a-z0-9 -]{0,19}$/; // on the lower-cased key; same rule as profiles.name (003)
 const nameKey = (n: string) => n.trim().toLowerCase();
 
 const ORIGIN = Deno.env.get('SITE_ORIGIN');
@@ -48,17 +38,15 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: CORS });
   if (req.method !== 'POST') return json({ error: 'bad_request' }, 405);
 
-  let body: { familyCode?: unknown; name?: unknown; pin?: unknown; deviceId?: unknown; deviceToken?: unknown; captchaToken?: unknown };
+  let body: { name?: unknown; pin?: unknown; deviceId?: unknown; deviceToken?: unknown; captchaToken?: unknown };
   try { body = await req.json(); } catch { return json({ error: 'bad_request' }, 400); }
   const pin = typeof body.pin === 'string' ? body.pin : '';
   const deviceId = typeof body.deviceId === 'string' ? body.deviceId.slice(0, 64) : '';
-  if (typeof body.name !== 'string' || typeof body.familyCode !== 'string' || !/^\d{4}$/.test(pin) || !deviceId) {
+  if (typeof body.name !== 'string' || !/^\d{4}$/.test(pin) || !deviceId) {
     return json({ error: 'bad_request' }, 400);
   }
   const key = nameKey(body.name.slice(0, 100));
-  const code = normaliseCode(body.familyCode.slice(0, 40));
   const validName = NAME_RE.test(key);
-  const validCode = CODE_RE.test(code);
 
   const url = Deno.env.get('SUPABASE_URL')!;
   const admin = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, { auth: { persistSession: false } });
@@ -79,19 +67,16 @@ Deno.serve(async (req) => {
   };
 
   try {
-    // 1. Family by exact code, then the child by exact (parent_id, name_key). Malformed input never reaches the database.
-    let parentId: string | null = null;
-    if (validCode) {
-      const f = await admin.from('families').select('parent_id, deleted_at').eq('code', code).maybeSingle();
-      if (f.error) throw new Unavailable();
-      parentId = f.data && !f.data.deleted_at ? f.data.parent_id : null;
-    }
+    // 1. The child by exact name_key (unique among children), then its family's delete mark. Malformed input never
+    //    reaches the database; the family query runs for every valid name so a miss costs the same.
     let real: { id: string; name: string; pin_hash: string | null; pin_set_at: string | null; unlimited?: boolean } | null = null;
-    if (validName && parentId) {
-      const r = await admin.from('profiles').select('id, name, pin_hash, pin_set_at, unlimited, deleted_at')
-        .eq('role', 'child').eq('parent_id', parentId).eq('name_key', key).maybeSingle();
+    if (validName) {
+      const r = await admin.from('profiles').select('id, name, pin_hash, pin_set_at, unlimited, deleted_at, parent_id')
+        .eq('role', 'child').eq('name_key', key).maybeSingle();
       if (r.error) throw new Unavailable();
-      real = r.data && !r.data.deleted_at ? r.data : null;
+      const f = await admin.from('families').select('deleted_at').eq('parent_id', r.data?.parent_id ?? DUMMY.id).maybeSingle();
+      if (f.error) throw new Unavailable();
+      real = r.data && !r.data.deleted_at && !f.data?.deleted_at ? r.data : null;
     }
     const prof = real ?? DUMMY;
     const pinSetAt = tsMs(prof.pin_set_at);
@@ -105,9 +90,8 @@ Deno.serve(async (req) => {
       if (!(await verifyCaptcha(body.captchaToken))) return json({ error: 'captcha_failed' }, 400);
     }
 
-    // 3. ONE reservation. The lock key carries the family: '<parent_id>:<name_key>'. No family or bad name:
-    //    only the device is counted.
-    const lockKey = validName && parentId ? familyLockKey(parentId, key) : null;
+    // 3. ONE reservation on the device and the username (unknown names too, as in section 5). Malformed: device only.
+    const lockKey = validName ? key : null;
     const rs = await reserve(lockKey, trusted);
     if (!rs.allowed) return rs.scope === 'device' ? deviceLocked(tsMs(rs.device_until)) : json({ error: 'locked' }, 429);
     const deviceUntil = tsMs(rs.device_until);

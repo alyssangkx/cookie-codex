@@ -5,9 +5,7 @@ import Base from '../../layouts/Base.astro';
   <section class="wrap login-page">
     <h1>Who's playing?</h1>
     <form id="login-form" class="panel" autocomplete="off" novalidate>
-      <label for="code">Family code</label>
-      <input id="code" type="text" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD-2345" />
-      <label for="who">Your name</label>
+      <label for="who">Your username</label>
       <input id="who" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" />
 
       <p class="label" id="pin-label">Your PIN</p>
@@ -21,7 +19,7 @@ import Base from '../../layouts/Base.astro';
       <div id="captcha" class="captcha"></div>
       <p id="msg" class="msg" role="alert"></p>
     </form>
-    <p class="small">Your grown-up has your family code. This site keeps the first name you play under and your quiz progress, so you can carry on from another device. No email, no ads, nothing shared. <a href="/privacy/">Privacy</a></p>
+    <p class="small">This site keeps the first name you play under and your quiz progress, so you can carry on from another device. No email, no ads, nothing shared. <a href="/privacy/">Privacy</a></p>
     <p class="small"><strong>A private family revision game.</strong> Your name and PIN only work on this site; it never asks for an email, a password from another service, or payment. Fan project, not affiliated with Devsisters.</p>
     <p class="small"><a class="grown" href="/grownups/">Grown-ups: sign in or sign up</a></p>
   </section>
@@ -60,8 +58,7 @@ import Base from '../../layouts/Base.astro';
   import { mountCaptcha, type Captcha } from '../../lib/captcha';
 
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
-  const who = $<HTMLInputElement>('who'), code = $<HTMLInputElement>('code'), msg = $('msg');
-  code.value = kv.get('family-code') ?? '';
+  const who = $<HTMLInputElement>('who'), msg = $('msg');
   // a trusted device (a device token valid for this child) is never asked. A new device shows the CAPTCHA at once;
   // on a device whose token does not fit (a sibling, or a PIN the parent changed) it appears when the server asks.
   let captcha: Captcha | null = null, mounting: Promise<void> | null = null;
@@ -81,14 +78,13 @@ import Base from '../../layouts/Base.astro';
 
   async function submit() {
     if (busy) return;
-    if (!code.value.trim()) { say('Type your family code first (your grown-up has it).'); code.focus(); return; }
-    if (!who.value.trim()) { say('Type your name first.'); who.focus(); return; }
+    if (!who.value.trim()) { say('Type your username first.'); who.focus(); return; }
     if (pin.length < 4) { say('Your PIN has 4 digits.'); return; }
     say(''); setBusy(true);
     const tryPin = pin;
     try {
       const { status, body } = await callFunction('pin-login', {
-        familyCode: code.value, name: who.value, pin: tryPin, deviceId: deviceId(), deviceToken: kv.get('device-token') ?? undefined,
+        name: who.value, pin: tryPin, deviceId: deviceId(), deviceToken: kv.get('device-token') ?? undefined,
         captchaToken: captcha?.token(),
       });
       captcha?.reset(); // a token is good for one try
@@ -98,7 +94,6 @@ import Base from '../../layouts/Base.astro';
         if (body.deviceToken) kv.set('device-token', body.deviceToken);
         if (body.profile?.name) kv.set('player-name', body.profile.name);
         if (body.profile?.unlimited === true) kv.set('profile-unlimited', '1'); else kv.del('profile-unlimited');
-        kv.set('family-code', code.value.trim().toUpperCase());
         kv.del('sync:signedout');
         touch();
         const { data } = await supabase.auth.getSession();
@@ -125,7 +120,7 @@ import Base from '../../layouts/Base.astro';
         say(captcha?.shown ? 'Tick the "I am human" box, then type your PIN again.'
           : 'The "I am human" check could not load. Check the internet connection and reload the page.');
       } else if (status === 400) {
-        say('Check your family code, your name (letters only) and your 4-digit PIN.');
+        say('Check your username (letters and numbers) and your 4-digit PIN.');
       } else {
         say("Can't reach the server, try again");
       }
@@ -140,17 +135,16 @@ import Base from '../../layouts/Base.astro';
     if (k === 'back') pin = pin.slice(0, -1);
     else if (pin.length < 4) pin += k;
     paint();
-    if (pin.length === 4 && who.value.trim() && code.value.trim()) void submit();
+    if (pin.length === 4 && who.value.trim()) void submit();
   }
 
   document.querySelectorAll<HTMLButtonElement>('.login-page .key[data-k]').forEach((b) => b.addEventListener('click', () => press(b.dataset.k!)));
   $('login-form').addEventListener('submit', (e) => { e.preventDefault(); void submit(); });
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
-    const inName = e.target === who || e.target === code;
+    const inName = e.target === who;
     if (/^\d$/.test(e.key) && !inName) { e.preventDefault(); press(e.key); }
     else if (e.key === 'Backspace' && !inName) { e.preventDefault(); press('back'); }
-    else if (e.key === 'Enter' && e.target === code) { e.preventDefault(); who.focus(); }
     else if (e.key === 'Enter' && inName) { e.preventDefault(); if (pin.length === 4) void submit(); else (document.querySelector('.login-page .key[data-k="1"]') as HTMLElement).focus(); }
   });
 
@@ -158,6 +152,6 @@ import Base from '../../layouts/Base.astro';
   void (async () => {
     const { data } = await supabase.auth.getSession();
     if (data.session && isChildSession(data.session.user)) location.replace('/');
-    else (code.value ? who : code).focus();
+    else who.focus();
   })();
 </script>

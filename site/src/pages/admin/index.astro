@@ -59,7 +59,6 @@ const data = {
     <div id="v-console" hidden>
       <section class="panel" aria-labelledby="h-kids">
         <h2 id="h-kids">Children</h2>
-        <p class="note" id="famcode" hidden>Family code (children type it once per device): <b id="famcode-v"></b></p>
         <div id="kids"></div>
         <h3>Create child</h3>
         <form id="f-create" class="row" autocomplete="off">
@@ -210,12 +209,7 @@ const data = {
   // ------------------------------------------------------------ children
   let kids: Kid[] = [];
   async function refreshKids() {
-    let fc: string | null = null;
-    $('famcode').hidden = true; $('famcode-v').textContent = '';
-    try { const r = await admin({ action: 'list_children' }); kids = r.children as Kid[]; fc = typeof r.familyCode === 'string' ? r.familyCode : null; }
-    catch (e) { flash(e instanceof Error ? e.message : 'Could not load children.'); return; }
-    $('famcode').hidden = false;
-    $('famcode-v').textContent = fc && /^[2-9A-HJKMNP-Z]{8}$/.test(fc) ? `${fc.slice(0, 4)}-${fc.slice(4)}` : 'could not be loaded (reload; children cannot log in on a new device without it)';
+    try { kids = (await admin({ action: 'list_children' })).children as Kid[]; } catch (e) { flash(e instanceof Error ? e.message : 'Could not load children.'); return; }
     const real = kids.filter((k) => k.role === 'child');
     $('kids').innerHTML = real.length ? real.map((k) => `
       <div class="kid" data-id="${esc(k.id)}" data-name="${esc(k.name)}">

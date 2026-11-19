@@ -22,7 +22,9 @@ grant execute on all functions in schema pg_temp to authenticated;
 
 -- ---------------------------------------------------------------- backfill
 select pg_temp.ok((select count(*) = 1 from families f join auth.users u on u.id = f.parent_id where u.email = 'admin@x.test'
-                   and f.code ~ '^[2-9A-HJKMNP-Z]{8}$' and f.consent_version = 'owner'), 'admin family backfilled with a valid code');
+                   and f.consent_version = 'owner'), 'admin family backfilled');
+select pg_temp.ok(not exists (select 1 from information_schema.columns where table_name = 'families' and column_name = 'code'), 'family code column gone (003)');
+select pg_temp.ok((select count(*) = 0 from private.pin_attempts where key ~ '^(name|trust):[0-9a-f-]{36}:'), 'family-scoped lock rows removed (003)');
 select pg_temp.ok((select unlimited from profiles where name = 'Admin'), 'Admin player unlimited');
 select pg_temp.ok((select unlimited from profiles where role = 'test'), 'Test Player unlimited');
 select pg_temp.ok((select not unlimited from profiles where name = 'Alyssa'), 'Alyssa not unlimited');
@@ -33,12 +35,14 @@ insert into auth.users (id, email, email_confirmed_at, raw_app_meta_data) values
   ('22222222-2222-2222-2222-222222222222', 'p2@x.test', now(), '{"role":"parent"}'),
   ('a1111111-1111-1111-1111-111111111111', 'child-a1@children.invalid', now(), '{}'),
   ('b2222222-2222-2222-2222-222222222222', 'child-b2@children.invalid', now(), '{}');
-insert into families (parent_id, code, consent_version) values
-  ('11111111-1111-1111-1111-111111111111', 'AAAA2222', '1'), ('22222222-2222-2222-2222-222222222222', 'BBBB3333', '1');
+insert into families (parent_id, consent_version) values
+  ('11111111-1111-1111-1111-111111111111', '1'), ('22222222-2222-2222-2222-222222222222', '1');
 insert into profiles (id, parent_id, name) values
   ('a1111111-1111-1111-1111-111111111111', '11111111-1111-1111-1111-111111111111', 'Emma'),
-  ('b2222222-2222-2222-2222-222222222222', '22222222-2222-2222-2222-222222222222', 'Emma');
-select pg_temp.ok(true, 'same child name allowed in two families');
+  ('b2222222-2222-2222-2222-222222222222', '22222222-2222-2222-2222-222222222222', 'Emma2');
+select pg_temp.ok(true, 'username with a digit allowed');
+select pg_temp.fails($$select pg_temp.kid('22222222-2222-2222-2222-222222222222', 'EMMA')$$, 'a username taken in another family is refused (site-wide)');
+select pg_temp.fails($$select pg_temp.kid('22222222-2222-2222-2222-222222222222', '2Emma')$$, 'a username must start with a letter');
 select pg_temp.fails($$select pg_temp.kid('11111111-1111-1111-1111-111111111111', 'emma')$$, 'same name twice in one family refused');
 select pg_temp.fails($$select pg_temp.kid('11111111-1111-1111-1111-111111111111', 'Admin')$$, 'name Admin reserved for a parent');
 select pg_temp.fails($$select pg_temp.kid('11111111-1111-1111-1111-111111111111', 'Tess', 'test')$$, 'test profile refused for a parent');
@@ -56,12 +60,11 @@ do $$ begin for i in 1..6 loop perform pg_temp.kid('11111111-1111-1111-1111-1111
 select pg_temp.ok(true, 'six active children allowed beside a deleted one');
 delete from auth.users where id in (select id from profiles where name like 'Kid %');
 update profiles set deleted_at = null where id = 'a1111111-1111-1111-1111-111111111111';
-select pg_temp.fails($$insert into families (parent_id, code, consent_version) values ('11111111-1111-1111-1111-111111111111', 'abc', '1')$$, 'bad family code refused');
 
 -- ---------------------------------------------------------------- RLS as parent 1
 set role authenticated;
 select pg_temp.as_user('11111111-1111-1111-1111-111111111111', 'parent');
-select pg_temp.ok((select count(*) = 1 and bool_and(code = 'AAAA2222') from families), 'parent sees only their family row');
+select pg_temp.ok((select count(*) = 1 and bool_and(parent_id = '11111111-1111-1111-1111-111111111111') from families), 'parent sees only their family row');
 select pg_temp.ok((select count(*) = 1 from profiles), 'parent sees only their own child');
 select pg_temp.ok((select array_agg(s.status) = '{ok}' from push_save('a1111111-1111-1111-1111-111111111111', '{"schemaVersion":4}', 4) s), 'parent push to own child ok');
 select pg_temp.ok((select array_agg(s.status) = '{denied}' from push_save('b2222222-2222-2222-2222-222222222222', '{"schemaVersion":4}', 4) s), 'parent push to other family denied');
@@ -69,13 +72,21 @@ select pg_temp.ok((select count(*) = 1 from saves), 'parent reads only own child
 update saves set data = '{"x":1}' where child_id = 'b2222222-2222-2222-2222-222222222222';
 delete from profiles where id = 'b2222222-2222-2222-2222-222222222222';
 select pg_temp.fails($$select pin_hash from profiles$$, 'pin_hash not readable');
-select pg_temp.fails($$update families set code = 'CCCC4444'$$, 'family row not client-writable');
+select pg_temp.fails($$update families set consent_version = 'x'$$, 'family row not client-writable');
 select pg_temp.fails($$select pin_clear_name_lock('b2222222-2222-2222-2222-222222222222')$$, 'cannot clear another family''s lock');
 select pin_clear_name_lock('a1111111-1111-1111-1111-111111111111');
 select pg_temp.ok(true, 'can clear own child''s lock');
 select pg_temp.fails($$select rate_hit('x', 1, '1 hour')$$, 'rate_hit not callable by clients');
 reset role;
 select pg_temp.ok((select count(*) = 1 from profiles where id = 'b2222222-2222-2222-2222-222222222222'), 'other family''s child untouched');
+insert into private.pin_attempts (key) values ('name:emma'), ('trust:emma'), ('name:emma2');
+set role authenticated;
+select pg_temp.as_user('11111111-1111-1111-1111-111111111111', 'parent');
+select pin_clear_name_lock('a1111111-1111-1111-1111-111111111111');
+reset role;
+select pg_temp.ok((select count(*) = 0 from private.pin_attempts where key in ('name:emma', 'trust:emma')), 'parent clears the username-keyed locks of their child');
+select pg_temp.ok((select count(*) = 1 from private.pin_attempts where key = 'name:emma2'), 'another child''s lock is untouched');
+delete from private.pin_attempts where key = 'name:emma2';
 select pg_temp.ok((select count(*) = 0 from saves where child_id = 'b2222222-2222-2222-2222-222222222222'), 'other family''s save untouched');
 
 -- ---------------------------------------------------------------- child session, shape gate, deletes
@@ -104,12 +115,11 @@ select pg_temp.ok((select array_agg(s.status) = '{ok}' from push_save('00000000-
 reset role;
 
 -- ---------------------------------------------------------------- purge jobs
-insert into private.pin_attempts (key) values ('name:22222222-2222-2222-2222-222222222222:emma');
+insert into private.pin_attempts (key) values ('name:emma2');
 update families set deleted_at = now() - interval '8 days' where parent_id = '22222222-2222-2222-2222-222222222222';
 update profiles set deleted_at = now() - interval '6 days' where id = 'a1111111-1111-1111-1111-111111111111';
 select private.purge_deleted();
 select pg_temp.ok((select count(*) = 0 from auth.users where id in ('22222222-2222-2222-2222-222222222222', 'b2222222-2222-2222-2222-222222222222')), 'family deleted 8 days ago: parent and child purged');
-select pg_temp.ok((select count(*) = 0 from private.pin_attempts where key like '%22222222-2222-2222-2222-222222222222%'), 'their lock rows purged');
 select pg_temp.ok((select count(*) = 1 from profiles where id = 'a1111111-1111-1111-1111-111111111111'), 'child deleted 6 days ago kept (still restorable)');
 update profiles set deleted_at = now() - interval '8 days' where id = 'a1111111-1111-1111-1111-111111111111';
 select private.purge_deleted();

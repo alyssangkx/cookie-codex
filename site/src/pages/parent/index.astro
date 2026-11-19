@@ -27,18 +27,12 @@ const data = {
 
     <section id="family" class="panel" aria-labelledby="h-fam" hidden>
       <h2 id="h-fam">Your family</h2>
-      <p class="note">Your children sign in at <b>Who's playing?</b> with this family code, their name and their PIN.</p>
-      <p class="famcode" id="fam-code"></p>
-      <div class="row">
-        <button type="button" class="btn" id="fam-copy">Copy code</button>
-        <button type="button" class="btn" id="fam-print">Print</button>
-        <button type="button" class="btn danger" id="fam-rotate">Make a new code</button>
-      </div>
+      <p class="note">Each child signs in at <b>Who's playing?</b> on any device with their username and PIN.</p>
       <h3>Children</h3>
       <div id="fam-kids"></div>
       <h3 id="h-add">Add a child</h3>
       <form id="fam-add" autocomplete="off" aria-labelledby="h-add">
-        <label for="add-name">First name or nickname (letters only)</label>
+        <label for="add-name">Username (letters and numbers, e.g. Emma or Emma2)</label>
         <input id="add-name" type="text" maxlength="20" autocomplete="off" />
         <label for="add-pin">4-digit PIN</label>
         <input id="add-pin" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" />
@@ -168,14 +162,13 @@ const data = {
   .parent-page .wq-fig { margin: 0.4rem 0; max-width: 22rem; }
   .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
   .parent-page .btn.danger { background: #fff; color: var(--berry); border: 1.5px solid var(--berry); }
-  .parent-page .famcode { font: 600 2rem var(--font-display); letter-spacing: 0.12em; margin: 0.2rem 0; }
   .parent-page .kid { border-top: 1px dashed var(--crust); padding: 0.7rem 0; }
   .parent-page .kid .row { align-items: center; margin-top: 0.3rem; }
   .parent-page .kid .row input, .parent-page .kid .row .btn { margin-top: 0; }
   .parent-page input.pin { max-width: 8rem; letter-spacing: 0.3em; }
   .parent-page .fam-more { margin-top: 1rem; }
   .parent-page .fam-more > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; }
-  @media print { body * { visibility: hidden; } .parent-page .famcode, .parent-page .famcode * { visibility: visible; } .parent-page .famcode { position: absolute; top: 2rem; left: 2rem; } }
+
 </style>
 
 <script>
@@ -465,17 +458,17 @@ const data = {
 
   // ------------------------------------------------------------ family (parent accounts; parent-api, docs 12.4)
   type FKid = { id: string; name: string; pin_set_at: string | null; created_at: string; deleted_at: string | null };
-  type Me = { code: string; deleted_at: string | null; children: FKid[] };
+  type Me = { deleted_at: string | null; children: FKid[] };
   const ERR: Record<string, string> = {
     weak_pin: 'That PIN is too easy to guess (like 1234 or 1111). Pick another.',
-    name_taken: 'You already have a child with that name.',
+    name_taken: 'That username is taken. Try adding a number or an initial, e.g. Emma2 or EmmaT.',
     name_deleted: 'A child with that name was deleted in the last 7 days. Restore them instead.',
     name_reserved: 'That name is reserved. Pick another.',
     child_limit: 'You can have up to 6 children.',
     confirm_required: 'The confirmation did not match.',
     slow_down: 'Too many changes in an hour. Try again later.',
     mfa_required: 'Enter your authenticator code first.',
-    bad_request: 'Check the name (letters, spaces and hyphens, up to 20) and the 4-digit PIN.',
+    bad_request: 'Check the username (starts with a letter; letters, numbers, spaces or hyphens, up to 20) and the 4-digit PIN.',
     not_found: 'That child was not found.', deleted: 'This account is being deleted.',
   };
   const famSay = (ok: string, err = '') => { $('fam-msg').textContent = ok; $('fam-err').textContent = err; };
@@ -484,7 +477,6 @@ const data = {
     if (code === 'mfa_required' || code === 'unauthorized') { location.href = '/grownups/'; return; }
     famSay('', ERR[code] ?? "Can't reach the server, try again.");
   };
-  const fmtCode = (c: string) => `${c.slice(0, 4)}-${c.slice(4)}`;
   const purgeDay = (iso: string) => fmtDate(new Date(iso).getTime() + 7 * DAY);
   const goodPin = (a: string, b: string) => (!/^\d{4}$/.test(a) ? 'The PIN has 4 digits.' : a !== b ? 'The two PINs are different.' : '');
 
@@ -498,7 +490,7 @@ const data = {
       <div class="row"><input class="pin" id="pin-${id}" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" placeholder="New PIN" aria-label="New PIN for ${nm}" />
         <button type="button" class="btn" data-act="pin" data-id="${id}">Set PIN</button>
         <button type="button" class="btn" data-act="unlock" data-id="${id}">Clear lock</button></div>
-      <div class="row"><input id="nm-${id}" type="text" maxlength="20" placeholder="New name" aria-label="New name for ${nm}" />
+      <div class="row"><input id="nm-${id}" type="text" maxlength="20" placeholder="New username" aria-label="New username for ${nm}" />
         <button type="button" class="btn" data-act="rename" data-id="${id}">Rename</button>
         <button type="button" class="btn danger" data-act="delete" data-id="${id}" data-name="${nm}">Delete</button></div></div>`;
   }
@@ -512,20 +504,11 @@ const data = {
       return;
     }
     $('fam-deleted').hidden = true; $('family').hidden = false;
-    $('fam-code').textContent = fmtCode(me.code);
     $('fam-kids').innerHTML = me.children.length ? me.children.map(kidHtml).join('') : '<p class="note">No children yet. Add your first child below.</p>';
     if (pickerReady) await buildKidPicker(me.children).catch(() => { $('content').hidden = true; });
   }
 
   async function initFamily() {
-    $('fam-copy').addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(fmtCode(me!.code)); famSay('Copied.'); } catch { famSay('', 'Copy was blocked.'); }
-    });
-    $('fam-print').addEventListener('click', () => window.print());
-    $('fam-rotate').addEventListener('click', async () => {
-      if (!confirm('Make a new family code? The old one stops working at once; your children type the new one next time.')) return;
-      try { await callParentApi({ action: 'rotate_family_code' }); await refreshFamily(); famSay('New code made.'); } catch (e) { famFail(e); }
-    });
     $('fam-add').addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = $<HTMLInputElement>('add-name').value.trim(), a = $<HTMLInputElement>('add-pin').value, b = $<HTMLInputElement>('add-pin2').value;
@@ -534,7 +517,7 @@ const data = {
       try {
         await callParentApi({ action: 'create_child', name, pin: a });
         for (const id of ['add-name', 'add-pin', 'add-pin2']) $<HTMLInputElement>(id).value = '';
-        await refreshFamily(); famSay(`${name} added. They sign in with code ${fmtCode(me!.code)}, their name and the PIN.`);
+        await refreshFamily(); famSay(`${name} added. They sign in on any device with the username ${name} and the PIN.`);
       } catch (err) { famFail(err); }
     });
     $('fam-kids').addEventListener('click', async (e) => {

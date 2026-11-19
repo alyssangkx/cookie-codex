@@ -7,9 +7,7 @@ import Base from '../../../layouts/Base.astro';
     <div class="panel">
       <p id="status">Confirming your account…</p>
       <div id="done" hidden>
-        <p>Your family code is</p>
-        <p class="famcode" id="code"></p>
-        <p class="note">Your children type this code, their name and their PIN to sign in. You can always see it on the parent page.</p>
+        <p class="note">Next, add your children on the parent page. Each child gets a username and a 4-digit PIN, and signs in with them on any device.</p>
         <a class="btn" href="/parent/" style="display:inline-flex;align-items:center;text-decoration:none">Add your first child</a>
       </div>
     </div>
@@ -30,9 +28,8 @@ import Base from '../../../layouts/Base.astro';
       if (roleOf(data.session) === 'admin') { location.href = '/admin/'; return; }
       touch();
       // creates the family (code + consent record) and the parent role; idempotent, so a reload is harmless
-      const r = await callParentApi<{ code: string }>({ action: 'register', consent_version: CONSENT_VERSION });
+      await callParentApi({ action: 'register', consent_version: CONSENT_VERSION });
       await supabase.auth.refreshSession(); // the new role is in the next token
-      $('code').textContent = `${r.code.slice(0, 4)}-${r.code.slice(4)}`;
       $('status').textContent = 'Your account is ready.';
       $('done').hidden = false;
     } catch (e) {

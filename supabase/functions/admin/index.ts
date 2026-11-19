@@ -20,7 +20,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { childPassword, hashPin } from '../_shared/pin.ts';
 
-const NAME_RE = /^[A-Za-z][A-Za-z -]{0,19}$/; // same rule as profiles.name and pin-login
+const NAME_RE = /^[A-Za-z][A-Za-z0-9 -]{0,19}$/; // same rule as profiles.name and pin-login
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const nameKey = (n: string) => n.trim().toLowerCase();
 
@@ -106,7 +106,7 @@ Deno.serve(async (req) => {
         if (fixed.error) throw fixed.error;
         const ins = await svc.from('profiles').insert({ id, parent_id: caller.id, name, role });
         if (ins.error) {
-          if (ins.error.code === '23505' || /profiles_family_name_uq/.test(ins.error.message ?? '')) throw new Refuse(409, 'name_taken');
+          if (ins.error.code === '23505' || /profiles_name_key_uq/.test(ins.error.message ?? '')) throw new Refuse(409, 'name_taken');
           throw ins.error;
         }
       } catch (e) {
@@ -121,7 +121,7 @@ Deno.serve(async (req) => {
         if (typeof body.name !== 'string') throw new Refuse(400, 'bad_request');
         const name = body.name.trim();
         if (!NAME_RE.test(name)) throw new Refuse(400, 'bad_request');
-        const dup = await svc.from('profiles').select('id').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle(); // unique per parent
+        const dup = await svc.from('profiles').select('id').eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle(); // usernames are unique across the site
         if (dup.error) throw dup.error;
         if (dup.data) throw new Refuse(409, 'name_taken');
         return json({ child: await makeChild(name, 'child') });
@@ -145,9 +145,7 @@ Deno.serve(async (req) => {
       case 'list_children': {
         const r = await svc.from('profiles').select('id, name, role, pin_set_at, created_at').eq('parent_id', caller.id).order('created_at');
         if (r.error) throw r.error;
-        // the admin's own family code (migration 002 backfills it); null before 002 is applied
-        const f = await svc.from('families').select('code').eq('parent_id', caller.id).maybeSingle();
-        return json({ children: r.data, familyCode: f.error ? null : (f.data?.code ?? null) });
+        return json({ children: r.data });
       }
       case 'create_test_player': {
         const have = await svc.from('profiles').select('id').eq('role', 'test').eq('parent_id', caller.id).limit(1);
@@ -179,7 +177,7 @@ Deno.serve(async (req) => {
         if (p.role !== 'test' && body.confirm !== p.name) throw new Refuse(400, 'confirm_required');
         // clear the lock rows first: if that fails nothing is deleted and the admin can retry
         for (const trusted of [false, true]) {
-          const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: `${caller.id}:${nameKey(p.name)}`, p_trusted: trusted });
+          const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: nameKey(p.name), p_trusted: trusted });
           if (c.error) throw c.error;
         }
         const del = await svc.auth.admin.deleteUser(id); // profiles and saves cascade

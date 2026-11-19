@@ -579,3 +579,17 @@ The contact is `psleadmin@gmail.com`. Version 1, to be stored as `consent_versio
 > **Changes:** if this notice changes, you will be asked to read and agree to it again the next time you sign in.
 >
 > Last updated: `<date of release>`.
+
+### 12.14 Family code removed (owner's decision, 20 Nov 2026)
+
+The owner found the family code counter-productive. Now: a child logs in on **any device with a username and a
+4-digit PIN**; usernames are **unique across the site** and may contain digits (`Emma2`); a parent choosing a taken
+one is told so (`name_taken`, "try Emma2 or EmmaT"). Migration `003_no_family_code.sql` restores the site-wide unique
+index (`profiles_name_key_uq`), widens the name check to digits, drops `families.code`, and moves lock keys back to
+`name:<name_key>` / `trust:<name_key>` (as in section 5). `families` stays for the consent record and the 7-day delete.
+
+What this gives up (audit F1, F5): a stranger who knows or guesses a username can try PINs from a new device, and can
+lock that username for new-device logins. Still in place: the CAPTCHA on every untrusted login, the escalating
+lockouts (the section 5 bound, about 240 days to 5,000 guesses), weak-PIN refusal, the trusted-device `trust:` key
+(a stranger's failures never lock a child's own devices), and the parent's "Clear lock". `name_taken` at child
+creation tells a signed-in parent that a username exists (rate-limited to 60 actions an hour per parent).

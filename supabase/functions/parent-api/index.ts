@@ -14,15 +14,14 @@
 //   * deletes are soft (7-day undo, owner's decision): deleted_at is set, the child's auth user is banned (its
 //     refresh token stops working) and pin-login / push_save refuse it; private.purge_deleted() removes the rows
 //     after 7 days. A parent whose account is marked deleted may only call `me` and `restore_account` (410 deleted).
-//   register             { consent_version }              -> { code }   family row + consent record + role
-//   me                   {}                               -> { code, deleted_at, children: [{ id, name, pin_set_at, created_at, deleted_at }] }
-//   create_child         { name, pin }                    -> { child: { id, name } }   409 name_taken|child_limit, 400 weak_pin|name_reserved
+//   register             { consent_version }              -> { ok: true }   family row + consent record + role
+//   me                   {}                               -> { deleted_at, children: [{ id, name, pin_set_at, created_at, deleted_at }] }
+//   create_child         { name, pin }                    -> { child: { id, name } }   409 name_taken (site-wide) | name_deleted | child_limit, 400 weak_pin|name_reserved
 //   rename_child         { child_id, name }               -> { ok: true }
 //   set_pin              { child_id, pin }                -> { ok: true }   voids device tokens; 400 weak_pin
 //   clear_name_lock      { child_id }                     -> { ok: true }
 //   delete_child         { child_id, confirm }            -> { ok: true }   confirm = the child's name; undo for 7 days
 //   restore_child        { child_id }                     -> { ok: true }   409 child_limit
-//   rotate_family_code   {}                               -> { code }       old code stops working at once
 //   delete_account       { confirm }                      -> { ok: true }   confirm = the parent's email; undo for 7 days
 //   restore_account      {}                               -> { ok: true }
 // Secrets: PIN_PEPPER, CHILD_PW_SECRET, SITE_ORIGIN, CONSENT_VERSION (= CONSENT_VERSION in site/src/lib/supabase.ts;
@@ -30,9 +29,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { childPassword, hashPin } from '../_shared/pin.ts';
 import { weakPin } from '../_shared/weakpin.ts';
-import { lockKey, newCode } from '../_shared/family.ts';
 
-const NAME_RE = /^[A-Za-z][A-Za-z -]{0,19}$/;
+const NAME_RE = /^[A-Za-z][A-Za-z0-9 -]{0,19}$/; // the username; unique across the site (migration 003)
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const RESERVED = new Set(['admin', 'test player']);
 const nameKey = (n: string) => n.trim().toLowerCase();
@@ -135,55 +133,48 @@ Deno.serve(async (req) => {
     };
     const clearLocks = async (name: string) => {
       for (const trusted of [false, true]) {
-        const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: lockKey(caller.id, nameKey(name)), p_trusted: trusted });
+        const c = await svc.rpc('pin_clear', { p_device_key: '', p_name_key: nameKey(name), p_trusted: trusted });
         if (c.error) throw c.error;
       }
     };
     const family = async () => {
-      const f = await svc.from('families').select('code, deleted_at').eq('parent_id', caller.id).maybeSingle();
+      const f = await svc.from('families').select('deleted_at').eq('parent_id', caller.id).maybeSingle();
       if (f.error) throw f.error;
       if (!f.data) throw new Refuse(404, 'not_found');
-      return f.data as { code: string; deleted_at: string | null };
+      return f.data as { deleted_at: string | null };
     };
-    const familyCode = async () => (await family()).code;
     if (role === 'parent' && !['me', 'register', 'restore_account'].includes(String(body.action)) && (await family()).deleted_at) {
       throw new Refuse(410, 'deleted');
     }
 
     switch (body.action) {
       case 'register': {
-        if (role === 'parent') return json({ code: await familyCode() }); // idempotent
+        if (role === 'parent') return json({ ok: true }); // idempotent
         const consent = Deno.env.get('CONSENT_VERSION');
         if (!consent) throw new Error('missing configuration'); // fail closed: never record a notice that does not exist
         if (typeof body.consent_version !== 'string' || body.consent_version !== consent) {
           throw new Refuse(400, 'consent_required');
         }
-        let code = '';
-        for (let i = 0; i < 5 && !code; i++) {
-          const c = newCode();
-          const ins = await svc.from('families').insert({ parent_id: caller.id, code: c, consent_version: body.consent_version });
-          if (!ins.error) code = c;
-          else if (ins.error.code !== '23505') throw ins.error;
-          else if (/families_pkey/.test(ins.error.message ?? '')) { code = await familyCode(); } // raced with ourselves
-        }
-        if (!code) throw new Error('no family code');
+        const ins = await svc.from('families').insert({ parent_id: caller.id, consent_version: body.consent_version });
+        if (ins.error && ins.error.code !== '23505') throw ins.error; // 23505: the row exists (a retried register)
         // role is set only after the family row exists; the client then refreshes its session to see it
         const up = await svc.auth.admin.updateUserById(caller.id, { app_metadata: { ...caller.app_metadata, role: 'parent' } });
         if (up.error) throw up.error;
-        return json({ code });
+        return json({ ok: true });
       }
       case 'me': {
         const r = await svc.from('profiles').select('id, name, pin_set_at, created_at, deleted_at').eq('parent_id', caller.id).eq('role', 'child').order('created_at');
         if (r.error) throw r.error;
         const f = await family();
-        return json({ code: f.code, deleted_at: f.deleted_at, children: r.data });
+        return json({ deleted_at: f.deleted_at, children: r.data });
       }
       case 'create_child': {
         const name = goodName(body.name);
         const pin = goodPin(body.pin);
-        const dup = await svc.from('profiles').select('id, deleted_at').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle();
+        // usernames are unique across the site: a name held by any child (another family's too) is taken
+        const dup = await svc.from('profiles').select('id, parent_id, deleted_at').eq('role', 'child').eq('name_key', nameKey(name)).maybeSingle();
         if (dup.error) throw dup.error;
-        if (dup.data) throw new Refuse(409, dup.data.deleted_at ? 'name_deleted' : 'name_taken'); // deleted: restore instead
+        if (dup.data) throw new Refuse(409, dup.data.parent_id === caller.id && dup.data.deleted_at ? 'name_deleted' : 'name_taken');
         if ((await activeCount()) >= 6) throw new Refuse(409, 'child_limit');
         const created = await svc.auth.admin.createUser({
           email: `new-${crypto.randomUUID()}@children.invalid`, password: crypto.randomUUID() + crypto.randomUUID(), email_confirm: true,
@@ -209,7 +200,7 @@ Deno.serve(async (req) => {
         const id = childId();
         const name = goodName(body.name);
         const old = await profileOf(id);
-        const dup = await svc.from('profiles').select('id').eq('parent_id', caller.id).eq('role', 'child').eq('name_key', nameKey(name)).neq('id', id).maybeSingle();
+        const dup = await svc.from('profiles').select('id').eq('role', 'child').eq('name_key', nameKey(name)).neq('id', id).maybeSingle();
         if (dup.error) throw dup.error;
         if (dup.data) throw new Refuse(409, 'name_taken');
         const u = await svc.from('profiles').update({ name }).eq('id', id).eq('parent_id', caller.id).select('id');
@@ -252,15 +243,6 @@ Deno.serve(async (req) => {
         if (u.error) throw u.error;
         await ban(id, false);
         return json({ ok: true });
-      }
-      case 'rotate_family_code': {
-        for (let i = 0; i < 5; i++) {
-          const c = newCode();
-          const u = await svc.from('families').update({ code: c }).eq('parent_id', caller.id).select('code');
-          if (!u.error) { if (!u.data?.length) throw new Refuse(404, 'not_found'); return json({ code: c }); }
-          if (u.error.code !== '23505') throw u.error;
-        }
-        throw new Error('no family code');
       }
       case 'delete_account': {
         if (typeof body.confirm !== 'string' || body.confirm.trim().toLowerCase() !== caller.email.toLowerCase()) {
