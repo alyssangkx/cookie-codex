@@ -515,15 +515,15 @@ Existing: the admin (also parent of Alyssa), Alyssa, the Admin player, the Test 
   hard-deletes rows older than 7 days (the steps in 12.9); old dumps age out after 4 weeks. Apart from that
   dump, this window is the only undo.
 - **Email sender:** Gmail SMTP for now (a domain may come later, then switch to Resend). Sender and privacy contact:
-  `baziadmin@gmail.com` (owner's choice). `smtp.gmail.com:587` with an app password the owner creates and types into
-  the Supabase SMTP settings; about 500 emails a day. Note: this is also the admin sign-in email, so it becomes public
-  (notice and every verification mail); the admin's required TOTP is what protects that account.
+  `psleadmin@gmail.com`, a dedicated account separate from the admin sign-in. `smtp.gmail.com:587` with an app
+  password; about 500 emails a day. Set in the Supabase SMTP settings by the owner on 19 Nov 2026 (Auth sign-up still
+  off). Not yet tested by a real send: the first verify mail in the Phase 2 end-to-end test is the check.
 - **Privacy contact:** the same address, named in the notice (12.13). Notice text drafted below.
 - **Still open:** the pre-apply checks in this section.
 
 ### 12.13 Privacy notice (draft for `/privacy/`)
 
-The contact is `baziadmin@gmail.com`. Version 1, to be stored as `consent_version = 1`.
+The contact is `psleadmin@gmail.com`. Version 1, to be stored as `consent_version = 1`.
 
 > **Privacy notice: Alyssa's Cookie Codex**
 >
@@ -562,7 +562,7 @@ The contact is `baziadmin@gmail.com`. Version 1, to be stored as `consent_versio
 > no access keys in your browser that could read other families. If data were ever exposed, we would tell affected
 > parents and, where the law requires, the Personal Data Protection Commission.
 >
-> **Questions or requests:** email baziadmin@gmail.com. We reply within 30 days.
+> **Questions or requests:** email psleadmin@gmail.com. We reply within 30 days.
 >
 > **Changes:** if this notice changes, you will be asked to read and agree to it again the next time you sign in.
 >
