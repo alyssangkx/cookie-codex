@@ -18,7 +18,7 @@ outside the repo.
    - The main rewrites and deletes have been live since 20 Nov.
    - Follow-ups on 20–21 Nov: a strict second review of the English visual-text sets and the Chinese idiom items,
      more Angles templates, and checked answer keys for the English, Maths and Chinese tags.
-   - **Open question:** should the site's English categories be reorganised to match the paper sections?
+   - **Approved 20 Nov:** reorganise the site's English categories to match the paper sections, in progress. The order is Grammar MCQ, Vocabulary MCQ, Vocabulary Cloze, Visual Text, Grammar Cloze, Editing, Comprehension Cloze, Synthesis & Transformation, Comprehension OE. Sections the site can't ask yet show "Coming soon".
 3. **Science population:**
    - Batch 1 on 20 Nov: plant reproduction and adaptations (upper tiers), forces, energy, survival, photosynthesis.
    - Batch 2 on 21–22 Nov: heat, circuits, respiration and circulation, water, light, matter, magnets,
