@@ -55,7 +55,7 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
 
 <script>
   import { load, save } from '../../lib/store';
-  import { loadDraft, draftOwner, draftState, tickPaper, discardDraft, paperSubject, staleText } from '../../lib/paper';
+  import { loadDraft, draftOwner, draftState, tickPaper, discardDraft, paperSubject, paperDate } from '../../lib/paper';
   const form = document.getElementById('paper-form') as HTMLFormElement;
   // one subject per paper: only the chosen subject's topics show, and only they are sent
   const subject = () => form.querySelector<HTMLInputElement>('input[name="subject"]:checked')?.value ?? 'math';
@@ -66,7 +66,8 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
   showSubject();
   document.getElementById('all')!.addEventListener('click', () => boxes().forEach((b) => (b.checked = true)));
   // A paper already started (its draft) must be finished or discarded first: Start is held back until then, and the
-  // quiz page never lets it replace the paper picked here. One long past its time is put away unscored, with a note.
+  // quiz page never lets it replace the paper picked here. This page never discards a draft by itself (another tab
+  // may be handing it in): one long past its time is only described, and is put away when it is opened or discarded.
   const $ = (id: string) => document.getElementById(id)!;
   const startBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const owner = draftOwner(load().createdAt);
@@ -77,10 +78,10 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
     if (!d) return;
     const subj = paperSubject(d);
     const st = draftState(d.clock, now);
-    if (st === 'stale') {
-      const s = load(); discardDraft(s, d); save(s);
-      $('resume-note').textContent = staleText(d);
-      $('resume-note').hidden = false;
+    $('resume-go').hidden = st === 'stale';
+    if (st === 'stale') { // Start stays on: starting a new paper puts this one away (unscored) first
+      $('resume-msg').textContent = `Your ${subj} paper from ${paperDate(d.ts)} ran out of time a while ago. It will be put away without a score, and nothing from it counts. You can start a new paper.`;
+      $('resume').hidden = false;
       return;
     }
     const left = tickPaper(d.clock, now).left;
@@ -92,7 +93,7 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
     startBtn.disabled = true;
   }
   showDraft();
-  // re-check every 30 s: a running paper becomes due, then stale (put away), and Start comes back by itself
+  // re-check every 30 s (text and Start only, never a discard): a running paper becomes due, then stale, and Start comes back
   window.setInterval(showDraft, 30_000);
   $('resume-discard').addEventListener('click', () => {
     if (!confirm('Discard this paper? Its answers are thrown away.')) return;
@@ -116,6 +117,7 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
   .resume[hidden], .note[hidden] { display: none; }
   .note { color: var(--cocoa-soft); }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .resume a[hidden] { display: none; }
   .resume a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border-radius: var(--radius-control); text-decoration: none; font-family: var(--font-display); }
   .subjects { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
   .topic[hidden] { display: none; }
