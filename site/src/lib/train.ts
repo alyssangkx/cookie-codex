@@ -81,7 +81,8 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
       c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
     return {
       ...s, school, file: subFile.get(s.id) ?? null, count, hash,
-      playable: { b: count.b >= MIN_POOL, i: count.i >= MIN_POOL, c: count.c >= MIN_POOL },
+      // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier playable)
+      playable: { b: countOf(`${s.id}|b`) >= MIN_POOL, i: countOf(`${s.id}|i`) >= MIN_POOL, c: countOf(`${s.id}|c`) >= MIN_POOL },
     };
   }),
 );

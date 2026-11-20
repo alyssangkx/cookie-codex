@@ -451,7 +451,7 @@ def deskew(g):
     ang = estimate_skew(g)
     if abs(ang) < SKEW_MIN:
         return g, 0.0
-    im = Image.fromarray(g).rotate(ang, resample=Image.BICUBIC, fillcolor=255)
+    im = Image.fromarray(g).rotate(ang, resample=Image.BICUBIC, expand=True, fillcolor=255)  # expand: keep the corners
     return np.asarray(im), ang
 
 
@@ -582,7 +582,8 @@ def selftest():
            {"subtopic": "s2", "level": "intermediate"}]
     assert tier_counts(trs, {"s1"}) == {"s1|b": 2, "s1|c": 1}
     import tempfile
-    with tempfile.TemporaryDirectory(dir=os.environ.get("PP_TMP", "/data/alvin/tmp/cookie-codex/ppfix")) as td:
+    tmpd = Path(os.environ.get("PP_TMP", "/data/alvin/tmp/cookie-codex/ppfix")); tmpd.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=tmpd) as td:
         cp = Path(td) / "c.json"
         cp.write_text('{"s1|b": 9, "s3|b": 4}')
         got = write_counts(trs, {"s1", "s2"}, cp)
@@ -715,17 +716,17 @@ def upload(a):
                        headers={"content-type": "image/webp", "x-upsert": "true", "cache-control": "3600"}, timeout=60)
             if r.status_code >= 300:
                 sys.exit(f"figure upload failed for {d['id']}: HTTP {r.status_code}")
-    ids = sorted(stale)
-    for i in range(0, len(ids), 100):  # before the upsert: a row re-tagged into another uploaded sub-topic is revived there
-        r = s.patch(f"{url}/rest/v1/pp_items", params={"id": f"in.({','.join(ids[i:i + 100])})"}, json={"active": False},
-                    headers={"prefer": "return=minimal", "content-type": "application/json"}, timeout=60)
-        if r.status_code >= 300:
-            sys.exit(f"deactivate failed at batch {i // 100}: HTTP {r.status_code}")
     for i in range(0, len(db), 200):
         r = s.post(f"{url}/rest/v1/pp_items?on_conflict=id", json=db[i:i + 200], timeout=60,
                    headers={"prefer": "resolution=merge-duplicates,return=minimal", "content-type": "application/json"})
         if r.status_code >= 300:
             sys.exit(f"row upsert failed at batch {i // 200}: HTTP {r.status_code}")
+    ids = sorted(stale)
+    for i in range(0, len(ids), 100):  # after the upsert: a failed upsert leaves the old rows live (stale never holds an uploaded id)
+        r = s.patch(f"{url}/rest/v1/pp_items", params={"id": f"in.({','.join(ids[i:i + 100])})"}, json={"active": False},
+                    headers={"prefer": "return=minimal", "content-type": "application/json"}, timeout=60)
+        if r.status_code >= 300:
+            sys.exit(f"deactivate failed at batch {i // 100}: HTTP {r.status_code}")
     print(f"loaded {len(db)} rows and {nfig} figures")
     write_counts(rows, usubs)
     print(f"wrote {COUNTS.name}")
