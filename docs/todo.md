@@ -58,8 +58,23 @@ outside the repo.
   - **Then the questions come from one of two sources:**
     - straight from the repo's past papers, served privately after the blind-answer check;
     - generated in the same style.
-  - First step: a Science frequency and format study over all tagged years, covering type × framing × figure kind
-    (photo, diagram, graph, table, set-up drawing).
+  - [x] 20 Nov: frequency and format study done.
+    - Public summary: `docs/quiz/science-paper-profile.md`. Private report:
+      `audit/science-study/report.md`, with blueprints.
+    - The site's 5 sub-topics carry only 15.6% of marks.
+    - MCQ is 54% of marks; open-ended is 46%, about 70% of it "explain why/how".
+    - 88% of questions have a figure: set-ups 30%, labelled diagrams 22%, tables 11%, line graphs 10%, circuits 7%.
+    - Figure kinds are being re-measured on the server.
+  - [ ] **Build order:**
+    1. Top up the Intermediate and Competent tiers of plant reproduction and adaptations.
+    2. Then forces-effects (10.2% of marks), energy-conv (8.9%), env-survival (8.1%), photosynthesis (5.9%),
+       heat-effects (5.4%), circuit (4.8%), resp-circ (4.5%) and water-states (3.6%).
+    3. Then light, matter, magnets, living classification and materials.
+    4. Build each small sub-topic alongside its parent (circuit-vars with circuit, and so on).
+    - Almost all MCQ blueprints are code-generatable (SVG tables, line graphs, circuits, food webs, set-ups,
+      ray/shadow, ramps).
+    - Flower/fruit, heart/lung, cell and beak/foot items need drawn line art.
+    - Open-ended items need verbatim repo items or the marker.
 
 - [ ] **Science:**
   - Adaptations and Plant reproduction need Intermediate and Competent items (only Basic is playable).
