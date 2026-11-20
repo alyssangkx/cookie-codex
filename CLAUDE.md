@@ -99,7 +99,7 @@ Same contract as the Chinese banks, with 4 options per item (passage sets: see Q
 
 ```bash
 python3 scripts/quiz/english/build.py     # items/*.json (the sub-topic is each file's "subtopic" field; several files may share one) + review.json -> site/src/data/quiz/english/<topic>.json
-python3 scripts/quiz/check_english.py     # must print "0 failures"
+python3 scripts/quiz/check_english.py     # must print "0 failures"; its WARN section (stem echo, near-duplicate options, correct option longest in >35% of a sub-topic) does not fail unless --strict
 python3 scripts/quiz/english/coverage.py  # -> docs/quiz/english-coverage.md
 python3 scripts/quiz/build_rewards.py     # after the banks change
 ```
@@ -115,7 +115,7 @@ Same contract as English (4 options, items + `review.json` with fingerprints, fa
 
 ```bash
 python3 scripts/quiz/science/build.py     # items/*.json (each file has "subtopic") + review.json -> site/src/data/quiz/science/<topic>.json
-python3 scripts/quiz/check_science.py     # must print "0 failures"
+python3 scripts/quiz/check_science.py     # must print "0 failures"; WARN section as English plus figure text naming the answer and figure/stem mismatch (--strict makes warnings fail)
 python3 scripts/quiz/science/coverage.py  # -> docs/quiz/science-coverage.md
 python3 scripts/quiz/build_rewards.py     # after the banks change
 ```

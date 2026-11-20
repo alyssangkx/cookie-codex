@@ -1,9 +1,13 @@
 """Validate the Science item files and the compiled banks; exits non-zero on any failure.
 
-    python3 scripts/quiz/check_science.py
+    python3 scripts/quiz/check_science.py            # review warnings are printed but do not fail
+    python3 scripts/quiz/check_science.py --strict   # review warnings count as failures
 
 Figures: an item's "figure" is an inline SVG string (code-made, currentColor, no scripts or external references)
 or line art {"img": "/science/<file>.webp", "alt", "labels": [{"x", "y", "text"}]} whose file must exist under site/public/.
+
+Review warnings (WARN section, helpers in bankcommon.py): figure text naming the answer, stem echo, near-duplicate
+options, the correct option strictly longest in over 35% of a sub-topic, and a figure that names none of the stem's words.
 """
 import json
 import re
@@ -13,6 +17,10 @@ from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).parent
+sys.path.insert(0, str(HERE))
+from bankcommon import (Warnings, gives_away, near_duplicates, correct_is_longest, figure_text, figure_mismatch,  # noqa: E402
+                        longest_share_warnings, warning_self_tests, NEAR_DUP)
+STRICT = "--strict" in sys.argv[1:]
 ROOT = HERE.parents[1]
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "science.json").read_text())
 OUTCOMES = {o["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
@@ -102,6 +110,14 @@ def figure_errors(fig, answer_text=None, options=()):
 _all = [(f, json.loads(f.read_text())) for f in sorted((HERE / "science" / "items").glob("*.json"))]
 sub_keys = Counter((d.get("subtopic"), it.get("key")) for _, d in _all for it in d["items"])
 sub_stems = Counter((d.get("subtopic"), it.get("stem")) for _, d in _all for it in d["items"])
+warn = Warnings({
+    "figure-leak": "figure alt/labels/text contain every distinctive word of the correct option, and of no other option",
+    "stem-echo": "stem contains every distinctive word of the correct option, and of no other option",
+    "near-dup-options": f"two options at least {NEAR_DUP:.0%} alike after normalising (labels and short options skipped)",
+    "longest-correct": "sub-topics where the correct option is strictly the longest in over 35% of items",
+    "figure-mismatch": "figure text names none of the stem's content words",
+})
+longest = {}
 
 for f, data in _all:
     sub = data.get("subtopic")
@@ -133,6 +149,16 @@ for f, data in _all:
         if "figure" in it:
             ans = opts[a] if isinstance(a, int) and not isinstance(a, bool) and 0 <= a < len(opts) and isinstance(opts[a], str) else None
             for msg in figure_errors(it["figure"], ans, opts if isinstance(opts, list) else ()): e(msg)
+        if isinstance(opts, list) and len(opts) == 4 and all(isinstance(o, str) for o in opts) \
+                and isinstance(a, int) and not isinstance(a, bool) and 0 <= a < 4:
+            w = lambda rule, m: warn.add(rule, f"{f.name} {it.get('key')}: {m}")
+            if "figure" in it and gives_away(figure_text(it["figure"]), opts, a): w("figure-leak", f"answer {opts[a]!r}")
+            if gives_away(stem, opts, a): w("stem-echo", f"answer {opts[a]!r}")
+            for x, y in near_duplicates(opts): w("near-dup-options", f"{x!r} ~ {y!r}")
+            if "figure" in it and figure_mismatch(stem, it["figure"]):
+                w("figure-mismatch", f"figure text {figure_text(it['figure'])[:60]!r}")
+            longest.setdefault(sub, []).append(correct_is_longest(opts, a))
+for m in longest_share_warnings(longest): warn.add("longest-correct", m)
 
 # compiled banks: unique ids, 4-option shape, figure schema
 ids = Counter()
@@ -147,8 +173,11 @@ errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
 
 for svg, must_fail in SELF_TESTS:
     if bool(svg_errors(svg)) != must_fail: errors.append(f"svg rule self-test failed for {svg}")
+errors += warning_self_tests(science=True)
 
 print(f"checked {len(_all)} item files, {sum(ids.values())} shipped questions")
+warn.report()
+if STRICT: errors += [f"[{r}] {m}" for r, ms in warn.hits.items() for m in ms]
 for m in errors[:40]:
     print("FAIL", m)
 print(f"{len(errors)} failures")

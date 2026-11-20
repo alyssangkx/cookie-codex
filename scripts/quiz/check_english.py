@@ -1,6 +1,11 @@
 """Validate the English item files and the compiled banks; exits non-zero on any failure.
 
-    python3 scripts/quiz/check_english.py
+    python3 scripts/quiz/check_english.py            # review warnings are printed but do not fail
+    python3 scripts/quiz/check_english.py --strict   # review warnings count as failures
+
+Review warnings (WARN section, helpers in bankcommon.py): stem echo (for a passage item, only the question after the
+passage), near-duplicate options, and the correct option strictly longest in over 35% of a sub-topic. English has no
+figures, so the figure rules are Science only.
 """
 import json
 import re
@@ -10,7 +15,9 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
-from bankcommon import PASSAGE  # noqa: E402
+from bankcommon import (PASSAGE, Warnings, gives_away, question_part, near_duplicates, correct_is_longest,  # noqa: E402
+                        longest_share_warnings, warning_self_tests, NEAR_DUP)
+STRICT = "--strict" in sys.argv[1:]
 ROOT = HERE.parents[1]
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "english.json").read_text())
 OUTCOMES = {o["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
@@ -74,6 +81,12 @@ def end_punct(s):
 _all = [(f, json.loads(f.read_text())) for f in sorted((HERE / "english" / "items").glob("*.json"))]
 sub_keys = Counter((d.get("subtopic"), it.get("key")) for _, d in _all for it in d["items"])
 sub_stems = Counter((d.get("subtopic"), it.get("stem")) for _, d in _all for it in d["items"])
+warn = Warnings({
+    "stem-echo": "stem (question part after a passage) contains every distinctive word of the correct option, and of no other option",
+    "near-dup-options": f"two options at least {NEAR_DUP:.0%} alike after normalising (labels and short options skipped)",
+    "longest-correct": "sub-topics where the correct option is strictly the longest in over 35% of items",
+})
+longest = {}
 
 sets = {}
 for f in sorted((HERE / "english" / "items").glob("*.json")):
@@ -126,6 +139,13 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
             if len(asked) != 1 or int(asked[0]) != int(m[3]): e(f"ecloze stem needs exactly one asked blank (N) ________ with N = {m[3]}, found {asked}")
             if any(len(u) != 4 for n, u in re.findall(r"\((\d+)\) (_+)", stem) if int(n) != int(m[3])):
                 e("ecloze: every blank other than the asked one must be written (k) ____ (4 underscores)")
+        if isinstance(opts, list) and len(opts) == 4 and all(isinstance(o, str) for o in opts) \
+                and isinstance(a, int) and not isinstance(a, bool) and 0 <= a < 4:
+            w = lambda rule, msg: warn.add(rule, f"{f.name} {it.get('key')}: {msg}")
+            if gives_away(question_part(stem) if m else stem, opts, a): w("stem-echo", f"answer {opts[a]!r}")
+            for x, y in near_duplicates(opts): w("near-dup-options", f"{x!r} ~ {y!r}")
+            longest.setdefault(sub, []).append(correct_is_longest(opts, a))
+for msg in longest_share_warnings(longest): warn.add("longest-correct", msg)
 
 for (sub, kind, nn), its in sets.items():
     nums = sorted(int(PASSAGE.match(i["key"])[3]) for i in its)
@@ -147,8 +167,11 @@ for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "english").glob("*.js
         if len(q["outcomes"]) != 2 or q["outcomes"][1] not in SYLLABUS:
             errors.append(f"{f.name} {q['id']}: outcomes must be [section outcome, syllabus outcome]")
 errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
+errors += warning_self_tests()
 
 print(f"checked {sum(1 for _ in (HERE / 'english' / 'items').glob('*.json'))} item files, {sum(ids.values())} shipped questions")
+warn.report()
+if STRICT: errors += [f"[{r}] {msg}" for r, ms in warn.hits.items() for msg in ms]
 for m in errors[:40]:
     print("FAIL", m)
 print(f"{len(errors)} failures")
