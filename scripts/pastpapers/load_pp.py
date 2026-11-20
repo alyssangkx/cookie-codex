@@ -65,6 +65,8 @@ def pp_id(src_id: str) -> str:
 def key(a, opts):
     """The answer as '1'..'4' (same rule as the blind check's key())."""
     a = str(a or "").strip()
+    if not a:
+        return None  # no key (an empty answer must not match an option that is empty after its "(n)")
     m = re.fullmatch(r"\(?([1-4])\)?", a)
     if m:
         return m.group(1)
