@@ -1,5 +1,5 @@
 {
-  "_note": "Building hotspots as % of each map image (left, top, width, height). Set by eye from site/public/home/map-*.webp; re-check with screenshots whenever an image changes.",
+  "_note": "Building hotspots as % of each map image (left, top, width, height). Set by eye from site/public/home/map-*.webp; re-check with screenshots whenever an image changes. `art` places building sprites drawn over the map (the shop), as % boxes per layout.",
   "buildings": [
     {
       "id": "math",
@@ -35,16 +35,18 @@
       "status": "open"
     },
     {
+      "id": "shop",
+      "label": "Shop",
+      "sub": "Spend Crumbs",
+      "href": "/shop/",
+      "status": "open"
+    },
+    {
       "id": "house",
       "label": "My House",
       "sub": "My cards",
       "href": "/collection/",
       "status": "open"
-    },
-    {
-      "id": "tower",
-      "label": "Ranking Tower",
-      "status": "soon"
     }
   ],
   "wide": {
@@ -78,12 +80,6 @@
       16,
       30
     ],
-    "tower": [
-      86,
-      3,
-      12,
-      45
-    ],
     "house": [
       76,
       56,
@@ -100,8 +96,8 @@
         57
       ],
       [
-        67,
-        60
+        72,
+        70
       ],
       [
         88,
@@ -111,6 +107,12 @@
         33,
         92
       ]
+    ],
+    "shop": [
+      63.0,
+      31.8,
+      14.1,
+      25.3
     ]
   },
   "tall": {
@@ -142,13 +144,7 @@
       12,
       21,
       30,
-      17
-    ],
-    "tower": [
-      46,
-      10,
-      19,
-      20
+      10
     ],
     "house": [
       60,
@@ -173,6 +169,28 @@
         44,
         58
       ]
+    ],
+    "shop": [
+      4,
+      34.5,
+      25.6,
+      14
     ]
+  },
+  "art": {
+    "shop": {
+      "wide": [
+        63.0,
+        31.8,
+        14.1,
+        25.3
+      ],
+      "tall": [
+        5.1,
+        30.6,
+        24.4,
+        13.7
+      ]
+    }
   }
 }

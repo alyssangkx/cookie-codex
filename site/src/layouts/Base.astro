@@ -8,7 +8,7 @@ interface Props {
 const { title, description } = Astro.props;
 // One list of private routes: the login gate below guards GAME and PARENT; all of them (plus the sign-in
 // pages) are kept out of search results with "noindex, follow", so the Library stays findable through them.
-const GAME = '^/(train|quiz|paper|collection)(/|$)';
+const GAME = '^/(train|quiz|paper|collection|shop)(/|$)';
 const path = Astro.url.pathname.replace(/\/+$/, '');
 const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|admin|grownups|signup|reset)(\/|$)/.test(path);
 ---
@@ -84,6 +84,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
           <a href="/">Home</a>
           <a href="/codex/">Library</a>
           <a class="gated" href="/collection/">My House</a>
+          <a class="gated crumb-bal" href="/shop/" id="crumb-bal">Shop</a>
           <a class="gated" href="/parent/">Parents</a>
           <button type="button" id="logout" class="logout" hidden>Log out</button>
         </nav>
@@ -107,7 +108,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
     <script>
       import { currentSession, offlineAllowed, supabase } from '../lib/supabase';
       import { initSync, logout, isChildSession } from '../lib/sync';
-      import { kv } from '../lib/store';
+      import { kv, crumbBalance } from '../lib/store';
 
       // The one place the signed-in child's name is shown: header brand, tab title, and every
       // <span class="player-sep"> (becomes ", <Name>"). It comes from the profile at login (kv player-name,
@@ -120,6 +121,9 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         if (brand) brand.textContent = `${name}'s\u00a0`; // no-break space: the header's layout drops a plain one
         if (document.title.endsWith('Cookie Codex')) document.title = document.title.replace(/Cookie Codex$/, `${name}'s Cookie Codex`);
         document.querySelectorAll('.player-sep').forEach((el) => (el.textContent = `, ${name}`));
+        // the Crumbs balance rides on the Shop link (the shop page updates it after a purchase)
+        const bal = document.getElementById('crumb-bal');
+        if (bal) bal.textContent = `Shop · ${crumbBalance()} Crumbs`;
       };
 
       const root = document.documentElement;

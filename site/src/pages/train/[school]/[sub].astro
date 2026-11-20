@@ -46,6 +46,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 
 <script>
   import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, type Tier } from '../../../lib/store';
+  import { rewardPreview, toEconomy, type EconomyData } from '../../../lib/crumbs';
   const s = load();
   const root = document.querySelector<HTMLElement>('.sub-page')!;
   const sub = root.dataset.sub!;
@@ -72,6 +73,26 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     if (!block && reason) block = blockMessage(reason);
     if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
   });
+
+  // The exact card a clear gives now (crumbs.ts rewardPreview, the same rule store.ts awards by): the slot card, or the
+  // next unowned card of its rarity when the slot card is owned, or a star plus Crumbs when none is left.
+  fetch('/data/economy.json').then((r) => (r.ok ? r.json() : null)).then((d: EconomyData | null) => {
+    if (!d) return;
+    const eco = toEconomy(d);
+    root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
+      const p = rewardPreview(s, card.dataset.slug!, eco);
+      const c = d.cards[p.slug];
+      if (!c) return;
+      const a = card.querySelector<HTMLAnchorElement>('.reward')!;
+      a.href = `/cookie/${encodeURIComponent(p.slug)}/`;
+      a.style.setProperty('--rc', `var(--r-${c.rarity})`);
+      a.querySelector('img')!.src = c.image;
+      a.querySelector('.reward-name')!.textContent = c.name;
+      a.querySelector('.reward-rarity')!.textContent = c.rarity.replace('-', ' ');
+      a.querySelector('.reward-label')!.textContent = p.kind === 'star' ? `Reward: +1 star and +${p.crumbs} Crumbs for`
+        : p.replaces ? `Reward card (you already have ${d.cards[p.replaces]?.name ?? 'this tier\'s card'})` : 'Reward card';
+    });
+  }).catch(() => { /* offline: the label above (card or star) still holds */ });
 </script>
 
 <style>
@@ -89,7 +110,8 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
   .reward { display: flex; gap: 0.75rem; align-items: center; color: var(--cocoa); text-decoration: none; }
   .reward img { width: 72px; height: 72px; object-fit: contain; background: var(--plate); border-radius: 50%; box-shadow: 0 0 0 3px var(--rc); }
   .reward > span { display: grid; }
-  .reward-label, .reward-rarity { font-size: 0.85rem; color: var(--cocoa-soft); text-transform: capitalize; }
+  .reward-label, .reward-rarity { font-size: 0.85rem; color: var(--cocoa-soft); }
+  .reward-rarity { text-transform: capitalize; } /* the label is a sentence (it can name the card you already have) */
   .reward-name { font: 600 1.05rem var(--font-display); }
   .meta, .state { margin: 0; font-size: 0.95rem; }
   .state { color: var(--cocoa-soft); }

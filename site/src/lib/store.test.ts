@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -570,4 +570,21 @@ test('a wrong answer keeps the picked option text (capped), through retests and 
   assert.deepEqual(s.questions.n, { s: 0, due: 0, w: 0 });
   const old = fresh(); old.questions.z = { s: 1, due: t0, w: 1 }; // a save from before the field existed
   assert.deepEqual(migrate(JSON.parse(JSON.stringify(old))).questions.z, { s: 1, due: t0, w: 1 });
+});
+
+test('a state parked by an older build (or older tab) cannot hide Daily Review: the gate counts it until this build re-checks it', () => {
+  const s = fresh();
+  for (const id of ['live', 'gone', 'fresh']) answer(s, id, false, t0);
+  const now = t0 + 2 * DAY;
+  s.questions.live.parked = true; // an old tab, missing a newer bank file, parked a live retest
+  s.questions.gone.parked = true;
+  assert.equal(reviewDueCount(s, now, 'banksV2'), 3); // isDue alone would count 1 and hide the Daily Review button
+  // Daily Review in this build loads every bank: unparks the live one, re-marks the vanished one with this bank set
+  assert.equal(syncParked(s, ['live', 'fresh'], true, 'banksV2'), true);
+  assert.equal(s.questions.live.parked, undefined);
+  assert.equal(s.questions.gone.parked, 'banksV2');
+  assert.equal(s.questions.gone.s, 1); // never deleted (ADR 0002)
+  assert.equal(reviewDueCount(s, now, 'banksV2'), 2); // the true orphan stays out of the count
+  assert.equal(syncParked(s, ['live', 'fresh'], true, 'banksV2'), false); // nothing changes on a second pass
+  assert.equal(reviewDueCount(s, now, 'banksV3'), 3); // a newer bank set re-checks it once more
 });

@@ -3,17 +3,13 @@ import Base from '../../layouts/Base.astro';
 import { cookies, rarityLabel } from '../../lib/data';
 import { subs, slots, milestones, SCHOOLS } from '../../lib/train';
 import { TIER_NAME } from '../../lib/store';
+import { EARN_RULE } from '../../lib/crumbs';
 
 const ORDER = ['ancient', 'witch', 'beast', 'dragon', 'legendary', 'super-epic', 'epic', 'special', 'rare', 'common'];
 const SCHOOL_NAME: Record<string, string> = { math: 'Math', science: 'Science', english: 'English', chinese: 'Chinese' };
 const subById = new Map(subs.map((s) => [s.id, s]));
 
-const MILESTONE_RULE: Record<string, string> = {
-  ancient: 'Get your legendary cards to 2 stars or more, then pass the Ancient Trial (coming later)',
-  dragon: 'Reach 30 / 100 study days',
-  beast: 'Beat a school monster (coming later)',
-  witch: 'Fix 150 old mistakes',
-};
+const MILESTONE_RULE = EARN_RULE; // crumbs.ts: shared with the shop
 const milestoneOf = new Map<string, string>();
 for (const [kind, list] of Object.entries(milestones)) for (const slug of list) milestoneOf.set(slug, kind);
 
@@ -193,7 +189,9 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
     owned++;
     el.classList.replace('locked', 'owned');
     const sub = meta.subs[c.srcSub];
-    const from = `${sub ? sub.sc + ' › ' + sub.n : c.srcSub} › ${TIER_NAME[c.srcTier] ?? c.srcTier}`;
+    // shop and achievement cards have no tier behind them (crumbs.ts, store.ts achievements)
+    const from = c.srcSub === 'shop' ? 'Bought in the Shop' : c.srcSub === 'paper' ? 'A top WA/SA paper result'
+      : c.srcSub.startsWith('topic:') ? 'Mastering a whole topic' : `${sub ? sub.sc + ' › ' + sub.n : c.srcSub} › ${TIER_NAME[c.srcTier] ?? c.srcTier}`;
     const stars = Math.max(1, Math.min(5, c.stars));
     el.querySelector('.state')!.innerHTML = `<span class="stars" role="img" aria-label="${stars} star${stars > 1 ? 's' : ''}">${'★'.repeat(stars)}</span> · Power ${power(c)}`;
     el.querySelector('.info')!.textContent = `Earned: ${from}`;

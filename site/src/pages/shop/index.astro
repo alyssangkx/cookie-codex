@@ -1,0 +1,231 @@
+---
+// The Crumb Shop (docs/game-economy.md; owner's answers 20 Nov 2026): fixed prices, the child picks the exact card,
+// nothing random, no timers, no sales, no real money. Super Epic, Legendary and the milestone classes are not for sale;
+// they show how they are earned and (Super Epic, Legendary) the exact card the next one will be.
+import Base from '../../layouts/Base.astro';
+import { cookies, rarityLabel } from '../../lib/data';
+import { rarityOrder, competencyTopics, milestones, subs } from '../../lib/train';
+import { PRICE, EARN_RULE, MAX_STARS, LEGENDARY_MIN_QUESTIONS } from '../../lib/crumbs';
+
+const FOR_SALE = ['common', 'rare', 'special', 'epic'];
+const EARN_ONLY = ['super-epic', 'legendary', 'beast', 'dragon', 'witch', 'ancient'];
+const byName = (a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name);
+const sale = FOR_SALE.map((r) => ({ rarity: r, price: PRICE[r], list: cookies.filter((c) => c.rarity === r).sort(byName) }));
+const earnOnly = EARN_ONLY.map((r) => ({ rarity: r, rule: EARN_RULE[r], list: cookies.filter((c) => c.rarity === r).sort(byName) }))
+  .filter((g) => g.list.length);
+const topicName = new Map(subs.map((s) => [s.topic, s.topicName]));
+const data = JSON.stringify({
+  order: rarityOrder, topics: competencyTopics,
+  topicNames: Object.fromEntries(Object.keys(competencyTopics).map((t) => [t, topicName.get(t) ?? t])),
+  cards: Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }])),
+  milestones,
+}).replace(/</g, '\\u003c');
+const EARN_TABLE = [['90% or more (AL1)', '8, plus 4 for a perfect score'], ['85 to 89% (AL2)', '7'], ['80 to 84% (AL3)', '6'],
+  ['75 to 79% (AL4)', '5'], ['65 to 74% (AL5)', '4'], ['45 to 64% (AL6)', '3'], ['20 to 44% (AL7)', '2'], ['under 20% (AL8)', '1']];
+---
+<Base title="Shop · Cookie Codex" description="Spend the Crumbs you earn from quizzes on the exact cookie card you want.">
+  <section class="wrap shop-page">
+    <h1>Crumb Shop</h1>
+    <p class="lede">Spend Crumbs on the exact card you want. Prices never change and nothing is random.</p>
+    <p class="wallet" aria-live="polite"><span>You have</span> <strong id="bal">0</strong> <span>Crumbs</span></p>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+
+    <details class="earn">
+      <summary>How do I earn Crumbs?</summary>
+      <p>Finish a quiz to earn Crumbs by your score (the same bands as PSLE AL grades):</p>
+      <table>
+        <thead><tr><th scope="col">Score</th><th scope="col">Crumbs</th></tr></thead>
+        <tbody>{EARN_TABLE.map(([a, b]) => <tr><td>{a}</td><td>{b}</td></tr>)}</tbody>
+      </table>
+      <ul>
+        <li>A WA/SA paper earns 3 times as many.</li>
+        <li>Each retest you pass: 1. Daily goal met: 3. A streak week: 10.</li>
+        <li>Crumbs never run out or expire. They can't be bought with money.</li>
+      </ul>
+    </details>
+
+    <nav class="jump" aria-label="Jump to a rarity">
+      <span>Jump to:</span>
+      {sale.map((g) => <a class="tag" href={`#shop-${g.rarity}`}>{rarityLabel(g.rarity)}</a>)}
+      <a class="tag" href="#earn-only">Not for sale</a>
+    </nav>
+
+    {sale.map((g) => (
+      <section class="shelf" id={`shop-${g.rarity}`} data-rarity={g.rarity} data-price={g.price} style={`--rc: var(--r-${g.rarity})`}>
+        <h2><span class="rarity-chip">{rarityLabel(g.rarity)}</span> <span class="price">{g.price} Crumbs each</span></h2>
+        <p class="sold-out" hidden>You have every {rarityLabel(g.rarity)} card. You can buy a star for one instead ({g.price} Crumbs, up to {MAX_STARS} stars).</p>
+        <ul class="grid">
+          {g.list.map((c) => (
+            <li class="scard" data-slug={c.slug} data-name={c.name}>
+              <a class="plate" href={`/cookie/${c.slug}/`} aria-label={`${c.name} (card details)`}>
+                <img src={c.image} alt="" width="312" height="312" loading="lazy" decoding="async" />
+              </a>
+              <span class="name">{c.name}</span>
+              <span class="stars" aria-label=""></span>
+              <button type="button" class="buy">Buy · {g.price}</button>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <h2 class="earn-h" id="earn-only">Not for sale: earn these by learning</h2>
+    <p class="lede">The rarest cards prove what you have learnt, so Crumbs can't buy them.</p>
+    {earnOnly.map((g) => (
+      <section class="shelf earn-only" data-rarity={g.rarity} style={`--rc: var(--r-${g.rarity})`}>
+        <h2><span class="rarity-chip">{rarityLabel(g.rarity)}</span> <span class="own"><span class="own-n">0</span> of {g.list.length} owned</span></h2>
+        <p class="rule"><strong>Earn by:</strong> {g.rule}.</p>
+        {(g.rarity === 'super-epic' || g.rarity === 'legendary') && (
+          <p class="next" hidden><span class="next-label"></span> <a class="next-card" href="#"></a></p>
+        )}
+        {g.rarity === 'super-epic' && <p class="topics"></p>}
+        {g.rarity === 'legendary' && <p class="hint">Build one on the <a href="/paper/">WA/SA paper</a> page ({LEGENDARY_MIN_QUESTIONS} questions or more).</p>}
+      </section>
+    ))}
+
+    <dialog id="confirm" class="shop-dlg" aria-labelledby="confirm-q">
+      <p id="confirm-q"></p>
+      <div class="dlg-actions">
+        <button type="button" id="confirm-yes" class="primary">Yes, buy it</button>
+        <button type="button" id="confirm-no">Not now</button>
+      </div>
+    </dialog>
+  </section>
+  <script type="application/json" id="shop-data" set:html={data} />
+</Base>
+
+<script>
+  import { load, purchase, tierState, type SaveV1 } from '../../lib/store';
+  import { toEconomy, balanceOf, nextUnowned, achievementPreview, PRICE, MAX_STARS, type EconomyData, type BuyResult } from '../../lib/crumbs';
+
+  const d: EconomyData = JSON.parse(document.getElementById('shop-data')!.textContent!);
+  const eco = toEconomy(d);
+  const $ = (id: string) => document.getElementById(id)!;
+  const dlg = $('confirm') as HTMLDialogElement;
+  let s: SaveV1 = load();
+  let pending: { kind: 'card' | 'star'; slug: string; from: number } | null = null;
+
+  const REFUSED: Record<Exclude<BuyResult, { ok: true }>['reason'], string> = {
+    owned: 'You already have that card.', poor: 'Not enough Crumbs yet.', 'not-for-sale': 'That card is not for sale.',
+    'cards-left': 'Stars are for sale once you have every card of that rarity.', stale: 'That was already bought (maybe in another tab).',
+    max: 'That card already has 5 stars.', 'not-owned': 'You need the card before you can add a star.',
+  };
+
+  function render() {
+    s = load(); // always the stored save: another tab may have bought or earned since
+    const bal = balanceOf(s);
+    $('bal').textContent = String(bal);
+    const head = document.getElementById('crumb-bal');
+    if (head) head.textContent = `Shop · ${bal} Crumbs`;
+    document.querySelectorAll<HTMLElement>('.shelf[data-price]').forEach((shelf) => {
+      const rarity = shelf.dataset.rarity!, price = Number(shelf.dataset.price);
+      const soldOut = !nextUnowned(s, rarity, eco);
+      shelf.querySelector<HTMLElement>('.sold-out')!.hidden = !soldOut;
+      shelf.querySelectorAll<HTMLElement>('.scard').forEach((li) => {
+        const card = s.cards[li.dataset.slug!];
+        const btn = li.querySelector<HTMLButtonElement>('.buy')!;
+        const stars = li.querySelector<HTMLElement>('.stars')!;
+        li.classList.toggle('owned', !!card);
+        stars.textContent = card ? `Owned ${'★'.repeat(Math.min(card.stars, MAX_STARS))}` : '';
+        stars.setAttribute('aria-label', card ? `Owned, ${card.stars} star${card.stars === 1 ? '' : 's'}` : '');
+        const kind = card ? (soldOut && card.stars < MAX_STARS ? 'star' : null) : 'card';
+        btn.hidden = !kind;
+        if (!kind) return;
+        const short = price - bal;
+        btn.dataset.kind = kind;
+        btn.dataset.from = String(card?.stars ?? 0);
+        btn.textContent = short > 0 ? `Need ${short} more` : kind === 'star' ? `Buy a star · ${price}` : `Buy · ${price}`;
+        btn.disabled = short > 0;
+      });
+    });
+    document.querySelectorAll<HTMLElement>('.earn-only').forEach((shelf) => {
+      const rarity = shelf.dataset.rarity!;
+      const list = rarity in d.milestones ? d.milestones[rarity] : d.order[rarity] ?? [];
+      shelf.querySelector('.own-n')!.textContent = String(list.filter((x) => s.cards[x]).length);
+      const next = shelf.querySelector<HTMLElement>('.next');
+      const p = next ? achievementPreview(s, rarity, eco) : null;
+      if (next && p) {
+        const c = d.cards[p.slug];
+        next.hidden = false;
+        next.querySelector('.next-label')!.textContent = p.kind === 'card' ? 'Your next one will be' : `You have them all: the next one gives +1 star and +${p.crumbs} Crumbs for`;
+        const a = next.querySelector<HTMLAnchorElement>('.next-card')!;
+        a.textContent = c.name;
+        a.href = `/cookie/${encodeURIComponent(p.slug)}/`;
+      }
+      const topics = shelf.querySelector<HTMLElement>('.topics');
+      if (topics) {
+        const ids = Object.keys(d.topics);
+        const done = ids.filter((t) => s.crumbs?.topics?.includes(t)).length;
+        const close = ids.filter((t) => !s.crumbs?.topics?.includes(t))
+          .map((t) => ({ t, left: d.topics[t].filter((sub) => !tierState(s, sub, 'c').cleared).length }))
+          .sort((a, b) => a.left - b.left)[0];
+        topics.textContent = !ids.length ? 'No topic has all its Competent tiers ready yet.'
+          : `${done} of ${ids.length} topics mastered.` + (close ? ` Closest: ${d.topicNames[close.t] ?? close.t} (${close.left} Competent tier${close.left === 1 ? '' : 's'} to clear).` : '');
+      }
+    });
+  }
+
+  document.querySelector('.shop-page')!.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('button.buy');
+    if (!btn || btn.disabled) return;
+    const li = btn.closest<HTMLElement>('.scard')!;
+    const slug = li.dataset.slug!, name = li.dataset.name!;
+    const price = PRICE[d.cards[slug]?.rarity] ?? 0;
+    pending = { kind: btn.dataset.kind as 'card' | 'star', slug, from: Number(btn.dataset.from) };
+    $('confirm-q').textContent = pending.kind === 'card' ? `Buy ${name} for ${price} Crumbs?` : `Buy a star for ${name} for ${price} Crumbs?`;
+    dlg.showModal();
+  });
+  $('confirm-no').addEventListener('click', () => { pending = null; dlg.close(); });
+  $('confirm-yes').addEventListener('click', () => {
+    const p = pending;
+    pending = null;
+    dlg.close();
+    if (!p) return; // a second click on the same dialog does nothing
+    const r = purchase(p.kind, p.slug, p.from, eco);
+    const name = d.cards[p.slug]?.name ?? p.slug;
+    $('status').textContent = r.ok ? (p.kind === 'card' ? `${name} is yours! It is in My House now.` : `${name} gained a star!`) : REFUSED[r.reason];
+    render();
+  });
+  // another tab earned or spent: show the stored balance
+  window.addEventListener('storage', (e) => { if (e.key === 'ccx:save') render(); });
+  render();
+</script>
+
+<style>
+  .shop-page { padding-block: 1.5rem 2.5rem; }
+  .lede { color: var(--cocoa-soft); max-width: 65ch; }
+  .wallet { display: inline-flex; gap: 0.4rem; align-items: baseline; margin: 0.25rem 0 0.5rem; padding: 0.4rem 1rem; border-radius: 999px;
+    background: var(--paper); border: 2px solid var(--crust); font: 600 1.15rem var(--font-display); color: var(--cocoa); }
+  .wallet strong { font-size: 1.5rem; }
+  .status { min-height: 1.5em; margin: 0 0 0.5rem; font-weight: 600; color: var(--cocoa); }
+  .earn { margin: 0 0 1rem; max-width: 65ch; }
+  .earn summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font: 600 1.05rem var(--font-display); color: var(--berry); }
+  .earn table { border-collapse: collapse; margin: 0.5rem 0; }
+  .earn th, .earn td { text-align: left; padding: 0.3rem 1rem 0.3rem 0; border-bottom: 1px dashed var(--crust); }
+  .jump { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; align-items: center; margin: 0.5rem 0 1rem; }
+  .jump .tag { min-height: 44px; display: inline-flex; align-items: center; }
+  .shelf { margin: 1.5rem 0; }
+  .shelf h2 { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: baseline; }
+  .price, .own { font: 500 1rem var(--font-body); color: var(--cocoa-soft); }
+  .sold-out, .rule, .next, .topics, .hint { max-width: 65ch; }
+  .grid { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .scard { display: grid; grid-template-rows: auto 1fr auto auto; gap: 0.3rem; justify-items: center; text-align: center; padding: 0.6rem; border-radius: var(--radius-card);
+    background: var(--paper); border: 2px solid var(--crust); }
+  .scard.owned { border-color: var(--rc); }
+  .plate { display: block; width: 96px; height: 96px; }
+  .plate img { width: 96px; height: 96px; object-fit: contain; }
+  .name { font: 600 0.95rem/1.2 var(--font-display); color: var(--cocoa); }
+  .stars { font-size: 0.85rem; color: var(--cocoa-soft); min-height: 1.2em; }
+  .buy { min-height: 44px; width: 100%; font: 600 0.95rem var(--font-display); border-radius: 10px; cursor: pointer;
+    border: 2px solid var(--berry); background: var(--berry); color: var(--berry-ink); }
+  .buy:disabled { background: var(--plate); border-color: var(--crust); color: var(--cocoa-soft); cursor: default; }
+  .earn-h { margin-top: 2.5rem; }
+  .earn-only { padding: 0.75rem 1rem; border-left: 6px solid var(--rc); background: var(--paper); border-radius: var(--radius-card); }
+  .next-card { font-weight: 600; }
+  .shop-dlg { border: 2px solid var(--crust); border-radius: var(--radius-card); background: var(--cream); color: var(--cocoa); max-width: min(90vw, 420px); }
+  .shop-dlg p { font: 600 1.1rem var(--font-display); }
+  .dlg-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .dlg-actions button { min-height: 44px; padding: 0 1rem; border-radius: 10px; font: 600 1rem var(--font-display); cursor: pointer;
+    border: 2px solid var(--berry); background: var(--paper); color: var(--berry); }
+  .dlg-actions .primary { background: var(--berry); color: var(--berry-ink); }
+</style>

@@ -1,6 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subsOf, subSlug, listGroup, unitName } from '../../../lib/train';
+import { SCHOOLS, subsOf, subSlug, listGroup, unitName, banksHash } from '../../../lib/train';
 import { groupByTopic, type SubInfo } from '../../../lib/suggest';
 import { TIERS, TIER_NAME, type School } from '../../../lib/store';
 
@@ -19,7 +19,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 ---
 {school.ready ? (
 <Base title={`Train ${school.name} · Cookie Codex`} description={`Pick what to train today in ${school.name}: suggestions, your power and every ${unitName(school.id as School, 1)}.`}>
-  <div class="wrap train-home" data-school={school.id}>
+  <div class="wrap train-home" data-school={school.id} data-banks={banksHash}>
     <p class="th-crumbs"><a href="/">Home</a></p>
     <h1 class="th-title">What do you want to train in {school.name} today<span class="player-sep"></span>?</h1>
 
@@ -94,7 +94,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 )}
 
 <script>
-  import { load, tierState, tierOpen, liveMastered, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
+  import { load, save, tierState, tierOpen, liveMastered, syncParked, reviewDueCount, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
   import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, unitName, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
@@ -163,7 +163,8 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     };
     const run = (due: number, qs?: Record<string, string>) => render(suggestions(s, subs, { now, dueCount: due, questionSub: qs }));
 
-    const anyDue = Object.keys(s.questions).length > 0 && dueCount(s, now) > 0;
+    // includes states an older tab or build parked (reviewDueCount), so the banks below get the chance to unpark them
+    const anyDue = reviewDueCount(s, now, root.dataset.banks) > 0;
     if (!anyDue) run(0);
     else {
       // map question ids to sub-topics using this school's banks, so the review count matches this school
@@ -172,6 +173,8 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
         .then((banks) => {
           const qs: Record<string, string> = {};
           for (const b of banks as { id: string; sub: string }[][]) for (const q of b) qs[q.id] = q.sub;
+          // unpark only (never park: this page loads one school's banks); nothing is deleted (ADR 0002)
+          if (syncParked(s, Object.keys(qs), false)) save(s);
           run(dueCount(s, now, qs), qs);
         })
         .catch(() => run(dueCount(s, now)));

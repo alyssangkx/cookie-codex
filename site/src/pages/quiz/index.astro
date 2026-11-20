@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { triesPerDay } from '../../lib/store';
-import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs } from '../../lib/train';
+import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs, rarityOrder, competencyTopics, banksHash } from '../../lib/train';
 
 // Everything the runner needs, small enough to inline; question banks are fetched on demand.
 const meta = {
@@ -9,9 +9,12 @@ const meta = {
     tries: triesPerDay(s.id), name: s.name, topicName: s.topicName, school: s.school, file: s.file, slug: subSlug(s.id), count: s.count,
   }])),
   files: banks.map((b) => b.topic),
+  banks: banksHash, // the bank set Daily Review parks against (store.ts syncParked)
   cloze: clozeSubs,
   slots,
   cards: cardInfo,
+  order: rarityOrder, // replacement order per rarity (crumbs.ts)
+  topics: competencyTopics, // Super Epic topics
   topicNames: Object.fromEntries(paperTopics.map((t) => [t.id, t.name])),
 };
 const data = JSON.stringify(meta).replace(/</g, '\\u003c');
@@ -95,6 +98,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
   import { esc, boldAns } from '../../lib/boldans';
+  import { toEconomy, balanceOf } from '../../lib/crumbs';
   import { lineForLast, bilingual } from '../../lib/encourage';
   import {
     newClock, tickPaper, canPause, startPause, endPause, pauseLeft, timeUsed, blanks, reviewList, paperOk, draftState,
@@ -105,10 +109,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false };
   type Meta = {
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
-    files: string[]; slots: Record<string, { slug: string; dup: boolean }>;
+    files: string[]; banks: string; slots: Record<string, { slug: string; dup: boolean }>;
     cards: Record<string, { name: string; image: string; rarity: string }>;
     topicNames: Record<string, string>;
     cloze: string[];
+    order: Record<string, string[]>; topics: Record<string, string[]>;
   };
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const meta: Meta = JSON.parse($('meta').textContent!);
@@ -125,6 +130,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const LETTERS = 'ABCDEFGH'; // 4 options, or 8 for a dialogue (完成对话) set
   const LEVEL: Record<Tier, string> = { b: 'basic', i: 'intermediate', c: 'competent' };
   const rewardFor = (sid: string, t: Tier) => meta.slots[`${sid}|${t}`];
+  const eco = toEconomy(meta); // replacement cards, star bonuses and achievement cards (crumbs.ts)
+  let retestsPassed = 0; // due retest steps passed in this quiz: 1 Crumb each at the finish
 
   // the asked cloze blank (four ＿, or English "(N) " + 8 underscores) is marked and kept on one line; other blanks have fewer
   const fmt = (x: string, ans?: string) =>
@@ -286,7 +293,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const all = await loadBanks(files);
       // only Daily Review loads every bank, so only it parks retests whose question is gone; any page unparks the ids it
       // loaded (an older tab missing newer bank files may have parked them). Nothing is deleted (ADR 0002).
-      if (syncParked(s, all.map((q) => q.id), mode === 'review')) save(s);
+      if (syncParked(s, all.map((q) => q.id), mode === 'review', meta.banks)) save(s);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
@@ -317,6 +324,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   }
 
   function begin() {
+    retestsPassed = 0;
     if (!quiz.length) return; // nothing to play (locked, capped or empty tier)
     // re-check the daily block right before starting: the page may have been open since before the cap was reached
     const s0 = load();
@@ -625,7 +633,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   function record(id: string, ok: boolean, picked?: string) {
     const s = load();
-    answer(s, id, ok, Date.now(), true, picked); // tier quizzes and Daily Review only: papers record in submitPaper()
+    if (answer(s, id, ok, Date.now(), true, picked)) retestsPassed++; // tier quizzes and Daily Review only: papers record in submitPaper()
     save(s);
   }
 
@@ -687,7 +695,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       mode, sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined,
       topics: mode === 'paper' ? paperTopics : undefined,
       score, total: quiz.length, ms, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, Date.now(), tierIds());
+    }, rewardFor, Date.now(), tierIds(), undefined, { eco, retests: retestsPassed });
     if (mode === 'tier') s.last = { sub: subId, tier };
     save(s);
     results(s, res, timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '');
@@ -705,11 +713,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     pclock = endPause(pclock, now);
     const s: SaveV1 = load();
     wrongs = []; score = 0;
+    let retests = 0;
     quiz.forEach((id, k) => {
       const q = byId.get(id)!, p = picks[k];
       const ok = p === q.answer;
       // retireNew = false: papers never retire new questions. A blank is LEFT_BLANK, or '' (time ran out) when handed in at zero
-      answer(s, id, ok, now, false, ok ? undefined : p == null ? (timeUp ? undefined : LEFT_BLANK) : q.options[p]);
+      if (answer(s, id, ok, now, false, ok ? undefined : p == null ? (timeUp ? undefined : LEFT_BLANK) : q.options[p])) retests++;
       if (ok) score++;
       else wrongs.push({ q, chose: p ?? -1, tag: p == null ? (timeUp ? 'ran_out_of_time' : 'blank') : q.explain[p]?.tag ?? 'wrong' });
     });
@@ -717,7 +726,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     paperUsed = timeUsed(pclock, startedAt, now);
     const res = finishQuiz(s, {
       mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, now, {}, startedAt); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
+    }, rewardFor, now, {}, startedAt, { eco, retests }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
     closeStalePapers(s, now);
     save(s);
     const b = blanks(picks);
@@ -735,7 +744,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   function results(s: SaveV1, res: QuizResult, note: string) {
     $('score').textContent = `${score} / ${quiz.length}`;
-    let html = cheerHtml(s) + note;
+    // Crumbs earned sit next to the encouragement line (owner's economy, 20 Nov 2026)
+    const gain = res.crumbs ? `<span class="crumb-gain" title="Crumbs: spend them in the Shop">+${res.crumbs} Crumb${res.crumbs === 1 ? '' : 's'} <small>(${balanceOf(s)} in all)</small></span>` : '';
+    const head = document.getElementById('crumb-bal'); // the header balance was read when the page loaded
+    if (head && head.textContent !== 'Shop') head.textContent = `Shop · ${balanceOf(s)} Crumbs`;
+    let html = `<div class="cheer-row">${cheerHtml(s)}${gain}</div>` + note;
     if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.autoPromoted ? `<p class="verdict good">Perfect first try! ${{ b: 'Basic', i: 'Intermediate', c: 'Competent' }[tier] ?? 'Tier'} cleared, and the next tier is open.</p>`
@@ -756,11 +769,18 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         html += `<p><button id="rv-start" class="primary" type="button">Review my ${wrongs.length} ${blank ? 'wrong or blank' : 'wrong'} answer${wrongs.length === 1 ? '' : 's'}</button></p>`;
       }
     }
-    for (const cl of res.newlyCleared) if (cl.reward) {
-      const c = meta.cards[cl.reward.slug];
-      html += `<a class="won" href="/cookie/${cl.reward.slug}/" style="--rc: var(--r-${c.rarity})">
-        <img src="${c.image}" alt="" width="96" height="96"><span><strong>${cl.reward.dup ? '+1 star' : 'New card!'}</strong>
-        ${esc(c.name)} ${'★'.repeat(cl.reward.stars)}</span></a>`;
+    const won = (r: NonNullable<QuizResult['reward']>, head: string) => {
+      const c = meta.cards[r.slug];
+      const got = r.dup ? `+1 star${r.crumbs ? ` and +${r.crumbs} Crumbs` : ''}` : 'New card!';
+      const why = r.replaces ? `<small>You already had ${esc(meta.cards[r.replaces]?.name ?? r.replaces)}, so here is a new card.</small>` : '';
+      return `<a class="won" href="/cookie/${encodeURIComponent(r.slug)}/" style="--rc: var(--r-${esc(c.rarity)})">
+        <img src="${esc(c.image)}" alt="" width="96" height="96"><span>${head}<strong>${got}</strong>
+        ${esc(c.name)} ${'★'.repeat(r.stars)}${why}</span></a>`;
+    };
+    for (const cl of res.newlyCleared) if (cl.reward) html += won(cl.reward, '');
+    for (const ac of res.achieved ?? []) {
+      html += won(ac.reward, ac.kind === 'legendary' ? '<em>Top paper result (AL1 or AL2)!</em>'
+        : `<em>Topic mastered: every Competent tier cleared!</em>`);
     }
     if (res.goalJustMet) html += '<p class="verdict good">Daily goal met! Your streak grows.</p>';
     { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b)}</p>`; }
@@ -1015,6 +1035,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .p-paused { text-align: center; padding: 1.5rem 0 0.5rem; }
   .quiz .p-paused [role='timer'] { font: 600 1.2rem var(--font-display); font-variant-numeric: tabular-nums; }
   .quiz .cheer { font: 600 1.15rem/1.4 var(--font-display); margin: 0.25rem 0 0.6rem; color: var(--cocoa); }
+  .quiz .cheer-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; }
+  .quiz .crumb-gain { font: 600 1.05rem var(--font-display); color: var(--cocoa); background: var(--plate); border: 2px solid var(--crust); border-radius: 999px; padding: 0.15rem 0.7rem; white-space: nowrap; }
+  .quiz .crumb-gain small { font: 500 0.8rem var(--font-body); color: var(--cocoa-soft); }
+  .quiz .won em { font-style: normal; font-size: 0.9rem; color: var(--berry); }
+  .quiz .won small { font: 500 0.85rem var(--font-body); color: var(--cocoa-soft); }
   .quiz .cheer-en { margin: -0.35rem 0 0.75rem; font-size: 0.92rem; color: var(--cocoa-soft); }
   .quiz .ptime { color: var(--cocoa-soft); margin: 0 0 0.5rem; }
   .quiz .linkish { font: inherit; min-height: 44px; padding: 0 0.25rem; background: none; border: 0; color: var(--berry);

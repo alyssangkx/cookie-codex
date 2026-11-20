@@ -139,7 +139,16 @@ def main():
                 slots[key] = {"slug": slug, "dup": False}
 
     milestones = {"ancient": by["ancient"], "dragon": by["dragon"], "beast": by["beast"], "witch": by["witch"]}
-    out = {"seed": SEED, "order": order, "slots": slots, "milestones": milestones}
+    # Replacement order per rarity (docs/game-economy.md section 1): every non-milestone card once, in the order its
+    # slot appears above (school, then tier, then sub-topic). Derived only from `slots`, after them, so adding it moves
+    # no slot. When a cleared tier's card is already owned, store.ts gives the first unowned card of the same rarity
+    # in this list; Super Epic and Legendary achievements use it too.
+    rarity_of = {c["slug"]: c["rarity"] for c in cookies}
+    rarity_order = {}
+    for v in slots.values():
+        if not v["dup"]:
+            rarity_order.setdefault(rarity_of[v["slug"]], []).append(v["slug"])
+    out = {"seed": SEED, "order": order, "slots": slots, "milestones": milestones, "rarityOrder": rarity_order}
     (DATA / "rewards.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
 
     # self-check: every cookie used exactly once as a new card or milestone
@@ -147,6 +156,8 @@ def main():
     ms = [s for v in milestones.values() for s in v]
     assert len(new) == len(set(new)) == 172, len(set(new))
     assert sorted(new + ms) == sorted(c["slug"] for c in cookies)
+    ordered = [s for v in rarity_order.values() for s in v]
+    assert sorted(ordered) == sorted(new), "rarityOrder must list every non-milestone card exactly once"
     first_math_basic = [slots[f"{s['id']}|b"]["slug"] for s in order["math"][:7]]
     assert set(first_math_basic) == set(by["common"]), "first 7 Math Basic rewards should be the commons"
     print(f"rewards.json: {len(slots)} slots, {len(new)} new cards, {len(slots) - len(new)} star slots, "

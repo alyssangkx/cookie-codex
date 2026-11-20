@@ -1,6 +1,10 @@
 // Client-side save (docs/game-design.md section 8). Every page reads and writes progress
 // through this module, so a backend can replace localStorage later.
 import progression from '../data/progression.json' with { type: 'json' };
+import {
+  crumbsOf, earn, quizCrumbs, rewardPreview, buyCard, buyStar, type BuyResult, achievementPreview, alBand, LEGENDARY_MIN_QUESTIONS, LEGENDARY_MAX_BAND,
+  type Crumbs, type Economy, type Preview,
+} from './crumbs.ts';
 
 export type School = 'math' | 'science' | 'english' | 'chinese';
 export type Tier = 'b' | 'i' | 'c';
@@ -19,7 +23,10 @@ export type TierState = { passes: string[]; scores: number[]; best: number; clea
 // parked: a retest whose id was in no bank when Daily Review last loaded every bank (syncParked). It is not counted as
 // due, and is never deleted (ADR 0002): an older tab missing newer bank files may park live states, so the next Daily
 // Review unparks any parked id it finds, and answering a question always unparks it. Optional, no schema bump.
-export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true };
+// Since 20 Nov 2026 a newer build stores the bank-set hash it parked against (`banksHash` in train.ts) instead of true;
+// a state parked by any other bank set (an older tab writes true) still counts toward reviewDueCount, so it cannot hide
+// Daily Review until this build has re-checked it. Older code treats any truthy value as parked.
+export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true | string };
 export const PICK_MAX = 120; // characters of a picked option kept in the save
 export const LEFT_BLANK = '\u2205'; // "∅": a paper question left blank on purpose (never an option's text)
 export interface Attempt {
@@ -42,6 +49,8 @@ export interface SaveV1 {
   days: Record<string, { quizzes: number; min: number; correct: number; total: number; ms?: number; goal?: boolean }>;
   streak: { current: number; best: number; lastDay: string | null; freezeUsedWeek: string | null; studyDays: number };
   last: { sub: string; tier: Tier } | null;
+  /** Crumbs ledger (crumbs.ts). Optional, added 20 Nov 2026 with no schema bump (ADR 0002); absent until first earned. */
+  crumbs?: Crumbs;
 }
 
 const KEY = 'ccx:save';
@@ -238,6 +247,11 @@ export const hasProgress = (s: Partial<SaveV1> | null | undefined) =>
   !!s && (Object.keys(s.progress ?? {}).length > 0 || Object.keys(s.cards ?? {}).length > 0 ||
     (s.attempts?.length ?? 0) > 0 || Object.keys(s.days ?? {}).length > 0);
 
+/** The stored Crumbs balance, for the header (no migration, no writes; 0 when unreadable). */
+export function crumbBalance(): number {
+  try { const b = JSON.parse(readLocalRaw() ?? '{}')?.crumbs?.bal; return typeof b === 'number' && b > 0 ? Math.floor(b) : 0; } catch { return 0; }
+}
+
 /** Small string store for sync and login metadata (device id, tokens, revs). This module stays the only code that touches localStorage. */
 export const kv = {
   get(k: string): string | null { try { return localStorage.getItem('ccx:' + k); } catch { return null; } },
@@ -326,10 +340,11 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
  *  A correct answer to a retest that is not yet due changes nothing (no progress, no penalty), so
  *  the spacing cannot be skipped by repeating questions on the same day. */
 /** Record one answer. `picked` is the option text chosen on a wrong answer; omitted = not answered because time ran
- *  out (stored as ''); LEFT_BLANK = a paper question left blank on purpose. */
-export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string) {
+ *  out (stored as ''); LEFT_BLANK = a paper question left blank on purpose. Returns true when a due retest step was
+ *  passed (1 Crumb each at the finish). */
+export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string): boolean {
   const q = s.questions[id];
-  if (ok && !q && !retireNew) return; // practice papers never drain tier pools
+  if (ok && !q && !retireNew) return false; // practice papers never drain tier pools
   if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
   const a = ok ? q?.a : (picked ?? '').slice(0, PICK_MAX);
   const keep = a != null ? { a } : {};
@@ -343,7 +358,9 @@ export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), ret
       const next = (q.s + 1) as 2 | 3;
       s.questions[id] = { s: next, due: now + STEP_DAYS[next] * DAY, w: q.w, ...keep };
     }
+    return true; // a due retest step passed (the caller counts these for Crumbs)
   }
+  return false;
 }
 
 export const isNew = (s: SaveV1, id: string) => !s.questions[id];
@@ -361,19 +378,29 @@ export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = fa
  * an older build missing newer bank files may park live states, and the next complete call in a newer build unparks
  * them. Returns true when anything changed (the caller saves).
  */
-export function syncParked(s: SaveV1, ids: Iterable<string>, complete: boolean): boolean {
+export function syncParked(s: SaveV1, ids: Iterable<string>, complete: boolean, banks?: string): boolean {
   const present = new Set(ids);
+  const mark = banks || true; // the bank set that confirmed the id is missing
   let changed = false;
   for (const [id, q] of Object.entries(s.questions)) {
     if (present.has(id)) {
       if (q.parked) { delete q.parked; changed = true; }
-    } else if (complete && !q.parked && q.s > 0) {
-      q.parked = true;
+    } else if (complete && q.s > 0 && q.parked !== mark) {
+      q.parked = mark; // parked, or re-marked as checked by this bank set
       changed = true;
     }
   }
   return changed;
 }
+
+/**
+ * Retests due now for the Daily Review gates (the /train/ button, the school page): every due retest state except those
+ * parked by this very bank set (`banks`, train.ts banksHash). A state parked by an older tab or build may be live, so it
+ * counts until a Daily Review here re-checks it (syncParked with `banks`), which unparks it or re-marks it. Without this
+ * an old tab could park live retests and hide the only page that unparks them.
+ */
+export const reviewDueCount = (s: SaveV1, now = Date.now(), banks?: string) =>
+  Object.values(s.questions).filter((q) => q.s > 0 && q.due <= now && (!q.parked || q.parked !== banks)).length;
 export const isRetired = (s: SaveV1, id: string) => s.questions[id]?.s === 0;
 
 // ---------------------------------------------------------------- tiers
@@ -438,14 +465,21 @@ const dropOpen = (s: SaveV1, mode: Attempt['mode'], sub?: string, tier?: Tier, o
 
 export const minutesFor = (s: SaveV1, t: Tier) => TIER_MIN[t] * (s.settings.extraTime ? 1.5 : 1);
 
+/** A card given for a cleared tier. dup: a star on an owned card instead (then `crumbs` is the bonus that came with it);
+ * replaces: the slot's own card, already owned, when a replacement card was given. */
+export type Reward = { slug: string; dup: boolean; stars: number; replaces?: string; crumbs?: number };
 export interface QuizResult {
   passed: boolean;
   cleared: boolean;
-  reward: { slug: string; dup: boolean; stars: number } | null;
+  reward: Reward | null;
+  /** Crumbs earned by this call (quiz band, retests, goal, streak week, bonuses). */
+  crumbs: number;
   goalJustMet: boolean;
   /** Basic cleared at once by a perfect first-ever Basic quiz on this sub-topic. */
   autoPromoted?: boolean;
   newlyCleared: { sub: string; tier: Tier; reward: QuizResult['reward'] }[];
+  /** Achievement-only cards this call gave (needs opts.eco): Super Epic per completed topic, Legendary per paper. */
+  achieved?: { kind: 'super-epic' | 'legendary'; topic?: string; reward: Reward }[];
 }
 
 /**
@@ -463,8 +497,11 @@ export function finishQuiz(
   now = Date.now(),
   tierIds: Record<string, string[]> = {},
   openTs?: number, // a paper: the start time of its open record (removed exactly; other papers' records stay)
+  opts: FinishOpts = {},
 ): QuizResult {
   const key = dayKey(now);
+  const test = opts.test ?? isUnlimited();
+  const earned0 = s.crumbs?.earned ?? 0;
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
   if (a.mode === 'tier' || a.mode === 'paper') dropOpen(s, a.mode, a.sub, a.tier, openTs);
   // "First" = no other attempt for this sub|tier at all (Basic and Intermediate only), finished OR abandoned (this quiz's own open record
@@ -496,17 +533,65 @@ export function finishQuiz(
   let autoPromoted = false;
   if (firstEver && a.tier && a.sub && a.total >= QUIZ_SIZE && a.score === a.total && !tierState(s, a.sub, a.tier).cleared) {
     // owner's rule: a perfect first Basic or Intermediate quiz clears that tier now (before syncTiers, so the next tier opens)
-    early.push({ sub: a.sub, tier: a.tier, reward: award(s, a.sub, a.tier, rewardFor, now) });
+    early.push({ sub: a.sub, tier: a.tier, reward: award(s, a.sub, a.tier, rewardFor, now, opts.eco, test) });
     autoPromoted = true;
   }
-  const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now)];
+  // Crumbs for finishing (never for an abandoned quiz: that never reaches finishQuiz); bonuses come with the clears below
+  earn(s, quizCrumbs(a.score, a.total, a.mode), a.mode === 'tier' ? 'quiz' : a.mode, now,
+    { test, note: a.mode === 'tier' ? `${a.sub}|${a.tier}` : a.mode === 'paper' ? (a.topics ?? []).join(',').slice(0, 120) : undefined });
+  earn(s, (opts.retests ?? 0) * RETEST_CRUMBS, 'retest', now, { test });
+  const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test)];
   const own = newlyCleared.find((x) => x.sub === a.sub && x.tier === a.tier);
   if (own) { cleared = true; reward = own.reward; }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
   if (d.quizzes >= s.settings.dailyGoalQuizzes) d.goal = true;
-  if (goalJustMet) bumpStreak(s, now);
-  return { passed, cleared, reward, goalJustMet, autoPromoted, newlyCleared };
+  if (goalJustMet) {
+    bumpStreak(s, now);
+    const c = crumbsOf(s);
+    if (c.goalDay !== key) { c.goalDay = key; earn(s, GOAL_CRUMBS, 'goal', now, { test }); }
+    const wk = weekId(key);
+    if (c.week !== wk && goalDays(s).filter((d) => weekId(d) === wk).length >= WEEK_GOAL_DAYS) {
+      c.week = wk;
+      earn(s, WEEK_CRUMBS, 'week', now, { test });
+    }
+  }
+  const achieved = opts.eco ? achievements(s, a, opts.eco, now, test) : [];
+  return { passed, cleared, reward, crumbs: (s.crumbs?.earned ?? 0) - earned0, goalJustMet, autoPromoted, newlyCleared, achieved };
+}
+
+/**
+ * Achievement-only cards (owner's answer 5a), checked at the end of every finished quiz, so a topic completed earlier is
+ * picked up by the next quiz. Super Epic: once per topic in eco.topics, when every one of its sub-topics has the
+ * Competent tier cleared. Legendary: a WA/SA paper of LEGENDARY_MIN_QUESTIONS+ questions at AL1-AL2. Each gives
+ * crumbs.ts achievementPreview(): the next unowned card of the rarity, else a star and a Crumbs bonus.
+ */
+function achievements(s: SaveV1, a: Omit<Attempt, 'ts'>, eco: Economy, now: number, test: boolean): NonNullable<QuizResult['achieved']> {
+  const out: NonNullable<QuizResult['achieved']> = [];
+  for (const [topic, list] of Object.entries(eco.topics ?? {})) {
+    if (!list.length || s.crumbs?.topics?.includes(topic) || !list.every((sub) => tierState(s, sub, 'c').cleared)) continue;
+    const reward = giveAchievement(s, achievementPreview(s, 'super-epic', eco), `topic:${topic}`, 100, now, test);
+    if (!reward) continue;
+    (crumbsOf(s).topics ??= []).push(topic);
+    out.push({ kind: 'super-epic', topic, reward });
+  }
+  if (a.mode === 'paper' && a.total >= LEGENDARY_MIN_QUESTIONS && alBand(a.score, a.total) <= LEGENDARY_MAX_BAND) {
+    const reward = giveAchievement(s, achievementPreview(s, 'legendary', eco), 'paper', Math.round((100 * a.score) / a.total), now, test);
+    if (reward) out.push({ kind: 'legendary', reward });
+  }
+  return out;
+}
+
+function giveAchievement(s: SaveV1, p: Preview | null, src: string, acc: number, now: number, test: boolean): Reward | null {
+  if (!p) return null;
+  if (p.kind === 'card') {
+    s.cards[p.slug] = { stars: 1, srcSub: src, srcTier: 'c', acc, last: now };
+    return { slug: p.slug, dup: false, stars: 1 };
+  }
+  const card = s.cards[p.slug];
+  card.stars = Math.min(5, card.stars + 1);
+  earn(s, p.crumbs, 'bonus', now, { test, slug: p.slug, note: src });
+  return { slug: p.slug, dup: true, stars: card.stars, crumbs: p.crumbs };
 }
 
 /**
@@ -514,7 +599,9 @@ export function finishQuiz(
  * clear a tier whose questions are all retired, awarding its card. A cleared tier is never un-cleared, even
  * if a question later slips back to retest. Returns the tiers cleared by this call.
  */
-export function syncTiers(s: SaveV1, tierIds: Record<string, string[]>, rewardFor: RewardFor, now = Date.now()): QuizResult['newlyCleared'] {
+export function syncTiers(
+  s: SaveV1, tierIds: Record<string, string[]>, rewardFor: RewardFor, now = Date.now(), eco?: Economy, test = false,
+): QuizResult['newlyCleared'] {
   const out: QuizResult['newlyCleared'] = [];
   const entries = Object.entries(tierIds)
     .map(([key, ids]) => { const [sub, tier] = key.split('|') as [string, Tier]; return { sub, tier, ids }; })
@@ -530,15 +617,24 @@ export function syncTiers(s: SaveV1, tierIds: Record<string, string[]>, rewardFo
     st.hash = tierHash(ids);
     (s.progress[sub] ??= {})[tier] = st;
     if (!st.cleared && st.mastered === st.total && tierOpen(s, sub, tier, playable(sub)))
-      out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now) });
+      out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now, eco, test) });
   }
   return out;
 }
 
 type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | undefined;
+/** eco: build-time card data (crumbs.ts Economy); without it a tier clear gives only its slot card or a star, as before
+ * the economy. retests: retest steps passed in this quiz (answer() returned true). test: the unlimited test account
+ * (defaults to isUnlimited()); its Crumbs are flagged. */
+export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean };
+export const RETEST_CRUMBS = 1, GOAL_CRUMBS = 3, WEEK_CRUMBS = 10;
 
-/** Mark a tier cleared and give its fixed card; a card already owned gains a star (max 5). */
-function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor, now = Date.now()): QuizResult['reward'] {
+/**
+ * Mark a tier cleared and give its card. With `eco` (the economy): the slot card if not owned, else the next unowned card
+ * of its rarity (a replacement), else a star on the slot card (max 5) plus a Crumbs bonus: crumbs.ts rewardPreview(),
+ * which the tier page shows. Without `eco`, an owned card gains a star.
+ */
+function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor, now = Date.now(), eco?: Economy, test = false): QuizResult['reward'] {
   const st = tierState(s, sub, t);
   st.cleared = true;
   (s.progress[sub] ??= {})[t] = st;
@@ -546,6 +642,17 @@ function award(s: SaveV1, sub: string, t: Tier, rewardFor: RewardFor, now = Date
   if (!r) return null;
   const top2 = [...st.scores].sort((x, y) => y - x).slice(0, 2);
   const acc = top2.length ? Math.round(top2.reduce((x, y) => x + y, 0) / top2.length) : st.best || 100;
+  if (eco) {
+    const p = rewardPreview(s, r.slug, eco);
+    if (p.kind === 'card') {
+      s.cards[p.slug] = { stars: 1, srcSub: sub, srcTier: t, acc, last: now };
+      return { slug: p.slug, dup: false, stars: 1, ...(p.replaces ? { replaces: p.replaces } : {}) };
+    }
+    const owned = s.cards[p.slug];
+    owned.stars = Math.min(5, owned.stars + 1);
+    earn(s, p.crumbs, 'bonus', now, { test, slug: p.slug, note: `${sub}|${t}` });
+    return { slug: p.slug, dup: true, stars: owned.stars, crumbs: p.crumbs };
+  }
   const card = s.cards[r.slug];
   if (card) card.stars = Math.min(5, card.stars + 1);
   else s.cards[r.slug] = { stars: 1, srcSub: sub, srcTier: t, acc, last: now };
@@ -569,6 +676,19 @@ export function power(c: { acc: number; stars: number; last?: number }, now = Da
   const idleWeeks = c.last ? Math.max(0, Math.floor((now - c.last) / (7 * DAY)) - 3) : 0;
   const base = Math.max(40, c.acc - 5 * idleWeeks);
   return Math.min(100, Math.round(base * (1 + 0.05 * (c.stars - 1))));
+}
+
+/**
+ * Buy a card or a star in the shop (crumbs.ts buyCard/buyStar). It reads the stored save itself, checks, charges and
+ * saves in one synchronous step, never a page's in-memory copy: a second tab, or a double click, sees the first
+ * purchase and is refused ('owned', 'stale' or 'poor') instead of spending twice. `from` is the star count the page
+ * showed (stars only).
+ */
+export function purchase(kind: 'card' | 'star', slug: string, from: number, eco: Economy, now = Date.now()): BuyResult {
+  const s = load();
+  const r = kind === 'card' ? buyCard(s, slug, eco, now, isUnlimited()) : buyStar(s, slug, from, eco, now, isUnlimited());
+  if (r.ok) save(s);
+  return r;
 }
 
 /** The reward a tier gives right now: a star if the card is already owned, else the new card. */

@@ -3,6 +3,7 @@
 // number in range, every string a string, malformed entries dropped. It never writes storage and changes no save rules;
 // store.ts load()/migrations stay as they are. Use it before rendering a save into HTML.
 import { fresh, TIERS, PICK_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
+import { CRUMB_WHYS, LEDGER_MAX, type Crumbs, type CrumbWhy, type LedgerEntry, type Purchase } from './crumbs.ts';
 
 type Obj = Record<string, unknown>;
 const obj = (v: unknown): Obj => (v && typeof v === 'object' && !Array.isArray(v) ? (v as Obj) : {});
@@ -43,6 +44,36 @@ function cleanAttempt(v: unknown): Attempt | null {
   return out;
 }
 
+const day = (v: unknown) => (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : undefined);
+const COIN = 10_000_000; // no real balance gets near this
+
+/** The optional Crumbs ledger (crumbs.ts). Kept field for field, so a save synced through the server keeps its coins. */
+function cleanCrumbs(v: unknown): Crumbs {
+  const c = obj(v);
+  const log: LedgerEntry[] = (Array.isArray(c.log) ? c.log.slice(-LEDGER_MAX) : []).flatMap((x) => {
+    const e = obj(x);
+    if (!CRUMB_WHYS.includes(e.why as CrumbWhy)) return [];
+    const out: LedgerEntry = { ts: num(e.ts), n: num(e.n, -COIN, COIN), bal: num(e.bal, 0, COIN), why: e.why as CrumbWhy };
+    if (typeof e.slug === 'string') out.slug = str(e.slug, 120);
+    if (typeof e.note === 'string') out.note = str(e.note, 120);
+    if (e.test === true) out.test = true;
+    return [out];
+  });
+  const buys: Purchase[] = (Array.isArray(c.buys) ? c.buys.slice(-5000) : []).flatMap((x) => {
+    const b = obj(x);
+    if (typeof b.slug !== 'string' || (b.kind !== 'card' && b.kind !== 'star')) return [];
+    const out: Purchase = { ts: num(b.ts), slug: str(b.slug, 120), kind: b.kind, price: num(b.price, 0, COIN), stars: num(b.stars, 1, 99) };
+    if (b.test === true) out.test = true;
+    return [out];
+  });
+  const out: Crumbs = { bal: num(c.bal, 0, COIN), earned: num(c.earned, 0, COIN), spent: num(c.spent, 0, COIN), test: num(c.test, 0, COIN), log, buys };
+  const g = day(c.goalDay), w = day(c.week);
+  if (g) out.goalDay = g;
+  if (w) out.week = w;
+  if (Array.isArray(c.topics)) out.topics = strs(c.topics, 1000);
+  return out;
+}
+
 export function cleanSave(raw: unknown): SaveV1 {
   const r = obj(raw), f = fresh();
   const s: SaveV1 = { ...f, createdAt: num(r.createdAt) || f.createdAt };
@@ -66,7 +97,7 @@ export function cleanSave(raw: unknown): SaveV1 {
     const q = obj(v);
     if (!Object.keys(q).length) continue;
     const step = [0, 1, 2, 3].includes(q.s as number) ? (q.s as 0 | 1 | 2 | 3) : 0;
-    s.questions[id.slice(0, 120)] = { s: step, due: num(q.due), w: num(q.w, 0, 100000), ...(typeof q.a === 'string' ? { a: q.a.slice(0, PICK_MAX) } : {}), ...(q.parked === true ? { parked: true as const } : {}) };
+    s.questions[id.slice(0, 120)] = { s: step, due: num(q.due), w: num(q.w, 0, 100000), ...(typeof q.a === 'string' ? { a: q.a.slice(0, PICK_MAX) } : {}), ...(q.parked === true ? { parked: true as const } : typeof q.parked === 'string' && /^[a-z0-9]{1,16}$/.test(q.parked) ? { parked: q.parked } : {}) };
   }
 
   for (const [slug, v] of entries(r.cards)) {
@@ -95,5 +126,6 @@ export function cleanSave(raw: unknown): SaveV1 {
 
   const last = obj(r.last), lt = tier(last.tier);
   s.last = typeof last.sub === 'string' && lt ? { sub: str(last.sub, 120), tier: lt } : null;
+  if (r.crumbs !== undefined) s.crumbs = cleanCrumbs(r.crumbs);
   return s;
 }

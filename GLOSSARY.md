@@ -165,21 +165,26 @@ One fixed (sub-topic, tier) pair that maps to one card in `rewards.json`. Slots 
 Owner: `scripts/quiz/build_rewards.py`.
 
 **Star / duplicate**:
-A slot whose card is already owned gives one star on that card instead. A planned replacement rule would give the next unowned card of the same rarity.
+A slot whose card is already owned gives a **replacement card**: the next unowned card of the same rarity in `rewards.json` `rarityOrder` (previewed on the tier page). Only when that rarity has no card left does it give one star on the slot card plus Crumbs (half the shop price, 60 for Super Epic and Legendary).
 _Avoid_: level-up
 
 **Rarity**:
 The class of a card: common (7), rare (14), special (11), epic (116), super epic (13), legendary (11), and the milestone classes beast, dragon, witch, ancient. Each needs a `--r-<rarity>` colour in `global.css`.
 
 **Milestone**:
-A card earned by behaviour, not by clearing a tier: Ancient, Dragon, Beast, Witch (14 cards). Specified in `docs/game-design.md` section 4; deferred.
+A card earned by behaviour, not by clearing a tier: Ancient, Dragon, Beast, Witch (14 cards). Specified in `docs/game-design.md` section 4; deferred. Never for sale.
+
+**Achievement card**:
+A Super Epic for each topic whose sub-topics all have Competent cleared (only topics where every sub-topic has a playable Competent tier), or a Legendary for a WA/SA paper of 20+ questions at AL1-AL2 (85%+). Gives the next unowned card of that rarity, else a star and 60 Crumbs. Not for sale.
+Owner: `store.ts` (`achievements`), `crumbs.ts` (`achievementPreview`).
 _Avoid_: tier reward
 
 **Card power**:
 A number that reflects retention of the questions behind a card, worked out in `suggest.ts`.
 
-**Crumbs** (proposed, name not agreed):
-A coin earned per quiz by score band and spent in a fixed-price shop. Not built.
+**Crumbs**:
+The coin, earned per finished quiz by AL band (8 for AL1, +4 perfect, down to 1 for AL8; WA/SA papers x3), +1 per retest step passed, +3 for the daily goal, +10 per streak week. Spent in the Shop at fixed prices on the exact card picked (Common 30, Rare 60, Special and Epic 120); once a rarity is all owned, on stars. Never random, never expire, no real money. Kept in the optional save field `crumbs` (balance, last 50 ledger entries, every purchase; no schema bump). The unlimited account's Crumbs are flagged `test` and left out of parent totals.
+Owner: `site/src/lib/crumbs.ts`; `store.ts` (`finishQuiz`, `purchase`); `/shop/`.
 
 ## Save, sync and accounts
 

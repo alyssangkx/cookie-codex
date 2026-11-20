@@ -10,6 +10,7 @@ const data = {
   // every subject's sub-topics with a bank file: the wrong-answer list and the retest queue look questions up in them
   all: allSubs.filter((s) => s.file).map((s) => ({ id: s.id, name: s.name, school: s.school, file: s.file })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
+  cards: Object.fromEntries([...cookieBySlug].map(([slug, c]) => [slug, c.name])), // card names for the Crumbs ledger
 };
 ---
 <Base title="Parent view: Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
@@ -79,6 +80,9 @@ const data = {
           <select id="wrong-who"><option value="">This device</option></select></p>
         <div id="wrong"></div></section>
       <section class="panel" aria-labelledby="h-ret"><h2 id="h-ret">Retest queue</h2><div id="retest"></div></section>
+      <section class="panel" aria-labelledby="h-crumbs"><h2 id="h-crumbs">Crumbs and the shop</h2>
+        <p class="note">Crumbs are earned by finishing quizzes (more for higher scores), passing retests, meeting the daily goal and streak weeks, and are spent on cards in the shop at fixed prices. Nothing is random and no real money is involved. This page only shows them: Crumbs can't be added or removed here. Crumbs from the unlimited test account are marked "test" and left out of the totals.</p>
+        <div id="crumbs"></div></section>
       <section class="panel" aria-labelledby="h-set"><h2 id="h-set">Settings</h2>
         <div class="fields">
           <label for="cap">Daily training time: <output id="cap-out"></output></label>
@@ -138,6 +142,9 @@ const data = {
   .parent-page .stat span { color: var(--cocoa-soft); font-size: 0.9rem; }
   .parent-page .scroll { overflow-x: auto; }
   .parent-page table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  .parent-page .pc-n { text-align: right; font-variant-numeric: tabular-nums; }
+  .parent-page .pc-test td { color: var(--cocoa-soft); }
+  .parent-page .pc-buys { margin: 0.25rem 0 0; padding-left: 1.2rem; }
   .parent-page th, .parent-page td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--crust); vertical-align: top; }
   .parent-page th { font-family: var(--font-display); font-weight: 500; }
   .parent-page .topic { margin-top: 1rem; }
@@ -180,7 +187,7 @@ const data = {
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; hash: Record<Tier, string>; content: boolean }
   interface ASub { id: string; name: string; school: string; file: string }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
-    { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[] };
+    { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[]; cards: Record<string, string> };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
   const DAY = 86_400_000;
@@ -217,6 +224,32 @@ const data = {
       [`${Object.keys(s.cards).length} of ${P.total}`, 'Cards owned'],
     ];
     $('summary').innerHTML = items.map(([b, l]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(l)}</span></div>`).join('');
+  }
+
+  const WHY: Record<string, string> = {
+    quiz: 'Tier quiz finished', review: 'Daily Review finished', paper: 'WA/SA paper finished', retest: 'Retests passed',
+    goal: 'Daily goal met', week: 'Streak week', bonus: 'Bonus (no new card left)', buy: 'Bought a card', star: 'Bought a star',
+  };
+  /** The Crumbs ledger (last 50 entries) and every purchase, read-only (owner's answer 7a). */
+  function renderCrumbs() {
+    const c = s.crumbs;
+    if (!c) { $('crumbs').innerHTML = '<p class="note">No Crumbs earned yet.</p>'; return; }
+    const card = (slug?: string) => (slug ? esc(P.cards[slug] ?? slug) : '');
+    const realSpent = c.buys.filter((b) => !b.test).reduce((n, b) => n + b.price, 0);
+    const stats: [string, string][] = [
+      [`${c.bal}`, 'Balance now'],
+      [`${Math.max(0, c.earned - c.test)}`, 'Earned in all (not counting test)'],
+      [`${realSpent}`, 'Spent in the shop (not counting test)'],
+      [`${c.buys.filter((b) => !b.test).length}`, 'Purchases'],
+    ];
+    if (c.test) stats.push([`${c.test}`, 'Earned on the test account']);
+    const rows = [...c.log].reverse().map((e) => `<tr${e.test ? ' class="pc-test"' : ''}><td>${esc(new Date(e.ts).toLocaleString(undefined, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }))}</td>
+      <td class="pc-n">${e.n > 0 ? '+' : ''}${esc(e.n)}</td><td>${esc(WHY[e.why] ?? e.why)}${e.slug ? `: ${card(e.slug)}` : ''}${e.test ? ' <small>(test)</small>' : ''}</td><td class="pc-n">${esc(e.bal)}</td></tr>`).join('');
+    const buys = [...c.buys].reverse().map((b) => `<li>${esc(fmtDate(b.ts))}: ${b.kind === 'card' ? 'card' : `star ${esc(b.stars)} for`} ${card(b.slug)}, ${esc(b.price)} Crumbs${b.test ? ' <small>(test)</small>' : ''}</li>`).join('');
+    $('crumbs').innerHTML = `<div class="stats">${stats.map(([b, l]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(l)}</span></div>`).join('')}</div>
+      <h3>Ledger (last ${c.log.length} entries)</h3>
+      <div class="scroll"><table><thead><tr><th scope="col">When</th><th scope="col">Crumbs</th><th scope="col">What for</th><th scope="col">Balance</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <h3>Purchases</h3>${buys ? `<ul class="pc-buys">${buys}</ul>` : '<p class="note">Nothing bought yet.</p>'}`;
   }
 
   function renderMastery() {
@@ -370,7 +403,8 @@ const data = {
 
   async function renderRetest() {
     const now = Date.now();
-    const waiting = Object.entries(s.questions).filter(([, q]) => q.s > 0).sort((a, b) => a[1].due - b[1].due);
+    // parked retests (question in no bank at the last Daily Review) are left out, as in the child's Daily Review
+    const waiting = Object.entries(s.questions).filter(([, q]) => q.s > 0 && !q.parked).sort((a, b) => a[1].due - b[1].due);
     if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
     $('retest').innerHTML = '<p class="note">Loading questions…</p>';
     const stems = await banks();
@@ -595,7 +629,7 @@ const data = {
   let child: { id: string; rev: number | null; raw: SaveV1 } | null = null;
   let pick = 0, isParentView = false, pickerReady = false;
   let fillSettings = () => {};
-  const renderAll = () => { wrongSeq++; renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
+  const renderAll = () => { wrongSeq++; renderSummary(); renderCrumbs(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
   const asSave = (d: unknown) => (d ? (migrate(d) as SaveV1) : (cleanSave(null) as SaveV1));
   async function showChild(id: string) {
     const my = ++pick;
@@ -663,7 +697,7 @@ const data = {
       catch { child = null; $('content').hidden = true; famSay('', "Couldn't load your child's progress. Reload the page."); }
       return;
     }
-    renderSummary(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
+    renderSummary(); renderCrumbs(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
     void initWrongPicker();
   }
 

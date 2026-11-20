@@ -1,6 +1,7 @@
 ---
-// Home base: a map of the cookie kingdom with the Schools of Mastery, the Library (Codex),
-// My House (collection) and the Ranking Tower. The map art has no text; every label is HTML.
+// Home base: a map of the cookie kingdom with the Schools of Mastery, the Library (Codex), the Shop and My House
+// (collection). The tower is scenery only: no leaderboards (game-design rules), so it has no label. The map art has no
+// text; every label is HTML. The shop is a separate sprite (public/home/shop.webp) drawn on its plot.
 import { existsSync } from 'node:fs';
 import Base from '../layouts/Base.astro';
 import spots from '../data/home-hotspots.json';
@@ -10,7 +11,7 @@ import { SCHOOLS } from '../lib/train';
 type Box = [number, number, number, number];
 // Art follows which schools are open: construction comes off a school once it opens.
 // a school shows open only when its hotspot says so AND its banks have a playable tier (train.ts SCHOOLS.ready)
-const SCHOOL_IDS = new Set(['math', 'english', 'science', 'chinese']); // library, house, tower are not schools
+const SCHOOL_IDS = new Set(['math', 'english', 'science', 'chinese']); // library, shop, house are not schools
 const buildings = spots.buildings.map((b) =>
   b.status === 'open' && SCHOOL_IDS.has(b.id) && !SCHOOLS.find((x) => x.id === b.id)?.ready ? { ...b, status: 'soon' } : b);
 // an open building with no link is a dead tap on the map: fail the build instead
@@ -31,6 +32,7 @@ const layouts = (['wide', 'tall'] as const).map((k) => ({
   size: k === 'wide' ? [1920, 1072] : [1080, 1935],
   items: buildings.map((b) => ({ ...b, box: (spots[k] as Record<string, unknown>)[b.id] as Box })),
   companions: spots[k].companions as [number, number][],
+  shopArt: spots.art.shop[k] as Box,
 }));
 // companions: owned cards (filled in by the client), falling back to the 7 commons
 const commons = cookies.filter((c) => c.rarity === 'common').map((c) => ({ slug: c.slug, name: c.name, image: c.image }));
@@ -42,7 +44,9 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
     {layouts.map((L) => (
       <div class={`scene scene-${L.k}`}>
         <img class="map" src={L.img} width={L.size[0]} height={L.size[1]}
-          alt="A cartoon cookie kingdom with seven buildings: the Math, Science, English and Chinese schools, the Library, My House and the Ranking Tower." />
+          alt="A cartoon cookie kingdom: the Math, Science, English and Chinese schools, the Library, the Shop, My House and a tall tower." />
+        <img class="shop-art" src="/home/shop.webp" width="640" height="642" alt="" decoding="async"
+          style={`left:${L.shopArt[0]}%;top:${L.shopArt[1]}%;width:${L.shopArt[2]}%;height:${L.shopArt[3]}%`} />
         <div class="banner">
           <p class="welcome">Welcome back<span class="player-sep"></span>!</p>
           <p class="hint">Tap a building to begin.</p>
@@ -107,6 +111,7 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
     .home .scene-tall { display: block; }
   }
   .home .map { display: block; width: 100%; height: auto; }
+  .home .shop-art { position: absolute; display: block; object-fit: contain; pointer-events: none; }
   .home .banner { position: absolute; left: 0; right: 0; top: 2%; text-align: center; pointer-events: none; }
   .home .welcome {
     margin: 0; font: 600 clamp(1.5rem, 4.2vw, 3.2rem) var(--font-display); color: var(--cocoa);

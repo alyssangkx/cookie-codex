@@ -1,5 +1,10 @@
 # Game economy proposal (pilot to redesign)
 
+**Status: built 20 Nov 2026** after the owner's answers (all as recommended). Differences from the text below: the
+ledger is an optional save field with no schema bump (ADR 0002), not a migration; a Legendary needs a paper of 20 or more
+questions; a Super Epic topic counts only once every one of its sub-topics has a playable Competent tier. Code:
+`site/src/lib/crumbs.ts`, `store.ts` (`finishQuiz`, `purchase`), `/shop/`.
+
 Status: proposal for the owner (20 Nov 2026). It amends [game-design.md](game-design.md), whose rules still apply: no
 loot boxes, no money, no leaderboards or comparing children, rewards shown before they are earned.
 

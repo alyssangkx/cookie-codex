@@ -52,7 +52,35 @@ test('garbage in gives a fresh save, never a throw', () => {
 });
 
 test('a tampered tier hash or parked flag is dropped', () => {
-  const c = cleanSave({ progress: { 'math-x': { b: { best: 1, hash: '<b>x</b>' } } }, questions: { q1: { s: 1, due: 1, w: 0, parked: 'yes' } } });
+  const c = cleanSave({ progress: { 'math-x': { b: { best: 1, hash: '<b>x</b>' } } }, questions: { q1: { s: 1, due: 1, w: 0, parked: 'Yes!' } } }); // a bank-set marker is [a-z0-9]{1,16}
   assert.equal(c.progress['math-x'].b!.hash, undefined);
   assert.equal(c.questions.q1.parked, undefined);
+});
+
+test('the Crumbs ledger comes through a server round trip unchanged; a save without one stays without one', () => {
+  const s = fresh();
+  s.crumbs = {
+    bal: 41, earned: 101, spent: 60, test: 0, goalDay: '2026-11-20', week: '2026-11-16', topics: ['math-fractions'],
+    log: [{ ts: 1, n: 12, bal: 101, why: 'quiz', note: 'math-x|b' }, { ts: 2, n: -60, bal: 41, why: 'buy', slug: 'r1', test: true }],
+    buys: [{ ts: 2, slug: 'r1', kind: 'card', price: 60, stars: 1, test: true }],
+  };
+  assert.deepEqual(cleanSave(JSON.parse(JSON.stringify(s))), s);
+  assert.equal('crumbs' in cleanSave(JSON.parse(JSON.stringify(fresh()))), false);
+});
+
+test('a tampered ledger is made well-formed: no negative balance, unknown reasons dropped, at most 50 entries', () => {
+  const log = Array.from({ length: 70 }, (_, k) => ({ ts: k, n: 1, bal: k, why: k === 69 ? '<b>hack</b>' : 'quiz' }));
+  const c = cleanSave({ ...fresh(), crumbs: { bal: -5, earned: 'x', log, buys: [{ slug: 3 }], topics: 'no' } }).crumbs!;
+  assert.equal(c.bal, 0);
+  assert.equal(c.earned, 0);
+  assert.equal(c.log.length, 49); // the last 50, minus the one with an unknown reason
+  assert.ok(c.log.every((e) => e.why === 'quiz'));
+  assert.deepEqual(c.buys, []);
+  assert.equal(c.topics, undefined);
+});
+
+test('a parked marker naming the bank set survives a round trip', () => {
+  const s = fresh();
+  s.questions.q1 = { s: 1, due: 5, w: 1, parked: 'k3x9a' };
+  assert.deepEqual(cleanSave(JSON.parse(JSON.stringify(s))).questions.q1, { s: 1, due: 5, w: 1, parked: 'k3x9a' });
 });

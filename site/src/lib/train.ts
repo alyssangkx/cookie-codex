@@ -44,6 +44,10 @@ export const banks = Object.values(files).map((f) => ({
   })) as BankQ[],
 }));
 
+/** tierHash of every question id in every bank: names the bank set a Daily Review parked against (store.ts syncParked,
+ * reviewDueCount), so a state parked by an older tab or build is re-checked instead of hidden. */
+export const banksHash = tierHash(banks.flatMap((b) => b.questions.map((q) => q.id)));
+
 const LEVEL_TIER = { basic: 'b', intermediate: 'i', competent: 'c' } as const;
 const tierQs = new Map<string, string[]>(); // "sub|tier" -> question ids
 const subFile = new Map<string, string>(); // sub -> topic file
@@ -104,6 +108,23 @@ export const cookieBySlug = new Map(cookies.map((c) => [c.slug, c]));
 /** Card details the client needs, keyed by slug. */
 export const cardInfo = Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }]));
 export const milestones = rewards.milestones as Record<string, string[]>;
+/** Replacement and shop order per rarity (build_rewards.py `rarityOrder`): every non-milestone card once. */
+export const rarityOrder = rewards.rarityOrder as Record<string, string[]>;
+/** Topics a Super Epic can be earned for: topic id -> its sub-topic ids, only for topics where every sub-topic has a
+ * playable Competent tier (a sub-topic without one could never be cleared, so its topic is not offered yet). */
+export const competencyTopics: Record<string, string[]> = (() => {
+  const by = new Map<string, Sub[]>();
+  for (const s of subs) by.set(s.topic, [...(by.get(s.topic) ?? []), s]);
+  return Object.fromEntries([...by].filter(([, l]) => l.every((s) => s.playable.c)).map(([t, l]) => [t, l.map((s) => s.id)]));
+})();
+/** Everything the client economy needs (crumbs.ts Economy plus card names), served at /data/economy.json. */
+export const economyData = () => ({
+  order: rarityOrder,
+  topics: competencyTopics,
+  topicNames: Object.fromEntries(Object.keys(competencyTopics).map((t) => [t, subs.find((s) => s.topic === t)!.topicName])),
+  cards: Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }])),
+  milestones,
+});
 
 const topicName = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
   syl.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string]))));

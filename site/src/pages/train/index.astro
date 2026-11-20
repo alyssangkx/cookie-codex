@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { SCHOOLS, subsOf, hasContent, unitName } from '../../lib/train';
+import { SCHOOLS, subsOf, hasContent, unitName, banksHash } from '../../lib/train';
 
 const schools = SCHOOLS.map((s) => {
   const list = subsOf(s.id);
@@ -8,7 +8,7 @@ const schools = SCHOOLS.map((s) => {
 });
 ---
 <Base title="Schools of Mastery · PSLE training" description="Daily PSLE practice in four Schools of Mastery: Math, Science, English and Chinese.">
-  <section class="wrap train-hub">
+  <section class="wrap train-hub" data-banks={banksHash}>
     <h1>Schools of Mastery</h1>
     <p class="lede">Train every day, clear tiers and earn cookie cards. Each sub-topic has three tiers: Basic, Intermediate and Competent.</p>
 
@@ -37,7 +37,7 @@ const schools = SCHOOLS.map((s) => {
 </Base>
 
 <script>
-  import { load, today, liveStreak, dayBlock, blockMessage, isDue, TIERS } from '../../lib/store';
+  import { load, today, liveStreak, dayBlock, blockMessage, reviewDueCount, TIERS } from '../../lib/store';
     const s = load();
   const t = today(s);
   document.getElementById('goal')!.textContent =
@@ -46,7 +46,8 @@ const schools = SCHOOLS.map((s) => {
   document.getElementById('goal-help')!.textContent = `Your daily goal is ${s.settings.dailyGoalQuizzes} quiz${s.settings.dailyGoalQuizzes === 1 ? '' : 'zes'} a day.`;
   const st = liveStreak(s);
   document.getElementById('streak')!.textContent = st ? `${st}-week streak` : 'Meet your goal on 4 days this week to start a streak';
-  const due = Object.keys(s.questions).filter((id) => isDue(s, id)).length;
+  // counts states an older tab or build parked too (reviewDueCount): only Daily Review can re-check them
+  const due = reviewDueCount(s, Date.now(), document.querySelector<HTMLElement>('.train-hub')!.dataset.banks);
   const review = document.getElementById('review') as HTMLAnchorElement;
   if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = 'Daily Review'; } // the exact count (bank ids only) is on each school page and the quiz start screen
   const doneEl = document.getElementById('done')!;
