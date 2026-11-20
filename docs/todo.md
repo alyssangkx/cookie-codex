@@ -160,6 +160,29 @@ outside the repo.
 - [ ] Owner questions in `docs/game-economy.md`: the currency name, the earning table and prices, whether tier
   clears still give a card, and the bar for the rare cards.
 
+## Development practice (20 Nov 2026)
+
+- [ ] `GLOSSARY.md` and `docs/adr/`, written with the domain-modeling skill (in progress).
+- [ ] **Turn the review findings into checks** in `check_science.py` and `check_english.py`, after the current
+  Science batch and the English reorganisation:
+  - captions, labels and alt text must not hold the answer's words;
+  - the stem must not echo the answer;
+  - no near-duplicate options;
+  - per sub-topic, the correct option is the longest in no more than about 35% of items;
+  - flag figures whose drawn objects don't match the stem's nouns.
+- [ ] **A short "working rules" section in CLAUDE.md**, Karpathy-style (the plugin is skipped):
+  - state the syllabus scope and definitions before a question batch;
+  - exactly one defensible answer per item;
+  - figures depict the stem;
+  - say what's unclear instead of guessing;
+  - every review fault class becomes a check.
+
+  Then a writing-for-agents pass to tighten CLAUDE.md.
+- [ ] **Matt Pocock skills (already installed):**
+  - to-questionnaire for the economy decisions;
+  - grilling and prototype before the assessment cycle and the marker builds;
+  - tdd and handoff written into agent briefs.
+
 ## Site and tech
 
 - [ ] Stale "N mastered" on a redesigned tier of the same size is not detected. Store a per-tier id hash in `syncTiers` and compare it with a build-time hash (display only).
