@@ -25,7 +25,7 @@ def template(topic, level, *outcomes, same_value_ok=False, calc=False, weight=1)
     template whose pattern is far more common in past papers than its sibling templates' patterns. Not part of the id."""
     def deco(fn):
         fn.topic, fn.level, fn.outcomes, fn.same_value_ok, fn.calc = topic, level, list(outcomes), same_value_ok, calc
-        if not (isinstance(weight, int) and weight >= 1):
+        if isinstance(weight, bool) or not (isinstance(weight, int) and weight >= 1):
             raise ValueError(f"{fn.__name__}: weight must be a whole number >= 1, got {weight!r}")
         fn.weight = weight
         fn.key = fn.__name__

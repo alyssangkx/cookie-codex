@@ -86,7 +86,7 @@ test('keep going: a part-mastered tier is suggested with N of M mastered', () =>
   assert.match(r[0].reason, /5 of 20 questions mastered/);
   // a count stored against a bank of another size is stale and is not suggested
   const t = run(s, [mk('math-a', 't'), { ...mk('math-b', 't'), count: { b: 25, i: 20, c: 20 } }]);
-  assert.notEqual(t[0]?.kind, 'one-more');
+  assert.ok(!t.some((x) => x.kind === 'one-more'));
   const u = real(); u.progress['math-a'] = { b: { passes: [], scores: [], best: 0, cleared: false } };
   assert.ok(!run(u, subs).some((x) => x.kind === 'one-more')); // nothing mastered yet
 });

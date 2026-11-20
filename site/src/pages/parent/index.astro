@@ -172,7 +172,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
@@ -231,7 +231,7 @@ const data = {
           if (sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
           const ts = tierState(s, sub.id, t);
           if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
-          else if (ts.mastered) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
+          else if (liveMastered(ts, sub.count[t])) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
           else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
         }
         html += '</div></div>';
@@ -276,7 +276,6 @@ const data = {
   const missingNote = () => (bankMissing ? `<p class="note">Some question files could not load (offline?), so their questions are not shown. Reload to try again.</p>` : '');
   function banks() {
     return (bankLoad ??= (async () => {
-      bankMissing = 0;
       const qs = new Map<string, BQ>();
       const files = [...new Set(P.all.map((x) => x.file))];
       await Promise.all(files.map(async (f) => {
@@ -286,7 +285,6 @@ const data = {
           for (const q of (await r.json()) as BQ[]) qs.set(q.id, q);
         } catch { bankMissing++; }
       }));
-      if (bankMissing) bankLoad = null; // a failed file is fetched again on the next render, not cached for the page
       return qs;
     })());
   }
