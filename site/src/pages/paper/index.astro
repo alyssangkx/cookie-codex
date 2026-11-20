@@ -55,7 +55,7 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
 
 <script>
   import { load, save } from '../../lib/store';
-  import { loadDraft, draftOwner, draftState, tickPaper, discardDraft } from '../../lib/paper';
+  import { loadDraft, draftOwner, draftState, tickPaper, discardDraft, paperSubject, staleText } from '../../lib/paper';
   const form = document.getElementById('paper-form') as HTMLFormElement;
   // one subject per paper: only the chosen subject's topics show, and only they are sent
   const subject = () => form.querySelector<HTMLInputElement>('input[name="subject"]:checked')?.value ?? 'math';
@@ -68,7 +68,6 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
   // A paper already started (its draft) must be finished or discarded first: Start is held back until then, and the
   // quiz page never lets it replace the paper picked here. One long past its time is put away unscored, with a note.
   const $ = (id: string) => document.getElementById(id)!;
-  const SUBJECT: Record<string, string> = { math: 'Math', eng: 'English', sci: 'Science' };
   const startBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const owner = draftOwner(load().createdAt);
   function showDraft() {
@@ -76,11 +75,11 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
     startBtn.disabled = false;
     $('resume').hidden = true;
     if (!d) return;
-    const subj = SUBJECT[d.topics[0]?.split('-')[0]] ?? 'practice';
+    const subj = paperSubject(d);
     const st = draftState(d.clock, now);
     if (st === 'stale') {
-      const s = load(); discardDraft(s, now); save(s);
-      $('resume-note').textContent = `Your ${subj} paper from ${new Date(d.ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })} ran out of time a while ago, so it was put away without a score. Nothing from it was counted.`;
+      const s = load(); discardDraft(s, d); save(s);
+      $('resume-note').textContent = staleText(d);
       $('resume-note').hidden = false;
       return;
     }
@@ -93,9 +92,12 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
     startBtn.disabled = true;
   }
   showDraft();
+  // re-check every 30 s: a running paper becomes due, then stale (put away), and Start comes back by itself
+  window.setInterval(showDraft, 30_000);
   $('resume-discard').addEventListener('click', () => {
-    if (!confirm('Discard this paper? Its answers are thrown away. It still counts as a paper started that day.')) return;
-    if (loadDraft(owner)) { const s = load(); discardDraft(s); save(s); }
+    if (!confirm('Discard this paper? Its answers are thrown away.')) return;
+    const d = loadDraft(owner);
+    if (d) { const s = load(); discardDraft(s, d); save(s); }
     $('resume-note').textContent = 'The paper was discarded. You can start a new one.';
     $('resume-note').hidden = false;
     showDraft();

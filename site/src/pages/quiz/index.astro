@@ -97,7 +97,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   import { lineForLast, bilingual } from '../../lib/encourage';
   import {
     newClock, tickPaper, canPause, startPause, endPause, pauseLeft, timeUsed, blanks, reviewList, paperOk, draftState,
-    loadDraft, saveDraft, draftCurrent, clearDraft, discardDraft, draftOwner, type PaperDraft, type Pick,
+    loadDraft, saveDraft, draftCurrent, clearDraft, discardDraft, draftOwner, paperSubject, staleText, type PaperDraft, type Pick,
   } from '../../lib/paper';
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
@@ -243,6 +243,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   }
 
   let notice = ''; // a line shown above the start text (e.g. an old paper was put away)
+  let handInChosen = false; // the child chose to hand in a paper whose time was up: never put it away on a later tick
   async function init() {
     const s = load();
     if (mode === 'tier') {
@@ -259,8 +260,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         const st = draftState(draft.clock, Date.now());
         if (st === 'stale') {
           notice = `<p class="note">${esc(staleText(draft))}</p>`;
-          putAway();
-        } else if (params.get('resume') === '1' || isThisPaper(draft)) return resumePaper(draft);
+          putAway(draft);
+        } else if (params.get('resume') === '1' || isThisPaper(draft)) {
+          handInChosen = st === 'due'; // opened while due: the decision to hand it in is taken now, not on a later tick
+          return resumePaper(draft);
+        }
         else return draftChoice(draft);
       }
       if (!paperTopics.length) return stop(`${notice}Choose at least one topic.`, '<a href="/paper/">Build a paper</a>');
@@ -314,7 +318,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (PAPER) { // another tab may have started a paper since this page loaded: never replace one that is running
       const d = loadDraft(draftOwner(s0.createdAt));
       if (d && draftState(d.clock, now) !== 'stale') return draftChoice(d);
-      closeStalePapers(s0, now); // papers abandoned on earlier days: close their open records
+      closeStalePapers(s0, now); // open paper records over 2 days old (abandoned, draft lost): no paper runs that long
     }
     const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined, total: quiz.length }, now);
     if (blocked) { quiz = []; return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>'); }
@@ -403,18 +407,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     playPaper();
   }
 
-  const SUBJECT: Record<string, string> = { math: 'Math', eng: 'English', sci: 'Science', chi: 'Chinese' };
-  const subjectOf = (d: PaperDraft) => SUBJECT[d.topics[0]?.split('-')[0]] ?? 'practice';
-  const dateOf = (t: number) => new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
-  const staleText = (d: PaperDraft) => `Your ${subjectOf(d)} paper from ${dateOf(d.ts)} ran out of time a while ago, so it was put away without a score. Nothing from it was counted.`;
   /** The link is the same paper as the draft (a reload of it): same topics and mix. */
   const isThisPaper = (d: PaperDraft) => !!paperTopics.length && mixKey === d.mix
     && [...paperTopics].sort().join() === [...d.topics].sort().join();
 
-  /** Put the draft away unscored: no result, no retests; its open record closes once its day is over. */
-  function putAway() {
+  /** Put the draft away unscored: no result, no retests; its own open record (by ts) is closed at once. */
+  function putAway(d: PaperDraft) {
     const s = load();
-    discardDraft(s);
+    discardDraft(s, d);
     save(s);
     draft = null;
   }
@@ -425,18 +425,29 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const due = draftState(d.clock, now) === 'due';
     const n = d.ids.length;
     $('start-info').innerHTML = due
-      ? `<p>Your ${esc(subjectOf(d))} paper's time is up. It will be handed in when you open it, and you will see your score.</p>`
-      : `<p>You already have a ${esc(subjectOf(d))} paper in progress (${n} questions, ${mmss(tickPaper(d.clock, now).left)} left). Finish it before starting a new one.</p>`;
+      ? `<p>Your ${esc(paperSubject(d))} paper's time is up. It will be handed in when you open it, and you will see your score.</p>`
+      : `<p>You already have a ${esc(paperSubject(d))} paper in progress (${n} questions, ${mmss(tickPaper(d.clock, now).left)} left). Finish it before starting a new one.</p>`;
     $('start-info').innerHTML += `<p class="choice"><button id="d-resume" class="primary" type="button">${due ? 'Hand it in' : 'Resume that paper'}</button>`
       + ` <button id="d-discard" type="button">Discard it</button></p>`
-      + '<p class="note">Discarding throws away its answers. It still counts as a paper started that day.</p>';
+      + '<p class="note">Discarding throws away its answers.</p>';
     $('start-btn').hidden = true;
     show('start');
-    $('d-resume').onclick = () => { draft = d; resumePaper(d); };
+    // read the draft again on click: the screen may have sat open while another tab answered, handed in or discarded it
+    const fresh = () => { const f = loadDraft(draftOwner(load().createdAt)); return f && f.ts === d.ts ? f : null; };
+    $('d-resume').onclick = () => {
+      const f = fresh();
+      if (!f) { notice = ''; return init(); } // gone or replaced meanwhile: look again
+      const st = draftState(f.clock, Date.now());
+      if (due) handInChosen = true; // "Hand it in" was chosen: hand it in even if the grace ran out while this screen sat open
+      else if (st === 'stale') { notice = `<p class="note">${esc(staleText(f))}</p>`; putAway(f); return init(); }
+      else handInChosen = st === 'due';
+      draft = f;
+      resumePaper(f);
+    };
     $('d-discard').onclick = () => {
-      if (!draftCurrent(d)) return init(); // handed in or changed in another tab meanwhile: look again
-      putAway();
-      notice = `<p class="note">The ${esc(subjectOf(d))} paper was discarded.</p>`;
+      const f = fresh();
+      if (f) putAway(f);
+      notice = f ? `<p class="note">The ${esc(paperSubject(f))} paper was discarded.</p>` : '';
       init();
     };
   }
@@ -448,7 +459,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     clearInterval(tick);
     if (history.state?.quiz) history.back();
     for (const id of ['leave-dlg', 'submit-dlg']) { const dlg = $(id) as HTMLDialogElement; if (dlg.open) dlg.close(); }
-    if (d && draftCurrent(d)) putAway();
+    if (d && draftCurrent(d)) putAway(d);
     stop(d ? staleText(d) : 'This paper ran out of time a while ago, so it was put away without a score.', '<a href="/paper/">Build a new paper</a>');
   }
 
@@ -474,7 +485,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('timer').classList.toggle('paused', !!pclock.pausedAt);
     if (pclock.pausedAt) $('p-paused-left').textContent = `Pause time left: ${mmss(pauseLeft(pclock, now))}`;
     if (r.submit) {
-      if (draftState(pclock, now) === 'stale') return abandonStale();
+      if (draftState(pclock, now) === 'stale' && !handInChosen) return abandonStale();
       finish(true);
     }
   }
@@ -700,7 +711,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     paperUsed = timeUsed(pclock, startedAt, now);
     const res = finishQuiz(s, {
       mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, now, {}); // papers never clear tiers (and byId holds only paperOk items, so tier lists would be partial)
+    }, rewardFor, now, {}, startedAt); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
     closeStalePapers(s, now);
     save(s);
     const b = blanks(picks);

@@ -60,10 +60,13 @@ test('bilingual until the end of the Term 1 date (local), then Chinese only', ()
   assert.equal(bilingual(new Date(2027, 3, 1, 0, 1).getTime(), '2027-03-31'), false);
 });
 
-test('pickLine never crashes on an edited copy: falls back to the band, then to any line', () => {
+test('pickLine never crashes on an edited copy: fitting band lines, then any non-tier line, then the band tier lines', () => {
   const only = { perfect: [{ use: 'tier' as const, en: 'T', zh: 't' }], high: [], mid: [{ use: 'all' as const, en: 'M', zh: 'm' }], low: [] };
-  assert.equal(pickLine('perfect', 1, false, undefined, only)!.en, 'T'); // only tier lines: use them rather than nothing
-  assert.equal(pickLine('high', 1, false, undefined, only)!.en, 'M'); // empty band: any 'all' line
+  assert.equal(pickLine('perfect', 1, false, undefined, only)!.en, 'M'); // no fitting line in the band: any non-tier line first
+  assert.equal(pickLine('high', 1, false, undefined, only)!.en, 'M'); // empty band: any non-tier line
+  assert.equal(pickLine('perfect', 1, true, undefined, only)!.en, 'T'); // tier quiz: the band's tier line fits
+  const tierOnly = { perfect: [{ use: 'tier' as const, en: 'T', zh: 't' }], high: [], mid: [], low: [] };
+  assert.equal(pickLine('perfect', 1, false, undefined, tierOnly)!.en, 'T'); // last resort: the band's own tier lines
   assert.equal(pickLine('low', 1, false, undefined, { perfect: [], high: [], mid: [], low: [] }), null);
   assert.equal(lineForLast([{ ts: 1, mode: 'paper', score: 0, total: 10 }], { perfect: [], high: [], mid: [], low: [] }), null);
 });

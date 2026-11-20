@@ -2,9 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   PAUSE_MAX, newClock, pauseLeft, canPause, startPause, endPause, tickPaper, timeUsed, blanks, paperScore, reviewList,
-  paperOk, draftOk, loadDraft, saveDraft, draftCurrent, clearDraft, draftState, discardDraft, GRACE, type PaperDraft,
+  paperOk, draftOk, loadDraft, saveDraft, draftCurrent, clearDraft, draftState, discardDraft, GRACE, paperSubject, staleText, type PaperDraft,
 } from './paper.ts';
-import { fresh, openAttempt, closeStalePapers, answer, LEFT_BLANK } from './store.ts';
+import { fresh, openAttempt, closeStalePapers, answer, finishQuiz, LEFT_BLANK, STALE_PAPER_MS } from './store.ts';
+
+const DAY = 86_400_000;
 
 const MIN = 60_000;
 const T = 1_790_000_000_000;
@@ -146,22 +148,37 @@ test('a new paper never replaces a live or due one (another tab); a stale one ma
   assert.equal(b!.ts, T + 25 * MIN);
 });
 
-test('closing abandoned papers: earlier days removed, today kept (still counts as started), a running one kept', () => {
-  const day = 86_400_000, now = new Date(2026, 10, 20, 12).getTime();
+test('a paper open record is matched by its own ts: finishing or discarding one never touches another', () => {
+  const now = new Date(2026, 10, 20, 12).getTime();
   const s = fresh();
-  openAttempt(s, { mode: 'paper', total: 10 }, now - 2 * day); // abandoned two days ago
-  openAttempt(s, { mode: 'paper', total: 10 }, now - day); // yesterday, still running (kept)
-  openAttempt(s, { mode: 'paper', total: 10 }, now - 60_000); // today
-  openAttempt(s, { mode: 'tier', sub: 'x', tier: 'b', total: 10 }, now - 2 * day); // tier records are not touched
-  closeStalePapers(s, now, now - day);
-  assert.deepEqual(s.attempts.map((a) => [a.mode, a.ts]), [['paper', now - day], ['paper', now - 60_000], ['tier', now - 2 * day]]);
+  openAttempt(s, { mode: 'paper', total: 10 }, now - 5 * 60_000); // running on another device
+  openAttempt(s, { mode: 'paper', total: 10 }, now - 60_000); // this paper (started later)
+  finishQuiz(s, { mode: 'paper', score: 5, total: 10, ms: 1, tags: [] }, () => undefined, now, {}, now - 60_000);
+  assert.deepEqual(s.attempts.filter((a) => a.open).map((a) => a.ts), [now - 5 * 60_000]); // the other device's stays
+  openAttempt(s, { mode: 'paper', total: 10 }, now - 30_000);
   memStore();
-  saveDraft(draft({ ts: now - 2 * day }), now - 2 * day);
-  const s2 = fresh();
-  openAttempt(s2, { mode: 'paper', total: 10 }, now - 2 * day);
-  discardDraft(s2, now);
+  const d = saveDraft(draft({ ts: now - 30_000 }), now - 30_000)!;
+  discardDraft(s, d);
   assert.equal(loadDraft('u1|5'), null);
-  assert.equal(s2.attempts.length, 0);
+  assert.deepEqual(s.attempts.filter((a) => a.open).map((a) => a.ts), [now - 5 * 60_000]); // only its own record closed
+});
+
+test('open paper records over 2 days old are closed (no paper runs that long); newer ones and tier records stay', () => {
+  const now = new Date(2026, 10, 20, 12).getTime();
+  const s = fresh();
+  openAttempt(s, { mode: 'paper', total: 10 }, now - 3 * DAY);
+  openAttempt(s, { mode: 'paper', total: 10 }, now - DAY); // e.g. still on another device's draft: kept
+  openAttempt(s, { mode: 'tier', sub: 'x', tier: 'b', total: 10 }, now - 3 * DAY);
+  closeStalePapers(s, now);
+  assert.deepEqual(s.attempts.map((a) => [a.mode, a.ts]), [['paper', now - DAY], ['tier', now - 3 * DAY]]);
+  assert.equal(STALE_PAPER_MS, 2 * DAY);
+});
+
+test('wording shared by /quiz/ and /paper/', () => {
+  assert.equal(paperSubject({ topics: ['sci-cycles-reproduction'] }), 'Science');
+  assert.equal(paperSubject({ topics: ['chi-ciyu'] }), 'Chinese');
+  assert.equal(paperSubject({ topics: [] }), 'practice');
+  assert.match(staleText({ topics: ['math-ratio'], ts: T }), /^Your Math paper from .+ put away without a score\. Nothing from it was counted\.$/);
 });
 
 test('a blank on purpose is stored apart from a time-out blank', () => {

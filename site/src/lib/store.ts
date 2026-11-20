@@ -303,7 +303,8 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
  *  then 3, then 7; correct at the 7-day step retires it; wrong at any step goes back to 1 day.
  *  A correct answer to a retest that is not yet due changes nothing (no progress, no penalty), so
  *  the spacing cannot be skipped by repeating questions on the same day. */
-/** Record one answer. `picked` is the option text chosen on a wrong answer; omitted = left blank (stored as ''). */
+/** Record one answer. `picked` is the option text chosen on a wrong answer; omitted = not answered because time ran
+ *  out (stored as ''); LEFT_BLANK = a paper question left blank on purpose. */
 export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string) {
   const q = s.questions[id];
   if (ok && !q && !retireNew) return; // practice papers never drain tier pools
@@ -372,16 +373,19 @@ export function beginQuiz(
   if (mode === 'tier' || mode === 'paper') openAttempt(s, { mode, ...a }, now);
   return null;
 }
-/**
- * Close papers that were started and never handed in (discarded, or abandoned past their time): their open records
- * from earlier days are removed, except `keep` (a paper still running). One started today stays open until the day
- * ends, so it still counts as a paper started today.
- */
-export function closeStalePapers(s: SaveV1, now = Date.now(), keep?: number) {
-  const day = dayKey(now);
-  s.attempts = s.attempts.filter((a) => !(a.open && a.mode === 'paper' && a.ts !== keep && dayKey(a.ts) !== day));
+/** A paper's open record is matched by its own start time (the paper draft's ts), never by mode alone. */
+export function closeOpenPaper(s: SaveV1, ts: number) {
+  const i = s.attempts.findIndex((x) => x.open && x.mode === 'paper' && x.ts === ts);
+  if (i >= 0) s.attempts.splice(i, 1);
 }
-const dropOpen = (s: SaveV1, mode: Attempt['mode'], sub?: string, tier?: Tier) => {
+/** No paper runs longer than about 2 hours, so an open paper record over 2 days old is one abandoned without its draft
+ *  being discarded (e.g. on another device whose draft was lost). Removing it cannot touch a paper still running. */
+export const STALE_PAPER_MS = 2 * DAY;
+export function closeStalePapers(s: SaveV1, now = Date.now()) {
+  s.attempts = s.attempts.filter((a) => !(a.open && a.mode === 'paper' && now - a.ts > STALE_PAPER_MS));
+}
+const dropOpen = (s: SaveV1, mode: Attempt['mode'], sub?: string, tier?: Tier, openTs?: number) => {
+  if (mode === 'paper' && openTs !== undefined) return closeOpenPaper(s, openTs);
   const i = s.attempts.findLastIndex((x) => x.open && x.mode === mode && x.sub === sub && x.tier === tier);
   if (i >= 0) s.attempts.splice(i, 1);
 };
@@ -412,10 +416,11 @@ export function finishQuiz(
   rewardFor: RewardFor,
   now = Date.now(),
   tierIds: Record<string, string[]> = {},
+  openTs?: number, // a paper: the start time of its open record (removed exactly; other papers' records stay)
 ): QuizResult {
   const key = dayKey(now);
   const wasMet = (s.days[key]?.quizzes ?? 0) >= s.settings.dailyGoalQuizzes;
-  if (a.mode === 'tier' || a.mode === 'paper') dropOpen(s, a.mode, a.sub, a.tier);
+  if (a.mode === 'tier' || a.mode === 'paper') dropOpen(s, a.mode, a.sub, a.tier, openTs);
   // "First" = no other attempt for this sub|tier at all (Basic and Intermediate only), finished OR abandoned (this quiz's own open record
   // was dropped above). Counting abandoned tries closes the "quit after a mistake, retry until perfect" loophole.
   const firstEver = a.mode === 'tier' && (a.tier === 'b' || a.tier === 'i') && !!a.sub && !s.attempts.some((x) => x.mode === 'tier' && x.sub === a.sub && x.tier === a.tier);

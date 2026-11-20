@@ -1,7 +1,7 @@
 // WA/SA practice papers, submit-then-review (docs/learning-loop-design.md item 2): pure clock, scoring and
 // draft rules, so the quiz page stays thin and the rules are tested. The draft lives in store.ts's kv (never in
 // the save), so there is no schema change and an old tab never meets a field it cannot read.
-import { kv, closeStalePapers, type SaveV1 } from './store.ts';
+import { kv, closeOpenPaper, type SaveV1 } from './store.ts';
 
 /** One pause per paper, up to 10 minutes. */
 export const PAUSE_MAX = 10 * 60_000;
@@ -121,9 +121,18 @@ export function draftCurrent(d: PaperDraft): boolean {
 
 export const clearDraft = () => kv.del(DRAFT_KEY);
 
-/** Put a paper away unscored (discarded, or stale): no result, no retests. Drops the draft and closes the paper's open
- * record if its day is over (closeStalePapers). The caller saves `s`. */
-export function discardDraft(s: SaveV1, now = Date.now()) {
+/** Put a paper away unscored (discarded, or stale): no result, no retests. Drops the draft and closes the paper's own
+ * open record (matched by its ts) at once. The caller saves `s`. */
+export function discardDraft(s: SaveV1, d: PaperDraft) {
   clearDraft();
-  closeStalePapers(s, now);
+  closeOpenPaper(s, d.ts);
 }
+
+// ------------------------------------------------------------------ wording shared by /quiz/ and /paper/
+
+const SUBJECT: Record<string, string> = { math: 'Math', eng: 'English', sci: 'Science', chi: 'Chinese' };
+/** "Math", "English", "Science" or "Chinese" from the draft's first topic id (e.g. sci-...). */
+export const paperSubject = (d: { topics: string[] }) => SUBJECT[d.topics[0]?.split('-')[0] ?? ''] ?? 'practice';
+export const paperDate = (t: number) => new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+export const staleText = (d: { topics: string[]; ts: number }) =>
+  `Your ${paperSubject(d)} paper from ${paperDate(d.ts)} ran out of time a while ago, so it was put away without a score. Nothing from it was counted.`;

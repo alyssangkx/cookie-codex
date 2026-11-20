@@ -24,10 +24,13 @@ export function hash(x: string | number): number {
 
 /** The band's line for `seed` (null only if the copy is empty). 'tier' lines only after tier quizzes. A line equal to `avoid` moves to the next one. */
 export function pickLine(b: Band, seed: string | number, tier: boolean, avoid?: string, bands = BANDS): Line | null {
-  // an edit that leaves a band with only 'tier' lines (or none) falls back to the band's lines, then to any 'all' line
+  // an edit can leave a band with only 'tier' lines (or none): then any fitting line of another band, then the
+  // band's own tier lines
+  const fits = (l: Line) => tier || l.use !== 'tier';
   const own = bands[b] ?? [];
-  const fit = own.filter((l) => tier || l.use !== 'tier');
-  const pool = fit.length ? fit : own.length ? own : Object.values(bands).flat().filter((l) => tier || l.use !== 'tier');
+  const fit = own.filter(fits);
+  const any = fit.length ? fit : Object.values(bands).flat().filter(fits);
+  const pool = any.length ? any : own;
   if (!pool.length) return null;
   let k = hash(seed) % pool.length;
   if (avoid !== undefined && pool.length > 1 && pool[k].en === avoid) k = (k + 1) % pool.length;
