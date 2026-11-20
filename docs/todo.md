@@ -54,11 +54,12 @@ support only. Supersedes the 'balanced thirds' tier split (owner OK'd it, then c
   - D. quiz page: pool quiz (no tier param; pickPool on the easier-first ids; title without tier; 20 minutes; finishQuiz opts.pools; answer(short) for pp ids of pool sub-topics); every mode hydrates the picked pp ids before showing them; daily_limit -> a plain message; Daily Review syncs milestones of pool sub-topics.
   - E. tier page [sub].astro: milestone view (counted/total bar, 3 markers with their cards, Exam-ready badge, Train button).
   - F. school page, G. result screen ("Milestone 1 reached"), H. parent page and suggest labels via MILESTONE_NAME; I. tests, build, screenshots.
+  - Status 21 Nov: A-G done and committed (165 tests, build 0, sub-topic page checked at 420 and 1200 px). Parent page needs nothing yet (its mastery grid lists Maths only; make it pool-aware when Maths switches). Release order: owner OK -> apply 006, deploy pp-serve (+ ALERT_* secrets by the owner) -> upload Science with `ord`, PP_SWITCH 'pool' for sub-topics with 20+ (else 'merge') -> code review, push -> check live -> apply 007.
 
 ### Anti-scraping for past-paper questions (owner, 21 Nov 2026, ADR 0012) — before the bulk upload
-- [ ] Migration 006: pool call (ids + order only), content call (<= 15 ids, text + figure paths), served log per account/day, limits (250 distinct/day, 40 calls/hour; half in the first 7 days; family-wide; admin/Test Player higher), flag table; drop the bulk `pp_items_for` and the readers' select policy on `pp-figures`. SQL tests in `sqltest.sh`.
-- [ ] Edge function `pp-serve`: checks the session and the limits through the content call, signs 10-minute figure URLs with the service role; emails the admin when an account is flagged (owner sets the Gmail sender secret in their own terminal).
-- [ ] Site: `ppfetch.ts` and the quiz page use pool + content calls; admin page "Heavy use" report.
+- [x] (built 21 Nov, not applied) Migration 006: pool call (ids + order only), content call (<= 15 ids, text + figure paths), served log per account/day, limits (250 distinct/day, 40 calls/hour; half in the first 7 days; family-wide; admin/Test Player higher), flag table; drop the bulk `pp_items_for` and the readers' select policy on `pp-figures`. SQL tests in `sqltest.sh`.
+- [x] (built 21 Nov, not deployed) Edge function `pp-serve`: checks the session and the limits through the content call, signs 10-minute figure URLs with the service role; emails the admin when an account is flagged (owner sets the Gmail sender secret in their own terminal).
+- [x] (built 21 Nov) Site: `ppfetch.ts` and the quiz page use pool + content calls; admin page "Heavy use" report. Migration 007 (drop the bulk read and the readers' bucket policy) written, to apply after the new site is live.
 - [ ] Owner OK to apply 006 and deploy the function; then the Science upload.
 
 ### Past-paper precedent for generated questions (owner, 21 Nov 2026)
