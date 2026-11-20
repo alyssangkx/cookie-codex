@@ -935,7 +935,7 @@ def _(p):
 @template(T, "competent", GA + "08", GT + "06")
 def ang_rhombus_equilateral(r):
     """math-pat-angles-chained-shapes"""
-    d = r.randrange(40, 101, 2)
+    d = r.randrange(40, 91, 2)
     if d == 90:
         return None
     sc = Scene()
@@ -946,7 +946,10 @@ def ang_rhombus_equilateral(r):
     sc.label("P", away="S"); sc.label("Q", away="S"); sc.label("R", away="S"); sc.label("T", away="S")
     sc.label("S", away=(0.5, 0.5), off=14)
     sc.ang("S", "P", "R", f"{d}°", r=22)
-    sc.ang("P", "S", "T", "x", r=26)
+    sc.ang("P", "S", "T", None, r=26)
+    sc.fit()
+    _bs = (bearing(pts[2], pts[0]) + bearing(pts[2], pts[4])) / 2  # bisector of the angle at P
+    sc.text(pt(pts[2][0], pts[2][1], _bs, 42 / sc.scale), "x")
     stem = (f"PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = {d}°. Find ∠SPT.")
     ans = (120 - d) // 2
     wr = [W(120 - d, "forgot_to_halve", "Found ∠SPT + ∠STP but did not halve it."),

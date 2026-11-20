@@ -32427,7 +32427,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"113.9\" y1=\"74.5\" x2=\"30.0\" y2=\"155.5\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"113.9\" y1=\"74.5\" x2=\"197.7\" y2=\"155.5\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"30.0\" y1=\"155.5\" x2=\"290.0\" y2=\"155.5\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"75.4\" y1=\"118.6\" x2=\"68.5\" y2=\"111.4\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"159.3\" y1=\"111.4\" x2=\"152.3\" y2=\"118.6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"113.9\" y=\"61.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"17.2\" y=\"157.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.7\" y=\"167.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"302.8\" y=\"157.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 98.0 89.8 A 22.0 22.0 0 0 0 129.7 89.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.9\" y=\"112.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">92°</text><path d=\"M 221.7 155.5 A 24.0 24.0 0 0 0 180.5 138.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"210.5\" y=\"124.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-7a0b5b683f",
+   "id": "geomet-c-4e9c5689fc",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -32435,18 +32435,18 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 100°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 84°. Find ∠SPT.",
    "options": [
-    "40°",
-    "10°",
-    "160°",
-    "20°"
+    "48°",
+    "18°",
+    "144°",
+    "36°"
    ],
    "optionValues": [
-    "40",
-    "10",
-    "160",
-    "20"
+    "48",
+    "18",
+    "144",
+    "36"
    ],
    "answer": 1,
    "explain": [
@@ -32466,14 +32466,14 @@
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 100° + 60° = 160°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 160°) ÷ 2 = 10°"
+    "∠PST = 84° + 60° = 144°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 144°) ÷ 2 = 18°"
    ],
    "params": {
-    "d": 100
+    "d": 84
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"106.1,30.0 198.0,30.0 213.9,120.5 122.0,120.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"106.1\" y1=\"30.0\" x2=\"168.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"122.0\" y1=\"120.5\" x2=\"168.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"213.9\" y1=\"120.5\" x2=\"168.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"103.8\" y=\"17.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"206.3\" y=\"20.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"226.9\" y=\"120.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"174.5\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"112.2\" y=\"130.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 144.0 120.5 A 22.0 22.0 0 0 0 118.2 98.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"148.6\" y=\"88.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">100°</text><path d=\"M 110.6 55.6 A 26.0 26.0 0 0 0 115.0 54.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"126.0\" y=\"104.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"119.1,30.0 210.5,30.0 200.9,120.9 109.5,120.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"119.1\" y1=\"30.0\" x2=\"155.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"109.5\" y1=\"120.9\" x2=\"155.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"200.9\" y1=\"120.9\" x2=\"155.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"120.4\" y=\"17.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"220.1\" y=\"21.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"213.9\" y=\"120.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"161.7\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"99.6\" y=\"130.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 131.5 120.9 A 22.0 22.0 0 0 0 111.8 99.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"137.9\" y=\"95.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">84°</text><path d=\"M 116.4 55.9 A 26.0 26.0 0 0 0 124.5 55.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"121.3\" y=\"71.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-be489ab6bb",
@@ -32972,7 +32972,7 @@
     "d": 76
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"124.9,30.0 217.5,30.0 195.1,119.8 102.5,119.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"124.9\" y1=\"30.0\" x2=\"148.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"102.5\" y1=\"119.8\" x2=\"148.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"195.1\" y1=\"119.8\" x2=\"148.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"128.1\" y=\"17.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"227.7\" y=\"22.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"208.1\" y=\"119.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"155.3\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"92.6\" y=\"129.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 124.5 119.8 A 22.0 22.0 0 0 0 107.8 98.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"132.6\" y=\"96.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">76°</text><path d=\"M 118.6 55.2 A 26.0 26.0 0 0 0 128.5 55.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"123.0\" y=\"65.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"124.9,30.0 217.5,30.0 195.1,119.8 102.5,119.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"124.9\" y1=\"30.0\" x2=\"148.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"102.5\" y1=\"119.8\" x2=\"148.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"195.1\" y1=\"119.8\" x2=\"148.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"128.1\" y=\"17.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"227.7\" y=\"22.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"208.1\" y=\"119.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"155.3\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"92.6\" y=\"129.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 124.5 119.8 A 22.0 22.0 0 0 0 107.8 98.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"132.6\" y=\"96.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">76°</text><path d=\"M 118.6 55.2 A 26.0 26.0 0 0 0 128.5 55.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"122.7\" y=\"71.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-0fc53edccb",
@@ -33471,7 +33471,7 @@
     "d": 66
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"131.7,30.0 227.2,30.0 188.3,117.3 92.8,117.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"131.7\" y1=\"30.0\" x2=\"140.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"92.8\" y1=\"117.3\" x2=\"140.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"188.3\" y1=\"117.3\" x2=\"140.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"137.0\" y=\"18.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"238.1\" y=\"22.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"201.3\" y=\"117.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"147.1\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"82.9\" y=\"127.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 114.8 117.3 A 22.0 22.0 0 0 0 101.8 97.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"124.8\" y=\"96.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">66°</text><path d=\"M 121.1 53.8 A 26.0 26.0 0 0 0 133.0 56.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"125.1\" y=\"65.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"131.7,30.0 227.2,30.0 188.3,117.3 92.8,117.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"131.7\" y1=\"30.0\" x2=\"140.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"92.8\" y1=\"117.3\" x2=\"140.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"188.3\" y1=\"117.3\" x2=\"140.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"137.0\" y=\"18.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"238.1\" y=\"22.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"201.3\" y=\"117.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"147.1\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"82.9\" y=\"127.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 114.8 117.3 A 22.0 22.0 0 0 0 101.8 97.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"124.8\" y=\"96.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">66°</text><path d=\"M 121.1 53.8 A 26.0 26.0 0 0 0 133.0 56.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"124.0\" y=\"71.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-b3db042824",
@@ -33924,7 +33924,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"113.9\" y1=\"39.3\" x2=\"30.0\" y2=\"190.7\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"113.9\" y1=\"39.3\" x2=\"197.7\" y2=\"190.7\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"30.0\" y1=\"190.7\" x2=\"290.0\" y2=\"190.7\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"76.3\" y1=\"117.4\" x2=\"67.6\" y2=\"112.6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"160.2\" y1=\"112.6\" x2=\"151.4\" y2=\"117.4\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"113.9\" y=\"26.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"17.5\" y=\"194.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.7\" y=\"202.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"302.8\" y=\"193.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 103.2 58.6 A 22.0 22.0 0 0 0 124.5 58.6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.9\" y=\"77.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">58°</text><path d=\"M 221.7 190.7 A 24.0 24.0 0 0 0 186.1 169.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"215.0\" y=\"161.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-8b784faf5d",
+   "id": "geomet-c-d08f4bf1e3",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -33932,28 +33932,28 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 96°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 46°. Find ∠SPT.",
    "options": [
-    "42°",
-    "24°",
-    "12°",
-    "156°"
+    "74°",
+    "67°",
+    "37°",
+    "106°"
    ],
    "optionValues": [
-    "42",
-    "24",
-    "12",
-    "156"
+    "74",
+    "67",
+    "37",
+    "106"
    ],
    "answer": 2,
    "explain": [
     {
-     "tag": "ignored_equilateral_triangle",
-     "why": "Left out the 60° angle of the equilateral triangle."
-    },
-    {
      "tag": "forgot_to_halve",
      "why": "Found ∠SPT + ∠STP but did not halve it."
+    },
+    {
+     "tag": "ignored_equilateral_triangle",
+     "why": "Left out the 60° angle of the equilateral triangle."
     },
     null,
     {
@@ -33963,14 +33963,14 @@
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 96° + 60° = 156°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 156°) ÷ 2 = 12°"
+    "∠PST = 46° + 60° = 106°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 106°) ÷ 2 = 37°"
    ],
    "params": {
-    "d": 96
+    "d": 46
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"109.5,30.0 200.9,30.0 210.5,120.9 119.1,120.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"109.5\" y1=\"30.0\" x2=\"164.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"119.1\" y1=\"120.9\" x2=\"164.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"210.5\" y1=\"120.9\" x2=\"164.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"108.2\" y=\"17.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"209.6\" y=\"20.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"223.5\" y=\"120.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"171.3\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"109.2\" y=\"130.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 141.1 120.9 A 22.0 22.0 0 0 0 116.8 99.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"144.6\" y=\"92.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">96°</text><path d=\"M 112.3 55.9 A 26.0 26.0 0 0 0 117.6 54.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"122.9\" y=\"92.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"143.6,30.0 250.9,30.0 176.4,107.1 69.1,107.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"143.6\" y1=\"30.0\" x2=\"122.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"69.1\" y1=\"107.1\" x2=\"122.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"176.4\" y1=\"107.1\" x2=\"122.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"152.7\" y=\"20.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"262.8\" y=\"24.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"189.4\" y=\"107.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"129.3\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"59.2\" y=\"117.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 91.1 107.1 A 22.0 22.0 0 0 0 84.4 91.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"104.3\" y=\"92.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">46°</text><path d=\"M 125.6 48.7 A 26.0 26.0 0 0 0 140.5 55.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"125.5\" y=\"67.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-f2c3c9ac43",
@@ -34423,7 +34423,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"113.9\" y1=\"32.7\" x2=\"30.0\" y2=\"197.3\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"113.9\" y1=\"32.7\" x2=\"197.7\" y2=\"197.3\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"30.0\" y1=\"197.3\" x2=\"290.0\" y2=\"197.3\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"76.4\" y1=\"117.3\" x2=\"67.5\" y2=\"112.7\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"160.3\" y1=\"112.7\" x2=\"151.4\" y2=\"117.3\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"113.9\" y=\"19.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"17.6\" y=\"201.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.7\" y=\"209.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"302.8\" y=\"199.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 103.9 52.3 A 22.0 22.0 0 0 0 123.9 52.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.9\" y=\"70.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">54°</text><path d=\"M 221.7 197.3 A 24.0 24.0 0 0 0 186.8 175.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"215.5\" y=\"168.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-4e9c5689fc",
+   "id": "geomet-c-a33c26890c",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -34431,45 +34431,45 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 84°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 88°. Find ∠SPT.",
    "options": [
-    "18°",
-    "144°",
-    "36°",
-    "48°"
+    "148°",
+    "46°",
+    "32°",
+    "16°"
    ],
    "optionValues": [
-    "18",
-    "144",
-    "36",
-    "48"
+    "148",
+    "46",
+    "32",
+    "16"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
      "tag": "gave_angle_at_s",
      "why": "Gave ∠PST, the angle at S."
     },
     {
+     "tag": "ignored_equilateral_triangle",
+     "why": "Left out the 60° angle of the equilateral triangle."
+    },
+    {
      "tag": "forgot_to_halve",
      "why": "Found ∠SPT + ∠STP but did not halve it."
     },
-    {
-     "tag": "ignored_equilateral_triangle",
-     "why": "Left out the 60° angle of the equilateral triangle."
-    }
+    null
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 84° + 60° = 144°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 144°) ÷ 2 = 18°"
+    "∠PST = 88° + 60° = 148°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 148°) ÷ 2 = 16°"
    ],
    "params": {
-    "d": 84
+    "d": 88
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"119.1,30.0 210.5,30.0 200.9,120.9 109.5,120.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"119.1\" y1=\"30.0\" x2=\"155.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"109.5\" y1=\"120.9\" x2=\"155.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"200.9\" y1=\"120.9\" x2=\"155.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"120.4\" y=\"17.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"220.1\" y=\"21.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"213.9\" y=\"120.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"161.7\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"99.6\" y=\"130.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 131.5 120.9 A 22.0 22.0 0 0 0 111.8 99.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"137.9\" y=\"95.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">84°</text><path d=\"M 116.4 55.9 A 26.0 26.0 0 0 0 124.5 55.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"121.3\" y=\"72.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"116.0,30.0 207.2,30.0 204.0,121.1 112.8,121.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"116.0\" y1=\"30.0\" x2=\"158.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"112.8\" y1=\"121.1\" x2=\"158.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"204.0\" y1=\"121.1\" x2=\"158.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"116.5\" y=\"17.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"216.5\" y=\"21.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"217.0\" y=\"121.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"164.9\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"102.9\" y=\"131.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 134.8 121.1 A 22.0 22.0 0 0 0 113.6 99.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.3\" y=\"94.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">88°</text><path d=\"M 115.1 56.0 A 26.0 26.0 0 0 0 122.3 55.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"120.4\" y=\"71.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-da17ca6003",
@@ -34922,7 +34922,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"113.9\" y1=\"36.1\" x2=\"30.0\" y2=\"193.9\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"113.9\" y1=\"36.1\" x2=\"197.7\" y2=\"193.9\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"30.0\" y1=\"193.9\" x2=\"290.0\" y2=\"193.9\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"76.4\" y1=\"117.3\" x2=\"67.5\" y2=\"112.7\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"160.2\" y1=\"112.7\" x2=\"151.4\" y2=\"117.3\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"113.9\" y=\"23.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"17.6\" y=\"197.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.7\" y=\"205.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"302.8\" y=\"196.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 103.5 55.6 A 22.0 22.0 0 0 0 124.2 55.6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.9\" y=\"74.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">56°</text><path d=\"M 221.7 193.9 A 24.0 24.0 0 0 0 186.5 172.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"215.2\" y=\"164.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-d08f4bf1e3",
+   "id": "geomet-c-54d15e53cb",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -34930,30 +34930,30 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 46°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 54°. Find ∠SPT.",
    "options": [
-    "74°",
-    "67°",
-    "37°",
-    "106°"
+    "66°",
+    "33°",
+    "63°",
+    "114°"
    ],
    "optionValues": [
-    "74",
-    "67",
-    "37",
-    "106"
+    "66",
+    "33",
+    "63",
+    "114"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
      "tag": "forgot_to_halve",
      "why": "Found ∠SPT + ∠STP but did not halve it."
     },
+    null,
     {
      "tag": "ignored_equilateral_triangle",
      "why": "Left out the 60° angle of the equilateral triangle."
     },
-    null,
     {
      "tag": "gave_angle_at_s",
      "why": "Gave ∠PST, the angle at S."
@@ -34961,14 +34961,14 @@
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 46° + 60° = 106°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 106°) ÷ 2 = 37°"
+    "∠PST = 54° + 60° = 114°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 114°) ÷ 2 = 33°"
    ],
    "params": {
-    "d": 46
+    "d": 54
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"143.6,30.0 250.9,30.0 176.4,107.1 69.1,107.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"143.6\" y1=\"30.0\" x2=\"122.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"69.1\" y1=\"107.1\" x2=\"122.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"176.4\" y1=\"107.1\" x2=\"122.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"152.7\" y=\"20.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"262.8\" y=\"24.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"189.4\" y=\"107.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"129.3\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"59.2\" y=\"117.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 91.1 107.1 A 22.0 22.0 0 0 0 84.4 91.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"104.3\" y=\"92.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">46°</text><path d=\"M 125.6 48.7 A 26.0 26.0 0 0 0 140.5 55.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"128.2\" y=\"62.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"139.1,30.0 240.6,30.0 180.9,112.1 79.4,112.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"139.1\" y1=\"30.0\" x2=\"130.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"79.4\" y1=\"112.1\" x2=\"130.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"180.9\" y1=\"112.1\" x2=\"130.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"146.7\" y=\"19.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"252.2\" y=\"24.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"193.9\" y=\"112.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"136.7\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"69.5\" y=\"122.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 101.4 112.1 A 22.0 22.0 0 0 0 92.4 94.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.4\" y=\"94.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">54°</text><path d=\"M 123.8 51.0 A 26.0 26.0 0 0 0 137.7 56.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"125.1\" y=\"69.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-4987246fc6",
@@ -35421,7 +35421,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"120.3\" y1=\"30.0\" x2=\"48.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"120.3\" y1=\"30.0\" x2=\"192.5\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"48.2\" y1=\"200.0\" x2=\"271.8\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"88.8\" y1=\"117.0\" x2=\"79.6\" y2=\"113.0\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"161.0\" y1=\"113.0\" x2=\"151.8\" y2=\"117.0\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"120.3\" y=\"17.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"36.0\" y=\"204.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"197.5\" y=\"212.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"284.6\" y=\"202.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 111.7 50.3 A 22.0 22.0 0 0 0 128.9 50.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"120.3\" y=\"68.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">46°</text><path d=\"M 216.5 200.0 A 24.0 24.0 0 0 0 183.1 177.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"211.2\" y=\"171.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-a33c26890c",
+   "id": "geomet-c-cd0557299e",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -35429,18 +35429,18 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 88°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 52°. Find ∠SPT.",
    "options": [
-    "148°",
-    "46°",
-    "32°",
-    "16°"
+    "112°",
+    "68°",
+    "64°",
+    "34°"
    ],
    "optionValues": [
-    "148",
-    "46",
-    "32",
-    "16"
+    "112",
+    "68",
+    "64",
+    "34"
    ],
    "answer": 3,
    "explain": [
@@ -35449,25 +35449,25 @@
      "why": "Gave ∠PST, the angle at S."
     },
     {
-     "tag": "ignored_equilateral_triangle",
-     "why": "Left out the 60° angle of the equilateral triangle."
-    },
-    {
      "tag": "forgot_to_halve",
      "why": "Found ∠SPT + ∠STP but did not halve it."
+    },
+    {
+     "tag": "ignored_equilateral_triangle",
+     "why": "Left out the 60° angle of the equilateral triangle."
     },
     null
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 88° + 60° = 148°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 148°) ÷ 2 = 16°"
+    "∠PST = 52° + 60° = 112°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 112°) ÷ 2 = 34°"
    ],
    "params": {
-    "d": 88
+    "d": 52
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"116.0,30.0 207.2,30.0 204.0,121.1 112.8,121.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"116.0\" y1=\"30.0\" x2=\"158.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"112.8\" y1=\"121.1\" x2=\"158.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"204.0\" y1=\"121.1\" x2=\"158.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"116.5\" y=\"17.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"216.5\" y=\"21.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"217.0\" y=\"121.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"164.9\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"102.9\" y=\"131.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 134.8 121.1 A 22.0 22.0 0 0 0 113.6 99.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"140.3\" y=\"94.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">88°</text><path d=\"M 115.1 56.0 A 26.0 26.0 0 0 0 122.3 55.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"121.1\" y=\"77.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"140.2,30.0 243.0,30.0 179.8,111.0 77.0,111.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"140.2\" y1=\"30.0\" x2=\"128.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"77.0\" y1=\"111.0\" x2=\"128.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"179.8\" y1=\"111.0\" x2=\"128.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"148.3\" y=\"19.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"254.7\" y=\"24.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"192.8\" y=\"111.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"134.9\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"67.1\" y=\"120.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 99.0 111.0 A 22.0 22.0 0 0 0 90.5 93.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"111.3\" y=\"94.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">52°</text><path d=\"M 124.2 50.5 A 26.0 26.0 0 0 0 138.4 55.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"125.2\" y=\"69.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-22f6dd237f",
@@ -35920,7 +35920,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"113.9\" y1=\"82.2\" x2=\"30.0\" y2=\"147.8\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"113.9\" y1=\"82.2\" x2=\"197.7\" y2=\"147.8\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"30.0\" y1=\"147.8\" x2=\"290.0\" y2=\"147.8\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"75.0\" y1=\"118.9\" x2=\"68.9\" y2=\"111.1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"158.9\" y1=\"111.1\" x2=\"152.7\" y2=\"118.9\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"113.9\" y=\"69.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"17.1\" y=\"149.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.7\" y=\"159.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"302.8\" y=\"150.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 96.5 95.8 A 22.0 22.0 0 0 0 131.2 95.8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.9\" y=\"123.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">104°</text><path d=\"M 221.7 147.8 A 24.0 24.0 0 0 0 178.8 133.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"208.8\" y=\"115.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-54d15e53cb",
+   "id": "geomet-c-1acfca8020",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -35928,45 +35928,45 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 54°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 56°. Find ∠SPT.",
    "options": [
-    "66°",
-    "33°",
-    "63°",
-    "114°"
+    "62°",
+    "64°",
+    "116°",
+    "32°"
    ],
    "optionValues": [
-    "66",
-    "33",
-    "63",
-    "114"
+    "62",
+    "64",
+    "116",
+    "32"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "forgot_to_halve",
-     "why": "Found ∠SPT + ∠STP but did not halve it."
-    },
-    null,
     {
      "tag": "ignored_equilateral_triangle",
      "why": "Left out the 60° angle of the equilateral triangle."
     },
     {
+     "tag": "forgot_to_halve",
+     "why": "Found ∠SPT + ∠STP but did not halve it."
+    },
+    {
      "tag": "gave_angle_at_s",
      "why": "Gave ∠PST, the angle at S."
-    }
+    },
+    null
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 54° + 60° = 114°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 114°) ÷ 2 = 33°"
+    "∠PST = 56° + 60° = 116°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 116°) ÷ 2 = 32°"
    ],
    "params": {
-    "d": 54
+    "d": 56
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"139.1,30.0 240.6,30.0 180.9,112.1 79.4,112.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"139.1\" y1=\"30.0\" x2=\"130.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"79.4\" y1=\"112.1\" x2=\"130.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"180.9\" y1=\"112.1\" x2=\"130.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"146.7\" y=\"19.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"252.2\" y=\"24.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"193.9\" y=\"112.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"136.7\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"69.5\" y=\"122.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 101.4 112.1 A 22.0 22.0 0 0 0 92.4 94.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.4\" y=\"94.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">54°</text><path d=\"M 123.8 51.0 A 26.0 26.0 0 0 0 137.7 56.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"127.1\" y=\"63.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"137.9,30.0 238.2,30.0 182.1,113.1 81.8,113.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"137.9\" y1=\"30.0\" x2=\"132.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"81.8\" y1=\"113.1\" x2=\"132.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"182.1\" y1=\"113.1\" x2=\"132.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"145.2\" y=\"19.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"249.7\" y=\"23.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"195.1\" y=\"113.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"138.5\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"71.9\" y=\"123.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 103.8 113.1 A 22.0 22.0 0 0 0 94.1 94.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"115.5\" y=\"95.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">56°</text><path d=\"M 123.4 51.6 A 26.0 26.0 0 0 0 137.0 56.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"124.9\" y=\"69.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-b361c0bb5b",
@@ -36419,7 +36419,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"129.6\" y1=\"30.0\" x2=\"74.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"129.6\" y1=\"30.0\" x2=\"184.9\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"74.4\" y1=\"200.0\" x2=\"245.6\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"106.8\" y1=\"116.5\" x2=\"97.2\" y2=\"113.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"162.0\" y1=\"113.5\" x2=\"152.5\" y2=\"116.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"129.6\" y=\"17.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"62.8\" y=\"205.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"189.9\" y=\"212.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"258.4\" y=\"202.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 122.8 50.9 A 22.0 22.0 0 0 0 136.4 50.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"129.6\" y=\"75.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">36°</text><path d=\"M 208.9 200.0 A 24.0 24.0 0 0 0 177.4 177.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"204.8\" y=\"172.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-cd0557299e",
+   "id": "geomet-c-1fdaf2c09c",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -36427,45 +36427,45 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 52°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 68°. Find ∠SPT.",
    "options": [
-    "112°",
-    "68°",
-    "64°",
-    "34°"
+    "128°",
+    "26°",
+    "56°",
+    "52°"
    ],
    "optionValues": [
-    "112",
-    "68",
-    "64",
-    "34"
+    "128",
+    "26",
+    "56",
+    "52"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
      "tag": "gave_angle_at_s",
      "why": "Gave ∠PST, the angle at S."
     },
-    {
-     "tag": "forgot_to_halve",
-     "why": "Found ∠SPT + ∠STP but did not halve it."
-    },
+    null,
     {
      "tag": "ignored_equilateral_triangle",
      "why": "Left out the 60° angle of the equilateral triangle."
     },
-    null
+    {
+     "tag": "forgot_to_halve",
+     "why": "Found ∠SPT + ∠STP but did not halve it."
+    }
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 52° + 60° = 112°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 112°) ÷ 2 = 34°"
+    "∠PST = 68° + 60° = 128°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 128°) ÷ 2 = 26°"
    ],
    "params": {
-    "d": 52
+    "d": 68
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"140.2,30.0 243.0,30.0 179.8,111.0 77.0,111.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"140.2\" y1=\"30.0\" x2=\"128.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"77.0\" y1=\"111.0\" x2=\"128.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"179.8\" y1=\"111.0\" x2=\"128.4\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"148.3\" y=\"19.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"254.7\" y=\"24.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"192.8\" y=\"111.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"134.9\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"67.1\" y=\"120.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 99.0 111.0 A 22.0 22.0 0 0 0 90.5 93.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"111.3\" y=\"94.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">52°</text><path d=\"M 124.2 50.5 A 26.0 26.0 0 0 0 138.4 55.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"127.4\" y=\"63.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"130.4,30.0 225.2,30.0 189.6,117.9 94.8,117.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"130.4\" y1=\"30.0\" x2=\"142.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"94.8\" y1=\"117.9\" x2=\"142.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"189.6\" y1=\"117.9\" x2=\"142.2\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"135.2\" y=\"17.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"235.9\" y=\"22.7\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.6\" y=\"117.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"148.7\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"84.9\" y=\"127.8\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 116.8 117.9 A 22.0 22.0 0 0 0 103.1 97.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"126.5\" y=\"96.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">68°</text><path d=\"M 120.6 54.1 A 26.0 26.0 0 0 0 132.2 55.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"123.8\" y=\"71.5\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-e9a3f13cd5",
@@ -36918,7 +36918,7 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Isosceles triangle with an extended side\" class=\"qfig\"><line x1=\"113.9\" y1=\"73.1\" x2=\"30.0\" y2=\"156.9\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"113.9\" y1=\"73.1\" x2=\"197.7\" y2=\"156.9\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"30.0\" y1=\"156.9\" x2=\"290.0\" y2=\"156.9\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"75.5\" y1=\"118.5\" x2=\"68.4\" y2=\"111.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><line x1=\"159.3\" y1=\"111.5\" x2=\"152.3\" y2=\"118.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><text x=\"113.9\" y=\"60.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"17.2\" y=\"159.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"202.7\" y=\"168.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"302.8\" y=\"159.4\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><polyline points=\"106.8,80.1 113.9,87.2 120.9,80.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"113.9\" y=\"103.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">90°</text><path d=\"M 221.7 156.9 A 24.0 24.0 0 0 0 180.8 140.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"210.7\" y=\"125.6\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
-   "id": "geomet-c-1acfca8020",
+   "id": "geomet-c-eadb2dd2e3",
    "topic": "math-geometry",
    "level": "competent",
    "template": "ang_rhombus_equilateral",
@@ -36926,45 +36926,45 @@
     "math-geometry-angles-08",
     "math-geometry-triangles-parallelogram-rhombus-and-trapezium-06"
    ],
-   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 56°. Find ∠SPT.",
+   "stem": "PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = 42°. Find ∠SPT.",
    "options": [
-    "62°",
-    "64°",
-    "116°",
-    "32°"
+    "102°",
+    "39°",
+    "78°",
+    "69°"
    ],
    "optionValues": [
-    "62",
-    "64",
-    "116",
-    "32"
+    "102",
+    "39",
+    "78",
+    "69"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "ignored_equilateral_triangle",
-     "why": "Left out the 60° angle of the equilateral triangle."
+     "tag": "gave_angle_at_s",
+     "why": "Gave ∠PST, the angle at S."
     },
+    null,
     {
      "tag": "forgot_to_halve",
      "why": "Found ∠SPT + ∠STP but did not halve it."
     },
     {
-     "tag": "gave_angle_at_s",
-     "why": "Gave ∠PST, the angle at S."
-    },
-    null
+     "tag": "ignored_equilateral_triangle",
+     "why": "Left out the 60° angle of the equilateral triangle."
+    }
    ],
    "solution": [
     "Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
-    "∠PST = 56° + 60° = 116°; triangle SPT is isosceles with SP = ST",
-    "∠SPT = (180° − 116°) ÷ 2 = 32°"
+    "∠PST = 42° + 60° = 102°; triangle SPT is isosceles with SP = ST",
+    "∠SPT = (180° − 102°) ÷ 2 = 39°"
    ],
    "params": {
-    "d": 56
+    "d": 42
    },
    "calc": false,
-   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"137.9,30.0 238.2,30.0 182.1,113.1 81.8,113.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"137.9\" y1=\"30.0\" x2=\"132.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"81.8\" y1=\"113.1\" x2=\"132.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"182.1\" y1=\"113.1\" x2=\"132.0\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"145.2\" y=\"19.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"249.7\" y=\"23.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"195.1\" y=\"113.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"138.5\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"71.9\" y=\"123.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 103.8 113.1 A 22.0 22.0 0 0 0 94.1 94.9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"115.5\" y=\"95.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">56°</text><path d=\"M 123.4 51.6 A 26.0 26.0 0 0 0 137.0 56.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"126.8\" y=\"64.2\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"Rhombus and equilateral triangle\" class=\"qfig\"><polygon points=\"145.8,30.0 256.5,30.0 174.2,104.1 63.5,104.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"145.8\" y1=\"30.0\" x2=\"118.9\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"63.5\" y1=\"104.1\" x2=\"118.9\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"174.2\" y1=\"104.1\" x2=\"118.9\" y2=\"200.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"155.4\" y=\"21.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">P</text><text x=\"268.7\" y=\"25.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">Q</text><text x=\"187.2\" y=\"104.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">R</text><text x=\"125.4\" y=\"211.3\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">T</text><text x=\"53.6\" y=\"114.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">S</text><path d=\"M 85.5 104.1 A 22.0 22.0 0 0 0 79.8 89.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"100.2\" y=\"90.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">42°</text><path d=\"M 126.5 47.4 A 26.0 26.0 0 0 0 141.7 55.7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><text x=\"125.7\" y=\"66.9\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">x</text></svg>"
   },
   {
    "id": "geomet-c-b97f3e98c1",
