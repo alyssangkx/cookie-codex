@@ -62,9 +62,10 @@ outside the repo.
   - English 84%: 94% where the paper names the section, 74% where the 72B filled it.
   - Chinese 85% after the section rule, 73% before it.
   - Report: `goldkeys/report.md`, private.
-- [ ] Add the suggested tagger rules for Maths, English and Chinese to `tag_llm.py` (percentage vs fractions, never
+- [x] Add the suggested tagger rules for Maths, English and Chinese to `tag_llm.py` (percentage vs fractions, never
   a null st; lettered word list means grammar cloze, posters mean visual text; route maps mean 听后选答, single-word
   gaps mean 词语选用).
+- [ ] EN/MA/ZH tagger rules + gold-gated re-tag (queue 10, `vlm/run_tag10.sh` waiting on queue 9; new files `tags72r10.jsonl`, gate lines in `vlm/tag10-done.txt`):
 - [ ] Then a server re-tag run:
   - Maths: 175 null-st items plus the confused sub-topics;
   - English: the 72B-filled sections;

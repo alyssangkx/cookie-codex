@@ -8,7 +8,9 @@ Record: {id, st, pat, method, difficulty 1-3, ans_check, conf, flags}. st/pat mu
 (packet.taxonomy); an invalid answer is asked again once, then kept with st null and flag "invalid".
 Gold key (outside the repo): PP_ROOT/gold/science-2024-gold.jsonl, {id, st, ok: [acceptable ids], use: example|eval, pat?},
 from a blind Sonnet tagging of 110 Science 2024 questions, adjudicated against the Haiku step B and first 72B tags.
-"example" rows are the few-shot examples (Science only); "eval" rows are the gate."""
+"example" rows are the few-shot examples (Science only); "eval" rows are the gate.
+English, Maths and Chinese gold keys (same format, no examples, "skip" rows ignored) sit in the same gold folder as
+<subject>-gold.jsonl; pass them to compare as the second argument (it defaults to the Science key)."""
 import argparse, json, os, sys
 from pathlib import Path
 
@@ -43,7 +45,25 @@ RULES = {"science": (
     "effects of a force in general).\n"
     "- Melting, freezing, boiling, evaporation, condensation and the temperature/state of water go to "
     "sci-cycles-water-states, not sci-cycles-matter-states (keep -matter-states for mass, volume and the shape/volume "
-    "of solids, liquids and gases).\n")}
+    "of solids, liquids and gases).\n"),
+    # english, maths and chinese: from the blind-tag error analysis against the hand gold keys (20 Nov 2026)
+    "english": (
+    "- A lettered word list (A to Q) the blanks are filled from means eng-grammar-cloze.\n"
+    "- eng-vocab-cloze is only \"closest in meaning to the underlined word\"; a sentence blank with four options is eng-vocab-mcq.\n"
+    "- Posters, flyers, notices, advertisements and Text 1/Text 2 questions are eng-visual-text.\n"
+    "- Questions on a story or passage with a written answer are eng-comp-oe.\n"),
+    "maths": (
+    "- Percentage questions (percent of, percentage change, discount, GST, interest) go to math-percentage-percentage, "
+    "not the fractions sub-topics.\n"
+    "- Whole number divided by a fraction, and fraction times fraction, go to math-fractions-multiplication-and-division-of-fractions, "
+    "not whole numbers.\n"
+    "- Reading a scale or ruler goes to math-measurement-length-mass-and-volume, not decimals.\n"
+    "- Always return one sub-topic id from the list; never null.\n"),
+    "chinese": (
+    "- Route maps or diagrams with options 图1/图2/图3 are chi-tingli-text (听后选答), not sentence order or character form.\n"
+    "- A gap filled by one of four single words is chi-ciyu-choose (词语选用); chi-zixing-form (字形辨认) only for look-alike characters.\n"
+    "- chi-juzi-choose (句子选用) completes a clause with a phrase or sentence.\n"
+    "- A question such as \"文中…指的是什么\" is reading (chi-yuedu-mcq-text or chi-yuedu-open-text), not chi-ciyu-idiom (成语).\n")}
 
 
 def show(q):
@@ -81,7 +101,7 @@ def check(rec, subs, pats):
     return None
 
 
-def run(sets, batch, tp):
+def run(sets, batch, tp, outname="tags72.jsonl"):
     from vllm import LLM, SamplingParams
     llm = LLM(model=MODEL, tensor_parallel_size=tp, gpu_memory_utilization=0.9, max_model_len=16384,
               enable_prefix_caching=True, max_num_seqs=64)
@@ -90,7 +110,7 @@ def run(sets, batch, tp):
         base = PP / subject / str(year)
         tax, subs, pats = taxonomy(subject, outcomes=True)
         ex = examples(subject)
-        out = base / "tags72.jsonl"
+        out = base / outname
         done = {json.loads(l)["id"] for l in open(out)} if out.exists() else set()
         todo = [q for q in map(json.loads, open(base / "merged.jsonl")) if q["id"] not in done]
         print(f"{subject} {year}: {len(todo)} to tag", flush=True)
@@ -151,6 +171,11 @@ def selftest():
             {"id": "c", "st": "s3", "ok": ["s3"], "use": "example"}]
     assert score({"a": "s2", "b": "s2", "c": "x"}, gold) == (2, 1, 0, [("b", "s1", "s2")])
     assert score({"a": "s1", "b": "s1"}, [{"id": "a", "st": "s1", "ok": ["s2"], "use": "eval"}, gold[1]])[1] == 2
+    for subj, r in RULES.items():  # every sub-topic id a rule names must exist in that subject's taxonomy
+        subs_ = taxonomy(subj)[1]
+        import re
+        ids = set(re.findall(r"\b(?:sci|eng|math|chi)-[a-z0-9-]+", r))
+        assert ids and ids <= subs_, (subj, ids - subs_)
     print("tag_llm selftest ok")
 
 
@@ -159,7 +184,8 @@ if __name__ == "__main__":
     if sys.argv[1:2] == ["compare"]: sys.exit(0 if compare(*sys.argv[2:4]) else 3)
     ap = argparse.ArgumentParser()
     ap.add_argument("--sets", required=True, help="subject:year pairs in order, e.g. science:2024,chinese:2026")
+    ap.add_argument("--out", default="tags72.jsonl", help="output file name inside each PP_ROOT/<subject>/<year>/ (a new name keeps the current tags)")
     ap.add_argument("--batch", type=int, default=256)
     ap.add_argument("--tp", type=int, default=int(os.environ.get("PP_TP", "4")))
     a = ap.parse_args()
-    run([(x.split(":")[0], int(x.split(":")[1])) for x in a.sets.split(",")], a.batch, a.tp)
+    run([(x.split(":")[0], int(x.split(":")[1])) for x in a.sets.split(",")], a.batch, a.tp, a.out)
