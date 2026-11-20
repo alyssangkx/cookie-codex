@@ -94,7 +94,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 )}
 
 <script>
-  import { load, save, tierState, tierOpen, liveMastered, syncParked, reviewDueCount, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, liveMastered, syncParkedStored, reviewDueCount, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
   import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, unitName, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
@@ -173,8 +173,9 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
         .then((banks) => {
           const qs: Record<string, string> = {};
           for (const b of banks as { id: string; sub: string }[][]) for (const q of b) qs[q.id] = q.sub;
-          // unpark only (never park: this page loads one school's banks); nothing is deleted (ADR 0002)
-          if (syncParked(s, Object.keys(qs), false)) save(s);
+          // unpark only (never park: this page loads one school's banks); nothing is deleted (ADR 0002). Against the save as
+          // stored now, never `s` from before the fetch: another tab may have bought or earned meanwhile
+          syncParkedStored(Object.keys(qs), false);
           run(dueCount(s, now, qs), qs);
         })
         .catch(() => run(dueCount(s, now)));

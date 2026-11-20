@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { triesPerDay } from '../../lib/store';
-import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs, rarityOrder, competencyTopics, banksHash } from '../../lib/train';
+import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs, rarityOrder, competencyTopics, competencySubjects, banksHash } from '../../lib/train';
 
 // Everything the runner needs, small enough to inline; question banks are fetched on demand.
 const meta = {
@@ -15,6 +15,7 @@ const meta = {
   cards: cardInfo,
   order: rarityOrder, // replacement order per rarity (crumbs.ts)
   topics: competencyTopics, // Super Epic topics
+  subjects: competencySubjects, // subject Legendary
   topicNames: Object.fromEntries(paperTopics.map((t) => [t.id, t.name])),
 };
 const data = JSON.stringify(meta).replace(/</g, '\\u003c');
@@ -93,7 +94,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, TIER_NAME, LEFT_BLANK, closeStalePapers, syncParked, type Tier, type SaveV1, type QuizResult,
+    QUIZ_SIZE, tierState, TIER_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, type Tier, type SaveV1, type QuizResult,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
@@ -113,7 +114,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     cards: Record<string, { name: string; image: string; rarity: string }>;
     topicNames: Record<string, string>;
     cloze: string[];
-    order: Record<string, string[]>; topics: Record<string, string[]>;
+    order: Record<string, string[]>; topics: Record<string, string[]>; subjects: Record<string, string[]>;
   };
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const meta: Meta = JSON.parse($('meta').textContent!);
@@ -293,18 +294,19 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const all = await loadBanks(files);
       // only Daily Review loads every bank, so only it parks retests whose question is gone; any page unparks the ids it
       // loaded (an older tab missing newer bank files may have parked them). Nothing is deleted (ADR 0002).
-      if (syncParked(s, all.map((q) => q.id), mode === 'review', meta.banks)) save(s);
+      // the save as stored now, not `s` from before the await: another tab may have bought or earned meanwhile
+      const cur = syncParkedStored(all.map((q) => q.id), mode === 'review', meta.banks);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
-        quiz = pickTier(ids, s.questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
+        quiz = pickTier(ids, cur.questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
         if (quiz.length < QUIZ_SIZE) return stop('This tier does not have enough questions yet. Try another tier.');
       } else if (mode === 'paper') {
-        quiz = pickPaper(all as any, s.questions, paperN, paperMix.mix);
+        quiz = pickPaper(all as any, cur.questions, paperN, paperMix.mix);
       } else {
         // a passage's due blanks are asked together in passage order; its other blanks show their answer (clozeStem)
-        quiz = reviewPassages(pickReview(all.map((q) => q.id), s.questions), passage);
+        quiz = reviewPassages(pickReview(all.map((q) => q.id), cur.questions), passage);
         if (!quiz.length) return stop('Nothing to review today. Great work!');
       }
     } catch (e) {
@@ -779,7 +781,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     };
     for (const cl of res.newlyCleared) if (cl.reward) html += won(cl.reward, '');
     for (const ac of res.achieved ?? []) {
-      html += won(ac.reward, ac.kind === 'legendary' ? '<em>Top paper result (AL1 or AL2)!</em>'
+      html += won(ac.reward, ac.kind === 'legendary' ? (ac.subject ? '<em>Subject mastered: every topic cleared at Competent!</em>' : '<em>Top paper result (AL1 or AL2)!</em>')
         : `<em>Topic mastered: every Competent tier cleared!</em>`);
     }
     if (res.goalJustMet) html += '<p class="verdict good">Daily goal met! Your streak grows.</p>';

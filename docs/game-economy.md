@@ -1,9 +1,17 @@
 # Game economy proposal (pilot to redesign)
 
-**Status: built 20 Nov 2026** after the owner's answers (all as recommended). Differences from the text below: the
-ledger is an optional save field with no schema bump (ADR 0002), not a migration; a Legendary needs a paper of 20 or more
-questions; a Super Epic topic counts only once every one of its sub-topics has a playable Competent tier. Code:
-`site/src/lib/crumbs.ts`, `store.ts` (`finishQuiz`, `purchase`), `/shop/`.
+**Status: built 20 Nov 2026** after the owner's answers (all as recommended), then tightened after review. Where it
+differs from the text below, this list wins:
+- The ledger is an optional save field with no schema bump (ADR 0002), not a migration.
+- **WA/SA paper Crumbs scale with length:** the band's Crumbs x (questions / 10), at most x3 (10 questions x1, 20 x2,
+  30 or more x3), rounded, at least 1. A short paper never pays more per question than a tier quiz.
+- **Legendary, paper route:** a paper of 20+ questions from 3+ topics at AL1-AL2 (85%+), at most one per calendar week;
+  later qualifying papers that week earn their Crumbs only.
+- **Legendary, subject route (built):** once per subject, when every competency topic of the subject (below) has all its
+  playable Competent tiers cleared; a subject counts once it has 2 or more competency topics.
+- **Super Epic:** once per competency topic: a Math or Science topic, or an English or Chinese booklet (their topics are
+  single paper sections), counting only sub-topics with a playable Competent tier, and only groups with 2 or more.
+Code: `site/src/lib/crumbs.ts` (`quizCrumbs`, `competencyGroups`), `store.ts` (`finishQuiz`, `purchase`), `/shop/`.
 
 Status: proposal for the owner (20 Nov 2026). It amends [game-design.md](game-design.md), whose rules still apply: no
 loot boxes, no money, no leaderboards or comparing children, rewards shown before they are earned.
@@ -40,7 +48,7 @@ A small currency earned by doing the work. Suggested name: **Crumbs**.
 | 20–44% | AL7 | 2 |
 | under 20% | AL8 | 1 (finishing always earns something) |
 
-- **WA/SA paper:** the same bands multiplied by 3 (papers are longer and timed).
+- **WA/SA paper:** the same bands multiplied by the paper's length: x(questions / 10), at most x3 (built rule; see Status).
 - **Learning extras:**
   - each retest step passed: 1 (rewards remembering);
   - daily goal met: 3;

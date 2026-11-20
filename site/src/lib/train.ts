@@ -9,6 +9,7 @@ import { cookies } from './data';
 import { MIN_POOL, tierHash, type School, type Tier } from './store';
 import { paperOk } from './paper';
 import { unitName } from './suggest';
+import { competencyGroups } from './crumbs';
 
 export { MIN_POOL };
 
@@ -110,18 +111,22 @@ export const cardInfo = Object.fromEntries(cookies.map((c) => [c.slug, { name: c
 export const milestones = rewards.milestones as Record<string, string[]>;
 /** Replacement and shop order per rarity (build_rewards.py `rarityOrder`): every non-milestone card once. */
 export const rarityOrder = rewards.rarityOrder as Record<string, string[]>;
-/** Topics a Super Epic can be earned for: topic id -> its sub-topic ids, only for topics where every sub-topic has a
- * playable Competent tier (a sub-topic without one could never be cleared, so its topic is not offered yet). */
-export const competencyTopics: Record<string, string[]> = (() => {
-  const by = new Map<string, Sub[]>();
-  for (const s of subs) by.set(s.topic, [...(by.get(s.topic) ?? []), s]);
-  return Object.fromEntries([...by].filter(([, l]) => l.every((s) => s.playable.c)).map(([t, l]) => [t, l.map((s) => s.id)]));
-})();
+// sub-topic id -> syllabus strand (an English or Chinese booklet); competency groups use it for those two subjects
+const strandOf = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
+  syl.strands.flatMap((st) => st.topics.flatMap((t) => t.subtopics.map((sb) => [sb.id, st.id] as [string, string])))));
+const strandName = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
+  syl.strands.map((st) => [st.id, st.name] as [string, string])));
+/** Competency groups (crumbs.ts competencyGroups): topics a Super Epic can be earned for (Math, Science topics; English,
+ * Chinese booklets; only sub-topics with a playable Competent tier, 2 or more per group), and subjects for the subject
+ * Legendary (2 or more groups). */
+export const { topics: competencyTopics, subjects: competencySubjects } = competencyGroups(
+  subs.map((s) => ({ id: s.id, school: s.school, topic: s.topic, strand: strandOf.get(s.id) ?? s.topic, playableC: s.playable.c })));
 /** Everything the client economy needs (crumbs.ts Economy plus card names), served at /data/economy.json. */
 export const economyData = () => ({
   order: rarityOrder,
   topics: competencyTopics,
-  topicNames: Object.fromEntries(Object.keys(competencyTopics).map((t) => [t, subs.find((s) => s.topic === t)!.topicName])),
+  subjects: competencySubjects,
+  topicNames: Object.fromEntries(Object.keys(competencyTopics).map((t) => [t, strandName.get(t) ?? subs.find((s) => s.topic === t)?.topicName ?? t])),
   cards: Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }])),
   milestones,
 });

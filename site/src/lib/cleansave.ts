@@ -68,9 +68,12 @@ function cleanCrumbs(v: unknown): Crumbs {
   });
   const out: Crumbs = { bal: num(c.bal, 0, COIN), earned: num(c.earned, 0, COIN), spent: num(c.spent, 0, COIN), test: num(c.test, 0, COIN), log, buys };
   const g = day(c.goalDay), w = day(c.week);
+  const lw = day(c.legWeek);
   if (g) out.goalDay = g;
   if (w) out.week = w;
   if (Array.isArray(c.topics)) out.topics = strs(c.topics, 1000);
+  if (lw) out.legWeek = lw;
+  if (Array.isArray(c.subjects)) out.subjects = strs(c.subjects, 20);
   return out;
 }
 

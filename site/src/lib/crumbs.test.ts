@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { alBand, quizCrumbs, earn, LEDGER_MAX, priceOf, buyCard, buyStar, rewardPreview, achievementPreview, LEGENDARY_MIN_QUESTIONS, type Economy } from './crumbs.ts';
-import { fresh, answer, finishQuiz, beginQuiz, purchase, load, save, resetUnlimitedCache, type SaveV1 } from './store.ts';
+import { alBand, quizCrumbs, earn, LEDGER_MAX, priceOf, buyCard, buyStar, rewardPreview, achievementPreview, competencyGroups, LEGENDARY_MIN_QUESTIONS, type Economy } from './crumbs.ts';
+import { fresh, answer, finishQuiz, beginQuiz, purchase, load, save, resetUnlimitedCache, syncParkedStored, inReview, type SaveV1 } from './store.ts';
 
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
 
@@ -13,14 +13,19 @@ test('AL bands follow the PSLE cut-offs (90, 85, 80, 75, 65, 45, 20)', () => {
   assert.equal(alBand(0, 0), 8); // an empty quiz is the lowest band, never a crash
 });
 
-test('a finished quiz earns Crumbs by band, +4 for perfect, never less than 1; papers earn 3x', () => {
+test('a finished quiz earns Crumbs by band, +4 for perfect, never less than 1; papers by length (x1 per 10 questions, at most x3)', () => {
   const ten = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map((n) => quizCrumbs(n, 10, 'tier'));
   assert.deepEqual(ten, [12, 8, 6, 4, 3, 3, 2, 2, 2, 1, 1]);
   assert.equal(quizCrumbs(17, 20, 'tier'), 7); // 85% = AL2
   assert.equal(quizCrumbs(5, 5, 'review'), 12); // Daily Review earns like a tier quiz
-  assert.equal(quizCrumbs(18, 20, 'paper'), 24); // 90%: 8 x 3
-  assert.equal(quizCrumbs(20, 20, 'paper'), 36); // perfect: (8 + 4) x 3
-  assert.equal(quizCrumbs(0, 20, 'paper'), 3);
+  assert.equal(quizCrumbs(9, 10, 'paper'), 8); // a 10-question paper pays like a 10-question quiz
+  assert.equal(quizCrumbs(18, 20, 'paper'), 16); // 90%: 8 x 2
+  assert.equal(quizCrumbs(20, 20, 'paper'), 24); // perfect: (8 + 4) x 2
+  assert.equal(quizCrumbs(0, 20, 'paper'), 2);
+  assert.equal(quizCrumbs(27, 30, 'paper'), 24); // 8 x 3
+  assert.equal(quizCrumbs(36, 40, 'paper'), 24); // never more than x3
+  assert.equal(quizCrumbs(5, 5, 'paper'), 6); // (8 + 4) x 0.5
+  assert.equal(quizCrumbs(0, 5, 'paper'), 1); // still at least 1
 });
 
 test('the ledger keeps a running balance and only the last 50 entries; coins never drop when entries are trimmed', () => {
@@ -189,20 +194,79 @@ test('Super Epic: once per topic, when every sub-topic in it has its Competent t
   assert.equal(fin().achieved[0].reward.slug, 'se2'); // the next one in the fixed order
 });
 
-test('Legendary: a WA/SA paper of 20+ questions at AL1-AL2 (85%+); all owned gives a star and 60 Crumbs', () => {
+test('Legendary from a paper: 20+ questions, 3+ topics, AL1-AL2, at most one per calendar week', () => {
   const s = fresh();
-  const paper = (score: number, total = 20) => finishQuiz(s, { mode: 'paper', topics: ['m'], score, total, ms: 60_000, tags: [] },
-    () => undefined, t0, {}, undefined, { eco, test: false });
+  const paper = (score: number, now: number, topics = ['m1', 'm2', 'm3'], total = 20) => finishQuiz(s, { mode: 'paper', topics, score, total, ms: 60_000, tags: [] },
+    () => undefined, now, {}, undefined, { eco, test: false });
   assert.equal(LEGENDARY_MIN_QUESTIONS, 20);
-  assert.deepEqual(paper(16).achieved, []); // 80%: AL3
-  assert.deepEqual(paper(10, 10).achieved, []); // perfect, but a short paper
-  assert.deepEqual(paper(17).achieved, [{ kind: 'legendary', reward: { slug: 'l1', dup: false, stars: 1 } }]);
+  assert.deepEqual(paper(16, t0).achieved, []); // 80%: AL3
+  assert.deepEqual(paper(10, t0, ['m1', 'm2', 'm3'], 10).achieved, []); // perfect, but a short paper
+  assert.deepEqual(paper(20, t0, ['m1', 'm2']).achieved, []); // only 2 topics
+  assert.deepEqual(paper(20, t0, ['m1', 'm1', 'm2']).achieved, []); // topics are counted once each
+  assert.deepEqual(paper(17, t0).achieved, [{ kind: 'legendary', reward: { slug: 'l1', dup: false, stars: 1 } }]); // Monday
   assert.equal(s.cards.l1.srcSub, 'paper');
-  assert.equal(paper(20).achieved[0].reward.slug, 'l2');
+  const again = paper(20, t0 + 3 * DAY); // Thursday, same week: the paper's Crumbs only
+  assert.deepEqual(again.achieved, []);
+  assert.equal(again.crumbs, 24);
+  assert.equal(paper(20, t0 + 7 * DAY).achieved![0].reward.slug, 'l2'); // next Monday
   assert.deepEqual(achievementPreview(s, 'legendary', eco), { kind: 'star', slug: 'l1', crumbs: 60 });
-  const r = paper(18);
+  const r = paper(18, t0 + 14 * DAY);
   assert.deepEqual(r.achieved, [{ kind: 'legendary', reward: { slug: 'l1', dup: true, stars: 2, crumbs: 60 } }]);
-  assert.equal(r.crumbs, 24 + 60);
+  assert.equal(r.crumbs, 16 + 60);
+});
+
+test('Legendary from a subject: once, when every competency topic of the subject has its Competent tiers cleared', () => {
+  const s = fresh();
+  const subjEco: Economy = { ...eco, subjects: { math: ['a', 'b', 'c'] } };
+  const done = (sub: string) => { (s.progress[sub] ??= {}).c = { passes: [], scores: [], best: 90, cleared: true }; };
+  const fin = (now = t0) => finishQuiz(s, quiz(5), () => undefined, now, {}, undefined, { eco: subjEco, test: false });
+  done('a'); done('b');
+  assert.deepEqual(fin().achieved, []);
+  done('c');
+  assert.deepEqual(fin().achieved, [{ kind: 'legendary', subject: 'math', reward: { slug: 'l1', dup: false, stars: 1 } }]);
+  assert.equal(s.cards.l1.srcSub, 'subject:math');
+  assert.deepEqual(fin(t0 + 1).achieved, []); // once per subject
+  // the subject route does not use up the week's paper Legendary
+  const p = finishQuiz(s, { mode: 'paper', topics: ['x', 'y', 'z'], score: 20, total: 20, ms: 1, tags: [] }, () => undefined, t0 + 2, {}, undefined, { eco: subjEco, test: false });
+  assert.equal(p.achieved![0].reward.slug, 'l2');
+});
+
+test('competency groups: topics (Math, Science) or booklets (English, Chinese) with 2+ playable Competent tiers', () => {
+  const sub = (id: string, school: string, topic: string, strand: string, c = true) => ({ id, school, topic, strand, playableC: c });
+  const g = competencyGroups([
+    sub('m1', 'math', 'fr', 'num'), sub('m2', 'math', 'fr', 'num'), sub('m3', 'math', 'fr', 'num', false),
+    sub('m4', 'math', 'ratio', 'num'), // one playable sub-topic: not a group
+    sub('e1', 'english', 'e-sec1', 'p2a'), sub('e2', 'english', 'e-sec2', 'p2a'), sub('e3', 'english', 'e-sec3', 'p2b'),
+    sub('c1', 'chinese', 'c-t1', 'zi'), sub('c2', 'chinese', 'c-t2', 'zi', false),
+  ]);
+  assert.deepEqual(g.topics, { fr: ['m1', 'm2'], p2a: ['e1', 'e2'] });
+  assert.deepEqual(g.subjects, {}); // a subject needs 2+ groups (Math and English have one each here)
+  const two = competencyGroups([sub('m1', 'math', 'a', 's'), sub('m2', 'math', 'a', 's'), sub('m3', 'math', 'b', 's'), sub('m4', 'math', 'b', 's')]);
+  assert.deepEqual(two.subjects, { math: ['m1', 'm2', 'm3', 'm4'] });
+});
+
+test('parking re-reads the stored save after the banks load, so a purchase in another tab is not overwritten', () => {
+  mockStorage();
+  const s = fresh();
+  earn(s, 100, 'quiz', t0);
+  answer(s, 'gone', false, t0);
+  save(s);
+  const page = load(); // the quiz page loaded this, then awaited the bank files
+  assert.equal(purchase('card', 'r1', 0, eco, t0 + 1).ok, true); // meanwhile, another tab buys a card
+  const after = syncParkedStored(['other'], true, 'banksV1'); // what the page now does instead of save(page)
+  assert.equal(after.questions.gone.parked, 'banksV1');
+  assert.equal(load().cards.r1.stars, 1);
+  assert.equal(load().crumbs!.bal, 40);
+  assert.equal(page.cards.r1, undefined); // the stale copy was never saved
+});
+
+test('the parent retest queue and the child gate share one parked rule', () => {
+  const q = (parked?: true | string) => ({ s: 1 as const, due: 0, w: 1, ...(parked ? { parked } : {}) });
+  assert.equal(inReview(q(), 'b1'), true);
+  assert.equal(inReview(q(true), 'b1'), true); // parked by an older tab: may be live
+  assert.equal(inReview(q('b0'), 'b1'), true); // parked by another bank set
+  assert.equal(inReview(q('b1'), 'b1'), false); // confirmed gone by these banks
+  assert.equal(inReview({ s: 0, due: 0, w: 0 }, 'b1'), false); // retired
 });
 
 function mockStorage() {

@@ -191,7 +191,7 @@ const isOpen = (id: string) => !!SCHOOLS.find((x) => x.id === id)?.ready;
     const sub = meta.subs[c.srcSub];
     // shop and achievement cards have no tier behind them (crumbs.ts, store.ts achievements)
     const from = c.srcSub === 'shop' ? 'Bought in the Shop' : c.srcSub === 'paper' ? 'A top WA/SA paper result'
-      : c.srcSub.startsWith('topic:') ? 'Mastering a whole topic' : `${sub ? sub.sc + ' › ' + sub.n : c.srcSub} › ${TIER_NAME[c.srcTier] ?? c.srcTier}`;
+      : c.srcSub.startsWith('topic:') ? 'Mastering a whole topic' : c.srcSub.startsWith('subject:') ? 'Mastering a whole subject' : `${sub ? sub.sc + ' › ' + sub.n : c.srcSub} › ${TIER_NAME[c.srcTier] ?? c.srcTier}`;
     const stars = Math.max(1, Math.min(5, c.stars));
     el.querySelector('.state')!.innerHTML = `<span class="stars" role="img" aria-label="${stars} star${stars > 1 ? 's' : ''}">${'★'.repeat(stars)}</span> · Power ${power(c)}`;
     el.querySelector('.info')!.textContent = `Earned: ${from}`;

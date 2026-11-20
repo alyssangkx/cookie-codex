@@ -60,7 +60,7 @@ test('a tampered tier hash or parked flag is dropped', () => {
 test('the Crumbs ledger comes through a server round trip unchanged; a save without one stays without one', () => {
   const s = fresh();
   s.crumbs = {
-    bal: 41, earned: 101, spent: 60, test: 0, goalDay: '2026-11-20', week: '2026-11-16', topics: ['math-fractions'],
+    bal: 41, earned: 101, spent: 60, test: 0, goalDay: '2026-11-20', week: '2026-11-16', topics: ['math-fractions'], legWeek: '2026-11-16', subjects: ['math'],
     log: [{ ts: 1, n: 12, bal: 101, why: 'quiz', note: 'math-x|b' }, { ts: 2, n: -60, bal: 41, why: 'buy', slug: 'r1', test: true }],
     buys: [{ ts: 2, slug: 'r1', kind: 'card', price: 60, stars: 1, test: true }],
   };

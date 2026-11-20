@@ -2,8 +2,9 @@
 // through this module, so a backend can replace localStorage later.
 import progression from '../data/progression.json' with { type: 'json' };
 import {
-  crumbsOf, earn, quizCrumbs, rewardPreview, buyCard, buyStar, type BuyResult, achievementPreview, alBand, LEGENDARY_MIN_QUESTIONS, LEGENDARY_MAX_BAND,
-  type Crumbs, type Economy, type Preview,
+  crumbsOf, earn, quizCrumbs, rewardPreview, buyCard, buyStar, achievementPreview, alBand,
+  LEGENDARY_MIN_QUESTIONS, LEGENDARY_MIN_TOPICS, LEGENDARY_MAX_BAND,
+  type BuyResult, type Crumbs, type Economy, type Preview,
 } from './crumbs.ts';
 
 export type School = 'math' | 'science' | 'english' | 'chinese';
@@ -400,7 +401,21 @@ export function syncParked(s: SaveV1, ids: Iterable<string>, complete: boolean, 
  * an old tab could park live retests and hide the only page that unparks them.
  */
 export const reviewDueCount = (s: SaveV1, now = Date.now(), banks?: string) =>
-  Object.values(s.questions).filter((q) => q.s > 0 && q.due <= now && (!q.parked || q.parked !== banks)).length;
+  Object.values(s.questions).filter((q) => inReview(q, banks) && q.due <= now).length;
+/** A retest state that belongs in review lists (the child's gates, the parent's retest queue): not retired, and not
+ * parked by this very bank set. */
+export const inReview = (q: QState, banks?: string) => q.s > 0 && (!q.parked || q.parked !== banks);
+
+/**
+ * syncParked against the save as stored NOW, then save. Pages call this after awaiting bank files instead of saving the
+ * copy they loaded before the await, which would overwrite a purchase or award made in another tab meanwhile.
+ * Returns the stored save.
+ */
+export function syncParkedStored(ids: Iterable<string>, complete: boolean, banks?: string): SaveV1 {
+  const s = load();
+  if (syncParked(s, ids, complete, banks)) save(s);
+  return s;
+}
 export const isRetired = (s: SaveV1, id: string) => s.questions[id]?.s === 0;
 
 // ---------------------------------------------------------------- tiers
@@ -479,7 +494,7 @@ export interface QuizResult {
   autoPromoted?: boolean;
   newlyCleared: { sub: string; tier: Tier; reward: QuizResult['reward'] }[];
   /** Achievement-only cards this call gave (needs opts.eco): Super Epic per completed topic, Legendary per paper. */
-  achieved?: { kind: 'super-epic' | 'legendary'; topic?: string; reward: Reward }[];
+  achieved?: { kind: 'super-epic' | 'legendary'; topic?: string; subject?: string; reward: Reward }[];
 }
 
 /**
@@ -562,9 +577,11 @@ export function finishQuiz(
 
 /**
  * Achievement-only cards (owner's answer 5a), checked at the end of every finished quiz, so a topic completed earlier is
- * picked up by the next quiz. Super Epic: once per topic in eco.topics, when every one of its sub-topics has the
- * Competent tier cleared. Legendary: a WA/SA paper of LEGENDARY_MIN_QUESTIONS+ questions at AL1-AL2. Each gives
- * crumbs.ts achievementPreview(): the next unowned card of the rarity, else a star and a Crumbs bonus.
+ * picked up by the next quiz. Super Epic: once per competency topic in eco.topics, when all its sub-topics have the
+ * Competent tier cleared. Legendary: once per subject in eco.subjects the same way, or a WA/SA paper of
+ * LEGENDARY_MIN_QUESTIONS+ questions from LEGENDARY_MIN_TOPICS+ topics at AL1-AL2, at most one paper Legendary per
+ * calendar week (later papers that week earn their Crumbs only). Each gives crumbs.ts achievementPreview(): the next
+ * unowned card of the rarity, else a star and a Crumbs bonus.
  */
 function achievements(s: SaveV1, a: Omit<Attempt, 'ts'>, eco: Economy, now: number, test: boolean): NonNullable<QuizResult['achieved']> {
   const out: NonNullable<QuizResult['achieved']> = [];
@@ -575,9 +592,18 @@ function achievements(s: SaveV1, a: Omit<Attempt, 'ts'>, eco: Economy, now: numb
     (crumbsOf(s).topics ??= []).push(topic);
     out.push({ kind: 'super-epic', topic, reward });
   }
-  if (a.mode === 'paper' && a.total >= LEGENDARY_MIN_QUESTIONS && alBand(a.score, a.total) <= LEGENDARY_MAX_BAND) {
+  for (const [subject, list] of Object.entries(eco.subjects ?? {})) {
+    if (!list.length || s.crumbs?.subjects?.includes(subject) || !list.every((sub) => tierState(s, sub, 'c').cleared)) continue;
+    const reward = giveAchievement(s, achievementPreview(s, 'legendary', eco), `subject:${subject}`, 100, now, test);
+    if (!reward) continue;
+    (crumbsOf(s).subjects ??= []).push(subject);
+    out.push({ kind: 'legendary', subject, reward });
+  }
+  const week = weekId(dayKey(now));
+  if (a.mode === 'paper' && a.total >= LEGENDARY_MIN_QUESTIONS && new Set(a.topics ?? []).size >= LEGENDARY_MIN_TOPICS
+    && alBand(a.score, a.total) <= LEGENDARY_MAX_BAND && s.crumbs?.legWeek !== week) {
     const reward = giveAchievement(s, achievementPreview(s, 'legendary', eco), 'paper', Math.round((100 * a.score) / a.total), now, test);
-    if (reward) out.push({ kind: 'legendary', reward });
+    if (reward) { crumbsOf(s).legWeek = week; out.push({ kind: 'legendary', reward }); }
   }
   return out;
 }

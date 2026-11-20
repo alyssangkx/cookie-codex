@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { subs as allSubs, subsOf, hasContent, cookieBySlug, MIN_POOL, SCHOOLS } from '../../lib/train';
+import { subs as allSubs, subsOf, hasContent, cookieBySlug, MIN_POOL, SCHOOLS, banksHash } from '../../lib/train';
 
 const math = subsOf('math');
 const data = {
@@ -11,6 +11,7 @@ const data = {
   all: allSubs.filter((s) => s.file).map((s) => ({ id: s.id, name: s.name, school: s.school, file: s.file })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
   cards: Object.fromEntries([...cookieBySlug].map(([slug, c]) => [slug, c.name])), // card names for the Crumbs ledger
+  banks: banksHash, // the retest queue hides only states parked by these banks (store.ts inReview), as the child's gates do
 };
 ---
 <Base title="Parent view: Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
@@ -179,7 +180,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
@@ -187,7 +188,7 @@ const data = {
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; hash: Record<Tier, string>; content: boolean }
   interface ASub { id: string; name: string; school: string; file: string }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
-    { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[]; cards: Record<string, string> };
+    { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[]; cards: Record<string, string>; banks: string };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
   const DAY = 86_400_000;
@@ -403,8 +404,9 @@ const data = {
 
   async function renderRetest() {
     const now = Date.now();
-    // parked retests (question in no bank at the last Daily Review) are left out, as in the child's Daily Review
-    const waiting = Object.entries(s.questions).filter(([, q]) => q.s > 0 && !q.parked).sort((a, b) => a[1].due - b[1].due);
+    // the child's rule (inReview): states parked by these banks are left out (and out of the count); one parked by an
+    // older tab may be live, so it stays until a Daily Review re-checks it
+    const waiting = Object.entries(s.questions).filter(([, q]) => inReview(q, P.banks)).sort((a, b) => a[1].due - b[1].due);
     if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
     $('retest').innerHTML = '<p class="note">Loading questions…</p>';
     const stems = await banks();

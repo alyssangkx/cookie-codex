@@ -7,7 +7,7 @@ const AL_CUT = [90, 85, 80, 75, 65, 45, 20];
 /** Crumbs per band (index 0 = AL1). */
 const AL_CRUMBS = [8, 7, 6, 5, 4, 3, 2, 1];
 export const PERFECT_BONUS = 4;
-export const PAPER_MULT = 3;
+export const PAPER_MULT = 3; // the most a paper multiplies by (30+ questions)
 
 /** AL band 1-8 of a score (integer arithmetic, so 17/20 is exactly 85%). */
 export function alBand(score: number, total: number): number {
@@ -16,10 +16,11 @@ export function alBand(score: number, total: number): number {
   return i < 0 ? 8 : i + 1;
 }
 
-/** Crumbs for one finished quiz: by AL band, +4 for a perfect score, at least 1; a WA/SA paper earns 3x. */
+/** Crumbs for one finished quiz: by AL band, +4 for a perfect score, at least 1. A WA/SA paper scales with its length:
+ * x(questions / 10), at most x3 (10 questions x1, 20 x2, 30+ x3), so a paper never pays more per question than a quiz. */
 export function quizCrumbs(score: number, total: number, mode: 'tier' | 'review' | 'paper'): number {
   const base = AL_CRUMBS[alBand(score, total) - 1] + (total > 0 && score === total ? PERFECT_BONUS : 0);
-  return mode === 'paper' ? base * PAPER_MULT : base;
+  return mode === 'paper' ? Math.max(1, Math.round(base * Math.min(PAPER_MULT, total / 10))) : base;
 }
 
 // ---------------------------------------------------------------- ledger
@@ -37,12 +38,13 @@ export interface Purchase { ts: number; slug: string; kind: 'card' | 'star'; pri
  * The optional `crumbs` field of a save (added 20 Nov 2026 with no schema bump, ADR 0002: an older tab keeps it as an
  * unknown field). bal: spendable balance; earned/spent: lifetime totals; test: lifetime Crumbs earned on the unlimited
  * test account; log: the last LEDGER_MAX entries; buys: every purchase. goalDay/week: the last day and week a goal or
- * streak bonus was paid (each pays once); topics: topics whose Super Epic has been awarded.
+ * streak bonus was paid (each pays once); topics: competency topics whose Super Epic has been awarded; legWeek: the week
+ * (Monday) a paper last gave a Legendary (one a week); subjects: subjects whose Legendary has been awarded.
  */
 export interface Crumbs {
   bal: number; earned: number; spent: number; test: number;
   log: LedgerEntry[]; buys: Purchase[];
-  goalDay?: string; week?: string; topics?: string[];
+  goalDay?: string; week?: string; topics?: string[]; legWeek?: string; subjects?: string[];
 }
 type WithCrumbs = { crumbs?: Crumbs };
 
@@ -75,11 +77,12 @@ export function earn(s: WithCrumbs, n: number, why: CrumbWhy, now: number, o: { 
 // ---------------------------------------------------------------- cards and the shop
 
 /** Build-time card data a page passes in: the per-rarity order from rewards.json (`rarityOrder`), each card's rarity,
- * and (for Super Epic awards) the topics that can be completed: topic id -> its sub-topic ids. */
+ * and the competency groups (competencyGroups): topics for Super Epics, subjects for the subject Legendary. */
 export interface Economy {
   order: Record<string, string[]>;
   rarityOf: (slug: string) => string | undefined;
   topics?: Record<string, string[]>;
+  subjects?: Record<string, string[]>;
 }
 type Card = SaveV1['cards'][string];
 type Save = WithCrumbs & { cards: Record<string, Card> };
@@ -157,11 +160,39 @@ export function rewardPreview(s: Save, slot: string, eco: Economy): Preview {
 /** Legendary: a WA/SA paper at AL1-AL2 (owner's answer 5a). A paper needs this many questions to count as a WA/SA
  * paper (the builder allows 5 to 40; 20 is its default). */
 export const LEGENDARY_MIN_QUESTIONS = 20;
+export const LEGENDARY_MIN_TOPICS = 3; // a paper must mix at least this many topics
 export const LEGENDARY_MAX_BAND = 2;
+export const MIN_GROUP_SUBS = 2; // a competency topic needs this many sub-topics with a playable Competent tier
+
+/**
+ * Competency groups for the achievement cards. A group is a Math or Science topic, or an English or Chinese booklet
+ * (syllabus strand: their topics are single paper sections). Its members are the sub-topics with a playable Competent
+ * tier; a group counts only with MIN_GROUP_SUBS or more (one clear must not earn a Super Epic). A subject counts for the
+ * subject Legendary once it has 2 or more groups; its members are all their sub-topics.
+ */
+export function competencyGroups(subs: { id: string; school: string; topic: string; strand: string; playableC: boolean }[]) {
+  const by = new Map<string, { school: string; ids: string[] }>();
+  for (const s of subs) {
+    if (!s.playableC) continue;
+    const key = s.school === 'english' || s.school === 'chinese' ? s.strand : s.topic;
+    if (!by.has(key)) by.set(key, { school: s.school, ids: [] });
+    by.get(key)!.ids.push(s.id);
+  }
+  const topics: Record<string, string[]> = {};
+  const perSchool = new Map<string, string[][]>();
+  for (const [key, g] of by) {
+    if (g.ids.length < MIN_GROUP_SUBS) continue;
+    topics[key] = g.ids;
+    perSchool.set(g.school, [...(perSchool.get(g.school) ?? []), g.ids]);
+  }
+  const subjects: Record<string, string[]> = {};
+  for (const [school, groups] of perSchool) if (groups.length >= 2) subjects[school] = groups.flat();
+  return { topics, subjects };
+}
 /** How the cards that cannot be bought are earned (shown in the shop and My House). */
 export const EARN_RULE: Record<string, string> = {
-  'super-epic': 'Clear the Competent tier of every sub-topic in a topic (one card per topic)',
-  legendary: `Score 85% or more (AL1 or AL2) on a WA/SA paper of ${LEGENDARY_MIN_QUESTIONS} or more questions`,
+  'super-epic': 'Clear the Competent tier of every sub-topic in a topic (English and Chinese: a booklet), one card per topic',
+  legendary: `Score 85% or more (AL1 or AL2) on a WA/SA paper of ${LEGENDARY_MIN_QUESTIONS}+ questions from ${LEGENDARY_MIN_TOPICS}+ topics (one a week), or clear every topic of a subject at Competent`,
   ancient: 'Get your legendary cards to 2 stars or more, then pass the Ancient Trial (coming later)',
   dragon: 'Reach 30 / 100 study days',
   beast: 'Beat a school monster (coming later)',
@@ -184,8 +215,8 @@ export function achievementPreview(s: Save, rarity: string, eco: Economy): Previ
 
 /** The client side of /data/economy.json (train.ts economyData). */
 export interface EconomyData {
-  order: Record<string, string[]>; topics: Record<string, string[]>; topicNames: Record<string, string>;
+  order: Record<string, string[]>; topics: Record<string, string[]>; topicNames: Record<string, string>; subjects: Record<string, string[]>;
   cards: Record<string, { name: string; image: string; rarity: string }>; milestones: Record<string, string[]>;
 }
-export const toEconomy = (d: Pick<EconomyData, 'order' | 'topics' | 'cards'>): Economy =>
-  ({ order: d.order, topics: d.topics, rarityOf: (slug) => d.cards[slug]?.rarity });
+export const toEconomy = (d: Pick<EconomyData, 'order' | 'topics' | 'subjects' | 'cards'>): Economy =>
+  ({ order: d.order, topics: d.topics, subjects: d.subjects, rarityOf: (slug) => d.cards[slug]?.rarity });
