@@ -233,14 +233,16 @@ def ocr_keys(base: Path) -> dict:
 
 def reread_keys(base: Path) -> dict:
     """{(paper, qno): digit '1'-'4'} from <year>/ansreread/pNNNN.json (ans_reread.py, two independent VL-32B reads): only
-    cells whose two reads agree (final), on a page the run gate did not flag. Empty when the folder does not exist."""
+    cells whose two reads agree (final), on a page the run gate (ans_reread.gate, recomputed here so a file written by an
+    older gate is judged by the current one) does not flag. Empty when the folder does not exist."""
+    from ans_reread import gate
     out = {}
     for f in sorted((base / "ansreread").glob("p*.json")):
         try:
             j = json.loads(f.read_text())
         except Exception:
             continue
-        if j.get("gate"):
+        if gate({int(n): c["final"] for n, c in (j.get("cells") or {}).items() if c.get("final") in ("1", "2", "3", "4")}):
             continue
         for qn, c in (j.get("cells") or {}).items():
             if c.get("final") in ("1", "2", "3", "4") and c.get("a") == c.get("b") == c["final"]:
@@ -249,6 +251,13 @@ def reread_keys(base: Path) -> dict:
                 else:
                     out[(j["paper"], int(qn))] = c["final"]
     return {k: v for k, v in out.items() if v}
+
+
+def on_answer_pages(base: Path) -> set:
+    """Question ids whose pages all lie on the paper's answer pages (anskey_ocr.py find-answer-pages writes
+    <year>/questions_on_answer_pages.json): rows of the key, not questions. Empty when the file does not exist."""
+    f = base / "questions_on_answer_pages.json"
+    return {i for ids in json.loads(f.read_text()).values() for i in ids} if f.exists() else set()
 
 
 def select(a):
@@ -269,6 +278,7 @@ def select(a):
         merged = jl(base / "merged.jsonl")
         ocrk = ocr_keys(base) if a.ocr_keys else {}
         rrk = reread_keys(base) if a.reread_keys else {}
+        onans = on_answer_pages(base)
         last = collections.Counter()  # (paper, part) -> highest MCQ number
         for q in merged:
             if q.get("format") == "mcq" and isinstance(q.get("qno"), int):
@@ -303,8 +313,12 @@ def select(a):
                 elif q.get("answer_flag") == "grid-uncertain" and src == "vision":
                     q = dict(q, answer_flag=None)  # a second, independent two-read agreement
                     src = "vision+reread"
+            if len(opts) == 4 and ok and k and k != ok:
+                conflict = True  # also catches a partial OCR read against a key the reread supplied
             if len(opts) != 4:
                 reason = "not-4-options"
+            elif q["id"] in onans:
+                reason = "on-answer-page"  # every page it sits on is the paper's answer key
             elif not k:
                 reason = "no-answer-key"
             elif q["id"] in quar:
@@ -723,8 +737,14 @@ def selftest():
         (d / "p0001.json").write_text(json.dumps({"paper": "A", "page": 1, "gate": None, "cells": {
             "1": {"a": "3", "b": "3", "final": "3"}, "2": {"a": "1", "b": "2", "final": None}, "3": {"a": "4", "b": "4", "final": "4"}}}))
         (d / "p0002.json").write_text(json.dumps({"paper": "A", "page": 2, "gate": None, "cells": {"3": {"a": "2", "b": "2", "final": "2"}}}))
-        (d / "p0003.json").write_text(json.dumps({"paper": "B", "page": 3, "gate": "identical run", "cells": {"1": {"a": "1", "b": "1", "final": "1"}}}))
-        assert reread_keys(Path(td)) == {("A", 1): "3"}, reread_keys(Path(td))
+        (d / "p0003.json").write_text(json.dumps({"paper": "B", "page": 3, "gate": None, "cells": {
+            str(n): {"a": "1", "b": "1", "final": "1"} for n in range(1, 8)}}))  # 7 identical in a row: gated
+        (d / "p0004-x.json").write_text(json.dumps({"paper": "C", "page": 4, "gate": "identical run", "cells": {
+            str(n): {"a": "2", "b": "2", "final": "2"} for n in range(1, 5)}}))  # an old gate's flag is ignored
+        assert reread_keys(Path(td)) == {("A", 1): "3", **{("C", n): "2" for n in range(1, 5)}}, reread_keys(Path(td))
+        assert on_answer_pages(Path(td)) == set()
+        (Path(td) / "questions_on_answer_pages.json").write_text(json.dumps({"A": ["q1", "q2"], "B": ["q3"]}))
+        assert on_answer_pages(Path(td)) == {"q1", "q2", "q3"}
     print("selftest ok")
 
 

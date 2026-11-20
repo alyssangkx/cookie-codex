@@ -33,7 +33,7 @@ Layouts read (rows, pairs, slots, numslots; all from word-box geometry; label te
 Not read: pages rotated 90 degrees, anything that fails the checks above.
 Nothing here prints question text or answers: counts and ids only.
 """
-import argparse, collections, csv, io, json, multiprocessing, re, sys
+import argparse, collections, csv, functools, io, json, multiprocessing, re, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -517,13 +517,14 @@ def compare(a):
 # ---------------------------------------------------------------- answer pages hidden in the paper's own range
 
 QSTRICT = re.compile(r"^[QqGg9OoCc0@]\s?[0-9iIlLzZoOsS|]{1,2}[.:]?$")
+HEAD_LINES = 8  # a paper header sits at the top of the page
 NEAR_END = 8  # pages from the end of the paper where a key usually sits
 
 
 def page_signals(tsv_path):
     """Cheap evidence of an answer-key page from the TSV words only: {cells (structure() grid cells), qrow (most strict
-    Q labels in one line), qdist (distinct label numbers 1-60), qa (lines 'Qn a)'), hdr (header keywords in the first
-    14 lines: LEVEL SCHOOL SUBJECT TERM EXAM PAPER YEAR), nw}."""
+    Q labels in one line), qdist (distinct label numbers 1-60), qa (lines 'Qn a)'), hdr (header keywords as whole words in
+    the first HEAD_LINES lines: LEVEL SCHOOL SUBJECT TERM EXAM PAPER YEAR), nw}."""
     w = read_words(tsv_path)
     ls = lines_of(w)
     try:
@@ -532,11 +533,11 @@ def page_signals(tsv_path):
         cells = []
     nums = [num_of(x[3]) for ln in ls for x in ln if QSTRICT.match(x[3])]
     nums = [n for n in nums if n and 1 <= n <= 60]
-    head = " ".join(" ".join(x[3] for x in ln) for ln in ls[:14]).upper()
+    head = set(re.findall(r"[A-Z]+", " ".join(" ".join(x[3] for x in ln) for ln in ls[:HEAD_LINES]).upper()))
     return {"cells": len(cells), "nw": len(w), "qdist": len(set(nums)),
             "qrow": max([sum(1 for x in ln if QSTRICT.match(x[3])) for ln in ls] or [0]),
             "qa": sum(1 for ln in ls if len(ln) >= 2 and QSTRICT.match(ln[0][3]) and re.fullmatch(r"\(?[a-dA-D][).]?", ln[1][3])),
-            "hdr": sum(k in head for k in ("LEVEL", "SCHOOL", "SUBJECT", "TERM", "EXAM PAPER", "YEAR "))}
+            "hdr": sum(k in head for k in ("LEVEL", "SCHOOL", "SUBJECT", "TERM", "YEAR")) + ({"EXAM", "PAPER"} <= head)}
 
 
 def is_answer_page(f, near, repeat=False):
@@ -560,6 +561,7 @@ def mcq_numbers(base):
     return out
 
 
+@functools.lru_cache(maxsize=None)
 def grid_truth(base, pg):
     """True when the listed answer page's ans32 read has >= 8 MCQ cells (qno + one option 1-4/A-D); None without a read."""
     f = base / "ans32" / f"p{pg:04d}.json"
@@ -588,23 +590,28 @@ def find_answer_pages(a):
             sig = pool.map(_sig, [base / "pages" / f"p{pg:04d}.tsv" for _, pg in jobs], chunksize=20)
         det = collections.defaultdict(list)
         listed = {p["paper_id"]: set(p["answer_pages"] or []) for p in papers}
+        need = mcq_numbers(base)
+        hits = collections.defaultdict(set)  # paper id -> detected pages (measurement)
+        for p in papers:  # listed pages outside the paper's range are never scanned: count them as misses
+            meas["fn"] += sum(1 for g in listed[p["paper_id"]] if not p["first_page"] <= g <= p["last_page"])
         for (p, pg), f in zip(jobs, sig):
             near = pg > p["last_page"] - NEAR_END
             hit = is_answer_page(f, near, pg > p["first_page"] + 1)
             if p["answer_pages"]:  # measurement only: papers that have their own listed pages
                 truth, gt = pg in listed[p["paper_id"]], grid_truth(base, pg) if pg in listed[p["paper_id"]] else None
                 meas["tp" if hit and truth else "fp" if hit else "fn" if truth else "tn"] += 1
+                if hit:
+                    hits[p["paper_id"]].add(pg)
                 if gt:
                     meas["grid"] += 1
                     meas["grid_hit"] += hit
             elif hit:
                 det[p["paper_id"]].append(pg)
         for p in papers:  # paper-level recall on papers with listed pages and MCQs
-            if p["answer_pages"] and p["paper_id"] in mcq_numbers(base) and any(grid_truth(base, g) for g in p["answer_pages"]):
+            grid = {g for g in listed[p["paper_id"]] if grid_truth(base, g)}
+            if grid and p["paper_id"] in need:
                 meas["papers"] += 1
-                meas["papers_hit"] += any(is_answer_page(f, pg > q["last_page"] - NEAR_END, pg > q["first_page"] + 1)
-                                          for (q, pg), f in zip(jobs, sig) if q is p and pg in listed[p["paper_id"]]
-                                          and grid_truth(base, pg))
+                meas["papers_hit"] += bool(grid & hits[p["paper_id"]])
         found = {pid: sorted(pgs) for pid, pgs in det.items()}
         allp = {p["paper_id"]: listed[p["paper_id"]] | set(found.get(p["paper_id"], [])) for p in papers}
         flag = collections.defaultdict(list)
@@ -612,7 +619,6 @@ def find_answer_pages(a):
             pgs = q.get("pages") or []
             if pgs and set(pgs) <= allp.get(q.get("paper"), set()):
                 flag[q["paper"]].append(q["id"])
-        need = mcq_numbers(base)
         if not a.measure:
             (base / "answer_pages_found.json").write_text(json.dumps(found, indent=0))
             (base / "questions_on_answer_pages.json").write_text(json.dumps(flag, indent=0))

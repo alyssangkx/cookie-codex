@@ -5,11 +5,12 @@
 Each input row {subject, year, paper, page, n_mcq, mcq: [...]}. Read A: the page at full resolution (2.5 MP), row-wise
 prompt. Read B: the page converted to grey, contrast-stretched and sharpened (damps a coloured watermark stamp), 3 MP,
 cell-pair prompt. A cell is final only when A and B give the same option and the question number is one of the paper's
-MCQ numbers. Writes PP_ROOT/<subject>/<year>/ansreread/pNNNN.json:
-  {paper, page, expected: [...], cells: {"7": {"a": "3", "b": "3", "final": "3"}}, gate: <flag or null>}
+MCQ numbers. Writes PP_ROOT/<subject>/<year>/ansreread/pNNNN-<sha1(paper)[:8]>.json (one file per paper and page):
+  {paper, page, expected: [...], cells: {"7": {"a": "3", "b": "3", "final": "3"}}, dropped: [numbers read that are not
+  MCQs of the paper], gate: <flag or null>}
 (a page the paper owns twice, or a page that is not a key, simply yields no final cells). load_pp.py select
 --reread-keys uses the final cells (answer_src 'vision-reread'). Prints counts only."""
-import argparse, json, os, re, sys
+import argparse, hashlib, json, os, re, sys
 from pathlib import Path
 
 PP = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
@@ -38,23 +39,42 @@ def boost(src, dst, max_pixels=3_000_000):
     im.save(dst)
 
 
-def gate(vals):
-    a = [v for _, v in sorted(vals.items())]
-    for i in range(len(a) - 3):
-        w = a[i:i + 4]
-        if len(set(w)) == 1:
+def gate(vals, same=7, cyc=8):
+    """Flags a page whose agreed cells look like a continued pattern, not a printed key: `same` identical answers on
+    consecutive question numbers, or a 1234 / 4321 cycle `cyc` long. A random 40-question key has a 7-run about 0.6% of
+    the time (a 4-run about half the time, so short runs are normal). A gap in the numbers breaks a run."""
+    run_s = run_c = 0
+    prev_n = prev_v = None
+    for n, v in sorted(vals.items()):
+        if prev_n is not None and n == prev_n + 1:
+            run_s = run_s + 1 if v == prev_v else 1
+            d = (int(v) - int(prev_v)) % 4  # 1 = up one (4 -> 1 wraps), 3 = down one
+            run_c = (run_c + 1 if d == last_d else 2) if d in (1, 3) else 1
+            last_d = d if d in (1, 3) else None
+        else:
+            run_s = run_c = 1
+            last_d = None
+        if run_s >= same:
             return "identical run"
-        if w in (list("1234"), list("4321")):
-            return "ascending/descending run"
+        if run_c >= cyc:
+            return "ascending/descending cycle"
+        prev_n, prev_v = n, v
     return None
 
 
+def out_name(r):
+    return f"p{r['page']:04d}-{hashlib.sha1(str(r['paper']).encode()).hexdigest()[:8]}.json"
+
+
 def merge(pa, pb, expected):
-    cells = {}
+    """(cells for the paper's MCQ numbers, sorted numbers read that are not among them)."""
+    cells, dropped = {}, []
     for n in sorted(set(pa) | set(pb)):
         if n in expected:
             cells[str(n)] = {"a": pa.get(n), "b": pb.get(n), "final": pa.get(n) if pa.get(n) == pb.get(n) else None}
-    return cells
+        else:
+            dropped.append(n)
+    return cells, dropped
 
 
 def main():
@@ -64,12 +84,13 @@ def main():
     ap.add_argument("--batch", type=int, default=16)
     a = ap.parse_args()
     rows = [json.loads(l) for f in a.pages for l in open(f) if l.strip()]
-    todo = []
+    todo, seen = [], set()
     for r in rows:
         od = PP / r["subject"] / str(r["year"]) / "ansreread"
         od.mkdir(exist_ok=True)
         jpg = PP / r["subject"] / str(r["year"]) / "pages" / f"p{r['page']:04d}.jpg"
-        if jpg.exists() and not (od / f"p{r['page']:04d}.json").exists():
+        if jpg.exists() and not (od / out_name(r)).exists() and (od / out_name(r)) not in seen:
+            seen.add(od / out_name(r))
             todo.append((r, jpg, od))
     print(len(todo), "pages to read", flush=True)
     if not todo:
@@ -94,9 +115,10 @@ def main():
         ra = llm.chat(msgs([j for _, j, _ in ch], PA), sp, use_tqdm=False)
         rb = llm.chat(msgs(boosted, PB), sp, use_tqdm=False)
         for (r, _, od), x, y in zip(ch, ra, rb):
-            cells = merge(parse(x.outputs[0].text), parse(y.outputs[0].text), set(r["mcq"]))
+            cells, dropped = merge(parse(x.outputs[0].text), parse(y.outputs[0].text), set(r["mcq"]))
             fin = {int(n): c["final"] for n, c in cells.items() if c["final"]}
-            (od / f"p{r['page']:04d}.json").write_text(json.dumps({"paper": r["paper"], "page": r["page"], "expected": r["mcq"], "cells": cells, "gate": gate(fin)}))
+            (od / out_name(r)).write_text(json.dumps({"paper": r["paper"], "page": r["page"], "expected": r["mcq"], "cells": cells,
+                                                      "dropped": dropped, "gate": gate(fin)}))
         print("done", i + len(ch), "/", len(todo), flush=True)
     print("finished; final cells:", sum(1 for f in PP.glob("*/*/ansreread/p*.json") for c in json.load(open(f))["cells"].values() if c["final"]))
 
@@ -104,7 +126,12 @@ def main():
 if __name__ == "__main__":
     if sys.argv[1:2] == ["selftest"]:
         assert parse("Q1=3 Q2 = 1\nQ10:4 Q11=5") == {1: "3", 2: "1", 10: "4"}
-        assert merge({1: "3", 2: "1", 99: "2"}, {1: "3", 2: "2"}, {1, 2}) == {"1": {"a": "3", "b": "3", "final": "3"}, "2": {"a": "1", "b": "2", "final": None}}
-        assert gate({1: "2", 2: "2", 3: "2", 4: "2"}) and not gate({1: "1", 2: "3", 3: "2", 4: "2"})
+        assert merge({1: "3", 2: "1", 99: "2"}, {1: "3", 2: "2"}, {1, 2}) == ({"1": {"a": "3", "b": "3", "final": "3"}, "2": {"a": "1", "b": "2", "final": None}}, [99])
+        assert gate({n: "2" for n in range(1, 8)}) == "identical run" and not gate({n: "2" for n in range(1, 7)})
+        assert not gate({1: "2", 2: "2", 3: "2", 5: "2", 6: "2", 7: "2", 8: "2"})  # a gap breaks the run
+        assert gate({n: "1234"[(n - 1) % 4] for n in range(1, 9)}) and gate({n: "4321"[(n - 1) % 4] for n in range(1, 9)})
+        assert not gate({n: "1234"[(n - 1) % 4] for n in range(1, 8)}) and not gate({1: "1", 2: "2", 3: "3", 4: "4", 5: "3", 6: "2", 7: "1", 8: "4"})
+        assert not gate({1: "1", 2: "2", 3: "3", 4: "4", 11: "2", 12: "2", 13: "2", 14: "2"})  # short runs are normal
+        assert out_name({"page": 7, "paper": "X"}) != out_name({"page": 7, "paper": "Y"})
         print("ans_reread selftest ok"); sys.exit()
     main()
