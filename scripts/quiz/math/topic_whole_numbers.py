@@ -123,7 +123,7 @@ def _numeral_wrongs(m, t, o):
     ]
 
 
-@template(T, "basic", NUM + "24", NUM + "19", NUM + "15")
+@template(T, "basic", NUM + "24", NUM + "19", NUM + "15", weight=3)
 def numeral_from_words(r):
     """math-pat-place-value-read-write"""
     m, t, o = _numeral_parts(r)
@@ -139,7 +139,7 @@ def _(p):
     return F(int(f"{p['m']}{p['t']:03d}{p['o']:03d}"))
 
 
-@template(T, "basic", NUM + "24", NUM + "19")
+@template(T, "basic", NUM + "24", NUM + "19", weight=3)
 def words_from_numeral(r):
     """math-pat-place-value-read-write"""
     m, t, o = _numeral_parts(r)
@@ -187,7 +187,7 @@ def _(p):
     return F(max(nums) if p["big"] else min(nums))
 
 
-@template(T, "basic", NUM + "22", NUM + "23")
+@template(T, "basic", NUM + "22", NUM + "23", weight=2)
 def round_whole(r):
     """math-pat-rounding-estimation"""
     place = r.choice([10, 100, 1000])
@@ -497,7 +497,7 @@ def _(p):
 
 # ================================================================ OPERATIONS: basic
 
-@template(T, "basic", OPS + "09", OPS + "05")
+@template(T, "basic", OPS + "09", OPS + "05", weight=2)
 def add_sub_algorithm(r):
     """math-pat-whole-number-four-ops-direct"""
     a = r.randint(2100, 9899)
@@ -528,7 +528,7 @@ def _(p):
     return F(p["a"] + p["b"] if p["add"] else p["a"] - p["b"])
 
 
-@template(T, "basic", OPS + "15", OPS + "13")
+@template(T, "basic", OPS + "15", OPS + "13", weight=2)
 def mult_algorithm(r):
     """math-pat-whole-number-four-ops-direct"""
     a = r.randint(120, 899)
@@ -552,7 +552,7 @@ def _(p):
     return F(sum(p["a"] for _ in range(p["b"])))
 
 
-@template(T, "basic", OPS + "16", OPS + "13")
+@template(T, "basic", OPS + "16", OPS + "13", weight=2)
 def div_algorithm(r):
     """math-pat-whole-number-four-ops-direct"""
     d = r.randint(3, 9)
@@ -644,7 +644,7 @@ def expr_str(tokens):
     return " ".join(str(t) for t in tokens)
 
 
-@template(T, "basic", OPS + "18")
+@template(T, "basic", OPS + "18", weight=2)
 def order_of_operations(r):
     """math-pat-order-of-operations"""
     form = r.randint(1, 5)
@@ -918,7 +918,7 @@ def posts_gaps(r):
     if closed:
         stem = f"Trees are planted {d} m apart around a circular pond with a path {Lg} m long. How many trees are planted?"
         ans = k
-        wrong = [(k + 1, "added_one_for_the_end", "Added 1 as if the path were a straight line."), (k - 1, "subtracted_one", "Took one off."),
+        wrong = [(k + 1, "added_one_for_the_end", "Added one tree as if the path were a straight line."), (k - 1, "subtracted_one", "Took one off."),
                  (k + 2, "slip", "Two too many."), (k * 2, "multiplied_by_two", "Counted both sides.")]
     else:
         stem = f"Posts are placed {d} m apart along a straight fence {Lg} m long, with a post at each end. How many posts are needed?"
@@ -937,7 +937,7 @@ def _(p):
 
 # ================================================================ OPERATIONS: competent
 
-@template(T, "competent", OPS + "19", OPS + "15")
+@template(T, "competent", OPS + "19", OPS + "15", weight=3)
 def working_backwards_transfers(r):
     """math-pat-working-backwards-transfers"""
     x, y, z = r.sample(NAMES, 3)
@@ -947,6 +947,8 @@ def working_backwards_transfers(r):
     if min(start) <= 0:
         return None
     ans = start[0] - start[2]
+    if ans <= 0:
+        return None  # the question asks how much MORE x had
     stem = (f"{x}, {y} and {z} each had ${E} in the end. In between, {x} gave ${a} to {y}, then {y} gave ${b} to {z}, "
             f"then {z} spent ${s}. How much more money than {z} did {x} have at first?")
     return build(working_backwards_transfers, stem, ans, [
@@ -969,7 +971,7 @@ def _(p):
     return F(A - C)
 
 
-@template(T, "competent", OPS + "19", OPS + "15")
+@template(T, "competent", OPS + "19", OPS + "15", weight=2)
 def transfer_difference(r):
     """math-pat-transfer-difference-change"""
     x, y = two_names(r)
@@ -998,7 +1000,7 @@ def _(p):
     return F(gv)
 
 
-@template(T, "competent", OPS + "15", OPS + "19")
+@template(T, "competent", OPS + "15", OPS + "19", weight=2)
 def total_given_then_difference(r):
     """math-pat-transfer-difference-change"""
     x, y = two_names(r)
@@ -1053,7 +1055,7 @@ def _(p):
     return F(brute(lambda n: n * p["p1"] - n * p["p2"] == p["D"], 1, 2000))
 
 
-@template(T, "competent", OPS + "15", OPS + "19")
+@template(T, "competent", OPS + "15", OPS + "19", weight=2)
 def equal_total_two_ways(r):
     """math-pat-equal-total-two-ways"""
     kids = r.randint(6, 30)
@@ -1165,7 +1167,7 @@ def day_after(r):
         (((s + n // 7) % 7) + 1, "used_quotient_not_remainder", "Used the number of weeks instead of the remainder."),
         (((ans - 1) % 7) + 1, "off_by_one_day", "Counted one day too few."),
         (((s + 3) % 7) + 1, "slip", "Slip.")],
-        [f"{n} ÷ 7 = {n // 7} remainder {n % 7}", f"Move {n % 7} days on from {days[s]}."],
+        [f"{n} ÷ 7 = {n // 7} remainder {n % 7}", f"Move {plural(n % 7, 'day')} on from {days[s]}."],
         {"s": s, "n": n}, lambda x: days[int(x) - 1])
 
 
@@ -1339,7 +1341,7 @@ def _(p):
     return F(brute(lambda n: n % p["a"] == 0 and n % p["b"] == 0, 1, 2000))
 
 
-@template(T, "intermediate", FM + "05", FM + "04", calc=True)
+@template(T, "intermediate", FM + "05", FM + "04", calc=True, weight=2)
 def multiples_below_limit(r):
     """math-pat-multiples-factors-direct"""
     mode = r.choice(["largest_below", "smallest_above", "common_below"])
@@ -1480,7 +1482,7 @@ def _(p):
 
 # ================================================================ extra patterns (added after catalogue grew)
 
-@template(T, "basic", OPS + "15", OPS + "16")
+@template(T, "basic", OPS + "15", OPS + "16", weight=2)
 def big_four_ops(r):
     """math-pat-whole-number-four-ops-direct"""
     if r.random() < 0.5:
@@ -1566,7 +1568,7 @@ def _(p):
     return F(max(nums) if p["big"] else min(nums))
 
 
-@template(T, "intermediate", OPS + "15", OPS + "19")
+@template(T, "intermediate", OPS + "15", OPS + "19", weight=3)
 def more_than_total_model(r):
     """math-pat-whole-number-more-than-total-model"""
     a, b, c = r.sample(NAMES, 3)
@@ -1694,31 +1696,8 @@ def _eqs_check(p):
 
 # ---------------------------------------------------------------- NUM-01: counting and comparing sets
 
+
 @template(T, "basic", NUM + "01")
-def ga_count_one_shape(r):
-    cs = r.sample(range(3, 11), 3)
-    kind = r.randrange(3)
-    nm = ["circles", "squares", "triangles"]
-    total = sum(cs)
-    who = r.choice(NAMES)
-    n = cs[kind]
-    stem = (f"{who} drew {plural(total, 'shape')} in a box: circles, squares and triangles, as shown. "
-            f"How many {nm[kind]} did {who} draw?")
-    return build(ga_count_one_shape, stem, n, [
-        (total, "counted_every_shape", "Counted all the shapes instead of only one kind."),
-        (cs[(kind + 1) % 3], "counted_the_wrong_shape", "Counted a different kind of shape."),
-        *slip_set(n, 1)],
-        [f"Count only the {nm[kind]}: {n}."], {"cs": cs, "kind": kind}, whole=True,
-        figure=count_shapes_fig(tuple(cs), r.randrange(10 ** 6)))
-
-
-@checker(ga_count_one_shape)
-def _(p):
-    shapes = ["c"] * p["cs"][0] + ["s"] * p["cs"][1] + ["t"] * p["cs"][2]
-    return F(shapes.count("cst"[p["kind"]]))
-
-
-@template(T, "intermediate", NUM + "01")
 def ga_compare_boxes(r):
     cs = r.sample(range(5, 26), 3)
     L = "ABC"
@@ -1742,7 +1721,7 @@ def _(p):
     return F(len([k for k in range(b + 1, a + 1)]))
 
 
-@template(T, "competent", NUM + "01", OPS + "19")
+@template(T, "basic", NUM + "01", OPS + "19")
 def ga_equalise_boxes(r):
     while True:
         cs = r.sample(range(5, 26), 3)
@@ -1800,7 +1779,7 @@ def _(p):
     return F(_unwords(p["w"]))
 
 
-@template(T, "competent", NUM + "03", NUM + "04")
+@template(T, "basic", NUM + "03", NUM + "04")
 def ga_swap_digits_words(r):
     t, o = r.randint(3, 9), r.randint(1, 9)
     if t == o:
@@ -1857,7 +1836,7 @@ def _(p):
     return F(s[-1] if p["big"] else s[0])
 
 
-@template(T, "intermediate", NUM + "04")
+@template(T, "basic", NUM + "04")
 def ga_rank_or_between(r):
     if r.random() < 0.5:
         a = r.randint(12, 80)
@@ -1897,7 +1876,7 @@ def _(p):
     return F(max(0, hi - lo + 1))
 
 
-@template(T, "competent", NUM + "04", NUM + "08")
+@template(T, "basic", NUM + "04", NUM + "08")
 def ga_digit_cards_sum(r):
     ds = sorted(r.sample(range(1, 10), 4), reverse=True)
     a, b, c, d = ds
@@ -1955,7 +1934,7 @@ def _(p):
     return known[0][1] + (k - known[0][0]) * d
 
 
-@template(T, "intermediate", NUM + "05")
+@template(T, "basic", NUM + "05")
 def ga_alternating_rule(r):
     a, b = r.sample([2, 3, 4, 5, 6, 7], 2)
     s = r.randint(1, 12)
@@ -1987,7 +1966,7 @@ def _(p):
     return F(seq[-1])
 
 
-@template(T, "competent", NUM + "05", OPS + "19")
+@template(T, "basic", NUM + "05", OPS + "19")
 def ga_pattern_two_terms(r):
     d = r.randint(2, 9)
     i = r.randint(2, 4)
@@ -2057,7 +2036,7 @@ def _(p):
     return F(len(list(range(p["k"] + 1, p["n"] + 1))))
 
 
-@template(T, "intermediate", NUM + "06", OPS + "19")
+@template(T, "basic", NUM + "06", OPS + "19")
 def ga_queue_positions(r):
     who, w2 = two_names(r)
     if r.random() < 0.5:
@@ -2089,7 +2068,7 @@ def _(p):
             return F(n)
 
 
-@template(T, "competent", NUM + "06", OPS + "19")
+@template(T, "basic", NUM + "06", OPS + "19")
 def ga_race_places(r):
     who, w2, w3 = r.sample(NAMES, 3)
     mode = r.randrange(3)
@@ -2201,7 +2180,7 @@ def _(p):
     return F(v)
 
 
-@template(T, "intermediate", NUM + "07", OPS + "19")
+@template(T, "basic", NUM + "07", OPS + "19")
 def ga_count_on_and_back(r):
     n = r.randint(120, 600)
     a, b = r.randint(2, 6), r.randint(3, 9)
@@ -2229,7 +2208,7 @@ def _(p):
     return F(v)
 
 
-@template(T, "competent", NUM + "07", NUM + "08")
+@template(T, "basic", NUM + "07", NUM + "08")
 def ga_packs_of_ten(r):
     unit, thing, pack = r.choice([(10, "stickers", "packs of 10 stickers"), (100, "beads", "boxes of 100 beads"),
                                   (10, "pencils", "packs of 10 pencils")])
@@ -2291,7 +2270,7 @@ def _(p):
     return F(d if p["mode"] == "digit" else d * [1, 10, 100][p["pos"]])
 
 
-@template(T, "intermediate", NUM + "08")
+@template(T, "basic", NUM + "08")
 def ga_hundreds_tens_ones(r):
     if r.random() < 0.6:
         h, t, o = r.randint(2, 7), r.randint(11, 25), r.randint(1, 9)
@@ -2327,7 +2306,7 @@ def _(p):
     return F(k)
 
 
-@template(T, "competent", NUM + "08", NUM + "04")
+@template(T, "basic", NUM + "08", NUM + "04")
 def ga_digit_clues(r):
     while True:
         h, t, d = r.randint(1, 9), r.randint(0, 6), r.randint(1, 3)
@@ -2354,7 +2333,7 @@ def _(p):
     return F(hits[0]) if len(hits) == 1 else None
 
 
-@template(T, "competent", NUM + "08", NUM + "04")
+@template(T, "basic", NUM + "08", NUM + "04")
 def ga_greatest_even_number(r):
     ds = r.sample(range(0, 10), 4)
     evens = sorted(int("".join(map(str, p))) for p in permutations(ds, 3)
@@ -2388,37 +2367,8 @@ def _(p):
 
 # ---------------------------------------------------------------- OPS-01: addition and subtraction concepts
 
+
 @template(T, "basic", OPS + "01")
-def ga_number_bond(r):
-    whole = r.randint(30, 99)
-    part = r.randint(11, whole - 8)
-    other = whole - part
-    form = r.randrange(3)
-    if form == 0:
-        stem = f"In a number bond, the whole is {whole} and one part is {part}. What is the other part?"
-        ans, eq = other, f"x + {part} = {whole}"
-        wr = [(whole + part, "added_the_whole_and_the_part", "Added the whole and the part."), (abs(whole - part - 10), "slip_in_renaming", "Made a slip when renaming."),
-              (part, "gave_the_part_given", "Gave the part that was already given.")]
-    elif form == 1:
-        stem = f"Find the missing number: {part} + __ = {whole}"
-        ans, eq = other, f"{part} + x = {whole}"
-        wr = [(whole + part, "added_instead_of_subtracting", "Added instead of subtracting."), (part + 10 if part + 10 != other else part - 10, "slip_in_renaming", "Made a slip when renaming."),
-              (whole - part + 10, "slip_in_renaming", "Forgot to rename a ten.")]
-    else:
-        stem = f"Find the missing number: {whole} − __ = {part}"
-        ans, eq = other, f"{whole} − x = {part}"
-        wr = [(whole + part, "added_instead_of_subtracting", "Added the two numbers."), (part, "gave_the_number_given", "Copied the number after the equals sign."),
-              (whole - part + 10, "slip_in_renaming", "Forgot to rename a ten.")]
-    return build(ga_number_bond, stem, ans, wr + slip_set(ans, 1), [f"{whole} − {part} = {other}"], {"eq": eq}, whole=True, auto_slips=False)
-
-
-@checker(ga_number_bond)
-def _(p):
-    lhs, rhs = p["eq"].split("=")
-    return next((F(x) for x in range(1, 200) if _ev(lhs.replace("x", f"({x})")) == int(rhs)), None)
-
-
-@template(T, "intermediate", OPS + "01")
 def ga_check_sentence(r):
     a, b = r.randint(21, 70), r.randint(11, 29)
     c = a + b
@@ -2446,7 +2396,7 @@ def _(p):
     return _eqs_check(p)
 
 
-@template(T, "competent", OPS + "01", OPS + "19")
+@template(T, "basic", OPS + "01", OPS + "19")
 def ga_equal_after_giving(r):
     who, w2 = two_names(r)
     g = r.randint(6, 24)
@@ -2469,68 +2419,12 @@ def _(p):
 
 # ---------------------------------------------------------------- OPS-02: adding and subtracting within 100
 
-@template(T, "basic", OPS + "02")
-def ga_add_ones_chain(r):
-    k = r.choice([3, 4, 5])
-    xs = [r.randint(2, 9) for _ in range(k)]
-    s = sum(xs)
-    stem = f"Find the value of {' + '.join(map(str, xs))}."
-    return build(ga_add_ones_chain, stem, s, [
-        (s - xs[0], "left_one_number_out", "Left out one of the numbers."),
-        (s + xs[-1], "counted_one_number_twice", "Added one of the numbers twice."),
-        (s + 10, "slip_when_bridging_ten", "Made a slip when making a ten."), (s - 10, "slip_when_bridging_ten", "Made a slip when making a ten."),
-        *slip_set(s, 1)],
-        [f"Add in pairs that make 10 where you can: total {s}."], {"xs": xs}, whole=True, auto_slips=False)
-
-
-@checker(ga_add_ones_chain)
-def _(p):
-    t = 0
-    for x in p["xs"]:
-        t += x
-    return F(t)
-
-
-@template(T, "basic", OPS + "02")
-def ga_add_sub_renaming(r):
-    if r.random() < 0.5:
-        a, b = r.randint(15, 78), r.randint(12, 60)
-        if (a % 10) + (b % 10) < 10 or a + b > 100:
-            return None
-        ans = a + b
-        stem = f"Find {a} + {b}."
-        wr = [(ans - 10, "forgot_to_carry", "Forgot to add the extra ten."), (ans + 10, "carried_twice", "Added the extra ten twice."),
-              (ans - 9, "slip_when_carrying", "Made a slip when carrying.")]
-        mode = "add"
-    else:
-        a, b = r.randint(41, 99), r.randint(12, 38)
-        if a % 10 >= b % 10 or a <= b:
-            return None
-        ans = a - b
-        stem = f"Find {a} − {b}."
-        wr = [(10 * (a // 10 - b // 10) + (b % 10 - a % 10), "took_the_smaller_digit_from_the_larger", "Subtracted the smaller ones digit from the larger one."),
-              (ans + 10, "forgot_to_rename", "Forgot to take 1 ten away after renaming."),
-              (ans - 10, "took_the_ten_twice", "Took away the renamed ten twice.")]
-        mode = "sub"
-    return build(ga_add_sub_renaming, stem, ans, wr + slip_set(ans, 1), [f"{a} {'+' if mode == 'add' else '−'} {b} = {ans}"],
-                 {"a": a, "b": b, "mode": mode}, whole=True, auto_slips=False)
-
-
-@checker(ga_add_sub_renaming)
-def _(p):
-    a, b = p["a"], p["b"]
-    if p["mode"] == "add":
-        ones, carry = (a % 10 + b % 10) % 10, (a % 10 + b % 10) // 10
-        return F(10 * (a // 10 + b // 10 + carry) + ones)
-    borrow = 1 if a % 10 < b % 10 else 0
-    return F(10 * (a // 10 - b // 10 - borrow) + (a % 10 + 10 * borrow - b % 10))
-
 
 CTX = [("A bookshop had", "books", "sold", "received"), ("A bakery made", "buns", "sold", "baked"),
        ("A school hall had", "chairs", "removed", "added"), ("A fruit stall had", "oranges", "sold", "restocked")]
 
 
-@template(T, "intermediate", OPS + "02", OPS + "19")
+@template(T, "basic", OPS + "02", OPS + "19")
 def ga_three_step_100(r):
     lead, item, down, up = r.choice(CTX)
     a, b, c = r.randint(40, 95), r.randint(12, 38), r.randint(11, 35)
@@ -2560,7 +2454,7 @@ def _(p):
     return F(v)
 
 
-@template(T, "competent", OPS + "02", OPS + "19")
+@template(T, "basic", OPS + "02", OPS + "19")
 def ga_game_scores(r):
     who = r.choice(NAMES)
     xs = [r.randint(5, 9) for _ in range(4)]
@@ -2589,55 +2483,8 @@ def _(p):
 
 # ---------------------------------------------------------------- OPS-03: mental calculation
 
-@template(T, "basic", OPS + "03")
-def ga_mental_basic(r):
-    mode = r.randrange(3)
-    if mode == 0:
-        if r.random() < 0.5:
-            a, b = r.randint(6, 12), r.randint(5, 9)
-            if a + b > 20 or a + b < 11:
-                return None
-            e, ans, op = f"{a} + {b}", a + b, "+"
-        else:
-            a, b = r.randint(12, 19), r.randint(4, 9)
-            if a % 10 >= b:
-                return None
-            e, ans, op = f"{a} − {b}", a - b, "−"
-        wr = [(a + b if op == "−" else abs(a - b), "used_the_wrong_operation", "Used the wrong operation."),
-              (ans + 10, "slip_over_ten", "Slipped when crossing 10."), (ans - 10, "slip_over_ten", "Slipped when crossing 10.")]
-    elif mode == 1:
-        a, b = r.randint(21, 89), r.randint(1, 8)
-        up = r.random() < 0.5
-        if (a % 10 + b > 9) if up else (a % 10 < b):
-            return None
-        e, ans, op = f"{a} {'+' if up else '−'} {b}", (a + b if up else a - b), "+" if up else "−"
-        wr = [(a + 10 * b if up else a - 10 * b, "changed_the_tens", "Changed the tens digit instead of the ones digit."),
-              (a + 10 * b + b if up else a - b + 10, "tens_and_ones_confused", "Mixed up tens and ones."),
-              (ans + 10, "slip_over_ten", "Slipped with the tens."), (ans - 10, "slip_over_ten", "Slipped with the tens.")]
-    else:
-        a, b = r.randint(11, 89), r.randint(1, 5) * 10
-        up = r.random() < 0.5
-        if (a + b > 99) if up else (a <= b):
-            return None
-        e, ans, op = f"{a} {'+' if up else '−'} {b}", (a + b if up else a - b), "+" if up else "−"
-        wr = [(a + b // 10 if up else a - b // 10, "changed_the_ones", "Changed the ones digit instead of the tens digit."),
-              (a + b + 1 if up else a - b + 1, "slip_in_ones", "Changed the ones digit by mistake."),
-              (ans + 10, "slip_with_the_tens", "Slipped with the tens."), (ans - 10, "slip_with_the_tens", "Slipped with the tens.")]
-    stem = f"Without using paper, work out {e}."
-    return build(ga_mental_basic, stem, ans, wr, [f"{e} = {ans}"], {"e": e}, whole=True, auto_slips=False)
 
-
-@checker(ga_mental_basic)
-def _(p):
-    toks = p["e"].split()
-    a, op, b = int(toks[0]), toks[1], int(toks[2])
-    v = a
-    for _i in range(b):
-        v += 1 if op == "+" else -1
-    return F(v)
-
-
-@template(T, "intermediate", OPS + "03", OPS + "19")
+@template(T, "basic", OPS + "03", OPS + "19")
 def ga_mental_chain(r):
     v = r.randint(21, 70)
     who = r.choice(NAMES)
@@ -2684,7 +2531,7 @@ def _(p):
     return F(v)
 
 
-@template(T, "competent", OPS + "03", OPS + "19")
+@template(T, "basic", OPS + "03", OPS + "19")
 def ga_mental_three_friends(r):
     a_, b_, c_ = r.sample(NAMES, 3)
     a = r.randint(24, 59)
@@ -2713,35 +2560,6 @@ def _(p):
 
 
 # ---------------------------------------------------------------- OPS-04: multiplication and division concepts
-
-@template(T, "basic", OPS + "04")
-def ga_repeated_addition(r):
-    k, m = r.randint(3, 8), r.randint(2, 9)
-    if k * m > 40 or k == m:
-        return None
-    opts = [f"{k} × {m}", f"{k} × {k}", f"{m} × {m}", f"{k} + {m}"]
-    tot = k * m
-    ads = " + ".join([str(m)] * k)
-    stem = f"Which expression has the same value as {ads}?"
-    r_ = r.sample(range(4), 4)
-    shown = [opts[i] for i in r_]
-    wr = [(r_.index(1), "squared_the_number_of_groups", "Multiplied the number of groups by itself."),
-          (r_.index(2), "squared_the_number_added", "Multiplied the number being added by itself."),
-          (r_.index(3), "added_the_two_numbers", "Added the number of groups and the number in each group.")]
-    if len({_ev(s) for s in opts}) < 4:
-        return None
-    return build(ga_repeated_addition, stem, r_.index(0) + 1, [(i + 1, t, w) for i, t, w in wr],
-                 [f"{ads} has {k} lots of {m}, so it is {k} × {m} = {tot}."], {"opts": shown, "k": k, "m": m},
-                 show=lambda v: shown[int(v) - 1], whole=True, auto_slips=False)
-
-
-@checker(ga_repeated_addition)
-def _(p):
-    tot = 0
-    for _i in range(p["k"]):
-        tot += p["m"]
-    hit = [i for i, s in enumerate(p["opts"]) if _ev(s) == tot]
-    return F(hit[0] + 1) if len(hit) == 1 else None
 
 
 @template(T, "basic", OPS + "04", OPS + "07")
@@ -2777,7 +2595,7 @@ def _(p):
     return next(F(q) for q in range(1, 30) if q * p["k"] == p["n"])
 
 
-@template(T, "intermediate", OPS + "04", OPS + "19")
+@template(T, "basic", OPS + "04", OPS + "19")
 def ga_groups_then_change(r):
     who = r.choice(NAMES)
     if r.random() < 0.5:
@@ -2810,7 +2628,7 @@ def _(p):
     return F(each - p["g"])
 
 
-@template(T, "competent", OPS + "04", OPS + "19")
+@template(T, "basic", OPS + "04", OPS + "19")
 def ga_groups_markers(r):
     g = r.randint(3, 5)
     q = r.randint(4, 8)
@@ -2843,36 +2661,6 @@ TBL = [2, 3, 4, 5, 10]
 
 
 @template(T, "basic", OPS + "07")
-def ga_table_direct(r):
-    k, m = r.choice(TBL), r.randint(3, 12)
-    if k == m:
-        return None
-    n = k * m
-    mode = r.randrange(3)
-    if mode == 0:
-        stem = f"Work out {m} × {k}."
-        ans, wr = n, [(m + k, "added_instead_of_multiplied", "Added the two numbers."), (n + k, "one_group_too_many", "Counted one group too many."),
-                      (n - k, "one_group_too_few", "Counted one group too few.")]
-    elif mode == 1:
-        stem = f"Work out {n} ÷ {k}."
-        ans, wr = m, [(n - k, "subtracted_instead_of_divided", "Subtracted the two numbers."), (k, "gave_the_divisor", "Gave the number you divide by."),
-                      (m + 1, "slip", "Slip."), (m - 1, "slip", "Slip.")]
-    else:
-        stem = f"How many {k}s are there in {n}?"
-        ans, wr = m, [(n - k, "subtracted_instead_of_divided", "Subtracted the two numbers."), (n + k, "added_instead_of_divided", "Added the numbers."),
-                      (m + 1, "slip", "Slip."), (m - 1, "slip", "Slip.")]
-    return build(ga_table_direct, stem, ans, wr, [f"{m} × {k} = {n}"], {"k": k, "m": m, "mode": mode}, whole=True, auto_slips=False)
-
-
-@checker(ga_table_direct)
-def _(p):
-    k, m = p["k"], p["m"]
-    if p["mode"] == 0:
-        return F(sum([k] * m))
-    return F(len(range(k, k * m + 1, k)))
-
-
-@template(T, "intermediate", OPS + "07")
 def ga_given_product(r):
     a, b = r.choice(TBL), r.randint(3, 9)
     if a == b:
@@ -2893,7 +2681,7 @@ def _(p):
     return F(len(range(p["a"], c + 1, p["a"])) + len(range(p["b"], c + 1, p["b"])))
 
 
-@template(T, "competent", OPS + "07", OPS + "19")
+@template(T, "basic", OPS + "07", OPS + "19")
 def ga_table_story(r):
     r1, t1 = r.randint(4, 9), r.choice([3, 4, 5, 10])
     r2, t2 = r.randint(3, 8), r.choice([2, 5, 10])
@@ -2920,32 +2708,6 @@ def _(p):
 
 
 @template(T, "basic", OPS + "08")
-def ga_missing_factor(r):
-    k, m = r.choice(TBL), r.randint(2, 10)
-    n = k * m
-    form = r.randrange(4)
-    eq = [f"x × {k} = {n}", f"{k} × x = {n}", f"x ÷ {k} = {m}", f"{n} ÷ x = {m}"][form]
-    ans = [m, m, n, k][form]
-    if form == 3 and k == m:
-        return None
-    shown = eq.replace("x", "__")
-    wr = [(n + k if form < 2 else m + k, "used_the_wrong_operation", "Used the wrong operation."),
-          (abs(n - k) if form < 2 else abs(m - k), "used_the_wrong_operation", "Subtracted instead."),
-          (n * k if form == 3 else (m * k if form < 2 else m + k + 1), "used_the_wrong_operation", "Used the wrong operation.")]
-    return build(ga_missing_factor, f"Find the missing number: {shown}", ans, wr + slip_set(ans, 1),
-                 [f"Use the multiplication fact {m} × {k} = {n}."], {"eq": eq}, whole=True, auto_slips=False)
-
-
-@checker(ga_missing_factor)
-def _(p):
-    lhs, rhs = p["eq"].split("=")
-    for x in range(1, 200):
-        v = _ev(lhs.replace("x", f"({x})"))
-        if v == int(rhs):
-            return F(x)
-
-
-@template(T, "intermediate", OPS + "08")
 def ga_groups_leftover(r):
     g = r.choice(TBL)
     q = r.randint(3, 9)
@@ -2980,7 +2742,7 @@ def _(p):
     return F([bags, left, bags + (1 if left else 0)][p["mode"]])
 
 
-@template(T, "competent", OPS + "08", OPS + "19")
+@template(T, "basic", OPS + "08", OPS + "19")
 def ga_tickets_change(r):
     price, n = r.choice(TBL), r.randint(5, 12)
     paid = 50 if price * n <= 50 else 100
@@ -3004,33 +2766,8 @@ def _(p):
 
 # ---------------------------------------------------------------- OPS-11 / OPS-14: tables of 6, 7, 8 and 9
 
-@template(T, "basic", OPS + "11")
-def ga_table_high(r):
-    k, m = r.randint(6, 9), r.randint(3, 12)
-    n = k * m
-    mode = r.randrange(3)
-    if mode == 0:
-        stem, ans = f"Work out {k} × {m}.", n
-        wr = [(k + m, "added_instead_of_multiplied", "Added the two numbers."), (n + k, "one_group_too_many", "Counted one group too many."),
-              (n - k, "one_group_too_few", "Counted one group too few.")]
-    elif mode == 1:
-        stem, ans = f"Work out {n} ÷ {k}.", m
-        wr = [(m + 1, "slip_in_the_table", "Slipped in the times table."), (m - 1, "slip_in_the_table", "Slipped in the times table."),
-              (n - k, "subtracted_instead_of_divided", "Subtracted the two numbers."), (k, "gave_the_divisor", "Gave the number you divide by.")]
-    else:
-        stem, ans = f"Find the missing number: __ × {k} = {n}", m
-        wr = [(n - k, "subtracted_instead_of_divided", "Subtracted instead."), (n + k, "added_instead", "Added instead."),
-              (m + 1, "slip_in_the_table", "Slipped in the times table."), (m - 1, "slip_in_the_table", "Slipped in the times table.")]
-    return build(ga_table_high, stem, ans, wr, [f"{m} × {k} = {n}"], {"k": k, "m": m, "mode": mode}, whole=True, auto_slips=False)
 
-
-@checker(ga_table_high)
-def _(p):
-    k, m = p["k"], p["m"]
-    return F(sum([k] * m)) if p["mode"] == 0 else F(len(range(k, k * m + 1, k)))
-
-
-@template(T, "intermediate", OPS + "11", OPS + "07")
+@template(T, "basic", OPS + "11", OPS + "07")
 def ga_two_pack_sizes(r):
     a, s1 = r.randint(4, 9), r.choice([6, 7, 8, 9])
     b, s2 = r.randint(3, 8), r.choice([6, 7, 8, 9])
@@ -3053,7 +2790,7 @@ def _(p):
     return F(sum([p["s1"]] * p["a"]) + sum([p["s2"]] * p["b"]))
 
 
-@template(T, "competent", OPS + "11", OPS + "19")
+@template(T, "basic", OPS + "11", OPS + "19")
 def ga_pens_at_first(r):
     a, s1 = r.randint(5, 9), r.randint(6, 9)
     b, s2 = r.randint(4, 8), r.randint(6, 9)
@@ -3079,33 +2816,7 @@ def _(p):
     return F(sum(items) + p["left"])
 
 
-@template(T, "basic", OPS + "14")
-def ga_mental_tables(r):
-    k, m = r.randint(2, 9), r.randint(2, 9)
-    c = r.randint(3, 15)
-    n = k * m
-    kind = r.randrange(3)
-    if kind == 0:
-        e, ans = f"{k} × {m} + {c}", n + c
-        wr = [(k * (m + c), "ignored_the_order_of_operations", "Added before multiplying."), (n - c if n > c else n + 2 * c, "used_the_wrong_sign", "Subtracted instead of adding.")]
-    elif kind == 1:
-        if n <= c + 3:
-            return None
-        e, ans = f"{k} × {m} − {c}", n - c
-        wr = [(k * (m - c) if m > c else n + c, "ignored_the_order_of_operations", "Subtracted before multiplying."), (n + c, "used_the_wrong_sign", "Added instead of subtracting.")]
-    else:
-        e, ans = f"{c} + {k} × {m}", n + c
-        wr = [((c + k) * m, "worked_left_to_right", "Added first and then multiplied."), (c * k + m, "ignored_the_order_of_operations", "Multiplied the wrong numbers.")]
-    stem = f"Find the value of {e}."
-    return build(ga_mental_tables, stem, ans, wr + slip_set(ans, k), [f"Multiply first: {k} × {m} = {n}", f"Then {ans}"], {"e": e}, whole=True, auto_slips=False)
-
-
-@checker(ga_mental_tables)
-def _(p):
-    return F(int(_ev(p["e"])))
-
-
-@template(T, "intermediate", OPS + "14", OPS + "11")
+@template(T, "basic", OPS + "14", OPS + "11")
 def ga_equal_products(r):
     a, b, c = r.randint(3, 9), r.randint(4, 12), r.choice([2, 3, 4, 6])
     n = a * b
@@ -3134,7 +2845,7 @@ def _(p):
     return next((F(x) for x in range(1, 200) if p["c"] * x == n), None)
 
 
-@template(T, "competent", OPS + "14", OPS + "11")
+@template(T, "basic", OPS + "14", OPS + "11")
 def ga_share_then_lose(r):
     d, q = r.randint(6, 9), r.randint(6, 12)
     g = r.randint(2, q - 2)
@@ -3156,7 +2867,7 @@ def _(p):
     return F(sum([each - p["g"]] * p["k"]))
 
 
-@template(T, "intermediate", NUM + "03", OPS + "03")
+@template(T, "basic", NUM + "03", OPS + "03")
 def ga_words_add_tens(r):
     n = r.randint(11, 78)
     if n % 10 == 0:

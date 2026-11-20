@@ -99,7 +99,7 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | math-pat-symmetry-and-construction | basic | 75 | yes | lines_of_symmetry_count (basic), symmetric_letters (basic), which_dotted_line (basic), symmetric_figure_count (intermediate), regular_polygon_lines (intermediate), shade_to_symmetry (intermediate), symmetry_axes_pattern (competent), shade_two_lines (competent) |
 | math-pat-direction-turn-compass | basic | 73 |  | compass_turn (basic), compass_two_turns (competent) |
 | math-pat-angles-parallel-quadrilaterals | intermediate | 64 | yes | parallelogram_basic (basic), rhombus_diagonal (intermediate), trapezium_angles (intermediate), true_statements (intermediate), rhombus_equilateral (competent), parallelogram_isosceles (competent), trapezium_isosceles (competent) |
-| math-pat-shapes-classify-2d | basic | 45 |  | shape_by_property (basic) |
+| math-pat-shapes-classify-2d | basic | 45 |  | shape_by_property (basic), grid_which_quadrilateral (competent), grid_triangle_type (competent) |
 | math-pat-nets-and-solids | basic | 44 |  | solid_from_faces (basic) |
 | math-pat-angles-folded-paper | competent | 41 | yes | folded_paper (competent) |
 | math-pat-cubes-packing-scale | competent | 28 | yes | cube_packing (competent) |
@@ -192,7 +192,7 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 
 | Outcome | Level | Generators |
 |---|---|---|
-| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-01 | P1 | 3 templates |
+| whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-01 | P1 | 2 templates |
 | whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-02 | P1 | secondary only (1 templates) |
 | whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-03 | P1 | 3 templates |
 | whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-04 | P1 | 3 templates |
@@ -216,20 +216,20 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22 | P4 | 2 templates |
 | whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23 | P4 | 2 templates |
 | whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24 | P5 | 2 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-01 | P1 | 3 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-02 | P1 | 4 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-03 | P1 | 3 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-04 | P1 | 4 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-01 | P1 | 2 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-02 | P1 | 2 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-03 | P1 | 2 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-04 | P1 | 3 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-05 | P2 | secondary only (1 templates) |
 | whole-numbers-addition-subtraction-multiplication-and-division-06 | P2 | secondary only (1 templates) |
-| whole-numbers-addition-subtraction-multiplication-and-division-07 | P2 | 3 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-08 | P2 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-07 | P2 | 2 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-08 | P2 | 2 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-09 | P3 | 1 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-10 | P3 | 1 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-11 | P3 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-11 | P3 | 2 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-12 | P3 | 3 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-13 | P3 | 2 templates |
-| whole-numbers-addition-subtraction-multiplication-and-division-14 | P3 | 3 templates |
+| whole-numbers-addition-subtraction-multiplication-and-division-14 | P3 | 2 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-15 | P4 | 12 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-16 | P4 | 3 templates |
 | whole-numbers-addition-subtraction-multiplication-and-division-17 | P5 | 1 templates |
@@ -334,9 +334,9 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | area-and-volume-area-and-circumference-of-circle-01 | P6 | 6 templates |
 | area-and-volume-area-and-circumference-of-circle-02 | P6 | 2 templates |
 | area-and-volume-area-and-circumference-of-circle-03 | P6 | 8 templates |
-| geometry-2d-shapes-01 | P1 | 2 templates |
+| geometry-2d-shapes-01 | P1 | 5 templates |
 | geometry-2d-shapes-02 | P1 | 1 templates |
-| geometry-2d-shapes-03 | P1 | 5 templates |
+| geometry-2d-shapes-03 | P1 | 2 templates |
 | geometry-2d-shapes-04 | P1 | 3 templates |
 | geometry-2d-shapes-05 | P2 | 2 templates |
 | geometry-3d-shapes-and-nets-01 | P2 | 5 templates |
@@ -353,7 +353,7 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | geometry-angles-07 | P5 | 3 templates |
 | geometry-angles-08 | P5 | 4 templates |
 | geometry-perpendicular-and-parallel-lines-01 | P3 | 4 templates |
-| geometry-perpendicular-and-parallel-lines-02 | P3 | 3 templates |
+| geometry-perpendicular-and-parallel-lines-02 | P3 | 2 templates |
 | geometry-rectangle-and-square-01 | P4 | 8 templates |
 | geometry-rectangle-and-square-02 | P4 | 3 templates |
 | geometry-line-symmetry-01 | P4 | 5 templates |

@@ -113,7 +113,7 @@ def _(p):
     return F(next(n for n in range(1, 400000) if divmod(n, k) == (a, b)))
 
 
-@template(T, "basic", LM_CONVERT)
+@template(T, "basic", LM_CONVERT, weight=2)
 def convert_to_compound(r):
     u1, u2, k = r.choice(SYS)
     q = r.randint(2, 15)
@@ -138,7 +138,7 @@ def _(p):
     return F(cc(q, N - q * k))
 
 
-@template(T, "basic", LM_CONVERT, LM_COMPOUND)
+@template(T, "basic", LM_CONVERT, LM_COMPOUND, weight=2)
 def convert_decimal(r):
     """math-pat-unit-conversion-compound"""
     u1, u2, k = r.choice(SYS)
@@ -875,7 +875,7 @@ def clock_add(h, m, d):
     return h2 * 60 + t % 60
 
 
-@template(T, "basic", TM_FIND, TM_5)
+@template(T, "basic", TM_FIND, TM_5, weight=3)
 def clock_plus_duration(r):
     """math-pat-time-elapsed-clock"""
     h, m = r.randint(1, 12), r.randrange(0, 60, 5)
@@ -1398,8 +1398,8 @@ def cm_how_much_longer(r):
     s = sorted(vals)
     ans = s[2] - s[0]
     i_long, i_short = vals.index(s[2]), vals.index(s[0])
-    stem = (f"{name} has a {objs[0]} that is {vals[0]} cm long, a {objs[1]} that is {vals[1]} cm long and a "
-            f"{objs[2]} that is {vals[2]} cm long. How much longer is the {objs[i_long]} than the {objs[i_short]}, in cm?")
+    stem = (f"{name} has {a_an(objs[0])} {objs[0]} that is {vals[0]} cm long, {a_an(objs[1])} {objs[1]} that is {vals[1]} cm long and "
+            f"{a_an(objs[2])} {objs[2]} that is {vals[2]} cm long. How much longer is the {objs[i_long]} than the {objs[i_short]}, in cm?")
     return build(cm_how_much_longer, stem, ans, [
         (s[2] + s[0], "added_instead_of_subtracting", "Added the two lengths."),
         (s[1] - s[0], "used_the_middle_length", "Compared the shortest with the middle one."),

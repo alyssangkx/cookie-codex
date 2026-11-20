@@ -280,7 +280,7 @@ def _(q):
     return F(q["price"]) * F(109, 100)
 
 
-@template(T, "intermediate", DISC, CHANGE)
+@template(T, "intermediate", DISC, CHANGE, weight=2)
 def discount_then_gst(r):
     """math-pat-percent-gst-discount-direct"""
     price = 5 * r.randint(8, 80)
@@ -353,7 +353,7 @@ def _(q):
     return next(F(h, 2) for h in range(1, 401) if abs(q["new"] - q["old"]) * 200 == h * q["old"])
 
 
-@template(T, "intermediate", WHOLE, DISC)
+@template(T, "intermediate", WHOLE, DISC, weight=2)
 def find_original_after_discount(r):
     """math-pat-percent-reverse-find-original"""
     d = r.choice([10, 20, 25, 30, 40, 50, 60])
@@ -729,14 +729,16 @@ def _(q):
 
 @template(T, "competent", EXPR, CHANGE)
 def compare_more_less(r):
-    pairs_more = [(25, 20), (100, 50), (150, 60), (300, 75), (400, 80), (900, 90)]
-    pairs_less = [(20, 25), (50, 100), (60, 150), (75, 300), (80, 400), (90, 900)]
+    # realistic sizes only (bank review: "900% more" is not a P6 question): 10%-100% more, 10%-90% fewer, answers
+    # a whole number or one decimal place
+    pairs_more = [(25, 20), (60, F(75, 2)), (100, 50)]
+    pairs_less = [(20, 25), (50, 100), (60, 150)]
     n1, n2 = two_names(r)
     if r.random() < 0.5:
         p, ans = r.choice(pairs_more)
         stem = f"{n1} has {p}% more stickers than {n2}. {n2} has what percentage fewer stickers than {n1}?"
         steps = [f"Let {n2} have 100 units, so {n1} has {100 + p}", f"{n2} has {p} fewer than {n1}",
-                 f"{p}/{100 + p} × 100% = {ans}%"]
+                 f"{p}/{100 + p} × 100% = {pc(ans)}"]
         kind = "more"
     else:
         p, ans = r.choice(pairs_less)
@@ -750,7 +752,7 @@ def compare_more_less(r):
         (100 + p if kind == "more" else 100 - p if p < 100 else p + 10, "gave_one_of_the_totals", "Gave one of the totals in units."),
         (ans + 10, "careless_slip", "Made a slip in the calculation."),
         (ans - 5, "careless_slip", "Made a slip in the calculation."),
-    ], steps, {"p": p, "kind": kind}, pc, auto_slips=False, whole=True)
+    ], steps, {"p": p, "kind": kind}, pc, auto_slips=False)
 
 
 @checker(compare_more_less)

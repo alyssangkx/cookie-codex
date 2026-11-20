@@ -63,7 +63,7 @@ def mark(a, tag=""):
 
 # ============================================================ ANGLES: basic
 
-@template(T, "basic", GA + "05", GA + "08")
+@template(T, "basic", GA + "05", GA + "08", weight=2)
 def angles_on_line(r):
     """math-pat-angles-one-step"""
     two = r.random() < 0.5
@@ -114,7 +114,7 @@ def _(p):
     return F(round(meas(q["D"], q["O"], q["B"]) if p["b"] else meas(q["C"], q["O"], q["B"])))
 
 
-@template(T, "basic", GA + "06")
+@template(T, "basic", GA + "06", weight=2)
 def angles_at_point(r):
     """math-pat-angles-one-step"""
     n = r.choice([3, 4])
@@ -163,7 +163,7 @@ def _(p):
     return F(round(meas(last, (0, 0), first)))
 
 
-@template(T, "basic", GA + "07")
+@template(T, "basic", GA + "07", weight=2)
 def vertically_opposite(r):
     """math-pat-angles-one-step"""
     a = r.randint(25, 155)
@@ -273,7 +273,7 @@ def _(p):
     return F(outer if p["right"] else inner)
 
 
-@template(T, "basic", GA + "02")
+@template(T, "basic", GA + "02", weight=2)
 def angle_notation(r):
     """math-pat-angles-one-step"""
     a, b = r.randint(20, 70), r.randint(20, 70)
@@ -320,7 +320,7 @@ def _coef(c, v="x"):
     return v if c == 1 else f"{c}{v}"
 
 
-@template(T, "intermediate", GA + "07", GA + "08")
+@template(T, "intermediate", GA + "07", GA + "08", weight=2)
 def crossing_lines_algebra(r):
     """math-pat-angles-one-step"""
     a, b = r.randint(1, 4), r.randint(1, 4)
@@ -363,7 +363,7 @@ def _(p):
     return F(round(meas(vec(al + 180), O, vec(al + a * x + 180))))
 
 
-@template(T, "intermediate", GA + "05", GA + "06", GA + "08")
+@template(T, "intermediate", GA + "05", GA + "06", GA + "08", weight=2)
 def angle_ratio(r):
     """math-pat-angles-one-step"""
     line = r.random() < 0.5
@@ -786,7 +786,7 @@ def para_pts(a, w=1.5, d=1.0):
     return {"A": A, "B": B, "C": C, "D": D}
 
 
-@template(T, "basic", GT + "04", GT + "05")
+@template(T, "basic", GT + "04", GT + "05", weight=2)
 def parallelogram_basic(r):
     """math-pat-angles-parallel-quadrilaterals"""
     a = r.randint(35, 145)
@@ -1336,235 +1336,12 @@ def _(q):
 
 # ============================================================ PERPENDICULAR AND PARALLEL LINES
 
-def stair_poly(xs, ys):
-    """Rectilinear 'staircase' polygon with len(xs) steps (all sides on distinct lines)."""
-    k = len(xs)
-    pts = [(0, 0), (xs[-1], 0)]
-    for i in range(k):
-        pts.append((xs[k - 1 - i], ys[i]))
-        pts.append((xs[k - 2 - i] if i < k - 1 else 0, ys[i]))
-    return pts
-
-
 def rot(p, deg):
     c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg))
     return (p[0] * c - p[1] * s, p[0] * s + p[1] * c)
 
 
-def stair_params(r, kmin=1, kmax=3):
-    k = r.randint(kmin, kmax)
-    xs = sorted(r.sample(range(1, 9), k))
-    ys = sorted(r.sample(range(1, 9), k))
-    return xs, ys, r.choice([0, 0, 15, -20, 30, 70])
-
-
-def poly_scene(pts, rotation, marks=True, w=330, h=230):
-    P = [rot(p, rotation) for p in pts]
-    sc = Scene(w=w, h=h, pad=32)
-    names = "ABCDEFGH"[:len(P)]
-    for n, p in zip(names, P):
-        sc.add(n, *p)
-    sc.poly(list(names))
-    cen = (sum(p[0] for p in P) / len(P), sum(p[1] for p in P) / len(P))
-    for n in names:
-        sc.label(n, away=cen, off=14)
-    if marks:
-        m = len(P)
-        for i, n in enumerate(names):
-            sc.right(n, names[(i - 1) % m], names[(i + 1) % m])
-    return sc, names
-
-
-def sides_of(pts):
-    n = len(pts)
-    return [(pts[i], pts[(i + 1) % n]) for i in range(n)]
-
-
-def vecs_rel(a, b):
-    """Return (dot, cross) of two segments, exact for integer coordinates."""
-    va, vb = (a[1][0] - a[0][0], a[1][1] - a[0][1]), (b[1][0] - b[0][0], b[1][1] - b[0][1])
-    return va[0] * vb[0] + va[1] * vb[1], va[0] * vb[1] - va[1] * vb[0]
-
-
-@template(T, "basic", GP + "01")
-def pp_count_sides(r):
-    """Sides parallel / perpendicular to a given side"""
-    xs, ys, rotn = stair_params(r, 1, 3)
-    pts = stair_poly(xs, ys)
-    n = len(pts)
-    i = r.randrange(n)
-    kind = r.choice(["parallel", "perpendicular"])
-    names = "ABCDEFGH"[:n]
-    sd = sides_of(pts)
-    cnt = sum(1 for j in range(n) if j != i and (vecs_rel(sd[i], sd[j])[1] == 0 if kind == "parallel" else vecs_rel(sd[i], sd[j])[0] == 0))
-    if cnt == 0:
-        return None
-    sc, _ = poly_scene(pts, rotn)
-    nm = r.choice(NAMES)
-    sidename = names[i] + names[(i + 1) % n]
-    stem = (f"{nm} draws the figure shown, which has {n} sides and every angle is a right angle (or a reflex 270°). "
-            f"How many sides of the figure are {kind} to side {sidename}?")
-    others = n - 1
-    wr = [W(cnt + 1, "counted_the_side_itself", "Counted side " + sidename + " itself."),
-          W(n // 2 if n // 2 != cnt else None, "halved_the_sides", "Guessed half of the sides."),
-          W((n - 1 - cnt) if (n - 1 - cnt) not in (0, cnt) else None, "counted_the_other_kind", "Counted the sides of the other kind."),
-          W(cnt - 1 if cnt > 1 else None, "missed_one_side", "Missed one side."),
-          W(cnt + 2, "miscount", "Counted extra sides.")]
-    return mk(pp_count_sides, stem, cnt, wr,
-              [f"Sides {kind} to {sidename}: " + ", ".join(names[j] + names[(j + 1) % n] for j in range(n)
-                                                           if j != i and (vecs_rel(sd[i], sd[j])[1] == 0 if kind == "parallel" else vecs_rel(sd[i], sd[j])[0] == 0)),
-               f"There are {cnt}."], {"xs": xs, "ys": ys, "i": i, "kind": kind}, sc.svg("Rectilinear figure"),
-              show=lambda v: str(int(v)), maxv=8)
-
-
-@checker(pp_count_sides)
-def _(p):
-    pts = stair_poly(p["xs"], p["ys"])
-    sd = sides_of(pts)
-    c = 0
-    for j, s in enumerate(sd):
-        if j == p["i"]:
-            continue
-        d, x = vecs_rel(sd[p["i"]], s)
-        c += (x == 0) if p["kind"] == "parallel" else (d == 0)
-    return F(c)
-
-
-@template(T, "intermediate", GP + "01")
-def pp_count_pairs(r):
-    """Pairs of parallel / perpendicular sides in a figure"""
-    xs, ys, rotn = stair_params(r, 2, 3)
-    pts = stair_poly(xs, ys)
-    n = len(pts)
-    kind = r.choice(["parallel", "perpendicular"])
-    sd = sides_of(pts)
-    cnt = sum(1 for i in range(n) for j in range(i + 1, n)
-              if (vecs_rel(sd[i], sd[j])[1] == 0 if kind == "parallel" else vecs_rel(sd[i], sd[j])[0] == 0))
-    sc, names = poly_scene(pts, rotn)
-    nm = r.choice(NAMES)
-    stem = (f"The figure below has {n} sides. All its angles are right angles or 270°. {nm} counts the pairs of {kind} sides "
-            f"(any two sides that lie on {kind} lines count as a pair, and no two sides lie on the same line). How many pairs are there?")
-    h = sum(1 for s in sd if s[0][1] == s[1][1])
-    v = n - h
-    total_pairs = n * (n - 1) // 2
-    wr = [W(n // 2 * (n // 2 - 1) // 2 * 2 if False else (h + v) , "counted_sides_not_pairs", "Counted sides instead of pairs."),
-          W(h * v if kind == "parallel" else h * (h - 1) // 2 + v * (v - 1) // 2, "counted_the_other_kind", "Counted the pairs of the other kind."),
-          W(cnt * 2, "counted_each_pair_twice", "Counted each pair twice."),
-          W(cnt - 1, "missed_one_pair", "Missed one pair."), W(total_pairs, "counted_all_pairs", "Counted every pair of sides.")]
-    return mk(pp_count_pairs, stem, cnt, wr,
-              [f"There are {h} horizontal-direction sides and {v} vertical-direction sides (perpendicular to each other).",
-               ("Parallel pairs: each direction gives " + f"{h}×{h - 1}÷2 = {h * (h - 1) // 2} and {v}×{v - 1}÷2 = {v * (v - 1) // 2}") if kind == "parallel"
-               else f"Perpendicular pairs: one side of each direction → {h} × {v}", f"Total = {cnt}"],
-              {"xs": xs, "ys": ys, "kind": kind}, sc.svg("Rectilinear figure"), show=lambda v_: str(int(v_)), maxv=80)
-
-
-@checker(pp_count_pairs)
-def _(p):
-    pts = stair_poly(p["xs"], p["ys"])
-    sd = sides_of(pts)
-    c = 0
-    for i in range(len(sd)):
-        for j in range(i + 1, len(sd)):
-            d, x = vecs_rel(sd[i], sd[j])
-            c += (x == 0) if p["kind"] == "parallel" else (d == 0)
-    return F(c)
-
-
-@template(T, "competent", GP + "01")
-def pp_grid_lines(r):
-    """Pairs of parallel / perpendicular lines in a divided rectangle"""
-    m, n = r.randint(1, 4), r.randint(1, 4)
-    kind = r.choice(["parallel", "perpendicular"])
-    nm = r.choice(NAMES)
-    H, V = m + 2, n + 2
-    cnt = H * (H - 1) // 2 + V * (V - 1) // 2 if kind == "parallel" else H * V
-    f = Fig(300, 200)
-    x0, y0, w, h = 30, 24, 240, 150
-    f.rect(x0, y0, w, h)
-    for i in range(1, m + 1):
-        y = y0 + h * i / (m + 1)
-        f.line(x0, y, x0 + w, y)
-    for j in range(1, n + 1):
-        x = x0 + w * j / (n + 1)
-        f.line(x, y0, x, y0 + h)
-    stem = (f"{nm} draws a rectangle, then {m} line{'s' if m > 1 else ''} across it parallel to the length and "
-            f"{n} line{'s' if n > 1 else ''} parallel to the breadth, each from one side to the opposite side (see figure). "
-            f"Counting the four sides of the rectangle as lines too, how many pairs of {kind} lines are there?")
-    wr = [W(H * V if kind == "parallel" else H * (H - 1) // 2 + V * (V - 1) // 2, "counted_the_other_kind", "Counted the pairs of the other kind."),
-          W(cnt - (H - 1 if kind == "parallel" else 0) if cnt - (H - 1) > 0 else None, "x", ""),
-          W((m + n) * 2 if (m + n) * 2 != cnt else None, "counted_inner_lines_only", "Worked with the inner lines only."),
-          W(((H - 1) * (V - 1)) if kind == "perpendicular" else (m * (m - 1) // 2 + n * (n - 1) // 2), "left_out_the_sides", "Left out the sides of the rectangle."),
-          W(cnt + H, "miscount", "Miscounted.")]
-    wr = [w for w in wr if w[1] != "x" and w[0]]
-    return mk(pp_grid_lines, stem, cnt, wr,
-              [f"Lines parallel to the length: {m} + 2 = {H}. Lines parallel to the breadth: {n} + 2 = {V}.",
-               (f"Parallel pairs = {H}×{H - 1}÷2 + {V}×{V - 1}÷2 = {cnt}") if kind == "parallel" else f"Perpendicular pairs = {H} × {V} = {cnt}"],
-              {"m": m, "n": n, "kind": kind}, f.svg("Rectangle divided by lines"), show=lambda v: str(int(v)), maxv=200)
-
-
-@checker(pp_grid_lines)
-def _(p):
-    lines = [("h", i) for i in range(p["m"] + 2)] + [("v", j) for j in range(p["n"] + 2)]
-    c = 0
-    for i in range(len(lines)):
-        for j in range(i + 1, len(lines)):
-            same = lines[i][0] == lines[j][0]
-            c += same if p["kind"] == "parallel" else (not same)
-    return F(c)
-
-
-@template(T, "competent", GP + "01")
-def pp_grid_points(r):
-    """Points on a grid that make a line perpendicular to AB"""
-    dx, dy = r.choice([(2, 1), (3, 1), (1, 2), (3, 2), (2, 3), (1, 3), (1, 1), (2, 5)])
-    px, py = -dy, dx
-    Ax, Ay = r.randint(3, 6), r.randint(3, 6)
-    A, B = (Ax, Ay), (Ax + dx, Ay + dy)
-    cands = []
-    good = [(Ax + px, Ay + py), (Ax - px, Ay - py), (Ax + 2 * px, Ay + 2 * py), (Ax - 2 * px, Ay - 2 * py)]
-    bad = [(Ax + px + 1, Ay + py), (Ax + px, Ay + py + 1), (Ax + dx, Ay + dy + 1 + 0), (Ax - dx, Ay - dy), (Ax + 2 * dx, Ay + 2 * dy),
-           (Ax + px - 1, Ay + py + 1), (Ax - px + 1, Ay - py), (Ax + py, Ay + px)]
-    inside = lambda p_: 0 <= p_[0] <= 9 and 0 <= p_[1] <= 9 and p_ != A and p_ != B
-    good = [g for g in good if inside(g)]
-    bad = [b for b in bad if inside(b) and (b[0] - Ax) * dx + (b[1] - Ay) * dy != 0]
-    k = r.randint(1, 3)
-    if len(good) < k or len(bad) < 4 - k:
-        return None
-    pts = r.sample(good, k) + r.sample(bad, 4 - k)
-    if len(set(pts)) < 4:
-        return None
-    r.shuffle(pts)
-    f = Fig(300, 296)
-    s_, ox, oy = 26, 30, 262
-    X = lambda x: ox + x * s_
-    Y = lambda y: oy - y * s_
-    for i in range(10):
-        f.line(X(i), Y(0), X(i), Y(9), width=0.5)
-        f.line(X(0), Y(i), X(9), Y(i), width=0.5)
-    for i in range(10):
-        f.text(X(i), Y(0) + 11, str(i), size=10)
-        f.text(X(0) - 11, Y(i), str(i), size=10)
-    f.line(*(X(A[0]), Y(A[1])), *(X(B[0]), Y(B[1])), width=2)
-    f.dot(X(A[0]), Y(A[1]), 4); f.dot(X(B[0]), Y(B[1]), 4)
-    f.text(X(A[0]) - 10, Y(A[1]) + 12, "A", bold=True); f.text(X(B[0]) + 10, Y(B[1]) - 10, "B", bold=True)
-    for lab, p_ in zip("PQRS", pts):
-        f.dot(X(p_[0]), Y(p_[1]), 4)
-        f.text(X(p_[0]) + 10, Y(p_[1]) - 9, lab, bold=True)
-    cnt = sum(1 for p_ in pts if (p_[0] - Ax) * dx + (p_[1] - Ay) * dy == 0)
-    stem = (f"On the square grid, A is at ({Ax}, {Ay}) and B is at ({Ax + dx}, {Ay + dy}). "
-            f"For how many of the points P, Q, R and S is the line joining the point to A perpendicular to AB?")
-    wr = [W(4 - cnt if 4 - cnt != cnt else None, "counted_the_other_points", "Counted the points that are not perpendicular."),
-          W(cnt + 1, "miscount", "Counted one extra point."), W(cnt - 1, "miscount", "Missed one point."), W(cnt + 2, "miscount", "Miscounted.")]
-    return mk(pp_grid_points, stem, cnt, wr,
-              [f"AB goes {dx} across and {dy} up. A perpendicular line goes {dy} across and {dx} the other way (or a multiple).",
-               f"Points that work: {cnt}"], {"A": list(A), "d": [dx, dy], "pts": [list(q) for q in pts]}, f.svg("Grid with points"),
-              show=lambda v: str(int(v)), maxv=4)
-
-
-@checker(pp_grid_points)
-def _(p):
-    (ax, ay), (dx, dy) = p["A"], p["d"]
-    return F(sum(1 for (x, y) in p["pts"] if (x - ax) * dx + (y - ay) * dy == 0))
+# (the perpendicular and parallel line templates are with the grid helpers, further down)
 
 
 # ============================================================ RECTANGLE AND SQUARE
@@ -2550,76 +2327,6 @@ def _(p):
     return F(sum({"square": 4, "triangle": 3, "pentagon": 5}[k] * v for k, v in p["cnt"].items()))
 
 
-def grid_lines_fig(m, n, cell=34):
-    f = Fig(m * cell + 20, n * cell + 20)
-    for i in range(m + 1):
-        f.line(10 + i * cell, 10, 10 + i * cell, 10 + n * cell, width=1.4)
-    for j in range(n + 1):
-        f.line(10, 10 + j * cell, 10 + m * cell, 10 + j * cell, width=1.4)
-    return f.svg("Grid")
-
-
-@template(T, "competent", G2 + "03")
-def count_squares_grid(r):
-    """Count the squares of all sizes in a grid"""
-    m, n = r.randint(2, 5), r.randint(2, 5)
-    ans = sum((m - k + 1) * (n - k + 1) for k in range(1, min(m, n) + 1))
-    nm = r.choice(NAMES)
-    stem = f"{nm} draws a rectangular grid of squares that is {m} squares wide and {n} squares tall. How many squares of any size can be found in the grid?"
-    unit_ = m * n
-    wr = [W(unit_, "counted_small_squares_only", "Counted only the smallest squares."),
-          W(sum(k * k for k in range(1, min(m, n) + 1)), "used_square_numbers", "Used 1² + 2² + … as if the grid were square."),
-          W(ans + min(m, n), "counted_extra", "Counted extra large squares."), W(ans - 1, "missed_one", "Missed one square."), W(unit_ + min(m, n), "x", "")]
-    wr = [w_ for w_ in wr if w_[1] != "x"]
-    return mk(count_squares_grid, stem, ans, wr,
-              [f"1 × 1 squares: {m} × {n} = {m * n}"] + [f"{k} × {k} squares: {m - k + 1} × {n - k + 1} = {(m - k + 1) * (n - k + 1)}" for k in range(2, min(m, n) + 1)] + [f"Total = {ans}"],
-              {"m": m, "n": n}, grid_lines_fig(m, n), show=lambda v: str(int(v)), maxv=100)
-
-
-@checker(count_squares_grid)
-def _(p):
-    m, n = p["m"], p["n"]
-    c = 0
-    for x in range(m):
-        for y in range(n):
-            for k in range(1, 6):
-                if x + k <= m and y + k <= n:
-                    c += 1
-    return F(c)
-
-
-@template(T, "competent", G2 + "03")
-def count_rectangles_grid(r):
-    """Count the rectangles (including squares) in a grid"""
-    m, n = r.randint(1, 4), r.randint(2, 4)
-    ans = (m * (m + 1) // 2) * (n * (n + 1) // 2)
-    if ans < 3:
-        return None
-    nm = r.choice(NAMES)
-    stem = (f"{nm} draws a grid that is {m} square{'s' if m > 1 else ''} wide and {n} squares tall. "
-            f"How many rectangles, including squares, of any size are in the grid?")
-    wr = [W(m * n, "counted_small_squares_only", "Counted only the smallest squares."),
-          W(sum((m - k + 1) * (n - k + 1) for k in range(1, min(m, n) + 1)), "counted_squares_only", "Counted squares only, leaving out the rectangles that are not squares."),
-          W((m + 1) * (n + 1), "counted_points", "Counted the grid points."), W(ans + 1, "x", ""), W(m * (m + 1) // 2 + n * (n + 1) // 2, "added_instead_of_multiplied", "Added the numbers of ways instead of multiplying.")]
-    wr = [w_ for w_ in wr if w_[1] != "x"]
-    return mk(count_rectangles_grid, stem, ans, wr,
-              [f"Ways to pick the left and right edges: 1+2+…+{m} = {m * (m + 1) // 2}", f"Ways to pick the top and bottom edges: 1+2+…+{n} = {n * (n + 1) // 2}",
-               f"Rectangles = {m * (m + 1) // 2} × {n * (n + 1) // 2} = {ans}"], {"m": m, "n": n}, grid_lines_fig(m, n),
-              show=lambda v: str(int(v)), maxv=200)
-
-
-@checker(count_rectangles_grid)
-def _(p):
-    m, n = p["m"], p["n"]
-    c = 0
-    for x1 in range(m + 1):
-        for x2 in range(x1 + 1, m + 1):
-            for y1 in range(n + 1):
-                for y2 in range(y1 + 1, n + 1):
-                    c += 1
-    return F(c)
-
-
 @template(T, "competent", G2 + "05", G2 + "03")
 def pattern_first_n(r):
     """Repeating pattern: how many of one shape in the first N"""
@@ -2655,35 +2362,6 @@ def _(p):
     for i in range(p["N"]):
         c += p["pat"][i % p["p"]] == p["tgt"]
     return F(c)
-
-
-@template(T, "competent", G2 + "03")
-def triangles_from_apex(r):
-    """Count the triangles in a figure"""
-    k = r.randint(2, 6)
-    nm = r.choice(NAMES)
-    sc = Scene(w=320, h=200, pad=26)
-    sc.add("A", 0, 1.6); sc.add("B", -1.4, 0); sc.add("C", 1.4, 0)
-    sc.poly("ABC")
-    for i in range(k):
-        x = -1.4 + 2.8 * (i + 1) / (k + 1)
-        sc.add(f"p{i}", x, 0)
-        sc.seg("A", f"p{i}")
-    stem = (f"{nm} draws a triangle ABC and then {k} straight lines from A to points on BC, as shown. How many triangles are there in the figure?")
-    ans = (k + 1) * (k + 2) // 2
-    wr = [W(k + 1, "counted_small_triangles_only", "Counted only the smallest triangles."),
-          W((k + 1) * (k + 2), "counted_each_twice", "Counted each triangle twice."),
-          W(ans + k, "counted_extra", "Counted extra triangles."), W(ans - 1, "missed_one", "Missed one triangle."), W(2 * k + 1, "x", "")]
-    wr = [w_ for w_ in wr if w_[1] != "x"]
-    return mk(triangles_from_apex, stem, ans, wr,
-              [f"Points on the base: B, C and the {k} new points = {plural(k + 2, 'point')}", "Each pair of points on the base makes one triangle with A.",
-               f"{plural(k + 2, 'point')} → {k + 2} × {k + 1} ÷ 2 = {ans} triangles"], {"k": k}, sc.svg("Triangle with lines from A"), show=lambda v: str(int(v)), maxv=60)
-
-
-@checker(triangles_from_apex)
-def _(p):
-    pts = list(range(p["k"] + 2))
-    return F(sum(1 for i in pts for j in pts if i < j))
 
 
 # ============================================================ 3D SHAPES AND NETS
@@ -2973,7 +2651,7 @@ def painted_cube(r):
     wr = [w_ for w_ in wr if w_[1] != "x" and w_[0]]
     steps = {3: ["Only the 8 corner cubes touch three painted faces."], 2: [f"Each edge has (edge − 2) cubes with 2 painted faces; add over the 12 edges: 4 × ({x} + {y} + {z}) = {cnt}"],
              1: [f"Each face has (length − 2) × (width − 2) cubes with 1 painted face; add over the 6 faces = {cnt}"],
-             0: [f"The unpainted cubes form a ({a}−2) × ({b}−2) × ({c}−2) block = {x} × {y} × {z} = {cnt}"]}[k]
+             0: [f"The unpainted cubes form a block of ({a}−2) × ({b}−2) × ({c}−2) = {x} × {y} × {z} = {cnt}"]}[k]
     return mk(painted_cube, stem, cnt, wr, steps, {"a": a, "b": b, "c": c, "k": k}, None, show=lambda v: str(int(v)), maxv=2000)
 
 
@@ -3152,7 +2830,7 @@ PRISM_PYR = {"cube": ["cuboid", "square-based pyramid", "triangular prism"], "cu
              "cylinder": ["cone", "cuboid", "triangular prism"], "cone": ["cylinder", "square-based pyramid", "triangular pyramid"]}
 
 
-@template(T, "basic", G3 + "01", G3 + "02")
+@template(T, "basic", G3 + "01", G3 + "02", weight=2)
 def solid_from_faces(r):
     """math-pat-nets-and-solids"""
     name = r.choice(list(FACE_DESC))
@@ -3871,50 +3549,578 @@ def line_perp_par_grid_slope(r):
 checker(line_perp_par_grid_slope)(_lines_check)
 
 
-@template(T, "competent", GP + "02")
-def count_perpendicular_pairs(r):
-    """Count the pairs of perpendicular lines among four lines drawn on a grid."""
-    name = r.choice(NAMES)
-    pool = [(1, 0), (0, 1), (1, 1), (1, -1), (1, 2), (2, -1), (2, 1), (-1, 2)]
-    vecs = [r.choice(pool) for _ in range(4)]
-    pairs = [(i, j) for i in range(4) for j in range(i + 1, 4)]
-    perp = sum(1 for i, j in pairs if _dot(vecs[i], vecs[j]) == 0)
-    par = sum(1 for i, j in pairs if _cross(vecs[i], vecs[j]) == 0)
-    if perp < 1 or par == perp or len({perp, par, 2 * perp}) < 3:
+# ---------------------------------------------------------------- perpendicular and parallel lines: the paper frames
+# Bank review (20 Nov 2026): 2025-26 papers ask "which two lines are perpendicular / parallel?" (about half the items)
+# and "how many of the letters have both kinds of line?" (about a quarter). Lines are labelled P-T, never A-D, because
+# the option buttons are lettered A-D.
+
+_PAIR_LABELS = "PQRST"
+
+
+def _rel(u, v):
+    return "perp" if _dot(u, v) == 0 else "par" if _cross(u, v) == 0 else None
+
+
+def _meet_angle(u, v):
+    """The smaller angle between two lines with directions u and v, in degrees (unrounded)."""
+    a = abs(math.degrees(math.atan2(u[1], u[0]) - math.atan2(v[1], v[0]))) % 180
+    return min(a, 180 - a)
+
+
+def _about(a):
+    return f"{round(a)}°" if abs(a - round(a)) < 1e-9 else f"about {round(a)}°"
+
+
+def _pair_show(v):
+    i, j = divmod(int(v), 10)
+    return f"{_PAIR_LABELS[i - 1]} and {_PAIR_LABELS[j - 1]}"
+
+
+def _steps_desc(v):
+    """How a grid line runs, for the worked solution (y grows downwards in the figure)."""
+    g = math.gcd(abs(v[0]), abs(v[1]))
+    dx, dy = v[0] // g, v[1] // g
+    if dx < 0 or (dx == 0 and dy < 0):
+        dx, dy = -dx, -dy
+    if dy == 0:
+        return "goes straight across"
+    if dx == 0:
+        return "goes straight up and down"
+    return f"goes {dx} across for every {abs(dy)} {'down' if dy > 0 else 'up'}"
+
+
+def _slope(a, b):
+    """Gradient of segment ab as a Fraction, or None for an up-and-down line (checker route: no dot products)."""
+    return None if b[0] == a[0] else F(b[1] - a[1], b[0] - a[0])
+
+
+def _slope_rel(s, t):
+    if s == t:
+        return "par"
+    if (s is None and t == 0) or (t is None and s == 0) or (s is not None and t is not None and s * t == -1):
+        return "perp"
+    return None
+
+
+def _pick_pair(r, fn, pool, n, kind, slanted_answer=False):
+    vecs = [r.choice(pool) for _ in range(n)]
+    pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
+    hits = [(i, j) for i, j in pairs if _rel(vecs[i], vecs[j]) == kind]
+    if len(hits) != 1:
         return None
-    ks = [r.choice([1, 2]) if abs(v[0]) + abs(v[1]) <= 2 else 1 for v in vecs]
-    vecs = [(v[0] * k, v[1] * k) for v, k in zip(vecs, ks)]
-    vecs = [(-x, -y) if r.random() < 0.5 else (x, y) for x, y in vecs]
-    regions = r.sample(range(6), 4)
-    segs = []
-    for rg, v in zip(regions, vecs):
-        if abs(v[0]) > 4 or abs(v[1]) > 4:
+    a, b = hits[0]
+    if slanted_answer and 0 in (vecs[a][0] * vecs[a][1], vecs[b][0] * vecs[b][1]):
+        return None
+    if kind == "perp" and not any(_rel(vecs[i], vecs[j]) == "par" or abs(_meet_angle(vecs[i], vecs[j]) - 90) < 30
+                                  for i, j in pairs if (i, j) != (a, b)):
+        return None  # needs at least one tempting wrong pair
+    scaled = []
+    for v in vecs:
+        top = 4 // max(abs(v[0]), abs(v[1]))
+        k = r.randint(max(1, min(2, top)), top)
+        scaled.append((v[0] * k, v[1] * k) if r.random() < 0.5 else (-v[0] * k, -v[1] * k))
+    regions = r.sample(range(6), n)
+    segs = [_seg_in_region(r, rg, v) for rg, v in zip(regions, scaled)]
+    for i, j in pairs:  # two parallel pieces of the same straight line would read as one broken line
+        if _rel(scaled[i], scaled[j]) == "par":
+            w = (segs[j][0][0] - segs[i][0][0], segs[j][0][1] - segs[i][0][1])
+            if _cross(w, scaled[i]) == 0:
+                return None
+    L = _PAIR_LABELS
+    word = "perpendicular" if kind == "perp" else "parallel"
+    wrong = []
+    for i, j in pairs:
+        if (i, j) == (a, b):
+            continue
+        rel, ang = _rel(scaled[i], scaled[j]), _meet_angle(scaled[i], scaled[j])
+        if kind == "perp":
+            if rel == "par":
+                wrong.append((0, (10 * (i + 1) + j + 1, "chose_a_parallel_pair",
+                                  f"Lines {L[i]} and {L[j]} are parallel: they slope the same way and never meet.")))
+            else:
+                wrong.append((1 + abs(90 - ang) / 100, (10 * (i + 1) + j + 1, "chose_lines_not_at_a_right_angle",
+                                                        f"Lines {L[i]} and {L[j]} would meet at {_about(ang)}, not at a right angle.")))
+        else:
+            if rel == "perp":
+                wrong.append((1.5, (10 * (i + 1) + j + 1, "chose_a_perpendicular_pair",
+                                    f"Lines {L[i]} and {L[j]} are perpendicular: they would meet at a right angle.")))
+            else:
+                wrong.append((ang / 100, (10 * (i + 1) + j + 1, "chose_lines_that_would_meet",
+                                          f"Lines {L[i]} and {L[j]} would meet at {_about(ang)} if they were drawn longer, "
+                                          f"so they are not parallel.")))
+    wrong = [w for _, w in sorted(wrong, key=lambda x: x[0])]
+    names = ", ".join(L[:n - 1]) + f" and {L[n - 1]}"
+    name = r.choice(NAMES)
+    stem = f"{name} draws {['four', 'five'][n - 4]} lines, {names}, on a square grid. Which two lines are {word} to each other?"
+    rule = ("Perpendicular lines meet at a right angle (or would, if they were drawn longer)." if kind == "perp"
+            else "Parallel lines slope the same way, so they never meet however long they are drawn.")
+    steps = [rule, f"Line {L[a]} {_steps_desc(scaled[a])}. Line {L[b]} {_steps_desc(scaled[b])}.",
+             (f"Turning line {L[a]} through a right angle gives the direction of line {L[b]}, so lines {L[a]} and {L[b]} "
+              f"are perpendicular.") if kind == "perp" else f"So lines {L[a]} and {L[b]} are parallel."]
+    return build(fn, stem, 10 * (a + 1) + b + 1, wrong, steps,
+                 {"segs": [[list(p), list(q)] for p, q in segs], "kind": kind},
+                 _pair_show, whole=True, auto_slips=False, figure=_pair_fig(segs))
+
+
+def _pair_fig(segs):
+    """The lines one square in from the edge of the grid, each labelled beside its middle (above it, or to its left)."""
+    cell, pad = 17, 8
+    f = shape_grid(16, 11, [], cell=cell, pad_tl=pad, pad_br=pad)
+    for i, (p, q) in enumerate(segs):
+        x1, y1 = pad + (p[0] + 1) * cell, pad + (p[1] + 1) * cell
+        x2, y2 = pad + (q[0] + 1) * cell, pad + (q[1] + 1) * cell
+        f.line(x1, y1, x2, y2, width=2.4)
+        d = math.hypot(x2 - x1, y2 - y1)
+        nx, ny = -(y2 - y1) / d, (x2 - x1) / d
+        if ny > 0 or (ny == 0 and nx > 0):
+            nx, ny = -nx, -ny
+        f.text((x1 + x2) / 2 + nx * 12, (y1 + y2) / 2 + ny * 12, _PAIR_LABELS[i], size=14, bold=True)
+    return f.svg("Lines on a square grid")
+
+
+def _pick_pair_check(p):
+    s = [_slope(tuple(a), tuple(b)) for a, b in p["segs"]]
+    hits = [10 * (i + 1) + j + 1 for i in range(len(s)) for j in range(i + 1, len(s)) if _slope_rel(s[i], s[j]) == p["kind"]]
+    return F(hits[0]) if len(hits) == 1 else None
+
+
+@template(T, "basic", GP + "01")
+def pp_pick_pair(r):
+    """Which two of four lines on a square grid are perpendicular / parallel (straight across, up-and-down and 45° lines)."""
+    return _pick_pair(r, pp_pick_pair, [(1, 0), (0, 1), (1, 1), (1, -1), (1, 2), (2, 1)], 4, r.choice(["perp", "par"]))
+
+
+checker(pp_pick_pair)(_pick_pair_check)
+
+
+@template(T, "competent", GP + "01", GP + "02")
+def pp_pick_pair_slanted(r):
+    """Which two of five lines on a square grid are perpendicular / parallel; the answer is a pair of slanting lines."""
+    pool = [(1, 0), (0, 1), (1, 1), (1, -1), (1, 2), (-2, 1), (2, 1), (-1, 2), (1, 3), (-3, 1), (3, 1), (-1, 3)]
+    return _pick_pair(r, pp_pick_pair_slanted, pool, 5, r.choice(["perp", "par"]), slanted_answer=True)
+
+
+checker(pp_pick_pair_slanted)(_pick_pair_check)
+
+
+# capital letters drawn on a square grid; each stroke is one straight line (x right, y down). No A-D: the option buttons
+# are lettered A-D.
+_LETTERS = {
+    "E": [((0, 0), (0, 4)), ((0, 0), (3, 0)), ((0, 2), (2, 2)), ((0, 4), (3, 4))],
+    "F": [((0, 0), (0, 4)), ((0, 0), (3, 0)), ((0, 2), (2, 2))],
+    "H": [((0, 0), (0, 4)), ((3, 0), (3, 4)), ((0, 2), (3, 2))],
+    "I": [((0, 0), (2, 0)), ((1, 0), (1, 4)), ((0, 4), (2, 4))],
+    "J": [((0, 0), (3, 0)), ((2, 0), (2, 4)), ((0, 4), (2, 4))],
+    "K": [((0, 0), (0, 4)), ((0, 2), (2, 0)), ((0, 2), (2, 4))],
+    "L": [((0, 0), (0, 4)), ((0, 4), (3, 4))],
+    "M": [((0, 4), (0, 0)), ((0, 0), (2, 3)), ((2, 3), (4, 0)), ((4, 0), (4, 4))],
+    "N": [((0, 4), (0, 0)), ((0, 0), (3, 4)), ((3, 4), (3, 0))],
+    "O": [((0, 0), (3, 0)), ((3, 0), (3, 4)), ((3, 4), (0, 4)), ((0, 4), (0, 0))],
+    "P": [((0, 4), (0, 0)), ((0, 0), (3, 0)), ((3, 0), (3, 2)), ((3, 2), (0, 2))],
+    "T": [((0, 0), (4, 0)), ((2, 0), (2, 4))],
+    "U": [((0, 0), (0, 4)), ((0, 4), (3, 4)), ((3, 4), (3, 0))],
+    "V": [((0, 0), (2, 4)), ((2, 4), (4, 0))],
+    "X": [((0, 0), (4, 4)), ((4, 0), (0, 4))],
+    "Y": [((0, 0), (2, 2)), ((4, 0), (2, 2)), ((2, 2), (2, 4))],
+    "Z": [((0, 0), (3, 0)), ((3, 0), (0, 4)), ((0, 4), (3, 4))],
+}
+
+
+def _letter_props(c):
+    """(has a pair of perpendicular strokes, number of pairs of parallel strokes, has a right angle between slanting strokes)."""
+    v = [(b[0] - a[0], b[1] - a[1]) for a, b in _LETTERS[c]]
+    pairs = [(v[i], v[j]) for i in range(len(v)) for j in range(i + 1, len(v))]
+    perp = [(x, y) for x, y in pairs if _dot(x, y) == 0]
+    slant_perp = any(x[0] * x[1] != 0 for x, _ in perp)
+    return bool(perp), sum(1 for x, y in pairs if _cross(x, y) == 0), slant_perp
+
+
+def _letters_fig(word):
+    cell, pad = 12, 8
+    widths = [max(p[0] for s in _LETTERS[c] for p in s) for c in word]
+    cols = 2 + sum(widths) + 2 * (len(word) - 1)
+    f = shape_grid(cols, 6, [], cell=cell, pad_tl=pad, pad_br=pad)
+    x0 = 1
+    for c, w in zip(word, widths):
+        for a, b in _LETTERS[c]:
+            f.line(pad + (x0 + a[0]) * cell, pad + (1 + a[1]) * cell, pad + (x0 + b[0]) * cell, pad + (1 + b[1]) * cell, width=3.4)
+        x0 += w + 2
+    return f.svg("Letters drawn on a square grid")
+
+
+def _letter_line(c):
+    perp, npar, _ = _letter_props(c)
+    return (f"{c}: {'has' if perp else 'no'} perpendicular lines, "
+            + ("no parallel lines" if npar == 0 else f"{plural(npar, 'pair')} of parallel lines"))
+
+
+def _letters_q(r, fn, n, ask):
+    word = "".join(r.sample(sorted(_LETTERS), n))
+    props = {c: _letter_props(c) for c in word}
+    count = lambda pred: sum(1 for c in word if pred(*props[c]))
+    letters = ", ".join(word[:-1]) + f" and {word[-1]}"
+    if ask == "both":
+        ans = count(lambda pe, np_, sp: pe and np_ > 0)
+        q = "How many of the letters have both perpendicular and parallel lines?"
+        wrong = [(count(lambda pe, np_, sp: pe), "counted_letters_with_perpendicular_lines",
+                  "Counted the letters with perpendicular lines without checking for parallel lines too."),
+                 (count(lambda pe, np_, sp: np_ > 0), "counted_letters_with_parallel_lines",
+                  "Counted the letters with parallel lines without checking for perpendicular lines too.")]
+    elif ask == "two_pairs":
+        ans = count(lambda pe, np_, sp: np_ >= 2)
+        q = "How many of the letters have more than one pair of parallel lines?"
+        wrong = [(count(lambda pe, np_, sp: np_ >= 1), "counted_letters_with_one_pair",
+                  "Also counted letters with only one pair of parallel lines."),
+                 (count(lambda pe, np_, sp: np_ == 1), "counted_exactly_one_pair",
+                  "Counted the letters with exactly one pair of parallel lines.")]
+    else:  # perpendicular lines but no parallel lines
+        ans = count(lambda pe, np_, sp: pe and np_ == 0)
+        q = "How many of the letters have perpendicular lines but no parallel lines?"
+        wrong = [(count(lambda pe, np_, sp: pe and np_ == 0 and not sp), "missed_right_angles_between_slanting_lines",
+                  "Missed the right angles between slanting lines (count the squares: they meet at a right angle too)."),
+                 (count(lambda pe, np_, sp: pe), "forgot_no_parallel_lines",
+                  "Counted every letter with perpendicular lines, including those that also have parallel lines.")]
+    if not 1 <= ans <= n - 1:
+        return None
+    wrong += [(ans + 1, "counted_one_letter_too_many", "Counted one letter too many."),
+              (ans - 1, "missed_one_letter", "Missed one of the letters."),
+              (ans + 2, "miscounted_the_letters", "Miscounted the letters.")]
+    stem = f"The letters {letters} are drawn on a square grid. {q}"
+    steps = [_letter_line(c) for c in word] + [f"So the answer is {ans}."]
+    return build(fn, stem, ans, [w for w in wrong if w[0] <= n], steps, {"letters": word, "ask": ask}, str,
+                 whole=True, auto_slips=False, figure=_letters_fig(word))
+
+
+def _letters_check(p):
+    """Counts again from the strokes, with gradients instead of dot products."""
+    out = 0
+    for c in p["letters"]:
+        s = [_slope(a, b) for a, b in _LETTERS[c]]
+        rels = [_slope_rel(s[i], s[j]) for i in range(len(s)) for j in range(i + 1, len(s))]
+        perp, npar = "perp" in rels, rels.count("par")
+        out += {"both": perp and npar > 0, "two_pairs": npar >= 2, "perp_only": perp and npar == 0}[p["ask"]]
+    return F(out)
+
+
+@template(T, "intermediate", GP + "01")
+def pp_letters_both(r):
+    """How many of five letters on a grid have both perpendicular and parallel lines."""
+    return _letters_q(r, pp_letters_both, 5, "both")
+
+
+checker(pp_letters_both)(_letters_check)
+
+
+@template(T, "competent", GP + "01")
+def pp_letters_parallel_pairs(r):
+    """How many of six letters on a grid have more than one pair of parallel lines, or perpendicular but no parallel lines."""
+    return _letters_q(r, pp_letters_parallel_pairs, 6, r.choice(["two_pairs", "perp_only"]))
+
+
+checker(pp_letters_parallel_pairs)(_letters_check)
+
+
+# ---------------------------------------------------------------- 2D shapes on a grid: the paper frames
+# Bank review (20 Nov 2026): paper 2D-shape MCQs ask which grid shape is a rhombus / trapezium, what type a grid triangle
+# is, or which point completes a named triangle. These replace three counting puzzles with no paper analogue.
+
+def _quad_class(poly):
+    e = [(poly[(i + 1) % 4][0] - poly[i][0], poly[(i + 1) % 4][1] - poly[i][1]) for i in range(4)]
+    par = [_cross(e[0], e[2]) == 0, _cross(e[1], e[3]) == 0]
+    sq = [x * x + y * y for x, y in e]
+    if all(par):
+        rh, rect = len(set(sq)) == 1, _dot(e[0], e[1]) == 0
+        return "square" if rh and rect else "rhombus" if rh else "rectangle" if rect else "parallelogram"
+    return "trapezium" if any(par) else "kite"
+
+
+def _quad_shapes(r):
+    a, b = r.choice([(1, 2), (2, 1), (3, 1), (3, 2)])
+    w, h = r.randint(3, 4), r.randint(2, 3)
+    k = r.randint(1, 2)
+    t = r.randint(1, w - 2) if w > 2 else 1
+    return {
+        "rhombus": r.choice([[(a, 0), (2 * a, b), (a, 2 * b), (0, b)], [(0, 0), (2, 1), (3, 3), (1, 2)], [(1, 0), (3, 1), (4, 3), (2, 2)]]),
+        "rectangle": r.choice([[(0, 0), (w, 0), (w, h), (0, h)], [(1, 0), (3, 2), (2, 3), (0, 1)], [(2, 0), (3, 1), (1, 3), (0, 2)]]),
+        "parallelogram": r.choice([[(k, 0), (k + w, 0), (w, h), (0, h)], [(0, 0), (w, 0), (w + k, h), (k, h)], [(0, 1), (3, 0), (4, 2), (1, 3)]]),
+        "trapezium": r.choice([[(t, 0), (w - 1, 0), (w, h), (0, h)], [(0, 0), (w, 0), (w, h), (t, h)], [(0, 0), (w - 1, 0), (w, h), (0, h)]]),
+        "kite": r.choice([[(1, 0), (2, 1), (1, 3), (0, 1)], [(2, 0), (4, 1), (2, 3), (0, 1)], [(1, 0), (3, 1), (1, 2), (0, 1)]]),
+    }
+
+
+_QUAD_WHY = {
+    ("parallelogram", "rhombus"): "is a parallelogram, but its sides are not all the same length",
+    ("rectangle", "rhombus"): "is a rectangle: its sides are not all the same length",
+    ("trapezium", "rhombus"): "is a trapezium: only one pair of its sides is parallel",
+    ("kite", "rhombus"): "has no parallel sides",
+    ("parallelogram", "trapezium"): "has two pairs of parallel sides; a trapezium has exactly one pair",
+    ("rectangle", "trapezium"): "has two pairs of parallel sides; a trapezium has exactly one pair",
+    ("rhombus", "trapezium"): "has two pairs of parallel sides; a trapezium has exactly one pair",
+    ("kite", "trapezium"): "has no parallel sides",
+    ("trapezium", "parallelogram"): "has only one pair of parallel sides",
+    ("kite", "parallelogram"): "has no parallel sides",
+    ("parallelogram", "rectangle"): "is a parallelogram, but its angles are not right angles",
+    ("rhombus", "rectangle"): "is a rhombus: its angles are not right angles",
+    ("trapezium", "rectangle"): "has only one pair of parallel sides",
+    ("kite", "rectangle"): "has no parallel sides",
+}
+_QUAD_RULE = {
+    "rhombus": "A rhombus has 4 equal sides and its opposite sides are parallel.",
+    "trapezium": "A trapezium has exactly one pair of parallel sides.",
+    "parallelogram": "A parallelogram has two pairs of parallel sides.",
+    "rectangle": "A rectangle has two pairs of parallel sides and 4 right angles.",
+}
+_QUAD_OK = {"rhombus": {"rhombus", "square"}, "trapezium": {"trapezium"},
+            "parallelogram": {"parallelogram", "rhombus", "rectangle", "square"}, "rectangle": {"rectangle", "square"}}
+
+
+@template(T, "competent", G2 + "01", GT + "04")
+def grid_which_quadrilateral(r):
+    """math-pat-shapes-classify-2d. Which of four shapes on a square grid is a rhombus / trapezium / parallelogram / rectangle."""
+    target = r.choice(["rhombus", "trapezium", "parallelogram", "rectangle"])
+    shapes = _quad_shapes(r)
+    if any(_quad_class(p) != k for k, p in shapes.items()):
+        return None
+    decoys = [k for k in shapes if k not in _QUAD_OK[target]]
+    if target == "parallelogram":
+        decoys += ["trapezium"]  # only two classes are not parallelograms: use two different trapeziums
+        alt = _quad_shapes(r)["trapezium"]
+        if alt == shapes["trapezium"]:
             return None
-        segs.append(_seg_in_region(r, rg, v))
-    # lines P-S, not A-D: the answers are numbers on buttons lettered A-D (site review row 3)
-    ph = r.choice(["How many pairs of perpendicular lines are there among lines P, Q, R and S?",
-                   "Looking at all four lines, how many pairs of lines are perpendicular to each other?"])
-    stem = f"{name} draws four lines on a square grid. {ph}"
-    return build(count_perpendicular_pairs, stem, perp, [
-        (par, "counted_parallel_pairs", "Counted the parallel pairs instead of the perpendicular pairs."),
-        (2 * perp, "counted_each_pair_twice", "Counted each pair of lines twice (P with Q, then Q with P)."),
-        (perp + 1, "counted_one_pair_too_many", "Counted one pair too many."),
-        (perp - 1, "missed_one_pair", "Missed one pair."),
-    ], ["Check each pair of lines: do the steps across and up/down turn into each other with one reversed?",
-        f"There {'is' if perp == 1 else 'are'} {plural(perp, 'perpendicular pair')}."],
-        {"segs": [[list(a), list(b)] for a, b in segs]}, str, whole=True, auto_slips=False,
-        figure=_line_figure(None, segs, "PQRS"))
+    else:
+        alt = None
+    r.shuffle(decoys)
+    bad, used = [], set()
+    for k in decoys[:3]:
+        poly = alt if (k == "trapezium" and "trapezium" in used) else shapes[k]
+        used.add(k)
+        bad.append((poly, f"chose_a_{k}", f"That shape {_QUAD_WHY[(k, target)]}."))
+    if len(bad) < 3:
+        return None
+    name = r.choice(NAMES)
+    stem = f"{name} draws four shapes on a square grid. Which shape is {a_an(target)} {target}?"
+    steps = [_QUAD_RULE[target], "Count the squares along each side to check which sides are parallel and equal.",
+             f"Only one of the shapes is {a_an(target)} {target}."]
+    return _rect_options(r, grid_which_quadrilateral, shapes[target], bad, stem, steps, {"target": target}, None,
+                         cols=6, rows=5, cell=13)
 
 
-@checker(count_perpendicular_pairs)
+@checker(grid_which_quadrilateral)
 def _(p):
-    vs = [(b[0] - a[0], b[1] - a[1]) for a, b in p["segs"]]
-    n = 0
+    """Classifies again with gradients and side lengths (no dot or cross products)."""
+    def cls(poly):
+        pts = [tuple(v) for v in poly]
+        s = [_slope(pts[i], pts[(i + 1) % 4]) for i in range(4)]
+        ln = [(pts[(i + 1) % 4][0] - pts[i][0]) ** 2 + (pts[(i + 1) % 4][1] - pts[i][1]) ** 2 for i in range(4)]
+        two = s[0] == s[2] and s[1] == s[3]
+        one = (s[0] == s[2]) != (s[1] == s[3])
+        right = _slope_rel(s[0], s[1]) == "perp"
+        return {"rhombus": two and len(set(ln)) == 1, "trapezium": one, "parallelogram": two, "rectangle": two and right}[p["target"]]
+    ok = [i + 1 for i, o in enumerate(p["opts"]) if cls(o)]
+    return F(ok[0]) if len(ok) == 1 else None
+
+
+def _sq(u):
+    return u[0] * u[0] + u[1] * u[1]
+
+
+def _same_steps(u, v):
+    return sorted((abs(u[0]), abs(u[1]))) == sorted((abs(v[0]), abs(v[1])))
+
+
+def _countable(pts):
+    """Every pair of equal sides goes the same numbers of squares across and up, so a child can see they are equal."""
+    e = [(pts[(i + 1) % 3][0] - pts[i][0], pts[(i + 1) % 3][1] - pts[i][1]) for i in range(3)]
+    return all(_same_steps(e[i], e[j]) or _sq(e[i]) != _sq(e[j]) for i in range(3) for j in range(i + 1, 3))
+
+
+def _tri_info(pts):
+    """(right-angled corner index or None, isosceles?) of a lattice triangle."""
+    right = None
+    for i in range(3):
+        a, b, c = pts[i], pts[(i + 1) % 3], pts[(i + 2) % 3]
+        if _dot((b[0] - a[0], b[1] - a[1]), (c[0] - a[0], c[1] - a[1])) == 0:
+            right = i
+    e = [_sq((pts[(i + 1) % 3][0] - pts[i][0], pts[(i + 1) % 3][1] - pts[i][1])) for i in range(3)]
+    return right, len(set(e)) < 3
+
+
+def _tri_angles(pts):
+    out = []
+    for i in range(3):
+        a, b, c = pts[i], pts[(i + 1) % 3], pts[(i + 2) % 3]
+        u, v = (b[0] - a[0], b[1] - a[1]), (c[0] - a[0], c[1] - a[1])
+        out.append(math.degrees(math.acos(_dot(u, v) / math.sqrt(_sq(u) * _sq(v)))))
+    return out
+
+
+def _side_desc(u):
+    """How a side runs from a corner: '2 across and 1 down' (y grows downwards in the figure)."""
+    ax, ay = abs(u[0]), abs(u[1])
+    ud = "down" if u[1] > 0 else "up"
+    if ay == 0:
+        return f"{ax} across"
+    if ax == 0:
+        return f"{ay} {ud}"
+    return f"{ax} across and {ay} {ud}"
+
+
+def _equal_desc(u):
+    big, small = sorted((abs(u[0]), abs(u[1])), reverse=True)
+    return f"{big} squares along a grid line" if small == 0 else f"{big} squares one way and {small} the other way"
+
+
+_TRI_TYPES = ["equilateral triangle", "isosceles triangle", "right-angled triangle", "right-angled isosceles triangle"]
+
+
+@template(T, "competent", G2 + "01", GT + "01")
+def grid_triangle_type(r):
+    """math-pat-shapes-classify-2d. What type of triangle (isosceles or right-angled) a triangle drawn on a square grid is."""
+    pts = [(r.randint(0, 5), r.randint(0, 4)) for _ in range(3)]
+    if len(set(pts)) < 3 or _cross((pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]), (pts[2][0] - pts[0][0], pts[2][1] - pts[0][1])) == 0:
+        return None
+    e = [(pts[(i + 1) % 3][0] - pts[i][0], pts[(i + 1) % 3][1] - pts[i][1]) for i in range(3)]
+    if sum(1 for u in e if u[0] == 0 or u[1] == 0) >= 2 or not _countable(pts) or abs(_cross(e[0], e[1])) < 6:
+        return None  # two sides along grid lines is too easy; equal sides must be countable
+    right, iso = _tri_info(pts)
+    if (right is not None) == iso:
+        return None  # exactly one of the two types, so only one option is right
+    lab = r.choice("PQRS")
+    ans = 2 if iso else 3
+    wrong = [(1, "chose_equilateral", "Its three sides are not all the same length.")]
+    if iso:
+        wrong += [(3, "chose_right_angled", "None of its angles is a right angle."),
+                  (4, "chose_right_angled_isosceles", "It has two equal sides but no right angle.")]
+        i, j = next((i, j) for i in range(3) for j in range(i + 1, 3) if _sq(e[i]) == _sq(e[j]))
+        steps = [f"Two sides each go {_equal_desc(e[i])}, so they are the same length.",
+                 "None of the angles is a right angle.", f"Triangle {lab} is an isosceles triangle."]
+    else:
+        wrong += [(2, "chose_isosceles", "No two of its sides are the same length."),
+                  (4, "chose_right_angled_isosceles", "It has a right angle, but the two sides that make the right angle are not equal.")]
+        a, b, c = pts[right], pts[(right + 1) % 3], pts[(right + 2) % 3]
+        u, v = (b[0] - a[0], b[1] - a[1]), (c[0] - a[0], c[1] - a[1])
+        steps = [f"At one corner, one side goes {_side_desc(u)} and the other goes {_side_desc(v)}: "
+                 "one is the other turned through a right angle, so that corner is a right angle.",
+                 "The three sides all have different lengths.", f"Triangle {lab} is a right-angled triangle."]
+    f = shape_grid(6, 5, [pts], cell=24, pad_tl=12, pad_br=12, shade=0.12)
+    cx, cy = sum(x for x, _ in pts) / 3, sum(y for _, y in pts) / 3
+    f.text(12 + cx * 24, 12 + cy * 24 + 5, lab, size=14, bold=True)
+    name = r.choice(NAMES)  # the stem needs some variety: two questions in a tier may not share a stem
+    stem = f"{name} draws Triangle {lab} on a square grid. What type of triangle is Triangle {lab}?"
+    return build(grid_triangle_type, stem, ans, wrong, steps, {"pts": [list(p) for p in pts]},
+                 lambda v: _TRI_TYPES[int(v) - 1], whole=True, auto_slips=False, figure=f.svg("Triangle on a square grid"))
+
+
+@checker(grid_triangle_type)
+def _(p):
+    """Side lengths and angles in floating point (law of cosines), not dot products."""
+    (x1, y1), (x2, y2), (x3, y3) = p["pts"]
+    a, b, c = math.dist((x2, y2), (x3, y3)), math.dist((x1, y1), (x3, y3)), math.dist((x1, y1), (x2, y2))
+    iso = min(abs(a - b), abs(b - c), abs(a - c)) < 1e-9
+    a2, b2, c2 = sorted([a * a, b * b, c * c])
+    right = abs(a2 + b2 - c2) < 1e-9
+    if iso and not right:
+        return F(2)
+    if right and not iso:
+        return F(3)
+    return None
+
+
+@template(T, "competent", G2 + "01", GT + "01")
+def grid_point_triangle(r):
+    """Which point W, X, Y or Z, joined to two fixed points (E and F, G and H, ...), forms a right-angled (or isosceles) triangle."""
+    kind = r.choice(["right-angled", "isosceles"])
+    E = (r.randint(1, 3), r.randint(1, 5))
+    F_ = (E[0] + r.randint(2, 4), E[1] + r.choice([-2, -1, 0, 1, 2]))
+    if not 0 <= F_[1] <= 6 or F_[0] > 8:
+        return None
+    good, bad = [], []
+    for x in range(9):
+        for y in range(7):
+            P = (x, y)
+            if max(abs(x - E[0]), abs(y - E[1])) < 2 or max(abs(x - F_[0]), abs(y - F_[1])) < 2:
+                continue
+            tri = [E, F_, P]
+            if _cross((F_[0] - E[0], F_[1] - E[1]), (x - E[0], y - E[1])) == 0 or not _countable(tri):
+                continue
+            right, iso = _tri_info(tri)
+            ok = right is not None if kind == "right-angled" else iso
+            if ok:
+                good.append(P)
+            elif kind == "right-angled" and min(abs(a - 90) for a in _tri_angles(tri)) >= 12:
+                bad.append(P)
+            elif kind == "isosceles":
+                s = sorted(math.sqrt(_sq((q[0] - p_[0], q[1] - p_[1]))) for p_, q in [(E, F_), (E, P), (F_, P)])
+                if min(s[1] - s[0], s[2] - s[1]) >= 0.4:
+                    bad.append(P)
+    if not good or len(bad) < 3:
+        return None
+    cands = [r.choice(good)] + r.sample(bad, 3)
     for i in range(4):
         for j in range(i + 1, 4):
-            if _dot(vs[i], vs[j]) == 0:
-                n += 1
-    return F(n)
+            if max(abs(cands[i][0] - cands[j][0]), abs(cands[i][1] - cands[j][1])) < 2:
+                return None  # keep the labels apart
+    pos = r.randrange(4)
+    cands[0], cands[pos] = cands[pos], cands[0]
+    L = "WXYZ"
+    e_, f_ = r.choice(["EF", "GH", "JK", "MN"])
+    wrong = []
+    for i, P in enumerate(cands):
+        if i == pos:
+            continue
+        if kind == "right-angled":
+            big = max(_tri_angles([E, F_, P]))
+            wrong.append((i + 1, "no_right_angle", f"Triangle {e_}{f_}{L[i]} has no right angle (its largest angle is about "
+                                                   f"{round(big)}°)."))
+        else:
+            wrong.append((i + 1, "no_two_equal_sides", f"No two sides of triangle {e_}{f_}{L[i]} are the same length."))
+    P = cands[pos]
+    tri = [E, F_, P]
+    right, _ = _tri_info(tri)
+    if kind == "right-angled":
+        a, b, c = tri[right], tri[(right + 1) % 3], tri[(right + 2) % 3]
+        corner = [e_, f_, L[pos]][right]
+        steps = ["A right-angled triangle has one corner that is a right angle.",
+                 f"At {corner}, one side goes {_side_desc((b[0] - a[0], b[1] - a[1]))} and the other goes "
+                 f"{_side_desc((c[0] - a[0], c[1] - a[1]))}: they meet at a right angle.",
+                 f"So {L[pos]} forms a right-angled triangle with {e_} and {f_}."]
+    else:
+        e = {e_ + f_: (F_[0] - E[0], F_[1] - E[1]), f"{e_}{L[pos]}": (P[0] - E[0], P[1] - E[1]), f"{f_}{L[pos]}": (P[0] - F_[0], P[1] - F_[1])}
+        k = list(e)
+        i, j = next((i, j) for i in range(3) for j in range(i + 1, 3) if _sq(e[k[i]]) == _sq(e[k[j]]))
+        steps = ["An isosceles triangle has two equal sides.",
+                 f"{k[i]} and {k[j]} each go {_equal_desc(e[k[i]])}, so they are the same length.",
+                 f"So {L[pos]} forms an isosceles triangle with {e_} and {f_}."]
+    cell, pad = 24, 20
+    f = shape_grid(8, 6, [], cell=cell, pad_tl=pad, pad_br=pad)
+    X, Y = (lambda x: pad + x * cell), (lambda y: pad + y * cell)
+    f.line(X(E[0]), Y(E[1]), X(F_[0]), Y(F_[1]), width=2.6)
+    d = math.hypot(F_[0] - E[0], F_[1] - E[1])
+    ux, uy = (F_[0] - E[0]) / d, (F_[1] - E[1]) / d
+    for lab_, Q, (ox, oy) in [(e_, E, (-ux * 13, -uy * 13)), (f_, F_, (ux * 13, uy * 13))] + [(c, Q, (9, -9)) for c, Q in zip(L, cands)]:
+        f.dot(X(Q[0]), Y(Q[1]), 3.5)
+        f.text(X(Q[0]) + ox, Y(Q[1]) + oy, lab_, size=13, bold=True)
+    name = r.choice(NAMES)
+    stem = (f"{name} marks the points {e_}, {f_}, W, X, Y and Z on a square grid. Which point, when joined to {e_} and {f_}, "
+            f"forms {a_an(kind)} {kind} triangle?")
+    return build(grid_point_triangle, stem, pos + 1, wrong, steps,
+                 {"kind": kind, "E": list(E), "F": list(F_), "pts": [list(c) for c in cands]},
+                 lambda v: L[int(v) - 1], whole=True, auto_slips=False, figure=f.svg("Points on a square grid"))
+
+
+@checker(grid_point_triangle)
+def _(p):
+    """Brute force with side lengths (Pythagoras on the lengths, not dot products)."""
+    ok = []
+    for i, P in enumerate(p["pts"]):
+        d = sorted([math.dist(p["E"], p["F"]) ** 2, math.dist(p["E"], P) ** 2, math.dist(p["F"], P) ** 2])
+        if p["kind"] == "right-angled":
+            good = abs(d[0] + d[1] - d[2]) < 1e-9
+        else:
+            good = abs(d[0] - d[1]) < 1e-9 or abs(d[1] - d[2]) < 1e-9
+        if good:
+            ok.append(i + 1)
+    return F(ok[0]) if len(ok) == 1 else None
 
 
 # ---------------------------------------------------------------- rectangles and squares drawn on a grid

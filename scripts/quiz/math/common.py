@@ -16,13 +16,16 @@ NAMES = ["Ali", "Mei Ling", "Ravi", "Siti", "Jun Wei", "Priya", "Hui Min", "Fari
          "Kumar", "Xin Yi", "Aisha", "Daniel", "Wei Jie", "Nurul", "Arjun", "Shu Fen"]
 
 
-def template(topic, level, *outcomes, same_value_ok=False, calc=False):
+def template(topic, level, *outcomes, same_value_ok=False, calc=False, weight=1):
     """Register a generator. The first outcome decides which sub-topic the question is filed under.
     Put the top-school pattern ids it covers (math-pat-...) in the docstring for the coverage report.
     calc=True: a calculator is allowed (PSLE Paper 2 style). The default False means Paper 1 style, and
-    check_math.py then requires every step to be workable by hand (hand_problems below)."""
+    check_math.py then requires every step to be workable by hand (hand_problems below).
+    weight: this template's share of its sub-topic's questions relative to its siblings (build.py). Give 2-3 to a
+    template whose pattern is far more common in past papers than its sibling templates' patterns. Not part of the id."""
     def deco(fn):
         fn.topic, fn.level, fn.outcomes, fn.same_value_ok, fn.calc = topic, level, list(outcomes), same_value_ok, calc
+        fn.weight = weight
         fn.key = fn.__name__
         REGISTRY.setdefault(topic, []).append(fn)
         return fn

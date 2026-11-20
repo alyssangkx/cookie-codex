@@ -168,7 +168,7 @@ def _(q):
 
 # ---------------------------------------------------------------- intermediate
 
-@template(T, "intermediate", REL)
+@template(T, "intermediate", REL, weight=2)
 def find_missing_value(r):
     """math-pat-average-find-missing"""
     n = r.choice([4, 5, 6])

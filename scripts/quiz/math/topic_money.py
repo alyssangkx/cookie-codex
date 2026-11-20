@@ -462,7 +462,7 @@ def _(p):
     return F(k) if cents == p["total"] else None
 
 
-@template(T, "competent", M + "06", M + "02")
+@template(T, "competent", M + "06", M + "02", weight=2)
 def price_two_equations(r):
     """math-pat-price-two-equations"""
     x = r.choice(NAMES)

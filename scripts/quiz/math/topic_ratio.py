@@ -231,7 +231,7 @@ def _(p):
     return F(boys + p["girls"])
 
 
-@template(T, "intermediate", DIVIDE)
+@template(T, "intermediate", DIVIDE, weight=2)
 def three_way_share(r):
     """math-pat-ratio-total-find-part"""
     a, b, c = simplify(*sorted(r.sample(range(1, 10), 3)))
@@ -348,7 +348,7 @@ def ages_constant_difference(r):
         return None
     u = r.randint(1, 4)
     A, B, n = now_units * u, b * L // (a - b) * u, (later_units - now_units) * u
-    if A > 70 or A < 8 or n > 30:
+    if A > 70 or A < 8 or n > 30 or n < 2:  # n = 1 would read "in 1 years' time"
         return None
     x, y = two_names(r)
     stem = (f"The ratio of {x}'s age to {y}'s age is {a} : {b}. In {n} years' time, the ratio will be "

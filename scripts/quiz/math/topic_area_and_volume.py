@@ -301,7 +301,7 @@ def _(p):
     return shoelace(v) if p["ask"] == "area" else F(perim_of(v))
 
 
-@template(T, "intermediate", AP7, AP3)
+@template(T, "intermediate", AP7, AP3, weight=3)
 def identical_squares(r):
     """math-pat-perimeter-composite-identical-pieces"""
     n = r.randint(5, 8)
@@ -908,7 +908,7 @@ def _(p):
     return F(next(x for x in range(1, 800) if x * p["w"] == A))
 
 
-@template(T, "intermediate", AT3)
+@template(T, "intermediate", AT3, weight=2)
 def composite_house(r):
     """math-pat-area-triangle-rectangle-composite"""
     w = r.choice([8, 10, 12, 14, 16, 18])
@@ -944,7 +944,7 @@ def _(p):
     return shoelace([(0, p["t"]), (p["p"], 0), (p["w"], p["t"]), (p["w"], p["t"] + p["h"]), (0, p["t"] + p["h"])])
 
 
-@template(T, "intermediate", AT3)
+@template(T, "intermediate", AT3, weight=2)
 def rect_minus_triangle(r):
     """math-pat-area-triangle-rectangle-composite"""
     Wd = r.choice([10, 12, 14, 16, 18, 20])
@@ -982,7 +982,7 @@ def _(p):
 
 # ---------------------------------------------------------------- triangles: competent
 
-@template(T, "competent", AT3)
+@template(T, "competent", AT3, weight=2)
 def corner_two_points(r):
     """math-pat-area-triangle-rectangle-composite"""
     Wd, H = r.choice([12, 16, 20, 24]), r.choice([10, 12, 16, 18])
@@ -2478,7 +2478,7 @@ def pond_path(r):
     """math-pat-circle-area-composite-shaded"""
     pi, ps = pick_pi(r)
     if ps == "22/7":
-        rad, w = r.choice([7, 14]), r.choice([F(7, 2), 7])
+        rad, w = r.choice([7, 14, 21]), 7  # a 3.5 m path gives 10.5 × 10.5: not a Paper 1 step
     else:
         rad, w = r.choice([4, 5, 6, 8]), r.choice([2, 3, 4])
     R = rad + w

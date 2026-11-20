@@ -77,7 +77,7 @@ def _(p):
     return F(p["d"], 10 ** (s.index(str(p["d"])) + 1))
 
 
-@template(T, "basic", DN + "02")
+@template(T, "basic", DN + "02", weight=2)
 def dec_compare(r):
     """math-pat-decimal-compare-order"""
     vals = set()

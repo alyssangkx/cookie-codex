@@ -73,7 +73,7 @@ def _(p):
     return F(p["a"] * p["d"] + p["c"] * p["b"], p["b"] * p["d"])
 
 
-@template(T, "basic", MUL_WHOLE)
+@template(T, "basic", MUL_WHOLE, weight=2)
 def frac_times_whole(r):
     """math-pat-fraction-operations-simplest"""
     a, b = coprime_pair(r, 3, 12)
@@ -194,7 +194,7 @@ def _(p):
     return F(p["p"] * p["b"] + p["a"], p["b"]) - F(p["q"] * p["d"] + p["c"], p["d"])
 
 
-@template(T, "intermediate", MUL_FRAC, OF_SET)
+@template(T, "intermediate", MUL_FRAC, OF_SET, weight=2)
 def remainder_left(r):
     """math-pat-fraction-successive-parts"""
     a, b = coprime_pair(r, 3, 8)
@@ -316,7 +316,7 @@ def _(p):
 
 # ---------------------------------------------------------------- competent
 
-@template(T, "competent", MUL_FRAC, OF_SET)
+@template(T, "competent", MUL_FRAC, OF_SET, weight=2)
 def remainder_backwards(r):
     """math-pat-fraction-successive-parts"""
     a, b = coprime_pair(r, 3, 8)
@@ -504,7 +504,7 @@ def _(p):
     return F(str(d))
 
 
-@template(T, "basic", DIV_BY_WHOLE, MUL_WHOLE)
+@template(T, "basic", DIV_BY_WHOLE, MUL_WHOLE, weight=3)
 def share_remainder(r):
     """math-pat-fraction-share-remainder"""
     a, b = coprime_pair(r, 3, 8)
@@ -529,7 +529,7 @@ def _(p):
     return (p["L"] - p["L"] * F(p["a"], p["b"])) / p["n"]
 
 
-@template(T, "intermediate", OF_SET, MUL_FRAC)
+@template(T, "intermediate", OF_SET, MUL_FRAC, weight=2)
 def fixed_then_fraction(r):
     """math-pat-fraction-successive-parts (fixed amount first, then a fraction of the rest)"""
     c, d = coprime_pair(r, 2, 7)
@@ -678,7 +678,7 @@ def _(p):
     return max(vals) if p["want"] == "greatest" else min(vals)
 
 
-@template(T, "basic", WHOLE_PART)
+@template(T, "basic", WHOLE_PART, weight=3)
 def shaded_figure(r):
     """math-pat-fraction-shaded-figure"""
     rows, cols = r.choice([(2, 4), (2, 6), (3, 4), (3, 6), (4, 4), (2, 5), (3, 5), (4, 6)])
@@ -835,10 +835,10 @@ def two_groups_sold(r):
         return None
     coef = F(a, b) * F(d - c, d) + F(b - a, b)
     stem = (f"A fruit stall had some apples and pears. {a}/{b} of the fruits were apples. After {c}/{d} of the apples "
-            f"and {x} pears were sold, {left} fruits were left. How many fruits were there at first?")
+            f"and {plural(x, 'pear')} were sold, {left} fruits were left. How many fruits were there at first?")
     naive = (left + x) / (1 - F(c, d))
     return build(two_groups_sold, stem, T0, [
-        (F(left) / coef, "forgot_to_add_back_pears_sold", f"Did not add back the {x} pears that were sold."),
+        (F(left) / coef, "forgot_to_add_back_pears_sold", f"Did not add back the {plural(x, 'pear')} that {'was' if x == 1 else 'were'} sold."),
         (naive, "took_fraction_of_all_fruits", f"Took {c}/{d} of all the fruits instead of the apples."),
         (apples, "gave_apples_only", "Gave the number of apples at first."),
         (left + x + apples * c // d + 1, "careless_slip", "Made a slip adding back what was sold."),
