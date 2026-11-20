@@ -1,6 +1,6 @@
-// Verbatim past-paper MCQs (ADR 0004). They reach the browser ONLY from Supabase: rows through the pp_items_for RPC
-// (migration 004, signed-in child, parent or admin) and pictures as short-lived signed URLs from the private bucket
-// pp-figures. Never through the public /data/quiz endpoint, site/public or the static build. This module is pure (no
+// Verbatim past-paper MCQs (ADR 0004). They reach the browser ONLY from Supabase, per quiz (ADR 0012): ids, sub-topic,
+// level and rank through the pp_pool RPC (migration 006), then the text of the picked questions (at most 15 a call) and
+// 10-minute signed picture URLs through the pp-serve function, under daily limits. Signed-in child or admin only. Never through the public /data/quiz endpoint, site/public or the static build. This module is pure (no
 // I/O, no imports) so it can be tested; ppfetch.ts does the network calls. Everything is OFF until PP_ENABLED is true.
 // Owner, 20 Nov 2026 (ADR 0004 amendment): checked past-paper items count like generated ones (mastery, tiers, cards,
 // Crumbs); readable by children and the admin only; shown as "Past paper <year>" (never the school); left out of the
@@ -10,8 +10,9 @@ import { esc } from './boldans.ts';
 /** Master switch. On since 20 Nov 2026 (004 applied, Plant transport uploaded and reviewed by the owner). */
 export const PP_ENABLED = true;
 
-/** merge: past-paper items join the generated ones; replace: they take over a tier once it has a full pool. */
-export type PpMode = 'merge' | 'replace';
+/** merge: past-paper items join the generated ones; replace: they take over a tier once it has a full pool; pool (ADR
+ * 0011): the sub-topic is one pool of its past-paper questions (20+), no tiers, milestones; generated questions leave it. */
+export type PpMode = 'merge' | 'replace' | 'pool';
 
 /** Per-sub-topic switch, added in the order the imports land (Plant transport first). Ignored while PP_ENABLED is false. */
 export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
@@ -21,7 +22,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
 export const PP_SUBJECT = 'science';
 export const PP_BUCKET = 'pp-figures';
 export const PP_MIN_TIER = 20; // same as MIN_POOL: a smaller past-paper pool never replaces a tier, it is merged in
-export const SIGN_TTL_S = 7200; // signed figure URLs live 2 hours (longer than any quiz or paper); images load eagerly
+export const SIGN_TTL_S = 7200; // (unused since ADR 0012: pp-serve signs 10-minute URLs; pictures load eagerly at quiz start)
 const LEVELS = ['basic', 'intermediate', 'competent'] as const;
 
 export interface PpFigure { path: string; w: number; h: number }
@@ -40,6 +41,24 @@ export interface PpQ {
   ppFigs: PpFig[];
   ppYear: number | null;
 }
+
+/** A past-paper question known only by id until the quiz has picked it (ADR 0012): sub-topic, level and easier-first
+ * rank from pp_pool. Shaped like a PpQ (4 placeholder options so paper filters keep it) and replaced by the real
+ * question (hydrate) before it is shown. */
+export type PpStub = PpQ & { stub: true; ord: number | null };
+export function stubOf(r: { id: unknown; subtopic: unknown; level: unknown; ord?: unknown }, topic?: string): PpStub | null {
+  if (typeof r.id !== 'string' || !isPpId(r.id) || typeof r.subtopic !== 'string' || !/^[a-z0-9-]{3,80}$/.test(r.subtopic)
+    || !LEVELS.includes(r.level as PpRow['level'])) return null;
+  return { id: r.id, sub: r.subtopic, level: r.level as string, topic, stem: '', options: ['', '', '', ''], answer: 0,
+    explain: [null, null, null, null], solution: [], numbered: true, ppFigs: [], ppYear: null, stub: true,
+    ord: Number.isInteger(r.ord) ? (r.ord as number) : null };
+}
+export const isStub = (q: unknown): q is PpStub => !!q && (q as PpStub).stub === true;
+/** A one-pool sub-topic (ADR 0011). */
+export const isPoolSub = (sub: string, enabled = PP_ENABLED, sw: Readonly<Record<string, PpMode>> = PP_SWITCH) => ppMode(sub, enabled, sw) === 'pool';
+/** A pool's ids easier-first (rank, then id), as pickPool wants them. */
+export const easierFirst = (qs: { id: string; ord?: number | null }[]) =>
+  [...qs].sort((a, b) => (a.ord ?? 1e9) - (b.ord ?? 1e9) || (a.id < b.id ? -1 : 1)).map((q) => q.id);
 
 /** A past-paper question id (pp-<10 hex>), as opposed to a generated one. */
 export const isPpId = (id: string) => /^pp-[0-9a-f]{10}$/.test(id);
@@ -125,7 +144,8 @@ export function mergePool<T extends { id: string; sub: string; level: string }>(
   const ppBy = new Map<string, T[]>();
   for (const q of pp) if (modeOf(q.sub)) ppBy.set(key(q), [...(ppBy.get(key(q)) ?? []), q]);
   const replaced = new Set([...ppBy].filter(([k, v]) => modeOf(k.split('|')[0]) === 'replace' && v.length >= minTier).map(([k]) => k));
-  return [...generated.filter((q) => !replaced.has(key(q))), ...[...ppBy.values()].flat()];
+  // a one-pool sub-topic is its past-paper questions only (generated ones leave it, ADR 0011)
+  return [...generated.filter((q) => !replaced.has(key(q)) && modeOf(q.sub) !== 'pool'), ...[...ppBy.values()].flat()];
 }
 
 /**
@@ -138,7 +158,9 @@ export function mergePool<T extends { id: string; sub: string; level: string }>(
 export function tierPoolIds<T extends { id: string; sub: string; level: string }>(generated: T[], pp: T[],
   modeOf: (sub: string) => PpMode | null = (s) => ppMode(s), ppFailed = false, minTier = PP_MIN_TIER): Record<string, string[]> {
   const out: Record<string, string[]> = {};
-  for (const q of mergePool(generated, ppFailed ? [] : pp, modeOf, minTier)) (out[`${q.sub}|${q.level}`] ??= []).push(q.id);
+  for (const q of mergePool(generated, ppFailed ? [] : pp, modeOf, minTier)) {
+    if (modeOf(q.sub) !== 'pool') (out[`${q.sub}|${q.level}`] ??= []).push(q.id); // a pool sub-topic has milestones, no tiers
+  }
   if (ppFailed) for (const k of Object.keys(out)) if (modeOf(k.split('|')[0])) delete out[k];
   return out;
 }
@@ -148,6 +170,7 @@ export function tierPoolIds<T extends { id: string; sub: string; level: string }
  * generated bank, so its tierHash cannot be known at build time (pp ids are private) and liveMastered must use the size. */
 export function ppTierCount(gen: number, pp: number, mode: PpMode | null, minTier = PP_MIN_TIER): { count: number; usesPp: boolean } {
   if (!mode || pp <= 0) return { count: gen, usesPp: false };
+  if (mode === 'pool') return { count: 0, usesPp: true }; // no tiers: train.ts counts the whole pool (Sub.pool)
   return { count: mode === 'replace' && pp >= minTier ? pp : gen + pp, usesPp: true };
 }
 

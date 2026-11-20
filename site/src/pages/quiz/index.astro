@@ -7,6 +7,7 @@ import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSu
 const meta = {
   subs: Object.fromEntries(subs.filter(hasContent).map((s) => [s.id, {
     tries: triesPerDay(s.id), name: s.name, topicName: s.topicName, school: s.school, file: s.file, slug: subSlug(s.id), count: s.count,
+    pool: s.pool ?? 0, // a one-pool sub-topic's past-paper question count (ADR 0011); 0 = tiers
   }])),
   files: banks.map((b) => b.topic),
   banks: banksHash, // the bank set Daily Review parks against (store.ts syncParked)
@@ -94,11 +95,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, TIER_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, type Tier, type SaveV1, type QuizResult,
+    QUIZ_SIZE, tierState, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, type Tier, type SaveV1, type QuizResult,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
-  import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
-  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, type PpFig } from '../../lib/pastpaper';
+  import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
+  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, type PpFig } from '../../lib/pastpaper';
   import { esc, boldAns } from '../../lib/boldans';
   import { toEconomy, balanceOf } from '../../lib/crumbs';
   import { lineForLast, bilingual } from '../../lib/encourage';
@@ -111,7 +112,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false;
     numbered?: true; ppFigs?: PpFig[]; ppYear?: number | null }; // past-paper items only (pastpaper.ts; off while PP_ENABLED is false)
   type Meta = {
-    subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
+    subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string | null; slug: string; count: Record<Tier, number>; pool: number }>;
     files: string[]; banks: string; slots: Record<string, { slug: string; dup: boolean }>;
     cards: Record<string, { name: string; image: string; rarity: string }>;
     topicNames: Record<string, string>;
@@ -130,6 +131,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const subId = params.get('sub') ?? '';
   const tier = (params.get('tier') ?? 'b') as Tier;
   const sub = meta.subs[subId];
+  const POOL = mode === 'tier' && !!sub?.pool; // a one-pool sub-topic (ADR 0011): no tier, milestones
   const LEVEL: Record<Tier, string> = { b: 'basic', i: 'intermediate', c: 'competent' };
   const rewardFor = (sid: string, t: Tier) => meta.slots[`${sid}|${t}`];
   const eco = toEconomy(meta); // replacement cards, star bonuses and achievement cards (crumbs.ts)
@@ -249,13 +251,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   let ppFailed = false; // a failed past-paper fetch: Daily Review must not park pp retests it never saw
   async function loadBanks(files: string[]): Promise<Q[]> {
     genAll = []; ppAll = []; ppLoaded = false; ppFailed = false;
-    let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
+    let all = (await Promise.all(files.filter(Boolean).map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
     // past-paper items (ADR 0004): fetched from Supabase for a signed-in player, never from /data/quiz; OFF for now
     if (PP_ENABLED) {
       const subs = ppSubsFor(mode, subId, all.map((q) => q.sub));
       if (subs.length) {
-        const { fetchPp } = await import('../../lib/ppfetch');
-        const pp = await fetchPp(subs, (x) => meta.subs[x]?.file);
+        // ids, sub-topic, level and rank only (ADR 0012): the picked ones are fetched in full by hydrate() before they show
+        const { fetchPool } = await import('../../lib/ppfetch');
+        const pp = await fetchPool(subs, (x) => meta.subs[x]?.file ?? undefined);
         if (pp === null) ppFailed = true;
         genAll = all; ppAll = (pp ?? []) as Q[]; ppLoaded = true;
         all = mergePool(all, ppAll, poolModeFor(mode));
@@ -269,13 +272,38 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     return all;
   }
 
+  /**
+   * The picked past-paper questions are stubs (ids only, ADR 0012): fetch their text and pictures now, at most 15 a call.
+   * Returns a reason to stop, or '' when the quiz is ready. A tier or pool quiz stops when they cannot load; Daily Review
+   * and papers drop them and go on with the rest (and park nothing, as ppFailed says).
+   */
+  async function hydrate(): Promise<string> {
+    const want = quiz.filter((id) => isStub(byId.get(id)));
+    if (!want.length) return '';
+    const { fetchItems } = await import('../../lib/ppfetch');
+    const r = await fetchItems(want, (x) => meta.subs[x]?.file ?? undefined);
+    if ('items' in r) {
+      for (const q of r.items) byId.set(q.id, q as Q);
+      return '';
+    }
+    const limit = r.error === 'daily_limit';
+    if (mode === 'tier') {
+      return limit ? 'You have answered a lot of past-paper questions today. They open again tomorrow.'
+        : 'Past-paper questions could not load. Check your connection and try again.';
+    }
+    ppFailed = true;
+    quiz = quiz.filter((id) => !isStub(byId.get(id)));
+    notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this ${mode === 'paper' ? 'paper' : 'review'} uses the other questions.</p>`;
+    return quiz.length ? '' : (mode === 'paper' ? 'There are not enough questions for this paper right now. Try again later.' : 'Nothing to review right now. Try again later.');
+  }
+
   let notice = ''; // a line shown above the start text (e.g. an old paper was put away)
   let handInChosen = false; // the child chose to hand in a paper whose time was up: never put it away on a later tick
   async function init() {
     const s = load();
     if (mode === 'tier') {
       if (!sub) return stop('This quiz does not exist.');
-      $('title').textContent = `${sub.name}: ${TIER_NAME[tier]}`;
+      $('title').textContent = POOL ? sub.name : `${sub.name}: ${TIER_NAME[tier]}`;
       $('crumbs').innerHTML = `<a href="/train/">Schools</a> › <a href="/train/${sub.school}/">${sub.school[0].toUpperCase() + sub.school.slice(1)}</a> › <a href="/train/${sub.school}/${sub.slug}/">${esc(sub.name)}</a>`;
     } else if (mode === 'paper') {
       $('title').textContent = 'Practice paper';
@@ -301,9 +329,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const blocked = dayBlock(s, mode);
     if (blocked) return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
     const playable = { b: sub?.count.b >= MIN_POOL, i: sub?.count.i >= MIN_POOL, c: sub?.count.c >= MIN_POOL };
-    if (mode === 'tier' && !playable[tier]) return stop('This tier has no questions yet.');
-    if (mode === 'tier' && !tierOpen(s, subId, tier, playable)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
-    if (mode === 'tier' && triesUsedUp(s, subId, tier)) return stop(`You have had ${sub.tries} tries at this tier today. Try again tomorrow.`);
+    if (POOL && triesUsedUp(s, subId)) return stop(`You have had ${sub.tries} tries at this topic today. Try again tomorrow.`);
+    if (mode === 'tier' && !POOL && !playable[tier]) return stop('This tier has no questions yet.');
+    if (mode === 'tier' && !POOL && !tierOpen(s, subId, tier, playable)) return stop(`Clear ${tier === 'i' ? 'Basic' : 'Intermediate'} first.`);
+    if (mode === 'tier' && !POOL && triesUsedUp(s, subId, tier)) return stop(`You have had ${sub.tries} tries at this tier today. Try again tomorrow.`);
 
     try {
       const files = mode === 'tier' ? [sub.file] : mode === 'paper' ? paperTopics : meta.files;
@@ -313,7 +342,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       // the save as stored now, not `s` from before the await: another tab may have bought or earned meanwhile
       const cur = syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
-      if (mode === 'tier') {
+      if (POOL) {
+        if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
+        quiz = pickPool(easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]), cur.questions, QUIZ_SIZE);
+        if (quiz.length < QUIZ_SIZE) return stop('This topic does not have enough questions yet.');
+      } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
         quiz = pickTier(ids, cur.questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
@@ -325,15 +358,19 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         quiz = reviewPassages(pickReview(all.map((q) => q.id), cur.questions), passage);
         if (!quiz.length) return stop('Nothing to review today. Great work!');
       }
+      const why = await hydrate();
+      if (why) return stop(why);
     } catch (e) {
       return stop((e as Error).message);
     }
     const x = s.settings.extraTime ? 1.5 : 1;
-    mins = mode === 'tier' ? minutesFor(s, tier)
+    mins = POOL ? minutesFor(s, 'c') : mode === 'tier' ? minutesFor(s, tier)
       : mode === 'paper' ? Math.ceil(quiz.reduce((m, id) => m + PER_Q[byId.get(id)!.level], 0) * x)
       : Math.ceil(quiz.length * 1.5 * x);
     deadline = mins * 60_000;
-    $('start-info').innerHTML = notice + esc(mode === 'tier'
+    $('start-info').innerHTML = notice + esc(POOL
+      ? `${quiz.length} past-paper questions in ${mins} minutes. Every one you get right counts toward your milestones.`
+      : mode === 'tier'
       ? `${quiz.length} questions in ${mins} minutes. Every question you get right counts toward clearing the tier.`
       : mode === 'paper' ? `${paperMix.label}: ${quiz.length} questions from ${paperTopics.length} topic${paperTopics.length > 1 ? 's' : ''} in ${mins} minutes, ordered from easier to harder. Answer them all, then submit; you see your score and the ones to fix after you submit. You can pause once, for up to 10 minutes.`
       : `${quiz.length} questions you got wrong before, in ${mins} minutes. Review counts toward today's goal.`);
@@ -352,7 +389,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       if (d && draftState(d.clock, now) !== 'stale') return draftChoice(d);
       closeStalePapers(s0, now); // open paper records over 2 days old (abandoned, draft lost): no paper runs that long
     }
-    const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined, total: quiz.length }, now);
+    const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' && !POOL ? tier : undefined, total: quiz.length }, now);
     if (blocked) { quiz = []; return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>'); }
     save(s0);
     i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
@@ -676,9 +713,19 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('options').querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();
   }
 
+  /** A past-paper question of a one-pool sub-topic: wrong comes back after 1 day and counts once right then (ADR 0011). */
+  const shortRetest = (id: string) => isPpId(id) && isPoolSub(byId.get(id)?.sub ?? '');
+  /** For finishQuiz: every one-pool sub-topic this quiz loaded, with ALL its past-paper ids (milestones count the whole
+   * pool, not the quiz). Left out when the past-paper list failed to load (a partial pool would store a wrong total). */
+  function pools(): Record<string, string[]> {
+    if (!ppLoaded || ppFailed) return {};
+    const out: Record<string, string[]> = {};
+    for (const q of ppAll) if (isPoolSub(q.sub)) (out[q.sub] ??= []).push(q.id);
+    return out;
+  }
   function record(id: string, ok: boolean, picked?: string) {
     const s = load();
-    if (answer(s, id, ok, Date.now(), true, picked)) retestsPassed++; // tier quizzes and Daily Review only: papers record in submitPaper()
+    if (answer(s, id, ok, Date.now(), true, picked, shortRetest(id))) retestsPassed++; // tier quizzes and Daily Review only: papers record in submitPaper()
     save(s);
   }
 
@@ -740,11 +787,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const ms = (pausedAt || Date.now()) - startedAt;
     const s: SaveV1 = load();
     const res = finishQuiz(s, {
-      mode, sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined,
+      mode, sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' && !POOL ? tier : undefined,
       topics: mode === 'paper' ? paperTopics : undefined,
       score, total: quiz.length, ms, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, Date.now(), tierIds(), undefined, { eco, retests: retestsPassed });
-    if (mode === 'tier') s.last = { sub: subId, tier };
+    }, rewardFor, Date.now(), tierIds(), undefined, { eco, retests: retestsPassed, pools: pools() });
+    if (mode === 'tier') s.last = { sub: subId, tier: POOL ? 'b' : tier };
     save(s);
     results(s, res, timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '');
   }
@@ -766,7 +813,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const q = byId.get(id)!, p = picks[k];
       const ok = p === q.answer;
       // retireNew = false: papers never retire new questions. A blank is LEFT_BLANK, or '' (time ran out) when handed in at zero
-      if (answer(s, id, ok, now, false, ok ? undefined : p == null ? (timeUp ? undefined : LEFT_BLANK) : q.options[p])) retests++;
+      if (answer(s, id, ok, now, false, ok ? undefined : p == null ? (timeUp ? undefined : LEFT_BLANK) : q.options[p], shortRetest(id))) retests++;
       if (ok) score++;
       else wrongs.push({ q, chose: p ?? -1, tag: p == null ? (timeUp ? 'ran_out_of_time' : 'blank') : q.explain[p]?.tag ?? 'wrong' });
     });
@@ -774,7 +821,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     paperUsed = timeUsed(pclock, startedAt, now);
     const res = finishQuiz(s, {
       mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, now, {}, startedAt, { eco, retests, paperTopics: quiz.map((id) => byId.get(id)!.topic ?? '').filter(Boolean) }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
+    }, rewardFor, now, {}, startedAt, { eco, retests, pools: pools(), paperTopics: quiz.map((id) => byId.get(id)!.topic ?? '').filter(Boolean) }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
     closeStalePapers(s, now);
     save(s);
     const b = blanks(picks);
@@ -825,7 +872,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         <img src="${esc(c.image)}" alt="" width="96" height="96"><span>${head}<strong>${got}</strong>
         ${esc(c.name)} ${'★'.repeat(r.stars)}${why}</span></a>`;
     };
-    for (const cl of res.newlyCleared) if (cl.reward) html += won(cl.reward, '');
+    for (const cl of res.newlyCleared) {
+      if (!cl.reward) continue;
+      const pool = !!meta.subs[cl.sub]?.pool;
+      html += won(cl.reward, pool ? `<em>${cl.tier === 'c' ? 'Exam-ready' : MILESTONE_NAME[cl.tier] + ' reached'}: ${esc(meta.subs[cl.sub].name)}!</em>` : '');
+    }
     for (const ac of res.achieved ?? []) {
       html += won(ac.reward, ac.kind === 'legendary' ? (ac.subject ? '<em>Subject mastered: every topic cleared at Competent!</em>' : '<em>Top paper result (AL1 or AL2)!</em>')
         : `<em>Topic mastered: every Competent tier cleared!</em>`);

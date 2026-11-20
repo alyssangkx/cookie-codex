@@ -1,28 +1,60 @@
-// Network half of the past-paper path (pure rules in pastpaper.ts). Loaded with a dynamic import only when
-// PP_ENABLED is true, so while the flag is off no page calls it. Any failure (signed out, offline, RPC refused, rate
-// limit) returns null and the quiz falls back to the generated items; null (not []) tells Daily Review not to park
-// the past-paper retests it could not load.
-import { supabase, SUPABASE_URL, currentSession } from './supabase';
-import { PP_SUBJECT, PP_BUCKET, SIGN_TTL_S, validRow, safeSignedUrl, toQ, fetchComplete, type PpQ } from './pastpaper';
+// Network half of the past-paper path (pure rules in pastpaper.ts), ADR 0012: per quiz, never in bulk. fetchPool lists ids,
+// sub-topic, level and rank (no text); fetchItems gets the text and 10-minute picture URLs of the picked questions from the
+// pp-serve function, at most 15 a call, under the daily limits. Loaded with a dynamic import only while PP_ENABLED.
+// Any failure returns null (the quiz falls back or stops); null (not []) tells Daily Review not to park the past-paper
+// retests it could not load.
+import { supabase, SUPABASE_URL, currentSession, callFunction } from './supabase';
+import { PP_SUBJECT, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
 
-export async function fetchPp(subs: string[], topicOf: (sub: string) => string | undefined): Promise<PpQ[] | null> {
+const CHUNK = 15; // pp-serve takes at most 15 ids a call (migration 006)
+
+export async function fetchPool(subs: string[], topicOf: (sub: string) => string | undefined): Promise<PpStub[] | null> {
   if (!subs.length) return [];
   try {
     if (!(await currentSession())) return null;
-    const { data, error } = await supabase.rpc('pp_items_for', { p_subject: PP_SUBJECT, p_subtopics: subs });
-    if (error || !Array.isArray(data)) return null;
-    const rows = data.filter(validRow);
-    const paths = [...new Set(rows.flatMap((r) => r.figures.map((f) => f.path)))];
-    let signErrors = 0;
-    const signed = new Map<string, string>();
-    for (let i = 0; i < paths.length; i += 100) {
-      const { data: s, error: e } = await supabase.storage.from(PP_BUCKET).createSignedUrls(paths.slice(i, i + 100), SIGN_TTL_S);
-      if (e) { signErrors++; continue; }
-      for (const x of s ?? []) if (x.path && x.signedUrl && safeSignedUrl(x.signedUrl, SUPABASE_URL)) signed.set(x.path, x.signedUrl);
+    const out: PpStub[] = [];
+    for (let i = 0; i < subs.length; i += 40) { // pp_pool takes at most 40 sub-topics a call
+      const { data, error } = await supabase.rpc('pp_pool', { p_subject: PP_SUBJECT, p_subtopics: subs.slice(i, i + 40) });
+      if (error || !Array.isArray(data)) return null;
+      for (const r of data) {
+        const st = stubOf(r, topicOf(r?.subtopic));
+        if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
+        out.push(st);
+      }
     }
-    const qs = rows.map((r) => toQ(r, signed, topicOf(r.subtopic))).filter((q): q is PpQ => q !== null);
-    return fetchComplete(data.length, rows.length, qs.length, signErrors) ? qs : null; // partial = failure
+    return out;
   } catch {
     return null;
+  }
+}
+
+export type ItemsResult = { items: PpQ[] } | { error: 'daily_limit' | 'failed' };
+
+/** The real questions for these ids (in any order). A missing or unsigned one makes the whole call a failure. */
+export async function fetchItems(ids: string[], topicOf: (sub: string) => string | undefined): Promise<ItemsResult> {
+  const want = [...new Set(ids)];
+  if (!want.length) return { items: [] };
+  try {
+    const sess = await currentSession();
+    if (!sess) return { error: 'failed' };
+    const items: PpQ[] = [];
+    for (let i = 0; i < want.length; i += CHUNK) {
+      const r = await callFunction('pp-serve', { ids: want.slice(i, i + CHUNK) }, sess.access_token);
+      if (r.status === 429 && r.body?.error === 'daily_limit') return { error: 'daily_limit' };
+      if (r.status !== 200 || !Array.isArray(r.body?.items)) return { error: 'failed' };
+      for (const row of r.body.items) {
+        if (!validRow(row)) return { error: 'failed' };
+        const signed = new Map<string, string>();
+        for (const f of (row as { figures: { path: string; url?: unknown }[] }).figures) {
+          if (typeof f.url === 'string' && safeSignedUrl(f.url, SUPABASE_URL)) signed.set(f.path, f.url);
+        }
+        const q = toQ(row, signed, topicOf(row.subtopic));
+        if (!q) return { error: 'failed' };
+        items.push(q);
+      }
+    }
+    return items.length === want.length ? { items } : { error: 'failed' }; // an inactive or missing id: a stale pool
+  } catch {
+    return { error: 'failed' };
   }
 }

@@ -69,7 +69,10 @@ export interface Sub {
   id: string; name: string; topic: string; topicName: string; home: number; capstone: boolean;
   school: School; file: string | null; count: Record<Tier, number>; playable: Record<Tier, boolean>;
   hash: Record<Tier, string | undefined>; // tierHash of each tier's question ids, for liveMastered; undefined on a tier that uses past-paper items (size check only)
+  /** A one-pool sub-topic (ADR 0011): its past-paper question count (20+); its tiers' card slots are milestones 1-3. */
+  pool?: number;
 }
+const ppTotal = (sub: string) => (['b', 'i', 'c'] as const).reduce((n, t) => n + ((ppCounts as Record<string, number>)[`${sub}|${t}`] ?? 0), 0);
 
 export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).flatMap(([school, list]) =>
   list.map((s) => {
@@ -79,8 +82,9 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
     const count = { b: v.b.count, i: v.i.count, c: v.c.count };
     const hash = { b: v.b.usesPp ? undefined : hashOf(`${s.id}|b`), i: v.i.usesPp ? undefined : hashOf(`${s.id}|i`),
       c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
+    const pool = ppMode(s.id) === 'pool' && ppTotal(s.id) >= MIN_POOL ? ppTotal(s.id) : undefined;
     return {
-      ...s, school, file: subFile.get(s.id) ?? null, count, hash,
+      ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool } : {}),
       // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier playable)
       playable: { b: countOf(`${s.id}|b`) >= MIN_POOL, i: countOf(`${s.id}|i`) >= MIN_POOL, c: countOf(`${s.id}|c`) >= MIN_POOL },
     };
@@ -117,7 +121,7 @@ export const clozeSubs = [mathSyllabus, chineseSyllabus, englishSyllabus, scienc
   syl.strands.flatMap((st) => st.topics.flatMap((t) =>
     (t.subtopics as { id: string; cloze?: boolean }[]).filter((sb) => sb.cloze).map((sb) => sb.id))));
 export const subSlug = (id: string) => id.replace(/^(math|sci|eng|chi)-/, '');
-export const hasContent = (s: Sub) => s.playable.b || s.playable.i || s.playable.c;
+export const hasContent = (s: Sub) => !!s.pool || s.playable.b || s.playable.i || s.playable.c;
 
 // English and Science go live as soon as their banks have a playable tier; Math and Chinese are always on.
 export const SCHOOLS: { id: School; name: string; ready: boolean }[] = [

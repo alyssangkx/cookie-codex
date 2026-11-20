@@ -1,8 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, fetchComplete, PP_MIN_TIER, type PpRow,
-} from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, fetchComplete, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -183,4 +182,28 @@ test('fetchComplete: any dropped row or failed signing batch makes the fetch a f
   assert.equal(fetchComplete(5, 4, 4), false); // validRow rejected one
   assert.equal(fetchComplete(5, 5, 4), false); // toQ returned null
   assert.equal(fetchComplete(5, 5, 5, 1), false); // a createSignedUrls batch errored
+});
+
+test('stubs (ADR 0012): ids, sub-topic, level and rank only; anything malformed is refused', () => {
+  const st = stubOf({ id: 'pp-0123456789', subtopic: 'sci-x', level: 'basic', ord: 3 }, 'sci-file');
+  assert.ok(st && isStub(st) && st.ord === 3 && st.topic === 'sci-file' && st.options.length === 4 && st.stem === '');
+  assert.equal(stubOf({ id: 'pp-xyz', subtopic: 'sci-x', level: 'basic' }), null);
+  assert.equal(stubOf({ id: 'pp-0123456789', subtopic: 'sci-x', level: 'hard' }), null);
+  assert.equal(stubOf({ id: 'pp-0123456789', subtopic: 'sci-x', level: 'basic', ord: 'x' })?.ord, null);
+});
+
+test('easierFirst: rank, then id; unranked last', () => {
+  assert.deepEqual(easierFirst([{ id: 'pp-c', ord: 2 }, { id: 'pp-a', ord: null }, { id: 'pp-b', ord: 1 }, { id: 'pp-0', ord: 2 }]), ['pp-b', 'pp-0', 'pp-c', 'pp-a']);
+});
+
+test('pool mode: a pool sub-topic is its past-paper questions only, and reports no tier ids', () => {
+  const sw = { 'sci-pool': 'pool' as const, 'sci-merge': 'merge' as const };
+  const gen = [{ id: 'g1', sub: 'sci-pool', level: 'basic' }, { id: 'g2', sub: 'sci-merge', level: 'basic' }];
+  const pp = [{ id: 'pp-0000000001', sub: 'sci-pool', level: 'competent' }, { id: 'pp-0000000002', sub: 'sci-merge', level: 'basic' }];
+  const modeOf = (x: string) => (sw as Record<string, 'pool' | 'merge'>)[x] ?? null;
+  assert.deepEqual(mergePool(gen, pp, modeOf).map((q) => q.id).sort(), ['g2', 'pp-0000000001', 'pp-0000000002']);
+  assert.deepEqual(Object.keys(tierPoolIds(gen, pp, modeOf)), ['sci-merge|basic']);
+  assert.equal(isPoolSub('sci-pool', true, sw), true);
+  assert.equal(isPoolSub('sci-pool', false, sw), false);
+  assert.deepEqual(ppTierCount(25, 30, 'pool'), { count: 0, usesPp: true });
 });
