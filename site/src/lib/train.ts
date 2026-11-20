@@ -10,6 +10,8 @@ import { MIN_POOL, tierHash, type School, type Tier } from './store';
 import { paperOk } from './paper';
 import { unitName } from './suggest';
 import { competencyGroups } from './crumbs';
+import { ppMode, ppTierCount } from './pastpaper';
+import ppCounts from '../data/pp_counts.json'; // numbers only: {"<sub>|<b|i|c>": n}; no past-paper ids or content
 
 export { MIN_POOL };
 
@@ -66,13 +68,17 @@ const hashOf = (k: string) => tierHash(tierQs.get(k) ?? []);
 export interface Sub {
   id: string; name: string; topic: string; topicName: string; home: number; capstone: boolean;
   school: School; file: string | null; count: Record<Tier, number>; playable: Record<Tier, boolean>;
-  hash: Record<Tier, string>; // tierHash of each tier's question ids, for liveMastered
+  hash: Record<Tier, string | undefined>; // tierHash of each tier's question ids, for liveMastered; undefined on a tier that uses past-paper items (size check only)
 }
 
 export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).flatMap(([school, list]) =>
   list.map((s) => {
-    const count = { b: countOf(`${s.id}|b`), i: countOf(`${s.id}|i`), c: countOf(`${s.id}|c`) };
-    const hash = { b: hashOf(`${s.id}|b`), i: hashOf(`${s.id}|i`), c: hashOf(`${s.id}|c`) };
+    // a switched-on past-paper sub-topic: the quiz merges or swaps in pp items, so count what it will use and drop the hash
+    const view = (t: Tier) => ppTierCount(countOf(`${s.id}|${t}`), (ppCounts as Record<string, number>)[`${s.id}|${t}`] ?? 0, ppMode(s.id));
+    const v = { b: view('b'), i: view('i'), c: view('c') };
+    const count = { b: v.b.count, i: v.i.count, c: v.c.count };
+    const hash = { b: v.b.usesPp ? undefined : hashOf(`${s.id}|b`), i: v.i.usesPp ? undefined : hashOf(`${s.id}|i`),
+      c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
     return {
       ...s, school, file: subFile.get(s.id) ?? null, count, hash,
       playable: { b: count.b >= MIN_POOL, i: count.i >= MIN_POOL, c: count.c >= MIN_POOL },

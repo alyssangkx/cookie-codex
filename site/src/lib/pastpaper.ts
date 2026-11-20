@@ -128,6 +128,14 @@ export function mergePool<T extends { id: string; sub: string; level: string }>(
   return [...generated.filter((q) => !replaced.has(key(q))), ...[...ppBy.values()].flat()];
 }
 
+/** Tier question count as the quiz will use it (mirrors mergePool for one tier): `gen` generated questions, `pp` active
+ * past-paper rows (public counts only, data/pp_counts.json). `usesPp` tells the caller the tier's id set is not the
+ * generated bank, so its tierHash cannot be known at build time (pp ids are private) and liveMastered must use the size. */
+export function ppTierCount(gen: number, pp: number, mode: PpMode | null, minTier = PP_MIN_TIER): { count: number; usesPp: boolean } {
+  if (!mode || pp <= 0) return { count: gen, usesPp: false };
+  return { count: mode === 'replace' && pp >= minTier ? pp : gen + pp, usesPp: true };
+}
+
 /** The source line above a past-paper stem: "Past paper 2025" (year only, never the school). */
 export function ppBadge(q: { ppYear?: number | null; numbered?: boolean }): string {
   if (!q.numbered) return '';

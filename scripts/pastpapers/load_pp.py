@@ -21,6 +21,13 @@
       --apply it only prints what it would do. Needs SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in the environment;
       the key is never printed. Run only after the owner says "apply" (migration 004 must be applied first).
 
+  load_pp.py counts  [--subject science] [--out DIR] [--subtopics a,b]
+      Writes site/src/data/pp_counts.json ({"<sub>|<tier letter>": n}, numbers only, no ids or content) from the rows
+      `upload` would send, without uploading. `upload --apply` writes it too. train.ts uses it for the tier counts.
+  upload also sets active=false on existing pp_items rows of each uploaded sub-topic that are not in this upload
+  (held, dropped by select, or re-tagged away). A held row is never re-activated. Dry run reports how many (needs the
+  Supabase env to look; else says it cannot count).
+
 Ids: pp-<sha1(source question id)[:10]>. The sub-topic is NOT part of the id, so a re-tag keeps saves and retests.
 Nothing here prints question text, options or answers: counts and ids only.
 """
@@ -565,6 +572,21 @@ def selftest():
     assert l2 == 0.0 and (lvl == np.asarray(t)).all()
     tiny = np.asarray(t.rotate(0.2, resample=Image.BICUBIC, fillcolor=255))
     assert deskew(tiny)[1] == 0.0
+    # deactivate set and tier counts
+    assert deactivate_set({"a", "b", "c"}, {"b", "x"}) == {"a", "c"}  # held/dropped/re-tagged rows go; new row x is not "existing"
+    assert deactivate_set(set(), {"a"}) == set() and deactivate_set({"a"}, {"a"}) == set()
+    held = {"b"}
+    upl = {"a", "c"} - held  # a held id is never in the upload set, so it is only ever deactivated, never revived
+    assert "b" in deactivate_set({"a", "b", "c"}, upl) and "b" not in upl
+    trs = [{"subtopic": "s1", "level": "basic"}, {"subtopic": "s1", "level": "basic"}, {"subtopic": "s1", "level": "competent"},
+           {"subtopic": "s2", "level": "intermediate"}]
+    assert tier_counts(trs, {"s1"}) == {"s1|b": 2, "s1|c": 1}
+    import tempfile
+    with tempfile.TemporaryDirectory(dir=os.environ.get("PP_TMP", "/data/alvin/tmp/cookie-codex/ppfix")) as td:
+        cp = Path(td) / "c.json"
+        cp.write_text('{"s1|b": 9, "s3|b": 4}')
+        got = write_counts(trs, {"s1", "s2"}, cp)
+        assert got == {"s1|b": 2, "s1|c": 1, "s2|i": 1, "s3|b": 4} and json.load(open(cp)) == got
     print("selftest ok")
 
 
@@ -599,17 +621,54 @@ def review(a):
 
 # ------------------------------------------------------------------ upload (owner's "apply" only)
 
-def upload(a):
+COUNTS = REPO / "site" / "src" / "data" / "pp_counts.json"
+TIER = {"basic": "b", "intermediate": "i", "competent": "c"}
+
+
+def deactivate_set(existing_active: set, upload_ids: set) -> set:
+    """Rows live in the table for an uploaded sub-topic that this upload no longer carries: held, dropped by select,
+    or re-tagged away. Pure (selftest)."""
+    return set(existing_active) - set(upload_ids)
+
+
+def tier_counts(rows, subs: set) -> dict:
+    """{"<sub>|<tier letter>": n} for the given sub-topics; numbers only. Pure (selftest)."""
+    c = collections.Counter(f"{r['subtopic']}|{TIER[r['level']]}" for r in rows if r["subtopic"] in subs)
+    return dict(sorted(c.items()))
+
+
+def write_counts(rows, subs: set, path: Path = COUNTS) -> dict:
+    """Replace the entries of `subs` in the counts file, keep every other sub-topic's."""
+    old = json.load(open(path)) if path.exists() else {}
+    new = {k: v for k, v in old.items() if k.split("|")[0] not in subs}
+    new.update(tier_counts(rows, subs))
+    path.write_text(json.dumps(dict(sorted(new.items())), indent=1) + "\n")
+    return new
+
+
+def selection(a):
+    """(upload rows after hold, sub-topics in the selection, db figures map, out dir)."""
     out = Path(a.out) / a.subject
     rows = jl(out / "selected.jsonl")
-    figs = collections.defaultdict(list)
-    for m in jl(out / "figures.jsonl"):
-        figs[m["pp_id"]].append({"path": m["path"], "w": m["w"], "h": m["h"]})
     if a.subtopics:
         keep = set(a.subtopics.split(","))
         rows = [r for r in rows if r["subtopic"] in keep]
+    subs = {r["subtopic"] for r in rows} | (set(a.subtopics.split(",")) if a.subtopics else set())
     hold = read_hold(out)
-    rows = [r for r in rows if r["id"] not in hold]
+    return [r for r in rows if r["id"] not in hold], subs, out
+
+
+def counts(a):
+    rows, subs, _ = selection(a)
+    new = write_counts(rows, subs)
+    print(f"{COUNTS.name}: {len(new)} tier counts ({len(subs)} sub-topics updated)")
+
+
+def upload(a):
+    rows, usubs, out = selection(a)
+    figs = collections.defaultdict(list)
+    for m in jl(out / "figures.jsonl"):
+        figs[m["pp_id"]].append({"path": m["path"], "w": m["w"], "h": m["h"]})
     missing = [r["id"] for r in rows if r["crops"] and len(figs[r["id"]]) != len(r["crops"])]
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
@@ -619,18 +678,32 @@ def upload(a):
            "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "active": True} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
     print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}")
-    if not a.apply:
-        print("dry run: nothing sent (add --apply after the owner's go-ahead)")
-        return
-    import requests
     url, k = os.environ.get("SUPABASE_URL", "").rstrip("/"), os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+    if not a.apply and not (url and k):
+        print("dry run: nothing sent; deactivations not counted (no Supabase env); "
+              "add --apply after the owner's go-ahead")
+        return
     if not url or not k:
         sys.exit("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set")
+    import requests
     h = {"apikey": k}
     if k.startswith("eyJ"):  # legacy JWT service key; new sb_secret_ keys go in apikey only
         h["authorization"] = f"Bearer {k}"
     s = requests.Session()
     s.headers.update(h)
+    keepids = {d["id"] for d in db}
+    stale = set()
+    for sub in sorted(usubs):  # active rows of an uploaded sub-topic that this upload no longer carries
+        r = s.get(f"{url}/rest/v1/pp_items", params={"select": "id", "subject": f"eq.{a.subject}",
+                  "subtopic": f"eq.{sub}", "active": "eq.true", "limit": "10000"}, timeout=60)
+        if r.status_code >= 300:
+            sys.exit(f"could not list existing rows of {sub}: HTTP {r.status_code}")
+        stale |= deactivate_set({x["id"] for x in r.json()}, keepids)
+    print(f"would deactivate {len(stale)} existing rows no longer selected" if not a.apply
+          else f"deactivating {len(stale)} existing rows no longer selected")
+    if not a.apply:
+        print("dry run: nothing sent (add --apply after the owner's go-ahead)")
+        return
     fdir = out / "figures"
     for d in db:
         for f in d["figures"]:
@@ -639,17 +712,25 @@ def upload(a):
                        headers={"content-type": "image/webp", "x-upsert": "true", "cache-control": "3600"}, timeout=60)
             if r.status_code >= 300:
                 sys.exit(f"figure upload failed for {d['id']}: HTTP {r.status_code}")
+    ids = sorted(stale)
+    for i in range(0, len(ids), 100):  # before the upsert: a row re-tagged into another uploaded sub-topic is revived there
+        r = s.patch(f"{url}/rest/v1/pp_items", params={"id": f"in.({','.join(ids[i:i + 100])})"}, json={"active": False},
+                    headers={"prefer": "return=minimal", "content-type": "application/json"}, timeout=60)
+        if r.status_code >= 300:
+            sys.exit(f"deactivate failed at batch {i // 100}: HTTP {r.status_code}")
     for i in range(0, len(db), 200):
         r = s.post(f"{url}/rest/v1/pp_items?on_conflict=id", json=db[i:i + 200], timeout=60,
                    headers={"prefer": "resolution=merge-duplicates,return=minimal", "content-type": "application/json"})
         if r.status_code >= 300:
             sys.exit(f"row upsert failed at batch {i // 200}: HTTP {r.status_code}")
     print(f"loaded {len(db)} rows and {nfig} figures")
+    write_counts(rows, usubs)
+    print(f"wrote {COUNTS.name}")
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "selftest"))
+    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "counts", "selftest"))
     p.add_argument("--subject", default="science")
     p.add_argument("--years", default="2018-2026")
     p.add_argument("--pp", default=str(DEF_PP))
@@ -662,7 +743,7 @@ def main():
     p.add_argument("--apply", action="store_true")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
-    {"select": select, "figures": figures, "review": review, "upload": upload, "selftest": lambda _a: selftest()}[a.cmd](a)
+    {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "selftest": lambda _a: selftest()}[a.cmd](a)
 
 
 if __name__ == "__main__":

@@ -1,8 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, type PpRow,
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, PP_MIN_TIER, type PpRow,
 } from './pastpaper.ts';
+import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
 const row = (over: Partial<PpRow> = {}): PpRow => ({
@@ -111,4 +112,39 @@ test('"Past paper <year>" only on past-paper items, never a school; pp ids are r
   assert.equal(ppBadge({}), '');
   assert.equal(validRow({ ...row(), year: '2025' }), false);
   assert.ok(isPpId('pp-0123456789') && !isPpId('sci-abc') && !isPpId('pp-xyz'));
+});
+
+test('ppTierCount mirrors mergePool: merge = gen + pp, replace = pp once it fills a tier, else gen + pp', () => {
+  assert.deepEqual(ppTierCount(40, 12, 'merge'), { count: 52, usesPp: true });
+  assert.deepEqual(ppTierCount(40, PP_MIN_TIER, 'replace'), { count: PP_MIN_TIER, usesPp: true });
+  assert.deepEqual(ppTierCount(40, PP_MIN_TIER - 1, 'replace'), { count: 40 + PP_MIN_TIER - 1, usesPp: true });
+  // same answer as the real merge
+  const gen = Array.from({ length: 30 }, (_, i) => ({ id: `g${i}`, sub: 's', level: 'basic' }));
+  for (const n of [5, 20, 33]) for (const mode of ['merge', 'replace'] as const) {
+    const pp = Array.from({ length: n }, (_, i) => ({ id: `pp-${i}`, sub: 's', level: 'basic' }));
+    assert.equal(mergePool(gen, pp, () => mode).length, ppTierCount(30, n, mode).count, `${mode} ${n}`);
+  }
+});
+
+test('ppTierCount changes nothing for a non-pp tier (switch off, or no pp rows)', () => {
+  assert.deepEqual(ppTierCount(40, 12, null), { count: 40, usesPp: false });
+  assert.deepEqual(ppTierCount(40, 0, 'replace'), { count: 40, usesPp: false });
+  assert.deepEqual(ppTierCount(0, 0, 'merge'), { count: 0, usesPp: false });
+  assert.equal(ppMode('sci-systems-plant-transport-parts'), null); // PP_ENABLED is false: nothing is counted yet
+});
+
+test('liveMastered matches the total a merged quiz stored, with no hash on pp tiers', () => {
+  const genIds = Array.from({ length: 30 }, (_, i) => `g${i}`);
+  const ppIds = Array.from({ length: 12 }, (_, i) => `pp-${String(i).padStart(10, '0')}`);
+  const s = fresh();
+  // the quiz page's pool for a merged tier: generated + pp, every one retired
+  const all = [...genIds, ...ppIds];
+  for (const id of all) answer(s, id, true, 1);
+  syncTiers(s, { 'x|b': all }, () => undefined, 1);
+  const st = s.progress.x!.b!;
+  const view = ppTierCount(genIds.length, ppIds.length, 'merge');
+  assert.equal(st.total, view.count);
+  assert.equal(liveMastered(st, view.count, view.usesPp ? undefined : tierHash(genIds)), all.length); // size check only
+  assert.equal(liveMastered(st, view.count, tierHash(genIds)), 0); // the old build-time hash would have read 0
+  assert.equal(liveMastered(st, genIds.length, undefined), 0); // the old build-time count too
 });
