@@ -6593,7 +6593,7 @@
    "seq": 5
   },
   {
-   "id": "engsec-5466b6ff49",
+   "id": "engsec-300372cd48",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -6603,17 +6603,13 @@
    ],
    "stem": "What type of text is this?",
    "options": [
-    "a story about the school canteen",
     "a diary entry written by a pupil",
     "an advertisement for the canteen food",
-    "a notice from the school"
+    "a notice from the school",
+    "a story about the school canteen"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
-    {
-     "tag": "wrong_text_type",
-     "why": "would tell what happened to characters, but this gives facts and instructions."
-    },
     {
      "tag": "wrong_text_type",
      "why": "would tell one person's feelings, but this is written to many pupils."
@@ -6622,13 +6618,17 @@
      "tag": "wrong_text_type",
      "why": "would try to sell food, but this tells pupils the canteen is closed."
     },
-    null
+    null,
+    {
+     "tag": "wrong_text_type",
+     "why": "would tell what happened to characters, but this gives facts and instructions."
+    }
    ],
    "solution": [
     "It gives a date, a reason and what to do, and is signed by a school staff member, so it is a notice."
    ],
    "params": {
-    "key": "vis-22-1",
+    "key": "vis-36-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -6657,11 +6657,11 @@
     ],
     "footer": "Thank you for your understanding. Mr Tan, Operations Manager"
    },
-   "group": "eng-visual-text:vis-22",
+   "group": "eng-visual-text:vis-36",
    "seq": 1
   },
   {
-   "id": "engsec-53a469e14d",
+   "id": "engsec-a3a76281bb",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -6671,17 +6671,13 @@
    ],
    "stem": "Who is the notice meant for?",
    "options": [
-    "the pest-control workers",
     "parents who cook at home",
     "visitors to the school",
-    "pupils of the school"
+    "pupils of the school",
+    "the pest-control workers"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
-    {
-     "tag": "wrong_audience",
-     "why": "are only mentioned; they are not the readers."
-    },
     {
      "tag": "wrong_audience",
      "why": "are not addressed; the notice says 'Pupils should bring...'."
@@ -6690,13 +6686,17 @@
      "tag": "wrong_audience",
      "why": "are not mentioned anywhere in the notice."
     },
-    null
+    null,
+    {
+     "tag": "wrong_audience",
+     "why": "are only mentioned; they are not the readers."
+    }
    ],
    "solution": [
     "The notice tells pupils what to do on Friday."
    ],
    "params": {
-    "key": "vis-22-2",
+    "key": "vis-36-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -6725,11 +6725,11 @@
     ],
     "footer": "Thank you for your understanding. Mr Tan, Operations Manager"
    },
-   "group": "eng-visual-text:vis-22",
+   "group": "eng-visual-text:vis-36",
    "seq": 2
   },
   {
-   "id": "engsec-f08752e1c5",
+   "id": "engsec-5dbaa119c7",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -6739,10 +6739,10 @@
    ],
    "stem": "Why did the writer add a line under the heading 'Note'?",
    "options": [
-    "to say sorry to the pupils",
-    "to ask pupils to buy drinks at the canteen",
+    "to say sorry to the pupils for the trouble",
+    "to repeat the date on which the canteen closes",
     "to give extra information that readers should not miss",
-    "to repeat the date of the closure"
+    "to ask pupils to buy their drinks from the canteen"
    ],
    "answer": 2,
    "explain": [
@@ -6752,19 +6752,19 @@
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the canteen is closed that day."
+     "why": "is wrong; the date was already given and the note says something new."
     },
     null,
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the date was already given and the note says something new."
+     "why": "is wrong; the canteen is closed that day."
     }
    ],
    "solution": [
     "A 'Note' adds a useful detail: water is still available from the coolers."
    ],
    "params": {
-    "key": "vis-22-3",
+    "key": "vis-36-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -6793,11 +6793,11 @@
     ],
     "footer": "Thank you for your understanding. Mr Tan, Operations Manager"
    },
-   "group": "eng-visual-text:vis-22",
+   "group": "eng-visual-text:vis-36",
    "seq": 3
   },
   {
-   "id": "engsec-330e76cc7f",
+   "id": "engsec-9ca7d0d7a2",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -6808,31 +6808,31 @@
    "stem": "Why will the canteen be closed on 12 June?",
    "options": [
     "The water coolers need to be moved",
-    "The canteen workers are on holiday",
+    "Pest-control workers will clean it",
     "The school hall is being repaired",
-    "Pest-control workers will clean it"
+    "The canteen workers are on holiday"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
      "tag": "wrong_detail",
      "why": "is not stated; the coolers will still be open."
     },
-    {
-     "tag": "wrong_detail",
-     "why": "is not stated; the reason given is cleaning."
-    },
+    null,
     {
      "tag": "wrong_detail",
      "why": "is not stated; the hall is only named as the place of the coolers."
     },
-    null
+    {
+     "tag": "wrong_detail",
+     "why": "is not stated; the reason given is cleaning."
+    }
    ],
    "solution": [
     "Under 'Why', pest-control workers will clean the whole canteen."
    ],
    "params": {
-    "key": "vis-22-4",
+    "key": "vis-36-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -6861,11 +6861,11 @@
     ],
     "footer": "Thank you for your understanding. Mr Tan, Operations Manager"
    },
-   "group": "eng-visual-text:vis-22",
+   "group": "eng-visual-text:vis-36",
    "seq": 4
   },
   {
-   "id": "engsec-24cb7057f1",
+   "id": "engsec-0fc4d6cd4d",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -6876,11 +6876,11 @@
    "stem": "What does the notice ask pupils to do on 12 June?",
    "options": [
     "go to the hall for lunch",
-    "stay at home",
     "buy food from the water coolers",
-    "bring their own food and drinks"
+    "bring their own food and drinks",
+    "stay at home"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
      "tag": "misread_detail",
@@ -6888,19 +6888,19 @@
     },
     {
      "tag": "misread_detail",
-     "why": "is not said; school is still open."
-    },
-    {
-     "tag": "misread_detail",
      "why": "is wrong; the coolers only give water."
     },
-    null
+    null,
+    {
+     "tag": "misread_detail",
+     "why": "is not said; school is still open."
+    }
    ],
    "solution": [
     "'Pupils should bring their own food and drinks that day.'"
    ],
    "params": {
-    "key": "vis-22-5",
+    "key": "vis-36-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -6929,7 +6929,7 @@
     ],
     "footer": "Thank you for your understanding. Mr Tan, Operations Manager"
    },
-   "group": "eng-visual-text:vis-22",
+   "group": "eng-visual-text:vis-36",
    "seq": 5
   },
   {
@@ -7298,7 +7298,7 @@
    "seq": 5
   },
   {
-   "id": "engsec-dd7a52d8a4",
+   "id": "engsec-3831973ab9",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7308,32 +7308,32 @@
    ],
    "stem": "Who is the timetable mainly meant for?",
    "options": [
-    "young children and their parents",
-    "teenagers who like to read novels",
     "people who want to borrow DVDs",
-    "librarians looking for a job"
+    "teenagers who like to read novels",
+    "librarians looking for a job",
+    "young children and their parents"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
-    {
-     "tag": "wrong_audience",
-     "why": "are not included; the oldest group is 7 to 9 years."
-    },
     {
      "tag": "wrong_audience",
      "why": "are not mentioned; the timetable is about story sessions."
     },
     {
      "tag": "wrong_audience",
+     "why": "are not included; the oldest group is 7 to 9 years."
+    },
+    {
+     "tag": "wrong_audience",
      "why": "are not addressed; the sessions are for listeners aged 3 to 9."
-    }
+    },
+    null
    ],
    "solution": [
     "The age groups are 3 to 9 years, so the readers are young children and their parents."
    ],
    "params": {
-    "key": "vis-24-1",
+    "key": "vis-37-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7360,11 +7360,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-24",
+   "group": "eng-visual-text:vis-37",
    "seq": 1
   },
   {
-   "id": "engsec-ac87e8181f",
+   "id": "engsec-e6c590e144",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7374,13 +7374,17 @@
    ],
    "stem": "Mei Ling is 5 years old and likes Mandarin. Which session should she go to?",
    "options": [
+    "Saturday at 11.00 a.m.",
     "Monday at 10.00 a.m.",
     "Friday at 3.30 p.m.",
-    "Wednesday at 10.00 a.m.",
-    "Saturday at 11.00 a.m."
+    "Wednesday at 10.00 a.m."
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
+    {
+     "tag": "misread_detail",
+     "why": "is in Malay, not Mandarin."
+    },
     {
      "tag": "misread_detail",
      "why": "is for 3 to 4 years and is in English."
@@ -7389,17 +7393,13 @@
      "tag": "misread_detail",
      "why": "is for 7 to 9 years and is in English."
     },
-    null,
-    {
-     "tag": "misread_detail",
-     "why": "is in Malay, not Mandarin."
-    }
+    null
    ],
    "solution": [
     "Age 5 and Mandarin match only the Wednesday row."
    ],
    "params": {
-    "key": "vis-24-2",
+    "key": "vis-37-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7426,11 +7426,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-24",
+   "group": "eng-visual-text:vis-37",
    "seq": 2
   },
   {
-   "id": "engsec-136a4be1c4",
+   "id": "engsec-c0840297cb",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7440,10 +7440,10 @@
    ],
    "stem": "Why did the writer use a table for this information?",
    "options": [
-    "to tell a story in order",
-    "to make the library look bigger",
+    "to tell the story of the library in order",
+    "to give readers a short poem to read aloud",
     "to show the details clearly in rows and columns",
-    "to give readers a poem to read"
+    "to make the library look bigger and busier"
    ],
    "answer": 2,
    "explain": [
@@ -7453,19 +7453,19 @@
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; a table does not change how the library looks."
+     "why": "is wrong; there is no poem."
     },
     null,
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; there is no poem."
+     "why": "is wrong; a table does not change how the library looks."
     }
    ],
    "solution": [
     "A table lets readers compare day, time, age and language quickly."
    ],
    "params": {
-    "key": "vis-24-3",
+    "key": "vis-37-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7492,11 +7492,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-24",
+   "group": "eng-visual-text:vis-37",
    "seq": 3
   },
   {
-   "id": "engsec-2f0d08e73b",
+   "id": "engsec-bd7ff02155",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7506,32 +7506,32 @@
    ],
    "stem": "What does 'Please arrive 10 minutes early' suggest?",
    "options": [
+    "children should be seated before the story begins",
     "the library will close after 10 minutes",
-    "the session will last for 10 minutes only",
     "children must pay if they come late",
-    "children should be seated before the story begins"
+    "the session will last for 10 minutes only"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_over_inference",
      "why": "is not suggested anywhere."
     },
     {
      "tag": "wrong_over_inference",
-     "why": "is wrong; the notes say each session lasts 30 minutes."
+     "why": "is not suggested; no fee is mentioned."
     },
     {
      "tag": "wrong_over_inference",
-     "why": "is not suggested; no fee is mentioned."
-    },
-    null
+     "why": "is wrong; the notes say each session lasts 30 minutes."
+    }
    ],
    "solution": [
     "Arriving early gives time to settle down, so the story can start on time."
    ],
    "params": {
-    "key": "vis-24-4",
+    "key": "vis-37-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7558,11 +7558,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-24",
+   "group": "eng-visual-text:vis-37",
    "seq": 4
   },
   {
-   "id": "engsec-36affecf89",
+   "id": "engsec-28585ae223",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7573,16 +7573,17 @@
    "stem": "Which session is probably planned for pupils who come after school?",
    "options": [
     "Saturday at 11.00 a.m.",
+    "Friday at 3.30 p.m.",
     "Wednesday at 10.00 a.m.",
-    "Monday at 10.00 a.m.",
-    "Friday at 3.30 p.m."
+    "Monday at 10.00 a.m."
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
      "tag": "wrong_inference",
      "why": "is a weekend session, not an after-school one."
     },
+    null,
     {
      "tag": "wrong_inference",
      "why": "is a school-day morning, when most pupils are in class."
@@ -7590,14 +7591,13 @@
     {
      "tag": "wrong_inference",
      "why": "is a school-day morning, when most pupils are in class."
-    },
-    null
+    }
    ],
    "solution": [
     "3.30 p.m. on a weekday is after school hours."
    ],
    "params": {
-    "key": "vis-24-5",
+    "key": "vis-37-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7624,11 +7624,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-24",
+   "group": "eng-visual-text:vis-37",
    "seq": 5
   },
   {
-   "id": "engsec-3623b6d58c",
+   "id": "engsec-30172dbecc",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7638,13 +7638,14 @@
    ],
    "stem": "Why did Mr Raj write this email?",
    "options": [
+    "to remind parents about Sports Day",
     "to invite parents to a talk in the hall",
     "to say that Sports Day is cancelled",
-    "to remind parents about Sports Day",
     "to ask parents to buy PE attire"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_purpose",
      "why": "is not its aim; the event is at the school field."
@@ -7653,7 +7654,6 @@
      "tag": "wrong_purpose",
      "why": "is not its aim; the event will take place."
     },
-    null,
     {
      "tag": "wrong_purpose",
      "why": "is not its aim; pupils are simply told to wear PE attire."
@@ -7663,7 +7663,7 @@
     "The email gives date, place, attire and rain plan, so it reminds parents."
    ],
    "params": {
-    "key": "vis-25-1",
+    "key": "vis-38-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7683,11 +7683,11 @@
     ],
     "footer": "Thank you. Mr Raj"
    },
-   "group": "eng-visual-text:vis-25",
+   "group": "eng-visual-text:vis-38",
    "seq": 1
   },
   {
-   "id": "engsec-a7c6b991b0",
+   "id": "engsec-cbebaf0605",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7697,13 +7697,14 @@
    ],
    "stem": "Who is Mr Raj?",
    "options": [
+    "a PE teacher at the school",
     "a parent of a Primary 3 pupil",
     "the school principal",
-    "a Primary 3 pupil",
-    "a PE teacher at the school"
+    "a Primary 3 pupil"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_detail",
      "why": "is wrong; he writes to the parents."
@@ -7715,14 +7716,13 @@
     {
      "tag": "wrong_detail",
      "why": "is wrong; the writer is an adult teacher."
-    },
-    null
+    }
    ],
    "solution": [
     "The line 'From: Mr Raj (PE Teacher)' tells us his job."
    ],
    "params": {
-    "key": "vis-25-2",
+    "key": "vis-38-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7742,11 +7742,11 @@
     ],
     "footer": "Thank you. Mr Raj"
    },
-   "group": "eng-visual-text:vis-25",
+   "group": "eng-visual-text:vis-38",
    "seq": 2
   },
   {
-   "id": "engsec-e2f15e2a67",
+   "id": "engsec-9bcde202e5",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7756,32 +7756,32 @@
    ],
    "stem": "Why does the email begin with a 'Subject' line?",
    "options": [
+    "to give the name of the person who sent it",
     "to tell the reader what the email is about",
-    "to say when the email was sent",
-    "to thank the reader",
-    "to give the name of the sender"
+    "to thank the reader for reading it",
+    "to say on which date the email was sent"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the subject line shows no sending date."
+     "why": "is wrong; the sender is shown in the 'From' line."
     },
+    null,
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the thanks come at the end."
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the sender is shown in the 'From' line."
+     "why": "is wrong; the subject line shows no sending date."
     }
    ],
    "solution": [
     "A subject line gives the topic so readers know what to expect."
    ],
    "params": {
-    "key": "vis-25-3",
+    "key": "vis-38-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7801,11 +7801,11 @@
     ],
     "footer": "Thank you. Mr Raj"
    },
-   "group": "eng-visual-text:vis-25",
+   "group": "eng-visual-text:vis-38",
    "seq": 3
   },
   {
-   "id": "engsec-a031e95d83",
+   "id": "engsec-c0c06b4c5d",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7817,10 +7817,10 @@
    "options": [
     "Saturday, 20 June",
     "Friday, 19 June",
-    "Monday, 22 June",
-    "Friday, 26 June"
+    "Friday, 26 June",
+    "Monday, 22 June"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
      "tag": "misread_detail",
@@ -7830,17 +7830,17 @@
      "tag": "misread_detail",
      "why": "is the planned day; it is moved if it rains."
     },
-    null,
     {
      "tag": "misread_detail",
      "why": "is not mentioned in the email."
-    }
+    },
+    null
    ],
    "solution": [
     "'If it rains, Sports Day will be moved to Monday, 22 June.'"
    ],
    "params": {
-    "key": "vis-25-4",
+    "key": "vis-38-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7860,11 +7860,11 @@
     ],
     "footer": "Thank you. Mr Raj"
    },
-   "group": "eng-visual-text:vis-25",
+   "group": "eng-visual-text:vis-38",
    "seq": 4
   },
   {
-   "id": "engsec-7e5a047ec5",
+   "id": "engsec-d4314759a5",
    "topic": "eng-sec-visual-text",
    "level": "basic",
    "template": "eng-pat-visual-mcq",
@@ -7874,16 +7874,16 @@
    ],
    "stem": "What does 'Parents are welcome to cheer' suggest?",
    "options": [
-    "parents are not allowed on the field",
+    "parents must come to the field",
     "parents will join the races",
     "parents may come if they wish",
-    "parents must come to the field"
+    "parents are not allowed on the field"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_over_inference",
-     "why": "is the opposite of 'welcome'."
+     "why": "is too strong; 'welcome' is an invitation, not a rule."
     },
     {
      "tag": "wrong_over_inference",
@@ -7892,14 +7892,14 @@
     null,
     {
      "tag": "wrong_over_inference",
-     "why": "is too strong; 'welcome' is an invitation, not a rule."
+     "why": "is the opposite of 'welcome'."
     }
    ],
    "solution": [
     "'Welcome' means invited, but not required."
    ],
    "params": {
-    "key": "vis-25-5",
+    "key": "vis-38-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7919,11 +7919,11 @@
     ],
     "footer": "Thank you. Mr Raj"
    },
-   "group": "eng-visual-text:vis-25",
+   "group": "eng-visual-text:vis-38",
    "seq": 5
   },
   {
-   "id": "engsec-463885a525",
+   "id": "engsec-f4fc16f6e2",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -7933,32 +7933,32 @@
    ],
    "stem": "Why did the writer put the last point under 'What you should know' in brackets?",
    "options": [
+    "to ask readers a question",
     "to show that the information is not true",
-    "to give extra details for one group of readers",
     "to show the name of the pool",
-    "to ask readers a question"
+    "to give extra details for one group of readers"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
+    {
+     "tag": "wrong_feature_purpose",
+     "why": "is wrong; the bracketed lines are statements."
+    },
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; brackets add details, they do not cast doubt."
     },
-    null,
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the pool name was already given in the line above."
     },
-    {
-     "tag": "wrong_feature_purpose",
-     "why": "is wrong; the bracketed lines are statements."
-    }
+    null
    ],
    "solution": [
     "The bracketed lines only matter to parents of Learn-to-Swim pupils, so they are added as an extra detail."
    ],
    "params": {
-    "key": "vis-26-1",
+    "key": "vis-39-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -7989,11 +7989,11 @@
     ],
     "footer": "We are sorry for the trouble caused."
    },
-   "group": "eng-visual-text:vis-26",
+   "group": "eng-visual-text:vis-39",
    "seq": 1
   },
   {
-   "id": "engsec-9327b56413",
+   "id": "engsec-e37886b013",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8003,14 +8003,13 @@
    ],
    "stem": "Who will NOT be affected by the closure at all?",
    "options": [
-    "a person who uses only the gym",
     "a season-pass holder who swims daily",
     "a pupil in Learn-to-Swim lessons",
+    "a person who uses only the gym",
     "a visitor who pays for each entry"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
      "tag": "wrong_inference",
      "why": "is affected; the pools are closed even though the pass is extended."
@@ -8019,6 +8018,7 @@
      "tag": "wrong_inference",
      "why": "is affected; lessons will move to another pool."
     },
+    null,
     {
      "tag": "wrong_inference",
      "why": "is affected; the visitor must go to a different pool."
@@ -8028,7 +8028,7 @@
     "The gym and sauna stay open, so gym users do not change anything."
    ],
    "params": {
-    "key": "vis-26-2",
+    "key": "vis-39-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8059,11 +8059,11 @@
     ],
     "footer": "We are sorry for the trouble caused."
    },
-   "group": "eng-visual-text:vis-26",
+   "group": "eng-visual-text:vis-39",
    "seq": 2
   },
   {
-   "id": "engsec-7865a26f90",
+   "id": "engsec-f2dc81eed0",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8073,32 +8073,32 @@
    ],
    "stem": "Mr Goh's season pass ends on 31 August. What will his new end date be?",
    "options": [
-    "28 September",
     "14 September",
+    "16 August",
     "31 August",
-    "16 August"
+    "28 September"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "misread_detail",
-     "why": "adds the 14 days twice."
+     "why": "is the last day of closure, not a pass date."
     },
-    null,
     {
      "tag": "misread_detail",
      "why": "ignores the 14 days that will be added."
     },
     {
      "tag": "misread_detail",
-     "why": "is the last day of closure, not a pass date."
+     "why": "adds the 14 days twice."
     }
    ],
    "solution": [
     "31 August + 14 days = 14 September."
    ],
    "params": {
-    "key": "vis-26-3",
+    "key": "vis-39-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8129,11 +8129,11 @@
     ],
     "footer": "We are sorry for the trouble caused."
    },
-   "group": "eng-visual-text:vis-26",
+   "group": "eng-visual-text:vis-39",
    "seq": 3
   },
   {
-   "id": "engsec-145ac7759d",
+   "id": "engsec-3d1c651c88",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8143,32 +8143,32 @@
    ],
    "stem": "Why did the writer end with 'We are sorry for the trouble caused.'?",
    "options": [
-    "to say the pool will close forever",
-    "to blame the visitors for the closure",
     "to show politeness for the inconvenience",
-    "to advertise the swimming complex"
+    "to advertise the swimming complex",
+    "to blame the visitors for the closure",
+    "to say the pool will close forever"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the closure is temporary."
+     "why": "is wrong; the line is an apology, not an advertisement."
     },
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; an apology does not blame readers."
     },
-    null,
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the line is an apology, not an advertisement."
+     "why": "is wrong; the closure is temporary."
     }
    ],
    "solution": [
     "An apology at the end is a polite way to admit that readers are inconvenienced."
    ],
    "params": {
-    "key": "vis-26-4",
+    "key": "vis-39-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8199,11 +8199,11 @@
     ],
     "footer": "We are sorry for the trouble caused."
    },
-   "group": "eng-visual-text:vis-26",
+   "group": "eng-visual-text:vis-39",
    "seq": 4
   },
   {
-   "id": "engsec-03c2581844",
+   "id": "engsec-afa7fd1da0",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8213,22 +8213,22 @@
    ],
    "stem": "Why did the writer put up this notice?",
    "options": [
-    "to advertise the gym and sauna",
-    "to ask people for donations",
     "to inform the public about the closure and what to do",
-    "to persuade people to buy season passes"
+    "to ask people for donations to repair the pools",
+    "to advertise the gym and sauna to new members",
+    "to persuade more people to buy new season passes"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong_purpose",
-     "why": "is not its aim; they are mentioned only because they stay open."
-    },
+    null,
     {
      "tag": "wrong_purpose",
      "why": "is not its aim; no money is requested."
     },
-    null,
+    {
+     "tag": "wrong_purpose",
+     "why": "is not its aim; they are mentioned only because they stay open."
+    },
     {
      "tag": "wrong_purpose",
      "why": "is not its aim; passes are mentioned only to explain what happens to them."
@@ -8238,7 +8238,7 @@
     "It states the closure dates, reason and arrangements for different users."
    ],
    "params": {
-    "key": "vis-26-5",
+    "key": "vis-39-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8269,11 +8269,11 @@
     ],
     "footer": "We are sorry for the trouble caused."
    },
-   "group": "eng-visual-text:vis-26",
+   "group": "eng-visual-text:vis-39",
    "seq": 5
   },
   {
-   "id": "engsec-587e54423b",
+   "id": "engsec-c905525556",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8283,13 +8283,18 @@
    ],
    "stem": "Why did the writer use three short sentences in 'Read it. Share it. Swap it.'?",
    "options": [
-    "to give the dates of the fair",
-    "to show that the writer is tired",
     "to make the slogan catchy and easy to remember",
-    "to tell readers they must buy three books"
+    "to tell readers they must buy three books",
+    "to give the dates of the fair",
+    "to show that the writer is tired"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "wrong_feature_purpose",
+     "why": "is wrong; the offer is described under 'Special offers'."
+    },
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the dates are under another heading."
@@ -8297,18 +8302,13 @@
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; short sentences here make the slogan lively."
-    },
-    null,
-    {
-     "tag": "wrong_feature_purpose",
-     "why": "is wrong; the offer is described under 'Special offers'."
     }
    ],
    "solution": [
     "Short parallel sentences are catchy and stay in the reader's mind."
    ],
    "params": {
-    "key": "vis-27-1",
+    "key": "vis-40-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8341,11 +8341,11 @@
     ],
     "footer": "Every book you buy helps another child read."
    },
-   "group": "eng-visual-text:vis-27",
+   "group": "eng-visual-text:vis-40",
    "seq": 1
   },
   {
-   "id": "engsec-389db52f3b",
+   "id": "engsec-cb8bf0e3c7",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8355,32 +8355,32 @@
    ],
    "stem": "What is the purpose of the last line, 'Every book you buy helps another child read.'?",
    "options": [
-    "to persuade readers that buying a book does good",
     "to explain how to swap books",
+    "to warn readers about the price of books",
     "to tell readers where the library is",
-    "to warn readers about the price of books"
+    "to persuade readers that buying a book does good"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
      "tag": "wrong_purpose",
      "why": "is not its aim; swapping is under 'Special offers'."
     },
     {
      "tag": "wrong_purpose",
-     "why": "is not its aim; the place is given earlier."
+     "why": "is not its aim; it gives no price."
     },
     {
      "tag": "wrong_purpose",
-     "why": "is not its aim; it gives no price."
-    }
+     "why": "is not its aim; the place is given earlier."
+    },
+    null
    ],
    "solution": [
     "It links a purchase to helping others, which encourages people to buy."
    ],
    "params": {
-    "key": "vis-27-2",
+    "key": "vis-40-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8413,11 +8413,11 @@
     ],
     "footer": "Every book you buy helps another child read."
    },
-   "group": "eng-visual-text:vis-27",
+   "group": "eng-visual-text:vis-40",
    "seq": 2
   },
   {
-   "id": "engsec-3149116707",
+   "id": "engsec-6f8018a134",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8427,16 +8427,16 @@
    ],
    "stem": "What does the word 'pre-loved' in 'Pre-loved Book Corner' suggest about the books?",
    "options": [
-    "they are written by Ms Farah Ng",
+    "they are all free",
     "they are brand new",
     "they have been owned by someone before",
-    "they are all free"
+    "they are written by Ms Farah Ng"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_over_inference",
-     "why": "is not suggested; she is only a visiting author."
+     "why": "is not suggested; they are swapped one for one."
     },
     {
      "tag": "wrong_meaning",
@@ -8445,14 +8445,14 @@
     null,
     {
      "tag": "wrong_over_inference",
-     "why": "is not suggested; they are swapped one for one."
+     "why": "is not suggested; she is only a visiting author."
     }
    ],
    "solution": [
     "'Pre-loved' is a friendly way of saying second-hand."
    ],
    "params": {
-    "key": "vis-27-3",
+    "key": "vis-40-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8485,11 +8485,11 @@
     ],
     "footer": "Every book you buy helps another child read."
    },
-   "group": "eng-visual-text:vis-27",
+   "group": "eng-visual-text:vis-40",
    "seq": 3
   },
   {
-   "id": "engsec-a4b443f9dc",
+   "id": "engsec-a48c630173",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8499,17 +8499,18 @@
    ],
    "stem": "Which book would probably NOT be accepted at the Pre-loved Book Corner?",
    "options": [
-    "a hardcover novel with a neat cover",
-    "a clean comic book",
-    "a slightly used dictionary",
-    "a storybook with torn pages and a missing cover"
+    "a hardcover novel with a neat cover and no marks",
+    "a storybook with torn pages and a missing cover",
+    "a clean comic book with bright pages",
+    "a slightly used dictionary with a firm cover"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
      "tag": "wrong_detail",
      "why": "would be accepted; it is in good condition."
     },
+    null,
     {
      "tag": "wrong_detail",
      "why": "would be accepted; it is in good condition."
@@ -8517,14 +8518,13 @@
     {
      "tag": "wrong_detail",
      "why": "would be accepted; slight use is still good condition."
-    },
-    null
+    }
    ],
    "solution": [
     "Books must be in good condition, and torn pages and a missing cover are not."
    ],
    "params": {
-    "key": "vis-27-4",
+    "key": "vis-40-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8557,11 +8557,11 @@
     ],
     "footer": "Every book you buy helps another child read."
    },
-   "group": "eng-visual-text:vis-27",
+   "group": "eng-visual-text:vis-40",
    "seq": 4
   },
   {
-   "id": "engsec-64f1fef22d",
+   "id": "engsec-108e790b1e",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -8572,21 +8572,21 @@
    "stem": "Mei Lin buys 3 books that cost $10 each. How much does she pay?",
    "options": [
     "$30",
-    "$25",
     "$15",
+    "$25",
     "$20"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "misread_detail",
      "why": "ignores the half-price offer."
     },
-    null,
     {
      "tag": "misread_detail",
      "why": "takes half off every book, but only the 3rd book is half price."
     },
+    null,
     {
      "tag": "misread_detail",
      "why": "treats the 3rd book as free, but it is half price."
@@ -8596,7 +8596,7 @@
     "$10 + $10 + half of $10 ($5) = $25."
    ],
    "params": {
-    "key": "vis-27-5",
+    "key": "vis-40-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -8629,7 +8629,7 @@
     ],
     "footer": "Every book you buy helps another child read."
    },
-   "group": "eng-visual-text:vis-27",
+   "group": "eng-visual-text:vis-40",
    "seq": 5
   },
   {
@@ -9313,7 +9313,7 @@
    "seq": 5
   },
   {
-   "id": "engsec-49de8cee54",
+   "id": "engsec-acdb907af8",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -9348,7 +9348,7 @@
     "Capital letters make readers notice a rule they must follow."
    ],
    "params": {
-    "key": "vis-30-1",
+    "key": "vis-41-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9368,11 +9368,11 @@
     ],
     "footer": "Yours sincerely, Mrs Chua"
    },
-   "group": "eng-visual-text:vis-30",
+   "group": "eng-visual-text:vis-41",
    "seq": 1
   },
   {
-   "id": "engsec-cb3b00c724",
+   "id": "engsec-2aab23ae2a",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -9382,32 +9382,32 @@
    ],
    "stem": "Why did the writer send this email?",
    "options": [
-    "to announce a new dismissal time for all pupils",
-    "to ask parents to repair the road",
     "to say that the school will close for three weeks",
-    "to tell parents about a temporary change in dismissal"
+    "to announce a new dismissal time for all pupils",
+    "to tell parents about a temporary change in dismissal",
+    "to ask parents to repair the road"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
-    {
-     "tag": "wrong_purpose",
-     "why": "is wrong; only Primary 1 to 3 are mentioned."
-    },
-    {
-     "tag": "wrong_purpose",
-     "why": "is wrong; the road works are done by others."
-    },
     {
      "tag": "wrong_purpose",
      "why": "is wrong; only the dismissal gate changes."
     },
-    null
+    {
+     "tag": "wrong_purpose",
+     "why": "is wrong; only Primary 1 to 3 are mentioned."
+    },
+    null,
+    {
+     "tag": "wrong_purpose",
+     "why": "is wrong; the road works are done by others."
+    }
    ],
    "solution": [
     "The email explains where and when pupils will leave during the road works."
    ],
    "params": {
-    "key": "vis-30-2",
+    "key": "vis-41-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9427,11 +9427,11 @@
     ],
     "footer": "Yours sincerely, Mrs Chua"
    },
-   "group": "eng-visual-text:vis-30",
+   "group": "eng-visual-text:vis-41",
    "seq": 2
   },
   {
-   "id": "engsec-598123a6b9",
+   "id": "engsec-4ce6d35d70",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -9441,13 +9441,18 @@
    ],
    "stem": "Where will a Primary 2 pupil be dismissed during the road works?",
    "options": [
-    "at the sports hall",
-    "at the car park behind the sports hall",
+    "at the side gate on Elm Street",
     "at the main gate",
-    "at the side gate on Elm Street"
+    "at the sports hall",
+    "at the car park behind the sports hall"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
+    {
+     "tag": "misread_detail",
+     "why": "is the usual gate; it changes during the road works."
+    },
     {
      "tag": "misread_detail",
      "why": "is not named as a dismissal point."
@@ -9455,18 +9460,13 @@
     {
      "tag": "misread_detail",
      "why": "is where drivers are advised to park, not a dismissal point."
-    },
-    {
-     "tag": "misread_detail",
-     "why": "is the usual gate; it changes during the road works."
-    },
-    null
+    }
    ],
    "solution": [
     "Primary 1 to 3 pupils will leave at the side gate on Elm Street."
    ],
    "params": {
-    "key": "vis-30-3",
+    "key": "vis-41-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9486,11 +9486,11 @@
     ],
     "footer": "Yours sincerely, Mrs Chua"
    },
-   "group": "eng-visual-text:vis-30",
+   "group": "eng-visual-text:vis-41",
    "seq": 3
   },
   {
-   "id": "engsec-f7893e5a8c",
+   "id": "engsec-643b040d94",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -9500,32 +9500,32 @@
    ],
    "stem": "Why are cars probably not allowed to stop along Elm Street?",
    "options": [
-    "to keep young pupils safe and traffic moving near the side gate",
-    "because the school sells the car park spaces",
-    "because Elm Street is closed for ever",
-    "because pupils must walk home"
+    "because Elm Street has been closed to everyone for good",
+    "because the school rents out the spaces along Elm Street",
+    "because all pupils have been told to walk home alone",
+    "to keep young pupils safe and traffic moving near the side gate"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
-    {
-     "tag": "wrong_inference",
-     "why": "is not suggested anywhere in the email."
-    },
     {
      "tag": "wrong_inference",
      "why": "is not suggested; pupils use the side gate there."
     },
     {
      "tag": "wrong_inference",
+     "why": "is not suggested anywhere in the email."
+    },
+    {
+     "tag": "wrong_inference",
      "why": "is not suggested; parents are told where to park."
-    }
+    },
+    null
    ],
    "solution": [
     "Young pupils gather at the side gate, so stopping cars would block and endanger them."
    ],
    "params": {
-    "key": "vis-30-4",
+    "key": "vis-41-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9545,11 +9545,11 @@
     ],
     "footer": "Yours sincerely, Mrs Chua"
    },
-   "group": "eng-visual-text:vis-30",
+   "group": "eng-visual-text:vis-41",
    "seq": 4
   },
   {
-   "id": "engsec-55a6930be1",
+   "id": "engsec-93ca6e5c05",
    "topic": "eng-sec-visual-text",
    "level": "intermediate",
    "template": "eng-pat-visual-mcq",
@@ -9559,18 +9559,13 @@
    ],
    "stem": "Why did Mrs Chua end with 'We seek your kind understanding and cooperation.'?",
    "options": [
-    "to politely ask parents to accept the inconvenience",
-    "to ask parents for ideas for the road works",
     "to order parents to attend a meeting",
-    "to thank parents for paying a fee"
+    "to thank parents for paying a fee",
+    "to politely ask parents to accept the inconvenience",
+    "to ask parents for ideas for the road works"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
-    {
-     "tag": "wrong_feature_purpose",
-     "why": "is wrong; no ideas are requested."
-    },
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; no meeting is mentioned."
@@ -9578,13 +9573,18 @@
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; no fee is mentioned."
+    },
+    null,
+    {
+     "tag": "wrong_feature_purpose",
+     "why": "is wrong; no ideas are requested."
     }
    ],
    "solution": [
     "The line is a polite request to put up with the changes."
    ],
    "params": {
-    "key": "vis-30-5",
+    "key": "vis-41-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9604,11 +9604,11 @@
     ],
     "footer": "Yours sincerely, Mrs Chua"
    },
-   "group": "eng-visual-text:vis-30",
+   "group": "eng-visual-text:vis-41",
    "seq": 5
   },
   {
-   "id": "engsec-56fedc19f8",
+   "id": "engsec-678a2a676a",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -9618,18 +9618,18 @@
    ],
    "stem": "Why did the writer put an asterisk (*) after 'free T-shirt'?",
    "options": [
-    "to show that the T-shirt is the best prize",
     "to point readers to a condition at the bottom of the poster",
-    "to show that the T-shirt has a star design",
-    "to show that the T-shirt costs extra"
+    "to show that the T-shirt is the best prize for runners",
+    "to show that the T-shirt has a star printed on it",
+    "to show that runners must pay extra for the T-shirt"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; an asterisk does not rank anything."
     },
-    null,
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the asterisk is a signal, not a picture."
@@ -9643,7 +9643,7 @@
     "The asterisk links to the footnote that says when the T-shirts are given out."
    ],
    "params": {
-    "key": "vis-31-1",
+    "key": "vis-42-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9682,11 +9682,11 @@
     ],
     "footer": "*T-shirts are given out only at pack collection on 13 November, 3.00 p.m. to 9.00 p.m."
    },
-   "group": "eng-visual-text:vis-31",
+   "group": "eng-visual-text:vis-42",
    "seq": 1
   },
   {
-   "id": "engsec-42f21f4c06",
+   "id": "engsec-f02844f958",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -9696,32 +9696,32 @@
    ],
    "stem": "What does the slogan 'Every step lights up a child's world' suggest?",
    "options": [
-    "each runner's effort helps brighten a child's life",
-    "the world is a place full of lights",
-    "children must run in every race",
-    "the run will take place at night"
+    "every child must take part in all of the runs",
+    "runners will be given lamps to carry on the route",
+    "the whole world is filled with bright street lights",
+    "each runner's effort helps brighten a child's life"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
-    {
-     "tag": "wrong_meaning",
-     "why": "takes the words literally and misses the figurative meaning."
-    },
     {
      "tag": "wrong_meaning",
      "why": "is not suggested; the slogan is about helping children."
     },
     {
      "tag": "wrong_meaning",
-     "why": "takes 'lights up' literally; the run starts at 6.30 a.m."
-    }
+     "why": "is not suggested; the poster mentions no lamps and the run starts in the morning."
+    },
+    {
+     "tag": "wrong_meaning",
+     "why": "takes the words literally and misses the figurative meaning."
+    },
+    null
    ],
    "solution": [
     "'Lights up' is used figuratively; the money raised helps children see."
    ],
    "params": {
-    "key": "vis-31-2",
+    "key": "vis-42-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9760,11 +9760,11 @@
     ],
     "footer": "*T-shirts are given out only at pack collection on 13 November, 3.00 p.m. to 9.00 p.m."
    },
-   "group": "eng-visual-text:vis-31",
+   "group": "eng-visual-text:vis-42",
    "seq": 2
   },
   {
-   "id": "engsec-f57ca1e42e",
+   "id": "engsec-360825ee32",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -9774,16 +9774,16 @@
    ],
    "stem": "Daniel is a student who registers on 20 October and wants the lowest price for the Challenge Run. How much should he pay?",
    "options": [
-    "$25",
+    "$30",
     "$24",
     "$19",
-    "$30"
+    "$25"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "misread_detail",
-     "why": "takes only the student discount, but 20% off is a bigger saving."
+     "why": "uses no discount."
     },
     null,
     {
@@ -9792,14 +9792,14 @@
     },
     {
      "tag": "misread_detail",
-     "why": "uses no discount."
+     "why": "takes only the student discount, but 20% off is a bigger saving."
     }
    ],
    "solution": [
     "20% off $30 is $24; student discount gives $25; the two cannot be combined, so $24 is lowest."
    ],
    "params": {
-    "key": "vis-31-3",
+    "key": "vis-42-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9838,11 +9838,11 @@
     ],
     "footer": "*T-shirts are given out only at pack collection on 13 November, 3.00 p.m. to 9.00 p.m."
    },
-   "group": "eng-visual-text:vis-31",
+   "group": "eng-visual-text:vis-42",
    "seq": 3
   },
   {
-   "id": "engsec-9528eb5e97",
+   "id": "engsec-8ffbbbe239",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -9854,10 +9854,10 @@
    "options": [
     "neither run",
     "the Challenge Run only",
-    "both the Fun Run and the Challenge Run",
-    "the Fun Run only"
+    "the Fun Run only",
+    "both the Fun Run and the Challenge Run"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
      "tag": "misread_detail",
@@ -9867,17 +9867,17 @@
      "tag": "misread_detail",
      "why": "needs the child to be 12 or above."
     },
+    null,
     {
      "tag": "misread_detail",
      "why": "is wrong; the Challenge Run has an age limit."
-    },
-    null
+    }
    ],
    "solution": [
     "The Fun Run is for all ages; the Challenge Run is for 12 and above."
    ],
    "params": {
-    "key": "vis-31-4",
+    "key": "vis-42-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9916,11 +9916,11 @@
     ],
     "footer": "*T-shirts are given out only at pack collection on 13 November, 3.00 p.m. to 9.00 p.m."
    },
-   "group": "eng-visual-text:vis-31",
+   "group": "eng-visual-text:vis-42",
    "seq": 4
   },
   {
-   "id": "engsec-6be7191b80",
+   "id": "engsec-6e5c8d424b",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -9930,17 +9930,13 @@
    ],
    "stem": "Why did the writer say that all money raised goes to the Eye Care Fund?",
    "options": [
-    "to explain how the timing chip works",
-    "to warn readers that the fee is high",
-    "to ask readers to donate T-shirts",
+    "to warn readers that the entry fee is very high",
+    "to ask readers to donate old T-shirts to the fund",
+    "to explain how the timing chip records each time",
     "to encourage readers to join by showing a good cause"
    ],
    "answer": 3,
    "explain": [
-    {
-     "tag": "wrong_purpose",
-     "why": "is not its aim; the chip is not mentioned there."
-    },
     {
      "tag": "wrong_purpose",
      "why": "is not its aim; no warning is given."
@@ -9949,13 +9945,17 @@
      "tag": "wrong_purpose",
      "why": "is not its aim; T-shirts are given to runners."
     },
+    {
+     "tag": "wrong_purpose",
+     "why": "is not its aim; the chip is not mentioned there."
+    },
     null
    ],
    "solution": [
     "A good cause gives readers a strong reason to register."
    ],
    "params": {
-    "key": "vis-31-5",
+    "key": "vis-42-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -9994,11 +9994,11 @@
     ],
     "footer": "*T-shirts are given out only at pack collection on 13 November, 3.00 p.m. to 9.00 p.m."
    },
-   "group": "eng-visual-text:vis-31",
+   "group": "eng-visual-text:vis-42",
    "seq": 5
   },
   {
-   "id": "engsec-1b6e3aa1bc",
+   "id": "engsec-a43984b7c6",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10008,32 +10008,32 @@
    ],
    "stem": "Which lift can residents use on 28 August?",
    "options": [
-    "Neither lift",
-    "Lift B",
     "Both lifts",
-    "Lift A"
+    "Neither lift",
+    "Lift A",
+    "Lift B"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
-    {
-     "tag": "misread_detail",
-     "why": "is wrong; Lift A is closed only from 3 to 23 August, so it is open on 28 August."
-    },
-    {
-     "tag": "misread_detail",
-     "why": "is closed from 24 August to 13 September."
-    },
     {
      "tag": "misread_detail",
      "why": "is wrong; Lift B is closed on 28 August."
     },
-    null
+    {
+     "tag": "misread_detail",
+     "why": "is wrong; Lift A is closed only from 3 to 23 August, so it is open on 28 August."
+    },
+    null,
+    {
+     "tag": "misread_detail",
+     "why": "is closed from 24 August to 13 September."
+    }
    ],
    "solution": [
     "28 August falls in Lift B's closure period, so only Lift A runs."
    ],
    "params": {
-    "key": "vis-32-1",
+    "key": "vis-43-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10053,11 +10053,11 @@
     ],
     "footer": "Yours faithfully, Mr Hassan"
    },
-   "group": "eng-visual-text:vis-32",
+   "group": "eng-visual-text:vis-43",
    "seq": 1
   },
   {
-   "id": "engsec-8c7d68daa2",
+   "id": "engsec-822ef3b16d",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10067,32 +10067,32 @@
    ],
    "stem": "What does the phrase 'where possible' in 'avoid peak hours where possible' suggest?",
    "options": [
-    "residents are requested, not forced, to avoid peak hours",
     "the lift will be broken at peak hours",
-    "peak hours will start before sunrise",
-    "residents must never use the lift at peak hours"
+    "residents must never use the lift at peak hours",
+    "residents are requested, not forced, to avoid peak hours",
+    "peak hours will start before sunrise"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
     {
      "tag": "wrong_meaning",
      "why": "is not suggested; the lift is working."
     },
     {
      "tag": "wrong_meaning",
-     "why": "is not suggested; the hours are stated."
+     "why": "is too strong; 'where possible' makes the request flexible."
     },
+    null,
     {
      "tag": "wrong_meaning",
-     "why": "is too strong; 'where possible' makes the request flexible."
+     "why": "is not suggested; the hours are stated."
     }
    ],
    "solution": [
     "'Where possible' softens the request: avoid if you can, but it is not compulsory."
    ],
    "params": {
-    "key": "vis-32-2",
+    "key": "vis-43-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10112,11 +10112,11 @@
     ],
     "footer": "Yours faithfully, Mr Hassan"
    },
-   "group": "eng-visual-text:vis-32",
+   "group": "eng-visual-text:vis-43",
    "seq": 2
   },
   {
-   "id": "engsec-c3459ff3b8",
+   "id": "engsec-2e950bbae3",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10126,32 +10126,32 @@
    ],
    "stem": "Why did the writer include a telephone number?",
    "options": [
-    "so residents can pay the upgrading fee",
+    "so residents can book a lift",
     "so residents who need help can ask for it",
-    "so residents can complain about the noise",
-    "so residents can book a lift"
+    "so residents can pay the upgrading fee",
+    "so residents can complain about the noise"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; no fee is mentioned."
+     "why": "is wrong; lifts cannot be booked."
     },
     null,
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the number is for help with the lifts."
+     "why": "is wrong; no fee is mentioned."
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; lifts cannot be booked."
+     "why": "is wrong; the number is for help with the lifts."
     }
    ],
    "solution": [
     "The number is given right after the line about elderly and wheelchair users."
    ],
    "params": {
-    "key": "vis-32-3",
+    "key": "vis-43-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10171,11 +10171,11 @@
     ],
     "footer": "Yours faithfully, Mr Hassan"
    },
-   "group": "eng-visual-text:vis-32",
+   "group": "eng-visual-text:vis-43",
    "seq": 3
   },
   {
-   "id": "engsec-1aaf453987",
+   "id": "engsec-0c4f45573a",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10185,32 +10185,32 @@
    ],
    "stem": "Why are the lifts upgraded one at a time?",
    "options": [
-    "because the upgrading costs less",
-    "so that residents always have one working lift",
-    "because only one worker is available",
-    "because Lift B is older than Lift A"
+    "because only one team of workers is available",
+    "because upgrading one lift at a time costs less",
+    "because Lift B is much older than Lift A",
+    "so that residents always have one working lift"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
+    {
+     "tag": "wrong_inference",
+     "why": "is not stated anywhere."
+    },
     {
      "tag": "wrong_inference",
      "why": "is not suggested; the email gives no cost."
     },
-    null,
     {
      "tag": "wrong_inference",
      "why": "is not stated anywhere."
     },
-    {
-     "tag": "wrong_inference",
-     "why": "is not stated anywhere."
-    }
+    null
    ],
    "solution": [
     "If both were closed together, residents could not use any lift."
    ],
    "params": {
-    "key": "vis-32-4",
+    "key": "vis-43-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10230,11 +10230,11 @@
     ],
     "footer": "Yours faithfully, Mr Hassan"
    },
-   "group": "eng-visual-text:vis-32",
+   "group": "eng-visual-text:vis-43",
    "seq": 4
   },
   {
-   "id": "engsec-dda9eaa897",
+   "id": "engsec-3e1c97a79d",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10269,7 +10269,7 @@
     "Two separate periods let residents plan around the working lift."
    ],
    "params": {
-    "key": "vis-32-5",
+    "key": "vis-43-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10289,11 +10289,11 @@
     ],
     "footer": "Yours faithfully, Mr Hassan"
    },
-   "group": "eng-visual-text:vis-32",
+   "group": "eng-visual-text:vis-43",
    "seq": 5
   },
   {
-   "id": "engsec-7058881d87",
+   "id": "engsec-2467b33547",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10303,12 +10303,12 @@
    ],
    "stem": "Why did the writer include Daniel's comment?",
    "options": [
-    "to give the opening hours",
-    "to explain the weather policy",
-    "to show that all guests are children",
-    "to persuade readers by showing that a guest enjoyed the trip"
+    "to give the opening hours of the centre",
+    "to explain what happens in bad weather",
+    "to persuade readers by quoting a happy guest",
+    "to show that all of the guests are children"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong_feature_purpose",
@@ -10318,17 +10318,17 @@
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the comment is about enjoyment."
     },
+    null,
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; one guest's comment does not describe everyone."
-    },
-    null
+    }
    ],
    "solution": [
     "A happy customer's words make other readers trust the product."
    ],
    "params": {
-    "key": "vis-33-1",
+    "key": "vis-44-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10365,11 +10365,11 @@
     ],
     "footer": "Book now. Spaces fill up fast!"
    },
-   "group": "eng-visual-text:vis-33",
+   "group": "eng-visual-text:vis-44",
    "seq": 1
   },
   {
-   "id": "engsec-b91d2a332d",
+   "id": "engsec-05d19ae0f1",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10380,31 +10380,31 @@
    "stem": "What does 'at short notice' mean in 'cancelled at short notice'?",
    "options": [
     "after a long time of planning",
+    "by a short written note",
     "with very little warning",
-    "only for a short time",
-    "by a short written note"
+    "only for a short time"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong_meaning",
      "why": "is the opposite of 'short notice'."
     },
+    {
+     "tag": "wrong_meaning",
+     "why": "takes 'notice' to mean a written note."
+    },
     null,
     {
      "tag": "wrong_meaning",
      "why": "confuses the length of the cancellation with the warning given."
-    },
-    {
-     "tag": "wrong_meaning",
-     "why": "takes 'notice' to mean a written note."
     }
    ],
    "solution": [
     "'Short notice' means little time between the warning and the event."
    ],
    "params": {
-    "key": "vis-33-2",
+    "key": "vis-44-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10441,11 +10441,11 @@
     ],
     "footer": "Book now. Spaces fill up fast!"
    },
-   "group": "eng-visual-text:vis-33",
+   "group": "eng-visual-text:vis-44",
    "seq": 2
   },
   {
-   "id": "engsec-96ec61bb50",
+   "id": "engsec-499881d91a",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10455,13 +10455,18 @@
    ],
    "stem": "Ben is 13 and wants to join the longest trip he is allowed to take. Which trip should he choose?",
    "options": [
-    "Mangrove Paddle",
-    "Moonlight Paddle",
+    "None of the trips",
     "Island Hopper",
-    "None of the trips"
+    "Mangrove Paddle",
+    "Moonlight Paddle"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "misread_detail",
+     "why": "is wrong; he qualifies for two trips."
+    },
+    null,
     {
      "tag": "misread_detail",
      "why": "is open to him but is only 2 hours, not the longest he can take."
@@ -10469,18 +10474,13 @@
     {
      "tag": "misread_detail",
      "why": "is for ages 14 and above, so he is too young."
-    },
-    null,
-    {
-     "tag": "misread_detail",
-     "why": "is wrong; he qualifies for two trips."
     }
    ],
    "solution": [
     "At 13, Ben qualifies for Mangrove Paddle and Island Hopper, and Island Hopper is longer."
    ],
    "params": {
-    "key": "vis-33-3",
+    "key": "vis-44-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10517,11 +10517,11 @@
     ],
     "footer": "Book now. Spaces fill up fast!"
    },
-   "group": "eng-visual-text:vis-33",
+   "group": "eng-visual-text:vis-44",
    "seq": 3
   },
   {
-   "id": "engsec-5c8199fa87",
+   "id": "engsec-2b64ed06bb",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10531,10 +10531,10 @@
    ],
    "stem": "Why did the writer say 'No experience needed' and mention certified guides?",
    "options": [
-    "to reassure readers who are afraid or new to kayaking",
+    "to reassure readers who are new to kayaking",
     "to show that guides are not trained",
-    "to warn readers that the trips are hard",
-    "to ask experts to apply for a job"
+    "to ask expert kayakers to apply for a job",
+    "to warn readers that the trips are hard"
    ],
    "answer": 0,
    "explain": [
@@ -10545,18 +10545,18 @@
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the lines are calming."
+     "why": "is wrong; the lines are written to guests, not job seekers."
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the lines are written to guests, not job seekers."
+     "why": "is wrong; the lines are calming."
     }
    ],
    "solution": [
     "These lines take away fear, so more beginners will book."
    ],
    "params": {
-    "key": "vis-33-4",
+    "key": "vis-44-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10593,11 +10593,11 @@
     ],
     "footer": "Book now. Spaces fill up fast!"
    },
-   "group": "eng-visual-text:vis-33",
+   "group": "eng-visual-text:vis-44",
    "seq": 4
   },
   {
-   "id": "engsec-d848e72a66",
+   "id": "engsec-0015fb2008",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10608,21 +10608,21 @@
    "stem": "A group of 4 books the Mangrove Paddle. How much do they pay in all?",
    "options": [
     "$112",
-    "$152",
     "$132",
+    "$152",
     "$147"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
      "tag": "misread_detail",
      "why": "takes $10 off each person instead of $5."
     },
+    null,
     {
      "tag": "misread_detail",
      "why": "ignores the group discount."
     },
-    null,
     {
      "tag": "misread_detail",
      "why": "takes $5 off the whole group, not per person."
@@ -10632,7 +10632,7 @@
     "$38 - $5 = $33 each; 4 x $33 = $132."
    ],
    "params": {
-    "key": "vis-33-5",
+    "key": "vis-44-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10669,11 +10669,11 @@
     ],
     "footer": "Book now. Spaces fill up fast!"
    },
-   "group": "eng-visual-text:vis-33",
+   "group": "eng-visual-text:vis-44",
    "seq": 5
   },
   {
-   "id": "engsec-6383f5875d",
+   "id": "engsec-9307277b23",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10683,32 +10683,32 @@
    ],
    "stem": "Who is the notice mainly written for?",
    "options": [
-    "owners who want to rent a stall",
-    "regular customers of the hawker centre",
     "workers who will clean the stalls",
-    "visitors who are looking for a hotel"
+    "owners who want to rent a stall",
+    "visitors who are looking for a hotel",
+    "regular customers of the hawker centre"
    ],
-   "answer": 1,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "wrong_audience",
-     "why": "is wrong; renting is not mentioned."
-    },
-    null,
     {
      "tag": "wrong_audience",
      "why": "is wrong; the notice speaks to diners ('Return your trays')."
     },
     {
      "tag": "wrong_audience",
+     "why": "is wrong; renting is not mentioned."
+    },
+    {
+     "tag": "wrong_audience",
      "why": "is wrong; hotels are not mentioned."
-    }
+    },
+    null
    ],
    "solution": [
     "The requests under 'Please help us' are for those who eat there."
    ],
    "params": {
-    "key": "vis-34-1",
+    "key": "vis-45-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10720,7 +10720,7 @@
       "lines": [
        "Stalls 01-01 to 01-20 will close from Tuesday, 8 September to Thursday, 10 September for deep cleaning.",
        "Stalls 01-21 to 01-40 will stay open as usual.",
-       "(Stall 01-14 will reopen on Friday, 11 September because its freezer is being replaced.)"
+       "(Stall 01-14 will reopen on Monday, 14 September because its freezer is being replaced.)"
       ]
      },
      {
@@ -10739,11 +10739,11 @@
     ],
     "footer": "Thank you for your understanding."
    },
-   "group": "eng-visual-text:vis-34",
+   "group": "eng-visual-text:vis-45",
    "seq": 1
   },
   {
-   "id": "engsec-7ffc0ef2af",
+   "id": "engsec-9f83626958",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10753,32 +10753,32 @@
    ],
    "stem": "Why is the line about Stall 01-14 in brackets?",
    "options": [
-    "to show that the information is not important",
     "to show that the stall has closed for ever",
+    "to show an exception to the main information",
     "to repeat the closing dates of all stalls",
-    "to show a special case that is different from the main information"
+    "to show that the information is not important"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
-    {
-     "tag": "wrong_feature_purpose",
-     "why": "is wrong; customers of the stall need this detail."
-    },
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the stall reopens on 11 September."
     },
+    null,
     {
      "tag": "wrong_feature_purpose",
      "why": "is wrong; the bracket gives a different date."
     },
-    null
+    {
+     "tag": "wrong_feature_purpose",
+     "why": "is wrong; customers of the stall need this detail."
+    }
    ],
    "solution": [
     "Stall 01-14 does not follow the general reopening date, so its line is added in brackets."
    ],
    "params": {
-    "key": "vis-34-2",
+    "key": "vis-45-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10790,7 +10790,7 @@
       "lines": [
        "Stalls 01-01 to 01-20 will close from Tuesday, 8 September to Thursday, 10 September for deep cleaning.",
        "Stalls 01-21 to 01-40 will stay open as usual.",
-       "(Stall 01-14 will reopen on Friday, 11 September because its freezer is being replaced.)"
+       "(Stall 01-14 will reopen on Monday, 14 September because its freezer is being replaced.)"
       ]
      },
      {
@@ -10809,11 +10809,11 @@
     ],
     "footer": "Thank you for your understanding."
    },
-   "group": "eng-visual-text:vis-34",
+   "group": "eng-visual-text:vis-45",
    "seq": 2
   },
   {
-   "id": "engsec-48b8656fac",
+   "id": "engsec-d925553178",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10823,32 +10823,32 @@
    ],
    "stem": "On which day can customers first buy food from Stall 01-14 again?",
    "options": [
-    "Thursday, 10 September",
-    "Tuesday, 8 September",
     "Wednesday, 9 September",
+    "Monday, 14 September",
+    "Thursday, 10 September",
     "Friday, 11 September"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
-     "tag": "misread_detail",
-     "why": "is when the other stalls finish closing, but Stall 01-14 reopens a day later."
-    },
-    {
-     "tag": "misread_detail",
-     "why": "is the first day of closure."
-    },
-    {
-     "tag": "misread_detail",
+     "tag": "wrong_date",
      "why": "is during the closure."
     },
-    null
+    null,
+    {
+     "tag": "wrong_date",
+     "why": "is the last day of closure, so the stall is still closed."
+    },
+    {
+     "tag": "wrong_date",
+     "why": "is when the other stalls reopen, but Stall 01-14 stays closed longer."
+    }
    ],
    "solution": [
-    "The bracketed line says Stall 01-14 will reopen on Friday, 11 September."
+    "The bracketed line says Stall 01-14 will reopen on Monday, 14 September."
    ],
    "params": {
-    "key": "vis-34-3",
+    "key": "vis-45-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10860,7 +10860,7 @@
       "lines": [
        "Stalls 01-01 to 01-20 will close from Tuesday, 8 September to Thursday, 10 September for deep cleaning.",
        "Stalls 01-21 to 01-40 will stay open as usual.",
-       "(Stall 01-14 will reopen on Friday, 11 September because its freezer is being replaced.)"
+       "(Stall 01-14 will reopen on Monday, 14 September because its freezer is being replaced.)"
       ]
      },
      {
@@ -10879,11 +10879,11 @@
     ],
     "footer": "Thank you for your understanding."
    },
-   "group": "eng-visual-text:vis-34",
+   "group": "eng-visual-text:vis-45",
    "seq": 3
   },
   {
-   "id": "engsec-3b66729585",
+   "id": "engsec-3cc062eaaf",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10893,32 +10893,32 @@
    ],
    "stem": "Why is the hawker centre cleaned in two parts?",
    "options": [
-    "so that the tables can be fenced all week",
+    "so that workers can finish sooner",
     "so that fewer cleaning workers are needed",
-    "so that some stalls stay open for customers",
-    "so that workers can finish sooner"
+    "so that the tables can be fenced all week",
+    "so that some stalls stay open for customers"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
      "tag": "wrong_inference",
-     "why": "is not the reason given."
+     "why": "is not what the notice says; it says the aim is to keep meals available."
     },
     {
      "tag": "wrong_inference",
      "why": "is not stated anywhere."
     },
-    null,
     {
      "tag": "wrong_inference",
-     "why": "is not what the notice says; it says the aim is to keep meals available."
-    }
+     "why": "is not the reason given."
+    },
+    null
    ],
    "solution": [
     "The notice says half-by-half cleaning lets residents keep buying meals."
    ],
    "params": {
-    "key": "vis-34-4",
+    "key": "vis-45-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -10930,7 +10930,7 @@
       "lines": [
        "Stalls 01-01 to 01-20 will close from Tuesday, 8 September to Thursday, 10 September for deep cleaning.",
        "Stalls 01-21 to 01-40 will stay open as usual.",
-       "(Stall 01-14 will reopen on Friday, 11 September because its freezer is being replaced.)"
+       "(Stall 01-14 will reopen on Monday, 14 September because its freezer is being replaced.)"
       ]
      },
      {
@@ -10949,11 +10949,11 @@
     ],
     "footer": "Thank you for your understanding."
    },
-   "group": "eng-visual-text:vis-34",
+   "group": "eng-visual-text:vis-45",
    "seq": 4
   },
   {
-   "id": "engsec-e3265144ae",
+   "id": "engsec-d60133e914",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -10965,8 +10965,8 @@
    "options": [
     "a thorough clean, not just wiping the surface",
     "cleaning in a very deep place",
-    "cleaning only the floors",
-    "cleaning that is done slowly and badly"
+    "cleaning that is done slowly and badly",
+    "cleaning only the floors"
    ],
    "answer": 0,
    "explain": [
@@ -10977,18 +10977,18 @@
     },
     {
      "tag": "wrong_meaning",
-     "why": "is too narrow; 'deep' does not say which parts."
+     "why": "is the opposite of thorough."
     },
     {
      "tag": "wrong_meaning",
-     "why": "is the opposite of thorough."
+     "why": "is too narrow; 'deep' does not say which parts."
     }
    ],
    "solution": [
     "'Deep cleaning' is a thorough clean beyond daily wiping."
    ],
    "params": {
-    "key": "vis-34-5",
+    "key": "vis-45-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -11000,7 +11000,7 @@
       "lines": [
        "Stalls 01-01 to 01-20 will close from Tuesday, 8 September to Thursday, 10 September for deep cleaning.",
        "Stalls 01-21 to 01-40 will stay open as usual.",
-       "(Stall 01-14 will reopen on Friday, 11 September because its freezer is being replaced.)"
+       "(Stall 01-14 will reopen on Monday, 14 September because its freezer is being replaced.)"
       ]
      },
      {
@@ -11019,11 +11019,11 @@
     ],
     "footer": "Thank you for your understanding."
    },
-   "group": "eng-visual-text:vis-34",
+   "group": "eng-visual-text:vis-45",
    "seq": 5
   },
   {
-   "id": "engsec-a4cbbccbf2",
+   "id": "engsec-6e8f5ea5a8",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -11034,16 +11034,17 @@
    "stem": "Wei Ming takes the 11.00 a.m. ferry from the pier on a Sunday. He wants to stay on Kusu Island for at least 4 hours. Which is his earliest ferry back?",
    "options": [
     "the 12.30 p.m. ferry",
+    "the 4.30 p.m. ferry",
     "the 10.30 a.m. ferry",
-    "the 3.00 p.m. ferry",
-    "the 4.30 p.m. ferry"
+    "the 3.00 p.m. ferry"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
     {
      "tag": "misread_detail",
      "why": "would give him only about 1 hour on the island."
     },
+    null,
     {
      "tag": "misread_detail",
      "why": "is a ferry that leaves before he arrives."
@@ -11051,14 +11052,13 @@
     {
      "tag": "misread_detail",
      "why": "leaves from Marina South Pier, not from Kusu Island."
-    },
-    null
+    }
    ],
    "solution": [
     "He arrives at 11.30 a.m., so 4 hours ends at 3.30 p.m.; the next ferry from Kusu is at 4.30 p.m."
    ],
    "params": {
-    "key": "vis-35-1",
+    "key": "vis-46-1",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -11083,11 +11083,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-35",
+   "group": "eng-visual-text:vis-46",
    "seq": 1
   },
   {
-   "id": "engsec-85b3227db3",
+   "id": "engsec-88d36eaeda",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -11097,20 +11097,20 @@
    ],
    "stem": "Why did the writer use the heading 'Departing from' in the table?",
    "options": [
-    "to show where the ferry is built",
-    "to show the cheapest fare",
+    "to show which ferry has the cheapest fare",
+    "to show in which country the ferry was built",
     "to show which ferry times belong to which place",
-    "to show how long the ferry stays"
+    "to show how long the ferry waits at the pier"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the heading is about the starting point."
+     "why": "is wrong; fares are in another column."
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; fares are in another column."
+     "why": "is wrong; the heading is about the starting point."
     },
     null,
     {
@@ -11122,7 +11122,7 @@
     "The two rows give times for the two starting places."
    ],
    "params": {
-    "key": "vis-35-2",
+    "key": "vis-46-2",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -11147,11 +11147,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-35",
+   "group": "eng-visual-text:vis-46",
    "seq": 2
   },
   {
-   "id": "engsec-5c3a05c579",
+   "id": "engsec-0547375531",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -11161,20 +11161,20 @@
    ],
    "stem": "Why did the writer add a 'Notes' section below the table?",
    "options": [
-    "to repeat the times in the table",
-    "to list the names of the ferries",
-    "to give extra information that does not fit the table",
-    "to tell a story about the island"
+    "to list the names of all the ferries",
+    "to repeat all of the times in the table",
+    "to add details that do not fit the table",
+    "to tell a short story about the island"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; the notes give new information."
+     "why": "is wrong; no ferry names are given."
     },
     {
      "tag": "wrong_feature_purpose",
-     "why": "is wrong; no ferry names are given."
+     "why": "is wrong; the notes give new information."
     },
     null,
     {
@@ -11186,7 +11186,7 @@
     "Payment, extra ferries and children's fares do not fit in the rows and columns."
    ],
    "params": {
-    "key": "vis-35-3",
+    "key": "vis-46-3",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -11211,11 +11211,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-35",
+   "group": "eng-visual-text:vis-46",
    "seq": 3
   },
   {
-   "id": "engsec-9546fb6cfd",
+   "id": "engsec-e7ed75138a",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -11225,20 +11225,20 @@
    ],
    "stem": "What does the note about an extra ferry in school holidays suggest?",
    "options": [
-    "the fare will be cheaper",
-    "the island will be closed",
-    "the other ferries will stop running",
-    "more people are expected to travel in the school holidays"
+    "the island will be closed to visitors then",
+    "the fare will be cheaper during the holidays",
+    "the usual ferries will stop in the school holidays",
+    "more people are likely to travel in the holidays"
    ],
    "answer": 3,
    "explain": [
     {
      "tag": "wrong_over_inference",
-     "why": "is not suggested; no price change is given."
+     "why": "is not suggested; an extra ferry means more visitors."
     },
     {
      "tag": "wrong_over_inference",
-     "why": "is not suggested; an extra ferry means more visitors."
+     "why": "is not suggested; no price change is given."
     },
     {
      "tag": "wrong_over_inference",
@@ -11250,7 +11250,7 @@
     "An extra ferry is added to carry more passengers."
    ],
    "params": {
-    "key": "vis-35-4",
+    "key": "vis-46-4",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -11275,11 +11275,11 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-35",
+   "group": "eng-visual-text:vis-46",
    "seq": 4
   },
   {
-   "id": "engsec-ed47d2930b",
+   "id": "engsec-b06ec2a632",
    "topic": "eng-sec-visual-text",
    "level": "competent",
    "template": "eng-pat-visual-mcq",
@@ -11289,18 +11289,13 @@
    ],
    "stem": "Who is most likely to use this timetable?",
    "options": [
-    "people planning a leisure trip to the island on a day off",
-    "pupils going to school on a Monday",
     "workers who travel to offices every weekday",
-    "ferry drivers who need to know their pay"
+    "ferry drivers who want to check their pay",
+    "pupils who travel to school on a Monday",
+    "people planning an outing to the island on a day off"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
-    {
-     "tag": "wrong_audience",
-     "why": "is wrong; Monday is not covered, unless it is a public holiday."
-    },
     {
      "tag": "wrong_audience",
      "why": "is wrong; the schedule is only for weekends and public holidays."
@@ -11308,13 +11303,18 @@
     {
      "tag": "wrong_audience",
      "why": "is wrong; no pay is shown."
-    }
+    },
+    {
+     "tag": "wrong_audience",
+     "why": "is wrong; Monday is not covered, unless it is a public holiday."
+    },
+    null
    ],
    "solution": [
     "The title says weekends and public holidays, when people go on outings."
    ],
    "params": {
-    "key": "vis-35-5",
+    "key": "vis-46-5",
     "subtopic": "eng-visual-text"
    },
    "visual": {
@@ -11339,7 +11339,7 @@
      }
     ]
    },
-   "group": "eng-visual-text:vis-35",
+   "group": "eng-visual-text:vis-46",
    "seq": 5
   }
  ]

@@ -6328,7 +6328,7 @@
    }
   },
   {
-   "id": "chiciyu-2bb5231ccf",
+   "id": "chiciyu-fe5f6bc4f0",
    "topic": "chi-ciyu",
    "level": "basic",
    "template": "chi-pat-xuanci",
@@ -6338,33 +6338,33 @@
    "stem": "钟声一响，赛跑选手们＿＿＿＿地冲向终点，谁也不想落在后面。\n最适合填入＿＿＿＿的词语是：",
    "options": [
     "争先恐后",
-    "井然有序",
+    "按部就班",
     "悠然自得",
-    "不约而同"
+    "井然有序"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "opposite_meaning",
-     "why": "「井然有序」是很有秩序，和争着冲向终点相反。 (It means orderly, the opposite of racing to be first.)"
+     "tag": "context_mismatch",
+     "why": "「按部就班」是照着步骤一步一步做，和争着冲向终点的急切不合。 (It means doing things step by step, which does not fit a rush to the finish line.)"
     },
     {
      "tag": "opposite_meaning",
      "why": "「悠然自得」是悠闲自在，和不想落后的心情相反。 (It means relaxed, the opposite of not wanting to fall behind.)"
     },
     {
-     "tag": "context_mismatch",
-     "why": "「不约而同」是想法行动一致，没有说明抢着向前的急切。 (It means acting alike without agreeing beforehand, with no sense of racing ahead.)"
+     "tag": "opposite_meaning",
+     "why": "「井然有序」是很有秩序，和争着冲向终点相反。 (It means orderly, the opposite of racing to be first.)"
     }
    ],
    "solution": [
     "句子的意思是：选手们争着向前，生怕落后。所以应填「争先恐后」。",
     "(The runners raced to be first, afraid of falling behind. So the answer is 争先恐后.)",
-    "争先恐后 = vie to be first；井然有序 = in good order；悠然自得 = leisurely；不约而同 = act in unison without arrangement"
+    "争先恐后 = vie to be first；井然有序 = in good order；悠然自得 = leisurely；按部就班 = follow the steps in order"
    ],
    "params": {
-    "key": "meaning-006-v2",
+    "key": "meaning-006-v3",
     "subtopic": "chi-ciyu-idiom"
    }
   },
@@ -6410,7 +6410,7 @@
    }
   },
   {
-   "id": "chiciyu-78d7025549",
+   "id": "chiciyu-2c425e7ed9",
    "topic": "chi-ciyu",
    "level": "basic",
    "template": "chi-pat-xuanci",
@@ -6419,34 +6419,34 @@
    ],
    "stem": "孩子们＿＿＿＿地望着橱窗里的玩具火车。\n最适合填入＿＿＿＿的词语是：",
    "options": [
-    "东张西望",
     "视而不见",
-    "目不转睛",
-    "目瞪口呆"
+    "一目十行",
+    "东张西望",
+    "目不转睛"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
-    {
-     "tag": "opposite_meaning",
-     "why": "「东张西望」是向四处看，不是盯着一个地方。 (It means looking everywhere, not staring at one thing.)"
-    },
     {
      "tag": "opposite_meaning",
      "why": "「视而不见」是看了却没放在心上，和专注地看相反。 (It means seeing without noticing, the opposite of staring keenly.)"
     },
-    null,
     {
-     "tag": "similar_looking",
-     "why": "「目瞪口呆」是吓呆或惊呆，句中孩子们只是喜欢，没有受惊。 (It means stunned by shock; the children are just fascinated.)"
-    }
+     "tag": "wrong_collocation",
+     "why": "「一目十行」形容看书很快，不能形容盯着看玩具火车。 (It describes reading very fast, not staring at a toy train.)"
+    },
+    {
+     "tag": "opposite_meaning",
+     "why": "「东张西望」是向四处看，不是盯着一个地方。 (It means looking everywhere, not staring at one thing.)"
+    },
+    null
    ],
    "solution": [
     "句子的意思是：孩子们眼睛一动不动地看着。所以应填「目不转睛」。",
     "(The children stared without moving their eyes. So the answer is 目不转睛.)",
-    "目不转睛 = with eyes fixed；视而不见 = look but not see；东张西望 = look around；目瞪口呆 = stunned"
+    "目不转睛 = with eyes fixed；视而不见 = look but not see；东张西望 = look around；一目十行 = read ten lines at a glance"
    ],
    "params": {
-    "key": "meaning-008-v2",
+    "key": "meaning-008-v3",
     "subtopic": "chi-ciyu-idiom"
    }
   },
@@ -7066,7 +7066,7 @@
    }
   },
   {
-   "id": "chiciyu-66c1c6bb5c",
+   "id": "chiciyu-7530270f48",
    "topic": "chi-ciyu",
    "level": "intermediate",
    "template": "chi-pat-xuanci",
@@ -7075,13 +7075,17 @@
    ],
    "stem": "新开的书店吸引了许多读者，来买书的人＿＿＿＿。\n最适合填入＿＿＿＿的词语是：",
    "options": [
+    "门可罗雀",
     "络绎不绝",
     "寥寥无几",
-    "门可罗雀",
-    "水泄不通"
+    "三三两两"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "opposite_meaning",
+     "why": "「门可罗雀」是门前冷清，和读者很多相反。 (It means deserted, the opposite.)"
+    },
     null,
     {
      "tag": "opposite_meaning",
@@ -7089,20 +7093,16 @@
     },
     {
      "tag": "opposite_meaning",
-     "why": "「门可罗雀」是门前冷清，和读者很多相反。 (It means deserted, the opposite.)"
-    },
-    {
-     "tag": "wrong_collocation",
-     "why": "「水泄不通」形容挤得很紧，用来说人流接连不断，搭配不当。 (It describes a place packed tight, not a stream of people coming.)"
+     "why": "「三三两两」是三五个人一伙、人数零散，和吸引许多读者相反。 (It means in small scattered groups, the opposite of many readers.)"
     }
    ],
    "solution": [
     "句子的意思是：买书的人一个接一个，接连不断。所以应填「络绎不绝」。",
     "(Buyers kept coming one after another. So the answer is 络绎不绝.)",
-    "络绎不绝 = in an endless stream；寥寥无几 = very few；门可罗雀 = deserted；水泄不通 = packed solid"
+    "络绎不绝 = in an endless stream；寥寥无几 = very few；门可罗雀 = deserted；三三两两 = in twos and threes"
    ],
    "params": {
-    "key": "meaning-024-v2",
+    "key": "meaning-024-v3",
     "subtopic": "chi-ciyu-idiom"
    }
   },
@@ -10510,7 +10510,7 @@
    }
   },
   {
-   "id": "chiciyu-5798c5f1bc",
+   "id": "chiciyu-a227ea0034",
    "topic": "chi-ciyu",
    "level": "intermediate",
    "template": "chi-pat-xuanci",
@@ -10520,33 +10520,33 @@
    "stem": "为了保护身后的孩子，他＿＿＿＿地挡在凶狠的野狗面前。\n最适合填入＿＿＿＿的词语是：",
    "options": [
     "贪生怕死",
+    "畏首畏尾",
     "不顾一切",
-    "三心二意",
-    "小心翼翼"
+    "三心二意"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "opposite_meaning",
      "why": "「贪生怕死」是怕死，和挡在野狗前面相反。 (It means fearing death, the opposite of standing in front of the dog.)"
     },
+    {
+     "tag": "opposite_meaning",
+     "why": "「畏首畏尾」是胆小怕事，和敢挡在野狗面前相反。 (It means timid and fearful, the opposite of standing before a dog.)"
+    },
     null,
     {
      "tag": "context_mismatch",
      "why": "「三心二意」是心思不专一，不符合保护孩子的急迫。 (It means not focused, unlike the urgency of protecting a child.)"
-    },
-    {
-     "tag": "opposite_meaning",
-     "why": "「小心翼翼」是十分谨慎，和不顾危险地挡在前面相反。 (It means extremely cautious, the opposite of recklessly shielding the child.)"
     }
    ],
    "solution": [
     "句子的意思是：他什么危险都不考虑。所以应填「不顾一切」。",
     "(He gave no thought to any danger. So the answer is 不顾一切.)",
-    "不顾一切 = regardless of everything；贪生怕死 = cling to life；小心翼翼 = very carefully；三心二意 = half-hearted"
+    "不顾一切 = regardless of everything；贪生怕死 = cling to life；畏首畏尾 = timid and hesitant；三心二意 = half-hearted"
    ],
    "params": {
-    "key": "v1b-idiom-mean-004-v2",
+    "key": "v1b-idiom-mean-004-v3",
     "subtopic": "chi-ciyu-idiom"
    }
   },
@@ -10674,7 +10674,7 @@
    }
   },
   {
-   "id": "chiciyu-d340573d29",
+   "id": "chiciyu-0fefe8c0a9",
    "topic": "chi-ciyu",
    "level": "competent",
    "template": "chi-pat-xuanci",
@@ -10683,22 +10683,22 @@
    ],
    "stem": "婆婆终于住进了梦寐以求的带花园的小屋，＿＿＿＿地坐在门前晒太阳。\n最适合填入＿＿＿＿的词语是：",
    "options": [
+    "心满意足",
     "心不在焉",
     "心灰意冷",
-    "心满意足",
     "心神不宁"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "context_mismatch",
      "why": "「心不在焉」是不专心，不能表达满足。 (It means not paying attention, not contentment.)"
     },
     {
      "tag": "opposite_meaning",
-     "why": "「心灰意冷」是失去信心，和得到玩具相反。 (It means disheartened, the opposite.)"
+     "why": "「心灰意冷」是失去信心，和住进梦想中的小屋而满足相反。 (It means disheartened, the opposite of being content in a long-wished-for home.)"
     },
-    null,
     {
      "tag": "opposite_meaning",
      "why": "「心神不宁」是心里不安，和满足相反。 (It means uneasy, the opposite.)"
@@ -10710,7 +10710,7 @@
     "心满意足 = fully content；心神不宁 = uneasy；心灰意冷 = disheartened；心不在焉 = absent-minded"
    ],
    "params": {
-    "key": "v1b-idiom-mean-008-v2",
+    "key": "v1b-idiom-mean-008-v3",
     "subtopic": "chi-ciyu-idiom"
    }
   },
