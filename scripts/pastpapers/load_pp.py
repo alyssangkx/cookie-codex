@@ -367,8 +367,10 @@ def select(a):
                 if not reason and t.get("difficulty") not in LEVEL:
                     reason = "no-difficulty"
                 if not reason:
-                    refers = bool(FIG_WORDS.search(q["text"]) or FIG_LETTER.search(q["text"])
-                                  or any(FIG_LETTER.search(strip_num(o)) for o in opts))
+                    # letter labels (A, P, X) point at a figure only in Science and Maths; in English and Chinese a capital is just a
+                    # word ("The", "B" of a blank sentence), so there only a figure the reader saw counts (21 Nov 2026)
+                    refers = a.subject in ("science", "maths") and bool(
+                        FIG_WORDS.search(q["text"]) or FIG_LETTER.search(q["text"]) or any(FIG_LETTER.search(strip_num(o)) for o in opts))
                     if refers or realfig(q):
                         good = [c for c in crops.get(q["id"], []) if crop_ok(c)]
                         if not crops.get(q["id"]):
