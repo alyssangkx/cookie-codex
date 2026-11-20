@@ -119,8 +119,9 @@ def realfig(q):
     return any(isinstance(f, str) and f and f.lower() not in ("none", "null") for f in (q.get("figures") or []))
 
 
+FIG_WORDS_LANG = re.compile(r"\b(picture|diagram|chart|graph|poster|map|timetable|table (below|above)|the table)\b|图|表格", re.I)
 BLANK_PUNCT = set("_.,;:?!'\"()[]-…—–·。，、；：？！“”‘’（）《》〈〉【】「」")
-LETTERED = re.compile(r"\(?([A-D])(?:[.)]\s*|\s+(?!and\b|or\b|only\b))")  # "A. Air" / "A Air", not "A and X only"
+LETTERED = re.compile(r"\(?([A-D])(?:[.)]\s*|\s+(?![\s&+,]|and\b|or\b|only\b))")  # "A. Air" / "A Air", not "A and X only"
 
 
 def garbled(text: str, opts) -> str | None:
@@ -133,6 +134,8 @@ def garbled(text: str, opts) -> str | None:
         return "text-replacement-char"
     # answer blanks (____) and punctuation are not noise: judge only the other characters
     body = [c for c in t if not c.isspace() and c not in BLANK_PUNCT]
+    if sum(c.isalpha() for c in body) < 8:
+        return "text-short"  # mostly blanks or dots: no real stem left
     if sum(c.isalpha() for c in body) / (len(body) or 1) < 0.6:
         return "text-low-alpha"
     if re.search(r"([A-Za-z])\1{4,}", t):
@@ -367,10 +370,11 @@ def select(a):
                 if not reason and t.get("difficulty") not in LEVEL:
                     reason = "no-difficulty"
                 if not reason:
-                    # letter labels (A, P, X) point at a figure only in Science and Maths; in English and Chinese a capital is just a
-                    # word ("The", "B" of a blank sentence), so there only a figure the reader saw counts (21 Nov 2026)
-                    refers = a.subject in ("science", "maths") and bool(
-                        FIG_WORDS.search(q["text"]) or FIG_LETTER.search(q["text"]) or any(FIG_LETTER.search(strip_num(o)) for o in opts))
+                    # letter labels (A, P, X) and "below" point at a figure only in Science and Maths; in English and Chinese a
+                    # capital is just a word ("The") and "below" a sentence, so there only an explicit picture word or a figure the
+                    # reader saw counts (21 Nov 2026)
+                    refers = (bool(FIG_WORDS.search(q["text"]) or FIG_LETTER.search(q["text"]) or any(FIG_LETTER.search(strip_num(o)) for o in opts))
+                              if a.subject in ("science", "maths") else bool(FIG_WORDS_LANG.search(q["text"])))
                     if refers or realfig(q):
                         good = [c for c in crops.get(q["id"], []) if crop_ok(c)]
                         if not crops.get(q["id"]):
@@ -694,13 +698,16 @@ def selftest():
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
     assert garbled("好", ["a", "b", "c", "d"]) == "text-short"
-    assert garbled("%% 12 34 ## 56 78 && 90 ** 11", ["a", "b", "c", "d"]) == "text-low-alpha"
+    assert garbled("ab 12 cd 34 ef 56 gh 78 ij 90 11 22 33 44 55", ["a", "b", "c", "d"]) == "text-low-alpha"
     stem = "Which of the following statements can be concluded from the experiment?"
     assert garbled(stem, ["A. Object 1 is a magnet.", "B. Object 2 is a magnet.", "C. Both are iron.", "D. Neither."]) == "options-are-statements"
     assert garbled(stem, ["A Object 1 is a magnet.", "B Object 2 is a magnet.", "C Both are iron.", "D Neither."]) == "options-are-statements"
     assert garbled(stem, ["A and B only", "B and C only", "A and D only", "B and D only"]) is None  # combinations are real options
     assert garbled(stem, ["(1) Air", "(2) Bark", "(3) Clay", "(4) Dust"]) is None
     assert garbled(stem, ["A and X only", "B and Y only", "C and Z only", "D and W only"]) is None
+    assert garbled(stem, ["A  and B only", "B  and C only", "C  and D only", "D  and A only"]) is None  # double spaces
+    assert garbled(stem, ["A & B", "B & C", "C & D", "D & A"]) is None and garbled(stem, ["A + B", "B + C", "C + D", "D + A"]) is None
+    assert garbled("a ____________ ..... ---- b ____", ["w", "x", "y", "z"]) == "text-short"
     import numpy as np
     from PIL import Image, ImageDraw
     # page 600x800 white: stem text line at y 100-115, gap, box (figure) at y 200-300, x 150-450
@@ -960,7 +967,7 @@ def where(a):
             d = json.loads(f.read_text())
             for q in d["questions"] if isinstance(d, dict) else d:
                 if q.get("id") == qid:
-                    print(f"{qid}: generated, {f.relative_to(root.parents[2])}, sub-topic {q.get('sub') or q.get('subtopic') or f.stem}, level {q.get('level')}\n  {q.get('stem')}")
+                    print(f"{qid}: generated, {f.relative_to(root.parents[3])}, sub-topic {(q.get('outcomes') or [f.stem + '-0'])[0].rsplit('-', 1)[0]}, level {q.get('level')}\n  {q.get('stem')}")
                     return
         sys.exit(f"{qid}: not in any bank under {root}")
     for subj_dir in sorted(p for p in Path(a.pp).iterdir() if p.is_dir()):
