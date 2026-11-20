@@ -61,6 +61,7 @@ any format counts; no match = hold (reversible, reason recorded); show the judge
 before removing anything; thin tiers (< 20) are acceptable until past papers fill them. Scope: 7,376 generated questions
 (Maths 3,888 from 524 templates, judged per template; Science 1,427, English 1,034, Chinese 1,027 per item).
 - [ ] `scripts/pastpapers/concept_match.py`: pack (dev) -> server run (candidates by word overlap from all 58k scanned questions, same sub-topic first; Qwen2.5-72B judge, JSON with the matching question and a reason) -> report (calibration: real past-paper MCQs must find a twin, owner-ruled-out items and off-syllabus probes must not).
+- [x] Review fixes before the full run (21 Nov): option digits kept (only a bracketed label is stripped), Maths units keyed (sub-topic, template), figure labels in the probe text, long passages keep their question, unparsed replies and unjudged probes are never a no-match (coverage in the report), verdicts tied to the question text, tolerant resume. Queue 18 stopped at 1,600 and re-run from scratch at 06:56.
 - [ ] Show the owner the calibration and samples; on OK, hold the no-match items (review.json ship false / Maths templates) and rebuild.
 
 ### MCQ push (owner, 21 Nov 2026)

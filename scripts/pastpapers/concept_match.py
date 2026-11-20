@@ -64,13 +64,38 @@ def words(t):
     return out
 
 
-def qtext(stem, options):
-    opts = [re.sub(r"^\s*\(?\d\)?\s*", "", str(o)) for o in options or []]  # no backslash inside an f-string: the server runs Python 3.11
-    return (str(stem).strip() + "\n" + "\n".join(f"({i + 1}) {o}" for i, o in enumerate(opts))).strip()
+def qtext(stem, options, figure=None):
+    # only a bracketed label "(1)" / "（1）" is stripped: "50 km/h" must keep its digits (review, 21 Nov 2026)
+    opts = [re.sub(r"^\s*[(（]\d[)）]\s*", "", str(o)) for o in options or []]  # no backslash inside an f-string (server Python 3.11)
+    fig = figure_text(figure)
+    return (str(stem).strip() + (f"\n[Figure: {fig}]" if fig else "") + "\n" + "\n".join(f"({i + 1}) {o}" for i, o in enumerate(opts))).strip()
+
+
+def figure_text(fig):
+    """The words a figure carries (SVG <text>, or line art alt and labels), so the judge sees what the stem points at."""
+    if isinstance(fig, dict):
+        parts = [fig.get("alt") or ""] + [str(l.get("text") or "") for l in fig.get("labels") or []]
+    elif isinstance(fig, str):
+        parts = [re.sub(r"<[^>]+>", " ", t) for t in re.findall(r"<text\b[^>]*>(.*?)</text>", fig, re.S)]
+    else:
+        return ""
+    return re.sub(r"\s+", " ", " ".join(p for p in parts if p.strip())).strip()[:400]
+
+
+def clip(t, n):
+    """At most n characters, keeping the start (set-up) and the end (question and options), which a passage pushes out."""
+    return t if len(t) <= n else t[: n // 4] + " ... " + t[-(n - n // 4):]
 
 
 def jl(p):
-    return [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()] if Path(p).exists() else []
+    out = []
+    if Path(p).exists():
+        for l in open(p, encoding="utf-8"):
+            try:
+                out.append(json.loads(l))
+            except ValueError:
+                pass  # a line cut short by a killed run: skipped, the probe is judged again
+    return out
 
 
 def pack(a):
@@ -82,9 +107,10 @@ def pack(a):
         for f in sorted((REPO / "site/src/data/quiz" / bank).glob("*.json")):
             for q in json.loads(f.read_text())["questions"]:
                 sub = (q.get("outcomes") or [f.stem + "-0"])[0].rsplit("-", 1)[0]
-                unit = q.get("template") if bank == "math" else q["id"]  # Maths: every question of a template tests one thing
+                # Maths: every question of a template tests one thing; template names repeat across topics -> (sub, template)
+                unit = f"{sub}|{q.get('template')}" if bank == "math" else q["id"]
                 per_tpl[unit].append({"pid": q["id"], "kind": "gen", "subject": subj, "sub": sub, "unit": unit,
-                                      "text": qtext(q["stem"], q["options"])})
+                                      "text": qtext(q["stem"], q["options"], q.get("figure"))})
         for unit, qs in per_tpl.items():
             probes += qs[:2] if bank == "math" else qs
     rnd = random.Random(21)
@@ -103,7 +129,10 @@ def pack(a):
         for it in d["items"]:
             items[(d["subtopic"], it["key"])] = it
     for subj, sub, key in RULED_OUT:
-        it = items[(sub, key)]
+        it = items.get((sub, key))
+        if not it:
+            print(f"warning: ruled-out item {sub}|{key} not found; calibration runs without it", file=sys.stderr)
+            continue
         probes.append({"pid": f"cal-neg-{key}", "kind": "cal-neg", "subject": subj, "sub": sub, "unit": key, "text": qtext(it["stem"], it["options"])})
     for i, (subj, stem, opts) in enumerate(NEGATIVE):
         probes.append({"pid": f"cal-neg-off{i:02d}", "kind": "cal-neg", "subject": subj, "sub": None, "unit": f"off{i:02d}", "text": qtext(stem, opts)})
@@ -159,19 +188,29 @@ def corpus(root, subj):
         for q in jl(ydir / "merged.jsonl"):
             t = qtext(q.get("text") or "", q.get("options") or [])
             if len(t) >= 15:
-                docs.append({"id": q["id"], "st": (tags.get(q["id"]) or {}).get("st"), "text": t[:600]})
+                docs.append({"id": q["id"], "st": (tags.get(q["id"]) or {}).get("st"), "text": clip(t, 700)})
     return docs
 
 
 def parse(raw, n):
+    """(candidate number or None, reason, parsed). parsed is True only when the JSON loaded; a bool or a fraction is no number."""
     m = re.search(r"\{.*\}", raw or "", re.S)
     try:
-        j = json.loads(m.group(0)) if m else {}
-    except Exception:
-        j = {}
-    k = j.get("match")
-    k = int(k) if isinstance(k, (int, float)) or (isinstance(k, str) and k.strip().isdigit()) else None
-    return (k if k and 1 <= k <= n else None), str(j.get("reason") or "")[:300], bool(m)
+        j = json.loads(m.group(0)) if m else None
+    except ValueError:
+        j = None
+    if not isinstance(j, dict) or "match" not in j:
+        return None, "", False
+    k = j["match"]
+    if isinstance(k, str) and k.strip().isdigit():
+        k = int(k)
+    k = k if isinstance(k, int) and not isinstance(k, bool) and 1 <= k <= n else None
+    return k, str(j.get("reason") or "")[:300], True
+
+
+def text_hash(t):
+    import hashlib
+    return hashlib.sha1(t.encode()).hexdigest()[:10]
 
 
 def run(a):
@@ -179,8 +218,9 @@ def run(a):
     probes = jl(a.probes)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    done = {r["pid"] for r in jl(out / "results.jsonl")}
-    todo = [p for p in probes if p["pid"] not in done]
+    # a verdict is reused only for the same text (a reworded question keeps its id) and only if the reply parsed
+    done = {(r["pid"], r.get("h")) for r in jl(out / "results.jsonl") if r.get("parsed")}
+    todo = [p for p in probes if (p["pid"], text_hash(p["text"])) not in done]
     print(len(todo), "probes to judge", flush=True)
     if not todo:
         return
@@ -196,22 +236,30 @@ def run(a):
             ch = todo[i:i + 64]
             cands = [idx[p["subject"]].top(p["text"], p.get("sub"), 8, p.get("exclude")) for p in ch]
             msgs = [[{"role": "system", "content": sysmsg},
-                     {"role": "user", "content": PROMPT.format(gen=p["text"][:1500], n=len(c),
+                     {"role": "user", "content": PROMPT.format(gen=clip(p["text"], 1500), n=len(c),
                                                                cands="\n\n".join(f"[{j + 1}] {d['text']}" for j, d in enumerate(c)))}]
                     for p, c in zip(ch, cands)]
             for p, c, o in zip(ch, cands, llm.chat(msgs, sp, use_tqdm=False)):
                 raw = o.outputs[0].text
                 k, reason, ok = parse(raw, len(c))
-                f.write(json.dumps({"pid": p["pid"], "cands": [d["id"] for d in c], "match": c[k - 1]["id"] if k else None,
-                                    "reason": reason, "parsed": ok}, ensure_ascii=False) + "\n")
+                f.write(json.dumps({"pid": p["pid"], "h": text_hash(p["text"]), "cands": [d["id"] for d in c],
+                                    "match": c[k - 1]["id"] if k else None, "reason": reason, "parsed": ok}, ensure_ascii=False) + "\n")
             f.flush()
             print(f"{min(i + 64, len(todo))}/{len(todo)}", flush=True)
 
 
 def report(a):
     probes = {p["pid"]: p for p in jl(a.probes)}
-    res = {r["pid"]: r for r in jl(a.results)}
-    L = ["# Past-paper precedent: judge report", ""]
+    # only parsed verdicts for the probe's current text count; anything else is unjudged, never a no-match
+    res = {r["pid"]: r for r in jl(a.results) if r.get("parsed") and r["pid"] in probes and r.get("h") == text_hash(probes[r["pid"]]["text"])}
+    allunits = {(p["subject"], p["sub"], p["unit"]) for p in probes.values() if p["kind"] == "gen"}
+    judged = {(probes[pid]["subject"], probes[pid]["sub"], probes[pid]["unit"]) for pid in res if probes[pid]["kind"] == "gen"}
+    L = ["# Past-paper precedent: judge report", "",
+         f"Coverage: {len(res)}/{len(probes)} probes judged; generated units judged {len(judged)}/{len(allunits)}"
+         f" ({len(allunits - judged)} unjudged: kept for now, listed in report.unjudged.jsonl, re-run to judge them).", ""]
+    with open(Path(a.out).with_suffix(".unjudged.jsonl"), "w", encoding="utf-8") as f:
+        for u in sorted(allunits - judged, key=str):
+            f.write(json.dumps({"subject": u[0], "sub": u[1], "unit": u[2]}, ensure_ascii=False) + "\n")
     cal = collections.defaultdict(collections.Counter)
     for pid, r in res.items():
         p = probes.get(pid)
@@ -261,7 +309,21 @@ def selftest():
     assert parse('{"match": 2, "reason": "same"}', 8) == (2, "same", True)
     assert parse('```json\n{"match": null, "reason": "no"}\n```', 8) == (None, "no", True)
     assert parse('{"match": 9, "reason": "x"}', 8)[0] is None and parse("garbage", 8) == (None, "", False)
+    assert parse('{"match": true, "reason": "x"}', 8) == (None, "x", True)  # a bool is not candidate 1
+    assert parse('{"match": 2.7, "reason": "x"}', 8)[0] is None and parse('{"match": "3"}', 8)[0] == 3
+    assert parse('{"match": 2, "reason": ', 8) == (None, "", False)  # cut off: unjudged, not a no-match
     assert qtext("Q?", ["(1) a", "b"]) == "Q?\n(1) a\n(2) b"
+    assert qtext("Speed?", ["50 km/h", "3/4", "12", "2.5"]) == "Speed?\n(1) 50 km/h\n(2) 3/4\n(3) 12\n(4) 2.5"  # digits kept
+    assert qtext("字?", ["（1）甲", "(2) 乙"]) == "字?\n(1) 甲\n(2) 乙"
+    svg = '<svg viewBox="0 0 10 10"><text x="1">bulb <tspan>P</tspan></text><rect/><text>switch S</text></svg>'
+    assert figure_text(svg) == "bulb P switch S" and "[Figure: bulb P switch S]" in qtext("Look at the circuit.", ["a"], svg)
+    assert figure_text({"img": "/x.webp", "alt": "a flower", "labels": [{"text": "P"}]}) == "a flower P"
+    assert clip("x" * 50, 100) == "x" * 50 and clip("S" * 100 + "QUESTION?", 40).endswith("QUESTION?")
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False, dir=os.environ.get("TMPDIR")) as t:
+        t.write('{"pid": "a"}\n{"pid": "b", "cut')
+    assert [r["pid"] for r in jl(t.name)] == ["a"]
+    os.unlink(t.name)
     print("concept_match selftest ok")
 
 
