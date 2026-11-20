@@ -368,7 +368,8 @@ def select(a):
             if reason:
                 R[reason] += 1
                 per_year[y][reason] += 1
-                rejects.append({"id": q["id"], "reason": reason, **({"answer_src": src} if src != "vision" else {})})
+                rejects.append({"id": q["id"], "reason": reason, **({"answer_src": src} if src != "vision" else {}),
+                                **({"key": k} if reason == "needs-blind-check-ocr" else {})})  # input for the blind run
                 continue
             per_year[y]["selected"] += 1
             rows.append({
