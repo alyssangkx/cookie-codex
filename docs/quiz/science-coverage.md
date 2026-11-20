@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-673 shipped questions (basic 226, intermediate 226, competent 221), 310 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+748 shipped questions (basic 251, intermediate 251, competent 246), 342 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -80,7 +80,7 @@
 | Respiration and the Sun | Recognise that living things need energy from respiration to carry ou… | yes | no | 0 **not yet** |
 | Respiration and the Sun | Recognise that the Sun is our primary source of energy (light and hea… | yes | no | 0 **not yet** |
 | Respiration and the Sun | Differentiate between the ways plants and animals obtain energy [Stan… | yes | no | 0 **not yet** |
-| Photosynthesis | Investigate the requirements (water, light energy, carbon dioxide) fo… | yes | yes | 0 **not yet** |
+| Photosynthesis | Investigate the requirements (water, light energy, carbon dioxide) fo… | yes | yes | 75 |
 | Forms and conversion of energy | Recognise that energy from most of our energy resources is derived in… | yes | no | 8 |
 | Forms and conversion of energy | Recognise and give examples of forms of energy: kinetic, potential, l… | yes | no | 17 |
 | Forms and conversion of energy | Investigate energy conversion from one form to another [Standard Scie… | yes | yes | 50 |
@@ -91,7 +91,7 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**25 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Organism, population, community, habitats; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**26 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Organism, population, community, habitats; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
@@ -110,15 +110,15 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 24 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 33 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 77 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 67 |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 68 |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 22 |
-| Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 9 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 36 |
+| Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 61 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
