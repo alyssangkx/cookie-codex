@@ -1,0 +1,34 @@
+{
+  "_note": "Result-screen encouragement (docs/learning-loop-design.md item 4). Edit freely: praise effort, strategy and persistence; name a next step; never compare with other children; never 'smart', 'genius' or 'talented'; 'not yet' instead of 'fail'. Bands: perfect = every answer right, high = 80% and over, mid = 50-79%, low = under 50%. use 'tier' = shown after tier quizzes only; 'all' = tier quizzes, Daily Review and papers. Keep at least one 'all' line per band. Chinese-subject results show zh with en underneath until bilingualUntil (inclusive, local date), then zh only.",
+  "bilingualUntil": "2027-03-31",
+  "bands": {
+    "perfect": [
+      { "use": "all", "en": "Every answer correct. The way you prepared worked, so keep doing it.", "zh": "全部答对！你的准备方法很有效，继续保持。" },
+      { "use": "all", "en": "Full marks! You read each question carefully, and it showed.", "zh": "满分！你认真读了每一道题，成果看得见。" },
+      { "use": "tier", "en": "All correct. Try the next tier or a new topic to keep stretching.", "zh": "全对了。试试下一级或新的课题，继续挑战自己。" },
+      { "use": "all", "en": "A perfect round. Which questions feel easy now that used to feel hard?", "zh": "完美的一轮！哪些题以前觉得难，现在觉得容易了？" },
+      { "use": "all", "en": "You checked your work, and it paid off. All correct!", "zh": "你仔细检查了答案，努力有了回报。全部正确！" }
+    ],
+    "high": [
+      { "use": "all", "en": "Strong work. The questions you missed show exactly what to practise next.", "zh": "做得很好！答错的题，正好告诉你下一步练什么。" },
+      { "use": "all", "en": "Nearly all correct. Your careful working is making a difference.", "zh": "几乎全对。你认真作答，效果很明显。" },
+      { "use": "all", "en": "Great effort. The ones you missed come back as retests, so you get another go.", "zh": "很努力！答错的题会再出现，你还有机会再试。" },
+      { "use": "all", "en": "You stayed focused to the end. Sort out the last few and you have it.", "zh": "你一直专心到最后。弄懂最后几题，你就掌握了。" },
+      { "use": "all", "en": "Well done for sticking with the harder questions. Check the steps for the ones you missed.", "zh": "难题你也坚持做完了，很棒。看看答错题的讲解吧。" }
+    ],
+    "mid": [
+      { "use": "all", "en": "Good progress. Every mistake here is a clue about what to practise.", "zh": "有进步！每一个错误都是线索，告诉你该练什么。" },
+      { "use": "all", "en": "At least half right. Read the worked steps for the rest, then try again tomorrow.", "zh": "至少答对了一半。读一读其余题目的讲解，明天再试。" },
+      { "use": "all", "en": "Keep going. Mistakes are how you learn, and the missed ones come back as retests.", "zh": "继续加油！犯错是学习的一部分，答错的题会再出现。" },
+      { "use": "all", "en": "Nice effort. Next time, try one new strategy: underline the key words first.", "zh": "很努力！下次试一个新方法：先圈出题目里的关键词。" },
+      { "use": "all", "en": "You are building this skill step by step. Go through the missed questions slowly.", "zh": "你正在一步一步地进步。慢慢看一遍答错的题目吧。" }
+    ],
+    "low": [
+      { "use": "all", "en": "Not yet, and that's fine. Every try teaches you something.", "zh": "还没掌握，没关系。每一次尝试都有收获。" },
+      { "use": "all", "en": "Hard questions are how you grow. Start with the worked steps.", "zh": "难题能帮助你成长。先看看每一步的讲解。" },
+      { "use": "tier", "en": "Thanks for sticking with it. Try the tier below or your review first, then come back.", "zh": "谢谢你坚持做完！可以先做低一级或复习，再回来挑战。" },
+      { "use": "all", "en": "Pick one missed question and work through it step by step.", "zh": "选一道答错的题，一步一步地把它弄懂。" },
+      { "use": "all", "en": "Today showed you what to practise. The missed questions come back so you can try again.", "zh": "今天你知道了该练什么。答错的题会再出现，让你再试一次。" }
+    ]
+  }
+}
