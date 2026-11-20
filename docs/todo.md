@@ -29,7 +29,7 @@ outside the repo.
     one-off refile script.
   - **Done:** `*.zip` and `.ses` gitignored (past-paper archive); the isolation wording corrected.
 - [ ] **Parent page:** questions no longer in any bank are left out of "answered wrong" and "waiting for retest"
-  (owner). Save migration 4→5 drops stale tier counts. **Each question has exactly one sub-topic:**
+  (owner). Stale tier counts are hidden by `liveMastered` (no schema bump: an old tab could overwrite the server save); Daily Review forgets orphan states. **Each question has exactly one sub-topic:**
   `check_dupes.py` guards it (0 clashes now).
 - [ ] **Parent note when pushing the Maths re-seed:** most Maths question ids change once. Pending Maths retests
   disappear, tier counts restart on the new questions, and cleared tiers and cards stay. The parent page lists the old

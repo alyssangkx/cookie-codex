@@ -94,7 +94,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 )}
 
 <script>
-  import { load, tierState, tierOpen, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, liveMastered, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
   import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
@@ -113,7 +113,8 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       const st = tierState(s, sub, t);
       if (st.cleared) return { state: 'cleared', text: `${TIER_NAME[t]}: cleared ✓` };
       if (!tierOpen(s, sub, t, subs.find((y) => y.id === sub)?.playable)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
-      if (st.mastered) return { state: 'pass1', text: `${TIER_NAME[t]}: ${st.mastered} of ${st.total} mastered` };
+      const m = liveMastered(st, subs.find((y) => y.id === sub)?.count?.[t]);
+      if (m) return { state: 'pass1', text: `${TIER_NAME[t]}: ${m} of ${st.total} mastered` };
       return { state: 'open', text: `${TIER_NAME[t]}: open` };
     };
     root.querySelectorAll<HTMLElement>('.th-chip').forEach((el) => {

@@ -1,6 +1,6 @@
 // Pure logic for the "What do you want to train today?" page: power numbers and the
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
-import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, type SaveV1, type Tier } from './store.ts';
+import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, liveMastered, type SaveV1, type Tier } from './store.ts';
 import { reviewSize } from './pick.ts';
 
 export interface SubInfo {
@@ -112,7 +112,7 @@ export function suggestions(
   for (const sub of subs) {
     const hit = TIERS.find((t) => {
       const st = tierState(s, sub.id, t);
-      return canStart(sub, t) && !st.cleared && (st.mastered ?? 0) > 0;
+      return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t]) > 0; // a count from a replaced bank is 0
     });
     if (hit) {
       const st = tierState(s, sub.id, hit);

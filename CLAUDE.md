@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+The running to-do list is `docs/todo.md`: add every agreed or recommended item there, and tick it only when done.
+
 Alyssa's Cookie Codex is a static Astro site with two parts:
 - **A PSLE revision game.** A Primary 6 student answers timed multiple-choice quizzes (PSLE 2027 syllabus; only Math has questions so far) and earns Cookie Run: Kingdom cookie cards.
 - **The Codex.** A reference library of all 186 cookies.
@@ -24,6 +26,8 @@ Tests and checks (from the repo root):
 node --test site/src/lib/*.test.ts        # game logic: store, pick, suggest (Node 24 strips TS types)
 python3 scripts/quiz/math/build.py        # regenerate all Math question banks (--topic math-ratio for one)
 python3 scripts/quiz/test_stable_ids.py   # a reworded stem keeps its id
+python3 scripts/quiz/math/test_isolation.py # removing a template leaves other sub-topics' questions unchanged
+python3 scripts/quiz/check_dupes.py         # must print "0 failures": no question stem appears under two sub-topics (each question has one category)
 python3 scripts/quiz/check_math.py        # must print "0 failures": re-solves every question independently (SHOW=n prints n failures, default 40)
 python3 scripts/quiz/coverage.py          # top-school question types covered -> docs/quiz/coverage.md
 python3 scripts/quiz/build_rewards.py     # card reward per (sub-topic, tier) -> site/src/data/rewards.json
@@ -53,10 +57,10 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
   - Template names can repeat across topics. Lookups are by `(topic, key)`.
 - **Diagrams.** Use `figures.py` (SVG with `currentColor`) plus `figures_<group>.py` helpers. A figure must agree with the stem's numbers and never show the answer.
 - **Banks.**
-  - `build.py` writes `site/src/data/quiz/math/<topic>.json`, with at least 25 unique questions per (sub-topic, level).
+  - `build.py` writes `site/src/data/quiz/math/<topic>.json`. Each template draws from its own random stream (topic, level, template key, seed): changing a template never touches other sub-topics. Inside a sub-topic, templates' candidates (each from its own stream minus its own repeats) are merged by weight and the first n new stems are kept, so removing a template never changes a sibling's questions (adding one or raising a weight can push siblings' last questions out). Stems are never compared across sub-topics (`check_dupes.py` enforces that). `PAPER_MARKS_PCT` keys are asserted to be real sub-topics. Questions per (sub-topic, level) follow the sub-topic's share of PSLE paper marks: 14 per 1% of marks, capped at 100 and at 10 per unit of template `weight`, but never under 25 (the floor wins, so a one-template level still gets 25) (`@template(..., weight=n)`, default 1, not part of the id). Since 20 Nov 2026; the switch changed most Math ids once (owner-approved: learning first, awarded cards stay).
   - A question is filed under the sub-topic of its **first** outcome id.
   - Question ids are `<topic prefix>-<level letter>-sha1(topic | template key | canonical JSON of params)[:10]` (`stable_id()` in `build.py`). Rewording a stem, explanation or figure keeps the id; changing a template's numbers or param structure makes a new question. Never key progress on stem text. `check_math.py` fails on a duplicate id, and `test_stable_ids.py` proves a reword keeps ids.
-  - There is no id alias map: the site was never deployed with v1 saves, so the v1→v2 migration simply clears `questions`.
+  - There is no id alias map. The v1→v2 migration simply clears `questions` (no v1 saves were ever deployed). Ids that leave a bank later (the 20 Nov 2026 redesign: the first banks were a pilot; the Math re-seed replaced most Math ids) stay in a save as orphans: they are never asked again, the parent page leaves them out, Daily Review (which loads every bank) forgets their states (`forgetMissing`, refuses fewer than 1,000 known ids), and pages show a tier's stored "N mastered" only when its stored `total` equals the current bank count (`liveMastered`), so a count from a replaced bank reads as 0 until the next quiz recounts it. Cleared tiers and cards stay. Deliberately no schema bump: an old tab meeting a newer save version would start fresh and could push that over the server save. A rewritten item must get a new key (English, Chinese, Science ids are sha1(topic|key)), or the new question inherits the old one's progress.
 - **Coverage.**
   - `patterns.json` is the catalogue of question types seen in top-school P5/P6 papers (from OCR'd PDFs).
   - A template covers a type by naming its `math-pat-...` id in its docstring.
@@ -100,7 +104,7 @@ python3 scripts/quiz/build_rewards.py     # after the banks change
 
 ### Game (`site/src/lib/`)
 
-- **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 3`). Never read or write storage directly. Rules it implements:
+- **`store.ts`** is the only code that touches localStorage (key `ccx:save`, interface `SaveV1`, now `schemaVersion: 4`). Never read or write storage directly. Rules it implements:
   - **Clearing is mastery.** A tier is cleared when every question in it is retired (`questions[id].s === 0`), for all tiers (P1-P6, Math and Chinese). A question answered right the first time retires at once; a wrong one retires after its 1, 3, 7 day retests are answered right. The score and the ≥ 80% pass flag on a full 10-question quiz are kept for display only. `store.ts` has no question ids, so `finishQuiz(..., tierIds)` takes a `"sub|tier" -> ids` map from the quiz page (which has the banks loaded) and `syncTiers()` stores `mastered`/`total` on the tier state and clears a tier when they match, awarding its card (a duplicate adds a star). Other pages show `mastered` of the build-time question count. A cleared tier is never un-cleared. **Exception: a perfect first try on Basic or Intermediate, all subjects.** If a child's first-ever tier quiz on a sub-topic's Basic or Intermediate tier scores 10/10 (a full `QUIZ_SIZE` quiz), `finishQuiz` clears that tier at once (before `syncTiers`), awards its card and the next tier opens (`QuizResult.autoPromoted`; the result screen says "Perfect first try! <Tier> cleared, and the next tier is open."). "First" is per tier: no earlier tier attempt for that `sub|tier` in `s.attempts`; any earlier attempt on it, finished or abandoned (`open`), means it is not a first try, so quitting after a mistake and retrying cannot earn it. Competent is not included and clears by mastery; everything else follows mastery. A Daily Review can clear a tier too (`newlyCleared`).
   - **Tries per tier per day** depend on the sub-topic's P-level (highest outcome `level` in the syllabus JSON): 5 for P1-P5, 3 for P6 and all Chinese (`triesPerDay(sub)`). `site/src/data/progression.json` (from `scripts/quiz/build_progression.py`, run after `build_rewards.py`) lists only the P1-P5 sub-topics, so `store.ts` imports no big JSON; an unlisted sub-topic counts as P6. The daily cap is a parent setting, 45 to 120 minutes in steps of 15.
   - Spaced retest: a wrong answer is due again in 1, then 3, then 7 days; a new question answered correctly retires at once. `questions[id].a` (optional) keeps the option text picked on the latest wrong answer for the parent page's "Questions answered wrong" list, which also lets the admin pick a child and read that child's save (select only; RLS already allows an admin).

@@ -272,6 +272,8 @@ const data = {
   type BQ = { id: string; sub: string; stem: string; options: string[]; answer: number;
     figure?: string | { img: string; alt: string; labels?: { text: string }[] }; visual?: { kind: string; title: string } };
   let bankLoad: Promise<Map<string, BQ>> | null = null;
+  let bankMissing = 0; // question files that failed to load: their questions cannot be shown
+  const missingNote = () => (bankMissing ? `<p class="note">Some question files could not load (offline?), so their questions are not shown. Reload to try again.</p>` : '');
   function banks() {
     return (bankLoad ??= (async () => {
       const qs = new Map<string, BQ>();
@@ -279,9 +281,9 @@ const data = {
       await Promise.all(files.map(async (f) => {
         try {
           const r = await fetch(`/data/quiz/${f}.json`);
-          if (!r.ok) return;
+          if (!r.ok) { bankMissing++; return; }
           for (const q of (await r.json()) as BQ[]) qs.set(q.id, q);
-        } catch { /* offline: show ids */ }
+        } catch { bankMissing++; }
       }));
       return qs;
     })());
@@ -328,35 +330,37 @@ const data = {
   let wrongSeq = 0;
   async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq) {
     const now = Date.now();
-    const wrong = Object.entries(questions).filter(([, q]) => q.w > 0);
-    if (!wrong.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
+    const recorded = Object.entries(questions).filter(([, q]) => q.w > 0);
+    if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
     $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
     const bank = await banks();
     if (my !== wrongSeq) return; // the picker changed while the banks loaded
+    // owner, 20 Nov 2026: questions no longer in any bank (the pilot banks were redesigned) are left out entirely
+    const wrong = recorded.filter(([id]) => bank.has(id));
+    if (!wrong.length) { $('wrong').innerHTML = (missingNote() || '<p class="note">No wrong answers on the current questions yet.</p>'); return; }
     const subOf = new Map(P.all.map((x) => [x.id, x]));
     const schoolName = new Map(P.schools.map((x) => [x.id, x.name]));
-    // subject -> sub-topic -> [id, state]; ids no longer in any bank are listed as retired, never dropped
+    // subject -> sub-topic -> [id, state]
     const tree = new Map<string, Map<string, [string, SaveV1['questions'][string]][]>>();
     for (const [id, q] of wrong) {
-      const bq = bank.get(id), sub = bq ? subOf.get(bq.sub) : undefined;
-      const subject = sub ? schoolName.get(sub.school) ?? sub.school : 'Retired from the bank';
-      const subName = sub ? sub.name : 'Questions no longer in any bank';
+      const bq = bank.get(id)!, sub = subOf.get(bq.sub);
+      const subject = sub ? schoolName.get(sub.school) ?? sub.school : 'Other';
+      const subName = sub ? sub.name : bq.sub;
       const bySub = tree.get(subject) ?? tree.set(subject, new Map()).get(subject)!;
       (bySub.get(subName) ?? bySub.set(subName, []).get(subName)!).push([id, q]);
     }
     const item = ([id, q]: [string, SaveV1['questions'][string]]) => {
-      const bq = bank.get(id);
+      const bq = bank.get(id)!;
       const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
         : 'answered right since (mastered)';
-      const head = bq ? `<div class="wq-stem">${bold(bq.stem)}</div>${figHtml(bq)}`
-        : `<div class="wq-stem">Question retired from the bank <code>${esc(id)}</code></div>`;
-      const right = bq ? `Right answer: <b>${bold(bq.options[bq.answer])}</b>` : '';
+      const head = `<div class="wq-stem">${bold(bq.stem)}</div>${figHtml(bq)}`;
+      const right = `Right answer: <b>${bold(bq.options[bq.answer])}</b>`;
       const theirs = q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
         : q.a === '' ? 'Their answer: none (time ran out)' : `Their answer: ${bold(q.a)}`;
       return `<li>${head}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
         + `<span class="meta">Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ${status}</span></li>`;
     };
-    $('wrong').innerHTML = `<p class="note">${wrong.length} question${wrong.length === 1 ? '' : 's'} in all.</p>` + [...tree].map(([subject, bySub]) => {
+    $('wrong').innerHTML = missingNote() + `<p class="note">${wrong.length} question${wrong.length === 1 ? '' : 's'} in all.</p>` + [...tree].map(([subject, bySub]) => {
       const n = [...bySub.values()].reduce((k, l) => k + l.length, 0);
       return `<details class="wq-subject"><summary><b>${esc(subject)}</b> (${n})</summary>` + [...bySub].sort((a, b) => a[0].localeCompare(b[0])).map(([name, list]) =>
         `<h3 class="wq-sub">${esc(name)} (${list.length})</h3><ol class="list">${list.sort((a, b) => b[1].w - a[1].w).map(item).join('')}</ol>`).join('') + '</details>';
@@ -365,17 +369,19 @@ const data = {
 
   async function renderRetest() {
     const now = Date.now();
-    const due = Object.entries(s.questions).filter(([, q]) => q.s > 0).sort((a, b) => a[1].due - b[1].due);
-    if (!due.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
+    const waiting = Object.entries(s.questions).filter(([, q]) => q.s > 0).sort((a, b) => a[1].due - b[1].due);
+    if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
     $('retest').innerHTML = '<p class="note">Loading questions…</p>';
     const stems = await banks();
+    const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
+    if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; return; }
     const step = [0, '1-day', '3-day', '7-day'];
-    $('retest').innerHTML = `<p class="note">${due.length} question${due.length > 1 ? 's' : ''} waiting.</p><ol class="list">` + due.map(([id, q]) => {
+    $('retest').innerHTML = missingNote() + `<p class="note">${due.length} question${due.length > 1 ? 's' : ''} waiting.</p><ol class="list">` + due.map(([id, q]) => {
       const late = q.due <= now;
       const dueTxt = late
         ? (dayKey(q.due) === dayKey(now) ? 'due today' : '<span class="due-late">overdue</span>')
         : `due ${esc(fmtDate(q.due))}`;
-      return `<li>${bold(stems.get(id)?.stem ?? id)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
+      return `<li>${bold(stems.get(id)!.stem)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
     }).join('') + '</ol>';
   }
 

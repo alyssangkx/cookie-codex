@@ -55,7 +55,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
 <script>
   import { MIN_POOL,
-    load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
+    load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor, forgetMissing,
     QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
@@ -223,6 +223,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       } else if (mode === 'paper') {
         quiz = pickPaper(all as any, s.questions, paperN, paperMix.mix);
       } else {
+        // Daily Review has every bank loaded: forget states of questions no longer in any bank (owner, 20 Nov 2026),
+        // so the Daily Review button on /train stops counting retests that can never be asked
+        if (forgetMissing(s, new Set(byId.keys()))) save(s);
         // a passage's due blanks are asked together in passage order; its other blanks show their answer (clozeStem)
         quiz = reviewPassages(pickReview(all.map((q) => q.id), s.questions), passage);
         if (!quiz.length) return stop('Nothing to review today. Great work!');

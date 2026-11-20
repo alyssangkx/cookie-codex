@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, forgetMissing, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -127,14 +127,14 @@ test('v1 -> v2 keeps cards, progress and streak, clears questions, backs up the 
   const v1 = v1Save();
   const data = mockStorage({ 'ccx:save': JSON.stringify(v1) });
   const s = load();
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, SCHEMA);
   assert.deepEqual(s.questions, {});
   assert.deepEqual(s.cards, v1.cards);
   assert.deepEqual(s.progress, v1.progress);
   assert.deepEqual(s.streak, v1.streak);
   assert.equal(s.settings.playerName, 'Kept');
   assert.deepEqual(JSON.parse(data['ccx:backup']), v1);
-  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, 4);
+  assert.equal(JSON.parse(data['ccx:save']).schemaVersion, SCHEMA);
 });
 
 test('a v2 save loads untouched and writes no backup', () => {
@@ -149,7 +149,7 @@ test('a failed migration preserves the raw save in ccx:failed:1 and leaves ccx:s
   const raw = JSON.stringify({ ...fresh(), schemaVersion: 0 }); // no migration from 0
   const data = mockStorage({ 'ccx:save': raw });
   const s = load();
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, SCHEMA);
   assert.deepEqual(s.cards, {});
   assert.equal(data['ccx:failed:1'], raw);
   assert.equal(data['ccx:failed:2'], undefined);
@@ -158,7 +158,7 @@ test('a failed migration preserves the raw save in ccx:failed:1 and leaves ccx:s
 });
 
 test('two loads of the same broken save write ccx:failed:1 once and create no extra keys', () => {
-  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: 5 })]) {
+  for (const raw of ['{not json', JSON.stringify({ ...fresh(), schemaVersion: SCHEMA + 1 })]) {
     const data = mockStorage({ 'ccx:save': raw, 'ccx:backup': 'old-backup' });
     let writes = 0;
     const set = (localStorage as any).setItem;
@@ -202,11 +202,11 @@ test('a legacy ccx:failed key is deduped against, folded into the slots once, th
 test('importCode migrates a v1 code, refuses a newer one, and writes no backup', async () => {
   const data = mockStorage({ 'ccx:save': 'current-save' });
   const s = await importCode(await exportCode(v1Save() as any));
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, SCHEMA);
   assert.deepEqual(s.questions, {});
   assert.equal(data['ccx:backup'], undefined);
   assert.equal(data['ccx:save'], 'current-save');
-  const newer: any = { ...fresh(), schemaVersion: 5 };
+  const newer: any = { ...fresh(), schemaVersion: SCHEMA + 1 };
   await assert.rejects(importCode(await exportCode(newer)), /newer version/);
   assert.equal(data['ccx:backup'], undefined);
 });
@@ -238,7 +238,7 @@ test('migration 2 -> 3 keeps cleared tiers, cards and everything else', () => {
   const before = JSON.stringify(v2);
   const s = migrate(v2);
   assert.equal(JSON.stringify(v2), before);
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, SCHEMA);
   assert.equal(s.progress['p4-sub'].b.cleared, true);
   assert.equal(s.progress['p6-sub'].b.cleared, false); // lazily judged from its questions at the next quiz
   assert.deepEqual(s.cards, v2.cards);
@@ -466,7 +466,20 @@ test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () 
   const v3 = (cap: number): any => { const x: any = fresh(); x.schemaVersion = 3; x.settings.dailyCapMin = cap; return x; };
   assert.equal(migrate(v3(45)).settings.dailyCapMin, 120);
   assert.equal(migrate(v3(60)).settings.dailyCapMin, 60);
-  assert.equal(migrate(v3(90)).schemaVersion, 4);
+  assert.equal(migrate(v3(90)).schemaVersion, SCHEMA);
+});
+
+test('liveMastered hides a count made against a different bank size; forgetMissing drops orphan ids', () => {
+  assert.equal(liveMastered({ mastered: 18, total: 25 }, 25), 18);
+  assert.equal(liveMastered({ mastered: 18, total: 25 }, 100), 0);
+  assert.equal(liveMastered({ mastered: 18, total: 25 }), 18);
+  assert.equal(liveMastered({}, 25), 0);
+  const s: any = fresh();
+  s.questions = { keep: { s: 1, due: 0, w: 1 }, gone: { s: 2, due: 0, w: 2 } };
+  assert.equal(forgetMissing(s, new Set(['keep'])), 0); // too small a set: refuses
+  const known = new Set(['keep', ...Array.from({ length: 1000 }, (_, k) => `q${k}`)]);
+  assert.equal(forgetMissing(s, known), 1);
+  assert.deepEqual(Object.keys(s.questions), ['keep']);
 });
 
 test('Admin: every tier is open with nothing cleared; a normal player is locked', () => {

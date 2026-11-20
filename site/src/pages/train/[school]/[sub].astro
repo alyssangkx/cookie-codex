@@ -24,7 +24,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 
     <div class="tiers">
       {tiers.map((t) => (
-        <article class="tier-card" data-tier={t.k} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
+        <article class="tier-card" data-tier={t.k} data-count={String(t.count)} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
           <h2>{t.name}</h2>
           <p class="tier-help">{{ b: 'The main ideas, step by step.', i: 'Trickier, mixed questions.', c: 'The hardest, exam-style questions.' }[t.k]}</p>
           <a class="reward" href={`/cookie/${t.cookie.slug}/`} style={`--rc: var(--r-${t.cookie.rarity})`}>
@@ -45,7 +45,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 </Base>
 
 <script>
-  import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, type Tier } from '../../../lib/store';
   const s = load();
   const root = document.querySelector<HTMLElement>('.sub-page')!;
   const sub = root.dataset.sub!;
@@ -67,7 +67,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     let block = '';
     if (st.cleared) { msg.textContent = `Cleared ✓ Every question mastered. You can keep practising.`; card.dataset.state = 'cleared'; }
     else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
-    else msg.textContent = st.mastered ? `${st.mastered} of ${st.total} questions mastered. Keep going!` : 'Ready when you are.';
+    else { const m = liveMastered(st, Number(card.dataset.count)); msg.textContent = m ? `${m} of ${st.total} questions mastered. Keep going!` : 'Ready when you are.'; }
     if (!block && triesUsedUp(s, sub, t)) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
     if (!block && reason) block = blockMessage(reason);
     if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
