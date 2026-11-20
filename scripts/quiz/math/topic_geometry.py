@@ -686,6 +686,383 @@ def _(p):
     return F(round(meas(O, B, D)))
 
 
+# ---------------------------------------------------------------- ANGLES: more PSLE-style types (parallel-quadrilaterals,
+# exterior angles, chained shapes). Points are named P..U so that no figure letter looks like an option letter A-D.
+
+@template(T, "intermediate", GA + "08", GT + "04")
+def ang_quad_diagonal(r):
+    """math-pat-angles-parallel-quadrilaterals"""
+    mode = r.choice(["rhombus", "parallelogram"])
+    sc = Scene()
+    if mode == "rhombus":
+        b = r.randrange(50, 131, 2)
+        if b == 90:
+            return None
+        P = {"mode": mode, "b": b}
+        Q, R = (0, 0), (1, 0)
+        Pp = vec(b)
+        S = (Pp[0] + R[0], Pp[1])
+        for n, p in zip("QRPS", (Q, R, Pp, S)):
+            sc.add(n, *p)
+        sc.poly(["P", "Q", "R", "S"]); sc.seg("P", "R")
+        for n in "PQRS":
+            sc.label(n)
+        sc.ang("Q", "P", "R", f"{b}°", r=22)
+        sc.ang("P", "Q", "R", "x", r=24)
+        stem = f"PQRS is a rhombus. ∠PQR = {b}°. Find ∠QPR."
+        ans = (180 - b) // 2
+        wr = [W(180 - b, "gave_co_interior_angle", "Gave ∠QPS instead of halving it for ∠QPR."),
+              W(b // 2, "halved_given_angle", "Halved the given angle instead of using the isosceles triangle."),
+              W(90 - b if b < 90 else b - 90, "used_right_angle", "Subtracted the angle from 90° instead of finding the base angle."),
+              W(180 - b // 2, "x", "")]
+        wr = [w for w in wr if w[1] != "x"]
+        steps = ["All sides of a rhombus are equal, so triangle PQR is isosceles with QP = QR.",
+                 f"The two base angles are equal: ∠QPR = (180° − {b}°) ÷ 2 = {ans}°"]
+        fig = sc.svg("Rhombus with a diagonal")
+    else:
+        u, v = r.randrange(20, 81, 2), r.randrange(20, 81, 2)
+        q3 = 180 - u - v
+        if not 30 <= q3 <= 130:
+            return None
+        P = {"mode": mode, "u": u, "v": v}
+        sP, sQ, sR, sS = _para_pts(u, v)
+        for n, p in zip("PQRS", (sP, sQ, sR, sS)):
+            sc.add(n, *p)
+        sc.poly(["P", "Q", "R", "S"]); sc.seg("P", "R")
+        sc.arrow("P", "Q"); sc.arrow("S", "R"); sc.arrow("Q", "R", 2); sc.arrow("P", "S", 2)
+        for n in "PQRS":
+            sc.label(n)
+        sc.ang("P", "Q", "R", f"{u}°", r=34)
+        sc.ang("R", "P", "Q", f"{v}°", r=26)
+        sc.ang("S", "R", "P", "x", r=24)
+        stem = f"PQRS is a parallelogram. ∠QPR = {u}° and ∠PRQ = {v}°. Find ∠PSR."
+        ans = q3
+        wr = [W(u + v, "gave_sum_of_given", "Added the two given angles instead of subtracting from 180°."),
+              W(180 - u, "mixed_up_angles", "Used one given angle with 180° only."),
+              W(180 - v, "mixed_up_angles", "Used one given angle with 180° only."),
+              W(360 - u - v, "used_360_for_triangle", "Used 360° for the angles of a triangle.")]
+        steps = [f"In triangle PQR: ∠PQR = 180° − {u}° − {v}° = {q3}°",
+                 f"Opposite angles of a parallelogram are equal, so ∠PSR = ∠PQR = {ans}°"]
+        fig = sc.svg("Parallelogram with a diagonal")
+    return mk(ang_quad_diagonal, stem, ans, wr, steps, P, fig)
+
+
+def _para_pts(u, v):
+    """Parallelogram PQRS: angle u at P (RPQ), v at R (PRQ); PQ = 1."""
+    q3 = 180 - u - v
+    pr = math.sin(math.radians(q3)) / math.sin(math.radians(v))
+    P0, Q0 = (0.0, 0.0), (1.0, 0.0)
+    R0 = vec(u, pr)
+    S0 = (P0[0] + R0[0] - Q0[0], P0[1] + R0[1] - Q0[1])
+    return P0, Q0, R0, S0
+
+
+@checker(ang_quad_diagonal)
+def _(p):
+    if p["mode"] == "rhombus":
+        b = p["b"]
+        Q, R = (0, 0), (1, 0)
+        Pp = vec(b)
+        return F(round(meas(Q, Pp, R)))
+    sP, sQ, sR, sS = _para_pts(p["u"], p["v"])
+    return F(round(meas(sP, sS, sR)))
+
+
+@template(T, "intermediate", GA + "08", GT + "06")
+def ang_trapezium_angles(r):
+    """math-pat-angles-parallel-quadrilaterals"""
+    mode = r.choice(["cointerior", "diagonal"])
+    sc = Scene()
+    if mode == "cointerior":
+        a, b = r.randrange(55, 126, 2), r.randrange(55, 126, 2)
+        if a == 90 or b == 90 or a == b:
+            return None
+        P = {"mode": mode, "a": a, "b": b}
+        pts = _trap_co(a, b)
+        if pts is None:
+            return None
+        for n, p in zip("PQRS", pts):
+            sc.add(n, *p)
+        sc.poly(["P", "Q", "R", "S"]); sc.arrow("P", "Q"); sc.arrow("S", "R")
+        for n in "PQRS":
+            sc.label(n)
+        sc.ang("P", "Q", "S", f"{a}°", r=24)
+        sc.ang("Q", "R", "P", f"{b}°", r=24)
+        sc.ang("S", "P", "R", "x", r=22)
+        stem = f"PQRS is a trapezium with PQ parallel to SR. ∠SPQ = {a}° and ∠PQR = {b}°. Find ∠PSR."
+        ans = 180 - a
+        wr = [W(180 - b, "mixed_up_angles", "Used ∠PQR instead of ∠SPQ in the co-interior angle."),
+              W(a, "gave_given_angle", "Gave ∠SPQ, which is not the angle asked."),
+              W(b, "gave_given_angle", "Gave ∠PQR, which is not the angle asked."),
+              W(360 - a - b if 360 - a - b <= 180 else None, "used_360", "Used 360° for a pair of angles between parallel lines.")]
+        steps = ["PQ is parallel to SR, so the angles between them on the same side (co-interior angles) add up to 180°.",
+                 f"∠PSR = 180° − {a}° = {ans}°"]
+        fig = sc.svg("Trapezium")
+    else:
+        u, v = r.randrange(20, 81, 2), r.randrange(20, 81, 2)
+        P = {"mode": mode, "u": u, "v": v}
+        pts = _trap_diag(u, v)
+        for n, p in zip("PQRS", pts):
+            sc.add(n, *p)
+        sc.poly(["P", "Q", "R", "S"]); sc.seg("P", "R"); sc.arrow("P", "Q"); sc.arrow("S", "R")
+        for n in "PQRS":
+            sc.label(n)
+        sc.ang("P", "Q", "R", f"{u}°", r=34)
+        sc.ang("R", "Q", "P", f"{v}°", r=20)
+        sc.ang("R", "Q", "S", None, r=62)
+        sc.fit()
+        aq = bearing(pts[2], pts[1])  # R -> Q; R -> S points left (180 degrees)
+        sw = ((aq - 180 + 180) % 360) - 180
+        sc.text(pt(pts[2][0], pts[2][1], 180 + 0.22 * sw, 74 / sc.scale), "x")
+        stem = f"PQRS is a trapezium with PQ parallel to SR. ∠QPR = {u}° and ∠PRQ = {v}°. Find ∠QRS."
+        ans = u + v
+        wr = [W(180 - u - v, "found_third_angle_only", "Found ∠PQR instead of ∠QRS."),
+              W(abs(u - v), "subtracted_given_angles", "Subtracted the two given angles."),
+              W(180 - u, "mixed_up_angles", "Used 180° minus one given angle."),
+              W(180 - v, "mixed_up_angles", "Used 180° minus one given angle.")]
+        steps = [f"PQ is parallel to SR, so ∠PRS = ∠QPR = {u}° (alternate angles).",
+                 f"∠QRS = ∠PRQ + ∠PRS = {v}° + {u}° = {ans}°"]
+        fig = sc.svg("Trapezium with a diagonal")
+    return mk(ang_trapezium_angles, stem, ans, wr, steps, P, fig)
+
+
+def _trap_co(a, b):
+    """Trapezium PQRS (PQ parallel to SR): angle a at P (SPQ), b at Q (PQR)."""
+    Pp = (0.0, 0.0)
+    S = vec(a, 1.0)
+    Q = (1.9, 0.0)
+    t = S[1] / math.sin(math.radians(b))
+    R = (Q[0] + t * math.cos(math.radians(180 - b)), S[1])
+    if R[0] - S[0] < 0.5:
+        return None
+    return Pp, Q, R, S
+
+
+def _trap_diag(u, v):
+    """Trapezium PQRS (PQ parallel to SR): angle u at P (RPQ), v at R (PRQ); PQ = 1."""
+    q3 = 180 - u - v
+    pr = math.sin(math.radians(q3)) / math.sin(math.radians(v))
+    Pp, Q, R = (0.0, 0.0), (1.0, 0.0), vec(u, pr)
+    S = (R[0] - 1.3, R[1])
+    return Pp, Q, R, S
+
+
+@checker(ang_trapezium_angles)
+def _(p):
+    if p["mode"] == "cointerior":
+        sP, sQ, sR, sS = _trap_co(p["a"], p["b"])
+        return F(round(meas(sP, sS, sR)))
+    sP, sQ, sR, sS = _trap_diag(p["u"], p["v"])
+    return F(round(meas(sQ, sR, sS)))
+
+
+@template(T, "intermediate", GA + "08", GT + "05")
+def ang_exterior_angle(r):
+    """math-pat-angles-one-step"""
+    p, q = r.randrange(25, 100, 1), r.randrange(25, 100, 1)
+    third = 180 - p - q
+    if third < 25 or p + q > 150:
+        return None
+    sc = Scene()
+    Q, R = (0.0, 0.0), (1.0, 0.0)
+    qp = math.sin(math.radians(third)) / math.sin(math.radians(p))
+    Pp = vec(q, qp)
+    S = (1.9, 0.0)
+    for n, pp in zip("PQRS", (Pp, Q, R, S)):
+        sc.add(n, *pp)
+    sc.seg("P", "Q"); sc.seg("P", "R"); sc.seg("Q", "S")
+    for n in "PQRS":
+        sc.label(n, away=(0.9, 0.2) if n == "P" else None)
+    sc.ang("Q", "P", "R", f"{q}°", r=24)
+    sc.ang("P", "Q", "R", f"{p}°", r=22)
+    sc.ang("R", "P", "S", "x", r=24)
+    stem = f"In triangle PQR, the side QR is extended to S. ∠QPR = {p}° and ∠PQR = {q}°. Find ∠PRS."
+    ans = p + q
+    wr = [W(third, "found_interior_angle", "Found the interior angle ∠PRQ instead of the exterior angle."),
+          W(180 - p, "used_one_angle_only", "Used only one of the given angles."),
+          W(180 - q, "used_one_angle_only", "Used only one of the given angles."),
+          W(abs(p - q), "subtracted_given_angles", "Subtracted the two given angles.")]
+    return mk(ang_exterior_angle, stem, ans, wr,
+              [f"∠PRQ = 180° − {p}° − {q}° = {third}°",
+               f"QRS is a straight line, so ∠PRS = 180° − {third}° = {ans}°"],
+              {"p": p, "q": q}, sc.svg("Triangle with an extended side"))
+
+
+@checker(ang_exterior_angle)
+def _(pr):
+    p, q = pr["p"], pr["q"]
+    third = 180 - p - q
+    qp = math.sin(math.radians(third)) / math.sin(math.radians(p))
+    Pp, R, S = vec(q, qp), (1.0, 0.0), (1.9, 0.0)
+    return F(round(meas(Pp, R, S)))
+
+
+@template(T, "competent", GA + "08", GT + "06")
+def ang_isosceles_exterior(r):
+    """math-pat-angles-chained-shapes"""
+    a = r.randrange(30, 111, 2)
+    base = (180 - a) // 2
+    sc = Scene()
+    Q, R, S = (-1.0, 0.0), (1.0, 0.0), (2.1, 0.0)
+    Pp = (0.0, math.tan(math.radians(base)))
+    for n, pp in zip("PQRS", (Pp, Q, R, S)):
+        sc.add(n, *pp)
+    sc.seg("P", "Q"); sc.seg("P", "R"); sc.seg("Q", "S")
+    sc.tick("P", "Q"); sc.tick("P", "R")
+    sc.label("P", away=(0, 0)); sc.label("Q"); sc.label("R", away=(0.5, 1.2)); sc.label("S", away=(0, 0.4))
+    sc.ang("P", "Q", "R", f"{a}°", r=22)
+    sc.ang("R", "P", "S", "x", r=24)
+    stem = f"PQR is an isosceles triangle with PQ = PR and ∠QPR = {a}°. The side QR is extended to S. Find ∠PRS."
+    ans = 90 + a // 2
+    wr = [W(base, "found_base_angle_only", "Found the base angle ∠PRQ but not the angle outside the triangle."),
+          W(180 - a, "used_apex_supplement", "Subtracted the apex angle from 180° and stopped."),
+          W(180 - a // 2, "halved_wrong_angle", "Halved the apex angle before subtracting from 180°."),
+          W(a, "gave_given_angle", "Gave the given angle.")]
+    return mk(ang_isosceles_exterior, stem, ans, wr,
+              ["PQ = PR, so the base angles are equal.",
+               f"∠PRQ = (180° − {a}°) ÷ 2 = {base}°",
+               f"QRS is a straight line, so ∠PRS = 180° − {base}° = {ans}°"],
+              {"a": a}, sc.svg("Isosceles triangle with an extended side"))
+
+
+@checker(ang_isosceles_exterior)
+def _(p):
+    base = next(b for b in range(1, 90) if 180 - 2 * b == p["a"])
+    Pp, R, S = (0.0, math.tan(math.radians(base))), (1.0, 0.0), (2.1, 0.0)
+    return F(round(meas(Pp, R, S)))
+
+
+@template(T, "competent", GA + "08", GT + "06")
+def ang_rhombus_equilateral(r):
+    """math-pat-angles-chained-shapes"""
+    d = r.randrange(40, 101, 2)
+    if d == 90:
+        return None
+    sc = Scene()
+    pts = _rh_eq(d)
+    for n, p in zip("SRPQT", pts):
+        sc.add(n, *p)
+    sc.poly(["P", "Q", "R", "S"]); sc.seg("P", "T"); sc.seg("S", "T"); sc.seg("R", "T")
+    sc.label("P", away="S"); sc.label("Q", away="S"); sc.label("R", away="S"); sc.label("T", away="S")
+    sc.label("S", away=(0.5, 0.5), off=14)
+    sc.ang("S", "P", "R", f"{d}°", r=22)
+    sc.ang("P", "S", "T", "x", r=26)
+    stem = (f"PQRS is a rhombus and RST is an equilateral triangle. ∠PSR = {d}°. Find ∠SPT.")
+    ans = (120 - d) // 2
+    wr = [W(120 - d, "forgot_to_halve", "Found ∠SPT + ∠STP but did not halve it."),
+          W((180 - d) // 2, "ignored_equilateral_triangle", "Left out the 60° angle of the equilateral triangle."),
+          W(d + 60, "gave_angle_at_s", "Gave ∠PST, the angle at S."),
+          W(60, "used_equilateral_angle", "Used the 60° angle of the equilateral triangle.")]
+    return mk(ang_rhombus_equilateral, stem, ans, wr,
+              ["Sides of a rhombus and of an equilateral triangle are all equal, so SP = SR = ST.",
+               f"∠PST = {d}° + 60° = {d + 60}°; triangle SPT is isosceles with SP = ST",
+               f"∠SPT = (180° − {d + 60}°) ÷ 2 = {ans}°"],
+              {"d": d}, sc.svg("Rhombus and equilateral triangle"))
+
+
+def _rh_eq(d):
+    S, R = (0.0, 0.0), (1.0, 0.0)
+    Pp = vec(d)
+    Q = (Pp[0] + 1.0, Pp[1])
+    T = vec(-60)
+    return S, R, Pp, Q, T
+
+
+@checker(ang_rhombus_equilateral)
+def _(p):
+    S, R, Pp, Q, T = _rh_eq(p["d"])
+    return F(round(meas(S, Pp, T)))
+
+
+@template(T, "competent", GA + "08", GA + "05")
+def ang_folded_flap(r):
+    """math-pat-angles-folded-paper"""
+    g = r.randrange(100, 141, 2)
+    sc = Scene(w=330, h=250)
+    pts = _flap(g)
+    for n, p in pts.items():
+        sc.add(n, *p)
+    sc.poly(["P", "Q", "R", "S"]); sc.seg("U", "V")
+    sc.poly(["U", "Pf", "Qf", "V"], dash=True)
+    for n in "PQRS":
+        sc.label(n)
+    sc.label("U", away="V"); sc.label("V", away="U"); sc.label("Pf", "P′", away="U"); sc.label("Qf", "Q′", away="V")
+    sc.ang("U", "P", "V", f"{g}°", r=22)
+    sc.ang("V", "R", "Qf", "x", r=26)
+    stem = (f"PQRS is a rectangular piece of paper. It is folded along UV so that P falls on P′ and Q falls on Q′, "
+            f"as shown. ∠PUV = {g}°. Find ∠RVQ′.")
+    ans = 2 * g - 180
+    wr = [W(180 - g, "stopped_at_co_interior", "Found ∠UVQ and stopped."),
+          W(360 - 2 * g, "found_angle_qvq", "Found ∠QVQ′ instead of ∠RVQ′."),
+          W(g, "gave_given_angle", "Gave the given angle."),
+          W(g - 90, "used_right_angle", "Subtracted 90° from the given angle.")]
+    return mk(ang_folded_flap, stem, ans, wr,
+              [f"PS is parallel to QR, so ∠UVQ = 180° − {g}° = {180 - g}° (co-interior angles).",
+               f"A fold does not change angles, so ∠UVQ′ = ∠UVQ = {180 - g}°.",
+               f"∠UVR = {g}° (angles on a straight line with ∠UVQ), so ∠RVQ′ = {g}° − {180 - g}° = {ans}°"],
+              {"g": g}, sc.svg("Folded rectangular paper"))
+
+
+def _flap(g):
+    w, h, xe = 3.4, 1.3, 1.0
+    P, Q, R, S = (0.0, h), (0.0, 0.0), (w, 0.0), (w, h)
+    U = (xe, h)
+    V = (xe - h / math.tan(math.radians(g)), 0.0)
+    ux, uy = V[0] - U[0], V[1] - U[1]
+    n = math.hypot(ux, uy)
+    ux, uy = ux / n, uy / n
+
+    def refl(p):
+        dx, dy = p[0] - U[0], p[1] - U[1]
+        k = dx * ux + dy * uy
+        return (U[0] + 2 * k * ux - dx, U[1] + 2 * k * uy - dy)
+    return {"P": P, "Q": Q, "R": R, "S": S, "U": U, "V": V, "Pf": refl(P), "Qf": refl(Q)}
+
+
+@checker(ang_folded_flap)
+def _(p):
+    q = _flap(p["g"])
+    return F(round(meas(q["R"], q["V"], q["Qf"])))
+
+
+@template(T, "competent", GA + "08", GA + "06")
+def ang_square_isosceles(r):
+    """math-pat-angles-chained-shapes"""
+    p = r.randrange(20, 81, 2)
+    sc = Scene()
+    q = _sq_iso(p)
+    for n, pt_ in q.items():
+        sc.add(n, *pt_)
+    sc.poly(["P", "Q", "R", "S"]); sc.seg("P", "T"); sc.seg("S", "T"); sc.seg("Q", "T")
+    sc.tick("P", "Q"); sc.tick("P", "T")
+    sc.label("P", away="R"); sc.label("Q", away="S"); sc.label("R", away="P"); sc.label("S", away="Q")
+    sc.label("T", away="P", off=11)
+    sc.ang("P", "Q", "T", f"{p}°", r=30)
+    sc.ang("T", "P", "S", "x", r=22)
+    stem = f"PQRS is a square. T is a point inside the square such that PT = PQ and ∠QPT = {p}°. Find ∠PTS."
+    ans = 45 + p // 2
+    wr = [W(90 - p // 2, "found_other_base_angle", "Found ∠PTQ, the base angle of the other triangle."),
+          W(90 - p, "found_angle_spt", "Found ∠SPT and stopped."),
+          W(45, "halved_right_angle", "Halved the right angle."),
+          W(p, "gave_given_angle", "Gave the given angle.")]
+    return mk(ang_square_isosceles, stem, ans, wr,
+              [f"∠SPT = 90° − {p}° = {90 - p}° (∠SPQ is a right angle).",
+               "PS = PQ = PT, so triangle PST is isosceles.",
+               f"∠PTS = (180° − {90 - p}°) ÷ 2 = {ans}°"],
+              {"p": p}, sc.svg("Square with a point inside"))
+
+
+def _sq_iso(p):
+    return {"P": (0.0, 0.0), "Q": (1.0, 0.0), "R": (1.0, 1.0), "S": (0.0, 1.0), "T": vec(p)}
+
+
+@checker(ang_square_isosceles)
+def _(p):
+    q = _sq_iso(p["p"])
+    return F(round(meas(q["P"], q["T"], q["S"])))
+
+
+
 # ============================================================ TRIANGLES, PARALLELOGRAM, RHOMBUS, TRAPEZIUM
 
 def tri_pts(a, b, base=1.0):

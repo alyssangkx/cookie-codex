@@ -93,15 +93,15 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 
 | Type | Level | Papers | Diagram | Generators |
 |---|---|---|---|---|
-| math-pat-angles-chained-shapes | competent | 135 | yes | square_isosceles (competent), circle_chain (competent), butterfly_triangles (competent), rhombus_equilateral (competent), parallelogram_isosceles (competent), trapezium_isosceles (competent), collinear_isosceles (competent), rect_isosceles_chain (competent) |
-| math-pat-angles-one-step | basic | 98 | yes | angles_on_line (basic), angles_at_point (basic), vertically_opposite (basic), angle_notation (basic), crossing_lines_algebra (intermediate), angle_ratio (intermediate), line_expressions (intermediate), reflex_angle (intermediate), triangle_third_angle (basic), isosceles_basic (basic), exterior_angle (intermediate), isosceles_exterior (intermediate) |
+| math-pat-angles-chained-shapes | competent | 135 | yes | square_isosceles (competent), circle_chain (competent), butterfly_triangles (competent), ang_isosceles_exterior (competent), ang_rhombus_equilateral (competent), ang_square_isosceles (competent), rhombus_equilateral (competent), parallelogram_isosceles (competent), trapezium_isosceles (competent), collinear_isosceles (competent), rect_isosceles_chain (competent) |
+| math-pat-angles-one-step | basic | 98 | yes | angles_on_line (basic), angles_at_point (basic), vertically_opposite (basic), angle_notation (basic), crossing_lines_algebra (intermediate), angle_ratio (intermediate), line_expressions (intermediate), reflex_angle (intermediate), ang_exterior_angle (intermediate), triangle_third_angle (basic), isosceles_basic (basic), exterior_angle (intermediate), isosceles_exterior (intermediate) |
 | math-pat-painted-cubes-and-views | competent | 87 | yes | painted_cube (competent), stack_cubes (competent) |
 | math-pat-symmetry-and-construction | basic | 75 | yes | lines_of_symmetry_count (basic), symmetric_letters (basic), which_dotted_line (basic), symmetric_figure_count (intermediate), regular_polygon_lines (intermediate), shade_to_symmetry (intermediate), symmetry_axes_pattern (competent), shade_two_lines (competent) |
 | math-pat-direction-turn-compass | basic | 73 |  | compass_turn (basic), compass_two_turns (competent) |
-| math-pat-angles-parallel-quadrilaterals | intermediate | 64 | yes | parallelogram_basic (basic), rhombus_diagonal (intermediate), trapezium_angles (intermediate), true_statements (intermediate), rhombus_equilateral (competent), parallelogram_isosceles (competent), trapezium_isosceles (competent) |
+| math-pat-angles-parallel-quadrilaterals | intermediate | 64 | yes | ang_quad_diagonal (intermediate), ang_trapezium_angles (intermediate), parallelogram_basic (basic), rhombus_diagonal (intermediate), trapezium_angles (intermediate), true_statements (intermediate), rhombus_equilateral (competent), parallelogram_isosceles (competent), trapezium_isosceles (competent) |
 | math-pat-shapes-classify-2d | basic | 45 |  | shape_by_property (basic), grid_which_quadrilateral (competent), grid_triangle_type (competent) |
 | math-pat-nets-and-solids | basic | 44 |  | solid_from_faces (basic) |
-| math-pat-angles-folded-paper | competent | 41 | yes | folded_paper (competent) |
+| math-pat-angles-folded-paper | competent | 41 | yes | folded_paper (competent), ang_folded_flap (competent) |
 | math-pat-cubes-packing-scale | competent | 28 | yes | cube_packing (competent) |
 
 ## measurement
@@ -351,7 +351,7 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | geometry-angles-05 | P5 | 2 templates |
 | geometry-angles-06 | P5 | 2 templates |
 | geometry-angles-07 | P5 | 3 templates |
-| geometry-angles-08 | P5 | 4 templates |
+| geometry-angles-08 | P5 | 11 templates |
 | geometry-perpendicular-and-parallel-lines-01 | P3 | 4 templates |
 | geometry-perpendicular-and-parallel-lines-02 | P3 | 2 templates |
 | geometry-rectangle-and-square-01 | P4 | 8 templates |
