@@ -1,6 +1,6 @@
 # One past-paper pool per sub-topic, with milestones to competency
 
-Status: **proposed** (owner to approve) · 21 Nov 2026 · Decision record: [ADR 0011](adr/0011-one-pool-per-sub-topic-milestones.md)
+Status: **accepted** (owner, 21 Nov 2026) · Decision record: [ADR 0011](adr/0011-one-pool-per-sub-topic-milestones.md)
 
 ## Why
 
@@ -51,22 +51,18 @@ of generated banks that leave the site remain orphan states (kept, never deleted
 A milestone or badge once reached is never taken away (as cleared tiers are never un-cleared today); the page shows the
 current share.
 
-## Open questions for the owner
+## Owner decisions (21 Nov 2026)
 
-1. **When does a wrong answer count once it is right?** (a) The next correct answer counts (simple, as stated above).
-   (b) Keep the spaced retests: a question first answered wrongly counts only when it is right on a later day (one retest
-   at 1 day; today's rule is 1, 3 and 7 days). Recommended: (b) with one retest, so a question cannot be counted from
-   short-term memory a minute after seeing its answer.
-2. **Milestone thresholds.** Recommended: milestone 1 at one sixth, milestone 2 at one third, milestone 3 at a majority
-   (over half) = competency. Alternative: a quarter, a majority, all.
-3. **Do generated fill-in questions count toward milestones?** Recommended: no; milestones and competency count
-   past-paper questions only, generated ones are practice.
-4. **Name on screen.** ADR 0010 calls the competency badge "Exam-ready" (since "Competent" was a tier name). With tiers
-   gone, "Competent" is free. Keep "Exam-ready", or call it "Competent"?
+1. **Wrong, then right:** a question first answered wrongly goes back into the pool and counts only when it is answered
+   right on a later day (one retest, due after 1 day). A question right the first time counts at once.
+2. **Milestones:** milestone 1 at one sixth of the sub-topic's past-paper questions correct, milestone 2 at one third,
+   milestone 3 at a majority (over half) = competency.
+3. **Generated fill-ins** are practice only: milestones and competency count past-paper questions only.
+4. **Badge name:** "Exam-ready" (ADR 0010).
 
 ## Rollout
 
-1. Owner approves this note and ADR 0011 (and answers the open questions).
+1. Done: approved with the decisions above.
 2. Build behind the existing past-paper switch: `store.ts` (pool, milestones, tries), `pick.ts` (order), `train.ts` and
    the tier page (milestones instead of tiers), the rewards preview, the parent page; tests for each rule.
 3. Goes live together with the past-paper upload, so children see the change once.

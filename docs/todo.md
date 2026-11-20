@@ -46,7 +46,7 @@ Proposed in `docs/past-paper-pools-design.md` and ADR 0011: difficulty tiers go;
 (playable at 20); correct answers leave the pool and add to the competency count, wrong ones go back; competency = a
 majority of the sub-topic's past-paper questions correct; 3 cards at milestones; easier-first order; generated questions
 support only. Supersedes the 'balanced thirds' tier split (owner OK'd it, then chose this redesign).
-- [ ] Owner approves the note and ADR, and answers its 4 open questions (wrong-answer retest, milestone thresholds, generated fill-ins counting, badge name).
+- [x] Owner approved (21 Nov 2026): wrong answer counts only when right on a later day (one 1-day retest); milestones 1/6, 1/3, majority (= competency); generated fill-ins never count; badge "Exam-ready".
 - [ ] Build (store, pick, train, tier page, rewards preview, parent page, tests); live together with the past-paper upload.
 
 ### Past-paper precedent for generated questions (owner, 21 Nov 2026)
