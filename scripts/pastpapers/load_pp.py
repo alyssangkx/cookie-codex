@@ -10,6 +10,8 @@
   load_pp.py figures [--subject science] [--out DIR] [--max-width 900] [--target-kb 60]
       Compresses each selected item's crops to WebP (grayscale when the crop has no colour) into
       OUT/<subject>/figures/ and writes figures.jsonl {pp_id, path, w, h, bytes}.
+      Before compressing, a crop whose ink touches an edge is grown to the surrounding whitespace (located in its page scan;
+      grow_to_whitespace) and a page rotated 0.3-3 degrees is straightened (deskew). `load_pp.py selftest` checks both.
   load_pp.py review  [--subject science] [--out DIR] --subtopics a,b
       Writes OUT/<subject>/review-<first sub-topic>.html (private, local only): every selected item of those
       sub-topics with its pictures, options and key, for the visual review before a switch. Put the pp id of any item
@@ -83,7 +85,7 @@ def key(a, opts):
     if m:
         return str("ABCD".index(m.group(1).upper()) + 1)
     for i, o in enumerate(opts, 1):
-        if re.sub(r"^\(\d\)\s*", "", o).strip() == a:
+        if re.sub(r"^\s*\(\d\)\s*", "", o).strip() == a:
             return str(i)
     return None
 
@@ -301,23 +303,269 @@ def compress(src: Path, dst: Path, max_w: int, target: int):
         return im.width, im.height, buf.tell(), im.mode
 
 
+DARK = 140        # grey level below which a pixel is ink
+BLANK_BAND = 25   # blank rows/columns that end a figure (the gap between a stem line and its figure is wider)
+GROW_PAD = 10     # blank pixels kept beyond the last ink when an edge is pushed out
+GROW_CAP = 0.40   # a top/bottom edge never moves more than this share of the page's height
+GROW_CAP_X = 0.12  # left/right: share of the page width (a crop wider than its figure only touches text lines)
+SKEW_MAX, SKEW_STEP, SKEW_MIN = 3.0, 0.1, 0.3
+SKEW_GAIN = 1.15  # variance of the projection must rise 15% (a noisy peak on a figure without straight lines is not skew)
+
+
+def touches(g):
+    """Edges of the grey array g where ink touches the border (a speck of noise, < 2 dark pixels, does not count)."""
+    d = g < DARK
+    return {"top": d[:2].sum() >= 2, "bottom": d[-2:].sum() >= 2, "left": d[:, :2].sum() >= 2, "right": d[:, -2:].sum() >= 2}
+
+
+def locate(page, crop):
+    """(x, y) of the crop inside the page (both grey uint8 arrays, same pixel scale), or None. Coarse FFT match on a
+    4x downsample, then an exact search of +-6 px at full size; accepted only when the mean absolute difference < 12."""
+    import numpy as np
+    H, W = page.shape
+    h, w = crop.shape
+    if h >= H or w >= W:
+        return None
+
+    def down(a, f=4):
+        hh, ww = a.shape[0] // f * f, a.shape[1] // f * f
+        return a[:hh, :ww].reshape(hh // f, f, ww // f, f).mean(axis=(1, 3)).astype(np.float32)
+    P, T = down(page), down(crop)
+    ph, pw = P.shape
+    th, tw = T.shape
+    if th < 8 or tw < 8:
+        return None
+    fh, fw = ph + th, pw + tw
+    corr = np.fft.irfft2(np.fft.rfft2(P, (fh, fw)) * np.conj(np.fft.rfft2(T, (fh, fw))), (fh, fw))[:ph - th + 1, :pw - tw + 1]
+    ii = np.pad((P.astype(np.float64) ** 2).cumsum(0).cumsum(1), ((1, 0), (1, 0)))
+    win = ii[th:, tw:][:ph - th + 1, :pw - tw + 1] - ii[:ph - th + 1, tw:][:, :pw - tw + 1] \
+        - ii[th:, :pw - tw + 1][:ph - th + 1] + ii[:ph - th + 1, :pw - tw + 1]
+    ssd = win - 2 * corr
+    cy, cx = np.unravel_index(int(np.argmin(ssd)), ssd.shape)
+    best = (1e9, None)
+    cf = crop.astype(np.int16)
+    for y in range(max(cy * 4 - 6, 0), min(cy * 4 + 7, H - h + 1)):
+        for x in range(max(cx * 4 - 6, 0), min(cx * 4 + 7, W - w + 1)):
+            m = float(np.abs(page[y:y + h, x:x + w].astype(np.int16) - cf).mean())
+            if m < best[0]:
+                best = (m, (x, y))
+    return best[1] if best[0] < 12 else None
+
+
+def grow_to_whitespace(page, box, cap=GROW_CAP, cap_x=GROW_CAP_X):
+    """page: grey uint8 array. box: (x0, y0, x1, y1) of the crop in the page. For each edge where ink touches the border,
+    push it outward until BLANK_BAND blank rows (columns, within the box's span) or the page margin, at most cap of
+    the page's height (width); GROW_PAD blank pixels are kept past the last ink. An edge with no such band inside the
+    cap stays. Returns (new_box, {edge: px}). The band stops it at the gap between a stem line and its figure."""
+    import numpy as np
+    H, W = page.shape
+    x0, y0, x1, y1 = box
+    grown = {}
+    d = page < DARK
+    t = touches(page[y0:y1, x0:x1])
+
+    def run(counts, start, step, limit):
+        """counts[i] = ink pixels of line i; walk from start in direction step; return how many lines the edge must move
+        to cover the ink before the blank band that ends the figure (0 = no ink beyond the edge), or None."""
+        blank, last_ink, i = 0, -1, start
+        while 0 <= i < len(counts) and abs(i - start) <= limit:
+            if counts[i] >= 2:
+                blank, last_ink = 0, i
+            else:
+                blank += 1
+                if blank >= BLANK_BAND:
+                    return last_ink + 1
+            i += step
+        if not (0 <= i < len(counts)):  # reached the page margin through blank lines
+            return last_ink + 1
+        return None
+    rows = lambda a, b, c, e: d[a:b, c:e].sum(axis=1)
+    cols = lambda a, b, c, e: d[a:b, c:e].sum(axis=0)
+    if t["top"]:
+        r = run(rows(0, y0, x0, x1)[::-1], 0, 1, int(cap * H))
+        if r is not None:
+            ny = max(y0 - r - GROW_PAD, 0) if r else y0
+            if ny < y0:
+                grown["top"] = y0 - ny
+                y0 = ny
+    if t["bottom"]:
+        r = run(rows(y1, H, x0, x1), 0, 1, int(cap * H))
+        if r is not None:
+            ny = min(y1 + r + GROW_PAD, H) if r else y1
+            if ny > y1:
+                grown["bottom"] = ny - y1
+                y1 = ny
+    if t["left"]:
+        r = run(cols(y0, y1, 0, x0)[::-1], 0, 1, int(cap_x * W))
+        if r is not None:
+            nx = max(x0 - r - GROW_PAD, 0) if r else x0
+            if nx < x0:
+                grown["left"] = x0 - nx
+                x0 = nx
+    if t["right"]:
+        r = run(cols(y0, y1, x1, W), 0, 1, int(cap_x * W))
+        if r is not None:
+            nx = min(x1 + r + GROW_PAD, W) if r else x1
+            if nx > x1:
+                grown["right"] = nx - x1
+                x1 = nx
+    return (x0, y0, x1, y1), grown
+
+
+def estimate_skew(g):
+    """Angle (degrees, counter-clockwise as PIL rotate() takes it) in [-SKEW_MAX, SKEW_MAX] that maximises the variance of
+    the horizontal ink projection on a downsampled copy; 0.0 when the variance gain over no rotation is under 15%."""
+    import numpy as np
+    from PIL import Image
+    im = Image.fromarray(g)
+    s = 700 / max(im.size)
+    if s < 1:
+        im = im.resize((max(int(im.width * s), 1), max(int(im.height * s), 1)), Image.BILINEAR)
+    ink = Image.fromarray(255 - np.asarray(im))
+    base = None
+    best = (-1.0, 0.0)
+    for k in range(-int(round(SKEW_MAX / SKEW_STEP)), int(round(SKEW_MAX / SKEW_STEP)) + 1):
+        ang = k * SKEW_STEP
+        r = np.asarray(ink.rotate(ang, resample=Image.BILINEAR, fillcolor=0), dtype=np.float32)
+        v = float(r.sum(axis=1).var())
+        if k == 0:
+            base = v
+        if v > best[0]:
+            best = (v, ang)
+    if not base or best[0] < base * SKEW_GAIN:
+        return 0.0
+    return round(best[1], 1)
+
+
+def deskew(g):
+    """g: grey uint8 array. Returns (array, angle): rotated with white fill only when |angle| >= SKEW_MIN."""
+    import numpy as np
+    from PIL import Image
+    ang = estimate_skew(g)
+    if abs(ang) < SKEW_MIN:
+        return g, 0.0
+    im = Image.fromarray(g).rotate(ang, resample=Image.BICUBIC, fillcolor=255)
+    return np.asarray(im), ang
+
+
+def fix_crop(src: Path, stats):
+    """Returns a PIL grey image for the crop: grown to whitespace if ink touches an edge, then deskewed."""
+    import numpy as np
+    from PIL import Image
+    with Image.open(src) as im:
+        im.load()
+        g = np.asarray(im.convert("L"))
+    m = re.search(r"-p(\d+)\.png$", src.name)
+    page_f = src.parent.parent / "pages" / f"p{m.group(1)}.jpg" if m else None
+    if any(touches(g).values()):
+        stats["touching"] += 1
+        if page_f and page_f.exists():
+            with Image.open(page_f) as pi:
+                page = np.asarray(pi.convert("L"))
+            pos = locate(page, g)
+            if pos is None:
+                stats["not_located"] += 1
+            else:
+                h, w = g.shape
+                box, grown = grow_to_whitespace(page, (pos[0], pos[1], pos[0] + w, pos[1] + h))
+                if grown:
+                    stats["grown"] += 1
+                    g = page[box[1]:box[3], box[0]:box[2]]
+                    stats["log"].append((src.name, grown))
+                else:
+                    stats["touch_unresolved"] += 1
+        else:
+            stats["no_page"] += 1
+    g, ang = deskew(g)
+    if ang:
+        stats["deskewed"] += 1
+        stats["angles"].append((src.name, ang))
+    return Image.fromarray(g)
+
+
 def figures(a):
     out = outside_repo(Path(a.out)) / a.subject
     fdir = out / "figures"
     fdir.mkdir(parents=True, exist_ok=True)
     man, tot, modes = [], 0, collections.Counter()
+    stats = {"touching": 0, "grown": 0, "not_located": 0, "touch_unresolved": 0, "no_page": 0, "deskewed": 0, "log": [], "angles": []}
+    tmpd = outside_repo(Path(a.out)) / a.subject / "_fixed"
+    tmpd.mkdir(exist_ok=True)
     for r in jl(out / "selected.jsonl"):
         for n, c in enumerate(r["crops"], 1):
             name = f"{r['id']}-{n}.webp"
-            w, h, b, mode = compress(Path(c), fdir / name, a.max_width, a.target_kb * 1024)
+            fixed = tmpd / f"{r['id']}-{n}.png"
+            fix_crop(Path(c), stats).save(fixed)
+            w, h, b, mode = compress(fixed, fdir / name, a.max_width, a.target_kb * 1024)
             man.append({"pp_id": r["id"], "path": f"{a.subject}/{name}", "w": w, "h": h, "bytes": b})
             tot += b
             modes[mode] += 1
+            if stats["log"] and stats["log"][-1][0] == Path(c).name:
+                stats["log"][-1] = (r["id"], n) + tuple(stats["log"][-1][1:])
+    for f in tmpd.glob("*.png"):
+        f.unlink()
+    tmpd.rmdir()
     with open(out / "figures.jsonl", "w") as f:
         for m in man:
             f.write(json.dumps(m) + "\n")
+    for it in stats["log"]:
+        print("grown", it[0], f"crop{it[1]}", it[2])
     over = sum(m["bytes"] > a.target_kb * 1024 for m in man)
     print(f"{len(man)} figures, {tot / 1e6:.1f} MB, mean {tot / max(len(man), 1) / 1024:.1f} KB, over target {over}, modes {dict(modes)}")
+    hist = collections.Counter(a for _, a in stats["angles"])
+    print("skew angles:", dict(sorted(hist.items())))
+    print("crop fixes:", {k: v for k, v in stats.items() if k not in ("log", "angles")})
+
+
+def selftest():
+    """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
+    import numpy as np
+    from PIL import Image, ImageDraw
+    # page 600x800 white: stem text line at y 100-115, gap, box (figure) at y 200-300, x 150-450
+    pg = Image.new("L", (600, 800), 255)
+    d = ImageDraw.Draw(pg)
+    d.rectangle([60, 100, 500, 115], fill=0)
+    d.rectangle([150, 200, 450, 300], outline=0, width=3)
+    d.rectangle([180, 330, 420, 400], outline=0, width=3)
+    page = np.asarray(pg)
+    # crop starts at y=230, cutting the box
+    box, grown = grow_to_whitespace(page, (140, 230, 460, 420))
+    assert "top" in grown and 200 - GROW_PAD - 1 <= box[1] <= 200, (box, grown)
+    assert box[1] > 115, "must not swallow the stem line"
+    assert "bottom" not in grown and "left" not in grown and "right" not in grown, grown
+    # a figure that continues only 1 px past the edge is still grown
+    p1 = np.full((200, 200), 255, np.uint8)
+    p1[100, 50:150] = 0
+    p1[99, 50:150] = 0
+    p1[98, 50:150] = 0
+    b1, g1 = grow_to_whitespace(p1, (40, 99, 160, 140))
+    assert g1.get("top", 0) >= 1 and b1[1] < 99, (b1, g1)
+    # a crop that touches nothing is left alone
+    box2, g2 = grow_to_whitespace(page, (100, 150, 500, 450))
+    assert g2 == {} and box2 == (100, 150, 500, 450)
+    # locate finds the crop (page with texture)
+    rng = np.random.default_rng(1)
+    tex = np.asarray(pg).copy()
+    tex[::7, ::5] = 90
+    tex[rng.random(tex.shape) < 0.01] = 0
+    assert locate(tex, tex[230:420, 140:460].copy()) == (140, 230)
+    # deskew: a table drawn then rotated by 1.2 degrees must come back level
+    t = Image.new("L", (500, 300), 255)
+    dt = ImageDraw.Draw(t)
+    for y in range(20, 290, 40):
+        dt.line([(20, y), (480, y)], fill=0, width=2)
+    for x in range(20, 490, 115):
+        dt.line([(x, 20), (x, 280)], fill=0, width=2)
+    skewed = np.asarray(t.rotate(1.2, resample=Image.BICUBIC, fillcolor=255))
+    ang = estimate_skew(skewed)
+    assert abs(ang + 1.2) <= 0.2, ang
+    fixed, a2 = deskew(skewed)
+    assert abs(estimate_skew(fixed)) < SKEW_MIN
+    lvl, l2 = deskew(np.asarray(t))
+    assert l2 == 0.0 and (lvl == np.asarray(t)).all()
+    tiny = np.asarray(t.rotate(0.2, resample=Image.BICUBIC, fillcolor=255))
+    assert deskew(tiny)[1] == 0.0
+    print("selftest ok")
 
 
 # ------------------------------------------------------------------ review page (private, local)
@@ -401,7 +649,7 @@ def upload(a):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("cmd", choices=("select", "figures", "review", "upload"))
+    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "selftest"))
     p.add_argument("--subject", default="science")
     p.add_argument("--years", default="2018-2026")
     p.add_argument("--pp", default=str(DEF_PP))
@@ -414,7 +662,7 @@ def main():
     p.add_argument("--apply", action="store_true")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
-    {"select": select, "figures": figures, "review": review, "upload": upload}[a.cmd](a)
+    {"select": select, "figures": figures, "review": review, "upload": upload, "selftest": lambda _a: selftest()}[a.cmd](a)
 
 
 if __name__ == "__main__":
