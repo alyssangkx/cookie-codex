@@ -69,6 +69,12 @@ const data = {
         <p class="note">Then set a 4-digit PIN for her below. Names are letters only and unique.</p>
       </section>
 
+      <section class="panel" aria-labelledby="h-heavy">
+        <h2 id="h-heavy">Heavy use (past papers)</h2>
+        <p class="note">Past-paper questions served today (Singapore time). An account is stopped for the day at 250 different questions (125 in its first week; 400 for a whole family) and flagged here; you also get an email when the alert sender is set up.</p>
+        <div id="heavy"><p class="note">Loading…</p></div>
+      </section>
+
       <section class="panel" aria-labelledby="h-test">
         <h2 id="h-test">Test Player</h2>
         <p class="note">A pretend child for trying things out. The tools below change only the Test Player's save; the server refuses an admin write to a real child.</p>
@@ -80,6 +86,8 @@ const data = {
 </Base>
 
 <style is:global>
+  .admin .heavy, .heavy { border-collapse: collapse; margin: 0.25rem 0 0.75rem; font-size: 0.95rem; }
+  .heavy th, .heavy td { text-align: left; padding: 0.25rem 0.75rem 0.25rem 0; border-bottom: 1px solid var(--crust); }
   .admin-page { padding-block: 1.5rem 3rem; max-width: 46rem; }
   .admin-page .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1rem; margin-top: 1rem; }
   .admin-page h2 { font-size: 1.3rem; margin-bottom: 0.6rem; }
@@ -167,7 +175,7 @@ const data = {
     }
     touch();
     const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (aal.data?.currentLevel === 'aal2') { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); return; }
+    if (aal.data?.currentLevel === 'aal2') { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); void refreshHeavy(); return; }
     const fl = await supabase.auth.mfa.listFactors();
     const verified = fl.data?.totp?.[0]; // listFactors().totp holds verified factors only
     if (verified) { factorId = verified.id; show('v-challenge'); signedInChrome(user.email ?? ''); $('code2').focus(); return; }
@@ -205,6 +213,24 @@ const data = {
   const signOut = async () => { await supabase.auth.signOut({ scope: 'local' }); flash('Signed out.', true); await render(); };
   $('signout').addEventListener('click', signOut);
   $('signout2').addEventListener('click', signOut);
+
+  // ------------------------------------------------------------ heavy use (ADR 0012, migration 006 pp_usage_report)
+  async function refreshHeavy() {
+    const box = $('heavy');
+    const { data, error } = await supabase.rpc('pp_usage_report');
+    if (error || !data) { box.innerHTML = '<p class="note">Could not load the report.</p>'; return; }
+    type Row = { name: string; n: number; flagged?: boolean; children?: number; day?: string; reason?: string; notified_at?: string | null };
+    const r = data as { day: string; top: Row[]; families: Row[]; flags: Row[] };
+    const table = (head: string[], rows: string[][]) => rows.length
+      ? `<table class="heavy"><thead><tr>${head.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((x) => `<tr>${x.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+      : '<p class="note">None.</p>';
+    box.innerHTML = `<h3>Top accounts today (${esc(r.day)})</h3>`
+      + table(['Account', 'Questions', 'Flagged'], r.top.map((x) => [esc(x.name), String(x.n), x.flagged ? '<b>yes</b>' : '']))
+      + '<h3>Busy families today (150+)</h3>'
+      + table(['Children', 'Questions'], r.families.map((x) => [String(x.children ?? ''), String(x.n)]))
+      + '<h3>Flags, last 7 days</h3>'
+      + table(['Day', 'Account', 'Reason', 'Emailed'], r.flags.map((x) => [esc(x.day ?? ''), esc(x.name), esc(x.reason ?? ''), x.notified_at ? 'yes' : '']));
+  }
 
   // ------------------------------------------------------------ children
   let kids: Kid[] = [];
