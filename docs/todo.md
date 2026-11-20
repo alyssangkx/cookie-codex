@@ -169,8 +169,18 @@ outside the repo.
   - spent in a fixed-price shop where the child picks the card;
   - rarer cards are achievement-only: Super Epic for topic competency, Legendary for a WA/SA paper at AL1–AL2, and
     Beast, Dragon, Witch and Ancient for milestones.
-- [ ] Owner questions in `docs/game-economy.md`: the currency name, the earning table and prices, whether tier
-  clears still give a card, and the bar for the rare cards.
+- [x] 20 Nov: owner answered the economy questionnaire, all as recommended:
+  - coins are called Crumbs, earned on the AL table;
+  - prices are 30, 60 and 120;
+  - tier clears still give a card;
+  - Super Epic for topic competency, Legendary for a WA/SA paper at AL1–AL2;
+  - spare coins buy stars;
+  - parents see the coin ledger.
+- [ ] **Build the economy:** replacement cards, the Crumbs ledger (an optional save field, no schema bump per ADR
+  0002), the shop page, achievement-only rare cards and the parent ledger. Start after the display-fix agent is done
+  with store.ts.
+- [ ] **Shop on the home map, replacing the Ranking Tower:** a drawn shop building as one transparent sprite over the
+  tower spot on every map variant, plus its hotspot to /shop/. Check with screenshots at 375px and 1280px.
 
 ## Development practice (20 Nov 2026)
 

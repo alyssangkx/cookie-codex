@@ -3,6 +3,8 @@
 Background is in [game-economy.md](../game-economy.md). Each question has a recommended answer marked **(rec)**. Reply
 with the numbers and letters (for example "1a 2a 3b 4a"), or change any of them. Nothing is built until you answer.
 
+**Owner's answers (20 Nov 2026): 1a 2a 3a 4a 5a 6a 7a, all as recommended.** The shop goes on the home map in place of the Ranking Tower (leaderboards are ruled out by the game design), drawn as its own building.
+
 ## 1. Name of the coin
 
 - a. **Crumbs** (rec)
