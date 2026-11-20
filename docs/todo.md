@@ -64,6 +64,7 @@ Chinese. Baseline 21 Nov (scanned cleanly / with key / blind agrees): Science 7,
 - [ ] 4. Model-consensus answers where there is no key: measure precision on keyed items first (98% bar), show the owner.
 - [ ] 5. Third-model adjudication of blind-check disagreements.
 - [ ] 6. English and Chinese sections set by position in the paper (booklet, question number), not by the tagger.
+- [ ] Site-ready list v1 (21 Nov 2026, `/data/alvin/tmp/cookie-codex/siteready/site-ready-mcq.csv`, sent to the owner): 2,758 MCQs (Science 1,297, Maths 251, English 543, Chinese 667; standalone sections only). Tiers with 20+: Science 27/105, Maths 1/93, English 3/6, Chinese 6/21. Competent is thin everywhere because the tier comes from the question's position in the paper (`--tier-rule position`). Open: owner choice on tiers (balanced thirds per sub-topic?); v2 after queue 17, v3 after the repair/answer passes.
 - [ ] 7. Holding list file per subject with a reason per question; recount against the 90% target after each pass.
 
 - [ ] Fix the answer-key grid reading in `scripts/pastpapers/vlm_read.py`. Partly done 20 Nov 2026: `scripts/pastpapers/anskey_ocr.py` reads grids from the OCR word boxes (>= 2 agreeing reads per cell) and `load_pp.py select --ocr-keys` uses it as a fallback; the rest (rotated and badly scanned key pages, papers with no key page) still needs a better read.
