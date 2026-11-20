@@ -107,7 +107,8 @@ def build_items(subtopic, rows):
     out = []
     for key, lvl, on, pat, stem, ok, wrongs, sol, fm in rows:
         assert len(wrongs) == 3, key
-        if key in RETIRED:
+        if key in RETIRED:  # never re-added; said out loud so a copy-paste under an old key is noticed
+            print(f"fillkit: skipped retired key {key} ({subtopic})", file=sys.stderr)
             continue
         pos = (int(key.split("-")[1]) * 3 + 1) % 4
         opts = [w[0] for w in wrongs]

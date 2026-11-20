@@ -37,6 +37,14 @@ def qid(topic, sub, key):
     return f"{prefix}-{hashlib.sha1(f'{sub}|{key}'.encode()).hexdigest()[:10]}"
 
 
+def steps(it):
+    """The worked solution as a list of steps. A bare string is refused (list() would split it into letters,
+    which put 76 live questions one letter per line until 20 Nov 2026); check_science.py enforces the same rule."""
+    if not isinstance(it["solution"], list):
+        sys.exit(f"build: {it.get('key')}: solution must be a list of steps, not {type(it['solution']).__name__}")
+    return list(it["solution"])
+
+
 def gloss_line(it):
     """The gloss as an extra solution line, only when it says something the solution does not."""
     g = (it.get("gloss") or "").strip()
@@ -78,7 +86,7 @@ def main():
                 "options": [it["options"][i] for i in order],
                 "answer": order.index(it["answer"]),
                 "explain": [it["explain"][i] for i in order],
-                "solution": ([it["solution"]] if isinstance(it["solution"], str) else list(it["solution"])) + gloss_line(it),  # never split a string into letters
+                "solution": steps(it) + gloss_line(it),
                 "params": {"key": it["key"], "subtopic": sub},
                 **({"figure": it["figure"]} if it.get("figure") else {}),
             })
