@@ -2353,7 +2353,7 @@
    "explain": [
     {
      "tag": "mix-up",
-     "why": "D is wrong. Petals wither after pollination."
+     "why": "C is correct, but D is wrong. Petals wither after pollination; they do not become seeds."
     },
     {
      "tag": "mix-up",
@@ -2361,12 +2361,13 @@
     },
     {
      "tag": "mix-up",
-     "why": "B is wrong. Pollen is made in the anther."
+     "why": "A is correct, but B is wrong. Pollen is made in the anther."
     },
     null
    ],
    "solution": [
-    "A and C are correct. B is wrong because pollen is made in the anther. D is wrong because petals do not become seeds."
+    "After fertilisation, the ovary grows into the fruit and each fertilised ovule inside it becomes a seed, so the fruit holds the seeds.",
+    "B is wrong because pollen is made in the anther. D is wrong because petals wither; they do not become seeds."
    ],
    "params": {
     "key": "rq-202",
@@ -2415,47 +2416,6 @@
    "figure": "<svg viewBox=\"0 0 270 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four flowers on one plant</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flower</text><rect x=\"80\" y=\"36\" width=\"180\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Part removed</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">all the petals</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">all the anthers</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">the stigma</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">the sepals</text></svg>"
   },
   {
-   "id": "scicycl-ff87ffe9f4",
-   "topic": "sci-cycles-reproduction",
-   "level": "competent",
-   "template": "sci-pat-fair-test-design",
-   "outcomes": [
-    "sci-cycles-repro-plants-2"
-   ],
-   "stem": "Four set-ups use bean seeds, as in the table. Which two set-ups should Mei compare to find out if seeds need warmth to germinate?",
-   "options": [
-    "R and S",
-    "P and Q",
-    "Q and S",
-    "P and R"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "wrong-pair",
-     "why": "R and S differ in water, not in warmth."
-    },
-    null,
-    {
-     "tag": "wrong-pair",
-     "why": "Q and S differ in water, light and so on. More than one thing is different."
-    },
-    {
-     "tag": "wrong-pair",
-     "why": "P and R differ in light, not in warmth."
-    }
-   ],
-   "solution": [
-    "For a fair test, only one thing should differ.",
-    "P and Q differ only in the place (warm or cold). The wetness and the darkness are the same."
-   ],
-   "params": {
-    "key": "rq-204",
-    "subtopic": "sci-cycles-repro-plants"
-   },
-   "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds in four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"115.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cotton wool</text><rect x=\"160\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"210.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"260\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Light</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"260\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dark</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">fridge</text><rect x=\"260\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dark</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"260\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">light</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry</text><rect x=\"160\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">fridge</text><rect x=\"260\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">light</text></svg>"
-  },
-  {
    "id": "scicycl-2f688874e5",
    "topic": "sci-cycles-reproduction",
    "level": "competent",
@@ -2467,7 +2427,7 @@
    "options": [
     "Seeds need water to germinate",
     "Seeds germinate better in a cold place",
-    "Seeds germinate with or without light",
+    "Seeds do not need light to germinate",
     "Seeds need light to germinate"
    ],
    "answer": 2,
@@ -2931,45 +2891,6 @@
    ],
    "params": {
     "key": "rq-218",
-    "subtopic": "sci-cycles-repro-plants"
-   }
-  },
-  {
-   "id": "scicycl-db8c5ab9d6",
-   "topic": "sci-cycles-reproduction",
-   "level": "competent",
-   "template": "sci-pat-plant-reproduction",
-   "outcomes": [
-    "sci-cycles-repro-plants-1"
-   ],
-   "stem": "Which of the following is evidence that a plant can reproduce without seeds?",
-   "options": [
-    "A leaf placed on wet soil grows roots and a plant",
-    "A seed grows into a seedling in wet cotton wool",
-    "Bees visit the flowers of a plant",
-    "A fruit has many seeds inside it"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong-idea",
-     "why": "That is a seed growing, so it needs a seed."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Bees carrying pollen lead to seeds."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "That shows seeds, not reproduction without them."
-    }
-   ],
-   "solution": [
-    "A new plant that grows from a leaf grows from part of the parent plant. No seed is involved."
-   ],
-   "params": {
-    "key": "rq-221",
     "subtopic": "sci-cycles-repro-plants"
    }
   },
