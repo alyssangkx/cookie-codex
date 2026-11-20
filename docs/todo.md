@@ -10,6 +10,23 @@ and reset when that simplifies a redesign; the cards stay.
 Private details (server addresses, keys, past-paper text) are kept out of this file. They live in the private notes
 outside the repo.
 
+## Schedule (as of 20 Nov 2026, estimates)
+
+1. **Submit-then-review for WA/SA papers:** going live 20 Nov, after the last review fixes. Tier quizzes keep instant
+   feedback.
+2. **Review and fix of site questions against the papers:**
+   - The main rewrites and deletes have been live since 20 Nov.
+   - Follow-ups on 20–21 Nov: a strict second review of the English visual-text sets and the Chinese idiom items,
+     more Angles templates, and checked answer keys for the English, Maths and Chinese tags.
+   - **Open question:** should the site's English categories be reorganised to match the paper sections?
+3. **Science population:**
+   - Batch 1 on 20 Nov: plant reproduction and adaptations (upper tiers), forces, energy, survival, photosynthesis.
+   - Batch 2 on 21–22 Nov: heat, circuits, respiration and circulation, water, light, matter, magnets,
+     classification, materials.
+   - Batch 3 on 23 Nov: the remaining small sub-topics.
+   - Real past-paper items next week, after the blind-check adjudication and the owner's OK for the import.
+   - Open-ended items after the marker is built.
+
 ## Now (20 Nov 2026)
 
 - [ ] **Server queue, then pickup on dev**
