@@ -1,4 +1,4 @@
--- Cookie Codex, migration 005: "Report a problem with this question" (owner, 21 Nov 2026).  NOT YET APPLIED.
+-- Cookie Codex, migration 005: "Report a problem with this question" (owner, 21 Nov 2026).  APPLIED to the live project 21 Nov 2026.
 -- Apply with:  supabase db query --remote --yes -f supabase/migrations/005_question_reports.sql   (never `db push`).
 -- Test: scripts/accounts/sqltest.sh runs 001-005 locally.
 --
