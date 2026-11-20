@@ -15,6 +15,11 @@ Terms are defined in `GLOSSARY.md` and past decisions are in `docs/adr/`: read t
   describes. Captions, labels and alt text never name or imply the answer. The stem never gives the answer away. No
   item depends on another item's figure. The correct option is the strictly longest in no more than about 30% of a
   sub-topic.
+- **Past-paper precedent (owner, 21 Nov 2026):** a generated question (any subject) stays only if some past paper in the
+  private repository has a question testing the same concept (same fact, rule or skill; any format, numbers and context may
+  differ). Checked by `scripts/pastpapers/concept_match.py` (server judge, calibrated first); a question with no match is
+  held (reversible, reason recorded), even if a tier drops below 20 until past-paper questions fill it. Don't write new
+  generated questions on concepts no past paper tests.
 - **When unsure** whether something is in scope or what the owner wants, say so in your report. Don't guess.
 - **Every fault class a review finds becomes an automatic check** (the WARN rules in the `check_*.py` scripts), not
   only a one-off fix.

@@ -41,6 +41,14 @@ outside the repo.
 
 ## Past-paper data quality
 
+### Past-paper precedent for generated questions (owner, 21 Nov 2026)
+Rule: a generated question stays only if a past paper has a question testing the same concept (any format). Owner choices:
+any format counts; no match = hold (reversible, reason recorded); show the judge's calibration and ~30 'no match' examples
+before removing anything; thin tiers (< 20) are acceptable until past papers fill them. Scope: 7,376 generated questions
+(Maths 3,888 from 524 templates, judged per template; Science 1,427, English 1,034, Chinese 1,027 per item).
+- [ ] `scripts/pastpapers/concept_match.py`: pack (dev) -> server run (candidates by word overlap from all 58k scanned questions, same sub-topic first; Qwen2.5-72B judge, JSON with the matching question and a reason) -> report (calibration: real past-paper MCQs must find a twin, owner-ruled-out items and off-syllabus probes must not).
+- [ ] Show the owner the calibration and samples; on OK, hold the no-match items (review.json ship false / Maths templates) and rebuild.
+
 ### MCQ push (owner, 21 Nov 2026)
 Scope: MCQs only, all 4 subjects, 2018-2026. Target: 90% of MCQs per subject recovered; the rest go to a holding list
 with a reason, processed later (not every question is recoverable: unclear scans, no answer sheet). Owner decisions:
