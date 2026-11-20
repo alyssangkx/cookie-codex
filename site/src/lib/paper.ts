@@ -1,30 +1,33 @@
 // WA/SA practice papers, submit-then-review (docs/learning-loop-design.md item 2): pure clock, scoring and
 // draft rules, so the quiz page stays thin and the rules are tested. The draft lives in store.ts's kv (never in
 // the save), so there is no schema change and an old tab never meets a field it cannot read.
-import { kv } from './store.ts';
+import { kv, closeStalePapers, type SaveV1 } from './store.ts';
 
 /** One pause per paper, up to 10 minutes. */
 export const PAUSE_MAX = 10 * 60_000;
 
-/** deadline: wall-clock end (moves later by the pause used); pausedAt: 0 while running. */
-export interface PaperClock { deadline: number; pauseUsed: number; pausedAt: number }
+/** A paper whose time ran out longer ago than this is put away unscored instead of handed in (it was abandoned). */
+export const GRACE = 10 * 60_000;
 
-export const newClock = (start: number, ms: number): PaperClock => ({ deadline: start + ms, pauseUsed: 0, pausedAt: 0 });
+/** deadline: wall-clock end (moves later by the pause used); pausedAt: 0 while running; pauseTaken: the one pause is used. */
+export interface PaperClock { deadline: number; pauseUsed: number; pausedAt: number; pauseTaken?: boolean }
+
+export const newClock = (start: number, ms: number): PaperClock => ({ deadline: start + ms, pauseUsed: 0, pausedAt: 0, pauseTaken: false });
 
 /** Pause time still available (counts down while paused). */
 export const pauseLeft = (c: PaperClock, now: number) =>
   Math.max(0, PAUSE_MAX - c.pauseUsed - (c.pausedAt ? Math.max(0, now - c.pausedAt) : 0));
 
 /** Only one pause per paper, and never after the time is up. */
-export const canPause = (c: PaperClock, now: number) => !c.pausedAt && c.pauseUsed === 0 && c.deadline > now;
+export const canPause = (c: PaperClock, now: number) => !c.pauseTaken && !c.pausedAt && c.deadline > now;
 
-export const startPause = (c: PaperClock, now: number): PaperClock => (canPause(c, now) ? { ...c, pausedAt: now } : c);
+export const startPause = (c: PaperClock, now: number): PaperClock => (canPause(c, now) ? { ...c, pausedAt: now, pauseTaken: true } : c);
 
 /** End the pause: the deadline moves later by the time paused, capped at what was left of the 10 minutes. */
 export function endPause(c: PaperClock, now: number): PaperClock {
   if (!c.pausedAt) return c;
   const used = Math.min(Math.max(0, now - c.pausedAt), PAUSE_MAX - c.pauseUsed);
-  return { deadline: c.deadline + used, pauseUsed: c.pauseUsed + used, pausedAt: 0 };
+  return { deadline: c.deadline + used, pauseUsed: c.pauseUsed + used, pausedAt: 0, pauseTaken: true };
 }
 
 /**
@@ -39,6 +42,16 @@ export function tickPaper(c: PaperClock, now: number): { clock: PaperClock; left
   }
   const left = Math.max(0, c.deadline - (c.pausedAt || now));
   return { clock: c, left, submit: !c.pausedAt && left === 0, resumed };
+}
+
+/**
+ * live: time left; due: the time ran out within GRACE (a short lock or reload), so it is handed in as usual;
+ * stale: it ran out longer ago (abandoned), so it is put away unscored: no result, no retests, nothing booked.
+ */
+export function draftState(c: PaperClock, now: number): 'live' | 'due' | 'stale' {
+  const r = tickPaper(c, now);
+  if (!r.submit) return 'live';
+  return now - r.clock.deadline <= GRACE ? 'due' : 'stale';
 }
 
 /** Time spent working: start to submit (or the deadline, if later), minus the pause. */
@@ -87,11 +100,14 @@ export function loadDraft(owner: string): PaperDraft | null {
 
 /**
  * Write the draft unless this tab's copy is stale; returns the stored draft (rev + 1) or null. rev 0 = a new paper
- * (always written). Otherwise the stored draft must be this paper at this rev: if another tab wrote since, or
+ * (written unless another paper is live or due). Otherwise the stored draft must be this paper at this rev: if another tab wrote since, or
  * submitted it (the draft is gone), this tab must not bring it back.
  */
-export function saveDraft(d: PaperDraft): PaperDraft | null {
+export function saveDraft(d: PaperDraft, now = Date.now()): PaperDraft | null {
   if (d.rev !== 0 && !draftCurrent(d)) return null;
+  // a new paper never replaces another one that is still running or due to be handed in (e.g. from another tab)
+  const cur = d.rev === 0 ? loadDraft(d.owner) : null;
+  if (cur && cur.ts !== d.ts && draftState(cur.clock, now) !== 'stale') return null;
   const next = { ...d, rev: d.rev + 1 };
   kv.set(DRAFT_KEY, JSON.stringify(next));
   return next;
@@ -104,3 +120,10 @@ export function draftCurrent(d: PaperDraft): boolean {
 }
 
 export const clearDraft = () => kv.del(DRAFT_KEY);
+
+/** Put a paper away unscored (discarded, or stale): no result, no retests. Drops the draft and closes the paper's open
+ * record if its day is over (closeStalePapers). The caller saves `s`. */
+export function discardDraft(s: SaveV1, now = Date.now()) {
+  clearDraft();
+  closeStalePapers(s, now);
+}

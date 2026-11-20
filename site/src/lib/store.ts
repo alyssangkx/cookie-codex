@@ -11,11 +11,13 @@ export const TIER_NAME: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', 
 // mastered/total are the last count seen when a quiz ended.
 export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number };
 // s: 0 retired, 1-3 retest step (due in 1, 3, 7 days); w: times answered wrong
-// a: the option text picked on the latest wrong answer, '' when that answer was left blank (time ran out); optional,
+// a: the option text picked on the latest wrong answer, '' when it was not answered because time ran out, LEFT_BLANK
+// when it was left blank on purpose (a paper submitted with blanks, 20 Nov 2026); optional,
 // added 19 Nov 2026 for the parent page; older saves simply lack it, so no schema bump. Kept after the question
 // retires, so the parent still sees it.
 export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string };
 export const PICK_MAX = 120; // characters of a picked option kept in the save
+export const LEFT_BLANK = '\u2205'; // "∅": a paper question left blank on purpose (never an option's text)
 export interface Attempt {
   ts: number; mode: 'tier' | 'review' | 'paper'; sub?: string; tier?: Tier; topics?: string[];
   score: number; total: number; ms: number; tags: string[];
@@ -369,6 +371,15 @@ export function beginQuiz(
   if (b) return b;
   if (mode === 'tier' || mode === 'paper') openAttempt(s, { mode, ...a }, now);
   return null;
+}
+/**
+ * Close papers that were started and never handed in (discarded, or abandoned past their time): their open records
+ * from earlier days are removed, except `keep` (a paper still running). One started today stays open until the day
+ * ends, so it still counts as a paper started today.
+ */
+export function closeStalePapers(s: SaveV1, now = Date.now(), keep?: number) {
+  const day = dayKey(now);
+  s.attempts = s.attempts.filter((a) => !(a.open && a.mode === 'paper' && a.ts !== keep && dayKey(a.ts) !== day));
 }
 const dropOpen = (s: SaveV1, mode: Attempt['mode'], sub?: string, tier?: Tier) => {
   const i = s.attempts.findLastIndex((x) => x.open && x.mode === mode && x.sub === sub && x.tier === tier);

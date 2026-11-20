@@ -10,7 +10,12 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
     <p class="crumbs"><a href="/train/">Schools of Mastery</a> › Practice paper</p>
     <h1>Build a practice paper</h1>
     <p class="lede">School tests (Weighted Assessments) and exams (Semestral and Prelim papers) mix several topics. Choose a subject, pick the topics your class has covered, and the paper mixes them from easier to harder, against the clock. Answer every question, change any answer you like, then submit to see your score and go through the ones you missed. Papers count toward today's goal but not toward clearing tiers.</p>
-    <p id="resume" class="resume" hidden>You have a paper in progress, and its clock is still running. <a class="primary" href="/quiz/?mode=paper&amp;resume=1">Resume paper</a></p>
+    <div id="resume" class="resume" role="status" hidden>
+      <p id="resume-msg"></p>
+      <p class="resume-actions"><a id="resume-go" class="primary" href="/quiz/?mode=paper&amp;resume=1">Resume paper</a>
+        <button id="resume-discard" type="button">Discard it</button></p>
+    </div>
+    <p id="resume-note" class="note" role="status" hidden></p>
     <form action="/quiz/" method="get" id="paper-form">
       <input type="hidden" name="mode" value="paper" />
       <input type="hidden" name="topics" id="topics" />
@@ -49,8 +54,8 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
 </Base>
 
 <script>
-  import { load } from '../../lib/store';
-  import { loadDraft, draftOwner } from '../../lib/paper';
+  import { load, save } from '../../lib/store';
+  import { loadDraft, draftOwner, draftState, tickPaper, discardDraft } from '../../lib/paper';
   const form = document.getElementById('paper-form') as HTMLFormElement;
   // one subject per paper: only the chosen subject's topics show, and only they are sent
   const subject = () => form.querySelector<HTMLInputElement>('input[name="subject"]:checked')?.value ?? 'math';
@@ -60,8 +65,41 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
   form.querySelectorAll('input[name="subject"]').forEach((r) => r.addEventListener('change', showSubject));
   showSubject();
   document.getElementById('all')!.addEventListener('click', () => boxes().forEach((b) => (b.checked = true)));
-  // a paper already started (its draft) must be finished first; the quiz page resumes it whatever is chosen here
-  if (loadDraft(draftOwner(load().createdAt))) document.getElementById('resume')!.hidden = false;
+  // A paper already started (its draft) must be finished or discarded first: Start is held back until then, and the
+  // quiz page never lets it replace the paper picked here. One long past its time is put away unscored, with a note.
+  const $ = (id: string) => document.getElementById(id)!;
+  const SUBJECT: Record<string, string> = { math: 'Math', eng: 'English', sci: 'Science' };
+  const startBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const owner = draftOwner(load().createdAt);
+  function showDraft() {
+    const d = loadDraft(owner), now = Date.now();
+    startBtn.disabled = false;
+    $('resume').hidden = true;
+    if (!d) return;
+    const subj = SUBJECT[d.topics[0]?.split('-')[0]] ?? 'practice';
+    const st = draftState(d.clock, now);
+    if (st === 'stale') {
+      const s = load(); discardDraft(s, now); save(s);
+      $('resume-note').textContent = `Your ${subj} paper from ${new Date(d.ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })} ran out of time a while ago, so it was put away without a score. Nothing from it was counted.`;
+      $('resume-note').hidden = false;
+      return;
+    }
+    const left = tickPaper(d.clock, now).left;
+    $('resume-msg').textContent = st === 'due'
+      ? `Your ${subj} paper's time is up. It will be handed in when you open it, and you will see your score.`
+      : `You have a ${subj} paper in progress with ${Math.ceil(left / 60000)} minute${left > 60000 ? 's' : ''} left. Finish it, or discard it, before starting a new one.`;
+    $('resume-go').textContent = st === 'due' ? 'Hand it in' : 'Resume paper';
+    $('resume').hidden = false;
+    startBtn.disabled = true;
+  }
+  showDraft();
+  $('resume-discard').addEventListener('click', () => {
+    if (!confirm('Discard this paper? Its answers are thrown away. It still counts as a paper started that day.')) return;
+    if (loadDraft(owner)) { const s = load(); discardDraft(s); save(s); }
+    $('resume-note').textContent = 'The paper was discarded. You can start a new one.';
+    $('resume-note').hidden = false;
+    showDraft();
+  });
   form.addEventListener('submit', (e) => {
     const picked = boxes().filter((b) => b.checked).map((b) => b.value);
     (document.getElementById('topics') as HTMLInputElement).value = picked.join(',');
@@ -71,7 +109,11 @@ const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school ==
 </script>
 
 <style>
-  .resume { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; padding: 0.75rem 1rem; border: 2px solid var(--berry); border-radius: var(--radius-card); background: var(--paper); font-weight: 600; }
+  .resume { padding: 0.25rem 1rem 0.75rem; border: 2px solid var(--berry); border-radius: var(--radius-card); background: var(--paper); font-weight: 600; }
+  .resume-actions { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0; }
+  .resume[hidden], .note[hidden] { display: none; }
+  .note { color: var(--cocoa-soft); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
   .resume a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border-radius: var(--radius-control); text-decoration: none; font-family: var(--font-display); }
   .subjects { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
   .topic[hidden] { display: none; }

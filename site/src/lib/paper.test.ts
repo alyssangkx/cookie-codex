@@ -2,8 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   PAUSE_MAX, newClock, pauseLeft, canPause, startPause, endPause, tickPaper, timeUsed, blanks, paperScore, reviewList,
-  paperOk, draftOk, loadDraft, saveDraft, draftCurrent, clearDraft, type PaperDraft,
+  paperOk, draftOk, loadDraft, saveDraft, draftCurrent, clearDraft, draftState, discardDraft, GRACE, type PaperDraft,
 } from './paper.ts';
+import { fresh, openAttempt, closeStalePapers, answer, LEFT_BLANK } from './store.ts';
 
 const MIN = 60_000;
 const T = 1_790_000_000_000;
@@ -38,7 +39,7 @@ test('one pause of up to 10 minutes: the clock stops, the deadline moves, and a 
   assert.equal(during.submit, false);
   assert.equal(pauseLeft(c, T + 9 * MIN), 6 * MIN);
   c = endPause(c, T + 9 * MIN); // paused 4 minutes
-  assert.deepEqual(c, { deadline: T + 34 * MIN, pauseUsed: 4 * MIN, pausedAt: 0 });
+  assert.deepEqual(c, { deadline: T + 34 * MIN, pauseUsed: 4 * MIN, pausedAt: 0, pauseTaken: true });
   assert.equal(canPause(c, T + 10 * MIN), false); // one pause per paper, even with 6 minutes unused
   assert.deepEqual(startPause(c, T + 10 * MIN), c);
 });
@@ -114,4 +115,61 @@ test('draft: resume after reload; a stale tab cannot write or bring back a submi
   assert.equal(draftCurrent(a2), false); // a second submit from any tab is refused
   assert.equal(saveDraft(a2), null); // and nothing recreates the draft
   assert.equal(loadDraft('u1|5'), null);
+});
+
+test('one pause is a flag: a pause of 0 ms still uses it', () => {
+  const c = endPause(startPause(newClock(T, 30 * MIN), T + MIN), T + MIN);
+  assert.equal(c.pauseUsed, 0);
+  assert.equal(c.pauseTaken, true);
+  assert.equal(canPause(c, T + 2 * MIN), false);
+});
+
+test('draft state: live, due within the grace (handed in), stale after it (put away unscored)', () => {
+  const c = newClock(T, 30 * MIN);
+  assert.equal(draftState(c, T + 29 * MIN), 'live');
+  assert.equal(draftState(c, T + 30 * MIN), 'due');
+  assert.equal(draftState(c, T + 30 * MIN + GRACE), 'due');
+  assert.equal(draftState(c, T + 30 * MIN + GRACE + 1), 'stale');
+  assert.equal(draftState(c, T + 3 * 86_400_000), 'stale'); // opened days later: never a fresh result
+  const paused = startPause(c, T + 10 * MIN); // closed while paused: the pause ends at 10 min, then the clock runs
+  assert.equal(draftState(paused, T + 39 * MIN), 'live');
+  assert.equal(draftState(paused, T + 40 * MIN + GRACE + 1), 'stale');
+});
+
+test('a new paper never replaces a live or due one (another tab); a stale one may be replaced', () => {
+  memStore();
+  const a = saveDraft(draft(), T + MIN)!;
+  assert.equal(saveDraft(draft({ ts: T + 5 * MIN }), T + 5 * MIN), null); // live: refused
+  assert.equal(loadDraft('u1|5')!.ts, a.ts);
+  assert.equal(saveDraft(draft({ ts: T + 11 * MIN }), T + 11 * MIN), null); // due (10 min paper ended at T+10): refused
+  const b = saveDraft(draft({ ts: T + 25 * MIN }), T + 25 * MIN); // stale: replaced
+  assert.equal(b!.ts, T + 25 * MIN);
+});
+
+test('closing abandoned papers: earlier days removed, today kept (still counts as started), a running one kept', () => {
+  const day = 86_400_000, now = new Date(2026, 10, 20, 12).getTime();
+  const s = fresh();
+  openAttempt(s, { mode: 'paper', total: 10 }, now - 2 * day); // abandoned two days ago
+  openAttempt(s, { mode: 'paper', total: 10 }, now - day); // yesterday, still running (kept)
+  openAttempt(s, { mode: 'paper', total: 10 }, now - 60_000); // today
+  openAttempt(s, { mode: 'tier', sub: 'x', tier: 'b', total: 10 }, now - 2 * day); // tier records are not touched
+  closeStalePapers(s, now, now - day);
+  assert.deepEqual(s.attempts.map((a) => [a.mode, a.ts]), [['paper', now - day], ['paper', now - 60_000], ['tier', now - 2 * day]]);
+  memStore();
+  saveDraft(draft({ ts: now - 2 * day }), now - 2 * day);
+  const s2 = fresh();
+  openAttempt(s2, { mode: 'paper', total: 10 }, now - 2 * day);
+  discardDraft(s2, now);
+  assert.equal(loadDraft('u1|5'), null);
+  assert.equal(s2.attempts.length, 0);
+});
+
+test('a blank on purpose is stored apart from a time-out blank', () => {
+  const s = fresh();
+  answer(s, 'p', false, T, false, LEFT_BLANK);
+  answer(s, 't', false, T, false);
+  assert.equal(s.questions.p.a, LEFT_BLANK);
+  assert.equal(s.questions.t.a, '');
+  answer(s, 'n', true, T, false); // a right answer to a new question on a paper stores nothing
+  assert.equal(s.questions.n, undefined);
 });

@@ -22,9 +22,13 @@ export function hash(x: string | number): number {
   return h >>> 0;
 }
 
-/** The band's line for `seed`. 'tier' lines only after tier quizzes. A line equal to `avoid` moves to the next one. */
-export function pickLine(b: Band, seed: string | number, tier: boolean, avoid?: string, bands = BANDS): Line {
-  const pool = bands[b].filter((l) => tier || l.use !== 'tier');
+/** The band's line for `seed` (null only if the copy is empty). 'tier' lines only after tier quizzes. A line equal to `avoid` moves to the next one. */
+export function pickLine(b: Band, seed: string | number, tier: boolean, avoid?: string, bands = BANDS): Line | null {
+  // an edit that leaves a band with only 'tier' lines (or none) falls back to the band's lines, then to any 'all' line
+  const own = bands[b] ?? [];
+  const fit = own.filter((l) => tier || l.use !== 'tier');
+  const pool = fit.length ? fit : own.length ? own : Object.values(bands).flat().filter((l) => tier || l.use !== 'tier');
+  if (!pool.length) return null;
   let k = hash(seed) % pool.length;
   if (avoid !== undefined && pool.length > 1 && pool[k].en === avoid) k = (k + 1) % pool.length;
   return pool[k];
@@ -40,7 +44,7 @@ export function lineForLast(attempts: Done[], bands = BANDS): Line | null {
   for (const a of attempts) {
     if (a.open) continue;
     line = pickLine(band(a.score, a.total), a.ts, a.mode === 'tier', prev, bands);
-    prev = line.en;
+    prev = line?.en;
   }
   return line;
 }

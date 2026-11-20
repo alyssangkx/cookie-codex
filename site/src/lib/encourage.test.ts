@@ -59,3 +59,11 @@ test('bilingual until the end of the Term 1 date (local), then Chinese only', ()
   assert.equal(bilingual(new Date(2027, 2, 31, 23, 59).getTime(), '2027-03-31'), true);
   assert.equal(bilingual(new Date(2027, 3, 1, 0, 1).getTime(), '2027-03-31'), false);
 });
+
+test('pickLine never crashes on an edited copy: falls back to the band, then to any line', () => {
+  const only = { perfect: [{ use: 'tier' as const, en: 'T', zh: 't' }], high: [], mid: [{ use: 'all' as const, en: 'M', zh: 'm' }], low: [] };
+  assert.equal(pickLine('perfect', 1, false, undefined, only)!.en, 'T'); // only tier lines: use them rather than nothing
+  assert.equal(pickLine('high', 1, false, undefined, only)!.en, 'M'); // empty band: any 'all' line
+  assert.equal(pickLine('low', 1, false, undefined, { perfect: [], high: [], mid: [], low: [] }), null);
+  assert.equal(lineForLast([{ ts: 1, mode: 'paper', score: 0, total: 10 }], { perfect: [], high: [], mid: [], low: [] }), null);
+});

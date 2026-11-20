@@ -172,7 +172,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
@@ -357,7 +357,7 @@ const data = {
       const head = `<div class="wq-stem">${bold(bq.stem)}</div>${figHtml(bq)}`;
       const right = `Right answer: <b>${bold(bq.options[bq.answer])}</b>`;
       const theirs = q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
-        : q.a === '' ? 'Their answer: none (time ran out)' : `Their answer: ${bold(q.a)}`;
+        : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
       return `<li>${head}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
         + `<span class="meta">Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ${status}</span></li>`;
     };
