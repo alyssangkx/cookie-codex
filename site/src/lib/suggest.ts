@@ -115,11 +115,11 @@ export function suggestions(
       return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t]) > 0; // a count from a replaced bank is 0
     });
     if (hit) {
-      const st = tierState(s, sub.id, hit);
-      const total = sub.count?.[hit] ?? st.total; // the current bank, not the size at the last sync
+      const total = sub.count![hit]; // liveMastered > 0 above means the count is known and matches the stored total
+      const m = liveMastered(tierState(s, sub.id, hit), total);
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
-        reason: `${TIER_NAME[hit]}: ${total ? `${st.mastered} of ${total} questions mastered.` : `${st.mastered} questions mastered.`}`, href: tierHref(sub.id, hit),
+        reason: `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`, href: tierHref(sub.id, hit),
       });
       break;
     }

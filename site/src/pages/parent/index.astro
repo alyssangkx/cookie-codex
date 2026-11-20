@@ -276,6 +276,7 @@ const data = {
   const missingNote = () => (bankMissing ? `<p class="note">Some question files could not load (offline?), so their questions are not shown. Reload to try again.</p>` : '');
   function banks() {
     return (bankLoad ??= (async () => {
+      bankMissing = 0;
       const qs = new Map<string, BQ>();
       const files = [...new Set(P.all.map((x) => x.file))];
       await Promise.all(files.map(async (f) => {
@@ -285,6 +286,7 @@ const data = {
           for (const q of (await r.json()) as BQ[]) qs.set(q.id, q);
         } catch { bankMissing++; }
       }));
+      if (bankMissing) bankLoad = null; // a failed file is fetched again on the next render, not cached for the page
       return qs;
     })());
   }

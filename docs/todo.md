@@ -29,7 +29,7 @@ outside the repo.
     one-off refile script.
   - **Done:** `*.zip` and `.ses` gitignored (past-paper archive); the isolation wording corrected.
 - [ ] **Parent page:** questions no longer in any bank are left out of "answered wrong" and "waiting for retest"
-  (owner). Stale tier counts are hidden by `liveMastered` (no schema bump: an old tab could overwrite the server save); Daily Review forgets orphan states. **Each question has exactly one sub-topic:**
+  (owner). Stale tier counts are hidden by `liveMastered` (no schema bump: an old tab could overwrite the server save). Orphan states are never deleted, because an old tab could delete live ones. **Each question has exactly one sub-topic:**
   `check_dupes.py` guards it (0 clashes now).
 - [ ] **Parent note when pushing the Maths re-seed:** most Maths question ids change once. Pending Maths retests
   disappear, tier counts restart on the new questions, and cleared tiers and cards stay. The parent page lists the old
@@ -148,6 +148,9 @@ outside the repo.
   clears still give a card, and the bar for the rare cards.
 
 ## Site and tech
+
+- [ ] Stale "N mastered" on a redesigned tier of the same size is not detected. Store a per-tier id hash in `syncTiers` and compare it with a build-time hash (display only).
+- [ ] The Daily Review button on /train can show for retests of deleted questions (the review then says "Nothing to review today"). Give it a bank-aware count.
 
 - [ ] Astro 7 upgrade on its own branch (npm advisories; none can be exploited here).
 - [ ] A shared username-rule helper across `pin-login`, `admin` and `parent-api`.

@@ -5,7 +5,7 @@ import { fresh, dayKey, type SaveV1, type Tier } from './store.ts';
 
 const ALL = { b: true, i: true, c: true };
 const mk = (id: string, topic: string, playable: Record<Tier, boolean> = ALL): SubInfo =>
-  ({ id, topic, topicName: topic.toUpperCase(), name: id, slug: id.replace('math-', ''), playable });
+  ({ id, topic, topicName: topic.toUpperCase(), name: id, slug: id.replace('math-', ''), playable, count: { b: 20, i: 20, c: 20 } });
 const NOW = new Date(2026, 5, 15, 12).getTime();
 const DAY = 86_400_000;
 const TODAY = dayKey(NOW), PAST = dayKey(NOW - 3 * DAY);
@@ -84,6 +84,9 @@ test('keep going: a part-mastered tier is suggested with N of M mastered', () =>
   assert.equal(r[0].kind, 'one-more');
   assert.equal(r[0].sub, 'math-b');
   assert.match(r[0].reason, /5 of 20 questions mastered/);
+  // a count stored against a bank of another size is stale and is not suggested
+  const t = run(s, [mk('math-a', 't'), { ...mk('math-b', 't'), count: { b: 25, i: 20, c: 20 } }]);
+  assert.notEqual(t[0]?.kind, 'one-more');
   const u = real(); u.progress['math-a'] = { b: { passes: [], scores: [], best: 0, cleared: false } };
   assert.ok(!run(u, subs).some((x) => x.kind === 'one-more')); // nothing mastered yet
 });

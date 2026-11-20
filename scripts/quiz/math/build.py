@@ -6,8 +6,10 @@ among that sub-topic's templates by their weight.
 
 Isolation: every template draws from its own random stream, seeded by (topic, level, template key, seed).
 Changing a template never changes another sub-topic's questions. Inside its own sub-topic, removing a template never
-removes or changes a sibling's question (siblings only gain questions to refill the tier); see sub_bank, and
-test_isolation.py checks it. Adding a template or raising a weight can push siblings' last questions out of the tier.
+changes a sibling's questions as long as the level's quota stays the same (siblings only gain questions to refill the
+tier); see sub_bank, and test_isolation.py checks it. The quota can shrink when a template goes, because the variety
+cap (PER_WEIGHT x total weight) binds in some sub-topics: then the merged list is cut shorter and siblings' last
+questions drop. Adding a template or raising a weight can also push siblings' last questions out of the tier.
 Stems are not compared across sub-topics (that would couple them): check_dupes.py fails any stem filed under two.
 
     python scripts/quiz/math/build.py                       # all topics

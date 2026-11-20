@@ -103,17 +103,10 @@ export const migrations: Record<number, (s: any) => any> = {
  * bank redesign (20 Nov 2026: the first banks were a pilot) the stored count points at questions that are gone,
  * so it reads as 0 until the next quiz on the tier recounts it (syncTiers). No schema bump: an old tab must never
  * meet a save version it cannot read. */
-export const liveMastered = (st: { mastered?: number; total?: number }, count?: number) =>
-  st.mastered && (count === undefined || st.total === count) ? st.mastered : 0;
-
-/** Forget question states whose id is in no current bank (owner: questions that no longer exist are dropped).
- * Call only with the ids of EVERY bank (Daily Review loads them all); refuses a suspiciously small set. -> removed. */
-export function forgetMissing(s: SaveV1, known: Set<string>): number {
-  if (known.size < 1000) return 0; // ponytail: sanity floor; a partial load must never wipe progress
-  let n = 0;
-  for (const id of Object.keys(s.questions)) if (!known.has(id)) { delete s.questions[id]; n++; }
-  return n;
-}
+export const liveMastered = (st: { mastered?: number; total?: number }, count: number | undefined) =>
+  st.mastered && count !== undefined && st.total === count ? st.mastered : 0; // unknown bank size: treat as stale
+// ponytail: a size check misses a redesigned tier of the same size (e.g. 25 -> 25); a per-tier id hash stored by
+// syncTiers would catch it. Display-only: the next quiz on the tier recounts.
 
 /** Run every migration from the save's version up to SCHEMA. Does not touch storage. */
 export function migrate(s: any): any {

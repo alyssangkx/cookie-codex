@@ -67,7 +67,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     let block = '';
     if (st.cleared) { msg.textContent = `Cleared ✓ Every question mastered. You can keep practising.`; card.dataset.state = 'cleared'; }
     else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
-    else { const m = liveMastered(st, Number(card.dataset.count)); msg.textContent = m ? `${m} of ${st.total} questions mastered. Keep going!` : 'Ready when you are.'; }
+    else { const n = card.dataset.count ? Number(card.dataset.count) : undefined; const m = liveMastered(st, n); msg.textContent = m ? `${m} of ${n} questions mastered. Keep going!` : 'Ready when you are.'; }
     if (!block && triesUsedUp(s, sub, t)) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
     if (!block && reason) block = blockMessage(reason);
     if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }

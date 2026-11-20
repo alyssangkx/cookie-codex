@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, forgetMissing, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -469,17 +469,11 @@ test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () 
   assert.equal(migrate(v3(90)).schemaVersion, SCHEMA);
 });
 
-test('liveMastered hides a count made against a different bank size; forgetMissing drops orphan ids', () => {
+test('liveMastered hides a count made against a different or unknown bank size', () => {
   assert.equal(liveMastered({ mastered: 18, total: 25 }, 25), 18);
   assert.equal(liveMastered({ mastered: 18, total: 25 }, 100), 0);
-  assert.equal(liveMastered({ mastered: 18, total: 25 }), 18);
+  assert.equal(liveMastered({ mastered: 18, total: 25 }, undefined), 0);
   assert.equal(liveMastered({}, 25), 0);
-  const s: any = fresh();
-  s.questions = { keep: { s: 1, due: 0, w: 1 }, gone: { s: 2, due: 0, w: 2 } };
-  assert.equal(forgetMissing(s, new Set(['keep'])), 0); // too small a set: refuses
-  const known = new Set(['keep', ...Array.from({ length: 1000 }, (_, k) => `q${k}`)]);
-  assert.equal(forgetMissing(s, known), 1);
-  assert.deepEqual(Object.keys(s.questions), ['keep']);
 });
 
 test('Admin: every tier is open with nothing cleared; a normal player is locked', () => {
