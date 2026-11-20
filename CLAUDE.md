@@ -117,7 +117,7 @@ Same contract as English (4 options, items + `review.json` with fingerprints, fa
 
 ```bash
 python3 scripts/quiz/science/build.py     # items/*.json (each file has "subtopic") + review.json -> site/src/data/quiz/science/<topic>.json
-python3 scripts/quiz/check_science.py     # must print "0 failures"; WARN section as English plus figure text naming the answer and figure/stem mismatch (--strict makes warnings fail). FAIL rule `figure-text-overflow` (`svg_text_overflows` in `bankcommon.py`): an inline-SVG label wider than its centred cell/box, or past the viewBox, fails; `fillkit.table` wraps a cell at a space and widens the column, never shrinking the font
+python3 scripts/quiz/check_science.py     # must print "0 failures"; WARN section as English plus figure text naming the answer and figure/stem mismatch (--strict makes warnings fail); FAIL `figure-unstated-switch` (a figure draws a labelled switch S but the stem never says switch/closed/open); WARN `stays-lit-unqualified` (a bare "It stays lit" key next to a brighter/dimmer option). FAIL rule `figure-text-overflow` (`svg_text_overflows` in `bankcommon.py`): an inline-SVG label wider than its centred cell/box, or past the viewBox, fails; `fillkit.table` wraps a cell at a space and widens the column, never shrinking the font
 python3 scripts/quiz/science/coverage.py  # -> docs/quiz/science-coverage.md
 python3 scripts/quiz/build_rewards.py     # after the banks change
 ```

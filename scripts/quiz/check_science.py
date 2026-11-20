@@ -18,7 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
-from bankcommon import (Warnings, gives_away, near_duplicates, correct_is_longest, figure_text, figure_mismatch,  # noqa: E402
+from bankcommon import (unstated_switch, unqualified_stays_lit, Warnings, gives_away, near_duplicates, correct_is_longest, figure_text, figure_mismatch,  # noqa: E402
                         longest_share_warnings, warning_self_tests, NEAR_DUP, svg_text_overflows)
 STRICT = "--strict" in sys.argv[1:]
 ROOT = HERE.parents[1]
@@ -119,6 +119,7 @@ warn = Warnings({
     "near-dup-options": f"two options at least {NEAR_DUP:.0%} alike after normalising (labels and short options skipped)",
     "longest-correct": "sub-topics where the correct option is strictly the longest in over 35% of items",
     "refers-to-other-item": "stem starts 'In/Using the same ...' (every item must stand alone, with its own figure or data)",
+    "stays-lit-unqualified": "key is a bare 'It stays lit' next to a brighter/dimmer option (say 'at the same brightness')",
     "figure-mismatch": "figure text names none of the stem's content words",
 })
 longest = {}
@@ -156,12 +157,14 @@ for f, data in _all:
         if "figure" in it:
             ans = opts[a] if isinstance(a, int) and not isinstance(a, bool) and 0 <= a < len(opts) and isinstance(opts[a], str) else None
             for msg in figure_errors(it["figure"], ans, opts if isinstance(opts, list) else ()): e(msg)
+            if unstated_switch(stem, it["figure"]): e("figure-unstated-switch: the figure draws a switch S but the stem never says if it is closed or open")
         if isinstance(opts, list) and len(opts) == 4 and all(isinstance(o, str) for o in opts) \
                 and isinstance(a, int) and not isinstance(a, bool) and 0 <= a < 4:
             w = lambda rule, m: warn.add(rule, f"{f.name} {it.get('key')}: {m}")
             if "figure" in it and gives_away(figure_text(it["figure"]), opts, a): w("figure-leak", f"answer {opts[a]!r}")
             if gives_away(stem, opts, a): w("stem-echo", f"answer {opts[a]!r}")
             if re.match(r"\s*(in|using|from|for) the same\b", stem, re.I): w("refers-to-other-item", f"stem {stem[:50]!r}")
+            if unqualified_stays_lit(opts, a): w("stays-lit-unqualified", f"answer {opts[a]!r}")
             for x, y in near_duplicates(opts): w("near-dup-options", f"{x!r} ~ {y!r}")
             if "figure" in it and figure_mismatch(stem, it["figure"]):
                 w("figure-mismatch", f"figure text {figure_text(it['figure'])[:60]!r}")

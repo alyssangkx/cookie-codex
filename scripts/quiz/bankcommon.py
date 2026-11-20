@@ -124,6 +124,26 @@ def figure_mismatch(stem, fig):
     return bool(fw) and not (fw & content_words(stem))
 
 
+SWITCH_STATE = re.compile(r"\b(switch(es)?|closed|open(ed)?)\b", re.I)
+SWITCH_DRAWN = re.compile(r'width="30" height="12" fill="#fff" stroke="none"/><circle')  # the switch symbol drawn by figs_circuit._switch
+
+
+def unstated_switch(stem, fig):
+    """FAIL rule figure-unstated-switch: the figure draws a switch labelled S (S, S1, S2 ...) but the stem never says
+    'switch', 'closed' or 'open', so a child cannot tell the switch's state (owner's ci-114 photo, 20 Nov 2026)."""
+    if not isinstance(fig, str) or not SWITCH_DRAWN.search(fig): return False
+    if not any(re.fullmatch(r"S\d*", t) for t in figure_text(fig).split()): return False
+    return not SWITCH_STATE.search(stem)
+
+
+def unqualified_stays_lit(options, answer):
+    """WARN rule stays-lit-unqualified: the key is a bare 'It stays lit' while another option says brighter/dimmer
+    (PSLE answer: it stays lit at the same brightness)."""
+    if not isinstance(answer, int) or not 0 <= answer < len(options): return False
+    return bool(re.fullmatch(r"\s*it (stays|remains) (lit|on)\.?\s*", str(options[answer]), re.I)) and \
+        any(re.search(r"brighter|dimmer", str(o), re.I) for i, o in enumerate(options) if i != answer)
+
+
 class Warnings:
     """Collects warnings per rule; report() prints counts and up to WARN_LIMIT examples per rule."""
 
@@ -179,6 +199,12 @@ def warning_self_tests(science=False):
     t(not correct_is_longest(["same", "same", "x", "y"], 0), "a tie is not strictly longest")
     t(len(longest_share_warnings({"s": [True] * 4 + [False] * 4})) == 1, "longest share above 35% warns")
     t(not longest_share_warnings({"s": [True] * 2 + [False] * 6}), "longest share at 25% is quiet")
+    sw = '<svg viewBox="0 0 9 9"><g><rect x="1" y="1" width="30" height="12" fill="#fff" stroke="none"/><circle cx="1" cy="1" r="2.5"/></g><text x="3" y="3">S</text></svg>'
+    t(unstated_switch("Will the bulb light up?", sw), "unstated switch: stem silent about S fails")
+    t(not unstated_switch("Switch S is closed. Will the bulb light up?", sw), "unstated switch: stem states S passes")
+    t(not unstated_switch("Will the bulb light up?", "<svg viewBox='0 0 9 9'><text>S</text></svg>"), "unstated switch: a figure without a switch symbol is not judged")
+    t(unqualified_stays_lit(["It goes out", "It stays lit", "It becomes dimmer", "It becomes brighter"], 1), "bare stays-lit key flagged")
+    t(not unqualified_stays_lit(["It goes out", "It stays lit at the same brightness", "It becomes dimmer", "It becomes brighter"], 1), "qualified stays-lit key quiet")
     if science:
         svg = "<svg viewBox='0 0 1 1'><text>Beaker A</text><text>ice</text></svg>"
         t(figure_text(svg) == "Beaker A ice", "svg figure text")
