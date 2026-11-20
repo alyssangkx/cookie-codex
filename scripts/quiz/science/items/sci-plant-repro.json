@@ -1279,6 +1279,1519 @@
         "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
         "labels": []
       }
+    },
+    {
+      "key": "rq-101",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The picture shows a flower cut in half. Which part makes pollen?",
+      "options": [
+        "Part B",
+        "Part A",
+        "Part C",
+        "Part D"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Part A is a petal. Petals are brightly coloured to attract insects. They do not make pollen."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part C is the stigma, which receives pollen. It does not make it."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part D is the ovary, which holds the ovules. It does not make pollen."
+        }
+      ],
+      "solution": [
+        "Pollen is made in the anther (part B)."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"156\" rx=\"5\" ry=\"6\"/><line x1=\"66\" y1=\"118\" x2=\"34\" y2=\"122\" stroke-width=\"1.5\"/><text x=\"24\" y=\"128\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"86\" y1=\"88\" x2=\"60\" y2=\"56\" stroke-width=\"1.5\"/><text x=\"50\" y=\"62\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"148\" y1=\"152\" x2=\"212\" y2=\"146\" stroke-width=\"1.5\"/><text x=\"222\" y=\"152\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "rq-102",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "In the picture of the flower, pollen from another flower must land on which part for the flower to make seeds?",
+      "options": [
+        "Part Q",
+        "Part R",
+        "Part S",
+        "Part P"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Part Q is the ovary. Pollen lands on the stigma at the top, not on the ovary."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part R is a petal. Insects may land on it, but the pollen must reach the stigma."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part S is an anther. It makes pollen and has pollen on it already."
+        },
+        null
+      ],
+      "solution": [
+        "Pollen has to land on the stigma (part P). That is called pollination."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"156\" rx=\"5\" ry=\"6\"/><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"148\" y1=\"152\" x2=\"212\" y2=\"146\" stroke-width=\"1.5\"/><text x=\"222\" y=\"152\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"66\" y1=\"118\" x2=\"34\" y2=\"122\" stroke-width=\"1.5\"/><text x=\"24\" y=\"128\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"86\" y1=\"88\" x2=\"60\" y2=\"56\" stroke-width=\"1.5\"/><text x=\"50\" y=\"62\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "rq-103",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The picture shows a flower cut in half. After fertilisation, which part will grow into a seed?",
+      "options": [
+        "Part A",
+        "Part C",
+        "Part B",
+        "Part D"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Part A is the stigma. It only receives pollen and does not become the seed."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part C is a petal. Petals wither after pollination."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Part D is an anther. It makes pollen and does not become the seed."
+        }
+      ],
+      "solution": [
+        "Part B is the ovule inside the ovary. After fertilisation, the ovule grows into the seed."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"156\" rx=\"5\" ry=\"6\"/><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"130\" y1=\"156\" x2=\"212\" y2=\"186\" stroke-width=\"1.5\"/><text x=\"222\" y=\"192\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"66\" y1=\"118\" x2=\"34\" y2=\"122\" stroke-width=\"1.5\"/><text x=\"24\" y=\"128\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"86\" y1=\"88\" x2=\"60\" y2=\"56\" stroke-width=\"1.5\"/><text x=\"50\" y=\"62\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "rq-104",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The picture shows a flower cut in half. After pollination and fertilisation, which part grows into the fruit?",
+      "options": [
+        "Part W",
+        "Part X",
+        "Part Y",
+        "Part Z"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Part W is an anther. It makes pollen, and it dries up after the pollen is gone."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Part Y is the stigma. It receives pollen and does not grow into the fruit."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part Z is a petal. Petals wither after pollination."
+        }
+      ],
+      "solution": [
+        "The ovary (part X) holds the ovules. It grows into the fruit and the ovules become seeds."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"156\" rx=\"5\" ry=\"6\"/><line x1=\"86\" y1=\"88\" x2=\"60\" y2=\"56\" stroke-width=\"1.5\"/><text x=\"50\" y=\"62\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">W</text><line x1=\"148\" y1=\"152\" x2=\"212\" y2=\"146\" stroke-width=\"1.5\"/><text x=\"222\" y=\"152\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text><line x1=\"66\" y1=\"118\" x2=\"34\" y2=\"122\" stroke-width=\"1.5\"/><text x=\"24\" y=\"128\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Z</text></svg>"
+    },
+    {
+      "key": "rq-105",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Look at the picture of the flower. Part D is a thin stalk that holds up part C. What is the job of part D?",
+      "options": [
+        "To hold the anther up where pollen can be carried off",
+        "To make the pollen that the flower needs for seeds",
+        "To grow into the fruit once pollination has taken place",
+        "To catch pollen that is brought from other flowers"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Pollen is made in the anther (part C), not in the stalk that holds it."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The ovary (part A) grows into the fruit, not the stalk."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Pollen is caught by the stigma (part B)."
+        }
+      ],
+      "solution": [
+        "Part D is the filament. It holds the anther up where wind or insects can reach the pollen."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"156\" rx=\"5\" ry=\"6\"/><line x1=\"148\" y1=\"152\" x2=\"212\" y2=\"146\" stroke-width=\"1.5\"/><text x=\"222\" y=\"152\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"86\" y1=\"88\" x2=\"60\" y2=\"56\" stroke-width=\"1.5\"/><text x=\"50\" y=\"62\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"98\" y1=\"130\" x2=\"76\" y2=\"164\" stroke-width=\"1.5\"/><text x=\"66\" y=\"170\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "rq-106",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A flower has small green petals and no smell. Its anthers hang outside the flower and its stigma is feathery. How is this flower most likely pollinated?",
+      "options": [
+        "By bees",
+        "By butterflies",
+        "By birds",
+        "By the wind"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-feature",
+          "why": "Bees are attracted by large, bright, scented flowers with nectar. This flower has none of these."
+        },
+        {
+          "tag": "wrong-feature",
+          "why": "Butterflies visit bright, sweet-smelling flowers, which this flower is not."
+        },
+        {
+          "tag": "wrong-feature",
+          "why": "Birds that pollinate flowers visit large, brightly coloured flowers."
+        },
+        null
+      ],
+      "solution": [
+        "Small dull flowers with hanging anthers and a feathery stigma are made for wind pollination."
+      ]
+    },
+    {
+      "key": "rq-107",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these features helps a flower to be pollinated by insects?",
+      "options": [
+        "Its pollen is very light and dry",
+        "Its stigma hangs far outside the flower",
+        "It makes a sweet liquid in the flower",
+        "Its petals are small and green"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wind-feature",
+          "why": "Very light, dry pollen is blown by the wind. Insect flowers have sticky pollen."
+        },
+        {
+          "tag": "wind-feature",
+          "why": "A stigma that hangs out is found on wind-pollinated flowers, to catch pollen from the air."
+        },
+        null,
+        {
+          "tag": "wind-feature",
+          "why": "Small green petals do not attract insects. They belong to wind-pollinated flowers."
+        }
+      ],
+      "solution": [
+        "The sweet liquid (nectar) makes insects come to the flower, and pollen sticks to them as they feed."
+      ]
+    },
+    {
+      "key": "rq-108",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Grass flowers are pollinated by the wind. Why does a grass flower make a very large amount of pollen?",
+      "options": [
+        "The pollen must feed the insects that visit the flower",
+        "Most pollen is blown away and little lands on a stigma",
+        "The pollen is needed to make the petals bright",
+        "The pollen turns into the fruit"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Grass flowers are not visited by insects for food. The wind carries the pollen."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Pollen has nothing to do with the colour of the petals."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The fruit grows from the ovary, not from the pollen."
+        }
+      ],
+      "solution": [
+        "The wind blows pollen in all directions, so a lot is wasted.",
+        "Making a lot gives a better chance that some lands on a stigma."
+      ]
+    },
+    {
+      "key": "rq-109",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A bee visits a flower P and then a flower Q of the same kind. Where must some pollen from flower P land for a seed to form in flower Q?",
+      "options": [
+        "On the stigma of flower Q",
+        "On a petal of flower Q, which attracts the bee",
+        "On the anther of flower Q, which makes pollen",
+        "On the stem that holds up flower Q"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "A petal only attracts insects. Pollen on a petal cannot lead to seeds."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The anther makes pollen. Pollen must land on a stigma."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Pollen on the stem cannot reach the ovules."
+        }
+      ],
+      "solution": [
+        "Pollination is when pollen lands on a stigma of a flower of the same kind."
+      ]
+    },
+    {
+      "key": "rq-110",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A farmer covers some flowers of a gourd plant with net bags that keep insects out. These flowers do not make fruits. What is the best reason?",
+      "options": [
+        "The petals did not get enough sunlight",
+        "The roots could not take in water",
+        "The anthers made too much pollen",
+        "Pollen was not carried to the stigmas"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The net bags let light in, and petals do not make the fruit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bags cover the flowers, not the roots."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Too much pollen would not stop a fruit forming. The stigma needs to receive pollen."
+        },
+        null
+      ],
+      "solution": [
+        "Insects carry pollen from flower to flower.",
+        "Without insects, no pollen reaches the stigmas, so no seeds or fruits form."
+      ]
+    },
+    {
+      "key": "rq-111",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of the following describes fertilisation in a flowering plant?",
+      "options": [
+        "Pollen from an anther lands on a stigma",
+        "An insect carries pollen from one flower to another",
+        "A male cell from pollen joins a female cell in an ovule",
+        "A seed is carried far away from the parent plant"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "That is pollination. Fertilisation happens afterwards, when the cells join."
+        },
+        {
+          "tag": "mix-up",
+          "why": "That is how pollen is carried. It is not fertilisation."
+        },
+        null,
+        {
+          "tag": "mix-up",
+          "why": "That is seed dispersal, which happens after the seed has formed."
+        }
+      ],
+      "solution": [
+        "In fertilisation, a male cell from the pollen joins a female cell inside an ovule."
+      ]
+    },
+    {
+      "key": "rq-112",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Kai put bean seeds on cotton wool in dishes P, Q, R and S as shown in the table. In which dish will the seeds most likely germinate?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "missing-water",
+          "why": "The cotton wool in P is dry. Seeds need water to germinate."
+        },
+        null,
+        {
+          "tag": "too-cold",
+          "why": "R is inside a fridge. Seeds need warmth to germinate."
+        },
+        {
+          "tag": "missing-both",
+          "why": "S is dry and cold, so it lacks both water and warmth."
+        }
+      ],
+      "solution": [
+        "Seeds need water, air and warmth to germinate.",
+        "Only Q has wet cotton wool in a warm room."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bean seeds in four dishes</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"80\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"130.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cotton wool</text><rect x=\"180\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"245.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"130.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry</text><rect x=\"180\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"245.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"130.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"180\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"245.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"130.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"180\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"245.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">inside a fridge</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"130.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry</text><rect x=\"180\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"245.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">inside a fridge</text></svg>"
+    },
+    {
+      "key": "rq-113",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The graph shows how many of 10 bean seeds germinated at five temperatures. At which temperature did the most seeds germinate?",
+      "options": [
+        "25 °C",
+        "5 °C",
+        "15 °C",
+        "45 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "At 5 °C no seeds germinated. This is too cold."
+        },
+        {
+          "tag": "misread",
+          "why": "At 15 °C only 4 seeds germinated, fewer than at 25 °C."
+        },
+        {
+          "tag": "misread",
+          "why": "At 45 °C no seeds germinated. This is too hot."
+        }
+      ],
+      "solution": [
+        "The highest point on the graph is at 25 °C, with 9 seeds germinated."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Germination of 10 seeds at each temperature</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"119.5\" y1=\"188\" x2=\"119.5\" y2=\"192\"/><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"187.0\" y1=\"188\" x2=\"187.0\" y2=\"192\"/><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><line x1=\"254.5\" y1=\"188\" x2=\"254.5\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">45</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Seeds germinated</text><polyline points=\"52.0,188.0 119.5,128.0 187.0,53.0 254.5,98.0 322.0,188.0\"/><circle cx=\"52.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"128.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"53.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "rq-114",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The table shows four kinds of fruit. Which fruit is most likely to be spread when an animal eats it and drops the seeds far away?",
+      "options": [
+        "P",
+        "R",
+        "S",
+        "Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-agent",
+          "why": "P has a thin wing, so the wind carries it away."
+        },
+        {
+          "tag": "wrong-agent",
+          "why": "R has hooks, which catch on an animal's fur. The animal does not need to eat it."
+        },
+        {
+          "tag": "wrong-agent",
+          "why": "S is light and hollow, so it floats on water."
+        },
+        null
+      ],
+      "solution": [
+        "A soft, sweet, bright fruit is eaten by animals. The seeds pass out in the droppings far from the parent plant."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four kinds of fruit</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fruit</text><rect x=\"70\" y=\"36\" width=\"230\" height=\"34\"/><text x=\"185.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What it looks like</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">thin, papery wing; dry and light</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">soft, sweet, bright red flesh</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">covered in small hooks</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">hollow, light, waterproof husk</text></svg>"
+    },
+    {
+      "key": "rq-115",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "In the table of four fruits, which fruit is most likely to be carried away on the fur of a passing animal?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-agent",
+          "why": "P has a wing, so it is carried by the wind."
+        },
+        {
+          "tag": "wrong-agent",
+          "why": "Q is soft and sweet and is spread by animals that eat it."
+        },
+        null,
+        {
+          "tag": "wrong-agent",
+          "why": "S is light and waterproof and floats on water."
+        }
+      ],
+      "solution": [
+        "The small hooks of R catch on fur and clothes, so the fruit is carried to new places."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four kinds of fruit</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fruit</text><rect x=\"70\" y=\"36\" width=\"230\" height=\"34\"/><text x=\"185.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What it looks like</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">thin, papery wing; dry and light</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">soft, sweet, bright red flesh</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">covered in small hooks</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">hollow, light, waterproof husk</text></svg>"
+    },
+    {
+      "key": "rq-116",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The table shows four kinds of fruit. Which fruit is most likely to be spread by water?",
+      "options": [
+        "P",
+        "S",
+        "Q",
+        "R"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-agent",
+          "why": "P is dry and light with a wing. It is made for the wind."
+        },
+        null,
+        {
+          "tag": "wrong-agent",
+          "why": "Q is a juicy fruit that animals eat."
+        },
+        {
+          "tag": "wrong-agent",
+          "why": "R has hooks and sticks to animals."
+        }
+      ],
+      "solution": [
+        "A light, hollow, waterproof husk floats, so the fruit is carried far by water."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four kinds of fruit</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fruit</text><rect x=\"70\" y=\"36\" width=\"230\" height=\"34\"/><text x=\"185.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What it looks like</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">thin, papery wing; dry and light</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">soft, sweet, bright red flesh</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">covered in small hooks</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">hollow, light, waterproof husk</text></svg>"
+    },
+    {
+      "key": "rq-117",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Tiny brown dots form on the underside of a fern leaf. Each dot holds many spores. Which statement about the spores is correct?",
+      "options": [
+        "The spores are blown away and may grow into new ferns in damp places",
+        "The spores are the fruits that grow on the fern leaf",
+        "The spores stay on the leaf and grow into new ferns there",
+        "The spores must be carried by bees from fern to fern"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Ferns do not make flowers or fruits. Spores are not fruits."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Spores are blown away from the parent fern. They do not grow on the leaf."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Spores are carried by the wind. Ferns have no flowers to attract bees."
+        }
+      ],
+      "solution": [
+        "Ferns reproduce by spores. The very light spores are blown by the wind.",
+        "A spore that lands in a damp place can grow into a new fern."
+      ]
+    },
+    {
+      "key": "rq-118",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Small plantlets grow along the edge of a leaf of a Bryophyllum plant. When they fall onto soil, they grow into new plants. From which part of the parent plant do the new plants grow?",
+      "options": [
+        "The root",
+        "The flower",
+        "The seed",
+        "The leaf"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The plantlets are on the leaf edge, not on the roots."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "No flower is needed. The plantlets grow on the leaf."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "These new plants do not come from seeds."
+        },
+        null
+      ],
+      "solution": [
+        "The new plants grow from the leaf of the parent plant, without seeds."
+      ]
+    },
+    {
+      "key": "rq-119",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A strawberry plant sends out long stems along the ground. A new plant grows at the end of each stem. Which statement about this is correct?",
+      "options": [
+        "The new plants grow only after bees pollinate the stems",
+        "The new plants grow from spores on the stems",
+        "The new plants grow without seeds",
+        "The new plants grow only when the parent dies"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Pollination is about flowers making seeds. These stems are not flowers."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Strawberry plants are flowering plants. They do not make spores."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The parent plant keeps living while the new plants grow."
+        }
+      ],
+      "solution": [
+        "The long stems grow new plants. No seeds are needed for this way of reproducing."
+      ]
+    },
+    {
+      "key": "rq-120",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A gardener wants new plants without waiting for any flower to be pollinated first. Which of these should he plant?",
+      "options": [
+        "A bean seed",
+        "A piece of rose stem",
+        "A mango seed",
+        "A sunflower seed"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A seed forms only after a flower has been pollinated and fertilised."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A mango seed also comes from a pollinated flower."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A sunflower seed also forms after pollination."
+        }
+      ],
+      "solution": [
+        "Seeds only form after pollination and fertilisation.",
+        "A piece of rose stem can grow roots and leaves into a new plant with no flowers involved."
+      ]
+    },
+    {
+      "key": "rq-121",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The picture shows a flower cut in half. The ovary of this flower holds 3 ovules. All 3 ovules are fertilised. How many seeds can the fruit have?",
+      "options": [
+        "3",
+        "1",
+        "2",
+        "6"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "miscount",
+          "why": "Each fertilised ovule becomes one seed, so 3 ovules give more than 1 seed."
+        },
+        {
+          "tag": "miscount",
+          "why": "All 3 ovules are fertilised, so 3 seeds form, not 2."
+        },
+        {
+          "tag": "miscount",
+          "why": "One ovule makes one seed. The number of seeds cannot be more than the number of ovules."
+        }
+      ],
+      "solution": [
+        "Each fertilised ovule grows into one seed.",
+        "3 fertilised ovules give 3 seeds."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"140\" rx=\"5\" ry=\"6\"/><ellipse cx=\"121\" cy=\"160\" rx=\"5\" ry=\"6\"/><ellipse cx=\"139\" cy=\"160\" rx=\"5\" ry=\"6\"/><line x1=\"148\" y1=\"152\" x2=\"212\" y2=\"146\" stroke-width=\"1.5\"/><text x=\"222\" y=\"152\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"66\" y1=\"118\" x2=\"34\" y2=\"122\" stroke-width=\"1.5\"/><text x=\"24\" y=\"128\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text></svg>"
+    },
+    {
+      "key": "rq-122",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A tomato fruit has 40 seeds. How many ovules in the flower were fertilised to form this fruit?",
+      "options": [
+        "1",
+        "4",
+        "80",
+        "40"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "miscount",
+          "why": "A flower's ovary has many ovules. Each seed comes from its own ovule."
+        },
+        {
+          "tag": "miscount",
+          "why": "Each seed comes from one fertilised ovule, so there must be as many ovules as seeds."
+        },
+        {
+          "tag": "miscount",
+          "why": "Each ovule makes one seed, not two."
+        },
+        null
+      ],
+      "solution": [
+        "One fertilised ovule makes one seed, so 40 seeds come from 40 fertilised ovules."
+      ]
+    },
+    {
+      "key": "rq-123",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of the following lists the events in the correct order, from first to last?",
+      "options": [
+        "Fertilisation, pollination, fruit and seeds form, seeds are dispersed",
+        "Pollination, seeds are dispersed, fertilisation, fruit and seeds form",
+        "Pollination, fertilisation, seeds form, seeds are dispersed",
+        "Pollination, fruit and seeds form, fertilisation, seeds are dispersed"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-order",
+          "why": "Pollen must land on the stigma before the cells can join, so pollination comes first."
+        },
+        {
+          "tag": "wrong-order",
+          "why": "Seeds are dispersed only after they have formed."
+        },
+        null,
+        {
+          "tag": "wrong-order",
+          "why": "The fruit and seeds form only after fertilisation."
+        }
+      ],
+      "solution": [
+        "Pollen lands on the stigma, then the cells join, then the ovary and ovules grow, and the seeds are carried away."
+      ]
+    },
+    {
+      "key": "rq-201",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of the following statements about pollination are correct?\nA: Pollen lands on the stigma.\nB: Pollen can only be carried by insects.\nC: Pollination happens before fertilisation.\nD: Pollination is when a male cell joins a female cell.",
+      "options": [
+        "A and C only",
+        "A and B only",
+        "B and D only",
+        "C and D only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mix-up",
+          "why": "B is wrong. Wind and some animals also carry pollen."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both B and D are wrong. Joining of cells is fertilisation."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. The joining of the male and female cells is fertilisation, not pollination."
+        }
+      ],
+      "solution": [
+        "A is correct: pollination is pollen landing on a stigma.",
+        "C is correct: the cells can join only after pollen has landed.",
+        "B is wrong (wind, water and animals carry pollen). D describes fertilisation."
+      ]
+    },
+    {
+      "key": "rq-202",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of the following statements about a flowering plant are correct?\nA: The ovary grows into the fruit.\nB: Pollen is made in the stigma.\nC: Each fertilised ovule becomes a seed.\nD: Petals grow into the seeds.",
+      "options": [
+        "A and B only",
+        "B and D only",
+        "C and D only",
+        "A and C only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "B is wrong. Pollen is made in the anther."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong. The stigma receives pollen and petals wither."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. Petals wither after pollination."
+        },
+        null
+      ],
+      "solution": [
+        "A and C are correct. B is wrong because pollen is made in the anther. D is wrong because petals do not become seeds."
+      ]
+    },
+    {
+      "key": "rq-203",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Four flowers on a plant were treated as shown in the table. Insects visited all the flowers. Which flower is least able to make seeds?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reasoning",
+          "why": "P has no petals, so fewer insects may visit, but its stigma can still receive pollen."
+        },
+        {
+          "tag": "wrong-reasoning",
+          "why": "Q has no anthers, but it can still receive pollen carried from other flowers."
+        },
+        null,
+        {
+          "tag": "wrong-reasoning",
+          "why": "S has no sepals. The sepals do not take part in making seeds."
+        }
+      ],
+      "solution": [
+        "Seeds form only if pollen lands on a stigma.",
+        "R has no stigma, so pollen cannot reach its ovules."
+      ],
+      "figure": "<svg viewBox=\"0 0 270 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four flowers on one plant</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flower</text><rect x=\"80\" y=\"36\" width=\"180\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Part removed</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">all the petals</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">all the anthers</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">the stigma</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"180\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">the sepals</text></svg>"
+    },
+    {
+      "key": "rq-204",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Four set-ups use bean seeds, as in the table. Which two set-ups should Mei compare to find out if seeds need warmth to germinate?",
+      "options": [
+        "P and R",
+        "P and Q",
+        "Q and S",
+        "R and S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "P and R differ in light, not in warmth."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "Q and S differ in water, light and so on. More than one thing is different."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "R and S differ in water, not in warmth."
+        }
+      ],
+      "solution": [
+        "For a fair test, only one thing should differ.",
+        "P and Q differ only in the place (warm or cold). The wetness and the darkness are the same."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds in four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"115.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cotton wool</text><rect x=\"160\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"210.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"260\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Light</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"260\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dark</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">fridge</text><rect x=\"260\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dark</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"260\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">light</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry</text><rect x=\"160\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">fridge</text><rect x=\"260\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">light</text></svg>"
+    },
+    {
+      "key": "rq-205",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "In the four set-ups of the table, only the seeds in P and R germinated. Which conclusion is correct?",
+      "options": [
+        "Seeds germinate with or without light",
+        "Seeds need light to germinate",
+        "Seeds need water to germinate",
+        "Seeds germinate better in a cold place"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-conclusion",
+          "why": "P was dark and the seeds still germinated."
+        },
+        {
+          "tag": "invalid-comparison",
+          "why": "S differs from the others in both water and place, so this test does not show it."
+        },
+        {
+          "tag": "wrong-conclusion",
+          "why": "The seeds in the cold place (Q and S) did not germinate at all."
+        }
+      ],
+      "solution": [
+        "P (dark) and R (light) are the same except for light. Both germinated, so light is not needed.",
+        "S cannot show the need for water as it also differs in place."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds in four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"115.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cotton wool</text><rect x=\"160\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"210.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"260\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Light</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"260\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dark</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">fridge</text><rect x=\"260\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dark</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet</text><rect x=\"160\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"260\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">light</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry</text><rect x=\"160\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"210.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">fridge</text><rect x=\"260\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"295.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">light</text></svg>"
+    },
+    {
+      "key": "rq-206",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "The graph shows seeds germinating in a warm room and a cold room over 6 days. Which statement is supported by the graph?",
+      "options": [
+        "All the seeds in the warm room had germinated by Day 6",
+        "No seeds germinated at all in the cold room",
+        "Seeds in the cold room germinated faster than in the warm room",
+        "From Day 2, more seeds had germinated in the warm room"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "At Day 6, only 90 % had germinated, not all."
+        },
+        {
+          "tag": "misread",
+          "why": "By Day 6, 25 % of the seeds in the cold room had germinated."
+        },
+        {
+          "tag": "reversed",
+          "why": "The warm room line is always higher from Day 2."
+        },
+        null
+      ],
+      "solution": [
+        "On every day from Day 2 the warm room line is above the cold room line.",
+        "At Day 6 the warm room has 90 % and the cold room 25 %."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds germinated in two rooms</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"106.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"106.0\" y1=\"188\" x2=\"106.0\" y2=\"192\"/><text x=\"160.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"160.0\" y1=\"188\" x2=\"160.0\" y2=\"192\"/><text x=\"214.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"214.0\" y1=\"188\" x2=\"214.0\" y2=\"192\"/><text x=\"268.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"268.0\" y1=\"188\" x2=\"268.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Day</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Seeds germinated (%)</text><polyline points=\"52.0,188.0 106.0,158.0 160.0,98.0 214.0,60.5 268.0,53.0 322.0,53.0\"/><circle cx=\"52.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"106.0\" cy=\"158.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"160.0\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"214.0\" cy=\"60.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"268.0\" cy=\"53.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"53.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,188.0 106.0,188.0 160.0,180.5 214.0,173.0 268.0,158.0 322.0,150.5\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"106.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"160.0\" cy=\"180.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"214.0\" cy=\"173.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"268.0\" cy=\"158.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"150.5\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"46\" x2=\"86\" y2=\"46\"/><text x=\"92\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Warm room</text><line x1=\"60\" y1=\"62\" x2=\"86\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Cold room</text></svg>"
+    },
+    {
+      "key": "rq-207",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The table shows four kinds of fruit. On a windy island there are no animals and no streams. Which fruit is most likely to be spread far from its parent plant there?",
+      "options": [
+        "Q",
+        "R",
+        "P",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-agent",
+          "why": "Q needs an animal to eat it, but there are no large animals."
+        },
+        {
+          "tag": "wrong-agent",
+          "why": "R needs an animal's fur to catch on to."
+        },
+        null,
+        {
+          "tag": "wrong-agent",
+          "why": "S floats, but there are no streams to carry it."
+        }
+      ],
+      "solution": [
+        "With only wind, the fruit that can fly is carried: the one with a thin papery wing."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four kinds of fruit</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fruit</text><rect x=\"70\" y=\"36\" width=\"230\" height=\"34\"/><text x=\"185.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What it looks like</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">thin, papery wing; dry and light</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">soft, sweet, bright red flesh</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">covered in small hooks</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"230\" height=\"30\"/><text x=\"185.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">hollow, light, waterproof husk</text></svg>"
+    },
+    {
+      "key": "rq-208",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A farmer sprays a strong insecticide that kills all the bees in his orchard. Fewer fruits grow on his trees that season. What is the best reason?",
+      "options": [
+        "The trees could not make any pollen without the bees",
+        "Less pollen reached the stigmas, so fewer flowers were fertilised",
+        "The petals fell off too soon for the fruits to grow",
+        "The roots took in less water from the soil that season"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The anthers of the trees make pollen on their own. Bees only carry it."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Petals falling off is normal after pollination. It does not reduce fruit by itself."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The insecticide killed bees. It was not about water in the roots."
+        }
+      ],
+      "solution": [
+        "Bees carry pollen to stigmas.",
+        "With no bees, fewer stigmas get pollen, fewer ovules are fertilised and fewer fruits form."
+      ]
+    },
+    {
+      "key": "rq-209",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Seedlings that grow right under their parent plant often grow poorly. What is the best reason?",
+      "options": [
+        "They compete with the parent for light and water",
+        "They cannot be pollinated by insects or wind",
+        "They cannot make flowers or fruits",
+        "They have lost their seed coat too early"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Pollination happens in flowers, long before seedlings grow."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Seedlings are young. Flowers come later and are not the problem here."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A seed coat protects the seed. It has no effect on how the seedling grows later."
+        }
+      ],
+      "solution": [
+        "Seedlings under the parent share the same light, water and soil.",
+        "That is why dispersing seeds far away helps new plants grow well."
+      ]
+    },
+    {
+      "key": "rq-210",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which statements about spores and seeds are correct?\nA: Both can grow into new plants.\nB: A seed has stored food but a spore does not.\nC: Spores are made in flowers.\nD: Ferns make seeds inside fruits.",
+      "options": [
+        "A and C only",
+        "B and D only",
+        "C and D only",
+        "A and B only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "C is wrong. Ferns and mosses have no flowers."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. Ferns have no fruits or seeds."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong. Plants with spores have no flowers, fruits or seeds."
+        },
+        null
+      ],
+      "solution": [
+        "A and B are correct. C and D are wrong because spore plants have no flowers, fruits or seeds."
+      ]
+    },
+    {
+      "key": "rq-211",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A gardener takes cuttings from a rose bush that has red flowers and plants them. What colour are the flowers of the new plants most likely to be?",
+      "options": [
+        "White, because cuttings are weaker than seeds",
+        "Pink, because the colour mixes with the soil",
+        "Red, because they grow from a part of the parent plant",
+        "Any colour, because insects must pollinate the cuttings"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A cutting grows into a plant like its parent. Weakness does not change the colour."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Soil does not change the colour of the flowers."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Cuttings grow from stems. No pollination is involved."
+        }
+      ],
+      "solution": [
+        "A cutting is a part of the parent plant, so the new plant is like the parent. Its flowers are red."
+      ]
+    },
+    {
+      "key": "rq-213",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Aisha's results are in the table. Which conclusion is correct?",
+      "options": [
+        "Seeds need both water and air to germinate",
+        "Seeds need light to germinate",
+        "Seeds germinate best when covered with water",
+        "Seeds can germinate without water if there is air"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "not-tested",
+          "why": "Light was not tested in any of the set-ups."
+        },
+        {
+          "tag": "wrong-conclusion",
+          "why": "P (damp cotton wool) had more germinating seeds than S (in water)."
+        },
+        {
+          "tag": "wrong-conclusion",
+          "why": "Q had air but no water and no seeds germinated."
+        }
+      ],
+      "solution": [
+        "Q (no water) shows that water is needed; R (no air) shows that air is needed.",
+        "P has both and nine seeds germinated."
+      ],
+      "figure": "<svg viewBox=\"0 0 370 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"185.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Results of the four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"115.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds in dish</text><rect x=\"160\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds that germinated after one week</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">9</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"160\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text></svg>"
+    },
+    {
+      "key": "rq-214",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The picture shows a flower. Which row correctly gives the job of two of its labelled parts?",
+      "options": [
+        "P: makes pollen; Q: grows into the fruit",
+        "P: attracts insects; Q: receives pollen",
+        "P: receives pollen; Q: makes pollen",
+        "P: attracts insects; Q: grows into the fruit"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "P is a petal, which attracts insects. It does not make pollen."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Q is the ovary. The stigma (S) receives pollen."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Both are wrong: the petal does not receive pollen and the ovary does not make it."
+        },
+        null
+      ],
+      "solution": [
+        "P is a petal and Q is the ovary. Petals attract insects, and the ovary grows into the fruit."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M122 232 V190 Q130 184 138 190 V232\"/><path d=\"M112 176 Q42 154 44 78 Q96 98 112 176 Z\"/><path d=\"M148 176 Q218 154 216 78 Q164 98 148 176 Z\"/><path d=\"M112 184 Q86 200 70 190 Q90 178 112 176\"/><path d=\"M148 184 Q174 200 190 190 Q170 178 148 176\"/><path d=\"M112 168 Q84 140 88 98\"/><path d=\"M148 168 Q176 140 172 98\"/><ellipse cx=\"88\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"172\" cy=\"90\" rx=\"6\" ry=\"9\"/><ellipse cx=\"130\" cy=\"152\" rx=\"20\" ry=\"26\"/><path d=\"M130 126 V72\"/><ellipse cx=\"130\" cy=\"64\" rx=\"10\" ry=\"6\"/><ellipse cx=\"130\" cy=\"156\" rx=\"5\" ry=\"6\"/><line x1=\"66\" y1=\"118\" x2=\"34\" y2=\"122\" stroke-width=\"1.5\"/><text x=\"24\" y=\"128\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"148\" y1=\"152\" x2=\"212\" y2=\"146\" stroke-width=\"1.5\"/><text x=\"222\" y=\"152\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"86\" y1=\"88\" x2=\"60\" y2=\"56\" stroke-width=\"1.5\"/><text x=\"50\" y=\"62\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"138\" y1=\"62\" x2=\"166\" y2=\"40\" stroke-width=\"1.5\"/><text x=\"176\" y=\"46\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "rq-215",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Soon after pollination, the petals of a flower wither and fall off, but the ovary grows bigger. Why can the flower afford to lose its petals?",
+      "options": [
+        "The petals are needed to carry pollen down to the ovary",
+        "The petals have changed into the seeds of the fruit",
+        "The petals have done their job of attracting insects",
+        "The petals would stop the ovary from growing bigger"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Petals do not carry pollen. Insects and wind do."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The seeds come from the ovules, not the petals."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Petals do not affect the growth of the ovary."
+        }
+      ],
+      "solution": [
+        "Petals attract insects. Pollination has happened, so they are no longer needed."
+      ]
+    },
+    {
+      "key": "rq-216",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Ravi gives 5 mL, 10 mL and 20 mL of water each day to three dishes with 10 bean seeds each, in the same warm room. What should he measure to find out how the amount of water affects germination?",
+      "options": [
+        "The temperature of the room each day",
+        "The seeds that germinate in each dish",
+        "The colour of the dishes he uses",
+        "The number of seeds put in each dish"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-variable",
+          "why": "The temperature must stay the same, so it is not what he measures."
+        },
+        null,
+        {
+          "tag": "wrong-variable",
+          "why": "The colour of the dish is not related to the question."
+        },
+        {
+          "tag": "wrong-variable",
+          "why": "This is the same (10) in all dishes. It is a variable kept the same."
+        }
+      ],
+      "solution": [
+        "The amount of water is the one thing changed.",
+        "The results to measure are how many seeds germinate in each dish."
+      ]
+    },
+    {
+      "key": "rq-217",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar graph shows how many of 10 seeds germinated when given different amounts of water each day. Which conclusion is best supported?",
+      "options": [
+        "Seeds germinate best with some water, and too much lowers germination",
+        "The more water the seeds are given, the more seeds germinate",
+        "Seeds do not need any water to germinate at all",
+        "Seeds that were given 5 mL of water germinated best"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "At 20 mL only 3 seeds germinated, fewer than at 10 mL."
+        },
+        {
+          "tag": "misread",
+          "why": "With no water, none of the seeds germinated."
+        },
+        {
+          "tag": "misread",
+          "why": "Seeds given 10 mL did best (9 seeds), better than 5 mL (8 seeds)."
+        }
+      ],
+      "solution": [
+        "No water gave 0 seeds, 10 mL gave the most (9) and 20 mL gave only 3.",
+        "So some water is needed but too much is harmful."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Germination of 10 seeds</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water given each day (mL)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Seeds germinated</text><rect x=\"68.9\" y=\"188.0\" width=\"33.8\" height=\"0.0\"/><rect x=\"136.4\" y=\"68.0\" width=\"33.8\" height=\"120.0\"/><rect x=\"203.9\" y=\"53.0\" width=\"33.8\" height=\"135.0\"/><rect x=\"271.4\" y=\"143.0\" width=\"33.8\" height=\"45.0\"/></svg>"
+    },
+    {
+      "key": "rq-218",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A gardener grows a herb under a net that keeps out insects. He gently shakes the flowers every day and the plant makes fruits. How does shaking help?",
+      "options": [
+        "The shaking makes the roots take in more water",
+        "The shaking joins the male and female cells directly",
+        "The shaking makes the petals grow into fruits",
+        "Pollen is shaken from the anthers onto the stigmas"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Shaking flowers does not change how roots take in water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The cells join inside the ovule after pollen reaches the stigma. Shaking only helps pollination."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Fruits grow from the ovary, not the petals."
+        },
+        null
+      ],
+      "solution": [
+        "Without insects, shaking moves pollen from the anthers to the stigmas, so pollination can happen."
+      ]
+    },
+    {
+      "key": "rq-220",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Pollen from a rose flower lands on the stigma of a hibiscus flower. What is most likely to happen?",
+      "options": [
+        "Fertilisation happens and the hibiscus makes seeds",
+        "Pollination happens but fertilisation does not",
+        "Neither pollination nor fertilisation happens",
+        "Fertilisation happens but the flower makes no pollen"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Pollen can only fertilise ovules of the same kind of plant."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Pollination is simply pollen landing on a stigma, so it has happened."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Fertilisation does not happen, and the anthers still make pollen."
+        }
+      ],
+      "solution": [
+        "Pollination is pollen landing on a stigma, so it does happen.",
+        "The male cell of a rose cannot join the female cell of a hibiscus, so there is no fertilisation."
+      ]
+    },
+    {
+      "key": "rq-221",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of the following is evidence that a plant can reproduce without seeds?",
+      "options": [
+        "A leaf placed on wet soil grows roots and a plant",
+        "A seed grows into a seedling in wet cotton wool",
+        "Bees visit the flowers of a plant",
+        "A fruit has many seeds inside it"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "That is a seed growing, so it needs a seed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Bees carrying pollen lead to seeds."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "That shows seeds, not reproduction without them."
+        }
+      ],
+      "solution": [
+        "A new plant that grows from a leaf grows from part of the parent plant. No seed is involved."
+      ]
+    },
+    {
+      "key": "rq-222",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A coconut has a fibrous husk that holds air. Which of the following is the best reason why this helps the coconut palm reproduce?",
+      "options": [
+        "The coconut flower is pollinated by sea water",
+        "The husk stops the seed from ever germinating on land",
+        "The husk lets the wind lift it up like a wing",
+        "The coconut floats and is carried by the sea to a new beach"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The husk is on the fruit, which forms after pollination."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The seed can germinate when it reaches a beach."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A coconut is heavy. It is carried by water, not the wind."
+        },
+        null
+      ],
+      "solution": [
+        "Air in the husk makes the coconut float.",
+        "Sea water carries it to a new beach where it can germinate."
+      ]
+    },
+    {
+      "key": "rq-223",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A student says: 'A flower with no ovary can never make a seed.' Which reason supports the student's statement?",
+      "options": [
+        "Seeds grow from pollen, which is made in the ovary of a flower",
+        "The ovary attracts the insects that carry the pollen",
+        "Seeds grow from ovules, which are inside the ovary",
+        "The ovary is the part that receives the pollen"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Pollen is made in the anther, and seeds do not grow from pollen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Petals attract insects, not the ovary."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The stigma receives pollen."
+        }
+      ],
+      "solution": [
+        "An ovule becomes a seed after fertilisation. Ovules are inside the ovary.",
+        "Without an ovary there are no ovules."
+      ]
+    },
+    {
+      "key": "rq-219",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Birds eat the berries of a plant. The seeds inside have a hard, smooth coat. Why is the hard coat useful to the plant?",
+      "options": [
+        "It makes the seeds light enough to be blown away by wind",
+        "It helps the seeds to stick to the bird's feathers and legs",
+        "It protects the inside from the bird's stomach juices",
+        "It lets the seeds float on water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A hard coat does not make a seed lighter. These seeds travel inside birds."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A smooth coat does not stick. Hooks would do that."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "These seeds are carried by birds, not by water."
+        }
+      ],
+      "solution": [
+        "The seeds pass through the bird's body and come out in the droppings.",
+        "The hard coat protects the inside of the seed from the juices that digest food."
+      ]
+    },
+    {
+      "key": "rq-212",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Aisha wants to find out if seeds need air to germinate. Which two set-ups in the table should she compare?",
+      "options": [
+        "P and Q",
+        "R and S",
+        "P and S",
+        "Q and R"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "P and Q differ in water. They test water, not air."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "P has cotton wool and S has tap water, so more than the air differs."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "Q is dry and R is wet, so water is different too."
+        }
+      ],
+      "solution": [
+        "R and S are both in water in a warm room. Only the air differs: R's water has no air (boiled and covered with oil)."
+      ],
+      "figure": "<svg viewBox=\"0 0 370 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"185.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four set-ups for bean seeds</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds placed in</text><rect x=\"270\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"315.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet cotton wool</text><rect x=\"270\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"315.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry cotton wool</text><rect x=\"270\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"315.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"200\" height=\"44\"/><text x=\"170.0\" y=\"149.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">boiled, cooled water</text><text x=\"170.0\" y=\"165.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">with oil on top</text><rect x=\"270\" y=\"130\" width=\"90\" height=\"44\"/><text x=\"315.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"174\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"174\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tap water with no oil</text><rect x=\"270\" y=\"174\" width=\"90\" height=\"30\"/><text x=\"315.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text></svg>"
     }
   ]
 }

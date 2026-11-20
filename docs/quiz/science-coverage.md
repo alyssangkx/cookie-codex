@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-290 shipped questions (basic 126, intermediate 87, competent 77), 182 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+336 shipped questions (basic 126, intermediate 110, competent 100), 202 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -17,9 +17,9 @@
 | Life cycles of plants and animals | Observe and compare life cycles of animals (chicken, cockroach, frog,… | yes | yes | 67 |
 | Cell and continuity of kind | Recognise that a cell is a basic unit of life [Standard Science only;… | yes | no | 0 **not yet** |
 | Cell and continuity of kind | Show an understanding that living things reproduce to ensure continui… | yes | no | 0 **not yet** |
-| Plant reproduction | Investigate the ways in which plants reproduce: spores, seeds | yes | no | 4 |
-| Plant reproduction | Describe processes in sexual reproduction of flowering plants: pollin… | yes | yes | 20 |
-| Plant reproduction | Recognise structural adaptations of fruits and seeds for dispersal (l… | yes | yes | 6 |
+| Plant reproduction | Investigate the ways in which plants reproduce: spores, seeds | yes | no | 11 |
+| Plant reproduction | Describe processes in sexual reproduction of flowering plants: pollin… | yes | yes | 52 |
+| Plant reproduction | Recognise structural adaptations of fruits and seeds for dispersal (l… | yes | yes | 13 |
 | Human reproduction | Recognise the process of fertilisation in human sexual reproduction (… | yes | no | 0 **not yet** |
 | Human reproduction | Recognise the similarity in fertilisation in sexual reproduction of f… | yes | no | 0 **not yet** |
 | Matter and states of matter | State that matter is anything that has mass and occupies space | yes | no | 0 **not yet** |
@@ -102,7 +102,7 @@
 | Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 0 **not yet** |
 | Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 47 |
 | Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 0 **not yet** |
-| Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 30 |
+| Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 69 |
 | Classify organisms into broad groups (plants, animals, fungi, bacteria) (`sci-pat-classify-groups`) | 99 | 0 **not yet** |
 | Respiratory and circulatory systems (lungs, heart, blood) (`sci-pat-resp-circulatory`) | 98 | 0 **not yet** |
 | Properties and uses of materials (`sci-pat-material-properties`) | 97 | 0 **not yet** |
@@ -110,14 +110,14 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 0 **not yet** |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 3 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 7 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 77 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 0 **not yet** |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 0 **not yet** |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 5 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 8 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 9 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 0 **not yet** |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 0 **not yet** |
