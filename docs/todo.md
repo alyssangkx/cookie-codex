@@ -174,6 +174,7 @@ outside the repo.
   - spent in a fixed-price shop where the child picks the card;
   - rarer cards are achievement-only: Super Epic for topic competency, Legendary for a WA/SA paper at AL1–AL2, and
     Beast, Dragon, Witch and Ancient for milestones.
+- [x] 20 Nov: owner confirmed the Chinese booklet groups for Super Epic: Paper 2 Booklet A (语文应用, 短文填空, 阅读理解一), Booklet B (完成对话, 阅读理解二), Paper 3 (听力). Already built (`CHI_BOOKLET` in `train.ts`).
 - [x] 20 Nov: owner answered the economy questionnaire, all as recommended:
   - coins are called Crumbs, earned on the AL table;
   - prices are 30, 60 and 120;
