@@ -130,6 +130,8 @@ for f, data in _all:
         elif len(ex) != 4 or ex[a] is not None or any(not (x and x.get("tag") and x.get("why")) for i, x in enumerate(ex) if i != a):
             e("explain must be null for the answer and {tag, why} for each wrong option")
         if not it.get("solution"): e("missing solution")
+        elif not (isinstance(it["solution"], list) and all(isinstance(x, str) and x.strip() for x in it["solution"])):
+            e("solution must be a list of non-empty strings (one step each)")
         if "figure" in it:
             ans = opts[a] if isinstance(a, int) and not isinstance(a, bool) and 0 <= a < len(opts) and isinstance(opts[a], str) else None
             for msg in figure_errors(it["figure"], ans, opts if isinstance(opts, list) else ()): e(msg)

@@ -78,7 +78,7 @@ def main():
                 "options": [it["options"][i] for i in order],
                 "answer": order.index(it["answer"]),
                 "explain": [it["explain"][i] for i in order],
-                "solution": list(it["solution"]) + gloss_line(it),
+                "solution": ([it["solution"]] if isinstance(it["solution"], str) else list(it["solution"])) + gloss_line(it),  # never split a string into letters
                 "params": {"key": it["key"], "subtopic": sub},
                 **({"figure": it["figure"]} if it.get("figure") else {}),
             })
