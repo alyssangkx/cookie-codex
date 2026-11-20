@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-748 shipped questions (basic 251, intermediate 251, competent 246), 342 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+749 shipped questions (basic 251, intermediate 251, competent 247), 342 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -43,7 +43,7 @@
 | Respiratory and circulatory systems | Compare the ways substances are transported within plants and humans … | yes | yes | 0 **not yet** |
 | Respiratory and circulatory systems | Recognise the integration of the digestive, respiratory and circulato… | yes | no | 0 **not yet** |
 | Plant transport system | Identify the parts of the plant transport system and describe their f… | yes | yes | 22 |
-| Plant transport system | Investigate how food and water are transported in the plant | yes | yes | 54 |
+| Plant transport system | Investigate how food and water are transported in the plant | yes | yes | 55 |
 | Electric circuits | Recognise that a circuit with an energy source (battery) and componen… | yes | yes | 0 **not yet** |
 | Electric circuits | Show an understanding that a closed circuit allows current to flow | yes | yes | 0 **not yet** |
 | Electric circuits | Construct simple circuits from circuit diagrams | yes | yes | 0 **not yet** |
@@ -121,7 +121,7 @@
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 61 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
-| Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
+| Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 81 |
 | Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 60 |
 | Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
 | Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |

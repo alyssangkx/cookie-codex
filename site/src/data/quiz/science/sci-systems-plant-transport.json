@@ -9809,6 +9809,46 @@
     "key": "pt-084",
     "subtopic": "sci-systems-plant-transport-parts"
    }
+  },
+  {
+   "id": "scisyst-11cd5d5293",
+   "topic": "sci-systems-plant-transport",
+   "level": "competent",
+   "template": "sci-pat-plant-transport",
+   "outcomes": [
+    "sci-systems-plant-transport-parts-2"
+   ],
+   "stem": "Two identical leafy stems stand in equal amounts of water. Stem P is in a warm, dry, windy place. Stem Q is in a cool, damp, still room. After a day, in which beaker has the water level fallen more?",
+   "options": [
+    "Both beakers the same, because the stems are identical",
+    "The beaker with stem Q, because the water cannot evaporate from its leaves",
+    "The beaker with stem P, because its leaves lose more water into the air",
+    "The beaker with stem Q, because cool water travels up faster"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong-idea",
+     "why": "The stems are identical but the places are not. Warm, dry, windy air makes leaves lose water faster."
+    },
+    {
+     "tag": "reversed",
+     "why": "Damp, still air slows the loss of water from leaves, so stem Q takes up less water."
+    },
+    null,
+    {
+     "tag": "wrong-idea",
+     "why": "Water moves up because the leaves lose water, and cool damp air slows this."
+    }
+   ],
+   "solution": [
+    "Warm, dry, windy air makes the leaves lose water faster.",
+    "The stem then takes up more water to replace it, so the water level falls more in beaker P."
+   ],
+   "params": {
+    "key": "pt-085",
+    "subtopic": "sci-systems-plant-transport-parts"
+   }
   }
  ]
 }
