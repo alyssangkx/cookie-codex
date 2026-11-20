@@ -1481,6 +1481,47 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 256\" font-family=\"Arial, sans-serif\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M55 170 L145 170 L135 225 L65 225 Z\"/><line x1=\"50\" y1=\"170\" x2=\"150\" y2=\"170\" stroke-width=\"4\"/><line x1=\"100\" y1=\"170\" x2=\"100\" y2=\"85\" stroke-width=\"3\"/><ellipse cx=\"78\" cy=\"115\" rx=\"22\" ry=\"9\" transform=\"rotate(-25 78 115)\"/><ellipse cx=\"122\" cy=\"105\" rx=\"22\" ry=\"9\" transform=\"rotate(25 122 105)\"/><ellipse cx=\"78\" cy=\"145\" rx=\"20\" ry=\"8\" transform=\"rotate(-20 78 145)\"/><ellipse cx=\"122\" cy=\"140\" rx=\"20\" ry=\"8\" transform=\"rotate(20 122 140)\"/><path d=\"M40 172 L40 70 Q40 30 100 30 Q160 30 160 70 L160 172\" stroke-dasharray=\"5 4\"/><text x=\"100\" y=\"248\" font-size=\"18\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">P</text><path d=\"M235 170 L325 170 L315 225 L245 225 Z\"/><line x1=\"230\" y1=\"170\" x2=\"330\" y2=\"170\" stroke-width=\"4\"/><line x1=\"280\" y1=\"170\" x2=\"280\" y2=\"85\" stroke-width=\"3\"/><path d=\"M220 172 L220 70 Q220 30 280 30 Q340 30 340 70 L340 172\" stroke-dasharray=\"5 4\"/><text x=\"280\" y=\"248\" font-size=\"18\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">Q</text><text x=\"180\" y=\"14\" font-size=\"12\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\">Plastic sheet covers the soil in each pot</text></svg>"
   },
   {
+   "id": "scisyst-70e52db547",
+   "topic": "sci-systems-plant-parts",
+   "level": "competent",
+   "template": "sci-pat-read-data",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-2"
+   ],
+   "stem": "The chart shows the water lost from three set-ups after 3 days. Which statement is the best conclusion?",
+   "options": [
+    "Taking off the leaves greatly cuts the water a plant loses",
+    "Leaves take in water from the cylinder",
+    "Plants lose water only when it is dark",
+    "Roots lose most of the water that a plant takes in"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong-conclusion",
+     "why": "Water was lost from the cylinder, not gained by it. The plant with leaves lost the most."
+    },
+    {
+     "tag": "wrong-conclusion",
+     "why": "The chart does not compare light and dark, so it cannot show this."
+    },
+    {
+     "tag": "wrong-conclusion",
+     "why": "The set-up with the leaves removed lost much less water, so the leaves are the main place."
+    }
+   ],
+   "solution": [
+    "Set-up A (with leaves) lost 10 ml and set-up B (no leaves) lost 2 ml.",
+    "So most water is lost through the leaves."
+   ],
+   "params": {
+    "key": "pp-759",
+    "subtopic": "sci-systems-plant-parts-fn"
+   },
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 256\" font-family=\"Arial, sans-serif\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><line x1=\"56\" y1=\"150\" x2=\"60\" y2=\"150\"/><text x=\"52\" y=\"154.0\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"56\" y1=\"128\" x2=\"60\" y2=\"128\"/><text x=\"52\" y=\"132.33333333333334\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"56\" y1=\"107\" x2=\"60\" y2=\"107\"/><text x=\"52\" y=\"110.66666666666666\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"56\" y1=\"85\" x2=\"60\" y2=\"85\"/><text x=\"52\" y=\"89.0\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"56\" y1=\"63\" x2=\"60\" y2=\"63\"/><text x=\"52\" y=\"67.33333333333333\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"56\" y1=\"42\" x2=\"60\" y2=\"42\"/><text x=\"52\" y=\"45.66666666666666\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"56\" y1=\"20\" x2=\"60\" y2=\"20\"/><text x=\"52\" y=\"24.0\" font-size=\"11\" text-anchor=\"end\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"60\" y1=\"20\" x2=\"60\" y2=\"150\"/><line x1=\"60\" y1=\"150\" x2=\"340\" y2=\"150\"/><text x=\"14\" y=\"85\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\" transform=\"rotate(-90 14 85)\">Water lost in 3 days (ml)</text><rect x=\"95\" y=\"42\" width=\"46\" height=\"108\"/><text x=\"118\" y=\"166\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">A</text><rect x=\"175\" y=\"128\" width=\"46\" height=\"22\"/><text x=\"198\" y=\"166\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">B</text><text x=\"278\" y=\"166\" font-size=\"14\" text-anchor=\"middle\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">C</text><text x=\"60\" y=\"190\" font-size=\"12\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\">A: plant with all its leaves</text><text x=\"60\" y=\"208\" font-size=\"12\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\">B: same kind of plant, all leaves removed</text><text x=\"60\" y=\"226\" font-size=\"12\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\">C: no plant (water only)</text><text x=\"60\" y=\"244\" font-size=\"12\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\">Oil covers the water in every set-up.</text></svg>"
+  },
+  {
    "id": "scisyst-6052fab477",
    "topic": "sci-systems-plant-parts",
    "level": "competent",
@@ -2758,41 +2799,41 @@
    }
   },
   {
-   "id": "scisyst-75ff1b4718",
+   "id": "scisyst-9241966669",
    "topic": "sci-systems-plant-parts",
    "level": "intermediate",
    "template": "sci-pat-plant-parts-function",
    "outcomes": [
     "sci-systems-plant-parts-fn-1"
    ],
-   "stem": "We eat the green heads of broccoli. These heads are bunches of flower buds. Which part of the broccoli plant do we eat?",
+   "stem": "We eat the green heads of broccoli. These heads are bunches of buds that have not opened. Which part of the broccoli plant do we eat?",
    "options": [
     "The leaves",
-    "The seeds",
     "The flowers",
-    "The roots"
+    "The roots",
+    "The seeds"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
      "tag": "wrong-part",
      "why": "The heads are buds that would open into flowers. They are not leaves."
     },
-    {
-     "tag": "wrong-part",
-     "why": "The buds have not made seeds yet."
-    },
     null,
     {
      "tag": "wrong-part",
      "why": "The heads are above the ground. Roots are under the soil."
+    },
+    {
+     "tag": "wrong-part",
+     "why": "The buds have not made seeds yet."
     }
    ],
    "solution": [
     "The heads are flower buds, so we eat the flowers of the plant."
    ],
    "params": {
-    "key": "pp-118",
+    "key": "pp-818",
     "subtopic": "sci-systems-plant-parts-fn"
    }
   },

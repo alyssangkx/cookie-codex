@@ -1177,18 +1177,6 @@
   "fingerprint": "35c397d90f6126d0",
   "round": "sci-r1-2026-11-18"
  },
- "sci-systems-plant-parts-fn|pp-059": {
-  "ship": false,
-  "reasons": [
-   "factcheck: natural_ok false",
-   "factcheck: figure_ok false"
-  ],
-  "notes": [
-   "Stem/options say 'the plant leaves through its leaves' (ambiguous 'leaves' verb vs noun) and option 1 mentions a 'cylinder' that is not in the figure. Fix: 'Most of the water lost by the plant escapes through its leaves'; replace 'cylinder' with 'the water'."
-  ],
-  "fingerprint": "76d55ed905ed5516",
-  "round": "sci-r1-2026-11-18"
- },
  "sci-systems-plant-parts-fn|pp-060": {
   "ship": true,
   "reasons": [],
@@ -2500,16 +2488,6 @@
   "fingerprint": "cd50d376a769e4f1",
   "round": "sci-r4-2026-11-20"
  },
- "sci-systems-plant-parts-fn|pp-118": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "r3: original item written to refill the sub-topic; item-by-item check: answer is the only correct option, each distractor wrong for its stated reason, figure (if any) agrees with the stem and does not name the answer, explanations fit",
-   "r4 (code review): figure no longer shows the answer and/or option wording balanced; re-checked item by item (answer still the only correct option, explanations fit, figure agrees with stem)"
-  ],
-  "fingerprint": "2216fe273825020f",
-  "round": "sci-r4-2026-11-20"
- },
  "sci-systems-plant-parts-fn|pp-119": {
   "ship": true,
   "reasons": [],
@@ -2802,15 +2780,6 @@
    "item-by-item pass: one defensible answer, distractors have stated reasons, figure/table shows no answer, fair-test pairs differ in one variable, combination options have exactly one correct set; length/echo lint run"
   ],
   "fingerprint": "7e8273666409614c",
-  "round": "sci-fill-repro-2026-11-20"
- },
- "sci-cycles-repro-plants|rq-118": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "item-by-item pass: one defensible answer, distractors have stated reasons, figure/table shows no answer, fair-test pairs differ in one variable, combination options have exactly one correct set; length/echo lint run"
-  ],
-  "fingerprint": "502a9e68e05751c0",
   "round": "sci-fill-repro-2026-11-20"
  },
  "sci-cycles-repro-plants|rq-119": {
@@ -3315,15 +3284,6 @@
    "item-by-item pass: one defensible answer, distractors name a misconception (camel hump water, wrong habitat, reversed graph reading), tables/graphs show only data, combination options have exactly one correct set; length lint run"
   ],
   "fingerprint": "9b62451fa03912ab",
-  "round": "sci-fill-adapt-2026-11-20"
- },
- "sci-interactions-env-adapt|ae-216": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "item-by-item pass: one defensible answer, distractors name a misconception (camel hump water, wrong habitat, reversed graph reading), tables/graphs show only data, combination options have exactly one correct set; length lint run"
-  ],
-  "fingerprint": "812ab09cd40fa761",
   "round": "sci-fill-adapt-2026-11-20"
  },
  "sci-interactions-env-adapt|ae-217": {
@@ -4100,15 +4060,6 @@
   "fingerprint": "ff6fc74c0fc69dbb",
   "round": "sci-fill-forces-investigate-2026-11-20"
  },
- "sci-interactions-forces-investigate|fi-021": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "item-by-item pass: numbers re-computed (spring 2 cm per 50 g, sums of weights), fair-test pairs differ in one variable, removed a figure that gave the answer, no stem/option contradictions; Moon items kept to weight vs mass"
-  ],
-  "fingerprint": "3e1081e116d2975f",
-  "round": "sci-fill-forces-investigate-2026-11-20"
- },
  "sci-interactions-forces-investigate|fi-022": {
   "ship": true,
   "reasons": [],
@@ -4379,15 +4330,6 @@
   "fingerprint": "d5dfa7eb8d967559",
   "round": "sci-fill-forces-investigate-2026-11-20"
  },
- "sci-interactions-forces-investigate|fi-204": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "item-by-item pass: numbers re-computed (spring 2 cm per 50 g, sums of weights), fair-test pairs differ in one variable, removed a figure that gave the answer, no stem/option contradictions; Moon items kept to weight vs mass"
-  ],
-  "fingerprint": "aaaba270f514df3c",
-  "round": "sci-fill-forces-investigate-2026-11-20"
- },
  "sci-interactions-forces-investigate|fi-207": {
   "ship": true,
   "reasons": [],
@@ -4404,15 +4346,6 @@
    "item-by-item pass: numbers re-computed (spring 2 cm per 50 g, sums of weights), fair-test pairs differ in one variable, removed a figure that gave the answer, no stem/option contradictions; Moon items kept to weight vs mass"
   ],
   "fingerprint": "9572770f72e24494",
-  "round": "sci-fill-forces-investigate-2026-11-20"
- },
- "sci-interactions-forces-investigate|fi-209": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "item-by-item pass: numbers re-computed (spring 2 cm per 50 g, sums of weights), fair-test pairs differ in one variable, removed a figure that gave the answer, no stem/option contradictions; Moon items kept to weight vs mass"
-  ],
-  "fingerprint": "11a90c1ba1cb07d6",
   "round": "sci-fill-forces-investigate-2026-11-20"
  },
  "sci-interactions-forces-investigate|fi-210": {
@@ -5513,15 +5446,6 @@
   "fingerprint": "20ffad10846368d4",
   "round": "sci-fill-env-survival-2026-11-20"
  },
- "sci-interactions-env-survival|es-025": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "Written in PSLE style; verified item by item against the web or graph; one defensible answer; distractors with stated reasons"
-  ],
-  "fingerprint": "178e727e00ac3343",
-  "round": "sci-fill-env-survival-2026-11-20"
- },
  "sci-interactions-env-survival|es-101": {
   "ship": true,
   "reasons": [],
@@ -6035,15 +5959,6 @@
   "fingerprint": "4dc0904ee74fa9fd",
   "round": "sci-fill-photo-req-2026-11-20"
  },
- "sci-energy-photo-requirements|ph-013": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "Written in PSLE style; verified item by item against the set-up, table or graph; one defensible answer; distractors with stated reasons"
-  ],
-  "fingerprint": "cc975ce25f36becf",
-  "round": "sci-fill-photo-req-2026-11-20"
- },
  "sci-energy-photo-requirements|ph-014": {
   "ship": true,
   "reasons": [],
@@ -6287,15 +6202,6 @@
   "fingerprint": "32b4540931efd52b",
   "round": "sci-fill-photo-req-2026-11-20"
  },
- "sci-energy-photo-requirements|ph-117": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "Written in PSLE style; verified item by item against the set-up, table or graph; one defensible answer; distractors with stated reasons"
-  ],
-  "fingerprint": "15a82f1235bb3ac8",
-  "round": "sci-fill-photo-req-2026-11-20"
- },
  "sci-energy-photo-requirements|ph-118": {
   "ship": true,
   "reasons": [],
@@ -6510,15 +6416,6 @@
    "Written in PSLE style; verified item by item against the set-up, table or graph; one defensible answer; distractors with stated reasons"
   ],
   "fingerprint": "be124746b92fc6f5",
-  "round": "sci-fill-photo-req-2026-11-20"
- },
- "sci-energy-photo-requirements|ph-217": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "Written in PSLE style; verified item by item against the set-up, table or graph; one defensible answer; distractors with stated reasons"
-  ],
-  "fingerprint": "fb787fb80423c4f5",
   "round": "sci-fill-photo-req-2026-11-20"
  },
  "sci-energy-photo-requirements|ph-218": {
@@ -7329,15 +7226,6 @@
    "blind-verified (text) and figures rendered; one defensible answer"
   ],
   "fingerprint": "dd4ec3a52701ecba",
-  "round": "sci-fill-heat-effects-2026-11-20"
- },
- "sci-energy-heat-effects|he-210": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "blind-verified (text) and figures rendered; one defensible answer"
-  ],
-  "fingerprint": "f89a47d4af2ae34c",
   "round": "sci-fill-heat-effects-2026-11-20"
  },
  "sci-energy-heat-effects|he-211": {
@@ -8537,15 +8425,6 @@
   "fingerprint": "1ff2fa87ba1d352b",
   "round": "sci-fill-circuit-2026-11-20"
  },
- "sci-systems-circuit|ci-113": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "blind-verified; stems fixed from verification"
-  ],
-  "fingerprint": "83f48e7d018a7479",
-  "round": "sci-fill-circuit-2026-11-20"
- },
  "sci-systems-circuit|ci-114": {
   "ship": true,
   "reasons": [],
@@ -8823,15 +8702,6 @@
    "blind-verified; stems fixed from verification"
   ],
   "fingerprint": "429a02513b2f792d",
-  "round": "sci-fill-circuit-2026-11-20"
- },
- "sci-systems-circuit|ci-220": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "blind-verified; stems fixed from verification"
-  ],
-  "fingerprint": "e2c646adb0c146d1",
   "round": "sci-fill-circuit-2026-11-20"
  },
  "sci-systems-circuit|ci-221": {
@@ -9455,15 +9325,6 @@
   "fingerprint": "63a29ef0afc23034",
   "round": "sci-fill-circuit-vars-2026-11-20"
  },
- "sci-systems-circuit-vars|cv-215": {
-  "ship": true,
-  "reasons": [],
-  "notes": [
-   "blind-verified; stems fixed from verification"
-  ],
-  "fingerprint": "acee317a474d5413",
-  "round": "sci-fill-circuit-vars-2026-11-20"
- },
  "sci-systems-circuit-vars|cv-216": {
   "ship": true,
   "reasons": [],
@@ -9553,5 +9414,140 @@
   ],
   "fingerprint": "b8bfd29a0d8e180f",
   "round": "sci-fill-circuit-vars-2026-11-20"
+ },
+ "sci-systems-circuit-vars|cv-915": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "32e4de6d4d7107d1",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-systems-circuit|ci-813": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "04d0c82703ab90a7",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-systems-circuit|ci-920": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "d9e8f127a29ead3f",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-energy-photo-requirements|ph-713": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "3f4a39d596b45e35",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-energy-photo-requirements|ph-817": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "de9f2dc849607007",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-energy-photo-requirements|ph-917": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "8cd91f4462feed5d",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-systems-plant-parts-fn|pp-759": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "238527e11f3486e1",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-interactions-env-survival|es-725": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "668daa4a88d067a4",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-interactions-forces-investigate|fi-721": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "b620c715355f86a5",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-interactions-forces-investigate|fi-904": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "f6b194d3e9a4baff",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-interactions-forces-investigate|fi-909": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "e884a82c12f6f7f5",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-energy-heat-effects|he-910": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "1e4875452265f6a7",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-interactions-env-adapt|ae-916": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "d5e801fbd1904301",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-systems-plant-parts-fn|pp-818": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "eadeb3ca91e6ad88",
+  "round": "sci-fill-step0b-2026-11-20"
+ },
+ "sci-cycles-repro-plants|rq-818": {
+  "ship": true,
+  "reasons": [],
+  "notes": [
+   "WARN fix: reworded, new key; one defensible answer unchanged"
+  ],
+  "fingerprint": "9ebf356952b779c6",
+  "round": "sci-fill-step0b-2026-11-20"
  }
 }

@@ -2988,7 +2988,7 @@
    }
   },
   {
-   "id": "sciinte-c68cd9f084",
+   "id": "sciinte-f23353c418",
    "topic": "sci-interactions-environment",
    "level": "competent",
    "template": "sci-pat-human-impact",
@@ -2997,16 +2997,16 @@
    ],
    "stem": "Which shows the correct chain of events that leads to global warming?",
    "options": [
-    "More fuel burnt, less carbon dioxide in the air, more heat trapped, Earth becomes warmer",
+    "More fuel burnt, more carbon dioxide in the air, less heat trapped, Earth becomes cooler",
     "More fuel burnt, more carbon dioxide in the air, more heat trapped, Earth becomes warmer",
     "More trees planted, more carbon dioxide in the air, more heat trapped, Earth becomes warmer",
-    "More fuel burnt, more carbon dioxide in the air, less heat trapped, Earth becomes cooler"
+    "More fuel burnt, more oxygen in the air, more heat trapped, Earth becomes warmer"
    ],
    "answer": 1,
    "explain": [
     {
      "tag": "wrong-link",
-     "why": "Burning fuel gives more carbon dioxide, not less."
+     "why": "More carbon dioxide traps more heat and the Earth warms."
     },
     null,
     {
@@ -3015,14 +3015,14 @@
     },
     {
      "tag": "wrong-link",
-     "why": "More carbon dioxide traps more heat and the Earth warms."
+     "why": "Burning fuel gives more carbon dioxide, not less."
     }
    ],
    "solution": [
     "Burning fuel adds carbon dioxide. Carbon dioxide traps heat, so the Earth becomes warmer."
    ],
    "params": {
-    "key": "ae-216",
+    "key": "ae-916",
     "subtopic": "sci-interactions-env-adapt"
    }
   },
@@ -4208,19 +4208,19 @@
    }
   },
   {
-   "id": "sciinte-adbe6d920c",
+   "id": "sciinte-9179c18b42",
    "topic": "sci-interactions-environment",
    "level": "basic",
    "template": "sci-pat-food-chain-web",
    "outcomes": [
     "sci-interactions-env-survival-1"
    ],
-   "stem": "A frog is kept in a dry box with no water for many days. Which factor is affecting the frog?",
+   "stem": "A frog is kept in a very dry box for many days. Which factor is affecting the frog?",
    "options": [
     "The amount of light",
     "The amount of water",
-    "The number of insects",
-    "The colour of the box"
+    "The colour of the box",
+    "The number of insects"
    ],
    "answer": 1,
    "explain": [
@@ -4231,18 +4231,18 @@
     null,
     {
      "tag": "wrong-factor",
-     "why": "The story is about the lack of water."
+     "why": "The colour of a box does not affect a frog's survival."
     },
     {
      "tag": "wrong-factor",
-     "why": "The colour of a box does not affect a frog's survival."
+     "why": "The story is about the lack of water."
     }
    ],
    "solution": [
     "Frogs need a damp place, and a lack of water makes it hard for them to survive."
    ],
    "params": {
-    "key": "es-025",
+    "key": "es-725",
     "subtopic": "sci-interactions-env-survival"
    }
   },

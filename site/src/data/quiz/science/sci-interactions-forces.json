@@ -3737,41 +3737,41 @@
    }
   },
   {
-   "id": "sciinte-8df160491f",
+   "id": "sciinte-139f53e9f5",
    "topic": "sci-interactions-forces",
    "level": "basic",
    "template": "sci-pat-friction-spring-weight",
    "outcomes": [
     "sci-interactions-forces-investigate-3"
    ],
-   "stem": "An apple is cut into two equal halves. What is the weight of one half, compared with the whole apple?",
+   "stem": "An apple is cut into two equal pieces. How does the weight of one piece compare with the weight of the whole apple?",
    "options": [
-    "It is the same as the whole apple",
-    "It has no weight",
-    "It is half the weight of the whole apple",
-    "It is twice the weight of the whole apple"
+    "It is half as heavy as the whole apple",
+    "It is as heavy as the whole apple",
+    "It is twice as heavy as the whole apple",
+    "It has no weight"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong-idea",
      "why": "Half the apple has half the matter, so half the weight."
     },
     {
      "tag": "wrong-idea",
-     "why": "Every object has weight."
+     "why": "Half an apple cannot weigh more than a whole one."
     },
-    null,
     {
      "tag": "wrong-idea",
-     "why": "Half an apple cannot weigh more than a whole one."
+     "why": "Every object has weight."
     }
    ],
    "solution": [
     "Half the apple has half as much matter, so the Earth pulls with half the force."
    ],
    "params": {
-    "key": "fi-021",
+    "key": "fi-721",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5051,41 +5051,41 @@
    }
   },
   {
-   "id": "sciinte-8511f4d939",
+   "id": "sciinte-656123b659",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-friction-spring-weight",
    "outcomes": [
     "sci-interactions-forces-investigate-2"
    ],
-   "stem": "A spring was stretched by a very heavy load. When the load was removed, the spring did not go back to its first length. What is the most likely reason?",
+   "stem": "A spring carried a very heavy load. When the load was removed, the spring did not go back to its first length. What is the most likely reason?",
    "options": [
-    "The load was too light",
     "The spring was not hung from a stand",
+    "The spring was too short at the start",
     "The spring was stretched too much",
-    "The spring was too short at the start"
+    "The load was too light"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong-reason",
-     "why": "A light load does not damage a spring."
+     "why": "A stand has nothing to do with it."
     },
     {
      "tag": "wrong-reason",
-     "why": "A stand has nothing to do with it."
+     "why": "A short spring is not damaged by length alone."
     },
     null,
     {
      "tag": "wrong-reason",
-     "why": "A short spring is not damaged by length alone."
+     "why": "A light load does not damage a spring."
     }
    ],
    "solution": [
     "A spring that is stretched too far is damaged and cannot go back to its first length."
    ],
    "params": {
-    "key": "fi-204",
+    "key": "fi-904",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5168,41 +5168,41 @@
    }
   },
   {
-   "id": "sciinte-0046b3a68a",
+   "id": "sciinte-045c2f7824",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-friction-spring-weight",
    "outcomes": [
     "sci-interactions-forces-investigate-1"
    ],
-   "stem": "Mei pushes the same box with the same push on a rough floor and on a smooth floor. Which statement is correct?",
+   "stem": "Mei pushes the same box with the same push once on a floor covered with sandpaper and once on a polished floor. Which statement is correct?",
    "options": [
+    "The box travels further on the smooth floor because there is less friction",
     "The box travels further on the rough floor because the box is heavier there",
-    "The box travels further on the rough floor because there is more friction",
     "The box travels the same distance because the push is the same",
-    "The box travels further on the smooth floor because there is less friction"
+    "The box travels further on the rough floor because there is more friction"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong-reason",
      "why": "The box weighs the same on both floors."
     },
     {
-     "tag": "reversed",
-     "why": "More friction stops the box sooner."
-    },
-    {
      "tag": "wrong-idea",
      "why": "Different friction gives different distances."
     },
-    null
+    {
+     "tag": "reversed",
+     "why": "More friction stops the box sooner."
+    }
    ],
    "solution": [
     "Less friction on the smooth floor means the box slows down more slowly and goes further."
    ],
    "params": {
-    "key": "fi-209",
+    "key": "fi-909",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },

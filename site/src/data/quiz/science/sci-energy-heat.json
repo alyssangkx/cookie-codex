@@ -2324,31 +2324,31 @@
    "figure": "<svg viewBox=\"0 0 330 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"70.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Wrapped in</text><rect x=\"130\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 20 min (°C)</text><rect x=\"10\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">nothing</text><rect x=\"130\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">45</text><rect x=\"10\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cloth</text><rect x=\"130\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">62</text><rect x=\"10\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">aluminium foil</text><rect x=\"130\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text></svg>"
   },
   {
-   "id": "sciener-811564c6a2",
+   "id": "sciener-e8823c149b",
    "topic": "sci-energy-heat",
    "level": "competent",
    "template": "sci-pat-fair-test-design",
    "outcomes": [
     "sci-energy-heat-effects-2"
    ],
-   "stem": "In the experiment with three cups wrapped in cloth, foil or nothing, which should NOT be the same in each cup?",
+   "stem": "In the experiment with three cups covered with cloth, foil or nothing, which should NOT be the same in each cup?",
    "options": [
-    "The starting temperature of the water",
     "The amount of water in each cup",
     "What the cup is wrapped in",
+    "The starting temperature of the water",
     "The time before the temperature is read"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
     {
      "tag": "fixed-variable",
      "why": "This must be the same."
     },
+    null,
     {
      "tag": "fixed-variable",
      "why": "This must be the same."
     },
-    null,
     {
      "tag": "fixed-variable",
      "why": "This must be the same."
@@ -2358,7 +2358,7 @@
     "The wrap is the one thing that is changed on purpose."
    ],
    "params": {
-    "key": "he-210",
+    "key": "he-910",
     "subtopic": "sci-energy-heat-effects"
    }
   },

@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-1057 shipped questions (basic 353, intermediate 354, competent 350), 471 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+1058 shipped questions (basic 353, intermediate 354, competent 351), 472 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -34,7 +34,7 @@
 | Water cycle and conservation | Recognise the importance of water to life processes [Standard Science… | yes | no | 0 **not yet** |
 | Water cycle and conservation | Describe the impact of water pollution on Earth's water resources [St… | yes | no | 0 **not yet** |
 | Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 46 |
-| Parts of a plant | Observe plant parts | yes | yes | 29 |
+| Parts of a plant | Observe plant parts | yes | yes | 30 |
 | Overview of human systems | Identify the human systems in the body and state their functions (dig… | yes | no | 0 **not yet** |
 | Digestive system | Identify the parts of the human digestive system (mouth, gullet, stom… | yes | yes | 0 **not yet** |
 | Gases in air | Recognise that air is made up of gases such as nitrogen, carbon dioxi… | yes | no | 0 **not yet** |
@@ -110,7 +110,7 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 64 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 65 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 78 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
