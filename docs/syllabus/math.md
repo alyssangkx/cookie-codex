@@ -47,7 +47,7 @@ Levels are where MOE first lists the outcome; PSLE assesses all levels. "MCQ-tes
 | Statistics | Data Representation and Interpretation | P1-P4 (P1, P2, P3, P4) | 6 | 6/6 | 6/6 |
 | Statistics | Data Analysis | P6-P6 (P6) | 2 | 2/2 | 0/2 |
 
-Speed is not a topic in the 2021 syllabus (no match in the MOE text); Rate (P5) replaces it.
+Speed is not a topic in the 2021 syllabus (no match in the MOE text); Rate (P5) replaces it. School papers still set speed questions under Rate (202 past-paper questions 2018-2026, 189 tagged Rate), so the owner asked for them on 21 Nov 2026: `topic_rate.py` has six speed templates (distance-speed-time, minutes and m/s, average speed over two parts, meeting).
 
 ## Unverified
 

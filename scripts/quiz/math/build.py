@@ -41,8 +41,8 @@ PER_WEIGHT = 10  #at most this many questions per unit of template weight, so a 
 MARKS_SCALE = 14  # questions per level for each 1% of past-paper marks
 
 # Share of Math marks per sub-topic in the 2018-2026 top-school prelim papers (13,986 tagged items, marks-weighted;
-# aggregate counts only; recomputed 20 Nov 2026 from all nine years). Sub-topics under 1.8% get the floor. Speed is not in
-# the syllabus and has no entry.
+# aggregate counts only; recomputed 20 Nov 2026 from all nine years). Sub-topics under 1.8% get the floor. Speed has no
+# entry of its own: its questions are part of Rate (topic_rate.py), as school papers file them.
 PAPER_MARKS_PCT = {
     "math-whole-numbers-addition-subtraction-multiplication-and-division": 17.6,
     "math-geometry-angles": 11.2,

@@ -51,7 +51,6 @@ NEGATIVE = [
     ("science", "Which particle in an atom has a negative charge?", ["Proton", "Neutron", "Electron", "Nucleus"]),
     ("science", "A wire has a voltage of 6 V across it and a current of 2 A. What is its resistance?", ["3 ohms", "4 ohms", "8 ohms", "12 ohms"]),
     ("science", "Which of these is an example of a plant reproducing from its leaves?", ["Bryophyllum", "Rose", "Hibiscus", "Balsam"]),
-    ("maths", "A car travels 180 km in 3 hours. What is its average speed?", ["50 km/h", "60 km/h", "90 km/h", "540 km/h"]),
     ("maths", "Solve the quadratic equation x² - 5x + 6 = 0.", ["x = 1 or 6", "x = 2 or 3", "x = -2 or -3", "x = 5 or 6"]),
     ("maths", "What is the value of sin 30°?", ["0.5", "0.707", "0.866", "1"]),
     ("maths", "What is the gradient of the straight line y = 3x + 2?", ["2", "3", "5", "6"]),

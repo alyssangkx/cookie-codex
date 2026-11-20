@@ -13,13 +13,13 @@ Each row is a question type found in the top-school P5/P6 papers (`scripts/quiz/
 | measurement | 6 | 6 | — |
 | money | 5 | 5 | — |
 | percentage | 6 | 6 | — |
-| rate | 3 | 3 | — |
+| rate | 6 | 6 | — |
 | ratio | 11 | 11 | — |
 | whole | 19 | 19 | — |
 
-**103 of 103 question types covered.**
+**106 of 106 question types covered.**
 
-Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-distance-time-basic, math-pat-speed-two-runners-finish, math-pat-speed-catch-up-meet
+Not counted (outside the 2021 syllabus, which has no Speed): none
 
 ## algebra
 
@@ -141,8 +141,11 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | Type | Level | Papers | Diagram | Generators |
 |---|---|---|---|---|
 | math-pat-unitary-rate-basic | basic | 72 |  | total_from_rate (basic) |
+| math-pat-speed-distance-time-basic | intermediate | 22 |  | speed_distance (basic), speed_time (basic), speed_minutes (intermediate), speed_metres_seconds (intermediate) |
+| math-pat-speed-catch-up-meet | competent | 22 |  | meet_towards_each_other (competent) |
 | math-pat-tank-fill-drain-net-rate | competent | 21 | yes | tank_fill_drain (competent) |
 | math-pat-two-machines-rate-work | competent | 12 |  | two_machines (competent) |
+| math-pat-speed-two-runners-finish | competent | 5 |  | average_speed_two_parts (competent) |
 
 ## ratio
 
@@ -283,7 +286,7 @@ Not counted (outside the 2021 syllabus, which has no Speed): math-pat-speed-dist
 | percentage-percentage-04 | P6 | 6 templates |
 | percentage-percentage-05 | P6 | 2 templates |
 | rate-rate-01 | P5 | 4 templates |
-| rate-rate-02 | P5 | 13 templates |
+| rate-rate-02 | P5 | 19 templates |
 | ratio-ratio-01 | P6 | 5 templates |
 | ratio-ratio-02 | P6 | 6 templates |
 | ratio-ratio-03 | P6 | 6 templates |

@@ -29,9 +29,9 @@ for ts in REGISTRY.values():
         for pid in re.findall(r"math-pat-[a-z0-9-]+", t.__doc__ or ""):
             covers[pid].append(f"{t.key} ({t.level})")
 
-# Speed was dropped from the 2021 primary syllabus (examined at PSLE from 2026); older papers still have it.
-OUT = [p for p in patterns if "speed" in p["id"]]
-patterns = [p for p in patterns if "speed" not in p["id"]]
+# Speed: not a topic of its own in the 2021 syllabus, but school papers set it under Rate, so it counts again since the
+# owner asked for it (21 Nov 2026, past-paper precedent rule); topic_rate.py covers the three speed types.
+OUT = []
 
 rows = defaultdict(list)
 for p in patterns:

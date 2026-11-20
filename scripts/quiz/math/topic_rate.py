@@ -1,6 +1,9 @@
 """Rate (math-rate): generators for basic, intermediate and competent levels.
 
-Speed is not in the 2021 syllabus, so every question here is about a rate of work, flow, price or pay.
+Rate of work, flow, price or pay, and speed. Speed is not a topic of its own in the 2021 syllabus, but school papers
+set it under Rate (202 past-paper questions 2018-2026, 189 of them tagged Rate), so the owner asked for it on 21 Nov 2026
+(past-paper precedent rule): distance-speed-time, unit changes (minutes, m/s), average speed over two parts of a journey
+(not the average of the two speeds), and two objects moving towards each other.
 """
 from common import *
 
@@ -577,3 +580,147 @@ def _(q):
         w += q["b"]
         t += 1
     return F(t)
+
+
+# ---------------------------------------------------------------- speed (owner, 21 Nov 2026)
+
+hours = lambda x: f"{x} hour" + ("" if x == 1 else "s")
+
+
+@template(T, "basic", FIND)
+def speed_distance(r):
+    """math-pat-speed-distance-time-basic"""
+    s, t = r.choice(range(30, 95, 5)), r.randint(2, 5)
+    d = s * t
+    who = r.choice(["A car", "A bus", "A lorry", "A train", "A van"])
+    stem = f"{who} travels at an average speed of {s} km/h. How far does it travel in {hours(t)}?"
+    return build(speed_distance, stem, d, [
+        (s + t, "added_speed_and_time", f"Added {s} and {t}."),
+        (F(s, t) if s % t == 0 else None, "divided_speed_by_time", f"Divided {s} by {t}."),
+        (s * (t + 1), "one_hour_too_many", "Counted one hour too many."),
+        *slip(d, 10), *slip(d, 5),
+    ], [f"Distance = speed × time = {s} × {t} = {d} km"], {"s": s, "t": t}, lambda x: f"{x} km", auto_slips=False, whole=True)
+
+
+@checker(speed_distance)
+def _(q):
+    return brute(lambda d: d == q["s"] * q["t"], 1000)
+
+
+@template(T, "basic", FIND)
+def speed_time(r):
+    """math-pat-speed-distance-time-basic"""
+    s, t = r.choice(range(40, 95, 5)), r.randint(2, 6)
+    d = s * t
+    who = r.choice(["A coach", "A car", "A motorcycle", "A ferry"])
+    stem = f"{who} travels {d} km at an average speed of {s} km/h. How long does the journey take?"
+    return build(speed_time, stem, t, [
+        (d - s, "subtracted", f"Subtracted {s} from {d}."),
+        (t + 1, "careless_slip", "Made a slip in the division."),
+        (t - 1, "careless_slip", "Made a slip in the division."),
+        (t + 2, "careless_slip", "Made a slip in the division."),
+    ], [f"Time = distance ÷ speed = {d} ÷ {s} = {t} hours"], {"s": s, "d": d}, hours, auto_slips=False, whole=True)
+
+
+@checker(speed_time)
+def _(q):
+    return brute(lambda t: q["s"] * t == q["d"], 100)
+
+
+@template(T, "intermediate", FIND)
+def speed_minutes(r):
+    """math-pat-speed-distance-time-basic"""
+    while True:
+        s, m = r.choice(range(30, 100, 3)), r.choice([10, 12, 15, 20, 30, 40, 45])
+        if s * m % 60 == 0:
+            break
+    d = s * m // 60
+    who = r.choice(["Mingfa", "Aisha", "Mr Tan", "Priya", "Ben"])
+    stem = f"{who} drove for {m} minutes at an average speed of {s} km/h. How far did {who} drive?"
+    return build(speed_minutes, stem, d, [
+        (s * m, "forgot_minutes_to_hours", f"Multiplied {s} by {m} without changing {m} minutes into hours."),
+        (F(s * m, 100) if (s * m) % 100 == 0 else None, "100_minutes_in_an_hour", "Took 1 hour as 100 minutes."),
+        (s - m, "subtracted", f"Subtracted {m} from {s}."),
+        *slip(d, 2), *slip(d, 1),
+    ], [f"{m} minutes = {m}/60 hour", f"Distance = {s} × {m}/60 = {d} km"], {"s": s, "m": m}, lambda x: f"{x} km",
+        auto_slips=False, whole=True)
+
+
+@checker(speed_minutes)
+def _(q):
+    return F(q["s"]) * F(q["m"], 60)
+
+
+@template(T, "intermediate", FIND)
+def speed_metres_seconds(r):
+    """math-pat-speed-distance-time-basic"""
+    v, t = r.randint(2, 9), r.choice([5, 8, 10, 12, 15, 20, 25])
+    d = v * t
+    who = r.choice(["Haizum", "Siti", "Jun Wei", "Kumar", "Mei Ling"])
+    stem = f"{who} runs {d} m in {t} s. What is {who}'s average speed?"
+    return build(speed_metres_seconds, stem, v, [
+        (d * t, "multiplied_instead_of_divided", f"Multiplied {d} by {t}."),
+        (d - t, "subtracted", f"Subtracted {t} from {d}."),
+        (d + t, "added", f"Added {d} and {t}."),
+        *slip(v, 1), *slip(v, 2),
+    ], [f"Speed = distance ÷ time = {d} ÷ {t} = {v} m/s"], {"d": d, "t": t}, lambda x: f"{x} m/s", auto_slips=False, whole=True)
+
+
+@checker(speed_metres_seconds)
+def _(q):
+    return brute(lambda v: v * q["t"] == q["d"], 100)
+
+
+@template(T, "competent", FIND, calc=True)
+def average_speed_two_parts(r):
+    """math-pat-speed-two-runners-finish"""
+    while True:
+        s1, s2 = r.sample(range(40, 100, 5), 2)
+        t1, t2 = r.sample([1, 2, 3, 4], 2)
+        tot_d, tot_t = s1 * t1 + s2 * t2, t1 + t2
+        if tot_d % tot_t == 0 and (s1 + s2) % 2 == 0 and (s1 + s2) // 2 != tot_d // tot_t:
+            break
+    ans = tot_d // tot_t
+    stem = (f"A car travelled at {s1} km/h for {hours(t1)} and then at {s2} km/h for {hours(t2)}. "
+            f"What was its average speed for the whole journey?")
+    return build(average_speed_two_parts, stem, ans, [
+        ((s1 + s2) // 2, "averaged_the_two_speeds", f"Found the average of {s1} and {s2}; the car spent different times at each speed."),
+        (F(tot_d, t1) if tot_d % t1 == 0 else None, "divided_by_one_time", f"Divided the total distance by {hours(t1)} only."),
+        (F(tot_d, 2) if tot_d % 2 == 0 else None, "divided_by_number_of_parts", f"Divided the total distance by 2 (the two parts of the journey) instead of by the {tot_t} hours."),
+        *slip(ans, 5), *slip(ans, 2),
+    ], [f"Distance = {s1} × {t1} + {s2} × {t2} = {tot_d} km", f"Time = {t1} + {t2} = {tot_t} hours",
+        f"Average speed = {tot_d} ÷ {tot_t} = {ans} km/h"], {"s1": s1, "t1": t1, "s2": s2, "t2": t2},
+        lambda x: f"{x} km/h", auto_slips=False, whole=True)
+
+
+@checker(average_speed_two_parts)
+def _(q):
+    return F(q["s1"] * q["t1"] + q["s2"] * q["t2"], q["t1"] + q["t2"])
+
+
+@template(T, "competent", FIND, calc=True)
+def meet_towards_each_other(r):
+    """math-pat-speed-catch-up-meet"""
+    while True:
+        s1, s2 = r.sample(range(40, 100, 5), 2)
+        t = r.randint(2, 4)
+        if s1 != s2:
+            break
+    d = (s1 + s2) * t
+    a, b = r.choice([("Town P", "Town Q"), ("City A", "City B"), ("Ayer Rajah", "Bukit Timah")])
+    stem = (f"{a} and {b} are {d} km apart. A car leaves {a} for {b} at {s1} km/h. At the same time, a van leaves {b} "
+            f"for {a} at {s2} km/h. After how many hours do they meet?")
+    return build(meet_towards_each_other, stem, t, [
+        (F(d, abs(s1 - s2)) if d % abs(s1 - s2) == 0 else None, "subtracted_the_speeds", f"Divided {d} by the difference of the speeds."),
+        (F(d, s1) if d % s1 == 0 else None, "used_one_speed", f"Divided {d} by {s1} only."),
+        (F(d, s2) if d % s2 == 0 else None, "used_one_speed", f"Divided {d} by {s2} only."),
+        (t + 1, "careless_slip", "Made a slip in the division."),
+        (t * 2, "doubled", "Counted each car's time separately and added them."),
+    ], [f"Together they close the gap at {s1} + {s2} = {s1 + s2} km/h", f"Time = {d} ÷ {s1 + s2} = {t} hours"],
+        {"s1": s1, "s2": s2, "d": d}, hours, auto_slips=False, whole=True)
+
+
+@checker(meet_towards_each_other)
+def _(q):
+    return brute(lambda t: (q["s1"] + q["s2"]) * t == q["d"], 50)
+

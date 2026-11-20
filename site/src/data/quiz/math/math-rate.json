@@ -235,6 +235,98 @@
    "calc": false
   },
   {
+   "id": "rate-b-3ddca9065e",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_distance",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A bus travels at an average speed of 80 km/h. How far does it travel in 3 hours?",
+   "options": [
+    "83 km",
+    "250 km",
+    "240 km",
+    "320 km"
+   ],
+   "optionValues": [
+    "83",
+    "250",
+    "240",
+    "320"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "added_speed_and_time",
+     "why": "Added 80 and 3."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null,
+    {
+     "tag": "one_hour_too_many",
+     "why": "Counted one hour too many."
+    }
+   ],
+   "solution": [
+    "Distance = speed × time = 80 × 3 = 240 km"
+   ],
+   "params": {
+    "s": 80,
+    "t": 3
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-05fe49d7ca",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_time",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travels 160 km at an average speed of 80 km/h. How long does the journey take?",
+   "options": [
+    "2 hours",
+    "80 hours",
+    "3 hours",
+    "1 hour"
+   ],
+   "optionValues": [
+    "2",
+    "80",
+    "3",
+    "1"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 80 from 160."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    }
+   ],
+   "solution": [
+    "Time = distance ÷ speed = 160 ÷ 80 = 2 hours"
+   ],
+   "params": {
+    "s": 80,
+    "d": 160
+   },
+   "calc": false
+  },
+  {
    "id": "rate-b-6fc3d33928",
    "topic": "math-rate",
    "level": "basic",
@@ -463,6 +555,98 @@
    "params": {
     "rate": 19,
     "h": 8
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-675b636c77",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_distance",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A lorry travels at an average speed of 45 km/h. How far does it travel in 3 hours?",
+   "options": [
+    "48 km",
+    "135 km",
+    "180 km",
+    "15 km"
+   ],
+   "optionValues": [
+    "48",
+    "135",
+    "180",
+    "15"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added_speed_and_time",
+     "why": "Added 45 and 3."
+    },
+    null,
+    {
+     "tag": "one_hour_too_many",
+     "why": "Counted one hour too many."
+    },
+    {
+     "tag": "divided_speed_by_time",
+     "why": "Divided 45 by 3."
+    }
+   ],
+   "solution": [
+    "Distance = speed × time = 45 × 3 = 135 km"
+   ],
+   "params": {
+    "s": 45,
+    "t": 3
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-ee8428cdf5",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_time",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travels 225 km at an average speed of 45 km/h. How long does the journey take?",
+   "options": [
+    "180 hours",
+    "5 hours",
+    "6 hours",
+    "4 hours"
+   ],
+   "optionValues": [
+    "180",
+    "5",
+    "6",
+    "4"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 45 from 225."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    }
+   ],
+   "solution": [
+    "Time = distance ÷ speed = 225 ÷ 45 = 5 hours"
+   ],
+   "params": {
+    "s": 45,
+    "d": 225
    },
    "calc": false
   },
@@ -699,6 +883,98 @@
    "calc": false
   },
   {
+   "id": "rate-b-33b162c947",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_distance",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travels at an average speed of 70 km/h. How far does it travel in 2 hours?",
+   "options": [
+    "35 km",
+    "210 km",
+    "140 km",
+    "72 km"
+   ],
+   "optionValues": [
+    "35",
+    "210",
+    "140",
+    "72"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "divided_speed_by_time",
+     "why": "Divided 70 by 2."
+    },
+    {
+     "tag": "one_hour_too_many",
+     "why": "Counted one hour too many."
+    },
+    null,
+    {
+     "tag": "added_speed_and_time",
+     "why": "Added 70 and 2."
+    }
+   ],
+   "solution": [
+    "Distance = speed × time = 70 × 2 = 140 km"
+   ],
+   "params": {
+    "s": 70,
+    "t": 2
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-cdae897c45",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_time",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A ferry travels 270 km at an average speed of 90 km/h. How long does the journey take?",
+   "options": [
+    "2 hours",
+    "180 hours",
+    "3 hours",
+    "4 hours"
+   ],
+   "optionValues": [
+    "2",
+    "180",
+    "3",
+    "4"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 90 from 270."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    }
+   ],
+   "solution": [
+    "Time = distance ÷ speed = 270 ÷ 90 = 3 hours"
+   ],
+   "params": {
+    "s": 90,
+    "d": 270
+   },
+   "calc": false
+  },
+  {
    "id": "rate-b-76c50a5afb",
    "topic": "math-rate",
    "level": "basic",
@@ -927,6 +1203,98 @@
    "params": {
     "rate": 10,
     "h": 3
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-ae10b57ddf",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_distance",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travels at an average speed of 65 km/h. How far does it travel in 2 hours?",
+   "options": [
+    "195 km",
+    "67 km",
+    "130 km",
+    "140 km"
+   ],
+   "optionValues": [
+    "195",
+    "67",
+    "130",
+    "140"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "one_hour_too_many",
+     "why": "Counted one hour too many."
+    },
+    {
+     "tag": "added_speed_and_time",
+     "why": "Added 65 and 2."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    }
+   ],
+   "solution": [
+    "Distance = speed × time = 65 × 2 = 130 km"
+   ],
+   "params": {
+    "s": 65,
+    "t": 2
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-2f557d47d6",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_time",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A ferry travels 90 km at an average speed of 45 km/h. How long does the journey take?",
+   "options": [
+    "1 hour",
+    "2 hours",
+    "3 hours",
+    "45 hours"
+   ],
+   "optionValues": [
+    "1",
+    "2",
+    "3",
+    "45"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 45 from 90."
+    }
+   ],
+   "solution": [
+    "Time = distance ÷ speed = 90 ÷ 45 = 2 hours"
+   ],
+   "params": {
+    "s": 45,
+    "d": 90
    },
    "calc": false
   },
@@ -1163,6 +1531,98 @@
    "calc": false
   },
   {
+   "id": "rate-b-4129a0d515",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_distance",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travels at an average speed of 85 km/h. How far does it travel in 3 hours?",
+   "options": [
+    "340 km",
+    "88 km",
+    "255 km",
+    "265 km"
+   ],
+   "optionValues": [
+    "340",
+    "88",
+    "255",
+    "265"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "one_hour_too_many",
+     "why": "Counted one hour too many."
+    },
+    {
+     "tag": "added_speed_and_time",
+     "why": "Added 85 and 3."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    }
+   ],
+   "solution": [
+    "Distance = speed × time = 85 × 3 = 255 km"
+   ],
+   "params": {
+    "s": 85,
+    "t": 3
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-b-d32f60d7a4",
+   "topic": "math-rate",
+   "level": "basic",
+   "template": "speed_time",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A motorcycle travels 135 km at an average speed of 45 km/h. How long does the journey take?",
+   "options": [
+    "90 hours",
+    "2 hours",
+    "3 hours",
+    "4 hours"
+   ],
+   "optionValues": [
+    "90",
+    "2",
+    "3",
+    "4"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 45 from 135."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    }
+   ],
+   "solution": [
+    "Time = distance ÷ speed = 135 ÷ 45 = 3 hours"
+   ],
+   "params": {
+    "s": 45,
+    "d": 135
+   },
+   "calc": false
+  },
+  {
    "id": "rate-b-fa559ef016",
    "topic": "math-rate",
    "level": "basic",
@@ -1395,512 +1855,48 @@
    "calc": false
   },
   {
-   "id": "rate-b-c6505d6dad",
+   "id": "rate-b-dfe7a1c6b0",
    "topic": "math-rate",
    "level": "basic",
-   "template": "rate_per_unit",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "A factory makes 108 toys in 3 hours. How many toys per hour is that?",
-   "options": [
-    "105 toys per hour",
-    "111 toys per hour",
-    "36 toys per hour",
-    "324 toys per hour"
-   ],
-   "optionValues": [
-    "105",
-    "111",
-    "36",
-    "324"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 3 from 108."
-    },
-    {
-     "tag": "added",
-     "why": "Added 108 and 3."
-    },
-    null,
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied 108 by 3."
-    }
-   ],
-   "solution": [
-    "Rate = total ÷ time = 108 ÷ 3 = 36"
-   ],
-   "params": {
-    "tot": 108,
-    "t": 3
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-1d7898b5c9",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "total_from_rate",
+   "template": "speed_distance",
    "outcomes": [
     "math-rate-rate-02"
    ],
-   "stem": "A machine makes 36 cups in 2 minutes. At this rate, how many cups will it make in 25 minutes?",
+   "stem": "A lorry travels at an average speed of 70 km/h. How far does it travel in 3 hours?",
    "options": [
-    "450 cups",
-    "59 cups",
-    "900 cups",
-    "468 cups"
+    "73 km",
+    "220 km",
+    "280 km",
+    "210 km"
    ],
    "optionValues": [
-    "450",
-    "59",
-    "900",
-    "468"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "added_the_difference_in_time",
-     "why": "Added 23 to 36."
-    },
-    {
-     "tag": "multiplied_the_givens",
-     "why": "Multiplied 36 by 25."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    }
-   ],
-   "solution": [
-    "Rate = 36 ÷ 2 = 18 per minute",
-    "25 minutes → 18 × 25 = 450"
-   ],
-   "params": {
-    "tot0": 36,
-    "t0": 2,
-    "t": 25
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-7e8f66b122",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "time_from_rate",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A tap flows at 20 litres per minute. How many minutes does it take to fill a pail that holds 280 litres?",
-   "options": [
-    "14 min",
-    "260 min",
-    "5600 min",
-    "300 min"
-   ],
-   "optionValues": [
-    "14",
-    "260",
-    "5600",
-    "300"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 20 from 280."
-    },
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied 280 by 20."
-    },
-    {
-     "tag": "added",
-     "why": "Added 280 and 20."
-    }
-   ],
-   "solution": [
-    "Time = total ÷ rate = 280 ÷ 20 = 14"
-   ],
-   "params": {
-    "tot": 280,
-    "rate": 20
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-0b659c6f4d",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "price_per_unit",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "9 metres of ribbon cost $31.50. What is the cost of 1 m?",
-   "options": [
-    "$40.50",
-    "$283.50",
-    "$22.50",
-    "$3.50"
-   ],
-   "optionValues": [
-    "81/2",
-    "567/2",
-    "45/2",
-    "7/2"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "added",
-     "why": "Added 9 to the cost."
-    },
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied $31.50 by 9."
-    },
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 9 from the cost."
-    },
-    null
-   ],
-   "solution": [
-    "Cost of 1 m = $31.50 ÷ 9 = $3.50"
-   ],
-   "params": {
-    "cost2": 63,
-    "k": 9
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-9278bdd753",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "pay_from_rate",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Shu Fen earns $25 per hour at a part-time job. How much does Shu Fen earn in 10 hours?",
-   "options": [
-    "$35",
-    "$125",
-    "$275",
-    "$250"
-   ],
-   "optionValues": [
-    "35",
-    "125",
-    "275",
-    "250"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "added",
-     "why": "Added 25 and 10."
-    },
-    {
-     "tag": "halved_or_missed_an_hour",
-     "why": "Made a slip with the number of hours."
-    },
-    {
-     "tag": "extra_hour",
-     "why": "Counted one hour too many."
-    },
-    null
-   ],
-   "solution": [
-    "Amount earned = $25 × 10 = $250"
-   ],
-   "params": {
-    "rate": 25,
-    "h": 10
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-0b0458d17a",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "rate_per_unit",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "A factory makes 252 toys in 9 hours. How many toys per hour is that?",
-   "options": [
-    "261 toys per hour",
-    "2268 toys per hour",
-    "28 toys per hour",
-    "243 toys per hour"
-   ],
-   "optionValues": [
-    "261",
-    "2268",
-    "28",
-    "243"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "added",
-     "why": "Added 252 and 9."
-    },
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied 252 by 9."
-    },
-    null,
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 9 from 252."
-    }
-   ],
-   "solution": [
-    "Rate = total ÷ time = 252 ÷ 9 = 28"
-   ],
-   "params": {
-    "tot": 252,
-    "t": 9
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-3fe658de7f",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "total_from_rate",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A machine makes 70 shirts in 5 hours. At this rate, how many shirts will it make in 15 hours?",
-   "options": [
-    "1050 shirts",
-    "80 shirts",
-    "224 shirts",
-    "210 shirts"
-   ],
-   "optionValues": [
-    "1050",
-    "80",
-    "224",
+    "73",
+    "220",
+    "280",
     "210"
    ],
    "answer": 3,
    "explain": [
     {
-     "tag": "multiplied_the_givens",
-     "why": "Multiplied 70 by 15."
-    },
-    {
-     "tag": "added_the_difference_in_time",
-     "why": "Added 10 to 70."
+     "tag": "added_speed_and_time",
+     "why": "Added 70 and 3."
     },
     {
      "tag": "careless_slip",
      "why": "Made a slip in the calculation."
     },
-    null
-   ],
-   "solution": [
-    "Rate = 70 ÷ 5 = 14 per hour",
-    "15 hours → 14 × 15 = 210"
-   ],
-   "params": {
-    "tot0": 70,
-    "t0": 5,
-    "t": 15
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-85a799a3b9",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "time_from_rate",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A printer prints 19 pages per minute. How many minutes does it take to print 95 pages?",
-   "options": [
-    "114 min",
-    "5 min",
-    "76 min",
-    "1805 min"
-   ],
-   "optionValues": [
-    "114",
-    "5",
-    "76",
-    "1805"
-   ],
-   "answer": 1,
-   "explain": [
     {
-     "tag": "added",
-     "why": "Added 95 and 19."
-    },
-    null,
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 19 from 95."
-    },
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied 95 by 19."
-    }
-   ],
-   "solution": [
-    "Time = total ÷ rate = 95 ÷ 19 = 5"
-   ],
-   "params": {
-    "tot": 95,
-    "rate": 19
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-b7a95fca8a",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "price_per_unit",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "6 kg of chicken cost $117. What is the cost of 1 kg?",
-   "options": [
-    "$123",
-    "$19.50",
-    "$111",
-    "$702"
-   ],
-   "optionValues": [
-    "123",
-    "39/2",
-    "111",
-    "702"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "added",
-     "why": "Added 6 to the cost."
-    },
-    null,
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 6 from the cost."
-    },
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied $117 by 6."
-    }
-   ],
-   "solution": [
-    "Cost of 1 kg = $117 ÷ 6 = $19.50"
-   ],
-   "params": {
-    "cost2": 234,
-    "k": 6
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-f38e33d807",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "pay_from_rate",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Kumar earns $14 per hour at a part-time job. How much does Kumar earn in 8 hours?",
-   "options": [
-    "$126",
-    "$112",
-    "$22",
-    "$56"
-   ],
-   "optionValues": [
-    "126",
-    "112",
-    "22",
-    "56"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "extra_hour",
+     "tag": "one_hour_too_many",
      "why": "Counted one hour too many."
     },
-    null,
-    {
-     "tag": "added",
-     "why": "Added 14 and 8."
-    },
-    {
-     "tag": "halved_or_missed_an_hour",
-     "why": "Made a slip with the number of hours."
-    }
-   ],
-   "solution": [
-    "Amount earned = $14 × 8 = $112"
-   ],
-   "params": {
-    "rate": 14,
-    "h": 8
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-b-4342582ddd",
-   "topic": "math-rate",
-   "level": "basic",
-   "template": "rate_per_unit",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "A machine packs 546 boxes in 14 minutes. How many boxes per minute is that?",
-   "options": [
-    "7644 boxes per minute",
-    "560 boxes per minute",
-    "532 boxes per minute",
-    "39 boxes per minute"
-   ],
-   "optionValues": [
-    "7644",
-    "560",
-    "532",
-    "39"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied 546 by 14."
-    },
-    {
-     "tag": "added",
-     "why": "Added 546 and 14."
-    },
-    {
-     "tag": "subtracted",
-     "why": "Subtracted 14 from 546."
-    },
     null
    ],
    "solution": [
-    "Rate = total ÷ time = 546 ÷ 14 = 39"
+    "Distance = speed × time = 70 × 3 = 210 km"
    ],
    "params": {
-    "tot": 546,
-    "t": 14
+    "s": 70,
+    "t": 3
    },
    "calc": false
   },
@@ -2197,6 +2193,99 @@
    "calc": false
   },
   {
+   "id": "rate-i-ca4ab7caa0",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_minutes",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Mingfa drove for 30 minutes at an average speed of 96 km/h. How far did Mingfa drive?",
+   "options": [
+    "2880 km",
+    "48 km",
+    "50 km",
+    "66 km"
+   ],
+   "optionValues": [
+    "2880",
+    "48",
+    "50",
+    "66"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "forgot_minutes_to_hours",
+     "why": "Multiplied 96 by 30 without changing 30 minutes into hours."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 30 from 96."
+    }
+   ],
+   "solution": [
+    "30 minutes = 30/60 hour",
+    "Distance = 96 × 30/60 = 48 km"
+   ],
+   "params": {
+    "s": 96,
+    "m": 30
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-17ca90d186",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_metres_seconds",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Siti runs 32 m in 8 s. What is Siti's average speed?",
+   "options": [
+    "40 m/s",
+    "256 m/s",
+    "24 m/s",
+    "4 m/s"
+   ],
+   "optionValues": [
+    "40",
+    "256",
+    "24",
+    "4"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "added",
+     "why": "Added 32 and 8."
+    },
+    {
+     "tag": "multiplied_instead_of_divided",
+     "why": "Multiplied 32 by 8."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 8 from 32."
+    },
+    null
+   ],
+   "solution": [
+    "Speed = distance ÷ time = 32 ÷ 8 = 4 m/s"
+   ],
+   "params": {
+    "d": 32,
+    "t": 8
+   },
+   "calc": false
+  },
+  {
    "id": "rate-i-aaa21dc203",
    "topic": "math-rate",
    "level": "intermediate",
@@ -2485,6 +2574,99 @@
     "C": 334,
     "s": 298,
     "rate": 6
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-03afa19a51",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_minutes",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Priya drove for 15 minutes at an average speed of 84 km/h. How far did Priya drive?",
+   "options": [
+    "1260 km",
+    "23 km",
+    "21 km",
+    "69 km"
+   ],
+   "optionValues": [
+    "1260",
+    "23",
+    "21",
+    "69"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "forgot_minutes_to_hours",
+     "why": "Multiplied 84 by 15 without changing 15 minutes into hours."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null,
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 15 from 84."
+    }
+   ],
+   "solution": [
+    "15 minutes = 15/60 hour",
+    "Distance = 84 × 15/60 = 21 km"
+   ],
+   "params": {
+    "s": 84,
+    "m": 15
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-e60ddb2e81",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_metres_seconds",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Siti runs 48 m in 8 s. What is Siti's average speed?",
+   "options": [
+    "384 m/s",
+    "40 m/s",
+    "6 m/s",
+    "56 m/s"
+   ],
+   "optionValues": [
+    "384",
+    "40",
+    "6",
+    "56"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "multiplied_instead_of_divided",
+     "why": "Multiplied 48 by 8."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 8 from 48."
+    },
+    null,
+    {
+     "tag": "added",
+     "why": "Added 48 and 8."
+    }
+   ],
+   "solution": [
+    "Speed = distance ÷ time = 48 ÷ 8 = 6 m/s"
+   ],
+   "params": {
+    "d": 48,
+    "t": 8
    },
    "calc": false
   },
@@ -2781,6 +2963,99 @@
    "calc": false
   },
   {
+   "id": "rate-i-6e92305849",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_minutes",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Priya drove for 15 minutes at an average speed of 48 km/h. How far did Priya drive?",
+   "options": [
+    "720 km",
+    "14 km",
+    "33 km",
+    "12 km"
+   ],
+   "optionValues": [
+    "720",
+    "14",
+    "33",
+    "12"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "forgot_minutes_to_hours",
+     "why": "Multiplied 48 by 15 without changing 15 minutes into hours."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 15 from 48."
+    },
+    null
+   ],
+   "solution": [
+    "15 minutes = 15/60 hour",
+    "Distance = 48 × 15/60 = 12 km"
+   ],
+   "params": {
+    "s": 48,
+    "m": 15
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-e7f4deee2b",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_metres_seconds",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Mei Ling runs 20 m in 5 s. What is Mei Ling's average speed?",
+   "options": [
+    "25 m/s",
+    "4 m/s",
+    "100 m/s",
+    "15 m/s"
+   ],
+   "optionValues": [
+    "25",
+    "4",
+    "100",
+    "15"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added",
+     "why": "Added 20 and 5."
+    },
+    null,
+    {
+     "tag": "multiplied_instead_of_divided",
+     "why": "Multiplied 20 by 5."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 5 from 20."
+    }
+   ],
+   "solution": [
+    "Speed = distance ÷ time = 20 ÷ 5 = 4 m/s"
+   ],
+   "params": {
+    "d": 20,
+    "t": 5
+   },
+   "calc": false
+  },
+  {
    "id": "rate-i-bc3832cbb0",
    "topic": "math-rate",
    "level": "intermediate",
@@ -3069,6 +3344,99 @@
     "C": 391,
     "s": 301,
     "rate": 18
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-cfd53768a2",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_minutes",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Aisha drove for 20 minutes at an average speed of 57 km/h. How far did Aisha drive?",
+   "options": [
+    "19 km",
+    "21 km",
+    "37 km",
+    "1140 km"
+   ],
+   "optionValues": [
+    "19",
+    "21",
+    "37",
+    "1140"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 20 from 57."
+    },
+    {
+     "tag": "forgot_minutes_to_hours",
+     "why": "Multiplied 57 by 20 without changing 20 minutes into hours."
+    }
+   ],
+   "solution": [
+    "20 minutes = 20/60 hour",
+    "Distance = 57 × 20/60 = 19 km"
+   ],
+   "params": {
+    "s": 57,
+    "m": 20
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-db4eb17ea5",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_metres_seconds",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Kumar runs 35 m in 5 s. What is Kumar's average speed?",
+   "options": [
+    "40 m/s",
+    "7 m/s",
+    "175 m/s",
+    "30 m/s"
+   ],
+   "optionValues": [
+    "40",
+    "7",
+    "175",
+    "30"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added",
+     "why": "Added 35 and 5."
+    },
+    null,
+    {
+     "tag": "multiplied_instead_of_divided",
+     "why": "Multiplied 35 by 5."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 5 from 35."
+    }
+   ],
+   "solution": [
+    "Speed = distance ÷ time = 35 ÷ 5 = 7 m/s"
+   ],
+   "params": {
+    "d": 35,
+    "t": 5
    },
    "calc": false
   },
@@ -3365,6 +3733,99 @@
    "calc": false
   },
   {
+   "id": "rate-i-4ae03ffcf9",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_minutes",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Aisha drove for 30 minutes at an average speed of 48 km/h. How far did Aisha drive?",
+   "options": [
+    "18 km",
+    "1440 km",
+    "24 km",
+    "26 km"
+   ],
+   "optionValues": [
+    "18",
+    "1440",
+    "24",
+    "26"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 30 from 48."
+    },
+    {
+     "tag": "forgot_minutes_to_hours",
+     "why": "Multiplied 48 by 30 without changing 30 minutes into hours."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    }
+   ],
+   "solution": [
+    "30 minutes = 30/60 hour",
+    "Distance = 48 × 30/60 = 24 km"
+   ],
+   "params": {
+    "s": 48,
+    "m": 30
+   },
+   "calc": false
+  },
+  {
+   "id": "rate-i-170dbfc06e",
+   "topic": "math-rate",
+   "level": "intermediate",
+   "template": "speed_metres_seconds",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Siti runs 96 m in 12 s. What is Siti's average speed?",
+   "options": [
+    "108 m/s",
+    "8 m/s",
+    "84 m/s",
+    "1152 m/s"
+   ],
+   "optionValues": [
+    "108",
+    "8",
+    "84",
+    "1152"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added",
+     "why": "Added 96 and 12."
+    },
+    null,
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 12 from 96."
+    },
+    {
+     "tag": "multiplied_instead_of_divided",
+     "why": "Multiplied 96 by 12."
+    }
+   ],
+   "solution": [
+    "Speed = distance ÷ time = 96 ÷ 12 = 8 m/s"
+   ],
+   "params": {
+    "d": 96,
+    "t": 12
+   },
+   "calc": false
+  },
+  {
    "id": "rate-i-24f94e1b32",
    "topic": "math-rate",
    "level": "intermediate",
@@ -3410,493 +3871,6 @@
     "b": 60,
     "c": 40,
     "rate": 8
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-51db9d5ab9",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "rate_compare_difference",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "Arjun typed 161 words in 7 minutes. Siti typed 220 words in 10 minutes. How many more words per minute did the faster person manage than the other person?",
-   "options": [
-    "45 words",
-    "1 word",
-    "2 words",
-    "59 words"
-   ],
-   "optionValues": [
-    "45",
-    "1",
-    "2",
-    "59"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "added_the_rates",
-     "why": "Added the two rates."
-    },
-    null,
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    {
-     "tag": "compared_totals",
-     "why": "Compared the totals and ignored the different times."
-    }
-   ],
-   "solution": [
-    "Arjun: 161 ÷ 7 = 23 per minute",
-    "Siti: 220 ÷ 10 = 22 per minute",
-    "Difference = 1"
-   ],
-   "params": {
-    "A": 161,
-    "ta": 7,
-    "B": 220,
-    "tb": 10
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-6ae4e0fd5e",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "combined_taps_time",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Tap A fills a tub at 26 litres per minute and Tap B fills it at 17 litres per minute. How many minutes do the two taps take to fill an empty tub of 774 litres when both are turned on together?",
-   "options": [
-    "19 minutes",
-    "18 minutes",
-    "86 minutes",
-    "17 minutes"
-   ],
-   "optionValues": [
-    "19",
-    "18",
-    "86",
-    "17"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "subtracted_the_rates",
-     "why": "Subtracted the rates."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    }
-   ],
-   "solution": [
-    "Together: 26 + 17 = 43 litres per minute",
-    "Time = 774 ÷ 43 = 18 minutes"
-   ],
-   "params": {
-    "ra": 26,
-    "rb": 17,
-    "V": 774
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-ed38aa8380",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "printing_cost",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Nurul's printer prints 50 pages per minute. A pack of 500 sheets of paper costs $9. How much does the paper cost to print for 30 minutes (assume one page per sheet)?",
-   "options": [
-    "$36",
-    "$270",
-    "$27",
-    "$13500"
-   ],
-   "optionValues": [
-    "36",
-    "270",
-    "27",
-    "13500"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "extra_pack",
-     "why": "Counted one pack too many."
-    },
-    {
-     "tag": "multiplied_minutes_by_price",
-     "why": "Multiplied the minutes by the price of a pack."
-    },
-    null,
-    {
-     "tag": "multiplied_pages_by_price",
-     "why": "Multiplied the number of pages by the price of a pack."
-    }
-   ],
-   "solution": [
-    "Pages printed = 50 × 30 = 1500",
-    "Packs needed = 1500 ÷ 500 = 3",
-    "Cost = 3 × $9 = $27"
-   ],
-   "params": {
-    "rate": 50,
-    "pages": 500,
-    "mins": 30,
-    "cost": 9
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-12a512b7a5",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "rate_unit_change",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "A fountain sprays 3 litres per minute. How many litres of water is that in 6 hours?",
-   "options": [
-    "18 litres",
-    "1080 litres",
-    "1800 litres",
-    "540 litres"
-   ],
-   "optionValues": [
-    "18",
-    "1080",
-    "1800",
-    "540"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "forgot_to_change_hours_to_minutes",
-     "why": "Used the number of hours as minutes."
-    },
-    null,
-    {
-     "tag": "used_100_minutes_in_an_hour",
-     "why": "Used 100 minutes in an hour."
-    },
-    {
-     "tag": "used_30_minutes_in_an_hour",
-     "why": "Used 30 minutes in an hour."
-    }
-   ],
-   "solution": [
-    "6 hours = 360 minutes",
-    "3 × 360 = 1080 litres"
-   ],
-   "params": {
-    "p2": 12,
-    "h": 6
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-53cb4f69a0",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "time_to_fill_rest",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A drum holds 146 litres when full. It now has 62 litres of water. A tap fills it at 12 litres per minute. How many more minutes will it take to fill the drum?",
-   "options": [
-    "8 minutes",
-    "7 minutes",
-    "9 minutes",
-    "6 minutes"
-   ],
-   "optionValues": [
-    "8",
-    "7",
-    "9",
-    "6"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    }
-   ],
-   "solution": [
-    "Water needed = 146 − 62 = 84 litres",
-    "Time = 84 ÷ 12 = 7 minutes"
-   ],
-   "params": {
-    "C": 146,
-    "s": 62,
-    "rate": 12
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-90318ecf91",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "tank_litres_time",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "An empty water tank is 100 cm long, 50 cm wide and 40 cm high. A tap fills it at 20 litres per minute. How many minutes does it take to fill the water tank completely? (1 litre = 1000 cm³)",
-   "options": [
-    "100 minutes",
-    "10 minutes",
-    "10000 minutes",
-    "4000 minutes"
-   ],
-   "optionValues": [
-    "100",
-    "10",
-    "10000",
-    "4000"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "wrong_conversion",
-     "why": "Used 1 litre = 100 cm³."
-    },
-    null,
-    {
-     "tag": "forgot_to_convert_to_litres",
-     "why": "Used the volume in cm³ without changing it to litres."
-    },
-    {
-     "tag": "multiplied_instead_of_divided",
-     "why": "Multiplied the capacity by the rate."
-    }
-   ],
-   "solution": [
-    "Volume = 100 × 50 × 40 = 200000 cm³ = 200 litres",
-    "Time = 200 ÷ 20 = 10 minutes"
-   ],
-   "params": {
-    "a": 100,
-    "b": 50,
-    "c": 40,
-    "rate": 20
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-e1608bf642",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "rate_compare_difference",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "Nurul made 112 bookmarks in 8 minutes. Wei Jie made 65 bookmarks in 5 minutes. How many more bookmarks per minute did the faster person manage than the other person?",
-   "options": [
-    "27 bookmarks",
-    "47 bookmarks",
-    "1 bookmark",
-    "2 bookmarks"
-   ],
-   "optionValues": [
-    "27",
-    "47",
-    "1",
-    "2"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "added_the_rates",
-     "why": "Added the two rates."
-    },
-    {
-     "tag": "compared_totals",
-     "why": "Compared the totals and ignored the different times."
-    },
-    null,
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    }
-   ],
-   "solution": [
-    "Nurul: 112 ÷ 8 = 14 per minute",
-    "Wei Jie: 65 ÷ 5 = 13 per minute",
-    "Difference = 1"
-   ],
-   "params": {
-    "A": 112,
-    "ta": 8,
-    "B": 65,
-    "tb": 5
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-6adb7ad244",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "combined_taps_time",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Tap A fills a tub at 26 litres per minute and Tap B fills it at 17 litres per minute. How many minutes do the two taps take to fill an empty tub of 817 litres when both are turned on together?",
-   "options": [
-    "18 minutes",
-    "19 minutes",
-    "20 minutes",
-    "21 minutes"
-   ],
-   "optionValues": [
-    "18",
-    "19",
-    "20",
-    "21"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    }
-   ],
-   "solution": [
-    "Together: 26 + 17 = 43 litres per minute",
-    "Time = 817 ÷ 43 = 19 minutes"
-   ],
-   "params": {
-    "ra": 26,
-    "rb": 17,
-    "V": 817
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-3a82509a37",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "printing_cost",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Jun Wei's printer prints 50 pages per minute. A pack of 500 sheets of paper costs $12. How much does the paper cost to print for 30 minutes (assume one page per sheet)?",
-   "options": [
-    "$360",
-    "$36",
-    "$18000",
-    "$48"
-   ],
-   "optionValues": [
-    "360",
-    "36",
-    "18000",
-    "48"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "multiplied_minutes_by_price",
-     "why": "Multiplied the minutes by the price of a pack."
-    },
-    null,
-    {
-     "tag": "multiplied_pages_by_price",
-     "why": "Multiplied the number of pages by the price of a pack."
-    },
-    {
-     "tag": "extra_pack",
-     "why": "Counted one pack too many."
-    }
-   ],
-   "solution": [
-    "Pages printed = 50 × 30 = 1500",
-    "Packs needed = 1500 ÷ 500 = 3",
-    "Cost = 3 × $12 = $36"
-   ],
-   "params": {
-    "rate": 50,
-    "pages": 500,
-    "mins": 30,
-    "cost": 12
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-i-460d0d9531",
-   "topic": "math-rate",
-   "level": "intermediate",
-   "template": "rate_unit_change",
-   "outcomes": [
-    "math-rate-rate-01"
-   ],
-   "stem": "A machine uses 2.5 litres per minute. How many litres of oil is that in 4 hours?",
-   "options": [
-    "300 litres",
-    "10 litres",
-    "1000 litres",
-    "600 litres"
-   ],
-   "optionValues": [
-    "300",
-    "10",
-    "1000",
-    "600"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "used_30_minutes_in_an_hour",
-     "why": "Used 30 minutes in an hour."
-    },
-    {
-     "tag": "forgot_to_change_hours_to_minutes",
-     "why": "Used the number of hours as minutes."
-    },
-    {
-     "tag": "used_100_minutes_in_an_hour",
-     "why": "Used 100 minutes in an hour."
-    },
-    null
-   ],
-   "solution": [
-    "4 hours = 240 minutes",
-    "2.5 × 240 = 600 litres"
-   ],
-   "params": {
-    "p2": 10,
-    "h": 4
    },
    "calc": false
   },
@@ -4212,6 +4186,104 @@
    "calc": false
   },
   {
+   "id": "rate-c-29c0dd80f4",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "average_speed_two_parts",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travelled at 60 km/h for 3 hours and then at 90 km/h for 2 hours. What was its average speed for the whole journey?",
+   "options": [
+    "180 km/h",
+    "120 km/h",
+    "75 km/h",
+    "72 km/h"
+   ],
+   "optionValues": [
+    "180",
+    "120",
+    "75",
+    "72"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "divided_by_number_of_parts",
+     "why": "Divided the total distance by 2 (the two parts of the journey) instead of by the 5 hours."
+    },
+    {
+     "tag": "divided_by_one_time",
+     "why": "Divided the total distance by 3 hours only."
+    },
+    {
+     "tag": "averaged_the_two_speeds",
+     "why": "Found the average of 60 and 90; the car spent different times at each speed."
+    },
+    null
+   ],
+   "solution": [
+    "Distance = 60 × 3 + 90 × 2 = 360 km",
+    "Time = 3 + 2 = 5 hours",
+    "Average speed = 360 ÷ 5 = 72 km/h"
+   ],
+   "params": {
+    "s1": 60,
+    "t1": 3,
+    "s2": 90,
+    "t2": 2
+   },
+   "calc": true
+  },
+  {
+   "id": "rate-c-873ae05a3c",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "meet_towards_each_other",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Town P and Town Q are 390 km apart. A car leaves Town P for Town Q at 70 km/h. At the same time, a van leaves Town Q for Town P at 60 km/h. After how many hours do they meet?",
+   "options": [
+    "6 hours",
+    "4 hours",
+    "39 hours",
+    "3 hours"
+   ],
+   "optionValues": [
+    "6",
+    "4",
+    "39",
+    "3"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "doubled",
+     "why": "Counted each car's time separately and added them."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "subtracted_the_speeds",
+     "why": "Divided 390 by the difference of the speeds."
+    },
+    null
+   ],
+   "solution": [
+    "Together they close the gap at 70 + 60 = 130 km/h",
+    "Time = 390 ÷ 130 = 3 hours"
+   ],
+   "params": {
+    "s1": 70,
+    "s2": 60,
+    "d": 390
+   },
+   "calc": true
+  },
+  {
    "id": "rate-c-85144809a9",
    "topic": "math-rate",
    "level": "competent",
@@ -4521,6 +4593,104 @@
     "C": 375
    },
    "calc": false
+  },
+  {
+   "id": "rate-c-d398d5d4ab",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "average_speed_two_parts",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travelled at 70 km/h for 1 hour and then at 90 km/h for 4 hours. What was its average speed for the whole journey?",
+   "options": [
+    "86 km/h",
+    "430 km/h",
+    "80 km/h",
+    "215 km/h"
+   ],
+   "optionValues": [
+    "86",
+    "430",
+    "80",
+    "215"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "divided_by_one_time",
+     "why": "Divided the total distance by 1 hour only."
+    },
+    {
+     "tag": "averaged_the_two_speeds",
+     "why": "Found the average of 70 and 90; the car spent different times at each speed."
+    },
+    {
+     "tag": "divided_by_number_of_parts",
+     "why": "Divided the total distance by 2 (the two parts of the journey) instead of by the 5 hours."
+    }
+   ],
+   "solution": [
+    "Distance = 70 × 1 + 90 × 4 = 430 km",
+    "Time = 1 + 4 = 5 hours",
+    "Average speed = 430 ÷ 5 = 86 km/h"
+   ],
+   "params": {
+    "s1": 70,
+    "t1": 1,
+    "s2": 90,
+    "t2": 4
+   },
+   "calc": true
+  },
+  {
+   "id": "rate-c-3d11665ed2",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "meet_towards_each_other",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Town P and Town Q are 435 km apart. A car leaves Town P for Town Q at 65 km/h. At the same time, a van leaves Town Q for Town P at 80 km/h. After how many hours do they meet?",
+   "options": [
+    "3 hours",
+    "6 hours",
+    "4 hours",
+    "29 hours"
+   ],
+   "optionValues": [
+    "3",
+    "6",
+    "4",
+    "29"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "doubled",
+     "why": "Counted each car's time separately and added them."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "subtracted_the_speeds",
+     "why": "Divided 435 by the difference of the speeds."
+    }
+   ],
+   "solution": [
+    "Together they close the gap at 65 + 80 = 145 km/h",
+    "Time = 435 ÷ 145 = 3 hours"
+   ],
+   "params": {
+    "s1": 65,
+    "s2": 80,
+    "d": 435
+   },
+   "calc": true
   },
   {
    "id": "rate-c-f29d43a312",
@@ -4834,6 +5004,104 @@
    "calc": false
   },
   {
+   "id": "rate-c-0b2827c529",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "average_speed_two_parts",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travelled at 90 km/h for 4 hours and then at 50 km/h for 1 hour. What was its average speed for the whole journey?",
+   "options": [
+    "87 km/h",
+    "205 km/h",
+    "70 km/h",
+    "82 km/h"
+   ],
+   "optionValues": [
+    "87",
+    "205",
+    "70",
+    "82"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "divided_by_number_of_parts",
+     "why": "Divided the total distance by 2 (the two parts of the journey) instead of by the 5 hours."
+    },
+    {
+     "tag": "averaged_the_two_speeds",
+     "why": "Found the average of 90 and 50; the car spent different times at each speed."
+    },
+    null
+   ],
+   "solution": [
+    "Distance = 90 × 4 + 50 × 1 = 410 km",
+    "Time = 4 + 1 = 5 hours",
+    "Average speed = 410 ÷ 5 = 82 km/h"
+   ],
+   "params": {
+    "s1": 90,
+    "t1": 4,
+    "s2": 50,
+    "t2": 1
+   },
+   "calc": true
+  },
+  {
+   "id": "rate-c-10f16a0f12",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "meet_towards_each_other",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "City A and City B are 600 km apart. A car leaves City A for City B at 85 km/h. At the same time, a van leaves City B for City A at 65 km/h. After how many hours do they meet?",
+   "options": [
+    "30 hours",
+    "5 hours",
+    "8 hours",
+    "4 hours"
+   ],
+   "optionValues": [
+    "30",
+    "5",
+    "8",
+    "4"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "subtracted_the_speeds",
+     "why": "Divided 600 by the difference of the speeds."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "doubled",
+     "why": "Counted each car's time separately and added them."
+    },
+    null
+   ],
+   "solution": [
+    "Together they close the gap at 85 + 65 = 150 km/h",
+    "Time = 600 ÷ 150 = 4 hours"
+   ],
+   "params": {
+    "s1": 85,
+    "s2": 65,
+    "d": 600
+   },
+   "calc": true
+  },
+  {
    "id": "rate-c-66ef3ad3b9",
    "topic": "math-rate",
    "level": "competent",
@@ -5143,6 +5411,104 @@
     "C": 332
    },
    "calc": false
+  },
+  {
+   "id": "rate-c-20722f94e3",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "average_speed_two_parts",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travelled at 85 km/h for 3 hours and then at 45 km/h for 2 hours. What was its average speed for the whole journey?",
+   "options": [
+    "69 km/h",
+    "74 km/h",
+    "115 km/h",
+    "65 km/h"
+   ],
+   "optionValues": [
+    "69",
+    "74",
+    "115",
+    "65"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "divided_by_one_time",
+     "why": "Divided the total distance by 3 hours only."
+    },
+    {
+     "tag": "averaged_the_two_speeds",
+     "why": "Found the average of 85 and 45; the car spent different times at each speed."
+    }
+   ],
+   "solution": [
+    "Distance = 85 × 3 + 45 × 2 = 345 km",
+    "Time = 3 + 2 = 5 hours",
+    "Average speed = 345 ÷ 5 = 69 km/h"
+   ],
+   "params": {
+    "s1": 85,
+    "t1": 3,
+    "s2": 45,
+    "t2": 2
+   },
+   "calc": true
+  },
+  {
+   "id": "rate-c-c4a75cc8e1",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "meet_towards_each_other",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Town P and Town Q are 270 km apart. A car leaves Town P for Town Q at 60 km/h. At the same time, a van leaves Town Q for Town P at 75 km/h. After how many hours do they meet?",
+   "options": [
+    "2 hours",
+    "4 hours",
+    "3 hours",
+    "18 hours"
+   ],
+   "optionValues": [
+    "2",
+    "4",
+    "3",
+    "18"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "doubled",
+     "why": "Counted each car's time separately and added them."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "subtracted_the_speeds",
+     "why": "Divided 270 by the difference of the speeds."
+    }
+   ],
+   "solution": [
+    "Together they close the gap at 60 + 75 = 135 km/h",
+    "Time = 270 ÷ 135 = 2 hours"
+   ],
+   "params": {
+    "s1": 60,
+    "s2": 75,
+    "d": 270
+   },
+   "calc": true
   },
   {
    "id": "rate-c-32b206d616",
@@ -5457,6 +5823,104 @@
    "calc": false
   },
   {
+   "id": "rate-c-f5f7ae2bf0",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "average_speed_two_parts",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "A car travelled at 55 km/h for 4 hours and then at 95 km/h for 1 hour. What was its average speed for the whole journey?",
+   "options": [
+    "63 km/h",
+    "68 km/h",
+    "58 km/h",
+    "75 km/h"
+   ],
+   "optionValues": [
+    "63",
+    "68",
+    "58",
+    "75"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "averaged_the_two_speeds",
+     "why": "Found the average of 55 and 95; the car spent different times at each speed."
+    }
+   ],
+   "solution": [
+    "Distance = 55 × 4 + 95 × 1 = 315 km",
+    "Time = 4 + 1 = 5 hours",
+    "Average speed = 315 ÷ 5 = 63 km/h"
+   ],
+   "params": {
+    "s1": 55,
+    "t1": 4,
+    "s2": 95,
+    "t2": 1
+   },
+   "calc": true
+  },
+  {
+   "id": "rate-c-de02d3e2da",
+   "topic": "math-rate",
+   "level": "competent",
+   "template": "meet_towards_each_other",
+   "outcomes": [
+    "math-rate-rate-02"
+   ],
+   "stem": "Town P and Town Q are 250 km apart. A car leaves Town P for Town Q at 50 km/h. At the same time, a van leaves Town Q for Town P at 75 km/h. After how many hours do they meet?",
+   "options": [
+    "3 hours",
+    "5 hours",
+    "10 hours",
+    "2 hours"
+   ],
+   "optionValues": [
+    "3",
+    "5",
+    "10",
+    "2"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the division."
+    },
+    {
+     "tag": "used_one_speed",
+     "why": "Divided 250 by 50 only."
+    },
+    {
+     "tag": "subtracted_the_speeds",
+     "why": "Divided 250 by the difference of the speeds."
+    },
+    null
+   ],
+   "solution": [
+    "Together they close the gap at 50 + 75 = 125 km/h",
+    "Time = 250 ÷ 125 = 2 hours"
+   ],
+   "params": {
+    "s1": 50,
+    "s2": 75,
+    "d": 250
+   },
+   "calc": true
+  },
+  {
    "id": "rate-c-5d2842fe0a",
    "topic": "math-rate",
    "level": "competent",
@@ -5510,522 +5974,6 @@
     "fill": 9,
     "t": 6,
     "V": 96
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-0e16c9aafd",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "two_machines",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Machine A completes a job in 24 minutes and Machine B completes the same job in 48 minutes. Machine A works 5 items per minute faster than Machine B. If both work together, how many minutes do they take together?",
-   "options": [
-    "16 minutes",
-    "24 minutes",
-    "36 minutes",
-    "72 minutes"
-   ],
-   "optionValues": [
-    "16",
-    "24",
-    "36",
-    "72"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "used_the_faster_machine_only",
-     "why": "Used the faster one only."
-    },
-    {
-     "tag": "averaged_the_times",
-     "why": "Averaged 24 and 48."
-    },
-    {
-     "tag": "added_the_times",
-     "why": "Added 24 and 48."
-    }
-   ],
-   "solution": [
-    "Rates are in the ratio 48 : 24 = 2 : 1",
-    "1 unit = 5, so rate B = 5 and rate A = 10 per minute",
-    "Job = 10 × 24 = 240",
-    "Time together = 240 ÷ 15 = 16 minutes"
-   ],
-   "params": {
-    "tA": 24,
-    "tB": 48,
-    "D": 5,
-    "ask": "time"
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-7994ab4f1f",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "relay_taps",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Tap A fills a tank at 5 litres per minute. It runs alone until the tank is half full. Tap B, which fills at 10 litres per minute, is then turned on as well. The tank holds 90 litres. How many minutes does it take to fill the tank from empty?",
-   "options": [
-    "18 minutes",
-    "10 minutes",
-    "12 minutes",
-    "6 minutes"
-   ],
-   "optionValues": [
-    "18",
-    "10",
-    "12",
-    "6"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "used_tap_a_all_the_time",
-     "why": "Used Tap A for the whole job."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "used_both_taps_all_the_time",
-     "why": "Used both taps from the start."
-    }
-   ],
-   "solution": [
-    "Half the tank = 45 litres",
-    "Tap A alone: 45 ÷ 5 = 9 minutes",
-    "Both taps: 45 ÷ 15 = 3 minutes",
-    "Total = 9 + 3 = 12 minutes"
-   ],
-   "params": {
-    "ra": 5,
-    "rb": 10,
-    "V": 90
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-80cd90dc99",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "leaking_tank",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A tank holds 213 litres when full and now has 31 litres. A tap fills it at 20 litres per minute, but a crack in the tank lets out 6 litres per minute. How many minutes will it take for the tank to be full?",
-   "options": [
-    "14 minutes",
-    "13 minutes",
-    "12 minutes",
-    "7 minutes"
-   ],
-   "optionValues": [
-    "14",
-    "13",
-    "12",
-    "7"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    {
-     "tag": "added_the_leak",
-     "why": "Added the leak to the tap's rate."
-    }
-   ],
-   "solution": [
-    "Net rate = 20 − 6 = 14 litres per minute",
-    "Water needed = 213 − 31 = 182 litres",
-    "Time = 182 ÷ 14 = 13 minutes"
-   ],
-   "params": {
-    "C": 213,
-    "s": 31,
-    "F": 20,
-    "leak": 6
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-33e420302f",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "rate_ratio_share",
-   "outcomes": [
-    "math-rate-rate-02",
-    "math-rate-rate-01"
-   ],
-   "stem": "Machine A prints 4 pages for every 3 pages that Machine B prints. Together they print 154 leaflets in 11 minutes. How many leaflets does Machine A print in 9 minutes?",
-   "options": [
-    "72 leaflets",
-    "88 leaflets",
-    "54 leaflets",
-    "126 leaflets"
-   ],
-   "optionValues": [
-    "72",
-    "88",
-    "54",
-    "126"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "forgot_to_scale_the_time",
-     "why": "Found A's share of the 11-minute total, not 9 minutes."
-    },
-    {
-     "tag": "used_machine_b",
-     "why": "Found Machine B's pages."
-    },
-    {
-     "tag": "gave_the_total_for_both",
-     "why": "Gave the pages printed by both machines."
-    }
-   ],
-   "solution": [
-    "Together: 154 ÷ 11 = 14 per minute",
-    "7 units = 14, so 1 unit = 2 per minute",
-    "Machine A: 4 × 2 = 8 per minute",
-    "In 9 minutes: 8 × 9 = 72"
-   ],
-   "params": {
-    "u": 4,
-    "v": 3,
-    "T": 154,
-    "t": 11,
-    "t2": 9
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-0a067e6934",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "two_stage_rate",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A pump fills an empty tank at 4 litres per minute for the first 3 minutes. It is then set to a faster rate of 6 litres per minute until the tank, which holds 66 litres, is full. How many minutes does it take to fill the tank altogether?",
-   "options": [
-    "9 minutes",
-    "13 minutes",
-    "11 minutes",
-    "12 minutes"
-   ],
-   "optionValues": [
-    "9",
-    "13",
-    "11",
-    "12"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "gave_second_stage_only",
-     "why": "Gave the time at the faster rate only."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    {
-     "tag": "used_the_faster_rate_throughout",
-     "why": "Used the faster rate for the whole time."
-    },
-    null
-   ],
-   "solution": [
-    "First stage: 4 × 3 = 12 litres",
-    "Left to fill = 66 − 12 = 54 litres",
-    "Second stage: 54 ÷ 6 = 9 minutes",
-    "Total = 3 + 9 = 12 minutes"
-   ],
-   "params": {
-    "a": 4,
-    "b": 6,
-    "t1": 3,
-    "C": 66
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-d554e21444",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "tank_fill_drain",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A tank 50 cm by 80 cm by 40 cm was 1/4 full of water. A tap running at 7 litres per minute filled it while a drain emptied it at the same time. After 8 minutes there were 56 litres of water in the tank. What was the rate of the drain in litres per minute? (1 litre = 1000 cm³)",
-   "options": [
-    "9 litres per minute",
-    "15 litres per minute",
-    "2 litres per minute",
-    "5 litres per minute"
-   ],
-   "optionValues": [
-    "9",
-    "15",
-    "2",
-    "5"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "added_instead_of_subtracted",
-     "why": "Added the net rate to the tap's rate."
-    },
-    {
-     "tag": "used_the_capacity_not_the_final_volume",
-     "why": "Used the capacity as the volume after the time."
-    },
-    {
-     "tag": "gave_the_net_rate",
-     "why": "Gave the net rate at which the tank filled."
-    },
-    null
-   ],
-   "solution": [
-    "Capacity = 50 × 80 × 40 ÷ 1000 = 160 litres",
-    "Water at first = 1/4 × 160 = 40 litres",
-    "Net gain = 56 − 40 = 16 litres in 8 min = 2 litres per minute",
-    "Drain = 7 − 2 = 5 litres per minute"
-   ],
-   "params": {
-    "a": 50,
-    "b": 80,
-    "c": 40,
-    "fr": [
-     1,
-     4
-    ],
-    "fill": 7,
-    "t": 8,
-    "V": 56
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-a97f6bebcd",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "two_machines",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Pump A fills a tank in 60 minutes and Pump B fills the same tank in 90 minutes. Pump A works 11 litres per minute faster than Pump B. If both work together, how many minutes do they take to fill the tank?",
-   "options": [
-    "75 minutes",
-    "36 minutes",
-    "60 minutes",
-    "150 minutes"
-   ],
-   "optionValues": [
-    "75",
-    "36",
-    "60",
-    "150"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "averaged_the_times",
-     "why": "Averaged 60 and 90."
-    },
-    null,
-    {
-     "tag": "used_the_faster_machine_only",
-     "why": "Used the faster one only."
-    },
-    {
-     "tag": "added_the_times",
-     "why": "Added 60 and 90."
-    }
-   ],
-   "solution": [
-    "Rates are in the ratio 90 : 60 = 3 : 2",
-    "1 unit = 11, so rate B = 22 and rate A = 33 per minute",
-    "Job = 33 × 60 = 1980",
-    "Time together = 1980 ÷ 55 = 36 minutes"
-   ],
-   "params": {
-    "tA": 60,
-    "tB": 90,
-    "D": 11,
-    "ask": "time"
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-cb37e3fe9f",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "relay_taps",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "Tap A fills a tank at 7 litres per minute. It runs alone until the tank is half full. Tap B, which fills at 2 litres per minute, is then turned on as well. The tank holds 126 litres. How many minutes does it take to fill the tank from empty?",
-   "options": [
-    "10 minutes",
-    "16 minutes",
-    "18 minutes",
-    "14 minutes"
-   ],
-   "optionValues": [
-    "10",
-    "16",
-    "18",
-    "14"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "used_tap_a_all_the_time",
-     "why": "Used Tap A for the whole job."
-    },
-    {
-     "tag": "used_both_taps_all_the_time",
-     "why": "Used both taps from the start."
-    }
-   ],
-   "solution": [
-    "Half the tank = 63 litres",
-    "Tap A alone: 63 ÷ 7 = 9 minutes",
-    "Both taps: 63 ÷ 9 = 7 minutes",
-    "Total = 9 + 7 = 16 minutes"
-   ],
-   "params": {
-    "ra": 7,
-    "rb": 2,
-    "V": 126
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-41e98fa163",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "leaking_tank",
-   "outcomes": [
-    "math-rate-rate-02"
-   ],
-   "stem": "A tank holds 101 litres when full and now has 29 litres. A tap fills it at 17 litres per minute, but a crack in the tank lets out 9 litres per minute. How many minutes will it take for the tank to be full?",
-   "options": [
-    "12 minutes",
-    "10 minutes",
-    "9 minutes",
-    "8 minutes"
-   ],
-   "optionValues": [
-    "12",
-    "10",
-    "9",
-    "8"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    },
-    null,
-    {
-     "tag": "careless_slip",
-     "why": "Made a slip in the calculation."
-    }
-   ],
-   "solution": [
-    "Net rate = 17 − 9 = 8 litres per minute",
-    "Water needed = 101 − 29 = 72 litres",
-    "Time = 72 ÷ 8 = 9 minutes"
-   ],
-   "params": {
-    "C": 101,
-    "s": 29,
-    "F": 17,
-    "leak": 9
-   },
-   "calc": false
-  },
-  {
-   "id": "rate-c-96041289e8",
-   "topic": "math-rate",
-   "level": "competent",
-   "template": "rate_ratio_share",
-   "outcomes": [
-    "math-rate-rate-02",
-    "math-rate-rate-01"
-   ],
-   "stem": "Machine A prints 5 pages for every 4 pages that Machine B prints. Together they print 189 leaflets in 7 minutes. How many leaflets does Machine A print in 2 minutes?",
-   "options": [
-    "105 leaflets",
-    "30 leaflets",
-    "24 leaflets",
-    "54 leaflets"
-   ],
-   "optionValues": [
-    "105",
-    "30",
-    "24",
-    "54"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "forgot_to_scale_the_time",
-     "why": "Found A's share of the 7-minute total, not 2 minutes."
-    },
-    null,
-    {
-     "tag": "used_machine_b",
-     "why": "Found Machine B's pages."
-    },
-    {
-     "tag": "gave_the_total_for_both",
-     "why": "Gave the pages printed by both machines."
-    }
-   ],
-   "solution": [
-    "Together: 189 ÷ 7 = 27 per minute",
-    "9 units = 27, so 1 unit = 3 per minute",
-    "Machine A: 5 × 3 = 15 per minute",
-    "In 2 minutes: 15 × 2 = 30"
-   ],
-   "params": {
-    "u": 5,
-    "v": 4,
-    "T": 189,
-    "t": 7,
-    "t2": 2
    },
    "calc": false
   }
