@@ -41,6 +41,14 @@ outside the repo.
 
 ## Past-paper data quality
 
+### One pool per sub-topic, milestones to competency (owner, 21 Nov 2026)
+Proposed in `docs/past-paper-pools-design.md` and ADR 0011: difficulty tiers go; one past-paper pool per sub-topic
+(playable at 20); correct answers leave the pool and add to the competency count, wrong ones go back; competency = a
+majority of the sub-topic's past-paper questions correct; 3 cards at milestones; easier-first order; generated questions
+support only. Supersedes the 'balanced thirds' tier split (owner OK'd it, then chose this redesign).
+- [ ] Owner approves the note and ADR, and answers its 4 open questions (wrong-answer retest, milestone thresholds, generated fill-ins counting, badge name).
+- [ ] Build (store, pick, train, tier page, rewards preview, parent page, tests); live together with the past-paper upload.
+
 ### Past-paper precedent for generated questions (owner, 21 Nov 2026)
 Rule: a generated question stays only if a past paper has a question testing the same concept (any format). Owner choices:
 any format counts; no match = hold (reversible, reason recorded); show the judge's calibration and ~30 'no match' examples
