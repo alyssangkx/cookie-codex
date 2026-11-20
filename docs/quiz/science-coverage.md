@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-907 shipped questions (basic 303, intermediate 304, competent 300), 402 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+1057 shipped questions (basic 353, intermediate 354, competent 350), 471 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -44,11 +44,11 @@
 | Respiratory and circulatory systems | Recognise the integration of the digestive, respiratory and circulato… | yes | no | 0 **not yet** |
 | Plant transport system | Identify the parts of the plant transport system and describe their f… | yes | yes | 22 |
 | Plant transport system | Investigate how food and water are transported in the plant | yes | yes | 55 |
-| Electric circuits | Recognise that a circuit with an energy source (battery) and componen… | yes | yes | 0 **not yet** |
-| Electric circuits | Show an understanding that a closed circuit allows current to flow | yes | yes | 0 **not yet** |
-| Electric circuits | Construct simple circuits from circuit diagrams | yes | yes | 0 **not yet** |
-| Variables affecting current; conductors | Investigate the effect on current of number of batteries (in series) … | yes | yes | 0 **not yet** |
-| Variables affecting current; conductors | Identify electrical conductors and insulators | yes | no | 0 **not yet** |
+| Electric circuits | Recognise that a circuit with an energy source (battery) and componen… | yes | yes | 10 |
+| Electric circuits | Show an understanding that a closed circuit allows current to flow | yes | yes | 51 |
+| Electric circuits | Construct simple circuits from circuit diagrams | yes | yes | 14 |
+| Variables affecting current; conductors | Investigate the effect on current of number of batteries (in series) … | yes | yes | 50 |
+| Variables affecting current; conductors | Identify electrical conductors and insulators | yes | no | 25 |
 | Magnets | Recognise that a magnet can exert a push or a pull | yes | no | 0 **not yet** |
 | Magnets | Identify characteristics of magnets: made of iron or steel; two poles… | yes | yes | 0 **not yet** |
 | Magnets | Compare magnets, non-magnetic materials and magnetic materials | yes | yes | 0 **not yet** |
@@ -91,7 +91,7 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**32 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**37 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
@@ -99,7 +99,7 @@
 |---|---|---|
 | Properties of solids, liquids and gases (mass, volume, shape) (`sci-pat-states-of-matter`) | 129 | 0 **not yet** |
 | Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 0 **not yet** |
-| Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 0 **not yet** |
+| Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 74 |
 | Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 51 |
 | Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 60 |
 | Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 69 |
@@ -110,14 +110,14 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 63 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 64 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 78 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 67 |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 68 |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 41 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 47 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 62 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
@@ -127,6 +127,6 @@
 | Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
 | Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 57 |
 | Gases in air and tests for gases (`sci-pat-gases-in-air`) | 12 | 0 **not yet** |
-| Current strength, conductors and insulators (`sci-pat-circuit-variables`) | 11 | 0 **not yet** |
+| Current strength, conductors and insulators (`sci-pat-circuit-variables`) | 11 | 69 |
 | Respiration and the Sun as the source of energy (`sci-pat-respiration-sun`) | 9 | 0 **not yet** |
 | Rate of evaporation: factors and fair set-ups (`sci-pat-evaporation-rate`) | 5 | 0 **not yet** |

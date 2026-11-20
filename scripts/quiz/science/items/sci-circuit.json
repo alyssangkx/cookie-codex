@@ -1,0 +1,2448 @@
+{
+  "subtopic": "sci-systems-circuit",
+  "items": [
+    {
+      "key": "ci-001",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which part of a circuit provides the electrical energy?",
+      "options": [
+        "The battery",
+        "The switch",
+        "The bulb",
+        "The wire"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "A switch only opens or closes the circuit."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The bulb changes electrical energy into light and heat."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Wires carry the electricity. They do not provide the energy."
+        }
+      ],
+      "solution": [
+        "A battery is the energy source."
+      ]
+    },
+    {
+      "key": "ci-002",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "What is the job of a switch in a circuit?",
+      "options": [
+        "To provide electrical energy",
+        "To give out light",
+        "To make the wire hot",
+        "To open or close the circuit"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-job",
+          "why": "The battery does this."
+        },
+        {
+          "tag": "wrong-job",
+          "why": "The bulb does this."
+        },
+        {
+          "tag": "wrong-job",
+          "why": "A switch does not heat the wire."
+        },
+        null
+      ],
+      "solution": [
+        "A switch opens or closes the path for the electricity."
+      ]
+    },
+    {
+      "key": "ci-003",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A circuit has a battery, a bulb, a switch and wires joined in a loop. When will the bulb light up?",
+      "options": [
+        "When the switch is open",
+        "Only when the wires are touching the table",
+        "When the switch is closed",
+        "Only when two switches are used"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "An open switch breaks the circuit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The table has nothing to do with it."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "One closed switch is enough."
+        }
+      ],
+      "solution": [
+        "The bulb lights when the circuit is complete and closed."
+      ]
+    },
+    {
+      "key": "ci-004",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Look at the circuit. Will the bulb light up?",
+      "options": [
+        "No, because there is only one bulb",
+        "Yes, because the circuit is closed",
+        "No, because the switch is in the wrong place",
+        "No, because there is no wire"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "One bulb is enough."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "A switch can be anywhere in the loop."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The wires are drawn as lines."
+        }
+      ],
+      "solution": [
+        "The path is complete, so current flows and the bulb lights."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-005",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Look at the circuit. The bulb does not light up. Why?",
+      "options": [
+        "The open switch breaks the circuit",
+        "The battery is too big for the bulb",
+        "The bulb is in the wrong place in the loop",
+        "The wires are too short"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "A battery cannot be too big."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "A bulb can be anywhere in the loop."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The wire length is not the problem."
+        }
+      ],
+      "solution": [
+        "An open switch leaves a gap, so no current flows."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-006",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Look at the circuit. The bulb does not light up when the switch is closed. Which part is missing?",
+      "options": [
+        "A second bulb",
+        "A second switch",
+        "A bigger bulb",
+        "A battery"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "One bulb does not need a second bulb."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "One closed switch is enough."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The circuit has no energy source."
+        },
+        null
+      ],
+      "solution": [
+        "Without a battery there is no energy source."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(150.0 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"150.0\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "ci-007",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "What happens to the current when a switch in a circuit is opened?",
+      "options": [
+        "The current flows faster",
+        "The current flows the other way",
+        "The current stops flowing",
+        "The current does not change"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Opening the circuit stops the current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The current does not reverse."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "An open switch breaks the circuit."
+        }
+      ],
+      "solution": [
+        "An open switch breaks the path, so there is no current."
+      ]
+    },
+    {
+      "key": "ci-008",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which of the following is the best material for the wires of a circuit?",
+      "options": [
+        "Plastic",
+        "Copper",
+        "Rubber",
+        "Wood"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is an insulator."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Wood is an insulator."
+        }
+      ],
+      "solution": [
+        "Copper is a metal and a good conductor of electricity."
+      ]
+    },
+    {
+      "key": "ci-009",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A student connects a bulb to a battery using a plastic string instead of a wire. The bulb does not light. Why?",
+      "options": [
+        "Plastic does not conduct electricity",
+        "The string is too thin to carry any current",
+        "The battery is too weak to light the bulb",
+        "The bulb is too big for the battery"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Thickness is not the reason."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The battery is fine. The plastic is the problem."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The bulb never lit."
+        }
+      ],
+      "solution": [
+        "Plastic is an insulator, so the circuit is not complete."
+      ]
+    },
+    {
+      "key": "ci-010",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Look at the circuit. The bulb does not light. Which action will make it light?",
+      "options": [
+        "Adding a second switch",
+        "Taking out the battery",
+        "Turning the bulb upside down",
+        "Closing the switch"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-action",
+          "why": "A second switch would not close the gap."
+        },
+        {
+          "tag": "wrong-action",
+          "why": "Without a battery nothing would light."
+        },
+        {
+          "tag": "wrong-action",
+          "why": "This does not close the gap in the circuit."
+        },
+        null
+      ],
+      "solution": [
+        "Closing the switch completes the circuit."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-011",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Switch S is closed. Which bulbs will light up?",
+      "options": [
+        "P only",
+        "Q only",
+        "Both P and Q",
+        "Neither P nor Q"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "Current goes through both bulbs in the loop."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "Current goes through both bulbs in the loop."
+        },
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "The circuit is closed, so current flows."
+        }
+      ],
+      "solution": [
+        "The circuit is complete, so both bulbs light."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-012",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Switch S is open. Which bulbs will light up?",
+      "options": [
+        "P only",
+        "Neither P nor Q",
+        "Q only",
+        "Both P and Q"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "An open switch stops current to every part."
+        },
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "An open switch stops current to every part."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "An open switch breaks the circuit."
+        }
+      ],
+      "solution": [
+        "The open switch breaks the only path."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-013",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, switch S1 is closed and switch S2 is open. Which bulb lights up?",
+      "options": [
+        "P only",
+        "Q only",
+        "Both P and Q",
+        "Neither P nor Q"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "Q's branch has the open switch."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "Q's branch is open."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "P is on a complete path."
+        }
+      ],
+      "solution": [
+        "P is on a complete path. Q's branch is broken by S2."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"276\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"276\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"276\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(160.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(121.33333333333333 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"121.33333333333333\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(198.66666666666666 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"198.66666666666666\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(160.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-014",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "What is a closed circuit?",
+      "options": [
+        "A circuit that has a gap in it",
+        "A circuit that has no battery",
+        "A circuit that has only a switch",
+        "A complete path for the current"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "That is an open circuit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Without a battery nothing flows."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A circuit needs more than a switch."
+        },
+        null
+      ],
+      "solution": [
+        "A closed circuit has no gaps."
+      ]
+    },
+    {
+      "key": "ci-015",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Why are electric wires covered with plastic?",
+      "options": [
+        "Plastic is a good conductor of electricity",
+        "Plastic makes the wire carry more electricity",
+        "Plastic is an insulator, so we stay safe",
+        "Plastic makes the wire lighter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Plastic is an insulator."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It does not."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Weight is not the reason."
+        }
+      ],
+      "solution": [
+        "The plastic does not let electricity pass to our hands."
+      ]
+    },
+    {
+      "key": "ci-016",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, which letter is the energy source?",
+      "options": [
+        "Y",
+        "X",
+        "Z",
+        "None of them"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Y is a bulb, which gives out light."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Z is a switch, which opens and closes the circuit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One part is a battery."
+        }
+      ],
+      "solution": [
+        "X is the battery."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Z</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g><text x=\"185.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text></svg>"
+    },
+    {
+      "key": "ci-017",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, which letter is the switch?",
+      "options": [
+        "Z",
+        "X",
+        "Y",
+        "None of them"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "X is a battery."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Y is a bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One part is a switch."
+        }
+      ],
+      "solution": [
+        "Z opens and closes the circuit."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Z</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g><text x=\"185.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text></svg>"
+    },
+    {
+      "key": "ci-018",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which of the following is needed for a bulb to light up?",
+      "options": [
+        "A switch that is open",
+        "Two bulbs in the same circuit loop",
+        "A plastic wire",
+        "A complete circuit with a battery"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "An open switch breaks the circuit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One bulb is enough."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plastic does not carry electricity."
+        },
+        null
+      ],
+      "solution": [
+        "The bulb needs a closed circuit with an energy source."
+      ]
+    },
+    {
+      "key": "ci-019",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A bulb is fused in a circuit with one bulb. What happens when the switch is closed?",
+      "options": [
+        "The bulb lights up brightly at first",
+        "The bulb lights up only very dimly",
+        "It stays off, as the circuit is broken",
+        "The battery gets bigger and hotter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A fused bulb has a break inside it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No current flows through a broken filament."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Nothing like that happens."
+        }
+      ],
+      "solution": [
+        "A fused bulb leaves a gap in the circuit."
+      ]
+    },
+    {
+      "key": "ci-020",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "When the switch in a circuit is closed, what flows around the circuit?",
+      "options": [
+        "Light",
+        "Electric current",
+        "Heat",
+        "Air"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-term",
+          "why": "Light comes from the bulb. It does not flow around."
+        },
+        null,
+        {
+          "tag": "wrong-term",
+          "why": "Heat is made in the bulb. It does not flow around the circuit."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Air does not flow in a circuit."
+        }
+      ],
+      "solution": [
+        "An electric current flows when the circuit is closed."
+      ]
+    },
+    {
+      "key": "ci-021",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Two bulbs P and Q are in the same loop with a battery and a closed switch. Bulb P is taken out of its holder. What happens to bulb Q?",
+      "options": [
+        "It goes out",
+        "It stays lit",
+        "It becomes brighter",
+        "It becomes dimmer but stays lit"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The loop is broken where P was."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No current can flow."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Without P the circuit is open."
+        }
+      ],
+      "solution": [
+        "The circuit is broken, so no bulb in the loop stays lit."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-022",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which of the following can be used to complete the gap in the circuit so that the bulb lights up?",
+      "options": [
+        "A plastic straw",
+        "A rubber band",
+        "A wooden stick",
+        "A steel paper clip"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Wood is an insulator."
+        },
+        null
+      ],
+      "solution": [
+        "Steel is a metal, so it is a conductor."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A gap in the circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><rect x=\"-16\" y=\"-10\" width=\"32\" height=\"20\" fill=\"#fff\" stroke-width=\"2\"/><text x=\"0\" y=\"5\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">gap</text></g><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-023",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A circuit drawing shows a long and a short parallel line. What does it stand for?",
+      "options": [
+        "A bulb",
+        "A switch",
+        "A battery",
+        "A wire"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "A bulb is drawn as a circle with a cross."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A switch is drawn with a gap and a lever."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "A wire is drawn as a single line."
+        }
+      ],
+      "solution": [
+        "The long and short lines are the symbol for a cell or battery."
+      ]
+    },
+    {
+      "key": "ci-024",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, a coin is placed in the gap and the bulb lights up. What does this show about the coin?",
+      "options": [
+        "It is an insulator of electricity",
+        "It is a conductor of electricity",
+        "It is a battery",
+        "It makes its own electricity"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "An insulator would stop the bulb lighting."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The battery is already in the circuit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The battery supplies the energy."
+        }
+      ],
+      "solution": [
+        "The bulb lit, so the coin lets electricity pass through it."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing a coin</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><rect x=\"-16\" y=\"-10\" width=\"32\" height=\"20\" fill=\"#fff\" stroke-width=\"2\"/><text x=\"0\" y=\"5\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">coin</text></g><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"0.0\" y1=\"-17.6\" x2=\"0.0\" y2=\"-25.3\" stroke-width=\"1.6\"/><line x1=\"-13.6\" y1=\"-13.6\" x2=\"-19.5\" y2=\"-19.5\" stroke-width=\"1.6\"/><line x1=\"13.6\" y1=\"-13.6\" x2=\"19.5\" y2=\"-19.5\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"122.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-025",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, switch S is open. What will happen when S is closed?",
+      "options": [
+        "Current will flow and the bulb will light",
+        "Nothing will happen to the bulb or the battery",
+        "The battery will stop working",
+        "The bulb will go out"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Closing S completes the circuit."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The battery is not harmed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb was not lit before."
+        }
+      ],
+      "solution": [
+        "A closed switch completes the circuit."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-101",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, bulbs P and Q are in one loop and bulb P is removed from its holder. What happens to bulb Q?",
+      "options": [
+        "It goes out",
+        "It stays lit",
+        "It becomes brighter",
+        "It becomes dimmer"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "P and Q are in one loop, so removing P breaks it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "There is no current at all."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No current flows, so it is off."
+        }
+      ],
+      "solution": [
+        "Removing P makes a gap in the only loop."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, one loop</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-102",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, bulbs P and Q are on separate paths and bulb P is removed from its holder. What happens to bulb Q?",
+      "options": [
+        "It goes out",
+        "It becomes much dimmer",
+        "It becomes much brighter",
+        "It stays lit"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Q has its own complete path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Q's path is not changed by removing P."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Q is on its own path, so its current is the same as before."
+        },
+        null
+      ],
+      "solution": [
+        "P and Q are on separate paths, so Q still has a complete circuit."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, two paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"276\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"276\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"276\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(160.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(160.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(160.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-103",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, only switches S1 and S2 are closed. Which bulb lights up?",
+      "options": [
+        "P only",
+        "Both P and Q",
+        "Q only",
+        "Neither"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "P's branch has S3, which is open."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "P's branch is broken."
+        },
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "Q has a complete path."
+        }
+      ],
+      "solution": [
+        "S1 is the main switch and S2 closes Q's branch."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(128.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(212.0 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-104",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, which switches must be closed so that only bulb P lights up?",
+      "options": [
+        "S2 and S3 only",
+        "S1 and S3 only",
+        "S1 and S2 only",
+        "S3 only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "S1 is on the main wire. Without it nothing lights."
+        },
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "That would light Q, not P."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "The main switch S1 must also be closed."
+        }
+      ],
+      "solution": [
+        "S1 completes the main wire, and S3 completes P's branch."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(128.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(212.0 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-105",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, which switches must be closed so that both bulbs light up?",
+      "options": [
+        "S1, S2 and S3",
+        "S1 only",
+        "S2 and S3 only",
+        "S1 and S3 only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "Each branch has its own switch as well."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "The main switch S1 must also be closed."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "That lights only P."
+        }
+      ],
+      "solution": [
+        "Both branch switches and the main switch must be closed."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(128.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(212.0 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-106",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, S1 is open and S2 and S3 are closed. Which bulbs light up?",
+      "options": [
+        "P only",
+        "Q only",
+        "Both P and Q",
+        "Neither"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "S1 is on the main wire, which is broken."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "S1 is on the main wire, which is broken."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "S1 is on the main wire, which is broken."
+        },
+        null
+      ],
+      "solution": [
+        "The open main switch stops all current."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(128.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(212.0 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-107",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, the switch is closed and bulb P lights up but bulb Q does not. What is the most likely reason?",
+      "options": [
+        "Bulb P is fused",
+        "The switch S is open",
+        "Bulb Q is fused",
+        "The battery is flat"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "P is lit, so it is not fused."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "S is closed and P is lit."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "P is lit, so the battery works."
+        }
+      ],
+      "solution": [
+        "P is lit, so the battery and S are fine. Only Q's path is broken."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, two paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"276\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"276\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"276\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(160.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(160.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(160.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-108",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, switch S is closed but neither bulb lights up. Which is the most likely reason?",
+      "options": [
+        "The bulbs are in a loop",
+        "One of the bulbs is fused",
+        "Switch S is in the wrong place",
+        "The battery has two cells"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Bulbs in a loop will light if the circuit is closed."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "A switch can be anywhere in the loop."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Two cells make a circuit work better."
+        }
+      ],
+      "solution": [
+        "A fused bulb breaks the only loop."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, one loop</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-109",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Four materials were put one at a time in the gap of a circuit with a bulb and a battery. The table shows what happened. Which materials are conductors of electricity?",
+      "options": [
+        "Coin and iron nail",
+        "Plastic ruler and wooden stick",
+        "Coin and plastic ruler",
+        "Iron nail and wooden stick"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "These did not light the bulb, so they are insulators."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "The ruler did not light the bulb."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "The stick did not light the bulb."
+        }
+      ],
+      "solution": [
+        "The bulb lit with the coin and the nail."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing four materials</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Material</text><rect x=\"140\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulb</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">coin</text><rect x=\"140\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">plastic ruler</text><rect x=\"140\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">iron nail</text><rect x=\"140\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wooden stick</text><rect x=\"140\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text></svg>"
+    },
+    {
+      "key": "ci-110",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Using the same table, which materials are insulators of electricity?",
+      "options": [
+        "Coin and iron nail",
+        "Coin and wooden stick",
+        "Iron nail and plastic ruler",
+        "Plastic ruler and wooden stick"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "These lit the bulb, so they are conductors."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "The coin lit the bulb."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "The nail lit the bulb."
+        },
+        null
+      ],
+      "solution": [
+        "The bulb did not light with the ruler or the stick."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing four materials</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Material</text><rect x=\"140\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulb</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">coin</text><rect x=\"140\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">plastic ruler</text><rect x=\"140\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">iron nail</text><rect x=\"140\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wooden stick</text><rect x=\"140\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text></svg>"
+    },
+    {
+      "key": "ci-111",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "An object is placed in the gap of the circuit shown. The bulb does not light up. What does this show?",
+      "options": [
+        "The object is a conductor",
+        "The battery is flat",
+        "The object is an insulator",
+        "The bulb is brighter than normal"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A conductor would let the bulb light."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "There is no evidence of this in the test."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "It is not lit."
+        }
+      ],
+      "solution": [
+        "The object does not let electricity pass, so it is an insulator."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing an object</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><rect x=\"-16\" y=\"-10\" width=\"32\" height=\"20\" fill=\"#fff\" stroke-width=\"2\"/><text x=\"0\" y=\"5\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">object</text></g><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-112",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In a circuit with one battery, a bulb and a switch in a loop, does it matter where the switch is placed in the loop?",
+      "options": [
+        "Yes, it works only when it is next to the battery",
+        "No, it controls the bulb wherever it is in the loop",
+        "Yes, it works only next to the bulb",
+        "Yes, it must be at the top of the diagram"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A switch works anywhere in the loop."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A switch works anywhere in the loop."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The place on a drawing does not matter."
+        }
+      ],
+      "solution": [
+        "Opening the switch anywhere breaks the loop."
+      ]
+    },
+    {
+      "key": "ci-113",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, switch S on the main wire is open. What will happen when S is closed?",
+      "options": [
+        "Both bulbs will light up",
+        "Only P will light up",
+        "Only Q will light up",
+        "Neither will light up"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "S is on the main wire for both bulbs."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "S is on the main wire for both bulbs."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "Closing S completes both paths."
+        }
+      ],
+      "solution": [
+        "S is on the main wire, so it controls both branches."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, two paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"276\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"276\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"276\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(160.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(160.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(160.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-114",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Three bulbs P, Q and R are connected in separate paths to one battery. Bulb Q is fused. Which bulbs stay lit?",
+      "options": [
+        "Q only",
+        "None of them",
+        "P only",
+        "P and R"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "Q is fused, so it cannot be lit."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "P and R have their own complete paths."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "R also has its own complete path."
+        },
+        null
+      ],
+      "solution": [
+        "Each bulb has its own path, so only Q goes out."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 322\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three bulbs, three paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"286\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"286\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.0\" x2=\"276\" y2=\"115.0\"/><line x1=\"44\" y1=\"172.0\" x2=\"276\" y2=\"172.0\"/><line x1=\"44\" y1=\"229.0\" x2=\"276\" y2=\"229.0\"/><line x1=\"44\" y1=\"286.0\" x2=\"276\" y2=\"286.0\"/><circle cx=\"44\" cy=\"115.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"229.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"229.0\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(160.0 115.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(160.0 172.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(160.0 229.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"207.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(160.0 286.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-115",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Three bulbs are connected one after another in a single loop with a battery. One bulb is unscrewed. What happens to the other two bulbs?",
+      "options": [
+        "They both stay lit",
+        "One goes out and one stays lit",
+        "They both go out",
+        "They both become brighter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The loop is broken."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The same break stops all current."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "No current flows."
+        }
+      ],
+      "solution": [
+        "Unscrewing one bulb opens the only loop."
+      ]
+    },
+    {
+      "key": "ci-116",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Why are the lights in a house connected so that one can be switched off without the others going out?",
+      "options": [
+        "All the lights are in one loop",
+        "Each light has its own path to the supply",
+        "The wires are made of plastic",
+        "There is only one bulb in the house"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "In one loop, switching one off would turn off all."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Plastic does not carry electricity."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "There are many lights."
+        }
+      ],
+      "solution": [
+        "Separate paths let each light work on its own."
+      ]
+    },
+    {
+      "key": "ci-117",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In a string of decorative lights, all the bulbs go out when one bulb breaks. How are the bulbs connected?",
+      "options": [
+        "One after another in a single loop",
+        "Each bulb is in its own path",
+        "All the bulbs are in separate switches",
+        "The bulbs are not connected to a battery"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Then the others would stay lit."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "That does not explain why all go out."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "They light, so they are connected."
+        }
+      ],
+      "solution": [
+        "A break anywhere in a single loop stops all of the bulbs."
+      ]
+    },
+    {
+      "key": "ci-118",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which statements about a closed circuit are correct?\nA: Current flows around it.\nB: It has a gap in it.\nC: A bulb in it can light.\nD: It must have an energy source.",
+      "options": [
+        "A, B and C only",
+        "B, C and D only",
+        "A, B and D only",
+        "A, C and D only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "B is wrong. A closed circuit has no gap."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "B is wrong. A closed circuit has no gap."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "B is wrong. A closed circuit has no gap."
+        },
+        null
+      ],
+      "solution": [
+        "A closed circuit has no gap, an energy source, and a current."
+      ]
+    },
+    {
+      "key": "ci-119",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A student closes a switch and the bulb lights. When he opens the switch the bulb goes off. What does the switch do?",
+      "options": [
+        "It makes the electricity for the bulb",
+        "It makes the bulb brighter",
+        "It opens and closes the path for the current",
+        "It stores the electricity"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-job",
+          "why": "The battery supplies the energy."
+        },
+        {
+          "tag": "wrong-job",
+          "why": "It only turns the circuit on or off."
+        },
+        null,
+        {
+          "tag": "wrong-job",
+          "why": "A switch does not store electricity."
+        }
+      ],
+      "solution": [
+        "A switch controls whether the circuit is complete."
+      ]
+    },
+    {
+      "key": "ci-120",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which of the following should be used to complete a circuit so that a bulb lights up?",
+      "options": [
+        "A dry wooden ruler",
+        "An aluminium foil strip",
+        "A plastic comb",
+        "A rubber eraser"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Wood is an insulator."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is an insulator."
+        }
+      ],
+      "solution": [
+        "Aluminium is a metal and a conductor."
+      ]
+    },
+    {
+      "key": "ci-121",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, S1 is open and S2 is closed. Which bulbs light up?",
+      "options": [
+        "Neither",
+        "P only",
+        "Q only",
+        "Both P and Q"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "S1 on the main wire is open."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "S1 on the main wire is open."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "S1 on the main wire is open."
+        }
+      ],
+      "solution": [
+        "The open main switch stops all current."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(128.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(212.0 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"212.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-522",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, a new battery, a bulb and a closed switch are in a loop, but the bulb does not light. Which of the following is the most likely reason?",
+      "options": [
+        "The switch is the wrong shape",
+        "The battery has one cell instead of two",
+        "The wire is too long",
+        "The bulb is fused"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "The shape of a switch does not matter."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "A single cell can light a bulb."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Wire length is not the problem."
+        },
+        null
+      ],
+      "solution": [
+        "A fused bulb leaves a gap in the circuit."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-123",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A bulb lights up when a copper wire is placed in the gap of a test circuit but not when a rubber band is used. Which statement is correct?",
+      "options": [
+        "Copper is an insulator and rubber is a conductor",
+        "Both are conductors",
+        "Copper is a conductor and rubber is an insulator",
+        "Both are insulators"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The bulb lit with copper, so copper conducts."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb did not light with rubber."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb lit with copper."
+        }
+      ],
+      "solution": [
+        "The bulb lit only with copper."
+      ]
+    },
+    {
+      "key": "ci-124",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, S is closed. Bulb P is fused. What happens to bulb Q?",
+      "options": [
+        "It goes out",
+        "It stays lit",
+        "It becomes much dimmer",
+        "It explodes"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Q has its own path."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Q's path is not changed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Nothing like that happens."
+        }
+      ],
+      "solution": [
+        "Q is on a separate path from P."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, two paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"276\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"276\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"276\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(160.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(160.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(160.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-125",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-1",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which of the following is NOT needed to make a simple circuit that lights a bulb?",
+      "options": [
+        "A magnet",
+        "A battery",
+        "Wires",
+        "A bulb"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "needed",
+          "why": "A battery is needed as the energy source."
+        },
+        {
+          "tag": "needed",
+          "why": "Wires join the parts."
+        },
+        {
+          "tag": "needed",
+          "why": "A bulb is the part that lights."
+        }
+      ],
+      "solution": [
+        "A magnet is not part of a simple lighting circuit."
+      ]
+    },
+    {
+      "key": "ci-201",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, bulbs P and Q are in one path and bulb R is in another path. Switch S is closed. Bulb Q is fused. Which bulbs stay lit?",
+      "options": [
+        "R only",
+        "P only",
+        "P and R only",
+        "None of them"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "P is in the same path as Q, so it goes out."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "P is in the same path as Q, so it goes out."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "R has its own complete path."
+        }
+      ],
+      "solution": [
+        "The fused Q breaks the path with P. R's path is unaffected."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three bulbs</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(170.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"170.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-202",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the same circuit, bulb R is fused and switch S is closed. Which bulbs stay lit?",
+      "options": [
+        "R only",
+        "P only",
+        "None of them",
+        "P and Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "R is fused, so it cannot be lit."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "Q is in the same unbroken path as P."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "The path with P and Q is complete."
+        },
+        null
+      ],
+      "solution": [
+        "R's path is broken but the path with P and Q is complete."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three bulbs</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(170.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"170.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-203",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the same circuit, bulb P is taken out of its holder and switch S is closed. Which bulb lights up?",
+      "options": [
+        "Q only",
+        "Q and R",
+        "R only",
+        "Neither Q nor R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "Q is in the same path as P, which is now broken."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "Q is in the path that is now broken."
+        },
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "R is on its own path."
+        }
+      ],
+      "solution": [
+        "Removing P breaks the path with Q. R is unaffected."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three bulbs</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(170.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"170.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-204",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the same circuit, switch S is open. Which bulbs light up?",
+      "options": [
+        "R only",
+        "None of them",
+        "P and Q only",
+        "All three bulbs"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "S is on the main wire, so all paths are broken."
+        },
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "S is on the main wire, so all paths are broken."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "An open switch on the main wire stops all current."
+        }
+      ],
+      "solution": [
+        "S is on the wire shared by all paths."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three bulbs</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(170.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"170.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-205",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the same circuit (S closed), bulb R is added to the path with P and Q so that all three are one after another. Which statement is correct?",
+      "options": [
+        "If one bulb is fused, all three go out",
+        "If R is fused, P and Q both stay lit",
+        "If P is fused, Q and R stay lit",
+        "Each bulb works on its own path now"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "All three are now in one path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "All three are now in one path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "They are in one path now."
+        }
+      ],
+      "solution": [
+        "In a single path, a break stops the current for all."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three bulbs</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(170.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"170.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-206",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Four wires are used to join a battery, a bulb and a switch. The bulb does not light even though the switch is closed. A student finds the bulb is fine. What could be the problem?",
+      "options": [
+        "The switch is too far from the battery",
+        "The bulb is on the left side of the battery",
+        "There are four wires instead of five",
+        "A wire is not touching its terminal"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Distance is not the problem."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Sides do not matter."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The number of wires is not the issue."
+        },
+        null
+      ],
+      "solution": [
+        "A loose connection breaks the circuit."
+      ]
+    },
+    {
+      "key": "ci-507",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "The table shows what happened when four materials were put in the gap of a test circuit. Which material is most likely to be a metal?",
+      "options": [
+        "P",
+        "R",
+        "Q",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "P did not light the bulb."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "R did not light the bulb."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "S did not light the bulb."
+        }
+      ],
+      "solution": [
+        "Only Q let the bulb light, so it is a conductor, most likely a metal."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"125.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing four materials</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Material</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulb</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text></svg>"
+    },
+    {
+      "key": "ci-208",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Hui tests whether different materials let electricity pass. Which should she keep the same in every test?",
+      "options": [
+        "The material in the gap",
+        "The battery, the bulb and the wires",
+        "Whether the bulb lights up",
+        "The name of the material"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "This is the one thing she changes."
+        },
+        null,
+        {
+          "tag": "measured-variable",
+          "why": "This is what she observes."
+        },
+        {
+          "tag": "changed-variable",
+          "why": "This is part of what she changes."
+        }
+      ],
+      "solution": [
+        "Only the material in the gap changes."
+      ]
+    },
+    {
+      "key": "ci-209",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A student wants to check whether a pencil lead conducts electricity. Which set-up should he use?",
+      "options": [
+        "Put it in the gap of a circuit with a bulb",
+        "Put the lead next to a battery only",
+        "Put the lead in a circuit with a switch only",
+        "Put the lead on the bulb without any wires"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-method",
+          "why": "There is no circuit to show conduction."
+        },
+        {
+          "tag": "wrong-method",
+          "why": "Without a bulb nothing shows whether current flows."
+        },
+        {
+          "tag": "wrong-method",
+          "why": "There is no complete circuit."
+        }
+      ],
+      "solution": [
+        "A bulb in a closed circuit shows whether current flows."
+      ]
+    },
+    {
+      "key": "ci-210",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Look at the circuit. The bulb is lit. Which of the following will make the bulb go out?",
+      "options": [
+        "Replacing the metal clip with an iron nail",
+        "Replacing the metal clip with a copper coin",
+        "Adding a second metal clip to the gap",
+        "Replacing the metal clip with a plastic clip"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "stays-lit",
+          "why": "Iron is also a conductor, so the bulb stays lit."
+        },
+        {
+          "tag": "stays-lit",
+          "why": "Copper is a conductor, so the bulb stays lit."
+        },
+        {
+          "tag": "stays-lit",
+          "why": "More metal still conducts."
+        },
+        null
+      ],
+      "solution": [
+        "Plastic is an insulator, so the circuit would no longer be complete."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A metal clip in the gap</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><rect x=\"-16\" y=\"-10\" width=\"32\" height=\"20\" fill=\"#fff\" stroke-width=\"2\"/><text x=\"0\" y=\"5\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">clip</text></g><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"0.0\" y1=\"-17.6\" x2=\"0.0\" y2=\"-25.3\" stroke-width=\"1.6\"/><line x1=\"-13.6\" y1=\"-13.6\" x2=\"-19.5\" y2=\"-19.5\" stroke-width=\"1.6\"/><line x1=\"13.6\" y1=\"-13.6\" x2=\"19.5\" y2=\"-19.5\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"122.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-211",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, S1 and S2 are closed. Which bulbs light up?",
+      "options": [
+        "P only",
+        "R only",
+        "P and Q only",
+        "P, Q and R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-bulb",
+          "why": "Q's path is complete as well."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "R's path has S3, which is open."
+        },
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "R's path has an open switch."
+        }
+      ],
+      "solution": [
+        "R's branch is broken by the open S3."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three bulbs and three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"316\" y1=\"58.0\" x2=\"316\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"316\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"316\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"316\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"316\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"316\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"316\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(180.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"180.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(112.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"112.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(180.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"180.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(248.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"248.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(134.66666666666669 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"134.66666666666669\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(225.33333333333334 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"225.33333333333334\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(180.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-212",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, which switch must be closed to make bulb R light, if S1 is already closed?",
+      "options": [
+        "S2",
+        "S3",
+        "S1 again",
+        "None, R lights already"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-switch",
+          "why": "S2 is in the other branch."
+        },
+        null,
+        {
+          "tag": "wrong-switch",
+          "why": "S1 is already closed."
+        },
+        {
+          "tag": "wrong-switch",
+          "why": "R's branch is broken by S3."
+        }
+      ],
+      "solution": [
+        "S3 is the switch in R's branch."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three bulbs and three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"316\" y1=\"58.0\" x2=\"316\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"316\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"316\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"316\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"316\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"316\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"316\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(180.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"180.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(112.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"112.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(180.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"180.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(248.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"248.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(134.66666666666669 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"134.66666666666669\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(225.33333333333334 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"225.33333333333334\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(180.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-213",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, S1 and S3 are closed and S2 is open. Which bulbs light up?",
+      "options": [
+        "R only",
+        "P and Q only",
+        "P, Q and R",
+        "None of them"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-bulb",
+          "why": "S2 is open in their branch."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "S2 is open in the branch of P and Q."
+        },
+        {
+          "tag": "wrong-bulb",
+          "why": "R's branch is complete."
+        }
+      ],
+      "solution": [
+        "S2 is open, so P and Q are out. R's branch is complete."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three bulbs and three switches</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"316\" y1=\"58.0\" x2=\"316\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"316\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"316\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"316\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"316\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"316\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"316\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(180.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"180.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S1</text><g transform=\"translate(112.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"112.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(180.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"180.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(248.0 115.33333333333334) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"10\" y2=\"-13\" stroke-width=\"2\"/></g><text x=\"248.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S2</text><g transform=\"translate(134.66666666666669 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"134.66666666666669\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(225.33333333333334 172.66666666666669) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"225.33333333333334\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S3</text><g transform=\"translate(180.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-214",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A torch uses a battery, a bulb and a switch. The bulb does not light when the switch is on. A student replaces the bulb with one that works and the torch still does not light. What should he check next?",
+      "options": [
+        "Whether the torch is heavy to hold",
+        "Whether the case is painted red",
+        "Whether the torch was bought new",
+        "Whether the metal parts touch"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-check",
+          "why": "Weight does not affect the circuit."
+        },
+        {
+          "tag": "wrong-check",
+          "why": "Colour does not affect the circuit."
+        },
+        {
+          "tag": "wrong-check",
+          "why": "Age by itself is not the problem."
+        },
+        null
+      ],
+      "solution": [
+        "A loose or dirty contact leaves a gap in the circuit."
+      ]
+    },
+    {
+      "key": "ci-215",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which of the following statements about the circuit shown (P and Q in one path, R in another, S closed) is correct?",
+      "options": [
+        "P still lights if Q is fused or removed",
+        "Q still lights if P is removed",
+        "R still has its own complete path",
+        "R goes out if P is fused"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "P and Q are in the same path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "P and Q are in the same path."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "R has its own path."
+        }
+      ],
+      "solution": [
+        "R's path does not include P or Q."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit with three bulbs</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"296\" y1=\"58.0\" x2=\"296\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"296\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"296\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"296\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"296\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"296\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(170.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"170.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(128.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"128.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(212.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"212.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(170.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"170.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(170.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-516",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which statement correctly describes what a closed switch does in a circuit?",
+      "options": [
+        "It stops the current, so the circuit is complete",
+        "It lets the current pass, so the circuit is complete",
+        "It makes the current, so the bulb lights",
+        "It stores the current until it is needed"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A closed switch lets the current through."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not make current. The battery does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not store current."
+        }
+      ],
+      "solution": [
+        "A closed switch completes the path."
+      ]
+    },
+    {
+      "key": "ci-217",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A circuit has a battery, a bulb and a gap. A student fills the gap with a graphite pencil lead and the bulb lights. Which statement is correct?",
+      "options": [
+        "Graphite conducts even though it is not a metal",
+        "Graphite is an insulator because it is not a metal",
+        "The pencil lead made its own electricity",
+        "The bulb would have lit without the lead"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb lit, so it conducts."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The battery is the energy source."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The gap was open until the lead was added."
+        }
+      ],
+      "solution": [
+        "The bulb lit, so graphite lets current pass."
+      ]
+    },
+    {
+      "key": "ci-218",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, bulbs P and Q are in separate paths. A student unscrews P. What happens to the current from the battery?",
+      "options": [
+        "It becomes larger because one bulb is removed",
+        "It stops completely",
+        "It does not change",
+        "It becomes smaller because one path is broken"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "One path less means less current from the battery."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Q's path is still complete."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One path has been lost."
+        },
+        null
+      ],
+      "solution": [
+        "Only one path is left, so less current flows from the battery."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, two paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"276\" y1=\"58.0\" x2=\"276\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"276\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"276\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"276\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"276\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"276\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(160.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"160.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(160.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(160.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"160.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(160.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-219",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which is the best reason for putting a switch on the main wire of a parallel circuit?",
+      "options": [
+        "To make each bulb brighter",
+        "To make the battery last longer in every case",
+        "To turn all the bulbs on and off together",
+        "To make the wire cooler"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "A switch does not change brightness."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Its job is to control the circuit."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "A switch has nothing to do with this."
+        }
+      ],
+      "solution": [
+        "The main wire is shared by all paths."
+      ]
+    },
+    {
+      "key": "ci-220",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Two students test a coin. Ali puts the coin in the gap of a test circuit and the bulb lights. Mei puts a coin covered in thick plastic tape in the gap and the bulb does not light. What can be concluded?",
+      "options": [
+        "The coin is an insulator",
+        "The plastic tape is an insulator",
+        "The tape is a conductor",
+        "The coin works only when taped"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Ali's coin lit the bulb."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "The bulb did not light through the tape."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It lit without tape."
+        }
+      ],
+      "solution": [
+        "The tape stopped the current."
+      ]
+    },
+    {
+      "key": "ci-221",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, bulbs P and Q are in one loop. A student adds a wire across bulb Q (joining both of its ends). What happens?",
+      "options": [
+        "P stays lit and Q goes out",
+        "Q stays lit and P goes out",
+        "Both stay lit",
+        "Both go out"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The wire gives the current an easier path past Q."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Q is bypassed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The loop is still complete through the wire."
+        }
+      ],
+      "solution": [
+        "Current takes the wire instead of Q, so Q goes out and P stays lit."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, one loop</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "ci-222",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "Which circuit part changes electrical energy into light and heat?",
+      "options": [
+        "A switch",
+        "A battery",
+        "A wire",
+        "A bulb"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "A switch only opens and closes the circuit."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A battery provides the electrical energy."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A wire carries current."
+        },
+        null
+      ],
+      "solution": [
+        "The bulb gives out light and heat."
+      ]
+    },
+    {
+      "key": "ci-223",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In which situation will the bulb light up?",
+      "options": [
+        "A wire joins only one end of the battery to the bulb",
+        "Two wires join the two ends of the battery together, with no bulb",
+        "Two wires join the bulb to both ends of the battery",
+        "The bulb is placed next to the battery without wires"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-setup",
+          "why": "There is no complete path."
+        },
+        {
+          "tag": "wrong-setup",
+          "why": "There is no bulb in the path."
+        },
+        null,
+        {
+          "tag": "wrong-setup",
+          "why": "There is no path between them."
+        }
+      ],
+      "solution": [
+        "The bulb needs a complete path from one end of the battery to the other."
+      ]
+    },
+    {
+      "key": "ci-224",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-3",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "A student has a battery, a bulb, wires and these materials: iron key, plastic comb, glass marble, copper wire. Which two can be used to complete the circuit?",
+      "options": [
+        "Plastic comb and glass marble",
+        "Iron key and copper wire",
+        "Iron key and glass marble",
+        "Plastic comb and copper wire"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "These are insulators."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "Glass is an insulator."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "Plastic is an insulator."
+        }
+      ],
+      "solution": [
+        "Metals conduct electricity."
+      ]
+    },
+    {
+      "key": "ci-225",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-2",
+      "pattern": "sci-pat-circuit-basics",
+      "stem": "In the circuit shown, S is closed but the bulb is not lit. A student replaces the battery with a new one and the bulb lights up. What was the problem?",
+      "options": [
+        "The first battery was flat",
+        "The bulb was fused",
+        "The switch was open",
+        "The wires were too thick"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "The same bulb lit with the new battery."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The switch is closed and was not changed."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The wires were not changed."
+        }
+      ],
+      "solution": [
+        "Only the battery was changed, so it was the problem."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A circuit</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    }
+  ]
+}

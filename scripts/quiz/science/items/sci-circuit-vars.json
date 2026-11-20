@@ -1,0 +1,2431 @@
+{
+  "subtopic": "sci-systems-circuit-vars",
+  "items": [
+    {
+      "key": "cv-001",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A bulb is lit by one battery. A second battery is added in series. What happens to the bulb?",
+      "options": [
+        "It becomes brighter",
+        "It becomes dimmer than before",
+        "It stays just the same as before",
+        "It goes out completely"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "More batteries in series push more current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The extra battery gives more energy."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb still has a complete circuit."
+        }
+      ],
+      "solution": [
+        "More cells in series give a larger current, so the bulb is brighter."
+      ]
+    },
+    {
+      "key": "cv-002",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A second bulb is added in series to a circuit with one battery and one bulb. What happens to the first bulb?",
+      "options": [
+        "It becomes brighter",
+        "It stays the same",
+        "It goes out",
+        "It becomes dimmer"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The battery now has to light two bulbs."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The current is now smaller."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The circuit is still complete."
+        },
+        null
+      ],
+      "solution": [
+        "More bulbs in series make the current smaller."
+      ]
+    },
+    {
+      "key": "cv-003",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuits A and B each have a single bulb. Which bulb is brighter?",
+      "options": [
+        "The bulb in circuit A",
+        "Both are equally bright",
+        "The bulb in circuit B",
+        "Neither will light"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A has fewer cells, so a smaller current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The two circuits have different numbers of cells."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both circuits are closed."
+        }
+      ],
+      "solution": [
+        "Circuit B has two cells in series, so more current flows."
+      ],
+      "figure": "<svg viewBox=\"0 0 474.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-004",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuit A has one bulb and circuit B has two bulbs. Which circuit has the brighter bulb or bulbs?",
+      "options": [
+        "The bulb in circuit B",
+        "The bulb in circuit A",
+        "Both are equally bright",
+        "Neither will light"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "B has two bulbs sharing the same battery."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "B has two bulbs in series."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both circuits are closed."
+        }
+      ],
+      "solution": [
+        "In A one bulb gets all the current. In B the current is smaller because there are two bulbs."
+      ],
+      "figure": "<svg viewBox=\"0 0 514.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-005",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which circuit has the brightest bulbs?",
+      "options": [
+        "Circuit B",
+        "Circuit A",
+        "Circuit C",
+        "They are all equally bright"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "A has the fewest cells."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "C has fewer cells than B."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The numbers of cells are different."
+        }
+      ],
+      "solution": [
+        "B has the most cells for one bulb."
+      ],
+      "figure": "<svg viewBox=\"0 0 718.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-18.0\" y=\"-14\" width=\"36\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-13.0\" y1=\"-13\" x2=\"-13.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-7.0\" y1=\"-7\" x2=\"-7.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"7.0\" y1=\"-13\" x2=\"7.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"13.0\" y1=\"-7\" x2=\"13.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"488.0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit C</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-006",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "What happens to the brightness of a bulb when a battery is added in series?",
+      "options": [
+        "It becomes dimmer",
+        "It does not change",
+        "It first brightens and then goes out",
+        "It becomes brighter"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More energy makes it brighter."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The current changes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It simply stays brighter."
+        },
+        null
+      ],
+      "solution": [
+        "More cells in series give a bigger current."
+      ]
+    },
+    {
+      "key": "cv-007",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following is a good conductor of electricity?",
+      "options": [
+        "A rubber glove",
+        "A plastic ruler",
+        "A copper wire",
+        "A wooden spoon"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is an insulator."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Wood is an insulator."
+        }
+      ],
+      "solution": [
+        "Copper is a metal and conducts electricity."
+      ]
+    },
+    {
+      "key": "cv-008",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following is an electrical insulator?",
+      "options": [
+        "Iron",
+        "Rubber",
+        "Aluminium",
+        "Copper"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Iron is a metal, so it is a conductor."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Aluminium is a metal, so it is a conductor."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Copper is a metal, so it is a conductor."
+        }
+      ],
+      "solution": [
+        "Rubber does not let electricity pass through it."
+      ]
+    },
+    {
+      "key": "cv-009",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of these is an electrical conductor?",
+      "options": [
+        "A steel key",
+        "A glass cup",
+        "A plastic comb",
+        "A dry wooden stick"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Glass is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Wood is an insulator."
+        }
+      ],
+      "solution": [
+        "Steel is a metal and conducts electricity."
+      ]
+    },
+    {
+      "key": "cv-010",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following is an insulator?",
+      "options": [
+        "A copper coin",
+        "An iron nail",
+        "An aluminium spoon",
+        "A plastic pen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Copper is a conductor."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Iron is a conductor."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Aluminium is a conductor."
+        },
+        null
+      ],
+      "solution": [
+        "Plastic is an insulator."
+      ]
+    },
+    {
+      "key": "cv-011",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Why are the handles of screwdrivers used by electricians made of plastic?",
+      "options": [
+        "Plastic is a conductor, so it carries the electricity away",
+        "Plastic is heavier than metal",
+        "Plastic is an insulator, so the hand is safe",
+        "Plastic makes the screwdriver shiny"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Plastic is an insulator."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Weight is not the reason."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Appearance is not the reason."
+        }
+      ],
+      "solution": [
+        "An insulating handle keeps the user safe."
+      ]
+    },
+    {
+      "key": "cv-012",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following is NOT an electrical conductor?",
+      "options": [
+        "Copper",
+        "Dry wood",
+        "Iron",
+        "Aluminium"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "conductor",
+          "why": "Copper is a metal conductor."
+        },
+        null,
+        {
+          "tag": "conductor",
+          "why": "Iron is a metal conductor."
+        },
+        {
+          "tag": "conductor",
+          "why": "Aluminium is a metal conductor."
+        }
+      ],
+      "solution": [
+        "Dry wood does not conduct electricity."
+      ]
+    },
+    {
+      "key": "cv-013",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The bulbs in circuits A and B are the same. How does the brightness of the bulb in A compare with a bulb in B?",
+      "options": [
+        "They are equally bright",
+        "The bulb in A is brighter",
+        "The bulb in B is brighter",
+        "The bulbs in B are dimmer"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "In a parallel circuit each bulb has its own path to the battery."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Each path has the same current as in A."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Bulbs in separate paths are not dimmer."
+        }
+      ],
+      "solution": [
+        "In B each bulb has its own path, so it is as bright as the bulb in A."
+      ],
+      "figure": "<svg viewBox=\"0 0 484.0 266.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"36.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"240.0\" height=\"266.0\" viewBox=\"0 0 240 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"120.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"196\" y1=\"58.0\" x2=\"196\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"196\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"196\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"196\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"196\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"196\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"196\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(120.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"120.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(120.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"120.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(120.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"120.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(120.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-014",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Compare the bulb in circuit A with a bulb in circuit B. Which statement is correct?",
+      "options": [
+        "The bulb in B is brighter",
+        "They are equally bright",
+        "None of the bulbs light",
+        "The bulb in A is brighter"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "B's bulbs are in series, sharing the current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "B has two bulbs in series."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both circuits are closed."
+        },
+        null
+      ],
+      "solution": [
+        "The bulb in A has all of the current. In B two bulbs share it."
+      ],
+      "figure": "<svg viewBox=\"0 0 514.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-015",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student adds more cells in series to a circuit with a bulb. What can she expect?",
+      "options": [
+        "The bulb becomes much dimmer",
+        "The bulb stays the same as before",
+        "The bulb becomes brighter",
+        "The bulb gets smaller in size"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More cells give more current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "More cells make a difference."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb does not change size."
+        }
+      ],
+      "solution": [
+        "More cells give a bigger current."
+      ]
+    },
+    {
+      "key": "cv-016",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following is a poor conductor of electricity?",
+      "options": [
+        "A steel spoon",
+        "A plastic spoon",
+        "A copper spoon",
+        "An aluminium spoon"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Steel is a metal."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Copper is a metal."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Aluminium is a metal."
+        }
+      ],
+      "solution": [
+        "Plastic is a poor conductor."
+      ]
+    },
+    {
+      "key": "cv-017",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of these materials can be used to carry electricity to a lamp?",
+      "options": [
+        "Aluminium",
+        "Glass",
+        "Rubber",
+        "Paper"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Glass is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Paper is an insulator."
+        }
+      ],
+      "solution": [
+        "Aluminium is a metal conductor."
+      ]
+    },
+    {
+      "key": "cv-018",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which one is the best material to cover an electric cable?",
+      "options": [
+        "Copper",
+        "Iron",
+        "Steel",
+        "Plastic"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Copper conducts electricity."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Iron conducts electricity."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Steel conducts electricity."
+        },
+        null
+      ],
+      "solution": [
+        "Plastic is an insulator, so it is safe."
+      ]
+    },
+    {
+      "key": "cv-019",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which circuit has the dimmest bulbs?",
+      "options": [
+        "Circuit A",
+        "Circuit B",
+        "Circuit C",
+        "They are all equally dim"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-circuit",
+          "why": "A has only one bulb."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "B has fewer bulbs than C."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The circuits have different numbers of bulbs."
+        }
+      ],
+      "solution": [
+        "C has the most bulbs sharing one cell."
+      ],
+      "figure": "<svg viewBox=\"0 0 788.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"200.0\" height=\"194.0\" viewBox=\"0 0 200 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"100.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"156\" y1=\"58.0\" x2=\"156\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"156\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"156\" y2=\"158.0\"/><g transform=\"translate(100.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"100.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(81.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"81.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(118.66666666666667 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"214.0\" y=\"0.0\" width=\"260.0\" height=\"194.0\" viewBox=\"0 0 260 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"216\" y1=\"58.0\" x2=\"216\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"216\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"216\" y2=\"158.0\"/><g transform=\"translate(101.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"101.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(158.66666666666669 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"158.66666666666669\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(101.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"101.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(158.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"488.0\" y=\"0.0\" width=\"300.0\" height=\"194.0\" viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit C</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(97.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"97.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(150.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"150.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(203.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"203.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-020",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "What happens to the current when more bulbs are added in series?",
+      "options": [
+        "The current becomes larger",
+        "The current becomes smaller",
+        "The current does not change",
+        "The current stops"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More bulbs make it harder for the current."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The current changes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The circuit is still complete."
+        }
+      ],
+      "solution": [
+        "More bulbs in one loop make the current smaller."
+      ]
+    },
+    {
+      "key": "cv-021",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student places a coin in the gap of a circuit and the bulb lights. Which statement about the coin is correct?",
+      "options": [
+        "The coin is a conductor",
+        "The coin is an insulator",
+        "The coin is a battery",
+        "The coin is a bulb"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "An insulator would stop the bulb lighting."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The coin does not supply energy."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The coin only carries current."
+        }
+      ],
+      "solution": [
+        "The bulb lit, so the coin conducts."
+      ]
+    },
+    {
+      "key": "cv-022",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A rubber band is placed in the gap of a circuit. The bulb does not light. What does this show?",
+      "options": [
+        "The rubber band is a conductor",
+        "The battery is flat",
+        "The bulb is fused",
+        "The rubber band is an insulator"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A conductor would let the bulb light."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The test does not show this."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The test does not show this."
+        },
+        null
+      ],
+      "solution": [
+        "Rubber does not let electricity through."
+      ]
+    },
+    {
+      "key": "cv-023",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Metals are good conductors of electricity. Which of the following is a metal?",
+      "options": [
+        "A glass marble for a game",
+        "A rubber ball for a game",
+        "A steel paper clip",
+        "A wooden block for a game"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Glass is not a metal."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is not a metal."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Wood is not a metal."
+        }
+      ],
+      "solution": [
+        "Steel is a metal."
+      ]
+    },
+    {
+      "key": "cv-024",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Two cells are joined in series. How does this compare with using one cell?",
+      "options": [
+        "The bulb gets less energy and is dimmer",
+        "The bulb gets more energy and is brighter",
+        "The bulb is the same brightness",
+        "The bulb will not light"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Two cells give more energy."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "More cells make a difference."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It will light."
+        }
+      ],
+      "solution": [
+        "Two cells in series push a bigger current."
+      ]
+    },
+    {
+      "key": "cv-025",
+      "level": "basic",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which change will make the bulb in a series circuit brighter?",
+      "options": [
+        "Adding another battery in series",
+        "Adding another bulb in series",
+        "Making the wire longer",
+        "Opening the switch"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "This makes the bulb dimmer."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Wire length is not the answer."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "An open switch turns the bulb off."
+        }
+      ],
+      "solution": [
+        "More cells give a larger current."
+      ]
+    },
+    {
+      "key": "cv-101",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The table shows the brightness of a bulb for different numbers of cells in series. What can be concluded?",
+      "options": [
+        "The more cells in series, the brighter the bulb",
+        "The more cells in series, the dimmer the bulb",
+        "The number of cells does not affect the bulb",
+        "The bulb is brightest with one cell"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The bulb got brighter with more cells."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The brightness changed."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "With one cell it was dim."
+        }
+      ],
+      "solution": [
+        "Brightness rose with each extra cell."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series with one bulb</text><rect x=\"10\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"80.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Number of cells</text><rect x=\"150\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Brightness of bulb</text><rect x=\"10\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"150\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dim</text><rect x=\"10\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"150\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">bright</text><rect x=\"10\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"150\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">very bright</text></svg>"
+    },
+    {
+      "key": "cv-102",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "In the same experiment, which variable was changed on purpose?",
+      "options": [
+        "The brightness of the bulb",
+        "The type of bulb",
+        "The length of the wires",
+        "The number of cells"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "measured-variable",
+          "why": "This is what was observed."
+        },
+        {
+          "tag": "fixed-variable",
+          "why": "This was kept the same."
+        },
+        {
+          "tag": "fixed-variable",
+          "why": "This was kept the same."
+        },
+        null
+      ],
+      "solution": [
+        "The number of cells was the variable that was changed."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series with one bulb</text><rect x=\"10\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"80.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Number of cells</text><rect x=\"150\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Brightness of bulb</text><rect x=\"10\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"150\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dim</text><rect x=\"10\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"150\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">bright</text><rect x=\"10\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"150\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">very bright</text></svg>"
+    },
+    {
+      "key": "cv-503",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "In the same experiment, which should be kept the same?",
+      "options": [
+        "The number of cells",
+        "The brightness of the bulb",
+        "The bulb and the wires",
+        "The number of cells in each test"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "This is the variable that is changed."
+        },
+        {
+          "tag": "measured-variable",
+          "why": "This is the result that is observed."
+        },
+        null,
+        {
+          "tag": "changed-variable",
+          "why": "The number of cells changes each time."
+        }
+      ],
+      "solution": [
+        "Only the number of cells should change."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series with one bulb</text><rect x=\"10\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"80.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Number of cells</text><rect x=\"150\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Brightness of bulb</text><rect x=\"10\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"150\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dim</text><rect x=\"10\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"150\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">bright</text><rect x=\"10\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"80.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"150\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">very bright</text></svg>"
+    },
+    {
+      "key": "cv-104",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The table shows what happened as more bulbs were added in series to one cell. What can be concluded?",
+      "options": [
+        "The more bulbs in series, the brighter each bulb",
+        "The more bulbs in series, the dimmer each bulb",
+        "The number of bulbs has no effect",
+        "Two bulbs are the brightest"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Each bulb got dimmer."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The brightness changed."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "One bulb was the brightest."
+        }
+      ],
+      "solution": [
+        "The current becomes smaller as bulbs are added."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulbs in series with one cell</text><rect x=\"10\" y=\"36\" width=\"160\" height=\"34\"/><text x=\"90.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Number of bulbs in series</text><rect x=\"170\" y=\"36\" width=\"160\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Brightness of each bulb</text><rect x=\"10\" y=\"70\" width=\"160\" height=\"30\"/><text x=\"90.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"170\" y=\"70\" width=\"160\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">bright</text><rect x=\"10\" y=\"100\" width=\"160\" height=\"30\"/><text x=\"90.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"170\" y=\"100\" width=\"160\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dim</text><rect x=\"10\" y=\"130\" width=\"160\" height=\"30\"/><text x=\"90.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"170\" y=\"130\" width=\"160\" height=\"30\"/><text x=\"250.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">very dim</text></svg>"
+    },
+    {
+      "key": "cv-105",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The circuit has three bulbs in separate paths and one cell. What will be the brightness of each bulb compared with a single bulb on one cell?",
+      "options": [
+        "The same as a single bulb",
+        "Dimmer than a single bulb",
+        "Brighter than a single bulb",
+        "Only one will light"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Each bulb has its own path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The cell is the same, so each path gets about the same current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Every path is complete."
+        }
+      ],
+      "solution": [
+        "Bulbs in separate paths are each as bright as one bulb alone."
+      ],
+      "figure": "<svg viewBox=\"0 0 260 322\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three bulbs, separate paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"286\"/><line x1=\"216\" y1=\"58.0\" x2=\"216\" y2=\"286\"/><line x1=\"44\" y1=\"58.0\" x2=\"216\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.0\" x2=\"216\" y2=\"115.0\"/><line x1=\"44\" y1=\"172.0\" x2=\"216\" y2=\"172.0\"/><line x1=\"44\" y1=\"229.0\" x2=\"216\" y2=\"229.0\"/><line x1=\"44\" y1=\"286.0\" x2=\"216\" y2=\"286.0\"/><circle cx=\"44\" cy=\"115.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"216\" cy=\"115.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"216\" cy=\"172.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"229.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"216\" cy=\"229.0\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(130.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"130.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(130.0 115.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"130.0\" y=\"93.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(130.0 172.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"130.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(130.0 229.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"130.0\" y=\"207.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><g transform=\"translate(130.0 286.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "cv-106",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student wants the bulb in a circuit to be as bright as possible. Which circuit should she use?",
+      "options": [
+        "One cell with three bulbs in series",
+        "One cell with one bulb",
+        "Two cells with two bulbs in series",
+        "Three cells in series with one bulb"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-circuit",
+          "why": "This would give the dimmest bulbs."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "Three cells give a bigger current."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "The two bulbs would share the current."
+        },
+        null
+      ],
+      "solution": [
+        "Most cells and fewest bulbs in series give the brightest bulb."
+      ]
+    },
+    {
+      "key": "cv-107",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student wants the bulbs in a circuit to be as dim as possible. Which circuit should she use?",
+      "options": [
+        "Three cells with one bulb only",
+        "Two cells with one bulb only",
+        "One cell, three bulbs in series",
+        "One cell with one bulb"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-circuit",
+          "why": "This is the brightest."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "This is quite bright."
+        },
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "One bulb gets all the current."
+        }
+      ],
+      "solution": [
+        "Fewest cells and most bulbs in series give dim bulbs."
+      ]
+    },
+    {
+      "key": "cv-108",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which statement about bulbs in a series circuit is correct?",
+      "options": [
+        "Adding bulbs makes each bulb brighter",
+        "Adding bulbs makes each bulb dimmer",
+        "Adding bulbs does not change the brightness",
+        "Adding bulbs makes the battery bigger"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More bulbs make the current smaller."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The brightness changes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The battery does not change."
+        }
+      ],
+      "solution": [
+        "The current becomes smaller as bulbs are added."
+      ]
+    },
+    {
+      "key": "cv-109",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The table shows whether a bulb lit when each object was put in the gap of a circuit. Which two objects are made of insulators?",
+      "options": [
+        "Rubber eraser and plastic spoon",
+        "Steel key and copper coin",
+        "Rubber eraser and steel key",
+        "Plastic spoon and copper coin"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "These lit the bulb, so they are conductors."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "The key lit the bulb."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "The coin lit the bulb."
+        }
+      ],
+      "solution": [
+        "The bulb did not light with the eraser or the spoon."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing four objects</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Object</text><rect x=\"140\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulb</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">steel key</text><rect x=\"140\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">rubber eraser</text><rect x=\"140\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">copper coin</text><rect x=\"140\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">plastic spoon</text><rect x=\"140\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text></svg>"
+    },
+    {
+      "key": "cv-110",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following is made of a conductor and an insulator?",
+      "options": [
+        "A spoon made only of steel",
+        "A rubber band for the hair",
+        "A wooden ruler for school",
+        "A plastic-coated wire"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-object",
+          "why": "Steel alone is a conductor."
+        },
+        {
+          "tag": "wrong-object",
+          "why": "Rubber alone is an insulator."
+        },
+        {
+          "tag": "wrong-object",
+          "why": "Wood alone is an insulator."
+        },
+        null
+      ],
+      "solution": [
+        "Copper carries the current and plastic is the insulator covering it."
+      ]
+    },
+    {
+      "key": "cv-111",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student suspects that a shiny object is not made of metal. How can he test it?",
+      "options": [
+        "Hold it next to a battery and a bulb",
+        "Weigh it on a balance and note its mass",
+        "See if it lights a bulb in a circuit",
+        "Look at it closely under a bright lamp"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-method",
+          "why": "There is no circuit."
+        },
+        {
+          "tag": "wrong-method",
+          "why": "Mass does not show whether it conducts."
+        },
+        null,
+        {
+          "tag": "wrong-method",
+          "why": "Appearance does not show whether it conducts."
+        }
+      ],
+      "solution": [
+        "A conductor lets the bulb light."
+      ]
+    },
+    {
+      "key": "cv-112",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "In which of the circuits will the bulb be the brightest?",
+      "options": [
+        "Circuit A",
+        "Circuit C",
+        "Circuit B",
+        "They are equally bright"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-circuit",
+          "why": "A has the fewest cells."
+        },
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "B has fewer cells than C."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The numbers of cells differ."
+        }
+      ],
+      "solution": [
+        "C has the most cells in series."
+      ],
+      "figure": "<svg viewBox=\"0 0 718.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"488.0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit C</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-18.0\" y=\"-14\" width=\"36\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-13.0\" y1=\"-13\" x2=\"-13.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-7.0\" y1=\"-7\" x2=\"-7.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"7.0\" y1=\"-13\" x2=\"7.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"13.0\" y1=\"-7\" x2=\"13.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-113",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "In which circuit will the bulbs be the dimmest?",
+      "options": [
+        "Circuit A",
+        "Circuit B",
+        "Circuit C",
+        "They are equally dim"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "B has two bulbs, but also two cells."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "C has one bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The numbers of bulbs and cells differ."
+        }
+      ],
+      "solution": [
+        "A has the most bulbs for the fewest cells."
+      ],
+      "figure": "<svg viewBox=\"0 0 798.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"284.0\" y=\"0.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"568.0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit C</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-114",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuit A has one cell and one bulb. Circuit B has two cells and two bulbs in series. Which statement is correct?",
+      "options": [
+        "The bulb in A is much brighter than those in B",
+        "The bulbs in B are brighter than the bulb in A",
+        "The bulbs in B are dimmer than the bulb in A",
+        "The bulbs in A and B are equally bright"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "B has twice the energy to share between two bulbs."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "B has two bulbs to share the extra energy."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The extra cell makes up for the extra bulb."
+        },
+        null
+      ],
+      "solution": [
+        "Each bulb in B gets the same share as the single bulb in A."
+      ],
+      "figure": "<svg viewBox=\"0 0 514.0 194.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"230.0\" height=\"194.0\" viewBox=\"0 0 230 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"115.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"186\" y1=\"58.0\" x2=\"186\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"186\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"186\" y2=\"158.0\"/><g transform=\"translate(115.0 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"115.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(91.33333333333334 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"91.33333333333334\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(138.66666666666669 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"244.0\" y=\"0.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-115",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Why does the battery in a parallel circuit with two bulbs run out sooner than the battery in a circuit with one bulb?",
+      "options": [
+        "The bulbs are dimmer than a single bulb",
+        "The wires are longer",
+        "It supplies two paths at once",
+        "The switch uses up the energy"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The bulbs are as bright as before."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Wire length is not the reason."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not use energy."
+        }
+      ],
+      "solution": [
+        "Two bulbs use energy twice as quickly."
+      ]
+    },
+    {
+      "key": "cv-116",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei wants to find out how the number of bulbs affects brightness. She uses one cell and adds bulbs in series. Which should she keep the same?",
+      "options": [
+        "The number of bulbs",
+        "The cell and the type of bulbs",
+        "The brightness of the bulbs",
+        "The number of bulbs lit"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "This is what she changes."
+        },
+        null,
+        {
+          "tag": "measured-variable",
+          "why": "This is what she observes."
+        },
+        {
+          "tag": "changed-variable",
+          "why": "This changes when she adds bulbs."
+        }
+      ],
+      "solution": [
+        "Only the number of bulbs should change."
+      ]
+    },
+    {
+      "key": "cv-117",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following can be used to join two parts of a circuit so that the bulb lights up?",
+      "options": [
+        "An iron nail",
+        "A plastic straw",
+        "A dry wooden stick",
+        "A glass rod"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Wood is an insulator."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Glass is an insulator."
+        }
+      ],
+      "solution": [
+        "Iron is a conductor."
+      ]
+    },
+    {
+      "key": "cv-118",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A bulb is lit with one cell. Two cells are then connected in series. What happens to the current?",
+      "options": [
+        "It decreases",
+        "It stays the same",
+        "It stops",
+        "It increases"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More cells push a bigger current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "More cells change it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The circuit is still complete."
+        },
+        null
+      ],
+      "solution": [
+        "More cells in series give a bigger current."
+      ]
+    },
+    {
+      "key": "cv-119",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuit A has two cells in series and one bulb. In circuit B, one of the cells is removed. How does the brightness of the bulb in B compare with A?",
+      "options": [
+        "The bulb in B is brighter",
+        "They are equally bright",
+        "The bulb in B is dimmer",
+        "The bulb in B goes out"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "B has fewer cells."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "B has fewer cells."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "One cell still lights it."
+        }
+      ],
+      "solution": [
+        "One cell gives a smaller current than two."
+      ]
+    },
+    {
+      "key": "cv-120",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which row correctly shows a conductor and an insulator?",
+      "options": [
+        "Rubber and plastic",
+        "Iron nail and rubber",
+        "Copper and steel",
+        "Wood and glass"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "Both are insulators."
+        },
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "Both are conductors."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "Both are insulators."
+        }
+      ],
+      "solution": [
+        "Iron is a conductor and rubber is an insulator."
+      ]
+    },
+    {
+      "key": "cv-121",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Compare circuit A (one cell, two bulbs in series) with circuit B (one cell, two bulbs in separate paths). Which has the brighter bulbs?",
+      "options": [
+        "Circuit B",
+        "Circuit A",
+        "They are equally bright",
+        "Neither will light"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "In A the bulbs share one path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "In B each bulb has its own path."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both circuits are complete."
+        }
+      ],
+      "solution": [
+        "In B each bulb has a path to the cell of its own."
+      ],
+      "figure": "<svg viewBox=\"0 0 524.0 266.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"36.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"284.0\" y=\"0.0\" width=\"240.0\" height=\"266.0\" viewBox=\"0 0 240 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"120.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"196\" y1=\"58.0\" x2=\"196\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"196\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"196\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"196\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"196\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"196\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"196\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(120.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"120.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(120.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"120.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(120.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"120.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(120.0 230.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-122",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "In the circuit shown with two bulbs in series, one bulb is replaced by a wire. What happens to the other bulb?",
+      "options": [
+        "It becomes a lot dimmer",
+        "It goes out completely",
+        "It does not change at all",
+        "It becomes brighter"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Fewer bulbs make the current bigger."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The circuit is still complete."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "There is now only one bulb in the loop."
+        },
+        null
+      ],
+      "solution": [
+        "With one less bulb, the current is larger."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, one loop</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"256\" y1=\"58.0\" x2=\"256\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"256\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"256\" y2=\"158.0\"/><g transform=\"translate(114.66666666666667 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"114.66666666666667\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(185.33333333333334 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"185.33333333333334\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(114.66666666666667 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"114.66666666666667\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(185.33333333333334 158.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "cv-123",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Why must the metal tips of an electric plug be metal and the case be plastic?",
+      "options": [
+        "Metal is light and plastic is heavy",
+        "Plastic carries the current and metal keeps the user safe",
+        "Metal carries the current and plastic keeps the user safe",
+        "Both are conductors"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Weight is not the reason."
+        },
+        {
+          "tag": "reversed",
+          "why": "Metal is the conductor."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Plastic is an insulator."
+        }
+      ],
+      "solution": [
+        "A conductor for the current and an insulator for safety."
+      ]
+    },
+    {
+      "key": "cv-124",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A circuit has one cell and two bulbs in series. Another cell is added in series. What happens?",
+      "options": [
+        "The bulbs become a lot dimmer",
+        "The bulbs become brighter",
+        "The bulbs stay just the same",
+        "One of the bulbs goes out"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More cells give a bigger current."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "More cells make a difference."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The circuit is still complete."
+        }
+      ],
+      "solution": [
+        "More cells give a bigger current."
+      ]
+    },
+    {
+      "key": "cv-125",
+      "level": "intermediate",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student tests a pencil lead and a wooden pencil casing in the gap of a circuit. Only the lead lights the bulb. What does this show?",
+      "options": [
+        "The lead is a conductor and the wood is an insulator",
+        "The lead is an insulator and the wood is a conductor",
+        "Both are conductors",
+        "Both are insulators"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The lead lit the bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The wood did not light the bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The lead lit the bulb."
+        }
+      ],
+      "solution": [
+        "Only the lead lit the bulb."
+      ]
+    },
+    {
+      "key": "cv-201",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The table shows four circuits. Each uses the same kind of cells and bulbs. In which circuit is the bulb the brightest?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "P has fewer cells than Q for the same single bulb."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "R has the fewest cells for two bulbs."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "S has two bulbs sharing two cells."
+        }
+      ],
+      "solution": [
+        "Q has the most cells and the fewest bulbs."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four circuits</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit</text><rect x=\"80\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"140.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series</text><rect x=\"200\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulbs in series</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text></svg>"
+    },
+    {
+      "key": "cv-202",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Using the same table, in which circuit are the bulbs the dimmest?",
+      "options": [
+        "P",
+        "Q",
+        "S",
+        "R"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-circuit",
+          "why": "P has one bulb for one cell."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "Q has two cells for one bulb."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "S has two cells for two bulbs."
+        },
+        null
+      ],
+      "solution": [
+        "R has the fewest cells and the most bulbs."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four circuits</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit</text><rect x=\"80\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"140.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series</text><rect x=\"200\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulbs in series</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text></svg>"
+    },
+    {
+      "key": "cv-203",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Using the same table, which two circuits have bulbs of equal brightness?",
+      "options": [
+        "P and Q",
+        "Q and R",
+        "P and S",
+        "R and S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "Q has more cells for the same one bulb."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "These are at opposite ends of the brightness order."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "S has more cells for the same two bulbs."
+        }
+      ],
+      "solution": [
+        "Each bulb in P and S gets one cell's worth."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four circuits</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit</text><rect x=\"80\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"140.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series</text><rect x=\"200\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulbs in series</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text></svg>"
+    },
+    {
+      "key": "cv-204",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Using the same table, which two circuits should be compared to find out how the number of cells affects the brightness of one bulb?",
+      "options": [
+        "P and R",
+        "P and Q",
+        "Q and R",
+        "Q and S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "These differ in the number of bulbs."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "These differ in both cells and bulbs."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "These differ in the number of bulbs."
+        }
+      ],
+      "solution": [
+        "P and Q differ only in the number of cells."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four circuits</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit</text><rect x=\"80\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"140.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series</text><rect x=\"200\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulbs in series</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text></svg>"
+    },
+    {
+      "key": "cv-205",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Using the same table, which two circuits should be compared to find out how the number of bulbs in series affects brightness when there is one cell?",
+      "options": [
+        "P and R",
+        "P and Q",
+        "Q and R",
+        "R and S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "These differ in the number of cells."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "These differ in both cells and bulbs."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "These differ in the number of cells."
+        }
+      ],
+      "solution": [
+        "P and R differ only in the number of bulbs."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four circuits</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit</text><rect x=\"80\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"140.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series</text><rect x=\"200\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulbs in series</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"200\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"80\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"140.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"200\" y=\"160\" width=\"120\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text></svg>"
+    },
+    {
+      "key": "cv-206",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuit A has two bulbs in separate paths and circuit B has the same two bulbs in series. Both use two identical cells in series. Which battery will run out first?",
+      "options": [
+        "Circuit B, because the bulbs share the current",
+        "Both at the same time",
+        "Neither runs out",
+        "Circuit A, as both paths use current"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "In series the current is smaller, so the cells last longer."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The total current is not the same."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Every battery eventually runs out."
+        },
+        null
+      ],
+      "solution": [
+        "In parallel more current is drawn, so the cells are used up sooner."
+      ],
+      "figure": "<svg viewBox=\"0 0 524.0 266.0\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><svg x=\"0\" y=\"0.0\" width=\"240.0\" height=\"266.0\" viewBox=\"0 0 240 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"120.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit A</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"196\" y1=\"58.0\" x2=\"196\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"196\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"196\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"196\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"196\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"196\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"196\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(120.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"120.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(120.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"120.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(120.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"120.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(120.0 230.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg><svg x=\"254.0\" y=\"36.0\" width=\"270.0\" height=\"194.0\" viewBox=\"0 0 270 194\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Circuit B</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"158\"/><line x1=\"226\" y1=\"58.0\" x2=\"226\" y2=\"158\"/><line x1=\"44\" y1=\"58.0\" x2=\"226\" y2=\"58.0\"/><line x1=\"44\" y1=\"158.0\" x2=\"226\" y2=\"158.0\"/><g transform=\"translate(104.66666666666666 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"104.66666666666666\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(165.33333333333331 58.0) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"165.33333333333331\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(104.66666666666666 158.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"104.66666666666666\" y=\"136.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(165.33333333333331 158.0) rotate(0)\"><rect x=\"-13.0\" y=\"-14\" width=\"26\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-8.0\" y1=\"-13\" x2=\"-8.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"-2.0\" y1=\"-7\" x2=\"-2.0\" y2=\"7\" stroke-width=\"4\"/><line x1=\"2.0\" y1=\"-13\" x2=\"2.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"8.0\" y1=\"-7\" x2=\"8.0\" y2=\"7\" stroke-width=\"4\"/></g></svg></svg>"
+    },
+    {
+      "key": "cv-207",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student wants a bulb to be brighter without changing the bulb or the wires. What can she do?",
+      "options": [
+        "Add another bulb in series",
+        "Add a switch to the circuit",
+        "Add another cell in series",
+        "Make the wires longer"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "This makes the bulb dimmer."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not change brightness."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "This will not make the bulb brighter."
+        }
+      ],
+      "solution": [
+        "More cells in series give more current."
+      ]
+    },
+    {
+      "key": "cv-208",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following will make the bulb in a series circuit dimmer?",
+      "options": [
+        "Adding another cell in series",
+        "Adding another bulb in series",
+        "Removing a bulb from the circuit",
+        "Closing a second switch"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "This makes the bulb brighter."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "This makes the bulb brighter."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not change brightness."
+        }
+      ],
+      "solution": [
+        "More bulbs in series make the current smaller."
+      ]
+    },
+    {
+      "key": "cv-209",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A circuit has two cells and two bulbs in series. Which change will make the bulbs brighter?",
+      "options": [
+        "Adding a third cell in series",
+        "Adding a third bulb in series",
+        "Taking out one of the cells",
+        "Adding a second switch"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "This makes the bulbs dimmer."
+        },
+        {
+          "tag": "reversed",
+          "why": "This makes the bulbs dimmer."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not change brightness."
+        }
+      ],
+      "solution": [
+        "More cells in series give more current."
+      ]
+    },
+    {
+      "key": "cv-210",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "The table shows what happened when different objects were placed in the gap of a circuit. Which object is most likely to be made of a metal?",
+      "options": [
+        "R",
+        "S",
+        "U",
+        "T"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-object",
+          "why": "R did not light the bulb."
+        },
+        {
+          "tag": "wrong-object",
+          "why": "S did not light the bulb."
+        },
+        {
+          "tag": "wrong-object",
+          "why": "U did not light the bulb."
+        },
+        null
+      ],
+      "solution": [
+        "Only T lit the bulb, so it is a conductor, most likely a metal."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"125.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Testing four objects</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Object</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Bulb</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">T</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">lights up</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">U</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">does not light</text></svg>"
+    },
+    {
+      "key": "cv-211",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A bulb lights when a pencil lead is in the gap but not when a wooden pencil casing is in the gap. Which is the best conclusion?",
+      "options": [
+        "Both are conductors",
+        "Both are insulators",
+        "The lead is a conductor and the wood is an insulator",
+        "The lead is an insulator and the wood is a conductor"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The wood did not light the bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The lead lit the bulb."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "The lead lit the bulb."
+        }
+      ],
+      "solution": [
+        "Only the lead lit the bulb."
+      ]
+    },
+    {
+      "key": "cv-212",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following would be best for making the outer cover of an electric plug?",
+      "options": [
+        "Copper, because it is a good conductor",
+        "Plastic, because it is an insulator",
+        "Iron, because it is very strong",
+        "Aluminium, because it is light"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A conductor on the outside would be unsafe."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Iron conducts electricity, so it is unsafe."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Aluminium conducts electricity, so it is unsafe."
+        }
+      ],
+      "solution": [
+        "The cover should not let electricity pass to the user."
+      ]
+    },
+    {
+      "key": "cv-213",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A series circuit has one cell and three bulbs. Two bulbs are replaced by wires. What happens to the brightness of the remaining bulb?",
+      "options": [
+        "It becomes brighter",
+        "It becomes a lot dimmer",
+        "It stays just the same",
+        "It goes out"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Fewer bulbs mean a bigger current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The current has changed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The circuit is still complete."
+        }
+      ],
+      "solution": [
+        "With fewer bulbs in series, the current is larger."
+      ]
+    },
+    {
+      "key": "cv-214",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuits X and Y each have one bulb. X has two cells in series and Y has one cell. A second bulb is added in series in both circuits. Which statement is correct?",
+      "options": [
+        "The bulbs in both circuits become brighter",
+        "The bulbs in X become brighter and those in Y become dimmer",
+        "The bulbs do not change",
+        "The bulbs in both circuits become dimmer"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More bulbs in series make the current smaller."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Adding a bulb has the same kind of effect in both."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The current falls in both circuits."
+        },
+        null
+      ],
+      "solution": [
+        "More bulbs in series make the current smaller in both circuits."
+      ]
+    },
+    {
+      "key": "cv-215",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student sets up the circuit shown, with two bulbs in separate paths and one cell. He says the bulbs will be as bright as a single bulb on the same cell. Is he correct?",
+      "options": [
+        "No, they will be brighter",
+        "No, they will be dimmer because they share the cell",
+        "Yes, each bulb has its own path to the cell",
+        "No, only one will light"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "There is no extra energy for each bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "They are not in the same path."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both paths are complete."
+        }
+      ],
+      "solution": [
+        "Bulbs in separate paths are each as bright as a single bulb."
+      ],
+      "figure": "<svg viewBox=\"0 0 260 266\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two bulbs, separate paths</text><line x1=\"44\" y1=\"58.0\" x2=\"44\" y2=\"230\"/><line x1=\"216\" y1=\"58.0\" x2=\"216\" y2=\"230\"/><line x1=\"44\" y1=\"58.0\" x2=\"216\" y2=\"58.0\"/><line x1=\"44\" y1=\"115.33333333333334\" x2=\"216\" y2=\"115.33333333333334\"/><line x1=\"44\" y1=\"172.66666666666669\" x2=\"216\" y2=\"172.66666666666669\"/><line x1=\"44\" y1=\"230.0\" x2=\"216\" y2=\"230.0\"/><circle cx=\"44\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"216\" cy=\"115.33333333333334\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"44\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"216\" cy=\"172.66666666666669\" r=\"2.5\" fill=\"currentColor\"/><g transform=\"translate(130.0 58.0) rotate(0)\"><rect x=\"-15\" y=\"-6\" width=\"30\" height=\"12\" fill=\"#fff\" stroke=\"none\"/><circle cx=\"-14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"14\" cy=\"0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke-width=\"2\"/></g><text x=\"130.0\" y=\"36.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><g transform=\"translate(130.0 115.33333333333334) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"130.0\" y=\"93.33333333333334\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><g transform=\"translate(130.0 172.66666666666669) rotate(0)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#fff\" stroke-width=\"2\"/><line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke-width=\"1.6\"/><line x1=\"10\" y1=\"-10\" x2=\"-10\" y2=\"10\" stroke-width=\"1.6\"/></g><text x=\"130.0\" y=\"150.66666666666669\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><g transform=\"translate(130.0 230.0) rotate(0)\"><rect x=\"-8.0\" y=\"-14\" width=\"16\" height=\"28\" fill=\"#fff\" stroke=\"none\"/><line x1=\"-3.0\" y1=\"-13\" x2=\"-3.0\" y2=\"13\" stroke-width=\"2.4\"/><line x1=\"3.0\" y1=\"-7\" x2=\"3.0\" y2=\"7\" stroke-width=\"4\"/></g></svg>"
+    },
+    {
+      "key": "cv-216",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student tests whether a spoon conducts electricity. She uses a circuit with a battery and a bulb and puts the spoon in the gap. The bulb does not light. She is surprised because the spoon looks like metal. What is the most likely reason?",
+      "options": [
+        "The spoon is a metal conductor",
+        "The spoon has a plastic paint layer",
+        "The battery is far too strong",
+        "The bulb is too bright"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A conductor would let the bulb light, so something is blocking the current."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A strong battery would light the bulb."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bulb did not light at all."
+        }
+      ],
+      "solution": [
+        "A paint or plastic layer blocks the current."
+      ]
+    },
+    {
+      "key": "cv-217",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the brightness of a bulb with different numbers of cells in series. How bright is the bulb likely to be with 4 cells?",
+      "options": [
+        "Brighter than with 3 cells",
+        "Dimmer than it was with 3 cells",
+        "The same as with 3 cells",
+        "The bulb will not light"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The pattern is brighter with more cells."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The pattern is rising."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "More cells make it brighter."
+        }
+      ],
+      "solution": [
+        "Brightness rises with every extra cell."
+      ],
+      "figure": "<svg viewBox=\"0 0 270 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells in series with one bulb</text><rect x=\"10\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"60.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cells</text><rect x=\"110\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"185.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Brightness</text><rect x=\"10\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"60.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"110\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"185.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dim</text><rect x=\"10\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"60.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"110\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"185.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">bright</text><rect x=\"10\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"60.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"110\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"185.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">very bright</text></svg>"
+    },
+    {
+      "key": "cv-218",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A switch is added in series to a circuit with one cell and one bulb, and the switch is closed. What happens to the brightness of the bulb?",
+      "options": [
+        "It becomes much brighter",
+        "It becomes much dimmer",
+        "It goes out",
+        "It stays the same"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A switch does not add energy."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A closed switch does not reduce the current."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A closed switch keeps the circuit complete."
+        },
+        null
+      ],
+      "solution": [
+        "A closed switch only completes the circuit."
+      ]
+    },
+    {
+      "key": "cv-219",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which row shows two materials that are both good conductors of electricity?",
+      "options": [
+        "Copper and rubber",
+        "Plastic and aluminium",
+        "Copper and aluminium",
+        "Glass and wood"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "Rubber is an insulator."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "Plastic is an insulator."
+        },
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "Both are insulators."
+        }
+      ],
+      "solution": [
+        "Both are metals."
+      ]
+    },
+    {
+      "key": "cv-220",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A student wants to find out whether the number of bulbs in series affects the brightness. Which is the best way?",
+      "options": [
+        "Use more cells each time a bulb is added",
+        "Use one cell and add bulbs one by one",
+        "Use a different bulb each time",
+        "Use two switches"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "unfair",
+          "why": "The number of cells must be kept the same."
+        },
+        null,
+        {
+          "tag": "unfair",
+          "why": "The bulb type must be kept the same."
+        },
+        {
+          "tag": "unfair",
+          "why": "Switches do not test this."
+        }
+      ],
+      "solution": [
+        "Only the number of bulbs should change."
+      ]
+    },
+    {
+      "key": "cv-221",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Circuit A has one cell and one bulb. Circuit B has three cells and three bulbs in series. How does the brightness of each bulb in B compare with the bulb in A?",
+      "options": [
+        "About the same",
+        "Three times as bright",
+        "One third as bright",
+        "They do not light"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The three bulbs share the three cells."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Each bulb still gets about one cell's worth."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both circuits are complete."
+        }
+      ],
+      "solution": [
+        "Each bulb in B gets about as much as the bulb in A."
+      ]
+    },
+    {
+      "key": "cv-222",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Why do torches often use two or more cells in series?",
+      "options": [
+        "To make the bulb much dimmer",
+        "To use fewer wires",
+        "To keep the switch cool",
+        "To make the bulb brighter"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More cells make it brighter."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The number of wires is not the reason."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "This has no link to the cells."
+        },
+        null
+      ],
+      "solution": [
+        "More cells give a bigger current."
+      ]
+    },
+    {
+      "key": "cv-223",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-2",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "A steel nail and a plastic cap are tested one at a time in the gap of a circuit with a cell and a bulb. Which result is expected?",
+      "options": [
+        "The bulb lights with the cap but not with the nail",
+        "The bulb lights with both",
+        "The bulb lights with the nail but not with the cap",
+        "The bulb lights with neither"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Plastic is an insulator and steel is a conductor."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plastic does not conduct."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Steel conducts."
+        }
+      ],
+      "solution": [
+        "Steel conducts and plastic does not."
+      ]
+    },
+    {
+      "key": "cv-224",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following circuits will have the dimmest bulbs?",
+      "options": [
+        "Three cells with three bulbs in series",
+        "One cell with three bulbs in series",
+        "Two cells with one bulb",
+        "One cell with one bulb"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-circuit",
+          "why": "This has about one cell per bulb."
+        },
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "This is bright."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "One bulb gets all the cell's energy."
+        }
+      ],
+      "solution": [
+        "The fewest cells for the most bulbs."
+      ]
+    },
+    {
+      "key": "cv-225",
+      "level": "competent",
+      "outcome": "sci-systems-circuit-vars-1",
+      "pattern": "sci-pat-circuit-variables",
+      "stem": "Which of the following circuits will have the brightest bulbs?",
+      "options": [
+        "Three cells with one bulb",
+        "One cell with three bulbs in series",
+        "Two cells with two bulbs in series",
+        "One cell with two bulbs in series"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-circuit",
+          "why": "This is the dimmest."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "Each bulb has about one cell's worth."
+        },
+        {
+          "tag": "wrong-circuit",
+          "why": "The bulbs are dim."
+        }
+      ],
+      "solution": [
+        "The most cells for the fewest bulbs."
+      ]
+    }
+  ]
+}

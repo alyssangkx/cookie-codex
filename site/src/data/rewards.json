@@ -338,6 +338,24 @@
     "capstone": true
    },
    {
+    "id": "sci-systems-circuit",
+    "name": "Electric circuits",
+    "topic": "sci-systems-electrical",
+    "topicName": "Electrical System",
+    "home": 5,
+    "i": 17,
+    "capstone": false
+   },
+   {
+    "id": "sci-systems-circuit-vars",
+    "name": "Variables affecting current; conductors",
+    "topic": "sci-systems-electrical",
+    "topicName": "Electrical System",
+    "home": 5,
+    "i": 18,
+    "capstone": true
+   },
+   {
     "id": "sci-interactions-forces-effects",
     "name": "Forces and their effects",
     "topic": "sci-interactions-forces",
@@ -551,24 +569,6 @@
     "topicName": "Human System (Respiratory and circulatory systems)",
     "home": 5,
     "i": 15,
-    "capstone": true
-   },
-   {
-    "id": "sci-systems-circuit",
-    "name": "Electric circuits",
-    "topic": "sci-systems-electrical",
-    "topicName": "Electrical System",
-    "home": 5,
-    "i": 17,
-    "capstone": false
-   },
-   {
-    "id": "sci-systems-circuit-vars",
-    "name": "Variables affecting current; conductors",
-    "topic": "sci-systems-electrical",
-    "topicName": "Electrical System",
-    "home": 5,
-    "i": 18,
     "capstone": true
    },
    {
@@ -1190,8 +1190,16 @@
    "slug": "jagae-cookie",
    "dup": false
   },
-  "sci-interactions-forces-effects|b": {
+  "sci-systems-circuit|b": {
    "slug": "cream-unicorn-cookie",
+   "dup": false
+  },
+  "sci-systems-circuit-vars|b": {
+   "slug": "linzer-cookie",
+   "dup": true
+  },
+  "sci-interactions-forces-effects|b": {
+   "slug": "lilac-cookie",
    "dup": false
   },
   "sci-interactions-forces-investigate|b": {
@@ -1199,31 +1207,31 @@
    "dup": true
   },
   "sci-interactions-env-survival|b": {
-   "slug": "lilac-cookie",
-   "dup": false
-  },
-  "sci-interactions-env-adapt|b": {
-   "slug": "linzer-cookie",
-   "dup": true
-  },
-  "sci-energy-photo-requirements|b": {
    "slug": "lemon-cookie",
    "dup": false
   },
-  "sci-energy-conv-forms|b": {
+  "sci-interactions-env-adapt|b": {
    "slug": "seltzer-cookie",
    "dup": true
   },
-  "sci-diversity-living-characteristics|b": {
+  "sci-energy-photo-requirements|b": {
    "slug": "almond-cookie",
    "dup": false
   },
-  "sci-diversity-living-classification|b": {
+  "sci-energy-conv-forms|b": {
    "slug": "cream-unicorn-cookie",
    "dup": true
   },
-  "sci-diversity-materials-properties|b": {
+  "sci-diversity-living-characteristics|b": {
    "slug": "eclair-cookie",
+   "dup": false
+  },
+  "sci-diversity-living-classification|b": {
+   "slug": "frilled-jellyfish-cookie",
+   "dup": true
+  },
+  "sci-diversity-materials-properties|b": {
+   "slug": "elphaba-cookie",
    "dup": false
   },
   "sci-interactions-magnet-props|b": {
@@ -1231,66 +1239,58 @@
    "dup": true
   },
   "sci-inquiry-predict-hyp|b": {
-   "slug": "elphaba-cookie",
+   "slug": "milk-cookie",
    "dup": false
   },
   "sci-inquiry-analyse|b": {
-   "slug": "frilled-jellyfish-cookie",
+   "slug": "milk-cookie",
    "dup": true
   },
   "sci-inquiry-communicate|b": {
-   "slug": "milk-cookie",
+   "slug": "menthol-cookie",
    "dup": false
   },
   "sci-cycles-matter-states|b": {
-   "slug": "milk-cookie",
-   "dup": true
-  },
-  "sci-systems-human-overview|b": {
-   "slug": "menthol-cookie",
-   "dup": false
-  },
-  "sci-systems-digestive-parts|b": {
    "slug": "snapdragon-cookie",
    "dup": false
   },
-  "sci-energy-light-seeing|b": {
+  "sci-systems-human-overview|b": {
    "slug": "jagae-cookie",
    "dup": true
   },
-  "sci-cycles-repro-cell|b": {
+  "sci-systems-digestive-parts|b": {
    "slug": "pomegranate-cookie",
    "dup": false
   },
-  "sci-cycles-repro-humans|b": {
+  "sci-energy-light-seeing|b": {
    "slug": "menthol-cookie",
    "dup": true
   },
-  "sci-cycles-water-states|b": {
+  "sci-cycles-repro-cell|b": {
    "slug": "carol-cookie",
    "dup": false
   },
-  "sci-cycles-water-evaporation|b": {
+  "sci-cycles-repro-humans|b": {
    "slug": "lemon-cookie",
    "dup": true
   },
-  "sci-cycles-water-cycle|b": {
+  "sci-cycles-water-states|b": {
    "slug": "icicle-yeti",
    "dup": false
   },
-  "sci-systems-air-gases|b": {
+  "sci-cycles-water-evaporation|b": {
    "slug": "almond-cookie",
    "dup": true
   },
-  "sci-systems-resp-circ-parts|b": {
+  "sci-cycles-water-cycle|b": {
    "slug": "nutmeg-tiger-cookie",
    "dup": false
   },
-  "sci-systems-circuit|b": {
+  "sci-systems-air-gases|b": {
    "slug": "eclair-cookie",
    "dup": true
   },
-  "sci-systems-circuit-vars|b": {
+  "sci-systems-resp-circ-parts|b": {
    "slug": "tails-cookie",
    "dup": false
   },
@@ -1330,8 +1330,16 @@
    "slug": "purple-yam-cookie",
    "dup": false
   },
-  "sci-interactions-forces-effects|i": {
+  "sci-systems-circuit|i": {
    "slug": "twizzly-gummy-cookie",
+   "dup": false
+  },
+  "sci-systems-circuit-vars|i": {
+   "slug": "cream-soda-cookie",
+   "dup": true
+  },
+  "sci-interactions-forces-effects|i": {
+   "slug": "onion-cookie",
    "dup": false
   },
   "sci-interactions-forces-investigate|i": {
@@ -1339,98 +1347,90 @@
    "dup": true
   },
   "sci-interactions-env-survival|i": {
-   "slug": "onion-cookie",
-   "dup": false
-  },
-  "sci-interactions-env-adapt|i": {
-   "slug": "cream-soda-cookie",
-   "dup": true
-  },
-  "sci-energy-photo-requirements|i": {
    "slug": "princess-cookie",
    "dup": false
   },
-  "sci-energy-conv-forms|i": {
+  "sci-interactions-env-adapt|i": {
    "slug": "litmus-cookie",
+   "dup": false
+  },
+  "sci-energy-photo-requirements|i": {
+   "slug": "cream-soda-cookie",
+   "dup": true
+  },
+  "sci-energy-conv-forms|i": {
+   "slug": "cocoa-cookie",
    "dup": false
   },
   "sci-diversity-living-characteristics|i": {
-   "slug": "cream-soda-cookie",
+   "slug": "litmus-cookie",
    "dup": true
   },
   "sci-diversity-living-classification|i": {
-   "slug": "cocoa-cookie",
-   "dup": false
-  },
-  "sci-diversity-materials-properties|i": {
-   "slug": "litmus-cookie",
-   "dup": true
-  },
-  "sci-interactions-magnet-props|i": {
    "slug": "charcoal-cookie",
    "dup": false
   },
-  "sci-inquiry-predict-hyp|i": {
+  "sci-diversity-materials-properties|i": {
    "slug": "financier-cookie",
    "dup": false
   },
-  "sci-inquiry-analyse|i": {
+  "sci-interactions-magnet-props|i": {
    "slug": "purple-yam-cookie",
    "dup": true
   },
-  "sci-inquiry-communicate|i": {
+  "sci-inquiry-predict-hyp|i": {
    "slug": "burnt-cheese-cookie",
    "dup": false
   },
-  "sci-cycles-matter-states|i": {
+  "sci-inquiry-analyse|i": {
    "slug": "burnt-cheese-cookie",
    "dup": true
   },
-  "sci-systems-human-overview|i": {
+  "sci-inquiry-communicate|i": {
    "slug": "custard-cookie-iii",
    "dup": false
   },
-  "sci-systems-digestive-parts|i": {
+  "sci-cycles-matter-states|i": {
    "slug": "lime-cookie",
    "dup": false
   },
-  "sci-energy-light-seeing|i": {
+  "sci-systems-human-overview|i": {
    "slug": "cocoa-cookie",
    "dup": true
   },
-  "sci-cycles-repro-cell|i": {
+  "sci-systems-digestive-parts|i": {
    "slug": "avocado-cookie",
    "dup": false
   },
-  "sci-cycles-repro-humans|i": {
+  "sci-energy-light-seeing|i": {
    "slug": "cream-soda-cookie",
    "dup": true
   },
-  "sci-cycles-water-states|i": {
+  "sci-cycles-repro-cell|i": {
    "slug": "star-coral-cookie",
    "dup": false
   },
-  "sci-cycles-water-evaporation|i": {
+  "sci-cycles-repro-humans|i": {
    "slug": "adventurer-cookie",
    "dup": false
   },
-  "sci-cycles-water-cycle|i": {
+  "sci-cycles-water-states|i": {
    "slug": "litmus-cookie",
    "dup": true
   },
-  "sci-systems-air-gases|i": {
+  "sci-cycles-water-evaporation|i": {
    "slug": "captain-caviar",
    "dup": false
   },
-  "sci-systems-resp-circ-parts|i": {
+  "sci-cycles-water-cycle|i": {
    "slug": "clover-cookie",
    "dup": true
   },
-  "sci-systems-circuit|i": {
+  "sci-systems-air-gases|i": {
    "slug": "mold-dough-cookie",
    "dup": false
   },
-  "sci-systems-circuit-vars|i": {
+  "sci-systems-resp-circ-parts|i": {
    "slug": "cream-puff-cookie",
    "dup": false
   },
@@ -1447,47 +1447,55 @@
    "dup": false
   },
   "sci-cycles-life-cycles-compare|c": {
-   "slug": "black-pearl-cookie",
+   "slug": "mogra-cookie",
    "dup": false
   },
   "sci-systems-plant-parts-fn|c": {
-   "slug": "povidone-iodine-cookie",
+   "slug": "black-pearl-cookie",
    "dup": false
   },
   "sci-energy-heat-temp|c": {
-   "slug": "mogra-cookie",
-   "dup": false
-  },
-  "sci-energy-heat-effects|c": {
-   "slug": "sea-fairy-cookie",
-   "dup": false
-  },
-  "sci-cycles-repro-plants|c": {
    "slug": "tiger-lily-cookie",
    "dup": false
   },
-  "sci-systems-plant-transport-parts|c": {
-   "slug": "oyster-cookie",
+  "sci-energy-heat-effects|c": {
+   "slug": "povidone-iodine-cookie",
    "dup": false
   },
-  "sci-interactions-forces-effects|c": {
+  "sci-cycles-repro-plants|c": {
    "slug": "okchun-cookie",
    "dup": false
   },
-  "sci-interactions-forces-investigate|c": {
-   "slug": "black-pearl-cookie",
-   "dup": true
-  },
-  "sci-interactions-env-survival|c": {
+  "sci-systems-plant-transport-parts|c": {
    "slug": "sea-fairy-cookie",
-   "dup": true
+   "dup": false
   },
-  "sci-interactions-env-adapt|c": {
+  "sci-systems-circuit|c": {
    "slug": "rockstar-cookie",
    "dup": false
   },
-  "sci-energy-photo-requirements|c": {
+  "sci-systems-circuit-vars|c": {
    "slug": "mogra-cookie",
+   "dup": true
+  },
+  "sci-interactions-forces-effects|c": {
+   "slug": "povidone-iodine-cookie",
+   "dup": true
+  },
+  "sci-interactions-forces-investigate|c": {
+   "slug": "oyster-cookie",
+   "dup": false
+  },
+  "sci-interactions-env-survival|c": {
+   "slug": "tiger-lily-cookie",
+   "dup": true
+  },
+  "sci-interactions-env-adapt|c": {
+   "slug": "black-forest-cookie",
+   "dup": false
+  },
+  "sci-energy-photo-requirements|c": {
+   "slug": "black-pearl-cookie",
    "dup": true
   },
   "sci-energy-conv-forms|c": {
@@ -1495,47 +1503,47 @@
    "dup": false
   },
   "sci-diversity-living-characteristics|c": {
-   "slug": "povidone-iodine-cookie",
+   "slug": "black-pearl-cookie",
    "dup": true
   },
   "sci-diversity-living-classification|c": {
+   "slug": "black-forest-cookie",
+   "dup": true
+  },
+  "sci-diversity-materials-properties|c": {
    "slug": "nether-queen-cookie",
    "dup": false
   },
-  "sci-diversity-materials-properties|c": {
-   "slug": "povidone-iodine-cookie",
-   "dup": true
-  },
   "sci-interactions-magnet-props|c": {
-   "slug": "fire-spirit-cookie",
+   "slug": "mogra-cookie",
    "dup": true
   },
   "sci-inquiry-predict-hyp|c": {
-   "slug": "black-forest-cookie",
+   "slug": "pom-pom-dough-cookie",
    "dup": false
   },
   "sci-inquiry-analyse|c": {
-   "slug": "black-pearl-cookie",
+   "slug": "mogra-cookie",
    "dup": true
   },
   "sci-inquiry-communicate|c": {
-   "slug": "pom-pom-dough-cookie",
+   "slug": "kouign-amann-cookie",
    "dup": false
   },
   "sci-cycles-matter-states|c": {
-   "slug": "black-pearl-cookie",
+   "slug": "kouign-amann-cookie",
    "dup": true
   },
   "sci-systems-human-overview|c": {
-   "slug": "kouign-amann-cookie",
-   "dup": false
-  },
-  "sci-systems-digestive-parts|c": {
-   "slug": "kouign-amann-cookie",
+   "slug": "pom-pom-dough-cookie",
    "dup": true
   },
+  "sci-systems-digestive-parts|c": {
+   "slug": "timekeeper-cookie",
+   "dup": false
+  },
   "sci-energy-light-seeing|c": {
-   "slug": "pom-pom-dough-cookie",
+   "slug": "fire-spirit-cookie",
    "dup": true
   },
   "sci-cycles-repro-cell|c": {
@@ -1543,7 +1551,7 @@
    "dup": false
   },
   "sci-cycles-repro-humans|c": {
-   "slug": "nether-queen-cookie",
+   "slug": "okchun-cookie",
    "dup": true
   },
   "sci-cycles-water-states|c": {
@@ -1551,27 +1559,19 @@
    "dup": false
   },
   "sci-cycles-water-evaporation|c": {
-   "slug": "tiger-lily-cookie",
+   "slug": "rockstar-cookie",
    "dup": true
   },
   "sci-cycles-water-cycle|c": {
-   "slug": "timekeeper-cookie",
-   "dup": false
+   "slug": "black-pearl-cookie",
+   "dup": true
   },
   "sci-systems-air-gases|c": {
-   "slug": "okchun-cookie",
-   "dup": true
-  },
-  "sci-systems-resp-circ-parts|c": {
-   "slug": "povidone-iodine-cookie",
-   "dup": true
-  },
-  "sci-systems-circuit|c": {
    "slug": "smoked-cheese-cookie",
    "dup": false
   },
-  "sci-systems-circuit-vars|c": {
-   "slug": "fire-spirit-cookie",
+  "sci-systems-resp-circ-parts|c": {
+   "slug": "black-forest-cookie",
    "dup": true
   },
   "sci-inquiry-evaluate|c": {
@@ -1579,7 +1579,7 @@
    "dup": false
   },
   "sci-interactions-env-community|c": {
-   "slug": "povidone-iodine-cookie",
+   "slug": "black-pearl-cookie",
    "dup": true
   },
   "sci-energy-photo-respiration|c": {
