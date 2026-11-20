@@ -4694,30 +4694,30 @@
    }
   },
   {
-   "id": "sciinte-f513dd0e79",
+   "id": "sciinte-0cdb2e5139",
    "topic": "sci-interactions-forces",
    "level": "intermediate",
    "template": "sci-pat-fair-test-design",
    "outcomes": [
     "sci-interactions-forces-investigate-1"
    ],
-   "stem": "In the same experiment, which is the variable that is measured?",
+   "stem": "A student rolls a toy car down a ramp onto different surfaces and measures how far it travels each time. Which is the variable that is measured?",
    "options": [
-    "The distance the car moves",
-    "The weight of the car",
     "The type of surface the car moves on",
-    "The height of the ramp used each time"
+    "The distance the car moves",
+    "The height of the ramp used each time",
+    "The weight of the car"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "changed",
+     "why": "This is the variable that is changed."
+    },
     null,
     {
      "tag": "kept-same",
      "why": "This should be kept the same."
-    },
-    {
-     "tag": "changed",
-     "why": "This is the variable that is changed."
     },
     {
      "tag": "kept-same",
@@ -4728,7 +4728,7 @@
     "The distance the car moves is what is measured for each surface."
    ],
    "params": {
-    "key": "fi-420",
+    "key": "fi-1120",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5561,19 +5561,19 @@
    "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of a spring</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"150.5\" x2=\"52\" y2=\"150.5\"/><text x=\"44\" y=\"154.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"75.5\" x2=\"52\" y2=\"75.5\"/><text x=\"44\" y=\"79.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"142.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"142.0\" y1=\"188\" x2=\"142.0\" y2=\"192\"/><text x=\"232.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"232.0\" y1=\"188\" x2=\"232.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">150</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Length (cm)</text><polyline points=\"52.0,113.0 142.0,94.2 232.0,75.5 322.0,56.8\"/><circle cx=\"52.0\" cy=\"113.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"142.0\" cy=\"94.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"232.0\" cy=\"75.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"56.8\" r=\"2.5\" fill=\"currentColor\"/></svg>"
   },
   {
-   "id": "sciinte-66e8ebd098",
+   "id": "sciinte-2f2b6bce1f",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-interactions-forces-investigate-2"
    ],
-   "stem": "Using the same graph of length against load, how long will the spring be with a 200 g load, if it keeps stretching in the same way?",
+   "stem": "Using the graph shown of length against load, how long will the spring be with a 200 g load, if it keeps stretching in the same way?",
    "options": [
     "200 cm",
-    "18 cm",
+    "14 cm",
     "16 cm",
-    "14 cm"
+    "18 cm"
    ],
    "answer": 2,
    "explain": [
@@ -5582,13 +5582,13 @@
      "why": "200 g is the load, not the length."
     },
     {
-     "tag": "wrong-calc",
-     "why": "The spring gains 2 cm per 50 g, so only 16 cm."
+     "tag": "wrong-reading",
+     "why": "14 cm is the length with 150 g. The spring gains 2 cm per 50 g."
     },
     null,
     {
-     "tag": "wrong-reading",
-     "why": "14 cm is the length with 150 g. The spring gains 2 cm per 50 g."
+     "tag": "wrong-calc",
+     "why": "The spring gains 2 cm per 50 g, so only 16 cm."
     }
    ],
    "solution": [
@@ -5596,7 +5596,7 @@
     "At 150 g it is 14 cm, so at 200 g it is 16 cm."
    ],
    "params": {
-    "key": "fi-220",
+    "key": "fi-920",
     "subtopic": "sci-interactions-forces-investigate"
    },
    "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of a spring</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"150.5\" x2=\"52\" y2=\"150.5\"/><text x=\"44\" y=\"154.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"75.5\" x2=\"52\" y2=\"75.5\"/><text x=\"44\" y=\"79.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"142.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"142.0\" y1=\"188\" x2=\"142.0\" y2=\"192\"/><text x=\"232.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"232.0\" y1=\"188\" x2=\"232.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">150</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Length (cm)</text><polyline points=\"52.0,113.0 142.0,94.2 232.0,75.5 322.0,56.8\"/><circle cx=\"52.0\" cy=\"113.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"142.0\" cy=\"94.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"232.0\" cy=\"75.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"56.8\" r=\"2.5\" fill=\"currentColor\"/></svg>"

@@ -1965,62 +1965,67 @@
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A ball falling from a high place</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"171.3\" x2=\"52\" y2=\"171.3\"/><text x=\"44\" y=\"175.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"144.7\" x2=\"52\" y2=\"144.7\"/><text x=\"44\" y=\"148.66666666666669\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"91.3\" x2=\"52\" y2=\"91.3\"/><text x=\"44\" y=\"95.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"64.7\" x2=\"52\" y2=\"64.7\"/><text x=\"44\" y=\"68.66666666666666\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (s)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Energy (units)</text><polyline points=\"52.0,198.0 124.5,190.0 197.0,164.7 269.5,123.3 342.0,64.7\"/><circle cx=\"52.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"190.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"164.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"123.3\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"64.7\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,64.7 124.5,72.7 197.0,98.0 269.5,139.3 342.0,198.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"64.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"72.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"139.3\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"46\" x2=\"86\" y2=\"46\"/><text x=\"92\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Kinetic</text><line x1=\"60\" y1=\"62\" x2=\"86\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Potential</text></svg>"
   },
   {
-   "id": "sciener-acdb79869c",
+   "id": "sciener-4334a08f58",
    "topic": "sci-energy-conversion",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-conv-forms-3"
    ],
-   "stem": "Using the same graph, what is the total of the kinetic energy and potential energy of the ball at 1 s?",
+   "stem": "Using the graph shown, what is the total of the kinetic energy and potential energy of the ball at 1 s?",
    "options": [
-    "100 units",
-    "94 units",
     "6 units",
-    "0 units"
+    "100 units",
+    "0 units",
+    "94 units"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
-    {
-     "tag": "wrong-reading",
-     "why": "94 units is only the potential energy at 1 s."
-    },
     {
      "tag": "wrong-reading",
      "why": "6 units is only the kinetic energy at 1 s."
     },
+    null,
     {
      "tag": "wrong-reading",
      "why": "The ball still has energy at 1 s."
+    },
+    {
+     "tag": "wrong-reading",
+     "why": "94 units is only the potential energy at 1 s."
     }
    ],
    "solution": [
     "At 1 s, 6 + 94 = 100 units. The total stays 100 units because potential energy changes into kinetic energy."
    ],
    "params": {
-    "key": "ec-202",
+    "key": "ec-902",
     "subtopic": "sci-energy-conv-forms"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A ball falling from a high place</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"171.3\" x2=\"52\" y2=\"171.3\"/><text x=\"44\" y=\"175.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"144.7\" x2=\"52\" y2=\"144.7\"/><text x=\"44\" y=\"148.66666666666669\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"91.3\" x2=\"52\" y2=\"91.3\"/><text x=\"44\" y=\"95.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"64.7\" x2=\"52\" y2=\"64.7\"/><text x=\"44\" y=\"68.66666666666666\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (s)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Energy (units)</text><polyline points=\"52.0,198.0 124.5,190.0 197.0,164.7 269.5,123.3 342.0,64.7\"/><circle cx=\"52.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"190.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"164.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"123.3\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"64.7\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,64.7 124.5,72.7 197.0,98.0 269.5,139.3 342.0,198.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"64.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"72.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"139.3\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"46\" x2=\"86\" y2=\"46\"/><text x=\"92\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Kinetic</text><line x1=\"60\" y1=\"62\" x2=\"86\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Potential</text></svg>"
   },
   {
-   "id": "sciener-9d74de6fd0",
+   "id": "sciener-c6516589dc",
    "topic": "sci-energy-conversion",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-conv-forms-3"
    ],
-   "stem": "Using the same graph, which statement is correct?",
+   "stem": "Using the graph shown, which statement is correct?",
    "options": [
-    "As the ball falls, the total energy keeps getting bigger",
-    "As the ball falls, both energies increase",
     "As the ball falls, kinetic energy is changed into potential energy",
-    "As the ball falls, potential energy is changed into kinetic energy"
+    "As the ball falls, potential energy is changed into kinetic energy",
+    "As the ball falls, the total energy keeps getting bigger",
+    "As the ball falls, both energies increase"
    ],
-   "answer": 3,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "reversed",
+     "why": "The kinetic energy is rising, so energy is changing into kinetic energy."
+    },
+    null,
     {
      "tag": "wrong-idea",
      "why": "The two energies always add up to 100 units."
@@ -2028,18 +2033,13 @@
     {
      "tag": "wrong-reading",
      "why": "The potential energy line goes down."
-    },
-    {
-     "tag": "reversed",
-     "why": "The kinetic energy is rising, so energy is changing into kinetic energy."
-    },
-    null
+    }
    ],
    "solution": [
     "The potential energy line falls while the kinetic energy line rises by the same amount."
    ],
    "params": {
-    "key": "ec-203",
+    "key": "ec-903",
     "subtopic": "sci-energy-conv-forms"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A ball falling from a high place</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"171.3\" x2=\"52\" y2=\"171.3\"/><text x=\"44\" y=\"175.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"144.7\" x2=\"52\" y2=\"144.7\"/><text x=\"44\" y=\"148.66666666666669\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"91.3\" x2=\"52\" y2=\"91.3\"/><text x=\"44\" y=\"95.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"64.7\" x2=\"52\" y2=\"64.7\"/><text x=\"44\" y=\"68.66666666666666\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (s)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Energy (units)</text><polyline points=\"52.0,198.0 124.5,190.0 197.0,164.7 269.5,123.3 342.0,64.7\"/><circle cx=\"52.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"190.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"164.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"123.3\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"64.7\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,64.7 124.5,72.7 197.0,98.0 269.5,139.3 342.0,198.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"64.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"72.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"139.3\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"46\" x2=\"86\" y2=\"46\"/><text x=\"92\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Kinetic</text><line x1=\"60\" y1=\"62\" x2=\"86\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Potential</text></svg>"
@@ -2085,27 +2085,27 @@
    "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Balls dropped into sand</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"110.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ball</text><rect x=\"150\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"190.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Height</text><rect x=\"230\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"280.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dent depth</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"150\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20 cm</text><rect x=\"230\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1 cm</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"150\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"230\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2 cm</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">large</text><rect x=\"150\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"230\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3 cm</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">medium</text><rect x=\"150\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60 cm</text><rect x=\"230\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4 cm</text></svg>"
   },
   {
-   "id": "sciener-105b475a01",
+   "id": "sciener-669d46889d",
    "topic": "sci-energy-conversion",
    "level": "competent",
    "template": "sci-pat-fair-test-design",
    "outcomes": [
     "sci-energy-conv-forms-3"
    ],
-   "stem": "Using the same table, which two set-ups show whether the size of the ball affects the depth of the dent?",
+   "stem": "Using the table shown, which two set-ups show whether the size of the ball affects the depth of the dent?",
    "options": [
+    "R and S",
     "Q and R",
     "P and R",
-    "R and S",
     "P and Q"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
     {
      "tag": "wrong-pair",
      "why": "Both the size of the ball and the height are different."
     },
+    null,
     {
      "tag": "wrong-pair",
      "why": "Both the size of the ball and the height are different."
@@ -2119,7 +2119,7 @@
     "Q and R are released from the same height, and only the size of the ball is different."
    ],
    "params": {
-    "key": "ec-205",
+    "key": "ec-905",
     "subtopic": "sci-energy-conv-forms"
    },
    "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Balls dropped into sand</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"110.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ball</text><rect x=\"150\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"190.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Height</text><rect x=\"230\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"280.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dent depth</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"150\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20 cm</text><rect x=\"230\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1 cm</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"150\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"230\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2 cm</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">large</text><rect x=\"150\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"230\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3 cm</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">medium</text><rect x=\"150\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"190.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60 cm</text><rect x=\"230\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"280.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4 cm</text></svg>"

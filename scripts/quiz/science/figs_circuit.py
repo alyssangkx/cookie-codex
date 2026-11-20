@@ -48,6 +48,11 @@ def _item(it, x, y, rot):
 
 
 def circuit(rows, left=(), right=(), W=300, H=None, caption=None):
+    # With 3+ rows, a lone switch on the first row is the MAIN switch: it is drawn in series on the left
+    # side wire, between the last branch and the battery row (a top row would be a parallel branch across the battery).
+    main = None
+    if len(rows) > 2 and len(rows[0]) == 1 and rows[0][0][0] == "S" and not left:
+        main, rows = rows[0][0], rows[1:]
     n = len(rows)
     x0, x1 = 44, W - 44
     top = 58 if caption else 36
@@ -65,6 +70,8 @@ def circuit(rows, left=(), right=(), W=300, H=None, caption=None):
         m = len(items)
         for i, it in enumerate(items):
             b += _item(it, x0 + (x1 - x0) * (i + 1) / (m + 1), y, False)
+    if main:
+        b += _item(main, x0, (ys[-2] + ys[-1]) / 2, True)
     for xs, items in ((x0, left), (x1, right)):
         m = len(items)
         for i, it in enumerate(items):

@@ -3397,26 +3397,22 @@
    "figure": "<svg viewBox=\"0 0 360 184\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three plants (same light, water, soil)</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"70\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"110.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Roots</text><rect x=\"150\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Leaves</text><rect x=\"240\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After 4 weeks</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">healthy</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"80\" height=\"44\"/><text x=\"110.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"100\" width=\"90\" height=\"44\"/><text x=\"195.0\" y=\"119.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><text x=\"195.0\" y=\"135.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">each day</text><rect x=\"240\" y=\"100\" width=\"110\" height=\"44\"/><text x=\"295.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">weak</text><rect x=\"10\" y=\"144\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"144\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><rect x=\"150\" y=\"144\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"144\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wilted</text></svg>"
   },
   {
-   "id": "scisyst-7b22d964d8",
+   "id": "scisyst-66a92ed5ce",
    "topic": "sci-systems-plant-parts",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-systems-plant-parts-fn-2"
    ],
-   "stem": "Using the same table, what does plant R show?",
+   "stem": "Using the table shown, what does plant R show?",
    "options": [
-    "A plant needs roots to carry food to its leaves",
     "A plant needs roots to catch light",
     "A plant needs roots to take in water",
-    "A plant needs roots to make food"
+    "A plant needs roots to make food",
+    "A plant needs roots to carry food to its leaves"
    ],
-   "answer": 2,
+   "answer": 1,
    "explain": [
-    {
-     "tag": "wrong-job",
-     "why": "This is not shown. R wilted because it lacked water."
-    },
     {
      "tag": "wrong-job",
      "why": "Roots do not catch light."
@@ -3425,13 +3421,17 @@
     {
      "tag": "wrong-job",
      "why": "Roots do not make food."
+    },
+    {
+     "tag": "wrong-job",
+     "why": "This is not shown. R wilted because it lacked water."
     }
    ],
    "solution": [
     "With its roots cut off R wilted, so roots are needed for taking in water."
    ],
    "params": {
-    "key": "pp-207",
+    "key": "pp-907",
     "subtopic": "sci-systems-plant-parts-fn"
    },
    "figure": "<svg viewBox=\"0 0 360 184\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three plants (same light, water, soil)</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"70\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"110.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Roots</text><rect x=\"150\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Leaves</text><rect x=\"240\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After 4 weeks</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">healthy</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"80\" height=\"44\"/><text x=\"110.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"100\" width=\"90\" height=\"44\"/><text x=\"195.0\" y=\"119.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><text x=\"195.0\" y=\"135.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">each day</text><rect x=\"240\" y=\"100\" width=\"110\" height=\"44\"/><text x=\"295.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">weak</text><rect x=\"10\" y=\"144\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"144\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><rect x=\"150\" y=\"144\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"144\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wilted</text></svg>"

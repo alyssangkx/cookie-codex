@@ -115,6 +115,7 @@ warn = Warnings({
     "stem-echo": "stem contains every distinctive word of the correct option, and of no other option",
     "near-dup-options": f"two options at least {NEAR_DUP:.0%} alike after normalising (labels and short options skipped)",
     "longest-correct": "sub-topics where the correct option is strictly the longest in over 35% of items",
+    "refers-to-other-item": "stem starts 'In/Using the same ...' (every item must stand alone, with its own figure or data)",
     "figure-mismatch": "figure text names none of the stem's content words",
 })
 longest = {}
@@ -154,6 +155,7 @@ for f, data in _all:
             w = lambda rule, m: warn.add(rule, f"{f.name} {it.get('key')}: {m}")
             if "figure" in it and gives_away(figure_text(it["figure"]), opts, a): w("figure-leak", f"answer {opts[a]!r}")
             if gives_away(stem, opts, a): w("stem-echo", f"answer {opts[a]!r}")
+            if re.match(r"\s*(in|using|from|for) the same\b", stem, re.I): w("refers-to-other-item", f"stem {stem[:50]!r}")
             for x, y in near_duplicates(opts): w("near-dup-options", f"{x!r} ~ {y!r}")
             if "figure" in it and figure_mismatch(stem, it["figure"]):
                 w("figure-mismatch", f"figure text {figure_text(it['figure'])[:60]!r}")

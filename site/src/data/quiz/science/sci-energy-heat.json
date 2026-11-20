@@ -628,30 +628,30 @@
    "figure": "<svg viewBox=\"0 0 380 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"190.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rods with pins, in hot water</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"120\" rx=\"4\"/><text x=\"45\" y=\"99.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot</text><text x=\"45\" y=\"113.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">water</text><line x1=\"80\" y1=\"168\" x2=\"370\" y2=\"168\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><rect x=\"80\" y=\"50\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"59\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"192\" y1=\"165\" x2=\"208\" y2=\"165\" stroke-width=\"2\"/><line x1=\"262\" y1=\"165\" x2=\"278\" y2=\"165\" stroke-width=\"2\"/><rect x=\"80\" y=\"88\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"97\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"200\" y1=\"96\" x2=\"200\" y2=\"109\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"96\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"270\" y1=\"96\" x2=\"270\" y2=\"109\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"96\" r=\"2.5\" fill=\"currentColor\"/><rect x=\"80\" y=\"126\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"130\" y1=\"134\" x2=\"130\" y2=\"147\" stroke-width=\"2\"/><circle cx=\"130\" cy=\"134\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"200\" y1=\"134\" x2=\"200\" y2=\"147\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"134\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"270\" y1=\"134\" x2=\"270\" y2=\"147\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"134\" r=\"2.5\" fill=\"currentColor\"/></svg>"
   },
   {
-   "id": "sciener-950a3e7c4b",
+   "id": "sciener-70d22b98ac",
    "topic": "sci-energy-heat",
    "level": "basic",
    "template": "sci-pat-heat-effects-conductors",
    "outcomes": [
     "sci-energy-heat-effects-2"
    ],
-   "stem": "In the same kind of test, rods A, B and C are heated at one end. Which rod is the poorest conductor of heat?",
+   "stem": "Rods A, B and C are heated at one end, as shown. Which rod is the poorest conductor of heat?",
    "options": [
+    "B",
     "A",
     "A and B",
-    "B",
     "C"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
+    {
+     "tag": "wrong-rod",
+     "why": "Two pins fell from B, so heat travelled quite far in it."
+    },
     null,
     {
      "tag": "wrong-rod",
      "why": "Only A is the poorest, because no pin fell from it."
-    },
-    {
-     "tag": "wrong-rod",
-     "why": "Two pins fell from B, so heat travelled quite far in it."
     },
     {
      "tag": "wrong-rod",
@@ -662,7 +662,7 @@
     "No pin fell from A, so heat travelled the slowest in it."
    ],
    "params": {
-    "key": "he-017",
+    "key": "he-717",
     "subtopic": "sci-energy-heat-effects"
    },
    "figure": "<svg viewBox=\"0 0 380 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"190.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rods with pins, in hot water</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"120\" rx=\"4\"/><text x=\"45\" y=\"99.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot</text><text x=\"45\" y=\"113.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">water</text><line x1=\"80\" y1=\"168\" x2=\"370\" y2=\"168\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><rect x=\"80\" y=\"50\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"59\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"130\" y1=\"58\" x2=\"130\" y2=\"71\" stroke-width=\"2\"/><circle cx=\"130\" cy=\"58\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"200\" y1=\"58\" x2=\"200\" y2=\"71\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"58\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"270\" y1=\"58\" x2=\"270\" y2=\"71\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"58\" r=\"2.5\" fill=\"currentColor\"/><rect x=\"80\" y=\"88\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"97\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"192\" y1=\"165\" x2=\"208\" y2=\"165\" stroke-width=\"2\"/><line x1=\"270\" y1=\"96\" x2=\"270\" y2=\"109\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"96\" r=\"2.5\" fill=\"currentColor\"/><rect x=\"80\" y=\"126\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"192\" y1=\"165\" x2=\"208\" y2=\"165\" stroke-width=\"2\"/><line x1=\"262\" y1=\"165\" x2=\"278\" y2=\"165\" stroke-width=\"2\"/></svg>"
@@ -1220,25 +1220,25 @@
    "figure": "<svg viewBox=\"0 0 290 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"145.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three rods heated at one end</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rod</text><rect x=\"80\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"180.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for last pin to fall (min)</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text></svg>"
   },
   {
-   "id": "sciener-edb7315ba0",
+   "id": "sciener-0d05367251",
    "topic": "sci-energy-heat",
    "level": "intermediate",
    "template": "sci-pat-heat-effects-conductors",
    "outcomes": [
     "sci-energy-heat-effects-2"
    ],
-   "stem": "Using the same table, which list shows the rods from the poorest conductor to the best conductor?",
+   "stem": "Using the table shown, which list shows the rods from the poorest conductor to the best conductor?",
    "options": [
-    "P, Q, R",
+    "Q, P, R",
     "R, Q, P",
     "R, P, Q",
-    "Q, P, R"
+    "P, Q, R"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "reversed",
-     "why": "This order is best to poorest."
+     "tag": "wrong-order",
+     "why": "R is the poorest and P is the best."
     },
     null,
     {
@@ -1246,15 +1246,15 @@
      "why": "Q took less time than R but more than P."
     },
     {
-     "tag": "wrong-order",
-     "why": "R is the poorest and P is the best."
+     "tag": "reversed",
+     "why": "This order is best to poorest."
     }
    ],
    "solution": [
     "The longer the time, the poorer the conductor: R, Q, P."
    ],
    "params": {
-    "key": "he-107",
+    "key": "he-807",
     "subtopic": "sci-energy-heat-effects"
    },
    "figure": "<svg viewBox=\"0 0 290 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"145.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three rods heated at one end</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rod</text><rect x=\"80\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"180.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for last pin to fall (min)</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text></svg>"
@@ -1378,19 +1378,19 @@
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of hot water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"182.0\" x2=\"52\" y2=\"182.0\"/><text x=\"44\" y=\"186.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"150.0\" x2=\"52\" y2=\"150.0\"/><text x=\"44\" y=\"154.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"86.0\" x2=\"52\" y2=\"86.0\"/><text x=\"44\" y=\"90.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">70</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"54.0\" x2=\"52\" y2=\"54.0\"/><text x=\"44\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">90</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,70.0 197.0,86.0 269.5,102.0 342.0,118.0\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,86.0 197.0,118.0 269.5,134.0 342.0,150.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
   },
   {
-   "id": "sciener-84b93de491",
+   "id": "sciener-61509b02c5",
    "topic": "sci-energy-heat",
    "level": "intermediate",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-effects-1"
    ],
-   "stem": "Using the same graph, how much lower was the temperature of Q than that of P after 15 minutes?",
+   "stem": "Using the graph shown, how much lower was the temperature of Q than that of P after 15 minutes?",
    "options": [
-    "30 °C",
+    "10 °C",
     "20 °C",
-    "40 °C",
-    "10 °C"
+    "30 °C",
+    "40 °C"
    ],
    "answer": 1,
    "explain": [
@@ -1401,18 +1401,18 @@
     null,
     {
      "tag": "wrong-reading",
-     "why": "40 °C is the reading of Q, not the difference."
+     "why": "At 15 min, P is 60 and Q is 40."
     },
     {
      "tag": "wrong-reading",
-     "why": "At 15 min, P is 60 and Q is 40."
+     "why": "40 °C is the reading of Q, not the difference."
     }
    ],
    "solution": [
     "60 - 40 = 20."
    ],
    "params": {
-    "key": "he-111",
+    "key": "he-811",
     "subtopic": "sci-energy-heat-effects"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of hot water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"182.0\" x2=\"52\" y2=\"182.0\"/><text x=\"44\" y=\"186.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"150.0\" x2=\"52\" y2=\"150.0\"/><text x=\"44\" y=\"154.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"86.0\" x2=\"52\" y2=\"86.0\"/><text x=\"44\" y=\"90.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">70</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"54.0\" x2=\"52\" y2=\"54.0\"/><text x=\"44\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">90</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,70.0 197.0,86.0 269.5,102.0 342.0,118.0\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,86.0 197.0,118.0 269.5,134.0 342.0,150.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
@@ -4015,25 +4015,25 @@
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold drink in a room</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"175.1\" x2=\"52\" y2=\"175.1\"/><text x=\"44\" y=\"179.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"152.3\" x2=\"52\" y2=\"152.3\"/><text x=\"44\" y=\"156.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"129.4\" x2=\"52\" y2=\"129.4\"/><text x=\"44\" y=\"133.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"106.6\" x2=\"52\" y2=\"106.6\"/><text x=\"44\" y=\"110.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"83.7\" x2=\"52\" y2=\"83.7\"/><text x=\"44\" y=\"87.71428571428571\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"48\" y1=\"60.9\" x2=\"52\" y2=\"60.9\"/><text x=\"44\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,175.1 110.0,129.4 168.0,106.6 226.0,83.7 284.0,83.7 342.0,83.7\"/><circle cx=\"52.0\" cy=\"175.1\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"129.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"106.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/></svg>"
   },
   {
-   "id": "sciener-2ac1ecda3f",
+   "id": "sciener-ff045dfb52",
    "topic": "sci-energy-heat",
    "level": "intermediate",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-1"
    ],
-   "stem": "In the same graph, between which times did the temperature of the drink rise the most?",
+   "stem": "In the graph shown, between which times did the temperature of the drink rise the most?",
    "options": [
-    "15 and 20 minutes",
     "5 and 10 minutes",
+    "10 and 15 minutes",
     "0 and 5 minutes",
-    "10 and 15 minutes"
+    "15 and 20 minutes"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "wrong-reading",
-     "why": "The temperature did not change."
+     "why": "The rise was 5 °C, less than from 0 to 5 minutes."
     },
     {
      "tag": "wrong-reading",
@@ -4042,27 +4042,27 @@
     null,
     {
      "tag": "wrong-reading",
-     "why": "The rise was 5 °C, less than from 0 to 5 minutes."
+     "why": "The temperature did not change."
     }
    ],
    "solution": [
     "From 0 to 5 minutes it rose by 10 °C."
    ],
    "params": {
-    "key": "ht-103",
+    "key": "ht-803",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold drink in a room</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"175.1\" x2=\"52\" y2=\"175.1\"/><text x=\"44\" y=\"179.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"152.3\" x2=\"52\" y2=\"152.3\"/><text x=\"44\" y=\"156.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"129.4\" x2=\"52\" y2=\"129.4\"/><text x=\"44\" y=\"133.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"106.6\" x2=\"52\" y2=\"106.6\"/><text x=\"44\" y=\"110.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"83.7\" x2=\"52\" y2=\"83.7\"/><text x=\"44\" y=\"87.71428571428571\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"48\" y1=\"60.9\" x2=\"52\" y2=\"60.9\"/><text x=\"44\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,175.1 110.0,129.4 168.0,106.6 226.0,83.7 284.0,83.7 342.0,83.7\"/><circle cx=\"52.0\" cy=\"175.1\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"129.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"106.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/></svg>"
   },
   {
-   "id": "sciener-c01bcee835",
+   "id": "sciener-4f6b15c64c",
    "topic": "sci-energy-heat",
    "level": "intermediate",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "In the same graph, what is the temperature of the room most likely to be?",
+   "stem": "In the graph shown, what is the temperature of the room most likely to be?",
    "options": [
     "5 °C",
     "15 °C",
@@ -4089,7 +4089,7 @@
     "The drink stops changing at the temperature of the room, 25 °C."
    ],
    "params": {
-    "key": "ht-104",
+    "key": "ht-804",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold drink in a room</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"175.1\" x2=\"52\" y2=\"175.1\"/><text x=\"44\" y=\"179.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"152.3\" x2=\"52\" y2=\"152.3\"/><text x=\"44\" y=\"156.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"129.4\" x2=\"52\" y2=\"129.4\"/><text x=\"44\" y=\"133.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"106.6\" x2=\"52\" y2=\"106.6\"/><text x=\"44\" y=\"110.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"83.7\" x2=\"52\" y2=\"83.7\"/><text x=\"44\" y=\"87.71428571428571\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"48\" y1=\"60.9\" x2=\"52\" y2=\"60.9\"/><text x=\"44\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,175.1 110.0,129.4 168.0,106.6 226.0,83.7 284.0,83.7 342.0,83.7\"/><circle cx=\"52.0\" cy=\"175.1\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"129.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"106.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/></svg>"
@@ -4529,21 +4529,21 @@
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
   },
   {
-   "id": "sciener-9430a8eb05",
+   "id": "sciener-99cdbd0583",
    "topic": "sci-energy-heat",
    "level": "intermediate",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "Using the same graph, what is the temperature of the water and ball after 8 minutes?",
+   "stem": "Using the graph shown, what is the temperature of the water and ball after 8 minutes?",
    "options": [
     "32 °C",
-    "45 °C",
     "40 °C",
-    "38 °C"
+    "38 °C",
+    "45 °C"
    ],
-   "answer": 3,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong-reading",
@@ -4551,49 +4551,49 @@
     },
     {
      "tag": "wrong-reading",
-     "why": "This is the ball at 4 minutes."
-    },
-    {
-     "tag": "wrong-reading",
      "why": "This is the ball at 6 minutes."
     },
-    null
+    null,
+    {
+     "tag": "wrong-reading",
+     "why": "This is the ball at 4 minutes."
+    }
    ],
    "solution": [
     "Both lines are at 38 °C from 8 minutes."
    ],
    "params": {
-    "key": "ht-116",
+    "key": "ht-816",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
   },
   {
-   "id": "sciener-0f6a44d84b",
+   "id": "sciener-af81686257",
    "topic": "sci-energy-heat",
    "level": "intermediate",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "Using the same graph, what is happening to the heat after 8 minutes?",
+   "stem": "Using the graph shown, what is happening to the heat after 8 minutes?",
    "options": [
-    "No heat now flows between them",
-    "Heat flows from the water to the ball",
     "The ball makes more heat",
+    "Heat flows from the water to the ball",
+    "No heat now flows between them",
     "Heat still flows from the ball to the water"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
-    {
-     "tag": "wrong-reading",
-     "why": "They are at the same temperature."
-    },
     {
      "tag": "wrong-idea",
      "why": "The ball cannot make heat."
     },
+    {
+     "tag": "wrong-reading",
+     "why": "They are at the same temperature."
+    },
+    null,
     {
      "tag": "wrong-reading",
      "why": "They are at the same temperature, so there is no net flow."
@@ -4603,7 +4603,7 @@
     "Both have the same temperature, so heat no longer flows."
    ],
    "params": {
-    "key": "ht-117",
+    "key": "ht-817",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
@@ -4963,70 +4963,70 @@
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
   },
   {
-   "id": "sciener-7daa1b2171",
+   "id": "sciener-b998fe8410",
    "topic": "sci-energy-heat",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "Using the same graph, by how much did the temperature of the ball fall?",
+   "stem": "Using the graph shown, by how much did the temperature of the ball fall?",
    "options": [
+    "62 °C",
     "18 °C",
-    "38 °C",
     "100 °C",
-    "62 °C"
+    "38 °C"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong-step",
      "why": "This is the rise of the water."
     },
     {
      "tag": "wrong-step",
-     "why": "38 °C is the final temperature, not the fall."
+     "why": "100 °C is the starting temperature."
     },
     {
      "tag": "wrong-step",
-     "why": "100 °C is the starting temperature."
-    },
-    null
+     "why": "38 °C is the final temperature, not the fall."
+    }
    ],
    "solution": [
     "100 - 38 = 62 °C."
    ],
    "params": {
-    "key": "ht-202",
+    "key": "ht-902",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
   },
   {
-   "id": "sciener-eb826b4f4a",
+   "id": "sciener-2bdb7c83c8",
    "topic": "sci-energy-heat",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "Using the same graph, by how much did the temperature of the water rise?",
+   "stem": "Using the graph shown, by how much did the temperature of the water rise?",
    "options": [
-    "20 °C",
     "18 °C",
     "38 °C",
+    "20 °C",
     "62 °C"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong-step",
-     "why": "This is the starting temperature."
-    },
     null,
     {
      "tag": "wrong-step",
      "why": "This is the final temperature."
+    },
+    {
+     "tag": "wrong-step",
+     "why": "This is the starting temperature."
     },
     {
      "tag": "wrong-step",
@@ -5037,7 +5037,7 @@
     "38 - 20 = 18 °C."
    ],
    "params": {
-    "key": "ht-203",
+    "key": "ht-903",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
@@ -5123,25 +5123,26 @@
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of tea</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,73.2 197.0,89.2 269.5,102.0 342.0,111.6\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"73.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"89.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"111.6\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,92.4 197.0,114.8 269.5,127.6 342.0,134.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"92.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"127.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
   },
   {
-   "id": "sciener-4bf48c377a",
+   "id": "sciener-334f77c814",
    "topic": "sci-energy-heat",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "In the same graph, what is the likely temperature of the room?",
+   "stem": "In the graph shown, what is the likely temperature of the room?",
    "options": [
-    "About 60 °C, halfway down",
-    "About 90 °C, as at the start",
+    "A little below 40 °C",
     "About 100 °C, the top of the scale",
-    "A little below 40 °C"
+    "About 90 °C, as at the start",
+    "About 60 °C, halfway down"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "wrong-reading",
-     "why": "The tea was still cooling past 60 °C."
+     "why": "This is above the starting temperature."
     },
     {
      "tag": "wrong-reading",
@@ -5149,15 +5150,14 @@
     },
     {
      "tag": "wrong-reading",
-     "why": "This is above the starting temperature."
-    },
-    null
+     "why": "The tea was still cooling past 60 °C."
+    }
    ],
    "solution": [
     "The tea cools until it reaches the temperature of the room."
    ],
    "params": {
-    "key": "ht-206",
+    "key": "ht-906",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of tea</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,73.2 197.0,89.2 269.5,102.0 342.0,111.6\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"73.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"89.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"111.6\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,92.4 197.0,114.8 269.5,127.6 342.0,134.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"92.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"127.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
@@ -5557,41 +5557,41 @@
    "figure": "<svg viewBox=\"0 0 280 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"70\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 30 min (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">72</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">58</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">41</text></svg>"
   },
   {
-   "id": "sciener-68f33dc390",
+   "id": "sciener-9626851599",
    "topic": "sci-energy-heat",
    "level": "competent",
    "template": "sci-pat-read-data",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "In the same table, which cup will the water in the room gain the most heat from?",
+   "stem": "Three cups hold the same amount of hot water at the same starting temperature and are left in a room. The table shows the temperature of each after 30 min. Which cup gave the most heat to the room?",
    "options": [
-    "P",
-    "R",
     "They all give the same",
-    "Q"
+    "R",
+    "Q",
+    "P"
    ],
    "answer": 1,
    "explain": [
     {
-     "tag": "wrong-cup",
-     "why": "P gave out the least heat."
-    },
-    null,
-    {
      "tag": "wrong-idea",
      "why": "The cups gave out different amounts."
     },
+    null,
     {
      "tag": "wrong-cup",
      "why": "Q gave out less than R."
+    },
+    {
+     "tag": "wrong-cup",
+     "why": "P gave out the least heat."
     }
    ],
    "solution": [
     "R lost the most heat, so the room gained the most from R."
    ],
    "params": {
-    "key": "ht-217",
+    "key": "ht-917",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 280 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"70\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 30 min (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">72</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">58</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">41</text></svg>"
@@ -5714,17 +5714,17 @@
    }
   },
   {
-   "id": "sciener-58d6cea7a1",
+   "id": "sciener-830a2e2b95",
    "topic": "sci-energy-heat",
    "level": "competent",
    "template": "sci-pat-heat-temperature",
    "outcomes": [
     "sci-energy-heat-temp-4"
    ],
-   "stem": "Two metal blocks of the same size, P at 100 °C and Q at 0 °C, are placed in contact. After a long time, which temperature is the most likely for both blocks?",
+   "stem": "Two blocks of the same size, made of the same metal, P at 100 °C and Q at 0 °C, are placed in contact. After a long time, which temperature is the most likely for both blocks?",
    "options": [
-    "150 °C, the total of both",
     "100 °C, the temperature of P",
+    "150 °C, the total of both",
     "0 °C, the temperature of Q",
     "About 50 °C"
    ],
@@ -5732,11 +5732,11 @@
    "explain": [
     {
      "tag": "wrong-idea",
-     "why": "They cannot be hotter than P was."
+     "why": "P loses heat, so both cannot be 100 °C."
     },
     {
      "tag": "wrong-idea",
-     "why": "P loses heat, so both cannot be 100 °C."
+     "why": "They cannot be hotter than P was."
     },
     {
      "tag": "wrong-idea",
@@ -5748,7 +5748,7 @@
     "Equal metal blocks meet halfway between the two temperatures."
    ],
    "params": {
-    "key": "ht-221",
+    "key": "ht-921",
     "subtopic": "sci-energy-heat-temp"
    },
    "figure": "<svg viewBox=\"0 0 330 130\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two equal blocks in contact</text><rect x=\"40\" y=\"44\" width=\"120\" height=\"64\"/><rect x=\"160\" y=\"44\" width=\"120\" height=\"64\"/><text x=\"100\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"100\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">100 °C</text><text x=\"220\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">0 °C</text></svg>"
