@@ -57,8 +57,19 @@ outside the repo.
   - it files friction, spring and weight questions under "Forces and their effects": add a rule, then re-tag the
     forces questions;
   - it puts water changes of state under general "states of matter".
-- [ ] Tag accuracy for English, Maths and Chinese is not measured yet. Build a checked key for each, as was done for
-  Science (110 questions, about 100k Sonnet tokens per subject).
+- [x] 20 Nov: tag accuracy measured against checked keys.
+  - Maths 89% acceptable (77% exact).
+  - English 84%: 94% where the paper names the section, 74% where the 72B filled it.
+  - Chinese 85% after the section rule, 73% before it.
+  - Report: `goldkeys/report.md`, private.
+- [ ] Add the suggested tagger rules for Maths, English and Chinese to `tag_llm.py` (percentage vs fractions, never
+  a null st; lettered word list means grammar cloze, posters mean visual text; route maps mean 听后选答, single-word
+  gaps mean 词语选用).
+- [ ] Then a server re-tag run:
+  - Maths: 175 null-st items plus the confused sub-topics;
+  - English: the 72B-filled sections;
+  - Chinese: the 语文应用 split.
+  - Gate each subject on its new gold key.
 - [ ] English patterns: about 29% of English questions get no pattern. Extend `scripts/quiz/english/patterns.json`.
 - [x] 20 Nov: Speed re-checked over 2018–2026. It is fading (about 2.3% of Maths items in 2018, 1.7% in 2025, 6 tagged items in 2026), so it stays excluded.
 - [ ] 2025 MCQ import, phase 1 (`prompt-pp-mcq-import.md`), after the blind-answer check. Stop before any SQL or data
