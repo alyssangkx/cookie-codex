@@ -5398,27 +5398,23 @@
    "figure": "<svg viewBox=\"0 0 400 232\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"200.0\" y=\"14\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A food web in a forest</text><line x1=\"104.3\" y1=\"192.0\" x2=\"72.9\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"136.9\" y1=\"192.0\" x2=\"170.7\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"262.1\" y1=\"192.0\" x2=\"216.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"297.1\" y1=\"192.0\" x2=\"321.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"149.0\" y1=\"198.2\" x2=\"300.4\" y2=\"157.3\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"55.0\" y1=\"134.0\" x2=\"55.0\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"80.4\" y1=\"92.0\" x2=\"119.0\" y2=\"92.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"180.0\" y1=\"134.0\" x2=\"161.4\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"197.4\" y1=\"134.0\" x2=\"241.6\" y2=\"50.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"174.1\" y1=\"78.0\" x2=\"226.2\" y2=\"47.8\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"337.5\" y1=\"134.0\" x2=\"342.1\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><rect x=\"93.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"120\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grass</text><rect x=\"258.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"285\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">shrub</text><rect x=\"6.4\" y=\"136\" width=\"97.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grasshopper</text><rect x=\"163.0\" y=\"136\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"190\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mouse</text><rect x=\"304.4\" y=\"136\" width=\"61.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"335\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">rabbit</text><rect x=\"31.6\" y=\"80\" width=\"46.8\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">frog</text><rect x=\"123.0\" y=\"80\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"150\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">snake</text><rect x=\"325.2\" y=\"80\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"345\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">fox</text><rect x=\"230.2\" y=\"22\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"250\" y=\"38\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">owl</text></svg>"
   },
   {
-   "id": "sciinte-bf2b971d56",
+   "id": "sciinte-aaa9541cf5",
    "topic": "sci-interactions-environment",
    "level": "competent",
    "template": "sci-pat-food-chain-web",
    "outcomes": [
     "sci-interactions-env-survival-3"
    ],
-   "stem": "Look at the food web. Which two organisms compete for the same food?",
+   "stem": "In the food web shown, which two animals compete for the same food?",
    "options": [
     "Mouse and rabbit",
-    "Owl and fox",
     "Frog and fox",
-    "Grasshopper and owl"
+    "Grasshopper and owl",
+    "Owl and fox"
    ],
    "answer": 0,
    "explain": [
     null,
-    {
-     "tag": "wrong-pair",
-     "why": "Owls eat mice and snakes and foxes eat rabbits, so they do not share food."
-    },
     {
      "tag": "wrong-pair",
      "why": "Frogs eat grasshoppers and foxes eat rabbits, so they do not share food."
@@ -5426,13 +5422,17 @@
     {
      "tag": "wrong-pair",
      "why": "Grasshoppers eat grass and owls eat mice and snakes, so they do not share food."
+    },
+    {
+     "tag": "wrong-pair",
+     "why": "Owls eat mice and snakes and foxes eat rabbits, so they do not share food."
     }
    ],
    "solution": [
     "The mouse and the rabbit both eat grass and shrub."
    ],
    "params": {
-    "key": "es-205",
+    "key": "es-505",
     "subtopic": "sci-interactions-env-survival"
    },
    "figure": "<svg viewBox=\"0 0 400 232\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"200.0\" y=\"14\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A food web in a forest</text><line x1=\"104.3\" y1=\"192.0\" x2=\"72.9\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"136.9\" y1=\"192.0\" x2=\"170.7\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"262.1\" y1=\"192.0\" x2=\"216.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"297.1\" y1=\"192.0\" x2=\"321.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"149.0\" y1=\"198.2\" x2=\"300.4\" y2=\"157.3\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"55.0\" y1=\"134.0\" x2=\"55.0\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"80.4\" y1=\"92.0\" x2=\"119.0\" y2=\"92.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"180.0\" y1=\"134.0\" x2=\"161.4\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"197.4\" y1=\"134.0\" x2=\"241.6\" y2=\"50.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"174.1\" y1=\"78.0\" x2=\"226.2\" y2=\"47.8\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"337.5\" y1=\"134.0\" x2=\"342.1\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><rect x=\"93.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"120\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grass</text><rect x=\"258.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"285\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">shrub</text><rect x=\"6.4\" y=\"136\" width=\"97.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grasshopper</text><rect x=\"163.0\" y=\"136\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"190\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mouse</text><rect x=\"304.4\" y=\"136\" width=\"61.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"335\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">rabbit</text><rect x=\"31.6\" y=\"80\" width=\"46.8\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">frog</text><rect x=\"123.0\" y=\"80\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"150\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">snake</text><rect x=\"325.2\" y=\"80\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"345\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">fox</text><rect x=\"230.2\" y=\"22\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"250\" y=\"38\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">owl</text></svg>"
@@ -5598,41 +5598,41 @@
    "figure": "<svg viewBox=\"0 0 400 232\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"200.0\" y=\"14\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A food web in a forest</text><line x1=\"104.3\" y1=\"192.0\" x2=\"72.9\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"136.9\" y1=\"192.0\" x2=\"170.7\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"262.1\" y1=\"192.0\" x2=\"216.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"297.1\" y1=\"192.0\" x2=\"321.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"149.0\" y1=\"198.2\" x2=\"300.4\" y2=\"157.3\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"55.0\" y1=\"134.0\" x2=\"55.0\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"80.4\" y1=\"92.0\" x2=\"119.0\" y2=\"92.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"180.0\" y1=\"134.0\" x2=\"161.4\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"197.4\" y1=\"134.0\" x2=\"241.6\" y2=\"50.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"174.1\" y1=\"78.0\" x2=\"226.2\" y2=\"47.8\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"337.5\" y1=\"134.0\" x2=\"342.1\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><rect x=\"93.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"120\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grass</text><rect x=\"258.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"285\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">shrub</text><rect x=\"6.4\" y=\"136\" width=\"97.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grasshopper</text><rect x=\"163.0\" y=\"136\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"190\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mouse</text><rect x=\"304.4\" y=\"136\" width=\"61.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"335\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">rabbit</text><rect x=\"31.6\" y=\"80\" width=\"46.8\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">frog</text><rect x=\"123.0\" y=\"80\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"150\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">snake</text><rect x=\"325.2\" y=\"80\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"345\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">fox</text><rect x=\"230.2\" y=\"22\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"250\" y=\"38\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">owl</text></svg>"
   },
   {
-   "id": "sciinte-e4107fc884",
+   "id": "sciinte-a72fe9f5fb",
    "topic": "sci-interactions-environment",
    "level": "competent",
    "template": "sci-pat-food-chain-web",
    "outcomes": [
     "sci-interactions-env-survival-3"
    ],
-   "stem": "Look at the food web. Which organisms eat only plants?",
+   "stem": "In the food web shown, which animals feed only on plants?",
    "options": [
     "Grasshopper, frog and fox",
+    "Frog, snake and fox",
     "Grasshopper, mouse and rabbit",
-    "Mouse, snake and owl",
-    "Frog, snake and fox"
+    "Mouse, snake and owl"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong-reading",
      "why": "The frog and the fox eat other animals."
     },
+    {
+     "tag": "wrong-reading",
+     "why": "These eat other animals."
+    },
     null,
     {
      "tag": "wrong-reading",
      "why": "The snake and the owl eat other animals."
-    },
-    {
-     "tag": "wrong-reading",
-     "why": "These eat other animals."
     }
    ],
    "solution": [
     "Only the grasshopper, mouse and rabbit have arrows coming straight from the plants."
    ],
    "params": {
-    "key": "es-210",
+    "key": "es-510",
     "subtopic": "sci-interactions-env-survival"
    },
    "figure": "<svg viewBox=\"0 0 400 232\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"200.0\" y=\"14\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A food web in a forest</text><line x1=\"104.3\" y1=\"192.0\" x2=\"72.9\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"136.9\" y1=\"192.0\" x2=\"170.7\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"262.1\" y1=\"192.0\" x2=\"216.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"297.1\" y1=\"192.0\" x2=\"321.2\" y2=\"164.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"149.0\" y1=\"198.2\" x2=\"300.4\" y2=\"157.3\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"55.0\" y1=\"134.0\" x2=\"55.0\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"80.4\" y1=\"92.0\" x2=\"119.0\" y2=\"92.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"180.0\" y1=\"134.0\" x2=\"161.4\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"197.4\" y1=\"134.0\" x2=\"241.6\" y2=\"50.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"174.1\" y1=\"78.0\" x2=\"226.2\" y2=\"47.8\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><line x1=\"337.5\" y1=\"134.0\" x2=\"342.1\" y2=\"108.0\" stroke-width=\"1.8\" marker-end=\"url(#ah)\"/><rect x=\"93.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"120\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grass</text><rect x=\"258.0\" y=\"194\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"285\" y=\"210\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">shrub</text><rect x=\"6.4\" y=\"136\" width=\"97.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">grasshopper</text><rect x=\"163.0\" y=\"136\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"190\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mouse</text><rect x=\"304.4\" y=\"136\" width=\"61.2\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"335\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">rabbit</text><rect x=\"31.6\" y=\"80\" width=\"46.8\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"55\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">frog</text><rect x=\"123.0\" y=\"80\" width=\"54.0\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"150\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">snake</text><rect x=\"325.2\" y=\"80\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"345\" y=\"96\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">fox</text><rect x=\"230.2\" y=\"22\" width=\"39.6\" height=\"24\" rx=\"4\" fill=\"#fff\"/><text x=\"250\" y=\"38\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">owl</text></svg>"

@@ -3035,7 +3035,7 @@
    }
   },
   {
-   "id": "sciinte-44ca015d7e",
+   "id": "sciinte-b30ac9434c",
    "topic": "sci-interactions-forces",
    "level": "basic",
    "template": "sci-pat-friction-spring-weight",
@@ -3044,17 +3044,16 @@
    ],
    "stem": "Why do running shoes have grooves on their soles?",
    "options": [
-    "To increase friction so the runner does not slip",
-    "To make the shoes look nicer",
+    "To make the shoes lighter in the air",
     "To reduce friction so the runner can slide",
-    "To make the shoes lighter in the air"
+    "To make the shoes look nicer",
+    "To give more grip on the ground"
    ],
-   "answer": 0,
+   "answer": 3,
    "explain": [
-    null,
     {
      "tag": "wrong-reason",
-     "why": "The grooves have a job: they stop slipping."
+     "why": "Grooves are for grip, not for lightness."
     },
     {
      "tag": "reversed",
@@ -3062,14 +3061,15 @@
     },
     {
      "tag": "wrong-reason",
-     "why": "Grooves are for grip, not for lightness."
-    }
+     "why": "The grooves have a job: they stop slipping."
+    },
+    null
    ],
    "solution": [
     "Grooves grip the ground. More friction means the shoe does not slip."
    ],
    "params": {
-    "key": "fi-003",
+    "key": "fi-303",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -3347,7 +3347,7 @@
    }
   },
   {
-   "id": "sciinte-08fe3f09d9",
+   "id": "sciinte-a8b603aefd",
    "topic": "sci-interactions-forces",
    "level": "basic",
    "template": "sci-pat-friction-spring-weight",
@@ -3356,21 +3356,21 @@
    ],
    "stem": "A stretched spring is let go and goes back to its first length. Which force makes it do this?",
    "options": [
-    "Gravitational force",
     "Elastic spring force",
-    "Magnetic force",
+    "The magnetic force of a magnet",
+    "The gravitational force of the Earth",
     "Frictional force"
    ],
-   "answer": 1,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong-force",
-     "why": "Gravity pulls down, not along the spring."
-    },
     null,
     {
      "tag": "wrong-force",
      "why": "A spring is not a magnet."
+    },
+    {
+     "tag": "wrong-force",
+     "why": "Gravity pulls down, not along the spring."
     },
     {
      "tag": "wrong-force",
@@ -3381,12 +3381,12 @@
     "A stretched spring pulls back because of elastic spring force."
    ],
    "params": {
-    "key": "fi-011",
+    "key": "fi-311",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
   {
-   "id": "sciinte-ab15ced418",
+   "id": "sciinte-2366ed0ca2",
    "topic": "sci-interactions-forces",
    "level": "basic",
    "template": "sci-pat-friction-spring-weight",
@@ -3395,32 +3395,32 @@
    ],
    "stem": "Which of these things makes use of a spring?",
    "options": [
-    "A ball rolling down a ramp",
+    "A pen that clicks open",
     "A bar of soap sliding on a tray",
-    "A magnet on a fridge",
-    "A pen that clicks to push the tip out"
+    "A ball rolling down a ramp",
+    "A magnet on a fridge"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong-device",
-     "why": "This works by gravity."
-    },
+    null,
     {
      "tag": "wrong-device",
      "why": "This involves friction."
     },
     {
      "tag": "wrong-device",
-     "why": "This works by magnetic force."
+     "why": "This works by gravity."
     },
-    null
+    {
+     "tag": "wrong-device",
+     "why": "This works by magnetic force."
+    }
    ],
    "solution": [
     "The clicking pen has a spring inside that pushes back."
    ],
    "params": {
-    "key": "fi-012",
+    "key": "fi-312",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -3542,7 +3542,7 @@
    }
   },
   {
-   "id": "sciinte-f7568a864e",
+   "id": "sciinte-532fe4663a",
    "topic": "sci-interactions-forces",
    "level": "basic",
    "template": "sci-pat-friction-spring-weight",
@@ -3552,31 +3552,31 @@
    "stem": "The weight of an object is the pull of which force on it?",
    "options": [
     "The frictional force of the floor",
+    "The magnetic force between the Earth and it",
     "The gravitational force of the Earth",
-    "The elastic force of the ground",
-    "The magnetic force of the Earth"
+    "The elastic force of the ground"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong-force",
      "why": "Friction does not give an object weight."
     },
+    {
+     "tag": "wrong-force",
+     "why": "Not all objects are magnetic, but all have weight."
+    },
     null,
     {
      "tag": "wrong-force",
      "why": "Elastic force is not what weight is."
-    },
-    {
-     "tag": "wrong-force",
-     "why": "Not all objects are magnetic, but all have weight."
     }
    ],
    "solution": [
     "Weight is the pull of the Earth's gravity on an object."
    ],
    "params": {
-    "key": "fi-016",
+    "key": "fi-316",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -3698,7 +3698,7 @@
    }
   },
   {
-   "id": "sciinte-214ebb4285",
+   "id": "sciinte-0144ae61f7",
    "topic": "sci-interactions-forces",
    "level": "basic",
    "template": "sci-pat-friction-spring-weight",
@@ -3708,31 +3708,31 @@
    "stem": "In which direction does the force that gives an object its weight act?",
    "options": [
     "Sideways, along the ground",
-    "Downwards, towards the centre of the Earth",
-    "Upwards, away from the Earth",
-    "In the same direction as the object moves"
+    "In the same direction as the object moves",
+    "Downwards, towards the Earth",
+    "Upwards, away from the Earth"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
     {
      "tag": "wrong-direction",
      "why": "Gravity does not pull sideways."
     },
+    {
+     "tag": "wrong-direction",
+     "why": "Gravity always pulls down, whichever way the object moves."
+    },
     null,
     {
      "tag": "reversed",
      "why": "Gravity pulls things towards the Earth."
-    },
-    {
-     "tag": "wrong-direction",
-     "why": "Gravity always pulls down, whichever way the object moves."
     }
    ],
    "solution": [
     "Weight is the pull of gravity, which is towards the Earth."
    ],
    "params": {
-    "key": "fi-020",
+    "key": "fi-320",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -4694,7 +4694,7 @@
    }
   },
   {
-   "id": "sciinte-ddb7ff5ad0",
+   "id": "sciinte-f513dd0e79",
    "topic": "sci-interactions-forces",
    "level": "intermediate",
    "template": "sci-pat-fair-test-design",
@@ -4704,20 +4704,20 @@
    "stem": "In the same experiment, which is the variable that is measured?",
    "options": [
     "The distance the car moves",
-    "The type of surface",
-    "The height of the ramp",
-    "The weight of the car"
+    "The weight of the car",
+    "The type of surface the car moves on",
+    "The height of the ramp used each time"
    ],
    "answer": 0,
    "explain": [
     null,
     {
-     "tag": "changed",
-     "why": "This is the variable that is changed."
-    },
-    {
      "tag": "kept-same",
      "why": "This should be kept the same."
+    },
+    {
+     "tag": "changed",
+     "why": "This is the variable that is changed."
     },
     {
      "tag": "kept-same",
@@ -4728,7 +4728,7 @@
     "The distance the car moves is what is measured for each surface."
    ],
    "params": {
-    "key": "fi-120",
+    "key": "fi-420",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -4812,7 +4812,7 @@
    }
   },
   {
-   "id": "sciinte-828e3b6513",
+   "id": "sciinte-e96df2d756",
    "topic": "sci-interactions-forces",
    "level": "intermediate",
    "template": "sci-pat-friction-spring-weight",
@@ -4821,18 +4821,13 @@
    ],
    "stem": "A bag hangs from a spring balance and the reading is 6 N. What does the reading tell us?",
    "options": [
-    "The Earth pulls the bag down with a force of 6 N",
-    "The spring pushes the bag down with 6 N",
     "The bag has a mass of 6 N",
-    "Friction on the bag is 6 N"
+    "Friction on the bag is 6 N",
+    "The Earth pulls the bag down with 6 N",
+    "The spring pushes the bag down with 6 N"
    ],
-   "answer": 0,
+   "answer": 2,
    "explain": [
-    null,
-    {
-     "tag": "wrong-force",
-     "why": "The spring pulls up. The bag's weight pulls down."
-    },
     {
      "tag": "wrong-unit",
      "why": "Mass is not measured in newtons."
@@ -4840,13 +4835,18 @@
     {
      "tag": "wrong-force",
      "why": "Nothing is rubbing against the bag."
+    },
+    null,
+    {
+     "tag": "wrong-force",
+     "why": "The spring pulls up. The bag's weight pulls down."
     }
    ],
    "solution": [
     "The reading shows the weight of the bag, which is the pull of gravity on it."
    ],
    "params": {
-    "key": "fi-123",
+    "key": "fi-423",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5286,7 +5286,7 @@
    }
   },
   {
-   "id": "sciinte-e7e82f1ba1",
+   "id": "sciinte-2fee1770b4",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-read-data",
@@ -5296,31 +5296,31 @@
    "stem": "Three tests use a ramp and a toy car. The ramp heights and distances moved on carpet are: 10 cm, 30 cm; 20 cm, 55 cm; 30 cm, 80 cm. Which conclusion is correct?",
    "options": [
     "The lower the ramp, the further the car moves",
+    "The height of the ramp has no effect",
     "The car moves further on a rough surface",
-    "The higher the ramp, the further the car moves",
-    "The height of the ramp has no effect"
+    "A higher ramp makes the car go further"
    ],
-   "answer": 2,
+   "answer": 3,
    "explain": [
     {
      "tag": "reversed",
      "why": "The 30 cm ramp gave the longest distance."
     },
     {
+     "tag": "wrong-conclusion",
+     "why": "The distance changes with the height."
+    },
+    {
      "tag": "not-tested",
      "why": "The surface was not changed in these tests."
     },
-    null,
-    {
-     "tag": "wrong-conclusion",
-     "why": "The distance changes with the height."
-    }
+    null
    ],
    "solution": [
     "The distance goes up as the height goes up: 30, 55, 80 cm."
    ],
    "params": {
-    "key": "fi-213",
+    "key": "fi-513",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5364,7 +5364,7 @@
    }
   },
   {
-   "id": "sciinte-2b378f754d",
+   "id": "sciinte-14926d71c1",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-fair-test-design",
@@ -5373,32 +5373,32 @@
    ],
    "stem": "Mei compares two springs P and Q to see which stretches more. What must she keep the same?",
    "options": [
+    "The load and first length",
     "The number of coils in the springs",
-    "The colour of the springs",
-    "The load and the first length of the springs",
-    "The material of the springs"
+    "The material of the springs",
+    "The colour of the springs"
    ],
-   "answer": 2,
+   "answer": 0,
    "explain": [
+    null,
     {
      "tag": "changed",
      "why": "These may be the difference being tested."
     },
     {
-     "tag": "irrelevant",
-     "why": "Colour does not affect stretching."
-    },
-    null,
-    {
      "tag": "changed",
      "why": "The springs are different, and that is what she is comparing."
+    },
+    {
+     "tag": "irrelevant",
+     "why": "Colour does not affect stretching."
     }
    ],
    "solution": [
     "To compare the springs, the load and first length should be the same."
    ],
    "params": {
-    "key": "fi-215",
+    "key": "fi-515",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5481,7 +5481,7 @@
    }
   },
   {
-   "id": "sciinte-81c21d2f11",
+   "id": "sciinte-b08c81b540",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-friction-spring-weight",
@@ -5490,33 +5490,33 @@
    ],
    "stem": "A block hangs from a spring balance and does not move. Which two forces act on the block?",
    "options": [
-    "Magnetic force downwards and the spring force upwards",
+    "Its weight down and the spring force up",
     "Its weight downwards and friction upwards",
-    "Its weight upwards and the spring force downwards",
-    "Its weight downwards and the elastic spring force upwards"
+    "Magnetic force downwards and the spring force upwards",
+    "Its weight upwards and the spring force downwards"
    ],
-   "answer": 3,
+   "answer": 0,
    "explain": [
-    {
-     "tag": "wrong-force",
-     "why": "A magnet is not involved. Gravity pulls down."
-    },
+    null,
     {
      "tag": "wrong-force",
      "why": "There is no rubbing surface, so no friction."
     },
     {
+     "tag": "wrong-force",
+     "why": "A magnet is not involved. Gravity pulls down."
+    },
+    {
      "tag": "reversed",
      "why": "Weight acts down."
-    },
-    null
+    }
    ],
    "solution": [
     "Gravity pulls the block down.",
     "The stretched spring pulls it up with the same size of force, so it stays still."
    ],
    "params": {
-    "key": "fi-218",
+    "key": "fi-518",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5680,7 +5680,7 @@
    }
   },
   {
-   "id": "sciinte-4105460157",
+   "id": "sciinte-bee2d40fff",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-friction-spring-weight",
@@ -5689,16 +5689,16 @@
    ],
    "stem": "Which action makes it harder to slide a heavy cupboard across the floor?",
    "options": [
-    "Putting oil on the floor",
+    "Putting a wet cloth under the cupboard",
     "Putting small wheels on the cupboard",
-    "Putting a thick rubber sheet under the cupboard",
-    "Putting a wet cloth under the cupboard"
+    "Putting a rubber mat under it",
+    "Putting oil on the floor"
    ],
    "answer": 2,
    "explain": [
     {
      "tag": "reduces",
-     "why": "Oil makes it easier to slide."
+     "why": "Wetness reduces friction."
     },
     {
      "tag": "reduces",
@@ -5707,14 +5707,14 @@
     null,
     {
      "tag": "reduces",
-     "why": "Wetness reduces friction."
+     "why": "Oil makes it easier to slide."
     }
    ],
    "solution": [
     "A rubber sheet grips the floor, so friction is greater."
    ],
    "params": {
-    "key": "fi-224",
+    "key": "fi-524",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5799,7 +5799,7 @@
    "figure": "<svg viewBox=\"0 0 330 140\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of two springs</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><rect x=\"120\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"145.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"170\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"220\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"245.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"270\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">150</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Spring P (cm)</text><rect x=\"120\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"145.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"170\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"220\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"245.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"270\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"10\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Spring Q (cm)</text><rect x=\"120\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"145.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"170\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"195.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"220\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"245.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text><rect x=\"270\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"295.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">22</text></svg>"
   },
   {
-   "id": "sciinte-92b4252856",
+   "id": "sciinte-27b9a23598",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-friction-spring-weight",
@@ -5808,22 +5808,22 @@
    ],
    "stem": "A cyclist squeezes the brakes and the bicycle slows down. The brake pads become warm. Which statement explains why?",
    "options": [
-    "The pull of gravity on the pads produces heat",
-    "Friction between the pads and the wheel produces heat",
     "The magnetic force of the wheel produces heat",
+    "The pull of gravity on the pads produces heat",
+    "Friction between pads and wheel makes heat",
     "The elastic spring force in the brake produces heat"
    ],
-   "answer": 1,
+   "answer": 2,
    "explain": [
+    {
+     "tag": "wrong-force",
+     "why": "A bicycle wheel does not act as a magnet on the pads."
+    },
     {
      "tag": "wrong-force",
      "why": "Gravity does not rub the pads against the wheel."
     },
     null,
-    {
-     "tag": "wrong-force",
-     "why": "A bicycle wheel does not act as a magnet on the pads."
-    },
     {
      "tag": "wrong-force",
      "why": "The spring only pulls the pads back. It does not rub against the wheel."
@@ -5833,7 +5833,7 @@
     "The pads rub against the moving wheel. Friction slows the wheel and makes the pads warm."
    ],
    "params": {
-    "key": "fi-229",
+    "key": "fi-529",
     "subtopic": "sci-interactions-forces-investigate"
    }
   },
@@ -5877,7 +5877,7 @@
    }
   },
   {
-   "id": "sciinte-9976592ac6",
+   "id": "sciinte-b5499e86e6",
    "topic": "sci-interactions-forces",
    "level": "competent",
    "template": "sci-pat-fair-test-design",
@@ -5886,32 +5886,32 @@
    ],
    "stem": "Zhi Wei wants to find out whether a heavier block has more friction with a table. He pulls blocks of different weights with a spring balance. Which should he keep the same?",
    "options": [
-    "The material of the blocks and the table",
     "The reading on the spring balance",
-    "The number of blocks pulled at one time",
-    "The weight of each block that he pulls"
+    "The material of the blocks and table",
+    "The weight of each block that he pulls",
+    "The number of blocks pulled at one time"
    ],
-   "answer": 0,
+   "answer": 1,
    "explain": [
-    null,
     {
      "tag": "measured-variable",
      "why": "The reading is what he measures, so it can change."
     },
-    {
-     "tag": "changed-variable",
-     "why": "More blocks would make a heavier load, which changes the variable being tested."
-    },
+    null,
     {
      "tag": "changed-variable",
      "why": "The weight is the variable he is testing, so it must be different."
+    },
+    {
+     "tag": "changed-variable",
+     "why": "More blocks would make a heavier load, which changes the variable being tested."
     }
    ],
    "solution": [
     "Only the weight should change. The block material and the table surface must stay the same so that the test is fair."
    ],
    "params": {
-    "key": "fi-227",
+    "key": "fi-527",
     "subtopic": "sci-interactions-forces-investigate"
    }
   }

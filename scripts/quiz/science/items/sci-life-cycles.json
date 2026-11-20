@@ -3225,6 +3225,38 @@
           }
         ]
       }
+    },
+    {
+      "key": "lc-085",
+      "level": "competent",
+      "outcome": "sci-cycles-life-cycles-compare-3",
+      "pattern": "sci-pat-life-cycle-stages",
+      "stem": "How many stages are in the life cycle of a cockroach, and how many are in the life cycle of a mosquito?",
+      "options": [
+        "3 stages and 4 stages",
+        "4 stages and 3 stages",
+        "3 stages and 3 stages",
+        "4 stages and 4 stages"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "swapped",
+          "why": "A cockroach has no pupa, so it has fewer stages."
+        },
+        {
+          "tag": "wrong-count",
+          "why": "A mosquito has egg, larva, pupa and adult."
+        },
+        {
+          "tag": "wrong-count",
+          "why": "A cockroach has egg, nymph and adult only."
+        }
+      ],
+      "solution": [
+        "Cockroach: egg, nymph, adult (3). Mosquito: egg, larva, pupa, adult (4)."
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-749 shipped questions (basic 251, intermediate 251, competent 247), 342 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+757 shipped questions (basic 253, intermediate 254, competent 250), 344 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -14,7 +14,7 @@
 | Properties and uses of materials | Compare physical properties of materials: strength, flexibility, abil… | yes | yes | 0 **not yet** |
 | Life cycles of plants and animals | Show an understanding that different living things have different lif… | yes | no | 3 |
 | Life cycles of plants and animals | Observe and compare life cycles of flowering plants grown from seeds … | yes | yes | 7 |
-| Life cycles of plants and animals | Observe and compare life cycles of animals (chicken, cockroach, frog,… | yes | yes | 67 |
+| Life cycles of plants and animals | Observe and compare life cycles of animals (chicken, cockroach, frog,… | yes | yes | 68 |
 | Cell and continuity of kind | Recognise that a cell is a basic unit of life [Standard Science only;… | yes | no | 0 **not yet** |
 | Cell and continuity of kind | Show an understanding that living things reproduce to ensure continui… | yes | no | 0 **not yet** |
 | Plant reproduction | Investigate the ways in which plants reproduce: spores, seeds | yes | no | 11 |
@@ -33,8 +33,8 @@
 | Water cycle and conservation | Show an understanding of the roles of evaporation and condensation in… | yes | yes | 0 **not yet** |
 | Water cycle and conservation | Recognise the importance of water to life processes [Standard Science… | yes | no | 0 **not yet** |
 | Water cycle and conservation | Describe the impact of water pollution on Earth's water resources [St… | yes | no | 0 **not yet** |
-| Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 41 |
-| Parts of a plant | Observe plant parts | yes | yes | 27 |
+| Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 46 |
+| Parts of a plant | Observe plant parts | yes | yes | 29 |
 | Overview of human systems | Identify the human systems in the body and state their functions (dig… | yes | no | 0 **not yet** |
 | Digestive system | Identify the parts of the human digestive system (mouth, gullet, stom… | yes | yes | 0 **not yet** |
 | Gases in air | Recognise that air is made up of gases such as nitrogen, carbon dioxi… | yes | no | 0 **not yet** |
@@ -100,7 +100,7 @@
 | Properties of solids, liquids and gases (mass, volume, shape) (`sci-pat-states-of-matter`) | 129 | 0 **not yet** |
 | Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 0 **not yet** |
 | Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 0 **not yet** |
-| Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 47 |
+| Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 51 |
 | Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 0 **not yet** |
 | Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 69 |
 | Classify organisms into broad groups (plants, animals, fungi, bacteria) (`sci-pat-classify-groups`) | 99 | 0 **not yet** |
@@ -110,15 +110,15 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 33 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 34 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
-| Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 77 |
+| Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 78 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 67 |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 68 |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 36 |
-| Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 61 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 37 |
+| Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 62 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 81 |

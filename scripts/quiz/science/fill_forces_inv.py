@@ -99,5 +99,7 @@ q("fi-229", C, 1, PAT, "A cyclist squeezes the brakes and the bicycle slows down
 q("fi-230", C, 3, PAT, "A block is pulled at a steady speed along a table by a spring balance that reads 4 N. What is the size of the friction between the block and the table?", "4 N", [W("0 N", "wrong-idea", "Friction acts on any block sliding on a table. Here it is as big as the pull."), W("8 N", "wrong-calc", "The friction is not twice the pull. A steady speed means the two are equal."), W("2 N", "wrong-calc", "The friction is not half the pull. A steady speed means the two are equal.")], ["The block moves at a steady speed, so the friction is as big as the pull on the spring balance, 4 N."], None)
 
 if __name__ == "__main__":
+    from fill_step0 import FI
+    P[:] = [r for r in P if r[0] not in FI]  # reworded under new keys by fill_step0
     print("added", add(SUB, FILE, P))
     lint(SUB, FILE, "fi-")

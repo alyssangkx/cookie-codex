@@ -3119,6 +3119,281 @@
     "alt": "A young bean seedling in line art.",
     "labels": []
    }
+  },
+  {
+   "id": "scisyst-3b9f88510f",
+   "topic": "sci-systems-plant-parts",
+   "level": "basic",
+   "template": "sci-pat-plant-parts-function",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-1"
+   ],
+   "stem": "A florist keeps cut roses in a vase of water. Which part of each rose lets the water travel up to the flower?",
+   "options": [
+    "The roots",
+    "The thorns",
+    "The petals",
+    "The stem"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong-part",
+     "why": "Cut roses have no roots."
+    },
+    {
+     "tag": "wrong-part",
+     "why": "Thorns do not carry water."
+    },
+    {
+     "tag": "wrong-part",
+     "why": "Petals are at the top. They do not carry water up."
+    },
+    null
+   ],
+   "solution": [
+    "The stem carries water up to the other parts."
+   ],
+   "params": {
+    "key": "pp-201",
+    "subtopic": "sci-systems-plant-parts-fn"
+   }
+  },
+  {
+   "id": "scisyst-8958f34249",
+   "topic": "sci-systems-plant-parts",
+   "level": "basic",
+   "template": "sci-pat-plant-parts-function",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-1"
+   ],
+   "stem": "We eat lettuce in a salad. Which part of the lettuce plant are we mostly eating?",
+   "options": [
+    "The seeds",
+    "The flowers",
+    "The roots",
+    "The leaves"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong-part",
+     "why": "We do not eat the seeds of lettuce."
+    },
+    {
+     "tag": "wrong-part",
+     "why": "Lettuce is eaten before it flowers."
+    },
+    {
+     "tag": "wrong-part",
+     "why": "Roots are under the soil. We do not eat them in lettuce."
+    },
+    null
+   ],
+   "solution": [
+    "The green, leafy part of lettuce is its leaves."
+   ],
+   "params": {
+    "key": "pp-202",
+    "subtopic": "sci-systems-plant-parts-fn"
+   }
+  },
+  {
+   "id": "scisyst-3c9f2095eb",
+   "topic": "sci-systems-plant-parts",
+   "level": "intermediate",
+   "template": "sci-pat-plant-parts-function",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-1"
+   ],
+   "stem": "A farmer picks off all the flowers of a tomato plant before they can form fruits. Which job of the plant part is stopped?",
+   "options": [
+    "Taking in water from the soil",
+    "Making food for the plant",
+    "Holding the plant up",
+    "Making seeds for new plants"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong-job",
+     "why": "This is the job of the roots."
+    },
+    {
+     "tag": "wrong-job",
+     "why": "This is mainly the job of the leaves."
+    },
+    {
+     "tag": "wrong-job",
+     "why": "This is the job of the stem."
+    },
+    null
+   ],
+   "solution": [
+    "Flowers make the fruits and seeds."
+   ],
+   "params": {
+    "key": "pp-203",
+    "subtopic": "sci-systems-plant-parts-fn"
+   }
+  },
+  {
+   "id": "scisyst-e9e29ca1c3",
+   "topic": "sci-systems-plant-parts",
+   "level": "intermediate",
+   "template": "sci-pat-plant-parts-function",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-1"
+   ],
+   "stem": "The roots of a tree spread out wide under the soil. How does this help the tree?",
+   "options": [
+    "It holds the tree firmly and takes in more water",
+    "It helps the tree make food from sunlight",
+    "It helps the tree catch more sunlight",
+    "It carries food up to the leaves"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong-job",
+     "why": "There is no sunlight under the soil. Leaves make food."
+    },
+    {
+     "tag": "wrong-job",
+     "why": "Leaves catch the sunlight."
+    },
+    {
+     "tag": "wrong-job",
+     "why": "Roots do not carry food up to the leaves."
+    }
+   ],
+   "solution": [
+    "Wide roots anchor the tree and reach more water."
+   ],
+   "params": {
+    "key": "pp-204",
+    "subtopic": "sci-systems-plant-parts-fn"
+   }
+  },
+  {
+   "id": "scisyst-90fbde6a75",
+   "topic": "sci-systems-plant-parts",
+   "level": "intermediate",
+   "template": "sci-pat-photosynthesis",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-1"
+   ],
+   "stem": "A gardener cuts all the leaves off a plant but leaves its stem and roots. After some weeks the plant is weaker. Why?",
+   "options": [
+    "Its stem can no longer stand up",
+    "It has too much food stored in its leaves",
+    "Its roots cannot take in any water at all",
+    "It cannot make food without its leaves"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong-idea",
+     "why": "The stem still holds up the plant."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "The leaves were cut off, so they store nothing."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "The roots still take in water."
+    },
+    null
+   ],
+   "solution": [
+    "Leaves make food, so without them the plant becomes weak."
+   ],
+   "params": {
+    "key": "pp-205",
+    "subtopic": "sci-systems-plant-parts-fn"
+   }
+  },
+  {
+   "id": "scisyst-c4c764b367",
+   "topic": "sci-systems-plant-parts",
+   "level": "competent",
+   "template": "sci-pat-fair-test-design",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-2"
+   ],
+   "stem": "The table shows three plants kept in the same place. Which two plants should be compared to find out if leaves are needed to keep a plant healthy?",
+   "options": [
+    "P and R",
+    "P only",
+    "P and Q",
+    "Q and R"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong-pair",
+     "why": "P and R differ in their roots, not their leaves."
+    },
+    {
+     "tag": "wrong-pair",
+     "why": "One plant cannot be compared with itself."
+    },
+    null,
+    {
+     "tag": "wrong-pair",
+     "why": "Q and R differ in both roots and leaves."
+    }
+   ],
+   "solution": [
+    "P and Q differ only in the leaves."
+   ],
+   "params": {
+    "key": "pp-206",
+    "subtopic": "sci-systems-plant-parts-fn"
+   },
+   "figure": "<svg viewBox=\"0 0 360 184\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three plants (same light, water, soil)</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"70\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"110.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Roots</text><rect x=\"150\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Leaves</text><rect x=\"240\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After 4 weeks</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">healthy</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"80\" height=\"44\"/><text x=\"110.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"100\" width=\"90\" height=\"44\"/><text x=\"195.0\" y=\"119.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><text x=\"195.0\" y=\"135.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">each day</text><rect x=\"240\" y=\"100\" width=\"110\" height=\"44\"/><text x=\"295.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">weak</text><rect x=\"10\" y=\"144\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"144\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><rect x=\"150\" y=\"144\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"144\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wilted</text></svg>"
+  },
+  {
+   "id": "scisyst-7b22d964d8",
+   "topic": "sci-systems-plant-parts",
+   "level": "competent",
+   "template": "sci-pat-read-data",
+   "outcomes": [
+    "sci-systems-plant-parts-fn-2"
+   ],
+   "stem": "Using the same table, what does plant R show?",
+   "options": [
+    "A plant needs roots to carry food to its leaves",
+    "A plant needs roots to catch light",
+    "A plant needs roots to take in water",
+    "A plant needs roots to make food"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong-job",
+     "why": "This is not shown. R wilted because it lacked water."
+    },
+    {
+     "tag": "wrong-job",
+     "why": "Roots do not catch light."
+    },
+    null,
+    {
+     "tag": "wrong-job",
+     "why": "Roots do not make food."
+    }
+   ],
+   "solution": [
+    "With its roots cut off R wilted, so roots are needed for taking in water."
+   ],
+   "params": {
+    "key": "pp-207",
+    "subtopic": "sci-systems-plant-parts-fn"
+   },
+   "figure": "<svg viewBox=\"0 0 360 184\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three plants (same light, water, soil)</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"70\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"110.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Roots</text><rect x=\"150\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Leaves</text><rect x=\"240\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After 4 weeks</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">healthy</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"80\" height=\"44\"/><text x=\"110.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"150\" y=\"100\" width=\"90\" height=\"44\"/><text x=\"195.0\" y=\"119.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><text x=\"195.0\" y=\"135.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">each day</text><rect x=\"240\" y=\"100\" width=\"110\" height=\"44\"/><text x=\"295.0\" y=\"127.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">weak</text><rect x=\"10\" y=\"144\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"144\" width=\"80\" height=\"30\"/><text x=\"110.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cut off</text><rect x=\"150\" y=\"144\" width=\"90\" height=\"30\"/><text x=\"195.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"240\" y=\"144\" width=\"110\" height=\"30\"/><text x=\"295.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wilted</text></svg>"
   }
  ]
 }
