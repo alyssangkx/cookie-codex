@@ -1304,8 +1304,8 @@
       "options": [
         "A burning candle and a breathing mouse",
         "A burning candle and a melting ice cube",
-        "A green plant making food in light and a boiling kettle",
-        "A breathing mouse and a growing plant making food in light"
+        "An electric kettle boiling water and a melting ice cube",
+        "A breathing mouse and a puddle of water drying up"
       ],
       "answer": 0,
       "explain": [
@@ -1316,11 +1316,11 @@
         },
         {
           "tag": "partial",
-          "why": "Neither uses up oxygen."
+          "why": "Neither burns anything or breathes, so neither uses up oxygen."
         },
         {
           "tag": "partial",
-          "why": "A plant making food in light adds oxygen."
+          "why": "The mouse uses oxygen, but water drying up (evaporating) does not."
         }
       ],
       "solution": [

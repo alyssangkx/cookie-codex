@@ -1576,6 +1576,45 @@
    "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two gases in air</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Gas</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Amount in air (%)</text><rect x=\"85.8\" y=\"71.0\" width=\"67.5\" height=\"117.0\"/><rect x=\"220.8\" y=\"156.5\" width=\"67.5\" height=\"31.5\"/></svg>"
   },
   {
+   "id": "scisyst-56386bb716",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "intermediate",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "Which pair of things both use up oxygen from the air?",
+   "options": [
+    "A breathing mouse and a puddle of water drying up",
+    "A burning candle and a melting ice cube",
+    "An electric kettle boiling water and a melting ice cube",
+    "A burning candle and a breathing mouse"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "partial",
+     "why": "The mouse uses oxygen, but water drying up (evaporating) does not."
+    },
+    {
+     "tag": "partial",
+     "why": "A melting ice cube does not use oxygen."
+    },
+    {
+     "tag": "partial",
+     "why": "Neither burns anything or breathes, so neither uses up oxygen."
+    },
+    null
+   ],
+   "solution": [
+    "Burning and breathing both use oxygen."
+   ],
+   "params": {
+    "key": "ag-121",
+    "subtopic": "sci-systems-air-gases"
+   }
+  },
+  {
    "id": "scisyst-50c1b20134",
    "topic": "sci-systems-human-resp-circ",
    "level": "intermediate",
@@ -5832,6 +5871,46 @@
     "subtopic": "sci-systems-resp-circ-parts"
    },
    "figure": "<svg viewBox=\"0 0 300 280\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">How blood moves round the body</text><rect x=\"105\" y=\"30\" width=\"100\" height=\"40\" rx=\"8\"/><text x=\"155.0\" y=\"55.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Lungs</text><rect x=\"105\" y=\"120\" width=\"100\" height=\"44\" rx=\"8\"/><text x=\"155.0\" y=\"147.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heart</text><rect x=\"105\" y=\"220\" width=\"100\" height=\"40\" rx=\"8\"/><text x=\"155.0\" y=\"245.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Body</text><line x1=\"135\" y1=\"118\" x2=\"135\" y2=\"72\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"120\" y=\"98\" text-anchor=\"end\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"175\" y1=\"72\" x2=\"175\" y2=\"118\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"190\" y=\"98\" text-anchor=\"start\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"175\" y1=\"166\" x2=\"175\" y2=\"218\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"190\" y=\"198\" text-anchor=\"start\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"135\" y1=\"218\" x2=\"135\" y2=\"166\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"120\" y=\"198\" text-anchor=\"end\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+  },
+  {
+   "id": "scisyst-12bc45e4d8",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "competent",
+   "template": "sci-pat-resp-circulatory",
+   "outcomes": [
+    "sci-systems-resp-circ-parts-3"
+   ],
+   "stem": "The table shows whether three substances are carried by human blood and by the tubes of plants. Which substance is most likely P?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Light energy",
+    "Water"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "human-only",
+     "why": "Oxygen is carried by blood but not by the tubes of plants, like Q."
+    },
+    {
+     "tag": "human-only",
+     "why": "Carbon dioxide is carried by blood but not by the tubes of plants, like Q."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "No living thing carries light in its tubes, like R."
+    },
+    null
+   ],
+   "solution": [
+    "Blood carries water and so do the tubes of plants."
+   ],
+   "params": {
+    "key": "rc-512",
+    "subtopic": "sci-systems-resp-circ-parts"
+   },
+   "figure": "<svg viewBox=\"0 0 410 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"205.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substances carried</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"175.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">In human blood?</text><rect x=\"250\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"325.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">In plant tubes?</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"175.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"325.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"175.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"325.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"175.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"250\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"325.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text></svg>"
   }
  ]
 }
