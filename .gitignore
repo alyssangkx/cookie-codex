@@ -22,3 +22,7 @@ supabase/.temp/
 
 # past papers stay local (copyright); scripts/pastpapers/ reads them
 PastPapers/
+
+# Owner's local files: past-paper archives must never enter the repo (past papers stay private)
+*.zip
+.ses

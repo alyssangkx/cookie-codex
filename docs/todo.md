@@ -19,6 +19,18 @@ outside the repo.
     - rewards rebuilt (90 Science slots moved).
   - Steps: code review medium, then commit in four parts, then ask the owner before pushing. Pushing resets
     per-question progress on most Maths questions once; cleared tiers and cards stay.
+- [ ] **Review fixes before the push (20 Nov):**
+  - **New keys:** rewritten English and Chinese items get new keys, so new questions don't inherit old progress.
+  - **Move to matching sub-topics:**
+    - sentence-choice items out of "sentence ordering";
+    - grammar cloze out of "metalanguage";
+    - visual-text sets into "multimodal texts".
+  - **Science figures:** fix the ones that show the answer, plus give-away options in the new items. Guard the
+    one-off refile script.
+  - **Done:** `*.zip` and `.ses` gitignored (past-paper archive); the isolation wording corrected.
+- [ ] **Parent note when pushing the Maths re-seed:** most Maths question ids change once. Pending Maths retests
+  disappear, tier counts restart on the new questions, and cleared tiers and cards stay. The parent page lists the old
+  ids as "retired".
 - [ ] **Server queue, then pickup on dev**
   - Tag Maths, Science and Chinese 2018–2024.
   - Apply the Chinese rule: the sub-topic comes from the paper section, except 语文应用.
@@ -55,6 +67,17 @@ outside the repo.
 - [ ] Part 2 design run (`prompt-design-part2-run.md`).
 
 ## Question banks (content)
+
+- [ ] **Populate the site's Science questions (owner, 20 Nov 2026).** This is the main Science task.
+  - **Do it only after the repo is robust** and three things are clearly understood from the tagged papers:
+    - how often each question type appears;
+    - how each type is asked (stem framing, options, mark split);
+    - what picture, graph or table goes with it.
+  - **Then the questions come from one of two sources:**
+    - straight from the repo's past papers, served privately after the blind-answer check;
+    - generated in the same style.
+  - First step: a Science frequency and format study over all tagged years, covering type × framing × figure kind
+    (photo, diagram, graph, table, set-up drawing).
 
 - [ ] **Science:**
   - Adaptations and Plant reproduction need Intermediate and Competent items (only Basic is playable).
