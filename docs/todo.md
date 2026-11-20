@@ -4,7 +4,8 @@ This file holds everything the owner and Claude have agreed or recommended but n
 something is discussed. Tick an item (`[x]`) only once it is done and verified, and write the date next to it.
 
 Priority (owner, 20 Nov 2026): the learning, training and assessment loop comes first. Game mechanics come second and
-may be reworked, but cards already awarded stay.
+may be reworked, but cards already awarded stay. Game progress (tier states, question states, attempts) may be wiped
+and reset when that simplifies a redesign; the cards stay.
 
 Private details (server addresses, keys, past-paper text) are kept out of this file. They live in the private notes
 outside the repo.
@@ -12,7 +13,7 @@ outside the repo.
 ## Now (20 Nov 2026)
 
 - [ ] **Server queue, then pickup on dev**
-  - Tag Maths, Science and Chinese 2018–2024.
+  - [x] Tag Maths, Science and Chinese 2018–2024 (done 08:45, 70 min).
   - Apply the Chinese rule: the sub-topic comes from the paper section, except 语文应用.
   - Tag English 2018–2026 by paper section.
   - Re-run the MCQ audit with passages and figures.
