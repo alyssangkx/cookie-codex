@@ -40,28 +40,27 @@ QUOTA_MAX = 100  # ceiling per sub-topic per level (a tier clears only when all 
 PER_WEIGHT = 10  #at most this many questions per unit of template weight, so a tier is not one template repeated
 MARKS_SCALE = 14  # questions per level for each 1% of past-paper marks
 
-# Share of Math marks per sub-topic in the 2025 and 2026 top-school prelim papers (70 papers, 2,679 tagged items;
-# aggregate counts only). Sub-topics not listed get the floor. Speed is not in the syllabus and has no entry.
+# Share of Math marks per sub-topic in the 2018-2026 top-school prelim papers (13,986 tagged items, marks-weighted;
+# aggregate counts only; recomputed 20 Nov 2026 from all nine years). Sub-topics under 1.8% get the floor. Speed is not in
+# the syllabus and has no entry.
 PAPER_MARKS_PCT = {
-    "math-whole-numbers-addition-subtraction-multiplication-and-division": 17.2,
-    "math-geometry-angles": 11.8,
-    "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts": 7.0,
-    "math-fractions-fraction-of-a-whole-and-of-a-set": 6.0,
-    "math-ratio-ratio": 5.9,
-    "math-area-and-volume-volume-of-cube-and-cuboid": 5.3,
-    "math-area-and-volume-area-and-circumference-of-circle": 4.9,
-    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million": 4.2,
+    "math-whole-numbers-addition-subtraction-multiplication-and-division": 17.6,
+    "math-geometry-angles": 11.2,
+    "math-ratio-ratio": 6.2,
+    "math-fractions-fraction-of-a-whole-and-of-a-set": 5.8,
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million": 5.6,
+    "math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts": 5.2,
+    "math-area-and-volume-area-and-circumference-of-circle": 5.1,
+    "math-area-and-volume-volume-of-cube-and-cuboid": 4.5,
+    "math-percentage-percentage": 4.3,
+    "math-money-money": 4.1,
     "math-area-and-volume-area-and-perimeter": 4.0,
-    "math-percentage-percentage": 4.0,
-    "math-money-money": 3.5,
-    "math-rate-rate": 3.1,
-    "math-data-analysis-average-of-a-set-of-data": 2.5,
+    "math-rate-rate": 2.9,
+    "math-algebra-algebra": 2.3,
+    "math-area-and-volume-area-of-triangle": 2.3,
     "math-measurement-length-mass-and-volume": 2.3,
-    "math-area-and-volume-area-of-triangle": 2.1,
-    "math-geometry-3d-shapes-and-nets": 2.0,
-    "math-whole-numbers-factors-and-multiples": 1.9,
+    "math-data-analysis-average-of-a-set-of-data": 2.2,
     "math-decimals-decimal-notation-and-comparison": 1.9,
-    "math-algebra-algebra": 1.8,
 }
 
 

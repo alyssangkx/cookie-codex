@@ -7119,6 +7119,106 @@
    "calc": false
   },
   {
+   "id": "ratio-i-0f91cd8770",
+   "topic": "math-ratio",
+   "level": "intermediate",
+   "template": "combine_ratios",
+   "outcomes": [
+    "math-ratio-ratio-02"
+   ],
+   "stem": "The ratio of A to B is 1 : 3. The ratio of B to C is 2 : 1. Find the ratio of A to B to C.",
+   "options": [
+    "1 : 3 : 1",
+    "3 : 6 : 2",
+    "2 : 6 : 1",
+    "2 : 6 : 3"
+   ],
+   "optionValues": [
+    "1003001",
+    "3006002",
+    "2006001",
+    "2006003"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "joined_without_matching_B",
+     "why": "Joined the ratios as 1 : 3 : 1 without making B the same."
+    },
+    {
+     "tag": "reversed_order",
+     "why": "Wrote the ratio backwards."
+    },
+    {
+     "tag": "scaled_only_first_ratio",
+     "why": "Changed the first ratio but not the second."
+    },
+    null
+   ],
+   "solution": [
+    "Make B the same: LCM of 3 and 2 is 6",
+    "A : B = 2 : 6, B : C = 6 : 3",
+    "A : B : C = 2 : 6 : 3"
+   ],
+   "params": {
+    "a": 1,
+    "b": 3,
+    "c": 2,
+    "d": 1
+   },
+   "calc": false
+  },
+  {
+   "id": "ratio-i-1b6ebdef60",
+   "topic": "math-ratio",
+   "level": "intermediate",
+   "template": "part_to_total",
+   "outcomes": [
+    "math-ratio-ratio-03",
+    "math-ratio-ratio-07"
+   ],
+   "stem": "The ratio of boys to girls in a choir is 2 : 7. There are 56 girls. How many children are in the choir?",
+   "options": [
+    "80 children",
+    "504 children",
+    "16 children",
+    "72 children"
+   ],
+   "optionValues": [
+    "80",
+    "504",
+    "16",
+    "72"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "miscounted_units",
+     "why": "Counted one unit too many."
+    },
+    {
+     "tag": "did_not_find_one_unit",
+     "why": "Multiplied 56 by 9 without finding 1 unit."
+    },
+    {
+     "tag": "gave_number_of_boys",
+     "why": "Gave the number of boys."
+    },
+    null
+   ],
+   "solution": [
+    "7 units → 56",
+    "1 unit = 56 ÷ 7 = 8",
+    "Total = 9 × 8 = 72"
+   ],
+   "params": {
+    "a": 2,
+    "b": 7,
+    "girls": 56
+   },
+   "calc": false
+  },
+  {
    "id": "ratio-i-edc8eef90f",
    "topic": "math-ratio",
    "level": "intermediate",
@@ -7167,6 +7267,109 @@
     "Q": 72
    },
    "calc": false
+  },
+  {
+   "id": "ratio-i-9016ccc7a9",
+   "topic": "math-ratio",
+   "level": "intermediate",
+   "template": "multiple_and_ratio",
+   "outcomes": [
+    "math-ratio-ratio-03",
+    "math-ratio-ratio-02"
+   ],
+   "stem": "Ali, Mei Ling and Siti share $341. Ali gets 4 times as much as Mei Ling. The ratio of Mei Ling's share to Siti's share is 5 : 6. How much does Siti get?",
+   "options": [
+    "$220",
+    "$66",
+    "$55",
+    "$77"
+   ],
+   "optionValues": [
+    "220",
+    "66",
+    "55",
+    "77"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "gave_first_person",
+     "why": "Gave Ali's share."
+    },
+    null,
+    {
+     "tag": "gave_second_person",
+     "why": "Gave Mei Ling's share."
+    },
+    {
+     "tag": "miscounted_units",
+     "why": "Counted one unit too many."
+    }
+   ],
+   "solution": [
+    "Mei Ling : Siti = 5 : 6, so Ali = 4 × 5 = 20 units",
+    "Ali : Mei Ling : Siti = 20 : 5 : 6",
+    "1 unit = $341 ÷ 31 = $11",
+    "Siti = 6 × $11 = $66"
+   ],
+   "params": {
+    "k": 4,
+    "p": 5,
+    "q": 6,
+    "total": 341
+   },
+   "calc": false
+  },
+  {
+   "id": "ratio-i-e62f6c5496",
+   "topic": "math-ratio",
+   "level": "intermediate",
+   "template": "triangle_area_shared_height",
+   "outcomes": [
+    "math-ratio-ratio-05",
+    "math-ratio-ratio-02"
+   ],
+   "stem": "In the figure, B, C and D lie on a straight line and BC : CD = 4 : 3. The area of triangle ABC is 44 cm². What is the area of triangle ACD?",
+   "options": [
+    "33 cm²",
+    "11 cm²",
+    "44 cm²",
+    "77 cm²"
+   ],
+   "optionValues": [
+    "33",
+    "11",
+    "44",
+    "77"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "found_one_unit_only",
+     "why": "Found 1 unit of area only."
+    },
+    {
+     "tag": "miscounted_units",
+     "why": "Counted one unit too many."
+    },
+    {
+     "tag": "gave_whole_triangle",
+     "why": "Gave the area of the whole triangle ABD."
+    }
+   ],
+   "solution": [
+    "The triangles share the same height from A, so their areas are in the ratio of their bases.",
+    "4 units → 44 cm², so 1 unit = 11 cm²",
+    "Area ACD = 3 × 11 = 33 cm²"
+   ],
+   "params": {
+    "m": 4,
+    "n": 3,
+    "X": 44
+   },
+   "calc": false,
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 190\" role=\"img\" aria-label=\"Triangle ABD with C on BD\" class=\"qfig\"><polygon points=\"20.0,160.0 300.0,160.0 118.0,30.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><line x1=\"118.0\" y1=\"30.0\" x2=\"180.0\" y2=\"160.0\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"20.0\" y=\"176.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">B</text><text x=\"180.0\" y=\"176.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">C</text><text x=\"300.0\" y=\"176.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">D</text><text x=\"118.0\" y=\"18.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">A</text></svg>"
   },
   {
    "id": "ratio-i-259527505c",

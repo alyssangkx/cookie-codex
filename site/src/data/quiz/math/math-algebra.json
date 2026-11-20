@@ -1216,6 +1216,345 @@
    "calc": false
   },
   {
+   "id": "algebr-b-ba7a5da36c",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "simplify_basic",
+   "outcomes": [
+    "math-algebra-algebra-03"
+   ],
+   "stem": "Simplify 8 + 7x - 5x.",
+   "options": [
+    "12x + 8",
+    "2x - 8",
+    "10x",
+    "2x + 8"
+   ],
+   "optionValues": [
+    "760726",
+    "317966",
+    "825268",
+    "297169"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_operation_on_letter_terms",
+     "why": "Added the letter terms when they should be subtracted."
+    },
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Changed the sign of the number."
+    },
+    {
+     "tag": "combined_unlike_terms",
+     "why": "Added the number to the letter terms."
+    },
+    null
+   ],
+   "solution": [
+    "Add or subtract the x terms: 7x - 5x = 2x",
+    "Keep the number: 2x + 8"
+   ],
+   "params": {
+    "a1": 7,
+    "a2": 5,
+    "s": -1,
+    "c": 8,
+    "v": "x"
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-b-951a908c39",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "substitute_basic",
+   "outcomes": [
+    "math-algebra-algebra-04"
+   ],
+   "stem": "Find the value of 7m + 7 when m = 7.",
+   "options": [
+    "56",
+    "42",
+    "21",
+    "84"
+   ],
+   "optionValues": [
+    "56",
+    "42",
+    "21",
+    "84"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Changed the sign of the number."
+    },
+    {
+     "tag": "added_instead_of_multiplied",
+     "why": "Added 7 and 7 instead of multiplying."
+    },
+    {
+     "tag": "wrote_digits_together",
+     "why": "Read 7m as 77."
+    }
+   ],
+   "solution": [
+    "7m + 7 = 7 × 7 + 7",
+    "= 49 + 7 = 56"
+   ],
+   "params": {
+    "a": 7,
+    "b": 7,
+    "x": 7
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-b-42f9527405",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "solve_basic",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Solve a ÷ 9 = 24.",
+   "options": [
+    "33",
+    "216",
+    "217",
+    "15"
+   ],
+   "optionValues": [
+    "33",
+    "216",
+    "217",
+    "15"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added",
+     "why": "Added 24 and 9."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "subtracted",
+     "why": "Subtracted 9 from 24."
+    }
+   ],
+   "solution": [
+    "Do the opposite operation to both sides, giving a = 216."
+   ],
+   "params": {
+    "kind": "div",
+    "k": 9,
+    "m": 24
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-b-b12adc62fc",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "letter_context",
+   "outcomes": [
+    "math-algebra-algebra-01",
+    "math-algebra-algebra-02"
+   ],
+   "stem": "Nurul has n marbles. Shu Fen has 8 more marbles than Nurul. How many marbles does Shu Fen have?",
+   "options": [
+    "n - 8",
+    "8n",
+    "n + 8",
+    "8 - n"
+   ],
+   "optionValues": [
+    "103183",
+    "236470",
+    "526153",
+    "306010"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Wrote n - 8: subtracted instead of added."
+    },
+    {
+     "tag": "multiplied_instead_of_added",
+     "why": "Wrote 8n: multiplied instead of added."
+    },
+    null,
+    {
+     "tag": "reversed_the_subtraction",
+     "why": "Wrote 8 - n: reversed the subtraction."
+    }
+   ],
+   "solution": [
+    "Let the number of marbles be n.",
+    "The answer is n + 8."
+   ],
+   "params": {
+    "kind": "more",
+    "k": 8,
+    "v": "n"
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-b-958816d20e",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "simplify_basic",
+   "outcomes": [
+    "math-algebra-algebra-03"
+   ],
+   "stem": "Simplify 8n + 5 - 5n.",
+   "options": [
+    "8n",
+    "3n - 5",
+    "3n + 5",
+    "13n + 5"
+   ],
+   "optionValues": [
+    "236470",
+    "327315",
+    "507319",
+    "698773"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "combined_unlike_terms",
+     "why": "Added the number to the letter terms."
+    },
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Changed the sign of the number."
+    },
+    null,
+    {
+     "tag": "wrong_operation_on_letter_terms",
+     "why": "Added the letter terms when they should be subtracted."
+    }
+   ],
+   "solution": [
+    "Add or subtract the n terms: 8n - 5n = 3n",
+    "Keep the number: 3n + 5"
+   ],
+   "params": {
+    "a1": 8,
+    "a2": 5,
+    "s": -1,
+    "c": 5,
+    "v": "n"
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-b-a2b35d3a06",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "substitute_basic",
+   "outcomes": [
+    "math-algebra-algebra-04"
+   ],
+   "stem": "Find the value of 9p + 4 when p = 7.",
+   "options": [
+    "20",
+    "67",
+    "59",
+    "101"
+   ],
+   "optionValues": [
+    "20",
+    "67",
+    "59",
+    "101"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added_instead_of_multiplied",
+     "why": "Added 9 and 7 instead of multiplying."
+    },
+    null,
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Changed the sign of the number."
+    },
+    {
+     "tag": "wrote_digits_together",
+     "why": "Read 9p as 97."
+    }
+   ],
+   "solution": [
+    "9p + 4 = 9 × 7 + 4",
+    "= 63 + 4 = 67"
+   ],
+   "params": {
+    "a": 9,
+    "b": 4,
+    "x": 7
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-b-9c0e0137c9",
+   "topic": "math-algebra",
+   "level": "basic",
+   "template": "solve_basic",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Solve k - 10 = 19.",
+   "options": [
+    "10",
+    "29",
+    "190",
+    "9"
+   ],
+   "optionValues": [
+    "10",
+    "29",
+    "190",
+    "9"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "gave_the_constant",
+     "why": "Gave 10."
+    },
+    null,
+    {
+     "tag": "multiplied",
+     "why": "Multiplied 10 by 19."
+    },
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Subtracted 10 from 19."
+    }
+   ],
+   "solution": [
+    "Do the opposite operation to both sides, giving k = 29."
+   ],
+   "params": {
+    "kind": "sub",
+    "k": 10,
+    "m": 19
+   },
+   "calc": false
+  },
+  {
    "id": "algebr-i-7b4139250b",
    "topic": "math-algebra",
    "level": "intermediate",
@@ -2562,6 +2901,384 @@
    "calc": false
   },
   {
+   "id": "algebr-i-36c1d79fc1",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "simplify_intermediate",
+   "outcomes": [
+    "math-algebra-algebra-03"
+   ],
+   "stem": "Simplify 9a - 6 - 2a - 12.",
+   "options": [
+    "7a - 17",
+    "7a - 18",
+    "7a + 6",
+    "11a - 18"
+   ],
+   "optionValues": [
+    "150384",
+    "562405",
+    "322954",
+    "766239"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null,
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Made a sign error with the numbers."
+    },
+    {
+     "tag": "added_instead_of_subtracted",
+     "why": "Added the a terms instead of subtracting."
+    }
+   ],
+   "solution": [
+    "a terms: 9a − 2a = 7a",
+    "Numbers: -6 − 12 = -18",
+    "= 7a - 18"
+   ],
+   "params": {
+    "a1": 9,
+    "a2": 2,
+    "b": -6,
+    "d": -12,
+    "v": "a"
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-i-03ecfcc53c",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "simplify_two_letters",
+   "outcomes": [
+    "math-algebra-algebra-03"
+   ],
+   "stem": "Simplify 5b + 8a + 9a + 5b.",
+   "options": [
+    "17a + 11b",
+    "27ab",
+    "27a",
+    "17a + 10b"
+   ],
+   "optionValues": [
+    "879330",
+    "786558",
+    "309113",
+    "348023"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "multiplied_unlike_terms",
+     "why": "Joined a and b into one term."
+    },
+    {
+     "tag": "combined_unlike_terms",
+     "why": "Added all the coefficients as if a and b were the same."
+    },
+    null
+   ],
+   "solution": [
+    "a terms: 8a + 9a = 17a",
+    "b terms: 5b + 5b = 10b",
+    "= 17a + 10b"
+   ],
+   "params": {
+    "terms": [
+     [
+      5,
+      "b"
+     ],
+     [
+      8,
+      "a"
+     ],
+     [
+      9,
+      "a"
+     ],
+     [
+      5,
+      "b"
+     ]
+    ]
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-i-5f364abe20",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "substitute_two_letters",
+   "outcomes": [
+    "math-algebra-algebra-04"
+   ],
+   "stem": "Find the value of 6a + 6b - 1 when a = 3 and b = 4.",
+   "options": [
+    "42",
+    "126",
+    "41",
+    "43"
+   ],
+   "optionValues": [
+    "42",
+    "126",
+    "41",
+    "43"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "wrote_digits_together",
+     "why": "Wrote the digits side by side instead of multiplying."
+    },
+    null,
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Changed the sign of the number."
+    }
+   ],
+   "solution": [
+    "6 × 3 + 6 × 4 − 1",
+    "= 18 + 24 − 1 = 41"
+   ],
+   "params": {
+    "p": 6,
+    "q": 6,
+    "a": 3,
+    "b": 4,
+    "sgn": 1,
+    "c": -1
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-i-95791af695",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "equation_from_context",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Kumar bought 4 bottles of juice at $m each. After a $4 discount, Kumar paid $44 altogether. Find the cost of one bottle, $m.",
+   "options": [
+    "$11",
+    "$10",
+    "$12",
+    "$48"
+   ],
+   "optionValues": [
+    "11",
+    "10",
+    "12",
+    "48"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "forgot_the_other_amount",
+     "why": "Divided $44 by 4 and ignored the $4."
+    },
+    {
+     "tag": "wrong_operation",
+     "why": "Subtracted $4 instead of adding."
+    },
+    null,
+    {
+     "tag": "forgot_to_divide",
+     "why": "Found $44 + $4 but did not divide by 4."
+    }
+   ],
+   "solution": [
+    "4m − 4 = 44",
+    "4m = 48",
+    "m = 12"
+   ],
+   "params": {
+    "a": 4,
+    "b": 4,
+    "sgn": -1,
+    "c": 44
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-i-e7e0cbe95e",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "equation_from_figure_triangle",
+   "outcomes": [
+    "math-algebra-algebra-05",
+    "math-algebra-algebra-03"
+   ],
+   "stem": "The figure shows a triangle with sides (2x + 7) cm, (2x + 2) cm and (2x + 4) cm. The figure is not drawn to scale. The perimeter of the triangle is 55 cm. What is the length of the longest side?",
+   "options": [
+    "55 cm",
+    "7 cm",
+    "18 cm",
+    "21 cm"
+   ],
+   "optionValues": [
+    "55",
+    "7",
+    "18",
+    "21"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "gave_the_perimeter",
+     "why": "Gave the perimeter."
+    },
+    {
+     "tag": "gave_x",
+     "why": "Gave the value of x, not a side."
+    },
+    {
+     "tag": "gave_the_wrong_side",
+     "why": "Gave the second longest side."
+    },
+    null
+   ],
+   "solution": [
+    "Perimeter: 6x + 13 = 55",
+    "6x = 42",
+    "x = 7",
+    "The sides are 21 cm, 16 cm and 18 cm.",
+    "The longest side is 21 cm."
+   ],
+   "params": {
+    "a": [
+     2,
+     2,
+     2
+    ],
+    "b": [
+     7,
+     2,
+     4
+    ],
+    "P": 55
+   },
+   "calc": false,
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 190\" role=\"img\" aria-label=\"Triangle with sides marked in terms of x\" class=\"qfig\"><polygon points=\"70.0,150.0 280.0,150.0 150.0,30.0\" fill=\"currentColor\" fill-opacity=\"0.06\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"175.0\" y=\"166.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">(2x + 7) cm</text><text x=\"238.1\" y=\"65.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">(2x + 2) cm</text><text x=\"81.7\" y=\"71.1\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">(2x + 4) cm</text></svg>"
+  },
+  {
+   "id": "algebr-i-88f49e680b",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "equation_both_sides",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Ali has (5x + 12) marbles. Jun Wei has (3x + 32) marbles. They have the same number of marbles. How many marbles does each of them have?",
+   "options": [
+    "62 marbles",
+    "82 marbles",
+    "42 marbles",
+    "10 marbles"
+   ],
+   "optionValues": [
+    "62",
+    "82",
+    "42",
+    "10"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "mixed_up_the_constants",
+     "why": "Used 5x + 32."
+    },
+    {
+     "tag": "mixed_up_the_constants",
+     "why": "Used 3x + 12."
+    },
+    {
+     "tag": "gave_x",
+     "why": "Gave the value of x, not the number of items."
+    }
+   ],
+   "solution": [
+    "5x + 12 = 3x + 32",
+    "2x = 20",
+    "x = 10",
+    "Each has 5 × 10 + 12 = 62"
+   ],
+   "params": {
+    "a": 5,
+    "b": 12,
+    "c": 3,
+    "d": 32
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-i-17723023fb",
+   "topic": "math-algebra",
+   "level": "intermediate",
+   "template": "always_true_statement",
+   "outcomes": [
+    "math-algebra-algebra-02",
+    "math-algebra-algebra-01"
+   ],
+   "stem": "Tank A holds 2x litres of water and Tank B holds (x + 10) litres, where x is a whole number greater than 0. Which one of the following statements must be true?",
+   "options": [
+    "Tank B holds more water than Tank A.",
+    "Together, the two tanks hold 3(x + 10) litres.",
+    "Tank A holds more water than Tank B.",
+    "Together, the two tanks hold (3x + 10) litres."
+   ],
+   "optionValues": [
+    "3",
+    "4",
+    "2",
+    "1"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "assumed_a_value_for_the_letter",
+     "why": "Assumed a value of the letter: it may be true for some values but not for others."
+    },
+    {
+     "tag": "combined_unlike_terms",
+     "why": "Simplified wrongly by treating the number and the letter terms as like terms."
+    },
+    {
+     "tag": "assumed_a_value_for_the_letter",
+     "why": "Assumed a value of the letter: it may be true for some values but not for others."
+    },
+    null
+   ],
+   "solution": [
+    "Test each statement with different values of the letter.",
+    "Only “Together, the two tanks hold (3x + 10) litres.” is true for every value.",
+    "A statement that is true for some values and false for others cannot be said to be true: it is not possible to tell."
+   ],
+   "params": {
+    "kind": "tank",
+    "a": 2,
+    "c": 10
+   },
+   "calc": false
+  },
+  {
    "id": "algebr-c-84d38f773e",
    "topic": "math-algebra",
    "level": "competent",
@@ -3829,6 +4546,363 @@
    "params": {
     "W": 21,
     "a": 3
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-c-1ab422834d",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "rectangle_perimeter_area",
+   "outcomes": [
+    "math-algebra-algebra-05",
+    "math-algebra-algebra-03"
+   ],
+   "stem": "The figure shows a rectangle with length (3x + 1) cm and width (2x + 5) cm. The figure is not drawn to scale. The perimeter of the rectangle is 82 cm. What is the area of the rectangle in cm²?",
+   "options": [
+    "82 cm²",
+    "7 cm²",
+    "41 cm²",
+    "418 cm²"
+   ],
+   "optionValues": [
+    "82",
+    "7",
+    "41",
+    "418"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "gave_the_perimeter",
+     "why": "Gave the perimeter."
+    },
+    {
+     "tag": "gave_x",
+     "why": "Gave the value of x."
+    },
+    {
+     "tag": "gave_the_half_perimeter",
+     "why": "Gave the sum of the length and width."
+    },
+    null
+   ],
+   "solution": [
+    "Perimeter = 2 × (3x + 1 + 2x + 5) = 2 × (5x + 6) = 82",
+    "5x + 6 = 41, so 5x = 35, x = 7",
+    "Length = 22 cm, width = 19 cm",
+    "Area = 22 × 19 = 418 cm²"
+   ],
+   "params": {
+    "a": 3,
+    "b": 1,
+    "c": 2,
+    "d": 5,
+    "P": 82
+   },
+   "calc": false,
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 180\" role=\"img\" aria-label=\"Rectangle with sides marked in terms of x\" class=\"qfig\"><polygon points=\"100.0,40.0 270.0,40.0 270.0,140.0 100.0,140.0\" fill=\"currentColor\" fill-opacity=\"0.06\" stroke=\"currentColor\" stroke-width=\"1.6\"/><text x=\"185.0\" y=\"26.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">(3x + 1) cm</text><text x=\"92.0\" y=\"90.0\" text-anchor=\"end\" dominant-baseline=\"middle\" font-size=\"13\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\">(2x + 5) cm</text></svg>"
+  },
+  {
+   "id": "algebr-c-fe237debfe",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "equation_three_people",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Shu Fen has x cards. Hui Min has 3 more than twice as many cards as Shu Fen. Daniel has 3 fewer cards than Hui Min. The three of them have 78 cards altogether. How many cards does Daniel have?",
+   "options": [
+    "36 cards",
+    "33 cards",
+    "30 cards",
+    "15 cards"
+   ],
+   "optionValues": [
+    "36",
+    "33",
+    "30",
+    "15"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Added 3 instead of subtracting it."
+    },
+    {
+     "tag": "gave_the_wrong_person",
+     "why": "Gave the number of cards Hui Min has."
+    },
+    null,
+    {
+     "tag": "gave_x",
+     "why": "Gave the number of cards Shu Fen has."
+    }
+   ],
+   "solution": [
+    "Hui Min: 2x + 3; Daniel: 2x",
+    "Total: x + (2x + 3) + (2x) = 5x + 3 = 78",
+    "5x = 75, x = 15",
+    "Daniel has 2 × 15 + 3 − 3 = 30"
+   ],
+   "params": {
+    "j": 2,
+    "k": 3,
+    "m": 3,
+    "tot": 78
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-c-68e022f706",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "hire_hours",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "The rental charge for a bouncy castle is ($43 + $4h), where h is the number of hours. Daniel paid $59 for the rental. For how many hours was it hired?",
+   "options": [
+    "3 hours",
+    "4 hours",
+    "5 hours",
+    "16 hours"
+   ],
+   "optionValues": [
+    "3",
+    "4",
+    "5",
+    "16"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "forgot_to_divide",
+     "why": "Stopped after taking away the fixed charge."
+    }
+   ],
+   "solution": [
+    "43 + 4h = 59",
+    "4h = 16",
+    "h = 4"
+   ],
+   "params": {
+    "fee": 43,
+    "rate": 4,
+    "tot": 59
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-c-b6a37e4e34",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "consecutive_numbers",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "The sum of four consecutive whole numbers is 74. What is the largest of the four numbers?",
+   "options": [
+    "21",
+    "17",
+    "19",
+    "20"
+   ],
+   "optionValues": [
+    "21",
+    "17",
+    "19",
+    "20"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "gave_the_next_number",
+     "why": "Gave the number after the largest."
+    },
+    {
+     "tag": "gave_the_smallest",
+     "why": "Gave the smallest number."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null
+   ],
+   "solution": [
+    "Let the smallest number be n. The numbers are n, n + 1, ... , n + 3.",
+    "4n + 6 = 74",
+    "n = 17",
+    "Largest = 17 + 3 = 20"
+   ],
+   "params": {
+    "m": 4,
+    "s": 1,
+    "S": 74
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-c-022151f28a",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "fraction_then_substitute",
+   "outcomes": [
+    "math-algebra-algebra-04",
+    "math-algebra-algebra-02"
+   ],
+   "stem": "Kumar had 12n marbles. Kumar gave away one-quarter of them and then used 5 more. How many marbles did Kumar have left when n = 15?",
+   "options": [
+    "140",
+    "130",
+    "45",
+    "175"
+   ],
+   "optionValues": [
+    "140",
+    "130",
+    "45",
+    "175"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "sign_error_on_constant",
+     "why": "Added 5 instead of subtracting it."
+    },
+    null,
+    {
+     "tag": "gave_the_fraction_given_away",
+     "why": "Gave the number of marbles given away."
+    },
+    {
+     "tag": "forgot_to_give_away_the_fraction",
+     "why": "Forgot the one-quarter that was given away."
+    }
+   ],
+   "solution": [
+    "At first: 12 × 15 = 180",
+    "Gave away one-quarter: 180 ÷ 4 = 45",
+    "Left: 180 − 45 − 5 = 130"
+   ],
+   "params": {
+    "q": 4,
+    "a": 12,
+    "N": 15,
+    "b": 5
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-c-7a097b8936",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "ages_equation",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Shu Fen's mother is 4 times as old as Shu Fen. In 4 years' time, the sum of their ages will be 73 years. How old is Shu Fen's mother now?",
+   "options": [
+    "56 years",
+    "53 years",
+    "52 years",
+    "13 years"
+   ],
+   "optionValues": [
+    "56",
+    "53",
+    "52",
+    "13"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "gave_the_age_in_the_future",
+     "why": "Gave the mother's age in 4 years."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null,
+    {
+     "tag": "gave_the_childs_age",
+     "why": "Gave Shu Fen's age."
+    }
+   ],
+   "solution": [
+    "Now: Shu Fen is x, mother is 4x",
+    "In 4 years: x + 4 and 4x + 4",
+    "5x + 8 = 73",
+    "x = 13",
+    "Mother = 4 × 13 = 52"
+   ],
+   "params": {
+    "j": 4,
+    "yrs": 4,
+    "S": 73
+   },
+   "calc": false
+  },
+  {
+   "id": "algebr-c-8611f623ba",
+   "topic": "math-algebra",
+   "level": "competent",
+   "template": "plans_same_cost",
+   "outcomes": [
+    "math-algebra-algebra-05"
+   ],
+   "stem": "Plan A for a gym charges $10 to join and $12 per visit. Plan B charges $90 to join and $4 per visit. After how many visits will the two plans cost the same?",
+   "options": [
+    "9",
+    "11",
+    "10",
+    "5"
+   ],
+   "optionValues": [
+    "9",
+    "11",
+    "10",
+    "5"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    null,
+    {
+     "tag": "added_the_rates",
+     "why": "Added the two rates instead of subtracting."
+    }
+   ],
+   "solution": [
+    "Plan A: 10 + 12h; Plan B: 90 + 4h",
+    "10 + 12h = 90 + 4h",
+    "8h = 80",
+    "h = 10"
+   ],
+   "params": {
+    "fa": 10,
+    "ra": 12,
+    "fb": 90,
+    "rb": 4
    },
    "calc": false
   }

@@ -2401,6 +2401,394 @@
    "calc": false
   },
   {
+   "id": "money-b-30e1dab8b1",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "dollars_cents_convert",
+   "outcomes": [
+    "math-money-money-05"
+   ],
+   "stem": "Express 8351 cents in dollars.",
+   "options": [
+    "$83.51",
+    "$8.35",
+    "$83.15",
+    "$835.10"
+   ],
+   "optionValues": [
+    "8351/100",
+    "8351/1000",
+    "1663/20",
+    "8351/10"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "used_1000_cents_in_a_dollar",
+     "why": "Divided by 1 000."
+    },
+    {
+     "tag": "swapped_cents_digits",
+     "why": "Swapped the digits in the cents."
+    },
+    {
+     "tag": "used_10_cents_in_a_dollar",
+     "why": "Divided by 10 instead of 100."
+    }
+   ],
+   "solution": [
+    "100 cents = 1 dollar",
+    "8351 ÷ 100 = $83.51"
+   ],
+   "params": {
+    "c": 8351,
+    "to_cents": false
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-b7a9bffec3",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "write_money_decimal",
+   "outcomes": [
+    "math-money-money-03"
+   ],
+   "stem": "Write 89 dollars and 87 cents in decimal notation.",
+   "options": [
+    "$89.87",
+    "$89.78",
+    "$8987",
+    "$87.89"
+   ],
+   "optionValues": [
+    "8987/100",
+    "4489/50",
+    "8987",
+    "8789/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "swapped_cents_digits",
+     "why": "Swapped the digits of the cents."
+    },
+    {
+     "tag": "joined_dollars_and_cents",
+     "why": "Joined the dollars and cents as one whole number."
+    },
+    {
+     "tag": "swapped_dollars_and_cents",
+     "why": "Swapped the dollars and the cents."
+    }
+   ],
+   "solution": [
+    "89 dollars = $89",
+    "87 cents = $0.87",
+    "Total = $89.87"
+   ],
+   "params": {
+    "d": 89,
+    "c": 87
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-5993d6bdfb",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "greatest_amount",
+   "outcomes": [
+    "math-money-money-04"
+   ],
+   "stem": "The digits 9, 5 and 7 are each used once to make amounts of money, such as $x.yz. The amounts are $5.79, $5.97, $7.59, $9.75. Which is the smallest amount?",
+   "options": [
+    "$5.79",
+    "$9.75",
+    "$5.97",
+    "$7.59"
+   ],
+   "optionValues": [
+    "579/100",
+    "39/4",
+    "597/100",
+    "759/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "compared_the_cents_not_the_dollars",
+     "why": "Looked at the cents digits before the dollars."
+    },
+    {
+     "tag": "compared_the_cents_not_the_dollars",
+     "why": "Looked at the cents digits before the dollars."
+    },
+    {
+     "tag": "compared_the_cents_not_the_dollars",
+     "why": "Looked at the cents digits before the dollars."
+    }
+   ],
+   "solution": [
+    "Compare the dollars first, then the cents.",
+    "Answer: $5.79"
+   ],
+   "params": {
+    "opts": [
+     759,
+     597,
+     579,
+     975
+    ],
+    "big": false
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-8db071f30b",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "add_two_amounts",
+   "outcomes": [
+    "math-money-money-06"
+   ],
+   "stem": "Xin Yi spent $8.82 on a pen and $5.65 on a ruler. How much did Xin Yi spend altogether?",
+   "options": [
+    "$13.47",
+    "$14.57",
+    "$3.47",
+    "$14.47"
+   ],
+   "optionValues": [
+    "1347/100",
+    "1457/100",
+    "347/100",
+    "1447/100"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "forgot_to_carry_the_cents",
+     "why": "Forgot to carry 1 dollar from the cents."
+    },
+    {
+     "tag": "slip",
+     "why": "Slip in the cents."
+    },
+    {
+     "tag": "added_columns_without_carrying",
+     "why": "Added each column without carrying."
+    },
+    null
+   ],
+   "solution": [
+    "$8.82 + $5.65 = $14.47"
+   ],
+   "params": {
+    "a": 882,
+    "b": 565
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-616d056967",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "change_from_note",
+   "outcomes": [
+    "math-money-money-06"
+   ],
+   "stem": "Arjun paid for a T-shirt that cost $2.73 with a $5 note. How much change should Arjun get?",
+   "options": [
+    "$2.27",
+    "$2.17",
+    "$3.27",
+    "$3.73"
+   ],
+   "optionValues": [
+    "227/100",
+    "217/100",
+    "327/100",
+    "373/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "slip",
+     "why": "Slip in the cents."
+    },
+    {
+     "tag": "borrow_not_reduced",
+     "why": "Forgot to reduce the dollars after borrowing."
+    },
+    {
+     "tag": "subtracted_smaller_digit_from_larger",
+     "why": "Took the smaller digit from the larger in each column."
+    }
+   ],
+   "solution": [
+    "$5.00 − $2.73 = $2.27"
+   ],
+   "params": {
+    "note": 5,
+    "a": 273
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-aa13f38ac6",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "count_money",
+   "outcomes": [
+    "math-money-money-02",
+    "math-money-money-01"
+   ],
+   "stem": "Mei Ling has three $5 notes, two $2 notes, two 50-cent coins, four 20-cent coins and one 10-cent coin. How much money does Mei Ling have altogether?",
+   "options": [
+    "$21.80",
+    "$20.90",
+    "$20.10",
+    "$20"
+   ],
+   "optionValues": [
+    "109/5",
+    "209/10",
+    "201/10",
+    "20"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "counted_10_cent_coins_as_dollars",
+     "why": "Counted each 10-cent coin as $1."
+    },
+    null,
+    {
+     "tag": "forgot_one_kind_of_coin",
+     "why": "Left out the 20-cent coins."
+    },
+    {
+     "tag": "mixed_up_coin_values",
+     "why": "Counted each 50-cent coin as 5 cents."
+    }
+   ],
+   "solution": [
+    "Notes: 3 × $5 + 2 × $2 = $19",
+    "Coins: 190 cents",
+    "Total = $20.90"
+   ],
+   "params": {
+    "n": [
+     3,
+     2,
+     2,
+     4,
+     1
+    ]
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-15a790f777",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "dollars_cents_convert",
+   "outcomes": [
+    "math-money-money-05"
+   ],
+   "stem": "Express 2560 cents in dollars.",
+   "options": [
+    "$2.56",
+    "$256",
+    "$25.06",
+    "$25.60"
+   ],
+   "optionValues": [
+    "64/25",
+    "256",
+    "1253/50",
+    "128/5"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "used_1000_cents_in_a_dollar",
+     "why": "Divided by 1 000."
+    },
+    {
+     "tag": "used_10_cents_in_a_dollar",
+     "why": "Divided by 10 instead of 100."
+    },
+    {
+     "tag": "swapped_cents_digits",
+     "why": "Swapped the digits in the cents."
+    },
+    null
+   ],
+   "solution": [
+    "100 cents = 1 dollar",
+    "2560 ÷ 100 = $25.60"
+   ],
+   "params": {
+    "c": 2560,
+    "to_cents": false
+   },
+   "calc": false
+  },
+  {
+   "id": "money-b-55b28cbe7d",
+   "topic": "math-money",
+   "level": "basic",
+   "template": "write_money_decimal",
+   "outcomes": [
+    "math-money-money-03"
+   ],
+   "stem": "Write 8 dollars and 44 cents in decimal notation.",
+   "options": [
+    "$8.44",
+    "$1.24",
+    "$844",
+    "$44.08"
+   ],
+   "optionValues": [
+    "211/25",
+    "31/25",
+    "844",
+    "1102/25"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "dollars_in_wrong_place",
+     "why": "Put the dollars in the tenths place."
+    },
+    {
+     "tag": "joined_dollars_and_cents",
+     "why": "Joined the dollars and cents as one whole number."
+    },
+    {
+     "tag": "swapped_dollars_and_cents",
+     "why": "Swapped the dollars and the cents."
+    }
+   ],
+   "solution": [
+    "8 dollars = $8",
+    "44 cents = $0.44",
+    "Total = $8.44"
+   ],
+   "params": {
+    "d": 8,
+    "c": 44
+   },
+   "calc": false
+  },
+  {
    "id": "money-i-8e8b2e36d3",
    "topic": "math-money",
    "level": "intermediate",
@@ -4905,6 +5293,413 @@
    "calc": false
   },
   {
+   "id": "money-i-58ef63e1a6",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "buy_n_get_free",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Muffins cost $2.28 each. For every 6 muffins bought, 1 more is free. What is the least amount Mei Ling must pay to get 46 muffins?",
+   "options": [
+    "$89.90",
+    "$104.88",
+    "$95.76",
+    "$91.20"
+   ],
+   "optionValues": [
+    "899/10",
+    "2622/25",
+    "2394/25",
+    "456/5"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "averaged_the_discount",
+     "why": "Treated every muffin as costing 6/7 of the price."
+    },
+    {
+     "tag": "no_promotion_used",
+     "why": "Paid for every one and ignored the free ones."
+    },
+    {
+     "tag": "bought_extra_to_complete_the_set",
+     "why": "Bought full sets, which gives more than needed and costs more."
+    },
+    null
+   ],
+   "solution": [
+    "Each set of 7 costs 6 muffins.",
+    "46 ÷ 7 = 6 remainder 4, so 6 are free.",
+    "Pay for 46 − 6 = 40: 40 × $2.28 = $91.20"
+   ],
+   "params": {
+    "n": 6,
+    "price": 228,
+    "N": 46
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-4368b57e32",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "change_after_items",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Siti bought 5 erasers at $2.50 each and a ruler for $5.33. Siti paid with a $50 note. How much change did Siti receive?",
+   "options": [
+    "$32.17",
+    "$17.83",
+    "$42.17",
+    "$37.50"
+   ],
+   "optionValues": [
+    "3217/100",
+    "1783/100",
+    "4217/100",
+    "75/2"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "gave_the_total_spent",
+     "why": "Gave the amount spent, not the change."
+    },
+    {
+     "tag": "forgot_to_multiply_by_number_of_items",
+     "why": "Used the price of only one of the erasers."
+    },
+    {
+     "tag": "forgot_the_second_item",
+     "why": "Forgot a ruler."
+    }
+   ],
+   "solution": [
+    "5 × $2.50 = $12.50",
+    "Total = $12.50 + $5.33 = $17.83",
+    "Change = $50 − $17.83 = $32.17"
+   ],
+   "params": {
+    "k": 5,
+    "a": 250,
+    "b": 533,
+    "note": 50
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-36d9cedcc2",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "most_minus_least",
+   "outcomes": [
+    "math-money-money-04",
+    "math-money-money-05"
+   ],
+   "stem": "Ali has $5.72, Shu Fen has 560 cents and Aisha has $4.12. How much more money does the person with the most have than the person with the least?",
+   "options": [
+    "$1.60",
+    "$1.70",
+    "$1.48",
+    "$0.12"
+   ],
+   "optionValues": [
+    "8/5",
+    "17/10",
+    "37/25",
+    "3/25"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "slip",
+     "why": "Slip."
+    },
+    {
+     "tag": "used_wrong_pair",
+     "why": "Compared the middle with the least amount."
+    },
+    {
+     "tag": "used_wrong_pair",
+     "why": "Compared the most with the middle amount."
+    }
+   ],
+   "solution": [
+    "Write all in dollars: $5.72, $5.60, $4.12",
+    "Most − least = $5.72 − $4.12 = $1.60"
+   ],
+   "params": {
+    "cs": [
+     572,
+     560,
+     412
+    ]
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-9eb758866b",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "weekly_saving_cycle",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Ravi gets $5 pocket money every day. From Monday to Friday Ravi spends $3.23 each day. On Saturday and Sunday Ravi spends nothing. Ravi starts saving on a Monday. After how many days will Ravi first have at least $58.50?",
+   "options": [
+    "28",
+    "23",
+    "24",
+    "22"
+   ],
+   "optionValues": [
+    "28",
+    "23",
+    "24",
+    "22"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "whole_weeks_only",
+     "why": "Counted whole weeks only."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Counted one extra day."
+    },
+    {
+     "tag": "averaged_per_day",
+     "why": "Used the average savings per day."
+    }
+   ],
+   "solution": [
+    "Saved in one week: 5 × $1.77 + 2 × $5 = $18.85",
+    "After 3 weeks: $56.55; still need $1.95",
+    "Days = 21 + 2 = 23"
+   ],
+   "params": {
+    "g": 5,
+    "s": 323,
+    "X": 5850
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-1567c16b74",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "coins_relationship",
+   "outcomes": [
+    "math-money-money-02",
+    "math-money-money-01"
+   ],
+   "stem": "Priya has 3 times as many 10-cent coins as 5-cent coins. The total value of the coins is $8.75. How many 5-cent coins does Priya have?",
+   "options": [
+    "175",
+    "25",
+    "26",
+    "75"
+   ],
+   "optionValues": [
+    "175",
+    "25",
+    "26",
+    "75"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "divided_by_one_coin_value",
+     "why": "Divided by 5 cents only."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Off by 1."
+    },
+    {
+     "tag": "gave_the_other_coin",
+     "why": "Gave the number of 10-cent coins."
+    }
+   ],
+   "solution": [
+    "Each group: 3 × 10 + 5 = 35 cents",
+    "875 ÷ 35 = 25"
+   ],
+   "params": {
+    "a": 10,
+    "b": 5,
+    "kind": "times",
+    "k": 3,
+    "mo": 12,
+    "total": 875
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-6562b4576b",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "tariff_charge",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-03"
+   ],
+   "stem": "Posting a parcel costs $3.19 for the first 100 g and $0.77 for every additional 50 g or part of it. Hui Min's parcel has a mass of 193 g. How much does Hui Min pay to post it?",
+   "options": [
+    "$3.96",
+    "$3.08",
+    "$4.73",
+    "$5.50"
+   ],
+   "optionValues": [
+    "99/25",
+    "77/25",
+    "473/100",
+    "11/2"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "ignored_the_part_block",
+     "why": "Did not charge for the last part of a block."
+    },
+    {
+     "tag": "charged_every_block_from_the_start",
+     "why": "Charged the extra rate from the start."
+    },
+    null,
+    {
+     "tag": "charged_one_block_too_many",
+     "why": "Counted the first block as an extra block as well."
+    }
+   ],
+   "solution": [
+    "After the first 100: 93 remains.",
+    "93 ÷ 50 = 1 remainder 43, so 2 extra blocks.",
+    "Total = $3.19 + 2 × $0.77 = $4.73"
+   ],
+   "params": {
+    "f": 319,
+    "p": 77,
+    "first": 100,
+    "block": 50,
+    "total": 193
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-81c72ae980",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "buy_n_get_free",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Apples cost $2.20 each. For every 6 apples bought, 1 more is free. What is the least amount Nurul must pay to get 38 apples?",
+   "options": [
+    "$83.60",
+    "$71.66",
+    "$79.20",
+    "$72.60"
+   ],
+   "optionValues": [
+    "418/5",
+    "3583/50",
+    "396/5",
+    "363/5"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "no_promotion_used",
+     "why": "Paid for every one and ignored the free ones."
+    },
+    {
+     "tag": "averaged_the_discount",
+     "why": "Treated every apple as costing 6/7 of the price."
+    },
+    {
+     "tag": "bought_extra_to_complete_the_set",
+     "why": "Bought full sets, which gives more than needed and costs more."
+    },
+    null
+   ],
+   "solution": [
+    "Each set of 7 costs 6 apples.",
+    "38 ÷ 7 = 5 remainder 3, so 5 are free.",
+    "Pay for 38 − 5 = 33: 33 × $2.20 = $72.60"
+   ],
+   "params": {
+    "n": 6,
+    "price": 220,
+    "N": 38
+   },
+   "calc": false
+  },
+  {
+   "id": "money-i-163d14b138",
+   "topic": "math-money",
+   "level": "intermediate",
+   "template": "change_after_items",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Hui Min bought 4 erasers at $2.34 each and a ruler for $3.61. Hui Min paid with a $100 note. How much change did Hui Min receive?",
+   "options": [
+    "$12.97",
+    "$87.03",
+    "$94.05",
+    "$90.64"
+   ],
+   "optionValues": [
+    "1297/100",
+    "8703/100",
+    "1881/20",
+    "2266/25"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "gave_the_total_spent",
+     "why": "Gave the amount spent, not the change."
+    },
+    null,
+    {
+     "tag": "forgot_to_multiply_by_number_of_items",
+     "why": "Used the price of only one of the erasers."
+    },
+    {
+     "tag": "forgot_the_second_item",
+     "why": "Forgot a ruler."
+    }
+   ],
+   "solution": [
+    "4 × $2.34 = $9.36",
+    "Total = $9.36 + $3.61 = $12.97",
+    "Change = $100 − $12.97 = $87.03"
+   ],
+   "params": {
+    "k": 4,
+    "a": 234,
+    "b": 361,
+    "note": 100
+   },
+   "calc": false
+  },
+  {
    "id": "money-c-bad22c5c0e",
    "topic": "math-money",
    "level": "competent",
@@ -6931,6 +7726,206 @@
    "calc": false
   },
   {
+   "id": "money-c-7c70ebc132",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "weeks_to_save",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "A tablet costs $270. Nurul has saved $86 and saves another $6 every week. After how many weeks will Nurul first have enough money to buy it?",
+   "options": [
+    "32",
+    "30",
+    "31",
+    "45"
+   ],
+   "optionValues": [
+    "32",
+    "30",
+    "31",
+    "45"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "slip",
+     "why": "One week too many."
+    },
+    {
+     "tag": "ignored_the_remainder",
+     "why": "Rounded down, so the money is not quite enough."
+    },
+    null,
+    {
+     "tag": "forgot_the_savings_so_far",
+     "why": "Ignored the money already saved."
+    }
+   ],
+   "solution": [
+    "Still needed: $270 − $86 = $184",
+    "$184 ÷ $6 = 30 remainder 4",
+    "The remainder needs one more week: 31"
+   ],
+   "params": {
+    "P": 270,
+    "sv": 86,
+    "d": 6
+   },
+   "calc": true
+  },
+  {
+   "id": "money-c-ae0ac39bde",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "offer_saving",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Shop A sells badges at 5 for $8.60. Shop B sells the same badges at $2.32 each. How much is saved by buying 30 badges from Shop A instead of Shop B?",
+   "options": [
+    "$18",
+    "$188.40",
+    "$0.60",
+    "$3"
+   ],
+   "optionValues": [
+    "18",
+    "942/5",
+    "3/5",
+    "3"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "used_set_price_as_one_price",
+     "why": "Treated the set price as the price of one."
+    },
+    {
+     "tag": "saving_for_one_only",
+     "why": "Found the saving on one badge only."
+    },
+    {
+     "tag": "saving_for_one_set_only",
+     "why": "Found the saving for one set of 5."
+    }
+   ],
+   "solution": [
+    "Shop A: 30 ÷ 5 = 6 sets × $8.60 = $51.60",
+    "Shop B: 30 × $2.32 = $69.60",
+    "Saved = $18.00"
+   ],
+   "params": {
+    "k": 5,
+    "pa": 860,
+    "pb": 232,
+    "sets": 6
+   },
+   "calc": false
+  },
+  {
+   "id": "money-c-bd7ae6bf12",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "money_backwards",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Mei Ling spent $6.98 on lunch. Then Mei Ling bought 5 pens at $3.38 each. Mei Ling had $2.13 left. How much money did Mei Ling have at first?",
+   "options": [
+    "$26.01",
+    "$23.88",
+    "$12.49",
+    "$21.75"
+   ],
+   "optionValues": [
+    "2601/100",
+    "597/25",
+    "1249/100",
+    "87/4"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "forgot_the_money_left",
+     "why": "Forgot the money left."
+    },
+    {
+     "tag": "forgot_to_multiply_pens",
+     "why": "Added the price of only one pen."
+    },
+    {
+     "tag": "subtracted_when_working_backwards",
+     "why": "Subtracted instead of adding back."
+    }
+   ],
+   "solution": [
+    "Pens: 5 × $3.38 = $16.90",
+    "At first: $6.98 + $16.90 + $2.13 = $26.01"
+   ],
+   "params": {
+    "a": 698,
+    "n": 5,
+    "b": 338,
+    "left": 213
+   },
+   "calc": false
+  },
+  {
+   "id": "money-c-3a3637ec28",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "coins_same_number",
+   "outcomes": [
+    "math-money-money-02",
+    "math-money-money-01"
+   ],
+   "stem": "Mei Ling has the same number of 20-cent coins and 50-cent coins. The coins are worth $41.30 altogether. How many 20-cent coins does Mei Ling have?",
+   "options": [
+    "118",
+    "59",
+    "60",
+    "58"
+   ],
+   "optionValues": [
+    "118",
+    "59",
+    "60",
+    "58"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "counted_all_the_coins",
+     "why": "Found the total number of coins."
+    },
+    null,
+    {
+     "tag": "slip",
+     "why": "Off by 1."
+    },
+    {
+     "tag": "slip",
+     "why": "Off by 1."
+    }
+   ],
+   "solution": [
+    "One of each: 20 + 50 = 70 cents",
+    "4130 ÷ 70 = 59"
+   ],
+   "params": {
+    "a": 20,
+    "b": 50,
+    "total": 4130
+   },
+   "calc": false
+  },
+  {
    "id": "money-c-07406cc85f",
    "topic": "math-money",
    "level": "competent",
@@ -6979,6 +7974,107 @@
     "A": 1240,
     "B": 1612,
     "ask": "pen"
+   },
+   "calc": false
+  },
+  {
+   "id": "money-c-416dfe6155",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "weeks_to_save",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "A camera costs $100. Xin Yi has saved $15 and saves another $6 every week. After how many weeks will Xin Yi first have enough money to buy it?",
+   "options": [
+    "14",
+    "17",
+    "16",
+    "15"
+   ],
+   "optionValues": [
+    "14",
+    "17",
+    "16",
+    "15"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "ignored_the_remainder",
+     "why": "Rounded down, so the money is not quite enough."
+    },
+    {
+     "tag": "forgot_the_savings_so_far",
+     "why": "Ignored the money already saved."
+    },
+    {
+     "tag": "slip",
+     "why": "One week too many."
+    },
+    null
+   ],
+   "solution": [
+    "Still needed: $100 − $15 = $85",
+    "$85 ÷ $6 = 14 remainder 1",
+    "The remainder needs one more week: 15"
+   ],
+   "params": {
+    "P": 100,
+    "sv": 15,
+    "d": 6
+   },
+   "calc": true
+  },
+  {
+   "id": "money-c-8c733f8e2e",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "offer_saving",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "Shop A sells erasers at 6 for $6.84. Shop B sells the same erasers at $1.74 each. How much is saved by buying 18 erasers from Shop A instead of Shop B?",
+   "options": [
+    "$3.60",
+    "$0.60",
+    "$10.80",
+    "$91.80"
+   ],
+   "optionValues": [
+    "18/5",
+    "3/5",
+    "54/5",
+    "459/5"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "saving_for_one_set_only",
+     "why": "Found the saving for one set of 6."
+    },
+    {
+     "tag": "saving_for_one_only",
+     "why": "Found the saving on one eraser only."
+    },
+    null,
+    {
+     "tag": "used_set_price_as_one_price",
+     "why": "Treated the set price as the price of one."
+    }
+   ],
+   "solution": [
+    "Shop A: 18 ÷ 6 = 3 sets × $6.84 = $20.52",
+    "Shop B: 18 × $1.74 = $31.32",
+    "Saved = $10.80"
+   ],
+   "params": {
+    "k": 6,
+    "pa": 684,
+    "pb": 174,
+    "sets": 3
    },
    "calc": false
   },
@@ -7404,6 +8500,112 @@
     "m2": 6,
     "A": 1042,
     "B": 2218,
+    "ask": "notebook"
+   },
+   "calc": false
+  },
+  {
+   "id": "money-c-67a3cd92cf",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "price_two_equations",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "2 notebooks and 2 pens cost $9.56. 2 notebooks and 6 pens cost $17.76. What is the cost of one pen?",
+   "options": [
+    "$1.02",
+    "$2.22",
+    "$8.20",
+    "$2.05"
+   ],
+   "optionValues": [
+    "51/50",
+    "111/50",
+    "41/5",
+    "41/20"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "divided_by_wrong_number",
+     "why": "Divided by the total number of pens."
+    },
+    {
+     "tag": "divided_by_number_of_items",
+     "why": "Divided the total by the number of items."
+    },
+    {
+     "tag": "forgot_to_divide_by_extra_pens",
+     "why": "Gave the cost of the 4 extra pens."
+    },
+    null
+   ],
+   "solution": [
+    "Extra 4 pens cost $17.76 − $9.56 = $8.20",
+    "1 pen = $8.20 ÷ 4 = $2.05"
+   ],
+   "params": {
+    "k": 2,
+    "m1": 2,
+    "m2": 6,
+    "A": 956,
+    "B": 1776,
+    "ask": "pen"
+   },
+   "calc": false
+  },
+  {
+   "id": "money-c-317ec85f57",
+   "topic": "math-money",
+   "level": "competent",
+   "template": "price_two_equations",
+   "outcomes": [
+    "math-money-money-06",
+    "math-money-money-02"
+   ],
+   "stem": "2 notebooks and 4 pens cost $6.54. 2 notebooks and 5 pens cost $7.39. What is the cost of one notebook?",
+   "options": [
+    "$2.42",
+    "$1.57",
+    "$1.09",
+    "$3.27"
+   ],
+   "optionValues": [
+    "121/50",
+    "157/100",
+    "109/100",
+    "327/100"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "added_a_pen",
+     "why": "Forgot to take away the cost of all the pens."
+    },
+    null,
+    {
+     "tag": "divided_by_number_of_items",
+     "why": "Divided the total by the number of items."
+    },
+    {
+     "tag": "ignored_the_pens",
+     "why": "Divided the first total by the number of notebooks."
+    }
+   ],
+   "solution": [
+    "1 pen = $0.85",
+    "4 pens = $3.40",
+    "2 notebooks = $6.54 − $3.40 = $3.14",
+    "1 notebook = $1.57"
+   ],
+   "params": {
+    "k": 2,
+    "m1": 4,
+    "m2": 5,
+    "A": 654,
+    "B": 739,
     "ask": "notebook"
    },
    "calc": false

@@ -30,19 +30,20 @@ outside the repo.
     - read cell by cell, or twice;
     - add a gate that flags runs of the same value or 1-2-3-4;
     - re-read any key the blind solver disagrees with.
-- [ ] Quarantine the 14 items listed in the audit (`mcq-answers.md`). The 72B's `ans_check` flag does not predict
+- [x] 20 Nov: the 14 audit items are in the private `pastpapers/quarantine.jsonl`.
+- [ ] (kept for context) Quarantine the 14 items listed in the audit (`mcq-answers.md`). The 72B's `ans_check` flag does not predict
   wrong keys, so do not rely on it.
 - [ ] **No past-paper question reaches a child before a blind-answer check.** About 6% of Maths keys and at least 5%
   of English keys were wrong.
 - [ ] Re-read the 9 answer pages that would not parse (queued).
-- [ ] Tagger bias in Science:
+- [ ] Tagger bias in Science (the rule was added to `tag_llm.py`; the re-tag is queued on the server):
   - it files friction, spring and weight questions under "Forces and their effects": add a rule, then re-tag the
     forces questions;
   - it puts water changes of state under general "states of matter".
 - [ ] Tag accuracy for English, Maths and Chinese is not measured yet. Build a checked key for each, as was done for
   Science (110 questions, about 100k Sonnet tokens per subject).
 - [ ] English patterns: about 29% of English questions get no pattern. Extend `scripts/quiz/english/patterns.json`.
-- [ ] Speed is excluded as off-syllabus, but 2026 prelims had 6 speed items. Re-check once 2018–2024 are tagged.
+- [x] 20 Nov: Speed re-checked over 2018–2026. It is fading (about 2.3% of Maths items in 2018, 1.7% in 2025, 6 tagged items in 2026), so it stays excluded.
 - [ ] 2025 MCQ import, phase 1 (`prompt-pp-mcq-import.md`), after the blind-answer check. Stop before any SQL or data
   load.
 - [ ] Part 2 design run (`prompt-design-part2-run.md`).
@@ -70,7 +71,7 @@ outside the repo.
   had only one review pass.
 - [ ] **Maths:** add Angles templates until Angles reaches its share of paper marks (it is at 230 questions, under its
   share).
-- [ ] Keep weighting banks by paper frequency as new tags arrive (2018–2024).
+- [x] 20 Nov: Maths weights recomputed from all 2018–2026 tags (13,986 items). 3 sub-topics moved by 1 point or more; 3,826 to 3,818 questions; rewards unchanged.
 
 ## Learning loop (`docs/learning-loop-design.md`, owner decisions 1–10 accepted)
 

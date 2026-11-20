@@ -2643,6 +2643,193 @@
    "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 146 146\" role=\"img\" aria-label=\"Grid of 25 equal squares with some shaded\" class=\"qfig\"><polygon points=\"8.0,8.0 34.0,8.0 34.0,34.0 8.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,8.0 60.0,8.0 60.0,34.0 34.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,8.0 86.0,8.0 86.0,34.0 60.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,8.0 112.0,8.0 112.0,34.0 86.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,8.0 138.0,8.0 138.0,34.0 112.0,34.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,34.0 34.0,34.0 34.0,60.0 8.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,34.0 60.0,34.0 60.0,60.0 34.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,34.0 86.0,34.0 86.0,60.0 60.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,34.0 112.0,34.0 112.0,60.0 86.0,60.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,34.0 138.0,34.0 138.0,60.0 112.0,60.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,60.0 34.0,60.0 34.0,86.0 8.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,60.0 60.0,60.0 60.0,86.0 34.0,86.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,60.0 86.0,60.0 86.0,86.0 60.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,60.0 112.0,60.0 112.0,86.0 86.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,60.0 138.0,60.0 138.0,86.0 112.0,86.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,86.0 34.0,86.0 34.0,112.0 8.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,86.0 60.0,86.0 60.0,112.0 34.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,86.0 86.0,86.0 86.0,112.0 60.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,86.0 112.0,86.0 112.0,112.0 86.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,86.0 138.0,86.0 138.0,112.0 112.0,112.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"8.0,112.0 34.0,112.0 34.0,138.0 8.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"34.0,112.0 60.0,112.0 60.0,138.0 34.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"60.0,112.0 86.0,112.0 86.0,138.0 60.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"86.0,112.0 112.0,112.0 112.0,138.0 86.0,138.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><polygon points=\"112.0,112.0 138.0,112.0 138.0,138.0 112.0,138.0\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>"
   },
   {
+   "id": "percen-b-edd512fc69",
+   "topic": "math-percentage",
+   "level": "basic",
+   "template": "pct_of_quantity",
+   "outcomes": [
+    "math-percentage-percentage-02"
+   ],
+   "stem": "Shu Fen has 440 beads. 40% of them are rare ones. How many beads are rare?",
+   "options": [
+    "176",
+    "1760",
+    "11",
+    "264"
+   ],
+   "optionValues": [
+    "176",
+    "1760",
+    "11",
+    "264"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "decimal_point_slip",
+     "why": "Put the decimal point in the wrong place."
+    },
+    {
+     "tag": "divided_by_the_percent",
+     "why": "Divided 440 by 40."
+    },
+    {
+     "tag": "found_the_remainder",
+     "why": "Found 60% instead of 40%."
+    }
+   ],
+   "solution": [
+    "1% of 440 = 22/5",
+    "40% of 440 = 40 × 22/5 = 176"
+   ],
+   "params": {
+    "p": 40,
+    "W": 440
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-b-5ac8faa25b",
+   "topic": "math-percentage",
+   "level": "basic",
+   "template": "part_as_percent",
+   "outcomes": [
+    "math-percentage-percentage-01"
+   ],
+   "stem": "A tank holds 20 litres. It has 12 litres of water. What percentage of the tank is full?",
+   "options": [
+    "40%",
+    "166.7%",
+    "12%",
+    "60%"
+   ],
+   "optionValues": [
+    "40",
+    "500/3",
+    "12",
+    "60"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "found_the_other_part",
+     "why": "Found the percentage that was left over."
+    },
+    {
+     "tag": "reversed_the_fraction",
+     "why": "Divided 20 by 12."
+    },
+    {
+     "tag": "gave_the_count",
+     "why": "Gave the part itself instead of a percentage."
+    },
+    null
+   ],
+   "solution": [
+    "Fraction = 12/20",
+    "Percentage = 12/20 × 100% = 60%"
+   ],
+   "params": {
+    "s": 12,
+    "t": 20
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-b-b03714c1d7",
+   "topic": "math-percentage",
+   "level": "basic",
+   "template": "discount_amount",
+   "outcomes": [
+    "math-percentage-percentage-03"
+   ],
+   "stem": "A bicycle usually costs $580. It is on sale at a discount of 20%. How much is the discount, in dollars?",
+   "options": [
+    "$116",
+    "$29",
+    "$464",
+    "$20"
+   ],
+   "optionValues": [
+    "116",
+    "29",
+    "464",
+    "20"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "divided_by_the_percent",
+     "why": "Divided 580 by 20."
+    },
+    {
+     "tag": "gave_the_sale_price",
+     "why": "Gave the selling price instead of the discount."
+    },
+    {
+     "tag": "gave_the_percent",
+     "why": "Gave 20 as the number of dollars."
+    }
+   ],
+   "solution": [
+    "Discount = 20% of $580",
+    "= 20 ÷ 100 × 580 = $116"
+   ],
+   "params": {
+    "price": 580,
+    "d": 20
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-b-a57f7354a9",
+   "topic": "math-percentage",
+   "level": "basic",
+   "template": "gst_amount",
+   "outcomes": [
+    "math-percentage-percentage-03"
+   ],
+   "stem": "A calculator costs $60 before GST. GST is 9%. How much is the GST on the calculator?",
+   "options": [
+    "$0.54",
+    "$65.40",
+    "$5.40",
+    "$54.60"
+   ],
+   "optionValues": [
+    "27/50",
+    "327/5",
+    "27/5",
+    "273/5"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "decimal_point_slip",
+     "why": "Put the decimal point in the wrong place."
+    },
+    {
+     "tag": "added_gst_to_the_price",
+     "why": "Gave the price including GST instead of the GST."
+    },
+    null,
+    {
+     "tag": "subtracted_instead_of_added",
+     "why": "Took the GST off the price."
+    }
+   ],
+   "solution": [
+    "GST = 9% of $60",
+    "= 9 ÷ 100 × 60 = $5.40"
+   ],
+   "params": {
+    "price": 60
+   },
+   "calc": false
+  },
+  {
    "id": "percen-i-52b62290bf",
    "topic": "math-percentage",
    "level": "intermediate",
@@ -4867,6 +5054,104 @@
    "calc": false
   },
   {
+   "id": "percen-i-92ed247b12",
+   "topic": "math-percentage",
+   "level": "intermediate",
+   "template": "simple_interest_loan",
+   "outcomes": [
+    "math-percentage-percentage-03"
+   ],
+   "stem": "Mei Ling borrowed $57000 from a bank at a simple interest rate of 4% per year. Mei Ling will repay the loan with its interest in 24 equal monthly instalments over 2 years. How much is each instalment?",
+   "options": [
+    "$2470",
+    "$2565",
+    "$2375",
+    "$190"
+   ],
+   "optionValues": [
+    "2470",
+    "2565",
+    "2375",
+    "190"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "interest_for_one_year_only",
+     "why": "Charged interest for 1 year instead of 2 years."
+    },
+    null,
+    {
+     "tag": "ignored_the_interest",
+     "why": "Divided the loan only and forgot the interest."
+    },
+    {
+     "tag": "gave_interest_per_month",
+     "why": "Divided the interest only."
+    }
+   ],
+   "solution": [
+    "Interest = $57000 × 4% × 2 = $4560",
+    "Total to repay = $61560",
+    "Each instalment = $61560 ÷ 24 = $2565"
+   ],
+   "params": {
+    "P": 57000,
+    "rate": 4,
+    "yrs": 2
+   },
+   "calc": true
+  },
+  {
+   "id": "percen-i-46154c7190",
+   "topic": "math-percentage",
+   "level": "intermediate",
+   "template": "interest_deposit",
+   "outcomes": [
+    "math-percentage-percentage-03"
+   ],
+   "stem": "Ravi put $7000 in a bank that pays simple interest of 4% per year. How much money will Ravi have in the bank after 5 years?",
+   "options": [
+    "$8400",
+    "$7280",
+    "$1400",
+    "$8516.57"
+   ],
+   "optionValues": [
+    "8400",
+    "7280",
+    "1400",
+    "851657/100"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "interest_for_one_year_only",
+     "why": "Added one year of interest only."
+    },
+    {
+     "tag": "forgot_the_deposit",
+     "why": "Gave the interest only."
+    },
+    {
+     "tag": "used_compound_interest",
+     "why": "Added interest on the interest each year."
+    }
+   ],
+   "solution": [
+    "Interest for 1 year = 4% of $7000 = $280",
+    "Interest for 5 years = $1400",
+    "Total = $7000 + $1400 = $8400"
+   ],
+   "params": {
+    "P": 7000,
+    "r2": 8,
+    "yrs": 5
+   },
+   "calc": false
+  },
+  {
    "id": "percen-i-2d09461589",
    "topic": "math-percentage",
    "level": "intermediate",
@@ -5353,6 +5638,104 @@
    "params": {
     "d": 30,
     "paid": 210
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-i-53c0d7626d",
+   "topic": "math-percentage",
+   "level": "intermediate",
+   "template": "discount_then_gst",
+   "outcomes": [
+    "math-percentage-percentage-03",
+    "math-percentage-percentage-05"
+   ],
+   "stem": "A bicycle is marked $320. The shop gives a 50% discount and then adds 9% GST on the discounted price. How much must the customer pay?",
+   "options": [
+    "$174.40",
+    "$188.80",
+    "$348.80",
+    "$160"
+   ],
+   "optionValues": [
+    "872/5",
+    "944/5",
+    "1744/5",
+    "160"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "combined_the_percentages",
+     "why": "Worked out 59% of the price: the GST is on the discounted price only."
+    },
+    {
+     "tag": "forgot_discount",
+     "why": "Added the GST but forgot the discount."
+    },
+    {
+     "tag": "forgot_gst",
+     "why": "Stopped after the discount and forgot the GST."
+    }
+   ],
+   "solution": [
+    "Price after discount = 50% of $320 = $160",
+    "GST = 9% of $160 = $14.40",
+    "Total = $174.40"
+   ],
+   "params": {
+    "price": 320,
+    "d": 50
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-i-5a27710213",
+   "topic": "math-percentage",
+   "level": "intermediate",
+   "template": "find_original_after_discount",
+   "outcomes": [
+    "math-percentage-percentage-04",
+    "math-percentage-percentage-03"
+   ],
+   "stem": "After a 40% discount, Kumar paid $264 for a bicycle. What was the price of the bicycle before the discount?",
+   "options": [
+    "$304",
+    "$460",
+    "$176",
+    "$440"
+   ],
+   "optionValues": [
+    "304",
+    "460",
+    "176",
+    "440"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "added_percent_as_dollars",
+     "why": "Added $40 instead of finding the original."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "gave_the_discount",
+     "why": "Found the discount instead of the original price."
+    },
+    null
+   ],
+   "solution": [
+    "60% of the original = $264",
+    "1% = $22/5",
+    "100% = $440"
+   ],
+   "params": {
+    "d": 40,
+    "paid": 264
    },
    "calc": false
   },
@@ -8205,6 +8588,208 @@
     "p": 80,
     "q": 50,
     "x": 48
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-c-35d91e264e",
+   "topic": "math-percentage",
+   "level": "competent",
+   "template": "constant_part_remove",
+   "outcomes": [
+    "math-percentage-percentage-02",
+    "math-percentage-percentage-05"
+   ],
+   "stem": "Aisha had 220 sweets in a bag. 30% of them were strawberry sweets, and the rest were orange sweets. Aisha then ate some of the orange sweets, so the strawberry sweets became 50% of the sweets left. How many sweets did Aisha eat?",
+   "options": [
+    "132",
+    "66",
+    "44",
+    "88"
+   ],
+   "optionValues": [
+    "132",
+    "66",
+    "44",
+    "88"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "gave_the_number_left",
+     "why": "Gave the number of sweets left in the bag."
+    },
+    {
+     "tag": "gave_the_unchanged_part",
+     "why": "Gave the number of strawberry sweets."
+    },
+    {
+     "tag": "took_percent_difference_of_total",
+     "why": "Found 20% of 220."
+    },
+    null
+   ],
+   "solution": [
+    "Number of strawberry sweets = 30% of 220 = 66",
+    "This is 50% of the sweets left",
+    "Sweets left = 66 ÷ 50 × 100 = 132",
+    "Sweets eaten = 220 − 132 = 88"
+   ],
+   "params": {
+    "p": 30,
+    "q": 50,
+    "N": 220
+   },
+   "calc": false
+  },
+  {
+   "id": "percen-c-7240f2c300",
+   "topic": "math-percentage",
+   "level": "competent",
+   "template": "reverse_items_affordable",
+   "outcomes": [
+    "math-percentage-percentage-04",
+    "math-percentage-percentage-03"
+   ],
+   "stem": "During a sale, a bicycle was sold at a 50% discount for $270. Daniel has $1771. How many of these bicycles can Daniel buy at the usual price?",
+   "options": [
+    "6",
+    "3",
+    "2",
+    "4"
+   ],
+   "optionValues": [
+    "6",
+    "3",
+    "2",
+    "4"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "used_the_sale_price",
+     "why": "Divided by the sale price, not the usual price."
+    },
+    null,
+    {
+     "tag": "miscounted",
+     "why": "Made a slip in the count."
+    },
+    {
+     "tag": "added_percent_of_given",
+     "why": "Added 50% of $270 to find the usual price."
+    }
+   ],
+   "solution": [
+    "50% of the usual price = $270",
+    "Usual price = $270 ÷ 50 × 100 = $540",
+    "$1771 ÷ $540 = 3.28, so Daniel can buy 3"
+   ],
+   "params": {
+    "d": 50,
+    "paid": 270,
+    "B": 1771
+   },
+   "calc": true
+  },
+  {
+   "id": "percen-c-6849f94f11",
+   "topic": "math-percentage",
+   "level": "competent",
+   "template": "successive_changes_original",
+   "outcomes": [
+    "math-percentage-percentage-04",
+    "math-percentage-percentage-05"
+   ],
+   "stem": "The price of a bicycle was increased by 20% in June. In July the new price was reduced by 50% and it then cost $24. What was the price before June?",
+   "options": [
+    "$36",
+    "$40",
+    "$20",
+    "$60"
+   ],
+   "optionValues": [
+    "36",
+    "40",
+    "20",
+    "60"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "undid_only_the_second_change",
+     "why": "Undid only the 50% reduction."
+    },
+    null,
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a slip in the calculation."
+    }
+   ],
+   "solution": [
+    "After the increase: 120% of the original",
+    "After the reduction: 50% of that = $24",
+    "50% of 120% of the original = 60% = $24",
+    "Original = $24 ÷ 60 × 100 = $40"
+   ],
+   "params": {
+    "a": 20,
+    "b": 50,
+    "fin": 24
+   },
+   "calc": true
+  },
+  {
+   "id": "percen-c-989adf9bd8",
+   "topic": "math-percentage",
+   "level": "competent",
+   "template": "successive_change_overall",
+   "outcomes": [
+    "math-percentage-percentage-02",
+    "math-percentage-percentage-05"
+   ],
+   "stem": "The price of a toy robot was first increased by 20% and later the new price was decreased by 30%. What was the overall change compared with the original price?",
+   "options": [
+    "10% decrease",
+    "50% increase",
+    "16% increase",
+    "16% decrease"
+   ],
+   "optionValues": [
+    "202",
+    "1001",
+    "321",
+    "322"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "added_the_percents_with_signs",
+     "why": "Subtracted 30 from 20 to get -10%."
+    },
+    {
+     "tag": "added_the_percents",
+     "why": "Added 20% and 30%."
+    },
+    {
+     "tag": "wrong_direction",
+     "why": "Gave the right size but the wrong direction."
+    },
+    null
+   ],
+   "solution": [
+    "Take the original as 100",
+    "After the increase: 120",
+    "After the decrease: 120 × 70% = 84",
+    "Overall change = -16 → 16% decrease"
+   ],
+   "params": {
+    "a": 20,
+    "b": 30
    },
    "calc": false
   }

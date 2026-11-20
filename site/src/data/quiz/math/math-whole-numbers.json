@@ -2599,6 +2599,252 @@
    "calc": false
   },
   {
+   "id": "whole-b-65256782ef",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_hundreds_tens_ones",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-08"
+   ],
+   "stem": "How many tens are there in 698? Count only complete tens.",
+   "options": [
+    "69",
+    "70",
+    "9",
+    "6"
+   ],
+   "optionValues": [
+    "69",
+    "70",
+    "9",
+    "6"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "rounded_up",
+     "why": "Counted the ones as another ten."
+    },
+    {
+     "tag": "gave_the_tens_digit",
+     "why": "Gave the digit in the tens place."
+    },
+    {
+     "tag": "gave_the_hundreds_digit",
+     "why": "Gave the digit in the hundreds place."
+    }
+   ],
+   "solution": [
+    "698 = 69 tens and 8 ones."
+   ],
+   "params": {
+    "mode": "tens",
+    "n": 698
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-8f1b168241",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_digit_clues",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-08",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-04"
+   ],
+   "stem": "A 3-digit number has 7 in the hundreds place. The digit in the ones place is 1 more than the digit in the tens place. The sum of its three digits is 8. What is the number?",
+   "options": [
+    "720",
+    "710",
+    "701",
+    "711"
+   ],
+   "optionValues": [
+    "720",
+    "710",
+    "701",
+    "711"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong_digit_sum",
+     "why": "Did not check that the digits add up to the sum."
+    },
+    {
+     "tag": "swapped_tens_and_ones",
+     "why": "Swapped the tens digit and the ones digit."
+    },
+    null,
+    {
+     "tag": "used_the_clue_for_both_digits",
+     "why": "Used the same digit for both places."
+    }
+   ],
+   "solution": [
+    "Tens + ones = 8 − 7 = 1",
+    "Ones = tens + 1, so 2 × tens + 1 = 1",
+    "Tens = 0, ones = 1"
+   ],
+   "params": {
+    "h": 7,
+    "d": 1,
+    "S": 8
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-46aa4bc313",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_greatest_even_number",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-08",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-04"
+   ],
+   "stem": "Siti has four digit cards: 5, 6, 4, 7. Siti chooses three of the cards to make a 3-digit even number. What is the greatest even number Siti can make?",
+   "options": [
+    "764",
+    "754",
+    "765",
+    "756"
+   ],
+   "optionValues": [
+    "764",
+    "754",
+    "765",
+    "756"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "stopped_at_a_near_miss",
+     "why": "Chose a good number but not the greatest even one."
+    },
+    {
+     "tag": "ignored_the_even_condition",
+     "why": "Made the greatest number but forgot it must be even."
+    },
+    {
+     "tag": "stopped_at_a_near_miss",
+     "why": "Chose a good number but not the greatest even one."
+    }
+   ],
+   "solution": [
+    "The ones digit must be even, so try each even card in the ones place and arrange the others from greatest to smallest.",
+    "Greatest: 764"
+   ],
+   "params": {
+    "ds": [
+     5,
+     6,
+     4,
+     7
+    ]
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-d685109522",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_words_add_tens",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-03",
+    "math-whole-numbers-addition-subtraction-multiplication-and-division-03"
+   ],
+   "stem": "Xin Yi reads the number 'seventy-eight', then takes away 'ten'. Which of these is the answer written in words?",
+   "options": [
+    "eighty-six",
+    "sixty-nine",
+    "eighty-eight",
+    "sixty-eight"
+   ],
+   "optionValues": [
+    "86",
+    "69",
+    "88",
+    "68"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "swapped_the_digits",
+     "why": "Wrote the tens and ones the wrong way round."
+    },
+    {
+     "tag": "slip_in_ones",
+     "why": "Changed the ones digit by mistake."
+    },
+    {
+     "tag": "used_the_wrong_operation",
+     "why": "Used the wrong operation."
+    },
+    null
+   ],
+   "solution": [
+    "78 − 10 = 68",
+    "sixty-eight"
+   ],
+   "params": {
+    "nw": "seventy-eight",
+    "kw": "ten",
+    "sub": true
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-deab688e18",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "digit_value",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-18",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-14",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-02"
+   ],
+   "stem": "What is the value of the digit 6 in 1 289 670?",
+   "options": [
+    "6 000",
+    "6",
+    "60",
+    "600"
+   ],
+   "optionValues": [
+    "6000",
+    "6",
+    "60",
+    "600"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "read_one_place_too_high",
+     "why": "Read the 6 as being in the thousands place."
+    },
+    {
+     "tag": "gave_the_digit_not_its_value",
+     "why": "Gave the digit itself instead of its value."
+    },
+    {
+     "tag": "read_one_place_too_low",
+     "why": "Read the 6 as being in the tens place."
+    },
+    null
+   ],
+   "solution": [
+    "6 is in the hundreds place.",
+    "Value = 6 × 100 = 600"
+   ],
+   "params": {
+    "n": 1289670,
+    "d": 6
+   },
+   "calc": false
+  },
+  {
    "id": "whole-b-bb35e385db",
    "topic": "math-whole-numbers",
    "level": "basic",
@@ -2700,6 +2946,61 @@
    "calc": false
   },
   {
+   "id": "whole-b-72a922e280",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "form_number",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-16",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-10"
+   ],
+   "stem": "Using each of the digits 0, 1, 4, 7, 8 once, what is the greatest 5-digit number that can be formed?",
+   "options": [
+    "10 478",
+    "80 147",
+    "87 419",
+    "87 410"
+   ],
+   "optionValues": [
+    "10478",
+    "80147",
+    "87419",
+    "87410"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "gave_opposite",
+     "why": "Gave the smallest instead of the greatest."
+    },
+    {
+     "tag": "sorted_only_first_digit",
+     "why": "Put the right first digit but did not order the rest."
+    },
+    {
+     "tag": "swapped_last_digits",
+     "why": "Swapped the last two digits."
+    },
+    null
+   ],
+   "solution": [
+    "Greatest: digits from largest to smallest.",
+    "Answer: 87 410"
+   ],
+   "params": {
+    "ds": [
+     4,
+     0,
+     1,
+     7,
+     8
+    ],
+    "big": true
+   },
+   "calc": false
+  },
+  {
    "id": "whole-b-68ec2bf6e2",
    "topic": "math-whole-numbers",
    "level": "basic",
@@ -2744,6 +3045,255 @@
    "params": {
     "n": 96552,
     "place": 10
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-deefe70a15",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "next_term",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-21",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-17",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-11"
+   ],
+   "stem": "What is the next number in the pattern 600, 650, 700, 750, ... ?",
+   "options": [
+    "1 250",
+    "850",
+    "750",
+    "800"
+   ],
+   "optionValues": [
+    "1250",
+    "850",
+    "750",
+    "800"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_step_size",
+     "why": "Added ten steps."
+    },
+    {
+     "tag": "skipped_a_term",
+     "why": "Skipped a term."
+    },
+    {
+     "tag": "repeated_last_term",
+     "why": "Gave the last term again."
+    },
+    null
+   ],
+   "solution": [
+    "The pattern adds 50 each time.",
+    "750 + 50 = 800"
+   ],
+   "params": {
+    "a": 600,
+    "sd": 50
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-ac88929216",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_compare_boxes",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-01"
+   ],
+   "stem": "Ali put 46 counters into three boxes, A, B and C, as shown. How many more counters are in Box B than in Box C?",
+   "options": [
+    "13",
+    "19",
+    "25",
+    "14"
+   ],
+   "optionValues": [
+    "13",
+    "19",
+    "25",
+    "14"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "gave_one_box_only",
+     "why": "Gave the number in Box B instead of the difference."
+    },
+    {
+     "tag": "added_the_two_boxes",
+     "why": "Added the two boxes instead of finding the difference."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
+    }
+   ],
+   "solution": [
+    "Box B: 19, Box C: 6",
+    "19 − 6 = 13"
+   ],
+   "params": {
+    "cs": [
+     21,
+     19,
+     6
+    ],
+    "x": 1,
+    "y": 2
+   },
+   "calc": false,
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 344 136\" role=\"img\" aria-label=\"Boxes of counters\" class=\"qfig\"><polygon points=\"10.0,8.0 106.0,8.0 106.0,104.0 10.0,104.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"26.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"42.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"58.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"74.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"90.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"26.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"42.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"58.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"74.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"90.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"26.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"42.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"58.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"74.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"90.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"26.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"42.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"58.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"74.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"90.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"26.0\" cy=\"88.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><text x=\"58.0\" y=\"122.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"14\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">A</text><polygon points=\"124.0,8.0 220.0,8.0 220.0,104.0 124.0,104.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"140.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"156.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"172.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"188.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"204.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"140.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"156.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"172.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"188.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"204.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"140.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"156.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"172.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"188.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"204.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"140.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"156.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"172.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"188.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><text x=\"172.0\" y=\"122.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"14\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">B</text><polygon points=\"238.0,8.0 334.0,8.0 334.0,104.0 238.0,104.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"254.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"270.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"286.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"302.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"318.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"254.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><text x=\"286.0\" y=\"122.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"14\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">C</text></svg>"
+  },
+  {
+   "id": "whole-b-99110d7ab1",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_equalise_boxes",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-01",
+    "math-whole-numbers-addition-subtraction-multiplication-and-division-19"
+   ],
+   "stem": "Nurul has 33 counters in three boxes, A, B and C, as shown. Nurul moves counters from the fuller boxes to the emptier boxes until all three boxes have the same number. How many counters are moved altogether?",
+   "options": [
+    "10",
+    "5",
+    "11",
+    "15"
+   ],
+   "optionValues": [
+    "10",
+    "5",
+    "11",
+    "15"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "used_the_biggest_difference",
+     "why": "Used the difference between the fullest and the emptiest box."
+    },
+    null,
+    {
+     "tag": "gave_the_final_number_in_each_box",
+     "why": "Gave the number in each box at the end."
+    },
+    {
+     "tag": "compared_with_the_smallest",
+     "why": "Compared every box with the emptiest box."
+    }
+   ],
+   "solution": [
+    "33 ÷ 3 = 11 in each box.",
+    "Counters to move = how many the fuller boxes have above 11: 5"
+   ],
+   "params": {
+    "cs": [
+     6,
+     11,
+     16
+    ]
+   },
+   "calc": false,
+   "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 344 120\" role=\"img\" aria-label=\"Boxes of counters\" class=\"qfig\"><polygon points=\"10.0,8.0 106.0,8.0 106.0,88.0 10.0,88.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"26.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"42.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"58.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"74.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"90.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"26.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><text x=\"58.0\" y=\"106.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"14\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">A</text><polygon points=\"124.0,8.0 220.0,8.0 220.0,88.0 124.0,88.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"140.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"156.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"172.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"188.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"204.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"140.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"156.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"172.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"188.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"204.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"140.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><text x=\"172.0\" y=\"106.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"14\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">B</text><polygon points=\"238.0,8.0 334.0,8.0 334.0,88.0 238.0,88.0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"254.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"270.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"286.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"302.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"318.0\" cy=\"24.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"254.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"270.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"286.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"302.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"318.0\" cy=\"40.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"254.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"270.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"286.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"302.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"318.0\" cy=\"56.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><circle cx=\"254.0\" cy=\"72.0\" r=\"5.5\" fill=\"currentColor\" fill-opacity=\"0.45\" stroke=\"currentColor\" stroke-width=\"1.0\"/><text x=\"286.0\" y=\"106.0\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"14\" font-family=\"Literata, Georgia, serif\" fill=\"currentColor\" font-weight=\"600\">C</text></svg>"
+  },
+  {
+   "id": "whole-b-749d85819a",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_numeral_words_100",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-03"
+   ],
+   "stem": "Which numeral stands for 'twenty-three'?",
+   "options": [
+    "32",
+    "24",
+    "23",
+    "33"
+   ],
+   "optionValues": [
+    "32",
+    "24",
+    "23",
+    "33"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "swapped_the_digits",
+     "why": "Wrote the tens digit and the ones digit the wrong way round."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
+    },
+    null,
+    {
+     "tag": "tens_word_slip",
+     "why": "Used the wrong tens word."
+    }
+   ],
+   "solution": [
+    "2 tens and 3 ones: 23 = twenty-three"
+   ],
+   "params": {
+    "w": "twenty-three",
+    "mode": 0
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-5344489ed5",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "ga_swap_digits_words",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-03",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-04"
+   ],
+   "stem": "Ravi writes the number 'thirty-eight' in numerals. Ravi swaps its two digits to make a new number, then subtracts 'forty-six' from the new number. Which of these is the answer in words?",
+   "options": [
+    "ninety-one",
+    "forty-seven",
+    "thirty-seven",
+    "one hundred and twenty-nine"
+   ],
+   "optionValues": [
+    "91",
+    "47",
+    "37",
+    "129"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "other_slip",
+     "why": "Used the difference of the two numbers by mistake."
+    },
+    {
+     "tag": "careless_slip",
+     "why": "Made a careless slip in the last step."
+    },
+    null,
+    {
+     "tag": "added_instead",
+     "why": "Added instead of subtracting."
+    }
+   ],
+   "solution": [
+    "thirty-eight = 38; swapped: 83",
+    "83 − 46 = 37",
+    "thirty-seven"
+   ],
+   "params": {
+    "nw": "thirty-eight",
+    "kw": "forty-six"
    },
    "calc": false
   },
@@ -2849,6 +3399,54 @@
    "calc": false
   },
   {
+   "id": "whole-b-96d4388f5f",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "round_whole",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23"
+   ],
+   "stem": "37 250 ≈ ? (correct to the nearest 100)",
+   "options": [
+    "37 300",
+    "37 000",
+    "37 250",
+    "37 200"
+   ],
+   "optionValues": [
+    "37300",
+    "37000",
+    "37250",
+    "37200"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "rounded_to_wrong_place",
+     "why": "Rounded to the nearest 1 000."
+    },
+    {
+     "tag": "rounded_to_wrong_place",
+     "why": "Rounded to the nearest 10."
+    },
+    {
+     "tag": "always_rounded_down",
+     "why": "Rounded down without looking at the next digit."
+    }
+   ],
+   "solution": [
+    "Look at the digit to the right of the 100 place.",
+    "Answer: 37 300"
+   ],
+   "params": {
+    "n": 37250,
+    "place": 100
+   },
+   "calc": false
+  },
+  {
    "id": "whole-b-c2c8d6abb0",
    "topic": "math-whole-numbers",
    "level": "basic",
@@ -2945,6 +3543,357 @@
    "params": {
     "m": 5,
     "t": 38,
+    "o": 0
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-c814a9d46d",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "round_whole",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23"
+   ],
+   "stem": "47 408 ≈ ? (correct to the nearest 1 000)",
+   "options": [
+    "47 000",
+    "47 400",
+    "48 000",
+    "50 000"
+   ],
+   "optionValues": [
+    "47000",
+    "47400",
+    "48000",
+    "50000"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "rounded_to_wrong_place",
+     "why": "Rounded to the nearest 100."
+    },
+    {
+     "tag": "always_rounded_up",
+     "why": "Rounded up without looking at the next digit."
+    },
+    {
+     "tag": "rounded_to_wrong_place",
+     "why": "Rounded to the nearest 10 000."
+    }
+   ],
+   "solution": [
+    "Look at the digit to the right of the 1 000 place.",
+    "Answer: 47 000"
+   ],
+   "params": {
+    "n": 47408,
+    "place": 1000
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-9597e931af",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "numeral_from_words",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-15"
+   ],
+   "stem": "Which numeral is 'nine million, six hundred and seventy-eight thousand, six hundred and sixty-three'?",
+   "options": [
+    "9 678 663",
+    "15 780 663",
+    "9 068 463",
+    "9 663 678"
+   ],
+   "optionValues": [
+    "9678663",
+    "15780663",
+    "9068463",
+    "9663678"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Put the thousands group one place too high."
+    },
+    {
+     "tag": "read_thousand_as_hundred",
+     "why": "Treated the thousands as hundreds."
+    },
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Swapped the thousands and ones groups."
+    }
+   ],
+   "solution": [
+    "Millions: 9 000 000",
+    "Thousands: 678 000",
+    "Ones: 663",
+    "Total = 9 678 663"
+   ],
+   "params": {
+    "m": 9,
+    "t": 678,
+    "o": 663
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-1e1e990be3",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "words_from_numeral",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19"
+   ],
+   "stem": "Which of these is 4 066 037 written in words?",
+   "options": [
+    "four million, six thousand, six hundred and thirty-seven",
+    "four million, sixty-six thousand and thirty-seven",
+    "four million, thirty-seven thousand and sixty-six",
+    "forty-six thousand, six hundred and thirty-seven"
+   ],
+   "optionValues": [
+    "4006637",
+    "4066037",
+    "4037066",
+    "46637"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "read_thousand_as_hundred",
+     "why": "Treated the thousands as hundreds."
+    },
+    null,
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Swapped the thousands and ones groups."
+    },
+    {
+     "tag": "dropped_placeholder_zero",
+     "why": "Left out the zero place holders when joining the groups."
+    }
+   ],
+   "solution": [
+    "4 066 037 = 4 million + 66 thousand + 37",
+    "four million, sixty-six thousand and thirty-seven"
+   ],
+   "params": {
+    "m": 4,
+    "t": 66,
+    "o": 37
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-23a168279d",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "numeral_from_words",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-15"
+   ],
+   "stem": "Which numeral is 'eight million, two hundred and nineteen thousand, three hundred and eighteen'?",
+   "options": [
+    "8 318 219",
+    "10 190 318",
+    "8 022 218",
+    "8 219 318"
+   ],
+   "optionValues": [
+    "8318219",
+    "10190318",
+    "8022218",
+    "8219318"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Swapped the thousands and ones groups."
+    },
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Put the thousands group one place too high."
+    },
+    {
+     "tag": "read_thousand_as_hundred",
+     "why": "Treated the thousands as hundreds."
+    },
+    null
+   ],
+   "solution": [
+    "Millions: 8 000 000",
+    "Thousands: 219 000",
+    "Ones: 318",
+    "Total = 8 219 318"
+   ],
+   "params": {
+    "m": 8,
+    "t": 219,
+    "o": 318
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-5bc5ac13c0",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "words_from_numeral",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19"
+   ],
+   "stem": "Which of these is 6 442 971 written in words?",
+   "options": [
+    "six million, four hundred and forty-two thousand, nine hundred and seventy-one",
+    "ten million, four hundred and twenty thousand, nine hundred and seventy-one",
+    "six million, forty-five thousand, one hundred and seventy-one",
+    "six million, nine hundred and seventy-one thousand, four hundred and forty-two"
+   ],
+   "optionValues": [
+    "6442971",
+    "10420971",
+    "6045171",
+    "6971442"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Put the thousands group one place too high."
+    },
+    {
+     "tag": "read_thousand_as_hundred",
+     "why": "Treated the thousands as hundreds."
+    },
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Swapped the thousands and ones groups."
+    }
+   ],
+   "solution": [
+    "6 442 971 = 6 million + 442 thousand + 971",
+    "six million, four hundred and forty-two thousand, nine hundred and seventy-one"
+   ],
+   "params": {
+    "m": 6,
+    "t": 442,
+    "o": 971
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-97fea605a1",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "numeral_from_words",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-15"
+   ],
+   "stem": "Which numeral is 'eight million, nine hundred and seventy-five thousand'?",
+   "options": [
+    "8 097 500",
+    "17 750 000",
+    "8 975",
+    "8 975 000"
+   ],
+   "optionValues": [
+    "8097500",
+    "17750000",
+    "8975",
+    "8975000"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "read_thousand_as_hundred",
+     "why": "Treated the thousands as hundreds."
+    },
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Put the thousands group one place too high."
+    },
+    {
+     "tag": "dropped_placeholder_zero",
+     "why": "Left out the zero place holders when joining the groups."
+    },
+    null
+   ],
+   "solution": [
+    "Millions: 8 000 000",
+    "Thousands: 975 000",
+    "Ones: 0",
+    "Total = 8 975 000"
+   ],
+   "params": {
+    "m": 8,
+    "t": 975,
+    "o": 0
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-b-7611bd5a37",
+   "topic": "math-whole-numbers",
+   "level": "basic",
+   "template": "words_from_numeral",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-24",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-19"
+   ],
+   "stem": "Which of these is 4 401 000 written in words?",
+   "options": [
+    "four thousand, four hundred and one",
+    "four million, forty thousand, one hundred",
+    "four million, four hundred and one thousand",
+    "eight million, ten thousand"
+   ],
+   "optionValues": [
+    "4401",
+    "4040100",
+    "4401000",
+    "8010000"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "dropped_placeholder_zero",
+     "why": "Left out the zero place holders when joining the groups."
+    },
+    {
+     "tag": "read_thousand_as_hundred",
+     "why": "Treated the thousands as hundreds."
+    },
+    null,
+    {
+     "tag": "misplaced_thousands_group",
+     "why": "Put the thousands group one place too high."
+    }
+   ],
+   "solution": [
+    "4 401 000 = 4 million + 401 thousand + 0",
+    "four million, four hundred and one thousand"
+   ],
+   "params": {
+    "m": 4,
+    "t": 401,
     "o": 0
    },
    "calc": false
@@ -9109,100 +10058,6 @@
    "calc": false
   },
   {
-   "id": "whole-b-731a3944fb",
-   "topic": "math-whole-numbers",
-   "level": "basic",
-   "template": "pick_factor",
-   "outcomes": [
-    "math-whole-numbers-factors-and-multiples-02",
-    "math-whole-numbers-factors-and-multiples-01"
-   ],
-   "stem": "Which of these numbers is a factor of 66?",
-   "options": [
-    "8",
-    "7",
-    "3",
-    "5"
-   ],
-   "optionValues": [
-    "8",
-    "7",
-    "3",
-    "5"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "did_not_check_by_dividing",
-     "why": "66 is not divisible by 8."
-    },
-    {
-     "tag": "did_not_check_by_dividing",
-     "why": "66 is not divisible by 7."
-    },
-    null,
-    {
-     "tag": "did_not_check_by_dividing",
-     "why": "66 is not divisible by 5."
-    }
-   ],
-   "solution": [
-    "66 ÷ 3 = 22, with no remainder."
-   ],
-   "params": {
-    "N": 66,
-    "f": 3
-   },
-   "calc": false
-  },
-  {
-   "id": "whole-b-322604e966",
-   "topic": "math-whole-numbers",
-   "level": "basic",
-   "template": "pick_multiple",
-   "outcomes": [
-    "math-whole-numbers-factors-and-multiples-04",
-    "math-whole-numbers-factors-and-multiples-01"
-   ],
-   "stem": "Which of these numbers is a multiple of 7?",
-   "options": [
-    "65",
-    "62",
-    "63",
-    "64"
-   ],
-   "optionValues": [
-    "65",
-    "62",
-    "63",
-    "64"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "off_by_one_multiple",
-     "why": "65 is not in the 7 times table."
-    },
-    {
-     "tag": "off_by_one_multiple",
-     "why": "62 is not in the 7 times table."
-    },
-    null,
-    {
-     "tag": "transposed_digits_or_off_by_one",
-     "why": "64 is not in the 7 times table."
-    }
-   ],
-   "solution": [
-    "7 × 9 = 63"
-   ],
-   "params": {
-    "k": 7,
-    "N": 63
-   },
-   "calc": false
-  },
-  {
    "id": "whole-i-21e29ab11f",
    "topic": "math-whole-numbers",
    "level": "intermediate",
@@ -12128,6 +12983,557 @@
     "X": 700,
     "place": 100,
     "big": false
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-1743b7a7e5",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "estimate_sum",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22"
+   ],
+   "stem": "Estimate 8 492 + 6 321 by rounding each number to the nearest 1 000.",
+   "options": [
+    "20 000",
+    "14 813",
+    "14 000",
+    "14 321"
+   ],
+   "optionValues": [
+    "20000",
+    "14813",
+    "14000",
+    "14321"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "rounded_to_wrong_place",
+     "why": "Rounded to the nearest 10 000."
+    },
+    {
+     "tag": "found_exact_answer",
+     "why": "Worked out the exact answer instead of an estimate."
+    },
+    null,
+    {
+     "tag": "rounded_only_one_number",
+     "why": "Rounded only one of the numbers."
+    }
+   ],
+   "solution": [
+    "8 492 ≈ 8 000",
+    "6 321 ≈ 6 000",
+    "Estimate = 14 000"
+   ],
+   "params": {
+    "a": 8492,
+    "b": 6321,
+    "place": 1000
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-604f3609e2",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "estimate_product",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22"
+   ],
+   "stem": "Estimate 492 × 16 by rounding each number to 1 significant figure.",
+   "options": [
+    "9 840",
+    "10 000",
+    "100 000",
+    "8 000"
+   ],
+   "optionValues": [
+    "9840",
+    "10000",
+    "100000",
+    "8000"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "rounded_only_one_number",
+     "why": "Rounded only 16."
+    },
+    null,
+    {
+     "tag": "extra_zero",
+     "why": "Wrote one zero too many."
+    },
+    {
+     "tag": "rounded_only_one_number",
+     "why": "Rounded only 492."
+    }
+   ],
+   "solution": [
+    "492 ≈ 500, 16 ≈ 20",
+    "500 × 20 = 10 000"
+   ],
+   "params": {
+    "a": 492,
+    "b": 16
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-2f065dbba4",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "nth_term",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-21",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-17",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-11"
+   ],
+   "stem": "The first three numbers in a pattern are 8, 15, 22. The pattern continues in the same way. What is the 35th number?",
+   "options": [
+    "245",
+    "239",
+    "246",
+    "253"
+   ],
+   "optionValues": [
+    "245",
+    "239",
+    "246",
+    "253"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "forgot_first_term",
+     "why": "Gave k × step and ignored the first term."
+    },
+    {
+     "tag": "counted_too_few_steps",
+     "why": "Added the step one time too few."
+    },
+    null,
+    {
+     "tag": "counted_k_steps_not_k_minus_1",
+     "why": "Added the step k times instead of k − 1 times."
+    }
+   ],
+   "solution": [
+    "The step is 7.",
+    "35th number = 8 + 34 × 7 = 246"
+   ],
+   "params": {
+    "a": 8,
+    "d": 7,
+    "k": 35
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-3d25a84974",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "form_with_condition",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-16",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-12"
+   ],
+   "stem": "Use all the digits 2, 5, 7, 8 once each to form the smallest 4-digit even number. What is the number?",
+   "options": [
+    "8 752",
+    "2 578",
+    "5 278",
+    "2 587"
+   ],
+   "optionValues": [
+    "8752",
+    "2578",
+    "5278",
+    "2587"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "gave_the_opposite",
+     "why": "Gave the greatest number that works."
+    },
+    null,
+    {
+     "tag": "swapped_first_two_digits",
+     "why": "Swapped the first two digits."
+    },
+    {
+     "tag": "swapped_last_two_digits",
+     "why": "Swapped the last two digits."
+    }
+   ],
+   "solution": [
+    "The last digit must make the number even.",
+    "Answer: 2 578"
+   ],
+   "params": {
+    "ds": [
+     5,
+     7,
+     8,
+     2
+    ],
+    "cond": "even",
+    "big": false
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-b3bc8b0a27",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "same_digit_ratio",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-18",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-14"
+   ],
+   "stem": "In 1 026 923, the value of the digit 2 in the ten thousands place is how many times the value of the digit 2 in the tens place?",
+   "options": [
+    "3",
+    "1 000",
+    "10 000",
+    "1"
+   ],
+   "optionValues": [
+    "3",
+    "1000",
+    "10000",
+    "1"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "counted_places_not_powers_of_10",
+     "why": "Gave the number of places between the digits."
+    },
+    null,
+    {
+     "tag": "counted_one_place_too_many",
+     "why": "Counted one place too many."
+    },
+    {
+     "tag": "same_digit_same_value",
+     "why": "Thought the same digit always has the same value."
+    }
+   ],
+   "solution": [
+    "The digits are 3 places apart.",
+    "Each place is 10 times the one before: 10^3 = 1 000"
+   ],
+   "params": {
+    "n": 1026923,
+    "d": 2
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-7b79365e21",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "n_more_less",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-18",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20"
+   ],
+   "stem": "What is 200 more than 30 000?",
+   "options": [
+    "30 020",
+    "32 000",
+    "29 800",
+    "30 200"
+   ],
+   "optionValues": [
+    "30020",
+    "32000",
+    "29800",
+    "30200"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "wrong_place",
+     "why": "Used 20 instead."
+    },
+    {
+     "tag": "wrong_place",
+     "why": "Used 2 000 instead."
+    },
+    {
+     "tag": "wrong_operation",
+     "why": "Used the wrong operation."
+    },
+    null
+   ],
+   "solution": [
+    "30 000 + 200 = 30 200"
+   ],
+   "params": {
+    "n": 30000,
+    "step": 200,
+    "more": true
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-1e6cf6c81f",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "rounding_limits",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20"
+   ],
+   "stem": "A number is 600 when rounded to the nearest 100. What is the smallest whole number it could be?",
+   "options": [
+    "600",
+    "501",
+    "550",
+    "549"
+   ],
+   "optionValues": [
+    "600",
+    "501",
+    "550",
+    "549"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "gave_the_rounded_number",
+     "why": "Gave the rounded number itself."
+    },
+    {
+     "tag": "used_whole_place_not_half",
+     "why": "Used a whole place value instead of half."
+    },
+    null,
+    {
+     "tag": "boundary_rounds_the_other_way",
+     "why": "Went one below the lowest number that rounds to it."
+    }
+   ],
+   "solution": [
+    "Numbers from 550 to 649 round to 600.",
+    "Answer: 550"
+   ],
+   "params": {
+    "X": 600,
+    "place": 100,
+    "big": false
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-61ae365472",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "estimate_sum",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22"
+   ],
+   "stem": "Estimate 5 655 + 6 473 by rounding each number to the nearest 1 000.",
+   "options": [
+    "12 128",
+    "20 000",
+    "12 000",
+    "12 473"
+   ],
+   "optionValues": [
+    "12128",
+    "20000",
+    "12000",
+    "12473"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "found_exact_answer",
+     "why": "Worked out the exact answer instead of an estimate."
+    },
+    {
+     "tag": "rounded_to_wrong_place",
+     "why": "Rounded to the nearest 10 000."
+    },
+    null,
+    {
+     "tag": "rounded_only_one_number",
+     "why": "Rounded only one of the numbers."
+    }
+   ],
+   "solution": [
+    "5 655 ≈ 6 000",
+    "6 473 ≈ 6 000",
+    "Estimate = 12 000"
+   ],
+   "params": {
+    "a": 5655,
+    "b": 6473,
+    "place": 1000
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-a36fa18547",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "estimate_product",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-23",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-22"
+   ],
+   "stem": "Estimate 294 × 47 by rounding each number to 1 significant figure.",
+   "options": [
+    "150 000",
+    "15 000",
+    "14 100",
+    "14 700"
+   ],
+   "optionValues": [
+    "150000",
+    "15000",
+    "14100",
+    "14700"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "extra_zero",
+     "why": "Wrote one zero too many."
+    },
+    null,
+    {
+     "tag": "rounded_only_one_number",
+     "why": "Rounded only 294."
+    },
+    {
+     "tag": "rounded_only_one_number",
+     "why": "Rounded only 47."
+    }
+   ],
+   "solution": [
+    "294 ≈ 300, 47 ≈ 50",
+    "300 × 50 = 15 000"
+   ],
+   "params": {
+    "a": 294,
+    "b": 47
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-9715e52cba",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "nth_term",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-21",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-17",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-11"
+   ],
+   "stem": "The first three numbers in a pattern are 20, 24, 28. The pattern continues in the same way. What is the 25th number?",
+   "options": [
+    "120",
+    "112",
+    "100",
+    "116"
+   ],
+   "optionValues": [
+    "120",
+    "112",
+    "100",
+    "116"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "counted_k_steps_not_k_minus_1",
+     "why": "Added the step k times instead of k − 1 times."
+    },
+    {
+     "tag": "counted_too_few_steps",
+     "why": "Added the step one time too few."
+    },
+    {
+     "tag": "forgot_first_term",
+     "why": "Gave k × step and ignored the first term."
+    },
+    null
+   ],
+   "solution": [
+    "The step is 4.",
+    "25th number = 20 + 24 × 4 = 116"
+   ],
+   "params": {
+    "a": 20,
+    "d": 4,
+    "k": 25
+   },
+   "calc": false
+  },
+  {
+   "id": "whole-i-0570eeaf74",
+   "topic": "math-whole-numbers",
+   "level": "intermediate",
+   "template": "form_with_condition",
+   "outcomes": [
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-20",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-16",
+    "math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million-12"
+   ],
+   "stem": "Use all the digits 2, 3, 4, 8 once each to form the greatest 4-digit even number. What is the number?",
+   "options": [
+    "8 423",
+    "4 832",
+    "8 432",
+    "2 348"
+   ],
+   "optionValues": [
+    "8423",
+    "4832",
+    "8432",
+    "2348"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "swapped_last_two_digits",
+     "why": "Swapped the last two digits."
+    },
+    {
+     "tag": "swapped_first_two_digits",
+     "why": "Swapped the first two digits."
+    },
+    null,
+    {
+     "tag": "gave_the_opposite",
+     "why": "Gave the smallest number that works."
+    }
+   ],
+   "solution": [
+    "The last digit must make the number even.",
+    "Answer: 8 432"
+   ],
+   "params": {
+    "ds": [
+     3,
+     4,
+     2,
+     8
+    ],
+    "cond": "even",
+    "big": true
    },
    "calc": false
   },
@@ -18013,100 +19419,6 @@
     "lim": 92
    },
    "calc": true
-  },
-  {
-   "id": "whole-i-681bf54c3e",
-   "topic": "math-whole-numbers",
-   "level": "intermediate",
-   "template": "hcf_word",
-   "outcomes": [
-    "math-whole-numbers-factors-and-multiples-03",
-    "math-whole-numbers-factors-and-multiples-01"
-   ],
-   "stem": "Two pieces of ribbon, 99 cm and 27 cm long, are cut into pieces of equal length with no ribbon left over. What is the greatest possible length of each piece, in cm?",
-   "options": [
-    "10",
-    "9",
-    "297",
-    "72"
-   ],
-   "optionValues": [
-    "10",
-    "9",
-    "297",
-    "72"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "slip",
-     "why": "Slip."
-    },
-    null,
-    {
-     "tag": "used_lcm",
-     "why": "Used the lowest common multiple."
-    },
-    {
-     "tag": "used_difference",
-     "why": "Gave the difference in length."
-    }
-   ],
-   "solution": [
-    "HCF of 99 and 27 is 9."
-   ],
-   "params": {
-    "A": 99,
-    "B": 27
-   },
-   "calc": false
-  },
-  {
-   "id": "whole-i-6ba05b91fc",
-   "topic": "math-whole-numbers",
-   "level": "intermediate",
-   "template": "lcm_word",
-   "outcomes": [
-    "math-whole-numbers-factors-and-multiples-05",
-    "math-whole-numbers-factors-and-multiples-04"
-   ],
-   "stem": "Bus A leaves a stop every 24 minutes and Bus B leaves every 20 minutes. They both leave together at 7:15 a.m. After how many minutes will they next leave together?",
-   "options": [
-    "4 minutes",
-    "44 minutes",
-    "120 minutes",
-    "480 minutes"
-   ],
-   "optionValues": [
-    "4",
-    "44",
-    "120",
-    "480"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "used_hcf",
-     "why": "Used the highest common factor."
-    },
-    {
-     "tag": "added_times",
-     "why": "Added the two times."
-    },
-    null,
-    {
-     "tag": "multiplied_the_numbers",
-     "why": "Multiplied the two times."
-    }
-   ],
-   "solution": [
-    "LCM of 24 and 20 is 120."
-   ],
-   "params": {
-    "a": 24,
-    "b": 20
-   },
-   "calc": false
   },
   {
    "id": "whole-i-0126e9df2f",
@@ -26257,105 +27569,6 @@
    "params": {
     "a": 13,
     "b": 6
-   },
-   "calc": false
-  },
-  {
-   "id": "whole-c-b73a59ca11",
-   "topic": "math-whole-numbers",
-   "level": "competent",
-   "template": "flash_together",
-   "outcomes": [
-    "math-whole-numbers-factors-and-multiples-05",
-    "math-whole-numbers-factors-and-multiples-04"
-   ],
-   "stem": "Three lights flash every 3 seconds, 8 seconds and 6 seconds. They flash together at 8:00 p.m. How many times will they flash together in the next 16 minutes, not counting the one at 8:00 p.m.?",
-   "options": [
-    "41",
-    "40",
-    "6",
-    "39"
-   ],
-   "optionValues": [
-    "41",
-    "40",
-    "6",
-    "39"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "counted_the_start",
-     "why": "Counted the flash at the start as well."
-    },
-    null,
-    {
-     "tag": "used_product",
-     "why": "Used the product of the three numbers instead of the LCM."
-    },
-    {
-     "tag": "counted_one_too_few",
-     "why": "Counted one too few."
-    }
-   ],
-   "solution": [
-    "LCM of 3, 8, 6 is 24 seconds.",
-    "16 min = 960 s; 960 ÷ 24 = 40 remainder 0"
-   ],
-   "params": {
-    "a": 3,
-    "b": 8,
-    "c": 6,
-    "secs": 960
-   },
-   "calc": false
-  },
-  {
-   "id": "whole-c-6baf0070f1",
-   "topic": "math-whole-numbers",
-   "level": "competent",
-   "template": "remainder_smallest",
-   "outcomes": [
-    "math-whole-numbers-factors-and-multiples-05",
-    "math-whole-numbers-factors-and-multiples-04"
-   ],
-   "stem": "What is the smallest number greater than 6 that leaves a remainder of 6 when divided by 12 and also when divided by 9?",
-   "options": [
-    "30",
-    "36",
-    "42",
-    "114"
-   ],
-   "optionValues": [
-    "30",
-    "36",
-    "42",
-    "114"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "subtracted_the_remainder",
-     "why": "Subtracted the remainder."
-    },
-    {
-     "tag": "forgot_the_remainder",
-     "why": "Gave the lowest common multiple without adding the remainder."
-    },
-    null,
-    {
-     "tag": "used_product",
-     "why": "Used the product of the two numbers."
-    }
-   ],
-   "solution": [
-    "LCM of 12 and 9 is 36.",
-    "Number = 36 + 6 = 42"
-   ],
-   "params": {
-    "a": 12,
-    "b": 9,
-    "rem": 6
    },
    "calc": false
   }

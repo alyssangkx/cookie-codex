@@ -32,8 +32,18 @@ Classify the question below.
 - difficulty: 1 easy, 2 medium, 3 hard, for a P6 pupil.
 - ans_check: true if the given answer fits the question, false if it does not, null if no answer is given.
 - conf: 0 to 1, your confidence in st.
-{examples}{question}
+{rules}{examples}{question}
 JSON: {{"st": "<id>", "pat": "<id or null>", "method": "...", "difficulty": 1, "ans_check": null, "conf": 0.0}}"""
+
+
+# subject-specific rules for the tagger's known confusions (checked against the Science gold key, 20 Nov 2026)
+RULES = {"science": (
+    "- Friction, elastic spring force and weight (what a spring or friction does, an object's weight) go to "
+    "sci-interactions-forces-investigate, not sci-interactions-forces-effects (keep -effects for push/pull and the "
+    "effects of a force in general).\n"
+    "- Melting, freezing, boiling, evaporation, condensation and the temperature/state of water go to "
+    "sci-cycles-water-states, not sci-cycles-matter-states (keep -matter-states for mass, volume and the shape/volume "
+    "of solids, liquids and gases).\n")}
 
 
 def show(q):
@@ -87,7 +97,7 @@ def run(sets, batch, tp):
         sysmsg = {"role": "system", "content": SYSTEM.format(subject=subject)}
         for i in range(0, len(todo), batch):
             chunk = todo[i:i + batch]
-            msgs = [[sysmsg, {"role": "user", "content": TASK.format(tax=tax, examples=ex, question=show(q))}] for q in chunk]
+            msgs = [[sysmsg, {"role": "user", "content": TASK.format(tax=tax, rules=RULES.get(subject, ""), examples=ex, question=show(q))}] for q in chunk]
             first = [parse(o.outputs[0].text) for o in llm.chat(msgs, sp, use_tqdm=False)]
             again = [k for k, r in enumerate(first) if check(r, subs, pats)]
             if again:  # ask once more, saying what was wrong
@@ -134,7 +144,8 @@ def selftest():
     assert check("text", subs, pats) == "not a JSON object"
     assert check({"st": ["s1", "s2"], "pat": None, "difficulty": 2, "conf": 1}, subs, pats) == "st must be one id string"
     q = {"format": "mcq", "marks": 2, "section": "Booklet A", "text": "Which is a mammal?", "options": ["(1) a", "(2) b"], "answer": "2"}
-    p = TASK.format(tax=taxonomy("science", outcomes=True)[0], examples="", question=show(q))
+    p = TASK.format(tax=taxonomy("science", outcomes=True)[0], rules=RULES["science"], examples="", question=show(q))
+    assert "forces-investigate" in p
     assert "Options: (1) a | (2) b" in p and "Given answer: 2" in p and "sci-pat-" in p and "    - " in p
     gold = [{"id": "a", "st": "s1", "ok": ["s1", "s2"], "use": "eval"}, {"id": "b", "st": "s1", "ok": ["s1"], "use": "eval"},
             {"id": "c", "st": "s3", "ok": ["s3"], "use": "example"}]
