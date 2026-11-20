@@ -65,7 +65,8 @@ def words(t):
 
 
 def qtext(stem, options):
-    return (str(stem).strip() + "\n" + "\n".join(f"({i + 1}) {re.sub(r'^\s*\(?\d\)?\s*', '', str(o))}" for i, o in enumerate(options or []))).strip()
+    opts = [re.sub(r"^\s*\(?\d\)?\s*", "", str(o)) for o in options or []]  # no backslash inside an f-string: the server runs Python 3.11
+    return (str(stem).strip() + "\n" + "\n".join(f"({i + 1}) {o}" for i, o in enumerate(opts))).strip()
 
 
 def jl(p):
