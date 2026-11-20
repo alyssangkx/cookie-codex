@@ -6,6 +6,23 @@ The running to-do list is `docs/todo.md`: add every agreed or recommended item t
 
 Terms are defined in `GLOSSARY.md` and past decisions are in `docs/adr/`: read them before renaming, merging or redefining a concept.
 
+## Working rules (for every agent)
+
+- **Before a batch of questions:** state the syllabus scope and the definitions you will use. Keep definitions
+  consistent across items; for example, pollination means pollen landing on the stigma of the same kind of flower.
+  Stay inside the P6 syllabus: no mass and acceleration, no action-reaction.
+- **Every question:** exactly one defensible answer ("mainly" when two causes act). The figure draws what the stem
+  describes. Captions, labels and alt text never name or imply the answer. The stem never gives the answer away. No
+  item depends on another item's figure. The correct option is the strictly longest in no more than about 30% of a
+  sub-topic.
+- **When unsure** whether something is in scope or what the owner wants, say so in your report. Don't guess.
+- **Every fault class a review finds becomes an automatic check** (the WARN rules in the `check_*.py` scripts), not
+  only a one-off fix.
+- **Touch only what the task needs.** Commit only your own files, by explicit path (never `git add -A`); other agents
+  share the working tree. Never push unless the owner asked; a `/code-review` comes first.
+- **Prove it works:** run the checks and tests and report their exit codes. Look at rendered figures and pages as
+  screenshots, not just the code.
+
 Alyssa's Cookie Codex is a static Astro site with two parts:
 - **A PSLE revision game.** A Primary 6 student answers timed multiple-choice quizzes (PSLE 2027 syllabus; only Math has questions so far) and earns Cookie Run: Kingdom cookie cards.
 - **The Codex.** A reference library of all 186 cookies.
