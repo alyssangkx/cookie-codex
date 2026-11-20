@@ -68,6 +68,15 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
   }),
 );
 export const subsOf = (school: School) => subs.filter((s) => s.school === school);
+
+// English sub-topics are the PSLE Paper 2 sections (one topic each, in paper order); its school page groups them by
+// booklet (the syllabus strand) and calls them sections.
+const booklet = new Map(englishSyllabus.strands.flatMap((st) =>
+  st.topics.flatMap((t) => t.subtopics.map((sb) => [sb.id, { topic: st.id, topicName: st.name }] as const))));
+/** The group a sub-topic is listed under on its school page: the English booklet, else its own topic. */
+export const listGroup = (s: Sub) => booklet.get(s.id) ?? { topic: s.topic, topicName: s.topicName };
+/** What a school calls its sub-topics on the training pages. */
+export const unitName = (school: School, n = 2) => (school === 'english' ? 'section' : 'sub-topic') + (n === 1 ? '' : 's');
 export const subSlug = (id: string) => id.replace(/^(math|sci|eng|chi)-/, '');
 export const hasContent = (s: Sub) => s.playable.b || s.playable.i || s.playable.c;
 

@@ -2,8 +2,9 @@
 
     python3 scripts/quiz/english/coverage.py   ->  docs/quiz/english-coverage.md
 
-Two views: every outcome in site/src/data/syllabus/english.json with its shipped question count, and every
-question type in patterns.json (from the OCR'd P5/P6 papers) with its paper frequency next to shipped counts.
+Three views: the PSLE Paper 2 sections (the site's English sub-topics, `strands` of site/src/data/syllabus/english.json)
+with shipped questions per tier; every MOE syllabus outcome (`syllabusStrands`, each question's second outcome) with its
+shipped count; and every question type in patterns.json (from the OCR'd P5/P6 papers) with its paper frequency.
 """
 import json
 from collections import Counter
@@ -29,11 +30,20 @@ def cell(text, width=None):
 lines = ["# English bank: PSLE syllabus and top-school coverage", "",
          f"{len(qs)} shipped questions (basic {by_level['basic']}, intermediate {by_level['intermediate']}, "
          f"competent {by_level['competent']}). Regenerate with `python3 scripts/quiz/english/coverage.py`.", "",
-         "## 1. PSLE syllabus (English Language Syllabus 2020)", "",
+         "## 1. PSLE Paper 2 sections (the English sub-topics, in paper order)", "",
+         "| Section | Booklet | Basic | Intermediate | Competent | Total |", "|---|---|---|---|---|---|"]
+by_sub_level = Counter((q["outcomes"][0].rsplit("-", 1)[0], q["level"]) for q in qs)
+for st in SYL["strands"]:
+    for t in st["topics"]:
+        for sb in t["subtopics"]:
+            n = [by_sub_level.get((sb["id"], lv), 0) for lv in ("basic", "intermediate", "competent")]
+            lines.append(f"| {cell(sb['name'])} | {cell(st['name'])} | " + " | ".join(map(str, n))
+                         + f" | {sum(n) or 'Coming soon'} |")
+lines += ["", "## 2. PSLE syllabus (English Language Syllabus 2020)", "",
          "| Sub-topic | Outcome | MCQ-testable | Shipped |", "|---|---|---|---|"]
 mcq_total = mcq_done = 0
 missing_subs = []
-for st in SYL["strands"]:
+for st in SYL["syllabusStrands"]:
     for t in st["topics"]:
         for sb in t["subtopics"]:
             for o in sb["outcomes"]:
@@ -47,7 +57,7 @@ for st in SYL["strands"]:
                 lines.append(f"| {cell(sb['name'])} | {cell(o['text'], 70)} | {'yes' if o.get('mcqTestable') else 'no'} | {n}{flag} |")
 lines += ["", f"**{mcq_done} of {mcq_total} MCQ-testable outcomes have questions.** Not yet covered: "
           + ("; ".join(missing_subs) or "none") + ".", "",
-          f"## 2. Top-school question types ({PATTERNS.get('papersAnalysedCount', '?')} P5/P6 papers)", "",
+          f"## 3. Top-school question types ({PATTERNS.get('papersAnalysedCount', '?')} P5/P6 papers)", "",
           "| Type | Papers it appears in | Shipped questions |", "|---|---|---|"]
 for p in sorted(PATTERNS["patterns"], key=lambda p: -p.get("frequency", 0)):
     n = by_pattern.get(p["id"], 0)

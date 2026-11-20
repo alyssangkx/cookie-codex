@@ -175,7 +175,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // cloze passage sets: a blank answered earlier in this quiz (right or wrong) reads as the correct text in later questions;
   // right = green, wrong = amber "correct answer". reveal = feedback state, the asked blank is filled too.
   // ponytail: the cloze sub-topic set is hard-coded here; extend it when a new passage set is added
-  const CLOZE = new Set(['chi-cloze-mcq', 'eng-gram-text-cohesion']);
+  const CLOZE = new Set(['chi-cloze-mcq', 'eng-grammar-cloze']);
   const clozeStem = (q: Q, reveal: boolean) => {
     const zh = q.sub === 'chi-cloze-mcq';
     const asked = zh ? /（(\d+)）＿＿＿＿/.exec(q.stem)?.[1] : /\((\d+)\) _{8}(?!_)/.exec(q.stem)?.[1];

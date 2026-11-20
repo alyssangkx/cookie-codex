@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { SCHOOLS, subsOf, hasContent } from '../../lib/train';
+import { SCHOOLS, subsOf, hasContent, unitName } from '../../lib/train';
 
 const schools = SCHOOLS.map((s) => {
   const list = subsOf(s.id);
@@ -25,7 +25,7 @@ const schools = SCHOOLS.map((s) => {
           <a href={`/train/${s.id}/`}>
             <span class="school-name">{s.name}</span>
             <span class="school-meta">
-              {s.ready ? `${s.withQs.length} of ${s.total} sub-topics have questions` : `${s.total} sub-topics · questions coming soon`}
+              {s.ready ? `${s.withQs.length} of ${s.total} ${unitName(s.id)} have questions` : `${s.total} ${unitName(s.id)} · questions coming soon`}
             </span>
             {s.ready && <span class="school-progress" data-subs={JSON.stringify(s.withQs)}></span>}
           </a>

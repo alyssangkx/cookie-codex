@@ -115,7 +115,184 @@
     ],
     "notes": "Total 200 marks. Paper 2: 25 MCQ (Booklet A, 25 marks) plus 50 open-ended items (Booklet B, 65 marks). Paper 3: 20 MCQ, graphics for first seven items, each text read twice. MCQ-assessed marks: 45 of 200 (22.5%). Foundation English is a separate syllabus (one-line note only)."
   },
+  "sectionsNote": "strands are the PSLE Paper 2 sections in paper order (owner decision, 20 Nov 2026): the English school's sub-topics. syllabusStrands is the MOE syllabus; each item keeps its syllabus outcome as metadata (item field `syllabus`, the bank's second outcome).",
   "strands": [
+    {
+      "id": "eng-p2a",
+      "name": "Paper 2 Booklet A (multiple choice)",
+      "topics": [
+        {
+          "id": "eng-sec-grammar-mcq",
+          "name": "Grammar MCQ",
+          "subtopics": [
+            {
+              "id": "eng-grammar-mcq",
+              "name": "Grammar MCQ",
+              "outcomes": [
+                {
+                  "id": "eng-grammar-mcq-1",
+                  "text": "Choose the word or phrase that completes a sentence correctly (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags, quantifiers).",
+                  "level": "P6",
+                  "mcqTestable": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-vocab-mcq",
+          "name": "Vocabulary MCQ",
+          "subtopics": [
+            {
+              "id": "eng-vocab-mcq",
+              "name": "Vocabulary MCQ",
+              "outcomes": [
+                {
+                  "id": "eng-vocab-mcq-1",
+                  "text": "Choose the word or phrase, including phrasal verbs and idioms, that best fits the meaning of a sentence.",
+                  "level": "P6",
+                  "mcqTestable": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-vocab-cloze",
+          "name": "Vocabulary Cloze",
+          "subtopics": [
+            {
+              "id": "eng-vocab-cloze",
+              "name": "Vocabulary Cloze",
+              "outcomes": [
+                {
+                  "id": "eng-vocab-cloze-1",
+                  "text": "Choose the option closest in meaning to a word as it is used in context.",
+                  "level": "P6",
+                  "mcqTestable": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-visual-text",
+          "name": "Visual Text",
+          "subtopics": [
+            {
+              "id": "eng-visual-text",
+              "name": "Visual Text",
+              "outcomes": [
+                {
+                  "id": "eng-visual-text-1",
+                  "text": "Answer questions on a visual text (poster, notice, brochure, timetable, email).",
+                  "level": "P6",
+                  "mcqTestable": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eng-p2b",
+      "name": "Paper 2 Booklet B (open-ended)",
+      "topics": [
+        {
+          "id": "eng-sec-grammar-cloze",
+          "name": "Grammar Cloze",
+          "subtopics": [
+            {
+              "id": "eng-grammar-cloze",
+              "name": "Grammar Cloze",
+              "outcomes": [
+                {
+                  "id": "eng-grammar-cloze-1",
+                  "text": "Fill each blank in a passage with the word that fits grammatically (the paper gives a word box; the site asks each blank with 4 options).",
+                  "level": "P6",
+                  "mcqTestable": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-editing",
+          "name": "Editing",
+          "subtopics": [
+            {
+              "id": "eng-editing",
+              "name": "Editing",
+              "outcomes": [
+                {
+                  "id": "eng-editing-1",
+                  "text": "Correct the underlined spelling and grammar errors in a passage (open answer).",
+                  "level": "P6",
+                  "mcqTestable": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-comp-cloze",
+          "name": "Comprehension Cloze",
+          "subtopics": [
+            {
+              "id": "eng-comp-cloze",
+              "name": "Comprehension Cloze",
+              "outcomes": [
+                {
+                  "id": "eng-comp-cloze-1",
+                  "text": "Fill each blank in a passage with one suitable word (open answer).",
+                  "level": "P6",
+                  "mcqTestable": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-synthesis",
+          "name": "Synthesis & Transformation",
+          "subtopics": [
+            {
+              "id": "eng-synthesis",
+              "name": "Synthesis & Transformation",
+              "outcomes": [
+                {
+                  "id": "eng-synthesis-1",
+                  "text": "Combine or rewrite sentences using the word given, keeping the meaning (open answer).",
+                  "level": "P6",
+                  "mcqTestable": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng-sec-comp-oe",
+          "name": "Comprehension OE",
+          "subtopics": [
+            {
+              "id": "eng-comp-oe",
+              "name": "Comprehension OE",
+              "outcomes": [
+                {
+                  "id": "eng-comp-oe-1",
+                  "text": "Answer questions on a passage at the literal, inferential and evaluative levels (open answer; practised on the site as MCQ).",
+                  "level": "P6",
+                  "mcqTestable": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "syllabusStrands": [
     {
       "id": "eng-grammar",
       "name": "Grammar",

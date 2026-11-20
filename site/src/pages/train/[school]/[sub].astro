@@ -1,6 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL } from '../../../lib/train';
+import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL, listGroup } from '../../../lib/train';
 import { TIER_MIN, triesPerDay } from '../../../lib/store';
 
 export function getStaticPaths() {
@@ -17,7 +17,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 ---
 <Base title={`${sub.name} · ${school.name} training`} description={`Three tiers of PSLE ${school.name} practice on ${sub.name}.`}>
   <section class="wrap sub-page" data-sub={sub.id} data-tries={tries}>
-    <p class="crumbs"><a href="/train/">Schools</a> › <a href={`/train/${school.id}/`}>{school.name}</a> › {sub.topicName}</p>
+    <p class="crumbs"><a href="/train/">Schools</a> › <a href={`/train/${school.id}/`}>{school.name}</a> › {listGroup(sub).topicName}</p>
     <h1>{sub.name}</h1>
     <p class="rules">Each quiz has up to 10 questions. Master every question in a tier to clear it and earn its card. A question is mastered when you answer it right the first time, or right again after its retests. You can try each tier up to {tries} times a day. Clear a tier to open the next one.</p>
     <p id="cap" class="cap" hidden>Done for today! You have reached today's training time. Come back tomorrow.</p>

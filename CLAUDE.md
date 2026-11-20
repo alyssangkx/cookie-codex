@@ -74,7 +74,9 @@ python scripts/build_cookie_data.py  # -> site/src/data/cookies.json, copies ima
 
 ### English banks (`scripts/quiz/english/`)
 
-Same contract as the Chinese banks, with 4 options per item and no passage sets yet.
+Same contract as the Chinese banks, with 4 options per item (passage sets: see Question banks above).
+
+- **Sections are the sub-topics** (owner decision, 20 Nov 2026). The English school's sub-topics are the PSLE Paper 2 sections in paper order: Grammar MCQ, Vocabulary MCQ, Vocabulary Cloze, Visual Text (strand `eng-p2a`, Booklet A), Grammar Cloze, Editing, Comprehension Cloze, Synthesis & Transformation, Comprehension OE (`eng-p2b`, Booklet B). In `site/src/data/syllabus/english.json`, `strands` holds them (each section is a topic `eng-sec-<x>` with one sub-topic `eng-<x>` and one outcome `eng-<x>-1`; ids match the past-paper audit's section ids); the MOE syllabus moved to `syllabusStrands`. Editing, Comprehension Cloze and Synthesis & Transformation are open-answer (`mcqTestable: false`) and stay "Coming soon" with no items (`check_english.py` fails an item filed there) until the site can mark open answers. Grammar Cloze is asked blank by blank with 4 options (the paper uses a word box); Comprehension OE holds the reading passages, practised as MCQ. `build_rewards.py` keeps English in paper order (not playable-first); the school page groups the sections by booklet (`listGroup`) and calls them sections (`unitName`).
 
 ```bash
 python3 scripts/quiz/english/build.py     # items/*.json (the sub-topic is each file's "subtopic" field; several files may share one) + review.json -> site/src/data/quiz/english/<topic>.json
@@ -83,10 +85,10 @@ python3 scripts/quiz/english/coverage.py  # -> docs/quiz/english-coverage.md
 python3 scripts/quiz/build_rewards.py     # after the banks change
 ```
 
-- **Items** are `{key, level, outcome, pattern, stem, options[4], answer, explain[4], solution[], gloss?}`. `pattern` is an id from `patterns.json`; `outcome` is a syllabus outcome id under the file's sub-topic.
-- **Review gate.** An item ships only if `review.json` has `"<subtopic>|<key>": {"ship": true, "fingerprint": ...}` for its current stem, options, answer, explain and solution (`fingerprint()` in `scripts/quiz/bankcommon.py`, shared with the Chinese build). Anything else is dropped, unreviewed or stale. Options are shuffled with a seed from the key; ids are `eng<strand>-<sha1(topic|key)>` and ignore the level. Empty and stale banks are not written or are deleted.
+- **Items** are `{key, level, outcome, syllabus, pattern, stem, options[4], answer, explain[4], solution[], gloss?}`. `pattern` is an id from `patterns.json`; `outcome` is the section outcome (`<file's sub-topic>-1`); `syllabus` is the MOE syllabus outcome (in `syllabusStrands`), metadata the bank keeps as the question's second outcome.
+- **Review gate.** An item ships only if `review.json` has `"<subtopic>|<key>": {"ship": true, "fingerprint": ...}` for its current stem, options, answer, explain, solution, level, outcome and pattern (`fingerprint()` in `scripts/quiz/bankcommon.py`, shared with the Chinese build). Anything else is dropped, unreviewed or stale. Options are shuffled with a seed from the key; ids are `engsec-<sha1(topic|key)>` and ignore the level (moving to the sections on 20 Nov 2026 changed every English id; progress on the old ids is orphaned, cards stay). Empty and stale banks are not written or are deleted.
 - **Checks.** Stem has a `____` blank or a `?`; options are 4 distinct strings with the same first-letter case and end punctuation; explain is null only for the answer.
-- **Site.** `train.ts` marks English `ready` once a sub-topic has a playable tier (20 questions). `build_rewards.py` already lists English sub-topics (playable ones first within English), so Math and Chinese rewards do not move. English is open on the home map (`home-hotspots.json`), with the `chinese-english-open` art; `index.astro` shows a school open only when its hotspot says "open" AND `SCHOOLS.ready` is true, and throws if the art for the open set is missing.
+- **Site.** `train.ts` marks English `ready` once a sub-topic has a playable tier (20 questions). `build_rewards.py` lists the English sections in paper order; English star slots draw from their own RNG and the main RNG replays the old layout's 12 English draws (`LEGACY_ENGLISH_DRAWS`), so Math, Science and Chinese rewards do not move when English changes. English is open on the home map (`home-hotspots.json`), with the `chinese-english-open` art; `index.astro` shows a school open only when its hotspot says "open" AND `SCHOOLS.ready` is true, and throws if the art for the open set is missing.
 
 ### Science banks (`scripts/quiz/science/`)
 

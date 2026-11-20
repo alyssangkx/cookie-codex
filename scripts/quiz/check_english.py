@@ -15,6 +15,10 @@ ROOT = HERE.parents[1]
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "english.json").read_text())
 OUTCOMES = {o["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
 SUBS = {sb["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
+# sub-topics are the PSLE Paper 2 sections; each item also names its MOE syllabus outcome (metadata)
+SYLLABUS = {o["id"] for st in SYL["syllabusStrands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
+OPEN_SECTIONS = {sb["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]
+                 if not any(o.get("mcqTestable") for o in sb["outcomes"])}  # "Coming soon": no MCQ items
 PATTERNS = {p["id"] for p in json.loads((HERE / "english" / "patterns.json").read_text())["patterns"]}
 LEVELS = {"basic", "intermediate", "competent"}
 BLANK = "____"
@@ -74,12 +78,15 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
     sub = data.get("subtopic")
     if sub not in SUBS:
         errors.append(f"{f.name}: unknown subtopic {sub}")
+    elif sub in OPEN_SECTIONS and data["items"]:
+        errors.append(f"{f.name}: {sub} is an open-answer section; the site has no MCQ items for it yet")
     for it in data["items"]:
         e = lambda m: errors.append(f"{f.name} {it.get('key')}: {m}")
         if sub_keys[(sub, it.get("key"))] > 1: e("duplicate key in this sub-topic")
         if sub_stems[(sub, it.get("stem"))] > 1: e("duplicate stem in this sub-topic")
         if it.get("level") not in LEVELS: e(f"bad level {it.get('level')}")
         if it.get("outcome") not in OUTCOMES or not str(it.get("outcome", "")).startswith(str(sub)): e(f"bad outcome {it.get('outcome')}")
+        if it.get("syllabus") not in SYLLABUS: e(f"bad syllabus outcome {it.get('syllabus')}")
         if it.get("pattern") not in PATTERNS: e(f"unknown pattern {it.get('pattern')}")
         stem = str(it.get("stem", ""))
         opts = it.get("options", [])
@@ -129,6 +136,8 @@ for f in sorted((ROOT / "site" / "src" / "data" / "quiz" / "english").glob("*.js
         if "visual" in q:
             errors += [f"{f.name} {q['id']}: {m}" for m in visual_errors(q["visual"])]
         if ("group" in q) != ("seq" in q): errors.append(f"{f.name} {q['id']}: group and seq go together")
+        if len(q["outcomes"]) != 2 or q["outcomes"][1] not in SYLLABUS:
+            errors.append(f"{f.name} {q['id']}: outcomes must be [section outcome, syllabus outcome]")
 errors += [f"duplicate question id {i}" for i, n in ids.items() if n > 1]
 
 print(f"checked {sum(1 for _ in (HERE / 'english' / 'items').glob('*.json'))} item files, {sum(ids.values())} shipped questions")

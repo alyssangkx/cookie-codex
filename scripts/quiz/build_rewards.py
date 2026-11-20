@@ -18,6 +18,10 @@ NEW = {"math": (20, 22, 17), "science": (22, 24, 19), "english": (8, 9, 7), "chi
 HIGH_SHARE = {"math": 8, "science": 9, "english": 3, "chinese": 4}  # legendary + super-epic capstones (24)
 FIRST_DUP = 7  # no duplicate in the first 7 slots (so the 7 commons open Math)
 SEED = "ccx-rewards-2027"
+# English moved to the PSLE Paper 2 sections (9 sub-topics instead of 12, owner decision 20 Nov 2026). Its star-slot
+# draws now use their own RNG, and the main RNG still makes the 12 draws (these list lengths) the old English layout
+# made, so every school drawn after English (Chinese) keeps exactly the rewards it had.
+LEGACY_ENGLISH_DRAWS = [7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7]
 
 
 def playable_subs():
@@ -49,8 +53,10 @@ def ordered_subtopics(school):
                 subs.append({"id": st["id"], "name": st["name"], "topic": topic["id"],
                              "topicName": topic["name"], "home": home, "i": i})
                 i += 1
-    # sub-topics that have questions come first, so early rewards (the 7 commons) are earnable now
-    subs.sort(key=lambda s: (s["id"] not in PLAYABLE, s["home"], s["i"]))
+    # sub-topics that have questions come first, so early rewards (the 7 commons) are earnable now; English keeps the
+    # paper's section order, so its "Coming soon" sections sit where they come in the paper
+    if school != "english":
+        subs.sort(key=lambda s: (s["id"] not in PLAYABLE, s["home"], s["i"]))
     last_of_topic = {s["topic"]: s["id"] for s in subs}  # later sub-topics overwrite earlier ones
     for s in subs:
         s["capstone"] = last_of_topic[s["topic"]] == s["id"]
@@ -84,7 +90,12 @@ def main():
 
     order, slots = {}, {}
     pos = {"b": 0, "i": 0, "high": 0, "low": 0}
+    main_rng = rng
     for school in SCHOOLS:
+        rng = random.Random(f"{SEED}-english") if school == "english" else main_rng
+        if school == "chinese":
+            for n in LEGACY_ENGLISH_DRAWS:
+                main_rng.choice(range(n))
         subs = ordered_subtopics(school)
         order[school] = subs
         n = len(subs)

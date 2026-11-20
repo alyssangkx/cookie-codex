@@ -2,7 +2,21 @@
 
 1034 shipped questions (basic 307, intermediate 306, competent 421). Regenerate with `python3 scripts/quiz/english/coverage.py`.
 
-## 1. PSLE syllabus (English Language Syllabus 2020)
+## 1. PSLE Paper 2 sections (the English sub-topics, in paper order)
+
+| Section | Booklet | Basic | Intermediate | Competent | Total |
+|---|---|---|---|---|---|
+| Grammar MCQ | Paper 2 Booklet A (multiple choice) | 102 | 99 | 150 | 351 |
+| Vocabulary MCQ | Paper 2 Booklet A (multiple choice) | 75 | 77 | 108 | 260 |
+| Vocabulary Cloze | Paper 2 Booklet A (multiple choice) | 25 | 25 | 58 | 108 |
+| Visual Text | Paper 2 Booklet A (multiple choice) | 55 | 55 | 55 | 165 |
+| Grammar Cloze | Paper 2 Booklet B (open-ended) | 20 | 20 | 20 | 60 |
+| Editing | Paper 2 Booklet B (open-ended) | 0 | 0 | 0 | Coming soon |
+| Comprehension Cloze | Paper 2 Booklet B (open-ended) | 0 | 0 | 0 | Coming soon |
+| Synthesis & Transformation | Paper 2 Booklet B (open-ended) | 0 | 0 | 0 | Coming soon |
+| Comprehension OE | Paper 2 Booklet B (open-ended) | 30 | 30 | 30 | 90 |
+
+## 2. PSLE syllabus (English Language Syllabus 2020)
 
 | Sub-topic | Outcome | MCQ-testable | Shipped |
 |---|---|---|---|
@@ -36,7 +50,7 @@
 
 **15 of 27 MCQ-testable outcomes have questions.** Not yet covered: Metalanguage; Applying grammatical knowledge; Language features of text types; Appropriate use; Critical response; Listening closely; Listening for understanding.
 
-## 2. Top-school question types (188 P5/P6 papers)
+## 3. Top-school question types (188 P5/P6 papers)
 
 | Type | Papers it appears in | Shipped questions |
 |---|---|---|

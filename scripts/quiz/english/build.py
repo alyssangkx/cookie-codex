@@ -2,8 +2,10 @@
 
     python3 scripts/quiz/english/build.py
 
-Items live in scripts/quiz/english/items/<subtopic>.json (hand-written, curated), shaped
-{"subtopic": ..., "items": [{key, level, outcome, pattern, stem, options[4], answer, explain[4], solution[], gloss?, visual?}]}.
+Items live in scripts/quiz/english/items/*.json (hand-written, curated), shaped
+{"subtopic": ..., "items": [{key, level, outcome, syllabus, pattern, stem, options[4], answer, explain[4], solution[], gloss?, visual?}]}.
+The sub-topics are the PSLE Paper 2 sections (`strands` of the syllabus JSON, owner decision 20 Nov 2026); `outcome` is the
+section's outcome and `syllabus` the MOE syllabus outcome (`syllabusStrands`), kept as the bank question's second outcome.
 Keys vis-NN-K, read-NN-K and ecloze-NN-K form passage sets (group/seq in the bank); a set ships whole or not at all.
 An optional "visual" (poster/notice/brochure/timetable/email card) is copied into the bank question.
 An item ships only if scripts/quiz/english/review.json records, under "<subtopic>|<key>", ship: true for exactly the
@@ -32,7 +34,7 @@ TOPIC_OF = {sb["id"]: t["id"] for st in SYL["strands"] for t in st["topics"] for
 
 def qid(topic, key):
     # no level in the id: moving an item between levels must not orphan a child's retest history
-    prefix = "eng" + topic.split("-")[1][:4]  # eng-gram-wps -> enggram
+    prefix = "eng" + topic.split("-")[1][:4]  # eng-sec-grammar-mcq -> engsec
     return f"{prefix}-{hashlib.sha1(f'{topic}|{key}'.encode()).hexdigest()[:10]}"
 
 
@@ -93,7 +95,7 @@ def main():
                 "topic": topic,
                 "level": it["level"],
                 "template": it["pattern"],
-                "outcomes": [it["outcome"]],
+                "outcomes": [it["outcome"], it["syllabus"]],  # the section files it; the syllabus outcome is metadata
                 "stem": re.sub(r"\s+(Which option is closest in meaning)", r"\n\1", it["stem"]),  # the question on its own line
                 "options": [it["options"][i] for i in order],
                 "answer": order.index(it["answer"]),

@@ -1,6 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subsOf, subSlug } from '../../../lib/train';
+import { SCHOOLS, subsOf, subSlug, listGroup, unitName } from '../../../lib/train';
 import { groupByTopic, type SubInfo } from '../../../lib/suggest';
 import { TIERS, TIER_NAME, type School } from '../../../lib/store';
 
@@ -10,7 +10,7 @@ export function getStaticPaths() {
 const { school } = Astro.props as { school: (typeof SCHOOLS)[number] };
 const list = subsOf(school.id as School);
 const infos: (SubInfo & { file: string | null; home: number })[] = list.map((s) => ({
-  id: s.id, topic: s.topic, topicName: s.topicName, name: s.name, slug: subSlug(s.id),
+  id: s.id, ...listGroup(s), name: s.name, slug: subSlug(s.id),
   playable: s.playable, count: s.count, file: s.file, home: s.home,
 }));
 const groups = groupByTopic(infos) as { topic: string; name: string; subs: typeof infos }[];
@@ -18,7 +18,7 @@ const clientData = JSON.stringify(infos).replace(/</g, '\\u003c');
 const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n + TIERS.filter((t) => s.playable[t]).length, 0);
 ---
 {school.ready ? (
-<Base title={`Train ${school.name} · Cookie Codex`} description={`Pick what to train today in ${school.name}: suggestions, your power and every sub-topic.`}>
+<Base title={`Train ${school.name} · Cookie Codex`} description={`Pick what to train today in ${school.name}: suggestions, your power and every ${unitName(school.id as School, 1)}.`}>
   <div class="wrap train-home" data-school={school.id}>
     <p class="th-crumbs"><a href="/">Home</a></p>
     <h1 class="th-title">What do you want to train in {school.name} today<span class="player-sep"></span>?</h1>
@@ -31,12 +31,12 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     <section class="th-sugg" aria-labelledby="th-sugg-h">
       <h2 id="th-sugg-h">Suggested for you</h2>
       <div id="th-cards" class="th-cards" aria-live="polite">
-        <p class="th-muted">Pick a sub-topic below to start a quiz.</p>
+        <p class="th-muted">Pick a {unitName(school.id as School, 1)} below to start a quiz.</p>
       </div>
     </section>
 
     <section class="th-syl" aria-labelledby="th-syl-h">
-      <h2 id="th-syl-h">All sub-topics</h2>
+      <h2 id="th-syl-h">All {unitName(school.id as School)}</h2>
       <div class="th-topics">
       {groups.map((g) => (
         <details class="th-topic" data-topic={g.topic}>
@@ -146,7 +146,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     const cards = document.getElementById('th-cards')!;
     const kindLabel: Record<Suggestion['kind'], string> = { review: 'Review', 'one-more': 'One more pass', weak: 'Weak spot', next: 'Next up', done: 'All done' };
     const render = (list: Suggestion[]) => {
-      if (!list.length) { cards.innerHTML = '<p class="th-muted">Pick a sub-topic below to start a quiz.</p>'; return; }
+      if (!list.length) { cards.innerHTML = `<p class="th-muted">Pick a ${root?.dataset.school === 'english' ? 'section' : 'sub-topic'} below to start a quiz.</p>`; return; }
       cards.innerHTML = list.map((x) => `
         <article class="th-card" data-kind="${x.kind}">
           <span class="th-card-kind">${kindLabel[x.kind]}</span>
