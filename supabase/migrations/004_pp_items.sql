@@ -1,6 +1,6 @@
--- Cookie Codex, migration 004: private past-paper MCQs (ADR 0004, amended 20 Nov 2026).  Approved; NOT YET APPLIED.
--- Apply only after the owner says "apply", with:  supabase db query --remote --yes -f supabase/migrations/004_pp_items.sql
--- (there is no migrations table; never `db push`). Test first: scripts/accounts/sqltest.sh runs 001-004 locally.
+-- Cookie Codex, migration 004: private past-paper MCQs (ADR 0004, amended 20 Nov 2026).  APPLIED to the live project 20 Nov 2026.
+-- It was applied with:  supabase db query --remote --yes -f supabase/migrations/004_pp_items.sql
+-- (there is no migrations table; never `db push`). Do not re-run it. Test: scripts/accounts/sqltest.sh runs 001-004 locally.
 --
 -- What it adds:
 --   * public.pp_items: verbatim past-paper MCQs that passed the blind-answer check. No client may select the table

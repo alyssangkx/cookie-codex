@@ -124,7 +124,8 @@ def freeze_english(slots, pins, rarity_of, caps_of):
         for k in before:  # duplicates must repeat a card of this tier
             if slots[k]["dup"] and slots[k]["slug"] not in held:
                 slots[k]["slug"] = sorted(held)[0]
-        assert {slots[k]["slug"] for k in keys if not slots[k]["dup"]} == pool, ("English tier cookies changed", t)
+        assert {slots[k]["slug"] for k in keys if not slots[k]["dup"]} == pool, ("English tier cookies changed: the English draw now deals tier " + t + " a different cookie set, so a pinned "
+            "slot no longer fits. Deliberately loud (a silent fix could move a cleared card): re-pin english_frozen.json by hand", t)
     for k, v in pins.items():
         assert slots[k] == v, ("frozen English slot moved", k)
 

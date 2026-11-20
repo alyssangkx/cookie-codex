@@ -130,7 +130,6 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const subId = params.get('sub') ?? '';
   const tier = (params.get('tier') ?? 'b') as Tier;
   const sub = meta.subs[subId];
-  const LETTERS = 'ABCDEFGH'; // 4 options, or 8 for a dialogue (完成对话) set
   const LEVEL: Record<Tier, string> = { b: 'basic', i: 'intermediate', c: 'competent' };
   const rewardFor = (sid: string, t: Tier) => meta.slots[`${sid}|${t}`];
   const eco = toEconomy(meta); // replacement cards, star bonuses and achievement cards (crumbs.ts)
@@ -246,6 +245,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     return r.json();
   }
 
+  let ppFailed = false; // a failed past-paper fetch: Daily Review must not park pp retests it never saw
   async function loadBanks(files: string[]): Promise<Q[]> {
     let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
     // past-paper items (ADR 0004): fetched from Supabase for a signed-in player, never from /data/quiz; OFF for now
@@ -253,7 +253,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const subs = ppSubsFor(mode, subId, all.map((q) => q.sub));
       if (subs.length) {
         const { fetchPp } = await import('../../lib/ppfetch');
-        all = mergePool(all, (await fetchPp(subs, (x) => meta.subs[x]?.file)) as Q[], poolModeFor(mode));
+        const pp = await fetchPp(subs, (x) => meta.subs[x]?.file);
+        if (pp === null) ppFailed = true;
+        all = mergePool(all, (pp ?? []) as Q[], poolModeFor(mode));
       }
     }
     // papers use 4-option items outside passage sets only (no 8-option dialogue item, no split passage)
@@ -306,7 +308,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       // only Daily Review loads every bank, so only it parks retests whose question is gone; any page unparks the ids it
       // loaded (an older tab missing newer bank files may have parked them). Nothing is deleted (ADR 0002).
       // the save as stored now, not `s` from before the await: another tab may have bought or earned meanwhile
-      const cur = syncParkedStored(all.map((q) => q.id), mode === 'review', meta.banks);
+      const cur = syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
@@ -637,7 +639,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const used = (many && q.group && usedRight.get(q.group)) || new Set<number>();
     $('options').classList.toggle('many', many);
     $('options').innerHTML = q.options
-      .map((o, k) => `<button type="button" class="opt${used.has(k) ? ' used' : ''}" data-k="${k}"${used.has(k) ? ' disabled' : ''}><span class="letter">${LETTERS[k]}</span> <span>${fmt(o)}</span></button>`)
+      .map((o, k) => `<button type="button" class="opt${used.has(k) ? ' used' : ''}" data-k="${k}"${used.has(k) ? ' disabled' : ''}><span class="letter">${optionLabel(q, k)}</span> <span>${fmt(o)}</span></button>`)
       .join('');
     $('feedback').hidden = true;
     $('next').hidden = true;

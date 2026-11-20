@@ -2,7 +2,6 @@
 the one-use-per-cookie rule. Writes only to a scratch folder. Run: python3 scripts/quiz/test_rewards_freeze.py"""
 import json
 import sys
-import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -13,9 +12,10 @@ scratch.mkdir(parents=True, exist_ok=True)
 pins = json.loads(b.FROZEN.read_text())
 base = b.main(out_path=scratch / "base.json")
 assert json.loads((scratch / "base.json").read_text()) == json.loads((b.DATA / "rewards.json").read_text())
+orig = set(b.PLAYABLE)
 for extra in ({"eng-editing"}, {"eng-vocab-cloze", "eng-comp-cloze"}, {"eng-editing", "eng-synthesis", "eng-vocab-cloze"}):
-    sim = b.main(playable=b.PLAYABLE | extra, out_path=scratch / "sim.json")
-    b.PLAYABLE = {s for s in b.PLAYABLE if s not in extra}
+    sim = b.main(playable=orig | extra, out_path=scratch / "sim.json")
+    b.PLAYABLE = set(orig)  # main() sets the module global; restore the real set exactly
     for k, v in pins.items():
         assert sim[k] == v, ("pinned slot moved", extra, k)
     for k, v in base.items():

@@ -67,6 +67,9 @@ outside the repo.
   gaps mean 词语选用).
 - [ ] EN/MA/ZH tagger rules + gold-gated re-tag (queue 10, `vlm/run_tag10.sh` waiting on queue 9; new files `tags72r10.jsonl`, gate lines in `vlm/tag10-done.txt`):
 - [ ] Automatic crop review (owner, 20 Nov 2026: the server model should check pictures, not a person): (a) script fixes in `load_pp.py figures`: grow a crop cut off at an edge to the next blank band, straighten skewed scans; (b) server pass with Qwen2.5-VL-32B per selected item, crop next to its full page: is the figure complete, does it belong to this question, does it carry part of another question; a fail goes to `hold-auto.txt` (read like `hold.txt`). The owner then only spot-checks a sample per sub-topic. Run (b) after queue 10.
+- [ ] Before switching any past-paper sub-topic on (code review 20 Nov 2026):
+  - tier counts: train.ts counts and hashes a tier from the generated bank at build time, but the quiz adds or swaps in pp items at run time, so "N of M mastered" reads 0 on merged/replaced tiers. Fix: load_pp writes a public per-tier list of pp ids (ids only, no content) that train.ts folds into the count and hash;
+  - `load_pp.py upload` must set active=false on rows of the uploaded sub-topics that are no longer selected (held, dropped or re-tagged away); today they stay live.
 - [ ] Decide before importing English past papers: the tagger files "closest in meaning to the underlined word" under Vocabulary Cloze (as the papers label it), but the site keeps those single-sentence items in Vocabulary MCQ and Vocabulary Cloze takes passage sets only. Pick one home (recommended: Vocabulary MCQ, matching the site).
 - [ ] Then a server re-tag run:
   - Maths: 175 null-st items plus the confused sub-topics;
