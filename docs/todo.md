@@ -226,6 +226,17 @@ outside the repo.
 
 ## Done
 
+- [x] 20 Nov 2026: second big push live (`3500954`).
+  - Submit-then-review WA/SA papers, now for English and Science too.
+  - Encouragement lines.
+  - English categories by paper section.
+  - Science: 18 sub-topics, about 1,450 questions, with code-drawn figures to be replaced by real past-paper items.
+  - Angles templates and nine-year Maths weights.
+  - Display fixes: tier id hash and reversible parking of orphan retests.
+  - Review WARN checks.
+  - Game economy: Crumbs, the shop on the home map, replacement cards, achievement-only rare cards, the parent ledger.
+  - GLOSSARY and ADRs.
+- [x] 20 Nov 2026: hotfix live (`daa2547`). Plant transport worked solutions no longer show one letter per line.
 - [x] 20 Nov 2026: content redesign live (`975eeec`).
   - Maths: its own random stream per template, weighting by paper marks, exam-style rewrites (4,281 to 3,826
     questions; most Maths ids changed once).
