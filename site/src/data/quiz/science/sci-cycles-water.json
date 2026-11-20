@@ -3040,7 +3040,7 @@
    "outcomes": [
     "sci-cycles-water-evaporation-1"
    ],
-   "stem": "Two identical wet towels are hung in the same sunny spot as shown. Which towel will dry first?",
+   "stem": "Two identical wet towels are hung in the same sunny spot, one spread out and one folded, as shown. Which towel will dry first?",
    "options": [
     "Q, because it is thicker and holds more heat",
     "Both dry at the same time because they are in the same place",
@@ -3399,7 +3399,7 @@
    "options": [
     "The salt sinks to the bottom faster in a deep pan",
     "A large surface lets the water evaporate quickly",
-    "A shallow pan makes the water freeze",
+    "The water in a wide pan boils faster",
     "A wide pan makes the seawater less salty"
    ],
    "answer": 1,
@@ -3410,8 +3410,8 @@
     },
     null,
     {
-     "tag": "wrong-change",
-     "why": "Pans are left in the Sun so that water evaporates, not freezes."
+     "tag": "boil-confusion",
+     "why": "Seawater in the pans is not boiled. It evaporates in the Sun."
     },
     {
      "tag": "wrong-idea",
@@ -3673,7 +3673,7 @@
    "stem": "Mrs Tan's kitchen floor is wet. Which action helps the floor dry fastest?",
    "options": [
     "Closing all the windows and doors",
-    "Switching on a freezer next to the floor",
+    "Closing the curtains to keep the room cool",
     "Switching on a fan to blow air over the floor",
     "Covering the floor with a plastic sheet"
    ],
@@ -3685,7 +3685,7 @@
     },
     {
      "tag": "wrong-factor",
-     "why": "A colder place slows evaporation."
+     "why": "A cooler place slows evaporation."
     },
     null,
     {
@@ -3910,7 +3910,7 @@
     "The Sun can freeze the clothes if they touch",
     "The clothes weigh less when they are apart",
     "More of each cloth is exposed to moving air",
-    "Touching clothes stop the water from existing"
+    "Touching clothes soak up water from each other"
    ],
    "answer": 2,
    "explain": [
@@ -3925,7 +3925,7 @@
     null,
     {
      "tag": "wrong-idea",
-     "why": "Water does not stop existing. It just leaves slower."
+     "why": "Water leaves the clothes into the air. Touching does not add water to them."
     }
    ],
    "solution": [
@@ -4226,7 +4226,7 @@
    ],
    "stem": "In salt farms, seawater is led into very wide, shallow ponds in sunny places. Which pair of reasons explains this best?",
    "options": [
-    "Wide ponds help the Sun freeze the salt out",
+    "A wide pond holds more water, so there is more salt to collect",
     "A deep pond heats up too fast and the water boils",
     "A big surface and the Sun's heat both speed up evaporation",
     "A shallow pond stops the wind and stores the salt"
@@ -4234,8 +4234,8 @@
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong-change",
-     "why": "Salt is left behind when the water evaporates."
+     "tag": "wrong-idea",
+     "why": "A wide, shallow pond is used so that the water leaves faster, not to hold more of it."
     },
     {
      "tag": "boil-confusion",
@@ -4541,7 +4541,7 @@
    ],
    "stem": "Ben pours 100 ml of water each into a tray and a tall cup and leaves them in the Sun for 5 hours. The cup has more water left. What does this show?",
    "options": [
-    "Trays make water boil in the Sun",
+    "A tall container keeps the heat of the Sun away from the water",
     "Tall containers make water heavier",
     "Water evaporates only from wide containers",
     "A smaller exposed surface gives slower evaporation"
@@ -4549,8 +4549,8 @@
    "answer": 3,
    "explain": [
     {
-     "tag": "boil-confusion",
-     "why": "The water is not boiling."
+     "tag": "wrong-idea",
+     "why": "Both containers are in the Sun. What differs is the size of the exposed surface."
     },
     {
      "tag": "wrong-idea",
@@ -4658,7 +4658,7 @@
    ],
    "stem": "A fan blows over a wet cloth. Why does the cloth dry faster?",
    "options": [
-    "The fan turns the water into ice first",
+    "The fan cools the cloth, so the water evaporates faster",
     "The fan pushes the water out of the cloth",
     "The air carries away the vapour as it forms",
     "The fan heats the water in the cloth"
@@ -4666,8 +4666,8 @@
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong-change",
-     "why": "Freezing is not part of drying."
+     "tag": "wrong-factor",
+     "why": "A cooler cloth would lose water more slowly, not faster."
     },
     {
      "tag": "wrong-idea",
@@ -5214,7 +5214,7 @@
    ],
    "stem": "A fan blows over a tightly closed bottle of water for a whole day. The water level hardly changes. Why?",
    "options": [
-    "The water has been frozen by the moving air",
+    "The moving air cools the water so much that it stops evaporating",
     "A fan can only dry solid things",
     "The vapour formed cannot leave the bottle",
     "Evaporation does not happen at room temperature"
@@ -5222,8 +5222,8 @@
    "answer": 2,
    "explain": [
     {
-     "tag": "wrong-change",
-     "why": "Moving air does not freeze water."
+     "tag": "wrong-idea",
+     "why": "The air cannot cool the water that much. The vapour is trapped by the closed bottle."
     },
     {
      "tag": "wrong-idea",
@@ -6789,7 +6789,7 @@
    "options": [
     "three states of the same substance",
     "three different kinds of substance",
-    "one solid, one liquid and one liquid",
+    "three kinds of water that never change into each other",
     "three kinds of liquid"
    ],
    "answer": 0,
@@ -7618,7 +7618,7 @@
    "stem": "On a hot day an ice lolly melts and drips. What happens to heat?",
    "options": [
     "The lolly loses heat to the air",
-    "No heat moves, since the lolly is being cold",
+    "No heat moves, since the lolly is cold",
     "The air gains heat from the lolly",
     "The lolly gains heat from the air"
    ],
@@ -7931,7 +7931,7 @@
    "options": [
     "The water in the droplets came from the air",
     "The water in the droplets came from inside the bottle",
-    "The droplets weigh nothing",
+    "The ice in the bottle became heavier as it got colder",
     "The ice in the bottle melted into the droplets"
    ],
    "answer": 0,
@@ -8364,7 +8364,7 @@
    "outcomes": [
     "sci-cycles-water-states-4"
    ],
-   "stem": "The experiment is repeated using half the amount of water in the same freezer. How does the flat part of the graph change?",
+   "stem": "Water is cooled in a freezer and its temperature is recorded as shown. The experiment is repeated using half the amount of water in the same freezer. How does the flat part of the graph change?",
    "options": [
     "It is still at 0 °C but is shorter",
     "It is still at 0 °C and is longer",

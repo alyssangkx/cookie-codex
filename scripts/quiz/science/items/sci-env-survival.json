@@ -265,8 +265,8 @@
       "stem": "A pond dries up in a very long dry spell. What will most likely happen to the fish that live in it?",
       "options": [
         "They die because they cannot live out of water",
-        "They fly away to another pond nearby",
-        "They grow legs and walk to another pond",
+        "They breathe air with their gills and live on the dry bed",
+        "They store water in their bodies and live on the dry bed",
         "They live on the dry land around the pond"
       ],
       "answer": 0,
@@ -274,11 +274,11 @@
         null,
         {
           "tag": "wrong-idea",
-          "why": "Fish do not have wings and cannot leave the water."
+          "why": "Gills only take in oxygen from water. Fish cannot breathe air with them."
         },
         {
           "tag": "wrong-idea",
-          "why": "Fish cannot change their bodies in a short time."
+          "why": "A fish cannot store enough water to live out of a pond."
         },
         {
           "tag": "wrong-idea",
@@ -880,7 +880,7 @@
       "pattern": "sci-pat-food-chain-web",
       "stem": "Look at the food web. Which organism has the most predators in the web?",
       "options": [
-        "Grass",
+        "Grasshopper",
         "Rabbit",
         "Frog",
         "Snake"
@@ -889,7 +889,7 @@
       "explain": [
         {
           "tag": "wrong-reading",
-          "why": "Grass is eaten only by plant-eaters. Predators eat animals."
+          "why": "Only the frog eats the grasshopper."
         },
         null,
         {
@@ -1403,21 +1403,21 @@
       "pattern": "sci-pat-food-chain-web",
       "stem": "A factory pours waste into a river and many fish disappear. Which statement is most likely to be correct?",
       "options": [
-        "All the fish changed into a different kind of animal",
+        "All the fish quickly grew thicker skin and none were affected",
         "Some fish died and some moved to a cleaner part of the river",
-        "The fish became plants so they could survive",
+        "The fish ate the waste and grew bigger",
         "The fish stayed and none of them were affected"
       ],
       "answer": 1,
       "explain": [
         {
           "tag": "wrong-idea",
-          "why": "Animals do not change into a different kind of animal."
+          "why": "Fish cannot change their bodies that quickly. The fish are missing, so they were affected."
         },
         null,
         {
           "tag": "wrong-idea",
-          "why": "Fish cannot become plants."
+          "why": "Waste in the water harms fish. It does not feed them."
         },
         {
           "tag": "wrong-idea",
@@ -1599,7 +1599,7 @@
       "options": [
         "Mouse",
         "Rabbit",
-        "Grass",
+        "Grasshopper",
         "Frog"
       ],
       "answer": 0,
@@ -1611,7 +1611,7 @@
         },
         {
           "tag": "wrong-reading",
-          "why": "Grass is eaten by plant-eaters. Predators eat animals."
+          "why": "Only the frog eats the grasshopper."
         },
         {
           "tag": "wrong-reading",

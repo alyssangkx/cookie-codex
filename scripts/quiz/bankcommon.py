@@ -142,12 +142,42 @@ def unstated_switch(stem, fig, key=None):
     return not SWITCH_STATE.search(stem)
 
 
+def refers_to_earlier_item(stem):
+    """True when a stem leans on another item's figure or set-up: 'the same leaf/table/graph', 'Siti now wants'."""
+    return bool(re.search(r"\b(the same (leaf|table|graph|diagram|figure|circuit|set-ups?)\b|now (wants|uses|puts))", stem, re.I))
+
+
+def dangling_figure_ref(stem, fig):
+    """WARN rule dangling-figure-ref: the stem points at a picture/table/graph/experiment ('as shown', 'the graph', 'in the
+    experiment with ...', 'using the table') but the item has no figure, so it leans on another item's set-up."""
+    if fig: return False
+    return bool(re.search(r"\b(as shown|shown (above|below)|(using|from|look at) the (graph|table|diagram|chart|picture|figure|photo)\b|"
+                          r"the (graph|table|diagram|chart|picture|figure) (shows|above|below)|in the experiment (with|above))", stem, re.I))
+
+
 def unqualified_stays_lit(options, answer):
     """WARN rule stays-lit-unqualified: the key is a bare 'It stays lit' (also 'will stay lit', 'remains lit', 'Bulb X
     stays lit') while another option says brighter/dimmer (PSLE answer: it stays lit at the same brightness)."""
     if not isinstance(answer, int) or not 0 <= answer < len(options): return False
     return bool(re.fullmatch(r"\s*(?:(?:it|they|the bulbs?|both bulbs|bulbs? \w+(?: and \w+)?)\s+)?(?:(?:will|would)\s+)?(?:stays?|remains?)\s+(?:lit|on)\.?\s*", str(options[answer]), re.I)) and \
         any(re.search(r"brighter|dimmer", str(o), re.I) for i, o in enumerate(options) if i != answer)
+
+
+def ring_figure_unrelated(stem, options, figure):
+    """WARN rule figure-unrelated-ring: a '<animal>-ring.webp' life-cycle picture whose animal (or 'plant') is named in
+    neither the stem nor any option, so it decorates another organism's cycle and hints at the answer (lc-003, 016, 020)."""
+    if not isinstance(figure, dict): return False
+    m = re.search(r"/([a-z]+)-ring\.webp$", str(figure.get("img", "")))
+    return bool(m) and m.group(1) not in (str(stem) + " " + " ".join(map(str, options))).lower()
+
+
+JOKE_DISTRACTOR = re.compile(r"\b(fly away|flies away|grow(?:s)? legs|grew legs|changed? into (?:a |an )?(?:different|another) (?:kind of )?(?:animal|plant)|became plants|turn(?:s|ed)? into (?:a )?plants?|grow(?:s)? wings)\b", re.I)
+
+
+def joke_distractors(options):
+    """WARN rule joke-distractor: a wrong option is a silly impossibility ('fish fly away', 'grow legs', 'changed into a
+    different animal') instead of a plausible misconception. Returns the offending options."""
+    return [o for o in options if JOKE_DISTRACTOR.search(str(o))]
 
 
 class Warnings:
@@ -200,6 +230,8 @@ def warning_self_tests(science=False):
     t(question_part("Passage text.\n\nWhy did she go?") == "Why did she go?", "question part after a passage")
     t(bool(near_duplicates(["The plant grows taller in light.", "The plant grows taller in the light", "It wilts.", "It dies."])), "near-duplicate options flagged")
     t(not near_duplicates(["has been", "will be", "was", "is being"]), "distinct options not flagged")
+    t(refers_to_earlier_item("Siti now wants to find out if the ramp matters. Using the same table, which two?"), "stem leaning on an earlier item is flagged")
+    t(not refers_to_earlier_item("Which part of the leaf shown turns blue-black?"), "self-contained stem is quiet")
     t(not near_duplicates(["Part P makes food for it", "Part Q makes food for it", "x", "y"]), "label-only contrast not flagged")
     t(correct_is_longest(["a much longer option", "short", "tiny", "mid size"], 0), "strictly longest")
     t(not correct_is_longest(["same", "same", "x", "y"], 0), "a tie is not strictly longest")
@@ -213,10 +245,19 @@ def warning_self_tests(science=False):
     t(not unstated_switch("Switch S is turned off. Will the bulb light up?", sw), "unstated switch: 'turned off' is a state")
     t(unstated_switch("Bulb A is on. Will bulb B light up?", sw), "unstated switch: a bulb's state is not the switch's")
     t(not unstated_switch("Ali closes switch S. Will the bulb light up?", sw), "unstated switch: 'closes switch S' is a state")
+    t(joke_distractors(["They fly away to another pond", "They die"]) == ["They fly away to another pond"], "joke distractor flagged")
+    t(not joke_distractors(["They move to a cleaner part of the river", "Some fish died"]), "plausible options are quiet")
     t(unqualified_stays_lit(["Both bulbs stay lit", "Both bulbs become brighter", "x", "y"], 0), "stays-lit: plural keys are flagged")
+    t(dangling_figure_ref("Using the table shown, which rod is best?", None), "dangling ref: no figure fails")
+    t(not dangling_figure_ref("Using the table shown, which rod is best?", "<svg/>"), "dangling ref: figure present passes")
+    t(dangling_figure_ref("In the experiment with three cups, which is not kept the same?", ""), "dangling ref: experiment named without a set-up")
+    t(not dangling_figure_ref("Which rod conducts heat best?", None), "dangling ref: plain stem passes")
     t(not unstated_switch("The bulb does not light up. Why?", sw, "ci-005"), "unstated switch: allowlisted state-is-the-question item passes")
     for v in ("It stays lit", "It will stay lit", "It remains lit", "Bulb X stays lit", "The bulb remains on."):
         t(unqualified_stays_lit(["It goes out", v, "It becomes dimmer", "It becomes brighter"], 1), f"stays-lit variant flagged: {v}")
+    rf = {"img": "/science/grasshopper-ring.webp", "alt": "", "labels": []}
+    t(ring_figure_unrelated("Which animal has three stages?", ["Frog", "Butterfly", "Cockroach", "Mosquito"], rf), "ring figure of an unnamed animal flagged")
+    t(not ring_figure_unrelated("Which letter shows the nymph of the grasshopper?", ["A", "B", "C", "D"], rf), "ring figure of the named animal passes")
     t(unqualified_stays_lit(["It goes out", "It stays lit", "It becomes dimmer", "It becomes brighter"], 1), "bare stays-lit key flagged")
     t(not unqualified_stays_lit(["It goes out", "It stays lit at the same brightness", "It becomes dimmer", "It becomes brighter"], 1), "qualified stays-lit key quiet")
     if science:  # the real figs_circuit._switch output (new marker) and the old stored string both reach the detector

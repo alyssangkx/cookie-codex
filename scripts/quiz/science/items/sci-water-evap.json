@@ -70,7 +70,7 @@
       "level": "basic",
       "outcome": "sci-cycles-water-evaporation-1",
       "pattern": "sci-pat-evaporation-rate",
-      "stem": "Two identical wet towels are hung in the same sunny spot as shown. Which towel will dry first?",
+      "stem": "Two identical wet towels are hung in the same sunny spot, one spread out and one folded, as shown. Which towel will dry first?",
       "options": [
         "Q, because it is thicker and holds more heat",
         "Q, because its water is packed close together",
@@ -366,7 +366,7 @@
       "options": [
         "The salt sinks to the bottom faster in a deep pan",
         "A large surface lets the water evaporate quickly",
-        "A shallow pan makes the water freeze",
+        "The water in a wide pan boils faster",
         "A wide pan makes the seawater less salty"
       ],
       "answer": 1,
@@ -377,8 +377,8 @@
         },
         null,
         {
-          "tag": "wrong-change",
-          "why": "Pans are left in the Sun so that water evaporates, not freezes."
+          "tag": "boil-confusion",
+          "why": "Seawater in the pans is not boiled. It evaporates in the Sun."
         },
         {
           "tag": "wrong-idea",
@@ -593,7 +593,7 @@
         "Covering the floor with a plastic sheet",
         "Closing all the windows and doors",
         "Switching on a fan to blow air over the floor",
-        "Switching on a freezer next to the floor"
+        "Closing the curtains to keep the room cool"
       ],
       "answer": 2,
       "explain": [
@@ -608,7 +608,7 @@
         null,
         {
           "tag": "wrong-factor",
-          "why": "A colder place slows evaporation."
+          "why": "A cooler place slows evaporation."
         }
       ],
       "solution": [
@@ -786,7 +786,7 @@
         "More of each cloth is exposed to moving air",
         "The clothes weigh less when they are apart",
         "The Sun can freeze the clothes if they touch",
-        "Touching clothes stop the water from existing"
+        "Touching clothes soak up water from each other"
       ],
       "answer": 0,
       "explain": [
@@ -801,7 +801,7 @@
         },
         {
           "tag": "wrong-idea",
-          "why": "Water does not stop existing. It just leaves slower."
+          "why": "Water leaves the clothes into the air. Touching does not add water to them."
         }
       ],
       "solution": [
@@ -1049,7 +1049,7 @@
         "A deep pond heats up too fast and the water boils",
         "A big surface and the Sun's heat both speed up evaporation",
         "A shallow pond stops the wind and stores the salt",
-        "Wide ponds help the Sun freeze the salt out"
+        "A wide pond holds more water, so there is more salt to collect"
       ],
       "answer": 1,
       "explain": [
@@ -1063,8 +1063,8 @@
           "why": "Wind helps evaporation and the pond does not stop it."
         },
         {
-          "tag": "wrong-change",
-          "why": "Salt is left behind when the water evaporates."
+          "tag": "wrong-idea",
+          "why": "A wide, shallow pond is used so that the water leaves faster, not to hold more of it."
         }
       ],
       "solution": [
@@ -1308,7 +1308,7 @@
         "A smaller exposed surface gives slower evaporation",
         "Tall containers make water heavier",
         "Water evaporates only from wide containers",
-        "Trays make water boil in the Sun"
+        "A tall container keeps the heat of the Sun away from the water"
       ],
       "answer": 0,
       "explain": [
@@ -1322,8 +1322,8 @@
           "why": "It evaporates from every open container."
         },
         {
-          "tag": "boil-confusion",
-          "why": "The water is not boiling."
+          "tag": "wrong-idea",
+          "why": "Both containers are in the Sun. What differs is the size of the exposed surface."
         }
       ],
       "solution": [
@@ -1404,7 +1404,7 @@
         "The fan heats the water in the cloth",
         "The air carries away the vapour as it forms",
         "The fan pushes the water out of the cloth",
-        "The fan turns the water into ice first"
+        "The fan cools the cloth, so the water evaporates faster"
       ],
       "answer": 1,
       "explain": [
@@ -1418,8 +1418,8 @@
           "why": "The water leaves as vapour, not pushed as liquid."
         },
         {
-          "tag": "wrong-change",
-          "why": "Freezing is not part of drying."
+          "tag": "wrong-factor",
+          "why": "A cooler cloth would lose water more slowly, not faster."
         }
       ],
       "solution": [
@@ -1861,7 +1861,7 @@
       "options": [
         "The vapour formed cannot leave the bottle",
         "A fan can only dry solid things",
-        "The water has been frozen by the moving air",
+        "The moving air cools the water so much that it stops evaporating",
         "Evaporation does not happen at room temperature"
       ],
       "answer": 0,
@@ -1872,8 +1872,8 @@
           "why": "A fan helps liquids evaporate when the vapour can leave."
         },
         {
-          "tag": "wrong-change",
-          "why": "Moving air does not freeze water."
+          "tag": "wrong-idea",
+          "why": "The air cannot cool the water that much. The vapour is trapped by the closed bottle."
         },
         {
           "tag": "wrong-idea",

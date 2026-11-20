@@ -18,8 +18,10 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
-from bankcommon import (unstated_switch, unqualified_stays_lit, Warnings, gives_away, near_duplicates, correct_is_longest, figure_text, figure_mismatch,  # noqa: E402
-                        longest_share_warnings, warning_self_tests, NEAR_DUP, svg_text_overflows)
+from bankcommon import (refers_to_earlier_item, unstated_switch, unqualified_stays_lit, Warnings, gives_away, near_duplicates, correct_is_longest, figure_text, figure_mismatch,  # noqa: E402
+                        longest_share_warnings, warning_self_tests, NEAR_DUP, svg_text_overflows, ring_figure_unrelated)
+from bankcommon import joke_distractors  # noqa: E402
+from bankcommon import dangling_figure_ref  # noqa: E402
 STRICT = "--strict" in sys.argv[1:]
 ROOT = HERE.parents[1]
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "science.json").read_text())
@@ -119,8 +121,12 @@ warn = Warnings({
     "near-dup-options": f"two options at least {NEAR_DUP:.0%} alike after normalising (labels and short options skipped)",
     "longest-correct": "sub-topics where the correct option is strictly the longest in over 35% of items",
     "refers-to-other-item": "stem starts 'In/Using the same ...' (every item must stand alone, with its own figure or data)",
+    "refers-to-earlier-item": "stem leans on another item ('the same leaf/table/graph', 'now wants'): restate the set-up",
     "stays-lit-unqualified": "key is a bare 'It stays lit' next to a brighter/dimmer option (say 'at the same brightness')",
     "figure-mismatch": "figure text names none of the stem's content words",
+    "figure-unrelated-ring": "life-cycle '<animal>-ring' picture whose animal the stem and options never name (decorates another organism, hints the answer)",
+    "dangling-figure-ref": "stem points at a picture/table/graph/experiment ('as shown', 'the graph', 'in the experiment with') but the item has no figure",
+    "joke-distractor": "an option is a silly impossibility (fly away, grow legs, changed into a different animal); use a plausible misconception",
 })
 longest = {}
 
@@ -164,10 +170,14 @@ for f, data in _all:
             if "figure" in it and gives_away(figure_text(it["figure"]), opts, a): w("figure-leak", f"answer {opts[a]!r}")
             if gives_away(stem, opts, a): w("stem-echo", f"answer {opts[a]!r}")
             if re.match(r"\s*(in|using|from|for) the same\b", stem, re.I): w("refers-to-other-item", f"stem {stem[:50]!r}")
+            if refers_to_earlier_item(stem): w("refers-to-earlier-item", f"stem {stem[:60]!r}")
             if unqualified_stays_lit(opts, a): w("stays-lit-unqualified", f"answer {opts[a]!r}")
+            if dangling_figure_ref(stem, it.get("figure")): w("dangling-figure-ref", f"stem {stem[:60]!r}")
+            for o in joke_distractors(opts): w("joke-distractor", f"option {o!r}")
             for x, y in near_duplicates(opts): w("near-dup-options", f"{x!r} ~ {y!r}")
             if "figure" in it and figure_mismatch(stem, it["figure"]):
                 w("figure-mismatch", f"figure text {figure_text(it['figure'])[:60]!r}")
+            if "figure" in it and ring_figure_unrelated(stem, opts, it["figure"]): w("figure-unrelated-ring", f"figure {it['figure']['img']}")
             longest.setdefault(sub, []).append(correct_is_longest(opts, a))
 for m in longest_share_warnings(longest): warn.add("longest-correct", m)
 

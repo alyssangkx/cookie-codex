@@ -1450,7 +1450,7 @@
         "The stem of the plant also lost a little water vapour",
         "The oil let water evaporate from the surface",
         "The leaves had grown back by the end",
-        "The roots made the water into oil"
+        "The cylinder leaked a little water"
       ],
       "answer": 0,
       "explain": [
@@ -1465,7 +1465,7 @@
         },
         {
           "tag": "wrong-explanation",
-          "why": "Roots take in water; they do not turn water into oil."
+          "why": "The cylinder did not leak. Set-up C, with no plant, lost no water at all, so a leak cannot explain the 2 ml."
         }
       ],
       "solution": [
@@ -1516,7 +1516,7 @@
       "stem": "The table shows the results of a leaf experiment. What does it show?",
       "options": [
         "Leaves need darkness to make food",
-        "Leaves need foil to make food",
+        "Leaves turn brown when they make food",
         "Leaves make food only in the soil",
         "Leaves need light to be able to make food"
       ],
@@ -1528,7 +1528,7 @@
         },
         {
           "tag": "wrong-conclusion",
-          "why": "Foil only kept the light out. The covered leaf made no food."
+          "why": "The leaf that was making food (Y) turned blue-black with iodine, not brown. Brown means no starch was found."
         },
         {
           "tag": "wrong-conclusion",
@@ -1686,7 +1686,7 @@
         "They wilt because water cannot reach them",
         "They stay the same because the roots still supply water",
         "They grow bigger because they get more sunlight",
-        "They turn into fruits"
+        "They stay fresh because the leaves take in water from the air"
       ],
       "answer": 0,
       "explain": [
@@ -1701,7 +1701,7 @@
         },
         {
           "tag": "wrong-prediction",
-          "why": "Leaves do not turn into fruits. Fruits grow from flowers."
+          "why": "Leaves do not take in water from the air to replace what the stem can no longer bring up. They wilt."
         }
       ],
       "solution": [
@@ -1870,7 +1870,7 @@
         "The leaf takes in more water from the wet soil",
         "The leaf takes in more sunlight and so makes more food",
         "The leaf takes in less carbon dioxide and makes less food",
-        "The leaf turns into a flower"
+        "The leaf loses more water vapour and wilts"
       ],
       "answer": 2,
       "explain": [
@@ -1885,7 +1885,7 @@
         null,
         {
           "tag": "wrong-prediction",
-          "why": "A leaf never turns into a flower. Blocked stomata cut the supply of carbon dioxide."
+          "why": "Blocked stomata let less water vapour out, not more. The leaf is not made to wilt by the jelly itself."
         }
       ],
       "solution": [
@@ -1902,7 +1902,7 @@
       "options": [
         "The flower takes in water through its petals",
         "The stem carries water up to the flower",
-        "The roots make red water for the flower",
+        "The petals took in the red water from the air",
         "The leaves make red food for the flower"
       ],
       "answer": 1,
@@ -1914,7 +1914,7 @@
         null,
         {
           "tag": "wrong-conclusion",
-          "why": "Roots take in water; they do not make colour."
+          "why": "The red water was in the glass. It was carried up the stem, not taken in from the air by the petals."
         },
         {
           "tag": "wrong-conclusion",
@@ -2278,7 +2278,7 @@
         "Food",
         "Roots",
         "Seeds",
-        "Water"
+        "Mineral salts"
       ],
       "answer": 2,
       "explain": [
@@ -2293,7 +2293,7 @@
         null,
         {
           "tag": "wrong-part",
-          "why": "A plant does not make water. It takes water in through its roots."
+          "why": "A plant takes in mineral salts through its roots. Picking off the flower does not stop that."
         }
       ],
       "solution": [
@@ -2592,7 +2592,7 @@
       "pattern": "sci-pat-plant-parts-function",
       "stem": "A sheet of plastic covers the soil of a potted plant. Water is poured only onto the plastic. After a few days the leaves droop. What is the reason?",
       "options": [
-        "The leaves cannot make food without plastic",
+        "The leaves cannot get enough sunlight",
         "The stem has too much water",
         "Water cannot reach the roots in the soil",
         "The flowers are using all the water"
@@ -2601,7 +2601,7 @@
       "explain": [
         {
           "tag": "wrong-reason",
-          "why": "Plastic has nothing to do with making food. The soil is blocked so the roots cannot get water."
+          "why": "The plastic is on the soil, so it does not shade the leaves. Sunlight reaches them as before."
         },
         {
           "tag": "wrong-reason",
@@ -2853,12 +2853,7 @@
       "solution": [
         "The first part to grow down is the root.",
         "It takes in water and holds the young plant firmly in the soil."
-      ],
-      "figure": {
-        "img": "/science/pp-bean-seedling.webp",
-        "alt": "A young bean seedling in line art.",
-        "labels": []
-      }
+      ]
     },
     {
       "key": "pp-201",
@@ -2929,7 +2924,7 @@
       "level": "intermediate",
       "outcome": "sci-systems-plant-parts-fn-1",
       "pattern": "sci-pat-plant-parts-function",
-      "stem": "A farmer picks off all the flowers of a tomato plant before they can form fruits. Which job of the plant part is stopped?",
+      "stem": "A farmer picks off all the flowers of a tomato plant before they can form fruits. Which job of the plant is stopped?",
       "options": [
         "Taking in water from the soil",
         "Holding the plant up",
