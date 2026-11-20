@@ -343,7 +343,9 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
 /** Record one answer. `picked` is the option text chosen on a wrong answer; omitted = not answered because time ran
  *  out (stored as ''); LEFT_BLANK = a paper question left blank on purpose. Returns true when a due retest step was
  *  passed (1 Crumb each at the finish). */
-export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string): boolean {
+/** `short` (ADR 0011, a past-paper question of a one-pool sub-topic): a wrong answer comes back after 1 day, and a correct
+ *  answer at that due retest retires it (counts toward the milestones); no 3- and 7-day steps. */
+export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string, short = false): boolean {
   const q = s.questions[id];
   if (ok && !q && !retireNew) return false; // practice papers never drain tier pools
   if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
@@ -354,7 +356,7 @@ export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), ret
   } else if (!q) {
     s.questions[id] = { s: 0, due: 0, w: 0 };
   } else if (q.s > 0 && q.due <= now) {
-    if (q.s === 3) s.questions[id] = { s: 0, due: 0, w: q.w, ...keep };
+    if (q.s === 3 || short) s.questions[id] = { s: 0, due: 0, w: q.w, ...keep };
     else {
       const next = (q.s + 1) as 2 | 3;
       s.questions[id] = { s: next, due: now + STEP_DAYS[next] * DAY, w: q.w, ...keep };
@@ -435,12 +437,13 @@ export function tierOpen(s: SaveV1, sub: string, t: Tier, playable?: Record<Tier
   return true;
 }
 
-export const attemptsLeft = (s: SaveV1, sub: string, t: Tier) =>
+export const attemptsLeft = (s: SaveV1, sub: string, t?: Tier) =>
   isUnlimited() ? Infinity : Math.max(0, triesPerDay(sub) - attemptsToday(s, sub, t));
 /** True when no more tries are allowed at this tier today (never for Admin). */
-export const triesUsedUp = (s: SaveV1, sub: string, t: Tier) => !isUnlimited() && attemptsToday(s, sub, t) >= triesPerDay(sub);
-export const attemptsToday = (s: SaveV1, sub: string, t: Tier) =>
-  s.attempts.filter((a) => a.mode === 'tier' && a.sub === sub && a.tier === t && dayKey(a.ts) === dayKey()).length;
+export const triesUsedUp = (s: SaveV1, sub: string, t?: Tier) => !isUnlimited() && attemptsToday(s, sub, t) >= triesPerDay(sub);
+/** Tries today at this tier; with no tier (a one-pool sub-topic, ADR 0011) every try at the sub-topic today. */
+export const attemptsToday = (s: SaveV1, sub: string, t?: Tier) =>
+  s.attempts.filter((a) => a.mode === 'tier' && a.sub === sub && (t === undefined || a.tier === t) && dayKey(a.ts) === dayKey()).length;
 
 /** Record a tier quiz or practice paper as started, so walking away still uses one of the daily tries
  *  (tier) and counts toward the daily quiz cap (tier and paper). */
@@ -531,6 +534,10 @@ export function finishQuiz(
   d.total += a.total;
 
   let passed = false, cleared = false, reward: QuizResult['reward'] = null;
+  if (a.mode === 'tier' && a.sub && !a.tier && a.total) { // a one-pool quiz: practice keeps the sub-topic's cards strong
+    const pct = a.score / a.total;
+    for (const card of Object.values(s.cards)) if (card.srcSub === a.sub) { card.acc = Math.round(0.7 * card.acc + 0.3 * pct * 100); card.last = now; }
+  }
   if (a.mode === 'tier' && a.sub && a.tier) {
     const st = tierState(s, a.sub, a.tier);
     const pct = a.total ? a.score / a.total : 0;
@@ -555,8 +562,9 @@ export function finishQuiz(
   earn(s, quizCrumbs(a.score, a.total, a.mode), a.mode === 'tier' ? 'quiz' : a.mode, now,
     { test, note: a.mode === 'tier' ? `${a.sub}|${a.tier}` : a.mode === 'paper' ? (a.topics ?? []).join(',').slice(0, 120) : undefined });
   earn(s, (opts.retests ?? 0) * RETEST_CRUMBS, 'retest', now, { test });
-  const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test)];
-  const own = newlyCleared.find((x) => x.sub === a.sub && x.tier === a.tier);
+  const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test),
+    ...syncMilestones(s, opts.pools ?? {}, rewardFor, now, opts.eco, test)];
+  const own = [...newlyCleared].reverse().find((x) => x.sub === a.sub && (a.tier ? x.tier === a.tier : !!opts.pools?.[x.sub]));
   if (own) { cleared = true; reward = own.reward; }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
@@ -649,12 +657,41 @@ export function syncTiers(
   return out;
 }
 
+/** Milestones of a one-pool sub-topic with n past-paper questions (ADR 0011, owner 21 Nov 2026): a sixth, a third, and a
+ *  majority (over half) = competency, the "Exam-ready" badge. Milestone k uses the sub-topic's k-th card slot (b, i, c). */
+export const milestoneAt = (n: number): [number, number, number] => [Math.ceil(n / 6), Math.ceil(n / 3), Math.floor(n / 2) + 1];
+export const MILESTONE_NAME: Record<Tier, string> = { b: 'Milestone 1', i: 'Milestone 2', c: 'Exam-ready' };
+
+/**
+ * One-pool sub-topics ("sub" -> its past-paper question ids, never generated ones): count the retired (counted) ones,
+ * store the count on each milestone slot, and reach every milestone whose threshold the count meets, awarding its card.
+ * A milestone once reached is never taken away (the pool can grow later). Returns the milestones reached by this call.
+ */
+export function syncMilestones(
+  s: SaveV1, pools: Record<string, string[]>, rewardFor: RewardFor, now = Date.now(), eco?: Economy, test = false,
+): QuizResult['newlyCleared'] {
+  const out: QuizResult['newlyCleared'] = [];
+  for (const [sub, ids] of Object.entries(pools)) {
+    if (ids.length < MIN_POOL) continue; // a sub-topic switches to one pool only at 20 past-paper questions
+    const at = milestoneAt(ids.length);
+    const mastered = ids.filter((id) => isRetired(s, id)).length;
+    const hash = tierHash(ids);
+    TIERS.forEach((t, k) => {
+      const st = tierState(s, sub, t);
+      st.total = ids.length; st.mastered = mastered; st.hash = hash;
+      (s.progress[sub] ??= {})[t] = st;
+      if (!st.cleared && mastered >= at[k]) out.push({ sub, tier: t, reward: award(s, sub, t, rewardFor, now, eco, test) });
+    });
+  }
+  return out;
+}
+
 type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | undefined;
 /** eco: build-time card data (crumbs.ts Economy); without it a tier clear gives only its slot card or a star, as before
  * the economy. retests: retest steps passed in this quiz (answer() returned true). test: the unlimited test account
  * (defaults to isUnlimited()); its Crumbs are flagged. paperTopics: a paper's question topics, one per question asked
  * (the Legendary counts distinct ones; the topics the child picked may not all have been drawn). */
-export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean; paperTopics?: string[] };
+export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean; paperTopics?: string[]; pools?: Record<string, string[]> };
 export const RETEST_CRUMBS = 1, GOAL_CRUMBS = 3, WEEK_CRUMBS = 10;
 
 /**

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -587,4 +587,59 @@ test('a state parked by an older build (or older tab) cannot hide Daily Review: 
   assert.equal(reviewDueCount(s, now, 'banksV2'), 2); // the true orphan stays out of the count
   assert.equal(syncParked(s, ['live', 'fresh'], true, 'banksV2'), false); // nothing changes on a second pass
   assert.equal(reviewDueCount(s, now, 'banksV3'), 3); // a newer bank set re-checks it once more
+});
+
+// ---------------------------------------------------------------- one pool per sub-topic, milestones (ADR 0011)
+
+test('one-pool past-paper question: wrong comes back after 1 day and counts once right then (no 3- and 7-day steps)', () => {
+  const s = fresh();
+  answer(s, 'pp-0000000001', false, t0, true, 'x', true);
+  assert.deepEqual([s.questions['pp-0000000001'].s, s.questions['pp-0000000001'].due], [1, t0 + DAY]);
+  answer(s, 'pp-0000000001', true, t0 + 3600_000, true, undefined, true); // right again the same day: not counted yet
+  assert.equal(s.questions['pp-0000000001'].s, 1);
+  answer(s, 'pp-0000000001', true, t0 + DAY, true, undefined, true); // right on a later day: retired = counted
+  assert.equal(s.questions['pp-0000000001'].s, 0);
+  answer(s, 'pp-0000000002', true, t0, true, undefined, true); // right the first time counts at once
+  assert.equal(s.questions['pp-0000000002'].s, 0);
+});
+
+test('milestones sit at a sixth, a third and a majority of the past-paper questions', () => {
+  assert.deepEqual(milestoneAt(20), [4, 7, 11]);
+  assert.deepEqual(milestoneAt(60), [10, 20, 31]);
+  assert.deepEqual(milestoneAt(299), [50, 100, 150]);
+});
+
+test('syncMilestones reaches milestones in order, awards each slot card once, never takes one away, needs 20 questions', () => {
+  const s = fresh();
+  const ids = Array.from({ length: 24 }, (_, i) => `pp-${String(i).padStart(10, '0')}`);
+  const slots: Record<string, string> = { b: 'card-b', i: 'card-i', c: 'card-c' };
+  const rf = (_sub: string, t: 'b' | 'i' | 'c') => ({ slug: slots[t], dup: false });
+  ids.slice(0, 3).forEach((id) => answer(s, id, true, t0));
+  assert.equal(syncMilestones(s, { sci: ids }, rf, t0).length, 0); // 3 < 4
+  ids.slice(3, 8).forEach((id) => answer(s, id, true, t0));         // 8 counted: milestones 1 (4) and 2 (8)
+  assert.deepEqual(syncMilestones(s, { sci: ids }, rf, t0).map((x) => x.tier), ['b', 'i']);
+  assert.ok(s.cards['card-b'] && s.cards['card-i'] && !s.cards['card-c']);
+  assert.equal(syncMilestones(s, { sci: ids }, rf, t0).length, 0); // never twice
+  ids.slice(8, 13).forEach((id) => answer(s, id, true, t0));        // 13 = majority of 24
+  assert.deepEqual(syncMilestones(s, { sci: ids }, rf, t0).map((x) => x.tier), ['c']);
+  const more = [...ids, ...Array.from({ length: 40 }, (_, i) => `pp-9${String(i).padStart(9, '0')}`)]; // the pool grows
+  syncMilestones(s, { sci: more }, rf, t0);
+  assert.equal(s.progress.sci.c?.cleared, true); // a reached milestone stays
+  assert.equal(syncMilestones(fresh(), { small: ids.slice(0, 19) }, rf, t0).length, 0); // under 20: no milestones
+});
+
+test('a one-pool quiz (no tier): finishQuiz reaches milestones through opts.pools; tries count per sub-topic', () => {
+  const s = fresh();
+  const ids = Array.from({ length: 20 }, (_, i) => `pp-${String(i).padStart(10, '0')}`);
+  const rf = () => ({ slug: 'muscle-cookie', dup: false });
+  openAttempt(s, { sub: 'sci', total: 10 }, t0);
+  ids.slice(0, 4).forEach((id) => answer(s, id, true, t0, true, undefined, true));
+  const r = finishQuiz(s, { mode: 'tier', sub: 'sci', total: 10, score: 4, ms: 60_000, tags: [] }, rf, t0, {}, undefined, { pools: { sci: ids } });
+  assert.equal(r.cleared, true);
+  assert.deepEqual(r.newlyCleared.map((x) => x.tier), ['b']);
+  assert.equal(r.autoPromoted, false); // no perfect-first-try clear without tiers
+  s.attempts.push({ ts: Date.now(), mode: 'tier', sub: 'sci', tier: 'b', score: 0, total: 10, ms: 0, tags: [] });
+  s.attempts.push({ ts: Date.now(), mode: 'tier', sub: 'sci', score: 0, total: 10, ms: 0, tags: [] });
+  assert.equal(attemptsToday(s, 'sci'), 2); // any try at the sub-topic today, tier or none
+  assert.equal(attemptsToday(s, 'sci', 'b'), 1);
 });
