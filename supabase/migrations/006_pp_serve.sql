@@ -1,5 +1,5 @@
 -- Cookie Codex, migration 006: past-paper questions served per quiz, with daily limits, a log and flags (ADR 0012,
--- owner 21 Nov 2026: anti-scraping).  NOT YET APPLIED.
+-- owner 21 Nov 2026: anti-scraping).  APPLIED to the live project 21 Nov 2026 (pp-serve deployed the same day).
 -- Apply with:  supabase db query --remote --yes -f supabase/migrations/006_pp_serve.sql   (never `db push`).
 -- Test: scripts/accounts/sqltest.sh runs 001-006 locally.
 -- Additive only: the old bulk read (pp_items_for) and the readers' select policy on pp-figures stay until the new site

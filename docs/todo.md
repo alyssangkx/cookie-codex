@@ -60,7 +60,8 @@ support only. Supersedes the 'balanced thirds' tier split (owner OK'd it, then c
 - [x] (built 21 Nov, not applied) Migration 006: pool call (ids + order only), content call (<= 15 ids, text + figure paths), served log per account/day, limits (250 distinct/day, 40 calls/hour; half in the first 7 days; family-wide; admin/Test Player higher), flag table; drop the bulk `pp_items_for` and the readers' select policy on `pp-figures`. SQL tests in `sqltest.sh`.
 - [x] (built 21 Nov, not deployed) Edge function `pp-serve`: checks the session and the limits through the content call, signs 10-minute figure URLs with the service role; emails the admin when an account is flagged (owner sets the Gmail sender secret in their own terminal).
 - [x] (built 21 Nov) Site: `ppfetch.ts` and the quiz page use pool + content calls; admin page "Heavy use" report. Migration 007 (drop the bulk read and the readers' bucket policy) written, to apply after the new site is live.
-- [ ] Owner OK to apply 006 and deploy the function; then the Science upload.
+- [x] 006 applied and pp-serve deployed (owner OK, 21 Nov 2026); checked: pool/serve callable by signed-in users only, flag_take service-role only, log under RLS, `ord` column present, the function refuses a call without a token (401) and allows the site's origin. The old bulk read stays until 007.
+- [ ] Science upload (owner OK), then push and the live check, then 007.
 
 ### Past-paper precedent for generated questions (owner, 21 Nov 2026)
 Rule: a generated question stays only if a past paper has a question testing the same concept (any format). Owner choices:
