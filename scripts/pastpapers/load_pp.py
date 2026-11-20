@@ -3,12 +3,17 @@
   load_pp.py select  [--subject science] [--years 2018-2026] [--pp DIR] [--blind DIR] [--out DIR]
       Picks the importable MCQs and writes OUT/<subject>/selected.jsonl (private rows), rejects.jsonl (id + reason)
       and report.json (counts only). Rules: exactly 4 options; an answer key; not in the quarantine; not
-      answer_flag grid-uncertain; the blind-answer check agrees with the key; text and options not garbled; options
+      answer_flag grid-uncertain; the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
+      full resolution AND the 72B on the transcribed figure text) both reach it; text and options not garbled; options
       not only in the picture; a sub-topic that exists in the site's syllabus; and a usable crop whenever the stem
       points at a figure, table or graph (or labels such as A/B/P/Q) or the reader saw a figure.
   load_pp.py figures [--subject science] [--out DIR] [--max-width 900] [--target-kb 60]
       Compresses each selected item's crops to WebP (grayscale when the crop has no colour) into
       OUT/<subject>/figures/ and writes figures.jsonl {pp_id, path, w, h, bytes}.
+  load_pp.py review  [--subject science] [--out DIR] --subtopics a,b
+      Writes OUT/<subject>/review-<first sub-topic>.html (private, local only): every selected item of those
+      sub-topics with its pictures, options and key, for the visual review before a switch. Put the pp id of any item
+      that fails on its own line in OUT/<subject>/hold.txt; `select` and `upload` then leave it out.
   load_pp.py upload  [--subject science] [--out DIR] [--subtopics a,b] [--apply]
       Upserts rows into public.pp_items and uploads the WebP files to the private bucket pp-figures. Without
       --apply it only prints what it would do. Needs SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in the environment;
@@ -23,6 +28,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 TMP = Path("/data/alvin/tmp/cookie-codex")
 DEF_PP, DEF_BLIND, DEF_OUT = TMP / "pastpapers", TMP / "audit" / "blindcheck", TMP / "ppimport"
+DEF_BLIND2 = DEF_BLIND / "second"  # queue 9: second local solver; recovers a failure only when both its routes reach the key
 LEVEL = {1: "basic", 2: "intermediate", 3: "competent"}
 LATE = 0.6  # tier rule "position": a difficulty-2 item in the last 40% of its booklet's MCQs counts as Competent
 
@@ -39,6 +45,9 @@ BUCKET = "pp-figures"
 FIG_WORDS = re.compile(r"\b(shown|show(s)? (below|above)|below|above|diagram|figure|table|graph|chart|picture|"
                        r"set-?up|illustrat\w*|drawing|labelled|marked)\b", re.I)
 FIG_LETTER = re.compile(r"(?<![A-Za-z'])[B-HJ-Z](?![A-Za-z'])|\bA(?=\s*,|\s+(and|or)\b)|\b(?:and|or)\s+A\b|\bA\b(?=\s*(only|and))")
+
+
+HEADER = re.compile(r"([A-Za-z][a-z]{2,}(?: [a-z]{2,})?) ([A-Z])")
 
 
 def outside_repo(p: Path) -> Path:
@@ -105,6 +114,10 @@ def garbled(text: str, opts) -> str | None:
         return "options-duplicate-or-empty"
     if any(len(x) > 300 for x in s):
         return "option-too-long"
+    # a table read as options: its column headers ("Substance R", "Tube W") instead of the rows (review, 20 Nov)
+    m = [HEADER.fullmatch(x) for x in s]
+    if all(m) and len({x.group(1).lower() for x in m}) > 1:
+        return "options-are-table-headers"
     return None
 
 
@@ -139,6 +152,11 @@ def crop_ok(path: Path) -> bool:
         return False
 
 
+def read_hold(out: Path) -> set:
+    p = out / "hold.txt"
+    return {l.split("#")[0].strip() for l in open(p) if l.split("#")[0].strip()} if p.exists() else set()
+
+
 # ------------------------------------------------------------------ select
 
 def select(a):
@@ -146,6 +164,7 @@ def select(a):
     out.mkdir(parents=True, exist_ok=True)
     subs = syllabus_subs(a.subject)
     quar = {r["id"] for r in jl(Path(a.pp) / "quarantine.jsonl")}
+    hold = read_hold(out)
     rows, rejects = [], []
     R = collections.Counter()
     per_year = collections.defaultdict(collections.Counter)
@@ -154,6 +173,7 @@ def select(a):
         tags = {t["id"]: t for t in jl(base / "tags72.jsonl")}
         bfile = Path(a.blind) / f"{a.subject}-{y}.jsonl"
         blind = {b["id"]: b for b in jl(bfile)} if bfile.exists() else None
+        second = {b["id"]: b for b in jl(Path(a.blind2) / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
         last = collections.Counter()  # (paper, part) -> highest MCQ number
         for q in merged:
@@ -175,6 +195,8 @@ def select(a):
                 reason = "no-answer-key"
             elif q["id"] in quar:
                 reason = "quarantined"
+            elif pp_id(q["id"]) in hold:
+                reason = "held-by-review"
             elif q.get("answer_flag") == "grid-uncertain":
                 reason = "grid-uncertain"
             elif blind is None:
@@ -183,7 +205,8 @@ def select(a):
                 reason = "not-in-blind-check"
             elif blind[q["id"]].get("key") != k:
                 reason = "blind-key-mismatch"  # the key changed after the blind run: re-run it
-            elif blind[q["id"]].get("agree") is not True:
+            elif blind[q["id"]].get("agree") is not True and not (
+                    second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
                 reason = garbled(q.get("text") or "", opts)
@@ -218,7 +241,8 @@ def select(a):
                 "stem": q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
                 "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
-                "blind_src": blind[q["id"]].get("src") or "blind",
+                "blind_src": (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
+                else "second:vl2-fullres+text72-ocr",
             })
     ids = [r["id"] for r in rows]
     assert len(ids) == len(set(ids)), "pp id collision"
@@ -296,6 +320,35 @@ def figures(a):
     print(f"{len(man)} figures, {tot / 1e6:.1f} MB, mean {tot / max(len(man), 1) / 1024:.1f} KB, over target {over}, modes {dict(modes)}")
 
 
+# ------------------------------------------------------------------ review page (private, local)
+
+def review(a):
+    import base64, html
+    out = outside_repo(Path(a.out)) / a.subject
+    keep = set(a.subtopics.split(",")) if a.subtopics else None
+    if not keep:
+        sys.exit("--subtopics is required")
+    figs = collections.defaultdict(list)
+    for m in jl(out / "figures.jsonl"):
+        figs[m["pp_id"]].append(m["path"])
+    rows = [r for r in jl(out / "selected.jsonl") if r["subtopic"] in keep]
+    parts = ["<!doctype html><meta charset=utf-8><title>pp review</title><style>body{font:16px Arial;max-width:960px;margin:auto;padding:16px}"
+             "section{border-top:2px solid #444;padding:12px 0}img{max-width:100%;border:1px solid #999;margin:6px 0}"
+             ".k{background:#d6f5d6;font-weight:bold}.m{color:#555;font-size:13px}</style>",
+             f"<h1>{html.escape(', '.join(sorted(keep)))}: {len(rows)} items</h1><p>Check each: picture readable and complete "
+             "(all (1)-(4) labels visible), picture matches the stem, nothing gives the answer away, key is right. "
+             "Put the pp id of a failing item in hold.txt.</p>"]
+    for n, r in enumerate(sorted(rows, key=lambda r: (r["level"], r["id"])), 1):
+        imgs = "".join(f'<img src="data:image/webp;base64,{base64.b64encode((out / "figures" / Path(p).name).read_bytes()).decode()}">'
+                       for p in figs[r["id"]])
+        opts = "".join(f'<li class="{"k" if i == r["answer"] else ""}">({i + 1}) {html.escape(o)}</li>' for i, o in enumerate(r["options"]))
+        parts.append(f'<section><div class=m>#{n} {r["id"]} · {r["level"]} · Past paper {r["year"]} · blind: {html.escape(r["blind_src"])}</div>'
+                     f'<p>{html.escape(r["stem"])}</p>{imgs}<ol style="list-style:none;padding:0">{opts}</ol></section>')
+    dst = out / f"review-{sorted(keep)[0]}.html"
+    dst.write_text("\n".join(parts))
+    print(f"{len(rows)} items -> {dst}")
+
+
 # ------------------------------------------------------------------ upload (owner's "apply" only)
 
 def upload(a):
@@ -307,6 +360,8 @@ def upload(a):
     if a.subtopics:
         keep = set(a.subtopics.split(","))
         rows = [r for r in rows if r["subtopic"] in keep]
+    hold = read_hold(out)
+    rows = [r for r in rows if r["id"] not in hold]
     missing = [r["id"] for r in rows if r["crops"] and len(figs[r["id"]]) != len(r["crops"])]
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
@@ -346,11 +401,12 @@ def upload(a):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("cmd", choices=("select", "figures", "upload"))
+    p.add_argument("cmd", choices=("select", "figures", "review", "upload"))
     p.add_argument("--subject", default="science")
     p.add_argument("--years", default="2018-2026")
     p.add_argument("--pp", default=str(DEF_PP))
     p.add_argument("--blind", default=str(DEF_BLIND))
+    p.add_argument("--blind2", default=str(DEF_BLIND2))
     p.add_argument("--out", default=str(DEF_OUT))
     p.add_argument("--max-width", type=int, default=900)
     p.add_argument("--target-kb", type=int, default=60)
@@ -358,7 +414,7 @@ def main():
     p.add_argument("--apply", action="store_true")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
-    {"select": select, "figures": figures, "upload": upload}[a.cmd](a)
+    {"select": select, "figures": figures, "review": review, "upload": upload}[a.cmd](a)
 
 
 if __name__ == "__main__":

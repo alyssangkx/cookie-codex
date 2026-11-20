@@ -1,5 +1,5 @@
 -- Run by sqltest.sh after test_accounts.sql: the 004 rules (past-paper items readable only through pp_items_for by a
--- signed-in child, parent or admin; never by anon; figures bucket private). Every check raises on failure.
+-- signed-in child, the Test Player or the admin; never by a parent or anon; figures bucket private). Every check raises on failure.
 \set QUIET on
 create function pg_temp.as_user(p_id uuid, p_role text default null) returns void language sql as $$
   select set_config('request.jwt.claims', case when p_id is null then '' else jsonb_build_object('sub', p_id, 'aal', 'aal1',
@@ -64,9 +64,12 @@ select pg_temp.fails($$insert into storage.objects (bucket_id, name) values ('pp
 -- a deleted child
 select pg_temp.as_user('22222222-0000-0000-0000-0000000000c2');
 select pg_temp.fails($$select pg_temp.n('sci-systems-plant-transport-parts')$$, 'a deleted child is refused');
--- the parent and the admin
+-- the parent (refused, owner 20 Nov 2026) and the admin
 select pg_temp.as_user('22222222-0000-0000-0000-0000000000a1');
-select pg_temp.ok(pg_temp.n('sci-systems-plant-transport-parts') = 1, 'a parent with a live family may read');
+select pg_temp.fails($$select pg_temp.n('sci-systems-plant-transport-parts')$$, 'a parent is refused');
+select pg_temp.ok((select count(*) = 0 from storage.objects where bucket_id = 'pp-figures'), 'a parent sees no figure objects');
+select pg_temp.as_user('22222222-0000-0000-0000-0000000000a1', 'parent');
+select pg_temp.fails($$select pg_temp.n('sci-systems-plant-transport-parts')$$, 'a parent with role parent in app_metadata is refused');
 select pg_temp.as_user('00000000-0000-0000-0000-0000000000ad', 'admin');
 select pg_temp.ok(pg_temp.n('sci-systems-circuit') = 1, 'the admin may read');
 -- the Test Player (role test, the admin's)

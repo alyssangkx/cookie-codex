@@ -1,12 +1,13 @@
--- Cookie Codex, migration 004: private past-paper MCQs (ADR 0004).  DRAFT, NOT APPLIED.
+-- Cookie Codex, migration 004: private past-paper MCQs (ADR 0004, amended 20 Nov 2026).  Approved; NOT YET APPLIED.
 -- Apply only after the owner says "apply", with:  supabase db query --remote --yes -f supabase/migrations/004_pp_items.sql
 -- (there is no migrations table; never `db push`). Test first: scripts/accounts/sqltest.sh runs 001-004 locally.
 --
 -- What it adds:
 --   * public.pp_items: verbatim past-paper MCQs that passed the blind-answer check. No client may select the table
 --     directly (RLS on, no policies, no grants); rows are written only by the service role (scripts/pastpapers/load_pp.py).
---   * public.pp_items_for(subject, subtopics[]): the only read path. Signed-in child (incl. the Test Player),
---     parent or admin only; anon is refused; at most 40 sub-topics per call and 120 calls per user per hour.
+--   * public.pp_items_for(subject, subtopics[]): the only read path. Signed-in child (incl. the Test Player) or
+--     the admin only (owner, 20 Nov 2026): no parent role, no anon; at most 40 sub-topics per call and 120 calls per
+--     user per hour.
 --   * Storage bucket pp-figures (private) for the WebP crops. The same readers may select objects there, which is
 --     what supabase-js createSignedUrls() needs; nobody but the service role may write.
 -- Nothing in this file contains past-paper content.
@@ -41,22 +42,21 @@ grant all on public.pp_items to service_role;
 
 -- ---------------------------------------------------------------- who may read
 
--- A signed-in child or Test Player whose profile and family are not deleted, a parent with a live family, or the
--- admin. Children have their own auth users (001), so auth.uid() is the profile id. The admin's children have no
--- families row, which the left join allows.
+-- A signed-in child or Test Player whose profile and family are not deleted, or the admin. NOT a parent (owner,
+-- 20 Nov 2026: sign-up is open, so a parent account must not open the papers). Children have their own auth users
+-- (001), so auth.uid() is the profile id; a parent's uid is never a profile id.
 create function private.can_read_pp() returns boolean
 language sql stable security definer set search_path = '' as $$
   select auth.uid() is not null and (
        exists (select 1 from public.profiles p left join public.families f on f.parent_id = p.parent_id
                 where p.id = auth.uid() and p.deleted_at is null and f.deleted_at is null)
-    or exists (select 1 from public.families f where f.parent_id = auth.uid() and f.deleted_at is null)
     or coalesce(auth.jwt() -> 'app_metadata' ->> 'role', '') = 'admin')
 $$;
 revoke execute on function private.can_read_pp() from public, anon;
 grant execute on function private.can_read_pp() to authenticated;
 
--- The one read path. Volatile because rate_hit writes. Returns no school/paper/qno: the site shows only the year
--- (if the owner wants it shown at all).
+-- The one read path. Volatile because rate_hit writes. Returns no school/paper/qno: the site shows only
+-- "Past paper <year>" (owner, 20 Nov 2026).
 create function public.pp_items_for(p_subject text, p_subtopics text[])
 returns table (id text, subtopic text, level text, pattern text, stem text, options jsonb, answer smallint,
                figures jsonb, year smallint)

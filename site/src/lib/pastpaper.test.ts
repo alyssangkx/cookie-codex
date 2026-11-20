@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, type PpRow,
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, type PpRow,
 } from './pastpaper.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -101,4 +101,14 @@ test('Daily Review merges instead of replacing, so old retests stay reachable', 
   assert.equal(poolModeFor('review', true, sw)('a'), 'merge');
   assert.equal(poolModeFor('review', true, sw)('b'), null);
   assert.equal(poolModeFor('tier', false, sw)('a'), null);
+});
+
+test('"Past paper <year>" only on past-paper items, never a school; pp ids are recognised', () => {
+  const q = toQ(row({ figures: [] }), new Map())!;
+  assert.equal(q.ppYear, 2025);
+  assert.equal(ppBadge(q), '<span class="pp-badge">Past paper 2025</span>');
+  assert.equal(ppBadge({ ...q, ppYear: null }), '<span class="pp-badge">Past paper</span>');
+  assert.equal(ppBadge({}), '');
+  assert.equal(validRow({ ...row(), year: '2025' }), false);
+  assert.ok(isPpId('pp-0123456789') && !isPpId('sci-abc') && !isPpId('pp-xyz'));
 });

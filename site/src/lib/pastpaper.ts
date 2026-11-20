@@ -2,6 +2,9 @@
 // (migration 004, signed-in child, parent or admin) and pictures as short-lived signed URLs from the private bucket
 // pp-figures. Never through the public /data/quiz endpoint, site/public or the static build. This module is pure (no
 // I/O, no imports) so it can be tested; ppfetch.ts does the network calls. Everything is OFF until PP_ENABLED is true.
+// Owner, 20 Nov 2026 (ADR 0004 amendment): checked past-paper items count like generated ones (mastery, tiers, cards,
+// Crumbs); readable by children and the admin only; shown as "Past paper <year>" (never the school); left out of the
+// parent page's wrong-answer list.
 import { esc } from './boldans.ts';
 
 /** Master switch. Stays false until the owner applies 004 and the first sub-topic is loaded and reviewed. */
@@ -35,7 +38,11 @@ export interface PpQ {
   explain: ({ tag: string; why: string } | null)[]; solution: string[];
   numbered: true; // label options (1)-(4) as the paper and its pictures do, not A-D
   ppFigs: PpFig[];
+  ppYear: number | null;
 }
+
+/** A past-paper question id (pp-<10 hex>), as opposed to a generated one. */
+export const isPpId = (id: string) => /^pp-[0-9a-f]{10}$/.test(id);
 
 /** The switch for one sub-topic, or null when past-paper items are off for it. */
 export function ppMode(sub: string, enabled = PP_ENABLED, sw: Readonly<Record<string, PpMode>> = PP_SWITCH): PpMode | null {
@@ -75,7 +82,8 @@ export function validRow(r: unknown): r is PpRow {
     && Array.isArray(x.options) && x.options.length === 4 && x.options.every((o) => typeof o === 'string')
     && Number.isInteger(x.answer) && (x.answer as number) >= 0 && (x.answer as number) <= 3
     && Array.isArray(x.figures) && x.figures.every((f) => f && typeof f.path === 'string' && FIG_PATH.test(f.path)
-      && Number.isFinite(f.w) && Number.isFinite(f.h));
+      && Number.isFinite(f.w) && Number.isFinite(f.h))
+    && (x.year === null || x.year === undefined || Number.isInteger(x.year));
 }
 
 /** A signed URL from our own project's private bucket, and nothing else (no other host, no public object path). */
@@ -102,6 +110,7 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
     id: r.id, sub: r.subtopic, level: r.level, topic, stem: r.stem, options: [...r.options], answer: r.answer,
     explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: '' })),
     solution: [], numbered: true, ppFigs: figs,
+    ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,
   };
 }
 
@@ -117,6 +126,12 @@ export function mergePool<T extends { id: string; sub: string; level: string }>(
   for (const q of pp) if (modeOf(q.sub)) ppBy.set(key(q), [...(ppBy.get(key(q)) ?? []), q]);
   const replaced = new Set([...ppBy].filter(([k, v]) => modeOf(k.split('|')[0]) === 'replace' && v.length >= minTier).map(([k]) => k));
   return [...generated.filter((q) => !replaced.has(key(q))), ...[...ppBy.values()].flat()];
+}
+
+/** The source line above a past-paper stem: "Past paper 2025" (year only, never the school). */
+export function ppBadge(q: { ppYear?: number | null; numbered?: boolean }): string {
+  if (!q.numbered) return '';
+  return `<span class="pp-badge">Past paper${q.ppYear ? ` ${q.ppYear}` : ''}</span>`;
 }
 
 /** The pictures under the stem. Sources must already have passed safeSignedUrl. */

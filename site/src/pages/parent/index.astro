@@ -183,6 +183,7 @@ const data = {
   import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
+  import { isPpId } from '../../lib/pastpaper';
   import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; hash: Record<Tier, string>; content: boolean }
@@ -365,7 +366,8 @@ const data = {
   let wrongSeq = 0;
   async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq) {
     const now = Date.now();
-    const recorded = Object.entries(questions).filter(([, q]) => q.w > 0);
+    // past-paper items stay private to the child's quiz (owner, 20 Nov 2026): never listed here
+    const recorded = Object.entries(questions).filter(([id, q]) => q.w > 0 && !isPpId(id));
     if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
     $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
     const bank = await banks();
