@@ -164,7 +164,7 @@ def syllabus_subs(subject: str) -> set:
         elif isinstance(n, list):
             for x in n:
                 walk(x)
-    walk(json.load(open(REPO / "site" / "src" / "data" / "syllabus" / f"{subject}.json")))
+    walk(json.load(open(REPO / "site" / "src" / "data" / "syllabus" / f"{ {'maths': 'math'}.get(subject, subject)}.json")))
     return out
 
 
