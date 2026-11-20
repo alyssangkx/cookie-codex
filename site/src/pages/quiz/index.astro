@@ -593,6 +593,29 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // ------------------------------------------------------------ feedback pieces shared by the quiz, paper review and results list
 
   const stepsHtml = (q: Q) => `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`;
+  /** "Report a problem" under the answer (migration 005): the question id goes to report_question; a grown-up looks it up. */
+  const REPORT_KINDS: [string, string][] = [['picture', 'The picture is wrong or cut off'], ['answer', 'The answer looks wrong'],
+    ['question', 'The question or options are muddled'], ['other', 'Something else']];
+  const reportHtml = (q: Q) => `<details class="qz-report" data-qid="${esc(q.id)}"><summary>Report a problem with this question</summary>`
+    + `<fieldset><legend>What looks wrong?</legend>${REPORT_KINDS.map(([v, t], j) => `<label><input type="radio" name="rk-${esc(q.id)}" value="${v}"${j ? '' : ' checked'}> ${t}</label>`).join('')}</fieldset>`
+    + `<label class="qz-report-note">Tell us more (optional)<input type="text" maxlength="300" autocomplete="off"></label>`
+    + `<button type="button" class="qz-report-send">Send</button><p class="qz-report-msg" aria-live="polite"></p></details>`;
+  async function sendReport(box: HTMLElement) {
+    const btn = box.querySelector<HTMLButtonElement>('.qz-report-send')!, msg = box.querySelector('.qz-report-msg')!;
+    const kind = box.querySelector<HTMLInputElement>('input[type=radio]:checked')?.value ?? 'other';
+    const note = box.querySelector<HTMLInputElement>('.qz-report-note input')!.value.trim();
+    btn.disabled = true;
+    msg.textContent = 'Sending...';
+    try {
+      const { supabase } = await import('../../lib/supabase');
+      const { error } = await supabase.rpc('report_question', { p_qid: box.dataset.qid, p_kind: kind, p_note: note || null });
+      if (error) throw error;
+      msg.textContent = 'Thank you! A grown-up will check this question.';
+    } catch {
+      btn.disabled = false;
+      msg.textContent = 'Could not send just now. Please try again later.';
+    }
+  }
   /** "Why B is tempting" for a wrong pick; nothing for a blank (k < 0 or null) or a pick without a note. */
   const temptingHtml = (q: Q, k: number | null) => {
     const why = k != null && k >= 0 ? q.explain[k] : null;
@@ -608,7 +631,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('rv-body').innerHTML = (q.visual ? visualCard(q.visual) : '')
       + `<p class="stem">${stemHtml(q, true)}</p><div class="options">${opts}</div><div class="feedback">`
       + `<p class="verdict bad">${p == null ? 'You left this blank.' : `You chose ${optionLabel(q, p)}.`} The answer is ${optionLabel(q, q.answer)}.</p>`
-      + temptingHtml(q, p) + stepsHtml(q) + '</div>';
+      + temptingHtml(q, p) + stepsHtml(q) + reportHtml(q) + '</div>';
     $<HTMLButtonElement>('rv-prev').disabled = rvAt === 0;
     $('rv-next').textContent = rvAt + 1 < rvList.length ? 'Next' : 'Back to results';
   }
@@ -678,7 +701,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     });
     $('feedback').innerHTML =
       (ok ? '<p class="verdict good">Correct!</p>'
-          : `<p class="verdict bad">Not yet. The answer is ${optionLabel(q, q.answer)}.</p>${temptingHtml(q, k)}`) + stepsHtml(q);
+          : `<p class="verdict bad">Not yet. The answer is ${optionLabel(q, q.answer)}.</p>${temptingHtml(q, k)}`) + stepsHtml(q) + reportHtml(q);
     $('feedback').hidden = false;
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
@@ -830,7 +853,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (b) (PAPER ? choosePaper : choose)(Number(b.dataset.k));
   });
   document.addEventListener('keydown', (e) => {
-    if ($('play').hidden || answered || e.altKey || e.ctrlKey || e.metaKey) return;
+    if ($('play').hidden || answered || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, textarea')) return;
     const k = 'abcdefgh'.indexOf(e.key.toLowerCase()), n = '12345678'.indexOf(e.key);
     const pick = k >= 0 ? k : n;
     const btn = $('options').querySelectorAll<HTMLButtonElement>('button')[pick];
@@ -873,6 +896,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   $('rv-next').addEventListener('click', () => rvStep(1));
   $('rv-done').addEventListener('click', () => { show('done'); $('quiz').scrollIntoView({ block: 'start' }); });
   $('next').addEventListener('click', () => (++i < quiz.length ? render() : finish()));
+  document.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.qz-report-send');
+    if (b) sendReport(b.closest<HTMLElement>('.qz-report')!);
+  });
   // tapping an open blank of the passage asks that blank now; the current question moves to just after it
   $('stem').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.blank-jump');
@@ -929,6 +956,15 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
 <style is:global>
   .pp-badge { display: block; font-size: 0.8em; font-weight: 600; opacity: 0.75; margin-bottom: 0.35em; }
+  .qz-report { margin-top: 1rem; font-size: 0.9rem; }
+  .qz-report summary { cursor: pointer; color: var(--cocoa-soft); text-decoration: underline; width: fit-content; }
+  .qz-report fieldset { border: 0; padding: 0; margin: 0.6rem 0 0; display: grid; gap: 0.35rem; }
+  .qz-report legend { font-weight: 600; margin-bottom: 0.25rem; }
+  .qz-report label { display: flex; gap: 0.5rem; align-items: center; }
+  .qz-report .qz-report-note { flex-direction: column; align-items: stretch; gap: 0.25rem; margin-top: 0.6rem; }
+  .qz-report .qz-report-note input { font: inherit; padding: 0.4rem 0.5rem; border: 1.5px solid var(--crust); border-radius: 8px; width: 100%; box-sizing: border-box; }
+  .qz-report .qz-report-send { margin-top: 0.6rem; }
+  .qz-report .qz-report-msg { margin: 0.4rem 0 0; min-height: 1.2em; }
   /* global: the quiz markup is built with innerHTML, which scoped styles cannot reach */
   .quiz { padding-block: 1.5rem 2rem; max-width: 760px; }
   .quiz .nocalc { font-size: 0.8rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 999px; border: 1.5px solid var(--berry); color: var(--berry); }

@@ -12,6 +12,9 @@
       full resolution AND the 72B on the transcribed figure text) both reach it; text and options not garbled; options
       not only in the picture; a sub-topic that exists in the site's syllabus; and a usable crop whenever the stem
       points at a figure, table or graph (or labels such as A/B/P/Q) or the reader saw a figure.
+  load_pp.py where <question id> [--out DIR]
+      Where a reported question (question_reports, migration 005) comes from: paper, PDF file and page, crops, text, key,
+      and any hold file naming it. A generated id prints its bank and stem.
   load_pp.py figures [--subject science] [--out DIR] [--max-width 900] [--target-kb 60]
       Compresses each selected item's crops to WebP (grayscale when the crop has no colour) into
       OUT/<subject>/figures/ and writes figures.jsonl {pp_id, path, w, h, bytes}.
@@ -934,10 +937,43 @@ def upload(a):
     print(f"wrote {COUNTS.name}")
 
 
+def where(a):
+    """Where a reported question comes from (question_reports, migration 005): a pp id -> its paper (school, exam, PDF
+    file and page), crops, text, options and key, and the hold files that name it; a generated id -> its bank and stem.
+    Prints private past-paper text: terminal only."""
+    qid = a.arg or ""
+    if not qid.startswith("pp-"):
+        root = Path(__file__).resolve().parents[2] / "site" / "src" / "data" / "quiz"
+        for f in sorted(root.glob("*/*.json")):
+            d = json.loads(f.read_text())
+            for q in d["questions"] if isinstance(d, dict) else d:
+                if q.get("id") == qid:
+                    print(f"{qid}: generated, {f.relative_to(root.parents[2])}, sub-topic {q.get('sub') or q.get('subtopic') or f.stem}, level {q.get('level')}\n  {q.get('stem')}")
+                    return
+        sys.exit(f"{qid}: not in any bank under {root}")
+    for subj_dir in sorted(p for p in Path(a.pp).iterdir() if p.is_dir()):
+        for ydir in sorted(subj_dir.glob("20[0-9][0-9]")):
+            for q in jl(ydir / "merged.jsonl"):
+                if pp_id(q["id"]) != qid:
+                    continue
+                paper = next((x for x in jl(ydir / "papers.jsonl") if x["paper_id"] == q.get("paper")), {})
+                print(f"{qid} = {q['id']}  ({paper.get('school')}, {paper.get('exam')}, question {q.get('qno')})")
+                print(f"  PDF: {paper.get('file')}  page(s) {q.get('pages')} (paper runs {paper.get('first_page')}-{paper.get('last_page')})")
+                print(f"  page scans: {', '.join(str(ydir / 'pages' / f'p{n:04d}.jpg') for n in q.get('pages') or [])}")
+                print(f"  crops: {', '.join(str(c) for c in sorted((ydir / 'crops').glob(q['id'] + '-p*.png'))) or 'none'}")
+                print(f"  text: {q.get('text')}\n  options: {q.get('options')}\n  key: {q.get('answer')} (flag {q.get('answer_flag')})")
+                for hf in sorted(Path(a.out).glob(f"*/{subj_dir.name}/hold*.txt")) + sorted(Path(a.out).glob(f"{subj_dir.name}/hold*.txt")):
+                    for line in hf.read_text().splitlines():
+                        if line.split("#")[0].strip() == qid:
+                            print(f"  held: {hf}: {line}")
+                return
+    sys.exit(f"{qid}: no past-paper question under {a.pp} has this id")
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "counts", "cropcheck-apply", "selftest"))
-    p.add_argument("arg", nargs="?", help="cropcheck-apply: the results.jsonl")
+    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "counts", "cropcheck-apply", "where", "selftest"))
+    p.add_argument("arg", nargs="?", help="cropcheck-apply: the results.jsonl; where: a question id (pp-... or generated)")
     p.add_argument("--subject", default="science")
     p.add_argument("--years", default="2018-2026")
     p.add_argument("--pp", default=str(DEF_PP))
@@ -953,7 +989,7 @@ def main():
     p.add_argument("--reread-keys", action="store_true", help="select: use agreed <year>/ansreread/ cells (ans_reread.py) as a fallback key source, answer_src 'vision-reread'")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
-    {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "selftest": lambda _a: selftest()}[a.cmd](a)
+    {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "where": where, "selftest": lambda _a: selftest()}[a.cmd](a)
 
 
 if __name__ == "__main__":
