@@ -1,0 +1,2433 @@
+{
+  "subtopic": "sci-cycles-water-cycle",
+  "items": [
+    {
+      "key": "wc-001",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which source of energy drives the water cycle?",
+      "options": [
+        "Heat from the Sun",
+        "Wind blowing over the sea",
+        "Light from the Moon",
+        "Cold air from the clouds"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-source",
+          "why": "Wind moves clouds, but it does not give the heat that changes water into water vapour."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "The Moon gives very little light and no useful heat."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "Cold air takes heat away. It cannot make water evaporate."
+        }
+      ],
+      "solution": [
+        "The Sun's heat makes water evaporate, which starts the water cycle."
+      ]
+    },
+    {
+      "key": "wc-002",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "What is the name of the process that changes water from a pond into water vapour?",
+      "options": [
+        "Condensation",
+        "Melting",
+        "Freezing",
+        "Evaporation"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Condensation changes water vapour into liquid water."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Melting changes a solid into a liquid."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Freezing changes a liquid into a solid."
+        },
+        null
+      ],
+      "solution": [
+        "Liquid water changing into water vapour is evaporation."
+      ]
+    },
+    {
+      "key": "wc-003",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which of the following describes water vapour?",
+      "options": [
+        "Tiny drops of water that we can see",
+        "Small pieces of ice in the air",
+        "Water as an invisible gas",
+        "Smoke made when water is heated"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "confused-with-cloud",
+          "why": "Tiny visible drops are liquid water, as in clouds and mist."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Ice is solid water, not water vapour."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Smoke is made of solid bits from burning things."
+        }
+      ],
+      "solution": [
+        "Water vapour is a gas. We cannot see it."
+      ]
+    },
+    {
+      "key": "wc-004",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "What happens to water vapour when it cools high up in the air?",
+      "options": [
+        "It melts into a block of ice up high",
+        "It condenses into tiny water droplets",
+        "It evaporates again and rises higher",
+        "It becomes smoke and drifts away with the wind"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-term",
+          "why": "Melting is for solids."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Evaporation needs heat and changes liquid water into water vapour."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour does not turn into smoke."
+        }
+      ],
+      "solution": [
+        "Cooling water vapour condenses into tiny water droplets."
+      ]
+    },
+    {
+      "key": "wc-005",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the cloud in the picture. What is it made up of?",
+      "options": [
+        "tiny droplets of water",
+        "water vapour only",
+        "smoke from factories",
+        "pieces of cotton-like dust"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "confused-with-gas",
+          "why": "Water vapour is invisible. We see clouds because of the liquid droplets."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Smoke is not what clouds are made of."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Clouds have no dust fibres like cotton."
+        }
+      ],
+      "solution": [
+        "Clouds are tiny water droplets formed by condensation."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Look at the cloud over the sea</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "wc-006",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why does rain fall from a cloud?",
+      "options": [
+        "The Sun pulls the water down to the ground",
+        "The cloud has used up all of its water vapour",
+        "The wind turns the whole cloud into solid ice",
+        "The droplets join and get too heavy to stay up"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The Sun gives heat. It does not pull water down."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Rain is made from the water droplets in the cloud."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Wind moves clouds, but it does not make rain by itself."
+        },
+        null
+      ],
+      "solution": [
+        "Droplets join into bigger drops. When they are too heavy they fall as rain."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rain falls from the cloud in the water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "wc-007",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Hot water is covered with a plastic sheet. After some time, drops of water form under the sheet. What do the drops show?",
+      "options": [
+        "The plastic sheet has made new water from air",
+        "The hot water has frozen onto the sheet",
+        "Water vapour has changed to liquid water",
+        "The water has become heavier and fallen"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Water is not made by plastic. It comes from the bowl."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Hot water does not freeze."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The water has only changed from vapour to liquid."
+        }
+      ],
+      "solution": [
+        "Water vapour from the hot water cooled at the sheet and condensed into drops."
+      ],
+      "figure": "<svg viewBox=\"0 0 200 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"100\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A model of the water cycle</text><g transform=\"translate(0 0)\"><path d=\"M30 80 V110 Q30 170 100 170 Q170 170 170 110 V80\"/><path d=\"M40 128 Q100 138 160 128\" stroke-dasharray=\"3 3\"/><path d=\"M70 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M100 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M130 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M24 78 Q100 98 176 78\" stroke-width=\"3\"/><path d=\"M62 94 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M88 100 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M112 100 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M138 94 q-3 5 0 7 q3 -2 0 -7 z\"/><text x=\"100\" y=\"190\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text></g><text x=\"100\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">plastic sheet</text></svg>"
+    },
+    {
+      "key": "wc-008",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which letter shows condensation?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "P is water leaving the sea as water vapour. That is evaporation."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "R is rain falling from the cloud."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "S is water flowing back to the sea."
+        }
+      ],
+      "solution": [
+        "Condensation happens in the cloud, at Q."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "wc-009",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which letter shows evaporation?",
+      "options": [
+        "R",
+        "P",
+        "Q",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "P is where droplets form in the cloud."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Q shows water flowing along the river."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "S is rain falling down."
+        }
+      ],
+      "solution": [
+        "Water from the sea rises as water vapour, shown by R."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "wc-010",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which letter shows rain falling?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "P is water rising from the sea."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Q is the cloud, where the droplets form."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "R is water flowing in the river."
+        },
+        null
+      ],
+      "solution": [
+        "The dotted arrow from the cloud to the mountain is rain, S."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "wc-011",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which letter shows river water flowing back to the sea?",
+      "options": [
+        "Q",
+        "R",
+        "P",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "Q is rising water vapour."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "R is the cloud."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "S is rain falling from the cloud."
+        }
+      ],
+      "solution": [
+        "The river carries water down to the sea, shown by P."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text></svg>"
+    },
+    {
+      "key": "wc-012",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why does the Earth not run out of water even though water evaporates all the time?",
+      "options": [
+        "The Sun makes a lot of new water every day",
+        "The water keeps moving around sea, air and land",
+        "New water is made inside the clouds each day",
+        "Only a very little water evaporates from the sea"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The Sun only gives heat. It does not make water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Clouds are formed from water that evaporated earlier."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A lot of water evaporates, but it returns as rain."
+        }
+      ],
+      "solution": [
+        "The water cycle moves the same water around again and again."
+      ]
+    },
+    {
+      "key": "wc-013",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which of the following do plants use water for?",
+      "options": [
+        "To make their food",
+        "To make sunlight",
+        "To make soil",
+        "To keep warm at night"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Plants cannot make sunlight."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plants do not make soil from water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water is not used by plants as a blanket."
+        }
+      ],
+      "solution": [
+        "Plants use water, light and carbon dioxide to make food."
+      ]
+    },
+    {
+      "key": "wc-014",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A plant was not watered for many days. Its leaves became soft and drooped. What is the most likely reason?",
+      "options": [
+        "The plant had too much sunlight",
+        "The plant had too much water",
+        "The plant grew too many roots",
+        "The plant lost water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Too much light does not make leaves droop by itself."
+        },
+        {
+          "tag": "reversed",
+          "why": "A plant with too much water does not droop like this."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "More roots would take in more water."
+        },
+        null
+      ],
+      "solution": [
+        "Plants droop, or wilt, when they lose water."
+      ]
+    },
+    {
+      "key": "wc-015",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "On a hot day, what does the body make to help it cool down?",
+      "options": [
+        "Urine",
+        "Saliva",
+        "Sweat",
+        "Mucus"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-term",
+          "why": "Urine is made to remove waste."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Saliva is made in the mouth to help with eating."
+        },
+        null,
+        {
+          "tag": "wrong-term",
+          "why": "Mucus lines the nose and throat."
+        }
+      ],
+      "solution": [
+        "Sweat is mostly water. It helps to cool the body."
+      ]
+    },
+    {
+      "key": "wc-016",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "About how much of the human body is water?",
+      "options": [
+        "About one tenth of it",
+        "More than half of it",
+        "Almost none of it",
+        "Exactly all of it"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-amount",
+          "why": "The body has much more water than this."
+        },
+        null,
+        {
+          "tag": "wrong-amount",
+          "why": "Water is a large part of the body."
+        },
+        {
+          "tag": "wrong-amount",
+          "why": "The body also has solid parts such as bones."
+        }
+      ],
+      "solution": [
+        "Over half of the human body is water."
+      ]
+    },
+    {
+      "key": "wc-017",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which of the following is a way to save water at home?",
+      "options": [
+        "Turning off the tap while brushing teeth",
+        "Leaving the tap running while washing dishes",
+        "Washing a car with a running hose",
+        "Flushing the toilet many times for no reason"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wasting",
+          "why": "A running tap wastes a lot of water."
+        },
+        {
+          "tag": "wasting",
+          "why": "A hose uses much more water than a bucket."
+        },
+        {
+          "tag": "wasting",
+          "why": "Each flush uses clean water."
+        }
+      ],
+      "solution": [
+        "Turning off the tap stops water from being wasted."
+      ]
+    },
+    {
+      "key": "wc-018",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which action pollutes the water in a river?",
+      "options": [
+        "Picking up litter near the river bank",
+        "Planting trees along the river bank to hold soil",
+        "Using a bin for rubbish",
+        "Pouring used cooking oil down a drain"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "helpful",
+          "why": "Removing litter keeps the river clean."
+        },
+        {
+          "tag": "helpful",
+          "why": "Trees do not pollute the river."
+        },
+        {
+          "tag": "helpful",
+          "why": "Rubbish in a bin does not reach the river."
+        },
+        null
+      ],
+      "solution": [
+        "Used oil flows to rivers and the sea and pollutes the water."
+      ]
+    },
+    {
+      "key": "wc-019",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A factory pours chemicals into a river. What is likely to happen to the fish in the river?",
+      "options": [
+        "They will grow bigger",
+        "They will move faster",
+        "Many of them may die",
+        "Nothing will happen to them"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Chemicals harm living things."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Polluted water does not make fish faster."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Harmful chemicals can poison fish."
+        }
+      ],
+      "solution": [
+        "Chemicals in water can poison fish and plants."
+      ]
+    },
+    {
+      "key": "wc-020",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which of the following helps to keep water clean?",
+      "options": [
+        "Throwing rubbish into a drain",
+        "Putting rubbish into a bin",
+        "Washing paint brushes in a pond",
+        "Pouring oil into the sea"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "polluting",
+          "why": "Drains lead to rivers and the sea."
+        },
+        null,
+        {
+          "tag": "polluting",
+          "why": "Paint pollutes the water."
+        },
+        {
+          "tag": "polluting",
+          "why": "Oil spills harm the sea."
+        }
+      ],
+      "solution": [
+        "Rubbish in a bin cannot reach the water."
+      ]
+    },
+    {
+      "key": "wc-021",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "What is NEWater?",
+      "options": [
+        "Used water cleaned so that it can be used again",
+        "Rain water collected from roofs and drains",
+        "Sea water that is sold with its salt left in",
+        "Water that comes from a brand new tap"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "NEWater is made from used water, not directly from rain."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Salt would make it unfit to drink."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "NEWater is not named for a tap."
+        }
+      ],
+      "solution": [
+        "NEWater is treated used water."
+      ]
+    },
+    {
+      "key": "wc-022",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why should we not drink water straight from a dirty river?",
+      "options": [
+        "It is too heavy for our bodies to drink",
+        "It has no real water in it at all",
+        "It makes our teeth much stronger",
+        "It may have germs that make us ill"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Dirty water is not heavier in a way that matters."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "River water is water, but it may be unsafe."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Dirty water does not help teeth."
+        },
+        null
+      ],
+      "solution": [
+        "Dirty water can carry germs that cause diseases."
+      ]
+    },
+    {
+      "key": "wc-023",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which of the following wastes water?",
+      "options": [
+        "Using a basin of water to wash vegetables",
+        "Using a bucket of water to wash a bicycle",
+        "Letting the tap run while washing plates",
+        "Watering the plants with water used for rinsing rice"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "saving",
+          "why": "A basin uses less water than a running tap."
+        },
+        {
+          "tag": "saving",
+          "why": "A bucket limits the water used."
+        },
+        null,
+        {
+          "tag": "saving",
+          "why": "Reusing water saves clean water."
+        }
+      ],
+      "solution": [
+        "A running tap wastes water that could be saved."
+      ]
+    },
+    {
+      "key": "wc-024",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which of the following is a water habitat?",
+      "options": [
+        "A termite mound",
+        "A pond",
+        "A hole in a tree",
+        "A desert"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "land-habitat",
+          "why": "A termite mound is on land."
+        },
+        null,
+        {
+          "tag": "land-habitat",
+          "why": "A hole in a tree is on land."
+        },
+        {
+          "tag": "land-habitat",
+          "why": "A desert is very dry land."
+        }
+      ],
+      "solution": [
+        "A pond is full of water and animals and plants live in it."
+      ]
+    },
+    {
+      "key": "wc-025",
+      "level": "basic",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows how much water is used by some ways of washing. Which way uses the least water?",
+      "options": [
+        "Brushing teeth with the tap off",
+        "Brushing teeth with the tap on",
+        "Washing the face with the tap on",
+        "Washing the face with a basin"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "This used 12 litres, the most."
+        },
+        {
+          "tag": "wrong-row",
+          "why": "This used 8 litres."
+        },
+        {
+          "tag": "wrong-row",
+          "why": "This used 2 litres, more than 1 litre."
+        }
+      ],
+      "solution": [
+        "Tap off: 1 litre. This is the smallest amount."
+      ],
+      "figure": "<svg viewBox=\"0 0 350 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"175.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water used by ways of washing</text><rect x=\"10\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"105.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Way of washing</text><rect x=\"200\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"270.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water used (litres)</text><rect x=\"10\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Brushing teeth, tap on</text><rect x=\"200\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"270.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"10\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Brushing teeth, tap off</text><rect x=\"200\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"270.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Washing face, tap on</text><rect x=\"200\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"270.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text><rect x=\"10\" y=\"160\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Washing face, basin</text><rect x=\"200\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"270.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text></svg>"
+    },
+    {
+      "key": "wc-101",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. What happens at Q?",
+      "options": [
+        "Water vapour cools and forms tiny droplets",
+        "Water from the sea changes into water vapour",
+        "Tiny droplets of water change into ice",
+        "Rain water flows into the river"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "That is evaporation, which happens as water rises from the sea."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No freezing is part of this picture."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Water flowing down is run-off, not what happens in the cloud."
+        }
+      ],
+      "solution": [
+        "Q is the cloud, where condensation takes place."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "wc-102",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which two letters show stages in which water changes its state?",
+      "options": [
+        "S and Q",
+        "R and S",
+        "P and Q",
+        "R and P"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "S and Q show water falling and flowing as a liquid, so the state is not changing."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "S shows water falling as a liquid."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "Q shows water flowing as a liquid."
+        },
+        null
+      ],
+      "solution": [
+        "R is evaporation and P is condensation. In both, water changes between gas and liquid."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "wc-103",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which letter shows the stage that needs heat from the Sun?",
+      "options": [
+        "P",
+        "Q",
+        "S",
+        "R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "P is condensation, which happens when water vapour cools."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Q is rain, which falls because of its weight."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "R is run-off, which is driven by the slope of the land."
+        }
+      ],
+      "solution": [
+        "Evaporation needs the Sun's heat. It is shown by S."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "wc-104",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Over a large lake, the Sun's heat is blocked for many weeks by thick smoke. What is most likely to happen to the rain over the lake?",
+      "options": [
+        "There will be more rain",
+        "There will be less rain",
+        "The rain will be the same",
+        "The rain will turn salty"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Less heat means less water evaporates, so fewer clouds form."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The rain depends on how much water evaporates."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Rain does not take up salt from the lake."
+        }
+      ],
+      "solution": [
+        "Less heat means less evaporation and fewer clouds."
+      ]
+    },
+    {
+      "key": "wc-105",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the model of the water cycle. Why are ice cubes placed on the plastic sheet?",
+      "options": [
+        "They cool the vapour so that drops form",
+        "They heat the water vapour in the bowl",
+        "They stop water vapour from forming",
+        "They make the plastic sheet thicker and stronger"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Ice takes heat away."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Vapour forms from the hot water below."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The sheet stays the same thickness."
+        }
+      ],
+      "solution": [
+        "Cold ice cools the sheet, so the vapour condenses to drops."
+      ],
+      "figure": "<svg viewBox=\"0 0 200 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"100\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A model of the water cycle</text><g transform=\"translate(0 0)\"><path d=\"M30 80 V110 Q30 170 100 170 Q170 170 170 110 V80\"/><path d=\"M40 128 Q100 138 160 128\" stroke-dasharray=\"3 3\"/><path d=\"M70 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M100 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M130 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M24 78 Q100 98 176 78\" stroke-width=\"3\"/><rect x=\"68\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><rect x=\"91\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><rect x=\"114\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><path d=\"M62 94 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M88 100 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M112 100 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M138 94 q-3 5 0 7 q3 -2 0 -7 z\"/><text x=\"100\" y=\"190\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text></g><text x=\"100\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">ice cubes on plastic sheet</text></svg>"
+    },
+    {
+      "key": "wc-106",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Drops of water appear on the outside of a cold can in a warm room. Where did most of this water come from?",
+      "options": [
+        "Water that leaked through the can",
+        "Water that came out of the can's metal",
+        "Water made by the cold can",
+        "Water vapour in the air"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The can is not leaking. The drops form even on a sealed can."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal does not hold water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The can cannot make water."
+        },
+        null
+      ],
+      "solution": [
+        "Water vapour in the warm air cooled at the can and condensed into drops."
+      ],
+      "figure": "<svg viewBox=\"0 0 220 216\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"110\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold can in a warm room</text><path d=\"M70 50 V170 Q110 182 150 170 V50\"/><ellipse cx=\"110\" cy=\"50\" rx=\"40\" ry=\"8\"/><text x=\"110\" y=\"120\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">ice-cold</text><text x=\"110\" y=\"136\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">drink</text><path d=\"M62 80 q-4 7 0 9 q4 -2 0 -9 z\"/><path d=\"M60 120 q-4 7 0 9 q4 -2 0 -9 z\"/><path d=\"M64 156 q-4 7 0 9 q4 -2 0 -9 z\"/><path d=\"M158 90 q-4 7 0 9 q4 -2 0 -9 z\"/><path d=\"M160 130 q-4 7 0 9 q4 -2 0 -9 z\"/><path d=\"M156 160 q-4 7 0 9 q4 -2 0 -9 z\"/><path d=\"M176 105 q-4 7 0 9 q4 -2 0 -9 z\"/><text x=\"110\" y=\"204\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">air in the room is warm</text></svg>"
+    },
+    {
+      "key": "wc-107",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar graph shows the amount of rain in a town in six months. How much more rain fell in May than in March?",
+      "options": [
+        "100 mm",
+        "60 mm",
+        "40 mm",
+        "160 mm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-read",
+          "why": "100 mm is the rain in May alone, not the difference."
+        },
+        {
+          "tag": "wrong-read",
+          "why": "This is the rain in March alone."
+        },
+        null,
+        {
+          "tag": "added",
+          "why": "This adds the two months instead of finding the difference."
+        }
+      ],
+      "solution": [
+        "May is 100 mm and March is 60 mm. 100 - 60 = 40 mm."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rain in six months</text><path d=\"M52 38 V188 H342\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.6\" x2=\"52\" y2=\"166.6\"/><text x=\"44\" y=\"170.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"145.1\" x2=\"52\" y2=\"145.1\"/><text x=\"44\" y=\"149.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"123.7\" x2=\"52\" y2=\"123.7\"/><text x=\"44\" y=\"127.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"102.3\" x2=\"52\" y2=\"102.3\"/><text x=\"44\" y=\"106.28571428571429\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"80.9\" x2=\"52\" y2=\"80.9\"/><text x=\"44\" y=\"84.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"48\" y1=\"59.4\" x2=\"52\" y2=\"59.4\"/><text x=\"44\" y=\"63.428571428571445\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">140</text><text x=\"76.16666666666667\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Jan</text><text x=\"124.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Feb</text><text x=\"172.83333333333331\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Mar</text><text x=\"221.16666666666666\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Apr</text><text x=\"269.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">May</text><text x=\"317.8333333333333\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Jun</text><text x=\"197.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Month</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Rain (mm)</text><rect x=\"64.1\" y=\"59.4\" width=\"24.2\" height=\"128.6\"/><rect x=\"112.4\" y=\"102.3\" width=\"24.2\" height=\"85.7\"/><rect x=\"160.7\" y=\"123.7\" width=\"24.2\" height=\"64.3\"/><rect x=\"209.1\" y=\"113.0\" width=\"24.2\" height=\"75.0\"/><rect x=\"257.4\" y=\"80.9\" width=\"24.2\" height=\"107.1\"/><rect x=\"305.8\" y=\"145.1\" width=\"24.2\" height=\"42.9\"/></svg>"
+    },
+    {
+      "key": "wc-108",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A pond had no rain on any day shown in the graph. What is the best reason for the fall in the water level?",
+      "options": [
+        "The water condensed into rain in the pond",
+        "The Sun's heat made water evaporate",
+        "Water vapour dropped into the pond",
+        "The pond made more water vapour at night"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Condensation does not remove water from a pond."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "That would raise the level."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The level fell steadily during the whole time."
+        }
+      ],
+      "solution": [
+        "With no rain, water lost through evaporation lowers the level."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water level of a pond with no rain</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"163.0\" x2=\"52\" y2=\"163.0\"/><text x=\"44\" y=\"167.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"138.0\" x2=\"52\" y2=\"138.0\"/><text x=\"44\" y=\"142.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"88.0\" x2=\"52\" y2=\"88.0\"/><text x=\"44\" y=\"92.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"63.0\" x2=\"52\" y2=\"63.0\"/><text x=\"44\" y=\"67.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"119.5\" y1=\"188\" x2=\"119.5\" y2=\"192\"/><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"187.0\" y1=\"188\" x2=\"187.0\" y2=\"192\"/><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"254.5\" y1=\"188\" x2=\"254.5\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Day</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water level (cm)</text><polyline points=\"52.0,63.0 119.5,70.5 187.0,78.0 254.5,85.5 322.0,93.0\"/><circle cx=\"52.0\" cy=\"63.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"70.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"78.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"85.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"93.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "wc-109",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "A river was checked at three places for fish. The factory pipe is next to place B. What does the table suggest?",
+      "options": [
+        "Something harmful may have entered near B",
+        "The river was the cleanest place at B",
+        "Fish prefer to live close to the factory pipe",
+        "The river flows upwards to A"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Place B has the fewest fish."
+        },
+        {
+          "tag": "reversed",
+          "why": "There are fewer fish near the factory."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The table says nothing about the flow."
+        }
+      ],
+      "solution": [
+        "Fish fall from 24 at A to 9 at B, so pollution near B is likely."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fish seen in a river</text><rect x=\"10\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"105.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"200\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fish seen</text><rect x=\"10\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A (before the factory)</text><rect x=\"200\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">24</text><rect x=\"10\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B (next to the pipe)</text><rect x=\"200\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">9</text><rect x=\"10\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C (far downstream)</text><rect x=\"200\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">15</text></svg>"
+    },
+    {
+      "key": "wc-110",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows how a family uses water in one day. Which activity should the family try to reduce first to save the most water?",
+      "options": [
+        "Cooking",
+        "Flushing",
+        "Laundry",
+        "Showering"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-row",
+          "why": "Cooking uses the least water of the four."
+        },
+        {
+          "tag": "wrong-row",
+          "why": "Flushing uses less water than showering."
+        },
+        {
+          "tag": "wrong-row",
+          "why": "Laundry is the second highest, not the highest."
+        },
+        null
+      ],
+      "solution": [
+        "Showering uses 120 litres, the most."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water used by a family in one day</text><rect x=\"10\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"85.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Activity</text><rect x=\"160\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"235.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water used (litres)</text><rect x=\"10\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Showering</text><rect x=\"160\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"235.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">120</text><rect x=\"10\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Laundry</text><rect x=\"160\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"235.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">90</text><rect x=\"10\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Flushing</text><rect x=\"160\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"235.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60</text><rect x=\"10\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Cooking</text><rect x=\"160\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"235.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text></svg>"
+    },
+    {
+      "key": "wc-111",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why can people not drink sea water straight from the sea?",
+      "options": [
+        "It has no water in it",
+        "It has too little salt in it",
+        "It has too much salt in it",
+        "It is too warm to drink"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Sea water is mostly water."
+        },
+        {
+          "tag": "reversed",
+          "why": "The salt is the problem."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Temperature is not the problem."
+        }
+      ],
+      "solution": [
+        "The salt in sea water makes it unfit to drink."
+      ]
+    },
+    {
+      "key": "wc-112",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why do countries store rain water in reservoirs?",
+      "options": [
+        "To stop clouds from forming",
+        "To keep fresh water for later use",
+        "To make the sea salty",
+        "To keep the water from evaporating at all"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Storing rain does not affect clouds."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Reservoirs have nothing to do with sea salt."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Some water still evaporates from reservoirs."
+        }
+      ],
+      "solution": [
+        "A reservoir gives a store of fresh water."
+      ]
+    },
+    {
+      "key": "wc-113",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A factory pours oily waste into a river. Which is a likely result for the river?",
+      "options": [
+        "Less clean water is left for living things to use",
+        "The river gets more oxygen for the fish",
+        "Rain stops falling over the river",
+        "The river water becomes cleaner"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Oil on water makes it harder for fish to live."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Pollution in a river does not stop the rain."
+        },
+        {
+          "tag": "reversed",
+          "why": "Waste makes water dirtier, not cleaner."
+        }
+      ],
+      "solution": [
+        "Water pollution means less clean water for living things."
+      ]
+    },
+    {
+      "key": "wc-114",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why does an oil spill harm sea birds and fish?",
+      "options": [
+        "The oil makes the sea water much warmer",
+        "The oil makes the animals grow much faster than usual",
+        "The oil makes the sea water far too salty",
+        "The oil coats animals and blocks air from the water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The harm is from coating and blocking air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Oil does not help living things grow."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Oil does not add salt to the sea."
+        },
+        null
+      ],
+      "solution": [
+        "Oil sticks to feathers and gills and stops air from reaching the water."
+      ]
+    },
+    {
+      "key": "wc-115",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which action by a community would do most to reduce litter in a river?",
+      "options": [
+        "Telling people to drink much more water each day",
+        "Building much taller houses along the river",
+        "Putting out bins and teaching people to use them",
+        "Using more fertiliser on the farms nearby"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Drinking water does not remove litter."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This does not stop litter."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "More fertiliser makes pollution worse."
+        }
+      ],
+      "solution": [
+        "Bins and good habits keep litter out of drains and rivers."
+      ]
+    },
+    {
+      "key": "wc-116",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why is it unsafe to let sewage flow into a river without treating it?",
+      "options": [
+        "It makes the river flow backwards",
+        "It carries germs that spread diseases",
+        "It makes the water too clean to drink",
+        "It stops the Sun from heating the river"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Sewage does not change the direction of flow."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Sewage makes the water dirtier."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Sewage does not block the Sun's heat."
+        }
+      ],
+      "solution": [
+        "Untreated sewage has germs that cause illness."
+      ]
+    },
+    {
+      "key": "wc-117",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A celery stalk is placed in red water for one day. Red lines are seen inside the stalk. What does this show?",
+      "options": [
+        "Water moves up through the stalk",
+        "Water moves down from the leaves",
+        "The stalk makes red water",
+        "The stalk gives out water from its cut end"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The red colour shows the water going up from the cut end."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The colour came from outside."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The water entered the stalk."
+        }
+      ],
+      "solution": [
+        "Plants carry water up through tubes in the stem."
+      ]
+    },
+    {
+      "key": "wc-118",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "On a very hot afternoon a plant wilts, but it stands up again after being watered. Why did it wilt?",
+      "options": [
+        "Its roots took in far too much water",
+        "Its leaves made far too much food to hold",
+        "Its stem grew too long to stand up",
+        "It lost water faster than the roots took it in"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Too much water does not make a plant wilt."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Making food does not make a plant droop."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Stem length does not change in one afternoon."
+        },
+        null
+      ],
+      "solution": [
+        "A plant wilts when it loses more water than it takes in."
+      ]
+    },
+    {
+      "key": "wc-119",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "On a hot day we sweat a lot. How does sweating help the body?",
+      "options": [
+        "Sweat adds heat to the skin",
+        "Sweat makes the skin thicker and tougher",
+        "Sweat takes heat away as it dries",
+        "Sweat stops the blood from moving"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Evaporating sweat takes heat away."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Sweat does not change the thickness of skin."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Blood keeps moving."
+        }
+      ],
+      "solution": [
+        "Sweat evaporates and takes heat away, so the body cools."
+      ]
+    },
+    {
+      "key": "wc-120",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which job does water do inside the human body?",
+      "options": [
+        "It makes the bones hard and strong",
+        "It forms most of the blood that carries food",
+        "It makes the air that the lungs breathe",
+        "It stops us from ever feeling thirsty"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Bones are hardened by other materials, not water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water does not make air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Drinking water does this, but it is not a job of water in the body."
+        }
+      ],
+      "solution": [
+        "Blood is mostly water and carries food and oxygen."
+      ]
+    },
+    {
+      "key": "wc-121",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which two actions both help to save water?",
+      "options": [
+        "Washing a car with a bucket and watering plants with rinse water",
+        "Washing a car with a hose and leaving the tap on",
+        "Washing a car with a bucket and leaving a tap dripping",
+        "Watering plants with rinse water and using a hose to wash the path"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wasting",
+          "why": "Both waste water."
+        },
+        {
+          "tag": "mixed",
+          "why": "A dripping tap wastes water."
+        },
+        {
+          "tag": "mixed",
+          "why": "A hose wastes water."
+        }
+      ],
+      "solution": [
+        "A bucket uses less water than a hose. Rinse water is reused."
+      ]
+    },
+    {
+      "key": "wc-122",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Most of the Earth is covered with water. Why must people still save water?",
+      "options": [
+        "Water is made only in the sea and then lost",
+        "Fresh water cannot evaporate or fall as rain",
+        "Water gets used up and is never replaced",
+        "Only a little of it is fresh water we can use"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Water moves in the water cycle."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "All water can evaporate."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Rain replaces water, but clean fresh water is still limited."
+        },
+        null
+      ],
+      "solution": [
+        "Fresh water is a small part of all the water on Earth."
+      ]
+    },
+    {
+      "key": "wc-123",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. At which letter does water lose heat as it changes into tiny droplets?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "P is rain falling."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Q is river water flowing."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "S is water vapour rising as it gains heat."
+        }
+      ],
+      "solution": [
+        "Water vapour loses heat and condenses in the cloud, R."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "wc-124",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The graph shows the water level in a reservoir at the end of each month. In which month did the reservoir gain the most water?",
+      "options": [
+        "March",
+        "April",
+        "May",
+        "June"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-read",
+          "why": "From February to March the level rose by only 2 m."
+        },
+        null,
+        {
+          "tag": "wrong-read",
+          "why": "From April to May the level changed by 2 m."
+        },
+        {
+          "tag": "wrong-read",
+          "why": "From May to June the level fell."
+        }
+      ],
+      "solution": [
+        "March to April: 8 m to 14 m. This is the biggest rise."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water level in a reservoir</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"150.5\" x2=\"52\" y2=\"150.5\"/><text x=\"44\" y=\"154.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"75.5\" x2=\"52\" y2=\"75.5\"/><text x=\"44\" y=\"79.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Feb</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Mar</text><line x1=\"119.5\" y1=\"188\" x2=\"119.5\" y2=\"192\"/><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Apr</text><line x1=\"187.0\" y1=\"188\" x2=\"187.0\" y2=\"192\"/><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">May</text><line x1=\"254.5\" y1=\"188\" x2=\"254.5\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Jun</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">End of month</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water level (m)</text><polyline points=\"52.0,131.8 119.5,113.0 187.0,56.8 254.5,75.5 322.0,103.6\"/><circle cx=\"52.0\" cy=\"131.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"113.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"56.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"75.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"103.6\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "wc-125",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A student wants more drops to form under the plastic sheet in the same time. Which change would help?",
+      "options": [
+        "Put more ice on top of the sheet",
+        "Take the plastic sheet off the bowl",
+        "Use cooler water in the bowl",
+        "Put a warm cloth on the sheet"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-change",
+          "why": "Vapour would escape instead of condensing."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Cooler water makes less water vapour."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "A warm sheet cools the vapour less."
+        }
+      ],
+      "solution": [
+        "More ice cools the sheet more, so more vapour condenses."
+      ],
+      "figure": "<svg viewBox=\"0 0 200 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"100\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A model of the water cycle</text><g transform=\"translate(0 0)\"><path d=\"M30 80 V110 Q30 170 100 170 Q170 170 170 110 V80\"/><path d=\"M40 128 Q100 138 160 128\" stroke-dasharray=\"3 3\"/><path d=\"M70 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M100 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M130 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M24 78 Q100 98 176 78\" stroke-width=\"3\"/><rect x=\"68\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><rect x=\"91\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><rect x=\"114\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><path d=\"M62 94 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M88 100 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M112 100 q-3 5 0 7 q3 -2 0 -7 z\"/><path d=\"M138 94 q-3 5 0 7 q3 -2 0 -7 z\"/><text x=\"100\" y=\"190\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text></g><text x=\"100\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">ice cubes on plastic sheet</text></svg>"
+    },
+    {
+      "key": "wc-201",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which statement is correct?",
+      "options": [
+        "Water vapour turns into tiny droplets at Q",
+        "Water changes from gas to liquid at P",
+        "Tiny droplets change into water vapour at R",
+        "Water flows up the river at S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "At P, liquid water changes into water vapour."
+        },
+        {
+          "tag": "reversed",
+          "why": "At R the water is already falling as a liquid."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "River water flows down to the sea."
+        }
+      ],
+      "solution": [
+        "P is evaporation, Q is condensation, R is rain, S is run-off."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "wc-202",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. Which stages need the water to be cooled?",
+      "options": [
+        "The stages at P and Q",
+        "Only the stage at P",
+        "The stages at R and S",
+        "Only the stage at S"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "Water gains heat to evaporate. It does not need to be cooled."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "P needs heat, not cooling."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "R is rain falling. It does not need cooling."
+        },
+        null
+      ],
+      "solution": [
+        "Condensation, at S, needs cooling. Evaporation, at P, needs heat."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "wc-203",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Set-ups A and B each have a bowl of the same hot water and a plastic sheet. The only difference is the ice on A. After 10 minutes, which set-up has more drops under its sheet and why?",
+      "options": [
+        "B, because it is warmer under the sheet",
+        "A, because the ice adds water to the sheet",
+        "A, because the ice cools the vapour more",
+        "They are the same, because the water is the same"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "A warmer sheet cools the vapour less."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The ice does not add water under the sheet."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "The sheet is colder in A, so more vapour condenses."
+        }
+      ],
+      "solution": [
+        "The colder sheet in A makes more water vapour condense into drops."
+      ],
+      "figure": "<svg viewBox=\"0 0 430 224\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"210\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two set-ups with hot water</text><g transform=\"translate(0 0)\"><path d=\"M30 80 V110 Q30 170 100 170 Q170 170 170 110 V80\"/><path d=\"M40 128 Q100 138 160 128\" stroke-dasharray=\"3 3\"/><path d=\"M70 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M100 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M130 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M24 78 Q100 98 176 78\" stroke-width=\"3\"/><rect x=\"68\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><rect x=\"91\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><rect x=\"114\" y=\"68\" width=\"18\" height=\"16\" rx=\"2\" fill=\"#fff\"/><text x=\"100\" y=\"190\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text><text x=\"100\" y=\"210\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up A</text></g><g transform=\"translate(220 0)\"><path d=\"M30 80 V110 Q30 170 100 170 Q170 170 170 110 V80\"/><path d=\"M40 128 Q100 138 160 128\" stroke-dasharray=\"3 3\"/><path d=\"M70 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M100 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M130 126 q-6 -6 0 -12 t0 -12\" stroke-dasharray=\"2 4\"/><path d=\"M24 78 Q100 98 176 78\" stroke-width=\"3\"/><text x=\"100\" y=\"190\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text><text x=\"100\" y=\"210\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up B</text></g><text x=\"100\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">ice on sheet</text><text x=\"320\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">no ice on sheet</text></svg>"
+    },
+    {
+      "key": "wc-204",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Water is boiled in a pot with a lid. Drops of water form under the lid and fall back into the pot. Which part of the water cycle does the lid most resemble?",
+      "options": [
+        "The sea where water evaporates",
+        "A cold place high in the air",
+        "A river that carries water",
+        "The Sun that heats the water"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The sea is where water evaporates, like the hot pot."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "A river flows. The lid does not."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The Sun is like the stove, not the lid."
+        }
+      ],
+      "solution": [
+        "The cool lid acts like the cold air, so vapour condenses on it."
+      ]
+    },
+    {
+      "key": "wc-205",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why do clouds form high above the ground rather than on the ground?",
+      "options": [
+        "Rising air cools, so the vapour condenses",
+        "The Sun heats the air more and more at the top",
+        "Water vapour is too heavy to stay low",
+        "Water vapour only forms in high air"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The air gets cooler, not hotter, as it rises."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour is light and rises."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour forms from the sea and land below."
+        }
+      ],
+      "solution": [
+        "The vapour rises into cooler air and condenses into droplets."
+      ]
+    },
+    {
+      "key": "wc-206",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Tiny droplets in a cloud stay in the air, but raindrops fall. What is the main difference?",
+      "options": [
+        "Raindrops are made of water vapour",
+        "Raindrops are warmer than the droplets",
+        "Raindrops have salt in them",
+        "Raindrops are bigger and heavier"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour is a gas and cannot fall as drops."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Temperature does not decide this."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Rain is fresh water."
+        },
+        null
+      ],
+      "solution": [
+        "Many tiny droplets join into a drop that is too heavy to stay up."
+      ]
+    },
+    {
+      "key": "wc-207",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A pond gets water only from rain. In a month with no rain, the pond becomes smaller. Which is the main reason?",
+      "options": [
+        "The rain stopped the water from evaporating",
+        "The pond made more clouds for itself",
+        "More water evaporated than was gained",
+        "The water condensed and left the pond"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "No rain fell."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A pond does not make clouds by itself."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Condensation does not take water out of a pond."
+        }
+      ],
+      "solution": [
+        "No rain came in, and water kept evaporating."
+      ]
+    },
+    {
+      "key": "wc-208",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the water going into a reservoir and the water used from it each month. In which month did the reservoir lose the most water overall?",
+      "options": [
+        "January",
+        "February",
+        "March",
+        "April"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "In January the loss was 15 million m3. In February it was 20."
+        },
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "In March the reservoir gained water."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "In April the reservoir gained water."
+        }
+      ],
+      "solution": [
+        "Feb: 30 - 50 = -20. Jan: 40 - 55 = -15. March and April gain water."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A reservoir's water in and used</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Month</text><rect x=\"80\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"155.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in (million m3)</text><rect x=\"230\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"305.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water used (million m3)</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Jan</text><rect x=\"80\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"155.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"230\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"305.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">55</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Feb</text><rect x=\"80\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"155.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"230\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"305.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Mar</text><rect x=\"80\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"155.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">70</text><rect x=\"230\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"305.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">55</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Apr</text><rect x=\"80\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"155.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"230\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"305.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60</text></svg>"
+    },
+    {
+      "key": "wc-209",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "A tap leaks and wastes 4 litres of water every hour. How much water does it waste in 2 days?",
+      "options": [
+        "192 litres",
+        "96 litres",
+        "48 litres",
+        "8 litres"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "one-day",
+          "why": "This is for 1 day only. 4 x 24 = 96."
+        },
+        {
+          "tag": "hours",
+          "why": "This is only 12 hours' worth."
+        },
+        {
+          "tag": "wrong-unit",
+          "why": "This is only 2 hours' worth."
+        }
+      ],
+      "solution": [
+        "2 days = 48 hours. 4 x 48 = 192 litres."
+      ]
+    },
+    {
+      "key": "wc-210",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which statement about untreated used water flowing into a river is correct?",
+      "options": [
+        "It makes the river water cleaner and safer for fish",
+        "It affects only the colour of the river and nothing else",
+        "It is safe because the river flows to the sea",
+        "It can make the water unsafe and harm living things"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Untreated used water adds dirt and germs."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It can also carry germs and harmful chemicals."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Pollution spreads with the flowing water."
+        },
+        null
+      ],
+      "solution": [
+        "Used water carries germs and chemicals."
+      ]
+    },
+    {
+      "key": "wc-211",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "How does NEWater help a country that has little land to store rain water?",
+      "options": [
+        "It makes more rain fall on the land",
+        "It turns the sea water into new rivers",
+        "It gives fresh water made from used water",
+        "It stops water from ever being used up"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "NEWater does not change the rain."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "NEWater is made from used water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water still needs to be treated and used carefully."
+        }
+      ],
+      "solution": [
+        "Used water is cleaned and used again, adding to the water supply."
+      ]
+    },
+    {
+      "key": "wc-212",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which action helps to keep the fresh water of rivers and lakes clean?",
+      "options": [
+        "Throwing litter into the canal",
+        "Treating used water before it flows back to the river",
+        "Pouring used cooking oil down the drain",
+        "Washing rubbish into the stream"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-action",
+          "why": "Litter pollutes the water."
+        },
+        null,
+        {
+          "tag": "wrong-action",
+          "why": "Oil pollutes the water."
+        },
+        {
+          "tag": "wrong-action",
+          "why": "Rubbish pollutes the water."
+        }
+      ],
+      "solution": [
+        "Treating used water removes dirt before it reaches the river."
+      ]
+    },
+    {
+      "key": "wc-213",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three plants were kept as shown in the table, and each had enough air. Which plant could make food?",
+      "options": [
+        "Plant X only",
+        "Plant Y only",
+        "Plant Z only",
+        "All three plants"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-plant",
+          "why": "Plant Y has light but no water."
+        },
+        {
+          "tag": "wrong-plant",
+          "why": "Plant Z has water but no light."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Making food needs both light and water."
+        }
+      ],
+      "solution": [
+        "Plants need water and light to make food."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"125.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three plants for five days</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"80\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"120.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Light</text><rect x=\"160\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"200.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">X</text><rect x=\"80\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"120.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"160\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"200.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Y</text><rect x=\"80\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"120.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text><rect x=\"160\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"200.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">no</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Z</text><rect x=\"80\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"120.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">no</text><rect x=\"160\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"200.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">yes</text></svg>"
+    },
+    {
+      "key": "wc-214",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "After running a race, a child drinks water. Which is the best reason for this?",
+      "options": [
+        "To make the heart stop beating fast",
+        "To turn sweat into blood at once",
+        "To make the muscles grow bigger",
+        "To replace water lost as sweat"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Drinking water does not stop the heart rate."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Sweat is not turned into blood."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Muscles do not grow from one drink."
+        },
+        null
+      ],
+      "solution": [
+        "Sweat is mostly water. Replacing it helps cooling and blood flow."
+      ]
+    },
+    {
+      "key": "wc-215",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-2",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A pond dried up in a long hot spell, and all the fish in it died. Why?",
+      "options": [
+        "The fish evaporated into the air",
+        "The fish could no longer make clouds",
+        "The fish had no water to live in and take in oxygen from",
+        "The fish were too heavy for the dry pond"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Fish do not turn into water vapour."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Fish do not make clouds."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Weight is not why they died."
+        }
+      ],
+      "solution": [
+        "Without water, fish lose their habitat and cannot take in oxygen."
+      ]
+    },
+    {
+      "key": "wc-216",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "After a hot shower, the bathroom mirror is covered with tiny drops of water. Why did the drops form on the mirror?",
+      "options": [
+        "The mirror made new water by itself",
+        "The cool mirror cooled the vapour",
+        "The mirror soaked up water from the walls",
+        "The mirror was heated by the shower"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A mirror cannot make water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The drops come from the air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A cooler mirror causes the drops."
+        }
+      ],
+      "solution": [
+        "Vapour cooled at the cooler mirror and condensed into drops."
+      ]
+    },
+    {
+      "key": "wc-217",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Sea water is salty, but rain water is not. What is the best explanation?",
+      "options": [
+        "The salt stays behind as water evaporates",
+        "The clouds remove the salt with the wind",
+        "The salt turns into water vapour too",
+        "The sea water loses its salt when it rains"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Wind does not remove salt."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Salt stays in the sea."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Salt remains in the sea."
+        }
+      ],
+      "solution": [
+        "Only the water changes into vapour. The salt stays in the sea."
+      ]
+    },
+    {
+      "key": "wc-218",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar graph shows the rain in six months. What is the total rain in March and April?",
+      "options": [
+        "60 mm",
+        "70 mm",
+        "10 mm",
+        "130 mm"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-read",
+          "why": "This is March alone."
+        },
+        {
+          "tag": "wrong-read",
+          "why": "This is April alone."
+        },
+        {
+          "tag": "subtracted",
+          "why": "This is the difference, not the total."
+        },
+        null
+      ],
+      "solution": [
+        "March 60 mm + April 70 mm = 130 mm."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Total rain in six months</text><path d=\"M52 38 V188 H342\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.6\" x2=\"52\" y2=\"166.6\"/><text x=\"44\" y=\"170.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"145.1\" x2=\"52\" y2=\"145.1\"/><text x=\"44\" y=\"149.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"123.7\" x2=\"52\" y2=\"123.7\"/><text x=\"44\" y=\"127.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"102.3\" x2=\"52\" y2=\"102.3\"/><text x=\"44\" y=\"106.28571428571429\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"80.9\" x2=\"52\" y2=\"80.9\"/><text x=\"44\" y=\"84.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"48\" y1=\"59.4\" x2=\"52\" y2=\"59.4\"/><text x=\"44\" y=\"63.428571428571445\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">140</text><text x=\"76.16666666666667\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Jan</text><text x=\"124.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Feb</text><text x=\"172.83333333333331\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Mar</text><text x=\"221.16666666666666\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Apr</text><text x=\"269.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">May</text><text x=\"317.8333333333333\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Jun</text><text x=\"197.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Month</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Rain (mm)</text><rect x=\"64.1\" y=\"59.4\" width=\"24.2\" height=\"128.6\"/><rect x=\"112.4\" y=\"102.3\" width=\"24.2\" height=\"85.7\"/><rect x=\"160.7\" y=\"123.7\" width=\"24.2\" height=\"64.3\"/><rect x=\"209.1\" y=\"113.0\" width=\"24.2\" height=\"75.0\"/><rect x=\"257.4\" y=\"80.9\" width=\"24.2\" height=\"107.1\"/><rect x=\"305.8\" y=\"145.1\" width=\"24.2\" height=\"42.9\"/></svg>"
+    },
+    {
+      "key": "wc-219",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. In which stage does water move through the air as a gas?",
+      "options": [
+        "The arrow marked Q",
+        "The arrow marked R",
+        "The arrow marked P",
+        "The cloud marked S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "Q is the rain, which falls as liquid drops."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "R is the river, where the water is a liquid."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "The cloud holds liquid droplets, not a gas."
+        }
+      ],
+      "solution": [
+        "Water rises as water vapour, which is a gas."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "wc-220",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A glass of river water looks clear, but a child still becomes ill after drinking it. What is the best explanation?",
+      "options": [
+        "Clear water always has too little oxygen",
+        "Harmful germs or chemicals can still be in it",
+        "Clear water cannot be digested by the body",
+        "The river must have been far too cold to drink"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Clear water does not mean low oxygen."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water is not digested."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Cold water does not cause this illness."
+        }
+      ],
+      "solution": [
+        "Germs are too small to see, and some harmful chemicals dissolve in water."
+      ]
+    },
+    {
+      "key": "wc-221",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "A family collects the water used to rinse vegetables and uses it to water plants. What is the main benefit?",
+      "options": [
+        "Less clean water is needed from the tap",
+        "The plants need no light any more",
+        "The rinse water becomes fresh water",
+        "The vegetables are cleaned without water"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Plants always need light."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Rinse water is not made fresh."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water is still used to rinse them."
+        }
+      ],
+      "solution": [
+        "Reusing water means less tap water is used."
+      ]
+    },
+    {
+      "key": "wc-222",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Which two parts of the water cycle bring water into a lake?",
+      "options": [
+        "Evaporation and condensation",
+        "Rain falling and evaporation from the lake",
+        "Condensation and evaporation from the land",
+        "Rain falling and rivers flowing in"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "These take water into the air or form clouds."
+        },
+        {
+          "tag": "mixed",
+          "why": "Evaporation takes water away from the lake."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Neither brings water into the lake."
+        },
+        null
+      ],
+      "solution": [
+        "Rain and rivers add water. Evaporation removes water."
+      ]
+    },
+    {
+      "key": "wc-223",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. At which letter does water travel through the air as a liquid?",
+      "options": [
+        "P",
+        "Q",
+        "S",
+        "R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "P is water rising as a gas."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Q is the cloud, where droplets form."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "R is the river, which flows on the land."
+        }
+      ],
+      "solution": [
+        "Rain falls as liquid drops, at S."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "wc-224",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "A tank holds 600 litres of water. Each week it gains 150 litres from rain and 200 litres are used. How much water is in the tank after 3 weeks?",
+      "options": [
+        "750 litres",
+        "450 litres",
+        "600 litres",
+        "150 litres"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-sign",
+          "why": "This adds the 50 litres each week instead of taking it away."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The amount in the tank changes each week."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "This is one week of rain only."
+        }
+      ],
+      "solution": [
+        "Each week: 150 - 200 = -50 litres. After 3 weeks: 600 - 150 = 450 litres."
+      ]
+    },
+    {
+      "key": "wc-225",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-3",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Why is it important to save water even in a country with plenty of rain?",
+      "options": [
+        "Clean water is costly to make and limited",
+        "Rain water is always far too salty to use",
+        "The Sun makes water disappear from the Earth",
+        "Water in taps is not part of the water cycle"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Rain water is fresh."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water stays in the water cycle."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It is part of the same cycle."
+        }
+      ],
+      "solution": [
+        "Treating and supplying clean water is costly, and clean fresh water is limited."
+      ]
+    }
+  ]
+}

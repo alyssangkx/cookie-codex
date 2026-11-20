@@ -1,0 +1,2442 @@
+{
+  "subtopic": "sci-cycles-water-states",
+  "items": [
+    {
+      "key": "ws-001",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which of the following is water in its solid state?",
+      "options": [
+        "A hailstone",
+        "A raindrop",
+        "A puddle",
+        "Water vapour in the air"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-state",
+          "why": "A raindrop is liquid water."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "A puddle is liquid water."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "Water vapour is the gas state."
+        }
+      ],
+      "solution": [
+        "A hailstone is a lump of ice, which is solid water."
+      ]
+    },
+    {
+      "key": "ws-002",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which statement about water in the gas state is correct?",
+      "options": [
+        "It has a fixed shape and can be seen easily",
+        "It can be seen and has a fixed volume always",
+        "It has a fixed shape and a fixed volume",
+        "It cannot be seen and has no fixed shape"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour is invisible and has no shape of its own."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour cannot be seen and it spreads out."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "That describes a solid, such as ice."
+        },
+        null
+      ],
+      "solution": [
+        "Water vapour is invisible and spreads out to fill the space it is in."
+      ]
+    },
+    {
+      "key": "ws-003",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which state of water keeps its own shape?",
+      "options": [
+        "Liquid water",
+        "Water vapour",
+        "Ice",
+        "Both liquid water and water vapour"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-state",
+          "why": "Liquid water takes the shape of its container."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "Water vapour spreads out in any space."
+        },
+        null,
+        {
+          "tag": "wrong-state",
+          "why": "Neither of these keeps its own shape."
+        }
+      ],
+      "solution": [
+        "Only the solid state, ice, has a fixed shape."
+      ]
+    },
+    {
+      "key": "ws-004",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which state of water takes the shape of its container but keeps the same volume?",
+      "options": [
+        "Ice",
+        "Liquid water",
+        "Water vapour",
+        "All three states of water"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-state",
+          "why": "Ice keeps its own shape."
+        },
+        null,
+        {
+          "tag": "wrong-state",
+          "why": "Water vapour also changes its volume to fill the space."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "Ice does not take the shape of its container."
+        }
+      ],
+      "solution": [
+        "A liquid can flow into the shape of a container, and its volume stays the same."
+      ]
+    },
+    {
+      "key": "ws-005",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which letter in the diagram shows ice changing into water?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "Q is water changing into ice, which is freezing."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "R is water changing into water vapour."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "S is water vapour changing into water."
+        }
+      ],
+      "solution": [
+        "Ice to water is melting, which is P."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "ws-006",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which letter in the diagram shows condensation?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "P is melting."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Q is freezing."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "R is water changing into a gas, the opposite of condensation."
+        },
+        null
+      ],
+      "solution": [
+        "Condensation is water vapour changing into liquid water, which is S."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "ws-007",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "What is the change from liquid water to ice called?",
+      "options": [
+        "Melting",
+        "Boiling",
+        "Freezing",
+        "Condensation"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "Melting is ice changing into water."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Boiling is water changing into a gas."
+        },
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "Condensation is a gas changing into a liquid."
+        }
+      ],
+      "solution": [
+        "Liquid water changes to ice when it freezes."
+      ]
+    },
+    {
+      "key": "ws-008",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "What is the change from water vapour to liquid water called?",
+      "options": [
+        "Evaporation or boiling",
+        "Condensation",
+        "Freezing",
+        "Melting"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "Evaporation is liquid water changing into water vapour."
+        },
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "Freezing is water changing into ice."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Melting is ice changing into water."
+        }
+      ],
+      "solution": [
+        "A gas changing to a liquid is condensation."
+      ]
+    },
+    {
+      "key": "ws-009",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "At which temperature does pure ice melt?",
+      "options": [
+        "0 °C",
+        "100 °C",
+        "37 °C",
+        "-10 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "100 °C is the boiling point of water."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "37 °C is the temperature of a healthy body."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Ice that is already melting is not this cold."
+        }
+      ],
+      "solution": [
+        "Ice melts at 0 °C."
+      ]
+    },
+    {
+      "key": "ws-010",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "At which temperature does pure water boil at sea level?",
+      "options": [
+        "0 °C",
+        "90 °C",
+        "10 °C",
+        "100 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "0 °C is the melting point of ice."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Water is not boiling yet at 90 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is a cold temperature."
+        },
+        null
+      ],
+      "solution": [
+        "Water boils at 100 °C."
+      ]
+    },
+    {
+      "key": "ws-011",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Ice cubes on a plate in a warm room turn into water. What happens to the ice?",
+      "options": [
+        "It loses heat and melts",
+        "It gains heat and freezes",
+        "It gains heat and melts",
+        "It loses heat and freezes"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Melting needs heat to be gained."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Freezing is the change from water to ice."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "The ice is turning into water, not the other way round."
+        }
+      ],
+      "solution": [
+        "The ice takes in heat from the warm room and melts."
+      ]
+    },
+    {
+      "key": "ws-012",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Droplets of water form on the outside of a glass of iced water. Where does the water come from?",
+      "options": [
+        "Water that leaks through the glass",
+        "Water vapour in the air",
+        "Ice that melts and flows out of the glass",
+        "The glass itself, which makes water when cold"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Glass has no holes for water to pass through."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The glass is not leaking."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A glass cannot make water."
+        }
+      ],
+      "solution": [
+        "Water vapour in the air touches the cold glass and condenses."
+      ],
+      "figure": "<svg viewBox=\"0 0 260 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A glass of iced water</text><path d=\"M80 48 L88 200 H172 L180 48\" stroke-width=\"2.5\"/><path d=\"M82 78 H178\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><rect x=\"94\" y=\"76\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#fff\" stroke-width=\"1.8\"/><rect x=\"128\" y=\"84\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#fff\" stroke-width=\"1.8\"/><rect x=\"110\" y=\"108\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#fff\" stroke-width=\"1.8\"/><path d=\"M73 79 Q78 87 73 91 Q68 87 73 79 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M76 117 Q81 125 76 129 Q71 125 76 117 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M80 153 Q85 161 80 165 Q75 161 80 153 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M188 73 Q193 81 188 85 Q183 81 188 73 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M185 111 Q190 119 185 123 Q180 119 185 111 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M182 149 Q187 157 182 161 Q177 157 182 149 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M174 179 Q179 187 174 191 Q169 187 174 179 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/></svg>"
+    },
+    {
+      "key": "ws-013",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A puddle on a concrete floor slowly disappears on a sunny day. What has happened to the water?",
+      "options": [
+        "It has changed into water vapour in the air",
+        "It has frozen into a thin sheet of ice on the floor",
+        "It has soaked down into the concrete floor",
+        "It has been used up and is gone for good"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The Sun makes things warm, so ice would not form."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Concrete floors do not soak up this much water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water does not disappear. It changes state."
+        }
+      ],
+      "solution": [
+        "The water gains heat from the Sun and evaporates."
+      ]
+    },
+    {
+      "key": "ws-014",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A kettle of water is boiling. What is the white mist at Y made of?",
+      "options": [
+        "Water vapour coming out of the spout",
+        "Smoke from the burning heater",
+        "Tiny pieces of ice",
+        "Tiny drops of liquid water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour is a gas that we cannot see."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The kettle only contains water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The air above a kettle is too hot for ice."
+        },
+        null
+      ],
+      "solution": [
+        "Water vapour cools in the air and condenses into tiny drops, which we see as mist."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"190.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A kettle of boiling water</text><path d=\"M70 190 L82 120 H190 L202 190 Z\" stroke-width=\"2.5\"/><path d=\"M82 120 L96 104 H176 L190 120\" stroke-width=\"2\"/><path d=\"M202 150 L262 112 L270 122 L206 170\" stroke-width=\"2.5\"/><path d=\"M82 128 Q40 130 50 170 Q56 188 74 182\" stroke-width=\"3\"/><line x1=\"56\" y1=\"208\" x2=\"224\" y2=\"208\" stroke-width=\"3\"/><text x=\"280\" y=\"100\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><circle cx=\"316\" cy=\"65\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"341\" cy=\"65\" r=\"4.8\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"270\" cy=\"52\" r=\"4.9\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"318\" cy=\"72\" r=\"3.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"304\" cy=\"43\" r=\"4.1\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"312\" cy=\"33\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"290\" cy=\"72\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"280\" cy=\"67\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"316\" cy=\"38\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"335\" cy=\"41\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"344\" cy=\"70\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"56\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"284\" cy=\"73\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"71\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"296\" cy=\"39\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"273\" cy=\"45\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"268\" cy=\"62\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"68\" r=\"4.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"53\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"272\" cy=\"75\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"326\" cy=\"69\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"329\" cy=\"48\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"269\" cy=\"34\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"41\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"340\" cy=\"73\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"295\" cy=\"55\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><text x=\"360\" y=\"58\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ws-015",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the melting points and boiling points of four substances. Which substance is a liquid at 25 °C?",
+      "options": [
+        "Q",
+        "R",
+        "P",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "25 °C is below the melting point of Q, so Q is solid."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "25 °C is above the boiling point of R, so R is a gas."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "25 °C is below the melting point of S, so S is solid."
+        }
+      ],
+      "solution": [
+        "A liquid is above its melting point and below its boiling point. 25 °C is between -20 °C and 80 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting and boiling points</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting point (°C)</text><rect x=\"240\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"310.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Boiling point (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-20</text><rect x=\"240\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"240\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-50</text><rect x=\"240\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-10</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"240\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">300</text></svg>"
+    },
+    {
+      "key": "ws-016",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the melting points and boiling points of four substances. Which substance is a gas at 25 °C?",
+      "options": [
+        "P",
+        "R",
+        "Q",
+        "S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "25 °C is below the boiling point of P, so P is a liquid."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "25 °C is below the melting point of Q, so Q is solid."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "25 °C is below the melting point of S, so S is solid."
+        }
+      ],
+      "solution": [
+        "A gas is above its boiling point. 25 °C is above -10 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting and boiling points</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting point (°C)</text><rect x=\"240\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"310.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Boiling point (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-20</text><rect x=\"240\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"240\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-50</text><rect x=\"240\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-10</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"240\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">300</text></svg>"
+    },
+    {
+      "key": "ws-017",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Ice at -5 °C is heated in a beaker. What is the first change seen when the ice reaches 0 °C?",
+      "options": [
+        "The ice begins to melt",
+        "The water begins to boil",
+        "The water begins to freeze",
+        "The ice turns into water vapour"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-order",
+          "why": "Boiling happens much later, at 100 °C."
+        },
+        {
+          "tag": "reversed",
+          "why": "Heating cannot make water freeze."
+        },
+        {
+          "tag": "wrong-order",
+          "why": "Ice becomes liquid first."
+        }
+      ],
+      "solution": [
+        "At 0 °C the ice starts to melt."
+      ]
+    },
+    {
+      "key": "ws-018",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which states of water can flow?",
+      "options": [
+        "Ice, which can be poured out",
+        "Ice and liquid water",
+        "Water vapour only, since it spreads out",
+        "Liquid water and water vapour"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-state",
+          "why": "Ice keeps its shape and does not flow."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "Ice does not flow."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "Liquid water can flow too."
+        },
+        null
+      ],
+      "solution": [
+        "Liquids and gases can flow, but solids cannot."
+      ]
+    },
+    {
+      "key": "ws-019",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Water in an ice tray is put in a freezer and turns into ice. What happens to the water?",
+      "options": [
+        "It gains heat and freezes",
+        "It loses heat and melts",
+        "It loses heat and freezes",
+        "It gains heat and melts"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Water must lose heat to freeze."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Melting is ice becoming water."
+        },
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "The water is becoming ice, not melting."
+        }
+      ],
+      "solution": [
+        "Water gives out heat to the cold freezer and becomes ice."
+      ]
+    },
+    {
+      "key": "ws-020",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A bathroom mirror becomes misty after a hot shower. Which change caused this?",
+      "options": [
+        "Water on the mirror freezing into ice",
+        "Water vapour condensing on the cool mirror",
+        "Water vapour boiling away on the mirror",
+        "Hot water melting on the mirror"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The mirror is not cold enough to make ice."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Boiling needs the water to gain heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Melting is ice turning into water."
+        }
+      ],
+      "solution": [
+        "Water vapour from the shower loses heat to the cool mirror and condenses into tiny droplets."
+      ]
+    },
+    {
+      "key": "ws-021",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which state of water can be squeezed into a smaller space most easily?",
+      "options": [
+        "Water vapour",
+        "Ice",
+        "Liquid water",
+        "Ice and liquid water"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-state",
+          "why": "A solid is hard to squeeze smaller."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "A liquid is hard to squeeze smaller."
+        },
+        {
+          "tag": "wrong-state",
+          "why": "Neither can be squeezed easily."
+        }
+      ],
+      "solution": [
+        "A gas can be squeezed into a smaller space."
+      ]
+    },
+    {
+      "key": "ws-022",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "The water in a beaker is bubbling and the thermometer reading is shown. What does the reading tell us?",
+      "options": [
+        "Water melts at this temperature",
+        "Water freezes at this temperature",
+        "The water is not yet hot enough to boil",
+        "Water boils at this temperature"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "Ice melts at 0 °C."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Water freezes at 0 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The reading is at the boiling point."
+        },
+        null
+      ],
+      "solution": [
+        "The reading is 100 °C, the boiling point of water."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"202.5\" x2=\"71\" y2=\"202.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"189.0\" x2=\"71\" y2=\"189.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"193.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"175.5\" x2=\"71\" y2=\"175.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"162.0\" x2=\"71\" y2=\"162.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"166.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"148.5\" x2=\"71\" y2=\"148.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"135.0\" x2=\"71\" y2=\"135.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"139.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"65\" y1=\"121.5\" x2=\"71\" y2=\"121.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"108.0\" x2=\"71\" y2=\"108.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"112.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"65\" y1=\"94.5\" x2=\"71\" y2=\"94.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"81.0\" x2=\"71\" y2=\"81.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"85.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"65\" y1=\"67.5\" x2=\"71\" y2=\"67.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><rect x=\"75\" y=\"81.0\" width=\"6\" height=\"135.0\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ws-023",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Ice, liquid water and water vapour are ____.",
+      "options": [
+        "three different kinds of substance",
+        "one solid, one liquid and one liquid",
+        "three states of the same substance",
+        "three kinds of liquid"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "They are all water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Ice is solid, water is liquid and vapour is a gas."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Only one of them is a liquid."
+        }
+      ],
+      "solution": [
+        "They are the solid, liquid and gas states of water."
+      ]
+    },
+    {
+      "key": "ws-024",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Wet clothes dry on a clothes line. What has happened to the water in the clothes?",
+      "options": [
+        "It has frozen into ice",
+        "It has changed into water vapour",
+        "It has disappeared completely",
+        "It has changed into ice and then melted"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The clothes are not cold enough for ice."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water does not vanish. It changes state."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No ice forms when clothes dry in the air."
+        }
+      ],
+      "solution": [
+        "The water in the clothes evaporates into the air."
+      ]
+    },
+    {
+      "key": "ws-025",
+      "level": "basic",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which two letters in the diagram show changes in which water gains heat?",
+      "options": [
+        "P and R",
+        "Q and S",
+        "P and Q",
+        "R and S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Freezing and condensation need heat to be lost."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Q is freezing, which needs heat to be lost."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "S is condensation, which needs heat to be lost."
+        }
+      ],
+      "solution": [
+        "Melting (P) and boiling or evaporation (R) both need heat to be gained."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "ws-101",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which two letters in the diagram show changes in which water loses heat?",
+      "options": [
+        "Q and S",
+        "P and R",
+        "P and Q",
+        "R and S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Those changes need heat to be gained."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "P is melting, which needs heat to be gained."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "R is a change from liquid to gas, which needs heat to be gained."
+        }
+      ],
+      "solution": [
+        "Freezing and condensation need heat to be lost. In this diagram they are S and Q."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ws-102",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Wet washing dries on a sunny day. Which letter shows this change?",
+      "options": [
+        "P",
+        "Q",
+        "S",
+        "R"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "P is melting, which is ice becoming water."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Q is freezing."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "S is condensation."
+        },
+        null
+      ],
+      "solution": [
+        "The water in the washing changes into water vapour, which is R."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text></svg>"
+    },
+    {
+      "key": "ws-103",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Droplets form on the outside of a cold glass. Which letter shows the change that makes them?",
+      "options": [
+        "Q",
+        "R",
+        "P",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mixed-up",
+          "why": "Q is a liquid becoming a gas."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "R is a liquid becoming ice."
+        },
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "S is ice becoming water."
+        }
+      ],
+      "solution": [
+        "Water vapour changing to droplets is condensation, which is P in this diagram."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text></svg>"
+    },
+    {
+      "key": "ws-104",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Droplets form on the outside of a glass of iced water. Why does this happen?",
+      "options": [
+        "Water vapour in the air gains heat from the glass and condenses",
+        "Water vapour in the air loses heat to the cold glass and condenses",
+        "Water from the ice seeps through the glass",
+        "Cold from the ice goes through the glass and freezes the air"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Condensing needs heat to be lost."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Glass does not let water through."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Cold does not flow. Heat is lost from the air to the glass."
+        }
+      ],
+      "solution": [
+        "Warm air next to the cold glass loses heat, so water vapour condenses into droplets."
+      ],
+      "figure": "<svg viewBox=\"0 0 260 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A glass of iced water</text><path d=\"M80 48 L88 200 H172 L180 48\" stroke-width=\"2.5\"/><path d=\"M82 78 H178\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><rect x=\"94\" y=\"76\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#fff\" stroke-width=\"1.8\"/><rect x=\"128\" y=\"84\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#fff\" stroke-width=\"1.8\"/><rect x=\"110\" y=\"108\" width=\"24\" height=\"24\" rx=\"3\" fill=\"#fff\" stroke-width=\"1.8\"/><path d=\"M73 79 Q78 87 73 91 Q68 87 73 79 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M76 117 Q81 125 76 129 Q71 125 76 117 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M80 153 Q85 161 80 165 Q75 161 80 153 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M188 73 Q193 81 188 85 Q183 81 188 73 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M185 111 Q190 119 185 123 Q180 119 185 111 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M182 149 Q187 157 182 161 Q177 157 182 149 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M174 179 Q179 187 174 191 Q169 187 174 179 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/></svg>"
+    },
+    {
+      "key": "ws-105",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A kettle of water is boiling. What is found in the clear gap X just above the spout?",
+      "options": [
+        "Water vapour",
+        "Tiny drops of liquid water",
+        "Tiny pieces of ice",
+        "Nothing at all"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Drops would show up as mist."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It is too hot for ice."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Boiling water is turning into a gas that we cannot see."
+        }
+      ],
+      "solution": [
+        "Water vapour is invisible, so the gap looks clear."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"190.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A kettle of boiling water</text><path d=\"M70 190 L82 120 H190 L202 190 Z\" stroke-width=\"2.5\"/><path d=\"M82 120 L96 104 H176 L190 120\" stroke-width=\"2\"/><path d=\"M202 150 L262 112 L270 122 L206 170\" stroke-width=\"2.5\"/><path d=\"M82 128 Q40 130 50 170 Q56 188 74 182\" stroke-width=\"3\"/><line x1=\"56\" y1=\"208\" x2=\"224\" y2=\"208\" stroke-width=\"3\"/><text x=\"280\" y=\"100\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><circle cx=\"316\" cy=\"65\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"341\" cy=\"65\" r=\"4.8\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"270\" cy=\"52\" r=\"4.9\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"318\" cy=\"72\" r=\"3.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"304\" cy=\"43\" r=\"4.1\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"312\" cy=\"33\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"290\" cy=\"72\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"280\" cy=\"67\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"316\" cy=\"38\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"335\" cy=\"41\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"344\" cy=\"70\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"56\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"284\" cy=\"73\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"71\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"296\" cy=\"39\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"273\" cy=\"45\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"268\" cy=\"62\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"68\" r=\"4.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"53\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"272\" cy=\"75\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"326\" cy=\"69\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"329\" cy=\"48\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"269\" cy=\"34\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"41\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"340\" cy=\"73\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"295\" cy=\"55\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><text x=\"360\" y=\"58\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ws-106",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "In the kettle, why is there a clear gap between the spout and the white mist at Y?",
+      "options": [
+        "The water has not yet boiled near the spout",
+        "Ice forms in the air away from the spout",
+        "The vapour changes into liquid before it leaves",
+        "The vapour only condenses after it has cooled in the air"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The water is boiling because vapour is coming out."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The mist is liquid drops, not ice."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Condensation would wet the spout instead of leaving a gap."
+        },
+        null
+      ],
+      "solution": [
+        "Hot vapour is invisible. It cools in the air and condenses into mist a little way out."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"190.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A kettle of boiling water</text><path d=\"M70 190 L82 120 H190 L202 190 Z\" stroke-width=\"2.5\"/><path d=\"M82 120 L96 104 H176 L190 120\" stroke-width=\"2\"/><path d=\"M202 150 L262 112 L270 122 L206 170\" stroke-width=\"2.5\"/><path d=\"M82 128 Q40 130 50 170 Q56 188 74 182\" stroke-width=\"3\"/><line x1=\"56\" y1=\"208\" x2=\"224\" y2=\"208\" stroke-width=\"3\"/><text x=\"280\" y=\"100\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><circle cx=\"316\" cy=\"65\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"341\" cy=\"65\" r=\"4.8\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"270\" cy=\"52\" r=\"4.9\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"318\" cy=\"72\" r=\"3.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"304\" cy=\"43\" r=\"4.1\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"312\" cy=\"33\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"290\" cy=\"72\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"280\" cy=\"67\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"316\" cy=\"38\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"335\" cy=\"41\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"344\" cy=\"70\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"56\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"284\" cy=\"73\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"71\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"296\" cy=\"39\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"273\" cy=\"45\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"268\" cy=\"62\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"68\" r=\"4.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"53\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"272\" cy=\"75\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"326\" cy=\"69\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"329\" cy=\"48\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"269\" cy=\"34\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"41\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"340\" cy=\"73\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"295\" cy=\"55\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><text x=\"360\" y=\"58\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ws-107",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A cold lid is held over a pot of boiling water. Droplets form under the lid. Why?",
+      "options": [
+        "The rising vapour takes in heat from the lid and condenses",
+        "Hot water boils on the lid and falls back as drops",
+        "The rising vapour gives out heat to the lid and condenses",
+        "The lid has tiny holes that let water out"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Condensation needs heat to be lost."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Boiling needs the water to gain heat, and the lid is cold."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The droplets are on the underside, so they come from below."
+        }
+      ],
+      "solution": [
+        "Water vapour rising from the pot meets the cold lid, loses heat and turns into liquid drops."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A pot of boiling water</text><path d=\"M60 130 V210 H240 V130\" stroke-width=\"2.5\"/><path d=\"M62 150 H238\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"100\" cy=\"170\" r=\"5\"/><circle cx=\"130\" cy=\"184\" r=\"5\"/><circle cx=\"160\" cy=\"166\" r=\"5\"/><circle cx=\"190\" cy=\"180\" r=\"5\"/><circle cx=\"215\" cy=\"168\" r=\"5\"/><circle cx=\"145\" cy=\"196\" r=\"5\"/><path d=\"M48 70 Q150 38 252 70 Z\" fill=\"#fff\" stroke-width=\"2.5\"/><line x1=\"150\" y1=\"44\" x2=\"150\" y2=\"34\" stroke-width=\"3\"/><path d=\"M96 74 Q100 82 96 86 Q92 82 96 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M126 74 Q130 82 126 86 Q122 82 126 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M160 74 Q164 82 160 86 Q156 82 160 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M194 74 Q198 82 194 86 Q190 82 194 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M222 74 Q226 82 222 86 Q218 82 222 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/></svg>"
+    },
+    {
+      "key": "ws-108",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the melting points and boiling points of four substances. At 20 °C, which substance is a gas?",
+      "options": [
+        "P",
+        "S",
+        "Q",
+        "R"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "20 °C is between -115 °C and 78 °C, so P is a liquid."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "20 °C is between -39 °C and 357 °C, so Q is a liquid."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "20 °C is below the melting point of R, so R is a solid."
+        }
+      ],
+      "solution": [
+        "20 °C is above the boiling point of S (-183 °C), so S is a gas."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting and boiling points</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting point (°C)</text><rect x=\"240\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"310.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Boiling point (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-115</text><rect x=\"240\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-39</text><rect x=\"240\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">357</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1535</text><rect x=\"240\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2750</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-219</text><rect x=\"240\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-183</text></svg>"
+    },
+    {
+      "key": "ws-109",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the melting points and boiling points of four substances. Which substance is a liquid at 100 °C?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "100 °C is above the boiling point of P, so P is a gas."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "100 °C is below the melting point of R, so R is a solid."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "100 °C is above the boiling point of S, so S is a gas."
+        }
+      ],
+      "solution": [
+        "100 °C is between -39 °C and 357 °C, so Q is a liquid."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting and boiling points</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting point (°C)</text><rect x=\"240\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"310.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Boiling point (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-115</text><rect x=\"240\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-39</text><rect x=\"240\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">357</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1535</text><rect x=\"240\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2750</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-219</text><rect x=\"240\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-183</text></svg>"
+    },
+    {
+      "key": "ws-110",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A block of ice at 0 °C is placed in a warm room. What happens to the temperature of the ice while it is melting?",
+      "options": [
+        "It rises steadily as the room is warm",
+        "It falls below 0 °C as the ice loses cold",
+        "It rises to 100 °C at once",
+        "It stays at 0 °C until all the ice has melted"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The temperature stays at the melting point until the ice is gone."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ice gains heat from the room. It does not get colder."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Only boiling water reaches 100 °C."
+        },
+        null
+      ],
+      "solution": [
+        "The heat gained is used to melt the ice, so the temperature stays at 0 °C."
+      ]
+    },
+    {
+      "key": "ws-111",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily. The graph shows the temperature. Which part of the graph shows the ice melting?",
+      "options": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "In A the ice is getting warmer but has not started to melt."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "In C the melting is over and the water is getting hotter."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "D is the flat part where the water boils."
+        }
+      ],
+      "solution": [
+        "The first flat part, at 0 °C, is the ice melting."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-112",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. Which part of the graph shows the water boiling?",
+      "options": [
+        "B",
+        "D",
+        "C",
+        "E"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "B is at 0 °C, where ice melts."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "In C the temperature is still rising, so the water has not started to boil."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "In E the temperature is rising again, so boiling is finished."
+        }
+      ],
+      "solution": [
+        "The second flat part, at 100 °C, is boiling."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-113",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. In which state is the water during part C?",
+      "options": [
+        "Liquid water only",
+        "Ice and liquid water",
+        "Liquid water and water vapour",
+        "Water vapour only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "That is part B, while the ice is melting."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "That is part D, while the water boils."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "That is part E, after all the water has boiled away."
+        }
+      ],
+      "solution": [
+        "All the ice has melted and the water has not started to boil."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-114",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. Why does the temperature stay at 0 °C in part B although the heater is still on?",
+      "options": [
+        "The heater stops giving out heat for a while",
+        "The ice loses heat as fast as it gains heat",
+        "The thermometer cannot read above 0 °C",
+        "The heat gained is used to change ice into water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The heater is still on."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ice is gaining heat all the time."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The same thermometer reads higher later."
+        },
+        null
+      ],
+      "solution": [
+        "Heat is used up in changing the state, so the temperature does not rise until all the ice has melted."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-115",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. What is the boiling point of the water?",
+      "options": [
+        "0 °C",
+        "112 °C",
+        "100 °C",
+        "20 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "0 °C is where the first flat part is, which is melting."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "112 °C is only the highest reading at the end."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "20 is a time in minutes, not a temperature."
+        }
+      ],
+      "solution": [
+        "The temperature stays at 100 °C in the second flat part."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-116",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Water in an open beaker is boiling on a stove. The thermometer stays at 100 °C even though the flame is still on. What is the heat being used for?",
+      "options": [
+        "Making the water hotter than 100 °C",
+        "Changing liquid water into water vapour",
+        "Turning water vapour back into liquid water",
+        "Making the beaker lose mass"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The reading is not rising."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "That change gives out heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The heat is used to change the water's state."
+        }
+      ],
+      "solution": [
+        "The heat is used to change water into water vapour, not to raise the temperature."
+      ]
+    },
+    {
+      "key": "ws-117",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "On a cool morning the inside of a bus window is covered with tiny drops. What are the drops?",
+      "options": [
+        "Liquid water formed from water vapour in the passengers' breath",
+        "Ice that has melted from the window glass",
+        "Water vapour that has become visible",
+        "Water that has leaked through the glass from outside"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The glass is not made of ice."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour cannot be seen. The drops are liquid."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The drops form on the inside, from the warm moist air."
+        }
+      ],
+      "solution": [
+        "Water vapour from breath cools on the cold glass and condenses into liquid drops."
+      ]
+    },
+    {
+      "key": "ws-118",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which statement about boiling and evaporation is correct?",
+      "options": [
+        "Boiling happens only at the surface, but evaporation happens throughout the water",
+        "Both happen only when water is at 100 °C",
+        "Evaporation needs the water to lose heat",
+        "Evaporation happens only at the surface, but boiling happens throughout the water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Bubbles form inside boiling water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Evaporation also happens at lower temperatures."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both changes need heat to be gained."
+        },
+        null
+      ],
+      "solution": [
+        "Evaporation takes place at the surface at any temperature. Boiling takes place throughout the liquid at 100 °C."
+      ]
+    },
+    {
+      "key": "ws-119",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table describes water in three forms X, Y and Z. Which one is water vapour?",
+      "options": [
+        "X",
+        "Y",
+        "Z",
+        "Both X and Y"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "X has a fixed shape and a fixed volume, so it is ice."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Y takes any shape but keeps its volume, so it is liquid water."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "Neither of them spreads out to fill a space."
+        }
+      ],
+      "solution": [
+        "Water vapour has neither a fixed shape nor a fixed volume."
+      ],
+      "figure": "<svg viewBox=\"0 0 350 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"175.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in three forms</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Form of water</text><rect x=\"120\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"175.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fixed shape?</text><rect x=\"230\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"285.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fixed volume?</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">X</text><rect x=\"120\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"175.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"230\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"285.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Y</text><rect x=\"120\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"175.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"230\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"285.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Z</text><rect x=\"120\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"175.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"230\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"285.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text></svg>"
+    },
+    {
+      "key": "ws-120",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which of the following changes needs water to lose heat?",
+      "options": [
+        "A wet floor drying in the hot Sun",
+        "Water vapour forming drops on a cold window",
+        "An ice cube turning into water in a cup",
+        "Water bubbling away in a hot pot"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Drying means water gains heat and evaporates."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Melting needs heat to be gained."
+        },
+        {
+          "tag": "reversed",
+          "why": "Boiling needs heat to be gained."
+        }
+      ],
+      "solution": [
+        "Condensation is the only change here in which water loses heat."
+      ]
+    },
+    {
+      "key": "ws-121",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which of the following describes boiling?",
+      "options": [
+        "Liquid water changes to water vapour throughout the liquid at 100 °C",
+        "Ice changes to liquid water throughout the block at 100 °C",
+        "Water vapour changes to liquid water on cooling at 100 °C",
+        "Liquid water changes to ice throughout the liquid at 0 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "That describes melting, which happens at 0 °C."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "That is condensation."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "That is freezing."
+        }
+      ],
+      "solution": [
+        "Boiling is the change from liquid to gas, happening in the whole liquid at 100 °C."
+      ]
+    },
+    {
+      "key": "ws-122",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A beaker of water at 15 °C is put in a freezer. The thermometer shows the same reading for a long time while the water turns into ice. What is the reading?",
+      "options": [
+        "-18 °C",
+        "15 °C",
+        "100 °C",
+        "0 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "That is the freezer's temperature, reached only after all the water has frozen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The water has cooled well below its starting temperature."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "That is the boiling point."
+        },
+        null
+      ],
+      "solution": [
+        "Water freezes at 0 °C, and its temperature stays there until all of it is ice."
+      ]
+    },
+    {
+      "key": "ws-123",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A student pours 200 mL of water from a jug into a tall glass, and then into a wide bowl. Which statement is correct?",
+      "options": [
+        "Both the shape and the volume of the water change",
+        "The shape of the water stays the same but its volume changes",
+        "The shape of the water changes but its volume stays at 200 mL",
+        "Neither the shape nor the volume of the water changes"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The amount of water stays the same."
+        },
+        {
+          "tag": "reversed",
+          "why": "Liquid water takes the shape of its container."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The shape follows the container."
+        }
+      ],
+      "solution": [
+        "A liquid takes the shape of its container and keeps its volume."
+      ]
+    },
+    {
+      "key": "ws-124",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "On a hot day an ice lolly melts and drips. What happens to heat?",
+      "options": [
+        "The lolly loses heat to the air",
+        "The lolly gains heat from the air",
+        "The air gains heat from the lolly",
+        "No heat moves, since the lolly is being cold"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Melting needs heat to be gained."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Heat flows from the hot air to the cold lolly."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A difference in temperature always makes heat flow."
+        }
+      ],
+      "solution": [
+        "Heat flows from the warm air to the cold lolly, which melts."
+      ]
+    },
+    {
+      "key": "ws-125",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "The temperature at which pure liquid water changes into a gas is called the ____ point.",
+      "options": [
+        "boiling",
+        "melting",
+        "freezing",
+        "condensing"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "Melting is the change from solid to liquid."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Freezing is the change from liquid to solid."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "Condensation is the change from gas to liquid."
+        }
+      ],
+      "solution": [
+        "Water changes to a gas at its boiling point, 100 °C."
+      ]
+    },
+    {
+      "key": "ws-201",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. In which parts does the water gain heat but its temperature stay the same?",
+      "options": [
+        "B and D",
+        "A and C",
+        "C and E",
+        "A, C and E"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature rises in these parts."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature rises in these parts."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature rises in all of these parts."
+        }
+      ],
+      "solution": [
+        "The flat parts, B and D, are where the heat changes the state."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-202",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. In which state is the water at 21 minutes?",
+      "options": [
+        "Liquid water only",
+        "Liquid water and water vapour",
+        "Ice and water vapour",
+        "Water vapour only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "All the water has boiled away by then."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "That is the boiling stage, which ended at 20 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The ice melted long before this."
+        },
+        null
+      ],
+      "solution": [
+        "After the flat boiling part is over, the temperature rises again and only water vapour remains."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-203",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. What can be seen in the beaker at 15 minutes?",
+      "options": [
+        "Only ice cubes still floating in cold water",
+        "Only clear gas, with no liquid water left",
+        "Bubbles rising through water that is still there",
+        "Water with no bubbles, which is still getting hotter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The ice melted by 6 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The water has not all boiled away yet."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "Water at 100 °C is boiling, so it has bubbles."
+        }
+      ],
+      "solution": [
+        "At 15 minutes the water is boiling at 100 °C, so there are bubbles and liquid is left."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
+    },
+    {
+      "key": "ws-204",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Ice cubes at 0 °C are put into hot tea at 80 °C and the tea is stirred until all the ice has melted. Which describes the final temperature of the tea?",
+      "options": [
+        "Exactly 0 °C, the same as the ice",
+        "Between 0 °C and 80 °C",
+        "Exactly 80 °C, as it was before",
+        "Above 80 °C, as heat was added"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "There was much more heat in the hot tea than the ice needed."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The tea loses some heat to the ice, so it cools."
+        },
+        {
+          "tag": "reversed",
+          "why": "The tea cannot become hotter by adding ice."
+        }
+      ],
+      "solution": [
+        "The tea loses heat to the ice, which melts and warms up, so the final temperature is between 0 °C and 80 °C."
+      ]
+    },
+    {
+      "key": "ws-205",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei Ling wants to find out how the mass of ice affects the time it takes to melt in a warm room. Which is the measured variable?",
+      "options": [
+        "The time taken for the ice to melt",
+        "The mass of ice put in each beaker",
+        "The temperature of the warm room",
+        "The type of container that is used"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-variable",
+          "why": "This is the variable she changes on purpose."
+        },
+        {
+          "tag": "wrong-variable",
+          "why": "This should be kept the same."
+        },
+        {
+          "tag": "wrong-variable",
+          "why": "This should be kept the same."
+        }
+      ],
+      "solution": [
+        "She changes the mass and measures the time taken."
+      ]
+    },
+    {
+      "key": "ws-206",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A beaker of crushed ice and water is left on a warm table. The thermometer in the beaker is read every minute while some ice is still left. What does it show?",
+      "options": [
+        "A reading that slowly rises above 0 °C",
+        "A reading that falls below 0 °C",
+        "A reading that rises to the room temperature at once",
+        "A reading of 0 °C all the time"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat from the room melts the ice instead of warming it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ice is gaining heat, not losing it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "While ice remains, the mixture stays at 0 °C."
+        },
+        null
+      ],
+      "solution": [
+        "The heat gained is used to melt ice, so the temperature stays at 0 °C until the ice is gone."
+      ]
+    },
+    {
+      "key": "ws-207",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "More droplets form on the outside of a cold can on a very humid day than on a dry day. Why?",
+      "options": [
+        "The air is hotter and gives more heat to the can",
+        "The can makes more water from the cold",
+        "The air has more water vapour that can condense",
+        "More ice melts inside the can"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat gained by the can does not make droplets."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A can cannot make water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The droplets come from outside the can."
+        }
+      ],
+      "solution": [
+        "More water vapour in the air means more of it condenses on the cold can."
+      ]
+    },
+    {
+      "key": "ws-208",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A girl walks from an air-conditioned room into the warm, humid air outside. Her spectacles become covered with a fine mist. Why?",
+      "options": [
+        "Water vapour in her breath freezes on the lenses",
+        "Water vapour in the warm air condenses on the cold lenses",
+        "The lenses make water when they warm up",
+        "Water inside the lenses boils away to the surface"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The lenses are cold, but not below 0 °C."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Glass cannot make water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Glass does not contain water."
+        }
+      ],
+      "solution": [
+        "The lenses are cooler than the air, so water vapour touching them loses heat and condenses."
+      ]
+    },
+    {
+      "key": "ws-209",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Two cans in a 30 °C room each hold water. Can A has iced water. Can B has water at 30 °C. Droplets form only on Can A. Why?",
+      "options": [
+        "The surface of A is cold enough to make water vapour lose heat",
+        "Can B has no water vapour in the air around it",
+        "Can A gives out more heat to the room than Can B does",
+        "The water in Can B has already evaporated and boiled away"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both cans are surrounded by the same air."
+        },
+        {
+          "tag": "reversed",
+          "why": "Can A is colder, so it gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water at 30 °C does not boil."
+        }
+      ],
+      "solution": [
+        "Only the cold surface cools the nearby air enough for water vapour to condense."
+      ]
+    },
+    {
+      "key": "ws-210",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A sealed bottle of iced water is weighed before and after droplets form on its outside. The total mass has gone up. What does this show?",
+      "options": [
+        "The water in the droplets came from inside the bottle",
+        "The ice in the bottle melted into the droplets",
+        "The droplets weigh nothing",
+        "The water in the droplets came from the air"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The mass would not go up if water only moved from inside the bottle."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bottle is sealed, so melting ice stays inside."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water drops have mass."
+        },
+        null
+      ],
+      "solution": [
+        "Extra mass can only come from outside the sealed bottle, so the droplets came from water vapour in the air."
+      ]
+    },
+    {
+      "key": "ws-211",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Aisha wants to find out whether the starting temperature of the water affects how fast an ice cube melts. Which set-up is a fair test?",
+      "options": [
+        "Two beakers of water at 20 °C and 40 °C, with one ice cube and one crushed ice",
+        "A beaker of 100 mL of water at 20 °C and a beaker of 200 mL of water at 40 °C",
+        "Two beakers of 100 mL of water at 20 °C and 40 °C, each with an identical ice cube",
+        "One beaker of water at 20 °C tested for a long time and another tested for a short time"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "unfair",
+          "why": "The ice differs, so more than one thing changes."
+        },
+        {
+          "tag": "unfair",
+          "why": "The amount of water also changes."
+        },
+        null,
+        {
+          "tag": "unfair",
+          "why": "The time is not the thing to be changed."
+        }
+      ],
+      "solution": [
+        "Only the starting temperature of the water is changed."
+      ]
+    },
+    {
+      "key": "ws-212",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which of the following is true for ice, liquid water and water vapour?",
+      "options": [
+        "They all keep their own shape in any container",
+        "They all have mass and take up space",
+        "They all can flow from one container to another",
+        "They all have a fixed volume that never changes"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Only ice keeps its own shape."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Ice does not flow."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour spreads out to fill its container."
+        }
+      ],
+      "solution": [
+        "All three are matter, so they have mass and take up space."
+      ]
+    },
+    {
+      "key": "ws-213",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "A tube of each substance is placed in a water bath at 100 °C. Which substance that is a liquid at 20 °C will boil?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "Q boils at 357 °C, far above 100 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "R is a solid at 20 °C and boils at 2750 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "S is already a gas at 20 °C, so it is not a liquid."
+        }
+      ],
+      "solution": [
+        "Only P is a liquid at 20 °C with a boiling point (78 °C) below 100 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting and boiling points</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting point (°C)</text><rect x=\"240\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"310.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Boiling point (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-115</text><rect x=\"240\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-39</text><rect x=\"240\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">357</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1535</text><rect x=\"240\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2750</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-219</text><rect x=\"240\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-183</text></svg>"
+    },
+    {
+      "key": "ws-214",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the melting points and boiling points of four substances. Which substance is a liquid at -100 °C?",
+      "options": [
+        "Q",
+        "R",
+        "S",
+        "P"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "-100 °C is below the melting point of Q, so Q is solid."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "-100 °C is below the melting point of R, so R is solid."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "-100 °C is above the boiling point of S, so S is a gas."
+        },
+        null
+      ],
+      "solution": [
+        "-100 °C is between -115 °C and 78 °C, so P is a liquid."
+      ],
+      "figure": "<svg viewBox=\"0 0 390 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"195.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting and boiling points</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Melting point (°C)</text><rect x=\"240\" y=\"36\" width=\"140\" height=\"34\"/><text x=\"310.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Boiling point (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-115</text><rect x=\"240\" y=\"70\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-39</text><rect x=\"240\" y=\"100\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">357</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1535</text><rect x=\"240\" y=\"130\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2750</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"170.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-219</text><rect x=\"240\" y=\"160\" width=\"140\" height=\"30\"/><text x=\"310.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">-183</text></svg>"
+    },
+    {
+      "key": "ws-215",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A student holds a cold metal plate above the spout at X in the kettle. Drops of water form on the plate. What does this show about X?",
+      "options": [
+        "Tiny drops of water are already there",
+        "Ice is present there",
+        "Water vapour is present there",
+        "Only air is present there"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "If drops were there, X would look misty."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The air at the spout is too hot for ice."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The drops need a supply of water."
+        }
+      ],
+      "solution": [
+        "Invisible water vapour cooled and condensed on the cold plate."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"190.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A kettle of boiling water</text><path d=\"M70 190 L82 120 H190 L202 190 Z\" stroke-width=\"2.5\"/><path d=\"M82 120 L96 104 H176 L190 120\" stroke-width=\"2\"/><path d=\"M202 150 L262 112 L270 122 L206 170\" stroke-width=\"2.5\"/><path d=\"M82 128 Q40 130 50 170 Q56 188 74 182\" stroke-width=\"3\"/><line x1=\"56\" y1=\"208\" x2=\"224\" y2=\"208\" stroke-width=\"3\"/><text x=\"280\" y=\"100\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><circle cx=\"316\" cy=\"65\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"341\" cy=\"65\" r=\"4.8\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"270\" cy=\"52\" r=\"4.9\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"318\" cy=\"72\" r=\"3.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"304\" cy=\"43\" r=\"4.1\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"312\" cy=\"33\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"290\" cy=\"72\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"280\" cy=\"67\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"316\" cy=\"38\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"335\" cy=\"41\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"344\" cy=\"70\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"56\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"284\" cy=\"73\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"71\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"296\" cy=\"39\" r=\"3.3\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"273\" cy=\"45\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"268\" cy=\"62\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"68\" r=\"4.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"292\" cy=\"53\" r=\"4.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"272\" cy=\"75\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"326\" cy=\"69\" r=\"3.0\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"329\" cy=\"48\" r=\"4.2\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"269\" cy=\"34\" r=\"3.4\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"342\" cy=\"41\" r=\"4.5\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"340\" cy=\"73\" r=\"3.7\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><circle cx=\"295\" cy=\"55\" r=\"4.6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1\"/><text x=\"360\" y=\"58\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ws-216",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Few droplets form under the lid when it is warmed to 100 °C before it is placed over the pot of boiling water. Why?",
+      "options": [
+        "The warm lid gives heat to the water vapour, which then freezes",
+        "The warm lid does not take enough heat from the water vapour",
+        "The water in the pot has stopped boiling",
+        "The warm lid makes the water vapour disappear"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour does not freeze at this temperature."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The pot is still boiling."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour is still there but is not condensing."
+        }
+      ],
+      "solution": [
+        "Condensation needs the water vapour to lose heat to a cooler surface."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A pot of boiling water</text><path d=\"M60 130 V210 H240 V130\" stroke-width=\"2.5\"/><path d=\"M62 150 H238\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><circle cx=\"100\" cy=\"170\" r=\"5\"/><circle cx=\"130\" cy=\"184\" r=\"5\"/><circle cx=\"160\" cy=\"166\" r=\"5\"/><circle cx=\"190\" cy=\"180\" r=\"5\"/><circle cx=\"215\" cy=\"168\" r=\"5\"/><circle cx=\"145\" cy=\"196\" r=\"5\"/><path d=\"M48 70 Q150 38 252 70 Z\" fill=\"#fff\" stroke-width=\"2.5\"/><line x1=\"150\" y1=\"44\" x2=\"150\" y2=\"34\" stroke-width=\"3\"/><path d=\"M96 74 Q100 82 96 86 Q92 82 96 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M126 74 Q130 82 126 86 Q122 82 126 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M160 74 Q164 82 160 86 Q156 82 160 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M194 74 Q198 82 194 86 Q190 82 194 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/><path d=\"M222 74 Q226 82 222 86 Q218 82 222 74 Z\" fill=\"currentColor\" fill-opacity=\"0.35\" stroke-width=\"1.2\"/></svg>"
+    },
+    {
+      "key": "ws-217",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "A student heats solid wax and records its temperature as shown. What is the melting point of the wax?",
+      "options": [
+        "60 °C",
+        "30 °C",
+        "90 °C",
+        "8 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "30 °C is the starting temperature."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "90 °C is only the final reading."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "8 is a time in minutes, not a temperature."
+        }
+      ],
+      "solution": [
+        "The temperature stays at 60 °C while the wax melts."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating solid wax</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"184.4\" x2=\"56\" y2=\"184.4\"/><text x=\"48\" y=\"188.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"146.8\" x2=\"56\" y2=\"146.8\"/><text x=\"48\" y=\"150.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"109.2\" x2=\"56\" y2=\"109.2\"/><text x=\"48\" y=\"113.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"71.6\" x2=\"56\" y2=\"71.6\"/><text x=\"48\" y=\"75.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,165.6 138.0,109.2 274.7,109.2 384.0,52.8\"/></svg>"
+    },
+    {
+      "key": "ws-218",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Solid wax is heated and its temperature is recorded as shown. What is the state of the wax at 5 minutes?",
+      "options": [
+        "Solid wax only, not yet changed",
+        "Liquid wax only, all melted by now",
+        "Liquid and gas, since it is very hot",
+        "Partly solid and partly liquid"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The wax started to melt at 3 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The wax is still melting."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The wax has not started to boil."
+        },
+        null
+      ],
+      "solution": [
+        "The flat part from 3 to 8 minutes is the wax melting, so solid and liquid are both present."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating solid wax</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"184.4\" x2=\"56\" y2=\"184.4\"/><text x=\"48\" y=\"188.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"146.8\" x2=\"56\" y2=\"146.8\"/><text x=\"48\" y=\"150.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"109.2\" x2=\"56\" y2=\"109.2\"/><text x=\"48\" y=\"113.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"71.6\" x2=\"56\" y2=\"71.6\"/><text x=\"48\" y=\"75.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,165.6 138.0,109.2 274.7,109.2 384.0,52.8\"/></svg>"
+    },
+    {
+      "key": "ws-219",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Water is cooled in a freezer and its temperature is recorded as shown. In which part is the water changing into ice?",
+      "options": [
+        "P",
+        "R",
+        "Q",
+        "P and R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "In P the water is only cooling down."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "In R all the water has already turned into ice."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature falls in P and R, so no change of state happens."
+        }
+      ],
+      "solution": [
+        "The flat part at 0 °C is the water freezing, while it loses heat."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cooling water in a freezer</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"190.7\" x2=\"56\" y2=\"190.7\"/><text x=\"48\" y=\"194.66666666666666\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"159.3\" x2=\"56\" y2=\"159.3\"/><text x=\"48\" y=\"163.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"128.0\" x2=\"56\" y2=\"128.0\"/><text x=\"48\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"96.7\" x2=\"56\" y2=\"96.7\"/><text x=\"48\" y=\"100.66666666666667\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"65.3\" x2=\"56\" y2=\"65.3\"/><text x=\"48\" y=\"69.33333333333331\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"56\" y1=\"190.7\" x2=\"384\" y2=\"190.7\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,65.3 165.3,190.7 302.0,190.7 384.0,209.5\"/><text x=\"123.66666666666666\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"233.66666666666666\" y=\"181.66666666666666\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"355.0\" y=\"196.06666666666666\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "ws-220",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Water is cooled in a freezer and its temperature is recorded as shown. What is the state of the water in part R?",
+      "options": [
+        "Liquid water only",
+        "Ice only",
+        "Ice and liquid water",
+        "Liquid water and water vapour"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "That is part P."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "That is part Q."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "No water vapour is shown in this experiment."
+        }
+      ],
+      "solution": [
+        "After the water has frozen, the ice only gets colder."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cooling water in a freezer</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"190.7\" x2=\"56\" y2=\"190.7\"/><text x=\"48\" y=\"194.66666666666666\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"159.3\" x2=\"56\" y2=\"159.3\"/><text x=\"48\" y=\"163.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"128.0\" x2=\"56\" y2=\"128.0\"/><text x=\"48\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"96.7\" x2=\"56\" y2=\"96.7\"/><text x=\"48\" y=\"100.66666666666667\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"65.3\" x2=\"56\" y2=\"65.3\"/><text x=\"48\" y=\"69.33333333333331\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"56\" y1=\"190.7\" x2=\"384\" y2=\"190.7\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,65.3 165.3,190.7 302.0,190.7 384.0,209.5\"/><text x=\"123.66666666666666\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"233.66666666666666\" y=\"181.66666666666666\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"355.0\" y=\"196.06666666666666\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "ws-221",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "The experiment is repeated using half the amount of water in the same freezer. How does the flat part of the graph change?",
+      "options": [
+        "It is still at 0 °C but is shorter",
+        "It is at a lower temperature and the same length",
+        "It is still at 0 °C and is longer",
+        "It disappears since the water cools too fast"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water always freezes at 0 °C."
+        },
+        {
+          "tag": "reversed",
+          "why": "Less water has less heat to lose, so it freezes sooner."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Every amount of water still freezes at 0 °C."
+        }
+      ],
+      "solution": [
+        "Water freezes at 0 °C. Less water loses its heat sooner, so the flat part is shorter."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cooling water in a freezer</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"190.7\" x2=\"56\" y2=\"190.7\"/><text x=\"48\" y=\"194.66666666666666\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"159.3\" x2=\"56\" y2=\"159.3\"/><text x=\"48\" y=\"163.33333333333334\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"128.0\" x2=\"56\" y2=\"128.0\"/><text x=\"48\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"96.7\" x2=\"56\" y2=\"96.7\"/><text x=\"48\" y=\"100.66666666666667\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"65.3\" x2=\"56\" y2=\"65.3\"/><text x=\"48\" y=\"69.33333333333331\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"56\" y1=\"190.7\" x2=\"384\" y2=\"190.7\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,65.3 165.3,190.7 302.0,190.7 384.0,209.5\"/><text x=\"123.66666666666666\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"233.66666666666666\" y=\"181.66666666666666\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"355.0\" y=\"196.06666666666666\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "ws-222",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "On a hot day, ice cubes melt on a plate and the water later dries up. In the diagram, which letters show these changes in order?",
+      "options": [
+        "Q, then S",
+        "R, then P",
+        "P, then R",
+        "S, then Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Q is boiling or evaporation, which comes after melting."
+        },
+        {
+          "tag": "reversed",
+          "why": "R is freezing and P is condensation."
+        },
+        {
+          "tag": "mixed-up",
+          "why": "P is condensation and R is freezing."
+        },
+        null
+      ],
+      "solution": [
+        "Ice melts first, which is S. The water then evaporates, which is Q."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text></svg>"
+    },
+    {
+      "key": "ws-223",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-2",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which statement about the change shown by the letter Q is correct?",
+      "options": [
+        "Water vapour gains heat and changes into liquid water",
+        "Liquid water loses heat and changes into water vapour",
+        "Water vapour loses heat and changes into liquid water",
+        "Liquid water gains heat and changes into ice"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Condensation needs heat to be lost."
+        },
+        {
+          "tag": "reversed",
+          "why": "Liquid water becomes a gas by gaining heat."
+        },
+        null,
+        {
+          "tag": "mixed-up",
+          "why": "Q is a change between water vapour and liquid water."
+        }
+      ],
+      "solution": [
+        "Q is condensation in this diagram, in which water vapour loses heat."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"220.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three states of water</text><rect x=\"10\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"55.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ice</text><rect x=\"175\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"220.0\" y=\"111.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><rect x=\"340\" y=\"78\" width=\"90\" height=\"56\" rx=\"6\"/><text x=\"385.0\" y=\"103.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"385.0\" y=\"121.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">vapour</text><line x1=\"104\" y1=\"94\" x2=\"171\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"171\" y1=\"118\" x2=\"104\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"269\" y1=\"94\" x2=\"336\" y2=\"94\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"336\" y1=\"118\" x2=\"269\" y2=\"118\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><text x=\"137\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"137\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"302\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"302\" y=\"140\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ws-224",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "A tray of ice cubes taken from a freezer at -10 °C is left in a warm room with a thermometer in one cube. Which describes the reading?",
+      "options": [
+        "It stays at -10 °C until all of the ice has melted",
+        "It rises to 0 °C and stays there until the ice has melted",
+        "It rises steadily to room temperature",
+        "It falls below -10 °C as the ice takes in heat"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The ice gains heat, so its temperature rises to 0 °C first."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "It stops rising at 0 °C while ice is melting."
+        },
+        {
+          "tag": "reversed",
+          "why": "Gaining heat cannot lower the temperature."
+        }
+      ],
+      "solution": [
+        "The ice warms to 0 °C, then the heat gained melts it at constant temperature."
+      ]
+    },
+    {
+      "key": "ws-225",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-1",
+      "pattern": "sci-pat-change-of-state",
+      "stem": "Which statement about water vapour is correct?",
+      "options": [
+        "It is in the air around us even though we cannot see it",
+        "It is the white mist seen above a boiling kettle",
+        "It is a liquid that spreads out in the air",
+        "It has a fixed volume like liquid water"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "That mist is tiny drops of liquid water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour is a gas."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A gas spreads out to fill the space it is in."
+        }
+      ],
+      "solution": [
+        "Water vapour is an invisible gas that is always in the air."
+      ]
+    }
+  ]
+}

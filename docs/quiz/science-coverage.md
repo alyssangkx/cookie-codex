@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-1208 shipped questions (basic 403, intermediate 404, competent 401), 533 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+1433 shipped questions (basic 478, intermediate 479, competent 476), 631 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -25,14 +25,14 @@
 | Matter and states of matter | State that matter is anything that has mass and occupies space | yes | no | 0 **not yet** |
 | Matter and states of matter | Differentiate among solid, liquid and gas in terms of shape and volume | yes | no | 0 **not yet** |
 | Matter and states of matter | Measure mass and volume using appropriate apparatus | yes | yes | 0 **not yet** |
-| States of water and changes of state | Recognise that water can exist in three interchangeable states of mat… | yes | no | 0 **not yet** |
-| States of water and changes of state | Show an understanding of melting, freezing, boiling/evaporation and c… | yes | no | 0 **not yet** |
-| States of water and changes of state | Show an understanding of melting point of ice (freezing point of wate… | yes | no | 0 **not yet** |
-| States of water and changes of state | Investigate the effect of heat gain or loss on the temperature and st… | yes | yes | 0 **not yet** |
-| Rate of evaporation | Investigate the factors that affect the rate of evaporation: wind, te… | yes | yes | 0 **not yet** |
-| Water cycle and conservation | Show an understanding of the roles of evaporation and condensation in… | yes | yes | 0 **not yet** |
-| Water cycle and conservation | Recognise the importance of water to life processes [Standard Science… | yes | no | 0 **not yet** |
-| Water cycle and conservation | Describe the impact of water pollution on Earth's water resources [St… | yes | no | 0 **not yet** |
+| States of water and changes of state | Recognise that water can exist in three interchangeable states of mat… | yes | no | 11 |
+| States of water and changes of state | Show an understanding of melting, freezing, boiling/evaporation and c… | yes | no | 31 |
+| States of water and changes of state | Show an understanding of melting point of ice (freezing point of wate… | yes | no | 16 |
+| States of water and changes of state | Investigate the effect of heat gain or loss on the temperature and st… | yes | yes | 17 |
+| Rate of evaporation | Investigate the factors that affect the rate of evaporation: wind, te… | yes | yes | 75 |
+| Water cycle and conservation | Show an understanding of the roles of evaporation and condensation in… | yes | yes | 39 |
+| Water cycle and conservation | Recognise the importance of water to life processes [Standard Science… | yes | no | 12 |
+| Water cycle and conservation | Describe the impact of water pollution on Earth's water resources [St… | yes | no | 24 |
 | Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 46 |
 | Parts of a plant | Observe plant parts | yes | yes | 30 |
 | Overview of human systems | Identify the human systems in the body and state their functions (dig… | yes | no | 0 **not yet** |
@@ -91,14 +91,14 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**42 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**50 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; Overview of human systems; Digestive system; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
 | Type | Papers it appears in | Shipped questions |
 |---|---|---|
 | Properties of solids, liquids and gases (mass, volume, shape) (`sci-pat-states-of-matter`) | 129 | 0 **not yet** |
-| Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 0 **not yet** |
+| Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 53 |
 | Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 74 |
 | Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 51 |
 | Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 60 |
@@ -110,23 +110,23 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 87 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 132 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 78 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 67 |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 68 |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 47 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 63 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 62 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 81 |
 | Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 60 |
 | Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
-| Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
+| Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 64 |
 | Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 57 |
 | Gases in air and tests for gases (`sci-pat-gases-in-air`) | 12 | 59 |
 | Current strength, conductors and insulators (`sci-pat-circuit-variables`) | 11 | 69 |
 | Respiration and the Sun as the source of energy (`sci-pat-respiration-sun`) | 9 | 0 **not yet** |
-| Rate of evaporation: factors and fair set-ups (`sci-pat-evaporation-rate`) | 5 | 0 **not yet** |
+| Rate of evaporation: factors and fair set-ups (`sci-pat-evaporation-rate`) | 5 | 47 |

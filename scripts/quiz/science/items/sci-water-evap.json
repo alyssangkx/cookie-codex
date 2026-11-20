@@ -1,0 +1,2438 @@
+{
+  "subtopic": "sci-cycles-water-evaporation",
+  "items": [
+    {
+      "key": "ev-001",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which process changes liquid water at the surface of a puddle into water vapour?",
+      "options": [
+        "Evaporation",
+        "Condensation",
+        "Freezing",
+        "Melting"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Condensation changes water vapour into liquid water, the opposite change."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Freezing changes liquid water into ice."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Melting changes a solid, such as ice, into liquid water."
+        }
+      ],
+      "solution": [
+        "Evaporation is the change of liquid water into water vapour at its surface."
+      ]
+    },
+    {
+      "key": "ev-002",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which day is the best for drying wet clothes quickly?",
+      "options": [
+        "A cool day with no wind",
+        "A cool and windy day",
+        "A hot day with no moving air at all",
+        "A hot and windy day"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "Cool, still air gives the slowest drying."
+        },
+        {
+          "tag": "partial",
+          "why": "Wind helps, but the cool air slows evaporation."
+        },
+        {
+          "tag": "partial",
+          "why": "Heat helps, but there is no wind to carry the vapour away."
+        },
+        null
+      ],
+      "solution": [
+        "Heat and wind both speed up evaporation."
+      ]
+    },
+    {
+      "key": "ev-003",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two identical wet towels are hung in the same sunny spot as shown. Which towel will dry first?",
+      "options": [
+        "Q, because it is thicker and holds more heat",
+        "Q, because its water is packed close together",
+        "P, because more of its water is exposed to the air",
+        "Both dry at the same time because they are in the same place"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A thick folded towel hides most of its water from the air, so it dries slower."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Packed water has less surface in contact with the air."
+        },
+        null,
+        {
+          "tag": "ignore-area",
+          "why": "The shape matters. The spread towel has a larger exposed surface."
+        }
+      ],
+      "solution": [
+        "The spread-out towel P shows a larger surface to the air, so it dries faster."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 152\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two wet towels on a line</text><line x1=\"10\" y1=\"40\" x2=\"310\" y2=\"40\" stroke-width=\"3\"/><rect x=\"35\" y=\"42\" width=\"100\" height=\"74\" fill=\"currentColor\" fill-opacity=\"0.18\"/><line x1=\"85\" y1=\"34\" x2=\"85\" y2=\"46\" stroke-width=\"3\"/><text x=\"85\" y=\"140\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"210\" y=\"42\" width=\"50\" height=\"38\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke-width=\"3\"/><line x1=\"235\" y1=\"34\" x2=\"235\" y2=\"46\" stroke-width=\"3\"/><text x=\"235\" y=\"140\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ev-004",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which statement about evaporation is correct?",
+      "options": [
+        "It happens only when water boils",
+        "It can happen at room temperature",
+        "It happens only when water is in sunlight",
+        "It changes water vapour into liquid water"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "boil-confusion",
+          "why": "Water evaporates at any temperature. Boiling is faster, but evaporation does not wait for it."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water also evaporates in the shade."
+        },
+        {
+          "tag": "reversed",
+          "why": "That is condensation."
+        }
+      ],
+      "solution": [
+        "Water evaporates from its surface at any temperature."
+      ]
+    },
+    {
+      "key": "ev-005",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "After a sunny afternoon, a puddle on a road has gone. Where did the water go?",
+      "options": [
+        "It became vapour and went into the air",
+        "It sank down into the hard road",
+        "It changed into tiny pieces of ice",
+        "It was destroyed by the heat of the Sun"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A road is hard and does not soak up a puddle."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "The day was hot, so the water did not freeze."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Matter is not destroyed. The water changed state."
+        }
+      ],
+      "solution": [
+        "The water evaporated into water vapour."
+      ]
+    },
+    {
+      "key": "ev-006",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which of the following would increase the rate of evaporation of water in a bowl?",
+      "options": [
+        "Putting a lid on the bowl",
+        "Moving the bowl to a colder place",
+        "Pouring the water into a narrow tall cup",
+        "Blowing air across the water with a fan"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "A lid traps the water vapour above the water."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "A colder place slows evaporation."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "A narrower surface is smaller, so evaporation is slower."
+        },
+        null
+      ],
+      "solution": [
+        "Moving air carries away water vapour, so evaporation is faster."
+      ]
+    },
+    {
+      "key": "ev-007",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two containers hold the same amount of water and are left in the same place, as shown. Which has less water left after 5 hours?",
+      "options": [
+        "B, because its water is deeper and stores more heat",
+        "B, because its sides are taller",
+        "A, because more of its water touches the air",
+        "They are the same, as they hold equal water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Depth does not speed up evaporation. Surface area does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Tall sides do not help the water evaporate."
+        },
+        null,
+        {
+          "tag": "ignore-area",
+          "why": "Equal amounts of water do not mean equal exposed surface."
+        }
+      ],
+      "solution": [
+        "A is wider, so it has the larger exposed surface and loses water faster."
+      ],
+      "figure": "<svg viewBox=\"0 0 262 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"131.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two containers of water</text><rect x=\"29.0\" y=\"114.0\" width=\"108.0\" height=\"16.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H138.0 V80\" stroke-width=\"2.5\"/><text x=\"83.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"180.0\" y=\"94.0\" width=\"48.0\" height=\"36.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M179.0 80 V130 H229.0 V80\" stroke-width=\"2.5\"/><text x=\"204.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text></svg>"
+    },
+    {
+      "key": "ev-008",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two identical dishes hold the same amount of water. A fan blows over dish A, as shown. Which dries up first?",
+      "options": [
+        "B, because still air keeps the water warm",
+        "A, because moving air carries the vapour away",
+        "A, because the fan makes the water hotter",
+        "They dry up together, as the dishes are the same"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Still air lets vapour build up above the water, so B is slower."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A fan does not heat the water."
+        },
+        {
+          "tag": "ignore-wind",
+          "why": "Wind is the one difference, and it speeds up evaporation."
+        }
+      ],
+      "solution": [
+        "Moving air removes the water vapour at the surface, so A dries first."
+      ],
+      "figure": "<svg viewBox=\"0 0 244 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"122.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two dishes of water</text><rect x=\"29.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H104.0 V80\" stroke-width=\"2.5\"/><circle cx=\"66.0\" cy=\"44\" r=\"13\" stroke-width=\"1.6\"/><circle cx=\"66.0\" cy=\"44\" r=\"2.5\" fill=\"currentColor\"/><ellipse cx=\"66.0\" cy=\"37\" rx=\"3.5\" ry=\"6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"60.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(60 60.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"72.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(-60 72.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><path d=\"M54.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M66.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M78.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><text x=\"66.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"141.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M140.0 80 V130 H216.0 V80\" stroke-width=\"2.5\"/><text x=\"178.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text></svg>"
+    },
+    {
+      "key": "ev-009",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two identical dishes hold the same amount of water. One is in a sunny spot and one in a shady spot, as shown. Which loses more water in 4 hours?",
+      "options": [
+        "A, because the heat of the Sun warms its water",
+        "B, because the shade is a cooler and calmer place",
+        "B, because the Sun makes its water heavier",
+        "Both lose the same amount of water"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Cooler places slow evaporation down."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The Sun does not add mass to water."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "The Sun makes one dish warmer, so it loses water faster."
+        }
+      ],
+      "solution": [
+        "A is warmer, so its water evaporates faster."
+      ],
+      "figure": "<svg viewBox=\"0 0 244 183\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"122.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two dishes of water</text><rect x=\"29.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H104.0 V80\" stroke-width=\"2.5\"/><circle cx=\"66.0\" cy=\"42\" r=\"9\"/><line x1=\"78.0\" y1=\"42.0\" x2=\"83.0\" y2=\"42.0\"/><line x1=\"74.5\" y1=\"50.5\" x2=\"78.0\" y2=\"54.0\"/><line x1=\"66.0\" y1=\"54.0\" x2=\"66.0\" y2=\"59.0\"/><line x1=\"57.5\" y1=\"50.5\" x2=\"54.0\" y2=\"54.0\"/><line x1=\"54.0\" y1=\"42.0\" x2=\"49.0\" y2=\"42.0\"/><line x1=\"57.5\" y1=\"33.5\" x2=\"54.0\" y2=\"30.0\"/><line x1=\"66.0\" y1=\"30.0\" x2=\"66.0\" y2=\"25.0\"/><line x1=\"74.5\" y1=\"33.5\" x2=\"78.0\" y2=\"30.0\"/><text x=\"66.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"66.0\" y=\"166\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sunny spot</text><rect x=\"141.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M140.0 80 V130 H216.0 V80\" stroke-width=\"2.5\"/><text x=\"178.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"178.0\" y=\"166\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">shady spot</text></svg>"
+    },
+    {
+      "key": "ev-010",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Why do we hang washing in an open, airy place instead of in a closed cupboard?",
+      "options": [
+        "Moving air makes the water in the clothes boil",
+        "Clothes dry faster because the cupboard has no light",
+        "The cupboard adds more water to the clothes",
+        "Moving air carries away the vapour, so it dries faster"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "boil-confusion",
+          "why": "Air does not make the water boil."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Light is not what dries the clothes. Moving air and warmth are."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A cupboard does not add water. It just stops the vapour leaving."
+        },
+        null
+      ],
+      "solution": [
+        "Wind carries away the water vapour from the clothes."
+      ]
+    },
+    {
+      "key": "ev-011",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Where should Mei hang her wet shoes so that they dry quickly?",
+      "options": [
+        "Inside a closed shoe cupboard",
+        "Inside a plastic bag in the shade",
+        "Near a sunny window where air can move",
+        "In a dark, cold storeroom"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "A closed space has no moving air."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "The bag traps the vapour and the shade is cooler."
+        },
+        null,
+        {
+          "tag": "wrong-factor",
+          "why": "Cold, still air slows evaporation."
+        }
+      ],
+      "solution": [
+        "A warm, breezy place makes the water evaporate fastest."
+      ]
+    },
+    {
+      "key": "ev-012",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Salt is made from seawater in wide, shallow pans left under the Sun. Why are the pans wide and shallow?",
+      "options": [
+        "The salt sinks to the bottom faster in a deep pan",
+        "A large surface lets the water evaporate quickly",
+        "A shallow pan makes the water freeze",
+        "A wide pan makes the seawater less salty"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Depth does not help the water to leave."
+        },
+        null,
+        {
+          "tag": "wrong-change",
+          "why": "Pans are left in the Sun so that water evaporates, not freezes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The amount of salt does not change. Only the water leaves."
+        }
+      ],
+      "solution": [
+        "More of the water is exposed to the air and the Sun, so it evaporates faster."
+      ]
+    },
+    {
+      "key": "ev-013",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two same pots hold 200 ml of water each. After one day, the pot with a lid has more water left. Why?",
+      "options": [
+        "The lid stops the vapour escaping",
+        "The lid stops the Sun from heating the water",
+        "The lid adds water to the pot",
+        "The lid makes the water too cold to evaporate"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The pots may be in the same place and heat is not the main cause."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A lid does not add water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water at any temperature can evaporate."
+        }
+      ],
+      "solution": [
+        "With a lid, the water vapour stays trapped, so less water is lost."
+      ]
+    },
+    {
+      "key": "ev-014",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei wants to find out if wind affects how fast water evaporates. Which two set-ups should she compare?",
+      "options": [
+        "A and C",
+        "B and C",
+        "C and D",
+        "A and B"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "A and C differ in temperature, not in wind."
+        },
+        {
+          "tag": "two-changes",
+          "why": "B and C differ in both fan and temperature."
+        },
+        {
+          "tag": "two-changes",
+          "why": "C and D differ in both temperature and amount of water."
+        },
+        null
+      ],
+      "solution": [
+        "A and B are the same except for the fan."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-ups of water in dishes</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">120</text></svg>"
+    },
+    {
+      "key": "ev-015",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which apparatus is best for finding how much water is left in a dish after 3 hours?",
+      "options": [
+        "A thermometer put into the dish",
+        "A ruler held next to the dish",
+        "A measuring cylinder",
+        "A stopwatch started with the test"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-tool",
+          "why": "A thermometer measures temperature."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A ruler measures length."
+        },
+        null,
+        {
+          "tag": "wrong-tool",
+          "why": "A stopwatch measures time."
+        }
+      ],
+      "solution": [
+        "A measuring cylinder measures the volume of water."
+      ]
+    },
+    {
+      "key": "ev-016",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Each dish had 100 ml of water at first. The bar chart shows the water left after 4 hours. Which dish lost the most water?",
+      "options": [
+        "R",
+        "Q",
+        "P",
+        "S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "read-wrong-way",
+          "why": "R has the tallest bar, which means the most water is left, so it lost the least."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "P kept 70 ml, so it lost 30 ml, less than Q."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "S kept 55 ml, so it lost 45 ml, less than Q."
+        }
+      ],
+      "solution": [
+        "Q has the shortest bar. It kept 40 ml, so it lost 60 ml."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in each dish after 4 hours</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><rect x=\"68.9\" y=\"83.0\" width=\"33.8\" height=\"105.0\"/><rect x=\"136.4\" y=\"128.0\" width=\"33.8\" height=\"60.0\"/><rect x=\"203.9\" y=\"60.5\" width=\"33.8\" height=\"127.5\"/><rect x=\"271.4\" y=\"105.5\" width=\"33.8\" height=\"82.5\"/></svg>"
+    },
+    {
+      "key": "ev-017",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Cup X is left in a hot kitchen and cup Y in a cold room. Both are the same and hold the same amount of water. After one day, which has less water?",
+      "options": [
+        "Cup X, because it is warmer",
+        "Cup Y, because it is colder",
+        "Both have the same amount of water",
+        "Neither, because water cannot leave a cup"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Evaporation is slower in a colder place."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "The two places differ in temperature, so the loss differs."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water vapour can leave from the open top."
+        }
+      ],
+      "solution": [
+        "Higher temperature means faster evaporation."
+      ]
+    },
+    {
+      "key": "ev-018",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "On a hot, dry day the water level in a pond drops. What mainly causes this?",
+      "options": [
+        "Condensation of the water",
+        "Boiling of the pond water",
+        "Freezing of the pond water",
+        "Evaporation of the water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Condensation would add water, not remove it."
+        },
+        {
+          "tag": "boil-confusion",
+          "why": "A pond is far below boiling temperature."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "A hot day does not freeze water."
+        },
+        null
+      ],
+      "solution": [
+        "Water evaporates from the pond surface and joins the air as water vapour."
+      ]
+    },
+    {
+      "key": "ev-019",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Mrs Tan's kitchen floor is wet. Which action helps the floor dry fastest?",
+      "options": [
+        "Covering the floor with a plastic sheet",
+        "Closing all the windows and doors",
+        "Switching on a fan to blow air over the floor",
+        "Switching on a freezer next to the floor"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "A cover traps the vapour."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "Closing up stops the air from moving."
+        },
+        null,
+        {
+          "tag": "wrong-factor",
+          "why": "A colder place slows evaporation."
+        }
+      ],
+      "solution": [
+        "Moving air carries away the vapour, so the floor dries faster."
+      ]
+    },
+    {
+      "key": "ev-020",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "From which part of a dish of water does evaporation take place?",
+      "options": [
+        "The bottom of the dish",
+        "The surface of the water",
+        "Only the sides of the dish",
+        "Only the middle of the water"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Vapour leaves at the top where water meets the air."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The sides do not matter. The surface does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "All of the surface can lose water."
+        }
+      ],
+      "solution": [
+        "Water changes into vapour where it meets the air, at the surface."
+      ]
+    },
+    {
+      "key": "ev-021",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which of the following is an example of evaporation?",
+      "options": [
+        "Wet footprints on warm ground slowly vanish",
+        "Droplets form on the outside of a cold glass",
+        "Water turns into ice in a freezer",
+        "Steam turns into drops on a pot lid"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "That is condensation."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "That is freezing."
+        },
+        {
+          "tag": "reversed",
+          "why": "That is condensation."
+        }
+      ],
+      "solution": [
+        "The water of the footprints changes into water vapour."
+      ]
+    },
+    {
+      "key": "ev-022",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two identical dishes hold the same amount of water. Dish Q is covered with a lid, as shown. Which loses less water in one day?",
+      "options": [
+        "P, because its water is cooler",
+        "P, because the lid draws water out of Q",
+        "Both lose the same amount of water",
+        "Q, because the vapour cannot escape"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The uncovered dish is not cooler in any way shown."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A lid does not draw water out."
+        },
+        {
+          "tag": "ignore-lid",
+          "why": "The lid is the one difference and it slows the loss."
+        },
+        null
+      ],
+      "solution": [
+        "The lid traps the vapour, so Q loses less water."
+      ],
+      "figure": "<svg viewBox=\"0 0 244 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"122.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two dishes of water</text><rect x=\"29.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H104.0 V80\" stroke-width=\"2.5\"/><text x=\"66.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"141.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M140.0 80 V130 H216.0 V80\" stroke-width=\"2.5\"/><line x1=\"135.0\" y1=\"78\" x2=\"221.0\" y2=\"78\" stroke-width=\"5\"/><text x=\"178.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ev-023",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Ali wants his wet hair to dry quickly. Which is the best way?",
+      "options": [
+        "Covering it with a plastic cap",
+        "Sitting in a cold, closed room alone",
+        "A hair dryer blowing warm air",
+        "Tying it into a tight bun"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "The cap traps the vapour."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "Cold, still air is slow."
+        },
+        null,
+        {
+          "tag": "wrong-factor",
+          "why": "A bun hides most of the hair from the air."
+        }
+      ],
+      "solution": [
+        "Warm, moving air makes the water evaporate faster."
+      ]
+    },
+    {
+      "key": "ev-024",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which wet cloth will take the longest time to dry?",
+      "options": [
+        "A cloth spread out on a hot, windy open balcony",
+        "A cloth folded up in a closed box in a cool room",
+        "A cloth spread out under a fan in a warm room",
+        "A cloth hung open in a warm, sunny room"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "This is the fastest way to dry."
+        },
+        null,
+        {
+          "tag": "wrong-factor",
+          "why": "Moving air makes it dry fast."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "Heat and a wide surface make it dry fast."
+        }
+      ],
+      "solution": [
+        "Folded, closed in and cool: every factor slows the evaporation."
+      ]
+    },
+    {
+      "key": "ev-025",
+      "level": "basic",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Why should wet clothes on a line be hung with space between them?",
+      "options": [
+        "More of each cloth is exposed to moving air",
+        "The clothes weigh less when they are apart",
+        "The Sun can freeze the clothes if they touch",
+        "Touching clothes stop the water from existing"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The clothes weigh the same however they hang."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Heat does not freeze clothes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water does not stop existing. It just leaves slower."
+        }
+      ],
+      "solution": [
+        "Space lets air reach more of the wet surface."
+      ]
+    },
+    {
+      "key": "ev-101",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Ali tests how the width of the dish affects the speed of evaporation. Which two set-ups should he compare?",
+      "options": [
+        "A and B",
+        "B and C",
+        "C and D",
+        "A and D"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "B and C differ in temperature, not in width."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "C and D differ in the fan, not in width."
+        },
+        {
+          "tag": "two-changes",
+          "why": "A and D differ in width, temperature and fan."
+        }
+      ],
+      "solution": [
+        "A and B are the same except for the dish width (6 cm and 12 cm)."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text></svg>"
+    },
+    {
+      "key": "ev-102",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Which two set-ups should be compared to find out how temperature affects evaporation?",
+      "options": [
+        "A and B",
+        "C and D",
+        "A and C",
+        "B and C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "A and B differ in dish width."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "C and D differ in the fan."
+        },
+        {
+          "tag": "two-changes",
+          "why": "A and C differ in both temperature and dish width."
+        },
+        null
+      ],
+      "solution": [
+        "B and C differ only in temperature (20 °C and 35 °C)."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text></svg>"
+    },
+    {
+      "key": "ev-103",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Which two set-ups should be compared to find out how wind affects evaporation?",
+      "options": [
+        "A and B",
+        "B and C",
+        "C and D",
+        "B and D"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "A and B differ in dish width."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "B and C differ in temperature."
+        },
+        null,
+        {
+          "tag": "two-changes",
+          "why": "B and D differ in both temperature and fan."
+        }
+      ],
+      "solution": [
+        "C and D are the same except for the fan."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text></svg>"
+    },
+    {
+      "key": "ev-104",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "The same dishes are left for 6 hours. In which set-up will the water be used up first?",
+      "options": [
+        "B",
+        "A",
+        "C",
+        "D"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "B has a low temperature, no wind and a small surface, so it is the slowest."
+        },
+        null,
+        {
+          "tag": "partial",
+          "why": "C is hot, but it has no wind and a small surface."
+        },
+        {
+          "tag": "partial",
+          "why": "D has wind and a wide dish, but it is cooler than A."
+        }
+      ],
+      "solution": [
+        "A has a high temperature, a fan and a wide dish: all three speed up evaporation."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-105",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "The dishes hold the same amount of water and are left in the same place. Which dish will be the last to run dry?",
+      "options": [
+        "C",
+        "A",
+        "B",
+        "They run dry together"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "A has the widest surface, so it dries first."
+        },
+        {
+          "tag": "partial",
+          "why": "B has a smaller surface than A, but C is smaller still."
+        },
+        {
+          "tag": "ignore-area",
+          "why": "Their exposed surfaces differ, so the times differ."
+        }
+      ],
+      "solution": [
+        "C is the narrowest, so it has the smallest exposed surface."
+      ],
+      "figure": "<svg viewBox=\"0 0 388 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"194.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three dishes of water</text><rect x=\"29.0\" y=\"114.0\" width=\"108.0\" height=\"16.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H138.0 V80\" stroke-width=\"2.5\"/><text x=\"83.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"175.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M174.0 80 V130 H250.0 V80\" stroke-width=\"2.5\"/><text x=\"212.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"299.0\" y=\"94.0\" width=\"48.0\" height=\"36.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M298.0 80 V130 H348.0 V80\" stroke-width=\"2.5\"/><text x=\"323.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text></svg>"
+    },
+    {
+      "key": "ev-106",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Two dishes had the same amount of water at first, as the graph shows. In which dish did the water evaporate faster?",
+      "options": [
+        "Y, because it has more water left",
+        "Y, because its line is flatter",
+        "Both, because the lines start together",
+        "X, because its line falls more steeply"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "read-wrong-way",
+          "why": "More water left means less water evaporated."
+        },
+        {
+          "tag": "reversed",
+          "why": "A flatter line means slower loss."
+        },
+        {
+          "tag": "ignore-data",
+          "why": "The lines separate, so the rates differ."
+        },
+        null
+      ],
+      "solution": [
+        "X lost 72 ml in 4 hours and Y lost 24 ml, so X evaporated faster."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in two dishes</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,66.8 197.0,95.6 269.5,124.4 342.0,153.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"66.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"95.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"124.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"153.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,47.6 197.0,57.2 269.5,66.8 342.0,76.4\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"47.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"57.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"66.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"76.4\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ev-107",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "From the graph of the two dishes, how much water evaporated from dish X in the first 3 hours?",
+      "options": [
+        "46 ml",
+        "18 ml",
+        "54 ml",
+        "28 ml"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "read-wrong-way",
+          "why": "46 ml is the water left, not the water lost."
+        },
+        {
+          "tag": "wrong-dish",
+          "why": "18 ml is the loss of dish Y."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "28 ml is the water left at 4 hours."
+        }
+      ],
+      "solution": [
+        "100 - 46 = 54 ml."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in two dishes</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,66.8 197.0,95.6 269.5,124.4 342.0,153.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"66.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"95.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"124.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"153.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,47.6 197.0,57.2 269.5,66.8 342.0,76.4\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"47.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"57.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"66.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"76.4\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ev-108",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "In salt farms, seawater is led into very wide, shallow ponds in sunny places. Which pair of reasons explains this best?",
+      "options": [
+        "A deep pond heats up too fast and the water boils",
+        "A big surface and the Sun's heat both speed up evaporation",
+        "A shallow pond stops the wind and stores the salt",
+        "Wide ponds help the Sun freeze the salt out"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "boil-confusion",
+          "why": "Evaporation, not boiling, removes the water."
+        },
+        null,
+        {
+          "tag": "wrong-factor",
+          "why": "Wind helps evaporation and the pond does not stop it."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Salt is left behind when the water evaporates."
+        }
+      ],
+      "solution": [
+        "Wide ponds expose more water, and the Sun warms it."
+      ]
+    },
+    {
+      "key": "ev-109",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Wet clothes are hung in a small bathroom with the door and window shut. They dry slowly. Which is the main reason?",
+      "options": [
+        "There is no moving air to carry the vapour away",
+        "There is no light to dry the clothes",
+        "The clothes weigh more in a small room",
+        "Evaporation cannot happen indoors"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Light itself does not dry clothes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Weight does not change with the room."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Evaporation happens indoors too, only slower here."
+        }
+      ],
+      "solution": [
+        "Without moving air, the vapour stays near the clothes."
+      ]
+    },
+    {
+      "key": "ev-110",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "The same amount of water is poured into a wide dish and a tall, narrow cup and left side by side. After a day, the cup has more water left. Why?",
+      "options": [
+        "The cup is taller and the water is deeper",
+        "The dish makes the water hotter",
+        "The cup has less water at first",
+        "The dish has a larger exposed surface"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Deeper water does not slow evaporation by being deep. The small surface does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both are in the same place, so the temperature is the same."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The question says the amounts are the same."
+        },
+        null
+      ],
+      "solution": [
+        "Evaporation takes place at the surface, so the wider dish loses water faster."
+      ],
+      "figure": "<svg viewBox=\"0 0 276 198\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"138.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in a dish and in a cup</text><rect x=\"29.0\" y=\"144.0\" width=\"108.0\" height=\"16.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 110 V160 H138.0 V110\" stroke-width=\"2.5\"/><text x=\"83.0\" y=\"180\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish</text><rect x=\"192.0\" y=\"115.0\" width=\"38.0\" height=\"45.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M191.0 80 V160 H231.0 V80\" stroke-width=\"2.5\"/><text x=\"211.0\" y=\"180\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text></svg>"
+    },
+    {
+      "key": "ev-111",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two identical beakers hold the same amount of water. One is placed near a heater and one in a cool room. Which statement is correct?",
+      "options": [
+        "The water in the cool room evaporates faster",
+        "Only the water near the heater evaporates",
+        "The water near the heater evaporates faster",
+        "The two evaporate at the same rate"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heat speeds up evaporation."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water evaporates in a cool room too, only slowly."
+        },
+        null,
+        {
+          "tag": "ignore-temp",
+          "why": "The places differ in temperature, so the rates differ."
+        }
+      ],
+      "solution": [
+        "Higher temperature gives faster evaporation, but evaporation still happens in the cool room."
+      ]
+    },
+    {
+      "key": "ev-112",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Zara says, \"Water in an open cup inside a cold refrigerator cannot evaporate.\" What is the best reply?",
+      "options": [
+        "She is right, because evaporation only needs boiling",
+        "It does evaporate, but more slowly than in a warm room",
+        "She is right, because evaporation needs sunlight",
+        "It evaporates faster because it is cold"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "boil-confusion",
+          "why": "Evaporation takes place at any temperature."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Sunlight is not needed."
+        },
+        {
+          "tag": "reversed",
+          "why": "Cold slows evaporation."
+        }
+      ],
+      "solution": [
+        "Evaporation is slower in the cold but is never zero."
+      ]
+    },
+    {
+      "key": "ev-113",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which statement tells evaporation and boiling apart correctly?",
+      "options": [
+        "Evaporation is at the surface at any temperature, and boiling is throughout the liquid",
+        "Evaporation happens only below 50 °C, and boiling happens only above it",
+        "Evaporation makes liquid water, and boiling makes water vapour",
+        "Evaporation needs a fan to start it, and boiling does not"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Evaporation also takes place at higher temperatures."
+        },
+        {
+          "tag": "reversed",
+          "why": "Both give water vapour from liquid water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A fan only makes evaporation faster."
+        }
+      ],
+      "solution": [
+        "Evaporation is a surface change at any temperature. Boiling is rapid vapour formation in the whole liquid."
+      ]
+    },
+    {
+      "key": "ev-114",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Two identical dishes hold the same amount of water and sit in the same place. Dish Q has a lid. After 6 hours, which is correct?",
+      "options": [
+        "Dish Q has less water left than dish P",
+        "Both have the same amount left",
+        "Dish Q has no water left",
+        "Dish P has less water left than dish Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The lid keeps the vapour in, so Q loses less."
+        },
+        {
+          "tag": "ignore-lid",
+          "why": "The lid is the one difference and slows the loss."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A covered dish loses water slowly."
+        },
+        null
+      ],
+      "solution": [
+        "The lid traps the vapour, so Q loses less."
+      ],
+      "figure": "<svg viewBox=\"0 0 244 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"122.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two dishes of water in the same place</text><rect x=\"29.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H104.0 V80\" stroke-width=\"2.5\"/><text x=\"66.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"141.0\" y=\"106.0\" width=\"74.0\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M140.0 80 V130 H216.0 V80\" stroke-width=\"2.5\"/><line x1=\"135.0\" y1=\"78\" x2=\"221.0\" y2=\"78\" stroke-width=\"5\"/><text x=\"178.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ev-115",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which set-up in the table would take the longest to lose all its water?",
+      "options": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A is hot, windy and wide: the fastest."
+        },
+        {
+          "tag": "partial",
+          "why": "C is hot, so it is faster than B."
+        },
+        null,
+        {
+          "tag": "partial",
+          "why": "D has a fan and is wide, so it is faster than B."
+        }
+      ],
+      "solution": [
+        "B is cool, has no fan and the narrowest dish."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-116",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The four dishes held 100 ml of water at first and have the same width. The bar chart shows the water left after 3 hours. Which dish was probably in the hottest place?",
+      "options": [
+        "P",
+        "S",
+        "Q",
+        "R"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "read-wrong-way",
+          "why": "P has the most water left, so it was probably the coolest."
+        },
+        null,
+        {
+          "tag": "partial",
+          "why": "Q lost some water, but S lost more."
+        },
+        {
+          "tag": "partial",
+          "why": "R lost some water, but S lost more."
+        }
+      ],
+      "solution": [
+        "S lost the most water (85 ml), so it evaporated fastest."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in each dish after 3 hours</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><rect x=\"68.9\" y=\"50.0\" width=\"33.8\" height=\"138.0\"/><rect x=\"136.4\" y=\"83.0\" width=\"33.8\" height=\"105.0\"/><rect x=\"203.9\" y=\"120.5\" width=\"33.8\" height=\"67.5\"/><rect x=\"271.4\" y=\"165.5\" width=\"33.8\" height=\"22.5\"/></svg>"
+    },
+    {
+      "key": "ev-117",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Ben pours 100 ml of water each into a tray and a tall cup and leaves them in the Sun for 5 hours. The cup has more water left. What does this show?",
+      "options": [
+        "A smaller exposed surface gives slower evaporation",
+        "Tall containers make water heavier",
+        "Water evaporates only from wide containers",
+        "Trays make water boil in the Sun"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The mass of water does not depend on the container."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It evaporates from every open container."
+        },
+        {
+          "tag": "boil-confusion",
+          "why": "The water is not boiling."
+        }
+      ],
+      "solution": [
+        "The cup's surface is smaller, so less water leaves."
+      ]
+    },
+    {
+      "key": "ev-118",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A wet shirt is rolled into a tight ball and another is hung with the sleeves spread. Why does the rolled one dry more slowly?",
+      "options": [
+        "The rolled shirt is hotter inside",
+        "Water cannot evaporate from cloth that is rolled",
+        "The spread shirt is heavier so it loses more",
+        "Most of its water is hidden from the air"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "It is not hotter. Its water is just covered."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It evaporates, but only from the outside."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Weight is not the reason."
+        },
+        null
+      ],
+      "solution": [
+        "The tight roll exposes a small surface, so it dries slowly."
+      ]
+    },
+    {
+      "key": "ev-119",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei compares a towel spread in the Sun with a towel folded in the shade to see if the area exposed matters. Why is this not a fair test?",
+      "options": [
+        "Both towels are made of the same kind of cloth",
+        "She is using only two towels in the test",
+        "Both the area and the temperature are different",
+        "The towels are both wet at the very start"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Equal cloth is correct for a fair test."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Two towels are enough for a comparison."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "They should both be wet at the start."
+        }
+      ],
+      "solution": [
+        "Two things differ, so we cannot tell which one caused the difference."
+      ]
+    },
+    {
+      "key": "ev-120",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A fan blows over a wet cloth. Why does the cloth dry faster?",
+      "options": [
+        "The fan heats the water in the cloth",
+        "The air carries away the vapour as it forms",
+        "The fan pushes the water out of the cloth",
+        "The fan turns the water into ice first"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A fan blows air. It does not heat the water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The water leaves as vapour, not pushed as liquid."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Freezing is not part of drying."
+        }
+      ],
+      "solution": [
+        "Moving air takes away vapour, so more water can evaporate."
+      ]
+    },
+    {
+      "key": "ev-121",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which action would slow down the evaporation of a dish of water the most?",
+      "options": [
+        "Covering it and placing it in a cool room",
+        "Placing it in a cool room and leaving the lid off",
+        "Covering it with a lid and leaving it in the Sun",
+        "Pouring it into a wider dish in a cool room"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "partial",
+          "why": "This slows evaporation, but less than doing both."
+        },
+        {
+          "tag": "partial",
+          "why": "This slows evaporation, but less than doing both."
+        },
+        {
+          "tag": "reversed",
+          "why": "A wider surface speeds up evaporation."
+        }
+      ],
+      "solution": [
+        "A lid and a cool place each slow evaporation. Together they slow it the most."
+      ]
+    },
+    {
+      "key": "ev-122",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Dish A is wide and has no fan. Dish B is narrow and has a fan. Both hold the same amount of water. Why can Ali not conclude from this test that wind makes water evaporate faster?",
+      "options": [
+        "The two dishes hold the same amount of water",
+        "A fan is not needed for a test",
+        "Dish A will dry faster, so the fan has no effect",
+        "Both the dish width and the fan are different"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "This is correct for a fair test."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A fan is a good way to make wind."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The dishes also differ in width, so no conclusion is possible."
+        },
+        null
+      ],
+      "solution": [
+        "Two variables are changed, so any difference could be due to either."
+      ],
+      "figure": "<svg viewBox=\"0 0 262 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"131.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two dishes of water</text><rect x=\"29.0\" y=\"114.0\" width=\"108.0\" height=\"16.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H138.0 V80\" stroke-width=\"2.5\"/><text x=\"83.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"180.0\" y=\"94.0\" width=\"48.0\" height=\"36.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M179.0 80 V130 H229.0 V80\" stroke-width=\"2.5\"/><circle cx=\"204.0\" cy=\"44\" r=\"13\" stroke-width=\"1.6\"/><circle cx=\"204.0\" cy=\"44\" r=\"2.5\" fill=\"currentColor\"/><ellipse cx=\"204.0\" cy=\"37\" rx=\"3.5\" ry=\"6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"198.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(60 198.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"210.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(-60 210.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><path d=\"M192.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M204.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M216.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><text x=\"204.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text></svg>"
+    },
+    {
+      "key": "ev-123",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "After rain, two puddles are the same size. One is in a sunny car park and one is in a shady car park. Which statement is correct?",
+      "options": [
+        "The shady puddle dries first because it is cooler",
+        "They dry together because they are the same size",
+        "The sunny puddle dries first because it is warmer",
+        "The sunny puddle dries by boiling away"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Cooler places slow evaporation."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "The temperature differs, so the speed differs."
+        },
+        null,
+        {
+          "tag": "boil-confusion",
+          "why": "The puddle does not reach boiling temperature."
+        }
+      ],
+      "solution": [
+        "More heat gives faster evaporation."
+      ]
+    },
+    {
+      "key": "ev-124",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The graph shows two dishes with the same water at first. One has a lid and the other does not. Which is the dish with the lid?",
+      "options": [
+        "Y, because it loses the most water",
+        "X, because it loses very little water",
+        "Y, because its line falls steadily",
+        "X, because its line starts at the top"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A lid stops water from leaving, so the lid dish loses little."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "A falling line means water is leaving freely."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Both lines start at the same point."
+        }
+      ],
+      "solution": [
+        "X is almost flat, so the vapour was held in by the lid."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in two dishes</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,41.2 197.0,42.8 269.5,46.0 342.0,47.6\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"41.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"42.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"46.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"47.6\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,76.4 197.0,114.8 269.5,153.2 342.0,191.6\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"76.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"153.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"191.6\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ev-125",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The same dish of water was left at three temperatures. It took 12 hours at 20 °C, 8 hours at 30 °C and 5 hours at 40 °C to dry up. Which conclusion is supported?",
+      "options": [
+        "A higher temperature made the water dry up sooner",
+        "A higher temperature made the water last longer",
+        "The temperature had no effect on the time",
+        "Water dried up only at 40 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The time got shorter as the temperature rose."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "The times are all different."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It dried up at every temperature."
+        }
+      ],
+      "solution": [
+        "The drying time falls from 12 h to 5 h as the temperature rises."
+      ]
+    },
+    {
+      "key": "ev-201",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei wants to find out if the exposed surface area affects the rate of evaporation. Which two set-ups should she compare?",
+      "options": [
+        "A and C",
+        "A and B",
+        "A and D",
+        "B and D"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "A and B differ in the amount of water."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "A and D differ in temperature."
+        },
+        {
+          "tag": "two-changes",
+          "why": "B and D differ in both the amount of water and temperature."
+        }
+      ],
+      "solution": [
+        "A and C differ only in the dish width, which sets the exposed surface."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-202",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Ravi wants to find out if the starting amount of water changes the time taken for the dish to dry up. Which two set-ups should he compare?",
+      "options": [
+        "A and C",
+        "C and D",
+        "A and D",
+        "A and B"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "A and C differ in dish width."
+        },
+        {
+          "tag": "two-changes",
+          "why": "C and D differ in dish width and temperature."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "A and D differ in temperature."
+        },
+        null
+      ],
+      "solution": [
+        "A and B differ only in the amount of water."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-203",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Dishes A and D are compared. The water in D is used up sooner. What can be concluded?",
+      "options": [
+        "The fan made evaporation faster",
+        "The wider dish made evaporation faster",
+        "The higher temperature made evaporation faster",
+        "The bigger amount of water evaporated faster"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-factor",
+          "why": "Both have a fan, so the fan is not the difference."
+        },
+        {
+          "tag": "wrong-factor",
+          "why": "Both dishes have the same width."
+        },
+        null,
+        {
+          "tag": "wrong-factor",
+          "why": "Both have 100 ml."
+        }
+      ],
+      "solution": [
+        "A and D differ only in temperature (30 and 40 °C)."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-204",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Anna compares sets B and C and finds that C dries up later. She says the lower temperature caused this. Why is her conclusion not reliable?",
+      "options": [
+        "The dishes were the same width",
+        "The fan setting was different too",
+        "Both dishes held 100 ml of water",
+        "Water cannot dry up at 20 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Both are 12 cm wide, which is fair."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Equal water is correct."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water evaporates at any temperature."
+        }
+      ],
+      "solution": [
+        "B and C differ in temperature and in the fan, so two things changed."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-205",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three dishes of the same size hold 100 ml of water each. They are in the same place with fans of different speed: none, slow and fast. Which line shows the dish with the slow fan?",
+      "options": [
+        "Y",
+        "X",
+        "Z",
+        "The graph cannot show it"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "partial",
+          "why": "X falls fastest, so it is the fast fan."
+        },
+        {
+          "tag": "partial",
+          "why": "Z falls slowest, so it has no fan."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The steepness of the lines ranks them."
+        }
+      ],
+      "solution": [
+        "Steepest X is the fast fan, middle Y is the slow fan, flattest Z is no fan."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in three dishes</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,102.0 197.0,166.0 269.5,198.0 342.0,198.0\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,76.4 197.0,114.8 269.5,153.2 342.0,191.6\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"76.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"153.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"191.6\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,57.2 197.0,76.4 269.5,95.6 342.0,114.8\" stroke-dasharray=\"2 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"57.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"76.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"95.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"154\" x2=\"86\" y2=\"154\"/><text x=\"92\" y=\"158\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"2 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Z</text></svg>"
+    },
+    {
+      "key": "ev-206",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The graph shows two dishes of water. Compared with Q, how fast did the water in P evaporate?",
+      "options": [
+        "Four times as fast",
+        "The same speed",
+        "Half as fast",
+        "Two times as fast"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-ratio",
+          "why": "P lost 80 ml and Q lost 40 ml in 4 h, a ratio of 2."
+        },
+        {
+          "tag": "ignore-data",
+          "why": "The lines have different steepness."
+        },
+        {
+          "tag": "reversed",
+          "why": "P loses more water, so it is faster."
+        },
+        null
+      ],
+      "solution": [
+        "P lost 20 ml each hour and Q lost 10 ml each hour."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in dishes P and Q</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,70.0 197.0,102.0 269.5,134.0 342.0,166.0\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,54.0 197.0,70.0 269.5,86.0 342.0,102.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ev-207",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The graph shows two dishes of water. If the water in P keeps evaporating at the same rate, when will P have no water left?",
+      "options": [
+        "4 hours",
+        "6 hours",
+        "5 hours",
+        "10 hours"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "At 4 h there is still 20 ml in P."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "20 ml at 20 ml per hour takes one more hour, not two."
+        },
+        null,
+        {
+          "tag": "wrong-dish",
+          "why": "10 hours would suit the rate of Q, 10 ml per hour."
+        }
+      ],
+      "solution": [
+        "20 ml are left at 4 h and 20 ml are lost each hour, so it ends at 5 h."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in dishes P and Q</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,70.0 197.0,102.0 269.5,134.0 342.0,166.0\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,54.0 197.0,70.0 269.5,86.0 342.0,102.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ev-208",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three identical dishes hold 100 ml of water. One is uncovered in the Sun, one is uncovered in the shade and one is covered in the shade. Which line shows the dish that is uncovered in the shade?",
+      "options": [
+        "K",
+        "L",
+        "M",
+        "None of them"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "partial",
+          "why": "K falls fastest, so it is the one in the Sun."
+        },
+        null,
+        {
+          "tag": "partial",
+          "why": "M is almost flat, so it is covered."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The middle line fits the dish in the shade."
+        }
+      ],
+      "solution": [
+        "Sun is fastest (K), shade uncovered is middle (L) and covered is slowest (M)."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in three dishes</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,108.4 197.0,178.8 269.5,198.0 342.0,198.0\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"108.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"178.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,63.6 197.0,89.2 269.5,114.8 342.0,140.4\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"63.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"89.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,38.0 124.5,39.6 197.0,41.2 269.5,42.8 342.0,44.4\" stroke-dasharray=\"2 4\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"39.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"41.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"42.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"44.4\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"154\" x2=\"86\" y2=\"154\"/><text x=\"92\" y=\"158\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">K</text><line x1=\"60\" y1=\"170\" x2=\"86\" y2=\"170\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">L</text><line x1=\"60\" y1=\"186\" x2=\"86\" y2=\"186\" stroke-dasharray=\"2 4\"/><text x=\"92\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">M</text></svg>"
+    },
+    {
+      "key": "ev-209",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A fan blows over a tightly closed bottle of water for a whole day. The water level hardly changes. Why?",
+      "options": [
+        "The vapour formed cannot leave the bottle",
+        "A fan can only dry solid things",
+        "The water has been frozen by the moving air",
+        "Evaporation does not happen at room temperature"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A fan helps liquids evaporate when the vapour can leave."
+        },
+        {
+          "tag": "wrong-change",
+          "why": "Moving air does not freeze water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It does at any temperature."
+        }
+      ],
+      "solution": [
+        "A closed bottle keeps the vapour in, so the level stays almost the same."
+      ]
+    },
+    {
+      "key": "ev-210",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A pot of water is at 25 °C. Another pot is boiling at 100 °C. Which statement is correct?",
+      "options": [
+        "Water evaporates only in the boiling pot, and not at 25 °C",
+        "Water in the 25 °C pot cannot become vapour at all",
+        "Bubbles of vapour form inside both of the pots",
+        "Both pots evaporate, and bubbles form inside only the boiling one"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "boil-confusion",
+          "why": "Water at 25 °C also evaporates from its surface."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It slowly does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Only the boiling water has vapour bubbles throughout."
+        },
+        null
+      ],
+      "solution": [
+        "Evaporation is at the surface at any temperature. Boiling also forms bubbles inside."
+      ]
+    },
+    {
+      "key": "ev-211",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which of the following would slow down the evaporation of seawater in a salt pan?",
+      "options": [
+        "Spreading the seawater in a thin layer",
+        "Moving the pan from the shade into full sun",
+        "Building high walls around the pan to block the wind",
+        "Letting the wind blow across the pan"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A thin layer has a large surface, which speeds it up."
+        },
+        {
+          "tag": "reversed",
+          "why": "More heat speeds it up."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Wind speeds it up."
+        }
+      ],
+      "solution": [
+        "Blocking the wind leaves vapour above the water, so evaporation is slower."
+      ]
+    },
+    {
+      "key": "ev-212",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "The three dishes hold the same amount of water and are left in the same place. Which two dishes should be compared to find the effect of exposed surface area?",
+      "options": [
+        "A and B",
+        "A and C",
+        "B and C",
+        "A, B and C all together"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "two-changes",
+          "why": "A and B differ in both width and fan."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "B and C differ in the fan only."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Compare two dishes that differ in one thing."
+        }
+      ],
+      "solution": [
+        "A and C are blown by a fan and differ only in width."
+      ],
+      "figure": "<svg viewBox=\"0 0 386 168\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"193.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three dishes of water</text><rect x=\"29.0\" y=\"114.0\" width=\"108.0\" height=\"16.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M28.0 80 V130 H138.0 V80\" stroke-width=\"2.5\"/><circle cx=\"83.0\" cy=\"44\" r=\"13\" stroke-width=\"1.6\"/><circle cx=\"83.0\" cy=\"44\" r=\"2.5\" fill=\"currentColor\"/><ellipse cx=\"83.0\" cy=\"37\" rx=\"3.5\" ry=\"6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"77.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(60 77.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"89.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(-60 89.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><path d=\"M71.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M83.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M95.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><text x=\"83.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"187.0\" y=\"94.0\" width=\"48.0\" height=\"36.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M186.0 80 V130 H236.0 V80\" stroke-width=\"2.5\"/><text x=\"211.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"297.0\" y=\"94.0\" width=\"48.0\" height=\"36.0\" fill=\"currentColor\" fill-opacity=\"0.3\" stroke=\"none\"/><path d=\"M296.0 80 V130 H346.0 V80\" stroke-width=\"2.5\"/><circle cx=\"321.0\" cy=\"44\" r=\"13\" stroke-width=\"1.6\"/><circle cx=\"321.0\" cy=\"44\" r=\"2.5\" fill=\"currentColor\"/><ellipse cx=\"321.0\" cy=\"37\" rx=\"3.5\" ry=\"6\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"315.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(60 315.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><ellipse cx=\"327.0\" cy=\"48\" rx=\"3.5\" ry=\"6\" transform=\"rotate(-60 327.0 48)\" fill=\"currentColor\" fill-opacity=\"0.25\" stroke-width=\"1.2\"/><path d=\"M309.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M321.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><path d=\"M333.0 62 q4 5 0 10 t0 10\" stroke-width=\"1.4\"/><text x=\"321.0\" y=\"150\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text></svg>"
+    },
+    {
+      "key": "ev-213",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A dish loses 40 ml of water in 3 hours at 30 °C. The same dish, with the same amount of water, is put in the same place with the temperature raised to 40 °C. How much water does it most likely lose in 3 hours?",
+      "options": [
+        "More than 40 ml",
+        "Less than 40 ml",
+        "Exactly 40 ml",
+        "None"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "A higher temperature speeds up evaporation."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "The temperature is different, so the loss differs."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water still evaporates at 40 °C."
+        }
+      ],
+      "solution": [
+        "Higher temperature means more water lost in the same time."
+      ]
+    },
+    {
+      "key": "ev-214",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "Which set-up in the table has the slowest rate of evaporation?",
+      "options": [
+        "A",
+        "C",
+        "D",
+        "B"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A has every fast factor."
+        },
+        {
+          "tag": "partial",
+          "why": "C is hot, so it is faster than B."
+        },
+        {
+          "tag": "partial",
+          "why": "D has wind and a wide dish, so it is faster than B."
+        },
+        null
+      ],
+      "solution": [
+        "B is cooler, has no fan and has the smallest surface."
+      ],
+      "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
+    },
+    {
+      "key": "ev-215",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Dishes P and Q differ only in width (P is 6 cm, Q is 10 cm). Dishes Q and R differ only in temperature (R is hotter). Each had 100 ml of water. The bar chart shows the water left after 3 hours. Which conclusion is supported?",
+      "options": [
+        "A narrower dish and a higher temperature each made evaporation faster",
+        "Only the width of the dish changed the rate",
+        "A wider dish and a higher temperature each made evaporation faster",
+        "Only the temperature changed the rate"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "P is narrower and kept more water."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "R also lost more water than Q."
+        },
+        null,
+        {
+          "tag": "ignore-area",
+          "why": "Q also lost more water than P."
+        }
+      ],
+      "solution": [
+        "P to Q: more water lost with the wider dish. Q to R: more lost at a higher temperature."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in each dish after 3 hours</text><path d=\"M52 38 V188 H302\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"93.66666666666666\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"177.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"260.33333333333337\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"177.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><rect x=\"72.8\" y=\"68.0\" width=\"41.7\" height=\"120.0\"/><rect x=\"156.2\" y=\"113.0\" width=\"41.7\" height=\"75.0\"/><rect x=\"239.5\" y=\"158.0\" width=\"41.7\" height=\"30.0\"/></svg>"
+    },
+    {
+      "key": "ev-216",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Ali tests how wind affects evaporation using two dishes of water. Which of these must be kept the same in both dishes?",
+      "options": [
+        "The speed of the air moving over the dish",
+        "The width of the dish",
+        "Whether a fan is blowing at the dish",
+        "The amount of water left after 3 hours"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "This is the variable Ali changes."
+        },
+        null,
+        {
+          "tag": "changed-variable",
+          "why": "This is the variable Ali changes."
+        },
+        {
+          "tag": "measured-variable",
+          "why": "This is what Ali measures. It is expected to differ."
+        }
+      ],
+      "solution": [
+        "Everything except the wind must stay the same, including the dish width."
+      ]
+    },
+    {
+      "key": "ev-217",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei changes the width of the dish to see how it affects evaporation. What should she measure?",
+      "options": [
+        "The water left in each dish after the same time",
+        "The width of each dish, which she changes",
+        "The temperature of the room around the dishes",
+        "The number of dishes that she is using"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "changed-variable",
+          "why": "She changes the width. She does not measure it as the result."
+        },
+        {
+          "tag": "kept-same",
+          "why": "The temperature is kept the same."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This does not show how fast the water evaporated."
+        }
+      ],
+      "solution": [
+        "The result is shown by how much water has been lost in the same time."
+      ]
+    },
+    {
+      "key": "ev-218",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A heap of wet clothes stays damp in a basket for days, but the same clothes hung out dry in a few hours. What is the main reason?",
+      "options": [
+        "The clothes in the basket weigh less than the hung ones",
+        "The basket makes the water in the clothes more salty",
+        "Clothes cannot lose water when it is dark inside",
+        "Little water is exposed, and air does not move over it"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Weight is not the cause."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The water does not become salty."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Evaporation does not need light."
+        },
+        null
+      ],
+      "solution": [
+        "A heap hides its water and has no wind, so it dries slowly."
+      ]
+    },
+    {
+      "key": "ev-219",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "The same volume of rainwater is spread thinly over a large car park and also collected in a narrow bucket in the same Sun. Which dries first and why?",
+      "options": [
+        "The bucket, because its water is deeper than the layer",
+        "The bucket, because its sides keep the water warm",
+        "The car park, because its thin layer has a large surface",
+        "They dry at the same time"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Deeper water does not dry faster."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The sides do not speed things up."
+        },
+        null,
+        {
+          "tag": "ignore-area",
+          "why": "The surfaces differ greatly."
+        }
+      ],
+      "solution": [
+        "A large surface exposes more water to the air."
+      ]
+    },
+    {
+      "key": "ev-220",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Wei pours 100 ml of water each into a narrow beaker and a wide tray in the Sun. After 2 hours, the beaker has 92 ml and the tray has 70 ml. How much more water evaporated from the tray than from the beaker?",
+      "options": [
+        "30 ml",
+        "22 ml",
+        "8 ml",
+        "162 ml"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "30 ml is the water lost from the tray only."
+        },
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "8 ml is the water lost from the beaker only."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "162 ml adds the water that is left, which is not a loss."
+        }
+      ],
+      "solution": [
+        "Tray lost 100 - 70 = 30 ml. Beaker lost 100 - 92 = 8 ml. 30 - 8 = 22 ml."
+      ]
+    },
+    {
+      "key": "ev-221",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A dish of water dries up in 10 hours at 30 °C and in 6 hours at 40 °C. Everything else is the same. Which is the best prediction for 50 °C?",
+      "options": [
+        "Less than 6 hours",
+        "More than 6 hours",
+        "Exactly 6 hours",
+        "Exactly 2 hours"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Heat speeds up evaporation."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "Temperature has an effect."
+        },
+        {
+          "tag": "assume-linear",
+          "why": "We cannot be sure of an exact time. The safe claim is that it is shorter."
+        }
+      ],
+      "solution": [
+        "A higher temperature makes it faster, so the time is shorter."
+      ]
+    },
+    {
+      "key": "ev-222",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-evaporation-rate",
+      "stem": "A beaker of water is placed on a hot plate that is switched on, before the water reaches boiling point. Compared with an identical beaker on a bench, what is true?",
+      "options": [
+        "No water evaporates until the water starts to boil",
+        "The beaker on the bench evaporates faster than the other",
+        "The two beakers evaporate at the same rate as each other",
+        "The beaker on the hot plate loses water faster"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "boil-confusion",
+          "why": "Evaporation happens before boiling."
+        },
+        {
+          "tag": "reversed",
+          "why": "Heat speeds up evaporation."
+        },
+        {
+          "tag": "ignore-temp",
+          "why": "The hot plate warms the water, so it evaporates faster."
+        },
+        null
+      ],
+      "solution": [
+        "Warm water evaporates faster, even before it boils."
+      ]
+    },
+    {
+      "key": "ev-223",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Zara puts 100 ml in dish A and 150 ml in dish B, and puts a fan by B only. She wants to test the effect of the fan. How can she improve the test?",
+      "options": [
+        "Use dishes of different widths",
+        "Put the two dishes in different places",
+        "Pour equal amounts into both dishes",
+        "Measure the dishes after different times"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "adds-variable",
+          "why": "A different width adds a second changed variable."
+        },
+        {
+          "tag": "adds-variable",
+          "why": "A different place adds a second changed variable."
+        },
+        null,
+        {
+          "tag": "adds-variable",
+          "why": "Different times make the results unfair."
+        }
+      ],
+      "solution": [
+        "Only the fan should differ, so the water amount must be equal."
+      ]
+    },
+    {
+      "key": "ev-224",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Dishes A and B are the same size and are in the same place. Which statement about the graph is correct?",
+      "options": [
+        "B evaporated faster because it ran out first",
+        "Both evaporated at the same rate, but B started with less water",
+        "A evaporated faster because it has more water left",
+        "A did not evaporate at all"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "Both lose 15 ml each hour."
+        },
+        null,
+        {
+          "tag": "read-wrong-way",
+          "why": "More water left does not mean faster loss."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "A's line goes down, so it did evaporate."
+        }
+      ],
+      "solution": [
+        "Both lines have the same steepness: 15 ml per hour."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water left in dishes A and B</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><polyline points=\"52.0,38.0 124.5,62.0 197.0,86.0 269.5,110.0 342.0,134.0\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"110.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,102.0 124.5,126.0 197.0,150.0 269.5,174.0 342.0,198.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"174.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"198.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">B</text></svg>"
+    },
+    {
+      "key": "ev-225",
+      "level": "competent",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The same amount of water was put in dishes of different width. The bar chart shows the time taken to dry up. Which is the best prediction for a 12 cm dish?",
+      "options": [
+        "Fewer than 8 hours",
+        "More than 8 hours",
+        "Exactly 8 hours",
+        "20 hours"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The time falls as the dish gets wider."
+        },
+        {
+          "tag": "ignore-data",
+          "why": "The pattern is that wider dishes dry sooner."
+        },
+        {
+          "tag": "wrong-dish",
+          "why": "20 hours is for the narrowest dish."
+        }
+      ],
+      "solution": [
+        "Wider dishes dry up sooner, so 12 cm takes less than 8 hours."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for the water to dry up</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"163.0\" x2=\"52\" y2=\"163.0\"/><text x=\"44\" y=\"167.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"138.0\" x2=\"52\" y2=\"138.0\"/><text x=\"44\" y=\"142.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"88.0\" x2=\"52\" y2=\"88.0\"/><text x=\"44\" y=\"92.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"48\" y1=\"63.0\" x2=\"52\" y2=\"63.0\"/><text x=\"44\" y=\"67.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish width (cm)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time to dry (h)</text><rect x=\"68.9\" y=\"63.0\" width=\"33.8\" height=\"125.0\"/><rect x=\"136.4\" y=\"100.5\" width=\"33.8\" height=\"87.5\"/><rect x=\"203.9\" y=\"125.5\" width=\"33.8\" height=\"62.5\"/><rect x=\"271.4\" y=\"138.0\" width=\"33.8\" height=\"50.0\"/></svg>"
+    }
+  ]
+}
