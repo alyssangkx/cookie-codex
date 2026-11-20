@@ -116,6 +116,9 @@ def realfig(q):
     return any(isinstance(f, str) and f and f.lower() not in ("none", "null") for f in (q.get("figures") or []))
 
 
+LETTERED = re.compile(r"\(?([A-D])(?:[.)]\s*|\s+(?!and\b|or\b|only\b))")  # "A. Air" / "A Air", not "A and X only"
+
+
 def garbled(text: str, opts) -> str | None:
     t = text or ""
     if len(t.strip()) < 20:
@@ -138,6 +141,10 @@ def garbled(text: str, opts) -> str | None:
     m = [HEADER.fullmatch(x) for x in s]
     if all(m) and len({x.group(1).lower() for x in m}) > 1:
         return "options-are-table-headers"
+    # statements A-D read as the options: the paper's real options are combinations ("(1) B and D only") printed after
+    # them, so the stored options and key are wrong (owner spot-check, 21 Nov: pp-3f46ebd0cf). PSLE options are (1)-(4).
+    if all((m := LETTERED.match(o or "")) and m.group(1) == "ABCD"[i] for i, o in enumerate(opts)):
+        return "options-are-statements"
     return None
 
 
@@ -673,6 +680,12 @@ def figures(a):
 
 def selftest():
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
+    stem = "Which of the following statements can be concluded from the experiment?"
+    assert garbled(stem, ["A. Object 1 is a magnet.", "B. Object 2 is a magnet.", "C. Both are iron.", "D. Neither."]) == "options-are-statements"
+    assert garbled(stem, ["A Object 1 is a magnet.", "B Object 2 is a magnet.", "C Both are iron.", "D Neither."]) == "options-are-statements"
+    assert garbled(stem, ["A and B only", "B and C only", "A and D only", "B and D only"]) is None  # combinations are real options
+    assert garbled(stem, ["(1) Air", "(2) Bark", "(3) Clay", "(4) Dust"]) is None
+    assert garbled(stem, ["A and X only", "B and Y only", "C and Z only", "D and W only"]) is None
     import numpy as np
     from PIL import Image, ImageDraw
     # page 600x800 white: stem text line at y 100-115, gap, box (figure) at y 200-300, x 150-450
