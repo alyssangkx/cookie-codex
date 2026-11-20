@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-1058 shipped questions (basic 353, intermediate 354, competent 351), 472 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+1208 shipped questions (basic 403, intermediate 404, competent 401), 533 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -37,11 +37,11 @@
 | Parts of a plant | Observe plant parts | yes | yes | 30 |
 | Overview of human systems | Identify the human systems in the body and state their functions (dig… | yes | no | 0 **not yet** |
 | Digestive system | Identify the parts of the human digestive system (mouth, gullet, stom… | yes | yes | 0 **not yet** |
-| Gases in air | Recognise that air is made up of gases such as nitrogen, carbon dioxi… | yes | no | 0 **not yet** |
-| Respiratory and circulatory systems | Identify the parts of the human respiratory system (nose, windpipe, l… | yes | yes | 0 **not yet** |
-| Respiratory and circulatory systems | Compare how plants, fish and humans take in oxygen and give out carbo… | yes | yes | 0 **not yet** |
-| Respiratory and circulatory systems | Compare the ways substances are transported within plants and humans … | yes | yes | 0 **not yet** |
-| Respiratory and circulatory systems | Recognise the integration of the digestive, respiratory and circulato… | yes | no | 0 **not yet** |
+| Gases in air | Recognise that air is made up of gases such as nitrogen, carbon dioxi… | yes | no | 75 |
+| Respiratory and circulatory systems | Identify the parts of the human respiratory system (nose, windpipe, l… | yes | yes | 21 |
+| Respiratory and circulatory systems | Compare how plants, fish and humans take in oxygen and give out carbo… | yes | yes | 19 |
+| Respiratory and circulatory systems | Compare the ways substances are transported within plants and humans … | yes | yes | 16 |
+| Respiratory and circulatory systems | Recognise the integration of the digestive, respiratory and circulato… | yes | no | 19 |
 | Plant transport system | Identify the parts of the plant transport system and describe their f… | yes | yes | 22 |
 | Plant transport system | Investigate how food and water are transported in the plant | yes | yes | 55 |
 | Electric circuits | Recognise that a circuit with an energy source (battery) and componen… | yes | yes | 10 |
@@ -91,7 +91,7 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**37 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**42 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
@@ -104,13 +104,13 @@
 | Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 60 |
 | Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 69 |
 | Classify organisms into broad groups (plants, animals, fungi, bacteria) (`sci-pat-classify-groups`) | 99 | 0 **not yet** |
-| Respiratory and circulatory systems (lungs, heart, blood) (`sci-pat-resp-circulatory`) | 98 | 0 **not yet** |
+| Respiratory and circulatory systems (lungs, heart, blood) (`sci-pat-resp-circulatory`) | 98 | 69 |
 | Properties and uses of materials (`sci-pat-material-properties`) | 97 | 0 **not yet** |
 | Magnets: poles, magnetic materials, attraction and repulsion (`sci-pat-magnet-properties`) | 93 | 0 **not yet** |
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 65 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 87 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 78 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
@@ -126,7 +126,7 @@
 | Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
 | Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
 | Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 57 |
-| Gases in air and tests for gases (`sci-pat-gases-in-air`) | 12 | 0 **not yet** |
+| Gases in air and tests for gases (`sci-pat-gases-in-air`) | 12 | 59 |
 | Current strength, conductors and insulators (`sci-pat-circuit-variables`) | 11 | 69 |
 | Respiration and the Sun as the source of energy (`sci-pat-respiration-sun`) | 9 | 0 **not yet** |
 | Rate of evaporation: factors and fair set-ups (`sci-pat-evaporation-rate`) | 5 | 0 **not yet** |

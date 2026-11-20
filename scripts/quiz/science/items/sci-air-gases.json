@@ -1,0 +1,2439 @@
+{
+  "subtopic": "sci-systems-air-gases",
+  "items": [
+    {
+      "key": "ag-001",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "What is air?",
+      "options": [
+        "A mixture of different gases",
+        "Only one gas, oxygen",
+        "Only one gas, nitrogen",
+        "Empty space with nothing in it"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "one-gas",
+          "why": "Air has oxygen but also nitrogen and other gases."
+        },
+        {
+          "tag": "one-gas",
+          "why": "Nitrogen is the most plentiful gas, but it is not the only one."
+        },
+        {
+          "tag": "no-matter",
+          "why": "Air is made of gases, which are matter."
+        }
+      ],
+      "solution": [
+        "Air is a mixture of gases such as nitrogen, oxygen, carbon dioxide and water vapour."
+      ]
+    },
+    {
+      "key": "ag-002",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which gas makes up the largest part of air?",
+      "options": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Water vapour",
+        "Nitrogen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "most-common",
+          "why": "Oxygen is about one fifth of air, so it is second."
+        },
+        {
+          "tag": "most-common",
+          "why": "Carbon dioxide is only a tiny part of air."
+        },
+        {
+          "tag": "most-common",
+          "why": "Water vapour is a small part of air and its amount changes."
+        },
+        null
+      ],
+      "solution": [
+        "About 78% of air is nitrogen."
+      ]
+    },
+    {
+      "key": "ag-003",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A candle burns in a room. Which gas in the air does the flame use?",
+      "options": [
+        "Nitrogen",
+        "Carbon dioxide",
+        "Oxygen",
+        "Water vapour"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not help things burn."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide does not support burning."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour does not help things burn."
+        }
+      ],
+      "solution": [
+        "Burning needs oxygen."
+      ]
+    },
+    {
+      "key": "ag-004",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which gas in air do we need to stay alive?",
+      "options": [
+        "Carbon dioxide",
+        "Oxygen",
+        "Nitrogen",
+        "Water vapour"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "We give this out when we breathe out."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "We breathe nitrogen in and out, but our bodies do not use it."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Our bodies do not need water vapour from air for respiration."
+        }
+      ],
+      "solution": [
+        "Living things use oxygen for respiration."
+      ]
+    },
+    {
+      "key": "ag-005",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which gas turns limewater milky?",
+      "options": [
+        "Carbon dioxide",
+        "Oxygen in the air",
+        "Nitrogen",
+        "Water vapour"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen does not change limewater."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not change limewater."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour does not turn limewater milky."
+        }
+      ],
+      "solution": [
+        "Carbon dioxide is the gas that makes limewater turn milky."
+      ]
+    },
+    {
+      "key": "ag-006",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A green plant is placed in bright light. Which gas does it add to the air?",
+      "options": [
+        "Nitrogen",
+        "Carbon dioxide",
+        "Smoke",
+        "Oxygen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Plants do not make nitrogen."
+        },
+        {
+          "tag": "reversed",
+          "why": "In light, plants take in carbon dioxide to make food."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plants do not make smoke."
+        },
+        null
+      ],
+      "solution": [
+        "Plants give out oxygen when they make food in light."
+      ]
+    },
+    {
+      "key": "ag-007",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Water drops form on the outside of a cold glass of ice water. Which gas in the air formed these drops?",
+      "options": [
+        "Oxygen",
+        "Nitrogen",
+        "Water vapour",
+        "Carbon dioxide"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen stays as a gas on the cold glass."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen stays as a gas on the cold glass."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide does not turn into water."
+        }
+      ],
+      "solution": [
+        "Water vapour in the air cools and turns into drops of water on the cold glass."
+      ]
+    },
+    {
+      "key": "ag-008",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Mira blows up a balloon. What does this show about air?",
+      "options": [
+        "Air has no mass",
+        "Air takes up space",
+        "Air is a liquid",
+        "Air is always cold"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Air has mass, but a balloon does not show that."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Air is a mixture of gases."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The balloon says nothing about temperature."
+        }
+      ],
+      "solution": [
+        "The balloon gets bigger as air fills it, so air takes up space."
+      ]
+    },
+    {
+      "key": "ag-009",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which of the following lists gases that are all found in air?",
+      "options": [
+        "Nitrogen, oxygen and carbon dioxide",
+        "Oxygen, iron and nitrogen",
+        "Water vapour, salt and oxygen",
+        "Carbon dioxide, sand and nitrogen"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "not-a-gas",
+          "why": "Iron is a solid metal."
+        },
+        {
+          "tag": "not-a-gas",
+          "why": "Salt is a solid."
+        },
+        {
+          "tag": "not-a-gas",
+          "why": "Sand is a solid."
+        }
+      ],
+      "solution": [
+        "Nitrogen, oxygen and carbon dioxide are all gases in air."
+      ]
+    },
+    {
+      "key": "ag-010",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "About how much of air is oxygen?",
+      "options": [
+        "About one half",
+        "About four fifths",
+        "A tiny amount, less than one hundredth",
+        "About one fifth"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-amount",
+          "why": "Half is far too much. Nitrogen is the biggest part."
+        },
+        {
+          "tag": "swap",
+          "why": "Four fifths is about the amount of nitrogen."
+        },
+        {
+          "tag": "wrong-amount",
+          "why": "That is about the carbon dioxide."
+        },
+        null
+      ],
+      "solution": [
+        "Oxygen is about 21%, which is about one fifth."
+      ]
+    },
+    {
+      "key": "ag-011",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "The pie chart shows the gases in air. Which slice stands for nitrogen?",
+      "options": [
+        "Q",
+        "R",
+        "P",
+        "None of the slices"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-slice",
+          "why": "Q is the second biggest part, which is oxygen."
+        },
+        {
+          "tag": "wrong-slice",
+          "why": "R is the smallest part."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Nitrogen is the largest part of air."
+        }
+      ],
+      "solution": [
+        "Nitrogen is about 78%, the biggest slice."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 1 1 79.3 124.5 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"207.4\" y=\"211.3\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 78%</text><path d=\"M150 138 L79.3 124.5 A72 72 0 0 1 145.5 66.1 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"90.5\" y=\"74.5\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 21%</text><path d=\"M150 138 L145.5 66.1 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"147.2\" y=\"52.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 1%</text></svg>"
+    },
+    {
+      "key": "ag-012",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "The pie chart shows the gases in air. Which slice stands for oxygen?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "P and R together"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-slice",
+          "why": "P is the biggest slice. Oxygen is not the most plentiful gas."
+        },
+        null,
+        {
+          "tag": "wrong-slice",
+          "why": "R is far smaller than the amount of oxygen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Oxygen is one gas and has one slice."
+        }
+      ],
+      "solution": [
+        "Oxygen is about 21%, the second biggest slice."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 1 1 79.3 124.5 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"207.4\" y=\"211.3\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 78%</text><path d=\"M150 138 L79.3 124.5 A72 72 0 0 1 145.5 66.1 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"90.5\" y=\"74.5\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 21%</text><path d=\"M150 138 L145.5 66.1 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"147.2\" y=\"52.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 1%</text></svg>"
+    },
+    {
+      "key": "ag-013",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "In the pie chart of gases in air, slice R is the smallest. What belongs to slice R?",
+      "options": [
+        "Carbon dioxide and the other gases",
+        "Only nitrogen",
+        "Only oxygen",
+        "Nitrogen and oxygen together"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen is the biggest part of air."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen is the second biggest part."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Those two make up almost all of air."
+        }
+      ],
+      "solution": [
+        "Carbon dioxide and the remaining gases make up only a tiny part of air."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 1 1 79.3 124.5 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"207.4\" y=\"211.3\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 78%</text><path d=\"M150 138 L79.3 124.5 A72 72 0 0 1 145.5 66.1 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"90.5\" y=\"74.5\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 21%</text><path d=\"M150 138 L145.5 66.1 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"147.2\" y=\"52.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 1%</text></svg>"
+    },
+    {
+      "key": "ag-014",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar chart shows gases in air. Which bar stands for the gas that burning needs?",
+      "options": [
+        "P",
+        "R",
+        "P and Q together",
+        "Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-bar",
+          "why": "P is nitrogen, which does not support burning."
+        },
+        {
+          "tag": "wrong-bar",
+          "why": "R is the small amount of other gases."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Only oxygen is needed for burning."
+        },
+        null
+      ],
+      "solution": [
+        "Oxygen supports burning and is about 21% of air, the Q bar."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in air</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"97.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"277.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Gas</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Amount in air (%)</text><rect x=\"74.5\" y=\"71.0\" width=\"45.0\" height=\"117.0\"/><rect x=\"164.5\" y=\"156.5\" width=\"45.0\" height=\"31.5\"/><rect x=\"254.5\" y=\"186.5\" width=\"45.0\" height=\"1.5\"/></svg>"
+    },
+    {
+      "key": "ag-015",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which of these gases is found in the smallest amount in air?",
+      "options": [
+        "Nitrogen",
+        "Oxygen",
+        "Carbon dioxide",
+        "They are all the same amount"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "most-least",
+          "why": "Nitrogen is the largest part."
+        },
+        {
+          "tag": "most-least",
+          "why": "Oxygen is about one fifth of air."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The gases are in very different amounts."
+        }
+      ],
+      "solution": [
+        "Carbon dioxide is only about 0.04% of air."
+      ]
+    },
+    {
+      "key": "ag-016",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Why do we need to breathe in air?",
+      "options": [
+        "To get carbon dioxide for our bodies to use",
+        "To get oxygen for our bodies to use",
+        "To fill our lungs so that they stay big",
+        "To get water vapour so that we do not need to drink"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "We give carbon dioxide out."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "We breathe to take in oxygen, not just to fill space."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "We still need to drink water."
+        }
+      ],
+      "solution": [
+        "The body uses oxygen from the air for respiration."
+      ]
+    },
+    {
+      "key": "ag-017",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A cold can of drink is left on a table. Drops of water appear on its outside. Where did the water come from?",
+      "options": [
+        "Water vapour in the air",
+        "Water that leaked through tiny holes in the can",
+        "Oxygen in the air that turned into water",
+        "Water that the can made from the cold"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The can is sealed. The drops come from outside."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen does not turn into water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Cold does not make water. Water vapour cools and forms drops."
+        }
+      ],
+      "solution": [
+        "Water vapour in the air touches the cold can and turns back into water."
+      ]
+    },
+    {
+      "key": "ag-018",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A candle burns under a jar standing on a table. After a while the flame goes out. Why?",
+      "options": [
+        "All the air in the jar has been used up",
+        "The nitrogen in the jar has been used up",
+        "The jar has too much oxygen",
+        "The oxygen in the jar has been used up"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "air-vs-oxygen",
+          "why": "Only the oxygen is used. Other gases remain."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen is not used by a burning candle."
+        },
+        {
+          "tag": "reversed",
+          "why": "Extra oxygen makes the flame brighter."
+        },
+        null
+      ],
+      "solution": [
+        "A burning candle uses oxygen. When it runs low, the flame goes out."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 235\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle burning under a jar</text><line x1=\"10\" y1=\"200\" x2=\"290\" y2=\"200\" stroke-width=\"3\"/><path d=\"M105.0 200 V80 H195.0 V200\"/><rect x=\"143\" y=\"164\" width=\"14\" height=\"36\" fill=\"#fff\"/><path d=\"M150 148 Q156 158 150 162 Q144 158 150 148 Z\" fill=\"currentColor\"/><text x=\"150\" y=\"224\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar</text></svg>"
+    },
+    {
+      "key": "ag-019",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Two identical candles are lit and covered by jars P and Q. Which candle goes out first?",
+      "options": [
+        "The one under jar Q, because it has more oxygen",
+        "Both go out at the same time because the flames are the same",
+        "The one under jar P, because there is less oxygen in it",
+        "Neither, because a candle can burn with no air"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More oxygen lets a candle burn longer."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The amount of oxygen differs."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A flame needs oxygen."
+        }
+      ],
+      "solution": [
+        "The small jar has less air and so less oxygen. The candle uses it up sooner."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 235\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Candles under two jars</text><line x1=\"10\" y1=\"200\" x2=\"290\" y2=\"200\" stroke-width=\"3\"/><path d=\"M55.0 200 V110 H125.0 V200\"/><rect x=\"83\" y=\"164\" width=\"14\" height=\"36\" fill=\"#fff\"/><path d=\"M90 148 Q96 158 90 162 Q84 158 90 148 Z\" fill=\"currentColor\"/><text x=\"90\" y=\"224\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><path d=\"M155.0 200 V60 H265.0 V200\"/><rect x=\"203\" y=\"164\" width=\"14\" height=\"36\" fill=\"#fff\"/><path d=\"M210 148 Q216 158 210 162 Q204 158 210 148 Z\" fill=\"currentColor\"/><text x=\"210\" y=\"224\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ag-020",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which of the following statements about air is true?",
+      "options": [
+        "Air has no mass because we cannot see it",
+        "Air has mass and takes up space",
+        "Air does not take up space",
+        "Air is made up of only oxygen"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "We cannot see air, but it has mass."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A balloon filled with air shows that air takes up space."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air is a mixture of gases."
+        }
+      ],
+      "solution": [
+        "Air is a mixture of gases, so it is matter with mass that takes up space."
+      ]
+    },
+    {
+      "key": "ag-021",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows three gases in air. Which gas is oxygen?",
+      "options": [
+        "Y",
+        "X",
+        "Z",
+        "X and Y"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "X is the biggest part and does not keep a candle burning, so it is nitrogen."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Z is a tiny part and does not keep a candle burning, so it is carbon dioxide."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Only one gas keeps the candle burning."
+        }
+      ],
+      "solution": [
+        "Only oxygen keeps a candle burning and it is about 21% of air."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three gases in air</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"70\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"120.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">In air (%)</text><rect x=\"170\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"235.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Burning candle</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">X</text><rect x=\"70\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"170\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"235.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">goes out</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Y</text><rect x=\"70\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">21</text><rect x=\"170\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"235.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">keeps burning</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Z</text><rect x=\"70\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0.04</text><rect x=\"170\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"235.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">goes out</text></svg>"
+    },
+    {
+      "key": "ag-022",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which of the following shows that air contains water vapour?",
+      "options": [
+        "A balloon gets bigger when we blow into it",
+        "A candle goes out in a closed jar",
+        "Limewater turns milky when we breathe into it",
+        "Water drops form on the outside of a cold glass"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-test",
+          "why": "This shows that air takes up space."
+        },
+        {
+          "tag": "wrong-test",
+          "why": "This shows that burning uses oxygen."
+        },
+        {
+          "tag": "wrong-test",
+          "why": "This shows carbon dioxide."
+        },
+        null
+      ],
+      "solution": [
+        "Water vapour cools and turns back into drops on a cold surface."
+      ]
+    },
+    {
+      "key": "ag-023",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A mouse is sealed in a jar of air for a long time. Which gas in the jar goes down?",
+      "options": [
+        "Nitrogen",
+        "Carbon dioxide",
+        "Oxygen",
+        "All the gases go down equally"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "The mouse does not use nitrogen."
+        },
+        {
+          "tag": "reversed",
+          "why": "The mouse gives out carbon dioxide, so it goes up."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Only oxygen is used by the mouse."
+        }
+      ],
+      "solution": [
+        "The mouse uses up oxygen in respiration."
+      ]
+    },
+    {
+      "key": "ag-024",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which gas does not support burning?",
+      "options": [
+        "Oxygen from the air",
+        "Carbon dioxide",
+        "Air",
+        "Pure oxygen"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Oxygen is the gas that supports burning."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Air contains oxygen, so a flame can burn in it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "More oxygen makes a flame burn brighter."
+        }
+      ],
+      "solution": [
+        "Carbon dioxide does not support burning."
+      ]
+    },
+    {
+      "key": "ag-025",
+      "level": "basic",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A student breathes out through a straw into limewater. The limewater turns milky. Which gas is in the air we breathe out?",
+      "options": [
+        "Carbon dioxide",
+        "Nitrogen",
+        "Oxygen, which turns limewater milky",
+        "Water vapour"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not change limewater."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Exhaled air still has oxygen, but oxygen does not change limewater."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour does not turn limewater milky."
+        }
+      ],
+      "solution": [
+        "Limewater turns milky with carbon dioxide."
+      ]
+    },
+    {
+      "key": "ag-101",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A jar is placed over a burning candle standing in water. The flame goes out and the water level in the jar rises. Why does the water level rise?",
+      "options": [
+        "The burning candle used up oxygen, so there is less gas in the jar",
+        "The heat of the flame pushes the water up into the jar",
+        "The candle wax turns into water that fills the jar from below",
+        "The nitrogen in the jar is used up by the candle"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A flame does not push the water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Candle wax does not turn into the water in the trough."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "A candle does not use nitrogen."
+        }
+      ],
+      "solution": [
+        "Oxygen is used up, so the gas volume falls and water is pushed in by the air outside."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar over a burning candle</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ag-102",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "The jar is divided into 5 equal parts above the water. The candle burns until it goes out. About how many parts will the water rise?",
+      "options": [
+        "2 parts",
+        "4 parts",
+        "5 parts",
+        "1 part"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-amount",
+          "why": "Two parts would be about two fifths, more than the oxygen in air."
+        },
+        {
+          "tag": "swap",
+          "why": "Four fifths is about the amount of nitrogen."
+        },
+        {
+          "tag": "wrong-amount",
+          "why": "That would mean all the gas was used up."
+        },
+        null
+      ],
+      "solution": [
+        "Oxygen is about one fifth of air, so water rises about 1 part in 5."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Candle in a jar of air</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"100\" y1=\"146\" x2=\"118\" y2=\"146\" stroke-width=\"1.5\"/><line x1=\"100\" y1=\"122\" x2=\"118\" y2=\"122\" stroke-width=\"1.5\"/><line x1=\"100\" y1=\"98\" x2=\"118\" y2=\"98\" stroke-width=\"1.5\"/><line x1=\"100\" y1=\"74\" x2=\"118\" y2=\"74\" stroke-width=\"1.5\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ag-103",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "In the set-up, the water level has risen by about one fifth after the candle went out. Which gas in the jar has been used up?",
+      "options": [
+        "Nitrogen",
+        "Carbon dioxide",
+        "Oxygen",
+        "Water vapour"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen is about four fifths of the air and does not rise by this amount."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide is a tiny part of air."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour is a tiny, changing part of air."
+        }
+      ],
+      "solution": [
+        "The gas lost is about one fifth of the air, which is the oxygen."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After the candle went out</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><rect x=\"101\" y=\"146.0\" width=\"98\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><line x1=\"101\" y1=\"146.0\" x2=\"199\" y2=\"146.0\" stroke-width=\"1.5\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ag-104",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Tube X has fresh air pumped into limewater. Tube Y has air from the lungs blown into limewater. Y turns milky faster. What does this show?",
+      "options": [
+        "Fresh air has no carbon dioxide at all but air from the lungs has some",
+        "Air from the lungs has more carbon dioxide",
+        "Air from the lungs has no oxygen left in it, unlike fresh air",
+        "Limewater reacts with oxygen in the air from the lungs"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Fresh air has a very small amount."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "It has less oxygen, not none."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Limewater turns milky with carbon dioxide."
+        }
+      ],
+      "solution": [
+        "More carbon dioxide turns limewater milky faster."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 225\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Limewater in two tubes</text><path d=\"M60 60 V150 a20 20 0 0 0 40 0 V60\"/><rect x=\"61\" y=\"108\" width=\"38\" height=\"42\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><path d=\"M61 150 a19 19 0 0 0 38 0 Z\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><line x1=\"88\" y1=\"28\" x2=\"88\" y2=\"140\" stroke-width=\"3\"/><circle cx=\"83\" cy=\"128\" r=\"2.5\"/><circle cx=\"92\" cy=\"119\" r=\"2.5\"/><text x=\"80\" y=\"196\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><text x=\"80\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">fresh air</text><path d=\"M190 60 V150 a20 20 0 0 0 40 0 V60\"/><rect x=\"191\" y=\"108\" width=\"38\" height=\"42\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><path d=\"M191 150 a19 19 0 0 0 38 0 Z\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><line x1=\"195\" y1=\"114\" x2=\"225\" y2=\"114\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"122\" x2=\"225\" y2=\"122\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"130\" x2=\"225\" y2=\"130\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"138\" x2=\"225\" y2=\"138\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"146\" x2=\"225\" y2=\"146\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"218\" y1=\"28\" x2=\"218\" y2=\"140\" stroke-width=\"3\"/><circle cx=\"213\" cy=\"128\" r=\"2.5\"/><circle cx=\"222\" cy=\"119\" r=\"2.5\"/><text x=\"210\" y=\"196\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text><text x=\"210\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">air from lungs</text></svg>"
+    },
+    {
+      "key": "ag-105",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Which conclusion about the air we breathe in and out does the table support?",
+      "options": [
+        "Exhaled air has less oxygen and more carbon dioxide than inhaled air",
+        "Air we breathe out has more oxygen than air we breathe in",
+        "Air we breathe out has no carbon dioxide",
+        "Air we breathe in has more carbon dioxide than air we breathe out"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The table shows 16% against 21%."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The table shows 4%."
+        },
+        {
+          "tag": "reversed",
+          "why": "The table shows 0.04% against 4%."
+        }
+      ],
+      "solution": [
+        "Oxygen goes 21 to 16 and carbon dioxide goes 0.04 to 4."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 140\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"220.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Breathing test</text><rect x=\"10\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"70.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"130\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Air breathed in (%)</text><rect x=\"280\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"355.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Air breathed out (%)</text><rect x=\"10\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Oxygen</text><rect x=\"130\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">21</text><rect x=\"280\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"355.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"10\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Carbon dioxide</text><rect x=\"130\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0.04</text><rect x=\"280\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"355.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text></svg>"
+    },
+    {
+      "key": "ag-106",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "How many percentage points less oxygen is in exhaled air than in inhaled air?",
+      "options": [
+        "4",
+        "16",
+        "21",
+        "5"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "4 is the carbon dioxide in exhaled air."
+        },
+        {
+          "tag": "misread",
+          "why": "16 is the oxygen in exhaled air, not the difference."
+        },
+        {
+          "tag": "misread",
+          "why": "21 is the oxygen in inhaled air, not the difference."
+        },
+        null
+      ],
+      "solution": [
+        "21 - 16 = 5."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 140\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"220.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Breathing test</text><rect x=\"10\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"70.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"130\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Air breathed in (%)</text><rect x=\"280\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"355.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Air breathed out (%)</text><rect x=\"10\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Oxygen</text><rect x=\"130\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">21</text><rect x=\"280\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"355.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"10\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Carbon dioxide</text><rect x=\"130\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0.04</text><rect x=\"280\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"355.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text></svg>"
+    },
+    {
+      "key": "ag-107",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A candle burns in a closed jar of air until the flame goes out. Which gas is still the most plentiful in the jar?",
+      "options": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Nitrogen",
+        "Water vapour"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Much of the oxygen was used up."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "The candle makes some, but nitrogen is still far more."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour is a small part of the air."
+        }
+      ],
+      "solution": [
+        "Nitrogen is not used up, so it stays the biggest part."
+      ]
+    },
+    {
+      "key": "ag-108",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The same candle was lit under three jars of different sizes. What can be concluded from the table?",
+      "options": [
+        "The bigger the jar, the shorter the time the candle burns for",
+        "A bigger jar lets the candle burn longer as it holds more oxygen",
+        "The size of the jar does not change how long the candle burns for",
+        "The candle burns longer because the jar has more nitrogen"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The times go up with jar size."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The times are different."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not keep a flame burning."
+        }
+      ],
+      "solution": [
+        "A bigger jar holds more air and so more oxygen."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Same candle, different jars</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar volume (cm3)</text><rect x=\"140\" y=\"36\" width=\"170\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time candle burns (s)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">250</text><rect x=\"140\" y=\"70\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">500</text><rect x=\"140\" y=\"100\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">750</text><rect x=\"140\" y=\"130\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text></svg>"
+    },
+    {
+      "key": "ag-109",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A candle burns in a closed jar. What is the percentage of oxygen in the jar after 2 minutes?",
+      "options": [
+        "17%",
+        "19%",
+        "16%",
+        "21%"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "19% is the value at 1 minute."
+        },
+        {
+          "tag": "misread",
+          "why": "16% is the value at 3 minutes."
+        },
+        {
+          "tag": "misread",
+          "why": "21% is the value at the start."
+        }
+      ],
+      "solution": [
+        "Read the graph at 2 minutes: 17%."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle in a closed jar</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"106.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"106.0\" y1=\"188\" x2=\"106.0\" y2=\"192\"/><text x=\"160.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"160.0\" y1=\"188\" x2=\"160.0\" y2=\"192\"/><text x=\"214.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"214.0\" y1=\"188\" x2=\"214.0\" y2=\"192\"/><text x=\"268.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"268.0\" y1=\"188\" x2=\"268.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Oxygen in jar (%)</text><polyline points=\"52.0,62.0 106.0,74.0 160.0,86.0 214.0,92.0 268.0,92.0 322.0,92.0\"/><circle cx=\"52.0\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"106.0\" cy=\"74.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"160.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"214.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"268.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "ag-110",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "At which time did the oxygen in the closed jar stop going down?",
+      "options": [
+        "1 minute",
+        "2 minutes",
+        "5 minutes",
+        "3 minutes"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The line is still falling after 1 minute."
+        },
+        {
+          "tag": "misread",
+          "why": "The line is still falling after 2 minutes."
+        },
+        {
+          "tag": "misread",
+          "why": "The line was flat from 3 minutes already."
+        },
+        null
+      ],
+      "solution": [
+        "The line becomes flat at 3 minutes, the flame went out."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle in a closed jar</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"106.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"106.0\" y1=\"188\" x2=\"106.0\" y2=\"192\"/><text x=\"160.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"160.0\" y1=\"188\" x2=\"160.0\" y2=\"192\"/><text x=\"214.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"214.0\" y1=\"188\" x2=\"214.0\" y2=\"192\"/><text x=\"268.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"268.0\" y1=\"188\" x2=\"268.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Oxygen in jar (%)</text><polyline points=\"52.0,62.0 106.0,74.0 160.0,86.0 214.0,92.0 268.0,92.0 322.0,92.0\"/><circle cx=\"52.0\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"106.0\" cy=\"74.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"160.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"214.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"268.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "ag-111",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A lit candle is lowered into a jar filled with pure nitrogen. What happens to the flame?",
+      "options": [
+        "It burns more brightly",
+        "It burns as normal because nitrogen is most of the air",
+        "It goes out at once because there is no oxygen",
+        "It goes out slowly because nitrogen burns away"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Brighter burning needs more oxygen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "In air, the oxygen is what keeps the flame going."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Nitrogen does not burn."
+        }
+      ],
+      "solution": [
+        "Without oxygen there is nothing for the flame to use."
+      ]
+    },
+    {
+      "key": "ag-112",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows three gases in air breathed in and out. Which gas is X?",
+      "options": [
+        "Oxygen",
+        "Nitrogen",
+        "Carbon dioxide",
+        "Water vapour"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen goes down in exhaled air, but X stays the same."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide goes up in exhaled air, but X stays the same."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour is not a large percentage like 78%."
+        }
+      ],
+      "solution": [
+        "X is about 78% and does not change, so it is nitrogen."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in breath</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"70\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"125.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Inhaled (%)</text><rect x=\"180\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"235.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Exhaled (%)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">X</text><rect x=\"70\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"125.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"180\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"235.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">78</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Y</text><rect x=\"70\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"125.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">21</text><rect x=\"180\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"235.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Z</text><rect x=\"70\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"125.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0.04</text><rect x=\"180\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"235.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text></svg>"
+    },
+    {
+      "key": "ag-113",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Drops of water appear on the outside of a bottle taken out of the fridge. Which statement explains this?",
+      "options": [
+        "Water vapour in air turns to liquid water on the cold bottle",
+        "Water from inside the bottle passes through the glass slowly",
+        "The cold bottle changes the oxygen in the air into water",
+        "The cold bottle pulls water out of the nitrogen"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Glass does not let water through."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen does not become water."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not contain water."
+        }
+      ],
+      "solution": [
+        "Water vapour loses heat to the bottle and condenses."
+      ]
+    },
+    {
+      "key": "ag-114",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A candle is lit in each of two identical closed jars. Jar A has air only. Jar B has air and a green plant that was kept in bright light. In which jar does the candle burn for longer?",
+      "options": [
+        "Jar A, because the plant takes in the oxygen",
+        "Both the same, because the plant takes no part",
+        "Jar B, because the plant adds carbon dioxide in light",
+        "Jar B, because the plant adds oxygen in light"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "In bright light, plants give out oxygen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The plant changes the gases in the jar."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide does not keep a flame burning."
+        },
+        null
+      ],
+      "solution": [
+        "More oxygen lets the candle burn longer."
+      ]
+    },
+    {
+      "key": "ag-115",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "After a candle goes out in a closed jar, limewater is poured in and shaken. It turns milky. What does this show?",
+      "options": [
+        "The jar has run out of oxygen",
+        "The candle made nitrogen when it burned",
+        "The candle made carbon dioxide when it burned",
+        "The candle made water vapour when it burned"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-test",
+          "why": "Limewater does not test for oxygen."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Limewater does not change with nitrogen."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Water vapour does not turn limewater milky."
+        }
+      ],
+      "solution": [
+        "Milky limewater means carbon dioxide is present."
+      ]
+    },
+    {
+      "key": "ag-116",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which gas is matched correctly to what it does?",
+      "options": [
+        "Nitrogen: turns limewater milky",
+        "Oxygen: needed for burning",
+        "Carbon dioxide: needed for burning",
+        "Water vapour: makes up most of the air"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "mismatch",
+          "why": "This describes carbon dioxide."
+        },
+        null,
+        {
+          "tag": "mismatch",
+          "why": "Carbon dioxide does not support burning."
+        },
+        {
+          "tag": "mismatch",
+          "why": "Nitrogen makes up most of the air."
+        }
+      ],
+      "solution": [
+        "Oxygen supports burning."
+      ]
+    },
+    {
+      "key": "ag-117",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which of the following is a mixture of gases?",
+      "options": [
+        "The air in a classroom",
+        "Pure nitrogen in a tank",
+        "Pure oxygen in a hospital cylinder",
+        "Pure carbon dioxide in a fire extinguisher"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "pure-gas",
+          "why": "It is one gas only."
+        },
+        {
+          "tag": "pure-gas",
+          "why": "It is one gas only."
+        },
+        {
+          "tag": "pure-gas",
+          "why": "It is one gas only."
+        }
+      ],
+      "solution": [
+        "Air contains several gases mixed together."
+      ]
+    },
+    {
+      "key": "ag-118",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A lit candle is lowered into a jar of pure oxygen. How does the flame compare with one in air?",
+      "options": [
+        "It burns less brightly because the jar has less nitrogen",
+        "It burns the same because the jar is only a single gas",
+        "It goes out because pure oxygen cannot burn",
+        "It burns more brightly because the jar has more oxygen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Nitrogen does not matter to the flame."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "More oxygen makes it brighter."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Oxygen supports burning."
+        },
+        null
+      ],
+      "solution": [
+        "More oxygen means a brighter flame."
+      ]
+    },
+    {
+      "key": "ag-119",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A football is weighed before and after being pumped up with air. The reading is higher afterwards. What does this show?",
+      "options": [
+        "Air is a solid",
+        "Air has no mass but takes up space",
+        "Air has mass",
+        "Only oxygen has mass"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The reading does not tell us the state."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air takes up space and also has mass."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "All the gases in air have mass."
+        }
+      ],
+      "solution": [
+        "The extra reading is the mass of the added air."
+      ]
+    },
+    {
+      "key": "ag-120",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar chart shows two gases in air. The rest of the air is made up of other gases. About what percentage is this rest?",
+      "options": [
+        "About 9%",
+        "About 1%",
+        "About 21%",
+        "About 99%"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "78 + 21 = 99, so the rest is 1%."
+        },
+        null,
+        {
+          "tag": "misread",
+          "why": "21% is the Q bar."
+        },
+        {
+          "tag": "misread",
+          "why": "99% is the two bars together."
+        }
+      ],
+      "solution": [
+        "100 - 78 - 21 = 1."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two gases in air</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Gas</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Amount in air (%)</text><rect x=\"85.8\" y=\"71.0\" width=\"67.5\" height=\"117.0\"/><rect x=\"220.8\" y=\"156.5\" width=\"67.5\" height=\"31.5\"/></svg>"
+    },
+    {
+      "key": "ag-121",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which pair of things both use up oxygen from the air?",
+      "options": [
+        "A burning candle and a breathing mouse",
+        "A burning candle and a melting ice cube",
+        "A green plant making food in light and a boiling kettle",
+        "A breathing mouse and a growing plant making food in light"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "partial",
+          "why": "A melting ice cube does not use oxygen."
+        },
+        {
+          "tag": "partial",
+          "why": "Neither uses up oxygen."
+        },
+        {
+          "tag": "partial",
+          "why": "A plant making food in light adds oxygen."
+        }
+      ],
+      "solution": [
+        "Burning and breathing both use oxygen."
+      ]
+    },
+    {
+      "key": "ag-122",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A pan of oil catches fire. A cook covers it with a fire blanket and the fire goes out. Why?",
+      "options": [
+        "The blanket adds carbon dioxide to the fire",
+        "The blanket removes the nitrogen from the air",
+        "The blanket turns the oil into water",
+        "The blanket stops oxygen from reaching the fire"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The blanket does not make any gas."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not keep a fire going."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The blanket does not change the oil to water."
+        },
+        null
+      ],
+      "solution": [
+        "No oxygen reaches the flame, so it goes out."
+      ]
+    },
+    {
+      "key": "ag-123",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which gas in air changes the most in amount from one day to the next, for example between a dry and a rainy day?",
+      "options": [
+        "Nitrogen",
+        "Oxygen",
+        "Water vapour",
+        "Carbon dioxide"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen stays about the same."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen stays about the same."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide stays very small."
+        }
+      ],
+      "solution": [
+        "The amount of water vapour in air changes with the weather."
+      ]
+    },
+    {
+      "key": "ag-124",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Rina blows through the straw into the limewater for one minute. What will she see?",
+      "options": [
+        "The limewater turns into a blue liquid",
+        "The limewater turns milky",
+        "The limewater stays clear because breath has no carbon dioxide",
+        "The limewater disappears"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-observation",
+          "why": "Limewater does not turn blue."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Breath has more carbon dioxide than fresh air."
+        },
+        {
+          "tag": "wrong-observation",
+          "why": "It stays in the tube."
+        }
+      ],
+      "solution": [
+        "Air from the lungs has carbon dioxide, which turns limewater milky."
+      ],
+      "figure": "<svg viewBox=\"0 0 240 225\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"110\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Blowing into limewater with a straw</text><path d=\"M90 60 V150 a20 20 0 0 0 40 0 V60\"/><rect x=\"91\" y=\"108\" width=\"38\" height=\"42\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><path d=\"M91 150 a19 19 0 0 0 38 0 Z\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><line x1=\"118\" y1=\"28\" x2=\"118\" y2=\"140\" stroke-width=\"3\"/><circle cx=\"113\" cy=\"128\" r=\"2.5\"/><circle cx=\"122\" cy=\"119\" r=\"2.5\"/><text x=\"110\" y=\"196\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Limewater</text></svg>"
+    },
+    {
+      "key": "ag-125",
+      "level": "intermediate",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "The pie chart shows the gases in dry air. Which slice stands for the gas that a candle uses up when it burns?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "P and Q together"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-slice",
+          "why": "P is nitrogen, which a candle does not use."
+        },
+        {
+          "tag": "wrong-slice",
+          "why": "R is mostly carbon dioxide and other gases, which a candle does not use."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A candle uses only one of the gases."
+        }
+      ],
+      "solution": [
+        "A candle uses oxygen, the 21% slice."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 1 1 79.3 124.5 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"207.4\" y=\"211.3\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 78%</text><path d=\"M150 138 L79.3 124.5 A72 72 0 0 1 145.5 66.1 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"90.5\" y=\"74.5\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 21%</text><path d=\"M150 138 L145.5 66.1 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"147.2\" y=\"52.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 1%</text></svg>"
+    },
+    {
+      "key": "ag-201",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A candle burns in a closed jar over water until it goes out. The water rises only a short way up the jar. Why does it not rise further?",
+      "options": [
+        "Only the oxygen, about one fifth of air, was used",
+        "The water is too heavy to rise higher",
+        "All the gases in the jar were used up by the candle",
+        "The candle also made oxygen as it burned"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The amount of gas lost sets the rise."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Most of the gas in the jar remained."
+        },
+        {
+          "tag": "reversed",
+          "why": "A burning candle uses up oxygen."
+        }
+      ],
+      "solution": [
+        "About 21% of air is oxygen, and the rest stays in the jar."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water level after burning</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><rect x=\"101\" y=\"146.0\" width=\"98\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><line x1=\"101\" y1=\"146.0\" x2=\"199\" y2=\"146.0\" stroke-width=\"1.5\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ag-202",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Aiden's jar has a small crack at the top. When he repeats the candle experiment, the water inside hardly rises. Why?",
+      "options": [
+        "The crack lets in water, so the level is the same inside and outside",
+        "The candle burns more oxygen because of the crack",
+        "The candle burns faster because of the crack, so uses more air",
+        "Air from outside enters through the crack and replaces oxygen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The crack is at the top, so air enters, not water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The crack does not make the candle use more oxygen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Burning speed does not decide how much gas is lost."
+        },
+        null
+      ],
+      "solution": [
+        "The jar must be airtight for the volume of gas lost to show."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A jar over a burning candle</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ag-203",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A pupil says, \"Air has only two gases, nitrogen and oxygen.\" Which statement corrects this?",
+      "options": [
+        "Air also has a large amount of carbon dioxide gas, about a fifth",
+        "Air has no other gases, but it has some empty space in it",
+        "Air also has small amounts of other gases, such as carbon dioxide",
+        "Air has only one gas, since nitrogen and oxygen are joined together"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-amount",
+          "why": "Carbon dioxide is a tiny part of air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air is made of gases and has no empty space inside it."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Air is a mixture. The gases are not joined."
+        }
+      ],
+      "solution": [
+        "Nitrogen and oxygen make up about 99%. Carbon dioxide, water vapour and other gases make up the rest."
+      ]
+    },
+    {
+      "key": "ag-204",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Tube X turned milky in 30 seconds. Tube Y took 2 minutes. One tube had air from the lungs blown in and the other had fresh air pumped in at the same rate. Which conclusion is correct?",
+      "options": [
+        "Y had air from the lungs, because that air has more carbon dioxide",
+        "X had air from the lungs, because that air has more carbon dioxide",
+        "X had fresh air, because fresh air has more oxygen",
+        "Both had the same gas, because both turned milky"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "swap",
+          "why": "More carbon dioxide turns limewater milky faster, which is X."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Oxygen does not turn limewater milky."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The speeds differ, so the amounts differ."
+        }
+      ],
+      "solution": [
+        "The faster change means more carbon dioxide."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 225\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Limewater in two tubes</text><path d=\"M60 60 V150 a20 20 0 0 0 40 0 V60\"/><rect x=\"61\" y=\"108\" width=\"38\" height=\"42\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><path d=\"M61 150 a19 19 0 0 0 38 0 Z\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><line x1=\"65\" y1=\"114\" x2=\"95\" y2=\"114\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"65\" y1=\"120\" x2=\"95\" y2=\"120\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"65\" y1=\"126\" x2=\"95\" y2=\"126\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"65\" y1=\"132\" x2=\"95\" y2=\"132\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"65\" y1=\"138\" x2=\"95\" y2=\"138\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"65\" y1=\"144\" x2=\"95\" y2=\"144\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"65\" y1=\"150\" x2=\"95\" y2=\"150\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"88\" y1=\"28\" x2=\"88\" y2=\"140\" stroke-width=\"3\"/><circle cx=\"83\" cy=\"128\" r=\"2.5\"/><circle cx=\"92\" cy=\"119\" r=\"2.5\"/><text x=\"80\" y=\"196\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><text x=\"80\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">after 30 s</text><path d=\"M190 60 V150 a20 20 0 0 0 40 0 V60\"/><rect x=\"191\" y=\"108\" width=\"38\" height=\"42\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><path d=\"M191 150 a19 19 0 0 0 38 0 Z\" fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\"/><line x1=\"195\" y1=\"114\" x2=\"225\" y2=\"114\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"120\" x2=\"225\" y2=\"120\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"126\" x2=\"225\" y2=\"126\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"132\" x2=\"225\" y2=\"132\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"138\" x2=\"225\" y2=\"138\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"144\" x2=\"225\" y2=\"144\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"195\" y1=\"150\" x2=\"225\" y2=\"150\" stroke-width=\"1.5\" stroke-dasharray=\"5 3\"/><line x1=\"218\" y1=\"28\" x2=\"218\" y2=\"140\" stroke-width=\"3\"/><circle cx=\"213\" cy=\"128\" r=\"2.5\"/><circle cx=\"222\" cy=\"119\" r=\"2.5\"/><text x=\"210\" y=\"196\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text><text x=\"210\" y=\"214\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">after 2 min</text></svg>"
+    },
+    {
+      "key": "ag-205",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A boy's exhaled air was tested at rest and after running. What does the table show?",
+      "options": [
+        "His body used more oxygen and made more carbon dioxide when he ran",
+        "His body used the same oxygen but made more carbon dioxide when he ran",
+        "His body made oxygen when he ran",
+        "The air he breathed in had more carbon dioxide"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mixed",
+          "why": "Less oxygen in exhaled air means more was used."
+        },
+        {
+          "tag": "reversed",
+          "why": "Oxygen in exhaled air went down."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The table is about exhaled air only."
+        }
+      ],
+      "solution": [
+        "Exhaled oxygen is lower and exhaled carbon dioxide is higher after running."
+      ],
+      "figure": "<svg viewBox=\"0 0 440 140\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"220.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Exhaled air of a boy</text><rect x=\"10\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"105.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"200\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">At rest (%)</text><rect x=\"300\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"365.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After running (%)</text><rect x=\"10\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Oxygen in exhaled air</text><rect x=\"200\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"300\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"365.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"10\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"105.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Carbon dioxide in exhaled air</text><rect x=\"200\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text><rect x=\"300\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"365.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text></svg>"
+    },
+    {
+      "key": "ag-206",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A mouse is sealed in a jar of air. The graph shows two gases in the jar. Which gas does line Y stand for?",
+      "options": [
+        "Oxygen, which the mouse gives out",
+        "Nitrogen, which the mouse gives out",
+        "Carbon dioxide, which the mouse takes in",
+        "Carbon dioxide, which the mouse gives out"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "swap",
+          "why": "The mouse uses oxygen, so oxygen is X."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not change much."
+        },
+        {
+          "tag": "reversed",
+          "why": "The mouse gives out carbon dioxide."
+        },
+        null
+      ],
+      "solution": [
+        "Y goes up from a tiny amount, so it is carbon dioxide from respiration."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A mouse in a closed jar</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"119.5\" y1=\"188\" x2=\"119.5\" y2=\"192\"/><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"187.0\" y1=\"188\" x2=\"187.0\" y2=\"192\"/><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"254.5\" y1=\"188\" x2=\"254.5\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Gas in jar (%)</text><polyline points=\"52.0,62.0 119.5,74.0 187.0,80.0 254.5,86.0 322.0,92.0\"/><circle cx=\"52.0\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"74.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"80.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,187.8 119.5,182.0 187.0,176.0 254.5,170.0 322.0,164.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"187.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"182.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"176.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"170.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"164.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"260\" y1=\"46\" x2=\"286\" y2=\"46\"/><text x=\"292\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"260\" y1=\"62\" x2=\"286\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"292\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ag-207",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A mouse is sealed in a jar. It survives for a longer time when a green plant in bright light is also in the jar. Why?",
+      "options": [
+        "The plant adds nitrogen to the air in the jar",
+        "The plant takes in oxygen and gives out carbon dioxide in light",
+        "The plant adds oxygen to the air in the jar",
+        "The plant takes up space, so the mouse needs less air"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Mice do not use nitrogen."
+        },
+        {
+          "tag": "reversed",
+          "why": "In light the plant makes food and gives out oxygen."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Taking up space does not give more oxygen."
+        }
+      ],
+      "solution": [
+        "Plants give out oxygen in light."
+      ]
+    },
+    {
+      "key": "ag-208",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A green plant in a sealed box is moved from bright light into a cupboard with no light. Which change in the gases of the box is expected?",
+      "options": [
+        "Oxygen goes up because the cupboard is cooler",
+        "Oxygen goes down as the plant makes none in the dark",
+        "Nitrogen goes down because the plant uses it up",
+        "Nothing changes because plants do not respire"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Without light the plant does not add oxygen."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Plants do not use up nitrogen in this way."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plants respire and use oxygen."
+        }
+      ],
+      "solution": [
+        "In the dark the plant uses oxygen in respiration and adds none."
+      ]
+    },
+    {
+      "key": "ag-209",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A burning candle is lowered into a jar that has been filled with only carbon dioxide. The flame goes out. Which statement explains this?",
+      "options": [
+        "Carbon dioxide does not support burning",
+        "Carbon dioxide takes the oxygen out of the candle wax",
+        "Carbon dioxide cools the flame, so it cannot burn",
+        "Carbon dioxide is a liquid in the jar"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Carbon dioxide does not remove oxygen from wax."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The reason is that the gas cannot support burning."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It is a gas in the jar."
+        }
+      ],
+      "solution": [
+        "Without oxygen, the flame cannot continue."
+      ]
+    },
+    {
+      "key": "ag-210",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A candle goes out in a closed jar while the graph shows 16% oxygen is still there. Which statement is correct?",
+      "options": [
+        "All the oxygen was used up, so the graph must be wrong",
+        "The candle needs no oxygen when the amount is below 21%",
+        "The remaining gas was carbon dioxide only",
+        "The oxygen left was too little to keep the candle burning"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Some oxygen remained."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A flame needs enough oxygen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Most of the rest was nitrogen."
+        },
+        null
+      ],
+      "solution": [
+        "A flame goes out when oxygen falls too low, even if some remains."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle in a closed jar</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"106.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">1</text><line x1=\"106.0\" y1=\"188\" x2=\"106.0\" y2=\"192\"/><text x=\"160.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"160.0\" y1=\"188\" x2=\"160.0\" y2=\"192\"/><text x=\"214.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">3</text><line x1=\"214.0\" y1=\"188\" x2=\"214.0\" y2=\"192\"/><text x=\"268.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"268.0\" y1=\"188\" x2=\"268.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Oxygen in jar (%)</text><polyline points=\"52.0,62.0 106.0,74.0 160.0,86.0 214.0,92.0 268.0,92.0 322.0,92.0\"/><circle cx=\"52.0\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"106.0\" cy=\"74.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"160.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"214.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"268.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"92.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "ag-211",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "The pie chart shows the gases in exhaled air. Which slice stands for oxygen?",
+      "options": [
+        "Q",
+        "R",
+        "P",
+        "S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-slice",
+          "why": "Q is the biggest slice, which is nitrogen."
+        },
+        {
+          "tag": "wrong-slice",
+          "why": "R is about 4%, which is carbon dioxide."
+        },
+        null,
+        {
+          "tag": "wrong-slice",
+          "why": "S is the other gases, including water vapour."
+        }
+      ],
+      "solution": [
+        "Exhaled air has about 16% oxygen."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in exhaled air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 0 1 167.9 68.3 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"161.3\" y=\"52.7\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 4%</text><path d=\"M150 138 L167.9 68.3 A72 72 0 1 1 84.9 107.3 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"188.3\" y=\"223.4\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 78%</text><path d=\"M150 138 L84.9 107.3 A72 72 0 0 1 89.2 99.4 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"71.1\" y=\"98.6\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S 2%</text><path d=\"M150 138 L89.2 99.4 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.92\"/><text x=\"106.6\" y=\"63.1\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 16%</text></svg>"
+    },
+    {
+      "key": "ag-212",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "In the pie chart of exhaled air, S stands for the other gases including water vapour. Which slice stands for carbon dioxide?",
+      "options": [
+        "P",
+        "R",
+        "Q",
+        "S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-slice",
+          "why": "P is the oxygen left in exhaled air."
+        },
+        null,
+        {
+          "tag": "wrong-slice",
+          "why": "Q is nitrogen, the largest part."
+        },
+        {
+          "tag": "wrong-slice",
+          "why": "S is the other gases together."
+        }
+      ],
+      "solution": [
+        "Carbon dioxide in exhaled air is about 4%."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in exhaled air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 0 1 167.9 68.3 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"161.3\" y=\"52.7\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 4%</text><path d=\"M150 138 L167.9 68.3 A72 72 0 1 1 84.9 107.3 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"188.3\" y=\"223.4\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 78%</text><path d=\"M150 138 L84.9 107.3 A72 72 0 0 1 89.2 99.4 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"71.1\" y=\"98.6\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S 2%</text><path d=\"M150 138 L89.2 99.4 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.92\"/><text x=\"106.6\" y=\"63.1\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 16%</text></svg>"
+    },
+    {
+      "key": "ag-213",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar chart shows the oxygen in air breathed in and out. About how much of the air breathed in is used by the body?",
+      "options": [
+        "5 percentage points",
+        "16 percentage points",
+        "21 percentage points",
+        "37 percentage points"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "16 is what is left in exhaled air."
+        },
+        {
+          "tag": "misread",
+          "why": "21 is the oxygen in inhaled air."
+        },
+        {
+          "tag": "misread",
+          "why": "Adding the bars is meaningless here."
+        }
+      ],
+      "solution": [
+        "21 - 16 = 5 percentage points."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Oxygen in air</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Inhaled</text><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Exhaled</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Air</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Oxygen (%)</text><rect x=\"85.8\" y=\"62.0\" width=\"67.5\" height=\"126.0\"/><rect x=\"220.8\" y=\"92.0\" width=\"67.5\" height=\"96.0\"/></svg>"
+    },
+    {
+      "key": "ag-214",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Which statement about water vapour in air does the table support?",
+      "options": [
+        "Water vapour is the most plentiful gas in the air in every place",
+        "Desert air has no water vapour",
+        "The amount of oxygen in air differs in each place",
+        "The amount of water vapour in air is not the same in every place"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The table shows 1% to 4% only."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The table shows 1%."
+        },
+        {
+          "tag": "unsupported",
+          "why": "The table does not show oxygen."
+        },
+        null
+      ],
+      "solution": [
+        "The values 1, 3 and 4 are different."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water vapour in air at three places</text><rect x=\"10\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"70.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"130\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"230.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water vapour in air (%)</text><rect x=\"10\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Desert</text><rect x=\"130\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"230.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Seaside</text><rect x=\"130\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"230.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"10\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Rainforest</text><rect x=\"130\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"230.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text></svg>"
+    },
+    {
+      "key": "ag-215",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "On a cold day, the windows of a full classroom become wet on the inside. Why?",
+      "options": [
+        "The oxygen in the room turns to water on the cold glass",
+        "Water comes from outside through the glass slowly",
+        "Water vapour in the pupils' breath turns to water on the glass",
+        "Carbon dioxide turns to water on the cold glass"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen does not turn to water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The wet side is the inside."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "Carbon dioxide does not turn into water."
+        }
+      ],
+      "solution": [
+        "Exhaled air has water vapour that condenses on the cold glass."
+      ]
+    },
+    {
+      "key": "ag-216",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows tests on three gases that are found in air. Which gas is carbon dioxide?",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "A and B"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "A makes the splint burn brighter, which is oxygen."
+        },
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "C does not change limewater, so it is not carbon dioxide."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Only one gas is carbon dioxide."
+        }
+      ],
+      "solution": [
+        "Only carbon dioxide turns limewater milky."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Tests on three gases</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"70\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"130.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Burning splint</text><rect x=\"190\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Limewater</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"70\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"130.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">burns brighter</text><rect x=\"190\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">stays clear</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"70\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"130.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">goes out</text><rect x=\"190\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">turns milky</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"70\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"130.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">goes out</text><rect x=\"190\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"250.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">stays clear</text></svg>"
+    },
+    {
+      "key": "ag-217",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows tests on three gases that are found in air. Which gas is oxygen?",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "B and C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-gas",
+          "why": "B turns limewater milky, which is carbon dioxide."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "C puts out the splint, as nitrogen does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both put out the splint, so neither is oxygen."
+        }
+      ],
+      "solution": [
+        "Oxygen makes things burn more brightly."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Tests on three gases</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gas</text><rect x=\"70\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"130.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Burning splint</text><rect x=\"190\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Limewater</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"70\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"130.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">burns brighter</text><rect x=\"190\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">stays clear</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"70\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"130.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">goes out</text><rect x=\"190\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">turns milky</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"70\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"130.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">goes out</text><rect x=\"190\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"250.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">stays clear</text></svg>"
+    },
+    {
+      "key": "ag-218",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Animals and fires use up oxygen all the time, yet the amount of oxygen in air stays about the same. Which reason helps to explain this?",
+      "options": [
+        "Nitrogen slowly changes into oxygen in the air",
+        "Carbon dioxide changes into oxygen in the air",
+        "Water vapour breaks down into oxygen in the air",
+        "Green plants give out oxygen in light"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Nitrogen does not change into oxygen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plants use carbon dioxide, but air does not change it by itself."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This does not happen in air."
+        },
+        null
+      ],
+      "solution": [
+        "Plants return oxygen to the air."
+      ]
+    },
+    {
+      "key": "ag-219",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which statement about air is correct?",
+      "options": [
+        "Nitrogen is needed for burning, so it is used up by a flame",
+        "Carbon dioxide is the second most plentiful gas in air",
+        "Air is a mixture of gases and its water vapour amount can change",
+        "Oxygen makes up about half of the air"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-gas",
+          "why": "Oxygen is the gas needed for burning."
+        },
+        {
+          "tag": "wrong-amount",
+          "why": "Oxygen is second. Carbon dioxide is tiny."
+        },
+        null,
+        {
+          "tag": "wrong-amount",
+          "why": "It is about one fifth."
+        }
+      ],
+      "solution": [
+        "Air has fixed large parts but variable water vapour."
+      ]
+    },
+    {
+      "key": "ag-220",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "A student breathes in and out of a closed plastic bag for two minutes. What happens to the gases in the bag?",
+      "options": [
+        "Oxygen goes up and carbon dioxide goes down",
+        "Oxygen goes down and carbon dioxide goes up",
+        "Both oxygen and carbon dioxide go down",
+        "Nitrogen goes down and oxygen goes up"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The student uses oxygen and gives out carbon dioxide."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The student gives carbon dioxide to the bag."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen stays about the same."
+        }
+      ],
+      "solution": [
+        "Respiration uses oxygen and makes carbon dioxide."
+      ]
+    },
+    {
+      "key": "ag-221",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Gas in a jar was tested before and after a candle burned in it. How does the gas after burning compare with the gas before?",
+      "options": [
+        "It has less oxygen and more carbon dioxide",
+        "It has more oxygen and less carbon dioxide",
+        "It has less nitrogen and more oxygen",
+        "It has the same amount of every gas"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Burning uses oxygen and makes carbon dioxide."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen stays about the same."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Burning changes the gases."
+        }
+      ],
+      "solution": [
+        "The candle used oxygen and gave out carbon dioxide."
+      ]
+    },
+    {
+      "key": "ag-222",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Limewater is used in the trough instead of water. After the candle goes out, the limewater inside the jar turns milky. What does this show?",
+      "options": [
+        "The jar now contains more oxygen than it did before",
+        "The candle made nitrogen",
+        "The limewater has reacted with the glass of the jar",
+        "Carbon dioxide was made by the candle"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-test",
+          "why": "Burning uses oxygen."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Limewater does not test for nitrogen."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The change is due to carbon dioxide."
+        },
+        null
+      ],
+      "solution": [
+        "Milky limewater means carbon dioxide."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Limewater in the trough</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">limewater</text></svg>"
+    },
+    {
+      "key": "ag-223",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A plant was kept in a sealed box in bright light and in the dark. Which conclusion does the graph support?",
+      "options": [
+        "In light the plant used oxygen, but in the dark it added oxygen",
+        "The plant added oxygen both in light and in the dark",
+        "In light the plant added oxygen, but in the dark it used oxygen",
+        "The plant had no effect on oxygen"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "In light the oxygen went up."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "In the dark the oxygen went down."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both lines change."
+        }
+      ],
+      "solution": [
+        "Light gives a rise and dark gives a fall."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A plant in a sealed box</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"142.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"142.0\" y1=\"188\" x2=\"142.0\" y2=\"192\"/><text x=\"232.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"232.0\" y1=\"188\" x2=\"232.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (h)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Oxygen in box (%)</text><polyline points=\"52.0,62.0 142.0,56.0 232.0,50.0 322.0,44.0\"/><circle cx=\"52.0\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"142.0\" cy=\"56.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"232.0\" cy=\"50.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"44.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,62.0 142.0,68.0 232.0,74.0 322.0,80.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"62.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"142.0\" cy=\"68.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"232.0\" cy=\"74.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"80.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"60\" y1=\"160\" x2=\"86\" y2=\"160\"/><text x=\"92\" y=\"164\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Light</text><line x1=\"60\" y1=\"176\" x2=\"86\" y2=\"176\" stroke-dasharray=\"6 4\"/><text x=\"92\" y=\"180\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Dark</text></svg>"
+    },
+    {
+      "key": "ag-224",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Gas is collected from a jar after a candle has gone out. A burning splint goes out in it and it turns limewater milky. Is it pure carbon dioxide?",
+      "options": [
+        "Yes, because it turns limewater milky and puts the splint out",
+        "No, it also has nitrogen and some oxygen",
+        "Yes, because the splint goes out",
+        "No, it is only nitrogen"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Other gases in a mixture do not affect that test."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A flame can also go out with low oxygen."
+        },
+        {
+          "tag": "wrong-gas",
+          "why": "Nitrogen does not turn limewater milky."
+        }
+      ],
+      "solution": [
+        "The jar still holds the nitrogen of the original air."
+      ]
+    },
+    {
+      "key": "ag-225",
+      "level": "competent",
+      "outcome": "sci-systems-air-gases-1",
+      "pattern": "sci-pat-gases-in-air",
+      "stem": "Which method shows that air we breathe out has water vapour?",
+      "options": [
+        "Breathe onto a cold mirror and look for drops",
+        "Breathe into limewater and look for a milky colour",
+        "Breathe onto a burning candle",
+        "Breathe into a balloon and measure its size after"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-test",
+          "why": "This tests for carbon dioxide."
+        },
+        {
+          "tag": "wrong-test",
+          "why": "This does not test for water vapour."
+        },
+        {
+          "tag": "wrong-test",
+          "why": "This shows that air takes up space."
+        }
+      ],
+      "solution": [
+        "Water vapour condenses on a cold mirror."
+      ]
+    }
+  ]
+}
