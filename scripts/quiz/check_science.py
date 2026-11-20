@@ -19,7 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).parent
 sys.path.insert(0, str(HERE))
 from bankcommon import (Warnings, gives_away, near_duplicates, correct_is_longest, figure_text, figure_mismatch,  # noqa: E402
-                        longest_share_warnings, warning_self_tests, NEAR_DUP)
+                        longest_share_warnings, warning_self_tests, NEAR_DUP, svg_text_overflows)
 STRICT = "--strict" in sys.argv[1:]
 ROOT = HERE.parents[1]
 SYL = json.loads((ROOT / "site" / "src" / "data" / "syllabus" / "science.json").read_text())
@@ -36,6 +36,8 @@ PAINT_ATTRS = {"fill", "stroke", "color", "stop-color", "flood-color", "lighting
 MAX_SVG = 30_000
 errors = []
 SELF_TESTS = [  # (svg, must fail?)
+    ("<svg viewBox='0 0 100 40'><rect x='0' y='0' width='50' height='30'/><text x='25' y='20' text-anchor='middle' font-size='14'>Hours of light a day</text></svg>", True),
+    ("<svg viewBox='0 0 100 40'><rect x='0' y='0' width='90' height='30'/><text x='45' y='20' text-anchor='middle' font-size='14'>Hours</text></svg>", False),
     ("<svg viewBox='0 0 1 1'><path d='M0 0' fill='currentColor' style='stroke:black'/></svg>", False),
     ("<svg viewBox='0 0 1 1'><path d='M0 0' style='color:red'/></svg>", True),
     ("<svg viewBox='0 0 1 1'><stop stop-color='#f00'/></svg>", True),
@@ -73,6 +75,7 @@ def svg_errors(s):
                     val = val.strip().lower()
                     if prop.lower() in PAINT_ATTRS and val not in OK_PAINT and not val.startswith("url(#"):
                         out.append(f"svg style sets {prop.lower()}:{val} (use currentColor, black and white only)")
+    out += [f"figure-text-overflow: {t!r}: {why}" for t, why in svg_text_overflows(s)]  # wrap or widen the cell (fillkit.table does)
     return sorted(set(out))
 
 

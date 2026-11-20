@@ -179,3 +179,77 @@ def warning_self_tests(science=False):
         t(figure_mismatch("Which animal eats the grass?", svg), "figure mentions no stem noun")
         t(not figure_mismatch("Which animal eats the grass?", "<svg viewBox='0 0 1 1'><path d='M0 0'/></svg>"), "a figure without words is not judged")
     return fails
+
+
+# ------------------------------------------------------------------ SVG text fit (check_science; reusable for other inline figures)
+TEXT_OVERFLOW_SLACK = 4  # px a label may pass its cell or the viewBox before it counts as overflowing
+
+
+def svg_text_overflows(svg):
+    """Labels of an inline SVG that do not fit: each <text> width is estimated (font-size x 0.55 per character,
+    0.6 bold; text-anchor respected) and compared with the smallest <rect> that holds it centred (a table cell
+    or box) and with the viewBox. Returns [(text, reason)]. Simple and slightly generous on purpose."""
+    import re
+    import xml.etree.ElementTree as ET
+    try:
+        root = ET.fromstring(svg)
+    except ET.ParseError:
+        return []
+    vb = [float(v) for v in re.split(r"[ ,]+", (root.get("viewBox") or "").strip()) if v] if root.get("viewBox") else []
+    default_fs = float(root.get("font-size") or 14)
+    rects = []
+    for el in root.iter():
+        if el.tag.split("}")[-1] == "rect":
+            try:
+                x, y, w, h = (float(el.get(k, 0)) for k in ("x", "y", "width", "height"))
+            except ValueError:
+                continue
+            if "transform" not in el.attrib:
+                rects.append((x, y, w, h))
+    out = []
+    for el in root.iter():
+        if el.tag.split("}")[-1] != "text" or "transform" in el.attrib:
+            continue
+        s = "".join(el.itertext()).strip()
+        if not s or el.get("x") is None:
+            continue
+        fs = float(el.get("font-size") or default_fs)
+        w = len(s) * fs * (0.6 if el.get("font-weight") == "bold" else 0.55)
+        x, y = float(el.get("x")), float(el.get("y", 0))
+        anchor = el.get("text-anchor", "start")
+        x0, x1 = (x - w / 2, x + w / 2) if anchor == "middle" else (x - w, x) if anchor == "end" else (x, x + w)
+        # cell check only for text centred in its box (table cells, labelled boxes); free labels are held to the viewBox only
+        holders = [r for r in rects if anchor == "middle" and r[2] >= 30 and abs(x - (r[0] + r[2] / 2)) < 1 and r[1] <= y <= r[1] + r[3]]
+        if holders:
+            rx, _, rw, _ = min(holders, key=lambda r: r[2] * r[3])
+            if x0 < rx - TEXT_OVERFLOW_SLACK or x1 > rx + rw + TEXT_OVERFLOW_SLACK:
+                out.append((s, f"text ~{w:.0f}px wide overflows its {rw:.0f}px cell"))
+                continue
+        if len(vb) == 4 and (x0 < vb[0] - TEXT_OVERFLOW_SLACK or x1 > vb[0] + vb[2] + TEXT_OVERFLOW_SLACK):
+            out.append((s, "text runs past the viewBox"))
+    return out
+
+
+def widen_viewbox(svg, margin=6):
+    """Grow an inline SVG's viewBox (sideways only) so no <text> runs past its edge; a figure that already fits is returned unchanged."""
+    import re
+    import xml.etree.ElementTree as ET
+    m = re.search(r'viewBox="([^"]+)"', svg)
+    if not m:
+        return svg
+    x, y, w, h = (float(v) for v in m.group(1).split())
+    lo, hi = x, x + w
+    for el in ET.fromstring(svg).iter():
+        if el.tag.split("}")[-1] != "text" or el.get("x") is None or "transform" in el.attrib:
+            continue
+        s = "".join(el.itertext()).strip()
+        fs = float(el.get("font-size") or 14)
+        tw = len(s) * fs * (0.6 if el.get("font-weight") == "bold" else 0.55)
+        cx, a = float(el.get("x")), el.get("text-anchor", "start")
+        x0, x1 = (cx - tw / 2, cx + tw / 2) if a == "middle" else (cx - tw, cx) if a == "end" else (cx, cx + tw)
+        if x0 < lo - TEXT_OVERFLOW_SLACK: lo = x0 - margin
+        if x1 > hi + TEXT_OVERFLOW_SLACK: hi = x1 + margin
+    if (lo, hi) == (x, x + w):
+        return svg
+    nv = f'viewBox="{lo:g} {y:g} {hi - lo:g} {h:g}"'
+    return svg.replace(m.group(0), nv, 1)

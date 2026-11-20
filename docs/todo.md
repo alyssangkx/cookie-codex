@@ -262,3 +262,4 @@ outside the repo.
 - [x] 20 Nov 2026: tagger gate rebuilt on a checked key (84%). 2025, 2026 and Science 2024 tagged.
 - [x] 20 Nov 2026: answer-page re-read. Questions with an answer went from 25,459 to 40,553.
 - [x] 20 Nov 2026: design docs written: `learning-loop-design.md` and `marking-framework.md`.
+- [x] 20 Nov 2026: Science SVG table headers overflowed their cells (owner screenshot, `ph-211`). New FAIL rule `figure-text-overflow` in `check_science.py`; `fillkit.table` wraps/widens; 76 figures rebuilt (74 shipped re-fingerprinted, keys unchanged).

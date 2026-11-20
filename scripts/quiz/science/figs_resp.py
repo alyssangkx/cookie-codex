@@ -69,7 +69,7 @@ def integ_block(letters=("P", "Q", "R"), caption="Moving substances in the body"
     """letters = (small intestine->blood, lungs->blood, blood->lungs)."""
     p, q, r = letters
     b = AH + txt(150, 16, caption, 13, bold=True)
-    for (x, y, w, h, t) in ((90, 30, 120, 40, "Small intestine"), (90, 120, 120, 44, "Blood"), (90, 220, 120, 40, "Lungs")):
+    for (x, y, w, h, t) in ((75, 30, 150, 40, "Small intestine"), (75, 120, 150, 44, "Blood"), (75, 220, 150, 40, "Lungs")):
         b += f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8"/>' + txt(x + w / 2, y + h / 2 + 5, t, 15, bold=True)
     b += _arrow(150, 72, 150, 118, False) + txt(165, 100, p, 17, anchor="start", bold=True)
     b += _arrow(130, 218, 130, 166, False) + txt(116, 198, q, 17, anchor="end", bold=True)

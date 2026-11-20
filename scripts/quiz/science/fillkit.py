@@ -27,20 +27,57 @@ def arrow(x1, y1, x2, y2, w=2):
     return f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke-width="{w}" marker-end="url(#ah)"/>'
 
 
+def _tw(s, fs, bold=False):
+    """Estimated text width in px (same estimate as bankcommon.svg_text_overflows)."""
+    return len(s) * fs * (0.6 if bold else 0.55)
+
+
+def _best_split(s, fs, bold):
+    """Two-line split at a space that makes the wider line narrowest; None if there is no space."""
+    ws = s.split(" ")
+    if len(ws) < 2:
+        return None
+    return min(((" ".join(ws[:i]), " ".join(ws[i:])) for i in range(1, len(ws))),
+               key=lambda p: max(_tw(p[0], fs, bold), _tw(p[1], fs, bold)))
+
+
 def table(headers, rows, widths=None, caption=None, rowh=30, fs=14, first_left=False):
-    """A ruled table. Cells may contain '|' for two lines."""
+    """A ruled table. Cells may contain '|' for two lines. A cell that does not fit its column wraps at a space into two
+    lines; a line that still does not fit widens the column (the given width is a minimum). The font is never shrunk."""
     n = len(headers)
-    widths = widths or [90] * n
+    widths = list(widths or [90] * n)
+    PAD = 12
+    grid = [[str(c) for c in row] for row in [headers] + rows]
+    cells = []  # per row: per column: list of lines
+    for r, row in enumerate(grid):
+        bold = r == 0
+        cells.append([c.split("|") for c in row])
+    for c in range(n):
+        for r, row in enumerate(cells):
+            lines = row[c]
+            bold = r == 0
+            if max(_tw(l, fs, bold) for l in lines) + PAD <= widths[c]:
+                continue
+            if len(lines) == 1 and (sp := _best_split(lines[0], fs, bold)):
+                lines = list(sp)
+            widths[c] = max(widths[c], int(max(_tw(l, fs, bold) for l in lines) + PAD + 0.999))
+    for row_i, row in enumerate(cells):  # wrap what no longer fits at the final widths
+        for c in range(n):
+            lines = row[c]
+            if len(lines) == 1 and _tw(lines[0], fs, row_i == 0) + PAD > widths[c] and (sp := _best_split(lines[0], fs, row_i == 0)):
+                row[c] = list(sp)
     W = sum(widths) + 20
+    if caption:
+        W = max(W, int(_tw(caption, 13, True)) + 20)
     y0 = 36 if caption else 10
+    off = (W - sum(widths) - 20) / 2
     b = txt(W / 2, 22, caption, 13, bold=True) if caption else ""
     y = y0
-    for r, row in enumerate([headers] + rows):
-        h = (rowh + 4 if r == 0 else rowh) + (14 if any("|" in str(c) for c in row) else 0)
-        x = 10
-        for c, cell in enumerate(row):
-            b += f'<rect x="{x}" y="{y}" width="{widths[c]}" height="{h}"/>'
-            parts = str(cell).split("|")
+    for r, row in enumerate(cells):
+        h = (rowh + 4 if r == 0 else rowh) + 14 * (max(len(l) for l in row) - 1)
+        x = 10 + off
+        for c, parts in enumerate(row):
+            b += f'<rect x="{x:g}" y="{y}" width="{widths[c]}" height="{h}"/>'
             for k, p in enumerate(parts):
                 yy = y + h / 2 + 5 - (len(parts) - 1) * 8 + k * 16
                 b += txt(x + widths[c] / 2, yy, p, fs, bold=(r == 0))
