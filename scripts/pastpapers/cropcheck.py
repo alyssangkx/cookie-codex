@@ -20,7 +20,7 @@ Server side (CUDA, vLLM; env /data/alvin/envs/ppvlm; started by vlm/run_tag11.sh
   cropcheck.py gate               the gate cases must come out as expected; tries the prompt variants in order
   cropcheck.py run K N [--prompt i]   shard K of N over pack/items.jsonl (TP2 on CUDA_VISIBLE_DEVICES), resumes
 """
-import argparse, json, os, re, subprocess, sys
+import argparse, hashlib, json, os, re, subprocess, sys
 from pathlib import Path
 
 TMP = Path("/data/alvin/tmp/cookie-codex")
@@ -98,6 +98,23 @@ def item_ok(figs: list) -> bool:
     return bool(figs) and all(fig_ok(f) for f in figs)
 
 
+def pack_stamp(pack: Path) -> str:
+    """Identity of a pack: sha1 over items.jsonl and every figure file (name, size, content). Results carry it, so a
+    result made from another pack (older run, different selection) is never resumed or merged."""
+    h = hashlib.sha1()
+    ip = Path(pack) / "items.jsonl"
+    h.update(ip.read_bytes() if ip.exists() else b"")
+    for f in sorted((Path(pack) / "figs").glob("*")) if (Path(pack) / "figs").is_dir() else []:
+        h.update(f"{f.name}:{f.stat().st_size}:".encode())
+        h.update(hashlib.sha1(f.read_bytes()).digest())
+    return h.hexdigest()[:16]
+
+
+def stamped(rows, stamp: str):
+    """Only the result rows made from the pack with this stamp."""
+    return [r for r in rows if r.get("stamp") == stamp]
+
+
 def page_of_crop(crop: str):
     """('2026', 'p0519') from .../science/2026/crops/sci-...-p0519.png, else None."""
     p = Path(crop)
@@ -170,6 +187,7 @@ def pack(a):
     with open(PACK / "gate.jsonl", "w") as f:
         for g in gate:
             f.write(json.dumps(g) + "\n")
+    (PACK / "stamp.txt").write_text(pack_stamp(PACK) + "\n")
     print(f"packed {len(items)} items, {nfig} figures, {len(gate)} gate figures -> {PACK}")
     if a.push:
         subprocess.run(["ssh", SERVER, f"mkdir -p {SERVER_PACK} {SERVER_BASE}/out"], check=True)
@@ -185,14 +203,14 @@ def pickup(a):
     WORK.mkdir(parents=True, exist_ok=True)
     subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/out/results.jsonl", str(PACK / "results.jsonl")], check=True)
     subprocess.run(["scp", "-q", f"{SERVER}:/data/alvin/cookie/vlm/tag11-done.txt", str(WORK / "tag11-done.txt")], check=True)
-    rows = jl(PACK / "results.jsonl")
-    print(f"{len(rows)} items, {sum(not r['ok'] for r in rows)} failed -> {PACK / 'results.jsonl'}")
+    rows = stamped(jl(PACK / "results.jsonl"), pack_stamp(PACK))
+    print(f"{len(rows)} items (current pack stamp), {sum(not r['ok'] for r in rows)} failed -> {PACK / 'results.jsonl'}")
 
 
 # ------------------------------------------------------------------ server side
 
-def run_model(cases, prompt_idx, shard=None):
-    """cases: [{key, qno, img, page}] (absolute paths). Returns {key: dict|None}."""
+def run_model():
+    """Starts the vLLM engine. Returns (llm, sampling params)."""
     from vllm import LLM, SamplingParams
     llm = LLM(model="Qwen/Qwen2.5-VL-32B-Instruct-AWQ", tensor_parallel_size=int(os.environ.get("PP_TP", "2")),
               gpu_memory_utilization=0.92, max_model_len=16384, max_num_seqs=6, limit_mm_per_prompt={"image": 2},
@@ -234,10 +252,9 @@ def gate_verdict(cases, answers):
 
 def gate(a):
     cases = gate_cases()
-    llm, sp = run_model(cases, 0)
-    start = a.prompt if a.prompt is not None else 0
+    llm, sp = run_model()
     tried = []
-    for i in range(start, len(VARIANTS)) if a.prompt is None else [a.prompt]:
+    for i in range(len(VARIANTS)) if a.prompt is None else [a.prompt]:
         ans = ask(llm, sp, cases, i)
         res = gate_verdict(cases, ans)
         tried.append((i, res))
@@ -259,12 +276,13 @@ def run(a):
     idx = a.prompt if a.prompt is not None else int(pf.read_text()) if pf.exists() else 0
     out = Path(SERVER_BASE) / "out" / f"results-{a.k}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
-    done = {r["id"] for r in jl(out)}
+    stamp = pack_stamp(P)
+    done = {r["id"] for r in stamped(jl(out), stamp)}
     items = [it for it in jl(P / "items.jsonl")[a.k::a.n] if it["id"] not in done]
     print(f"shard {a.k}/{a.n}: {len(items)} items to do, prompt {idx}", flush=True)
     if not items:
         return 0
-    llm, sp = run_model([], idx)
+    llm, sp = run_model()
     for i in range(0, len(items), 16):
         ch = items[i:i + 16]
         cases = [{"qno": it["qno"], "img": str(P / f["img"]), "page": str(P / f["page"]), "id": it["id"], "n": f["n"]}
@@ -281,15 +299,16 @@ def run(a):
                     if c["id"] == it["id"]:
                         figs.append({"n": c["n"], **(x or {"complete": False, "belongs_to_question": False,
                                                             "contains_other_question": True, "reason": "unparsed answer"})})
-                f.write(json.dumps({"id": it["id"], "ok": item_ok(figs), "figs": figs, "prompt": idx}) + "\n")
+                f.write(json.dumps({"id": it["id"], "ok": item_ok(figs), "figs": figs, "prompt": idx, "stamp": stamp}) + "\n")
         print("done", i + len(ch), "/", len(items), flush=True)
     return 0
 
 
 def merge(a):
     rows = {}
+    stamp = pack_stamp(Path(SERVER_PACK))
     for f in sorted((Path(SERVER_BASE) / "out").glob("results-*.jsonl")):
-        for r in jl(f):
+        for r in stamped(jl(f), stamp):
             rows[r["id"]] = r
     order = [it["id"] for it in jl(Path(SERVER_PACK) / "items.jsonl")]
     with open(Path(SERVER_BASE) / "out" / "results.jsonl", "w") as f:
@@ -314,6 +333,17 @@ def selftest():
     assert gate_verdict(cs, [{**good, "complete": False}, good, good]) == {"a/webp": True, "b/webp": True}
     assert gate_verdict(cs, [good, good, None]) == {"a/webp": False, "b/webp": False}
     assert all("{qno}" in v and v.count("{{") == v.count("}}") for v in VARIANTS) and VARIANTS[0].format(qno=3)
+    import tempfile
+    tmpd = TMP / "reviewfix"; tmpd.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=tmpd) as td:
+        pk = Path(td); (pk / "figs").mkdir()
+        (pk / "items.jsonl").write_text('{"id":"a"}\n'); (pk / "figs" / "a-1.webp").write_bytes(b"xx")
+        s1 = pack_stamp(pk)
+        assert s1 == pack_stamp(pk)
+        (pk / "figs" / "a-1.webp").write_bytes(b"xy")  # same size, other content
+        s2 = pack_stamp(pk); assert s2 != s1
+        (pk / "items.jsonl").write_text('{"id":"b"}\n'); assert pack_stamp(pk) != s2
+        assert stamped([{"id": "a", "stamp": s1}, {"id": "b", "stamp": s2}, {"id": "c"}], s2) == [{"id": "b", "stamp": s2}]
     print("cropcheck selftest ok")
 
 

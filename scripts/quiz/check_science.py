@@ -157,7 +157,7 @@ for f, data in _all:
         if "figure" in it:
             ans = opts[a] if isinstance(a, int) and not isinstance(a, bool) and 0 <= a < len(opts) and isinstance(opts[a], str) else None
             for msg in figure_errors(it["figure"], ans, opts if isinstance(opts, list) else ()): e(msg)
-            if unstated_switch(stem, it["figure"]): e("figure-unstated-switch: the figure draws a switch S but the stem never says if it is closed or open")
+            if unstated_switch(stem, it["figure"], it.get("key")): e("figure-unstated-switch: the figure draws a switch S but the stem never says if it is closed or open")
         if isinstance(opts, list) and len(opts) == 4 and all(isinstance(o, str) for o in opts) \
                 and isinstance(a, int) and not isinstance(a, bool) and 0 <= a < 4:
             w = lambda rule, m: warn.add(rule, f"{f.name} {it.get('key')}: {m}")

@@ -38,6 +38,8 @@ Nothing here prints question text, options or answers: counts and ids only.
 import argparse, collections, hashlib, json, os, re, sys
 from pathlib import Path
 
+import cropcheck  # fig_ok, pack_stamp: the per-figure pass rule and pack identity are shared
+
 REPO = Path(__file__).resolve().parents[2]
 TMP = Path("/data/alvin/tmp/cookie-codex")
 DEF_PP, DEF_BLIND, DEF_OUT = TMP / "pastpapers", TMP / "audit" / "blindcheck", TMP / "ppimport"
@@ -174,13 +176,15 @@ def read_hold(out: Path) -> set:
     return set().union(*(parse_hold(open(out / n).read()) for n in ("hold.txt", "hold-auto.txt") if (out / n).exists()))
 
 
-def hold_auto_text(rows) -> str:
+def hold_auto_text(rows, expected_ids=None) -> str:
     """hold-auto.txt from cropcheck results rows {id, ok, figs:[{n, complete, ..., reason}]}: one line per failed item."""
     lines = ["# written by `load_pp.py cropcheck-apply` from the server crop review; read like hold.txt. Do not edit: re-apply overwrites."]
+    for i in sorted(set(expected_ids or ()) - {r["id"] for r in rows}):  # no result (crashed shard, partial merge): held
+        lines.append(f"{i}  # not checked")
     for r in rows:
         if r.get("ok"):
             continue
-        why = next((f.get("reason", "") for f in r.get("figs", []) if not (f.get("complete") is True and f.get("belongs_to_question") is True and f.get("contains_other_question") is False)), "")
+        why = next((f.get("reason", "") for f in r.get("figs", []) if not cropcheck.fig_ok(f)), "")
         flags = [k for k in ("complete", "belongs_to_question") if any(f.get(k) is False for f in r.get("figs", []))]
         flags += ["contains_other_question"] if any(f.get("contains_other_question") is True for f in r.get("figs", [])) else []
         lines.append(f"{r['id']}  # {','.join(flags) or 'failed'}: {' '.join(why.split())[:100]}")
@@ -189,12 +193,15 @@ def hold_auto_text(rows) -> str:
 
 def cropcheck_apply(a):
     out = outside_repo(Path(a.out)) / a.subject
-    rows = jl(a.arg)
-    if not rows:
-        sys.exit("no results rows in " + str(a.arg))
-    (out / "hold-auto.txt").write_text(hold_auto_text(rows))
+    allrows = jl(a.arg)
+    expected = [it["id"] for it in jl(cropcheck.PACK / "items.jsonl")]
+    if not allrows or not expected:
+        sys.exit("no results rows in " + str(a.arg) + " or no pack at " + str(cropcheck.PACK))
+    rows = cropcheck.stamped(allrows, cropcheck.pack_stamp(cropcheck.PACK))  # results of another pack count as missing
+    (out / "hold-auto.txt").write_text(hold_auto_text(rows, expected))
     bad = sum(not r.get("ok") for r in rows)
-    print(f"{len(rows)} items checked, {bad} failed -> {out / 'hold-auto.txt'}")
+    missing = len(set(expected) - {r["id"] for r in rows})
+    print(f"{len(expected)} in pack: {len(rows)} checked, {bad} failed, {missing} missing (held as 'not checked') -> {out / 'hold-auto.txt'}")
 
 
 # ------------------------------------------------------------------ select
@@ -624,6 +631,8 @@ def selftest():
                           "contains_other_question": True, "reason": "cut\noff"}]},
                          {"id": "pp-y", "ok": True, "figs": []}])
     assert "pp-x  # complete,contains_other_question: cut off" in ht and "pp-y" not in ht and parse_hold(ht) == {"pp-x"}
+    hm = hold_auto_text([{"id": "pp-y", "ok": True, "figs": []}], ["pp-y", "pp-z"])
+    assert parse_hold(hm) == {"pp-z"} and "pp-z  # not checked" in hm
     with tempfile.TemporaryDirectory(dir=tmpd) as td:
         (Path(td) / "hold.txt").write_text("pp-h # a\n")
         (Path(td) / "hold-auto.txt").write_text(ht)

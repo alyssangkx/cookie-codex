@@ -166,3 +166,9 @@ export function ppFigureHtml(figs: PpFig[]): string {
 /** Option label: (1)-(4) for past-paper items, whose pictures and options say (1)-(4); else the page's letters. */
 export const optionLabel = (q: { numbered?: boolean }, k: number, letters = 'ABCDEFGH') =>
   q.numbered ? `(${k + 1})` : letters[k];
+
+// A partial fetch is a failure: the quiz would treat a smaller pool as complete (wrong tier totals). True only when
+// every row the RPC returned survived validation and conversion, and no figure batch failed to sign.
+export function fetchComplete(received: number, validRows: number, converted: number, signBatchErrors = 0): boolean {
+  return signBatchErrors === 0 && validRows === received && converted === received;
+}

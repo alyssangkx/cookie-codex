@@ -245,9 +245,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     return r.json();
   }
 
-  let genAll: Q[] = [], ppAll: Q[] = []; // pools before the merge: tierIds() reports the tier quiz's pool, not the merged one
+  let genAll: Q[] = [], ppAll: Q[] = [], ppLoaded = false; // pools before the merge: tierIds() reports the tier quiz's pool, not the merged one
   let ppFailed = false; // a failed past-paper fetch: Daily Review must not park pp retests it never saw
   async function loadBanks(files: string[]): Promise<Q[]> {
+    genAll = []; ppAll = []; ppLoaded = false;
     let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
     // past-paper items (ADR 0004): fetched from Supabase for a signed-in player, never from /data/quiz; OFF for now
     if (PP_ENABLED) {
@@ -256,7 +257,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         const { fetchPp } = await import('../../lib/ppfetch');
         const pp = await fetchPp(subs, (x) => meta.subs[x]?.file);
         if (pp === null) ppFailed = true;
-        genAll = all; ppAll = (pp ?? []) as Q[];
+        genAll = all; ppAll = (pp ?? []) as Q[]; ppLoaded = true;
         all = mergePool(all, ppAll, poolModeFor(mode));
       }
     }
@@ -691,7 +692,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const tierOf = Object.fromEntries(Object.entries(LEVEL).map(([t, l]) => [l, t]));
     const out: Record<string, string[]> = {};
     // the tier quiz's pool per tier (pp swapped in on 'replace' tiers), whichever pool this quiz drew from
-    const gen = (genAll.length ? genAll : [...byId.values()]).filter((q) => subsInQuiz.has(q.sub) && tierOf[q.level]);
+    const gen = (ppLoaded ? genAll : [...byId.values()]).filter((q) => subsInQuiz.has(q.sub) && tierOf[q.level]);
     const pool = tierPoolIds(gen, ppAll.filter((q) => subsInQuiz.has(q.sub)), (x) => ppMode(x), ppFailed);
     for (const [k, ids] of Object.entries(pool)) { const [sub, lvl] = k.split('|'); out[`${sub}|${tierOf[lvl]}`] = ids; }
     for (const k of Object.keys(out)) if (out[k].length < MIN_POOL) delete out[k];

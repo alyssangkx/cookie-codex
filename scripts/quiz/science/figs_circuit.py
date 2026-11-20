@@ -24,7 +24,7 @@ def _cells(x, y, n):
 def _switch(x, y, closed):
     b = f'<rect x="{x - 15}" y="{y - 6}" width="30" height="12" fill="#fff" stroke="none"/><circle cx="{x - 14}" cy="{y}" r="2.5" fill="currentColor"/><circle cx="{x + 14}" cy="{y}" r="2.5" fill="currentColor"/>'
     b += f'<line x1="{x - 14}" y1="{y}" x2="{x + 14}" y2="{y}" stroke-width="2"/>' if closed else f'<line x1="{x - 14}" y1="{y}" x2="{x + 10}" y2="{y - 13}" stroke-width="2"/>'
-    return b, 16
+    return f'<g data-switch="1">{b}</g>', 16  # marker for check_science's unstated_switch (stored figures predate it and keep the old string)
 
 
 def _object(x, y, label):

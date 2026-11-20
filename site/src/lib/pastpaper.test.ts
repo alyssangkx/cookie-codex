@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow,
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, fetchComplete, PP_MIN_TIER, type PpRow,
 } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
@@ -175,4 +175,12 @@ test('tierPoolIds: a failed pp fetch reports nothing for a switched sub-topic, s
   const gen = [...mk('g', 30, 's'), ...mk('h', 30, 'plain')];
   const out = tierPoolIds(gen, [], (s) => (s === 's' ? 'replace' : null), true);
   assert.deepEqual(Object.keys(out), ['plain|basic']);
+});
+
+test('fetchComplete: any dropped row or failed signing batch makes the fetch a failure', () => {
+  assert.equal(fetchComplete(5, 5, 5), true);
+  assert.equal(fetchComplete(0, 0, 0), true);
+  assert.equal(fetchComplete(5, 4, 4), false); // validRow rejected one
+  assert.equal(fetchComplete(5, 5, 4), false); // toQ returned null
+  assert.equal(fetchComplete(5, 5, 5, 1), false); // a createSignedUrls batch errored
 });
