@@ -1929,9 +1929,10 @@
     "ship": true,
     "reasons": [],
     "notes": [
-      "20 Nov: solution string wrapped as a one-step list (shown one letter per line before); content unchanged"
+      "20 Nov: solution string wrapped as a one-step list (shown one letter per line before); content unchanged",
+      "owner 20 Nov 2026: key reworded to PSLE phrasing, same answer"
     ],
-    "fingerprint": "64abbf9eb1d7d1e1",
+    "fingerprint": "3037de0e3f8a26de",
     "round": "sci-r1-2026-11-18"
   },
   "sci-systems-plant-transport-parts|pt-058": {
@@ -9096,8 +9097,10 @@
     "round": "sci-fill-step0b-2026-11-20"
   },
   "sci-interactions-forces-investigate|fi-904": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner 20 Nov 2026: needs the elastic-limit idea (beyond P6) that the stem does not give"
+    ],
     "notes": [
       "WARN fix: reworded, new key; one defensible answer unchanged"
     ],
@@ -10750,8 +10753,10 @@
     "round": "sci-fill-resp-air-2026-11-20"
   },
   "sci-systems-air-gases|ag-121": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner 20 Nov 2026: a second option is also correct (a plant making food in light still respires)"
+    ],
     "notes": [
       "written to the working rules; blind text verification + all figures rendered and checked; one defensible answer"
     ],
@@ -13004,8 +13009,10 @@
     "round": "sci-fill-step0c-2026-11-20"
   },
   "sci-systems-resp-circ-parts|rc-512": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner 20 Nov 2026: needs a fact P6 does not teach (blood carries water) and the stem does not give it"
+    ],
     "notes": [
       "review fix: one defensible answer, figure neutral or drawn to match the stem; checked by render"
     ],
