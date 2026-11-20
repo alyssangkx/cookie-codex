@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Two independent VL-32B reads of MCQ answer-key pages found by anskey_ocr.py find-answer-pages (server job, GPU).
+
+  ans_reread.py --pages reread/pages-science.jsonl [--pages ...]     (PP_ROOT = the pastpapers folder on the server)
+Each input row {subject, year, paper, page, n_mcq, mcq: [...]}. Read A: the page at full resolution (2.5 MP), row-wise
+prompt. Read B: the page converted to grey, contrast-stretched and sharpened (damps a coloured watermark stamp), 3 MP,
+cell-pair prompt. A cell is final only when A and B give the same option and the question number is one of the paper's
+MCQ numbers. Writes PP_ROOT/<subject>/<year>/ansreread/pNNNN.json:
+  {paper, page, expected: [...], cells: {"7": {"a": "3", "b": "3", "final": "3"}}, gate: <flag or null>}
+(a page the paper owns twice, or a page that is not a key, simply yields no final cells). load_pp.py select
+--reread-keys uses the final cells (answer_src 'vision-reread'). Prints counts only."""
+import argparse, json, os, re, sys
+from pathlib import Path
+
+PP = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
+CELL = re.compile(r"\bQ?\s*(\d{1,2})\s*[=:\-]\s*\(?([1-4])\)?(?![\w.])")
+PA = ("This page is a marking scheme. Find the table of multiple-choice answers (each cell pair is a question number such as Q7 and a single digit 1-4 printed with it). "
+      "Ignore every other answer and any watermark. Read the table row by row, left to right, exactly as printed, one table row per line, in the form: Q1=3 Q2=1 Q3=2 ... "
+      "Do not guess or continue a pattern; write only what is printed. Reply with the lines only.")
+PB = ("This page is a marking scheme with a table of multiple-choice answers. For every cell pair of that table, in reading order, write one line 'Qn=a' where n is the question "
+      "number printed and a is the single digit 1-4 printed with it. Copy each cell carefully; do not infer values; ignore long answers and watermarks. Reply with the lines only.")
+
+
+def parse(t):
+    d = {}
+    for n, a in CELL.findall(t):
+        d.setdefault(int(n), a)
+    return d
+
+
+def boost(src, dst, max_pixels=3_000_000):
+    """Grey, autocontrast (1% clipped), unsharp, scaled to about max_pixels."""
+    from PIL import Image, ImageFilter, ImageOps
+    im = ImageOps.autocontrast(Image.open(src).convert("L"), cutoff=1).filter(ImageFilter.UnsharpMask(radius=2, percent=150))
+    k = (max_pixels / (im.width * im.height)) ** 0.5
+    if k != 1:
+        im = im.resize((int(im.width * k), int(im.height * k)), Image.LANCZOS)
+    im.save(dst)
+
+
+def gate(vals):
+    a = [v for _, v in sorted(vals.items())]
+    for i in range(len(a) - 3):
+        w = a[i:i + 4]
+        if len(set(w)) == 1:
+            return "identical run"
+        if w in (list("1234"), list("4321")):
+            return "ascending/descending run"
+    return None
+
+
+def merge(pa, pb, expected):
+    cells = {}
+    for n in sorted(set(pa) | set(pb)):
+        if n in expected:
+            cells[str(n)] = {"a": pa.get(n), "b": pb.get(n), "final": pa.get(n) if pa.get(n) == pb.get(n) else None}
+    return cells
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pages", action="append", required=True)
+    ap.add_argument("--tmp", default=os.environ.get("PP_TMP", "/data/alvin/cookie/tmp/ansreread"))
+    ap.add_argument("--batch", type=int, default=16)
+    a = ap.parse_args()
+    rows = [json.loads(l) for f in a.pages for l in open(f) if l.strip()]
+    todo = []
+    for r in rows:
+        od = PP / r["subject"] / str(r["year"]) / "ansreread"
+        od.mkdir(exist_ok=True)
+        jpg = PP / r["subject"] / str(r["year"]) / "pages" / f"p{r['page']:04d}.jpg"
+        if jpg.exists() and not (od / f"p{r['page']:04d}.json").exists():
+            todo.append((r, jpg, od))
+    print(len(todo), "pages to read", flush=True)
+    if not todo:
+        return
+    tmp = Path(a.tmp)
+    tmp.mkdir(parents=True, exist_ok=True)
+    from vllm import LLM, SamplingParams
+    llm = LLM(model="Qwen/Qwen2.5-VL-32B-Instruct-AWQ", tensor_parallel_size=int(os.environ.get("PP_TP", "2")), gpu_memory_utilization=0.9,
+              max_model_len=12288, max_num_seqs=8, limit_mm_per_prompt={"image": 1}, mm_processor_kwargs={"max_pixels": 3_000_000},
+              allowed_local_media_path="/", enforce_eager=bool(os.environ.get("PP_EAGER")))
+    sp = SamplingParams(temperature=0, max_tokens=600)
+    for i in range(0, len(todo), a.batch):
+        ch = todo[i:i + a.batch]
+        boosted = []
+        for r, jpg, _ in ch:
+            b = tmp / f"{r['subject']}-{r['year']}-p{r['page']:04d}.png"
+            boost(jpg, b)
+            boosted.append(b)
+
+        def msgs(paths, prompt):
+            return [[{"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"file://{p}"}}, {"type": "text", "text": prompt}]}] for p in paths]
+        ra = llm.chat(msgs([j for _, j, _ in ch], PA), sp, use_tqdm=False)
+        rb = llm.chat(msgs(boosted, PB), sp, use_tqdm=False)
+        for (r, _, od), x, y in zip(ch, ra, rb):
+            cells = merge(parse(x.outputs[0].text), parse(y.outputs[0].text), set(r["mcq"]))
+            fin = {int(n): c["final"] for n, c in cells.items() if c["final"]}
+            (od / f"p{r['page']:04d}.json").write_text(json.dumps({"paper": r["paper"], "page": r["page"], "expected": r["mcq"], "cells": cells, "gate": gate(fin)}))
+        print("done", i + len(ch), "/", len(todo), flush=True)
+    print("finished; final cells:", sum(1 for f in PP.glob("*/*/ansreread/p*.json") for c in json.load(open(f))["cells"].values() if c["final"]))
+
+
+if __name__ == "__main__":
+    if sys.argv[1:2] == ["selftest"]:
+        assert parse("Q1=3 Q2 = 1\nQ10:4 Q11=5") == {1: "3", 2: "1", 10: "4"}
+        assert merge({1: "3", 2: "1", 99: "2"}, {1: "3", 2: "2"}, {1, 2}) == {"1": {"a": "3", "b": "3", "final": "3"}, "2": {"a": "1", "b": "2", "final": None}}
+        assert gate({1: "2", 2: "2", 3: "2", 4: "2"}) and not gate({1: "1", 2: "3", 3: "2", 4: "2"})
+        print("ans_reread selftest ok"); sys.exit()
+    main()

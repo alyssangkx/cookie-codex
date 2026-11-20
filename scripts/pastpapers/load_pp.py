@@ -7,7 +7,8 @@
       key is taken from a full row; only rows read from the paper's own answer pages count, a partial row can only
       contradict a key; the row's answer_src says which). Order for OCR-only keys: anskey_ocr.py run -> blind check with
       OCR keys (run_blind_ocr.sh under /data/alvin/tmp/cookie-codex/anskey/) -> select --ocr-keys; an OCR-only item
-      absent from that blind file is rejected as needs-blind-check-ocr; the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
+      absent from that blind file is rejected as needs-blind-check-ocr; --reread-keys does the same with the cells on which
+      two independent VL-32B reads of the key page agree (ans_reread.py; answer_src 'vision-reread', same blind check); the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
       full resolution AND the 72B on the transcribed figure text) both reach it; text and options not garbled; options
       not only in the picture; a sub-topic that exists in the site's syllabus; and a usable crop whenever the stem
       points at a figure, table or graph (or labels such as A/B/P/Q) or the reader saw a figure.
@@ -230,6 +231,26 @@ def ocr_keys(base: Path) -> dict:
     return out
 
 
+def reread_keys(base: Path) -> dict:
+    """{(paper, qno): digit '1'-'4'} from <year>/ansreread/pNNNN.json (ans_reread.py, two independent VL-32B reads): only
+    cells whose two reads agree (final), on a page the run gate did not flag. Empty when the folder does not exist."""
+    out = {}
+    for f in sorted((base / "ansreread").glob("p*.json")):
+        try:
+            j = json.loads(f.read_text())
+        except Exception:
+            continue
+        if j.get("gate"):
+            continue
+        for qn, c in (j.get("cells") or {}).items():
+            if c.get("final") in ("1", "2", "3", "4") and c.get("a") == c.get("b") == c["final"]:
+                if out.get((j["paper"], int(qn)), c["final"]) != c["final"]:
+                    out[(j["paper"], int(qn))] = None  # two pages disagree: no key
+                else:
+                    out[(j["paper"], int(qn))] = c["final"]
+    return {k: v for k, v in out.items() if v}
+
+
 def select(a):
     out = outside_repo(Path(a.out)) / a.subject
     out.mkdir(parents=True, exist_ok=True)
@@ -247,6 +268,7 @@ def select(a):
         second = {b["id"]: b for b in jl(Path(a.blind2) / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
         ocrk = ocr_keys(base) if a.ocr_keys else {}
+        rrk = reread_keys(base) if a.reread_keys else {}
         last = collections.Counter()  # (paper, part) -> highest MCQ number
         for q in merged:
             if q.get("format") == "mcq" and isinstance(q.get("qno"), int):
@@ -272,6 +294,15 @@ def select(a):
                 elif k and full and q.get("answer_flag") == "grid-uncertain":
                     q = dict(q, answer_flag=None)  # two independent strong reads agree
                     src = "vision+ocr"
+            rr = rrk.get((q.get("paper"), q.get("qno")))
+            if len(opts) == 4 and rr:
+                if not k:
+                    k, src = rr, "vision-reread"
+                elif k != rr:
+                    conflict = True
+                elif q.get("answer_flag") == "grid-uncertain" and src == "vision":
+                    q = dict(q, answer_flag=None)  # a second, independent two-read agreement
+                    src = "vision+reread"
             if len(opts) != 4:
                 reason = "not-4-options"
             elif not k:
@@ -284,7 +315,7 @@ def select(a):
                 reason = "grid-uncertain"
             elif conflict:
                 reason = "ocr-key-conflict"
-            elif src == "ocr" and (blind is None or q["id"] not in blind or blind[q["id"]].get("key") != k):
+            elif src in ("ocr", "vision-reread") and (blind is None or q["id"] not in blind or blind[q["id"]].get("key") != k):
                 reason = "needs-blind-check-ocr"  # a blind file made with OCR keys must contain it
             elif blind is None:
                 reason = "no-blind-check-yet"
@@ -686,6 +717,14 @@ def selftest():
         (Path(td) / "anskey_ocr.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
         k = ocr_keys(Path(td))
         assert k == {("A", 1): ("3", True), ("A", 2): ("4", True), ("B", 1): ("2", False), ("B", 2): ("1", False)}, k
+    with tempfile.TemporaryDirectory() as td:  # reread_keys: both reads agree, gate clear, two pages must not disagree
+        d = Path(td) / "ansreread"
+        d.mkdir()
+        (d / "p0001.json").write_text(json.dumps({"paper": "A", "page": 1, "gate": None, "cells": {
+            "1": {"a": "3", "b": "3", "final": "3"}, "2": {"a": "1", "b": "2", "final": None}, "3": {"a": "4", "b": "4", "final": "4"}}}))
+        (d / "p0002.json").write_text(json.dumps({"paper": "A", "page": 2, "gate": None, "cells": {"3": {"a": "2", "b": "2", "final": "2"}}}))
+        (d / "p0003.json").write_text(json.dumps({"paper": "B", "page": 3, "gate": "identical run", "cells": {"1": {"a": "1", "b": "1", "final": "1"}}}))
+        assert reread_keys(Path(td)) == {("A", 1): "3"}, reread_keys(Path(td))
     print("selftest ok")
 
 
@@ -845,6 +884,7 @@ def main():
     p.add_argument("--subtopics", default="")
     p.add_argument("--apply", action="store_true")
     p.add_argument("--ocr-keys", action="store_true", help="select: use <year>/anskey_ocr.jsonl as a fallback key source")
+    p.add_argument("--reread-keys", action="store_true", help="select: use agreed <year>/ansreread/ cells (ans_reread.py) as a fallback key source, answer_src 'vision-reread'")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
     {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "selftest": lambda _a: selftest()}[a.cmd](a)

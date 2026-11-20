@@ -11,6 +11,18 @@
       from one or more pages with one digit 1-4, and any repeat read agrees.
   anskey_ocr.py compare [--subject science] [--years 2018-2024]
       Reports per year how the OCR read agrees with the existing merged.jsonl answers (vision model reads); counts only.
+  anskey_ocr.py find-answer-pages [--subject science] [--years 2018-2026] [--pp DIR] [--reread-dir DIR] [--measure]
+      Papers recorded with empty answer_pages often carry their key inside their own page range (the last pages: the
+      repeated paper header, a "Q1 Q2 ..." grid with the answers under it, Booklet B lines "Q29 a)"). Scores every page
+      of such a paper from its TSV words (page_signals / is_answer_page) and keeps a page only on strong evidence:
+      a grid (structure() finds >= 4 cells, or a line of >= 3 strict Q labels, or >= 2 "Qn a)" lines), or >= 6 labels
+      under the repeated header, or (last 8 pages only) the paper header on a page after the paper's first two. Pages in the paper's last 8 pages use that rule; an earlier page needs a stronger one
+      (>= 8 cells, or the header with 3+ labels in a line). Writes PP/<subject>/<year>/answer_pages_found.json
+      {paper_id: [pages]} and questions_on_answer_pages.json {paper_id: [question ids]} (a question whose every page is a
+      found or listed answer page was catalogued from an answer page: exclude it). papers.jsonl is not touched. With
+      --reread-dir, also writes DIR/pages.jsonl {subject, year, paper, page, n_mcq, mcq: [...]} (one row per found page;
+      the input of run_ans_reread.sh). --measure prints the detector's page precision and recall on the papers that DO
+      have answer_pages (truth: listed answer pages; grid truth: listed pages whose ans32 read has >= 8 MCQ cells).
   anskey_ocr.py selftest
 
 Layouts read (rows, pairs, slots, numslots; all from word-box geometry; label text is only a hint because tesseract garbles "Q1" into "Qi", "a10~"):
@@ -502,6 +514,127 @@ def compare(a):
         print(y, dict(c))
 
 
+# ---------------------------------------------------------------- answer pages hidden in the paper's own range
+
+QSTRICT = re.compile(r"^[QqGg9OoCc0@]\s?[0-9iIlLzZoOsS|]{1,2}[.:]?$")
+NEAR_END = 8  # pages from the end of the paper where a key usually sits
+
+
+def page_signals(tsv_path):
+    """Cheap evidence of an answer-key page from the TSV words only: {cells (structure() grid cells), qrow (most strict
+    Q labels in one line), qdist (distinct label numbers 1-60), qa (lines 'Qn a)'), hdr (header keywords in the first
+    14 lines: LEVEL SCHOOL SUBJECT TERM EXAM PAPER YEAR), nw}."""
+    w = read_words(tsv_path)
+    ls = lines_of(w)
+    try:
+        cells, _ = structure(w)
+    except Exception:
+        cells = []
+    nums = [num_of(x[3]) for ln in ls for x in ln if QSTRICT.match(x[3])]
+    nums = [n for n in nums if n and 1 <= n <= 60]
+    head = " ".join(" ".join(x[3] for x in ln) for ln in ls[:14]).upper()
+    return {"cells": len(cells), "nw": len(w), "qdist": len(set(nums)),
+            "qrow": max([sum(1 for x in ln if QSTRICT.match(x[3])) for ln in ls] or [0]),
+            "qa": sum(1 for ln in ls if len(ln) >= 2 and QSTRICT.match(ln[0][3]) and re.fullmatch(r"\(?[a-dA-D][).]?", ln[1][3])),
+            "hdr": sum(k in head for k in ("LEVEL", "SCHOOL", "SUBJECT", "TERM", "EXAM PAPER", "YEAR "))}
+
+
+def is_answer_page(f, near, repeat=False):
+    """Strong evidence only. near = the page is among the paper's last NEAR_END pages; repeat = it is not the paper's
+    first or second page, so the paper header on it is the key's repeated header, not the cover."""
+    if near:
+        return (f["cells"] >= 4 or f["qrow"] >= 3 or f["qa"] >= 2 or (f["qdist"] >= 6 and f["hdr"] >= 3)
+                or (repeat and f["hdr"] >= 3))
+    return f["cells"] >= 8 or (f["hdr"] >= 3 and f["qrow"] >= 3)
+
+
+def _sig(args):
+    return page_signals(args)
+
+
+def mcq_numbers(base):
+    out = collections.defaultdict(set)
+    for q in jl(base / "merged.jsonl"):
+        if q.get("format") == "mcq" and isinstance(q.get("qno"), int) and len(q.get("options") or []) == 4:
+            out[q["paper"]].add(q["qno"])
+    return out
+
+
+def grid_truth(base, pg):
+    """True when the listed answer page's ans32 read has >= 8 MCQ cells (qno + one option 1-4/A-D); None without a read."""
+    f = base / "ans32" / f"p{pg:04d}.json"
+    if not f.exists():
+        return None
+    try:
+        j = json.loads(f.read_text())
+    except Exception:
+        return None
+    n = sum(1 for a in j.get("answers") or []
+            if re.fullmatch(r"\(?[1-4A-Da-d]\)?", str(a.get("answer") or "").strip()) and not a.get("sub")
+            and re.match(r"\D*\d+\s*$", str(a.get("qno") or "")))
+    return n >= 8
+
+
+def find_answer_pages(a):
+    meas = collections.Counter()
+    rr = []
+    for y in years(a.years):
+        base = Path(a.pp) / a.subject / str(y)
+        papers = jl(base / "papers.jsonl")
+        if not papers:
+            continue
+        jobs = [(p, pg) for p in papers for pg in range(p["first_page"], p["last_page"] + 1)]
+        with multiprocessing.Pool(a.jobs) as pool:
+            sig = pool.map(_sig, [base / "pages" / f"p{pg:04d}.tsv" for _, pg in jobs], chunksize=20)
+        det = collections.defaultdict(list)
+        listed = {p["paper_id"]: set(p["answer_pages"] or []) for p in papers}
+        for (p, pg), f in zip(jobs, sig):
+            near = pg > p["last_page"] - NEAR_END
+            hit = is_answer_page(f, near, pg > p["first_page"] + 1)
+            if p["answer_pages"]:  # measurement only: papers that have their own listed pages
+                truth, gt = pg in listed[p["paper_id"]], grid_truth(base, pg) if pg in listed[p["paper_id"]] else None
+                meas["tp" if hit and truth else "fp" if hit else "fn" if truth else "tn"] += 1
+                if gt:
+                    meas["grid"] += 1
+                    meas["grid_hit"] += hit
+            elif hit:
+                det[p["paper_id"]].append(pg)
+        for p in papers:  # paper-level recall on papers with listed pages and MCQs
+            if p["answer_pages"] and p["paper_id"] in mcq_numbers(base) and any(grid_truth(base, g) for g in p["answer_pages"]):
+                meas["papers"] += 1
+                meas["papers_hit"] += any(is_answer_page(f, pg > q["last_page"] - NEAR_END, pg > q["first_page"] + 1)
+                                          for (q, pg), f in zip(jobs, sig) if q is p and pg in listed[p["paper_id"]]
+                                          and grid_truth(base, pg))
+        found = {pid: sorted(pgs) for pid, pgs in det.items()}
+        allp = {p["paper_id"]: listed[p["paper_id"]] | set(found.get(p["paper_id"], [])) for p in papers}
+        flag = collections.defaultdict(list)
+        for q in jl(base / "merged.jsonl"):
+            pgs = q.get("pages") or []
+            if pgs and set(pgs) <= allp.get(q.get("paper"), set()):
+                flag[q["paper"]].append(q["id"])
+        need = mcq_numbers(base)
+        if not a.measure:
+            (base / "answer_pages_found.json").write_text(json.dumps(found, indent=0))
+            (base / "questions_on_answer_pages.json").write_text(json.dumps(flag, indent=0))
+        for pid, pgs in found.items():
+            for pg in pgs:
+                if need.get(pid):
+                    rr.append({"subject": a.subject, "year": y, "paper": pid, "page": pg, "n_mcq": len(need[pid]), "mcq": sorted(need[pid])})
+        print(y, f"papers_without_pages={sum(1 for p in papers if not p['answer_pages'])} found_for={len(found)} "
+              f"pages={sum(len(v) for v in found.values())} questions_on_answer_pages={sum(len(v) for v in flag.values())}")
+    if a.measure:
+        tp, fp, fn = meas["tp"], meas["fp"], meas["fn"]
+        print(f"page precision vs listed answer pages {tp / max(1, tp + fp):.3f}, recall {tp / max(1, tp + fn):.3f} (listed pages include worked solutions);"
+              f" grid-page recall {meas['grid_hit']}/{meas['grid']}; paper-level recall {meas['papers_hit']}/{meas['papers']}")
+    if a.reread_dir and not a.measure:
+        d = Path(a.reread_dir)
+        d.mkdir(parents=True, exist_ok=True)
+        with open(d / f"pages-{a.subject}.jsonl", "w") as f:
+            for r in rr:
+                f.write(json.dumps(r) + "\n")
+        print(f"reread input: {len(rr)} pages, {sum(r['n_mcq'] for r in rr)} MCQs (counted once per page) -> {d}/pages-{a.subject}.jsonl")
+
+
 def selftest():
     def tsv(rows):  # rows: [(y, [(x, text)])]
         return [[x, y, 30, t] for y, ws in rows for x, t in ws]
@@ -543,6 +676,13 @@ def selftest():
     assert not any(labelish(t) for t in "1 3 2 4 1 2".split())  # bare answer digits are never labels by default
     assert read_pairs(lines_of(tsv([(100, [(100 + 100 * i, d) for i, d in enumerate("132412")])]))) == []
     assert labelish("Q3") and not labelish("3") and labelish("3", True)
+    # answer-page evidence: a Q grid with its header counts, a prose page does not; far pages need a stronger sign
+    assert is_answer_page({"cells": 5, "qrow": 0, "qa": 0, "qdist": 0, "hdr": 0}, True)
+    assert not is_answer_page({"cells": 5, "qrow": 4, "qa": 0, "qdist": 5, "hdr": 0}, False)
+    assert is_answer_page({"cells": 0, "qrow": 3, "qa": 0, "qdist": 3, "hdr": 3}, False)
+    assert not is_answer_page({"cells": 0, "qrow": 1, "qa": 1, "qdist": 2, "hdr": 3}, True)
+    assert is_answer_page({"cells": 0, "qrow": 0, "qa": 0, "qdist": 0, "hdr": 3}, True, True)
+    assert not is_answer_page({"cells": 0, "qrow": 0, "qa": 0, "qdist": 0, "hdr": 3}, False, True)
     print("selftest ok")
 
 
@@ -555,9 +695,16 @@ def main():
         s.add_argument("--years", default="2018-2024")
         s.add_argument("--pp", default=str(DEF_PP))
         s.add_argument("--jobs", type=int, default=24)
+    s = sp.add_parser("find-answer-pages")
+    s.add_argument("--subject", default="science")
+    s.add_argument("--years", default="2018-2026")
+    s.add_argument("--pp", default=str(DEF_PP))
+    s.add_argument("--jobs", type=int, default=24)
+    s.add_argument("--reread-dir", default=None)
+    s.add_argument("--measure", action="store_true")
     sp.add_parser("selftest")
     a = ap.parse_args()
-    {"run": run, "compare": compare, "selftest": lambda a: selftest()}[a.cmd](a)
+    {"run": run, "compare": compare, "find-answer-pages": find_answer_pages, "selftest": lambda a: selftest()}[a.cmd](a)
 
 
 if __name__ == "__main__":
