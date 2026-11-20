@@ -33,7 +33,7 @@ def air_table():
 
 
 def results_table():
-    return table(["Set-up", "Seeds in dish", "Seeds that germinated after one week"], [["P", "10", "9"], ["Q", "10", "0"], ["R", "10", "0"], ["S", "10", "6"]], [60, 90, 200], "Results of the four set-ups")
+    return table(["Set-up", "10 seeds put in", "Germinated in a week"], [["P", "wet cotton wool", "9"], ["Q", "dry cotton wool", "0"], ["R", "boiled, cooled water|with oil on top", "0"], ["S", "tap water with no oil", "6"]], [60, 190, 160], "Results of the four set-ups (warm room)")
 
 
 def temp_graph():
@@ -190,9 +190,9 @@ q("rq-218", C, 2, PAT, "A gardener grows a herb under a net that keeps out insec
 q("rq-219", C, 3, PAT, "Birds eat the berries of a plant. The seeds inside have a hard, smooth coat. Why is the hard coat useful to the plant?", "It protects the inside from the bird's stomach juices",
   [W("It makes the seeds light enough to be blown away by wind", "wrong-idea", "A hard coat does not make a seed lighter. These seeds travel inside birds."), W("It helps the seeds to stick to the bird's feathers and legs", "wrong-idea", "A smooth coat does not stick. Hooks would do that."), W("It lets the seeds float on water", "wrong-idea", "These seeds are carried by birds, not by water.")],
   ["The seeds pass through the bird's body and come out in the droppings.", "The hard coat protects the inside of the seed from the juices that digest food."], None)
-q("rq-220", C, 2, PAT, "Pollen from a rose flower lands on the stigma of a hibiscus flower. What is most likely to happen?", "Pollination happens but fertilisation does not",
-  [W("Fertilisation happens and the hibiscus makes seeds", "wrong-idea", "Pollen can only fertilise ovules of the same kind of plant."), W("Neither pollination nor fertilisation happens", "wrong-idea", "Pollination is simply pollen landing on a stigma, so it has happened."), W("Fertilisation happens but the flower makes no pollen", "wrong-idea", "Fertilisation does not happen, and the anthers still make pollen.")],
-  ["Pollination is pollen landing on a stigma, so it does happen.", "The male cell of a rose cannot join the female cell of a hibiscus, so there is no fertilisation."], None)
+q("rq-224", C, 2, PAT, "Pollen from a rose flower lands on the stigma of a hibiscus flower. What is most likely to happen?", "The hibiscus flower does not make seeds, because the pollen cannot fertilise it",
+  [W("The hibiscus flower makes seeds, because pollen on any stigma fertilises it", "wrong-idea", "Pollen can only fertilise the ovules of a flower of the same kind of plant."), W("The rose flower makes seeds, because its pollen has been used", "wrong-idea", "The rose flower is not involved here. Its own ovules were not fertilised."), W("The pollen grows into a new rose plant on the hibiscus flower", "wrong-idea", "Pollen does not grow into a plant. A seed forms only after fertilisation.")],
+  ["Pollen from one kind of plant cannot fertilise the ovules of another kind, so fertilisation does not happen.", "Without fertilisation, the hibiscus flower does not make seeds."], None)
 q("rq-221", C, 1, PAT, "Which of the following is evidence that a plant can reproduce without seeds?", "A leaf placed on wet soil grows roots and a plant",
   [W("A seed grows into a seedling in wet cotton wool", "wrong-idea", "That is a seed growing, so it needs a seed."), W("Bees visit the flowers of a plant", "wrong-idea", "Bees carrying pollen lead to seeds."), W("A fruit has many seeds inside it", "wrong-idea", "That shows seeds, not reproduction without them.")],
   ["A new plant that grows from a leaf grows from part of the parent plant. No seed is involved."], None)

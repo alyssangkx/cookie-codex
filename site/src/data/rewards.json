@@ -601,111 +601,84 @@
   ],
   "english": [
    {
-    "id": "eng-gram-text-cohesion",
-    "name": "Cohesion in texts",
-    "topic": "eng-gram-text",
-    "topicName": "Grammar at text level",
-    "home": 5,
-    "i": 3,
-    "capstone": false
-   },
-   {
-    "id": "eng-vocab-rich-words",
-    "name": "Word study",
-    "topic": "eng-vocab-rich",
-    "topicName": "Developing rich vocabulary knowledge",
-    "home": 5,
-    "i": 5,
-    "capstone": true
-   },
-   {
-    "id": "eng-vocab-use-appropriate",
-    "name": "Appropriate use",
-    "topic": "eng-vocab-use",
-    "topicName": "Using vocabulary",
-    "home": 5,
-    "i": 6,
-    "capstone": true
-   },
-   {
-    "id": "eng-gram-wps-items",
-    "name": "Specific grammar items (tenses, subject-verb agreement, prepositions, connectors, pronouns, question tags)",
-    "topic": "eng-gram-wps",
-    "topicName": "Grammar at word, phrase and sentence levels",
+    "id": "eng-grammar-mcq",
+    "name": "Grammar MCQ",
+    "topic": "eng-sec-grammar-mcq",
+    "topicName": "Grammar MCQ",
     "home": 6,
-    "i": 2,
-    "capstone": false
-   },
-   {
-    "id": "eng-read-close-lit",
-    "name": "Literal and inferential comprehension",
-    "topic": "eng-read-close",
-    "topicName": "Reading and viewing closely",
-    "home": 6,
-    "i": 7,
-    "capstone": false
-   },
-   {
-    "id": "eng-read-close-visual",
-    "name": "Multimodal and visual texts",
-    "topic": "eng-read-close",
-    "topicName": "Reading and viewing closely",
-    "home": 6,
-    "i": 8,
-    "capstone": true
-   },
-   {
-    "id": "eng-gram-terms-meta",
-    "name": "Metalanguage",
-    "topic": "eng-gram-terms",
-    "topicName": "Use of terms (grammatical metalanguage)",
-    "home": 5,
     "i": 0,
     "capstone": true
    },
    {
-    "id": "eng-gram-wps-apply",
-    "name": "Applying grammatical knowledge",
-    "topic": "eng-gram-wps",
-    "topicName": "Grammar at word, phrase and sentence levels",
-    "home": 5,
+    "id": "eng-vocab-mcq",
+    "name": "Vocabulary MCQ",
+    "topic": "eng-sec-vocab-mcq",
+    "topicName": "Vocabulary MCQ",
+    "home": 6,
     "i": 1,
     "capstone": true
    },
    {
-    "id": "eng-gram-text-features",
-    "name": "Language features of text types",
-    "topic": "eng-gram-text",
-    "topicName": "Grammar at text level",
-    "home": 5,
+    "id": "eng-vocab-cloze",
+    "name": "Vocabulary Cloze",
+    "topic": "eng-sec-vocab-cloze",
+    "topicName": "Vocabulary Cloze",
+    "home": 6,
+    "i": 2,
+    "capstone": true
+   },
+   {
+    "id": "eng-visual-text",
+    "name": "Visual Text",
+    "topic": "eng-sec-visual-text",
+    "topicName": "Visual Text",
+    "home": 6,
+    "i": 3,
+    "capstone": true
+   },
+   {
+    "id": "eng-grammar-cloze",
+    "name": "Grammar Cloze",
+    "topic": "eng-sec-grammar-cloze",
+    "topicName": "Grammar Cloze",
+    "home": 6,
     "i": 4,
     "capstone": true
    },
    {
-    "id": "eng-listen-close",
-    "name": "Listening closely",
-    "topic": "eng-listen-core",
-    "topicName": "Listening and viewing",
-    "home": 5,
-    "i": 10,
-    "capstone": false
-   },
-   {
-    "id": "eng-read-crit-eval",
-    "name": "Critical response",
-    "topic": "eng-read-crit",
-    "topicName": "Reading and viewing critically",
+    "id": "eng-editing",
+    "name": "Editing",
+    "topic": "eng-sec-editing",
+    "topicName": "Editing",
     "home": 6,
-    "i": 9,
+    "i": 5,
     "capstone": true
    },
    {
-    "id": "eng-listen-understand",
-    "name": "Listening for understanding",
-    "topic": "eng-listen-core",
-    "topicName": "Listening and viewing",
+    "id": "eng-comp-cloze",
+    "name": "Comprehension Cloze",
+    "topic": "eng-sec-comp-cloze",
+    "topicName": "Comprehension Cloze",
     "home": 6,
-    "i": 11,
+    "i": 6,
+    "capstone": true
+   },
+   {
+    "id": "eng-synthesis",
+    "name": "Synthesis & Transformation",
+    "topic": "eng-sec-synthesis",
+    "topicName": "Synthesis & Transformation",
+    "home": 6,
+    "i": 7,
+    "capstone": true
+   },
+   {
+    "id": "eng-comp-oe",
+    "name": "Comprehension OE",
+    "topic": "eng-sec-comp-oe",
+    "topicName": "Comprehension OE",
+    "home": 6,
+    "i": 8,
     "capstone": true
    }
   ],
@@ -1613,148 +1586,112 @@
    "slug": "stardust-cookie",
    "dup": false
   },
-  "eng-gram-text-cohesion|b": {
+  "eng-grammar-mcq|b": {
    "slug": "poison-mushroom-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|b": {
+  "eng-vocab-mcq|b": {
    "slug": "sonic-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|b": {
+  "eng-vocab-cloze|b": {
    "slug": "black-lemonade-cookie",
    "dup": false
   },
-  "eng-gram-wps-items|b": {
+  "eng-visual-text|b": {
    "slug": "peach-blossom-cookie",
    "dup": false
   },
-  "eng-read-close-lit|b": {
+  "eng-grammar-cloze|b": {
    "slug": "silverbell-cookie",
    "dup": false
   },
-  "eng-read-close-visual|b": {
+  "eng-editing|b": {
    "slug": "milky-way-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|b": {
+  "eng-comp-cloze|b": {
    "slug": "zoey-cookie",
    "dup": false
   },
-  "eng-gram-wps-apply|b": {
-   "slug": "peach-blossom-cookie",
+  "eng-synthesis|b": {
+   "slug": "milky-way-cookie",
    "dup": true
   },
-  "eng-gram-text-features|b": {
-   "slug": "sonic-cookie",
-   "dup": true
-  },
-  "eng-listen-close|b": {
-   "slug": "black-lemonade-cookie",
-   "dup": true
-  },
-  "eng-read-crit-eval|b": {
-   "slug": "peach-blossom-cookie",
-   "dup": true
-  },
-  "eng-listen-understand|b": {
+  "eng-comp-oe|b": {
    "slug": "candy-diver-cookie",
    "dup": false
   },
-  "eng-gram-text-cohesion|i": {
+  "eng-grammar-mcq|i": {
    "slug": "sorbet-shark-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|i": {
+  "eng-vocab-mcq|i": {
    "slug": "snow-sugar-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|i": {
+  "eng-vocab-cloze|i": {
    "slug": "choco-drizzle-cookie",
    "dup": false
   },
-  "eng-gram-wps-items|i": {
+  "eng-visual-text|i": {
    "slug": "raspberry-cookie",
    "dup": false
   },
-  "eng-read-close-lit|i": {
+  "eng-grammar-cloze|i": {
    "slug": "vampire-cookie",
    "dup": false
   },
-  "eng-read-close-visual|i": {
+  "eng-editing|i": {
    "slug": "cotton-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|i": {
+  "eng-comp-cloze|i": {
    "slug": "squid-ink-cookie",
    "dup": false
   },
-  "eng-gram-wps-apply|i": {
-   "slug": "sorbet-shark-cookie",
-   "dup": true
-  },
-  "eng-gram-text-features|i": {
-   "slug": "squid-ink-cookie",
-   "dup": true
-  },
-  "eng-listen-close|i": {
+  "eng-synthesis|i": {
    "slug": "pancake-cookie",
    "dup": false
   },
-  "eng-read-crit-eval|i": {
-   "slug": "pancake-cookie",
-   "dup": true
-  },
-  "eng-listen-understand|i": {
+  "eng-comp-oe|i": {
    "slug": "cherry-cookie",
    "dup": false
   },
-  "eng-gram-text-cohesion|c": {
+  "eng-grammar-mcq|c": {
    "slug": "manju-cookie",
    "dup": false
   },
-  "eng-vocab-rich-words|c": {
+  "eng-vocab-mcq|c": {
    "slug": "fig-cookie",
    "dup": false
   },
-  "eng-vocab-use-appropriate|c": {
-   "slug": "elder-faerie-cookie",
-   "dup": false
-  },
-  "eng-gram-wps-items|c": {
+  "eng-vocab-cloze|c": {
    "slug": "pudding-a-la-mode-cookie",
    "dup": false
   },
-  "eng-read-close-lit|c": {
+  "eng-visual-text|c": {
    "slug": "sugarfly-cookie",
    "dup": false
   },
-  "eng-read-close-visual|c": {
+  "eng-grammar-cloze|c": {
+   "slug": "elder-faerie-cookie",
+   "dup": false
+  },
+  "eng-editing|c": {
    "slug": "venom-dough-cookie",
    "dup": false
   },
-  "eng-gram-terms-meta|c": {
+  "eng-comp-cloze|c": {
    "slug": "moonlight-cookie",
    "dup": false
   },
-  "eng-gram-wps-apply|c": {
-   "slug": "moonlight-cookie",
-   "dup": true
-  },
-  "eng-gram-text-features|c": {
-   "slug": "elder-faerie-cookie",
-   "dup": true
-  },
-  "eng-listen-close|c": {
+  "eng-synthesis|c": {
    "slug": "sugarfly-cookie",
    "dup": true
   },
-  "eng-read-crit-eval|c": {
-   "slug": "elder-faerie-cookie",
-   "dup": true
-  },
-  "eng-listen-understand|c": {
-   "slug": "manju-cookie",
+  "eng-comp-oe|c": {
+   "slug": "pudding-a-la-mode-cookie",
    "dup": true
   },
   "chi-pinyin-sound|b": {

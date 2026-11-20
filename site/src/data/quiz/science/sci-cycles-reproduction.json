@@ -2736,47 +2736,6 @@
    }
   },
   {
-   "id": "scicycl-823c4ceedb",
-   "topic": "sci-cycles-reproduction",
-   "level": "competent",
-   "template": "sci-pat-read-data",
-   "outcomes": [
-    "sci-cycles-repro-plants-2"
-   ],
-   "stem": "Aisha's results are in the table. Which conclusion is correct?",
-   "options": [
-    "Seeds need light to germinate",
-    "Seeds need both water and air to germinate",
-    "Seeds germinate best when covered with water",
-    "Seeds can germinate without water if there is air"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "not-tested",
-     "why": "Light was not tested in any of the set-ups."
-    },
-    null,
-    {
-     "tag": "wrong-conclusion",
-     "why": "P (damp cotton wool) had more germinating seeds than S (in water)."
-    },
-    {
-     "tag": "wrong-conclusion",
-     "why": "Q had air but no water and no seeds germinated."
-    }
-   ],
-   "solution": [
-    "Q (no water) shows that water is needed; R (no air) shows that air is needed.",
-    "P has both and nine seeds germinated."
-   ],
-   "params": {
-    "key": "rq-213",
-    "subtopic": "sci-cycles-repro-plants"
-   },
-   "figure": "<svg viewBox=\"0 0 370 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"185.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Results of the four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"115.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds in dish</text><rect x=\"160\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"260.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds that germinated after one week</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">9</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"115.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"160\" y=\"160\" width=\"200\" height=\"30\"/><text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text></svg>"
-  },
-  {
    "id": "scicycl-d94a4fda5d",
    "topic": "sci-cycles-reproduction",
    "level": "competent",
@@ -2972,46 +2931,6 @@
    ],
    "params": {
     "key": "rq-218",
-    "subtopic": "sci-cycles-repro-plants"
-   }
-  },
-  {
-   "id": "scicycl-cd22861cda",
-   "topic": "sci-cycles-reproduction",
-   "level": "competent",
-   "template": "sci-pat-plant-reproduction",
-   "outcomes": [
-    "sci-cycles-repro-plants-2"
-   ],
-   "stem": "Pollen from a rose flower lands on the stigma of a hibiscus flower. What is most likely to happen?",
-   "options": [
-    "Fertilisation happens and the hibiscus makes seeds",
-    "Pollination happens but fertilisation does not",
-    "Neither pollination nor fertilisation happens",
-    "Fertilisation happens but the flower makes no pollen"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "wrong-idea",
-     "why": "Pollen can only fertilise ovules of the same kind of plant."
-    },
-    null,
-    {
-     "tag": "wrong-idea",
-     "why": "Pollination is simply pollen landing on a stigma, so it has happened."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Fertilisation does not happen, and the anthers still make pollen."
-    }
-   ],
-   "solution": [
-    "Pollination is pollen landing on a stigma, so it does happen.",
-    "The male cell of a rose cannot join the female cell of a hibiscus, so there is no fertilisation."
-   ],
-   "params": {
-    "key": "rq-220",
     "subtopic": "sci-cycles-repro-plants"
    }
   },
@@ -3213,6 +3132,87 @@
     "subtopic": "sci-cycles-repro-plants"
    },
    "figure": "<svg viewBox=\"0 0 370 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"185.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four set-ups for bean seeds</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Seeds placed in</text><rect x=\"270\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"315.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Place</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet cotton wool</text><rect x=\"270\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"315.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry cotton wool</text><rect x=\"270\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"315.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"200\" height=\"44\"/><text x=\"170.0\" y=\"149.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">boiled, cooled water</text><text x=\"170.0\" y=\"165.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">with oil on top</text><rect x=\"270\" y=\"130\" width=\"90\" height=\"44\"/><text x=\"315.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text><rect x=\"10\" y=\"174\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"174\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tap water with no oil</text><rect x=\"270\" y=\"174\" width=\"90\" height=\"30\"/><text x=\"315.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">warm room</text></svg>"
+  },
+  {
+   "id": "scicycl-89a8b7d0ae",
+   "topic": "sci-cycles-reproduction",
+   "level": "competent",
+   "template": "sci-pat-plant-reproduction",
+   "outcomes": [
+    "sci-cycles-repro-plants-2"
+   ],
+   "stem": "Pollen from a rose flower lands on the stigma of a hibiscus flower. What is most likely to happen?",
+   "options": [
+    "The rose flower makes seeds, because its pollen has been used",
+    "The pollen grows into a new rose plant on the hibiscus flower",
+    "The hibiscus flower does not make seeds, because the pollen cannot fertilise it",
+    "The hibiscus flower makes seeds, because pollen on any stigma fertilises it"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong-idea",
+     "why": "The rose flower is not involved here. Its own ovules were not fertilised."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "Pollen does not grow into a plant. A seed forms only after fertilisation."
+    },
+    null,
+    {
+     "tag": "wrong-idea",
+     "why": "Pollen can only fertilise the ovules of a flower of the same kind of plant."
+    }
+   ],
+   "solution": [
+    "Pollen from one kind of plant cannot fertilise the ovules of another kind, so fertilisation does not happen.",
+    "Without fertilisation, the hibiscus flower does not make seeds."
+   ],
+   "params": {
+    "key": "rq-224",
+    "subtopic": "sci-cycles-repro-plants"
+   }
+  },
+  {
+   "id": "scicycl-823c4ceedb",
+   "topic": "sci-cycles-reproduction",
+   "level": "competent",
+   "template": "sci-pat-read-data",
+   "outcomes": [
+    "sci-cycles-repro-plants-2"
+   ],
+   "stem": "Aisha's results are in the table. Which conclusion is correct?",
+   "options": [
+    "Seeds need light to germinate",
+    "Seeds need both water and air to germinate",
+    "Seeds germinate best when covered with water",
+    "Seeds can germinate without water if there is air"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "not-tested",
+     "why": "Light was not tested in any of the set-ups."
+    },
+    null,
+    {
+     "tag": "wrong-conclusion",
+     "why": "P (damp cotton wool) had more germinating seeds than S (in water)."
+    },
+    {
+     "tag": "wrong-conclusion",
+     "why": "Q had air but no water and no seeds germinated."
+    }
+   ],
+   "solution": [
+    "Q (no water) shows that water is needed; R (no air) shows that air is needed.",
+    "P has both and nine seeds germinated."
+   ],
+   "params": {
+    "key": "rq-213",
+    "subtopic": "sci-cycles-repro-plants"
+   },
+   "figure": "<svg viewBox=\"0 0 430 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"215.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Results of the four set-ups (warm room)</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"165.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">10 seeds put in</text><rect x=\"260\" y=\"36\" width=\"160\" height=\"34\"/><text x=\"340.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Germinated in a week</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wet cotton wool</text><rect x=\"260\" y=\"70\" width=\"160\" height=\"30\"/><text x=\"340.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">9</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">dry cotton wool</text><rect x=\"260\" y=\"100\" width=\"160\" height=\"30\"/><text x=\"340.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"44\"/><text x=\"40.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"190\" height=\"44\"/><text x=\"165.0\" y=\"149.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">boiled, cooled water</text><text x=\"165.0\" y=\"165.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">with oil on top</text><rect x=\"260\" y=\"130\" width=\"160\" height=\"44\"/><text x=\"340.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"10\" y=\"174\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"174\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tap water with no oil</text><rect x=\"260\" y=\"174\" width=\"160\" height=\"30\"/><text x=\"340.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text></svg>"
   }
  ]
 }

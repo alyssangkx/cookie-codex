@@ -67,3 +67,76 @@ def spring(load, ext=None, W=190, H=210, scale=True):
         b += f'<line x1="130" y1="{ytop}" x2="130" y2="{ytop + 14 * px}" stroke-width="1.2"/>'
         b += f'<line x1="90" y1="{ybot}" x2="128" y2="{ybot}" stroke-dasharray="3 3" stroke-width="1.2"/>'
     return svg(W, H, b)
+
+
+def _zig(x1, x2, y, n=7, amp=7):
+    d = f"M{x1} {y} "
+    step = (x2 - x1) / (n * 2)
+    for i in range(n * 2):
+        d += f"L{x1 + (i + 0.5) * step:.1f} {y + (amp if i % 2 == 0 else -amp)} "
+    return d + f"L{x2} {y}"
+
+
+def _spec_arrows(cx, cy, bw, bh, specs, yoff=0):
+    """Force arrows drawn from the edges of a box centred at (cx, cy). Horizontal arrows sit yoff px above the middle."""
+    b = ""
+    for d, lab, ln in specs:
+        if d == "R":
+            b += arrow(cx + bw / 2, cy + yoff, cx + bw / 2 + ln, cy + yoff, 3) + txt(cx + bw / 2 + ln + 12, cy + yoff + 5, lab, 15, bold=True)
+        elif d == "L":
+            b += arrow(cx - bw / 2, cy + yoff, cx - bw / 2 - ln, cy + yoff, 3) + txt(cx - bw / 2 - ln - 12, cy + yoff + 5, lab, 15, bold=True)
+        elif d == "U":
+            b += arrow(cx, cy - bh / 2, cx, cy - bh / 2 - ln, 3) + txt(cx + 14, cy - bh / 2 - ln + 4, lab, 15, bold=True)
+        else:
+            b += arrow(cx, cy + bh / 2, cx, cy + bh / 2 + ln, 3) + txt(cx + 14, cy + bh / 2 + ln, lab, 15, bold=True)
+    return b
+
+
+def pulled_block(obj, specs, caption=None, W=330, H=190):
+    """A block on a table with a stretched spring joined to its right side and a hand holding the far end."""
+    cx, cy, bw, bh = 130, 92, 96, 44
+    b = AH + (txt(W / 2, 16, caption, 13, bold=True) if caption else "")
+    b += f'<line x1="10" y1="{cy + bh / 2}" x2="{W - 10}" y2="{cy + bh / 2}" stroke-width="2"/>'
+    b += f'<rect x="{cx - bw / 2}" y="{cy - bh / 2}" width="{bw}" height="{bh}" rx="5"/>' + txt(cx, cy + 5, obj, 12)
+    b += f'<path d="{_zig(cx + bw / 2, 286, cy + 12)}"/><circle cx="296" cy="{cy + 12}" r="10"/>' + txt(296, cy + 41, "hand", 11)
+    b += _spec_arrows(cx, cy, bw, bh, specs, yoff=-12)
+    return svg(W, H, b)
+
+
+def wall_spring(specs, caption=None, W=330, H=190):
+    """A spring fixed to a wall at the left, its free end held by a hand (a box) at the right."""
+    cx, cy, bw, bh = 220, 92, 74, 44
+    b = AH + (txt(W / 2, 16, caption, 13, bold=True) if caption else "")
+    b += f'<line x1="26" y1="40" x2="26" y2="150" stroke-width="5"/>' + "".join(f'<line x1="26" y1="{y}" x2="14" y2="{y + 10}" stroke-width="1.5"/>' for y in range(44, 146, 14))
+    b += f'<path d="{_zig(26, cx - bw / 2, cy + 12, 9)}"/>'
+    b += f'<rect x="{cx - bw / 2}" y="{cy - bh / 2}" width="{bw}" height="{bh}" rx="5"/>' + txt(cx, cy + 5, "hand", 13)
+    b += _spec_arrows(cx, cy, bw, bh, specs, yoff=-12)
+    return svg(W, H, b)
+
+
+def magnet_ball(specs, caption=None, W=300, H=200):
+    """A magnet fixed above an iron ball with a gap between them (nothing touches)."""
+    cx, cy = W / 2, 112
+    b = AH + (txt(W / 2, 16, caption, 13, bold=True) if caption else "")
+    b += f'<rect x="{cx - 40}" y="26" width="80" height="26" rx="3"/>' + txt(cx, 44, "magnet", 13)
+    b += f'<circle cx="{cx}" cy="{cy}" r="18"/>' + txt(cx, cy + 5, "iron", 11)
+    for d, lab, ln in specs:
+        if d == "U":
+            b += arrow(cx - 8, cy - 18, cx - 8, cy - 18 - ln, 3) + txt(cx - 22, cy - 18 - ln / 2 + 5, lab, 15, bold=True)
+        else:
+            b += arrow(cx - 8, cy + 18, cx - 8, cy + 18 + ln, 3) + txt(cx - 22, cy + 18 + ln / 2 + 5, lab, 15, bold=True)
+    return svg(W, H, b)
+
+
+def pusher(specs, caption=None, W=360, H=190):
+    """A boy (stick figure) on the left with his hands on a box, pushing it along the floor to the right."""
+    cx, cy, bw, bh = 215, 92, 90, 44
+    b = AH + (txt(W / 2, 16, caption, 13, bold=True) if caption else "")
+    b += f'<line x1="10" y1="{cy + bh / 2}" x2="{W - 10}" y2="{cy + bh / 2}" stroke-width="2"/>'
+    b += f'<rect x="{cx - bw / 2}" y="{cy - bh / 2}" width="{bw}" height="{bh}" rx="5"/>' + txt(cx, cy + 5, "box", 13)
+    hx = cx - bw / 2
+    fx = hx - 90
+    b += f'<circle cx="{fx - 6}" cy="{cy - 30}" r="9"/><line x1="{fx - 4}" y1="{cy - 21}" x2="{fx + 10}" y2="{cy + 6}"/>'
+    b += f'<line x1="{fx}" y1="{cy - 14}" x2="{hx}" y2="{cy - 6}"/><line x1="{fx + 10}" y1="{cy + 6}" x2="{fx - 6}" y2="{cy + 22}"/><line x1="{fx + 10}" y1="{cy + 6}" x2="{fx + 22}" y2="{cy + 22}"/>'
+    b += _spec_arrows(cx, cy, bw, bh, specs, yoff=14)
+    return svg(W, H, b)

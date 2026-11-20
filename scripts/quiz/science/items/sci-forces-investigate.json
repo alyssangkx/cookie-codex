@@ -1757,72 +1757,6 @@
       ]
     },
     {
-      "key": "fi-205",
-      "level": "competent",
-      "outcome": "sci-interactions-forces-investigate-3",
-      "pattern": "sci-pat-friction-spring-weight",
-      "stem": "A man has a mass of 60 kg on Earth. On the Moon, gravity is weaker. Which statement is correct about the man on the Moon?",
-      "options": [
-        "His weight is less than on Earth but his mass is the same",
-        "His weight and his mass are both less than on Earth",
-        "His weight is the same as on Earth but his mass is less",
-        "His weight and his mass are both the same as on Earth"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-idea",
-          "why": "The amount of matter in him does not change. Only the pull of gravity does."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "Weaker gravity gives less weight. His mass is unchanged."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "Gravity on the Moon is weaker, so his weight is less."
-        }
-      ],
-      "solution": [
-        "Weight depends on the pull of gravity. The Moon's pull is weaker.",
-        "Mass is the amount of matter, which stays the same."
-      ]
-    },
-    {
-      "key": "fi-206",
-      "level": "competent",
-      "outcome": "sci-interactions-forces-investigate-3",
-      "pattern": "sci-pat-friction-spring-weight",
-      "stem": "A spring balance shows 12 N for a bag on Earth. The same bag is taken to the Moon and weighed on the same spring balance. What will the reading be?",
-      "options": [
-        "More than 12 N",
-        "12 N",
-        "0 N",
-        "Less than 12 N"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-idea",
-          "why": "The Moon's gravity is weaker, so the pull is smaller."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "The pull is different on the Moon."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "The Moon has gravity, so the bag still has weight."
-        },
-        null
-      ],
-      "solution": [
-        "The Moon pulls less than the Earth.",
-        "So the spring stretches less and the reading is lower."
-      ]
-    },
-    {
       "key": "fi-207",
       "level": "competent",
       "outcome": "sci-interactions-forces-investigate-1",
@@ -1981,38 +1915,6 @@
       "solution": [
         "Friction slows moving objects and makes heat when surfaces rub.",
         "It is smaller on smooth surfaces."
-      ]
-    },
-    {
-      "key": "fi-212",
-      "level": "competent",
-      "outcome": "sci-interactions-forces-investigate-3",
-      "pattern": "sci-pat-friction-spring-weight",
-      "stem": "Which of the following statements about the weight of an object are correct?\nA: It is the pull of the Earth on the object.\nB: It is smaller on the Moon than on Earth.\nC: It is the same as the amount of matter in the object.\nD: It acts upwards.",
-      "options": [
-        "A and C only",
-        "A and B only",
-        "B and D only",
-        "C and D only"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "mix-up",
-          "why": "C is wrong. The amount of matter is mass, not weight."
-        },
-        null,
-        {
-          "tag": "mix-up",
-          "why": "D is wrong. Weight acts downwards."
-        },
-        {
-          "tag": "mix-up",
-          "why": "Both are wrong."
-        }
-      ],
-      "solution": [
-        "Weight is the pull of gravity, smaller on the Moon. It acts downwards."
       ]
     },
     {
@@ -2340,39 +2242,6 @@
       ]
     },
     {
-      "key": "fi-223",
-      "level": "competent",
-      "outcome": "sci-interactions-forces-investigate-3",
-      "pattern": "sci-pat-friction-spring-weight",
-      "stem": "A bag is taken from the Earth to the Moon. Which of the following would NOT change?",
-      "options": [
-        "The weight of the bag",
-        "The pull of gravity on the bag",
-        "The amount of matter in the bag",
-        "The reading on a spring balance"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "changes",
-          "why": "Weaker gravity on the Moon gives the bag less weight."
-        },
-        {
-          "tag": "changes",
-          "why": "The Moon pulls less than the Earth."
-        },
-        null,
-        {
-          "tag": "changes",
-          "why": "The spring stretches less on the Moon."
-        }
-      ],
-      "solution": [
-        "The amount of matter in the bag stays the same.",
-        "Weight, the pull of gravity and the spring balance reading are all smaller on the Moon."
-      ]
-    },
-    {
       "key": "fi-224",
       "level": "competent",
       "outcome": "sci-interactions-forces-investigate-1",
@@ -2405,35 +2274,165 @@
       ]
     },
     {
-      "key": "fi-225",
+      "key": "fi-226",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following statements about the weight of an object are correct?\nA: It is the pull of the Earth on the object.\nB: It is measured in newtons.\nC: It is the same as the amount of matter in the object.\nD: It acts upwards.",
+      "options": [
+        "A and C only",
+        "B and D only",
+        "C and D only",
+        "A and B only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Weight is a force. It is not the amount of matter, so C is wrong."
+        },
+        {
+          "tag": "wrong-direction",
+          "why": "Weight acts downwards, towards the Earth, so D is wrong."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both C and D are wrong. Weight is a force that acts downwards."
+        },
+        null
+      ],
+      "solution": [
+        "A and B are correct: weight is the Earth's pull on an object and is measured in newtons.",
+        "Weight is a force, not an amount of matter, and it acts downwards."
+      ]
+    },
+    {
+      "key": "fi-228",
       "level": "competent",
       "outcome": "sci-interactions-forces-investigate-2",
-      "pattern": "sci-pat-friction-spring-weight",
-      "stem": "A spring is stretched by 3 cm by a 60 g mass. By how much would two identical springs hung side by side share the 60 g mass?",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the length of two springs, P and Q, with different loads. Which statement is correct?",
       "options": [
-        "Each stretches by 1.5 cm",
-        "Each stretches by 3 cm",
-        "Each stretches by 6 cm",
-        "Each stretches by 0 cm"
+        "Spring P stretches more than spring Q for the same load",
+        "Spring Q stretches more than spring P for the same load",
+        "Springs P and Q stretch by the same amount for the same load",
+        "Spring Q is longer than spring P with no load"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Spring P gains 2 cm for each 50 g and spring Q gains 4 cm, so Q stretches more."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The lengths of the two springs do not change by the same amount."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Both springs are 10 cm long with no load."
+        }
+      ],
+      "solution": [
+        "From 0 g to 100 g, spring P grows from 10 cm to 14 cm and spring Q from 10 cm to 18 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 140\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of two springs</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><rect x=\"120\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"145.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"170\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"220\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"245.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"270\" y=\"36\" width=\"50\" height=\"34\"/><text x=\"295.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">150</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Spring P (cm)</text><rect x=\"120\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"145.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"170\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"220\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"245.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"270\" y=\"70\" width=\"50\" height=\"30\"/><text x=\"295.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"10\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Spring Q (cm)</text><rect x=\"120\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"145.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"170\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"195.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"220\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"245.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text><rect x=\"270\" y=\"100\" width=\"50\" height=\"30\"/><text x=\"295.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">22</text></svg>"
+    },
+    {
+      "key": "fi-229",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A cyclist squeezes the brakes and the bicycle slows down. The brake pads become warm. Which statement explains why?",
+      "options": [
+        "Friction between the pads and the wheel produces heat",
+        "The pull of gravity on the pads produces heat",
+        "The elastic spring force in the brake produces heat",
+        "The magnetic force of the wheel produces heat"
       ],
       "answer": 0,
       "explain": [
         null,
         {
-          "tag": "wrong-calc",
-          "why": "The load is shared, so each spring has only half of it."
+          "tag": "wrong-force",
+          "why": "Gravity does not rub the pads against the wheel."
         },
         {
-          "tag": "wrong-calc",
-          "why": "The load is shared, so each stretches less."
+          "tag": "wrong-force",
+          "why": "The spring only pulls the pads back. It does not rub against the wheel."
         },
         {
-          "tag": "wrong-calc",
-          "why": "Each spring still carries 30 g."
+          "tag": "wrong-force",
+          "why": "A bicycle wheel does not act as a magnet on the pads."
         }
       ],
       "solution": [
-        "Each spring carries 30 g, half the load, so it stretches half as much: 1.5 cm."
+        "The pads rub against the moving wheel. Friction slows the wheel and makes the pads warm."
+      ]
+    },
+    {
+      "key": "fi-230",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A block is pulled at a steady speed along a table by a spring balance that reads 4 N. What is the size of the friction between the block and the table?",
+      "options": [
+        "0 N",
+        "8 N",
+        "2 N",
+        "4 N"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Friction acts on any block sliding on a table. Here it is as big as the pull."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "The friction is not twice the pull. A steady speed means the two are equal."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "The friction is not half the pull. A steady speed means the two are equal."
+        },
+        null
+      ],
+      "solution": [
+        "The block moves at a steady speed, so the friction is as big as the pull on the spring balance, 4 N."
+      ]
+    },
+    {
+      "key": "fi-227",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Zhi Wei wants to find out whether a heavier block has more friction with a table. He pulls blocks of different weights with a spring balance. Which should he keep the same?",
+      "options": [
+        "The weight of each block that he pulls",
+        "The reading on the spring balance",
+        "The material of the blocks and the table",
+        "The number of blocks pulled at one time"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "The weight is the variable he is testing, so it must be different."
+        },
+        {
+          "tag": "measured-variable",
+          "why": "The reading is what he measures, so it can change."
+        },
+        null,
+        {
+          "tag": "changed-variable",
+          "why": "More blocks would make a heavier load, which changes the variable being tested."
+        }
+      ],
+      "solution": [
+        "Only the weight should change. The block material and the table surface must stay the same so that the test is fair."
       ]
     }
   ]

@@ -738,105 +738,6 @@
       ]
     },
     {
-      "key": "fe-101",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the frictional force?",
-      "options": [
-        "Arrow Q",
-        "Arrow P",
-        "Arrow R",
-        "None of the arrows"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow P points the way the block is pulled. Friction acts against the motion."
-        },
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow R points down, towards the ground. That is the pull of gravity."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "A block sliding on a rough table has friction, shown by one of the arrows."
-        }
-      ],
-      "solution": [
-        "Friction acts opposite to the motion of the block, so it points left (arrow Q)."
-      ],
-      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block on a table</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">wooden block</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"48.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"34.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
-    },
-    {
-      "key": "fe-102",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the gravitational force?",
-      "options": [
-        "Arrow P",
-        "Arrow Q",
-        "Arrow P and arrow Q",
-        "Arrow R"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow P points the way the block is pulled by the spring."
-        },
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow Q points opposite to the motion. That is friction."
-        },
-        {
-          "tag": "wrong-arrow",
-          "why": "Both of those arrows point sideways. Gravity points down."
-        },
-        null
-      ],
-      "solution": [
-        "Gravity pulls things towards the Earth, so it is the arrow pointing down (R)."
-      ],
-      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block on a table</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">wooden block</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"48.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"34.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
-    },
-    {
-      "key": "fe-103",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the elastic spring force?",
-      "options": [
-        "Arrow Q",
-        "Arrow R",
-        "Arrow P",
-        "Arrow Q and arrow R"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow Q points the opposite way to the spring's pull. That is friction."
-        },
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow R points down. That is gravity."
-        },
-        null,
-        {
-          "tag": "wrong-arrow",
-          "why": "Neither of these is the pull of the spring."
-        }
-      ],
-      "solution": [
-        "The stretched spring pulls the block towards itself, to the right (arrow P)."
-      ],
-      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block on a table</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">wooden block</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"48.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"34.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
-    },
-    {
       "key": "fe-105",
       "level": "intermediate",
       "outcome": "sci-interactions-forces-effects-3",
@@ -1036,39 +937,6 @@
       "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four situations</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Situation</text><rect x=\"100\" y=\"36\" width=\"210\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What happens</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A cart goes faster</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A still toy starts moving</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A ball bounces off a wall</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A spring is stretched</text></svg>"
     },
     {
-      "key": "fe-111",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "The table shows four forces. Which row about a force is correct?",
-      "options": [
-        "Frictional force: acts without contact",
-        "Gravitational force: needs the objects to touch",
-        "Magnetic force: acts without contact",
-        "Elastic spring force: acts only on magnets"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-fact",
-          "why": "Friction needs the two surfaces to touch."
-        },
-        {
-          "tag": "wrong-fact",
-          "why": "Gravity pulls from a distance."
-        },
-        null,
-        {
-          "tag": "wrong-fact",
-          "why": "It acts on any stretched or squashed spring or rubber band."
-        }
-      ],
-      "solution": [
-        "Magnetic force can act across a gap, so the first row is true. The others are not."
-      ],
-      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four forces</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Force</text><rect x=\"120\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"215.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Example</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Magnetic</text><rect x=\"120\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">magnet pulls a pin</text><rect x=\"10\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Frictional</text><rect x=\"120\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">brakes slow a wheel</text><rect x=\"10\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Gravitational</text><rect x=\"120\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">apple falls</text><rect x=\"10\" y=\"160\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Elastic spring</text><rect x=\"120\" y=\"160\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">stretched band</text></svg>"
-    },
-    {
       "key": "fe-112",
       "level": "intermediate",
       "outcome": "sci-interactions-forces-effects-3",
@@ -1229,39 +1097,6 @@
       ]
     },
     {
-      "key": "fe-120",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-1",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "Look at the arrows. A boy pushes a box to the right. Arrow R points right and arrow L points left. Which is the push from the boy?",
-      "options": [
-        "Arrow L",
-        "Arrow R",
-        "Both arrows",
-        "Neither arrow"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow L points opposite to the push. It is friction."
-        },
-        null,
-        {
-          "tag": "wrong-arrow",
-          "why": "Only one arrow points the way he pushes."
-        },
-        {
-          "tag": "wrong-arrow",
-          "why": "The push is one of the arrows."
-        }
-      ],
-      "solution": [
-        "The boy pushes to the right, so the push is arrow R."
-      ],
-      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A boy pushes a box</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">box</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"98.0\" y1=\"92\" x2=\"54.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"40.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">L</text></svg>"
-    },
-    {
       "key": "fe-121",
       "level": "intermediate",
       "outcome": "sci-interactions-forces-effects-2",
@@ -1387,38 +1222,6 @@
       ],
       "solution": [
         "The throw makes a ball that was still start to move upwards."
-      ]
-    },
-    {
-      "key": "fe-125",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "A ball thrown upwards slows down, stops for a moment and falls. Which force slows it going up?",
-      "options": [
-        "Gravitational force",
-        "Magnetic force",
-        "Elastic spring force",
-        "Frictional force"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-force",
-          "why": "There is no magnet."
-        },
-        {
-          "tag": "wrong-force",
-          "why": "There is no spring."
-        },
-        {
-          "tag": "wrong-force",
-          "why": "Friction with the air is small. The main force is gravity."
-        }
-      ],
-      "solution": [
-        "Gravity pulls down on the ball all the time, so it slows going up and speeds up coming down."
       ]
     },
     {
@@ -1814,71 +1617,6 @@
       ]
     },
     {
-      "key": "fe-216",
-      "level": "competent",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "A spring is attached to a hook on the wall. A girl pulls its free end to the right. Arrows A to D are shown. Which arrow shows the force of the spring on the girl's hand?",
-      "options": [
-        "Arrow A",
-        "Arrow B",
-        "Arrow C",
-        "Arrow D"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow A shows the girl's pull on the spring, to the right."
-        },
-        null,
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow C points down. That is gravity."
-        },
-        {
-          "tag": "wrong-arrow",
-          "why": "Arrow D points up, and no force acts that way here."
-        }
-      ],
-      "solution": [
-        "The stretched spring pulls back towards the wall, to the left (B)."
-      ],
-      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A stretched spring</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">girl's hand</text><line x1=\"202.0\" y1=\"92\" x2=\"258.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"272.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"98.0\" y1=\"92\" x2=\"42.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"28.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"150.0\" y1=\"70.0\" x2=\"150.0\" y2=\"26.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
-    },
-    {
-      "key": "fe-217",
-      "level": "competent",
-      "outcome": "sci-interactions-forces-effects-2",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "A parked car is pushed to the right by a man but it does not move. Which of the following is the best explanation?",
-      "options": [
-        "Friction at the tyres is bigger than the push",
-        "The man's push has no effect on a heavy car like this",
-        "Gravity holds the car off the ground",
-        "The car has no weight so it cannot move"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-idea",
-          "why": "A push is a force, and it would move a car if it were big enough."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "Gravity pulls the car down towards the ground."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "The car has weight. It does not move because of friction."
-        }
-      ],
-      "solution": [
-        "The push is smaller than the friction at the tyres, so the car stays still."
-      ]
-    },
-    {
       "key": "fe-218",
       "level": "competent",
       "outcome": "sci-interactions-forces-effects-3",
@@ -2103,40 +1841,6 @@
       "solution": [
         "Gravity always pulls the stone towards the Earth."
       ]
-    },
-    {
-      "key": "fe-104",
-      "level": "intermediate",
-      "outcome": "sci-interactions-forces-effects-3",
-      "pattern": "sci-pat-forces-effects",
-      "stem": "An iron ball hangs in the air below a magnet and does not touch it. Arrows X and Y act on the ball. Which statement is correct?",
-      "options": [
-        "X is the gravitational force and Y is the magnetic force",
-        "X is the magnetic force and Y is the gravitational force",
-        "X is the frictional force and Y is the gravitational force",
-        "X is the magnetic force and Y is the elastic spring force"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "swapped",
-          "why": "Gravity pulls down (Y). The magnet pulls the iron ball up (X)."
-        },
-        null,
-        {
-          "tag": "wrong-force",
-          "why": "The ball is not touching anything, so there is no friction."
-        },
-        {
-          "tag": "wrong-force",
-          "why": "There is no spring. The downward force is gravity."
-        }
-      ],
-      "solution": [
-        "The magnet pulls the iron ball up (X, magnetic force).",
-        "The Earth pulls it down (Y, gravity)."
-      ],
-      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A ball below a magnet</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">iron ball</text><line x1=\"150.0\" y1=\"70.0\" x2=\"150.0\" y2=\"14.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"18.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
     },
     {
       "key": "fe-113",
@@ -2431,6 +2135,301 @@
         "A squashed spring pushes back. It holds up the book.",
         "This is elastic spring force."
       ]
+    },
+    {
+      "key": "fe-128",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which statement about forces is correct?",
+      "options": [
+        "Frictional force: acts without contact",
+        "Magnetic force: acts without contact",
+        "Gravitational force: needs the objects to touch",
+        "Elastic spring force: acts only on magnets"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-fact",
+          "why": "Friction needs the two surfaces to touch."
+        },
+        null,
+        {
+          "tag": "wrong-fact",
+          "why": "Gravity pulls from a distance."
+        },
+        {
+          "tag": "wrong-fact",
+          "why": "It acts on any stretched or squashed spring or rubber band."
+        }
+      ],
+      "solution": [
+        "Magnetic force can act across a gap, so that statement is true. The others are not."
+      ]
+    },
+    {
+      "key": "fe-127",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A ball thrown upwards slows down, stops for a moment and falls. Which force mainly slows it going up?",
+      "options": [
+        "Magnetic force",
+        "Elastic spring force",
+        "Gravitational force",
+        "The push from the thrower's hand"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "There is no magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "The hand's push ends when the ball leaves it. It cannot slow the ball."
+        }
+      ],
+      "solution": [
+        "Gravity pulls down on the ball all the time, so it slows going up and speeds up coming down."
+      ]
+    },
+    {
+      "key": "fe-129",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A parked car is pushed to the right by a man but it does not move. Which of the following is the best explanation?",
+      "options": [
+        "The push is not big enough to overcome the friction at the tyres",
+        "The man's push has no effect on a heavy car like this",
+        "Gravity holds the car off the ground",
+        "The car has no weight so it cannot move"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A push is a force, and it would move a car if it were big enough."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity pulls the car down towards the ground."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The car has weight. It does not move because of friction."
+        }
+      ],
+      "solution": [
+        "The friction at the tyres balances the push. The push is not big enough to overcome the friction, so the car stays still."
+      ]
+    },
+    {
+      "key": "fe-101",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the frictional force?",
+      "options": [
+        "Arrow Q",
+        "Arrow P",
+        "Arrow R",
+        "None of the arrows"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow P points the way the block is pulled. Friction acts against the motion."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow R points down, towards the ground. That is the pull of gravity."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A block sliding on a rough table has friction, shown by one of the arrows."
+        }
+      ],
+      "solution": [
+        "Friction acts opposite to the motion of the block, so it points left (arrow Q)."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block pulled by a spring</text><line x1=\"10\" y1=\"114.0\" x2=\"320\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"82.0\" y=\"70.0\" width=\"96\" height=\"44\" rx=\"5\"/><text x=\"130\" y=\"97\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">wooden block</text><path d=\"M178.0 104 L181.9 111 L189.6 97 L197.3 111 L205.0 97 L212.7 111 L220.4 97 L228.1 111 L235.9 97 L243.6 111 L251.3 97 L259.0 111 L266.7 97 L274.4 111 L282.1 97 L286 104\"/><circle cx=\"296\" cy=\"104\" r=\"10\"/><text x=\"296\" y=\"133\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">hand</text><line x1=\"178.0\" y1=\"80\" x2=\"248.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"260.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"82.0\" y1=\"80\" x2=\"32.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"20.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"130\" y1=\"114.0\" x2=\"130\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"144\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-102",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the gravitational force?",
+      "options": [
+        "Arrow P",
+        "Arrow Q",
+        "Arrow P and arrow Q",
+        "Arrow R"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow P points the way the block is pulled by the spring."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow Q points opposite to the motion. That is friction."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Both of those arrows point sideways. Gravity points down."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls things towards the Earth, so it is the arrow pointing down (R)."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block pulled by a spring</text><line x1=\"10\" y1=\"114.0\" x2=\"320\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"82.0\" y=\"70.0\" width=\"96\" height=\"44\" rx=\"5\"/><text x=\"130\" y=\"97\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">wooden block</text><path d=\"M178.0 104 L181.9 111 L189.6 97 L197.3 111 L205.0 97 L212.7 111 L220.4 97 L228.1 111 L235.9 97 L243.6 111 L251.3 97 L259.0 111 L266.7 97 L274.4 111 L282.1 97 L286 104\"/><circle cx=\"296\" cy=\"104\" r=\"10\"/><text x=\"296\" y=\"133\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">hand</text><line x1=\"178.0\" y1=\"80\" x2=\"248.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"260.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"82.0\" y1=\"80\" x2=\"32.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"20.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"130\" y1=\"114.0\" x2=\"130\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"144\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-103",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the elastic spring force?",
+      "options": [
+        "Arrow Q",
+        "Arrow R",
+        "Arrow P",
+        "Arrow Q and arrow R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow Q points the opposite way to the spring's pull. That is friction."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow R points down. That is gravity."
+        },
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Neither of these is the pull of the spring."
+        }
+      ],
+      "solution": [
+        "The stretched spring pulls the block towards itself, to the right (arrow P)."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block pulled by a spring</text><line x1=\"10\" y1=\"114.0\" x2=\"320\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"82.0\" y=\"70.0\" width=\"96\" height=\"44\" rx=\"5\"/><text x=\"130\" y=\"97\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">wooden block</text><path d=\"M178.0 104 L181.9 111 L189.6 97 L197.3 111 L205.0 97 L212.7 111 L220.4 97 L228.1 111 L235.9 97 L243.6 111 L251.3 97 L259.0 111 L266.7 97 L274.4 111 L282.1 97 L286 104\"/><circle cx=\"296\" cy=\"104\" r=\"10\"/><text x=\"296\" y=\"133\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">hand</text><line x1=\"178.0\" y1=\"80\" x2=\"248.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"260.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"82.0\" y1=\"80\" x2=\"32.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"20.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"130\" y1=\"114.0\" x2=\"130\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"144\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-216",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A spring is attached to a hook on the wall. A girl pulls its free end to the right. Arrows A to D are shown. Which arrow shows the force of the spring on the girl's hand?",
+      "options": [
+        "Arrow A",
+        "Arrow B",
+        "Arrow C",
+        "Arrow D"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow A shows the girl's pull on the spring, to the right."
+        },
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow C points down. That is gravity."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow D points up, and no force acts that way here."
+        }
+      ],
+      "solution": [
+        "The stretched spring pulls back towards the wall, to the left (B)."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A stretched spring</text><line x1=\"26\" y1=\"40\" x2=\"26\" y2=\"150\" stroke-width=\"5\"/><line x1=\"26\" y1=\"44\" x2=\"14\" y2=\"54\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"58\" x2=\"14\" y2=\"68\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"72\" x2=\"14\" y2=\"82\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"86\" x2=\"14\" y2=\"96\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"100\" x2=\"14\" y2=\"110\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"114\" x2=\"14\" y2=\"124\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"128\" x2=\"14\" y2=\"138\" stroke-width=\"1.5\"/><line x1=\"26\" y1=\"142\" x2=\"14\" y2=\"152\" stroke-width=\"1.5\"/><path d=\"M26 104 L30.4 111 L39.1 97 L47.8 111 L56.5 97 L65.2 111 L74.0 97 L82.7 111 L91.4 97 L100.1 111 L108.9 97 L117.6 111 L126.3 97 L135.0 111 L143.8 97 L152.5 111 L161.2 97 L169.9 111 L178.6 97 L183.0 104\"/><rect x=\"183.0\" y=\"70.0\" width=\"74\" height=\"44\" rx=\"5\"/><text x=\"220\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">hand</text><line x1=\"257.0\" y1=\"80\" x2=\"313.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"325.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"183.0\" y1=\"80\" x2=\"127.0\" y2=\"80\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"115.0\" y=\"85\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"220\" y1=\"114.0\" x2=\"220\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"234\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"220\" y1=\"70.0\" x2=\"220\" y2=\"26.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"234\" y=\"30.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "fe-104",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "An iron ball hangs in the air below a magnet and does not touch it. Arrows X and Y act on the ball. Which statement is correct?",
+      "options": [
+        "X is the gravitational force and Y is the magnetic force",
+        "X is the magnetic force and Y is the gravitational force",
+        "X is the frictional force and Y is the gravitational force",
+        "X is the magnetic force and Y is the elastic spring force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "swapped",
+          "why": "Gravity pulls down (Y). The magnet pulls the iron ball up (X)."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "The ball is not touching anything, so there is no friction."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring. The downward force is gravity."
+        }
+      ],
+      "solution": [
+        "The magnet pulls the iron ball up (X, magnetic force).",
+        "The Earth pulls it down (Y, gravity)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A ball below a magnet</text><rect x=\"110.0\" y=\"26\" width=\"80\" height=\"26\" rx=\"3\"/><text x=\"150.0\" y=\"44\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">magnet</text><circle cx=\"150.0\" cy=\"112\" r=\"18\"/><text x=\"150.0\" y=\"117\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">iron</text><line x1=\"142.0\" y1=\"94\" x2=\"142.0\" y2=\"60\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"128.0\" y=\"82.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"142.0\" y1=\"130\" x2=\"142.0\" y2=\"174\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"128.0\" y=\"157.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "fe-126",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A boy pushes a box along the floor, as shown. Arrows P and Q are drawn on the box. Which arrow is the push from the boy?",
+      "options": [
+        "Arrow P",
+        "Both arrows",
+        "Neither arrow",
+        "Arrow Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow P points back towards the boy, opposite to his push. It is friction."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Only one arrow points the way he pushes."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "The push is one of the arrows."
+        },
+        null
+      ],
+      "solution": [
+        "The boy is on the left and pushes the box away from him, to the right. That is arrow Q."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"180.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A boy pushes a box</text><line x1=\"10\" y1=\"114.0\" x2=\"350\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"170.0\" y=\"70.0\" width=\"90\" height=\"44\" rx=\"5\"/><text x=\"215\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">box</text><circle cx=\"74.0\" cy=\"62\" r=\"9\"/><line x1=\"76.0\" y1=\"71\" x2=\"90.0\" y2=\"98\"/><line x1=\"80.0\" y1=\"78\" x2=\"170.0\" y2=\"86\"/><line x1=\"90.0\" y1=\"98\" x2=\"74.0\" y2=\"114\"/><line x1=\"90.0\" y1=\"98\" x2=\"102.0\" y2=\"114\"/><line x1=\"170.0\" y1=\"106\" x2=\"140.0\" y2=\"106\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"128.0\" y=\"111\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"260.0\" y1=\"106\" x2=\"320.0\" y2=\"106\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"332.0\" y=\"111\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
     }
   ]
 }

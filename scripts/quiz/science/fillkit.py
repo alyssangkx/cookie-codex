@@ -117,6 +117,18 @@ def add(subtopic, fname, rows):
     return n
 
 
+def remove(subtopic, fname, keys):
+    """Delete items (and their review verdicts) so they can be re-added under a new key."""
+    f = ITEMS / fname
+    d = json.loads(f.read_text())
+    d["items"] = [it for it in d["items"] if it["key"] not in keys]
+    f.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n")
+    rv = json.loads(REVIEW.read_text())
+    for k in keys:
+        rv.pop(f"{subtopic}|{k}", None)
+    REVIEW.write_text(json.dumps(rv, ensure_ascii=False, indent=1) + "\n")
+
+
 def ship(subtopic, fname, round_name, note, only=None):
     """Mark items of this file without a verdict yet as shipped for exactly their current content."""
     rv = json.loads(REVIEW.read_text())

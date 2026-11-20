@@ -57,9 +57,9 @@
 | Forces and their effects | Identify a force as a push or a pull | yes | no | 6 |
 | Forces and their effects | Show an understanding of the effects of a force: move a stationary ob… | yes | yes | 30 |
 | Forces and their effects | Recognise and give examples of types of forces: magnetic, gravitation… | yes | no | 39 |
-| Friction, elastic spring force, weight | Investigate the effect of frictional force on the motion of objects | yes | yes | 33 |
-| Friction, elastic spring force, weight | Investigate the effects of elastic spring force [Standard Science onl… | yes | yes | 24 |
-| Friction, elastic spring force, weight | Recognise that objects have weight because of the gravitational force… | yes | no | 18 |
+| Friction, elastic spring force, weight | Investigate the effect of frictional force on the motion of objects | yes | yes | 34 |
+| Friction, elastic spring force, weight | Investigate the effects of elastic spring force [Standard Science onl… | yes | yes | 25 |
+| Friction, elastic spring force, weight | Recognise that objects have weight because of the gravitational force… | yes | no | 16 |
 | Factors affecting survival; food chains | Identify factors affecting survival of an organism: temperature, ligh… | yes | no | 0 **not yet** |
 | Factors affecting survival; food chains | Show an understanding of the effect on organisms when the environment… | yes | no | 0 **not yet** |
 | Factors affecting survival; food chains | Show an understanding of the energy pathway from the Sun through livi… | yes | yes | 0 **not yet** |
@@ -110,16 +110,16 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 13 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 14 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 77 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 0 **not yet** |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 0 **not yet** |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 16 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 17 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 9 |
-| Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 63 |
+| Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
 | Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 60 |
