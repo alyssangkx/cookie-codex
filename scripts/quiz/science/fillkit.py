@@ -94,15 +94,20 @@ def graph(xs, series, ymax, xlabel, ylabel, caption=None, ystep=None, W=340, H=2
     return svg(W, H, b)
 
 
-def add(subtopic, fname, rows):
-    f = ITEMS / fname
-    d = json.loads(f.read_text()) if f.exists() else {"subtopic": subtopic, "items": []}
-    have = {it["key"] for it in d["items"]}
-    n = 0
+# Keys that were retired (content changed, a new key took their place). add() never re-adds them.
+RETIRED = set("""
+ag-018 ag-101 ag-102 ag-103 ag-114 ag-201 rc-201 rc-212 wc-223 ev-116 cv-013
+ws-111 ws-112 ws-113 ws-114 ws-115 ws-201 ws-202 ws-203
+ci-110 ci-113 ci-202 ci-203 ci-204 ci-205 ci-220 cv-102 cv-119 cv-202 cv-203 cv-204 cv-205 cv-215 cv-503
+""".split())
+
+
+def build_items(subtopic, rows):
+    """Rows -> item dicts (no file access). Rows with a retired key are refused."""
+    out = []
     for key, lvl, on, pat, stem, ok, wrongs, sol, fm in rows:
         assert len(wrongs) == 3, key
-        if key in have:
-            continue
+        if key in RETIRED:
             continue
         pos = (int(key.split("-")[1]) * 3 + 1) % 4
         opts = [w[0] for w in wrongs]
@@ -113,10 +118,18 @@ def add(subtopic, fname, rows):
               "explain": expl, "solution": sol}
         if fm:
             it["figure"] = fm() if callable(fm) else fm
-        d["items"].append(it)
-        n += 1
+        out.append(it)
+    return out
+
+
+def add(subtopic, fname, rows):
+    f = ITEMS / fname
+    d = json.loads(f.read_text()) if f.exists() else {"subtopic": subtopic, "items": []}
+    have = {it["key"] for it in d["items"]}
+    new = [it for it in build_items(subtopic, rows) if it["key"] not in have]
+    d["items"].extend(new)
     f.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n")
-    return n
+    return len(new)
 
 
 def remove(subtopic, fname, keys):

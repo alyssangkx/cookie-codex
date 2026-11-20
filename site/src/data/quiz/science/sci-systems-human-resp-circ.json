@@ -669,46 +669,6 @@
    }
   },
   {
-   "id": "scisyst-d156e0d89d",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "basic",
-   "template": "sci-pat-gases-in-air",
-   "outcomes": [
-    "sci-systems-air-gases-1"
-   ],
-   "stem": "A candle burns under a jar standing on a table. After a while the flame goes out. Why?",
-   "options": [
-    "All the air in the jar has been used up",
-    "The oxygen in the jar has been used up",
-    "The nitrogen in the jar has been used up",
-    "The jar has too much oxygen"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "air-vs-oxygen",
-     "why": "Only the oxygen is used. Other gases remain."
-    },
-    null,
-    {
-     "tag": "wrong-gas",
-     "why": "Nitrogen is not used by a burning candle."
-    },
-    {
-     "tag": "reversed",
-     "why": "Extra oxygen makes the flame brighter."
-    }
-   ],
-   "solution": [
-    "A burning candle uses oxygen. When it runs low, the flame goes out."
-   ],
-   "params": {
-    "key": "ag-018",
-    "subtopic": "sci-systems-air-gases"
-   },
-   "figure": "<svg viewBox=\"0 0 300 235\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle burning under a jar</text><line x1=\"10\" y1=\"200\" x2=\"290\" y2=\"200\" stroke-width=\"3\"/><path d=\"M105.0 200 V80 H195.0 V200\"/><rect x=\"143\" y=\"164\" width=\"14\" height=\"36\" fill=\"#fff\"/><path d=\"M150 148 Q156 158 150 162 Q144 158 150 148 Z\" fill=\"currentColor\"/><text x=\"150\" y=\"224\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar</text></svg>"
-  },
-  {
    "id": "scisyst-2c1c9290d9",
    "topic": "sci-systems-human-resp-circ",
    "level": "basic",
@@ -982,126 +942,6 @@
     "key": "ag-025",
     "subtopic": "sci-systems-air-gases"
    }
-  },
-  {
-   "id": "scisyst-1b9c052918",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "intermediate",
-   "template": "sci-pat-gases-in-air",
-   "outcomes": [
-    "sci-systems-air-gases-1"
-   ],
-   "stem": "A jar is placed over a burning candle standing in water. The flame goes out and the water level in the jar rises. Why does the water level rise?",
-   "options": [
-    "The nitrogen in the jar is used up by the candle",
-    "The candle wax turns into water that fills the jar from below",
-    "The burning candle used up oxygen, so there is less gas in the jar",
-    "The heat of the flame pushes the water up into the jar"
-   ],
-   "answer": 2,
-   "explain": [
-    {
-     "tag": "wrong-gas",
-     "why": "A candle does not use nitrogen."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Candle wax does not turn into the water in the trough."
-    },
-    null,
-    {
-     "tag": "wrong-idea",
-     "why": "A flame does not push the water."
-    }
-   ],
-   "solution": [
-    "Oxygen is used up, so the gas volume falls and water is pushed in by the air outside."
-   ],
-   "params": {
-    "key": "ag-101",
-    "subtopic": "sci-systems-air-gases"
-   },
-   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar over a burning candle</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
-  },
-  {
-   "id": "scisyst-b32e886a8b",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "intermediate",
-   "template": "sci-pat-gases-in-air",
-   "outcomes": [
-    "sci-systems-air-gases-1"
-   ],
-   "stem": "The jar is divided into 5 equal parts above the water. The candle burns until it goes out. About how many parts will the water rise?",
-   "options": [
-    "1 part",
-    "2 parts",
-    "5 parts",
-    "4 parts"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong-amount",
-     "why": "Two parts would be about two fifths, more than the oxygen in air."
-    },
-    {
-     "tag": "wrong-amount",
-     "why": "That would mean all the gas was used up."
-    },
-    {
-     "tag": "swap",
-     "why": "Four fifths is about the amount of nitrogen."
-    }
-   ],
-   "solution": [
-    "Oxygen is about one fifth of air, so water rises about 1 part in 5."
-   ],
-   "params": {
-    "key": "ag-102",
-    "subtopic": "sci-systems-air-gases"
-   },
-   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Candle in a jar of air</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"100\" y1=\"146\" x2=\"118\" y2=\"146\" stroke-width=\"1.5\"/><line x1=\"100\" y1=\"122\" x2=\"118\" y2=\"122\" stroke-width=\"1.5\"/><line x1=\"100\" y1=\"98\" x2=\"118\" y2=\"98\" stroke-width=\"1.5\"/><line x1=\"100\" y1=\"74\" x2=\"118\" y2=\"74\" stroke-width=\"1.5\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
-  },
-  {
-   "id": "scisyst-079c6755c4",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "intermediate",
-   "template": "sci-pat-gases-in-air",
-   "outcomes": [
-    "sci-systems-air-gases-1"
-   ],
-   "stem": "In the set-up, the water level has risen by about one fifth after the candle went out. Which gas in the jar has been used up?",
-   "options": [
-    "Oxygen",
-    "Carbon dioxide",
-    "Nitrogen",
-    "Water vapour"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong-gas",
-     "why": "Carbon dioxide is a tiny part of air."
-    },
-    {
-     "tag": "wrong-gas",
-     "why": "Nitrogen is about four fifths of the air and does not rise by this amount."
-    },
-    {
-     "tag": "wrong-gas",
-     "why": "Water vapour is a tiny, changing part of air."
-    }
-   ],
-   "solution": [
-    "The gas lost is about one fifth of the air, which is the oxygen."
-   ],
-   "params": {
-    "key": "ag-103",
-    "subtopic": "sci-systems-air-gases"
-   },
-   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">After the candle went out</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><rect x=\"101\" y=\"146.0\" width=\"98\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><line x1=\"101\" y1=\"146.0\" x2=\"199\" y2=\"146.0\" stroke-width=\"1.5\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
   },
   {
    "id": "scisyst-c9512d315e",
@@ -1497,45 +1337,6 @@
    ],
    "params": {
     "key": "ag-113",
-    "subtopic": "sci-systems-air-gases"
-   }
-  },
-  {
-   "id": "scisyst-13d99f14c9",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "intermediate",
-   "template": "sci-pat-gases-in-air",
-   "outcomes": [
-    "sci-systems-air-gases-1"
-   ],
-   "stem": "A candle is lit in each of two identical closed jars. Jar A has air only. Jar B has air and a green plant that was kept in bright light. In which jar does the candle burn for longer?",
-   "options": [
-    "Jar A, because the plant takes in the oxygen",
-    "Jar B, because the plant adds carbon dioxide in light",
-    "Both the same, because the plant takes no part",
-    "Jar B, because the plant adds oxygen in light"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong-idea",
-     "why": "In bright light, plants give out oxygen."
-    },
-    {
-     "tag": "wrong-gas",
-     "why": "Carbon dioxide does not keep a flame burning."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "The plant changes the gases in the jar."
-    },
-    null
-   ],
-   "solution": [
-    "More oxygen lets the candle burn longer."
-   ],
-   "params": {
-    "key": "ag-114",
     "subtopic": "sci-systems-air-gases"
    }
   },
@@ -1970,46 +1771,6 @@
     "subtopic": "sci-systems-air-gases"
    },
    "figure": "<svg viewBox=\"0 0 300 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gases in air</text><path d=\"M150 138 L150.0 66.0 A72 72 0 1 1 79.3 124.5 Z\" fill=\"currentColor\" fill-opacity=\"0.12\"/><text x=\"207.4\" y=\"211.3\" text-anchor=\"start\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P 78%</text><path d=\"M150 138 L79.3 124.5 A72 72 0 0 1 145.5 66.1 Z\" fill=\"currentColor\" fill-opacity=\"0.42\"/><text x=\"90.5\" y=\"74.5\" text-anchor=\"end\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q 21%</text><path d=\"M150 138 L145.5 66.1 A72 72 0 0 1 150.0 66.0 Z\" fill=\"currentColor\" fill-opacity=\"0.7\"/><text x=\"147.2\" y=\"52.0\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R 1%</text></svg>"
-  },
-  {
-   "id": "scisyst-d8aba185cc",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "competent",
-   "template": "sci-pat-gases-in-air",
-   "outcomes": [
-    "sci-systems-air-gases-1"
-   ],
-   "stem": "A candle burns in a closed jar over water until it goes out. The water rises only a short way up the jar. Why does it not rise further?",
-   "options": [
-    "All the gases in the jar were used up by the candle",
-    "The candle also made oxygen as it burned",
-    "The water is too heavy to rise higher",
-    "Only the oxygen, about one fifth of air, was used"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong-idea",
-     "why": "Most of the gas in the jar remained."
-    },
-    {
-     "tag": "reversed",
-     "why": "A burning candle uses up oxygen."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "The amount of gas lost sets the rise."
-    },
-    null
-   ],
-   "solution": [
-    "About 21% of air is oxygen, and the rest stays in the jar."
-   ],
-   "params": {
-    "key": "ag-201",
-    "subtopic": "sci-systems-air-gases"
-   },
-   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water level after burning</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><rect x=\"101\" y=\"146.0\" width=\"98\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><line x1=\"101\" y1=\"146.0\" x2=\"199\" y2=\"146.0\" stroke-width=\"1.5\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
   },
   {
    "id": "scisyst-a64a76ae7e",
@@ -2959,6 +2720,245 @@
     "key": "ag-225",
     "subtopic": "sci-systems-air-gases"
    }
+  },
+  {
+   "id": "scisyst-32e734f53a",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "basic",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "A candle burns under a jar standing on a table. After a while the flame goes out. Why?",
+   "options": [
+    "The jar has too much oxygen",
+    "There was too little oxygen left in the jar to keep it burning",
+    "All the air in the jar has been used up",
+    "The nitrogen in the jar has been used up"
+   ],
+   "answer": 1,
+   "explain": [
+    {
+     "tag": "reversed",
+     "why": "Extra oxygen makes the flame brighter."
+    },
+    null,
+    {
+     "tag": "air-vs-oxygen",
+     "why": "Only some of the oxygen is used. The other gases stay in the jar."
+    },
+    {
+     "tag": "wrong-gas",
+     "why": "Nitrogen is not used by a burning candle."
+    }
+   ],
+   "solution": [
+    "A burning candle uses oxygen. When the oxygen left is too little, the flame goes out."
+   ],
+   "params": {
+    "key": "ag-318",
+    "subtopic": "sci-systems-air-gases"
+   },
+   "figure": "<svg viewBox=\"0 0 300 235\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle burning under a jar</text><line x1=\"10\" y1=\"200\" x2=\"290\" y2=\"200\" stroke-width=\"3\"/><path d=\"M105.0 200 V80 H195.0 V200\"/><rect x=\"143\" y=\"164\" width=\"14\" height=\"36\" fill=\"#fff\"/><path d=\"M150 148 Q156 158 150 162 Q144 158 150 148 Z\" fill=\"currentColor\"/><text x=\"150\" y=\"224\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar</text></svg>"
+  },
+  {
+   "id": "scisyst-01eb178f7f",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "intermediate",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "A jar is placed over a burning candle standing in water. The flame goes out and the water level in the jar rises. Why does the water level rise?",
+   "options": [
+    "The heat of the flame pushes the water up into the jar",
+    "The candle wax turns into water that fills the jar from below",
+    "The burning candle used some of the oxygen, so there is less gas in the jar",
+    "The nitrogen in the jar is used up by the candle"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "wrong-idea",
+     "why": "A flame does not push the water."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "Candle wax does not turn into the water in the trough."
+    },
+    null,
+    {
+     "tag": "wrong-gas",
+     "why": "A candle does not use nitrogen."
+    }
+   ],
+   "solution": [
+    "Some of the oxygen is used, so less gas is left and the air outside pushes water in."
+   ],
+   "params": {
+    "key": "ag-401",
+    "subtopic": "sci-systems-air-gases"
+   },
+   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Jar over a burning candle</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+  },
+  {
+   "id": "scisyst-1909b8e5ca",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "intermediate",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "A candle burns under a jar over water until it goes out. The water rises a little way into the jar. Which statement about the gas left in the jar is correct?",
+   "options": [
+    "It has no oxygen left, only nitrogen and carbon dioxide",
+    "It is all carbon dioxide, made by the burning candle",
+    "It is all nitrogen, as nothing else can stay in the jar",
+    "It still has some oxygen, but too little to keep the flame going"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "all-used",
+     "why": "A flame goes out while some oxygen is still left."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "Most of the gas left is nitrogen."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "Some oxygen and a little carbon dioxide are still there."
+    },
+    null
+   ],
+   "solution": [
+    "The flame goes out when the oxygen is too low. Some oxygen is still left."
+   ],
+   "params": {
+    "key": "ag-402",
+    "subtopic": "sci-systems-air-gases"
+   },
+   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water level after the flame went out</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><rect x=\"101\" y=\"146.0\" width=\"98\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><line x1=\"101\" y1=\"146.0\" x2=\"199\" y2=\"146.0\" stroke-width=\"1.5\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+  },
+  {
+   "id": "scisyst-63d3cffb9b",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "intermediate",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "A candle burns under a jar over water as shown. The flame goes out and the water level rises. Which gas in the jar did the candle use?",
+   "options": [
+    "Carbon dioxide",
+    "Nitrogen",
+    "Water vapour",
+    "Oxygen"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "reversed",
+     "why": "A burning candle makes a little carbon dioxide."
+    },
+    {
+     "tag": "wrong-gas",
+     "why": "A burning candle does not use nitrogen."
+    },
+    {
+     "tag": "wrong-gas",
+     "why": "Water vapour is a tiny, changing part of air."
+    },
+    null
+   ],
+   "solution": [
+    "Burning uses oxygen from the air in the jar."
+   ],
+   "params": {
+    "key": "ag-403",
+    "subtopic": "sci-systems-air-gases"
+   },
+   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A candle burning under a jar</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><path d=\"M150 126 Q156 136 150 140 Q144 136 150 126 Z\" fill=\"currentColor\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+  },
+  {
+   "id": "scisyst-3c315df198",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "intermediate",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "A candle is lit in each of two identical closed jars. Jar A has air only. Jar B has air and a green plant. Both jars are kept in bright light. In which jar does the candle burn for longer?",
+   "options": [
+    "Jar A, because the plant takes in the oxygen",
+    "Both the same, because the plant takes no part",
+    "Jar B, because the plant adds carbon dioxide in light",
+    "Jar B, because the plant adds oxygen in light"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "reversed",
+     "why": "In bright light the plant gives out oxygen."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "The plant changes the gases in the jar."
+    },
+    {
+     "tag": "wrong-gas",
+     "why": "In light the plant takes in carbon dioxide."
+    },
+    null
+   ],
+   "solution": [
+    "More oxygen lets the candle burn longer."
+   ],
+   "params": {
+    "key": "ag-414",
+    "subtopic": "sci-systems-air-gases"
+   }
+  },
+  {
+   "id": "scisyst-b72d7831cb",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "competent",
+   "template": "sci-pat-gases-in-air",
+   "outcomes": [
+    "sci-systems-air-gases-1"
+   ],
+   "stem": "A candle burns in a closed jar over water until it goes out. The water rises only a short way up the jar. Why does it not rise further?",
+   "options": [
+    "The candle used only some of the oxygen, and the other gases stayed in the jar",
+    "The water is too heavy for the air outside to push it any higher",
+    "The candle used up all the gases in the jar before it went out",
+    "The candle made new oxygen as it burned, which filled the space"
+   ],
+   "answer": 0,
+   "explain": [
+    null,
+    {
+     "tag": "wrong-idea",
+     "why": "The amount of gas lost sets the rise."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "Most of the gas in the jar remained."
+    },
+    {
+     "tag": "reversed",
+     "why": "A burning candle uses oxygen. It does not make it."
+    }
+   ],
+   "solution": [
+    "Only some of the oxygen is used, and the rest of the gas stays in the jar."
+   ],
+   "params": {
+    "key": "ag-501",
+    "subtopic": "sci-systems-air-gases"
+   },
+   "figure": "<svg viewBox=\"0 0 300 245\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water level after burning</text><rect x=\"31\" y=\"170\" width=\"238\" height=\"60\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><path d=\"M30 150 V230 H270 V150\"/><rect x=\"101\" y=\"146.0\" width=\"98\" height=\"24.0\" fill=\"currentColor\" fill-opacity=\"0.15\" stroke=\"none\"/><line x1=\"101\" y1=\"146.0\" x2=\"199\" y2=\"146.0\" stroke-width=\"1.5\"/><path d=\"M100 200 V50 H200 V200\"/><line x1=\"150\" y1=\"176\" x2=\"150\" y2=\"228\"/><line x1=\"128\" y1=\"176\" x2=\"172\" y2=\"176\"/><rect x=\"143\" y=\"142\" width=\"14\" height=\"34\" fill=\"#fff\"/><text x=\"62\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">jar</text><line x1=\"78\" y1=\"90\" x2=\"98\" y2=\"90\" stroke-width=\"1.5\"/><text x=\"240\" y=\"120\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">candle</text><line x1=\"214\" y1=\"116\" x2=\"160\" y2=\"150\" stroke-width=\"1.5\"/><text x=\"238\" y=\"208\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
   },
   {
    "id": "scisyst-9ea313f717",
@@ -4925,46 +4925,6 @@
    }
   },
   {
-   "id": "scisyst-58223993b9",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "competent",
-   "template": "sci-pat-resp-circulatory",
-   "outcomes": [
-    "sci-systems-resp-circ-parts-1"
-   ],
-   "stem": "In the diagram, solid lines show oxygen-rich blood. Which two arrows carry blood that contains the most oxygen?",
-   "options": [
-    "A and B",
-    "C and D",
-    "A and D",
-    "B and C"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "mixed",
-     "why": "A carries oxygen-poor blood."
-    },
-    {
-     "tag": "mixed",
-     "why": "D carries oxygen-poor blood."
-    },
-    {
-     "tag": "poor-only",
-     "why": "Both carry oxygen-poor blood."
-    },
-    null
-   ],
-   "solution": [
-    "Solid lines B and C carry oxygen-rich blood; A and D are dashed (oxygen-poor)."
-   ],
-   "params": {
-    "key": "rc-201",
-    "subtopic": "sci-systems-resp-circ-parts"
-   },
-   "figure": "<svg viewBox=\"0 0 300 330\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">How blood moves round the body</text><rect x=\"105\" y=\"30\" width=\"100\" height=\"40\" rx=\"8\"/><text x=\"155.0\" y=\"55.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Lungs</text><rect x=\"105\" y=\"120\" width=\"100\" height=\"44\" rx=\"8\"/><text x=\"155.0\" y=\"147.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heart</text><rect x=\"105\" y=\"220\" width=\"100\" height=\"40\" rx=\"8\"/><text x=\"155.0\" y=\"245.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Body</text><line x1=\"135\" y1=\"118\" x2=\"135\" y2=\"72\" stroke-width=\"2.4\" stroke-dasharray=\"7 5\" marker-end=\"url(#ah)\"/><text x=\"120\" y=\"98\" text-anchor=\"end\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"175\" y1=\"72\" x2=\"175\" y2=\"118\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"190\" y=\"98\" text-anchor=\"start\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"175\" y1=\"166\" x2=\"175\" y2=\"218\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"190\" y=\"198\" text-anchor=\"start\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"135\" y1=\"218\" x2=\"135\" y2=\"166\" stroke-width=\"2.4\" stroke-dasharray=\"7 5\" marker-end=\"url(#ah)\"/><text x=\"120\" y=\"198\" text-anchor=\"end\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><line x1=\"40\" y1=\"290\" x2=\"84\" y2=\"290\" stroke-width=\"2.4\"/><text x=\"92\" y=\"295\" text-anchor=\"start\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">oxygen-rich blood</text><line x1=\"40\" y1=\"314\" x2=\"84\" y2=\"314\" stroke-width=\"2.4\" stroke-dasharray=\"7 5\"/><text x=\"92\" y=\"319\" text-anchor=\"start\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">oxygen-poor blood</text></svg>"
-  },
-  {
    "id": "scisyst-792c4bbdf1",
    "topic": "sci-systems-human-resp-circ",
    "level": "competent",
@@ -5358,46 +5318,6 @@
     "subtopic": "sci-systems-resp-circ-parts"
    },
    "figure": "<svg viewBox=\"0 0 300 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Lungs and gills</text><rect x=\"10\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"60.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Living thing</text><rect x=\"110\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"155.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Lungs</text><rect x=\"200\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"245.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Gills</text><rect x=\"10\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"60.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"110\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"155.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"200\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"245.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"10\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"60.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"110\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"155.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"200\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"245.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"60.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"110\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"155.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"200\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"245.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text></svg>"
-  },
-  {
-   "id": "scisyst-6588eaea62",
-   "topic": "sci-systems-human-resp-circ",
-   "level": "competent",
-   "template": "sci-pat-resp-circulatory",
-   "outcomes": [
-    "sci-systems-resp-circ-parts-3"
-   ],
-   "stem": "The table compares how substances are carried in plants and humans. Which substance is most likely Q?",
-   "options": [
-    "Food",
-    "Oxygen",
-    "Light energy",
-    "Carbon dioxide"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "human-only",
-     "why": "Oxygen is carried only by blood."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Light is not carried by either."
-    },
-    {
-     "tag": "human-only",
-     "why": "Carbon dioxide is carried only by blood."
-    }
-   ],
-   "solution": [
-    "Food is carried by blood in humans and in the tubes of plants."
-   ],
-   "params": {
-    "key": "rc-212",
-    "subtopic": "sci-systems-resp-circ-parts"
-   },
-   "figure": "<svg viewBox=\"0 0 430 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"215.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substances carried</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"160\" height=\"34\"/><text x=\"180.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Carried in humans?</text><rect x=\"260\" y=\"36\" width=\"160\" height=\"34\"/><text x=\"340.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Carried in plants?</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"160\" height=\"30\"/><text x=\"180.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"260\" y=\"70\" width=\"160\" height=\"30\"/><text x=\"340.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"160\" height=\"30\"/><text x=\"180.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"260\" y=\"100\" width=\"160\" height=\"30\"/><text x=\"340.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"160\" height=\"30\"/><text x=\"180.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"260\" y=\"130\" width=\"160\" height=\"30\"/><text x=\"340.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text></svg>"
   },
   {
    "id": "scisyst-5acb920acd",
@@ -5911,6 +5831,86 @@
     "key": "rc-225",
     "subtopic": "sci-systems-resp-circ-parts"
    }
+  },
+  {
+   "id": "scisyst-9a1cb9ae87",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "competent",
+   "template": "sci-pat-resp-circulatory",
+   "outcomes": [
+    "sci-systems-resp-circ-parts-1"
+   ],
+   "stem": "The diagram shows how blood moves between the lungs, the heart and the body. Which two arrows carry blood that contains the most oxygen?",
+   "options": [
+    "A and B",
+    "C and D",
+    "B and C",
+    "A and D"
+   ],
+   "answer": 2,
+   "explain": [
+    {
+     "tag": "mixed",
+     "why": "A carries blood from the heart to the lungs, which has little oxygen."
+    },
+    {
+     "tag": "mixed",
+     "why": "D carries blood from the body to the heart, which has little oxygen."
+    },
+    null,
+    {
+     "tag": "poor-only",
+     "why": "Both carry blood that has little oxygen."
+    }
+   ],
+   "solution": [
+    "Blood takes in oxygen in the lungs and goes along B to the heart. The heart pumps it along C to the body."
+   ],
+   "params": {
+    "key": "rc-501",
+    "subtopic": "sci-systems-resp-circ-parts"
+   },
+   "figure": "<svg viewBox=\"0 0 300 280\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">How blood moves round the body</text><rect x=\"105\" y=\"30\" width=\"100\" height=\"40\" rx=\"8\"/><text x=\"155.0\" y=\"55.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Lungs</text><rect x=\"105\" y=\"120\" width=\"100\" height=\"44\" rx=\"8\"/><text x=\"155.0\" y=\"147.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heart</text><rect x=\"105\" y=\"220\" width=\"100\" height=\"40\" rx=\"8\"/><text x=\"155.0\" y=\"245.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Body</text><line x1=\"135\" y1=\"118\" x2=\"135\" y2=\"72\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"120\" y=\"98\" text-anchor=\"end\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"175\" y1=\"72\" x2=\"175\" y2=\"118\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"190\" y=\"98\" text-anchor=\"start\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"175\" y1=\"166\" x2=\"175\" y2=\"218\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"190\" y=\"198\" text-anchor=\"start\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"135\" y1=\"218\" x2=\"135\" y2=\"166\" stroke-width=\"2.4\" marker-end=\"url(#ah)\"/><text x=\"120\" y=\"198\" text-anchor=\"end\" font-size=\"17\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+  },
+  {
+   "id": "scisyst-12bc45e4d8",
+   "topic": "sci-systems-human-resp-circ",
+   "level": "competent",
+   "template": "sci-pat-resp-circulatory",
+   "outcomes": [
+    "sci-systems-resp-circ-parts-3"
+   ],
+   "stem": "The table shows whether three substances are carried by human blood and by the tubes of plants. Which substance is most likely P?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Light energy",
+    "Water"
+   ],
+   "answer": 3,
+   "explain": [
+    {
+     "tag": "human-only",
+     "why": "Oxygen is carried by blood but not by the tubes of plants, like Q."
+    },
+    {
+     "tag": "human-only",
+     "why": "Carbon dioxide is carried by blood but not by the tubes of plants, like Q."
+    },
+    {
+     "tag": "wrong-idea",
+     "why": "No living thing carries light in its tubes, like R."
+    },
+    null
+   ],
+   "solution": [
+    "Blood carries water and so do the tubes of plants."
+   ],
+   "params": {
+    "key": "rc-512",
+    "subtopic": "sci-systems-resp-circ-parts"
+   },
+   "figure": "<svg viewBox=\"0 0 410 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"205.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substances carried</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Substance</text><rect x=\"100\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"175.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">In human blood?</text><rect x=\"250\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"325.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">In plant tubes?</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"175.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"325.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"175.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"325.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"175.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"250\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"325.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text></svg>"
   }
  ]
 }

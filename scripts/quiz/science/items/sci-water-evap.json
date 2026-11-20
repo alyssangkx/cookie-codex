@@ -1299,39 +1299,6 @@
       "figure": "<svg viewBox=\"0 0 342 214\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"171.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four dishes of water</text><rect x=\"10\" y=\"36\" width=\"58\" height=\"48\"/><text x=\"39.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"68\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"100.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temp</text><text x=\"100.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(°C)</text><rect x=\"132\" y=\"36\" width=\"52\" height=\"48\"/><text x=\"158.0\" y=\"65.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fan</text><rect x=\"184\" y=\"36\" width=\"84\" height=\"48\"/><text x=\"226.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Dish width</text><text x=\"226.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(cm)</text><rect x=\"268\" y=\"36\" width=\"64\" height=\"48\"/><text x=\"300.0\" y=\"57.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water</text><text x=\"300.0\" y=\"73.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">(ml)</text><rect x=\"10\" y=\"84\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"68\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"84\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"84\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"84\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"104.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"114\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"68\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"114\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"114\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"114\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"144\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"68\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text><rect x=\"132\" y=\"144\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">off</text><rect x=\"184\" y=\"144\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"268\" y=\"144\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"164.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"10\" y=\"174\" width=\"58\" height=\"30\"/><text x=\"39.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"68\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"100.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"132\" y=\"174\" width=\"52\" height=\"30\"/><text x=\"158.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">on</text><rect x=\"184\" y=\"174\" width=\"84\" height=\"30\"/><text x=\"226.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"268\" y=\"174\" width=\"64\" height=\"30\"/><text x=\"300.0\" y=\"194.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100</text></svg>"
     },
     {
-      "key": "ev-116",
-      "level": "intermediate",
-      "outcome": "sci-cycles-water-evaporation-1",
-      "pattern": "sci-pat-read-data",
-      "stem": "The four dishes held 100 ml of water at first and have the same width. The bar chart shows the water left after 3 hours. Which dish was probably in the hottest place?",
-      "options": [
-        "P",
-        "S",
-        "Q",
-        "R"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "read-wrong-way",
-          "why": "P has the most water left, so it was probably the coolest."
-        },
-        null,
-        {
-          "tag": "partial",
-          "why": "Q lost some water, but S lost more."
-        },
-        {
-          "tag": "partial",
-          "why": "R lost some water, but S lost more."
-        }
-      ],
-      "solution": [
-        "S lost the most water (85 ml), so it evaporated fastest."
-      ],
-      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in each dish after 3 hours</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><rect x=\"68.9\" y=\"50.0\" width=\"33.8\" height=\"138.0\"/><rect x=\"136.4\" y=\"83.0\" width=\"33.8\" height=\"105.0\"/><rect x=\"203.9\" y=\"120.5\" width=\"33.8\" height=\"67.5\"/><rect x=\"271.4\" y=\"165.5\" width=\"33.8\" height=\"22.5\"/></svg>"
-    },
-    {
       "key": "ev-117",
       "level": "intermediate",
       "outcome": "sci-cycles-water-evaporation-1",
@@ -2433,6 +2400,39 @@
         "Wider dishes dry up sooner, so 12 cm takes less than 8 hours."
       ],
       "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for the water to dry up</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"163.0\" x2=\"52\" y2=\"163.0\"/><text x=\"44\" y=\"167.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"138.0\" x2=\"52\" y2=\"138.0\"/><text x=\"44\" y=\"142.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"88.0\" x2=\"52\" y2=\"88.0\"/><text x=\"44\" y=\"92.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"48\" y1=\"63.0\" x2=\"52\" y2=\"63.0\"/><text x=\"44\" y=\"67.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish width (cm)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time to dry (h)</text><rect x=\"68.9\" y=\"63.0\" width=\"33.8\" height=\"125.0\"/><rect x=\"136.4\" y=\"100.5\" width=\"33.8\" height=\"87.5\"/><rect x=\"203.9\" y=\"125.5\" width=\"33.8\" height=\"62.5\"/><rect x=\"271.4\" y=\"138.0\" width=\"33.8\" height=\"50.0\"/></svg>"
+    },
+    {
+      "key": "ev-416",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-evaporation-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Four dishes held 100 ml of water at first and have the same width. They stood in four places with the same wind and the same moisture in the air, and the places differed only in how hot they were. The bar chart shows the water left after 3 hours. Which dish was probably in the hottest place?",
+      "options": [
+        "P",
+        "S",
+        "Q",
+        "R"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "read-wrong-way",
+          "why": "P has the most water left, so it was probably the coolest."
+        },
+        null,
+        {
+          "tag": "partial",
+          "why": "Q lost some water, but S lost more."
+        },
+        {
+          "tag": "partial",
+          "why": "R lost some water, but S lost more."
+        }
+      ],
+      "solution": [
+        "S lost the most water (85 ml), so it evaporated fastest."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water in each dish after 3 hours</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"85.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"153.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"288.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">S</text><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Dish</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Water left (ml)</text><rect x=\"68.9\" y=\"50.0\" width=\"33.8\" height=\"138.0\"/><rect x=\"136.4\" y=\"83.0\" width=\"33.8\" height=\"105.0\"/><rect x=\"203.9\" y=\"120.5\" width=\"33.8\" height=\"67.5\"/><rect x=\"271.4\" y=\"165.5\" width=\"33.8\" height=\"22.5\"/></svg>"
     }
   ]
 }

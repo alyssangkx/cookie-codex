@@ -1139,171 +1139,6 @@
       ]
     },
     {
-      "key": "ws-111",
-      "level": "intermediate",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice in a beaker is heated steadily. The graph shows the temperature. Which part of the graph shows the ice melting?",
-      "options": [
-        "A",
-        "C",
-        "B",
-        "D"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-reading",
-          "why": "In A the ice is getting warmer but has not started to melt."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "In C the melting is over and the water is getting hotter."
-        },
-        null,
-        {
-          "tag": "wrong-reading",
-          "why": "D is the flat part where the water boils."
-        }
-      ],
-      "solution": [
-        "The first flat part, at 0 °C, is the ice melting."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
-      "key": "ws-112",
-      "level": "intermediate",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. Which part of the graph shows the water boiling?",
-      "options": [
-        "B",
-        "D",
-        "C",
-        "E"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "wrong-reading",
-          "why": "B is at 0 °C, where ice melts."
-        },
-        null,
-        {
-          "tag": "wrong-reading",
-          "why": "In C the temperature is still rising, so the water has not started to boil."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "In E the temperature is rising again, so boiling is finished."
-        }
-      ],
-      "solution": [
-        "The second flat part, at 100 °C, is boiling."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
-      "key": "ws-113",
-      "level": "intermediate",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. In which state is the water during part C?",
-      "options": [
-        "Liquid water only",
-        "Ice and liquid water",
-        "Liquid water and water vapour",
-        "Water vapour only"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-reading",
-          "why": "That is part B, while the ice is melting."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "That is part D, while the water boils."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "That is part E, after all the water has boiled away."
-        }
-      ],
-      "solution": [
-        "All the ice has melted and the water has not started to boil."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
-      "key": "ws-114",
-      "level": "intermediate",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. Why does the temperature stay at 0 °C in part B although the heater is still on?",
-      "options": [
-        "The heater stops giving out heat for a while",
-        "The ice loses heat as fast as it gains heat",
-        "The thermometer cannot read above 0 °C",
-        "The heat gained is used to change ice into water"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-idea",
-          "why": "The heater is still on."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "The ice is gaining heat all the time."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "The same thermometer reads higher later."
-        },
-        null
-      ],
-      "solution": [
-        "Heat is used up in changing the state, so the temperature does not rise until all the ice has melted."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
-      "key": "ws-115",
-      "level": "intermediate",
-      "outcome": "sci-cycles-water-states-3",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. What is the boiling point of the water?",
-      "options": [
-        "0 °C",
-        "112 °C",
-        "100 °C",
-        "20 °C"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-reading",
-          "why": "0 °C is where the first flat part is, which is melting."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "112 °C is only the highest reading at the end."
-        },
-        null,
-        {
-          "tag": "wrong-reading",
-          "why": "20 is a time in minutes, not a temperature."
-        }
-      ],
-      "solution": [
-        "The temperature stays at 100 °C in the second flat part."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
       "key": "ws-116",
       "level": "intermediate",
       "outcome": "sci-cycles-water-states-4",
@@ -1623,105 +1458,6 @@
       "solution": [
         "Water changes to a gas at its boiling point, 100 °C."
       ]
-    },
-    {
-      "key": "ws-201",
-      "level": "competent",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. In which parts does the water gain heat but its temperature stay the same?",
-      "options": [
-        "B and D",
-        "A and C",
-        "C and E",
-        "A, C and E"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-reading",
-          "why": "The temperature rises in these parts."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "The temperature rises in these parts."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "The temperature rises in all of these parts."
-        }
-      ],
-      "solution": [
-        "The flat parts, B and D, are where the heat changes the state."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
-      "key": "ws-202",
-      "level": "competent",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. In which state is the water at 21 minutes?",
-      "options": [
-        "Liquid water only",
-        "Liquid water and water vapour",
-        "Ice and water vapour",
-        "Water vapour only"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-reading",
-          "why": "All the water has boiled away by then."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "That is the boiling stage, which ended at 20 minutes."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "The ice melted long before this."
-        },
-        null
-      ],
-      "solution": [
-        "After the flat boiling part is over, the temperature rises again and only water vapour remains."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
-    },
-    {
-      "key": "ws-203",
-      "level": "competent",
-      "outcome": "sci-cycles-water-states-4",
-      "pattern": "sci-pat-read-data",
-      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. What can be seen in the beaker at 15 minutes?",
-      "options": [
-        "Only ice cubes still floating in cold water",
-        "Only clear gas, with no liquid water left",
-        "Bubbles rising through water that is still there",
-        "Water with no bubbles, which is still getting hotter"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-reading",
-          "why": "The ice melted by 6 minutes."
-        },
-        {
-          "tag": "wrong-reading",
-          "why": "The water has not all boiled away yet."
-        },
-        null,
-        {
-          "tag": "wrong-reading",
-          "why": "Water at 100 °C is boiling, so it has bubbles."
-        }
-      ],
-      "solution": [
-        "At 15 minutes the water is boiling at 100 °C, so there are bubbles and liquid is left."
-      ],
-      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"110.7\" y1=\"222\" x2=\"110.7\" y2=\"226\"/><text x=\"110.66666666666666\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"165.3\" y1=\"222\" x2=\"165.3\" y2=\"226\"/><text x=\"165.33333333333331\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"220.0\" y1=\"222\" x2=\"220.0\" y2=\"226\"/><text x=\"220.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"274.7\" y1=\"222\" x2=\"274.7\" y2=\"226\"/><text x=\"274.66666666666663\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"329.3\" y1=\"222\" x2=\"329.3\" y2=\"226\"/><text x=\"329.33333333333337\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">24</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 83.3,195.1 138.0,195.1 220.0,60.9 329.3,60.9 356.7,44.7\"/><text x=\"77.66666666666667\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"110.66666666666666\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"166.0\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"274.66666666666663\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text><text x=\"357.0\" y=\"58.79999999999998\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">E</text></svg>"
     },
     {
       "key": "ws-204",
@@ -2437,6 +2173,270 @@
       "solution": [
         "Water vapour is an invisible gas that is always in the air."
       ]
+    },
+    {
+      "key": "ws-411",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily. The graph shows the temperature. Which part of the graph shows the ice melting?",
+      "options": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "In A the ice is getting warmer but has not started to melt."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "In C the melting is over and the water is getting hotter."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "D is the flat part where the water boils."
+        }
+      ],
+      "solution": [
+        "The first flat part, at 0 °C, is the ice melting."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-412",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. Which part of the graph shows the water boiling?",
+      "options": [
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "B is at 0 °C, where ice melts."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "In C the temperature is still rising, so the water has not started to boil."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "In A the ice is still warming up, below its melting point."
+        }
+      ],
+      "solution": [
+        "The second flat part, at 100 °C, is boiling."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-413",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. In which state is the water during part C?",
+      "options": [
+        "Liquid water only",
+        "Ice and liquid water",
+        "Liquid water and water vapour",
+        "Ice only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "That is part B, while the ice is melting."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "That is part D, while the water boils."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The ice has all melted by the end of part B."
+        }
+      ],
+      "solution": [
+        "All the ice has melted and the water has not started to boil."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-414",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. Why does the temperature stay at 0 °C in part B although the heater is still on?",
+      "options": [
+        "The heater stops giving out heat for a while",
+        "The ice loses heat as fast as it gains heat",
+        "The thermometer cannot read above 0 °C",
+        "The heat gained is used to change ice into water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The heater is still on."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ice is gaining heat all the time."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The same thermometer reads higher later."
+        },
+        null
+      ],
+      "solution": [
+        "Heat is used up in changing the state, so the temperature does not rise until all the ice has melted."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-415",
+      "level": "intermediate",
+      "outcome": "sci-cycles-water-states-3",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice in a beaker is heated steadily and its temperature is recorded as shown. What is the boiling point of the water?",
+      "options": [
+        "0 °C",
+        "50 °C",
+        "100 °C",
+        "20 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "0 °C is where the first flat part is, which is melting."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "50 °C is only a reading on the way up in part C."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "20 is a time in minutes, not a temperature."
+        }
+      ],
+      "solution": [
+        "The temperature stays at 100 °C in the second flat part."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-501",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. In which parts does the water gain heat but its temperature stay the same?",
+      "options": [
+        "B and D",
+        "A and C",
+        "B and C",
+        "A and D"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature rises in these parts."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature rises in part C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature rises in part A."
+        }
+      ],
+      "solution": [
+        "The flat parts, B and D, are where the heat changes the state."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-502",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. In which state is the water at 3 minutes?",
+      "options": [
+        "Ice only",
+        "Liquid water only",
+        "Liquid water and water vapour",
+        "Ice and liquid water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The ice has started to melt after 2 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The ice does not finish melting until 6 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The water does not boil until about 12 minutes."
+        },
+        null
+      ],
+      "solution": [
+        "At 3 minutes the graph is in the flat part B at 0 °C, so ice and liquid water are both there."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "ws-503",
+      "level": "competent",
+      "outcome": "sci-cycles-water-states-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Ice is heated in a beaker and its temperature is recorded as shown. What can be seen in the beaker at 15 minutes?",
+      "options": [
+        "Only ice cubes still floating in cold water",
+        "Only clear gas, with no liquid water left",
+        "Bubbles rising through water that is still there",
+        "Water with no bubbles, which is still getting hotter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The ice melted by 6 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The water has not all boiled away yet."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "Water at 100 °C is boiling, so it has bubbles."
+        }
+      ],
+      "solution": [
+        "At 15 minutes the water is boiling at 100 °C, so there are bubbles and liquid is left."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Heating ice in a beaker</text><path d=\"M56 34 V222 H384\"/><line x1=\"52\" y1=\"222.0\" x2=\"56\" y2=\"222.0\"/><text x=\"48\" y=\"226.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">-20</text><line x1=\"52\" y1=\"195.1\" x2=\"56\" y2=\"195.1\"/><text x=\"48\" y=\"199.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52\" y1=\"168.3\" x2=\"56\" y2=\"168.3\"/><text x=\"48\" y=\"172.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"52\" y1=\"141.4\" x2=\"56\" y2=\"141.4\"/><text x=\"48\" y=\"145.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"52\" y1=\"114.6\" x2=\"56\" y2=\"114.6\"/><text x=\"48\" y=\"118.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"52\" y1=\"87.7\" x2=\"56\" y2=\"87.7\"/><text x=\"48\" y=\"91.71428571428572\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"52\" y1=\"60.9\" x2=\"56\" y2=\"60.9\"/><text x=\"48\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"52\" y1=\"34.0\" x2=\"56\" y2=\"34.0\"/><text x=\"48\" y=\"38.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><line x1=\"56\" y1=\"195.1\" x2=\"384\" y2=\"195.1\" stroke-width=\"0.8\" stroke-dasharray=\"3 4\" stroke-opacity=\"0.5\"/><line x1=\"56.0\" y1=\"222\" x2=\"56.0\" y2=\"226\"/><text x=\"56.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"121.6\" y1=\"222\" x2=\"121.6\" y2=\"226\"/><text x=\"121.60000000000001\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"187.2\" y1=\"222\" x2=\"187.2\" y2=\"226\"/><text x=\"187.20000000000002\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"252.8\" y1=\"222\" x2=\"252.8\" y2=\"226\"/><text x=\"252.79999999999998\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"318.4\" y1=\"222\" x2=\"318.4\" y2=\"226\"/><text x=\"318.40000000000003\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><line x1=\"384.0\" y1=\"222\" x2=\"384.0\" y2=\"226\"/><text x=\"384.0\" y=\"239\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><text x=\"220.0\" y=\"262\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 128.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"56.0,208.6 88.8,195.1 154.4,195.1 252.8,60.9 384.0,60.9\"/><text x=\"80.4\" y=\"198.57142857142858\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"121.60000000000001\" y=\"186.14285714285714\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"190.6\" y=\"128.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><text x=\"318.40000000000003\" y=\"51.85714285714286\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
     }
   ]
 }

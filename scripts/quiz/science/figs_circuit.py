@@ -47,12 +47,9 @@ def _item(it, x, y, rot):
     return g
 
 
-def circuit(rows, left=(), right=(), W=300, H=None, caption=None):
-    # With 3+ rows, a lone switch on the first row is the MAIN switch: it is drawn in series on the left
-    # side wire, between the last branch and the battery row (a top row would be a parallel branch across the battery).
-    main = None
-    if len(rows) > 2 and len(rows[0]) == 1 and rows[0][0][0] == "S" and not left:
-        main, rows = rows[0][0], rows[1:]
+def circuit(rows, left=(), right=(), W=300, H=None, caption=None, main=None):
+    # main = a switch item drawn in series on the left side wire, between the last branch and the battery row
+    # (put it in a top row instead and it would be a parallel branch across the battery). Pass it explicitly; rows then holds the branches and the battery row (at least 2).
     n = len(rows)
     x0, x1 = 44, W - 44
     top = 58 if caption else 36

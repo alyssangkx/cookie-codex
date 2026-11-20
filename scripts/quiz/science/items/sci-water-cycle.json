@@ -2333,39 +2333,6 @@
       ]
     },
     {
-      "key": "wc-223",
-      "level": "competent",
-      "outcome": "sci-cycles-water-cycle-1",
-      "pattern": "sci-pat-water-cycle",
-      "stem": "Look at the picture of the water cycle. At which letter does water travel through the air as a liquid?",
-      "options": [
-        "P",
-        "Q",
-        "S",
-        "R"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-stage",
-          "why": "P is water rising as a gas."
-        },
-        {
-          "tag": "wrong-stage",
-          "why": "Q is the cloud, where droplets form."
-        },
-        null,
-        {
-          "tag": "wrong-stage",
-          "why": "R is the river, which flows on the land."
-        }
-      ],
-      "solution": [
-        "Rain falls as liquid drops, at S."
-      ],
-      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
-    },
-    {
       "key": "wc-224",
       "level": "competent",
       "outcome": "sci-cycles-water-cycle-3",
@@ -2428,6 +2395,39 @@
       "solution": [
         "Treating and supplying clean water is costly, and clean fresh water is limited."
       ]
+    },
+    {
+      "key": "wc-523",
+      "level": "competent",
+      "outcome": "sci-cycles-water-cycle-1",
+      "pattern": "sci-pat-water-cycle",
+      "stem": "Look at the picture of the water cycle. At which letter do drops of liquid water reach the ground?",
+      "options": [
+        "P",
+        "Q",
+        "S",
+        "R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-stage",
+          "why": "P is water rising as a gas."
+        },
+        {
+          "tag": "wrong-stage",
+          "why": "Q is the cloud, whose droplets are too light to fall."
+        },
+        null,
+        {
+          "tag": "wrong-stage",
+          "why": "R is the river, where water is already on the land."
+        }
+      ],
+      "solution": [
+        "Rain falls as liquid drops, at S."
+      ],
+      "figure": "<svg viewBox=\"0 0 420 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"210.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The water cycle</text><circle cx=\"48\" cy=\"58\" r=\"14\"/><line x1=\"68.0\" y1=\"58.0\" x2=\"76.0\" y2=\"58.0\"/><line x1=\"62.1\" y1=\"72.1\" x2=\"67.8\" y2=\"77.8\"/><line x1=\"48.0\" y1=\"78.0\" x2=\"48.0\" y2=\"86.0\"/><line x1=\"33.9\" y1=\"72.1\" x2=\"28.2\" y2=\"77.8\"/><line x1=\"28.0\" y1=\"58.0\" x2=\"20.0\" y2=\"58.0\"/><line x1=\"33.9\" y1=\"43.9\" x2=\"28.2\" y2=\"38.2\"/><line x1=\"48.0\" y1=\"38.0\" x2=\"48.0\" y2=\"30.0\"/><line x1=\"62.1\" y1=\"43.9\" x2=\"67.8\" y2=\"38.2\"/><text x=\"48\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Sun</text><path d=\"M10 205 H222 V252 H10 Z\" fill-opacity=\"0\"/><path d=\"M16 220 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><path d=\"M16 236 q10 -8 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0\"/><text x=\"70\" y=\"200\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">sea</text><path d=\"M222 252 L330 112 L410 252 Z\"/><path d=\"M308 140 l12 8 l10 -10 l12 10\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">mountain</text><path d=\"M140.0 80.0 Q124.0 80.0 128.0 64.0 Q132.0 50.0 150.0 54.0 Q154.0 28.0 182.0 34.0 Q202.0 20.0 220.0 42.0 Q250.0 40.0 248.0 64.0 Q258.0 80.0 238.0 80.0 Z\" fill=\"#fff\"/><line x1=\"112\" y1=\"190\" x2=\"130\" y2=\"108\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><line x1=\"238\" y1=\"96\" x2=\"272\" y2=\"158\" stroke-width=\"2\" stroke-dasharray=\"6 4\" marker-end=\"url(#ah)\"/><path d=\"M300 172 Q290 200 262 214 Q240 226 226 232\" stroke-width=\"2\" marker-end=\"url(#ah)\"/><circle cx=\"96\" cy=\"150\" r=\"11\" fill=\"#fff\"/><text x=\"96\" y=\"155\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"190\" cy=\"66\" r=\"11\" fill=\"#fff\"/><text x=\"190\" y=\"71\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"232\" cy=\"130\" r=\"11\" fill=\"#fff\"/><text x=\"232\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><circle cx=\"292\" cy=\"212\" r=\"11\" fill=\"#fff\"/><text x=\"292\" y=\"217\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
     }
   ]
 }
