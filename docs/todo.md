@@ -263,3 +263,4 @@ outside the repo.
 - [x] 20 Nov 2026: answer-page re-read. Questions with an answer went from 25,459 to 40,553.
 - [x] 20 Nov 2026: design docs written: `learning-loop-design.md` and `marking-framework.md`.
 - [x] 20 Nov 2026: Science SVG table headers overflowed their cells (owner screenshot, `ph-211`). New FAIL rule `figure-text-overflow` in `check_science.py`; `fillkit.table` wraps/widens; 76 figures rebuilt (74 shipped re-fingerprinted, keys unchanged).
+- [ ] figure-text-overflow follow-ups (code review 20 Nov 2026): run the same check on Math figures in `check_math.py`; add vertical fit (wrapped cells, captions below the viewBox); width is a fixed per-character estimate (0.55/0.6 em), so a label a few px over its box can pass (ci-111 "object" was widened by hand after the visual pass).

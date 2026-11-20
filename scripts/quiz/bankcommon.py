@@ -159,6 +159,14 @@ def warning_self_tests(science=False):
     t = lambda ok, name: ok or fails.append(f"warning self-test failed: {name}")
     t(distinctive_words(opts, 0) == {"evaporation"}, "distinctive words")
     t(echoes("Arrows show evaporation from the pond.", opts, 0), "figure leak / stem echo flags the answer word")
+    ov = svg_text_overflows  # figure-text-overflow (owner's ph-211 screenshot, 20 Nov 2026)
+    cell = '<svg viewBox="0 0 200 50"><rect x="0" y="0" width="{w}" height="40"/><g font-size="18" font-weight="700"><text x="{c}" y="20" text-anchor="middle">Mass gained</text></g></svg>'
+    t(ov(cell.format(w=160, c=80)) == [], "overflow: a label that fits passes")
+    t(bool(ov(cell.format(w=60, c=30))), "overflow: inherited bold 18px label wider than its cell fails")
+    t(ov('<svg><text x="1">&nbsp;</text></svg>')[0][1].startswith("SVG cannot"), "overflow: unparseable SVG fails")
+    t(ov('<svg viewBox="0 0 9 9"><text x="50%" font-size="14px">x</text></svg>') == [], "overflow: unit values are skipped, not a crash")
+    t(bool(ov('<svg viewBox="0 0 300 60"><g transform="translate(150 30)"><rect x="-16" y="-10" width="32" height="20"/>'
+              '<text x="0" y="5" text-anchor="middle" font-size="12">an object</text></g></svg>')), "overflow: translated groups are measured")
     t(not echoes("Arrows show water in a pond.", opts, 0), "figure leak / stem echo ignores shared words")
     t(not echoes("anything", ["A", "B", "C", "D"], 0), "letter options never echo")
     t(gives_away("Arrows show evaporation from the pond.", opts, 0), "gives away: only the answer echoes")
@@ -187,36 +195,62 @@ TEXT_OVERFLOW_SLACK = 4  # px a label may pass its cell or the viewBox before it
 
 def svg_text_overflows(svg):
     """Labels of an inline SVG that do not fit: each <text> width is estimated (font-size x 0.55 per character,
-    0.6 bold; text-anchor respected) and compared with the smallest <rect> that holds it centred (a table cell
-    or box) and with the viewBox. Returns [(text, reason)]. Simple and slightly generous on purpose."""
+    0.6 bold; font-size and weight inherited from parent groups; text-anchor respected) and compared with the smallest
+    <rect> that holds it centred (a table cell or box) and with the viewBox. Returns [(text, reason)]. Simple and
+    slightly generous on purpose. Not measured (no false alarms): text under a transform other than translate(), text with <tspan> lines,
+    values with units or lists. An SVG that cannot be parsed is itself a failure.
+    ponytail: horizontal fit only and a fixed per-character width; add vertical fit / real font metrics if a fault slips by."""
     import re
     import xml.etree.ElementTree as ET
     try:
         root = ET.fromstring(svg)
-    except ET.ParseError:
-        return []
-    vb = [float(v) for v in re.split(r"[ ,]+", (root.get("viewBox") or "").strip()) if v] if root.get("viewBox") else []
-    default_fs = float(root.get("font-size") or 14)
+    except ET.ParseError as e:
+        return [("(figure)", f"SVG cannot be parsed ({e})")]
+    tag = lambda el: el.tag.split("}")[-1]
+    parent = {c: p for p in root.iter() for c in p}
+    def num(v, default=None):
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return default
+    def inherited(el, attr):
+        while el is not None:
+            if el.get(attr) is not None:
+                return el.get(attr)
+            el = parent.get(el)
+        return None
+    def offset(el):
+        """Summed translate() of the element and its groups; None under any other transform (not measured)."""
+        dx = dy = 0.0
+        while el is not None:
+            t = el.get("transform")
+            if t:
+                m = re.fullmatch(r"\s*translate\(\s*(-?[\d.]+)(?:[\s,]+(-?[\d.]+))?\s*\)\s*", t)
+                if not m:
+                    return None
+                dx, dy = dx + float(m.group(1)), dy + float(m.group(2) or 0)
+            el = parent.get(el)
+        return dx, dy
+    vb = [num(v) for v in re.split(r"[ ,]+", (root.get("viewBox") or "").strip()) if v]
+    vb = vb if len(vb) == 4 and None not in vb else []
     rects = []
     for el in root.iter():
-        if el.tag.split("}")[-1] == "rect":
-            try:
-                x, y, w, h = (float(el.get(k, 0)) for k in ("x", "y", "width", "height"))
-            except ValueError:
-                continue
-            if "transform" not in el.attrib:
-                rects.append((x, y, w, h))
+        if tag(el) == "rect" and offset(el) is not None:
+            (dx, dy), r = offset(el), tuple(num(el.get(k, 0)) for k in ("x", "y", "width", "height"))
+            if None not in r:
+                rects.append((r[0] + dx, r[1] + dy, r[2], r[3]))
     out = []
     for el in root.iter():
-        if el.tag.split("}")[-1] != "text" or "transform" in el.attrib:
+        if tag(el) != "text" or offset(el) is None or any(tag(c) == "tspan" for c in el):
             continue
         s = "".join(el.itertext()).strip()
-        if not s or el.get("x") is None:
+        x, y, fs = num(el.get("x")), num(el.get("y", 0)), num(inherited(el, "font-size") or 14)
+        if not s or x is None or y is None or fs is None:
             continue
-        fs = float(el.get("font-size") or default_fs)
-        w = len(s) * fs * (0.6 if el.get("font-weight") == "bold" else 0.55)
-        x, y = float(el.get("x")), float(el.get("y", 0))
-        anchor = el.get("text-anchor", "start")
+        x, y = x + offset(el)[0], y + offset(el)[1]
+        bold = (inherited(el, "font-weight") or "") in ("bold", "bolder", "600", "700", "800", "900")
+        w = len(s) * fs * (0.6 if bold else 0.55)
+        anchor = inherited(el, "text-anchor") or "start"
         x0, x1 = (x - w / 2, x + w / 2) if anchor == "middle" else (x - w, x) if anchor == "end" else (x, x + w)
         # cell check only for text centred in its box (table cells, labelled boxes); free labels are held to the viewBox only
         holders = [r for r in rects if anchor == "middle" and r[2] >= 30 and abs(x - (r[0] + r[2] / 2)) < 1 and r[1] <= y <= r[1] + r[3]]
@@ -225,31 +259,8 @@ def svg_text_overflows(svg):
             if x0 < rx - TEXT_OVERFLOW_SLACK or x1 > rx + rw + TEXT_OVERFLOW_SLACK:
                 out.append((s, f"text ~{w:.0f}px wide overflows its {rw:.0f}px cell"))
                 continue
-        if len(vb) == 4 and (x0 < vb[0] - TEXT_OVERFLOW_SLACK or x1 > vb[0] + vb[2] + TEXT_OVERFLOW_SLACK):
+        if vb and (x0 < vb[0] - TEXT_OVERFLOW_SLACK or x1 > vb[0] + vb[2] + TEXT_OVERFLOW_SLACK):
             out.append((s, "text runs past the viewBox"))
     return out
 
 
-def widen_viewbox(svg, margin=6):
-    """Grow an inline SVG's viewBox (sideways only) so no <text> runs past its edge; a figure that already fits is returned unchanged."""
-    import re
-    import xml.etree.ElementTree as ET
-    m = re.search(r'viewBox="([^"]+)"', svg)
-    if not m:
-        return svg
-    x, y, w, h = (float(v) for v in m.group(1).split())
-    lo, hi = x, x + w
-    for el in ET.fromstring(svg).iter():
-        if el.tag.split("}")[-1] != "text" or el.get("x") is None or "transform" in el.attrib:
-            continue
-        s = "".join(el.itertext()).strip()
-        fs = float(el.get("font-size") or 14)
-        tw = len(s) * fs * (0.6 if el.get("font-weight") == "bold" else 0.55)
-        cx, a = float(el.get("x")), el.get("text-anchor", "start")
-        x0, x1 = (cx - tw / 2, cx + tw / 2) if a == "middle" else (cx - tw, cx) if a == "end" else (cx, cx + tw)
-        if x0 < lo - TEXT_OVERFLOW_SLACK: lo = x0 - margin
-        if x1 > hi + TEXT_OVERFLOW_SLACK: hi = x1 + margin
-    if (lo, hi) == (x, x + w):
-        return svg
-    nv = f'viewBox="{lo:g} {y:g} {hi - lo:g} {h:g}"'
-    return svg.replace(m.group(0), nv, 1)
