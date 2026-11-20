@@ -66,6 +66,7 @@ outside the repo.
   a null st; lettered word list means grammar cloze, posters mean visual text; route maps mean 听后选答, single-word
   gaps mean 词语选用).
 - [ ] EN/MA/ZH tagger rules + gold-gated re-tag (queue 10, `vlm/run_tag10.sh` waiting on queue 9; new files `tags72r10.jsonl`, gate lines in `vlm/tag10-done.txt`):
+- [ ] Automatic crop review (owner, 20 Nov 2026: the server model should check pictures, not a person): (a) script fixes in `load_pp.py figures`: grow a crop cut off at an edge to the next blank band, straighten skewed scans; (b) server pass with Qwen2.5-VL-32B per selected item, crop next to its full page: is the figure complete, does it belong to this question, does it carry part of another question; a fail goes to `hold-auto.txt` (read like `hold.txt`). The owner then only spot-checks a sample per sub-topic. Run (b) after queue 10.
 - [ ] Decide before importing English past papers: the tagger files "closest in meaning to the underlined word" under Vocabulary Cloze (as the papers label it), but the site keeps those single-sentence items in Vocabulary MCQ and Vocabulary Cloze takes passage sets only. Pick one home (recommended: Vocabulary MCQ, matching the site).
 - [ ] Then a server re-tag run:
   - Maths: 175 null-st items plus the confused sub-topics;
