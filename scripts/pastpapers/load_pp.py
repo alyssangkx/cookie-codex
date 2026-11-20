@@ -15,7 +15,11 @@
   load_pp.py review  [--subject science] [--out DIR] --subtopics a,b
       Writes OUT/<subject>/review-<first sub-topic>.html (private, local only): every selected item of those
       sub-topics with its pictures, options and key, for the visual review before a switch. Put the pp id of any item
-      that fails on its own line in OUT/<subject>/hold.txt; `select` and `upload` then leave it out.
+      that fails on its own line in OUT/<subject>/hold.txt (or let the server crop review write hold-auto.txt); `select` and
+      `upload` then leave it out.
+  load_pp.py cropcheck-apply RESULTS [--subject science] [--out DIR]
+      Writes OUT/<subject>/hold-auto.txt (id + short reason as a comment) from the server crop review's results.jsonl
+      (scripts/pastpapers/cropcheck.py). `select` and `upload` read it like hold.txt.
   load_pp.py upload  [--subject science] [--out DIR] [--subtopics a,b] [--apply]
       Upserts rows into public.pp_items and uploads the WebP files to the private bucket pp-figures. Without
       --apply it only prints what it would do. Needs SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in the environment;
@@ -161,9 +165,36 @@ def crop_ok(path: Path) -> bool:
         return False
 
 
+def parse_hold(text: str) -> set:
+    return {l.split("#")[0].strip() for l in text.splitlines() if l.split("#")[0].strip()}
+
+
 def read_hold(out: Path) -> set:
-    p = out / "hold.txt"
-    return {l.split("#")[0].strip() for l in open(p) if l.split("#")[0].strip()} if p.exists() else set()
+    """hold.txt (visual review) plus hold-auto.txt (cropcheck-apply, the server model's crop review)."""
+    return set().union(*(parse_hold(open(out / n).read()) for n in ("hold.txt", "hold-auto.txt") if (out / n).exists()))
+
+
+def hold_auto_text(rows) -> str:
+    """hold-auto.txt from cropcheck results rows {id, ok, figs:[{n, complete, ..., reason}]}: one line per failed item."""
+    lines = ["# written by `load_pp.py cropcheck-apply` from the server crop review; read like hold.txt. Do not edit: re-apply overwrites."]
+    for r in rows:
+        if r.get("ok"):
+            continue
+        why = next((f.get("reason", "") for f in r.get("figs", []) if not (f.get("complete") is True and f.get("belongs_to_question") is True and f.get("contains_other_question") is False)), "")
+        flags = [k for k in ("complete", "belongs_to_question") if any(f.get(k) is False for f in r.get("figs", []))]
+        flags += ["contains_other_question"] if any(f.get("contains_other_question") is True for f in r.get("figs", [])) else []
+        lines.append(f"{r['id']}  # {','.join(flags) or 'failed'}: {' '.join(why.split())[:100]}")
+    return "\n".join(lines) + "\n"
+
+
+def cropcheck_apply(a):
+    out = outside_repo(Path(a.out)) / a.subject
+    rows = jl(a.arg)
+    if not rows:
+        sys.exit("no results rows in " + str(a.arg))
+    (out / "hold-auto.txt").write_text(hold_auto_text(rows))
+    bad = sum(not r.get("ok") for r in rows)
+    print(f"{len(rows)} items checked, {bad} failed -> {out / 'hold-auto.txt'}")
 
 
 # ------------------------------------------------------------------ select
@@ -588,6 +619,15 @@ def selftest():
         cp.write_text('{"s1|b": 9, "s3|b": 4}')
         got = write_counts(trs, {"s1", "s2"}, cp)
         assert got == {"s1|b": 2, "s1|c": 1, "s2|i": 1, "s3|b": 4} and json.load(open(cp)) == got
+    assert parse_hold("pp-a  # note\n# c\n\npp-b\n") == {"pp-a", "pp-b"}
+    ht = hold_auto_text([{"id": "pp-x", "ok": False, "figs": [{"n": 1, "complete": False, "belongs_to_question": True,
+                          "contains_other_question": True, "reason": "cut\noff"}]},
+                         {"id": "pp-y", "ok": True, "figs": []}])
+    assert "pp-x  # complete,contains_other_question: cut off" in ht and "pp-y" not in ht and parse_hold(ht) == {"pp-x"}
+    with tempfile.TemporaryDirectory(dir=tmpd) as td:
+        (Path(td) / "hold.txt").write_text("pp-h # a\n")
+        (Path(td) / "hold-auto.txt").write_text(ht)
+        assert read_hold(Path(td)) == {"pp-h", "pp-x"}
     print("selftest ok")
 
 
@@ -734,7 +774,8 @@ def upload(a):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "counts", "selftest"))
+    p.add_argument("cmd", choices=("select", "figures", "review", "upload", "counts", "cropcheck-apply", "selftest"))
+    p.add_argument("arg", nargs="?", help="cropcheck-apply: the results.jsonl")
     p.add_argument("--subject", default="science")
     p.add_argument("--years", default="2018-2026")
     p.add_argument("--pp", default=str(DEF_PP))
@@ -747,7 +788,7 @@ def main():
     p.add_argument("--apply", action="store_true")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
-    {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "selftest": lambda _a: selftest()}[a.cmd](a)
+    {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "selftest": lambda _a: selftest()}[a.cmd](a)
 
 
 if __name__ == "__main__":
