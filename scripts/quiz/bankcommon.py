@@ -110,8 +110,9 @@ def figure_text(fig):
     if isinstance(fig, str):
         try:
             root = ET.fromstring(fig)
-            return " ".join(t for el in root.iter() if el.tag.split("}")[-1] in ("text", "tspan", "title", "desc")
-                            for t in [el.text or ""] if t.strip())
+            # itertext() of each <text>/<title>/<desc> includes nested <tspan> text AND the tails after them
+            return " ".join(t for el in root.iter() if el.tag.split("}")[-1] in ("text", "title", "desc")
+                            for t in ["".join(el.itertext())] if t.strip())
         except ET.ParseError:
             return " ".join(re.findall(r">([^<>]+)<", fig))
     return ""
