@@ -161,7 +161,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
         if (sub) root.querySelector<HTMLDetailsElement>(`.th-topic[data-topic="${sub.topic}"]`)!.open = true;
       }
     };
-    const run = (due: number, qs?: Record<string, string>) => render(suggestions(s, subs, { now, dueCount: due, questionSub: qs }));
+    const run = (due: number, qs?: Record<string, string>, sv = s) => render(suggestions(sv, subs, { now, dueCount: due, questionSub: qs }));
 
     // includes states an older tab or build parked (reviewDueCount), so the banks below get the chance to unpark them
     const anyDue = reviewDueCount(s, now, root.dataset.banks) > 0;
@@ -175,8 +175,8 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
           for (const b of banks as { id: string; sub: string }[][]) for (const q of b) qs[q.id] = q.sub;
           // unpark only (never park: this page loads one school's banks); nothing is deleted (ADR 0002). Against the save as
           // stored now, never `s` from before the fetch: another tab may have bought or earned meanwhile
-          syncParkedStored(Object.keys(qs), false);
-          run(dueCount(s, now, qs), qs);
+          const cur = syncParkedStored(Object.keys(qs), false);
+          run(dueCount(cur, now, qs), qs, cur);
         })
         .catch(() => run(dueCount(s, now)));
     }

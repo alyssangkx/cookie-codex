@@ -5,12 +5,16 @@ differs from the text below, this list wins:
 - The ledger is an optional save field with no schema bump (ADR 0002), not a migration.
 - **WA/SA paper Crumbs scale with length:** the band's Crumbs x (questions / 10), at most x3 (10 questions x1, 20 x2,
   30 or more x3), rounded, at least 1. A short paper never pays more per question than a tier quiz.
-- **Legendary, paper route:** a paper of 20+ questions from 3+ topics at AL1-AL2 (85%+), at most one per calendar week;
-  later qualifying papers that week earn their Crumbs only.
-- **Legendary, subject route (built):** once per subject, when every competency topic of the subject (below) has all its
-  playable Competent tiers cleared; a subject counts once it has 2 or more competency topics.
-- **Super Epic:** once per competency topic: a Math or Science topic, or an English or Chinese booklet (their topics are
-  single paper sections), counting only sub-topics with a playable Competent tier, and only groups with 2 or more.
+- **Legendary, paper route:** a paper of 20+ questions at AL1-AL2 (85%+) whose questions come from 3 or more different
+  topics (the topics of the questions actually in the paper, not the topics picked), at most one per calendar week; later
+  qualifying papers that week earn their Crumbs only.
+- **Legendary, subject route:** once per subject, and only when EVERY sub-topic of that subject in the syllabus has a
+  playable Competent tier (so a partly built subject, like Science today, cannot earn it) and the subject has 2 or more
+  competency groups; then all those Competent tiers must be cleared.
+- **Super Epic:** once per competency group, when all its members are cleared at Competent. A group is a Math or Science
+  topic, or a paper booklet for English (Paper 2 Booklet A, Booklet B) and Chinese (Paper 2 Booklet A: 语文应用, 短文填空,
+  阅读理解一; Booklet B: 完成对话, 阅读理解二; Paper 3: 听力). Its members are the sub-topics with a playable Competent
+  tier, and a group counts only with 2 or more.
 Code: `site/src/lib/crumbs.ts` (`quizCrumbs`, `competencyGroups`), `store.ts` (`finishQuiz`, `purchase`), `/shop/`.
 
 Status: proposal for the owner (20 Nov 2026). It amends [game-design.md](game-design.md), whose rules still apply: no

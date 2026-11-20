@@ -194,15 +194,21 @@ test('Super Epic: once per topic, when every sub-topic in it has its Competent t
   assert.equal(fin().achieved[0].reward.slug, 'se2'); // the next one in the fixed order
 });
 
-test('Legendary from a paper: 20+ questions, 3+ topics, AL1-AL2, at most one per calendar week', () => {
+test('Legendary from a paper: 20+ questions from 3+ topics (of the questions asked), AL1-AL2, at most one per calendar week', () => {
   const s = fresh();
-  const paper = (score: number, now: number, topics = ['m1', 'm2', 'm3'], total = 20) => finishQuiz(s, { mode: 'paper', topics, score, total, ms: 60_000, tags: [] },
-    () => undefined, now, {}, undefined, { eco, test: false });
+  // `topics`: the topic of each question actually in the paper (what the quiz page passes), not the topics picked
+  const paper = (score: number, now: number, topics = ['m1', 'm2', 'm3'], total = 20) => finishQuiz(s, { mode: 'paper', topics: ['m1', 'm2', 'm3'], score, total, ms: 60_000, tags: [] },
+    () => undefined, now, {}, undefined, { eco, test: false, paperTopics: topics });
   assert.equal(LEGENDARY_MIN_QUESTIONS, 20);
   assert.deepEqual(paper(16, t0).achieved, []); // 80%: AL3
   assert.deepEqual(paper(10, t0, ['m1', 'm2', 'm3'], 10).achieved, []); // perfect, but a short paper
   assert.deepEqual(paper(20, t0, ['m1', 'm2']).achieved, []); // only 2 topics
   assert.deepEqual(paper(20, t0, ['m1', 'm1', 'm2']).achieved, []); // topics are counted once each
+  // three topics picked, but the questions drawn came from two of them
+  assert.deepEqual(finishQuiz(s, { mode: 'paper', topics: ['m1', 'm2', 'm3'], score: 20, total: 20, ms: 1, tags: [] },
+    () => undefined, t0, {}, undefined, { eco, test: false, paperTopics: Array(20).fill('m1').fill('m2', 10) }).achieved, []);
+  assert.deepEqual(finishQuiz(s, { mode: 'paper', topics: ['m1', 'm2', 'm3'], score: 20, total: 20, ms: 1, tags: [] },
+    () => undefined, t0, {}, undefined, { eco, test: false }).achieved, []); // unknown question topics: no Legendary
   assert.deepEqual(paper(17, t0).achieved, [{ kind: 'legendary', reward: { slug: 'l1', dup: false, stars: 1 } }]); // Monday
   assert.equal(s.cards.l1.srcSub, 'paper');
   const again = paper(20, t0 + 3 * DAY); // Thursday, same week: the paper's Crumbs only
@@ -227,22 +233,23 @@ test('Legendary from a subject: once, when every competency topic of the subject
   assert.equal(s.cards.l1.srcSub, 'subject:math');
   assert.deepEqual(fin(t0 + 1).achieved, []); // once per subject
   // the subject route does not use up the week's paper Legendary
-  const p = finishQuiz(s, { mode: 'paper', topics: ['x', 'y', 'z'], score: 20, total: 20, ms: 1, tags: [] }, () => undefined, t0 + 2, {}, undefined, { eco: subjEco, test: false });
+  const p = finishQuiz(s, { mode: 'paper', topics: ['x', 'y', 'z'], score: 20, total: 20, ms: 1, tags: [] }, () => undefined, t0 + 2, {}, undefined, { eco: subjEco, test: false, paperTopics: ['x', 'y', 'z'] });
   assert.equal(p.achieved![0].reward.slug, 'l2');
 });
 
-test('competency groups: topics (Math, Science) or booklets (English, Chinese) with 2+ playable Competent tiers', () => {
-  const sub = (id: string, school: string, topic: string, strand: string, c = true) => ({ id, school, topic, strand, playableC: c });
+test('competency groups: 2+ sub-topics with a playable Competent tier per group; a subject only when all its sub-topics are playable', () => {
+  // group: the topic (Math, Science) or the paper booklet (English, Chinese), worked out by the caller (train.ts)
+  const sub = (id: string, school: string, group: string, c = true) => ({ id, school, group, playableC: c });
   const g = competencyGroups([
-    sub('m1', 'math', 'fr', 'num'), sub('m2', 'math', 'fr', 'num'), sub('m3', 'math', 'fr', 'num', false),
-    sub('m4', 'math', 'ratio', 'num'), // one playable sub-topic: not a group
-    sub('e1', 'english', 'e-sec1', 'p2a'), sub('e2', 'english', 'e-sec2', 'p2a'), sub('e3', 'english', 'e-sec3', 'p2b'),
-    sub('c1', 'chinese', 'c-t1', 'zi'), sub('c2', 'chinese', 'c-t2', 'zi', false),
+    sub('m1', 'math', 'fr'), sub('m2', 'math', 'fr'), sub('m3', 'math', 'fr', false),
+    sub('m4', 'math', 'ratio'), // one playable sub-topic: not a group
+    sub('e1', 'english', 'p2a'), sub('e2', 'english', 'p2a'), sub('e3', 'english', 'p2b'),
   ]);
   assert.deepEqual(g.topics, { fr: ['m1', 'm2'], p2a: ['e1', 'e2'] });
-  assert.deepEqual(g.subjects, {}); // a subject needs 2+ groups (Math and English have one each here)
-  const two = competencyGroups([sub('m1', 'math', 'a', 's'), sub('m2', 'math', 'a', 's'), sub('m3', 'math', 'b', 's'), sub('m4', 'math', 'b', 's')]);
-  assert.deepEqual(two.subjects, { math: ['m1', 'm2', 'm3', 'm4'] });
+  assert.deepEqual(g.subjects, {}); // Math has an unplayable sub-topic; English has only one group
+  const full = competencyGroups([sub('m1', 'math', 'a'), sub('m2', 'math', 'a'), sub('m3', 'math', 'b'), sub('m4', 'math', 'b'),
+    sub('s1', 'science', 'a2'), sub('s2', 'science', 'a2'), sub('s3', 'science', 'b2'), sub('s4', 'science', 'b2'), sub('s5', 'science', 'c2', false)]);
+  assert.deepEqual(full.subjects, { math: ['m1', 'm2', 'm3', 'm4'] }); // Science: one sub-topic not playable yet
 });
 
 test('parking re-reads the stored save after the banks load, so a purchase in another tab is not overwritten', () => {

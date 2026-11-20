@@ -81,12 +81,28 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
 );
 export const subsOf = (school: School) => subs.filter((s) => s.school === school);
 
-// English sub-topics are the PSLE Paper 2 sections (one topic each, in paper order); its school page groups them by
-// booklet (the syllabus strand) and calls them sections.
-const booklet = new Map(englishSyllabus.strands.flatMap((st) =>
-  st.topics.flatMap((t) => t.subtopics.map((sb) => [sb.id, { topic: st.id, topicName: st.name }] as const))));
+// The PSLE paper booklet of each English and Chinese sub-topic (their syllabus topics are single paper sections).
+// English: the syllabus strands are the Paper 2 booklets. Chinese: the strands are skill strands, so the booklet comes from
+// this table of syllabus topics (Paper 2 Booklet A: 语文应用, 短文填空, 阅读理解一; Booklet B: 完成对话, 阅读理解二;
+// Paper 3: 听力). A Chinese topic missing here fails the build. Used by listGroup (English school page) and the
+// competency groups (crumbs.ts competencyGroups).
+const CHI_BOOKLET: Record<string, { topic: string; topicName: string }> = (() => {
+  const a = { topic: 'chi-p2a', topicName: 'Paper 2 Booklet A (语文应用, 短文填空, 阅读理解一)' };
+  const b = { topic: 'chi-p2b', topicName: 'Paper 2 Booklet B (完成对话, 阅读理解二)' };
+  const l = { topic: 'chi-p3', topicName: 'Paper 3 (听力 listening)' };
+  return { 'chi-pinyin': a, 'chi-zixing': a, 'chi-ciyu': a, 'chi-juzi-yunyong': a, 'chi-cloze': a, 'chi-yuedu-mcq': a,
+    'chi-dialogue': b, 'chi-yuedu-open': b, 'chi-tingli-types': l };
+})();
+const booklet = new Map([
+  ...englishSyllabus.strands.flatMap((st) =>
+    st.topics.flatMap((t) => t.subtopics.map((sb) => [sb.id, { topic: st.id, topicName: st.name }] as const))),
+  ...chineseSyllabus.strands.flatMap((st) => st.topics.flatMap((t) => {
+    if (!CHI_BOOKLET[t.id]) throw new Error(`train.ts: Chinese topic ${t.id} has no paper booklet in CHI_BOOKLET`);
+    return t.subtopics.map((sb) => [sb.id, CHI_BOOKLET[t.id]] as const);
+  })),
+]);
 /** The group a sub-topic is listed under on its school page: the English booklet, else its own topic. */
-export const listGroup = (s: Sub) => booklet.get(s.id) ?? { topic: s.topic, topicName: s.topicName };
+export const listGroup = (s: Sub) => (s.school === 'english' ? booklet.get(s.id) : undefined) ?? { topic: s.topic, topicName: s.topicName };
 export { unitName }; // lives in suggest.ts so client scripts can use it without the banks
 /** Sub-topics whose questions are blanks in one passage (`cloze: true` in the syllabus JSON): the quiz page fills
  *  the blanks in as they are answered. */
@@ -111,28 +127,24 @@ export const cardInfo = Object.fromEntries(cookies.map((c) => [c.slug, { name: c
 export const milestones = rewards.milestones as Record<string, string[]>;
 /** Replacement and shop order per rarity (build_rewards.py `rarityOrder`): every non-milestone card once. */
 export const rarityOrder = rewards.rarityOrder as Record<string, string[]>;
-// sub-topic id -> syllabus strand (an English or Chinese booklet); competency groups use it for those two subjects
-const strandOf = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
-  syl.strands.flatMap((st) => st.topics.flatMap((t) => t.subtopics.map((sb) => [sb.id, st.id] as [string, string])))));
-const strandName = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
-  syl.strands.map((st) => [st.id, st.name] as [string, string])));
-/** Competency groups (crumbs.ts competencyGroups): topics a Super Epic can be earned for (Math, Science topics; English,
- * Chinese booklets; only sub-topics with a playable Competent tier, 2 or more per group), and subjects for the subject
- * Legendary (2 or more groups). */
+const topicName = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
+  syl.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string]))));
+for (const b of booklet.values()) topicName.set(b.topic, b.topicName); // booklet groups are named as the child sees them
+/** Competency groups (crumbs.ts competencyGroups): groups a Super Epic can be earned for (Math, Science topics; English,
+ * Chinese paper booklets; only sub-topics with a playable Competent tier, 2 or more per group), and subjects for the
+ * subject Legendary (every sub-topic of the subject playable at Competent, 2 or more groups). */
 export const { topics: competencyTopics, subjects: competencySubjects } = competencyGroups(
-  subs.map((s) => ({ id: s.id, school: s.school, topic: s.topic, strand: strandOf.get(s.id) ?? s.topic, playableC: s.playable.c })));
+  subs.map((s) => ({ id: s.id, school: s.school, group: booklet.get(s.id)?.topic ?? s.topic, playableC: s.playable.c })));
 /** Everything the client economy needs (crumbs.ts Economy plus card names), served at /data/economy.json. */
 export const economyData = () => ({
   order: rarityOrder,
   topics: competencyTopics,
   subjects: competencySubjects,
-  topicNames: Object.fromEntries(Object.keys(competencyTopics).map((t) => [t, strandName.get(t) ?? subs.find((s) => s.topic === t)?.topicName ?? t])),
+  topicNames: Object.fromEntries(Object.keys(competencyTopics).map((t) => [t, topicName.get(t) ?? t])),
   cards: Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }])),
   milestones,
 });
 
-const topicName = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
-  syl.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string]))));
 const PREFIX_SCHOOL: Record<string, School> = { math: 'math', sci: 'science', eng: 'english', chi: 'chinese' };
 /** Subjects the WA/SA builder offers. Chinese stays out for now (its banks are mostly passage and 8-option sets). */
 export const PAPER_SCHOOLS: School[] = ['math', 'english', 'science'];

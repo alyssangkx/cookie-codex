@@ -165,34 +165,38 @@ export const LEGENDARY_MAX_BAND = 2;
 export const MIN_GROUP_SUBS = 2; // a competency topic needs this many sub-topics with a playable Competent tier
 
 /**
- * Competency groups for the achievement cards. A group is a Math or Science topic, or an English or Chinese booklet
- * (syllabus strand: their topics are single paper sections). Its members are the sub-topics with a playable Competent
- * tier; a group counts only with MIN_GROUP_SUBS or more (one clear must not earn a Super Epic). A subject counts for the
- * subject Legendary once it has 2 or more groups; its members are all their sub-topics.
+ * Competency groups for the achievement cards. `group` is worked out by the caller (train.ts): the topic for Math and
+ * Science, the PSLE paper booklet for English and Chinese (their syllabus topics are single paper sections). A group's
+ * members are its sub-topics with a playable Competent tier, and a group counts only with MIN_GROUP_SUBS or more (one
+ * clear must never earn a Super Epic). A subject counts for the subject Legendary only when EVERY one of its sub-topics
+ * has a playable Competent tier (a partly built subject cannot earn it) and it has 2 or more groups; its members are
+ * all its sub-topics.
  */
-export function competencyGroups(subs: { id: string; school: string; topic: string; strand: string; playableC: boolean }[]) {
+export function competencyGroups(subs: { id: string; school: string; group: string; playableC: boolean }[]) {
   const by = new Map<string, { school: string; ids: string[] }>();
   for (const s of subs) {
     if (!s.playableC) continue;
-    const key = s.school === 'english' || s.school === 'chinese' ? s.strand : s.topic;
-    if (!by.has(key)) by.set(key, { school: s.school, ids: [] });
-    by.get(key)!.ids.push(s.id);
+    if (!by.has(s.group)) by.set(s.group, { school: s.school, ids: [] });
+    by.get(s.group)!.ids.push(s.id);
   }
   const topics: Record<string, string[]> = {};
-  const perSchool = new Map<string, string[][]>();
+  const groupsPer = new Map<string, number>();
   for (const [key, g] of by) {
     if (g.ids.length < MIN_GROUP_SUBS) continue;
     topics[key] = g.ids;
-    perSchool.set(g.school, [...(perSchool.get(g.school) ?? []), g.ids]);
+    groupsPer.set(g.school, (groupsPer.get(g.school) ?? 0) + 1);
   }
   const subjects: Record<string, string[]> = {};
-  for (const [school, groups] of perSchool) if (groups.length >= 2) subjects[school] = groups.flat();
+  for (const school of new Set(subs.map((s) => s.school))) {
+    const all = subs.filter((s) => s.school === school);
+    if (all.every((s) => s.playableC) && (groupsPer.get(school) ?? 0) >= 2) subjects[school] = all.map((s) => s.id);
+  }
   return { topics, subjects };
 }
 /** How the cards that cannot be bought are earned (shown in the shop and My House). */
 export const EARN_RULE: Record<string, string> = {
-  'super-epic': 'Clear the Competent tier of every sub-topic in a topic (English and Chinese: a booklet), one card per topic',
-  legendary: `Score 85% or more (AL1 or AL2) on a WA/SA paper of ${LEGENDARY_MIN_QUESTIONS}+ questions from ${LEGENDARY_MIN_TOPICS}+ topics (one a week), or clear every topic of a subject at Competent`,
+  'super-epic': `Clear the Competent tier of every sub-topic in a topic that has Competent questions ready, one card per topic. A topic counts once at least ${MIN_GROUP_SUBS} of its sub-topics have Competent questions ready; for English and Chinese a topic is a paper booklet`,
+  legendary: `Score 85% or more (AL1 or AL2) on a WA/SA paper of ${LEGENDARY_MIN_QUESTIONS}+ questions drawn from ${LEGENDARY_MIN_TOPICS}+ topics (one a week), or clear the Competent tier of every sub-topic in a subject (only once every sub-topic of that subject has Competent questions ready)`,
   ancient: 'Get your legendary cards to 2 stars or more, then pass the Ancient Trial (coming later)',
   dragon: 'Reach 30 / 100 study days',
   beast: 'Beat a school monster (coming later)',

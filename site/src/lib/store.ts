@@ -571,7 +571,7 @@ export function finishQuiz(
       earn(s, WEEK_CRUMBS, 'week', now, { test });
     }
   }
-  const achieved = opts.eco ? achievements(s, a, opts.eco, now, test) : [];
+  const achieved = opts.eco ? achievements(s, a, opts.eco, now, test, opts.paperTopics) : [];
   return { passed, cleared, reward, crumbs: (s.crumbs?.earned ?? 0) - earned0, goalJustMet, autoPromoted, newlyCleared, achieved };
 }
 
@@ -579,11 +579,12 @@ export function finishQuiz(
  * Achievement-only cards (owner's answer 5a), checked at the end of every finished quiz, so a topic completed earlier is
  * picked up by the next quiz. Super Epic: once per competency topic in eco.topics, when all its sub-topics have the
  * Competent tier cleared. Legendary: once per subject in eco.subjects the same way, or a WA/SA paper of
- * LEGENDARY_MIN_QUESTIONS+ questions from LEGENDARY_MIN_TOPICS+ topics at AL1-AL2, at most one paper Legendary per
+ * LEGENDARY_MIN_QUESTIONS+ questions whose questions come from LEGENDARY_MIN_TOPICS+ topics (opts.paperTopics) at
+ * AL1-AL2, at most one paper Legendary per
  * calendar week (later papers that week earn their Crumbs only). Each gives crumbs.ts achievementPreview(): the next
  * unowned card of the rarity, else a star and a Crumbs bonus.
  */
-function achievements(s: SaveV1, a: Omit<Attempt, 'ts'>, eco: Economy, now: number, test: boolean): NonNullable<QuizResult['achieved']> {
+function achievements(s: SaveV1, a: Omit<Attempt, 'ts'>, eco: Economy, now: number, test: boolean, paperTopics: string[] = []): NonNullable<QuizResult['achieved']> {
   const out: NonNullable<QuizResult['achieved']> = [];
   for (const [topic, list] of Object.entries(eco.topics ?? {})) {
     if (!list.length || s.crumbs?.topics?.includes(topic) || !list.every((sub) => tierState(s, sub, 'c').cleared)) continue;
@@ -600,7 +601,7 @@ function achievements(s: SaveV1, a: Omit<Attempt, 'ts'>, eco: Economy, now: numb
     out.push({ kind: 'legendary', subject, reward });
   }
   const week = weekId(dayKey(now));
-  if (a.mode === 'paper' && a.total >= LEGENDARY_MIN_QUESTIONS && new Set(a.topics ?? []).size >= LEGENDARY_MIN_TOPICS
+  if (a.mode === 'paper' && a.total >= LEGENDARY_MIN_QUESTIONS && new Set(paperTopics).size >= LEGENDARY_MIN_TOPICS
     && alBand(a.score, a.total) <= LEGENDARY_MAX_BAND && s.crumbs?.legWeek !== week) {
     const reward = giveAchievement(s, achievementPreview(s, 'legendary', eco), 'paper', Math.round((100 * a.score) / a.total), now, test);
     if (reward) { crumbsOf(s).legWeek = week; out.push({ kind: 'legendary', reward }); }
@@ -651,8 +652,9 @@ export function syncTiers(
 type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | undefined;
 /** eco: build-time card data (crumbs.ts Economy); without it a tier clear gives only its slot card or a star, as before
  * the economy. retests: retest steps passed in this quiz (answer() returned true). test: the unlimited test account
- * (defaults to isUnlimited()); its Crumbs are flagged. */
-export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean };
+ * (defaults to isUnlimited()); its Crumbs are flagged. paperTopics: a paper's question topics, one per question asked
+ * (the Legendary counts distinct ones; the topics the child picked may not all have been drawn). */
+export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean; paperTopics?: string[] };
 export const RETEST_CRUMBS = 1, GOAL_CRUMBS = 3, WEEK_CRUMBS = 10;
 
 /**

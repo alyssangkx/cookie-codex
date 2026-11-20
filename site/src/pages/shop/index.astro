@@ -73,7 +73,7 @@ const EARN_TABLE = [['90% or more (AL1)', '8, plus 4 for a perfect score'], ['85
           <p class="next" hidden><span class="next-label"></span> <a class="next-card" href="#"></a></p>
         )}
         {g.rarity === 'super-epic' && <p class="topics"></p>}
-        {g.rarity === 'legendary' && <p class="hint">Build one on the <a href="/paper/">WA/SA paper</a> page ({LEGENDARY_MIN_QUESTIONS} questions or more, {LEGENDARY_MIN_TOPICS} topics or more). One paper Legendary a week.</p>}
+        {g.rarity === 'legendary' && <p class="hint">Build one on the <a href="/paper/">WA/SA paper</a> page ({LEGENDARY_MIN_QUESTIONS} questions or more, with questions from {LEGENDARY_MIN_TOPICS} topics or more). One paper Legendary a week.</p>}
         {g.rarity === 'legendary' && <p class="subjects"></p>}
       </section>
     ))}
@@ -151,7 +151,7 @@ const EARN_TABLE = [['90% or more (AL1)', '8, plus 4 for a perfect score'], ['85
       if (subjects) {
         const ids = Object.keys(d.subjects);
         const NAME: Record<string, string> = { math: 'Math', science: 'Science', english: 'English', chinese: 'Chinese' };
-        subjects.textContent = !ids.length ? 'No subject has enough Competent tiers ready yet for the subject route.'
+        subjects.textContent = !ids.length ? 'Subject route: not open yet. It opens for a subject once every one of its sub-topics has Competent questions ready.'
           : `Subject route: ${ids.map((x) => `${NAME[x] ?? x} ${d.subjects[x].filter((sub) => tierState(s, sub, 'c').cleared).length} of ${d.subjects[x].length} Competent tiers`).join(', ')}.`;
       }
       const topics = shelf.querySelector<HTMLElement>('.topics');
@@ -161,7 +161,7 @@ const EARN_TABLE = [['90% or more (AL1)', '8, plus 4 for a perfect score'], ['85
         const close = ids.filter((t) => !s.crumbs?.topics?.includes(t))
           .map((t) => ({ t, left: d.topics[t].filter((sub) => !tierState(s, sub, 'c').cleared).length }))
           .sort((a, b) => a.left - b.left)[0];
-        topics.textContent = !ids.length ? 'No topic has all its Competent tiers ready yet.'
+        topics.textContent = !ids.length ? 'No topic has 2 or more sub-topics with Competent questions ready yet.'
           : `${done} of ${ids.length} topics mastered.` + (close ? ` Closest: ${d.topicNames[close.t] ?? close.t} (${close.left} Competent tier${close.left === 1 ? '' : 's'} to clear).` : '');
       }
     });

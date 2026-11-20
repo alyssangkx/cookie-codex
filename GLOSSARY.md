@@ -175,7 +175,7 @@ The class of a card: common (7), rare (14), special (11), epic (116), super epic
 A card earned by behaviour, not by clearing a tier: Ancient, Dragon, Beast, Witch (14 cards). Specified in `docs/game-design.md` section 4; deferred. Never for sale.
 
 **Achievement card**:
-A Super Epic for each competency topic (a Math or Science topic, or an English or Chinese booklet; only sub-topics with a playable Competent tier, 2 or more) once all are cleared at Competent. A Legendary once per subject whose competency topics are all cleared, or for a WA/SA paper of 20+ questions from 3+ topics at AL1-AL2 (85%+), at most one paper Legendary a week. Gives the next unowned card of that rarity, else a star and 60 Crumbs. Not for sale.
+A Super Epic for each competency group (a Math or Science topic, or an English or Chinese paper booklet; members are the sub-topics with a playable Competent tier, 2 or more) once all are cleared at Competent. A Legendary once per subject when every sub-topic of the subject is playable at Competent and cleared, or for a WA/SA paper of 20+ questions drawn from 3+ topics at AL1-AL2 (85%+), at most one paper Legendary a week. Gives the next unowned card of that rarity, else a star and 60 Crumbs. Not for sale.
 Owner: `store.ts` (`achievements`), `crumbs.ts` (`achievementPreview`).
 _Avoid_: tier reward
 

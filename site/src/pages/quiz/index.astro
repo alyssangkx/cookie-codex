@@ -728,7 +728,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     paperUsed = timeUsed(pclock, startedAt, now);
     const res = finishQuiz(s, {
       mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, now, {}, startedAt, { eco, retests }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
+    }, rewardFor, now, {}, startedAt, { eco, retests, paperTopics: quiz.map((id) => byId.get(id)!.topic ?? '').filter(Boolean) }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
     closeStalePapers(s, now);
     save(s);
     const b = blanks(picks);
