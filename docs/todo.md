@@ -78,6 +78,11 @@ outside the repo.
 
 ## Question banks (content)
 
+- [ ] **Owner, 20 Nov 2026, later: Science uses the real past-paper questions with their original pictures. Do not create code-drawn graphics** (the generated plant graphic was poor). The code-drawn Science fill is stopped after its fix step.
+  - Next: the private import of Science past-paper MCQs with compressed crops (`prompt-pp-mcq-import.md`: a Supabase table plus a private Storage bucket with signed URLs; nothing in the public repo).
+  - Only blind-checked items go in: 2025–2026 now; 2018–2024 need a blind check on the server first.
+  - Stop before any SQL or deploy for the owner's OK.
+  - Decide what happens to the generated Science items with code-drawn figures in the meantime.
 - [ ] **Populate the site's Science questions (owner, 20 Nov 2026).** This is the main Science task.
   - **Do it only after the repo is robust** and three things are clearly understood from the tagged papers:
     - how often each question type appears;
