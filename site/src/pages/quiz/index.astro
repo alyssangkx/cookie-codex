@@ -98,6 +98,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
+  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, ppFigureHtml, optionLabel, type PpFig } from '../../lib/pastpaper';
   import { esc, boldAns } from '../../lib/boldans';
   import { toEconomy, balanceOf } from '../../lib/crumbs';
   import { lineForLast, bilingual } from '../../lib/encourage';
@@ -107,7 +108,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   } from '../../lib/paper';
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
-    explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false };
+    explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false;
+    numbered?: true; ppFigs?: PpFig[] }; // past-paper items only (pastpaper.ts; off while PP_ENABLED is false)
   type Meta = {
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
     files: string[]; banks: string; slots: Record<string, { slug: string; dup: boolean }>;
@@ -216,7 +218,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const stemHtml = (q: Q, reveal = false) => {
     const many = q.sub === 'chi-dialogue-mcq';
     const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal) : fmt(q.stem);
-    return t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '');
+    return t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '')
+      + (q.ppFigs?.length ? `<span class="qfig-wrap">${ppFigureHtml(q.ppFigs)}</span>` : '');
   };
 
   let byId = new Map<string, Q>();
@@ -245,6 +248,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   async function loadBanks(files: string[]): Promise<Q[]> {
     let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
+    // past-paper items (ADR 0004): fetched from Supabase for a signed-in player, never from /data/quiz; OFF for now
+    if (PP_ENABLED) {
+      const subs = ppSubsFor(mode, subId, all.map((q) => q.sub));
+      if (subs.length) {
+        const { fetchPp } = await import('../../lib/ppfetch');
+        all = mergePool(all, (await fetchPp(subs, (x) => meta.subs[x]?.file)) as Q[], poolModeFor(mode));
+      }
+    }
     // papers use 4-option items outside passage sets only (no 8-option dialogue item, no split passage)
     if (mode === 'paper') all = all.filter(paperOk);
     byId = new Map(all.map((q) => [q.id, q]));
@@ -544,7 +555,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('stem').innerHTML = stemHtml(q);
     $('options').classList.remove('many');
     $('options').innerHTML = q.options.map((o, k) => `<button type="button" class="opt${picks[i] === k ? ' sel' : ''}" data-k="${k}" aria-pressed="${picks[i] === k}">`
-      + `<span class="letter">${LETTERS[k]}</span> <span>${fmt(o)}</span></button>`).join('');
+      + `<span class="letter">${optionLabel(q, k)}</span> <span>${fmt(o)}</span></button>`).join('');
     $<HTMLButtonElement>('p-prev').disabled = i === 0;
     $<HTMLButtonElement>('p-next').disabled = i + 1 >= quiz.length;
     $('p-submit').classList.toggle('primary', i + 1 >= quiz.length);
@@ -580,7 +591,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   /** "Why B is tempting" for a wrong pick; nothing for a blank (k < 0 or null) or a pick without a note. */
   const temptingHtml = (q: Q, k: number | null) => {
     const why = k != null && k >= 0 ? q.explain[k] : null;
-    return why ? `<p class="mistake"><strong>Why ${LETTERS[k!]} is tempting:</strong> ${fmt(why.why, q.options[q.answer])}</p>` : '';
+    return why?.why ? `<p class="mistake"><strong>Why ${optionLabel(q, k!)} is tempting:</strong> ${fmt(why.why, q.options[q.answer])}</p>` : '';
   };
 
   // ------------------------------------------------------------ paper review: wrong and blank answers only
@@ -588,10 +599,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   function renderRv() {
     const k = rvList[rvAt], q = byId.get(quiz[k])!, p = picks[k];
     $('rv-count').textContent = `${rvAt + 1} of ${rvList.length} · Question ${k + 1}`;
-    const opts = q.options.map((o, j) => `<div class="opt${j === q.answer ? ' right' : j === p ? ' wrong' : ''}"><span class="letter">${LETTERS[j]}</span> <span>${fmt(o)}</span></div>`).join('');
+    const opts = q.options.map((o, j) => `<div class="opt${j === q.answer ? ' right' : j === p ? ' wrong' : ''}"><span class="letter">${optionLabel(q, j)}</span> <span>${fmt(o)}</span></div>`).join('');
     $('rv-body').innerHTML = (q.visual ? visualCard(q.visual) : '')
       + `<p class="stem">${stemHtml(q, true)}</p><div class="options">${opts}</div><div class="feedback">`
-      + `<p class="verdict bad">${p == null ? 'You left this blank.' : `You chose ${LETTERS[p]}.`} The answer is ${LETTERS[q.answer]}.</p>`
+      + `<p class="verdict bad">${p == null ? 'You left this blank.' : `You chose ${optionLabel(q, p)}.`} The answer is ${optionLabel(q, q.answer)}.</p>`
       + temptingHtml(q, p) + stepsHtml(q) + '</div>';
     $<HTMLButtonElement>('rv-prev').disabled = rvAt === 0;
     $('rv-next').textContent = rvAt + 1 < rvList.length ? 'Next' : 'Back to results';
@@ -662,7 +673,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     });
     $('feedback').innerHTML =
       (ok ? '<p class="verdict good">Correct!</p>'
-          : `<p class="verdict bad">Not yet. The answer is ${LETTERS[q.answer]}.</p>${temptingHtml(q, k)}`) + stepsHtml(q);
+          : `<p class="verdict bad">Not yet. The answer is ${optionLabel(q, q.answer)}.</p>${temptingHtml(q, k)}`) + stepsHtml(q);
     $('feedback').hidden = false;
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
@@ -793,7 +804,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       if (q.group) seenVis.add(q.group);
       return `<details class="rev"><summary>${stemHtml(q, true)}</summary>
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
-       <p>${chose >= 0 ? `You chose ${LETTERS[chose]} (${fmt(q.options[chose])}). ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${LETTERS[q.answer]} (${fmt(q.options[q.answer])}).</p>
+       <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${optionLabel(q, q.answer)} (${fmt(q.options[q.answer])}).</p>
        ${stepsHtml(q)}</details>`;
     }).join('');
     // a paper steps through these one by one (Review button); the list stays for scanning, folded away

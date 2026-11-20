@@ -1,0 +1,104 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, type PpRow,
+} from './pastpaper.ts';
+
+const SB = 'https://abcdefgh.supabase.co';
+const row = (over: Partial<PpRow> = {}): PpRow => ({
+  id: 'pp-0123456789', subtopic: 'sci-systems-plant-transport-parts', level: 'basic', pattern: null,
+  stem: 'placeholder stem', options: ['a', 'b', 'c', 'd'], answer: 2,
+  figures: [{ path: 'science/pp-0123456789-1.webp', w: 900, h: 400 }], year: 2025, ...over,
+});
+const signedFor = (p: string) => `${SB}/storage/v1/object/sign/pp-figures/${p}?token=abc.def`;
+
+test('the master switch ships OFF, and Plant transport is first in the switch order', () => {
+  assert.equal(PP_ENABLED, false);
+  assert.equal(Object.keys(PP_SWITCH)[0], 'sci-systems-plant-transport-parts');
+  assert.equal(ppMode('sci-systems-plant-transport-parts'), null); // off while the flag is off
+  assert.equal(ppMode('sci-systems-plant-transport-parts', true), 'replace');
+  assert.equal(ppMode('sci-systems-circuit', true), null);
+});
+
+test('which sub-topics a quiz fetches', () => {
+  const sw = { a: 'replace', b: 'merge' } as const;
+  assert.deepEqual(ppSubsFor('tier', 'a', [], true, sw), ['a']);
+  assert.deepEqual(ppSubsFor('tier', 'c', [], true, sw), []);
+  assert.deepEqual(ppSubsFor('review', '', [], true, sw), ['a', 'b']);
+  assert.deepEqual(ppSubsFor('paper', '', ['b', 'c', 'b'], true, sw), ['b']);
+  assert.deepEqual(ppSubsFor('review', '', [], false, sw), []);
+  assert.deepEqual(ppSubsFor('tier', 'a', [], false, sw), []);
+});
+
+test('validRow accepts the RPC shape and rejects anything odd', () => {
+  assert.ok(validRow(row()));
+  assert.ok(validRow(row({ figures: [] })));
+  for (const bad of [
+    null, 'x', row({ id: 'eng-123' }), row({ level: 'hard' as PpRow['level'] }), row({ stem: '  ' }),
+    row({ options: ['a', 'b', 'c'] }), row({ answer: 4 }), row({ answer: 1.5 }),
+    row({ figures: [{ path: '../secret.png', w: 1, h: 1 }] }),
+    row({ figures: [{ path: 'https://evil.example/x.webp', w: 1, h: 1 }] }),
+    row({ subtopic: 'Bad Sub' }),
+  ]) assert.equal(validRow(bad), false, JSON.stringify(bad));
+});
+
+test('only signed URLs from our own private bucket are used', () => {
+  assert.ok(safeSignedUrl(signedFor('science/pp-0123456789-1.webp'), SB));
+  assert.ok(safeSignedUrl(signedFor('science/pp-0123456789-1.webp'), `${SB}/`));
+  assert.equal(safeSignedUrl(`${SB}/storage/v1/object/public/pp-figures/science/x.webp`, SB), false); // public path
+  assert.equal(safeSignedUrl(`${SB}/storage/v1/object/sign/other/science/x.webp?token=a`, SB), false); // other bucket
+  assert.equal(safeSignedUrl(`${SB}/storage/v1/object/sign/pp-figures/science/x.webp`, SB), false); // no token
+  assert.equal(safeSignedUrl(`https://evil.example/storage/v1/object/sign/pp-figures/x.webp?token=a`, SB), false);
+  assert.equal(safeSignedUrl(signedFor('x.webp'), 'javascript:alert(1)'), false);
+});
+
+test('toQ keeps the paper order, labels (1)-(4), and drops a row whose picture was not signed', () => {
+  const r = row();
+  const q = toQ(r, new Map([[r.figures[0].path, signedFor(r.figures[0].path)]]), 'plant-transport')!;
+  assert.deepEqual(q.options, ['a', 'b', 'c', 'd']);
+  assert.equal(q.answer, 2);
+  assert.equal(q.numbered, true);
+  assert.equal(q.topic, 'plant-transport');
+  assert.equal(q.explain[2], null);
+  assert.equal(q.explain.filter((e) => e && e.tag === 'past-paper').length, 3);
+  assert.deepEqual(q.ppFigs, [{ src: signedFor(r.figures[0].path), w: 900, h: 400 }]);
+  assert.equal(toQ(r, new Map()), null);
+  assert.ok(toQ(row({ figures: [] }), new Map()));
+});
+
+test('mergePool: off, merge, and replace only when the past-paper tier is full', () => {
+  const mk = (pre: string, sub: string, level: string, n: number) =>
+    Array.from({ length: n }, (_, i) => ({ id: `${pre}${sub}${level}${i}`, sub, level }));
+  const gen = [...mk('g', 'a', 'basic', 25), ...mk('g', 'a', 'intermediate', 25), ...mk('g', 'b', 'basic', 25)];
+  const pp = [...mk('pp-', 'a', 'basic', 20), ...mk('pp-', 'a', 'intermediate', 5), ...mk('pp-', 'b', 'basic', 30)];
+  const modes: Record<string, 'replace' | 'merge'> = { a: 'replace' };
+  const out = mergePool(gen, pp, (s) => modes[s] ?? null, 20);
+  const count = (pre: string, sub: string, level: string) =>
+    out.filter((q) => q.id.startsWith(pre) && q.sub === sub && q.level === level).length;
+  assert.equal(count('g', 'a', 'basic'), 0); // replaced: 20 past-paper items fill the tier
+  assert.equal(count('pp-', 'a', 'basic'), 20);
+  assert.equal(count('g', 'a', 'intermediate'), 25); // too few to replace: merged
+  assert.equal(count('pp-', 'a', 'intermediate'), 5);
+  assert.equal(count('g', 'b', 'basic'), 25); // b is off: its past-paper items are dropped
+  assert.equal(count('pp-', 'b', 'basic'), 0);
+  const merged = mergePool(gen, pp, (s) => (s === 'b' ? 'merge' : null), 20);
+  assert.equal(merged.filter((q) => q.sub === 'b').length, 55);
+  assert.deepEqual(mergePool(gen, pp, () => null), gen);
+});
+
+test('figure HTML escapes the source and labels follow the item kind', () => {
+  const h = ppFigureHtml([{ src: `${SB}/x?token=a"b&c`, w: 10, h: 20 }]);
+  assert.ok(h.includes('token=a&#34;b&#38;c') && !h.includes('a"b'));
+  assert.ok(h.includes('width="10" height="20"') && h.includes('referrerpolicy="no-referrer"'));
+  assert.equal(optionLabel({ numbered: true }, 0), '(1)');
+  assert.equal(optionLabel({}, 3), 'D');
+});
+
+test('Daily Review merges instead of replacing, so old retests stay reachable', () => {
+  const sw = { a: 'replace' } as const;
+  assert.equal(poolModeFor('tier', true, sw)('a'), 'replace');
+  assert.equal(poolModeFor('paper', true, sw)('a'), 'replace');
+  assert.equal(poolModeFor('review', true, sw)('a'), 'merge');
+  assert.equal(poolModeFor('review', true, sw)('b'), null);
+  assert.equal(poolModeFor('tier', false, sw)('a'), null);
+});
