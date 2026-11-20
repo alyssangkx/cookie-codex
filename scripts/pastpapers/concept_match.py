@@ -32,6 +32,14 @@ PROMPT = ("Generated question:\n<<<{gen}>>>\n\nPast-paper questions:\n{cands}\n\
           "must know to answer it, even if the numbers, context, wording or question format differ? A question on the same "
           "broad topic that needs different knowledge does NOT count. Reply with JSON only: "
           "{{\"match\": <the number 1-{n} of the best match, or null>, \"reason\": \"<one short sentence: the shared concept, or what none of them tests>\"}}")
+# second pass (21 Nov 2026): the first prompt held back a question that asks directly what past papers test through a
+# circuit (conductors). Same knowledge counts whatever the set-up; still not the same topic with different knowledge.
+PROMPT_LENIENT = ("Generated question:\n<<<{gen}>>>\n\nPast-paper questions:\n{cands}\n\n"
+                  "Does any past-paper question test the same knowledge as the generated question: the fact, rule or skill a pupil "
+                  "needs to answer it? It counts as the same even if one question asks directly and the other through an "
+                  "experiment, a set-up, a picture, a table or a story, and even if the numbers, wording or format differ. It does "
+                  "NOT count if the past-paper question needs different knowledge, even on the same topic. Reply with JSON only: "
+                  "{{\"match\": <the number 1-{n} of the best match, or null>, \"reason\": \"<one short sentence: the shared knowledge, or what none of them tests>\"}}")
 # off-syllabus probes: concepts P6 does not teach (CLAUDE.md: no mass and acceleration, no action-reaction; Speed is not in
 # the 2021 Maths syllabus; owner: no reproduction from plant parts). They must find no match.
 NEGATIVE = [
@@ -234,9 +242,9 @@ def run(a):
     with open(out / "results.jsonl", "a", encoding="utf-8") as f:
         for i in range(0, len(todo), 64):
             ch = todo[i:i + 64]
-            cands = [idx[p["subject"]].top(p["text"], p.get("sub"), 8, p.get("exclude")) for p in ch]
+            cands = [idx[p["subject"]].top(p["text"], p.get("sub"), a.k, p.get("exclude")) for p in ch]
             msgs = [[{"role": "system", "content": sysmsg},
-                     {"role": "user", "content": PROMPT.format(gen=clip(p["text"], 1500), n=len(c),
+                     {"role": "user", "content": (PROMPT_LENIENT if a.lenient else PROMPT).format(gen=clip(p["text"], 1500), n=len(c),
                                                                cands="\n\n".join(f"[{j + 1}] {d['text']}" for j, d in enumerate(c)))}]
                     for p, c in zip(ch, cands)]
             for p, c, o in zip(ch, cands, llm.chat(msgs, sp, use_tqdm=False)):
@@ -251,7 +259,13 @@ def run(a):
 def report(a):
     probes = {p["pid"]: p for p in jl(a.probes)}
     # only parsed verdicts for the probe's current text count; anything else is unjudged, never a no-match
-    res = {r["pid"]: r for r in jl(a.results) if r.get("parsed") and r["pid"] in probes and r.get("h") == text_hash(probes[r["pid"]]["text"])}
+    # several result files (a first and a second pass): a probe matches if any pass matched it
+    res = {}
+    for f in a.results.split(","):
+        for r in jl(f):
+            if r.get("parsed") and r["pid"] in probes and r.get("h") == text_hash(probes[r["pid"]]["text"]):
+                if r["pid"] not in res or (r["match"] and not res[r["pid"]]["match"]):
+                    res[r["pid"]] = r
     allunits = {(p["subject"], p["sub"], p["unit"]) for p in probes.values() if p["kind"] == "gen"}
     judged = {(probes[pid]["subject"], probes[pid]["sub"], probes[pid]["unit"]) for pid in res if probes[pid]["kind"] == "gen"}
     L = ["# Past-paper precedent: judge report", "",
@@ -335,6 +349,7 @@ if __name__ == "__main__":
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("pack"); p.add_argument("--out", default=str(TMP / "concept"))
     p = sp.add_parser("run"); p.add_argument("probes"); p.add_argument("out")
+    p.add_argument("--k", type=int, default=8, help="candidates shown to the judge"); p.add_argument("--lenient", action="store_true", help="the second-pass prompt")
     p = sp.add_parser("report"); p.add_argument("probes"); p.add_argument("results"); p.add_argument("--out", default=str(TMP / "concept" / "report.md"))
     a = ap.parse_args()
     {"pack": pack, "run": run, "report": report}[a.cmd](a)
