@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The running to-do list is `docs/todo.md`: add every agreed or recommended item there, and tick it only when done.
 
+Terms are defined in `GLOSSARY.md` and past decisions are in `docs/adr/`: read them before renaming, merging or redefining a concept.
+
 Alyssa's Cookie Codex is a static Astro site with two parts:
 - **A PSLE revision game.** A Primary 6 student answers timed multiple-choice quizzes (PSLE 2027 syllabus; only Math has questions so far) and earns Cookie Run: Kingdom cookie cards.
 - **The Codex.** A reference library of all 186 cookies.
