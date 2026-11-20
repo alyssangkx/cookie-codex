@@ -699,6 +699,11 @@ def selftest():
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
     assert garbled("好", ["a", "b", "c", "d"]) == "text-short"
     assert garbled("ab 12 cd 34 ef 56 gh 78 ij 90 11 22 33 44 55", ["a", "b", "c", "d"]) == "text-low-alpha"
+    rk = easier_first([{"id": "pp-c", "subtopic": "s", "difficulty": 2, "level": "basic", "qno": 1},
+                       {"id": "pp-a", "subtopic": "s", "difficulty": 1, "level": "competent", "qno": 28},
+                       {"id": "pp-b", "subtopic": "s", "difficulty": 2, "level": "basic", "qno": 3},
+                       {"id": "pp-z", "subtopic": "t", "difficulty": 3, "level": "basic", "qno": 1}])
+    assert rk == {"pp-a": 1, "pp-c": 2, "pp-b": 3, "pp-z": 1}, rk  # difficulty first, then position; ranked per sub-topic
     stem = "Which of the following statements can be concluded from the experiment?"
     assert garbled(stem, ["A. Object 1 is a magnet.", "B. Object 2 is a magnet.", "C. Both are iron.", "D. Neither."]) == "options-are-statements"
     assert garbled(stem, ["A Object 1 is a magnet.", "B Object 2 is a magnet.", "C Both are iron.", "D Neither."]) == "options-are-statements"
@@ -889,8 +894,23 @@ def counts(a):
     print(f"{COUNTS.name}: {len(new)} tier counts ({len(subs)} sub-topics updated)")
 
 
+def easier_first(rows):
+    """{pp id: rank} inside each sub-topic for pp_items.ord (migration 006, ADR 0011): the tagger's difficulty, then the
+    paper position (the level the position rule gave, then the question number), then the id. 1 = served first."""
+    lv = {"basic": 0, "intermediate": 1, "competent": 2}
+    out, by = {}, collections.defaultdict(list)
+    for r in rows:
+        by[r["subtopic"]].append(r)
+    for rs in by.values():
+        rs.sort(key=lambda r: (r.get("difficulty") if isinstance(r.get("difficulty"), int) else 2, lv.get(r.get("level"), 1),
+                               r.get("qno") if isinstance(r.get("qno"), int) else 99, r["id"]))
+        out.update({r["id"]: i for i, r in enumerate(rs, 1)})
+    return out
+
+
 def upload(a):
     rows, usubs, out = selection(a)
+    ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
         figs[m["pp_id"]].append({"path": m["path"], "w": m["w"], "h": m["h"]})
@@ -900,7 +920,7 @@ def upload(a):
     db = [{"id": r["id"], "src_id": r["src_id"], "subject": r["subject"], "subtopic": r["subtopic"], "level": r["level"],
            "pattern": r["pattern"], "stem": r["stem"], "options": r["options"], "answer": r["answer"],
            "figures": figs[r["id"]], "year": r["year"], "school": r["school"], "paper": r["paper"],
-           "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "active": True} for r in rows]
+           "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "ord": ord_[r["id"]], "active": True} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
     print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}")
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
