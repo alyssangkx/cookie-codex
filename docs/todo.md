@@ -213,9 +213,9 @@ outside the repo.
 
 ## Site and tech
 
-- [ ] English reward previews can change when a "Coming soon" section opens: slots are assigned to playable sections
-  first, so opening one reorders them. The planned replacement cards stop duplicates, but previews of cleared tiers
-  may show a different card. Decide whether to freeze the slots of cleared tiers.
+- [x] Freeze English reward slots of cleared tiers (owner approved 20 Nov 2026): `scripts/quiz/english_frozen.json` pins
+  the 15 slots of the 5 playable sections; `build_rewards.py` keeps them and `test_rewards_freeze.py` proves it. When a
+  section ships, add its 3 slots to the pin file (copy them from rewards.json) in the same commit.
 
 - [ ] Stale "N mastered" on a redesigned tier of the same size is not detected. Store a per-tier id hash in `syncTiers` and compare it with a build-time hash (display only).
 - [ ] The Daily Review button on /train can show for retests of deleted questions (the review then says "Nothing to review today"). Give it a bank-aware count.

@@ -72,7 +72,67 @@ def spread(n_slots, n_dups, avoid):
     return {cand[int(k * step)] for k in range(n_dups)}
 
 
-def main():
+FROZEN = Path(__file__).with_name("english_frozen.json")
+
+
+def freeze_english(slots, pins, rarity_of, caps_of):
+    """Owner decision 20 Nov 2026: an English slot of a tier that can already have been cleared never changes.
+    `pins` (english_frozen.json) holds those slots; the unpinned English slots keep what the draw gave them
+    unless that cookie is now held by a pinned slot, then they take a cookie nobody holds (same rarity class).
+    Non-English slots are never touched."""
+    eng = [k for k in slots if k.startswith("eng-")]
+    for t in "bic":
+        keys = [k for k in eng if k.endswith("|" + t)]
+        pool = {slots[k]["slug"] for k in keys if not slots[k]["dup"]}  # this tier's English cookies, order-free
+        before = [k for k in keys if k not in pins]
+        for k in keys:
+            if k in pins:
+                slots[k] = dict(pins[k])
+        held = {slots[k]["slug"] for k in keys if k in pins and not slots[k]["dup"]}
+        need = len(pool)
+        for k in before:  # keep the draw's cookie unless a pinned slot holds it or it repeats
+            if not slots[k]["dup"]:
+                if slots[k]["slug"] in held:
+                    slots[k]["slug"] = None
+                else:
+                    held.add(slots[k]["slug"])
+        free = sorted(pool - held)
+        def take(k):
+            want_high = caps_of[k] and t == "c"
+            pick = next((c for c in free if (rarity_of[c] in ("legendary", "super-epic")) == want_high), free[0])
+            free.remove(pick)
+            held.add(pick)
+            return pick
+        n_nondup = sum(1 for k in keys if not slots[k]["dup"])
+        for k in reversed(before):  # a pinned duplicate/new mix can leave too many new slots: demote the extra
+            if n_nondup > need and not slots[k]["dup"] and slots[k]["slug"] is None:
+                slots[k] = {"slug": None, "dup": True}
+                n_nondup -= 1
+        for k in reversed(before):
+            if n_nondup > need and not slots[k]["dup"]:
+                held.discard(slots[k]["slug"])
+                slots[k] = {"slug": None, "dup": True}
+                n_nondup -= 1
+        free = sorted(pool - held)
+        for k in before:
+            if not slots[k]["dup"] and slots[k]["slug"] is None:
+                slots[k]["slug"] = take(k)
+        for k in before:  # a pinned duplicate may have left a cookie unused: promote an unpinned duplicate
+            if n_nondup < need and slots[k]["dup"]:
+                slots[k] = {"slug": take(k), "dup": False}
+                n_nondup += 1
+        for k in before:  # duplicates must repeat a card of this tier
+            if slots[k]["dup"] and slots[k]["slug"] not in held:
+                slots[k]["slug"] = sorted(held)[0]
+        assert {slots[k]["slug"] for k in keys if not slots[k]["dup"]} == pool, ("English tier cookies changed", t)
+    for k, v in pins.items():
+        assert slots[k] == v, ("frozen English slot moved", k)
+
+
+def main(playable=None, out_path=None):
+    global PLAYABLE
+    if playable is not None:
+        PLAYABLE = set(playable)
     rng = random.Random(SEED)
     cookies = json.loads((DATA / "cookies.json").read_text())["cookies"]
     by = {}
@@ -138,6 +198,10 @@ def main():
                 earned.append(slug)
                 slots[key] = {"slug": slug, "dup": False}
 
+    pins = json.loads(FROZEN.read_text())
+    caps_of = {f"{s['id']}|{t}": s["capstone"] for s in order["english"] for t in "bic"}
+    freeze_english(slots, pins, {c["slug"]: c["rarity"] for c in cookies}, caps_of)
+
     milestones = {"ancient": by["ancient"], "dragon": by["dragon"], "beast": by["beast"], "witch": by["witch"]}
     # Replacement order per rarity (docs/game-economy.md section 1): every non-milestone card once, in the order its
     # slot appears above (school, then tier, then sub-topic). Derived only from `slots`, after them, so adding it moves
@@ -149,7 +213,7 @@ def main():
         if not v["dup"]:
             rarity_order.setdefault(rarity_of[v["slug"]], []).append(v["slug"])
     out = {"seed": SEED, "order": order, "slots": slots, "milestones": milestones, "rarityOrder": rarity_order}
-    (DATA / "rewards.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
+    (out_path or DATA / "rewards.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
 
     # self-check: every cookie used exactly once as a new card or milestone
     new = [v["slug"] for v in slots.values() if not v["dup"]]
@@ -162,6 +226,7 @@ def main():
     assert set(first_math_basic) == set(by["common"]), "first 7 Math Basic rewards should be the commons"
     print(f"rewards.json: {len(slots)} slots, {len(new)} new cards, {len(slots) - len(new)} star slots, "
           f"{len(ms)} milestone cards")
+    return slots
 
 
 if __name__ == "__main__":
