@@ -678,6 +678,9 @@ def upload(a):
            "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "active": True} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
     print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}")
+    if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
+        sys.exit(f"nothing selected under {a.out}/{a.subject} for those sub-topics: wrong --out? "
+                 "(the 2025-26 import lives in /data/alvin/tmp/cookie-codex/ppimport/final2526)")
     url, k = os.environ.get("SUPABASE_URL", "").rstrip("/"), os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
     if not a.apply and not (url and k):
         print("dry run: nothing sent; deactivations not counted (no Supabase env); "
