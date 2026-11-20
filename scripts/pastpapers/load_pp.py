@@ -183,6 +183,7 @@ def read_hold(out: Path) -> set:
 
 
 HOLD_FILES = ("hold.txt", "hold-auto.txt", "hold-crop.txt")
+BLIND_RERUN = ("needs-blind-check-ocr", "no-blind-check-yet", "not-in-blind-check", "blind-key-mismatch")  # fixed by a blind run with the current key
 UNRESOLVED = ("not_located", "touch_unresolved", "no_page")  # fix_crop outcomes that leave a crop possibly cut off
 
 
@@ -369,7 +370,7 @@ def select(a):
                 R[reason] += 1
                 per_year[y][reason] += 1
                 rejects.append({"id": q["id"], "reason": reason, **({"answer_src": src} if src != "vision" else {}),
-                                **({"key": k} if reason == "needs-blind-check-ocr" else {})})  # input for the blind run
+                                **({"key": k} if reason in BLIND_RERUN else {})})  # input for a blind run
                 continue
             per_year[y]["selected"] += 1
             rows.append({
@@ -628,7 +629,9 @@ def figures(a):
     tmpd = outside_repo(Path(a.out)) / a.subject / "_fixed"
     tmpd.mkdir(exist_ok=True)
     unresolved = {}  # pp id -> figure numbers still touching an edge
+    seen = set()  # ids re-checked by this run
     for r in jl(out / "selected.jsonl"):
+        seen.add(r["id"])
         for n, c in enumerate(r["crops"], 1):
             name = f"{r['id']}-{n}.webp"
             fixed = tmpd / f"{r['id']}-{n}.png"
@@ -650,12 +653,12 @@ def figures(a):
             f.write(json.dumps(m) + "\n")
     # Keep earlier holds for items this run did not re-check: `select` leaves held items out of selected.jsonl, so
     # rewriting from this run alone would release them on the next run.
-    seen = {r["id"] for r in jl(out / "selected.jsonl")}
     hc = out / "hold-crop.txt"
     keep = [ln for ln in (hc.read_text().splitlines() if hc.exists() else [])
-            if ln.strip() and not ln.startswith("#") and ln.split()[0] not in seen and ln.split()[0] not in unresolved]
+            if ln.split("#")[0].strip() and ln.split("#")[0].strip() not in seen]  # same id rule as parse_hold
     hc.write_text("# written by `load_pp.py figures`: a crop still cut off at an edge after the automatic fixes. "
-                  "Do not edit: `figures` rewrites it (to release an item, delete its line and re-run select + figures).\n"
+                  "Only edit to release an item (delete its line, re-run select + figures, which re-checks it); "
+                  "a held item is not re-checked otherwise.\n"
                   + "".join(ln + "\n" for ln in keep)
                   + "".join(f"{i}  # figure {', '.join(map(str, ns))}\n" for i, ns in sorted(unresolved.items())))
     print(f"held (crop still cut off): {len(unresolved)} new, {len(keep)} kept -> {hc}")

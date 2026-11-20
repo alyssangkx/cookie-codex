@@ -42,19 +42,26 @@ def boost(src, dst, max_pixels=3_000_000):
 def gate(vals, same=7, cyc=8):
     """Flags a page whose agreed cells look like a continued pattern, not a printed key: `same` identical answers on
     consecutive question numbers, or a 1234 / 4321 cycle `cyc` long. A random 40-question key has a 7-run about 0.6% of
-    the time (a 4-run about half the time, so short runs are normal). A gap of one number (a cell the reads disagreed on)
-    does not break a run, so one disputed cell cannot hide a made-up pattern; a longer gap does."""
+    the time (a 4-run about half the time, so short runs are normal). Run lengths count question numbers spanned; a run
+    may span ONE missing number (a cell the reads disagreed on, or that neither returned), so one disputed cell cannot
+    hide a made-up pattern; a second gap or a gap of two numbers ends it."""
     run_s = run_c = 0
-    prev_n = prev_v = None
+    gap_s = gap_c = False
+    prev_n = prev_v = last_d = None
     for n, v in sorted(vals.items()):
-        if prev_n is not None and n - prev_n <= 2:
-            run_s = run_s + 1 if v == prev_v else 1
-            d = (int(v) - int(prev_v)) % 4  # 1 = up one (4 -> 1 wraps), 3 = down one
-            run_c = (run_c + 1 if d == last_d else 2) if d in (1, 3) else 1
-            last_d = d if d in (1, 3) else None
+        step = n - prev_n if prev_n is not None else 0
+        d = (int(v) - int(prev_v)) % 4 if prev_n is not None else None  # 1 = up one (4 -> 1 wraps), 3 = down one
+        if v == prev_v and (step == 1 or (step == 2 and not gap_s)):
+            run_s, gap_s = run_s + step, gap_s or step == 2
         else:
-            run_s = run_c = 1
-            last_d = None
+            run_s, gap_s = 1, False
+        if step == 1 and d in (1, 3):
+            run_c, gap_c = (run_c + 1, gap_c) if d == last_d else (2, False)
+            last_d = d
+        elif step == 2 and d == 2 and last_d in (1, 3) and not gap_c:
+            run_c, gap_c = run_c + 2, True  # up two or down two across the gap continues the direction already seen
+        else:
+            run_c, gap_c, last_d = 1, False, None
         if run_s >= same:
             return "identical run"
         if run_c >= cyc:
@@ -133,6 +140,10 @@ if __name__ == "__main__":
         assert gate({n: "2" for n in range(1, 8)}) == "identical run" and not gate({n: "2" for n in range(1, 7)})
         assert gate({1: "2", 2: "2", 3: "2", 5: "2", 6: "2", 7: "2", 8: "2"})  # one disputed cell does not hide the run
         assert not gate({1: "2", 2: "2", 3: "2", 6: "2", 7: "2", 8: "2", 9: "2"})  # a longer gap breaks it
+        assert not gate({n: "2" for n in range(1, 14, 2)})  # alternate cells disputed: a second gap ends the run
+        assert gate({1: "1", 2: "2", 3: "3", 4: "4", 6: "2", 7: "3", 8: "4", 9: "1", 10: "2"})  # cycle across one gap
+        assert gate({1: "4", 2: "3", 3: "2", 5: "4", 6: "3", 7: "2", 8: "1"})  # descending cycle across one gap
+        assert not gate({1: "1", 2: "2", 3: "3", 5: "1", 6: "2", 7: "3", 9: "1", 10: "2"})  # two gaps: no cycle
         assert gate({n: "1234"[(n - 1) % 4] for n in range(1, 9)}) and gate({n: "4321"[(n - 1) % 4] for n in range(1, 9)})
         assert not gate({n: "1234"[(n - 1) % 4] for n in range(1, 8)}) and not gate({1: "1", 2: "2", 3: "3", 4: "4", 5: "3", 6: "2", 7: "1", 8: "4"})
         assert not gate({1: "1", 2: "2", 3: "3", 4: "4", 11: "2", 12: "2", 13: "2", 14: "2"})  # short runs are normal
