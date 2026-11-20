@@ -2,8 +2,8 @@
 """Two independent VL-32B reads of MCQ answer-key pages found by anskey_ocr.py find-answer-pages (server job, GPU).
 
   ans_reread.py --pages reread/pages-science.jsonl [--pages ...]     (PP_ROOT = the pastpapers folder on the server)
-Each input row {subject, year, paper, page, n_mcq, mcq: [...]}. Read A: the page at full resolution (2.5 MP), row-wise
-prompt. Read B: the page converted to grey, contrast-stretched and sharpened (damps a coloured watermark stamp), 3 MP,
+Each input row {subject, year, paper, page, n_mcq, mcq: [...]}. Read A: the original page image (vLLM caps both reads at
+3 MP), row-wise prompt. Read B: the page converted to grey, contrast-stretched and sharpened (damps a coloured watermark stamp), 3 MP,
 cell-pair prompt. A cell is final only when A and B give the same option and the question number is one of the paper's
 MCQ numbers. Writes PP_ROOT/<subject>/<year>/ansreread/pNNNN-<sha1(paper)[:8]>.json (one file per paper and page):
   {paper, page, expected: [...], cells: {"7": {"a": "3", "b": "3", "final": "3"}}, dropped: [numbers read that are not
@@ -42,11 +42,12 @@ def boost(src, dst, max_pixels=3_000_000):
 def gate(vals, same=7, cyc=8):
     """Flags a page whose agreed cells look like a continued pattern, not a printed key: `same` identical answers on
     consecutive question numbers, or a 1234 / 4321 cycle `cyc` long. A random 40-question key has a 7-run about 0.6% of
-    the time (a 4-run about half the time, so short runs are normal). A gap in the numbers breaks a run."""
+    the time (a 4-run about half the time, so short runs are normal). A gap of one number (a cell the reads disagreed on)
+    does not break a run, so one disputed cell cannot hide a made-up pattern; a longer gap does."""
     run_s = run_c = 0
     prev_n = prev_v = None
     for n, v in sorted(vals.items()):
-        if prev_n is not None and n == prev_n + 1:
+        if prev_n is not None and n - prev_n <= 2:
             run_s = run_s + 1 if v == prev_v else 1
             d = (int(v) - int(prev_v)) % 4  # 1 = up one (4 -> 1 wraps), 3 = down one
             run_c = (run_c + 1 if d == last_d else 2) if d in (1, 3) else 1
@@ -87,9 +88,11 @@ def main():
     todo, seen = [], set()
     for r in rows:
         od = PP / r["subject"] / str(r["year"]) / "ansreread"
-        od.mkdir(exist_ok=True)
         jpg = PP / r["subject"] / str(r["year"]) / "pages" / f"p{r['page']:04d}.jpg"
-        if jpg.exists() and not (od / out_name(r)).exists() and (od / out_name(r)) not in seen:
+        if not jpg.exists():
+            continue
+        od.mkdir(parents=True, exist_ok=True)
+        if not (od / out_name(r)).exists() and (od / out_name(r)) not in seen:
             seen.add(od / out_name(r))
             todo.append((r, jpg, od))
     print(len(todo), "pages to read", flush=True)
@@ -128,7 +131,8 @@ if __name__ == "__main__":
         assert parse("Q1=3 Q2 = 1\nQ10:4 Q11=5") == {1: "3", 2: "1", 10: "4"}
         assert merge({1: "3", 2: "1", 99: "2"}, {1: "3", 2: "2"}, {1, 2}) == ({"1": {"a": "3", "b": "3", "final": "3"}, "2": {"a": "1", "b": "2", "final": None}}, [99])
         assert gate({n: "2" for n in range(1, 8)}) == "identical run" and not gate({n: "2" for n in range(1, 7)})
-        assert not gate({1: "2", 2: "2", 3: "2", 5: "2", 6: "2", 7: "2", 8: "2"})  # a gap breaks the run
+        assert gate({1: "2", 2: "2", 3: "2", 5: "2", 6: "2", 7: "2", 8: "2"})  # one disputed cell does not hide the run
+        assert not gate({1: "2", 2: "2", 3: "2", 6: "2", 7: "2", 8: "2", 9: "2"})  # a longer gap breaks it
         assert gate({n: "1234"[(n - 1) % 4] for n in range(1, 9)}) and gate({n: "4321"[(n - 1) % 4] for n in range(1, 9)})
         assert not gate({n: "1234"[(n - 1) % 4] for n in range(1, 8)}) and not gate({1: "1", 2: "2", 3: "3", 4: "4", 5: "3", 6: "2", 7: "1", 8: "4"})
         assert not gate({1: "1", 2: "2", 3: "3", 4: "4", 11: "2", 12: "2", 13: "2", 14: "2"})  # short runs are normal

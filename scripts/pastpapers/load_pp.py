@@ -647,10 +647,17 @@ def figures(a):
     with open(out / "figures.jsonl", "w") as f:
         for m in man:
             f.write(json.dumps(m) + "\n")
-    (out / "hold-crop.txt").write_text("# written by `load_pp.py figures`: a crop still cut off at an edge after the automatic fixes. "
-                                       "Do not edit: the next `figures` run overwrites.\n"
-                                       + "".join(f"{i}  # figure {', '.join(map(str, ns))}\n" for i, ns in sorted(unresolved.items())))
-    print(f"held (crop still cut off): {len(unresolved)} -> {out / 'hold-crop.txt'}")
+    # Keep earlier holds for items this run did not re-check: `select` leaves held items out of selected.jsonl, so
+    # rewriting from this run alone would release them on the next run.
+    seen = {r["id"] for r in jl(out / "selected.jsonl")}
+    hc = out / "hold-crop.txt"
+    keep = [ln for ln in (hc.read_text().splitlines() if hc.exists() else [])
+            if ln.strip() and not ln.startswith("#") and ln.split()[0] not in seen and ln.split()[0] not in unresolved]
+    hc.write_text("# written by `load_pp.py figures`: a crop still cut off at an edge after the automatic fixes. "
+                  "Do not edit: `figures` rewrites it (to release an item, delete its line and re-run select + figures).\n"
+                  + "".join(ln + "\n" for ln in keep)
+                  + "".join(f"{i}  # figure {', '.join(map(str, ns))}\n" for i, ns in sorted(unresolved.items())))
+    print(f"held (crop still cut off): {len(unresolved)} new, {len(keep)} kept -> {hc}")
     for it in stats["log"]:
         print("grown", it[0], f"crop{it[1]}", it[2])
     over = sum(m["bytes"] > a.target_kb * 1024 for m in man)
