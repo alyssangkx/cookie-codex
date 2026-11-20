@@ -47,7 +47,13 @@ Proposed in `docs/past-paper-pools-design.md` and ADR 0011: difficulty tiers go;
 majority of the sub-topic's past-paper questions correct; 3 cards at milestones; easier-first order; generated questions
 support only. Supersedes the 'balanced thirds' tier split (owner OK'd it, then chose this redesign).
 - [x] Owner approved (21 Nov 2026): wrong answer counts only when right on a later day (one 1-day retest); milestones 1/6, 1/3, majority (= competency); generated fill-ins never count; badge "Exam-ready".
-- [ ] Build (store, pick, train, tier page, rewards preview, parent page, tests); live together with the past-paper upload.
+- [ ] Build; live together with the past-paper upload. Done 21 Nov: store.ts (short retest, milestoneAt/syncMilestones, pool quizzes without a tier, tries per sub-topic; tests), pick.ts (pickPool easier-first; test), migration 006 pp_pool returns sub-topic + level + rank. Client plan (in progress):
+  - A. pastpaper.ts: PpMode 'pool' (set per sub-topic in PP_SWITCH at upload: 'pool' at 20+ past-paper questions, else 'merge'); stub type (id, sub, level, ord; 4 placeholder options so paperOk keeps it) until hydrated.
+  - B. ppfetch.ts: fetchPool(subs) -> stubs via pp_pool; fetchItems(ids) -> PpQ via pp-serve in chunks of 15; 'daily_limit' reported apart from failures.
+  - C. train.ts: Sub.pool {count} for 'pool' sub-topics (pp_counts total), playable at 20; no tier hashes.
+  - D. quiz page: pool quiz (no tier param; pickPool on the easier-first ids; title without tier; 20 minutes; finishQuiz opts.pools; answer(short) for pp ids of pool sub-topics); every mode hydrates the picked pp ids before showing them; daily_limit -> a plain message; Daily Review syncs milestones of pool sub-topics.
+  - E. tier page [sub].astro: milestone view (counted/total bar, 3 markers with their cards, Exam-ready badge, Train button).
+  - F. school page, G. result screen ("Milestone 1 reached"), H. parent page and suggest labels via MILESTONE_NAME; I. tests, build, screenshots.
 
 ### Anti-scraping for past-paper questions (owner, 21 Nov 2026, ADR 0012) — before the bulk upload
 - [ ] Migration 006: pool call (ids + order only), content call (<= 15 ids, text + figure paths), served log per account/day, limits (250 distinct/day, 40 calls/hour; half in the first 7 days; family-wide; admin/Test Player higher), flag table; drop the bulk `pp_items_for` and the readers' select policy on `pp-figures`. SQL tests in `sqltest.sh`.
