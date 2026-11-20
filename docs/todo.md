@@ -28,6 +28,9 @@ outside the repo.
   - **Science figures:** fix the ones that show the answer, plus give-away options in the new items. Guard the
     one-off refile script.
   - **Done:** `*.zip` and `.ses` gitignored (past-paper archive); the isolation wording corrected.
+- [ ] **Parent page:** questions no longer in any bank are left out of "answered wrong" and "waiting for retest"
+  (owner). Save migration 4→5 drops stale tier counts. **Each question has exactly one sub-topic:**
+  `check_dupes.py` guards it (0 clashes now).
 - [ ] **Parent note when pushing the Maths re-seed:** most Maths question ids change once. Pending Maths retests
   disappear, tier counts restart on the new questions, and cleared tiers and cards stay. The parent page lists the old
   ids as "retired".
@@ -128,6 +131,21 @@ outside the repo.
 - [ ] Supabase Edge Function proxy: it holds the API key and checks the child's login.
 - [ ] Data retention: typed answers 90 days, transcripts 30 days, both visible to the parent with a notice. A safety
   flag also emails the parent, with no transcript text.
+
+## Game design (pilot -> redesign, `docs/game-economy.md`)
+
+- [ ] **The first question banks were a pilot (owner, 20 Nov 2026).** They are being redesigned from the repository.
+  Game mechanics stay; an awarded card is never taken away.
+- [ ] **Replacement cards:** when a redesigned tier's card is already owned, give the next unowned card of the same
+  rarity (fixed, previewed).
+- [ ] **Coins ("Crumbs"):**
+  - earned per quiz, following the AL bands (more for AL1 and a perfect score; WA/SA papers ×3), plus retest steps,
+    goals and streak weeks;
+  - spent in a fixed-price shop where the child picks the card;
+  - rarer cards are achievement-only: Super Epic for topic competency, Legendary for a WA/SA paper at AL1–AL2, and
+    Beast, Dragon, Witch and Ancient for milestones.
+- [ ] Owner questions in `docs/game-economy.md`: the currency name, the earning table and prices, whether tier
+  clears still give a card, and the bar for the rare cards.
 
 ## Site and tech
 
