@@ -95,7 +95,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 
 <script>
   import { load, tierState, tierOpen, liveMastered, TIERS, TIER_NAME, type Tier } from '../../../lib/store';
-  import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, type SubInfo, type Suggestion } from '../../../lib/suggest';
+  import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, unitName, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
   const dataEl = document.getElementById('th-subs');
@@ -146,7 +146,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     const cards = document.getElementById('th-cards')!;
     const kindLabel: Record<Suggestion['kind'], string> = { review: 'Review', 'one-more': 'One more pass', weak: 'Weak spot', next: 'Next up', done: 'All done' };
     const render = (list: Suggestion[]) => {
-      if (!list.length) { cards.innerHTML = `<p class="th-muted">Pick a ${root?.dataset.school === 'english' ? 'section' : 'sub-topic'} below to start a quiz.</p>`; return; }
+      if (!list.length) { cards.innerHTML = `<p class="th-muted">Pick a ${unitName(root?.dataset.school ?? '', 1)} below to start a quiz.</p>`; return; }
       cards.innerHTML = list.map((x) => `
         <article class="th-card" data-kind="${x.kind}">
           <span class="th-card-kind">${kindLabel[x.kind]}</span>

@@ -8,6 +8,7 @@ import scienceSyllabus from '../data/syllabus/science.json';
 import { cookies } from './data';
 import { MIN_POOL, type School, type Tier } from './store';
 import { paperOk } from './paper';
+import { unitName } from './suggest';
 
 export { MIN_POOL };
 
@@ -75,8 +76,12 @@ const booklet = new Map(englishSyllabus.strands.flatMap((st) =>
   st.topics.flatMap((t) => t.subtopics.map((sb) => [sb.id, { topic: st.id, topicName: st.name }] as const))));
 /** The group a sub-topic is listed under on its school page: the English booklet, else its own topic. */
 export const listGroup = (s: Sub) => booklet.get(s.id) ?? { topic: s.topic, topicName: s.topicName };
-/** What a school calls its sub-topics on the training pages. */
-export const unitName = (school: School, n = 2) => (school === 'english' ? 'section' : 'sub-topic') + (n === 1 ? '' : 's');
+export { unitName }; // lives in suggest.ts so client scripts can use it without the banks
+/** Sub-topics whose questions are blanks in one passage (`cloze: true` in the syllabus JSON): the quiz page fills
+ *  the blanks in as they are answered. */
+export const clozeSubs = [mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
+  syl.strands.flatMap((st) => st.topics.flatMap((t) =>
+    (t.subtopics as { id: string; cloze?: boolean }[]).filter((sb) => sb.cloze).map((sb) => sb.id))));
 export const subSlug = (id: string) => id.replace(/^(math|sci|eng|chi)-/, '');
 export const hasContent = (s: Sub) => s.playable.b || s.playable.i || s.playable.c;
 

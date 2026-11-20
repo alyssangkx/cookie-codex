@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { triesPerDay } from '../../lib/store';
-import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics } from '../../lib/train';
+import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs } from '../../lib/train';
 
 // Everything the runner needs, small enough to inline; question banks are fetched on demand.
 const meta = {
@@ -9,6 +9,7 @@ const meta = {
     tries: triesPerDay(s.id), name: s.name, topicName: s.topicName, school: s.school, file: s.file, slug: subSlug(s.id), count: s.count,
   }])),
   files: banks.map((b) => b.topic),
+  cloze: clozeSubs,
   slots,
   cards: cardInfo,
   topicNames: Object.fromEntries(paperTopics.map((t) => [t.id, t.name])),
@@ -107,6 +108,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     files: string[]; slots: Record<string, { slug: string; dup: boolean }>;
     cards: Record<string, { name: string; image: string; rarity: string }>;
     topicNames: Record<string, string>;
+    cloze: string[];
   };
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const meta: Meta = JSON.parse($('meta').textContent!);
@@ -174,8 +176,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   // cloze passage sets: a blank answered earlier in this quiz (right or wrong) reads as the correct text in later questions;
   // right = green, wrong = amber "correct answer". reveal = feedback state, the asked blank is filled too.
-  // ponytail: the cloze sub-topic set is hard-coded here; extend it when a new passage set is added
-  const CLOZE = new Set(['chi-cloze-mcq', 'eng-grammar-cloze']);
+  // cloze sub-topics come from the syllabus JSON (`cloze: true` on the sub-topic), so a renamed or new cloze
+  // section keeps its blank filling
+  const CLOZE = new Set(meta.cloze);
   const clozeStem = (q: Q, reveal: boolean) => {
     const zh = q.sub === 'chi-cloze-mcq';
     const asked = zh ? /（(\d+)）＿＿＿＿/.exec(q.stem)?.[1] : /\((\d+)\) _{8}(?!_)/.exec(q.stem)?.[1];

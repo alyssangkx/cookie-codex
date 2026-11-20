@@ -164,6 +164,7 @@
             {
               "id": "eng-vocab-cloze",
               "name": "Vocabulary Cloze",
+              "passage": true,
               "outcomes": [
                 {
                   "id": "eng-vocab-cloze-1",
@@ -182,6 +183,7 @@
             {
               "id": "eng-visual-text",
               "name": "Visual Text",
+              "passage": true,
               "outcomes": [
                 {
                   "id": "eng-visual-text-1",
@@ -206,6 +208,8 @@
             {
               "id": "eng-grammar-cloze",
               "name": "Grammar Cloze",
+              "passage": true,
+              "cloze": true,
               "outcomes": [
                 {
                   "id": "eng-grammar-cloze-1",
@@ -224,6 +228,7 @@
             {
               "id": "eng-editing",
               "name": "Editing",
+              "passage": true,
               "outcomes": [
                 {
                   "id": "eng-editing-1",
@@ -242,6 +247,8 @@
             {
               "id": "eng-comp-cloze",
               "name": "Comprehension Cloze",
+              "passage": true,
+              "cloze": true,
               "outcomes": [
                 {
                   "id": "eng-comp-cloze-1",
@@ -278,6 +285,7 @@
             {
               "id": "eng-comp-oe",
               "name": "Comprehension OE",
+              "passage": true,
               "outcomes": [
                 {
                   "id": "eng-comp-oe-1",

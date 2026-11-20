@@ -53,13 +53,13 @@ def ordered_subtopics(school):
                 subs.append({"id": st["id"], "name": st["name"], "topic": topic["id"],
                              "topicName": topic["name"], "home": home, "i": i})
                 i += 1
-    # sub-topics that have questions come first, so early rewards (the 7 commons) are earnable now; English keeps the
-    # paper's section order, so its "Coming soon" sections sit where they come in the paper
-    if school != "english":
-        subs.sort(key=lambda s: (s["id"] not in PLAYABLE, s["home"], s["i"]))
+    # sub-topics that have questions come first, so early rewards (the 7 commons) are earnable now
+    subs.sort(key=lambda s: (s["id"] not in PLAYABLE, s["home"], s["i"]))
     last_of_topic = {s["topic"]: s["id"] for s in subs}  # later sub-topics overwrite earlier ones
     for s in subs:
         s["capstone"] = last_of_topic[s["topic"]] == s["id"]
+        if school == "english":  # every section is its own topic: only playable ones are capstones, so the
+            s["capstone"] = s["id"] in PLAYABLE  # legendary/super-epic Competent cards sit on earnable tiers
     return subs
 
 
@@ -96,8 +96,9 @@ def main():
         if school == "chinese":
             for n in LEGACY_ENGLISH_DRAWS:
                 main_rng.choice(range(n))
-        subs = ordered_subtopics(school)
-        order[school] = subs
+        subs = ordered_subtopics(school)  # slots are assigned in this order (playable first)
+        # the training pages list sub-topics in rewards.json order: English shows the paper's section order
+        order[school] = sorted(subs, key=lambda s: s["i"]) if school == "english" else subs
         n = len(subs)
         caps = {k for k, s in enumerate(subs) if s["capstone"]}
         for tier, pool, n_new in (("b", basic, NEW[school][0]), ("i", inter, NEW[school][1])):

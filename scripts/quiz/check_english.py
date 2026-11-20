@@ -17,8 +17,11 @@ OUTCOMES = {o["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["
 SUBS = {sb["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
 # sub-topics are the PSLE Paper 2 sections; each item also names its MOE syllabus outcome (metadata)
 SYLLABUS = {o["id"] for st in SYL["syllabusStrands"] for t in st["topics"] for sb in t["subtopics"] for o in sb["outcomes"]}
-OPEN_SECTIONS = {sb["id"] for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]
-                 if not any(o.get("mcqTestable") for o in sb["outcomes"])}  # "Coming soon": no MCQ items
+SUB_OF = {sb["id"]: sb for st in SYL["strands"] for t in st["topics"] for sb in t["subtopics"]}
+OPEN_SECTIONS = {k for k, sb in SUB_OF.items() if not any(o.get("mcqTestable") for o in sb["outcomes"])}  # "Coming soon"
+# the section's format, flagged on the sub-topic: "passage" sections take only passage-set items (vis-, read-, ecloze-),
+# "cloze" ones only blank-filling ecloze- sets (the quiz page fills their blanks from the same flag); other sections
+# take only single items. So a one-sentence item cannot pass for a Vocabulary Cloze passage.
 PATTERNS = {p["id"] for p in json.loads((HERE / "english" / "patterns.json").read_text())["patterns"]}
 LEVELS = {"basic", "intermediate", "competent"}
 BLANK = "____"
@@ -107,6 +110,11 @@ for f in sorted((HERE / "english" / "items").glob("*.json")):
             e("explain must be null for the answer and {tag, why} for each wrong option")
         if not it.get("solution"): e("missing solution")
         m = PASSAGE.match(str(it.get("key", "")))
+        sec = SUB_OF.get(sub, {})
+        if bool(m) != bool(sec.get("passage")):
+            e("passage sections take only passage-set items, other sections only single items")
+        elif bool(m and m[1] == "ecloze") != bool(sec.get("cloze")):
+            e("ecloze- sets go in a cloze section, and a cloze section takes only ecloze- sets")
         if m:
             sets.setdefault((sub, m[1], m[2]), []).append(it)
         if "visual" in it:

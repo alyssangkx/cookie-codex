@@ -32,6 +32,9 @@ export function topicPower(s: SaveV1, subsInTopic: SubInfo[]): number {
 
 export const hasPlayable = (sub: SubInfo) => TIERS.some((t) => sub.playable[t]);
 
+/** What a school calls its sub-topics on the training pages: English ones are the PSLE paper sections. */
+export const unitName = (school: string, n = 2) => (school === 'english' ? 'section' : 'sub-topic') + (n === 1 ? '' : 's');
+
 export function groupByTopic(subs: SubInfo[]): { topic: string; name: string; subs: SubInfo[] }[] {
   const out: { topic: string; name: string; subs: SubInfo[] }[] = [];
   for (const sub of subs) {
