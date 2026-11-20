@@ -13,10 +13,11 @@ const row = (over: Partial<PpRow> = {}): PpRow => ({
 });
 const signedFor = (p: string) => `${SB}/storage/v1/object/sign/pp-figures/${p}?token=abc.def`;
 
-test('the master switch ships OFF, and Plant transport is first in the switch order', () => {
-  assert.equal(PP_ENABLED, false);
+test('the master switch is ON (20 Nov 2026), and Plant transport is first in the switch order', () => {
+  assert.equal(PP_ENABLED, true);
   assert.equal(Object.keys(PP_SWITCH)[0], 'sci-systems-plant-transport-parts');
-  assert.equal(ppMode('sci-systems-plant-transport-parts'), null); // off while the flag is off
+  assert.equal(ppMode('sci-systems-plant-transport-parts', false), null); // nothing while the flag is off
+  assert.equal(ppMode('sci-systems-plant-transport-parts'), 'replace');
   assert.equal(ppMode('sci-systems-plant-transport-parts', true), 'replace');
   assert.equal(ppMode('sci-systems-circuit', true), null);
 });
@@ -130,7 +131,7 @@ test('ppTierCount changes nothing for a non-pp tier (switch off, or no pp rows)'
   assert.deepEqual(ppTierCount(40, 12, null), { count: 40, usesPp: false });
   assert.deepEqual(ppTierCount(40, 0, 'replace'), { count: 40, usesPp: false });
   assert.deepEqual(ppTierCount(0, 0, 'merge'), { count: 0, usesPp: false });
-  assert.equal(ppMode('sci-systems-plant-transport-parts'), null); // PP_ENABLED is false: nothing is counted yet
+  assert.equal(ppMode('sci-systems-plant-transport-parts', false), null); // flag off: nothing is counted
 });
 
 test('liveMastered matches the total a merged quiz stored, with no hash on pp tiers', () => {
