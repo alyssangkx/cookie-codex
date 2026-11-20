@@ -26,3 +26,6 @@ PastPapers/
 # Owner's local files: past-paper archives must never enter the repo (past papers stay private)
 *.zip
 .ses
+
+# Node compile cache created by test runs
+node-compile-cache/
