@@ -40,7 +40,7 @@ def leaf(zones, caption=None, W=360, H=170):
     return svg(W, H, b)
 
 
-def jar(dish=None, light=True, W=250, H=230, caption=None):
+def jar(dish=None, light=True, W=250, H=230, caption=None, cover=None):
     """A potted plant under a glass jar. dish = text shown on a dish inside (or None); light=False draws a dark cover."""
     b = (txt(W / 2, 16, caption, 13, bold=True) if caption else "")
     jx, jy, jw, jh = 60, 40, 140, 150
@@ -53,7 +53,7 @@ def jar(dish=None, light=True, W=250, H=230, caption=None):
     if dish:
         b += f'<rect x="{jx + 8}" y="{jy + jh - 20}" width="34" height="14" rx="3" fill="none"/>' + txt(jx + 25, jy + jh + 18, dish, 11)
     if not light:
-        b += f'<rect x="{jx - 6}" y="{jy - 8}" width="{jw + 12}" height="{jh + 8}" fill="none" stroke-width="2" stroke-dasharray="6 4"/>'
+        b += f'<rect x="{jx - 6}" y="{jy - 8}" width="{jw + 12}" height="{jh + 8}" fill="none" stroke-width="2" stroke-dasharray="6 4"/>' + (txt(jx + jw / 2, jy + 54, cover, 12) if cover else "")
     else:
         for k, dy in enumerate((0, 22, 44)):
             b += f'<line x1="6" y1="{jy + 20 + dy}" x2="40" y2="{jy + 20 + dy}" stroke-width="2"/>'
@@ -61,7 +61,7 @@ def jar(dish=None, light=True, W=250, H=230, caption=None):
     return svg(W, H, b)
 
 
-def pondweed(dist, W=340, H=220, caption=None):
+def pondweed(dist, W=340, H=220, caption=None, bubbles=True):
     """A beaker with pondweed under an upturned funnel and test tube, with a lamp dist cm away."""
     b = (txt(W / 2, 16, caption, 13, bold=True) if caption else "")
     bx, by, bw, bh = 150, 60, 150, 130
@@ -72,7 +72,7 @@ def pondweed(dist, W=340, H=220, caption=None):
     b += f'<rect x="{cx - 9}" y="{by + 4}" width="18" height="38" fill="#fff" stroke-width="1.8"/>'
     for sx in (-14, 0, 14):
         b += f'<path d="M{cx + sx} {by + bh} Q{cx + sx + 6} {by + bh - 30} {cx + sx} {by + bh - 56}" fill="none" stroke-width="2"/>'
-    for i, (dx, dy) in enumerate(((-6, 62), (5, 78), (-3, 94))):
+    for i, (dx, dy) in enumerate(((-6, 62), (5, 78), (-3, 94)) if bubbles else ()):
         b += f'<circle cx="{cx + dx}" cy="{by + dy}" r="2.5" fill="none"/>'
     b += f'<circle cx="40" cy="{by + 84}" r="18" fill="none" stroke-width="2.5"/>' + txt(40, by + 124, "lamp", 12)
     b += f'<line x1="58" y1="{by + 130}" x2="{bx}" y2="{by + 130}" stroke-width="1.5"/><line x1="58" y1="{by + 124}" x2="58" y2="{by + 136}"/><line x1="{bx}" y1="{by + 124}" x2="{bx}" y2="{by + 136}"/>'

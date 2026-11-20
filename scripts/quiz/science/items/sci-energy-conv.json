@@ -969,39 +969,6 @@
       "figure": "<svg viewBox=\"0 0 340 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20.0,46.0 25.0,49.3 30.0,52.5 35.0,55.8 40.0,59.1 45.0,62.3 50.0,65.6 55.0,68.9 60.0,72.1 65.0,75.4 70.0,78.7 75.0,81.9 80.0,85.2 85.0,88.5 90.0,91.7 95.0,95.0 100.0,98.3 105.0,101.5 110.0,104.8 115.0,108.1 120.0,111.3 125.0,114.6 130.0,117.9 135.0,121.1 140.0,124.4 145.0,127.7 150.0,130.9 155.0,134.2 160.0,137.5 165.0,140.7 170.0,144.0 175.0,141.4 180.0,138.8 185.0,136.2 190.0,133.5 195.0,130.9 200.0,128.3 205.0,125.7 210.0,123.1 215.0,120.5 220.0,117.9 225.0,115.3 230.0,112.6 235.0,110.0 240.0,107.4 245.0,104.8 250.0,102.2 255.0,99.6 260.0,97.0 265.0,94.3 270.0,91.7 275.0,89.1 280.0,86.5 285.0,83.9 290.0,81.3 295.0,78.7 300.0,76.1 305.0,73.4 310.0,70.8 315.0,68.2 320.0,65.6\" stroke-width=\"3\"/><line x1=\"20\" y1=\"150\" x2=\"320\" y2=\"150\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><circle cx=\"20.0\" cy=\"37.0\" r=\"8\" fill=\"none\" stroke-width=\"2\"/><text x=\"20.0\" y=\"24.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"170.0\" cy=\"144.0\" r=\"3\" fill=\"currentColor\"/><text x=\"170.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"290.0\" cy=\"81.3\" r=\"3\" fill=\"currentColor\"/><text x=\"290.0\" y=\"71.27999999999999\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
     },
     {
-      "key": "ec-106",
-      "level": "intermediate",
-      "outcome": "sci-energy-conv-forms-2",
-      "pattern": "sci-pat-energy-conversion",
-      "stem": "A roller-coaster car is released at P and rolls along the track without friction. At which position does the car have the most kinetic energy?",
-      "options": [
-        "P",
-        "R",
-        "It is the same at P, Q and R",
-        "Q"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-position",
-          "why": "The car starts at rest at P, so its kinetic energy is the least."
-        },
-        {
-          "tag": "wrong-position",
-          "why": "R is higher than Q, so the car is slower there than at Q."
-        },
-        {
-          "tag": "wrong-idea",
-          "why": "The speed of the car changes along the track, so its kinetic energy changes too."
-        },
-        null
-      ],
-      "solution": [
-        "Q is the lowest position, so the car has lost the most potential energy and moves fastest there."
-      ],
-      "figure": "<svg viewBox=\"0 0 340 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20.0,46.0 25.0,46.7 30.0,48.8 35.0,52.2 40.0,56.9 45.0,62.6 50.0,69.3 55.0,76.6 60.0,84.5 65.0,92.5 70.0,100.6 75.0,108.5 80.0,115.8 85.0,122.5 90.0,128.2 95.0,132.9 100.0,136.3 105.0,138.4 110.0,139.1 115.0,138.5 120.0,136.8 125.0,134.0 130.0,130.2 135.0,125.6 140.0,120.5 145.0,115.0 150.0,109.3 155.0,103.8 160.0,98.7 165.0,94.1 170.0,90.3 175.0,87.5 180.0,85.8 185.0,85.2 190.0,85.8 195.0,87.7 200.0,90.8 205.0,94.9 210.0,99.9 215.0,105.5 220.0,111.5 225.0,117.7 230.0,123.7 235.0,129.3 240.0,134.3 245.0,138.4 250.0,141.5 255.0,143.4 260.0,144.0 265.0,143.7 270.0,143.0 275.0,141.8 280.0,140.3 285.0,138.6 290.0,136.7 295.0,134.7 300.0,133.0 305.0,131.5 310.0,130.3 315.0,129.6 320.0,129.3\" stroke-width=\"3\"/><line x1=\"20\" y1=\"150\" x2=\"320\" y2=\"150\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><circle cx=\"20.0\" cy=\"37.0\" r=\"8\" fill=\"none\" stroke-width=\"2\"/><text x=\"20.0\" y=\"24.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"110.0\" cy=\"139.1\" r=\"3\" fill=\"currentColor\"/><text x=\"110.0\" y=\"129.1\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><circle cx=\"185.0\" cy=\"85.2\" r=\"3\" fill=\"currentColor\"/><text x=\"185.0\" y=\"75.2\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
-    },
-    {
       "key": "ec-107",
       "level": "intermediate",
       "outcome": "sci-energy-conv-forms-3",
@@ -2424,6 +2391,39 @@
       "solution": [
         "The Sun's heat makes water evaporate and fall as rain on high ground. The water has potential energy, and as it flows down it turns a turbine."
       ]
+    },
+    {
+      "key": "ec-406",
+      "level": "intermediate",
+      "outcome": "sci-energy-conv-forms-2",
+      "pattern": "sci-pat-energy-conversion",
+      "stem": "A roller-coaster car is released at P and rolls along the track without friction. At which position does the car have the most kinetic energy?",
+      "options": [
+        "P",
+        "R",
+        "It is the same at P, Q and R",
+        "Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-position",
+          "why": "The car starts at rest at P, so its kinetic energy is the least."
+        },
+        {
+          "tag": "wrong-position",
+          "why": "R is higher than Q, so the car is slower there than at Q."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The speed of the car changes along the track, so its kinetic energy changes too."
+        },
+        null
+      ],
+      "solution": [
+        "Q is the lowest position, so the car has lost the most potential energy and moves fastest there."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20.0,46.0 25.0,46.7 30.0,48.8 35.0,52.2 40.0,56.9 45.0,62.6 50.0,69.3 55.0,76.6 60.0,84.5 65.0,92.5 70.0,100.6 75.0,108.5 80.0,115.8 85.0,122.5 90.0,128.2 95.0,132.9 100.0,136.3 105.0,138.4 110.0,139.1 115.0,138.5 120.0,136.8 125.0,134.0 130.0,130.2 135.0,125.6 140.0,120.5 145.0,115.0 150.0,109.3 155.0,103.8 160.0,98.7 165.0,94.1 170.0,90.3 175.0,87.5 180.0,85.8 185.0,85.2 190.0,85.8 195.0,87.7 200.0,90.8 205.0,94.9 210.0,99.9 215.0,105.5 220.0,111.5 225.0,117.7 230.0,123.7 235.0,129.3 240.0,134.3 245.0,138.4 250.0,141.5 255.0,143.4 260.0,144.0 265.0,143.7 270.0,143.0 275.0,141.8 280.0,140.3 285.0,138.6 290.0,136.7 295.0,134.7 300.0,133.0 305.0,131.5 310.0,130.3 315.0,129.6 320.0,129.3\" stroke-width=\"3\"/><line x1=\"20\" y1=\"150\" x2=\"320\" y2=\"150\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><circle cx=\"20.0\" cy=\"37.0\" r=\"8\" fill=\"none\" stroke-width=\"2\"/><text x=\"20.0\" y=\"24.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><circle cx=\"185.0\" cy=\"85.2\" r=\"3\" fill=\"currentColor\"/><text x=\"185.0\" y=\"75.2\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><circle cx=\"260.0\" cy=\"144.0\" r=\"3\" fill=\"currentColor\"/><text x=\"260.0\" y=\"134.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
     }
   ]
 }
