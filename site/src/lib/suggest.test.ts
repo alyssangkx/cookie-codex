@@ -174,3 +174,17 @@ test('cap reached: only a done card linking to the collection', () => {
   assert.equal(r[0].kind, 'done');
   assert.equal(r[0].href, '/collection/');
 });
+
+test('a one-pool sub-topic is one unit: "Next up" links to the pool quiz (no tier), and its milestones count toward power', () => {
+  const s = real();
+  const pool: SubInfo = { id: 'sci-pool', topic: 't', topicName: 'T', name: 'Pool topic', slug: 'pool', playable: { b: true, i: true, c: true }, pool: 30 };
+  const [next] = run(s, [pool]);
+  assert.equal(next.kind, 'next');
+  assert.equal(next.href, '/quiz/?sub=sci-pool');
+  assert.match(next.reason, /past-paper/);
+  s.progress['sci-pool'] = { b: { passes: [], scores: [], best: 0, cleared: true, mastered: 5, total: 30 } };
+  assert.equal(topicPower(s, [pool]), 17); // milestone 1 of 3 (weights 1, 2, 3)
+  const [more] = run(s, [pool]);
+  assert.equal(more.kind, 'one-more');
+  assert.match(more.reason, /5 of 30 past-paper questions counted/);
+});

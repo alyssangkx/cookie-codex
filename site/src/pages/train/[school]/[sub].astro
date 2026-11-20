@@ -1,7 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL, listGroup } from '../../../lib/train';
-import { TIER_MIN, triesPerDay } from '../../../lib/store';
+import { TIER_MIN, triesPerDay, milestoneAt } from '../../../lib/store';
 
 export function getStaticPaths() {
   return subs.map((s) => ({ params: { school: s.school, sub: subSlug(s.id) }, props: { sub: s } }));
@@ -9,24 +9,43 @@ export function getStaticPaths() {
 const { sub } = Astro.props as { sub: (typeof subs)[number] };
 const tries = triesPerDay(sub.id);
 const school = SCHOOLS.find((x) => x.id === sub.school)!;
-const tiers = (['b', 'i', 'c'] as const).map((k) => {
+// a one-pool sub-topic (ADR 0011): one pool of past-paper questions, the three card slots are milestones
+const pool = sub.pool ?? 0;
+const at = milestoneAt(pool);
+const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   const slot = slots[`${sub.id}|${k}`];
-  return { k, name: { b: 'Basic', i: 'Intermediate', c: 'Competent' }[k], slot, cookie: cookieBySlug.get(slot.slug)!,
-    count: sub.count[k], hash: sub.hash[k], playable: sub.playable[k], min: TIER_MIN[k] };
+  return { k, name: pool ? { b: 'Milestone 1', i: 'Milestone 2', c: 'Exam-ready' }[k] : { b: 'Basic', i: 'Intermediate', c: 'Competent' }[k],
+    slot, cookie: cookieBySlug.get(slot.slug)!, at: at[n],
+    count: pool || sub.count[k], hash: pool ? undefined : sub.hash[k], playable: pool ? true : sub.playable[k], min: TIER_MIN[k] };
 });
 ---
 <Base title={`${sub.name} · ${school.name} training`} description={`Three tiers of PSLE ${school.name} practice on ${sub.name}.`}>
-  <section class="wrap sub-page" data-sub={sub.id} data-tries={tries}>
+  <section class="wrap sub-page" data-sub={sub.id} data-tries={tries} data-pool={String(pool)}>
     <p class="crumbs"><a href="/train/">Schools</a> › <a href={`/train/${school.id}/`}>{school.name}</a> › {listGroup(sub).topicName}</p>
     <h1>{sub.name}</h1>
-    <p class="rules">Each quiz has up to 10 questions. Master every question in a tier to clear it and earn its card. A question is mastered when you answer it right the first time, or right again after its retests. You can try each tier up to {tries} times a day. Clear a tier to open the next one.</p>
+    {pool ? (
+      <p class="rules">{pool} real past-paper questions, easier ones first. A question counts when you answer it right, the first time or when it comes back the next day. Count {at[0]} for your first card, {at[1]} for the second, and more than half ({at[2]}) to be Exam-ready. You can train up to {tries} times a day.</p>
+    ) : (
+      <p class="rules">Each quiz has up to 10 questions. Master every question in a tier to clear it and earn its card. A question is mastered when you answer it right the first time, or right again after its retests. You can try each tier up to {tries} times a day. Clear a tier to open the next one.</p>
+    )}
     <p id="cap" class="cap" hidden>Done for today! You have reached today's training time. Come back tomorrow.</p>
+    {pool > 0 && (
+      <div class="pool-panel">
+        <p class="pool-count" aria-live="polite"><strong id="pool-n">0</strong> of {pool} past-paper questions counted</p>
+        <div class="pool-bar" role="img" aria-label="Progress toward the milestones">
+          <span class="pool-fill" style="width: 0%"></span>
+          {at.map((a, n) => <span class="pool-mark" style={`left: ${(100 * a) / pool}%`} title={tiers[n].name}></span>)}
+        </div>
+        <p class="pool-state" aria-live="polite"></p>
+        <a class="start pool-start" href={`/quiz/?sub=${encodeURIComponent(sub.id)}`}>Train with past papers</a>
+      </div>
+    )}
 
     <div class="tiers">
       {tiers.map((t) => (
         <article class="tier-card" data-tier={t.k} data-count={String(t.count)} data-hash={t.hash} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
           <h2>{t.name}</h2>
-          <p class="tier-help">{{ b: 'The main ideas, step by step.', i: 'Trickier, mixed questions.', c: 'The hardest, exam-style questions.' }[t.k]}</p>
+          <p class="tier-help">{pool ? `At ${t.at} of ${pool} counted.` : { b: 'The main ideas, step by step.', i: 'Trickier, mixed questions.', c: 'The hardest, exam-style questions.' }[t.k]}</p>
           <a class="reward" href={`/cookie/${t.cookie.slug}/`} style={`--rc: var(--r-${t.cookie.rarity})`}>
             <img src={t.cookie.image} alt="" width="96" height="96" loading="lazy" />
             <span>
@@ -35,9 +54,9 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
               <span class="reward-rarity">{t.cookie.rarity.replace('-', ' ')}</span>
             </span>
           </a>
-          <p class="meta">{t.min} minutes · {t.count} questions in the bank</p>
+          {!pool && <p class="meta">{t.min} minutes · {t.count} questions in the bank</p>}
           <p class="state" aria-live="polite">{t.playable ? '' : `Questions coming soon (needs at least ${MIN_POOL}).`}</p>
-          {t.playable && <a class="start" href={`/quiz/?sub=${encodeURIComponent(sub.id)}&tier=${t.k}`}>Start {t.name} quiz</a>}
+          {t.playable && !pool && <a class="start" href={`/quiz/?sub=${encodeURIComponent(sub.id)}&tier=${t.k}`}>Start {t.name} quiz</a>}
         </article>
       ))}
     </div>
@@ -56,7 +75,21 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
   const capEl = document.getElementById('cap')!;
   capEl.hidden = !reason;
   if (reason) capEl.textContent = blockMessage(reason);
-  root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
+  const pool = Number(root.dataset.pool) || 0;
+  if (pool) { // one pool (ADR 0011): the counted share, each milestone's state, one Train button
+    const counted = liveMastered(tierState(s, sub, 'b'), pool, undefined); // syncMilestones stores the count on every slot
+    document.getElementById('pool-n')!.textContent = String(counted);
+    root.querySelector<HTMLElement>('.pool-fill')!.style.width = `${Math.min(100, (100 * counted) / pool)}%`;
+    root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
+      card.querySelector('.reward-label')!.textContent = actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
+      if (tierState(s, sub, card.dataset.tier as Tier).cleared) { card.dataset.state = 'cleared'; card.querySelector('.state')!.textContent = 'Reached ✓'; }
+    });
+    const start = root.querySelector<HTMLAnchorElement>('.pool-start')!;
+    const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this topic today. Come back tomorrow.` : reason ? blockMessage(reason) : '';
+    root.querySelector('.pool-state')!.textContent = block || (tierState(s, sub, 'c').cleared ? 'Exam-ready ✓ Keep practising to count them all.' : 'Ready when you are.');
+    if (block) { start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
+  }
+  if (!pool) root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
     // the preview always matches the real reward: a star only if the card is already owned
     card.querySelector('.reward-label')!.textContent = actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
     if (card.dataset.playable !== 'true') return;
@@ -120,4 +153,10 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     border-radius: var(--radius-control); padding: 0.5rem 1rem; min-height: 44px; display: inline-flex; align-items: center; text-decoration: none;
   }
   .start[aria-disabled='true'] { background: var(--crust); color: var(--cocoa-soft); cursor: not-allowed; }
+  .pool-panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1rem 1.25rem; margin-bottom: 1rem; display: grid; gap: 0.6rem; }
+  .pool-count { margin: 0; font-size: 1.05rem; }
+  .pool-bar { position: relative; height: 14px; background: var(--plate); border-radius: 999px; overflow: visible; }
+  .pool-fill { position: absolute; inset: 0 auto 0 0; background: var(--berry); border-radius: 999px; }
+  .pool-mark { position: absolute; top: -4px; bottom: -4px; width: 3px; margin-left: -1.5px; background: var(--cocoa); border-radius: 2px; }
+  .pool-state { margin: 0; color: var(--cocoa-soft); }
 </style>

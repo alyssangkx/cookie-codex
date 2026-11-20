@@ -8,6 +8,7 @@ export interface SubInfo {
   playable: Record<Tier, boolean>;
   count?: Record<Tier, number>; // questions per tier, for the "N of M mastered" wording
   hash?: Record<Tier, string>; // tierHash of each tier's question ids (train.ts), so a redesigned tier reads as stale
+  pool?: number; // a one-pool sub-topic (ADR 0011): its past-paper count; one unit, its slots are milestones
 }
 export interface Suggestion {
   kind: 'review' | 'one-more' | 'weak' | 'next' | 'done';
@@ -76,7 +77,9 @@ export function recentAccuracy(s: SaveV1, now: number) {
   return m;
 }
 
-const tierHref = (sub: string, tier: Tier) => `/quiz/?sub=${encodeURIComponent(sub)}&tier=${tier}`;
+const tierHref = (sub: string, tier: Tier, pool = false) => `/quiz/?sub=${encodeURIComponent(sub)}${pool ? '' : `&tier=${tier}`}`;
+/** "Basic", or "Past papers" for a one-pool sub-topic (it has no tiers). */
+const unitLabel = (sub: SubInfo | undefined, t: Tier) => (sub?.pool ? 'Past papers' : TIER_NAME[t]);
 
 export function suggestions(
   s: SaveV1, subs: SubInfo[],
@@ -95,8 +98,9 @@ export function suggestions(
     return out;
   }
 
-  const canStart = (sub: SubInfo, t: Tier) =>
-    sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && !triesUsedUp(s, sub.id, t);
+  const canStart = (sub: SubInfo, t: Tier) => sub.pool
+    ? t === 'b' && !triesUsedUp(s, sub.id) // one unit: its first slot stands for the whole pool
+    : sub.playable[t] && tierOpen(s, sub.id, t, sub.playable) && !triesUsedUp(s, sub.id, t);
   const taken = new Set<string>();
   const out: Suggestion[] = [];
   const add = (x: Suggestion) => {
@@ -117,14 +121,16 @@ export function suggestions(
   for (const sub of subs) {
     const hit = TIERS.find((t) => {
       const st = tierState(s, sub.id, t);
-      return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t], sub.hash?.[t]) > 0; // a count from a replaced bank is 0
+      return canStart(sub, t) && !(sub.pool ? tierState(s, sub.id, 'c').cleared : st.cleared)
+        && liveMastered(st, sub.pool ?? sub.count?.[t], sub.pool ? undefined : sub.hash?.[t]) > 0; // a count from a replaced bank is 0
     });
     if (hit) {
-      const total = sub.count![hit]; // liveMastered > 0 above means the count is known and matches the stored total
-      const m = liveMastered(tierState(s, sub.id, hit), total, sub.hash?.[hit]);
+      const total = sub.pool ?? sub.count![hit]; // liveMastered > 0 above means the count is known and matches the stored total
+      const m = liveMastered(tierState(s, sub.id, hit), total, sub.pool ? undefined : sub.hash?.[hit]);
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
-        reason: `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`, href: tierHref(sub.id, hit),
+        reason: sub.pool ? `${m} of ${total} past-paper questions counted.` : `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`,
+        href: tierHref(sub.id, hit, !!sub.pool),
       });
       break;
     }
@@ -140,17 +146,17 @@ export function suggestions(
     const sub = byId.get(weak.sub)!;
     add({
       kind: 'weak', title: `Fix a weak spot: ${sub.name}`, sub: weak.sub, tier: weak.tier,
-      reason: `${TIER_NAME[weak.tier]}: ${weak.acc}% right over the last ${WEAK_DAYS} days`, href: tierHref(weak.sub, weak.tier),
+      reason: `${unitLabel(sub, weak.tier)}: ${weak.acc}% right over the last ${WEAK_DAYS} days`, href: tierHref(weak.sub, weak.tier, !!sub.pool),
     });
   }
 
   // 4. Next up: first open, uncleared, playable tier in syllabus order
   outer: for (const sub of subs)
     for (const t of TIERS)
-      if (canStart(sub, t) && !tierState(s, sub.id, t).cleared && !taken.has(`${sub.id}|${t}`)) {
+      if (canStart(sub, t) && !tierState(s, sub.id, sub.pool ? 'c' : t).cleared && !taken.has(`${sub.id}|${t}`)) {
         add({
           kind: 'next', title: `Next up: ${sub.name}`, sub: sub.id, tier: t,
-          reason: `${TIER_NAME[t]} is open. Try it!`, href: tierHref(sub.id, t),
+          reason: sub.pool ? 'Real past-paper questions. Try them!' : `${TIER_NAME[t]} is open. Try it!`, href: tierHref(sub.id, t, !!sub.pool),
         });
         break outer;
       }

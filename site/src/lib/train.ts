@@ -85,8 +85,10 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
     const pool = ppMode(s.id) === 'pool' && ppTotal(s.id) >= MIN_POOL ? ppTotal(s.id) : undefined;
     return {
       ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool } : {}),
-      // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier playable)
-      playable: { b: countOf(`${s.id}|b`) >= MIN_POOL, i: countOf(`${s.id}|i`) >= MIN_POOL, c: countOf(`${s.id}|c`) >= MIN_POOL },
+      // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier
+      // playable); a one-pool sub-topic's three slots are milestones, all reachable, so they count as playable (power, pages)
+      playable: pool ? { b: true, i: true, c: true }
+        : { b: countOf(`${s.id}|b`) >= MIN_POOL, i: countOf(`${s.id}|i`) >= MIN_POOL, c: countOf(`${s.id}|c`) >= MIN_POOL },
     };
   }),
 );
