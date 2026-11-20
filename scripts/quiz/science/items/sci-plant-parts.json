@@ -31,7 +31,12 @@
       ],
       "solution": [
         "The roots grow in the soil and take in water and mineral salts."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-002",
@@ -63,7 +68,12 @@
       ],
       "solution": [
         "Leaves use sunlight, water and carbon dioxide to make food."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-003",
@@ -95,7 +105,12 @@
       ],
       "solution": [
         "The stem holds the leaves and flowers up and carries water and food around the plant."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-004",
@@ -156,70 +171,6 @@
       }
     },
     {
-      "key": "pp-005",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "Which part of a plant makes the seeds?",
-      "options": [
-        "The flower",
-        "The stem that holds the plant up",
-        "The root",
-        "The leaf"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "The stem supports the plant and carries water. It does not make seeds."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "The root takes in water and mineral salts. It does not make seeds."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "The leaf makes food. It does not make seeds."
-        }
-      ],
-      "solution": [
-        "The flower is the part that makes the seeds."
-      ]
-    },
-    {
-      "key": "pp-006",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "What is one job of the fruit of a plant?",
-      "options": [
-        "To protect the seeds as they grow inside it",
-        "To make food for the plant",
-        "To take in water for the plant",
-        "To hold the plant up in the wind"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves, not by the fruit."
-        },
-        {
-          "tag": "which-part-takes-in",
-          "why": "Water is taken in by the roots, not by the fruit."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Holding the plant up is the job of the stem and roots."
-        }
-      ],
-      "solution": [
-        "The fruit covers and protects the seeds while they grow."
-      ]
-    },
-    {
       "key": "pp-007",
       "level": "basic",
       "outcome": "sci-systems-plant-parts-fn-2",
@@ -252,7 +203,7 @@
       ],
       "figure": {
         "img": "/science/pp-bean-seedling.webp",
-        "alt": "A young bean seedling in line art with a root in the soil, a short stem and the first leaves, with three marked positions.",
+        "alt": "A young bean seedling in line art.",
         "labels": [
           {
             "x": 45.9,
@@ -268,64 +219,6 @@
             "x": 41.0,
             "y": 12.2,
             "text": "C"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-008",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "In the picture of the chilli plant, part B contains the seeds. What is part B?",
-      "options": [
-        "The flower",
-        "The fruit",
-        "The leaf",
-        "The stem"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "wrong-part",
-          "why": "The flower is the part that later turns into the fruit. It is not the part holding the seeds."
-        },
-        null,
-        {
-          "tag": "wrong-part",
-          "why": "Leaves are flat and green and do not hold seeds."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "The stem is the long part that holds up the plant. It does not hold seeds."
-        }
-      ],
-      "solution": [
-        "The chilli is the fruit. The seeds are inside it."
-      ],
-      "figure": {
-        "img": "/science/pp-chilli-plant.webp",
-        "alt": "A chilli plant in line art with a flower, a ripe chilli with seeds showing, a leaf and a stem, with four marked positions.",
-        "labels": [
-          {
-            "x": 33.7,
-            "y": 27.8,
-            "text": "A"
-          },
-          {
-            "x": 74.2,
-            "y": 54.7,
-            "text": "B"
-          },
-          {
-            "x": 36.1,
-            "y": 38.6,
-            "text": "C"
-          },
-          {
-            "x": 45.9,
-            "y": 68.4,
-            "text": "D"
           }
         ]
       }
@@ -360,7 +253,8 @@
       ],
       "solution": [
         "Roots grew from the stem so the cutting could take in water."
-      ]
+      ],
+      "figure": "<svg viewBox=\"0 0 300 285\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M105 120 L105 235 Q105 245 115 245 L185 245 Q195 245 195 235 L195 120\"/><line x1=\"100\" y1=\"120\" x2=\"200\" y2=\"120\"/><path d=\"M107 160 L193 160\"/><path d=\"M150 235 L150 60\"/><ellipse cx=\"120\" cy=\"82\" rx=\"28\" ry=\"12\" transform=\"rotate(25 120 82)\"/><ellipse cx=\"180\" cy=\"70\" rx=\"28\" ry=\"12\" transform=\"rotate(-25 180 70)\"/><text x=\"150\" y=\"268\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">a cutting at the start</text></svg>"
     },
     {
       "key": "pp-010",
@@ -392,7 +286,12 @@
       ],
       "solution": [
         "The leaves of kangkong make the food for the plant."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-kangkong.webp",
+        "alt": "A kangkong plant floating in water.",
+        "labels": []
+      }
     },
     {
       "key": "pp-011",
@@ -456,7 +355,12 @@
       ],
       "solution": [
         "Cabbage is made of leaves."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-013",
@@ -488,7 +392,8 @@
       ],
       "solution": [
         "The trunk is the stem of the tree and keeps the leaves up in the light."
-      ]
+      ],
+      "figure": "<svg viewBox=\"0 0 300 280\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"10\" y1=\"250\" x2=\"290\" y2=\"250\"/><path d=\"M138 250 L142 150 M162 250 L158 150\"/><path d=\"M138 250 Q120 262 100 266 M162 250 Q180 262 200 266\"/><path d=\"M142 150 Q70 150 70 100 Q60 50 110 45 Q150 15 190 45 Q240 50 230 100 Q230 150 158 150 Z\"/></svg>"
     },
     {
       "key": "pp-014",
@@ -636,39 +541,12 @@
       ],
       "solution": [
         "Roots take in water from the soil."
-      ]
-    },
-    {
-      "key": "pp-017",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A banyan tree has long roots that hang down in the air from its branches. What are these roots called?",
-      "options": [
-        "Storage roots",
-        "Climbing stems",
-        "Flower stalks",
-        "Aerial roots, which grow in the air"
       ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-term",
-          "why": "Storage roots are thick roots under the ground, like a carrot, that store food."
-        },
-        {
-          "tag": "wrong-term",
-          "why": "Climbing stems are stems that wind around a support. These are roots, not stems."
-        },
-        {
-          "tag": "wrong-term",
-          "why": "Flower stalks hold up flowers. These hanging parts are roots."
-        },
-        null
-      ],
-      "solution": [
-        "Roots that grow in the air are called aerial roots."
-      ]
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-018",
@@ -700,7 +578,12 @@
       ],
       "solution": [
         "Roots grip the soil and hold the plant firmly."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-019",
@@ -732,7 +615,8 @@
       ],
       "solution": [
         "Leaves use sunlight, water and carbon dioxide to make food."
-      ]
+      ],
+      "figure": "<svg viewBox=\"0 0 300 290\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"20\" y1=\"200\" x2=\"280\" y2=\"200\"/><text x=\"272\" y=\"218\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">soil</text><text x=\"272\" y=\"40\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">air</text><line x1=\"150\" y1=\"200\" x2=\"150\" y2=\"62\" stroke-width=\"4\"/><path d=\"M150 200 Q 120 227 90 255\"/><path d=\"M150 200 Q 135 235 120 270\"/><path d=\"M150 200 Q 150 237 150 275\"/><path d=\"M150 200 Q 165 235 180 270\"/><path d=\"M150 200 Q 180 227 210 255\"/><ellipse cx=\"205\" cy=\"95\" rx=\"38\" ry=\"14\" transform=\"rotate(-25 205 95)\"/><line x1=\"170\" y1=\"108\" x2=\"238\" y2=\"82\"/><ellipse cx=\"95\" cy=\"120\" rx=\"38\" ry=\"14\" transform=\"rotate(25 95 120)\"/><line x1=\"130\" y1=\"132\" x2=\"62\" y2=\"108\"/><ellipse cx=\"166\" cy=\"48\" rx=\"9\" ry=\"6\" transform=\"rotate(0 166 48)\"/><ellipse cx=\"154.9\" cy=\"63.2\" rx=\"9\" ry=\"6\" transform=\"rotate(72 154.9 63.2)\"/><ellipse cx=\"137.1\" cy=\"57.4\" rx=\"9\" ry=\"6\" transform=\"rotate(144 137.1 57.4)\"/><ellipse cx=\"137.1\" cy=\"38.6\" rx=\"9\" ry=\"6\" transform=\"rotate(216 137.1 38.6)\"/><ellipse cx=\"154.9\" cy=\"32.8\" rx=\"9\" ry=\"6\" transform=\"rotate(288 154.9 32.8)\"/><circle cx=\"150\" cy=\"48\" r=\"6\"/></svg>"
     },
     {
       "key": "pp-020",
@@ -764,39 +648,8 @@
       ],
       "solution": [
         "Water goes from the roots, up the stem, to the leaves."
-      ]
-    },
-    {
-      "key": "pp-021",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "Why do many flowers have bright petals?",
-      "options": [
-        "To take in water for the plant from the soil",
-        "To attract insects to the flower",
-        "To make food for the plant",
-        "To hold the plant up"
       ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "part-function-swap",
-          "why": "Water is taken in by the roots, not by petals."
-        },
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves, not the petals."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Holding the plant up is done by the stem, not by the petals."
-        }
-      ],
-      "solution": [
-        "Bright petals attract insects that visit the flower."
-      ]
+      "figure": "<svg viewBox=\"0 0 300 290\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"20\" y1=\"200\" x2=\"280\" y2=\"200\"/><text x=\"272\" y=\"218\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">soil</text><text x=\"272\" y=\"40\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">air</text><line x1=\"150\" y1=\"200\" x2=\"150\" y2=\"62\" stroke-width=\"4\"/><path d=\"M150 200 Q 120 227 90 255\"/><path d=\"M150 200 Q 135 235 120 270\"/><path d=\"M150 200 Q 150 237 150 275\"/><path d=\"M150 200 Q 165 235 180 270\"/><path d=\"M150 200 Q 180 227 210 255\"/><ellipse cx=\"205\" cy=\"95\" rx=\"38\" ry=\"14\" transform=\"rotate(-25 205 95)\"/><line x1=\"170\" y1=\"108\" x2=\"238\" y2=\"82\"/><ellipse cx=\"95\" cy=\"120\" rx=\"38\" ry=\"14\" transform=\"rotate(25 95 120)\"/><line x1=\"130\" y1=\"132\" x2=\"62\" y2=\"108\"/><ellipse cx=\"166\" cy=\"48\" rx=\"9\" ry=\"6\" transform=\"rotate(0 166 48)\"/><ellipse cx=\"154.9\" cy=\"63.2\" rx=\"9\" ry=\"6\" transform=\"rotate(72 154.9 63.2)\"/><ellipse cx=\"137.1\" cy=\"57.4\" rx=\"9\" ry=\"6\" transform=\"rotate(144 137.1 57.4)\"/><ellipse cx=\"137.1\" cy=\"38.6\" rx=\"9\" ry=\"6\" transform=\"rotate(216 137.1 38.6)\"/><ellipse cx=\"154.9\" cy=\"32.8\" rx=\"9\" ry=\"6\" transform=\"rotate(288 154.9 32.8)\"/><circle cx=\"150\" cy=\"48\" r=\"6\"/></svg>"
     },
     {
       "key": "pp-022",
@@ -828,7 +681,12 @@
       ],
       "solution": [
         "Roots grip the soil and hold the plant firmly."
-      ]
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
     },
     {
       "key": "pp-023",
@@ -864,70 +722,6 @@
       "figure": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 260\" font-family=\"Arial, sans-serif\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><line x1=\"20\" y1=\"120\" x2=\"340\" y2=\"120\"/><text x=\"25\" y=\"140\" font-size=\"12\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\">soil</text><line x1=\"150\" y1=\"120\" x2=\"150\" y2=\"55\" stroke-width=\"4\"/><ellipse cx=\"118\" cy=\"88\" rx=\"30\" ry=\"12\" transform=\"rotate(-20 118 88)\"/><ellipse cx=\"182\" cy=\"75\" rx=\"30\" ry=\"12\" transform=\"rotate(20 182 75)\"/><circle cx=\"150\" cy=\"42\" r=\"9\"/><circle cx=\"167\" cy=\"42\" r=\"7\"/><circle cx=\"155\" cy=\"58\" r=\"7\"/><circle cx=\"136\" cy=\"52\" r=\"7\"/><circle cx=\"136\" cy=\"32\" r=\"7\"/><circle cx=\"155\" cy=\"26\" r=\"7\"/><path d=\"M150 120 Q140 160 112 195\"/><path d=\"M150 120 L150 200\"/><path d=\"M150 120 Q160 160 188 195\"/><path d=\"M150 150 L128 160 M150 165 L172 175\"/><line x1=\"168\" y1=\"40\" x2=\"262\" y2=\"40\"/><text x=\"272\" y=\"46\" font-size=\"20\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">R</text><line x1=\"205\" y1=\"80\" x2=\"262\" y2=\"80\"/><text x=\"272\" y=\"86\" font-size=\"20\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">S</text><line x1=\"152\" y1=\"105\" x2=\"262\" y2=\"105\"/><text x=\"272\" y=\"111\" font-size=\"20\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">P</text><line x1=\"160\" y1=\"175\" x2=\"262\" y2=\"175\"/><text x=\"272\" y=\"181\" font-size=\"20\" text-anchor=\"start\" fill=\"currentColor\" stroke=\"none\" font-weight=\"bold\">Q</text></svg>"
     },
     {
-      "key": "pp-024",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "What is the job of a seed?",
-      "options": [
-        "To make food for the plant",
-        "To grow into a new plant",
-        "To take in water for the plant",
-        "To hold the leaves up"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves, not by a seed."
-        },
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "Taking in water is the job of the roots."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Holding the leaves up is the job of the stem."
-        }
-      ],
-      "solution": [
-        "A seed can grow into a new plant when it gets what it needs."
-      ]
-    },
-    {
-      "key": "pp-025",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "A farmer picks guavas from a tree. Which part of the plant is a guava?",
-      "options": [
-        "A seed",
-        "A flower",
-        "A root",
-        "A fruit"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-part",
-          "why": "Seeds are found inside the guava. The whole guava is the fruit."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "A guava starts as a flower, but the part we pick is the fruit."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Roots grow in the soil. A guava grows on the tree."
-        },
-        null
-      ],
-      "solution": [
-        "A guava is a fruit, with seeds inside."
-      ]
-    },
-    {
       "key": "pp-026",
       "level": "basic",
       "outcome": "sci-systems-plant-parts-fn-2",
@@ -960,7 +754,7 @@
       ],
       "figure": {
         "img": "/science/pp-orchid-tree.webp",
-        "alt": "An orchid growing on a tree trunk in line art, with a flower, leaves and long roots hanging in the air, with four marked positions.",
+        "alt": "An orchid growing on a tree trunk in line art.",
         "labels": [
           {
             "x": 37.1,
@@ -981,117 +775,6 @@
             "x": 80.1,
             "y": 7.8,
             "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-027",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "Look at the picture of the flower cut in half. Which part is brightly coloured and attracts insects?",
-      "options": [
-        "Part A",
-        "Part B",
-        "Part C",
-        "Part D"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-part",
-          "why": "Part B is inside the flower and makes pollen. It is not there to attract insects."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Part C is inside the flower. It receives pollen and is not the bright outer part."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Part D is at the base of the flower and later grows into the fruit."
-        }
-      ],
-      "solution": [
-        "Part A is a petal. Bright petals attract insects."
-      ],
-      "figure": {
-        "img": "/science/pp-flower-cut.webp",
-        "alt": "A flower cut in half in line art, showing its petals and the parts inside, with four marked positions.",
-        "labels": [
-          {
-            "x": 17.6,
-            "y": 29.3,
-            "text": "A"
-          },
-          {
-            "x": 30.3,
-            "y": 21.0,
-            "text": "B"
-          },
-          {
-            "x": 58.6,
-            "y": 17.1,
-            "text": "C"
-          },
-          {
-            "x": 50.3,
-            "y": 55.7,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-028",
-      "level": "basic",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "Look at the picture of the bean seed cut open. Part A covers the outside of the seed. What is the job of part A?",
-      "options": [
-        "To take in water and mineral salts for the young plant",
-        "To make food for the seed",
-        "To protect the parts inside the seed",
-        "To attract insects to the seed"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "part-function-swap",
-          "why": "Water is taken in by the root of the young plant, not by the covering."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Seeds do not make food. Leaves make food once the plant grows."
-        },
-        null,
-        {
-          "tag": "wrong-function",
-          "why": "Insects are attracted to the flower, not to the seed covering."
-        }
-      ],
-      "solution": [
-        "The outer covering of a seed protects the parts inside."
-      ],
-      "figure": {
-        "img": "/science/pp-bean-seed.webp",
-        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
-        "labels": [
-          {
-            "x": 6.8,
-            "y": 48.8,
-            "text": "A"
-          },
-          {
-            "x": 74.2,
-            "y": 54.7,
-            "text": "B"
-          },
-          {
-            "x": 40.0,
-            "y": 36.6,
-            "text": "C"
           }
         ]
       }
@@ -1187,719 +870,6 @@
         "Roots can only take in water from the soil.",
         "With dry soil, the leaves lose water and droop."
       ]
-    },
-    {
-      "key": "pp-031",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A banyan tree has thick roots hanging from its branches (part B). How do these roots help the tree?",
-      "options": [
-        "They reach the ground and help to hold up the very heavy tree",
-        "They make food for the whole tree using light and water",
-        "They protect the seeds as they grow in the fruit",
-        "They attract insects to the flowers of the tree"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves (part C), not by the roots."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Protecting seeds is the job of the fruit."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Insects are attracted by the flowers, not by the roots."
-        }
-      ],
-      "solution": [
-        "Aerial roots that grow down into the ground help to support a large tree."
-      ],
-      "figure": {
-        "img": "/science/pp-banyan-tree.webp",
-        "alt": "A banyan tree in line art with a thick trunk, spreading branches with leaves, and long roots hanging down from the branches, with four marked positions.",
-        "labels": [
-          {
-            "x": 53.7,
-            "y": 60.5,
-            "text": "A"
-          },
-          {
-            "x": 20.0,
-            "y": 63.5,
-            "text": "B"
-          },
-          {
-            "x": 10.7,
-            "y": 32.2,
-            "text": "C"
-          },
-          {
-            "x": 32.2,
-            "y": 49.8,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-032",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "An orchid grows on the trunk of a tree. The roots labelled B hang in the air. Which statement about them is correct?",
-      "options": [
-        "They take in water and mineral salts from the soil below the tree",
-        "They hold up the leaves so they get sunlight",
-        "They grip the tree and take in moisture from the air",
-        "They make the seeds that grow into new orchids"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "which-part-takes-in",
-          "why": "The orchid sits on the trunk, not in soil. Its aerial roots take in moisture from the air."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Holding leaves up is a job of stems. These roots grip the tree."
-        },
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "Seeds are made by flowers, not by roots."
-        }
-      ],
-      "solution": [
-        "Orchid aerial roots cling to the tree and take in moisture from the air."
-      ],
-      "figure": {
-        "img": "/science/pp-orchid-tree.webp",
-        "alt": "An orchid growing on a tree trunk in line art, with a flower, leaves and long roots hanging in the air, with four marked positions.",
-        "labels": [
-          {
-            "x": 37.1,
-            "y": 18.1,
-            "text": "A"
-          },
-          {
-            "x": 44.9,
-            "y": 74.2,
-            "text": "B"
-          },
-          {
-            "x": 45.9,
-            "y": 43.5,
-            "text": "C"
-          },
-          {
-            "x": 80.1,
-            "y": 7.8,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-033",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A money plant has a weak stem. Small roots (part C) on its stem press against a pole. How does this help the plant?",
-      "options": [
-        "The plant no longer needs its leaves to make food",
-        "The flowers of the plant open later in the night",
-        "The fruits grow larger on the plant and fall off sooner",
-        "The stem is held on the pole so the leaves can reach more light"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-cause",
-          "why": "All green plants still need leaves to make food."
-        },
-        {
-          "tag": "unrelated",
-          "why": "The small roots hold the stem on the pole. They do not change when flowers open."
-        },
-        {
-          "tag": "unrelated",
-          "why": "The roots on the stem grip the pole. They do not make fruits larger."
-        },
-        null
-      ],
-      "solution": [
-        "The small roots grip the pole so the weak stem climbs up towards the light."
-      ],
-      "figure": {
-        "img": "/science/pp-money-plant-pole.webp",
-        "alt": "A money plant climbing up a pole in line art, with heart-shaped leaves, a weak stem and small roots on the stem pressed against the pole, with four marked positions.",
-        "labels": [
-          {
-            "x": 34.2,
-            "y": 8.8,
-            "text": "A"
-          },
-          {
-            "x": 42.0,
-            "y": 33.7,
-            "text": "B"
-          },
-          {
-            "x": 57.6,
-            "y": 55.7,
-            "text": "C"
-          },
-          {
-            "x": 56.2,
-            "y": 5.9,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-034",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A pea plant has a weak stem. Its tendrils (part A) curl round a support. How does this help the plant?",
-      "options": [
-        "The stem is held up so the leaves get light",
-        "The tendrils take in water from the moist air",
-        "The tendrils make the seeds for the whole plant",
-        "The tendrils keep animals away from the plant"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "which-part-takes-in",
-          "why": "Tendrils hold on to a support. Water is taken in by the roots."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Seeds are made by the flower (part D), not the tendrils."
-        },
-        {
-          "tag": "wrong-function",
-          "why": "Keeping animals away is the job of thorns, not tendrils."
-        }
-      ],
-      "solution": [
-        "Tendrils wind round a support and help the weak stem to climb."
-      ],
-      "figure": {
-        "img": "/science/pp-tendril-climber.webp",
-        "alt": "A pea plant with a thin stem climbing a support in line art, with leaves, a flower and curly thread-like parts wound round the support, with four marked positions.",
-        "labels": [
-          {
-            "x": 56.2,
-            "y": 17.1,
-            "text": "A"
-          },
-          {
-            "x": 61.5,
-            "y": 32.2,
-            "text": "B"
-          },
-          {
-            "x": 43.5,
-            "y": 92.8,
-            "text": "C"
-          },
-          {
-            "x": 29.3,
-            "y": 32.2,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-035",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A cactus grows in a dry desert. How does the thick stem (part B) help it to live there?",
-      "options": [
-        "It stores water for the dry times",
-        "It lets the cactus float on water",
-        "It attracts insects to the flowers",
-        "It makes more leaves to lose water quickly"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "unrelated",
-          "why": "A cactus does not live in water; its thick stem is a water store."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Insects are attracted by the flower (part D), not by the stem."
-        },
-        {
-          "tag": "wrong-cause",
-          "why": "A cactus has spines, not leaves, so that it loses very little water."
-        }
-      ],
-      "solution": [
-        "The thick stem of a cactus holds water the plant can use when there is no rain."
-      ],
-      "figure": {
-        "img": "/science/pp-cactus.webp",
-        "alt": "A cactus in the desert in line art, with a thick green stem covered in spines, shallow spreading roots and a flower, with four marked positions.",
-        "labels": [
-          {
-            "x": 36.6,
-            "y": 54.7,
-            "text": "A"
-          },
-          {
-            "x": 50.8,
-            "y": 34.2,
-            "text": "B"
-          },
-          {
-            "x": 32.2,
-            "y": 83.0,
-            "text": "C"
-          },
-          {
-            "x": 64.5,
-            "y": 12.7,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-036",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "The stalk of a water lily (part B) has many air spaces. How does this help the plant?",
-      "options": [
-        "It takes in more mineral salts from the mud below",
-        "It attracts more insects to the flower",
-        "It stores seeds for when the pond dries up",
-        "It helps the leaf float to get sunlight"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "which-part-takes-in",
-          "why": "Mineral salts are taken in by the roots (part C) in the mud, not by the stalk."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Insects are attracted by the flower (part D), not by air spaces in the stalk."
-        },
-        {
-          "tag": "unrelated",
-          "why": "The stalk does not store seeds. Its air spaces help the plant float."
-        },
-        null
-      ],
-      "solution": [
-        "Air spaces make the stalk and leaf float so the leaf can get sunlight."
-      ],
-      "figure": {
-        "img": "/science/pp-water-lily.webp",
-        "alt": "A water lily in a pond in line art, with a wide leaf floating on the surface, a long stalk, a flower and roots in the mud, with four marked positions.",
-        "labels": [
-          {
-            "x": 29.3,
-            "y": 27.3,
-            "text": "A"
-          },
-          {
-            "x": 43.0,
-            "y": 54.7,
-            "text": "B"
-          },
-          {
-            "x": 37.6,
-            "y": 87.4,
-            "text": "C"
-          },
-          {
-            "x": 82.0,
-            "y": 16.6,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-037",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "Mangrove trees grow in soft mud. How do the thick, arching roots labelled B help the tree?",
-      "options": [
-        "They take in air from the water around them",
-        "They make food for the tree",
-        "They hold the tree up firmly in mud",
-        "They carry the seeds of the tree to the mud"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "wrong-function",
-          "why": "The roots that stick up out of the mud (part A) help the tree get air. These arching roots hold it up."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves (part C)."
-        },
-        null,
-        {
-          "tag": "unrelated",
-          "why": "Roots do not carry seeds. These roots hold the tree in the mud."
-        }
-      ],
-      "solution": [
-        "Roots arching from the trunk spread out and hold the tree up in soft mud."
-      ],
-      "figure": {
-        "img": "/science/pp-mangrove.webp",
-        "alt": "A mangrove tree in muddy water in line art, with curved roots arching from the trunk into the mud, short roots sticking up out of the mud, leaves and a trunk, with four marked positions.",
-        "labels": [
-          {
-            "x": 67.4,
-            "y": 84.0,
-            "text": "A"
-          },
-          {
-            "x": 20.0,
-            "y": 64.5,
-            "text": "B"
-          },
-          {
-            "x": 22.5,
-            "y": 16.6,
-            "text": "C"
-          },
-          {
-            "x": 42.0,
-            "y": 43.0,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-038",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "Mangrove mud has very little air. Some roots (part A) grow upwards out of the mud. How does this help the tree?",
-      "options": [
-        "They take in more sunlight for making food",
-        "They let the roots get air",
-        "They stop the tree from floating away",
-        "They attract insects to the flowers"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "which-part-takes-in",
-          "why": "Making food is done by the leaves (part C). Roots do not make food."
-        },
-        null,
-        {
-          "tag": "wrong-function",
-          "why": "Holding the tree down is done by the arching roots (part B), not the roots sticking up."
-        },
-        {
-          "tag": "unrelated",
-          "why": "Insects are attracted by flowers, not by roots."
-        }
-      ],
-      "solution": [
-        "Roots that stick up out of the mud take in air for the roots below."
-      ],
-      "figure": {
-        "img": "/science/pp-mangrove.webp",
-        "alt": "A mangrove tree in muddy water in line art, with curved roots arching from the trunk into the mud, short roots sticking up out of the mud, leaves and a trunk, with four marked positions.",
-        "labels": [
-          {
-            "x": 67.4,
-            "y": 84.0,
-            "text": "A"
-          },
-          {
-            "x": 20.0,
-            "y": 64.5,
-            "text": "B"
-          },
-          {
-            "x": 22.5,
-            "y": 16.6,
-            "text": "C"
-          },
-          {
-            "x": 42.0,
-            "y": 43.0,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-039",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-adaptations",
-      "stem": "The thick orange part of a carrot is a root that stores food. Why is this useful to the carrot plant?",
-      "options": [
-        "It makes food for the plant using the sunlight under the soil",
-        "The plant can use the stored food later to grow",
-        "It lets the plant float on water",
-        "It protects the seeds of the carrot"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "wrong-cause",
-          "why": "There is no sunlight under the soil, so it cannot make food there."
-        },
-        null,
-        {
-          "tag": "unrelated",
-          "why": "A carrot plant grows in soil and a storage root does not help it float."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Seeds are protected by fruits. The carrot root holds food."
-        }
-      ],
-      "solution": [
-        "A storage root keeps food that the plant can use later."
-      ]
-    },
-    {
-      "key": "pp-040",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "The soft part of the mango (part A) is eaten by animals, which may drop the seed (part B) far away. How does this help the mango tree?",
-      "options": [
-        "More leaves grow on the tree",
-        "The seeds are spread to new places far away",
-        "The roots take in more water",
-        "The flowers open earlier in the year"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "unrelated",
-          "why": "Eating the fruit does not make more leaves grow."
-        },
-        null,
-        {
-          "tag": "unrelated",
-          "why": "Eating the fruit does not change how much water the roots take in."
-        },
-        {
-          "tag": "unrelated",
-          "why": "Animals eating the fruit do not make flowers open earlier."
-        }
-      ],
-      "solution": [
-        "Animals that eat the fruit spread the seeds to other places."
-      ],
-      "figure": {
-        "img": "/science/pp-mango-cut.webp",
-        "alt": "A mango cut open in line art, showing its skin, the soft part and a large seed inside, with three marked positions.",
-        "labels": [
-          {
-            "x": 13.7,
-            "y": 50.8,
-            "text": "A"
-          },
-          {
-            "x": 32.2,
-            "y": 50.8,
-            "text": "B"
-          },
-          {
-            "x": 2.9,
-            "y": 46.9,
-            "text": "C"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-041",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "In the picture of the flower cut in half, which part grows into the fruit after the flower has been pollinated?",
-      "options": [
-        "Part A",
-        "Part B",
-        "Part C",
-        "Part D"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-part",
-          "why": "Part A is a petal. Petals attract insects and later fall off."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Part B makes pollen. It does not grow into the fruit."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Part C receives the pollen. It does not grow into the fruit."
-        },
-        null
-      ],
-      "solution": [
-        "Part D is at the base of the flower. After pollination it grows into the fruit."
-      ],
-      "figure": {
-        "img": "/science/pp-flower-cut.webp",
-        "alt": "A flower cut in half in line art, showing its petals and the parts inside, with four marked positions.",
-        "labels": [
-          {
-            "x": 17.6,
-            "y": 29.3,
-            "text": "A"
-          },
-          {
-            "x": 30.3,
-            "y": 21.0,
-            "text": "B"
-          },
-          {
-            "x": 58.6,
-            "y": 17.1,
-            "text": "C"
-          },
-          {
-            "x": 50.3,
-            "y": 55.7,
-            "text": "D"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-042",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "A bean seed is cut open. Which part gives the young plant food until its leaves can make food?",
-      "options": [
-        "Part A",
-        "Part C",
-        "Both part A and part C",
-        "Part B"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-part",
-          "why": "Part A is the outer covering. It protects the seed and does not give food."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Part C is the young plant itself. It uses the food stored in the seed leaf (part B)."
-        },
-        {
-          "tag": "wrong-part",
-          "why": "Part A protects the seed and part C is the young plant. Neither is the food store, which is part B."
-        },
-        null
-      ],
-      "solution": [
-        "The food store in the seed (part B) feeds the young plant until its first leaves can make food."
-      ],
-      "figure": {
-        "img": "/science/pp-bean-seed.webp",
-        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
-        "labels": [
-          {
-            "x": 6.8,
-            "y": 48.8,
-            "text": "A"
-          },
-          {
-            "x": 74.2,
-            "y": 54.7,
-            "text": "B"
-          },
-          {
-            "x": 40.0,
-            "y": 36.6,
-            "text": "C"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-043",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-adaptations",
-      "stem": "Kangkong grows floating in ponds. How does its hollow stem (part B) help it?",
-      "options": [
-        "The air inside helps it to float",
-        "The water inside the stem makes the plant sink down",
-        "The hollow stem makes food for the roots below",
-        "The hollow stem takes in water from the pond"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-cause",
-          "why": "The air in the hollow stem makes the plant float, not sink."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves (part A)."
-        },
-        {
-          "tag": "which-part-takes-in",
-          "why": "Water is taken in by the roots (part C)."
-        }
-      ],
-      "solution": [
-        "A hollow stem is full of air, which helps the kangkong float."
-      ],
-      "figure": {
-        "img": "/science/pp-kangkong.webp",
-        "alt": "A kangkong plant floating in water in line art, with leaves, a long hollow stem and roots hanging in the water, with three marked positions.",
-        "labels": [
-          {
-            "x": 15.6,
-            "y": 43.9,
-            "text": "A"
-          },
-          {
-            "x": 14.6,
-            "y": 58.6,
-            "text": "B"
-          },
-          {
-            "x": 50.8,
-            "y": 68.4,
-            "text": "C"
-          }
-        ]
-      }
     },
     {
       "key": "pp-044",
@@ -2283,7 +1253,7 @@
       ],
       "figure": {
         "img": "/science/pp-bean-seedling.webp",
-        "alt": "A young bean seedling in line art with a root in the soil, a short stem and the first leaves, with three marked positions.",
+        "alt": "A young bean seedling in line art.",
         "labels": [
           {
             "x": 45.9,
@@ -2333,38 +1303,6 @@
       ],
       "solution": [
         "Carrot and sweet potato are thick roots that store food."
-      ]
-    },
-    {
-      "key": "pp-056",
-      "level": "intermediate",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "Sara picks all the flowers from a chilli plant. What will the plant not be able to make?",
-      "options": [
-        "New leaves on its stem",
-        "Fruits with seeds",
-        "New roots in the soil",
-        "New stems from the tips"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "wrong-claim",
-          "why": "New leaves grow from the stem. They do not need flowers."
-        },
-        null,
-        {
-          "tag": "wrong-claim",
-          "why": "New roots grow from the roots already there. They do not need flowers."
-        },
-        {
-          "tag": "wrong-claim",
-          "why": "New stems grow from the stem tips and do not need flowers."
-        }
-      ],
-      "solution": [
-        "Fruits and seeds form from flowers, so without flowers no fruits form."
       ]
     },
     {
@@ -3020,136 +1958,6 @@
       ]
     },
     {
-      "key": "pp-075",
-      "level": "competent",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-adaptations",
-      "stem": "Which feature best helps a plant to live in a very dry place?",
-      "options": [
-        "A thick stem that stores water, and sharp spines",
-        "Wide, thin leaves with a great many stomata",
-        "Hollow stems full of air",
-        "Long roots that hang in the air"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-adaptation",
-          "why": "Wide leaves with many stomata would lose too much water in a dry place."
-        },
-        {
-          "tag": "wrong-adaptation",
-          "why": "Hollow stems full of air help plants float in water, not live in dry places."
-        },
-        {
-          "tag": "wrong-adaptation",
-          "why": "Hanging aerial roots take moisture from damp air and would not help in a dry place."
-        }
-      ],
-      "solution": [
-        "A plant in a dry place needs to save water.",
-        "A thick stem stores water. Spines lose very little."
-      ]
-    },
-    {
-      "key": "pp-076",
-      "level": "competent",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A plant on the dark floor of a rainforest has large, thin leaves. How does this help it?",
-      "options": [
-        "The leaves can catch more of the weak light",
-        "The leaves can store more water",
-        "The leaves can hold the plant in the soil",
-        "The leaves can lose less water vapour to the air"
-      ],
-      "answer": 0,
-      "explain": [
-        null,
-        {
-          "tag": "wrong-adaptation",
-          "why": "Thin leaves cannot store much water."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Holding the plant in the soil is done by the roots."
-        },
-        {
-          "tag": "wrong-adaptation",
-          "why": "A large, thin leaf has more surface and so loses more water, not less."
-        }
-      ],
-      "solution": [
-        "A large leaf surface catches more of the weak light."
-      ]
-    },
-    {
-      "key": "pp-077",
-      "level": "competent",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-adaptations",
-      "stem": "A tree on a windy seashore has strong roots that spread wide and deep. How does this help the tree?",
-      "options": [
-        "The roots make food from the sunlight",
-        "The roots grip the soil so wind cannot blow it over",
-        "The roots help the leaves to float in the air above the tree",
-        "The roots attract insects to the flowers"
-      ],
-      "answer": 1,
-      "explain": [
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made by the leaves. Roots get no sunlight."
-        },
-        null,
-        {
-          "tag": "wrong-cause",
-          "why": "Leaves do not float in the air, and roots do not lift them."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Insects are attracted by flowers, not by roots."
-        }
-      ],
-      "solution": [
-        "Strong, spreading roots hold the tree firmly so it is not blown over."
-      ]
-    },
-    {
-      "key": "pp-078",
-      "level": "competent",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-adaptations",
-      "stem": "Which statement is true of both the hanging roots of a banyan tree and the aerial roots of an orchid?",
-      "options": [
-        "They make food using sunlight",
-        "They hold the plant in the soil under it",
-        "They make the seeds of the plant",
-        "They grow out in the air, above the ground"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "part-function-swap",
-          "why": "Food is made mainly by leaves, not by these roots."
-        },
-        {
-          "tag": "wrong-claim",
-          "why": "An orchid on a tree trunk does not grow in soil."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Seeds are made by flowers."
-        },
-        null
-      ],
-      "solution": [
-        "Aerial roots grow in the air.",
-        "Banyan roots hang from the branches and orchid roots hang from the tree they grow on."
-      ]
-    },
-    {
       "key": "pp-079",
       "level": "competent",
       "outcome": "sci-systems-plant-parts-fn-1",
@@ -3248,94 +2056,6 @@
       ]
     },
     {
-      "key": "pp-082",
-      "level": "competent",
-      "outcome": "sci-systems-plant-parts-fn-2",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "A bean seed has its food store (part B) removed and is then planted. What is most likely to happen?",
-      "options": [
-        "The young plant grows faster because it has less to carry",
-        "The young plant makes seeds sooner",
-        "The young plant gets food from its seed coat instead",
-        "The young plant grows poorly with less food"
-      ],
-      "answer": 3,
-      "explain": [
-        {
-          "tag": "wrong-prediction",
-          "why": "The food store feeds the young plant, so it grows poorly without it."
-        },
-        {
-          "tag": "wrong-prediction",
-          "why": "A young plant with less food would not make seeds sooner."
-        },
-        {
-          "tag": "wrong-prediction",
-          "why": "The seed coat protects the seed and does not provide food."
-        },
-        null
-      ],
-      "solution": [
-        "The food store feeds the young plant until its leaves can make food.",
-        "Without it, the young plant has far less food."
-      ],
-      "figure": {
-        "img": "/science/pp-bean-seed.webp",
-        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
-        "labels": [
-          {
-            "x": 6.8,
-            "y": 48.8,
-            "text": "A"
-          },
-          {
-            "x": 74.2,
-            "y": 54.7,
-            "text": "B"
-          },
-          {
-            "x": 40.0,
-            "y": 36.6,
-            "text": "C"
-          }
-        ]
-      }
-    },
-    {
-      "key": "pp-083",
-      "level": "competent",
-      "outcome": "sci-systems-plant-parts-fn-1",
-      "pattern": "sci-pat-plant-reproduction",
-      "stem": "Which row about the flower, fruit and seed is correct?",
-      "options": [
-        "Flower: protects seeds; fruit: makes seeds; seed: makes food",
-        "Flower: grows into a plant; fruit: makes seeds; seed: protects the fruit",
-        "Flower: makes seeds; fruit: protects them; seed: grows into a plant",
-        "Flower: makes food; fruit: grows into a plant; seed: makes seeds"
-      ],
-      "answer": 2,
-      "explain": [
-        {
-          "tag": "part-function-swap",
-          "why": "Flowers make seeds and fruits protect them. Seeds do not make food."
-        },
-        {
-          "tag": "part-function-swap",
-          "why": "Seeds grow into plants and do not protect the fruit."
-        },
-        null,
-        {
-          "tag": "part-function-swap",
-          "why": "Leaves make food, and a fruit does not grow into a plant. A seed does."
-        }
-      ],
-      "solution": [
-        "The flower makes the seeds.",
-        "The fruit protects the seeds.",
-        "A seed can grow into a new plant."
-      ]
-    },
-    {
       "key": "pp-084",
       "level": "competent",
       "outcome": "sci-systems-plant-parts-fn-1",
@@ -3367,6 +2087,778 @@
         "Leaves need water as well as sunlight to make food.",
         "The roots take in the water."
       ]
+    },
+    {
+      "key": "pp-101",
+      "level": "basic",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "A gardener ties a tall plant to a stick so that it does not fall over. Which part of the plant is held up by the stick?",
+      "options": [
+        "The stem",
+        "The roots",
+        "The flower only",
+        "The seeds"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "The roots are under the soil. The stick holds up the part above the soil."
+        },
+        {
+          "tag": "too-narrow",
+          "why": "The stick holds up the whole plant, not just the flower."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Seeds form inside the fruit. They are not what holds a plant up."
+        }
+      ],
+      "solution": [
+        "The stem holds up the leaves and flowers, so the stick helps the stem."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-102",
+      "level": "basic",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Hui plants a bean seed in wet soil. Which part of the young plant first grows down into the soil?",
+      "options": [
+        "The first leaves",
+        "The flower",
+        "The fruit",
+        "The root"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The first leaves grow upwards into the light, not down into the soil."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The flower grows much later, on an adult plant."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The fruit forms after the flower. It is not the first part to grow."
+        },
+        null
+      ],
+      "solution": [
+        "A young plant grows its root down first to take in water and hold itself in the soil."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-103",
+      "level": "basic",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Which part of a plant is usually found under the soil?",
+      "options": [
+        "The leaves",
+        "The flowers",
+        "The roots",
+        "The fruits"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Leaves grow above the soil where they can get light."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Flowers grow above the soil, where insects can reach them."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Fruits grow above the soil on the plant."
+        }
+      ],
+      "solution": [
+        "Roots grow down in the soil. The leaves, flowers and fruits are above it."
+      ]
+    },
+    {
+      "key": "pp-104",
+      "level": "basic",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Which part of a plant joins the roots to the leaves?",
+      "options": [
+        "The flower",
+        "The stem",
+        "The fruit",
+        "The seed"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The flower is at the top of the plant and does not join the roots to the leaves."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "A fruit holds seeds. It is not a link between roots and leaves."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A seed grows into a new plant. It does not join parts of the plant."
+        }
+      ],
+      "solution": [
+        "The stem is the part between the roots and the leaves."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-105",
+      "level": "basic",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Which part of a healthy plant is usually green?",
+      "options": [
+        "The leaves",
+        "The roots",
+        "The petals",
+        "The seeds"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Roots are under the soil, away from light, and are usually pale or brown."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Petals are usually brightly coloured to attract insects, not green."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Seeds are usually brown or another colour inside a fruit, not green like leaves."
+        }
+      ],
+      "solution": [
+        "Leaves are green because they hold the green substance that helps them make food."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-111",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Look at the picture of the potted plant. Mei Ling picks off part A every day. What will the plant be unable to make?",
+      "options": [
+        "Food",
+        "Roots",
+        "Seeds",
+        "Water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Food is made in the leaves (part B), which are still there."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Roots grow from the plant under the soil. They do not come from the flower."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "A plant does not make water. It takes water in through its roots."
+        }
+      ],
+      "solution": [
+        "Part A is the flower. Flowers make the seeds.",
+        "With no flowers there will be no seeds."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant drawn in line art with its flower, a broad leaf, a stem and roots shown under the soil, with four marked positions.",
+        "labels": [
+          {
+            "x": 32.7,
+            "y": 18.6,
+            "text": "A"
+          },
+          {
+            "x": 75.7,
+            "y": 33.2,
+            "text": "B"
+          },
+          {
+            "x": 45.9,
+            "y": 41.0,
+            "text": "C"
+          },
+          {
+            "x": 58.6,
+            "y": 84.0,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-112",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Look at the picture of the potted plant. Water must travel from the soil to the leaves. Which shows the parts it passes through, in order?",
+      "options": [
+        "B, C, D",
+        "D, C, B",
+        "D, B, C",
+        "C, D, B"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed-order",
+          "why": "This is the wrong way round. Water moves up, from the roots to the leaves."
+        },
+        null,
+        {
+          "tag": "stem-skipped",
+          "why": "The water cannot jump from the roots to the leaves. It goes up the stem first."
+        },
+        {
+          "tag": "wrong-start",
+          "why": "Water enters at the roots (D), not at the stem."
+        }
+      ],
+      "solution": [
+        "Part D is the roots, part C is the stem and part B is a leaf.",
+        "Water goes in at the roots, up the stem and into the leaves."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant drawn in line art with its flower, a broad leaf, a stem and roots shown under the soil, with four marked positions.",
+        "labels": [
+          {
+            "x": 32.7,
+            "y": 18.6,
+            "text": "A"
+          },
+          {
+            "x": 75.7,
+            "y": 33.2,
+            "text": "B"
+          },
+          {
+            "x": 45.9,
+            "y": 41.0,
+            "text": "C"
+          },
+          {
+            "x": 58.6,
+            "y": 84.0,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-113",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Look at the picture of the potted plant. Part D is torn off when the plant is pulled out of the soil. After some days the leaves droop. Why?",
+      "options": [
+        "The plant cannot take in enough water",
+        "The plant cannot make seeds",
+        "The stem cannot hold up the plant",
+        "The leaves cannot get any sunlight"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Seeds do not affect the leaves drooping. The leaves droop because of too little water."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The stem is still there. Drooping comes from a lack of water."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The leaves are still in the light. The problem is below the soil."
+        }
+      ],
+      "solution": [
+        "Part D is the roots, which take in water.",
+        "Without roots the plant cannot take in enough water, so the leaves droop."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant drawn in line art with its flower, a broad leaf, a stem and roots shown under the soil, with four marked positions.",
+        "labels": [
+          {
+            "x": 32.7,
+            "y": 18.6,
+            "text": "A"
+          },
+          {
+            "x": 75.7,
+            "y": 33.2,
+            "text": "B"
+          },
+          {
+            "x": 45.9,
+            "y": 41.0,
+            "text": "C"
+          },
+          {
+            "x": 58.6,
+            "y": 84.0,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-114",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Which of these is NOT a job of the roots of a plant?",
+      "options": [
+        "Holding the plant in the soil",
+        "Taking in water from the soil",
+        "Taking in mineral salts from the soil",
+        "Making food for the plant"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "is-a-job",
+          "why": "This is a job of the roots, so it is not the answer."
+        },
+        {
+          "tag": "is-a-job",
+          "why": "This is a job of the roots, so it is not the answer."
+        },
+        {
+          "tag": "is-a-job",
+          "why": "This is a job of the roots, so it is not the answer."
+        },
+        null
+      ],
+      "solution": [
+        "Roots hold the plant and take in water and mineral salts.",
+        "Food is made in the leaves, not in the roots."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-115",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Aisha cuts the stem of a potted plant just above the soil and leaves the top part in the pot. After a few days the leaves dry up. Why?",
+      "options": [
+        "The leaves cannot make seeds any more",
+        "The roots cannot hold the plant firmly",
+        "Water from the roots cannot reach the leaves",
+        "The leaves take in too much sunlight"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Leaves do not make seeds. They dry up because they get no water."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The roots are still in the soil. The cut stem breaks the path for water."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Light was the same as before. The change is the cut stem."
+        }
+      ],
+      "solution": [
+        "The stem carries water from the roots up to the leaves.",
+        "When the stem is cut, no water can reach the leaves, so they dry up."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-117",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Sugar cane juice comes from the tall, thick stalks of the sugar cane plant. Which part of the plant is the stalk?",
+      "options": [
+        "The stem",
+        "The root",
+        "The leaf",
+        "The fruit"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Roots grow under the soil. The tall stalk is above it."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Leaves are the thin green blades. The thick stalk is not a leaf."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A fruit holds seeds. The stalk is the part that holds the plant up."
+        }
+      ],
+      "solution": [
+        "The tall, thick part that holds up the leaves is the stem."
+      ]
+    },
+    {
+      "key": "pp-118",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "We eat the green heads of broccoli. These heads are bunches of flower buds. Which part of the broccoli plant do we eat?",
+      "options": [
+        "The roots",
+        "The leaves",
+        "The seeds",
+        "The flowers"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The heads are above the ground. Roots are under the soil."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The heads are buds that would open into flowers. They are not leaves."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The buds have not made seeds yet."
+        },
+        null
+      ],
+      "solution": [
+        "The heads are flower buds, so we eat the flowers of the plant."
+      ]
+    },
+    {
+      "key": "pp-119",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "A sheet of plastic covers the soil of a potted plant. Water is poured only onto the plastic. After a few days the leaves droop. What is the reason?",
+      "options": [
+        "The leaves cannot make food without plastic",
+        "The stem has too much water",
+        "Water cannot reach the roots in the soil",
+        "The flowers are using all the water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Plastic has nothing to do with making food. The soil is blocked so the roots cannot get water."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The stem is getting less water, not more."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Flowers do not use up the water. The roots simply cannot reach any."
+        }
+      ],
+      "solution": [
+        "Plants take in water through the roots in the soil.",
+        "The plastic stops the water reaching the soil, so the leaves droop."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 290\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"20\" y1=\"200\" x2=\"280\" y2=\"200\"/><text x=\"272\" y=\"218\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">soil</text><text x=\"272\" y=\"40\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">air</text><line x1=\"150\" y1=\"200\" x2=\"150\" y2=\"62\" stroke-width=\"4\"/><path d=\"M150 200 Q 120 227 90 255\"/><path d=\"M150 200 Q 135 235 120 270\"/><path d=\"M150 200 Q 150 237 150 275\"/><path d=\"M150 200 Q 165 235 180 270\"/><path d=\"M150 200 Q 180 227 210 255\"/><ellipse cx=\"205\" cy=\"95\" rx=\"38\" ry=\"14\" transform=\"rotate(-25 205 95)\"/><line x1=\"170\" y1=\"108\" x2=\"238\" y2=\"82\"/><ellipse cx=\"95\" cy=\"120\" rx=\"38\" ry=\"14\" transform=\"rotate(25 95 120)\"/><line x1=\"130\" y1=\"132\" x2=\"62\" y2=\"108\"/><ellipse cx=\"166\" cy=\"48\" rx=\"9\" ry=\"6\" transform=\"rotate(0 166 48)\"/><ellipse cx=\"154.9\" cy=\"63.2\" rx=\"9\" ry=\"6\" transform=\"rotate(72 154.9 63.2)\"/><ellipse cx=\"137.1\" cy=\"57.4\" rx=\"9\" ry=\"6\" transform=\"rotate(144 137.1 57.4)\"/><ellipse cx=\"137.1\" cy=\"38.6\" rx=\"9\" ry=\"6\" transform=\"rotate(216 137.1 38.6)\"/><ellipse cx=\"154.9\" cy=\"32.8\" rx=\"9\" ry=\"6\" transform=\"rotate(288 154.9 32.8)\"/><circle cx=\"150\" cy=\"48\" r=\"6\"/></svg>"
+    },
+    {
+      "key": "pp-120",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Which two parts of a plant take in things from outside the plant?",
+      "options": [
+        "The stem and the flowers",
+        "The roots and the leaves",
+        "The flowers and the fruits",
+        "The stem and the roots"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-parts",
+          "why": "The stem carries things and the flowers make seeds. Neither takes in water or air."
+        },
+        null,
+        {
+          "tag": "wrong-parts",
+          "why": "These help the plant to make seeds, not to take in things for food."
+        },
+        {
+          "tag": "one-wrong",
+          "why": "The roots take in water but the stem does not take in anything from outside."
+        }
+      ],
+      "solution": [
+        "The roots take in water and mineral salts from the soil.",
+        "The leaves take in air (carbon dioxide) to make food."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-131",
+      "level": "competent",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "Look at the picture of the potted plant. Which row matches each part with its job?",
+      "options": [
+        "A: makes food; B: makes seeds; C: carries water; D: takes in water",
+        "A: makes seeds; B: takes in water; C: makes food; D: carries water",
+        "A: makes seeds; B: makes food; C: carries water; D: takes in water",
+        "A: takes in water; B: carries water; C: makes seeds; D: makes food"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "swapped-jobs",
+          "why": "Part A is the flower, which makes seeds. Part B is the leaf, which makes food."
+        },
+        {
+          "tag": "jobs-mixed",
+          "why": "Leaves do not take in water from the soil. Roots do that and stems carry it."
+        },
+        null,
+        {
+          "tag": "jobs-mixed",
+          "why": "Each job here is given to the wrong part."
+        }
+      ],
+      "solution": [
+        "A is the flower, B a leaf, C the stem and D the roots.",
+        "Flower: seeds. Leaf: food. Stem: carries water. Roots: take in water."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant drawn in line art with its flower, a broad leaf, a stem and roots shown under the soil, with four marked positions.",
+        "labels": [
+          {
+            "x": 32.7,
+            "y": 18.6,
+            "text": "A"
+          },
+          {
+            "x": 75.7,
+            "y": 33.2,
+            "text": "B"
+          },
+          {
+            "x": 45.9,
+            "y": 41.0,
+            "text": "C"
+          },
+          {
+            "x": 58.6,
+            "y": 84.0,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-132",
+      "level": "competent",
+      "outcome": "sci-systems-plant-parts-fn-1",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "A gardener sprays water on the leaves of a potted plant every day but never waters the soil. After two weeks the plant is weak. Which is the best reason?",
+      "options": [
+        "Leaves make food only when they are dry",
+        "The roots take in most of a plant's water",
+        "The stem cannot carry water from the leaves",
+        "Water on the leaves stops light from reaching them"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "false-claim",
+          "why": "Leaves make food using light and air. They do not need to be dry to do it."
+        },
+        null,
+        {
+          "tag": "wrong-direction",
+          "why": "The stem carries water up from the roots. It does not need to carry water down from the leaves."
+        },
+        {
+          "tag": "false-claim",
+          "why": "A little water on the leaves does not stop them from making food."
+        }
+      ],
+      "solution": [
+        "Plants take in most water through their roots.",
+        "With dry soil the roots cannot take in enough water, so the plant becomes weak."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-133",
+      "level": "competent",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "The table shows the parts that four plants have. Which plant has what it needs to take in water, hold up its leaves and make food?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "missing-part",
+          "why": "Plant Q has no leaves, so it cannot make food."
+        },
+        {
+          "tag": "missing-part",
+          "why": "Plant R has no roots, so it cannot take in water from the soil."
+        },
+        {
+          "tag": "missing-part",
+          "why": "Plant S has no stem, so it cannot hold up its leaves or carry water up to them."
+        }
+      ],
+      "solution": [
+        "Taking in water needs roots, holding up leaves needs a stem and making food needs leaves.",
+        "Only plant P has all three."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 196\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"10\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"90\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Roots</text><rect x=\"170\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Stem</text><rect x=\"250\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Leaves</text><rect x=\"10\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"90\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"170\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"90\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"170\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"10\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"90\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"170\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"90\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"170\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"250\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text></svg>"
+    },
+    {
+      "key": "pp-135",
+      "level": "competent",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "The table shows the parts that four plants have. Which plant has roots and leaves but no part to carry water between them?",
+      "options": [
+        "P",
+        "Q",
+        "S",
+        "R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "has-all",
+          "why": "Plant P has a stem, so water can travel from its roots to its leaves."
+        },
+        {
+          "tag": "no-leaves",
+          "why": "Plant Q has roots and a stem but no leaves, so it has no leaves for the water to reach."
+        },
+        null,
+        {
+          "tag": "no-roots",
+          "why": "Plant R has a stem and leaves but no roots, so it has no roots to take water in."
+        }
+      ],
+      "solution": [
+        "Water travels up the stem from the roots to the leaves.",
+        "Only plant S has both roots and leaves but no stem."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 196\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"10\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Plant</text><rect x=\"90\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Roots</text><rect x=\"170\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Stem</text><rect x=\"250\" y=\"10\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Leaves</text><rect x=\"10\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"90\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"170\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"44\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"64.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"90\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"170\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"78\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"98.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"10\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"90\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"170\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"250\" y=\"112\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"132.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"10\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"49.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"90\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"129.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text><rect x=\"170\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"209.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">No</text><rect x=\"250\" y=\"146\" width=\"78\" height=\"30\" rx=\"6\"/><text x=\"289.0\" y=\"166.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Yes</text></svg>"
+    },
+    {
+      "key": "pp-122",
+      "level": "intermediate",
+      "outcome": "sci-systems-plant-parts-fn-2",
+      "pattern": "sci-pat-plant-parts-function",
+      "stem": "A bean seed has just started to grow. The first part to come out grows down into the soil before any leaves open. How does this part help the young plant?",
+      "options": [
+        "It makes food for the plant",
+        "It takes in light for the leaves",
+        "It carries food to the flower",
+        "It holds the plant and takes in water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-job",
+          "why": "Food is made in the leaves, and there are no leaves yet."
+        },
+        {
+          "tag": "wrong-job",
+          "why": "This part is in the soil. It does not take in light."
+        },
+        {
+          "tag": "wrong-job",
+          "why": "A young bean plant has no flower yet, and this part does not do this job."
+        },
+        null
+      ],
+      "solution": [
+        "The first part to grow down is the root.",
+        "It takes in water and holds the young plant firmly in the soil."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seedling.webp",
+        "alt": "A young bean seedling in line art.",
+        "labels": []
+      }
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-228 shipped questions (basic 78, intermediate 77, competent 73), 90 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+290 shipped questions (basic 126, intermediate 87, competent 77), 182 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -17,9 +17,9 @@
 | Life cycles of plants and animals | Observe and compare life cycles of animals (chicken, cockroach, frog,… | yes | yes | 67 |
 | Cell and continuity of kind | Recognise that a cell is a basic unit of life [Standard Science only;… | yes | no | 0 **not yet** |
 | Cell and continuity of kind | Show an understanding that living things reproduce to ensure continui… | yes | no | 0 **not yet** |
-| Plant reproduction | Investigate the ways in which plants reproduce: spores, seeds | yes | no | 0 **not yet** |
-| Plant reproduction | Describe processes in sexual reproduction of flowering plants: pollin… | yes | yes | 0 **not yet** |
-| Plant reproduction | Recognise structural adaptations of fruits and seeds for dispersal (l… | yes | yes | 0 **not yet** |
+| Plant reproduction | Investigate the ways in which plants reproduce: spores, seeds | yes | no | 4 |
+| Plant reproduction | Describe processes in sexual reproduction of flowering plants: pollin… | yes | yes | 20 |
+| Plant reproduction | Recognise structural adaptations of fruits and seeds for dispersal (l… | yes | yes | 6 |
 | Human reproduction | Recognise the process of fertilisation in human sexual reproduction (… | yes | no | 0 **not yet** |
 | Human reproduction | Recognise the similarity in fertilisation in sexual reproduction of f… | yes | no | 0 **not yet** |
 | Matter and states of matter | State that matter is anything that has mass and occupies space | yes | no | 0 **not yet** |
@@ -34,7 +34,7 @@
 | Water cycle and conservation | Recognise the importance of water to life processes [Standard Science… | yes | no | 0 **not yet** |
 | Water cycle and conservation | Describe the impact of water pollution on Earth's water resources [St… | yes | no | 0 **not yet** |
 | Parts of a plant | Identify the different parts of plants (leaf, stem, root) and state t… | yes | yes | 41 |
-| Parts of a plant | Observe plant parts | yes | yes | 34 |
+| Parts of a plant | Observe plant parts | yes | yes | 27 |
 | Overview of human systems | Identify the human systems in the body and state their functions (dig… | yes | no | 0 **not yet** |
 | Digestive system | Identify the parts of the human digestive system (mouth, gullet, stom… | yes | yes | 0 **not yet** |
 | Gases in air | Recognise that air is made up of gases such as nitrogen, carbon dioxi… | yes | no | 0 **not yet** |
@@ -66,8 +66,8 @@
 | Factors affecting survival; food chains | Observe, collect and record information on interacting factors within… | yes | yes | 0 **not yet** |
 | Organism, population, community, habitats | Differentiate among organism, population and community [Standard Scie… | yes | no | 0 **not yet** |
 | Organism, population, community, habitats | Show an understanding that different habitats support different commu… | yes | no | 0 **not yet** |
-| Adaptations and human impact | Show an understanding that adaptations (structural or behavioural) en… | yes | no | 0 **not yet** |
-| Adaptations and human impact | Give examples of man's positive (conservation, reforestation) and neg… | yes | no | 0 **not yet** |
+| Adaptations and human impact | Show an understanding that adaptations (structural or behavioural) en… | yes | no | 33 |
+| Adaptations and human impact | Give examples of man's positive (conservation, reforestation) and neg… | yes | no | 6 |
 | Seeing and shadows | Recognise that an object can be seen when it reflects light or is a s… | yes | yes | 0 **not yet** |
 | Seeing and shadows | Recognise that light travels in straight lines and a shadow forms whe… | yes | yes | 0 **not yet** |
 | Seeing and shadows | Investigate variables affecting shadows: shape, size, position of obj… | yes | yes | 0 **not yet** |
@@ -91,7 +91,7 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**7 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Plant reproduction; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Forces and their effects; Friction, elastic spring force, weight; Factors affecting survival; food chains; Organism, population, community, habitats; Adaptations and human impact; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Forms and conversion of energy; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**12 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Forces and their effects; Friction, elastic spring force, weight; Factors affecting survival; food chains; Organism, population, community, habitats; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Forms and conversion of energy; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
@@ -100,9 +100,9 @@
 | Properties of solids, liquids and gases (mass, volume, shape) (`sci-pat-states-of-matter`) | 129 | 0 **not yet** |
 | Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 0 **not yet** |
 | Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 0 **not yet** |
-| Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 28 |
+| Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 47 |
 | Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 0 **not yet** |
-| Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 12 |
+| Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 30 |
 | Classify organisms into broad groups (plants, animals, fungi, bacteria) (`sci-pat-classify-groups`) | 99 | 0 **not yet** |
 | Respiratory and circulatory systems (lungs, heart, blood) (`sci-pat-resp-circulatory`) | 98 | 0 **not yet** |
 | Properties and uses of materials (`sci-pat-material-properties`) | 97 | 0 **not yet** |
@@ -122,7 +122,7 @@
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 0 **not yet** |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 0 **not yet** |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
-| Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 14 |
+| Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 39 |
 | Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
 | Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
 | Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 0 **not yet** |

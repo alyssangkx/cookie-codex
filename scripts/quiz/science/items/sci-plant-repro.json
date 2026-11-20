@@ -1,0 +1,1284 @@
+{
+  "subtopic": "sci-cycles-repro-plants",
+  "items": [
+    {
+      "key": "pp-005",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which part of a plant makes the seeds?",
+      "options": [
+        "The flower",
+        "The stem that holds the plant up",
+        "The root",
+        "The leaf"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "part-function-swap",
+          "why": "The stem supports the plant and carries water. It does not make seeds."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "The root takes in water and mineral salts. It does not make seeds."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "The leaf makes food. It does not make seeds."
+        }
+      ],
+      "solution": [
+        "The flower is the part that makes the seeds."
+      ],
+      "figure": {
+        "img": "/science/pp-whole-plant.webp",
+        "alt": "A potted plant in line art.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-006",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "What is one job of the fruit of a plant?",
+      "options": [
+        "To protect the seeds as they grow inside it",
+        "To make food for the plant",
+        "To take in water for the plant",
+        "To hold the plant up in the wind"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "part-function-swap",
+          "why": "Food is made by the leaves, not by the fruit."
+        },
+        {
+          "tag": "which-part-takes-in",
+          "why": "Water is taken in by the roots, not by the fruit."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "Holding the plant up is the job of the stem and roots."
+        }
+      ],
+      "solution": [
+        "The fruit covers and protects the seeds while they grow."
+      ],
+      "figure": {
+        "img": "/science/pp-mango-cut.webp",
+        "alt": "A fruit cut open, showing its skin, the soft part and a large seed inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-008",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "In the picture of the chilli plant, part B contains the seeds. What is part B?",
+      "options": [
+        "The flower",
+        "The fruit",
+        "The leaf",
+        "The stem"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The flower is the part that later turns into the fruit. It is not the part holding the seeds."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Leaves are flat and green and do not hold seeds."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The stem is the long part that holds up the plant. It does not hold seeds."
+        }
+      ],
+      "solution": [
+        "The chilli is the fruit. The seeds are inside it."
+      ],
+      "figure": {
+        "img": "/science/pp-chilli-plant.webp",
+        "alt": "A chilli plant in line art with a flower, a ripe chilli with seeds showing, a leaf and a stem, with four marked positions.",
+        "labels": [
+          {
+            "x": 33.7,
+            "y": 27.8,
+            "text": "A"
+          },
+          {
+            "x": 74.2,
+            "y": 54.7,
+            "text": "B"
+          },
+          {
+            "x": 36.1,
+            "y": 38.6,
+            "text": "C"
+          },
+          {
+            "x": 45.9,
+            "y": 68.4,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-021",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Why do many flowers have bright petals?",
+      "options": [
+        "To take in water for the plant from the soil",
+        "To attract insects to the flower",
+        "To make food for the plant",
+        "To hold the plant up"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "part-function-swap",
+          "why": "Water is taken in by the roots, not by petals."
+        },
+        null,
+        {
+          "tag": "part-function-swap",
+          "why": "Food is made by the leaves, not the petals."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "Holding the plant up is done by the stem, not by the petals."
+        }
+      ],
+      "solution": [
+        "Bright petals attract insects that visit the flower."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half, showing its petals and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-024",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "What is the job of a seed?",
+      "options": [
+        "To make food for the plant",
+        "To grow into a new plant",
+        "To take in water for the plant",
+        "To hold the leaves up"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "part-function-swap",
+          "why": "Food is made by the leaves, not by a seed."
+        },
+        null,
+        {
+          "tag": "part-function-swap",
+          "why": "Taking in water is the job of the roots."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "Holding the leaves up is the job of the stem."
+        }
+      ],
+      "solution": [
+        "A seed can grow into a new plant when it gets what it needs."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "pp-025",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A farmer picks guavas from a tree. Which part of the plant is a guava?",
+      "options": [
+        "A seed",
+        "A flower",
+        "A root",
+        "A fruit"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Seeds are found inside the guava. The whole guava is the fruit."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A guava starts as a flower, but the part we pick is the fruit."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Roots grow in the soil. A guava grows on the tree."
+        },
+        null
+      ],
+      "solution": [
+        "A guava is a fruit, with seeds inside."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 280\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"10\" y1=\"250\" x2=\"290\" y2=\"250\"/><path d=\"M138 250 L142 150 M162 250 L158 150\"/><path d=\"M138 250 Q120 262 100 266 M162 250 Q180 262 200 266\"/><path d=\"M142 150 Q70 150 70 100 Q60 50 110 45 Q150 15 190 45 Q240 50 230 100 Q230 150 158 150 Z\"/></svg>"
+    },
+    {
+      "key": "pp-027",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Look at the picture of the flower cut in half. Which part is brightly coloured and attracts insects?",
+      "options": [
+        "Part A",
+        "Part B",
+        "Part C",
+        "Part D"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "Part B is inside the flower and makes pollen. It is not there to attract insects."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part C is inside the flower. It receives pollen and is not the bright outer part."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part D is at the base of the flower and later grows into the fruit."
+        }
+      ],
+      "solution": [
+        "Part A is a petal. Bright petals attract insects."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half in line art, showing its petals and the parts inside, with four marked positions.",
+        "labels": [
+          {
+            "x": 17.6,
+            "y": 29.3,
+            "text": "A"
+          },
+          {
+            "x": 30.3,
+            "y": 21.0,
+            "text": "B"
+          },
+          {
+            "x": 58.6,
+            "y": 17.1,
+            "text": "C"
+          },
+          {
+            "x": 50.3,
+            "y": 55.7,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-028",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Look at the picture of the bean seed cut open. Part A covers the outside of the seed. What is the job of part A?",
+      "options": [
+        "To take in water and mineral salts for the young plant",
+        "To make food for the seed",
+        "To protect the parts inside the seed",
+        "To attract insects to the seed"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "part-function-swap",
+          "why": "Water is taken in by the root of the young plant, not by the covering."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "Seeds do not make food. Leaves make food once the plant grows."
+        },
+        null,
+        {
+          "tag": "wrong-function",
+          "why": "Insects are attracted to the flower, not to the seed covering."
+        }
+      ],
+      "solution": [
+        "The outer covering of a seed protects the parts inside."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
+        "labels": [
+          {
+            "x": 6.8,
+            "y": 48.8,
+            "text": "A"
+          },
+          {
+            "x": 74.2,
+            "y": 54.7,
+            "text": "B"
+          },
+          {
+            "x": 40.0,
+            "y": 36.6,
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-040",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The soft part of the mango (part A) is eaten by animals, which may drop the seed (part B) far away. How does this help the mango tree?",
+      "options": [
+        "More leaves grow on the tree",
+        "The seeds are spread to new places far away",
+        "The roots take in more water",
+        "The flowers open earlier in the year"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "unrelated",
+          "why": "Eating the fruit does not make more leaves grow."
+        },
+        null,
+        {
+          "tag": "unrelated",
+          "why": "Eating the fruit does not change how much water the roots take in."
+        },
+        {
+          "tag": "unrelated",
+          "why": "Animals eating the fruit do not make flowers open earlier."
+        }
+      ],
+      "solution": [
+        "Animals that eat the fruit spread the seeds to other places."
+      ],
+      "figure": {
+        "img": "/science/pp-mango-cut.webp",
+        "alt": "A mango cut open in line art, showing its skin, the soft part and a large seed inside, with three marked positions.",
+        "labels": [
+          {
+            "x": 13.7,
+            "y": 50.8,
+            "text": "A"
+          },
+          {
+            "x": 32.2,
+            "y": 50.8,
+            "text": "B"
+          },
+          {
+            "x": 2.9,
+            "y": 46.9,
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-041",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "In the picture of the flower cut in half, which part grows into the fruit after the flower has been pollinated?",
+      "options": [
+        "Part A",
+        "Part B",
+        "Part C",
+        "Part D"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Part A is a petal. Petals attract insects and later fall off."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part B makes pollen. It does not grow into the fruit."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part C receives the pollen. It does not grow into the fruit."
+        },
+        null
+      ],
+      "solution": [
+        "Part D is at the base of the flower. After pollination it grows into the fruit."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half in line art, showing its petals and the parts inside, with four marked positions.",
+        "labels": [
+          {
+            "x": 17.6,
+            "y": 29.3,
+            "text": "A"
+          },
+          {
+            "x": 30.3,
+            "y": 21.0,
+            "text": "B"
+          },
+          {
+            "x": 58.6,
+            "y": 17.1,
+            "text": "C"
+          },
+          {
+            "x": 50.3,
+            "y": 55.7,
+            "text": "D"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-042",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A bean seed is cut open. Which part gives the young plant food until its leaves can make food?",
+      "options": [
+        "Part A",
+        "Part C",
+        "Both part A and part C",
+        "Part B"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Part A is the outer covering. It protects the seed and does not give food."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part C is the young plant itself. It uses the food stored in the seed leaf (part B)."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "Part A protects the seed and part C is the young plant. Neither is the food store, which is part B."
+        },
+        null
+      ],
+      "solution": [
+        "The food store in the seed (part B) feeds the young plant until its first leaves can make food."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
+        "labels": [
+          {
+            "x": 6.8,
+            "y": 48.8,
+            "text": "A"
+          },
+          {
+            "x": 74.2,
+            "y": 54.7,
+            "text": "B"
+          },
+          {
+            "x": 40.0,
+            "y": 36.6,
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-056",
+      "level": "intermediate",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Sara picks all the flowers from a chilli plant. What will the plant not be able to make?",
+      "options": [
+        "New leaves on its stem",
+        "Fruits with seeds",
+        "New roots in the soil",
+        "New stems from the tips"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-claim",
+          "why": "New leaves grow from the stem. They do not need flowers."
+        },
+        null,
+        {
+          "tag": "wrong-claim",
+          "why": "New roots grow from the roots already there. They do not need flowers."
+        },
+        {
+          "tag": "wrong-claim",
+          "why": "New stems grow from the stem tips and do not need flowers."
+        }
+      ],
+      "solution": [
+        "Fruits and seeds form from flowers, so without flowers no fruits form."
+      ]
+    },
+    {
+      "key": "pp-082",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A bean seed has its food store (part B) removed and is then planted. What is most likely to happen?",
+      "options": [
+        "The young plant grows faster because it has less to carry",
+        "The young plant makes seeds sooner",
+        "The young plant gets food from its seed coat instead",
+        "The young plant grows poorly with less food"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-prediction",
+          "why": "The food store feeds the young plant, so it grows poorly without it."
+        },
+        {
+          "tag": "wrong-prediction",
+          "why": "A young plant with less food would not make seeds sooner."
+        },
+        {
+          "tag": "wrong-prediction",
+          "why": "The seed coat protects the seed and does not provide food."
+        },
+        null
+      ],
+      "solution": [
+        "The food store feeds the young plant until its leaves can make food.",
+        "Without it, the young plant has far less food."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
+        "labels": [
+          {
+            "x": 6.8,
+            "y": 48.8,
+            "text": "A"
+          },
+          {
+            "x": 74.2,
+            "y": 54.7,
+            "text": "B"
+          },
+          {
+            "x": 40.0,
+            "y": 36.6,
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "key": "pp-083",
+      "level": "competent",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which row about the flower, fruit and seed is correct?",
+      "options": [
+        "Flower: protects seeds; fruit: makes seeds; seed: makes food",
+        "Flower: grows into a plant; fruit: makes seeds; seed: protects the fruit",
+        "Flower: makes seeds; fruit: protects them; seed: grows into a plant",
+        "Flower: makes food; fruit: grows into a plant; seed: makes seeds"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "part-function-swap",
+          "why": "Flowers make seeds and fruits protect them. Seeds do not make food."
+        },
+        {
+          "tag": "part-function-swap",
+          "why": "Seeds grow into plants and do not protect the fruit."
+        },
+        null,
+        {
+          "tag": "part-function-swap",
+          "why": "Leaves make food, and a fruit does not grow into a plant. A seed does."
+        }
+      ],
+      "solution": [
+        "The flower makes the seeds.",
+        "The fruit protects the seeds.",
+        "A seed can grow into a new plant."
+      ]
+    },
+    {
+      "key": "rp-001",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "What is the movement of pollen from one flower to another called?",
+      "options": [
+        "Pollination",
+        "Germination",
+        "Seed dispersal",
+        "Fertilisation"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-term",
+          "why": "Germination is when a seed starts to grow into a young plant."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Seed dispersal is the spreading of seeds away from the parent plant."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Fertilisation is when a male and a female cell join. It happens after pollination."
+        }
+      ],
+      "solution": [
+        "Moving pollen from one flower to another is called pollination."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half, showing its petals and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-002",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these animals often carry pollen from flower to flower?",
+      "options": [
+        "Worms and snails",
+        "Fish and frogs",
+        "Ants and earthworms",
+        "Bees and butterflies"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-animals",
+          "why": "Worms and snails stay low on the ground and do not visit flowers to feed."
+        },
+        {
+          "tag": "wrong-animals",
+          "why": "Fish and frogs live in or near water, not among flowers."
+        },
+        {
+          "tag": "wrong-animals",
+          "why": "These stay mostly on the ground or in the soil."
+        },
+        null
+      ],
+      "solution": [
+        "Bees and butterflies visit flowers for the sweet nectar, so pollen sticks to them and is carried on."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half, showing its petals and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-003",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these things must a bean seed have to start growing?",
+      "options": [
+        "Sunlight, soil and wind",
+        "Soil, light and carbon dioxide",
+        "Water, air and warmth",
+        "Light, mineral salts and wind"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-needs",
+          "why": "A seed does not need light, soil or wind to start growing."
+        },
+        {
+          "tag": "wrong-needs",
+          "why": "These are not needed for a seed to germinate."
+        },
+        null,
+        {
+          "tag": "wrong-needs",
+          "why": "A seed needs none of these to begin to grow."
+        }
+      ],
+      "solution": [
+        "A seed needs water, air and warmth to germinate."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-004",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "What do we call it when a seed starts to grow into a young plant?",
+      "options": [
+        "Pollination",
+        "Germination",
+        "Fertilisation",
+        "Seed dispersal"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-term",
+          "why": "Pollination is the movement of pollen between flowers."
+        },
+        null,
+        {
+          "tag": "wrong-term",
+          "why": "Fertilisation is the joining of a male and a female cell inside the flower."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Seed dispersal is the spreading of seeds."
+        }
+      ],
+      "solution": [
+        "A seed starting to grow is germination."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-005",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "In the picture of the bean seed cut open, part C is the tiny young plant inside. What will part C grow into?",
+      "options": [
+        "A new plant",
+        "The covering of the seed",
+        "The fruit that holds the seeds",
+        "The food store of the seed"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "The covering is part A and does not grow into the new plant."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "A fruit forms from the flower, not from the young plant inside the seed."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The food store is a different part (part B)."
+        }
+      ],
+      "solution": [
+        "Part C is the young plant, or baby plant, inside the seed.",
+        "It grows into a new plant."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open in line art, showing its outer covering and the parts inside, with three marked positions.",
+        "labels": [
+          {
+            "x": 6.8,
+            "y": 48.8,
+            "text": "A"
+          },
+          {
+            "x": 74.2,
+            "y": 54.7,
+            "text": "B"
+          },
+          {
+            "x": 40.0,
+            "y": 36.6,
+            "text": "C"
+          }
+        ]
+      }
+    },
+    {
+      "key": "rp-006",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "What do we call the carrying of seeds away from the parent plant?",
+      "options": [
+        "Germination",
+        "Pollination",
+        "Fertilisation",
+        "Seed dispersal"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-term",
+          "why": "Germination is when a seed starts to grow."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Pollination is the movement of pollen."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Fertilisation is the joining of a male and a female cell."
+        },
+        null
+      ],
+      "solution": [
+        "Carrying seeds away from the parent plant is called seed dispersal."
+      ]
+    },
+    {
+      "key": "rp-007",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Why is it good for a plant to have its seeds carried far away from it?",
+      "options": [
+        "The seeds can make food for the parent plant",
+        "The parent plant can make more flowers",
+        "The young plants have more room and light",
+        "The seeds can grow into fruits right away"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Seeds do not make food for the parent plant."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Where seeds land does not change how many flowers the parent makes."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Seeds do not become fruits. They grow into new plants."
+        }
+      ],
+      "solution": [
+        "Seeds that fall next to the parent must share its light, water and space.",
+        "Seeds carried far away have more room to grow."
+      ]
+    },
+    {
+      "key": "rp-008",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these seeds is carried away by the wind?",
+      "options": [
+        "A coconut",
+        "A dandelion seed",
+        "A burr seed",
+        "A mango seed"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "water-seed",
+          "why": "A coconut is spread by water, not wind."
+        },
+        null,
+        {
+          "tag": "animal-seed",
+          "why": "A burr has hooks, so it is carried on animals' fur."
+        },
+        {
+          "tag": "animal-seed",
+          "why": "A mango is a juicy fruit. Animals eat it and spread the seed."
+        }
+      ],
+      "solution": [
+        "A dandelion seed has light hairs that catch the wind and carry it away."
+      ]
+    },
+    {
+      "key": "rp-009",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these seeds is carried away by water?",
+      "options": [
+        "A coconut",
+        "A seed with a light wing",
+        "A seed with tiny hooks",
+        "A seed in a bright red berry"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wind-seed",
+          "why": "A winged seed is carried by wind."
+        },
+        {
+          "tag": "animal-seed",
+          "why": "A hooked seed is carried on animals' fur."
+        },
+        {
+          "tag": "animal-seed",
+          "why": "A bright berry is eaten by animals, which spread the seed."
+        }
+      ],
+      "solution": [
+        "A coconut has a thick husk that floats, so water can carry it away."
+      ]
+    },
+    {
+      "key": "rp-010",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Birds eat red berries and later drop the seeds in their droppings far away. How are the seeds spread?",
+      "options": [
+        "By wind",
+        "By water",
+        "By the fruit splitting open",
+        "By animals"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-way",
+          "why": "The seeds are carried inside the bird, not blown by wind."
+        },
+        {
+          "tag": "wrong-way",
+          "why": "Water does not carry the seeds in this case."
+        },
+        {
+          "tag": "wrong-way",
+          "why": "The fruit is eaten. It does not split open to throw the seeds out."
+        },
+        null
+      ],
+      "solution": [
+        "Animals eat the fruit and drop the seeds somewhere else, so the seeds are spread by animals."
+      ]
+    },
+    {
+      "key": "rp-011",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-3",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "The ripe fruits of a rubber tree dry in the sun and burst with a snap. The seeds land far from the tree. How are the seeds spread?",
+      "options": [
+        "By wind",
+        "By animals",
+        "By the fruit itself",
+        "By water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-way",
+          "why": "Wind does not throw the seeds. The fruit bursts by itself."
+        },
+        {
+          "tag": "wrong-way",
+          "why": "No animal is needed. The fruit bursts open by itself."
+        },
+        null,
+        {
+          "tag": "wrong-way",
+          "why": "The fruits dry in the sun. Water is not involved."
+        }
+      ],
+      "solution": [
+        "Some fruits dry and burst open, which throws the seeds away from the plant."
+      ]
+    },
+    {
+      "key": "rp-012",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these plants makes spores instead of seeds?",
+      "options": [
+        "A hibiscus plant",
+        "A fern",
+        "A mango tree",
+        "A bean plant"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "makes-seeds",
+          "why": "A hibiscus makes flowers and seeds."
+        },
+        null,
+        {
+          "tag": "makes-seeds",
+          "why": "A mango tree makes flowers, fruits and seeds."
+        },
+        {
+          "tag": "makes-seeds",
+          "why": "A bean plant makes flowers, pods and seeds."
+        }
+      ],
+      "solution": [
+        "Ferns do not make flowers or seeds.",
+        "They make tiny spores."
+      ]
+    },
+    {
+      "key": "rp-013",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-1",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A gardener pushes a cut branch of a rose bush into wet soil. Weeks later it has roots and leaves and is a new rose plant. What did the new plant grow from?",
+      "options": [
+        "A part of the old plant",
+        "A seed hidden inside the branch",
+        "A fruit of the old plant",
+        "Pollen from another rose"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-source",
+          "why": "No seed was planted. The branch itself grew roots and leaves."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "A fruit was not planted, only the cut branch."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "Pollen does not grow into a plant by itself."
+        }
+      ],
+      "solution": [
+        "A new plant can grow from a cut piece of stem.",
+        "No seed was planted."
+      ]
+    },
+    {
+      "key": "rp-014",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Pollen is made in the male part of a flower called the ____.",
+      "options": [
+        "petal",
+        "ovary",
+        "stalk",
+        "stamen"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "Petals attract insects. They do not make pollen."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The ovary is the female part. It holds the tiny egg cells that become seeds."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The stalk holds up the flower. It does not make pollen."
+        },
+        null
+      ],
+      "solution": [
+        "The stamen is the male part of the flower and makes pollen."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half, showing its petals and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-015",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "After a flower has been pollinated and fertilised, which part of it grows into the fruit?",
+      "options": [
+        "The petals",
+        "The stamen",
+        "The ovary",
+        "The flower stalk"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-part",
+          "why": "The petals usually wither and fall off."
+        },
+        {
+          "tag": "wrong-part",
+          "why": "The stamen makes pollen. It does not become the fruit."
+        },
+        null,
+        {
+          "tag": "wrong-part",
+          "why": "The stalk holds up the flower and does not become the fruit."
+        }
+      ],
+      "solution": [
+        "The ovary holds the tiny egg cells.",
+        "After fertilisation, it grows into the fruit and the egg cells become seeds."
+      ]
+    },
+    {
+      "key": "rp-016",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A bean seed is planted in soil. Where does the young plant get its food before its leaves can make food?",
+      "options": [
+        "From the soil only",
+        "From the food stored in the seed",
+        "From the air only",
+        "From the sunlight only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-source",
+          "why": "Soil gives water and mineral salts, but not food."
+        },
+        null,
+        {
+          "tag": "wrong-source",
+          "why": "Air alone cannot feed a young plant that has no leaves yet."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "Sunlight is only used by leaves to make food, and there are no leaves yet."
+        }
+      ],
+      "solution": [
+        "A bean seed has a food store inside it.",
+        "The young plant uses this until its leaves can make food."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-017",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "Which of these must happen first before a flower can make seeds?",
+      "options": [
+        "Pollen reaches its female part",
+        "The seeds are spread by wind",
+        "A seed starts to grow",
+        "An animal eats the fruit"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "later-step",
+          "why": "Seeds are spread only after they have been made."
+        },
+        {
+          "tag": "later-step",
+          "why": "Growing from a seed happens after the seed has been made."
+        },
+        {
+          "tag": "later-step",
+          "why": "The fruit forms only after pollination, so this comes later."
+        }
+      ],
+      "solution": [
+        "Seeds can form only after pollen reaches the female part of a flower.",
+        "Spreading and growing of seeds come later."
+      ],
+      "figure": {
+        "img": "/science/pp-flower-cut.webp",
+        "alt": "A flower cut in half, showing its petals and the parts inside.",
+        "labels": []
+      }
+    },
+    {
+      "key": "rp-018",
+      "level": "basic",
+      "outcome": "sci-cycles-repro-plants-2",
+      "pattern": "sci-pat-plant-reproduction",
+      "stem": "A bean seed is put on dry cotton wool in a warm room. After a week it has not started to grow. What is missing?",
+      "options": [
+        "Soil",
+        "Sunlight",
+        "Wind",
+        "Water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "not-needed",
+          "why": "A seed can start to grow without soil, for example on wet cotton wool."
+        },
+        {
+          "tag": "not-needed",
+          "why": "A seed does not need light to start to grow."
+        },
+        {
+          "tag": "not-needed",
+          "why": "Wind is not needed for a seed to start to grow."
+        },
+        null
+      ],
+      "solution": [
+        "A seed needs water, air and warmth to germinate.",
+        "The room is warm and has air. The cotton wool is dry, so water is missing."
+      ],
+      "figure": {
+        "img": "/science/pp-bean-seed.webp",
+        "alt": "A bean seed cut open, showing its outer covering and the parts inside.",
+        "labels": []
+      }
+    }
+  ]
+}
