@@ -41,7 +41,7 @@ outside the repo.
 
 ## Past-paper data quality
 
-- [ ] Fix the answer-key grid reading in `scripts/pastpapers/vlm_read.py`.
+- [ ] Fix the answer-key grid reading in `scripts/pastpapers/vlm_read.py`. Partly done 20 Nov 2026: `scripts/pastpapers/anskey_ocr.py` reads grids from the OCR word boxes (>= 2 agreeing reads per cell) and `load_pp.py select --ocr-keys` uses it as a fallback; the rest (rotated and badly scanned key pages, papers with no key page) still needs a better read.
   - What goes wrong: the 32B swaps, duplicates or invents cells.
   - The fix:
     - read cell by cell, or twice;

@@ -3,7 +3,9 @@
   load_pp.py select  [--subject science] [--years 2018-2026] [--pp DIR] [--blind DIR] [--out DIR]
       Picks the importable MCQs and writes OUT/<subject>/selected.jsonl (private rows), rejects.jsonl (id + reason)
       and report.json (counts only). Rules: exactly 4 options; an answer key; not in the quarantine; not
-      answer_flag grid-uncertain; the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
+      answer_flag grid-uncertain (with --ocr-keys: unless anskey_ocr.jsonl reads the same key, and a missing key is
+      taken from anskey_ocr.jsonl when it covers >= 60% of the paper; scripts/pastpapers/anskey_ocr.py; the row's
+      answer_src says which); the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
       full resolution AND the 72B on the transcribed figure text) both reach it; text and options not garbled; options
       not only in the picture; a sub-topic that exists in the site's syllabus; and a usable crop whenever the stem
       points at a figure, table or graph (or labels such as A/B/P/Q) or the reader saw a figure.
@@ -208,6 +210,21 @@ def cropcheck_apply(a):
 
 # ------------------------------------------------------------------ select
 
+OCR_COVER = 0.6  # anskey_ocr.py alone supplies a key only for a paper whose grid read covers this share of its MCQs
+
+
+def ocr_keys(base: Path) -> dict:
+    """{(paper, qno): '1'-'4'} from <year>/anskey_ocr.jsonl (scripts/pastpapers/anskey_ocr.py), for papers that pass the
+    coverage rule; empty when the file does not exist."""
+    out = {}
+    for r in jl(base / "anskey_ocr.jsonl"):
+        if r.get("n_mcq") and len(r.get("answers") or {}) >= OCR_COVER * r["n_mcq"]:
+            for qn, d in r["answers"].items():
+                if d in ("1", "2", "3", "4"):
+                    out[(r["paper"], int(qn))] = d
+    return out
+
+
 def select(a):
     out = outside_repo(Path(a.out)) / a.subject
     out.mkdir(parents=True, exist_ok=True)
@@ -224,6 +241,7 @@ def select(a):
         blind = {b["id"]: b for b in jl(bfile)} if bfile.exists() else None
         second = {b["id"]: b for b in jl(Path(a.blind2) / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
+        ocrk = ocr_keys(base) if a.ocr_keys else {}
         last = collections.Counter()  # (paper, part) -> highest MCQ number
         for q in merged:
             if q.get("format") == "mcq" and isinstance(q.get("qno"), int):
@@ -238,6 +256,16 @@ def select(a):
             k = key(q.get("answer"), opts) if len(opts) == 4 else None
             t = tags.get(q["id"]) or {}
             reason = None
+            ok = ocrk.get((q.get("paper"), q.get("qno")))
+            src = "vision"
+            if len(opts) == 4 and ok:
+                if not k:
+                    k, src = ok, "ocr"
+                elif q.get("answer_flag") == "grid-uncertain" and k == ok:
+                    q = dict(q, answer_flag=None)  # two independent reads agree
+                    src = "vision+ocr"
+                elif k != ok:
+                    pass  # judged below, after the quarantine and hold checks
             if len(opts) != 4:
                 reason = "not-4-options"
             elif not k:
@@ -248,6 +276,8 @@ def select(a):
                 reason = "held-by-review"
             elif q.get("answer_flag") == "grid-uncertain":
                 reason = "grid-uncertain"
+            elif len(opts) == 4 and ok and src == "vision" and k != ok:
+                reason = "ocr-key-conflict"
             elif blind is None:
                 reason = "no-blind-check-yet"
             elif q["id"] not in blind:
@@ -280,7 +310,7 @@ def select(a):
             if reason:
                 R[reason] += 1
                 per_year[y][reason] += 1
-                rejects.append({"id": q["id"], "reason": reason})
+                rejects.append({"id": q["id"], "reason": reason, **({"answer_src": src} if src != "vision" else {})})
                 continue
             per_year[y]["selected"] += 1
             rows.append({
@@ -288,7 +318,7 @@ def select(a):
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
                 "stem": q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
-                "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
+                "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                 "blind_src": (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
                 else "second:vl2-fullres+text72-ocr",
@@ -797,6 +827,7 @@ def main():
     p.add_argument("--target-kb", type=int, default=60)
     p.add_argument("--subtopics", default="")
     p.add_argument("--apply", action="store_true")
+    p.add_argument("--ocr-keys", action="store_true", help="select: use <year>/anskey_ocr.jsonl as a fallback key source")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
     a = p.parse_args()
     {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "selftest": lambda _a: selftest()}[a.cmd](a)
