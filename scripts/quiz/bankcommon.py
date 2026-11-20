@@ -143,8 +143,9 @@ def unstated_switch(stem, fig, key=None):
 
 
 def refers_to_earlier_item(stem):
-    """True when a stem leans on another item's figure or set-up: 'the same leaf/table/graph', 'Siti now wants'."""
-    return bool(re.search(r"\b(the same (leaf|table|graph|diagram|figure|circuit|set-ups?)\b|now (wants|uses|puts))", stem, re.I))
+    """True when a sentence opens with 'The same leaf/table/graph...' (another item's set-up). 'In/Using the same' is the
+    older refers-to-other-item rule; 'now wants' is left alone (self-contained stems use it)."""
+    return bool(re.search(r"(^|[.!?]\s+)the same (leaf|plant|table|graph|diagram|figure|circuit|set-ups?)\b", stem, re.I))
 
 
 def dangling_figure_ref(stem, fig):
@@ -152,7 +153,7 @@ def dangling_figure_ref(stem, fig):
     experiment with ...', 'using the table') but the item has no figure, so it leans on another item's set-up."""
     if fig: return False
     return bool(re.search(r"\b(as shown|shown (above|below)|(using|from|look at) the (graph|table|diagram|chart|picture|figure|photo)\b|"
-                          r"the (graph|table|diagram|chart|picture|figure) (shows|above|below)|in the experiment (with|above))", stem, re.I))
+                          r"the (graph|table|diagram|chart|picture|figure) (shows|above|below)|in the experiment (with|above)|\bset-?ups? [A-Z]\b)", stem, re.I))  # 'Which set-up...' is fine: its options describe the set-ups
 
 
 def unqualified_stays_lit(options, answer):
@@ -168,16 +169,24 @@ def ring_figure_unrelated(stem, options, figure):
     neither the stem nor any option, so it decorates another organism's cycle and hints at the answer (lc-003, 016, 020)."""
     if not isinstance(figure, dict): return False
     m = re.search(r"/([a-z]+)-ring\.webp$", str(figure.get("img", "")))
-    return bool(m) and m.group(1) not in (str(stem) + " " + " ".join(map(str, options))).lower()
+    if not m: return False
+    a = m.group(1)
+    names = {a, a + "s", a[:-1] + "ies" if a.endswith("y") else a + "es"} | RING_NAMES.get(a, set())
+    text = (str(stem) + " " + " ".join(map(str, options))).lower()
+    return not any(re.search(rf"\b{re.escape(n)}\b", text) for n in names)
 
 
-JOKE_DISTRACTOR = re.compile(r"\b(fly away|flies away|grow(?:s)? legs|grew legs|changed? into (?:a |an )?(?:different|another) (?:kind of )?(?:animal|plant)|became plants|turn(?:s|ed)? into (?:a )?plants?|grow(?:s)? wings)\b", re.I)
+RING_NAMES = {"chicken": {"hen", "hens", "chick", "chicks", "rooster"}, "frog": {"tadpole", "tadpoles"},
+              "mosquito": {"mosquitoes", "larva", "larvae", "pupa"}, "butterfly": {"caterpillar", "caterpillars"}}
 
 
-def joke_distractors(options):
+JOKE_DISTRACTOR = re.compile(r"\b(fly away|flies away|changed? into (?:a |an )?(?:different|another) (?:kind of )?(?:animal|plant)|became plants|turn(?:s|ed)? into (?:a )?plants?)\b", re.I)
+
+
+def joke_distractors(options, answer=None):
     """WARN rule joke-distractor: a wrong option is a silly impossibility ('fish fly away', 'grow legs', 'changed into a
-    different animal') instead of a plausible misconception. Returns the offending options."""
-    return [o for o in options if JOKE_DISTRACTOR.search(str(o))]
+    different animal') instead of a plausible misconception. The key is never judged. Returns the offending options."""
+    return [o for i, o in enumerate(options) if i != answer and JOKE_DISTRACTOR.search(str(o))]
 
 
 class Warnings:
@@ -230,7 +239,10 @@ def warning_self_tests(science=False):
     t(question_part("Passage text.\n\nWhy did she go?") == "Why did she go?", "question part after a passage")
     t(bool(near_duplicates(["The plant grows taller in light.", "The plant grows taller in the light", "It wilts.", "It dies."])), "near-duplicate options flagged")
     t(not near_duplicates(["has been", "will be", "was", "is being"]), "distinct options not flagged")
-    t(refers_to_earlier_item("Siti now wants to find out if the ramp matters. Using the same table, which two?"), "stem leaning on an earlier item is flagged")
+    t(refers_to_earlier_item("Look at it again. The same leaf is now tested for starch. What colour?"), "stem leaning on an earlier item is flagged")
+    t(not refers_to_earlier_item("Ali puts a plant in sunlight. He now puts it in a dark cupboard. What happens?"), "self-contained 'now puts' is not flagged")
+    t(not joke_distractors(["The tadpole grows legs", "It grows a shell", "x", "y"], 0), "joke-distractor never judges the key; growing legs is a true stage")
+    t(dangling_figure_ref("Set-up B lost 2 ml of water. Why?", None), "dangling ref: a set-up named by letter with no figure")
     t(not refers_to_earlier_item("Which part of the leaf shown turns blue-black?"), "self-contained stem is quiet")
     t(not near_duplicates(["Part P makes food for it", "Part Q makes food for it", "x", "y"]), "label-only contrast not flagged")
     t(correct_is_longest(["a much longer option", "short", "tiny", "mid size"], 0), "strictly longest")

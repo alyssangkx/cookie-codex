@@ -173,7 +173,7 @@ for f, data in _all:
             if refers_to_earlier_item(stem): w("refers-to-earlier-item", f"stem {stem[:60]!r}")
             if unqualified_stays_lit(opts, a): w("stays-lit-unqualified", f"answer {opts[a]!r}")
             if dangling_figure_ref(stem, it.get("figure")): w("dangling-figure-ref", f"stem {stem[:60]!r}")
-            for o in joke_distractors(opts): w("joke-distractor", f"option {o!r}")
+            for o in joke_distractors(opts, a): w("joke-distractor", f"option {o!r}")
             for x, y in near_duplicates(opts): w("near-dup-options", f"{x!r} ~ {y!r}")
             if "figure" in it and figure_mismatch(stem, it["figure"]):
                 w("figure-mismatch", f"figure text {figure_text(it['figure'])[:60]!r}")
