@@ -195,6 +195,8 @@ def cropcheck_apply(a):
     out = outside_repo(Path(a.out)) / a.subject
     allrows = jl(a.arg)
     expected = [it["id"] for it in jl(cropcheck.PACK / "items.jsonl")]
+    # an item selected after the pack was built has no result either: hold it too (only science packs exist today)
+    expected += [r["id"] for r in jl(out / "selected.jsonl") if r.get("crops") and r["id"] not in set(expected)]
     if not allrows or not expected:
         sys.exit("no results rows in " + str(a.arg) + " or no pack at " + str(cropcheck.PACK))
     rows = cropcheck.stamped(allrows, cropcheck.pack_stamp(cropcheck.PACK))  # results of another pack count as missing

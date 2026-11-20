@@ -248,7 +248,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   let genAll: Q[] = [], ppAll: Q[] = [], ppLoaded = false; // pools before the merge: tierIds() reports the tier quiz's pool, not the merged one
   let ppFailed = false; // a failed past-paper fetch: Daily Review must not park pp retests it never saw
   async function loadBanks(files: string[]): Promise<Q[]> {
-    genAll = []; ppAll = []; ppLoaded = false;
+    genAll = []; ppAll = []; ppLoaded = false; ppFailed = false;
     let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
     // past-paper items (ADR 0004): fetched from Supabase for a signed-in player, never from /data/quiz; OFF for now
     if (PP_ENABLED) {

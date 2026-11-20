@@ -126,7 +126,7 @@ def figure_mismatch(stem, fig):
 
 
 # a STATE word referring to the switch: closed/open, or on/off next to switch/turn/is/stays (the bare word "switch" says nothing)
-SWITCH_STATE = re.compile(r"\b(closed|open(ed)?|(switch(ed|es)?|turn(ed|s)?)\s+(it\s+|them\s+|S\d*\s+)?(on|off)|(is|are|stays?|remains?)\s+(on|off))\b", re.I)
+SWITCH_STATE = re.compile(r"\b(?:switch(?:es)?\s+(?:S\d*\s+)?(?:is|are|stays?|remains?|was|were|must\s+be|should\s+be|to\s+be)\s+(?:already\s+|still\s+)?(?:(?:turned|switched)\s+)?(?:closed|open|on|off)|S\d*\s+(?:(?:is|are|stays?|remains?|was|were|must\s+be|should\s+be|to\s+be)\s+(?:already\s+|still\s+)?(?:(?:turned|switched)\s+)?(?:closed|open|on|off)|closed|open)|(?:clos(?:e|es|ed|ing)|open(?:s|ed|ing)?|turn(?:s|ed)?\s+(?:on|off))\s+(?:the\s+)?(?:switch(?:es)?|S\d*)\b|all\s+(?:the\s+)?switches\s+(?:are\s+)?(?:closed|open)|(?:closed|open)\s+switch(?:es)?)", re.I)  # the state must be said OF the switch ("Bulb A is on" does not count)
 SWITCH_DRAWN = re.compile(r'data-switch="1"|width="30" height="12" fill="#fff" stroke="none"/><circle')  # figs_circuit._switch marker, or its older exact string (stored figures)
 # items whose drawn switch state IS the question ("The bulb does not light. Why?"): the child reads it off the figure
 SWITCH_STATE_IS_QUESTION = {"ci-005", "ci-010"}
@@ -146,7 +146,7 @@ def unqualified_stays_lit(options, answer):
     """WARN rule stays-lit-unqualified: the key is a bare 'It stays lit' (also 'will stay lit', 'remains lit', 'Bulb X
     stays lit') while another option says brighter/dimmer (PSLE answer: it stays lit at the same brightness)."""
     if not isinstance(answer, int) or not 0 <= answer < len(options): return False
-    return bool(re.fullmatch(r"\s*(?:(?:it|the bulb|bulb \w+)\s+)?(?:(?:will|would)\s+)?(?:stays?|remains?)\s+(?:lit|on)\.?\s*", str(options[answer]), re.I)) and \
+    return bool(re.fullmatch(r"\s*(?:(?:it|they|the bulbs?|both bulbs|bulbs? \w+(?: and \w+)?)\s+)?(?:(?:will|would)\s+)?(?:stays?|remains?)\s+(?:lit|on)\.?\s*", str(options[answer]), re.I)) and \
         any(re.search(r"brighter|dimmer", str(o), re.I) for i, o in enumerate(options) if i != answer)
 
 
@@ -211,6 +211,9 @@ def warning_self_tests(science=False):
     t(not unstated_switch("Will the bulb light up?", "<svg viewBox='0 0 9 9'><text>S</text></svg>"), "unstated switch: a figure without a switch symbol is not judged")
     t(unstated_switch("The switch is shown. Will the bulb light up?", sw), "unstated switch: the bare word 'switch' is not a state")
     t(not unstated_switch("Switch S is turned off. Will the bulb light up?", sw), "unstated switch: 'turned off' is a state")
+    t(unstated_switch("Bulb A is on. Will bulb B light up?", sw), "unstated switch: a bulb's state is not the switch's")
+    t(not unstated_switch("Ali closes switch S. Will the bulb light up?", sw), "unstated switch: 'closes switch S' is a state")
+    t(unqualified_stays_lit(["Both bulbs stay lit", "Both bulbs become brighter", "x", "y"], 0), "stays-lit: plural keys are flagged")
     t(not unstated_switch("The bulb does not light up. Why?", sw, "ci-005"), "unstated switch: allowlisted state-is-the-question item passes")
     for v in ("It stays lit", "It will stay lit", "It remains lit", "Bulb X stays lit", "The bulb remains on."):
         t(unqualified_stays_lit(["It goes out", v, "It becomes dimmer", "It becomes brighter"], 1), f"stays-lit variant flagged: {v}")
