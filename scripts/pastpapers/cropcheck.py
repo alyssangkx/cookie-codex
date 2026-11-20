@@ -212,7 +212,7 @@ def pickup(a):
 def run_model():
     """Starts the vLLM engine. Returns (llm, sampling params)."""
     from vllm import LLM, SamplingParams
-    llm = LLM(model="Qwen/Qwen2.5-VL-32B-Instruct-AWQ", tensor_parallel_size=int(os.environ.get("PP_TP", "2")),
+    llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-32B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "2")),
               gpu_memory_utilization=0.92, max_model_len=16384, max_num_seqs=6, limit_mm_per_prompt={"image": 2},
               mm_processor_kwargs={"max_pixels": 3500000}, allowed_local_media_path=SERVER_PACK,
               enforce_eager=bool(os.environ.get("PP_EAGER")))

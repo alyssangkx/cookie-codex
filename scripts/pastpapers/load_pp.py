@@ -177,8 +177,13 @@ def parse_hold(text: str) -> set:
 
 
 def read_hold(out: Path) -> set:
-    """hold.txt (visual review) plus hold-auto.txt (cropcheck-apply, the server model's crop review)."""
-    return set().union(*(parse_hold(open(out / n).read()) for n in ("hold.txt", "hold-auto.txt") if (out / n).exists()))
+    """hold.txt (visual review), hold-auto.txt (cropcheck-apply, the server model's crop review) and hold-crop.txt
+    (`figures`: a crop still cut off at an edge after the automatic fixes)."""
+    return set().union(*(parse_hold(open(out / n).read()) for n in HOLD_FILES if (out / n).exists()))
+
+
+HOLD_FILES = ("hold.txt", "hold-auto.txt", "hold-crop.txt")
+UNRESOLVED = ("not_located", "touch_unresolved", "no_page")  # fix_crop outcomes that leave a crop possibly cut off
 
 
 def hold_auto_text(rows, expected_ids=None) -> str:
@@ -621,11 +626,15 @@ def figures(a):
     stats = {"touching": 0, "grown": 0, "not_located": 0, "touch_unresolved": 0, "no_page": 0, "deskewed": 0, "log": [], "angles": []}
     tmpd = outside_repo(Path(a.out)) / a.subject / "_fixed"
     tmpd.mkdir(exist_ok=True)
+    unresolved = {}  # pp id -> figure numbers still touching an edge
     for r in jl(out / "selected.jsonl"):
         for n, c in enumerate(r["crops"], 1):
             name = f"{r['id']}-{n}.webp"
             fixed = tmpd / f"{r['id']}-{n}.png"
+            before = [stats[k] for k in UNRESOLVED]
             fix_crop(Path(c), stats).save(fixed)
+            if before != [stats[k] for k in UNRESOLVED]:
+                unresolved.setdefault(r["id"], []).append(n)
             w, h, b, mode = compress(fixed, fdir / name, a.max_width, a.target_kb * 1024)
             man.append({"pp_id": r["id"], "path": f"{a.subject}/{name}", "w": w, "h": h, "bytes": b})
             tot += b
@@ -638,6 +647,10 @@ def figures(a):
     with open(out / "figures.jsonl", "w") as f:
         for m in man:
             f.write(json.dumps(m) + "\n")
+    (out / "hold-crop.txt").write_text("# written by `load_pp.py figures`: a crop still cut off at an edge after the automatic fixes. "
+                                       "Do not edit: the next `figures` run overwrites.\n"
+                                       + "".join(f"{i}  # figure {', '.join(map(str, ns))}\n" for i, ns in sorted(unresolved.items())))
+    print(f"held (crop still cut off): {len(unresolved)} -> {out / 'hold-crop.txt'}")
     for it in stats["log"]:
         print("grown", it[0], f"crop{it[1]}", it[2])
     over = sum(m["bytes"] > a.target_kb * 1024 for m in man)
@@ -755,22 +768,30 @@ def review(a):
     out = outside_repo(Path(a.out)) / a.subject
     keep = set(a.subtopics.split(",")) if a.subtopics else None
     if not keep:
-        sys.exit("--subtopics is required")
+        sys.exit("--subtopics is required (or 'all' with --sample)")
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
         figs[m["pp_id"]].append(m["path"])
-    rows = [r for r in jl(out / "selected.jsonl") if r["subtopic"] in keep]
+    held = read_hold(out)
+    rows = [r for r in jl(out / "selected.jsonl") if (keep == {"all"} or r["subtopic"] in keep) and r["id"] not in held]
+    if a.sample:  # owner's spot-check: a seeded random few per sub-topic (same draw every run)
+        import random
+        by = collections.defaultdict(list)
+        for r in rows:
+            by[r["subtopic"]].append(r)
+        rows = [r for sub in sorted(by) for r in random.Random(sub).sample(by[sub], min(a.sample, len(by[sub])))]
+        keep = {"spotcheck"}
     parts = ["<!doctype html><meta charset=utf-8><title>pp review</title><style>body{font:16px Arial;max-width:960px;margin:auto;padding:16px}"
              "section{border-top:2px solid #444;padding:12px 0}img{max-width:100%;border:1px solid #999;margin:6px 0}"
              ".k{background:#d6f5d6;font-weight:bold}.m{color:#555;font-size:13px}</style>",
              f"<h1>{html.escape(', '.join(sorted(keep)))}: {len(rows)} items</h1><p>Check each: picture readable and complete "
              "(all (1)-(4) labels visible), picture matches the stem, nothing gives the answer away, key is right. "
              "Put the pp id of a failing item in hold.txt.</p>"]
-    for n, r in enumerate(sorted(rows, key=lambda r: (r["level"], r["id"])), 1):
+    for n, r in enumerate(sorted(rows, key=lambda r: (r["subtopic"], r["level"], r["id"])), 1):
         imgs = "".join(f'<img src="data:image/webp;base64,{base64.b64encode((out / "figures" / Path(p).name).read_bytes()).decode()}">'
                        for p in figs[r["id"]])
         opts = "".join(f'<li class="{"k" if i == r["answer"] else ""}">({i + 1}) {html.escape(o)}</li>' for i, o in enumerate(r["options"]))
-        parts.append(f'<section><div class=m>#{n} {r["id"]} · {r["level"]} · Past paper {r["year"]} · blind: {html.escape(r["blind_src"])}</div>'
+        parts.append(f'<section><div class=m>#{n} {r["id"]} · {html.escape(r["subtopic"])} · {r["level"]} · Past paper {r["year"]} · blind: {html.escape(r["blind_src"])}</div>'
                      f'<p>{html.escape(r["stem"])}</p>{imgs}<ol style="list-style:none;padding:0">{opts}</ol></section>')
     dst = out / f"review-{sorted(keep)[0]}.html"
     dst.write_text("\n".join(parts))
@@ -902,6 +923,7 @@ def main():
     p.add_argument("--max-width", type=int, default=900)
     p.add_argument("--target-kb", type=int, default=60)
     p.add_argument("--subtopics", default="")
+    p.add_argument("--sample", type=int, default=0, help="review: this many random items per sub-topic (spot-check)")
     p.add_argument("--apply", action="store_true")
     p.add_argument("--ocr-keys", action="store_true", help="select: use <year>/anskey_ocr.jsonl as a fallback key source")
     p.add_argument("--reread-keys", action="store_true", help="select: use agreed <year>/ansreread/ cells (ans_reread.py) as a fallback key source, answer_src 'vision-reread'")
