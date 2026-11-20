@@ -11,29 +11,6 @@ outside the repo.
 
 ## Now (20 Nov 2026)
 
-- [ ] **Content batch**
-  - The work:
-    - Maths rewrite, with its own seed per template and weighting by paper marks;
-    - Science figures, re-filing and 53 new items;
-    - English and Chinese rewrites;
-    - rewards rebuilt (90 Science slots moved).
-  - Steps: code review medium, then commit in four parts, then ask the owner before pushing. Pushing resets
-    per-question progress on most Maths questions once; cleared tiers and cards stay.
-- [ ] **Review fixes before the push (20 Nov):**
-  - **New keys:** rewritten English and Chinese items get new keys, so new questions don't inherit old progress.
-  - **Move to matching sub-topics:**
-    - sentence-choice items out of "sentence ordering";
-    - grammar cloze out of "metalanguage";
-    - visual-text sets into "multimodal texts".
-  - **Science figures:** fix the ones that show the answer, plus give-away options in the new items. Guard the
-    one-off refile script.
-  - **Done:** `*.zip` and `.ses` gitignored (past-paper archive); the isolation wording corrected.
-- [ ] **Parent page:** questions no longer in any bank are left out of "answered wrong" and "waiting for retest"
-  (owner). Stale tier counts are hidden by `liveMastered` (no schema bump: an old tab could overwrite the server save). Orphan states are never deleted, because an old tab could delete live ones. **Each question has exactly one sub-topic:**
-  `check_dupes.py` guards it (0 clashes now).
-- [ ] **Parent note when pushing the Maths re-seed:** most Maths question ids change once. Pending Maths retests
-  disappear, tier counts restart on the new questions, and cleared tiers and cards stay. The parent page lists the old
-  ids as "retired".
 - [ ] **Server queue, then pickup on dev**
   - Tag Maths, Science and Chinese 2018–2024.
   - Apply the Chinese rule: the sub-topic comes from the paper section, except 语文应用.
@@ -159,6 +136,13 @@ outside the repo.
 
 ## Done
 
+- [x] 20 Nov 2026: content redesign live (`975eeec`).
+  - Maths: its own random stream per template, weighting by paper marks, exam-style rewrites (4,281 to 3,826
+    questions; most Maths ids changed once).
+  - Science: figures, re-filing, new items.
+  - English and Chinese: pilot items rewritten under new keys, in the sub-topic each now tests.
+  - Rewards rebuilt: Science 90, English 26, Chinese 11 slots moved; awarded cards stay.
+  - Parent page leaves out deleted questions; one category per question (`check_dupes.py`).
 - [x] 20 Nov 2026: parent sign-up live; family code removed.
 - [x] 20 Nov 2026: site review leftovers. Login message, P–S line labels, home labels, Library jump chips, and a
   script-src CSP are all live.
