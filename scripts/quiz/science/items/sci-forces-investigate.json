@@ -1,0 +1,2440 @@
+{
+  "subtopic": "sci-interactions-forces-investigate",
+  "items": [
+    {
+      "key": "fi-001",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A toy car is rolled across four floors. On which floor will it stop the soonest?",
+      "options": [
+        "A rough carpet",
+        "A smooth tile floor",
+        "A sheet of ice",
+        "A polished wooden floor"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-surface",
+          "why": "A smooth surface has little friction, so the car goes further."
+        },
+        {
+          "tag": "wrong-surface",
+          "why": "Ice has very little friction, so the car goes a long way."
+        },
+        {
+          "tag": "wrong-surface",
+          "why": "A polished surface is smooth, so the car goes further than on carpet."
+        }
+      ],
+      "solution": [
+        "A rough surface has more friction, so the car loses speed and stops sooner."
+      ]
+    },
+    {
+      "key": "fi-002",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A box is sliding to the right across a floor. In which direction does friction act on the box?",
+      "options": [
+        "To the right, the same way as the motion",
+        "Upwards",
+        "Downwards",
+        "To the left, against the motion"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Friction does not help the box slide. It acts against the motion."
+        },
+        {
+          "tag": "wrong-direction",
+          "why": "Friction acts along the surface, not upwards."
+        },
+        {
+          "tag": "wrong-direction",
+          "why": "Gravity acts downwards. Friction acts along the surface against the motion."
+        },
+        null
+      ],
+      "solution": [
+        "Friction always acts opposite to the way an object moves or tries to move."
+      ]
+    },
+    {
+      "key": "fi-003",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Why do running shoes have grooves on their soles?",
+      "options": [
+        "To reduce friction so the runner can slide",
+        "To make the shoes lighter in the air",
+        "To increase friction so the runner does not slip",
+        "To make the shoes look nicer"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Grooves grip the ground. They increase friction."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Grooves are for grip, not for lightness."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "The grooves have a job: they stop slipping."
+        }
+      ],
+      "solution": [
+        "Grooves grip the ground. More friction means the shoe does not slip."
+      ]
+    },
+    {
+      "key": "fi-004",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Why is oil put on the chain of a bicycle?",
+      "options": [
+        "To increase friction between the metal parts",
+        "To reduce friction between the metal parts",
+        "To make the chain heavier",
+        "To make the chain stick to the wheel"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Oil makes surfaces slippery, so there is less friction."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Oil does not make the chain heavy."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Oil makes parts slide past each other more easily."
+        }
+      ],
+      "solution": [
+        "Oil makes the surfaces slippery. Friction goes down and the chain moves more easily."
+      ]
+    },
+    {
+      "key": "fi-005",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Mei pushes a box along a smooth floor, then along a rough carpet with the same push. On which surface does the box move the shorter distance after she lets go?",
+      "options": [
+        "On the rough carpet",
+        "On the smooth floor",
+        "It moves the same distance on both",
+        "It does not move on either surface"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-surface",
+          "why": "A smooth floor has less friction, so the box goes further."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The two surfaces have different amounts of friction."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The push makes the box move on both surfaces."
+        }
+      ],
+      "solution": [
+        "More friction on the carpet makes the box stop sooner."
+      ]
+    },
+    {
+      "key": "fi-006",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following ways will reduce the friction when moving a heavy box?",
+      "options": [
+        "Making the floor rougher",
+        "Putting sand on the floor",
+        "Gluing rubber under the box",
+        "Putting the box on wheels"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "increases",
+          "why": "A rougher floor means more friction."
+        },
+        {
+          "tag": "increases",
+          "why": "Sand makes the floor rougher, so there is more friction."
+        },
+        {
+          "tag": "increases",
+          "why": "Rubber grips the floor, so there is more friction."
+        },
+        null
+      ],
+      "solution": [
+        "Wheels roll instead of rubbing, so there is much less friction."
+      ]
+    },
+    {
+      "key": "fi-007",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of these activities needs friction?",
+      "options": [
+        "Sliding down a slide quickly",
+        "Skating on smooth ice",
+        "Walking on a path without slipping",
+        "Pushing a toy car on a smooth table"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-need",
+          "why": "A slide works best with little friction."
+        },
+        {
+          "tag": "wrong-need",
+          "why": "Skating needs little friction."
+        },
+        null,
+        {
+          "tag": "wrong-need",
+          "why": "A car moves further when there is little friction."
+        }
+      ],
+      "solution": [
+        "Friction between the shoe and the ground stops us from slipping when we walk."
+      ]
+    },
+    {
+      "key": "fi-008",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A pencil eraser gets smaller as it rubs against paper. Which force makes the eraser wear away?",
+      "options": [
+        "Magnetic force",
+        "Friction",
+        "Gravitational force",
+        "Elastic spring force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "An eraser is not a magnet."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the eraser down. Rubbing causes the wear."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring involved."
+        }
+      ],
+      "solution": [
+        "Rubbing against paper causes friction, which wears the eraser away."
+      ]
+    },
+    {
+      "key": "fi-009",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring is hung from a stand. Gina replaces a 100 g mass by a 200 g mass. What happens to the spring?",
+      "options": [
+        "It becomes longer",
+        "It becomes shorter",
+        "It stays the same length",
+        "It becomes shorter and then longer"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "A bigger mass pulls harder, so the spring stretches more."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A greater load stretches a spring more."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The spring only stretches more when the load is bigger."
+        }
+      ],
+      "solution": [
+        "A bigger load pulls the spring more, so it is longer."
+      ]
+    },
+    {
+      "key": "fi-010",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which instrument is used to measure the size of a force?",
+      "options": [
+        "A measuring cylinder",
+        "A thermometer",
+        "A stopwatch",
+        "A spring balance"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-tool",
+          "why": "A measuring cylinder measures volume."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A thermometer measures temperature."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A stopwatch measures time."
+        },
+        null
+      ],
+      "solution": [
+        "A spring balance stretches by an amount that shows the size of the force."
+      ]
+    },
+    {
+      "key": "fi-011",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A stretched spring is let go and goes back to its first length. Which force makes it do this?",
+      "options": [
+        "Magnetic force",
+        "Gravitational force",
+        "Elastic spring force",
+        "Frictional force"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "A spring is not a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls down, not along the spring."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Friction needs surfaces that rub."
+        }
+      ],
+      "solution": [
+        "A stretched spring pulls back because of elastic spring force."
+      ]
+    },
+    {
+      "key": "fi-012",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of these things makes use of a spring?",
+      "options": [
+        "A magnet on a fridge",
+        "A pen that clicks to push the tip out",
+        "A ball rolling down a ramp",
+        "A bar of soap sliding on a tray"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-device",
+          "why": "This works by magnetic force."
+        },
+        null,
+        {
+          "tag": "wrong-device",
+          "why": "This works by gravity."
+        },
+        {
+          "tag": "wrong-device",
+          "why": "This involves friction."
+        }
+      ],
+      "solution": [
+        "The clicking pen has a spring inside that pushes back."
+      ]
+    },
+    {
+      "key": "fi-013",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring is 10 cm long with no load. It is 14 cm long with a 100 g load. How much did the spring stretch?",
+      "options": [
+        "4 cm",
+        "14 cm",
+        "10 cm",
+        "24 cm"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "14 cm is the new length. The stretch is the change."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "10 cm is the first length."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "Do not add. The stretch is 14 cm minus 10 cm."
+        }
+      ],
+      "solution": [
+        "Stretch = new length - first length = 14 - 10 = 4 cm."
+      ]
+    },
+    {
+      "key": "fi-014",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A 50 g mass stretches a spring by 2 cm. How much will the same spring stretch with a 100 g mass?",
+      "options": [
+        "2 cm",
+        "1 cm",
+        "6 cm",
+        "4 cm"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "A bigger load stretches it more."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "A bigger load stretches the spring more, not less."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "Twice the load gives twice the stretch, which is 4 cm."
+        },
+        null
+      ],
+      "solution": [
+        "The stretch is in proportion to the load, so twice the load makes twice the stretch: 4 cm."
+      ]
+    },
+    {
+      "key": "fi-015",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which load will stretch the same spring the most?",
+      "options": [
+        "20 g",
+        "40 g",
+        "80 g",
+        "60 g"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-size",
+          "why": "20 g is the smallest load, so it stretches the spring the least."
+        },
+        {
+          "tag": "wrong-size",
+          "why": "A bigger load, 80 g, stretches the spring more."
+        },
+        null,
+        {
+          "tag": "wrong-size",
+          "why": "A bigger load, 80 g, stretches the spring more."
+        }
+      ],
+      "solution": [
+        "The bigger the load, the more the spring stretches."
+      ]
+    },
+    {
+      "key": "fi-016",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The weight of an object is the pull of which force on it?",
+      "options": [
+        "The magnetic force of the Earth",
+        "The gravitational force of the Earth",
+        "The frictional force of the floor",
+        "The elastic force of the ground"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "Not all objects are magnetic, but all have weight."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Friction does not give an object weight."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Elastic force is not what weight is."
+        }
+      ],
+      "solution": [
+        "Weight is the pull of the Earth's gravity on an object."
+      ]
+    },
+    {
+      "key": "fi-017",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "In which unit is weight measured?",
+      "options": [
+        "Newton (N)",
+        "Kilogram (kg)",
+        "Metre (m)",
+        "Second (s)"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-unit",
+          "why": "Kilogram is a unit of mass."
+        },
+        {
+          "tag": "wrong-unit",
+          "why": "Metre is a unit of length."
+        },
+        {
+          "tag": "wrong-unit",
+          "why": "Second is a unit of time."
+        }
+      ],
+      "solution": [
+        "Weight is a force, so it is measured in newtons."
+      ]
+    },
+    {
+      "key": "fi-018",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "What can be used to measure the weight of a bag?",
+      "options": [
+        "A ruler",
+        "A thermometer",
+        "A measuring cylinder",
+        "A spring balance"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-tool",
+          "why": "A ruler measures length."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A thermometer measures temperature."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A measuring cylinder measures volume."
+        },
+        null
+      ],
+      "solution": [
+        "Hang the bag on a spring balance. The reading is its weight."
+      ]
+    },
+    {
+      "key": "fi-019",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of these objects has the greatest weight?",
+      "options": [
+        "A pencil from the case",
+        "A rubber band",
+        "A school bag",
+        "A paper clip"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-size",
+          "why": "A pencil is very light."
+        },
+        {
+          "tag": "wrong-size",
+          "why": "A rubber band is very light."
+        },
+        null,
+        {
+          "tag": "wrong-size",
+          "why": "A paper clip is very light."
+        }
+      ],
+      "solution": [
+        "The more matter an object has, the more the Earth pulls on it."
+      ]
+    },
+    {
+      "key": "fi-020",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "In which direction does the force that gives an object its weight act?",
+      "options": [
+        "Upwards, away from the Earth",
+        "Downwards, towards the centre of the Earth",
+        "Sideways, along the ground",
+        "In the same direction as the object moves"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Gravity pulls things towards the Earth."
+        },
+        null,
+        {
+          "tag": "wrong-direction",
+          "why": "Gravity does not pull sideways."
+        },
+        {
+          "tag": "wrong-direction",
+          "why": "Gravity always pulls down, whichever way the object moves."
+        }
+      ],
+      "solution": [
+        "Weight is the pull of gravity, which is towards the Earth."
+      ]
+    },
+    {
+      "key": "fi-021",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "An apple is cut into two equal halves. What is the weight of one half, compared with the whole apple?",
+      "options": [
+        "It is half the weight of the whole apple",
+        "It is the same as the whole apple",
+        "It is twice the weight of the whole apple",
+        "It has no weight"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Half the apple has half the matter, so half the weight."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Half an apple cannot weigh more than a whole one."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Every object has weight."
+        }
+      ],
+      "solution": [
+        "Half the apple has half as much matter, so the Earth pulls with half the force."
+      ]
+    },
+    {
+      "key": "fi-022",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A mango is hung from a spring balance and the spring stretches. What makes the spring stretch?",
+      "options": [
+        "The magnetic force on the mango",
+        "The friction of the air",
+        "The elastic force of the spring",
+        "The weight of the mango"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "A mango is not a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Air friction is very small."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "The spring's own force pulls back. It does not make it stretch."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls the mango down. This weight pulls the spring and stretches it."
+      ]
+    },
+    {
+      "key": "fi-023",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Does a feather have weight?",
+      "options": [
+        "No, because it is too light",
+        "No, because it floats in the air",
+        "Yes, because gravity pulls on it",
+        "Yes, because it has friction"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity pulls on light things too."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It falls slowly, but gravity still pulls it."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Weight comes from gravity, not friction."
+        }
+      ],
+      "solution": [
+        "All objects have weight, even light ones, because gravity pulls on them."
+      ]
+    },
+    {
+      "key": "fi-024",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A boy rubs his hands together quickly and they get warm. Which force causes this?",
+      "options": [
+        "Gravity",
+        "Friction",
+        "Magnetic force",
+        "Elastic spring force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "Gravity does not warm the hands."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Hands are not magnets."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring."
+        }
+      ],
+      "solution": [
+        "Rubbing surfaces produce friction, which makes heat."
+      ]
+    },
+    {
+      "key": "fi-025",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A boy wants his toy car to roll as far as possible across the floor. Which floor should he use?",
+      "options": [
+        "A smooth floor",
+        "A floor covered with sand",
+        "A floor covered with a rough mat",
+        "A floor covered with sandpaper"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-surface",
+          "why": "Sand is rough, so there is a lot of friction."
+        },
+        {
+          "tag": "wrong-surface",
+          "why": "A rough mat has a lot of friction."
+        },
+        {
+          "tag": "wrong-surface",
+          "why": "Sandpaper has a lot of friction."
+        }
+      ],
+      "solution": [
+        "A smooth floor has the least friction, so the car goes furthest."
+      ]
+    },
+    {
+      "key": "fi-101",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A toy car rolls down the same ramp onto four different surfaces. The table shows how far it moved on each. Which surface has the least friction?",
+      "options": [
+        "Plastic sheet",
+        "Smooth tiles",
+        "Carpet",
+        "Rubber mat"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The car went 85 cm on tiles, less far than on the plastic sheet."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The car went only 40 cm on carpet."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The car went the shortest distance on the rubber mat, so it has the most friction."
+        }
+      ],
+      "solution": [
+        "The car went furthest (110 cm) on the plastic sheet, so that surface has the least friction."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A car rolls down the same ramp</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Surface</text><rect x=\"140\" y=\"36\" width=\"170\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Distance moved (cm)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Smooth tiles</text><rect x=\"140\" y=\"70\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">85</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Carpet</text><rect x=\"140\" y=\"100\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Rubber mat</text><rect x=\"140\" y=\"130\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Plastic sheet</text><rect x=\"140\" y=\"160\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">110</text></svg>"
+    },
+    {
+      "key": "fi-102",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The table shows how far a toy car moved on four surfaces. On which surface did the car lose its speed the fastest?",
+      "options": [
+        "Smooth tiles",
+        "Carpet",
+        "Plastic sheet",
+        "Rubber mat"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "On tiles the car went 85 cm. It lost speed slowly."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The car went 40 cm on carpet, further than on the rubber mat."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The car went furthest on the plastic sheet, so it lost speed slowest there."
+        },
+        null
+      ],
+      "solution": [
+        "The car went the shortest distance (25 cm) on the rubber mat, so friction is greatest there."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A car rolls down the same ramp</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Surface</text><rect x=\"140\" y=\"36\" width=\"170\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Distance moved (cm)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Smooth tiles</text><rect x=\"140\" y=\"70\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">85</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Carpet</text><rect x=\"140\" y=\"100\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Rubber mat</text><rect x=\"140\" y=\"130\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Plastic sheet</text><rect x=\"140\" y=\"160\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">110</text></svg>"
+    },
+    {
+      "key": "fi-103",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Siti wants to find out if the type of surface affects how far a toy car moves. The table shows four set-ups. Which two set-ups should she compare?",
+      "options": [
+        "P and R",
+        "Q and S",
+        "P and Q",
+        "R and S"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "P and R differ in the height of the ramp, not the surface."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "Q and S differ in height and car size."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "R and S differ in the surface and in the car, so it is not a fair test."
+        }
+      ],
+      "solution": [
+        "For a fair test, only the surface should change.",
+        "P and Q have the same ramp height and the same car, with different surfaces."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"120.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ramp height</text><rect x=\"170\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"210.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Surface</text><rect x=\"250\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"290.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Toy car</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20 cm</text><rect x=\"170\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">carpet</text><rect x=\"250\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20 cm</text><rect x=\"170\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tiles</text><rect x=\"250\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"170\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">carpet</text><rect x=\"250\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"170\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tiles</text><rect x=\"250\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">large</text></svg>"
+    },
+    {
+      "key": "fi-104",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Siti now wants to find out if the height of the ramp affects how far the car moves. Using the same table of set-ups, which two should she compare?",
+      "options": [
+        "P and Q",
+        "P and R",
+        "Q and R",
+        "Q and S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "P and Q have different surfaces."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "Q and R differ in height and in surface."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "Q and S differ in height and in the size of the car."
+        }
+      ],
+      "solution": [
+        "P and R both use carpet and a small car. Only the height of the ramp is different."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four set-ups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Set-up</text><rect x=\"70\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"120.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ramp height</text><rect x=\"170\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"210.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Surface</text><rect x=\"250\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"290.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Toy car</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20 cm</text><rect x=\"170\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">carpet</text><rect x=\"250\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20 cm</text><rect x=\"170\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tiles</text><rect x=\"250\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"170\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">carpet</text><rect x=\"250\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">small</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40 cm</text><rect x=\"170\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"210.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">tiles</text><rect x=\"250\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"290.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">large</text></svg>"
+    },
+    {
+      "key": "fi-105",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A toy car rolls down the ramp shown and stops 45 cm from the bottom of the ramp on carpet. Siti puts a smooth plastic sheet on the floor instead and rolls the same car from the same height. What will happen to the distance?",
+      "options": [
+        "It will be more than 45 cm",
+        "It will be less than 45 cm",
+        "It will be exactly 45 cm",
+        "The car will not move"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "A smooth sheet has less friction than carpet, so the car goes further."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The surface is different, so the friction is different."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The car still rolls down the ramp."
+        }
+      ],
+      "solution": [
+        "The plastic sheet is smoother than carpet. There is less friction, so the car goes further."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 150\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 120 L20 79 L150 120 Z\"/><line x1=\"14\" y1=\"120\" x2=\"370\" y2=\"120\"/><rect x=\"150\" y=\"120\" width=\"220\" height=\"9\" fill=\"none\"/><text x=\"260.0\" y=\"144\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">carpet</text><rect x=\"36\" y=\"84\" width=\"28\" height=\"14\" rx=\"3\" transform=\"rotate(18 50 91)\"/><circle cx=\"42\" cy=\"101\" r=\"3\"/><circle cx=\"60\" cy=\"107\" r=\"3\"/><text x=\"10\" y=\"73.0\" text-anchor=\"start\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">30 cm</text><rect x=\"208\" y=\"104\" width=\"28\" height=\"14\" rx=\"3\"/><line x1=\"150\" y1=\"98\" x2=\"222\" y2=\"98\" stroke-dasharray=\"4 3\"/><text x=\"186.0\" y=\"92\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">45 cm</text></svg>"
+    },
+    {
+      "key": "fi-106",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Zhi Wei pulls a block along four surfaces at a steady speed using a spring balance. The table shows his readings. Which surface has the most friction?",
+      "options": [
+        "Glass",
+        "Wood",
+        "Cloth",
+        "Sandpaper"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The smallest reading (1 N) shows the least friction, which is the glass."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The reading on wood (3 N) is smaller than on sandpaper."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The reading on cloth (5 N) is smaller than on sandpaper."
+        },
+        null
+      ],
+      "solution": [
+        "The biggest force (8 N) is needed on sandpaper, so it has the most friction."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Force to pull a block at a steady speed</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Surface</text><rect x=\"120\" y=\"36\" width=\"210\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Reading on spring balance (N)</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Glass</text><rect x=\"120\" y=\"70\" width=\"210\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">1</text><rect x=\"10\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Wood</text><rect x=\"120\" y=\"100\" width=\"210\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"10\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Cloth</text><rect x=\"120\" y=\"130\" width=\"210\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"160\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Sandpaper</text><rect x=\"120\" y=\"160\" width=\"210\" height=\"30\"/><text x=\"225.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text></svg>"
+    },
+    {
+      "key": "fi-107",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The table shows the length of a spring with different loads. What is the length of the spring with a 100 g load?",
+      "options": [
+        "12 cm",
+        "4 cm",
+        "14 cm",
+        "10 cm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "12 cm is the length with a 50 g load."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "4 cm is how much it stretched, not its length."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "10 cm is the length with no load."
+        }
+      ],
+      "solution": [
+        "Read along the table: for 100 g the length is 14 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 110\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A spring with different loads</text><rect x=\"10\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"85.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><rect x=\"160\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"183.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"206\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"229.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"252\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"275.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"298\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"321.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">150</text><rect x=\"344\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"367.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Length of spring (cm)</text><rect x=\"160\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"183.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"206\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"229.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"252\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"275.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"298\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"321.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"344\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"367.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text></svg>"
+    },
+    {
+      "key": "fi-108",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Using the table, by how much did the spring stretch when the load was 150 g?",
+      "options": [
+        "16 cm",
+        "6 cm",
+        "10 cm",
+        "2 cm"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "16 cm is the length. The stretch is 16 minus the first length."
+        },
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "10 cm is the first length of the spring."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "2 cm is the stretch with 50 g."
+        }
+      ],
+      "solution": [
+        "Stretch = 16 - 10 = 6 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 110\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A spring with different loads</text><rect x=\"10\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"85.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><rect x=\"160\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"183.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"206\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"229.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"252\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"275.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"298\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"321.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">150</text><rect x=\"344\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"367.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Length of spring (cm)</text><rect x=\"160\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"183.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"206\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"229.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"252\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"275.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"298\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"321.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"344\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"367.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text></svg>"
+    },
+    {
+      "key": "fi-109",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Using the table, what will the length of the spring be with a 250 g load, if the spring keeps stretching in the same way?",
+      "options": [
+        "20 cm",
+        "18 cm",
+        "22 cm",
+        "25 cm"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "18 cm is the length at 200 g. The spring stretches 2 cm more for each extra 50 g."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "The spring gains 2 cm for each extra 50 g, so only 2 cm more than 18 cm."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "The load is 250 g, but the length is not 250 times anything. Length goes up by 2 cm per 50 g."
+        }
+      ],
+      "solution": [
+        "Each extra 50 g adds 2 cm.",
+        "At 250 g the length is 18 + 2 = 20 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 110\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A spring with different loads</text><rect x=\"10\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"85.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><rect x=\"160\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"183.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"206\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"229.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"252\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"275.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"298\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"321.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">150</text><rect x=\"344\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"367.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Length of spring (cm)</text><rect x=\"160\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"183.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"206\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"229.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"252\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"275.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"298\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"321.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"344\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"367.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text></svg>"
+    },
+    {
+      "key": "fi-110",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The picture shows a spring hanging with a 50 g mass beside a ruler in cm. The ruler's 0 mark is at the top of the spring. What is the length of the spring?",
+      "options": [
+        "3 cm",
+        "5 cm",
+        "10 cm",
+        "8 cm"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The bottom of the spring is not at the 3 cm mark."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The bottom of the spring is not at the 5 cm mark."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The bottom of the spring is not at the 10 cm mark."
+        },
+        null
+      ],
+      "solution": [
+        "The bottom of the spring is level with the 8 cm mark on the ruler."
+      ],
+      "figure": "<svg viewBox=\"0 0 190 210\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"20\" y1=\"14\" x2=\"110\" y2=\"14\" stroke-width=\"4\"/><path d=\"M65 14 V24 L50 28.0 L80 36.0 L50 44.0 L80 52.0 L50 60.0 L80 68.0 L50 76.0 L80 84.0 L65 88 V96\"/><rect x=\"45\" y=\"96\" width=\"40\" height=\"30\" rx=\"4\"/><text x=\"65\" y=\"116\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">50 g</text><line x1=\"130\" y1=\"24\" x2=\"142\" y2=\"24\" stroke-width=\"1.2\"/><text x=\"160\" y=\"28\" text-anchor=\"start\" font-size=\"10\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"130\" y1=\"32\" x2=\"137\" y2=\"32\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"40\" x2=\"137\" y2=\"40\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"48\" x2=\"137\" y2=\"48\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"56\" x2=\"137\" y2=\"56\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"64\" x2=\"142\" y2=\"64\" stroke-width=\"1.2\"/><text x=\"160\" y=\"68\" text-anchor=\"start\" font-size=\"10\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"130\" y1=\"72\" x2=\"137\" y2=\"72\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"80\" x2=\"137\" y2=\"80\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"88\" x2=\"137\" y2=\"88\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"96\" x2=\"137\" y2=\"96\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"104\" x2=\"142\" y2=\"104\" stroke-width=\"1.2\"/><text x=\"160\" y=\"108\" text-anchor=\"start\" font-size=\"10\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"130\" y1=\"112\" x2=\"137\" y2=\"112\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"120\" x2=\"137\" y2=\"120\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"128\" x2=\"137\" y2=\"128\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"136\" x2=\"137\" y2=\"136\" stroke-width=\"1.2\"/><line x1=\"130\" y1=\"24\" x2=\"130\" y2=\"136\" stroke-width=\"1.2\"/><line x1=\"90\" y1=\"88\" x2=\"128\" y2=\"88\" stroke-dasharray=\"3 3\" stroke-width=\"1.2\"/></svg>"
+    },
+    {
+      "key": "fi-111",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The graph shows how far a spring stretched for different loads. How far did the spring stretch with a 150 g load?",
+      "options": [
+        "3 cm",
+        "4 cm",
+        "6 cm",
+        "8 cm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "3 cm is the stretch at 75 g."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "4 cm is the stretch at 100 g."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "8 cm is the stretch at 200 g."
+        }
+      ],
+      "solution": [
+        "Go up from 150 g to the line and across: 6 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Stretch of a spring</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"119.5\" y1=\"188\" x2=\"119.5\" y2=\"192\"/><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"187.0\" y1=\"188\" x2=\"187.0\" y2=\"192\"/><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">150</text><line x1=\"254.5\" y1=\"188\" x2=\"254.5\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">200</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Stretch (cm)</text><polyline points=\"52.0,188.0 119.5,158.0 187.0,128.0 254.5,98.0 322.0,68.0\"/><circle cx=\"52.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"158.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"128.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"68.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "fi-112",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The graph shows how far a spring stretched for different loads. What load would make the spring stretch by 7 cm, if it keeps stretching the same way?",
+      "options": [
+        "150 g",
+        "175 g",
+        "200 g",
+        "350 g"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "150 g gives a stretch of 6 cm."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "200 g gives a stretch of 8 cm."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "The stretch is 2 cm for every 50 g, so 7 cm needs 175 g."
+        }
+      ],
+      "solution": [
+        "6 cm needs 150 g and 8 cm needs 200 g.",
+        "So 7 cm needs 175 g."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Stretch of a spring</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"158.0\" x2=\"52\" y2=\"158.0\"/><text x=\"44\" y=\"162.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"48\" y1=\"128.0\" x2=\"52\" y2=\"128.0\"/><text x=\"44\" y=\"132.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"98.0\" x2=\"52\" y2=\"98.0\"/><text x=\"44\" y=\"102.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"48\" y1=\"68.0\" x2=\"52\" y2=\"68.0\"/><text x=\"44\" y=\"72.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"119.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"119.5\" y1=\"188\" x2=\"119.5\" y2=\"192\"/><text x=\"187.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"187.0\" y1=\"188\" x2=\"187.0\" y2=\"192\"/><text x=\"254.5\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">150</text><line x1=\"254.5\" y1=\"188\" x2=\"254.5\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">200</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Stretch (cm)</text><polyline points=\"52.0,188.0 119.5,158.0 187.0,128.0 254.5,98.0 322.0,68.0\"/><circle cx=\"52.0\" cy=\"188.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"119.5\" cy=\"158.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"187.0\" cy=\"128.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"254.5\" cy=\"98.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"68.0\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "fi-113",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "The table shows the weight of four objects. Which object is pulled by the Earth with the greatest force?",
+      "options": [
+        "School bag",
+        "Pencil case",
+        "Book",
+        "Shoe"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "It has the smallest weight (2 N)."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Its weight (4 N) is less than that of the bag."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Its weight (6 N) is less than that of the bag."
+        }
+      ],
+      "solution": [
+        "Weight is the pull of the Earth. The school bag has the biggest weight (12 N)."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Weight of four objects</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Object</text><rect x=\"140\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Weight (N)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Pencil case</text><rect x=\"140\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Book</text><rect x=\"140\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">School bag</text><rect x=\"140\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Shoe</text><rect x=\"140\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text></svg>"
+    },
+    {
+      "key": "fi-114",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Using the table of weights, what is the reading on a spring balance when a pencil case and a book are hung together from it?",
+      "options": [
+        "2 N",
+        "4 N",
+        "8 N",
+        "6 N"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "2 N is the weight of the pencil case alone."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "4 N is the weight of the book alone."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "Add only the pencil case (2 N) and the book (4 N)."
+        },
+        null
+      ],
+      "solution": [
+        "The weights add: 2 N + 4 N = 6 N."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Weight of four objects</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Object</text><rect x=\"140\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Weight (N)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Pencil case</text><rect x=\"140\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Book</text><rect x=\"140\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">School bag</text><rect x=\"140\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Shoe</text><rect x=\"140\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text></svg>"
+    },
+    {
+      "key": "fi-115",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following statements about friction are correct?\nA: Friction acts when two surfaces rub against each other.\nB: Friction acts in the same direction as the motion.\nC: Rough surfaces have more friction than smooth surfaces.\nD: Friction can never be useful.",
+      "options": [
+        "A and B only",
+        "B and D only",
+        "A and C only",
+        "C and D only"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "B is wrong. Friction acts against the motion."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong."
+        },
+        null,
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. Friction stops us from slipping when we walk."
+        }
+      ],
+      "solution": [
+        "A and C are correct.",
+        "B is wrong: friction acts against the motion. D is wrong: friction is useful for grip."
+      ]
+    },
+    {
+      "key": "fi-116",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following statements about springs are correct?\nA: A bigger load stretches a spring more.\nB: A spring balance can measure weight.\nC: A stretched spring stays stretched for ever.\nD: A spring has no force when it is stretched.",
+      "options": [
+        "A and C only",
+        "A and B only",
+        "B and D only",
+        "C and D only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "C is wrong. A spring returns to its length when the load is removed."
+        },
+        null,
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. A stretched spring pulls back."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong."
+        }
+      ],
+      "solution": [
+        "A and B are correct.",
+        "C and D are wrong because a stretched spring pulls back and returns to its length."
+      ]
+    },
+    {
+      "key": "fi-117",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following statements about weight are correct?\nA: Weight is the pull of gravity on an object.\nB: Weight is measured in grams.\nC: Weight can be measured with a spring balance.\nD: Light objects have no weight.",
+      "options": [
+        "A and C only",
+        "A and B only",
+        "B and D only",
+        "C and D only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "mix-up",
+          "why": "B is wrong. Weight is measured in newtons."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. All objects have weight."
+        }
+      ],
+      "solution": [
+        "A and C are correct.",
+        "Weight is in newtons (not grams), and every object has weight."
+      ]
+    },
+    {
+      "key": "fi-118",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following will help to reduce friction?\nA: Putting oil on moving metal parts.\nB: Adding sand to a slippery path.\nC: Using wheels instead of sliding.\nD: Wearing shoes with deep grooves.",
+      "options": [
+        "A and B only",
+        "B and D only",
+        "C and D only",
+        "A and C only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "B increases friction by making the path rough."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both B and D increase friction."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D increases friction because the grooves grip."
+        },
+        null
+      ],
+      "solution": [
+        "Oil and wheels reduce friction.",
+        "Sand and grooves increase friction."
+      ]
+    },
+    {
+      "key": "fi-119",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "In an experiment on how the surface affects the distance a car travels, which is the variable that is changed?",
+      "options": [
+        "The height of the ramp",
+        "The distance the car moves",
+        "The type of surface",
+        "The toy car used"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "kept-same",
+          "why": "The ramp height should be kept the same."
+        },
+        {
+          "tag": "measured",
+          "why": "This is what is measured."
+        },
+        null,
+        {
+          "tag": "kept-same",
+          "why": "The same car should be used each time."
+        }
+      ],
+      "solution": [
+        "The experimenter changes the surface and keeps the car and height the same."
+      ]
+    },
+    {
+      "key": "fi-120",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "In the same experiment, which is the variable that is measured?",
+      "options": [
+        "The type of surface",
+        "The distance the car moves",
+        "The height of the ramp",
+        "The weight of the car"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "changed",
+          "why": "This is the variable that is changed."
+        },
+        null,
+        {
+          "tag": "kept-same",
+          "why": "This should be kept the same."
+        },
+        {
+          "tag": "kept-same",
+          "why": "This should be kept the same."
+        }
+      ],
+      "solution": [
+        "The distance the car moves is what is measured for each surface."
+      ]
+    },
+    {
+      "key": "fi-121",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "The bar graph shows how far a toy car moved on four surfaces. Which statement is correct?",
+      "options": [
+        "The car moved furthest on the ice",
+        "The car moved furthest on the carpet",
+        "The car moved the same distance on all of them",
+        "The car moved the shortest distance on the ice"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "The carpet bar is the shortest."
+        },
+        {
+          "tag": "misread",
+          "why": "The bars have different heights."
+        },
+        {
+          "tag": "reversed",
+          "why": "The ice bar is the tallest."
+        }
+      ],
+      "solution": [
+        "The tallest bar is for ice, so the car moved furthest there."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Distance moved on four surfaces</text><path d=\"M52 38 V188 H342\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"163.0\" x2=\"52\" y2=\"163.0\"/><text x=\"44\" y=\"167.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"138.0\" x2=\"52\" y2=\"138.0\"/><text x=\"44\" y=\"142.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"88.0\" x2=\"52\" y2=\"88.0\"/><text x=\"44\" y=\"92.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"63.0\" x2=\"52\" y2=\"63.0\"/><text x=\"44\" y=\"67.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">120</text><text x=\"88.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Carpet</text><text x=\"160.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Wood</text><text x=\"233.25\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Tile</text><text x=\"305.75\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Ice</text><text x=\"197.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Surface</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Distance (cm)</text><rect x=\"70.1\" y=\"163.0\" width=\"36.2\" height=\"25.0\"/><rect x=\"142.6\" y=\"131.8\" width=\"36.2\" height=\"56.2\"/><rect x=\"215.1\" y=\"100.5\" width=\"36.2\" height=\"87.5\"/><rect x=\"287.6\" y=\"38.0\" width=\"36.2\" height=\"150.0\"/></svg>"
+    },
+    {
+      "key": "fi-122",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A 50 g mass stretches a spring by 2 cm. The same spring is stretched by a 175 g mass. If the stretch is in proportion to the load, how much will it stretch?",
+      "options": [
+        "6 cm",
+        "8 cm",
+        "3.5 cm",
+        "7 cm"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "6 cm is the stretch with 150 g."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "8 cm is the stretch with 200 g."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "50 g gives 2 cm, so 175 g gives 3.5 times as much: 7 cm."
+        },
+        null
+      ],
+      "solution": [
+        "175 g is 3.5 times 50 g, so the stretch is 3.5 x 2 = 7 cm."
+      ]
+    },
+    {
+      "key": "fi-123",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A bag hangs from a spring balance and the reading is 6 N. What does the reading tell us?",
+      "options": [
+        "The bag has a mass of 6 N",
+        "The spring pushes the bag down with 6 N",
+        "The Earth pulls the bag down with a force of 6 N",
+        "Friction on the bag is 6 N"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-unit",
+          "why": "Mass is not measured in newtons."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "The spring pulls up. The bag's weight pulls down."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Nothing is rubbing against the bag."
+        }
+      ],
+      "solution": [
+        "The reading shows the weight of the bag, which is the pull of gravity on it."
+      ]
+    },
+    {
+      "key": "fi-124",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Ali pushes a book along a table and it stops as soon as he lets go. When he puts a few pencils under the book, it slides further. Why?",
+      "options": [
+        "The pencils make the book heavier on the table",
+        "The pencils roll, so friction is less",
+        "The pencils push the book forward",
+        "The pencils increase the friction"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "Pencils do not make the book heavier. They reduce friction."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "Pencils do not push. They roll."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Rolling pencils reduce friction."
+        }
+      ],
+      "solution": [
+        "Rolling has much less friction than sliding. So the book goes further."
+      ]
+    },
+    {
+      "key": "fi-125",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Two identical springs P and Q hang with different loads. P has a 100 g mass and Q has a 50 g mass. Which statement is correct?",
+      "options": [
+        "P is longer than Q because it has the bigger load",
+        "Q is longer than P because it has the smaller load",
+        "P and Q are the same length",
+        "P is shorter than Q because it is heavier"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The bigger load stretches a spring more."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The loads are different."
+        },
+        {
+          "tag": "reversed",
+          "why": "A heavier load makes the spring longer, not shorter."
+        }
+      ],
+      "solution": [
+        "The spring with the bigger load stretches more, so P is longer."
+      ]
+    },
+    {
+      "key": "fi-201",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Siti rolls a car down a ramp onto four surfaces. The table shows how far it travelled. Which conclusion is supported?",
+      "options": [
+        "The car travelled furthest on the plastic sheet, so that has the least friction",
+        "The heavier the surface, the further the car travels",
+        "The car travels furthest on the surface with the most friction",
+        "Tiles have more friction than the rubber mat"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-conclusion",
+          "why": "The weight of the surface was not tested."
+        },
+        {
+          "tag": "reversed",
+          "why": "More friction makes the car go a shorter distance."
+        },
+        {
+          "tag": "reversed",
+          "why": "The car went further on tiles (85 cm) than on the rubber mat (25 cm), so tiles have less friction."
+        }
+      ],
+      "solution": [
+        "Plastic sheet: 110 cm, the furthest. So it has the least friction.",
+        "Rubber mat has the most friction."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A car rolls down the same ramp</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Surface</text><rect x=\"140\" y=\"36\" width=\"170\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Distance moved (cm)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Smooth tiles</text><rect x=\"140\" y=\"70\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">85</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Carpet</text><rect x=\"140\" y=\"100\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Rubber mat</text><rect x=\"140\" y=\"130\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">25</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Plastic sheet</text><rect x=\"140\" y=\"160\" width=\"170\" height=\"30\"/><text x=\"225.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">110</text></svg>"
+    },
+    {
+      "key": "fi-202",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the length of a spring for different loads. The spring is 24 cm long with an unknown load. What is the load?",
+      "options": [
+        "300 g",
+        "400 g",
+        "250 g",
+        "350 g"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "300 g would make the spring 22 cm long."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "400 g would make the spring 26 cm long."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "250 g would make the spring 20 cm long."
+        },
+        null
+      ],
+      "solution": [
+        "Each 50 g adds 2 cm. From 10 cm to 24 cm is 14 cm.",
+        "14 cm / 2 cm x 50 g = 350 g."
+      ],
+      "figure": "<svg viewBox=\"0 0 400 110\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"200.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A spring with different loads</text><rect x=\"10\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"85.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><rect x=\"160\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"183.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"206\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"229.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"252\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"275.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"298\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"321.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">150</text><rect x=\"344\" y=\"36\" width=\"46\" height=\"34\"/><text x=\"367.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">200</text><rect x=\"10\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"85.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Length of spring (cm)</text><rect x=\"160\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"183.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"206\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"229.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"252\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"275.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text><rect x=\"298\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"321.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">16</text><rect x=\"344\" y=\"70\" width=\"46\" height=\"30\"/><text x=\"367.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text></svg>"
+    },
+    {
+      "key": "fi-203",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring is 12 cm long with no load. A 100 g load makes it 16 cm and a 200 g load makes it 20 cm. What is its length with a 350 g load, if it keeps stretching in the same way?",
+      "options": [
+        "22 cm",
+        "24 cm",
+        "26 cm",
+        "35 cm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-calc",
+          "why": "This is the length with 250 g."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "This is the length with 300 g."
+        },
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "The length is not 350 g divided by anything. Add the stretch (14 cm) to 12 cm."
+        }
+      ],
+      "solution": [
+        "The stretch is 4 cm for each 100 g.",
+        "350 g stretches it 14 cm, so the length is 12 + 14 = 26 cm."
+      ]
+    },
+    {
+      "key": "fi-204",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring was stretched by a very heavy load. When the load was removed, the spring did not go back to its first length. What is the most likely reason?",
+      "options": [
+        "The spring was not hung from a stand",
+        "The spring was stretched too much",
+        "The load was too light",
+        "The spring was too short at the start"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reason",
+          "why": "A stand has nothing to do with it."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "A light load does not damage a spring."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "A short spring is not damaged by length alone."
+        }
+      ],
+      "solution": [
+        "A spring that is stretched too far is damaged and cannot go back to its first length."
+      ]
+    },
+    {
+      "key": "fi-205",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A man has a mass of 60 kg on Earth. On the Moon, gravity is weaker. Which statement is correct about the man on the Moon?",
+      "options": [
+        "His weight is less than on Earth but his mass is the same",
+        "His weight and his mass are both less than on Earth",
+        "His weight is the same as on Earth but his mass is less",
+        "His weight and his mass are both the same as on Earth"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The amount of matter in him does not change. Only the pull of gravity does."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Weaker gravity gives less weight. His mass is unchanged."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity on the Moon is weaker, so his weight is less."
+        }
+      ],
+      "solution": [
+        "Weight depends on the pull of gravity. The Moon's pull is weaker.",
+        "Mass is the amount of matter, which stays the same."
+      ]
+    },
+    {
+      "key": "fi-206",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring balance shows 12 N for a bag on Earth. The same bag is taken to the Moon and weighed on the same spring balance. What will the reading be?",
+      "options": [
+        "More than 12 N",
+        "12 N",
+        "0 N",
+        "Less than 12 N"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The Moon's gravity is weaker, so the pull is smaller."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The pull is different on the Moon."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The Moon has gravity, so the bag still has weight."
+        },
+        null
+      ],
+      "solution": [
+        "The Moon pulls less than the Earth.",
+        "So the spring stretches less and the reading is lower."
+      ]
+    },
+    {
+      "key": "fi-207",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "On a wet road, a car takes a longer distance to stop than on a dry road. What is the best explanation?",
+      "options": [
+        "Water increases friction between the tyres and the road",
+        "The wet road makes the car heavier",
+        "Water between the tyres and the road reduces friction",
+        "The tyres become smooth when they are wet"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Water makes the road slippery. Friction decreases."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The weight of the car does not change."
+        },
+        null,
+        {
+          "tag": "wrong-reason",
+          "why": "The tyres stay the same. The water is on the road."
+        }
+      ],
+      "solution": [
+        "Water acts like oil. Less friction means the brakes stop the car less quickly."
+      ]
+    },
+    {
+      "key": "fi-208",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A skater glides far across smooth ice after one push. A skater pushed once on a rough floor stops quickly. Which statement explains why?",
+      "options": [
+        "Ice has more friction so the skater keeps moving",
+        "Ice has less friction so the skater loses speed slowly",
+        "The rough floor has no friction",
+        "There is no friction on ice or on the rough floor"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "More friction would stop the skater faster."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Rough floors have a lot of friction."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Friction acts on both. It is just much smaller on ice."
+        }
+      ],
+      "solution": [
+        "Less friction means the skater slows down slowly and goes far."
+      ]
+    },
+    {
+      "key": "fi-209",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Mei pushes the same box with the same push on a rough floor and on a smooth floor. Which statement is correct?",
+      "options": [
+        "The box travels further on the smooth floor because there is less friction",
+        "The box travels further on the rough floor because there is more friction",
+        "The box travels the same distance because the push is the same",
+        "The box travels further on the rough floor because the box is heavier there"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "More friction stops the box sooner."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Different friction gives different distances."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The box weighs the same on both floors."
+        }
+      ],
+      "solution": [
+        "Less friction on the smooth floor means the box slows down more slowly and goes further."
+      ]
+    },
+    {
+      "key": "fi-210",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A block is pulled across a table with a spring balance at a steady speed. The reading on cloth is 5 N. The same block is pulled on glass. What is the reading likely to be?",
+      "options": [
+        "More than 5 N",
+        "5 N",
+        "0 N",
+        "Less than 5 N"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Glass is smoother than cloth, so there is less friction."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The surfaces have different friction."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Some friction still acts on glass, so a small pull is needed."
+        },
+        null
+      ],
+      "solution": [
+        "Glass has less friction than cloth, so a smaller pull is needed."
+      ]
+    },
+    {
+      "key": "fi-211",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following statements about friction are correct?\nA: It makes moving objects slow down.\nB: It produces heat when surfaces rub.\nC: It is bigger on a smooth surface than a rough one.\nD: It acts only when objects are moving.",
+      "options": [
+        "A and C only",
+        "B and D only",
+        "A and B only",
+        "C and D only"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "C is wrong. A smooth surface has less friction."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. Friction can act on a still object that is being pushed."
+        },
+        null,
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong."
+        }
+      ],
+      "solution": [
+        "Friction slows moving objects and makes heat when surfaces rub.",
+        "It is smaller on smooth surfaces."
+      ]
+    },
+    {
+      "key": "fi-212",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which of the following statements about the weight of an object are correct?\nA: It is the pull of the Earth on the object.\nB: It is smaller on the Moon than on Earth.\nC: It is the same as the amount of matter in the object.\nD: It acts upwards.",
+      "options": [
+        "A and C only",
+        "A and B only",
+        "B and D only",
+        "C and D only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "C is wrong. The amount of matter is mass, not weight."
+        },
+        null,
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. Weight acts downwards."
+        },
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong."
+        }
+      ],
+      "solution": [
+        "Weight is the pull of gravity, smaller on the Moon. It acts downwards."
+      ]
+    },
+    {
+      "key": "fi-213",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three tests use a ramp and a toy car. The ramp heights and distances moved on carpet are: 10 cm, 30 cm; 20 cm, 55 cm; 30 cm, 80 cm. Which conclusion is correct?",
+      "options": [
+        "The higher the ramp, the further the car moves",
+        "The lower the ramp, the further the car moves",
+        "The height of the ramp has no effect",
+        "The car moves further on a rough surface"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The 30 cm ramp gave the longest distance."
+        },
+        {
+          "tag": "wrong-conclusion",
+          "why": "The distance changes with the height."
+        },
+        {
+          "tag": "not-tested",
+          "why": "The surface was not changed in these tests."
+        }
+      ],
+      "solution": [
+        "The distance goes up as the height goes up: 30, 55, 80 cm."
+      ]
+    },
+    {
+      "key": "fi-214",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Ali's results for a ramp experiment do not show a clear pattern. He used a different toy car for each surface. What should he do to make his test fair?",
+      "options": [
+        "Use a different ramp for each surface",
+        "Release the cars from different heights",
+        "Measure the distance only once",
+        "Use the same toy car for every surface"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "unfair",
+          "why": "This would add another variable."
+        },
+        {
+          "tag": "unfair",
+          "why": "The height should be the same for every surface."
+        },
+        {
+          "tag": "unfair",
+          "why": "One measurement is not reliable. Repeating helps."
+        },
+        null
+      ],
+      "solution": [
+        "Only the surface should change. The car, ramp and height must stay the same."
+      ]
+    },
+    {
+      "key": "fi-215",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Mei compares two springs P and Q to see which stretches more. What must she keep the same?",
+      "options": [
+        "The material of the springs",
+        "The number of coils in the springs",
+        "The load and the first length of the springs",
+        "The colour of the springs"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "changed",
+          "why": "The springs are different, and that is what she is comparing."
+        },
+        {
+          "tag": "changed",
+          "why": "These may be the difference being tested."
+        },
+        null,
+        {
+          "tag": "irrelevant",
+          "why": "Colour does not affect stretching."
+        }
+      ],
+      "solution": [
+        "To compare the springs, the load and first length should be the same."
+      ]
+    },
+    {
+      "key": "fi-216",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A heavy box is pushed along the floor. Which action will make the box stop sooner after a push?",
+      "options": [
+        "Placing rollers under it",
+        "Placing a rough mat under it",
+        "Putting oil on the floor",
+        "Pushing it onto polished tiles"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reduces",
+          "why": "Rollers reduce friction, so the box slides further."
+        },
+        null,
+        {
+          "tag": "reduces",
+          "why": "Oil reduces friction."
+        },
+        {
+          "tag": "reduces",
+          "why": "Polished tiles have less friction than carpet."
+        }
+      ],
+      "solution": [
+        "A rough mat increases friction, so the box stops sooner."
+      ]
+    },
+    {
+      "key": "fi-217",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Why do machines have oil between their moving metal parts?",
+      "options": [
+        "It reduces friction and wear on the parts",
+        "It increases friction so that the parts stay in place",
+        "It makes the machine heavier",
+        "It makes the parts magnetic"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Oil reduces friction."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "The oil is a thin layer. It is not for weight."
+        },
+        {
+          "tag": "wrong-reason",
+          "why": "Oil has no effect on magnetism."
+        }
+      ],
+      "solution": [
+        "Oil keeps the metal parts from rubbing directly, so less friction, less heat and less wear."
+      ]
+    },
+    {
+      "key": "fi-218",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A block hangs from a spring balance and does not move. Which two forces act on the block?",
+      "options": [
+        "Its weight downwards and friction upwards",
+        "Magnetic force downwards and the spring force upwards",
+        "Its weight upwards and the spring force downwards",
+        "Its weight downwards and the elastic spring force upwards"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "There is no rubbing surface, so no friction."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "A magnet is not involved. Gravity pulls down."
+        },
+        {
+          "tag": "reversed",
+          "why": "Weight acts down."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls the block down.",
+        "The stretched spring pulls it up with the same size of force, so it stays still."
+      ]
+    },
+    {
+      "key": "fi-219",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "The graph shows how the length of a spring changes with load. What is the first length of the spring, with no load?",
+      "options": [
+        "0 cm",
+        "12 cm",
+        "8 cm",
+        "2 cm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "A spring has length even with no load."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "12 cm is the length with 100 g."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "2 cm is the stretch for 50 g, not the first length."
+        }
+      ],
+      "solution": [
+        "With no load (0 g), the line starts at 8 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of a spring</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"150.5\" x2=\"52\" y2=\"150.5\"/><text x=\"44\" y=\"154.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"75.5\" x2=\"52\" y2=\"75.5\"/><text x=\"44\" y=\"79.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"142.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"142.0\" y1=\"188\" x2=\"142.0\" y2=\"192\"/><text x=\"232.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"232.0\" y1=\"188\" x2=\"232.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">150</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Length (cm)</text><polyline points=\"52.0,113.0 142.0,94.2 232.0,75.5 322.0,56.8\"/><circle cx=\"52.0\" cy=\"113.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"142.0\" cy=\"94.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"232.0\" cy=\"75.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"56.8\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "fi-220",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Using the same graph of length against load, how long will the spring be with a 200 g load, if it keeps stretching in the same way?",
+      "options": [
+        "14 cm",
+        "16 cm",
+        "18 cm",
+        "200 cm"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "14 cm is the length with 150 g. The spring gains 2 cm per 50 g."
+        },
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "The spring gains 2 cm per 50 g, so only 16 cm."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "200 g is the load, not the length."
+        }
+      ],
+      "solution": [
+        "The length goes up by 2 cm for each 50 g.",
+        "At 150 g it is 14 cm, so at 200 g it is 16 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 240\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of a spring</text><path d=\"M52 38 V188 H322\"/><line x1=\"48\" y1=\"188.0\" x2=\"52\" y2=\"188.0\"/><text x=\"44\" y=\"192.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"150.5\" x2=\"52\" y2=\"150.5\"/><text x=\"44\" y=\"154.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"48\" y1=\"113.0\" x2=\"52\" y2=\"113.0\"/><text x=\"44\" y=\"117.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"48\" y1=\"75.5\" x2=\"52\" y2=\"75.5\"/><text x=\"44\" y=\"79.5\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">12</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">16</text><text x=\"52.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"188\" x2=\"52.0\" y2=\"192\"/><text x=\"142.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"142.0\" y1=\"188\" x2=\"142.0\" y2=\"192\"/><text x=\"232.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><line x1=\"232.0\" y1=\"188\" x2=\"232.0\" y2=\"192\"/><text x=\"322.0\" y=\"204\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">150</text><line x1=\"322.0\" y1=\"188\" x2=\"322.0\" y2=\"192\"/><text x=\"187.0\" y=\"232\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Load (g)</text><text transform=\"translate(14 113.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Length (cm)</text><polyline points=\"52.0,113.0 142.0,94.2 232.0,75.5 322.0,56.8\"/><circle cx=\"52.0\" cy=\"113.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"142.0\" cy=\"94.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"232.0\" cy=\"75.5\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"322.0\" cy=\"56.8\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "fi-221",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Two bags hang from separate spring balances. Bag X reads 8 N and bag Y reads 3 N. Which statement is correct?",
+      "options": [
+        "The Earth pulls X with a bigger force than Y",
+        "Y is pulled by the Earth with a bigger force than X",
+        "The Earth pulls X and Y with the same force",
+        "X has less matter than Y"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The bigger reading means the bigger pull."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The readings are different."
+        },
+        {
+          "tag": "reversed",
+          "why": "The bigger weight means more matter, not less."
+        }
+      ],
+      "solution": [
+        "The reading is the weight. The bigger reading (8 N) is the bigger pull of the Earth."
+      ]
+    },
+    {
+      "key": "fi-222",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring balance has a spring that stretches more for a heavier load. Why must the scale on a spring balance have equal spaces between marks?",
+      "options": [
+        "The spring stretches more and more for each extra gram",
+        "The spring does not stretch at all",
+        "The marks are only there to make the scale look neat",
+        "A spring stretches equally for each equal extra load"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A spring stretches by equal amounts for equal extra loads."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A spring balance works because the spring stretches."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The spaces show forces. They are equal because of how the spring stretches."
+        },
+        null
+      ],
+      "solution": [
+        "A spring stretches in equal steps for equal extra loads, so the scale can be marked evenly."
+      ]
+    },
+    {
+      "key": "fi-223",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-3",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A bag is taken from the Earth to the Moon. Which of the following would NOT change?",
+      "options": [
+        "The weight of the bag",
+        "The pull of gravity on the bag",
+        "The amount of matter in the bag",
+        "The reading on a spring balance"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "changes",
+          "why": "Weaker gravity on the Moon gives the bag less weight."
+        },
+        {
+          "tag": "changes",
+          "why": "The Moon pulls less than the Earth."
+        },
+        null,
+        {
+          "tag": "changes",
+          "why": "The spring stretches less on the Moon."
+        }
+      ],
+      "solution": [
+        "The amount of matter in the bag stays the same.",
+        "Weight, the pull of gravity and the spring balance reading are all smaller on the Moon."
+      ]
+    },
+    {
+      "key": "fi-224",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-1",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "Which action makes it harder to slide a heavy cupboard across the floor?",
+      "options": [
+        "Putting a wet cloth under the cupboard",
+        "Putting a thick rubber sheet under the cupboard",
+        "Putting oil on the floor",
+        "Putting small wheels on the cupboard"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reduces",
+          "why": "Wetness reduces friction."
+        },
+        null,
+        {
+          "tag": "reduces",
+          "why": "Oil makes it easier to slide."
+        },
+        {
+          "tag": "reduces",
+          "why": "Wheels reduce friction."
+        }
+      ],
+      "solution": [
+        "A rubber sheet grips the floor, so friction is greater."
+      ]
+    },
+    {
+      "key": "fi-225",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-investigate-2",
+      "pattern": "sci-pat-friction-spring-weight",
+      "stem": "A spring is stretched by 3 cm by a 60 g mass. By how much would two identical springs hung side by side share the 60 g mass?",
+      "options": [
+        "Each stretches by 1.5 cm",
+        "Each stretches by 3 cm",
+        "Each stretches by 6 cm",
+        "Each stretches by 0 cm"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-calc",
+          "why": "The load is shared, so each spring has only half of it."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "The load is shared, so each stretches less."
+        },
+        {
+          "tag": "wrong-calc",
+          "why": "Each spring still carries 30 g."
+        }
+      ],
+      "solution": [
+        "Each spring carries 30 g, half the load, so it stretches half as much: 1.5 cm."
+      ]
+    }
+  ]
+}

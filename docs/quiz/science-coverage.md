@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-448 shipped questions (basic 151, intermediate 151, competent 146), 225 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+523 shipped questions (basic 176, intermediate 176, competent 171), 244 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -57,9 +57,9 @@
 | Forces and their effects | Identify a force as a push or a pull | yes | no | 6 |
 | Forces and their effects | Show an understanding of the effects of a force: move a stationary ob… | yes | yes | 30 |
 | Forces and their effects | Recognise and give examples of types of forces: magnetic, gravitation… | yes | no | 39 |
-| Friction, elastic spring force, weight | Investigate the effect of frictional force on the motion of objects | yes | yes | 0 **not yet** |
-| Friction, elastic spring force, weight | Investigate the effects of elastic spring force [Standard Science onl… | yes | yes | 0 **not yet** |
-| Friction, elastic spring force, weight | Recognise that objects have weight because of the gravitational force… | yes | no | 0 **not yet** |
+| Friction, elastic spring force, weight | Investigate the effect of frictional force on the motion of objects | yes | yes | 33 |
+| Friction, elastic spring force, weight | Investigate the effects of elastic spring force [Standard Science onl… | yes | yes | 24 |
+| Friction, elastic spring force, weight | Recognise that objects have weight because of the gravitational force… | yes | no | 18 |
 | Factors affecting survival; food chains | Identify factors affecting survival of an organism: temperature, ligh… | yes | no | 0 **not yet** |
 | Factors affecting survival; food chains | Show an understanding of the effect on organisms when the environment… | yes | no | 0 **not yet** |
 | Factors affecting survival; food chains | Show an understanding of the energy pathway from the Sun through livi… | yes | yes | 0 **not yet** |
@@ -91,7 +91,7 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**15 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Friction, elastic spring force, weight; Factors affecting survival; food chains; Organism, population, community, habitats; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Forms and conversion of energy; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**18 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Factors affecting survival; food chains; Organism, population, community, habitats; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Photosynthesis; Forms and conversion of energy; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
@@ -110,16 +110,16 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 7 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 13 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 77 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 0 **not yet** |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 0 **not yet** |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 10 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 16 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 9 |
-| Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 0 **not yet** |
+| Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 63 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
 | Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 60 |
