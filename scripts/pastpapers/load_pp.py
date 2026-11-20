@@ -119,17 +119,21 @@ def realfig(q):
     return any(isinstance(f, str) and f and f.lower() not in ("none", "null") for f in (q.get("figures") or []))
 
 
+BLANK_PUNCT = set("_.,;:?!'\"()[]-…—–·。，、；：？！“”‘’（）《》〈〉【】「」")
 LETTERED = re.compile(r"\(?([A-D])(?:[.)]\s*|\s+(?!and\b|or\b|only\b))")  # "A. Air" / "A Air", not "A and X only"
 
 
 def garbled(text: str, opts) -> str | None:
     t = text or ""
-    if len(t.strip()) < 20:
+    # a CJK character carries about a word: 8 of them make a full Chinese stem (黑衣人是一个怎么样的人？), 20 letters an English one
+    cjk = sum("\u3400" <= c <= "\u9fff" for c in t)
+    if len(t.strip()) + 2 * cjk < 20:
         return "text-short"
     if "�" in t or any("�" in o for o in opts):
         return "text-replacement-char"
-    nonsp = sum(not c.isspace() for c in t) or 1
-    if sum(c.isalpha() for c in t) / nonsp < 0.6:
+    # answer blanks (____) and punctuation are not noise: judge only the other characters
+    body = [c for c in t if not c.isspace() and c not in BLANK_PUNCT]
+    if sum(c.isalpha() for c in body) / (len(body) or 1) < 0.6:
         return "text-low-alpha"
     if re.search(r"([A-Za-z])\1{4,}", t):
         return "text-letter-run"
@@ -683,6 +687,12 @@ def figures(a):
 
 def selftest():
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
+    assert garbled("黑衣人是一个怎么样的人？", ["(1) 贪心", "(2) 自私", "(3) 糊涂", "(4) 骄傲"]) is None  # a short Chinese stem is complete
+    assert garbled("你____多生气，____不应该对长辈无礼。", ["(1) 不管……也", "(2) 由于……才", "(3) 只要……都", "(4) 如果……就"]) is None
+    assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
+    assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
+    assert garbled("好", ["a", "b", "c", "d"]) == "text-short"
+    assert garbled("%% 12 34 ## 56 78 && 90 ** 11", ["a", "b", "c", "d"]) == "text-low-alpha"
     stem = "Which of the following statements can be concluded from the experiment?"
     assert garbled(stem, ["A. Object 1 is a magnet.", "B. Object 2 is a magnet.", "C. Both are iron.", "D. Neither."]) == "options-are-statements"
     assert garbled(stem, ["A Object 1 is a magnet.", "B Object 2 is a magnet.", "C Both are iron.", "D Neither."]) == "options-are-statements"

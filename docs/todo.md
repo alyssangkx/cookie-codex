@@ -41,6 +41,23 @@ outside the repo.
 
 ## Past-paper data quality
 
+### MCQ push (owner, 21 Nov 2026)
+Scope: MCQs only, all 4 subjects, 2018-2026. Target: 90% of MCQs per subject recovered; the rest go to a holding list
+with a reason, processed later (not every question is recoverable: unclear scans, no answer sheet). Owner decisions:
+(1) a question with no answer key may ship if two independent models agree AND that agreement is measured at 98%+ on
+keyed questions first (shown to the owner; model-answered rows marked in the data); (2) passage-based MCQs (cloze,
+comprehension, visual text: 33% of English, 43% of Chinese MCQs) are phase 2; (3) when the blind check disagrees with
+the key, a third, different model decides 2 of 3, else holding list; (4) Science first, then Maths, then English and
+Chinese. Baseline 21 Nov (scanned cleanly / with key / blind agrees): Science 7,250 MCQs 56/28/18%, Maths 4,410
+71/40/6%, English 7,879 76/59/8%, Chinese 6,565 35/29/7%; tag accuracy vs gold 87/97/83/85%.
+- [x] 1. Text rules made for English rejected short Chinese stems (2,801 text-short, 899 low-alpha): fixed 21 Nov (CJK characters count triple toward the 20-character minimum; blanks and punctuation are left out of the letter ratio). Chinese scanned cleanly 35% -> 90%, with key 29% -> 74%. The 539 short English stems are correct rejections (the scan kept only the underlined word, not its sentence): repair pass. Watch: pinyin items lose the underline that marks the tested word (the options make it clear, but the repair pass should restore it).
+- [ ] 2. Blind check Maths, English, Chinese 2018-24 (server).
+- [ ] 3. One server repair pass per failed MCQ (re-read from its page: options, statements A-D, options in the picture, figure box, unclear key).
+- [ ] 4. Model-consensus answers where there is no key: measure precision on keyed items first (98% bar), show the owner.
+- [ ] 5. Third-model adjudication of blind-check disagreements.
+- [ ] 6. English and Chinese sections set by position in the paper (booklet, question number), not by the tagger.
+- [ ] 7. Holding list file per subject with a reason per question; recount against the 90% target after each pass.
+
 - [ ] Fix the answer-key grid reading in `scripts/pastpapers/vlm_read.py`. Partly done 20 Nov 2026: `scripts/pastpapers/anskey_ocr.py` reads grids from the OCR word boxes (>= 2 agreeing reads per cell) and `load_pp.py select --ocr-keys` uses it as a fallback; the rest (rotated and badly scanned key pages, papers with no key page) still needs a better read.
   - What goes wrong: the 32B swaps, duplicates or invents cells.
   - The fix:
