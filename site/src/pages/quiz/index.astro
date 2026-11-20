@@ -98,7 +98,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
-  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, ppFigureHtml, ppBadge, optionLabel, type PpFig } from '../../lib/pastpaper';
+  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, type PpFig } from '../../lib/pastpaper';
   import { esc, boldAns } from '../../lib/boldans';
   import { toEconomy, balanceOf } from '../../lib/crumbs';
   import { lineForLast, bilingual } from '../../lib/encourage';
@@ -245,6 +245,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     return r.json();
   }
 
+  let genAll: Q[] = [], ppAll: Q[] = []; // pools before the merge: tierIds() reports the tier quiz's pool, not the merged one
   let ppFailed = false; // a failed past-paper fetch: Daily Review must not park pp retests it never saw
   async function loadBanks(files: string[]): Promise<Q[]> {
     let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
@@ -255,7 +256,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         const { fetchPp } = await import('../../lib/ppfetch');
         const pp = await fetchPp(subs, (x) => meta.subs[x]?.file);
         if (pp === null) ppFailed = true;
-        all = mergePool(all, (pp ?? []) as Q[], poolModeFor(mode));
+        genAll = all; ppAll = (pp ?? []) as Q[];
+        all = mergePool(all, ppAll, poolModeFor(mode));
       }
     }
     // papers use 4-option items outside passage sets only (no 8-option dialogue item, no split passage)
@@ -688,7 +690,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const subsInQuiz = new Set(quiz.map((id) => byId.get(id)!.sub));
     const tierOf = Object.fromEntries(Object.entries(LEVEL).map(([t, l]) => [l, t]));
     const out: Record<string, string[]> = {};
-    for (const q of byId.values()) if (subsInQuiz.has(q.sub) && tierOf[q.level]) (out[`${q.sub}|${tierOf[q.level]}`] ??= []).push(q.id);
+    // the tier quiz's pool per tier (pp swapped in on 'replace' tiers), whichever pool this quiz drew from
+    const gen = (genAll.length ? genAll : [...byId.values()]).filter((q) => subsInQuiz.has(q.sub) && tierOf[q.level]);
+    const pool = tierPoolIds(gen, ppAll.filter((q) => subsInQuiz.has(q.sub)), (x) => ppMode(x), ppFailed);
+    for (const [k, ids] of Object.entries(pool)) { const [sub, lvl] = k.split('|'); out[`${sub}|${tierOf[lvl]}`] = ids; }
     for (const k of Object.keys(out)) if (out[k].length < MIN_POOL) delete out[k];
     return out;
   }

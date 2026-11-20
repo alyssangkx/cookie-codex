@@ -128,6 +128,21 @@ export function mergePool<T extends { id: string; sub: string; level: string }>(
   return [...generated.filter((q) => !replaced.has(key(q))), ...[...ppBy.values()].flat()];
 }
 
+/**
+ * The ids a quiz reports to syncTiers, per "sub|level": exactly the TIER quiz's pool for that tier, whatever pool this
+ * quiz asked from (Daily Review asks from the merged pool but must still report a replaced tier as pp-only, or the
+ * stored total would not match the page's count and the tier could only clear once generated items are retired too).
+ * `ppFailed` (the past-paper fetch failed): a switched sub-topic's tiers are left out, so syncTiers leaves them alone
+ * instead of storing a generated-only total.
+ */
+export function tierPoolIds<T extends { id: string; sub: string; level: string }>(generated: T[], pp: T[],
+  modeOf: (sub: string) => PpMode | null = (s) => ppMode(s), ppFailed = false, minTier = PP_MIN_TIER): Record<string, string[]> {
+  const out: Record<string, string[]> = {};
+  for (const q of mergePool(generated, ppFailed ? [] : pp, modeOf, minTier)) (out[`${q.sub}|${q.level}`] ??= []).push(q.id);
+  if (ppFailed) for (const k of Object.keys(out)) if (modeOf(k.split('|')[0])) delete out[k];
+  return out;
+}
+
 /** Tier question count as the quiz will use it (mirrors mergePool for one tier): `gen` generated questions, `pp` active
  * past-paper rows (public counts only, data/pp_counts.json). `usesPp` tells the caller the tier's id set is not the
  * generated bank, so its tierHash cannot be known at build time (pp ids are private) and liveMastered must use the size. */

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, PP_MIN_TIER, type PpRow,
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow,
 } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
@@ -148,4 +148,31 @@ test('liveMastered matches the total a merged quiz stored, with no hash on pp ti
   assert.equal(liveMastered(st, view.count, view.usesPp ? undefined : tierHash(genIds)), all.length); // size check only
   assert.equal(liveMastered(st, view.count, tierHash(genIds)), 0); // the old build-time hash would have read 0
   assert.equal(liveMastered(st, genIds.length, undefined), 0); // the old build-time count too
+});
+
+test('tierPoolIds: every quiz mode reports the tier quiz pool (replace tier = pp only), matching ppTierCount and liveMastered', () => {
+  const mk = (pre: string, n: number, sub = 's', level = 'basic') => Array.from({ length: n }, (_, i) => ({ id: `${pre}${String(i).padStart(10, '0')}`, sub, level }));
+  const gen = [...mk('g', 30), ...mk('h', 30, 'plain'), ...mk('m', 30, 'mrg')];
+  const pp = [...mk('pp-', 25), ...mk('pq-', 5, 'mrg')];
+  const modeOf = (s: string) => (s === 's' ? 'replace' : s === 'mrg' ? 'merge' : null) as 'replace' | 'merge' | null;
+  const tierQuiz = tierPoolIds(gen, pp, modeOf);
+  // Daily Review asks from the merged pool but reports the same ids
+  assert.deepEqual(tierPoolIds(gen, pp, modeOf), tierQuiz);
+  assert.deepEqual(tierQuiz['s|basic'].sort(), pp.slice(0, 25).map((q) => q.id).sort());
+  assert.equal(tierQuiz['s|basic'].length, ppTierCount(30, 25, 'replace').count);
+  assert.equal(tierQuiz['mrg|basic'].length, ppTierCount(30, 5, 'merge').count); // merge unchanged: gen + pp
+  assert.equal(tierQuiz['plain|basic'].length, 30); // non-pp tier unchanged
+  const st = fresh();
+  syncTiers(st, { 's|b': tierQuiz['s|basic'] }, () => undefined);
+  assert.equal(st.progress.s.b.total, 25);
+  assert.equal(liveMastered(st.progress.s.b, ppTierCount(30, 25, 'replace').count, undefined), 0);
+  st.progress.s.b.mastered = 3; // as if 3 were retired
+  assert.equal(liveMastered(st.progress.s.b, 25, undefined), 3); // not read as 0
+});
+
+test('tierPoolIds: a failed pp fetch reports nothing for a switched sub-topic, so syncTiers leaves it alone', () => {
+  const mk = (pre: string, n: number, sub: string) => Array.from({ length: n }, (_, i) => ({ id: `${pre}${i}`, sub, level: 'basic' }));
+  const gen = [...mk('g', 30, 's'), ...mk('h', 30, 'plain')];
+  const out = tierPoolIds(gen, [], (s) => (s === 's' ? 'replace' : null), true);
+  assert.deepEqual(Object.keys(out), ['plain|basic']);
 });
