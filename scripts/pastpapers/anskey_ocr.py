@@ -1,10 +1,12 @@
 """Deterministic answer-key reader for private past papers (ADR 0004). Reads and writes ONLY outside the repo.
 
-  anskey_ocr.py run [--subject science] [--years 2018-2024] [--pp DIR] [--out-name anskey_ocr.jsonl]
+  anskey_ocr.py run [--subject science] [--years 2018-2024] [--pp DIR] [--jobs N]
       For each paper, scans its answer pages (papers.jsonl answer_pages; when none, every page from the paper's first
       page up to the next paper) in the tesseract word boxes (pages/pNNNN.tsv) and reads the MCQ answer grid into
       {qno: option 1-4}. Writes PP/<subject>/<year>/anskey_ocr.jsonl, one row per paper:
-        {paper, ok, answers: {"1": "3", ...}, pages: [...], layout, n_mcq, why}
+        {paper, ok, answers: {"1": "3", ...}, pages: [...], layout, n_mcq, coverage, from_answer_pages, why}
+      from_answer_pages is true when the paper has its own answer pages (otherwise question pages were scanned and
+      load_pp.py select --ocr-keys ignores the row).
       ok is true only when every MCQ number 1..N of the paper (N = the paper's MCQ numbers in merged.jsonl) is read
       from one or more pages with one digit 1-4, and any repeat read agrees.
   anskey_ocr.py compare [--subject science] [--years 2018-2024]
@@ -14,11 +16,16 @@
 Layouts read (rows, pairs, slots, numslots; all from word-box geometry; label text is only a hint because tesseract garbles "Q1" into "Qi", "a10~"):
   rows    a line of >=4 labels (Q1 Q2 ...) with a line of single digits 1-4 directly below, one digit per label x-position
   pairs   lines of alternating label, digit (Q1 3 Q6 1 ...; or plain "1 4  11 2  21 2"): column-major numbering
-Not read: pages rotated 90 degrees, stacked "Qn | Answer" lists, anything that fails the check above.
+  slots   table lines of (label, digit) cells read by x-position; row-major numbering
+  numslots  tables of (number, answer) column pairs without Q prefixes, e.g. "Qn | Answer" lists; column-major numbering
+Not read: pages rotated 90 degrees, anything that fails the checks above.
 Nothing here prints question text or answers: counts and ids only.
 """
 import argparse, collections, csv, io, json, multiprocessing, re, sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from load_pp import jl, years  # load_pp does not import this module: no cycle
 
 TMP = Path("/data/alvin/tmp/cookie-codex")
 DEF_PP = TMP / "pastpapers"
@@ -28,11 +35,6 @@ TESS = TMP / "ocr-env" / "bin" / "tesseract"  # the binary catalogue.py uses
 
 
 PAGE = {}
-
-
-def years(spec):
-    a, _, b = spec.partition("-")
-    return list(range(int(a), int(b or a) + 1))
 
 
 def read_words(path):
@@ -91,11 +93,14 @@ def num_of(t):
     return int(m.group(1)) if m else None
 
 
-def labelish(t):
-    return bool(LABEL.match(t)) and t not in ("", "|") and not DIG.match(t) or bool(re.fullmatch(r"\d{1,2}", t))
+def labelish(t, bare=False):
+    """A label token: Q-ish text that is not a bare answer digit 1-4. A bare 1-2 digit number counts only when
+    bare=True (the pairs layout, whose labels may be plain numbers), so a line of answers is not read as labels."""
+    return (bool(LABEL.match(t)) and t not in ("", "|") and not DIG.match(t)) or \
+        (bare and bool(re.fullmatch(r"\d{1,2}", t)))
 
 
-def vote_start(readable, k, prev_end):
+def vote_start(readable, prev_end):
     """Row start number from the readable labels (n - index); falls back to prev_end + 1 when unsupported."""
     votes = collections.Counter(n - i for i, n in readable if n is not None and 1 <= n <= 60)
     if votes:
@@ -139,7 +144,7 @@ def read_rows(lines):
         readable = [(j, num_of(t[3])) for j, t in enumerate(lt) if len(t[3]) <= 5]
         if prev_y is not None and lab[0][1] - prev_y > 250:
             prev_end = None  # a different table
-        s, _ = vote_start(readable, len(lt), prev_end)
+        s, _ = vote_start(readable, prev_end)
         if s is None:
             continue
         for j, x in enumerate(xs):
@@ -156,7 +161,7 @@ def read_pairs(lines):
     blocks, cur = [], []
     for ln in lines:
         ok = len(ln) >= 4 and len(ln) % 2 == 0 and all(re.fullmatch(r"\D{0,1}\d\D{0,1}", ln[j][3]) for j in range(1, len(ln), 2)) \
-            and all(labelish(ln[j][3]) for j in range(0, len(ln), 2))
+            and all(labelish(ln[j][3], True) for j in range(0, len(ln), 2))
         if ok:
             cur.append(ln)
         else:
@@ -302,6 +307,7 @@ def page_words(jpg, scale, y0=0, y1=None):
     band = im.crop((0, max(0, y0), im.width, min(im.height, y1)))
     if scale != 1:
         band = band.resize((int(band.width * scale), int(band.height * scale)), Image.LANCZOS)
+    (TMP / "anskey").mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=str(TMP / "anskey")) as td:
         band.save(f"{td}/b.png")
         r = subprocess.run([str(TESS), f"{td}/b.png", "stdout", "--psm", "6", "tsv"], capture_output=True, text=True)
@@ -343,6 +349,7 @@ def crop_vote(im, x, y, pitch):
             t = t.resize((t.width * sc, t.height * sc), Image.LANCZOS)
         if thr:
             t = t.point(lambda v: 255 if v > thr else 0)
+        (TMP / "anskey").mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=str(TMP / "anskey")) as td:
             b = Image.new("L", (t.width + 120, t.height + 120), 255)
             b.paste(t, (60, 60))
@@ -392,7 +399,12 @@ def read_page(tsv_path, jpg_path=None):
         seen = [v for v in srcs if v]
         top = collections.Counter(seen).most_common(1)
         v = top[0][0] if top and top[0][1] >= 2 and len(set(seen)) == 1 else "?"
-        got[q] = "?" if q in got and got[q] != v else v
+        if v == "?":
+            got.setdefault(q, "?")  # unreadable here; a clear read elsewhere may still fill it
+        elif got.get(q, "?") in ("?", v):
+            got[q] = v
+        else:
+            got[q] = "!"  # two different clear digits: a real conflict
     return got, lay
 
 
@@ -410,23 +422,20 @@ def judge(pages, need):
         if not all(1 <= q <= 80 for q in g):
             continue
         for q, v in g.items():
-            if q in ans and ans[q] != v:
-                ans[q] = "?"
-            elif q not in ans:
+            if v == "!":
+                ans[q] = "!"
+            elif q not in ans or ans[q] == "?":
                 ans[q] = v
+            elif v != "?" and ans[q] != v:
+                ans[q] = "!"  # two different clear digits
     missing = [q for q in need if q not in ans]
-    bad = [q for q in need if ans.get(q) == "?"]
+    bad = [q for q in need if ans.get(q) in ("?", "!")]
     if not layouts:
         return {"ok": False, "why": "no-grid", "answers": {}}
     if missing or bad:
         return {"ok": False, "why": f"incomplete:missing{len(missing)}/conflict{len(bad)}",
-                "answers": {str(q): ans[q] for q in need if q in ans and ans[q] != "?"}, "layout": layouts[0]}
+                "answers": {str(q): ans[q] for q in need if q in ans and ans[q] not in ("?", "!")}, "layout": layouts[0]}
     return {"ok": True, "why": None, "answers": {str(q): ans[q] for q in need}, "layout": layouts[0]}
-
-
-def jl(p):
-    p = Path(p)
-    return [json.loads(l) for l in open(p)] if p.exists() else []
 
 
 def run(a):
@@ -522,6 +531,18 @@ def selftest():
     assert judge(pg, range(1, 7))["ok"] and not judge(pg, range(1, 9))["ok"]
     pg[2] = ({3: "2"}, "rows")
     assert not judge(pg, range(1, 7))["ok"]
+    # '?' never blocks a later clear read; two different clear digits do
+    pg = {1: ({1: "?", 2: "1"}, "rows"), 2: ({1: "3", 2: "?"}, "rows")}
+    r = judge(pg, [1, 2])
+    assert r["ok"] and r["answers"] == {"1": "3", "2": "1"}, r
+    pg = {1: ({1: "3"}, "rows"), 2: ({1: "?"}, "rows")}
+    assert judge(pg, [1])["ok"]
+    pg = {1: ({1: "3"}, "rows"), 2: ({1: "2"}, "rows"), 3: ({1: "3"}, "rows")}
+    assert not judge(pg, [1])["ok"]
+    # a line of bare answer digits is not label/digit pairs
+    assert not any(labelish(t) for t in "1 3 2 4 1 2".split())  # bare answer digits are never labels by default
+    assert read_pairs(lines_of(tsv([(100, [(100 + 100 * i, d) for i, d in enumerate("132412")])]))) == []
+    assert labelish("Q3") and not labelish("3") and labelish("3", True)
     print("selftest ok")
 
 

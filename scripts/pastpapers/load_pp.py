@@ -3,9 +3,11 @@
   load_pp.py select  [--subject science] [--years 2018-2026] [--pp DIR] [--blind DIR] [--out DIR]
       Picks the importable MCQs and writes OUT/<subject>/selected.jsonl (private rows), rejects.jsonl (id + reason)
       and report.json (counts only). Rules: exactly 4 options; an answer key; not in the quarantine; not
-      answer_flag grid-uncertain (with --ocr-keys: unless anskey_ocr.jsonl reads the same key, and a missing key is
-      taken from anskey_ocr.jsonl when it covers >= 60% of the paper; scripts/pastpapers/anskey_ocr.py; the row's
-      answer_src says which); the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
+      answer_flag grid-uncertain (with --ocr-keys: unless a full anskey_ocr.jsonl row reads the same key, and a missing
+      key is taken from a full row; only rows read from the paper's own answer pages count, a partial row can only
+      contradict a key; the row's answer_src says which). Order for OCR-only keys: anskey_ocr.py run -> blind check with
+      OCR keys (run_blind_ocr.sh under /data/alvin/tmp/cookie-codex/anskey/) -> select --ocr-keys; an OCR-only item
+      absent from that blind file is rejected as needs-blind-check-ocr; the blind-answer check agrees with the key, or the second solver (--blind2: VL-32B at
       full resolution AND the 72B on the transcribed figure text) both reach it; text and options not garbled; options
       not only in the picture; a sub-topic that exists in the site's syllabus; and a usable crop whenever the stem
       points at a figure, table or graph (or labels such as A/B/P/Q) or the reader saw a figure.
@@ -214,14 +216,17 @@ OCR_COVER = 0.6  # anskey_ocr.py alone supplies a key only for a paper whose gri
 
 
 def ocr_keys(base: Path) -> dict:
-    """{(paper, qno): '1'-'4'} from <year>/anskey_ocr.jsonl (scripts/pastpapers/anskey_ocr.py), for papers that pass the
-    coverage rule; empty when the file does not exist."""
+    """{(paper, qno): (digit '1'-'4', full)} from <year>/anskey_ocr.jsonl (scripts/pastpapers/anskey_ocr.py). Only rows
+    read from the paper's own answer pages (from_answer_pages) with coverage >= OCR_COVER are used; a row read from
+    question pages never fills or contradicts a key. full = the row is ok (no conflict, every MCQ read): only a full
+    row may fill a missing key or clear grid-uncertain; a partial one may only contradict a key. Empty when the file
+    does not exist."""
     out = {}
     for r in jl(base / "anskey_ocr.jsonl"):
-        if r.get("n_mcq") and len(r.get("answers") or {}) >= OCR_COVER * r["n_mcq"]:
+        if r.get("from_answer_pages") is True and r.get("n_mcq") and len(r.get("answers") or {}) >= OCR_COVER * r["n_mcq"]:
             for qn, d in r["answers"].items():
                 if d in ("1", "2", "3", "4"):
-                    out[(r["paper"], int(qn))] = d
+                    out[(r["paper"], int(qn))] = (d, r.get("ok") is True)
     return out
 
 
@@ -256,16 +261,17 @@ def select(a):
             k = key(q.get("answer"), opts) if len(opts) == 4 else None
             t = tags.get(q["id"]) or {}
             reason = None
-            ok = ocrk.get((q.get("paper"), q.get("qno")))
+            ok, full = ocrk.get((q.get("paper"), q.get("qno")), (None, False))
             src = "vision"
+            conflict = False
             if len(opts) == 4 and ok:
-                if not k:
+                if not k and full:
                     k, src = ok, "ocr"
-                elif q.get("answer_flag") == "grid-uncertain" and k == ok:
-                    q = dict(q, answer_flag=None)  # two independent reads agree
+                elif k and k != ok:
+                    conflict = True  # judged below, after the quarantine and hold checks
+                elif k and full and q.get("answer_flag") == "grid-uncertain":
+                    q = dict(q, answer_flag=None)  # two independent strong reads agree
                     src = "vision+ocr"
-                elif k != ok:
-                    pass  # judged below, after the quarantine and hold checks
             if len(opts) != 4:
                 reason = "not-4-options"
             elif not k:
@@ -276,8 +282,10 @@ def select(a):
                 reason = "held-by-review"
             elif q.get("answer_flag") == "grid-uncertain":
                 reason = "grid-uncertain"
-            elif len(opts) == 4 and ok and src == "vision" and k != ok:
+            elif conflict:
                 reason = "ocr-key-conflict"
+            elif src == "ocr" and (blind is None or q["id"] not in blind or blind[q["id"]].get("key") != k):
+                reason = "needs-blind-check-ocr"  # a blind file made with OCR keys must contain it
             elif blind is None:
                 reason = "no-blind-check-yet"
             elif q["id"] not in blind:
@@ -669,6 +677,15 @@ def selftest():
         (Path(td) / "hold.txt").write_text("pp-h # a\n")
         (Path(td) / "hold-auto.txt").write_text(ht)
         assert read_hold(Path(td)) == {"pp-h", "pp-x"}
+    # ocr_keys: only answer-page rows count; full needs ok
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        rows = [{"paper": "A", "ok": True, "from_answer_pages": True, "n_mcq": 2, "answers": {"1": "3", "2": "4"}},
+                {"paper": "B", "ok": False, "from_answer_pages": True, "n_mcq": 3, "answers": {"1": "2", "2": "1"}},
+                {"paper": "C", "ok": True, "from_answer_pages": False, "n_mcq": 1, "answers": {"1": "1"}}]
+        (Path(td) / "anskey_ocr.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
+        k = ocr_keys(Path(td))
+        assert k == {("A", 1): ("3", True), ("A", 2): ("4", True), ("B", 1): ("2", False), ("B", 2): ("1", False)}, k
     print("selftest ok")
 
 
