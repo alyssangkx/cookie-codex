@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-336 shipped questions (basic 126, intermediate 110, competent 100), 202 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+373 shipped questions (basic 126, intermediate 126, competent 121), 214 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -66,8 +66,8 @@
 | Factors affecting survival; food chains | Observe, collect and record information on interacting factors within… | yes | yes | 0 **not yet** |
 | Organism, population, community, habitats | Differentiate among organism, population and community [Standard Scie… | yes | no | 0 **not yet** |
 | Organism, population, community, habitats | Show an understanding that different habitats support different commu… | yes | no | 0 **not yet** |
-| Adaptations and human impact | Show an understanding that adaptations (structural or behavioural) en… | yes | no | 33 |
-| Adaptations and human impact | Give examples of man's positive (conservation, reforestation) and neg… | yes | no | 6 |
+| Adaptations and human impact | Show an understanding that adaptations (structural or behavioural) en… | yes | no | 56 |
+| Adaptations and human impact | Give examples of man's positive (conservation, reforestation) and neg… | yes | no | 20 |
 | Seeing and shadows | Recognise that an object can be seen when it reflects light or is a s… | yes | yes | 0 **not yet** |
 | Seeing and shadows | Recognise that light travels in straight lines and a shadow forms whe… | yes | yes | 0 **not yet** |
 | Seeing and shadows | Investigate variables affecting shadows: shape, size, position of obj… | yes | yes | 0 **not yet** |
@@ -117,12 +117,12 @@
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 0 **not yet** |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 0 **not yet** |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 8 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 10 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 9 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 0 **not yet** |
-| Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 0 **not yet** |
+| Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
 | Plant transport system: water and food transport (`sci-pat-plant-transport`) | 34 | 80 |
-| Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 39 |
+| Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 60 |
 | Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
 | Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
 | Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 0 **not yet** |
