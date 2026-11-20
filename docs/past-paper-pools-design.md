@@ -30,6 +30,14 @@ sub-topics playable instead of 8.
 7. **Papers are the main check.** Timed prelim-style papers of past-paper questions only (the existing paper mode),
    submit-then-review as in ADR 0005.
 
+## When a sub-topic switches (21 Nov 2026, during the build)
+
+A sub-topic switches to the one pool when it has at least 20 past-paper questions (and its subject has had its upload).
+Until then it keeps its current Basic/Intermediate/Competent tiers, with generated questions and any past-paper ones
+merged in, as today. Milestones count past-paper questions only, so a sub-topic with a handful of them cannot give fair
+cards; this way no sub-topic loses its cards meanwhile, and generated questions never count toward a milestone. The
+past-paper id lookup (`pp_pool`, migration 006) also returns each question's level for those tier-mode merges.
+
 ## What changes in the code
 
 | Today | After |

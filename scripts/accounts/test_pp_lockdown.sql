@@ -10,6 +10,6 @@ select pg_temp.ok(not exists (select 1 from pg_policies where tablename = 'objec
 set role authenticated;
 select pg_temp.as_user('44444444-0000-0000-0000-0000000000c2');
 select pg_temp.ok((select count(*) = 0 from storage.objects where bucket_id = 'pp-figures'), 'a child can no longer list the pictures');
-select pg_temp.ok((select count(*) > 0 from public.pp_pool('science', 'sci-test-pool')), 'the per-quiz pool still works');
+select pg_temp.ok((select count(*) > 0 from public.pp_pool('science', array['sci-test-pool'])), 'the per-quiz pool still works');
 reset role;
 \echo LOCKDOWN CHECKS PASSED

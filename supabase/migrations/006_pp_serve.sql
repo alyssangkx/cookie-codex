@@ -7,7 +7,8 @@
 --
 -- What it adds:
 --   * pp_items.ord: easier-first rank inside a sub-topic (written by load_pp.py upload).
---   * public.pp_pool(subject, subtopic): question ids and their rank only, no text. Readers as in 004.
+--   * public.pp_pool(subject, subtopics[]): question ids, sub-topic, level and rank only, no text (at most 40 sub-topics).
+--     Readers as in 004.
 --   * public.pp_serve(ids[]): text and figure paths for at most 15 ids (one quiz), as jsonb {status: 'ok', items} or
 --     {status: 'limit'}. Every id served is logged per account and Singapore day; a new id beyond the account's daily
 --     limit (250 distinct questions; 125 in the account's first 7 days; 2000 for the admin and the Test Player) or the
@@ -52,23 +53,26 @@ language sql stable security definer set search_path = '' as $$
       or exists (select 1 from public.profiles p where p.id = auth.uid() and p.unlimited)
 $$;
 
-create function public.pp_pool(p_subject text, p_subtopic text)
-returns table (id text, ord int)
+create function public.pp_pool(p_subject text, p_subtopics text[])
+returns table (id text, subtopic text, level text, ord int)
 language plpgsql security definer set search_path = '' as $$
 begin
   if not private.can_read_pp() then
     raise exception 'not allowed' using errcode = '42501';
   end if;
+  if coalesce(cardinality(p_subtopics), 0) not between 1 and 40 then
+    raise exception 'bad request' using errcode = '22023';
+  end if;
   if not public.rate_hit('ppp:' || auth.uid()::text, case when private.pp_trusted() then 1200 else 120 end, interval '1 hour') then
     raise exception 'too many requests' using errcode = '53400';
   end if;
   return query
-    select i.id, i.ord from public.pp_items i
-     where i.active and i.subject = p_subject and i.subtopic = p_subtopic
-     order by i.ord nulls last, i.id;
+    select i.id, i.subtopic, i.level, i.ord from public.pp_items i
+     where i.active and i.subject = p_subject and i.subtopic = any (p_subtopics)
+     order by i.subtopic, i.ord nulls last, i.id;
 end $$;
-revoke execute on function public.pp_pool(text, text) from public, anon;
-grant execute on function public.pp_pool(text, text) to authenticated;
+revoke execute on function public.pp_pool(text, text[]) from public, anon;
+grant execute on function public.pp_pool(text, text[]) to authenticated;
 
 create function public.pp_serve(p_ids text[])
 returns jsonb

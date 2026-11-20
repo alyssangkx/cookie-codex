@@ -39,8 +39,10 @@ update public.pp_items set active = false where id = 'pp-4400000030';
 set role authenticated;
 -- the pool: ids and rank only, active items, easier (lower ord) first
 select pg_temp.as_user('44444444-0000-0000-0000-0000000000c1');
-select pg_temp.ok((select count(*) = 29 from public.pp_pool('science', 'sci-test-pool')), 'pool lists the active items of the sub-topic');
-select pg_temp.ok((select id = 'pp-4400000029' from public.pp_pool('science', 'sci-test-pool') limit 1), 'pool is easier-first (lowest ord first)');
+select pg_temp.ok((select count(*) = 29 from public.pp_pool('science', array['sci-test-pool'])), 'pool lists the active items of the sub-topic');
+select pg_temp.ok((select id = 'pp-4400000029' from public.pp_pool('science', array['sci-test-pool']) limit 1), 'pool is easier-first (lowest ord first)');
+select pg_temp.ok((select level = 'basic' and subtopic = 'sci-test-pool' from public.pp_pool('science', array['sci-test-pool']) limit 1), 'pool gives sub-topic and level, for tier-mode merges');
+select pg_temp.fails($$select count(*) from public.pp_pool('science', array[]::text[])$$, 'an empty sub-topic list refused');
 select pg_temp.fails($$select public.pp_serve(pg_temp.ids(1, 16))$$, 'more than 15 ids in one call refused');
 select pg_temp.fails($$select public.pp_serve(array['pp-xyz'])$$, 'a malformed id refused');
 select pg_temp.fails($$select public.pp_serve(array[]::text[])$$, 'an empty call refused');
@@ -90,7 +92,7 @@ select pg_temp.fails($$select public.pp_serve(pg_temp.ids(1, 1))$$, 'over 40 cal
 
 -- who may not read: a parent, anon
 select pg_temp.as_user('44444444-0000-0000-0000-0000000000a1');
-select pg_temp.fails($$select count(*) from public.pp_pool('science', 'sci-test-pool')$$, 'a parent may not list the pool');
+select pg_temp.fails($$select count(*) from public.pp_pool('science', array['sci-test-pool'])$$, 'a parent may not list the pool');
 select pg_temp.fails($$select public.pp_serve(pg_temp.ids(1, 1))$$, 'a parent may not be served');
 reset role;
 set role anon;
