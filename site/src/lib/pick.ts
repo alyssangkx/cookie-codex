@@ -25,13 +25,14 @@ export function pickTier(
   ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now(), rand = Math.random,
   sideRetests: string[] = [],
   passage?: (id: string) => { group: string; seq: number } | undefined,
+  ordered = false, // ids are easier-first (a one-pool sub-topic, ADR 0011): new questions keep that order, no shuffle
 ): string[] {
   const byDue = (a: string, b: string) => seen[a]!.due - seen[b]!.due;
   const retest = ids.filter((id) => (seen[id]?.s ?? 0) > 0).sort(byDue);
   const due = [...retest, ...sideRetests.filter((id) => (seen[id]?.s ?? 0) > 0)]
     .filter((id) => seen[id]!.due <= now).sort(byDue);
   const notDue = retest.filter((id) => seen[id]!.due > now);
-  const fresh = shuffle(ids.filter((id) => !seen[id]), rand);
+  const fresh = ordered ? ids.filter((id) => !seen[id]) : shuffle(ids.filter((id) => !seen[id]), rand);
   const retired = shuffle(ids.filter((id) => seen[id]?.s === 0), rand);
   const take = due.slice(0, Math.min(3, Math.floor(size * 0.3)));
   const out = [...take, ...fresh.slice(0, size - take.length)];
@@ -40,8 +41,14 @@ export function pickTier(
     const id = spare.shift()!;
     if (!out.includes(id)) out.push(id);
   }
-  return passage && out.some((id) => passage(id)) ? wholePassages(out, ids, passage, size, new Set(take)) : shuffle(out, rand);
+  if (passage && out.some((id) => passage(id))) return wholePassages(out, ids, passage, size, new Set(take));
+  return ordered ? out : shuffle(out, rand);
 }
+
+/** A one-pool sub-topic's quiz (ADR 0011): `ids` are its past-paper questions easier-first (pp_pool order). Due retests
+ *  first (at most 3), then new questions in that order, then not-due retests, then counted ones again. */
+export const pickPool = (ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now()) =>
+  pickTier(ids, seen, size, now, Math.random, [], undefined, true);
 
 /**
  * Passage sub-topics (cloze, reading): a quiz is whole passages, read once, questions in order.

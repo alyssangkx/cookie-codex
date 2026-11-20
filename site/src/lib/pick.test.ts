@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pickTier, pickReview, wholePassages, reviewPassages, type Seen } from './pick.ts';
+import { pickTier, pickReview, wholePassages, reviewPassages, type Seen, pickPool } from './pick.ts';
 
 const ids = Array.from({ length: 30 }, (_, i) => `q${i}`);
 const NOW = 1_000_000;
@@ -132,4 +132,15 @@ test('Daily Review groups a passage\'s due blanks in passage order and adds noth
   // due in this order (oldest first): c4, m1, c1, c2; c3 retired and c5 not due are NOT added
   assert.deepEqual(reviewPassages(['c4', 'm1', 'c1', 'c2'], passage), ['c1', 'c2', 'c4', 'm1']);
   assert.deepEqual(reviewPassages(['m1', 'm2'], passage), ['m1', 'm2']);
+});
+
+test('pickPool: due retests first, then new questions easier-first (no shuffle), then the rest', () => {
+  const ids = Array.from({ length: 30 }, (_, i) => `pp-${String(i).padStart(10, '0')}`); // already easier-first
+  const now = 1_000_000_000_000;
+  const seen = { [ids[0]]: { s: 0, due: 0 }, [ids[1]]: { s: 0, due: 0 }, [ids[25]]: { s: 1, due: now - 1 }, [ids[26]]: { s: 1, due: now + 1e9 } };
+  const q = pickPool(ids, seen, 10, now);
+  assert.equal(q.length, 10);
+  assert.equal(q[0], ids[25]);                       // the due retest leads
+  assert.deepEqual(q.slice(1), ids.slice(2, 11));    // then the easiest unseen ones, in order
+  assert.ok(!q.includes(ids[0]) && !q.includes(ids[26]));
 });
