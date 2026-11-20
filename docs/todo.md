@@ -118,6 +118,7 @@ outside the repo.
 3. [ ] **Initial assessment, study plan and re-assessment cycle (L):**
    - one subject a day in the December holidays;
    - cards stay on tier mastery, with an "Exam-ready" badge added (not "Competent", which is a tier name);
+   - **Design conflict to settle first:** `past-papers-design.md` stores competency in the save at schema 5, but ADR 0002 rules out schema bumps (an old tab could overwrite the server save). Store it server-side, or in a field old code ignores, and decide this before the build.
    - real past-paper items wait for the private import.
 4. [ ] **Open-answer marker (L), per `docs/marking-framework.md`:**
    - [ ] rubric schema and private storage, plus a reviewer page in admin;
