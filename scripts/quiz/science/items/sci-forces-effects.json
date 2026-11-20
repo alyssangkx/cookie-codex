@@ -1,0 +1,2436 @@
+{
+  "subtopic": "sci-interactions-forces-effects",
+  "items": [
+    {
+      "key": "fe-001",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "What is a force?",
+      "options": [
+        "A push or a pull",
+        "A kind of heat",
+        "A type of light",
+        "A sound that moves things"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Heat is energy that makes things hot. A force is not heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Light lets us see. A force is not light."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Sound is not a force. A force is a push or a pull."
+        }
+      ],
+      "solution": [
+        "A force is a push or a pull on an object."
+      ]
+    },
+    {
+      "key": "fe-002",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of these is a push?",
+      "options": [
+        "Pulling a rope in a tug-of-war",
+        "Opening a drawer by its handle",
+        "Dragging a bag along the floor",
+        "Pressing a doorbell"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "pull",
+          "why": "Pulling a rope is a pull."
+        },
+        {
+          "tag": "pull",
+          "why": "You pull the drawer towards you."
+        },
+        {
+          "tag": "pull",
+          "why": "Dragging uses a pull on the bag."
+        },
+        null
+      ],
+      "solution": [
+        "Pressing a doorbell pushes the button away from you. The others are pulls."
+      ]
+    },
+    {
+      "key": "fe-003",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of these is a pull?",
+      "options": [
+        "Kicking a football",
+        "Hammering a nail into wood",
+        "Opening a drawer by its handle",
+        "Pressing a switch on the wall"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "push",
+          "why": "A kick is a push on the ball."
+        },
+        {
+          "tag": "push",
+          "why": "A hammer pushes the nail into the wood."
+        },
+        null,
+        {
+          "tag": "push",
+          "why": "Pressing a switch is a push."
+        }
+      ],
+      "solution": [
+        "You pull the handle towards you to open a drawer."
+      ]
+    },
+    {
+      "key": "fe-004",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Ali kicks a football that is lying still on the grass. What does the force of his kick do to the ball?",
+      "options": [
+        "It makes the ball change its shape for ever",
+        "It makes the ball start to move",
+        "It makes the ball stop",
+        "It makes the ball slow down"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "The ball may squash a little but goes back to its shape."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The ball was not moving, so it cannot be stopped."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball was still. A force from the kick moves it."
+        }
+      ],
+      "solution": [
+        "A force can make a still object start to move."
+      ]
+    },
+    {
+      "key": "fe-005",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A goalkeeper catches a fast-moving ball. What does the force from the goalkeeper's hands do to the ball?",
+      "options": [
+        "It makes the ball stop moving",
+        "It makes the ball start moving",
+        "It makes the ball speed up",
+        "It makes the ball change direction"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The ball was already moving."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The hands make the ball stop, not move faster."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The goalkeeper holds the ball, so it does not go in a new direction."
+        }
+      ],
+      "solution": [
+        "A force can stop a moving object. The hands stop the ball."
+      ]
+    },
+    {
+      "key": "fe-006",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A batsman hits a ball coming towards him and the ball flies back the other way. What effect does the bat's force have?",
+      "options": [
+        "It changes the shape of the ball for ever",
+        "It makes the ball stay still",
+        "It makes the ball lighter",
+        "It changes the direction of the ball"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "The ball goes back to its shape afterwards."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball is still moving after it is hit."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "A force does not change how heavy the ball is."
+        },
+        null
+      ],
+      "solution": [
+        "The ball was moving towards the batsman and now moves away. The bat changed its direction."
+      ]
+    },
+    {
+      "key": "fe-007",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A cyclist pedals harder on a flat road. What happens to the bicycle?",
+      "options": [
+        "It stops",
+        "It slows down",
+        "It speeds up",
+        "It changes shape"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "Pedalling harder is a bigger push, so the bicycle does not stop."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "A bigger force from the pedals speeds the bicycle up."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "A bicycle does not change shape when you pedal harder."
+        }
+      ],
+      "solution": [
+        "A bigger push makes a moving bicycle go faster."
+      ]
+    },
+    {
+      "key": "fe-008",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Mei squeezes a soft sponge in her hand. What does her force do to the sponge?",
+      "options": [
+        "It makes the sponge move up",
+        "It changes the shape of the sponge",
+        "It makes the sponge speed up",
+        "It makes the sponge stop moving"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "The sponge stays in her hand. It gets squashed."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The sponge is not moving. It is being squashed."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The sponge was not moving."
+        }
+      ],
+      "solution": [
+        "Squeezing is a force that changes the shape of an object."
+      ]
+    },
+    {
+      "key": "fe-009",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A cyclist presses the brakes while riding. What happens to the bicycle?",
+      "options": [
+        "It slows down",
+        "It speeds up",
+        "It starts to move backwards",
+        "It changes direction"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "Brakes make a bicycle go slower."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The brakes slow it down. It keeps moving forwards until it stops."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Brakes do not turn the bicycle."
+        }
+      ],
+      "solution": [
+        "A force from the brakes slows down a moving object."
+      ]
+    },
+    {
+      "key": "fe-010",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which force pulls objects towards the ground?",
+      "options": [
+        "Magnetic force",
+        "Frictional force",
+        "Elastic spring force",
+        "Gravitational force"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "A magnetic force pulls on iron, not on everything."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction acts between surfaces that touch."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Elastic spring force acts when a spring or rubber band is stretched."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls everything towards the Earth."
+      ]
+    },
+    {
+      "key": "fe-011",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A magnet pulls an iron nail towards it without touching it. Which force is this?",
+      "options": [
+        "Gravitational force",
+        "Frictional force",
+        "Magnetic force",
+        "Elastic spring force"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "The nail moves sideways or up, not down."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction needs two surfaces to rub together."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "No spring or rubber band is being stretched."
+        }
+      ],
+      "solution": [
+        "A magnet attracts iron with magnetic force, even from a short distance."
+      ]
+    },
+    {
+      "key": "fe-012",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A box slides along the floor and stops after a while. Which force slows it down?",
+      "options": [
+        "Magnetic force",
+        "Frictional force",
+        "Gravitational force",
+        "Elastic spring force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "The floor is not a magnet."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the box down, not backwards."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no stretched spring."
+        }
+      ],
+      "solution": [
+        "Friction between the box and the floor slows the box."
+      ]
+    },
+    {
+      "key": "fe-013",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A rubber band is stretched and then let go. It springs back to its first length. Which force makes it spring back?",
+      "options": [
+        "Elastic spring force",
+        "Gravitational force",
+        "Magnetic force",
+        "Frictional force"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the band down, not back along its length."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "A rubber band is not a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction needs rubbing surfaces."
+        }
+      ],
+      "solution": [
+        "A stretched rubber band pulls back because of elastic spring force."
+      ]
+    },
+    {
+      "key": "fe-014",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of these forces can act on an object without touching it?",
+      "options": [
+        "Frictional force",
+        "A push by a hand",
+        "A pull by a rope",
+        "Magnetic force"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "contact",
+          "why": "Friction acts only when two surfaces touch."
+        },
+        {
+          "tag": "contact",
+          "why": "A hand has to touch the object to push it."
+        },
+        {
+          "tag": "contact",
+          "why": "A rope must be tied to the object."
+        },
+        null
+      ],
+      "solution": [
+        "Magnetic force and gravity act from a distance. The others need contact."
+      ]
+    },
+    {
+      "key": "fe-015",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A ripe mango falls from a tree to the ground. Which force pulls it down?",
+      "options": [
+        "Magnetic force",
+        "Frictional force",
+        "Gravitational force",
+        "Elastic spring force"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "The ground does not pull the mango like a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction acts against sliding, not falling."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring in a falling mango."
+        }
+      ],
+      "solution": [
+        "Gravity pulls the mango to the Earth."
+      ]
+    },
+    {
+      "key": "fe-016",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A boy pushes a heavy door shut. What does the force do to the door?",
+      "options": [
+        "It changes the shape of the door for ever",
+        "It makes the door move",
+        "It makes the door heavier",
+        "It makes the door lighter"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "The door does not stay bent. It moves."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "A force does not change how heavy something is."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "A force does not change how heavy something is."
+        }
+      ],
+      "solution": [
+        "The push moves the door from open to shut."
+      ]
+    },
+    {
+      "key": "fe-017",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following shows a force changing the shape of an object?",
+      "options": [
+        "Pressing a ball of clay flat",
+        "Rolling a ball along the ground",
+        "Catching a ball in the air",
+        "Kicking a ball across a field"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "Rolling makes the ball move. Its shape stays the same."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "This stops the ball. Its shape stays the same."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "A kick makes the ball move."
+        }
+      ],
+      "solution": [
+        "Pressing a ball of clay changes its shape."
+      ]
+    },
+    {
+      "key": "fe-018",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "What is the unit for measuring the size of a force?",
+      "options": [
+        "Gram (g)",
+        "Centimetre (cm)",
+        "Degree Celsius (°C)",
+        "Newton (N)"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-unit",
+          "why": "Gram is a unit of mass."
+        },
+        {
+          "tag": "wrong-unit",
+          "why": "Centimetre measures length."
+        },
+        {
+          "tag": "wrong-unit",
+          "why": "Degree Celsius measures temperature."
+        },
+        null
+      ],
+      "solution": [
+        "Force is measured in newtons (N)."
+      ]
+    },
+    {
+      "key": "fe-019",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Nina pushes a swing in the same direction that it is already moving. What happens to the swing?",
+      "options": [
+        "It stops",
+        "It moves slower",
+        "It moves faster",
+        "It changes shape"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "A push in the same direction does not stop it."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "A push the same way adds speed."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "A swing does not change shape."
+        }
+      ],
+      "solution": [
+        "A push in the direction of motion speeds up a moving object."
+      ]
+    },
+    {
+      "key": "fe-020",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A ball rolls towards a wall and bounces back. What effect does the wall's force have on the ball?",
+      "options": [
+        "It makes the ball lighter",
+        "It changes the direction of the ball",
+        "It makes the ball keep going the same way",
+        "It makes the ball float"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "Forces do not change how heavy the ball is."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The ball does not keep going. It comes back."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The wall does not make the ball float."
+        }
+      ],
+      "solution": [
+        "The wall pushes the ball back, so its direction changes."
+      ]
+    },
+    {
+      "key": "fe-022",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A small magnet sticks to a fridge door. Which force holds it there?",
+      "options": [
+        "Elastic spring force",
+        "Frictional force",
+        "Gravitational force",
+        "Magnetic force"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "No spring is stretched or squashed."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction would not hold it up without the magnet pulling it."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the magnet down. It does not hold it on the door."
+        },
+        null
+      ],
+      "solution": [
+        "The magnet is pulled onto the iron door by magnetic force."
+      ]
+    },
+    {
+      "key": "fe-023",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A child jumps on a trampoline and is pushed back up into the air. Which force pushes the child up?",
+      "options": [
+        "Magnetic force",
+        "Frictional force",
+        "Elastic spring force",
+        "Gravitational force"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "A trampoline is not a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction acts across surfaces that slide, not when you bounce."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the child down."
+        }
+      ],
+      "solution": [
+        "The stretched trampoline springs back and pushes the child up. This is elastic spring force."
+      ]
+    },
+    {
+      "key": "fe-024",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of these forces needs the two objects to touch each other?",
+      "options": [
+        "Gravitational force",
+        "Frictional force",
+        "Magnetic force",
+        "The pull of the Earth on the Moon"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "non-contact",
+          "why": "Gravity acts from a distance."
+        },
+        null,
+        {
+          "tag": "non-contact",
+          "why": "A magnet can pull iron from a distance."
+        },
+        {
+          "tag": "non-contact",
+          "why": "This is gravity, which needs no contact."
+        }
+      ],
+      "solution": [
+        "Friction happens only where two surfaces touch."
+      ]
+    },
+    {
+      "key": "fe-101",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the frictional force?",
+      "options": [
+        "Arrow Q",
+        "Arrow P",
+        "Arrow R",
+        "None of the arrows"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow P points the way the block is pulled. Friction acts against the motion."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow R points down, towards the ground. That is the pull of gravity."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A block sliding on a rough table has friction, shown by one of the arrows."
+        }
+      ],
+      "solution": [
+        "Friction acts opposite to the motion of the block, so it points left (arrow Q)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block on a table</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">wooden block</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"48.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"34.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-102",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the gravitational force?",
+      "options": [
+        "Arrow P",
+        "Arrow Q",
+        "Arrow P and arrow Q",
+        "Arrow R"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow P points the way the block is pulled by the spring."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow Q points opposite to the motion. That is friction."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Both of those arrows point sideways. Gravity points down."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls things towards the Earth, so it is the arrow pointing down (R)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block on a table</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">wooden block</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"48.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"34.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-103",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A wooden block is pulled to the right by a spring and slides across a rough table. Arrows P, Q and R show forces on the block. Which arrow shows the elastic spring force?",
+      "options": [
+        "Arrow Q",
+        "Arrow R",
+        "Arrow P",
+        "Arrow Q and arrow R"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow Q points the opposite way to the spring's pull. That is friction."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow R points down. That is gravity."
+        },
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Neither of these is the pull of the spring."
+        }
+      ],
+      "solution": [
+        "The stretched spring pulls the block towards itself, to the right (arrow P)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A block on a table</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">wooden block</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"48.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"34.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-105",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A trolley rolls to the right across a rough floor and slows down. Which arrow shows the force that slows it?",
+      "options": [
+        "Arrow S",
+        "Arrow R",
+        "Arrow T",
+        "None of them, since nothing is pushing it"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow R points the same way as the trolley moves, so it would speed it up."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow T points down. That is gravity, which does not slow the trolley."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Friction between the wheels and the floor slows it, and that is shown by one of the arrows."
+        }
+      ],
+      "solution": [
+        "Friction acts against the motion, so it points left (S)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A trolley moving right</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">trolley</text><line x1=\"202.0\" y1=\"92\" x2=\"242.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"256.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"98.0\" y1=\"92\" x2=\"42.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"28.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">S</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">T</text></svg>"
+    },
+    {
+      "key": "fe-106",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following situations show a force changing the direction of a moving object?\nA: A tennis ball hits a wall and bounces back.\nB: A footballer stops a rolling ball with his foot.\nC: A hockey stick hits a puck and turns it.\nD: A girl squashes a rubber ball.",
+      "options": [
+        "A and B only",
+        "B and D only",
+        "C and D only",
+        "A and C only"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "B shows a force stopping a ball, not changing its direction."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "B stops a ball and D changes the shape of a ball."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "D changes shape, not direction."
+        },
+        null
+      ],
+      "solution": [
+        "A and C: the force turns the moving ball or puck.",
+        "B stops an object. D changes shape."
+      ]
+    },
+    {
+      "key": "fe-107",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following situations show a force changing the shape of an object?\nA: A boy bends a plastic ruler.\nB: A girl kicks a ball.\nC: A cook rolls dough flat with a rolling pin.\nD: A man pulls a trolley.",
+      "options": [
+        "A and B only",
+        "B and D only",
+        "A and C only",
+        "C and D only"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "B makes a ball move, which is not a change of shape."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Both of these make something move."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "D makes the trolley move."
+        }
+      ],
+      "solution": [
+        "Bending a ruler and flattening dough change shape.",
+        "Kicking a ball and pulling a trolley make things move."
+      ]
+    },
+    {
+      "key": "fe-108",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following forces act on an object without touching it?\nA: Friction.\nB: Gravitational force.\nC: Magnetic force.\nD: Elastic spring force.",
+      "options": [
+        "A and B only",
+        "B and C only",
+        "A and D only",
+        "C and D only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "contact",
+          "why": "Friction needs the surfaces to touch."
+        },
+        null,
+        {
+          "tag": "contact",
+          "why": "Both friction and a stretched spring need contact."
+        },
+        {
+          "tag": "contact",
+          "why": "A spring needs contact to push or pull."
+        }
+      ],
+      "solution": [
+        "Gravity and magnetic forces can act across a gap.",
+        "Friction and a spring's force need contact."
+      ]
+    },
+    {
+      "key": "fe-109",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "The table shows what happens to four objects when a force acts on each. In which situation does the force make the object speed up?",
+      "options": [
+        "Situation S",
+        "Situation P",
+        "Situation Q",
+        "Situation R"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "P stops the object."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Q changes the shape of the object."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "R slows the object down."
+        }
+      ],
+      "solution": [
+        "A car that begins to go faster is speeding up.",
+        "That is situation S."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four situations</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Situation</text><rect x=\"100\" y=\"36\" width=\"210\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What happens</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A rolling ball stops</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A sponge is squashed</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A bicycle goes slower</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A car goes faster</text></svg>"
+    },
+    {
+      "key": "fe-110",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "The table shows what happens to four objects. In which situation does the force change the direction of a moving object?",
+      "options": [
+        "Situation P",
+        "Situation Q",
+        "Situation S",
+        "Situation R"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "P makes the object go faster."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Q makes a still object start moving."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "S changes the shape of a spring."
+        },
+        null
+      ],
+      "solution": [
+        "A ball that goes the other way after hitting a wall has its direction changed."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four situations</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Situation</text><rect x=\"100\" y=\"36\" width=\"210\" height=\"34\"/><text x=\"205.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">What happens</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"100\" y=\"70\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A cart goes faster</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"100\" y=\"100\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A still toy starts moving</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"100\" y=\"130\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A ball bounces off a wall</text><rect x=\"10\" y=\"160\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"100\" y=\"160\" width=\"210\" height=\"30\"/><text x=\"205.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A spring is stretched</text></svg>"
+    },
+    {
+      "key": "fe-111",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "The table shows four forces. Which row about a force is correct?",
+      "options": [
+        "Frictional force: acts without contact",
+        "Gravitational force: needs the objects to touch",
+        "Magnetic force: acts without contact",
+        "Elastic spring force: acts only on magnets"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-fact",
+          "why": "Friction needs the two surfaces to touch."
+        },
+        {
+          "tag": "wrong-fact",
+          "why": "Gravity pulls from a distance."
+        },
+        null,
+        {
+          "tag": "wrong-fact",
+          "why": "It acts on any stretched or squashed spring or rubber band."
+        }
+      ],
+      "solution": [
+        "Magnetic force can act across a gap, so the first row is true. The others are not."
+      ],
+      "figure": "<svg viewBox=\"0 0 320 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"160.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four forces</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Force</text><rect x=\"120\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"215.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Example</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Magnetic</text><rect x=\"120\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">magnet pulls a pin</text><rect x=\"10\" y=\"100\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Frictional</text><rect x=\"120\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">brakes slow a wheel</text><rect x=\"10\" y=\"130\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Gravitational</text><rect x=\"120\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">apple falls</text><rect x=\"10\" y=\"160\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Elastic spring</text><rect x=\"120\" y=\"160\" width=\"190\" height=\"30\"/><text x=\"215.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">stretched band</text></svg>"
+    },
+    {
+      "key": "fe-112",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following is a contact force?",
+      "options": [
+        "The pull of the Earth on a falling stone",
+        "The force of a ball bouncing off a hard floor",
+        "The pull of a magnet on a paper clip held a little way off",
+        "The pull of the Earth on the Moon"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "non-contact",
+          "why": "Gravity acts without touching."
+        },
+        null,
+        {
+          "tag": "non-contact",
+          "why": "A magnet pulls through a gap, so this does not need contact."
+        },
+        {
+          "tag": "non-contact",
+          "why": "Gravity acts across space without touching."
+        }
+      ],
+      "solution": [
+        "The floor must touch the ball to push it back up."
+      ]
+    },
+    {
+      "key": "fe-114",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A girl pushes a toy car and lets it go. It rolls along the floor and slowly comes to a stop. What stops the car?",
+      "options": [
+        "The pull of gravity on the toy car as it rolls",
+        "The magnetic force of the floor on the car",
+        "The push she gave the car at the start",
+        "Friction between the wheels and the floor"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the car down. It does not slow it down sideways."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "The floor is not a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Her push started the car moving. It does not stop it."
+        },
+        null
+      ],
+      "solution": [
+        "Friction acts against the motion, so it slows the car and finally stops it."
+      ]
+    },
+    {
+      "key": "fe-115",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of these will use elastic spring force?",
+      "options": [
+        "A magnet lifting a pin off a table",
+        "A ball falling from the edge of a table",
+        "A catapult that is pulled back",
+        "A boy sliding down a playground slide"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "That is a magnetic force."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "That is gravity."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls him, and friction slows him."
+        }
+      ],
+      "solution": [
+        "The stretched rubber of a catapult springs back and throws the stone."
+      ]
+    },
+    {
+      "key": "fe-116",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Mei hangs a metal spoon from a magnet. She says: 'Two forces act on the spoon.' Which are the two forces?",
+      "options": [
+        "Frictional force and magnetic force",
+        "Magnetic force and gravitational force",
+        "Gravitational force and elastic spring force",
+        "Frictional force and elastic spring force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "The spoon is not sliding on anything, so there is no friction."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring. The magnet holds the spoon."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Neither of these forces acts on the hanging spoon."
+        }
+      ],
+      "solution": [
+        "The magnet pulls the spoon up and gravity pulls it down."
+      ]
+    },
+    {
+      "key": "fe-118",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Ben says: 'Gravity pulls only on heavy things.' Which example shows that Ben is wrong?",
+      "options": [
+        "A heavy stone falls to the ground",
+        "A magnet pulls an iron nail",
+        "A boat floats on water",
+        "A light feather also falls to the ground"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "not-evidence",
+          "why": "A heavy stone falling does not show that light things are pulled."
+        },
+        {
+          "tag": "not-evidence",
+          "why": "This is magnetic force, not gravity."
+        },
+        {
+          "tag": "not-evidence",
+          "why": "A floating boat does not show whether gravity pulls on light things."
+        },
+        null
+      ],
+      "solution": [
+        "A feather is light, but it still falls. So gravity pulls on light things too."
+      ]
+    },
+    {
+      "key": "fe-120",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Look at the arrows. A boy pushes a box to the right. Arrow R points right and arrow L points left. Which is the push from the boy?",
+      "options": [
+        "Arrow L",
+        "Arrow R",
+        "Both arrows",
+        "Neither arrow"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow L points opposite to the push. It is friction."
+        },
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Only one arrow points the way he pushes."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "The push is one of the arrows."
+        }
+      ],
+      "solution": [
+        "The boy pushes to the right, so the push is arrow R."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A boy pushes a box</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">box</text><line x1=\"202.0\" y1=\"92\" x2=\"272.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"286.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"98.0\" y1=\"92\" x2=\"54.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"40.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">L</text></svg>"
+    },
+    {
+      "key": "fe-121",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A rubber band is stretched by a pull and gets longer. What effect does the pull have on the rubber band?",
+      "options": [
+        "It changes the shape of the band",
+        "It changes the direction of the band",
+        "It makes the band speed up",
+        "It makes the band stop moving"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The band does not go in a new direction."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The band is not moving faster. It is longer."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The band was not moving."
+        }
+      ],
+      "solution": [
+        "Stretching is a force that changes shape."
+      ]
+    },
+    {
+      "key": "fe-122",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A woman pushes a heavy box along a floor. She stops pushing and the box stops after a short distance. Which force made the box stop?",
+      "options": [
+        "Gravity on the box",
+        "The magnetic force of the floor",
+        "The elastic spring force of the floor",
+        "Friction between the box and the floor"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the box down, not backwards."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "The floor does not attract the box."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring."
+        },
+        null
+      ],
+      "solution": [
+        "Friction opposes the sliding of the box. It slows it and stops it."
+      ]
+    },
+    {
+      "key": "fe-123",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following pairs lists forces that both need contact?",
+      "options": [
+        "Friction and gravity",
+        "Magnetic force and a pull by a rope",
+        "Friction and a push by a hand",
+        "Gravity and magnetic force"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mix",
+          "why": "Gravity needs no contact."
+        },
+        {
+          "tag": "mix",
+          "why": "A magnet needs no contact."
+        },
+        null,
+        {
+          "tag": "mix",
+          "why": "Neither of them needs contact."
+        }
+      ],
+      "solution": [
+        "Friction and a push by a hand act only when things touch."
+      ]
+    },
+    {
+      "key": "fe-124",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A girl throws a ball straight up. Which effect does the force of her throw have on the ball?",
+      "options": [
+        "It makes the ball stop in the air",
+        "It makes the ball start moving up",
+        "It makes the ball change shape for ever",
+        "It makes the ball fall"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "Gravity slows the ball later. The throw starts it moving."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The shape of the ball does not stay changed."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Falling is caused by gravity, not the throw."
+        }
+      ],
+      "solution": [
+        "The throw makes a ball that was still start to move upwards."
+      ]
+    },
+    {
+      "key": "fe-125",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A ball thrown upwards slows down, stops for a moment and falls. Which force slows it going up?",
+      "options": [
+        "Gravitational force",
+        "Magnetic force",
+        "Elastic spring force",
+        "Frictional force"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "There is no magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Friction with the air is small. The main force is gravity."
+        }
+      ],
+      "solution": [
+        "Gravity pulls down on the ball all the time, so it slows going up and speeds up coming down."
+      ]
+    },
+    {
+      "key": "fe-201",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A box slides to the right on the floor and slows down. Arrows P, Q and R show forces. Which statement is correct?",
+      "options": [
+        "Q is friction and it slows the box",
+        "P is friction and it slows the box",
+        "R is friction and it slows the box",
+        "Q is the push from a hand that slows the box"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "swapped",
+          "why": "P points the way the box is moving, so it would not slow the box."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "R points down. That is gravity."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "No hand is pushing. Q is the friction between the box and floor."
+        }
+      ],
+      "solution": [
+        "Friction acts against the motion, so it points to the left.",
+        "Q is friction, and it makes the box slow down."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A box sliding on the floor</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">box</text><line x1=\"202.0\" y1=\"92\" x2=\"262.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"276.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"98.0\" y1=\"92\" x2=\"42.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"28.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "fe-202",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A magnet hangs from a spring above an iron nail. The spring is stretched. Which forces act on the magnet?",
+      "options": [
+        "Gravity and magnetic force only",
+        "Gravity and elastic spring force only",
+        "Magnetic force and elastic spring force only",
+        "Gravity, magnetic force and elastic spring force"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "missing-force",
+          "why": "The spring is stretched and pulls on the magnet, so there is also an elastic spring force."
+        },
+        {
+          "tag": "missing-force",
+          "why": "The nail is attracted by the magnet, so there is also a magnetic force on the magnet."
+        },
+        {
+          "tag": "missing-force",
+          "why": "Gravity pulls on everything, including the magnet."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls the magnet down.",
+        "The nail pulls it down by magnetic force.",
+        "The stretched spring pulls it up."
+      ]
+    },
+    {
+      "key": "fe-203",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A skier travels down a slope at a high speed, then the ground flattens and she slows down and stops. Which sequence shows the effects of forces on her motion?",
+      "options": [
+        "Slows down, then speeds up, then stops",
+        "Speeds up, then stops, then slows down",
+        "Speeds up, then slows down, then stops",
+        "Stops, then speeds up, then slows down"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-order",
+          "why": "She speeds up on the slope first."
+        },
+        {
+          "tag": "wrong-order",
+          "why": "She slows down before she stops."
+        },
+        null,
+        {
+          "tag": "wrong-order",
+          "why": "She does not stop at the top."
+        }
+      ],
+      "solution": [
+        "Gravity speeds her up on the slope.",
+        "Friction slows her on the flat and finally stops her."
+      ]
+    },
+    {
+      "key": "fe-204",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Jun says that friction always makes a moving object slow down. Which situation shows friction helping to make something move?",
+      "options": [
+        "A parachute falling to the ground",
+        "A person walking forward",
+        "A box sliding to a stop",
+        "A skater gliding on ice"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-example",
+          "why": "This slows down a fall. It does not help make the person move forward."
+        },
+        null,
+        {
+          "tag": "wrong-example",
+          "why": "Here friction slows the box."
+        },
+        {
+          "tag": "wrong-example",
+          "why": "There is very little friction on ice."
+        }
+      ],
+      "solution": [
+        "The shoe grips the ground. Friction on the shoe lets the person push off and walk forward."
+      ]
+    },
+    {
+      "key": "fe-205",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A footballer kicks a ball that is rolling towards him. The ball goes in the opposite direction at a higher speed. Which effects does the kick have?",
+      "options": [
+        "It changes the direction and speeds the ball up",
+        "It changes the direction and slows the ball down",
+        "It only speeds the ball up",
+        "It only changes the direction of the ball"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The ball goes faster than before, not slower."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball also goes in a new direction."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball also moves faster."
+        }
+      ],
+      "solution": [
+        "Moving the opposite way means the direction changed.",
+        "A higher speed means it also sped up."
+      ]
+    },
+    {
+      "key": "fe-207",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A girl stretches a spring with her hands. Then she lets it go and the spring pulls her hands back together. What does her force do to the spring and what makes it pull back?",
+      "options": [
+        "It makes the spring move, and magnetic force makes it pull back",
+        "It changes the shape of the spring, and gravity makes it pull back",
+        "It changes the shape of the spring, and elastic spring force makes it pull back",
+        "It makes the spring speed up, and friction makes it pull back"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "The spring is not a magnet. The pull back is elastic spring force."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls down. The pull back is the spring's own force."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Friction acts when surfaces rub. It is not what pulls the spring back."
+        }
+      ],
+      "solution": [
+        "Stretching changes the spring's shape.",
+        "A stretched spring pulls back by elastic spring force."
+      ]
+    },
+    {
+      "key": "fe-208",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A bird sits on a wire. The wire sags a little but does not break and goes back to its shape when the bird leaves. Which statement is correct?",
+      "options": [
+        "Gravity pulls the wire up and the bird pushes down with friction",
+        "Gravity pulls the bird down and the sagging wire pushes back with an elastic force",
+        "Magnetic force holds the bird on the wire",
+        "Friction pulls the wire down and gravity pushes the bird up"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls things down, and friction does not hold the bird up."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "Birds are not attracted by magnets."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls down, not up."
+        }
+      ],
+      "solution": [
+        "The bird is pulled down by gravity.",
+        "The wire changes shape and pushes back like a spring."
+      ]
+    },
+    {
+      "key": "fe-209",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following describes what happens when a car driver presses the brake pedal harder and harder as the car comes to a stop?",
+      "options": [
+        "Friction on the wheels is greater and the car slows more",
+        "The force of friction on the wheels is smaller and the car speeds up",
+        "The force of gravity is greater and the car speeds up",
+        "The magnetic force is greater and the car stops at once"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "Brakes are used to slow the car, with more friction."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Gravity does not change when the brake is pressed."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "Brakes use friction, not magnetic force."
+        }
+      ],
+      "solution": [
+        "Pressing harder makes friction bigger, so the car slows faster."
+      ]
+    },
+    {
+      "key": "fe-210",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following is NOT an example of a force acting without contact?",
+      "options": [
+        "A magnet attracting an iron nail from a short distance",
+        "The Earth pulling an apple towards the ground",
+        "The Earth pulling the Moon",
+        "A wind pushing against a flag"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "non-contact",
+          "why": "A magnet pulls without touching, so this is a non-contact force."
+        },
+        {
+          "tag": "non-contact",
+          "why": "Gravity pulls without touching."
+        },
+        {
+          "tag": "non-contact",
+          "why": "Gravity acts across space."
+        },
+        null
+      ],
+      "solution": [
+        "Wind has to touch the flag to push it. The other three forces act across a gap."
+      ]
+    },
+    {
+      "key": "fe-211",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A cricketer catches a fast ball with a pair of soft gloves and pulls his hands back as he catches. Which effects does the force of his hands have on the ball?",
+      "options": [
+        "The ball speeds up and goes in a new direction",
+        "The ball changes direction and keeps moving",
+        "The ball slows down and stops",
+        "The ball keeps going at the same speed"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "A catch does not speed up the ball."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball stops in his hands."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "A force on the ball changes its motion."
+        }
+      ],
+      "solution": [
+        "Force from his hands slows the ball until it stops in his hands."
+      ]
+    },
+    {
+      "key": "fe-213",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A boy pulls a stretched elastic band and lets go. A small ball placed against the band shoots out. What does the force from the band do to the ball?",
+      "options": [
+        "It makes the ball start to move and speeds it up",
+        "It makes the ball stop moving",
+        "It makes the ball slow down",
+        "It changes the shape of the ball for ever"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The ball was still, and then it shoots away."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball moves faster, not slower."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball keeps its shape. It moves."
+        }
+      ],
+      "solution": [
+        "The stretched band pushes the ball, so the ball goes from still to moving fast."
+      ]
+    },
+    {
+      "key": "fe-214",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Two students argue about a book on a table. Aini says: 'Gravity is pulling the book down.' Dev says: 'No force is acting on it because it is not moving.' Who is correct, and why?",
+      "options": [
+        "Dev, because forces only act on moving objects",
+        "Dev, because the table cancels gravity",
+        "Both are correct since forces come and go",
+        "Aini, because gravity pulls on the book all the time"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Forces act on still objects too."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The table does not remove gravity. The book is still pulled down."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity does not come and go. Dev is wrong."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls on every object near the Earth all the time, even if it is still."
+      ]
+    },
+    {
+      "key": "fe-216",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A spring is attached to a hook on the wall. A girl pulls its free end to the right. Arrows A to D are shown. Which arrow shows the force of the spring on the girl's hand?",
+      "options": [
+        "Arrow A",
+        "Arrow B",
+        "Arrow C",
+        "Arrow D"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow A shows the girl's pull on the spring, to the right."
+        },
+        null,
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow C points down. That is gravity."
+        },
+        {
+          "tag": "wrong-arrow",
+          "why": "Arrow D points up, and no force acts that way here."
+        }
+      ],
+      "solution": [
+        "The stretched spring pulls back towards the wall, to the left (B)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A stretched spring</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">girl's hand</text><line x1=\"202.0\" y1=\"92\" x2=\"258.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"272.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"98.0\" y1=\"92\" x2=\"42.0\" y2=\"92\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"28.0\" y=\"97\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"150.0\" y1=\"70.0\" x2=\"150.0\" y2=\"26.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"30.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">D</text></svg>"
+    },
+    {
+      "key": "fe-217",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A parked car is pushed to the right by a man but it does not move. Which of the following is the best explanation?",
+      "options": [
+        "Friction at the tyres is bigger than the push",
+        "The man's push has no effect on a heavy car like this",
+        "Gravity holds the car off the ground",
+        "The car has no weight so it cannot move"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A push is a force, and it would move a car if it were big enough."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity pulls the car down towards the ground."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The car has weight. It does not move because of friction."
+        }
+      ],
+      "solution": [
+        "The push is smaller than the friction at the tyres, so the car stays still."
+      ]
+    },
+    {
+      "key": "fe-218",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following is a correct pair of a force and an example?",
+      "options": [
+        "Magnetic force: a stone falling off a cliff",
+        "Gravitational force: a fridge magnet holding a note",
+        "Frictional force: a bar magnet lifting a pin",
+        "Elastic spring force: a trampoline pushing a jumper up"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-example",
+          "why": "A falling stone is pulled by gravity."
+        },
+        {
+          "tag": "wrong-example",
+          "why": "A fridge magnet holds the note by magnetic force."
+        },
+        {
+          "tag": "wrong-example",
+          "why": "A magnet lifts a pin by magnetic force."
+        },
+        null
+      ],
+      "solution": [
+        "A trampoline stretches and then pushes back with an elastic spring force."
+      ]
+    },
+    {
+      "key": "fe-220",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A paper clip is dropped from a table, and it falls. A student holds a magnet above it, and the clip is pulled up and sticks to the magnet. Which statement explains this?",
+      "options": [
+        "The magnetic force on the clip is smaller than the gravity on it",
+        "The magnetic force on the clip is greater than the gravity on it",
+        "Gravity stops acting on the clip near a magnet",
+        "Friction between the magnet and clip lifts the clip"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "If it were smaller, the clip would not move up."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity always acts on the clip."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Friction does not lift the clip. The magnet does."
+        }
+      ],
+      "solution": [
+        "The clip moves up, so the upward magnetic force is greater than the downward gravity."
+      ]
+    },
+    {
+      "key": "fe-221",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A bowling ball hits a pin. The pin flies away and the ball slows down. What do the forces between them do?",
+      "options": [
+        "They change the motion of both objects",
+        "They change the motion of the pin only",
+        "They change the motion of the ball only",
+        "They change the shape of the pin only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "The ball slows down as well."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The pin moves as well."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The question is about motion, and both objects change motion."
+        }
+      ],
+      "solution": [
+        "Forces act on both objects when they hit.",
+        "The pin goes from still to moving and the ball slows down."
+      ]
+    },
+    {
+      "key": "fe-222",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A student hangs a ball on a spring from a stand. The spring stretches and then the ball stays still. Which forces act on the ball?",
+      "options": [
+        "Gravity down and friction up",
+        "Magnetic force down and gravity up",
+        "Elastic spring force down and gravity up",
+        "Gravity down and elastic spring force up"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "There is nothing rubbing against the ball."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no magnet. Gravity pulls down."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls down and the spring pulls up."
+        },
+        null
+      ],
+      "solution": [
+        "Gravity pulls the ball down.",
+        "The stretched spring pulls it up."
+      ]
+    },
+    {
+      "key": "fe-224",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following is true of gravitational force?",
+      "options": [
+        "It only pulls on things made of iron",
+        "It pulls everything on Earth towards the ground",
+        "It only acts when objects touch",
+        "It makes moving objects speed up all the time"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-fact",
+          "why": "That describes magnetic force."
+        },
+        null,
+        {
+          "tag": "wrong-fact",
+          "why": "Gravity acts without touching."
+        },
+        {
+          "tag": "wrong-fact",
+          "why": "Gravity can also slow things, such as a ball thrown up."
+        }
+      ],
+      "solution": [
+        "Gravity pulls everything towards the Earth, with or without contact."
+      ]
+    },
+    {
+      "key": "fe-025",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-1",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Zara pulls a toy wagon along the floor with a string. Which describes the force from the string on the wagon?",
+      "options": [
+        "A pull, towards Zara",
+        "A push, towards Zara",
+        "A pull, away from Zara",
+        "A push, away from Zara"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-type",
+          "why": "A push moves an object away from the one who pushes."
+        },
+        {
+          "tag": "wrong-direction",
+          "why": "A pull moves the wagon towards the person pulling."
+        },
+        {
+          "tag": "wrong-type",
+          "why": "A string cannot push. It pulls the wagon."
+        }
+      ],
+      "solution": [
+        "The string pulls the wagon towards Zara."
+      ]
+    },
+    {
+      "key": "fe-021",
+      "level": "basic",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A stone sits still on the ground. Which force is acting on it?",
+      "options": [
+        "Gravitational force",
+        "Magnetic force",
+        "Elastic spring force",
+        "No force, since the stone is still"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "A stone is not attracted by a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "No spring is stretched or squashed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity pulls on the stone all the time, even when it is still."
+        }
+      ],
+      "solution": [
+        "Gravity always pulls the stone towards the Earth."
+      ]
+    },
+    {
+      "key": "fe-104",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "An iron ball hangs in the air below a magnet and does not touch it. Arrows X and Y act on the ball. Which statement is correct?",
+      "options": [
+        "X is the gravitational force and Y is the magnetic force",
+        "X is the magnetic force and Y is the gravitational force",
+        "X is the frictional force and Y is the gravitational force",
+        "X is the magnetic force and Y is the elastic spring force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "swapped",
+          "why": "Gravity pulls down (Y). The magnet pulls the iron ball up (X)."
+        },
+        null,
+        {
+          "tag": "wrong-force",
+          "why": "The ball is not touching anything, so there is no friction."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "There is no spring. The downward force is gravity."
+        }
+      ],
+      "solution": [
+        "The magnet pulls the iron ball up (X, magnetic force).",
+        "The Earth pulls it down (Y, gravity)."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A ball below a magnet</text><line x1=\"14\" y1=\"114.0\" x2=\"286\" y2=\"114.0\" stroke-width=\"2\"/><rect x=\"98.0\" y=\"70.0\" width=\"104\" height=\"44\" rx=\"5\"/><text x=\"150.0\" y=\"97\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">iron ball</text><line x1=\"150.0\" y1=\"70.0\" x2=\"150.0\" y2=\"14.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"18.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"150.0\" y1=\"114.0\" x2=\"150.0\" y2=\"158.0\" stroke-width=\"3\" marker-end=\"url(#ah)\"/><text x=\"164.0\" y=\"158.0\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "fe-113",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following show a force making a still object start to move?\nA: A girl kicks a ball lying on the grass.\nB: A man stops a rolling ball with his foot.\nC: A boy pulls a wagon that is standing still.\nD: A cook flattens a ball of dough.",
+      "options": [
+        "A and C only",
+        "A and B only",
+        "B and D only",
+        "C and D only"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "B shows a force stopping a moving ball."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "B stops a ball and D changes a shape."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "D changes the shape of dough. It does not make it move."
+        }
+      ],
+      "solution": [
+        "A and C: a force makes a still ball and a still wagon move.",
+        "B stops a moving ball. D changes shape."
+      ]
+    },
+    {
+      "key": "fe-117",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A ball is dropped and hits the floor. It squashes slightly and bounces up. Which effects of a force are shown?",
+      "options": [
+        "Change of shape and change of direction",
+        "Change of shape only",
+        "Change of direction only",
+        "Neither shape nor direction changes"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "missed-effect",
+          "why": "The ball also goes up instead of down, so its direction changes too."
+        },
+        {
+          "tag": "missed-effect",
+          "why": "The ball is also squashed for a moment."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The ball squashes and goes the other way, so both change."
+        }
+      ],
+      "solution": [
+        "The floor squashes the ball for a moment (shape).",
+        "Then the ball moves up instead of down (direction)."
+      ]
+    },
+    {
+      "key": "fe-119",
+      "level": "intermediate",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A girl pulls a cart that is standing still. What does her force do to the cart?",
+      "options": [
+        "It makes the cart stay still",
+        "It changes the shape of the cart for ever",
+        "It makes the cart start to move",
+        "It makes the cart lighter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "A pull large enough to move the cart gets it going."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "The cart does not change shape. It moves."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "A force does not change how heavy the cart is."
+        }
+      ],
+      "solution": [
+        "A pull makes a still object start to move."
+      ]
+    },
+    {
+      "key": "fe-206",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following statements about forces is correct?",
+      "options": [
+        "A spring has a force only when it is pushed",
+        "Friction acts even when the surfaces do not touch",
+        "Gravity pulls only on things that are falling",
+        "A magnet can pull a paper clip without touching it"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-fact",
+          "why": "A spring also has force when pulled or stretched."
+        },
+        {
+          "tag": "wrong-fact",
+          "why": "Friction needs the surfaces to touch."
+        },
+        {
+          "tag": "wrong-fact",
+          "why": "Gravity pulls on all things all the time, even those that are still."
+        },
+        null
+      ],
+      "solution": [
+        "A magnetic force acts through a gap, so a magnet can pull a paper clip from a distance."
+      ]
+    },
+    {
+      "key": "fe-212",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following pairs of an object and the force acting on it is NOT correct?",
+      "options": [
+        "A ball falling from a roof: gravity pulls it down",
+        "An iron nail on a table: elastic spring force pulls it down",
+        "A sled slowing down on snow: friction",
+        "A paper clip near a magnet: magnetic force"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "correct-pair",
+          "why": "This pair is correct."
+        },
+        null,
+        {
+          "tag": "correct-pair",
+          "why": "This pair is correct."
+        },
+        {
+          "tag": "correct-pair",
+          "why": "This pair is correct."
+        }
+      ],
+      "solution": [
+        "The pull on a nail on a table is gravity, not elastic spring force. The other pairs are correct."
+      ]
+    },
+    {
+      "key": "fe-215",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Which of the following can a force do to an object?\nA: Make a still object move.\nB: Make a moving object stop.\nC: Make an object lighter.\nD: Make an object change direction.",
+      "options": [
+        "A, B and C only",
+        "B, C and D only",
+        "A, B and D only",
+        "A, C and D only"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-effect",
+          "why": "C is wrong. A force does not change how heavy an object is."
+        },
+        {
+          "tag": "wrong-effect",
+          "why": "C is wrong, and it leaves out A, which is correct."
+        },
+        null,
+        {
+          "tag": "wrong-effect",
+          "why": "C is wrong, and it leaves out B, which is correct."
+        }
+      ],
+      "solution": [
+        "A, B and D are effects of a force.",
+        "A force cannot make an object lighter."
+      ]
+    },
+    {
+      "key": "fe-219",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-2",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "Zhen pushes a sled on a flat field of snow and lets go. The sled slows down and stops. Which statements are correct?\nA: The sled slows down because of friction.\nB: A force is needed to stop the sled.\nC: The sled stops because there is no force on it.\nD: Friction makes the sled move faster.",
+      "options": [
+        "A and C only",
+        "B and D only",
+        "A and B only",
+        "C and D only"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "mix-up",
+          "why": "C is wrong. A force (friction) is acting on the sled."
+        },
+        {
+          "tag": "mix-up",
+          "why": "D is wrong. Friction slows the sled down."
+        },
+        null,
+        {
+          "tag": "mix-up",
+          "why": "Both are wrong. Friction acts on the sled and slows it."
+        }
+      ],
+      "solution": [
+        "Friction slows the sled and stops it.",
+        "Stopping a moving object needs a force, and friction supplies it."
+      ]
+    },
+    {
+      "key": "fe-223",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A diving board bends down when a girl stands at its end and goes back to its shape after she leaves. Which statement is correct?",
+      "options": [
+        "Magnetic force pulls the girl down and the bent board pushes with friction",
+        "Gravity pushes the board up and the girl pulls it down with friction",
+        "Gravity pulls the girl down and the bent board pushes up with elastic spring force",
+        "The board stays bent because no force acts on it"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-force",
+          "why": "The girl is not pulled down by a magnet, and friction is not what pushes the board back up."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls down, not up."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The board goes back to its shape because of its own elastic force."
+        }
+      ],
+      "solution": [
+        "Gravity pulls the girl down and bends the board.",
+        "The bent board pushes up with elastic spring force."
+      ]
+    },
+    {
+      "key": "fe-225",
+      "level": "competent",
+      "outcome": "sci-interactions-forces-effects-3",
+      "pattern": "sci-pat-forces-effects",
+      "stem": "A heavy book is placed on a coil spring and squashes it. The book stays still. Which statement is correct?",
+      "options": [
+        "The squashed spring pushes the book up with elastic spring force",
+        "The squashed spring pulls the book down with elastic spring force",
+        "The spring pushes the book up with magnetic force",
+        "The spring pushes the book up with gravity"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-direction",
+          "why": "A squashed spring pushes out, so it pushes the book up."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "The spring is not a magnet."
+        },
+        {
+          "tag": "wrong-force",
+          "why": "Gravity pulls the book down, not up."
+        }
+      ],
+      "solution": [
+        "A squashed spring pushes back. It holds up the book.",
+        "This is elastic spring force."
+      ]
+    }
+  ]
+}
