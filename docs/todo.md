@@ -117,7 +117,7 @@ outside the repo.
      so a review can reopen later; flag-a-question on the answer sheet.
 3. [ ] **Initial assessment, study plan and re-assessment cycle (L):**
    - one subject a day in the December holidays;
-   - cards stay on tier mastery, with a "Competent" badge added;
+   - cards stay on tier mastery, with an "Exam-ready" badge added (not "Competent", which is a tier name);
    - real past-paper items wait for the private import.
 4. [ ] **Open-answer marker (L), per `docs/marking-framework.md`:**
    - [ ] rubric schema and private storage, plus a reviewer page in admin;

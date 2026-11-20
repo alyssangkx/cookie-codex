@@ -15,7 +15,7 @@ The three levels of `site/src/data/syllabus/<subject>.json`: strands contain top
 _Avoid_: unit, chapter
 
 **Category**:
-What the child sees a sub-topic called on the site. Math and Science categories are SEAB syllabus sub-topics; English and Chinese categories follow prelim paper sections (ADR 0007). English categories are being reorganised to paper sections; "Coming soon" marks sections the site cannot ask yet. The code still says sub-topic.
+Umbrella word only (owner, 20 Nov 2026): code and docs say **sub-topic**; on screen each subject uses the paper's own word, **"section"** for English and Chinese (prelim paper sections) and **"topic"** for Math and Science (SEAB syllabus sub-topics) (ADR 0007). "Coming soon" marks sections the site cannot ask yet.
 _Avoid_: using category and topic interchangeably (a topic is the level above the sub-topic)
 
 **Paper section**:
@@ -143,8 +143,8 @@ A PSLE Achievement Level (AL1 best to AL8) derived from a score percentage. Used
 _Avoid_: score band
 
 **Competency** (proposed):
-A per-pattern state of Not yet, Developing, Competent or Not measured, built from evidence in the save (`comp`, schema 5). Designed in `docs/past-papers-design.md` section 4; not built.
-_Avoid_: mastered, Competent (the tier)
+A per-pattern state of Not yet, Developing, Exam-ready or Not measured (owner, 20 Nov 2026: the top state and its badge are called **Exam-ready**, never "Competent", which is a tier name), built from evidence in the save (`comp`, schema 5). Designed in `docs/past-papers-design.md` section 4; not built.
+_Avoid_: mastered, Competent (the tier); call the top state Exam-ready
 
 **Diagnose / Drill / Re-assess** (proposed):
 The assessment cycle: probe a sub-topic with fresh items, drill it in the site banks, re-assess with a different set. Re-assess never repeats Diagnose items.

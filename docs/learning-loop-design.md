@@ -166,7 +166,7 @@ Developing, Competent or Not measured, ordered by paper weight; **This week**: 3
 competency times highest weight) with the drill type and the re-assessment date; the next timed paper date; the last
 four paper scores; flags "needs teaching or a better item" (the stopping rule) and items in `review`. The child sees
 the same focus list as "Train today" and never an AL band. Tier cards keep coming from tier mastery, so no reward
-slot moves; a "Competent" badge on a sub-topic tile marks the new state.
+slot moves; an "Exam-ready" badge on a sub-topic tile marks the new state (renamed from "Competent", which is a tier name).
 
 **Data.** Competency is `comp` in the save at schema 5 with migration 4→5 (`past-papers-design.md` 4.5); new attempt
 modes `check`, `diagnose` and `reassess`; a build-time map from item id to pattern; the plan is computed, not stored.
