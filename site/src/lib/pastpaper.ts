@@ -7,8 +7,8 @@
 // parent page's wrong-answer list.
 import { esc } from './boldans.ts';
 
-/** Master switch. Stays false until the owner applies 004 and the first sub-topic is loaded and reviewed. */
-export const PP_ENABLED = false;
+/** Master switch. On since 20 Nov 2026 (004 applied, Plant transport uploaded and reviewed by the owner). */
+export const PP_ENABLED = true;
 
 /** merge: past-paper items join the generated ones; replace: they take over a tier once it has a full pool. */
 export type PpMode = 'merge' | 'replace';
