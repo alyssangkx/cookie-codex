@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { triesPerDay } from '../../lib/store';
-import { subs, hasContent, slots, cardInfo, banks, subSlug } from '../../lib/train';
+import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics } from '../../lib/train';
 
 // Everything the runner needs, small enough to inline; question banks are fetched on demand.
 const meta = {
@@ -11,6 +11,7 @@ const meta = {
   files: banks.map((b) => b.topic),
   slots,
   cards: cardInfo,
+  topicNames: Object.fromEntries(paperTopics.map((t) => [t.id, t.name])),
 };
 const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 ---
@@ -30,11 +31,37 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         <span id="nocalc" class="nocalc" hidden>No calculator</span>
         <span id="timer" class="timer" role="timer" aria-label="Time left"></span>
       </div>
-      <div id="visual" hidden></div>
-      <p id="stem" class="stem"></p>
-      <div id="options" class="options" role="group" aria-label="Answer options"></div>
+      <div id="pbar" class="pbar" hidden>
+        <button id="p-sheet" type="button" aria-expanded="false" aria-controls="p-grid">Sheet</button>
+        <button id="p-pause" type="button">Pause</button>
+      </div>
+      <div id="p-grid" class="p-grid" role="group" aria-label="Jump to a question" hidden></div>
+      <div id="p-paused" class="p-paused" hidden>
+        <p><strong>Paused.</strong> The questions are hidden and the paper clock has stopped.</p>
+        <p id="p-paused-left" role="timer"></p>
+        <button id="p-resume" class="primary" type="button">Resume</button>
+      </div>
+      <div id="qbody">
+        <div id="visual" hidden></div>
+        <p id="stem" class="stem"></p>
+        <div id="options" class="options" role="group" aria-label="Answer options"></div>
+      </div>
       <div id="feedback" class="feedback" aria-live="polite" hidden></div>
       <button id="next" class="primary" type="button" hidden>Next question</button>
+      <div id="pnav" class="pnav" hidden>
+        <button id="p-prev" type="button">Back</button>
+        <button id="p-next" class="primary" type="button">Next</button>
+        <button id="p-submit" type="button">Submit</button>
+      </div>
+    </div>
+
+    <div id="rv" class="panel" hidden>
+      <div class="status"><span id="rv-count"></span><button id="rv-done" class="linkish" type="button">Back to results</button></div>
+      <div id="rv-body"></div>
+      <div class="pnav">
+        <button id="rv-prev" type="button">Back</button>
+        <button id="rv-next" class="primary" type="button">Next</button>
+      </div>
     </div>
 
     <div id="done" class="panel" hidden>
@@ -46,9 +73,15 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   </section>
   <dialog id="leave-dlg" class="leave-dlg" aria-labelledby="leave-title">
     <h2 id="leave-title">Leave this quiz?</h2>
-    <p>It still counts as today's try and your answers so far are lost.</p>
+    <p id="leave-msg">It still counts as today's try and your answers so far are lost.</p>
     <p class="leave-actions"><button id="leave-stay" class="primary" type="button">Stay</button>
       <button id="leave-go" type="button">Leave</button></p>
+  </dialog>
+  <dialog id="submit-dlg" class="leave-dlg" aria-labelledby="submit-title">
+    <h2 id="submit-title">Submit your paper?</h2>
+    <p id="submit-msg"></p>
+    <p class="leave-actions"><button id="submit-stay" type="button">Keep working</button>
+      <button id="submit-go" class="primary" type="button">Submit</button></p>
   </dialog>
   <script type="application/json" id="meta" set:html={data} />
 </Base>
@@ -56,11 +89,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1,
+    QUIZ_SIZE, tierState, TIER_NAME, type Tier, type SaveV1, type QuizResult,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
   import { esc, boldAns } from '../../lib/boldans';
+  import { lineForLast, bilingual } from '../../lib/encourage';
+  import {
+    newClock, tickPaper, canPause, startPause, endPause, pauseLeft, timeUsed, blanks, reviewList, paperOk,
+    loadDraft, saveDraft, draftCurrent, clearDraft, draftOwner, type PaperDraft, type Pick,
+  } from '../../lib/paper';
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false };
@@ -68,14 +106,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string; slug: string; count: Record<Tier, number> }>;
     files: string[]; slots: Record<string, { slug: string; dup: boolean }>;
     cards: Record<string, { name: string; image: string; rarity: string }>;
+    topicNames: Record<string, string>;
   };
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const meta: Meta = JSON.parse($('meta').textContent!);
   const params = new URLSearchParams(location.search);
   const mode = (['review', 'paper'].includes(params.get('mode') ?? '') ? params.get('mode') : 'tier') as 'tier' | 'review' | 'paper';
-  const paperTopics = (params.get('topics') ?? '').split(',').filter((t) => meta.files.includes(t));
+  let paperTopics = (params.get('topics') ?? '').split(',').filter((t) => meta.files.includes(t));
   const paperN = Math.min(40, Math.max(5, Number(params.get('n')) || 20));
-  const paperMix = MIXES[params.get('mix') ?? 'wa'] ?? MIXES.wa;
+  let mixKey = Object.hasOwn(MIXES, params.get('mix') ?? '') ? params.get('mix')! : 'wa';
+  let paperMix = MIXES[mixKey];
   const PER_Q: Record<string, number> = { basic: 1.2, intermediate: 1.5, competent: 2 };
   const subId = params.get('sub') ?? '';
   const tier = (params.get('tier') ?? 'b') as Tier;
@@ -174,8 +214,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   let quiz: string[] = [], i = 0, score = 0, deadline = 0, tick = 0, startedAt = 0, answered = false, over = false;
   let pausedAt = 0; // the clock stops while the worked solution is on screen
   let wrongs: { q: Q; chose: number; tag: string }[] = [];
+  // papers (submit-then-review): a pick per question, the wall clock, and the draft that survives a reload
+  let picks: Pick[] = [], pclock = newClock(0, 0), draft: PaperDraft | null = null, mins = 0, paperUsed = 0;
+  let rvList: number[] = [], rvAt = 0;
+  const PAPER = mode === 'paper';
+  if (PAPER) $('quiz').classList.add('paper');
 
-  const show = (p: 'start' | 'play' | 'done') => ['start', 'play', 'done'].forEach((x) => ($(x).hidden = x !== p));
+  const show = (p: 'start' | 'play' | 'done' | 'rv') => ['start', 'play', 'done', 'rv'].forEach((x) => ($(x).hidden = x !== p));
   const stop = (msg: string, links = '<a href="/train/">Back to the Schools</a>') => {
     $('start-info').innerHTML = `${msg}<br>${links}`;
     show('start');
@@ -187,6 +232,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     return r.json();
   }
 
+  async function loadBanks(files: string[]): Promise<Q[]> {
+    let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
+    // papers use 4-option items outside passage sets only (no 8-option dialogue item, no split passage)
+    if (mode === 'paper') all = all.filter(paperOk);
+    byId = new Map(all.map((q) => [q.id, q]));
+    members = new Map();
+    for (const q of all) if (q.group) members.set(q.group, [...(members.get(q.group) ?? []), q]);
+    return all;
+  }
+
   async function init() {
     const s = load();
     if (mode === 'tier') {
@@ -195,6 +250,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       $('crumbs').innerHTML = `<a href="/train/">Schools</a> › <a href="/train/${sub.school}/">${sub.school[0].toUpperCase() + sub.school.slice(1)}</a> › <a href="/train/${sub.school}/${sub.slug}/">${esc(sub.name)}</a>`;
     } else if (mode === 'paper') {
       $('title').textContent = 'Practice paper';
+      // a paper already started on this device (by this player) is resumed, whatever the link asked for:
+      // its clock kept running while the page was closed
+      draft = loadDraft(draftOwner(s.createdAt));
+      if (draft) return resumePaper(draft);
       if (!paperTopics.length) return stop('Choose at least one topic.', '<a href="/paper/">Build a paper</a>');
     } else {
       $('title').textContent = 'Daily Review';
@@ -208,12 +267,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
     try {
       const files = mode === 'tier' ? [sub.file] : mode === 'paper' ? paperTopics : meta.files;
-      let all = (await Promise.all(files.map(async (f) => (await fetchBank(f)).map((q) => ({ ...q, topic: f }))))).flat();
-      // practice papers are Math-only and assume 4 options; never mix in an 8-option dialogue item
-      if (mode === 'paper') all = all.filter((q) => q.options.length === 4);
-      byId = new Map(all.map((q) => [q.id, q]));
-      members = new Map();
-      for (const q of all) if (q.group) members.set(q.group, [...(members.get(q.group) ?? []), q]);
+      const all = await loadBanks(files);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
@@ -231,13 +285,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       return stop((e as Error).message);
     }
     const x = s.settings.extraTime ? 1.5 : 1;
-    const mins = mode === 'tier' ? minutesFor(s, tier)
+    mins = mode === 'tier' ? minutesFor(s, tier)
       : mode === 'paper' ? Math.ceil(quiz.reduce((m, id) => m + PER_Q[byId.get(id)!.level], 0) * x)
       : Math.ceil(quiz.length * 1.5 * x);
     deadline = mins * 60_000;
     $('start-info').textContent = mode === 'tier'
       ? `${quiz.length} questions in ${mins} minutes. Every question you get right counts toward clearing the tier.`
-      : mode === 'paper' ? `${paperMix.label}: ${quiz.length} questions from ${paperTopics.length} topic${paperTopics.length > 1 ? 's' : ''} in ${mins} minutes, ordered from easier to harder.`
+      : mode === 'paper' ? `${paperMix.label}: ${quiz.length} questions from ${paperTopics.length} topic${paperTopics.length > 1 ? 's' : ''} in ${mins} minutes, ordered from easier to harder. Answer them all, then submit; you see your score and the ones to fix after you submit. You can pause once, for up to 10 minutes.`
       : `${quiz.length} questions you got wrong before, in ${mins} minutes. Review counts toward today's goal.`;
     $('start-btn').hidden = false;
     show('start');
@@ -247,13 +301,21 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (!quiz.length) return; // nothing to play (locked, capped or empty tier)
     // re-check the daily block right before starting: the page may have been open since before the cap was reached
     const s0 = load();
-    const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined, total: quiz.length });
+    const now = Date.now();
+    const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' ? tier : undefined, total: quiz.length }, now);
     if (blocked) { quiz = []; return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>'); }
     save(s0);
     i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
     inQuiz = new Set(quiz);
+    startedAt = now;
+    if (PAPER) {
+      picks = quiz.map(() => null);
+      pclock = newClock(now, mins * 60_000);
+      // the draft's ts is the open attempt's ts: the paper's id
+      draft = saveDraft({ v: 1, owner: draftOwner(s0.createdAt), ts: now, rev: 0, topics: paperTopics, mix: mixKey, ids: quiz, picks, at: 0, clock: pclock, mins });
+      return playPaper();
+    }
     history.pushState({ quiz: 1 }, ''); // a back press lands here first, so the leave guard can ask
-    startedAt = Date.now();
     deadline += startedAt;
     tick = window.setInterval(clock, 250);
     clock();
@@ -261,10 +323,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     render();
   }
 
+  const mmss = (ms: number) => `${Math.floor(ms / 60000)}:${String(Math.floor((ms % 60000) / 1000)).padStart(2, '0')}`;
+
   function clock() {
+    if (PAPER) return paperClock();
     if (pausedAt) return;
     const left = Math.max(0, deadline - Date.now());
-    $('timer').textContent = `${Math.floor(left / 60000)}:${String(Math.floor((left % 60000) / 1000)).padStart(2, '0')}`;
+    $('timer').textContent = mmss(left);
     $('timer').classList.toggle('low', left < 60000);
     if (left === 0) finish(true);
   }
@@ -279,6 +344,165 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       `<span class="qfig-label" style="left:${pct(l.x)}%;top:${pct(l.y)}%">${esc(l.text)}</span>`).join('');
     return `<span class="qfig-art"><img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy" decoding="async">${tags}</span>`;
   };
+
+  // ------------------------------------------------------------ papers: answer everything, then submit
+
+  /** Shared by a new paper and a resumed one. The clock is the wall clock, so a resumed paper may already be over. */
+  function playPaper() {
+    i = Math.min(Math.max(0, draft?.at ?? 0), quiz.length - 1);
+    over = false; wrongs = []; score = 0;
+    inQuiz = new Set(quiz);
+    $('leave-title').textContent = 'Leave this paper?';
+    $('leave-msg').textContent = 'Your answers are kept, but the clock keeps running. Open Practice paper again to finish it.';
+    history.pushState({ quiz: 1 }, ''); // a back press lands here first, so the leave guard can ask
+    $('pbar').hidden = false;
+    $('pnav').hidden = false;
+    show('play');
+    renderPaper();
+    showPaused(!!pclock.pausedAt);
+    tick = window.setInterval(clock, 250);
+    clock(); // submits at once when the time ran out while the page was closed
+  }
+
+  async function resumePaper(d: PaperDraft) {
+    paperTopics = d.topics.filter((t) => meta.files.includes(t));
+    mixKey = Object.hasOwn(MIXES, d.mix) ? d.mix : 'wa';
+    paperMix = MIXES[mixKey];
+    try { await loadBanks(paperTopics); } catch (e) { return stop((e as Error).message); }
+    // a bank rebuilt since the paper began may have lost a question: keep the rest
+    const keep = d.ids.map((id, k) => [id, d.picks[k]] as const).filter(([id]) => byId.has(id));
+    if (!keep.length) {
+      clearDraft(); draft = null;
+      return stop("That paper's questions have changed since you started it. Please build a new paper.", '<a href="/paper/">Build a paper</a>');
+    }
+    quiz = keep.map(([id]) => id);
+    picks = keep.map(([id, p]) => (typeof p === 'number' && p >= 0 && p < byId.get(id)!.options.length ? p : null));
+    pclock = d.clock; startedAt = d.ts; mins = d.mins;
+    $('title').textContent = 'Practice paper (resumed)';
+    playPaper();
+  }
+
+  /** Keep the draft in step; a stale tab (another tab wrote or submitted) stops here. */
+  function persist() {
+    if (!draft) return;
+    const next = saveDraft({ ...draft, ids: quiz, picks, at: i, clock: pclock });
+    if (next) { draft = next; return; }
+    over = true;
+    clearInterval(tick);
+    if (history.state?.quiz) history.back();
+    stop('This paper was changed or submitted in another tab or window, so this copy has stopped. Reload the page to carry on.',
+      '<a href="/paper/">Practice paper</a>');
+  }
+
+  function paperClock() {
+    if (over) return;
+    const now = Date.now();
+    const r = tickPaper(pclock, now);
+    if (r.resumed) { pclock = r.clock; persist(); if (over) return; showPaused(false); }
+    $('timer').textContent = mmss(r.left) + (pclock.pausedAt ? ' paused' : '');
+    $('timer').classList.toggle('low', r.left < 60000);
+    $('timer').classList.toggle('paused', !!pclock.pausedAt);
+    if (pclock.pausedAt) $('p-paused-left').textContent = `Pause time left: ${mmss(pauseLeft(pclock, now))}`;
+    if (r.submit) finish(true);
+  }
+
+  function updatePauseBtn() {
+    const b = $<HTMLButtonElement>('p-pause');
+    b.disabled = !canPause(pclock, Date.now());
+    b.textContent = pclock.pausedAt ? 'Paused' : pclock.pauseUsed ? 'Pause used' : 'Pause';
+  }
+
+  /** Paused: the questions, the sheet and the buttons are hidden; only Resume shows. */
+  function showPaused(on: boolean) {
+    $('p-paused').hidden = !on;
+    $('qbody').hidden = on;
+    $('pnav').hidden = on;
+    $<HTMLButtonElement>('p-sheet').disabled = on;
+    if (on) toggleSheet(false);
+    updatePauseBtn();
+  }
+
+  function toggleSheet(open: boolean) {
+    $('p-grid').hidden = !open;
+    $('p-sheet').setAttribute('aria-expanded', String(open));
+  }
+
+  function drawSheet() {
+    const b = blanks(picks);
+    $('p-sheet').textContent = `Sheet · ${quiz.length - b}/${quiz.length} done`;
+    $('p-grid').innerHTML = quiz.map((_, k) => `<button type="button" class="cell${picks[k] != null ? ' done' : ''}${k === i ? ' cur' : ''}" data-j="${k}"`
+      + ` aria-label="Question ${k + 1}, ${picks[k] != null ? 'answered' : 'blank'}"${k === i ? ' aria-current="true"' : ''}>${k + 1}</button>`).join('')
+      + `<p class="legend">${quiz.length - b} answered, ${b} blank. Tap a number to go there.</p>`;
+  }
+
+  function renderPaper() {
+    const q = byId.get(quiz[i])!;
+    $('count').textContent = `Question ${i + 1} of ${quiz.length}`;
+    $('nocalc').hidden = q.calc !== false;
+    $('visual').hidden = !q.visual;
+    $('visual').innerHTML = q.visual ? visualCard(q.visual) : '';
+    $('stem').innerHTML = stemHtml(q);
+    $('options').classList.remove('many');
+    $('options').innerHTML = q.options.map((o, k) => `<button type="button" class="opt${picks[i] === k ? ' sel' : ''}" data-k="${k}" aria-pressed="${picks[i] === k}">`
+      + `<span class="letter">${LETTERS[k]}</span> <span>${fmt(o)}</span></button>`).join('');
+    $<HTMLButtonElement>('p-prev').disabled = i === 0;
+    $<HTMLButtonElement>('p-next').disabled = i + 1 >= quiz.length;
+    $('p-submit').classList.toggle('primary', i + 1 >= quiz.length);
+    drawSheet();
+    updatePauseBtn();
+  }
+
+  /** Choose (or change) an answer. Nothing says right or wrong until the paper is submitted. */
+  function choosePaper(k: number) {
+    if (over || pclock.pausedAt || k < 0 || k >= byId.get(quiz[i])!.options.length) return;
+    picks[i] = k;
+    persist();
+    if (over) return;
+    $('options').querySelectorAll<HTMLButtonElement>('button').forEach((b, j) => {
+      b.classList.toggle('sel', j === k);
+      b.setAttribute('aria-pressed', String(j === k));
+    });
+    drawSheet();
+  }
+
+  function goTo(j: number) {
+    if (over || pclock.pausedAt || j < 0 || j >= quiz.length) return;
+    i = j;
+    persist();
+    if (over) return;
+    renderPaper();
+    $('quiz').scrollIntoView({ block: 'start' });
+  }
+
+  // ------------------------------------------------------------ paper review: wrong and blank answers only
+
+  function renderRv() {
+    const k = rvList[rvAt], q = byId.get(quiz[k])!, p = picks[k];
+    $('rv-count').textContent = `${rvAt + 1} of ${rvList.length} · Question ${k + 1}`;
+    const opts = q.options.map((o, j) => `<div class="opt${j === q.answer ? ' right' : j === p ? ' wrong' : ''}"><span class="letter">${LETTERS[j]}</span> <span>${fmt(o)}</span></div>`).join('');
+    const why = p != null ? q.explain[p] : null;
+    $('rv-body').innerHTML = (q.visual ? visualCard(q.visual) : '')
+      + `<p class="stem">${stemHtml(q, true)}</p><div class="options">${opts}</div><div class="feedback">`
+      + `<p class="verdict bad">${p == null ? 'You left this blank.' : `You chose ${LETTERS[p]}.`} The answer is ${LETTERS[q.answer]}.</p>`
+      + (why ? `<p class="mistake"><strong>Why ${LETTERS[p!]} is tempting:</strong> ${fmt(why.why, q.options[q.answer])}</p>` : '')
+      + `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol></div>`;
+    $<HTMLButtonElement>('rv-prev').disabled = rvAt === 0;
+    $('rv-next').textContent = rvAt + 1 < rvList.length ? 'Next' : 'Back to results';
+  }
+  function openReview() {
+    rvList = reviewList(quiz.map((id) => byId.get(id)!.answer), picks);
+    if (!rvList.length) return;
+    rvAt = 0;
+    renderRv();
+    show('rv');
+    $('quiz').scrollIntoView({ block: 'start' });
+  }
+  function rvStep(d: number) {
+    if (rvAt + d >= rvList.length) { show('done'); $('quiz').scrollIntoView({ block: 'start' }); return; }
+    rvAt = Math.max(0, rvAt + d);
+    renderRv();
+    $('quiz').scrollIntoView({ block: 'start' });
+  }
 
   function render() {
     const q = byId.get(quiz[i])!;
@@ -356,8 +580,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     over = true;
     clearInterval(tick);
     if (history.state?.quiz) history.back(); // drop the guard entry so Back on the result screen leaves at once
-    const dlg = $('leave-dlg') as HTMLDialogElement;
-    if (dlg.open) dlg.close(); // the quiz ended (time up) while "Leave this quiz?" was showing: it no longer applies
+    // the quiz ended (time up) while "Leave this quiz?" or "Submit?" was showing: it no longer applies
+    for (const d of ['leave-dlg', 'submit-dlg']) { const dlg = $(d) as HTMLDialogElement; if (dlg.open) dlg.close(); }
+    if (PAPER) return submitPaper(timeUp);
     // unanswered questions count as wrong when time runs out (design section 3)
     const unanswered = quiz.slice(i + (answered ? 1 : 0));
     for (const id of unanswered) { record(id, false); wrongs.push({ q: byId.get(id)!, chose: -1, tag: 'ran_out_of_time' }); }
@@ -370,23 +595,69 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     }, rewardFor, Date.now(), tierIds());
     if (mode === 'tier') s.last = { sub: subId, tier };
     save(s);
+    results(s, res, timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '');
+  }
 
+  /**
+   * Submit a paper: every answer goes through the same answer() as a tier quiz, with retireNew = false (papers never
+   * retire new questions), so wrong and blank answers are due again in 1, 3 and 7 days exactly as before.
+   */
+  function submitPaper(timeUp: boolean) {
+    if (!draft || !draftCurrent(draft)) {
+      return stop('This paper was already submitted in another tab or window.', '<a href="/paper/">Build another paper</a>');
+    }
+    const now = Date.now();
+    pclock = endPause(pclock, now);
+    const s: SaveV1 = load();
+    wrongs = []; score = 0;
+    quiz.forEach((id, k) => {
+      const q = byId.get(id)!, p = picks[k];
+      const ok = p === q.answer;
+      answer(s, id, ok, now, false, ok || p == null ? undefined : q.options[p]); // blank -> stored as '' (left blank)
+      if (ok) score++;
+      else wrongs.push({ q, chose: p ?? -1, tag: p == null ? (timeUp ? 'ran_out_of_time' : 'blank') : q.explain[p]?.tag ?? 'wrong' });
+    });
+    clearDraft(); draft = null;
+    paperUsed = timeUsed(pclock, startedAt, now);
+    const res = finishQuiz(s, {
+      mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
+    }, rewardFor, now, tierIds());
+    save(s);
+    const b = blanks(picks);
+    results(s, res, timeUp ? `<p>Time's up! The paper was handed in for you${b ? ` with ${b} question${b === 1 ? '' : 's'} blank` : ''}.</p>` : '');
+  }
+
+  // Growth-mindset line (encourage.ts): Chinese-subject results show the Chinese line, with the English under it in Term 1
+  const isZh = () => mode === 'tier' ? sub.school === 'chinese' : quiz.length > 0 && quiz.every((id) => byId.get(id)?.sub.startsWith('chi-'));
+  function cheerHtml(s: SaveV1) {
+    const l = lineForLast(s.attempts);
+    if (!l) return '';
+    if (!isZh()) return `<p class="cheer">${esc(l.en)}</p>`;
+    return `<p class="cheer" lang="zh-Hans">${esc(l.zh)}</p>${bilingual() ? `<p class="cheer-en" lang="en">${esc(l.en)}</p>` : ''}`;
+  }
+
+  function results(s: SaveV1, res: QuizResult, note: string) {
     $('score').textContent = `${score} / ${quiz.length}`;
-    let html = timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '';
+    let html = cheerHtml(s) + note;
     if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.autoPromoted ? `<p class="verdict good">Perfect first try! ${{ b: 'Basic', i: 'Intermediate', c: 'Competent' }[tier] ?? 'Tier'} cleared, and the next tier is open.</p>`
         : res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`
-        : st.cleared ? `<p class="verdict good">${res.passed ? 'Nice score! ' : ''}This tier is cleared (you keep its card). ${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered right now; any you missed come back for practice.</p>`
-        : `<p class="verdict ${res.passed ? 'good' : 'bad'}">${res.passed ? 'Nice score! ' : 'Keep going. '}${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered. Missed questions come back until you get them right.</p>`;
+        : st.cleared ? `<p class="verdict good">This tier is cleared (you keep its card). ${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered right now; any you missed come back for practice.</p>`
+        : `<p class="verdict${res.passed ? ' good' : ''}">${Math.min(st.mastered ?? 0, sub.count[tier] ?? st.total ?? 0)} of ${sub.count[tier] ?? st.total} questions mastered. Missed questions come back until you get them right.</p>`;
     }
     if (mode === 'paper') {
+      html += `<p class="ptime">Time used: ${mmss(paperUsed)} of ${mins}:00${pclock.pauseUsed >= 1000 ? ` · paused for ${mmss(pclock.pauseUsed)}` : ''}</p>`;
       const per = new Map<string, [number, number]>();
       quiz.forEach((id) => { const t = byId.get(id)!.topic!; const v = per.get(t) ?? [0, 0]; v[1]++; per.set(t, v); });
       const wrongIds = new Set(wrongs.map((w) => w.q.id));
       quiz.forEach((id) => { if (!wrongIds.has(id)) per.get(byId.get(id)!.topic!)![0]++; });
       html += `<table class="per-topic"><tr><th>Topic</th><th>Score</th></tr>${[...per].map(([t, [c, n]]) =>
-        `<tr><td>${esc(t.replace('math-', '').replace(/-/g, ' '))}</td><td>${c} / ${n}</td></tr>`).join('')}</table>`;
+        `<tr><td>${esc(meta.topicNames[t] ?? t)}</td><td>${c} / ${n}</td></tr>`).join('')}</table>`;
+      if (wrongs.length) {
+        const blank = wrongs.some((w) => w.chose < 0);
+        html += `<p><button id="rv-start" class="primary" type="button">Review my ${wrongs.length} ${blank ? 'wrong or blank' : 'wrong'} answer${wrongs.length === 1 ? '' : 's'}</button></p>`;
+      }
     }
     for (const cl of res.newlyCleared) if (cl.reward) {
       const c = meta.cards[cl.reward.slug];
@@ -398,7 +669,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b)}</p>`; }
     $('verdict').innerHTML = html;
     const seenVis = new Set<string>(); // a visual card shows once per set, with the first missed question of that group
-    $('review').innerHTML = (wrongs.length ? '<h3 class="rev-h">Questions to look at again</h3>' : '') + wrongs.map(({ q, chose }) => {
+    const items = wrongs.map(({ q, chose }) => {
       const showVis = q.visual && !(q.group && seenVis.has(q.group));
       if (q.group) seenVis.add(q.group);
       return `<details class="rev"><summary>${stemHtml(q, true)}</summary>
@@ -406,6 +677,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
        <p>${chose >= 0 ? `You chose ${LETTERS[chose]} (${fmt(q.options[chose])}). ` : 'Not answered. '}Answer: ${LETTERS[q.answer]} (${fmt(q.options[q.answer])}).</p>
        <ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol></details>`;
     }).join('');
+    // a paper steps through these one by one (Review button); the list stays for scanning, folded away
+    $('review').innerHTML = !wrongs.length ? '' : PAPER
+      ? `<details class="rev-all"><summary>See them all as a list</summary>${items}</details>`
+      : `<h3 class="rev-h">Questions to look at again</h3>${items}`;
     const back = mode === 'tier' ? `<a href="/train/${sub.school}/${sub.slug}/">Back to ${esc(sub.name)}</a>`
       : mode === 'paper' ? '<a href="/paper/">Build another paper</a>' : '<a href="/train/">Back to the Schools</a>';
     $('actions').innerHTML = `${back}<a href="/collection/">My cards</a>`;
@@ -414,15 +689,51 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   $('options').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest('button');
-    if (b) choose(Number(b.dataset.k));
+    if (b) (PAPER ? choosePaper : choose)(Number(b.dataset.k));
   });
   document.addEventListener('keydown', (e) => {
     if ($('play').hidden || answered || e.altKey || e.ctrlKey || e.metaKey) return;
     const k = 'abcdefgh'.indexOf(e.key.toLowerCase()), n = '12345678'.indexOf(e.key);
     const pick = k >= 0 ? k : n;
     const btn = $('options').querySelectorAll<HTMLButtonElement>('button')[pick];
+    if (PAPER) { if (pick >= 0 && btn && !$('qbody').hidden && !(e.target as HTMLElement).closest('dialog')) choosePaper(pick); return; }
     if (pick >= 0 && btn && !btn.disabled) choose(pick); // keys past this question's options do nothing
   });
+  // papers: move freely, change answers, pause once, submit when ready
+  $('p-prev').addEventListener('click', () => goTo(i - 1));
+  $('p-next').addEventListener('click', () => goTo(i + 1));
+  $('p-sheet').addEventListener('click', () => toggleSheet($('p-grid').hidden));
+  $('p-grid').addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-j]');
+    if (b) { toggleSheet(false); goTo(Number(b.dataset.j)); }
+  });
+  $('p-pause').addEventListener('click', () => {
+    if (over || !canPause(pclock, Date.now())) return;
+    pclock = startPause(pclock, Date.now());
+    persist();
+    if (over) return;
+    showPaused(true);
+    paperClock();
+  });
+  $('p-resume').addEventListener('click', () => {
+    if (over) return;
+    pclock = endPause(pclock, Date.now());
+    persist();
+    if (over) return;
+    showPaused(false);
+    paperClock();
+  });
+  $('p-submit').addEventListener('click', () => {
+    if (over) return;
+    const b = blanks(picks);
+    $('submit-title').textContent = b ? `${b} question${b === 1 ? ' is' : 's are'} blank` : 'Submit your paper?';
+    $('submit-msg').textContent = b ? 'Submit anyway? You cannot change your answers after submitting.' : 'You cannot change your answers after submitting.';
+    ask('submit-dlg', 'submit-stay', 'submit-go').then((go) => { if (go) finish(); });
+  });
+  $('verdict').addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('#rv-start')) openReview(); });
+  $('rv-prev').addEventListener('click', () => rvStep(-1));
+  $('rv-next').addEventListener('click', () => rvStep(1));
+  $('rv-done').addEventListener('click', () => { show('done'); $('quiz').scrollIntoView({ block: 'start' }); });
   $('next').addEventListener('click', () => (++i < quiz.length ? render() : finish()));
   // tapping an open blank of the passage asks that blank now; the current question moves to just after it
   $('stem').addEventListener('click', (e) => {
@@ -440,18 +751,20 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // started and not finished; nothing is asked before the first question or on the result screen.
   const inProgress = () => !$('play').hidden && !over;
   let leaving = false;
-  function confirmLeave(): Promise<boolean> {
-    const dlg = $('leave-dlg') as HTMLDialogElement;
+  function ask(id: string, stay: string, go: string): Promise<boolean> {
+    const dlg = $(id) as HTMLDialogElement;
     if (dlg.open) return Promise.resolve(false);
     return new Promise((done) => {
-      const end = (go: boolean) => { dlg.close(); done(go); };
-      $('leave-stay').onclick = () => end(false);
-      $('leave-go').onclick = () => end(true);
+      const end = (ok: boolean) => { dlg.close(); done(ok); };
+      $(stay).onclick = () => end(false);
+      $(go).onclick = () => end(true);
+      dlg.onclose = () => done(false); // closed from outside (the paper ended): a no-op if end() already ran
       dlg.oncancel = (e) => { e.preventDefault(); end(false); }; // Esc means Stay
       dlg.showModal(); // modal: the page behind is inert, so focus stays in the dialog
-      $('leave-stay').focus();
+      $(stay).focus();
     });
   }
+  const confirmLeave = () => ask('leave-dlg', 'leave-stay', 'leave-go');
   document.addEventListener('click', (e) => {
     const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
     if (!a || !inProgress() || a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
@@ -467,7 +780,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       if (!go) { if (inProgress()) history.pushState({ quiz: 1 }, ''); return; }
       leaving = true;
       history.back();
-      window.setTimeout(() => { location.href = '/train/'; }, 400); // only runs if back() did not leave the page
+      window.setTimeout(() => { location.href = PAPER ? '/paper/' : '/train/'; }, 400); // only runs if back() did not leave the page
     });
   });
   window.addEventListener('beforeunload', (e) => {
@@ -575,7 +888,40 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     max-width: 45%; text-align: center; overflow-wrap: anywhere; }
   .quiz .qfig-wrap svg { width: 100%; height: auto; display: block; }
   .quiz .per-topic { border-collapse: collapse; margin: 0.5rem 0 1rem; }
-  .quiz .per-topic td, .quiz .per-topic th { border-bottom: 1px solid var(--crust); padding: 0.25rem 0.75rem 0.25rem 0; text-align: left; text-transform: capitalize; }
+  .quiz .per-topic td, .quiz .per-topic th { border-bottom: 1px solid var(--crust); padding: 0.25rem 0.75rem 0.25rem 0; text-align: left; }
+  /* papers: answer sheet, pause, free navigation; the result line; the wrong-answer review */
+  .quiz .pbar button, .quiz .pnav button:not(.primary), .leave-dlg button:not(.primary) {
+    font: 600 1rem var(--font-display); min-height: 44px; padding: 0.4rem 0.9rem; color: var(--cocoa);
+    background: var(--cream); border: 1.5px solid var(--crust); border-radius: var(--radius-control); cursor: pointer;
+  }
+  .leave-dlg .primary { font: 600 1rem var(--font-display); min-height: 44px; padding: 0.4rem 1.1rem; border: 0;
+    border-radius: var(--radius-control); background: var(--berry); color: var(--berry-ink); cursor: pointer; }
+  .quiz button:disabled { opacity: 0.5; cursor: default; }
+  .quiz .opt:disabled { opacity: 1; }
+  .quiz.paper #play .status { position: sticky; top: 0; z-index: 2; background: var(--paper); padding: 0.4rem 0; }
+  .quiz .pbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; margin-top: 0.5rem; }
+  .quiz .pnav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; margin-top: 1.25rem; }
+  .quiz #rv .pnav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .quiz .pnav .primary { padding-inline: 0.5rem; }
+  .quiz .opt.sel { border: 2.5px solid var(--berry); background: color-mix(in srgb, var(--berry) 12%, var(--cream)); font-weight: 600; }
+  .quiz .opt.sel .letter { display: inline-grid; place-items: center; width: 1.7em; height: 1.7em; border-radius: 50%;
+    background: var(--berry); color: var(--berry-ink); }
+  .quiz .p-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 0.4rem; margin-top: 0.75rem;
+    padding: 0.75rem; border: 1.5px dashed var(--crust); border-radius: var(--radius-card); }
+  .quiz .p-grid .cell { min-height: 44px; font: 600 1rem var(--font-display); color: var(--cocoa); background: transparent;
+    border: 1.5px solid var(--cocoa-soft); border-radius: 8px; cursor: pointer; }
+  .quiz .p-grid .cell.done { background: var(--berry); color: var(--berry-ink); border-color: var(--berry); }
+  .quiz .p-grid .cell.cur { outline: 3px solid var(--cocoa); outline-offset: 2px; }
+  .quiz .p-grid .legend { grid-column: 1 / -1; margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--cocoa-soft); }
+  .quiz .p-paused { text-align: center; padding: 1.5rem 0 0.5rem; }
+  .quiz .p-paused [role='timer'] { font: 600 1.2rem var(--font-display); font-variant-numeric: tabular-nums; }
+  .quiz .cheer { font: 600 1.15rem/1.4 var(--font-display); margin: 0.25rem 0 0.6rem; color: var(--cocoa); }
+  .quiz .cheer-en { margin: -0.35rem 0 0.75rem; font-size: 0.92rem; color: var(--cocoa-soft); }
+  .quiz .ptime { color: var(--cocoa-soft); margin: 0 0 0.5rem; }
+  .quiz .linkish { font: inherit; min-height: 44px; padding: 0 0.25rem; background: none; border: 0; color: var(--berry);
+    text-decoration: underline; cursor: pointer; }
+  .quiz #rv .status { flex-wrap: wrap; }
+  .quiz .rev-all > summary { padding: 0.65rem 0; cursor: pointer; font: 600 1rem var(--font-display); color: var(--cocoa); }
   .quiz .fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; font-size: 0.85em; line-height: 1.05; margin: 0 0.1em; }
   .quiz .fr .n { border-bottom: 1.5px solid currentColor; padding: 0 0.15em; }
   .quiz .fr .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

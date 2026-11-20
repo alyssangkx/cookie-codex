@@ -3,8 +3,11 @@
 import rewards from '../data/rewards.json';
 import mathSyllabus from '../data/syllabus/math.json';
 import chineseSyllabus from '../data/syllabus/chinese.json';
+import englishSyllabus from '../data/syllabus/english.json';
+import scienceSyllabus from '../data/syllabus/science.json';
 import { cookies } from './data';
 import { MIN_POOL, type School, type Tier } from './store';
+import { paperOk } from './paper';
 
 export { MIN_POOL };
 
@@ -82,10 +85,16 @@ export const cookieBySlug = new Map(cookies.map((c) => [c.slug, c]));
 export const cardInfo = Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image, rarity: c.rarity }]));
 export const milestones = rewards.milestones as Record<string, string[]>;
 
-const topicName = new Map([mathSyllabus, chineseSyllabus].flatMap((syl) =>
+const topicName = new Map([mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
   syl.strands.flatMap((st) => st.topics.map((t) => [t.id, t.name] as [string, string]))));
-/** Topics that have a question bank, for the WA/SA paper builder. */
+const PREFIX_SCHOOL: Record<string, School> = { math: 'math', sci: 'science', eng: 'english', chi: 'chinese' };
+/** Subjects the WA/SA builder offers. Chinese stays out for now (its banks are mostly passage and 8-option sets). */
+export const PAPER_SCHOOLS: School[] = ['math', 'english', 'science'];
+/** Topics with paper-ready questions (4 options, not in a passage set: paperOk), for the WA/SA paper builder. */
 export const paperTopics = banks
-  .filter((b) => b.topic.startsWith('math-')) // the WA/SA builder is Math-only for now
-  .map((b) => ({ id: b.topic, name: topicName.get(b.topic) ?? b.topic, count: b.questions.length }))
+  .map((b) => ({
+    id: b.topic, name: topicName.get(b.topic) ?? b.topic, school: PREFIX_SCHOOL[b.topic.split('-')[0]],
+    count: b.questions.filter(paperOk).length,
+  }))
+  .filter((t) => PAPER_SCHOOLS.includes(t.school) && t.count > 0)
   .sort((a, b) => a.name.localeCompare(b.name));

@@ -197,6 +197,7 @@ const data = {
     gave_other_person: 'Answered for the wrong person',
     took_second_fraction_of_total: 'Took a fraction of the total instead of the remainder',
     ran_out_of_time: 'Ran out of time',
+    blank: 'Left blank on a paper',
   };
   const humanise = (t: string) => TAG_LABELS[t] ?? (t.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()));
   const subName = new Map(P.subs.map((x) => [x.id, x.name]));

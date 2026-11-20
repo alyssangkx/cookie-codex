@@ -1,22 +1,33 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { paperTopics } from '../../lib/train';
+import { paperTopics, PAPER_SCHOOLS } from '../../lib/train';
 import { MIXES } from '../../lib/pick';
+const SUBJECT = { math: 'Math', english: 'English', science: 'Science', chinese: 'Chinese' } as const;
+const schools = PAPER_SCHOOLS.filter((sc) => paperTopics.some((t) => t.school === sc));
 ---
-<Base title="Practice paper · PSLE training" description="Build a Math practice test or exam paper from the topics you choose.">
+<Base title="Practice paper · PSLE training" description="Build a Math, English or Science practice test or exam paper from the topics you choose.">
   <section class="wrap paper">
     <p class="crumbs"><a href="/train/">Schools of Mastery</a> › Practice paper</p>
     <h1>Build a practice paper</h1>
-    <p class="lede">School tests (Weighted Assessments) and exams (Semestral and Prelim papers) mix several topics. This builder is for Math only for now. Pick the topics your class has covered and the paper will mix them, from easier to harder, against the clock. Papers count toward today's goal but not toward clearing tiers.</p>
+    <p class="lede">School tests (Weighted Assessments) and exams (Semestral and Prelim papers) mix several topics. Choose a subject, pick the topics your class has covered, and the paper mixes them from easier to harder, against the clock. Answer every question, change any answer you like, then submit to see your score and go through the ones you missed. Papers count toward today's goal but not toward clearing tiers.</p>
+    <p id="resume" class="resume" hidden>You have a paper in progress, and its clock is still running. <a class="primary" href="/quiz/?mode=paper&amp;resume=1">Resume paper</a></p>
     <form action="/quiz/" method="get" id="paper-form">
       <input type="hidden" name="mode" value="paper" />
       <input type="hidden" name="topics" id="topics" />
+      <fieldset>
+        <legend>Subject</legend>
+        <div class="subjects">
+          {schools.map((sc, i) => (
+            <label class="subject"><input type="radio" name="subject" value={sc} checked={i === 0} /> {SUBJECT[sc]}</label>
+          ))}
+        </div>
+      </fieldset>
       <fieldset>
         <legend>Topics</legend>
         <p><button type="button" id="all">Select all</button></p>
         <div class="topics">
           {paperTopics.map((t) => (
-            <label class="topic"><input type="checkbox" value={t.id} /> {t.name} <span class="n">{t.count} questions</span></label>
+            <label class="topic" data-school={t.school}><input type="checkbox" value={t.id} /> {t.name} <span class="n">{t.count} questions</span></label>
           ))}
         </div>
       </fieldset>
@@ -38,9 +49,19 @@ import { MIXES } from '../../lib/pick';
 </Base>
 
 <script>
+  import { load } from '../../lib/store';
+  import { loadDraft, draftOwner } from '../../lib/paper';
   const form = document.getElementById('paper-form') as HTMLFormElement;
-  const boxes = () => [...form.querySelectorAll<HTMLInputElement>('.topic input')];
+  // one subject per paper: only the chosen subject's topics show, and only they are sent
+  const subject = () => form.querySelector<HTMLInputElement>('input[name="subject"]:checked')?.value ?? 'math';
+  const boxes = () => [...form.querySelectorAll<HTMLInputElement>('.topic input')]
+    .filter((b) => b.closest<HTMLElement>('.topic')!.dataset.school === subject());
+  const showSubject = () => form.querySelectorAll<HTMLElement>('.topic').forEach((l) => (l.hidden = l.dataset.school !== subject()));
+  form.querySelectorAll('input[name="subject"]').forEach((r) => r.addEventListener('change', showSubject));
+  showSubject();
   document.getElementById('all')!.addEventListener('click', () => boxes().forEach((b) => (b.checked = true)));
+  // a paper already started (its draft) must be finished first; the quiz page resumes it whatever is chosen here
+  if (loadDraft(draftOwner(load().createdAt))) document.getElementById('resume')!.hidden = false;
   form.addEventListener('submit', (e) => {
     const picked = boxes().filter((b) => b.checked).map((b) => b.value);
     (document.getElementById('topics') as HTMLInputElement).value = picked.join(',');
@@ -50,6 +71,10 @@ import { MIXES } from '../../lib/pick';
 </script>
 
 <style>
+  .resume { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; padding: 0.75rem 1rem; border: 2px solid var(--berry); border-radius: var(--radius-card); background: var(--paper); font-weight: 600; }
+  .resume a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border-radius: var(--radius-control); text-decoration: none; font-family: var(--font-display); }
+  .subjects { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+  .topic[hidden] { display: none; }
   .paper { padding-block: 1.5rem 2rem; max-width: 760px; }
   .crumbs { margin: 0; font-size: 0.95rem; color: var(--cocoa-soft); }
   .lede { color: var(--cocoa-soft); }

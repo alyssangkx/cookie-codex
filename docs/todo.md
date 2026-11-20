@@ -90,12 +90,14 @@ outside the repo.
 
 ## Learning loop (`docs/learning-loop-design.md`, owner decisions 1–10 accepted)
 
-1. [ ] **Encouragement lines on results (S):** score bands, 20 English and 20 Chinese lines (Chinese with English
-   underneath in term 1). The owner edits the table in the design doc.
-2. [ ] **Submit-then-review for WA/SA papers (M):**
-   - answer everything against the clock, submit, see the score, then step through only the wrong answers;
-   - wall clock, one pause of up to 10 minutes, submits itself at zero;
-   - add English and Science papers.
+1. [x] **Encouragement lines on results (S):** score bands, 20 English and 20 Chinese lines (Chinese with English
+   underneath until 31 Mar 2027). Built 20 Nov 2026; the owner edits `site/src/data/encouragement.json`.
+2. [x] **Submit-then-review for WA/SA papers (M):** built 20 Nov 2026 (`site/src/lib/paper.ts`):
+   - answer everything against the clock, submit, see the score, then step through only the wrong and blank answers;
+   - wall clock, one pause of up to 10 minutes, submits itself at zero; a reload resumes the paper;
+   - English and Science papers: added, with items outside passage sets only (Grammar, Vocabulary; all Science).
+   - [ ] Later: English cloze and comprehension sets as whole sets in papers; keep `ids`/`picks` on the last 20 papers
+     so a review can reopen later; flag-a-question on the answer sheet.
 3. [ ] **Initial assessment, study plan and re-assessment cycle (L):**
    - one subject a day in the December holidays;
    - cards stay on tier mastery, with a "Competent" badge added;
