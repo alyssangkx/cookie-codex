@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-1433 shipped questions (basic 478, intermediate 479, competent 476), 631 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+1433 shipped questions (basic 478, intermediate 479, competent 476), 626 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 

@@ -5058,12 +5058,12 @@
    "outcomes": [
     "sci-interactions-forces-investigate-2"
    ],
-   "stem": "A spring carried a very heavy load. When the load was removed, the spring did not go back to its first length. What is the most likely reason?",
+   "stem": "A load was hung on a spring. When the load was removed, the spring did not go back to its first length. What is the most likely reason?",
    "options": [
     "The spring was not hung from a stand",
     "The spring was too short at the start",
     "The spring was stretched too much",
-    "The load was too light"
+    "The spring was hung from a stand that was too low"
    ],
    "answer": 2,
    "explain": [
@@ -5077,8 +5077,8 @@
     },
     null,
     {
-     "tag": "wrong-reason",
-     "why": "A light load does not damage a spring."
+     "tag": "irrelevant",
+     "why": "The height of the stand does not change how far the spring itself is stretched."
     }
    ],
    "solution": [
