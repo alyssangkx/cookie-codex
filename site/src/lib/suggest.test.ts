@@ -77,6 +77,24 @@ test('dueCount uses isDue and the optional question map', () => {
   assert.equal(dueCount(s, NOW, { q1: 'math-a' }), 1);
 });
 
+test('dueCount skips parked retests without a map, and counts them when the map proves the question exists', () => {
+  const s = real();
+  s.questions.q1 = { s: 1, due: NOW - 1, w: 1 };
+  s.questions.q2 = { s: 2, due: NOW - 1, w: 1, parked: true };
+  s.questions.q3 = { s: 3, due: NOW - 1, w: 1, parked: true };
+  assert.equal(dueCount(s, NOW), 1);
+  assert.equal(dueCount(s, NOW, { q1: 'math-a', q2: 'math-a' }), 2);
+});
+
+test('keep going ignores a stored mastered count whose id hash differs from the current tier (same size)', () => {
+  const s = real();
+  s.progress['math-a'] = { b: { passes: [], scores: [], best: 50, cleared: false, mastered: 5, total: 25, hash: 'old' } };
+  const sub: SubInfo = { ...mk('math-a', 't'), count: { b: 25, i: 0, c: 0 }, hash: { b: 'new', i: '', c: '' } };
+  assert.ok(!run(s, [sub]).some((x) => x.kind === 'one-more'));
+  sub.hash!.b = 'old';
+  assert.ok(run(s, [sub]).some((x) => x.kind === 'one-more'));
+});
+
 test('keep going: a part-mastered tier is suggested with N of M mastered', () => {
   const subs = [mk('math-a', 't'), mk('math-b', 't')];
   const s = real(); clear(s, 'math-a', 'b'); onePass(s, 'math-b', 'b');

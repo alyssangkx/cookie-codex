@@ -7,6 +7,7 @@ export interface SubInfo {
   id: string; topic: string; topicName: string; name: string; slug: string;
   playable: Record<Tier, boolean>;
   count?: Record<Tier, number>; // questions per tier, for the "N of M mastered" wording
+  hash?: Record<Tier, string>; // tierHash of each tier's question ids (train.ts), so a redesigned tier reads as stale
 }
 export interface Suggestion {
   kind: 'review' | 'one-more' | 'weak' | 'next' | 'done';
@@ -50,12 +51,13 @@ export function schoolPower(s: SaveV1, subs: SubInfo[]): number {
   return powers.length ? Math.round(powers.reduce((a, b) => a + b, 0) / powers.length) : 0;
 }
 
-/** Questions due for retest. With a question-to-sub map, only questions of known subs are counted. */
+/** Questions due for retest. Without a map, parked states (in no bank at the last Daily Review) are skipped. With a
+ *  question-to-sub map, only questions of known subs are counted, parked or not (the map proves they exist). */
 export function dueCount(s: SaveV1, now: number, questionSub?: Record<string, string>): number {
   let n = 0;
   for (const id of Object.keys(s.questions)) {
     if (questionSub && !questionSub[id]) continue;
-    if (isDue(s, id, now)) n++;
+    if (isDue(s, id, now, !!questionSub)) n++;
   }
   return n;
 }
@@ -115,11 +117,11 @@ export function suggestions(
   for (const sub of subs) {
     const hit = TIERS.find((t) => {
       const st = tierState(s, sub.id, t);
-      return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t]) > 0; // a count from a replaced bank is 0
+      return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t], sub.hash?.[t]) > 0; // a count from a replaced bank is 0
     });
     if (hit) {
       const total = sub.count![hit]; // liveMastered > 0 above means the count is known and matches the stored total
-      const m = liveMastered(tierState(s, sub.id, hit), total);
+      const m = liveMastered(tierState(s, sub.id, hit), total, sub.hash?.[hit]);
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
         reason: `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`, href: tierHref(sub.id, hit),

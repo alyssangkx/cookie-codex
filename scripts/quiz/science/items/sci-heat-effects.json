@@ -1,0 +1,2430 @@
+{
+  "subtopic": "sci-energy-heat-effects",
+  "items": [
+    {
+      "key": "he-001",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which of the following is a good conductor of heat?",
+      "options": [
+        "A steel spoon",
+        "A wooden spoon",
+        "A plastic cup",
+        "A rubber band"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Wood is a poor conductor of heat."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Plastic is a poor conductor of heat."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Rubber is a poor conductor of heat."
+        }
+      ],
+      "solution": [
+        "Metals such as steel are good conductors of heat."
+      ]
+    },
+    {
+      "key": "he-002",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Why are cooking pots usually made of metal?",
+      "options": [
+        "Metal is a poor conductor, so heat stays inside the pot",
+        "Metal does not gain any heat from the stove",
+        "Metal is a good insulator of heat",
+        "Metal is a good conductor, so food heats quickly"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Metal is a good conductor of heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal gains heat from the stove quickly."
+        },
+        {
+          "tag": "reversed",
+          "why": "A good insulator is a poor conductor. Metal conducts heat well."
+        },
+        null
+      ],
+      "solution": [
+        "A metal pot conducts heat from the stove to the food."
+      ]
+    },
+    {
+      "key": "he-003",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "The handle of a pot is made of plastic. Why?",
+      "options": [
+        "Plastic is a good conductor, so heat leaves the handle quickly",
+        "Plastic expands more than metal does",
+        "Plastic is a poor conductor, so the handle stays cooler",
+        "Plastic is a good conductor, so it spreads heat to the food"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Plastic is a poor conductor of heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This is not the reason a handle is made of plastic."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Plastic is a poor conductor of heat."
+        }
+      ],
+      "solution": [
+        "A poor conductor does not carry the heat to our hand."
+      ]
+    },
+    {
+      "key": "he-004",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "What usually happens to a solid when it gains heat?",
+      "options": [
+        "It contracts",
+        "It expands",
+        "It always melts",
+        "It always turns into a gas"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A solid usually contracts when it loses heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Many solids expand without melting."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Most solids do not change into a gas when heated."
+        }
+      ],
+      "solution": [
+        "Most solids expand when they gain heat."
+      ]
+    },
+    {
+      "key": "he-005",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A sealed balloon filled with air is left in the hot Sun. What happens to the air inside?",
+      "options": [
+        "It expands",
+        "It contracts",
+        "It becomes heavier",
+        "It turns into a liquid"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Air contracts when it loses heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heating does not change the mass of the air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Warm air does not turn into a liquid."
+        }
+      ],
+      "solution": [
+        "A gas expands when it gains heat."
+      ]
+    },
+    {
+      "key": "he-006",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal lid is stuck tightly on a glass jar. Which of these will help loosen the lid?",
+      "options": [
+        "Running cold water over the lid",
+        "Putting the whole jar into a freezer",
+        "Pouring cold milk into the jar",
+        "Running hot water over the lid"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Cold makes the lid contract and grip even more tightly."
+        },
+        {
+          "tag": "reversed",
+          "why": "Cold makes the lid contract and grip more tightly."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This does not make the lid any bigger."
+        },
+        null
+      ],
+      "solution": [
+        "Heat makes the metal lid expand, so it becomes looser."
+      ]
+    },
+    {
+      "key": "he-007",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "There are small gaps between the sections of a railway track. Why?",
+      "options": [
+        "So that the tracks can contract more on hot days",
+        "So that the trains can travel faster",
+        "So that the tracks have space to expand on hot days",
+        "So that rain can flow away"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Tracks expand, not contract, on hot days."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The gaps are not there to make trains faster."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The gaps are for expansion, not drainage."
+        }
+      ],
+      "solution": [
+        "The tracks expand in the heat, and the gaps stop them from bending."
+      ]
+    },
+    {
+      "key": "he-008",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A thermometer is placed in hot water. What happens to the liquid inside it?",
+      "options": [
+        "It contracts and goes down the tube",
+        "It expands and rises up the tube",
+        "It stays at the same level",
+        "It turns into a gas and escapes"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The liquid contracts only when it loses heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The liquid gains heat, so it changes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The liquid stays inside the tube."
+        }
+      ],
+      "solution": [
+        "The liquid gains heat and expands, so it rises."
+      ]
+    },
+    {
+      "key": "he-009",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A thermometer is moved from warm water into ice water. What happens to the liquid inside it?",
+      "options": [
+        "It contracts and moves down",
+        "It expands and goes up the tube",
+        "It stays at the same level",
+        "It freezes at once"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The liquid expands only when it gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The liquid loses heat, so it changes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The liquid used in a thermometer does not freeze in ice water."
+        }
+      ],
+      "solution": [
+        "The liquid loses heat and contracts."
+      ]
+    },
+    {
+      "key": "he-010",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which of the following is a poor conductor of heat?",
+      "options": [
+        "A copper coin",
+        "A steel nail",
+        "An iron rod",
+        "A wooden block"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Copper is a metal, so it is a good conductor."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Steel is a metal, so it is a good conductor."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Iron is a metal, so it is a good conductor."
+        },
+        null
+      ],
+      "solution": [
+        "Wood is a poor conductor of heat."
+      ]
+    },
+    {
+      "key": "he-011",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Why do people wear woollen clothes in cold places?",
+      "options": [
+        "Wool makes heat for the body",
+        "Wool is a good conductor, so it brings heat to the body",
+        "Trapped air in wool slows down heat loss",
+        "Wool lets the cold air go into the body"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Wool does not make heat."
+        },
+        {
+          "tag": "reversed",
+          "why": "Wool is a poor conductor."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Cold does not flow in. Heat flows out of the body."
+        }
+      ],
+      "solution": [
+        "Trapped air slows down the heat lost from the body."
+      ]
+    },
+    {
+      "key": "he-012",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "What happens when ice gains heat at room temperature?",
+      "options": [
+        "It freezes",
+        "It melts into water",
+        "It becomes colder",
+        "It condenses"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Freezing happens when water loses heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Gaining heat makes it warmer, not colder."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Condensation is a gas changing into a liquid."
+        }
+      ],
+      "solution": [
+        "Ice melts when it gains heat."
+      ]
+    },
+    {
+      "key": "he-013",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "What happens to water when it loses a lot of heat in a freezer?",
+      "options": [
+        "It freezes into ice",
+        "It boils",
+        "It evaporates",
+        "It turns into a gas"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Boiling happens when water gains heat."
+        },
+        {
+          "tag": "reversed",
+          "why": "Evaporation happens when water gains heat."
+        },
+        {
+          "tag": "reversed",
+          "why": "Water turns into a gas when it gains heat."
+        }
+      ],
+      "solution": [
+        "Water freezes when it loses enough heat."
+      ]
+    },
+    {
+      "key": "he-014",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal ball can only just pass through a ring when both are cold. The ball is heated and then placed on the ring as shown. The ball does not pass through. Why?",
+      "options": [
+        "The heated ball has contracted",
+        "The ring has become heavier",
+        "The ball has become lighter",
+        "The heated ball has expanded"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heat makes a solid expand."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ring has not changed in mass."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heating does not make the ball lighter."
+        },
+        null
+      ],
+      "solution": [
+        "The ball gained heat and expanded, so it is too big for the ring."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">The heated ball and the ring</text><ellipse cx=\"150\" cy=\"108\" rx=\"34\" ry=\"8\" stroke-width=\"3\"/><line x1=\"184\" y1=\"108\" x2=\"240\" y2=\"108\" stroke-width=\"3\"/><line x1=\"240\" y1=\"108\" x2=\"240\" y2=\"186\" stroke-width=\"3\"/><line x1=\"210\" y1=\"186\" x2=\"270\" y2=\"186\" stroke-width=\"3\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"64\" stroke-width=\"1.5\"/><circle cx=\"150\" cy=\"84\" r=\"22\" fill=\"currentColor\" fill-opacity=\"0.2\"/></svg>"
+    },
+    {
+      "key": "he-015",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal ball is just too big to pass through a ring. The ball is then cooled for a long time. What happens when it is put on the ring again?",
+      "options": [
+        "It still cannot pass through the ring",
+        "It becomes too big for the ring",
+        "It passes through the ring",
+        "It melts and sticks to the ring"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Cooling makes the ball contract."
+        },
+        {
+          "tag": "reversed",
+          "why": "Cooling makes the ball smaller, not bigger."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Cooling does not melt a metal."
+        }
+      ],
+      "solution": [
+        "The cooled ball contracts, so it is small enough to pass."
+      ]
+    },
+    {
+      "key": "he-016",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Metal rods P, Q and R are heated at one end in the same way. The pins on the rods are stuck on with wax and fall off when the wax melts. Which rod is the best conductor of heat?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "They are all equally good"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-rod",
+          "why": "Only one pin fell from Q, so heat travelled slowly in it."
+        },
+        null,
+        {
+          "tag": "wrong-rod",
+          "why": "No pin fell from R, so heat travelled the slowest in it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The pins fell off at different times, so they are different."
+        }
+      ],
+      "solution": [
+        "All the pins fell from P, so heat travelled furthest and fastest in P."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"190.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rods with pins, in hot water</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"120\" rx=\"4\"/><text x=\"45\" y=\"99.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot</text><text x=\"45\" y=\"113.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">water</text><line x1=\"80\" y1=\"168\" x2=\"370\" y2=\"168\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><rect x=\"80\" y=\"50\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"59\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"192\" y1=\"165\" x2=\"208\" y2=\"165\" stroke-width=\"2\"/><line x1=\"262\" y1=\"165\" x2=\"278\" y2=\"165\" stroke-width=\"2\"/><rect x=\"80\" y=\"88\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"97\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"200\" y1=\"96\" x2=\"200\" y2=\"109\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"96\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"270\" y1=\"96\" x2=\"270\" y2=\"109\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"96\" r=\"2.5\" fill=\"currentColor\"/><rect x=\"80\" y=\"126\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><line x1=\"130\" y1=\"134\" x2=\"130\" y2=\"147\" stroke-width=\"2\"/><circle cx=\"130\" cy=\"134\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"200\" y1=\"134\" x2=\"200\" y2=\"147\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"134\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"270\" y1=\"134\" x2=\"270\" y2=\"147\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"134\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "he-017",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "In the same kind of test, rods A, B and C are heated at one end. Which rod is the poorest conductor of heat?",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "A and B"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-rod",
+          "why": "Two pins fell from B, so heat travelled quite far in it."
+        },
+        {
+          "tag": "wrong-rod",
+          "why": "All pins fell from C, so it is the best conductor."
+        },
+        {
+          "tag": "wrong-rod",
+          "why": "Only A is the poorest, because no pin fell from it."
+        }
+      ],
+      "solution": [
+        "No pin fell from A, so heat travelled the slowest in it."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><defs><marker id=\"ah\" markerUnits=\"userSpaceOnUse\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"5\" orient=\"auto\"><path d=\"M0,0 L10,5 L0,10 z\" fill=\"currentColor\"/></marker></defs><text x=\"190.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rods with pins, in hot water</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"120\" rx=\"4\"/><text x=\"45\" y=\"99.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot</text><text x=\"45\" y=\"113.0\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">water</text><line x1=\"80\" y1=\"168\" x2=\"370\" y2=\"168\" stroke-width=\"1\" stroke-dasharray=\"3 4\"/><rect x=\"80\" y=\"50\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"59\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><line x1=\"130\" y1=\"58\" x2=\"130\" y2=\"71\" stroke-width=\"2\"/><circle cx=\"130\" cy=\"58\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"200\" y1=\"58\" x2=\"200\" y2=\"71\" stroke-width=\"2\"/><circle cx=\"200\" cy=\"58\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"270\" y1=\"58\" x2=\"270\" y2=\"71\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"58\" r=\"2.5\" fill=\"currentColor\"/><rect x=\"80\" y=\"88\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"97\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"192\" y1=\"165\" x2=\"208\" y2=\"165\" stroke-width=\"2\"/><line x1=\"270\" y1=\"96\" x2=\"270\" y2=\"109\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"96\" r=\"2.5\" fill=\"currentColor\"/><rect x=\"80\" y=\"126\" width=\"260\" height=\"8\" fill=\"none\"/><text x=\"362\" y=\"135\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><line x1=\"122\" y1=\"165\" x2=\"138\" y2=\"165\" stroke-width=\"2\"/><line x1=\"192\" y1=\"165\" x2=\"208\" y2=\"165\" stroke-width=\"2\"/><line x1=\"262\" y1=\"165\" x2=\"278\" y2=\"165\" stroke-width=\"2\"/></svg>"
+    },
+    {
+      "key": "he-018",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "The table shows the time taken for the wax on the end of each rod to melt when the other end was heated. Which two rods are the best conductors of heat?",
+      "options": [
+        "B and D",
+        "A and B",
+        "C and D",
+        "A and C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "B and D took the longest time, so they are poor conductors."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "B took a long time, so it is a poor conductor."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "D took a long time, so it is a poor conductor."
+        },
+        null
+      ],
+      "solution": [
+        "A shorter time means a better conductor of heat. A and C have the shortest times."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four rods</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rod</text><rect x=\"80\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"175.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for wax to melt (s)</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">A</text><rect x=\"80\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"175.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">12</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"80\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"175.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">85</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"80\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"175.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">9</text><rect x=\"10\" y=\"160\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">D</text><rect x=\"80\" y=\"160\" width=\"190\" height=\"30\"/><text x=\"175.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">70</text></svg>"
+    },
+    {
+      "key": "he-019",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A cup has two plastic walls with a layer of air trapped between them. Why does this help to keep a hot drink hot?",
+      "options": [
+        "Air is a good conductor, so it keeps the heat in",
+        "Air makes more heat for the drink",
+        "Air is a poor conductor, so heat escapes slowly",
+        "Air is heavy, so it keeps the cup steady"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Air is a poor conductor of heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air does not make heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "This has nothing to do with heat."
+        }
+      ],
+      "solution": [
+        "Trapped air is a poor conductor, so it slows the heat loss."
+      ]
+    },
+    {
+      "key": "he-020",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which material is the best choice for the handle of a frying pan?",
+      "options": [
+        "Copper",
+        "Wood",
+        "Iron",
+        "Aluminium"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "Copper is a good conductor, so the handle would get very hot."
+        },
+        null,
+        {
+          "tag": "wrong-material",
+          "why": "Iron is a good conductor, so the handle would get very hot."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "Aluminium is a good conductor, so the handle would get very hot."
+        }
+      ],
+      "solution": [
+        "Wood is a poor conductor, so the handle stays cooler."
+      ]
+    },
+    {
+      "key": "he-021",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A wet cloth is hung in the Sun and becomes dry. What happens to the water in the cloth?",
+      "options": [
+        "It gains heat and evaporates",
+        "It loses heat and freezes into ice",
+        "It loses heat and condenses",
+        "It gains heat and melts"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The Sun gives heat. The water does not lose heat."
+        },
+        {
+          "tag": "reversed",
+          "why": "Condensation happens when a gas loses heat."
+        },
+        {
+          "tag": "wrong-term",
+          "why": "Melting is a solid becoming a liquid."
+        }
+      ],
+      "solution": [
+        "The water gains heat from the Sun and changes into water vapour."
+      ]
+    },
+    {
+      "key": "he-022",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal spoon and a plastic spoon are placed in a bowl of hot soup. After a minute, which end of each spoon feels hotter?",
+      "options": [
+        "The top end of the plastic spoon",
+        "Both feel equally hot",
+        "Neither spoon becomes hot",
+        "The top end of the metal spoon"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Plastic is a poor conductor, so its top end stays cooler."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal conducts heat much better than plastic."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal conducts heat up the spoon to our hand."
+        },
+        null
+      ],
+      "solution": [
+        "Heat travels up the metal spoon quickly because metal is a good conductor."
+      ]
+    },
+    {
+      "key": "he-023",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which sentence about conductors of heat is correct?",
+      "options": [
+        "Wood is a good conductor of heat",
+        "Air is a good conductor of heat",
+        "Metals are good conductors of heat",
+        "Rubber is a good conductor of heat"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Wood is a poor conductor."
+        },
+        {
+          "tag": "reversed",
+          "why": "Air is a poor conductor."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Rubber is a poor conductor."
+        }
+      ],
+      "solution": [
+        "Metals are good conductors; wood, air and rubber are poor conductors."
+      ]
+    },
+    {
+      "key": "he-024",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Overhead cables hang lower on a hot day than on a cold day. Why?",
+      "options": [
+        "The cables contract on a hot day",
+        "The cables expand and become longer",
+        "The pull of gravity is stronger on a hot day",
+        "The poles become shorter on a hot day"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Cables expand when they gain heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Gravity does not change with the weather."
+        },
+        {
+          "tag": "reversed",
+          "why": "Poles also expand when hot, they do not shrink."
+        }
+      ],
+      "solution": [
+        "The cables gain heat and expand, so they sag."
+      ]
+    },
+    {
+      "key": "he-025",
+      "level": "basic",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "An ice cube melts faster on a metal tray than on a plastic tray in the same room. Why?",
+      "options": [
+        "Metal passes heat to the ice faster",
+        "Metal is a poor conductor, so it traps heat",
+        "Plastic is a good conductor of heat",
+        "Metal makes its own heat"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Metal is a good conductor of heat."
+        },
+        {
+          "tag": "reversed",
+          "why": "Plastic is a poor conductor."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal does not make heat."
+        }
+      ],
+      "solution": [
+        "Metal is a better conductor, so heat reaches the ice faster."
+      ]
+    },
+    {
+      "key": "he-101",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A flask full of coloured water is placed in a bath of hot water. The liquid rises in the thin tube as shown. Why?",
+      "options": [
+        "The water in the flask expands",
+        "The water in the flask contracts",
+        "The water in the flask becomes heavier",
+        "Air from the bath enters the flask"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "A liquid contracts when it loses heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heating does not add mass."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The flask is closed. The liquid itself changes."
+        }
+      ],
+      "solution": [
+        "The water gains heat, expands and has to rise up the tube."
+      ],
+      "figure": "<svg viewBox=\"0 0 260 274\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flask in a bath</text><path d=\"M125.0 34 V141.2 A40 40 0 1 0 135.0 141.2 V34\" stroke-width=\"2.5\"/><circle cx=\"130\" cy=\"178\" r=\"36\" fill=\"currentColor\" fill-opacity=\"0.4\" stroke=\"none\"/><rect x=\"126.5\" y=\"68.6\" width=\"7\" height=\"79.4\" fill=\"currentColor\" fill-opacity=\"0.4\" stroke=\"none\"/><line x1=\"135\" y1=\"125.0\" x2=\"142\" y2=\"125.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"108.0\" x2=\"142\" y2=\"108.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"91.0\" x2=\"142\" y2=\"91.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"74.0\" x2=\"142\" y2=\"74.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"57.0\" x2=\"142\" y2=\"57.0\" stroke-width=\"1\"/><line x1=\"108\" y1=\"99.2\" x2=\"152\" y2=\"99.2\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><text x=\"104\" y=\"103.16\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">start</text><path d=\"M64 168 V240 H196 V168\" stroke-width=\"2\"/><text x=\"130\" y=\"260\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text></svg>"
+    },
+    {
+      "key": "he-102",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "The same flask is moved to a bath of ice water. The liquid goes down the tube as shown. What does this show?",
+      "options": [
+        "A liquid expands when it loses heat",
+        "A liquid expands when it gains heat",
+        "A liquid does not change when it loses heat",
+        "A liquid contracts when it loses heat"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The level went down, so the liquid took up less space."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The liquid was cooled, not heated, in this test."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The level changed, so the liquid changed."
+        },
+        null
+      ],
+      "solution": [
+        "The level fell because the cooled liquid contracted."
+      ],
+      "figure": "<svg viewBox=\"0 0 260 274\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"130.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flask in a bath</text><path d=\"M125.0 34 V141.2 A40 40 0 1 0 135.0 141.2 V34\" stroke-width=\"2.5\"/><circle cx=\"130\" cy=\"178\" r=\"36\" fill=\"currentColor\" fill-opacity=\"0.4\" stroke=\"none\"/><rect x=\"126.5\" y=\"121.6\" width=\"7\" height=\"26.4\" fill=\"currentColor\" fill-opacity=\"0.4\" stroke=\"none\"/><line x1=\"135\" y1=\"125.0\" x2=\"142\" y2=\"125.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"108.0\" x2=\"142\" y2=\"108.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"91.0\" x2=\"142\" y2=\"91.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"74.0\" x2=\"142\" y2=\"74.0\" stroke-width=\"1\"/><line x1=\"135\" y1=\"57.0\" x2=\"142\" y2=\"57.0\" stroke-width=\"1\"/><line x1=\"108\" y1=\"99.2\" x2=\"152\" y2=\"99.2\" stroke-width=\"1.2\" stroke-dasharray=\"3 3\"/><text x=\"104\" y=\"103.16\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">start</text><path d=\"M64 168 V240 H196 V168\" stroke-width=\"2\"/><text x=\"130\" y=\"260\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">ice water</text></svg>"
+    },
+    {
+      "key": "he-103",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A balloon is stretched over the neck of a flask. The flask is placed in hot water and the balloon becomes bigger as shown. Why?",
+      "options": [
+        "Hot water enters the flask and pushes up the balloon",
+        "The air in the flask gains mass",
+        "The air in the flask gains heat and expands",
+        "The air in the flask contracts"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The water stays outside the flask."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No air is added, so the mass stays the same."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Air contracts only when it loses heat."
+        }
+      ],
+      "solution": [
+        "The warmed air expands and fills the balloon."
+      ],
+      "figure": "<svg viewBox=\"0 0 240 262\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"120.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flask and balloon</text><path d=\"M112 110 V142.0 A40 40 0 1 0 128 142.0 V110\" stroke-width=\"2.5\"/><rect x=\"109\" y=\"108\" width=\"22\" height=\"9\" fill=\"currentColor\" fill-opacity=\"0.2\"/><ellipse cx=\"120\" cy=\"66\" rx=\"44\" ry=\"48.4\" fill=\"currentColor\" fill-opacity=\"0.2\" stroke-width=\"2\"/><path d=\"M54 164 V236 H186 V164\" stroke-width=\"2\"/><text x=\"120\" y=\"256\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">hot water</text></svg>"
+    },
+    {
+      "key": "he-104",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A flask with a balloon on its neck is placed in ice water. The balloon becomes smaller as shown. Why?",
+      "options": [
+        "The air in the flask gains heat and expands",
+        "The air in the flask loses heat and contracts",
+        "The ice water enters the balloon",
+        "The air in the flask turns into a liquid"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The ice water takes heat away from the air."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The water stays outside the flask."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air does not turn into a liquid in ice water."
+        }
+      ],
+      "solution": [
+        "Cooled air contracts, so the balloon shrinks."
+      ],
+      "figure": "<svg viewBox=\"0 0 240 262\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"120.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flask and balloon</text><path d=\"M112 110 V142.0 A40 40 0 1 0 128 142.0 V110\" stroke-width=\"2.5\"/><rect x=\"109\" y=\"108\" width=\"22\" height=\"9\" fill=\"currentColor\" fill-opacity=\"0.2\"/><ellipse cx=\"120\" cy=\"97\" rx=\"13\" ry=\"14.3\" fill=\"currentColor\" fill-opacity=\"0.2\" stroke-width=\"2\"/><path d=\"M54 164 V236 H186 V164\" stroke-width=\"2\"/><text x=\"120\" y=\"256\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">ice water</text></svg>"
+    },
+    {
+      "key": "he-105",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal ball can only just pass through a metal ring when both are at room temperature. Which of the following will stop the ball from passing through?",
+      "options": [
+        "Heating the ball only",
+        "Heating the ring only",
+        "Cooling the ball only",
+        "Leaving both in the room for a while"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The ring expands, so its hole is bigger."
+        },
+        {
+          "tag": "reversed",
+          "why": "The ball contracts and is smaller."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Nothing changes, so the ball still passes."
+        }
+      ],
+      "solution": [
+        "Only a bigger ball will not fit. Heating the ball makes it expand."
+      ]
+    },
+    {
+      "key": "he-106",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "The table shows the time for the last pin to fall off each rod heated in the same way. Which rod is the best conductor of heat?",
+      "options": [
+        "Q",
+        "R",
+        "P, Q and R are equally good",
+        "P"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-rod",
+          "why": "Q took longer than P."
+        },
+        {
+          "tag": "wrong-rod",
+          "why": "R took the longest, so it is the poorest conductor."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The times are different."
+        },
+        null
+      ],
+      "solution": [
+        "P took the shortest time, so heat travelled through it fastest."
+      ],
+      "figure": "<svg viewBox=\"0 0 290 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"145.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three rods heated at one end</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rod</text><rect x=\"80\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"180.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for last pin to fall (min)</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text></svg>"
+    },
+    {
+      "key": "he-107",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Using the same table, which list shows the rods from the poorest conductor to the best conductor?",
+      "options": [
+        "P, Q, R",
+        "Q, P, R",
+        "R, Q, P",
+        "R, P, Q"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "This order is best to poorest."
+        },
+        {
+          "tag": "wrong-order",
+          "why": "R is the poorest and P is the best."
+        },
+        null,
+        {
+          "tag": "wrong-order",
+          "why": "Q took less time than R but more than P."
+        }
+      ],
+      "solution": [
+        "The longer the time, the poorer the conductor: R, Q, P."
+      ],
+      "figure": "<svg viewBox=\"0 0 290 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"145.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three rods heated at one end</text><rect x=\"10\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"45.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Rod</text><rect x=\"80\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"180.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time for last pin to fall (min)</text><rect x=\"10\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"80\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"80\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"130\" width=\"70\" height=\"30\"/><text x=\"45.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"80\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"180.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">8</text></svg>"
+    },
+    {
+      "key": "he-108",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Rods of different materials are heated at one end to find which is the best conductor of heat. Which of these must be kept the same for every rod?",
+      "options": [
+        "The material of the rods",
+        "The length and thickness of the rods",
+        "The number of pins that fall off",
+        "The time at which each pin falls"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "This is what is being tested."
+        },
+        null,
+        {
+          "tag": "measured-variable",
+          "why": "This is the result that is measured."
+        },
+        {
+          "tag": "measured-variable",
+          "why": "This is a result, so it differs for each rod."
+        }
+      ],
+      "solution": [
+        "Only the material should change."
+      ]
+    },
+    {
+      "key": "he-109",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal rod is heated at one end. Which statement describes how the heat travels?",
+      "options": [
+        "Heat moves along the rod from the hot end",
+        "Heat travels from the cooler end to the hot end",
+        "Heat stays at the hot end",
+        "Heat travels only through the air around the rod"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Heat always flows from hot to cold."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal is a good conductor, so the heat moves along."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air is a poor conductor. Heat moves along the metal."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hotter part to the cooler part."
+      ]
+    },
+    {
+      "key": "he-110",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Two cups P and Q are filled with the same amount of hot water. The graph shows how the temperature changes. Which cup lost heat faster?",
+      "options": [
+        "P",
+        "They lost heat at the same rate",
+        "Neither lost heat",
+        "Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-cup",
+          "why": "P's temperature dropped by less."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The two lines drop by different amounts."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Both temperatures went down."
+        },
+        null
+      ],
+      "solution": [
+        "Q dropped from 90 to 30. P only dropped to 50."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of hot water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"182.0\" x2=\"52\" y2=\"182.0\"/><text x=\"44\" y=\"186.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"150.0\" x2=\"52\" y2=\"150.0\"/><text x=\"44\" y=\"154.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"86.0\" x2=\"52\" y2=\"86.0\"/><text x=\"44\" y=\"90.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">70</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"54.0\" x2=\"52\" y2=\"54.0\"/><text x=\"44\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">90</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,70.0 197.0,86.0 269.5,102.0 342.0,118.0\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,86.0 197.0,118.0 269.5,134.0 342.0,150.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "he-111",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "Using the same graph, how much lower was the temperature of Q than that of P after 15 minutes?",
+      "options": [
+        "10 °C",
+        "30 °C",
+        "20 °C",
+        "40 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "At 15 min, P is 60 and Q is 40."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "At 15 min, P is 60 and Q is 40."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "40 °C is the reading of Q, not the difference."
+        }
+      ],
+      "solution": [
+        "60 - 40 = 20."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of hot water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"182.0\" x2=\"52\" y2=\"182.0\"/><text x=\"44\" y=\"186.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"150.0\" x2=\"52\" y2=\"150.0\"/><text x=\"44\" y=\"154.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"118.0\" x2=\"52\" y2=\"118.0\"/><text x=\"44\" y=\"122.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"86.0\" x2=\"52\" y2=\"86.0\"/><text x=\"44\" y=\"90.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">70</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"54.0\" x2=\"52\" y2=\"54.0\"/><text x=\"44\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">90</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,70.0 197.0,86.0 269.5,102.0 342.0,118.0\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"70.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,86.0 197.0,118.0 269.5,134.0 342.0,150.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"86.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"118.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "he-112",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which statements about conductors of heat are correct?\nA: Metals are good conductors.\nB: Air is a poor conductor.\nC: Wood is a good conductor.\nD: Plastics are poor conductors.",
+      "options": [
+        "A, B and C only",
+        "A, B and D only",
+        "B, C and D only",
+        "A and C only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong because wood is a poor conductor."
+        },
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong because wood is a poor conductor."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong, and B and D are correct as well."
+        }
+      ],
+      "solution": [
+        "Metals conduct heat well. Air, wood and plastics are poor conductors."
+      ]
+    },
+    {
+      "key": "he-113",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "At room temperature, a metal spoon feels colder to the touch than a wooden spoon. Why?",
+      "options": [
+        "The metal conducts heat away from our hand faster",
+        "The metal spoon is at a lower temperature than the wooden spoon",
+        "The wooden spoon makes more heat than the metal spoon",
+        "The metal spoon gives heat to our hand"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both are at room temperature."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Wood does not make heat."
+        },
+        {
+          "tag": "reversed",
+          "why": "Our hand is warmer, so heat moves from the hand to the spoon."
+        }
+      ],
+      "solution": [
+        "Heat leaves the hand faster through metal, so the metal feels colder."
+      ]
+    },
+    {
+      "key": "he-114",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Hot water was put in three identical cups, each wrapped in a different material, for 20 minutes. The table shows the final temperature. Which material is the best insulator of heat?",
+      "options": [
+        "Newspaper",
+        "Aluminium foil",
+        "They are equally good",
+        "Wool"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-material",
+          "why": "The water in this cup was cooler than in the wool one."
+        },
+        {
+          "tag": "wrong-material",
+          "why": "The water in this cup cooled the most."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The final temperatures are different."
+        },
+        null
+      ],
+      "solution": [
+        "The water stayed hottest in the wool, so wool is the best insulator."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">All cups started at 85 °C</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Wrapped in</text><rect x=\"140\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"215.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Final temperature (°C)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">wool</text><rect x=\"140\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">64</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">newspaper</text><rect x=\"140\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">55</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">aluminium foil</text><rect x=\"140\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">41</text></svg>"
+    },
+    {
+      "key": "he-115",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A glass bottle is filled to the brim with cold water and closed tightly. It is left in the hot Sun. What may happen?",
+      "options": [
+        "The water contracts and the level drops",
+        "The water turns into ice",
+        "The water expands and may crack the bottle",
+        "Nothing happens to the water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heated water expands."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The Sun gives heat. Ice forms only when water loses heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The water gains heat and expands."
+        }
+      ],
+      "solution": [
+        "Water gains heat and expands. With no room, it pushes on the bottle."
+      ]
+    },
+    {
+      "key": "he-116",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A sealed empty plastic bottle contains only air. It is put in a freezer for an hour. What will happen to the bottle?",
+      "options": [
+        "It will swell up because the air inside expands",
+        "It will be a little squashed as the air contracts",
+        "It will stay exactly the same as before",
+        "It will burst because the air turns into ice"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Air contracts when it loses heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The cooled air takes up less space."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Air does not turn into ice in a freezer."
+        }
+      ],
+      "solution": [
+        "Cooled air contracts, so the outside air pushes the bottle in."
+      ]
+    },
+    {
+      "key": "he-117",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A table tennis ball has a small dent. When it is put in hot water, the dent pops out. Why?",
+      "options": [
+        "The air inside the ball gains heat and expands",
+        "The air inside the ball loses heat and contracts",
+        "The hot water goes into the ball and pushes out the dent",
+        "The plastic of the ball melts and fills the dent"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Hot water gives heat to the air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ball is sealed, so no water enters."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The plastic does not melt in hot water."
+        }
+      ],
+      "solution": [
+        "The warmed air expands and pushes the dent out."
+      ]
+    },
+    {
+      "key": "he-118",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which row shows what happens to a solid, a liquid and a gas when each gains heat?",
+      "options": [
+        "Solid contracts, liquid expands, gas expands",
+        "Solid expands, liquid expands, gas contracts",
+        "Solid expands, liquid contracts, gas expands",
+        "Solid expands, liquid expands, gas expands"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "A solid also expands when heated."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "A gas also expands when heated."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "A liquid also expands when heated."
+        },
+        null
+      ],
+      "solution": [
+        "Solids, liquids and gases all expand when they gain heat."
+      ]
+    },
+    {
+      "key": "he-119",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A dentist chooses a filling that expands and contracts by about the same amount as a tooth when hot or cold drinks are taken. Why is this important?",
+      "options": [
+        "So that the filling is heavier than the tooth",
+        "So that the filling always gets hotter than the tooth does",
+        "So that it does not become loose or crack the tooth",
+        "So that the filling never gains heat"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Mass is not the reason."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "That would not help."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The filling still gains and loses heat."
+        }
+      ],
+      "solution": [
+        "Matching expansion keeps the filling snug in the tooth."
+      ]
+    },
+    {
+      "key": "he-120",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal bench and a wooden bench in a park have been in the Sun for hours and are both at the same temperature. The metal bench feels hotter to the touch. Why?",
+      "options": [
+        "Metal makes more heat than wood",
+        "Metal passes heat to our hand faster",
+        "Wood is a better conductor than metal",
+        "The metal bench is at a higher temperature"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Neither material makes heat."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Metal is the better conductor."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "They are at the same temperature."
+        }
+      ],
+      "solution": [
+        "Heat moves from the metal into the hand faster."
+      ]
+    },
+    {
+      "key": "he-121",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three identical cups with lids hold hot water at 90 °C. They are made of different materials. The table shows the temperature of the water after 30 minutes. Which cup is the best insulator?",
+      "options": [
+        "Foam cup",
+        "Glass cup",
+        "Steel cup",
+        "They are equally good"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-cup",
+          "why": "The water in the glass cup was cooler than in the foam cup."
+        },
+        {
+          "tag": "wrong-cup",
+          "why": "The water in the steel cup cooled the most."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The final temperatures are different."
+        }
+      ],
+      "solution": [
+        "The foam cup kept the water hottest."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"100\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"195.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 30 min (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">foam</text><rect x=\"100\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"195.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">68</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">glass</text><rect x=\"100\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"195.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">52</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">steel</text><rect x=\"100\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"195.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text></svg>"
+    },
+    {
+      "key": "he-122",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Hot soup is poured into a pot. A metal ladle is left inside the pot. After some time, the top end of the ladle is hot. How did the heat get there?",
+      "options": [
+        "It came from the cold air above the pot",
+        "It was made by the metal itself",
+        "The soup gave coldness to the ladle",
+        "It travelled up the ladle from the soup"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows from hot to cold, not from cold air."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metal does not make heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Cold is not something that is given. Heat flows."
+        },
+        null
+      ],
+      "solution": [
+        "Heat moves from the hotter soup along the ladle."
+      ]
+    },
+    {
+      "key": "he-123",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Why are the handles of cooking tools often covered with rubber?",
+      "options": [
+        "Rubber is a good conductor, so it spreads the heat",
+        "Rubber makes the tool heavier",
+        "Rubber is a poor conductor of heat",
+        "Rubber gives off cold"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Rubber is a poor conductor."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Weight is not related to heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Rubber does not give off cold."
+        }
+      ],
+      "solution": [
+        "A poor conductor slows the heat flowing to the hand."
+      ]
+    },
+    {
+      "key": "he-124",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A gap is left between the metal sections of a long bridge. What is the gap for?",
+      "options": [
+        "To let the metal contract when it gets hot",
+        "To let the metal expand when it gets hot",
+        "To let the metal melt on hot days",
+        "To make the bridge lighter"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Metal expands when it gets hot."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The gap is not for melting."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The gap is for expansion."
+        }
+      ],
+      "solution": [
+        "Heat makes the metal expand, so room is needed."
+      ]
+    },
+    {
+      "key": "he-125",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A rod measured 50.0 cm long at room temperature. After it is heated, it measures 50.1 cm. What does this show?",
+      "options": [
+        "The rod expands when it gains heat",
+        "The rod contracts when it gains heat",
+        "The rod gained mass when it gained heat",
+        "The rod expands when it loses heat"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The rod became longer, so it expanded."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Length was measured, not mass."
+        },
+        {
+          "tag": "reversed",
+          "why": "The rod gained heat in this test."
+        }
+      ],
+      "solution": [
+        "The length increased when the rod was heated."
+      ]
+    },
+    {
+      "key": "he-201",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three rods P, Q and R of the same size are heated at one end. The graph shows the temperature at the other end. Which statement is correct?",
+      "options": [
+        "Heat travels through R faster than through P",
+        "Heat travels through P faster than through R",
+        "Heat travels through Q and R at the same speed",
+        "Heat does not travel through P"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "R's temperature rose faster."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The lines for Q and R are different."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "P's temperature also rose, but slowly."
+        }
+      ],
+      "solution": [
+        "R's far end got hot sooner, so R is the better conductor."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature at the far end</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,166.0 124.5,159.6 197.0,153.2 269.5,146.8 342.0,140.4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"159.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"153.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 124.5,150.0 197.0,134.0 269.5,121.2 342.0,110.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"121.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"110.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 124.5,130.8 197.0,102.0 269.5,79.6 342.0,63.6\" stroke-dasharray=\"2 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"130.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"79.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"63.6\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"154\" x2=\"306\" y2=\"154\"/><text x=\"312\" y=\"158\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"170\" x2=\"306\" y2=\"170\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"280\" y1=\"186\" x2=\"306\" y2=\"186\" stroke-dasharray=\"2 4\"/><text x=\"312\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "he-202",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Water at 80 °C was poured into four identical cups made of different materials. The table shows how much the temperature of the water fell in 10 minutes. Which material is the best insulator?",
+      "options": [
+        "P",
+        "Q",
+        "R",
+        "S"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-cup",
+          "why": "The water in P cooled the most."
+        },
+        {
+          "tag": "wrong-cup",
+          "why": "The water in Q cooled more than in S."
+        },
+        {
+          "tag": "wrong-cup",
+          "why": "The water in R cooled more than in S."
+        },
+        null
+      ],
+      "solution": [
+        "The smallest fall in temperature means the least heat was lost."
+      ],
+      "figure": "<svg viewBox=\"0 0 270 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four cups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"70\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"165.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Fall in temperature (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">26</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">17</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">9</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">4</text></svg>"
+    },
+    {
+      "key": "he-203",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Shan wants to find out which of three cloths keeps ice from melting best. Which set-up is fair?",
+      "options": [
+        "Ice cubes of different sizes in each cloth, left in the same room for the same time",
+        "One ice cube in each cloth, each kept in a different room for the same time",
+        "One ice cube of the same size in each cloth, in the same room, for equal time",
+        "The same cloth with ice cubes left for different times"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "unfair",
+          "why": "The size of the ice cube also changes the result."
+        },
+        {
+          "tag": "unfair",
+          "why": "The room temperature must be the same."
+        },
+        null,
+        {
+          "tag": "unfair",
+          "why": "This tests time, not the cloth."
+        }
+      ],
+      "solution": [
+        "Only the cloth should change."
+      ]
+    },
+    {
+      "key": "he-204",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "A long metal rod is heated at one end. The table shows its temperature at three points. In which direction does heat flow along the rod?",
+      "options": [
+        "From point C towards point A",
+        "From point A towards point C",
+        "From point B towards both A and C",
+        "Heat does not flow along the rod"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heat flows from hotter to cooler places. A is hottest."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "B is cooler than A, so heat flows into B from A."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The temperatures differ, so heat flows."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hottest point A to the coolest point C."
+      ],
+      "figure": "<svg viewBox=\"0 0 380 110\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"190.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A rod</text><rect x=\"10\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"65.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Point</text><rect x=\"120\" y=\"36\" width=\"110\" height=\"34\"/><text x=\"175.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A (heated end)</text><rect x=\"230\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"265.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><rect x=\"300\" y=\"36\" width=\"70\" height=\"34\"/><text x=\"335.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">C</text><rect x=\"10\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"65.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><rect x=\"120\" y=\"70\" width=\"110\" height=\"30\"/><text x=\"175.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">90</text><rect x=\"230\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"265.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">62</text><rect x=\"300\" y=\"70\" width=\"70\" height=\"30\"/><text x=\"335.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">35</text></svg>"
+    },
+    {
+      "key": "he-205",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A metal ball just passes through a ring when both are at 20 °C. The table shows four tests. In which test will the ball not pass through the ring?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-test",
+          "why": "The ring is hotter and expands, so it is easier to pass."
+        },
+        {
+          "tag": "wrong-test",
+          "why": "The ball is cooler and smaller, so it passes."
+        },
+        {
+          "tag": "wrong-test",
+          "why": "Nothing has changed, so it passes."
+        }
+      ],
+      "solution": [
+        "In Q the ball is hotter and larger, and the ring is unchanged."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four tests</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Test</text><rect x=\"70\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"120.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ball (°C)</text><rect x=\"170\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"220.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Ring (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"170\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"220.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60</text><rect x=\"170\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"220.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"170\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"220.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"120.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"170\" y=\"160\" width=\"100\" height=\"30\"/><text x=\"220.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text></svg>"
+    },
+    {
+      "key": "he-206",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A balloon is fixed over a flask. The flask is put into water baths of different temperatures. The table shows the distance round the balloon. What is the distance round the balloon expected to be at 50 °C?",
+      "options": [
+        "22 cm",
+        "24 cm",
+        "30 cm",
+        "26 cm"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "This is the reading at 30 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is lower than the pattern gives."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The pattern rises by 2 cm every 10 °C."
+        },
+        null
+      ],
+      "solution": [
+        "The distance rises by 2 cm for each 10 °C, so 22 + 4 = 26 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 340 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"170.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Flask and balloon</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><rect x=\"140\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"235.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Distance round balloon (cm)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"140\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"235.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">18</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text><rect x=\"140\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"235.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">22</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">70</text><rect x=\"140\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"235.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">30</text></svg>"
+    },
+    {
+      "key": "he-207",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A thermometer has a liquid that expands evenly. The table shows the length of the liquid in the tube. What is the length at 50 °C?",
+      "options": [
+        "10 cm",
+        "11 cm",
+        "12 cm",
+        "14 cm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "10 cm is the length at 40 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The length rises 2 cm for every 10 °C."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "14 cm is the length at 60 °C."
+        }
+      ],
+      "solution": [
+        "The length rises 4 cm for every 20 °C, so 50 °C gives 12 cm."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><rect x=\"140\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"215.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of liquid (cm)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"140\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">2</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"140\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"140\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">10</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60</text><rect x=\"140\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">14</text></svg>"
+    },
+    {
+      "key": "he-208",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A thermometer has a very thin tube. Why?",
+      "options": [
+        "So that the liquid does not expand when it is heated",
+        "A small expansion shows up as a big rise in the tube",
+        "So that the liquid gains heat more slowly than the glass",
+        "So that the liquid can contract more"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The liquid must expand for the thermometer to work."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The tube is thin to make the change easier to see."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Thinness does not change how much the liquid contracts."
+        }
+      ],
+      "solution": [
+        "A thin tube makes a small change in volume show as a long change in length."
+      ]
+    },
+    {
+      "key": "he-209",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three identical cups with lids are wrapped in different materials. Each starts with water at 85 °C. The table shows the temperature after 20 minutes. Which conclusion is correct?",
+      "options": [
+        "Cloth is a better insulator than aluminium foil",
+        "Aluminium foil is a better insulator than cloth",
+        "Having no wrap is the best way to keep water hot",
+        "Aluminium foil is the worst insulator"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The water in the foil cup was cooler."
+        },
+        {
+          "tag": "reversed",
+          "why": "The water cooled most with no wrap."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The cup with no wrap cooled the most."
+        }
+      ],
+      "solution": [
+        "The water stayed hotter in cloth (62) than in foil (50), so cloth is the better insulator."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"120\" height=\"34\"/><text x=\"70.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Wrapped in</text><rect x=\"130\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"225.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 20 min (°C)</text><rect x=\"10\" y=\"70\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">nothing</text><rect x=\"130\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"225.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">45</text><rect x=\"10\" y=\"100\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">cloth</text><rect x=\"130\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"225.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">62</text><rect x=\"10\" y=\"130\" width=\"120\" height=\"30\"/><text x=\"70.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">aluminium foil</text><rect x=\"130\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"225.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">50</text></svg>"
+    },
+    {
+      "key": "he-210",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "In the experiment with three cups wrapped in cloth, foil or nothing, which should NOT be the same in each cup?",
+      "options": [
+        "The starting temperature of the water",
+        "The amount of water in each cup",
+        "The time before the temperature is read",
+        "What the cup is wrapped in"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "fixed-variable",
+          "why": "This must be the same."
+        },
+        {
+          "tag": "fixed-variable",
+          "why": "This must be the same."
+        },
+        {
+          "tag": "fixed-variable",
+          "why": "This must be the same."
+        },
+        null
+      ],
+      "solution": [
+        "The wrap is the one thing that is changed on purpose."
+      ]
+    },
+    {
+      "key": "he-211",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A cook wants to keep a pot of soup hot for as long as possible without using a stove. Which is the best way?",
+      "options": [
+        "Leave the pot uncovered on a metal table",
+        "Put the pot in a bowl of cold water",
+        "Put a lid on it and wrap it in a towel",
+        "Wrap the pot in a sheet of aluminium foil only"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat escapes upwards and into the metal."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Cold water takes heat away."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "A thin metal sheet traps almost no air, so heat is lost."
+        }
+      ],
+      "solution": [
+        "A towel traps air, a poor conductor, and the lid stops heat leaving from the top."
+      ]
+    },
+    {
+      "key": "he-212",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Which of the rods in the graph (P, Q and R) is the poorest conductor of heat?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "They are the same"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-rod",
+          "why": "Q heated up faster than P."
+        },
+        null,
+        {
+          "tag": "wrong-rod",
+          "why": "R heated up the fastest."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The lines are different."
+        }
+      ],
+      "solution": [
+        "The far end of P warmed up the slowest."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature at the far end</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,166.0 124.5,159.6 197.0,153.2 269.5,146.8 342.0,140.4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"159.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"153.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 124.5,150.0 197.0,134.0 269.5,121.2 342.0,110.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"150.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"121.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"110.0\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 124.5,130.8 197.0,102.0 269.5,79.6 342.0,63.6\" stroke-dasharray=\"2 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"130.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"79.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"63.6\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"154\" x2=\"306\" y2=\"154\"/><text x=\"312\" y=\"158\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"170\" x2=\"306\" y2=\"170\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"174\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text><line x1=\"280\" y1=\"186\" x2=\"306\" y2=\"186\" stroke-dasharray=\"2 4\"/><text x=\"312\" y=\"190\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">R</text></svg>"
+    },
+    {
+      "key": "he-213",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Two metal blocks are in contact as shown. Block A is at 80 °C and block B is at 20 °C. Which statement is correct?",
+      "options": [
+        "Heat flows from A to B until they are at the same temperature",
+        "Heat flows from B to A until they are at the same temperature",
+        "Coldness flows from B to A",
+        "Heat flows from A to B until A is at 0 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Heat flows from the hotter block."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows. There is no flow of cold."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Flow stops when both have the same temperature."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hotter object to the colder one until they are equal."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 130\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two blocks touching</text><rect x=\"40\" y=\"44\" width=\"120\" height=\"64\"/><rect x=\"160\" y=\"44\" width=\"120\" height=\"64\"/><text x=\"100\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"100\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">80 °C</text><text x=\"220\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"220\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">20 °C</text></svg>"
+    },
+    {
+      "key": "he-214",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A cook runs hot water over only the metal lid of a glass jar for a short time. The tight lid then comes off easily. Why?",
+      "options": [
+        "The metal lid loses heat and contracts",
+        "The glass jar contracts but the lid stays the same",
+        "The hot water melts the edge of the lid",
+        "The metal lid gains heat and expands"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Hot water gives heat to the lid. It does not take heat away."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The jar is not the part that was heated."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Hot tap water cannot melt metal."
+        },
+        null
+      ],
+      "solution": [
+        "The lid expands, so it is no longer gripping the jar tightly."
+      ]
+    },
+    {
+      "key": "he-215",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which of the following is NOT a result of heat gain?",
+      "options": [
+        "A metal rod becoming longer",
+        "Butter melting in a hot pan",
+        "Water freezing in a freezer tray",
+        "Wet clothes drying in the Sun"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "result-of-heat",
+          "why": "This is expansion, a result of gaining heat."
+        },
+        {
+          "tag": "result-of-heat",
+          "why": "Melting happens when a solid gains heat."
+        },
+        null,
+        {
+          "tag": "result-of-heat",
+          "why": "Evaporation happens when water gains heat."
+        }
+      ],
+      "solution": [
+        "Freezing happens when water loses heat."
+      ]
+    },
+    {
+      "key": "he-216",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which of the following statements about heat and conductors are correct?\nA: Heat flows from a hot object to a cold object.\nB: Air trapped in a jacket slows down heat loss.\nC: Plastic conducts heat better than steel.\nD: A wooden spoon in hot soup stays cool at the top end for longer than a steel spoon.",
+      "options": [
+        "A, B and C only",
+        "A, B and D only",
+        "B, C and D only",
+        "A, C and D only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong because steel is the better conductor."
+        },
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong, and A is correct."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong, and B is correct."
+        }
+      ],
+      "solution": [
+        "Plastic is a poorer conductor than steel, so C is wrong."
+      ]
+    },
+    {
+      "key": "he-217",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A student heats a metal rod and measures its length. The table shows the results. Which conclusion is supported?",
+      "options": [
+        "The hotter the rod, the longer it becomes",
+        "The hotter the rod, the shorter it becomes",
+        "The length of the rod does not depend on temperature",
+        "The rod becomes longer only above 100 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The length increased as the temperature rose."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The length changed as the temperature changed."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The rod was already longer at 40 °C than at 20 °C."
+        }
+      ],
+      "solution": [
+        "The length rises as the temperature rises."
+      ],
+      "figure": "<svg viewBox=\"0 0 300 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"150.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A heated rod</text><rect x=\"10\" y=\"36\" width=\"130\" height=\"34\"/><text x=\"75.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><rect x=\"140\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"215.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Length of rod (cm)</text><rect x=\"10\" y=\"70\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"140\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100.00</text><rect x=\"10\" y=\"100\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"140\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100.02</text><rect x=\"10\" y=\"130\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">60</text><rect x=\"140\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100.04</text><rect x=\"10\" y=\"160\" width=\"130\" height=\"30\"/><text x=\"75.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">80</text><rect x=\"140\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"215.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">100.06</text></svg>"
+    },
+    {
+      "key": "he-218",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Why are the fins of some heaters made of metal while the knobs are made of plastic?",
+      "options": [
+        "Metal keeps heat in the heater, while plastic gives out heat",
+        "Both materials conduct heat equally well",
+        "Plastic makes heat for the knob",
+        "Metal gives out heat while plastic keeps the knob cool"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Metal conducts heat out, and plastic does not."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Metals are good conductors and plastics are poor conductors."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Plastic does not make heat."
+        },
+        null
+      ],
+      "solution": [
+        "Good conductor for heating the room, poor conductor so that the knob is safe to hold."
+      ]
+    },
+    {
+      "key": "he-219",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Wet sand is heated until it is dry. Which change is a result of the sand gaining heat?",
+      "options": [
+        "The sand changes into water",
+        "The water vapour changes into sand",
+        "The water changes into vapour",
+        "The water in the sand freezes"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Sand does not change into water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This is not possible."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "Freezing happens when water loses heat."
+        }
+      ],
+      "solution": [
+        "The water gains heat and evaporates, leaving dry sand."
+      ]
+    },
+    {
+      "key": "he-220",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-read-data",
+      "stem": "Four cups each hold 100 g of hot water at 90 °C. Each cup is made of a different material. The table shows the temperature of the water after 15 minutes. Which two cups are most likely made of the poorest conductors of heat?",
+      "options": [
+        "P and Q",
+        "R and S",
+        "Q and R",
+        "P and S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-pair",
+          "why": "P and Q lost the most heat, so they are good conductors."
+        },
+        null,
+        {
+          "tag": "wrong-pair",
+          "why": "Q lost a lot of heat."
+        },
+        {
+          "tag": "wrong-pair",
+          "why": "P lost a lot of heat."
+        }
+      ],
+      "solution": [
+        "Cups R and S kept the water hottest."
+      ],
+      "figure": "<svg viewBox=\"0 0 270 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"135.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four cups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"70\" y=\"36\" width=\"190\" height=\"34\"/><text x=\"165.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 15 min (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">52</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">58</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">77</text><rect x=\"10\" y=\"160\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"70\" y=\"160\" width=\"190\" height=\"30\"/><text x=\"165.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">81</text></svg>"
+    },
+    {
+      "key": "he-221",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Concrete slabs on a long road have narrow gaps filled with soft tar. What would happen on a very hot day if there were no gaps?",
+      "options": [
+        "The slabs would expand and crack",
+        "The slabs would contract and pull apart from one another",
+        "The slabs would melt and flow away from the road",
+        "Nothing would change"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Slabs expand on a hot day."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The concrete does not melt in the heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Expansion would have no room."
+        }
+      ],
+      "solution": [
+        "Without gaps, the expanding slabs press against each other."
+      ]
+    },
+    {
+      "key": "he-222",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A student holds an iron rod with one end in a flame. Soon the end near his hand becomes hot. He then holds a wooden stick the same way and the end near his hand stays cool. What can he conclude?",
+      "options": [
+        "Wood conducts heat better than iron",
+        "Iron makes more heat than wood",
+        "Wood is a good insulator because it gives out cold",
+        "Iron conducts heat better than wood"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heat reached his hand faster through the iron."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Neither makes heat. The flame supplies it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Wood does not give out cold. It conducts poorly."
+        },
+        null
+      ],
+      "solution": [
+        "Heat reached the far end of the iron but not the wood."
+      ]
+    },
+    {
+      "key": "he-223",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "A ball just passes through a ring at 20 °C. The ball is heated to 80 °C and placed on the ring. It does not pass. After a few minutes it passes through again. What most likely happened?",
+      "options": [
+        "The ball gained more heat and expanded further",
+        "The ring contracted so that its hole became bigger",
+        "The ball cooled down and contracted",
+        "The ball became lighter"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "A bigger ball would not pass."
+        },
+        {
+          "tag": "reversed",
+          "why": "A contracting ring has a smaller hole."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Mass does not change with temperature."
+        }
+      ],
+      "solution": [
+        "As the ball cooled it contracted until it fitted the ring."
+      ]
+    },
+    {
+      "key": "he-224",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "Which of the following would be best for making a container to keep ice cream cold for a long time?",
+      "options": [
+        "A thin steel box",
+        "A box with thick foam walls",
+        "A thin glass box",
+        "A box made of aluminium foil"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Steel is a good conductor, so heat would flow in quickly."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Glass lets heat in quite easily when thin."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Aluminium is a good conductor."
+        }
+      ],
+      "solution": [
+        "Plastic foam traps air, a poor conductor, so heat gets in slowly."
+      ]
+    },
+    {
+      "key": "he-225",
+      "level": "competent",
+      "outcome": "sci-energy-heat-effects-2",
+      "pattern": "sci-pat-heat-effects-conductors",
+      "stem": "A rubber hot-water bottle and a metal can hold water at the same temperature. Why does the metal can feel hotter to the touch?",
+      "options": [
+        "Metal conducts heat to the hand faster than rubber does",
+        "Rubber conducts heat better than metal does",
+        "The water in the can is at a higher temperature",
+        "Rubber gives out cold to the hand"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Metal is the better conductor."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Both hold water at the same temperature."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Rubber does not give out cold."
+        }
+      ],
+      "solution": [
+        "Heat reaches the hand faster through metal."
+      ]
+    }
+  ]
+}

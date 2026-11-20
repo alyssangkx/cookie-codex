@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, load, importCode, exportCode } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -474,6 +474,69 @@ test('liveMastered hides a count made against a different or unknown bank size',
   assert.equal(liveMastered({ mastered: 18, total: 25 }, 100), 0);
   assert.equal(liveMastered({ mastered: 18, total: 25 }, undefined), 0);
   assert.equal(liveMastered({}, 25), 0);
+});
+
+test('tierHash ignores order and changes with the ids', () => {
+  assert.equal(tierHash(['a', 'b', 'c']), tierHash(['c', 'a', 'b']));
+  assert.notEqual(tierHash(['a', 'b', 'c']), tierHash(['a', 'b', 'd']));
+  assert.match(tierHash(['a']), /^[a-z0-9]{1,16}$/);
+  const ids = ['b', 'a']; tierHash(ids); assert.deepEqual(ids, ['b', 'a']); // the caller's array is not sorted in place
+});
+
+test('syncTiers stores the id hash; liveMastered uses it to catch a same-size redesign, size check without it', () => {
+  const s = fresh();
+  answer(s, 'q1', true, t0); answer(s, 'q2', true, t0);
+  syncTiers(s, { 'x|b': ['q1', 'q2', 'q3'] }, () => undefined, t0);
+  const st = s.progress.x!.b!;
+  assert.deepEqual([st.mastered, st.total, st.hash], [2, 3, tierHash(['q3', 'q2', 'q1'])]);
+  assert.equal(liveMastered(st, 3, tierHash(['q1', 'q2', 'q3'])), 2); // same questions
+  assert.equal(liveMastered(st, 3, tierHash(['n1', 'n2', 'n3'])), 0); // redesigned, same size
+  assert.equal(liveMastered(st, 3), 2); // caller without a hash: size check only
+  assert.equal(liveMastered({ mastered: 2, total: 3 }, 3, tierHash(['n1', 'n2', 'n3'])), 2); // older state: size check
+  assert.equal(liveMastered(st, 4, st.hash), 0); // the size must still match
+});
+
+test('syncParked: Daily Review parks retests of vanished questions, unparks them when they return; nothing is deleted', () => {
+  const s = fresh();
+  answer(s, 'live', false, t0); answer(s, 'gone', false, t0); answer(s, 'old-retired', true, t0);
+  const now = t0 + 2 * DAY;
+  assert.equal(syncParked(s, ['live'], true), true);
+  assert.equal(s.questions.gone.parked, true);
+  assert.equal(s.questions.live.parked, undefined);
+  assert.equal(s.questions['old-retired'].parked, undefined); // retired states are never parked
+  assert.deepEqual(Object.keys(s.questions).sort(), ['gone', 'live', 'old-retired']);
+  assert.equal(isDue(s, 'gone', now), false);
+  assert.equal(isDue(s, 'gone', now, true), true); // a caller that knows the id is in a bank
+  assert.equal(syncParked(s, ['live'], true), false); // nothing new: no save needed
+  // a partial load (tier quiz, paper) never parks, but unparks what it saw
+  answer(s, 'other', false, t0);
+  assert.equal(syncParked(s, ['gone'], false), true);
+  assert.equal(s.questions.other.parked, undefined);
+  assert.equal(s.questions.gone.parked, undefined);
+  assert.equal(isDue(s, 'gone', now), true);
+});
+
+test('syncParked is reversible: an old build parks live states, the next Daily Review in a newer build unparks them', () => {
+  const s = fresh();
+  answer(s, 'v1', false, t0); answer(s, 'new-bank-q', false, t0);
+  syncParked(s, ['v1'], true); // old tab: it lacks the newer bank file
+  assert.equal(s.questions['new-bank-q'].parked, true);
+  syncParked(s, ['v1', 'new-bank-q'], true); // newer build, before picking
+  assert.equal(s.questions['new-bank-q'].parked, undefined);
+  assert.equal(isDue(s, 'new-bank-q', t0 + DAY), true);
+});
+
+test('answering a parked question always unparks it, including a correct answer that changes nothing else', () => {
+  const s = fresh();
+  answer(s, 'a', false, t0); answer(s, 'b', false, t0); answer(s, 'c', true, t0);
+  syncParked(s, [], true);
+  s.questions.c.parked = true; // retired and parked (e.g. set by a hand-edited or future save)
+  answer(s, 'a', false, t0 + DAY);
+  assert.equal(s.questions.a.parked, undefined);
+  answer(s, 'b', true, t0 + 0.5 * DAY); // retest not yet due: no step change, still unparked
+  assert.deepEqual([s.questions.b.s, s.questions.b.parked], [1, undefined]);
+  answer(s, 'c', true, t0 + DAY);
+  assert.equal(s.questions.c.parked, undefined);
 });
 
 test('Admin: every tier is open with nothing cleared; a normal player is locked', () => {

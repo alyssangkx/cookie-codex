@@ -8,14 +8,18 @@ export const TIERS: Tier[] = ['b', 'i', 'c'];
 export const TIER_NAME: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', c: 'Competent' };
 
 // passes/scores/best are history for display only; `cleared` is set by syncTiers (all questions retired).
-// mastered/total are the last count seen when a quiz ended.
-export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number };
+// mastered/total are the last count seen when a quiz ended; hash is tierHash() of the ids they were counted against
+// (optional, added 20 Nov 2026 with no schema bump; older states lack it and fall back to the size check).
+export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number; hash?: string };
 // s: 0 retired, 1-3 retest step (due in 1, 3, 7 days); w: times answered wrong
 // a: the option text picked on the latest wrong answer, '' when it was not answered because time ran out, LEFT_BLANK
 // when it was left blank on purpose (a paper submitted with blanks, 20 Nov 2026); optional,
 // added 19 Nov 2026 for the parent page; older saves simply lack it, so no schema bump. Kept after the question
 // retires, so the parent still sees it.
-export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string };
+// parked: a retest whose id was in no bank when Daily Review last loaded every bank (syncParked). It is not counted as
+// due, and is never deleted (ADR 0002): an older tab missing newer bank files may park live states, so the next Daily
+// Review unparks any parked id it finds, and answering a question always unparks it. Optional, no schema bump.
+export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true };
 export const PICK_MAX = 120; // characters of a picked option kept in the save
 export const LEFT_BLANK = '\u2205'; // "∅": a paper question left blank on purpose (never an option's text)
 export interface Attempt {
@@ -101,14 +105,32 @@ export const migrations: Record<number, (s: any) => any> = {
   3: (s) => (s.settings?.dailyCapMin === 45 ? { ...s, settings: { ...s.settings, dailyCapMin: DEFAULT_CAP_MIN } } : s),
 };
 
-/** "N mastered" for display: only when the stored count was made against a bank of the current size. After a
+/** Short, order-independent hash of a tier's question ids (cyrb53 over the sorted ids, base 36). syncTiers stores it
+ * on the tier state; train.ts computes the same value per tier at build time. */
+export function tierHash(ids: readonly string[]): string {
+  const str = [...ids].sort().join('\n');
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < str.length; i++) {
+    const c = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 2654435761);
+    h2 = Math.imul(h2 ^ c, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+
+/** "N mastered" for display: only when the stored count was made against the tier's current questions. After a
  * bank redesign (20 Nov 2026: the first banks were a pilot) the stored count points at questions that are gone,
  * so it reads as 0 until the next quiz on the tier recounts it (syncTiers). No schema bump: an old tab must never
- * meet a save version it cannot read. */
-export const liveMastered = (st: { mastered?: number; total?: number }, count: number | undefined) =>
-  st.mastered && count !== undefined && st.total === count ? st.mastered : 0; // unknown bank size: treat as stale
-// ponytail: a size check misses a redesigned tier of the same size (e.g. 25 -> 25); a per-tier id hash stored by
-// syncTiers would catch it. Display-only: the next quiz on the tier recounts.
+ * meet a save version it cannot read. A state with a stored id hash must match `hash` (and the size), which also
+ * catches a redesign of the same size; an older state without one, or a caller without the hash, falls back to the
+ * size check. */
+export const liveMastered = (st: { mastered?: number; total?: number; hash?: string }, count: number | undefined, hash?: string) => {
+  if (!st.mastered || count === undefined || st.total !== count) return 0; // unknown bank size: treat as stale
+  if (st.hash && hash && st.hash !== hash) return 0; // same size, different questions
+  return st.mastered;
+};
 
 /** Run every migration from the save's version up to SCHEMA. Does not touch storage. */
 export function migrate(s: any): any {
@@ -308,6 +330,7 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
 export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string) {
   const q = s.questions[id];
   if (ok && !q && !retireNew) return; // practice papers never drain tier pools
+  if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
   const a = ok ? q?.a : (picked ?? '').slice(0, PICK_MAX);
   const keep = a != null ? { a } : {};
   if (!ok) {
@@ -324,10 +347,33 @@ export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), ret
 }
 
 export const isNew = (s: SaveV1, id: string) => !s.questions[id];
-export const isDue = (s: SaveV1, id: string, now = Date.now()) => {
+/** A retest that is due now. Parked states (id in no bank at the last Daily Review) are skipped unless the caller
+ *  already knows the id is in a bank (`ignoreParked`). */
+export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = false) => {
   const q = s.questions[id];
-  return !!q && q.s > 0 && q.due <= now;
+  return !!q && (ignoreParked || !q.parked) && q.s > 0 && q.due <= now;
 };
+
+/**
+ * Keep the `parked` flags in step with the banks a page has loaded. Every parked state whose id is in `ids` is
+ * unparked. Only when `complete` (the ids of every bank: Daily Review) is a retest state whose id is missing parked;
+ * nothing is ever deleted (ADR 0002). Retired states are never parked (they are never counted as due). Reversible:
+ * an older build missing newer bank files may park live states, and the next complete call in a newer build unparks
+ * them. Returns true when anything changed (the caller saves).
+ */
+export function syncParked(s: SaveV1, ids: Iterable<string>, complete: boolean): boolean {
+  const present = new Set(ids);
+  let changed = false;
+  for (const [id, q] of Object.entries(s.questions)) {
+    if (present.has(id)) {
+      if (q.parked) { delete q.parked; changed = true; }
+    } else if (complete && !q.parked && q.s > 0) {
+      q.parked = true;
+      changed = true;
+    }
+  }
+  return changed;
+}
 export const isRetired = (s: SaveV1, id: string) => s.questions[id]?.s === 0;
 
 // ---------------------------------------------------------------- tiers
@@ -481,6 +527,7 @@ export function syncTiers(s: SaveV1, tierIds: Record<string, string[]>, rewardFo
     const st = tierState(s, sub, tier);
     st.total = ids.length;
     st.mastered = ids.filter((id) => isRetired(s, id)).length;
+    st.hash = tierHash(ids);
     (s.progress[sub] ??= {})[tier] = st;
     if (!st.cleared && st.mastered === st.total && tierOpen(s, sub, tier, playable(sub)))
       out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now) });

@@ -50,7 +50,7 @@ def table(headers, rows, widths=None, caption=None, rowh=30, fs=14, first_left=F
     return svg(W, H, b)
 
 
-def graph(xs, series, ymax, xlabel, ylabel, caption=None, ystep=None, W=340, H=240, labels=True, bars=False, ymin=0):
+def graph(xs, series, ymax, xlabel, ylabel, caption=None, ystep=None, W=340, H=240, labels=True, bars=False, ymin=0, legend="tl"):
     """Line (or bar) graph. series = [(name, [y...])]; xs are x tick labels (evenly spaced)."""
     L, R, T, B = 52, 18, 38 if caption else 20, 52
     pw, ph = W - L - R, H - T - B
@@ -86,9 +86,11 @@ def graph(xs, series, ymax, xlabel, ylabel, caption=None, ystep=None, W=340, H=2
             for i, y in enumerate(ys):
                 b += f'<circle cx="{xp(i):.1f}" cy="{T + ph - (y - ymin) / (ymax - ymin) * ph:.1f}" r="2.5" fill="currentColor"/>'
     if len(series) > 1 and labels:
+        lx = L + 8 if legend[1] == "l" else L + pw - 62
+        ly = T + 8 if legend[0] == "t" else T + ph - 12 - 16 * (len(series) - 1)
         for s, (name, ys) in enumerate(series):
-            b += f'<line x1="{L + 8}" y1="{T + 8 + s * 16}" x2="{L + 34}" y2="{T + 8 + s * 16}"' + (f' stroke-dasharray="{dash[s]}"' if dash[s] else "") + "/>"
-            b += txt(L + 40, T + 12 + s * 16, name, 11, anchor="start")
+            b += f'<line x1="{lx}" y1="{ly + s * 16}" x2="{lx + 26}" y2="{ly + s * 16}"' + (f' stroke-dasharray="{dash[s]}"' if dash[s] else "") + "/>"
+            b += txt(lx + 32, ly + 4 + s * 16, name, 11, anchor="start")
     return svg(W, H, b)
 
 

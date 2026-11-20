@@ -90,7 +90,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, TIER_NAME, LEFT_BLANK, closeStalePapers, type Tier, type SaveV1, type QuizResult,
+    QUIZ_SIZE, tierState, TIER_NAME, LEFT_BLANK, closeStalePapers, syncParked, type Tier, type SaveV1, type QuizResult,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
@@ -284,6 +284,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     try {
       const files = mode === 'tier' ? [sub.file] : mode === 'paper' ? paperTopics : meta.files;
       const all = await loadBanks(files);
+      // only Daily Review loads every bank, so only it parks retests whose question is gone; any page unparks the ids it
+      // loaded (an older tab missing newer bank files may have parked them). Nothing is deleted (ADR 0002).
+      if (syncParked(s, all.map((q) => q.id), mode === 'review')) save(s);
       const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);

@@ -6,7 +6,7 @@ import chineseSyllabus from '../data/syllabus/chinese.json';
 import englishSyllabus from '../data/syllabus/english.json';
 import scienceSyllabus from '../data/syllabus/science.json';
 import { cookies } from './data';
-import { MIN_POOL, type School, type Tier } from './store';
+import { MIN_POOL, tierHash, type School, type Tier } from './store';
 import { paperOk } from './paper';
 import { unitName } from './suggest';
 
@@ -45,25 +45,31 @@ export const banks = Object.values(files).map((f) => ({
 }));
 
 const LEVEL_TIER = { basic: 'b', intermediate: 'i', competent: 'c' } as const;
-const counts = new Map<string, number>(); // "sub|tier" -> questions
+const tierQs = new Map<string, string[]>(); // "sub|tier" -> question ids
 const subFile = new Map<string, string>(); // sub -> topic file
 for (const b of banks)
   for (const q of b.questions) {
     const k = `${q.sub}|${LEVEL_TIER[q.level]}`;
-    counts.set(k, (counts.get(k) ?? 0) + 1);
+    if (!tierQs.has(k)) tierQs.set(k, []);
+    tierQs.get(k)!.push(q.id);
     subFile.set(q.sub, b.topic);
   }
+const countOf = (k: string) => tierQs.get(k)?.length ?? 0;
+// the same tierHash() syncTiers stores, so liveMastered can tell a redesigned tier of the same size
+const hashOf = (k: string) => tierHash(tierQs.get(k) ?? []);
 
 export interface Sub {
   id: string; name: string; topic: string; topicName: string; home: number; capstone: boolean;
   school: School; file: string | null; count: Record<Tier, number>; playable: Record<Tier, boolean>;
+  hash: Record<Tier, string>; // tierHash of each tier's question ids, for liveMastered
 }
 
 export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).flatMap(([school, list]) =>
   list.map((s) => {
-    const count = { b: counts.get(`${s.id}|b`) ?? 0, i: counts.get(`${s.id}|i`) ?? 0, c: counts.get(`${s.id}|c`) ?? 0 };
+    const count = { b: countOf(`${s.id}|b`), i: countOf(`${s.id}|i`), c: countOf(`${s.id}|c`) };
+    const hash = { b: hashOf(`${s.id}|b`), i: hashOf(`${s.id}|i`), c: hashOf(`${s.id}|c`) };
     return {
-      ...s, school, file: subFile.get(s.id) ?? null, count,
+      ...s, school, file: subFile.get(s.id) ?? null, count, hash,
       playable: { b: count.b >= MIN_POOL, i: count.i >= MIN_POOL, c: count.c >= MIN_POOL },
     };
   }),

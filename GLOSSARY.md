@@ -89,12 +89,16 @@ A wrong answer comes due again in 1 day, then 3, then 7. A wrong answer at any s
 Owner: `answer()` in `store.ts`.
 _Avoid_: review (Daily Review is the quiz that asks due retests)
 
+**Parked**:
+A retest state whose question id was in no bank when Daily Review last loaded every bank (`syncParked`). It is not counted as due and is never deleted; any page that loads the id unparks it, and answering always unparks it.
+Owner: `questions[id].parked` in the save, `syncParked` in `store.ts`.
+
 **Retired**:
 A question state `s === 0`: answered right first time, or right at the 7-day retest. A retired question is no longer drilled in its tier.
 Owner: `questions[id].s` in the save.
 
 **Mastered**:
-The count of retired questions in a tier, shown as "N of M mastered". `liveMastered` returns 0 when the stored count was made against a bank of a different size.
+The count of retired questions in a tier, shown as "N of M mastered". `liveMastered` returns 0 when the stored count was made against a bank of a different size, or (when the tier state has one) a different id hash (`tierHash`, stored by `syncTiers`, computed per tier by `train.ts`).
 Owner: `syncTiers`, `liveMastered` in `store.ts`.
 
 **Cleared**:

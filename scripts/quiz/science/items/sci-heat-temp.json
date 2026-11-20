@@ -1,0 +1,2438 @@
+{
+  "subtopic": "sci-energy-heat-temp",
+  "items": [
+    {
+      "key": "ht-001",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following is a source of heat?",
+      "options": [
+        "The Sun",
+        "A block of ice",
+        "A glass of cold milk",
+        "A cold metal spoon"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-source",
+          "why": "Ice is cold. It takes in heat."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "Cold milk is not a source of heat."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "A cold spoon does not give out heat."
+        }
+      ],
+      "solution": [
+        "The Sun gives out a lot of heat."
+      ]
+    },
+    {
+      "key": "ht-002",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following gives out heat when electricity flows through it?",
+      "options": [
+        "A wooden spoon",
+        "A glass of water",
+        "A rubber ball",
+        "A toaster"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-source",
+          "why": "A wooden spoon does not give out heat."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "Water does not give out heat when electricity is not used on it."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "A rubber ball does not give out heat."
+        },
+        null
+      ],
+      "solution": [
+        "A toaster changes electrical energy into heat."
+      ]
+    },
+    {
+      "key": "ht-003",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which instrument is used to measure temperature?",
+      "options": [
+        "A ruler",
+        "A balance",
+        "A thermometer",
+        "A measuring cylinder"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-tool",
+          "why": "A ruler measures length."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A balance measures mass."
+        },
+        null,
+        {
+          "tag": "wrong-tool",
+          "why": "A measuring cylinder measures volume."
+        }
+      ],
+      "solution": [
+        "Temperature is measured with a thermometer."
+      ]
+    },
+    {
+      "key": "ht-004",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following is the unit used to measure temperature?",
+      "options": [
+        "Gram (g)",
+        "Degree Celsius (°C)",
+        "Centimetre (cm)",
+        "Newton (N)"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-unit",
+          "why": "Gram is a unit of mass."
+        },
+        null,
+        {
+          "tag": "wrong-unit",
+          "why": "Centimetre is a unit of length."
+        },
+        {
+          "tag": "wrong-unit",
+          "why": "Newton is a unit of force."
+        }
+      ],
+      "solution": [
+        "Temperature is measured in degrees Celsius."
+      ]
+    },
+    {
+      "key": "ht-005",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Temperature is a measure of how ____ an object is.",
+      "options": [
+        "hot or cold",
+        "heavy or light",
+        "big or small",
+        "fast or slow"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Mass tells us how heavy an object is."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Size is not temperature."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Speed is not temperature."
+        }
+      ],
+      "solution": [
+        "Temperature tells how hot or cold something is."
+      ]
+    },
+    {
+      "key": "ht-006",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Heat is a form of ____.",
+      "options": [
+        "force",
+        "matter",
+        "material",
+        "energy"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat is not a push or a pull."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat has no mass and takes up no space."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat is not a material."
+        },
+        null
+      ],
+      "solution": [
+        "Heat is a form of energy."
+      ]
+    },
+    {
+      "key": "ht-007",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A cup of hot tea is left on a table in a cool room. Which way does heat flow?",
+      "options": [
+        "From the surroundings to the tea",
+        "From the table to the tea",
+        "From the tea to the surroundings",
+        "Heat does not flow"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heat flows from hot to cold."
+        },
+        {
+          "tag": "reversed",
+          "why": "The tea is hotter than the table."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "There is a difference in temperature, so heat flows."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hotter tea to the cooler surroundings."
+      ]
+    },
+    {
+      "key": "ht-008",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Ali puts a thermometer into a cup of water. What is the reading on the thermometer?",
+      "options": [
+        "22 °C",
+        "24 °C",
+        "26 °C",
+        "14 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "Count the small marks again from 20."
+        },
+        null,
+        {
+          "tag": "misread",
+          "why": "The liquid is below the 26 mark."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is above the 20 mark."
+        }
+      ],
+      "solution": [
+        "The liquid is two small marks above 20, so it reads 24 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"138.2\" width=\"6\" height=\"77.8\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-009",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer is used to measure the temperature of a bowl of soup. What is the reading?",
+      "options": [
+        "36 °C",
+        "34 °C",
+        "38 °C",
+        "26 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "The liquid is above the 34 mark."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid has not reached the 38 mark."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is above the 30 mark."
+        }
+      ],
+      "solution": [
+        "The liquid is three small marks above 30, so it reads 36 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"99.4\" width=\"6\" height=\"116.6\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-010",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Mei Ling measures the temperature of the classroom air in the morning. What does the thermometer read?",
+      "options": [
+        "16 °C",
+        "22 °C",
+        "28 °C",
+        "18 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The liquid is above 16."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is below 20."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is below 20."
+        },
+        null
+      ],
+      "solution": [
+        "The liquid is just below 20, at the second mark below it, so it reads 18 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"157.7\" width=\"6\" height=\"58.3\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-011",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer is placed in a glass of warm milk. What is its reading?",
+      "options": [
+        "40 °C",
+        "44 °C",
+        "42 °C",
+        "32 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The liquid is above the 40 mark."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid has not reached 44."
+        },
+        null,
+        {
+          "tag": "misread",
+          "why": "The liquid is above 40."
+        }
+      ],
+      "solution": [
+        "The liquid is one small mark above 40, so it reads 42 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"79.9\" width=\"6\" height=\"136.1\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-012",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer is placed in the water of a fish tank. What is the reading?",
+      "options": [
+        "10 °C",
+        "12 °C",
+        "14 °C",
+        "22 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The liquid is above 10."
+        },
+        null,
+        {
+          "tag": "misread",
+          "why": "The liquid is below 14."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is below 20."
+        }
+      ],
+      "solution": [
+        "The liquid is one small mark above 10, so it reads 12 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"177.1\" width=\"6\" height=\"38.9\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-013",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Blocks P and Q are in contact as shown. Which block will gain heat?",
+      "options": [
+        "Q",
+        "P",
+        "Both P and Q",
+        "Neither P nor Q"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "P is hotter, so it loses heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Only the cooler block gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows because their temperatures differ."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hotter P to the cooler Q."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 130\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two blocks in contact</text><rect x=\"40\" y=\"44\" width=\"120\" height=\"64\"/><rect x=\"160\" y=\"44\" width=\"120\" height=\"64\"/><text x=\"100\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"100\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">80 °C</text><text x=\"220\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">30 °C</text></svg>"
+    },
+    {
+      "key": "ht-014",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A hot drink is left in a room at 28 °C for a very long time. What will its temperature be?",
+      "options": [
+        "More than 28 °C",
+        "Less than 28 °C",
+        "0 °C",
+        "About 28 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "It cannot become hotter than the room by cooling."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It stops cooling when it is as warm as the room."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It will not go that cold in a warm room."
+        },
+        null
+      ],
+      "solution": [
+        "Heat flows until the drink and the room are at the same temperature."
+      ]
+    },
+    {
+      "key": "ht-015",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A piece of ice at 0 °C is placed in a room at 28 °C. Which way does heat flow?",
+      "options": [
+        "From the ice to the room",
+        "Heat does not flow",
+        "From the room to the ice",
+        "Cold flows from the ice to the room"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The room is hotter than the ice."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "They have different temperatures, so heat flows."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows. There is no flow of cold."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hotter room to the colder ice."
+      ]
+    },
+    {
+      "key": "ht-016",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "The table shows the temperatures of four objects. Which object is the hottest?",
+      "options": [
+        "P",
+        "R",
+        "Q",
+        "S"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "P is cooler than R."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "Q is the coldest."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "S is cooler than R."
+        }
+      ],
+      "solution": [
+        "62 °C is the highest temperature."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"125.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four objects</text><rect x=\"10\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"50.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Object</text><rect x=\"90\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"165.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><rect x=\"10\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"90\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">34</text><rect x=\"10\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"90\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"90\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">62</text><rect x=\"10\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"90\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text></svg>"
+    },
+    {
+      "key": "ht-017",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Using the table, which object is the coldest?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "S"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "P is hotter than Q."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "R is the hottest."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "S is hotter than Q."
+        }
+      ],
+      "solution": [
+        "5 °C is the lowest temperature."
+      ],
+      "figure": "<svg viewBox=\"0 0 250 200\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"125.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Four objects</text><rect x=\"10\" y=\"36\" width=\"80\" height=\"34\"/><text x=\"50.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Object</text><rect x=\"90\" y=\"36\" width=\"150\" height=\"34\"/><text x=\"165.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><rect x=\"10\" y=\"70\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"90\" y=\"70\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">34</text><rect x=\"10\" y=\"100\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"90\" y=\"100\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">5</text><rect x=\"10\" y=\"130\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"90\" y=\"130\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">62</text><rect x=\"10\" y=\"160\" width=\"80\" height=\"30\"/><text x=\"50.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">S</text><rect x=\"90\" y=\"160\" width=\"150\" height=\"30\"/><text x=\"165.0\" y=\"180.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text></svg>"
+    },
+    {
+      "key": "ht-018",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Why does a piece of ice feel cold when we hold it in our hand?",
+      "options": [
+        "Cold flows from the ice to our hand",
+        "Heat flows from the ice to our hand",
+        "The ice makes our hand lose mass",
+        "Heat flows from our hand to the ice"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows. There is no flow of cold."
+        },
+        {
+          "tag": "reversed",
+          "why": "The hand is hotter than the ice."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This has nothing to do with heat."
+        },
+        null
+      ],
+      "solution": [
+        "Our hand loses heat to the colder ice."
+      ]
+    },
+    {
+      "key": "ht-019",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of these is a source of heat?",
+      "options": [
+        "A glass of ice water",
+        "A cold stone",
+        "A burning candle",
+        "A wet towel"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-source",
+          "why": "Ice water is cold."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "A cold stone does not give out heat."
+        },
+        null,
+        {
+          "tag": "wrong-source",
+          "why": "A wet towel does not give out heat."
+        }
+      ],
+      "solution": [
+        "A burning candle gives out heat and light."
+      ]
+    },
+    {
+      "key": "ht-020",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of these is a use of heat from the Sun?",
+      "options": [
+        "Making ice cubes",
+        "Drying wet clothes",
+        "Keeping food cold",
+        "Cooling a drink"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-use",
+          "why": "Ice cubes form when water loses heat."
+        },
+        null,
+        {
+          "tag": "wrong-use",
+          "why": "Keeping food cold needs heat to be taken away."
+        },
+        {
+          "tag": "wrong-use",
+          "why": "A drink cools when it loses heat."
+        }
+      ],
+      "solution": [
+        "The Sun gives heat that dries the clothes."
+      ]
+    },
+    {
+      "key": "ht-021",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which statement about heat and temperature is correct?",
+      "options": [
+        "Heat is energy; temperature is how hot it is",
+        "Heat and temperature mean the same thing",
+        "Heat is a measure of how hot an object is",
+        "Temperature is a form of energy"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "They are different."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "This describes temperature."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat is a form of energy."
+        }
+      ],
+      "solution": [
+        "Heat is a form of energy. Temperature is how hot or cold something is."
+      ]
+    },
+    {
+      "key": "ht-022",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "What is the usual temperature of the body of a healthy person?",
+      "options": [
+        "About 10 °C",
+        "About 25 °C",
+        "About 60 °C",
+        "About 37 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "This is far too cold."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is room temperature."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is far too hot."
+        },
+        null
+      ],
+      "solution": [
+        "A healthy body is at about 37 °C."
+      ]
+    },
+    {
+      "key": "ht-023",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer is put in a glass of ice water. Which reading is the most likely?",
+      "options": [
+        "25 °C",
+        "37 °C",
+        "1 °C",
+        "90 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "This is room temperature."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is body temperature."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "This is very hot water."
+        }
+      ],
+      "solution": [
+        "Ice water is close to 0 °C."
+      ]
+    },
+    {
+      "key": "ht-024",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Aisha wants to read the temperature of a cup of tea. Which is the best way to read the thermometer?",
+      "options": [
+        "Take it out of the tea at once and read it from above",
+        "Wait until it is steady, then read at eye level",
+        "Read it as soon as it is put in, from below",
+        "Hold the bulb in her hand while reading"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-method",
+          "why": "The liquid has not settled, and the view from above misreads."
+        },
+        null,
+        {
+          "tag": "wrong-method",
+          "why": "The liquid is still moving and the view from below misreads."
+        },
+        {
+          "tag": "wrong-method",
+          "why": "Her hand would change the temperature."
+        }
+      ],
+      "solution": [
+        "Wait until the reading is steady and look straight at the scale."
+      ]
+    },
+    {
+      "key": "ht-025",
+      "level": "basic",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A spoon at 20 °C is put into water at 70 °C. What happens to the spoon?",
+      "options": [
+        "It gains heat and its temperature rises",
+        "It loses heat and its temperature falls",
+        "Its temperature stays at 20 °C",
+        "It gains heat and its temperature falls"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The water is hotter, so the spoon gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows into it, so the temperature changes."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Gaining heat raises the temperature."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hot water to the spoon."
+      ]
+    },
+    {
+      "key": "ht-101",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Blocks A and B are in contact as shown and are left for a long time. What will be true at the end?",
+      "options": [
+        "Both are at a temperature between 40 °C and 90 °C",
+        "A stays at 90 °C and B stays at 40 °C the whole time",
+        "Both blocks are at 40 °C, the lower temperature",
+        "Both blocks are at 90 °C, the higher temperature"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows from A to B until both match."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A loses heat and B gains it, so they meet in between."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A loses heat, so it cannot stay at 90 °C."
+        }
+      ],
+      "solution": [
+        "Heat flows from A to B until they reach one temperature between the two."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 130\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two blocks in contact</text><rect x=\"40\" y=\"44\" width=\"120\" height=\"64\"/><rect x=\"160\" y=\"44\" width=\"120\" height=\"64\"/><text x=\"100\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A</text><text x=\"100\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">90 °C</text><text x=\"220\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">B</text><text x=\"220\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">40 °C</text></svg>"
+    },
+    {
+      "key": "ht-102",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "A cold drink is placed in a room. The graph shows its temperature. Why does the line become flat after 15 minutes?",
+      "options": [
+        "The drink stops gaining heat because it is full",
+        "The room stops giving out heat",
+        "The drink has reached the freezing point",
+        "The drink is now at room temperature"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A drink does not become full of heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The room has the same temperature all the time."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The temperature rose to 25 °C, not 0 °C."
+        },
+        null
+      ],
+      "solution": [
+        "Heat flowed until the drink was as warm as the room."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold drink in a room</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"175.1\" x2=\"52\" y2=\"175.1\"/><text x=\"44\" y=\"179.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"152.3\" x2=\"52\" y2=\"152.3\"/><text x=\"44\" y=\"156.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"129.4\" x2=\"52\" y2=\"129.4\"/><text x=\"44\" y=\"133.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"106.6\" x2=\"52\" y2=\"106.6\"/><text x=\"44\" y=\"110.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"83.7\" x2=\"52\" y2=\"83.7\"/><text x=\"44\" y=\"87.71428571428571\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"48\" y1=\"60.9\" x2=\"52\" y2=\"60.9\"/><text x=\"44\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,175.1 110.0,129.4 168.0,106.6 226.0,83.7 284.0,83.7 342.0,83.7\"/><circle cx=\"52.0\" cy=\"175.1\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"129.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"106.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "ht-103",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-read-data",
+      "stem": "In the same graph, between which times did the temperature of the drink rise the most?",
+      "options": [
+        "5 and 10 minutes",
+        "10 and 15 minutes",
+        "0 and 5 minutes",
+        "15 and 20 minutes"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "The rise was 5 °C, less than from 0 to 5 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The rise was 5 °C, less than from 0 to 5 minutes."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The temperature did not change."
+        }
+      ],
+      "solution": [
+        "From 0 to 5 minutes it rose by 10 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold drink in a room</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"175.1\" x2=\"52\" y2=\"175.1\"/><text x=\"44\" y=\"179.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"152.3\" x2=\"52\" y2=\"152.3\"/><text x=\"44\" y=\"156.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"129.4\" x2=\"52\" y2=\"129.4\"/><text x=\"44\" y=\"133.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"106.6\" x2=\"52\" y2=\"106.6\"/><text x=\"44\" y=\"110.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"83.7\" x2=\"52\" y2=\"83.7\"/><text x=\"44\" y=\"87.71428571428571\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"48\" y1=\"60.9\" x2=\"52\" y2=\"60.9\"/><text x=\"44\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,175.1 110.0,129.4 168.0,106.6 226.0,83.7 284.0,83.7 342.0,83.7\"/><circle cx=\"52.0\" cy=\"175.1\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"129.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"106.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "ht-104",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "In the same graph, what is the temperature of the room most likely to be?",
+      "options": [
+        "5 °C",
+        "25 °C",
+        "15 °C",
+        "35 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "This is the starting temperature of the drink."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The drink kept getting warmer after this."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The line never rose that high."
+        }
+      ],
+      "solution": [
+        "The drink stops changing at the temperature of the room, 25 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A cold drink in a room</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"175.1\" x2=\"52\" y2=\"175.1\"/><text x=\"44\" y=\"179.14285714285714\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"48\" y1=\"152.3\" x2=\"52\" y2=\"152.3\"/><text x=\"44\" y=\"156.28571428571428\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"48\" y1=\"129.4\" x2=\"52\" y2=\"129.4\"/><text x=\"44\" y=\"133.42857142857144\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"48\" y1=\"106.6\" x2=\"52\" y2=\"106.6\"/><text x=\"44\" y=\"110.57142857142858\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"83.7\" x2=\"52\" y2=\"83.7\"/><text x=\"44\" y=\"87.71428571428571\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"48\" y1=\"60.9\" x2=\"52\" y2=\"60.9\"/><text x=\"44\" y=\"64.85714285714286\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">35</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">5</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">15</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">25</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,175.1 110.0,129.4 168.0,106.6 226.0,83.7 284.0,83.7 342.0,83.7\"/><circle cx=\"52.0\" cy=\"175.1\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"129.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"106.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"83.7\" r=\"2.5\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "key": "ht-105",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer with a larger scale is used to measure the water in a kettle. What is the reading?",
+      "options": [
+        "65 °C",
+        "63 °C",
+        "70 °C",
+        "60 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "misread",
+          "why": "Each small mark is 5 °C, not 1 °C."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is below the 70 mark."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid is above the 60 mark."
+        }
+      ],
+      "solution": [
+        "The liquid is at the small mark halfway between 60 and 70, so 65 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"207.9\" x2=\"71\" y2=\"207.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"199.8\" x2=\"71\" y2=\"199.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"203.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"191.7\" x2=\"71\" y2=\"191.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"175.5\" x2=\"71\" y2=\"175.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"167.4\" x2=\"71\" y2=\"167.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"171.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"159.3\" x2=\"71\" y2=\"159.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"143.1\" x2=\"71\" y2=\"143.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"135.0\" x2=\"71\" y2=\"135.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"139.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"65\" y1=\"126.9\" x2=\"71\" y2=\"126.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"65\" y1=\"110.7\" x2=\"71\" y2=\"110.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"102.6\" x2=\"71\" y2=\"102.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"106.60000000000001\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">70</text><line x1=\"65\" y1=\"94.5\" x2=\"71\" y2=\"94.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"65\" y1=\"78.3\" x2=\"71\" y2=\"78.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"70.2\" x2=\"71\" y2=\"70.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"74.19999999999999\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">90</text><line x1=\"65\" y1=\"62.1\" x2=\"71\" y2=\"62.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"75\" y=\"110.7\" width=\"6\" height=\"105.3\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-106",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "The thermometer in the figure is used to measure hot bath water. What is the reading?",
+      "options": [
+        "80 °C",
+        "83 °C",
+        "90 °C",
+        "85 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The liquid is above the 80 mark."
+        },
+        {
+          "tag": "misread",
+          "why": "Each small mark is 5 °C, not 1 °C."
+        },
+        {
+          "tag": "misread",
+          "why": "The liquid has not reached the 90 mark."
+        },
+        null
+      ],
+      "solution": [
+        "It is at the mark halfway between 80 and 90, so 85 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"207.9\" x2=\"71\" y2=\"207.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"199.8\" x2=\"71\" y2=\"199.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"203.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"191.7\" x2=\"71\" y2=\"191.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"175.5\" x2=\"71\" y2=\"175.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"167.4\" x2=\"71\" y2=\"167.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"171.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"159.3\" x2=\"71\" y2=\"159.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"143.1\" x2=\"71\" y2=\"143.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"135.0\" x2=\"71\" y2=\"135.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"139.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><line x1=\"65\" y1=\"126.9\" x2=\"71\" y2=\"126.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"65\" y1=\"110.7\" x2=\"71\" y2=\"110.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"102.6\" x2=\"71\" y2=\"102.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"106.60000000000001\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">70</text><line x1=\"65\" y1=\"94.5\" x2=\"71\" y2=\"94.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"65\" y1=\"78.3\" x2=\"71\" y2=\"78.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"70.2\" x2=\"71\" y2=\"70.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"74.19999999999999\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">90</text><line x1=\"65\" y1=\"62.1\" x2=\"71\" y2=\"62.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><rect x=\"75\" y=\"78.3\" width=\"6\" height=\"137.7\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-107",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer reads 20 °C at first. It is then put in hot water and reads as shown. By how much has the reading risen?",
+      "options": [
+        "6 °C",
+        "36 °C",
+        "16 °C",
+        "56 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The new reading is 36 °C, not 26 °C."
+        },
+        {
+          "tag": "wrong-step",
+          "why": "36 °C is the new reading. The rise is the difference."
+        },
+        null,
+        {
+          "tag": "wrong-step",
+          "why": "Subtract the first reading from the new one."
+        }
+      ],
+      "solution": [
+        "36 - 20 = 16 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"99.4\" width=\"6\" height=\"116.6\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-108",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A large bucket and a small cup both hold water at 50 °C. Which statement is correct?",
+      "options": [
+        "The cup has more heat, and both are at the same temperature",
+        "The bucket has more heat, and both are at the same temperature",
+        "The bucket is at a higher temperature than the cup",
+        "Both have the same heat and the same temperature"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "More water at the same temperature holds more heat."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both are at 50 °C."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Different amounts of water hold different amounts of heat."
+        }
+      ],
+      "solution": [
+        "Same temperature, but more water means more heat."
+      ]
+    },
+    {
+      "key": "ht-109",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A hot metal ball is dropped into a cup of cold water. Which statement is correct?",
+      "options": [
+        "The ball loses heat and the water gains heat",
+        "The ball gains heat and the water loses heat",
+        "Both the ball and the water gain heat",
+        "Both the ball and the water lose heat"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The ball is the hotter one."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One of them has to lose the heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One of them has to gain the heat."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hot ball to the cold water."
+      ]
+    },
+    {
+      "key": "ht-110",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Blocks P, Q and R are placed in contact in a row as shown. Which block both gains heat and loses heat?",
+      "options": [
+        "P",
+        "R",
+        "None of them",
+        "Q"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-block",
+          "why": "P is the hottest, so it only loses heat."
+        },
+        {
+          "tag": "wrong-block",
+          "why": "R is the coolest, so it only gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Q is cooler than P and hotter than R."
+        },
+        null
+      ],
+      "solution": [
+        "Q gains heat from P and loses heat to R."
+      ],
+      "figure": "<svg viewBox=\"0 0 348 128\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"174.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three blocks in a row</text><rect x=\"30\" y=\"44\" width=\"96\" height=\"64\"/><text x=\"78.0\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"78.0\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">70 °C</text><rect x=\"126\" y=\"44\" width=\"96\" height=\"64\"/><text x=\"174.0\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"174.0\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">40 °C</text><rect x=\"222\" y=\"44\" width=\"96\" height=\"64\"/><text x=\"270.0\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">R</text><text x=\"270.0\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">10 °C</text></svg>"
+    },
+    {
+      "key": "ht-111",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Mei puts her left hand into hot water and her right hand into cold water for a minute. She then puts both hands into warm water. How do her hands feel?",
+      "options": [
+        "The left hand feels hotter than the right hand",
+        "Both hands feel the same",
+        "The left hand feels cooler than the right hand",
+        "Neither hand can feel the water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The left hand was in hotter water, so the warm water feels cooler to it."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Our hands judge by the heat gained or lost."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Both hands can feel it."
+        }
+      ],
+      "solution": [
+        "Our hands are poor judges of temperature, so we use a thermometer."
+      ]
+    },
+    {
+      "key": "ht-112",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Why do we use a thermometer instead of our hand to find how hot water is?",
+      "options": [
+        "A thermometer makes the water hotter",
+        "Our sense of hot and cold is not exact",
+        "Our hand is always colder than the water",
+        "Water cannot be felt with the hand"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A thermometer does not change the water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "This is not always true."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "We can feel water. We just cannot measure exactly."
+        }
+      ],
+      "solution": [
+        "A thermometer gives an exact reading."
+      ]
+    },
+    {
+      "key": "ht-113",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which list contains only sources of heat?",
+      "options": [
+        "The Sun, burning wood, an electric stove",
+        "The Sun, ice, an electric stove",
+        "Burning wood, a refrigerator shelf, the Sun",
+        "An electric stove, a snowman, burning wood"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-source",
+          "why": "Ice is not a source of heat."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "A refrigerator shelf is not a source of heat."
+        },
+        {
+          "tag": "wrong-source",
+          "why": "A snowman is not a source of heat."
+        }
+      ],
+      "solution": [
+        "The Sun, burning wood and electric stoves all give out heat."
+      ]
+    },
+    {
+      "key": "ht-114",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Why do our hands become warm when we rub them together?",
+      "options": [
+        "Our hands take in cold from the air",
+        "Heat flows from the cold air to our hands",
+        "Our hands lose mass",
+        "Movement energy changes into heat"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Cold is not taken in."
+        },
+        {
+          "tag": "reversed",
+          "why": "Heat flows from hot to cold."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Mass is not related to heat here."
+        },
+        null
+      ],
+      "solution": [
+        "Rubbing makes friction, which makes heat."
+      ]
+    },
+    {
+      "key": "ht-115",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "A hot metal ball is put into cold water. The graph shows the temperatures of the ball and the water. Which line is for the ball?",
+      "options": [
+        "The line that starts at 20 °C",
+        "Both lines",
+        "The line that starts at 100 °C",
+        "Neither line"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The ball is the hot object. It starts at 100 °C."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The two lines start at different temperatures."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "One of the lines belongs to the ball."
+        }
+      ],
+      "solution": [
+        "The ball was hotter at the start, so its line starts higher."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">X</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Y</text></svg>"
+    },
+    {
+      "key": "ht-116",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Using the same graph, what is the temperature of the water and ball after 8 minutes?",
+      "options": [
+        "32 °C",
+        "38 °C",
+        "40 °C",
+        "45 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "This is the water at 2 minutes."
+        },
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "This is the ball at 6 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is the ball at 4 minutes."
+        }
+      ],
+      "solution": [
+        "Both lines are at 38 °C from 8 minutes."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ht-117",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Using the same graph, what is happening to the heat after 8 minutes?",
+      "options": [
+        "No heat now flows between them",
+        "Heat still flows from the ball to the water",
+        "Heat flows from the water to the ball",
+        "The ball makes more heat"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "They are at the same temperature, so there is no net flow."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "They are at the same temperature."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ball cannot make heat."
+        }
+      ],
+      "solution": [
+        "Both have the same temperature, so heat no longer flows."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ht-118",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Two thermometers X and Y are in different cups. X reads 28 °C and Y reads 32 °C. If the two cups touch each other, which way will heat flow?",
+      "options": [
+        "From the cup with X to the cup with Y",
+        "Heat will not flow",
+        "Both cups will gain heat",
+        "From the cup with Y to the cup with X"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Y is hotter, so heat flows from Y."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The temperatures differ."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "One cup has to lose the heat."
+        },
+        null
+      ],
+      "solution": [
+        "Y is at the higher temperature."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 190\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups</text><path d=\"M57.0 56 V138 H133.0 V56\" stroke-width=\"2.5\"/><path d=\"M59.0 76 H131.0\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"95.0\" y=\"160\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">X</text><text x=\"95.0\" y=\"104\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">water</text><text x=\"95.0\" y=\"119\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">28 °C</text><path d=\"M227.0 56 V138 H303.0 V56\" stroke-width=\"2.5\"/><path d=\"M229.0 76 H301.0\" stroke-width=\"1\" stroke-dasharray=\"3 3\"/><text x=\"265.0\" y=\"160\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Y</text><text x=\"265.0\" y=\"104\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">water</text><text x=\"265.0\" y=\"119\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">32 °C</text></svg>"
+    },
+    {
+      "key": "ht-119",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A cup of boiling water and a bathtub of warm water are compared. Which statement is correct?",
+      "options": [
+        "The bathtub has the higher temperature because it holds more heat in it",
+        "The cup holds more heat because it is much hotter than the bath",
+        "The cup can have a higher temperature, but the bathtub holds more heat",
+        "The two have the same heat if they feel equally warm"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat and temperature are different things."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The bathtub has much more water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Feeling is not a measure of heat."
+        }
+      ],
+      "solution": [
+        "Temperature tells how hot. The amount of heat also depends on how much water there is."
+      ]
+    },
+    {
+      "key": "ht-120",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A cup of hot coffee is put on a cold table. Which statements are correct?\nA: The coffee loses heat.\nB: The table gains heat.\nC: The table loses heat to the coffee.\nD: The temperature of the coffee falls.",
+      "options": [
+        "A, C and D only",
+        "A, B and D only",
+        "B, C and D only",
+        "A and C only"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong because the table is colder than the coffee."
+        },
+        null,
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong because the table is colder than the coffee."
+        },
+        {
+          "tag": "wrong-combo",
+          "why": "C is wrong, and B and D are correct."
+        }
+      ],
+      "solution": [
+        "Heat flows from the coffee to the table, so the coffee cools."
+      ]
+    },
+    {
+      "key": "ht-121",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A student reads the thermometer in a cup of water. Which reading is the best to record?",
+      "options": [
+        "34 °C",
+        "34.5 °C",
+        "Between 30 and 40 °C",
+        "About 35 °C"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-precision",
+          "why": "The scale only has marks every 2 °C."
+        },
+        {
+          "tag": "wrong-precision",
+          "why": "This is not an exact reading."
+        },
+        {
+          "tag": "wrong-precision",
+          "why": "The liquid is at a mark, so the exact reading is 34 °C."
+        }
+      ],
+      "solution": [
+        "The liquid is at the second mark above 30, so 34 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"105.8\" width=\"6\" height=\"110.2\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-122",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A plastic cup of hot soup is placed in a bowl of cold water. What will happen?",
+      "options": [
+        "The soup warms up and the water cools down",
+        "Both become hotter",
+        "Nothing happens to either",
+        "The soup cools down and the water warms up"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Heat flows from the hot soup to the cold water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat is not made. It flows."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "They have different temperatures, so heat flows."
+        },
+        null
+      ],
+      "solution": [
+        "The soup loses heat and the water gains heat."
+      ]
+    },
+    {
+      "key": "ht-123",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following can be used to find out how hot an object is?",
+      "options": [
+        "A balance",
+        "A stopwatch",
+        "A thermometer",
+        "A measuring tape"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-tool",
+          "why": "A balance measures mass."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "A stopwatch measures time."
+        },
+        null,
+        {
+          "tag": "wrong-tool",
+          "why": "A tape measures length."
+        }
+      ],
+      "solution": [
+        "A thermometer measures temperature."
+      ]
+    },
+    {
+      "key": "ht-124",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A metal block at 100 °C is put into water at 100 °C. What happens?",
+      "options": [
+        "Heat flows from the block to the water",
+        "No heat flows between them",
+        "Heat flows from the water to the block",
+        "The block makes the water hotter"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "There is no difference in temperature."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "There is no difference in temperature."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "No heat flows between objects at the same temperature."
+        }
+      ],
+      "solution": [
+        "There is no temperature difference, so no heat flows."
+      ]
+    },
+    {
+      "key": "ht-125",
+      "level": "intermediate",
+      "outcome": "sci-energy-heat-temp-1",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following is NOT a source of heat?",
+      "options": [
+        "A block of ice",
+        "A lit gas stove",
+        "An iron being used",
+        "Sunlight on a roof"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "source",
+          "why": "This is a source of heat."
+        },
+        {
+          "tag": "source",
+          "why": "An electric iron gives out heat."
+        },
+        {
+          "tag": "source",
+          "why": "The Sun gives out heat."
+        }
+      ],
+      "solution": [
+        "Ice takes in heat. It is not a source."
+      ]
+    },
+    {
+      "key": "ht-201",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "A hot metal ball is put into cold water. The graph shows both temperatures. How many minutes did it take for the ball and the water to reach the same temperature?",
+      "options": [
+        "8 minutes",
+        "2 minutes",
+        "4 minutes",
+        "10 minutes"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-reading",
+          "why": "The two lines are still far apart at 2 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The two lines are still apart at 4 minutes."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "They already matched from 8 minutes."
+        }
+      ],
+      "solution": [
+        "The lines meet at 8 minutes."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ht-202",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Using the same graph, by how much did the temperature of the ball fall?",
+      "options": [
+        "38 °C",
+        "18 °C",
+        "100 °C",
+        "62 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-step",
+          "why": "38 °C is the final temperature, not the fall."
+        },
+        {
+          "tag": "wrong-step",
+          "why": "This is the rise of the water."
+        },
+        {
+          "tag": "wrong-step",
+          "why": "100 °C is the starting temperature."
+        },
+        null
+      ],
+      "solution": [
+        "100 - 38 = 62 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ht-203",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Using the same graph, by how much did the temperature of the water rise?",
+      "options": [
+        "62 °C",
+        "38 °C",
+        "18 °C",
+        "20 °C"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-step",
+          "why": "This is how much the ball fell."
+        },
+        {
+          "tag": "wrong-step",
+          "why": "This is the final temperature."
+        },
+        null,
+        {
+          "tag": "wrong-step",
+          "why": "This is the starting temperature."
+        }
+      ],
+      "solution": [
+        "38 - 20 = 18 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ht-204",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "The ball fell by 62 °C but the water rose by only 18 °C. Which is the most likely reason?",
+      "options": [
+        "The ball lost heat to the air only",
+        "Much more water than metal",
+        "The water made heat of its own",
+        "The water cannot gain heat"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Some heat can go to the air, but this does not explain such a big difference."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Water does not make heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The water did gain heat."
+        }
+      ],
+      "solution": [
+        "A large amount of water needs more heat for each degree it rises than a small ball."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A hot ball in cold water</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"110.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">2</text><line x1=\"110.0\" y1=\"198\" x2=\"110.0\" y2=\"202\"/><text x=\"168.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">4</text><line x1=\"168.0\" y1=\"198\" x2=\"168.0\" y2=\"202\"/><text x=\"226.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">6</text><line x1=\"226.0\" y1=\"198\" x2=\"226.0\" y2=\"202\"/><text x=\"284.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">8</text><line x1=\"284.0\" y1=\"198\" x2=\"284.0\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,38.0 110.0,102.0 168.0,126.0 226.0,134.0 284.0,137.2 342.0,137.2\"/><circle cx=\"52.0\" cy=\"38.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"126.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,166.0 110.0,146.8 168.0,140.4 226.0,137.2 284.0,137.2 342.0,137.2\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"166.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"110.0\" cy=\"146.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"168.0\" cy=\"140.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"226.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"284.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"137.2\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">ball</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">water</text></svg>"
+    },
+    {
+      "key": "ht-205",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "The graph shows the temperatures of two cups of tea left in the same room. Which statement is correct?",
+      "options": [
+        "Tea Q lost heat faster than tea P at the start",
+        "Tea P lost heat faster than tea Q at the start",
+        "Both cups ended at 90 °C",
+        "Tea Q gained heat from the room"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "Q's line falls more steeply."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "Both ended near the room temperature."
+        },
+        {
+          "tag": "reversed",
+          "why": "Q's temperature fell, so it lost heat."
+        }
+      ],
+      "solution": [
+        "Q's line drops more steeply at the start."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of tea</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,73.2 197.0,89.2 269.5,102.0 342.0,111.6\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"73.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"89.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"111.6\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,92.4 197.0,114.8 269.5,127.6 342.0,134.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"92.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"127.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ht-206",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "In the same graph, what is the likely temperature of the room?",
+      "options": [
+        "About 90 °C, as at the start",
+        "About 60 °C, halfway down",
+        "About 100 °C, the top of the scale",
+        "A little below 40 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "This is the starting temperature of the tea."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "The tea was still cooling past 60 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "This is above the starting temperature."
+        },
+        null
+      ],
+      "solution": [
+        "The tea cools until it reaches the temperature of the room."
+      ],
+      "figure": "<svg viewBox=\"0 0 360 250\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"180.0\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two cups of tea</text><path d=\"M52 38 V198 H342\"/><line x1=\"48\" y1=\"198.0\" x2=\"52\" y2=\"198.0\"/><text x=\"44\" y=\"202.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"48\" y1=\"166.0\" x2=\"52\" y2=\"166.0\"/><text x=\"44\" y=\"170.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"48\" y1=\"134.0\" x2=\"52\" y2=\"134.0\"/><text x=\"44\" y=\"138.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"48\" y1=\"102.0\" x2=\"52\" y2=\"102.0\"/><text x=\"44\" y=\"106.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">60</text><line x1=\"48\" y1=\"70.0\" x2=\"52\" y2=\"70.0\"/><text x=\"44\" y=\"74.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">80</text><line x1=\"48\" y1=\"38.0\" x2=\"52\" y2=\"38.0\"/><text x=\"44\" y=\"42.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">100</text><text x=\"52.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"52.0\" y1=\"198\" x2=\"52.0\" y2=\"202\"/><text x=\"124.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"124.5\" y1=\"198\" x2=\"124.5\" y2=\"202\"/><text x=\"197.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"197.0\" y1=\"198\" x2=\"197.0\" y2=\"202\"/><text x=\"269.5\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"269.5\" y1=\"198\" x2=\"269.5\" y2=\"202\"/><text x=\"342.0\" y=\"214\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"342.0\" y1=\"198\" x2=\"342.0\" y2=\"202\"/><text x=\"197.0\" y=\"242\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><text transform=\"translate(14 118.0) rotate(-90)\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">Temperature (°C)</text><polyline points=\"52.0,54.0 124.5,73.2 197.0,89.2 269.5,102.0 342.0,111.6\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"73.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"89.2\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"102.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"111.6\" r=\"2.5\" fill=\"currentColor\"/><polyline points=\"52.0,54.0 124.5,92.4 197.0,114.8 269.5,127.6 342.0,134.0\" stroke-dasharray=\"6 4\"/><circle cx=\"52.0\" cy=\"54.0\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"124.5\" cy=\"92.4\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"197.0\" cy=\"114.8\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"269.5\" cy=\"127.6\" r=\"2.5\" fill=\"currentColor\"/><circle cx=\"342.0\" cy=\"134.0\" r=\"2.5\" fill=\"currentColor\"/><line x1=\"280\" y1=\"46\" x2=\"306\" y2=\"46\"/><text x=\"312\" y=\"50\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">P</text><line x1=\"280\" y1=\"62\" x2=\"306\" y2=\"62\" stroke-dasharray=\"6 4\"/><text x=\"312\" y=\"66\" text-anchor=\"start\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">Q</text></svg>"
+    },
+    {
+      "key": "ht-207",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Hot water at 70 °C is put in a metal can. The can is placed in a larger dish of water at 20 °C. After some time, the temperature of the water in the can is 45 °C. Which is the most likely temperature of the water in the dish?",
+      "options": [
+        "20 °C, as it was at the start",
+        "A temperature above 45 °C",
+        "A temperature between 20 °C and 45 °C",
+        "70 °C, the same as the can at the start"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The dish water gains heat, so it is warmer than 20 °C."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The dish water is still colder than the can water."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The dish water cannot be hotter than the can water."
+        }
+      ],
+      "solution": [
+        "The dish water gains heat but is still cooler than the can water."
+      ]
+    },
+    {
+      "key": "ht-208",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-fair-test-design",
+      "stem": "Ravi wants to find out which of two cups cools faster. He fills both with hot water and measures the temperature every 5 minutes. Which should he keep the same?",
+      "options": [
+        "The material that each cup is made of",
+        "Water amount and starting temperature",
+        "The temperature reading after 5 minutes",
+        "The time taken for the water to cool"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "changed-variable",
+          "why": "This is what he changes in this test."
+        },
+        null,
+        {
+          "tag": "measured-variable",
+          "why": "This is the result that is measured."
+        },
+        {
+          "tag": "measured-variable",
+          "why": "This is the result, not something to keep the same."
+        }
+      ],
+      "solution": [
+        "Only the cup should differ."
+      ]
+    },
+    {
+      "key": "ht-209",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following statements comparing two objects at the same temperature is correct?",
+      "options": [
+        "Two objects at the same temperature may hold different amounts of heat",
+        "Two objects at the same temperature always hold the same amount of heat",
+        "An object with a higher temperature always holds more heat",
+        "Heat can be measured with a thermometer"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The amount of heat also depends on how much matter there is."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A small hot object can hold less heat than a large warm one."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "A thermometer measures temperature."
+        }
+      ],
+      "solution": [
+        "A larger object holds more heat at the same temperature."
+      ]
+    },
+    {
+      "key": "ht-210",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "The table shows the temperature of a block of metal and the water it was dropped into. Which statement is correct?",
+      "options": [
+        "Heat flowed from the water to the metal",
+        "No heat flowed because the temperatures changed",
+        "Heat flowed from the metal to the water after 6 minutes only",
+        "Heat flowed from the metal to the water"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The metal started hotter and ended cooler."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The temperatures changed because heat flowed."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flowed from the start."
+        },
+        null
+      ],
+      "solution": [
+        "The metal cooled and the water warmed."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Metal in water</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><rect x=\"100\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"150.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Metal (°C)</text><rect x=\"200\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"100\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"150.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">90</text><rect x=\"200\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"100\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"150.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">52</text><rect x=\"200\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">34</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"100\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"150.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"200\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text></svg>"
+    },
+    {
+      "key": "ht-211",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "In the table, what can be said about the metal and the water at 6 minutes?",
+      "options": [
+        "The metal is hotter, so it is still losing heat",
+        "The water is hotter, so it is losing heat",
+        "Both are at 40 °C, so no heat flows now",
+        "The metal has lost all its heat"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-reading",
+          "why": "At 6 minutes both are at 40 °C."
+        },
+        {
+          "tag": "wrong-reading",
+          "why": "They are at the same temperature."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "It is at 40 °C, not at no heat."
+        }
+      ],
+      "solution": [
+        "Both are at 40 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 310 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"155.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Metal in water</text><rect x=\"10\" y=\"36\" width=\"90\" height=\"34\"/><text x=\"55.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Time (min)</text><rect x=\"100\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"150.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Metal (°C)</text><rect x=\"200\" y=\"36\" width=\"100\" height=\"34\"/><text x=\"250.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Water (°C)</text><rect x=\"10\" y=\"70\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">0</text><rect x=\"100\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"150.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">90</text><rect x=\"200\" y=\"70\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">20</text><rect x=\"10\" y=\"100\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">3</text><rect x=\"100\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"150.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">52</text><rect x=\"200\" y=\"100\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">34</text><rect x=\"10\" y=\"130\" width=\"90\" height=\"30\"/><text x=\"55.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">6</text><rect x=\"100\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"150.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text><rect x=\"200\" y=\"130\" width=\"100\" height=\"30\"/><text x=\"250.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">40</text></svg>"
+    },
+    {
+      "key": "ht-212",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer reads 20 °C in a cup. After a lot of cold water is added, it reads as shown. How much has the temperature fallen?",
+      "options": [
+        "12 °C",
+        "8 °C",
+        "32 °C",
+        "2 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "misread",
+          "why": "The new reading is 12 °C, not the fall."
+        },
+        null,
+        {
+          "tag": "wrong-step",
+          "why": "Subtract the new reading from 20 °C."
+        },
+        {
+          "tag": "misread",
+          "why": "Count the scale marks again."
+        }
+      ],
+      "solution": [
+        "20 - 12 = 8 °C."
+      ],
+      "figure": "<svg viewBox=\"0 0 150 270\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"75.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">A thermometer</text><text x=\"42\" y=\"42\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\" stroke=\"none\">°C</text><rect x=\"71\" y=\"48\" width=\"14\" height=\"174\" rx=\"7\" stroke-width=\"2\"/><circle cx=\"78\" cy=\"236\" r=\"14\" fill=\"currentColor\"/><rect x=\"71\" y=\"216\" width=\"14\" height=\"22\" fill=\"#fff\" stroke=\"none\"/><rect x=\"75\" y=\"216\" width=\"6\" height=\"22\" fill=\"currentColor\" stroke=\"none\"/><line x1=\"59\" y1=\"216.0\" x2=\"71\" y2=\"216.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"220.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">0</text><line x1=\"65\" y1=\"209.5\" x2=\"71\" y2=\"209.5\" stroke-width=\"1\"/><line x1=\"65\" y1=\"203.0\" x2=\"71\" y2=\"203.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"196.6\" x2=\"71\" y2=\"196.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"190.1\" x2=\"71\" y2=\"190.1\" stroke-width=\"1\"/><line x1=\"59\" y1=\"183.6\" x2=\"71\" y2=\"183.6\" stroke-width=\"1.6\"/><text x=\"50\" y=\"187.6\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">10</text><line x1=\"65\" y1=\"177.1\" x2=\"71\" y2=\"177.1\" stroke-width=\"1\"/><line x1=\"65\" y1=\"170.6\" x2=\"71\" y2=\"170.6\" stroke-width=\"1\"/><line x1=\"65\" y1=\"164.2\" x2=\"71\" y2=\"164.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"157.7\" x2=\"71\" y2=\"157.7\" stroke-width=\"1\"/><line x1=\"59\" y1=\"151.2\" x2=\"71\" y2=\"151.2\" stroke-width=\"1.6\"/><text x=\"50\" y=\"155.2\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">20</text><line x1=\"65\" y1=\"144.7\" x2=\"71\" y2=\"144.7\" stroke-width=\"1\"/><line x1=\"65\" y1=\"138.2\" x2=\"71\" y2=\"138.2\" stroke-width=\"1\"/><line x1=\"65\" y1=\"131.8\" x2=\"71\" y2=\"131.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"125.3\" x2=\"71\" y2=\"125.3\" stroke-width=\"1\"/><line x1=\"59\" y1=\"118.8\" x2=\"71\" y2=\"118.8\" stroke-width=\"1.6\"/><text x=\"50\" y=\"122.8\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">30</text><line x1=\"65\" y1=\"112.3\" x2=\"71\" y2=\"112.3\" stroke-width=\"1\"/><line x1=\"65\" y1=\"105.8\" x2=\"71\" y2=\"105.8\" stroke-width=\"1\"/><line x1=\"65\" y1=\"99.4\" x2=\"71\" y2=\"99.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"92.9\" x2=\"71\" y2=\"92.9\" stroke-width=\"1\"/><line x1=\"59\" y1=\"86.4\" x2=\"71\" y2=\"86.4\" stroke-width=\"1.6\"/><text x=\"50\" y=\"90.4\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">40</text><line x1=\"65\" y1=\"79.9\" x2=\"71\" y2=\"79.9\" stroke-width=\"1\"/><line x1=\"65\" y1=\"73.4\" x2=\"71\" y2=\"73.4\" stroke-width=\"1\"/><line x1=\"65\" y1=\"67.0\" x2=\"71\" y2=\"67.0\" stroke-width=\"1\"/><line x1=\"65\" y1=\"60.5\" x2=\"71\" y2=\"60.5\" stroke-width=\"1\"/><line x1=\"59\" y1=\"54.0\" x2=\"71\" y2=\"54.0\" stroke-width=\"1.6\"/><text x=\"50\" y=\"58.0\" text-anchor=\"end\" font-size=\"11\" fill=\"currentColor\" stroke=\"none\">50</text><rect x=\"75\" y=\"177.1\" width=\"6\" height=\"38.9\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+    },
+    {
+      "key": "ht-213",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A cook says, \"The soup is full of heat, so its temperature must be very high.\" Which reply is best?",
+      "options": [
+        "Not always, as a big pot of warm soup can hold more heat",
+        "Yes: heat and temperature are the same thing, so it is very hot",
+        "Yes: temperature measures the amount of heat in the soup",
+        "No: soup has no heat at all, only temperature"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Heat and temperature are different."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Temperature tells how hot, not how much heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Soup has heat."
+        }
+      ],
+      "solution": [
+        "Temperature and the amount of heat are different."
+      ]
+    },
+    {
+      "key": "ht-214",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Hot water at 80 °C is put in a cup. A cold metal spoon at 20 °C is placed in it. Which graph is most likely for the temperature of the spoon?",
+      "options": [
+        "A line that falls, then levels off at a lower value",
+        "A flat line at 20 °C",
+        "A line that rises above 80 °C and keeps rising",
+        "A line that rises, then levels off below 80 °C"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "The spoon gains heat, so it warms."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The spoon gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The spoon cannot become hotter than the water."
+        },
+        null
+      ],
+      "solution": [
+        "The spoon warms up until it matches the water."
+      ]
+    },
+    {
+      "key": "ht-215",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which is the most suitable way to measure the temperature of boiling water?",
+      "options": [
+        "A thermometer that reads from -10 to 50 °C",
+        "The back of the hand",
+        "A thermometer that reads above 110 °C",
+        "A stopwatch"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-tool",
+          "why": "The liquid would rise beyond the top of the scale."
+        },
+        {
+          "tag": "wrong-tool",
+          "why": "This is unsafe and gives no number."
+        },
+        null,
+        {
+          "tag": "wrong-tool",
+          "why": "A stopwatch measures time."
+        }
+      ],
+      "solution": [
+        "The scale must go above 100 °C."
+      ]
+    },
+    {
+      "key": "ht-216",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "Three identical cups with hot water at 90 °C are left in a room at 25 °C. The table shows the temperature after 30 minutes. Which cup lost the most heat?",
+      "options": [
+        "P",
+        "R",
+        "Q",
+        "They all lost the same amount"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-cup",
+          "why": "The water in P cooled the least."
+        },
+        null,
+        {
+          "tag": "wrong-cup",
+          "why": "The water in Q cooled less than in R."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The final temperatures are different."
+        }
+      ],
+      "solution": [
+        "R fell the most, from 90 to 41."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"70\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 30 min (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">72</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">58</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">41</text></svg>"
+    },
+    {
+      "key": "ht-217",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-read-data",
+      "stem": "In the same table, which cup will the water in the room gain the most heat from?",
+      "options": [
+        "R",
+        "P",
+        "Q",
+        "They all give the same"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-cup",
+          "why": "P gave out the least heat."
+        },
+        {
+          "tag": "wrong-cup",
+          "why": "Q gave out less than R."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The cups gave out different amounts."
+        }
+      ],
+      "solution": [
+        "R lost the most heat, so the room gained the most from R."
+      ],
+      "figure": "<svg viewBox=\"0 0 280 170\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"140.0\" y=\"22\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Three cups</text><rect x=\"10\" y=\"36\" width=\"60\" height=\"34\"/><text x=\"40.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Cup</text><rect x=\"70\" y=\"36\" width=\"200\" height=\"34\"/><text x=\"170.0\" y=\"58.0\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Temperature after 30 min (°C)</text><rect x=\"10\" y=\"70\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">P</text><rect x=\"70\" y=\"70\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"90.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">72</text><rect x=\"10\" y=\"100\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">Q</text><rect x=\"70\" y=\"100\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"120.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">58</text><rect x=\"10\" y=\"130\" width=\"60\" height=\"30\"/><text x=\"40.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">R</text><rect x=\"70\" y=\"130\" width=\"200\" height=\"30\"/><text x=\"170.0\" y=\"150.0\" text-anchor=\"middle\" font-size=\"14\" fill=\"currentColor\" stroke=\"none\">41</text></svg>"
+    },
+    {
+      "key": "ht-218",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following shows that temperature and heat are different?",
+      "options": [
+        "Two beakers with the same temperature always feel exactly the same to touch",
+        "A thermometer reading rises when we add ice cubes to hot water",
+        "Hot water always contains less heat than cold water of any amount",
+        "Beakers at 60 °C with 100 ml and 500 ml give out different amounts of heat"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Feeling does not show the amount of heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Ice makes it fall."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The amount depends on both temperature and amount of water."
+        },
+        null
+      ],
+      "solution": [
+        "The bigger beaker gives out more heat, though both start at the same temperature."
+      ]
+    },
+    {
+      "key": "ht-219",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A hot iron block is dropped into cold water. Which statement describes what happens to the heat?",
+      "options": [
+        "The iron loses heat and the heat disappears",
+        "The water makes heat to match the iron",
+        "The heat lost by the iron is gained by the water",
+        "The iron gains heat from the water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "The heat does not disappear. It flows to the water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Water does not make heat."
+        },
+        null,
+        {
+          "tag": "reversed",
+          "why": "The iron is hotter, so it loses heat."
+        }
+      ],
+      "solution": [
+        "Heat moves from the iron to the water."
+      ]
+    },
+    {
+      "key": "ht-220",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A thermometer is moved from a cup of ice water into a cup of hot water. Which describes how the reading changes?",
+      "options": [
+        "It jumps to the final reading as soon as it is put in",
+        "It rises fast at first, then slowly until steady",
+        "It falls first and then rises to the final reading",
+        "It does not change"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "Heat takes time to flow into the thermometer."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "The thermometer only gains heat."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "It gains heat from the hot water."
+        }
+      ],
+      "solution": [
+        "The thermometer gains heat, and its reading rises until it matches the water."
+      ]
+    },
+    {
+      "key": "ht-221",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Two metal blocks of the same size, P at 100 °C and Q at 0 °C, are placed in contact. After a long time, which temperature is the most likely for both blocks?",
+      "options": [
+        "About 50 °C",
+        "100 °C, the temperature of P",
+        "0 °C, the temperature of Q",
+        "150 °C, the total of both"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "P loses heat, so both cannot be 100 °C."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Q gains heat, so both cannot be 0 °C."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "They cannot be hotter than P was."
+        }
+      ],
+      "solution": [
+        "Equal metal blocks meet halfway between the two temperatures."
+      ],
+      "figure": "<svg viewBox=\"0 0 330 130\" font-family=\"Arial, Helvetica, sans-serif\" font-size=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><text x=\"165.0\" y=\"16\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Two equal blocks in contact</text><rect x=\"40\" y=\"44\" width=\"120\" height=\"64\"/><rect x=\"160\" y=\"44\" width=\"120\" height=\"64\"/><text x=\"100\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">P</text><text x=\"100\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">100 °C</text><text x=\"220\" y=\"72\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"currentColor\" stroke=\"none\">Q</text><text x=\"220\" y=\"94\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\" stroke=\"none\">0 °C</text></svg>"
+    },
+    {
+      "key": "ht-222",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-2",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Which of the following can we measure directly with a thermometer?",
+      "options": [
+        "How much heat the tea contains",
+        "How much heat the tea will give to the room",
+        "The mass of the tea",
+        "How hot a cup of tea is"
+      ],
+      "answer": 3,
+      "explain": [
+        {
+          "tag": "wrong-quantity",
+          "why": "A thermometer measures temperature, not the amount of heat."
+        },
+        {
+          "tag": "wrong-quantity",
+          "why": "A thermometer does not measure the amount of heat."
+        },
+        {
+          "tag": "wrong-quantity",
+          "why": "A thermometer does not measure mass."
+        },
+        null
+      ],
+      "solution": [
+        "A thermometer measures temperature."
+      ]
+    },
+    {
+      "key": "ht-223",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "An ice cube is put into a cup of warm water. Which statement about the temperature of the water is correct?",
+      "options": [
+        "It rises because the ice gives heat to the water",
+        "It stays the same because ice has no heat",
+        "It falls because the water gives heat to the ice",
+        "It falls because the ice gives coldness to the water"
+      ],
+      "answer": 2,
+      "explain": [
+        {
+          "tag": "reversed",
+          "why": "Ice is colder than the water."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "The ice is colder, so heat flows to it."
+        },
+        null,
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows from water to ice. Cold is not given."
+        }
+      ],
+      "solution": [
+        "Heat flows from the warm water to the ice."
+      ]
+    },
+    {
+      "key": "ht-224",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-3",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "Aisha reads the thermometer in hot water as 78 °C and later reads 52 °C. Which is the best description of her results?",
+      "options": [
+        "The water gained heat and its temperature fell by 26 °C",
+        "The water lost heat and its temperature fell by 26 °C",
+        "The water lost heat and its temperature fell by 130 °C",
+        "The water lost heat and its temperature rose by 26 °C"
+      ],
+      "answer": 1,
+      "explain": [
+        {
+          "tag": "wrong-idea",
+          "why": "A falling temperature means heat was lost."
+        },
+        null,
+        {
+          "tag": "wrong-step",
+          "why": "Subtract, do not add."
+        },
+        {
+          "tag": "reversed",
+          "why": "The temperature fell."
+        }
+      ],
+      "solution": [
+        "78 - 52 = 26 °C. Falling temperature means heat was lost."
+      ]
+    },
+    {
+      "key": "ht-225",
+      "level": "competent",
+      "outcome": "sci-energy-heat-temp-4",
+      "pattern": "sci-pat-heat-temperature",
+      "stem": "A hot-water pipe passes through a cold room. Which statement is correct?",
+      "options": [
+        "Heat flows from the pipe to the room, so the pipe loses heat",
+        "Heat flows from the room to the pipe",
+        "No heat flows because the pipe is metal",
+        "The room makes the pipe cooler by giving cold to it"
+      ],
+      "answer": 0,
+      "explain": [
+        null,
+        {
+          "tag": "reversed",
+          "why": "The pipe is hotter than the room."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows whenever temperatures differ."
+        },
+        {
+          "tag": "wrong-idea",
+          "why": "Heat flows. Cold does not flow."
+        }
+      ],
+      "solution": [
+        "Heat flows from the hotter pipe to the cooler room."
+      ]
+    }
+  ]
+}

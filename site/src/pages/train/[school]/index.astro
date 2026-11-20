@@ -11,7 +11,7 @@ const { school } = Astro.props as { school: (typeof SCHOOLS)[number] };
 const list = subsOf(school.id as School);
 const infos: (SubInfo & { file: string | null; home: number })[] = list.map((s) => ({
   id: s.id, ...listGroup(s), name: s.name, slug: subSlug(s.id),
-  playable: s.playable, count: s.count, file: s.file, home: s.home,
+  playable: s.playable, count: s.count, hash: s.hash, file: s.file, home: s.home,
 }));
 const groups = groupByTopic(infos) as { topic: string; name: string; subs: typeof infos }[];
 const clientData = JSON.stringify(infos).replace(/</g, '\\u003c');
@@ -109,12 +109,13 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 
     // chips
     const countOf = new Map(subs.map((y) => [y.id, y.count]));
+    const hashOf = new Map(subs.map((y) => [y.id, y.hash]));
     const chipState = (sub: string, t: Tier, playable: boolean) => {
       if (!playable) return { state: 'none', text: `${TIER_NAME[t]}: no questions yet` };
       const st = tierState(s, sub, t);
       if (st.cleared) return { state: 'cleared', text: `${TIER_NAME[t]}: cleared ✓` };
       if (!tierOpen(s, sub, t, subs.find((y) => y.id === sub)?.playable)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
-      const n = countOf.get(sub)?.[t], m = liveMastered(st, n);
+      const n = countOf.get(sub)?.[t], m = liveMastered(st, n, hashOf.get(sub)?.[t]);
       if (m) return { state: 'pass1', text: `${TIER_NAME[t]}: ${m} of ${n} mastered` };
       return { state: 'open', text: `${TIER_NAME[t]}: open` };
     };

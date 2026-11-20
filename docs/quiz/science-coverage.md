@@ -1,6 +1,6 @@
 # Science bank: PSLE syllabus and top-school coverage
 
-757 shipped questions (basic 253, intermediate 254, competent 250), 344 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
+907 shipped questions (basic 303, intermediate 304, competent 300), 402 with a figure. Regenerate with `python3 scripts/quiz/science/coverage.py`.
 
 ## 1. PSLE syllabus (Science Syllabus 2023)
 
@@ -71,12 +71,12 @@
 | Seeing and shadows | Recognise that an object can be seen when it reflects light or is a s… | yes | yes | 0 **not yet** |
 | Seeing and shadows | Recognise that light travels in straight lines and a shadow forms whe… | yes | yes | 0 **not yet** |
 | Seeing and shadows | Investigate variables affecting shadows: shape, size, position of obj… | yes | yes | 0 **not yet** |
-| Heat and temperature | Identify common sources of heat | yes | no | 0 **not yet** |
-| Heat and temperature | State that temperature is a measurement of degree of hotness; that he… | yes | no | 0 **not yet** |
-| Heat and temperature | Measure temperature using a thermometer and a datalogger with tempera… | yes | yes | 0 **not yet** |
-| Heat and temperature | Show an understanding that heat flows from a hotter to a colder objec… | yes | yes | 0 **not yet** |
-| Effects of heat and conductors | List effects of heat gain/loss in everyday life: contraction/expansio… | yes | no | 0 **not yet** |
-| Effects of heat and conductors | Identify good conductors (metals) and poor conductors (wood, plastics… | yes | yes | 0 **not yet** |
+| Heat and temperature | Identify common sources of heat | yes | no | 9 |
+| Heat and temperature | State that temperature is a measurement of degree of hotness; that he… | yes | no | 15 |
+| Heat and temperature | Measure temperature using a thermometer and a datalogger with tempera… | yes | yes | 21 |
+| Heat and temperature | Show an understanding that heat flows from a hotter to a colder objec… | yes | yes | 30 |
+| Effects of heat and conductors | List effects of heat gain/loss in everyday life: contraction/expansio… | yes | no | 36 |
+| Effects of heat and conductors | Identify good conductors (metals) and poor conductors (wood, plastics… | yes | yes | 39 |
 | Respiration and the Sun | Recognise that living things need energy from respiration to carry ou… | yes | no | 0 **not yet** |
 | Respiration and the Sun | Recognise that the Sun is our primary source of energy (light and hea… | yes | no | 0 **not yet** |
 | Respiration and the Sun | Differentiate between the ways plants and animals obtain energy [Stan… | yes | no | 0 **not yet** |
@@ -91,7 +91,7 @@
 | Evaluating observations, information and methods | Evaluate observations, information and methods (assess reasonableness… | yes | yes | 0 **not yet** |
 | Communicating explanations and reasoning | Communicate explanations and reasoning using words, diagrams, tables … | no | no | 0 |
 
-**26 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Organism, population, community, habitats; Seeing and shadows; Heat and temperature; Effects of heat and conductors; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
+**32 of 83 MCQ-testable outcomes have questions.** Not yet covered: Characteristics of living things; Broad groups of living things; Properties and uses of materials; Cell and continuity of kind; Human reproduction; Matter and states of matter; States of water and changes of state; Rate of evaporation; Water cycle and conservation; Overview of human systems; Digestive system; Gases in air; Respiratory and circulatory systems; Electric circuits; Variables affecting current; conductors; Magnets; Organism, population, community, habitats; Seeing and shadows; Respiration and the Sun; Predicting and hypothesising; Interpreting and analysing information; Evaluating observations, information and methods
 
 ## 2. Top-school question types (214 P5/P6 papers)
 
@@ -101,7 +101,7 @@
 | Changes of state: melting, freezing, boiling, condensation, evaporation (`sci-pat-change-of-state`) | 127 | 0 **not yet** |
 | Electric circuits: complete and open circuits, symbols, switches (`sci-pat-circuit-basics`) | 123 | 0 **not yet** |
 | Plant parts and their functions (root, stem, leaf, stomata) (`sci-pat-plant-parts-function`) | 117 | 51 |
-| Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 0 **not yet** |
+| Heat gain and loss, temperature and thermometers (`sci-pat-heat-temperature`) | 113 | 60 |
 | Plant reproduction: flower parts, pollination, fertilisation, dispersal, germination (`sci-pat-plant-reproduction`) | 106 | 69 |
 | Classify organisms into broad groups (plants, animals, fungi, bacteria) (`sci-pat-classify-groups`) | 99 | 0 **not yet** |
 | Respiratory and circulatory systems (lungs, heart, blood) (`sci-pat-resp-circulatory`) | 98 | 0 **not yet** |
@@ -110,14 +110,14 @@
 | Cell parts, functions and continuity of kind (`sci-pat-cell-continuity`) | 91 | 0 **not yet** |
 | Human digestive system: organs and digestion (`sci-pat-digestive-system`) | 88 | 0 **not yet** |
 | Forces and their effects (push, pull, contact and non-contact forces) (`sci-pat-forces-effects`) | 87 | 75 |
-| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 34 |
+| Interpret a graph or results table and draw a conclusion (`sci-pat-read-data`) | 80 | 63 |
 | Light: sources, seeing, reflection and shadows (`sci-pat-light-shadows`) | 78 | 0 **not yet** |
 | Life cycle stages and comparison (insect, amphibian, plant) (`sci-pat-life-cycle-stages`) | 76 | 78 |
 | Human reproduction: gametes, fertilisation and development (`sci-pat-human-reproduction`) | 76 | 0 **not yet** |
 | Energy forms and conversion (`sci-pat-energy-conversion`) | 75 | 67 |
 | Food chains and food webs: energy flow and population effects (`sci-pat-food-chain-web`) | 69 | 68 |
 | Organism, population, community and habitat (`sci-pat-population-community`) | 58 | 0 **not yet** |
-| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 37 |
+| Fair test and experiment design: variables and set-up choice (`sci-pat-fair-test-design`) | 51 | 41 |
 | Photosynthesis: requirements, products and experiment set-ups (`sci-pat-photosynthesis`) | 49 | 62 |
 | Friction, elastic spring force and weight: investigations (`sci-pat-friction-spring-weight`) | 36 | 61 |
 | Human impact on the environment and conservation (`sci-pat-human-impact`) | 35 | 14 |
@@ -125,7 +125,7 @@
 | Adaptations of plants and animals (structural and behavioural) (`sci-pat-adaptations`) | 30 | 60 |
 | Characteristics of living and non-living things (`sci-pat-living-characteristics`) | 29 | 0 **not yet** |
 | Water cycle and water conservation (`sci-pat-water-cycle`) | 22 | 0 **not yet** |
-| Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 0 **not yet** |
+| Effects of heat: expansion and contraction, and heat conductors (`sci-pat-heat-effects-conductors`) | 21 | 57 |
 | Gases in air and tests for gases (`sci-pat-gases-in-air`) | 12 | 0 **not yet** |
 | Current strength, conductors and insulators (`sci-pat-circuit-variables`) | 11 | 0 **not yet** |
 | Respiration and the Sun as the source of energy (`sci-pat-respiration-sun`) | 9 | 0 **not yet** |

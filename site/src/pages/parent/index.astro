@@ -6,7 +6,7 @@ const math = subsOf('math');
 const data = {
   total: cookieBySlug.size,
   min: MIN_POOL,
-  subs: math.map((s) => ({ id: s.id, name: s.name, topic: s.topicName, file: s.file, count: s.count, content: hasContent(s) })),
+  subs: math.map((s) => ({ id: s.id, name: s.name, topic: s.topicName, file: s.file, count: s.count, hash: s.hash, content: hasContent(s) })),
   // every subject's sub-topics with a bank file: the wrong-answer list and the retest queue look questions up in them
   all: allSubs.filter((s) => s.file).map((s) => ({ id: s.id, name: s.name, school: s.school, file: s.file })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
@@ -177,7 +177,7 @@ const data = {
   import { cleanSave } from '../../lib/cleansave';
   import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
-  interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; content: boolean }
+  interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; hash: Record<Tier, string>; content: boolean }
   interface ASub { id: string; name: string; school: string; file: string }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
     { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[] };
@@ -232,7 +232,7 @@ const data = {
           if (sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
           const ts = tierState(s, sub.id, t);
           if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
-          else if (liveMastered(ts, sub.count[t])) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
+          else if (liveMastered(ts, sub.count[t], sub.hash[t])) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
           else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
         }
         html += '</div></div>';

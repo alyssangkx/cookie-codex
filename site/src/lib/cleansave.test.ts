@@ -5,8 +5,9 @@ import { fresh, SCHEMA } from './store.ts';
 
 test('a well-formed save comes through unchanged', () => {
   const s = fresh();
-  s.progress['math-x'] = { b: { passes: ['d1'], scores: [80], best: 80, cleared: false, mastered: 5, total: 20 } };
+  s.progress['math-x'] = { b: { passes: ['d1'], scores: [80], best: 80, cleared: false, mastered: 5, total: 20, hash: 'k3x9a' } };
   s.questions['q1'] = { s: 2, due: 1000, w: 1, a: 'cat' };
+  s.questions['q2'] = { s: 1, due: 1000, w: 1, parked: true };
   s.cards['chip'] = { stars: 2, srcSub: 'math-x', srcTier: 'b', acc: 90, last: 5 };
   s.days['2026-11-19'] = { quizzes: 3, min: 40, correct: 25, total: 30 };
   s.attempts.push({ ts: 1, mode: 'tier', sub: 'math-x', tier: 'b', score: 8, total: 10, ms: 9, tags: ['slip'] });
@@ -48,4 +49,10 @@ test('a __proto__ key in a save cannot reach the prototype', () => {
 
 test('garbage in gives a fresh save, never a throw', () => {
   for (const g of [null, undefined, 5, 'x', [], { questions: [] }]) assert.equal(cleanSave(g).schemaVersion, SCHEMA);
+});
+
+test('a tampered tier hash or parked flag is dropped', () => {
+  const c = cleanSave({ progress: { 'math-x': { b: { best: 1, hash: '<b>x</b>' } } }, questions: { q1: { s: 1, due: 1, w: 0, parked: 'yes' } } });
+  assert.equal(c.progress['math-x'].b!.hash, undefined);
+  assert.equal(c.questions.q1.parked, undefined);
 });

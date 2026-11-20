@@ -24,6 +24,7 @@ function cleanTier(v: unknown): TierState | null {
   };
   if (t.total !== undefined) out.total = num(t.total);
   if (t.mastered !== undefined) out.mastered = Math.min(num(t.mastered), out.total ?? Number.MAX_SAFE_INTEGER);
+  if (typeof t.hash === 'string' && /^[a-z0-9]{1,16}$/.test(t.hash)) out.hash = t.hash;
   return out;
 }
 
@@ -65,7 +66,7 @@ export function cleanSave(raw: unknown): SaveV1 {
     const q = obj(v);
     if (!Object.keys(q).length) continue;
     const step = [0, 1, 2, 3].includes(q.s as number) ? (q.s as 0 | 1 | 2 | 3) : 0;
-    s.questions[id.slice(0, 120)] = { s: step, due: num(q.due), w: num(q.w, 0, 100000), ...(typeof q.a === 'string' ? { a: q.a.slice(0, PICK_MAX) } : {}) };
+    s.questions[id.slice(0, 120)] = { s: step, due: num(q.due), w: num(q.w, 0, 100000), ...(typeof q.a === 'string' ? { a: q.a.slice(0, PICK_MAX) } : {}), ...(q.parked === true ? { parked: true as const } : {}) };
   }
 
   for (const [slug, v] of entries(r.cards)) {

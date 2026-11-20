@@ -12,7 +12,7 @@ const school = SCHOOLS.find((x) => x.id === sub.school)!;
 const tiers = (['b', 'i', 'c'] as const).map((k) => {
   const slot = slots[`${sub.id}|${k}`];
   return { k, name: { b: 'Basic', i: 'Intermediate', c: 'Competent' }[k], slot, cookie: cookieBySlug.get(slot.slug)!,
-    count: sub.count[k], playable: sub.playable[k], min: TIER_MIN[k] };
+    count: sub.count[k], hash: sub.hash[k], playable: sub.playable[k], min: TIER_MIN[k] };
 });
 ---
 <Base title={`${sub.name} · ${school.name} training`} description={`Three tiers of PSLE ${school.name} practice on ${sub.name}.`}>
@@ -24,7 +24,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
 
     <div class="tiers">
       {tiers.map((t) => (
-        <article class="tier-card" data-tier={t.k} data-count={String(t.count)} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
+        <article class="tier-card" data-tier={t.k} data-count={String(t.count)} data-hash={t.hash} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
           <h2>{t.name}</h2>
           <p class="tier-help">{{ b: 'The main ideas, step by step.', i: 'Trickier, mixed questions.', c: 'The hardest, exam-style questions.' }[t.k]}</p>
           <a class="reward" href={`/cookie/${t.cookie.slug}/`} style={`--rc: var(--r-${t.cookie.rarity})`}>
@@ -67,7 +67,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k) => {
     let block = '';
     if (st.cleared) { msg.textContent = `Cleared ✓ Every question mastered. You can keep practising.`; card.dataset.state = 'cleared'; }
     else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
-    else { const n = card.dataset.count ? Number(card.dataset.count) : undefined; const m = liveMastered(st, n); msg.textContent = m ? `${m} of ${n} questions mastered. Keep going!` : 'Ready when you are.'; }
+    else { const n = card.dataset.count ? Number(card.dataset.count) : undefined; const m = liveMastered(st, n, card.dataset.hash); msg.textContent = m ? `${m} of ${n} questions mastered. Keep going!` : 'Ready when you are.'; }
     if (!block && triesUsedUp(s, sub, t)) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
     if (!block && reason) block = blockMessage(reason);
     if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
