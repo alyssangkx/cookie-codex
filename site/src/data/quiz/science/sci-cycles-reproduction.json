@@ -1121,46 +1121,6 @@
    }
   },
   {
-   "id": "scicycl-536393ef2b",
-   "topic": "sci-cycles-reproduction",
-   "level": "basic",
-   "template": "sci-pat-plant-reproduction",
-   "outcomes": [
-    "sci-cycles-repro-plants-1"
-   ],
-   "stem": "A gardener pushes a cut branch of a rose bush into wet soil. Weeks later it has roots and leaves and is a new rose plant. What did the new plant grow from?",
-   "options": [
-    "A part of the old plant",
-    "A seed hidden inside the branch",
-    "Pollen from another rose",
-    "A fruit of the old plant"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong-source",
-     "why": "No seed was planted. The branch itself grew roots and leaves."
-    },
-    {
-     "tag": "wrong-source",
-     "why": "Pollen does not grow into a plant by itself."
-    },
-    {
-     "tag": "wrong-source",
-     "why": "A fruit was not planted, only the cut branch."
-    }
-   ],
-   "solution": [
-    "A new plant can grow from a cut piece of stem.",
-    "No seed was planted."
-   ],
-   "params": {
-    "key": "rp-013",
-    "subtopic": "sci-cycles-repro-plants"
-   }
-  },
-  {
    "id": "scicycl-55e9084e39",
    "topic": "sci-cycles-reproduction",
    "level": "basic",
@@ -2057,84 +2017,6 @@
    }
   },
   {
-   "id": "scicycl-3223ce3b94",
-   "topic": "sci-cycles-reproduction",
-   "level": "intermediate",
-   "template": "sci-pat-plant-reproduction",
-   "outcomes": [
-    "sci-cycles-repro-plants-1"
-   ],
-   "stem": "Small plantlets grow along the notched edge of the parts of a Bryophyllum plant that make its food. When they fall onto soil, they grow into new plants. From which part of the parent plant do the new plants grow?",
-   "options": [
-    "The flower",
-    "The leaf",
-    "The root",
-    "The seed"
-   ],
-   "answer": 1,
-   "explain": [
-    {
-     "tag": "wrong-part",
-     "why": "No flower is needed. The plantlets grow on the leaf."
-    },
-    null,
-    {
-     "tag": "wrong-part",
-     "why": "The plantlets are on the leaf edge, not on the roots."
-    },
-    {
-     "tag": "wrong-part",
-     "why": "These new plants do not come from seeds."
-    }
-   ],
-   "solution": [
-    "The new plants grow from the leaf of the parent plant, without seeds."
-   ],
-   "params": {
-    "key": "rq-818",
-    "subtopic": "sci-cycles-repro-plants"
-   }
-  },
-  {
-   "id": "scicycl-58403bf296",
-   "topic": "sci-cycles-reproduction",
-   "level": "intermediate",
-   "template": "sci-pat-plant-reproduction",
-   "outcomes": [
-    "sci-cycles-repro-plants-1"
-   ],
-   "stem": "A strawberry plant sends out long stems along the ground. A new plant grows at the end of each stem. Which statement about this is correct?",
-   "options": [
-    "The new plants grow only when the parent dies",
-    "The new plants grow from spores on the stems",
-    "The new plants grow only after bees pollinate the stems",
-    "The new plants grow without seeds"
-   ],
-   "answer": 3,
-   "explain": [
-    {
-     "tag": "wrong-idea",
-     "why": "The parent plant keeps living while the new plants grow."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Strawberry plants are flowering plants. They do not make spores."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Pollination is about flowers making seeds. These stems are not flowers."
-    },
-    null
-   ],
-   "solution": [
-    "The long stems grow new plants. No seeds are needed for this way of reproducing."
-   ],
-   "params": {
-    "key": "rq-119",
-    "subtopic": "sci-cycles-repro-plants"
-   }
-  },
-  {
    "id": "scicycl-c6549bd8b5",
    "topic": "sci-cycles-reproduction",
    "level": "intermediate",
@@ -2366,7 +2248,7 @@
     null
    ],
    "solution": [
-    "After fertilisation, the ovary grows into the fruit and each fertilised ovule inside it becomes a seed, so the fruit holds the seeds.",
+    "After fertilisation, the ovary grows into the fruit and each fertilised ovule inside it becomes a seed, so the fruit holds the seeds. So statements A and C are correct.",
     "B is wrong because pollen is made in the anther. D is wrong because petals wither; they do not become seeds."
    ],
    "params": {
@@ -2653,45 +2535,6 @@
    ],
    "params": {
     "key": "rq-210",
-    "subtopic": "sci-cycles-repro-plants"
-   }
-  },
-  {
-   "id": "scicycl-6a686ddffc",
-   "topic": "sci-cycles-reproduction",
-   "level": "competent",
-   "template": "sci-pat-plant-reproduction",
-   "outcomes": [
-    "sci-cycles-repro-plants-1"
-   ],
-   "stem": "A gardener takes cuttings from a rose bush that has red flowers and plants them. What colour are the flowers of the new plants most likely to be?",
-   "options": [
-    "Red, because they grow from a part of the parent plant",
-    "White, because cuttings are weaker than seeds",
-    "Pink, because the colour mixes with the soil",
-    "Any colour, because insects must pollinate the cuttings"
-   ],
-   "answer": 0,
-   "explain": [
-    null,
-    {
-     "tag": "wrong-idea",
-     "why": "A cutting grows into a plant like its parent. Weakness does not change the colour."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Soil does not change the colour of the flowers."
-    },
-    {
-     "tag": "wrong-idea",
-     "why": "Cuttings grow from stems. No pollination is involved."
-    }
-   ],
-   "solution": [
-    "A cutting is a part of the parent plant, so the new plant is like the parent. Its flowers are red."
-   ],
-   "params": {
-    "key": "rq-211",
     "subtopic": "sci-cycles-repro-plants"
    }
   },

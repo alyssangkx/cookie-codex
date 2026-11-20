@@ -2500,14 +2500,16 @@
     "round": "sci-r3-2026-11-20"
   },
   "sci-cycles-repro-plants|rp-013": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner ruling 21 Nov 2026: reproduction from plant parts (a rose cutting) is not taught at P6; found by the new plant-parts-reproduction WARN rule"
+    ],
     "notes": [
       "r3: original item written to refill the sub-topic; item-by-item check: answer is the only correct option, each distractor wrong for its stated reason, figure (if any) agrees with the stem and does not name the answer, explanations fit",
       "r4 (code review): figure no longer shows the answer and/or option wording balanced; re-checked item by item (answer still the only correct option, explanations fit, figure agrees with stem)"
     ],
     "fingerprint": "7ebf20eddd79cde8",
-    "round": "sci-r4-2026-11-20"
+    "round": "owner-report-2026-11-21"
   },
   "sci-cycles-repro-plants|rp-014": {
     "ship": true,
@@ -2931,13 +2933,15 @@
     "round": "sci-fill-repro-2026-11-20"
   },
   "sci-cycles-repro-plants|rq-119": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner ruling 21 Nov 2026: reproduction from plant parts (cuttings, plantlets, runners) is not taught at P6; removed with rq-221"
+    ],
     "notes": [
       "item-by-item pass: one defensible answer, distractors have stated reasons, figure/table shows no answer, fair-test pairs differ in one variable, combination options have exactly one correct set; length/echo lint run"
     ],
     "fingerprint": "c81946ea8e56c98e",
-    "round": "sci-fill-repro-2026-11-20"
+    "round": "owner-report-2026-11-21"
   },
   "sci-cycles-repro-plants|rq-120": {
     "ship": true,
@@ -2991,7 +2995,7 @@
       "item-by-item pass: one defensible answer, distractors have stated reasons, figure/table shows no answer, fair-test pairs differ in one variable, combination options have exactly one correct set; length/echo lint run",
       "owner report: solution now links ovary -> fruit with ovule -> seed; explanations say which half is right"
     ],
-    "fingerprint": "0acd59cb706ac716",
+    "fingerprint": "fc7ba4b94f0afab6",
     "round": "owner-report-2026-11-21"
   },
   "sci-cycles-repro-plants|rq-203": {
@@ -3070,13 +3074,15 @@
     "round": "sci-fill-repro-2026-11-20"
   },
   "sci-cycles-repro-plants|rq-211": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner ruling 21 Nov 2026: reproduction from plant parts (cuttings, plantlets, runners) is not taught at P6; removed with rq-221"
+    ],
     "notes": [
       "item-by-item pass: one defensible answer, distractors have stated reasons, figure/table shows no answer, fair-test pairs differ in one variable, combination options have exactly one correct set; length/echo lint run"
     ],
     "fingerprint": "d75d511f843b5176",
-    "round": "sci-fill-repro-2026-11-20"
+    "round": "owner-report-2026-11-21"
   },
   "sci-cycles-repro-plants|rq-214": {
     "ship": true,
@@ -9150,13 +9156,15 @@
     "round": "sci-fill-step0b-2026-11-20"
   },
   "sci-cycles-repro-plants|rq-818": {
-    "ship": true,
-    "reasons": [],
+    "ship": false,
+    "reasons": [
+      "owner ruling 21 Nov 2026: reproduction from plant parts (cuttings, plantlets, runners) is not taught at P6; removed with rq-221"
+    ],
     "notes": [
       "WARN fix: reworded, new key; one defensible answer unchanged"
     ],
     "fingerprint": "9ebf356952b779c6",
-    "round": "sci-fill-step0b-2026-11-20"
+    "round": "owner-report-2026-11-21"
   },
   "sci-systems-circuit-vars|cv-802": {
     "ship": true,

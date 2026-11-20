@@ -127,7 +127,14 @@ warn = Warnings({
     "figure-unrelated-ring": "life-cycle '<animal>-ring' picture whose animal the stem and options never name (decorates another organism, hints the answer)",
     "dangling-figure-ref": "stem points at a picture/table/graph/experiment ('as shown', 'the graph', 'in the experiment with') but the item has no figure",
     "joke-distractor": "an option is a silly impossibility (fly away, grow legs, changed into a different animal); use a plausible misconception",
+    "plant-parts-reproduction": "Plant reproduction item on reproduction from plant parts (cuttings, plantlets, runners): not taught at P6 (owner, 21 Nov 2026)",
+    "shared-figure": "one figure used by several shipped items of a sub-topic: the same table or picture asked again (owner report, 21 Nov 2026)",
 })
+REVIEW = json.loads((HERE / "science" / "review.json").read_text())
+shipped = lambda sub, key: (REVIEW.get(f"{sub}|{key}") or {}).get("ship") is True
+PARTS_REPRO = re.compile(r"\b(cuttings?|plantlets?|runners?)\b|(reproduce[sd]?|grows?|grown) without seeds|grows? (roots and )?a (new )?plant"
+                         r"|new plants? grows? (at|from|along)", re.I)
+figure_users = {}
 longest = {}
 
 for f, data in _all:
@@ -179,7 +186,14 @@ for f, data in _all:
                 w("figure-mismatch", f"figure text {figure_text(it['figure'])[:60]!r}")
             if "figure" in it and ring_figure_unrelated(stem, opts, it["figure"]): w("figure-unrelated-ring", f"figure {it['figure']['img']}")
             longest.setdefault(sub, []).append(correct_is_longest(opts, a))
+            if shipped(sub, it.get("key")):
+                if sub == "sci-cycles-repro-plants" and PARTS_REPRO.search(stem + " " + " ".join(opts)):
+                    w("plant-parts-reproduction", f"stem {stem[:60]!r}")
+                if it.get("figure"):
+                    figure_users.setdefault((sub, json.dumps(it["figure"], sort_keys=True)), []).append(f"{it.get('key')} ({it.get('level')})")
 for m in longest_share_warnings(longest): warn.add("longest-correct", m)
+for (sub, _), users in sorted(figure_users.items()):
+    if len(users) > 1: warn.add("shared-figure", f"{sub}: {len(users)} items share one figure: {', '.join(users)}")
 
 # compiled banks: unique ids, 4-option shape, figure schema
 ids = Counter()
