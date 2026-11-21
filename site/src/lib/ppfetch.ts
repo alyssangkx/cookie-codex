@@ -4,7 +4,7 @@
 // Any failure returns null; null (not []) tells Daily Review not to park the past-paper retests it could not load. The
 // quiz page then: a one-pool quiz stops; a merged tier, Daily Review and papers carry on with the generated questions.
 import { supabase, SUPABASE_URL, currentSession, callFunction } from './supabase';
-import { ppSubjectOf, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
+import { ppSubjectOf, pageStep, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
 
 const CHUNK = 15; // pp-serve takes at most 15 ids a call (migration 006)
 const POOL_PAGE = 1000; // rows asked per pp_pool call (the API's default max_rows; a lower cap just means more pages)
@@ -28,23 +28,22 @@ export async function fetchPool(subs: string[], topicOf: (sub: string) => string
         // through pp_pool's fixed order (sub-topic, rank, id) and check every page against the server's exact total, so a
         // list cut by a lower cap, or shifted by an upload between pages, fails closed instead of passing as complete.
         // ponytail: each page is one pp_pool rate hit (about 7 for a three-subject Daily Review, limit 120 an hour)
-        let total: number | null | undefined, got = 0; // null: the server sent no total (then a short page ends the list)
-        for (;;) { // the next page starts after the rows received (a lower cap returns fewer)
+        let total: number | null | undefined, got = 0; // null: the server sent no total (pageStep explains)
+        for (let step = 'more'; step === 'more';) { // the next page starts after the rows received (a lower cap returns fewer)
           const { data, error, count } = await supabase.rpc('pp_pool', { p_subject: subject, p_subtopics: list.slice(i, i + 40) },
             { count: 'exact' }).range(got, got + POOL_PAGE - 1);
           if (error || !Array.isArray(data)) return null;
-          if (total === undefined) total = typeof count === 'number' ? count : null;
-          else if (total !== null && count !== total) return null; // the pool changed between pages
+          const c = typeof count === 'number' ? count : null;
+          if (total === undefined) total = c;
           for (const r of data) {
             const st = stubOf(r, topicOf(r?.subtopic));
             if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
             out.push(st);
           }
           got += data.length;
-          if (total !== null ? got >= total : data.length < POOL_PAGE) break;
-          if (!data.length) return null; // the server stopped short of its own total
+          step = pageStep(total, c, got, data.length, POOL_PAGE);
+          if (step === 'fail') return null;
         }
-        if (total !== null && got !== total) return null;
       }
     }
     return new Set(out.map((q) => q.id)).size === out.length ? out : null; // a row seen twice: the order moved between pages

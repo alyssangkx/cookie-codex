@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -214,4 +214,16 @@ test('the counting pool is a pool\'s first POOL_CAP questions easier-first; a sm
   assert.equal(c.length, POOL_CAP);
   assert.equal(c[0], 'pp-0000000449'); // ord 1, served first
   assert.deepEqual(countingPool(big.slice(0, 30)).length, 30);
+});
+
+test('pageStep: pp_pool paging against the exact total fails closed on a cut or moved list', () => {
+  assert.equal(pageStep(1919, 1919, 1000, 1000, 1000), 'more');
+  assert.equal(pageStep(1919, 1919, 1919, 919, 1000), 'done');
+  assert.equal(pageStep(1919, 1919, 500, 500, 1000), 'more');   // a lower server cap: more pages, not the end
+  assert.equal(pageStep(1919, 1918, 1500, 500, 1000), 'fail');  // the total moved between pages
+  assert.equal(pageStep(1919, 1919, 1500, 0, 1000), 'fail');    // the server stopped short
+  assert.equal(pageStep(1000, 1000, 1000, 1000, 1000), 'done'); // an exact multiple: no extra empty call
+  assert.equal(pageStep(0, 0, 0, 0, 1000), 'done');
+  assert.equal(pageStep(null, null, 400, 400, 1000), 'done');   // no total: a short page ends it (pre-paging rule)
+  assert.equal(pageStep(null, null, 1000, 1000, 1000), 'more');
 });

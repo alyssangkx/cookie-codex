@@ -111,6 +111,18 @@ export const easierFirst = (qs: { id: string; ord?: number | null }[]) =>
 export const POOL_CAP = 300;
 export const countingPool = (qs: { id: string; ord?: number | null }[]) => easierFirst(qs).slice(0, POOL_CAP);
 
+/** One pp_pool page (fetchPool): 'more' to ask for the next page, 'done', or 'fail' (the list would be partial).
+ * total: the server's exact count from the first page (null when it sent none: then a short page ends the list, the
+ * pre-paging rule; a count is always asked for); count: this page's count; got: rows received so far, this page included.
+ * ponytail: a row removed before the offset and another added after it while an upload runs keeps the total and is
+ * not seen; key-based paging (pass the last row into pp_pool) if uploads ever overlap play. */
+export function pageStep(total: number | null, count: number | null, got: number, pageLen: number, pageSize: number): 'more' | 'done' | 'fail' {
+  if (total === null) return pageLen < pageSize ? 'done' : 'more';
+  if (count !== total || got > total) return 'fail'; // the pool changed between pages
+  if (got === total) return 'done';
+  return pageLen ? 'more' : 'fail'; // the server stopped short of its own total
+}
+
 /** A past-paper question id (pp-<10 hex>), as opposed to a generated one. */
 export const isPpId = (id: string) => /^pp-[0-9a-f]{10}$/.test(id);
 
