@@ -94,8 +94,9 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     if (block) { start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
   }
   if (!pool) root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
-    // the preview always matches the real reward: a star only if the card is already owned
-    card.querySelector('.reward-label')!.textContent = actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
+    // the preview always matches the real reward: a star only if the card is already owned; a cleared tier never pays again
+    card.querySelector('.reward-label')!.textContent = tierState(s, sub, card.dataset.tier as Tier).cleared ? 'Earned:'
+      : actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
     if (card.dataset.playable !== 'true') return;
     const t = card.dataset.tier as Tier;
     const st = tierState(s, sub, t);
@@ -117,18 +118,26 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     if (!d) return;
     const eco = toEconomy(d);
     root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
-      if (tierState(s, sub, card.dataset.tier as Tier).cleared) return; // a cleared slot never pays again: keep its own card
-      const p = rewardPreview(s, card.dataset.slug!, eco);
-      const c = d.cards[p.slug];
+      const t = card.dataset.tier as Tier;
+      let slug: string, label: string;
+      if (tierState(s, sub, t).cleared) { // never pays again: show the card this slot gave (a replacement, say), else its own
+        slug = Object.entries(s.cards).find(([, x]) => x.srcSub === sub && x.srcTier === t)?.[0] ?? card.dataset.slug!;
+        label = 'Earned:';
+      } else {
+        const p = rewardPreview(s, card.dataset.slug!, eco);
+        slug = p.slug;
+        label = p.kind === 'star' ? `Reward: +1 star and +${p.crumbs} Crumbs for`
+          : p.replaces ? `Reward card (you already have ${d.cards[p.replaces]?.name ?? 'this tier\'s card'})` : 'Reward card';
+      }
+      const c = d.cards[slug];
       if (!c) return;
       const a = card.querySelector<HTMLAnchorElement>('.reward')!;
-      a.href = `/cookie/${encodeURIComponent(p.slug)}/`;
+      a.href = `/cookie/${encodeURIComponent(slug)}/`;
       a.style.setProperty('--rc', `var(--r-${c.rarity})`);
       a.querySelector('img')!.src = c.image;
       a.querySelector('.reward-name')!.textContent = c.name;
       a.querySelector('.reward-rarity')!.textContent = c.rarity.replace('-', ' ');
-      a.querySelector('.reward-label')!.textContent = p.kind === 'star' ? `Reward: +1 star and +${p.crumbs} Crumbs for`
-        : p.replaces ? `Reward card (you already have ${d.cards[p.replaces]?.name ?? 'this tier\'s card'})` : 'Reward card';
+      a.querySelector('.reward-label')!.textContent = label;
     });
   }).catch(() => { /* offline: the label above (card or star) still holds */ });
 </script>
