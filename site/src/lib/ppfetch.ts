@@ -7,6 +7,7 @@ import { supabase, SUPABASE_URL, currentSession, callFunction } from './supabase
 import { ppSubjectOf, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
 
 const CHUNK = 15; // pp-serve takes at most 15 ids a call (migration 006)
+const POOL_PAGE = 1000; // rows per pp_pool call: the API's default max_rows (a lower cap would end the paging early)
 
 export async function fetchPool(subs: string[], topicOf: (sub: string) => string | undefined): Promise<PpStub[] | null> {
   if (!subs.length) return [];
@@ -23,16 +24,22 @@ export async function fetchPool(subs: string[], topicOf: (sub: string) => string
     }
     for (const [subject, list] of bySubject) {
       for (let i = 0; i < list.length; i += 40) { // pp_pool takes at most 40 sub-topics a call
-        const { data, error } = await supabase.rpc('pp_pool', { p_subject: subject, p_subtopics: list.slice(i, i + 40) });
-        if (error || !Array.isArray(data)) return null;
-        for (const r of data) {
-          const st = stubOf(r, topicOf(r?.subtopic));
-          if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
-          out.push(st);
+        // the API returns at most POOL_PAGE rows a call (Supabase max_rows, 1000 by default) and English grammar alone has
+        // 1,900+: page through pp_pool's fixed order (sub-topic, rank, id) until a short page, so no list is cut silently
+        for (let from = 0; ; from += POOL_PAGE) {
+          const { data, error } = await supabase.rpc('pp_pool', { p_subject: subject, p_subtopics: list.slice(i, i + 40) })
+            .range(from, from + POOL_PAGE - 1);
+          if (error || !Array.isArray(data)) return null;
+          for (const r of data) {
+            const st = stubOf(r, topicOf(r?.subtopic));
+            if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
+            out.push(st);
+          }
+          if (data.length < POOL_PAGE) break;
         }
       }
     }
-    return out;
+    return new Set(out.map((q) => q.id)).size === out.length ? out : null; // pages that overlap mean the order moved: fail
   } catch {
     return null;
   }
