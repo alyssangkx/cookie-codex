@@ -182,7 +182,10 @@ test('a one-pool sub-topic is one unit: "Next up" links to the pool quiz (no tie
   assert.equal(next.kind, 'next');
   assert.equal(next.href, '/quiz/?sub=sci-pool');
   assert.match(next.reason, /past-paper/);
-  s.progress['sci-pool'] = { b: { passes: [], scores: [], best: 0, cleared: true, mastered: 5, total: 30 } };
+  // a count and clear left by the generated tiers before the switch never read as pool progress
+  s.progress['sci-pool'] = { b: { passes: [], scores: [], best: 0, cleared: true, mastered: 15, total: 25 }, c: { passes: [], scores: [], best: 0, cleared: true } };
+  assert.equal(run(s, [pool])[0].kind, 'next');
+  s.progress['sci-pool'] = { b: { passes: [], scores: [], best: 0, cleared: true, mastered: 5, total: 30, pool: true, ms: true } };
   assert.equal(topicPower(s, [pool]), 17); // milestone 1 of 3 (weights 1, 2, 3)
   const [more] = run(s, [pool]);
   assert.equal(more.kind, 'one-more');

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones, poolProgress, milestoneReached } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -626,6 +626,39 @@ test('syncMilestones reaches milestones in order, awards each slot card once, ne
   syncMilestones(s, { sci: more }, rf, t0);
   assert.equal(s.progress.sci.c?.cleared, true); // a reached milestone stays
   assert.equal(syncMilestones(fresh(), { small: ids.slice(0, 19) }, rf, t0).length, 0); // under 20: no milestones
+});
+
+test('a generated tier cleared before the switch keeps its clear and card, but its milestone is earned on the pool', () => {
+  const s = fresh();
+  s.progress.sci = { c: { passes: [], scores: [], best: 0, cleared: true, mastered: 25, total: 25 } }; // old Competent clear
+  s.cards['card-c'] = { stars: 1, srcSub: 'sci', srcTier: 'c', acc: 90, last: t0 };
+  assert.deepEqual(poolProgress(s, 'sci'), { counted: 0 });                // its count is not past-paper progress
+  assert.equal(milestoneReached(s, 'sci', 'c'), false);
+  const ids = Array.from({ length: 24 }, (_, i) => `pp-${String(i).padStart(10, '0')}`);
+  const rf = (_sub: string, t: 'b' | 'i' | 'c') => ({ slug: `card-${t}`, dup: false });
+  assert.equal(syncMilestones(s, { sci: ids }, rf, t0).length, 0);
+  assert.deepEqual(poolProgress(s, 'sci'), { counted: 0, total: 24 });
+  assert.equal(s.progress.sci.c?.cleared, true);                           // never un-cleared, card stays
+  ids.slice(0, 13).forEach((id) => answer(s, id, true, t0));
+  const got = syncMilestones(s, { sci: ids }, rf, t0);
+  assert.deepEqual(got.map((x) => x.tier), ['b', 'i', 'c']);
+  assert.equal(got[2].reward, null);                                       // the old clear's card was its reward: none twice
+  assert.equal(milestoneReached(s, 'sci', 'c'), true);
+  assert.ok(s.cards['card-c']);
+});
+
+test('a milestone the first one-pool build awarded (cleared, no ms marker) is marked, not awarded again', () => {
+  const s = fresh();
+  const ids = Array.from({ length: 24 }, (_, i) => `pp-${String(i).padStart(10, '0')}`);
+  ids.slice(0, 5).forEach((id) => answer(s, id, true, t0));
+  s.progress.sci = { b: { passes: [], scores: [], best: 0, cleared: true, mastered: 5, total: 24 } }; // old build: no ms
+  let calls = 0;
+  const rf = (_sub: string, t: 'b' | 'i' | 'c') => { calls++; return { slug: `card-${t}`, dup: false }; };
+  const got = syncMilestones(s, { sci: ids }, rf, t0);
+  assert.deepEqual(got.map((x) => [x.tier, x.reward]), [['b', null]]);
+  assert.equal(calls, 0);
+  assert.equal(milestoneReached(s, 'sci', 'b'), true);
+  assert.equal(syncMilestones(s, { sci: ids }, rf, t0).length, 0);         // marked once
 });
 
 test('a one-pool quiz (no tier): finishQuiz reaches milestones through opts.pools; tries count per sub-topic', () => {

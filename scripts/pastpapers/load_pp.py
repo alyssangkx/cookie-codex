@@ -692,11 +692,11 @@ def figures(a):
 
 
 def selftest():
+    """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
     import base64
     jwt = "eyJhbGciOiJIUzI1NiJ9." + base64.urlsafe_b64encode(b'{"role":"anon"}').decode().rstrip("=") + ".sig"
     assert key_kind(jwt).startswith("legacy JWT key, role anon"), key_kind(jwt)
     assert key_kind("sb_publishable_abc").startswith("publishable key") and "abc" not in key_kind("sb_secret_abc")
-    """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
     assert garbled("黑衣人是一个怎么样的人？", ["(1) 贪心", "(2) 自私", "(3) 糊涂", "(4) 骄傲"]) is None  # a short Chinese stem is complete
     assert garbled("你____多生气，____不应该对长辈无礼。", ["(1) 不管……也", "(2) 由于……才", "(3) 只要……都", "(4) 如果……就"]) is None
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
@@ -920,7 +920,8 @@ def key_kind(k):
     if k.startswith("eyJ") and k.count(".") == 2:
         try:
             part = k.split(".")[1]
-            role = json.loads(base64.urlsafe_b64decode(part + "=" * (-len(part) % 4))).get("role", "?")
+            claims = json.loads(base64.urlsafe_b64decode(part + "=" * (-len(part) % 4)))
+            role = claims.get("role", "?") if isinstance(claims, dict) else "unreadable"
         except ValueError:
             role = "unreadable"
         return f"legacy JWT key, role {role}, {len(k)} chars"

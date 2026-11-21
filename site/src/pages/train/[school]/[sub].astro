@@ -64,7 +64,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
 </Base>
 
 <script>
-  import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, poolProgress, milestoneReached, type Tier } from '../../../lib/store';
   import { rewardPreview, toEconomy, type EconomyData } from '../../../lib/crumbs';
   const s = load();
   const root = document.querySelector<HTMLElement>('.sub-page')!;
@@ -78,17 +78,17 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   const pool = Number(root.dataset.pool) || 0;
   if (pool) { // one pool (ADR 0011): the counted share, each milestone's state, one Train button
     // syncMilestones stores the count and the live pool size on every slot; the build-time size may differ slightly
-    const st0 = tierState(s, sub, 'b'), total = st0.total || pool, counted = st0.mastered ?? 0;
+    const pp = poolProgress(s, sub), total = pp.total || pool, counted = pp.counted;
     document.getElementById('pool-n')!.textContent = String(counted);
     root.querySelector('.pool-count')!.lastChild!.textContent = ` of ${total} past-paper questions counted`;
     root.querySelector<HTMLElement>('.pool-fill')!.style.width = `${Math.min(100, (100 * counted) / total)}%`;
     root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
       card.querySelector('.reward-label')!.textContent = actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
-      if (tierState(s, sub, card.dataset.tier as Tier).cleared) { card.dataset.state = 'cleared'; card.querySelector('.state')!.textContent = 'Reached ✓'; }
+      if (milestoneReached(s, sub, card.dataset.tier as Tier)) { card.dataset.state = 'cleared'; card.querySelector('.state')!.textContent = 'Reached ✓'; }
     });
     const start = root.querySelector<HTMLAnchorElement>('.pool-start')!;
     const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this topic today. Come back tomorrow.` : reason ? blockMessage(reason) : '';
-    root.querySelector('.pool-state')!.textContent = block || (tierState(s, sub, 'c').cleared ? 'Exam-ready ✓ Keep practising to count them all.' : 'Ready when you are.');
+    root.querySelector('.pool-state')!.textContent = block || (milestoneReached(s, sub, 'c') ? 'Exam-ready ✓ Keep practising to count them all.' : 'Ready when you are.');
     if (block) { start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
   }
   if (!pool) root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {

@@ -261,15 +261,19 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         const pp = await fetchPool(subs, (x) => meta.subs[x]?.file ?? undefined);
         if (pp === null) ppFailed = true;
         genAll = all; ppAll = (pp ?? []) as Q[]; ppLoaded = true;
-        all = mergePool(all, ppAll, poolModeFor(mode));
+        if (pp !== null) all = mergePool(all, ppAll, poolModeFor(mode)); // failed: keep every generated question (a pool quiz stops)
       }
     }
     // papers use 4-option items outside passage sets only (no 8-option dialogue item, no split passage)
     if (mode === 'paper') all = all.filter(paperOk);
     byId = new Map(all.map((q) => [q.id, q]));
-    members = new Map();
-    for (const q of all) if (q.group) members.set(q.group, [...(members.get(q.group) ?? []), q]);
+    indexMembers();
     return all;
+  }
+  /** Passage groups from the questions loaded (again after a fallback adds generated questions). */
+  function indexMembers() {
+    members = new Map();
+    for (const q of byId.values()) if (q.group) members.set(q.group, [...(members.get(q.group) ?? []), q]);
   }
 
   /**
@@ -277,7 +281,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    * Returns a reason to stop, or '' when the quiz is ready. A tier or pool quiz stops when they cannot load; Daily Review
    * and papers drop them and go on with the rest (and park nothing, as ppFailed says).
    */
-  async function hydrate(): Promise<string> {
+  async function hydrate(topUp = true): Promise<string> {
     const want = quiz.filter((id) => isStub(byId.get(id)));
     if (!want.length) return '';
     const { fetchItems } = await import('../../lib/ppfetch');
@@ -290,7 +294,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (mode === 'tier' && !POOL) { // a merged tier: carry on with its generated questions
       ppFailed = true;
       const gen = genAll.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
-      quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, [], undefined);
+      const side = genAll.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
+      const passage = (id: string) => { const q = genAll.find((x) => x.id === id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
+      for (const q of genAll) if (q.sub === subId) byId.set(q.id, q);
+      indexMembers();
+      quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
       notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this quiz uses the other questions.</p>`;
       return quiz.length >= QUIZ_SIZE ? '' : 'This tier does not have enough questions right now. Try again later.';
     }
@@ -299,7 +307,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         : 'Past-paper questions could not load. Check your connection and try again.';
     }
     ppFailed = true;
+    const lost = quiz.filter((id) => isStub(byId.get(id)));
     quiz = quiz.filter((id) => !isStub(byId.get(id)));
+    if (mode === 'paper' && topUp) { // a new paper: fill the gap from the same sub-topics' generated questions
+      const subs = new Set(lost.map((id) => byId.get(id)!.sub));
+      const cand = genAll.filter((q) => subs.has(q.sub) && paperOk(q) && !quiz.includes(q.id));
+      for (const id of pickPaper(cand as any, load().questions, lost.length, paperMix.mix)) { byId.set(id, cand.find((q) => q.id === id)!); quiz.push(id); }
+    }
     notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this ${mode === 'paper' ? 'paper' : 'review'} uses the other questions.</p>`;
     return quiz.length ? '' : (mode === 'paper' ? 'There are not enough questions for this paper right now. Try again later.' : 'Nothing to review right now. Try again later.');
   }
@@ -448,8 +462,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // ------------------------------------------------------------ papers: answer everything, then submit
 
   /** Shared by a new paper and a resumed one. The clock is the wall clock, so a resumed paper may already be over. */
-  function playPaper() {
-    i = Math.min(Math.max(0, draft?.at ?? 0), quiz.length - 1);
+  function playPaper(at = draft?.at ?? 0) {
+    document.querySelector('.resume-note')?.remove();
+    i = Math.min(Math.max(0, at), quiz.length - 1);
     over = false; wrongs = []; score = 0;
     inQuiz = new Set(quiz);
     $('leave-title').textContent = 'Leave this paper?';
@@ -477,13 +492,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     }
     quiz = keep.map(([id]) => id);
     // past-paper questions are stubs after the reload (ADR 0012): fetch them, or drop them with their picks
-    try { const why = await hydrate(); if (why) return stop(why); } catch (e) { return stop((e as Error).message); }
+    try { const why = await hydrate(false); if (why) return stop(why); } catch (e) { return stop((e as Error).message); }
     const left = keep.filter(([id]) => quiz.includes(id));
+    const wasAt = d.ids[Math.min(Math.max(0, d.at ?? 0), d.ids.length - 1)]; // the question left on, or the next one still here
+    const from = d.ids.indexOf(wasAt), at = left.findIndex(([id]) => d.ids.indexOf(id) >= from);
     picks = left.map(([id, p]) => (typeof p === 'number' && p >= 0 && p < byId.get(id)!.options.length ? p : null));
     pclock = { ...d.clock, pauseTaken: d.clock.pauseTaken ?? (d.clock.pauseUsed > 0 || !!d.clock.pausedAt) };
     startedAt = d.ts; mins = d.mins;
     $('title').textContent = 'Practice paper (resumed)';
-    playPaper();
+    playPaper(at < 0 ? left.length - 1 : at);
+    if (notice) { $('title').insertAdjacentHTML('afterend', `<div class="resume-note">${notice}</div>`); notice = ''; }
   }
 
   /** The link is the same paper as the draft (a reload of it): same topics and mix. */

@@ -26,6 +26,8 @@ function cleanTier(v: unknown): TierState | null {
   if (t.total !== undefined) out.total = num(t.total);
   if (t.mastered !== undefined) out.mastered = Math.min(num(t.mastered), out.total ?? Number.MAX_SAFE_INTEGER);
   if (typeof t.hash === 'string' && /^[a-z0-9]{1,16}$/.test(t.hash)) out.hash = t.hash;
+  if (t.pool === true) out.pool = true;
+  if (t.ms === true) out.ms = true;
   return out;
 }
 

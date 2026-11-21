@@ -94,7 +94,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 )}
 
 <script>
-  import { load, tierState, tierOpen, liveMastered, syncParkedStored, reviewDueCount, TIERS, TIER_NAME, MILESTONE_NAME, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, liveMastered, poolProgress, milestoneReached, slotDone, syncParkedStored, reviewDueCount, TIERS, TIER_NAME, MILESTONE_NAME, type Tier } from '../../../lib/store';
   import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, unitName, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
@@ -112,9 +112,9 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     const hashOf = new Map(subs.map((y) => [y.id, y.hash]));
     const chipState = (sub: string, t: Tier, playable: boolean, pool = 0) => {
       if (pool) { // one pool (ADR 0011): the chips are its milestones
-        if (tierState(s, sub, t).cleared) return { state: 'cleared', text: `${MILESTONE_NAME[t]}: reached ✓` };
-        const st0 = tierState(s, sub, 'b'), m = st0.mastered ?? 0; // stored with the live pool size (st0.total)
-        return { state: m ? 'pass1' : 'open', text: `${MILESTONE_NAME[t]}: ${m} of ${st0.total || pool} counted` };
+        if (milestoneReached(s, sub, t)) return { state: 'cleared', text: `${MILESTONE_NAME[t]}: reached ✓` };
+        const pp = poolProgress(s, sub); // stored with the live pool size
+        return { state: pp.counted ? 'pass1' : 'open', text: `${MILESTONE_NAME[t]}: ${pp.counted} of ${pp.total || pool} counted` };
       }
       if (!playable) return { state: 'none', text: `${TIER_NAME[t]}: no questions yet` };
       const st = tierState(s, sub, t);
@@ -144,7 +144,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       const p = topicPower(s, g.subs);
       d.querySelector<HTMLElement>('.th-topic-fill')!.style.width = `${p}%`;
       let n = 0;
-      for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && tierState(s, sub.id, t).cleared) n++;
+      for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && slotDone(s, sub.id, t, !!sub.pool)) n++;
       const c = d.querySelector('.th-cleared'); if (c) c.textContent = String(n);
     });
 

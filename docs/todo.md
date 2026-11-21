@@ -69,6 +69,7 @@ any format counts; no match = hold (reversible, reason recorded); show the judge
 before removing anything; thin tiers (< 20) are acceptable until past papers fill them. Scope: 7,376 generated questions
 (Maths 3,888 from 524 templates, judged per template; Science 1,427, English 1,034, Chinese 1,027 per item).
 - [ ] `scripts/pastpapers/concept_match.py`: pack (dev) -> server run (candidates by word overlap from all 58k scanned questions, same sub-topic first; Qwen2.5-72B judge, JSON with the matching question and a reason) -> report (calibration: real past-paper MCQs must find a twin, owner-ruled-out items and off-syllabus probes must not).
+  - [ ] Results so far (21 Nov 2026): pass 1 too strict, pass 2 (lenient) wrongly matched 5/19 ruled-out probes, pass 3 pair check (queue 20) confirmed only 2/7 real twins and wrongly matched 1/5. Nothing held. Next: a judge that passes both calibration sets (stronger model, or 2-of-3 across passes), then show the owner calibration + ~30 samples.
 - [x] Review fixes before the full run (21 Nov): option digits kept (only a bracketed label is stripped), Maths units keyed (sub-topic, template), figure labels in the probe text, long passages keep their question, unparsed replies and unjudged probes are never a no-match (coverage in the report), verdicts tied to the question text, tolerant resume. Queue 18 stopped at 1,600 and re-run from scratch at 06:56.
 - [ ] Show the owner the calibration and samples; on OK, hold the no-match items (review.json ship false / Maths templates) and rebuild.
 

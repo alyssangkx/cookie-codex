@@ -84,3 +84,14 @@ test('a parked marker naming the bank set survives a round trip', () => {
   s.questions.q1 = { s: 1, due: 5, w: 1, parked: 'k3x9a' };
   assert.deepEqual(cleanSave(JSON.parse(JSON.stringify(s))).questions.q1, { s: 1, due: 5, w: 1, parked: 'k3x9a' });
 });
+
+test('one-pool markers (pool, ms) survive the server round trip; anything but true is dropped', () => {
+  const s = fresh();
+  s.progress.sci = { b: { passes: [], scores: [], best: 0, cleared: true, mastered: 5, total: 24, pool: true, ms: true },
+    i: { passes: [], scores: [], best: 0, cleared: false, pool: 'yes', ms: 1 } as any };
+  const c = cleanSave(JSON.parse(JSON.stringify(s)));
+  assert.equal(c.progress.sci.b?.pool, true);
+  assert.equal(c.progress.sci.b?.ms, true);
+  assert.equal(c.progress.sci.i?.pool, undefined);
+  assert.equal(c.progress.sci.i?.ms, undefined);
+});

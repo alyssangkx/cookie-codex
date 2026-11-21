@@ -15,7 +15,8 @@ export const TIER_NAME: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', 
 // passes/scores/best are history for display only; `cleared` is set by syncTiers (all questions retired).
 // mastered/total are the last count seen when a quiz ended; hash is tierHash() of the ids they were counted against
 // (optional, added 20 Nov 2026 with no schema bump; older states lack it and fall back to the size check).
-export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number; hash?: string };
+export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number; hash?: string;
+  pool?: true; ms?: true }; // one-pool slots (ADR 0011): pool = counts are past-paper counts; ms = milestone reached on the pool
 // s: 0 retired, 1-3 retest step (due in 1, 3, 7 days); w: times answered wrong
 // a: the option text picked on the latest wrong answer, '' when it was not answered because time ran out, LEFT_BLANK
 // when it was left blank on purpose (a paper submitted with blanks, 20 Nov 2026); optional,
@@ -678,13 +679,28 @@ export function syncMilestones(
     const hash = tierHash(ids);
     TIERS.forEach((t, k) => {
       const st = tierState(s, sub, t);
-      st.total = ids.length; st.mastered = mastered; st.hash = hash;
+      st.total = ids.length; st.mastered = mastered; st.hash = hash; st.pool = true;
       (s.progress[sub] ??= {})[t] = st;
-      if (!st.cleared && mastered >= at[k]) out.push({ sub, tier: t, reward: award(s, sub, t, rewardFor, now, eco, test) });
+      // a generated tier cleared before the switch keeps its clear and card, but the milestone is earned on the pool; a slot
+      // already cleared (that old tier, or a milestone the first one-pool build awarded without the marker) gives no second reward
+      if (!st.ms && mastered >= at[k]) {
+        st.ms = true;
+        out.push({ sub, tier: t, reward: st.cleared ? null : award(s, sub, t, rewardFor, now, eco, test) });
+      }
     });
   }
   return out;
 }
+
+/** One-pool progress: only what syncMilestones stored; a count left by the replaced generated tiers reads as 0. */
+export function poolProgress(s: SaveV1, sub: string): { counted: number; total?: number } {
+  const st = tierState(s, sub, 'b');
+  return st.pool ? { counted: st.mastered ?? 0, total: st.total } : { counted: 0 };
+}
+/** A milestone reached on the pool, not a generated tier cleared before the switch. */
+export const milestoneReached = (s: SaveV1, sub: string, t: Tier) => !!tierState(s, sub, t).ms;
+/** A slot done: a cleared tier, or on a one-pool sub-topic a milestone reached on the pool (power, cleared counts). */
+export const slotDone = (s: SaveV1, sub: string, t: Tier, pool: boolean) => (pool ? milestoneReached(s, sub, t) : tierState(s, sub, t).cleared);
 
 type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | undefined;
 /** eco: build-time card data (crumbs.ts Economy); without it a tier clear gives only its slot card or a star, as before

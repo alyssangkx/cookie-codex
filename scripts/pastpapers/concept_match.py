@@ -262,17 +262,23 @@ def run(a):
 
 
 def verify(a):
-    """Server: pairs {pid, text, subject, pp_id} -> OUT/verify.jsonl {pid, pp_id, same, reason, parsed} (resumable)."""
+    """Server: pairs {pid, text, subject, pp_id} -> OUT/verify.jsonl {pid, pp_id, same, reason, parsed} (resumable).
+    Not read by report(): its calibration (21 Nov 2026, queue 20) confirmed only 2 of 7 real past-paper twins, too strict
+    to hold questions on. Nothing is held until a judge passes the calibration pairs (docs/todo.md)."""
     root = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
     pairs = jl(a.pairs)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     done = {(r["pid"], r["pp_id"]) for r in jl(out / "verify.jsonl") if r.get("parsed")}
     todo = [p for p in pairs if (p["pid"], p["pp_id"]) not in done]
+    text = {d["id"]: d["text"] for s in sorted({p["subject"] for p in todo}) for d in corpus(root, s)}
+    gone = [p for p in todo if p["pp_id"] not in text]
+    if gone:  # a pp_id from an older corpus: say so instead of retrying it on every run
+        print(len(gone), "pairs skipped: pp_id not in the corpus", flush=True)
+    todo = [p for p in todo if p["pp_id"] in text]
     print(len(todo), "pairs to verify", flush=True)
     if not todo:
         return
-    text = {d["id"]: d["text"] for s in sorted({p["subject"] for p in todo}) for d in corpus(root, s)}
     from vllm import LLM, SamplingParams
     llm = LLM(model=os.environ.get("PP_LLM", "Qwen/Qwen2.5-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
               gpu_memory_utilization=0.9, max_model_len=8192, max_num_seqs=32, enforce_eager=bool(os.environ.get("PP_EAGER")))
@@ -280,7 +286,7 @@ def verify(a):
     sysmsg = "You compare Singapore Primary 6 (PSLE) exam questions. You answer with JSON only."
     with open(out / "verify.jsonl", "a", encoding="utf-8") as f:
         for i in range(0, len(todo), 64):
-            ch = [p for p in todo[i:i + 64] if p["pp_id"] in text]
+            ch = todo[i:i + 64]
             msgs = [[{"role": "system", "content": sysmsg},
                      {"role": "user", "content": PROMPT_PAIR.format(gen=clip(p["text"], 1500), pp=text[p["pp_id"]])}] for p in ch]
             for p, o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):

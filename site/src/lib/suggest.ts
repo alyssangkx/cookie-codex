@@ -1,6 +1,6 @@
 // Pure logic for the "What do you want to train today?" page: power numbers and the
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
-import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, liveMastered, type SaveV1, type Tier } from './store.ts';
+import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, liveMastered, poolProgress, milestoneReached, slotDone, type SaveV1, type Tier } from './store.ts';
 import { reviewSize } from './pick.ts';
 
 export interface SubInfo {
@@ -27,7 +27,7 @@ export function topicPower(s: SaveV1, subsInTopic: SubInfo[]): number {
     for (const t of TIERS) {
       if (!sub.playable[t]) continue;
       all += TIER_WEIGHT[t];
-      if (tierState(s, sub.id, t).cleared) got += TIER_WEIGHT[t];
+      if (slotDone(s, sub.id, t, !!sub.pool)) got += TIER_WEIGHT[t];
     }
   return all ? Math.round((100 * got) / all) : 0;
 }
@@ -65,13 +65,13 @@ export function dueCount(s: SaveV1, now: number, questionSub?: Record<string, st
 
 /** Accuracy per "sub|tier" over the last 14 days from finished tier quizzes. */
 export function recentAccuracy(s: SaveV1, now: number) {
-  const m = new Map<string, { sub: string; tier: Tier; score: number; total: number }>();
+  const m = new Map<string, { sub: string; tier: Tier; pool: boolean; score: number; total: number }>();
   for (const a of s.attempts) {
     if (a.mode !== 'tier' || a.open || !a.sub || !a.total) continue;
     if (a.ts > now || now - a.ts > WEAK_DAYS * DAY) continue;
-    const tier: Tier = a.tier ?? 'b'; // a one-pool quiz has no tier: its first slot stands for the whole pool
-    const k = `${a.sub}|${tier}`;
-    const e = m.get(k) ?? { sub: a.sub, tier, score: 0, total: 0 };
+    const tier: Tier = a.tier ?? 'b'; // a one-pool quiz has no tier: its first slot stands for the whole pool (link only)
+    const k = `${a.sub}|${a.tier ?? 'pool'}`;
+    const e = m.get(k) ?? { sub: a.sub, tier, pool: !a.tier, score: 0, total: 0 };
     e.score += a.score; e.total += a.total;
     m.set(k, e);
   }
@@ -122,13 +122,14 @@ export function suggestions(
   for (const sub of subs) {
     const hit = TIERS.find((t) => {
       const st = tierState(s, sub.id, t);
-      if (sub.pool) return canStart(sub, t) && !tierState(s, sub.id, 'c').cleared && (st.mastered ?? 0) > 0; // stored with the live size
+      if (sub.pool) return canStart(sub, t) && !milestoneReached(s, sub.id, 'c') && poolProgress(s, sub.id).counted > 0;
       return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t], sub.hash?.[t]) > 0; // a count from a replaced bank is 0
     });
     if (hit) {
       const hs = tierState(s, sub.id, hit);
-      const total = sub.pool ? hs.total || sub.pool : sub.count![hit]; // liveMastered > 0 above means the count is known and matches
-      const m = sub.pool ? hs.mastered ?? 0 : liveMastered(hs, total, sub.hash?.[hit]);
+      const pp = poolProgress(s, sub.id);
+      const total = sub.pool ? pp.total || sub.pool : sub.count![hit]; // liveMastered > 0 above means the count is known and matches
+      const m = sub.pool ? pp.counted : liveMastered(hs, total, sub.hash?.[hit]);
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
         reason: sub.pool ? `${m} of ${total} past-paper questions counted.` : `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`,
@@ -141,7 +142,7 @@ export function suggestions(
   // 3. Weak spot: lowest accuracy over 14 days, at least 10 answered
   const byId = new Map(subs.map((x) => [x.id, x]));
   const weak = [...recentAccuracy(s, ctx.now).values()]
-    .filter((e) => e.total >= WEAK_MIN_ANSWERED && byId.has(e.sub) && canStart(byId.get(e.sub)!, e.tier) && !taken.has(`${e.sub}|${e.tier}`))
+    .filter((e) => e.total >= WEAK_MIN_ANSWERED && byId.has(e.sub) && e.pool === !!byId.get(e.sub)!.pool && canStart(byId.get(e.sub)!, e.tier) && !taken.has(`${e.sub}|${e.tier}`))
     .map((e) => ({ ...e, acc: Math.round((100 * e.score) / e.total) }))
     .sort((a, b) => a.acc - b.acc || b.total - a.total)[0];
   if (weak) {
@@ -155,7 +156,7 @@ export function suggestions(
   // 4. Next up: first open, uncleared, playable tier in syllabus order
   outer: for (const sub of subs)
     for (const t of TIERS)
-      if (canStart(sub, t) && !tierState(s, sub.id, sub.pool ? 'c' : t).cleared && !taken.has(`${sub.id}|${t}`)) {
+      if (canStart(sub, t) && !(sub.pool ? milestoneReached(s, sub.id, 'c') : tierState(s, sub.id, t).cleared) && !taken.has(`${sub.id}|${t}`)) {
         add({
           kind: 'next', title: `Next up: ${sub.name}`, sub: sub.id, tier: t,
           reason: sub.pool ? 'Real past-paper questions. Try them!' : `${TIER_NAME[t]} is open. Try it!`, href: tierHref(sub.id, t, !!sub.pool),
