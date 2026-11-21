@@ -692,6 +692,10 @@ def figures(a):
 
 
 def selftest():
+    import base64
+    jwt = "eyJhbGciOiJIUzI1NiJ9." + base64.urlsafe_b64encode(b'{"role":"anon"}').decode().rstrip("=") + ".sig"
+    assert key_kind(jwt).startswith("legacy JWT key, role anon"), key_kind(jwt)
+    assert key_kind("sb_publishable_abc").startswith("publishable key") and "abc" not in key_kind("sb_secret_abc")
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
     assert garbled("黑衣人是一个怎么样的人？", ["(1) 贪心", "(2) 自私", "(3) 糊涂", "(4) 骄傲"]) is None  # a short Chinese stem is complete
     assert garbled("你____多生气，____不应该对长辈无礼。", ["(1) 不管……也", "(2) 由于……才", "(3) 只要……都", "(4) 如果……就"]) is None
@@ -908,6 +912,21 @@ def easier_first(rows):
     return out
 
 
+def key_kind(k):
+    """What kind of Supabase key this is, never the key itself: prefix, the JWT role claim, length."""
+    import base64
+    if k.startswith(("sb_secret_", "sb_publishable_")):
+        return f"{k.split('_')[1]} key, {len(k)} chars"
+    if k.startswith("eyJ") and k.count(".") == 2:
+        try:
+            part = k.split(".")[1]
+            role = json.loads(base64.urlsafe_b64decode(part + "=" * (-len(part) % 4))).get("role", "?")
+        except ValueError:
+            role = "unreadable"
+        return f"legacy JWT key, role {role}, {len(k)} chars"
+    return f"unrecognised key, {len(k)} chars"
+
+
 def upload(a):
     rows, usubs, out = selection(a)
     ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
@@ -926,7 +945,7 @@ def upload(a):
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
         sys.exit(f"nothing selected under {a.out}/{a.subject} for those sub-topics: wrong --out? "
                  "(the 2025-26 import lives in /data/alvin/tmp/cookie-codex/ppimport/final2526)")
-    url, k = os.environ.get("SUPABASE_URL", "").rstrip("/"), os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+    url, k = os.environ.get("SUPABASE_URL", "").rstrip("/"), os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
     if not a.apply and not (url and k):
         print("dry run: nothing sent; deactivations not counted (no Supabase env); "
               "add --apply after the owner's go-ahead")
@@ -944,8 +963,9 @@ def upload(a):
     for sub in sorted(usubs):  # active rows of an uploaded sub-topic that this upload no longer carries
         r = s.get(f"{url}/rest/v1/pp_items", params={"select": "id", "subject": f"eq.{a.subject}",
                   "subtopic": f"eq.{sub}", "active": "eq.true", "limit": "10000"}, timeout=60)
-        if r.status_code >= 300:
-            sys.exit(f"could not list existing rows of {sub}: HTTP {r.status_code}")
+        if r.status_code >= 300:  # 401: the key is not a service-role key (or was pasted cut short)
+            sys.exit(f"could not list existing rows of {sub}: HTTP {r.status_code} {r.text[:200]}\n"
+                     f"key given: {key_kind(k)} (needs the service-role / secret key)")
         stale |= deactivate_set({x["id"] for x in r.json()}, keepids)
     print(f"would deactivate {len(stale)} existing rows no longer selected" if not a.apply
           else f"deactivating {len(stale)} existing rows no longer selected")
