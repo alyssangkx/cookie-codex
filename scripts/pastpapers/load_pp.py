@@ -375,6 +375,9 @@ def select(a):
                     # reader saw counts (21 Nov 2026)
                     refers = (bool(FIG_WORDS.search(q["text"]) or FIG_LETTER.search(q["text"]) or any(FIG_LETTER.search(strip_num(o)) for o in opts))
                               if a.subject in ("science", "maths") else bool(FIG_WORDS_LANG.search(q["text"])))
+                    # bare two-cell table rows ("Sound, None") mean the column headings are in the picture: the table is
+                    # needed (tester report 21 Nov: pp-87af45c055 "Useful energy | Wasted energy" shipped without it)
+                    refers = refers or table_rows(opts)
                     if refers or realfig(q):
                         usable = [c for c in crops.get(q["id"], []) if crop_ok(c)]
                         good = own_page_crops(usable, q.get("pages"))
@@ -696,6 +699,13 @@ def figures(a):
     print("crop fixes:", {k: v for k, v in stats.items() if k not in ("log", "angles")})
 
 
+def table_rows(opts):
+    """Every option is one flattened table row of exactly two short unlabelled cells ("Light + sound, Heat"): the column
+    headings exist only in the picture. Lists ("water, oil and flour") and labelled cells ("Mass: increase") read fine."""
+    s = [strip_num(o or "") for o in opts]
+    return len(s) == 4 and all(re.fullmatch(r"[^,:;]{1,25}, [^,:;]{1,25}", x) and " and " not in x for x in s)
+
+
 def own_page_crops(crops, pages):
     """Crops on the question's own page(s). The cropper also files crops from other parts of the paper under the same
     question number (Booklet B q5 under Booklet A q5, 40-50 pages away; 372 of 1,250 Science items, 21 Nov 2026 tester
@@ -713,6 +723,9 @@ def own_page_crops(crops, pages):
 
 def selftest():
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
+    assert table_rows(["(1) Light, Heat", "(2) Sound, None", "(3) Light + sound, Heat", "(4) Light + sound, None"])
+    assert not table_rows(["water, oil and flour", "ice, sugar and flour", "a, b and c", "d, e and f"])
+    assert not table_rows(["Mass: increase, Volume: increase"] * 4) and not table_rows(["K", "L", "M", "N"])
     c3 = ["x/sci-2022-015-BookletA-q05-p0501.png", "x/sci-2022-015-BookletA-q05-p0544.png", "x/q05-p0502.png"]
     assert own_page_crops(c3, [501, 502]) == [c3[0], c3[2]], own_page_crops(c3, [501, 502])
     assert own_page_crops(c3, None) == [] and own_page_crops(c3, [544]) == [c3[1]] and own_page_crops([], [1]) == []
