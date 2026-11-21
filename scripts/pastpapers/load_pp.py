@@ -117,6 +117,15 @@ def strip_num(o: str) -> str:
     return re.sub(r"^\s*(?:[(（]\s*\d\s*[)）]|[1-4][.)．、](?=\s*\D))\s*", "", o or "").strip()
 
 
+def scanner_marks(t: str) -> str:
+    """The scanner's part labels a child should not see (owner's report, 21 Nov 2026: pp-699ed1d689 "(cont)",
+    pp-29e22e295c "(sub)"): "(cont)"/"(cont'd)"/"(continued)", "(sub)" anywhere, and an "(a)"-"(d)" label at the start of a
+    line (the part of a structured question this MCQ was). Science and Maths stems."""
+    t = re.sub(r"(?m)^[ \t]*\((?:cont(?:'d|inued)?|sub)\.?\)[ \t]*", "", t, flags=re.I)  # a label opening a line
+    t = re.sub(r"[ \t]*\((?:cont(?:'d|inued)?|sub)\.?\)", "", t, flags=re.I)  # one inside a line
+    return re.sub(r"(?m)^[ \t]*\([a-d]\)[ \t]+", "", t)  # nothing else is touched
+
+
 def strip_opts(opts):
     """strip_num on each option, and "1 获得" (a number and a space) only when the four options are numbered 1-4 in order
     (owner sample, 21 Nov 2026: "(1) 1 焦急"); an unlabelled "3 天" keeps its number."""
@@ -493,7 +502,8 @@ def select(a):
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
                 "stem": cloze_stem(q["text"], qn, opts) if a.passage == "chinese-cloze" else
-                        tex_to_text(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip()),
+                        tex_to_text(scanner_marks(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip())
+                                    if a.subject in ("science", "maths") else q["text"].strip()),
                 "options": [tex_to_text(o) for o in strip_opts(opts)], "answer": int(k) - 1,
                 **({"grp": set_id(q, pk["suffix"]), "seq": qn, "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
@@ -1094,6 +1104,10 @@ def selftest():
     assert cloze_stem("我明白——如果……那只是Q17（1 保持 2 保证 3 保留 4 保守）的。", 17, O17) == "我明白——如果……那只是（17）＿＿＿＿的。"
     assert strip_opts(["1 年", "2 年", "3 年", "4 年"]) == ["1 年", "2 年", "3 年", "4 年"]
     assert cloze_stem("负责人在接受Q17（1反问 2责问 3访问 4发问）时表示。", 17, ["1反问", "2责问", "3访问", "4发问"]) == "负责人在接受（17）＿＿＿＿时表示。"
+    assert scanner_marks("Study the chart below.\n(sub) Which letters represent X?") == "Study the chart below.\nWhich letters represent X?"
+    assert scanner_marks("with object Y.\n(cont) The results are shown.") == "with object Y.\nThe results are shown."
+    assert scanner_marks("The table shows it.\n(a) Which cell makes food?") == "The table shows it.\nWhich cell makes food?"
+    assert scanner_marks("Mix (a) and (b) in the beaker.") == "Mix (a) and (b) in the beaker."  # labels inside a sentence stay
     print("selftest ok")
 
 
