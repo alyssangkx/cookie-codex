@@ -117,8 +117,8 @@ def score(a):
         qmap = {int(k): v for k, v in json.load(open(qf)).items()}
         ids += qmap.values()
         for m in models:
-            f = out / f"{part}_{m}.txt"
-            if f.exists():
+            fs = sorted(out.glob(f"*{part}_{m}.txt"))  # "part1_gemini.txt" or any prefix ("complete_..._part1_gemini.txt")
+            for f in fs[:1]:
                 got = {}
                 for mm in ANS.finditer(f.read_text(encoding="utf-8", errors="replace")):
                     got.setdefault(int(mm.group(1)), mm.group(2))
