@@ -405,7 +405,7 @@ def select(a):
                 "id": pp_id(q["id"]), "src_id": q["id"], "subject": a.subject, "subtopic": t["st"],
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
-                "stem": speaker_lines(q["text"].strip()), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
+                "stem": speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                 "blind_src": (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
@@ -704,14 +704,16 @@ SPEAKER = re.compile(r'(?<=[.?!:"\u201d\u2019\')])(?<!\bMr\.)(?<!\bMrs\.)(?<!\bM
                      r'(?=(?:' + TITLE + r'\.? )?[A-Z][a-z]+:\s)')
 # the stem's own question after the last comment: a sentence starting with a question word and ending in "?" (decimals
 # allowed); a comment's own "Do you agree?" is left with its speaker
-ASK = re.compile(r'(?<=[.!?"\u201d\u2019])\s+(?=(?:Which|What|Who|Whose|Whom|How|When|Where|Why|Based|In|From|According)\b'
-                 r'(?:[^.!?]|\.\d)*\?\s*$)')
+ASK = re.compile(r'(?<=[.!?"\u201d\u2019])\s+(?=(?:\S+\s+){2}\S)(?=(?:Which|What|Who|Whose|Whom|How|When|Where|Why|Based|In|From|According)\b'
+                 r'(?:[^.!?]|\.\d)*\?\s*$)')  # 3+ words: a bare "Why?" stays with its speaker
 
 
 def speaker_lines(t):
     """Comments by named people ("Aminah: ... Bala: ...") each on their own line, as printed, and the question after them
     on its own line (tester report 21 Nov: pp-aaaeb1ffd1 read as one block). Only with 2+ speakers; other line breaks are
-    kept; the quiz shows the stem with white-space: pre-line."""
+    kept; the quiz shows the stem with white-space: pre-line. Science only (Maths "Ans:" and English "To:" are labels).
+    ponytail: one-word names (and Mr/Mrs/Ms/Mdm/Dr + name) only; "Jun Wei:" stays on the line before; a speaker's own 3+ word
+    closing question starting with a question word would move to its own line. Fine on the 7 Science stems it touches."""
     parts = SPEAKER.split(t)
     if len(parts) < 3:
         return t
@@ -758,6 +760,7 @@ def selftest():
     assert speaker_lines("Comments. Aminah: Roots. Bala: Is it dry? Which is correct?") == "Comments.\nAminah: Roots.\nBala: Is it dry?\nWhich is correct?"
     assert speaker_lines("Said: Aminah: Roots. Bala: It is dry. Do you agree?") == "Said:\nAminah: Roots.\nBala: It is dry. Do you agree?"
     assert speaker_lines("Said: Aminah: Roots. Bala: Stem is 2.5 cm. Which is 3.5 cm?") == "Said:\nAminah: Roots.\nBala: Stem is 2.5 cm.\nWhich is 3.5 cm?"
+    assert speaker_lines("Said: Aminah: It needs water. Bala: It wilts. How?").endswith("Bala: It wilts. How?")
     assert speaker_lines("Four. Aminah: Roots. Bala: Stem.\n\nA | B\nWhich?") == "Four.\nAminah: Roots.\nBala: Stem.\n\nA | B\nWhich?"
     assert table_rows(["(1) Light, Heat", "(2) Sound, None", "(3) Light + sound, Heat", "(4) Light + sound, None"])
     assert not table_rows(["water, oil and flour", "ice, sugar and flour", "a, b and c", "d, e and f"])

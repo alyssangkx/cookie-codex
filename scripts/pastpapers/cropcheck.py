@@ -26,7 +26,7 @@ from pathlib import Path
 TMP = Path("/data/alvin/tmp/cookie-codex")
 WORK = TMP / "cropcheck"
 PACK = WORK / "pack"
-DEF_OUT = TMP / "ppimport" / "final2526"
+DEF_OUT = TMP / "ppimport" / "sci1826b"  # the Science set live since 21 Nov 2026
 SERVER = "alvin@192.168.1.170"
 SERVER_BASE = "/data/alvin/cookie/cropcheck"
 SERVER_PACK = SERVER_BASE + "/pack"
@@ -39,6 +39,11 @@ GATE = [
     ("pp-59bab0deb1", ["final2526"], "orig", "fail"),
     ("pp-17f298d774", ["final2526"], "webp", "pass"),
     ("pp-59bab0deb1", ["final2526"], "webp", "pass"),
+    # tester reports 21 Nov: a crop of only the options table (the plant diagram is elsewhere on the page), a crop holding
+    # the whole previous question, and the television table that belongs to its question
+    ("pp-7c736161cb", ["sci1826b"], "webp", "fail"),
+    ("pp-22f8bc3801", ["sci1826b"], "webp", "fail"),
+    ("pp-87af45c055", ["sci1826b"], "webp", "pass"),
 ]
 
 BASE = ("You are checking a crop taken from a Singapore PSLE Science exam page. Image 1 is the crop. Image 2 is the full "
@@ -197,12 +202,13 @@ def pack(a):
 
 
 def pickup(a):
-    r = subprocess.run(["ssh", SERVER, "tail -1 /data/alvin/cookie/vlm/tag11-done.txt"], capture_output=True, text=True)
+    done = f"/data/alvin/cookie/vlm/{a.tag}-done.txt"
+    r = subprocess.run(["ssh", SERVER, f"tail -1 {done}"], capture_output=True, text=True)
     if "QUEUE EMPTY" not in r.stdout:
-        sys.exit("queue 11 not finished: " + r.stdout.strip()[-120:])
+        sys.exit(f"{a.tag} not finished: " + r.stdout.strip()[-120:])
     WORK.mkdir(parents=True, exist_ok=True)
     subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/out/results.jsonl", str(PACK / "results.jsonl")], check=True)
-    subprocess.run(["scp", "-q", f"{SERVER}:/data/alvin/cookie/vlm/tag11-done.txt", str(WORK / "tag11-done.txt")], check=True)
+    subprocess.run(["scp", "-q", f"{SERVER}:{done}", str(WORK / f"{a.tag}-done.txt")], check=True)
     rows = stamped(jl(PACK / "results.jsonl"), pack_stamp(PACK))
     print(f"{len(rows)} items (current pack stamp), {sum(not r['ok'] for r in rows)} failed -> {PACK / 'results.jsonl'}")
 
@@ -356,6 +362,7 @@ def main():
     p.add_argument("--subject", default="science")
     p.add_argument("--push", action="store_true")
     p.add_argument("--prompt", type=int, default=None)
+    p.add_argument("--tag", default="tag21", help="pickup: the server queue whose done file to wait for (tag11 was the first run)")
     a = p.parse_args()
     if a.cmd == "selftest":
         return selftest()
