@@ -158,7 +158,9 @@ def score(a):
         qmap = {int(k): v for k, v in json.load(open(qf)).items()}
         ids += qmap.values()
         for m in models:
-            fs = sorted(out.glob(f"*{part}_{m}.txt"))  # "part1_gemini.txt" or any prefix ("complete_..._part1_gemini.txt")
+            # "part1_gemini.txt", any prefix ("complete_..._part1_gemini.txt"), or "part_1_2_gemini.txt"
+            num = part.removeprefix("part")
+            fs = sorted(f for f in out.glob(f"*_{m}.txt") if re.search(rf"part_?{num}(?:_\d+)?_{m}\.txt$", f.name))
             if len(fs) > 1:
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:
