@@ -62,6 +62,39 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'chi-zixing-form': 'pool',
   'chi-juzi-choose': 'pool',
   'chi-ciyu-idiom': 'merge',
+  // Maths upload (owner OK after the 40-question sample, 21 Nov 2026): MCQs 2018-2026, keys confirmed by the blind check;
+  // 'pool' at 20+ past-paper questions, 'merge' below (they join the sub-topic's generated tiers)
+  'math-algebra-algebra': 'pool', // 59
+  'math-area-and-volume-area-and-circumference-of-circle': 'pool', // 45
+  'math-area-and-volume-volume-of-cube-and-cuboid': 'pool', // 21
+  'math-data-analysis-average-of-a-set-of-data': 'pool', // 25
+  'math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts': 'pool', // 27
+  'math-decimals-decimal-notation-and-comparison': 'pool', // 104
+  'math-fractions-equivalent-fractions-and-simplest-form': 'pool', // 50
+  'math-fractions-fraction-of-a-whole-and-of-a-set': 'pool', // 54
+  'math-fractions-multiplication-and-division-of-fractions': 'pool', // 41
+  'math-geometry-angles': 'pool', // 49
+  'math-measurement-length-mass-and-volume': 'pool', // 99
+  'math-measurement-time': 'pool', // 35
+  'math-money-money': 'pool', // 40
+  'math-percentage-percentage': 'pool', // 116
+  'math-rate-rate': 'pool', // 38
+  'math-ratio-ratio': 'pool', // 95
+  'math-whole-numbers-addition-subtraction-multiplication-and-division': 'pool', // 126
+  'math-whole-numbers-factors-and-multiples': 'pool', // 30
+  'math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million': 'pool', // 107
+  'math-area-and-volume-area-and-perimeter': 'merge', // 13
+  'math-area-and-volume-area-of-triangle': 'merge', // 13
+  'math-decimals-four-operations-with-decimals': 'merge', // 13
+  'math-fractions-addition-and-subtraction-of-fractions': 'merge', // 13
+  'math-fractions-fraction-and-division': 'merge', // 1
+  'math-fractions-mixed-numbers-and-improper-fractions': 'merge', // 11
+  'math-geometry-2d-shapes': 'merge', // 10
+  'math-geometry-3d-shapes-and-nets': 'merge', // 7
+  'math-geometry-line-symmetry': 'merge', // 8
+  'math-geometry-perpendicular-and-parallel-lines': 'merge', // 5
+  'math-geometry-rectangle-and-square': 'merge', // 2
+  'math-geometry-triangles-parallelogram-rhombus-and-trapezium': 'merge', // 17
 };
 
 /** pp_items.subject of a sub-topic, from its id prefix (pp_pool lists one subject per call). */

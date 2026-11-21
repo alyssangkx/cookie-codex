@@ -18,7 +18,8 @@ test('the master switch is ON; the Science upload (21 Nov 2026) puts 20+ sub-top
   assert.equal(ppMode('sci-systems-plant-transport-parts', false), null); // nothing while the flag is off
   assert.equal(ppMode('sci-systems-plant-transport-parts'), 'pool');
   assert.equal(ppMode('sci-cycles-water-cycle'), 'merge'); // 9 past-paper questions: merged into its tiers
-  assert.equal(ppMode('math-rate-rate'), null); // Maths has no past-paper questions on the site yet
+  assert.equal(ppMode('math-rate-rate'), 'pool'); // Maths upload (21 Nov 2026): 38 past-paper questions
+  assert.equal(ppMode('math-geometry-line-symmetry'), 'merge'); // 9: merged into its tiers
 });
 
 test('which sub-topics a quiz fetches', () => {
