@@ -697,15 +697,15 @@ def figures(a):
 def own_page_crops(crops, pages):
     """Crops on the question's own page(s). The cropper also files crops from other parts of the paper under the same
     question number (Booklet B q5 under Booklet A q5, 40-50 pages away; 372 of 1,250 Science items, 21 Nov 2026 tester
-    reports), so a crop counts only on a page of the question, or, without page data, on the first crop's page (MCQs are in
-    Booklet A, before Booklet B, so the first crop is the question's). Not the page after: a sample of 6 such crops were all
-    another question's picture (21 Nov 2026)."""
+    reports), so a crop counts only on a page of the question; without page data none counts (the item is held; every
+    Science item had page data on 21 Nov 2026). Not the page after: a sample of 6 such crops were all another question's
+    picture."""
     def pg(c):
         m = re.search(r"-p(\d+)\.png$", str(c))
         return int(m.group(1)) if m else -1
     if not crops:
         return []
-    own = set(pages or []) or {pg(crops[0])}
+    own = set(pages or [])
     return [c for c in crops if pg(c) in own]
 
 
@@ -713,7 +713,7 @@ def selftest():
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
     c3 = ["x/sci-2022-015-BookletA-q05-p0501.png", "x/sci-2022-015-BookletA-q05-p0544.png", "x/q05-p0502.png"]
     assert own_page_crops(c3, [501, 502]) == [c3[0], c3[2]], own_page_crops(c3, [501, 502])
-    assert own_page_crops(c3, None) == [c3[0]] and own_page_crops(c3, [544]) == [c3[1]] and own_page_crops([], [1]) == []
+    assert own_page_crops(c3, None) == [] and own_page_crops(c3, [544]) == [c3[1]] and own_page_crops([], [1]) == []
     assert own_page_crops(c3, [501]) == [c3[0]] and own_page_crops(["x/q.png"], [1]) == []  # never the page after; odd name
     import base64
     jwt = "eyJhbGciOiJIUzI1NiJ9." + base64.urlsafe_b64encode(b'{"role":"anon"}').decode().rstrip("=") + ".sig"

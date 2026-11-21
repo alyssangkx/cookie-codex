@@ -544,7 +544,7 @@ export function finishQuiz(
     const pct = a.total ? a.score / a.total : 0;
     st.best = Math.max(st.best, Math.round(pct * 100));
     passed = a.total >= QUIZ_SIZE && pct >= PASS;
-    const card = Object.values(s.cards).find((c) => c.srcSub === a.sub && c.srcTier === a.tier);
+    const card = a.tier ? s.cards[slotCard(s, a.sub, a.tier) ?? ''] : undefined;
     if (card && a.total) { card.acc = Math.round(0.7 * card.acc + 0.3 * pct * 100); card.last = now; } // practice keeps cards strong
     if (passed) {
       st.scores.push(Math.round(pct * 100));
@@ -700,6 +700,9 @@ export function poolProgress(s: SaveV1, sub: string): { counted: number; total?:
   const st = tierState(s, sub, 'b');
   return st.pool ? { counted: st.mastered ?? 0, total: st.total } : { counted: 0 };
 }
+/** The card a (sub-topic, slot) clear gave: its slot card or a replacement; undefined when it paid a star or nothing. */
+export const slotCard = (s: SaveV1, sub: string, t: Tier) =>
+  Object.entries(s.cards).find(([, c]) => c.srcSub === sub && c.srcTier === t)?.[0];
 /** A milestone reached on the pool, not a generated tier cleared before the switch. */
 export const milestoneReached = (s: SaveV1, sub: string, t: Tier) => !!tierState(s, sub, t).ms;
 

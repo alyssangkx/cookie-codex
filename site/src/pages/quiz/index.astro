@@ -275,7 +275,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const ppReason = (limit: boolean) => (limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load');
   const ppNote = (limit: boolean, what: string) => `<p class="note">${ppReason(limit)}, so this ${what} uses the other questions.</p>`;
   const KEPT = 'Your answers are kept: open the paper again later.';
-  const DUE = 'Its time is up: open it again within 10 minutes to hand it in, or it will be put away unmarked.';
+  const DUE = 'Its time is up and it cannot be marked without them. Try again soon: a paper left long past its time is put away unmarked.';
   function indexMembers() {
     members = new Map();
     for (const q of byId.values()) if (q.group) (members.get(q.group) ?? members.set(q.group, []).get(q.group)!).push(q);
