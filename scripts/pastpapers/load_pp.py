@@ -320,6 +320,10 @@ def select(a):
         bfile = Path(a.blind) / f"{a.subject}-{y}.jsonl"
         blind = {b["id"]: b for b in jl(bfile)} if bfile.exists() else None
         second = {b["id"]: b for b in jl(Path(a.blind2) / f"{a.subject}-{y}.jsonl")}
+        # owner-approved model consensus (21 Nov 2026, English): three outside models agree with the key ("confirm"), or
+        # with the local blind solver against it ("replace"; spot check 20/20 for the models). Used only while the key is
+        # still the one the verdict was made on (key_old).
+        consensus = {c["id"]: c for c in jl(Path(a.blind) / "consensus" / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
         ocrk = ocr_keys(base) if a.ocr_keys else {}
         rrk = reread_keys(base) if a.reread_keys else {}
@@ -360,6 +364,10 @@ def select(a):
                     src = "vision+reread"
             if len(opts) == 4 and ok and k and k != ok:
                 conflict = True  # also catches a partial OCR read against a key the reread supplied
+            cv = consensus.get(q["id"])
+            cv_ok = bool(cv and len(opts) == 4 and k and cv["key_old"] == k)
+            if cv_ok and cv["kind"] == "replace":
+                k, src, conflict = cv["key_new"], "consensus", False
             if len(opts) != 4:
                 reason = "not-4-options"
             elif q["id"] in onans:
@@ -374,19 +382,23 @@ def select(a):
                 reason = "grid-uncertain"
             elif conflict:
                 reason = "ocr-key-conflict"
-            elif src in ("ocr", "vision-reread") and (blind is None or q["id"] not in blind or blind[q["id"]].get("key") != k):
+            elif not cv_ok and src in ("ocr", "vision-reread") and (blind is None or q["id"] not in blind or blind[q["id"]].get("key") != k):
                 reason = "needs-blind-check-ocr"  # a blind file made with OCR keys must contain it
-            elif blind is None:
+            elif not cv_ok and blind is None:
                 reason = "no-blind-check-yet"
-            elif q["id"] not in blind:
+            elif not cv_ok and q["id"] not in blind:
                 reason = "not-in-blind-check"
-            elif blind[q["id"]].get("key") != k:
+            elif not cv_ok and blind[q["id"]].get("key") != k:
                 reason = "blind-key-mismatch"  # the key changed after the blind run: re-run it
-            elif blind[q["id"]].get("agree") is not True and not (
+            elif not cv_ok and blind[q["id"]].get("agree") is not True and not (
                     second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
                 reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None)
+                # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
+                # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
+                if not reason and a.subject == "english" and isinstance(q.get("qno"), int) and q["qno"] > 15:
+                    reason = "eng-passage-section"
                 if not reason and t.get("st") not in subs:
                     reason = "subtopic-not-in-syllabus"
                 if not reason and t.get("difficulty") not in LEVEL:
