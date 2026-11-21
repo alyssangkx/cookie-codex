@@ -124,6 +124,7 @@ BLANK_PUNCT = set("_.,;:?!'\"()[]-…—–·。，、；：？！“”‘’�
 LETTERED = re.compile(r"\(?([A-D])(?:[.)]\s*|\s+(?![\s&+,]|and\b|or\b|only\b))")  # "A. Air" / "A Air", not "A and X only"
 
 
+CHI_SINGLE = {"chi-pinyin-sound", "chi-zixing-form", "chi-ciyu-choose", "chi-ciyu-idiom", "chi-juzi-choose", "chi-juzi-guanlian"}
 ENG_INSTR = re.compile(r"(?:^|(?<=[.?!]))\s*(?:select|choose|circle|fill in|pick)\b[^.?!]*[.?!]?", re.I)
 ENG_BLANK = re.compile(r"_{2,}|\(\s*\)|\.{4,}")
 ENG_PASSAGE = re.compile(r"\b(passage|paragraph|line \d+|lines \d+|the (?:poster|advertisement|notice|brochure|flyer|leaflet|"
@@ -144,6 +145,21 @@ def eng_incomplete(text: str) -> str | None:
     if ENG_PASSAGE.search(t):
         return "stem-needs-passage"
     return None
+
+
+CHI_BLANK = re.compile(r"_{2,}|（\s*）|\(\s*\)")
+PINYIN = re.compile(r"[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü' ]+")
+
+
+def chi_incomplete(text: str, opts) -> str | None:
+    """A single Chinese MCQ must carry a blank, or pinyin options (字音: the pinyin shows which word is asked). A meaning or
+    usage question names its word by an underline, which the scan loses, and a sentence fragment has no blank: neither can be
+    answered (owner's spot check, 21 Nov 2026)."""
+    if CHI_BLANK.search(text or ""):
+        return None
+    if opts and all(PINYIN.fullmatch(strip_num(o).strip() or "x") for o in opts):
+        return None
+    return "chi-no-blank-underline-lost"
 
 
 def garbled(text: str, opts) -> str | None:
@@ -394,7 +410,8 @@ def select(a):
                     second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
-                reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None)
+                reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None) \
+                    or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
                 # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
                 if not reason and a.subject == "english" and isinstance(q.get("qno"), int) and q["qno"] > 15:
@@ -814,6 +831,9 @@ def selftest():
     assert garbled("你____多生气，____不应该对长辈无礼。", ["(1) 不管……也", "(2) 由于……才", "(3) 只要……都", "(4) 如果……就"]) is None
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
+    assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
+    assert chi_incomplete("哥哥吃了一碗炒饭，但仍然觉得饿。", ["rēng rán", "réng rán", "lēng rán", "léng rán"]) is None
+    assert chi_incomplete("老师让班长统计一下参加的人数。", ["记录重要的数字", "算出总体的数字", "a", "b"]) == "chi-no-blank-underline-lost"
     assert eng_incomplete("Select the most appropriate word to fill in the blank.") == "stem-instruction-only"
     assert eng_incomplete("portrayed") == "stem-instruction-only"
     assert eng_incomplete("He tried to remain poised as he realised he was trapped in the car.") == "stem-no-blank-or-question"
