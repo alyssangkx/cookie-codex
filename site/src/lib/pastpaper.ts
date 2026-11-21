@@ -153,7 +153,22 @@ export const easierFirst = (qs: { id: string; ord?: number | null }[]) =>
 /** Milestones count at most a pool's first POOL_CAP questions in easier-first order (owner, 21 Nov 2026: Exam-ready on
  * 1,926 English grammar questions would need 964 counted). The rest of the pool is still served for practice. */
 export const POOL_CAP = 300;
-export const countingPool = (qs: { id: string; ord?: number | null }[]) => easierFirst(qs).slice(0, POOL_CAP);
+export function countingPool(qs: { id: string; ord?: number | null; group?: string }[]): string[] {
+  const order = easierFirst(qs);
+  const groupOf = new Map(qs.map((q) => [q.id, q.group]));
+  if (!qs.some((q) => q.group)) return order.slice(0, POOL_CAP);
+  // passage sets count whole (they are asked whole): take sets in the order their easiest question comes, until the cap
+  const out: string[] = [], taken = new Set<string>();
+  for (const id of order) {
+    if (out.length >= POOL_CAP) break;
+    const g = groupOf.get(id);
+    if (!g) { out.push(id); continue; }
+    if (taken.has(g)) continue;
+    taken.add(g);
+    out.push(...order.filter((x) => groupOf.get(x) === g));
+  }
+  return out;
+}
 
 /** One pp_pool page (fetchPool): 'more' to ask for the next page, 'done', or 'fail' (the list would be partial).
  * total: the server's exact count from the first page (null when it sent none: then a short page ends the list, the

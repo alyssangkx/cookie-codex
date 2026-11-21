@@ -356,7 +356,7 @@ def select(a):
             if q.get("format") != "mcq":
                 continue
             vt = a.passage == "english-visual"
-            if vt and not (isinstance(q.get("qno"), int) and 21 <= q["qno"] <= 30
+            if vt and not (isinstance(q.get("qno"), int) and 21 <= q["qno"] <= 30 and not re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)
                            and ((tags.get(q["id"]) or {}).get("st") == "eng-visual-text" or q.get("section") == "Visual Text")):
                 continue  # passage mode takes only the visual-text section
             opts = q.get("options") or []
@@ -481,7 +481,9 @@ def select(a):
                               else "second:vl2-fullres+text72-ocr"),
             })
     if a.passage:
-        set_pages(rows)
+        for r, why in set_pages(rows):  # a dropped set is held with its reason, like any other question
+            rejects.append({"id": r["src_id"], "reason": why})
+            R[why] += 1
     ids = [r["id"] for r in rows]
     assert len(ids) == len(set(ids)), "pp id collision"
     with open(out / "selected.jsonl", "w") as f:
@@ -1082,7 +1084,9 @@ def selection(a):
         rows = [r for r in rows if r["subtopic"] in keep]
     subs = {r["subtopic"] for r in rows} | (set(a.subtopics.split(",")) if a.subtopics else set())
     hold = read_hold(out)
-    return [r for r in rows if r["id"] not in hold], subs, out
+    rows = [r for r in rows if r["id"] not in hold]
+    left = collections.Counter(r["grp"] for r in rows if r.get("grp"))
+    return [r for r in rows if not r.get("grp") or left[r["grp"]] >= 2], subs, out  # a hold may leave a set of one: drop it
 
 
 def counts(a):
@@ -1139,7 +1143,7 @@ def set_pages(rows):
     """Every question of a set shows the same pages: from two pages before the set's first question page (the poster or
     passage, which may run over two pages) to its first question page. Sets of one question, and sets whose questions spread
     over more than 5 pages (bad page data), are dropped."""
-    by = collections.defaultdict(list)
+    by, dropped = collections.defaultdict(list), []
     for r in rows:
         if r.get("grp"):
             by[r["grp"]].append(r)
@@ -1147,12 +1151,14 @@ def set_pages(rows):
         if len(rs) < 2:
             for r in rs:
                 rows.remove(r)
+                dropped.append((r, "set-one-question"))
             continue
         pages = sorted({p for r in rs for p in r["pages"]})
         pdir = Path(rs[0]["pages_dir"])
         if pages[-1] - pages[0] > 4:  # a visual text and its questions fit in a few pages: a longer span is bad page data
             for r in rs:
                 rows.remove(r)
+                dropped.append((r, "set-bad-pages"))
             continue
         # the poster (up to two pages before the questions) and the first question page, which may hold its end; later
         # question pages carry only questions, which the quiz shows as text
@@ -1166,6 +1172,7 @@ def set_pages(rows):
             r["set_pages"] = [str(pdir / f"p{p:04d}.jpg") for p in span]
             r["set_owner"] = first  # the pages are stored once, under the set's first question
             r.pop("pages_dir", None)
+    return dropped
 
 
 def tex_to_text(t: str) -> str:
@@ -1214,7 +1221,8 @@ def upload(a):
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
         figs[m["pp_id"]].append({"path": m["path"], "w": m["w"], "h": m["h"]})
-    missing = [r["id"] for r in rows if r["crops"] and len(figs[r["id"]]) != len(r["crops"])]
+    missing = [r["id"] for r in rows if (r["crops"] and len(figs[r["id"]]) != len(r["crops"]))
+               or (r.get("set_pages") and len(figs[r["id"]]) != len(r["set_pages"]))]  # a set row without its pages too
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
     db = [{"id": r["id"], "src_id": r["src_id"], "subject": r["subject"], "subtopic": r["subtopic"], "level": r["level"],

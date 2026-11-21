@@ -216,11 +216,15 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     }
     return h;
   };
-  const stemHtml = (q: Q, reveal = false) => {
+  /** figs: past-paper pictures in the stem; the result list puts them in the row's body instead (a link or a folded
+   * block inside a <summary> would open a tab, or is not valid). Reviewed one at a time, a set's pages show in full. */
+  const ppFigsHtml = (q: Q, again: boolean) =>
+    q.ppFigs?.length ? `<span class="qfig-wrap${q.group ? ' qfig-set' : ''}">${ppFigureHtml(q.ppFigs, again)}</span>` : '';
+  const stemHtml = (q: Q, reveal = false, figs = true) => {
     const many = q.sub === 'chi-dialogue-mcq';
     const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal) : fmt(q.stem);
     return ppBadge(q) + t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '')
-      + (q.ppFigs?.length ? `<span class="qfig-wrap${q.group ? ' qfig-set' : ''}">${ppFigureHtml(q.ppFigs, laterInSet(q))}</span>` : '');
+      + (figs ? ppFigsHtml(q, !reveal && laterInSet(q)) : '');
   };
 
   /** A question of a passage set after the set's first one in this quiz: its pages were already shown in full. */
@@ -764,8 +768,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    * wrong total). */
   function pools(): Record<string, string[]> {
     if (!ppLoaded || ppFailed) return {};
-    const by: Record<string, { id: string; ord?: number | null }[]> = {};
-    for (const q of ppAll) if (isPoolSub(q.sub)) (by[q.sub] ??= []).push(q as { id: string; ord?: number | null });
+    const by: Record<string, { id: string; ord?: number | null; group?: string }[]> = {};
+    for (const q of ppAll) if (isPoolSub(q.sub)) (by[q.sub] ??= []).push(q as { id: string; ord?: number | null; group?: string });
     return Object.fromEntries(Object.entries(by).map(([sub, qs]) => [sub, countingPool(qs)]));
   }
   function record(id: string, ok: boolean, picked?: string) {
@@ -935,8 +939,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const seenVis = new Set<string>(); // a visual card shows once per set, with the first missed question of that group
     const items = wrongs.map(({ q, chose }) => {
       const showVis = q.visual && !(q.group && seenVis.has(q.group));
+      const setAgain = !!q.group && seenVis.has(q.group); // a set's pages in full with its first wrong question only
       if (q.group) seenVis.add(q.group);
-      return `<details class="rev"><summary>${stemHtml(q, true)}</summary>
+      return `<details class="rev"><summary>${stemHtml(q, true, false)}</summary>${ppFigsHtml(q, setAgain)}
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
        <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${optionLabel(q, q.answer)} (${fmt(q.options[q.answer])}).</p>
        ${stepsHtml(q)}</details>`;

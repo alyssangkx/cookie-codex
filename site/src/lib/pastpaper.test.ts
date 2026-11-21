@@ -249,3 +249,13 @@ test('a pool row carries its passage set (migration 010); odd set values are ign
   assert.equal(odd?.group, undefined);
   assert.equal(stubOf({ id: 'pp-0123456789', subtopic: 'eng-grammar-mcq', level: 'basic', grp: null, seq: null })?.group, undefined);
 });
+
+test('a counting pool with passage sets takes whole sets, easiest first, until the cap', () => {
+  const qs: { id: string; ord: number; group?: string }[] = [];
+  let o = 0;
+  for (let g = 0; g < 80; g++) for (let k = 0; k < 6; k++) qs.push({ id: `pp-${String(g * 10 + k).padStart(10, '0')}`, ord: ++o, group: `set-${g}` });
+  const c = countingPool(qs);
+  const sets = new Set(c.map((id) => qs.find((q) => q.id === id)!.group));
+  for (const g of sets) assert.equal(c.filter((id) => qs.find((q) => q.id === id)!.group === g).length, 6); // never part of a set
+  assert.ok(c.length >= POOL_CAP && c.length < POOL_CAP + 6);
+});
