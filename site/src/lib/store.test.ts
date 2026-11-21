@@ -641,7 +641,7 @@ test('a generated tier cleared before the switch keeps its clear and card, but i
   assert.equal(s.progress.sci.c?.cleared, true);                           // never un-cleared, card stays
   ids.slice(0, 13).forEach((id) => answer(s, id, true, t0));
   const got = syncMilestones(s, { sci: ids }, rf, t0);
-  assert.deepEqual(got.map((x) => x.tier), ['b', 'i']);                    // c was cleared before: marked, no second reward
+  assert.deepEqual(got.map((x) => [x.tier, !!x.reward]), [['b', true], ['i', true], ['c', false]]); // c cleared before: no second reward
   assert.equal(milestoneReached(s, 'sci', 'c'), true);
   assert.ok(s.cards['card-c']);
 });
@@ -654,7 +654,7 @@ test('a milestone the first one-pool build awarded (cleared, no ms marker) is ma
   let calls = 0;
   const rf = (_sub: string, t: 'b' | 'i' | 'c') => { calls++; return { slug: `card-${t}`, dup: false }; };
   const got = syncMilestones(s, { sci: ids }, rf, t0);
-  assert.deepEqual(got, []);
+  assert.deepEqual(got.map((x) => [x.tier, x.reward]), [['b', null]]);  // announced, not paid again
   assert.equal(calls, 0);
   assert.equal(milestoneReached(s, 'sci', 'b'), true);
   assert.equal(syncMilestones(s, { sci: ids }, rf, t0).length, 0);         // marked once

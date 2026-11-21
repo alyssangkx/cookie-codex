@@ -682,11 +682,12 @@ export function syncMilestones(
       st.total = ids.length; st.mastered = mastered; st.hash = hash; st.pool = true;
       (s.progress[sub] ??= {})[t] = st;
       // a generated tier cleared before the switch keeps its clear and card, but the milestone is earned on the pool; a slot
-      // already cleared (that old tier, or a milestone the first one-pool build awarded without the marker) is only marked: no
-      // second reward and no "cleared" result. ponytail: pool/ms are never reset; if a sub-topic ever leaves 'pool', reset them then
+      // already cleared (that old tier, or a milestone the first one-pool build awarded without the marker) is announced with
+      // no second reward (the pool page previews it as already earned). ponytail: pool/ms are never reset; reset them if a
+      // sub-topic ever leaves 'pool'
       if (!st.ms && mastered >= at[k]) {
         st.ms = true;
-        if (!st.cleared) out.push({ sub, tier: t, reward: award(s, sub, t, rewardFor, now, eco, test) });
+        out.push({ sub, tier: t, reward: st.cleared ? null : award(s, sub, t, rewardFor, now, eco, test) });
       }
     });
   }

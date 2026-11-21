@@ -271,6 +271,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     return all;
   }
   /** Passage groups from the questions loaded (again after a fallback adds generated questions). */
+  const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
+  const ppNote = (limit: boolean, what: string) =>
+    `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this ${what} uses the other questions.</p>`;
   function indexMembers() {
     members = new Map();
     for (const q of byId.values()) if (q.group) members.set(q.group, [...(members.get(q.group) ?? []), q]);
@@ -296,10 +299,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const gen = genAll.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
       const side = genAll.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
       for (const q of genAll) if (q.sub === subId) byId.set(q.id, q);
-      const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       indexMembers();
       quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
-      notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this quiz uses the other questions.</p>`;
+      notice += ppNote(limit, 'quiz');
       return quiz.length >= QUIZ_SIZE ? '' : 'This tier does not have enough questions right now. Try again later.';
     }
     if (mode === 'tier') {
@@ -313,7 +315,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       indexMembers();
       quiz = pickPaper(gen as any, load().questions, paperN, paperMix.mix);
     } else quiz = quiz.filter((id) => !isStub(byId.get(id))); // a resumed paper or review drops them (with their picks)
-    notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this ${mode === 'paper' ? 'paper' : 'review'} uses the other questions.</p>`;
+    notice += ppNote(limit, mode === 'paper' ? 'paper' : 'review');
     return quiz.length ? '' : (mode === 'paper' ? 'There are not enough questions for this paper right now. Try again later.' : 'Nothing to review right now. Try again later.');
   }
 
@@ -361,7 +363,6 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       // loaded (an older tab missing newer bank files may have parked them). Nothing is deleted (ADR 0002).
       // the save as stored now, not `s` from before the await: another tab may have bought or earned meanwhile
       const cur = syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
-      const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       if (POOL) {
         if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
         quiz = pickPool(easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]), cur.questions, QUIZ_SIZE);
@@ -873,7 +874,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     let html = `<div class="cheer-row">${cheerHtml(s)}${gain}</div>` + note;
     if (mode === 'tier' && POOL) {
       const pp = poolProgress(s, subId), hit = res.newlyCleared.filter((x) => x.sub === subId).map((x) => x.tier === 'c' ? 'Exam-ready' : `${MILESTONE_NAME[x.tier]} reached`);
-      html += `<p class="verdict${hit.length || res.passed ? ' good' : ''}">${hit.length ? `${hit.join(' and ')}! ` : ''}${pp.counted} of ${pp.total || sub.pool} past-paper questions counted. Missed ones come back the next day.</p>`;
+      html += `<p class="verdict${hit.length || score >= 0.8 * quiz.length ? ' good' : ''}">${hit.length ? `${hit.join(' and ')}! ` : ''}${pp.counted} of ${pp.total || sub.pool} past-paper questions counted. Missed ones come back the next day.</p>`;
     } else if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.autoPromoted ? `<p class="verdict good">Perfect first try! ${{ b: 'Basic', i: 'Intermediate', c: 'Competent' }[tier] ?? 'Tier'} cleared, and the next tier is open.</p>`
