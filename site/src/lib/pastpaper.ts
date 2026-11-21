@@ -101,6 +101,8 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
 const SUBJECT_OF: Readonly<Record<string, string>> = { sci: 'science', eng: 'english', chi: 'chinese', math: 'maths' };
 export const ppSubjectOf = (sub: string): string | null => SUBJECT_OF[sub.split('-')[0]] ?? null;
 export const PP_BUCKET = 'pp-figures';
+/** A sub-topic id as pp_items stores it (pp_items_subtopic_check, migration 009: up to 120; one Maths id has 103). */
+const SUBTOPIC_ID = /^[a-z0-9-]{3,120}$/;
 export const PP_MIN_TIER = 20; // same as MIN_POOL: a smaller past-paper pool never replaces a tier, it is merged in
 const LEVELS = ['basic', 'intermediate', 'competent'] as const;
 
@@ -127,7 +129,7 @@ export interface PpQ {
  * question (hydrate) before it is shown. */
 export type PpStub = PpQ & { stub: true; ord: number | null };
 export function stubOf(r: { id: unknown; subtopic: unknown; level: unknown; ord?: unknown }, topic?: string): PpStub | null {
-  if (typeof r.id !== 'string' || !isPpId(r.id) || typeof r.subtopic !== 'string' || !/^[a-z0-9-]{3,80}$/.test(r.subtopic)
+  if (typeof r.id !== 'string' || !isPpId(r.id) || typeof r.subtopic !== 'string' || !SUBTOPIC_ID.test(r.subtopic)
     || !LEVELS.includes(r.level as PpRow['level'])) return null;
   return { id: r.id, sub: r.subtopic, level: r.level as string, topic, stem: '', options: ['', '', '', ''], answer: 0,
     explain: [null, null, null, null], solution: [], numbered: true, ppFigs: [], ppYear: null, stub: true,
@@ -192,7 +194,7 @@ export function validRow(r: unknown): r is PpRow {
   if (!r || typeof r !== 'object') return false;
   const x = r as Record<string, unknown>;
   return typeof x.id === 'string' && /^pp-[0-9a-f]{10}$/.test(x.id)
-    && typeof x.subtopic === 'string' && /^[a-z0-9-]{3,80}$/.test(x.subtopic)
+    && typeof x.subtopic === 'string' && SUBTOPIC_ID.test(x.subtopic)
     && LEVELS.includes(x.level as PpRow['level'])
     && typeof x.stem === 'string' && x.stem.trim().length > 0
     && Array.isArray(x.options) && x.options.length === 4 && x.options.every((o) => typeof o === 'string')

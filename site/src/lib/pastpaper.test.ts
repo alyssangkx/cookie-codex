@@ -234,3 +234,9 @@ test('a past-paper Maths question is marked no-calculator (Paper 1); other subje
   assert.equal(toQ(row, new Map())?.calc, false);
   assert.equal(toQ({ ...row, subtopic: 'sci-cycles-water-states' } as PpRow, new Map())?.calc, undefined);
 });
+
+test('a long Maths sub-topic id (103 characters, migration 009) passes the stub and row checks', () => {
+  const sub = 'math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts';
+  assert.ok(stubOf({ id: 'pp-0123456789', subtopic: sub, level: 'basic', ord: 1 }));
+  assert.ok(validRow({ id: 'pp-0123456789', subtopic: sub, level: 'basic', stem: 'x', options: ['a', 'b', 'c', 'd'], answer: 0, figures: [], year: 2024 }));
+});
