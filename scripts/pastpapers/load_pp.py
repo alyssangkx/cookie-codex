@@ -481,7 +481,7 @@ def select(a):
                               else "second:vl2-fullres+text72-ocr"),
             })
     if a.passage:
-        for r, why in set_pages(rows):  # a dropped set is held with its reason, like any other question
+        for r, why in set_pages(rows, out):  # a dropped set is held with its reason, like any other question
             rejects.append({"id": r["src_id"], "reason": why})
             R[why] += 1
     ids = [r["id"] for r in rows]
@@ -1008,6 +1008,17 @@ def selftest():
         assert on_answer_pages(Path(td)) == set()
         (Path(td) / "questions_on_answer_pages.json").write_text(json.dumps({"A": ["q1", "q2"], "B": ["q3"]}))
         assert on_answer_pages(Path(td)) == {"q1", "q2", "q3"}
+    # poster_pieces: from the instruction (OCR "Siudy") to the questions' heading; the previous section's question 20 and
+    # a poster line "21 October!" are not cut points; the scanned questions are never in a piece
+    def pg(lines):  # [(y, words)] -> page_lines shape, page 1000 x 3000
+        return rows_of([(100 + 60 * k, y, 150 + 60 * k, y + 30, w) for y, ws in lines for k, w in enumerate(ws.split())]), 1000, 3000
+    P = {5: pg([(100, "20, (1) favourite"), (150, "(4) significant"), (300, "Siudy this poster carefully and answer questions 21 to 28."),
+                (900, "Fun Festival 2018 is here"), (1500, "21 October! We are sure everyone will enjoy it"), (2400, "Come and join us all")]),
+         6: pg([(200, "For each question from 21 to 28, four options are given."), (400, "21. The festival is organised by"),
+                (500, "(1) Funfest.com")])}
+    pieces, why = poster_pieces(P, 21)
+    assert why is None and pieces == [(5, 292, 3000)], (pieces, why)
+    assert poster_pieces({6: P[6]}, 21) == (None, "set-no-cut")  # no poster before the questions: held
     print("selftest ok")
 
 
@@ -1139,11 +1150,108 @@ def set_id(q) -> str:
     return re.sub(r"[^a-z0-9]+", "-", f"{q.get('paper')}-{q.get('part') or ''}-vt".lower()).strip("-")[:80]
 
 
-def set_pages(rows):
+QROW = re.compile(r"^(\d{1,2})[.,]?$")  # OCR reads "20." as "20," too
+QRANGE = re.compile(r"questions?\s+(?:from\s+)?(\d{1,2})\s*(?:to|-|–|and)\s*(\d{1,2})", re.I)
+STUDY = re.compile(r"^\W*(s[tli1]u?dy|read|look)\b", re.I)  # OCR: "Siudy", "Sludy"
+STUDY_REST = re.compile(r"carefully|answer|question|following|below", re.I)
+FOOT = re.compile(r"kiasu|exampaper|go on to|blank page|^\W*\d{1,3}\W*$|^\W*[A-Z]?\s*-\s*\d{1,2}\W*$", re.I)
+QHEAD = re.compile(r"for each question|shade|optical answer", re.I)
+
+
+def page_lines(jpg):
+    """OCR rows of a page scan from its tesseract .tsv: ([(top, bottom, [(l, t, r, b, word)])], width, height), or None."""
+    from PIL import Image
+    tsv = Path(jpg).with_suffix(".tsv")
+    if not Path(jpg).exists() or not tsv.exists():
+        return None
+    with Image.open(jpg) as im:
+        W, H = im.size
+    words = []
+    for ln in tsv.read_text(encoding="utf-8", errors="replace").splitlines()[1:]:
+        f = ln.split("\t")
+        if len(f) >= 12 and f[0] == "5" and f[11].strip():
+            x, y, w, h = map(int, f[6:10])
+            words.append((x, y, x + w, y + h, f[11].strip()))
+    return rows_of(words), W, H
+
+
+def rows_of(words):
+    """Words grouped into rows by position (a question number is often its own tesseract block)."""
+    rows = []
+    for w in sorted(words, key=lambda w: (w[1] + w[3]) / 2):
+        cy = (w[1] + w[3]) / 2
+        if rows and abs(cy - rows[-1][3]) < 0.6 * max(8, w[3] - w[1]):
+            rows[-1][2].append(w)
+            rows[-1][0], rows[-1][1] = min(rows[-1][0], w[1]), max(rows[-1][1], w[3])
+        else:
+            rows.append([w[1], w[3], [w], cy])
+    return [(t, b, sorted(ws)) for t, b, ws, _ in rows]
+
+
+def poster_pieces(pages, own_min):
+    """A visual text without its questions (owner, 21 Nov 2026: the scanned questions showed next to the quiz's own text).
+    pages: {page number: page_lines(...)} up to the set's first question page. A piece runs from the "Study this poster
+    ... answer questions 21 to 28" line (else just below the previous section's last option) down to the section's
+    "For each question from 21 to 28 ... shade" heading (else its first question's line). Returns ([(page, top, bottom)],
+    None), or (None, "set-no-cut") when either end is not found: the set is held rather than shown with questions on it."""
+    flat = [(p, r, pages[p][1], pages[p][2]) for p in sorted(pages) for r in pages[p][0]]
+    text = lambda r: " ".join(w[4] for w in r[2])
+    num = lambda r, W: int(m.group(1)) if (m := QROW.match(r[2][0][4])) and r[2][0][0] < 0.25 * W else None
+    rng = lambda r: int(m.group(1)) if (m := QRANGE.search(text(r))) else None
+    S = max((n for _, r, _, _ in flat if (n := rng(r)) and 15 <= n <= own_min), default=None) \
+        or min((n for _, r, W, _ in flat if (n := num(r, W)) and 21 <= n <= own_min and len(r[2]) >= 3), default=None)
+    if not S:
+        return None, "set-no-cut"
+    # start: the section's instruction (a range in it must be this section's), else after the previous section's options
+    # an instruction's range may wrap onto its next line ("... and answer / questions 21 to 25.")
+    rng_at = lambda k: rng(flat[k][1]) or (rng(flat[k + 1][1]) if k + 1 < len(flat) and flat[k + 1][0] == flat[k][0] else None)
+    study = [k for k, (_, r, _, _) in enumerate(flat) if STUDY.match(text(r)) and STUDY_REST.search(text(r))
+             and rng_at(k) in (None, S) and not QHEAD.search(text(r))]
+    # the end: the questions' heading ("For each question from 21 to 28 ... shade"); a line starting with the number only
+    # when no heading follows ("21 October!" in a poster is not question 21)
+    is_head = lambda k: bool(QHEAD.search(text(flat[k][1])))
+    is_q = lambda k: num(flat[k][1], flat[k][2]) == S and len(flat[k][1][2]) >= 3
+    is_end = lambda k: is_head(k) or (is_q(k) and not any(is_head(j) for j in range(k, len(flat))))
+    if study:  # the last instruction before the questions (an earlier match is the previous section's)
+        e0 = next((k for k in range(study[0] + 1, len(flat)) if is_end(k)), len(flat))
+        # the first instruction naming this section's questions (a paper may repeat it on each page: Text 1, Text 2),
+        # else the last one before the questions (an earlier one belongs to the previous section)
+        k0 = next((k for k in study if k < e0 and rng_at(k) == S), max(k for k in study if k < e0))
+        top0 = flat[k0][1][0] - 8
+    elif S < 21:  # no instruction and a section starting before 21: not a visual text (a mis-tagged vocabulary section)
+        return None, "set-no-cut"
+    else:
+        prev = [k for k, (_, r, W, _) in enumerate(flat) if (n := num(r, W)) is not None and n < S and len(r[2]) >= 3]
+        opt4 = [k for k, (_, r, _, _) in enumerate(flat) if prev and k > prev[-1] and re.match(r"^\(?4\)", r[2][0][4])]
+        if not opt4:
+            return None, "set-no-cut"
+        k0, top0 = opt4[0], flat[opt4[0]][1][1] + 8
+    end = next((k for k in range(k0 + 1, len(flat)) if is_end(k)), None)
+    if end is None:
+        return None, "set-no-cut"
+    p0, pe, bot_e = flat[k0][0], flat[end][0], flat[end][1][0] - 8
+    pieces = []
+    for p in sorted(pages):
+        if p0 <= p <= pe:
+            rows, _, H = pages[p]
+            top, bot = (top0 if p == p0 else 0), (bot_e if p == pe else H)
+            # the page footer (scan site, page number, "Go on to the next page") is not part of the poster
+            foot = [r[0] for r in rows if r[0] > 0.8 * H and FOOT.search(text(r))]
+            bot = min([bot] + [f - 8 for f in foot])
+            # the school's header line at the top of a page is no content either
+            inside = [r for r in rows if top <= r[0] and r[1] <= bot and not FOOT.search(text(r)) and r[0] > 0.08 * H]
+            # an empty strip, or a "BLANK PAGE", is no piece; a picture-only poster still has a few words (title, date)
+            if bot - top > 0.06 * H and sum(len(r[2]) for r in inside) >= 6:
+                pieces.append((p, max(0, top), min(H, bot)))
+    return (pieces, None) if pieces else (None, "set-no-cut")
+
+
+def set_pages(rows, out):
     """Every question of a set shows the same pages: from two pages before the set's first question page (the poster or
     passage, which may run over two pages) to its first question page. Sets of one question, and sets whose questions spread
-    over more than 5 pages (bad page data), are dropped."""
-    by, dropped = collections.defaultdict(list), []
+    over more than 5 pages (bad page data), are dropped. The pictures are the poster pieces only (poster_pieces), cut
+    from the page scans into OUT/setpages."""
+    by, dropped, seen_sets = collections.defaultdict(list), [], set()
     for r in rows:
         if r.get("grp"):
             by[r["grp"]].append(r)
@@ -1153,6 +1261,14 @@ def set_pages(rows):
                 rows.remove(r)
                 dropped.append((r, "set-one-question"))
             continue
+        # the same paper filed under two schools: a set whose questions and options all match an earlier set is a copy
+        sig = tuple(sorted((re.sub(r"\W+", " ", r["stem"]).strip().lower(), tuple(r["options"])) for r in rs))
+        if sig in seen_sets:
+            for r in rs:
+                rows.remove(r)
+                dropped.append((r, "set-duplicate"))
+            continue
+        seen_sets.add(sig)
         pages = sorted({p for r in rs for p in r["pages"]})
         pdir = Path(rs[0]["pages_dir"])
         if pages[-1] - pages[0] > 4:  # a visual text and its questions fit in a few pages: a longer span is bad page data
@@ -1160,16 +1276,25 @@ def set_pages(rows):
                 rows.remove(r)
                 dropped.append((r, "set-bad-pages"))
             continue
-        # the poster (up to two pages before the questions) and the first question page, which may hold its end; later
-        # question pages carry only questions, which the quiz shows as text
-        span = [p for p in range(max(1, pages[0] - 2), pages[0] + 1) if (pdir / f"p{p:04d}.jpg").exists()]
-        if not span:
+        # the poster: up to three pages before the first question page, and that page down to the questions
+        win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 3), pages[0] + 1)}
+        pieces, why = poster_pieces({p: v for p, v in win.items() if v}, min(r["seq"] for r in rs))
+        if not pieces:
             for r in rs:
                 rows.remove(r)
+                dropped.append((r, why))
             continue
+        from PIL import Image
+        (out / "setpages").mkdir(parents=True, exist_ok=True)
+        files = []
+        for n, (p, top, bot) in enumerate(pieces, 1):
+            f = out / "setpages" / f"{g}-{n}.png"
+            with Image.open(pdir / f"p{p:04d}.jpg") as im:
+                im.crop((0, top, im.size[0], bot)).save(f)
+            files.append(str(f))
         first = min(rs, key=lambda r: (r["seq"], r["id"]))["id"]
         for r in rs:
-            r["set_pages"] = [str(pdir / f"p{p:04d}.jpg") for p in span]
+            r["set_pages"] = files
             r["set_owner"] = first  # the pages are stored once, under the set's first question
             r.pop("pages_dir", None)
     return dropped

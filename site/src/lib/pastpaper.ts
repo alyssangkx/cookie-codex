@@ -54,7 +54,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   // keys confirmed by the blind check or by owner-approved outside-model consensus
   'eng-grammar-mcq': 'pool',
   'eng-vocab-mcq': 'pool',
-  // English visual text (passage phase, 21 Nov 2026): 481 questions in 122 sets, each set shown with its exam pages
+  // English visual text (passage phase, 21 Nov 2026): 398 questions in 98 sets, each set shown with its exam pages
   'eng-visual-text': 'pool',
   // Chinese upload (owner OK, 21 Nov 2026): single-item MCQs (a blank or pinyin options); keys confirmed by the blind check
   // or owner-approved outside-model consensus. Cloze, reading and dialogue wait for the passage phase.
