@@ -1,4 +1,4 @@
--- Cookie Codex, migration 008: pp_serve counts and logs only active questions (review of 006, 21 Nov 2026).  NOT YET APPLIED.
+-- Cookie Codex, migration 008: pp_serve counts and logs only active questions (review of 006, 21 Nov 2026).  APPLIED to the live project 21 Nov 2026.
 -- Apply with:  supabase db query --remote --yes -f supabase/migrations/008_pp_serve_active_only.sql   (never `db push`).
 -- 006 logged every well-formed id a quiz asked for, so an id deactivated since the quiz listed its pool (or a made-up one)
 -- used up the child's daily quota without being served. Only the id filter changes; limits and returns are as in 006.
