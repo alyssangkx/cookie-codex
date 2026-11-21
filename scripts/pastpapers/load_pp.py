@@ -377,7 +377,7 @@ def select(a):
                               if a.subject in ("science", "maths") else bool(FIG_WORDS_LANG.search(q["text"])))
                     # bare two-cell table rows ("Sound, None") mean the column headings are in the picture: the table is
                     # needed (tester report 21 Nov: pp-87af45c055 "Useful energy | Wasted energy" shipped without it)
-                    refers = refers or table_rows(opts)
+                    refers = refers or (a.subject == "science" and table_rows(opts))
                     if refers or realfig(q):
                         usable = [c for c in crops.get(q["id"], []) if crop_ok(c)]
                         good = own_page_crops(usable, q.get("pages"))
@@ -701,9 +701,14 @@ def figures(a):
 
 def table_rows(opts):
     """Every option is one flattened table row of exactly two short unlabelled cells ("Light + sound, Heat"): the column
-    headings exist only in the picture. Lists ("water, oil and flour") and labelled cells ("Mass: increase") read fine."""
+    headings exist only in the picture. Lists ("water, oil and flour") and labelled cells ("Mass: increase") read fine.
+    Science only (the caller): Maths "2, 4" answers and Chinese sentences with an OCR'd comma are not tables. A list's
+    last cell joins its final item with "and" ("oil and flour"); a row may have it in the first ("Light and sound, Heat").
+    ponytail: two cells only; a 3-column row ("Increases, Decreases, Increases") looks like a 3-item list, so it is not caught."""
     s = [strip_num(o or "") for o in opts]
-    return len(s) == 4 and all(re.fullmatch(r"[^,:;]{1,25}, [^,:;]{1,25}", x) and " and " not in x for x in s)
+    cells = [x.split(", ") for x in s]
+    return len(s) == 4 and all(
+        len(c) == 2 and all(re.fullmatch(r"[A-Za-z][A-Za-z +'-]{0,24}", y) for y in c) and " and " not in c[1] for c in cells)
 
 
 def own_page_crops(crops, pages):
@@ -726,6 +731,9 @@ def selftest():
     assert table_rows(["(1) Light, Heat", "(2) Sound, None", "(3) Light + sound, Heat", "(4) Light + sound, None"])
     assert not table_rows(["water, oil and flour", "ice, sugar and flour", "a, b and c", "d, e and f"])
     assert not table_rows(["Mass: increase, Volume: increase"] * 4) and not table_rows(["K", "L", "M", "N"])
+    assert table_rows(["Light and sound, Heat", "Sound, None", "Light, Heat", "Heat, None"])
+    assert not table_rows(["2, 4", "8, 18", "32, 40", "16, 36"]) and not table_rows([r"\( 12 \, \text{cm}^3 \)"] * 4)
+    assert not table_rows(["哥哥的钱包很贫穷, 里面只剩下一块钱。"] * 4)
     c3 = ["x/sci-2022-015-BookletA-q05-p0501.png", "x/sci-2022-015-BookletA-q05-p0544.png", "x/q05-p0502.png"]
     assert own_page_crops(c3, [501, 502]) == [c3[0], c3[2]], own_page_crops(c3, [501, 502])
     assert own_page_crops(c3, None) == [] and own_page_crops(c3, [544]) == [c3[1]] and own_page_crops([], [1]) == []
