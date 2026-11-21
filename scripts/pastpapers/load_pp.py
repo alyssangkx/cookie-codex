@@ -699,17 +699,18 @@ def figures(a):
     print("crop fixes:", {k: v for k, v in stats.items() if k not in ("log", "angles")})
 
 
-SPEAKER = re.compile(r'(?<=[.?!:"\u201d])\s+(?=[A-Z][a-z]+:\s)')
-ASK = re.compile(r'(?<=[.?!])\s+(?=(?:Which|What|Who|Whose|How|Based)\b)')
+SPEAKER = re.compile(r'(?<=[.?!:"\u201d\u2019\')])\s+(?=(?:(?:Mr|Mrs|Ms|Mdm|Dr)\.? )?[A-Z][a-z]+:\s)')
+ASK = re.compile(r'(?<=[.!"\u201d\u2019])\s+(?=[^.!?]*\?\s*$)')  # the final sentence, when it ends with "?"
 
 
 def speaker_lines(t):
     """Comments by named people ("Aminah: ... Bala: ...") each on their own line, as printed, and the question after them
     on its own line (tester report 21 Nov: pp-aaaeb1ffd1 read as one block). Only with 2+ speakers; the quiz shows
     the stem with white-space: pre-line."""
-    if len(SPEAKER.findall(t)) < 2:
+    t1 = re.sub(r"\s+", " ", t)  # OCR line breaks become spaces first
+    if len(SPEAKER.findall(t1)) < 2:
         return t
-    t = SPEAKER.sub("\n", t)
+    t = SPEAKER.sub("\n", t1)
     last = t.rfind("\n")
     return t[:last] + ASK.sub("\n", t[last:])
 
@@ -746,6 +747,9 @@ def selftest():
     sp = speaker_lines("Four comments. Aminah: Roots hold it. Bala: It is uprooted. Caden: It makes food. Which are correct?")
     assert sp == "Four comments.\nAminah: Roots hold it.\nBala: It is uprooted.\nCaden: It makes food.\nWhich are correct?", sp
     assert speaker_lines("Note: one label only. Which is it?") == "Note: one label only. Which is it?"
+    assert speaker_lines("Said: Aminah: Roots. Bala: Stem. Mr Tan: Leaf. In which part is food\nmade?") == \
+        "Said:\nAminah: Roots.\nBala: Stem.\nMr Tan: Leaf.\nIn which part is food made?"
+    assert speaker_lines("Said: Aminah: Roots. Bala: It wilts. What a pity.") == "Said:\nAminah: Roots.\nBala: It wilts. What a pity."
     assert table_rows(["(1) Light, Heat", "(2) Sound, None", "(3) Light + sound, Heat", "(4) Light + sound, None"])
     assert not table_rows(["water, oil and flour", "ice, sugar and flour", "a, b and c", "d, e and f"])
     assert not table_rows(["Mass: increase, Volume: increase"] * 4) and not table_rows(["K", "L", "M", "N"])

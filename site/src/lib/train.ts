@@ -84,6 +84,8 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
       c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
     if (ppMode(s.id) === 'pool' && ppTotal(s.id) < MIN_POOL) // mergePool drops a pool sub-topic's generated questions
       throw new Error(`train.ts: ${s.id} is 'pool' in PP_SWITCH with ${ppTotal(s.id)} past-paper questions (needs ${MIN_POOL}); use 'merge'`);
+    if (ppMode(s.id) === 'merge' && ppTotal(s.id) >= MIN_POOL) // ADR 0011: a sub-topic switches to one pool at 20
+      console.warn(`train.ts: ${s.id} has ${ppTotal(s.id)} past-paper questions: switch it to 'pool' in PP_SWITCH`);
     const pool = ppMode(s.id) === 'pool' ? ppTotal(s.id) : undefined;
     return {
       ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool } : {}),

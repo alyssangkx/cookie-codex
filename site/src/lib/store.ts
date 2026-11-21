@@ -652,6 +652,7 @@ export function syncTiers(
     st.total = ids.length;
     st.mastered = ids.filter((id) => isRetired(s, id)).length;
     st.hash = tierHash(ids);
+    delete st.pool; // these are tier counts now (a sub-topic back in tiers): never read them as past-paper counts
     (s.progress[sub] ??= {})[tier] = st;
     if (!st.cleared && st.mastered === st.total && tierOpen(s, sub, tier, playable(sub)))
       out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now, eco, test) });
@@ -684,8 +685,8 @@ export function syncMilestones(
       (s.progress[sub] ??= {})[t] = st;
       // a generated tier cleared before the switch keeps its clear and card, but the milestone is earned on the pool; a slot
       // already cleared (that old tier, or a milestone the first one-pool build awarded without the marker) is announced with
-      // no second reward (the pool page previews it as already earned). ponytail: pool/ms are never reset; reset them if a
-      // sub-topic ever leaves 'pool'
+      // no second reward (the pool page previews it as already earned). A sub-topic back in tiers keeps its clears (a clear
+      // is never taken away) and ms (reached stays reached); syncTiers drops `pool`, so tier counts never read as pool counts
       if (!st.ms && mastered >= at[k]) {
         st.ms = true;
         out.push(st.cleared ? { sub, tier: t, reward: null, again: true } : { sub, tier: t, reward: award(s, sub, t, rewardFor, now, eco, test) });
