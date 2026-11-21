@@ -64,8 +64,8 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'chi-zixing-form': 'pool',
   'chi-juzi-choose': 'pool',
   'chi-ciyu-idiom': 'merge',
-  // Chinese passage phase (21 Nov 2026): cloze (短文填空, 400 in 101 sets; each blank's sentence with （16）＿＿＿＿, the
-  // passage page shown once) and reading (阅读理解一, 493 in 149 sets; the passage without its questions)
+  // Chinese passage phase (21 Nov 2026): cloze (短文填空, 395 in 100 sets; each blank's sentence with （16）＿＿＿＿, the
+  // passage page shown once) and reading (阅读理解一, 456 in 138 sets; the passage without its questions)
   'chi-cloze-mcq': 'pool',
   'chi-yuedu-mcq-text': 'pool',
   // Maths upload (owner OK after the 40-question sample, 21 Nov 2026): MCQs 2018-2026, keys confirmed by the blind check;

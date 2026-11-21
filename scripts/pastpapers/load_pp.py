@@ -114,8 +114,15 @@ def key(a, opts):
 
 def strip_num(o: str) -> str:
     """The option's printed numbering off: "(2)", "（2）", "2." / "2)" / "2、" before a non-digit (a decimal like "2.5" stays)."""
-    # also "1 获得": a number and a space before a Chinese word (owner sample, 21 Nov 2026: "(1) 1 焦急")
-    return re.sub(r"^\s*(?:[(（]\s*\d\s*[)）]|[1-4][.)．、](?=\s*\D)|[1-4]\s+(?=[\u3400-\u9fff]))\s*", "", o or "").strip()
+    return re.sub(r"^\s*(?:[(（]\s*\d\s*[)）]|[1-4][.)．、](?=\s*\D))\s*", "", o or "").strip()
+
+
+def strip_opts(opts):
+    """strip_num on each option, and "1 获得" (a number and a space) only when the four options are numbered 1-4 in order
+    (owner sample, 21 Nov 2026: "(1) 1 焦急"); an unlabelled "3 天" keeps its number."""
+    if len(opts) == 4 and all(re.match(rf"^\s*{i}\s+\S", o or "") for i, o in enumerate(opts, 1)):
+        opts = [re.sub(r"^\s*[1-4]\s+", "", o) for o in opts]
+    return [strip_num(o) for o in opts]
 
 
 def realfig(q):
@@ -333,6 +340,8 @@ def select(a):
     rows, rejects = [], []
     R = collections.Counter()
     per_year = collections.defaultdict(collections.Counter)
+    if a.passage and PASSAGE[a.passage]["subject"] != a.subject:
+        sys.exit(f"--passage {a.passage} is a {PASSAGE[a.passage]['subject']} section")
     for y in years(a.years):
         base = Path(a.pp) / a.subject / str(y)
         tags = {t["id"]: t for t in jl(base / "tags72.jsonl")}
@@ -480,7 +489,7 @@ def select(a):
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
                 "stem": cloze_stem(q["text"], qn, opts) if a.passage == "chinese-cloze" else
                         tex_to_text(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip()),
-                "options": [tex_to_text(strip_num(o)) for o in opts], "answer": int(k) - 1,
+                "options": [tex_to_text(o) for o in strip_opts(opts)], "answer": int(k) - 1,
                 **({"grp": set_id(q, pk["suffix"]), "seq": qn, "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
@@ -488,8 +497,6 @@ def select(a):
                               else "second:vl2-fullres+text72-ocr"),
             })
     if a.passage:
-        if PASSAGE[a.passage]["subject"] != a.subject:
-            sys.exit(f"--passage {a.passage} is a {PASSAGE[a.passage]['subject']} section")
         for r, why in set_pages(rows, out, a.passage):  # a dropped set is held with its reason, like any other question
             rejects.append({"id": r["src_id"], "reason": why})
             R[why] += 1
@@ -1042,7 +1049,24 @@ def selftest():
         == "员工（18）＿＿让它多吃。猴子（19）＿＿＿＿长不大。"
     assert cloze_stem("Q20.（1 无论 2 只要 3 不但 4 虽然）是日常生活，我们都应该。(（一）)根据短文的内容和上下文的意思，选出适当的答案。", 20,
                       ["1 无论", "2 只要", "3 不但", "4 虽然"]) == "（20）＿＿＿＿是日常生活，我们都应该。"
-    assert strip_num("1 焦急") == "焦急" and strip_num("2.5 kg") == "2.5 kg" and strip_num("3 apples") == "3 apples"
+    assert strip_opts(["1 焦急", "2 紧张", "3 悲伤", "4 麻烦"]) == ["焦急", "紧张", "悲伤", "麻烦"]
+    assert strip_opts(["2 年", "3 年", "4 年", "5 年"]) == ["2 年", "3 年", "4 年", "5 年"] and strip_num("3 天") == "3 天"
+    # review cases (21 Nov 2026): a mislabelled bracket is not asked; an unlabelled neighbour holds the item; an instruction
+    # ending in ：is stripped, not the whole stem
+    assert cloze_stem("员工Q17（1设法 2提早 3创作 4分享）让它。她Q17（1 保持 2 保证 3 保留 4 保守）身体", 17,
+                      ["1 保持", "2 保证", "3 保留", "4 保守"]) == "员工（17）＿＿让它。她（17）＿＿＿＿身体"
+    assert cloze_stem("Q17（1 a 2 b 3 c 4 d）他（1 设法 2 提早 3 创作 4 分享）了", 17) is None
+    assert cloze_stem("根据短文的内容，选出适当的词语：她总是Q17（1 保持 2 保证 3 保留 4 保守）身体健康。", 17,
+                      ["1 保持", "2 保证", "3 保留", "4 保守"]) == "她总是（17）＿＿＿＿身体健康。"
+    # a reading cut never starts at a question line holding 根据短文, and a paragraph numbered （1） is not an option block
+    pgr = lambda lines: (rows_of([(100 + 60 * k, y, 150 + 60 * k, y + 30, w) for y, ws in lines for k, w in enumerate(ws.split())]), 1000, 3000)
+    R = {9: pgr([(100, "三 阅读理解一"), (160, "根据短文的内容和上下文的意思，选出适当的答案。"), (240, "小明的故事"),
+                 (300, "（1） 第一段 小明 很 早 就 起床 了"), (360, "第二段 他 去 上学"), (420, "第三段 他 很 开心"),
+                 *[(480 + 60 * i, "他 和 同学们 一起 在 操场 上 跑步 ， 大家 都 跑 得 满头大汗 ， 可是 谁 也 不 愿意 停下来 休息") for i in range(4)],
+                 (900, "Q21 小明 为什么 开心"), (960, "(1) 甲"), (1010, "(2) 乙"), (1060, "(3) 丙"), (1110, "(4) 丁"),
+                 (1300, "Q22根据短文，下面 哪一项 是 正确的？"), (1360, "(1) 甲"), (1410, "(2) 乙"), (1460, "(3) 丙"), (1510, "(4) 丁")])}
+    pc, why = chi_pieces(R, "chinese-reading", 21, 25)
+    assert why is None and pc == [(9, 92, 892)], (pc, why)
     print("selftest ok")
 
 
@@ -1332,6 +1356,7 @@ def chi_pieces(pages, kind, first, last):
 
 
 CHI_RANGE = re.compile(r"[(（]\s*Q?\s?2[01]\s*[-—–－~至到]")  # "(Q21—Q25)" under the reading instruction
+CHI_MIN_PASSAGE = 150  # characters the OCR read inside a reading passage
 CHI_OPT1 = re.compile(r"^\W{0,2}[(（《]\s*[1iIl]\s*[)）]")  # OCR: "(i)"
 CHI_BLANKROW = re.compile(r"Q\s?\d{1,2}\s?[（(]\s*1|[（(]\s*1\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*(?<!\d)4\s*[.．、]?")
 
@@ -1341,16 +1366,25 @@ def chi_reading_pieces(pages, flat, first, last):
     question: a question line, or the first "(1)" option row (cut above the question line over it, which the OCR may not
     have read as "Q21"). A cloze blank inside is the previous section: held."""
     text = lambda r: "".join(w[4] for w in r[2])
-    isq = lambda k: (n := chi_qnum(text(flat[k][1]))) is not None and first <= n <= last and not CHI_RANGE.search(text(flat[k][1])) \
-        and not CHI_OPT1.match(text(flat[k][1]))
-    starts = [k for k, (_, r) in enumerate(flat) if CHI_HEAD["chinese-reading"].search(text(r)) or CHI_INSTR.search(text(r))
-              or CHI_RANGE.search(text(r))]
+    # a question line: "Q21…"/"021…" (any OCR'd number, "Q2l" too) or "21." — never a bare "22岁那年…" passage line
+    isq = lambda k: not CHI_RANGE.search(text(flat[k][1])) and bool(
+        re.match(r"^\W{0,2}[QO0]\s?2\S", text(flat[k][1]))  # "Q21", "Q2l", "021": a 2 after the Q (questions 21-25)
+        or ((n := chi_qnum(text(flat[k][1]))) and first <= n <= last and re.match(r"^\W{0,2}\d{1,2}\s*[.．、]", text(flat[k][1]))))
+    # an option block: a "(1)" row with a "(2)" row within the next 4 (a passage paragraph numbered （1） is not one)
+    opt_block = lambda k: bool(CHI_OPT1.match(text(flat[k][1]))) and any(
+        re.match(r"^\W{0,2}[(（《]?\s*[2②]\s*[)）]", text(flat[j][1])) for j in range(k + 1, min(k + 5, len(flat))))
+    # a start: the heading, the instruction or the "(Q21—Q25)" line, never a question line ("Q22根据短文，…")
+    starts = [k for k, (_, r) in enumerate(flat) if (CHI_HEAD["chinese-reading"].search(text(r)) or CHI_INSTR.search(text(r))
+              or CHI_RANGE.search(text(r))) and not isq(k) and not re.search(r"括号|词语", text(r))]  # not the cloze's instruction
     for k0 in reversed(starts):
-        end = next((k for k in range(k0 + 1, len(flat)) if isq(k) or CHI_OPT1.match(text(flat[k][1]))), None)
+        end = next((k for k in range(k0 + 1, len(flat)) if isq(k) or opt_block(k)), None)
         if end is None:
             continue
-        if CHI_OPT1.match(text(flat[end][1])) and end - 1 > k0 and flat[end - 1][0] == flat[end][0]:
-            end -= 1  # the question line above its first option
+        if not isq(end):  # an option block whose question line the OCR did not read: step back over its (wrapped) lines
+            while end - 1 > k0 and flat[end - 1][0] == flat[end][0] and flat[end][1][0] - flat[end - 1][1][1] < 60 \
+                    and not re.search(r"[。！？”」]\s*$", text(flat[end - 2][1]) if end - 2 > k0 else "。"):
+                end -= 1
+            end -= 1 if end - 1 > k0 and flat[end - 1][0] == flat[end][0] else 0
         if end - k0 < 3:  # nothing between: an instruction right above the questions, try an earlier start
             continue
         if any(CHI_BLANKROW.search(text(flat[k][1])) for k in range(k0, end)):
@@ -1362,7 +1396,9 @@ def chi_reading_pieces(pages, flat, first, last):
         got = cut_pieces(pages, flat[k0][0], top0, flat[end][0], flat[end][1][0] - 8, cjk=True)
         # the automatic check: option rows inside mean a question the OCR could not read got in (owner: no question twice)
         inside = [text(r) for p, t, b in (got[0] or []) for r in pages[p][0] if t <= r[0] and r[1] <= b]
-        if sum(bool(re.match(r"^\W{0,2}[(（《]?\s*[1-4iIl]\s*[)）]", x)) for x in inside) >= 2:
+        if sum(bool(re.match(r"^\W{0,2}(?:[(（《]?\s*[1-4iIl]\s*[)）]|[①②③④])", x)) for x in inside) >= 2:
+            return None, "set-no-cut"
+        if sum(len(x) for x in inside) < CHI_MIN_PASSAGE:  # a reading passage is long: a strip is a wrong cut
             return None, "set-no-cut"
         return got
     return None, "set-no-cut"
@@ -1373,23 +1409,28 @@ def cloze_stem(t, n, opts=()):
     ("Q16（1 表达 2 保存 …）", or the bracket alone, picked by its own number or by holding the item's options) or a bare
     line become the blank; a neighbouring blank becomes （19）＿＿, which the quiz fills once it is answered. None when the
     asked blank is not found."""
-    t = re.sub(r"^\s*根据短文[^。]*。\s*", "", t or "")  # the section's instruction, read into the first blank's text
-    t = re.sub(r"\s*[(（]*\s*[（(][一二三]\s*[）)]\s*[)）]*\s*根据短文.*$|\s*根据短文.*$", "", t, flags=re.S)  # the next section's
+    # the section's instruction, read into the first blank's text (OCR may end it with ：or ，)
+    t, k = re.subn(r"^\s*根据短文[^。：:]*(?:词语|答案)[^。：:，,]*[。：:，,]?\s*", "", t or "")
+    if not k:
+        t = re.sub(r"^\s*根据短文[^。：:]*[。：:]\s*", "", t)
+    t = re.sub(r"(?<=\S)\s*[(（]*\s*[（(][一二三]\s*[）)]\s*[)）]*\s*根据短文.*$|(?<=\S)\s*根据短文.*$", "", t, flags=re.S)  # the next section's
     t = re.sub(r"(?<![\u3400-\u9fff])Q\s?\d{1,2}\s*[.．](?!\d)", "", t)  # a stray question label ("Q20.")
     ask = f"（{n}）＿＿＿＿"
-    t2, k = re.subn(rf"Q\s?{n}\s?[（(][^（）()]*[）)]", ask, t, count=1)
-    if not k:  # the bracket holding this item's options: （1. 保持 2. 保证 3. 保留 4. 保守）
-        words = [strip_num(o).replace(" ", "") for o in opts if strip_num(o)]
-        for m in re.finditer(r"[（(][^（）()]*[）)]", t):
-            if words and sum(w in m.group(0).replace(" ", "") for w in words) >= 3:
-                t2, k = t[:m.start()] + ask + t[m.end():], 1
-                break
+    words = [o.replace(" ", "") for o in strip_opts(list(opts)) if o]
+    holds = lambda g: sum(w in g.replace(" ", "") for w in words) >= 3  # the bracket holds this item's options
+    t2, k = t, 0
+    # the bracket holding this item's options (labelled Q{n} or not); by label alone only when the options are unknown
+    for m in re.finditer(r"(?:Q\s?\d{1,2}\s?)?[（(][^（）()]*[）)]", t):
+        if (words and holds(m.group(0))) or (not words and re.match(rf"Q\s?{n}\s?[（(]", m.group(0))):
+            t2, k = t[:m.start()] + ask + t[m.end():], 1
+            break
     if not k and len(re.findall(r"_{2,}|＿{2,}|[（(]\s*[)）]", t)) == 1:
         t2, k = re.subn(r"_{2,}|＿{2,}|[（(]\s*[)）]", ask, t)
     if not k:
         return None
     t2 = re.sub(r"Q\s?(\d{1,2})\s?[（(][^（）()]*[）)]", r"（\1）＿＿", t2)  # neighbouring blanks
-    t2 = re.sub(r"[（(]\s*1\s*[.．、]?[^（）()]*?(?<!\d)4\s*[.．、]?[^（）()]*[）)]", "＿＿", t2)
+    if re.search(r"[（(]\s*1\s*[.．、]?[^（）()]*?(?<!\d)4\s*[.．、]?[^（）()]*[）)]", t2):
+        return None  # an unlabelled neighbouring blank: the quiz cannot number or fill it
     t2 = re.sub(r"\s+(?=[\u3400-\u9fff（，。！？＿])|(?<=[\u3400-\u9fff）＿])\s+", "", t2).strip()
     # the automatic check: exactly the asked blank, no option bracket or question label left
     if t2.count("＿＿＿＿") != 1 or re.search(r"Q\s?\d|根据短文|[（(]\s*1\s*[.．、 ]?\s*[\u3400-\u9fff]", t2):
@@ -1431,9 +1472,7 @@ def set_pages(rows, out, kind="english-visual"):
         # the first text's poster, so the set is held
         seqs = [r["seq"] for r in rs]
         later = []
-        if kind != "english-visual":  # a Chinese section holds one passage
-            seqs = [0]
-        for p in range(max(1, pages[0] - 3), pages[-1] + 1):
+        for p in (range(max(1, pages[0] - 3), pages[-1] + 1) if kind == "english-visual" else ()):  # a Chinese section: one passage
             v = page_lines(pdir / f"p{p:04d}.jpg")
             lines = [" ".join(w[4] for w in row[2]) for row in v[0]] if v else []
             for i in range(len(lines)):  # each row with the next: a range may wrap ("questions" / "26 to 28")
