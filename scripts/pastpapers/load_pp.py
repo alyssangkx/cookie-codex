@@ -1075,8 +1075,14 @@ def key_kind(k):
     return f"unrecognised key, {len(k)} chars"
 
 
+SUBTOPIC_DB = re.compile(r"^[a-z0-9-]{3,120}$")  # pp_items_subtopic_check (migration 009; 004 allowed 80)
+
+
 def upload(a):
     rows, usubs, out = selection(a)
+    bad = sorted({r["subtopic"] for r in rows if not SUBTOPIC_DB.fullmatch(r["subtopic"])})
+    if bad:  # the database refuses the whole batch: say so before sending anything
+        sys.exit(f"sub-topic ids the database would refuse (pp_items_subtopic_check): {bad}")
     ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):

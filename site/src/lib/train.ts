@@ -10,7 +10,7 @@ import { MIN_POOL, tierHash, type School, type Tier } from './store';
 import { paperOk } from './paper';
 import { unitName } from './suggest';
 import { competencyGroups } from './crumbs';
-import { ppMode, ppTierCount, POOL_CAP } from './pastpaper';
+import { ppMode, ppTierCount, POOL_CAP, PP_SWITCH } from './pastpaper';
 import ppCounts from '../data/pp_counts.json'; // numbers only: {"<sub>|<b|i|c>": n}; no past-paper ids or content
 
 export { MIN_POOL };
@@ -97,6 +97,9 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
     };
   }),
 );
+// every past-paper switch names a real sub-topic: a mistyped (long) id would otherwise stay off without a word (review)
+{ const known = new Set(subs.map((s) => s.id)); const stray = Object.keys(PP_SWITCH).filter((k) => !known.has(k));
+  if (stray.length) throw new Error(`train.ts: PP_SWITCH names sub-topics that do not exist: ${stray.join(', ')}`); }
 export const subsOf = (school: School) => subs.filter((s) => s.school === school);
 
 // The PSLE paper booklet of each English and Chinese sub-topic (their syllabus topics are single paper sections).
