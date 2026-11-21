@@ -40,6 +40,12 @@ PROMPT_LENIENT = ("Generated question:\n<<<{gen}>>>\n\nPast-paper questions:\n{c
                   "experiment, a set-up, a picture, a table or a story, and even if the numbers, wording or format differ. It does "
                   "NOT count if the past-paper question needs different knowledge, even on the same topic. Reply with JSON only: "
                   "{{\"match\": <the number 1-{n} of the best match, or null>, \"reason\": \"<one short sentence: the shared knowledge, or what none of them tests>\"}}")
+# third step (21 Nov 2026): the lenient pass also matched questions on the same broad topic that need different knowledge
+# (5 of 19 off-syllabus probes). Each lenient-only match is checked as one pair with a narrow yes/no question.
+PROMPT_PAIR = ("Generated question:\n<<<{gen}>>>\n\nPast-paper question:\n<<<{pp}>>>\n\n"
+               "Would a pupil who can answer the past-paper question use the same fact, rule or skill to answer the generated "
+               "question? Answer no if the generated question needs knowledge the past-paper question does not test, even on "
+               "the same topic. Reply with JSON only: {{\"same\": true or false, \"reason\": \"<one short sentence>\"}}")
 # off-syllabus probes: concepts P6 does not teach (CLAUDE.md: no mass and acceleration, no action-reaction; Speed is not in
 # the 2021 Maths syllabus; owner: no reproduction from plant parts). They must find no match.
 NEGATIVE = [
@@ -255,6 +261,46 @@ def run(a):
             print(f"{min(i + 64, len(todo))}/{len(todo)}", flush=True)
 
 
+def verify(a):
+    """Server: pairs {pid, text, subject, pp_id} -> OUT/verify.jsonl {pid, pp_id, same, reason, parsed} (resumable)."""
+    root = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
+    pairs = jl(a.pairs)
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    done = {(r["pid"], r["pp_id"]) for r in jl(out / "verify.jsonl") if r.get("parsed")}
+    todo = [p for p in pairs if (p["pid"], p["pp_id"]) not in done]
+    print(len(todo), "pairs to verify", flush=True)
+    if not todo:
+        return
+    text = {d["id"]: d["text"] for s in sorted({p["subject"] for p in todo}) for d in corpus(root, s)}
+    from vllm import LLM, SamplingParams
+    llm = LLM(model=os.environ.get("PP_LLM", "Qwen/Qwen2.5-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
+              gpu_memory_utilization=0.9, max_model_len=8192, max_num_seqs=32, enforce_eager=bool(os.environ.get("PP_EAGER")))
+    sp = SamplingParams(temperature=0, max_tokens=120)
+    sysmsg = "You compare Singapore Primary 6 (PSLE) exam questions. You answer with JSON only."
+    with open(out / "verify.jsonl", "a", encoding="utf-8") as f:
+        for i in range(0, len(todo), 64):
+            ch = [p for p in todo[i:i + 64] if p["pp_id"] in text]
+            msgs = [[{"role": "system", "content": sysmsg},
+                     {"role": "user", "content": PROMPT_PAIR.format(gen=clip(p["text"], 1500), pp=text[p["pp_id"]])}] for p in ch]
+            for p, o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
+                same, reason, ok = parse_pair(o.outputs[0].text)
+                f.write(json.dumps({"pid": p["pid"], "pp_id": p["pp_id"], "same": same, "reason": reason, "parsed": ok}, ensure_ascii=False) + "\n")
+            f.flush()
+            print(f"{min(i + 64, len(todo))}/{len(todo)}", flush=True)
+
+
+def parse_pair(raw):
+    m = re.search(r"\{.*\}", raw or "", re.S)
+    try:
+        j = json.loads(m.group(0)) if m else None
+    except ValueError:
+        j = None
+    if not isinstance(j, dict) or not isinstance(j.get("same"), bool):
+        return None, "", False
+    return j["same"], str(j.get("reason") or "")[:300], True
+
+
 def report(a):
     probes = {p["pid"]: p for p in jl(a.probes)}
     # only parsed verdicts for the probe's current text count; anything else is unjudged, never a no-match
@@ -326,6 +372,7 @@ def selftest():
     assert parse('{"match": 2.7, "reason": "x"}', 8)[0] is None and parse('{"match": "3"}', 8)[0] == 3
     assert parse('{"match": 2, "reason": ', 8) == (None, "", False)  # cut off: unjudged, not a no-match
     assert qtext("Q?", ["(1) a", "b"]) == "Q?\n(1) a\n(2) b"
+    assert parse_pair('{"same": true, "reason": "x"}') == (True, "x", True) and parse_pair('{"same": "yes"}') == (None, "", False)
     assert qtext("Speed?", ["50 km/h", "3/4", "12", "2.5"]) == "Speed?\n(1) 50 km/h\n(2) 3/4\n(3) 12\n(4) 2.5"  # digits kept
     assert qtext("字?", ["（1）甲", "(2) 乙"]) == "字?\n(1) 甲\n(2) 乙"
     svg = '<svg viewBox="0 0 10 10"><text x="1">bulb <tspan>P</tspan></text><rect/><text>switch S</text></svg>'
@@ -349,6 +396,7 @@ if __name__ == "__main__":
     p = sp.add_parser("pack"); p.add_argument("--out", default=str(TMP / "concept"))
     p = sp.add_parser("run"); p.add_argument("probes"); p.add_argument("out")
     p.add_argument("--k", type=int, default=8, help="candidates shown to the judge"); p.add_argument("--lenient", action="store_true", help="the second-pass prompt")
+    p = sp.add_parser("verify"); p.add_argument("pairs"); p.add_argument("out")
     p = sp.add_parser("report"); p.add_argument("probes"); p.add_argument("results"); p.add_argument("--out", default=str(TMP / "concept" / "report.md"))
     a = ap.parse_args()
-    {"pack": pack, "run": run, "report": report}[a.cmd](a)
+    {"pack": pack, "run": run, "verify": verify, "report": report}[a.cmd](a)
