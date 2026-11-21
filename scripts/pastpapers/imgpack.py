@@ -66,8 +66,8 @@ def qnum(q):
 
 def single_sets(kind):
     """Science/Maths key disputes as one-question items: every 4-option keyed MCQ whose key the blind solver disputes, plus
-    CALIB agreeing ones, shuffled. The picture is the question's own crop (load_pp.own_page_crops); a question that refers
-    to a picture but has none from its own page is left out (no one could judge it)."""
+    CALIB agreeing ones, shuffled. A question that refers to a picture shows its whole exam page(s) (owner, 22 Nov 2026:
+    Gemini scored 77% / 66% on picture questions shown as crops, 95% / 90% on text-only ones); others are text only."""
     import random
     subject = KINDS[kind][0]
     only = {r["id"] for r in jl(HOLDS[subject]) if r.get("reason") == "blind-disagree"}
@@ -75,19 +75,16 @@ def single_sets(kind):
     for y in range(2018, 2027):
         base = PP / subject / str(y)
         bl = {b["id"]: b for b in jl(BLIND / f"{subject}-{y}.jsonl")}
-        crops = collections.defaultdict(list)
-        for c in sorted((base / "crops").glob("*.png")):
-            crops[re.sub(r"-p\d+\.png$", "", c.name)].append(c)
         for q in jl(base / "merged.jsonl"):
             b = bl.get(q["id"]) or {}
             if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not b.get("key") or not q.get("pages"):
                 continue
             text = L.tex_to_text(q.get("text") or "")
             refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q))
-            own = L.own_page_crops([c for c in crops.get(q["id"], []) if L.crop_ok(c)], q.get("pages")) if refers else []
-            if refers and not own:
+            pages = sorted(q["pages"])[:2] if refers else []  # the question's own page(s), at most two
+            if refers and not all((base / "pages" / f"p{p:04d}.jpg").exists() for p in pages):
                 continue
-            item = {"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "crops": [str(c) for c in own]}
+            item = {"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "pages": pages}
             if b.get("agree") is False and b.get("pick") and q["id"] in only:
                 dis.append(item)
             elif b.get("agree") is True:
@@ -151,14 +148,7 @@ def build(a):
         for si, s in enumerate(chunk, 1):
             qs = [s["q"][x] for x in s["ids"]]
             imgs = []
-            for c in s.get("crops") or []:  # a single question's own figure crop
-                dst = out / "img" / (Path(c).stem + ".jpg")
-                if not dst.exists():
-                    im = Image.open(c).convert("L")
-                    im.thumbnail((1000, 1000))
-                    im.save(dst, quality=75)
-                imgs.append(dst.name)
-            for p in ([] if a.kind in SINGLE else page_range(qs)):
+            for p in (s.get("pages") or [] if a.kind in SINGLE else page_range(qs)):
                 src = PP / subject / str(s["year"]) / "pages" / f"p{p:04d}.jpg"
                 if not src.exists():
                     continue
@@ -173,7 +163,8 @@ def build(a):
                 n += 1
                 qmap[n] = q["id"]
                 # the printed numbers off ("1 角色"), as on the site, so the pack does not read "(1) 1 角色"
-                opts = "".join(f"<div>({j}) {html.escape(o)}</div>" for j, o in enumerate(L.strip_opts(q["options"]), 1))
+                opts = "".join(f"<div>({j}) {html.escape(L.tex_to_text(o) if a.kind in SINGLE else o)}</div>"  # TeX as plain text
+                               for j, o in enumerate(L.strip_opts(q["options"]), 1))
                 if a.kind in SINGLE:  # one question: its text (TeX as plain text, scanner labels off), its picture, its options
                     text = html.escape(L.scanner_marks(L.tex_to_text(q.get("text") or ""))).replace("\n", "<br>")
                     pics = "".join(f'<img class="fig" src="img/{x}">' for x in imgs)
@@ -191,7 +182,7 @@ def build(a):
                 "img{display:block;max-width:100%;max-height:24.5cm;margin:0 auto 4px;border:1px solid #ccc;page-break-after:always}"
                 ".q{margin:10px 0;page-break-inside:avoid} h2{font-size:18px}"
                 ".q1{margin:14px 0;padding-top:6px;border-top:1px solid #ddd;page-break-inside:avoid}"
-                ".q1 img.fig{max-height:9cm;max-width:70%;margin:6px 0;page-break-after:auto}</style></head><body>"
+                ".q1 img.fig{max-height:24cm;max-width:100%;margin:6px 0;page-break-before:auto;page-break-after:auto}</style></head><body>"
                 f"<p>{HEAD if subject == 'english' else HEAD_ZH if subject == 'chinese' else HEAD_SG.format(subj=SINGLE[a.kind])}</p>{''.join(body)}</body></html>")
         hp = out / f"part{part}.html"
         hp.write_text(page, encoding="utf-8")
