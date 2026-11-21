@@ -405,7 +405,7 @@ def select(a):
                 "id": pp_id(q["id"]), "src_id": q["id"], "subject": a.subject, "subtopic": t["st"],
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
-                "stem": q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
+                "stem": speaker_lines(q["text"].strip()), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                 "blind_src": (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
@@ -699,6 +699,21 @@ def figures(a):
     print("crop fixes:", {k: v for k, v in stats.items() if k not in ("log", "angles")})
 
 
+SPEAKER = re.compile(r'(?<=[.?!:"\u201d])\s+(?=[A-Z][a-z]+:\s)')
+ASK = re.compile(r'(?<=[.?!])\s+(?=(?:Which|What|Who|Whose|How|Based)\b)')
+
+
+def speaker_lines(t):
+    """Comments by named people ("Aminah: ... Bala: ...") each on their own line, as printed, and the question after them
+    on its own line (tester report 21 Nov: pp-aaaeb1ffd1 read as one block). Only with 2+ speakers; the quiz shows
+    the stem with white-space: pre-line."""
+    if len(SPEAKER.findall(t)) < 2:
+        return t
+    t = SPEAKER.sub("\n", t)
+    last = t.rfind("\n")
+    return t[:last] + ASK.sub("\n", t[last:])
+
+
 def table_rows(opts):
     """Every option is one flattened table row of exactly two short unlabelled cells ("Light + sound, Heat"): the column
     headings exist only in the picture. Lists ("water, oil and flour") and labelled cells ("Mass: increase") read fine.
@@ -728,6 +743,9 @@ def own_page_crops(crops, pages):
 
 def selftest():
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
+    sp = speaker_lines("Four comments. Aminah: Roots hold it. Bala: It is uprooted. Caden: It makes food. Which are correct?")
+    assert sp == "Four comments.\nAminah: Roots hold it.\nBala: It is uprooted.\nCaden: It makes food.\nWhich are correct?", sp
+    assert speaker_lines("Note: one label only. Which is it?") == "Note: one label only. Which is it?"
     assert table_rows(["(1) Light, Heat", "(2) Sound, None", "(3) Light + sound, Heat", "(4) Light + sound, None"])
     assert not table_rows(["water, oil and flour", "ice, sugar and flour", "a, b and c", "d, e and f"])
     assert not table_rows(["Mass: increase, Volume: increase"] * 4) and not table_rows(["K", "L", "M", "N"])

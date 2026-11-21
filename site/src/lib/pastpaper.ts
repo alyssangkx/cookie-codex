@@ -39,7 +39,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'sci-systems-circuit': 'pool',
   'sci-systems-circuit-vars': 'pool',
   'sci-systems-digestive-parts': 'pool',
-  'sci-systems-plant-parts-fn': 'pool',
+  'sci-systems-plant-parts-fn': 'merge', // 19 after the 21 Nov tester holds: tiers until 20
   'sci-systems-plant-transport-parts': 'pool',
   'sci-systems-resp-circ-parts': 'pool',
   'sci-cycles-repro-humans': 'merge',
