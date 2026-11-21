@@ -387,7 +387,7 @@ def select(a):
                 k, src = cv["key_new"], "consensus"
                 conflict = bool((ok and ok != k) or (rr and rr != k))
             elif cv_ok:
-                src = "consensus-confirm"
+                src = f"{src}+consensus"
             if len(opts) != 4:
                 reason = "not-4-options"
             elif q["id"] in onans:
@@ -464,7 +464,7 @@ def select(a):
                 "stem": speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
-                "blind_src": (cv["src"] if cv_ok else (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
+                "blind_src": (cv.get("src", "consensus") if cv_ok else (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
                               else "second:vl2-fullres+text72-ocr"),
             })
     ids = [r["id"] for r in rows]

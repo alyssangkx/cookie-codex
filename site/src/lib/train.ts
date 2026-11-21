@@ -71,6 +71,7 @@ export interface Sub {
   hash: Record<Tier, string | undefined>; // tierHash of each tier's question ids, for liveMastered; undefined on a tier that uses past-paper items (size check only)
   /** A one-pool sub-topic (ADR 0011): its past-paper question count (20+); its tiers' card slots are milestones 1-3. */
   pool?: number;
+  poolAll?: number; // the whole past-paper pool when it is larger than the counting pool (POOL_CAP)
 }
 const ppTotal = (sub: string) => (['b', 'i', 'c'] as const).reduce((n, t) => n + ((ppCounts as Record<string, number>)[`${sub}|${t}`] ?? 0), 0);
 
@@ -88,7 +89,7 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
       console.warn(`train.ts: ${s.id} has ${ppTotal(s.id)} past-paper questions: switch it to 'pool' in PP_SWITCH`);
     const pool = ppMode(s.id) === 'pool' ? Math.min(ppTotal(s.id), POOL_CAP) : undefined; // the counting pool (POOL_CAP)
     return {
-      ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool } : {}),
+      ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool, ...(ppTotal(s.id) > pool ? { poolAll: ppTotal(s.id) } : {}) } : {}),
       // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier
       // playable); a one-pool sub-topic's three slots are milestones, all reachable, so they count as playable (power, pages)
       playable: pool ? { b: true, i: true, c: true }

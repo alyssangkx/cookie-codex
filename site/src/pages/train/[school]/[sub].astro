@@ -20,11 +20,11 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
 });
 ---
 <Base title={`${sub.name} · ${school.name} training`} description={`Three tiers of PSLE ${school.name} practice on ${sub.name}.`}>
-  <section class="wrap sub-page" data-sub={sub.id} data-tries={tries} data-pool={String(pool)}>
+  <section class="wrap sub-page" data-sub={sub.id} data-tries={tries} data-pool={String(pool)} data-pool-all={sub.poolAll ? String(sub.poolAll) : undefined}>
     <p class="crumbs"><a href="/train/">Schools</a> › <a href={`/train/${school.id}/`}>{school.name}</a> › {listGroup(sub).topicName}</p>
     <h1>{sub.name}</h1>
     {pool ? (
-      <p class="rules">{pool} real past-paper questions, easier ones first. A question counts when you answer it right, the first time or when it comes back the next day. Count {at[0]} for your first card, {at[1]} for the second, and more than half ({at[2]}) to be Exam-ready. You can train up to {tries} times a day.</p>
+      <p class="rules">{sub.poolAll ? `${sub.poolAll} real past-paper questions, easier ones first; the first ${pool} count toward your cards.` : `${pool} real past-paper questions, easier ones first.`} A question counts when you answer it right, the first time or when it comes back the next day. Count {at[0]} for your first card, {at[1]} for the second, and more than half ({at[2]}) to be Exam-ready. You can train up to {tries} times a day.</p>
     ) : (
       <p class="rules">Each quiz has up to 10 questions. Master every question in a tier to clear it and earn its card. A question is mastered when you answer it right the first time, or right again after its retests. You can try each tier up to {tries} times a day. Clear a tier to open the next one.</p>
     )}
@@ -96,7 +96,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     });
     const start = root.querySelector<HTMLAnchorElement>('.pool-start')!;
     const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this topic today. Come back tomorrow.` : reason ? blockMessage(reason) : '';
-    root.querySelector('.pool-state')!.textContent = block || (milestoneReached(s, sub, 'c') ? 'Exam-ready ✓ Keep practising to count them all.' : 'Ready when you are.');
+    root.querySelector('.pool-state')!.textContent = block || (milestoneReached(s, sub, 'c') ? (root.dataset.poolAll ? 'Exam-ready ✓ Keep practising: there are more past-paper questions to try.' : 'Exam-ready ✓ Keep practising to count them all.') : 'Ready when you are.');
     if (block) { start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
   }
   if (!pool) root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
