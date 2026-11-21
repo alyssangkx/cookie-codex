@@ -78,7 +78,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'math-measurement-time': 'pool', // 35
   'math-money-money': 'pool', // 40
   'math-percentage-percentage': 'pool', // 116
-  'math-rate-rate': 'pool', // 38
+  'math-rate-rate': 'merge', // 38: owner, 21 Nov 2026: keep the generated speed questions next to the past papers
   'math-ratio-ratio': 'pool', // 95
   'math-whole-numbers-addition-subtraction-multiplication-and-division': 'pool', // 126
   'math-whole-numbers-factors-and-multiples': 'pool', // 30
@@ -119,6 +119,7 @@ export interface PpQ {
   numbered: true; // label options (1)-(4) as the paper and its pictures do, not A-D
   ppFigs: PpFig[];
   ppYear: number | null;
+  calc?: false; // Maths: PSLE-style MCQs sit in Paper 1 (no calculator), so the quiz shows its "No calculator" badge
 }
 
 /** A past-paper question known only by id until the quiz has picked it (ADR 0012): sub-topic, level and easier-first
@@ -226,6 +227,7 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
     explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: '' })),
     solution: [], numbered: true, ppFigs: figs,
     ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,
+    ...(r.subtopic.startsWith('math-') ? { calc: false as const } : {}), // every past-paper Maths MCQ is Paper 1 (owner, 21 Nov 2026)
   };
 }
 

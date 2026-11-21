@@ -461,7 +461,8 @@ def select(a):
                 "id": pp_id(q["id"]), "src_id": q["id"], "subject": a.subject, "subtopic": t["st"],
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
-                "stem": speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
+                "stem": tex_to_text(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip()),
+                "options": [tex_to_text(strip_num(o)) for o in opts], "answer": int(k) - 1,
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                 "blind_src": (cv.get("src", "consensus") if cv_ok else (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
@@ -836,6 +837,13 @@ def selftest():
     assert garbled("你____多生气，____不应该对长辈无礼。", ["(1) 不管……也", "(2) 由于……才", "(3) 只要……都", "(4) 如果……就"]) is None
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
+    assert tex_to_text(r"Each had \(\frac{3}{5}\) kg") == "Each had 3/5 kg"
+    assert tex_to_text(r"\(2\frac{1}{3}\) m") == "2 1/3 m"
+    assert tex_to_text(r"\(\frac{3b - 7 + 4b}{3} + 6\)") == "(3b - 7 + 4b)/3 + 6"
+    assert tex_to_text(r"\(12 \times 5 \div 3\) and \(45^\circ\) and 8 cm\(^2\)") == "12 × 5 ÷ 3 and 45° and 8 cm²"
+    assert tex_to_text(r"\(120 \, \text{cm}^3\)") == "120 cm³" and tex_to_text("Cost $5.20") == "Cost $5.20"
+    assert tex_to_text("90.9\\nFind it") == "90.9\nFind it"
+    assert tex_to_text("5 × \\\x0crac{1}{3}") == "5 × 1/3" and tex_to_text("\x0crac{6}{1} \\\\times \x0crac{5}{4}") == "6/1 × 5/4"
     assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
     assert chi_incomplete("他们在行业里很有名。", ["（1）xíng yè", "（2）xíng yà", "（3）háng yè", "（4）háng yà"]) is None
     assert chi_incomplete("老师说的话。", ["a", "b", "c", "d"]) == "chi-no-blank-underline-lost"
@@ -1073,6 +1081,36 @@ def key_kind(k):
             role = "unreadable"
         return f"legacy JWT key, role {role}, {len(k)} chars"
     return f"unrecognised key, {len(k)} chars"
+
+
+TEX_SYM = {r"\times": "×", r"\div": "÷", r"\pi": "π", r"\angle": "∠", r"\ell": "ℓ", r"\square": "□", r"\cdot": "·",
+           r"\left": "", r"\right": "", r"\,": " ", r"\;": " ", r"\!": "", r"\%": "%", r"\$": "$"}
+SUPERS = {"2": "²", "3": "³"}
+
+
+def tex_to_text(t: str) -> str:
+    """LaTeX in an OCR'd stem or option as plain text, the way the site writes Maths ("3/5", "2 1/3", "×", "°"): the owner's
+    report of 21 Nov 2026 ("\\frac{3}{4}" shown raw; 359 Maths items). Money "$" is left alone."""
+    # JSON escapes ate some backslashes upstream: "\\frac" stored as a form feed + "rac", "\\times" as a tab + "imes"
+    t = t.replace("\x0crac", "\\frac").replace("\x09imes", "\\times").replace("\x0bec", "\\vec")
+    if "\\" not in t and "^" not in t:
+        return t
+    t = re.sub(r"\\{2,}(?=[A-Za-z()\[\]])", r"\\", t)  # "\\\\times" -> "\\times"
+    t = t.replace("\\n", "\n")  # a literal backslash-n from the OCR
+    def frac(m):
+        a, b = m.group(1).strip(), m.group(2).strip()
+        wrap = lambda x: f"({x})" if re.search(r"[\s+\-−×÷]", x) else x
+        return f"{wrap(a)}/{wrap(b)}"
+    for _ in range(3):  # nested fractions, innermost first
+        t = re.sub(r"\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}", frac, t)
+    t = re.sub(r"(\d)\s*(\(?\d+\)?/\(?\d+\)?)", r"\1 \2", t)  # mixed number: "2" + "1/3" -> "2 1/3"
+    t = re.sub(r"\\(?:text|mathrm|textrm)\s*\{([^{}]*)\}", r"\1", t)
+    t = re.sub(r"\^\s*\{?\s*\\circ\s*\}?", "°", t)
+    t = re.sub(r"\^\s*\{?([23])\}?", lambda m: SUPERS[m.group(1)], t)
+    for k, v in TEX_SYM.items():
+        t = t.replace(k, v)
+    t = re.sub(r"\\[()\[\]]", "", t)  # \( \) \[ \] math wrappers
+    return re.sub(r"[ \t]{2,}", " ", t).strip()
 
 
 SUBTOPIC_DB = re.compile(r"^[a-z0-9-]{3,120}$")  # pp_items_subtopic_check (migration 009; 004 allowed 80)

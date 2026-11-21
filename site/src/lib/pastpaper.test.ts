@@ -18,7 +18,7 @@ test('the master switch is ON; the Science upload (21 Nov 2026) puts 20+ sub-top
   assert.equal(ppMode('sci-systems-plant-transport-parts', false), null); // nothing while the flag is off
   assert.equal(ppMode('sci-systems-plant-transport-parts'), 'pool');
   assert.equal(ppMode('sci-cycles-water-cycle'), 'merge'); // 9 past-paper questions: merged into its tiers
-  assert.equal(ppMode('math-rate-rate'), 'pool'); // Maths upload (21 Nov 2026): 38 past-paper questions
+  assert.equal(ppMode('math-rate-rate'), 'merge'); // 38 past-paper questions, merged so the generated speed questions stay (owner)
   assert.equal(ppMode('math-geometry-line-symmetry'), 'merge'); // 9: merged into its tiers
 });
 
@@ -227,4 +227,10 @@ test('pageStep: pp_pool paging against the exact total fails closed on a cut or 
   assert.equal(pageStep(0, 0, 0, 0, 1000), 'done');
   assert.equal(pageStep(null, null, 400, 400, 1000), 'done');   // no total: a short page ends it (pre-paging rule)
   assert.equal(pageStep(null, null, 1000, 1000, 1000), 'more');
+});
+
+test('a past-paper Maths question is marked no-calculator (Paper 1); other subjects are not', () => {
+  const row = { id: 'pp-0123456789', subtopic: 'math-ratio-ratio', level: 'basic', stem: 'x', options: ['a', 'b', 'c', 'd'], answer: 0, figures: [], year: 2024 } as unknown as PpRow;
+  assert.equal(toQ(row, new Map())?.calc, false);
+  assert.equal(toQ({ ...row, subtopic: 'sci-cycles-water-states' } as PpRow, new Map())?.calc, undefined);
 });
