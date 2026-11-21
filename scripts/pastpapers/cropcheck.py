@@ -12,8 +12,8 @@ Dev side (needs PIL; writes only under /data/alvin/tmp/cookie-codex/cropcheck/):
       changes (queue 9 recovered more items): re-run `load_pp.py select` and `figures`, then
           python3 scripts/pastpapers/cropcheck.py pack --push
       run_tag11.sh reads pack/items.jsonl when its full run starts, so a refresh before that is enough.
-  cropcheck.py pickup
-      When the server's vlm/tag11-done.txt ends with QUEUE EMPTY, copies the results to PACK/results.jsonl.
+  cropcheck.py pickup [--tag tag21]
+      When the server's vlm/<tag>-done.txt ends with QUEUE EMPTY (tag11 was the first run, tag21 the 21 Nov one), copies the results to PACK/results.jsonl.
       Then: python3 scripts/pastpapers/load_pp.py cropcheck-apply PACK/results.jsonl --out <OUT dir> --subject science
 
 Server side (CUDA, vLLM; env /data/alvin/envs/ppvlm; started by vlm/run_tag11.sh):
@@ -41,8 +41,8 @@ GATE = [
     ("pp-59bab0deb1", ["final2526"], "webp", "pass"),
     # tester reports 21 Nov: a crop of only the options table (the plant diagram is elsewhere on the page), a crop holding
     # the whole previous question, and the television table that belongs to its question
-    ("pp-7c736161cb", ["sci1826b"], "webp", "fail"),
-    ("pp-22f8bc3801", ["sci1826b"], "webp", "fail"),
+    ("pp-7c736161cb", ["sci1826"], "webp", "fail"),  # sci1826: the first upload set, frozen (held items stay in it)
+    ("pp-22f8bc3801", ["sci1826"], "webp", "fail"),
     ("pp-87af45c055", ["sci1826b"], "webp", "pass"),
 ]
 
