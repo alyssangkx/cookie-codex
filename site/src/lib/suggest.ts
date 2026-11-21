@@ -1,6 +1,6 @@
 // Pure logic for the "What do you want to train today?" page: power numbers and the
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
-import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, liveMastered, poolProgress, milestoneReached, slotDone, type SaveV1, type Tier } from './store.ts';
+import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, liveMastered, poolProgress, milestoneReached, type SaveV1, type Tier } from './store.ts';
 import { reviewSize } from './pick.ts';
 
 export interface SubInfo {
@@ -27,7 +27,7 @@ export function topicPower(s: SaveV1, subsInTopic: SubInfo[]): number {
     for (const t of TIERS) {
       if (!sub.playable[t]) continue;
       all += TIER_WEIGHT[t];
-      if (slotDone(s, sub.id, t, !!sub.pool)) got += TIER_WEIGHT[t];
+      if (tierState(s, sub.id, t).cleared) got += TIER_WEIGHT[t]; // a clear from before a pool switch counts: it was earned
     }
   return all ? Math.round((100 * got) / all) : 0;
 }

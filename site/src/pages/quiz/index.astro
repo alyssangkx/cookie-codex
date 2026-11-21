@@ -95,7 +95,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, type Tier, type SaveV1, type QuizResult,
+    QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, type Tier, type SaveV1, type QuizResult,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
@@ -295,8 +295,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       ppFailed = true;
       const gen = genAll.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
       const side = genAll.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
-      const passage = (id: string) => { const q = genAll.find((x) => x.id === id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       for (const q of genAll) if (q.sub === subId) byId.set(q.id, q);
+      const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
       indexMembers();
       quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
       notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this quiz uses the other questions.</p>`;
@@ -307,13 +307,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         : 'Past-paper questions could not load. Check your connection and try again.';
     }
     ppFailed = true;
-    const lost = quiz.filter((id) => isStub(byId.get(id)));
-    quiz = quiz.filter((id) => !isStub(byId.get(id)));
-    if (mode === 'paper' && topUp) { // a new paper: fill the gap from the same sub-topics' generated questions
-      const subs = new Set(lost.map((id) => byId.get(id)!.sub));
-      const cand = genAll.filter((q) => subs.has(q.sub) && paperOk(q) && !quiz.includes(q.id));
-      for (const id of pickPaper(cand as any, load().questions, lost.length, paperMix.mix)) { byId.set(id, cand.find((q) => q.id === id)!); quiz.push(id); }
-    }
+    if (mode === 'paper' && topUp) { // a new paper: pick it again from the generated questions (same mix, order and minutes)
+      const gen = genAll.filter(paperOk);
+      for (const q of gen) byId.set(q.id, q);
+      indexMembers();
+      quiz = pickPaper(gen as any, load().questions, paperN, paperMix.mix);
+    } else quiz = quiz.filter((id) => !isStub(byId.get(id))); // a resumed paper or review drops them (with their picks)
     notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this ${mode === 'paper' ? 'paper' : 'review'} uses the other questions.</p>`;
     return quiz.length ? '' : (mode === 'paper' ? 'There are not enough questions for this paper right now. Try again later.' : 'Nothing to review right now. Try again later.');
   }
@@ -463,7 +462,6 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   /** Shared by a new paper and a resumed one. The clock is the wall clock, so a resumed paper may already be over. */
   function playPaper(at = draft?.at ?? 0) {
-    document.querySelector('.resume-note')?.remove();
     i = Math.min(Math.max(0, at), quiz.length - 1);
     over = false; wrongs = []; score = 0;
     inQuiz = new Set(quiz);
@@ -500,8 +498,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     pclock = { ...d.clock, pauseTaken: d.clock.pauseTaken ?? (d.clock.pauseUsed > 0 || !!d.clock.pausedAt) };
     startedAt = d.ts; mins = d.mins;
     $('title').textContent = 'Practice paper (resumed)';
-    playPaper(at < 0 ? left.length - 1 : at);
+    document.querySelector('.resume-note')?.remove();
     if (notice) { $('title').insertAdjacentHTML('afterend', `<div class="resume-note">${notice}</div>`); notice = ''; }
+    playPaper(at < 0 ? left.length - 1 : at);
   }
 
   /** The link is the same paper as the draft (a reload of it): same topics and mix. */
@@ -872,7 +871,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const head = document.getElementById('crumb-bal'); // the header balance was read when the page loaded
     if (head && head.textContent !== 'Shop') head.textContent = `Shop · ${balanceOf(s)} Crumbs`;
     let html = `<div class="cheer-row">${cheerHtml(s)}${gain}</div>` + note;
-    if (mode === 'tier') {
+    if (mode === 'tier' && POOL) {
+      const pp = poolProgress(s, subId), hit = res.newlyCleared.filter((x) => x.sub === subId).map((x) => x.tier === 'c' ? 'Exam-ready' : `${MILESTONE_NAME[x.tier]} reached`);
+      html += `<p class="verdict${hit.length || res.passed ? ' good' : ''}">${hit.length ? `${hit.join(' and ')}! ` : ''}${pp.counted} of ${pp.total || sub.pool} past-paper questions counted. Missed ones come back the next day.</p>`;
+    } else if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.autoPromoted ? `<p class="verdict good">Perfect first try! ${{ b: 'Basic', i: 'Intermediate', c: 'Competent' }[tier] ?? 'Tier'} cleared, and the next tier is open.</p>`
         : res.cleared ? `<p class="verdict good">Tier cleared! All ${st.total} questions mastered.</p>`

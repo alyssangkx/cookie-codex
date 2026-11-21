@@ -94,7 +94,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 )}
 
 <script>
-  import { load, tierState, tierOpen, liveMastered, poolProgress, milestoneReached, slotDone, syncParkedStored, reviewDueCount, TIERS, TIER_NAME, MILESTONE_NAME, type Tier } from '../../../lib/store';
+  import { load, tierState, tierOpen, liveMastered, poolProgress, milestoneReached, syncParkedStored, reviewDueCount, TIERS, TIER_NAME, MILESTONE_NAME, type Tier } from '../../../lib/store';
   import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, unitName, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
@@ -144,7 +144,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       const p = topicPower(s, g.subs);
       d.querySelector<HTMLElement>('.th-topic-fill')!.style.width = `${p}%`;
       let n = 0;
-      for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && slotDone(s, sub.id, t, !!sub.pool)) n++;
+      for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && tierState(s, sub.id, t).cleared) n++;
       const c = d.querySelector('.th-cleared'); if (c) c.textContent = String(n);
     });
 

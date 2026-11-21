@@ -271,6 +271,9 @@ def verify(a):
     out.mkdir(parents=True, exist_ok=True)
     done = {(r["pid"], r["pp_id"]) for r in jl(out / "verify.jsonl") if r.get("parsed")}
     todo = [p for p in pairs if (p["pid"], p["pp_id"]) not in done]
+    if not todo:
+        print("0 pairs to verify", flush=True)
+        return
     text = {d["id"]: d["text"] for s in sorted({p["subject"] for p in todo}) for d in corpus(root, s)}
     gone = [p for p in todo if p["pp_id"] not in text]
     if gone:  # a pp_id from an older corpus: say so instead of retrying it on every run
