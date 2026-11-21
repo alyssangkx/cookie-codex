@@ -124,6 +124,28 @@ BLANK_PUNCT = set("_.,;:?!'\"()[]-…—–·。，、；：？！“”‘’�
 LETTERED = re.compile(r"\(?([A-D])(?:[.)]\s*|\s+(?![\s&+,]|and\b|or\b|only\b))")  # "A. Air" / "A Air", not "A and X only"
 
 
+ENG_INSTR = re.compile(r"(?:^|(?<=[.?!]))\s*(?:select|choose|circle|fill in|pick)\b[^.?!]*[.?!]?", re.I)
+ENG_BLANK = re.compile(r"_{2,}|\(\s*\)|\.{4,}")
+ENG_PASSAGE = re.compile(r"\b(passage|paragraph|line \d+|lines \d+|the (?:poster|advertisement|notice|brochure|flyer|leaflet|"
+                         r"article|email|letter|text above|text below|story)|according to the|in the (?:text|story|article))\b", re.I)
+
+
+def eng_incomplete(text: str) -> str | None:
+    """A single-sentence English MCQ (grammar, vocabulary) must carry its own sentence with a blank or a question
+    (owner's sample, 21 Nov 2026: 13 of 30 had none). Rejects: a stem that is only an instruction ("Select the most
+    appropriate word to fill in the blank."), a lone word whose sentence was lost ("portrayed"), a sentence with no blank
+    or question (the underlined word is lost in OCR), and a stem that needs a passage or visual text."""
+    t = (text or "").strip()
+    rest = ENG_INSTR.sub(" ", t)
+    if sum(c.isalpha() for c in rest) < 15:
+        return "stem-instruction-only"
+    if not ENG_BLANK.search(t) and "?" not in t:
+        return "stem-no-blank-or-question"
+    if ENG_PASSAGE.search(t):
+        return "stem-needs-passage"
+    return None
+
+
 def garbled(text: str, opts) -> str | None:
     t = text or ""
     # a CJK character carries about a word: 8 of them make a full Chinese stem (黑衣人是一个怎么样的人？), 20 letters an English one
@@ -364,7 +386,7 @@ def select(a):
                     second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
-                reason = garbled(q.get("text") or "", opts)
+                reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None)
                 if not reason and t.get("st") not in subs:
                     reason = "subtopic-not-in-syllabus"
                 if not reason and t.get("difficulty") not in LEVEL:
@@ -780,6 +802,12 @@ def selftest():
     assert garbled("你____多生气，____不应该对长辈无礼。", ["(1) 不管……也", "(2) 由于……才", "(3) 只要……都", "(4) 如果……就"]) is None
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
+    assert eng_incomplete("Select the most appropriate word to fill in the blank.") == "stem-instruction-only"
+    assert eng_incomplete("portrayed") == "stem-instruction-only"
+    assert eng_incomplete("He tried to remain poised as he realised he was trapped in the car.") == "stem-no-blank-or-question"
+    assert eng_incomplete("According to the poster, when should Mr Tan ____ the book?") == "stem-needs-passage"
+    assert eng_incomplete("The number of community cases _______ increased since January.") is None
+    assert eng_incomplete("Choose the correct word. She _____ to school every day.") is None
     assert garbled("好", ["a", "b", "c", "d"]) == "text-short"
     assert garbled("ab 12 cd 34 ef 56 gh 78 ij 90 11 22 33 44 55", ["a", "b", "c", "d"]) == "text-low-alpha"
     rk = easier_first([{"id": "pp-c", "subtopic": "s", "difficulty": 2, "level": "basic", "qno": 1},
