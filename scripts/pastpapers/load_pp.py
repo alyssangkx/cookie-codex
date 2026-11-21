@@ -1086,6 +1086,12 @@ def selftest():
         == "让我这个（17）＿＿＿＿的好心人来帮助你！"
     assert cloze_stem("便________（1）准备 2 选择 3 参加 4 走向）了很多食物", 16, ["1 准备", "2 选择", "3 参加", "4 走向"]) is None
     assert cloze_stem("她Q17（1 保持 2 保证 3 保留 4 保守）身体，（1 保持 Z保证 3 保留 4 保守）好。", 17, O17) is None
+    for bad in ["她Q17（1 保持 2 保证 3 保留 4 保守）身体，（１保持 ２保证 ３保留 ４保守）好。", "他Q17（1 保持 2 保证 3 保留 4 保守）________（18）很好",
+                "他Ql7（1 保持 2 保证 3 保留 4 保守）身体", "他Q17（1 保持 2 保证 3 保留 4 保守）身体。（1)高兴 (2)难过 (3)生气",
+                "他Q17（1 保持 2 保证 3 保留 4 保守）。① 高兴 ② 难过", "他很________Q17（1 保持 2 保证 3 保留 4 保守）________的人"]:
+        assert cloze_stem(bad, 17, O17) is None, bad
+    assert cloze_stem("让我这个————Q17（1 保持 2 保证 3 保留 4 保守）的人", 17, O17) == "让我这个（17）＿＿＿＿的人"
+    assert cloze_stem("我明白——如果……那只是Q17（1 保持 2 保证 3 保留 4 保守）的。", 17, O17) == "我明白——如果……那只是（17）＿＿＿＿的。"
     assert strip_opts(["1 年", "2 年", "3 年", "4 年"]) == ["1 年", "2 年", "3 年", "4 年"]
     assert cloze_stem("负责人在接受Q17（1反问 2责问 3访问 4发问）时表示。", 17, ["1反问", "2责问", "3访问", "4发问"]) == "负责人在接受（17）＿＿＿＿时表示。"
     print("selftest ok")
@@ -1445,8 +1451,13 @@ def cloze_stem(t, n, opts=()):
     # share an option set: 的/地/得); by label alone only when the options are unknown
     pick = next((m for m in brackets if labelled(m.group(0)) and (holds(m.group(0)) if words else True)), None) \
         or next((m for m in brackets if words and not re.match(r"Q\s?\d", m.group(0)) and holds(m.group(0))), None)
-    if pick:  # a printed blank line next to the bracket ("这个________（1 …）") goes with it
-        t2, k = re.sub(r"[_＿]{2,}\s*$", "", t[:pick.start()]) + ask + re.sub(r"^\s*[_＿]{2,}", "", t[pick.end():]), 1
+    if pick:  # a printed blank line next to the bracket ("这个________（1 …）") goes with it; one on each side is ambiguous
+        line = r"(?:[_＿]{2,}|[—－-]{4,}|﹍{2,}|…{3,}|\.{4,})"  # 破折号 —— and 省略号 …… are punctuation, not blanks
+        pre, post = t[:pick.start()], t[pick.end():]
+        lp, rp = re.search(line + r"\s*$", pre), re.match(r"\s*" + line, post)
+        if lp and rp:
+            return None
+        t2, k = (pre[:lp.start()] if lp else pre) + ask + (post[rp.end():] if rp else post), 1
     if not k and len(re.findall(r"_{2,}|＿{2,}|[（(]\s*[)）]", t)) == 1:
         t2, k = re.subn(r"_{2,}|＿{2,}|[（(]\s*[)）]", ask, t)
     if not k:
@@ -1458,7 +1469,8 @@ def cloze_stem(t, n, opts=()):
     # the automatic check: exactly the asked blank; once the quiz's own blanks are taken out, no blank line, no option list
     # (1 … 2 … 3 … 4, inside a bracket or not, however OCR'd) and no question label or instruction left
     rest = re.sub(r"（\d{1,2}）＿＿＿＿|（\d{1,2}）＿＿", "", t2)
-    if t2.count("＿＿＿＿") != 1 or re.search(r"[_＿]", rest) or re.search(r"Q\s?\d|根据短文|号码|填写在", rest) \
+    if t2.count("＿＿＿＿") != 1 or re.search(r"[_＿]", rest) or re.search(r"Q\s?[\dlI]|根据短文|号码|填写在", rest) \
+            or re.search(r"[０-９①②③④]|[—－]{4,}|﹍{2,}|…{3,}|\.{4,}|（\d{1,2}）|[(（]\s*[1-4lI]\s*[)）.．、]", rest) \
             or re.search(r"(?<!\d)1\D{1,10}?(?<!\d)2\D{1,10}?(?<!\d)3\D{1,10}?(?<!\d)4(?!\d)", rest) \
             or any(len(re.findall(r"(?<!\d)[1-4]\s*[.．、]?\s*[\u3400-\u9fff“《]", g)) >= 3 for g in re.findall(r"[（(][^（）()]*[）)]?", rest)):
         return None  # a bracket with 3+ numbered words is an option list even with one number misread (a date has 2)
