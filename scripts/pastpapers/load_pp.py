@@ -699,20 +699,24 @@ def figures(a):
     print("crop fixes:", {k: v for k, v in stats.items() if k not in ("log", "angles")})
 
 
-SPEAKER = re.compile(r'(?<=[.?!:"\u201d\u2019\')])\s+(?=(?:(?:Mr|Mrs|Ms|Mdm|Dr)\.? )?[A-Z][a-z]+:\s)')
-ASK = re.compile(r'(?<=[.!"\u201d\u2019])\s+(?=[^.!?]*\?\s*$)')  # the final sentence, when it ends with "?"
+TITLE = r"(?:Mr|Mrs|Ms|Mdm|Dr)"
+SPEAKER = re.compile(r'(?<=[.?!:"\u201d\u2019\')])(?<!\bMr\.)(?<!\bMrs\.)(?<!\bMs\.)(?<!\bMdm\.)(?<!\bDr\.)\s+'
+                     r'(?=(?:' + TITLE + r'\.? )?[A-Z][a-z]+:\s)')
+# the stem's own question after the last comment: a sentence starting with a question word and ending in "?" (decimals
+# allowed); a comment's own "Do you agree?" is left with its speaker
+ASK = re.compile(r'(?<=[.!?"\u201d\u2019])\s+(?=(?:Which|What|Who|Whose|Whom|How|When|Where|Why|Based|In|From|According)\b'
+                 r'(?:[^.!?]|\.\d)*\?\s*$)')
 
 
 def speaker_lines(t):
     """Comments by named people ("Aminah: ... Bala: ...") each on their own line, as printed, and the question after them
-    on its own line (tester report 21 Nov: pp-aaaeb1ffd1 read as one block). Only with 2+ speakers; the quiz shows
-    the stem with white-space: pre-line."""
-    t1 = re.sub(r"\s+", " ", t)  # OCR line breaks become spaces first
-    if len(SPEAKER.findall(t1)) < 2:
+    on its own line (tester report 21 Nov: pp-aaaeb1ffd1 read as one block). Only with 2+ speakers; other line breaks are
+    kept; the quiz shows the stem with white-space: pre-line."""
+    parts = SPEAKER.split(t)
+    if len(parts) < 3:
         return t
-    t = SPEAKER.sub("\n", t1)
-    last = t.rfind("\n")
-    return t[:last] + ASK.sub("\n", t[last:])
+    parts[-1] = ASK.sub("\n", parts[-1])
+    return "\n".join(parts)
 
 
 def table_rows(opts):
@@ -747,9 +751,14 @@ def selftest():
     sp = speaker_lines("Four comments. Aminah: Roots hold it. Bala: It is uprooted. Caden: It makes food. Which are correct?")
     assert sp == "Four comments.\nAminah: Roots hold it.\nBala: It is uprooted.\nCaden: It makes food.\nWhich are correct?", sp
     assert speaker_lines("Note: one label only. Which is it?") == "Note: one label only. Which is it?"
-    assert speaker_lines("Said: Aminah: Roots. Bala: Stem. Mr Tan: Leaf. In which part is food\nmade?") == \
+    assert speaker_lines("Said: Aminah: Roots. Bala: Stem. Mr Tan: Leaf. In which part is food made?") == \
         "Said:\nAminah: Roots.\nBala: Stem.\nMr Tan: Leaf.\nIn which part is food made?"
     assert speaker_lines("Said: Aminah: Roots. Bala: It wilts. What a pity.") == "Said:\nAminah: Roots.\nBala: It wilts. What a pity."
+    assert speaker_lines("Said: Mr. Tan: Leaf. Aminah: Roots. Which is correct?") == "Said:\nMr. Tan: Leaf.\nAminah: Roots.\nWhich is correct?"
+    assert speaker_lines("Comments. Aminah: Roots. Bala: Is it dry? Which is correct?") == "Comments.\nAminah: Roots.\nBala: Is it dry?\nWhich is correct?"
+    assert speaker_lines("Said: Aminah: Roots. Bala: It is dry. Do you agree?") == "Said:\nAminah: Roots.\nBala: It is dry. Do you agree?"
+    assert speaker_lines("Said: Aminah: Roots. Bala: Stem is 2.5 cm. Which is 3.5 cm?") == "Said:\nAminah: Roots.\nBala: Stem is 2.5 cm.\nWhich is 3.5 cm?"
+    assert speaker_lines("Four. Aminah: Roots. Bala: Stem.\n\nA | B\nWhich?") == "Four.\nAminah: Roots.\nBala: Stem.\n\nA | B\nWhich?"
     assert table_rows(["(1) Light, Heat", "(2) Sound, None", "(3) Light + sound, Heat", "(4) Light + sound, None"])
     assert not table_rows(["water, oil and flour", "ice, sugar and flour", "a, b and c", "d, e and f"])
     assert not table_rows(["Mass: increase, Volume: increase"] * 4) and not table_rows(["K", "L", "M", "N"])
