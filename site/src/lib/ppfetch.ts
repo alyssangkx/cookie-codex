@@ -7,7 +7,7 @@ import { supabase, SUPABASE_URL, currentSession, callFunction } from './supabase
 import { ppSubjectOf, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
 
 const CHUNK = 15; // pp-serve takes at most 15 ids a call (migration 006)
-const POOL_PAGE = 1000; // rows per pp_pool call: the API's default max_rows (a lower cap would end the paging early)
+const POOL_PAGE = 1000; // rows asked per pp_pool call (the API's default max_rows; a lower cap just means more pages)
 
 export async function fetchPool(subs: string[], topicOf: (sub: string) => string | undefined): Promise<PpStub[] | null> {
   if (!subs.length) return [];
@@ -24,22 +24,30 @@ export async function fetchPool(subs: string[], topicOf: (sub: string) => string
     }
     for (const [subject, list] of bySubject) {
       for (let i = 0; i < list.length; i += 40) { // pp_pool takes at most 40 sub-topics a call
-        // the API returns at most POOL_PAGE rows a call (Supabase max_rows, 1000 by default) and English grammar alone has
-        // 1,900+: page through pp_pool's fixed order (sub-topic, rank, id) until a short page, so no list is cut silently
-        for (let from = 0; ; from += POOL_PAGE) {
-          const { data, error } = await supabase.rpc('pp_pool', { p_subject: subject, p_subtopics: list.slice(i, i + 40) })
-            .range(from, from + POOL_PAGE - 1);
+        // the API returns at most max_rows a call (Supabase, 1000 by default) and English grammar alone has 1,900+: page
+        // through pp_pool's fixed order (sub-topic, rank, id) and check every page against the server's exact total, so a
+        // list cut by a lower cap, or shifted by an upload between pages, fails closed instead of passing as complete.
+        // ponytail: each page is one pp_pool rate hit (about 7 for a three-subject Daily Review, limit 120 an hour)
+        let total: number | null | undefined, got = 0; // null: the server sent no total (then a short page ends the list)
+        for (;;) { // the next page starts after the rows received (a lower cap returns fewer)
+          const { data, error, count } = await supabase.rpc('pp_pool', { p_subject: subject, p_subtopics: list.slice(i, i + 40) },
+            { count: 'exact' }).range(got, got + POOL_PAGE - 1);
           if (error || !Array.isArray(data)) return null;
+          if (total === undefined) total = typeof count === 'number' ? count : null;
+          else if (total !== null && count !== total) return null; // the pool changed between pages
           for (const r of data) {
             const st = stubOf(r, topicOf(r?.subtopic));
             if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
             out.push(st);
           }
-          if (data.length < POOL_PAGE) break;
+          got += data.length;
+          if (total !== null ? got >= total : data.length < POOL_PAGE) break;
+          if (!data.length) return null; // the server stopped short of its own total
         }
+        if (total !== null && got !== total) return null;
       }
     }
-    return new Set(out.map((q) => q.id)).size === out.length ? out : null; // pages that overlap mean the order moved: fail
+    return new Set(out.map((q) => q.id)).size === out.length ? out : null; // a row seen twice: the order moved between pages
   } catch {
     return null;
   }
