@@ -32,15 +32,26 @@ HEAD = ("You are an expert Singapore primary-school English teacher marking PSLE
         "one line per question: Q&lt;number&gt;: &lt;option number&gt;, for example Q1: 3. Answer every question.")
 HEAD_ZH = ("你是新加坡小学华文老师，正在批改小六会考（PSLE）华文试卷。下面每一组（SET）先给出试卷的页面图片（短文和题目），"
            "然后列出这一组的题目。请根据页面图片中的短文作答。每题括号里的“paper question”是试卷上的题号。每题选出最恰当的答案（1-4）。"
-           "只用一行回答一题，格式为 Q<题号>: <选项号>，例如 Q1: 3。每一题都要回答。\n"
+           "只用一行回答一题，格式为 Q&lt;题号&gt;: &lt;选项号&gt;，例如 Q1: 3。每一题都要回答。\n"
            "You are an expert Singapore primary-school Chinese teacher marking PSLE Chinese. Each SET shows the exam page images "
            "(the passage and its questions), then its numbered questions. Use the passage in the page images. For each question "
-           "choose the single best option (1-4). Reply ONLY with one line per question: Q<number>: <option number>.")
+           "choose the single best option (1-4). Reply ONLY with one line per question: Q&lt;number&gt;: &lt;option number&gt;.")
+HEAD_SG = ("You are an expert Singapore primary-school {subj} teacher marking PSLE {subj} multiple-choice questions. Below are "
+           "numbered questions, each with its options and, where the question refers to one, the picture printed with it. For "
+           "each question choose the single best option (1-4). Reply ONLY with one line per question: Q&lt;number&gt;: &lt;option "
+           "number&gt;, for example Q1: 3. Answer every question.")
+SINGLE = {"science-single": "Science", "maths-single": "Mathematics"}  # one question per item: key disputes (owner, 21 Nov 2026)
 KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed questions in a set, sets need a disputed key)
     "english-visual": ("english", (21, 30), "eng-visual-text", "Visual Text", 5, False),
     "chinese-cloze": ("chinese", (16, 20), "chi-cloze-mcq", "短文填空", 1, True),
     "chinese-reading": ("chinese", (21, 25), "chi-yuedu-mcq-text", "阅读理解一", 1, True),
+    "science-single": ("science", (1, 99), None, None, 1, True),
+    "maths-single": ("maths", (1, 99), None, None, 1, True),
 }
+CALIB = 200  # agreeing keys mixed into a single-question pack to measure the models
+# the latest selection's holds: a disputed question goes in only when the dispute is all that holds it back
+HOLDS = {"science": TMP / "ppimport" / "sci1826b" / "science" / "rejects.jsonl",
+         "maths": TMP / "ppimport" / "math1826" / "maths" / "rejects.jsonl"}
 ANS = re.compile(r"Q\s*(\d{1,3})\s*[:：.)\-]\s*\(?([1-4])\)?")
 
 
@@ -53,7 +64,43 @@ def qnum(q):
     return int(q["qno"]) if str(q.get("qno") or "").isdigit() else None  # Chinese papers store "17"
 
 
+def single_sets(kind):
+    """Science/Maths key disputes as one-question items: every 4-option keyed MCQ whose key the blind solver disputes, plus
+    CALIB agreeing ones, shuffled. The picture is the question's own crop (load_pp.own_page_crops); a question that refers
+    to a picture but has none from its own page is left out (no one could judge it)."""
+    import random
+    subject = KINDS[kind][0]
+    only = {r["id"] for r in jl(HOLDS[subject]) if r.get("reason") == "blind-disagree"}
+    dis, agree = [], []
+    for y in range(2018, 2027):
+        base = PP / subject / str(y)
+        bl = {b["id"]: b for b in jl(BLIND / f"{subject}-{y}.jsonl")}
+        crops = collections.defaultdict(list)
+        for c in sorted((base / "crops").glob("*.png")):
+            crops[re.sub(r"-p\d+\.png$", "", c.name)].append(c)
+        for q in jl(base / "merged.jsonl"):
+            b = bl.get(q["id"]) or {}
+            if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not b.get("key") or not q.get("pages"):
+                continue
+            text = L.tex_to_text(q.get("text") or "")
+            refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q))
+            own = L.own_page_crops([c for c in crops.get(q["id"], []) if L.crop_ok(c)], q.get("pages")) if refers else []
+            if refers and not own:
+                continue
+            item = {"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "crops": [str(c) for c in own]}
+            if b.get("agree") is False and b.get("pick") and q["id"] in only:
+                dis.append(item)
+            elif b.get("agree") is True:
+                agree.append(item)
+    rng = random.Random(21)
+    items = dis + rng.sample(agree, min(CALIB, len(agree)))
+    rng.shuffle(items)
+    return items
+
+
 def kind_sets(kind, skip):
+    if kind in SINGLE:
+        return single_sets(kind)
     subject, (lo, hi), st, section, least, disputed = KINDS[kind]
     sets = []
     for y in range(2018, 2027):
@@ -104,7 +151,14 @@ def build(a):
         for si, s in enumerate(chunk, 1):
             qs = [s["q"][x] for x in s["ids"]]
             imgs = []
-            for p in page_range(qs):
+            for c in s.get("crops") or []:  # a single question's own figure crop
+                dst = out / "img" / (Path(c).stem + ".jpg")
+                if not dst.exists():
+                    im = Image.open(c).convert("L")
+                    im.thumbnail((1000, 1000))
+                    im.save(dst, quality=75)
+                imgs.append(dst.name)
+            for p in ([] if a.kind in SINGLE else page_range(qs)):
                 src = PP / subject / str(s["year"]) / "pages" / f"p{p:04d}.jpg"
                 if not src.exists():
                     continue
@@ -120,15 +174,25 @@ def build(a):
                 qmap[n] = q["id"]
                 # the printed numbers off ("1 角色"), as on the site, so the pack does not read "(1) 1 角色"
                 opts = "".join(f"<div>({j}) {html.escape(o)}</div>" for j, o in enumerate(L.strip_opts(q["options"]), 1))
-                items.append(f'<div class="q"><b>Q{n}.</b> <i>(paper question {q["qno"]})</i> {html.escape(q["text"])}{opts}</div>')
+                if a.kind in SINGLE:  # one question: its text (TeX as plain text, scanner labels off), its picture, its options
+                    text = html.escape(L.scanner_marks(L.tex_to_text(q.get("text") or ""))).replace("\n", "<br>")
+                    pics = "".join(f'<img class="fig" src="img/{x}">' for x in imgs)
+                    items.append(f'<div class="q1"><b>Q{n}.</b> {text}{pics}{opts}</div>')
+                else:
+                    items.append(f'<div class="q"><b>Q{n}.</b> <i>(paper question {q["qno"]})</i> {html.escape(q["text"])}{opts}</div>')
+            if a.kind in SINGLE:
+                body.append("".join(items))
+                continue
             body.append(f"<section><h2>SET {si} (questions Q{n - len(qs) + 1}-Q{n})</h2>"
                         + "".join(f'<img src="img/{x}">' for x in imgs) + f"<h3>Questions for SET {si}</h3>" + "".join(items) + "</section>")
-        title = "Visual Text Pack" if subject == "english" else "Chinese Passage Pack"
+        title = {"english": "Visual Text Pack", "chinese": "Chinese Passage Pack"}.get(subject, f"{subject.title()} Question Pack")
         page = (f'<!doctype html><html><head><meta charset="utf-8"><title>{title}</title><style>'
                 "body{font:14px/1.4 Arial,sans-serif;margin:24px} section{page-break-before:always} h3{page-break-before:avoid}"
                 "img{display:block;max-width:100%;max-height:24.5cm;margin:0 auto 4px;border:1px solid #ccc;page-break-after:always}"
-                ".q{margin:10px 0;page-break-inside:avoid} h2{font-size:18px}</style></head><body>"
-                f"<p>{HEAD if subject == 'english' else HEAD_ZH}</p>{''.join(body)}</body></html>")
+                ".q{margin:10px 0;page-break-inside:avoid} h2{font-size:18px}"
+                ".q1{margin:14px 0;padding-top:6px;border-top:1px solid #ddd;page-break-inside:avoid}"
+                ".q1 img.fig{max-height:9cm;max-width:70%;margin:6px 0;page-break-after:auto}</style></head><body>"
+                f"<p>{HEAD if subject == 'english' else HEAD_ZH if subject == 'chinese' else HEAD_SG.format(subj=SINGLE[a.kind])}</p>{''.join(body)}</body></html>")
         hp = out / f"part{part}.html"
         hp.write_text(page, encoding="utf-8")
         json.dump(qmap, open(out / f"part{part}.qmap.json", "w"))
