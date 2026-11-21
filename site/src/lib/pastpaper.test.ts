@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -198,4 +198,11 @@ test('pool mode: a pool sub-topic is its past-paper questions only, and reports 
   assert.equal(isPoolSub('sci-pool', true, sw), true);
   assert.equal(isPoolSub('sci-pool', false, sw), false);
   assert.deepEqual(ppTierCount(25, 30, 'pool'), { count: 0, usesPp: true });
+});
+
+test('ppSubjectOf maps a sub-topic id to its pp_items subject (pp_pool lists one subject per call)', () => {
+  assert.equal(ppSubjectOf('sci-cycles-water-states'), 'science');
+  assert.equal(ppSubjectOf('eng-grammar-mcq'), 'english');
+  assert.equal(ppSubjectOf('chi-ciyu-choose'), 'chinese');
+  assert.equal(ppSubjectOf('xyz-thing'), null);
 });

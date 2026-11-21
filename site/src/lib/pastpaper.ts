@@ -50,9 +50,15 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'sci-inquiry-predict-hyp': 'merge',
   'sci-systems-air-gases': 'merge',
   'sci-systems-human-overview': 'merge',
+  // English upload (owner OK, 21 Nov 2026): single-sentence MCQs, paper questions 1-15 (grammar 1,926, vocabulary 969);
+  // keys confirmed by the blind check or by owner-approved outside-model consensus
+  'eng-grammar-mcq': 'pool',
+  'eng-vocab-mcq': 'pool',
 };
 
-export const PP_SUBJECT = 'science';
+/** pp_items.subject of a sub-topic, from its id prefix (pp_pool lists one subject per call). */
+const SUBJECT_OF: Readonly<Record<string, string>> = { sci: 'science', eng: 'english', chi: 'chinese', mat: 'maths' };
+export const ppSubjectOf = (sub: string): string | null => SUBJECT_OF[sub.split('-')[0]] ?? null;
 export const PP_BUCKET = 'pp-figures';
 export const PP_MIN_TIER = 20; // same as MIN_POOL: a smaller past-paper pool never replaces a tier, it is merged in
 const LEVELS = ['basic', 'intermediate', 'competent'] as const;

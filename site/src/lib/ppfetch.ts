@@ -4,7 +4,7 @@
 // Any failure returns null; null (not []) tells Daily Review not to park the past-paper retests it could not load. The
 // quiz page then: a one-pool quiz stops; a merged tier, Daily Review and papers carry on with the generated questions.
 import { supabase, SUPABASE_URL, currentSession, callFunction } from './supabase';
-import { PP_SUBJECT, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
+import { ppSubjectOf, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
 
 const CHUNK = 15; // pp-serve takes at most 15 ids a call (migration 006)
 
@@ -13,13 +13,21 @@ export async function fetchPool(subs: string[], topicOf: (sub: string) => string
   try {
     if (!(await currentSession())) return null;
     const out: PpStub[] = [];
-    for (let i = 0; i < subs.length; i += 40) { // pp_pool takes at most 40 sub-topics a call
-      const { data, error } = await supabase.rpc('pp_pool', { p_subject: PP_SUBJECT, p_subtopics: subs.slice(i, i + 40) });
-      if (error || !Array.isArray(data)) return null;
-      for (const r of data) {
-        const st = stubOf(r, topicOf(r?.subtopic));
-        if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
-        out.push(st);
+    const bySubject = new Map<string, string[]>(); // pp_pool lists one subject per call (Daily Review asks for several)
+    for (const s of subs) {
+      const subject = ppSubjectOf(s);
+      if (!subject) return null;
+      (bySubject.get(subject) ?? bySubject.set(subject, []).get(subject)!).push(s);
+    }
+    for (const [subject, list] of bySubject) {
+      for (let i = 0; i < list.length; i += 40) { // pp_pool takes at most 40 sub-topics a call
+        const { data, error } = await supabase.rpc('pp_pool', { p_subject: subject, p_subtopics: list.slice(i, i + 40) });
+        if (error || !Array.isArray(data)) return null;
+        for (const r of data) {
+          const st = stubOf(r, topicOf(r?.subtopic));
+          if (!st) return null; // a partial list is a failure: totals and milestones would be wrong
+          out.push(st);
+        }
       }
     }
     return out;
