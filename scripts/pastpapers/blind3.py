@@ -18,8 +18,20 @@ TMP = Path("/data/alvin/tmp/cookie-codex")
 PP, BLIND = TMP / "pastpapers", TMP / "audit" / "blindcheck"
 SERVER, SERVER_BASE = "alvin@192.168.1.170", "/data/alvin/cookie/blind3"
 # single-sentence sections only (passage sets are phase 2, owner 21 Nov 2026)
-SINGLE = {"english": {"eng-grammar-mcq", "eng-vocab-mcq"}}
-SYS = {"english": "You are an expert Singapore primary school English teacher solving PSLE English Paper 2 multiple-choice questions."}
+SINGLE = {"english": {"eng-grammar-mcq", "eng-vocab-mcq"},
+          "chinese": {"chi-pinyin-sound", "chi-zixing-form", "chi-ciyu-choose", "chi-ciyu-idiom", "chi-juzi-choose", "chi-juzi-guanlian"}}
+SYS = {"english": "You are an expert Singapore primary school English teacher solving PSLE English Paper 2 multiple-choice questions.",
+       "chinese": "You are an expert Singapore primary school Chinese teacher solving PSLE Chinese Language multiple-choice questions."}
+# the instruction at the top of each part of an outside-model pack (the owner pastes it into Gemini, Grok, Perplexity ...)
+EXT_HEAD = {
+    "english": ("You are an expert Singapore primary-school English teacher marking PSLE English Paper 2. For each numbered "
+                "multiple-choice question below, choose the single best option (1-4). Reply ONLY with one line per question in the "
+                "form Q<number>: <option number>, for example Q1: 3. Answer every question.\n\n"),
+    "chinese": ("你是新加坡小学华文老师，正在批改小六会考（PSLE）华文选择题。请为下面每一道题选出最恰当的答案（1-4）。"
+                "只用一行回答一题，格式为 Q<题号>: <选项号>，例如 Q1: 3。每一题都要回答。\n"
+                "You are an expert Singapore primary-school Chinese teacher. For each numbered PSLE Chinese multiple-choice question "
+                "below, choose the single best option (1-4). Reply ONLY with one line per question: Q<number>: <option number>.\n\n"),
+}
 ASK = "Think step by step, briefly, then end with a final line exactly: ANSWER: <option number 1-4>."
 
 
@@ -37,7 +49,7 @@ def pick(raw):
 
 
 def strip_num(o):
-    return re.sub(r"^\s*\(?[1-4A-D][).]\s*", "", o or "").strip()  # numbering only: "a.m." stays
+    return re.sub(r"^\s*(?:[(（]\s*[1-4A-D]\s*[)）]|[1-4A-D][).．、])\s*", "", o or "").strip()  # numbering only, also （1）: "a.m." stays
 
 
 def qtext(q):
@@ -81,6 +93,38 @@ def pack(a):
         subprocess.run(["scp", "-q", str(w / "items.jsonl"), f"{SERVER}:{dst}/items.jsonl"], check=True)
         subprocess.run(["scp", "-q", str(Path(__file__).resolve()), f"{SERVER}:{SERVER_BASE}/blind3.py"], check=True)
         print("pushed to", dst)
+
+
+def extpack(a):
+    """The disagreements and the calibration sample as a numbered, answer-free pack for outside models: <subject>_questions.txt
+    (parts of 100, each with the instruction) and .csv, plus a private qmap.json (Q number -> id). Score with `extscore`."""
+    w = work(a.subject)
+    qs = [q for q in jl(w / "items.jsonl")]
+    if a.subject == "english":
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import load_pp as L
+        qs = [q for q in qs if L.eng_incomplete(q["text"]) is None]
+    random.Random(11).shuffle(qs)
+    out = w / "external"
+    out.mkdir(exist_ok=True)
+    mp, parts = {}, []
+    chunks = [qs[i:i + 100] for i in range(0, len(qs), 100)]
+    import csv
+    with open(out / f"{a.subject}_questions.csv", "w", newline="", encoding="utf-8") as f:
+        wr = csv.writer(f)
+        wr.writerow(["Q", "question", "option 1", "option 2", "option 3", "option 4", "answer"])
+        n = 0
+        for k, ch in enumerate(chunks, 1):
+            body = []
+            for q in ch:
+                n += 1
+                mp[n] = q["id"]
+                wr.writerow([n, q["text"], *q["options"], ""])
+                body.append(f"Q{n}. {q['text']}\n" + "\n".join(f"  ({j}) {o}" for j, o in enumerate(q["options"], 1)))
+            parts.append(f"===== PART {k} of {len(chunks)} (Q{n - len(ch) + 1}-Q{n}) =====\n" + EXT_HEAD[a.subject] + "\n\n".join(body))
+    (out / f"{a.subject}_questions.txt").write_text("\n\n\n".join(parts), encoding="utf-8")
+    json.dump(mp, open(out / "qmap.json", "w"))
+    print(f"{len(qs)} questions ({sum(not q['calib'] for q in qs)} disagreements, {sum(q['calib'] for q in qs)} calibration) in {len(chunks)} parts -> {out}")
 
 
 def run(a):
@@ -140,17 +184,18 @@ def report(a):
 def selftest():
     assert pick("so ANSWER: 3") == "3" and pick("ANSWER: (B)") == "2" and pick("no answer") is None
     assert strip_num("(2) went") == "went" and strip_num("B. gone") == "gone" and strip_num("a.m.") == "a.m."
+    assert strip_num("（1）讨论") == "讨论" and strip_num("2、接触") == "接触"
     assert qtext({"text": "He ___ home.", "options": ["go", "goes", "going", "gone"]}).endswith("(4) gone")
     print("blind3 selftest ok")
 
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("cmd", choices=("pack", "run", "report", "selftest"))
+    p.add_argument("cmd", choices=("pack", "run", "report", "extpack", "selftest"))
     p.add_argument("--subject", default="english")
     p.add_argument("--calib", type=int, default=300)
     p.add_argument("--push", action="store_true")
     p.add_argument("--pull", action="store_true")
     p.add_argument("--write", action="store_true", help="report: write BLIND/third/ for load_pp (after the owner has seen it)")
     a = p.parse_args()
-    {"pack": pack, "run": run, "report": report, "selftest": lambda _a: selftest()}[a.cmd](a)
+    {"pack": pack, "run": run, "report": report, "extpack": extpack, "selftest": lambda _a: selftest()}[a.cmd](a)
