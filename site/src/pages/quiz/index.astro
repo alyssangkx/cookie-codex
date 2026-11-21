@@ -275,7 +275,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const ppReason = (limit: boolean) => (limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load');
   const ppNote = (limit: boolean, what: string) => `<p class="note">${ppReason(limit)}, so this ${what} uses the other questions.</p>`;
   const KEPT = 'Your answers are kept: open the paper again later.';
-  const DUE = 'Its time is up and it cannot be marked without them. Try again soon: a paper left long past its time is put away unmarked.';
+  const due = (limit: boolean) => (limit ? 'Its time is up and it cannot be marked before then, so it will be put away unmarked.'
+    : 'Its time is up and it cannot be marked without them. Try again soon: a paper left long past its time is put away unmarked.');
   function indexMembers() {
     members = new Map();
     for (const q of byId.values()) if (q.group) (members.get(q.group) ?? members.set(q.group, []).get(q.group)!).push(q);
@@ -322,7 +323,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     } else quiz = quiz.filter((id) => !isStub(byId.get(id))); // a resumed paper or review drops them (with their picks)
     notice += ppNote(limit, mode === 'paper' ? 'paper' : 'review');
     return quiz.length ? '' : mode === 'review' ? 'Nothing to review right now. Try again later.'
-      : topUp ? 'There are not enough questions for this paper right now. Try again later.' : `${ppReason(limit)}. ${DUE}`; // only a due paper gets here
+      : topUp ? 'There are not enough questions for this paper right now. Try again later.' : `${ppReason(limit)}. ${due(limit)}`; // only a due paper gets here
   }
 
   let notice = ''; // a line shown above the start text (e.g. an old paper was put away)
@@ -492,7 +493,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     notice = ''; // this paper's own notes only (not a new paper's set up earlier on this page)
     const running = () => !handInChosen && draftState(d.clock, Date.now()) === 'live'; // a due paper is handed in with what loaded
     if (ppFailed && d.ids.some((id) => isPpId(id) && !byId.has(id))) {
-      if (running() || d.ids.every((id) => isPpId(id) || !byId.has(id))) return stop(`${ppReason(false)}. ${running() ? KEPT : DUE}`); // nothing else to hand in
+      if (running() || d.ids.every((id) => isPpId(id) || !byId.has(id))) return stop(`${ppReason(false)}. ${running() ? KEPT : due(false)}`); // nothing else to hand in
       notice = ppNote(false, 'paper');
     }
     // a bank rebuilt since the paper began may have lost a question: keep the rest

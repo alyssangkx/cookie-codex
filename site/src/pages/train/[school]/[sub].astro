@@ -67,6 +67,8 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, poolProgress, milestoneReached, slotCard, type Tier } from '../../../lib/store';
   import { rewardPreview, toEconomy, type EconomyData } from '../../../lib/crumbs';
   const s = load();
+  const root = document.querySelector<HTMLElement>('.sub-page')!;
+  const sub = root.dataset.sub!;
   /** A cleared slot never pays again: "Earned:" when it gave this card, "Cleared ✓" when it gave a star or a replacement
    * (the economy fetch below swaps a replacement in); null for a slot not cleared. */
   const paidLabel = (card: HTMLElement) => {
@@ -74,8 +76,6 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     if (!tierState(s, sub, t).cleared) return null;
     return slotCard(s, sub, t) === card.dataset.slug ? 'Earned:' : 'Cleared ✓';
   };
-  const root = document.querySelector<HTMLElement>('.sub-page')!;
-  const sub = root.dataset.sub!;
   const tries = Number(root.dataset.tries);
   const reason = dayBlock(s, 'tier');
   const playable = Object.fromEntries([...root.querySelectorAll<HTMLElement>('.tier-card')].map((c) => [c.dataset.tier, c.dataset.playable === 'true'])) as Record<Tier, boolean>;

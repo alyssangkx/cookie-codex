@@ -544,7 +544,7 @@ export function finishQuiz(
     const pct = a.total ? a.score / a.total : 0;
     st.best = Math.max(st.best, Math.round(pct * 100));
     passed = a.total >= QUIZ_SIZE && pct >= PASS;
-    const card = a.tier ? s.cards[slotCard(s, a.sub, a.tier) ?? ''] : undefined;
+    const slug = slotCard(s, a.sub, a.tier), card = slug ? s.cards[slug] : undefined;
     if (card && a.total) { card.acc = Math.round(0.7 * card.acc + 0.3 * pct * 100); card.last = now; } // practice keeps cards strong
     if (passed) {
       st.scores.push(Math.round(pct * 100));

@@ -382,6 +382,8 @@ def select(a):
                             reason = "needs-figure-no-crop"
                         elif not usable:
                             reason = "crop-unusable"
+                        elif not q.get("pages"):
+                            reason = "no-page-data"  # own_page_crops cannot tell the question's crops from misfiled ones
                         elif not good:
                             reason = "crop-other-page"
                         else:
