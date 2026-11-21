@@ -24,7 +24,7 @@ const CORS: Record<string, string> = {
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...CORS, 'content-type': 'application/json' } });
 const ID_RE = /^pp-[0-9a-f]{10}$/;
-const SIGN_TTL_S = 600;
+const SIGN_TTL_S = 7200; // figure links outlive the longest quiz or paper plus its review (600 broke images after 10 min)
 
 async function alert(name: string, reason: string, day: string) {
   const user = Deno.env.get('ALERT_SMTP_USER'), pass = Deno.env.get('ALERT_SMTP_PASS'), to = Deno.env.get('ALERT_TO');

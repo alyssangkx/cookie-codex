@@ -376,11 +376,14 @@ def select(a):
                     refers = (bool(FIG_WORDS.search(q["text"]) or FIG_LETTER.search(q["text"]) or any(FIG_LETTER.search(strip_num(o)) for o in opts))
                               if a.subject in ("science", "maths") else bool(FIG_WORDS_LANG.search(q["text"])))
                     if refers or realfig(q):
-                        good = [c for c in crops.get(q["id"], []) if crop_ok(c)]
+                        usable = [c for c in crops.get(q["id"], []) if crop_ok(c)]
+                        good = own_page_crops(usable, q.get("pages"))
                         if not crops.get(q["id"]):
                             reason = "needs-figure-no-crop"
-                        elif not good:
+                        elif not usable:
                             reason = "crop-unusable"
+                        elif not good:
+                            reason = "crop-other-page"
                         else:
                             q["_crops"] = [str(c) for c in good]
                     else:
@@ -691,8 +694,22 @@ def figures(a):
     print("crop fixes:", {k: v for k, v in stats.items() if k not in ("log", "angles")})
 
 
+def own_page_crops(crops, pages):
+    """Crops on the question's own page(s). The cropper also files crops from other parts of the paper under the same
+    question number (Booklet B q5 under Booklet A q5, 40-50 pages away; 372 of 1,250 Science items, 21 Nov 2026 tester
+    reports), so a crop counts only on a page of the question, or, without page data, within 1 page of the first crop."""
+    pg = lambda c: int(re.search(r"-p(\d+)\.png$", str(c)).group(1))
+    if not crops:
+        return []
+    own = set(pages or []) or {pg(crops[0]), pg(crops[0]) + 1}
+    return [c for c in crops if pg(c) in own]
+
+
 def selftest():
     """Synthetic checks of grow_to_whitespace and deskew (python3 load_pp.py selftest)."""
+    c3 = ["x/sci-2022-015-BookletA-q05-p0501.png", "x/sci-2022-015-BookletA-q05-p0544.png", "x/q05-p0502.png"]
+    assert own_page_crops(c3, [501, 502]) == [c3[0], c3[2]], own_page_crops(c3, [501, 502])
+    assert own_page_crops(c3, None) == [c3[0], c3[2]] and own_page_crops(c3, [544]) == [c3[1]] and own_page_crops([], [1]) == []
     import base64
     jwt = "eyJhbGciOiJIUzI1NiJ9." + base64.urlsafe_b64encode(b'{"role":"anon"}').decode().rstrip("=") + ".sig"
     assert key_kind(jwt).startswith("legacy JWT key, role anon"), key_kind(jwt)
