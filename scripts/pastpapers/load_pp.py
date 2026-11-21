@@ -1081,6 +1081,11 @@ def selftest():
     assert strip_opts(["(1) 1 焦急", "(2) 2 紧张", "(3) 3 悲伤", "(4) 4 麻烦"]) == ["焦急", "紧张", "悲伤", "麻烦"]
     assert key("焦急", ["1 焦急", "2 紧张", "3 悲伤", "4 麻烦"]) == "1"
     assert strip_opts(["1反问", "2责问", "3访问", "4发问"]) == ["反问", "责问", "访问", "发问"]
+    # third review: a printed blank line next to the bracket goes; an OCR'd "1）" option list left in the stem holds it
+    assert cloze_stem("让我这个________（1 勤劳 2 慈祥 3 慷慨 4 勇敢）的好心人来帮助你！", 17, ["1 勤劳", "2 慈祥", "3 慷慨", "4 勇敢"]) \
+        == "让我这个（17）＿＿＿＿的好心人来帮助你！"
+    assert cloze_stem("便________（1）准备 2 选择 3 参加 4 走向）了很多食物", 16, ["1 准备", "2 选择", "3 参加", "4 走向"]) is None
+    assert cloze_stem("她Q17（1 保持 2 保证 3 保留 4 保守）身体，（1 保持 Z保证 3 保留 4 保守）好。", 17, O17) is None
     assert strip_opts(["1 年", "2 年", "3 年", "4 年"]) == ["1 年", "2 年", "3 年", "4 年"]
     assert cloze_stem("负责人在接受Q17（1反问 2责问 3访问 4发问）时表示。", 17, ["1反问", "2责问", "3访问", "4发问"]) == "负责人在接受（17）＿＿＿＿时表示。"
     print("selftest ok")
@@ -1440,8 +1445,8 @@ def cloze_stem(t, n, opts=()):
     # share an option set: 的/地/得); by label alone only when the options are unknown
     pick = next((m for m in brackets if labelled(m.group(0)) and (holds(m.group(0)) if words else True)), None) \
         or next((m for m in brackets if words and not re.match(r"Q\s?\d", m.group(0)) and holds(m.group(0))), None)
-    if pick:
-        t2, k = t[:pick.start()] + ask + t[pick.end():], 1
+    if pick:  # a printed blank line next to the bracket ("这个________（1 …）") goes with it
+        t2, k = re.sub(r"[_＿]{2,}\s*$", "", t[:pick.start()]) + ask + re.sub(r"^\s*[_＿]{2,}", "", t[pick.end():]), 1
     if not k and len(re.findall(r"_{2,}|＿{2,}|[（(]\s*[)）]", t)) == 1:
         t2, k = re.subn(r"_{2,}|＿{2,}|[（(]\s*[)）]", ask, t)
     if not k:
@@ -1450,9 +1455,13 @@ def cloze_stem(t, n, opts=()):
     if re.search(r"[（(]\s*1\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*?(?<!\d)2\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*?(?<!\d)3\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*?(?<!\d)4\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*[）)]", t2):
         return None  # an unlabelled neighbouring blank: the quiz cannot number or fill it
     t2 = re.sub(r"\s+(?=[\u3400-\u9fff（，。！？＿])|(?<=[\u3400-\u9fff）＿])\s+", "", t2).strip()
-    # the automatic check: exactly the asked blank, no option bracket or question label left
-    if t2.count("＿＿＿＿") != 1 or re.search(r"Q\s?\d|根据短文|号码|填写在|[（(]\s*1\s*[.．、 ]?\s*[\u3400-\u9fff]{1,8}\s*2\s*[.．、 ]?\s*[\u3400-\u9fff]", t2):
-        return None
+    # the automatic check: exactly the asked blank; once the quiz's own blanks are taken out, no blank line, no option list
+    # (1 … 2 … 3 … 4, inside a bracket or not, however OCR'd) and no question label or instruction left
+    rest = re.sub(r"（\d{1,2}）＿＿＿＿|（\d{1,2}）＿＿", "", t2)
+    if t2.count("＿＿＿＿") != 1 or re.search(r"[_＿]", rest) or re.search(r"Q\s?\d|根据短文|号码|填写在", rest) \
+            or re.search(r"(?<!\d)1\D{1,10}?(?<!\d)2\D{1,10}?(?<!\d)3\D{1,10}?(?<!\d)4(?!\d)", rest) \
+            or any(len(re.findall(r"(?<!\d)[1-4]\s*[.．、]?\s*[\u3400-\u9fff“《]", g)) >= 3 for g in re.findall(r"[（(][^（）()]*[）)]?", rest)):
+        return None  # a bracket with 3+ numbered words is an option list even with one number misread (a date has 2)
     return t2
 
 
