@@ -13,11 +13,11 @@ Each row is a question type found in the top-school P5/P6 papers (`scripts/quiz/
 | measurement | 6 | 6 | — |
 | money | 5 | 5 | — |
 | percentage | 6 | 6 | — |
-| rate | 6 | 6 | — |
+| rate | 6 | 5 | math-pat-speed-two-runners-finish |
 | ratio | 11 | 11 | — |
 | whole | 19 | 19 | — |
 
-**106 of 106 question types covered.**
+**105 of 106 question types covered.**
 
 Not counted (outside the 2021 syllabus, which has no Speed): none
 
@@ -145,7 +145,7 @@ Not counted (outside the 2021 syllabus, which has no Speed): none
 | math-pat-speed-catch-up-meet | competent | 22 |  | meet_towards_each_other (competent) |
 | math-pat-tank-fill-drain-net-rate | competent | 21 | yes | tank_fill_drain (competent) |
 | math-pat-two-machines-rate-work | competent | 12 |  | two_machines (competent) |
-| math-pat-speed-two-runners-finish | competent | 5 |  | average_speed_two_parts (competent) |
+| math-pat-speed-two-runners-finish | competent | 5 |  | **missing** |
 
 ## ratio
 

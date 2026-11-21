@@ -560,7 +560,7 @@ export function finishQuiz(
   }
   // Crumbs for finishing (never for an abandoned quiz: that never reaches finishQuiz); bonuses come with the clears below
   earn(s, quizCrumbs(a.score, a.total, a.mode), a.mode === 'tier' ? 'quiz' : a.mode, now,
-    { test, note: a.mode === 'tier' ? `${a.sub}|${a.tier}` : a.mode === 'paper' ? (a.topics ?? []).join(',').slice(0, 120) : undefined });
+    { test, note: a.mode === 'tier' ? `${a.sub}|${a.tier ?? 'pool'}` : a.mode === 'paper' ? (a.topics ?? []).join(',').slice(0, 120) : undefined });
   earn(s, (opts.retests ?? 0) * RETEST_CRUMBS, 'retest', now, { test });
   const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test),
     ...syncMilestones(s, opts.pools ?? {}, rewardFor, now, opts.eco, test)];

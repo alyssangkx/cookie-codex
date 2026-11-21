@@ -113,8 +113,8 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     const chipState = (sub: string, t: Tier, playable: boolean, pool = 0) => {
       if (pool) { // one pool (ADR 0011): the chips are its milestones
         if (tierState(s, sub, t).cleared) return { state: 'cleared', text: `${MILESTONE_NAME[t]}: reached ✓` };
-        const m = liveMastered(tierState(s, sub, 'b'), pool, undefined);
-        return { state: m ? 'pass1' : 'open', text: `${MILESTONE_NAME[t]}: ${m} of ${pool} counted` };
+        const st0 = tierState(s, sub, 'b'), m = st0.mastered ?? 0; // stored with the live pool size (st0.total)
+        return { state: m ? 'pass1' : 'open', text: `${MILESTONE_NAME[t]}: ${m} of ${st0.total || pool} counted` };
       }
       if (!playable) return { state: 'none', text: `${TIER_NAME[t]}: no questions yet` };
       const st = tierState(s, sub, t);

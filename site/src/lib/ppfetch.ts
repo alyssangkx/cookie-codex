@@ -1,8 +1,8 @@
 // Network half of the past-paper path (pure rules in pastpaper.ts), ADR 0012: per quiz, never in bulk. fetchPool lists ids,
 // sub-topic, level and rank (no text); fetchItems gets the text and 10-minute picture URLs of the picked questions from the
 // pp-serve function, at most 15 a call, under the daily limits. Loaded with a dynamic import only while PP_ENABLED.
-// Any failure returns null (the quiz falls back or stops); null (not []) tells Daily Review not to park the past-paper
-// retests it could not load.
+// Any failure returns null; null (not []) tells Daily Review not to park the past-paper retests it could not load. The
+// quiz page then: a one-pool quiz stops; a merged tier, Daily Review and papers carry on with the generated questions.
 import { supabase, SUPABASE_URL, currentSession, callFunction } from './supabase';
 import { PP_SUBJECT, validRow, safeSignedUrl, toQ, stubOf, type PpQ, type PpStub } from './pastpaper';
 

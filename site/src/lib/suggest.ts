@@ -67,10 +67,11 @@ export function dueCount(s: SaveV1, now: number, questionSub?: Record<string, st
 export function recentAccuracy(s: SaveV1, now: number) {
   const m = new Map<string, { sub: string; tier: Tier; score: number; total: number }>();
   for (const a of s.attempts) {
-    if (a.mode !== 'tier' || a.open || !a.sub || !a.tier || !a.total) continue;
+    if (a.mode !== 'tier' || a.open || !a.sub || !a.total) continue;
     if (a.ts > now || now - a.ts > WEAK_DAYS * DAY) continue;
-    const k = `${a.sub}|${a.tier}`;
-    const e = m.get(k) ?? { sub: a.sub, tier: a.tier, score: 0, total: 0 };
+    const tier: Tier = a.tier ?? 'b'; // a one-pool quiz has no tier: its first slot stands for the whole pool
+    const k = `${a.sub}|${tier}`;
+    const e = m.get(k) ?? { sub: a.sub, tier, score: 0, total: 0 };
     e.score += a.score; e.total += a.total;
     m.set(k, e);
   }
@@ -121,12 +122,13 @@ export function suggestions(
   for (const sub of subs) {
     const hit = TIERS.find((t) => {
       const st = tierState(s, sub.id, t);
-      return canStart(sub, t) && !(sub.pool ? tierState(s, sub.id, 'c').cleared : st.cleared)
-        && liveMastered(st, sub.pool ?? sub.count?.[t], sub.pool ? undefined : sub.hash?.[t]) > 0; // a count from a replaced bank is 0
+      if (sub.pool) return canStart(sub, t) && !tierState(s, sub.id, 'c').cleared && (st.mastered ?? 0) > 0; // stored with the live size
+      return canStart(sub, t) && !st.cleared && liveMastered(st, sub.count?.[t], sub.hash?.[t]) > 0; // a count from a replaced bank is 0
     });
     if (hit) {
-      const total = sub.pool ?? sub.count![hit]; // liveMastered > 0 above means the count is known and matches the stored total
-      const m = liveMastered(tierState(s, sub.id, hit), total, sub.pool ? undefined : sub.hash?.[hit]);
+      const hs = tierState(s, sub.id, hit);
+      const total = sub.pool ? hs.total || sub.pool : sub.count![hit]; // liveMastered > 0 above means the count is known and matches
+      const m = sub.pool ? hs.mastered ?? 0 : liveMastered(hs, total, sub.hash?.[hit]);
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
         reason: sub.pool ? `${m} of ${total} past-paper questions counted.` : `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`,

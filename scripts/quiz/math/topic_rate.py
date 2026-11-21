@@ -673,7 +673,7 @@ def _(q):
 
 @template(T, "competent", FIND, calc=True)
 def average_speed_two_parts(r):
-    """math-pat-speed-two-runners-finish"""
+    """Average speed over two parts of one journey (not the two-runners pattern, which no template covers yet)."""
     while True:
         s1, s2 = r.sample(range(40, 100, 5), 2)
         t1, t2 = r.sample([1, 2, 3, 4], 2)

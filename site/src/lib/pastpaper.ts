@@ -16,13 +16,45 @@ export type PpMode = 'merge' | 'replace' | 'pool';
 
 /** Per-sub-topic switch, added in the order the imports land (Plant transport first). Ignored while PP_ENABLED is false. */
 export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
-  'sci-systems-plant-transport-parts': 'replace',
+  // Science upload, 21 Nov 2026 (owner OK): 1,250 questions 2018-2026; 'pool' at 20+ past-paper questions (ADR 0011),
+  // 'merge' below that (they join the sub-topic's generated tiers)
+  'sci-cycles-life-cycles-compare': 'pool',
+  'sci-cycles-matter-states': 'pool',
+  'sci-cycles-repro-cell': 'pool',
+  'sci-cycles-repro-plants': 'pool',
+  'sci-cycles-water-evaporation': 'pool',
+  'sci-cycles-water-states': 'pool',
+  'sci-diversity-living-classification': 'pool',
+  'sci-diversity-materials-properties': 'pool',
+  'sci-energy-conv-forms': 'pool',
+  'sci-energy-heat-effects': 'pool',
+  'sci-energy-light-seeing': 'pool',
+  'sci-energy-photo-requirements': 'pool',
+  'sci-interactions-env-adapt': 'pool',
+  'sci-interactions-env-community': 'pool',
+  'sci-interactions-env-survival': 'pool',
+  'sci-interactions-forces-effects': 'pool',
+  'sci-interactions-forces-investigate': 'pool',
+  'sci-interactions-magnet-props': 'pool',
+  'sci-systems-circuit': 'pool',
+  'sci-systems-circuit-vars': 'pool',
+  'sci-systems-digestive-parts': 'pool',
+  'sci-systems-plant-parts-fn': 'pool',
+  'sci-systems-plant-transport-parts': 'pool',
+  'sci-systems-resp-circ-parts': 'pool',
+  'sci-cycles-repro-humans': 'merge',
+  'sci-cycles-water-cycle': 'merge',
+  'sci-diversity-living-characteristics': 'merge',
+  'sci-energy-heat-temp': 'merge',
+  'sci-energy-photo-respiration': 'merge',
+  'sci-inquiry-predict-hyp': 'merge',
+  'sci-systems-air-gases': 'merge',
+  'sci-systems-human-overview': 'merge',
 };
 
 export const PP_SUBJECT = 'science';
 export const PP_BUCKET = 'pp-figures';
 export const PP_MIN_TIER = 20; // same as MIN_POOL: a smaller past-paper pool never replaces a tier, it is merged in
-export const SIGN_TTL_S = 7200; // (unused since ADR 0012: pp-serve signs 10-minute URLs; pictures load eagerly at quiz start)
 const LEVELS = ['basic', 'intermediate', 'competent'] as const;
 
 export interface PpFigure { path: string; w: number; h: number }
@@ -190,8 +222,3 @@ export function ppFigureHtml(figs: PpFig[]): string {
 export const optionLabel = (q: { numbered?: boolean }, k: number, letters = 'ABCDEFGH') =>
   q.numbered ? `(${k + 1})` : letters[k];
 
-// A partial fetch is a failure: the quiz would treat a smaller pool as complete (wrong tier totals). True only when
-// every row the RPC returned survived validation and conversion, and no figure batch failed to sign.
-export function fetchComplete(received: number, validRows: number, converted: number, signBatchErrors = 0): boolean {
-  return signBatchErrors === 0 && validRows === received && converted === received;
-}

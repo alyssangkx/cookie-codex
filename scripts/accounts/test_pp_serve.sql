@@ -50,11 +50,11 @@ select pg_temp.ok((select public.pp_serve(pg_temp.ids(1, 10)) ->> 'status' = 'ok
 select pg_temp.ok((select jsonb_array_length(public.pp_serve(pg_temp.ids(1, 10)) -> 'items') = 10), 'the same 10 again the same day');
 select pg_temp.ok((select jsonb_array_length(public.pp_serve(array['pp-4400000030']) -> 'items') = 0), 'an inactive item is not served');
 reset role;
-select pg_temp.ok((select count(*) = 11 from private.pp_served where user_id = '44444444-0000-0000-0000-0000000000c1'),
-                  'each question is logged once a day (repeats cost nothing)');
+select pg_temp.ok((select count(*) = 10 from private.pp_served where user_id = '44444444-0000-0000-0000-0000000000c1'),
+                  'each question is logged once a day (repeats and inactive ids cost nothing, 008)');
 
 -- a new account (first 7 days): 125 a day
-select pg_temp.pad('44444444-0000-0000-0000-0000000000c1', '44444444-0000-0000-0000-0000000000a1', 'aa', 110);
+select pg_temp.pad('44444444-0000-0000-0000-0000000000c1', '44444444-0000-0000-0000-0000000000a1', 'aa', 111);
 set role authenticated;
 select pg_temp.as_user('44444444-0000-0000-0000-0000000000c1');
 select pg_temp.ok((select public.pp_serve(pg_temp.ids(11, 15)) ->> 'status' = 'limit'), 'a new account is stopped past 125 a day');

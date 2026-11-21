@@ -77,9 +77,11 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   if (reason) capEl.textContent = blockMessage(reason);
   const pool = Number(root.dataset.pool) || 0;
   if (pool) { // one pool (ADR 0011): the counted share, each milestone's state, one Train button
-    const counted = liveMastered(tierState(s, sub, 'b'), pool, undefined); // syncMilestones stores the count on every slot
+    // syncMilestones stores the count and the live pool size on every slot; the build-time size may differ slightly
+    const st0 = tierState(s, sub, 'b'), total = st0.total || pool, counted = st0.mastered ?? 0;
     document.getElementById('pool-n')!.textContent = String(counted);
-    root.querySelector<HTMLElement>('.pool-fill')!.style.width = `${Math.min(100, (100 * counted) / pool)}%`;
+    root.querySelector('.pool-count')!.lastChild!.textContent = ` of ${total} past-paper questions counted`;
+    root.querySelector<HTMLElement>('.pool-fill')!.style.width = `${Math.min(100, (100 * counted) / total)}%`;
     root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
       card.querySelector('.reward-label')!.textContent = actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card';
       if (tierState(s, sub, card.dataset.tier as Tier).cleared) { card.dataset.state = 'cleared'; card.querySelector('.state')!.textContent = 'Reached ✓'; }

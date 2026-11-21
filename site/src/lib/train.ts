@@ -82,7 +82,9 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
     const count = { b: v.b.count, i: v.i.count, c: v.c.count };
     const hash = { b: v.b.usesPp ? undefined : hashOf(`${s.id}|b`), i: v.i.usesPp ? undefined : hashOf(`${s.id}|i`),
       c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
-    const pool = ppMode(s.id) === 'pool' && ppTotal(s.id) >= MIN_POOL ? ppTotal(s.id) : undefined;
+    if (ppMode(s.id) === 'pool' && ppTotal(s.id) < MIN_POOL) // mergePool drops a pool sub-topic's generated questions
+      throw new Error(`train.ts: ${s.id} is 'pool' in PP_SWITCH with ${ppTotal(s.id)} past-paper questions (needs ${MIN_POOL}); use 'merge'`);
+    const pool = ppMode(s.id) === 'pool' ? ppTotal(s.id) : undefined;
     return {
       ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool } : {}),
       // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier

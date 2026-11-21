@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, fetchComplete, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -12,13 +12,13 @@ const row = (over: Partial<PpRow> = {}): PpRow => ({
 });
 const signedFor = (p: string) => `${SB}/storage/v1/object/sign/pp-figures/${p}?token=abc.def`;
 
-test('the master switch is ON (20 Nov 2026), and Plant transport is first in the switch order', () => {
+test('the master switch is ON; the Science upload (21 Nov 2026) puts 20+ sub-topics in one pool, smaller ones merge', () => {
   assert.equal(PP_ENABLED, true);
-  assert.equal(Object.keys(PP_SWITCH)[0], 'sci-systems-plant-transport-parts');
+  assert.ok(Object.values(PP_SWITCH).every((m) => m === 'pool' || m === 'merge'));
   assert.equal(ppMode('sci-systems-plant-transport-parts', false), null); // nothing while the flag is off
-  assert.equal(ppMode('sci-systems-plant-transport-parts'), 'replace');
-  assert.equal(ppMode('sci-systems-plant-transport-parts', true), 'replace');
-  assert.equal(ppMode('sci-systems-circuit', true), null);
+  assert.equal(ppMode('sci-systems-plant-transport-parts'), 'pool');
+  assert.equal(ppMode('sci-cycles-water-cycle'), 'merge'); // 9 past-paper questions: merged into its tiers
+  assert.equal(ppMode('math-rate-rate'), null); // Maths has no past-paper questions on the site yet
 });
 
 test('which sub-topics a quiz fetches', () => {
@@ -174,14 +174,6 @@ test('tierPoolIds: a failed pp fetch reports nothing for a switched sub-topic, s
   const gen = [...mk('g', 30, 's'), ...mk('h', 30, 'plain')];
   const out = tierPoolIds(gen, [], (s) => (s === 's' ? 'replace' : null), true);
   assert.deepEqual(Object.keys(out), ['plain|basic']);
-});
-
-test('fetchComplete: any dropped row or failed signing batch makes the fetch a failure', () => {
-  assert.equal(fetchComplete(5, 5, 5), true);
-  assert.equal(fetchComplete(0, 0, 0), true);
-  assert.equal(fetchComplete(5, 4, 4), false); // validRow rejected one
-  assert.equal(fetchComplete(5, 5, 4), false); // toQ returned null
-  assert.equal(fetchComplete(5, 5, 5, 1), false); // a createSignedUrls batch errored
 });
 
 test('stubs (ADR 0012): ids, sub-topic, level and rank only; anything malformed is refused', () => {

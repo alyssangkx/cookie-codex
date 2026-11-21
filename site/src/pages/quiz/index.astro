@@ -287,6 +287,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       return '';
     }
     const limit = r.error === 'daily_limit';
+    if (mode === 'tier' && !POOL) { // a merged tier: carry on with its generated questions
+      ppFailed = true;
+      const gen = genAll.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
+      quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, [], undefined);
+      notice += `<p class="note">${limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load'}, so this quiz uses the other questions.</p>`;
+      return quiz.length >= QUIZ_SIZE ? '' : 'This tier does not have enough questions right now. Try again later.';
+    }
     if (mode === 'tier') {
       return limit ? 'You have answered a lot of past-paper questions today. They open again tomorrow.'
         : 'Past-paper questions could not load. Check your connection and try again.';
@@ -469,7 +476,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       return stop("That paper's questions have changed since you started it. Please build a new paper.", '<a href="/paper/">Build a paper</a>');
     }
     quiz = keep.map(([id]) => id);
-    picks = keep.map(([id, p]) => (typeof p === 'number' && p >= 0 && p < byId.get(id)!.options.length ? p : null));
+    // past-paper questions are stubs after the reload (ADR 0012): fetch them, or drop them with their picks
+    try { const why = await hydrate(); if (why) return stop(why); } catch (e) { return stop((e as Error).message); }
+    const left = keep.filter(([id]) => quiz.includes(id));
+    picks = left.map(([id, p]) => (typeof p === 'number' && p >= 0 && p < byId.get(id)!.options.length ? p : null));
     pclock = { ...d.clock, pauseTaken: d.clock.pauseTaken ?? (d.clock.pauseUsed > 0 || !!d.clock.pausedAt) };
     startedAt = d.ts; mins = d.mins;
     $('title').textContent = 'Practice paper (resumed)';
@@ -821,7 +831,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     paperUsed = timeUsed(pclock, startedAt, now);
     const res = finishQuiz(s, {
       mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, now, {}, startedAt, { eco, retests, pools: pools(), paperTopics: quiz.map((id) => byId.get(id)!.topic ?? '').filter(Boolean) }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
+    }, rewardFor, now, {}, startedAt, { eco, retests, paperTopics: quiz.map((id) => byId.get(id)!.topic ?? '').filter(Boolean) }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
     closeStalePapers(s, now);
     save(s);
     const b = blanks(picks);
