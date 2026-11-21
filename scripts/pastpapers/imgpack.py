@@ -123,7 +123,8 @@ def build(a):
                 items.append(f'<div class="q"><b>Q{n}.</b> <i>(paper question {q["qno"]})</i> {html.escape(q["text"])}{opts}</div>')
             body.append(f"<section><h2>SET {si} (questions Q{n - len(qs) + 1}-Q{n})</h2>"
                         + "".join(f'<img src="img/{x}">' for x in imgs) + f"<h3>Questions for SET {si}</h3>" + "".join(items) + "</section>")
-        page = ('<!doctype html><html><head><meta charset="utf-8"><title>Visual Text Pack</title><style>'
+        title = "Visual Text Pack" if subject == "english" else "Chinese Passage Pack"
+        page = (f'<!doctype html><html><head><meta charset="utf-8"><title>{title}</title><style>'
                 "body{font:14px/1.4 Arial,sans-serif;margin:24px} section{page-break-before:always} h3{page-break-before:avoid}"
                 "img{display:block;max-width:100%;max-height:24.5cm;margin:0 auto 4px;border:1px solid #ccc;page-break-after:always}"
                 ".q{margin:10px 0;page-break-inside:avoid} h2{font-size:18px}</style></head><body>"
@@ -191,9 +192,15 @@ def score(a):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
-        for y, vs in sorted(verdicts.items()):
+        if len(models) < 3:
+            sys.exit("--write needs 3 or more models (owner rule: unanimous outside models)")
+        # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
+        # leave a stale replace behind)
+        stale = {i for i in ids if bl[i].get("agree") is not True} - {v["id"] for vs in verdicts.values() for v in vs}
+        for y in sorted(set(verdicts) | {year[i] for i in stale}):
+            vs = verdicts.get(y, [])
             f = BLIND / "consensus" / f"{subject}-{y}.jsonl"
-            have = {v["id"]: v for v in jl(f)}
+            have = {v["id"]: v for v in jl(f) if v["id"] not in stale}
             have.update({v["id"]: v for v in vs})
             f.write_text("".join(json.dumps(v, ensure_ascii=False) + "\n" for v in have.values()), encoding="utf-8")
         print("wrote", sum(map(len, verdicts.values())), "verdicts to", BLIND / "consensus")
