@@ -778,6 +778,9 @@ def figures(a):
     print(f"held (crop still cut off): {len(unresolved)} new, {len(keep)} kept -> {hc}")
     for it in stats["log"]:
         print("grown", it[0], f"crop{it[1]}", it[2])
+    toobig = sorted({m["path"] for m in man if m["bytes"] > FIG_MAX})
+    if toobig:  # compress() stops shrinking at 520 px wide; such a picture cannot be uploaded: hold its item by hand
+        sys.exit(f"{len(toobig)} pictures still over the bucket's {FIG_MAX // 1024} KB limit: {', '.join(toobig[:5])}")
     over = sum(m["bytes"] > a.target_kb * 1024 for m in man)
     print(f"{len(man)} figures, {tot / 1e6:.1f} MB, mean {tot / max(len(man), 1) / 1024:.1f} KB, over target {over}, modes {dict(modes)}")
     hist = collections.Counter(a for _, a in stats["angles"])
@@ -1202,9 +1205,10 @@ def poster_pieces(pages, own_min):
     text = lambda r: " ".join(w[4] for w in r[2])
     num = lambda r, W: int(m.group(1)) if (m := QROW.match(r[2][0][4])) and r[2][0][0] < 0.25 * W else None
     rng = lambda r: int(m.group(1)) if (m := QRANGE.search(text(r))) else None
-    S = max((n for _, r, _, _ in flat if (n := rng(r)) and 15 <= n <= own_min), default=None) \
+    # a range below 21 is the previous section's ("questions 16 to 20"): never this one's
+    S = max((n for _, r, _, _ in flat if (n := rng(r)) and 21 <= n <= own_min), default=None) \
         or min((n for _, r, W, _ in flat if (n := num(r, W)) and 21 <= n <= own_min and len(r[2]) >= 3), default=None)
-    if not S or S < 21:  # a range before 21 is the previous section's (a misread visual-text range): held, not cut there
+    if not S:
         return None, "set-no-cut"
     # start: the section's instruction (a range in it must be this section's), else after the previous section's options
     # an instruction's range may wrap onto its next line ("... and answer / questions 21 to 25.")
@@ -1281,9 +1285,14 @@ def set_pages(rows, out):
         # a second text inside the set's questions ("answer questions 27 to 28" on a later page): its questions would show
         # the first text's poster, so the set is held
         seqs = [r["seq"] for r in rs]
-        later = [n for p in range(max(1, pages[0] - 3), pages[-1] + 1) for v in [page_lines(pdir / f"p{p:04d}.jpg")] if v
-                 for row in v[0] if (n := int(m.group(1)) if (m := QRANGE.search(" ".join(w[4] for w in row[2]))) else 0)
-                 and min(seqs) < n <= max(seqs)]
+        later = []
+        for p in range(max(1, pages[0] - 3), pages[-1] + 1):
+            v = page_lines(pdir / f"p{p:04d}.jpg")
+            lines = [" ".join(w[4] for w in row[2]) for row in v[0]] if v else []
+            for i in range(len(lines)):  # each row with the next: a range may wrap ("questions" / "26 to 28")
+                m = QRANGE.search(" ".join(lines[i:i + 2]))
+                if m and min(seqs) < int(m.group(1)) <= max(seqs):
+                    later.append(int(m.group(1)))
         if later:
             for r in rs:
                 rows.remove(r)
@@ -1373,6 +1382,9 @@ def upload(a):
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
         sys.exit(f"nothing selected under {a.out}/{a.subject} for those sub-topics: wrong --out? "
                  "(the 2025-26 import lives in /data/alvin/tmp/cookie-codex/ppimport/final2526)")
+    big = sorted({f["path"] for d in db for f in d["figures"] if (out / "figures" / Path(f["path"]).name).stat().st_size > FIG_MAX})
+    if big:  # checked before anything is sent, dry run included: a half-sent upload leaves pictures without rows
+        sys.exit(f"{len(big)} pictures exceed the bucket's {FIG_MAX // 1024} KB limit (e.g. {big[0]}): re-run `figures`")
     url, k = os.environ.get("SUPABASE_URL", "").rstrip("/"), os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
     if not a.apply and not (url and k):
         print("dry run: nothing sent; deactivations not counted (no Supabase env); "
@@ -1401,9 +1413,6 @@ def upload(a):
         print("dry run: nothing sent (add --apply after the owner's go-ahead)")
         return
     fdir = out / "figures"
-    big = sorted({f["path"] for d in db for f in d["figures"] if (fdir / Path(f["path"]).name).stat().st_size > FIG_MAX})
-    if big:  # checked before anything is sent: a half-sent upload leaves pictures without rows
-        sys.exit(f"{len(big)} pictures exceed the bucket's {FIG_MAX // 1024} KB limit (e.g. {big[0]}): re-run `figures`")
     sent = set()  # a passage set's pages are shared by its questions: send each file once
     for d in db:
         for f in d["figures"]:
