@@ -47,8 +47,9 @@ export function pickTier(
 
 /** A one-pool sub-topic's quiz (ADR 0011): `ids` are its past-paper questions easier-first (pp_pool order). Due retests
  *  first (at most 3), then new questions in that order, then not-due retests, then counted ones again. */
-export const pickPool = (ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now()) =>
-  pickTier(ids, seen, size, now, Math.random, [], undefined, true);
+export const pickPool = (ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now(),
+  passage?: (id: string) => { group: string; seq: number } | undefined) =>
+  pickTier(ids, seen, size, now, Math.random, [], passage, true); // a passage set is asked whole and in order
 
 /**
  * Passage sub-topics (cloze, reading): a quiz is whole passages, read once, questions in order.

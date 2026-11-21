@@ -144,3 +144,20 @@ test('pickPool: due retests first, then new questions easier-first (no shuffle),
   assert.deepEqual(q.slice(1), ids.slice(2, 11));    // then the easiest unseen ones, in order
   assert.ok(!q.includes(ids[0]) && !q.includes(ids[26]));
 });
+
+test('pickPool with passage sets: whole sets, each in paper order (migration 010)', () => {
+  // three visual-text sets of 4, easier-first order interleaves them
+  const sets: Record<string, { group: string; seq: number }> = {};
+  const ids: string[] = [];
+  for (const g of ['a', 'b', 'c']) for (let k = 1; k <= 4; k++) { const id = `${g}${k}`; sets[id] = { group: g, seq: 20 + k }; }
+  for (let k = 1; k <= 4; k++) for (const g of ['c', 'a', 'b']) ids.push(`${g}${k}`);
+  const q = pickPool(ids, {}, 8, Date.now(), (id) => sets[id]);
+  assert.equal(q.length, 8);
+  const groups = [...new Set(q.map((id) => sets[id].group))];
+  assert.equal(groups.length, 2); // two whole sets of 4, not pieces of three
+  for (const g of groups) {
+    const mine = q.filter((id) => sets[id].group === g);
+    assert.equal(mine.length, 4);
+    assert.deepEqual(mine.map((id) => sets[id].seq), [21, 22, 23, 24]);
+  }
+});

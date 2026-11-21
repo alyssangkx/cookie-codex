@@ -220,9 +220,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const many = q.sub === 'chi-dialogue-mcq';
     const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal) : fmt(q.stem);
     return ppBadge(q) + t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '')
-      + (q.ppFigs?.length ? `<span class="qfig-wrap">${ppFigureHtml(q.ppFigs)}</span>` : '');
+      + (q.ppFigs?.length ? `<span class="qfig-wrap${q.group ? ' qfig-set' : ''}">${ppFigureHtml(q.ppFigs, laterInSet(q))}</span>` : '');
   };
 
+  /** A question of a passage set after the set's first one in this quiz: its pages were already shown in full. */
+  const laterInSet = (q: Q) => !!q.group && quiz.indexOf(q.id) > quiz.findIndex((id) => byId.get(id)?.group === q.group);
   let byId = new Map<string, Q>();
   let members = new Map<string, Q[]>(); // passage group -> its questions (built once per quiz, not per render)
   let inQuiz = new Set<string>(); // ids in the current quiz
@@ -372,7 +374,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const cur = syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
       if (POOL) {
         if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
-        quiz = pickPool(easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]), cur.questions, QUIZ_SIZE);
+        quiz = pickPool(easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]), cur.questions, QUIZ_SIZE,
+          Date.now(), passage);
         if (quiz.length < QUIZ_SIZE) return stop('This topic does not have enough questions yet.');
       } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
@@ -1162,6 +1165,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     font: 700 0.85rem/1.2 var(--font-display); color: #1a1a1a; background: rgb(255 255 255 / 0.9); border: 1px solid #1a1a1a;
     max-width: 45%; text-align: center; overflow-wrap: anywhere; }
   .quiz .qfig-wrap svg { width: 100%; height: auto; display: block; }
+  /* a passage set's exam pages: as wide as the page allows (a full exam page at 380px cannot be read), one under another */
+  .quiz .qfig-wrap.qfig-set { max-width: 760px; }
+  .quiz .qfig-set .qfig-pp { margin: 0 0 0.5rem; }
+  .quiz .qfig-set .qfig-pp img { border: 1px solid var(--crust); }
+  .quiz .qfig-again summary { cursor: pointer; font-weight: 700; color: var(--berry); line-height: 1.4; padding: 0.35rem 0; }
+  .quiz .qfig-again[open] summary { margin-bottom: 0.4rem; }
   .quiz .per-topic { border-collapse: collapse; margin: 0.5rem 0 1rem; }
   .quiz .per-topic td, .quiz .per-topic th { border-bottom: 1px solid var(--crust); padding: 0.25rem 0.75rem 0.25rem 0; text-align: left; }
   /* papers: answer sheet, pause, free navigation; the result line; the wrong-answer review */

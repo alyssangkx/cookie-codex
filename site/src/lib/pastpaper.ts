@@ -54,6 +54,8 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   // keys confirmed by the blind check or by owner-approved outside-model consensus
   'eng-grammar-mcq': 'pool',
   'eng-vocab-mcq': 'pool',
+  // English visual text (passage phase, 21 Nov 2026): 481 questions in 122 sets, each set shown with its exam pages
+  'eng-visual-text': 'pool',
   // Chinese upload (owner OK, 21 Nov 2026): single-item MCQs (a blank or pinyin options); keys confirmed by the blind check
   // or owner-approved outside-model consensus. Cloze, reading and dialogue wait for the passage phase.
   'chi-ciyu-choose': 'pool',
@@ -111,6 +113,7 @@ export interface PpFigure { path: string; w: number; h: number }
 export interface PpRow {
   id: string; subtopic: string; level: (typeof LEVELS)[number]; pattern: string | null; stem: string;
   options: string[]; answer: number; figures: PpFigure[]; year: number | null;
+  grp?: string | null; seq?: number | null; // a passage set (migration 010): its id and the question's place in it
 }
 /** A signed, checked picture ready for an <img>. */
 export interface PpFig { src: string; w: number; h: number }
@@ -122,18 +125,23 @@ export interface PpQ {
   ppFigs: PpFig[];
   ppYear: number | null;
   calc?: false; // Maths: PSLE-style MCQs sit in Paper 1 (no calculator), so the quiz shows its "No calculator" badge
+  group?: string; seq?: number; // a passage set: asked whole and in order, its pages shown once (migration 010)
 }
+const SET_ID = /^[a-z0-9-]{3,80}$/;
+/** A passage set's id and position from a pool or content row; nothing for a single question or anything odd. */
+const setOf = (r: { grp?: unknown; seq?: unknown }) => typeof r.grp === 'string' && SET_ID.test(r.grp) && Number.isInteger(r.seq)
+  && (r.seq as number) >= 1 && (r.seq as number) <= 99 ? { group: r.grp, seq: r.seq as number } : {};
 
 /** A past-paper question known only by id until the quiz has picked it (ADR 0012): sub-topic, level and easier-first
  * rank from pp_pool. Shaped like a PpQ (4 placeholder options so paper filters keep it) and replaced by the real
  * question (hydrate) before it is shown. */
 export type PpStub = PpQ & { stub: true; ord: number | null };
-export function stubOf(r: { id: unknown; subtopic: unknown; level: unknown; ord?: unknown }, topic?: string): PpStub | null {
+export function stubOf(r: { id: unknown; subtopic: unknown; level: unknown; ord?: unknown; grp?: unknown; seq?: unknown }, topic?: string): PpStub | null {
   if (typeof r.id !== 'string' || !isPpId(r.id) || typeof r.subtopic !== 'string' || !SUBTOPIC_ID.test(r.subtopic)
     || !LEVELS.includes(r.level as PpRow['level'])) return null;
   return { id: r.id, sub: r.subtopic, level: r.level as string, topic, stem: '', options: ['', '', '', ''], answer: 0,
     explain: [null, null, null, null], solution: [], numbered: true, ppFigs: [], ppYear: null, stub: true,
-    ord: Number.isInteger(r.ord) ? (r.ord as number) : null };
+    ord: Number.isInteger(r.ord) ? (r.ord as number) : null, ...setOf(r) };
 }
 export const isStub = (q: unknown): q is PpStub => !!q && (q as PpStub).stub === true;
 /** A one-pool sub-topic (ADR 0011). */
@@ -230,6 +238,7 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
     solution: [], numbered: true, ppFigs: figs,
     ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,
     ...(r.subtopic.startsWith('math-') ? { calc: false as const } : {}), // every past-paper Maths MCQ is Paper 1 (owner, 21 Nov 2026)
+    ...setOf(r),
   };
 }
 
@@ -281,9 +290,13 @@ export function ppBadge(q: { ppYear?: number | null; numbered?: boolean }): stri
 }
 
 /** The pictures under the stem. Sources must already have passed safeSignedUrl. */
-export function ppFigureHtml(figs: PpFig[]): string {
-  return figs.map((f) => `<span class="qfig-art qfig-pp"><img src="${esc(f.src)}" width="${f.w}" height="${f.h}" `
-    + `alt="Picture for this question" loading="eager" decoding="async" referrerpolicy="no-referrer"></span>`).join('');
+export function ppFigureHtml(figs: PpFig[], again = false): string {
+  // a tap opens the page full size, where a phone can zoom it (passage pages are dense)
+  const imgs = figs.map((f) => `<a class="qfig-art qfig-pp" href="${esc(f.src)}" target="_blank" rel="noopener noreferrer" `
+    + `aria-label="Open this picture full size"><img src="${esc(f.src)}" width="${f.w}" height="${f.h}" `
+    + `alt="Picture for this question" loading="eager" decoding="async" referrerpolicy="no-referrer"></a>`).join('');
+  // a later question of a passage set: the pages were shown with its first question, so they wait behind a tap
+  return again ? `<details class="qfig-again"><summary>Show the pages again</summary>${imgs}</details>` : imgs;
 }
 
 /** Option label: (1)-(4) for past-paper items, whose pictures and options say (1)-(4); else the page's letters. */

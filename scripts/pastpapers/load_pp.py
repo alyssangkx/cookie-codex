@@ -355,9 +355,15 @@ def select(a):
         for q in merged:
             if q.get("format") != "mcq":
                 continue
+            vt = a.passage == "english-visual"
+            if vt and not (isinstance(q.get("qno"), int) and 21 <= q["qno"] <= 30
+                           and ((tags.get(q["id"]) or {}).get("st") == "eng-visual-text" or q.get("section") == "Visual Text")):
+                continue  # passage mode takes only the visual-text section
             opts = q.get("options") or []
             k = key(q.get("answer"), opts) if len(opts) == 4 else None
             t = tags.get(q["id"]) or {}
+            if vt:
+                t = dict(t, st="eng-visual-text")  # the section, whatever the tagger filed it under
             reason = None
             ok, full = ocrk.get((q.get("paper"), q.get("qno")), (None, False))
             src = "vision"
@@ -414,12 +420,12 @@ def select(a):
                     second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
-                reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None) \
+                reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" and not vt else None) \
                     or ("tex-left" if any(re.search(r"\\|\^|[\x00-\x08\x0b\x0c\x0e-\x1f]", tex_to_text(x)) for x in [q.get("text") or "", *opts]) else None) \
                     or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
                 # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
-                if not reason and a.subject == "english" and (not isinstance(q.get("qno"), int) or q["qno"] > 15
+                if not reason and a.subject == "english" and not vt and (not isinstance(q.get("qno"), int) or q["qno"] > 15
                                                               or re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)):
                     reason = "eng-passage-section"
                 if not reason and t.get("st") not in subs:
@@ -435,7 +441,11 @@ def select(a):
                     # bare two-cell table rows ("Sound, None") mean the column headings are in the picture: the table is
                     # needed (tester report 21 Nov: pp-87af45c055 "Useful energy | Wasted energy" shipped without it)
                     refers = refers or (a.subject == "science" and table_rows(opts))
-                    if refers or realfig(q):
+                    if vt:  # the set's pages are its picture (set_pages below); no crop of its own
+                        q["_crops"] = []
+                        if not q.get("pages"):
+                            reason = "no-page-data"
+                    elif refers or realfig(q):
                         usable = [c for c in crops.get(q["id"], []) if crop_ok(c)]
                         good = own_page_crops(usable, q.get("pages"))
                         if not crops.get(q["id"]):
@@ -464,11 +474,14 @@ def select(a):
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
                 "stem": tex_to_text(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip()),
                 "options": [tex_to_text(strip_num(o)) for o in opts], "answer": int(k) - 1,
+                **({"grp": set_id(q), "seq": q["qno"], "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                 "blind_src": (cv.get("src", "consensus") if cv_ok else (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
                               else "second:vl2-fullres+text72-ocr"),
             })
+    if a.passage:
+        set_pages(rows)
     ids = [r["id"] for r in rows]
     assert len(ids) == len(set(ids)), "pp id collision"
     with open(out / "selected.jsonl", "w") as f:
@@ -716,8 +729,20 @@ def figures(a):
     tmpd.mkdir(exist_ok=True)
     unresolved = {}  # pp id -> figure numbers still touching an edge
     seen = set()  # ids re-checked by this run
+    done_sets = {}
     for r in jl(out / "selected.jsonl"):
         seen.add(r["id"])
+        if r.get("set_pages"):  # a passage set: its pages, stored once under the set's first question
+            if r["set_owner"] not in done_sets:
+                done_sets[r["set_owner"]] = []
+                for n, pg in enumerate(r["set_pages"], 1):
+                    name = f"{r['set_owner']}-{n}.webp"
+                    w, h, b, mode = compress(Path(pg), fdir / name, 1400, 220 * 1024)
+                    done_sets[r["set_owner"]].append({"path": f"{a.subject}/{name}", "w": w, "h": h, "bytes": b})
+                    tot += b
+                    modes[mode] += 1
+            man += [{"pp_id": r["id"], **m} for m in done_sets[r["set_owner"]]]
+            continue
         for n, c in enumerate(r["crops"], 1):
             name = f"{r['id']}-{n}.webp"
             fixed = tmpd / f"{r['id']}-{n}.png"
@@ -1105,6 +1130,44 @@ EATEN = re.compile("\x0c(rac)|\x09(ext|frac|imes|heta|riangle|extrm)|\x0d(ight)|
 EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b", "\x0b": "v"}
 
 
+def set_id(q) -> str:
+    """A passage set's id (pp_items.grp): the paper and part, plus the section."""
+    return re.sub(r"[^a-z0-9]+", "-", f"{q.get('paper')}-{q.get('part') or ''}-vt".lower()).strip("-")[:80]
+
+
+def set_pages(rows):
+    """Every question of a set shows the same pages: from two pages before the set's first question page (the poster or
+    passage, which may run over two pages) to its first question page. Sets of one question, and sets whose questions spread
+    over more than 5 pages (bad page data), are dropped."""
+    by = collections.defaultdict(list)
+    for r in rows:
+        if r.get("grp"):
+            by[r["grp"]].append(r)
+    for g, rs in by.items():
+        if len(rs) < 2:
+            for r in rs:
+                rows.remove(r)
+            continue
+        pages = sorted({p for r in rs for p in r["pages"]})
+        pdir = Path(rs[0]["pages_dir"])
+        if pages[-1] - pages[0] > 4:  # a visual text and its questions fit in a few pages: a longer span is bad page data
+            for r in rs:
+                rows.remove(r)
+            continue
+        # the poster (up to two pages before the questions) and the first question page, which may hold its end; later
+        # question pages carry only questions, which the quiz shows as text
+        span = [p for p in range(max(1, pages[0] - 2), pages[0] + 1) if (pdir / f"p{p:04d}.jpg").exists()]
+        if not span:
+            for r in rs:
+                rows.remove(r)
+            continue
+        first = min(rs, key=lambda r: (r["seq"], r["id"]))["id"]
+        for r in rs:
+            r["set_pages"] = [str(pdir / f"p{p:04d}.jpg") for p in span]
+            r["set_owner"] = first  # the pages are stored once, under the set's first question
+            r.pop("pages_dir", None)
+
+
 def tex_to_text(t: str) -> str:
     """LaTeX in an OCR'd stem or option as plain text, the way the site writes Maths ("3/5", "2 1/3", "×", "°"): the owner's
     report of 21 Nov 2026 ("\\frac{3}{4}" shown raw; 359 Maths items). Money "$" is left alone. Anything it cannot turn into
@@ -1157,7 +1220,8 @@ def upload(a):
     db = [{"id": r["id"], "src_id": r["src_id"], "subject": r["subject"], "subtopic": r["subtopic"], "level": r["level"],
            "pattern": r["pattern"], "stem": r["stem"], "options": r["options"], "answer": r["answer"],
            "figures": figs[r["id"]], "year": r["year"], "school": r["school"], "paper": r["paper"],
-           "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "ord": ord_[r["id"]], "active": True} for r in rows]
+           "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "ord": ord_[r["id"]], "active": True,
+           "grp": r.get("grp"), "seq": r.get("seq")} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
     print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}")
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
@@ -1191,8 +1255,12 @@ def upload(a):
         print("dry run: nothing sent (add --apply after the owner's go-ahead)")
         return
     fdir = out / "figures"
+    sent = set()  # a passage set's pages are shared by its questions: send each file once
     for d in db:
         for f in d["figures"]:
+            if f["path"] in sent:
+                continue
+            sent.add(f["path"])
             body = (fdir / Path(f["path"]).name).read_bytes()
             r = s.post(f"{url}/storage/v1/object/{BUCKET}/{f['path']}", data=body,
                        headers={"content-type": "image/webp", "x-upsert": "true", "cache-control": "3600"}, timeout=60)
@@ -1265,6 +1333,7 @@ def main():
     p.add_argument("--ocr-keys", action="store_true", help="select: use <year>/anskey_ocr.jsonl as a fallback key source")
     p.add_argument("--reread-keys", action="store_true", help="select: use agreed <year>/ansreread/ cells (ans_reread.py) as a fallback key source, answer_src 'vision-reread'")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
+    p.add_argument("--passage", choices=("", "english-visual"), default="", help="select: passage sets instead of single questions")
     a = p.parse_args()
     {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "where": where, "selftest": lambda _a: selftest()}[a.cmd](a)
 

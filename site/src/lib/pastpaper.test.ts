@@ -240,3 +240,12 @@ test('a long Maths sub-topic id (103 characters, migration 009) passes the stub 
   assert.ok(stubOf({ id: 'pp-0123456789', subtopic: sub, level: 'basic', ord: 1 }));
   assert.ok(validRow({ id: 'pp-0123456789', subtopic: sub, level: 'basic', stem: 'x', options: ['a', 'b', 'c', 'd'], answer: 0, figures: [], year: 2024 }));
 });
+
+test('a pool row carries its passage set (migration 010); odd set values are ignored', () => {
+  const st = stubOf({ id: 'pp-0123456789', subtopic: 'eng-visual-text', level: 'basic', ord: 3, grp: 'eng-2023-001-paper-2-vt', seq: 23 });
+  assert.equal(st?.group, 'eng-2023-001-paper-2-vt');
+  assert.equal(st?.seq, 23);
+  const odd = stubOf({ id: 'pp-0123456789', subtopic: 'eng-visual-text', level: 'basic', grp: 'Bad Set!', seq: 0 });
+  assert.equal(odd?.group, undefined);
+  assert.equal(stubOf({ id: 'pp-0123456789', subtopic: 'eng-grammar-mcq', level: 'basic', grp: null, seq: null })?.group, undefined);
+});
