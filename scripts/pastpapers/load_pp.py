@@ -106,8 +106,8 @@ def key(a, opts):
     m = re.fullmatch(r"\(?([A-Da-d])\)?", a)
     if m:
         return str("ABCD".index(m.group(1).upper()) + 1)
-    for i, o in enumerate(opts, 1):
-        if strip_num(o) == a:
+    for i, o in enumerate(strip_opts(opts), 1):
+        if o == a:
             return str(i)
     return None
 
@@ -120,9 +120,14 @@ def strip_num(o: str) -> str:
 def strip_opts(opts):
     """strip_num on each option, and "1 获得" (a number and a space) only when the four options are numbered 1-4 in order
     (owner sample, 21 Nov 2026: "(1) 1 焦急"); an unlabelled "3 天" keeps its number."""
-    if len(opts) == 4 and all(re.match(rf"^\s*{i}\s+\S", o or "") for i, o in enumerate(opts, 1)):
-        opts = [re.sub(r"^\s*[1-4]\s+", "", o) for o in opts]
-    return [strip_num(o) for o in opts]
+    opts = [strip_num(o) for o in opts]
+    # "1 获得" or "1反问": a number before a Chinese word (or after a space), all four in order 1-4; never when that would
+    # leave four equal options (a real "1 年 / 2 年 / 3 年 / 4 年")
+    if len(opts) == 4 and all(re.match(rf"^{i}(?:\s+\S|\s*[\u3400-\u9fff])", o) for i, o in enumerate(opts, 1)):
+        bare = [re.sub(r"^[1-4]\s*", "", o) for o in opts]
+        if len(set(bare)) == 4:
+            opts = bare
+    return opts
 
 
 def realfig(q):
@@ -188,7 +193,7 @@ def garbled(text: str, opts) -> str | None:
         return "text-low-alpha"
     if re.search(r"([A-Za-z])\1{4,}", t):
         return "text-letter-run"
-    s = [strip_num(o) for o in opts]
+    s = strip_opts(opts)
     if all(x == "" for x in s):
         return "options-in-picture"
     if any(x == "" for x in s) or len(set(s)) < 4:
@@ -1067,6 +1072,17 @@ def selftest():
                  (1300, "Q22根据短文，下面 哪一项 是 正确的？"), (1360, "(1) 甲"), (1410, "(2) 乙"), (1460, "(3) 丙"), (1510, "(4) 丁")])}
     pc, why = chi_pieces(R, "chinese-reading", 21, 25)
     assert why is None and pc == [(9, 92, 892)], (pc, why)
+    O17 = ["1 保持", "2 保证", "3 保留", "4 保守"]
+    assert cloze_stem("根据短文的内容，选出适当的词语，把它的号码填写在括号内。她总是Q17（1 保持 2 保证 3 保留 4 保守）身体健康。", 17, O17) \
+        == "她总是（17）＿＿＿＿身体健康。"
+    assert cloze_stem("他走Q16（1 的 2 地 3 得 4 了）很快，Q17（1 的 2 地 3 得 4 了）开心", 17, ["1 的", "2 地", "3 得", "4 了"]) \
+        == "他走（16）＿＿很快，（17）＿＿＿＿开心"
+    assert cloze_stem("那天（1月4日）她总是Q17（1 保持 2 保证 3 保留 4 保守）身体健康。", 17, O17) == "那天（1月4日）她总是（17）＿＿＿＿身体健康。"
+    assert strip_opts(["(1) 1 焦急", "(2) 2 紧张", "(3) 3 悲伤", "(4) 4 麻烦"]) == ["焦急", "紧张", "悲伤", "麻烦"]
+    assert key("焦急", ["1 焦急", "2 紧张", "3 悲伤", "4 麻烦"]) == "1"
+    assert strip_opts(["1反问", "2责问", "3访问", "4发问"]) == ["反问", "责问", "访问", "发问"]
+    assert strip_opts(["1 年", "2 年", "3 年", "4 年"]) == ["1 年", "2 年", "3 年", "4 年"]
+    assert cloze_stem("负责人在接受Q17（1反问 2责问 3访问 4发问）时表示。", 17, ["1反问", "2责问", "3访问", "4发问"]) == "负责人在接受（17）＿＿＿＿时表示。"
     print("selftest ok")
 
 
@@ -1368,23 +1384,20 @@ def chi_reading_pieces(pages, flat, first, last):
     text = lambda r: "".join(w[4] for w in r[2])
     # a question line: "Q21…"/"021…" (any OCR'd number, "Q2l" too) or "21." — never a bare "22岁那年…" passage line
     isq = lambda k: not CHI_RANGE.search(text(flat[k][1])) and bool(
-        re.match(r"^\W{0,2}[QO0]\s?2\S", text(flat[k][1]))  # "Q21", "Q2l", "021": a 2 after the Q (questions 21-25)
+        re.match(rf"^\W{{0,2}}[QO0]\s?(?:{'|'.join(map(str, range(first, last + 1)))}|{str(first)[0]}[lI])(?!\d)", text(flat[k][1]))  # "Q21", "Q2l", "021"
         or ((n := chi_qnum(text(flat[k][1]))) and first <= n <= last and re.match(r"^\W{0,2}\d{1,2}\s*[.．、]", text(flat[k][1]))))
     # an option block: a "(1)" row with a "(2)" row within the next 4 (a passage paragraph numbered （1） is not one)
     opt_block = lambda k: bool(CHI_OPT1.match(text(flat[k][1]))) and any(
         re.match(r"^\W{0,2}[(（《]?\s*[2②]\s*[)）]", text(flat[j][1])) for j in range(k + 1, min(k + 5, len(flat))))
     # a start: the heading, the instruction or the "(Q21—Q25)" line, never a question line ("Q22根据短文，…")
     starts = [k for k, (_, r) in enumerate(flat) if (CHI_HEAD["chinese-reading"].search(text(r)) or CHI_INSTR.search(text(r))
-              or CHI_RANGE.search(text(r))) and not isq(k) and not re.search(r"括号|词语", text(r))]  # not the cloze's instruction
+              or CHI_RANGE.search(text(r))) and not isq(k) and not re.search(r"词语", text(r))]  # not the cloze's instruction (选出适当的词语)
     for k0 in reversed(starts):
         end = next((k for k in range(k0 + 1, len(flat)) if isq(k) or opt_block(k)), None)
         if end is None:
             continue
-        if not isq(end):  # an option block whose question line the OCR did not read: step back over its (wrapped) lines
-            while end - 1 > k0 and flat[end - 1][0] == flat[end][0] and flat[end][1][0] - flat[end - 1][1][1] < 60 \
-                    and not re.search(r"[。！？”」]\s*$", text(flat[end - 2][1]) if end - 2 > k0 else "。"):
-                end -= 1
-            end -= 1 if end - 1 > k0 and flat[end - 1][0] == flat[end][0] else 0
+        if not isq(end):  # an option block whose question line the OCR did not read: where it starts is a guess, so held
+            return None, "set-no-cut"
         if end - k0 < 3:  # nothing between: an instruction right above the questions, try an earlier start
             continue
         if any(CHI_BLANKROW.search(text(flat[k][1])) for k in range(k0, end)):
@@ -1410,30 +1423,35 @@ def cloze_stem(t, n, opts=()):
     line become the blank; a neighbouring blank becomes （19）＿＿, which the quiz fills once it is answered. None when the
     asked blank is not found."""
     # the section's instruction, read into the first blank's text (OCR may end it with ：or ，)
-    t, k = re.subn(r"^\s*根据短文[^。：:]*(?:词语|答案)[^。：:，,]*[。：:，,]?\s*", "", t or "")
+    t, k = re.subn(r"^\s*根据短文[^。（(Q]*[。：:]\s*", "", t or "")
     if not k:
-        t = re.sub(r"^\s*根据短文[^。：:]*[。：:]\s*", "", t)
+        t = re.sub(r"^\s*根据短文[^。：:]*(?:词语|答案)[^。：:，,]*[。：:，,]?\s*", "", t)
     t = re.sub(r"(?<=\S)\s*[(（]*\s*[（(][一二三]\s*[）)]\s*[)）]*\s*根据短文.*$|(?<=\S)\s*根据短文.*$", "", t, flags=re.S)  # the next section's
     t = re.sub(r"(?<![\u3400-\u9fff])Q\s?\d{1,2}\s*[.．](?!\d)", "", t)  # a stray question label ("Q20.")
     ask = f"（{n}）＿＿＿＿"
-    words = [o.replace(" ", "") for o in strip_opts(list(opts)) if o]
-    holds = lambda g: sum(w in g.replace(" ", "") for w in words) >= 3  # the bracket holds this item's options
+    words = {o.replace(" ", "") for o in strip_opts(list(opts)) if o}
+    # the bracket's own options, split at their numbers: whole options compared, not substrings (的 inside 目的)
+    own = lambda g: {x.replace(" ", "") for x in re.split(r"[1-4]\s*[.．、]?", re.sub(r"^(?:Q\s?\d{1,2}\s?)?[（(]|[）)]$", "", g)) if x.strip()}
+    holds = lambda g: len(words & own(g)) >= 3
+    labelled = lambda g: bool(re.match(rf"Q\s?{n}\s?[（(]", g))
     t2, k = t, 0
-    # the bracket holding this item's options (labelled Q{n} or not); by label alone only when the options are unknown
-    for m in re.finditer(r"(?:Q\s?\d{1,2}\s?)?[（(][^（）()]*[）)]", t):
-        if (words and holds(m.group(0))) or (not words and re.match(rf"Q\s?{n}\s?[（(]", m.group(0))):
-            t2, k = t[:m.start()] + ask + t[m.end():], 1
-            break
+    brackets = list(re.finditer(r"(?:Q\s?\d{1,2}\s?)?[（(][^（）()]*[）)]", t))
+    # the bracket labelled Q{n} that holds this item's options; else an unlabelled one holding them (two blanks may
+    # share an option set: 的/地/得); by label alone only when the options are unknown
+    pick = next((m for m in brackets if labelled(m.group(0)) and (holds(m.group(0)) if words else True)), None) \
+        or next((m for m in brackets if words and not re.match(r"Q\s?\d", m.group(0)) and holds(m.group(0))), None)
+    if pick:
+        t2, k = t[:pick.start()] + ask + t[pick.end():], 1
     if not k and len(re.findall(r"_{2,}|＿{2,}|[（(]\s*[)）]", t)) == 1:
         t2, k = re.subn(r"_{2,}|＿{2,}|[（(]\s*[)）]", ask, t)
     if not k:
         return None
     t2 = re.sub(r"Q\s?(\d{1,2})\s?[（(][^（）()]*[）)]", r"（\1）＿＿", t2)  # neighbouring blanks
-    if re.search(r"[（(]\s*1\s*[.．、]?[^（）()]*?(?<!\d)4\s*[.．、]?[^（）()]*[）)]", t2):
+    if re.search(r"[（(]\s*1\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*?(?<!\d)2\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*?(?<!\d)3\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*?(?<!\d)4\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*[）)]", t2):
         return None  # an unlabelled neighbouring blank: the quiz cannot number or fill it
     t2 = re.sub(r"\s+(?=[\u3400-\u9fff（，。！？＿])|(?<=[\u3400-\u9fff）＿])\s+", "", t2).strip()
     # the automatic check: exactly the asked blank, no option bracket or question label left
-    if t2.count("＿＿＿＿") != 1 or re.search(r"Q\s?\d|根据短文|[（(]\s*1\s*[.．、 ]?\s*[\u3400-\u9fff]", t2):
+    if t2.count("＿＿＿＿") != 1 or re.search(r"Q\s?\d|根据短文|号码|填写在|[（(]\s*1\s*[.．、 ]?\s*[\u3400-\u9fff]{1,8}\s*2\s*[.．、 ]?\s*[\u3400-\u9fff]", t2):
         return None
     return t2
 
