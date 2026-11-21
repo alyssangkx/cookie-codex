@@ -114,7 +114,8 @@ def key(a, opts):
 
 def strip_num(o: str) -> str:
     """The option's printed numbering off: "(2)", "（2）", "2." / "2)" / "2、" before a non-digit (a decimal like "2.5" stays)."""
-    return re.sub(r"^\s*(?:[(（]\s*\d\s*[)）]|[1-4][.)．、](?=\s*\D))\s*", "", o or "").strip()
+    # also "1 获得": a number and a space before a Chinese word (owner sample, 21 Nov 2026: "(1) 1 焦急")
+    return re.sub(r"^\s*(?:[(（]\s*\d\s*[)）]|[1-4][.)．、](?=\s*\D)|[1-4]\s+(?=[\u3400-\u9fff]))\s*", "", o or "").strip()
 
 
 def realfig(q):
@@ -356,15 +357,17 @@ def select(a):
         for q in merged:
             if q.get("format") != "mcq":
                 continue
-            vt = a.passage == "english-visual"
-            if vt and not (isinstance(q.get("qno"), int) and 21 <= q["qno"] <= 30 and not re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)
-                           and ((tags.get(q["id"]) or {}).get("st") == "eng-visual-text" or q.get("section") == "Visual Text")):
-                continue  # passage mode takes only the visual-text section
+            pk = PASSAGE.get(a.passage)
+            vt = bool(pk)
+            qn = int(q["qno"]) if str(q.get("qno") or "").isdigit() else None  # Chinese papers store "17"
+            if vt and not (qn and pk["q"][0] <= qn <= pk["q"][1] and not re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)
+                           and ((tags.get(q["id"]) or {}).get("st") == pk["st"] or q.get("section") == pk["section"])):
+                continue  # passage mode takes only its section
             opts = q.get("options") or []
             k = key(q.get("answer"), opts) if len(opts) == 4 else None
             t = tags.get(q["id"]) or {}
             if vt:
-                t = dict(t, st="eng-visual-text")  # the section, whatever the tagger filed it under
+                t = dict(t, st=pk["st"])  # the section, whatever the tagger filed it under
             reason = None
             ok, full = ocrk.get((q.get("paper"), q.get("qno")), (None, False))
             src = "vision"
@@ -429,6 +432,8 @@ def select(a):
                 if not reason and a.subject == "english" and not vt and (not isinstance(q.get("qno"), int) or q["qno"] > 15
                                                               or re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)):
                     reason = "eng-passage-section"
+                if not reason and a.passage == "chinese-cloze" and not cloze_stem(q.get("text"), qn, opts):
+                    reason = "cloze-no-blank"
                 if not reason and t.get("st") not in subs:
                     reason = "subtopic-not-in-syllabus"
                 if not reason and t.get("difficulty") not in LEVEL:
@@ -473,16 +478,19 @@ def select(a):
                 "id": pp_id(q["id"]), "src_id": q["id"], "subject": a.subject, "subtopic": t["st"],
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
-                "stem": tex_to_text(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip()),
+                "stem": cloze_stem(q["text"], qn, opts) if a.passage == "chinese-cloze" else
+                        tex_to_text(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip()),
                 "options": [tex_to_text(strip_num(o)) for o in opts], "answer": int(k) - 1,
-                **({"grp": set_id(q), "seq": q["qno"], "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
+                **({"grp": set_id(q, pk["suffix"]), "seq": qn, "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                 "blind_src": (cv.get("src", "consensus") if cv_ok else (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
                               else "second:vl2-fullres+text72-ocr"),
             })
     if a.passage:
-        for r, why in set_pages(rows, out):  # a dropped set is held with its reason, like any other question
+        if PASSAGE[a.passage]["subject"] != a.subject:
+            sys.exit(f"--passage {a.passage} is a {PASSAGE[a.passage]['subject']} section")
+        for r, why in set_pages(rows, out, a.passage):  # a dropped set is held with its reason, like any other question
             rejects.append({"id": r["src_id"], "reason": why})
             R[why] += 1
     ids = [r["id"] for r in rows]
@@ -1023,6 +1031,18 @@ def selftest():
     pieces, why = poster_pieces(P, 21)
     assert why is None and pieces == [(5, 292, 3000)], (pieces, why)
     assert poster_pieces({6: P[6]}, 21) == (None, "set-no-cut")  # no poster before the questions: held
+    assert cloze_stem("这些礼物 Q16（1 表达 2 保存 3 集合 4 见证）了她对我的关爱。", 16) == "这些礼物（16）＿＿＿＿了她对我的关爱。"
+    assert cloze_stem("根据短文的内容和上下文的意思，从括号中选出适当的词语。她总是（1. 保持 2. 保证 3. 保留 4. 保守）身体健康。", 17,
+                      ["1. 保持", "2. 保证", "3. 保留", "4. 保守"]) \
+        == "她总是（17）＿＿＿＿身体健康。"
+    assert cloze_stem("但还是答应了他的________。", 18) == "但还是答应了他的（18）＿＿＿＿。"
+    assert cloze_stem("根据短文的内容和上下文的意思，从括号中选出适当的词语。", 16) is None
+    # the asked blank is picked by its number, not by being first; the neighbour stays a fillable blank
+    assert cloze_stem("员工Q18（1设法 2提早 3创作 4分享）让它多吃。猴子Q19（1竟然 2果然 3仍然 4猛然）长不大。", 19) \
+        == "员工（18）＿＿让它多吃。猴子（19）＿＿＿＿长不大。"
+    assert cloze_stem("Q20.（1 无论 2 只要 3 不但 4 虽然）是日常生活，我们都应该。(（一）)根据短文的内容和上下文的意思，选出适当的答案。", 20,
+                      ["1 无论", "2 只要", "3 不但", "4 虽然"]) == "（20）＿＿＿＿是日常生活，我们都应该。"
+    assert strip_num("1 焦急") == "焦急" and strip_num("2.5 kg") == "2.5 kg" and strip_num("3 apples") == "3 apples"
     print("selftest ok")
 
 
@@ -1152,16 +1172,23 @@ EATEN = re.compile("\x0c(rac)|\x09(ext|frac|imes|heta|riangle|extrm)|\x0d(ight)|
 EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b", "\x0b": "v"}
 
 
-def set_id(q) -> str:
+PASSAGE = {  # passage mode: the section's questions, its sub-topic, and the set id's suffix
+    "english-visual": {"subject": "english", "q": (21, 30), "st": "eng-visual-text", "section": "Visual Text", "suffix": "vt"},
+    "chinese-cloze": {"subject": "chinese", "q": (16, 20), "st": "chi-cloze-mcq", "section": "短文填空", "suffix": "cz"},
+    "chinese-reading": {"subject": "chinese", "q": (21, 25), "st": "chi-yuedu-mcq-text", "section": "阅读理解一", "suffix": "rd"},
+}
+
+
+def set_id(q, suffix="vt") -> str:
     """A passage set's id (pp_items.grp): the paper and part, plus the section."""
-    return re.sub(r"[^a-z0-9]+", "-", f"{q.get('paper') or q['id']}-{q.get('part') or ''}-vt".lower()).strip("-")[:80]  # no paper: a set of its own
+    return re.sub(r"[^a-z0-9]+", "-", f"{q.get('paper') or q['id']}-{q.get('part') or ''}-{suffix}".lower()).strip("-")[:80]  # no paper: a set of its own
 
 
 QROW = re.compile(r"^(\d{1,2})[.,]?$")  # OCR reads "20." as "20," too
 QRANGE = re.compile(r"questions?\s+(?:from\s+)?(\d{1,2})\s*(?:to|-|–|and)\s*(\d{1,2})", re.I)
 STUDY = re.compile(r"^\W*(s[tli1]u?dy|read|look)\b", re.I)  # OCR: "Siudy", "Sludy"
 STUDY_REST = re.compile(r"carefully|answer|question|following|below", re.I)
-FOOT = re.compile(r"kiasu|exampaper|go on to|blank page|^\W*\d{1,3}\W*$|^\W*[A-Z]?\s*-\s*\d{1,2}\W*$", re.I)
+FOOT = re.compile(r"kiasu|exampaper|go on to|blank page|接下页|空白页|翻页|^\W*\d{1,3}\W*$|^\W*[A-Z]?\s*-\s*\d{1,2}\W*$", re.I)
 QHEAD = re.compile(r"for each question|shade|optical answer", re.I)
 
 
@@ -1235,24 +1262,142 @@ def poster_pieces(pages, own_min):
     end = next((k for k in range(k0 + 1, len(flat)) if is_end(k)), None)
     if end is None:
         return None, "set-no-cut"
-    p0, pe, bot_e = flat[k0][0], flat[end][0], flat[end][1][0] - 8
+    return cut_pieces(pages, flat[k0][0], top0, flat[end][0], flat[end][1][0] - 8)
+
+
+def cut_pieces(pages, p0, top0, pe, bot_e, cjk=False):
+    """The pieces of pages p0 (from top0) to pe (down to bot_e): page footers and school header lines trimmed, empty strips
+    and blank pages dropped (an English poster keeps 6+ words, a Chinese passage 15+ characters)."""
+    text = lambda r: " ".join(w[4] for w in r[2])
     pieces = []
     for p in sorted(pages):
         if p0 <= p <= pe:
             rows, _, H = pages[p]
             top, bot = (top0 if p == p0 else 0), (bot_e if p == pe else H)
-            # the page footer (scan site, page number, "Go on to the next page") is not part of the poster
+            # the page footer (scan site, page number, "Go on to the next page", 接下页) is not part of the passage
             foot = [r[0] for r in rows if r[0] > 0.8 * H and FOOT.search(text(r))]
             bot = min([bot] + [f - 8 for f in foot])
             # the school's header line at the top of a page is no content either
             inside = [r for r in rows if top <= r[0] and r[1] <= bot and not FOOT.search(text(r)) and r[0] > 0.08 * H]
-            # an empty strip, or a "BLANK PAGE", is no piece; a picture-only poster still has a few words (title, date)
-            if bot - top > 0.06 * H and sum(len(r[2]) for r in inside) >= 6:
+            # an empty strip, or a "BLANK PAGE" / 空白页, is no piece; a picture-only poster still has a few words
+            enough = (sum(len(text(r).replace(" ", "")) for r in inside) >= 15) if cjk else (sum(len(r[2]) for r in inside) >= 6)
+            if bot - top > 0.06 * H and enough:
                 pieces.append((p, max(0, top), min(H, bot)))
     return (pieces, None) if pieces else (None, "set-no-cut")
 
 
-def set_pages(rows, out):
+CHI_HEAD = {"chinese-cloze": re.compile(r"短文填空"), "chinese-reading": re.compile(r"阅读理解")}
+CHI_INSTR = re.compile(r"根据短文")
+CHI_NEXT = re.compile(r"阅读理解|完成对话|短文填空|根据短文|^\W*[一二三四五六七八九十]\s*[、.．]?\s*\S{2,6}[（(]\s*\d+\s*题")
+
+
+def chi_qnum(t):
+    """A Chinese question row's number ("Q21当我把…", "21."), not a range ("(Q21-Q25)")."""
+    m = re.match(r"^\W{0,2}[QO0]?\s?(\d{1,2})(?![\d\-–－—~])", t)  # OCR reads "Q21" as "021" too
+    return int(m.group(1)) if m else None
+
+
+def chi_pieces(pages, kind, first, last):
+    """A Chinese passage without its questions (owner, 21 Nov 2026: no question shown twice). Reading (阅读理解一): from
+    the section heading (else the 根据短文 instruction) down to the line above the first question. Cloze (短文填空): the
+    passage holds its blanks, so it runs from the heading to the end of the page holding the last blank, or to the next
+    section's heading on that page. (None, "set-no-cut") when an end is not found."""
+    flat = [(p, r) for p in sorted(pages) for r in pages[p][0]]
+    text = lambda r: "".join(w[4] for w in r[2])
+    blank = lambda n: re.compile(rf"Q\s?{n}\s?[（(]")
+    # the first question (or blank) the OCR read: an OCR slip on one number ("QIO(" for Q19) falls back to the next
+    if kind == "chinese-reading":
+        hit = lambda k, n: chi_qnum(text(flat[k][1])) == n and not CHI_INSTR.search(text(flat[k][1]))
+    else:
+        hit = lambda k, n: bool(blank(n).search(text(flat[k][1])))
+    qk = next((k for n in range(first, last + 1) for k in range(len(flat)) if hit(k, n)), None)
+    if qk is None:
+        return None, "set-no-cut"
+    # the start: the later of the section's heading and its 根据短文 instruction before the questions (a heading the OCR
+    # missed must not let an earlier mention, or the previous section, in)
+    heads = [k for k in range(qk) if CHI_HEAD[kind].search(text(flat[k][1])) or CHI_INSTR.search(text(flat[k][1]))]
+    if not heads:
+        return None, "set-no-cut"
+    k0 = heads[-1]
+    if k0 > 0 and CHI_HEAD[kind].search(text(flat[k0 - 1][1])) and flat[k0 - 1][0] == flat[k0][0]:
+        k0 -= 1  # keep the heading line just above the instruction
+    if kind == "chinese-reading":
+        return chi_reading_pieces(pages, flat, first, last)
+    lk = next((k for n in range(last, first - 1, -1) for k in range(len(flat) - 1, qk - 1, -1) if hit(k, n)), None)
+    if lk is None:
+        return None, "set-no-cut"
+    pe = flat[lk][0]
+    nxt = next((k for k in range(lk + 1, len(flat)) if flat[k][0] == pe and CHI_NEXT.search(text(flat[k][1]))), None)
+    return cut_pieces(pages, flat[k0][0], flat[k0][1][0] - 8, pe, flat[nxt][1][0] - 8 if nxt is not None else pages[pe][2], cjk=True)
+
+
+CHI_RANGE = re.compile(r"[(（]\s*Q?\s?2[01]\s*[-—–－~至到]")  # "(Q21—Q25)" under the reading instruction
+CHI_OPT1 = re.compile(r"^\W{0,2}[(（《]\s*[1iIl]\s*[)）]")  # OCR: "(i)"
+CHI_BLANKROW = re.compile(r"Q\s?\d{1,2}\s?[（(]\s*1|[（(]\s*1\s*[.．、]?\s*[\u3400-\u9fff][^（）()]*(?<!\d)4\s*[.．、]?")
+
+
+def chi_reading_pieces(pages, flat, first, last):
+    """Reading (阅读理解一): the passage from the section's heading, instruction or "(Q21—Q25)" line down to the first
+    question: a question line, or the first "(1)" option row (cut above the question line over it, which the OCR may not
+    have read as "Q21"). A cloze blank inside is the previous section: held."""
+    text = lambda r: "".join(w[4] for w in r[2])
+    isq = lambda k: (n := chi_qnum(text(flat[k][1]))) is not None and first <= n <= last and not CHI_RANGE.search(text(flat[k][1])) \
+        and not CHI_OPT1.match(text(flat[k][1]))
+    starts = [k for k, (_, r) in enumerate(flat) if CHI_HEAD["chinese-reading"].search(text(r)) or CHI_INSTR.search(text(r))
+              or CHI_RANGE.search(text(r))]
+    for k0 in reversed(starts):
+        end = next((k for k in range(k0 + 1, len(flat)) if isq(k) or CHI_OPT1.match(text(flat[k][1]))), None)
+        if end is None:
+            continue
+        if CHI_OPT1.match(text(flat[end][1])) and end - 1 > k0 and flat[end - 1][0] == flat[end][0]:
+            end -= 1  # the question line above its first option
+        if end - k0 < 3:  # nothing between: an instruction right above the questions, try an earlier start
+            continue
+        if any(CHI_BLANKROW.search(text(flat[k][1])) for k in range(k0, end)):
+            return None, "set-no-cut"
+        while k0 > 0 and flat[k0 - 1][0] == flat[k0][0] and (CHI_HEAD["chinese-reading"].search(text(flat[k0 - 1][1]))
+                                                            or CHI_INSTR.search(text(flat[k0 - 1][1]))):
+            k0 -= 1  # keep the heading and instruction lines with the range line
+        top0 = flat[k0][1][0] - (int(0.06 * pages[flat[k0][0]][2]) if CHI_RANGE.search(text(flat[k0][1])) else 8)
+        got = cut_pieces(pages, flat[k0][0], top0, flat[end][0], flat[end][1][0] - 8, cjk=True)
+        # the automatic check: option rows inside mean a question the OCR could not read got in (owner: no question twice)
+        inside = [text(r) for p, t, b in (got[0] or []) for r in pages[p][0] if t <= r[0] and r[1] <= b]
+        if sum(bool(re.match(r"^\W{0,2}[(（《]?\s*[1-4iIl]\s*[)）]", x)) for x in inside) >= 2:
+            return None, "set-no-cut"
+        return got
+    return None, "set-no-cut"
+
+
+def cloze_stem(t, n, opts=()):
+    """A Chinese cloze blank's sentence with the asked blank as the site writes it, （16）＿＿＿＿: the paper's inline options
+    ("Q16（1 表达 2 保存 …）", or the bracket alone, picked by its own number or by holding the item's options) or a bare
+    line become the blank; a neighbouring blank becomes （19）＿＿, which the quiz fills once it is answered. None when the
+    asked blank is not found."""
+    t = re.sub(r"^\s*根据短文[^。]*。\s*", "", t or "")  # the section's instruction, read into the first blank's text
+    t = re.sub(r"\s*[(（]*\s*[（(][一二三]\s*[）)]\s*[)）]*\s*根据短文.*$|\s*根据短文.*$", "", t, flags=re.S)  # the next section's
+    t = re.sub(r"(?<![\u3400-\u9fff])Q\s?\d{1,2}\s*[.．](?!\d)", "", t)  # a stray question label ("Q20.")
+    ask = f"（{n}）＿＿＿＿"
+    t2, k = re.subn(rf"Q\s?{n}\s?[（(][^（）()]*[）)]", ask, t, count=1)
+    if not k:  # the bracket holding this item's options: （1. 保持 2. 保证 3. 保留 4. 保守）
+        words = [strip_num(o).replace(" ", "") for o in opts if strip_num(o)]
+        for m in re.finditer(r"[（(][^（）()]*[）)]", t):
+            if words and sum(w in m.group(0).replace(" ", "") for w in words) >= 3:
+                t2, k = t[:m.start()] + ask + t[m.end():], 1
+                break
+    if not k and len(re.findall(r"_{2,}|＿{2,}|[（(]\s*[)）]", t)) == 1:
+        t2, k = re.subn(r"_{2,}|＿{2,}|[（(]\s*[)）]", ask, t)
+    if not k:
+        return None
+    t2 = re.sub(r"Q\s?(\d{1,2})\s?[（(][^（）()]*[）)]", r"（\1）＿＿", t2)  # neighbouring blanks
+    t2 = re.sub(r"[（(]\s*1\s*[.．、]?[^（）()]*?(?<!\d)4\s*[.．、]?[^（）()]*[）)]", "＿＿", t2)
+    t2 = re.sub(r"\s+(?=[\u3400-\u9fff（，。！？＿])|(?<=[\u3400-\u9fff）＿])\s+", "", t2).strip()
+    # the automatic check: exactly the asked blank, no option bracket or question label left
+    if t2.count("＿＿＿＿") != 1 or re.search(r"Q\s?\d|根据短文|[（(]\s*1\s*[.．、 ]?\s*[\u3400-\u9fff]", t2):
+        return None
+    return t2
+
+
+def set_pages(rows, out, kind="english-visual"):
     """Every question of a set shows the same pages: from up to three pages before the set's first question page (the poster or
     passage, which may run over two pages) to its first question page. Sets of one question, and sets whose questions spread
     over more than 5 pages (bad page data), are dropped. The pictures are the poster pieces only (poster_pieces), cut
@@ -1286,6 +1431,8 @@ def set_pages(rows, out):
         # the first text's poster, so the set is held
         seqs = [r["seq"] for r in rs]
         later = []
+        if kind != "english-visual":  # a Chinese section holds one passage
+            seqs = [0]
         for p in range(max(1, pages[0] - 3), pages[-1] + 1):
             v = page_lines(pdir / f"p{p:04d}.jpg")
             lines = [" ".join(w[4] for w in row[2]) for row in v[0]] if v else []
@@ -1299,8 +1446,12 @@ def set_pages(rows, out):
                 dropped.append((r, "set-two-texts"))
             continue
         # the poster: up to three pages before the first question page, and that page down to the questions
-        win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 3), pages[0] + 1)}
-        pieces, why = poster_pieces({p: v for p, v in win.items() if v}, min(r["seq"] for r in rs))
+        if kind == "english-visual":
+            win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 3), pages[0] + 1)}
+            pieces, why = poster_pieces({p: v for p, v in win.items() if v}, min(r["seq"] for r in rs))
+        else:  # a Chinese passage: from two pages before its questions to the last question page
+            win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 2), pages[-1] + 1)}
+            pieces, why = chi_pieces({p: v for p, v in win.items() if v}, kind, PASSAGE[kind]["q"][0], PASSAGE[kind]["q"][1])
         if not pieces:
             for r in rs:
                 rows.remove(r)
@@ -1491,7 +1642,7 @@ def main():
     p.add_argument("--ocr-keys", action="store_true", help="select: use <year>/anskey_ocr.jsonl as a fallback key source")
     p.add_argument("--reread-keys", action="store_true", help="select: use agreed <year>/ansreread/ cells (ans_reread.py) as a fallback key source, answer_src 'vision-reread'")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")
-    p.add_argument("--passage", choices=("", "english-visual"), default="", help="select: passage sets instead of single questions")
+    p.add_argument("--passage", choices=("", *PASSAGE), default="", help="select: passage sets instead of single questions")
     a = p.parse_args()
     {"select": select, "figures": figures, "review": review, "upload": upload, "counts": counts, "cropcheck-apply": cropcheck_apply, "where": where, "selftest": lambda _a: selftest()}[a.cmd](a)
 

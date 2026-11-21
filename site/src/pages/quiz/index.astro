@@ -206,7 +206,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (q.group) for (const o of members.get(q.group) ?? []) {
       if (o.seq == null || String(o.seq) === asked || filledBlanks.get(q.group)?.has(o.seq)) continue;
       const lead = zh ? `（${o.seq}）` : `(${o.seq}) `, blank = zh ? `（${o.seq}）＿＿` : `(${o.seq}) ____`;
-      if (!inQuiz.has(o.id)) h = h.replace(blank, () => `${lead}<span class="filled given" title="not in this quiz">${esc(o.options[o.answer])}</span>`);
+      // a past-paper blank whose content was never fetched (a pool stub) has no answer text: it stays a blank
+      if (!inQuiz.has(o.id)) { if (o.options[o.answer]) h = h.replace(blank, () => `${lead}<span class="filled given" title="not in this quiz">${esc(o.options[o.answer])}</span>`); }
       else if (!reveal && quiz.indexOf(o.id) > i) h = h.replace(blank, () => `<button type="button" class="blank-jump" data-id="${esc(o.id)}" aria-label="Go to blank ${o.seq}">${blank}</button>`);
     }
     const mine = filledBlanks.get(q.group ?? '')?.get(Number(asked));
