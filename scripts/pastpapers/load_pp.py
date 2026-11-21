@@ -63,6 +63,7 @@ def tier(difficulty: int, qno, booklet_mcqs: int, rule: str) -> str:
         return LEVEL[difficulty]
     return "competent" if (qno or 0) / max(booklet_mcqs, 1) >= LATE else "intermediate"
 BUCKET = "pp-figures"
+FIG_MAX = 200 * 1024  # the bucket's file_size_limit (storage refuses a bigger file with HTTP 400)
 
 # a stem that points at something drawn: words, or a label letter (B-Z except I; "A" only beside and/or/commas)
 FIG_WORDS = re.compile(r"\b(shown|show(s)? (below|above)|below|above|diagram|figure|table|graph|chart|picture|"
@@ -739,7 +740,7 @@ def figures(a):
                 done_sets[r["set_owner"]] = []
                 for n, pg in enumerate(r["set_pages"], 1):
                     name = f"{r['set_owner']}-{n}.webp"
-                    w, h, b, mode = compress(Path(pg), fdir / name, 1400, 220 * 1024)
+                    w, h, b, mode = compress(Path(pg), fdir / name, 1400, 190 * 1024)
                     done_sets[r["set_owner"]].append({"path": f"{a.subject}/{name}", "w": w, "h": h, "bytes": b})
                     tot += b
                     modes[mode] += 1
@@ -1097,7 +1098,10 @@ def selection(a):
     hold = read_hold(out)
     rows = [r for r in rows if r["id"] not in hold]
     left = collections.Counter(r["grp"] for r in rows if r.get("grp"))
-    return [r for r in rows if not r.get("grp") or left[r["grp"]] >= 2], subs, out  # a hold may leave a set of one: drop it
+    lone = [r["id"] for r in rows if r.get("grp") and left[r["grp"]] < 2]
+    if lone:  # a hold may leave a set of one: dropped, and said so
+        print(f"{len(lone)} questions left alone in their set by a hold are not uploaded: {', '.join(lone[:5])}")
+    return [r for r in rows if r["id"] not in lone], subs, out
 
 
 def counts(a):
@@ -1147,7 +1151,7 @@ EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b", "\x0b": "v"}
 
 def set_id(q) -> str:
     """A passage set's id (pp_items.grp): the paper and part, plus the section."""
-    return re.sub(r"[^a-z0-9]+", "-", f"{q.get('paper')}-{q.get('part') or ''}-vt".lower()).strip("-")[:80]
+    return re.sub(r"[^a-z0-9]+", "-", f"{q.get('paper') or q['id']}-{q.get('part') or ''}-vt".lower()).strip("-")[:80]  # no paper: a set of its own
 
 
 QROW = re.compile(r"^(\d{1,2})[.,]?$")  # OCR reads "20." as "20," too
@@ -1200,7 +1204,7 @@ def poster_pieces(pages, own_min):
     rng = lambda r: int(m.group(1)) if (m := QRANGE.search(text(r))) else None
     S = max((n for _, r, _, _ in flat if (n := rng(r)) and 15 <= n <= own_min), default=None) \
         or min((n for _, r, W, _ in flat if (n := num(r, W)) and 21 <= n <= own_min and len(r[2]) >= 3), default=None)
-    if not S:
+    if not S or S < 21:  # a range before 21 is the previous section's (a misread visual-text range): held, not cut there
         return None, "set-no-cut"
     # start: the section's instruction (a range in it must be this section's), else after the previous section's options
     # an instruction's range may wrap onto its next line ("... and answer / questions 21 to 25.")
@@ -1218,8 +1222,6 @@ def poster_pieces(pages, own_min):
         # else the last one before the questions (an earlier one belongs to the previous section)
         k0 = next((k for k in study if k < e0 and rng_at(k) == S), max(k for k in study if k < e0))
         top0 = flat[k0][1][0] - 8
-    elif S < 21:  # no instruction and a section starting before 21: not a visual text (a mis-tagged vocabulary section)
-        return None, "set-no-cut"
     else:
         prev = [k for k, (_, r, W, _) in enumerate(flat) if (n := num(r, W)) is not None and n < S and len(r[2]) >= 3]
         opt4 = [k for k, (_, r, _, _) in enumerate(flat) if prev and k > prev[-1] and re.match(r"^\(?4\)", r[2][0][4])]
@@ -1247,7 +1249,7 @@ def poster_pieces(pages, own_min):
 
 
 def set_pages(rows, out):
-    """Every question of a set shows the same pages: from two pages before the set's first question page (the poster or
+    """Every question of a set shows the same pages: from up to three pages before the set's first question page (the poster or
     passage, which may run over two pages) to its first question page. Sets of one question, and sets whose questions spread
     over more than 5 pages (bad page data), are dropped. The pictures are the poster pieces only (poster_pieces), cut
     from the page scans into OUT/setpages."""
@@ -1275,6 +1277,17 @@ def set_pages(rows, out):
             for r in rs:
                 rows.remove(r)
                 dropped.append((r, "set-bad-pages"))
+            continue
+        # a second text inside the set's questions ("answer questions 27 to 28" on a later page): its questions would show
+        # the first text's poster, so the set is held
+        seqs = [r["seq"] for r in rs]
+        later = [n for p in range(max(1, pages[0] - 3), pages[-1] + 1) for v in [page_lines(pdir / f"p{p:04d}.jpg")] if v
+                 for row in v[0] if (n := int(m.group(1)) if (m := QRANGE.search(" ".join(w[4] for w in row[2]))) else 0)
+                 and min(seqs) < n <= max(seqs)]
+        if later:
+            for r in rs:
+                rows.remove(r)
+                dropped.append((r, "set-two-texts"))
             continue
         # the poster: up to three pages before the first question page, and that page down to the questions
         win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 3), pages[0] + 1)}
@@ -1388,6 +1401,9 @@ def upload(a):
         print("dry run: nothing sent (add --apply after the owner's go-ahead)")
         return
     fdir = out / "figures"
+    big = sorted({f["path"] for d in db for f in d["figures"] if (fdir / Path(f["path"]).name).stat().st_size > FIG_MAX})
+    if big:  # checked before anything is sent: a half-sent upload leaves pictures without rows
+        sys.exit(f"{len(big)} pictures exceed the bucket's {FIG_MAX // 1024} KB limit (e.g. {big[0]}): re-run `figures`")
     sent = set()  # a passage set's pages are shared by its questions: send each file once
     for d in db:
         for f in d["figures"]:

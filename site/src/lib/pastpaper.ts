@@ -54,7 +54,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   // keys confirmed by the blind check or by owner-approved outside-model consensus
   'eng-grammar-mcq': 'pool',
   'eng-vocab-mcq': 'pool',
-  // English visual text (passage phase, 21 Nov 2026): 398 questions in 98 sets, each set shown with its exam pages
+  // English visual text (passage phase, 21 Nov 2026): 387 questions in 95 sets, each set shown with its exam pages
   'eng-visual-text': 'pool',
   // Chinese upload (owner OK, 21 Nov 2026): single-item MCQs (a blank or pinyin options); keys confirmed by the blind check
   // or owner-approved outside-model consensus. Cloze, reading and dialogue wait for the passage phase.
@@ -158,6 +158,8 @@ export function countingPool(qs: { id: string; ord?: number | null; group?: stri
   const groupOf = new Map(qs.map((q) => [q.id, q.group]));
   if (!qs.some((q) => q.group)) return order.slice(0, POOL_CAP);
   // passage sets count whole (they are asked whole): take sets in the order their easiest question comes, until the cap
+  // ponytail: the set at the cap is counted only in part, so the counting pool is exactly POOL_CAP, the size train.ts
+  // and the milestone preview use
   const out: string[] = [], taken = new Set<string>();
   for (const id of order) {
     if (out.length >= POOL_CAP) break;
@@ -167,7 +169,7 @@ export function countingPool(qs: { id: string; ord?: number | null; group?: stri
     taken.add(g);
     out.push(...order.filter((x) => groupOf.get(x) === g));
   }
-  return out;
+  return out.slice(0, POOL_CAP);
 }
 
 /** One pp_pool page (fetchPool): 'more' to ask for the next page, 'done', or 'fail' (the list would be partial).

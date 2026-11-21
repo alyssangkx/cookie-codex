@@ -256,6 +256,7 @@ test('a counting pool with passage sets takes whole sets, easiest first, until t
   for (let g = 0; g < 80; g++) for (let k = 0; k < 6; k++) qs.push({ id: `pp-${String(g * 10 + k).padStart(10, '0')}`, ord: ++o, group: `set-${g}` });
   const c = countingPool(qs);
   const sets = new Set(c.map((id) => qs.find((q) => q.id === id)!.group));
-  for (const g of sets) assert.equal(c.filter((id) => qs.find((q) => q.id === id)!.group === g).length, 6); // never part of a set
-  assert.ok(c.length >= POOL_CAP && c.length < POOL_CAP + 6);
+  assert.equal(c.length, POOL_CAP); // the size train.ts and the milestone preview use
+  const part = [...sets].filter((g) => c.filter((id) => qs.find((q) => q.id === id)!.group === g).length !== 6);
+  assert.ok(part.length <= 1); // whole sets, only the one at the cap in part
 });

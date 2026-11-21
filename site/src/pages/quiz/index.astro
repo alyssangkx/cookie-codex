@@ -379,7 +379,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       if (POOL) {
         if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
         quiz = pickPool(easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]), cur.questions, QUIZ_SIZE,
-          Date.now(), passage);
+          // a counted question is not pulled back in with its set (a set cut short by an earlier quiz asks only the rest)
+          Date.now(), (id) => (cur.questions[id]?.s === 0 ? undefined : passage(id)));
         if (quiz.length < QUIZ_SIZE) return stop('This topic does not have enough questions yet.');
       } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
