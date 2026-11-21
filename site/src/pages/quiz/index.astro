@@ -99,7 +99,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
-  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, type PpFig } from '../../lib/pastpaper';
+  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, type PpFig } from '../../lib/pastpaper';
   import { esc, boldAns } from '../../lib/boldans';
   import { toEconomy, balanceOf } from '../../lib/crumbs';
   import { lineForLast, bilingual } from '../../lib/encourage';
@@ -756,13 +756,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   /** A past-paper question of a one-pool sub-topic: wrong comes back after 1 day and counts once right then (ADR 0011). */
   const shortRetest = (id: string) => isPpId(id) && isPoolSub(byId.get(id)?.sub ?? '');
-  /** For finishQuiz: every one-pool sub-topic this quiz loaded, with ALL its past-paper ids (milestones count the whole
-   * pool, not the quiz). Left out when the past-paper list failed to load (a partial pool would store a wrong total). */
+  /** For finishQuiz: every one-pool sub-topic this quiz loaded, with its counting pool (milestones count the pool, capped at
+   * POOL_CAP easier-first, not the quiz). Left out when the past-paper list failed to load (a partial pool would store a
+   * wrong total). */
   function pools(): Record<string, string[]> {
     if (!ppLoaded || ppFailed) return {};
-    const out: Record<string, string[]> = {};
-    for (const q of ppAll) if (isPoolSub(q.sub)) (out[q.sub] ??= []).push(q.id);
-    return out;
+    const by: Record<string, { id: string; ord?: number | null }[]> = {};
+    for (const q of ppAll) if (isPoolSub(q.sub)) (by[q.sub] ??= []).push(q as { id: string; ord?: number | null });
+    return Object.fromEntries(Object.entries(by).map(([sub, qs]) => [sub, countingPool(qs)]));
   }
   function record(id: string, ok: boolean, picked?: string) {
     const s = load();

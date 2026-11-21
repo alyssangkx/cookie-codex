@@ -97,7 +97,8 @@ def pack(a):
 
 def extpack(a):
     """The disagreements and the calibration sample as a numbered, answer-free pack for outside models: <subject>_questions.txt
-    (parts of 100, each with the instruction) and .csv, plus a private qmap.json (Q number -> id). Score with `extscore`."""
+    (parts of 100, each with the instruction) and .csv, plus qmap.json (Q number -> id; keep it, do not send it). The answers
+    are scored by mapping each "Q12: 3" line through qmap.json (see the session's scoring of the English and Chinese packs)."""
     w = work(a.subject)
     qs = [q for q in jl(w / "items.jsonl")]
     if a.subject == "english":

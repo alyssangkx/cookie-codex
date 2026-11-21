@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -204,5 +204,14 @@ test('ppSubjectOf maps a sub-topic id to its pp_items subject (pp_pool lists one
   assert.equal(ppSubjectOf('sci-cycles-water-states'), 'science');
   assert.equal(ppSubjectOf('eng-grammar-mcq'), 'english');
   assert.equal(ppSubjectOf('chi-ciyu-choose'), 'chinese');
+  assert.equal(ppSubjectOf('math-ratio-basic'), 'maths');
   assert.equal(ppSubjectOf('xyz-thing'), null);
+});
+
+test('the counting pool is a pool\'s first POOL_CAP questions easier-first; a small pool is all of it', () => {
+  const big = Array.from({ length: 450 }, (_, i) => ({ id: `pp-${String(i).padStart(10, '0')}`, ord: 450 - i }));
+  const c = countingPool(big);
+  assert.equal(c.length, POOL_CAP);
+  assert.equal(c[0], 'pp-0000000449'); // ord 1, served first
+  assert.deepEqual(countingPool(big.slice(0, 30)).length, 30);
 });

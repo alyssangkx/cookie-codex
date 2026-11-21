@@ -57,7 +57,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
 };
 
 /** pp_items.subject of a sub-topic, from its id prefix (pp_pool lists one subject per call). */
-const SUBJECT_OF: Readonly<Record<string, string>> = { sci: 'science', eng: 'english', chi: 'chinese', mat: 'maths' };
+const SUBJECT_OF: Readonly<Record<string, string>> = { sci: 'science', eng: 'english', chi: 'chinese', math: 'maths' };
 export const ppSubjectOf = (sub: string): string | null => SUBJECT_OF[sub.split('-')[0]] ?? null;
 export const PP_BUCKET = 'pp-figures';
 export const PP_MIN_TIER = 20; // same as MIN_POOL: a smaller past-paper pool never replaces a tier, it is merged in
@@ -97,6 +97,11 @@ export const isPoolSub = (sub: string, enabled = PP_ENABLED, sw: Readonly<Record
 /** A pool's ids easier-first (rank, then id), as pickPool wants them. */
 export const easierFirst = (qs: { id: string; ord?: number | null }[]) =>
   [...qs].sort((a, b) => (a.ord ?? 1e9) - (b.ord ?? 1e9) || (a.id < b.id ? -1 : 1)).map((q) => q.id);
+
+/** Milestones count at most a pool's first POOL_CAP questions in easier-first order (owner, 21 Nov 2026: Exam-ready on
+ * 1,926 English grammar questions would need 964 counted). The rest of the pool is still served for practice. */
+export const POOL_CAP = 300;
+export const countingPool = (qs: { id: string; ord?: number | null }[]) => easierFirst(qs).slice(0, POOL_CAP);
 
 /** A past-paper question id (pp-<10 hex>), as opposed to a generated one. */
 export const isPpId = (id: string) => /^pp-[0-9a-f]{10}$/.test(id);

@@ -118,6 +118,8 @@ def score(a):
         ids += qmap.values()
         for m in models:
             fs = sorted(out.glob(f"*{part}_{m}.txt"))  # "part1_gemini.txt" or any prefix ("complete_..._part1_gemini.txt")
+            if len(fs) > 1:
+                print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:
                 got = {}
                 for mm in ANS.finditer(f.read_text(encoding="utf-8", errors="replace")):

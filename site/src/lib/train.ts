@@ -10,7 +10,7 @@ import { MIN_POOL, tierHash, type School, type Tier } from './store';
 import { paperOk } from './paper';
 import { unitName } from './suggest';
 import { competencyGroups } from './crumbs';
-import { ppMode, ppTierCount } from './pastpaper';
+import { ppMode, ppTierCount, POOL_CAP } from './pastpaper';
 import ppCounts from '../data/pp_counts.json'; // numbers only: {"<sub>|<b|i|c>": n}; no past-paper ids or content
 
 export { MIN_POOL };
@@ -86,7 +86,7 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
       throw new Error(`train.ts: ${s.id} is 'pool' in PP_SWITCH with ${ppTotal(s.id)} past-paper questions (needs ${MIN_POOL}); use 'merge'`);
     if (ppMode(s.id) === 'merge' && ppTotal(s.id) >= MIN_POOL) // ADR 0011: a sub-topic switches to one pool at 20
       console.warn(`train.ts: ${s.id} has ${ppTotal(s.id)} past-paper questions: switch it to 'pool' in PP_SWITCH`);
-    const pool = ppMode(s.id) === 'pool' ? ppTotal(s.id) : undefined;
+    const pool = ppMode(s.id) === 'pool' ? Math.min(ppTotal(s.id), POOL_CAP) : undefined; // the counting pool (POOL_CAP)
     return {
       ...s, school, file: subFile.get(s.id) ?? null, count, hash, ...(pool ? { pool } : {}),
       // playable from the generated bank only, as build_rewards.py decides slots and capstones (pp items never make a tier

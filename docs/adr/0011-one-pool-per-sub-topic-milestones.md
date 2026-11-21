@@ -18,3 +18,11 @@ stay, cards stay (ADR 0001). The tier gate, the perfect-first-try clear and per-
 sub-topic. A growing pool can lower the shown share, but a milestone once reached is never taken away. ADR 0010's
 "Competent" tier name is retired; the badge stays "Exam-ready". Owner decisions: a wrongly answered question counts
 only when right on a later day (one 1-day retest); milestones at 1/6, 1/3 and a majority; generated fill-ins never count.
+
+## Amendment (owner, 21 Nov 2026): counting pool capped at 300
+
+Milestones count at most a pool's first 300 questions in easier-first order (`POOL_CAP`, `countingPool` in
+`site/src/lib/pastpaper.ts`). Without the cap, Exam-ready on English grammar (1,926 past-paper questions) would need 964
+counted, about 32 days at three quizzes a day with every answer right. With it: Milestone 1 at 50, Milestone 2 at 100,
+Exam-ready at 151. The rest of a pool is still served for practice after the counted ones (easier-first). Pools of 300 or
+fewer (every Science pool) are unchanged.

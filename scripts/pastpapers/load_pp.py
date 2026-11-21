@@ -106,13 +106,14 @@ def key(a, opts):
     if m:
         return str("ABCD".index(m.group(1).upper()) + 1)
     for i, o in enumerate(opts, 1):
-        if re.sub(r"^\s*\(\d\)\s*", "", o).strip() == a:
+        if strip_num(o) == a:
             return str(i)
     return None
 
 
 def strip_num(o: str) -> str:
-    return re.sub(r"^\s*\(\d\)\s*", "", o).strip()
+    """The option's printed numbering off: "(2)", "（2）", "2." / "2)" / "2、" before a non-digit (a decimal like "2.5" stays)."""
+    return re.sub(r"^\s*(?:[(（]\s*\d\s*[)）]|[1-4][.)．、](?=\s*\D))\s*", "", o or "").strip()
 
 
 def realfig(q):
@@ -157,7 +158,7 @@ def chi_incomplete(text: str, opts) -> str | None:
     answered (owner's spot check, 21 Nov 2026)."""
     if CHI_BLANK.search(text or ""):
         return None
-    if opts and all(PINYIN.fullmatch(strip_num(o).strip() or "x") for o in opts):
+    if opts and all(len(strip_num(o)) >= 2 and PINYIN.fullmatch(strip_num(o)) for o in opts):
         return None
     return "chi-no-blank-underline-lost"
 
@@ -382,8 +383,11 @@ def select(a):
                 conflict = True  # also catches a partial OCR read against a key the reread supplied
             cv = consensus.get(q["id"])
             cv_ok = bool(cv and len(opts) == 4 and k and cv["key_old"] == k)
-            if cv_ok and cv["kind"] == "replace":
-                k, src, conflict = cv["key_new"], "consensus", False
+            if cv_ok and cv["kind"] == "replace":  # an OCR or reread key that disagrees with the new key still holds it
+                k, src = cv["key_new"], "consensus"
+                conflict = bool((ok and ok != k) or (rr and rr != k))
+            elif cv_ok:
+                src = "consensus-confirm"
             if len(opts) != 4:
                 reason = "not-4-options"
             elif q["id"] in onans:
@@ -414,7 +418,8 @@ def select(a):
                     or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
                 # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
-                if not reason and a.subject == "english" and isinstance(q.get("qno"), int) and q["qno"] > 15:
+                if not reason and a.subject == "english" and (not isinstance(q.get("qno"), int) or q["qno"] > 15
+                                                              or re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)):
                     reason = "eng-passage-section"
                 if not reason and t.get("st") not in subs:
                     reason = "subtopic-not-in-syllabus"
@@ -459,8 +464,8 @@ def select(a):
                 "stem": speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip(), "options": [strip_num(o) for o in opts], "answer": int(k) - 1,
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
                 "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
-                "blind_src": (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
-                else "second:vl2-fullres+text72-ocr",
+                "blind_src": (cv["src"] if cv_ok else (blind[q["id"]].get("src") or "blind") if blind[q["id"]].get("agree") is True
+                              else "second:vl2-fullres+text72-ocr"),
             })
     ids = [r["id"] for r in rows]
     assert len(ids) == len(set(ids)), "pp id collision"
@@ -832,6 +837,9 @@ def selftest():
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
     assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
+    assert chi_incomplete("他们在行业里很有名。", ["（1）xíng yè", "（2）xíng yà", "（3）háng yè", "（4）háng yà"]) is None
+    assert chi_incomplete("老师说的话。", ["a", "b", "c", "d"]) == "chi-no-blank-underline-lost"
+    assert strip_num("（3）跌") == "跌" and strip_num("1. went") == "went" and strip_num("2.5 kg") == "2.5 kg" and strip_num("(4) 12") == "12"
     assert chi_incomplete("哥哥吃了一碗炒饭，但仍然觉得饿。", ["rēng rán", "réng rán", "lēng rán", "léng rán"]) is None
     assert chi_incomplete("老师让班长统计一下参加的人数。", ["记录重要的数字", "算出总体的数字", "a", "b"]) == "chi-no-blank-underline-lost"
     assert eng_incomplete("Select the most appropriate word to fill in the blank.") == "stem-instruction-only"

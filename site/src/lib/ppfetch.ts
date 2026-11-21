@@ -13,7 +13,9 @@ export async function fetchPool(subs: string[], topicOf: (sub: string) => string
   try {
     if (!(await currentSession())) return null;
     const out: PpStub[] = [];
-    const bySubject = new Map<string, string[]>(); // pp_pool lists one subject per call (Daily Review asks for several)
+    // pp_pool lists one subject per call (Daily Review asks for several). ponytail: one failing subject fails the whole list
+    // (null: Daily Review skips past papers that day, parks nothing); per-subject results if that ever bites
+    const bySubject = new Map<string, string[]>();
     for (const s of subs) {
       const subject = ppSubjectOf(s);
       if (!subject) return null;
