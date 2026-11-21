@@ -655,6 +655,7 @@ test('a milestone the first one-pool build awarded (cleared, no ms marker) is ma
   const rf = (_sub: string, t: 'b' | 'i' | 'c') => { calls++; return { slug: `card-${t}`, dup: false }; };
   const got = syncMilestones(s, { sci: ids }, rf, t0);
   assert.deepEqual(got.map((x) => [x.tier, x.reward]), [['b', null]]);  // announced, not paid again
+  assert.equal(got[0].again, true);
   assert.equal(calls, 0);
   assert.equal(milestoneReached(s, 'sci', 'b'), true);
   assert.equal(syncMilestones(s, { sci: ids }, rf, t0).length, 0);         // marked once

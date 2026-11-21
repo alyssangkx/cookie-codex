@@ -496,7 +496,7 @@ export interface QuizResult {
   goalJustMet: boolean;
   /** Basic cleared at once by a perfect first-ever Basic quiz on this sub-topic. */
   autoPromoted?: boolean;
-  newlyCleared: { sub: string; tier: Tier; reward: QuizResult['reward'] }[];
+  newlyCleared: { sub: string; tier: Tier; reward: QuizResult['reward']; again?: true }[]; // again: a pool milestone on a slot already cleared (paid before)
   /** Achievement-only cards this call gave (needs opts.eco): Super Epic per completed topic, Legendary per paper. */
   achieved?: { kind: 'super-epic' | 'legendary'; topic?: string; subject?: string; reward: Reward }[];
 }
@@ -566,7 +566,7 @@ export function finishQuiz(
   const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test),
     ...syncMilestones(s, opts.pools ?? {}, rewardFor, now, opts.eco, test)];
   const mine = newlyCleared.filter((x) => x.sub === a.sub && (a.tier ? x.tier === a.tier : !!opts.pools?.[x.sub])).reverse();
-  const own = mine.find((x) => x.reward) ?? (a.tier ? mine[0] : undefined); // a re-announced pool milestone paid nothing
+  const own = mine.find((x) => !x.again); // a pool milestone on a slot paid before is announced, but is not this quiz's clear
   if (own) { cleared = true; reward = own.reward; }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
@@ -688,7 +688,7 @@ export function syncMilestones(
       // sub-topic ever leaves 'pool'
       if (!st.ms && mastered >= at[k]) {
         st.ms = true;
-        out.push({ sub, tier: t, reward: st.cleared ? null : award(s, sub, t, rewardFor, now, eco, test) });
+        out.push(st.cleared ? { sub, tier: t, reward: null, again: true } : { sub, tier: t, reward: award(s, sub, t, rewardFor, now, eco, test) });
       }
     });
   }

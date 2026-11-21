@@ -287,7 +287,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    */
   /** topUp: a new paper is picked again without them; keep: a resumed paper still running stops (draft kept) instead of
    * dropping them, as the next save would lose their answers. A due paper drops them and is handed in with the rest. */
-  async function hydrate(topUp = true, keep = false): Promise<string> {
+  async function hydrate(topUp = true, keep: () => boolean = () => false): Promise<string> {
     const want = quiz.filter((id) => isStub(byId.get(id)));
     if (!want.length) return '';
     const { fetchItems } = await import('../../lib/ppfetch');
@@ -307,7 +307,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       notice += ppNote(limit, 'quiz');
       return quiz.length >= QUIZ_SIZE ? '' : 'This tier does not have enough questions right now. Try again later.';
     }
-    if (mode === 'paper' && keep) return `${ppReason(limit)}. ${KEPT}`;
+    if (mode === 'paper' && keep()) return `${ppReason(limit)}. ${KEPT}`; // asked now: the paper may have come due meanwhile
     if (mode === 'tier') {
       return limit ? 'You have answered a lot of past-paper questions today. They open again tomorrow.'
         : 'Past-paper questions could not load. Check your connection and try again.';
@@ -320,7 +320,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       quiz = pickPaper(gen as any, load().questions, paperN, paperMix.mix);
     } else quiz = quiz.filter((id) => !isStub(byId.get(id))); // a resumed paper or review drops them (with their picks)
     notice += ppNote(limit, mode === 'paper' ? 'paper' : 'review');
-    return quiz.length ? '' : (mode === 'paper' ? 'There are not enough questions for this paper right now. Try again later.' : 'Nothing to review right now. Try again later.');
+    return quiz.length ? '' : mode === 'review' ? 'Nothing to review right now. Try again later.'
+      : topUp ? 'There are not enough questions for this paper right now. Try again later.' : `${ppReason(limit)}. ${KEPT}`;
   }
 
   let notice = ''; // a line shown above the start text (e.g. an old paper was put away)
@@ -488,9 +489,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     paperMix = MIXES[mixKey];
     try { await loadBanks(paperTopics); } catch (e) { return stop((e as Error).message); }
     notice = ''; // this paper's own notes only (not a new paper's set up earlier on this page)
-    const running = !handInChosen && draftState(d.clock, Date.now()) === 'live'; // a due paper is handed in with what loaded
+    const running = () => !handInChosen && draftState(d.clock, Date.now()) === 'live'; // a due paper is handed in with what loaded
     if (ppFailed && d.ids.some((id) => isPpId(id) && !byId.has(id))) {
-      if (running) return stop(`${ppReason(false)}. ${KEPT}`);
+      if (running() || d.ids.every((id) => isPpId(id) || !byId.has(id))) return stop(`${ppReason(false)}. ${KEPT}`); // nothing else to hand in
       notice = ppNote(false, 'paper');
     }
     // a bank rebuilt since the paper began may have lost a question: keep the rest

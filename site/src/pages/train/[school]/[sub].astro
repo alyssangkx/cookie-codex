@@ -117,6 +117,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     if (!d) return;
     const eco = toEconomy(d);
     root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
+      if (tierState(s, sub, card.dataset.tier as Tier).cleared) return; // a cleared slot never pays again: keep its own card
       const p = rewardPreview(s, card.dataset.slug!, eco);
       const c = d.cards[p.slug];
       if (!c) return;
