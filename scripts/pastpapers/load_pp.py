@@ -415,7 +415,7 @@ def select(a):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
                 reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None) \
-                    or ("tex-left" if any("\\" in tex_to_text(x) for x in [q.get("text") or "", *opts]) else None) \
+                    or ("tex-left" if any(re.search(r"\\|\^|[\x00-\x08\x0b\x0c\x0e-\x1f]", tex_to_text(x)) for x in [q.get("text") or "", *opts]) else None) \
                     or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
                 # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
@@ -847,6 +847,15 @@ def selftest():
     assert tex_to_text(r"\(1, 2, 3, \cdots\)") == "1, 2, 3, …" and tex_to_text(r"\(10^{23}\)") == "10²³"
     assert tex_to_text("5 × \\\x0crac{1}{3}") == "5 × 1/3" and tex_to_text("120 \x09ext{cm}") == "120 cm"
     assert tex_to_text("On 21/11/2026 \\(\\times\\) 2") == "On 21/11/2026 × 2" and tex_to_text(r"$\frac{1}{2}$ of it") == "1/2 of it"
+    assert tex_to_text(r"8\(\frac{1}{2}\)") == "8 1/2" and tex_to_text(r"\(\frac{3}{4}\) of 2\(\frac{1}{2}\)") == "3/4 of 2 1/2"
+    assert tex_to_text(r"Ali paid $5 more than \(\frac{1}{2}\) of what Ben paid, $12.") == "Ali paid $5 more than 1/2 of what Ben paid, $12."
+    assert tex_to_text(r"Ali paid \$5 and \(\frac{1}{2}\) of \$12") == "Ali paid $5 and 1/2 of $12"
+    assert tex_to_text(r"\(\frac{1}{2}\)\(\frac{1}{3}\)") == "1/2 1/3" and tex_to_text(r"\(10^23\)") == "10²3"
+    assert tex_to_text(r"\(\frac{1}{\sqrt{2}}\)") == "1/√2" and tex_to_text(r"\(\frac12\)") == "1/2"
+    assert "^" in tex_to_text(r"\(x^{-1}\)")  # held by tex-left
+    assert tex_to_text(r"$(2\pi + 16)$ cm") == "(2π + 16) cm" and tex_to_text(r"How many in \(\frac{1}{2}\)?") == "How many in 1/2?"
+    assert tex_to_text(r"Express \(4\frac{4}{5}\) as a decimal.") == "Express 4 4/5 as a decimal."
+    assert tex_to_text("$(50-23z)$") == "(50-23z)" and tex_to_text("$(2x - 14)") == "$(2x - 14)" and tex_to_text("$12$") == "$12$"
     assert "\\" in tex_to_text(r"\(\overline{AB}\)")  # an unknown command keeps its backslash: select holds it (tex-left)
     assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
     assert chi_incomplete("他们在行业里很有名。", ["（1）xíng yè", "（2）xíng yà", "（3）háng yè", "（4）háng yà"]) is None
@@ -1092,8 +1101,8 @@ TEX_SYM = {"times": "×", "div": "÷", "pi": "π", "angle": "∠", "ell": "ℓ",
            "circ": "°", "degree": "°", "left": "", "right": "", "quad": " ", "qquad": " "}
 SUPER = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
 # a JSON escape upstream ate the backslash of these commands ("\frac" stored as a form feed + "rac", "\text" as a tab + "ext")
-EATEN = re.compile("\x0c(rac)|\x09(ext|frac|imes|heta|riangle|extrm)|\x0d(ight)|\x08(egin|ar)")
-EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b"}
+EATEN = re.compile("\x0c(rac)|\x09(ext|frac|imes|heta|riangle|extrm)|\x0d(ight)|\x08(egin|ar)|\x0b(ec)")
+EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b", "\x0b": "v"}
 
 
 def tex_to_text(t: str) -> str:
@@ -1101,26 +1110,33 @@ def tex_to_text(t: str) -> str:
     report of 21 Nov 2026 ("\\frac{3}{4}" shown raw; 359 Maths items). Money "$" is left alone. Anything it cannot turn into
     text keeps its backslash, and select holds that item (tex-left)."""
     t = EATEN.sub(lambda m: "\\" + EATEN_CH[m.group(0)[0]] + m.group(0)[1:], t)
+    t = re.sub(r"^\s*\$(?!\s*\d)([^$]+)\$\s*$", r"\1", t)  # a whole option in TeX dollars "$(50-23z)$" (money "$(2x - 14)" has one $)
     if "\\" not in t and "^" not in t:
         return t
     t = re.sub(r"\\{2,}(?=[A-Za-z()\[\]])", r"\\", t)  # "\\\\times" -> "\\times"
     t = re.sub(r"\\n(?=[A-Z0-9\s(]|$)", "\n", t)  # a literal backslash-n from the OCR ("90.9\nFind"), not \neq
-    t = re.sub(r"\$([^$]*\\[^$]*)\$", r"\1", t)  # $...$ math (only when it holds a command: money stays)
+    t = t.replace("\\$", "\x00")  # an escaped dollar is money: keep it out of the $...$ math rule
+    t = re.sub(r"\$(?!\s*\d)([^$]*\\[^$]*)\$", r"\1", t)  # $...$ math holding a command; money ("$5 ...") starts with a digit
+    t = re.sub(r"\\[()\[\]]", " ", t)  # \( \) \[ \] wrappers out first, so "8\(\frac{1}{2}\)" is seen as a mixed number
+    t = re.sub(r"\\(?:text|mathrm|textrm|mbox)\s*\{([^{}]*)\}", r"\1", t)
+    t = re.sub(r"\\sqrt\s*\{([^{}]*)\}", lambda m: "√" + (m.group(1) if re.fullmatch(r"\w+", m.group(1)) else f"({m.group(1)})"), t)
+    t = re.sub(r"\\[dt]?frac\s*(\d)(\d)(?!\d)", r"\\frac{\1}{\2}", t)  # "\frac12" -> "\frac{1}{2}"
     t = re.sub(r"(\d)\s*(?=\\[dt]?frac)", r"\1 ", t)  # a mixed number "2\frac{1}{3}" keeps its space: "2 1/3"
+    t = re.sub(r"\}\s*(?=\\[dt]?frac)", "} ", t)  # two fractions side by side stay apart: "1/2 1/3"
     def frac(m):
         a, b = m.group(1).strip(), m.group(2).strip()
         wrap = lambda x: f"({x})" if re.search(r"[\s+\-−×÷]", x) else x
         return f"{wrap(a)}/{wrap(b)}"
     for _ in range(3):  # nested fractions, innermost first
         t = re.sub(r"\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}", frac, t)
-    t = re.sub(r"\\(?:text|mathrm|textrm|mbox)\s*\{([^{}]*)\}", r"\1", t)
-    t = re.sub(r"\\sqrt\s*\{([^{}]*)\}", lambda m: "√" + (m.group(1) if re.fullmatch(r"\w+", m.group(1)) else f"({m.group(1)})"), t)
-    t = re.sub(r"\^\s*\{?\s*\\circ\s*\}?", "°", t)
-    t = re.sub(r"\^\s*\{(\d+)\}|\^(\d+)", lambda m: (m.group(1) or m.group(2)).translate(SUPER), t)
+    t = re.sub(r"\^\s*(?:\{\s*\\circ\s*\}|\\circ)", "°", t)  # ^\circ or ^{\circ}; the space after stays
+    t = re.sub(r"\^\s*\{(\d+)\}|\^(\d)", lambda m: (m.group(1) or m.group(2)).translate(SUPER), t)  # bare ^23 raises the 2 only (TeX)
     t = re.sub(r"\\([A-Za-z]+)(?![A-Za-z])", lambda m: TEX_SYM.get(m.group(1), m.group(0)), t)  # whole command names only
-    t = re.sub(r"\\[,;!:]", " ", t).replace("\\%", "%").replace("\\$", "$")
-    t = re.sub(r"\\[()\[\]]", "", t)  # \( \) \[ \] math wrappers
-    return re.sub(r"[ \t]{2,}", " ", t).strip()
+    t = re.sub(r"\\[,;!:]", " ", t).replace("\\%", "%").replace("\x00", "$")
+    t = re.sub(r"[ \t]+(?=[⁰¹²³⁴⁵⁶⁷⁸⁹°])", "", t)  # "8 cm \(^2\)" -> "8 cm²"
+    t = re.sub(r"[ \t]+(?=[?!,;:]|\.(?!\d))", "", t)  # "in 1/2 ?" -> "in 1/2?" (a wrapper's space; ".5" stays)
+    t = re.sub(r"[ \t]{2,}", " ", t)
+    return re.sub(r"\( (?=\S)|(?<=\S) \)", lambda m: m.group(0).strip(), t).strip()
 
 
 SUBTOPIC_DB = re.compile(r"^[a-z0-9-]{3,120}$")  # pp_items_subtopic_check (migration 009; 004 allowed 80)
