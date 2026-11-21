@@ -8,6 +8,9 @@ tesseract words inside it (pages/pNNNN.tsv) are checked:
                       figure the stem refers to is missing (tester: pp-7c736161cb)
   croptext.py check [--out DIR] [--subject science] [--gate]   -> OUT/<subject>/croptext.jsonl {id, n, flags}
   croptext.py selftest
+A review list, not automatic holds: every flag is looked at by eye before an item is held (a crop with its drawing AND an
+options table whose labels are single letters, or a numbered table row of the item's own, can be flagged too).
+A crop that cannot be placed on its page is flagged "unplaced" (unchecked, not clean).
 Prints ids, counts and flag names only (no paper text)."""
 import argparse, collections, json, re, sys
 from pathlib import Path
@@ -79,7 +82,7 @@ def flags_for(words, box, qno, options, stem=""):
     # passage, tables and observation boxes are foreign-looking too, but carry no question number (sample of 6, 21 Nov)
     # rows by position, not tesseract lines: a question number is often its own block, apart from the text beside it
     for n in inside:
-        m = QNUM.match(n[7].rstrip(")"))
+        m = QNUM.match(n[7])  # "12" or "12.", never an option label "1)" or "(1)"
         if not m or int(m.group(1)) == qno or n[0] - x0 > 0.15 * (x1 - x0):
             continue
         cy, hh = (n[1] + n[3]) / 2, max(8, n[3] - n[1])
@@ -111,6 +114,7 @@ def check(a):
             cb = crop_box(c)
             if cb is None:
                 unplaced += 1
+                fl.add("unplaced")
                 continue
             fl |= set(flags_for(words_of(cb[0]), cb[1], r["qno"], r["options"], r["stem"]))
         if r.get("crops"):

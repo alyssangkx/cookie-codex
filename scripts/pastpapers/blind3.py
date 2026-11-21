@@ -37,7 +37,7 @@ def pick(raw):
 
 
 def strip_num(o):
-    return re.sub(r"^\s*\(?[1-4A-Da-d][).]\s*", "", o or "").strip()
+    return re.sub(r"^\s*\(?[1-4A-D][).]\s*", "", o or "").strip()  # numbering only: "a.m." stays
 
 
 def qtext(q):
@@ -86,7 +86,7 @@ def pack(a):
 def run(a):
     w = Path(SERVER_BASE) / a.subject
     out = w / "results.jsonl"
-    done = {r["id"] for r in jl(out) if r.get("pick") is not None}
+    done = {r["id"] for r in jl(out)}  # an unparsed answer is final too (temperature 0 would repeat it)
     todo = [q for q in jl(w / "items.jsonl") if q["id"] not in done]
     print(len(todo), "to solve", flush=True)
     if not todo:
@@ -128,6 +128,8 @@ def report(a):
         print(f"  {k}: {n}")
     if a.write:
         (BLIND / "third").mkdir(exist_ok=True)
+        for old in (BLIND / "third").glob(f"{a.subject}-*.jsonl"):  # a year with no disagreements left keeps no stale verdicts
+            old.unlink()
         for y, L in by.items():
             with open(BLIND / "third" / f"{a.subject}-{y}.jsonl", "w") as f:
                 for r in L:
@@ -137,7 +139,7 @@ def report(a):
 
 def selftest():
     assert pick("so ANSWER: 3") == "3" and pick("ANSWER: (B)") == "2" and pick("no answer") is None
-    assert strip_num("(2) went") == "went" and strip_num("B. gone") == "gone"
+    assert strip_num("(2) went") == "went" and strip_num("B. gone") == "gone" and strip_num("a.m.") == "a.m."
     assert qtext({"text": "He ___ home.", "options": ["go", "goes", "going", "gone"]}).endswith("(4) gone")
     print("blind3 selftest ok")
 
