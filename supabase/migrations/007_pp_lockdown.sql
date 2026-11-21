@@ -1,4 +1,4 @@
--- Cookie Codex, migration 007: remove the bulk past-paper read paths (ADR 0012).  NOT YET APPLIED.
+-- Cookie Codex, migration 007: remove the bulk past-paper read paths (ADR 0012).  APPLIED to the live project 21 Nov 2026 (owner OK; verified: pp_items_for and pp_figures_read gone).
 -- Apply ONLY after the site that uses pp_pool + the pp-serve function is live (the old site reads through pp_items_for).
 -- Apply with:  supabase db query --remote --yes -f supabase/migrations/007_pp_lockdown.sql   (never `db push`).
 -- Test: scripts/accounts/sqltest.sh applies it after the 004-006 checks and runs test_pp_lockdown.sql.
