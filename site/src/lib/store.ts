@@ -565,7 +565,8 @@ export function finishQuiz(
   earn(s, (opts.retests ?? 0) * RETEST_CRUMBS, 'retest', now, { test });
   const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test),
     ...syncMilestones(s, opts.pools ?? {}, rewardFor, now, opts.eco, test)];
-  const own = [...newlyCleared].reverse().find((x) => x.sub === a.sub && (a.tier ? x.tier === a.tier : !!opts.pools?.[x.sub]));
+  const mine = newlyCleared.filter((x) => x.sub === a.sub && (a.tier ? x.tier === a.tier : !!opts.pools?.[x.sub])).reverse();
+  const own = mine.find((x) => x.reward) ?? mine[0]; // a re-announced pool milestone has no reward: report one that had
   if (own) { cleared = true; reward = own.reward; }
 
   const goalJustMet = !wasMet && d.quizzes >= s.settings.dailyGoalQuizzes;
