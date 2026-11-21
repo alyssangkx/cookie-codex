@@ -26,3 +26,8 @@ Milestones count at most a pool's first 300 questions in easier-first order (`PO
 counted, about 32 days at three quizzes a day with every answer right. With it: Milestone 1 at 50, Milestone 2 at 100,
 Exam-ready at 151. The rest of a pool is still served for practice after the counted ones (easier-first). Pools of 300 or
 fewer (every Science pool) are unchanged.
+
+## Amendment (owner, 21 Nov 2026): Rate stays merged
+
+`math-rate-rate` keeps its tiers with its 38 past-paper questions merged in, so the generated speed questions the owner
+asked for stay in play (`OWNER_MERGE` in `site/src/lib/train.ts` silences the build's switch-to-pool warning for it).

@@ -75,6 +75,8 @@ export interface Sub {
 }
 const ppTotal = (sub: string) => (['b', 'i', 'c'] as const).reduce((n, t) => n + ((ppCounts as Record<string, number>)[`${sub}|${t}`] ?? 0), 0);
 
+/** Sub-topics the owner keeps on 'merge' at 20+ past-paper questions (21 Nov 2026: Rate keeps the generated speed questions). */
+const OWNER_MERGE = new Set(['math-rate-rate']);
 export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).flatMap(([school, list]) =>
   list.map((s) => {
     // a switched-on past-paper sub-topic: the quiz merges or swaps in pp items, so count what it will use and drop the hash
@@ -85,7 +87,7 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
       c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
     if (ppMode(s.id) === 'pool' && ppTotal(s.id) < MIN_POOL) // mergePool drops a pool sub-topic's generated questions
       throw new Error(`train.ts: ${s.id} is 'pool' in PP_SWITCH with ${ppTotal(s.id)} past-paper questions (needs ${MIN_POOL}); use 'merge'`);
-    if (ppMode(s.id) === 'merge' && ppTotal(s.id) >= MIN_POOL) // ADR 0011: a sub-topic switches to one pool at 20
+    if (ppMode(s.id) === 'merge' && ppTotal(s.id) >= MIN_POOL && !OWNER_MERGE.has(s.id)) // ADR 0011: one pool at 20
       console.warn(`train.ts: ${s.id} has ${ppTotal(s.id)} past-paper questions: switch it to 'pool' in PP_SWITCH`);
     const pool = ppMode(s.id) === 'pool' ? Math.min(ppTotal(s.id), POOL_CAP) : undefined; // the counting pool (POOL_CAP)
     return {

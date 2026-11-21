@@ -415,6 +415,7 @@ def select(a):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
                 reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" else None) \
+                    or ("tex-left" if any("\\" in tex_to_text(x) for x in [q.get("text") or "", *opts]) else None) \
                     or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
                 # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
@@ -838,12 +839,15 @@ def selftest():
     assert garbled("I'm not good _________ dancing.", ["in", "at", "for", "with"]) is None  # blanks are not noise
     assert garbled("intimidated", ["worried", "terrified", "helpless", "ashamed"]) == "text-short"  # the sentence was lost
     assert tex_to_text(r"Each had \(\frac{3}{5}\) kg") == "Each had 3/5 kg"
-    assert tex_to_text(r"\(2\frac{1}{3}\) m") == "2 1/3 m"
+    assert tex_to_text(r"\(2\frac{1}{3}\) m") == "2 1/3 m" and tex_to_text(r"\(\frac{12}{5}\)") == "12/5"
     assert tex_to_text(r"\(\frac{3b - 7 + 4b}{3} + 6\)") == "(3b - 7 + 4b)/3 + 6"
     assert tex_to_text(r"\(12 \times 5 \div 3\) and \(45^\circ\) and 8 cm\(^2\)") == "12 × 5 ÷ 3 and 45° and 8 cm²"
     assert tex_to_text(r"\(120 \, \text{cm}^3\)") == "120 cm³" and tex_to_text("Cost $5.20") == "Cost $5.20"
-    assert tex_to_text("90.9\\nFind it") == "90.9\nFind it"
-    assert tex_to_text("5 × \\\x0crac{1}{3}") == "5 × 1/3" and tex_to_text("\x0crac{6}{1} \\\\times \x0crac{5}{4}") == "6/1 × 5/4"
+    assert tex_to_text("90.9\\nFind it") == "90.9\nFind it" and tex_to_text(r"\(x \neq 3\)") == "x ≠ 3"
+    assert tex_to_text(r"\(1, 2, 3, \cdots\)") == "1, 2, 3, …" and tex_to_text(r"\(10^{23}\)") == "10²³"
+    assert tex_to_text("5 × \\\x0crac{1}{3}") == "5 × 1/3" and tex_to_text("120 \x09ext{cm}") == "120 cm"
+    assert tex_to_text("On 21/11/2026 \\(\\times\\) 2") == "On 21/11/2026 × 2" and tex_to_text(r"$\frac{1}{2}$ of it") == "1/2 of it"
+    assert "\\" in tex_to_text(r"\(\overline{AB}\)")  # an unknown command keeps its backslash: select holds it (tex-left)
     assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
     assert chi_incomplete("他们在行业里很有名。", ["（1）xíng yè", "（2）xíng yà", "（3）háng yè", "（4）háng yà"]) is None
     assert chi_incomplete("老师说的话。", ["a", "b", "c", "d"]) == "chi-no-blank-underline-lost"
@@ -1083,32 +1087,38 @@ def key_kind(k):
     return f"unrecognised key, {len(k)} chars"
 
 
-TEX_SYM = {r"\times": "×", r"\div": "÷", r"\pi": "π", r"\angle": "∠", r"\ell": "ℓ", r"\square": "□", r"\cdot": "·",
-           r"\left": "", r"\right": "", r"\,": " ", r"\;": " ", r"\!": "", r"\%": "%", r"\$": "$"}
-SUPERS = {"2": "²", "3": "³"}
+TEX_SYM = {"times": "×", "div": "÷", "pi": "π", "angle": "∠", "ell": "ℓ", "square": "□", "cdot": "·", "cdots": "…",
+           "ldots": "…", "dots": "…", "geq": "≥", "leq": "≤", "ge": "≥", "le": "≤", "neq": "≠", "ne": "≠", "triangle": "△",
+           "circ": "°", "degree": "°", "left": "", "right": "", "quad": " ", "qquad": " "}
+SUPER = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
+# a JSON escape upstream ate the backslash of these commands ("\frac" stored as a form feed + "rac", "\text" as a tab + "ext")
+EATEN = re.compile("\x0c(rac)|\x09(ext|frac|imes|heta|riangle|extrm)|\x0d(ight)|\x08(egin|ar)")
+EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b"}
 
 
 def tex_to_text(t: str) -> str:
     """LaTeX in an OCR'd stem or option as plain text, the way the site writes Maths ("3/5", "2 1/3", "×", "°"): the owner's
-    report of 21 Nov 2026 ("\\frac{3}{4}" shown raw; 359 Maths items). Money "$" is left alone."""
-    # JSON escapes ate some backslashes upstream: "\\frac" stored as a form feed + "rac", "\\times" as a tab + "imes"
-    t = t.replace("\x0crac", "\\frac").replace("\x09imes", "\\times").replace("\x0bec", "\\vec")
+    report of 21 Nov 2026 ("\\frac{3}{4}" shown raw; 359 Maths items). Money "$" is left alone. Anything it cannot turn into
+    text keeps its backslash, and select holds that item (tex-left)."""
+    t = EATEN.sub(lambda m: "\\" + EATEN_CH[m.group(0)[0]] + m.group(0)[1:], t)
     if "\\" not in t and "^" not in t:
         return t
     t = re.sub(r"\\{2,}(?=[A-Za-z()\[\]])", r"\\", t)  # "\\\\times" -> "\\times"
-    t = t.replace("\\n", "\n")  # a literal backslash-n from the OCR
+    t = re.sub(r"\\n(?=[A-Z0-9\s(]|$)", "\n", t)  # a literal backslash-n from the OCR ("90.9\nFind"), not \neq
+    t = re.sub(r"\$([^$]*\\[^$]*)\$", r"\1", t)  # $...$ math (only when it holds a command: money stays)
+    t = re.sub(r"(\d)\s*(?=\\[dt]?frac)", r"\1 ", t)  # a mixed number "2\frac{1}{3}" keeps its space: "2 1/3"
     def frac(m):
         a, b = m.group(1).strip(), m.group(2).strip()
         wrap = lambda x: f"({x})" if re.search(r"[\s+\-−×÷]", x) else x
         return f"{wrap(a)}/{wrap(b)}"
     for _ in range(3):  # nested fractions, innermost first
         t = re.sub(r"\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}", frac, t)
-    t = re.sub(r"(\d)\s*(\(?\d+\)?/\(?\d+\)?)", r"\1 \2", t)  # mixed number: "2" + "1/3" -> "2 1/3"
-    t = re.sub(r"\\(?:text|mathrm|textrm)\s*\{([^{}]*)\}", r"\1", t)
+    t = re.sub(r"\\(?:text|mathrm|textrm|mbox)\s*\{([^{}]*)\}", r"\1", t)
+    t = re.sub(r"\\sqrt\s*\{([^{}]*)\}", lambda m: "√" + (m.group(1) if re.fullmatch(r"\w+", m.group(1)) else f"({m.group(1)})"), t)
     t = re.sub(r"\^\s*\{?\s*\\circ\s*\}?", "°", t)
-    t = re.sub(r"\^\s*\{?([23])\}?", lambda m: SUPERS[m.group(1)], t)
-    for k, v in TEX_SYM.items():
-        t = t.replace(k, v)
+    t = re.sub(r"\^\s*\{(\d+)\}|\^(\d+)", lambda m: (m.group(1) or m.group(2)).translate(SUPER), t)
+    t = re.sub(r"\\([A-Za-z]+)(?![A-Za-z])", lambda m: TEX_SYM.get(m.group(1), m.group(0)), t)  # whole command names only
+    t = re.sub(r"\\[,;!:]", " ", t).replace("\\%", "%").replace("\\$", "$")
     t = re.sub(r"\\[()\[\]]", "", t)  # \( \) \[ \] math wrappers
     return re.sub(r"[ \t]{2,}", " ", t).strip()
 
