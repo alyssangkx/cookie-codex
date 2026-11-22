@@ -348,6 +348,8 @@ def on_answer_pages(base: Path) -> set:
 
 
 def select(a):
+    if a.passage == "chinese-dialogue":
+        return select_dialogue(a)
     out = outside_repo(Path(a.out)) / a.subject
     out.mkdir(parents=True, exist_ok=True)
     subs = syllabus_subs(a.subject)
@@ -534,6 +536,108 @@ def select(a):
               "with_figure": sum(bool(r["crops"]) for r in rows), "crops": sum(len(r["crops"]) for r in rows)}
     (out / "report.json").write_text(json.dumps(report, indent=1))
     print(f"selected {len(rows)}; with figure {report['with_figure']} ({report['crops']} crops); rejected", dict(R.most_common()))
+
+
+DLG_GENERIC = "对话中的（{n}）应填入哪一句？"
+
+
+def dialogue_opts(opts):
+    """The 8 phrases of a 完成对话 table without their printed numbers ("1. 我已经习惯了", "(3) …", "3 …")."""
+    return [re.sub(r"^\s*[(（]?\s*[1-8]\s*[)）.．、]?\s*", "", o or "").strip() for o in opts]
+
+
+def dialogue_stem(t, n):
+    """The blank's dialogue line with （27）＿＿＿＿ when the OCR caught it cleanly (its own Q-number in it, no Latin letters
+    for a garbled speaker name, no instruction), else a plain question; the dialogue page is shown with every blank."""
+    t = re.sub(r"\s+(?=[\u3400-\u9fff，。！？：；“”])|(?<=[\u3400-\u9fff，。！？：；“”])\s+", "", t or "").strip()
+    m = re.search(rf"[〔(（]?\s*[QO0]\s?{n}(?!\d)\s*[.．]?\s*[)）〕]?(?:\s*[(（]\s*[)）])?|_{{2,}}", t)
+    if not m or re.search(r"根据上下文|从表中|[A-Za-z]{2,}|Q\d", t[:m.start()] + t[m.end():]) or len(t) < 6:
+        return DLG_GENERIC.format(n=n)
+    return (t[:m.start()] + f"（{n}）＿＿＿＿" + t[m.end():]).strip(" |")
+
+
+def select_dialogue(a):
+    """Chinese 完成对话 sets (owner OK 22 Nov 2026, migration 011: 8 options for chi-dialogue-mcq only). A set is a paper's
+    questions 26-29 sharing the section's 8 phrases. A set ships only with 4 blanks, 8 distinct phrases, 4 printed keys
+    1-8 that are all different (each phrase is used once), and per blank an outside-model 'confirm' verdict on the key
+    (imgpack chinese-dialogue: no blind solver checks 8-option items). Writes candidates.jsonl (every set passing the
+    structure checks, for the model pack) besides the usual selected/rejects/report."""
+    out = outside_repo(Path(a.out)) / a.subject
+    out.mkdir(parents=True, exist_ok=True)
+    hold = read_hold(out)
+    rows, rejects, cands = [], [], []
+    R = collections.Counter()
+    for y in years(a.years):
+        base = Path(a.pp) / "chinese" / str(y)
+        tags = {t["id"]: t for t in jl(base / "tags72.jsonl")}
+        consensus = {c["id"]: c for c in jl(Path(a.blind) / "consensus" / f"chinese-{y}.jsonl")}
+        papers = {p["paper_id"]: p for p in jl(base / "papers.jsonl")}
+        sets, phrases = collections.defaultdict(dict), {}
+        for q in jl(base / "merged.jsonl"):
+            t = tags.get(q["id"]) or {}
+            n = int(q["qno"]) if str(q.get("qno") or "").isdigit() else None
+            if t.get("st") != "chi-dialogue-mcq" and q.get("section") != "完成对话":
+                continue
+            if len(q.get("options") or []) == 8:
+                phrases[q["paper"]] = dialogue_opts(q["options"])
+            if n and 26 <= n <= 29:
+                sets[q["paper"]][n] = q
+        for paper, s in sorted(sets.items()):
+            ph = phrases.get(paper)
+            keys = {n: (re.sub(r"\D", "", str(q.get("answer") or ""))[-1:] or None) for n, q in s.items()}
+            why = None
+            if sorted(s) != [26, 27, 28, 29]:
+                why = "dlg-not-4-blanks"
+            elif not ph or len(set(ph)) != 8 or not all(ph):
+                why = "dlg-phrases-unread"
+            elif not all(k and k in "12345678" for k in keys.values()):
+                why = "no-answer-key"
+            elif len(set(keys.values())) != 4:
+                why = "dlg-keys-repeat"  # each phrase fills one blank: a repeated key is a misread
+            if why:
+                for q in s.values():
+                    rejects.append({"id": q["id"], "reason": why}); R[why] += 1
+                continue
+            grp = set_id(next(iter(s.values())), "dl")
+            cands.append({"grp": grp, "year": y, "paper": paper, "phrases": ph,
+                          "blanks": [{"id": q["id"], "qno": n, "key": keys[n], "pages": q.get("pages") or []} for n, q in sorted(s.items())]})
+            for n, q in sorted(s.items()):
+                cv = consensus.get(q["id"])
+                if pp_id(q["id"]) in hold:
+                    reason = "held-by-review"
+                elif not (cv and cv.get("kind") == "confirm" and cv.get("key_old") == keys[n]):
+                    reason = "needs-model-check"
+                elif not q.get("pages"):
+                    reason = "no-page-data"
+                else:
+                    reason = None
+                if reason:
+                    rejects.append({"id": q["id"], "reason": reason}); R[reason] += 1
+                    continue
+                t = tags.get(q["id"]) or {}
+                rows.append({"id": pp_id(q["id"]), "src_id": q["id"], "subject": "chinese", "subtopic": "chi-dialogue-mcq",
+                             "level": LEVEL.get(t.get("difficulty"), "intermediate"), "difficulty": t.get("difficulty", 2),
+                             "pattern": t.get("pat"), "stem": dialogue_stem(q.get("text"), n), "options": ph,
+                             "answer": int(keys[n]) - 1, "grp": grp, "seq": n, "pages": q["pages"], "pages_dir": str(base / "pages"),
+                             "answer_src": "vision+consensus", "crops": [], "year": y, "school": q.get("school") or (papers.get(paper) or {}).get("school"),
+                             "paper": paper, "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
+                             "blind_src": cv.get("src", "consensus")})
+    for r, why in set_pages(rows, out, "chinese-dialogue"):
+        rejects.append({"id": r["src_id"], "reason": why}); R[why] += 1
+    with open(out / "candidates.jsonl", "w", encoding="utf-8") as f:
+        for c in cands:
+            f.write(json.dumps(c, ensure_ascii=False) + "\n")
+    with open(out / "selected.jsonl", "w") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    with open(out / "rejects.jsonl", "w") as f:
+        for r in rejects:
+            f.write(json.dumps(r) + "\n")
+    report = {"subject": "chinese", "passage": "chinese-dialogue", "selected": len(rows), "candidate_sets": len(cands),
+              "rejected": dict(R.most_common()), "with_figure": 0, "crops": 0,
+              "by_subtopic": {"chi-dialogue-mcq": dict(collections.Counter(r["level"] for r in rows))}}
+    (out / "report.json").write_text(json.dumps(report, indent=1))
+    print(f"dialogue: {len(cands)} candidate sets ({4 * len(cands)} blanks); selected {len(rows)}; rejected", dict(R.most_common()))
 
 
 # ------------------------------------------------------------------ figures
@@ -1112,6 +1216,10 @@ def selftest():
     t = "(a) State which graph is correct.\n(a) Explain why you chose the graph in (a)."
     assert scanner_marks(t) == t  # the stem refers to part (a): its labels stay
     assert scanner_marks("Mix (a) and (b) in the beaker.") == "Mix (a) and (b) in the beaker."  # labels inside a sentence stay
+    assert dialogue_opts(["1. 我已经习惯了", "(2) 还是专心读书吧", "3 年底就要会考了"]) == ["我已经习惯了", "还是专心读书吧", "年底就要会考了"]
+    assert dialogue_stem("丽 云 : 昨天 傍晚 ，Q26。", 26) == "丽云:昨天傍晚，（26）＿＿＿＿。"
+    assert dialogue_stem("根据上下文的意思，从表中选出适当的短语或短句。", 27) == "对话中的（27）应填入哪一句？"
+    assert dialogue_stem("XH: Q27， 这 样 也 太 不 方便 了 !", 27) == "对话中的（27）应填入哪一句？"
     print("selftest ok")
 
 
@@ -1245,6 +1353,7 @@ PASSAGE = {  # passage mode: the section's questions, its sub-topic, and the set
     "english-visual": {"subject": "english", "q": (21, 30), "st": "eng-visual-text", "section": "Visual Text", "suffix": "vt"},
     "chinese-cloze": {"subject": "chinese", "q": (16, 20), "st": "chi-cloze-mcq", "section": "短文填空", "suffix": "cz"},
     "chinese-reading": {"subject": "chinese", "q": (21, 25), "st": "chi-yuedu-mcq-text", "section": "阅读理解一", "suffix": "rd"},
+    "chinese-dialogue": {"subject": "chinese", "q": (26, 29), "st": "chi-dialogue-mcq", "section": "完成对话", "suffix": "dl"},
 }
 
 
@@ -1355,7 +1464,8 @@ def cut_pieces(pages, p0, top0, pe, bot_e, cjk=False):
     return (pieces, None) if pieces else (None, "set-no-cut")
 
 
-CHI_HEAD = {"chinese-cloze": re.compile(r"短文填空"), "chinese-reading": re.compile(r"阅读理解")}
+CHI_HEAD = {"chinese-cloze": re.compile(r"短文填空"), "chinese-reading": re.compile(r"阅读理解"),
+            "chinese-dialogue": re.compile(r"完成对话|从表中选出")}
 CHI_INSTR = re.compile(r"根据短文")
 CHI_NEXT = re.compile(r"阅读理解|完成对话|短文填空|根据短文|^\W*[一二三四五六七八九十]\s*[、.．]?\s*\S{2,6}[（(]\s*\d+\s*题")
 
@@ -1373,7 +1483,7 @@ def chi_pieces(pages, kind, first, last):
     section's heading on that page. (None, "set-no-cut") when an end is not found."""
     flat = [(p, r) for p in sorted(pages) for r in pages[p][0]]
     text = lambda r: "".join(w[4] for w in r[2])
-    blank = lambda n: re.compile(rf"Q\s?{n}\s?[（(]")
+    blank = (lambda n: re.compile(rf"[QO0]\s?{n}(?!\d)")) if kind == "chinese-dialogue" else (lambda n: re.compile(rf"Q\s?{n}\s?[（(]"))
     # the first question (or blank) the OCR read: an OCR slip on one number ("QIO(" for Q19) falls back to the next
     if kind == "chinese-reading":
         hit = lambda k, n: chi_qnum(text(flat[k][1])) == n and not CHI_INSTR.search(text(flat[k][1]))
@@ -1384,7 +1494,9 @@ def chi_pieces(pages, kind, first, last):
         return None, "set-no-cut"
     # the start: the later of the section's heading and its 根据短文 instruction before the questions (a heading the OCR
     # missed must not let an earlier mention, or the previous section, in)
-    heads = [k for k in range(qk) if CHI_HEAD[kind].search(text(flat[k][1])) or CHI_INSTR.search(text(flat[k][1]))]
+    # a dialogue starts only at its own heading or instruction (完成对话 / 从表中选出): 根据短文 is the reading section's
+    heads = [k for k in range(qk) if CHI_HEAD[kind].search(text(flat[k][1]))
+             or (kind != "chinese-dialogue" and CHI_INSTR.search(text(flat[k][1])))]
     if not heads:
         return None, "set-no-cut"
     k0 = heads[-1]
@@ -1396,6 +1508,8 @@ def chi_pieces(pages, kind, first, last):
     if lk is None:
         return None, "set-no-cut"
     pe = flat[lk][0]
+    if kind == "chinese-dialogue" and any(re.match(r"^\W{0,2}[QO0]\s?2[1-5](?!\d)", text(flat[k][1])) for k in range(k0, lk)):
+        return None, "set-no-cut"  # reading questions 21-25 inside: the start is the previous section's
     nxt = next((k for k in range(lk + 1, len(flat)) if flat[k][0] == pe and CHI_NEXT.search(text(flat[k][1]))), None)
     return cut_pieces(pages, flat[k0][0], flat[k0][1][0] - 8, pe, flat[nxt][1][0] - 8 if nxt is not None else pages[pe][2], cjk=True)
 

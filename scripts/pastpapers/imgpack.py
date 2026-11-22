@@ -40,11 +40,18 @@ HEAD_SG = ("You are an expert Singapore primary-school {subj} teacher marking PS
            "numbered questions, each with its options and, where the question refers to one, the picture printed with it. For "
            "each question choose the single best option (1-4). Reply ONLY with one line per question: Q&lt;number&gt;: &lt;option "
            "number&gt;, for example Q1: 3. Answer every question.")
+HEAD_DLG = ("你是新加坡小学华文老师，正在批改小六会考（PSLE）华文试卷的“完成对话”。每一组（SET）先给出试卷的页面图片（一个有8个短语或短句的表格，"
+            "和一段有空格的对话），然后列出这组对话的空格。请根据上下文，为每个空格从表中选出最恰当的短语或短句（1-8），每个短语只用一次。"
+            "只用一行回答一题，格式为 Q&lt;题号&gt;: &lt;选项号&gt;，例如 Q1: 7。每一题都要回答。\n"
+            "You are an expert Singapore primary-school Chinese teacher. Each SET shows the exam page images (a table of 8 phrases "
+            "and a dialogue with numbered blanks), then lists the blanks. For each blank choose the phrase (1-8) that fits; each "
+            "phrase is used once. Reply ONLY with one line per question: Q&lt;number&gt;: &lt;option number 1-8&gt;.")
 SINGLE = {"science-single": "Science", "maths-single": "Mathematics"}  # one question per item: key disputes (owner, 21 Nov 2026)
 KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed questions in a set, sets need a disputed key)
     "english-visual": ("english", (21, 30), "eng-visual-text", "Visual Text", 5, False),
     "chinese-cloze": ("chinese", (16, 20), "chi-cloze-mcq", "短文填空", 1, True),
     "chinese-reading": ("chinese", (21, 25), "chi-yuedu-mcq-text", "阅读理解一", 1, True),
+    "chinese-dialogue": ("chinese", (26, 29), "chi-dialogue-mcq", "完成对话", 4, False),
     "science-single": ("science", (1, 99), None, None, 1, True),
     "maths-single": ("maths", (1, 99), None, None, 1, True),
 }
@@ -52,6 +59,8 @@ CALIB = 200  # agreeing keys mixed into a single-question pack to measure the mo
 # the latest selection's holds: a disputed question goes in only when the dispute is all that holds it back
 HOLDS = {"science": TMP / "ppimport" / "sci1826b" / "science" / "rejects.jsonl",
          "maths": TMP / "ppimport" / "math1826" / "maths" / "rejects.jsonl"}
+DIALOGUE = TMP / "ppimport" / "chidialogue" / "chinese" / "candidates.jsonl"  # load_pp select --passage chinese-dialogue
+ANS8 = re.compile(r"Q\s*(\d{1,3})\s*[:：.)\-]\s*\(?([1-8])\)?")  # 完成对话: 8 phrases
 ANS = re.compile(r"Q\s*(\d{1,3})\s*[:：.)\-]\s*\(?([1-4])\)?")
 
 
@@ -99,9 +108,23 @@ def single_sets(kind):
     return items
 
 
+def dialogue_sets():
+    """完成对话 candidate sets (load_pp select --passage chinese-dialogue): each blank asks which of the 8 phrases fills it."""
+    sets = []
+    for c in jl(DIALOGUE):
+        qs = {}
+        for b in c["blanks"]:
+            qs[b["id"]] = {"id": b["id"], "qno": b["qno"], "pages": b["pages"], "options": c["phrases"], "key": b["key"],
+                           "text": f"对话中的（{b['qno']}）应填入哪一个短语或短句？ Which phrase fills blank ({b['qno']}) of the dialogue?"}
+        sets.append({"year": c["year"], "ids": [b["id"] for b in c["blanks"]], "q": qs})
+    return sets
+
+
 def kind_sets(kind, skip):
     if kind in SINGLE:
         return single_sets(kind)
+    if kind == "chinese-dialogue":
+        return dialogue_sets()
     subject, (lo, hi), st, section, least, disputed = KINDS[kind]
     sets = []
     for y in range(2018, 2027):
@@ -152,7 +175,9 @@ def build(a):
         for si, s in enumerate(chunk, 1):
             qs = [s["q"][x] for x in s["ids"]]
             imgs = []
-            for p in (s.get("pages") or [] if a.kind in SINGLE else page_range(qs)):
+            dl = a.kind == "chinese-dialogue"  # the phrase table may sit one page before the dialogue, no more
+            for p in (s.get("pages") or [] if a.kind in SINGLE else
+                      list(range(max(1, page_range(qs)[2] - 1 if len(page_range(qs)) > 2 else page_range(qs)[0]), page_range(qs)[-1] + 1)) if dl else page_range(qs)):
                 src = PP / subject / str(s["year"]) / "pages" / f"p{p:04d}.jpg"
                 if not src.exists():
                     continue
@@ -187,7 +212,7 @@ def build(a):
                 ".q{margin:10px 0;page-break-inside:avoid} h2{font-size:18px}"
                 ".q1{margin:14px 0;padding-top:6px;border-top:1px solid #ddd;page-break-inside:avoid}"
                 ".q1 img.fig{max-height:24cm;max-width:100%;margin:6px 0;page-break-before:auto;page-break-after:auto}</style></head><body>"
-                f"<p>{HEAD if subject == 'english' else HEAD_ZH if subject == 'chinese' else HEAD_SG.format(subj=SINGLE[a.kind])}</p>{''.join(body)}</body></html>")
+                f"<p>{HEAD if subject == 'english' else HEAD_DLG if a.kind == 'chinese-dialogue' else HEAD_ZH if subject == 'chinese' else HEAD_SG.format(subj=SINGLE[a.kind])}</p>{''.join(body)}</body></html>")
         hp = out / f"part{part}.html"
         hp.write_text(page, encoding="utf-8")
         json.dump(qmap, open(out / f"part{part}.qmap.json", "w"))
@@ -210,6 +235,12 @@ def score(a):
         for r in jl(BLIND / f"{subject}-{y}.jsonl"):
             bl[r["id"]] = r
             year[r["id"]] = y
+    ans_re = ANS8 if a.kind == "chinese-dialogue" else ANS
+    if a.kind == "chinese-dialogue":  # no blind check exists for 8-option items: every printed key is "disputed", confirm only
+        for c in jl(DIALOGUE):
+            for b in c["blanks"]:
+                bl[b["id"]] = {"id": b["id"], "key": b["key"], "pick": None, "agree": None}
+                year[b["id"]] = c["year"]
     models = a.models.split(",")
     M = {m: {} for m in models}
     ids = []
@@ -228,7 +259,7 @@ def score(a):
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:
                 got = {}
-                for mm in ANS.finditer(f.read_text(encoding="utf-8", errors="replace")):
+                for mm in ans_re.finditer(f.read_text(encoding="utf-8", errors="replace")):
                     got.setdefault(int(mm.group(1)), mm.group(2))
                 M[m].update({qmap[k]: v for k, v in got.items() if k in qmap})
     cal = [i for i in ids if bl[i].get("agree") is True]
@@ -272,6 +303,7 @@ def selftest():
     qs = [{"pages": [12, 13]}, {"pages": [13]}]
     assert page_range(qs) == [10, 11, 12, 13] and page_range([{"pages": [1]}]) == [1]
     assert ANS.findall("Q1: 3\nQ2：4\nQ10) 2") == [("1", "3"), ("2", "4"), ("10", "2")]
+    assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
     print("imgpack selftest ok")
 
 
