@@ -68,6 +68,8 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   // passage page shown once) and reading (阅读理解一, 614 in 144 sets; the passage without its questions)
   'chi-cloze-mcq': 'pool',
   'chi-yuedu-mcq-text': 'pool',
+  // Chinese 完成对话 (22 Nov 2026, migration 011): 8 phrases per blank; keys confirmed by Claude and Perplexity (owner's pair)
+  'chi-dialogue-mcq': 'pool',
   // Maths upload (owner OK after the 40-question sample, 21 Nov 2026): MCQs 2018-2026, keys confirmed by the blind check;
   // 'pool' at 20+ past-paper questions, 'merge' below (they join the sub-topic's generated tiers)
   'math-algebra-algebra': 'pool', // 59
