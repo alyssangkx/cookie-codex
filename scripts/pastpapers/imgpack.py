@@ -80,6 +80,8 @@ def single_sets(kind):
             if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not b.get("key") or not q.get("pages"):
                 continue
             text = L.tex_to_text(q.get("text") or "")
+            if L.garbled(text, q["options"]):  # statements read as options and the like: no key can make it shippable
+                continue
             refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q))
             pages = sorted(q["pages"])[:2] if refers else []  # the question's own page(s), at most two
             if refers and not all((base / "pages" / f"p{p:04d}.jpg").exists() for p in pages):
@@ -216,7 +218,9 @@ def score(a):
         for m in models:
             # "part1_gemini.txt", any prefix ("complete_..._part1_gemini.txt"), or "part_1_2_gemini.txt"
             num = part.removeprefix("part")
-            fs = sorted(f for f in out.glob(f"*_{m}.txt") if re.search(rf"part_?{num}(?:_\d+)?_{m}\.txt$", f.name))
+            # the model's name anywhere in the name ("gemini-code-science_part1.txt" too), the part number exact
+            fs = sorted(f for f in out.glob(f"*{m}*.txt") if re.search(rf"(?<![a-z]){m}(?![a-z])", f.name, re.I)
+                        and re.search(rf"part[ _]?{num}(?:_\d+)?(?![\dt])", f.name, re.I))  # "Part 10_..." too, not "Part 11to24"
             if len(fs) > 1:
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:
@@ -247,8 +251,8 @@ def score(a):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
-        if len(models) < 3:
-            sys.exit("--write needs 3 or more models (owner rule: unanimous outside models)")
+        if len(models) < (2 if a.allow_two else 3):
+            sys.exit("--write needs 3 or more models (owner rule: unanimous outside models); --allow-two only where the owner chose a pair")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
         stale = {i for i in ids if bl[i].get("agree") is not True} - {v["id"] for vs in verdicts.values() for v in vs}
@@ -273,6 +277,7 @@ if __name__ == "__main__":
     p.add_argument("cmd", choices=("build", "score", "selftest"))
     p.add_argument("--kind", default="english-visual", choices=tuple(KINDS))
     p.add_argument("--write", action="store_true", help="score: write the unanimous verdicts for load_pp select")
+    p.add_argument("--allow-two", action="store_true", help="score --write with two models (owner's choice, e.g. Maths 22 Nov 2026)")
     p.add_argument("--per", type=int, default=15)
     p.add_argument("--skip", default=str(TMP / "blind3" / "english" / "vt_pilot_sets.json"))
     p.add_argument("--models", default="gemini,perplexity")
