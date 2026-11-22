@@ -943,7 +943,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const showVis = q.visual && !(q.group && seenVis.has(q.group));
       const setAgain = !!q.group && seenVis.has(q.group); // a set's pages in full with its first wrong question only
       if (q.group) seenVis.add(q.group);
-      return `<details class="rev"><summary>${stemHtml(q, true, false)}</summary>${ppFigsHtml(q, setAgain)}
+      return `<details class="rev"><summary>${stemHtml(q, true, false)}</summary>${ppFigsHtml(q, setAgain && q.sub !== 'chi-dialogue-mcq')}
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
        <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${optionLabel(q, q.answer)} (${fmt(q.options[q.answer])}).</p>
        ${stepsHtml(q)}</details>`;

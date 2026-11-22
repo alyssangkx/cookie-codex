@@ -176,8 +176,9 @@ def build(a):
             qs = [s["q"][x] for x in s["ids"]]
             imgs = []
             dl = a.kind == "chinese-dialogue"  # the phrase table may sit one page before the dialogue, no more
+            ps = sorted({p for q in qs for p in q["pages"]})
             for p in (s.get("pages") or [] if a.kind in SINGLE else
-                      list(range(max(1, page_range(qs)[2] - 1 if len(page_range(qs)) > 2 else page_range(qs)[0]), page_range(qs)[-1] + 1)) if dl else page_range(qs)):
+                      list(range(max(1, ps[0] - 1), ps[-1] + 1)) if dl else page_range(qs)):
                 src = PP / subject / str(s["year"]) / "pages" / f"p{p:04d}.jpg"
                 if not src.exists():
                     continue

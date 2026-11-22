@@ -62,7 +62,7 @@ def pack_dialogue(a):
     items = []
     for c in jl(TMP / "ppimport" / "chidialogue" / "chinese" / "candidates.jsonl"):
         ps = sorted({p for b in c["blanks"] for p in b["pages"]})
-        pages = [f"chinese/{c['year']}/pages/p{p:04d}.jpg" for p in range(max(1, ps[0] - 1), ps[-1] + 1)][:3]
+        pages = [f"chinese/{c['year']}/pages/p{p:04d}.jpg" for p in range(max(1, ps[0] - 1), ps[-1] + 1)][-3:]  # the dialogue's own pages first
         for b in c["blanks"]:
             items.append({"id": b["id"], "y": c["year"], "kind": "chinese-dialogue", "role": "target", "key": b["key"], "qno": b["qno"],
                           "pages": pages, "text": f"对话中的（{b['qno']}）应填入哪一个短语或短句？", "options": c["phrases"]})
@@ -155,8 +155,9 @@ def run(a):
 
 def report_dialogue(a):
     if a.pull:
-        subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/dialogue/picks-*.jsonl", str(WORK) + "/"], check=False)
-    picks = {r["id"]: r["pick"] for f in WORK.glob("picks-*.jsonl") for r in jl(f)}
+        (WORK / "dialogue").mkdir(parents=True, exist_ok=True)  # its own folder: never mixed with the passage run's picks
+        subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/dialogue/picks-*.jsonl", str(WORK / "dialogue") + "/"], check=False)
+    picks = {r["id"]: r["pick"] for f in (WORK / "dialogue").glob("picks-*.jsonl") for r in jl(f)}
     items = [it for it in jl(WORK / "items-dialogue.jsonl") if it["id"] in picks]
     agree = sum(picks[it["id"]] == it["key"] for it in items)
     print(f"chinese-dialogue: VL-32B agrees with the printed key on {agree}/{len(items)} = {100 * agree / max(1, len(items)):.1f}% "

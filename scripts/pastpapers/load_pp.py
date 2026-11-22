@@ -543,14 +543,17 @@ DLG_GENERIC = "对话中的（{n}）应填入哪一句？"
 
 def dialogue_opts(opts):
     """The 8 phrases of a 完成对话 table without their printed numbers ("1. 我已经习惯了", "(3) …", "3 …")."""
-    return [re.sub(r"^\s*[(（]?\s*[1-8]\s*[)）.．、]?\s*", "", o or "").strip() for o in opts]
+    # only a printed label: "(3)", "3." / "3、", or "3 " before the phrase ("5个人一起去" keeps its 5)
+    return [re.sub(r"^\s*(?:[(（]\s*[1-8]\s*[)）]|[1-8]\s*[.．、]|[1-8]\s+)\s*", "", o or "").strip() for o in opts]
 
 
 def dialogue_stem(t, n):
     """The blank's dialogue line with （27）＿＿＿＿ when the OCR caught it cleanly (its own Q-number in it, no Latin letters
     for a garbled speaker name, no instruction), else a plain question; the dialogue page is shown with every blank."""
     t = re.sub(r"\s+(?=[\u3400-\u9fff，。！？：；“”])|(?<=[\u3400-\u9fff，。！？：；“”])\s+", "", t or "").strip()
-    m = re.search(rf"[〔(（]?\s*[QO0]\s?{n}(?!\d)\s*[.．]?\s*[)）〕]?(?:\s*[(（]\s*[)）])?|_{{2,}}", t)
+    m = re.search(rf"[〔(（]?\s*(?<!\d)[QO0]\s?{n}(?!\d)\s*[.．]?\s*[)）〕]?(?:\s*[(（]\s*[)）])?", t)  # not "2026"
+    if not m and len(re.findall(r"_{2,}", t)) == 1:  # a bare printed blank only when it is the line's only one
+        m = re.search(r"_{2,}", t)
     if not m or re.search(r"根据上下文|从表中|[A-Za-z]{2,}|Q\d", t[:m.start()] + t[m.end():]) or len(t) < 6:
         return DLG_GENERIC.format(n=n)
     return (t[:m.start()] + f"（{n}）＿＿＿＿" + t[m.end():]).strip(" |")
@@ -622,6 +625,11 @@ def select_dialogue(a):
                              "answer_src": "vision+consensus", "crops": [], "year": y, "school": q.get("school") or (papers.get(paper) or {}).get("school"),
                              "paper": paper, "part": q.get("part"), "qno": q.get("qno"), "marks": q.get("marks"),
                              "blind_src": cv.get("src", "consensus")})
+    # a set ships whole (owner's 完成对话 rule): a blank left out would show on the page, never asked, its phrase still open
+    n_ok = collections.Counter(r["grp"] for r in rows)
+    for r in [r for r in rows if n_ok[r["grp"]] < 4]:
+        rows.remove(r)
+        rejects.append({"id": r["src_id"], "reason": "dlg-set-incomplete"}); R["dlg-set-incomplete"] += 1
     for r, why in set_pages(rows, out, "chinese-dialogue"):
         rejects.append({"id": r["src_id"], "reason": why}); R[why] += 1
     with open(out / "candidates.jsonl", "w", encoding="utf-8") as f:
@@ -1218,6 +1226,10 @@ def selftest():
     assert scanner_marks("Mix (a) and (b) in the beaker.") == "Mix (a) and (b) in the beaker."  # labels inside a sentence stay
     assert dialogue_opts(["1. 我已经习惯了", "(2) 还是专心读书吧", "3 年底就要会考了"]) == ["我已经习惯了", "还是专心读书吧", "年底就要会考了"]
     assert dialogue_stem("丽 云 : 昨天 傍晚 ，Q26。", 26) == "丽云:昨天傍晚，（26）＿＿＿＿。"
+    assert dialogue_stem("我们2026年去新加坡，你呢？", 26) == "对话中的（26）应填入哪一句？"  # a year is not blank 26
+    assert dialogue_stem("那发生火灾时，________？", 26) == "那发生火灾时，（26）＿＿＿＿？"
+    assert dialogue_stem("________，你呢？________。", 26) == "对话中的（26）应填入哪一句？"  # two bare blanks: whose is it?
+    assert dialogue_opts(["5个人一起去", "(6) 我们走吧", "7. 好的"]) == ["5个人一起去", "我们走吧", "好的"]
     assert dialogue_stem("根据上下文的意思，从表中选出适当的短语或短句。", 27) == "对话中的（27）应填入哪一句？"
     assert dialogue_stem("XH: Q27， 这 样 也 太 不 方便 了 !", 27) == "对话中的（27）应填入哪一句？"
     print("selftest ok")
@@ -1483,7 +1495,7 @@ def chi_pieces(pages, kind, first, last):
     section's heading on that page. (None, "set-no-cut") when an end is not found."""
     flat = [(p, r) for p in sorted(pages) for r in pages[p][0]]
     text = lambda r: "".join(w[4] for w in r[2])
-    blank = (lambda n: re.compile(rf"[QO0]\s?{n}(?!\d)")) if kind == "chinese-dialogue" else (lambda n: re.compile(rf"Q\s?{n}\s?[（(]"))
+    blank = (lambda n: re.compile(rf"(?<!\d)[QO0]\s?{n}(?!\d)")) if kind == "chinese-dialogue" else (lambda n: re.compile(rf"Q\s?{n}\s?[（(]"))
     # the first question (or blank) the OCR read: an OCR slip on one number ("QIO(" for Q19) falls back to the next
     if kind == "chinese-reading":
         hit = lambda k, n: chi_qnum(text(flat[k][1])) == n and not CHI_INSTR.search(text(flat[k][1]))
