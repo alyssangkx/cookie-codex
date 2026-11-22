@@ -80,7 +80,7 @@ def single_sets(kind):
             if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not b.get("key") or not q.get("pages"):
                 continue
             text = L.tex_to_text(q.get("text") or "")
-            if L.garbled(text, q["options"]):  # statements read as options and the like: no key can make it shippable
+            if L.garbled(text, L.strip_opts(q["options"])):  # statements read as options and the like: no key can make it shippable
                 continue
             refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q))
             pages = sorted(q["pages"])[:2] if refers else []  # the question's own page(s), at most two
@@ -220,7 +220,7 @@ def score(a):
             num = part.removeprefix("part")
             # the model's name anywhere in the name ("gemini-code-science_part1.txt" too), the part number exact
             fs = sorted(f for f in out.glob(f"*{m}*.txt") if re.search(rf"(?<![a-z]){m}(?![a-z])", f.name, re.I)
-                        and re.search(rf"part[ _]?{num}(?:_\d+)?(?![\dt])", f.name, re.I))  # "Part 10_..." too, not "Part 11to24"
+                        and re.search(rf"part[ _]?{num}(?:_\d+)?(?![\dt\-])", f.name, re.I))  # "Part 10_..." too, not "Part 11to24" or "part1-14"
             if len(fs) > 1:
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:

@@ -35,13 +35,12 @@ def pick(raw):
 
 
 def reread_keys():
-    """{(paper, qno): key} from the final cells of the answer-page re-reads (both reads agree)."""
+    """{(paper, qno): key} exactly as load_pp select reads them (final cells, gate applied) - one rule, not a copy."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import load_pp as L
     out = {}
-    for f in PP_DEV.glob("chinese/*/ansreread/*.json"):
-        d = json.load(open(f))
-        for n, c in (d.get("cells") or {}).items():
-            if c.get("final"):
-                out[(d["paper"], int(n))] = c["final"]
+    for y in range(2018, 2027):
+        out.update({(p, int(n)): k for (p, n), k in L.reread_keys(PP_DEV / "chinese" / str(y)).items()})
     return out
 
 
@@ -68,9 +67,11 @@ def pack(a):
                     key, role = str(live[q["id"]]["answer"] + 1), "calib"
                 else:
                     continue
+                sys.path.insert(0, str(Path(__file__).resolve().parent))
+                import load_pp as L
                 items.append({"id": q["id"], "y": y, "kind": kind, "role": role, "key": key, "qno": n,
                               "pages": [f"chinese/{y}/pages/p{p:04d}.jpg" for p in pages_for(q, kind)],
-                              "text": q["text"], "options": q["options"]})
+                              "text": q["text"], "options": L.strip_opts(q["options"])})  # no "(1) (1) 焦急"
     rng.shuffle(items)
     WORK.mkdir(parents=True, exist_ok=True)
     with open(WORK / "items.jsonl", "w", encoding="utf-8") as f:  # the key stays on dev: the server copy drops it
@@ -118,8 +119,7 @@ def run(a):
 
 def report(a):
     if a.pull:
-        for k in range(2):
-            subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/picks-{k}.jsonl", str(WORK / f"picks-{k}.jsonl")], check=False)
+        subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/picks-*.jsonl", str(WORK) + "/"], check=False)  # every shard
     picks = {r["id"]: r["pick"] for f in WORK.glob("picks-*.jsonl") for r in jl(f)}
     items = jl(WORK / "items.jsonl")
     for kind in KINDS:
