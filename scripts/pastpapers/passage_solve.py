@@ -29,8 +29,13 @@ def jl(p):
     return [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()] if p.exists() else []
 
 
+ASK_DLG = ("页面图片中有一个8个短语或短句的表格和一段有空格的对话。请根据上下文，为对话中的第{n}个空格从表中选出最恰当的一项。先简短思考，"
+           "最后一行只写：ANSWER: <选项号 1-8>\nThe pages show a table of 8 phrases and a dialogue with numbered blanks. Choose the "
+           "phrase that fits blank ({n}). Think briefly, then end with a final line exactly: ANSWER: <option number 1-8>.")
+
+
 def pick(raw):
-    m = re.findall(r"ANSWER[:：]\s*\(?([1-4])\)?", raw or "")
+    m = re.findall(r"ANSWER[:：]\s*\(?([1-8])\)?", raw or "")
     return m[-1] if m else None
 
 
@@ -51,7 +56,36 @@ def pages_for(q, kind):
     return [p for p in range(max(1, lo), ps[-1] + 1)][-3:]  # 3 images at most: never drop the page the question is on
 
 
+def pack_dialogue(a):
+    """完成对话 (22 Nov 2026): every blank of the candidate sets (load_pp select --passage chinese-dialogue), the printed key
+    kept on dev; no calibration set exists for 8-option items, so the report gives the agreement rate only."""
+    items = []
+    for c in jl(TMP / "ppimport" / "chidialogue" / "chinese" / "candidates.jsonl"):
+        ps = sorted({p for b in c["blanks"] for p in b["pages"]})
+        pages = [f"chinese/{c['year']}/pages/p{p:04d}.jpg" for p in range(max(1, ps[0] - 1), ps[-1] + 1)][:3]
+        for b in c["blanks"]:
+            items.append({"id": b["id"], "y": c["year"], "kind": "chinese-dialogue", "role": "target", "key": b["key"], "qno": b["qno"],
+                          "pages": pages, "text": f"对话中的（{b['qno']}）应填入哪一个短语或短句？", "options": c["phrases"]})
+    return items
+
+
 def pack(a):
+    if a.dialogue:
+        items = pack_dialogue(a)
+        WORK.mkdir(parents=True, exist_ok=True)
+        with open(WORK / "items-dialogue.jsonl", "w", encoding="utf-8") as f:
+            for it in items:
+                f.write(json.dumps(it, ensure_ascii=False) + "\n")
+        with open(WORK / "items-dialogue-server.jsonl", "w", encoding="utf-8") as f:
+            for it in items:
+                f.write(json.dumps({k: v for k, v in it.items() if k not in ("key", "role")}, ensure_ascii=False) + "\n")
+        print(f"{len(items)} dialogue blanks -> {WORK}")
+        if a.push:
+            subprocess.run(["ssh", SERVER, f"mkdir -p {SERVER_BASE}/dialogue"], check=True)
+            subprocess.run(["scp", "-q", str(WORK / "items-dialogue-server.jsonl"), f"{SERVER}:{SERVER_BASE}/dialogue/items.jsonl"], check=True)
+            subprocess.run(["scp", "-q", str(Path(__file__).resolve()), f"{SERVER}:{SERVER_BASE}/passage_solve.py"], check=True)
+            print("pushed to", SERVER_BASE + "/dialogue")
+        return
     rr = reread_keys()
     items, rng = [], random.Random(22)
     for kind, (d, (lo, hi)) in KINDS.items():
@@ -91,7 +125,7 @@ def pack(a):
 
 def run(a):
     root = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
-    w = Path(SERVER_BASE)
+    w = Path(SERVER_BASE) / ("dialogue" if a.dialogue else "")
     items = jl(w / "items.jsonl")[a.shard::a.nshards]
     out = w / f"picks-{a.shard}.jsonl"
     want = {q["id"]: q["pages"] for q in items}
@@ -109,7 +143,7 @@ def run(a):
         ch = todo[i:i + 16]
         msgs = [[{"role": "system", "content": SYS}, {"role": "user", "content":
                  [{"type": "image_url", "image_url": {"url": "file://" + str(root / p)}} for p in q["pages"]]
-                 + [{"type": "text", "text": ASK.format(n=q["qno"]) + "\n\n" + q["text"] + "\n"
+                 + [{"type": "text", "text": (ASK_DLG if q.get("kind") == "chinese-dialogue" else ASK).format(n=q["qno"]) + "\n\n" + q["text"] + "\n"
                      + "\n".join(f"({j}) {o}" for j, o in enumerate(q["options"], 1))}]}] for q in ch]
         res = llm.chat(msgs, sp, use_tqdm=False)
         with open(out, "a", encoding="utf-8") as f:
@@ -119,7 +153,19 @@ def run(a):
         print("done", i + len(ch), "/", len(todo), flush=True)
 
 
+def report_dialogue(a):
+    if a.pull:
+        subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/dialogue/picks-*.jsonl", str(WORK) + "/"], check=False)
+    picks = {r["id"]: r["pick"] for f in WORK.glob("picks-*.jsonl") for r in jl(f)}
+    items = [it for it in jl(WORK / "items-dialogue.jsonl") if it["id"] in picks]
+    agree = sum(picks[it["id"]] == it["key"] for it in items)
+    print(f"chinese-dialogue: VL-32B agrees with the printed key on {agree}/{len(items)} = {100 * agree / max(1, len(items)):.1f}% "
+          f"(no calibration set: a further check beside the three outside models), unparsed {sum(picks[it['id']] is None for it in items)}")
+
+
 def report(a):
+    if a.dialogue:
+        return report_dialogue(a)
     if a.pull:
         subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/picks-*.jsonl", str(WORK) + "/"], check=False)  # every shard
     items = jl(WORK / "items.jsonl")
@@ -153,7 +199,7 @@ def report(a):
 
 
 def selftest():
-    assert pick("思考……\nANSWER: 3") == "3" and pick("ANSWER：(2)") == "2" and pick("no") is None
+    assert pick("思考……\nANSWER: 3") == "3" and pick("ANSWER：(2)") == "2" and pick("no") is None and pick("ANSWER: 7") == "7"
     assert pages_for({"pages": [10, 11]}, "chinese-reading") == [9, 10, 11] and pages_for({"pages": [8]}, "chinese-cloze") == [8]
     assert pages_for({"pages": [10, 11, 12]}, "chinese-reading") == [10, 11, 12]  # the question's own last page is kept
     print("passage_solve selftest ok")
@@ -168,5 +214,6 @@ if __name__ == "__main__":
     p.add_argument("--push", action="store_true")
     p.add_argument("--pull", action="store_true")
     p.add_argument("--write", action="store_true")
+    p.add_argument("--dialogue", action="store_true", help="完成对话: pack/run/report the dialogue blanks (8 phrases)")
     a = p.parse_args()
     {"pack": pack, "run": run, "report": report, "selftest": lambda _a: selftest()}[a.cmd](a)
