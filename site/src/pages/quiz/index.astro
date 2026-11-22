@@ -225,7 +225,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const many = q.sub === 'chi-dialogue-mcq';
     const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal) : fmt(q.stem);
     return ppBadge(q) + t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '')
-      + (figs ? ppFigsHtml(q, !reveal && laterInSet(q)) : '');
+      // a dialogue cannot be answered without its page: shown with every blank, never folded away
+      + (figs ? ppFigsHtml(q, !reveal && laterInSet(q) && q.sub !== 'chi-dialogue-mcq') : '');
   };
 
   /** A question of a passage set after the set's first one in this quiz: its pages were already shown in full. */

@@ -226,8 +226,10 @@ export function validRow(r: unknown): r is PpRow {
     && typeof x.subtopic === 'string' && SUBTOPIC_ID.test(x.subtopic)
     && LEVELS.includes(x.level as PpRow['level'])
     && typeof x.stem === 'string' && x.stem.trim().length > 0
-    && Array.isArray(x.options) && x.options.length === 4 && x.options.every((o) => typeof o === 'string')
-    && Number.isInteger(x.answer) && (x.answer as number) >= 0 && (x.answer as number) <= 3
+    // 4 options; 8 only for the 完成对话 dialogue sets (migration 011), the answer always one of them
+    && Array.isArray(x.options) && (x.options.length === 4 || (x.subtopic === 'chi-dialogue-mcq' && x.options.length === 8))
+    && x.options.every((o) => typeof o === 'string')
+    && Number.isInteger(x.answer) && (x.answer as number) >= 0 && (x.answer as number) < x.options.length
     && Array.isArray(x.figures) && x.figures.every((f) => f && typeof f.path === 'string' && FIG_PATH.test(f.path)
       && Number.isFinite(f.w) && Number.isFinite(f.h))
     && (x.year === null || x.year === undefined || Number.isInteger(x.year));

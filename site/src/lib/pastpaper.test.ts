@@ -260,3 +260,11 @@ test('a counting pool with passage sets takes whole sets, easiest first, until t
   const part = [...sets].filter((g) => c.filter((id) => qs.find((q) => q.id === id)!.group === g).length !== 6);
   assert.ok(part.length <= 1); // whole sets, only the one at the cap in part
 });
+
+test('validRow: 8 phrases only for the 完成对话 dialogue sets (migration 011), the answer inside them', () => {
+  const eight = ['一', '二', '三', '四', '五', '六', '七', '八'];
+  assert.ok(validRow(row({ subtopic: 'chi-dialogue-mcq', options: eight, answer: 7 })));
+  assert.ok(!validRow(row({ subtopic: 'chi-cloze-mcq', options: eight, answer: 0 })));
+  assert.ok(!validRow(row({ subtopic: 'chi-dialogue-mcq', options: eight, answer: 8 })));
+  assert.ok(!validRow(row({ answer: 4 })));
+});
