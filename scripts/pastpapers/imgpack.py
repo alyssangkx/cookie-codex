@@ -82,7 +82,9 @@ def single_sets(kind):
             text = L.tex_to_text(q.get("text") or "")
             if L.garbled(text, L.strip_opts(q["options"])):  # statements read as options and the like: no key can make it shippable
                 continue
-            refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q))
+            # as load_pp select: options like "A and C only" point at the picture too
+            refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q)
+                          or any(L.FIG_LETTER.search(L.strip_num(o)) for o in q["options"]))
             pages = sorted(q["pages"])[:2] if refers else []  # the question's own page(s), at most two
             if refers and not all((base / "pages" / f"p{p:04d}.jpg").exists() for p in pages):
                 continue
@@ -219,8 +221,9 @@ def score(a):
             # "part1_gemini.txt", any prefix ("complete_..._part1_gemini.txt"), or "part_1_2_gemini.txt"
             num = part.removeprefix("part")
             # the model's name anywhere in the name ("gemini-code-science_part1.txt" too), the part number exact
-            fs = sorted(f for f in out.glob(f"*{m}*.txt") if re.search(rf"(?<![a-z]){m}(?![a-z])", f.name, re.I)
-                        and re.search(rf"part[ _]?{num}(?:_\d+)?(?![\dt\-])", f.name, re.I))  # "Part 10_..." too, not "Part 11to24" or "part1-14"
+            # glob every .txt and match the name case-insensitively ("Part 3_Gemini.txt"); "part1-gemini" counts, "part1-14" not
+            fs = sorted(f for f in out.glob("*.txt") if re.search(rf"(?<![a-z]){m}(?![a-z])", f.name, re.I)
+                        and re.search(rf"part[ _]?{num}(?:_\d+)?(?!\d|to|-\d)", f.name, re.I))  # "Part 10_..." too, not "Part 11to24"
             if len(fs) > 1:
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:

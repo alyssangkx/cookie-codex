@@ -123,6 +123,8 @@ def scanner_marks(t: str) -> str:
     line (the part of a structured question this MCQ was). Science and Maths stems."""
     t = re.sub(r"(?m)^[ \t]*\((?:cont(?:'d|inued)?|sub)\.?\)[ \t]*", "", t, flags=re.I)  # a label opening a line
     t = re.sub(r"[ \t]*\((?:cont(?:'d|inued)?|sub)\.?\)", "", t, flags=re.I)  # one inside a line
+    if re.search(r"(?m)\S[^\n]*\([a-d]\)", t):  # the stem also refers to a part ("the graph in (a)"): keep the labels
+        return t
     return re.sub(r"(?m)^[ \t]*\([a-d]\)[ \t]+", "", t)  # nothing else is touched
 
 
@@ -1107,6 +1109,8 @@ def selftest():
     assert scanner_marks("Study the chart below.\n(sub) Which letters represent X?") == "Study the chart below.\nWhich letters represent X?"
     assert scanner_marks("with object Y.\n(cont) The results are shown.") == "with object Y.\nThe results are shown."
     assert scanner_marks("The table shows it.\n(a) Which cell makes food?") == "The table shows it.\nWhich cell makes food?"
+    t = "(a) State which graph is correct.\n(a) Explain why you chose the graph in (a)."
+    assert scanner_marks(t) == t  # the stem refers to part (a): its labels stay
     assert scanner_marks("Mix (a) and (b) in the beaker.") == "Mix (a) and (b) in the beaker."  # labels inside a sentence stay
     print("selftest ok")
 

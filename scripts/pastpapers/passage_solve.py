@@ -48,7 +48,7 @@ def pages_for(q, kind):
     """The passage and question pages: reading also the page before the first question page (where the passage starts)."""
     ps = sorted(q["pages"])
     lo = ps[0] - (1 if kind == "chinese-reading" else 0)
-    return [p for p in range(max(1, lo), ps[-1] + 1)][:3]
+    return [p for p in range(max(1, lo), ps[-1] + 1)][-3:]  # 3 images at most: never drop the page the question is on
 
 
 def pack(a):
@@ -94,7 +94,8 @@ def run(a):
     w = Path(SERVER_BASE)
     items = jl(w / "items.jsonl")[a.shard::a.nshards]
     out = w / f"picks-{a.shard}.jsonl"
-    done = {r["id"] for r in jl(out)}
+    want = {q["id"]: q["pages"] for q in items}
+    done = {r["id"] for r in jl(out) if r.get("pages", want.get(r["id"])) == want.get(r["id"])}  # a pick from other pages is redone
     todo = [q for q in items if q["id"] not in done]
     print(len(todo), "to solve", flush=True)
     if not todo:
@@ -113,15 +114,19 @@ def run(a):
         res = llm.chat(msgs, sp, use_tqdm=False)
         with open(out, "a", encoding="utf-8") as f:
             for q, r in zip(ch, res):
-                f.write(json.dumps({"id": q["id"], "pick": pick(r.outputs[0].text), "raw": r.outputs[0].text[-300:]}, ensure_ascii=False) + "\n")
+                f.write(json.dumps({"id": q["id"], "pick": pick(r.outputs[0].text), "pages": q["pages"],
+                                    "raw": r.outputs[0].text[-300:]}, ensure_ascii=False) + "\n")
         print("done", i + len(ch), "/", len(todo), flush=True)
 
 
 def report(a):
     if a.pull:
         subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/picks-*.jsonl", str(WORK) + "/"], check=False)  # every shard
-    picks = {r["id"]: r["pick"] for f in WORK.glob("picks-*.jsonl") for r in jl(f)}
     items = jl(WORK / "items.jsonl")
+    # only picks made from this pack's pages (a leftover picks file from an earlier pack is ignored); older picks carry no pages
+    want = {it["id"]: it.get("pages") for it in items}
+    picks = {r["id"]: r["pick"] for f in sorted(WORK.glob("picks-*.jsonl")) for r in jl(f)
+             if "pages" not in r or want.get(r["id"]) is None or r["pages"] == want[r["id"]]}
     for kind in KINDS:
         cal = [it for it in items if it["kind"] == kind and it["role"] == "calib" and it["id"] in picks]
         tgt = [it for it in items if it["kind"] == kind and it["role"] == "target" and it["id"] in picks]
@@ -132,7 +137,7 @@ def report(a):
     if a.write:
         by = collections.defaultdict(list)
         for it in items:
-            if it["role"] == "target" and it["id"] in picks:
+            if it["role"] == "target" and picks.get(it["id"]):  # an unparsed answer is not written: a re-run can still answer it
                 by[it["y"]].append({"id": it["id"], "key": it["key"], "pick": picks[it["id"]],
                                     "agree": picks[it["id"]] == it["key"], "src": "vl32-passage"})
         n = 0
@@ -150,6 +155,7 @@ def report(a):
 def selftest():
     assert pick("思考……\nANSWER: 3") == "3" and pick("ANSWER：(2)") == "2" and pick("no") is None
     assert pages_for({"pages": [10, 11]}, "chinese-reading") == [9, 10, 11] and pages_for({"pages": [8]}, "chinese-cloze") == [8]
+    assert pages_for({"pages": [10, 11, 12]}, "chinese-reading") == [10, 11, 12]  # the question's own last page is kept
     print("passage_solve selftest ok")
 
 
