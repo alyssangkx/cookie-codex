@@ -350,7 +350,8 @@ Chinese. Baseline 21 Nov (scanned cleanly / with key / blind agrees): Science 7,
 
 ## Parent view and grown-up login (owner, 23 Nov 2026)
 - [x] Grown-up login on its own session (`ccx:auth-gu`): a child playing and a parent/admin no longer sign each other out; the admin console asks the authenticator code on each visit.
-- [x] Migration 012 (`pp_seen`, `pp_figures_seen`): a parent sees the past-paper questions the server served their own child, with pictures (SQL tests pass). **Apply live: owner's OK needed.**
+- [x] Migration 012 (`pp_seen`, `pp_figures_seen`): a parent sees the past-paper questions the server served their own child, with pictures (SQL tests pass). Applied live 23 Nov 2026 (owner OK).
 - [x] Parent view: tabs (Child progress | Family and accounts; the admin gets a link to the admin console); a card per subject (questions on the site, tried, a pie of how they stand, wrong count); a card opens its topics, tiers and every question tried; the wrong count opens those questions with "Retest now" and "Send up to 10 as a revision test" (save field `revision`, asked first in Daily Review as "Revision test"); an extra confirm before deleting a child.
-- [ ] Owner: run `scripts/accounts/create_parent.mjs` for Alyssa's parent account (dry run first), then check the parent page as that parent.
-- [ ] Deleted children and accounts are kept 7 days (not 30): change to 30 only if the owner asks (purge in `private.purge_deleted()`, parent-api texts).
+- [x] Owner ran `scripts/accounts/create_parent.mjs` (23 Nov 2026): Alyssa is in the new parent's family (verified: role parent, email confirmed, family row).
+- [ ] Check the parent page live as that parent once pushed (dashboard, past-paper pictures, Retest now, revision test).
+- [x] Deleted children and accounts stay kept 7 days (owner, 23 Nov 2026: keep 7).

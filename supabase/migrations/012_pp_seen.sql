@@ -1,4 +1,4 @@
--- Cookie Codex, migration 012: a parent sees the past-paper questions their own child was given (owner, 23 Nov 2026:
+-- Cookie Codex, migration 012: a parent sees the past-paper questions their own child was given (owner, 23 Nov 2026:  APPLIED to the live project 23 Nov 2026 (owner OK; verified: 3 functions, policy pp_figures_seen, index, anon cannot execute, 9,559 active items intact).
 -- the parent page shows every question the child attempted and every mistake, with its pictures).
 -- Apply with:  supabase db query --remote --yes -f supabase/migrations/012_pp_seen.sql   (never `db push`).
 -- Test: scripts/accounts/sqltest.sh applies it after 011 and runs test_pp_seen.sql.
