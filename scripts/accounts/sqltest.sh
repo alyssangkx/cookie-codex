@@ -22,6 +22,9 @@ run -o /dev/null < "$mig/009_pp_subtopic_length.sql"
 run -o /dev/null < "$mig/010_pp_sets.sql"
 st=$(run -t -o /dev/null < "$here/test_pp_sets.sql" 2>&1) || { echo "$st" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
 echo "$st" | grep -c "ok " | sed 's/^/sets checks passed: /'
+run -o /dev/null < "$mig/011_pp_dialogue_options.sql"
+dl=$(run -t -o /dev/null < "$here/test_pp_dialogue.sql" 2>&1) || { echo "$dl" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
+echo "$dl" | grep -c "ok " | sed 's/^/dialogue checks passed: /'
 run -o /dev/null < "$mig/007_pp_lockdown.sql"
 ld=$(run -t -o /dev/null < "$here/test_pp_lockdown.sql" 2>&1) || { echo "$ld" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
 echo "$ld" | sed -n 's/^.*NOTICE:  //p'; echo "$ld" | grep -q 'LOCKDOWN CHECKS PASSED' && echo 'LOCKDOWN CHECKS PASSED'
