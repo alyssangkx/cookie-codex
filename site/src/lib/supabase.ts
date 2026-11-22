@@ -25,20 +25,33 @@ export const supabase = client(AUTH_KEY);
 export const grownup = client(GROWNUP_AUTH_KEY);
 
 /** Stamp "active now" (called on sign-in and on every checked page load). */
-export const touch = () => kv.set('lastSeen', String(Date.now()));
+export const touch = (key = 'lastSeen') => kv.set(key, String(Date.now()));
+/** The grown-up session's own idle stamp (the child's play never keeps a grown-up signed in). */
+export const GROWNUP_SEEN = 'lastSeen-gu';
 
 /** The current session, or null. Signs out (this browser only) when idle for more than 90 days. */
 export async function currentSession(sb = supabase): Promise<Session | null> {
   const { data } = await sb.auth.getSession();
   if (!data.session) return null;
-  if (idleExpired(Number(kv.get('lastSeen') ?? 0))) {
+  const key = sb === supabase ? 'lastSeen' : GROWNUP_SEEN;
+  if (idleExpired(Number(kv.get(key) ?? 0))) {
     await sb.auth.signOut({ scope: 'local' });
-    kv.del('lastSeen');
-    kv.set('sync:signedout', '1');
+    kv.del(key);
+    if (sb === supabase) kv.set('sync:signedout', '1'); // the child's offline play only ends with the child's session
     return null;
   }
-  touch();
+  touch(key);
   return data.session;
+}
+
+/** Before 23 Nov 2026 one key held every session: a parent or admin signed in then sits in the player's slot. Move it to
+ *  the grown-up's slot (same tokens) and clear the player's, once. */
+export async function adoptGrownup() {
+  const s = (await supabase.auth.getSession()).data.session;
+  if (!s || !roleOf(s)) return;
+  try { if (!(await grownup.auth.getSession()).data.session) await grownup.auth.setSession({ access_token: s.access_token, refresh_token: s.refresh_token }); }
+  catch { /* the grown-up signs in again */ }
+  await supabase.auth.signOut({ scope: 'local' });
 }
 
 /**

@@ -16,7 +16,7 @@ import Base from '../../../layouts/Base.astro';
 </Base>
 
 <script>
-  import { grownup as supabase, sessionFromLink, callParentApi, CONSENT_VERSION, roleOf, touch } from '../../../lib/supabase';
+  import { grownup as supabase, sessionFromLink, callParentApi, CONSENT_VERSION, roleOf, touch, GROWNUP_SEEN } from '../../../lib/supabase';
 
   const $ = (id: string) => document.getElementById(id)!;
   void (async () => {
@@ -26,7 +26,7 @@ import Base from '../../../layouts/Base.astro';
       const { data } = await supabase.auth.getSession();
       if (!data.session) { $('status').textContent = 'Please sign in first.'; $('msg').innerHTML = '<a href="/grownups/">Go to Grown-ups</a>'; return; }
       if (roleOf(data.session) === 'admin') { location.href = '/admin/'; return; }
-      touch();
+      touch(GROWNUP_SEEN);
       // creates the family (code + consent record) and the parent role; idempotent, so a reload is harmless
       await callParentApi({ action: 'register', consent_version: CONSENT_VERSION });
       await supabase.auth.refreshSession(); // the new role is in the next token

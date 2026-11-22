@@ -378,8 +378,10 @@ export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = fa
   const q = s.questions[id];
   return !!q && (ignoreParked || !q.parked) && q.s > 0 && q.due <= now;
 };
-/** The questions of the parent's revision test that are still due (answering one right moves it on, so it drops out). */
-export const revisionDue = (s: SaveV1, now = Date.now()) => (s.revision?.ids ?? []).filter((id) => isDue(s, id, now, true));
+/** The questions of the parent's revision test not yet answered since it was sent: sending sets due to the send time and
+ *  any answer moves due later, so an answered question leaves the test for good (its later retests are ordinary ones). */
+export const revisionDue = (s: SaveV1, now = Date.now()) =>
+  (s.revision?.ids ?? []).filter((id) => isDue(s, id, now, true) && s.questions[id].due <= s.revision!.ts);
 
 /**
  * Keep the `parked` flags in step with the banks a page has loaded. Every parked state whose id is in `ids` is

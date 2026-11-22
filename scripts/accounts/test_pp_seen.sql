@@ -35,6 +35,14 @@ select pg_temp.ok((select array_agg(id) = array['pp-6600000101'] from public.pp_
 select pg_temp.ok((select answer = 1 and stem = 'served stem' from public.pp_seen('66666666-0000-0000-0000-0000000000c1')), 'with its stem and key');
 select pg_temp.ok((select array_agg(name) = array['science/pp-6600000101-1.webp'] from storage.objects where bucket_id = 'pp-figures'),
   'the parent may sign that item''s picture and no other');
+reset role;
+update public.pp_items set active = false where id = 'pp-6600000101';
+set role authenticated;
+select pg_temp.ok((select count(*) = 0 from public.pp_seen('66666666-0000-0000-0000-0000000000c1')), 'a withdrawn item is not shown');
+select pg_temp.ok((select count(*) = 0 from storage.objects where bucket_id = 'pp-figures'), 'nor its picture');
+reset role;
+update public.pp_items set active = true where id = 'pp-6600000101';
+set role authenticated;
 select pg_temp.as_user('66666666-0000-0000-0000-0000000000a2');
 select pg_temp.fails($$select * from public.pp_seen('66666666-0000-0000-0000-0000000000c1')$$, 'another parent cannot read them');
 select pg_temp.ok((select count(*) = 0 from storage.objects where bucket_id = 'pp-figures'), 'another parent sees no pictures');
@@ -44,6 +52,7 @@ select pg_temp.as_user('66666666-0000-0000-0000-0000000000ad', 'admin', 'aal1');
 select pg_temp.fails($$select * from public.pp_seen('66666666-0000-0000-0000-0000000000c1')$$, 'the admin without the authenticator code cannot');
 select pg_temp.as_user('66666666-0000-0000-0000-0000000000ad', 'admin', 'aal2');
 select pg_temp.ok((select count(*) = 1 from public.pp_seen('66666666-0000-0000-0000-0000000000c1')), 'the admin at aal2 can');
+select pg_temp.ok((select array_agg(name) = array['science/pp-6600000101-1.webp'] from storage.objects where bucket_id = 'pp-figures'), 'and sign only served pictures');
 reset role;
 set role anon;
 select pg_temp.as_user(null);

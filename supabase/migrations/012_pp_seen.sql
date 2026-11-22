@@ -29,19 +29,29 @@ begin
   return query
     select i.id, i.subtopic, i.level, i.stem, i.options, i.answer, i.figures, i.grp, i.seq
       from public.pp_items i
-     where exists (select 1 from private.pp_served s where s.user_id = p_child and s.item_id = i.id)
+     where i.active  -- a withdrawn item (migration 008) is never shown again
+       and exists (select 1 from private.pp_served s where s.user_id = p_child and s.item_id = i.id)
      order by i.subtopic, i.grp nulls first, i.seq, i.id;
 end $$;
 revoke execute on function public.pp_seen(uuid) from public, anon;
 grant execute on function public.pp_seen(uuid) to authenticated;
 
--- a picture is visible when it belongs to an item served to a child this grown-up may see
+-- a picture is visible when it belongs to an active item served to a child this grown-up may see. The policy runs per
+-- storage row, so this starts from the caller's own children (a child or stranger has none: no rows read) and the
+-- served log's primary key; the admin's path finds the item through the figures index.
+create index pp_items_figures_idx on public.pp_items using gin (figures jsonb_path_ops);
 create function private.pp_fig_seen(p_name text) returns boolean
 language sql stable security definer set search_path = '' as $$
   select exists (
-    select 1 from private.pp_served s join public.pp_items i on i.id = s.item_id
-     where private.may_see_child(s.user_id)
-       and i.figures @> jsonb_build_array(jsonb_build_object('path', p_name)))
+      select 1 from public.profiles p
+        join private.pp_served s on s.user_id = p.id
+        join public.pp_items i on i.id = s.item_id
+       where p.parent_id = auth.uid() and p.role = 'child' and i.active
+         and i.figures @> jsonb_build_array(jsonb_build_object('path', p_name)))
+    or (private.is_admin() and coalesce(auth.jwt() ->> 'aal', '') = 'aal2' and exists (
+      select 1 from public.pp_items i
+       where i.active and i.figures @> jsonb_build_array(jsonb_build_object('path', p_name))
+         and exists (select 1 from private.pp_served s where s.item_id = i.id)))
 $$;
 revoke execute on function private.pp_fig_seen(text) from public, anon;
 grant execute on function private.pp_fig_seen(text) to authenticated;

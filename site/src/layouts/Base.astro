@@ -108,7 +108,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
       </div>
     </footer>
     <script>
-      import { currentSession, offlineAllowed, grownup } from '../lib/supabase';
+      import { currentSession, offlineAllowed, grownup, adoptGrownup } from '../lib/supabase';
       import { initSync, logout, isChildSession } from '../lib/sync';
       import { kv, crumbBalance } from '../lib/store';
 
@@ -144,7 +144,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         const go = (to: string) => { leaving = true; location.replace(to); };
         try {
           let session = null;
-          try { session = await currentSession(grown ? grownup : undefined); } catch { /* unreachable storage: treated as signed out */ }
+          try { await adoptGrownup(); session = await currentSession(grown ? grownup : undefined); } catch { /* unreachable storage: treated as signed out */ }
           if (session) document.getElementById('logout')!.hidden = false;
           if (gate && !session) {
             if (gate === 'game' && await offlineAllowed()) {

@@ -220,6 +220,7 @@ const data = {
   import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
+  import { PP_ENABLED, isPpId } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; school: string; topic: string; file: string | null; count: Record<Tier, number>;
@@ -344,10 +345,11 @@ const data = {
   }
   /** Every question this page can show for a child: the site's banks plus the past-paper questions the server gave that
    *  child (pp_seen, migration 012; it never trusts ids from the save) with their pictures. One load per child. */
-  const looked = new Map<string, Promise<Map<string, BQ>>>();
+  // ponytail: one load per child, again after 50 minutes (the picture URLs are signed for 60); a failed load is retried next time
+  const looked = new Map<string, { at: number; p: Promise<Map<string, BQ>> }>();
   function lookup(childId: string | null) {
     const key = childId ?? '';
-    if (!looked.has(key)) looked.set(key, (async () => {
+    if (Date.now() - (looked.get(key)?.at ?? 0) > 50 * 60_000) looked.set(key, { at: Date.now(), p: (async () => {
       const qs = new Map(await banks());
       if (!childId) return qs;
       try {
@@ -362,10 +364,11 @@ const data = {
         }
         for (const x of rows) qs.set(x.id, { id: x.id, sub: x.subtopic, stem: x.stem, options: x.options, answer: x.answer,
           group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (urls.has(f.path) ? [urls.get(f.path)!] : [])) });
-      } catch { ppMissing = true; }
+        ppMissing = false;
+      } catch { ppMissing = true; looked.delete(key); }
       return qs;
-    })());
-    return looked.get(key)!;
+    })() });
+    return looked.get(key)!.p;
   }
   /** The child whose questions are shown: the picked child (parent), or this device's player (admin). */
   let viewId: string | null = null;
@@ -425,10 +428,10 @@ const data = {
   let dash: { qs: Map<string, BQ>; tried: Map<string, [BQ, QState][]> } | null = null;
   let detail: { kind: 'topics' | 'wrong'; school: string } | null = null;
   const subjectTried = (school: string) => P.subs.filter((x) => x.school === school).flatMap((x) => dash?.tried.get(x.id) ?? []);
-  async function renderTopics(my = wrongSeq) {
+  async function renderTopics(my = viewSeq) {
     $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
     const qs = await lookup(viewId);
-    if (my !== wrongSeq) return;
+    if (my !== viewSeq) return;
     const tried = new Map<string, [BQ, QState][]>();
     for (const [id, st] of Object.entries(s.questions)) {
       const bq = qs.get(id);
@@ -474,7 +477,9 @@ const data = {
     } else {
       const wrong = subjectTried(school.id).filter(([, x]) => x.w > 0);
       // the revision test: still-wrong questions first, the most often wrong first, at most REVISION_MAX
-      const pick = [...wrong].sort((a, b) => (b[1].s > 0 ? 1 : 0) - (a[1].s > 0 ? 1 : 0) || b[1].w - a[1].w).slice(0, REVISION_MAX).map(([bq]) => bq.id);
+      // (past-paper questions only while the child's quiz can load them)
+      const pick = [...wrong].filter(([bq]) => PP_ENABLED || !isPpId(bq.id))
+        .sort((a, b) => (b[1].s > 0 ? 1 : 0) - (a[1].s > 0 ? 1 : 0) || b[1].w - a[1].w).slice(0, REVISION_MAX).map(([bq]) => bq.id);
       const can = !!child; // only a parent writes the child's save; the admin's view is read-only
       const sent = (s.revision?.ids ?? []).filter((id) => wrong.some(([bq]) => bq.id === id));
       box.innerHTML = `<div class="dhead"><h3>${esc(school.name)}: ${plural(wrong.length, 'question')} answered wrong</h3>${close}</div>`
@@ -490,7 +495,8 @@ const data = {
   async function makeDue(ids: string[], revision: boolean) {
     const now = Date.now();
     const ok = await pushChild((x) => {
-      for (const id of ids) { const q = x.questions[id]; if (!q) continue; q.s = Math.max(q.s, 1); q.due = now; delete q.parked; }
+      // a mastered question comes back at the last retest step, so one right answer masters it again
+      for (const id of ids) { const q = x.questions[id]; if (!q) continue; q.s = q.s > 0 ? q.s : 3; q.due = now; delete q.parked; }
       if (revision) x.revision = { ids: ids.filter((id) => x.questions[id]), ts: now };
     });
     const msg = document.getElementById('dash-msg');
@@ -538,7 +544,8 @@ const data = {
     } catch { /* no picker: this device only */ }
   }
 
-  let wrongSeq = 0;
+  let wrongSeq = 0; // the mistakes list (the admin's picker changes it)
+  let viewSeq = 0; // the dashboard and the retest queue (a new child or save re-renders them)
   async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq, who: string | null = viewId) {
     const recorded = Object.entries(questions).filter(([, q]) => q.w > 0);
     if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
@@ -567,7 +574,7 @@ const data = {
     }).join('');
   }
 
-  async function renderRetest(my = wrongSeq) {
+  async function renderRetest(my = viewSeq) {
     const now = Date.now();
     // the child's rule (inReview): states parked by these banks are left out (and out of the count); one parked by an
     // older tab may be live, so it stays until a Daily Review re-checks it
@@ -575,7 +582,7 @@ const data = {
     if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
     $('retest').innerHTML = '<p class="note">Loading questions…</p>';
     const stems = await lookup(viewId);
-    if (my !== wrongSeq) return;
+    if (my !== viewSeq) return;
     const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
     if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; return; }
     const step = [0, '1-day', '3-day', '7-day'];
@@ -798,7 +805,7 @@ const data = {
   let child: { id: string; rev: number | null; raw: SaveV1 } | null = null;
   let pick = 0, isParentView = false, pickerReady = false;
   let fillSettings = () => {};
-  const renderAll = () => { wrongSeq++; renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
+  const renderAll = () => { wrongSeq++; viewSeq++; renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
   const asSave = (d: unknown) => (d ? (migrate(d) as SaveV1) : (cleanSave(null) as SaveV1));
   async function showChild(id: string) {
     const my = ++pick;

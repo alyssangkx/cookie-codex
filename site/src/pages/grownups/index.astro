@@ -30,7 +30,7 @@ import Base from '../../layouts/Base.astro';
 </Base>
 
 <script>
-  import { grownup as supabase, touch, roleOf } from '../../lib/supabase';
+  import { grownup as supabase, touch, GROWNUP_SEEN, roleOf } from '../../lib/supabase';
   import { isChildSession } from '../../lib/sync';
   import { mountCaptcha, type Captcha } from '../../lib/captcha';
 
@@ -46,7 +46,7 @@ import Base from '../../layouts/Base.astro';
     const { data } = await supabase.auth.getSession();
     const session = data.session;
     if (!session || isChildSession(session.user)) { $('v-signin').hidden = false; return; }
-    touch();
+    touch(GROWNUP_SEEN);
     const role = roleOf(session);
     if (role === 'admin') { location.href = '/admin/'; return; }
     if (!role) { location.href = '/signup/verify/'; return; }

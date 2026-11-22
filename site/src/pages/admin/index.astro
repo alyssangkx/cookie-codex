@@ -123,7 +123,7 @@ const data = {
 </style>
 
 <script>
-  import { grownup as supabase, supabase as player, callFunction, touch } from '../../lib/supabase';
+  import { grownup as supabase, supabase as player, callFunction, touch, GROWNUP_SEEN } from '../../lib/supabase';
   import { decidePush } from '../../lib/sync';
   import { fresh, migrate, SCHEMA } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
@@ -176,7 +176,7 @@ const data = {
       flash('That account is not a grown-up account. Children sign in on the Who\'s playing page.');
       show('v-signin'); signedInChrome(null); return;
     }
-    touch();
+    touch(GROWNUP_SEEN);
     const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
     if (aal.data?.currentLevel === 'aal2' && codeThisVisit) { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); void refreshHeavy(); return; }
     const fl = await supabase.auth.mfa.listFactors();
@@ -329,6 +329,9 @@ const data = {
     subSel.addEventListener('change', fillTiers); fillTiers();
 
     $('t-play').addEventListener('click', guard(async () => {
+      // the player slot is separate now: never replace another child signed in here (their unsynced play would be set aside)
+      const here = (await player.auth.getSession()).data.session;
+      if (here && here.user.id !== t.id) throw new Error('A child is signed in on this device. Log them out on a game page first.');
       const r = await admin({ action: 'test_login', child_id: t.id });
       const { error } = await player.auth.setSession({ access_token: r.session.access_token, refresh_token: r.session.refresh_token }); // the player session: the admin stays signed in
       if (error) throw new Error('Could not sign in as the Test Player.');
