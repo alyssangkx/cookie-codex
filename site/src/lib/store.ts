@@ -53,8 +53,12 @@ export interface SaveV1 {
   last: { sub: string; tier: Tier } | null;
   /** Crumbs ledger (crumbs.ts). Optional, added 20 Nov 2026 with no schema bump (ADR 0002); absent until first earned. */
   crumbs?: Crumbs;
+  /** A revision test a parent sent from the parent page (owner, 23 Nov 2026): up to 10 of the child's mistakes, made due
+   *  at once. Optional, no schema bump. Daily Review asks the ones still due first; answered, they leave it by themselves. */
+  revision?: { ids: string[]; ts: number };
 }
 
+export const REVISION_MAX = 10;
 const KEY = 'ccx:save';
 const BACKUP_KEY = 'ccx:backup'; // copy of a save taken just before a migration rewrites it
 export const SCHEMA = 4;
@@ -374,6 +378,8 @@ export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = fa
   const q = s.questions[id];
   return !!q && (ignoreParked || !q.parked) && q.s > 0 && q.due <= now;
 };
+/** The questions of the parent's revision test that are still due (answering one right moves it on, so it drops out). */
+export const revisionDue = (s: SaveV1, now = Date.now()) => (s.revision?.ids ?? []).filter((id) => isDue(s, id, now, true));
 
 /**
  * Keep the `parked` flags in step with the banks a page has loaded. Every parked state whose id is in `ids` is

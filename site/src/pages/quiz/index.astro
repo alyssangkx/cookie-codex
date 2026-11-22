@@ -95,7 +95,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, type Tier, type SaveV1, type QuizResult,
+    QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, revisionDue, type Tier, type SaveV1, type QuizResult,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
@@ -392,7 +392,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         quiz = pickPaper(all as any, cur.questions, paperN, paperMix.mix);
       } else {
         // a passage's due blanks are asked together in passage order; its other blanks show their answer (clozeStem)
-        quiz = reviewPassages(pickReview(all.map((q) => q.id), cur.questions), passage);
+        // a revision test the parent sent is asked on its own first, while any of it is still due
+        const have = new Set(all.map((q) => q.id)), rev = revisionDue(cur).filter((id) => have.has(id));
+        quiz = reviewPassages(rev.length ? rev : pickReview(all.map((q) => q.id), cur.questions), passage);
+        if (rev.length) $('title').textContent = 'Revision test';
         if (!quiz.length) return stop('Nothing to review today. Great work!');
       }
       const why = await hydrate();

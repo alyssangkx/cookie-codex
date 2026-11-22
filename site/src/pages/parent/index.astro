@@ -15,8 +15,13 @@ const data = {
 };
 ---
 <Base title="Parent view: Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
-  <section class="wrap parent-page">
+  <section class="wrap parent-page" id="pp-root" data-tab="prog">
     <h1>Parent view</h1>
+    <div class="pp-tabs" role="tablist" aria-label="Parent view">
+      <button type="button" role="tab" id="tab-prog" aria-selected="true" aria-controls="content">Child progress</button>
+      <button type="button" role="tab" id="tab-fam" aria-selected="false" aria-controls="family">Family and accounts</button>
+      <a id="tab-admin" class="pp-tab-link" href="/admin/" hidden>Admin functions</a>
+    </div>
 
     <p class="note">Signed in as the grown-up. This page shows the progress saved on this device.</p>
 
@@ -69,10 +74,10 @@ const data = {
     <div id="content" hidden>
       <p class="fields" id="kid-pick" hidden><label for="kid-who">Showing</label>
         <select id="kid-who"></select></p>
-      <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
-      <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Topics and questions</h2>
-        <p class="note">Every subject, topic and sub-topic on the site, with how many questions it has and how many have been tried, mastered and answered wrong. Open a subject, then a sub-topic, to see its tiers and every question tried, with the right answer. A tier clears when every question in it is mastered (answered right first time, or right after its 1, 3 and 7 day retests). P1 to P5 topics allow 5 tries a day per tier; P6 topics allow 3.</p>
+      <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Subjects</h2>
+        <p class="note">Tap a subject for its topics and every question tried. Tap the wrong count to review those questions, put one back for a retest now, or send up to 10 as a revision test. A tier clears when every question in it is mastered (right first time, or right after its 1, 3 and 7 day retests).</p>
         <div id="mastery"></div></section>
+      <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
       <section class="panel" aria-labelledby="h-days"><h2 id="h-days">Last 14 days</h2><div id="days" class="scroll"></div></section>
       <section class="panel" aria-labelledby="h-mis"><h2 id="h-mis">Most common mistakes</h2><div id="mistakes"></div></section>
       <section class="panel" aria-labelledby="h-wrong"><h2 id="h-wrong">Mistakes</h2>
@@ -167,6 +172,31 @@ const data = {
   .parent-page .wq-subject > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 0.3rem; }
   .parent-page .wq-sub { font-size: 1rem; margin: 0.8rem 0 0.4rem; }
   .parent-page .tq-n { color: var(--cocoa-soft); font-size: 0.9rem; }
+  .parent-page { --ok: #1f6b3a; }
+  .parent-page[data-tab='prog'] #family, .parent-page[data-tab='fam'] #content, .parent-page[data-tab='fam'] #fam-deleted { display: none; }
+  .parent-page .pp-tabs { display: flex; gap: 0.4rem; border-bottom: 1.5px solid var(--crust); margin-top: 0.8rem; flex-wrap: wrap; }
+  .parent-page .pp-tabs button, .parent-page .pp-tab-link { min-height: 44px; padding: 0 1rem; border: 1.5px solid var(--crust); border-bottom: 0;
+    border-radius: 10px 10px 0 0; background: var(--cream); color: var(--cocoa); font: 600 1rem var(--font-display); display: inline-flex; align-items: center; text-decoration: none; }
+  .parent-page .pp-tabs button[aria-selected='true'] { background: var(--paper); color: var(--berry); }
+  .parent-page .dash { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.7rem; }
+  .parent-page .dcard { background: var(--cream); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 0.7rem 0.8rem; }
+  .parent-page .dname { background: none; border: 0; padding: 0; min-height: 44px; font: 600 1.25rem var(--font-display); color: var(--berry); cursor: pointer; }
+  .parent-page .drow { display: flex; align-items: center; gap: 0.9rem; }
+  .parent-page .pie { flex: none; width: 76px; height: 76px; border-radius: 50%; }
+  .parent-page .dcard dl { margin: 0; display: grid; gap: 0.1rem; }
+  .parent-page .dcard dl div { display: flex; gap: 0.5rem; align-items: baseline; }
+  .parent-page .dcard dt { color: var(--cocoa-soft); font-size: 0.9rem; min-width: 5.5rem; }
+  .parent-page .dcard dd { margin: 0; font: 600 1.1rem var(--font-display); }
+  .parent-page .dwrong { min-height: 36px; min-width: 44px; padding: 0 0.6rem; border: 1.5px solid var(--berry); border-radius: var(--radius-control);
+    background: #fff; color: var(--berry); font: 600 1.05rem var(--font-display); cursor: pointer; }
+  .parent-page .legend { font-size: 0.82rem; color: var(--cocoa-soft); margin: 0.4rem 0 0; }
+  .parent-page .legend .k { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin: 0 0.15rem 0 0.4rem; vertical-align: -0.05em; }
+  .parent-page .legend .k:first-child { margin-left: 0; }
+  .parent-page .k.ok { background: var(--ok); } .parent-page .k.mid { background: var(--r-ancient); } .parent-page .k.bad { background: var(--berry); }
+  .parent-page #dash-detail:not(:empty) { margin-top: 1rem; border-top: 1.5px solid var(--crust); padding-top: 0.6rem; }
+  .parent-page .dhead { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
+  .parent-page .dhead h3 { margin: 0; }
+  .parent-page .btn.small { min-height: 36px; padding: 0 0.8rem; margin-top: 0.3rem; font-size: 0.92rem; }
   .parent-page .tq-sub { border-top: 1px solid var(--crust); padding: 0.2rem 0; }
   .parent-page .tq-sub.off { opacity: 0.55; }
   .parent-page .tq-sub > summary { cursor: pointer; min-height: 44px; padding: 0.3rem 0; }
@@ -187,7 +217,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
@@ -353,7 +383,7 @@ const data = {
   };
   /** One question as tried: stem, picture (or "same page" when the question above showed the same one), the right answer,
    *  the answer picked on the last wrong try, and where it stands now. */
-  function qItem(bq: BQ, q: QState, now: number, samePage = false) {
+  function qItem(bq: BQ, q: QState, now: number, samePage = false, extra = '') {
     const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
       : q.w > 0 ? 'answered right since (mastered)' : 'right first time (mastered)';
     const right = `Right answer: <b>${bold(bq.options[bq.answer] ?? '')}</b>`;
@@ -361,16 +391,16 @@ const data = {
       : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
     const fig = samePage ? '<span class="meta">Same exam page as the question above.</span>' : figHtml(bq);
     return `<li><div class="wq-stem">${bold(bq.stem)}</div>${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
-      + `<span class="meta">${q.w ? `Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ` : ''}${status}</span></li>`;
+      + `<span class="meta">${q.w ? `Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ` : ''}${status}</span>${extra}</li>`;
   }
   /** A list of tried questions, sets kept together in passage order, with a repeated exam page shown once. */
-  function qList(list: [BQ, QState][], now: number) {
+  function qList(list: [BQ, QState][], now: number, act?: (bq: BQ, q: QState) => string) {
     const k = (b: BQ) => b.group ?? '~' + b.id;
     let last = '';
     return '<ol class="list">' + [...list].sort((a, b) => k(a[0]).localeCompare(k(b[0])) || (a[0].seq ?? 0) - (b[0].seq ?? 0)).map(([bq, q]) => {
       const page = bq.pp?.length ? bq.pp.map((u) => u.split('?')[0]).join('|') : '';
       const same = !!page && page === last; last = page;
-      return qItem(bq, q, now, same);
+      return qItem(bq, q, now, same, act?.(bq, q) ?? '');
     }).join('') + '</ol>';
   }
 
@@ -388,35 +418,97 @@ const data = {
     }
     return html + '</div>';
   }
-  /** Every subject -> topic -> sub-topic with its question count and what was tried; a sub-topic opens to its tiers and
-   *  every question tried. */
+  // ------------------------------------------------------------ the subject dashboard
+  // One card per subject: questions on the site, how many were tried (a pie of how they stand), and the wrong count.
+  // The card opens its topic breakdown; the wrong count opens those questions, where a parent can put one back for a
+  // retest at once or send up to 10 as a revision test (the child's next Daily Review asks them first).
+  let dash: { qs: Map<string, BQ>; tried: Map<string, [BQ, QState][]> } | null = null;
+  let detail: { kind: 'topics' | 'wrong'; school: string } | null = null;
+  const subjectTried = (school: string) => P.subs.filter((x) => x.school === school).flatMap((x) => dash?.tried.get(x.id) ?? []);
   async function renderTopics(my = wrongSeq) {
     $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
     const qs = await lookup(viewId);
     if (my !== wrongSeq) return;
-    const now = Date.now(), tried = new Map<string, [BQ, QState][]>();
+    const tried = new Map<string, [BQ, QState][]>();
     for (const [id, st] of Object.entries(s.questions)) {
       const bq = qs.get(id);
       if (bq) (tried.get(bq.sub) ?? tried.set(bq.sub, []).get(bq.sub)!).push([bq, st]);
     }
-    let html = missingNote();
+    dash = { qs, tried };
+    let html = missingNote() + '<div class="dash">';
     for (const school of P.schools) {
       const list = P.subs.filter((x) => x.school === school.id);
       if (!list.length) continue;
-      const all = list.flatMap((x) => tried.get(x.id) ?? []), avail = list.reduce((n, x) => n + (x.content ? x.avail : 0), 0);
-      html += `<details class="wq-subject"><summary><b>${esc(school.name)}</b>&nbsp;<span class="tq-n">${plural(avail, 'question')} · ${tally(all)}</span></summary>`;
-      let topic = '';
-      for (const sub of list) {
+      const all = subjectTried(school.id), avail = list.reduce((n, x) => n + (x.content ? x.avail : 0), 0);
+      const first = all.filter(([, x]) => x.s === 0 && x.w === 0).length, later = all.filter(([, x]) => x.s === 0 && x.w > 0).length;
+      const learning = all.length - first - later, wrong = all.filter(([, x]) => x.w > 0).length;
+      const pc = (n: number) => (all.length ? (100 * n) / all.length : 0);
+      const pie = all.length ? `conic-gradient(var(--ok) 0 ${pc(first)}%, var(--r-ancient) 0 ${pc(first + later)}%, var(--berry) 0 100%)` : 'var(--crust)';
+      html += `<article class="dcard">
+        <button type="button" class="dname" data-act="topics" data-school="${esc(school.id)}">${esc(school.name)} <span aria-hidden="true">›</span></button>
+        <div class="drow"><div class="pie" style="background:${pie}" role="img" aria-label="${first} right first time, ${later} right after a retest, ${learning} still to retest"></div>
+          <dl><div><dt>On the site</dt><dd>${avail.toLocaleString()}</dd></div>
+            <div><dt>Tried</dt><dd>${all.length.toLocaleString()}${avail ? ` <small>(${((100 * all.length) / avail).toFixed(all.length && all.length < avail / 100 ? 1 : 0)}%)</small>` : ''}</dd></div>
+            <div><dt>Wrong</dt><dd>${wrong ? `<button type="button" class="dwrong" data-act="wrong" data-school="${esc(school.id)}">${wrong}</button>` : '0'}</dd></div></dl></div>
+        <p class="legend"><span class="k ok"></span>right first time ${first} <span class="k mid"></span>right after retest ${later} <span class="k bad"></span>to retest ${learning}</p>
+      </article>`;
+    }
+    $('mastery').innerHTML = html + '</div><div id="dash-detail"></div>';
+    renderDetail();
+  }
+  function renderDetail() {
+    const box = document.getElementById('dash-detail');
+    if (!box || !dash || !detail) { if (box) box.innerHTML = ''; return; }
+    const school = P.schools.find((x) => x.id === detail!.school)!, now = Date.now();
+    const close = '<button type="button" class="btn small" data-act="close">Close</button>';
+    if (detail.kind === 'topics') {
+      let html = `<div class="dhead"><h3>${esc(school.name)}: topics</h3>${close}</div>`, topic = '';
+      for (const sub of P.subs.filter((x) => x.school === school.id)) {
         if (sub.topic !== topic) { topic = sub.topic; html += `<h3 class="wq-sub">${esc(topic)}</h3>`; }
-        const l = tried.get(sub.id) ?? [];
+        const l = dash.tried.get(sub.id) ?? [];
         html += `<details class="tq-sub${sub.content ? '' : ' off'}"><summary><span class="nm">${esc(sub.name)}</span>`
           + `<span class="meta">${sub.content ? `${plural(sub.avail, 'question')} · ${tally(l)}` : 'Coming soon (no questions yet)'}</span></summary>`
           + (sub.content ? tierCells(sub) + (l.length ? qList(l, now) : '<p class="note">Not tried yet.</p>') : '') + '</details>';
       }
-      html += '</details>';
+      box.innerHTML = html;
+    } else {
+      const wrong = subjectTried(school.id).filter(([, x]) => x.w > 0);
+      // the revision test: still-wrong questions first, the most often wrong first, at most REVISION_MAX
+      const pick = [...wrong].sort((a, b) => (b[1].s > 0 ? 1 : 0) - (a[1].s > 0 ? 1 : 0) || b[1].w - a[1].w).slice(0, REVISION_MAX).map(([bq]) => bq.id);
+      const can = !!child; // only a parent writes the child's save; the admin's view is read-only
+      const sent = (s.revision?.ids ?? []).filter((id) => wrong.some(([bq]) => bq.id === id));
+      box.innerHTML = `<div class="dhead"><h3>${esc(school.name)}: ${plural(wrong.length, 'question')} answered wrong</h3>${close}</div>`
+        + (can && pick.length > 1 ? `<p><button type="button" class="btn" data-act="revise" data-ids="${esc(pick.join(' '))}">Send ${pick.length} as a revision test now</button></p>
+          <p class="note">The questions go to the top of the child's next Daily Review, asked together as a revision test.${sent.length ? ` ${sent.length} from the last one sent are in this list.` : ''}</p>` : '')
+        + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>'
+        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
     }
-    $('mastery').innerHTML = html;
+    box.scrollIntoView({ block: 'start' });
   }
+  /** Make questions due now in the child's save (a mastered one comes back as a retest); `revision` also marks them as the
+   *  revision test. Written through pushChild (rev check; never the admin's view). */
+  async function makeDue(ids: string[], revision: boolean) {
+    const now = Date.now();
+    const ok = await pushChild((x) => {
+      for (const id of ids) { const q = x.questions[id]; if (!q) continue; q.s = Math.max(q.s, 1); q.due = now; delete q.parked; }
+      if (revision) x.revision = { ids: ids.filter((id) => x.questions[id]), ts: now };
+    });
+    const msg = document.getElementById('dash-msg');
+    if (msg) msg.textContent = !ok ? "Couldn't save that. Reload the page and try again."
+      : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.` : 'Done: it will come up in the next quiz on that topic or the Daily Review.';
+  }
+  $('mastery').addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act]');
+    if (!b) return;
+    const act = b.dataset.act!;
+    if (act === 'topics' || act === 'wrong') { detail = { kind: act, school: b.dataset.school! }; renderDetail(); }
+    else if (act === 'close') { detail = null; renderDetail(); $('h-mast').scrollIntoView(); }
+    else if (act === 'recycle') void makeDue([b.dataset.id!], false);
+    else if (act === 'revise') {
+      const ids = b.dataset.ids!.split(' ');
+      if (confirm(`Send these ${ids.length} questions as a revision test? They become due now and are asked first in the next Daily Review.`)) void makeDue(ids, true);
+    }
+  });
 
   // Admin only: each child's saved progress for the mistakes list. The admin function lists the children and RLS lets an
   // admin read (select only) any save. Nothing here writes to another save. (A parent uses the "Showing" picker.)
@@ -655,6 +747,7 @@ const data = {
         } else if (act === 'delete') {
           const typed = prompt(`Type ${btn.dataset.name} to delete this child. They cannot sign in from now on; their progress is erased after 7 days unless you restore them.`);
           if (typed === null) return;
+          if (!confirm(`Delete ${btn.dataset.name} and all their progress? You can restore them for 7 days; after that it is gone for good.`)) return;
           await callParentApi({ action: 'delete_child', child_id: id, confirm: typed }); famSay('Deleted. You can restore them for 7 days.');
         } else if (act === 'restore') {
           await callParentApi({ action: 'restore_child', child_id: id }); famSay('Restored.');
@@ -748,6 +841,15 @@ const data = {
     if (keep !== child?.id) await showChild(keep);
   }
 
+  // ------------------------------------------------------------ tabs: child progress | family and accounts (a parent) or a
+  // link to the admin console (the admin). CSS hides the other panel by data-tab, so the panels' own hidden flags stay theirs.
+  const tab = (t: 'prog' | 'fam') => {
+    $('pp-root').dataset.tab = t;
+    $('tab-prog').setAttribute('aria-selected', String(t === 'prog')); $('tab-fam').setAttribute('aria-selected', String(t === 'fam'));
+  };
+  $('tab-prog').addEventListener('click', () => tab('prog'));
+  $('tab-fam').addEventListener('click', () => tab('fam'));
+
   // ------------------------------------------------------------ start
   let started = false;
   async function start() {
@@ -757,6 +859,7 @@ const data = {
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';
     isParentView = isParent;
+    if (!isParent) { $('tab-fam').hidden = true; $('tab-admin').hidden = false; }
     if (isParent) {
       try { await initFamily(); } catch (e) { famFail(e); $('family').hidden = false; }
       if (me?.deleted_at) return;

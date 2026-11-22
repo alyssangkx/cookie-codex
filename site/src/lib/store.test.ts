@@ -676,3 +676,14 @@ test('a one-pool quiz (no tier): finishQuiz reaches milestones through opts.pool
   assert.equal(attemptsToday(s, 'sci'), 2); // any try at the sub-topic today, tier or none
   assert.equal(attemptsToday(s, 'sci', 'b'), 1);
 });
+
+test('revisionDue: a parent-sent revision test lists only its questions still due', async () => {
+  const { fresh, revisionDue } = await import('./store.ts');
+  const { cleanSave } = await import('./cleansave.ts');
+  const s = fresh();
+  s.questions = { a: { s: 1, w: 1, due: t0 - 1 }, b: { s: 0, w: 1, due: 0 }, c: { s: 2, w: 2, due: t0 + DAY }, d: { s: 1, w: 1, due: t0 - 1, parked: true } } as any;
+  assert.deepEqual(revisionDue(s, t0), []);
+  s.revision = { ids: ['a', 'b', 'c', 'd', 'gone'], ts: t0 };
+  assert.deepEqual(revisionDue(s, t0), ['a', 'd']); // b answered right (retired), c not due yet, gone has no state
+  assert.deepEqual(cleanSave({ ...s, revision: { ids: ['x', 3, ...'abcdefghijkl'], ts: t0 } }).revision!.ids.length, 10); // strings only, at most 10
+});

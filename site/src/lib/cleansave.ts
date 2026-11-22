@@ -132,5 +132,7 @@ export function cleanSave(raw: unknown): SaveV1 {
   const last = obj(r.last), lt = tier(last.tier);
   s.last = typeof last.sub === 'string' && lt ? { sub: str(last.sub, 120), tier: lt } : null;
   if (r.crumbs !== undefined) s.crumbs = cleanCrumbs(r.crumbs);
+  const rv = obj(r.revision);
+  if (Array.isArray(rv.ids)) s.revision = { ids: rv.ids.filter((x: unknown) => typeof x === 'string').slice(0, 10).map((x: string) => str(x, 40)), ts: num(rv.ts, 0, 1e15) };
   return s;
 }
