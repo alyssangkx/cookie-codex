@@ -144,7 +144,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         const go = (to: string) => { leaving = true; location.replace(to); };
         try {
           let session = null;
-          try { await adoptGrownup(); session = await currentSession(grown ? grownup : undefined); } catch { /* unreachable storage: treated as signed out */ }
+          try { if (await adoptGrownup()) { go(location.href); return; } session = await currentSession(grown ? grownup : undefined); } catch { /* unreachable storage: treated as signed out */ }
           if (session) document.getElementById('logout')!.hidden = false;
           if (gate && !session) {
             if (gate === 'game' && await offlineAllowed()) {

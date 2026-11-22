@@ -45,13 +45,15 @@ export async function currentSession(sb = supabase): Promise<Session | null> {
 }
 
 /** Before 23 Nov 2026 one key held every session: a parent or admin signed in then sits in the player's slot. Move it to
- *  the grown-up's slot (same tokens) and clear the player's, once. */
-export async function adoptGrownup() {
+ *  the grown-up's slot (same tokens) and drop the player's copy, once. True when it moved: the caller reloads, so every
+ *  script on the page starts from the new slots. Never signOut() here: that ends the session on the server too. */
+export async function adoptGrownup(): Promise<boolean> {
   const s = (await supabase.auth.getSession()).data.session;
-  if (!s || !roleOf(s)) return;
+  if (!s || !roleOf(s)) return false;
   try { if (!(await grownup.auth.getSession()).data.session) await grownup.auth.setSession({ access_token: s.access_token, refresh_token: s.refresh_token }); }
   catch { /* the grown-up signs in again */ }
-  await supabase.auth.signOut({ scope: 'local' });
+  kv.del('auth'); // the player slot's key (AUTH_KEY = 'ccx:auth'), through store.ts like every other storage write
+  return true;
 }
 
 /**

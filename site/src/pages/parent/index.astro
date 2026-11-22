@@ -349,7 +349,7 @@ const data = {
   const looked = new Map<string, { at: number; p: Promise<Map<string, BQ>> }>();
   function lookup(childId: string | null) {
     const key = childId ?? '';
-    if (Date.now() - (looked.get(key)?.at ?? 0) > 50 * 60_000) looked.set(key, { at: Date.now(), p: (async () => {
+    if (Date.now() - (looked.get(key)?.at ?? 0) > 50 * 60_000) { const entry = { at: Date.now(), p: (async () => {
       const qs = new Map(await banks());
       if (!childId) return qs;
       try {
@@ -365,9 +365,9 @@ const data = {
         for (const x of rows) qs.set(x.id, { id: x.id, sub: x.subtopic, stem: x.stem, options: x.options, answer: x.answer,
           group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (urls.has(f.path) ? [urls.get(f.path)!] : [])) });
         ppMissing = false;
-      } catch { ppMissing = true; looked.delete(key); }
+      } catch { ppMissing = true; if (looked.get(key) === entry) looked.delete(key); }
       return qs;
-    })() });
+    })() }; looked.set(key, entry); }
     return looked.get(key)!.p;
   }
   /** The child whose questions are shown: the picked child (parent), or this device's player (admin). */
@@ -486,7 +486,7 @@ const data = {
         + (can && pick.length > 1 ? `<p><button type="button" class="btn" data-act="revise" data-ids="${esc(pick.join(' '))}">Send ${pick.length} as a revision test now</button></p>
           <p class="note">The questions go to the top of the child's next Daily Review, asked together as a revision test.${sent.length ? ` ${sent.length} from the last one sent are in this list.` : ''}</p>` : '')
         + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>'
-        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
+        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && (PP_ENABLED || !isPpId(bq.id)) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
     }
     box.scrollIntoView({ block: 'start' });
   }
@@ -503,6 +503,8 @@ const data = {
     if (msg) msg.textContent = !ok ? "Couldn't save that. Reload the page and try again."
       : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.` : 'Done: it will come up in the next quiz on that topic or the Daily Review.';
   }
+  // the exam-page pictures are signed for an hour: redraw the dashboard (and this device's mistakes list) before they lapse
+  setInterval(() => { viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
   $('mastery').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act]');
     if (!b) return;
