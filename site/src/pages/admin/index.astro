@@ -123,7 +123,7 @@ const data = {
 </style>
 
 <script>
-  import { supabase, callFunction, touch } from '../../lib/supabase';
+  import { grownup as supabase, supabase as player, callFunction, touch } from '../../lib/supabase';
   import { decidePush } from '../../lib/sync';
   import { fresh, migrate, SCHEMA } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
@@ -164,6 +164,9 @@ const data = {
 
   // ------------------------------------------------------------ sign-in and the authenticator
   let factorId = '';
+  // owner, 23 Nov 2026: the admin stays signed in (the Parent page opens straight away), but this console and its powers
+  // (PINs, deleting children) ask for the authenticator code once on every visit
+  let codeThisVisit = false;
   async function render() {
     const { data } = await supabase.auth.getSession();
     const user = data.session?.user;
@@ -175,7 +178,7 @@ const data = {
     }
     touch();
     const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (aal.data?.currentLevel === 'aal2') { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); void refreshHeavy(); return; }
+    if (aal.data?.currentLevel === 'aal2' && codeThisVisit) { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); void refreshHeavy(); return; }
     const fl = await supabase.auth.mfa.listFactors();
     const verified = fl.data?.totp?.[0]; // listFactors().totp holds verified factors only
     if (verified) { factorId = verified.id; show('v-challenge'); signedInChrome(user.email ?? ''); $('code2').focus(); return; }
@@ -206,6 +209,7 @@ const data = {
     const code = input.value.trim(); input.value = '';
     const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code });
     if (error) { flash('That code did not work. Wait for the next code and try again.'); return; }
+    codeThisVisit = true;
     await render();
   };
   $('f-enroll').addEventListener('submit', verify('code1'));
@@ -326,7 +330,7 @@ const data = {
 
     $('t-play').addEventListener('click', guard(async () => {
       const r = await admin({ action: 'test_login', child_id: t.id });
-      const { error } = await supabase.auth.setSession({ access_token: r.session.access_token, refresh_token: r.session.refresh_token });
+      const { error } = await player.auth.setSession({ access_token: r.session.access_token, refresh_token: r.session.refresh_token }); // the player session: the admin stays signed in
       if (error) throw new Error('Could not sign in as the Test Player.');
       touch();
       location.href = '/';

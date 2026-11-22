@@ -28,12 +28,14 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         if (p === '' || new RegExp(GAME).test(p)) g = 'game';
         else if (p === '/parent') g = 'admin';
         document.documentElement.setAttribute('data-gate', g);
+        // the one allowed storage read outside store.ts: the player's session key (AUTH_KEY in lib/supabase.ts) and the
+        // grown-up's (GROWNUP_AUTH_KEY); /parent needs the grown-up one, game pages the player one
+        var key = g === 'admin' ? 'ccx:auth-gu' : 'ccx:auth';
         // signed-out visitors do not see the links that only lead to the sign-in page
-        try { if (localStorage.getItem('ccx:auth') !== null) document.documentElement.className += ' has-auth'; } catch (e) {}
+        try { if (localStorage.getItem('ccx:auth') !== null || localStorage.getItem('ccx:auth-gu') !== null) document.documentElement.className += ' has-auth'; } catch (e) {}
         if (!g) return;
         var has = false;
-        // the one allowed storage read outside store.ts; the key is AUTH_KEY in lib/supabase.ts
-        try { has = localStorage.getItem('ccx:auth') !== null; } catch (e) {}
+        try { has = localStorage.getItem(key) !== null; } catch (e) {}
         document.documentElement.className += ' gate-pending';
         if (!has) { location.replace(g === 'admin' ? '/grownups/' : '/login'); return; }
         // fail-safe: never leave the page blank. A game page is shown; the parent page goes to the grown-ups sign-in.
@@ -106,7 +108,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
       </div>
     </footer>
     <script>
-      import { currentSession, offlineAllowed, supabase } from '../lib/supabase';
+      import { currentSession, offlineAllowed, grownup } from '../lib/supabase';
       import { initSync, logout, isChildSession } from '../lib/sync';
       import { kv, crumbBalance } from '../lib/store';
 
@@ -129,7 +131,12 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
       const root = document.documentElement;
       const gate = root.getAttribute('data-gate');
       const release = () => root.classList.remove('gate-pending');
-      document.getElementById('logout')?.addEventListener('click', () => { void logout(); });
+      // grown-up pages run on the grown-up's own session (lib/supabase.ts grownup): its Log out signs only the grown-up out
+      const grown = /^\/(parent|admin|grownups|signup|reset)(\/|$)/.test(location.pathname);
+      document.getElementById('logout')?.addEventListener('click', () => {
+        if (!grown) { void logout(); return; }
+        void grownup.auth.signOut({ scope: 'local' }).finally(() => location.replace('/grownups/'));
+      });
 
       (async () => {
         let leaving = false; // a redirect is under way: keep the body hidden
@@ -137,7 +144,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         const go = (to: string) => { leaving = true; location.replace(to); };
         try {
           let session = null;
-          try { session = await currentSession(); } catch { /* unreachable storage: treated as signed out */ }
+          try { session = await currentSession(grown ? grownup : undefined); } catch { /* unreachable storage: treated as signed out */ }
           if (session) document.getElementById('logout')!.hidden = false;
           if (gate && !session) {
             if (gate === 'game' && await offlineAllowed()) {
@@ -153,7 +160,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
             // the admin always at aal2; a parent at aal1, or aal2 once they have enrolled an authenticator
             let ok = false;
             try {
-              const aal = (await supabase.auth.mfa.getAuthenticatorAssuranceLevel()).data;
+              const aal = (await grownup.auth.mfa.getAuthenticatorAssuranceLevel()).data;
               const role = session!.user.app_metadata?.role;
               ok = role === 'admin' ? aal?.currentLevel === 'aal2'
                 : role === 'parent' && (aal?.nextLevel !== 'aal2' || aal?.currentLevel === 'aal2');

@@ -1,14 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { subs as allSubs, subsOf, hasContent, cookieBySlug, MIN_POOL, SCHOOLS, banksHash } from '../../lib/train';
+import { subs as allSubs, hasContent, cookieBySlug, MIN_POOL, SCHOOLS, banksHash, listGroup } from '../../lib/train';
 
-const math = subsOf('math');
 const data = {
   total: cookieBySlug.size,
   min: MIN_POOL,
-  subs: math.map((s) => ({ id: s.id, name: s.name, topic: s.topicName, file: s.file, count: s.count, hash: s.hash, content: hasContent(s) })),
-  // every subject's sub-topics with a bank file: the wrong-answer list and the retest queue look questions up in them
-  all: allSubs.filter((s) => s.file).map((s) => ({ id: s.id, name: s.name, school: s.school, file: s.file })),
+  // every subject's sub-topics in the order the training pages show them, with how many questions each has (a past-paper
+  // pool counts all its questions); the question lists look questions up in the bank files
+  subs: allSubs.map((s) => ({ id: s.id, name: s.name, school: s.school, topic: listGroup(s).topicName, file: s.file, count: s.count,
+    hash: s.hash, content: hasContent(s), pool: !!s.pool, avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
   cards: Object.fromEntries([...cookieBySlug].map(([slug, c]) => [slug, c.name])), // card names for the Crumbs ledger
   banks: banksHash, // the retest queue hides only states parked by these banks (store.ts inReview), as the child's gates do
@@ -70,13 +70,13 @@ const data = {
       <p class="fields" id="kid-pick" hidden><label for="kid-who">Showing</label>
         <select id="kid-who"></select></p>
       <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
-      <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Mastery: Math</h2>
-        <p class="note">A tier clears when every question in it is mastered (answered right first time, or right after its 1, 3 and 7 day retests). P1 to P5 topics allow 5 tries a day per tier; P6 topics allow 3.</p>
+      <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Topics and questions</h2>
+        <p class="note">Every subject, topic and sub-topic on the site, with how many questions it has and how many have been tried, mastered and answered wrong. Open a subject, then a sub-topic, to see its tiers and every question tried, with the right answer. A tier clears when every question in it is mastered (answered right first time, or right after its 1, 3 and 7 day retests). P1 to P5 topics allow 5 tries a day per tier; P6 topics allow 3.</p>
         <div id="mastery"></div></section>
       <section class="panel" aria-labelledby="h-days"><h2 id="h-days">Last 14 days</h2><div id="days" class="scroll"></div></section>
       <section class="panel" aria-labelledby="h-mis"><h2 id="h-mis">Most common mistakes</h2><div id="mistakes"></div></section>
-      <section class="panel" aria-labelledby="h-wrong"><h2 id="h-wrong">Questions answered wrong</h2>
-        <p class="note">Every question answered wrong, by subject and sub-topic, with the right answer and the answer picked last time (recorded from 19 Nov 2026).</p>
+      <section class="panel" aria-labelledby="h-wrong"><h2 id="h-wrong">Mistakes</h2>
+        <p class="note">Every question answered wrong, past-paper ones included, by subject and sub-topic, with the right answer and the answer picked last time (recorded from 19 Nov 2026).</p>
         <p class="fields" id="wrong-pick" hidden><label for="wrong-who">Show for</label>
           <select id="wrong-who"><option value="">This device</option></select></p>
         <div id="wrong"></div></section>
@@ -166,8 +166,15 @@ const data = {
   .parent-page .wq-subject { border-top: 1px solid var(--crust); padding: 0.4rem 0; }
   .parent-page .wq-subject > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 0.3rem; }
   .parent-page .wq-sub { font-size: 1rem; margin: 0.8rem 0 0.4rem; }
+  .parent-page .tq-n { color: var(--cocoa-soft); font-size: 0.9rem; }
+  .parent-page .tq-sub { border-top: 1px solid var(--crust); padding: 0.2rem 0; }
+  .parent-page .tq-sub.off { opacity: 0.55; }
+  .parent-page .tq-sub > summary { cursor: pointer; min-height: 44px; padding: 0.3rem 0; }
+  .parent-page .tq-sub > summary .nm { font-weight: 600; }
+  .parent-page .tq-sub > summary .meta { display: block; }
+  .parent-page .tq-sub > .tiers { margin: 0.2rem 0 0.6rem; }
   .parent-page .wq-stem { white-space: pre-line; }
-  .parent-page .wq-fig { margin: 0.4rem 0; max-width: 22rem; }
+  .parent-page .wq-fig { margin: 0.4rem 0; max-width: 32rem; }
   .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
   .parent-page .btn.danger { background: #fff; color: var(--berry); border: 1.5px solid var(--berry); }
   .parent-page .kid { border-top: 1px dashed var(--crust); padding: 0.7rem 0; }
@@ -183,13 +190,12 @@ const data = {
   import { load, save, migrate, SCHEMA, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { isPpId } from '../../lib/pastpaper';
-  import { supabase, callFunction, callParentApi, roleOf } from '../../lib/supabase';
+    import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
-  interface PSub { id: string; name: string; topic: string; file: string | null; count: Record<Tier, number>; hash: Record<Tier, string>; content: boolean }
-  interface ASub { id: string; name: string; school: string; file: string }
+  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; count: Record<Tier, number>;
+    hash: Record<Tier, string | undefined>; content: boolean; pool: boolean; avail: number }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
-    { total: number; min: number; subs: PSub[]; all: ASub[]; schools: { id: string; name: string }[]; cards: Record<string, string>; banks: string };
+    { total: number; min: number; subs: PSub[]; schools: { id: string; name: string }[]; cards: Record<string, string>; banks: string };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const esc = (t: unknown) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
   const DAY = 86_400_000;
@@ -254,29 +260,6 @@ const data = {
       <h3>Purchases</h3>${buys ? `<ul class="pc-buys">${buys}</ul>` : '<p class="note">Nothing bought yet.</p>'}`;
   }
 
-  function renderMastery() {
-    const topics = new Map<string, PSub[]>();
-    for (const sub of P.subs) (topics.get(sub.topic) ?? topics.set(sub.topic, []).get(sub.topic)!).push(sub);
-    let html = '';
-    for (const [topic, list] of topics) {
-      html += `<div class="topic"><h3>${esc(topic)}</h3>`;
-      for (const sub of list) {
-        html += `<div class="sub${sub.content ? '' : ' off'}"><span class="nm">${esc(sub.name)}</span>${sub.content ? '' : ' <small>(no questions yet)</small>'}<div class="tiers">`;
-        for (const t of TIERS) {
-          const name = TIER_NAME[t];
-          if (sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
-          const ts = tierState(s, sub.id, t);
-          if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
-          else if (liveMastered(ts, sub.count[t], sub.hash[t])) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
-          else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
-        }
-        html += '</div></div>';
-      }
-      html += '</div>';
-    }
-    $('mastery').innerHTML = html;
-  }
-
   function renderDays() {
     let rows = '';
     const now = new Date();
@@ -305,15 +288,20 @@ const data = {
     }).join('') + '</ol>';
   }
 
-  type BQ = { id: string; sub: string; stem: string; options: string[]; answer: number;
-    figure?: string | { img: string; alt: string; labels?: { text: string }[] }; visual?: { kind: string; title: string } };
+  type QState = SaveV1['questions'][string];
+  type BQ = { id: string; sub: string; stem: string; options: string[]; answer: number; group?: string; seq?: number;
+    figure?: string | { img: string; alt: string; labels?: { text: string }[] }; visual?: { kind: string; title: string };
+    pp?: string[] }; // pp: a past-paper question's exam-page pictures (signed URLs)
+  type PpRow = { id: string; subtopic: string; stem: string; options: string[]; answer: number; figures: { path: string }[] | null; grp: string | null; seq: number | null };
   let bankLoad: Promise<Map<string, BQ>> | null = null;
   let bankMissing = 0; // question files that failed to load: their questions cannot be shown
-  const missingNote = () => (bankMissing ? `<p class="note">Some question files could not load (offline?), so their questions are not shown. Reload to try again.</p>` : '');
+  let ppMissing = false; // the past-paper questions could not load
+  const missingNote = () => (bankMissing ? `<p class="note">Some question files could not load (offline?), so their questions are not shown. Reload to try again.</p>` : '')
+    + (ppMissing ? `<p class="note">The past-paper questions could not load, so they are not shown. Reload to try again.</p>` : '');
   function banks() {
     return (bankLoad ??= (async () => {
       const qs = new Map<string, BQ>();
-      const files = [...new Set(P.all.map((x) => x.file))];
+      const files = [...new Set(P.subs.flatMap((x) => (x.file ? [x.file] : [])))];
       await Promise.all(files.map(async (f) => {
         try {
           const r = await fetch(`/data/quiz/${f}.json`);
@@ -324,19 +312,114 @@ const data = {
       return qs;
     })());
   }
+  /** Every question this page can show for a child: the site's banks plus the past-paper questions the server gave that
+   *  child (pp_seen, migration 012; it never trusts ids from the save) with their pictures. One load per child. */
+  const looked = new Map<string, Promise<Map<string, BQ>>>();
+  function lookup(childId: string | null) {
+    const key = childId ?? '';
+    if (!looked.has(key)) looked.set(key, (async () => {
+      const qs = new Map(await banks());
+      if (!childId) return qs;
+      try {
+        const r = await supabase.rpc('pp_seen', { p_child: childId });
+        if (r.error) throw r.error;
+        const rows = (r.data ?? []) as PpRow[];
+        const paths = [...new Set(rows.flatMap((x) => (x.figures ?? []).map((f) => f.path)))];
+        const urls = new Map<string, string>();
+        for (let i = 0; i < paths.length; i += 100) {
+          const u = await supabase.storage.from('pp-figures').createSignedUrls(paths.slice(i, i + 100), 3600);
+          for (const x of u.data ?? []) if (x.path && x.signedUrl) urls.set(x.path, x.signedUrl);
+        }
+        for (const x of rows) qs.set(x.id, { id: x.id, sub: x.subtopic, stem: x.stem, options: x.options, answer: x.answer,
+          group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (urls.has(f.path) ? [urls.get(f.path)!] : [])) });
+      } catch { ppMissing = true; }
+      return qs;
+    })());
+    return looked.get(key)!;
+  }
+  /** The child whose questions are shown: the picked child (parent), or this device's player (admin). */
+  let viewId: string | null = null;
+
   const bold = (t: string) => esc(t).replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   // figures: Math SVG strings come from our own build scripts (as on the quiz page); Science line art is shown as the
-  // image with its labels listed underneath; a visual text (poster, notice...) is named, not drawn
+  // image with its labels listed underneath; a past-paper question shows its exam-page pictures; a visual text is named
   const figHtml = (q: BQ) => {
+    if (q.pp?.length) return `<div class="wq-fig">${q.pp.map((u) => `<img src="${esc(u)}" alt="Exam page for this question" loading="lazy">`).join('')}</div>`;
     const f = q.figure;
     if (typeof f === 'string') return `<div class="wq-fig">${f}</div>`;
     if (f && /^\/science\/[\w.-]+\.webp$/.test(f.img)) return `<div class="wq-fig"><img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy">`
       + `${f.labels?.length ? `<span class="meta">Labels: ${esc(f.labels.map((l) => l.text).join(', '))}</span>` : ''}</div>`;
     return q.visual ? `<span class="meta">With a ${esc(q.visual.kind)}: ${esc(q.visual.title)}</span>` : '';
   };
+  /** One question as tried: stem, picture (or "same page" when the question above showed the same one), the right answer,
+   *  the answer picked on the last wrong try, and where it stands now. */
+  function qItem(bq: BQ, q: QState, now: number, samePage = false) {
+    const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
+      : q.w > 0 ? 'answered right since (mastered)' : 'right first time (mastered)';
+    const right = `Right answer: <b>${bold(bq.options[bq.answer] ?? '')}</b>`;
+    const theirs = q.w === 0 ? '' : q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
+      : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
+    const fig = samePage ? '<span class="meta">Same exam page as the question above.</span>' : figHtml(bq);
+    return `<li><div class="wq-stem">${bold(bq.stem)}</div>${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
+      + `<span class="meta">${q.w ? `Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ` : ''}${status}</span></li>`;
+  }
+  /** A list of tried questions, sets kept together in passage order, with a repeated exam page shown once. */
+  function qList(list: [BQ, QState][], now: number) {
+    const k = (b: BQ) => b.group ?? '~' + b.id;
+    let last = '';
+    return '<ol class="list">' + [...list].sort((a, b) => k(a[0]).localeCompare(k(b[0])) || (a[0].seq ?? 0) - (b[0].seq ?? 0)).map(([bq, q]) => {
+      const page = bq.pp?.length ? bq.pp.map((u) => u.split('?')[0]).join('|') : '';
+      const same = !!page && page === last; last = page;
+      return qItem(bq, q, now, same);
+    }).join('') + '</ol>';
+  }
 
-  // Admin only: each child's saved progress for the wrong-answer list. The admin function lists the children and RLS
-  // lets an admin read (select only) any save. Nothing here writes to another save. (A parent uses the "Showing" picker.)
+  const plural = (n: number, w: string) => `${n.toLocaleString()} ${w}${n === 1 ? '' : 's'}`;
+  const tally = (l: [BQ, QState][]) => `tried ${l.length} · mastered ${l.filter(([, x]) => x.s === 0).length} · wrong ${l.filter(([, x]) => x.w > 0).length}`;
+  function tierCells(sub: PSub) {
+    let html = '<div class="tiers">';
+    for (const t of TIERS) {
+      const name = TIER_NAME[t];
+      if (!sub.pool && sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
+      const ts = tierState(s, sub.id, t);
+      if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
+      else if (liveMastered(ts, sub.count[t], sub.hash[t])) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
+      else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
+    }
+    return html + '</div>';
+  }
+  /** Every subject -> topic -> sub-topic with its question count and what was tried; a sub-topic opens to its tiers and
+   *  every question tried. */
+  async function renderTopics(my = wrongSeq) {
+    $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
+    const qs = await lookup(viewId);
+    if (my !== wrongSeq) return;
+    const now = Date.now(), tried = new Map<string, [BQ, QState][]>();
+    for (const [id, st] of Object.entries(s.questions)) {
+      const bq = qs.get(id);
+      if (bq) (tried.get(bq.sub) ?? tried.set(bq.sub, []).get(bq.sub)!).push([bq, st]);
+    }
+    let html = missingNote();
+    for (const school of P.schools) {
+      const list = P.subs.filter((x) => x.school === school.id);
+      if (!list.length) continue;
+      const all = list.flatMap((x) => tried.get(x.id) ?? []), avail = list.reduce((n, x) => n + (x.content ? x.avail : 0), 0);
+      html += `<details class="wq-subject"><summary><b>${esc(school.name)}</b>&nbsp;<span class="tq-n">${plural(avail, 'question')} · ${tally(all)}</span></summary>`;
+      let topic = '';
+      for (const sub of list) {
+        if (sub.topic !== topic) { topic = sub.topic; html += `<h3 class="wq-sub">${esc(topic)}</h3>`; }
+        const l = tried.get(sub.id) ?? [];
+        html += `<details class="tq-sub${sub.content ? '' : ' off'}"><summary><span class="nm">${esc(sub.name)}</span>`
+          + `<span class="meta">${sub.content ? `${plural(sub.avail, 'question')} · ${tally(l)}` : 'Coming soon (no questions yet)'}</span></summary>`
+          + (sub.content ? tierCells(sub) + (l.length ? qList(l, now) : '<p class="note">Not tried yet.</p>') : '') + '</details>';
+      }
+      html += '</details>';
+    }
+    $('mastery').innerHTML = html;
+  }
+
+  // Admin only: each child's saved progress for the mistakes list. The admin function lists the children and RLS lets an
+  // admin read (select only) any save. Nothing here writes to another save. (A parent uses the "Showing" picker.)
   async function initWrongPicker() {
     try {
       const { data } = await supabase.auth.getSession();
@@ -349,7 +432,7 @@ const data = {
       $('wrong-who').addEventListener('change', async () => {
         const id = $<HTMLSelectElement>('wrong-who').value;
         const my = ++wrongSeq; // a later pick wins even if this one's fetch finishes last
-        if (!id) return renderWrong(s.questions, my);
+        if (!id) return renderWrong(s.questions, my, viewId);
         $('wrong').innerHTML = '<p class="note">Loading…</p>';
         const res = await supabase.from('saves').select('data').eq('child_id', id).maybeSingle();
         if (my !== wrongSeq) return;
@@ -358,60 +441,49 @@ const data = {
         let data: unknown;
         try { data = res.data ? migrate(res.data.data) : null; }
         catch { if (my === wrongSeq) $('wrong').innerHTML = '<p class="note">Could not read that save (unknown format).</p>'; return; }
-        renderWrong(cleanSave(data).questions, my);
+        renderWrong(cleanSave(data).questions, my, id);
       });
     } catch { /* no picker: this device only */ }
   }
 
   let wrongSeq = 0;
-  async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq) {
-    const now = Date.now();
-    // past-paper items stay private to the child's quiz (owner, 20 Nov 2026): never listed here
-    const recorded = Object.entries(questions).filter(([id, q]) => q.w > 0 && !isPpId(id));
+  async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq, who: string | null = viewId) {
+    const recorded = Object.entries(questions).filter(([, q]) => q.w > 0);
     if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
     $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
-    const bank = await banks();
-    if (my !== wrongSeq) return; // the picker changed while the banks loaded
+    const bank = await lookup(who);
+    if (my !== wrongSeq) return; // the picker changed while the questions loaded
     // owner, 20 Nov 2026: questions no longer in any bank (the pilot banks were redesigned) are left out entirely
     const wrong = recorded.filter(([id]) => bank.has(id));
     if (!wrong.length) { $('wrong').innerHTML = (missingNote() || '<p class="note">No wrong answers on the current questions yet.</p>'); return; }
-    const subOf = new Map(P.all.map((x) => [x.id, x]));
+    const subOf = new Map(P.subs.map((x) => [x.id, x]));
     const schoolName = new Map(P.schools.map((x) => [x.id, x.name]));
-    // subject -> sub-topic -> [id, state]
-    const tree = new Map<string, Map<string, [string, SaveV1['questions'][string]][]>>();
+    // subject -> sub-topic -> [question, state]
+    const tree = new Map<string, Map<string, [BQ, QState][]>>();
     for (const [id, q] of wrong) {
       const bq = bank.get(id)!, sub = subOf.get(bq.sub);
       const subject = sub ? schoolName.get(sub.school) ?? sub.school : 'Other';
-      const subName = sub ? sub.name : bq.sub;
+      const name = sub ? sub.name : bq.sub;
       const bySub = tree.get(subject) ?? tree.set(subject, new Map()).get(subject)!;
-      (bySub.get(subName) ?? bySub.set(subName, []).get(subName)!).push([id, q]);
+      (bySub.get(name) ?? bySub.set(name, []).get(name)!).push([bq, q]);
     }
-    const item = ([id, q]: [string, SaveV1['questions'][string]]) => {
-      const bq = bank.get(id)!;
-      const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
-        : 'answered right since (mastered)';
-      const head = `<div class="wq-stem">${bold(bq.stem)}</div>${figHtml(bq)}`;
-      const right = `Right answer: <b>${bold(bq.options[bq.answer])}</b>`;
-      const theirs = q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
-        : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
-      return `<li>${head}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
-        + `<span class="meta">Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ${status}</span></li>`;
-    };
-    $('wrong').innerHTML = missingNote() + `<p class="note">${wrong.length} question${wrong.length === 1 ? '' : 's'} in all.</p>` + [...tree].map(([subject, bySub]) => {
+    const now = Date.now();
+    $('wrong').innerHTML = missingNote() + `<p class="note">${plural(wrong.length, 'question')} in all.</p>` + [...tree].map(([subject, bySub]) => {
       const n = [...bySub.values()].reduce((k, l) => k + l.length, 0);
       return `<details class="wq-subject"><summary><b>${esc(subject)}</b> (${n})</summary>` + [...bySub].sort((a, b) => a[0].localeCompare(b[0])).map(([name, list]) =>
-        `<h3 class="wq-sub">${esc(name)} (${list.length})</h3><ol class="list">${list.sort((a, b) => b[1].w - a[1].w).map(item).join('')}</ol>`).join('') + '</details>';
+        `<h3 class="wq-sub">${esc(name)} (${list.length})</h3>${qList(list, now)}`).join('') + '</details>';
     }).join('');
   }
 
-  async function renderRetest() {
+  async function renderRetest(my = wrongSeq) {
     const now = Date.now();
     // the child's rule (inReview): states parked by these banks are left out (and out of the count); one parked by an
     // older tab may be live, so it stays until a Daily Review re-checks it
     const waiting = Object.entries(s.questions).filter(([, q]) => inReview(q, P.banks)).sort((a, b) => a[1].due - b[1].due);
     if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
     $('retest').innerHTML = '<p class="note">Loading questions…</p>';
-    const stems = await banks();
+    const stems = await lookup(viewId);
+    if (my !== wrongSeq) return;
     const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
     if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; return; }
     const step = [0, '1-day', '3-day', '7-day'];
@@ -633,7 +705,7 @@ const data = {
   let child: { id: string; rev: number | null; raw: SaveV1 } | null = null;
   let pick = 0, isParentView = false, pickerReady = false;
   let fillSettings = () => {};
-  const renderAll = () => { wrongSeq++; renderSummary(); renderCrumbs(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
+  const renderAll = () => { wrongSeq++; renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
   const asSave = (d: unknown) => (d ? (migrate(d) as SaveV1) : (cleanSave(null) as SaveV1));
   async function showChild(id: string) {
     const my = ++pick;
@@ -641,7 +713,7 @@ const data = {
     if (my !== pick) return;
     if (r.error) throw r.error;
     child = { id, rev: r.data ? Number(r.data.rev) : null, raw: asSave(r.data?.data) };
-    s = cleanSave(child.raw);
+    s = cleanSave(child.raw); viewId = id;
     renderAll();
   }
   /** Change the child's server save with the rev check; on a conflict (the child played meanwhile) apply the change to
@@ -701,7 +773,9 @@ const data = {
       catch { child = null; $('content').hidden = true; famSay('', "Couldn't load your child's progress. Reload the page."); }
       return;
     }
-    renderSummary(); renderCrumbs(); renderMastery(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
+    // the admin sees this device's save: its past-paper questions are the device player's (the player session)
+    try { viewId = (await player.auth.getSession()).data.session?.user.id ?? null; } catch { viewId = null; }
+    renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
     void initWrongPicker();
   }
 

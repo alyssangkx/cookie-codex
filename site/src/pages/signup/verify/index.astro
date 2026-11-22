@@ -16,7 +16,7 @@ import Base from '../../../layouts/Base.astro';
 </Base>
 
 <script>
-  import { supabase, sessionFromLink, callParentApi, CONSENT_VERSION, roleOf, touch } from '../../../lib/supabase';
+  import { grownup as supabase, sessionFromLink, callParentApi, CONSENT_VERSION, roleOf, touch } from '../../../lib/supabase';
 
   const $ = (id: string) => document.getElementById(id)!;
   void (async () => {

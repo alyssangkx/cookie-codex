@@ -28,3 +28,6 @@ echo "$dl" | grep -c "ok " | sed 's/^/dialogue checks passed: /'
 run -o /dev/null < "$mig/007_pp_lockdown.sql"
 ld=$(run -t -o /dev/null < "$here/test_pp_lockdown.sql" 2>&1) || { echo "$ld" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
 echo "$ld" | sed -n 's/^.*NOTICE:  //p'; echo "$ld" | grep -q 'LOCKDOWN CHECKS PASSED' && echo 'LOCKDOWN CHECKS PASSED'
+run -o /dev/null < "$mig/012_pp_seen.sql"
+sn=$(run -t -o /dev/null < "$here/test_pp_seen.sql" 2>&1) || { echo "$sn" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
+echo "$sn" | sed -n 's/^.*NOTICE:  //p'; echo "$sn" | grep -q 'SEEN CHECKS PASSED' && echo 'SEEN CHECKS PASSED'

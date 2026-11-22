@@ -13,19 +13,26 @@ export const FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`;
 /** The session's localStorage key. Base.astro's pre-paint gate script checks this same literal. */
 export const AUTH_KEY = 'ccx:auth';
 
-export const supabase = createClient(SUPABASE_URL, ANON_KEY, {
-  auth: { storageKey: AUTH_KEY, persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
+/** The grown-up's session (parent or admin) lives under its own key (owner, 23 Nov 2026), so a child playing and a
+ *  grown-up on the Parent or Admin page never sign each other out on a shared device. */
+export const GROWNUP_AUTH_KEY = 'ccx:auth-gu';
+const client = (storageKey: string) => createClient(SUPABASE_URL, ANON_KEY, {
+  auth: { storageKey, persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
 });
+/** The child playing: game pages, sync, past-paper fetches, the PIN login. */
+export const supabase = client(AUTH_KEY);
+/** The grown-up: /parent, /admin, /grownups, sign-up, the emailed links, parent-api. */
+export const grownup = client(GROWNUP_AUTH_KEY);
 
 /** Stamp "active now" (called on sign-in and on every checked page load). */
 export const touch = () => kv.set('lastSeen', String(Date.now()));
 
 /** The current session, or null. Signs out (this browser only) when idle for more than 90 days. */
-export async function currentSession(): Promise<Session | null> {
-  const { data } = await supabase.auth.getSession();
+export async function currentSession(sb = supabase): Promise<Session | null> {
+  const { data } = await sb.auth.getSession();
   if (!data.session) return null;
   if (idleExpired(Number(kv.get('lastSeen') ?? 0))) {
-    await supabase.auth.signOut({ scope: 'local' });
+    await sb.auth.signOut({ scope: 'local' });
     kv.del('lastSeen');
     kv.set('sync:signedout', '1');
     return null;
@@ -65,7 +72,7 @@ export const roleOf = (s: Session | null): 'admin' | 'parent' | null => {
 
 /** parent-api with the current session; throws an Error whose message is the function's error code. */
 export async function callParentApi<T = any>(body: Record<string, unknown>): Promise<T> {
-  const { data } = await supabase.auth.getSession();
+  const { data } = await grownup.auth.getSession();
   if (!data.session) throw new Error('unauthorized');
   const r = await callFunction('parent-api', body, data.session.access_token);
   if (r.status !== 200) throw new Error(r.body?.error ?? 'server_error');
@@ -88,12 +95,12 @@ export async function sessionFromLink(): Promise<{ type: string | null; error: s
   if (err) { clear(); return { type: null, error: err }; }
   const code = q.get('code');
   if (code) {
-    const r = await supabase.auth.exchangeCodeForSession(code); clear();
+    const r = await grownup.auth.exchangeCodeForSession(code); clear();
     return { type: q.get('type'), error: r.error?.message ?? null };
   }
   const at = h.get('access_token'), rt = h.get('refresh_token');
   if (at && rt) {
-    const r = await supabase.auth.setSession({ access_token: at, refresh_token: rt }); clear();
+    const r = await grownup.auth.setSession({ access_token: at, refresh_token: rt }); clear();
     return { type: h.get('type'), error: r.error?.message ?? null };
   }
   return { type: null, error: null };
