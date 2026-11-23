@@ -23,7 +23,7 @@ Owner kept tiers on purpose (OWNER_MERGE, ADR 0011 amendment).
 
 | Subject | Sub-topic | Topic | Past-paper | Generated (B / I / C) | Switch |
 |---|---|---|---:|---|---|
-| Math | Rate (`math-rate-rate`) | Rate | 62 | 123 (41 / 41 / 41) | merge |
+| Math | Rate (`math-rate-rate`) | Rate | 72 | 123 (41 / 41 / 41) | merge |
 
 ## needs-pp (9)
 
@@ -31,8 +31,8 @@ Some past-paper questions, fewer than 20: tiers with them merged in; needs more 
 
 | Subject | Sub-topic | Topic | Past-paper | Generated (B / I / C) | Switch |
 |---|---|---|---:|---|---|
+| Math | Line symmetry (`math-geometry-line-symmetry`) | Geometry | 18 | 75 (25 / 25 / 25) | merge |
 | Math | 3D shapes and nets (`math-geometry-3d-shapes-and-nets`) | Geometry | 17 | 75 (25 / 25 / 25) | merge |
-| Math | Line symmetry (`math-geometry-line-symmetry`) | Geometry | 17 | 75 (25 / 25 / 25) | merge |
 | Math | Rectangle and square (`math-geometry-rectangle-and-square`) | Geometry | 3 | 75 (25 / 25 / 25) | merge |
 | Math | Fraction and division (`math-fractions-fraction-and-division`) | Fractions | 2 | 75 (25 / 25 / 25) | merge |
 | Science | Respiration and the Sun (`sci-energy-photo-respiration`) | Energy Forms and Uses (Photosynthesis) | 16 | 0 (0 / 0 / 0) | merge |
