@@ -76,8 +76,9 @@ NOKEY_HOLDS = {"maths": TMP / "ppimport" / "math1826d" / "maths" / "rejects.json
                "english": TMP / "ppimport" / "eng1826" / "english" / "rejects.jsonl",
                "chinese": TMP / "ppimport" / "chi1826" / "chinese" / "rejects.jsonl"}
 NOKEY = "nokey.json"  # written by build for a -nokey pack: {id: year}, scored as model keys (three models, unanimous)
-# every held question whose printed key was read as unsure (owner, 23 Nov 2026: all sub-topics; the first packs covered only
-# the short sub-topics and are kept in <kind>-short); the latest selections' holds
+# every held question whose printed key was read as unsure (owner, 23 Nov 2026: all sub-topics). The first packs covered only
+# the short sub-topics; their folders were renamed <kind>-short as a record (scored and written; not a kind any more).
+# The latest selections' holds
 UNSURE_HOLDS = {"science": TMP / "ppimport" / "sci1826e" / "science" / "rejects.jsonl",
                 "maths": TMP / "ppimport" / "math1826e" / "maths" / "rejects.jsonl"}
 CONFIRM_ONLY = "confirm-only.json"  # written by build for an -unsure pack: these ids are scored confirm-only
@@ -278,6 +279,8 @@ def build(a):
     sets = kind_sets(a.kind, skip)
     subject = KINDS[a.kind][0]
     out = OUT / a.kind
+    if list(out.glob("part*.qmap.json")):  # a rebuild with fewer parts would leave old parts for score() to read
+        sys.exit(f"{out} already holds a pack: move it aside (for example to {out.name}-old) before rebuilding")
     (out / "img").mkdir(parents=True, exist_ok=True)
     for part, i in enumerate(range(0, len(sets), a.per), 1):
         chunk, qmap, n, body = sets[i:i + a.per], {}, 0, []
@@ -337,10 +340,13 @@ def build(a):
     print(f"{len(sets)} sets -> {out}")
 
 
-# --allow-two pairs the owner approved: (subject, models). Maths: Claude + Perplexity for key disputes and unsure confirms
-# (22 Nov 2026) and no-key keys (23 Nov 2026); Science: Claude + Perplexity no-key keys (23 Nov 2026, Claude 138/139 and
-# Perplexity 134/134 on calibration, 20-question PDFs). English and Chinese need all three outside models.
-ALLOWED_PAIRS = [("maths", {"claude", "perplexity"}), ("science", {"claude", "perplexity"})]
+# --allow-two pairs the owner approved: (subject, models, pack kinds; None = every kind of that subject). Maths: Claude +
+# Perplexity for key disputes and unsure confirms (22 Nov 2026) and no-key keys (23 Nov 2026). Science: Claude + Perplexity
+# for no-key keys (23 Nov 2026, Claude 138/139 and Perplexity 134/134 on calibration, 20-question PDFs) and unsure confirms
+# (23 Nov 2026, the all-sub-topic confirm packs); NOT Science key disputes (science-single can replace a printed key).
+# English and Chinese need all three outside models.
+ALLOWED_PAIRS = [("maths", {"claude", "perplexity"}, None),
+                 ("science", {"claude", "perplexity"}, {"science-nokey", "science-unsure"})]
 
 
 def model_list(s):
@@ -348,16 +354,16 @@ def model_list(s):
     return list(dict.fromkeys(m.strip().lower() for m in s.split(",") if m.strip()))
 
 
-def write_gate(subject, models, allow_two=False):
-    """None when score --write may write with these models, else the reason it may not: three or more models, or a
-    pair the owner approved for this subject, typed with --allow-two."""
+def write_gate(kind, models, allow_two=False):
+    """None when score --write may write this pack kind with these models, else the reason it may not: three or more
+    models, or a pair the owner approved for this subject and kind, typed with --allow-two."""
     if len(models) >= 3:
         return None
-    if len(models) == 2 and allow_two and (subject, set(models)) in ALLOWED_PAIRS:
-        return None
-    if len(models) == 2 and not allow_two and (subject, set(models)) in ALLOWED_PAIRS:
-        return "this approved pair needs --allow-two typed (the owner's choice on record)"
-    return f"--write needs three outside models; a pair only as approved: {[(s, sorted(m)) for s, m in ALLOWED_PAIRS]}"
+    approved = len(models) == 2 and any(s == KINDS[kind][0] and m == set(models) and (ks is None or kind in ks)
+                                        for s, m, ks in ALLOWED_PAIRS)
+    if approved:
+        return None if allow_two else "this approved pair needs --allow-two typed (the owner's choice on record)"
+    return f"--write needs three outside models; a pair only as approved: {[(s, sorted(m), sorted(ks or ['all'])) for s, m, ks in ALLOWED_PAIRS]}"
 
 
 def score(a):
@@ -444,11 +450,12 @@ def score(a):
     if missing:  # shown on every run, so a dry run's counts are read with the gap in mind
         print(f"WARNING: {len(missing)} answer file(s) missing: {', '.join(missing)} (their questions count as unanswered)")
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
-        why = write_gate(subject, models, a.allow_two)  # first: never ask the owner to check a calibration for a refused model set
+        why = write_gate(a.kind, models, a.allow_two)  # first: never ask the owner to check a calibration for a refused model set
         if why:
             sys.exit(why)
-        # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
-        if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
+        # a model key is the only key those questions get, and two models have no third to catch a shared misreading:
+        # write either only after a clean calibration, unless the owner has looked
+        if (nokey or len(models) == 2) and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
@@ -513,9 +520,11 @@ def selftest():
     assert ANS.findall("Q1: 3\nQ2：4\nQ10) 2") == [("1", "3"), ("2", "4"), ("10", "2")]
     assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
     assert model_list(" Claude,claude ,Perplexity") == ["claude", "perplexity"]
-    assert {s for s, _ in ALLOWED_PAIRS} == {"maths", "science"}, "two-model pairs are approved for Maths and Science only (owner)"
-    assert write_gate("maths", model_list("Claude, Perplexity"), True) is None and "--allow-two" in write_gate("maths", ["claude", "perplexity"]) and write_gate("english", ["claude", "perplexity"], True)
-    assert write_gate("maths", ["claude", "grok"]) and write_gate("maths", ["claude"]) and write_gate("science", ["a", "b", "c"]) is None
+    assert {s for s, _, _ in ALLOWED_PAIRS} == {"maths", "science"}, "two-model pairs are approved for Maths and Science only (owner)"
+    assert write_gate("science-nokey", ["claude", "perplexity"], True) is None and write_gate("science-unsure", ["claude", "perplexity"], True) is None
+    assert write_gate("science-single", ["claude", "perplexity"], True), "Science key disputes were never approved for a pair"
+    assert write_gate("maths-nokey", model_list("Claude, Perplexity"), True) is None and "--allow-two" in write_gate("maths-single", ["claude", "perplexity"]) and write_gate("english-nokey", ["claude", "perplexity"], True)
+    assert write_gate("maths-nokey", ["claude", "grok"]) and write_gate("maths-nokey", ["claude"]) and write_gate("science-single", ["a", "b", "c"]) is None
     print("imgpack selftest ok")
 
 
