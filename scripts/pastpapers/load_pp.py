@@ -1217,6 +1217,14 @@ def selftest():
     # deactivate set and tier counts
     assert deactivate_set({"a", "b", "c"}, {"b", "x"}) == {"a", "c"}  # held/dropped/re-tagged rows go; new row x is not "existing"
     assert deactivate_set(set(), {"a"}) == set() and deactivate_set({"a"}, {"a"}) == set()
+    class _S:  # a fake PostgREST that stops each answer at 1,000 rows, as Supabase does
+        def get(self, u, params, timeout):
+            off, lim = int(params["offset"]), min(int(params["limit"]), 1000)
+            class R:
+                status_code = 200
+                json = staticmethod(lambda: [{"id": i} for i in range(off, min(off + lim, 2334))])
+            return R()
+    assert len(rest_all(_S(), "u", "pp_items", {})) == 2334, "every page is read (English grammar has more than 1,000 rows)"
     assert in_use([{"questions": {"pp-a": {"s": 0, "w": 1}, "pp-b": {"s": 0, "w": 0}, "pp-c": {"s": 3, "w": 1}, "x-1": {"s": 1, "w": 1}}}, None]) == {"pp-a", "pp-c"}
     st, kept, ft = keep_used_copies({"pp-d", "pp-e", "pp-f", "pp-g"}, {"pp-d", "pp-e", "pp-f"}, {"pp-d": "pp-k", "pp-e": "pp-k", "pp-g": "pp-k"})
     assert st == {"pp-f", "pp-g"} and kept == 2 and ft == 1, "copies in use stay live (three copies too); a faulted row still goes and is counted"
@@ -1389,21 +1397,26 @@ COUNTS = REPO / "site" / "src" / "data" / "pp_counts.json"
 TIER = {"basic": "b", "intermediate": "i", "competent": "c"}
 
 
-def live_saves(s, url, page=1000):
-    """Every save's questions map, of children not deleted, read page by page (PostgREST caps one answer at max-rows)."""
-    def all_rows(path, params):
-        out, off = [], 0
-        while True:
-            r = s.get(f"{url}/rest/v1/{path}", params={**params, "limit": str(page), "offset": str(off)}, timeout=60)
-            if r.status_code >= 300:
-                sys.exit(f"could not read {path} to protect children's retests: HTTP {r.status_code}")
-            got = r.json()
-            out += got
-            if len(got) < page:
-                return out
-            off += page
+def rest_all(s, url, path, params, page=1000):
+    """Every row of a PostgREST read, page by page: one answer stops at max-rows (1,000 on Supabase) without an error,
+    which once left 164 English duplicates live (English grammar has more than 1,000 rows)."""
+    out, off = [], 0
+    while True:
+        r = s.get(f"{url}/rest/v1/{path}", params={"order": "id", **params, "limit": str(page), "offset": str(off)}, timeout=60)  # a stable order for paging
+        if r.status_code >= 300:
+            sys.exit(f"could not read {path}: HTTP {r.status_code} {r.text[:200]}")
+        got = r.json()
+        out += got
+        if len(got) < page:
+            return out
+        off += page
+
+
+def live_saves(s, url):
+    """Every save's questions map, of children not deleted (all pages)."""
+    all_rows = lambda path, params: rest_all(s, url, path, params)
     alive = {x["id"] for x in all_rows("profiles", {"select": "id", "deleted_at": "is.null"})}
-    return [{"questions": x.get("q")} for x in all_rows("saves", {"select": "child_id,q:data->questions"}) if x["child_id"] in alive]
+    return [{"questions": x.get("q")} for x in rest_all(s, url, "saves", {"select": "child_id,q:data->questions", "order": "child_id"}) if x["child_id"] in alive]
 
 
 def in_use(saves) -> set:
@@ -1928,14 +1941,11 @@ def upload(a):
     s.headers.update(h)
     keepids = {d["id"] for d in db}
     stale, live = set(), {}
-    for sub in sorted(usubs):  # active rows of an uploaded sub-topic that this upload no longer carries
-        r = s.get(f"{url}/rest/v1/pp_items", params={"select": "id,subtopic,level", "subject": f"eq.{a.subject}",
-                  "subtopic": f"eq.{sub}", "active": "eq.true", "limit": "10000"}, timeout=60)
-        if r.status_code >= 300:  # 401: the key is not a service-role key (or was pasted cut short)
-            sys.exit(f"could not list existing rows of {sub}: HTTP {r.status_code} {r.text[:200]}\n"
-                     f"key given: {key_kind(k)} (needs the service-role / secret key)")
-        live.update({x["id"]: x for x in r.json()})
-        stale |= deactivate_set({x["id"] for x in r.json()}, keepids)
+    for sub in sorted(usubs):  # active rows of an uploaded sub-topic that this upload no longer carries (every page)
+        got = rest_all(s, url, "pp_items", {"select": "id,subtopic,level", "subject": f"eq.{a.subject}",
+                                            "subtopic": f"eq.{sub}", "active": "eq.true"})
+        live.update({x["id"]: x for x in got})
+        stale |= deactivate_set({x["id"] for x in got}, keepids)
     # owner, 23 Nov 2026: a question a child answered wrong (or still has to retest) must not leave the pool. For a
     # duplicate, keep the child's copy live and switch the other copy off instead (the same question, so a quiz still
     # never meets two copies); a row switched off for a fault (held key, bad picture) still goes, and is counted
