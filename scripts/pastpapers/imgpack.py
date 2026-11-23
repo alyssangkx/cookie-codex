@@ -92,7 +92,10 @@ def single_sets(kind):
     import random
     subject = KINDS[kind][0]
     unsure = kind.endswith("-unsure")
-    only = {r["id"] for r in jl((UNSURE_HOLDS if unsure else HOLDS)[subject]) if r.get("reason") == ("grid-uncertain" if unsure else "blind-disagree")}
+    holds = (UNSURE_HOLDS if unsure else HOLDS)[subject]
+    if not holds.exists():  # jl() reads a missing file as empty: the pack would hold calibration only and wipe confirm-only.json
+        sys.exit(f"missing holds file {holds}")
+    only = {r["id"] for r in jl(holds) if r.get("reason") == ("grid-uncertain" if unsure else "blind-disagree")}
     dis, agree = [], []
     for y in range(2018, 2027):
         base = PP / subject / str(y)
@@ -262,7 +265,10 @@ def score(a):
                 bl[b["id"]] = {"id": b["id"], "key": b["key"], "pick": None, "agree": None}
                 year[b["id"]] = c["year"]
     co = OUT / a.kind / CONFIRM_ONLY
-    for i in (json.loads(co.read_text()) if co.exists() else []):  # an unsure printed key: confirm only, never replace
+    if a.kind.endswith("-unsure") and not co.exists():  # the confirm-only rule must never fall back to a dispute pack's
+        sys.exit(f"missing {co}: rebuild the pack")
+    unsure_ids = set(json.loads(co.read_text())) if co.exists() else set()
+    for i in unsure_ids:  # an unsure printed key: confirm only, never replace
         if i in bl:
             bl[i] = dict(bl[i], agree=None, pick=None)
     models = a.models.split(",")
@@ -304,7 +310,8 @@ def score(a):
         c = "key stands" if u == str(bl[i]["key"]) else "replace (models + local)" if u and u == str(bl[i].get("pick")) else "other" if u else "split"
         C[c] += 1
         if c == "key stands":
-            verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "confirm", "src": "+".join(models)})
+            verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "confirm", "src": "+".join(models),
+                                      **({"unsure": True} if i in unsure_ids else {})})  # only these lift load_pp's grid-uncertain hold
         elif c.startswith("replace"):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))

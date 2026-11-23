@@ -435,7 +435,7 @@ def select(a):
                 reason = "quarantined"
             elif pp_id(q["id"]) in hold:
                 reason = "held-by-review"
-            elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and cv["kind"] == "confirm"):
+            elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and cv["kind"] == "confirm" and cv.get("unsure")):
                 reason = "grid-uncertain"  # lifted when outside models unanimously confirm the printed key (imgpack -unsure packs)
             elif conflict:
                 reason = "ocr-key-conflict"
