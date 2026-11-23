@@ -197,12 +197,18 @@ const data = {
   .parent-page .dhead { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
   .parent-page .dhead h3 { margin: 0; }
   .parent-page .btn.small { min-height: 36px; padding: 0 0.8rem; margin-top: 0.3rem; font-size: 0.92rem; }
-  .parent-page .tq-sub { border-top: 1px solid var(--crust); padding: 0.2rem 0; }
-  .parent-page .tq-sub.off { opacity: 0.55; }
-  .parent-page .tq-sub > summary { cursor: pointer; min-height: 44px; padding: 0.3rem 0; }
-  .parent-page .tq-sub > summary .nm { font-weight: 600; }
-  .parent-page .tq-sub > summary .meta { display: block; }
-  .parent-page .tq-sub > .tiers { margin: 0.2rem 0 0.6rem; }
+  .parent-page .tq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 0.4rem 0.6rem; }
+  .parent-page .tq-card { display: flex; align-items: center; gap: 0.6rem; min-height: 52px; padding: 0.35rem 0.6rem; border: 1.5px solid var(--crust); border-radius: 10px; background: var(--cream); }
+  .parent-page .tq-card.off { opacity: 0.55; }
+  .parent-page .tq-main { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+  .parent-page .tq-main .nm, .parent-page .tq-main .tq-n { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .parent-page .tq-main .nm { font-weight: 600; }
+  .parent-page .tq-main .tq-n { font-size: 0.82rem; }
+  .parent-page .tq-bars { flex: none; width: 88px; height: 22px; }
+  .parent-page .tq-bars .all, .parent-page .k.all { fill: #c9b393; background: #c9b393; }
+  .parent-page .tq-bars .tried, .parent-page .k.tried { fill: var(--cocoa-soft); background: var(--cocoa-soft); }
+  .parent-page .tq-bars .bad { fill: var(--berry); } .parent-page .tq-bars .mid { fill: var(--r-ancient); }
+  .parent-page .tq-card .btn.small { flex: none; margin-top: 0; }
   .parent-page .wq-stem { white-space: pre-line; }
   .parent-page .wq-fig { margin: 0.4rem 0; max-width: 32rem; }
   .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
@@ -217,7 +223,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { ppMode, isPpId } from '../../lib/pastpaper';
@@ -408,19 +414,6 @@ const data = {
   }
 
   const plural = (n: number, w: string) => `${n.toLocaleString()} ${w}${n === 1 ? '' : 's'}`;
-  const tally = (l: [BQ, QState][]) => `tried ${l.length} · mastered ${l.filter(([, x]) => x.s === 0).length} · wrong ${l.filter(([, x]) => x.w > 0).length}`;
-  function tierCells(sub: PSub) {
-    let html = '<div class="tiers">';
-    for (const t of TIERS) {
-      const name = TIER_NAME[t];
-      if (!sub.pool && sub.count[t] < P.min) { html += `<div class="cell none">${name}<small>No questions yet</small></div>`; continue; }
-      const ts = tierState(s, sub.id, t);
-      if (ts.cleared) html += `<div class="cell done">${name}<small>✓ Cleared</small></div>`;
-      else if (liveMastered(ts, sub.count[t], sub.hash[t])) html += `<div class="cell prog">${name}<small>${ts.mastered}/${sub.count[t]} mastered, best ${ts.best}%</small></div>`;
-      else html += `<div class="cell">${name}<small>Open${ts.best ? `, best ${ts.best}%` : ''}</small></div>`;
-    }
-    return html + '</div>';
-  }
   // ------------------------------------------------------------ the subject dashboard
   // One card per subject: questions on the site, how many were tried (a pie of how they stand), and the wrong count.
   // The card opens its topic breakdown; the wrong count opens those questions, where a parent can put one back for a
@@ -469,15 +462,30 @@ const data = {
     const school = P.schools.find((x) => x.id === detail!.school)!, now = Date.now();
     const close = '<button type="button" class="btn small" data-act="close">Close</button>';
     if (detail.kind === 'topics') {
-      let html = `<div class="dhead"><h3>${esc(school.name)}: topics</h3>${close}</div>`, topic = '';
-      for (const sub of P.subs.filter((x) => x.school === school.id)) {
-        if (sub.topic !== topic) { topic = sub.topic; html += `<h3 class="wq-sub">${esc(topic)}</h3>`; }
-        const l = dash.tried.get(sub.id) ?? [];
-        html += `<details class="tq-sub${sub.content ? '' : ' off'}"><summary><span class="nm">${esc(sub.name)}</span>`
-          + `<span class="meta">${sub.content ? `${plural(sub.avail, 'question')} · ${tally(l)}` : 'Coming soon (no questions yet)'}</span></summary>`
-          + (sub.content ? tierCells(sub) + (l.length ? qList(l, now) : '<p class="note">Not tried yet.</p>') : '') + '</details>';
+      // one compact card per sub-topic (two lines): name, counts, a bar chart and a Retest button that puts every wrong
+      // question of it back for a retest at once (owner, 23 Nov 2026: no question list here; the wrong count lists them)
+      const can = !!child;
+      let html = `<div class="dhead"><h3>${esc(school.name)}: topics</h3>${close}</div>`
+        + `<p class="legend"><span class="k all"></span>questions <span class="k tried"></span>tried <span class="k bad"></span>wrong <span class="k mid"></span>right after retest</p>`
+        + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>';
+      // each topic once, its sub-topics together (P.subs is in reward order, which splits a topic up)
+      const byTopic = new Map<string, PSub[]>();
+      for (const x of P.subs.filter((y) => y.school === school.id)) (byTopic.get(x.topic) ?? byTopic.set(x.topic, []).get(x.topic)!).push(x);
+      let topic = '', open = false;
+      for (const sub of [...byTopic.values()].flat()) {
+        if (sub.topic !== topic) { if (open) html += '</div>'; topic = sub.topic; html += `<h3 class="wq-sub">${esc(topic)}</h3><div class="tq-grid">`; open = true; }
+        const l = dash.tried.get(sub.id) ?? [], wrong = l.filter(([, q]) => q.w > 0), after = l.filter(([, q]) => q.s === 0 && q.w > 0).length;
+        const queue = can ? wrong.filter(([bq, q]) => askable(bq) && !(q.s > 0 && q.due <= now)).map(([bq]) => bq.id) : [];
+        // ponytail: square-root scale so 3 tried of 300 still shows; the exact numbers are on the card's second line
+        const bar = (v: number, cls: string, y: number) => `<rect class="${cls}" x="0" y="${y}" height="4" rx="1" width="${v ? Math.max(3, Math.round(88 * Math.sqrt(v / Math.max(sub.avail, 1)))) : 0}"></rect>`;
+        const nums = `${sub.avail.toLocaleString()} questions, ${l.length} tried, ${wrong.length} wrong, ${after} right after retest`;
+        html += `<div class="tq-card${sub.content ? '' : ' off'}"><div class="tq-main"><span class="nm" title="${esc(sub.name)}">${esc(sub.name)}</span>`
+          + `<span class="tq-n">${sub.content ? `${sub.avail.toLocaleString()} q · ${l.length} tried · ${wrong.length} wrong · ${after} after retest` : 'Coming soon'}</span></div>`
+          + (sub.content ? `<svg class="tq-bars" viewBox="0 0 88 22" role="img" aria-label="${esc(nums)}"><title>${esc(nums)}</title>${bar(sub.avail, 'all', 0)}${bar(l.length, 'tried', 6)}${bar(wrong.length, 'bad', 12)}${bar(after, 'mid', 18)}</svg>` : '')
+          + (queue.length ? `<button type="button" class="btn small" data-act="requeue" data-ids="${esc(queue.join(' '))}" aria-label="Retest the ${queue.length} wrong questions of ${esc(sub.name)} now">Retest ${queue.length}</button>` : '')
+          + '</div>';
       }
-      box.innerHTML = html;
+      box.innerHTML = html + (open ? '</div>' : '');
     } else {
       const wrong = subjectTried(school.id).filter(([, x]) => x.w > 0);
       // the revision test: still-wrong questions first, the most often wrong first, at most REVISION_MAX
@@ -505,7 +513,8 @@ const data = {
     });
     const msg = document.getElementById('dash-msg');
     if (msg) msg.textContent = !ok ? "Couldn't save that. Reload the page and try again."
-      : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.` : 'Done: it will come up in the next quiz on that topic or the Daily Review.';
+      : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.`
+      : `Done: ${ids.length === 1 ? 'it comes' : `${ids.length} questions come`} up in the next Daily Review.`;
   }
   // the exam-page pictures are signed for an hour: redraw the dashboard (and this device's mistakes list) before they lapse
   setInterval(() => { viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
@@ -516,6 +525,7 @@ const data = {
     if (act === 'topics' || act === 'wrong') { detail = { kind: act, school: b.dataset.school! }; renderDetail(); }
     else if (act === 'close') { detail = null; renderDetail(); $('h-mast').scrollIntoView(); }
     else if (act === 'recycle') void makeDue([b.dataset.id!], false);
+    else if (act === 'requeue') void makeDue(b.dataset.ids!.split(' '), false);
     else if (act === 'revise') {
       const ids = b.dataset.ids!.split(' ');
       if (confirm(`Send these ${ids.length} questions as a revision test? They become due now and are asked first in the next Daily Review.`)) void makeDue(ids, true);
