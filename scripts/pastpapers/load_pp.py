@@ -530,6 +530,10 @@ def select(a):
         for r, why in set_pages(rows, out, a.passage):  # a dropped set is held with its reason, like any other question
             rejects.append({"id": r["src_id"], "reason": why})
             R[why] += 1
+    rows, dups = dedupe(rows)
+    for r, keep in dups:  # the same question in two papers (owner, 23 Nov 2026: a quiz asked it twice)
+        rejects.append({"id": r["src_id"], "reason": "duplicate", "of": keep})
+        R["duplicate"] += 1
     ids = [r["id"] for r in rows]
     assert len(ids) == len(set(ids)), "pp id collision"
     with open(out / "selected.jsonl", "w") as f:
@@ -977,6 +981,52 @@ def table_rows(opts):
         len(c) == 2 and all(re.fullmatch(r"[A-Za-z][A-Za-z +'-]{0,24}", y) for y in c) and " and " not in c[1] for c in cells)
 
 
+def dup_text(s):
+    """A question's wording for duplicate matching: blanks, spaces and case do not count."""
+    return re.sub(r"[\s_＿　]+", "", (s or "").lower())
+
+
+def pic_hash(path):
+    """An 8x8 average hash of a crop (64 bits as an int), or None when it cannot be read."""
+    from PIL import Image
+    try:
+        with Image.open(path) as im:
+            g = list(im.convert("L").resize((8, 8)).getdata())
+    except Exception:
+        return None
+    m = sum(g) / 64
+    return sum(1 << i for i, v in enumerate(g) if v > m)
+
+
+def dedupe(rows, max_bits=6):
+    """(kept rows, [(dropped row, kept pp id)]): one copy of each question that appears in more than one paper. Same
+    wording and options; a question with pictures also needs pictures that match (hash within max_bits on every crop), so
+    "Which is correct?" over different diagrams stays. Passage sets (grp) are never touched: a set ships whole. The copy
+    kept is the earliest (year, source id), so a re-run keeps the same one."""
+    groups = collections.defaultdict(list)
+    for r in rows:
+        if r.get("grp"):
+            continue
+        groups[(r["subject"], dup_text(r["stem"]), tuple(dup_text(o) for o in r["options"]))].append(r)
+    drop = {}
+    for g in groups.values():
+        if len(g) < 2:
+            continue
+        g = sorted(g, key=lambda r: (r["year"], r["src_id"]))
+        kept = []  # (row, hashes)
+        for r in g:
+            hs = [pic_hash(c) for c in r.get("crops") or []]
+            for k, khs in kept:
+                same_pics = len(hs) == len(khs) and all(a is not None and b is not None and bin(a ^ b).count("1") <= max_bits
+                                                        for a, b in zip(hs, khs))
+                if same_pics and r.get("answer") == k.get("answer"):
+                    drop[r["id"]] = k["id"]
+                    break
+            else:
+                kept.append((r, hs))
+    return [r for r in rows if r["id"] not in drop], [(r, drop[r["id"]]) for r in rows if r["id"] in drop]
+
+
 def apply_stemfix(merged, fixes):
     """(merged, ids fixed): repair.py's marked stems replace the text only while the first read is the text they were
     checked against (sha1 of it, "first"), and only with a 「」 mark; a re-OCR'd or renumbered question keeps its own text."""
@@ -1069,6 +1119,13 @@ def selftest():
     assert apply_stemfix([_q], [_f]) == ([dict(_q, text="他做事很「认真」。")], {"x"})
     assert apply_stemfix([dict(_q, text="他做事很仔细。")], [_f])[1] == set(), "a changed first read keeps its own text"
     assert apply_stemfix([_q], [dict(_f, stem="他做事很认真。")])[1] == set(), "a stem without a 「」 mark is not used"
+    _r = lambda i, y, st, crops=(), ans=1, grp=None: {"id": i, "src_id": i, "subject": "chinese", "year": y, "stem": st,
+                                                      "options": ["相", "向", "像", "项"], "answer": ans, "crops": list(crops), **({"grp": grp} if grp else {})}
+    _k, _d = dedupe([_r("b", 2023, "奶奶戴了一条____链。"), _r("a", 2023, "奶奶戴了一条 ________ 链。"), _r("c", 2022, "别的句子。")])
+    assert [x["id"] for x in _k] == ["a", "c"] and [(x["id"], k) for x, k in _d] == [("b", "a")], "same wording: one copy, the earliest kept"
+    assert len(dedupe([_r("a", 2023, "Q"), _r("b", 2023, "Q", ans=2)])[0]) == 2, "a different key is a different question"
+    assert len(dedupe([_r("a", 2023, "Q", grp="s1"), _r("b", 2023, "Q", grp="s2")])[0]) == 2, "passage sets are never merged"
+    assert len(dedupe([_r("a", 2023, "Q", crops=["/nonexistent.png"]), _r("b", 2023, "Q", crops=["/nonexistent.png"])])[0]) == 2, "unreadable pictures are not called the same"
     assert strip_num("（3）跌") == "跌" and strip_num("1. went") == "went" and strip_num("2.5 kg") == "2.5 kg" and strip_num("(4) 12") == "12"
     assert chi_incomplete("哥哥吃了一碗炒饭，但仍然觉得饿。", ["rēng rán", "réng rán", "lēng rán", "léng rán"]) is None
     assert chi_incomplete("老师让班长统计一下参加的人数。", ["记录重要的数字", "算出总体的数字", "a", "b"]) == "chi-no-blank-underline-lost"
