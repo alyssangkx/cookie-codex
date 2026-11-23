@@ -139,7 +139,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         kv.set('assign-seen', String(newest));
         const d = document.createElement('dialog');
         d.className = 'assign-pop';
-        const h = document.createElement('h2'); h.textContent = 'Your parent set you something to do first';
+        const h = document.createElement('h2'); h.textContent = 'Your parent set you a 10-question quiz to do first';
         const ul = document.createElement('ul');
         for (const a of todo) { const li = document.createElement('li'), l = document.createElement('a'); l.href = a.href; l.textContent = a.name || a.sub; li.append(l); ul.append(li); }
         const go = document.createElement('a'); go.className = 'assign-go'; go.href = todo[0].href; go.textContent = "Let's start";

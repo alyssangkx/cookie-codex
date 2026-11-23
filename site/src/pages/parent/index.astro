@@ -190,17 +190,17 @@ const data = {
   .parent-page .dhead { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
   .parent-page .dhead h3 { margin: 0; }
   .parent-page .btn.small { min-height: 36px; padding: 0 0.8rem; margin-top: 0.3rem; font-size: 0.92rem; }
-  .parent-page .tq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 0.4rem 0.6rem; }
+  .parent-page .tq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem 0.6rem; }
+  @media (max-width: 680px) { .parent-page .tq-grid { grid-template-columns: minmax(0, 1fr); } }
   .parent-page .tq-card { display: flex; align-items: center; gap: 0.6rem; min-height: 52px; padding: 0.35rem 0.6rem; border: 1.5px solid var(--crust); border-radius: 10px; background: var(--cream); }
   .parent-page .tq-card.off { opacity: 0.55; }
   .parent-page .tq-main { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
   .parent-page .tq-main .nm, .parent-page .tq-main .tq-n { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .parent-page .tq-main .nm { font-weight: 600; }
   .parent-page .tq-main .tq-n { font-size: 0.82rem; }
-  .parent-page .tq-bars { flex: none; width: 88px; height: 22px; }
+  .parent-page .tq-bars { flex: none; width: 110px; height: 10px; border-radius: 3px; overflow: hidden; }
   .parent-page .tq-bars .all, .parent-page .k.all { fill: #c9b393; background: #c9b393; }
-  .parent-page .tq-bars .tried, .parent-page .k.tried { fill: var(--cocoa-soft); background: var(--cocoa-soft); }
-  .parent-page .tq-bars .bad { fill: var(--berry); } .parent-page .tq-bars .mid { fill: var(--r-ancient); }
+  .parent-page .tq-bars .bad { fill: var(--berry); } .parent-page .tq-bars .mid { fill: var(--r-ancient); } .parent-page .tq-bars .ok { fill: var(--ok); }
   .parent-page .tq-card .btn.small { flex: none; margin-top: 0; }
   .parent-page .btn.ghost { background: #fff; color: var(--cocoa); border: 1.5px solid var(--crust); }
   .parent-page .btn.on { background: var(--berry); }
@@ -455,7 +455,7 @@ const data = {
   // assignments (owner, 23 Nov 2026): a parent assigns a sub-topic; the child sees it as a priority until a quiz on it is done
   function assignBtn(sub: PSub) {
     const a = (s.assigned ?? []).find((x) => x.sub === sub.id);
-    if (!a) return `<button type="button" class="btn small ghost" data-act="assign" data-sub="${esc(sub.id)}">Assign</button>`;
+    if (!a) return `<button type="button" class="btn small ghost" data-act="assign" data-sub="${esc(sub.id)}" title="Ask the child to do one 10-question quiz on this first">Assign quiz</button>`;
     const done = !assignedPending(s).some((x) => x.sub === sub.id);
     return `<button type="button" class="btn small ${done ? 'done' : 'on'}" data-act="unassign" data-sub="${esc(sub.id)}" aria-pressed="true"`
       + ` title="${done ? 'Done since it was assigned. Tap to clear it.' : 'Assigned. Tap to take it back.'}">${done ? 'Done ✓' : 'Assigned'}</button>`;
@@ -472,7 +472,7 @@ const data = {
     });
     dashMsg = !ok ? "Couldn't save that. Reload the page and try again."
       : full ? `At most ${ASSIGN_MAX} assignments at a time: clear a done one first.`
-      : on ? `Assigned: ${sub.name}. It shows as a priority the next time they open the game.` : `Cleared: ${sub.name}.`;
+      : on ? `Assigned a 10-question quiz on ${sub.name}. It pops up the next time they open the game.` : `Cleared: ${sub.name}.`;
     const m = document.getElementById('dash-msg'); if (m) m.textContent = dashMsg;
   }
   function renderDetail(scroll = false) {
@@ -485,7 +485,8 @@ const data = {
       // question of it back for a retest at once (owner, 23 Nov 2026: no question list here; the wrong count lists them)
       const can = !!child;
       let html = `<div class="dhead"><h3>${esc(school.name)}: topics</h3>${close}</div>`
-        + `<p class="legend"><span class="k all"></span>questions <span class="k tried"></span>tried <span class="k bad"></span>wrong <span class="k mid"></span>right after retest</p>`
+        + `<p class="legend">Each bar is all of the sub-topic's questions: <span class="k ok"></span>right first time <span class="k mid"></span>right after retest <span class="k bad"></span>still to retest <span class="k all"></span>not tried yet</p>`
+        + (can ? '<p class="note">Assign asks the child to do one 10-question quiz on that sub-topic first: it pops up on their account and stays at the top of their Schools page until it is done.</p>' : '')
         + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>';
       // each topic once, its sub-topics together (P.subs is in reward order, which splits a topic up)
       const byTopic = new Map<string, PSub[]>();
@@ -497,12 +498,14 @@ const data = {
         // still wrong (s > 0) and not already due; a question mastered since is not un-mastered by this button
         const queue = can ? wrong.filter(([bq, q]) => askable(bq) && q.s > 0 && q.due > now).map(([bq]) => bq.id) : [];
         const scale = Math.max(sub.avail, l.length, 1); // a pool sub-topic's generated retests can outnumber its pool
-        // ponytail: square-root scale so 3 tried of 300 still shows; the exact numbers are on the card's second line
-        const bar = (v: number, cls: string, y: number) => `<rect class="${cls}" x="0" y="${y}" height="4" rx="1" width="${v ? Math.max(3, Math.round(88 * Math.sqrt(v / scale))) : 0}"></rect>`;
-        const nums = `${sub.avail.toLocaleString()} questions, ${l.length} tried, ${wrong.length} wrong, ${after} right after retest`;
+        // one bar in proportion (owner, 23 Nov 2026): the whole bar is every question; a non-zero part is at least 2 px wide
+        const first = l.filter(([, q]) => q.s === 0 && q.w === 0).length, still = l.length - first - after;
+        let x = 0;
+        const seg = (v: number, cls: string) => { if (!v) return ''; const w = Math.max(2, (110 * v) / scale); const r = `<rect class="${cls}" x="${x.toFixed(1)}" y="0" height="10" width="${w.toFixed(1)}"></rect>`; x += w; return r; };
+        const nums = `${sub.avail.toLocaleString()} questions: ${first} right first time, ${after} right after retest, ${still} still to retest, ${Math.max(0, sub.avail - l.length)} not tried`;
         html += `<div class="tq-card${sub.content ? '' : ' off'}"><div class="tq-main"><span class="nm" title="${esc(sub.name)}">${esc(sub.name)}</span>`
           + `<span class="tq-n">${sub.content ? `${sub.avail.toLocaleString()} q · ${l.length} tried · ${wrong.length} wrong · ${after} after retest` : 'Coming soon'}</span></div>`
-          + (sub.content ? `<svg class="tq-bars" viewBox="0 0 88 22" role="img" aria-label="${esc(nums)}"><title>${esc(nums)}</title>${bar(sub.avail, 'all', 0)}${bar(l.length, 'tried', 6)}${bar(wrong.length, 'bad', 12)}${bar(after, 'mid', 18)}</svg>` : '')
+          + (sub.content ? `<svg class="tq-bars" viewBox="0 0 110 10" preserveAspectRatio="none" role="img" aria-label="${esc(nums)}"><title>${esc(nums)}</title><rect class="all" x="0" y="0" width="110" height="10"></rect>${seg(first, 'ok')}${seg(after, 'mid')}${seg(still, 'bad')}</svg>` : '')
           + (can && sub.content ? assignBtn(sub) : '')
           + (queue.length ? `<button type="button" class="btn small" data-act="requeue" data-ids="${esc(queue.join(' '))}" aria-label="Retest the ${queue.length} still-wrong questions of ${esc(sub.name)} now" data-name="${esc(sub.name)}">Retest ${queue.length}</button>` : '')
           + '</div>';
