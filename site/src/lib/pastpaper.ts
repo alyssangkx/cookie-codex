@@ -121,6 +121,18 @@ export interface PpRow {
   id: string; subtopic: string; level: (typeof LEVELS)[number]; pattern: string | null; stem: string;
   options: string[]; answer: number; figures: PpFigure[]; year: number | null;
   grp?: string | null; seq?: number | null; // a passage set (migration 010): its id and the question's place in it
+  explain?: unknown; // migration 014: { right, wrong[] } from the server model, checked by a second one; read via cleanExplain
+}
+/** Why the key is right, and why each other option does not fit (null at the key). */
+export interface PpExplain { right: string; wrong: (string | null)[] }
+/** A well-formed explanation for a question with `n` options, or null (a malformed one is never shown). */
+export function cleanExplain(x: unknown, n: number): PpExplain | null {
+  if (!x || typeof x !== 'object') return null;
+  const e = x as { right?: unknown; wrong?: unknown };
+  if (typeof e.right !== 'string' || !e.right.trim() || e.right.length > 600) return null;
+  const wrong = Array.isArray(e.wrong) && e.wrong.length === n
+    ? e.wrong.map((w) => (typeof w === 'string' && w.trim() && w.length <= 400 ? w : null)) : Array<null>(n).fill(null);
+  return { right: e.right, wrong };
 }
 /** A signed, checked picture ready for an <img>. */
 export interface PpFig { src: string; w: number; h: number }
@@ -250,9 +262,11 @@ export function safeSignedUrl(u: string, supabaseUrl: string): boolean {
 }
 
 /** A row plus its signed URLs as a quiz question. A row whose picture could not be signed is dropped (the stem
- * may depend on it). Wrong options carry an empty note so the quiz can log a tag; the page shows no "tempting" line. */
+ * may depend on it). Wrong options carry a note (empty without an explanation) so the quiz can log a tag; with one
+ * (migration 014), the key's reason becomes the solution and each wrong option's reason its note. */
 export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: string): PpQ | null {
   const figs: PpFig[] = [];
+  const ex = cleanExplain(r.explain, r.options.length);
   for (const f of r.figures) {
     const src = signed.get(f.path);
     if (!src) return null;
@@ -260,8 +274,8 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
   }
   return {
     id: r.id, sub: r.subtopic, level: r.level, topic, stem: r.stem, options: [...r.options], answer: r.answer,
-    explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: '' })),
-    solution: [], numbered: true, ppFigs: figs,
+    explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: ex?.wrong[k] ?? '' })),
+    solution: ex ? [ex.right] : [], numbered: true, ppFigs: figs,
     ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,
     ...(r.subtopic.startsWith('math-') ? { calc: false as const } : {}), // every past-paper Maths MCQ is Paper 1 (owner, 21 Nov 2026)
     ...setOf(r),

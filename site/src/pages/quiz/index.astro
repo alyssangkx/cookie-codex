@@ -684,7 +684,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   // ------------------------------------------------------------ feedback pieces shared by the quiz, paper review and results list
 
-  const stepsHtml = (q: Q) => `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`;
+  // a past-paper question's one-line reason (migration 014) reads "Why (1) is right"; generated questions keep their steps
+  const stepsHtml = (q: Q) => (isPpId(q.id) && q.solution.length
+    ? `<p class="why-right"><strong>Why ${optionLabel(q, q.answer)} is right:</strong> ${fmt(q.solution[0], q.options[q.answer])}</p>`
+    : `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`);
   /** "Report a problem" under the answer (migration 005): the question id goes to report_question; a grown-up looks it up. */
   const REPORT_KINDS: [string, string][] = [['picture', 'The picture is wrong or cut off'], ['answer', 'The answer looks wrong'],
     ['question', 'The question or options are muddled'], ['other', 'Something else']];
@@ -716,7 +719,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    *  question also shows the pinyin and meaning of the answer's word and of the word picked (zhgloss.ts). */
   const temptingHtml = (q: Q, k: number | null) => {
     const why = k != null && k >= 0 ? q.explain[k] : null;
-    return (why?.why ? `<p class="mistake"><strong>Why ${optionLabel(q, k!)} is tempting:</strong> ${fmt(why.why, q.options[q.answer])}</p>` : '')
+    const label = isPpId(q.id) ? "doesn't fit" : 'is tempting'; // a past-paper reason says why the option is wrong
+    return (why?.why ? `<p class="mistake"><strong>Why ${optionLabel(q, k!)} ${label}:</strong> ${fmt(why.why, q.options[q.answer])}</p>` : '')
       + glossHtml(q, k);
   };
   // the Chinese word list (CC-CEDICT, /zh-gloss.json): fetched once, when the first Chinese question is shown

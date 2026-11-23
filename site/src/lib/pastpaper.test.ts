@@ -283,3 +283,16 @@ test('every pool sub-topic has at least MIN_POOL past-paper questions (pp_counts
 });
 
 test('PP_MIN_TIER is the playable minimum MIN_POOL', () => assert.equal(PP_MIN_TIER, MIN_POOL));
+
+test('explanations (migration 014): a well-formed one becomes the solution and the wrong options\' notes; a bad one is ignored', async () => {
+  const { cleanExplain } = await import('./pastpaper.ts');
+  const ex = { right: 'prefers is present simple, so the tag uses does', wrong: [null, 'hasn\'t needs has as a helper', 'isn\'t needs is', 'didn\'t is past'] };
+  const q = toQ(row({ options: ['doesn\'t', 'hasn\'t', 'isn\'t', 'didn\'t'], answer: 0, figures: [], explain: ex }), new Map());
+  assert.deepEqual(q?.solution, [ex.right]);
+  assert.equal(q?.explain[1]?.why, ex.wrong[1]);
+  assert.equal(q?.explain[0], null);
+  assert.equal(cleanExplain({ wrong: [] }, 4), null, 'no reason for the key: nothing shown');
+  assert.equal(cleanExplain('text', 4), null);
+  assert.deepEqual(cleanExplain({ right: 'r', wrong: ['a'] }, 4)?.wrong, [null, null, null, null], 'a wrong-length list is dropped, the reason kept');
+  assert.deepEqual(toQ(row({ figures: [] }), new Map())?.solution, [], 'no explanation: no solution line');
+});

@@ -228,7 +228,7 @@ const data = {
   import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { ppMode, isPpId, ppSubjectOf } from '../../lib/pastpaper';
+  import { ppMode, isPpId, ppSubjectOf, cleanExplain, type PpExplain } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string;
@@ -330,8 +330,8 @@ const data = {
   type QState = SaveV1['questions'][string];
   type BQ = { id: string; sub: string; stem: string; options: string[]; answer: number; group?: string; seq?: number;
     figure?: string | { img: string; alt: string; labels?: { text: string }[] }; visual?: { kind: string; title: string };
-    pp?: string[] }; // pp: a past-paper question's exam-page pictures (signed URLs)
-  type PpRow = { id: string; subtopic: string; stem: string; options: string[]; answer: number; figures: { path: string }[] | null; grp: string | null; seq: number | null };
+    pp?: string[]; ex?: PpExplain | null }; // pp: a past-paper question's exam-page pictures (signed URLs); ex: why (migration 014)
+  type PpRow = { id: string; subtopic: string; stem: string; options: string[]; answer: number; figures: { path: string }[] | null; grp: string | null; seq: number | null; explain?: unknown };
   let bankLoad: Promise<Map<string, BQ>> | null = null;
   let bankMissing = 0; // question files that failed to load: their questions cannot be shown
   let ppMissing = false; // the past-paper questions could not load
@@ -371,7 +371,8 @@ const data = {
           for (const x of u.data ?? []) if (x.path && x.signedUrl) urls.set(x.path, x.signedUrl);
         }
         for (const x of rows) qs.set(x.id, { id: x.id, sub: x.subtopic, stem: x.stem, options: x.options, answer: x.answer,
-          group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (urls.has(f.path) ? [urls.get(f.path)!] : [])) });
+          group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (urls.has(f.path) ? [urls.get(f.path)!] : [])),
+          ex: cleanExplain(x.explain, x.options.length) });
         ppMissing = false;
       } catch { ppMissing = true; if (looked.get(key) === entry) looked.delete(key); }
       return qs;
@@ -401,7 +402,11 @@ const data = {
     const theirs = q.w === 0 ? '' : q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
       : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
     const fig = samePage ? '<span class="meta">Same exam page as the question above.</span>' : figHtml(bq);
-    return `<li><div class="wq-stem">${bold(bq.stem)}</div>${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>`
+    // a past-paper question's explanation (migration 014): why the answer is right, and why the child's pick does not fit
+    const pick = q.a ? bq.options.indexOf(q.a) : -1;
+    const why = bq.ex ? `<span class="meta why">Why: ${esc(bq.ex.right)}${pick >= 0 && pick !== bq.answer && bq.ex.wrong[pick]
+      ? ` Their answer: ${esc(bq.ex.wrong[pick]!)}` : ''}</span>` : '';
+    return `<li><div class="wq-stem">${bold(bq.stem)}</div>${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>${why}`
       + `<span class="meta">${q.w ? `Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ` : ''}${status}</span>${extra}</li>`;
   }
   /** A list of tried questions, sets kept together in passage order, with a repeated exam page shown once. */
