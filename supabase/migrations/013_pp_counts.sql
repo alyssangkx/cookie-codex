@@ -1,5 +1,5 @@
 -- Cookie Codex, migration 013: live past-paper counts for the parent page (owner, 23 Nov 2026: "each reload updates the
--- pie chart with the current number of questions"). NOT YET APPLIED: needs the owner's OK.
+-- pie chart with the current number of questions"). APPLIED to the live project 23 Nov 2026 (owner OK; verified: a signed-in user reads 198 rows totalling 12,811 active items, anon is refused).
 -- Apply with:  supabase db query --remote --yes -f supabase/migrations/013_pp_counts.sql   (never `db push`).
 -- Test: scripts/accounts/sqltest.sh applies it after 012 and runs test_pp_counts.sql.
 --
