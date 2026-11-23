@@ -23,7 +23,7 @@ const data = {
       <a id="tab-admin" class="pp-tab-link" href="/admin/" hidden>Admin functions</a>
     </div>
 
-    <p class="note">Signed in as the grown-up. This page shows the progress saved on this device.</p>
+    <p class="note" id="who-note">Signed in as the grown-up. This page shows the progress saved on this device.</p>
 
     <div id="fam-deleted" class="panel" hidden>
       <h2>This account is being deleted</h2>
@@ -869,6 +869,7 @@ const data = {
     const isParent = roleOf(data.session) === 'parent';
     isParentView = isParent;
     if (!isParent) { $('tab-fam').hidden = true; $('tab-admin').hidden = false; }
+    else $('who-note').textContent = 'Signed in as the parent. This page shows the progress of the child picked below, as saved on the server.';
     if (isParent) {
       try { await initFamily(); } catch (e) { famFail(e); $('family').hidden = false; }
       if (me?.deleted_at) return;
