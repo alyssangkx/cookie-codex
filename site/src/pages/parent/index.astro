@@ -936,6 +936,9 @@ const data = {
         if (!sel.value) { pick++; child = null; s = cleanSave(load()); viewId = deviceId; renderAll(); return; } // pick++: a pick still loading is dropped
         await showChild(sel.value, opt?.dataset.test === 'true').catch(() => { child = null; $('mastery').innerHTML = '<p class="note">Could not load that save.</p>'; });
       });
+      // open on the Test Player's server save, like a parent's child, not on this browser's own (usually empty) save
+      const test = kids.find((k) => k.role === 'test');
+      if (test && sel.value === '') { sel.value = test.id; sel.dispatchEvent(new Event('change')); }
     } catch { /* no picker: this device only */ }
   }
 
