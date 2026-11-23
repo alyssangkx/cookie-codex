@@ -1,13 +1,18 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { subs as allSubs, hasContent, cookieBySlug, SCHOOLS, banksHash, listGroup, subSlug } from '../../lib/train';
+import { ppMode as ppModeOf } from '../../lib/pastpaper';
+import ppCounts from '../../data/pp_counts.json';
+const ppBuilt = (id: string) => ['b', 'i', 'c'].reduce((n, t) => n + ((ppCounts as Record<string, number>)[`${id}|${t}`] ?? 0), 0);
 
 const data = {
   total: cookieBySlug.size,
   // every subject's sub-topics in the order the training pages show them, with how many questions each has (a past-paper
   // pool counts all its questions); the question lists look questions up in the bank files
   subs: allSubs.map((s) => ({ id: s.id, name: s.name, school: s.school, topic: listGroup(s).topicName, file: s.file,
-    content: hasContent(s), avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c, href: `/train/${s.school}/${subSlug(s.id)}/` })),
+    content: hasContent(s), avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c, href: `/train/${s.school}/${subSlug(s.id)}/`,
+    // how its count uses past papers, and the past-paper part of it at build time: the page swaps in the live count
+    mode: ppModeOf(s.id), pp: ppBuilt(s.id) })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
   cards: Object.fromEntries([...cookieBySlug].map(([slug, c]) => [slug, c.name])), // card names for the Crumbs ledger
   banks: banksHash, // the retest queue hides only states parked by these banks (store.ts inReview), as the child's gates do
@@ -225,7 +230,8 @@ const data = {
   import { ppMode, isPpId } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
-  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string }
+  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string;
+    mode: 'pool' | 'merge' | 'replace' | null; pp: number }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
     { total: number; min: number; subs: PSub[]; schools: { id: string; name: string }[]; cards: Record<string, string>; banks: string };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -889,11 +895,34 @@ const data = {
   $('tab-prog').addEventListener('click', () => tab('prog'));
   $('tab-fam').addEventListener('click', () => tab('fam'));
 
+  // ------------------------------------------------------------ live question counts (migration 013, owner 23 Nov 2026)
+  // The build's counts date from the last deploy; past papers are uploaded in between. Each load asks the server how many
+  // active past-paper questions each sub-topic has and puts that in place of the build's past-paper part (a pool sub-topic
+  // counts its past papers only, a merged one its generated questions plus its past papers). Numbers only; on any failure
+  // the build's counts stay.
+  async function liveCounts(): Promise<boolean> {
+    try {
+      const r = await supabase.rpc('pp_counts');
+      if (r.error || !Array.isArray(r.data)) return false;
+      const live = new Map<string, number>();
+      for (const x of r.data as { subtopic: string; n: number }[]) live.set(x.subtopic, (live.get(x.subtopic) ?? 0) + Number(x.n));
+      let changed = false;
+      for (const sub of P.subs) {
+        if (sub.mode !== 'pool' && sub.mode !== 'merge') continue; // sub-topics not switched on serve no past papers
+        const n = live.get(sub.id) ?? 0;
+        const avail = sub.mode === 'pool' ? n : Math.max(0, sub.avail - sub.pp) + n;
+        if (avail !== sub.avail) { sub.avail = avail; sub.pp = n; changed = true; }
+      }
+      return changed;
+    } catch { return false; }
+  }
+
   // ------------------------------------------------------------ start
   let started = false;
   async function start() {
     if (started) return;
     started = true;
+    void liveCounts().then((changed) => { if (changed && !$('content').hidden) renderAll(); });
     // the page is gated (Base.astro): an admin at aal2, or a parent (aal2 once they enrolled an authenticator)
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';

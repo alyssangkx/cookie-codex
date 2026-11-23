@@ -31,3 +31,6 @@ echo "$ld" | sed -n 's/^.*NOTICE:  //p'; echo "$ld" | grep -q 'LOCKDOWN CHECKS P
 run -o /dev/null < "$mig/012_pp_seen.sql"
 sn=$(run -t -o /dev/null < "$here/test_pp_seen.sql" 2>&1) || { echo "$sn" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
 echo "$sn" | sed -n 's/^.*NOTICE:  //p'; echo "$sn" | grep -q 'SEEN CHECKS PASSED' && echo 'SEEN CHECKS PASSED'
+run -o /dev/null < "$mig/013_pp_counts.sql"
+ct=$(run -t -o /dev/null < "$here/test_pp_counts.sql" 2>&1) || { echo "$ct" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
+echo "$ct" | sed -n 's/^.*NOTICE:  //p'; echo "$ct" | grep -q 'COUNTS CHECKS PASSED' && echo 'COUNTS CHECKS PASSED'
