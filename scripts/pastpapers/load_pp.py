@@ -980,20 +980,18 @@ def table_rows(opts):
 def apply_stemfix(merged, fixes):
     """(merged, ids fixed): repair.py's marked stems replace the text only while the first read is the text they were
     checked against (sha1 of it, "first"), and only with a 「」 mark; a re-OCR'd or renumbered question keeps its own text."""
-    import hashlib
-    fx = {x["id"]: x for x in fixes if MARK_ASK.search(x.get("stem") or "")}
+    from repair import MARK, text_hash  # one copy of the mark and fingerprint rules
+    fx = {x["id"]: x for x in fixes if MARK.search(x.get("stem") or "")}
     out, used = [], set()
     for q in merged:
         x = fx.get(q["id"])
-        if x and x.get("first") == hashlib.sha1((q.get("text") or "").encode()).hexdigest()[:12]:
+        if x and x.get("first") == text_hash(q.get("text")):
             out.append(dict(q, text=x["stem"]))
             used.add(q["id"])
         else:
             out.append(q)
     return out, used
 
-
-MARK_ASK = re.compile(r"「[^「」]{1,12}」")
 
 
 def own_page_crops(crops, pages):

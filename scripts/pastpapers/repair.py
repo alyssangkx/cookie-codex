@@ -9,7 +9,9 @@
 
   repair.py pack [SEL ...]      dev: items.jsonl from the selections' rejects (default: the latest ones) + the gate set
   repair.py run ITEMS.jsonl     server (GPU; PP_ROOT = pastpapers folder, PP_VLM / PP_TP pick the model; PP_JOBS=stem
-                                reads only the stems, PP_OUT names the results file): results.jsonl
+                                reads only the stems, PP_OUT names the results file): results.jsonl. The stems' second
+                                read must use another model: PP_VLM=Qwen/Qwen2.5-VL-32B-Instruct-AWQ PP_JOBS=stem
+                                PP_OUT=results2.jsonl (apply refuses a second read from the first read's model)
   repair.py gate RESULTS        dev: how well the boxes match the gate set (the bar: GATE_BAR of them, IoU and cover)
   repair.py apply RESULTS [--second RESULTS2] [--stems-only]
                                 dev: cut the new crops into <year>/recrop/ (only after the gate; only on the question's
@@ -42,6 +44,7 @@ PROMPT_STEM = ("这是新加坡小六华文试卷的一页。找到第{qno}题�
                "（不要选项）照原文抄出来，并用「」把画线的字词括起来。只回复JSON：{{\"stem\": \"...\"}}；如果第{qno}题没有画线的字词，"
                "回复{{\"none\": true}}。")
 MARK = re.compile(r"「([^「」]{1,12})」")
+DEFAULT_VLM = "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"
 
 
 def jl(p):
@@ -81,7 +84,7 @@ def iou_cover(p, k):
 
 def first_stem(text):
     """The first read's question sentence: the text before option 1, printed (1), （1） or "1." on a new line."""
-    return re.split(r"[（(]\s*1\s*[)）]|\n\s*1\s*[.、]", text or "", maxsplit=1)[0].strip()
+    return re.split(r"(?:(?<=[\s。？！.?!:：])|^)[（(]\s*1\s*[)）]|\n\s*1\s*[.、]", text or "", maxsplit=1)[0].strip()
 
 
 def text_hash(text):
@@ -89,7 +92,7 @@ def text_hash(text):
     return hashlib.sha1((text or "").encode()).hexdigest()[:12]
 
 
-UNDERLINE_WORDS = re.compile(r"[画划](?:了)?(?:横)?线(?:的)?")
+UNDERLINE_WORDS = re.compile(r"[画划](?:了)?(?:横)?线(?:的)?(?=词语|字词|词|字|部分|句子)")  # the instruction only, not 规划线路
 
 
 def unline(stem):
@@ -132,7 +135,7 @@ def pack(sels):
             for q in jl(base / "merged.jsonl"):
                 if not q.get("pages"):
                     continue
-                row = {"id": q["id"], "subject": subject, "year": y, "qno": q.get("qno"), "pages": sorted(q["pages"])[:2],
+                row = {"id": q["id"], "subject": subject, "year": y, "qno": q.get("qno"), "pages": sorted(q["pages"])[:1 if q["id"] in want and want[q["id"]] != STEM_REASON else 2],
                        "start": (q.get("text") or "")[:120]}
                 if q["id"] in want:
                     items.append(dict(row, job="stem" if want[q["id"]] == STEM_REASON else "crop",
@@ -182,7 +185,8 @@ def run(items_file):
     if not todo:
         return
     from vllm import LLM, SamplingParams
-    llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
+    model = os.environ.get("PP_VLM", DEFAULT_VLM)
+    llm = LLM(model=model, tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
               gpu_memory_utilization=0.9, max_model_len=8192, max_num_seqs=16, limit_mm_per_prompt={"image": 1},
               mm_processor_kwargs={"max_pixels": 1_700_000}, allowed_local_media_path=str(tmp.parent), enforce_eager=bool(os.environ.get("PP_EAGER")))
     sp = SamplingParams(temperature=0, max_tokens=400)
@@ -193,7 +197,7 @@ def run(items_file):
                      {"type": "text", "text": (PROMPT_STEM if r["job"] == "stem" else PROMPT_CROP).format(
                          subj=SUBJ[r["subject"]], qno=r["qno"], start=r["start"].replace('"', "'"))}]}] for r, _, dst, _, _ in ch]
             for (r, p, _, W, H), o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
-                f.write(json.dumps({"id": r["id"], "subject": r["subject"], "year": r["year"], "job": r["job"], "page": p,
+                f.write(json.dumps({"id": r["id"], "subject": r["subject"], "year": r["year"], "job": r["job"], "page": p, "model": model,
                                     "w": W, "h": H, "raw": o.outputs[0].text, **({"gate": r["gate"]} if "gate" in r else {}),
                                     **({"text": r["text"], "first": r.get("first")} if "text" in r else {})}, ensure_ascii=False) + "\n")
             f.flush()
@@ -226,8 +230,8 @@ def gate_score(rows):
             quiet += not good
             continue
         k = r["gate"]["bbox"]
-        if (k[2] - k[0]) * (k[3] - k[1]) <= 0:
-            continue  # a degenerate known box measures nothing
+        if (k[2] - k[0]) * (k[3] - k[1]) <= 0 or not page_path(r["subject"], r["year"], r["page"]).exists():
+            continue  # a degenerate known box, or a page dev lacks, measures nothing
         pos += 1
         pb = to_page(b, r) if good else None
         if pb:
@@ -254,10 +258,13 @@ def apply(results, second=None, stems_only=False):
     rows = jl(results)
     items = {r["id"]: r for r in jl(Path(results).with_name("items.jsonl"))}
     c = {"crops": 0, "no-box": 0, "not-first-page": 0, "no-dev-page": 0, "stems": 0}
+    years = {(r["subject"], r["year"]) for r in items.values()}
     if not stems_only:
+        for s, y in years:  # this run's crops replace every earlier run's, also where none is written now or the gate fails
+            for old in (DEV_PP / s / str(y) / "recrop").glob("*.png"):
+                old.unlink()
         if not gate(results):
-            sys.exit("the crop gate failed: no crops written (stems alone: --stems-only)")
-        written = set()
+            sys.exit("the crop gate failed: no crops written, earlier repaired crops removed (stems alone: --stems-only)")
         for r in rows:
             if "gate" in r or r["job"] != "crop":
                 continue
@@ -274,11 +281,7 @@ def apply(results, second=None, stems_only=False):
                 c["no-dev-page"] += 1
                 continue
             d = DEV_PP / r["subject"] / str(r["year"]) / "recrop"
-            if d not in written:  # this run's crops replace an earlier run's (a box rejected now must not ship)
-                d.mkdir(exist_ok=True)
-                for old in d.glob("*.png"):
-                    old.unlink()
-                written.add(d)
+            d.mkdir(exist_ok=True)
             x1, y1, x2, y2 = pb
             pad = 12  # the model's box sits tight on the lines; `figures` grows a crop still touching an edge
             with Image.open(page_path(r["subject"], r["year"], r["page"])) as im:
@@ -288,24 +291,29 @@ def apply(results, second=None, stems_only=False):
     # stems: one model's choice of word is not enough (the underline is what the first read lost): two independent reads
     # must mark the same word(s), and the read must match the first read's sentence
     why, fixes = {}, {}
-    two = {r["id"]: parse(r["raw"]) for r in jl(second) if r["job"] == "stem"} if second else {}
+    two_rows = [r for r in jl(second) if r["job"] == "stem"] if second else []
+    two = {(r["id"], r["page"]): parse(r["raw"]) for r in two_rows}
+    model_of = lambda r: r.get("model") or DEFAULT_VLM  # rows from before the field was written came from the default
+    if two_rows and {model_of(r) for r in two_rows} & {model_of(r) for r in rows if r["job"] == "stem"}:
+        sys.exit("the second read must come from another model (PP_VLM): the same greedy model repeats its own answer")
     for r in rows:
         if r["job"] != "stem":
             continue
         st, w = check_stem(parse(r["raw"]), r["text"])
         if st and not second:
             w, st = "needs-a-second-read", None
-        elif st and marks(two.get(r["id"])) != MARK.findall(st):
+        elif st and marks(two.get((r["id"], r["page"]))) != MARK.findall(st):
             w, st = "second-read-marks-differ", None
         if st:
-            fixes.setdefault((r["subject"], r["year"]), {})[r["id"]] = (unline(st), (items.get(r["id"]) or {}).get("first"))
+            fixes.setdefault((r["subject"], r["year"]), {})[r["id"]] = (unline(st), r.get("first"))
         else:
             why[w] = why.get(w, 0) + 1
-    for (subject, y), fx in fixes.items():
-        f = DEV_PP / subject / str(y) / "stemfix.jsonl"
-        have = {x["id"]: x for x in jl(f)}
-        have.update({i: {"id": i, "stem": s, "first": h, "src": "repair.py"} for i, (s, h) in fx.items()})
-        f.write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in have.values()), encoding="utf-8")
+    for s, y in {k for k in years if k[0] == "chinese"}:  # this run's stems replace every earlier run's
+        fx = fixes.get((s, y), {})
+        f = DEV_PP / s / str(y) / "stemfix.jsonl"
+        if fx or f.exists():
+            f.write_text("".join(json.dumps({"id": i, "stem": st, "first": h, "src": "repair.py"}, ensure_ascii=False) + "\n"
+                                 for i, (st, h) in fx.items()), encoding="utf-8")
         c["stems"] += len(fx)
     print(c, "stems not used:", why)
 
@@ -327,6 +335,8 @@ def selftest():
     assert first_stem("他做事很认真。（1）仔细（2）马虎") == "他做事很认真。" and first_stem("他很认真。\n1. 仔细\n2. 马虎") == "他很认真。"
     assert unline("下面句子中画线的词语是什么意思？他很「认真」。") == "下面句子中「」里的词语是什么意思？他很「认真」。"
     assert unline("句中划线部分") == "句中「」里的部分"
+    assert unline("下面句子中画线的词语是什么意思？工人在「规划」线路。") == "下面句子中「」里的词语是什么意思？工人在「规划」线路。"
+    assert first_stem("阅读短文(1)，回答问题。他很认真。\n(1) 仔细") == "阅读短文(1)，回答问题。他很认真。"
     g = lambda raw, gt, w=1000, h=1000: {"raw": raw, "gate": gt, "w": w, "h": h, "subject": "x", "year": 0, "page": 1}
     assert gate_score([g('{"none": true}', {"none": True}), g('{"bbox_2d": [10, 10, 400, 300]}', {"none": True}),
                        g('{"none": true}', {"bbox": [0, 0, 0, 5]})]) == (0, 0, 1, 2), "a degenerate known box is skipped, a box on a text-only page counts against"
