@@ -381,7 +381,8 @@ export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = fa
 /** The questions of the parent's revision test not yet answered since it was sent: sending sets due to the send time and
  *  any answer moves due later, so an answered question leaves the test for good (its later retests are ordinary ones). */
 export const revisionDue = (s: SaveV1, now = Date.now()) =>
-  (s.revision?.ids ?? []).filter((id) => isDue(s, id, now, true) && s.questions[id].due <= s.revision!.ts);
+  // a parked one (its question is in no bank: Daily Review set it aside) is left out, so the button never promises it
+  (s.revision?.ids ?? []).filter((id) => isDue(s, id, now) && s.questions[id].due <= s.revision!.ts);
 
 /**
  * Keep the `parked` flags in step with the banks a page has loaded. Every parked state whose id is in `ids` is

@@ -684,8 +684,8 @@ test('revisionDue: a parent-sent revision test lists only its questions still du
   s.questions = { a: { s: 1, w: 1, due: t0 - 1 }, b: { s: 0, w: 1, due: 0 }, c: { s: 2, w: 2, due: t0 + DAY }, d: { s: 1, w: 1, due: t0 - 1, parked: true } } as any;
   assert.deepEqual(revisionDue(s, t0), []);
   s.revision = { ids: ['a', 'b', 'c', 'd', 'gone'], ts: t0 };
-  assert.deepEqual(revisionDue(s, t0), ['a', 'd']); // b answered right (retired), c not due yet, gone has no state
+  assert.deepEqual(revisionDue(s, t0), ['a']); // b answered right (retired), c not due yet, d parked (in no bank), gone has no state
   s.questions.a = { s: 2, w: 1, due: t0 + 3 * DAY }; // answered right after it was sent: it leaves the test for good
-  assert.deepEqual(revisionDue(s, t0 + 4 * DAY), ['d']);
+  assert.deepEqual(revisionDue(s, t0 + 4 * DAY), []);
   assert.deepEqual(cleanSave({ ...s, revision: { ids: ['x', 3, ...'abcdefghijkl'], ts: t0 } }).revision!.ids.length, 10); // strings only, at most 10
 });

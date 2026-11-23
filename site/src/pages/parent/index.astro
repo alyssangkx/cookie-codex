@@ -23,7 +23,7 @@ const data = {
       <a id="tab-admin" class="pp-tab-link" href="/admin/" hidden>Admin functions</a>
     </div>
 
-    <p class="note" id="who-note">Signed in as the grown-up. This page shows the progress saved on this device.</p>
+    <p class="note" id="who-note">Signed in as the grown-up. This page shows the progress saved on this device (the mistakes list can show another child's).</p>
 
     <div id="fam-deleted" class="panel" hidden>
       <h2>This account is being deleted</h2>
@@ -427,6 +427,10 @@ const data = {
   // retest at once or send up to 10 as a revision test (the child's next Daily Review asks them first).
   let dash: { qs: Map<string, BQ>; tried: Map<string, [BQ, QState][]> } | null = null;
   let detail: { kind: 'topics' | 'wrong'; school: string } | null = null;
+  // a question the child's quizzes can ask: past-paper ones while serving is on; generated ones unless their sub-topic now
+  // asks its past-paper pool only (the quiz drops those, and Daily Review sets their retests aside)
+  const poolSub = new Set(P.subs.filter((x) => x.pool).map((x) => x.id));
+  const askable = (bq: BQ) => (isPpId(bq.id) ? PP_ENABLED : !(PP_ENABLED && poolSub.has(bq.sub)));
   const subjectTried = (school: string) => P.subs.filter((x) => x.school === school).flatMap((x) => dash?.tried.get(x.id) ?? []);
   async function renderTopics(my = viewSeq) {
     $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
@@ -478,7 +482,7 @@ const data = {
       const wrong = subjectTried(school.id).filter(([, x]) => x.w > 0);
       // the revision test: still-wrong questions first, the most often wrong first, at most REVISION_MAX
       // (past-paper questions only while the child's quiz can load them)
-      const pick = [...wrong].filter(([bq]) => PP_ENABLED || !isPpId(bq.id))
+      const pick = [...wrong].filter(([bq]) => askable(bq))
         .sort((a, b) => (b[1].s > 0 ? 1 : 0) - (a[1].s > 0 ? 1 : 0) || b[1].w - a[1].w).slice(0, REVISION_MAX).map(([bq]) => bq.id);
       const can = !!child; // only a parent writes the child's save; the admin's view is read-only
       const sent = (s.revision?.ids ?? []).filter((id) => wrong.some(([bq]) => bq.id === id));
@@ -486,7 +490,7 @@ const data = {
         + (can && pick.length > 1 ? `<p><button type="button" class="btn" data-act="revise" data-ids="${esc(pick.join(' '))}">Send ${pick.length} as a revision test now</button></p>
           <p class="note">The questions go to the top of the child's next Daily Review, asked together as a revision test.${sent.length ? ` ${sent.length} from the last one sent are in this list.` : ''}</p>` : '')
         + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>'
-        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && (PP_ENABLED || !isPpId(bq.id)) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
+        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && askable(bq) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
     }
     box.scrollIntoView({ block: 'start' });
   }
@@ -847,6 +851,7 @@ const data = {
     const sel = $<HTMLSelectElement>('kid-who'), keep = live.some((k) => k.id === child?.id) ? child!.id : live[0].id;
     sel.innerHTML = live.map((k) => `<option value="${esc(k.id)}"${k.id === keep ? ' selected' : ''}>${esc(k.name)}</option>`).join('');
     $('kid-pick').hidden = false;
+    $('who-note').textContent = 'Signed in as the parent. This page shows the progress of the child picked below, as saved on the server.';
     if (keep !== child?.id) await showChild(keep);
   }
 
@@ -869,7 +874,7 @@ const data = {
     const isParent = roleOf(data.session) === 'parent';
     isParentView = isParent;
     if (!isParent) { $('tab-fam').hidden = true; $('tab-admin').hidden = false; }
-    else $('who-note').textContent = 'Signed in as the parent. This page shows the progress of the child picked below, as saved on the server.';
+    else $('who-note').textContent = 'Signed in as the parent.';
     if (isParent) {
       try { await initFamily(); } catch (e) { famFail(e); $('family').hidden = false; }
       if (me?.deleted_at) return;
