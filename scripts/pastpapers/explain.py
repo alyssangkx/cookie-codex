@@ -13,6 +13,9 @@ questions"; Maths and Science next): why the key is right, and why each other op
                                    revised.jsonl; `judge2` checks those -> judged2.jsonl (a second rejection drops it)
   explain.py apply [--sample N]    dev: the passed ones -> <selection>/<subject>/explain.jsonl (read by load_pp upload);
                                    prints N random passed ones for the owner's spot check
+  explain.py apply-opus [--sample N]  dev: the Claude Opus agents' files (opus/out_NN_partN.jsonl, owner's choice A,
+                                   23 Nov 2026) -> each selection's explain.jsonl; lines that doubt the key go to
+                                   opus/doubts.jsonl for the owner, never to the site
   explain.py selftest
 A key is never questioned here (the keys are settled); an explanation that argues for another option, or that the judge
 calls wrong, is dropped, and that question simply shows no explanation. Past-paper text stays off the repo and the site."""
@@ -230,6 +233,86 @@ def apply(sample=0):
                 print(f"  ({k + 1}) does not fit: {w}")
 
 
+def mentions(text, opt):
+    """The explanation talks about the option: for each part ("had...rushed" -> had, rushed) most of its words appear in
+    the text in some form ("incurred" ~ "incur", "backed off" ~ "back off", "blow over" ~ "blows over")."""
+    words = lambda s: re.findall(r"[a-z']+", (s or "").lower().replace("’", "'"))
+    tw = words(text)
+
+    def near(w):
+        if len(w) <= 3:
+            return w in tw
+        return any(len(x) >= 3 and (x == w or (x[:3] == w[:3] and len(os.path.commonprefix([x, w])) >= max(3, min(len(x), len(w)) - 3))) for x in tw)
+    parts = [p for p in re.split(r"\.{2,}|…|/", opt or "") if p.strip()]
+    if not parts:
+        return False
+    for part in parts:
+        ws = words(part)
+        if not ws or sum(near(w) for w in ws) * 2 < len(ws):
+            return False
+    return True
+
+
+def aligned(e, item):
+    """The explanation is about this question (an agent once re-took ids by position): its reason quotes the answer,
+    and at least two of the wrong-option lines quote their own option."""
+    o, k = item["options"], item["answer"]
+    hits = sum(mentions(w, o[j]) for j, w in enumerate(e["wrong"]) if j != k and w)
+    return mentions(e["right"], o[k]) and hits >= len(o) - 2
+
+
+def opus_row(x, item):
+    """An Opus agent's line as {right, wrong[]}, or None when its shape does not fit the question it names."""
+    if not item or x.get("fp") != item["fp"] or "doubt" in x:
+        return None
+    w, k = x.get("wrong"), item["answer"]
+    if not isinstance(x.get("right"), str) or len(x["right"].strip()) < 15 or not isinstance(w, list) or len(w) != len(item["options"]):
+        return None
+    if w[k] is not None or not all(isinstance(s, str) and s.strip() for j, s in enumerate(w) if j != k):
+        return None
+    e = {"right": x["right"].strip()[:600], "wrong": [None if j == k else s.strip()[:400] for j, s in enumerate(w)]}
+    return e if aligned(e, item) else None
+
+
+def apply_opus(sample=0):
+    import glob
+    items = {r["id"]: r for r in jl(WORK / "items.jsonl")}
+    got, doubts, bad = {}, [], 0
+    for f in sorted(glob.glob(str(WORK / "opus/out_*_part*.jsonl"))):
+        for l in open(f, encoding="utf-8"):
+            if not l.strip():
+                continue
+            try:
+                x = json.loads(l)
+            except Exception:
+                bad += 1
+                continue
+            if "doubt" in x and x.get("id") in items:
+                doubts.append({"id": x["id"], "doubt": x["doubt"], "stem": items[x["id"]]["stem"], "options": items[x["id"]]["options"],
+                               "answer": items[x["id"]]["answer"]})
+                continue
+            e = opus_row(x, items.get(x.get("id")))
+            if e:
+                got[x["id"]] = e
+            else:
+                bad += 1
+    by = {r["sel"]: [] for r in items.values()}
+    for i, e in got.items():
+        by[items[i]["sel"]].append({"id": i, "fp": items[i]["fp"], "explain": e, "src": "claude-opus"})
+    for sel, rows in by.items():
+        (Path(sel) / "explain.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in rows))
+    (WORK / "opus/doubts.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in doubts))
+    print(f"{len(items)} questions: {len(got)} explained, {len(doubts)} key doubts (opus/doubts.jsonl), {bad} lines unusable, "
+          f"{len(items) - len(got) - len(doubts)} not covered")
+    for i in random.Random(7).sample(sorted(got), min(sample, len(got))):
+        r, e = items[i], got[i]
+        print(f"\n{r['stem']}\n  " + "  ".join(f"({k + 1}) {o}" for k, o in enumerate(r["options"])) + f"\n  answer ({r['answer'] + 1})")
+        print(f"  why right: {e['right']}")
+        for k, w in enumerate(e["wrong"]):
+            if w:
+                print(f"  ({k + 1}) does not fit: {w}")
+
+
 def selftest():
     opts = ["doesn't", "hasn't", "isn't", "didn't"]
     good = {"right": "Prefers is present simple, so the tag uses does: doesn't he?", "wrong": {"2": "Hasn't needs has as a helper.", "3": "Isn't needs is.", "4": "Didn't is past tense."}}
@@ -239,6 +322,19 @@ def selftest():
     assert shape(parse("```json\n" + json.dumps(good) + "\n```"), opts, 0)["right"].startswith("Prefers")
     q = {"stem": "s", "options": opts, "answer": 0}
     assert fp(q) == fp(dict(q)) and fp(q) != fp(dict(q, answer=1)) and fp(q) != fp(dict(q, options=opts[::-1])), "a changed key or options is another version"
+    it = {"fp": "f", "answer": 0, "options": opts}
+    wl = [None, "\"Hasn't\" needs has.", "\"Isn't\" needs is.", "\"Didn't\" is past."]
+    ok = {"id": "x", "fp": "f", "right": "A question tag repeats the helper, so \"doesn't he?\"", "wrong": wl}
+    assert opus_row(ok, it)["wrong"] == wl
+    assert opus_row(dict(ok, fp="g"), it) is None, "another question version"
+    assert opus_row(dict(ok, wrong=["x"] + wl[1:]), it) is None, "the key's slot must be null"
+    assert opus_row(dict(ok, wrong=wl[:3]), it) is None and opus_row(dict(ok, doubt="key?"), it) is None
+    it2 = {"fp": "f", "answer": 2, "options": ["had...rush", "have...rush", "had...rushed", "have...rushed"]}
+    e2 = {"id": "y", "fp": "f", "right": "\"Had I not rushed\" means if I had not rushed.", "wrong": ["\"Rush\" after had is wrong.", "\"Have\" cannot mean if; \"rush\" too.", None, "\"Have\" with \"rushed\" is wrong."]}
+    assert opus_row(e2, it2), "multi-part options are matched part by part"
+    assert opus_row(dict(e2, right="Fatigue means extreme tiredness."), it2) is None, "a reason about another question is dropped"
+    assert mentions('To "incur" a fine means', "incurred") and mentions('When a storm "blows over"', "blow over")
+    assert mentions('"Come across as" means', "came across") and not mentions("Fatigue means tiredness.", "incurred")
     print("explain selftest ok")
 
 
@@ -248,6 +344,8 @@ if __name__ == "__main__":
         pack([Path(s) for s in sys.argv[2:]] or SELS)
     elif cmd in ("write", "judge", "revise", "judge2"):
         run(sys.argv[2], cmd)
+    elif cmd == "apply-opus":
+        apply_opus(int(sys.argv[sys.argv.index("--sample") + 1]) if "--sample" in sys.argv else 0)
     elif cmd == "calib":
         calib()
     elif cmd == "calib-score":
