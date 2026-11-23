@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
-import { syncTiers, tierHash, liveMastered, fresh, answer } from './store.ts';
+import { syncTiers, tierHash, liveMastered, fresh, answer, MIN_POOL } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
 const row = (over: Partial<PpRow> = {}): PpRow => ({
@@ -273,11 +273,11 @@ test('validRow: 8 phrases only for the 完成对话 dialogue sets (migration 011
 
 // review, 23 Nov 2026: the hand-kept counts left PP_SWITCH; train.ts fails the build only for sub-topics in rewards.order,
 // so every 'pool' key (a misspelt one too) is checked here against the counts, in the unit tests
-test('every pool sub-topic has at least PP_MIN_TIER past-paper questions (pp_counts.json)', async () => {
+test('every pool sub-topic has at least MIN_POOL past-paper questions (pp_counts.json)', async () => {
   const { readFileSync } = await import('node:fs');
   const pp = JSON.parse(readFileSync(new URL('../data/pp_counts.json', import.meta.url), 'utf8')) as Record<string, number>;
   const short = Object.keys(PP_SWITCH).filter((s) => ppMode(s) === 'pool')
     .map((s) => [s, ['b', 'i', 'c'].reduce((n, t) => n + (pp[`${s}|${t}`] ?? 0), 0)] as const)
-    .filter(([, n]) => n < PP_MIN_TIER);
+    .filter(([, n]) => n < MIN_POOL); // the rule train.ts builds with
   assert.deepEqual(short, [], 'pool sub-topics under the minimum: switch them back to merge or add questions');
 });

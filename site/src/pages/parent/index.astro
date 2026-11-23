@@ -836,7 +836,9 @@ const data = {
   const asSave = (d: unknown) => (d ? (migrate(d) as SaveV1) : (cleanSave(null) as SaveV1));
   async function showChild(id: string, writable = isParentView) {
     const my = ++pick;
-    const r = await supabase.from('saves').select('rev, data').eq('child_id', id).maybeSingle();
+    let r;
+    try { r = await supabase.from('saves').select('rev, data').eq('child_id', id).maybeSingle(); }
+    catch (e) { if (my !== pick) return; throw e; } // an older pick's failure never reaches the caller's fallback
     if (my !== pick) return;
     if (r.error) throw r.error;
     child = { id, rev: r.data ? Number(r.data.rev) : null, raw: asSave(r.data?.data), writable };
@@ -944,11 +946,9 @@ const data = {
         const device = () => { pick++; child = null; s = cleanSave(load()); viewId = deviceId; $('bak-panel').hidden = false; renderAll(); }; // pick++: a pick still loading is dropped
         if (!sel.value) { $('who-note').textContent = note; return device(); }
         const test = opt?.dataset.test === 'true';
-        $('who-note').textContent = `Signed in as the admin. Showing ${opt?.dataset.name ?? ''}'s save from the server${test ? ' (the Test Player)' : ', read only'}.`;
+        $('who-note').textContent = `Signed in as the admin. Showing ${opt?.dataset.name || opt?.textContent || 'this child'}'s save from the server${test ? ' (the Test Player)' : ', read only'}.`;
         $('bak-panel').hidden = true; // the save code is this browser's own save, not the picked child's
-        const loading = showChild(sel.value, test), my = pick; // showChild takes its pick number before its first await
-        await loading.catch(() => { // never leave the picker naming a child the page doesn't show
-          if (my !== pick) return; // an older pick failed after a newer one started: leave the newer one alone
+        await showChild(sel.value, test).catch(() => { // showChild throws only for the current pick
           sel.value = ''; device(); $('who-note').textContent = "Couldn't load that child's save: showing this device.";
         });
       });

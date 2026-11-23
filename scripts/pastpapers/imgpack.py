@@ -359,6 +359,8 @@ def write_gate(subject, models, allow_two=False):
         return None
     if len(models) == 2 and allow_two and (subject, set(models)) in ALLOWED_PAIRS:
         return None
+    if len(models) == 2 and not allow_two and (subject, set(models)) in ALLOWED_PAIRS:
+        return "this approved pair needs --allow-two typed (the owner's choice on record)"
     return f"--write needs three outside models; a pair only as approved: {[(s, sorted(m)) for s, m in ALLOWED_PAIRS]}"
 
 
@@ -414,6 +416,8 @@ def score(a):
                 M[m].update({qmap[k]: v for k, v in got.items() if k in qmap})
     cal = [i for i in ids if bl[i].get("agree") is True]
     for m in models:
+        if not M[m] and a.write:  # a misnamed answer file must not read as "split" everywhere and erase older verdicts
+            sys.exit(f"no answers found for {m}: check the file names (part<N>_{m}.txt)")
         c = [i for i in cal if i in M[m]]
         print(f"{m}: {len(M[m])} answers; calibration {sum(M[m][i] == str(bl[i]['key']) for i in c)}/{len(c)}")
     def vote(i):
