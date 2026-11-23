@@ -921,16 +921,18 @@ const data = {
   // Admin (owner, 23 Nov 2026, for testing): the same "Showing" picker a parent has, over the admin's own children (the Test
   // Player). Reading any save is allowed to the admin; writing (Retest, Assign, revision test, settings) only the Test
   // Player's, which the database enforces, so the actions show only for it.
-  const ADMIN_WATCH = ['Alyssa']; // profiles.name as stored; exact match
+  // owner, 23 Nov 2026: children the admin may also watch, read only, by profile id (a username can be renamed or reused).
+  // RLS lets the admin read any profile and save; the database refuses an admin write to anyone but the Test Player.
+  // ponytail: a fixed list in the page; a profiles flag returned by the admin function if the list ever grows
+  const ADMIN_WATCH = ['5ed5c924-d96d-40f3-ae38-b5d67484faa7'];
   async function initAdminKids(deviceId: string | null) {
     try {
       const { data } = await supabase.auth.getSession();
       if (!data.session) return;
       const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
       const own = ((r.status === 200 ? r.body?.children : null) ?? []) as { id: string; name: string; role: string }[];
-      // owner, 23 Nov 2026: the admin may also watch these children, read only (RLS lets the admin read any profile and
-      // save; the database refuses an admin write to anyone but the Test Player, and the page hides the actions)
-      const watch = await supabase.from('profiles').select('id, name, role').eq('role', 'child').in('name', ADMIN_WATCH).is('deleted_at', null);
+      const watch = await supabase.from('profiles').select('id, name, role').in('id', ADMIN_WATCH).eq('role', 'child').is('deleted_at', null);
+      if (watch.error) console.warn('watched children not loaded:', watch.error.message);
       const kids = [...own, ...(watch.data ?? []).filter((w) => !own.some((k) => k.id === w.id))];
       if (!kids.length) return;
       const sel = $<HTMLSelectElement>('kid-who');
@@ -938,8 +940,12 @@ const data = {
       $('kid-pick').hidden = false;
       sel.addEventListener('change', async () => {
         const opt = sel.selectedOptions[0];
-        if (!sel.value) { pick++; child = null; s = cleanSave(load()); viewId = deviceId; renderAll(); return; } // pick++: a pick still loading is dropped
-        await showChild(sel.value, opt?.dataset.test === 'true').catch(() => { child = null; $('mastery').innerHTML = '<p class="note">Could not load that save.</p>'; });
+        const device = () => { pick++; child = null; s = cleanSave(load()); viewId = deviceId; $('bak-panel').hidden = false; renderAll(); }; // pick++: a pick still loading is dropped
+        if (!sel.value) return device();
+        $('bak-panel').hidden = true; // the save code is this browser's own save, not the picked child's
+        await showChild(sel.value, opt?.dataset.test === 'true').catch(() => { // never leave the picker naming a child the page doesn't show
+          sel.value = ''; device(); $('who-note').textContent = "Couldn't load that child's save: showing this device.";
+        });
       });
       // open on the Test Player's server save, like a parent's child, not on this browser's own (usually empty) save
       const test = kids.find((k) => k.role === 'test');

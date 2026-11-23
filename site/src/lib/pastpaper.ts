@@ -14,7 +14,8 @@ export const PP_ENABLED = true;
  * 0011): the sub-topic is one pool of its past-paper questions (20+), no tiers, milestones; generated questions leave it. */
 export type PpMode = 'merge' | 'replace' | 'pool';
 
-/** Per-sub-topic switch, added in the order the imports land (Plant transport first). Ignored while PP_ENABLED is false. */
+/** Per-sub-topic switch, added in the order the imports land (Plant transport first). Ignored while PP_ENABLED is false.
+ *  Past-paper counts are not kept here (they went stale): see pp_counts.json and docs/audit/milestone-migration.md. */
 export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   // Science upload, 21 Nov 2026 (owner OK): 1,250 questions 2018-2026; 'pool' at 20+ past-paper questions (ADR 0011),
   // 'merge' below that (they join the sub-topic's generated tiers)
@@ -39,13 +40,13 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'sci-systems-circuit': 'pool',
   'sci-systems-circuit-vars': 'pool',
   'sci-systems-digestive-parts': 'pool',
-  'sci-systems-plant-parts-fn': 'pool', // 24 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'sci-systems-plant-parts-fn': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'sci-systems-plant-transport-parts': 'pool',
   'sci-systems-resp-circ-parts': 'pool',
-  'sci-cycles-repro-humans': 'pool', // 21 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'sci-cycles-water-cycle': 'pool', // 21 after the unsure-key confirms and two hand crops (23 Nov 2026)
-  'sci-diversity-living-characteristics': 'pool', // 21 after the unsure-key confirms (23 Nov 2026)
-  'sci-energy-heat-temp': 'pool', // 20 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'sci-cycles-repro-humans': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'sci-cycles-water-cycle': 'pool', // after the unsure-key confirms and two hand crops (23 Nov 2026)
+  'sci-diversity-living-characteristics': 'pool', // after the unsure-key confirms (23 Nov 2026)
+  'sci-energy-heat-temp': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'sci-energy-photo-respiration': 'merge',
   'sci-inquiry-predict-hyp': 'merge',
   'sci-systems-air-gases': 'merge',
@@ -72,37 +73,37 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'chi-dialogue-mcq': 'pool',
   // Maths upload (owner OK after the 40-question sample, 21 Nov 2026): MCQs 2018-2026, keys confirmed by the blind check;
   // 'pool' at 20+ past-paper questions, 'merge' below (they join the sub-topic's generated tiers)
-  'math-algebra-algebra': 'pool', // 59
-  'math-area-and-volume-area-and-circumference-of-circle': 'pool', // 45
-  'math-area-and-volume-volume-of-cube-and-cuboid': 'pool', // 21
-  'math-data-analysis-average-of-a-set-of-data': 'pool', // 25
-  'math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts': 'pool', // 27
-  'math-decimals-decimal-notation-and-comparison': 'pool', // 104
-  'math-fractions-equivalent-fractions-and-simplest-form': 'pool', // 50
-  'math-fractions-fraction-of-a-whole-and-of-a-set': 'pool', // 54
-  'math-fractions-multiplication-and-division-of-fractions': 'pool', // 41
-  'math-geometry-angles': 'pool', // 49
-  'math-measurement-length-mass-and-volume': 'pool', // 99
-  'math-measurement-time': 'pool', // 35
-  'math-money-money': 'pool', // 40
-  'math-percentage-percentage': 'pool', // 116
-  'math-rate-rate': 'merge', // 42: owner, 21 Nov 2026: keep the generated speed questions next to the past papers
-  'math-ratio-ratio': 'pool', // 95
-  'math-whole-numbers-addition-subtraction-multiplication-and-division': 'pool', // 126
-  'math-whole-numbers-factors-and-multiples': 'pool', // 30
-  'math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million': 'pool', // 107
-  'math-area-and-volume-area-and-perimeter': 'pool', // 26 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'math-area-and-volume-area-of-triangle': 'pool', // 26 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'math-decimals-four-operations-with-decimals': 'pool', // 21 with the Claude+Perplexity no-key keys (23 Nov 2026)
-  'math-fractions-addition-and-subtraction-of-fractions': 'pool', // 25 with the Claude+Perplexity no-key keys (23 Nov 2026)
-  'math-fractions-fraction-and-division': 'merge', // 2
-  'math-fractions-mixed-numbers-and-improper-fractions': 'pool', // 21 with the Claude+Perplexity no-key keys (23 Nov 2026)
-  'math-geometry-2d-shapes': 'pool', // 20 after the unsure-key confirms (23 Nov 2026)
-  'math-geometry-3d-shapes-and-nets': 'merge', // 17
-  'math-geometry-line-symmetry': 'merge', // 17
-  'math-geometry-perpendicular-and-parallel-lines': 'pool', // 25 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'math-geometry-rectangle-and-square': 'merge', // 3
-  'math-geometry-triangles-parallelogram-rhombus-and-trapezium': 'pool', // 31 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'math-algebra-algebra': 'pool',
+  'math-area-and-volume-area-and-circumference-of-circle': 'pool',
+  'math-area-and-volume-volume-of-cube-and-cuboid': 'pool',
+  'math-data-analysis-average-of-a-set-of-data': 'pool',
+  'math-data-representation-and-interpretation-picture-graphs-bar-graphs-tables-line-graphs-and-pie-charts': 'pool',
+  'math-decimals-decimal-notation-and-comparison': 'pool',
+  'math-fractions-equivalent-fractions-and-simplest-form': 'pool',
+  'math-fractions-fraction-of-a-whole-and-of-a-set': 'pool',
+  'math-fractions-multiplication-and-division-of-fractions': 'pool',
+  'math-geometry-angles': 'pool',
+  'math-measurement-length-mass-and-volume': 'pool',
+  'math-measurement-time': 'pool',
+  'math-money-money': 'pool',
+  'math-percentage-percentage': 'pool',
+  'math-rate-rate': 'merge', // owner, 21 Nov 2026: keep the generated speed questions next to the past papers
+  'math-ratio-ratio': 'pool',
+  'math-whole-numbers-addition-subtraction-multiplication-and-division': 'pool',
+  'math-whole-numbers-factors-and-multiples': 'pool',
+  'math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million': 'pool',
+  'math-area-and-volume-area-and-perimeter': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'math-area-and-volume-area-of-triangle': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'math-decimals-four-operations-with-decimals': 'pool', // with the Claude+Perplexity no-key keys (23 Nov 2026)
+  'math-fractions-addition-and-subtraction-of-fractions': 'pool', // with the Claude+Perplexity no-key keys (23 Nov 2026)
+  'math-fractions-fraction-and-division': 'merge',
+  'math-fractions-mixed-numbers-and-improper-fractions': 'pool', // with the Claude+Perplexity no-key keys (23 Nov 2026)
+  'math-geometry-2d-shapes': 'pool', // after the unsure-key confirms (23 Nov 2026)
+  'math-geometry-3d-shapes-and-nets': 'merge',
+  'math-geometry-line-symmetry': 'merge',
+  'math-geometry-perpendicular-and-parallel-lines': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
+  'math-geometry-rectangle-and-square': 'merge',
+  'math-geometry-triangles-parallelogram-rhombus-and-trapezium': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
 };
 
 /** pp_items.subject of a sub-topic, from its id prefix (pp_pool lists one subject per call). */

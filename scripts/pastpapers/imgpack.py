@@ -342,6 +342,11 @@ def build(a):
     print(f"{len(sets)} sets -> {out}")
 
 
+# --allow-two pairs the owner approved: (subject, models). Maths: Claude + Perplexity for key disputes and unsure confirms
+# (22 Nov 2026) and no-key keys (23 Nov 2026); every other subject needs all three outside models.
+ALLOWED_PAIRS = [("maths", {"claude", "perplexity"})]
+
+
 def score(a):
     out = OUT / a.kind
     subject = KINDS[a.kind][0]
@@ -429,6 +434,8 @@ def score(a):
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
         if len(models) < (2 if a.allow_two else 3):
             sys.exit("--write needs 3 or more models (owner rule: unanimous outside models); --allow-two only where the owner chose a pair")
+        if len(models) == 2 and (subject, set(models)) not in ALLOWED_PAIRS:  # a pair writes only where the owner chose it
+            sys.exit(f"--allow-two: the owner approved only {[(s, sorted(m)) for s, m in ALLOWED_PAIRS]}")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
         stale = {i for i in ids if bl[i].get("agree") is not True} - {v["id"] for vs in verdicts.values() for v in vs}
@@ -487,6 +494,7 @@ def selftest():
     assert page_range(qs) == [10, 11, 12, 13] and page_range([{"pages": [1]}]) == [1]
     assert ANS.findall("Q1: 3\nQ2：4\nQ10) 2") == [("1", "3"), ("2", "4"), ("10", "2")]
     assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
+    assert {s for s, _ in ALLOWED_PAIRS} == {"maths"}, "a two-model pair is approved for Maths only: other subjects need three"
     print("imgpack selftest ok")
 
 

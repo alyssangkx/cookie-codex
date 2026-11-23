@@ -19,8 +19,8 @@ test('the master switch is ON; the Science upload (21 Nov 2026) puts 20+ sub-top
   assert.equal(ppMode('sci-systems-plant-transport-parts'), 'pool');
   assert.equal(ppMode('sci-cycles-water-cycle'), 'pool'); // 21 since 23 Nov 2026 (unsure-key confirms): one pool
   assert.equal(ppMode('sci-energy-photo-respiration'), 'merge'); // 13 past-paper questions: merged into its tiers
-  assert.equal(ppMode('math-rate-rate'), 'merge'); // 62 past-paper questions, merged so the generated speed questions stay (owner)
-  assert.equal(ppMode('math-geometry-line-symmetry'), 'merge'); // 17: merged into its tiers
+  assert.equal(ppMode('math-rate-rate'), 'merge'); // merged so the generated speed questions stay (owner)
+  assert.equal(ppMode('math-geometry-line-symmetry'), 'merge'); // under 20: merged into its tiers
 });
 
 test('which sub-topics a quiz fetches', () => {
