@@ -6,7 +6,6 @@
 // Crumbs); readable by children and the admin only; shown as "Past paper <year>" (never the school); left out of the
 // parent page's wrong-answer list.
 import { esc } from './boldans.ts';
-import { MIN_POOL } from './store.ts';
 
 /** Master switch. On since 20 Nov 2026 (004 applied, Plant transport uploaded and reviewed by the owner). */
 export const PP_ENABLED = true;
@@ -113,7 +112,7 @@ export const ppSubjectOf = (sub: string): string | null => SUBJECT_OF[sub.split(
 export const PP_BUCKET = 'pp-figures';
 /** A sub-topic id as pp_items stores it (pp_items_subtopic_check, migration 009: up to 120; one Maths id has 103). */
 const SUBTOPIC_ID = /^[a-z0-9-]{3,120}$/;
-export const PP_MIN_TIER = MIN_POOL; // a smaller past-paper pool never replaces a tier, it is merged in
+export const PP_MIN_TIER = 20; // = store.ts MIN_POOL (tested; this module stays import-free): a smaller pool is merged in
 const LEVELS = ['basic', 'intermediate', 'competent'] as const;
 
 export interface PpFigure { path: string; w: number; h: number }

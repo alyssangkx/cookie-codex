@@ -446,7 +446,7 @@ def score(a):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
     if missing:  # shown on every run, so a dry run's counts are read with the gap in mind
-        print(f"WARNING: no answer file for {len(missing)} part(s): {', '.join(missing)} (their questions count as unanswered)")
+        print(f"WARNING: {len(missing)} answer file(s) missing: {', '.join(missing)} (their questions count as unanswered)")
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
         why = write_gate(subject, models, a.allow_two)  # first: never ask the owner to check a calibration for a refused model set
         if why:
@@ -456,9 +456,10 @@ def score(a):
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
-        # only a real split counts (every model answered): an unanswered question (missing, misnamed, cut-off or
+        # only a real split counts (every model answered, or the answers given already differ): an unanswered question (missing, misnamed, cut-off or
         # unreadable answer file) keeps its older verdict
-        stale = ({i for i in ids if bl[i].get("agree") is not True and all(i in M[m] for m in models)}
+        real_split = lambda i: all(i in M[m] for m in models) or len({M[m][i] for m in models if i in M[m]}) > 1
+        stale = ({i for i in ids if bl[i].get("agree") is not True and real_split(i)}
                  - {v["id"] for vs in verdicts.values() for v in vs})
         for y in sorted(set(verdicts) | {year[i] for i in stale}):
             vs = verdicts.get(y, [])

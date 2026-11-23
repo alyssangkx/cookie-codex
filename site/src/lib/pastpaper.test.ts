@@ -281,3 +281,5 @@ test('every pool sub-topic has at least MIN_POOL past-paper questions (pp_counts
     .filter(([, n]) => n < MIN_POOL); // the rule train.ts builds with
   assert.deepEqual(short, [], 'pool sub-topics under the minimum: switch them back to merge or add questions');
 });
+
+test('PP_MIN_TIER is the playable minimum MIN_POOL', () => assert.equal(PP_MIN_TIER, MIN_POOL));
