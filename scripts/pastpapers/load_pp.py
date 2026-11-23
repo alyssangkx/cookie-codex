@@ -1886,7 +1886,8 @@ def upload(a):
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
     # explanations (migration 014): explain.py apply writes <out>/<subject>/explain.jsonl for the ones the second model passed
-    expl = {x["id"]: x["explain"] for x in jl(out / "explain.jsonl")}
+    from explain import fp as explain_fp  # an explanation is used only for the question version it was written for
+    expl = {x["id"]: x for x in jl(out / "explain.jsonl")}
     # no explain.jsonl: the field is not sent at all, so explanations already live are left as they are (an upsert of an
     # absent column keeps it); PostgREST needs the same keys on every row of a batch, hence all or none
     has_expl = (out / "explain.jsonl").exists()
@@ -1894,7 +1895,7 @@ def upload(a):
            "pattern": r["pattern"], "stem": r["stem"], "options": r["options"], "answer": r["answer"],
            "figures": figs[r["id"]], "year": r["year"], "school": r["school"], "paper": r["paper"],
            "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "ord": ord_[r["id"]], "active": True,
-           "grp": r.get("grp"), "seq": r.get("seq"), **({"explain": expl.get(r["id"])} if has_expl else {})} for r in rows]
+           "grp": r.get("grp"), "seq": r.get("seq"), **({"explain": (expl[r["id"]]["explain"] if r["id"] in expl and expl[r["id"]].get("fp") == explain_fp(r) else None)} if has_expl else {})} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
     print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}, explanations {sum(bool(d.get('explain')) for d in db) if has_expl else 'unchanged (no explain.jsonl)'}")
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts

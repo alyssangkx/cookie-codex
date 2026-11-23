@@ -50,6 +50,12 @@ def parse(text):
         return None
 
 
+def fp(r):
+    """The question as the explanation was written for it: an explanation is used only while stem, options and key match."""
+    import hashlib
+    return hashlib.sha1(json.dumps([r["stem"], r["options"], r["answer"]], ensure_ascii=False).encode()).hexdigest()[:12]
+
+
 def opts_text(opts):
     return "\n".join(f"({i}) {o}" for i, o in enumerate(opts, 1))
 
@@ -78,8 +84,10 @@ def pack(sels):
     for sel in sels:
         subject = sel.name
         for r in jl(sel / "selected.jsonl"):
-            if r["subtopic"] in SUBS.get(subject, set()) and not r.get("grp"):
-                out.append({"id": r["id"], "sel": str(sel), "subject": subject, "stem": r["stem"], "options": r["options"], "answer": r["answer"]})
+            # a question with a picture is left out: the model reads text only and would explain what it cannot see
+            if r["subtopic"] in SUBS.get(subject, set()) and not r.get("grp") and not r.get("crops") and not r.get("set_pages"):
+                x = {"id": r["id"], "sel": str(sel), "subject": subject, "stem": r["stem"], "options": r["options"], "answer": r["answer"]}
+                out.append(dict(x, fp=fp(x)))
     (WORK / "items.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in out))
     print(f"{len(out)} questions -> {WORK / 'items.jsonl'}")
 
@@ -93,9 +101,10 @@ def llm(model):
 def run(items_file, phase):
     items = jl(items_file)
     out = Path(items_file).with_name("written.jsonl" if phase == "write" else "judged.jsonl")
-    done = {r["id"] for r in jl(out)}
-    written = {r["id"]: r for r in jl(Path(items_file).with_name("written.jsonl"))} if phase == "judge" else {}
-    todo = [r for r in items if r["id"] not in done and (phase == "write" or r["id"] in written)]
+    done = {(r["id"], r.get("fp")) for r in jl(out)}  # a changed question (new fp) is written and judged again
+    written = {(r["id"], r.get("fp")): r for r in jl(Path(items_file).with_name("written.jsonl"))} if phase == "judge" else {}
+    key = lambda r: (r["id"], r.get("fp"))
+    todo = [r for r in items if key(r) not in done and (phase == "write" or (written.get(key(r)) or {}).get("explain"))]
     print(len(todo), "to", phase, flush=True)
     if not todo:
         return
@@ -108,30 +117,34 @@ def run(items_file, phase):
                 if phase == "write":
                     p = WRITE.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k])
                 else:
-                    e = written[r["id"]].get("explain") or {"right": "", "wrong": []}
+                    e = written[key(r)]["explain"]
                     wr = "\n".join(f"Why ({j + 1}) does not fit: {w}" for j, w in enumerate(e["wrong"]) if w)
                     p = CHECK.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], right=e["right"], wrongs=wr)
                 msgs.append([{"role": "system", "content": SYS}, {"role": "user", "content": p}])
             for r, res in zip(ch, model.chat(msgs, sp, use_tqdm=False)):
                 raw = res.outputs[0].text
                 if phase == "write":
-                    rec = {"id": r["id"], "explain": shape(parse(raw), r["options"], r["answer"]), "raw": raw}
+                    rec = {"id": r["id"], "fp": r.get("fp"), "explain": shape(parse(raw), r["options"], r["answer"]), "raw": raw}
                 else:
                     v = parse(raw) or {}
-                    rec = {"id": r["id"], "ok": v.get("ok") is True, "problem": str(v.get("problem") or "")[:300], "raw": raw}
+                    rec = {"id": r["id"], "fp": r.get("fp"), "ok": v.get("ok") is True, "problem": str(v.get("problem") or "")[:300], "raw": raw}
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             f.flush()
             print(f"{min(i + 64, len(todo))}/{len(todo)}", flush=True)
 
 
 def apply(sample=0):
+    """Only rows of the current items.jsonl count, matched by id and fingerprint (rows from before fingerprints, fp None,
+    are taken as written for the current version); every selection in the items gets a fresh explain.jsonl, empty when
+    none passed, so a file from an earlier run never outlives it."""
     items = {r["id"]: r for r in jl(WORK / "items.jsonl")}
-    written = {r["id"]: r.get("explain") for r in jl(WORK / "written.jsonl")}
-    judged = {r["id"]: r for r in jl(WORK / "judged.jsonl")}
+    cur = lambda r: r["id"] in items and r.get("fp") in (None, items[r["id"]]["fp"])
+    written = {r["id"]: r.get("explain") for r in jl(WORK / "written.jsonl") if cur(r)}
+    judged = {r["id"]: r for r in jl(WORK / "judged.jsonl") if cur(r)}
     passed = {i: e for i, e in written.items() if e and judged.get(i, {}).get("ok")}
-    by = {}
+    by = {r["sel"]: [] for r in items.values()}
     for i, e in passed.items():
-        by.setdefault(items[i]["sel"], []).append({"id": i, "explain": e})
+        by[items[i]["sel"]].append({"id": i, "fp": items[i]["fp"], "explain": e})
     for sel, rows in by.items():
         (Path(sel) / "explain.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in rows))
     n, w, j = len(items), sum(bool(e) for e in written.values()), len(judged)
@@ -153,6 +166,8 @@ def selftest():
     assert shape(dict(good, wrong={"2": "x", "3": "y"}), opts, 0) is None, "every wrong option needs a reason"
     assert shape({"right": "ok", "wrong": good["wrong"]}, opts, 0) is None, "too short to explain anything"
     assert shape(parse("```json\n" + json.dumps(good) + "\n```"), opts, 0)["right"].startswith("Prefers")
+    q = {"stem": "s", "options": opts, "answer": 0}
+    assert fp(q) == fp(dict(q)) and fp(q) != fp(dict(q, answer=1)) and fp(q) != fp(dict(q, options=opts[::-1])), "a changed key or options is another version"
     print("explain selftest ok")
 
 

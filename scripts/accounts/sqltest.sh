@@ -11,13 +11,13 @@ sleep 1
 run() { docker exec -i "$name" psql -U postgres -v ON_ERROR_STOP=1 -q -X "$@"; }
 cat "$here/stub_supabase.sql" "$here/stub_storage.sql" "$mig/001_init.sql" "$here/seed_001.sql" "$mig/002_parents.sql" "$mig/003_no_family_code.sql" "$mig/004_pp_items.sql" "$mig/005_question_reports.sql" "$mig/006_pp_serve.sql" "$mig/008_pp_serve_active_only.sql" | run -o /dev/null
 out=$(run -t -o /dev/null < "$here/test_accounts.sql" 2>&1) || { echo "$out" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$out" | sed -n 's/^.*NOTICE:  //p'; echo "$out" | grep -q 'ALL CHECKS PASSED' && echo 'ALL CHECKS PASSED'
+echo "$out" | sed -n 's/^.*NOTICE:  //p'; echo "$out" | grep -q 'ALL CHECKS PASSED' && echo 'ALL CHECKS PASSED' || exit 1
 pp=$(run -t -o /dev/null < "$here/test_pp_items.sql" 2>&1) || { echo "$pp" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$pp" | sed -n 's/^.*NOTICE:  //p'; echo "$pp" | grep -q 'PP CHECKS PASSED' && echo 'PP CHECKS PASSED'
+echo "$pp" | sed -n 's/^.*NOTICE:  //p'; echo "$pp" | grep -q 'PP CHECKS PASSED' && echo 'PP CHECKS PASSED' || exit 1
 rq=$(run -t -o /dev/null < "$here/test_reports.sql" 2>&1) || { echo "$rq" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$rq" | sed -n 's/^.*NOTICE:  //p' | tail -4; echo "$rq" | grep -q 'REPORT CHECKS PASSED' && echo 'REPORT CHECKS PASSED'
+echo "$rq" | sed -n 's/^.*NOTICE:  //p' | tail -4; echo "$rq" | grep -q 'REPORT CHECKS PASSED' && echo 'REPORT CHECKS PASSED' || exit 1
 ps=$(run -t -o /dev/null < "$here/test_pp_serve.sql" 2>&1) || { echo "$ps" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$ps" | sed -n 's/^.*NOTICE:  //p' | tail -4; echo "$ps" | grep -q 'PP SERVE CHECKS PASSED' && echo 'PP SERVE CHECKS PASSED'
+echo "$ps" | sed -n 's/^.*NOTICE:  //p' | tail -4; echo "$ps" | grep -q 'PP SERVE CHECKS PASSED' && echo 'PP SERVE CHECKS PASSED' || exit 1
 run -o /dev/null < "$mig/009_pp_subtopic_length.sql"
 run -o /dev/null < "$mig/010_pp_sets.sql"
 st=$(run -t -o /dev/null < "$here/test_pp_sets.sql" 2>&1) || { echo "$st" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
@@ -27,13 +27,13 @@ dl=$(run -t -o /dev/null < "$here/test_pp_dialogue.sql" 2>&1) || { echo "$dl" | 
 echo "$dl" | grep -c "ok " | sed 's/^/dialogue checks passed: /'
 run -o /dev/null < "$mig/007_pp_lockdown.sql"
 ld=$(run -t -o /dev/null < "$here/test_pp_lockdown.sql" 2>&1) || { echo "$ld" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$ld" | sed -n 's/^.*NOTICE:  //p'; echo "$ld" | grep -q 'LOCKDOWN CHECKS PASSED' && echo 'LOCKDOWN CHECKS PASSED'
+echo "$ld" | sed -n 's/^.*NOTICE:  //p'; echo "$ld" | grep -q 'LOCKDOWN CHECKS PASSED' && echo 'LOCKDOWN CHECKS PASSED' || exit 1
 run -o /dev/null < "$mig/012_pp_seen.sql"
 sn=$(run -t -o /dev/null < "$here/test_pp_seen.sql" 2>&1) || { echo "$sn" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$sn" | sed -n 's/^.*NOTICE:  //p'; echo "$sn" | grep -q 'SEEN CHECKS PASSED' && echo 'SEEN CHECKS PASSED'
+echo "$sn" | sed -n 's/^.*NOTICE:  //p'; echo "$sn" | grep -q 'SEEN CHECKS PASSED' && echo 'SEEN CHECKS PASSED' || exit 1
 run -o /dev/null < "$mig/013_pp_counts.sql"
 ct=$(run -t -o /dev/null < "$here/test_pp_counts.sql" 2>&1) || { echo "$ct" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$ct" | sed -n 's/^.*NOTICE:  //p'; echo "$ct" | grep -q 'COUNTS CHECKS PASSED' && echo 'COUNTS CHECKS PASSED'
+echo "$ct" | sed -n 's/^.*NOTICE:  //p'; echo "$ct" | grep -q 'COUNTS CHECKS PASSED' && echo 'COUNTS CHECKS PASSED' || exit 1
 run -o /dev/null < "$mig/014_pp_explain.sql"
 ex=$(run -t -o /dev/null < "$here/test_pp_explain.sql" 2>&1) || { echo "$ex" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
-echo "$ex" | sed -n 's/^.*NOTICE:  //p'; echo "$ex" | grep -q 'EXPLAIN CHECKS PASSED' && echo 'EXPLAIN CHECKS PASSED'
+echo "$ex" | sed -n 's/^.*NOTICE:  //p'; echo "$ex" | grep -q 'EXPLAIN CHECKS PASSED' && echo 'EXPLAIN CHECKS PASSED' || exit 1

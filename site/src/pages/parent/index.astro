@@ -404,8 +404,8 @@ const data = {
     const fig = samePage ? '<span class="meta">Same exam page as the question above.</span>' : figHtml(bq);
     // a past-paper question's explanation (migration 014): why the answer is right, and why the child's pick does not fit
     const pick = q.a ? bq.options.indexOf(q.a) : -1;
-    const why = bq.ex ? `<span class="meta why">Why: ${esc(bq.ex.right)}${pick >= 0 && pick !== bq.answer && bq.ex.wrong[pick]
-      ? ` Their answer: ${esc(bq.ex.wrong[pick]!)}` : ''}</span>` : '';
+    const why = bq.ex ? `<span class="meta why">Why it is right: ${bold(bq.ex.right)}${pick >= 0 && pick !== bq.answer && bq.ex.wrong[pick]
+      ? ` · Why their answer doesn't fit: ${bold(bq.ex.wrong[pick]!)}` : ''}</span>` : '';
     return `<li><div class="wq-stem">${bold(bq.stem)}</div>${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>${why}`
       + `<span class="meta">${q.w ? `Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ` : ''}${status}</span>${extra}</li>`;
   }

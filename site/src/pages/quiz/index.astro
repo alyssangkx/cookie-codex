@@ -686,7 +686,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   // a past-paper question's one-line reason (migration 014) reads "Why (1) is right"; generated questions keep their steps
   const stepsHtml = (q: Q) => (isPpId(q.id) && q.solution.length
-    ? `<p class="why-right"><strong>Why ${optionLabel(q, q.answer)} is right:</strong> ${fmt(q.solution[0], q.options[q.answer])}</p>`
+    ? `<p class="why-right"><strong>Why ${optionLabel(q, q.answer)} is right:</strong> ${fmt(q.solution[0])}</p>` // no answer-bolding: "has" would light up everywhere
     : `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`);
   /** "Report a problem" under the answer (migration 005): the question id goes to report_question; a grown-up looks it up. */
   const REPORT_KINDS: [string, string][] = [['picture', 'The picture is wrong or cut off'], ['answer', 'The answer looks wrong'],
@@ -720,7 +720,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const temptingHtml = (q: Q, k: number | null) => {
     const why = k != null && k >= 0 ? q.explain[k] : null;
     const label = isPpId(q.id) ? "doesn't fit" : 'is tempting'; // a past-paper reason says why the option is wrong
-    return (why?.why ? `<p class="mistake"><strong>Why ${optionLabel(q, k!)} ${label}:</strong> ${fmt(why.why, q.options[q.answer])}</p>` : '')
+    return (why?.why ? `<p class="mistake"><strong>Why ${optionLabel(q, k!)} ${label}:</strong> ${fmt(why.why, isPpId(q.id) ? undefined : q.options[q.answer])}</p>` : '')
       + glossHtml(q, k);
   };
   // the Chinese word list (CC-CEDICT, /zh-gloss.json): fetched once, when the first Chinese question is shown
