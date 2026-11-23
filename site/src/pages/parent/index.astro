@@ -80,6 +80,7 @@ const data = {
         <select id="kid-who"></select></p>
       <section class="panel" aria-labelledby="h-mast"><h2 id="h-mast">Subjects</h2>
         <p class="note">Tap a subject for its topics and every question tried. Tap the wrong count to review those questions, put one back for a retest now, or send up to 10 as a revision test. A tier clears when every question in it is mastered (right first time, or right after its 1, 3 and 7 day retests).</p>
+        <p class="note" id="counts-note"></p>
         <div id="mastery"></div></section>
       <section class="panel" aria-labelledby="h-sum"><h2 id="h-sum">Summary</h2><div id="summary" class="stats"></div></section>
       <section class="panel" aria-labelledby="h-days"><h2 id="h-days">Last 14 days</h2><div id="days" class="scroll"></div></section>
@@ -900,11 +901,13 @@ const data = {
   // active past-paper questions each sub-topic has and puts that in place of the build's past-paper part (a pool sub-topic
   // counts its past papers only, a merged one its generated questions plus its past papers). Numbers only; on any failure
   // the build's counts stay.
-  let countsSettled = false;
+  let countsSettled = false, countsLive: Date | null = null;
   async function liveCounts(): Promise<boolean> {
     try {
       const r = await supabase.rpc('pp_counts');
       if (r.error || !Array.isArray(r.data)) return false;
+      if (countsSettled) return false; // too late: the page has drawn with the build's counts
+      countsLive = new Date();
       const live = new Map<string, number>();
       // only rows of the sub-topic's own subject count: pp_pool serves a sub-topic from its subject only
       for (const x of r.data as { subject: string; subtopic: string; n: number }[])
@@ -915,7 +918,6 @@ const data = {
         if (sub.mode !== 'pool' && sub.mode !== 'merge') continue;
         const n = live.get(sub.id) ?? 0;
         const avail = sub.mode === 'pool' ? n : Math.max(0, sub.avail - sub.pp) + n;
-        if (countsSettled) return false; // too late: the page has drawn with the build's counts
         if (avail !== sub.avail) { sub.avail = avail; sub.pp = n; changed = true; }
       }
       return changed;
@@ -931,6 +933,9 @@ const data = {
     // view the grown-up already opened or shows this device's save while a child's is loading
     await Promise.race([liveCounts(), new Promise((r) => setTimeout(r, 2500))]);
     countsSettled = true;
+    $('counts-note').textContent = countsLive
+      ? `Questions on the site: live count at ${countsLive.toLocaleString([], { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}. Tried and wrong come from the progress picked above.`
+      : 'Questions on the site: counts from the last site update (the live count did not answer).';
     // the page is gated (Base.astro): an admin at aal2, or a parent (aal2 once they enrolled an authenticator)
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';
