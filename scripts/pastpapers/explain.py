@@ -27,9 +27,12 @@ import sys
 from pathlib import Path
 
 TMP = Path("/data/alvin/tmp/cookie-codex")
-WORK = TMP / "explain"
+WORK = Path(os.environ.get("PP_WORK", str(TMP / "explain")))  # the server sets its own folder
 SELS = [TMP / "ppimport/eng1826d/english"]
-SUBS = {"english": {"eng-grammar-mcq", "eng-vocab-mcq"}}
+# Chinese (owner, 24 Nov 2026: option B, Qwen writes and InternLM checks): the single-question sections
+SELS_ZH = [TMP / "ppimport/chi1826e/chinese"]
+SUBS = {"english": {"eng-grammar-mcq", "eng-vocab-mcq"},
+        "chinese": {"chi-pinyin-sound", "chi-zixing-form", "chi-ciyu-choose", "chi-ciyu-idiom", "chi-juzi-choose", "chi-juzi-guanlian"}}
 LLM = os.environ.get("PP_LLM", "Qwen/Qwen2.5-72B-Instruct-AWQ")
 JUDGE = os.environ.get("PP_JUDGE", "hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4")
 SYS = ("You are a kind, precise Singapore primary school English teacher. You explain PSLE English MCQ answers to a "
@@ -44,6 +47,15 @@ REVISE = ("Question: {stem}\nOptions:\n{opts}\nThe correct answer (already confi
           "If the objection is right, fix the explanation; if it is wrong, keep what was right but make the wording "
           "clearer. Keep it short and simple for a 12-year-old, quote the words, never say another option could also be "
           "right. Reply with JSON only: {{\"right\": \"...\", \"wrong\": {{\"<option number>\": \"...\"}}}}")
+SYS_ZH = "你是一位亲切、严谨的新加坡小学华文老师，为12岁的学生解释小六华文选择题的答案。"
+WRITE_ZH = ("题目：{stem}\n选项：\n{opts}\n正确答案是（{k}）{ans}。\n\n"
+            "先用一两句简单的中文说明为什么（{k}）是对的：说明词语的意思、用法或搭配，或者字音、字形的分别；后面用括号加一句英文翻译。"
+            "然后为每个其他选项写一句话，说明它为什么不对（中文，后面用括号加简短英文）。不要说别的选项也可以。\n"
+            "只回复JSON：{{\"right\": \"中文说明（English: ...）\", \"wrong\": {{\"<选项号>\": \"...\"}}}}")
+CHECK_ZH = ("题目：{stem}\n选项：\n{opts}\n正确答案（已确认）是（{k}）{ans}。\n老师为12岁学生写的解释：\n为什么（{k}）对：{right}\n{wrongs}\n\n"
+            "这个解释里的每一句都正确吗？它是否支持（{k}），而没有暗示别的选项也对？"
+            "只回复JSON：{{\"ok\": true 或 false, \"problem\": \"...\"}}")
+JUDGE_ZH = os.environ.get("PP_JUDGE_ZH", "internlm/internlm2_5-20b-chat")
 CHECK = ("Question: {stem}\nOptions:\n{opts}\nThe correct answer (already confirmed) is ({k}) {ans}.\n"
          "A teacher wrote this explanation for a 12-year-old:\nWhy ({k}) is right: {right}\n{wrongs}\n\n"
          "Is every statement in the explanation true English grammar or meaning, and does it support ({k}) without "
@@ -108,7 +120,7 @@ def pack(sels):
 def llm(model):
     from vllm import LLM, SamplingParams
     return LLM(model=model, tensor_parallel_size=int(os.environ.get("PP_TP", "4")), gpu_memory_utilization=0.9,
-               max_model_len=4096, enforce_eager=bool(os.environ.get("PP_EAGER"))), SamplingParams(temperature=0, max_tokens=500)
+               max_model_len=4096, enforce_eager=bool(os.environ.get("PP_EAGER")), trust_remote_code=True), SamplingParams(temperature=0, max_tokens=500)
 
 
 def run(items_file, phase):
@@ -136,22 +148,24 @@ def run(items_file, phase):
     print(len(todo), "to", phase, flush=True)
     if not todo:
         return
-    model, sp = llm(JUDGE if phase in ("judge", "judge2") else LLM)
+    zh = bool(items) and items[0].get("subject") == "chinese"
+    model, sp = llm((JUDGE_ZH if zh else JUDGE) if phase in ("judge", "judge2") else LLM)
+    sys_p, write_p, check_p = (SYS_ZH, WRITE_ZH, CHECK_ZH) if zh else (SYS, WRITE, CHECK)
     with open(out, "a", encoding="utf-8") as f:
         for i in range(0, len(todo), 64):
             ch, msgs = todo[i:i + 64], []
             for r in ch:
                 k, o = r["answer"], r["options"]
                 if phase == "write":
-                    p = WRITE.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k])
+                    p = write_p.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k])
                 elif phase == "revise":
                     s = src[key(r)]
                     p = REVISE.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], old=say(s["explain"]), problem=s["problem"])
                 else:
                     e = src[key(r)]["explain"]
-                    wr = "\n".join(f"Why ({j + 1}) does not fit: {w}" for j, w in enumerate(e["wrong"]) if w)
-                    p = CHECK.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], right=e["right"], wrongs=wr)
-                msgs.append([{"role": "system", "content": SYS}, {"role": "user", "content": p}])
+                    wr = "\n".join(f"{'为什么（' + str(j + 1) + '）不对' if zh else 'Why (' + str(j + 1) + ') does not fit'}: {w}" for j, w in enumerate(e["wrong"]) if w)
+                    p = check_p.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], right=e["right"], wrongs=wr)
+                msgs.append([{"role": "system", "content": sys_p}, {"role": "user", "content": p}])
             for r, res in zip(ch, model.chat(msgs, sp, use_tqdm=False)):
                 raw = res.outputs[0].text
                 if phase in ("write", "revise"):
@@ -173,7 +187,9 @@ def calib():
     the reason for a wrong option (its words put where the answer's were)."""
     items = {r["id"]: r for r in jl(WORK / "items.jsonl")}
     wr = {r["id"]: r["explain"] for r in jl(WORK / "written.jsonl") if r.get("explain")}
-    ok = [r["id"] for r in jl(WORK / "judged.jsonl") if r["ok"] and r["id"] in wr and r["id"] in items]
+    judged = jl(WORK / "judged.jsonl")
+    pool = [r["id"] for r in judged if r["ok"]] if judged else list(wr)  # no judge yet: the written ones (only the planted catch rate counts)
+    ok = [i for i in pool if i in wr and i in items]
     rng = random.Random(11)
     pick = rng.sample(ok, min(120, len(ok)))
     good, plant = pick[:60], pick[60:]
@@ -185,7 +201,8 @@ def calib():
             e = dict(e, right=other["right"])
         else:  # argue for a wrong option: its words where the answer's were
             wrong = next(j for j in range(len(it["options"])) if j != it["answer"])
-            e = dict(e, right=e["right"].replace(it["options"][it["answer"]], it["options"][wrong]) + f" So the answer is ({wrong + 1}).")
+            tail = f"所以答案是（{wrong + 1}）。" if it.get("subject") == "chinese" else f" So the answer is ({wrong + 1})."
+            e = dict(e, right=e["right"].replace(it["options"][it["answer"]], it["options"][wrong]) + tail)
         out.append(dict(it, id=f"plant-{i}", explain=e, planted=True))
     (WORK / "calib.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in out))
     print(f"{len(out)} calibration rows -> {WORK / 'calib.jsonl'}")
@@ -341,7 +358,7 @@ def selftest():
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "pack":
-        pack([Path(s) for s in sys.argv[2:]] or SELS)
+        pack([Path(s) for s in sys.argv[2:] if s != "--zh"] or (SELS_ZH if "--zh" in sys.argv else SELS))
     elif cmd in ("write", "judge", "revise", "judge2"):
         run(sys.argv[2], cmd)
     elif cmd == "apply-opus":
