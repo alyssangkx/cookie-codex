@@ -49,7 +49,7 @@ const schools = SCHOOLS.map((s) => {
   // counts states an older tab or build parked too (reviewDueCount): only Daily Review can re-check them
   const due = reviewDueCount(s, Date.now(), document.querySelector<HTMLElement>('.train-hub')!.dataset.banks);
   const review = document.getElementById('review') as HTMLAnchorElement;
-  const rev = revisionDue(s).length; // a revision test from the parent goes first (the quiz page asks it on its own)
+  const rev = revisionDue(s, Date.now(), document.querySelector<HTMLElement>('.train-hub')!.dataset.banks).length; // a revision test from the parent goes first (the quiz page asks it on its own)
   if (due && !dayBlock(s, 'review')) { review.hidden = false; review.textContent = rev ? `Revision test from your parent (${rev})` : 'Daily Review'; } // the exact count (bank ids only) is on each school page and the quiz start screen
   const doneEl = document.getElementById('done')!;
   const reason = dayBlock(s, 'tier');

@@ -393,7 +393,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       } else {
         // a passage's due blanks are asked together in passage order; its other blanks show their answer (clozeStem)
         // a revision test the parent sent is asked on its own first, while any of it is still due
-        const have = new Set(all.map((q) => q.id)), rev = revisionDue(cur).filter((id) => have.has(id));
+        const have = new Set(all.map((q) => q.id)), rev = revisionDue(cur, Date.now(), meta.banks).filter((id) => have.has(id));
         quiz = reviewPassages(rev.length ? rev : pickReview(all.map((q) => q.id), cur.questions), passage);
         if (rev.length) $('title').textContent = 'Revision test';
         if (!quiz.length) return stop('Nothing to review today. Great work!');

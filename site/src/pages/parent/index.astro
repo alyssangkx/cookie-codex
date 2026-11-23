@@ -220,7 +220,7 @@ const data = {
   import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, tierState, liveMastered, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { PP_ENABLED, isPpId } from '../../lib/pastpaper';
+  import { ppMode, isPpId } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; school: string; topic: string; file: string | null; count: Record<Tier, number>;
@@ -427,10 +427,10 @@ const data = {
   // retest at once or send up to 10 as a revision test (the child's next Daily Review asks them first).
   let dash: { qs: Map<string, BQ>; tried: Map<string, [BQ, QState][]> } | null = null;
   let detail: { kind: 'topics' | 'wrong'; school: string } | null = null;
-  // a question the child's quizzes can ask: past-paper ones while serving is on; generated ones unless their sub-topic now
-  // asks its past-paper pool only (the quiz drops those, and Daily Review sets their retests aside)
-  const poolSub = new Set(P.subs.filter((x) => x.pool).map((x) => x.id));
-  const askable = (bq: BQ) => (isPpId(bq.id) ? PP_ENABLED : !(PP_ENABLED && poolSub.has(bq.sub)));
+  // a question Daily Review can ask (that is where Retest now and the revision test land): every generated question in the
+  // banks (Daily Review merges a pool sub-topic's generated items back in); a past-paper one only while its sub-topic's
+  // past-paper switch is on (Daily Review fetches only switched sub-topics)
+  const askable = (bq: BQ) => !isPpId(bq.id) || ppMode(bq.sub) !== null;
   const subjectTried = (school: string) => P.subs.filter((x) => x.school === school).flatMap((x) => dash?.tried.get(x.id) ?? []);
   async function renderTopics(my = viewSeq) {
     $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
@@ -847,7 +847,7 @@ const data = {
     const live = kids.filter((k) => !k.deleted_at);
     $('bak-panel').hidden = true; // the save code is the child's device's own backup
     $('content').hidden = !live.length;
-    if (!live.length) { child = null; return; }
+    if (!live.length) { child = null; $('who-note').textContent = 'Signed in as the parent. Add a child under Family and accounts to see their progress here.'; return; }
     const sel = $<HTMLSelectElement>('kid-who'), keep = live.some((k) => k.id === child?.id) ? child!.id : live[0].id;
     sel.innerHTML = live.map((k) => `<option value="${esc(k.id)}"${k.id === keep ? ' selected' : ''}>${esc(k.name)}</option>`).join('');
     $('kid-pick').hidden = false;
@@ -874,7 +874,7 @@ const data = {
     const isParent = roleOf(data.session) === 'parent';
     isParentView = isParent;
     if (!isParent) { $('tab-fam').hidden = true; $('tab-admin').hidden = false; }
-    else $('who-note').textContent = 'Signed in as the parent.';
+    else $('who-note').textContent = 'Signed in as the parent. This page shows your children\'s progress as saved on the server.';
     if (isParent) {
       try { await initFamily(); } catch (e) { famFail(e); $('family').hidden = false; }
       if (me?.deleted_at) return;
