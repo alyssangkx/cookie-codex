@@ -16,6 +16,11 @@
   repair.py apply RESULTS [--second RESULTS2] [--stems-only]
                                 dev: cut the new crops into <year>/recrop/ (only after the gate; only on the question's
                                 first page), write <year>/stemfix.jsonl (only stems two independent reads mark alike)
+  repair.py audit-pack [SEL ...] dev: every selected question with a picture (its crop box from questions.jsonl) ->
+                                repair/audit/items.jsonl; run it like the repair items (results in repair/audit/)
+  repair.py audit-report RESULTS dev: model box against each crop: crops that miss part of the model's picture, crops much
+                                bigger than it (extra text, another question), pages where the model sees no picture;
+                                draws a sample of each on its page (repair/audit/look/) for a person to judge
   repair.py selftest
 load_pp select reads recrop/*.png like crops/*.png and stemfix.jsonl as the stem. Prints counts only."""
 import json
@@ -29,7 +34,9 @@ from pathlib import Path
 TMP = Path("/data/alvin/tmp/cookie-codex")
 DEV_PP = TMP / "pastpapers"
 WORK = TMP / "repair"
-SELS = [TMP / "ppimport" / s for s in ("math1826g/maths", "sci1826e/science", "eng1826c/english", "chi1826d/chinese")]
+SELS = [TMP / "ppimport" / s for s in ("math1826g/maths", "sci1826f/science", "eng1826c/english", "chi1826d/chinese")]
+AUDIT = WORK / "audit"
+MISS, EXTRA = 0.15, 0.5  # flag a crop leaving out 15% of the model's box, or one whose area is half outside it
 CROP_REASONS = ("needs-figure-no-crop", "crop-other-page")
 STEM_REASON = "chi-no-blank-underline-lost"
 GATE_N, GATE_BAR, IOU_MIN, COVER_MIN = 80, 0.90, 0.5, 0.9  # a gate box counts when IoU >= 0.5 and it covers 90% of the known box
@@ -204,6 +211,92 @@ def run(items_file):
             print(f"{min(i + 32, len(todo))}/{len(todo)}", flush=True)
 
 
+def audit_pack(sels):
+    AUDIT.mkdir(parents=True, exist_ok=True)
+    if list(AUDIT.glob("results*.jsonl")):
+        sys.exit(f"{AUDIT} holds results of an earlier audit: move them aside first")
+    items = []
+    for sel in sels:
+        subject = sel.name
+        for r in jl(sel / "selected.jsonl"):
+            if not r.get("crops"):
+                continue
+            items.append({"id": r["src_id"], "pp_id": r["id"], "subject": subject, "year": r["year"], "crops": r["crops"]})
+    # questions.jsonl is read once per (subject, year)
+    boxes = {}
+    for s, y in {(i["subject"], i["year"]) for i in items}:
+        for q in jl(DEV_PP / s / str(y) / "questions.jsonl"):
+            for f in q.get("figures") or []:
+                if isinstance(f, dict) and f.get("bbox"):
+                    boxes[(q["id"], f.get("page"))] = f["bbox"]
+    merged = {}
+    for s, y in {(i["subject"], i["year"]) for i in items}:
+        for q in jl(DEV_PP / s / str(y) / "merged.jsonl"):
+            merged[q["id"]] = q
+    out = []
+    for i in items:
+        q = merged.get(i["id"]) or {}
+        for c in i["crops"]:
+            m = re.search(r"-p(\d+)\.png$", c)
+            page = int(m.group(1)) if m else None
+            if page is None or (i["id"], page) not in boxes:
+                continue  # a recrop or a crop with no recorded box: nothing to compare
+            out.append({"id": i["id"], "pp_id": i["pp_id"], "subject": i["subject"], "year": i["year"], "qno": q.get("qno"),
+                        "pages": [page], "start": (q.get("text") or "")[:120], "job": "crop",
+                        "audit": {"page": page, "bbox": boxes[(i["id"], page)]}})
+    (AUDIT / "items.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in out))
+    c = {}
+    for r in out:
+        c[r["subject"]] = c.get(r["subject"], 0) + 1
+    print(f"{len(out)} crops to audit {c} -> {AUDIT / 'items.jsonl'}")
+
+
+def audit_flags(model_box, live_box):
+    """Flags for one crop against the model's box (both in page pixels; model_box None = the model saw no picture)."""
+    if not model_box:
+        return ["model-sees-no-picture"]
+    flags = []
+    if 1 - iou_cover(live_box, model_box)[1] > MISS:
+        flags.append("crop-misses-part")  # part of the model's picture lies outside the crop
+    if 1 - iou_cover(model_box, live_box)[1] > EXTRA:
+        flags.append("crop-much-bigger")  # most of the crop lies outside the model's picture: text, options, another question
+    return flags or ["agree"]
+
+
+def audit_report(results, per=6):
+    from PIL import Image, ImageDraw
+    rows, by = jl(results), {}
+    look = Path(results).with_name("look")
+    look.mkdir(exist_ok=True)
+    report = []
+    for r in rows:
+        if not page_path(r["subject"], r["year"], r["page"]).exists():
+            continue
+        b = (parse(r["raw"]) or {}).get("bbox_2d")
+        mb = to_page(b, r) if box_ok(b, r["w"], r["h"]) else None
+        k = r["audit"]["bbox"]
+        if (k[2] - k[0]) * (k[3] - k[1]) <= 0:
+            continue
+        fl = audit_flags(mb, k)
+        report.append({"id": r["id"], "pp_id": r.get("pp_id"), "subject": r["subject"], "year": r["year"], "page": r["page"],
+                       "flags": fl, "model": mb, "crop": k})
+        for f in fl:
+            by.setdefault((r["subject"], f), []).append(report[-1])
+    (Path(results).with_name("report.jsonl")).write_text("".join(json.dumps(x) + "\n" for x in report))
+    rng = random.Random(31)
+    for (s, f), xs in sorted(by.items()):
+        print(f"{s:8} {f:22} {len(xs):5}")
+        for x in rng.sample(xs, min(per, len(xs))):
+            im = Image.open(page_path(x["subject"], x["year"], x["page"])).convert("RGB")
+            d = ImageDraw.Draw(im)
+            d.rectangle(x["crop"], outline=(0, 160, 0), width=10)  # green: the crop
+            if x["model"]:
+                d.rectangle(x["model"], outline=(220, 0, 0), width=10)  # red: the model's box
+            im.thumbnail((900, 1300))
+            im.save(look / f"{s}-{f}-{x['pp_id']}.jpg", quality=70)
+    print(f"{len(report)} crops compared; samples in {look} (green = crop, red = model)")
+
+
 def page_path(subject, year, page):
     return DEV_PP / subject / str(year) / "pages" / f"p{page:04d}.jpg"
 
@@ -337,6 +430,10 @@ def selftest():
     assert unline("句中划线部分") == "句中「」里的部分"
     assert unline("下面句子中画线的词语是什么意思？工人在「规划」线路。") == "下面句子中「」里的词语是什么意思？工人在「规划」线路。"
     assert first_stem("阅读短文(1)，回答问题。他很认真。\n(1) 仔细") == "阅读短文(1)，回答问题。他很认真。"
+    assert audit_flags(None, [0, 0, 10, 10]) == ["model-sees-no-picture"]
+    assert audit_flags([0, 0, 10, 10], [0, 0, 10, 10]) == ["agree"]
+    assert audit_flags([0, 0, 10, 20], [0, 0, 10, 10]) == ["crop-misses-part"]  # the crop has only half the picture
+    assert audit_flags([0, 0, 10, 10], [0, 0, 10, 40]) == ["crop-much-bigger"]
     g = lambda raw, gt, w=1000, h=1000: {"raw": raw, "gate": gt, "w": w, "h": h, "subject": "x", "year": 0, "page": 1}
     assert gate_score([g('{"none": true}', {"none": True}), g('{"bbox_2d": [10, 10, 400, 300]}', {"none": True}),
                        g('{"none": true}', {"bbox": [0, 0, 0, 5]})]) == (0, 0, 1, 2), "a degenerate known box is skipped, a box on a text-only page counts against"
@@ -354,6 +451,10 @@ if __name__ == "__main__":
     elif cmd == "apply":
         sec = sys.argv[sys.argv.index("--second") + 1] if "--second" in sys.argv else None
         apply(sys.argv[2], sec, "--stems-only" in sys.argv)
+    elif cmd == "audit-pack":
+        audit_pack([Path(s) for s in sys.argv[2:]] or SELS)
+    elif cmd == "audit-report":
+        audit_report(sys.argv[2])
     elif cmd == "selftest":
         selftest()
     else:
