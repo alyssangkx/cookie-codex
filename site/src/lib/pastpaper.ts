@@ -93,15 +93,15 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million': 'pool', // 107
   'math-area-and-volume-area-and-perimeter': 'pool', // 26 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'math-area-and-volume-area-of-triangle': 'pool', // 26 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'math-decimals-four-operations-with-decimals': 'merge', // 16
-  'math-fractions-addition-and-subtraction-of-fractions': 'merge', // 14
-  'math-fractions-fraction-and-division': 'merge', // 1
-  'math-fractions-mixed-numbers-and-improper-fractions': 'merge', // 14
+  'math-decimals-four-operations-with-decimals': 'pool', // 21 with the Claude+Perplexity no-key keys (23 Nov 2026)
+  'math-fractions-addition-and-subtraction-of-fractions': 'pool', // 25 with the Claude+Perplexity no-key keys (23 Nov 2026)
+  'math-fractions-fraction-and-division': 'merge', // 2
+  'math-fractions-mixed-numbers-and-improper-fractions': 'pool', // 21 with the Claude+Perplexity no-key keys (23 Nov 2026)
   'math-geometry-2d-shapes': 'pool', // 20 after the unsure-key confirms (23 Nov 2026)
-  'math-geometry-3d-shapes-and-nets': 'merge', // 11
-  'math-geometry-line-symmetry': 'merge', // 12
+  'math-geometry-3d-shapes-and-nets': 'merge', // 17
+  'math-geometry-line-symmetry': 'merge', // 17
   'math-geometry-perpendicular-and-parallel-lines': 'pool', // 25 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'math-geometry-rectangle-and-square': 'merge', // 2
+  'math-geometry-rectangle-and-square': 'merge', // 3
   'math-geometry-triangles-parallelogram-rhombus-and-trapezium': 'pool', // 31 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
 };
 
