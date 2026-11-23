@@ -1011,6 +1011,7 @@ def dedupe(rows, max_bits=6):
     kept is the earliest (year, source id), so a re-run keeps the same one."""
     groups = collections.defaultdict(list)
     for r in rows:
+        r["repeat"] = 1  # one paper unless a copy is found below
         if r.get("grp"):
             continue
         # the options in any order (a second paper may list them differently); the key is compared by its text below
@@ -1029,8 +1030,10 @@ def dedupe(rows, max_bits=6):
                 same_key = dup_text(r["options"][r["answer"]]) == dup_text(k["options"][k["answer"]])
                 if same_pics and same_key:
                     drop[r["id"]] = k["id"]
+                    k["repeat"] = k.get("repeat", 1) + 1  # how many papers set this question (owner: test these first)
                     break
             else:
+                r["repeat"] = 1
                 kept.append((r, hs))
     return [r for r in rows if r["id"] not in drop], [(r, drop[r["id"]]) for r in rows if r["id"] in drop]
 
@@ -1133,6 +1136,10 @@ def selftest():
     assert [x["id"] for x in _k] == ["a", "c"] and [(x["id"], k) for x, k in _d] == [("b", "a")], "same wording: one copy, the earliest kept"
     assert len(dedupe([_r("a", 2023, "Q"), _r("b", 2023, "Q", ans=2)])[0]) == 2, "a different key is a different question"
     assert len(dedupe([_r("a", 2023, "Q", grp="s1"), _r("b", 2023, "Q", grp="s2")])[0]) == 2, "passage sets are never merged"
+    _k3, _ = dedupe([_r("a", 2023, "R"), _r("b", 2024, "R"), _r("c", 2025, "R"), _r("d", 2025, "S")])
+    assert {x["id"]: x["repeat"] for x in _k3} == {"a": 3, "d": 1}, "the copy kept counts the papers that set it"
+    _o3 = easier_first([{"id": "x", "subtopic": "s", "level": "basic", "qno": 1, "repeat": 1}, {"id": "y", "subtopic": "s", "level": "competent", "qno": 30, "repeat": 3}])
+    assert _o3 == {"y": 1, "x": 2}, "a question more schools set is served first"
     _o = _r("b", 2024, "奶奶戴了一条（ ）链。", ans=0); _o["options"] = ["项", "相", "向", "像"]
     assert len(dedupe([_r("a", 2023, "奶奶戴了一条____链。", ans=3), _o])[0]) == 1, "another blank style and option order: still one question"
     assert len(dedupe([_r("a", 2023, "Q", crops=["/nonexistent.png"]), _r("b", 2023, "Q", crops=["/nonexistent.png"])])[0]) == 2, "unreadable pictures are not called the same"
@@ -1463,14 +1470,16 @@ def counts(a):
 
 
 def easier_first(rows):
-    """{pp id: rank} inside each sub-topic for pp_items.ord (migration 006, ADR 0011): the tagger's difficulty, then the
-    paper position (the level the position rule gave, then the question number), then the id. 1 = served first."""
+    """{pp id: rank} inside each sub-topic for pp_items.ord (migration 006, ADR 0011): first the questions more schools
+    set (`repeat`, the number of papers a question appears in, from dedupe; owner, 23 Nov 2026: test these first), then
+    the tagger's difficulty, then the paper position (the level the position rule gave, then the question number), then
+    the id. 1 = served first."""
     lv = {"basic": 0, "intermediate": 1, "competent": 2}
     out, by = {}, collections.defaultdict(list)
     for r in rows:
         by[r["subtopic"]].append(r)
     for rs in by.values():
-        rs.sort(key=lambda r: (r.get("difficulty") if isinstance(r.get("difficulty"), int) else 2, lv.get(r.get("level"), 1),
+        rs.sort(key=lambda r: (-(r.get("repeat") or 1), r.get("difficulty") if isinstance(r.get("difficulty"), int) else 2, lv.get(r.get("level"), 1),
                                r.get("qno") if isinstance(r.get("qno"), int) else 99, r["id"]))
         out.update({r["id"]: i for i, r in enumerate(rs, 1)})
     return out
