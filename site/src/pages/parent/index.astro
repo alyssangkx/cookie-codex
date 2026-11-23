@@ -1,14 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { subs as allSubs, hasContent, cookieBySlug, MIN_POOL, SCHOOLS, banksHash, listGroup } from '../../lib/train';
+import { subs as allSubs, hasContent, cookieBySlug, SCHOOLS, banksHash, listGroup } from '../../lib/train';
 
 const data = {
   total: cookieBySlug.size,
-  min: MIN_POOL,
   // every subject's sub-topics in the order the training pages show them, with how many questions each has (a past-paper
   // pool counts all its questions); the question lists look questions up in the bank files
-  subs: allSubs.map((s) => ({ id: s.id, name: s.name, school: s.school, topic: listGroup(s).topicName, file: s.file, count: s.count,
-    hash: s.hash, content: hasContent(s), pool: !!s.pool, avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c })),
+  subs: allSubs.map((s) => ({ id: s.id, name: s.name, school: s.school, topic: listGroup(s).topicName, file: s.file,
+    content: hasContent(s), avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
   cards: Object.fromEntries([...cookieBySlug].map(([slug, c]) => [slug, c.name])), // card names for the Crumbs ledger
   banks: banksHash, // the retest queue hides only states parked by these banks (store.ts inReview), as the child's gates do
@@ -158,12 +157,6 @@ const data = {
   .parent-page .sub { padding: 0.5rem 0; border-top: 1px solid var(--crust); }
   .parent-page .sub.off { opacity: 0.55; }
   .parent-page .sub .nm { font-weight: 600; }
-  .parent-page .tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin-top: 0.3rem; }
-  .parent-page .cell { border: 1.5px solid var(--crust); border-radius: 8px; padding: 0.3rem 0.4rem; font-size: 0.85rem; line-height: 1.3; background: var(--cream); }
-  .parent-page .cell small { display: block; color: var(--cocoa-soft); }
-  .parent-page .cell.done { border-color: #1f6b3a; background: #e7f3ea; }
-  .parent-page .cell.prog { border-color: var(--r-ancient); background: #fbf0d4; }
-  .parent-page .cell.none { border-style: dashed; color: var(--cocoa-soft); }
   .parent-page ol.list { padding-left: 1.2rem; margin: 0; }
   .parent-page ol.list li { margin-bottom: 0.7rem; }
   .parent-page .meta { display: block; color: var(--cocoa-soft); font-size: 0.88rem; }
@@ -223,14 +216,13 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, TIER_NAME, TIERS, LEFT_BLANK, inReview } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { ppMode, isPpId } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
-  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; count: Record<Tier, number>;
-    hash: Record<Tier, string | undefined>; content: boolean; pool: boolean; avail: number }
+  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
     { total: number; min: number; subs: PSub[]; schools: { id: string; name: string }[]; cards: Record<string, string>; banks: string };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -456,7 +448,8 @@ const data = {
     $('mastery').innerHTML = html + '</div><div id="dash-detail"></div>';
     renderDetail();
   }
-  function renderDetail() {
+  let dashMsg = ''; // the last Retest / revision status, kept across the re-render a save causes
+  function renderDetail(scroll = false) {
     const box = document.getElementById('dash-detail');
     if (!box || !dash || !detail) { if (box) box.innerHTML = ''; return; }
     const school = P.schools.find((x) => x.id === detail!.school)!, now = Date.now();
@@ -475,14 +468,16 @@ const data = {
       for (const sub of [...byTopic.values()].flat()) {
         if (sub.topic !== topic) { if (open) html += '</div>'; topic = sub.topic; html += `<h3 class="wq-sub">${esc(topic)}</h3><div class="tq-grid">`; open = true; }
         const l = dash.tried.get(sub.id) ?? [], wrong = l.filter(([, q]) => q.w > 0), after = l.filter(([, q]) => q.s === 0 && q.w > 0).length;
-        const queue = can ? wrong.filter(([bq, q]) => askable(bq) && !(q.s > 0 && q.due <= now)).map(([bq]) => bq.id) : [];
+        // still wrong (s > 0) and not already due; a question mastered since is not un-mastered by this button
+        const queue = can ? wrong.filter(([bq, q]) => askable(bq) && q.s > 0 && q.due > now).map(([bq]) => bq.id) : [];
+        const scale = Math.max(sub.avail, l.length, 1); // a pool sub-topic's generated retests can outnumber its pool
         // ponytail: square-root scale so 3 tried of 300 still shows; the exact numbers are on the card's second line
-        const bar = (v: number, cls: string, y: number) => `<rect class="${cls}" x="0" y="${y}" height="4" rx="1" width="${v ? Math.max(3, Math.round(88 * Math.sqrt(v / Math.max(sub.avail, 1)))) : 0}"></rect>`;
+        const bar = (v: number, cls: string, y: number) => `<rect class="${cls}" x="0" y="${y}" height="4" rx="1" width="${v ? Math.max(3, Math.round(88 * Math.sqrt(v / scale))) : 0}"></rect>`;
         const nums = `${sub.avail.toLocaleString()} questions, ${l.length} tried, ${wrong.length} wrong, ${after} right after retest`;
         html += `<div class="tq-card${sub.content ? '' : ' off'}"><div class="tq-main"><span class="nm" title="${esc(sub.name)}">${esc(sub.name)}</span>`
           + `<span class="tq-n">${sub.content ? `${sub.avail.toLocaleString()} q · ${l.length} tried · ${wrong.length} wrong · ${after} after retest` : 'Coming soon'}</span></div>`
           + (sub.content ? `<svg class="tq-bars" viewBox="0 0 88 22" role="img" aria-label="${esc(nums)}"><title>${esc(nums)}</title>${bar(sub.avail, 'all', 0)}${bar(l.length, 'tried', 6)}${bar(wrong.length, 'bad', 12)}${bar(after, 'mid', 18)}</svg>` : '')
-          + (queue.length ? `<button type="button" class="btn small" data-act="requeue" data-ids="${esc(queue.join(' '))}" aria-label="Retest the ${queue.length} wrong questions of ${esc(sub.name)} now">Retest ${queue.length}</button>` : '')
+          + (queue.length ? `<button type="button" class="btn small" data-act="requeue" data-ids="${esc(queue.join(' '))}" aria-label="Retest the ${queue.length} still-wrong questions of ${esc(sub.name)} now" data-name="${esc(sub.name)}">Retest ${queue.length}</button>` : '')
           + '</div>';
       }
       box.innerHTML = html + (open ? '</div>' : '');
@@ -500,7 +495,9 @@ const data = {
         + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>'
         + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && askable(bq) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
     }
-    box.scrollIntoView({ block: 'start' });
+    const m = document.getElementById('dash-msg');
+    if (m) m.textContent = dashMsg;
+    if (scroll) box.scrollIntoView({ block: 'start' });
   }
   /** Make questions due now in the child's save (a mastered one comes back as a retest); `revision` also marks them as the
    *  revision test. Written through pushChild (rev check; never the admin's view). */
@@ -511,10 +508,11 @@ const data = {
       for (const id of ids) { const q = x.questions[id]; if (!q) continue; q.s = q.s > 0 ? q.s : 3; q.due = now; delete q.parked; }
       if (revision) x.revision = { ids: ids.filter((id) => x.questions[id]), ts: now };
     });
-    const msg = document.getElementById('dash-msg');
-    if (msg) msg.textContent = !ok ? "Couldn't save that. Reload the page and try again."
+    dashMsg = !ok ? "Couldn't save that. Reload the page and try again."
       : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.`
       : `Done: ${ids.length === 1 ? 'it comes' : `${ids.length} questions come`} up in the next Daily Review.`;
+    const msg = document.getElementById('dash-msg');
+    if (msg) msg.textContent = dashMsg;
   }
   // the exam-page pictures are signed for an hour: redraw the dashboard (and this device's mistakes list) before they lapse
   setInterval(() => { viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
@@ -522,10 +520,13 @@ const data = {
     const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act]');
     if (!b) return;
     const act = b.dataset.act!;
-    if (act === 'topics' || act === 'wrong') { detail = { kind: act, school: b.dataset.school! }; renderDetail(); }
-    else if (act === 'close') { detail = null; renderDetail(); $('h-mast').scrollIntoView(); }
+    if (act === 'topics' || act === 'wrong') { detail = { kind: act, school: b.dataset.school! }; dashMsg = ''; renderDetail(true); }
+    else if (act === 'close') { detail = null; dashMsg = ''; renderDetail(); $('h-mast').scrollIntoView(); }
     else if (act === 'recycle') void makeDue([b.dataset.id!], false);
-    else if (act === 'requeue') void makeDue(b.dataset.ids!.split(' '), false);
+    else if (act === 'requeue') {
+      const ids = b.dataset.ids!.split(' ');
+      if (confirm(`Put the ${ids.length} still-wrong question${ids.length === 1 ? '' : 's'} of ${b.dataset.name} into the next Daily Review now?`)) void makeDue(ids, false);
+    }
     else if (act === 'revise') {
       const ids = b.dataset.ids!.split(' ');
       if (confirm(`Send these ${ids.length} questions as a revision test? They become due now and are asked first in the next Daily Review.`)) void makeDue(ids, true);

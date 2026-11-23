@@ -30,6 +30,12 @@ def main():
     banks = glob.glob(str(SITE / 'dist/data/quiz/*.json'))
     if not banks:
         raise SystemExit('no built banks: run `npm run build` in site/ first')
+    # the built banks must be newer than their sources and the past-paper counts, or the audit mixes old and new numbers
+    built = min(Path(f).stat().st_mtime for f in banks)
+    src = [Path(f) for f in glob.glob(str(SITE / 'src/data/quiz/**/*.json'), recursive=True)] + [SITE / 'src/data/pp_counts.json', SITE / 'src/lib/pastpaper.ts']
+    stale = [str(f.relative_to(ROOT)) for f in src if f.stat().st_mtime > built]
+    if stale:
+        raise SystemExit(f'site/dist is older than {len(stale)} source file(s) (e.g. {stale[0]}): run `npm run build` in site/ first')
     for f in banks:
         b = json.loads(Path(f).read_text())
         for q in (b['questions'] if isinstance(b, dict) else b):
@@ -87,7 +93,7 @@ def main():
     dest = ROOT / 'docs/audit/milestone-migration.md'
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text('\n'.join(out) + '\n')
-    print('\n'.join(out[4:4 + len(order) + 3]))
+    print('\n'.join(out[4:4 + len(order) + 5]))  # heading, blank, header, rule, one row per subject, the All row
     print(f'-> {dest.relative_to(ROOT)}')
 
 
