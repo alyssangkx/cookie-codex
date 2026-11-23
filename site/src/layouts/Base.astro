@@ -31,7 +31,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         // the one allowed storage read outside store.ts: the player's session key (AUTH_KEY in lib/supabase.ts) and the
         // grown-up's (GROWNUP_AUTH_KEY); /parent needs the grown-up one, game pages the player one
         var key = g === 'admin' ? 'ccx:auth-gu' : 'ccx:auth';
-        // signed-out visitors do not see the links that only lead to the sign-in page
+        // signed-out visitors do not see the game links (class gated), which only lead to the sign-in page; Grown-ups always shows
         try { if (localStorage.getItem('ccx:auth') !== null || localStorage.getItem('ccx:auth-gu') !== null) document.documentElement.className += ' has-auth'; } catch (e) {}
         if (!g) return;
         var has = false;
