@@ -49,7 +49,9 @@ HEAD_DLG = ("你是新加坡小学华文老师，正在批改小六会考（PSLE
 SINGLE = {"science-single": "Science", "maths-single": "Mathematics",  # one question per item: key disputes (owner, 21 Nov 2026)
           "science-unsure": "Science", "maths-unsure": "Mathematics",  # printed key read unsure: outside models may only confirm it
           # no printed key at all (owner, 23 Nov 2026): the key is what all three outside models agree on
-          "maths-nokey": "Mathematics", "science-nokey": "Science", "english-nokey": "English", "chinese-nokey": "Chinese"}
+          "maths-nokey": "Mathematics", "science-nokey": "Science", "english-nokey": "English", "chinese-nokey": "Chinese",
+          # live-key audit (owner, 23 Nov 2026): every live standalone MCQ, answered without its key; never writes verdicts
+          "english-audit": "English"}
 KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed questions in a set, sets need a disputed key)
     "english-visual": ("english", (21, 30), "eng-visual-text", "Visual Text", 5, False),
     "chinese-cloze": ("chinese", (16, 20), "chi-cloze-mcq", "短文填空", 1, True),
@@ -63,7 +65,11 @@ KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed
     "science-nokey": ("science", (1, 99), None, None, 1, True),
     "english-nokey": ("english", (1, 15), None, None, 1, True),
     "chinese-nokey": ("chinese", (1, 99), None, None, 1, True),
+    "english-audit": ("english", (1, 15), None, None, 1, True),
 }
+# the selection whose live rows an audit pack checks, and the sub-topics it covers
+AUDIT_SEL = {"english-audit": (TMP / "ppimport" / "eng1826b" / "english" / "selected.jsonl", {"eng-grammar-mcq", "eng-vocab-mcq"})}
+AUDIT = "audit.json"  # {source id: [pp id, live key 1-4, year]}
 # the latest selections' holds, for the no-key packs
 NOKEY_HOLDS = {"maths": TMP / "ppimport" / "math1826d" / "maths" / "rejects.jsonl",
                "science": TMP / "ppimport" / "sci1826d" / "science" / "rejects.jsonl",
@@ -144,6 +150,27 @@ def nokey_sets(kind):
     return items
 
 
+def audit_sets(kind):
+    """Every live row of the audited sub-topics, each shown as its exam question (single_sets layout), with no key."""
+    sel, subs = AUDIT_SEL[kind]
+    if not sel.exists():
+        sys.exit(f"missing selection {sel}")
+    # a key the three models set (model-key) needs no second audit by the same models
+    live = {r["src_id"]: (r["id"], int(r["answer"]) + 1, r["year"]) for r in jl(sel)
+            if r["subtopic"] in subs and "model-key" not in str(r.get("answer_src"))}
+    subject = KINDS[kind][0]
+    items = []
+    for y in sorted({v[2] for v in live.values()}):
+        for q in jl(PP / subject / str(y) / "merged.jsonl"):
+            if q["id"] in live:
+                items.append({"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "pages": []})
+    (OUT / kind).mkdir(parents=True, exist_ok=True)
+    (OUT / kind / AUDIT).write_text(json.dumps(live))
+    import random
+    random.Random(29).shuffle(items)
+    return items
+
+
 def single_sets(kind):
     """Science/Maths key disputes as one-question items: every 4-option keyed MCQ whose key the blind solver disputes, plus
     CALIB agreeing ones, shuffled. A question that refers to a picture shows its whole exam page(s) (owner, 22 Nov 2026:
@@ -202,6 +229,8 @@ def dialogue_sets():
 
 
 def kind_sets(kind, skip):
+    if kind.endswith("-audit"):
+        return audit_sets(kind)
     if kind.endswith("-nokey"):
         return nokey_sets(kind)
     if kind in SINGLE:
@@ -329,6 +358,8 @@ def score(a):
     if a.kind.endswith("-unsure") and not co.exists():  # the confirm-only rule must never fall back to a dispute pack's
         sys.exit(f"missing {co}: rebuild the pack")
     unsure_ids = set(json.loads(co.read_text())) if co.exists() else set()
+    if a.kind.endswith("-audit"):
+        return audit_score(a)
     nk = OUT / a.kind / NOKEY
     if a.kind.endswith("-nokey") and not nk.exists():
         sys.exit(f"missing {nk}: rebuild the pack")
@@ -404,6 +435,35 @@ def score(a):
             have.update({v["id"]: v for v in vs})
             f.write_text("".join(json.dumps(v, ensure_ascii=False) + "\n" for v in have.values()), encoding="utf-8")
         print("wrote", sum(map(len, verdicts.values())), "verdicts to", BLIND / "consensus")
+
+
+def audit_score(a):
+    """Lists the live rows where all models agree on an answer other than the live key (audit_report.json, ids and keys
+    only), for the owner to decide. Writes no verdicts."""
+    out = OUT / a.kind
+    live = json.loads((out / AUDIT).read_text())
+    models = a.models.split(",")
+    M = {m: {} for m in models}
+    for qf in sorted(out.glob("part*.qmap.json")):
+        num = qf.name.split(".")[0].removeprefix("part")
+        qmap = {int(k): v for k, v in json.load(open(qf)).items()}
+        for m in models:
+            for f in sorted(out.glob(f"split_part{num}_{m}.txt"))[:1]:
+                for mm in ANS.finditer(f.read_text(encoding="utf-8", errors="replace")):
+                    if int(mm.group(1)) in qmap:
+                        M[m][qmap[int(mm.group(1))]] = mm.group(2)
+    agree, against, split = 0, [], 0
+    for src, (pid, key, y) in live.items():
+        v = [M[m].get(src) for m in models]
+        if None in v or len(set(v)) > 1:
+            split += 1
+        elif v[0] == str(key):
+            agree += 1
+        else:
+            against.append({"pp_id": pid, "src_id": src, "live_key": key, "models": int(v[0]), "year": y})
+    (out / "audit_report.json").write_text(json.dumps(against, indent=1))
+    print(f"{len(live)} live rows: models agree with the key {agree}, unanimous against it {len(against)}, split or missing {split}")
+    print("->", out / "audit_report.json")
 
 
 def selftest():
