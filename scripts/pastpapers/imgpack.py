@@ -352,12 +352,12 @@ def model_list(s):
     return list(dict.fromkeys(m.strip().lower() for m in s.split(",") if m.strip()))
 
 
-def write_gate(subject, models):
+def write_gate(subject, models, allow_two=False):
     """None when score --write may write with these models, else the reason it may not: three or more models, or a
-    pair the owner approved for this subject."""
+    pair the owner approved for this subject, typed with --allow-two."""
     if len(models) >= 3:
         return None
-    if len(models) == 2 and (subject, set(models)) in ALLOWED_PAIRS:
+    if len(models) == 2 and allow_two and (subject, set(models)) in ALLOWED_PAIRS:
         return None
     return f"--write needs three outside models; a pair only as approved: {[(s, sorted(m)) for s, m in ALLOWED_PAIRS]}"
 
@@ -442,9 +442,9 @@ def score(a):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
-        why = write_gate(subject, models)  # first: never ask the owner to check a calibration for a refused model set
-        if why or (len(models) == 2 and not a.allow_two):  # a pair also needs --allow-two typed: the owner's choice on record
-            sys.exit(why or "a two-model write needs --allow-two (the owner's approved pair)")
+        why = write_gate(subject, models, a.allow_two)  # first: never ask the owner to check a calibration for a refused model set
+        if why:
+            sys.exit(why)
         # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
         if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
@@ -463,7 +463,7 @@ def score(a):
 def answer_files(out, num, m):
     """The answer files of part `num` from model `m`: the model's name anywhere in the name ("gemini-code-science_part1.txt"),
     case-insensitive, the part number exact ("Part 10_..." too, not "Part 11to24" or "part1-14")."""
-    return sorted(f for f in out.glob("*.txt") if re.search(rf"(?<![a-z]){re.escape(m)}(?![a-z])", f.name, re.I)
+    return sorted(f for f in out.glob("*.txt") if re.search(rf"(?<![a-z0-9]){re.escape(m)}(?![a-z0-9])", f.name, re.I)
                   and re.search(rf"part[ _]?{num}(?:_\d+)?(?!\d|to|-\d)", f.name, re.I))
 
 
@@ -508,7 +508,7 @@ def selftest():
     assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
     assert model_list(" Claude,claude ,Perplexity") == ["claude", "perplexity"]
     assert {s for s, _ in ALLOWED_PAIRS} == {"maths"}, "a two-model pair is approved for Maths only (owner): other subjects need three"
-    assert write_gate("maths", model_list("Claude, Perplexity")) is None and write_gate("science", ["claude", "perplexity"])
+    assert write_gate("maths", model_list("Claude, Perplexity"), True) is None and write_gate("maths", ["claude", "perplexity"]) and write_gate("science", ["claude", "perplexity"], True)
     assert write_gate("maths", ["claude", "grok"]) and write_gate("maths", ["claude"]) and write_gate("science", ["a", "b", "c"]) is None
     print("imgpack selftest ok")
 
