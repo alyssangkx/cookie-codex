@@ -419,7 +419,9 @@ def select(a):
             if len(opts) == 4 and ok and k and k != ok:
                 conflict = True  # also catches a partial OCR read against a key the reread supplied
             cv = consensus.get(q["id"])
-            cv_ok = bool(cv and len(opts) == 4 and k and cv["key_old"] == k)
+            if not k and len(opts) == 4 and cv and cv.get("kind") == "model-key":
+                k, src = str(cv["key_new"]), "model-key"  # no printed key: three outside models agreed (owner, 23 Nov 2026)
+            cv_ok = bool(cv and len(opts) == 4 and k and (cv["key_old"] == k or (src == "model-key" and cv["key_new"] == k)))
             if cv_ok and cv["kind"] == "replace":  # an OCR or reread key that disagrees with the new key still holds it
                 k, src = cv["key_new"], "consensus"
                 conflict = bool((ok and ok != k) or (rr and rr != k))

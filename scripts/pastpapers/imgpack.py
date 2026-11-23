@@ -47,7 +47,9 @@ HEAD_DLG = ("你是新加坡小学华文老师，正在批改小六会考（PSLE
             "and a dialogue with numbered blanks), then lists the blanks. For each blank choose the phrase (1-8) that fits; each "
             "phrase is used once. Reply ONLY with one line per question: Q&lt;number&gt;: &lt;option number 1-8&gt;.")
 SINGLE = {"science-single": "Science", "maths-single": "Mathematics",  # one question per item: key disputes (owner, 21 Nov 2026)
-          "science-unsure": "Science", "maths-unsure": "Mathematics"}  # printed key read unsure: outside models may only confirm it
+          "science-unsure": "Science", "maths-unsure": "Mathematics",  # printed key read unsure: outside models may only confirm it
+          # no printed key at all (owner, 23 Nov 2026): the key is what all three outside models agree on
+          "maths-nokey": "Mathematics", "science-nokey": "Science", "english-nokey": "English", "chinese-nokey": "Chinese"}
 KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed questions in a set, sets need a disputed key)
     "english-visual": ("english", (21, 30), "eng-visual-text", "Visual Text", 5, False),
     "chinese-cloze": ("chinese", (16, 20), "chi-cloze-mcq", "短文填空", 1, True),
@@ -57,7 +59,17 @@ KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed
     "maths-single": ("maths", (1, 99), None, None, 1, True),
     "science-unsure": ("science", (1, 99), None, None, 1, True),
     "maths-unsure": ("maths", (1, 99), None, None, 1, True),
+    "maths-nokey": ("maths", (1, 99), None, None, 1, True),
+    "science-nokey": ("science", (1, 99), None, None, 1, True),
+    "english-nokey": ("english", (1, 15), None, None, 1, True),
+    "chinese-nokey": ("chinese", (1, 99), None, None, 1, True),
 }
+# the latest selections' holds, for the no-key packs
+NOKEY_HOLDS = {"maths": TMP / "ppimport" / "math1826d" / "maths" / "rejects.jsonl",
+               "science": TMP / "ppimport" / "sci1826d" / "science" / "rejects.jsonl",
+               "english": TMP / "ppimport" / "eng1826" / "english" / "rejects.jsonl",
+               "chinese": TMP / "ppimport" / "chi1826" / "chinese" / "rejects.jsonl"}
+NOKEY = "nokey.json"  # written by build for a -nokey pack: {id: year}, scored as model keys (three models, unanimous)
 # owner, 23 Nov 2026 ("more past-paper questions first"): the sub-topics short of 20 past-paper questions whose held
 # questions carry a printed key read as unsure (docs/audit/pp-recovery-short-subtopics.md); the latest selections' holds
 UNSURE_HOLDS = {"science": TMP / "ppimport" / "sci1826c" / "science" / "rejects.jsonl",
@@ -83,6 +95,53 @@ def jl(p):
 
 def qnum(q):
     return int(q["qno"]) if str(q.get("qno") or "").isdigit() else None  # Chinese papers store "17"
+
+
+def nokey_sets(kind):
+    """Standalone MCQs held only for having no printed key (English: paper questions 1-15, the single-sentence items;
+    Chinese: the single-question sections), plus calibration questions whose printed key the blind solver agreed with.
+    A question that refers to a picture shows its own exam page(s), as single_sets."""
+    import random
+    subject = KINDS[kind][0]
+    holds = NOKEY_HOLDS[subject]
+    if not holds.exists():
+        sys.exit(f"missing holds file {holds}")
+    only = {r["id"] for r in jl(holds) if r.get("reason") == "no-answer-key"}
+    nokey, agree = [], []
+    for y in range(2018, 2027):
+        base = PP / subject / str(y)
+        bl = {b["id"]: b for b in jl(BLIND / f"{subject}-{y}.jsonl")}
+        st = {t["id"]: t.get("st") for t in jl(base / "tags72.jsonl")}
+        for q in jl(base / "merged.jsonl"):
+            if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not q.get("pages"):
+                continue
+            if subject == "english" and not (qnum(q) and qnum(q) <= 15 and not re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)):
+                continue
+            if subject == "chinese" and st.get(q["id"]) not in L.CHI_SINGLE:
+                continue
+            text = L.tex_to_text(q.get("text") or "")
+            if L.garbled(text, L.strip_opts(q["options"])):
+                continue
+            # the checks select applies after the key: a question it would drop anyway never goes to the models
+            if subject == "english" and L.eng_incomplete(text) or subject == "chinese" and L.chi_incomplete(text, q["options"]):
+                continue
+            refers = bool(L.FIG_WORDS.search(text) or L.FIG_LETTER.search(text) or L.realfig(q)
+                          or any(L.FIG_LETTER.search(L.strip_num(o)) for o in q["options"])) if subject in ("maths", "science") else L.realfig(q)
+            pages = sorted(q["pages"])[:2] if refers else []
+            if refers and not all((base / "pages" / f"p{p:04d}.jpg").exists() for p in pages):
+                continue
+            item = {"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "pages": pages}
+            if q["id"] in only:
+                nokey.append(item)
+            elif (bl.get(q["id"]) or {}).get("agree") is True:
+                agree.append(item)
+    rng = random.Random(23)
+    cal = rng.sample(agree, min(max(60, len(nokey) // 10), len(agree)))  # about 1 calibration question in 11
+    items = nokey + cal
+    rng.shuffle(items)
+    (OUT / kind).mkdir(parents=True, exist_ok=True)
+    (OUT / kind / NOKEY).write_text(json.dumps({i["ids"][0]: i["year"] for i in nokey}))
+    return items
 
 
 def single_sets(kind):
@@ -143,6 +202,8 @@ def dialogue_sets():
 
 
 def kind_sets(kind, skip):
+    if kind.endswith("-nokey"):
+        return nokey_sets(kind)
     if kind in SINGLE:
         return single_sets(kind)
     if kind == "chinese-dialogue":
@@ -235,7 +296,7 @@ def build(a):
                 ".q{margin:10px 0;page-break-inside:avoid} h2{font-size:18px}"
                 ".q1{margin:14px 0;padding-top:6px;border-top:1px solid #ddd;page-break-inside:avoid}"
                 ".q1 img.fig{max-height:24cm;max-width:100%;margin:6px 0;page-break-before:auto;page-break-after:auto}</style></head><body>"
-                f"<p>{HEAD if subject == 'english' else HEAD_DLG if a.kind == 'chinese-dialogue' else HEAD_ZH if subject == 'chinese' else HEAD_SG.format(subj=SINGLE[a.kind])}</p>{''.join(body)}</body></html>")
+                f"<p>{HEAD_SG.format(subj=SINGLE[a.kind]) if a.kind in SINGLE else HEAD if subject == 'english' else HEAD_DLG if a.kind == 'chinese-dialogue' else HEAD_ZH}</p>{''.join(body)}</body></html>")
         hp = out / f"part{part}.html"
         hp.write_text(page, encoding="utf-8")
         json.dump(qmap, open(out / f"part{part}.qmap.json", "w"))
@@ -268,6 +329,13 @@ def score(a):
     if a.kind.endswith("-unsure") and not co.exists():  # the confirm-only rule must never fall back to a dispute pack's
         sys.exit(f"missing {co}: rebuild the pack")
     unsure_ids = set(json.loads(co.read_text())) if co.exists() else set()
+    nk = OUT / a.kind / NOKEY
+    if a.kind.endswith("-nokey") and not nk.exists():
+        sys.exit(f"missing {nk}: rebuild the pack")
+    nokey = json.loads(nk.read_text()) if nk.exists() else {}
+    for i, y in nokey.items():  # no printed key: the models' unanimous answer becomes the key (never with fewer than 3)
+        bl[i] = {"id": i, "key": None, "pick": None, "agree": None}
+        year[i] = y
     for i in unsure_ids:  # an unsure printed key: confirm only, never replace
         if i in bl:
             bl[i] = dict(bl[i], agree=None, pick=None)
@@ -307,6 +375,12 @@ def score(a):
         if bl[i].get("agree") is True:
             continue
         u = vote(i)
+        if i in nokey:
+            c = "model key" if u else "split"
+            C[c] += 1
+            if u:
+                verdicts[year[i]].append({"id": i, "key_old": None, "key_new": u, "kind": "model-key", "src": "+".join(models)})
+            continue
         c = "key stands" if u == str(bl[i]["key"]) else "replace (models + local)" if u and u == str(bl[i].get("pick")) else "other" if u else "split"
         C[c] += 1
         if c == "key stands":
@@ -316,6 +390,8 @@ def score(a):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
+        if nokey and len(models) < 3:
+            sys.exit("a no-key pack needs all three outside models (owner, 23 Nov 2026)")
         if len(models) < (2 if a.allow_two else 3):
             sys.exit("--write needs 3 or more models (owner rule: unanimous outside models); --allow-two only where the owner chose a pair")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
