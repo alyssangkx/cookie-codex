@@ -901,41 +901,44 @@ const data = {
   // active past-paper questions each sub-topic has and puts that in place of the build's past-paper part (a pool sub-topic
   // counts its past papers only, a merged one its generated questions plus its past papers). Numbers only; on any failure
   // the build's counts stay.
-  let countsSettled = false, countsLive: Date | null = null;
-  async function liveCounts(): Promise<boolean> {
+  // 'live' (counts swapped in), 'refused' (an error or an empty answer: the build's counts stay), 'slow' (no answer in time)
+  let countsSettled = false;
+  async function liveCounts(): Promise<'live' | 'refused'> {
     try {
       const r = await supabase.rpc('pp_counts');
-      if (r.error || !Array.isArray(r.data)) return false;
-      if (countsSettled) return false; // too late: the page has drawn with the build's counts
-      countsLive = new Date();
+      // an empty list is never true while questions are live: treat it as a failure, not as "every pool has 0"
+      if (r.error || !Array.isArray(r.data) || !r.data.length) { if (r.error) console.warn('pp_counts:', r.error.message); return 'refused'; }
+      if (countsSettled) return 'refused'; // too late: the page has drawn with the build's counts
       const live = new Map<string, number>();
       // only rows of the sub-topic's own subject count: pp_pool serves a sub-topic from its subject only
       for (const x of r.data as { subject: string; subtopic: string; n: number }[])
         if (ppSubjectOf(x.subtopic) === x.subject) live.set(x.subtopic, (live.get(x.subtopic) ?? 0) + Number(x.n));
-      let changed = false;
       for (const sub of P.subs) {
         // ponytail: pool and merge only (every switched sub-topic today); a 'replace' one keeps its build count until a deploy
         if (sub.mode !== 'pool' && sub.mode !== 'merge') continue;
         const n = live.get(sub.id) ?? 0;
-        const avail = sub.mode === 'pool' ? n : Math.max(0, sub.avail - sub.pp) + n;
-        if (avail !== sub.avail) { sub.avail = avail; sub.pp = n; changed = true; }
+        sub.avail = sub.mode === 'pool' ? n : Math.max(0, sub.avail - sub.pp) + n;
+        sub.pp = n;
       }
-      return changed;
-    } catch { return false; }
+      return 'live';
+    } catch (e) { console.warn('pp_counts:', e); return 'refused'; }
   }
+  const countsText = (st: 'live' | 'refused' | 'slow') => st === 'live'
+    ? `Past-paper questions counted live at ${new Date().toLocaleString('en-SG', { timeZone: 'Asia/Singapore', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })} (Singapore time). Tried and wrong come from the progress shown on this page.`
+    : `Past-paper question counts are from the last site update (the live count ${st === 'slow' ? 'was too slow to answer' : 'was refused'}).`;
 
   // ------------------------------------------------------------ start
   let started = false;
   async function start() {
     if (started) return;
     started = true;
-    // the counts are in place before the first draw (up to 2.5 s); a later answer is dropped, so no redraw ever replaces a
+    // the counts are in place before the first draw (up to 4 s); a later answer is dropped, so no redraw ever replaces a
     // view the grown-up already opened or shows this device's save while a child's is loading
-    await Promise.race([liveCounts(), new Promise((r) => setTimeout(r, 2500))]);
+    let timer = 0;
+    const st = await Promise.race([liveCounts(), new Promise<'slow'>((r) => { timer = window.setTimeout(() => r('slow'), 4000); })]);
+    clearTimeout(timer);
     countsSettled = true;
-    $('counts-note').textContent = countsLive
-      ? `Questions on the site: live count at ${countsLive.toLocaleString([], { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}. Tried and wrong come from the progress picked above.`
-      : 'Questions on the site: counts from the last site update (the live count did not answer).';
+    $('counts-note').textContent = countsText(st);
     // the page is gated (Base.astro): an admin at aal2, or a parent (aal2 once they enrolled an authenticator)
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';
