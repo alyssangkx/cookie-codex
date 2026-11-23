@@ -86,20 +86,20 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'math-measurement-time': 'pool', // 35
   'math-money-money': 'pool', // 40
   'math-percentage-percentage': 'pool', // 116
-  'math-rate-rate': 'merge', // 38: owner, 21 Nov 2026: keep the generated speed questions next to the past papers
+  'math-rate-rate': 'merge', // 42: owner, 21 Nov 2026: keep the generated speed questions next to the past papers
   'math-ratio-ratio': 'pool', // 95
   'math-whole-numbers-addition-subtraction-multiplication-and-division': 'pool', // 126
   'math-whole-numbers-factors-and-multiples': 'pool', // 30
   'math-whole-numbers-numbers-up-to-100-1000-10-000-100-000-and-10-million': 'pool', // 107
   'math-area-and-volume-area-and-perimeter': 'pool', // 26 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'math-area-and-volume-area-of-triangle': 'pool', // 26 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'math-decimals-four-operations-with-decimals': 'merge', // 13
-  'math-fractions-addition-and-subtraction-of-fractions': 'merge', // 13
+  'math-decimals-four-operations-with-decimals': 'merge', // 16
+  'math-fractions-addition-and-subtraction-of-fractions': 'merge', // 14
   'math-fractions-fraction-and-division': 'merge', // 1
-  'math-fractions-mixed-numbers-and-improper-fractions': 'merge', // 11
+  'math-fractions-mixed-numbers-and-improper-fractions': 'merge', // 14
   'math-geometry-2d-shapes': 'pool', // 20 after the unsure-key confirms (23 Nov 2026)
-  'math-geometry-3d-shapes-and-nets': 'merge', // 7
-  'math-geometry-line-symmetry': 'merge', // 8
+  'math-geometry-3d-shapes-and-nets': 'merge', // 11
+  'math-geometry-line-symmetry': 'merge', // 12
   'math-geometry-perpendicular-and-parallel-lines': 'pool', // 25 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'math-geometry-rectangle-and-square': 'merge', // 2
   'math-geometry-triangles-parallelogram-rhombus-and-trapezium': 'pool', // 31 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
