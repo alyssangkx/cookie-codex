@@ -17,6 +17,8 @@ test('字形: the character and the word it forms; a character takes the reading
   assert.deepEqual(glossOption(g, 'chi-zixing-form', '奶奶戴了一条非常漂亮的____链。', '项').map((l) => l.text), ['项', '项链']);
   assert.equal(glossOption(g, 'chi-zixing-form', '小树慢慢____大了。', '长')[0].py, 'zhǎng', 'the word 长大 picks zhǎng, not the first reading');
   assert.deepEqual(glossOption(g, 'chi-zixing-form', '奶奶戴了一条非常漂亮的____链。', '像').map((l) => l.text), ['像'], 'a wrong pick has no word: its meaning only');
+  assert.deepEqual(glossOption(g, 'chi-zixing-form', '奶奶戴了一条非常漂亮的____链。', '项', true).map((l) => l.text), ['项'],
+    'a picked option never shows a word it forms around the blank (it would look right)');
 });
 
 test('other categories: a word, an idiom, a connective pair; sentences and skipped sections give nothing', () => {

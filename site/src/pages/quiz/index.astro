@@ -130,6 +130,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   let paperMix = MIXES[mixKey];
   const PER_Q: Record<string, number> = { basic: 1.2, intermediate: 1.5, competent: 2 };
   const subId = params.get('sub') ?? '';
+  if (subId.startsWith('chi-')) queueMicrotask(() => loadGloss()); // early, so a wrong first answer already has it
   const tier = (params.get('tier') ?? 'b') as Tier;
   const sub = meta.subs[subId];
   const POOL = mode === 'tier' && !!sub?.pool; // a one-pool sub-topic (ADR 0011): no tier, milestones
@@ -723,18 +724,21 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const loadGloss = () => {
     if (zhAsked) return;
     zhAsked = true;
-    fetch('/zh-gloss.json').then((r) => (r.ok ? r.json() : null)).then((j) => { zhGloss = j; }).catch(() => { zhAsked = false; });
+    // any failure (network or a non-OK answer) lets the next Chinese question try again
+    fetch('/zh-gloss.json').then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .then((j) => { zhGloss = j; }).catch(() => { zhAsked = false; });
   };
   const glossLine = (l: GlossLine) => `<span lang="zh">${esc(l.text)}</span> <span class="py">${esc(l.py)}</span>: ${esc(l.mean)}`;
   function glossHtml(q: Q, k: number | null) {
     if (!zhGloss || !q.sub.startsWith('chi-')) return '';
     const right = glossOption(zhGloss, q.sub, q.stem, q.options[q.answer] ?? '');
-    const picked = k != null && k >= 0 && k !== q.answer ? glossOption(zhGloss, q.sub, q.stem, q.options[k] ?? '') : [];
+    const picked = k != null && k >= 0 && k !== q.answer ? glossOption(zhGloss, q.sub, q.stem, q.options[k] ?? '', true) : [];
     if (!right.length && !picked.length) return '';
     return '<div class="gloss">'
       + (right.length ? `<p><strong>The answer:</strong> ${right.map(glossLine).join(' · ')}</p>` : '')
       + (picked.length ? `<p><strong>You chose:</strong> ${picked.map(glossLine).join(' · ')}</p>` : '')
-      + '<p class="credit">Pinyin and meanings: CC-CEDICT</p></div>';
+      + '<p class="credit">Pinyin and meanings: <a href="https://cc-cedict.org/" target="_blank" rel="noopener">CC-CEDICT</a>, '
+      + '<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p></div>';
   }
 
   // ------------------------------------------------------------ paper review: wrong and blank answers only

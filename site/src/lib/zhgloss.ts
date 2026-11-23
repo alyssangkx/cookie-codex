@@ -40,13 +40,14 @@ function charLine(g: Gloss, ch: string, wordPy?: string, at = 0): GlossLine | nu
   return { text: ch, py: r[0], mean: r[1] };
 }
 
-/** The lines to show for one option of a question (empty when nothing applies). */
-export function glossOption(g: Gloss, sub: string, stem: string, option: string): GlossLine[] {
+/** The lines to show for one option of a question (empty when nothing applies). `picked`: a 字形 pick that was wrong shows
+ *  its own character only, never a word it happens to form around the blank (that would read as if it fitted). */
+export function glossOption(g: Gloss, sub: string, stem: string, option: string, picked = false): GlossLine[] {
   if (SKIP.has(sub)) return [];
   const o = strip(option);
   if (sub === 'chi-zixing-form') {
     const m = BLANK.exec(stem);
-    const w = m ? windows(stem.slice(0, m.index), o, stem.slice(m.index + m[0].length)).find((x) => x.length > o.length && g.w[x]) : undefined;
+    const w = m && !picked ? windows(stem.slice(0, m.index), o, stem.slice(m.index + m[0].length)).find((x) => x.length > o.length && g.w[x]) : undefined;
     const lines: GlossLine[] = [];
     if (o.length === 1) {
       const c = charLine(g, o, w ? g.w[w][0] : undefined, w ? w.indexOf(o) : 0);

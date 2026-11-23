@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 PPI = Path("/data/alvin/tmp/cookie-codex/ppimport")
-SELS = [PPI / d / "chinese/selected.jsonl" for d in ("chi1826e", "chicloze4", "chireading4")]
+SELS = sorted(PPI.glob("*/chinese/selected.jsonl"))  # every Chinese selection (older ones only add words)
 BANKS = ROOT / "site/dist/data/quiz"  # the built banks (each question carries its sub-topic): run `npm run build` first
 CEDICT = Path("/data/alvin/tmp/cookie-codex/cedict/cedict_ts.u8")
 OUT = ROOT / "site/public/zh-gloss.json"
@@ -143,7 +143,12 @@ def main(cedict=CEDICT):
                         words[w] = d[w][0]
                     hit = hit or k == ans
         other_found += hit
-    OUT.write_text(json.dumps({"c": dict(sorted(chars.items())), "w": dict(sorted(words.items()))}, ensure_ascii=False,
+    # a missing input must not publish a near-empty dictionary over the good one
+    if not SELS or zx < 100 or other < 1000 or len(words) < 1000:
+        sys.exit(f"inputs look incomplete ({len(SELS)} selections, {zx} 字形 and {other} other questions, {len(words)} words): "
+                 "run `npm run build` in site/ and check the selections; nothing written")
+    OUT.write_text(json.dumps({"licence": "CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)",
+                               "c": dict(sorted(chars.items())), "w": dict(sorted(words.items()))}, ensure_ascii=False,
                               separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"字形 {zx} questions, the answer's word found in {zx_found} ({zx_found / max(1, zx):.0%}); other categories {other}"
           f" questions, the answer glossed in {other_found} ({other_found / max(1, other):.0%}); {len(chars)} characters, "

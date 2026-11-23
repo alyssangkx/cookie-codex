@@ -982,8 +982,11 @@ def table_rows(opts):
 
 
 def dup_text(s):
-    """A question's wording for duplicate matching: blanks, spaces and case do not count."""
-    return re.sub(r"[\s_＿　]+", "", (s or "").lower())
+    """A question's wording for duplicate matching: blanks of any style (____, （ ）, ( )), spaces, case and full- or
+    half-width punctuation do not count."""
+    import unicodedata
+    s = unicodedata.normalize("NFKC", s or "").lower()  # full-width punctuation and letters become their plain forms
+    return re.sub(r"\(\s*\)|[\s_＿　]+", "", s)
 
 
 def pic_hash(path):
@@ -1007,7 +1010,8 @@ def dedupe(rows, max_bits=6):
     for r in rows:
         if r.get("grp"):
             continue
-        groups[(r["subject"], dup_text(r["stem"]), tuple(dup_text(o) for o in r["options"]))].append(r)
+        # the options in any order (a second paper may list them differently); the key is compared by its text below
+        groups[(r["subject"], dup_text(r["stem"]), tuple(sorted(dup_text(o) for o in r["options"])))].append(r)
     drop = {}
     for g in groups.values():
         if len(g) < 2:
@@ -1019,7 +1023,8 @@ def dedupe(rows, max_bits=6):
             for k, khs in kept:
                 same_pics = len(hs) == len(khs) and all(a is not None and b is not None and bin(a ^ b).count("1") <= max_bits
                                                         for a, b in zip(hs, khs))
-                if same_pics and r.get("answer") == k.get("answer"):
+                same_key = dup_text(r["options"][r["answer"]]) == dup_text(k["options"][k["answer"]])
+                if same_pics and same_key:
                     drop[r["id"]] = k["id"]
                     break
             else:
@@ -1125,6 +1130,8 @@ def selftest():
     assert [x["id"] for x in _k] == ["a", "c"] and [(x["id"], k) for x, k in _d] == [("b", "a")], "same wording: one copy, the earliest kept"
     assert len(dedupe([_r("a", 2023, "Q"), _r("b", 2023, "Q", ans=2)])[0]) == 2, "a different key is a different question"
     assert len(dedupe([_r("a", 2023, "Q", grp="s1"), _r("b", 2023, "Q", grp="s2")])[0]) == 2, "passage sets are never merged"
+    _o = _r("b", 2024, "奶奶戴了一条（ ）链。", ans=0); _o["options"] = ["项", "相", "向", "像"]
+    assert len(dedupe([_r("a", 2023, "奶奶戴了一条____链。", ans=3), _o])[0]) == 1, "another blank style and option order: still one question"
     assert len(dedupe([_r("a", 2023, "Q", crops=["/nonexistent.png"]), _r("b", 2023, "Q", crops=["/nonexistent.png"])])[0]) == 2, "unreadable pictures are not called the same"
     assert strip_num("（3）跌") == "跌" and strip_num("1. went") == "went" and strip_num("2.5 kg") == "2.5 kg" and strip_num("(4) 12") == "12"
     assert chi_incomplete("哥哥吃了一碗炒饭，但仍然觉得饿。", ["rēng rán", "réng rán", "lēng rán", "léng rán"]) is None
