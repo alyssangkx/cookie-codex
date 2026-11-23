@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 ---
 <Base title="Who's playing? Cookie Codex" description="Sign in to keep your progress on every device.">
   <section class="wrap login-page">
-    <h1>Who's playing?</h1>
+    <div class="login-head"><h1>Who's playing?</h1><a class="grown-btn" href="/grownups/">Grown-ups sign in</a></div>
     <form id="login-form" class="panel" autocomplete="off" novalidate>
       <label for="who">Your username</label>
       <input id="who" type="text" maxlength="20" autocomplete="off" autocapitalize="words" spellcheck="false" />
@@ -48,6 +48,9 @@ import Base from '../../layouts/Base.astro';
   .login-page .msg { color: var(--berry); min-height: 1.5em; margin: 0.8rem 0 0; font-weight: 600; text-align: center; }
   .login-page .small { color: var(--cocoa-soft); font-size: 0.9rem; margin-top: 1rem; }
   .login-page .grown { display: inline-flex; align-items: center; min-height: 44px; }
+  .login-page .login-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; }
+  .login-page .grown-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border: 1.5px solid var(--berry);
+    border-radius: var(--radius-control); color: var(--berry); background: #fff; font: 600 0.95rem var(--font-display); text-decoration: none; }
   .login-page .captcha:not(:empty) { margin-top: 0.9rem; }
 </style>
 
