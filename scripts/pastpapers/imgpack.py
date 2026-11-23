@@ -270,17 +270,25 @@ def page_range(qs):
     return list(range(max(1, pages[0] - 2), pages[-1] + 1))
 
 
+def rebuild_refused(out):
+    """A reason not to build into `out`: it already holds a pack (a rebuild with fewer parts would leave old parts for
+    score() to read, next to id lists rewritten for the new pack)."""
+    if list(Path(out).glob("part*.qmap.json")):
+        return f"{out} already holds a pack: move it aside (for example to {Path(out).name}-old) before rebuilding"
+    return None
+
+
 def build(a):
     from PIL import Image
     skip = set()
     if a.skip:
         for s in json.load(open(a.skip)):
             skip |= set(s[2] if isinstance(s, list) else s)
+    out = OUT / a.kind
+    if why := rebuild_refused(out):  # before kind_sets, which rewrites the pack's confirm-only / nokey / audit lists
+        sys.exit(why)
     sets = kind_sets(a.kind, skip)
     subject = KINDS[a.kind][0]
-    out = OUT / a.kind
-    if list(out.glob("part*.qmap.json")):  # a rebuild with fewer parts would leave old parts for score() to read
-        sys.exit(f"{out} already holds a pack: move it aside (for example to {out.name}-old) before rebuilding")
     (out / "img").mkdir(parents=True, exist_ok=True)
     for part, i in enumerate(range(0, len(sets), a.per), 1):
         chunk, qmap, n, body = sets[i:i + a.per], {}, 0, []
@@ -340,18 +348,26 @@ def build(a):
     print(f"{len(sets)} sets -> {out}")
 
 
-# --allow-two pairs the owner approved: (subject, models, pack kinds; None = every kind of that subject). Maths: Claude +
+# --allow-two pairs the owner approved: (subject, models, the pack kinds it may write; a new kind needs the owner first). Maths: Claude +
 # Perplexity for key disputes and unsure confirms (22 Nov 2026) and no-key keys (23 Nov 2026). Science: Claude + Perplexity
 # for no-key keys (23 Nov 2026, Claude 138/139 and Perplexity 134/134 on calibration, 20-question PDFs) and unsure confirms
 # (23 Nov 2026, the all-sub-topic confirm packs); NOT Science key disputes (science-single can replace a printed key).
 # English and Chinese need all three outside models.
-ALLOWED_PAIRS = [("maths", {"claude", "perplexity"}, None),
+ALLOWED_PAIRS = [("maths", {"claude", "perplexity"}, {"maths-single", "maths-unsure", "maths-nokey"}),
                  ("science", {"claude", "perplexity"}, {"science-nokey", "science-unsure"})]
 
 
 def model_list(s):
     """--models as distinct lower-case names: "Claude, claude" is one model (answer files match names case-insensitively)."""
     return list(dict.fromkeys(m.strip().lower() for m in s.split(",") if m.strip()))
+
+
+def cal_ok(kind, models, ok, n):
+    """A no-key pack (its key is the models' answer) or a two-model write (no third model to catch a shared misreading)
+    needs 98% calibration on 30 or more agreeing questions; a three-model dispute or confirm pack does not."""
+    if not (kind.endswith("-nokey") or len(models) == 2):
+        return True
+    return n >= 30 and ok / n >= 0.98
 
 
 def write_gate(kind, models, allow_two=False):
@@ -455,7 +471,7 @@ def score(a):
             sys.exit(why)
         # a model key is the only key those questions get, and two models have no third to catch a shared misreading:
         # write either only after a clean calibration, unless the owner has looked
-        if (nokey or len(models) == 2) and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
+        if not cal_ok(a.kind, models, ok, len(cu)) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
@@ -523,6 +539,14 @@ def selftest():
     assert {s for s, _, _ in ALLOWED_PAIRS} == {"maths", "science"}, "two-model pairs are approved for Maths and Science only (owner)"
     assert write_gate("science-nokey", ["claude", "perplexity"], True) is None and write_gate("science-unsure", ["claude", "perplexity"], True) is None
     assert write_gate("science-single", ["claude", "perplexity"], True), "Science key disputes were never approved for a pair"
+    assert cal_ok("science-unsure", ["claude", "perplexity"], 59, 60) and not cal_ok("science-unsure", ["claude", "perplexity"], 55, 60)
+    assert not cal_ok("maths-single", ["claude", "perplexity"], 29, 29) and cal_ok("science-single", ["a", "b", "c"], 10, 20)
+    assert not cal_ok("english-nokey", ["a", "b", "c"], 50, 60), "a no-key pack needs the bar whatever the model count"
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        assert rebuild_refused(td) is None
+        (Path(td) / "part1.qmap.json").write_text("{}")
+        assert rebuild_refused(td), "a folder with a pack must refuse a rebuild"
     assert write_gate("maths-nokey", model_list("Claude, Perplexity"), True) is None and "--allow-two" in write_gate("maths-single", ["claude", "perplexity"]) and write_gate("english-nokey", ["claude", "perplexity"], True)
     assert write_gate("maths-nokey", ["claude", "grok"]) and write_gate("maths-nokey", ["claude"]) and write_gate("science-single", ["a", "b", "c"]) is None
     print("imgpack selftest ok")
