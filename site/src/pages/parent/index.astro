@@ -921,15 +921,20 @@ const data = {
   // Admin (owner, 23 Nov 2026, for testing): the same "Showing" picker a parent has, over the admin's own children (the Test
   // Player). Reading any save is allowed to the admin; writing (Retest, Assign, revision test, settings) only the Test
   // Player's, which the database enforces, so the actions show only for it.
+  const ADMIN_WATCH = ['Alyssa']; // profiles.name as stored; exact match
   async function initAdminKids(deviceId: string | null) {
     try {
       const { data } = await supabase.auth.getSession();
       if (!data.session) return;
       const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
-      const kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string; role: string }[] | null;
-      if (!kids?.length) return;
+      const own = ((r.status === 200 ? r.body?.children : null) ?? []) as { id: string; name: string; role: string }[];
+      // owner, 23 Nov 2026: the admin may also watch these children, read only (RLS lets the admin read any profile and
+      // save; the database refuses an admin write to anyone but the Test Player, and the page hides the actions)
+      const watch = await supabase.from('profiles').select('id, name, role').eq('role', 'child').in('name', ADMIN_WATCH).is('deleted_at', null);
+      const kids = [...own, ...(watch.data ?? []).filter((w) => !own.some((k) => k.id === w.id))];
+      if (!kids.length) return;
       const sel = $<HTMLSelectElement>('kid-who');
-      sel.innerHTML = '<option value="">This device</option>' + kids.map((k) => `<option value="${esc(k.id)}" data-test="${k.role === 'test'}">${esc(k.name)}${k.role === 'test' ? ' (Test Player)' : ''}</option>`).join('');
+      sel.innerHTML = '<option value="">This device</option>' + kids.map((k) => `<option value="${esc(k.id)}" data-test="${k.role === 'test'}">${esc(k.name)}${k.role === 'test' ? ' (Test Player)' : ' (read only)'}</option>`).join('');
       $('kid-pick').hidden = false;
       sel.addEventListener('change', async () => {
         const opt = sel.selectedOptions[0];
