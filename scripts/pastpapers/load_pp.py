@@ -380,9 +380,12 @@ def select(a):
         for q in merged:
             if q.get("format") == "mcq" and isinstance(q.get("qno"), int):
                 last[(q.get("paper"), q.get("part"))] = max(last[(q.get("paper"), q.get("part"))], q["qno"])
+        # crops/ (the first cropper), recrop/ (repair.py: a picture for a question that had none), fixcrop/ (the picture
+        # audit: the crop widened to the model's box, owner OK 23 Nov 2026); a later folder replaces the same <id>-pNNNN.png
+        byname = {c.name: c for d in ("crops", "recrop", "fixcrop") for c in sorted((base / d).glob("*.png"))}
         crops = collections.defaultdict(list)
-        for c in sorted((base / "crops").glob("*.png")) + sorted((base / "recrop").glob("*.png")):  # recrop: repair.py boxes
-            crops[re.sub(r"-p\d+\.png$", "", c.name)].append(c)
+        for name, c in sorted(byname.items()):
+            crops[re.sub(r"-p\d+\.png$", "", name)].append(c)
         for q in merged:
             if q.get("format") != "mcq":
                 continue
@@ -1882,13 +1885,18 @@ def upload(a):
                or (r.get("set_pages") and len(figs[r["id"]]) != len(r["set_pages"]))]  # a set row without its pages too
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
+    # explanations (migration 014): explain.py apply writes <out>/<subject>/explain.jsonl for the ones the second model passed
+    expl = {x["id"]: x["explain"] for x in jl(out / "explain.jsonl")}
+    # no explain.jsonl: the field is not sent at all, so explanations already live are left as they are (an upsert of an
+    # absent column keeps it); PostgREST needs the same keys on every row of a batch, hence all or none
+    has_expl = (out / "explain.jsonl").exists()
     db = [{"id": r["id"], "src_id": r["src_id"], "subject": r["subject"], "subtopic": r["subtopic"], "level": r["level"],
            "pattern": r["pattern"], "stem": r["stem"], "options": r["options"], "answer": r["answer"],
            "figures": figs[r["id"]], "year": r["year"], "school": r["school"], "paper": r["paper"],
            "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "ord": ord_[r["id"]], "active": True,
-           "grp": r.get("grp"), "seq": r.get("seq")} for r in rows]
+           "grp": r.get("grp"), "seq": r.get("seq"), **({"explain": expl.get(r["id"])} if has_expl else {})} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
-    print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}")
+    print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}, explanations {sum(bool(d.get('explain')) for d in db) if has_expl else 'unchanged (no explain.jsonl)'}")
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
         sys.exit(f"nothing selected under {a.out}/{a.subject} for those sub-topics: wrong --out? "
                  "(the 2025-26 import lives in /data/alvin/tmp/cookie-codex/ppimport/final2526)")
