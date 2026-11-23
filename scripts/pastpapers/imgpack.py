@@ -46,7 +46,8 @@ HEAD_DLG = ("你是新加坡小学华文老师，正在批改小六会考（PSLE
             "You are an expert Singapore primary-school Chinese teacher. Each SET shows the exam page images (a table of 8 phrases "
             "and a dialogue with numbered blanks), then lists the blanks. For each blank choose the phrase (1-8) that fits; each "
             "phrase is used once. Reply ONLY with one line per question: Q&lt;number&gt;: &lt;option number 1-8&gt;.")
-SINGLE = {"science-single": "Science", "maths-single": "Mathematics"}  # one question per item: key disputes (owner, 21 Nov 2026)
+SINGLE = {"science-single": "Science", "maths-single": "Mathematics",  # one question per item: key disputes (owner, 21 Nov 2026)
+          "science-unsure": "Science", "maths-unsure": "Mathematics"}  # printed key read unsure: outside models may only confirm it
 KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed questions in a set, sets need a disputed key)
     "english-visual": ("english", (21, 30), "eng-visual-text", "Visual Text", 5, False),
     "chinese-cloze": ("chinese", (16, 20), "chi-cloze-mcq", "短文填空", 1, True),
@@ -54,7 +55,18 @@ KINDS = {  # kind: (subject, questions, tagger sub-topic, section, minimum keyed
     "chinese-dialogue": ("chinese", (26, 29), "chi-dialogue-mcq", "完成对话", 4, False),
     "science-single": ("science", (1, 99), None, None, 1, True),
     "maths-single": ("maths", (1, 99), None, None, 1, True),
+    "science-unsure": ("science", (1, 99), None, None, 1, True),
+    "maths-unsure": ("maths", (1, 99), None, None, 1, True),
 }
+# owner, 23 Nov 2026 ("more past-paper questions first"): the sub-topics short of 20 past-paper questions whose held
+# questions carry a printed key read as unsure (docs/audit/pp-recovery-short-subtopics.md); the latest selections' holds
+UNSURE_HOLDS = {"science": TMP / "ppimport" / "sci1826c" / "science" / "rejects.jsonl",
+                "maths": TMP / "ppimport" / "math1826c" / "maths" / "rejects.jsonl"}
+SHORT_SUBS = {"math-geometry-2d-shapes", "math-geometry-3d-shapes-and-nets", "math-geometry-line-symmetry",
+              "math-fractions-addition-and-subtraction-of-fractions", "math-fractions-mixed-numbers-and-improper-fractions",
+              "math-decimals-four-operations-with-decimals", "sci-cycles-water-cycle", "sci-diversity-living-characteristics",
+              "sci-energy-photo-respiration", "sci-inquiry-predict-hyp"}
+CONFIRM_ONLY = "confirm-only.json"  # written by build for an -unsure pack: these ids are scored confirm-only
 CALIB = 200  # agreeing keys mixed into a single-question pack to measure the models
 # the latest selection's holds: a disputed question goes in only when the dispute is all that holds it back
 HOLDS = {"science": TMP / "ppimport" / "sci1826b" / "science" / "rejects.jsonl",
@@ -79,11 +91,13 @@ def single_sets(kind):
     Gemini scored 77% / 66% on picture questions shown as crops, 95% / 90% on text-only ones); others are text only."""
     import random
     subject = KINDS[kind][0]
-    only = {r["id"] for r in jl(HOLDS[subject]) if r.get("reason") == "blind-disagree"}
+    unsure = kind.endswith("-unsure")
+    only = {r["id"] for r in jl((UNSURE_HOLDS if unsure else HOLDS)[subject]) if r.get("reason") == ("grid-uncertain" if unsure else "blind-disagree")}
     dis, agree = [], []
     for y in range(2018, 2027):
         base = PP / subject / str(y)
         bl = {b["id"]: b for b in jl(BLIND / f"{subject}-{y}.jsonl")}
+        st = {t["id"]: t.get("st") for t in jl(base / "tags72.jsonl")} if unsure else {}
         for q in jl(base / "merged.jsonl"):
             b = bl.get(q["id"]) or {}
             if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not b.get("key") or not q.get("pages"):
@@ -98,12 +112,17 @@ def single_sets(kind):
             if refers and not all((base / "pages" / f"p{p:04d}.jpg").exists() for p in pages):
                 continue
             item = {"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "pages": pages}
-            if b.get("agree") is False and b.get("pick") and q["id"] in only:
+            if unsure and q["id"] in only and st.get(q["id"]) in SHORT_SUBS:
                 dis.append(item)
-            elif b.get("agree") is True:
+            elif not unsure and b.get("agree") is False and b.get("pick") and q["id"] in only:
+                dis.append(item)
+            elif b.get("agree") is True and q["id"] not in only:
                 agree.append(item)
     rng = random.Random(21)
-    items = dis + rng.sample(agree, min(CALIB, len(agree)))
+    items = dis + rng.sample(agree, min(60 if unsure else CALIB, len(agree)))
+    if unsure:
+        (OUT / kind).mkdir(parents=True, exist_ok=True)
+        (OUT / kind / CONFIRM_ONLY).write_text(json.dumps(sorted(i["ids"][0] for i in dis)))
     rng.shuffle(items)
     return items
 
@@ -242,6 +261,10 @@ def score(a):
             for b in c["blanks"]:
                 bl[b["id"]] = {"id": b["id"], "key": b["key"], "pick": None, "agree": None}
                 year[b["id"]] = c["year"]
+    co = OUT / a.kind / CONFIRM_ONLY
+    for i in (json.loads(co.read_text()) if co.exists() else []):  # an unsure printed key: confirm only, never replace
+        if i in bl:
+            bl[i] = dict(bl[i], agree=None, pick=None)
     models = a.models.split(",")
     M = {m: {} for m in models}
     ids = []

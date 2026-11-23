@@ -435,8 +435,8 @@ def select(a):
                 reason = "quarantined"
             elif pp_id(q["id"]) in hold:
                 reason = "held-by-review"
-            elif q.get("answer_flag") == "grid-uncertain":
-                reason = "grid-uncertain"
+            elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and cv["kind"] == "confirm"):
+                reason = "grid-uncertain"  # lifted when outside models unanimously confirm the printed key (imgpack -unsure packs)
             elif conflict:
                 reason = "ocr-key-conflict"
             elif not cv_ok and src in ("ocr", "vision-reread") and (blind is None or q["id"] not in blind or blind[q["id"]].get("key") != k):
