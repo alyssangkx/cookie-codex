@@ -843,6 +843,7 @@ const data = {
     if (r.error) throw r.error;
     child = { id, rev: r.data ? Number(r.data.rev) : null, raw: asSave(r.data?.data), writable };
     s = cleanSave(child.raw); viewId = id;
+    $('content').hidden = false; // a pick that failed before may have hidden it
     renderAll();
   }
   /** Change the child's server save with the rev check; on a conflict (the child played meanwhile) apply the change to
@@ -946,7 +947,7 @@ const data = {
         const device = () => { pick++; child = null; s = cleanSave(load()); viewId = deviceId; $('bak-panel').hidden = false; renderAll(); }; // pick++: a pick still loading is dropped
         if (!sel.value) { $('who-note').textContent = note; return device(); }
         const test = opt?.dataset.test === 'true';
-        $('who-note').textContent = `Signed in as the admin. Showing ${opt?.dataset.name || opt?.textContent || 'this child'}'s save from the server${test ? ' (the Test Player)' : ', read only'}.`;
+        $('who-note').textContent = `Signed in as the admin. Showing ${opt?.dataset.name || 'this child'}'s save from the server${test ? ' (the Test Player)' : ', read only'}.`;
         $('bak-panel').hidden = true; // the save code is this browser's own save, not the picked child's
         await showChild(sel.value, test).catch(() => { // showChild throws only for the current pick
           sel.value = ''; device(); $('who-note').textContent = "Couldn't load that child's save: showing this device.";

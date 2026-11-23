@@ -396,7 +396,7 @@ def score(a):
             bl[i] = dict(bl[i], agree=None, pick=None)
     models = model_list(a.models)  # a repeated name is one model
     M = {m: {} for m in models}
-    ids = []
+    ids, missing = [], []
     for qf in sorted(out.glob("part*.qmap.json")):
         part = qf.name.split(".")[0]
         qmap = {int(k): v for k, v in json.load(open(qf)).items()}
@@ -407,6 +407,8 @@ def score(a):
             # the model's name anywhere in the name ("gemini-code-science_part1.txt" too), the part number exact
             # glob every .txt and match the name case-insensitively ("Part 3_Gemini.txt"); "part1-gemini" counts, "part1-14" not
             fs = answer_files(out, num, m)
+            if not fs:
+                missing.append(f"{part} {m}")
             if len(fs) > 1:
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:
@@ -416,8 +418,6 @@ def score(a):
                 M[m].update({qmap[k]: v for k, v in got.items() if k in qmap})
     cal = [i for i in ids if bl[i].get("agree") is True]
     for m in models:
-        if not M[m] and a.write:  # a misnamed answer file must not read as "split" everywhere and erase older verdicts
-            sys.exit(f"no answers found for {m}: check the file names (part<N>_{m}.txt)")
         c = [i for i in cal if i in M[m]]
         print(f"{m}: {len(M[m])} answers; calibration {sum(M[m][i] == str(bl[i]['key']) for i in c)}/{len(c)}")
     def vote(i):
@@ -449,6 +449,8 @@ def score(a):
         why = write_gate(subject, models, a.allow_two)  # first: never ask the owner to check a calibration for a refused model set
         if why:
             sys.exit(why)
+        if missing:  # a missing or misnamed part would read as "split" and erase that part's older verdicts
+            sys.exit(f"no answer file for {len(missing)} part(s), e.g. {missing[0]}: check the file names (part<N>_<model>.txt)")
         # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
         if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
@@ -512,7 +514,7 @@ def selftest():
     assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
     assert model_list(" Claude,claude ,Perplexity") == ["claude", "perplexity"]
     assert {s for s, _ in ALLOWED_PAIRS} == {"maths"}, "a two-model pair is approved for Maths only (owner): other subjects need three"
-    assert write_gate("maths", model_list("Claude, Perplexity"), True) is None and write_gate("maths", ["claude", "perplexity"]) and write_gate("science", ["claude", "perplexity"], True)
+    assert write_gate("maths", model_list("Claude, Perplexity"), True) is None and "--allow-two" in write_gate("maths", ["claude", "perplexity"]) and write_gate("science", ["claude", "perplexity"], True)
     assert write_gate("maths", ["claude", "grok"]) and write_gate("maths", ["claude"]) and write_gate("science", ["a", "b", "c"]) is None
     print("imgpack selftest ok")
 
