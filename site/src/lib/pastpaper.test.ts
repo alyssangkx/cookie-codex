@@ -269,3 +269,13 @@ test('validRow: 8 phrases only for the 完成对话 dialogue sets (migration 011
   assert.ok(!validRow(row({ subtopic: 'chi-dialogue-mcq', options: eight, answer: 8 })));
   assert.ok(!validRow(row({ answer: 4 })));
 });
+
+// review, 23 Nov 2026: the hand-kept counts left PP_SWITCH, so the rule they showed is checked against the data instead
+test('every pool sub-topic has at least PP_MIN_TIER past-paper questions (pp_counts.json)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const pp = JSON.parse(readFileSync(new URL('../data/pp_counts.json', import.meta.url), 'utf8')) as Record<string, number>;
+  const short = Object.entries(PP_SWITCH).filter(([, m]) => m === 'pool')
+    .map(([s]) => [s, ['b', 'i', 'c'].reduce((n, t) => n + (pp[`${s}|${t}`] ?? 0), 0)] as const)
+    .filter(([, n]) => n < PP_MIN_TIER);
+  assert.deepEqual(short, [], 'pool sub-topics under the minimum: switch them back to merge or add questions');
+});

@@ -347,6 +347,21 @@ def build(a):
 ALLOWED_PAIRS = [("maths", {"claude", "perplexity"})]
 
 
+def model_list(s):
+    """--models as distinct lower-case names: "Claude, claude" is one model (answer files match names case-insensitively)."""
+    return list(dict.fromkeys(m.strip().lower() for m in s.split(",") if m.strip()))
+
+
+def write_gate(subject, models):
+    """None when score --write may write with these models, else the reason it may not: three or more models, or a
+    pair the owner approved for this subject."""
+    if len(models) >= 3:
+        return None
+    if len(models) == 2 and (subject, set(models)) in ALLOWED_PAIRS:
+        return None
+    return f"--write needs three outside models; a pair only as approved: {[(s, sorted(m)) for s, m in ALLOWED_PAIRS]}"
+
+
 def score(a):
     out = OUT / a.kind
     subject = KINDS[a.kind][0]
@@ -371,13 +386,13 @@ def score(a):
     if a.kind.endswith("-nokey") and not nk.exists():
         sys.exit(f"missing {nk}: rebuild the pack")
     nokey = json.loads(nk.read_text()) if nk.exists() else {}
-    for i, y in nokey.items():  # no printed key: the models' unanimous answer becomes the key (never with fewer than 3)
+    for i, y in nokey.items():  # no printed key: the models' unanimous answer becomes the key (three models, or the owner's approved pair: write_gate)
         bl[i] = {"id": i, "key": None, "pick": None, "agree": None}
         year[i] = y
     for i in unsure_ids:  # an unsure printed key: confirm only, never replace
         if i in bl:
             bl[i] = dict(bl[i], agree=None, pick=None)
-    models = list(dict.fromkeys(a.models.split(",")))  # a repeated name is one model
+    models = model_list(a.models)  # a repeated name is one model
     M = {m: {} for m in models}
     ids = []
     for qf in sorted(out.glob("part*.qmap.json")):
@@ -432,10 +447,9 @@ def score(a):
         # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
         if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
-        if len(models) < (2 if a.allow_two else 3):
-            sys.exit("--write needs 3 or more models (owner rule: unanimous outside models); --allow-two only where the owner chose a pair")
-        if len(models) == 2 and (subject, set(models)) not in ALLOWED_PAIRS:  # a pair writes only where the owner chose it
-            sys.exit(f"--allow-two: the owner approved only {[(s, sorted(m)) for s, m in ALLOWED_PAIRS]}")
+        why = write_gate(subject, models)
+        if why or (len(models) == 2 and not a.allow_two):  # a pair also needs --allow-two typed: the owner's choice on record
+            sys.exit(why or "a two-model write needs --allow-two (the owner's approved pair)")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
         stale = {i for i in ids if bl[i].get("agree") is not True} - {v["id"] for vs in verdicts.values() for v in vs}
@@ -460,7 +474,7 @@ def audit_score(a):
     only), for the owner to decide. Writes no verdicts."""
     out = OUT / a.kind
     live = json.loads((out / AUDIT).read_text())
-    models = list(dict.fromkeys(a.models.split(",")))
+    models = model_list(a.models)
     if len(models) < 3:
         sys.exit("an audit needs all three outside models: 'unanimous' must mean three")
     M = {m: {} for m in models}
@@ -494,7 +508,9 @@ def selftest():
     assert page_range(qs) == [10, 11, 12, 13] and page_range([{"pages": [1]}]) == [1]
     assert ANS.findall("Q1: 3\nQ2：4\nQ10) 2") == [("1", "3"), ("2", "4"), ("10", "2")]
     assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
-    assert {s for s, _ in ALLOWED_PAIRS} == {"maths"}, "a two-model pair is approved for Maths only: other subjects need three"
+    assert model_list(" Claude,claude ,Perplexity") == ["claude", "perplexity"]
+    assert write_gate("maths", model_list("Claude, Perplexity")) is None and write_gate("science", ["claude", "perplexity"])
+    assert write_gate("maths", ["claude", "grok"]) and write_gate("maths", ["claude"]) and write_gate("science", ["a", "b", "c"]) is None
     print("imgpack selftest ok")
 
 
