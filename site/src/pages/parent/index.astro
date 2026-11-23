@@ -483,7 +483,7 @@ const data = {
     if (detail.kind === 'topics') {
       // one compact card per sub-topic (two lines): name, counts, a bar chart and a Retest button that puts every wrong
       // question of it back for a retest at once (owner, 23 Nov 2026: no question list here; the wrong count lists them)
-      const can = !!child;
+      const can = !!child && writable;
       let html = `<div class="dhead"><h3>${esc(school.name)}: topics</h3>${close}</div>`
         + `<p class="legend"><span>Each bar is all of the sub-topic's questions:</span> <span class="k ok"></span>right first time <span class="k mid"></span>right after retest <span class="k bad"></span>still to retest <span class="k all"></span>not tried yet</p>`
         + (can ? '<p class="note">Assign asks the child to do one 10-question quiz on that sub-topic first: it pops up on their account and stays at the top of their Schools page until it is done.</p>' : '')
@@ -522,7 +522,7 @@ const data = {
       // (past-paper questions only while the child's quiz can load them)
       const pick = [...wrong].filter(([bq]) => askable(bq))
         .sort((a, b) => (b[1].s > 0 ? 1 : 0) - (a[1].s > 0 ? 1 : 0) || b[1].w - a[1].w).slice(0, REVISION_MAX).map(([bq]) => bq.id);
-      const can = !!child; // only a parent writes the child's save; the admin's view is read-only
+      const can = !!child && writable; // a parent's own child, or the admin's Test Player (the database allows no other admin write)
       const sent = (s.revision?.ids ?? []).filter((id) => wrong.some(([bq]) => bq.id === id));
       box.innerHTML = `<div class="dhead"><h3>${esc(school.name)}: ${plural(wrong.length, 'question')} answered wrong</h3>${close}</div>`
         + (can && pick.length > 1 ? `<p><button type="button" class="btn" data-act="revise" data-ids="${esc(pick.join(' '))}">Send ${pick.length} as a revision test now</button></p>
@@ -856,6 +856,7 @@ const data = {
   // `child.raw` is the migrated server save as stored (pushed back with only the settings changed); `s` is its cleaned
   // copy for display. `pick` guards against out-of-order replies: a reply for an older pick is dropped.
   let child: { id: string; rev: number | null; raw: SaveV1 } | null = null;
+  let writable = false; // the picked child's save may be changed from here (set with the pick)
   let pick = 0, isParentView = false, pickerReady = false;
   let fillSettings = () => {};
   const renderAll = () => { wrongSeq++; viewSeq++; renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
@@ -920,6 +921,7 @@ const data = {
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';
     isParentView = isParent;
+    writable = isParent; // a parent changes their own children's saves; the admin only the Test Player's (initAdminKids)
     if (!isParent) { $('tab-fam').hidden = true; $('tab-admin').hidden = false; }
     else $('who-note').textContent = 'Signed in as the parent. This page shows your children\'s progress as saved on the server.';
     if (isParent) {
@@ -942,6 +944,29 @@ const data = {
     try { viewId = (await player.auth.getSession()).data.session?.user.id ?? null; } catch { viewId = null; }
     renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest();
     void initWrongPicker();
+    void initAdminKids();
+  }
+
+  // Admin (owner, 23 Nov 2026, for testing): the same "Showing" picker a parent has, over the admin's own children (the Test
+  // Player). Reading any save is allowed to the admin; writing (Retest, Assign, revision test, settings) only the Test
+  // Player's, which the database enforces, so the actions show only for it.
+  async function initAdminKids() {
+    try {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) return;
+      const r = await callFunction('admin', { action: 'list_children' }, data.session.access_token);
+      const kids = (r.status === 200 ? r.body?.children : null) as { id: string; name: string; role: string }[] | null;
+      if (!kids?.length) return;
+      const sel = $<HTMLSelectElement>('kid-who');
+      sel.innerHTML = '<option value="">This device</option>' + kids.map((k) => `<option value="${esc(k.id)}" data-test="${k.role === 'test'}">${esc(k.name)}${k.role === 'test' ? ' (Test Player)' : ''}</option>`).join('');
+      $('kid-pick').hidden = false;
+      sel.addEventListener('change', async () => {
+        const opt = sel.selectedOptions[0];
+        if (!sel.value) { child = null; writable = false; s = cleanSave(load()); viewId = (await player.auth.getSession()).data.session?.user.id ?? null; renderAll(); return; }
+        writable = opt?.dataset.test === 'true';
+        await showChild(sel.value).catch(() => { $('mastery').innerHTML = '<p class="note">Could not load that save.</p>'; });
+      });
+    } catch { /* no picker: this device only */ }
   }
 
   void start();

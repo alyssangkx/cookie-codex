@@ -164,9 +164,8 @@ const data = {
 
   // ------------------------------------------------------------ sign-in and the authenticator
   let factorId = '';
-  // owner, 23 Nov 2026: the admin stays signed in (the Parent page opens straight away), but this console and its powers
-  // (PINs, deleting children) ask for the authenticator code once on every visit
-  let codeThisVisit = false;
+  // owner, 23 Nov 2026: the authenticator code is asked once per sign-in (the session stays aal2 until Log out), not on
+  // every visit to this console
   async function render() {
     const { data } = await supabase.auth.getSession();
     const user = data.session?.user;
@@ -178,7 +177,7 @@ const data = {
     }
     touch(GROWNUP_SEEN);
     const aal = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (aal.data?.currentLevel === 'aal2' && codeThisVisit) { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); void refreshHeavy(); return; }
+    if (aal.data?.currentLevel === 'aal2') { show('v-console'); signedInChrome(user.email ?? ''); await refreshKids(); void refreshHeavy(); return; }
     const fl = await supabase.auth.mfa.listFactors();
     const verified = fl.data?.totp?.[0]; // listFactors().totp holds verified factors only
     if (verified) { factorId = verified.id; show('v-challenge'); signedInChrome(user.email ?? ''); $('code2').focus(); return; }
@@ -209,7 +208,6 @@ const data = {
     const code = input.value.trim(); input.value = '';
     const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId, code });
     if (error) { flash('That code did not work. Wait for the next code and try again.'); return; }
-    codeThisVisit = true;
     await render();
   };
   $('f-enroll').addEventListener('submit', verify('code1'));
