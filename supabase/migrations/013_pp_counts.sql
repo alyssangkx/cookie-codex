@@ -10,9 +10,9 @@
 begin;
 
 create function public.pp_counts()
-returns table (subtopic text, level text, n int)
+returns table (subject text, subtopic text, level text, n int)
 language sql stable security definer set search_path = '' as $$
-  select i.subtopic, i.level, count(*)::int from public.pp_items i where i.active group by i.subtopic, i.level
+  select i.subject, i.subtopic, i.level, count(*)::int from public.pp_items i where i.active group by i.subject, i.subtopic, i.level
 $$;
 revoke execute on function public.pp_counts() from public, anon;
 grant execute on function public.pp_counts() to authenticated;

@@ -227,7 +227,7 @@ const data = {
   import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { ppMode, isPpId } from '../../lib/pastpaper';
+  import { ppMode, isPpId, ppSubjectOf } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string;
@@ -900,17 +900,22 @@ const data = {
   // active past-paper questions each sub-topic has and puts that in place of the build's past-paper part (a pool sub-topic
   // counts its past papers only, a merged one its generated questions plus its past papers). Numbers only; on any failure
   // the build's counts stay.
+  let countsSettled = false;
   async function liveCounts(): Promise<boolean> {
     try {
       const r = await supabase.rpc('pp_counts');
       if (r.error || !Array.isArray(r.data)) return false;
       const live = new Map<string, number>();
-      for (const x of r.data as { subtopic: string; n: number }[]) live.set(x.subtopic, (live.get(x.subtopic) ?? 0) + Number(x.n));
+      // only rows of the sub-topic's own subject count: pp_pool serves a sub-topic from its subject only
+      for (const x of r.data as { subject: string; subtopic: string; n: number }[])
+        if (ppSubjectOf(x.subtopic) === x.subject) live.set(x.subtopic, (live.get(x.subtopic) ?? 0) + Number(x.n));
       let changed = false;
       for (const sub of P.subs) {
-        if (sub.mode !== 'pool' && sub.mode !== 'merge') continue; // sub-topics not switched on serve no past papers
+        // ponytail: pool and merge only (every switched sub-topic today); a 'replace' one keeps its build count until a deploy
+        if (sub.mode !== 'pool' && sub.mode !== 'merge') continue;
         const n = live.get(sub.id) ?? 0;
         const avail = sub.mode === 'pool' ? n : Math.max(0, sub.avail - sub.pp) + n;
+        if (countsSettled) return false; // too late: the page has drawn with the build's counts
         if (avail !== sub.avail) { sub.avail = avail; sub.pp = n; changed = true; }
       }
       return changed;
@@ -922,7 +927,10 @@ const data = {
   async function start() {
     if (started) return;
     started = true;
-    void liveCounts().then((changed) => { if (changed && !$('content').hidden) renderAll(); });
+    // the counts are in place before the first draw (up to 2.5 s); a later answer is dropped, so no redraw ever replaces a
+    // view the grown-up already opened or shows this device's save while a child's is loading
+    await Promise.race([liveCounts(), new Promise((r) => setTimeout(r, 2500))]);
+    countsSettled = true;
     // the page is gated (Base.astro): an admin at aal2, or a parent (aal2 once they enrolled an authenticator)
     const { data } = await supabase.auth.getSession();
     const isParent = roleOf(data.session) === 'parent';

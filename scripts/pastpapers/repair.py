@@ -222,33 +222,39 @@ def audit_pack(sels):
             if not r.get("crops"):
                 continue
             items.append({"id": r["src_id"], "pp_id": r["id"], "subject": subject, "year": r["year"], "crops": r["crops"]})
-    # questions.jsonl is read once per (subject, year)
-    boxes = {}
-    for s, y in {(i["subject"], i["year"]) for i in items}:
+    boxes, merged = {}, {}
+    for s, y in {(i["subject"], i["year"]) for i in items}:  # each year's files read once
         for q in jl(DEV_PP / s / str(y) / "questions.jsonl"):
             for f in q.get("figures") or []:
                 if isinstance(f, dict) and f.get("bbox"):
-                    boxes[(q["id"], f.get("page"))] = f["bbox"]
-    merged = {}
-    for s, y in {(i["subject"], i["year"]) for i in items}:
-        for q in jl(DEV_PP / s / str(y) / "merged.jsonl"):
-            merged[q["id"]] = q
-    out = []
+                    boxes.setdefault((q["id"], f.get("page")), []).append(f["bbox"])
+        merged.update({q["id"]: q for q in jl(DEV_PP / s / str(y) / "merged.jsonl")})
+    out, two = [], 0
     for i in items:
         q = merged.get(i["id"]) or {}
         for c in i["crops"]:
             m = re.search(r"-p(\d+)\.png$", c)
             page = int(m.group(1)) if m else None
-            if page is None or (i["id"], page) not in boxes:
-                continue  # a recrop or a crop with no recorded box: nothing to compare
+            bs = boxes.get((i["id"], page)) or []
+            if len(bs) != 1:
+                two += len(bs) > 1  # two pictures of one question on one page: one model read cannot judge both
+                continue  # (none: a recrop or a crop with no recorded box)
             out.append({"id": i["id"], "pp_id": i["pp_id"], "subject": i["subject"], "year": i["year"], "qno": q.get("qno"),
                         "pages": [page], "start": (q.get("text") or "")[:120], "job": "crop",
-                        "audit": {"page": page, "bbox": boxes[(i["id"], page)]}})
+                        "audit": {"page": page, "bbox": bs[0]}})
     (AUDIT / "items.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in out))
     c = {}
     for r in out:
         c[r["subject"]] = c.get(r["subject"], 0) + 1
-    print(f"{len(out)} crops to audit {c} -> {AUDIT / 'items.jsonl'}")
+    print(f"{len(out)} crops to audit {c} -> {AUDIT / 'items.jsonl'}; {two} pages with two crops of one question left out")
+
+
+def audit_box_ok(b, w, h):
+    """For the audit any real box counts, a full-page diagram too (box_ok's 80% cap is for cutting new crops)."""
+    if not (isinstance(b, list) and len(b) == 4 and all(isinstance(x, (int, float)) for x in b)):
+        return False
+    x1, y1, x2, y2 = b
+    return 0 <= x1 < x2 <= w * 1.02 and 0 <= y1 < y2 <= h * 1.02 and x2 - x1 >= 0.02 * w and y2 - y1 >= 0.01 * h
 
 
 def audit_flags(model_box, live_box):
@@ -266,19 +272,23 @@ def audit_flags(model_box, live_box):
 def audit_report(results, per=6):
     from PIL import Image, ImageDraw
     rows, by = jl(results), {}
+    items = {(i["id"], i["pages"][0]): i for i in jl(Path(results).with_name("items.jsonl"))}  # run() does not copy audit/pp_id
     look = Path(results).with_name("look")
     look.mkdir(exist_ok=True)
     report = []
     for r in rows:
         if not page_path(r["subject"], r["year"], r["page"]).exists():
             continue
+        it = items.get((r["id"], r["page"]))
+        if not it:
+            continue
         b = (parse(r["raw"]) or {}).get("bbox_2d")
-        mb = to_page(b, r) if box_ok(b, r["w"], r["h"]) else None
-        k = r["audit"]["bbox"]
+        mb = to_page(b, r) if audit_box_ok(b, r["w"], r["h"]) else None
+        k = it["audit"]["bbox"]
         if (k[2] - k[0]) * (k[3] - k[1]) <= 0:
             continue
         fl = audit_flags(mb, k)
-        report.append({"id": r["id"], "pp_id": r.get("pp_id"), "subject": r["subject"], "year": r["year"], "page": r["page"],
+        report.append({"id": r["id"], "pp_id": it["pp_id"], "subject": r["subject"], "year": r["year"], "page": r["page"],
                        "flags": fl, "model": mb, "crop": k})
         for f in fl:
             by.setdefault((r["subject"], f), []).append(report[-1])
@@ -434,6 +444,7 @@ def selftest():
     assert audit_flags([0, 0, 10, 10], [0, 0, 10, 10]) == ["agree"]
     assert audit_flags([0, 0, 10, 20], [0, 0, 10, 10]) == ["crop-misses-part"]  # the crop has only half the picture
     assert audit_flags([0, 0, 10, 10], [0, 0, 10, 40]) == ["crop-much-bigger"]
+    assert audit_box_ok([10, 10, 990, 1450], 1000, 1500) and not box_ok([10, 10, 990, 1450], 1000, 1500)
     g = lambda raw, gt, w=1000, h=1000: {"raw": raw, "gate": gt, "w": w, "h": h, "subject": "x", "year": 0, "page": 1}
     assert gate_score([g('{"none": true}', {"none": True}), g('{"bbox_2d": [10, 10, 400, 300]}', {"none": True}),
                        g('{"none": true}', {"bbox": [0, 0, 0, 5]})]) == (0, 0, 1, 2), "a degenerate known box is skipped, a box on a text-only page counts against"

@@ -20,7 +20,7 @@ set role authenticated;
 select set_config('request.jwt.claims', '{"sub":"77777777-0000-0000-0000-0000000000a1","aal":"aal1"}', false);
 select pg_temp.ok((select n = 2 from public.pp_counts() where subtopic = 'sci-cnt' and level = 'basic'), 'active basic items counted, the withdrawn one not');
 select pg_temp.ok((select n = 1 from public.pp_counts() where subtopic = 'sci-cnt' and level = 'competent'), 'per level');
-select pg_temp.ok((select array_agg(k order by k) = array['level','n','subtopic']
+select pg_temp.ok((select array_agg(k order by k) = array['level','n','subject','subtopic']
                      from jsonb_object_keys((select to_jsonb(c) from public.pp_counts() c limit 1)) k), 'numbers only: no id, text or key column');
 reset role;
 set role anon;
