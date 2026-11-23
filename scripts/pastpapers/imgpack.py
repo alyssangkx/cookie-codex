@@ -422,8 +422,8 @@ def score(a):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
-        if nokey and len(models) < 3:
-            sys.exit("a no-key pack needs all three outside models (owner, 23 Nov 2026)")
+        if nokey and len(models) < (2 if a.allow_two else 3):  # --allow-two: the owner's recorded pair (Maths, 23 Nov 2026)
+            sys.exit("a no-key pack needs all three outside models (owner, 23 Nov 2026), or --allow-two for an owner-approved pair")
         # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
         if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
