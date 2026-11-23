@@ -371,6 +371,9 @@ def select(a):
         # still the one the verdict was made on (key_old).
         consensus = {c["id"]: c for c in jl(Path(a.blind) / "consensus" / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
+        # repair.py (server re-read, checked against the first read): a Chinese stem with its underlined word marked 「」
+        stemfix = {x["id"]: x["stem"] for x in jl(base / "stemfix.jsonl")}
+        merged = [dict(q, text=stemfix[q["id"]]) if q["id"] in stemfix else q for q in merged]
         ocrk = ocr_keys(base) if a.ocr_keys else {}
         rrk = reread_keys(base) if a.reread_keys else {}
         onans = on_answer_pages(base)
@@ -379,7 +382,7 @@ def select(a):
             if q.get("format") == "mcq" and isinstance(q.get("qno"), int):
                 last[(q.get("paper"), q.get("part"))] = max(last[(q.get("paper"), q.get("part"))], q["qno"])
         crops = collections.defaultdict(list)
-        for c in sorted((base / "crops").glob("*.png")):
+        for c in sorted((base / "crops").glob("*.png")) + sorted((base / "recrop").glob("*.png")):  # recrop: repair.py boxes
             crops[re.sub(r"-p\d+\.png$", "", c.name)].append(c)
         for q in merged:
             if q.get("format") != "mcq":
@@ -462,7 +465,7 @@ def select(a):
             else:
                 reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" and not vt else None) \
                     or ("tex-left" if any(re.search(r"\\|\^|[\x00-\x08\x0b\x0c\x0e-\x1f]", tex_to_text(x)) for x in [q.get("text") or "", *opts]) else None) \
-                    or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE else None)
+                    or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE and q["id"] not in stemfix else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
                 # cloze and 21+ visual text need their passage (owner, 21 Nov 2026: the split questions were visual text)
                 if not reason and a.subject == "english" and not vt and (not isinstance(q.get("qno"), int) or q["qno"] > 15
