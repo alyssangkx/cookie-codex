@@ -44,7 +44,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'sci-systems-resp-circ-parts': 'pool',
   'sci-cycles-repro-humans': 'pool', // 21 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'sci-cycles-water-cycle': 'merge',
-  'sci-diversity-living-characteristics': 'merge',
+  'sci-diversity-living-characteristics': 'pool', // 21 after the unsure-key confirms (23 Nov 2026)
   'sci-energy-heat-temp': 'pool', // 20 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'sci-energy-photo-respiration': 'merge',
   'sci-inquiry-predict-hyp': 'merge',
@@ -97,7 +97,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'math-fractions-addition-and-subtraction-of-fractions': 'merge', // 13
   'math-fractions-fraction-and-division': 'merge', // 1
   'math-fractions-mixed-numbers-and-improper-fractions': 'merge', // 11
-  'math-geometry-2d-shapes': 'merge', // 10
+  'math-geometry-2d-shapes': 'pool', // 20 after the unsure-key confirms (23 Nov 2026)
   'math-geometry-3d-shapes-and-nets': 'merge', // 7
   'math-geometry-line-symmetry': 'merge', // 8
   'math-geometry-perpendicular-and-parallel-lines': 'pool', // 25 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
