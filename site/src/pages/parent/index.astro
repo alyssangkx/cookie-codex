@@ -942,12 +942,12 @@ const data = {
       sel.addEventListener('change', async () => {
         const opt = sel.selectedOptions[0];
         const device = () => { pick++; child = null; s = cleanSave(load()); viewId = deviceId; $('bak-panel').hidden = false; renderAll(); }; // pick++: a pick still loading is dropped
-        $('who-note').textContent = note;
-        if (!sel.value) return device();
+        if (!sel.value) { $('who-note').textContent = note; return device(); }
+        const test = opt?.dataset.test === 'true';
+        $('who-note').textContent = `Signed in as the admin. Showing ${opt?.textContent ?? ''}, as saved on the server${test ? '' : ': you can look, not change anything'}.`;
         $('bak-panel').hidden = true; // the save code is this browser's own save, not the picked child's
-        const my = pick + 1; // the pick showChild is about to make
-        await showChild(sel.value, opt?.dataset.test === 'true').catch(() => { // never leave the picker naming a child the page doesn't show
-          if (my !== pick) return; // a newer pick has taken over
+        // showChild throws only for the current pick (an older reply returns first), so the fallback never hides a newer pick
+        await showChild(sel.value, test).catch(() => { // never leave the picker naming a child the page doesn't show
           sel.value = ''; device(); $('who-note').textContent = "Couldn't load that child's save: showing this device.";
         });
       });
