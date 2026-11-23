@@ -343,8 +343,9 @@ def build(a):
 
 
 # --allow-two pairs the owner approved: (subject, models). Maths: Claude + Perplexity for key disputes and unsure confirms
-# (22 Nov 2026) and no-key keys (23 Nov 2026); every other subject needs all three outside models.
-ALLOWED_PAIRS = [("maths", {"claude", "perplexity"})]
+# (22 Nov 2026) and no-key keys (23 Nov 2026); Science: Claude + Perplexity no-key keys (23 Nov 2026, Claude 138/139 and
+# Perplexity 134/134 on calibration, 20-question PDFs). English and Chinese need all three outside models.
+ALLOWED_PAIRS = [("maths", {"claude", "perplexity"}), ("science", {"claude", "perplexity"})]
 
 
 def model_list(s):
@@ -517,8 +518,8 @@ def selftest():
     assert ANS.findall("Q1: 3\nQ2：4\nQ10) 2") == [("1", "3"), ("2", "4"), ("10", "2")]
     assert ANS8.findall("Q1: 7\nQ2: 8") == [("1", "7"), ("2", "8")] and ANS.findall("Q1: 7") == []
     assert model_list(" Claude,claude ,Perplexity") == ["claude", "perplexity"]
-    assert {s for s, _ in ALLOWED_PAIRS} == {"maths"}, "a two-model pair is approved for Maths only (owner): other subjects need three"
-    assert write_gate("maths", model_list("Claude, Perplexity"), True) is None and "--allow-two" in write_gate("maths", ["claude", "perplexity"]) and write_gate("science", ["claude", "perplexity"], True)
+    assert {s for s, _ in ALLOWED_PAIRS} == {"maths", "science"}, "two-model pairs are approved for Maths and Science only (owner)"
+    assert write_gate("maths", model_list("Claude, Perplexity"), True) is None and "--allow-two" in write_gate("maths", ["claude", "perplexity"]) and write_gate("english", ["claude", "perplexity"], True)
     assert write_gate("maths", ["claude", "grok"]) and write_gate("maths", ["claude"]) and write_gate("science", ["a", "b", "c"]) is None
     print("imgpack selftest ok")
 
