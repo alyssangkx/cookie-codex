@@ -56,7 +56,15 @@ export interface SaveV1 {
   /** A revision test a parent sent from the parent page (owner, 23 Nov 2026): up to 10 of the child's mistakes, made due
    *  at once. Optional, no schema bump. Daily Review asks the ones still due first; answered, they leave it by themselves. */
   revision?: { ids: string[]; ts: number };
+  /** Sub-topics a parent assigned from the parent page (owner, 23 Nov 2026), with the name and page link to show. Optional,
+   *  no schema bump. One is done once a quiz on that sub-topic is finished after it was assigned. */
+  assigned?: Assignment[];
 }
+export interface Assignment { sub: string; name: string; href: string; ts: number }
+export const ASSIGN_MAX = 10;
+/** Assignments with no quiz on their sub-topic finished since they were assigned. */
+export const assignedPending = (s: SaveV1) =>
+  (s.assigned ?? []).filter((a) => !s.attempts.some((t) => t.sub === a.sub && !t.open && t.ts >= a.ts));
 
 export const REVISION_MAX = 10;
 const KEY = 'ccx:save';

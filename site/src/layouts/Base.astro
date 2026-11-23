@@ -111,7 +111,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
     <script>
       import { currentSession, offlineAllowed, grownup, adoptGrownup } from '../lib/supabase';
       import { initSync, logout, isChildSession } from '../lib/sync';
-      import { kv, crumbBalance } from '../lib/store';
+      import { kv, crumbBalance, load, assignedPending } from '../lib/store';
 
       // The one place the signed-in child's name is shown: header brand, tab title, and every
       // <span class="player-sep"> (becomes ", <Name>"). It comes from the profile at login (kv player-name,
@@ -129,6 +129,25 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         if (bal) bal.textContent = `Shop · ${crumbBalance()} Crumbs`;
       };
 
+      // A parent's assignments pop up once on a game page when a new one arrives (never in the middle of a quiz); the Schools
+      // page keeps listing them until a quiz on each is done. Text is set with textContent; links are sub-topic pages only.
+      const showAssigned = () => {
+        if (location.pathname.startsWith('/quiz')) return;
+        const todo = assignedPending(load()).filter((a) => /^\/train\/[a-z]+\/[a-z0-9-]+\/$/.test(a.href));
+        const newest = Math.max(0, ...todo.map((a) => a.ts));
+        if (!todo.length || Number(kv.get('assign-seen') ?? 0) >= newest) return;
+        kv.set('assign-seen', String(newest));
+        const d = document.createElement('dialog');
+        d.className = 'assign-pop';
+        const h = document.createElement('h2'); h.textContent = 'Your parent set you something to do first';
+        const ul = document.createElement('ul');
+        for (const a of todo) { const li = document.createElement('li'), l = document.createElement('a'); l.href = a.href; l.textContent = a.name || a.sub; li.append(l); ul.append(li); }
+        const go = document.createElement('a'); go.className = 'assign-go'; go.href = todo[0].href; go.textContent = "Let's start";
+        const later = document.createElement('button'); later.type = 'button'; later.className = 'assign-later'; later.textContent = 'Later';
+        later.addEventListener('click', () => d.close());
+        const row = document.createElement('p'); row.append(go, later);
+        d.append(h, ul, row); document.body.append(d); d.showModal();
+      };
       const root = document.documentElement;
       const gate = root.getAttribute('data-gate');
       const release = () => root.classList.remove('gate-pending');
@@ -176,7 +195,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
         } catch {
           if (gate === 'admin') go('/grownups/'); // fail closed
         } finally {
-          if (!leaving) { if (child) { try { showName(); } catch { /* storage unavailable */ } } release(); }
+          if (!leaving) { if (child) { try { showName(); showAssigned(); } catch { /* storage unavailable */ } } release(); }
         }
       })();
     </script>
@@ -186,6 +205,15 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
 <style is:global>
   html.gate-pending body { visibility: hidden; }
   html:not(.has-auth) .nav .gated { display: none; }
+  dialog.assign-pop { max-width: min(26rem, calc(100vw - 2rem)); border: 2px solid var(--r-ancient); border-radius: var(--radius-card); background: var(--paper); color: var(--cocoa); padding: 1rem 1.2rem; }
+  dialog.assign-pop::backdrop { background: rgb(0 0 0 / 0.35); }
+  dialog.assign-pop h2 { font-size: 1.2rem; margin: 0 0 0.5rem; }
+  dialog.assign-pop ul { margin: 0 0 0.8rem; padding-left: 1.2rem; }
+  dialog.assign-pop ul a { display: inline-flex; min-height: 40px; align-items: center; color: var(--berry); font-weight: 600; }
+  dialog.assign-pop p { display: flex; gap: 0.6rem; margin: 0; }
+  dialog.assign-pop .assign-go, dialog.assign-pop .assign-later { min-height: 44px; padding: 0 1.1rem; border-radius: var(--radius-control); font: 600 1rem var(--font-display); display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
+  dialog.assign-pop .assign-go { background: var(--berry); color: #fff; }
+  dialog.assign-pop .assign-later { background: #fff; color: var(--cocoa); border: 1.5px solid var(--crust); }
 </style>
 
 <style>

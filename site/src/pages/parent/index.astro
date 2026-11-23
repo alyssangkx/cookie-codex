@@ -202,6 +202,9 @@ const data = {
   .parent-page .tq-bars .tried, .parent-page .k.tried { fill: var(--cocoa-soft); background: var(--cocoa-soft); }
   .parent-page .tq-bars .bad { fill: var(--berry); } .parent-page .tq-bars .mid { fill: var(--r-ancient); }
   .parent-page .tq-card .btn.small { flex: none; margin-top: 0; }
+  .parent-page .btn.ghost { background: #fff; color: var(--cocoa); border: 1.5px solid var(--crust); }
+  .parent-page .btn.on { background: var(--berry); }
+  .parent-page .btn.done { background: var(--ok); }
   .parent-page .wq-stem { white-space: pre-line; }
   .parent-page .wq-fig { margin: 0.4rem 0; max-width: 32rem; }
   .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
@@ -216,7 +219,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, REVISION_MAX, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { ppMode, isPpId } from '../../lib/pastpaper';
@@ -449,6 +452,28 @@ const data = {
     renderDetail();
   }
   let dashMsg = ''; // the last Retest / revision status, kept across the re-render a save causes
+  // assignments (owner, 23 Nov 2026): a parent assigns a sub-topic; the child sees it as a priority until a quiz on it is done
+  function assignBtn(sub: PSub) {
+    const a = (s.assigned ?? []).find((x) => x.sub === sub.id);
+    if (!a) return `<button type="button" class="btn small ghost" data-act="assign" data-sub="${esc(sub.id)}">Assign</button>`;
+    const done = !assignedPending(s).some((x) => x.sub === sub.id);
+    return `<button type="button" class="btn small ${done ? 'done' : 'on'}" data-act="unassign" data-sub="${esc(sub.id)}" aria-pressed="true"`
+      + ` title="${done ? 'Done since it was assigned. Tap to clear it.' : 'Assigned. Tap to take it back.'}">${done ? 'Done ✓' : 'Assigned'}</button>`;
+  }
+  async function setAssigned(id: string, on: boolean) {
+    const sub = P.subs.find((x) => x.id === id);
+    if (!sub) return;
+    if (on && (s.assigned ?? []).length >= ASSIGN_MAX) { dashMsg = `At most ${ASSIGN_MAX} assignments at a time: clear a done one first.`; renderDetail(); return; }
+    const href = `/train/${sub.school}/${sub.id.replace(/^(math|sci|eng|chi)-/, '')}/`; // subSlug() in train.ts
+    const ok = await pushChild((x) => {
+      x.assigned = (x.assigned ?? []).filter((a) => a.sub !== id);
+      if (on) x.assigned.push({ sub: id, name: sub.name, href, ts: Date.now() });
+      if (!x.assigned.length) delete x.assigned;
+    });
+    dashMsg = !ok ? "Couldn't save that. Reload the page and try again."
+      : on ? `Assigned: ${sub.name}. It shows as a priority the next time they open the game.` : `Cleared: ${sub.name}.`;
+    const m = document.getElementById('dash-msg'); if (m) m.textContent = dashMsg;
+  }
   function renderDetail(scroll = false) {
     const box = document.getElementById('dash-detail');
     if (!box || !dash || !detail) { if (box) box.innerHTML = ''; return; }
@@ -477,6 +502,7 @@ const data = {
         html += `<div class="tq-card${sub.content ? '' : ' off'}"><div class="tq-main"><span class="nm" title="${esc(sub.name)}">${esc(sub.name)}</span>`
           + `<span class="tq-n">${sub.content ? `${sub.avail.toLocaleString()} q · ${l.length} tried · ${wrong.length} wrong · ${after} after retest` : 'Coming soon'}</span></div>`
           + (sub.content ? `<svg class="tq-bars" viewBox="0 0 88 22" role="img" aria-label="${esc(nums)}"><title>${esc(nums)}</title>${bar(sub.avail, 'all', 0)}${bar(l.length, 'tried', 6)}${bar(wrong.length, 'bad', 12)}${bar(after, 'mid', 18)}</svg>` : '')
+          + (can && sub.content ? assignBtn(sub) : '')
           + (queue.length ? `<button type="button" class="btn small" data-act="requeue" data-ids="${esc(queue.join(' '))}" aria-label="Retest the ${queue.length} still-wrong questions of ${esc(sub.name)} now" data-name="${esc(sub.name)}">Retest ${queue.length}</button>` : '')
           + '</div>';
       }
@@ -523,6 +549,7 @@ const data = {
     if (act === 'topics' || act === 'wrong') { detail = { kind: act, school: b.dataset.school! }; dashMsg = ''; renderDetail(true); }
     else if (act === 'close') { detail = null; dashMsg = ''; renderDetail(); $('h-mast').scrollIntoView(); }
     else if (act === 'recycle') void makeDue([b.dataset.id!], false);
+    else if (act === 'assign' || act === 'unassign') void setAssigned(b.dataset.sub!, act === 'assign');
     else if (act === 'requeue') {
       const ids = b.dataset.ids!.split(' ');
       if (confirm(`Put the ${ids.length} still-wrong question${ids.length === 1 ? '' : 's'} of ${b.dataset.name} into the next Daily Review now?`)) void makeDue(ids, false);

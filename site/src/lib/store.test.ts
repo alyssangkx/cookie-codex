@@ -691,3 +691,19 @@ test('revisionDue: a parent-sent revision test lists only its questions still du
   assert.deepEqual(revisionDue(s, t0 + 4 * DAY, 'h1'), []);
   assert.deepEqual(cleanSave({ ...s, revision: { ids: ['x', 3, ...'abcdefghijkl'], ts: t0 } }).revision!.ids.length, 10); // strings only, at most 10
 });
+
+test('assignedPending: an assignment is done once a quiz on it finishes after it was assigned', async () => {
+  const { fresh, assignedPending } = await import('./store.ts');
+  const { cleanSave } = await import('./cleansave.ts');
+  const s = fresh();
+  s.assigned = [{ sub: 'math-a', name: 'A', href: '/train/math/a/', ts: t0 }, { sub: 'math-b', name: 'B', href: '/train/math/b/', ts: t0 }];
+  s.attempts = [
+    { ts: t0 - 1, mode: 'tier', sub: 'math-a', score: 10, total: 10, ms: 1, tags: [] }, // before it was assigned
+    { ts: t0 + 1, mode: 'tier', sub: 'math-b', score: 2, total: 10, ms: 1, tags: [], open: true }, // started, not finished
+  ] as any;
+  assert.deepEqual(assignedPending(s).map((a) => a.sub), ['math-a', 'math-b']);
+  s.attempts.push({ ts: t0 + 2, mode: 'tier', sub: 'math-a', score: 3, total: 10, ms: 1, tags: [] } as any);
+  assert.deepEqual(assignedPending(s).map((a) => a.sub), ['math-b']); // any finished quiz counts, whatever the score
+  const c = cleanSave({ ...s, assigned: [...s.assigned, { sub: 'x', name: 'X', href: 'javascript:alert(1)', ts: 1 }, { sub: 'y', href: '//evil.example/', ts: 1 }] });
+  assert.deepEqual(c.assigned!.map((a) => a.sub), ['math-a', 'math-b']); // only sub-topic page links survive
+});

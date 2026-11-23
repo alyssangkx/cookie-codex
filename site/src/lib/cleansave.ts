@@ -133,6 +133,10 @@ export function cleanSave(raw: unknown): SaveV1 {
   s.last = typeof last.sub === 'string' && lt ? { sub: str(last.sub, 120), tier: lt } : null;
   if (r.crumbs !== undefined) s.crumbs = cleanCrumbs(r.crumbs);
   const rv = obj(r.revision);
+  // assignments: the link is only ever a sub-topic page (it is rendered as an href)
+  if (Array.isArray(r.assigned)) s.assigned = r.assigned.map(obj)
+    .filter((a: Obj) => typeof a.sub === 'string' && typeof a.href === 'string' && /^\/train\/[a-z]+\/[a-z0-9-]+\/$/.test(a.href as string))
+    .slice(0, 10).map((a: Obj) => ({ sub: str(a.sub, 120), name: str(a.name, 120), href: str(a.href, 160), ts: num(a.ts, 0, 1e15) }));
   if (Array.isArray(rv.ids)) s.revision = { ids: rv.ids.filter((x: unknown) => typeof x === 'string').slice(0, 10).map((x: string) => str(x, 40)), ts: num(rv.ts, 0, 1e15) };
   return s;
 }

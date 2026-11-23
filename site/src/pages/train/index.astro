@@ -12,6 +12,10 @@ const schools = SCHOOLS.map((s) => {
     <h1>Schools of Mastery</h1>
     <p class="lede">Train every day, clear tiers and earn cookie cards. Each sub-topic has three tiers: Basic, Intermediate and Competent.</p>
 
+    <section class="assigned" id="assigned" aria-labelledby="assigned-h" hidden>
+      <h2 id="assigned-h">To do first: set by your parent</h2>
+      <ul id="assigned-list"></ul>
+    </section>
     <div class="today-strip" id="today" aria-live="polite">
       <p><strong id="goal">Today: 0 of 2 quizzes</strong> · <span id="streak">No streak yet</span></p>
       <p class="goal-help" id="goal-help">Finish your quizzes each day to meet your daily goal.</p>
@@ -37,8 +41,16 @@ const schools = SCHOOLS.map((s) => {
 </Base>
 
 <script>
-  import { load, today, liveStreak, dayBlock, blockMessage, reviewDueCount, revisionDue, TIERS } from '../../lib/store';
+  import { load, today, liveStreak, dayBlock, blockMessage, reviewDueCount, revisionDue, assignedPending, TIERS } from '../../lib/store';
     const s = load();
+    // a parent's assignments come first until a quiz on each is finished (names and links come from the save: text only,
+    // links checked by cleanSave's rule here too)
+    const todo = assignedPending(s).filter((a) => /^\/train\/[a-z]+\/[a-z0-9-]+\/$/.test(a.href));
+    if (todo.length) {
+      const ul = document.getElementById('assigned-list')!;
+      for (const a of todo) { const li = document.createElement('li'), link = document.createElement('a'); link.href = a.href; link.textContent = a.name || a.sub; li.append(link); ul.append(li); }
+      document.getElementById('assigned')!.hidden = false;
+    }
   const t = today(s);
   document.getElementById('goal')!.textContent =
     `Today: ${Math.min(t.quizzes, s.settings.dailyGoalQuizzes)} of ${s.settings.dailyGoalQuizzes} quizzes` +
@@ -88,4 +100,8 @@ const schools = SCHOOLS.map((s) => {
   .links { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
   .links a { display: inline-flex; align-items: center; min-height: 44px; }
   .goal-help { color: var(--cocoa-soft); font-size: 0.9rem; flex-basis: 100%; }
+  .assigned { background: #fff4e0; border: 2px solid var(--r-ancient); border-radius: var(--radius-card); padding: 0.8rem 1rem; margin: 1rem 0; }
+  .assigned h2 { font-size: 1.15rem; margin: 0 0 0.4rem; }
+  .assigned ul { margin: 0; padding-left: 1.2rem; }
+  .assigned a { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-display); font-weight: 600; color: var(--berry); }
 </style>
