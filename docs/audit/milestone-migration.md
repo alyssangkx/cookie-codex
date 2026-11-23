@@ -39,7 +39,7 @@ Some past-paper questions, fewer than 20: tiers with them merged in; needs more 
 | Science | Predicting and hypothesising (`sci-inquiry-predict-hyp`) | Scientific inquiry skills assessed in PSLE (AO II b) | 9 | 0 (0 / 0 / 0) | merge |
 | Science | Overview of human systems (`sci-systems-human-overview`) | Human System (Digestive system) | 7 | 0 (0 / 0 / 0) | merge |
 | Science | Gases in air (`sci-systems-air-gases`) | Human System (Respiratory and circulatory systems) | 5 | 75 (25 / 25 / 25) | merge |
-| Chinese | 成语和习用语 (idioms and common expressions) (`chi-ciyu-idiom`) | 词语的认识和运用 (Words and usage) | 2 | 113 (37 / 39 / 37) | merge |
+| Chinese | 成语和习用语 (idioms and common expressions) (`chi-ciyu-idiom`) | 词语的认识和运用 (Words and usage) | 3 | 113 (37 / 39 / 37) | merge |
 
 ## generated-only (2)
 
