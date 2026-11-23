@@ -113,6 +113,8 @@ def nokey_sets(kind):
     if not holds.exists():
         sys.exit(f"missing holds file {holds}")
     only = {r["id"] for r in jl(holds) if r.get("reason") == "no-answer-key"}
+    if not only:
+        sys.exit("no no-key questions in the holds: nothing to pack")
     nokey, agree = [], []
     for y in range(2018, 2027):
         base = PP / subject / str(y)
@@ -370,7 +372,7 @@ def score(a):
     for i in unsure_ids:  # an unsure printed key: confirm only, never replace
         if i in bl:
             bl[i] = dict(bl[i], agree=None, pick=None)
-    models = a.models.split(",")
+    models = list(dict.fromkeys(a.models.split(",")))  # a repeated name is one model
     M = {m: {} for m in models}
     ids = []
     for qf in sorted(out.glob("part*.qmap.json")):
@@ -382,8 +384,7 @@ def score(a):
             num = part.removeprefix("part")
             # the model's name anywhere in the name ("gemini-code-science_part1.txt" too), the part number exact
             # glob every .txt and match the name case-insensitively ("Part 3_Gemini.txt"); "part1-gemini" counts, "part1-14" not
-            fs = sorted(f for f in out.glob("*.txt") if re.search(rf"(?<![a-z]){m}(?![a-z])", f.name, re.I)
-                        and re.search(rf"part[ _]?{num}(?:_\d+)?(?!\d|to|-\d)", f.name, re.I))  # "Part 10_..." too, not "Part 11to24"
+            fs = answer_files(out, num, m)
             if len(fs) > 1:
                 print(f"warning: {len(fs)} answer files for {part} {m}; using {fs[0].name}")
             for f in fs[:1]:
@@ -423,6 +424,9 @@ def score(a):
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
         if nokey and len(models) < 3:
             sys.exit("a no-key pack needs all three outside models (owner, 23 Nov 2026)")
+        # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
+        if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
+            sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
         if len(models) < (2 if a.allow_two else 3):
             sys.exit("--write needs 3 or more models (owner rule: unanimous outside models); --allow-two only where the owner chose a pair")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
@@ -437,18 +441,30 @@ def score(a):
         print("wrote", sum(map(len, verdicts.values())), "verdicts to", BLIND / "consensus")
 
 
+def answer_files(out, num, m):
+    """The answer files of part `num` from model `m`: the model's name anywhere in the name ("gemini-code-science_part1.txt"),
+    case-insensitive, the part number exact ("Part 10_..." too, not "Part 11to24" or "part1-14")."""
+    return sorted(f for f in out.glob("*.txt") if re.search(rf"(?<![a-z]){m}(?![a-z])", f.name, re.I)
+                  and re.search(rf"part[ _]?{num}(?:_\d+)?(?!\d|to|-\d)", f.name, re.I))
+
+
 def audit_score(a):
     """Lists the live rows where all models agree on an answer other than the live key (audit_report.json, ids and keys
     only), for the owner to decide. Writes no verdicts."""
     out = OUT / a.kind
     live = json.loads((out / AUDIT).read_text())
-    models = a.models.split(",")
+    models = list(dict.fromkeys(a.models.split(",")))
+    if len(models) < 3:
+        sys.exit("an audit needs all three outside models: 'unanimous' must mean three")
     M = {m: {} for m in models}
     for qf in sorted(out.glob("part*.qmap.json")):
         num = qf.name.split(".")[0].removeprefix("part")
         qmap = {int(k): v for k, v in json.load(open(qf)).items()}
         for m in models:
-            for f in sorted(out.glob(f"split_part{num}_{m}.txt"))[:1]:
+            fs = answer_files(out, num, m)
+            if not fs:
+                sys.exit(f"no answers from {m} for part {num}: an audit with gaps would read as clean")
+            for f in fs[:1]:
                 for mm in ANS.finditer(f.read_text(encoding="utf-8", errors="replace")):
                     if int(mm.group(1)) in qmap:
                         M[m][qmap[int(mm.group(1))]] = mm.group(2)
@@ -479,6 +495,7 @@ if __name__ == "__main__":
     p.add_argument("cmd", choices=("build", "score", "selftest"))
     p.add_argument("--kind", default="english-visual", choices=tuple(KINDS))
     p.add_argument("--write", action="store_true", help="score: write the unanimous verdicts for load_pp select")
+    p.add_argument("--accept-cal", action="store_true", help="score --write on a no-key pack below the calibration bar (owner checked)")
     p.add_argument("--allow-two", action="store_true", help="score --write with two models (owner's choice, e.g. Maths 22 Nov 2026)")
     p.add_argument("--per", type=int, default=15)
     p.add_argument("--skip", default=str(TMP / "blind3" / "english" / "vt_pilot_sets.json"))
