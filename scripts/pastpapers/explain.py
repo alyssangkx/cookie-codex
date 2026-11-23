@@ -120,7 +120,10 @@ def pack(sels):
 def llm(model):
     from vllm import LLM, SamplingParams
     return LLM(model=model, tensor_parallel_size=int(os.environ.get("PP_TP", "4")), gpu_memory_utilization=0.9,
-               max_model_len=4096, enforce_eager=bool(os.environ.get("PP_EAGER")), trust_remote_code=True), SamplingParams(temperature=0, max_tokens=500)
+               max_model_len=4096, enforce_eager=bool(os.environ.get("PP_EAGER")), trust_remote_code=True,
+               # InternLM's fast tokenizer is built from its sentencepiece model through protobuf, which the server's
+               # protobuf 4.25 cannot do (runtime_version); the slow tokenizer reads the model file directly
+               tokenizer_mode="slow" if "internlm" in model.lower() else "auto"), SamplingParams(temperature=0, max_tokens=500)
 
 
 def run(items_file, phase):
