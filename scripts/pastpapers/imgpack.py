@@ -445,18 +445,21 @@ def score(a):
         elif c.startswith("replace"):
             verdicts[year[i]].append({"id": i, "key_old": str(bl[i]["key"]), "key_new": u, "kind": "replace", "src": "+".join(models) + "+local"})
     print("disputed:", dict(C))
+    if missing:  # shown on every run, so a dry run's counts are read with the gap in mind
+        print(f"WARNING: no answer file for {len(missing)} part(s): {', '.join(missing)} (their questions count as unanswered)")
     if a.write:  # merged with the verdicts already there (a new verdict on the same id replaces the old one)
         why = write_gate(subject, models, a.allow_two)  # first: never ask the owner to check a calibration for a refused model set
         if why:
             sys.exit(why)
-        if missing:  # a missing or misnamed part would read as "split" and erase that part's older verdicts
-            sys.exit(f"no answer file for {len(missing)} part(s), e.g. {missing[0]}: check the file names (part<N>_<model>.txt)")
         # a model key is the only key those questions get: write only after a clean calibration, unless the owner has looked
         if nokey and (len(cu) < 30 or ok / len(cu) < 0.98) and not a.accept_cal:
             sys.exit(f"calibration {ok}/{len(cu)} is under the 98% bar (or too small): check it, then --accept-cal on the owner's OK")
         # a disputed question of this pack that is no longer unanimous loses an older verdict (a re-score must not
         # leave a stale replace behind)
-        stale = {i for i in ids if bl[i].get("agree") is not True} - {v["id"] for vs in verdicts.values() for v in vs}
+        # only a real split counts (every model answered): an unanswered question (missing, misnamed, cut-off or
+        # unreadable answer file) keeps its older verdict
+        stale = ({i for i in ids if bl[i].get("agree") is not True and all(i in M[m] for m in models)}
+                 - {v["id"] for vs in verdicts.values() for v in vs})
         for y in sorted(set(verdicts) | {year[i] for i in stale}):
             vs = verdicts.get(y, [])
             f = BLIND / "consensus" / f"{subject}-{y}.jsonl"

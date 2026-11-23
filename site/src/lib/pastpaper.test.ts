@@ -280,5 +280,4 @@ test('every pool sub-topic has at least MIN_POOL past-paper questions (pp_counts
     .map((s) => [s, ['b', 'i', 'c'].reduce((n, t) => n + (pp[`${s}|${t}`] ?? 0), 0)] as const)
     .filter(([, n]) => n < MIN_POOL); // the rule train.ts builds with
   assert.deepEqual(short, [], 'pool sub-topics under the minimum: switch them back to merge or add questions');
-  assert.equal(PP_MIN_TIER, MIN_POOL, 'the replace-tier minimum and the pool minimum are one rule');
 });

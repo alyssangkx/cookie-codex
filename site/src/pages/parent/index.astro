@@ -741,6 +741,7 @@ const data = {
   async function refreshFamily() {
     me = await callParentApi<Me>({ action: 'me' });
     if (me.deleted_at) {
+      pick++; // a child's save still loading must not show again under the deletion notice
       $('family').hidden = true; $('content').hidden = true; $('fam-deleted').hidden = false;
       $('fam-deleted-note').textContent = `Your children cannot sign in. Everything will be erased on ${purgeDay(me.deleted_at)} unless you restore it.`;
       return;
