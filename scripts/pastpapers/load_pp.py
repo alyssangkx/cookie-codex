@@ -1208,11 +1208,8 @@ def selftest():
     assert deactivate_set({"a", "b", "c"}, {"b", "x"}) == {"a", "c"}  # held/dropped/re-tagged rows go; new row x is not "existing"
     assert deactivate_set(set(), {"a"}) == set() and deactivate_set({"a"}, {"a"}) == set()
     assert in_use([{"questions": {"pp-a": {"s": 0, "w": 1}, "pp-b": {"s": 0, "w": 0}, "pp-c": {"s": 3, "w": 1}, "x-1": {"s": 1, "w": 1}}}, None]) == {"pp-a", "pp-c"}
-    _db = [{"id": "pp-k"}, {"id": "pp-n"}]
-    st, db2, sw, ft = keep_used_copies({"pp-d", "pp-f"}, _db, {"pp-d", "pp-f"}, {"pp-d": "pp-k"}, {"pp-k": {}, "pp-d": {}, "pp-f": {}})
-    assert st == {"pp-k", "pp-f"} and [d["id"] for d in db2] == ["pp-n"] and sw == 1 and ft == 1, "child's copy kept, twin off; a faulted row still goes"
-    st, db2, sw, _ = keep_used_copies({"pp-d"}, _db, {"pp-d", "pp-k"}, {"pp-d": "pp-k"}, {"pp-k": {}, "pp-d": {}})
-    assert st == set() and len(db2) == 2, "both copies in use: both stay"
+    st, kept, ft = keep_used_copies({"pp-d", "pp-e", "pp-f", "pp-g"}, {"pp-d", "pp-e", "pp-f"}, {"pp-d": "pp-k", "pp-e": "pp-k", "pp-g": "pp-k"})
+    assert st == {"pp-f", "pp-g"} and kept == 2 and ft == 1, "copies in use stay live (three copies too); a faulted row still goes and is counted"
     held = {"b"}
     upl = {"a", "c"} - held  # a held id is never in the upload set, so it is only ever deactivated, never revived
     assert "b" in deactivate_set({"a", "b", "c"}, upl) and "b" not in upl
@@ -1382,6 +1379,23 @@ COUNTS = REPO / "site" / "src" / "data" / "pp_counts.json"
 TIER = {"basic": "b", "intermediate": "i", "competent": "c"}
 
 
+def live_saves(s, url, page=1000):
+    """Every save's questions map, of children not deleted, read page by page (PostgREST caps one answer at max-rows)."""
+    def all_rows(path, params):
+        out, off = [], 0
+        while True:
+            r = s.get(f"{url}/rest/v1/{path}", params={**params, "limit": str(page), "offset": str(off)}, timeout=60)
+            if r.status_code >= 300:
+                sys.exit(f"could not read {path} to protect children's retests: HTTP {r.status_code}")
+            got = r.json()
+            out += got
+            if len(got) < page:
+                return out
+            off += page
+    alive = {x["id"] for x in all_rows("profiles", {"select": "id", "deleted_at": "is.null"})}
+    return [{"questions": x.get("q")} for x in all_rows("saves", {"select": "child_id,q:data->questions"}) if x["child_id"] in alive]
+
+
 def in_use(saves) -> set:
     """Past-paper ids some child answered wrong or still has to retest (w > 0 or s > 0), across the given save datas."""
     out = set()
@@ -1392,22 +1406,13 @@ def in_use(saves) -> set:
     return out
 
 
-def keep_used_copies(stale, db, used, dup_of, live):
-    """(stale, db, swapped, faulted): for each dropped duplicate a child is using, keep it live and drop its kept copy
-    instead (when that copy is not in use itself: then both stay). `live`: existing active rows {id: {subtopic, level}}."""
-    stale, db = set(stale), list(db)
-    swapped = 0
-    for i in sorted(stale & used):
-        keep = dup_of.get(i)
-        if keep is None:
-            continue
-        stale.discard(i)  # the child's copy stays live
-        if keep not in used:  # its twin goes, unless a child uses that one too
-            db = [d for d in db if d["id"] != keep]
-            if keep in live:
-                stale.add(keep)
-        swapped += 1
-    return stale, db, swapped, len(stale & used)
+def keep_used_copies(stale, used, dup_of):
+    """(stale, kept, faulted): a dropped duplicate some child is still learning (wrong, or a retest due) stays live; its
+    twin is left as it is (in some cases both copies stay live, which beats losing the retest). A row switched off for a
+    fault (held key, bad picture) still goes and is counted."""
+    kept = {i for i in stale & used if i in dup_of}
+    stale = set(stale) - kept
+    return stale, len(kept), len(stale & used)
 
 
 def deactivate_set(existing_active: set, upload_ids: set) -> set:
@@ -1916,16 +1921,12 @@ def upload(a):
     # owner, 23 Nov 2026: a question a child answered wrong (or still has to retest) must not leave the pool. For a
     # duplicate, keep the child's copy live and switch the other copy off instead (the same question, so a quiz still
     # never meets two copies); a row switched off for a fault (held key, bad picture) still goes, and is counted
-    r = s.get(f"{url}/rest/v1/saves", params={"select": "data"}, timeout=60)
-    if r.status_code >= 300:
-        sys.exit(f"could not read the saves to protect children's retests: HTTP {r.status_code}")
-    used = in_use([x.get("data") for x in r.json()])
+    used = in_use(live_saves(s, url))
     dup_of = {pp_id(x["id"]): x["of"] for x in jl(out / "rejects.jsonl") if x.get("reason") == "duplicate" and x.get("of")}
-    stale, db, swapped, faulted = keep_used_copies(stale, db, used, dup_of, live)
-    rows = [x for x in rows if x["id"] in {d["id"] for d in db}]
+    stale, kept, faulted = keep_used_copies(stale, used, dup_of)
     print(f"would deactivate {len(stale)} existing rows no longer selected" if not a.apply
           else f"deactivating {len(stale)} existing rows no longer selected")
-    print(f"  {swapped} duplicate(s) a child answered wrong or has a retest on: that copy kept live, the other switched off")
+    print(f"  {kept} duplicate copy(ies) kept live: a child is still learning it (wrong, or a retest due); its twin stays too")
     if faulted:
         print(f"  {faulted} of the rows switched off have a child's wrong answer or retest (held for a fault: wrong key or picture)")
     if not a.apply:
@@ -1956,7 +1957,8 @@ def upload(a):
             sys.exit(f"deactivate failed at batch {i // 100}: HTTP {r.status_code}")
     print(f"loaded {len(db)} rows and {nfig} figures")
     # a child's copy kept live counts too: every active row of the uploaded sub-topics after this upload
-    write_counts(rows + [live[i] for i in sorted(set(live) - stale - {d["id"] for d in db})], usubs)
+    dbids = {d["id"] for d in db}
+    write_counts(rows + [live[i] for i in sorted(set(live) - stale - dbids)], usubs)
     print(f"wrote {COUNTS.name}")
 
 
