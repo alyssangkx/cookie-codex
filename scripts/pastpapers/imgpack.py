@@ -76,14 +76,10 @@ NOKEY_HOLDS = {"maths": TMP / "ppimport" / "math1826d" / "maths" / "rejects.json
                "english": TMP / "ppimport" / "eng1826" / "english" / "rejects.jsonl",
                "chinese": TMP / "ppimport" / "chi1826" / "chinese" / "rejects.jsonl"}
 NOKEY = "nokey.json"  # written by build for a -nokey pack: {id: year}, scored as model keys (three models, unanimous)
-# owner, 23 Nov 2026 ("more past-paper questions first"): the sub-topics short of 20 past-paper questions whose held
-# questions carry a printed key read as unsure (docs/audit/pp-recovery-short-subtopics.md); the latest selections' holds
-UNSURE_HOLDS = {"science": TMP / "ppimport" / "sci1826c" / "science" / "rejects.jsonl",
-                "maths": TMP / "ppimport" / "math1826c" / "maths" / "rejects.jsonl"}
-SHORT_SUBS = {"math-geometry-2d-shapes", "math-geometry-3d-shapes-and-nets", "math-geometry-line-symmetry",
-              "math-fractions-addition-and-subtraction-of-fractions", "math-fractions-mixed-numbers-and-improper-fractions",
-              "math-decimals-four-operations-with-decimals", "sci-cycles-water-cycle", "sci-diversity-living-characteristics",
-              "sci-energy-photo-respiration", "sci-inquiry-predict-hyp"}
+# every held question whose printed key was read as unsure (owner, 23 Nov 2026: all sub-topics; the first packs covered only
+# the short sub-topics and are kept in <kind>-short); the latest selections' holds
+UNSURE_HOLDS = {"science": TMP / "ppimport" / "sci1826e" / "science" / "rejects.jsonl",
+                "maths": TMP / "ppimport" / "math1826e" / "maths" / "rejects.jsonl"}
 CONFIRM_ONLY = "confirm-only.json"  # written by build for an -unsure pack: these ids are scored confirm-only
 CALIB = 200  # agreeing keys mixed into a single-question pack to measure the models
 # the latest selection's holds: a disputed question goes in only when the dispute is all that holds it back
@@ -188,7 +184,6 @@ def single_sets(kind):
     for y in range(2018, 2027):
         base = PP / subject / str(y)
         bl = {b["id"]: b for b in jl(BLIND / f"{subject}-{y}.jsonl")}
-        st = {t["id"]: t.get("st") for t in jl(base / "tags72.jsonl")} if unsure else {}
         for q in jl(base / "merged.jsonl"):
             b = bl.get(q["id"]) or {}
             if q.get("format") != "mcq" or len(q.get("options") or []) != 4 or not b.get("key") or not q.get("pages"):
@@ -203,14 +198,14 @@ def single_sets(kind):
             if refers and not all((base / "pages" / f"p{p:04d}.jpg").exists() for p in pages):
                 continue
             item = {"year": y, "ids": [q["id"]], "q": {q["id"]: q}, "pages": pages}
-            if unsure and q["id"] in only and st.get(q["id"]) in SHORT_SUBS:
+            if unsure and q["id"] in only:
                 dis.append(item)
             elif not unsure and b.get("agree") is False and b.get("pick") and q["id"] in only:
                 dis.append(item)
             elif b.get("agree") is True and q["id"] not in only:
                 agree.append(item)
     rng = random.Random(21)
-    items = dis + rng.sample(agree, min(60 if unsure else CALIB, len(agree)))
+    items = dis + rng.sample(agree, min(max(60, len(dis) // 10) if unsure else CALIB, len(agree)))  # unsure: about 1 in 11
     if unsure:
         (OUT / kind).mkdir(parents=True, exist_ok=True)
         (OUT / kind / CONFIRM_ONLY).write_text(json.dumps(sorted(i["ids"][0] for i in dis)))
