@@ -372,8 +372,7 @@ def select(a):
         consensus = {c["id"]: c for c in jl(Path(a.blind) / "consensus" / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
         # repair.py (server re-read, checked against the first read): a Chinese stem with its underlined word marked 「」
-        stemfix = {x["id"]: x["stem"] for x in jl(base / "stemfix.jsonl")}
-        merged = [dict(q, text=stemfix[q["id"]]) if q["id"] in stemfix else q for q in merged]
+        merged, stemfix = apply_stemfix(merged, jl(base / "stemfix.jsonl"))
         ocrk = ocr_keys(base) if a.ocr_keys else {}
         rrk = reread_keys(base) if a.reread_keys else {}
         onans = on_answer_pages(base)
@@ -978,6 +977,25 @@ def table_rows(opts):
         len(c) == 2 and all(re.fullmatch(r"[A-Za-z][A-Za-z +'-]{0,24}", y) for y in c) and " and " not in c[1] for c in cells)
 
 
+def apply_stemfix(merged, fixes):
+    """(merged, ids fixed): repair.py's marked stems replace the text only while the first read is the text they were
+    checked against (sha1 of it, "first"), and only with a 「」 mark; a re-OCR'd or renumbered question keeps its own text."""
+    import hashlib
+    fx = {x["id"]: x for x in fixes if MARK_ASK.search(x.get("stem") or "")}
+    out, used = [], set()
+    for q in merged:
+        x = fx.get(q["id"])
+        if x and x.get("first") == hashlib.sha1((q.get("text") or "").encode()).hexdigest()[:12]:
+            out.append(dict(q, text=x["stem"]))
+            used.add(q["id"])
+        else:
+            out.append(q)
+    return out, used
+
+
+MARK_ASK = re.compile(r"「[^「」]{1,12}」")
+
+
 def own_page_crops(crops, pages):
     """Crops on the question's own page(s). The cropper also files crops from other parts of the paper under the same
     question number (Booklet B q5 under Booklet A q5, 40-50 pages away; 372 of 1,250 Science items, 21 Nov 2026 tester
@@ -1047,6 +1065,12 @@ def selftest():
     assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
     assert chi_incomplete("他们在行业里很有名。", ["（1）xíng yè", "（2）xíng yà", "（3）háng yè", "（4）háng yà"]) is None
     assert chi_incomplete("老师说的话。", ["a", "b", "c", "d"]) == "chi-no-blank-underline-lost"
+    import hashlib as _h
+    _q = {"id": "x", "text": "他做事很认真。"}
+    _f = {"id": "x", "stem": "他做事很「认真」。", "first": _h.sha1("他做事很认真。".encode()).hexdigest()[:12]}
+    assert apply_stemfix([_q], [_f]) == ([dict(_q, text="他做事很「认真」。")], {"x"})
+    assert apply_stemfix([dict(_q, text="他做事很仔细。")], [_f])[1] == set(), "a changed first read keeps its own text"
+    assert apply_stemfix([_q], [dict(_f, stem="他做事很认真。")])[1] == set(), "a stem without a 「」 mark is not used"
     assert strip_num("（3）跌") == "跌" and strip_num("1. went") == "went" and strip_num("2.5 kg") == "2.5 kg" and strip_num("(4) 12") == "12"
     assert chi_incomplete("哥哥吃了一碗炒饭，但仍然觉得饿。", ["rēng rán", "réng rán", "lēng rán", "léng rán"]) is None
     assert chi_incomplete("老师让班长统计一下参加的人数。", ["记录重要的数字", "算出总体的数字", "a", "b"]) == "chi-no-blank-underline-lost"

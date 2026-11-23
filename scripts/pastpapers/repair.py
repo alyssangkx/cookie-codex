@@ -8,9 +8,12 @@
       matches the first read and the marked word is in it (check_stem).
 
   repair.py pack [SEL ...]      dev: items.jsonl from the selections' rejects (default: the latest ones) + the gate set
-  repair.py run ITEMS.jsonl     server (GPU; PP_ROOT = pastpapers folder, PP_VLM / PP_TP pick the model): results.jsonl
+  repair.py run ITEMS.jsonl     server (GPU; PP_ROOT = pastpapers folder, PP_VLM / PP_TP pick the model; PP_JOBS=stem
+                                reads only the stems, PP_OUT names the results file): results.jsonl
   repair.py gate RESULTS        dev: how well the boxes match the gate set (the bar: GATE_BAR of them, IoU and cover)
-  repair.py apply RESULTS       dev: cut the new crops into <year>/recrop/, write <year>/stemfix.jsonl (only after the gate)
+  repair.py apply RESULTS [--second RESULTS2] [--stems-only]
+                                dev: cut the new crops into <year>/recrop/ (only after the gate; only on the question's
+                                first page), write <year>/stemfix.jsonl (only stems two independent reads mark alike)
   repair.py selftest
 load_pp select reads recrop/*.png like crops/*.png and stemfix.jsonl as the stem. Prints counts only."""
 import json
@@ -28,6 +31,7 @@ SELS = [TMP / "ppimport" / s for s in ("math1826g/maths", "sci1826e/science", "e
 CROP_REASONS = ("needs-figure-no-crop", "crop-other-page")
 STEM_REASON = "chi-no-blank-underline-lost"
 GATE_N, GATE_BAR, IOU_MIN, COVER_MIN = 80, 0.90, 0.5, 0.9  # a gate box counts when IoU >= 0.5 and it covers 90% of the known box
+GATE_NEG = 40  # text-only questions: the model must say "none" (a box there is a picture that does not exist)
 SUBJ = {"maths": "Mathematics", "science": "Science", "english": "English", "chinese": "Chinese"}
 PROMPT_CROP = ("This is a page from a Primary 6 {subj} exam paper. Find question {qno}; its text begins: \"{start}\". "
                "Give the bounding box of the diagram, picture, graph or table that belongs to question {qno}: not its text "
@@ -76,8 +80,21 @@ def iou_cover(p, k):
 
 
 def first_stem(text):
-    """The first read's question sentence: the text before option (1)."""
-    return re.split(r"\n\s*\(?1\)|\s\(1\)\s", text or "", maxsplit=1)[0].strip()
+    """The first read's question sentence: the text before option 1, printed (1), （1） or "1." on a new line."""
+    return re.split(r"[（(]\s*1\s*[)）]|\n\s*1\s*[.、]", text or "", maxsplit=1)[0].strip()
+
+
+def text_hash(text):
+    import hashlib
+    return hashlib.sha1((text or "").encode()).hexdigest()[:12]
+
+
+UNDERLINE_WORDS = re.compile(r"[画划](?:了)?(?:横)?线(?:的)?")
+
+
+def unline(stem):
+    """The site shows the asked word in 「」, not underlined: '画线的词语' becomes '「」里的词语'."""
+    return UNDERLINE_WORDS.sub("「」里的", stem)
 
 
 def check_stem(read, first_text):
@@ -100,11 +117,15 @@ def check_stem(read, first_text):
 
 def pack(sels):
     WORK.mkdir(parents=True, exist_ok=True)
-    items, gate = [], []
+    if list(WORK.glob("results*.jsonl")):  # gate and apply read every row: old reads must not mix with a new pack
+        sys.exit(f"{WORK} holds results of an earlier pack: move them aside first")
+    items, gate, neg = [], [], []
     for sel in sels:
         subject = sel.name
         want = {r["id"]: r["reason"] for r in jl(sel / "rejects.jsonl") if r.get("reason") in CROP_REASONS + (STEM_REASON,)}
-        live = {r["src_id"] for r in jl(sel / "selected.jsonl") if r.get("crops")}
+        sel_rows = jl(sel / "selected.jsonl")
+        live = {r["src_id"] for r in sel_rows if r.get("crops")}
+        plain = {r["src_id"] for r in sel_rows if not r.get("crops")} if subject in ("maths", "science") else set()
         for y in range(2018, 2027):
             base = DEV_PP / subject / str(y)
             qs = {q["id"]: q for q in jl(base / "questions.jsonl")}
@@ -115,14 +136,17 @@ def pack(sels):
                        "start": (q.get("text") or "")[:120]}
                 if q["id"] in want:
                     items.append(dict(row, job="stem" if want[q["id"]] == STEM_REASON else "crop",
-                                      **({"text": q.get("text") or ""} if want[q["id"]] == STEM_REASON else {})))
+                                      **({"text": q.get("text") or "", "first": text_hash(q.get("text"))} if want[q["id"]] == STEM_REASON else {})))
                 elif q["id"] in live:  # a question whose crop is right: its known box is the gate's answer
                     figs = [f for f in (qs.get(q["id"]) or {}).get("figures", []) if isinstance(f, dict) and f.get("bbox")
                             and f.get("page") in q["pages"]]
                     if len(figs) == 1:
                         gate.append(dict(row, job="crop", pages=[figs[0]["page"]], gate={"page": figs[0]["page"], "bbox": figs[0]["bbox"]}))
+                elif q["id"] in plain:  # a selected text-only question: the right answer is "none"
+                    neg.append(dict(row, job="crop", pages=row["pages"][:1], gate={"none": True}))
     random.Random(23).shuffle(gate)
-    gate = gate[:GATE_N]
+    random.Random(29).shuffle(neg)
+    gate = gate[:GATE_N] + neg[:GATE_NEG]
     out = WORK / "items.jsonl"
     out.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in items + gate))
     c = {}
@@ -133,13 +157,17 @@ def pack(sels):
 
 def run(items_file):
     from PIL import Image
+    items_file = Path(items_file).resolve()  # vLLM takes only absolute file:// paths under allowed_local_media_path
     pp = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
-    out = Path(items_file).with_name("results.jsonl")
+    out = Path(items_file).with_name(os.environ.get("PP_OUT", "results.jsonl"))
+    jobs = set(os.environ.get("PP_JOBS", "crop,stem").split(","))
     done = {(r["id"], r.get("page")) for r in jl(out)}
     tmp = Path(items_file).with_name("img")
     tmp.mkdir(exist_ok=True)
     todo = []
     for r in jl(items_file):
+        if r["job"] not in jobs:
+            continue
         for p in r["pages"]:
             src = pp / r["subject"] / str(r["year"]) / "pages" / f"p{p:04d}.jpg"
             if (r["id"], p) in done or not src.exists():
@@ -167,72 +195,116 @@ def run(items_file):
             for (r, p, _, W, H), o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
                 f.write(json.dumps({"id": r["id"], "subject": r["subject"], "year": r["year"], "job": r["job"], "page": p,
                                     "w": W, "h": H, "raw": o.outputs[0].text, **({"gate": r["gate"]} if "gate" in r else {}),
-                                    **({"text": r["text"]} if "text" in r else {})}, ensure_ascii=False) + "\n")
+                                    **({"text": r["text"], "first": r.get("first")} if "text" in r else {})}, ensure_ascii=False) + "\n")
             f.flush()
             print(f"{min(i + 32, len(todo))}/{len(todo)}", flush=True)
 
 
-def page_size(subject, year, page):
-    from PIL import Image
-    with Image.open(DEV_PP / subject / str(year) / "pages" / f"p{page:04d}.jpg") as im:
-        return im.size
+def page_path(subject, year, page):
+    return DEV_PP / subject / str(year) / "pages" / f"p{page:04d}.jpg"
 
 
 def to_page(b, r):
-    """The model's box (in the w x h frame it saw) in the dev page's pixels."""
-    W, H = page_size(r["subject"], r["year"], r["page"])
+    """The model's box (in the w x h frame it saw) in the dev page's pixels, or None when dev lacks the page."""
+    from PIL import Image
+    f = page_path(r["subject"], r["year"], r["page"])
+    if not f.exists():
+        return None
+    with Image.open(f) as im:
+        W, H = im.size
     return [round(b[0] * W / r["w"]), round(b[1] * H / r["h"]), round(b[2] * W / r["w"]), round(b[3] * H / r["h"])]
 
 
-def gate(results):
-    rows = [r for r in jl(results) if "gate" in r]
-    hit = 0
+def gate_score(rows):
+    """(found, positives, quiet, negatives): known boxes found (IoU and cover), and text-only pages left without a box."""
+    found = pos = quiet = negs = 0
     for r in rows:
         b = (parse(r["raw"]) or {}).get("bbox_2d")
-        if box_ok(b, r["w"], r["h"]):
-            iou, cov = iou_cover(to_page(b, r), r["gate"]["bbox"])
-            hit += iou >= IOU_MIN and cov >= COVER_MIN
-    rate = hit / max(1, len(rows))
-    print(f"gate: {hit}/{len(rows)} known boxes found (IoU >= {IOU_MIN}, covering >= {COVER_MIN:.0%}): {rate:.1%}, bar {GATE_BAR:.0%}"
-          f" -> {'PASSED' if rate >= GATE_BAR and len(rows) >= 50 else 'FAILED'}")
-    return rate >= GATE_BAR and len(rows) >= 50
-
-
-def apply(results, force=False):
-    from PIL import Image
-    if not gate(results) and not force:
-        sys.exit("the crop gate failed: no crops written (stems are written separately with --stems-only)")
-    stems_only = force == "stems"
-    c = {"crops": 0, "no-box": 0, "stems": 0}
-    why = {}
-    fixes = {}
-    for r in jl(results):
-        if "gate" in r:
+        good = box_ok(b, r["w"], r["h"])
+        if r["gate"].get("none"):
+            negs += 1
+            quiet += not good
             continue
-        if r["job"] == "crop" and not stems_only:
+        k = r["gate"]["bbox"]
+        if (k[2] - k[0]) * (k[3] - k[1]) <= 0:
+            continue  # a degenerate known box measures nothing
+        pos += 1
+        pb = to_page(b, r) if good else None
+        if pb:
+            iou, cov = iou_cover(pb, k)
+            found += iou >= IOU_MIN and cov >= COVER_MIN
+    return found, pos, quiet, negs
+
+
+def gate(results):
+    found, pos, quiet, negs = gate_score([r for r in jl(results) if "gate" in r])
+    ok = pos >= 50 and negs >= 20 and found / pos >= GATE_BAR and quiet / negs >= GATE_BAR
+    print(f"gate: known boxes found {found}/{pos} ({found / max(1, pos):.1%}); text-only pages left without a box "
+          f"{quiet}/{negs} ({quiet / max(1, negs):.1%}); bar {GATE_BAR:.0%} each -> {'PASSED' if ok else 'FAILED'}")
+    print("note: the gate questions are ones the first cropper got right; spot-check a sample of the repaired crops before upload")
+    return ok
+
+
+def marks(read):
+    return MARK.findall(str((read or {}).get("stem") or ""))
+
+
+def apply(results, second=None, stems_only=False):
+    from PIL import Image
+    rows = jl(results)
+    items = {r["id"]: r for r in jl(Path(results).with_name("items.jsonl"))}
+    c = {"crops": 0, "no-box": 0, "not-first-page": 0, "no-dev-page": 0, "stems": 0}
+    if not stems_only:
+        if not gate(results):
+            sys.exit("the crop gate failed: no crops written (stems alone: --stems-only)")
+        written = set()
+        for r in rows:
+            if "gate" in r or r["job"] != "crop":
+                continue
             b = (parse(r["raw"]) or {}).get("bbox_2d")
             if not box_ok(b, r["w"], r["h"]):
                 c["no-box"] += 1
                 continue
-            x1, y1, x2, y2 = to_page(b, r)
-            pad = 12  # the model's box sits tight on the lines; `figures` grows a crop still touching an edge
-            src = DEV_PP / r["subject"] / str(r["year"]) / "pages" / f"p{r['page']:04d}.jpg"
+            # only the question's first page: on a later page the box may be the next question's picture
+            if r["page"] != min((items.get(r["id"]) or {}).get("pages") or [r["page"]]):
+                c["not-first-page"] += 1
+                continue
+            pb = to_page(b, r)
+            if not pb:
+                c["no-dev-page"] += 1
+                continue
             d = DEV_PP / r["subject"] / str(r["year"]) / "recrop"
-            d.mkdir(exist_ok=True)
-            with Image.open(src) as im:
+            if d not in written:  # this run's crops replace an earlier run's (a box rejected now must not ship)
+                d.mkdir(exist_ok=True)
+                for old in d.glob("*.png"):
+                    old.unlink()
+                written.add(d)
+            x1, y1, x2, y2 = pb
+            pad = 12  # the model's box sits tight on the lines; `figures` grows a crop still touching an edge
+            with Image.open(page_path(r["subject"], r["year"], r["page"])) as im:
                 im.convert("L").crop((max(0, x1 - pad), max(0, y1 - pad), min(im.width, x2 + pad), min(im.height, y2 + pad))).save(
                     d / f"{r['id']}-p{r['page']:04d}.png", optimize=True)
             c["crops"] += 1
-        elif r["job"] == "stem":
-            st, w = check_stem(parse(r["raw"]), r["text"])
-            if st:
-                fixes.setdefault((r["subject"], r["year"]), {})[r["id"]] = st
-            else:
-                why[w] = why.get(w, 0) + 1
+    # stems: one model's choice of word is not enough (the underline is what the first read lost): two independent reads
+    # must mark the same word(s), and the read must match the first read's sentence
+    why, fixes = {}, {}
+    two = {r["id"]: parse(r["raw"]) for r in jl(second) if r["job"] == "stem"} if second else {}
+    for r in rows:
+        if r["job"] != "stem":
+            continue
+        st, w = check_stem(parse(r["raw"]), r["text"])
+        if st and not second:
+            w, st = "needs-a-second-read", None
+        elif st and marks(two.get(r["id"])) != MARK.findall(st):
+            w, st = "second-read-marks-differ", None
+        if st:
+            fixes.setdefault((r["subject"], r["year"]), {})[r["id"]] = (unline(st), (items.get(r["id"]) or {}).get("first"))
+        else:
+            why[w] = why.get(w, 0) + 1
     for (subject, y), fx in fixes.items():
         f = DEV_PP / subject / str(y) / "stemfix.jsonl"
         have = {x["id"]: x for x in jl(f)}
-        have.update({i: {"id": i, "stem": s, "src": "repair.py"} for i, s in fx.items()})
+        have.update({i: {"id": i, "stem": s, "first": h, "src": "repair.py"} for i, (s, h) in fx.items()})
         f.write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in have.values()), encoding="utf-8")
         c["stems"] += len(fx)
     print(c, "stems not used:", why)
@@ -252,6 +324,12 @@ def selftest():
     assert check_stem({"stem": "「他」今天去了动物园看大象和长颈鹿。"}, first)[1] in ("marked-word-not-in-first-read", "sentence-differs-from-first-read")
     assert check_stem({"none": True}, first)[1] == "no-underline"
     assert first_stem("Which is right?\n(1) a\n(2) b") == "Which is right?"
+    assert first_stem("他做事很认真。（1）仔细（2）马虎") == "他做事很认真。" and first_stem("他很认真。\n1. 仔细\n2. 马虎") == "他很认真。"
+    assert unline("下面句子中画线的词语是什么意思？他很「认真」。") == "下面句子中「」里的词语是什么意思？他很「认真」。"
+    assert unline("句中划线部分") == "句中「」里的部分"
+    g = lambda raw, gt, w=1000, h=1000: {"raw": raw, "gate": gt, "w": w, "h": h, "subject": "x", "year": 0, "page": 1}
+    assert gate_score([g('{"none": true}', {"none": True}), g('{"bbox_2d": [10, 10, 400, 300]}', {"none": True}),
+                       g('{"none": true}', {"bbox": [0, 0, 0, 5]})]) == (0, 0, 1, 2), "a degenerate known box is skipped, a box on a text-only page counts against"
     print("repair selftest ok")
 
 
@@ -264,7 +342,8 @@ if __name__ == "__main__":
     elif cmd == "gate":
         gate(sys.argv[2])
     elif cmd == "apply":
-        apply(sys.argv[2], "stems" if "--stems-only" in sys.argv else False)
+        sec = sys.argv[sys.argv.index("--second") + 1] if "--second" in sys.argv else None
+        apply(sys.argv[2], sec, "--stems-only" in sys.argv)
     elif cmd == "selftest":
         selftest()
     else:
