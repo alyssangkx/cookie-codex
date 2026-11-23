@@ -6,6 +6,11 @@ questions"; Maths and Science next): why the key is right, and why each other op
   explain.py write ITEMS           server: Qwen2.5-72B writes one per item (PP_LLM, PP_TP) -> written.jsonl (resumable)
   explain.py judge ITEMS           server: a second model of another family (Llama-3.1-70B, PP_JUDGE) checks each one
                                    against the question and its key -> judged.jsonl (resumable)
+  explain.py calib                 dev: calib.jsonl = 60 passed explanations + 60 planted wrong ones (another question's
+                                   reason, or the reason argued for a wrong option): the judge must reject >= 90% of the
+                                   planted ones before its verdicts count (`judge` on calib.jsonl, then `calib-score`)
+  explain.py revise ITEMS          server: the writer rewrites every rejected one, given the judge's objection ->
+                                   revised.jsonl; `judge2` checks those -> judged2.jsonl (a second rejection drops it)
   explain.py apply [--sample N]    dev: the passed ones -> <selection>/<subject>/explain.jsonl (read by load_pp upload);
                                    prints N random passed ones for the owner's spot check
   explain.py selftest
@@ -31,6 +36,11 @@ WRITE = ("Question: {stem}\nOptions:\n{opts}\nThe correct answer is ({k}) {ans}.
          "and why it fits this sentence. Then, for each other option, write one short sentence saying why it does not fit. "
          "Quote the words themselves, use simple language, and never say another option could also be right.\n"
          "Reply with JSON only: {{\"right\": \"...\", \"wrong\": {{\"<option number>\": \"...\"}}}}")
+REVISE = ("Question: {stem}\nOptions:\n{opts}\nThe correct answer (already confirmed) is ({k}) {ans}.\n"
+          "Your earlier explanation:\n{old}\nA reviewer objected: {problem}\n\n"
+          "If the objection is right, fix the explanation; if it is wrong, keep what was right but make the wording "
+          "clearer. Keep it short and simple for a 12-year-old, quote the words, never say another option could also be "
+          "right. Reply with JSON only: {{\"right\": \"...\", \"wrong\": {{\"<option number>\": \"...\"}}}}")
 CHECK = ("Question: {stem}\nOptions:\n{opts}\nThe correct answer (already confirmed) is ({k}) {ans}.\n"
          "A teacher wrote this explanation for a 12-year-old:\nWhy ({k}) is right: {right}\n{wrongs}\n\n"
          "Is every statement in the explanation true English grammar or meaning, and does it support ({k}) without "
@@ -99,16 +109,31 @@ def llm(model):
 
 
 def run(items_file, phase):
+    """write: items -> written.jsonl; judge: written -> judged.jsonl (for calib.jsonl: the explanations inside it ->
+    calib_judged.jsonl); revise: rejected -> revised.jsonl; judge2: revised -> judged2.jsonl. All resumable."""
+    items_file = Path(items_file)
     items = jl(items_file)
-    out = Path(items_file).with_name("written.jsonl" if phase == "write" else "judged.jsonl")
-    done = {(r["id"], r.get("fp")) for r in jl(out)}  # a changed question (new fp) is written and judged again
-    written = {(r["id"], r.get("fp")): r for r in jl(Path(items_file).with_name("written.jsonl"))} if phase == "judge" else {}
+    d = items_file.parent
+    calib = items_file.name == "calib.jsonl"
+    names = {"write": "written", "judge": "calib_judged" if calib else "judged", "revise": "revised", "judge2": "judged2"}
+    out = d / f"{names[phase]}.jsonl"
     key = lambda r: (r["id"], r.get("fp"))
-    todo = [r for r in items if key(r) not in done and (phase == "write" or (written.get(key(r)) or {}).get("explain"))]
+    done = {key(r) for r in jl(out)}
+    if phase == "write":
+        src = {}
+    elif phase == "judge":
+        src = {key(r): r for r in items} if calib else {key(r): r for r in jl(d / "written.jsonl")}
+    elif phase == "revise":
+        bad = {key(r): r for r in jl(d / "judged.jsonl") if not r["ok"]}
+        wr = {key(r): r for r in jl(d / "written.jsonl")}
+        src = {k: dict(wr[k], problem=bad[k]["problem"]) for k in bad if (wr.get(k) or {}).get("explain")}
+    else:
+        src = {key(r): r for r in jl(d / "revised.jsonl")}
+    todo = [r for r in items if key(r) not in done and (phase == "write" or (src.get(key(r)) or {}).get("explain"))]
     print(len(todo), "to", phase, flush=True)
     if not todo:
         return
-    model, sp = llm(LLM if phase == "write" else JUDGE)
+    model, sp = llm(JUDGE if phase in ("judge", "judge2") else LLM)
     with open(out, "a", encoding="utf-8") as f:
         for i in range(0, len(todo), 64):
             ch, msgs = todo[i:i + 64], []
@@ -116,14 +141,17 @@ def run(items_file, phase):
                 k, o = r["answer"], r["options"]
                 if phase == "write":
                     p = WRITE.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k])
+                elif phase == "revise":
+                    s = src[key(r)]
+                    p = REVISE.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], old=say(s["explain"]), problem=s["problem"])
                 else:
-                    e = written[key(r)]["explain"]
+                    e = src[key(r)]["explain"]
                     wr = "\n".join(f"Why ({j + 1}) does not fit: {w}" for j, w in enumerate(e["wrong"]) if w)
                     p = CHECK.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], right=e["right"], wrongs=wr)
                 msgs.append([{"role": "system", "content": SYS}, {"role": "user", "content": p}])
             for r, res in zip(ch, model.chat(msgs, sp, use_tqdm=False)):
                 raw = res.outputs[0].text
-                if phase == "write":
+                if phase in ("write", "revise"):
                     rec = {"id": r["id"], "fp": r.get("fp"), "explain": shape(parse(raw), r["options"], r["answer"]), "raw": raw}
                 else:
                     v = parse(raw) or {}
@@ -131,6 +159,46 @@ def run(items_file, phase):
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             f.flush()
             print(f"{min(i + 64, len(todo))}/{len(todo)}", flush=True)
+
+
+def say(e):
+    return f"Why it is right: {e['right']}\n" + "\n".join(f"Why ({j + 1}) does not fit: {w}" for j, w in enumerate(e["wrong"]) if w)
+
+
+def calib():
+    """60 passed explanations kept as they are, and 60 planted wrong ones: half take another question's reason, half say
+    the reason for a wrong option (its words put where the answer's were)."""
+    items = {r["id"]: r for r in jl(WORK / "items.jsonl")}
+    wr = {r["id"]: r["explain"] for r in jl(WORK / "written.jsonl") if r.get("explain")}
+    ok = [r["id"] for r in jl(WORK / "judged.jsonl") if r["ok"] and r["id"] in wr and r["id"] in items]
+    rng = random.Random(11)
+    pick = rng.sample(ok, min(120, len(ok)))
+    good, plant = pick[:60], pick[60:]
+    out = [dict(items[i], id=f"good-{i}", explain=wr[i], planted=False) for i in good]
+    for n, i in enumerate(plant):
+        it, e = items[i], dict(wr[i])
+        if n % 2:  # another question's reason
+            other = wr[plant[(n + 1) % len(plant)]]
+            e = dict(e, right=other["right"])
+        else:  # argue for a wrong option: its words where the answer's were
+            wrong = next(j for j in range(len(it["options"])) if j != it["answer"])
+            e = dict(e, right=e["right"].replace(it["options"][it["answer"]], it["options"][wrong]) + f" So the answer is ({wrong + 1}).")
+        out.append(dict(it, id=f"plant-{i}", explain=e, planted=True))
+    (WORK / "calib.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in out))
+    print(f"{len(out)} calibration rows -> {WORK / 'calib.jsonl'}")
+
+
+def calib_score(path=WORK / "calib_judged.jsonl", bar=0.9):
+    rows = {r["id"]: r for r in jl(WORK / "calib.jsonl")}
+    j = jl(path)
+    caught = sum(1 for x in j if rows[x["id"]]["planted"] and not x["ok"])
+    planted = sum(1 for x in j if rows[x["id"]]["planted"])
+    kept = sum(1 for x in j if not rows[x["id"]]["planted"] and x["ok"])
+    good = len(j) - planted
+    rate = caught / max(1, planted)
+    print(f"judge caught {caught}/{planted} planted wrong explanations ({rate:.0%}); passed {kept}/{good} good ones "
+          f"-> {'PASSED' if rate >= bar else 'FAILED'} (bar {bar:.0%})")
+    return rate >= bar
 
 
 def apply(sample=0):
@@ -141,7 +209,10 @@ def apply(sample=0):
     cur = lambda r: r["id"] in items and r.get("fp") in (None, items[r["id"]]["fp"])
     written = {r["id"]: r.get("explain") for r in jl(WORK / "written.jsonl") if cur(r)}
     judged = {r["id"]: r for r in jl(WORK / "judged.jsonl") if cur(r)}
+    revised = {r["id"]: r.get("explain") for r in jl(WORK / "revised.jsonl") if cur(r)}
+    judged2 = {r["id"]: r for r in jl(WORK / "judged2.jsonl") if cur(r)}
     passed = {i: e for i, e in written.items() if e and judged.get(i, {}).get("ok")}
+    passed.update({i: e for i, e in revised.items() if e and judged2.get(i, {}).get("ok") and i not in passed})
     by = {r["sel"]: [] for r in items.values()}
     for i, e in passed.items():
         by[items[i]["sel"]].append({"id": i, "fp": items[i]["fp"], "explain": e})
@@ -175,8 +246,12 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "pack":
         pack([Path(s) for s in sys.argv[2:]] or SELS)
-    elif cmd in ("write", "judge"):
+    elif cmd in ("write", "judge", "revise", "judge2"):
         run(sys.argv[2], cmd)
+    elif cmd == "calib":
+        calib()
+    elif cmd == "calib-score":
+        sys.exit(0 if calib_score() else 1)
     elif cmd == "apply":
         apply(int(sys.argv[sys.argv.index("--sample") + 1]) if "--sample" in sys.argv else 0)
     elif cmd == "selftest":
