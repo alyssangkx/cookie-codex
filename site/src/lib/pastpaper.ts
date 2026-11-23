@@ -43,7 +43,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'sci-systems-plant-transport-parts': 'pool',
   'sci-systems-resp-circ-parts': 'pool',
   'sci-cycles-repro-humans': 'pool', // 21 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
-  'sci-cycles-water-cycle': 'merge',
+  'sci-cycles-water-cycle': 'pool', // 21 after the unsure-key confirms and two hand crops (23 Nov 2026)
   'sci-diversity-living-characteristics': 'pool', // 21 after the unsure-key confirms (23 Nov 2026)
   'sci-energy-heat-temp': 'pool', // 20 with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'sci-energy-photo-respiration': 'merge',
