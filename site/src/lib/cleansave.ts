@@ -2,7 +2,7 @@
 // this device) must not trust its shape. cleanSave() returns a well-formed SaveV1 for display: every number is a finite
 // number in range, every string a string, malformed entries dropped. It never writes storage and changes no save rules;
 // store.ts load()/migrations stay as they are. Use it before rendering a save into HTML.
-import { fresh, TIERS, PICK_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
+import { fresh, TIERS, PICK_MAX, ASSIGN_HREF, ASSIGN_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
 import { CRUMB_WHYS, LEDGER_MAX, type Crumbs, type CrumbWhy, type LedgerEntry, type Purchase } from './crumbs.ts';
 
 type Obj = Record<string, unknown>;
@@ -135,8 +135,8 @@ export function cleanSave(raw: unknown): SaveV1 {
   const rv = obj(r.revision);
   // assignments: the link is only ever a sub-topic page (it is rendered as an href)
   if (Array.isArray(r.assigned)) s.assigned = r.assigned.map(obj)
-    .filter((a: Obj) => typeof a.sub === 'string' && typeof a.href === 'string' && /^\/train\/[a-z]+\/[a-z0-9-]+\/$/.test(a.href as string))
-    .slice(0, 10).map((a: Obj) => ({ sub: str(a.sub, 120), name: str(a.name, 120), href: str(a.href, 160), ts: num(a.ts, 0, 1e15) }));
+    .filter((a: Obj) => typeof a.sub === 'string' && typeof a.href === 'string' && ASSIGN_HREF.test(a.href as string))
+    .slice(0, ASSIGN_MAX).map((a: Obj) => ({ sub: str(a.sub, 120), name: str(a.name, 120), href: str(a.href, 160), ts: num(a.ts, 0, 1e15), base: num(a.base, 0, 1e9) }));
   if (Array.isArray(rv.ids)) s.revision = { ids: rv.ids.filter((x: unknown) => typeof x === 'string').slice(0, 10).map((x: string) => str(x, 40)), ts: num(rv.ts, 0, 1e15) };
   return s;
 }

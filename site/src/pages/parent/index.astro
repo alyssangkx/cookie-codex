@@ -1,13 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { subs as allSubs, hasContent, cookieBySlug, SCHOOLS, banksHash, listGroup } from '../../lib/train';
+import { subs as allSubs, hasContent, cookieBySlug, SCHOOLS, banksHash, listGroup, subSlug } from '../../lib/train';
 
 const data = {
   total: cookieBySlug.size,
   // every subject's sub-topics in the order the training pages show them, with how many questions each has (a past-paper
   // pool counts all its questions); the question lists look questions up in the bank files
   subs: allSubs.map((s) => ({ id: s.id, name: s.name, school: s.school, topic: listGroup(s).topicName, file: s.file,
-    content: hasContent(s), avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c })),
+    content: hasContent(s), avail: s.poolAll ?? s.pool ?? s.count.b + s.count.i + s.count.c, href: `/train/${s.school}/${subSlug(s.id)}/` })),
   schools: SCHOOLS.map((s) => ({ id: s.id, name: s.name })),
   cards: Object.fromEntries([...cookieBySlug].map(([slug, c]) => [slug, c.name])), // card names for the Crumbs ledger
   banks: banksHash, // the retest queue hides only states parked by these banks (store.ts inReview), as the child's gates do
@@ -219,13 +219,13 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { ppMode, isPpId } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
-  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number }
+  interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string }
   const P = JSON.parse(document.getElementById('pdata')!.textContent!) as
     { total: number; min: number; subs: PSub[]; schools: { id: string; name: string }[]; cards: Record<string, string>; banks: string };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -463,14 +463,15 @@ const data = {
   async function setAssigned(id: string, on: boolean) {
     const sub = P.subs.find((x) => x.id === id);
     if (!sub) return;
-    if (on && (s.assigned ?? []).length >= ASSIGN_MAX) { dashMsg = `At most ${ASSIGN_MAX} assignments at a time: clear a done one first.`; renderDetail(); return; }
-    const href = `/train/${sub.school}/${sub.id.replace(/^(math|sci|eng|chi)-/, '')}/`; // subSlug() in train.ts
+    let full = false; // decided on the copy being written (a conflict retry re-runs this on the server's copy)
     const ok = await pushChild((x) => {
       x.assigned = (x.assigned ?? []).filter((a) => a.sub !== id);
-      if (on) x.assigned.push({ sub: id, name: sub.name, href, ts: Date.now() });
+      if (on && x.assigned.length >= ASSIGN_MAX) full = true;
+      else if (on) x.assigned.push({ sub: id, name: sub.name, href: sub.href, ts: Date.now(), base: finishedOn(x, id) });
       if (!x.assigned.length) delete x.assigned;
     });
     dashMsg = !ok ? "Couldn't save that. Reload the page and try again."
+      : full ? `At most ${ASSIGN_MAX} assignments at a time: clear a done one first.`
       : on ? `Assigned: ${sub.name}. It shows as a priority the next time they open the game.` : `Cleared: ${sub.name}.`;
     const m = document.getElementById('dash-msg'); if (m) m.textContent = dashMsg;
   }

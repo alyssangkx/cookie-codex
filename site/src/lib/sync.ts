@@ -267,7 +267,7 @@ let supaUrl = '', anonKey = '';
  * was newer, the first push, up to 3 s) is done. Returns 'conflict' while the conflict banner is waiting for an answer.
  * reload: reload the page when the local save was replaced (off on the login page, which navigates itself).
  */
-export async function initSync(opts: { reload?: boolean } = {}): Promise<'ok' | 'conflict' | 'skip'> {
+export async function initSync(opts: { reload?: boolean } = {}): Promise<'ok' | 'conflict' | 'skip' | 'reload'> {
   const mod = await import('./supabase.ts');
   const client = mod.supabase;
   supaUrl = mod.SUPABASE_URL; anonKey = mod.ANON_KEY;
@@ -286,7 +286,7 @@ export async function initSync(opts: { reload?: boolean } = {}): Promise<'ok' | 
     window.addEventListener('pagehide', flushOnClose);
   }
   firstPush = null;
-  if (await hydrate(childId) && opts.reload !== false) { location.reload(); return 'ok'; }
+  if (await hydrate(childId) && opts.reload !== false) { location.reload(); return 'reload'; }
   if (firstPush) await Promise.race([firstPush, new Promise((res) => setTimeout(res, 3000))]);
   return conflicted ? 'conflict' : 'ok';
 }
@@ -301,6 +301,7 @@ export async function logout() {
   kv.del('lastSeen');
   kv.del('player-name');
   kv.del('profile-unlimited');
+  kv.del('assign-seen'); // the next child on this device gets their own assignment popup
   kv.set('sync:signedout', '1'); // a logged-out device never gets offline access
   location.href = '/login';
 }

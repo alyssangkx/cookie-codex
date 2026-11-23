@@ -60,11 +60,16 @@ export interface SaveV1 {
    *  no schema bump. One is done once a quiz on that sub-topic is finished after it was assigned. */
   assigned?: Assignment[];
 }
-export interface Assignment { sub: string; name: string; href: string; ts: number }
+/** base: quizzes on the sub-topic already finished when it was assigned (counting, not clock times: the parent's and the
+ *  child's devices need not agree on the time). ts orders them and marks which the popup has shown. */
+export interface Assignment { sub: string; name: string; href: string; ts: number; base: number }
 export const ASSIGN_MAX = 10;
-/** Assignments with no quiz on their sub-topic finished since they were assigned. */
+/** The only links an assignment may carry: a sub-topic page (the name and link come from a save a parent can write). */
+export const ASSIGN_HREF = /^\/train\/[a-z]+\/[a-z0-9-]+\/$/;
+export const finishedOn = (s: SaveV1, sub: string) => s.attempts.filter((t) => t.sub === sub && !t.open).length;
+/** Assignments with no quiz on their sub-topic finished since they were assigned (and a safe link). */
 export const assignedPending = (s: SaveV1) =>
-  (s.assigned ?? []).filter((a) => !s.attempts.some((t) => t.sub === a.sub && !t.open && t.ts >= a.ts));
+  (s.assigned ?? []).filter((a) => ASSIGN_HREF.test(a.href) && finishedOn(s, a.sub) <= a.base);
 
 export const REVISION_MAX = 10;
 const KEY = 'ccx:save';

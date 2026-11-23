@@ -133,7 +133,7 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
       // page keeps listing them until a quiz on each is done. Text is set with textContent; links are sub-topic pages only.
       const showAssigned = () => {
         if (location.pathname.startsWith('/quiz')) return;
-        const todo = assignedPending(load()).filter((a) => /^\/train\/[a-z]+\/[a-z0-9-]+\/$/.test(a.href));
+        const todo = assignedPending(load()); // links already limited to sub-topic pages (ASSIGN_HREF)
         const newest = Math.max(0, ...todo.map((a) => a.ts));
         if (!todo.length || Number(kv.get('assign-seen') ?? 0) >= newest) return;
         kv.set('assign-seen', String(newest));
@@ -190,7 +190,8 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
           if (session && isChildSession(session.user)) {
             child = true;
             // hold the page back (up to 4 s) while the newer server save is pulled, so it never shows stale progress
-            await Promise.race([initSync().catch(() => {}), new Promise((r) => setTimeout(r, 4000))]);
+            const r = await Promise.race([initSync().catch(() => 'ok'), new Promise((res) => setTimeout(res, 4000))]);
+            if (r === 'reload') { leaving = true; return; } // a newer server save: the page reloads, so nothing (no popup) runs now
           }
         } catch {
           if (gate === 'admin') go('/grownups/'); // fail closed

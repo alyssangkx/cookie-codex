@@ -43,9 +43,8 @@ const schools = SCHOOLS.map((s) => {
 <script>
   import { load, today, liveStreak, dayBlock, blockMessage, reviewDueCount, revisionDue, assignedPending, TIERS } from '../../lib/store';
     const s = load();
-    // a parent's assignments come first until a quiz on each is finished (names and links come from the save: text only,
-    // links checked by cleanSave's rule here too)
-    const todo = assignedPending(s).filter((a) => /^\/train\/[a-z]+\/[a-z0-9-]+\/$/.test(a.href));
+    // a parent's assignments come first until a quiz on each is finished (names set as text only)
+    const todo = assignedPending(s); // links already limited to sub-topic pages (ASSIGN_HREF)
     if (todo.length) {
       const ul = document.getElementById('assigned-list')!;
       for (const a of todo) { const li = document.createElement('li'), link = document.createElement('a'); link.href = a.href; link.textContent = a.name || a.sub; li.append(link); ul.append(li); }

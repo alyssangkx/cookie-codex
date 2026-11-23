@@ -696,14 +696,15 @@ test('assignedPending: an assignment is done once a quiz on it finishes after it
   const { fresh, assignedPending } = await import('./store.ts');
   const { cleanSave } = await import('./cleansave.ts');
   const s = fresh();
-  s.assigned = [{ sub: 'math-a', name: 'A', href: '/train/math/a/', ts: t0 }, { sub: 'math-b', name: 'B', href: '/train/math/b/', ts: t0 }];
   s.attempts = [
-    { ts: t0 - 1, mode: 'tier', sub: 'math-a', score: 10, total: 10, ms: 1, tags: [] }, // before it was assigned
+    { ts: t0 - 1, mode: 'tier', sub: 'math-a', score: 10, total: 10, ms: 1, tags: [] }, // finished before it was assigned
     { ts: t0 + 1, mode: 'tier', sub: 'math-b', score: 2, total: 10, ms: 1, tags: [], open: true }, // started, not finished
   ] as any;
+  // base counts the quizzes already finished when assigning (the parent's clock is never compared with the child's)
+  s.assigned = [{ sub: 'math-a', name: 'A', href: '/train/math/a/', ts: t0 + 99, base: 1 }, { sub: 'math-b', name: 'B', href: '/train/math/b/', ts: t0, base: 0 }];
   assert.deepEqual(assignedPending(s).map((a) => a.sub), ['math-a', 'math-b']);
-  s.attempts.push({ ts: t0 + 2, mode: 'tier', sub: 'math-a', score: 3, total: 10, ms: 1, tags: [] } as any);
-  assert.deepEqual(assignedPending(s).map((a) => a.sub), ['math-b']); // any finished quiz counts, whatever the score
+  s.attempts.push({ ts: t0 + 2, mode: 'tier', sub: 'math-a', score: 3, total: 10, ms: 1, tags: [] } as any); // its clock is behind the parent's
+  assert.deepEqual(assignedPending(s).map((a) => a.sub), ['math-b']); // any finished quiz counts, whatever the score or clock
   const c = cleanSave({ ...s, assigned: [...s.assigned, { sub: 'x', name: 'X', href: 'javascript:alert(1)', ts: 1 }, { sub: 'y', href: '//evil.example/', ts: 1 }] });
   assert.deepEqual(c.assigned!.map((a) => a.sub), ['math-a', 'math-b']); // only sub-topic page links survive
 });
