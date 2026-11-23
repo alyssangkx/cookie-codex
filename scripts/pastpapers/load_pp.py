@@ -1207,6 +1207,12 @@ def selftest():
     # deactivate set and tier counts
     assert deactivate_set({"a", "b", "c"}, {"b", "x"}) == {"a", "c"}  # held/dropped/re-tagged rows go; new row x is not "existing"
     assert deactivate_set(set(), {"a"}) == set() and deactivate_set({"a"}, {"a"}) == set()
+    assert in_use([{"questions": {"pp-a": {"s": 0, "w": 1}, "pp-b": {"s": 0, "w": 0}, "pp-c": {"s": 3, "w": 1}, "x-1": {"s": 1, "w": 1}}}, None]) == {"pp-a", "pp-c"}
+    _db = [{"id": "pp-k"}, {"id": "pp-n"}]
+    st, db2, sw, ft = keep_used_copies({"pp-d", "pp-f"}, _db, {"pp-d", "pp-f"}, {"pp-d": "pp-k"}, {"pp-k": {}, "pp-d": {}, "pp-f": {}})
+    assert st == {"pp-k", "pp-f"} and [d["id"] for d in db2] == ["pp-n"] and sw == 1 and ft == 1, "child's copy kept, twin off; a faulted row still goes"
+    st, db2, sw, _ = keep_used_copies({"pp-d"}, _db, {"pp-d", "pp-k"}, {"pp-d": "pp-k"}, {"pp-k": {}, "pp-d": {}})
+    assert st == set() and len(db2) == 2, "both copies in use: both stay"
     held = {"b"}
     upl = {"a", "c"} - held  # a held id is never in the upload set, so it is only ever deactivated, never revived
     assert "b" in deactivate_set({"a", "b", "c"}, upl) and "b" not in upl
@@ -1374,6 +1380,34 @@ def review(a):
 
 COUNTS = REPO / "site" / "src" / "data" / "pp_counts.json"
 TIER = {"basic": "b", "intermediate": "i", "competent": "c"}
+
+
+def in_use(saves) -> set:
+    """Past-paper ids some child answered wrong or still has to retest (w > 0 or s > 0), across the given save datas."""
+    out = set()
+    for d in saves:
+        for i, q in ((d or {}).get("questions") or {}).items():
+            if i.startswith("pp-") and isinstance(q, dict) and ((q.get("w") or 0) > 0 or (q.get("s") or 0) > 0):
+                out.add(i)
+    return out
+
+
+def keep_used_copies(stale, db, used, dup_of, live):
+    """(stale, db, swapped, faulted): for each dropped duplicate a child is using, keep it live and drop its kept copy
+    instead (when that copy is not in use itself: then both stay). `live`: existing active rows {id: {subtopic, level}}."""
+    stale, db = set(stale), list(db)
+    swapped = 0
+    for i in sorted(stale & used):
+        keep = dup_of.get(i)
+        if keep is None:
+            continue
+        stale.discard(i)  # the child's copy stays live
+        if keep not in used:  # its twin goes, unless a child uses that one too
+            db = [d for d in db if d["id"] != keep]
+            if keep in live:
+                stale.add(keep)
+        swapped += 1
+    return stale, db, swapped, len(stale & used)
 
 
 def deactivate_set(existing_active: set, upload_ids: set) -> set:
@@ -1870,16 +1904,30 @@ def upload(a):
     s = requests.Session()
     s.headers.update(h)
     keepids = {d["id"] for d in db}
-    stale = set()
+    stale, live = set(), {}
     for sub in sorted(usubs):  # active rows of an uploaded sub-topic that this upload no longer carries
-        r = s.get(f"{url}/rest/v1/pp_items", params={"select": "id", "subject": f"eq.{a.subject}",
+        r = s.get(f"{url}/rest/v1/pp_items", params={"select": "id,subtopic,level", "subject": f"eq.{a.subject}",
                   "subtopic": f"eq.{sub}", "active": "eq.true", "limit": "10000"}, timeout=60)
         if r.status_code >= 300:  # 401: the key is not a service-role key (or was pasted cut short)
             sys.exit(f"could not list existing rows of {sub}: HTTP {r.status_code} {r.text[:200]}\n"
                      f"key given: {key_kind(k)} (needs the service-role / secret key)")
+        live.update({x["id"]: x for x in r.json()})
         stale |= deactivate_set({x["id"] for x in r.json()}, keepids)
+    # owner, 23 Nov 2026: a question a child answered wrong (or still has to retest) must not leave the pool. For a
+    # duplicate, keep the child's copy live and switch the other copy off instead (the same question, so a quiz still
+    # never meets two copies); a row switched off for a fault (held key, bad picture) still goes, and is counted
+    r = s.get(f"{url}/rest/v1/saves", params={"select": "data"}, timeout=60)
+    if r.status_code >= 300:
+        sys.exit(f"could not read the saves to protect children's retests: HTTP {r.status_code}")
+    used = in_use([x.get("data") for x in r.json()])
+    dup_of = {pp_id(x["id"]): x["of"] for x in jl(out / "rejects.jsonl") if x.get("reason") == "duplicate" and x.get("of")}
+    stale, db, swapped, faulted = keep_used_copies(stale, db, used, dup_of, live)
+    rows = [x for x in rows if x["id"] in {d["id"] for d in db}]
     print(f"would deactivate {len(stale)} existing rows no longer selected" if not a.apply
           else f"deactivating {len(stale)} existing rows no longer selected")
+    print(f"  {swapped} duplicate(s) a child answered wrong or has a retest on: that copy kept live, the other switched off")
+    if faulted:
+        print(f"  {faulted} of the rows switched off have a child's wrong answer or retest (held for a fault: wrong key or picture)")
     if not a.apply:
         print("dry run: nothing sent (add --apply after the owner's go-ahead)")
         return
@@ -1907,7 +1955,8 @@ def upload(a):
         if r.status_code >= 300:
             sys.exit(f"deactivate failed at batch {i // 100}: HTTP {r.status_code}")
     print(f"loaded {len(db)} rows and {nfig} figures")
-    write_counts(rows, usubs)
+    # a child's copy kept live counts too: every active row of the uploaded sub-topics after this upload
+    write_counts(rows + [live[i] for i in sorted(set(live) - stale - {d["id"] for d in db})], usubs)
     print(f"wrote {COUNTS.name}")
 
 
