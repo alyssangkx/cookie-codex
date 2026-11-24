@@ -45,8 +45,24 @@ export function pickTier(
     const id = spare.shift()!;
     if (!out.includes(id)) out.push(id);
   }
-  if (passage && out.some((id) => passage(id))) return wholePassages(out, ids, passage, size, new Set(take));
+  if (passage && out.some((id) => passage(id))) return wholePassages(out, ids, passage, size, new Set(take), (id) => !!seen[id]);
   return ordered ? out : shuffle(out, rand);
+}
+
+/** A cloze section's quiz (owner, 24 Nov 2026: "if there are 15 blanks, then the quiz needs 15 questions"): ONE passage,
+ *  whole, every blank in passage order. The passage holding the most overdue retest first; else the first passage (in
+ *  `ids` order, easier-first) with a blank never answered; else the passage with the earliest retest; else the first. */
+export function pickPassage(all: string[], seen: Record<string, Seen | undefined>, now = Date.now(),
+  passage: (id: string) => { group: string; seq: number } | undefined = () => undefined, rand = Math.random): string[] {
+  const ids = all.filter((id) => passage(id)); // a question outside any passage is never a "passage of one"
+  const group = (id: string) => passage(id)!.group;
+  const due = ids.filter((id) => (seen[id]?.s ?? 0) > 0 && seen[id]!.due <= now).sort((a, b) => seen[a]!.due - seen[b]!.due);
+  const later = ids.filter((id) => (seen[id]?.s ?? 0) > 0).sort((a, b) => seen[a]!.due - seen[b]!.due);
+  // every passage done and nothing pending: any passage, at random (never the same first one for ever)
+  const pickId = due[0] ?? ids.find((id) => !seen[id]) ?? later[0] ?? ids[Math.floor(rand() * ids.length)];
+  if (pickId == null) return [];
+  const g = group(pickId);
+  return ids.filter((id) => group(id) === g).sort((a, b) => (passage(a)?.seq ?? 0) - (passage(b)?.seq ?? 0));
 }
 
 /** A one-pool sub-topic's quiz (ADR 0011): `ids` are its past-paper questions easier-first (pp_pool order). Due retests
@@ -66,6 +82,7 @@ export const pickPool = (ids: string[], seen: Record<string, Seen | undefined>, 
 export function wholePassages(
   picked: string[], ids: string[], passage: (id: string) => { group: string; seq: number } | undefined, size: number,
   must: Set<string> = new Set(),
+  done?: (id: string) => boolean, // answered before: a cut with no due retest starts at the passage's first blank not done
 ): string[] {
   const tier = new Set(ids);
   const members = new Map<string, string[]>();
@@ -89,6 +106,13 @@ export function wholePassages(
   const cut = (u: string[], n: number) => {
     if (n <= 0) return [];
     if (n >= u.length) return u;
+    // no due retest in it: read on from the first blank not answered yet (owner, 24 Nov 2026: a passage started at its
+    // 4th blank), never from the middle because the easier-first order picked later blanks
+    if (done && !u.some((id) => must.has(id))) {
+      const first = Math.max(0, u.findIndex((id) => !done(id)));
+      const s = Math.min(first, u.length - n);
+      return u.slice(s, s + n);
+    }
     let best = 0, bestScore = -Infinity;
     for (let s = 0; s + n <= u.length; s++) {
       const w = u.slice(s, s + n);

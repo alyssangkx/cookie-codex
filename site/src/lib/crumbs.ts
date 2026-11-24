@@ -20,7 +20,9 @@ export function alBand(score: number, total: number): number {
  * x(questions / 10), at most x3 (10 questions x1, 20 x2, 30+ x3), so a paper never pays more per question than a quiz. */
 export function quizCrumbs(score: number, total: number, mode: 'tier' | 'review' | 'paper'): number {
   const base = AL_CRUMBS[alBand(score, total) - 1] + (total > 0 && score === total ? PERFECT_BONUS : 0);
-  return mode === 'paper' ? Math.max(1, Math.round(base * Math.min(PAPER_MULT, total / 10))) : base;
+  // a paper pays by length; a tier quiz shorter than 10 (a short cloze passage, 24 Nov 2026) pays its share, so a 2-blank
+  // passage cannot earn a full quiz's Crumbs; a longer one keeps the per-quiz rate (owner's economy)
+  return mode === 'paper' || (mode === 'tier' && total < 10) ? Math.max(1, Math.round(base * Math.min(PAPER_MULT, total / 10))) : base;
 }
 
 // ---------------------------------------------------------------- ledger

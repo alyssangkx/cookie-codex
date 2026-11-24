@@ -312,3 +312,10 @@ test('a star bought twice from the same stale page is charged once', () => {
   assert.equal(load().crumbs!.bal, 170);
   assert.equal(load().cards.c2.stars, 2);
 });
+
+test('a tier quiz shorter than 10 (a short cloze passage) pays its share; 10 or more as before', () => {
+  assert.equal(quizCrumbs(10, 10, 'tier'), quizCrumbs(10, 10, 'tier'));
+  assert.ok(quizCrumbs(5, 5, 'tier') < quizCrumbs(10, 10, 'tier'), 'a 5-blank passage pays less than a 10-question quiz');
+  assert.equal(quizCrumbs(15, 15, 'tier'), quizCrumbs(10, 10, 'tier'), 'a longer one keeps the per-quiz rate');
+  assert.ok(quizCrumbs(1, 2, 'tier') >= 1);
+});

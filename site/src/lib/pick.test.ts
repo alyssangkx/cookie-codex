@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pickTier, pickReview, wholePassages, reviewPassages, type Seen, pickPool } from './pick.ts';
+import { pickTier, pickReview, wholePassages, reviewPassages, type Seen, pickPool, pickPassage } from './pick.ts';
 
 const ids = Array.from({ length: 30 }, (_, i) => `q${i}`);
 const NOW = 1_000_000;
@@ -172,4 +172,31 @@ test('a merged tier asks every new past-paper question before any generated one 
   const seen: Record<string, Seen> = Object.fromEntries(pp.slice(0, 4).map((id) => [id, { s: 0, due: 0 } as Seen]));
   const out = pickTier([...gen, ...pp], seen, 10, NOW, Math.random);
   assert.ok(pp.slice(4).every((id) => out.includes(id)), 'the two unasked past-paper questions come before generated ones');
+});
+
+test('a passage longer than the quiz starts at its first blank not answered yet (owner, 24 Nov 2026)', () => {
+  const set = Array.from({ length: 15 }, (_, i) => `pp-c${String(i).padStart(9, '0')}`); // blanks 51-65
+  const passage = (id: string) => { const k = set.indexOf(id); return k < 0 ? undefined : { group: 'g', seq: 51 + k }; };
+  const easierFirst = [...set.slice(5), ...set.slice(0, 5)]; // the ranking puts blanks 56-65 first
+  const out = pickPool(easierFirst, {}, 10, NOW, passage);
+  assert.deepEqual(out.map((id) => passage(id)!.seq), [51, 52, 53, 54, 55, 56, 57, 58, 59, 60], 'a new child starts at blank 51');
+  const seen: Record<string, Seen> = Object.fromEntries(set.slice(0, 10).map((id) => [id, { s: 0, due: 0 } as Seen]));
+  const next = pickPool(easierFirst, seen, 10, NOW, passage);
+  assert.equal(passage(next[0])!.seq, 56, 'the next quiz reads on (the last 10 blanks, from 56, ending at 65)');
+  assert.ok(next.some((id) => passage(id)!.seq === 61), 'and includes the blanks not done yet');
+});
+
+test('pickPassage: a cloze quiz is one whole passage, every blank in order (owner: 15 blanks, 15 questions)', () => {
+  const A = Array.from({ length: 15 }, (_, i) => `a${i}`), B = Array.from({ length: 5 }, (_, i) => `b${i}`);
+  const passage = (id: string) => ({ group: id[0], seq: Number(id.slice(1)) + (id[0] === 'a' ? 51 : 16) });
+  const ids = [...B.slice(2), ...A.slice(7), ...A.slice(0, 7), ...B.slice(0, 2)]; // an easier-first order mixing both
+  assert.deepEqual(pickPassage(ids, {}, NOW, passage), B, 'the passage of the first new question, whole and in order');
+  const doneB: Record<string, Seen> = Object.fromEntries(B.map((id) => [id, { s: 0, due: 0 } as Seen]));
+  assert.deepEqual(pickPassage(ids, doneB, NOW, passage), A, 'then the next passage with blanks never answered: all 15');
+  const dueA = { ...doneB, a3: { s: 1, due: NOW - 1 } as Seen };
+  assert.deepEqual(pickPassage(ids, dueA, NOW, passage), A, 'a due retest brings its whole passage back');
+  assert.deepEqual(pickPassage([], {}, NOW, passage), []);
+  const all = Object.fromEntries([...A, ...B].map((id) => [id, { s: 0, due: 0 } as Seen]));
+  assert.deepEqual(pickPassage(ids, all, NOW, passage, () => 0.99), B.slice().sort((a, b) => passage(a).seq - passage(b).seq).length === 5 && passage(ids[ids.length - 1]).group === 'b' ? B : A, 'all done: a random passage (the draw picks the last id)');
+  assert.deepEqual(pickPassage(['lone', ...B], {}, NOW, (id) => (id === 'lone' ? undefined : passage(id))), B, 'an ungrouped question is skipped');
 });

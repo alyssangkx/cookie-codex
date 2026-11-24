@@ -35,15 +35,15 @@ test('any accepted answer is right', () => {
 
 test('scaffoldHtml puts one box in each blank and escapes the printed words', () => {
   const h = scaffoldHtml('A <b> ____ and ____.', esc);
-  assert.equal((h.match(/<input /g) ?? []).length, 2);
+  assert.equal((h.match(/class="typed-box long"/g) ?? []).length, 2, 'an answer line: full-width boxes');
   assert.ok(h.includes('A &lt;b> ') && h.includes('data-n="1"'));
-  assert.equal((scaffoldHtml(null, esc).match(/<input /g) ?? []).length, 1);
+  assert.equal((scaffoldHtml(null, esc).match(/<input /g) ?? []).length, 1, 'a cloze blank: one small box');
 });
 
 test('repeated calls on different scaffolds give the same result (no regex state carried over)', () => {
   for (let i = 0; i < 3; i++) {
     assert.equal(compose('Neither ____.', ['the twins nor their brother enjoys cycling']), 'Neither the twins nor their brother enjoys cycling.');
-    assert.equal((scaffoldHtml('Having ____, John left.', esc).match(/<input /g) ?? []).length, 1);
+    assert.equal((scaffoldHtml('Having ____, John left.', esc).match(/typed-box/g) ?? []).length, 1);
   }
 });
 

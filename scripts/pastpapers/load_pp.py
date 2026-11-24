@@ -472,7 +472,8 @@ def select(a):
             elif not cv_ok and blind[q["id"]].get("key") != k:
                 reason = "blind-key-mismatch"  # the key changed after the blind run: re-run it
             elif not cv_ok and blind[q["id"]].get("agree") is not True and not (
-                    second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
+                    second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k) \
+                    and not (a.passage == "english-vocab-cloze" and vc_judge_ok(q["id"], k)):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
                 reason = garbled(VC_STEM if a.passage == "english-vocab-cloze" else q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" and not vt else None) \
@@ -1037,6 +1038,19 @@ def passage_text(src_id, qn):
                 _PTEXT[i] = r
     r = _PTEXT.get(src_id)
     return r["passage"] if r and qn is not None and str(qn) in {str(k) for k in r["markers"]} else None
+
+
+_VCJ = None
+
+
+def vc_judge_ok(src_id, k):
+    """A Vocabulary Cloze key the blind check disputed, confirmed when the Opus judge (passage.py WORK/vcjudge) picked the
+    same option blind: two sources (owner, 24 Nov 2026: settle the disagreements, ship complete passages)."""
+    global _VCJ
+    if _VCJ is None:
+        from passage import WORK
+        _VCJ = {j["id"]: j.get("answer") for j in jl(WORK / "vcjudge" / "out.jsonl") if not j.get("unclear")}
+    return k is not None and str(_VCJ.get(src_id)) == str(k)
 
 
 def row_stem(a, q, qn, opts):
@@ -1942,6 +1956,14 @@ def set_pages(rows, out, kind="english-visual"):
                 dropped.append((r, "set-two-texts"))
             continue
         if kind == "english-vocab-cloze":
+            # owner, 24 Nov 2026: a passage ships complete (every underlined mark asked) and is asked whole; a mark with no
+            # question (its key held) reads as a skipped number, so the set waits
+            marks = {int(m) for m in re.findall(r"\{\{\s*(\d+)\s*\|", rs[0]["stem"])}
+            texts = {r["stem"].rsplit("\n\n", 1)[0] for r in rs}  # one set, one passage (cloze sets once mixed two)
+            if marks - set(seqs) or len(texts) > 1:
+                for r in rs:
+                    rows.remove(r)
+                    dropped.append((r, "set-incomplete"))
             continue  # the passage is text in each stem (passage_text): no page picture
         # the poster: up to three pages before the first question page, and that page down to the questions
         if kind == "english-visual":

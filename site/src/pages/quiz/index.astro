@@ -99,7 +99,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   PICK_MAX,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
-  import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
+  import { pickTier, pickPool, pickPassage, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
   import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, underlineMarks, type PpFig } from '../../lib/pastpaper';
   import { typedOk, compose, scaffoldHtml } from '../../lib/typed';
   import { esc, boldAns } from '../../lib/boldans';
@@ -195,7 +195,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // section keeps its blank filling
   const CLOZE = new Set(meta.cloze);
   const clozeStem = (q: Q, reveal: boolean) => {
-    if (q.sub === 'eng-vocab-cloze') return underlineMarks(fmt(q.stem), q.seq ?? null); // a read passage: underlines, not blanks
+    if (q.sub === 'eng-vocab-cloze') return underlineMarks(fmt(q.stem), q.seq ?? null); // a read passage: underlines
     const zh = q.sub === 'chi-cloze-mcq';
     const asked = zh ? /（(\d+)）＿＿＿＿/.exec(q.stem)?.[1] : /\((\d+)\) _{8}(?!_)/.exec(q.stem)?.[1];
     let h = fmt(q.stem);
@@ -389,9 +389,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const cur = syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
       if (POOL) {
         if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
-        quiz = pickPool(easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]), cur.questions, QUIZ_SIZE,
-          Date.now(), passage);
-        if (quiz.length < QUIZ_SIZE) return stop('This topic does not have enough questions yet.');
+        const pool = easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]);
+        // a cloze section: one whole passage per quiz, every blank (owner, 24 Nov 2026); else the usual 10 questions
+        quiz = CLOZE.has(subId) && pool.some((id) => passage(id)) ? pickPassage(pool, cur.questions, Date.now(), passage)
+          : pickPool(pool, cur.questions, QUIZ_SIZE, Date.now(), passage);
+        if (quiz.length < (CLOZE.has(subId) ? 2 : QUIZ_SIZE)) return stop('This topic does not have enough questions yet.');
       } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
@@ -413,7 +415,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       return stop((e as Error).message);
     }
     const x = s.settings.extraTime ? 1.5 : 1;
-    mins = POOL ? minutesFor(s, 'c') : mode === 'tier' ? minutesFor(s, tier)
+    // a whole passage may be longer or shorter than 10 questions: its minutes scale with its blanks (at least 5)
+    mins = POOL ? Math.max(5, Math.ceil(minutesFor(s, 'c') * quiz.length / QUIZ_SIZE)) : mode === 'tier' ? minutesFor(s, tier)
       : mode === 'paper' ? Math.ceil(quiz.reduce((m, id) => m + PER_Q[byId.get(id)!.level], 0) * x)
       : Math.ceil(quiz.length * 1.5 * x);
     deadline = mins * 60_000;
@@ -1166,6 +1169,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .vc-u.ask { font-weight: 700; padding: 0 0.15em; border-radius: 0.3em; background: color-mix(in srgb, currentColor 14%, transparent); }
   .quiz .typed-box { font: inherit; line-height: 1.4; min-width: 9ch; width: min(100%, 26ch); padding: 0.25rem 0.5rem; border: 2px solid var(--cocoa-soft, #8a6a52);
     border-radius: 0.5rem; background: var(--paper, #fff); color: inherit; }
+  .quiz .typed-box.long { display: block; width: 100%; box-sizing: border-box; min-height: 3.2em; margin: 0.35rem 0; resize: vertical;
+    field-sizing: content; overflow-wrap: anywhere; }
   .quiz .typed-box.right { border-color: var(--good, #2e7d32); }
   .quiz .typed-box.wrong { border-color: var(--bad, #c62828); }
   .quiz .typed-hint { min-height: 1.2em; margin: 0 0 0.4rem; color: var(--bad, #c62828); font-size: 0.95rem; }

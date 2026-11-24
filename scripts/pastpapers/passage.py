@@ -234,6 +234,8 @@ def cloze_check():
     for f in sorted(glob.glob(str(d / "cloze_part_*.json"))):
         for k, g in json.loads(Path(f).read_text()).items():
             label[g] = k
+    rp = CLOZE_OUT / "english" / "renamed.json"
+    renamed = set(json.loads(rp.read_text())) if rp.exists() else set()
     claude, pplx = {}, {}
     for f in sorted(glob.glob(str(d / "cloze_part_*.claude.txt"))):
         claude.update(read_answers(f))
@@ -245,6 +247,8 @@ def cloze_check():
         k = (label.get(r["grp"]), r["seq"])
         keys = {n(a) for a in r["accept"]}
         c, pp = claude.get(k), pplx.get(k)
+        if r.get("sec") in renamed:
+            c = pp = None  # the blind packs showed another passage under this set id
         if c is None:
             v = "no Claude answer"
         elif n(c) not in keys:
@@ -274,19 +278,191 @@ def cloze_check():
 CLOZE_SHIP = TMP / "ppimport" / "engcloze-ship"
 
 
+JUDGE_DIR = CLOZE_OUT / "judge"
+
+
+def judge_pack(n_batches=3):
+    """Every agreed Grammar/Comprehension Cloze passage that is not complete, with each unsettled blank's school key and
+    Claude's blind answer, for the Opus judge (owner, 24 Nov 2026: settle the disagreements, then ship complete passages
+    only). JUDGE_DIR/batch_N.jsonl: {sec, st, box, text (all blanks open), blanks: [{n, key, claude}]}."""
+    import glob
+    rows = jl(CLOZE_OUT / "english" / "selected.jsonl")
+    ver = {x["id"]: x for x in jl(CLOZE_OUT / "english" / "checked.jsonl")}
+    label = {}
+    for f in sorted(glob.glob(str(CLOZE_OUT / "blind" / "cloze_part_*.json"))):
+        label.update({g: k for k, g in json.loads(Path(f).read_text()).items()})
+    claude = {}
+    for f in sorted(glob.glob(str(CLOZE_OUT / "blind" / "cloze_part_*.claude.txt"))):
+        claude.update(read_answers(f))
+    by = collections.defaultdict(list)
+    for r in rows:
+        by[r["sec"]].append(r)
+    items = []
+    for p in jl(WORK / "passages.jsonl"):
+        if p["sec"] not in by:
+            continue  # no keyed blank at all, or held earlier (box, duplicate): nothing to settle against
+        rs = {r["seq"]: r for r in by[p["sec"]]}
+        ok = {n for n, r in rs.items() if ver.get(r["id"], {}).get("verdict") in ("confirmed", "Claude agrees, Perplexity not in yet")}
+        marks = sorted(int(k) for k in p["markers"])
+        open_ = [n for n in marks if n not in ok]
+        if not open_:
+            continue  # complete already
+        r0 = next(iter(rs.values()))
+        box = re.match(r"Word box: (.*)\n", r0["stem"])
+        text = re.sub(r"\((\d+)\) _{4,8}", r"(\1) ____", r0["stem"].split("\n\n", 1)[1] if box else r0["stem"])
+        items.append({"sec": p["sec"], "st": p["st"], "box": box.group(1).split(" · ") if box else None, "text": text,
+                      "blanks": [{"n": n, "key": rs[n]["accept"] if n in rs else None,
+                                  "claude": claude.get((label.get(r0["grp"]), n))} for n in open_]})
+    JUDGE_DIR.mkdir(parents=True, exist_ok=True)
+    size = -(-len(items) // n_batches)
+    for b in range(n_batches):
+        (JUDGE_DIR / f"batch_{b + 1}.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in items[b * size:(b + 1) * size]))
+    print(f"{len(items)} passages, {sum(len(x['blanks']) for x in items)} blanks to settle -> {JUDGE_DIR}")
+
+
+_QS = None
+
+
+def questions():
+    """The first read of every English paper, by question id (loaded once)."""
+    global _QS
+    if _QS is None:
+        _QS = {q["id"]: q for y in range(2018, 2027) for q in jl(TMP / "pastpapers" / "english" / str(y) / "merged.jsonl")}
+    return _QS
+
+
+def qid_for(p, n):
+    """The source question id of blank n in passage p (the first read of the paper), or None."""
+    return next((i for i in sorted(p["ids"]) if (questions().get(i) or {}).get("qno") == n), None)
+
+
+_TAGS = None
+
+
+def own_meta(qid):
+    """A question's own level, difficulty and paper details (a row built from a sibling must not inherit the sibling's)."""
+    global _TAGS
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from load_pp import LEVEL
+    if _TAGS is None:
+        _TAGS = {t["id"]: t for y in range(2018, 2027) for t in jl(TMP / "pastpapers" / "english" / str(y) / "tags72.jsonl")}
+    q, d = questions().get(qid) or {}, (_TAGS.get(qid) or {}).get("difficulty")
+    return {"difficulty": d, "level": LEVEL.get(d if isinstance(d, int) else 2, "intermediate"), "school": q.get("school"),
+            "paper": q.get("paper"), "marks": q.get("marks")}
+
+
+def row_like(r, n, qid, accept):
+    """A shipping row for blank n made from a sibling blank's row: its own id, number and answer; the passage with n asked."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from load_pp import pp_id
+    stem = re.sub(rf"\({r['seq']}\) _{{8}}(?!_)", f"({r['seq']}) ____", r["stem"])
+    stem = re.sub(rf"\({n}\) _{{4}}(?!_)", f"({n}) ________", stem)
+    return dict(r, **own_meta(qid), id=pp_id(qid), src_id=qid, seq=n, qno=n, stem=stem, accept=accept, blind_src="judge+claude")
+
+
+def judged():
+    """{(sec, n): accepted words} for the blanks the Opus judge settled: its answer is the school key (one of its
+    alternatives: the key stands, strictly) or, when the key is wrong or missing, Claude's blind answer too (two sources)."""
+    import glob
+    items = {x["sec"]: x for f in sorted(glob.glob(str(JUDGE_DIR / "batch_*.jsonl"))) for x in jl(f)}
+    norm = lambda w: (w or "").strip().lower().strip(" .,'\"")
+    rp = CLOZE_OUT / "english" / "renamed.json"
+    renamed = set(json.loads(rp.read_text())) if rp.exists() else set()
+    out = {}
+    for f in sorted(glob.glob(str(JUDGE_DIR / "out_*.jsonl"))):
+        for j in jl(f):
+            try:
+                jn = int(j.get("n"))
+            except (TypeError, ValueError):
+                continue
+            j = dict(j, n=jn)  # a judge may write "29": compared as a number
+            b = next((b for b in (items.get(j["sec"]) or {}).get("blanks", []) if int(b["n"]) == jn), None)
+            if b and j["sec"] in renamed:
+                b = dict(b, claude=None)  # its Claude answers were written for the other passage under the shared id
+            if not b or j.get("unclear") or not j.get("answer"):
+                continue
+            a = norm(j["answer"])
+            if b["key"] and a in {norm(k) for k in b["key"]}:
+                out[(j["sec"], j["n"])] = b["key"]
+            elif b["claude"] and a == norm(b["claude"]):
+                out[(j["sec"], j["n"])] = [j["answer"].strip()]
+    return out
+
+
+def vc_judge_pack():
+    """The held Vocabulary Cloze questions whose passage was read (rejected as blind-disagree / no-answer-key in the last
+    `load_pp.py select --passage english-vocab-cloze`), with options in printed order and the key as load_pp reads it
+    (1-4), for the Opus judge: WORK/vcjudge/batch.jsonl. load_pp.vc_judge_ok compares its out.jsonl answer with that key."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import load_pp
+    rej = {r["id"]: r for r in jl(TMP / "ppimport" / "engvc" / "english" / "rejects.jsonl")}
+    qs = {q["id"]: q for y in range(2018, 2027) for q in jl(TMP / "pastpapers" / "english" / str(y) / "merged.jsonl")}
+    items = []
+    for i, r in rej.items():
+        q = qs.get(i)
+        if r["reason"] not in ("blind-disagree", "no-answer-key") or not q or len(q.get("options") or []) != 4:
+            continue
+        t = load_pp.passage_text(i, q.get("qno"))
+        if t:
+            items.append({"id": i, "n": q["qno"], "passage": t, "options": load_pp.strip_opts(q["options"]),
+                          "key": load_pp.key(q.get("answer"), q["options"]), "reason": r["reason"]})
+    (WORK / "vcjudge").mkdir(parents=True, exist_ok=True)
+    (WORK / "vcjudge" / "batch.jsonl").write_text("".join(json.dumps(x, ensure_ascii=False) + "\n" for x in items))
+    print(f"{len(items)} held Vocabulary Cloze questions -> {WORK / 'vcjudge' / 'batch.jsonl'}")
+
+
 def cloze_final():
-    """The blanks that ship: the key agrees with Claude's blind answer (and with Perplexity's when it is in; owner, 24 Nov
-    2026: a third check rarely changes an agreed key). Sets keep 2+ shipping blanks; the others stay "(n) ____" in the
-    passage. CLOZE_SHIP/english/selected.jsonl -> load_pp.py upload --out CLOZE_SHIP"""
+    """Owner, 24 Nov 2026: a passage ships only COMPLETE (every blank settled) and is asked whole. A blank is settled when
+    its key agrees with Claude's blind answer, or the Opus judge agrees with the key or with Claude (judged()). Anything
+    less holds the whole passage, so no shipped passage shows a number that is not asked.
+    CLOZE_SHIP/english/selected.jsonl -> load_pp.py upload --out CLOZE_SHIP"""
     ok = {x["id"] for x in jl(CLOZE_OUT / "english" / "checked.jsonl")
           if x["verdict"] in ("confirmed", "Claude agrees, Perplexity not in yet")}
-    rows = [r for r in jl(CLOZE_OUT / "english" / "selected.jsonl") if r["id"] in ok]
-    n = collections.Counter(r["grp"] for r in rows)
-    rows = [r for r in rows if n[r["grp"]] >= 2]
+    settled = judged()
+    by = collections.defaultdict(list)
+    for r in jl(CLOZE_OUT / "english" / "selected.jsonl"):
+        by[r["sec"]].append(r)
+    rows, why = [], collections.Counter()
+    for p in jl(WORK / "passages.jsonl"):
+        rs = {r["seq"]: r for r in by.get(p["sec"], [])}
+        if not rs:
+            continue
+        marks = sorted(int(k) for k in p["markers"])
+        keep = []
+        for n in marks:
+            r = rs.get(n)
+            if r and r["id"] in ok:
+                keep.append(r)
+            elif r and (p["sec"], n) in settled:
+                keep.append(dict(r, accept=settled[(p["sec"], n)]))
+            elif not r and (p["sec"], n) in settled and qid_for(p, n):
+                keep.append(row_like(next(iter(rs.values())), n, qid_for(p, n), settled[(p["sec"], n)]))  # no key was read
+            else:
+                break  # unsettled (or never read as a question): the passage waits
+        box = re.match(r"Word box: (.*)\n", keep[0]["stem"]) if keep else None
+        boxw = {w.strip().lower() for w in box.group(1).split(" · ")} if box else None
+        if len(keep) == len(marks) and boxw is not None and any(a.strip().lower() not in boxw for r in keep for a in r["accept"]):
+            why[(p["st"], "held: an answer is not in the word box as read")] += 1  # the child could not find it there
+        elif len(keep) == len(marks):
+            rows += keep
+            why[(p["st"], "complete")] += 1
+        else:
+            why[(p["st"], "held: a blank unsettled")] += 1
+    # the checks: one passage per set id; no shipped passage shows a blank number that is not one of its questions
+    owner = {}
+    for r in rows:
+        assert owner.setdefault(r["grp"], r["sec"]) == r["sec"], f"set {r['grp']} holds two passages"
+    asked = collections.defaultdict(set)
+    for r in rows:
+        asked[r["grp"]].add(r["seq"])
+    for r in rows:
+        shown = {int(n) for n in re.findall(r"\((\d+)\) _{4,8}", r["stem"])}
+        assert shown <= asked[r["grp"]], f"{r['id']}: blanks {sorted(shown - asked[r['grp']])} shown but not asked"
     out = CLOZE_SHIP / "english"
     out.mkdir(parents=True, exist_ok=True)
     (out / "selected.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
-    print(f"{len(rows)} blanks in {len(set(r['grp'] for r in rows))} sets ({dict(collections.Counter(r['subtopic'] for r in rows))}) -> {out}")
+    print(", ".join(f"{s} {w} {n}" for (s, w), n in sorted(why.items())))
+    print(f"{len(rows)} blanks in {len(set(r['grp'] for r in rows))} complete passages ({dict(collections.Counter(r['subtopic'] for r in rows))}) -> {out}")
 
 
 def cloze_keys(st, key, box, letters=None):
@@ -335,7 +511,7 @@ def export_cloze():
             qs[q["id"]] = q
         for t in jl(base / str(y) / "tags72.jsonl"):
             tags[t["id"]] = t
-    rows, why, seen_text = [], collections.Counter(), set()
+    rows, why, seen_text, grp_sec, renamed = [], collections.Counter(), set(), {}, []
     for p in jl(WORK / "passages.jsonl"):
         if p["st"] not in ("eng-grammar-cloze", "eng-comp-cloze"):
             continue
@@ -363,19 +539,32 @@ def export_cloze():
                 why["no key" if not keys else "copies disagree"] += 1
                 continue
             q = sorted(by[n], key=lambda q: q["id"])[0]
-            grp = grp or set_id(q, "gc" if p["st"] == "eng-grammar-cloze" else "cc")
+            if grp is None:
+                grp = set_id(q, "gc" if p["st"] == "eng-grammar-cloze" else "cc")
+                # two passages of one section in one file (paper and part alike) once shared a set id, which mixed their
+                # questions on the site (24 Nov 2026): the second passage gets its own
+                k = 2
+                while grp in grp_sec and grp_sec[grp] != p["sec"]:
+                    grp = f"{set_id(q, 'gc' if p['st'] == 'eng-grammar-cloze' else 'cc')}-{k}"
+                    k += 1
+                if k > 2:
+                    renamed.append(p["sec"])
+                grp_sec[grp] = p["sec"]
             d = (tags.get(q["id"]) or {}).get("difficulty")
             rows.append({"id": pp_id(q["id"]), "src_id": q["id"], "subject": "english", "subtopic": p["st"],
                          "level": LEVEL.get(d if isinstance(d, int) else 2, "intermediate"), "difficulty": d, "pattern": None,
                          "stem": cloze_stem(p["passage"], n, box), "options": [], "answer": 0, "crops": [], "year": p["year"],
                          "school": q.get("school"), "paper": q.get("paper"), "qno": n, "marks": q.get("marks"),
-                         "blind_src": "two-readers", "kind": "typed", "accept": keys[0], "scaffold": None, "grp": grp, "seq": n})
+                         "blind_src": "two-readers", "kind": "typed", "accept": keys[0], "scaffold": None, "grp": grp, "seq": n,
+                         "sec": p["sec"]})
             why["kept"] += 1
     counts = collections.Counter(r["grp"] for r in rows)
     rows = [r for r in rows if counts[r["grp"]] >= 2]  # a set of one is not a set
     out = CLOZE_OUT / "english"
     out.mkdir(parents=True, exist_ok=True)
     (out / "selected.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+    # the blind packs were made with the old shared ids: Claude never saw these passages, its answers there are another's
+    (out / "renamed.json").write_text(json.dumps(renamed))
     print(", ".join(f"{k} {v}" for k, v in why.most_common()) + f" -> {len(rows)} questions in {len(set(r['grp'] for r in rows))} sets "
           f"({dict(collections.Counter(r['subtopic'] for r in rows))}) -> {out}")
 
@@ -446,6 +635,8 @@ def selftest():
     assert cloze_keys("eng-comp-cloze", "make/produce", None) == ["make", "produce"]
     assert cloze_keys("eng-grammar-cloze", "(D) been", box) == ["been"] and cloze_keys("eng-comp-cloze", "(on)", None) == ["on"]
     assert cloze_keys("eng-comp-cloze", "(AVOID)", None) == [], "a capitalised word is another section's key"
+    sib = {"seq": 30, "stem": "A (29) ____ b (30) ________ c.", "id": "x"}
+    assert row_like(sib, 29, "eng-2020-001-x-q29", ["the"])["stem"] == "A (29) ________ b (30) ____ c.", "the new row asks its own blank"
     assert cloze_keys("eng-grammar-cloze", "beer", box) == [] and cloze_keys("eng-grammar-cloze", "been", box) == ["been"], "a word key must be in the box"
     lettered = list("ABCDEFGHIJ")  # a box lettered with I
     assert cloze_keys("eng-grammar-cloze", "J", box, lettered) == ["other"] and cloze_keys("eng-grammar-cloze", "I", box, lettered) == ["instead"]
@@ -463,6 +654,10 @@ if __name__ == "__main__":
         run(sys.argv[2])
     elif cmd == "check":
         check(int(sys.argv[sys.argv.index("--sample") + 1]) if "--sample" in sys.argv else 0)
+    elif cmd == "vc-judge-pack":
+        vc_judge_pack()
+    elif cmd == "judge-pack":
+        judge_pack()
     elif cmd == "cloze-final":
         cloze_final()
     elif cmd == "cloze-check":

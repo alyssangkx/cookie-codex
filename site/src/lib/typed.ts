@@ -44,8 +44,11 @@ export function typedOk(scaffold: string | null | undefined, parts: string[], ac
 
 /** The scaffold as HTML with a text box in each blank (escaped by the caller's esc). */
 export function scaffoldHtml(scaffold: string | null | undefined, esc: (s: string) => string): string {
-  const box = (n: number) => `<input type="text" class="typed-box" data-n="${n}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer box ${n + 1}">`;
-  if (!scaffold || !HAS_BLANK.test(scaffold)) return box(0);
+  // a cloze blank is one word: a small box; an answer line takes words, often most of a sentence (owner's reports, 24 Nov
+  // 2026: "the text box needs to be longer"): a full-width box on its own line that wraps and grows
+  const word = (n: number) => `<input type="text" class="typed-box" data-n="${n}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer box ${n + 1}">`;
+  const box = (n: number) => `<textarea class="typed-box long" data-n="${n}" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer box ${n + 1}"></textarea>`;
+  if (!scaffold || !HAS_BLANK.test(scaffold)) return word(0);
   let n = 0;
   return scaffold.split(BLANK).map((t, i, all) => esc(t) + (i < all.length - 1 ? box(n++) : '')).join('');
 }
