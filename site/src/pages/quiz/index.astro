@@ -801,10 +801,24 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('options').classList.toggle('many', many);
     $('options').classList.toggle('typed', !!q.typed);
     if (q.typed) { // migration 015: a box in each blank of the answer line, then Check (or Enter)
-      $('options').innerHTML = `<p class="typed-line">${scaffoldHtml(q.typed.scaffold, esc)}</p>`
-        + '<p class="typed-hint" aria-live="polite"></p><button type="button" class="primary typed-check">Check my answer</button>';
       $('feedback').hidden = true;
       $('next').hidden = true;
+      // a cloze blank (owner, 24 Nov 2026): typed straight into the passage, the asked blank itself becomes the box, scrolled
+      // into view, so no scrolling down to a box below a long passage
+      const ask = !q.typed.scaffold && q.group && CLOZE.has(q.sub)
+        ? [...$('stem').querySelectorAll('mark.ask')].find((m) => m.textContent?.startsWith(`(${q.seq})`)) ?? null : null;
+      if (ask) {
+        $('options').innerHTML = '<p class="typed-hint" aria-live="polite"></p>';
+        ask.outerHTML = `<span class="ask-inline"><b>(${q.seq})</b>\u00a0<input type="text" class="typed-box inline" data-n="0" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer for blank ${q.seq}">`
+          + `<button type="button" class="typed-check inline" aria-label="Check my answer for blank ${q.seq}">✓</button>`
+          + '<span class="typed-hint inline" aria-live="polite"></span></span>';
+        const box = $('stem').querySelector<HTMLInputElement>('.typed-box')!;
+        box.focus({ preventScroll: true });
+        box.scrollIntoView({ block: 'center' });
+        return;
+      }
+      $('options').innerHTML = `<p class="typed-line">${q.seq != null && !q.typed.scaffold && CLOZE.has(q.sub) ? `<b>(${q.seq})</b> ` : ''}${scaffoldHtml(q.typed.scaffold, esc)}</p>`
+        + '<p class="typed-hint" aria-live="polite"></p><button type="button" class="primary typed-check">Check my answer</button>';
       $('options').querySelector<HTMLInputElement>('.typed-box')?.focus();
       return;
     }
@@ -872,10 +886,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (answered || over) return;
     const q = byId.get(quiz[i])!;
     if (!q.typed) return;
-    const boxes = [...$('options').querySelectorAll<HTMLInputElement>('.typed-box')];
+    const boxes = [...document.querySelectorAll<HTMLInputElement>('#stem .typed-box, #options .typed-box')]; // in the passage or below
     const parts = boxes.map((b) => b.value);
     if (parts.some((p) => !p.trim())) { // never marked half-typed: an empty box is a slip, not an answer
-      $('options').querySelector('.typed-hint')!.textContent = boxes.length > 1 ? 'Fill in every box first.' : 'Type your answer first.';
+      const hint = document.querySelector('#stem .typed-hint, #options .typed-hint'); // beside an inline box, or under the line
+      if (hint) hint.textContent = boxes.length > 1 ? 'Fill in every box first.' : 'Type your answer first.';
       boxes.find((b) => !b.value.trim())?.focus();
       return;
     }
@@ -888,10 +903,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     // the parent page lists what was typed; the save keeps PICK_MAX characters, so a longer sentence ends in …
     record(q.id, ok, ok ? undefined : mine.length > PICK_MAX ? `${mine.slice(0, PICK_MAX - 1)}…` : mine);
     if (ok) score++; else wrongs.push({ q, chose: -1, tag: 'typed', typed: mine });
-    if (q.group && q.seq != null && CLOZE.has(q.sub)) fillBlank(q, ok ? mine.trim() : q.typed.accept[0], ok); // as an MCQ cloze blank
     boxes.forEach((b) => { b.disabled = true; b.classList.add(ok ? 'right' : 'wrong'); });
-    $('options').querySelector<HTMLButtonElement>('.typed-check')!.hidden = true;
-    $('options').querySelector('.typed-hint')!.textContent = '';
+    document.querySelectorAll<HTMLButtonElement>('.typed-check').forEach((b) => { b.hidden = true; });
+    document.querySelectorAll('.typed-hint').forEach((h) => { h.textContent = ''; });
+    // an inline cloze box is then replaced by the filled-in word (the feedback says what was typed)
+    if (q.group && q.seq != null && CLOZE.has(q.sub)) fillBlank(q, ok ? mine.trim() : q.typed.accept[0], ok); // as an MCQ cloze blank
     const also = q.typed.accept.length > 1 ? `<p class="typed-also">Also accepted: ${q.typed.accept.slice(1, 4).map(fmt).join(' · ')}</p>` : '';
     $('feedback').innerHTML = (ok ? '<p class="verdict good">Correct!</p>'
       : `<p class="verdict bad">Not yet.</p><p class="typed-mine"><strong>You wrote:</strong> ${esc(mine)}</p>`)
@@ -899,7 +915,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('feedback').hidden = false;
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
-    $('next').focus();
+    $('next').focus(); // scrolls Next (and the verdict above it) into view: no scrolling by hand after a long passage
   }
 
   // "sub|tier" -> every question id of that tier, for the subs in this quiz. store.ts clears a tier when
@@ -1055,9 +1071,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (b?.classList.contains('typed-check')) chooseTyped();
     else if (b?.dataset.k != null) (PAPER ? choosePaper : choose)(Number(b.dataset.k)); // only an option button picks
   });
-  $('options').addEventListener('keydown', (e) => { // Enter in a typed box checks the answer
+  const typedKey = (e: KeyboardEvent) => { // Enter in a typed box checks the answer
     if (e.key === 'Enter' && (e.target as HTMLElement).classList.contains('typed-box')) { e.preventDefault(); if (!e.repeat) chooseTyped(); }
-  });
+  };
+  $('options').addEventListener('keydown', typedKey);
+  $('stem').addEventListener('keydown', typedKey); // a cloze blank typed in the passage
+
   // a held Enter: its repeats must not press Next (focused after Check) and skip the feedback unseen
   $('next').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.repeat) e.preventDefault(); });
   document.addEventListener('keydown', (e) => {
@@ -1110,6 +1129,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   });
   // tapping an open blank of the passage asks that blank now; the current question moves to just after it
   $('stem').addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('.typed-check')) { chooseTyped(); return; } // a cloze blank checked in the passage
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.blank-jump');
     if (!b || answered || over) return;
     const j = quiz.indexOf(b.dataset.id ?? '', i + 1);
@@ -1169,6 +1189,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .vc-u.ask { font-weight: 700; padding: 0 0.15em; border-radius: 0.3em; background: color-mix(in srgb, currentColor 14%, transparent); }
   .quiz .typed-box { font: inherit; line-height: 1.4; min-width: 9ch; width: min(100%, 26ch); padding: 0.25rem 0.5rem; border: 2px solid var(--cocoa-soft, #8a6a52);
     border-radius: 0.5rem; background: var(--paper, #fff); color: inherit; }
+  .quiz .ask-inline { white-space: nowrap; }
+  .quiz .typed-box.inline { display: inline-block; width: 9ch; min-width: 7ch; padding: 0.05rem 0.35rem; margin: 0 0.15rem;
+    vertical-align: baseline; font-size: 1rem; }
+  .quiz .typed-hint.inline { margin-left: 0.3rem; font-size: 0.85rem; white-space: normal; }
+  .quiz .typed-check.inline { font: inherit; font-weight: 700; padding: 0.05rem 0.55rem; border: 0; border-radius: 0.4rem;
+    background: var(--berry, #a52a45); color: #fff; cursor: pointer; vertical-align: baseline; }
   .quiz .typed-box.long { display: block; width: 100%; box-sizing: border-box; min-height: 3.2em; margin: 0.35rem 0; resize: vertical;
     field-sizing: content; overflow-wrap: anywhere; }
   .quiz .typed-box.right { border-color: var(--good, #2e7d32); }
