@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub, underlineMarks } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub, underlineMarks, correctionHtml, type CxMark } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer, MIN_POOL } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -321,4 +321,17 @@ test('explanations (migration 014): a well-formed one becomes the solution and t
   assert.equal(cleanExplain('text', 4), null);
   assert.deepEqual(cleanExplain({ right: 'r', wrong: ['a'] }, 4)?.wrong, [null, null, null, null], 'a wrong-length list is dropped, the reason kept');
   assert.deepEqual(toQ(row({ figures: [] }), new Map())?.solution, [], 'no explanation: no solution line');
+});
+
+test('correctionHtml: one passage, every mistake highlighted, right and given blanks filled, the rest open', () => {
+  const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const { html, placed } = correctionHtml('A (1) ____ b (2) ________ c (3) ____ d (4) ____ e (5)____ f (6) ____.', new Map<number, CxMark>([
+    [1, { kind: 'right', answer: 'when' }], [2, { kind: 'wrong', typed: 'then', answer: 'than' }], [3, { kind: 'wrong', typed: '', answer: 'its' }],
+    [5, { kind: 'wrong', typed: null, answer: 'on' }], [6, { kind: 'given', answer: 'at' }], [9, { kind: 'wrong', typed: 'x', answer: 'y' }],
+  ]), esc);
+  assert.equal(html, 'A (1) <span class="filled">when</span> b <mark class="cx-fix">(2) <del>then</del> <strong>than</strong></mark> c '
+    + '<mark class="cx-fix">(3) <span class="cx-none">(no answer)</span> <strong>its</strong></mark> d (4) ____ e '
+    + '<mark class="cx-fix">(5) <strong>on</strong></mark> f (6) <span class="filled given" title="not in this quiz">at</span>.');
+  assert.deepEqual([...placed].sort(), [1, 2, 3, 5, 6], 'blank 9 is not in the passage: the caller lists it');
+  assert.ok(correctionHtml('x (5) ____', new Map([[5, { kind: 'wrong' as const, typed: '<b>', answer: 'a' }]]), esc).html.includes('&lt;b>'), 'typed text is escaped');
 });

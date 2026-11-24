@@ -422,6 +422,19 @@ def cloze_final():
     by = collections.defaultdict(list)
     for r in jl(CLOZE_OUT / "english" / "selected.jsonl"):
         by[r["sec"]].append(r)
+    # the owner's accepted alternatives (a report: "voice" also fits (12)), WORK/cloze_accept_owner.jsonl lines
+    # {"grp", "seq", "add": [...]}; lines for one blank merge; applied before the word-box check; one not applied is
+    # printed (its passage is held), never dropped quietly
+    extra = collections.defaultdict(list)
+    if (WORK / "cloze_accept_owner.jsonl").exists():
+        for o in jl(WORK / "cloze_accept_owner.jsonl"):
+            extra[(o["grp"], int(o["seq"]))] += o["add"]
+    def plus(r):
+        acc = list(r["accept"])
+        for a in extra.pop((r["grp"], r["seq"]), []):
+            if a.strip().lower() not in {x.strip().lower() for x in acc}:
+                acc.append(a.strip())
+        return dict(r, accept=acc)
     rows, why = [], collections.Counter()
     for p in jl(WORK / "passages.jsonl"):
         rs = {r["seq"]: r for r in by.get(p["sec"], [])}
@@ -439,6 +452,8 @@ def cloze_final():
                 keep.append(row_like(next(iter(rs.values())), n, qid_for(p, n), settled[(p["sec"], n)]))  # no key was read
             else:
                 break  # unsettled (or never read as a question): the passage waits
+        if len(keep) == len(marks):
+            keep = [plus(r) for r in keep]
         box = re.match(r"Word box: (.*)\n", keep[0]["stem"]) if keep else None
         boxw = {w.strip().lower() for w in box.group(1).split(" · ")} if box else None
         if len(keep) == len(marks) and boxw is not None and any(a.strip().lower() not in boxw for r in keep for a in r["accept"]):
@@ -448,6 +463,9 @@ def cloze_final():
             why[(p["st"], "complete")] += 1
         else:
             why[(p["st"], "held: a blank unsettled")] += 1
+    left = {k for k in extra if extra[k]}
+    if left:
+        print(f"WARNING owner alternatives not applied (their passage is not shipped): {sorted(left)}")
     # the checks: one passage per set id; no shipped passage shows a blank number that is not one of its questions
     owner = {}
     for r in rows:

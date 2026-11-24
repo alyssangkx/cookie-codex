@@ -359,6 +359,28 @@ export function underlineMarks(html: string, asked: number | null): string {
     `<span class="vc-u${Number(n) === asked ? ' ask' : ''}"><b>(${n})</b>\u00a0<u>${w}</u></span>`);
 }
 
+/** One blank in the corrections: right (the child's word), wrong (typed: what was written; null when not known, e.g. an
+ *  MCQ pick; '' when left empty), or given (not in this quiz: its answer in grey, so nothing reads as skipped). */
+export type CxMark = { kind: 'right' | 'wrong' | 'given'; typed?: string | null; answer: string };
+
+/** A cloze passage for the corrections after a quiz (owner, 24 Nov 2026: "only requires 1 paragraph with all the
+ *  mistakes highlighted"): each wrong blank "(n) ~~typed~~ answer" highlighted, a right one filled with the child's word, a
+ *  given one in grey, any other left "(n) ____". `html` is the escaped stem; `placed` lists the blanks found in it, so a
+ *  mistake the passage cannot show is listed by the caller instead of vanishing. */
+export function correctionHtml(html: string, marks: ReadonlyMap<number, CxMark>, esc: (s: string) => string): { html: string; placed: Set<number> } {
+  const placed = new Set<number>();
+  const out = html.replace(/\((\d{1,3})\) ?_{4,}/g, (all, n: string) => {
+    const m = marks.get(Number(n));
+    if (!m) return `(${n}) ____`;
+    placed.add(Number(n));
+    if (m.kind === 'right') return `(${n}) <span class="filled">${esc(m.answer)}</span>`;
+    if (m.kind === 'given') return `(${n}) <span class="filled given" title="not in this quiz">${esc(m.answer)}</span>`;
+    const yours = m.typed == null ? '' : m.typed.trim() ? `<del>${esc(m.typed.trim())}</del> ` : '<span class="cx-none">(no answer)</span> ';
+    return `<mark class="cx-fix">(${n}) ${yours}<strong>${esc(m.answer)}</strong></mark>`;
+  });
+  return { html: out, placed };
+}
+
 /** The pictures under the stem. Sources must already have passed safeSignedUrl. */
 export function ppFigureHtml(figs: PpFig[], again = false): string {
   // a tap opens the page full size, where a phone can zoom it (passage pages are dense)
