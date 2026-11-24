@@ -1,14 +1,16 @@
 ---
 // Home base: a map of the cookie kingdom with the Schools of Mastery, the Library (Codex), the Shop and My House
 // (collection). The tower is scenery only: no leaderboards (game-design rules), so it has no label. The map art has no
-// text; every label is HTML. The shop is a separate sprite (public/home/shop.webp) drawn on its plot.
+// text; every label is HTML. Some buildings are separate sprites drawn on their plots (`sprites` in home-hotspots.json):
+// the shop everywhere, and the Chinese school on the wide all-open map, whose base image (the `wide-all-open` entry in
+// `scenes`) has it painted out.
 import { existsSync } from 'node:fs';
 import Base from '../layouts/Base.astro';
 import spots from '../data/home-hotspots.json';
 import { cookies } from '../lib/data';
 import { SCHOOLS } from '../lib/train';
 
-type Box = [number, number, number, number];
+type Box = [number, number, number, number]; // left, top, width, height in % of the map image
 // Art follows which schools are open: construction comes off a school once it opens.
 // a school shows open only when its hotspot says so AND its banks have a playable tier (train.ts SCHOOLS.ready)
 const SCHOOL_IDS = new Set(['math', 'english', 'science', 'chinese']); // library, shop, house are not schools
@@ -19,21 +21,74 @@ const deadLinks = buildings.filter((b) => b.status === 'open' && !b.href).map((b
 if (deadLinks.length) throw new Error(`index.astro: open buildings with no href: ${deadLinks.join(', ')}`);
 const isOpen = (id: string) => buildings.find((b) => b.id === id)?.status === 'open';
 const schools = ['chinese', 'science', 'english'].filter(isOpen);
-// suffix from the open set in a fixed order; no art for the combination falls back to the base map
+// suffix from the open set in a fixed order (the art state)
 const suffix = schools.length === 3 ? 'all-open' : schools.length ? `${schools.join('-')}-open` : '';
-const missing = ['wide', 'tall'].map((k) => `public/home/map-${k}-${suffix}.webp`).filter((f) => !existsSync(f));
-const artState = suffix && !missing.length ? suffix : '';
-// a combination of open schools with no art fails the build: generate the art before opening the school
-// (paths are relative to site/, where the build runs)
-if (suffix && missing.length) throw new Error(`index.astro: missing home art ${missing.join(', ')}`);
-const layouts = (['wide', 'tall'] as const).map((k) => ({
-  k,
-  img: `/home/map-${k}${artState ? '-' + artState : ''}.webp`,
-  size: k === 'wide' ? [1920, 1072] : [1080, 1935],
-  items: buildings.map((b) => ({ ...b, box: (spots[k] as Record<string, unknown>)[b.id] as Box })),
-  companions: spots[k].companions as [number, number][],
-  shopArt: spots.art.shop[k] as Box,
-}));
+// home-hotspots.json: `scenes` (a layout, or `<layout>-<art state>` overriding it) and `sprites` (see its _note).
+// The file is checked whole at build, whatever is open now (paths are relative to site/, where the build runs).
+type Raw = { map?: string; paintedOut?: string[]; boxes: Record<string, number[]>; companions?: number[][] };
+type RawSprite = { src: string; size: number[]; boxes: Record<string, number[]>; hit?: Record<string, number[]> };
+const rawScenes: Record<string, Raw> = spots.scenes;
+const rawSprites: Record<string, RawSprite> = spots.sprites;
+const LAYOUTS = ['wide', 'tall'] as const;
+const fail = (msg: string): never => { throw new Error(`index.astro: ${msg}`); };
+const isNums = <N extends number>(v: unknown, n: N): v is number[] & { length: N } =>
+  Array.isArray(v) && v.length === n && v.every((x) => typeof x === 'number' && Number.isFinite(x));
+// a box is [left, top, width, height] in %, a `hit` inset [left, top, right, bottom] in %, a size [width, height] in px
+const box4 = (v: unknown, where: string): Box => (isNums(v, 4) ? [v[0], v[1], v[2], v[3]] : fail(`${where} must be 4 numbers`));
+const pair = (v: unknown, where: string): [number, number] => (isNums(v, 2) ? [v[0], v[1]] : fail(`${where} must be 2 numbers`));
+const boxesOf = (o: Record<string, number[]>, where: string) =>
+  Object.fromEntries(Object.entries(o).map(([id, b]) => [id, box4(b, `${where}.${id}`)]));
+const scenes = Object.fromEntries(Object.entries(rawScenes).map(([key, sc]) => [key, {
+  map: sc.map,
+  paintedOut: sc.paintedOut ?? [],
+  boxes: boxesOf(sc.boxes, `scenes.${key}.boxes`),
+  companions: sc.companions?.map((c, i) => pair(c, `scenes.${key}.companions[${i}]`)),
+}]));
+const sprites = Object.fromEntries(Object.entries(rawSprites).map(([id, s]) => [id, {
+  src: s.src,
+  size: pair(s.size, `sprites.${id}.size`),
+  boxes: boxesOf(s.boxes, `sprites.${id}.boxes`),
+  hit: boxesOf(s.hit ?? {}, `sprites.${id}.hit`),
+}]));
+// a sprite may be placed per layout or per `<layout>-<art state>`, valid when that state has art (a map file) or a scene
+const sceneExists = (key: string) => (LAYOUTS as readonly string[]).includes(key) || !!scenes[key] ||
+  LAYOUTS.some((k) => key.startsWith(`${k}-`) && existsSync(`public/home/map-${key}.webp`));
+for (const [id, s] of Object.entries(sprites)) {
+  if (!existsSync(`public${s.src}`)) fail(`missing sprite art public${s.src}`);
+  for (const key of Object.keys(s.boxes)) if (!sceneExists(key)) fail(`sprites.${id}.boxes.${key}: no such layout or art state`);
+  for (const key of Object.keys(s.hit)) if (!s.boxes[key]) fail(`sprites.${id}.hit.${key}: the sprite has no box there`);
+}
+// a scene with its own base map lists the buildings it paints out (maybe none), and each has a sprite box there
+for (const [key, sc] of Object.entries(scenes)) {
+  if (sc.map && !rawScenes[key].paintedOut) fail(`scenes.${key} sets map but no paintedOut list`);
+  for (const id of sc.paintedOut) if (!sprites[id]?.boxes[key]) fail(`scenes.${key} paints out ${id} but has no ${id} sprite box`);
+}
+const layouts = LAYOUTS.map((k) => {
+  // a `<layout>-<art state>` scene (e.g. wide-all-open) overrides boxes, companions and the base map
+  const key = suffix ? `${k}-${suffix}` : k;
+  const over = key !== k ? scenes[key] : undefined;
+  const img = `/home/${over?.map ?? `map-${k}${suffix ? '-' + suffix : ''}.webp`}`;
+  // a combination of open schools with no art fails the build: generate the art before opening the school
+  if (!existsSync(`public${img}`)) fail(`missing home art public${img}`);
+  // building sprites drawn over the map: the box for this art state, else for the layout, else none
+  const art = Object.entries(sprites).flatMap(([id, s]) => {
+    const sk = s.boxes[key] ? key : k;
+    const b = s.boxes[sk];
+    return b ? [{ id, src: s.src, size: s.size, box: b, hit: s.hit[sk] ?? [0, 0, 0, 0] }] : [];
+  });
+  // a building with a sprite takes its hotspot from the sprite box (shrunk by `hit`), else from the scene boxes
+  const box = (id: string): Box => {
+    const a = art.find((x) => x.id === id);
+    if (a) { const [x, y, w, h] = a.box, [l, t, r, bt] = a.hit; return [x + l, y + t, w - l - r, h - t - bt]; }
+    return over?.boxes[id] ?? scenes[k].boxes[id] ?? fail(`no ${k} box for ${id}`);
+  };
+  return {
+    k, img, art,
+    size: k === 'wide' ? [1920, 1072] : [1080, 1935],
+    items: buildings.map((b) => ({ ...b, box: box(b.id) })),
+    companions: over?.companions ?? scenes[k].companions ?? [],
+  };
+});
 // companions: owned cards (filled in by the client), falling back to the 7 commons
 const commons = cookies.filter((c) => c.rarity === 'common').map((c) => ({ slug: c.slug, name: c.name, image: c.image }));
 const cards = Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image }]));
@@ -45,8 +100,10 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
       <div class={`scene scene-${L.k}`}>
         <img class="map" src={L.img} width={L.size[0]} height={L.size[1]}
           alt="A cartoon cookie kingdom: the Math, Science, English and Chinese schools, the Library, the Shop, My House and a tall tower." />
-        <img class="shop-art" src="/home/shop.webp" width="640" height="642" alt="" decoding="async"
-          style={`left:${L.shopArt[0]}%;top:${L.shopArt[1]}%;width:${L.shopArt[2]}%;height:${L.shopArt[3]}%`} />
+        {L.art.map((a) => (
+          <img class={`sprite sprite-${a.id}`} src={a.src} width={a.size[0]} height={a.size[1]} alt="" loading="lazy" decoding="async"
+            style={`left:${a.box[0]}%;top:${a.box[1]}%;width:${a.box[2]}%;height:${a.box[3]}%`} />
+        ))}
         <div class="banner">
           <p class="welcome">Welcome back<span class="player-sep"></span>!</p>
           <p class="hint">Tap a building to begin.</p>
@@ -111,7 +168,7 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
     .home .scene-tall { display: block; }
   }
   .home .map { display: block; width: 100%; height: auto; }
-  .home .shop-art { position: absolute; display: block; object-fit: contain; pointer-events: none; }
+  .home .sprite { position: absolute; display: block; object-fit: contain; pointer-events: none; }
   .home .banner { position: absolute; left: 0; right: 0; top: 2%; text-align: center; pointer-events: none; }
   .home .welcome {
     margin: 0; font: 600 clamp(1.5rem, 4.2vw, 3.2rem) var(--font-display); color: var(--cocoa);
