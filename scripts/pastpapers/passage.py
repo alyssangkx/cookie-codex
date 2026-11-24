@@ -38,7 +38,7 @@ PROMPT = ("These are pages from a Singapore Primary 6 English exam paper. Transc
           "options, the question numbers in the margin, page headers and footers. Separate paragraphs with a blank line. If the "
           "passage has a title, put it on the first line. Reply with JSON only: {{\"passage\": \"...\"}}. If the passage is not "
           "on these pages, reply {{\"none\": true}}.")
-UNDER = re.compile(r"\{\{\s*(\d{1,3})\s*\|\s*([^{}|]+?)\s*\}\}")
+UNDER = re.compile(r"\{\{\s*(\d{1,3})\s*\|\s*([^{}|]*?)\s*\}\}")  # empty: Editing's missing-word box
 BLANK = re.compile(r"\[\[\s*(\d{1,3})\s*\]\]")
 
 
@@ -161,11 +161,19 @@ def judge(r, raw1, raw2):
     m1, m2 = markers(p1, r["kind"]), markers(p2, r["kind"])
     if m1 is None or m2 is None:
         return None, "a question number repeats"
-    want = set(r["qnos"])
-    if set(m1) != want:
+    # the passage holds every blank, and the first read of the paper missed some questions: the markers must be one unbroken
+    # run of numbers covering most of the known questions (a stray known number far off is the first read's slip)
+    nums, want = sorted(m1), set(r["qnos"])
+    if nums != list(range(nums[0], nums[0] + len(nums))) if nums else True:
+        return None, "markers are not one run of numbers"
+    # every known question has its blank (one first-read slip allowed), and at most 3 blanks beyond the known ones (the first
+    # read missed a few questions; more is the next section run in)
+    if len(want - set(nums)) > 1 or len(set(nums) - set(range(min(want), max(want) + 1))) > 3:
         return None, "markers differ from the questions"
+    if r.get("st") != "eng-editing" and any(not w for w in m1.values()) and r["kind"] == "under":
+        return None, "an underline lost its words"  # only Editing has a box with no word (a missing word)
     if m1 != m2:
-        return None, "the two reads mark different words" if set(m2) == want else "the second read's markers differ"
+        return None, "the two reads mark different words" if set(m2) == set(m1) else "the second read's markers differ"
     if difflib.SequenceMatcher(None, plain(p1), plain(p2), autojunk=False).ratio() < 0.95:
         return None, "the two reads' text differs"
     return p1.strip(), None
@@ -200,7 +208,15 @@ def selftest():
     assert judge(r, raw(p), raw(p.replace("Benedict", "Benedict "))) == (p, None)
     assert judge(r, raw(p), raw(p.replace("|widely", "|wisely")))[1] == "the two reads mark different words"
     assert judge(r, raw(p), raw(p.replace("{{18| detailed plan  for their trip }}", "detailed plan")))[1] == "the second read's markers differ"
-    assert judge({"kind": "under", "qnos": [16, 17, 18]}, raw(p), raw(p))[1] == "markers differ from the questions"
+    assert judge({"kind": "under", "qnos": [16, 17, 18, 19, 20]}, raw(p), raw(p))[1] == "markers differ from the questions"
+    assert judge({"kind": "under", "qnos": [17]}, raw(p), raw(p)) == (p, None), "more blanks than the first read found is fine"
+    run = " ".join(f"{{{{{n}|w{n}}}}}" for n in range(16, 36))
+    assert judge({"kind": "under", "qnos": list(range(16, 26))}, raw(run), raw(run))[1] == "markers differ from the questions", "the next section ran in"
+    e = "A {{17|}} b {{18|x}}."
+    assert judge({"kind": "under", "st": "eng-vocab-cloze", "qnos": [17, 18]}, raw(e), raw(e))[1] == "an underline lost its words"
+    assert judge({"kind": "under", "st": "eng-editing", "qnos": [17, 18]}, raw(e), raw(e)) == (e, None)
+    assert judge(r, raw("A {{17|x}} b {{19|y}}."), raw("A {{17|x}} b {{19|y}}."))[1] == "markers are not one run of numbers"
+    assert markers("useful {{29|}} reminders", "under") == {29: ""}, "Editing: a missing word is an empty box"
     qs = [{"pages": [4]}, {"pages": [4]}, {"pages": [5]}, {"pages": [30]}, {"pages": [30]}]
     assert [len(c) for c in clusters(qs)] == [3, 2], "a jump in pages starts another paper's section"
     print("passage selftest ok")

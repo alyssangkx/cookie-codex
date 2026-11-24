@@ -19,6 +19,7 @@ questions"; Maths and Science next): why the key is right, and why each other op
   explain.py selftest
 A key is never questioned here (the keys are settled); an explanation that argues for another option, or that the judge
 calls wrong, is dropped, and that question simply shows no explanation. Past-paper text stays off the repo and the site."""
+import collections
 import json
 import os
 import random
@@ -332,6 +333,149 @@ def aligned(e, item):
     return mentions_(e["right"], o[k]) and hits >= len(o) - 2
 
 
+CEDICT = Path("/data/alvin/tmp/cookie-codex/cedict/cedict_ts.u8")
+_CED = None
+
+
+def ced():
+    """CC-CEDICT as {simplified: [[pinyin, sense], ...]} (the site's gloss uses the same file and credit)."""
+    global _CED
+    if _CED is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "quiz" / "chinese"))
+        from build_gloss import load_cedict
+        _CED = load_cedict(CEDICT) if CEDICT.exists() else {}
+    return _CED
+
+
+# a connective in a 关联词 pair has one reading, whatever else the character can be read as
+CONNECTIVE = {"都": "dōu", "还": "hái", "便": "biàn", "只": "zhǐ", "得": "de", "要": "yào", "将": "jiāng", "为": "wèi", "和": "hé",
+              "与": "yǔ", "否": "fǒu", "则": "zé", "假": "jiǎ", "倘": "tǎng", "尽": "jǐn", "管": "guǎn", "更": "gèng", "宁": "nìng",
+              "省": "shěng"}
+
+
+_ALLR = None
+
+
+def all_readings():
+    """{simplified: {pinyin, ...}} with every CC-CEDICT reading, including the "used in ..." / "see ..." entries the gloss
+    loader drops (似 is sì, and shì in 似的): a character counts as having one reading only when it truly has one."""
+    global _ALLR
+    if _ALLR is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "quiz" / "chinese"))
+        from build_gloss import pinyin as tones
+        _ALLR = collections.defaultdict(set)
+        for line in open(CEDICT, encoding="utf-8") if CEDICT.exists() else ():
+            m = re.match(r"\S+ (\S+) \[([^\]]+)\]", line)
+            if m and not line.startswith("#") and not m.group(2)[:1].isupper():
+                _ALLR[m.group(1)].add(tones(m.group(2)).lower())
+    return _ALLR
+
+
+def reading(word, stem="", own=False, pair=False):
+    """The pinyin of an option word: its dictionary reading when it has one; a character with several readings takes the one
+    of the word it forms in the sentence (only for the key, own=True: a wrong character forms no word); a word missing from
+    the dictionary is spelled character by character when every character has one reading. None when unsure."""
+    rs = set(all_readings().get(word, ()))
+    if len(rs) == 1:
+        return rs.pop()
+    if pair and word in CONNECTIVE:
+        return CONNECTIVE[word]
+    if pair and len(word) > 1 and len(rs) > 1:
+        import unicodedata
+        bare = lambda r: unicodedata.normalize("NFD", r).encode("ascii", "ignore").decode()
+        if len({bare(r) for r in rs}) == 1:  # a connective (不是…而是: bù shì, not bù shi); elsewhere 东西 dōng xī / dōng xi
+            return max(rs, key=lambda r: sum(c in "āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜ" for c in r))  # are two words: unsure
+    if len(word) == 1 and 1 < len(rs) <= 3 and not own:
+        return " / ".join(sorted(rs))  # a wrong 字形 character forms no word here: all its readings are true
+    if len(word) == 1 and len(rs) > 1 and own:
+        from build_gloss import windows
+        parts = re.split(r"[_＿]{2,}", stem, maxsplit=1)
+        if len(parts) == 2:
+            seen = set()  # the character's syllable in every dictionary word around the blank: one reading, or unsure
+            for w in windows(parts[0], word, parts[1]):
+                for r in all_readings().get(w, ()):
+                    syl = r.split()
+                    if len(syl) == len(w):
+                        seen.add(syl[w.index(word)])
+            return seen.pop() if len(seen) == 1 else None
+        return None
+    if not rs and len(word) > 1:
+        syl = [reading(c, pair=pair) for c in word]
+        return " ".join(syl) if all(x and "/" not in x for x in syl) else None  # each character sure of its reading
+    return None
+
+
+ZH_WORDOPT = re.compile(r"[\u3400-\u9fff]{1,6}(?:(?:……|…|\.{2,})[\u3400-\u9fff]{1,4})?(?:……|…|\.{2,})?")  # "每逢……" too
+
+
+def add_pinyin(e, item):
+    """Owner, 24 Nov 2026: a Chinese explanation gives the pinyin of the word it is about. After the first mention of each
+    option in its own line (the key in the reason): 「打扰」（dǎ rǎo）, 「虽然……但是」（suī rán……dàn shì）. Pinyin and sentence
+    options are left as they are; a word whose reading is unsure gets none rather than a wrong one."""
+    if not CEDICT.exists():
+        sys.exit(f"{CEDICT} is missing: Chinese explanations need it for their pinyin (owner, 24 Nov 2026)")
+    o = [OPTNUM.sub("", x, count=1).strip() for x in item["options"]]
+    out = dict(e, wrong=list(e["wrong"]))
+    if not all(ZH_WORDOPT.fullmatch(x) for x in o):
+        return quoted_pinyin(out) if any(re.search(r"[\u3400-\u9fff]", x) for x in o) or ZH_OPT.search("".join(o)) else out
+    for k, opt in enumerate(o):
+        parts = [p for p in re.split(r"……|…|\.{2,}", opt) if p]
+        pys = [reading(p, item.get("stem") or "", own=(k == item["answer"]), pair=len(parts) > 1) for p in parts]
+        if not all(pys):
+            continue
+        py = "……".join(pys)
+        key = "right" if k == item["answer"] else None
+        line = out["right"] if key else out["wrong"][k]
+        if not line:
+            continue
+        zh, sep, en = line.partition("（English")
+        if re.search(re.escape(opt) + r"[」”\"’']?\s*[（(]\s*[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]", zh):
+            continue  # already there
+        whole = r"(?:……|…|\.{2,}|、)".join(map(re.escape, parts))  # a pair however its ellipsis is written
+        m = re.search(rf"[「“\"‘]{whole}[」”\"’]", zh) or re.search(whole, zh)
+        for part, pp in (zip(parts, pys) if not m and len(parts) > 1 else ()):
+            m = re.search(rf"{re.escape(part)}[」”\"’]?", zh)  # one half named alone (「而且」): after its closing quote
+            if m:
+                py = pp
+                break
+        if not m or re.match(r"\s*[（(]\s*[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]", zh[m.end():]):
+            continue  # not named, or its pinyin is already there (a re-run adds nothing)
+        zh = zh[:m.end()] + f"（{py}）" + zh[m.end():]
+        if key:
+            out["right"] = zh + sep + en
+        else:
+            out["wrong"][k] = zh + sep + en
+    return quoted_pinyin(out)
+
+
+PINYIN_AFTER = r"[」”\"’]?\s*[（(]\s*[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]"
+
+
+def quoted_pinyin(e):
+    """Every other word the explanation quotes in 「…」 (2 to 4 characters, or one character with a single reading) gets its
+    pinyin once per line: sentence-choice and pinyin questions name their key words this way (「紧急」, 「耻」). A word with
+    more than one possible reading gets none."""
+    def fix(line):
+        if not line:
+            return line
+        zh, sep, en = line.partition("（English")
+        # words already given their pinyin in this line (by the option pass) are not given it again
+        done = set(re.findall(r"「([\u3400-\u9fff…]{1,9})」\s*（\s*[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]", zh)) | \
+            set(re.findall(r"([\u3400-\u9fff]{1,4})[」”\"’]?\s*（\s*[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]", zh))
+
+        def one(m):
+            w = m.group(1)
+            if w in done or re.match(PINYIN_AFTER, zh[m.end() - 1:]) or re.match(r"\s*[（(]\s*[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]", zh[m.end():]):
+                return m.group(0)
+            r = reading(w)
+            if not r or "/" in r:
+                return m.group(0)
+            done.add(w)
+            return f"{m.group(0)}（{r}）"
+        return re.sub(r"「([\u3400-\u9fff]{1,4})」", one, zh) + sep + en
+    return dict(e, right=fix(e["right"]), wrong=[fix(w) for w in e["wrong"]])
+
+
 def opus_row(x, item):
     """An Opus agent's line as {right, wrong[]}, or None when its shape does not fit the question it names."""
     if not item or x.get("fp") != item["fp"] or "doubt" in x:
@@ -345,7 +489,7 @@ def opus_row(x, item):
     e = {"right": denum(x["right"], o)[:600], "wrong": [None if j == k else denum(s, o)[:400] for j, s in enumerate(w)]}
     if any(OPTNUM.search(t) for t in [e["right"], *e["wrong"]] if t):
         return None  # an option number denum could not map to its words: never shipped, never silently cut
-    return e if aligned(e, item) else None
+    return add_pinyin(e, item) if aligned(e, item) else None
 
 
 def apply_opus(sample=0):
@@ -392,6 +536,43 @@ def apply_opus(sample=0):
 
 
 def selftest():
+    assert CEDICT.exists(), f"{CEDICT} missing: the pinyin rules cannot be tested (and apply-opus refuses Chinese without it)"
+    if CEDICT.exists():
+        it = {"options": ["打扰", "打听", "打算", "打开"], "answer": 0, "stem": "对不起，____你了。"}
+        got = add_pinyin({"right": "「打扰」是麻烦别人。（English: to disturb）", "wrong": [None, "「打听」是问消息。（English: ask）", "这个不对。", "「打开」不行。"]}, it)
+        assert got["right"].startswith("「打扰」（dǎ rǎo）是") and (got["wrong"][1].startswith("「打听」（dǎ ting）") or got["wrong"][1].startswith("「打听」（dǎ tīng）")), got
+        assert reading("东西") is None, "东西 dōng xī / dōng xi are two words: unsure, no pinyin"
+        assert reading("似") is None or "/" in reading("似"), "似 is sì and shì (似的)"
+        assert reading("长太") is None, "a character with two readings is never spelled out inside an unknown word"
+        assert reading("不是", pair=True) == "bù shì"
+        assert got["wrong"][2] == "这个不对。", "a line that never names its option is left alone"
+        assert add_pinyin(got, it) == got, "added once"
+        gl = add_pinyin({"right": "「虽然……但是」表示转折。（English: contrast）", "wrong": [None, "x", "y", "z"]},
+                        {"options": ["虽然……但是", "因为……所以", "不但……而且", "如果……就"], "answer": 0, "stem": "s"})
+        assert gl["right"].startswith("「虽然……但是」（suī rán……dàn shì）"), gl["right"]
+        assert reading("长", "小树慢慢____大了。", own=True) in ("zhǎng", None), "never a wrong reading"
+        assert reading("长") == "cháng / zhǎng", "a wrong character: all its readings"
+        assert reading("都", pair=True) == "dōu" and reading("还", pair=True) == "hái"
+        assert reading("项", "奶奶戴了一条非常漂亮的____链。", own=True) == "xiàng"
+        half = add_pinyin({"right": "「虽然」后面要说事实。（English: x）", "wrong": [None, "a", "b", "c"]},
+                          {"options": ["虽然……但是", "因为……所以", "不但……而且", "如果……就"], "answer": 0, "stem": "s"})
+        assert half["right"].startswith("「虽然」（suī rán）后面"), half["right"]
+        dot = add_pinyin({"right": "「虽然…但是」表示转折。（English: x）", "wrong": [None, "a", "b", "c"]},
+                         {"options": ["虽然……但是", "因为……所以", "不但……而且", "如果……就"], "answer": 0, "stem": "s"})
+        assert dot["right"].startswith("「虽然…但是」（suī rán……dàn shì）"), dot["right"]
+        pr = {"options": ["虽然……但是", "因为……所以", "不但……而且", "如果……就"], "answer": 0, "stem": "s"}
+        assert add_pinyin(dot, pr) == dot and add_pinyin(half, pr) == half, "a re-run adds no second pinyin"
+        two = add_pinyin({"right": "r", "wrong": [None, "「而且」后面少了动词。（English: x）", "b", "c"]},
+                         {"options": ["虽然……但是……", "不仅……而且", "每逢……", "如果……就……"], "answer": 0, "stem": "s"})
+        assert two["wrong"][1].startswith("「而且」（ér qiě）"), two["wrong"][1]
+        sen = add_pinyin({"right": "「紧急」是说情况很急，「紧急」不能这样用。（English: x）", "wrong": [None, "「长」不对。", "b", "c"]},
+                         {"options": ["警察紧急赶往现场。", "x", "y", "z"], "answer": 0, "stem": "s"})
+        assert sen["right"] == "「紧急」（jǐn jí）是说情况很急，「紧急」不能这样用。（English: x）", sen["right"]
+        assert sen["wrong"][1] == "「长」不对。", "a character with two readings gets none"
+        twice = add_pinyin({"right": "r", "wrong": [None, "「请求」是礼貌地请人帮忙，不说「请求」。（English: x）", "b", "c"]},
+                           {"options": ["吩咐", "请求", "提问", "盼望"], "answer": 0, "stem": "s"})
+        assert twice["wrong"][1].count("qǐng qiú") == 1, twice["wrong"][1]
+        assert add_pinyin({"right": "r", "wrong": [None, "a", "b", "c"]}, {"options": ["他很好。", "x", "y", "z"], "answer": 0})["right"] == "r"
     zo = ["挑", "担", "抬", "提"]
     assert denum("正确答案是（2）担，因为要用扁担。（English: The answer is (2) 担.）", zo) == "正确答案是「担」，因为要用扁担。（English: The answer is 「担」.）"
     assert OPTNUM.search(denum("选（3）不对", zo)), "a number without its option stays, so opus_row rejects the line"

@@ -34,11 +34,30 @@ def jl(p):
 
 
 def parse(text):
+    """The model's JSON; when it ran out of tokens writing a dotted line as "____ ____ ____ ..." the reply is cut off, so
+    the sentences and the scaffold's start are taken from the partial text. Runs of blanks become one ____."""
     m = re.search(r"\{.*\}", text or "", re.S)
+    v = None
     try:
-        return json.loads(m.group(0)) if m else None
+        v = json.loads(m.group(0)) if m else None
     except Exception:
-        return None
+        pass
+    if v is None and text and '"none"' not in text:
+        un = lambda x: json.loads(f'"{x}"') if x is not None else None
+        se = re.search(r'"sentences"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        whole = re.search(r'"scaffold"\s*:\s*"((?:[^"\\]|\\.)*)"', text)
+        part = re.search(r'"scaffold"\s*:\s*"((?:[^"\\]|\\.)*)$', text.strip())
+        try:
+            if se and whole:  # complete strings in a reply that failed for another reason: taken as they are
+                v = {"sentences": un(se.group(1)), "scaffold": un(whole.group(1))}
+            elif se and part:  # cut off inside the dotted line: only the words before the first blank are known
+                lead = re.split(r"_{2,}", un(part.group(1).rstrip("\\")))[0].strip()
+                v = {"sentences": un(se.group(1)), "scaffold": f"{lead} ____", "cut": True} if lead else None
+        except Exception:
+            v = None
+    if v and isinstance(v.get("scaffold"), str):
+        v["scaffold"] = re.sub(r"_{2,}(?:[\s.]*_{2,})*", "____", v["scaffold"]).strip()
+    return v
 
 
 def norm(s):
@@ -57,6 +76,26 @@ def fits(answer, scaffold):
     a = norm(answer).rstrip(".!? ")
     pat = pat.rstrip(r"\.\!\? ").rstrip("\\")
     return bool(re.fullmatch(r"\s*" + pat + r"[.!?]?\s*", a + ".") or re.fullmatch(r"\s*" + pat + r"\s*", a))
+
+
+def fits_key(answer, scaffold):
+    """fits(), allowing what keys and reads do: a key that prints only the completion ("Ben commented ____" keyed "that he
+    had been ..."), and a read that dropped the line's last blank ("____ whom" for "____ whom ____")."""
+    # a dropped last blank ("____ whom"): only when the line does not end its sentence ("..., I still did not go." is whole)
+    sc = [scaffold] + ([scaffold.rstrip() + " ____"] if not re.search(r"(_{2,}|[.!?])\s*$", scaffold) else [])
+    lead = re.split(r"_{2,}", scaffold)[0].strip()
+    join = lead and answer[:1].islower()  # only a true completion ("that he had ..."), never a whole other sentence
+    return any(fits(answer, x) or (join and fits(f"{lead} {answer}", x)) for x in sc)
+
+
+STOP = set("a an the and but or so of to in on at by for with from as is was were be been are am it he she they we i you his her "
+           "their our my your him them us me that this these those not did does do had has have will would could should can".split())
+
+
+def same_topic(answer, sentences):
+    """The key reuses at least two content words of the given sentences (an answer from another question does not)."""
+    w = lambda t: {x for x in re.findall(r"[a-z']+", norm(t)) if x not in STOP and len(x) > 2}
+    return len(w(answer) & w(sentences)) >= 2
 
 
 def pack():
@@ -125,7 +164,7 @@ def check(sample=0):
         if v.get("none") or not v.get("scaffold"):
             continue
         it = items.get(r["id"])
-        if it and (r["id"] not in best or fits(it["answer"], v["scaffold"])):
+        if it and (r["id"] not in best or fits_key(it["answer"], v["scaffold"])):
             best[r["id"]] = v
     rows, why = [], {}
     for i, it in items.items():
@@ -134,8 +173,10 @@ def check(sample=0):
             w = "not found on its pages"
         elif not re.search(r"_{2,}", v["scaffold"]):  # the same blank test as fits()
             w = "no blank in the answer line"
-        elif not fits(it["answer"], v["scaffold"]):
+        elif not fits_key(it["answer"], v["scaffold"]):
             w = "the printed answer does not fit the answer line"
+        elif not same_topic(it["answer"], v.get("sentences") or ""):
+            w = "the printed answer is about other sentences"
         else:
             w = None
         why[w or "kept"] = why.get(w or "kept", 0) + 1
@@ -154,6 +195,19 @@ def selftest():
     assert fits("We will run out of water unless everyone drinks as little as possible.", "____ unless ____.")
     assert not fits("The bird pecked at it suddenly and had it.", "However ____, I still did not go to the party.")
     assert not fits("Anything at all.", "No blank here.")
+    assert fits_key("that he had been preparing all evening.", "Ben commented ____")
+    assert fits_key("The zookeeper, whom the elephant attacked, was very experienced.", "____ whom")
+    assert not fits_key("I ate fried rice for dinner last night.", "____ prefers ____"), "an answer from another question"
+    assert not fits_key("Sally said that she had run to school.", "Her ____"), "a whole sentence is never joined to the lead-in"
+    assert same_topic("Owing to her illness, Janet could not sing.", "Janet was ill. She was unable to sing at the concert.")
+    assert not same_topic("Mrs Lee prefers walking to driving.", "Aziz was committed to studying hard.")
+    cut = '```json { "sentences": "Janet was ill. She was unable to sing at the concert.", "scaffold": "Owing to ____ ____ ____ ____ __'
+    assert parse(cut)["scaffold"] == "Owing to ____" and fits("Owing to her illness, Janet was unable to sing at the concert.", parse(cut)["scaffold"])
+    assert parse('{"sentences": "x", "scaffold": "However _____ _____ _____, I still went."}')["scaffold"] == "However ____, I still went."
+    junk = parse('{"sentences":"Tom ran.","scaffold":"However ____, I still went."} and then {x}')
+    assert junk["scaffold"] == "However ____, I still went." and not junk.get("cut"), "a whole reply is never treated as cut"
+    assert parse('{"sentences": "x", "scaffold": "____ ____ ____') is None, "cut before any printed word: unusable"
+    assert not fits_key("However hard I tried, I still did not go to the party because I was sick.", "However ____, I still did not go to the party.")
     print("synth selftest ok")
 
 
