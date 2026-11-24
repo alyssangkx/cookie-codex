@@ -37,3 +37,6 @@ echo "$ct" | sed -n 's/^.*NOTICE:  //p'; echo "$ct" | grep -q 'COUNTS CHECKS PAS
 run -o /dev/null < "$mig/014_pp_explain.sql"
 ex=$(run -t -o /dev/null < "$here/test_pp_explain.sql" 2>&1) || { echo "$ex" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
 echo "$ex" | sed -n 's/^.*NOTICE:  //p'; echo "$ex" | grep -q 'EXPLAIN CHECKS PASSED' && echo 'EXPLAIN CHECKS PASSED' || exit 1
+run -o /dev/null < "$mig/015_pp_typed.sql"
+ty=$(run -t -o /dev/null < "$here/test_pp_typed.sql" 2>&1) || { echo "$ty" | sed 's/^psql:<stdin>:[0-9]*: //' | grep -v '^$'; exit 1; }
+echo "$ty" | sed -n 's/^.*NOTICE:  //p'; echo "$ty" | grep -q 'TYPED CHECKS PASSED' && echo 'TYPED CHECKS PASSED' || exit 1

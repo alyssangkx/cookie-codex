@@ -29,7 +29,7 @@ export type TierState = { passes: string[]; scores: number[]; best: number; clea
 // a state parked by any other bank set (an older tab writes true) still counts toward reviewDueCount, so it cannot hide
 // Daily Review until this build has re-checked it. Older code treats any truthy value as parked.
 export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true | string };
-export const PICK_MAX = 120; // characters of a picked option kept in the save
+export const PICK_MAX = 120; // characters of a picked option (or of a typed sentence, cut with … by the quiz) kept in the save (512 KB cap)
 export const LEFT_BLANK = '\u2205'; // "∅": a paper question left blank on purpose (never an option's text)
 export interface Attempt {
   ts: number; mode: 'tier' | 'review' | 'paper'; sub?: string; tier?: Tier; topics?: string[];

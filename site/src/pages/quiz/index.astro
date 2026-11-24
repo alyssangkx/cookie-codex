@@ -96,10 +96,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   import { MIN_POOL,
     load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, revisionDue, type Tier, type SaveV1, type QuizResult,
+  PICK_MAX,
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
   import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, type PpFig } from '../../lib/pastpaper';
+  import { typedOk, compose, scaffoldHtml } from '../../lib/typed';
   import { esc, boldAns } from '../../lib/boldans';
   import { glossOption, type Gloss, type GlossLine } from '../../lib/zhgloss';
   import { toEconomy, balanceOf } from '../../lib/crumbs';
@@ -111,7 +113,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false;
-    numbered?: true; ppFigs?: PpFig[]; ppYear?: number | null }; // past-paper items only (pastpaper.ts; off while PP_ENABLED is false)
+    numbered?: true; ppFigs?: PpFig[]; ppYear?: number | null; typed?: { accept: string[]; scaffold: string | null } }; // past-paper items only (pastpaper.ts; off while PP_ENABLED is false)
   type Meta = {
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string | null; slug: string; count: Record<Tier, number>; pool: number }>;
     files: string[]; banks: string; slots: Record<string, { slug: string; dup: boolean }>;
@@ -238,7 +240,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   let inQuiz = new Set<string>(); // ids in the current quiz
   let quiz: string[] = [], i = 0, score = 0, deadline = 0, tick = 0, startedAt = 0, answered = false, over = false;
   let pausedAt = 0; // the clock stops while the worked solution is on screen
-  let wrongs: { q: Q; chose: number; tag: string }[] = [];
+  let wrongs: { q: Q; chose: number; tag: string; typed?: string }[] = []; // typed: the sentence a typed answer made
   // papers (submit-then-review): a pick per question, the wall clock, and the draft that survives a reload
   let picks: Pick[] = [], pclock = newClock(0, 0), draft: PaperDraft | null = null, mins = 0, paperUsed = 0;
   let rvList: number[] = [], rvAt = 0;
@@ -306,7 +308,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const r = await fetchItems(want, (x) => meta.subs[x]?.file ?? undefined);
     if ('items' in r) {
       for (const q of r.items) byId.set(q.id, q as Q);
-      return '';
+      // a stub always looks paper-ready (4 placeholder options); the real row may be typed (015) or 8-option: a paper drops it
+      // ponytail: a new paper can come out a question short then; pp_pool carrying `kind` would let pickPaper skip them first
+      if (mode === 'paper') quiz = quiz.filter((id) => paperOk(byId.get(id)!));
+      return quiz.length ? '' : 'There are not enough questions for this paper right now. Try again later.';
     }
     const limit = r.error === 'daily_limit';
     if (mode === 'tier' && !POOL) { // a merged tier: carry on with its generated questions
@@ -686,8 +691,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   // a past-paper question's one-line reason (migration 014) reads "Why (1) is right"; generated questions keep their steps
   const stepsHtml = (q: Q) => (isPpId(q.id) && q.solution.length
-    ? `<p class="why-right"><strong>Why ${optionLabel(q, q.answer)} is right:</strong> ${fmt(q.solution[0])}</p>` // no answer-bolding: "has" would light up everywhere
+    ? `<p class="why-right"><strong>${q.typed ? 'Why this works' : `Why ${optionLabel(q, q.answer)} is right`}:</strong> ${fmt(q.solution[0])}</p>` // no answer-bolding: "has" would light up everywhere
     : `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`);
+  /** The answer as the results list writes it: the option with its label, or a typed question's model answer. */
+  const answerText = (q: Q) => (q.typed ? fmt(q.typed.accept[0]) : `${optionLabel(q, q.answer)} (${fmt(q.options[q.answer])})`);
   /** "Report a problem" under the answer (migration 005): the question id goes to report_question; a grown-up looks it up. */
   const REPORT_KINDS: [string, string][] = [['picture', 'The picture is wrong or cut off'], ['answer', 'The answer looks wrong'],
     ['question', 'The question or options are muddled'], ['other', 'Something else']];
@@ -787,6 +794,15 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('stem').innerHTML = stemHtml(q);
     const used = (many && q.group && usedRight.get(q.group)) || new Set<number>();
     $('options').classList.toggle('many', many);
+    $('options').classList.toggle('typed', !!q.typed);
+    if (q.typed) { // migration 015: a box in each blank of the answer line, then Check (or Enter)
+      $('options').innerHTML = `<p class="typed-line">${scaffoldHtml(q.typed.scaffold, esc)}</p>`
+        + '<p class="typed-hint" aria-live="polite"></p><button type="button" class="primary typed-check">Check my answer</button>';
+      $('feedback').hidden = true;
+      $('next').hidden = true;
+      $('options').querySelector<HTMLInputElement>('.typed-box')?.focus();
+      return;
+    }
     $('options').innerHTML = q.options
       .map((o, k) => `<button type="button" class="opt${used.has(k) ? ' used' : ''}" data-k="${k}"${used.has(k) ? ' disabled' : ''}><span class="letter">${optionLabel(q, k)}</span> <span>${fmt(o)}</span></button>`)
       .join('');
@@ -836,6 +852,40 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('feedback').innerHTML =
       (ok ? '<p class="verdict good">Correct!</p>'
           : `<p class="verdict bad">Not yet. The answer is ${optionLabel(q, q.answer)}.</p>${temptingHtml(q, k)}`) + stepsHtml(q) + reportHtml(q);
+    $('feedback').hidden = false;
+    $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
+    $('next').hidden = false;
+    $('next').focus();
+  }
+
+  /** A typed answer (migration 015): every box filled, the sentence it makes compared with the accepted answers (typed.ts). */
+  function chooseTyped() {
+    if (answered || over) return;
+    const q = byId.get(quiz[i])!;
+    if (!q.typed) return;
+    const boxes = [...$('options').querySelectorAll<HTMLInputElement>('.typed-box')];
+    const parts = boxes.map((b) => b.value);
+    if (parts.some((p) => !p.trim())) { // never marked half-typed: an empty box is a slip, not an answer
+      $('options').querySelector('.typed-hint')!.textContent = boxes.length > 1 ? 'Fill in every box first.' : 'Type your answer first.';
+      boxes.find((b) => !b.value.trim())?.focus();
+      return;
+    }
+    answered = true;
+    pausedAt = Date.now();
+    $('timer').classList.add('paused');
+    $('timer').textContent += ' paused';
+    const mine = compose(q.typed.scaffold, parts);
+    const ok = typedOk(q.typed.scaffold, parts, q.typed.accept);
+    // the parent page lists what was typed; the save keeps PICK_MAX characters, so a longer sentence ends in …
+    record(q.id, ok, ok ? undefined : mine.length > PICK_MAX ? `${mine.slice(0, PICK_MAX - 1)}…` : mine);
+    if (ok) score++; else wrongs.push({ q, chose: -1, tag: 'typed', typed: mine });
+    boxes.forEach((b) => { b.disabled = true; b.classList.add(ok ? 'right' : 'wrong'); });
+    $('options').querySelector<HTMLButtonElement>('.typed-check')!.hidden = true;
+    $('options').querySelector('.typed-hint')!.textContent = '';
+    const also = q.typed.accept.length > 1 ? `<p class="typed-also">Also accepted: ${q.typed.accept.slice(1, 4).map(fmt).join(' · ')}</p>` : '';
+    $('feedback').innerHTML = (ok ? '<p class="verdict good">Correct!</p>'
+      : `<p class="verdict bad">Not yet.</p><p class="typed-mine"><strong>You wrote:</strong> ${esc(mine)}</p>`)
+      + `<p class="typed-model"><strong>${ok ? 'Model answer' : 'Answer'}:</strong> ${fmt(q.typed.accept[0])}</p>${also}` + stepsHtml(q) + reportHtml(q);
     $('feedback').hidden = false;
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
@@ -971,13 +1021,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b)}</p>`; }
     $('verdict').innerHTML = html;
     const seenVis = new Set<string>(); // a visual card shows once per set, with the first missed question of that group
-    const items = wrongs.map(({ q, chose }) => {
+    const items = wrongs.map(({ q, chose, typed }) => {
       const showVis = q.visual && !(q.group && seenVis.has(q.group));
       const setAgain = !!q.group && seenVis.has(q.group); // a set's pages in full with its first wrong question only
       if (q.group) seenVis.add(q.group);
       return `<details class="rev"><summary>${stemHtml(q, true, false)}</summary>${ppFigsHtml(q, setAgain && q.sub !== 'chi-dialogue-mcq')}
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
-       <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${optionLabel(q, q.answer)} (${fmt(q.options[q.answer])}).</p>
+       <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : typed ? `You wrote: ${esc(typed)} ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${answerText(q)}.</p>
        ${stepsHtml(q)}</details>`;
     }).join('');
     // a paper steps through these one by one (Review button); the list stays for scanning, folded away
@@ -992,13 +1042,19 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   $('options').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest('button');
-    if (b) (PAPER ? choosePaper : choose)(Number(b.dataset.k));
+    if (b?.classList.contains('typed-check')) chooseTyped();
+    else if (b?.dataset.k != null) (PAPER ? choosePaper : choose)(Number(b.dataset.k)); // only an option button picks
   });
+  $('options').addEventListener('keydown', (e) => { // Enter in a typed box checks the answer
+    if (e.key === 'Enter' && (e.target as HTMLElement).classList.contains('typed-box')) { e.preventDefault(); if (!e.repeat) chooseTyped(); }
+  });
+  // a held Enter: its repeats must not press Next (focused after Check) and skip the feedback unseen
+  $('next').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.repeat) e.preventDefault(); });
   document.addEventListener('keydown', (e) => {
     if ($('play').hidden || answered || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, textarea')) return;
     const k = 'abcdefgh'.indexOf(e.key.toLowerCase()), n = '12345678'.indexOf(e.key);
     const pick = k >= 0 ? k : n;
-    const btn = $('options').querySelectorAll<HTMLButtonElement>('button')[pick];
+    const btn = $('options').querySelectorAll<HTMLButtonElement>('button[data-k]')[pick]; // options only, never a typed Check
     if (PAPER) { if (pick >= 0 && btn && !$('qbody').hidden && !(e.target as HTMLElement).closest('dialog, #p-grid, #pbar, #p-paused')) choosePaper(pick); return; }
     if (pick >= 0 && btn && !btn.disabled) choose(pick); // keys past this question's options do nothing
   });
@@ -1097,6 +1153,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 </script>
 
 <style is:global>
+  .quiz .options.typed { display: block; }
+  .quiz .typed-line { font-size: 1.15rem; line-height: 2.4; margin: 0.4rem 0 0.8rem; }
+  .quiz .typed-box { font: inherit; line-height: 1.4; min-width: 9ch; width: min(100%, 26ch); padding: 0.25rem 0.5rem; border: 2px solid var(--cocoa-soft, #8a6a52);
+    border-radius: 0.5rem; background: var(--paper, #fff); color: inherit; }
+  .quiz .typed-box.right { border-color: var(--good, #2e7d32); }
+  .quiz .typed-box.wrong { border-color: var(--bad, #c62828); }
+  .quiz .typed-hint { min-height: 1.2em; margin: 0 0 0.4rem; color: var(--bad, #c62828); font-size: 0.95rem; }
+  .quiz .typed-mine, .quiz .typed-model, .quiz .typed-also { margin: 0.35rem 0; }
   .quiz .gloss { margin: 0.6rem 0; padding: 0.55rem 0.75rem; border-left: 4px solid var(--r-ancient, #c9a227); background: var(--crust, #f6ecdc); border-radius: 8px; }
   .quiz .gloss p { margin: 0.2rem 0; }
   .quiz .gloss .py { font-style: italic; }

@@ -122,6 +122,7 @@ export interface PpRow {
   options: string[]; answer: number; figures: PpFigure[]; year: number | null;
   grp?: string | null; seq?: number | null; // a passage set (migration 010): its id and the question's place in it
   explain?: unknown; // migration 014: { right, wrong[] } from the server model, checked by a second one; read via cleanExplain
+  kind?: 'mcq' | 'typed'; accept?: string[] | null; scaffold?: string | null; // migration 015: a typed answer (typed.ts)
 }
 /** Why the key is right, and why each other option does not fit (null at the key). */
 export interface PpExplain { right: string; wrong: (string | null)[] }
@@ -143,6 +144,7 @@ export interface PpQ {
   numbered: true; // label options (1)-(4) as the paper and its pictures do, not A-D
   ppFigs: PpFig[];
   ppYear: number | null;
+  typed?: { accept: string[]; scaffold: string | null }; // migration 015: typed into the scaffold's blanks, no options
   calc?: false; // Maths: PSLE-style MCQs sit in Paper 1 (no calculator), so the quiz shows its "No calculator" badge
   group?: string; seq?: number; // a passage set: asked whole and in order, its pages shown once (migration 010)
 }
@@ -234,6 +236,16 @@ export function poolModeFor(quizMode: 'tier' | 'review' | 'paper', enabled = PP_
 const FIG_PATH = /^[a-z]+\/pp-[0-9a-f]{10}-\d{1,2}\.webp$/;
 
 /** Shape check of an RPC row; anything else is dropped (never rendered). */
+// 4 options; 8 only for the 完成对话 dialogue sets (migration 011), the answer always one of them
+const mcqShape = (x: Record<string, unknown>) => (x.kind === undefined || x.kind === null || x.kind === 'mcq')
+  && Array.isArray(x.options) && (x.options.length === 4 || (x.subtopic === 'chi-dialogue-mcq' && x.options.length === 8))
+  && x.options.every((o) => typeof o === 'string')
+  && Number.isInteger(x.answer) && (x.answer as number) >= 0 && (x.answer as number) < x.options.length;
+// a typed answer (migration 015): no options, answer 0, 1-20 accepted answers, a scaffold or none
+export const typedShape = (x: Record<string, unknown>) => Array.isArray(x.options) && x.options.length === 0 && x.answer === 0
+  && Array.isArray(x.accept) && x.accept.length >= 1 && x.accept.length <= 20
+  && x.accept.every((a) => typeof a === 'string' && a.trim().length > 0 && a.length <= 1000)
+  && (x.scaffold === null || x.scaffold === undefined || (typeof x.scaffold === 'string' && x.scaffold.length <= 1000));
 export function validRow(r: unknown): r is PpRow {
   if (!r || typeof r !== 'object') return false;
   const x = r as Record<string, unknown>;
@@ -241,10 +253,7 @@ export function validRow(r: unknown): r is PpRow {
     && typeof x.subtopic === 'string' && SUBTOPIC_ID.test(x.subtopic)
     && LEVELS.includes(x.level as PpRow['level'])
     && typeof x.stem === 'string' && x.stem.trim().length > 0
-    // 4 options; 8 only for the 完成对话 dialogue sets (migration 011), the answer always one of them
-    && Array.isArray(x.options) && (x.options.length === 4 || (x.subtopic === 'chi-dialogue-mcq' && x.options.length === 8))
-    && x.options.every((o) => typeof o === 'string')
-    && Number.isInteger(x.answer) && (x.answer as number) >= 0 && (x.answer as number) < x.options.length
+    && (x.kind === 'typed' ? typedShape(x) : mcqShape(x))
     && Array.isArray(x.figures) && x.figures.every((f) => f && typeof f.path === 'string' && FIG_PATH.test(f.path)
       && Number.isFinite(f.w) && Number.isFinite(f.h))
     && (x.year === null || x.year === undefined || Number.isInteger(x.year));
@@ -276,6 +285,7 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
     id: r.id, sub: r.subtopic, level: r.level, topic, stem: r.stem, options: [...r.options], answer: r.answer,
     explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: ex?.wrong[k] ?? '' })),
     solution: ex ? [ex.right] : [], numbered: true, ppFigs: figs,
+    ...(r.kind === 'typed' && r.accept ? { typed: { accept: [...r.accept], scaffold: r.scaffold ?? null } } : {}),
     ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,
     ...(r.subtopic.startsWith('math-') ? { calc: false as const } : {}), // every past-paper Maths MCQ is Paper 1 (owner, 21 Nov 2026)
     ...setOf(r),

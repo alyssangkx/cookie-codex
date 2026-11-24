@@ -45,6 +45,21 @@ test('validRow accepts the RPC shape and rejects anything odd', () => {
   ]) assert.equal(validRow(bad), false, JSON.stringify(bad));
 });
 
+test('a typed row (migration 015): no options, answer 0, accepted answers; toQ carries them, never options', () => {
+  const t = row({ subtopic: 'eng-synthesis', options: [], answer: 0, kind: 'typed', figures: [],
+    accept: ['However hard Julia tried, I still did not go.'], scaffold: 'However ____, I still did not go.' });
+  assert.ok(validRow(t));
+  assert.ok(validRow({ ...t, scaffold: null }), 'a cloze blank has no scaffold');
+  for (const bad of [{ ...t, accept: [] }, { ...t, accept: [''] }, { ...t, accept: null }, { ...t, options: ['a', 'b', 'c', 'd'] },
+    { ...t, answer: 1 }, { ...t, scaffold: 5 }, { ...row(), kind: 'essay' }, { ...row(), kind: 'typed' }])
+    assert.equal(validRow(bad), false, JSON.stringify(bad));
+  assert.ok(validRow({ ...row(), kind: 'mcq' }) && validRow(row()), 'an MCQ row with or without kind');
+  const q = toQ(t as PpRow, new Map());
+  assert.deepEqual(q?.typed, { accept: ['However hard Julia tried, I still did not go.'], scaffold: 'However ____, I still did not go.' });
+  assert.deepEqual(q?.options, []);
+  assert.equal(toQ(row({ figures: [] }), new Map())?.typed, undefined, 'an MCQ has no typed part');
+});
+
 test('only signed URLs from our own private bucket are used', () => {
   assert.ok(safeSignedUrl(signedFor('science/pp-0123456789-1.webp'), SB));
   assert.ok(safeSignedUrl(signedFor('science/pp-0123456789-1.webp'), `${SB}/`));

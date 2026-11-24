@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones, poolProgress, milestoneReached } from './store.ts';
+import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones, poolProgress, milestoneReached, PICK_MAX } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -555,8 +555,8 @@ test('Admin: every tier is open with nothing cleared; a normal player is locked'
 test('a wrong answer keeps the picked option text (capped), through retests and retirement; old saves still load', () => {
   const s = fresh();
   const t0 = Date.UTC(2026, 10, 19);
-  answer(s, 'q', false, t0, true, 'x'.repeat(200));
-  assert.equal(s.questions.q.a, 'x'.repeat(120));
+  answer(s, 'q', false, t0, true, 'x'.repeat(PICK_MAX + 80));
+  assert.equal(s.questions.q.a, 'x'.repeat(PICK_MAX));
   answer(s, 'q', false, t0, true, 'wrong again');
   assert.equal(s.questions.q.a, 'wrong again');
   assert.equal(s.questions.q.w, 2);
