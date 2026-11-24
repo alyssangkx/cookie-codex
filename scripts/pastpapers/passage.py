@@ -425,16 +425,33 @@ def cloze_final():
     # the owner's accepted alternatives (a report: "voice" also fits (12)), WORK/cloze_accept_owner.jsonl lines
     # {"grp", "seq", "add": [...]}; lines for one blank merge; applied before the word-box check; one not applied is
     # printed (its passage is held), never dropped quietly
-    extra = collections.defaultdict(list)
+    # also {"grp", "seq", "drop": [...]} (an accepted answer the owner removes; drops apply before adds, so drop + add
+    # replaces the model answer) and {"grp", "fix": [old, new]} (a passage text the OCR garbled, e.g. "to be four a." ->
+    # "to be found."; must match exactly once, outside the blanks; complete passages only, an unapplied one is printed)
+    extra, drop, fixes = collections.defaultdict(list), collections.defaultdict(list), collections.defaultdict(list)
     if (WORK / "cloze_accept_owner.jsonl").exists():
         for o in jl(WORK / "cloze_accept_owner.jsonl"):
-            extra[(o["grp"], int(o["seq"]))] += o["add"]
+            if "fix" in o:
+                fixes[o["grp"]].append(tuple(o["fix"]))
+                continue
+            extra[(o["grp"], int(o["seq"]))] += o.get("add", [])
+            drop[(o["grp"], int(o["seq"]))] += o.get("drop", [])
+    fixed = set()
+    def split(xs):  # a key line "initiate, begin" is two alternatives: as one string no single typed word could match it
+        return [a.strip() for x in xs for a in x.split(",") if a.strip()]
     def plus(r):
-        acc = list(r["accept"])
-        for a in extra.pop((r["grp"], r["seq"]), []):
-            if a.strip().lower() not in {x.strip().lower() for x in acc}:
-                acc.append(a.strip())
-        return dict(r, accept=acc)
+        """A shipped row with the owner's changes: text fixes, then dropped and added answers; None when none is left."""
+        for old, new in fixes.get(r["grp"], []):
+            # one exact place, never inside a blank marker (the asked blank's marker differs from row to row)
+            assert "____" not in old and r["stem"].count(old) == 1, f"{r['id']}: text fix {old!r} must match exactly once"
+            r = dict(r, stem=r["stem"].replace(old, new))
+            fixed.add(r["grp"])
+        gone = {d.lower() for d in split(drop.pop((r["grp"], r["seq"]), []))}
+        acc = [a for a in dict.fromkeys(split(r["accept"])) if a.lower() not in gone]
+        for a in split(extra.pop((r["grp"], r["seq"]), [])):
+            if a.lower() not in {x.lower() for x in acc}:
+                acc.append(a)
+        return dict(r, accept=acc) if acc else None
     rows, why = [], collections.Counter()
     for p in jl(WORK / "passages.jsonl"):
         rs = {r["seq"]: r for r in by.get(p["sec"], [])}
@@ -454,6 +471,9 @@ def cloze_final():
                 break  # unsettled (or never read as a question): the passage waits
         if len(keep) == len(marks):
             keep = [plus(r) for r in keep]
+            if None in keep:
+                why[(p["st"], "held: the owner dropped every answer of a blank")] += 1
+                continue
         box = re.match(r"Word box: (.*)\n", keep[0]["stem"]) if keep else None
         boxw = {w.strip().lower() for w in box.group(1).split(" · ")} if box else None
         if len(keep) == len(marks) and boxw is not None and any(a.strip().lower() not in boxw for r in keep for a in r["accept"]):
@@ -463,7 +483,7 @@ def cloze_final():
             why[(p["st"], "complete")] += 1
         else:
             why[(p["st"], "held: a blank unsettled")] += 1
-    left = {k for k in extra if extra[k]}
+    left = {k for k in extra if extra[k]} | {k for k in drop if drop[k]} | {(g, "text fix") for g in fixes if g not in fixed}
     if left:
         print(f"WARNING owner alternatives not applied (their passage is not shipped): {sorted(left)}")
     # the checks: one passage per set id; no shipped passage shows a blank number that is not one of its questions

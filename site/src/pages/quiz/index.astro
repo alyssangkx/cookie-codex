@@ -700,7 +700,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // ------------------------------------------------------------ feedback pieces shared by the quiz, paper review and results list
 
   // a past-paper question's one-line reason (migration 014) reads "Why (1) is right"; generated questions keep their steps
-  const stepsHtml = (q: Q) => (isPpId(q.id) && q.solution.length
+  const stepsHtml = (q: Q) => !q.solution.length ? '' : (isPpId(q.id) // nothing written yet: no empty "Why?" (owner's report)
     ? `<p class="why-right"><strong>${q.typed ? 'Why this works' : `Why ${optionLabel(q, q.answer)} is right`}:</strong> ${fmt(q.solution[0])}</p>` // no answer-bolding: "has" would light up everywhere
     : `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`);
   /** The answer as the results list writes it: the option with its label, or a typed question's model answer. */
