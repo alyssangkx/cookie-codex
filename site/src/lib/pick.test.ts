@@ -161,3 +161,15 @@ test('pickPool with passage sets: whole sets, each in paper order (migration 010
     assert.deepEqual(mine.map((id) => sets[id].seq), [21, 22, 23, 24]);
   }
 });
+
+test('a merged tier asks every new past-paper question before any generated one (owner, 24 Nov 2026)', () => {
+  const pp = Array.from({ length: 6 }, (_, i) => `pp-00000000${i}a`), gen = Array.from({ length: 20 }, (_, i) => `g${i}`);
+  for (let r = 0; r < 20; r++) {
+    const out = pickTier([...gen, ...pp], {}, 10, NOW, Math.random);
+    assert.equal(out.length, 10);
+    assert.deepEqual(new Set(out.filter((id) => id.startsWith('pp-'))), new Set(pp), 'all 6 past-paper questions are in');
+  }
+  const seen: Record<string, Seen> = Object.fromEntries(pp.slice(0, 4).map((id) => [id, { s: 0, due: 0 } as Seen]));
+  const out = pickTier([...gen, ...pp], seen, 10, NOW, Math.random);
+  assert.ok(pp.slice(4).every((id) => out.includes(id)), 'the two unasked past-paper questions come before generated ones');
+});

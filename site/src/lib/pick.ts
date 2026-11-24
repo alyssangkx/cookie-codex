@@ -1,3 +1,4 @@
+import { isPpId } from './pastpaper.ts';
 // Choose the questions for one quiz (docs/game-design.md section 3). Pure, so it is testable:
 //   node --test site/src/lib/*.test.ts
 export interface Seen {
@@ -32,7 +33,10 @@ export function pickTier(
   const due = [...retest, ...sideRetests.filter((id) => (seen[id]?.s ?? 0) > 0)]
     .filter((id) => seen[id]!.due <= now).sort(byDue);
   const notDue = retest.filter((id) => seen[id]!.due > now);
-  const fresh = ordered ? ids.filter((id) => !seen[id]) : shuffle(ids.filter((id) => !seen[id]), rand);
+  // owner, 24 Nov 2026: a generated question only when no past-paper one is left. In a merged tier the new past-paper
+  // questions come first (each kind shuffled on its own); generated ones only fill the quiz
+  const unseen = ids.filter((id) => !seen[id]);
+  const fresh = ordered ? unseen : [...shuffle(unseen.filter(isPpId), rand), ...shuffle(unseen.filter((id) => !isPpId(id)), rand)];
   const retired = shuffle(ids.filter((id) => seen[id]?.s === 0), rand);
   const take = due.slice(0, Math.min(3, Math.floor(size * 0.3)));
   const out = [...take, ...fresh.slice(0, size - take.length)];

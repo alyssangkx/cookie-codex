@@ -124,8 +124,13 @@ test('Daily Review merges instead of replacing, so old retests stay reachable', 
 test('"Past paper <year>" only on past-paper items, never a school; pp ids are recognised', () => {
   const q = toQ(row({ figures: [] }), new Map())!;
   assert.equal(q.ppYear, 2025);
-  assert.equal(ppBadge(q), '<span class="pp-badge">Past paper 2025</span>');
-  assert.equal(ppBadge({ ...q, ppYear: null }), '<span class="pp-badge">Past paper</span>');
+  assert.equal(ppBadge(q), `<span class="pp-badge">Past paper 2025 · ${q.id}</span>`);
+  assert.equal(ppBadge({ ...q, ppYear: null }), `<span class="pp-badge">Past paper · ${q.id}</span>`);
+  assert.equal(ppBadge({ ...q, ppSeen: 4 }), `<span class="pp-badge">Past paper 2025 · ${q.id} · also seen in 3 other past papers</span>`);
+  assert.equal(ppBadge({ ...q, ppSeen: 2 }), `<span class="pp-badge">Past paper 2025 · ${q.id} · also seen in 1 other past paper</span>`);
+  assert.equal(toQ(row({ figures: [], seen: 3 }), new Map())!.ppSeen, 3);
+  assert.equal(toQ(row({ figures: [], seen: 1 }), new Map())!.ppSeen, undefined, 'seen once: nothing added');
+  assert.equal(validRow({ ...row(), seen: 0 }), false);
   assert.equal(ppBadge({}), '');
   assert.equal(validRow({ ...row(), year: '2025' }), false);
   assert.ok(isPpId('pp-0123456789') && !isPpId('sci-abc') && !isPpId('pp-xyz'));

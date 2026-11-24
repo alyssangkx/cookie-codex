@@ -49,6 +49,7 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'sci-energy-heat-temp': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
   'sci-energy-photo-respiration': 'merge',
   'sci-inquiry-predict-hyp': 'merge',
+  'sci-inquiry-analyse': 'merge', 'sci-inquiry-evaluate': 'merge', // 1 past-paper question each (24 Nov 2026: asked before generated ones)
   'sci-systems-air-gases': 'merge',
   'sci-systems-human-overview': 'merge',
   // English upload (owner OK, 21 Nov 2026): single-sentence MCQs, paper questions 1-15 (grammar 1,926, vocabulary 969);
@@ -123,6 +124,7 @@ export interface PpRow {
   grp?: string | null; seq?: number | null; // a passage set (migration 010): its id and the question's place in it
   explain?: unknown; // migration 014: { right, wrong[] } from the server model, checked by a second one; read via cleanExplain
   kind?: 'mcq' | 'typed'; accept?: string[] | null; scaffold?: string | null; // migration 015: a typed answer (typed.ts)
+  seen?: number; // migration 016: how many past papers hold this question (1 = this one only)
 }
 /** Why the key is right, and why each other option does not fit (null at the key). */
 export interface PpExplain { right: string; wrong: (string | null)[] }
@@ -145,6 +147,7 @@ export interface PpQ {
   ppFigs: PpFig[];
   ppYear: number | null;
   typed?: { accept: string[]; scaffold: string | null }; // migration 015: typed into the scaffold's blanks, no options
+  ppSeen?: number; // migration 016: past papers holding it (the label says "also seen in N other past papers")
   calc?: false; // Maths: PSLE-style MCQs sit in Paper 1 (no calculator), so the quiz shows its "No calculator" badge
   group?: string; seq?: number; // a passage set: asked whole and in order, its pages shown once (migration 010)
 }
@@ -256,7 +259,8 @@ export function validRow(r: unknown): r is PpRow {
     && (x.kind === 'typed' ? typedShape(x) : mcqShape(x))
     && Array.isArray(x.figures) && x.figures.every((f) => f && typeof f.path === 'string' && FIG_PATH.test(f.path)
       && Number.isFinite(f.w) && Number.isFinite(f.h))
-    && (x.year === null || x.year === undefined || Number.isInteger(x.year));
+    && (x.year === null || x.year === undefined || Number.isInteger(x.year))
+    && (x.seen === null || x.seen === undefined || (Number.isInteger(x.seen) && (x.seen as number) >= 1 && (x.seen as number) <= 99));
 }
 
 /** A signed URL from our own project's private bucket, and nothing else (no other host, no public object path). */
@@ -286,6 +290,7 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
     explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: ex?.wrong[k] ?? '' })),
     solution: ex ? [ex.right] : [], numbered: true, ppFigs: figs,
     ...(r.kind === 'typed' && r.accept ? { typed: { accept: [...r.accept], scaffold: r.scaffold ?? null } } : {}),
+    ...(Number.isInteger(r.seen) && (r.seen as number) > 1 ? { ppSeen: r.seen } : {}),
     ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,
     ...(r.subtopic.startsWith('math-') ? { calc: false as const } : {}), // every past-paper Maths MCQ is Paper 1 (owner, 21 Nov 2026)
     ...setOf(r),
@@ -333,10 +338,13 @@ export function ppTierCount(gen: number, pp: number, mode: PpMode | null, minTie
   return { count: mode === 'replace' && pp >= minTier ? pp : gen + pp, usesPp: true };
 }
 
-/** The source line above a past-paper stem: "Past paper 2025" (year only, never the school). */
-export function ppBadge(q: { ppYear?: number | null; numbered?: boolean }): string {
+/** The source line above a past-paper stem: "Past paper 2025 · pp-1a2b3c4d5e", plus "· also seen in 3 other past papers"
+ *  when the same question was in several (owner, 24 Nov 2026). The year is the earliest copy's; never the school. */
+export function ppBadge(q: { id?: string; ppYear?: number | null; numbered?: boolean; ppSeen?: number }): string {
   if (!q.numbered) return '';
-  return `<span class="pp-badge">Past paper${q.ppYear ? ` ${q.ppYear}` : ''}</span>`;
+  const others = q.ppSeen && q.ppSeen > 1 ? q.ppSeen - 1 : 0;
+  return `<span class="pp-badge">Past paper${q.ppYear ? ` ${q.ppYear}` : ''}${q.id && isPpId(q.id) ? ` · ${q.id}` : ''}`
+    + `${others ? ` · also seen in ${others} other past paper${others === 1 ? '' : 's'}` : ''}</span>`;
 }
 
 /** The pictures under the stem. Sources must already have passed safeSignedUrl. */
