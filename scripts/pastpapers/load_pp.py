@@ -184,8 +184,16 @@ def chi_incomplete(text: str, opts) -> str | None:
     if CHI_BLANK.search(text or ""):
         return None
     if opts and all(len(strip_num(o)) >= 2 and PINYIN.fullmatch(strip_num(o)) for o in opts):
-        return None
+        # the pinyin names the word, but only inside its sentence: an instruction alone ("请选出画线词语的汉语拼音。") lost
+        # it (Opus check, 24 Nov 2026)
+        rest = CHI_PY_INSTR.sub("", text or "")
+        return None if sum("\u3400" <= c <= "\u9fff" for c in rest) >= 4 else "chi-pinyin-no-sentence"
     return "chi-no-blank-underline-lost"
+
+
+# the words of a "pick the reading" instruction, removed one by one: what is left of a real stem is its sentence (the reviewer's
+# variants: 选出下面句子中画线字的正确读音 / 下列画线词语的拼音是)
+CHI_PY_INSTR = re.compile(r"请|选出|选择|找出|下面|下列|以下|句子|句中|中|画线|划线|下划线|加点|有|的|字|词语|词|正确|汉语|拼音|读音|注音|是|哪一个|哪个|哪一项|一项|[。.？?：:]")
 
 
 def garbled(text: str, opts) -> str | None:
@@ -356,6 +364,7 @@ def select(a):
     quar = {r["id"] for r in jl(Path(a.pp) / "quarantine.jsonl")}
     hold = read_hold(out)
     rows, rejects = [], []
+    held_keys = set()  # a held question's wording + options: its copies in other papers are held too (held_copy)
     R = collections.Counter()
     per_year = collections.defaultdict(collections.Counter)
     if a.passage and PASSAGE[a.passage]["subject"] != a.subject:
@@ -449,6 +458,7 @@ def select(a):
                 reason = "quarantined"
             elif pp_id(q["id"]) in hold:
                 reason = "held-by-review"
+                held_keys.add(held_key(row_stem(a, q, qn, opts), [tex_to_text(o) for o in strip_opts(opts)]))
             elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and cv["kind"] == "confirm" and cv.get("unsure")):
                 reason = "grid-uncertain"  # lifted when outside models unanimously confirm the printed key (imgpack -unsure packs)
             elif conflict:
@@ -465,7 +475,7 @@ def select(a):
                     second.get(q["id"], {}).get("agree2") is True and second[q["id"]].get("key") == k):
                 reason = "blind-unparsed" if blind[q["id"]].get("pick") is None else "blind-disagree"
             else:
-                reason = garbled(q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" and not vt else None) \
+                reason = garbled(VC_STEM if a.passage == "english-vocab-cloze" else q.get("text") or "", opts) or (eng_incomplete(q.get("text") or "") if a.subject == "english" and not vt else None) \
                     or ("tex-left" if any(re.search(r"\\|\^|[\x00-\x08\x0b\x0c\x0e-\x1f]", tex_to_text(x)) for x in [q.get("text") or "", *opts]) else None) \
                     or (chi_incomplete(q.get("text") or "", opts) if a.subject == "chinese" and t.get("st") in CHI_SINGLE and q["id"] not in stemfix else None)
                 # PSLE English Paper 2 Booklet A: Q1-15 are the single-sentence grammar and vocabulary items; 16-20 vocabulary
@@ -519,9 +529,7 @@ def select(a):
                 "id": pp_id(q["id"]), "src_id": q["id"], "subject": a.subject, "subtopic": t["st"],
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
-                "stem": cloze_stem(q["text"], qn, opts) if a.passage == "chinese-cloze" else
-                        tex_to_text(scanner_marks(speaker_lines(q["text"].strip()) if a.subject == "science" else q["text"].strip())
-                                    if a.subject in ("science", "maths") else q["text"].strip()),
+                "stem": row_stem(a, q, qn, opts),
                 "options": [tex_to_text(o) for o in strip_opts(opts)], "answer": int(k) - 1,
                 **({"grp": set_id(q, pk["suffix"]), "seq": qn, "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
@@ -533,6 +541,9 @@ def select(a):
         for r, why in set_pages(rows, out, a.passage):  # a dropped set is held with its reason, like any other question
             rejects.append({"id": r["src_id"], "reason": why})
             R[why] += 1
+    for r, why in held_copies(rows, held_keys):
+        rejects.append({"id": r["src_id"], "reason": why})
+        R[why] += 1
     rows, dups = dedupe(rows)
     for r, keep in dups:  # the same question in two papers (owner, 23 Nov 2026: a quiz asked it twice)
         rejects.append({"id": r["src_id"], "reason": "duplicate", "of": keep})
@@ -1004,6 +1015,31 @@ def pic_hash(path):
     return sum(1 << i for i, v in enumerate(g) if v > m)
 
 
+def row_stem(a, q, qn, opts):
+    """The stem a selected row stores (also the held-copy key, so a held question and its copies compare alike)."""
+    t = (q.get("text") or "").strip()
+    if a.passage == "chinese-cloze":
+        return cloze_stem(q.get("text"), qn, opts)
+    if a.passage == "english-vocab-cloze":
+        return VC_STEM.format(n=qn)
+    if a.subject in ("science", "maths"):
+        return tex_to_text(scanner_marks(speaker_lines(t) if a.subject == "science" else t))
+    return t
+
+
+def held_key(stem, options):
+    return dup_text(tex_to_text(stem)), tuple(sorted(dup_text(tex_to_text(o)) for o in options))
+
+
+def held_copies(rows, held_keys):
+    """Rows that copy a held question (the same wording and options in another paper) leave too (Opus check, 24 Nov 2026:
+    holding one copy let dedupe promote its twin). Passage sets are held by their own ids."""
+    out = [(r, "held-copy") for r in rows if not r.get("grp") and held_key(r["stem"], r["options"]) in held_keys]
+    for r, _ in out:
+        rows.remove(r)
+    return out
+
+
 def dedupe(rows, max_bits=6):
     """(kept rows, [(dropped row, kept pp id)]): one copy of each question that appears in more than one paper. Same
     wording and options; a question with pictures also needs pictures that match (hash within max_bits on every crop), so
@@ -1150,6 +1186,15 @@ def selftest():
     assert eng_incomplete("portrayed") == "stem-instruction-only"
     assert eng_incomplete("He tried to remain poised as he realised he was trapped in the car.") == "stem-no-blank-or-question"
     assert eng_incomplete("According to the poster, when should Mr Tan ____ the book?") == "stem-needs-passage"
+    hk = {held_key("华明每天放学后，______写作业，______做家务。", ["不是……就是", "不但……而且", "虽然……但是", "因为……所以"])}
+    twin = [{"stem": "华明每天放学后，______写作业，______做家务。", "options": ["虽然……但是", "不是……就是", "不但……而且", "因为……所以"], "src_id": "b"},
+            {"stem": "别的题目。", "options": ["a", "b", "c", "d"], "src_id": "c"}]
+    assert [r["src_id"] for r, _ in held_copies(twin, hk)] == ["b"] and len(twin) == 1, "a held question's copy is held too"
+    py = ["bǎn yàn", "bǎn yàng", "bǎng yàn", "bǎng yàng"]
+    assert chi_incomplete("请选出画线词语的汉语拼音。", py) == "chi-pinyin-no-sentence"
+    assert chi_incomplete("请选出下面句子中画线字的正确读音。", py) == "chi-pinyin-no-sentence"
+    assert chi_incomplete("下列画线词语的拼音是：", py) == "chi-pinyin-no-sentence"
+    assert chi_incomplete("他有爱心又乐于助人，是我们学习的榜样。", py) is None
     assert eng_incomplete("The number of community cases _______ increased since January.") is None
     assert eng_incomplete("Choose the correct word. She _____ to school every day.") is None
     assert garbled("好", ["a", "b", "c", "d"]) == "text-short"
@@ -1525,6 +1570,9 @@ EATEN_CH = {"\x0c": "f", "\x09": "t", "\x0d": "r", "\x08": "b", "\x0b": "v"}
 
 PASSAGE = {  # passage mode: the section's questions, its sub-topic, and the set id's suffix
     "english-visual": {"subject": "english", "q": (21, 30), "st": "eng-visual-text", "section": "Visual Text", "suffix": "vt"},
+    # owner, 24 Nov 2026: Vocabulary Cloze next. School papers set a boxed passage with underlined words marked (16)-(20) and ask
+    # for the closest meaning; the underline survives only in the picture, so the passage is shown as one (like visual text)
+    "english-vocab-cloze": {"subject": "english", "q": (16, 20), "st": "eng-vocab-cloze", "section": "Vocabulary Cloze", "suffix": "vc"},
     "chinese-cloze": {"subject": "chinese", "q": (16, 20), "st": "chi-cloze-mcq", "section": "短文填空", "suffix": "cz"},
     "chinese-reading": {"subject": "chinese", "q": (21, 25), "st": "chi-yuedu-mcq-text", "section": "阅读理解一", "suffix": "rd"},
     "chinese-dialogue": {"subject": "chinese", "q": (26, 29), "st": "chi-dialogue-mcq", "section": "完成对话", "suffix": "dl"},
@@ -1648,6 +1696,36 @@ def chi_qnum(t):
     """A Chinese question row's number ("Q21当我把…", "21."), not a range ("(Q21-Q25)")."""
     m = re.match(r"^\W{0,2}[QO0]?\s?(\d{1,2})(?![\d\-–－—~])", t)  # OCR reads "Q21" as "021" too
     return int(m.group(1)) if m else None
+
+
+VC_STEM = "Choose the word(s) closest in meaning to the underlined word(s) marked ({n}) in the passage."
+VC_HEAD = re.compile(r"vocabulary\s+cloze|questions?\s+(?:from\s+)?16\s*(?:to|-|–)\s*20|closest\s+in\s+meaning", re.I)
+
+
+def vc_rows(first):
+    """The options row of question `first`: "16 (1) Tentatively", "16 .(1) exotic", "16. (1)"."""
+    return re.compile(rf"^\W{{0,3}}{first}\W{{0,4}}[(（]\s*[1lI]\s*[)）]")
+
+
+def vc_pieces(pages, first, last):
+    """Vocabulary Cloze: the passage without its options, from the section's heading or instruction ("For each question
+    from 16 to 20, choose the word closest in meaning to the underlined word(s)") down to the line above question 16's
+    options. The passage must carry its (16) marker. (None, "set-no-cut") when an end is not found."""
+    flat = [(p, r) for p in sorted(pages) for r in pages[p][0]]
+    text = lambda r: " ".join(w[4] for w in r[2])
+    qk = next((k for k in range(len(flat)) if vc_rows(first).search(text(flat[k][1]))), None)
+    if qk is None:
+        return None, "set-no-cut"
+    heads = [k for k in range(qk) if VC_HEAD.search(text(flat[k][1]))]
+    if not heads:
+        return None, "set-no-cut"
+    k0 = heads[-1]
+    if k0 > 0 and VC_HEAD.search(text(flat[k0 - 1][1])) and flat[k0 - 1][0] == flat[k0][0]:
+        k0 -= 1  # the "Section C: Vocabulary Cloze" line just above the instruction
+    if not any(re.search(rf"[(（]\s*{first}\s*[)）]", text(flat[k][1])) for k in range(k0, qk)):
+        return None, "set-no-marker"  # no (16) under an underlined word: not this layout
+    pq = flat[qk][0]
+    return cut_pieces(pages, flat[k0][0], flat[k0][1][0] - 8, pq, flat[qk][1][0] - 8)
 
 
 def chi_pieces(pages, kind, first, last):
@@ -1793,6 +1871,15 @@ def set_pages(rows, out, kind="english-visual"):
         if r.get("grp"):
             by[r["grp"]].append(r)
     for g, rs in by.items():
+        # two questions of one set with the same options: the first read copied one question's options onto another (Benedict
+        # passage, 24 Nov 2026: Q19 "hoped" carried Q16's list). Which one owns them is unknown, so both leave
+        # only where every blank has its own words: a dialogue shares its 8 phrases by design, and visual-text questions can
+        # rightly share "A only / B only / both / neither"
+        same = collections.Counter(tuple(r["options"]) for r in rs) if kind == "english-vocab-cloze" else collections.Counter()
+        for r in [r for r in rs if same[tuple(r["options"])] > 1]:
+            rs.remove(r)
+            rows.remove(r)
+            dropped.append((r, "set-repeated-options"))
         if len(rs) < 2:
             for r in rs:
                 rows.remove(r)
@@ -1833,6 +1920,9 @@ def set_pages(rows, out, kind="english-visual"):
         if kind == "english-visual":
             win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 3), pages[0] + 1)}
             pieces, why = poster_pieces({p: v for p, v in win.items() if v}, min(r["seq"] for r in rs))
+        elif kind == "english-vocab-cloze":
+            win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 2), pages[0] + 1)}
+            pieces, why = vc_pieces({p: v for p, v in win.items() if v}, *PASSAGE[kind]["q"])
         else:  # a Chinese passage: from two pages before its questions to the last question page
             win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 2), pages[-1] + 1)}
             pieces, why = chi_pieces({p: v for p, v in win.items() if v}, kind, PASSAGE[kind]["q"][0], PASSAGE[kind]["q"][1])

@@ -273,12 +273,63 @@ def mentions(text, opt):
     return True
 
 
+OPTNUM = re.compile(r"[（(]\s*[1-4]\s*[)）]\s*")  # "（4）担": options are shuffled on screen, so a number may name another option
+
+
+def denum(t, options):
+    """An option cited by its printed number followed by its words becomes the words alone: "正确答案是（4）担" ->
+    "正确答案是「担」" ("(2) hasn't" -> "\"hasn't\"" in English). A number not followed by its option is left in place, and
+    opus_row rejects the line (owner's site shuffles options, 24 Nov 2026: the Qwen drafts kept "（3）" and the first Opus
+    check missed 247)."""
+    zh = any(ZH_OPT.search(o) for o in options)
+    for k, o in enumerate(options):
+        core = OPTNUM.sub("", o, count=1).strip()
+        if core:
+            q = f"「{core}」" if zh else f'"{core}"'
+            t = re.sub(rf"[（(]\s*{k + 1}\s*[)）]\s*[「“\"'‘]?{re.escape(core)}[」”\"'’]?", lambda _m: q, t)
+            # "选项（2）中的“这本书虽然很薄”… (English: Option (2) 'he will…')": the line names the option in words, so its number
+            # adds nothing and goes
+            if core in t:
+                t = re.sub(rf"\s?[（(]\s*{k + 1}\s*[)）]", "", t)
+    return t.strip()
+
+
+ZH_OPT = re.compile(r"[\u3400-\u9fff]|[āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜ]")
+
+
+def mentions_zh(text, opt):
+    """Chinese or pinyin options. Pinyin: one of the option's syllables appears as a whole word in the line. Chinese: the
+    line has two of the option's characters in a row (all of a one-character option), "……" not counted. It catches an
+    explanation written for another question (its words differ), not one shifted between this question's look-alike options
+    (ponytail: a per-option check would need the reasons parsed; the fp copy by script guards that)."""
+    from difflib import SequenceMatcher
+    core = re.sub(r"…+|\.{2,}", " ", OPTNUM.sub("", opt or "", count=1)).strip()
+    if not core:
+        return False
+    if not re.search(r"[\u3400-\u9fff]", core):
+        return any(re.search(rf"(?<![\w]){re.escape(syl)}(?![\w])", text or "") for syl in core.split() if len(syl) >= 2)
+    t = re.sub(r"…+", " ", text or "")
+    parts = [p for p in core.split() if p]
+    return any(SequenceMatcher(None, t, p).find_longest_match(0, len(t), 0, len(p)).size >= min(2, len(p)) for p in parts)
+
+
+COMMON_ZH = set("的了是在不有和一这那我你他她它们个也就都很要会说上下来去着过把被给对")
+
+
 def aligned(e, item):
     """The explanation is about this question (an agent once re-took ids by position): its reason quotes the answer,
     and at least two of the wrong-option lines quote their own option."""
     o, k = item["options"], item["answer"]
-    hits = sum(mentions(w, o[j]) for j, w in enumerate(e["wrong"]) if j != k and w)
-    return mentions(e["right"], o[k]) and hits >= len(o) - 2
+    if all(not re.search(r"[\u3400-\u9fff]", x) and ZH_OPT.search(x) for x in o):
+        # pinyin options look alike and the reasons name the sound ("声母是 ch，不是 zh"), so text matching cannot tell them
+        # apart; an explanation is about this question when its reason quotes a character of this question's sentence
+        # (or quotes the key's whole syllable, where the sentence blanks the word out: 深刻的____)
+        return bool(set(re.findall(r"[\u3400-\u9fff]", e["right"])) & (set(re.findall(r"[\u3400-\u9fff]", item.get("stem") or "")) - COMMON_ZH)) \
+            or mentions_zh(e["right"], o[k])
+    zh = any(ZH_OPT.search(x) for x in o)
+    mentions_ = mentions_zh if zh else mentions
+    hits = sum(mentions_(w, o[j]) for j, w in enumerate(e["wrong"]) if j != k and w)
+    return mentions_(e["right"], o[k]) and hits >= len(o) - 2
 
 
 def opus_row(x, item):
@@ -290,7 +341,10 @@ def opus_row(x, item):
         return None
     if w[k] is not None or not all(isinstance(s, str) and s.strip() for j, s in enumerate(w) if j != k):
         return None
-    e = {"right": x["right"].strip()[:600], "wrong": [None if j == k else s.strip()[:400] for j, s in enumerate(w)]}
+    o = item["options"]
+    e = {"right": denum(x["right"], o)[:600], "wrong": [None if j == k else denum(s, o)[:400] for j, s in enumerate(w)]}
+    if any(OPTNUM.search(t) for t in [e["right"], *e["wrong"]] if t):
+        return None  # an option number denum could not map to its words: never shipped, never silently cut
     return e if aligned(e, item) else None
 
 
@@ -298,7 +352,8 @@ def apply_opus(sample=0):
     import glob
     items = {r["id"]: r for r in jl(WORK / "items.jsonl")}
     got, doubts, bad = {}, [], 0
-    for f in sorted(glob.glob(str(WORK / "opus/out_*_part*.jsonl"))):
+    # a second Opus review (recheck/, owner OK 24 Nov 2026: the first review kept wrong drafts) overrides the first
+    for f in sorted(glob.glob(str(WORK / "opus/out_*_part*.jsonl"))) + sorted(glob.glob(str(WORK / "recheck/out_*_part*.jsonl"))):
         for l in open(f, encoding="utf-8"):
             if not l.strip():
                 continue
@@ -308,14 +363,17 @@ def apply_opus(sample=0):
                 bad += 1
                 continue
             if "doubt" in x and x.get("id") in items:
-                doubts.append({"id": x["id"], "doubt": x["doubt"], "stem": items[x["id"]]["stem"], "options": items[x["id"]]["options"],
-                               "answer": items[x["id"]]["answer"]})
+                doubts = [d for d in doubts if d["id"] != x["id"]] + [{"id": x["id"], "doubt": x["doubt"], "stem": items[x["id"]]["stem"],
+                                                                        "options": items[x["id"]]["options"], "answer": items[x["id"]]["answer"]}]
+                got.pop(x["id"], None)  # a later review's doubt withdraws an earlier explanation
                 continue
             e = opus_row(x, items.get(x.get("id")))
             if e:
                 got[x["id"]] = e
+                doubts = [d for d in doubts if d["id"] != x["id"]]
             else:
                 bad += 1
+                got.pop(x.get("id"), None)  # a later review that fails the checks withdraws the earlier one too
     by = {r["sel"]: [] for r in items.values()}
     for i, e in got.items():
         by[items[i]["sel"]].append({"id": i, "fp": items[i]["fp"], "explain": e, "src": "claude-opus"})
@@ -334,6 +392,20 @@ def apply_opus(sample=0):
 
 
 def selftest():
+    zo = ["挑", "担", "抬", "提"]
+    assert denum("正确答案是（2）担，因为要用扁担。（English: The answer is (2) 担.）", zo) == "正确答案是「担」，因为要用扁担。（English: The answer is 「担」.）"
+    assert OPTNUM.search(denum("选（3）不对", zo)), "a number without its option stays, so opus_row rejects the line"
+    assert denum("The answer is (2) hasn't.", ["doesn't", "hasn't", "isn't", "didn't"]) == 'The answer is "hasn\'t".'
+    assert mentions_zh("「sǐ」是平舌音", "sǐ jìn") and not mentions_zh("「shǐ」是翘舌音", "sǐ jìn")
+    assert not mentions_zh("这个句子用……不对", "不是……就是"), "the ellipsis alone is not a mention"
+    assert denum("选项（3）中的“抬”不对。（English: Option (3) 'lift' is wrong.）", zo) == "选项中的“抬”不对。（English: Option 'lift' is wrong.）"
+    pi = {"options": ["zhǐ xiào", "zǐ xiào", "chǐ xiào", "cǐ xiào"], "answer": 2, "stem": "大家都耻笑他的行为。"}
+    assert aligned({"right": "「耻」读 chǐ，是翘舌送气音。", "wrong": ["声母是 ch，不是 zh。", "不是 z。", None, "不是 c。"]}, pi)
+    assert not aligned({"right": "「担」读 dān。", "wrong": ["x", "y", None, "z"]}, pi), "a pinyin reason about another sentence"
+    assert mentions_zh("「zù」这个读音不正确", "zù míng") and mentions_zh("「担」是挑东西的工具", "担") and not mentions_zh("意思不对", "担")
+    zi = {"options": zo, "answer": 1}
+    assert aligned({"right": "「担」是扁担的担。", "wrong": ["「挑」是动作。", None, "「抬」要两个人。", "「提」用手。"]}, zi)
+    assert not aligned({"right": "这是对的。", "wrong": ["不对。", None, "不对。", "不对。"]}, zi), "Chinese lines must quote their options"
     opts = ["doesn't", "hasn't", "isn't", "didn't"]
     good = {"right": "Prefers is present simple, so the tag uses does: doesn't he?", "wrong": {"2": "Hasn't needs has as a helper.", "3": "Isn't needs is.", "4": "Didn't is past tense."}}
     assert shape(good, opts, 0) == {"right": good["right"], "wrong": [None, "Hasn't needs has as a helper.", "Isn't needs is.", "Didn't is past tense."]}
