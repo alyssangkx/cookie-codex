@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub, underlineMarks } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer, MIN_POOL } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -58,6 +58,12 @@ test('a typed row (migration 015): no options, answer 0, accepted answers; toQ c
   assert.deepEqual(q?.typed, { accept: ['However hard Julia tried, I still did not go.'], scaffold: 'However ____, I still did not go.' });
   assert.deepEqual(q?.options, []);
   assert.equal(toQ(row({ figures: [] }), new Map())?.typed, undefined, 'an MCQ has no typed part');
+});
+
+test('underlineMarks: a read passage shows (n) and the underlined words, the asked one highlighted', () => {
+  const h = underlineMarks('He was {{16|disturbed}} and {{17| very glad }}.', 17);
+  assert.equal(h, 'He was <span class="vc-u"><b>(16)</b>\u00a0<u>disturbed</u></span> and <span class="vc-u ask"><b>(17)</b>\u00a0<u>very glad</u></span>.');
+  assert.equal(underlineMarks('no marks here', 3), 'no marks here');
 });
 
 test('only signed URLs from our own private bucket are used', () => {

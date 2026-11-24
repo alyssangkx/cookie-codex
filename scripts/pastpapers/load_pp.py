@@ -483,6 +483,8 @@ def select(a):
                 if not reason and a.subject == "english" and not vt and (not isinstance(q.get("qno"), int) or q["qno"] > 15
                                                               or re.search(r"booklet\s*b", str(q.get("part") or ""), re.I)):
                     reason = "eng-passage-section"
+                if not reason and a.passage == "english-vocab-cloze" and not passage_text(q["id"], qn):
+                    reason = "vc-passage-not-read"  # the two readers did not agree on its passage: waits for a better read
                 if not reason and a.passage == "chinese-cloze" and not cloze_stem(q.get("text"), qn, opts):
                     reason = "cloze-no-blank"
                 if not reason and t.get("st") not in subs:
@@ -1015,13 +1017,36 @@ def pic_hash(path):
     return sum(1 << i for i, v in enumerate(g) if v > m)
 
 
+def passage_file():
+    """passage.py check's output (both readers agreed), from the same PP_WORK passage.py uses."""
+    from passage import WORK
+    return WORK / "passages.jsonl"
+_PTEXT = None
+
+
+def passage_text(src_id, qn):
+    """The passage a question sits in, as text (owner, 24 Nov 2026: text, not page pictures), when both readers agreed on
+    it and it marks this question's number; else None."""
+    global _PTEXT
+    if _PTEXT is None:
+        if not passage_file().exists():
+            sys.exit(f"{passage_file()} is missing: run passage.py check first (else every passage question looks unread)")
+        _PTEXT = {}
+        for r in jl(passage_file()):
+            for i in r["ids"]:
+                _PTEXT[i] = r
+    r = _PTEXT.get(src_id)
+    return r["passage"] if r and qn is not None and str(qn) in {str(k) for k in r["markers"]} else None
+
+
 def row_stem(a, q, qn, opts):
     """The stem a selected row stores (also the held-copy key, so a held question and its copies compare alike)."""
     t = (q.get("text") or "").strip()
     if a.passage == "chinese-cloze":
         return cloze_stem(q.get("text"), qn, opts)
-    if a.passage == "english-vocab-cloze":
-        return VC_STEM.format(n=qn)
+    if a.passage == "english-vocab-cloze":  # the passage as text with {{n|underlined}} marks, then the question
+        text = passage_text(q["id"], qn)
+        return f"{text}\n\n{VC_STEM.format(n=qn)}" if text else VC_STEM.format(n=qn)  # unread: held by the caller
     if a.subject in ("science", "maths"):
         return tex_to_text(scanner_marks(speaker_lines(t) if a.subject == "science" else t))
     return t
@@ -1916,13 +1941,12 @@ def set_pages(rows, out, kind="english-visual"):
                 rows.remove(r)
                 dropped.append((r, "set-two-texts"))
             continue
+        if kind == "english-vocab-cloze":
+            continue  # the passage is text in each stem (passage_text): no page picture
         # the poster: up to three pages before the first question page, and that page down to the questions
         if kind == "english-visual":
             win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 3), pages[0] + 1)}
             pieces, why = poster_pieces({p: v for p, v in win.items() if v}, min(r["seq"] for r in rs))
-        elif kind == "english-vocab-cloze":
-            win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 2), pages[0] + 1)}
-            pieces, why = vc_pieces({p: v for p, v in win.items() if v}, *PASSAGE[kind]["q"])
         else:  # a Chinese passage: from two pages before its questions to the last question page
             win = {p: page_lines(pdir / f"p{p:04d}.jpg") for p in range(max(1, pages[0] - 2), pages[-1] + 1)}
             pieces, why = chi_pieces({p: v for p, v in win.items() if v}, kind, PASSAGE[kind]["q"][0], PASSAGE[kind]["q"][1])

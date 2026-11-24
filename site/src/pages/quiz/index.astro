@@ -100,7 +100,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   } from '../../lib/store';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickPool, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
-  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, type PpFig } from '../../lib/pastpaper';
+  import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, underlineMarks, type PpFig } from '../../lib/pastpaper';
   import { typedOk, compose, scaffoldHtml } from '../../lib/typed';
   import { esc, boldAns } from '../../lib/boldans';
   import { glossOption, type Gloss, type GlossLine } from '../../lib/zhgloss';
@@ -195,6 +195,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // section keeps its blank filling
   const CLOZE = new Set(meta.cloze);
   const clozeStem = (q: Q, reveal: boolean) => {
+    if (q.sub === 'eng-vocab-cloze') return underlineMarks(fmt(q.stem), q.seq ?? null); // a read passage: underlines, not blanks
     const zh = q.sub === 'chi-cloze-mcq';
     const asked = zh ? /（(\d+)）＿＿＿＿/.exec(q.stem)?.[1] : /\((\d+)\) _{8}(?!_)/.exec(q.stem)?.[1];
     let h = fmt(q.stem);
@@ -211,7 +212,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       if (o.seq == null || String(o.seq) === asked || filledBlanks.get(q.group)?.has(o.seq)) continue;
       const lead = zh ? `（${o.seq}）` : `(${o.seq}) `, blank = zh ? `（${o.seq}）＿＿` : `(${o.seq}) ____`;
       // a past-paper blank whose content was never fetched (a pool stub) has no answer text: it stays a blank
-      if (!inQuiz.has(o.id)) { if (o.options[o.answer]) h = h.replace(blank, () => `${lead}<span class="filled given" title="not in this quiz">${esc(o.options[o.answer])}</span>`); }
+      const given = o.typed ? o.typed.accept[0] : o.options[o.answer]; // a typed blank (015) shows its model answer
+      if (!inQuiz.has(o.id)) { if (given) h = h.replace(blank, () => `${lead}<span class="filled given" title="not in this quiz">${esc(given)}</span>`); }
       else if (!reveal && quiz.indexOf(o.id) > i) h = h.replace(blank, () => `<button type="button" class="blank-jump" data-id="${esc(o.id)}" aria-label="Go to blank ${o.seq}">${blank}</button>`);
     }
     const mine = filledBlanks.get(q.group ?? '')?.get(Number(asked));
@@ -828,6 +830,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     save(s);
   }
 
+  /** An answered blank of a passage set fills in (a cloze shows the word in the passage; a dialogue greys the phrase out). */
+  function fillBlank(q: Q, text: string, ok: boolean) {
+    if (!q.group || q.seq == null) return;
+    if (!filledBlanks.has(q.group)) filledBlanks.set(q.group, new Map());
+    filledBlanks.get(q.group)!.set(q.seq, { t: text, ok });
+    if (CLOZE.has(q.sub)) $('stem').innerHTML = stemHtml(q, true);
+  }
+
   function choose(k: number) {
     if (answered || over) return;
     answered = true;
@@ -838,11 +848,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const ok = k === q.answer;
     record(q.id, ok, ok ? undefined : q.options[k]); // the option text: options are shuffled, letters are not stable
     if (ok && q.group) { if (!usedRight.has(q.group)) usedRight.set(q.group, new Set()); usedRight.get(q.group)!.add(k); }
-    if (q.group && q.seq != null && (CLOZE.has(q.sub) || (ok && q.sub === 'chi-dialogue-mcq'))) {
-      if (!filledBlanks.has(q.group)) filledBlanks.set(q.group, new Map());
-      filledBlanks.get(q.group)!.set(q.seq, { t: q.options[q.answer], ok });
-      if (CLOZE.has(q.sub)) $('stem').innerHTML = stemHtml(q, true);
-    }
+    if (q.group && q.seq != null && (CLOZE.has(q.sub) || (ok && q.sub === 'chi-dialogue-mcq'))) fillBlank(q, q.options[q.answer], ok);
     if (ok) score++; else wrongs.push({ q, chose: k, tag: q.explain[k]!.tag });
     $('options').querySelectorAll<HTMLButtonElement>('button').forEach((b, j) => {
       b.disabled = true;
@@ -879,6 +885,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     // the parent page lists what was typed; the save keeps PICK_MAX characters, so a longer sentence ends in …
     record(q.id, ok, ok ? undefined : mine.length > PICK_MAX ? `${mine.slice(0, PICK_MAX - 1)}…` : mine);
     if (ok) score++; else wrongs.push({ q, chose: -1, tag: 'typed', typed: mine });
+    if (q.group && q.seq != null && CLOZE.has(q.sub)) fillBlank(q, ok ? mine.trim() : q.typed.accept[0], ok); // as an MCQ cloze blank
     boxes.forEach((b) => { b.disabled = true; b.classList.add(ok ? 'right' : 'wrong'); });
     $('options').querySelector<HTMLButtonElement>('.typed-check')!.hidden = true;
     $('options').querySelector('.typed-hint')!.textContent = '';
@@ -1155,6 +1162,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <style is:global>
   .quiz .options.typed { display: block; }
   .quiz .typed-line { font-size: 1.15rem; line-height: 2.4; margin: 0.4rem 0 0.8rem; }
+  .quiz .vc-u u { text-underline-offset: 3px; }
+  .quiz .vc-u.ask { font-weight: 700; padding: 0 0.15em; border-radius: 0.3em; background: color-mix(in srgb, currentColor 14%, transparent); }
   .quiz .typed-box { font: inherit; line-height: 1.4; min-width: 9ch; width: min(100%, 26ch); padding: 0.25rem 0.5rem; border: 2px solid var(--cocoa-soft, #8a6a52);
     border-radius: 0.5rem; background: var(--paper, #fff); color: inherit; }
   .quiz .typed-box.right { border-color: var(--good, #2e7d32); }

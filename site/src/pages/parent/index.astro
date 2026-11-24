@@ -228,7 +228,7 @@ const data = {
   import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { ppMode, isPpId, ppSubjectOf, cleanExplain, typedShape, type PpExplain } from '../../lib/pastpaper';
+  import { ppMode, isPpId, ppSubjectOf, cleanExplain, typedShape, underlineMarks, type PpExplain } from '../../lib/pastpaper';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string;
@@ -413,7 +413,7 @@ const data = {
     const why = bq.ex ? `<span class="meta why">Why it is right: ${bold(bq.ex.right)}${pick >= 0 && pick !== bq.answer && bq.ex.wrong[pick]
       ? ` · Why their answer doesn't fit: ${bold(bq.ex.wrong[pick]!)}` : ''}</span>` : '';
     const line = bq.typed?.scaffold ? `<div class="wq-stem meta">Answer line: ${esc(bq.typed.scaffold)}</div>` : '';
-    return `<li><div class="wq-stem">${bold(bq.stem)}</div>${line}${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>${why}`
+    return `<li><div class="wq-stem">${underlineMarks(bold(bq.stem), bq.seq ?? null)}</div>${line}${fig}<span class="meta">${[right, theirs].filter(Boolean).join(' · ')}</span>${why}`
       + `<span class="meta">${q.w ? `Wrong ${q.w} time${q.w === 1 ? '' : 's'} · ` : ''}${status}</span>${extra}</li>`;
   }
   /** A list of tried questions, sets kept together in passage order, with a repeated exam page shown once. */

@@ -60,6 +60,9 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'eng-visual-text': 'pool',
   // Synthesis & Transformation as typed answers (migration 015; owner, 24 Nov 2026): 750 questions, strictly the school key
   'eng-synthesis': 'pool',
+  // passages read as text by two models (passage.py, 24 Nov 2026): Vocabulary Cloze 141 MCQs; Grammar and Comprehension Cloze
+  // 770 + 752 typed blanks, each key confirmed by Claude's blind answer
+  'eng-vocab-cloze': 'pool', 'eng-grammar-cloze': 'pool', 'eng-comp-cloze': 'pool',
   // Chinese upload (owner OK, 21 Nov 2026): single-item MCQs (a blank or pinyin options); keys confirmed by the blind check
   // or owner-approved outside-model consensus. Cloze, reading and dialogue wait for the passage phase.
   'chi-ciyu-choose': 'pool',
@@ -347,6 +350,13 @@ export function ppBadge(q: { id?: string; ppYear?: number | null; numbered?: boo
   const others = q.ppSeen && q.ppSeen > 1 ? q.ppSeen - 1 : 0;
   return `<span class="pp-badge">Past paper${q.ppYear ? ` ${q.ppYear}` : ''}${q.id && isPpId(q.id) ? ` · ${q.id}` : ''}`
     + `${others ? ` · also seen in ${others} other past paper${others === 1 ? '' : 's'}` : ''}</span>`;
+}
+
+/** A passage read as text (passage.py, owner 24 Nov 2026): each {{n|words}} becomes "(n) words" underlined, the asked
+ *  one highlighted. Runs on already-escaped HTML (braces and | pass through esc unchanged). */
+export function underlineMarks(html: string, asked: number | null): string {
+  return html.replace(/\{\{\s*(\d{1,3})\s*\|\s*([^{}|]*?)\s*\}\}/g, (_, n: string, w: string) =>
+    `<span class="vc-u${Number(n) === asked ? ' ask' : ''}"><b>(${n})</b>\u00a0<u>${w}</u></span>`);
 }
 
 /** The pictures under the stem. Sources must already have passed safeSignedUrl. */
