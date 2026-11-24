@@ -2009,7 +2009,10 @@ def upload(a):
            "qno": r["qno"], "marks": r["marks"], "blind_src": r["blind_src"], "ord": ord_[r["id"]], "active": True,
            "grp": r.get("grp"), "seq": r.get("seq"),
            # migration 016: how many past papers hold it (dedupe's repeat; the earliest copy is the one kept)
-           "seen": max(1, min(99, int(r.get("repeat") or 1))), **({"explain": (expl[r["id"]]["explain"] if r["id"] in expl and expl[r["id"]].get("fp") == explain_fp(r) else None)} if has_expl else {})} for r in rows]
+           "seen": max(1, min(99, int(r.get("repeat") or 1))),
+           # migration 015: a typed answer (S&T): no options, answer 0, the accepted answers and the answer line
+           "kind": r.get("kind", "mcq"), "accept": r.get("accept") if r.get("kind") == "typed" else None,
+           "scaffold": r.get("scaffold") if r.get("kind") == "typed" else None, **({"explain": (expl[r["id"]]["explain"] if r["id"] in expl and expl[r["id"]].get("fp") == explain_fp(r) else None)} if has_expl else {})} for r in rows]
     nfig = sum(len(d["figures"]) for d in db)
     print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}, explanations {sum(bool(d.get('explain')) for d in db) if has_expl else 'unchanged (no explain.jsonl)'}")
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts

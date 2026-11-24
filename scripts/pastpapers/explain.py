@@ -79,7 +79,8 @@ def parse(text):
 def fp(r):
     """The question as the explanation was written for it: an explanation is used only while stem, options and key match."""
     import hashlib
-    return hashlib.sha1(json.dumps([r["stem"], r["options"], r["answer"]], ensure_ascii=False).encode()).hexdigest()[:12]
+    key = [r["stem"], r["options"], r["answer"]] + ([r.get("accept"), r.get("scaffold")] if r.get("kind") == "typed" else [])
+    return hashlib.sha1(json.dumps(key, ensure_ascii=False).encode()).hexdigest()[:12]  # typed: a new model answer needs a new why
 
 
 def opts_text(opts):

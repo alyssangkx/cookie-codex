@@ -17,7 +17,9 @@ const HAS_BLANK = /_{2,}/;
 export function compose(scaffold: string | null | undefined, parts: string[]): string {
   if (!scaffold || !HAS_BLANK.test(scaffold)) return (parts[0] ?? '').trim();
   let i = 0;
-  return scaffold.replace(BLANK, () => (parts[i++] ?? '').trim());
+  // spaces around each typed part ("Much to____" + "the children's" is "Much to the children's"), then tidied
+  return scaffold.replace(BLANK, () => ` ${(parts[i++] ?? '').trim()} `)
+    .replace(/[ \t]+/g, ' ').replace(/ ([,.;:!?])/g, '$1').replace(/ (['\u2019]s\b)/g, '$1').trim(); // "____'s": the boy's
 }
 
 /** The comparable form of an answer: letters and digits of any script, apostrophes inside a word or after a plural's s

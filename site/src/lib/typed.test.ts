@@ -56,3 +56,15 @@ test('review fixes: plural possessives, dashes, other scripts, symbol-only answe
   assert.ok(!typedOk(null, ['!!'], ['?']), 'an answer of only symbols matches nothing');
   assert.equal(norm("'Do you know?' Tessa asked."), 'do you know tessa asked');
 });
+
+test('a blank with no space beside it still makes separate words; spacing before punctuation is tidied', () => {
+  assert.equal(compose('Much to____, they were granted permission.', ['the children\'s delight']), "Much to the children's delight, they were granted permission.");
+  assert.equal(compose('All____ are clean.', ['the clothes']), 'All the clothes are clean.');
+  assert.ok(typedOk('Much to____', ["the children's delight, they were granted permission to attend the concert"],
+    ["Much to the children's delight, they were granted permission to attend the concert."]));
+});
+
+test("a blank before 's keeps the possessive on the typed word", () => {
+  assert.equal(compose("The ____'s bag was lost.", ['boy']), "The boy's bag was lost.");
+  assert.ok(typedOk("The ____'s bag was lost.", ['boy'], ["The boy's bag was lost."]));
+});

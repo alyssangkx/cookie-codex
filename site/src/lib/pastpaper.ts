@@ -58,6 +58,8 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'eng-vocab-mcq': 'pool',
   // English visual text (passage phase, 21 Nov 2026): 396 questions in 97 sets, each set shown with its exam pages
   'eng-visual-text': 'pool',
+  // Synthesis & Transformation as typed answers (migration 015; owner, 24 Nov 2026): 750 questions, strictly the school key
+  'eng-synthesis': 'pool',
   // Chinese upload (owner OK, 21 Nov 2026): single-item MCQs (a blank or pinyin options); keys confirmed by the blind check
   // or owner-approved outside-model consensus. Cloze, reading and dialogue wait for the passage phase.
   'chi-ciyu-choose': 'pool',
