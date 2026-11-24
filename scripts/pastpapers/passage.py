@@ -48,7 +48,9 @@ def jl(p):
 
 
 def parse(text):
-    m = re.search(r"\{.*\}", text or "", re.S)
+    # a Qwen3 reply run without PP_NO_THINK starts with <think>...</think>, which may hold braces of its own
+    text = re.sub(r"<think>.*?(</think>|$)", "", text or "", flags=re.S)
+    m = re.search(r"\{.*\}", text, re.S)
     try:
         return json.loads(m.group(0)) if m else None
     except Exception:
@@ -146,7 +148,7 @@ def run(items_file):
             msgs = [[{"role": "user", "content": [*({"type": "image_url", "image_url": {"url": f"file://{x}"}} for x in files),
                      {"type": "text", "text": PROMPT.format(name=SECTIONS[r["st"]][0], a=r["a"], b=r["b"], mark=MARK[r["kind"]])}]}]
                     for r, files in ch]
-            for (r, _), o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
+            for (r, _), o in zip(ch, llm.chat(msgs, sp, use_tqdm=False, **({"chat_template_kwargs": {"enable_thinking": False}} if os.environ.get("PP_NO_THINK") else {}))):
                 f.write(json.dumps({"sec": r["sec"], "model": model, "raw": o.outputs[0].text}, ensure_ascii=False) + "\n")
             f.flush()
             print(f"{min(i + 16, len(todo))}/{len(todo)}", flush=True)
@@ -419,6 +421,7 @@ def selftest():
     p = "Benedict read {{17|widely}} to find out more. They made a {{18| detailed plan  for their trip }}."
     assert markers(p, "under") == {17: "widely", 18: "detailed plan for their trip"}
     assert markers("A [[31]] and b[[32]].", "blank") == {31: "", 32: ""}
+    assert parse('<think>{"x": 1}</think>{"passage": "A [[31]]."}') == {"passage": "A [[31]]."}, "a thinking block is skipped"
     assert markers("A [[31]] and [[31]].", "blank") is None, "a repeated number is a misread"
     assert plain("He read {{17|widely}} [[3]] more.") == "he read widely more"
     r = {"kind": "under", "qnos": [17, 18]}

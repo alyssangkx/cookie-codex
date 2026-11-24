@@ -69,7 +69,9 @@ def jl(p):
 
 
 def parse(text):
-    m = re.search(r"\{.*\}", text or "", re.S)
+    # a Qwen3 reply run without PP_NO_THINK starts with <think>...</think>, which may hold braces of its own
+    text = re.sub(r"<think>.*?(</think>|$)", "", text or "", flags=re.S)
+    m = re.search(r"\{.*\}", text, re.S)
     try:
         return json.loads(m.group(0)) if m else None
     except Exception:
@@ -119,6 +121,11 @@ def pack(sels):
     print(f"{len(out)} questions -> {WORK / 'items.jsonl'}")
 
 
+def chat_kw():
+    """PP_NO_THINK=1 (Qwen3.x): answer without the thinking block, which would break the one-line JSON these prompts ask for."""
+    return {"chat_template_kwargs": {"enable_thinking": False}} if os.environ.get("PP_NO_THINK") else {}
+
+
 def llm(model):
     from vllm import LLM, SamplingParams
     return LLM(model=model, tensor_parallel_size=int(os.environ.get("PP_TP", "4")), gpu_memory_utilization=0.9,
@@ -155,6 +162,7 @@ def run(items_file, phase):
         return
     zh = bool(items) and items[0].get("subject") == "chinese"
     model, sp = llm((JUDGE_ZH if zh else JUDGE) if phase in ("judge", "judge2") else LLM)
+    kw = chat_kw()  # read once per run
     sys_p, write_p, check_p = (SYS_ZH, WRITE_ZH, CHECK_ZH) if zh else (SYS, WRITE, CHECK)
     with open(out, "a", encoding="utf-8") as f:
         for i in range(0, len(todo), 64):
@@ -171,7 +179,7 @@ def run(items_file, phase):
                     wr = "\n".join(f"{'为什么（' + str(j + 1) + '）不对' if zh else 'Why (' + str(j + 1) + ') does not fit'}: {w}" for j, w in enumerate(e["wrong"]) if w)
                     p = check_p.format(stem=r["stem"], opts=opts_text(o), k=k + 1, ans=o[k], right=e["right"], wrongs=wr)
                 msgs.append([{"role": "system", "content": sys_p}, {"role": "user", "content": p}])
-            for r, res in zip(ch, model.chat(msgs, sp, use_tqdm=False)):
+            for r, res in zip(ch, model.chat(msgs, sp, use_tqdm=False, **kw)):
                 raw = res.outputs[0].text
                 if phase in ("write", "revise"):
                     rec = {"id": r["id"], "fp": r.get("fp"), "explain": shape(parse(raw), r["options"], r["answer"]), "raw": raw}
@@ -594,6 +602,7 @@ def selftest():
     assert shape(dict(good, wrong={"2": "x", "3": "y"}), opts, 0) is None, "every wrong option needs a reason"
     assert shape({"right": "ok", "wrong": good["wrong"]}, opts, 0) is None, "too short to explain anything"
     assert shape(parse("```json\n" + json.dumps(good) + "\n```"), opts, 0)["right"].startswith("Prefers")
+    assert parse('<think>maybe {"ok": false}</think>{"ok": true, "problem": ""}') == {"ok": True, "problem": ""}, "a thinking block is skipped"
     q = {"stem": "s", "options": opts, "answer": 0}
     assert fp(q) == fp(dict(q)) and fp(q) != fp(dict(q, answer=1)) and fp(q) != fp(dict(q, options=opts[::-1])), "a changed key or options is another version"
     it = {"fp": "f", "answer": 0, "options": opts}
