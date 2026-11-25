@@ -266,12 +266,14 @@ def parse_hold(text: str) -> set:
 
 
 def read_hold(out: Path) -> set:
-    """hold.txt (visual review), hold-auto.txt (cropcheck-apply, the server model's crop review) and hold-crop.txt
-    (`figures`: a crop still cut off at an edge after the automatic fixes)."""
+    """hold.txt (visual review), hold-auto.txt (cropcheck-apply, the server model's crop review), hold-crop.txt
+    (`figures`: a crop still cut off at an edge after the automatic fixes), answer_pictures_held.txt (owner rule 25 Nov 2026:
+    a standalone question whose picture shows its answer) and owner_removed.txt (questions the owner removed). Read at
+    upload, so a re-run `select` cannot bring any of them back."""
     return set().union(*(parse_hold(open(out / n).read()) for n in HOLD_FILES if (out / n).exists()))
 
 
-HOLD_FILES = ("hold.txt", "hold-auto.txt", "hold-crop.txt")
+HOLD_FILES = ("hold.txt", "hold-auto.txt", "hold-crop.txt", "answer_pictures_held.txt", "owner_removed.txt")
 BLIND_RERUN = ("needs-blind-check-ocr", "no-blind-check-yet", "not-in-blind-check", "blind-key-mismatch")  # fixed by a blind run with the current key
 UNRESOLVED = ("not_located", "touch_unresolved", "no_page")  # fix_crop outcomes that leave a crop possibly cut off
 
@@ -376,8 +378,8 @@ def select(a):
         blind = {b["id"]: b for b in jl(bfile)} if bfile.exists() else None
         second = {b["id"]: b for b in jl(Path(a.blind2) / f"{a.subject}-{y}.jsonl")}
         # owner-approved model consensus (21 Nov 2026, English): three outside models agree with the key ("confirm"), or
-        # with the local blind solver against it ("replace"; spot check 20/20 for the models). Used only while the key is
-        # still the one the verdict was made on (key_old).
+        # with the local blind solver against it ("replace"; spot check 20/20 for the models), or the owner overrules the
+        # printed key itself ("owner", 25 Nov 2026). Used only while the key is still the one the verdict was made on (key_old).
         consensus = {c["id"]: c for c in jl(Path(a.blind) / "consensus" / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
         ocrt = ocr_texts(base / "questions.jsonl") if a.subject in ("science", "maths") else {}
@@ -444,7 +446,10 @@ def select(a):
                 else:
                     k, src = str(cv["key_new"]), "model-key"
             cv_ok = bool(cv and len(opts) == 4 and k and (cv["key_old"] == k or (src == "model-key" and cv["key_new"] == k)))
-            if cv_ok and cv["kind"] == "replace":  # an OCR or reread key that disagrees with the new key still holds it
+            if cv_ok and cv["kind"] == "owner":  # the owner overrules the PRINTED key (three outside models and two blind
+                k, src = cv["key_new"], "owner"   # answerers agree against it, 25 Nov 2026): the printed key no longer holds it
+                conflict = False
+            elif cv_ok and cv["kind"] == "replace":  # an OCR or reread key that disagrees with the new key still holds it
                 k, src = cv["key_new"], "consensus"
                 conflict = bool((ok and ok != k) or (rr and rr != k))
             elif cv_ok:
@@ -2441,17 +2446,39 @@ def upload(a):
         print("dry run: nothing sent (add --apply after the owner's go-ahead)")
         return
     fdir = out / "figures"
-    sent = set()  # a passage set's pages are shared by its questions: send each file once
-    for d in db:
-        for f in d["figures"]:
-            if f["path"] in sent:
-                continue
-            sent.add(f["path"])
-            body = (fdir / Path(f["path"]).name).read_bytes()
-            r = s.post(f"{url}/storage/v1/object/{BUCKET}/{f['path']}", data=body,
-                       headers={"content-type": "image/webp", "x-upsert": "true", "cache-control": "3600"}, timeout=60)
-            if r.status_code >= 300:
-                sys.exit(f"figure upload failed for {d['id']}: HTTP {r.status_code}")
+    # incremental pictures (owner, 25 Nov 2026: an upload re-sent ~2,700 pictures one request each): ONE record for the
+    # bucket (storage path -> sha1 of the bytes last sent from this machine, whichever folder sent them; folders share
+    # paths, so a per-folder record could let an old picture win), written as each one succeeds; a picture whose bytes
+    # match is skipped. --all-figures sends all again (pictures removed or changed in the bucket some other way).
+    man_p = Path(os.environ.get("PP_FIG_SENT", "/data/alvin/tmp/cookie-codex/ppimport/figures.sent.json"))
+    try:
+        man = {} if getattr(a, "all_figures", False) or not man_p.exists() else dict(json.loads(man_p.read_text()))
+    except (ValueError, TypeError):
+        man = {}  # a damaged record: send everything again rather than stop
+    sent, nsent, nskip = set(), 0, 0  # a passage set's pages are shared by its questions: send each file once
+    try:
+        for d in db:
+            for f in d["figures"]:
+                if f["path"] in sent:
+                    continue
+                sent.add(f["path"])
+                body = (fdir / Path(f["path"]).name).read_bytes()
+                h = hashlib.sha1(body).hexdigest()
+                if man.get(f["path"]) == h:
+                    nskip += 1
+                    continue
+                r = s.post(f"{url}/storage/v1/object/{BUCKET}/{f['path']}", data=body,
+                           headers={"content-type": "image/webp", "x-upsert": "true", "cache-control": "3600"}, timeout=60)
+                if r.status_code >= 300:
+                    sys.exit(f"figure upload failed for {d['id']}: HTTP {r.status_code}")
+                man[f["path"]] = h
+                nsent += 1
+    finally:  # what went up stays recorded even when a later picture fails; written whole, then swapped in
+        tmp = man_p.with_suffix(".tmp")
+        tmp.write_text(json.dumps(man, sort_keys=True))
+        os.replace(tmp, man_p)
+    print(f"pictures: {nsent} sent, {nskip} unchanged (skipped; if pictures were removed or changed in the bucket some "
+          f"other way, run again with --all-figures)")
     for i in range(0, len(db), 200):
         r = s.post(f"{url}/rest/v1/pp_items?on_conflict=id", json=db[i:i + 200], timeout=60,
                    headers={"prefer": "resolution=merge-duplicates,return=minimal", "content-type": "application/json"})
@@ -2518,6 +2545,7 @@ def main():
     p.add_argument("--subtopics", default="")
     p.add_argument("--sample", type=int, default=0, help="review: this many random items per sub-topic (spot-check)")
     p.add_argument("--apply", action="store_true")
+    p.add_argument("--all-figures", action="store_true", help="upload: send every picture again, not only new or changed ones")
     p.add_argument("--ocr-keys", action="store_true", help="select: use <year>/anskey_ocr.jsonl as a fallback key source")
     p.add_argument("--reread-keys", action="store_true", help="select: use agreed <year>/ansreread/ cells (ans_reread.py) as a fallback key source, answer_src 'vision-reread'")
     p.add_argument("--tier-rule", choices=("position", "tags"), default="position")

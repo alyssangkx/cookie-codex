@@ -192,6 +192,13 @@ def norm_num(s):
     return re.sub(r"(?<=\d),(?=\d{3}(?!\d))", "", s)
 
 
+# Physics the P6 syllabus does not teach (CLAUDE.md: no mass and acceleration, no action-reaction). Not bare "mass" (matter has
+# mass) and not "pushes back" (a compressed spring does): only wording that can only mean the excluded ideas.
+# "A heavier object has a greater gravitational force on it" IS taught (syllabus: objects have weight because of the
+# gravitational force acting on them; spring-force investigations), so gravity-and-weight wording stays allowed.
+OUT_OF_SYLLABUS = re.compile(r"\bequal and opposite\b|\baction[- ]reaction\b|\breaction force\b|\baccelerat\w*", re.I)
+
+
 def has_value(opt, text):
     """The Maths key option's value is in the text: its number (fraction, mixed number, decimal, percent) as a whole token, units
     optional ('12 cm' is met by 12); an option with no digit is met like a Science one (its words)."""
@@ -199,7 +206,10 @@ def has_value(opt, text):
     t = norm_num(text)
     if not re.search(r"\d", o):
         return se.names_answer(opt, text)
-    core = re.sub(r"\s*[A-Za-z°²³]+(?:\s*[A-Za-z°²³/]+)*\.?$", "", o).strip() or o  # drop trailing units: "12 cm" -> "12", "2 1/3 h" -> "2 1/3"
+    # drop trailing units: "12 cm" -> "12", "2 1/3 h" -> "2 1/3", "5 km/h" -> "5". Each word after the first needs a real
+    # space before it: the old "(?:\s*[...]+)*" could split a long run of words in exponentially many ways (25 Nov 2026: a
+    # Maths picture pack hung the lint for minutes)
+    core = re.sub(r"\s*[A-Za-z°²³][A-Za-z°²³/]*(?:\s+[A-Za-z°²³/]+)*\.?$", "", o).strip() or o
     for cand in dict.fromkeys([o, core, re.sub(r"\s+", " ", core)]):
         # not inside another number: not after a digit, '/', 'digit.', or '-' ('-5' for 5), and a fraction not after
         # "digits + space" ('1 3/4' for 3/4, '2 1/3' for 1/3)
@@ -235,6 +245,8 @@ def lint_ms(subject, r, rec):
             return se.style(t)
         if se.numbered(t):
             return "names an option by letter or number"
+        if subject == "science" and OUT_OF_SYLLABUS.search(t):
+            return "uses action-reaction, mass or acceleration (outside the P6 syllabus)"
     if subject == "maths":
         if not has_value(o[k], e["right"]):
             return "right does not contain the answer value"
@@ -411,6 +423,11 @@ def selftest():
           "wrong": ["The leaf makes food; it does not take water from the soil.", None, "The flower makes seeds, not water intake.", "The stem carries water up but does not take it in."]}
     assert lint_ms("science", s, sg) == "", lint_ms("science", s, sg)
     assert lint_ms("science", s, dict(sg, right="Plants drink through their underground part, which is long.")) == "does not name the answer"
+    oos = "uses action-reaction, mass or acceleration (outside the P6 syllabus)"
+    assert lint_ms("science", s, dict(sg, right="The root takes in water; by action-reaction the soil pushes back.")) == oos
+    assert lint_ms("science", s, dict(sg, wrong=[sg["wrong"][0], None, "The flower accelerates seed growth, not water intake.", sg["wrong"][3]])) == oos
+    assert lint_ms("science", s, dict(sg, right="The root takes in water; a squashed spring pushes back and matter has mass.")) == "", "spring force and mass are taught"
+    assert lint_ms("science", s, dict(sg, right="The root takes in water; it is heavier, so a greater gravitational force acts on it.")) == "", "weight is taught"
     assert se.doubt_of(dict(sg, blind=0), s).startswith("the writer's blind answer")
     # end to end on a made-up selection under WORK/_selftest: pick, pack, lint, checkpack, verdict tie, apply (preview, then --write)
     import builtins
