@@ -2,7 +2,7 @@
 // this device) must not trust its shape. cleanSave() returns a well-formed SaveV1 for display: every number is a finite
 // number in range, every string a string, malformed entries dropped. It never writes storage and changes no save rules;
 // store.ts load()/migrations stay as they are. Use it before rendering a save into HTML.
-import { fresh, TIERS, PICK_MAX, ASSIGN_HREF, ASSIGN_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
+import { fresh, TIERS, PICK_MAX, RQ_MAX, ASSIGN_HREF, ASSIGN_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
 import { CRUMB_WHYS, LEDGER_MAX, type Crumbs, type CrumbWhy, type LedgerEntry, type Purchase } from './crumbs.ts';
 
 type Obj = Record<string, unknown>;
@@ -28,6 +28,10 @@ function cleanTier(v: unknown): TierState | null {
   if (typeof t.hash === 'string' && /^[a-z0-9]{1,16}$/.test(t.hash)) out.hash = t.hash;
   if (t.pool === true) out.pool = true;
   if (t.ms === true) out.ms = true;
+  // display fields of a pool section (store.ts poolDisplay): counts and a short id list, shape-checked
+  if (t.tried !== undefined) out.tried = num(t.tried, 0, 100000);
+  if (Array.isArray(t.rq)) out.rq = strs(t.rq, RQ_MAX).filter((x) => /^[\w:.-]{1,60}$/.test(x));
+  if (t.pt !== undefined) { out.pt = num(t.pt, 0, 100000); out.pd = Math.min(num(t.pd, 0, 100000), out.pt); }
   return out;
 }
 

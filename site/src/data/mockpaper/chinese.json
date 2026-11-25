@@ -1,0 +1,95 @@
+{
+  "subject": "chinese",
+  "paper": "试卷二 语文应用与阅读理解",
+  "totalMarks": 90,
+  "minutes": 100,
+  "source": "site/src/data/syllabus/chinese.json paperFormat (SEAB 2026; 2027 not confirmed)",
+  "startingMarks": 58,
+  "sections": [
+    {
+      "id": "chi-m-yuyong",
+      "subTopics": [
+        "chi-pinyin-sound",
+        "chi-zixing-form",
+        "chi-ciyu-choose",
+        "chi-ciyu-idiom",
+        "chi-juzi-choose",
+        "chi-juzi-guanlian",
+        "chi-juzi-order"
+      ],
+      "title": "语文应用",
+      "instruction": "请选出最合适的答案。",
+      "questions": 15,
+      "marksPerQuestion": 2,
+      "wholeSets": false,
+      "answerKind": "mcq",
+      "available": true,
+      "note": "Spread across the seven 语文应用 sub-topics, about 2 each (one gets 3)."
+    },
+    {
+      "id": "chi-m-cloze",
+      "subTopics": [
+        "chi-cloze-mcq"
+      ],
+      "title": "短文填空",
+      "instruction": "阅读短文,在每个空格中选出最合适的答案。",
+      "questions": 5,
+      "marksPerQuestion": 2,
+      "wholeSets": true,
+      "blanksPerSet": 5,
+      "answerKind": "cloze-whole-passage",
+      "available": true
+    },
+    {
+      "id": "chi-m-yuedu1",
+      "subTopics": [
+        "chi-yuedu-mcq-text"
+      ],
+      "title": "阅读理解一",
+      "instruction": "阅读短文,然后回答问题。请选出最合适的答案。",
+      "questions": 5,
+      "marksPerQuestion": 2,
+      "wholeSets": true,
+      "blanksPerSet": 5,
+      "answerKind": "mcq",
+      "available": true
+    },
+    {
+      "id": "chi-m-dialogue",
+      "subTopics": [
+        "chi-dialogue-mcq"
+      ],
+      "title": "完成对话",
+      "instruction": "阅读对话,从方框中选出最合适的句子,填入空格。",
+      "questions": 4,
+      "marksPerQuestion": 2,
+      "wholeSets": true,
+      "blanksPerSet": 4,
+      "answerKind": "8-option-dialogue",
+      "available": true,
+      "note": "One dialogue = 4 blanks, 8 phrases (4 distractors); one set fills the section."
+    },
+    {
+      "id": "chi-m-yuedu2",
+      "subTopics": [
+        "chi-yuedu-open-text"
+      ],
+      "title": "阅读理解二",
+      "instruction": "阅读短文,然后回答问题。",
+      "questions": 11,
+      "marksPerQuestion": null,
+      "totalMarksForSection": 32,
+      "wholeSets": true,
+      "answerKind": "open-ended",
+      "available": false,
+      "reason": "Open-ended answers (2 passages, 11 items, 32 marks) cannot be marked by the site yet."
+    }
+  ],
+  "_unverified": [
+    "2027 paper format; the 语文应用 count of 15 was not checked against school papers (Phase 1 report).",
+    "blanksPerSet for 短文填空 (5) and 阅读理解一 (5) follow the paper format; the real passages in the bank were not counted. Step 2 must count them.",
+    "Marks per 阅读理解二 item vary (32 in total over 11 items); unavailable for now.",
+    "Chinese 听力 (20 marks) is audio and not part of this paper; excluded.",
+    "Instruction lines are written in plain words, not copied from a paper; a Chinese teacher should read them."
+  ]
+}

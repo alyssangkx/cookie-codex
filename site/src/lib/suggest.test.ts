@@ -189,5 +189,6 @@ test('a one-pool sub-topic is one unit: "Next up" links to the pool quiz (no tie
   assert.equal(topicPower(s, [pool]), 17); // milestone 1 of 3 (weights 1, 2, 3)
   const [more] = run(s, [pool]);
   assert.equal(more.kind, 'one-more');
-  assert.match(more.reason, /5 of 30 past-paper questions counted/);
+  assert.match(more.reason, /^5 of 30 questions right\.$/);
+  assert.match(run(s, [{ ...pool, cloze: true }])[0].reason, /^5 of 30 blanks right\.$/);
 });

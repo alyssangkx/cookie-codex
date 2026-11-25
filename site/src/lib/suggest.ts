@@ -2,12 +2,14 @@
 // "Suggested for you" cards. No DOM, no localStorage: everything comes from the save object.
 import { TIERS, TIER_NAME, tierState, tierOpen, triesUsedUp, dayBlock, DAILY_QUIZ_CAP, isDue, liveMastered, poolProgress, milestoneReached, type SaveV1, type Tier } from './store.ts';
 import { reviewSize } from './pick.ts';
+import { poolRightText } from './section.ts';
 
 export interface SubInfo {
   id: string; topic: string; topicName: string; name: string; slug: string;
   playable: Record<Tier, boolean>;
   count?: Record<Tier, number>; // questions per tier, for the "N of M mastered" wording
   hash?: Record<Tier, string>; // tierHash of each tier's question ids (train.ts), so a redesigned tier reads as stale
+  cloze?: boolean; // blanks, not questions, in the wording
   pool?: number; // a one-pool sub-topic (ADR 0011): its past-paper count; one unit, its slots are milestones
 }
 export interface Suggestion {
@@ -132,7 +134,7 @@ export function suggestions(
       const m = sub.pool ? pp.counted : liveMastered(hs, total, sub.hash?.[hit]);
       add({
         kind: 'one-more', title: `Keep going! ${sub.name}`, sub: sub.id, tier: hit,
-        reason: sub.pool ? `${m} of ${total} past-paper questions counted.` : `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`,
+        reason: sub.pool ? `${poolRightText(m, total, !!sub.cloze)}.` : `${TIER_NAME[hit]}: ${m} of ${total} questions mastered.`,
         href: tierHref(sub.id, hit, !!sub.pool),
       });
       break;

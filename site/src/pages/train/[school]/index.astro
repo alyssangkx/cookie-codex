@@ -1,17 +1,18 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subsOf, subSlug, listGroup, unitName, banksHash } from '../../../lib/train';
+import { SCHOOLS, subsOf, subSlug, listGroup, unitName, banksHash, clozeSubs } from '../../../lib/train';
 import { groupByTopic, type SubInfo } from '../../../lib/suggest';
-import { TIERS, TIER_NAME, MILESTONE_NAME, type School } from '../../../lib/store';
+import { TIERS, type School } from '../../../lib/store';
 
 export function getStaticPaths() {
   return SCHOOLS.map((s) => ({ params: { school: s.id }, props: { school: s } }));
 }
 const { school } = Astro.props as { school: (typeof SCHOOLS)[number] };
 const list = subsOf(school.id as School);
-const infos: (SubInfo & { file: string | null; home: number })[] = list.map((s) => ({
+const infos: (SubInfo & { file: string | null; home: number; cloze?: true })[] = list.map((s) => ({
   id: s.id, ...listGroup(s), name: s.name, slug: subSlug(s.id),
   playable: s.playable, count: s.count, hash: s.hash, file: s.file, home: s.home, ...(s.pool ? { pool: s.pool } : {}),
+  ...(clozeSubs.includes(s.id) ? { cloze: true } : {}),
 }));
 const groups = groupByTopic(infos) as { topic: string; name: string; subs: typeof infos }[];
 const clientData = JSON.stringify(infos).replace(/</g, '\\u003c');
@@ -45,7 +46,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
             <span class="th-topic-meta">
               <span class="th-mini" aria-hidden="true"><span class="th-topic-fill" style="width:0%"></span></span>
               {playableCount(g) > 0
-                ? <span class="th-topic-count"><span class="th-cleared">0</span>/{playableCount(g)} tiers cleared</span>
+                ? <span class="th-topic-count"><span class="th-cleared">0</span> of {playableCount(g)} stops reached</span>
                 : <span class="th-topic-count">Coming soon</span>}
             </span>
           </summary>
@@ -56,11 +57,10 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
                 <span class="th-home">Primary {s.home}</span>
                 {!TIERS.some((t) => s.playable[t]) && <span class="th-chips"><span class="th-soon-tag">Coming soon: no questions yet</span></span>}
                 {TIERS.some((t) => s.playable[t]) && <span class="th-chips">
-                  {TIERS.map((t) => (
-                    <a class="th-chip" href={`/train/${school.id}/${s.slug}/`} data-sub={s.id} data-tier={t} data-playable={String(s.playable[t])} data-pool={String(s.pool ?? 0)}>
-                      {s.pool ? MILESTONE_NAME[t] : TIER_NAME[t]}{s.playable[t] ? '' : ': no questions yet'}
-                    </a>
-                  ))}
+                  <a class="th-chip one" href={`/train/${school.id}/${s.slug}/`} data-sub={s.id}>
+                    <span class="dots" aria-hidden="true">{TIERS.filter((t) => s.playable[t]).map(() => <i></i>)}</span><span class="th-chip-txt">{s.name}</span>
+                  </a>
+                  <a class="th-retest" hidden href={`/train/${school.id}/${s.slug}/`} data-sub={s.id}></a>
                 </span>}
               </li>
             ))}
@@ -94,41 +94,67 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
 )}
 
 <script>
-  import { load, tierState, tierOpen, liveMastered, poolProgress, milestoneReached, syncParkedStored, reviewDueCount, TIERS, TIER_NAME, MILESTONE_NAME, type Tier } from '../../../lib/store';
+  import { load, tierState, poolProgress, syncParkedStored, reviewDueCount, isDue, TIERS, TIER_NAME } from '../../../lib/store';
+  import { nextTier, dueFromStored, stopCount, goalFlags, stopsText, poolRightText, tierFlags } from '../../../lib/section';
+  import { esc } from '../../../lib/boldans';
   import { topicPower, schoolPower, suggestions, dueCount, groupByTopic, unitName, type SubInfo, type Suggestion } from '../../../lib/suggest';
 
   const root = document.querySelector<HTMLElement>('.train-home[data-school]');
   const dataEl = document.getElementById('th-subs');
   if (root && dataEl) {
-    type Info = SubInfo & { file: string | null; home: number };
+    type Info = SubInfo & { file: string | null; home: number; cloze?: true };
     const subs: Info[] = JSON.parse(dataEl.textContent || '[]');
     const s = load();
     const now = Date.now();
-    const esc = (t: string) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 
 
-    // chips
-    const countOf = new Map(subs.map((y) => [y.id, y.count]));
-    const hashOf = new Map(subs.map((y) => [y.id, y.hash]));
-    const chipState = (sub: string, t: Tier, playable: boolean, pool = 0) => {
-      if (pool) { // one pool (ADR 0011): the chips are its milestones
-        if (milestoneReached(s, sub, t)) return { state: 'cleared', text: `${MILESTONE_NAME[t]}: reached ✓` };
-        const pp = poolProgress(s, sub); // stored with the live pool size
-        return { state: pp.counted ? 'pass1' : 'open', text: `${MILESTONE_NAME[t]}: ${pp.counted} of ${pp.total || pool} counted` };
-      }
-      if (!playable) return { state: 'none', text: `${TIER_NAME[t]}: no questions yet` };
-      const st = tierState(s, sub, t);
-      if (st.cleared) return { state: 'cleared', text: `${TIER_NAME[t]}: cleared ✓` };
-      if (!tierOpen(s, sub, t, subs.find((y) => y.id === sub)?.playable)) return { state: 'locked', text: `${TIER_NAME[t]}: locked` };
-      const n = countOf.get(sub)?.[t], m = liveMastered(st, n, hashOf.get(sub)?.[t]);
-      if (m) return { state: 'pass1', text: `${TIER_NAME[t]}: ${m} of ${n} mastered` };
-      return { state: 'open', text: `${TIER_NAME[t]}: open` };
+    // one chip per section: a dot per stop (filled when reached) and a line of text. A stop is counted as the section page
+    // counts it (stopCount): for a pool the 1st and 2nd by the slot, Exam-ready only by the pool's own milestone
+    const stops = (y: Info) => stopCount(s, y.id, !!y.pool, y.playable);
+    const dotsOn = (y: Info) => {
+      const flags = y.pool ? goalFlags(s, y.id) : TIERS.map((t) => tierState(s, y.id, t).cleared);
+      return TIERS.filter((t) => y.playable[t]).map((t) => flags[TIERS.indexOf(t)]);
     };
-    root.querySelectorAll<HTMLElement>('.th-chip').forEach((el) => {
-      const r = chipState(el.dataset.sub!, el.dataset.tier as Tier, el.dataset.playable === 'true', Number(el.dataset.pool) || 0);
-      el.dataset.state = r.state;
-      el.textContent = r.text;
+    const chipView = (y: Info) => {
+      const { reached: e, of } = stops(y);
+      const tried = s.attempts.some((a) => a.sub === y.id);
+      if (y.pool) {
+        const pp = poolProgress(s, y.id), total = pp.total || y.pool;
+        if (!pp.counted && !e && !tried) return { state: 'new', html: '<b>Not started</b>', label: 'not started' };
+        const right = poolRightText(pp.counted, total, !!y.cloze);
+        return { state: e === of ? 'done' : 'some', html: `<b>${stopsText(e, of)}</b><span class="soft">${right}</span>`, label: `${stopsText(e, of)}, ${right}` };
+      }
+      if (!e && !tried) return { state: 'new', html: '<b>Not started</b>', label: 'not started' };
+      if (e === of) return { state: 'done', html: `<b>${stopsText(e, of)}</b><span class="soft">All tiers cleared</span>`, label: `${stopsText(e, of)}, all tiers cleared` };
+      const { cleared, open } = tierFlags(s, y.id, y.playable);
+      const nt = nextTier(cleared, y.playable, open);
+      const last = [...TIERS].reverse().find((t) => y.playable[t] && cleared[t]);
+      const head = last ? `${TIER_NAME[last]} cleared` : stopsText(e, of);
+      const tail = nt ? `${TIER_NAME[nt]} next` : '';
+      return { state: 'some', html: `<b>${head}</b>${tail ? `<span class="soft">${tail}</span>` : ''}`, label: `${stopsText(e, of)}${tail ? `, ${tail}` : ''}` };
+    };
+    const byId = new Map(subs.map((y) => [y.id, y]));
+    root.querySelectorAll<HTMLElement>('.th-chip.one').forEach((el) => {
+      const y = byId.get(el.dataset.sub!);
+      if (!y) return;
+      const v = chipView(y), on = dotsOn(y);
+      el.dataset.state = v.state;
+      el.querySelectorAll('.dots i').forEach((d, i) => d.classList.toggle('on', !!on[i]));
+      el.querySelector('.th-chip-txt')!.innerHTML = v.html;
+      el.setAttribute('aria-label', `${y.name}: ${v.label}`);
     });
+    /** "N to retest" pills of the pool sections, from what the section's last quiz stored (no fetch); the live states decide
+     *  what is still due. A section not played since those fields were added shows none. Generated sections' pills come from
+     *  their banks (`extra`, below). */
+    const showRetests = (extra: Record<string, number> = {}) => {
+      const due = { ...dueFromStored(load(), subs.filter((y) => y.pool).map((y) => y.id), Date.now()), ...extra };
+      root.querySelectorAll<HTMLElement>('.th-retest').forEach((el) => {
+        const n = due[el.dataset.sub!] ?? 0;
+        el.hidden = !n;
+        el.textContent = `${n} to retest`;
+      });
+    };
+    showRetests();
 
     // power
     const setBar = (n: number) => {
@@ -143,8 +169,7 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
       if (!g) return;
       const p = topicPower(s, g.subs);
       d.querySelector<HTMLElement>('.th-topic-fill')!.style.width = `${p}%`;
-      let n = 0;
-      for (const sub of g.subs) for (const t of TIERS) if (sub.playable[t] && tierState(s, sub.id, t).cleared) n++;
+      const n = g.subs.reduce((k, y) => k + stops(y as Info).reached, 0);
       const c = d.querySelector('.th-cleared'); if (c) c.textContent = String(n);
     });
 
@@ -182,6 +207,16 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
           // stored now, never `s` from before the fetch: another tab may have bought or earned meanwhile
           const cur = syncParkedStored(Object.keys(qs), false);
           run(dueCount(cur, now, qs), qs, cur);
+          return qs;
+        })
+        .then((qs) => {
+          // generated sections' pills: due retests by the bank that owns the id (a pool section's pill comes from its stored
+          // `rq`, see showRetests; its generated ids never count, its quiz asks only past-paper questions)
+          const pools = new Set(subs.filter((y) => y.pool).map((y) => y.id));
+          const due: Record<string, number> = {};
+          const cur = load();
+          for (const [id, sub] of Object.entries(qs)) if (!pools.has(sub) && isDue(cur, id, Date.now(), true)) due[sub] = (due[sub] ?? 0) + 1;
+          showRetests(due);
         })
         .catch(() => run(dueCount(s, now)));
     }
@@ -244,10 +279,19 @@ const playableCount = (g: (typeof groups)[number]) => g.subs.reduce((n, s) => n 
     font-size: 0.85rem; min-height: 44px; display: inline-flex; align-items: center; padding: 0 0.8rem; border-radius: 999px;
     border: 1.5px solid var(--crust); color: var(--cocoa-soft); text-decoration: none; background: var(--paper);
   }
-  .train-home .th-chip[data-state='cleared'] { background: #e6f4ea; border-color: #2e7d4f; color: #1f6b3a; font-weight: 700; }
-  .train-home .th-chip[data-state='pass1'] { border-color: var(--berry); color: var(--berry); }
-  .train-home .th-chip[data-state='open'] { color: var(--cocoa); border-color: var(--cocoa-soft); }
-  .train-home .th-chip[data-state='locked'], .train-home .th-chip[data-state='none'] { opacity: 0.7; border-style: dashed; }
+  /* one chip per section: three dots (cards earned) and a line of text; a separate pill when retests wait */
+  .train-home .th-chip.one { gap: 0.55rem; color: var(--cocoa); border-color: var(--cocoa-soft); padding: 0 0.9rem 0 0.7rem; }
+  .train-home .th-chip.one .th-chip-txt { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.55rem; }
+  .train-home .th-chip.one .dots { display: inline-flex; gap: 3px; flex: none; }
+  .train-home .th-chip.one .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--cocoa-soft); }
+  .train-home .th-chip.one .dots i.on { background: #2e7d4f; border-color: #2e7d4f; }
+  .train-home .th-chip.one b { font-family: var(--font-display); font-weight: 600; }
+  .train-home .th-chip.one .soft { color: var(--cocoa-soft); }
+  .train-home .th-chip.one[data-state='done'] { background: #e6f4ea; border-color: #2e7d4f; color: #1f6b3a; }
+  .train-home .th-chip.one[data-state='new'] { border-style: dashed; color: var(--cocoa-soft); }
+  .train-home .th-retest { font-size: 0.85rem; min-height: 44px; display: inline-flex; align-items: center; padding: 0 0.8rem; border-radius: 999px;
+    background: #fdf1f3; color: var(--berry); font-weight: 600; text-decoration: none; border: 1.5px solid var(--berry); }
+  .train-home .th-retest[hidden] { display: none; }
   .train-home .th-paper { margin-top: 1.75rem; }
   .train-home .th-sub-soon { background: var(--plate); border-style: dashed; }
   .train-home .th-sub-soon .th-sub-name { color: var(--cocoa-soft); }

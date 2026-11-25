@@ -1,7 +1,8 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL, listGroup } from '../../../lib/train';
-import { TIER_MIN, triesPerDay, milestoneAt } from '../../../lib/store';
+import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL, listGroup, clozeSubs } from '../../../lib/train';
+import { TIER_NAME, MILESTONE_NAME, triesPerDay, milestoneAt } from '../../../lib/store';
+import { rarityLabel, TICK_SVG } from '../../../lib/section';
 
 export function getStaticPaths() {
   return subs.map((s) => ({ params: { school: s.school, sub: subSlug(s.id) }, props: { sub: s } }));
@@ -9,175 +10,476 @@ export function getStaticPaths() {
 const { sub } = Astro.props as { sub: (typeof subs)[number] };
 const tries = triesPerDay(sub.id);
 const school = SCHOOLS.find((x) => x.id === sub.school)!;
-// a one-pool sub-topic (ADR 0011): one pool of past-paper questions, the three card slots are milestones
+// a one-pool sub-topic (ADR 0011): one pool of past-paper questions, the three card slots are milestones ("stops")
 const pool = sub.pool ?? 0;
 const at = milestoneAt(pool);
+const cloze = clozeSubs.includes(sub.id);
+const units = cloze ? 'blanks' : 'questions';
 const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   const slot = slots[`${sub.id}|${k}`];
-  return { k, name: pool ? { b: 'Milestone 1', i: 'Milestone 2', c: 'Exam-ready' }[k] : { b: 'Basic', i: 'Intermediate', c: 'Competent' }[k],
-    slot, cookie: cookieBySlug.get(slot.slug)!, at: at[n],
-    count: pool || sub.count[k], hash: pool ? undefined : sub.hash[k], playable: pool ? true : sub.playable[k], min: TIER_MIN[k] };
+  const cookie = cookieBySlug.get(slot.slug)!;
+  return { k, name: pool ? MILESTONE_NAME[k] : TIER_NAME[k], slot, cookie, rarity: rarityLabel(cookie.rarity), at: at[n],
+    count: pool || sub.count[k], hash: pool ? undefined : sub.hash[k], playable: pool ? true : sub.playable[k] };
 });
 ---
-<Base title={`${sub.name} · ${school.name} training`} description={`Three tiers of PSLE ${school.name} practice on ${sub.name}.`}>
-  <section class="wrap sub-page" data-sub={sub.id} data-tries={tries} data-pool={String(pool)} data-pool-all={sub.poolAll ? String(sub.poolAll) : undefined}>
+<Base title={`${sub.name} · ${school.name} training`} description={`PSLE ${school.name} practice on ${sub.name}.`}>
+  <section class="wrap sub-page" data-sub={sub.id} data-tries={tries} data-pool={String(pool)} data-pool-all={sub.poolAll ? String(sub.poolAll) : undefined}
+    data-file={sub.file ?? undefined} data-units={units} data-cloze={cloze ? '1' : undefined} data-at={at.join(',')}>
     <p class="crumbs"><a href="/train/">Schools</a> › <a href={`/train/${school.id}/`}>{school.name}</a> › {listGroup(sub).topicName}</p>
     <h1>{sub.name}</h1>
-    {pool ? (
-      <p class="rules">{sub.poolAll ? `${sub.poolAll} real past-paper questions, easier ones first; the first ${pool} count toward your cards.` : `${pool} real past-paper questions, easier ones first.`} A question counts when you answer it right, the first time or when it comes back the next day. Count {at[0]} for your first card, {at[1]} for the second, and more than half ({at[2]}) to be Exam-ready. You can train up to {tries} times a day.</p>
-    ) : (
-      <p class="rules">Each quiz has up to 10 questions. Master every question in a tier to clear it and earn its card. A question is mastered when you answer it right the first time, or right again after its retests. You can try each tier up to {tries} times a day. Clear a tier to open the next one.</p>
-    )}
-    <p id="cap" class="cap" hidden>Done for today! You have reached today's training time. Come back tomorrow.</p>
-    {pool > 0 && (
-      <div class="pool-panel">
-        <p class="pool-count" aria-live="polite"><strong id="pool-n">0</strong> of {pool} past-paper questions counted</p>
-        <div class="pool-bar" role="img" aria-label="Progress toward the milestones">
-          <span class="pool-fill" style="width: 0%"></span>
-          {at.map((a, n) => <span class="pool-mark" style={`left: ${(100 * a) / pool}%`} title={tiers[n].name}></span>)}
-        </div>
-        <p class="pool-state" aria-live="polite"></p>
-        <a class="start pool-start" href={`/quiz/?sub=${encodeURIComponent(sub.id)}`}>Train with past papers</a>
-      </div>
-    )}
 
-    <div class="tiers">
-      {tiers.map((t) => (
-        <article class="tier-card" data-tier={t.k} data-count={String(t.count)} data-hash={t.hash} data-playable={String(t.playable)} data-slug={t.cookie.slug}>
-          <h2>{t.name}</h2>
-          <p class="tier-help">{pool ? `At ${t.at} of ${pool} counted.` : { b: 'The main ideas, step by step.', i: 'Trickier, mixed questions.', c: 'The hardest, exam-style questions.' }[t.k]}</p>
-          <a class="reward" href={`/cookie/${t.cookie.slug}/`} style={`--rc: var(--r-${t.cookie.rarity})`}>
-            <img src={t.cookie.image} alt="" width="96" height="96" loading="lazy" />
-            <span>
-              <span class="reward-label">{t.slot.dup ? 'Reward: +1 star for' : 'Reward card'}</span>
-              <span class="reward-name">{t.cookie.name}</span>
-              <span class="reward-rarity">{t.cookie.rarity.replace('-', ' ')}</span>
-            </span>
+    {pool > 0 ? (
+      <>
+        <div class="panel hero">
+          <div>
+            <p class="big"><span class="big-n" id="pool-n">0</span><span class="big-of">of <span id="pool-total">{pool}</span> {units} right</span></p>
+            <p class="next" id="next-line"></p>
+            <a class="go" id="go" href={`/quiz/?sub=${encodeURIComponent(sub.id)}`}>{cloze ? 'Fill a passage' : 'Start training'}</a>
+            <p class="go-note" id="go-note"></p>
+            <p class="cap" id="cap" role="status" hidden></p>
+          </div>
+          <dl class="stats" id="stats" hidden>
+            <div class="stat"><dt>{units} tried</dt><dd id="st-tried"></dd></div>
+            <div class="stat" id="st-due-box"><dt>to retest today</dt><dd id="st-due"></dd></div>
+            <div class="stat" id="st-pass-box" hidden><dt>passages done</dt><dd><span id="st-pass"></span> <small id="st-pass-of"></small></dd></div>
+          </dl>
+          <a class="hero-reward rw" id="first-card" hidden data-tier="b" data-slug={tiers[0].cookie.slug} data-rarity={tiers[0].cookie.rarity} href={`/cookie/${tiers[0].cookie.slug}/`} style={`--rc: var(--r-${tiers[0].cookie.rarity})`}>
+            <img class="rw-img" src={tiers[0].cookie.image} alt="" width="84" height="84" />
+            <span><small class="rw-label">Your first card, at {at[0]} right</small><b class="rw-name">{tiers[0].cookie.name}</b><small class="rw-rarity">{tiers[0].rarity}</small></span>
           </a>
-          {!pool && <p class="meta">{t.min} minutes · {t.count} questions in the bank</p>}
-          <p class="state" aria-live="polite">{t.playable ? '' : `Questions coming soon (needs at least ${MIN_POOL}).`}</p>
-          {t.playable && !pool && <a class="start" href={`/quiz/?sub=${encodeURIComponent(sub.id)}&tier=${t.k}`}>Start {t.name} quiz</a>}
-        </article>
-      ))}
-    </div>
+        </div>
+
+        <section class="panel track" aria-labelledby="tr-h">
+          <h2 id="tr-h">Your cards</h2>
+          <p class="track-sub">Real past-paper {units}, easier ones first. Each one you get right moves you along.</p>
+          <ol class="trail" id="trail">
+            {tiers.map((t) => (
+              <>
+                <li class="seg" aria-hidden="true"><span style="width:0%"></span></li>
+                <li class="stop rw" data-tier={t.k} data-name={t.name} data-slug={t.cookie.slug} data-rarity={t.cookie.rarity} style={`--rc: var(--r-${t.cookie.rarity})`}>
+                  <a class="stop-pic" href={`/cookie/${t.cookie.slug}/`} aria-label={`${t.name}: ${t.cookie.name}`}><img class="rw-img" src={t.cookie.image} alt="" width="84" height="84" loading="lazy" /></a>
+                  <span class="badge" hidden set:html={TICK_SVG} />
+                  <span class="stop-label">
+                    <span class="stop-name">{t.name}</span>
+                    <span class="stop-state">at {t.at} right</span>
+                    <span class="stop-card"><span class="rw-name">{t.cookie.name}</span> <i class="rw-rarity">{t.rarity}</i></span>
+                  </span>
+                </li>
+              </>
+            ))}
+          </ol>
+          <p class="after" id="after" hidden><b>All three cards earned.</b> Every {cloze ? 'blank' : 'question'} you get right still counts.</p>
+        </section>
+
+        <details class="how"><summary>How a {cloze ? 'blank' : 'question'} counts</summary>
+          <p>A {cloze ? 'blank' : 'question'} counts when you answer it right, the first time or when it comes back the next day. A wrong answer comes back the next day. {sub.poolAll ? `The first ${pool} of the ${sub.poolAll.toLocaleString('en')} past-paper ${units} count toward your cards.` : ''} You can train up to {tries} times a day.</p>
+        </details>
+      </>
+    ) : (
+      <>
+        <div class="panel hero" id="c-hero">
+          <div>
+            <p class="next-tag" id="c-tag">Next to train</p>
+            <p class="next-tier" id="c-name">Basic</p>
+            <div class="mastery" id="c-mastery">
+              <div class="mbar" role="img" id="c-bar"><span style="width:0%"></span></div>
+              <p id="c-mtext"></p>
+            </div>
+            <a class="go" id="go">Start quiz</a>
+            <p class="go-note" id="go-note"></p>
+            <p class="cap" id="cap" role="status" hidden></p>
+          </div>
+          <a class="hero-reward rw" id="c-reward" data-tier="b" data-slug={tiers[0].cookie.slug} data-rarity={tiers[0].cookie.rarity} href={`/cookie/${tiers[0].cookie.slug}/`} style={`--rc: var(--r-${tiers[0].cookie.rarity})`}>
+            <img class="rw-img" src={tiers[0].cookie.image} alt="" width="84" height="84" />
+            <span><small class="rw-label">Clear Basic for</small><b class="rw-name">{tiers[0].cookie.name}</b><small class="rw-rarity">{tiers[0].rarity}</small></span>
+          </a>
+        </div>
+
+        <h2 class="tiers-h">All three tiers</h2>
+        <div class="tiers">
+          {tiers.map((t) => (
+            <article class="tier rw" data-tier={t.k} data-slug={t.cookie.slug} data-count={String(t.count)} data-hash={t.hash} data-playable={String(t.playable)}
+              data-name={t.name} data-rarity={t.cookie.rarity} style={`--rc: var(--r-${t.cookie.rarity})`}>
+              <a class="t-pic" href={`/cookie/${t.cookie.slug}/`} aria-label={t.cookie.name}><img class="rw-img" src={t.cookie.image} alt="" width="56" height="56" loading="lazy" /></a>
+              <h3>{t.name}</h3>
+              <p class="t-card"><span class="rw-label">Reward card:</span> <span class="rw-name">{t.cookie.name}</span> <i class="rw-rarity">{t.rarity}</i></p>
+              <p class="t-state">{t.playable ? '' : `Questions coming soon (needs at least ${MIN_POOL}).`}</p>
+              {t.playable && <a class="t-act" hidden href={`/quiz/?sub=${encodeURIComponent(sub.id)}&tier=${t.k}`}>Practise again</a>}
+            </article>
+          ))}
+        </div>
+
+        <details class="how"><summary>How a tier clears</summary>
+          <p>Each quiz has up to 10 questions. A question is mastered when you answer it right the first time, or right again after its retests (1, 3 and 7 days after a wrong answer). Master every question in a tier to clear it and earn its card. Clear a tier to open the next one. You can try each tier up to {tries} times a day.</p>
+        </details>
+      </>
+    )}
   </section>
 </Base>
 
 <script>
-  import { load, tierState, tierOpen, triesUsedUp, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, poolProgress, milestoneReached, slotCard, type Tier } from '../../../lib/store';
-  import { rewardPreview, toEconomy, type EconomyData } from '../../../lib/crumbs';
+  import { load, tierState, triesUsedUp, attemptsLeft, dayBlock, blockMessage, minutesFor, actualReward, liveMastered, poolProgress,
+    slotCard, isDue, milestoneAt, MIN_POOL, TIERS, TIER_NAME, MILESTONE_NAME, type Tier } from '../../../lib/store';
+  import { sectionBoxes, sectionStarted, finishLine, previewSlots, nextGoal, goalFlags, tierFlags, trailFill, nextTier, retestNote, triesNote, tierBelow, rarityLabel, TICK_SVG } from '../../../lib/section';
+  import { esc } from '../../../lib/boldans';
+  import { toEconomy, type EconomyData } from '../../../lib/crumbs';
+
   const s = load();
   const root = document.querySelector<HTMLElement>('.sub-page')!;
   const sub = root.dataset.sub!;
-  /** A cleared slot never pays again: "Earned:" when it gave this card, "Cleared ✓" when it gave a star or a replacement
-   * (the economy fetch below swaps a replacement in); null for a slot not cleared. */
-  const paidLabel = (card: HTMLElement) => {
-    const t = card.dataset.tier as Tier;
-    if (!tierState(s, sub, t).cleared) return null;
-    return slotCard(s, sub, t) === card.dataset.slug ? 'Earned:' : 'Cleared ✓';
-  };
   const tries = Number(root.dataset.tries);
-  const reason = dayBlock(s, 'tier');
-  const playable = Object.fromEntries([...root.querySelectorAll<HTMLElement>('.tier-card')].map((c) => [c.dataset.tier, c.dataset.playable === 'true'])) as Record<Tier, boolean>;
-  const capEl = document.getElementById('cap')!;
-  capEl.hidden = !reason;
-  if (reason) capEl.textContent = blockMessage(reason);
   const pool = Number(root.dataset.pool) || 0;
-  if (pool) { // one pool (ADR 0011): the counted share, each milestone's state, one Train button
-    // syncMilestones stores the count and the live pool size on every slot; the build-time size may differ slightly
-    const pp = poolProgress(s, sub), total = pp.total || pool, counted = pp.counted;
-    document.getElementById('pool-n')!.textContent = String(counted);
-    root.querySelector('.pool-count')!.lastChild!.textContent = ` of ${total} past-paper questions counted`;
-    root.querySelector<HTMLElement>('.pool-fill')!.style.width = `${Math.min(100, (100 * counted) / total)}%`;
-    root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
-      card.querySelector('.reward-label')!.textContent = paidLabel(card) // cleared (before the pool, or by its milestone)
-        ?? (actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card');
-      if (milestoneReached(s, sub, card.dataset.tier as Tier)) { card.dataset.state = 'cleared'; card.querySelector('.state')!.textContent = 'Reached ✓'; }
-    });
-    const start = root.querySelector<HTMLAnchorElement>('.pool-start')!;
-    const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this topic today. Come back tomorrow.` : reason ? blockMessage(reason) : '';
-    root.querySelector('.pool-state')!.textContent = block || (milestoneReached(s, sub, 'c') ? (root.dataset.poolAll ? 'Exam-ready ✓ Keep practising: there are more past-paper questions to try.' : 'Exam-ready ✓ Keep practising to count them all.') : 'Ready when you are.');
-    if (block) { start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
+  const units = root.dataset.units!;
+  const cloze = !!root.dataset.cloze;
+  let at: number[] = (root.dataset.at ?? '').split(',').map(Number); // the stop thresholds, parsed once (the pool branch re-sets them from the stored total)
+  const reason = dayBlock(s, 'tier');
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const go = $<HTMLAnchorElement>('go');
+  const disable = (msg: string) => {
+    go.setAttribute('aria-disabled', 'true'); go.removeAttribute('href');
+    $('go-note').hidden = true;
+    const cap = $('cap'); cap.textContent = msg; cap.hidden = false;
+  };
+  /** Note under Start: retests (once known) and tries left. */
+  let triesText = '', retestText = '';
+  const setNote = () => {
+    const html = [retestText.replace(/(\d+ retests?)/, '<b>$1</b>'), esc(triesText)].filter(Boolean).join(' ');
+    $('go-note').innerHTML = html;
+  };
+
+  // ---------------------------------------------------------------- rewards (cards shown on stops, tiers and the hero)
+  // A cleared slot never pays again: it shows the card it gave. Otherwise the reward now: a new card or +1 star and Crumbs.
+  // `rarity` is the CSS token (data-rarity on the markup, "super-epic"); the label is made from it when painting.
+  // noCard: a cleared slot whose card this save cannot name (the clear paid a star, or the card is not known yet): shown as
+  // "Cleared ✓" with no card, never the slot card it did not give
+  type Shown = { slug: string; name: string; image: string; rarity: string; kind: 'earned' | 'card' | 'star'; replaces?: string; crumbs?: number; noCard?: boolean };
+  const rw = new Map<Tier, Shown>();
+  for (const el of root.querySelectorAll<HTMLElement>('.rw')) {
+    const t = el.dataset.tier as Tier;
+    if (rw.has(t)) continue;
+    const slug = el.dataset.slug!;
+    const cleared = tierState(s, sub, t).cleared;
+    rw.set(t, { slug, name: el.querySelector('.rw-name')!.textContent!, image: el.querySelector<HTMLImageElement>('.rw-img')!.getAttribute('src')!,
+      rarity: el.dataset.rarity!, kind: cleared ? 'earned' : actualReward(s, slug) === 'star' ? 'star' : 'card',
+      ...(cleared && slotCard(s, sub, t) !== slug ? { noCard: true } : {}) });
   }
-  if (!pool) root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
-    // the preview always matches the real reward: a star only if the card is already owned; a cleared tier never pays again
-    card.querySelector('.reward-label')!.textContent = paidLabel(card)
-      ?? (actualReward(s, card.dataset.slug!) === 'star' ? 'Reward: +1 star for' : 'Reward card');
-    if (card.dataset.playable !== 'true') return;
-    const t = card.dataset.tier as Tier;
-    const st = tierState(s, sub, t);
-    const start = card.querySelector<HTMLAnchorElement>('.start')!;
-    const msg = card.querySelector('.state')!;
-    card.querySelector('.meta')!.textContent = card.querySelector('.meta')!.textContent!.replace(/^\d+(\.\d+)? minutes/, `${minutesFor(s, t)} minutes`);
-    let block = '';
-    if (st.cleared) { msg.textContent = `Cleared ✓ Every question mastered. You can keep practising.`; card.dataset.state = 'cleared'; }
-    else if (!tierOpen(s, sub, t, playable)) block = `Clear ${t === 'i' ? 'Basic' : 'Intermediate'} first.`;
-    else { const n = card.dataset.count ? Number(card.dataset.count) : undefined; const m = liveMastered(st, n, card.dataset.hash); msg.textContent = m ? `${m} of ${n} questions mastered. Keep going!` : 'Ready when you are.'; }
-    if (!block && triesUsedUp(s, sub, t)) block = `You have had ${tries} tries at this tier today. Try again tomorrow.`;
-    if (!block && reason) block = blockMessage(reason);
-    if (block) { msg.textContent = block; start.setAttribute('aria-disabled', 'true'); start.removeAttribute('href'); }
-  });
+  /** Called once the economy data has arrived (the pool page re-words its "next" line then). */
+  let onEco: (() => void) | null = null;
+  const reward = (r: Shown) => (r.kind === 'star' ? `+1 star${r.crumbs ? ` and +${r.crumbs} Crumbs` : ''}` : '');
+  /** The small label above a card name: it depends on the element (tier row, hero) and on what a clear gives now. */
+  const labelFor = (el: HTMLElement, r: Shown, t: Tier) => {
+    if (el.classList.contains('tier')) {
+      return r.kind === 'earned' ? (r.noCard ? 'Cleared ✓' : 'Earned:') : r.kind === 'star' ? `Reward: ${reward(r)} for`
+        : r.replaces ? `Reward card (you already have ${r.replaces}):` : 'Reward card:';
+    }
+    if (el.id === 'first-card') {
+      const need = at[TIERS.indexOf(t)];
+      return r.kind === 'star' ? `Your first reward, ${reward(r)}, at ${need} right`
+        : r.replaces ? `Your first card, at ${need} right (you already have ${r.replaces})` : `Your first card, at ${need} right`;
+    }
+    const name = TIER_NAME[t]; // the classic hero
+    return r.kind === 'star' ? `Clear ${name} for ${reward(r)} on` : r.replaces ? `Clear ${name} for (you already have ${r.replaces})` : `Clear ${name} for`;
+  };
+  const paintCards = () => {
+    for (const el of root.querySelectorAll<HTMLElement>('.rw')) {
+      const t = el.dataset.tier as Tier;
+      const r = rw.get(t)!;
+      el.dataset.rarity = r.rarity;
+      el.style.setProperty('--rc', `var(--r-${r.rarity})`);
+      const img = el.querySelector<HTMLImageElement>('.rw-img')!;
+      if (img.getAttribute('src') !== r.image) img.src = r.image;
+      el.querySelectorAll<HTMLAnchorElement>('a[href^="/cookie/"]').forEach((a) => { a.href = `/cookie/${encodeURIComponent(r.slug)}/`; });
+      if (el instanceof HTMLAnchorElement) el.href = `/cookie/${encodeURIComponent(r.slug)}/`;
+      // the picture links carry their own label, fixed at build time for the slot card: keep it in step with the card shown
+      el.querySelector('.stop-pic, .t-pic')?.setAttribute('aria-label', el.classList.contains('stop') ? `${el.dataset.name}: ${r.name}` : r.name);
+      const none = r.kind === 'earned' && !!r.noCard;
+      el.querySelector('.rw-name')!.textContent = none ? '' : r.name;
+      el.querySelector('.rw-rarity')!.textContent = none ? '' : el.classList.contains('hero-reward') ? `${rarityLabel(r.rarity)} card` : rarityLabel(r.rarity);
+      img.style.visibility = none ? 'hidden' : '';
+      if (el.classList.contains('stop')) {
+        const i = TIERS.indexOf(t);
+        el.querySelector('.stop-state')!.textContent = el.hasAttribute('data-reached') ? (none ? 'Cleared ✓' : 'Earned') : `at ${at[i]} right`;
+      }
+      const label = el.querySelector('.rw-label');
+      if (label) label.textContent = labelFor(el, r, t);
+    }
+  };
+
+  if (pool) {
+    // ---------------------------------------------------------------- one pool (ADR 0011): the count, the stops, one Start
+    const pp = poolProgress(s, sub), total = pp.total || pool, n = pp.counted;
+    // thresholds from the same total as the count (the stored pool size), not the build's
+    at = milestoneAt(total);
+    root.dataset.at = at.join(',');
+    const poolAll = Number(root.dataset.poolAll) || 0;
+    $('pool-n').textContent = String(n);
+    $('pool-total').textContent = String(total);
+    root.querySelector('.big')!.setAttribute('aria-label', `${n} of ${total} ${units} right`);
+    // the stops reached: the 1st and 2nd count an old generated-tier clear, Exam-ready only the pool's own milestone
+    const reached = goalFlags(s, sub);
+    const goal = nextGoal(n, at, reached);
+    const nextLine = () => {
+      const el = $('next-line');
+      if (!goal) {
+        const left = Math.max(0, total - n);
+        el.innerHTML = `<b>Exam-ready.</b> You can keep practising: ${left} ${units} left to get right${poolAll > total ? `, and ${(poolAll - total).toLocaleString('en')} more past-paper ${units} after that.` : '.'}`;
+        return;
+      }
+      const t = TIERS[goal.i], r = rw.get(t)!, more = `<strong>${goal.need} more right</strong>`;
+      if (goal.need === 0) el.innerHTML = finishLine(t);
+      else if (n === 0 && goal.i === 0 && r.kind === 'card') el.innerHTML = `Get <strong>${at[0]} right</strong> for your first card. Easier ${units} come first.`;
+      else if (r.kind === 'card') el.innerHTML = `${more} for your ${goal.i < 2 ? MILESTONE_NAME[t] : 'Exam-ready card'}, ${esc(r.name)}.`;
+      else if (r.kind === 'star') el.innerHTML = `${more} for +1 star on ${esc(r.name)}.`;
+      else el.innerHTML = `${more} to reach ${MILESTONE_NAME[t]}.`; // the slot was cleared before: no card to name
+    };
+    onEco = nextLine;
+    // the trail: one bar from 0 to the Exam-ready stop
+    const fills = trailFill(n, at);
+    root.querySelectorAll<HTMLElement>('.trail .seg > span').forEach((el, i) => { el.style.width = `${fills[i]}%`; });
+    root.querySelectorAll<HTMLElement>('.trail .stop').forEach((el, i) => {
+      if (!reached[i]) return;
+      el.dataset.reached = ''; // paintCards words the state (Earned / Cleared) and keeps it in step with the card shown
+      el.querySelector<HTMLElement>('.badge')!.hidden = false;
+    });
+    $('trail').setAttribute('aria-label', `Cards: ${reached.filter(Boolean).length} of 3 earned`);
+    $('after').hidden = !reached.every(Boolean);
+    const started = sectionStarted(s, sub, n);
+    $('first-card').hidden = started;
+    root.querySelector('.hero')!.classList.toggle('has-side', !started);
+    nextLine();
+    paintCards();
+
+    const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this section today. Come back tomorrow.` : reason ? blockMessage(reason) : '';
+    if (block) disable(block);
+    else { triesText = triesNote(attemptsLeft(s, sub), tries); setNote(); }
+
+    // the small numbers are read from the save (store.ts poolDisplay wrote them when the last quiz ended): no fetch, no cache.
+    // A section not played since they were added has none, and its boxes stay hidden. "To retest" is checked against the
+    // live states, so a Daily Review that cleared a retest shows at once.
+    const box = sectionBoxes(s, sub);
+    if (started && box) {
+      $('st-tried').textContent = String(box.tried);
+      $('st-due-box').hidden = box.due === null;
+      if (box.due !== null) { $('st-due').textContent = String(box.due); $('st-due-box').classList.add(box.due ? 'hot' : 'quiet'); }
+      if (box.passages) { $('st-pass').textContent = String(box.passages.done); $('st-pass-of').textContent = `of ${box.passages.total}`; $('st-pass-box').hidden = false; }
+      const n3 = 1 + (box.due !== null ? 1 : 0) + (box.passages ? 1 : 0);
+      $('stats').style.setProperty('--n', String(n3));
+      $('stats').hidden = false;
+      root.querySelector('.hero')!.classList.add('has-side');
+      if (!block && box.due) {
+        // a cloze quiz is one whole passage, the one holding the first due blank; else up to 3 due retests come first
+        retestText = cloze ? 'Starts with a passage you have <b>to retest</b>.' : retestNote(box.due);
+        setNote();
+      }
+    }
+  } else {
+    // ---------------------------------------------------------------- classic three tiers
+    const cards = [...root.querySelectorAll<HTMLElement>('.tier')];
+    const playable = Object.fromEntries(cards.map((c) => [c.dataset.tier, c.dataset.playable === 'true'])) as Record<Tier, boolean>;
+    const { cleared, open } = tierFlags(s, sub, playable);
+    const mastered = (t: Tier) => {
+      const c = cards[TIERS.indexOf(t)];
+      const count = Number(c.dataset.count);
+      return { m: liveMastered(tierState(s, sub, t), count, c.dataset.hash), count };
+    };
+    const nt = nextTier(cleared, playable, open);
+    const lastPlayable = [...TIERS].reverse().find((t) => playable[t]);
+    const heroTier = nt ?? lastPlayable;
+    const href = (t: Tier) => `/quiz/?sub=${encodeURIComponent(sub)}&tier=${t}`;
+    for (const c of cards) {
+      const t = c.dataset.tier as Tier;
+      const state = c.querySelector('.t-state')!;
+      const act = c.querySelector<HTMLAnchorElement>('.t-act');
+      if (!playable[t]) { c.dataset.state = 'locked'; continue; }
+      const { m, count } = mastered(t);
+      if (cleared[t]) {
+        c.dataset.state = 'cleared';
+        state.innerHTML = `${TICK_SVG} Cleared. ${slotCard(s, sub, t) ? 'Card earned.' : 'Every question mastered.'}`;
+        if (act) act.hidden = false;
+      } else if (!open[t]) {
+        c.dataset.state = 'locked';
+        state.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.4"/></svg> Clear ${TIER_NAME[tierBelow(t, playable) ?? 'b']} first.`;
+      } else if (t === nt) {
+        c.dataset.state = 'next';
+        state.textContent = `${m ? `${m} of ${count} mastered. ` : ''}Next to train.`;
+      } else { // open, not next (the unlimited test account opens every tier)
+        c.dataset.state = 'open';
+        state.textContent = m ? `${m} of ${count} mastered.` : 'Open.';
+        if (act) { act.textContent = `Start ${TIER_NAME[t]}`; act.hidden = false; }
+      }
+      // a Start / Practise link is dead while the day's limit or this tier's tries are used up, with the reason in the row
+      const stop = triesUsedUp(s, sub, t) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason) : '';
+      if (stop && act && !act.hidden) { act.setAttribute('aria-disabled', 'true'); act.removeAttribute('href'); state.textContent = stop; }
+    }
+    // the hero: the tier to train next, its mastery, Start and its card
+    const heroReward = $('c-reward');
+    if (!heroTier) {
+      $('c-tag').textContent = 'Coming soon';
+      $('c-name').textContent = 'No questions yet';
+      $('c-mastery').hidden = true;
+      heroReward.hidden = true;
+      go.textContent = 'Start quiz';
+      disable(`Questions are coming soon (a tier needs at least ${MIN_POOL}).`);
+    } else {
+      const { m, count } = mastered(heroTier);
+      const allDone = !nt;
+      const name = TIER_NAME[heroTier];
+      $('c-tag').textContent = allDone ? 'Every tier cleared' : 'Next to train';
+      $('c-name').textContent = name;
+      // the real mastered count either way: a perfect first try clears a tier with most questions still unanswered
+      root.querySelector<HTMLElement>('#c-bar > span')!.style.width = `${count ? Math.min(100, (100 * m) / count) : 0}%`;
+      $('c-bar').setAttribute('aria-label', `${m} of ${count} mastered`);
+      $('c-mtext').innerHTML = allDone ? `<b>Cleared.</b> ${m} of ${count} questions mastered. You can keep practising.` : `<b>${m} of ${count}</b> questions mastered. Master all ${count} to clear it.`;
+      go.href = href(heroTier);
+      go.textContent = allDone ? `Practise ${name} again` : `Start ${name} quiz`;
+      // the hero card is the card of the tier to train; it moves with the tier (the reward map is keyed by tier)
+      heroReward.dataset.tier = heroTier;
+      heroReward.hidden = allDone; // its label is painted by paintCards (and again once the economy data arrives)
+      const block = triesUsedUp(s, sub, heroTier) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason) : '';
+      if (block) disable(block);
+      else {
+        triesText = [triesNote(attemptsLeft(s, sub, heroTier), tries), `About ${minutesFor(s, heroTier)} minutes.`].filter(Boolean).join(' ');
+        setNote();
+        // due retests from this section's generated bank (a public static file), after first paint; a failure hides the count
+        const file = root.dataset.file;
+        if (file && !allDone) requestAnimationFrame(() => setTimeout(() => {
+          fetch(`/data/quiz/${file}.json`).then((r) => (r.ok ? r.json() : null)).then((bank: { id: string; sub: string }[] | null) => {
+            if (!Array.isArray(bank)) return;
+            const cur = load();
+            const due = bank.filter((q) => q.sub === sub && isDue(cur, q.id, Date.now(), true)).length;
+            retestText = retestNote(due);
+            setNote();
+          }).catch(() => {});
+        }, 0));
+      }
+    }
+    paintCards();
+  }
 
   // The exact card a clear gives now (crumbs.ts rewardPreview, the same rule store.ts awards by): the slot card, or the
   // next unowned card of its rarity when the slot card is owned, or a star plus Crumbs when none is left.
   fetch('/data/economy.json').then((r) => (r.ok ? r.json() : null)).then((d: EconomyData | null) => {
     if (!d) return;
     const eco = toEconomy(d);
-    root.querySelectorAll<HTMLElement>('.tier-card').forEach((card) => {
-      const t = card.dataset.tier as Tier;
-      let slug: string, label: string;
-      if (tierState(s, sub, t).cleared) { // never pays again: show the card this slot gave (a replacement, say)
-        const got = slotCard(s, sub, t);
-        if (!got || got === card.dataset.slug) return; // its own card (labelled above) or a star: nothing to swap
-        slug = got; label = 'Earned:';
-      } else {
-        const p = rewardPreview(s, card.dataset.slug!, eco);
-        slug = p.slug;
-        label = p.kind === 'star' ? `Reward: +1 star and +${p.crumbs} Crumbs for`
-          : p.replaces ? `Reward card (you already have ${d.cards[p.replaces]?.name ?? 'this tier\'s card'})` : 'Reward card';
-      }
+    // in slot order, each unearned slot previewed with the cards of the earlier ones counted as owned (two slots of one
+    // rarity must not both promise the same replacement)
+    const order = TIERS.filter((t) => rw.has(t));
+    const prev = previewSlots(s, order.map((t) => ({ slug: rw.get(t)!.slug, earned: rw.get(t)!.kind === 'earned' })), eco);
+    order.forEach((t, k) => {
+      const r = rw.get(t)!, p = prev[k];
+      let slug: string;
+      if (!p) { const got = slotCard(s, sub, t); if (!got) return; if (got === r.slug) { r.noCard = false; return; } slug = got; }
+      else { slug = p.slug; r.kind = p.kind; r.crumbs = p.kind === 'star' ? p.crumbs : undefined; r.replaces = p.kind === 'card' && p.replaces ? (d.cards[p.replaces]?.name ?? r.name) : undefined; }
       const c = d.cards[slug];
       if (!c) return;
-      const a = card.querySelector<HTMLAnchorElement>('.reward')!;
-      a.href = `/cookie/${encodeURIComponent(slug)}/`;
-      a.style.setProperty('--rc', `var(--r-${c.rarity})`);
-      a.querySelector('img')!.src = c.image;
-      a.querySelector('.reward-name')!.textContent = c.name;
-      a.querySelector('.reward-rarity')!.textContent = c.rarity.replace('-', ' ');
-      a.querySelector('.reward-label')!.textContent = label;
+      Object.assign(r, { slug, name: c.name, image: c.image, rarity: c.rarity });
+      if (r.kind === 'earned') r.noCard = false;
     });
-  }).catch(() => { /* offline: the label above (card or star) still holds */ });
+    paintCards();
+    onEco?.();
+  }).catch(() => { /* offline: the cards above (slot card or star) still hold */ });
 </script>
 
-<style>
-  .sub-page { padding-block: 1.5rem 2rem; }
-  .crumbs { margin: 0; font-size: 0.95rem; color: var(--cocoa-soft); }
-  .rules { color: var(--cocoa-soft); max-width: 65ch; }
-  .cap { color: var(--berry); font-weight: 600; }
-  .tiers { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
-  .tier-card { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1rem 1.25rem; display: grid; gap: 0.5rem; align-content: start; }
-  .tier-card[data-playable='false'] { opacity: 0.65; }
-  .tier-card[data-state='cleared'] { border-color: #2e7d4f; }
-  .tier-card[data-state='cleared'] .state { color: #1f6b3a; font-weight: 700; }
-  .tier-card h2 { margin: 0; }
-  .tier-help { margin: 0; font-size: 0.9rem; color: var(--cocoa-soft); }
-  .reward { display: flex; gap: 0.75rem; align-items: center; color: var(--cocoa); text-decoration: none; }
-  .reward img { width: 72px; height: 72px; object-fit: contain; background: var(--plate); border-radius: 50%; box-shadow: 0 0 0 3px var(--rc); }
-  .reward > span { display: grid; }
-  .reward-label, .reward-rarity { font-size: 0.85rem; color: var(--cocoa-soft); }
-  .reward-rarity { text-transform: capitalize; } /* the label is a sentence (it can name the card you already have) */
-  .reward-name { font: 600 1.05rem var(--font-display); }
-  .meta, .state { margin: 0; font-size: 0.95rem; }
-  .state { color: var(--cocoa-soft); }
-  .start {
-    justify-self: start; font: 600 1rem var(--font-display); background: var(--berry); color: var(--berry-ink);
-    border-radius: var(--radius-control); padding: 0.5rem 1rem; min-height: 44px; display: inline-flex; align-items: center; text-decoration: none;
+<style is:global>
+  .sub-page { padding-block: 1.5rem 2rem; max-width: 62rem; }
+  .sub-page .crumbs { margin: 0; font-size: 0.95rem; color: var(--cocoa-soft); }
+  .sub-page h1 { font-size: clamp(1.75rem, 6vw, 2.4rem); margin: 0 0 1rem; }
+  .sub-page h2 { font-size: 1.2rem; }
+  .sub-page .panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1.1rem 1.25rem; }
+
+  /* hero: the count, the one action, then the small numbers */
+  .sub-page .hero { display: grid; gap: 1.1rem; box-shadow: var(--shadow-lift); }
+  @media (min-width: 760px) { .sub-page .hero { padding: 1.5rem 1.75rem; } .sub-page .hero.has-side { grid-template-columns: 1fr minmax(15rem, 19rem); align-items: center; } }
+  .sub-page .big { margin: 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 0.5rem; font-family: var(--font-display); line-height: 1; }
+  .sub-page .big-n { font-size: clamp(3.6rem, 16vw, 5rem); font-weight: 600; color: var(--berry); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .sub-page .big-of { font-size: 1.35rem; font-weight: 500; }
+  .sub-page .next { margin: 0.55rem 0 0; color: var(--cocoa); }
+  .sub-page .next strong, .sub-page .next b { font-family: var(--font-display); font-weight: 600; }
+  .sub-page .go { display: flex; justify-content: center; align-items: center; gap: 0.5rem; min-height: 56px; padding: 0 1.5rem; margin-top: 1rem;
+    border-radius: 14px; background: var(--berry); color: var(--berry-ink); font: 600 1.2rem var(--font-display); text-decoration: none;
+    box-shadow: 0 4px 0 #7d1f35; }
+  @media (min-width: 760px) { .sub-page .go { display: inline-flex; min-width: 17rem; } }
+  .sub-page .go:active { transform: translateY(2px); box-shadow: 0 2px 0 #7d1f35; }
+  .sub-page .go:focus-visible, .sub-page a:focus-visible, .sub-page summary:focus-visible { outline: 3px solid var(--berry); outline-offset: 2px; }
+  .sub-page .go[aria-disabled='true'] { background: var(--crust); color: var(--cocoa-soft); box-shadow: none; cursor: not-allowed; }
+  .sub-page .go-note { margin: 0.6rem 0 0; font-size: 0.95rem; color: var(--cocoa-soft); }
+  .sub-page .go-note:empty { display: none; }
+  .sub-page .go-note b { color: var(--cocoa); font-weight: 600; }
+  .sub-page .cap { margin: 0.75rem 0 0; padding: 0.6rem 0.8rem; border-radius: var(--radius-control); background: #fbe9ec; color: var(--berry); font: 500 1.05rem/1.35 var(--font-display); }
+  .sub-page [hidden] { display: none !important; }
+
+  .sub-page .stats { margin: 0; display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 0.5rem; }
+  @media (min-width: 760px) { .sub-page .stats { grid-template-columns: 1fr; gap: 0.6rem; } }
+  .sub-page .stat { background: var(--cream); border: 1px solid var(--crust); border-radius: var(--radius-control); padding: 0.55rem 0.7rem; display: grid; align-content: start; }
+  @media (min-width: 760px) { .sub-page .stat { grid-template-columns: auto 1fr; align-items: baseline; gap: 0.5rem; padding: 0.6rem 0.9rem; } }
+  .sub-page .stat dd { margin: 0; font: 600 1.6rem/1.1 var(--font-display); font-variant-numeric: tabular-nums; order: -1; }
+  .sub-page .stat dd small { font-size: 0.95rem; font-weight: 500; color: var(--cocoa-soft); }
+  .sub-page .stat dt { font-size: 0.85rem; line-height: 1.3; color: var(--cocoa-soft); }
+  .sub-page .stat.hot { border-color: var(--berry); background: #fdf1f3; }
+  .sub-page .stat.hot dd { color: var(--berry); }
+  .sub-page .stat.quiet dd { color: var(--cocoa-soft); }
+
+  /* the trail: three reward stops on one bar; 0 to Exam-ready, so the stops sit at the ends of the three segments */
+  .sub-page .track { margin-top: 1rem; }
+  .sub-page .track h2 { margin: 0 0 0.25rem; }
+  .sub-page .track-sub { margin: 0 0 1rem; font-size: 0.95rem; color: var(--cocoa-soft); }
+  .sub-page .trail { list-style: none; margin: 0; padding: 0 0 8.2rem; display: grid; grid-template-columns: 1fr 64px 1fr 64px 1fr 64px; align-items: center; }
+  .sub-page .seg { height: 16px; background: var(--plate); border: 1.5px solid var(--crust); border-radius: 999px; margin-inline: -4px; overflow: hidden; }
+  .sub-page .seg > span { display: block; height: 100%; background: var(--berry); }
+  .sub-page .stop { position: relative; width: 64px; height: 64px; z-index: 1; }
+  .sub-page .stop-pic { display: block; width: 100%; height: 100%; border-radius: 50%; }
+  .sub-page .stop img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 50%; background: var(--plate); box-shadow: 0 0 0 3px var(--rc), 0 0 0 6px var(--paper); }
+  .sub-page .stop .badge { position: absolute; right: -6px; top: -6px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+    background: #2e7d4f; color: #fff; box-shadow: 0 0 0 3px var(--paper); }
+  .sub-page .stop-label { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); width: 6.1rem; text-align: center; overflow-wrap: anywhere; display: grid; gap: 0.05rem; }
+  .sub-page .stop:last-child .stop-label { left: auto; right: -2px; transform: none; text-align: right; }
+  .sub-page .stop-name { font: 600 1rem/1.2 var(--font-display); }
+  .sub-page .stop-state { font-size: 0.85rem; line-height: 1.3; color: var(--cocoa-soft); }
+  .sub-page .stop[data-reached] .stop-state { color: #1f6b3a; font-weight: 700; }
+  .sub-page .stop-card { font-size: 0.8rem; line-height: 1.25; color: var(--cocoa); }
+  .sub-page .stop-card i { font-style: normal; color: var(--cocoa-soft); display: block; }
+  @media (min-width: 760px) {
+    .sub-page .trail { grid-template-columns: 1fr 84px 1fr 84px 1fr 84px; padding-bottom: 6.4rem; }
+    .sub-page .stop { width: 84px; height: 84px; }
+    .sub-page .stop-label { width: 11rem; }
+    .sub-page .stop-card { font-size: 0.9rem; }
   }
-  .start[aria-disabled='true'] { background: var(--crust); color: var(--cocoa-soft); cursor: not-allowed; }
-  .pool-panel { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 1rem 1.25rem; margin-bottom: 1rem; display: grid; gap: 0.6rem; }
-  .pool-count { margin: 0; font-size: 1.05rem; }
-  .pool-bar { position: relative; height: 14px; background: var(--plate); border-radius: 999px; overflow: visible; }
-  .pool-fill { position: absolute; inset: 0 auto 0 0; background: var(--berry); border-radius: 999px; }
-  .pool-mark { position: absolute; top: -4px; bottom: -4px; width: 3px; margin-left: -1.5px; background: var(--cocoa); border-radius: 2px; }
-  .pool-state { margin: 0; color: var(--cocoa-soft); }
+  .sub-page .after { margin: 0; padding-top: 0.25rem; font-size: 0.95rem; color: var(--cocoa-soft); }
+  .sub-page .after b { color: #1f6b3a; }
+
+  .sub-page .how { margin-top: 1rem; color: var(--cocoa-soft); font-size: 0.95rem; }
+  .sub-page .how summary { min-height: 44px; display: inline-flex; align-items: center; font: 600 1rem var(--font-display); color: var(--berry); cursor: pointer; }
+  .sub-page .how p { margin: 0.25rem 0 0; max-width: 65ch; }
+
+  /* classic three tiers */
+  .sub-page .next-tag { margin: 0; font: 600 0.95rem var(--font-display); color: var(--berry); }
+  .sub-page .next-tier { margin: 0.1rem 0 0; font: 600 clamp(2rem, 9vw, 2.75rem)/1.05 var(--font-display); }
+  .sub-page .mastery { margin-top: 0.75rem; display: grid; gap: 0.35rem; max-width: 26rem; }
+  .sub-page .mbar { height: 14px; border-radius: 999px; background: var(--plate); border: 1.5px solid var(--crust); overflow: hidden; }
+  .sub-page .mbar > span { display: block; height: 100%; background: var(--berry); }
+  .sub-page .mastery p { margin: 0; font-size: 0.95rem; }
+  .sub-page .hero-reward { display: flex; gap: 0.8rem; align-items: center; color: var(--cocoa); text-decoration: none; }
+  .sub-page .hero-reward img { width: 84px; height: 84px; object-fit: contain; border-radius: 50%; background: var(--plate); box-shadow: 0 0 0 3px var(--rc); flex: none; }
+  .sub-page .hero-reward > span { display: grid; }
+  .sub-page .hero-reward small { font-size: 0.85rem; color: var(--cocoa-soft); }
+  .sub-page .hero-reward b { font: 600 1.1rem var(--font-display); }
+  @media (min-width: 760px) { .sub-page #c-hero { grid-template-columns: 1fr minmax(15rem, 19rem); align-items: center; } }
+  .sub-page .tiers-h { margin: 1.5rem 0 0; }
+  .sub-page .tiers { margin-top: 1rem; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .sub-page .tier { background: var(--paper); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 0.9rem 1rem; display: grid; grid-template-columns: 56px 1fr; gap: 0.25rem 0.8rem; align-items: start; align-content: start; }
+  .sub-page .tier .t-pic { grid-row: 1 / 4; align-self: center; width: 56px; height: 56px; border-radius: 50%; }
+  .sub-page .tier img { display: block; width: 56px; height: 56px; object-fit: contain; border-radius: 50%; background: var(--plate); box-shadow: 0 0 0 3px var(--rc); }
+  .sub-page .tier h3 { margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem; }
+  .sub-page .tier .t-card { margin: 0; font-size: 0.9rem; }
+  .sub-page .tier .t-card i { font-style: normal; color: var(--cocoa-soft); }
+  .sub-page .tier .t-state { margin: 0; font-size: 0.9rem; color: var(--cocoa-soft); }
+  .sub-page .tier .t-state svg { vertical-align: -2px; }
+  .sub-page .tier[data-state='cleared'] { border-color: #2e7d4f; }
+  .sub-page .tier[data-state='cleared'] .t-state { color: #1f6b3a; font-weight: 700; }
+  .sub-page .tier .t-act[aria-disabled='true'] { background: var(--crust); color: var(--cocoa-soft); border-color: var(--crust); cursor: not-allowed; }
+  .sub-page .tier[data-state='next'] { border: 2px solid var(--berry); }
+  .sub-page .tier[data-state='next'] .t-state { color: var(--berry); font-weight: 600; }
+  .sub-page .tier[data-state='locked'] { background: var(--cream); border-style: dashed; }
+  .sub-page .tier .t-act { grid-column: 1 / -1; justify-self: start; min-height: 44px; display: inline-flex; align-items: center; padding: 0 1rem; margin-top: 0.3rem;
+    border: 1.5px solid var(--cocoa-soft); border-radius: var(--radius-control); color: var(--cocoa); font: 600 0.95rem var(--font-display); text-decoration: none; background: var(--paper); }
 </style>

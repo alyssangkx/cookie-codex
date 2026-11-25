@@ -94,10 +94,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
 <script>
   import { MIN_POOL,
-    load, save, answer, finishQuiz, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
+    load, save, answer, finishQuiz, mergeRetests, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
     QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, revisionDue, type Tier, type SaveV1, type QuizResult,
   PICK_MAX,
   } from '../../lib/store';
+  import { stopLine, stopWord, poolRightText } from '../../lib/section';
   import type { Visual, Figure } from '../../lib/train';
   import { pickTier, pickPool, pickPassage, pickReview, reviewPassages, pickPaper, MIXES } from '../../lib/pick';
   import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, underlineMarks, correctionHtml, type CxMark, type PpFig } from '../../lib/pastpaper';
@@ -828,10 +829,23 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    * POOL_CAP easier-first, not the quiz). Left out when the past-paper list failed to load (a partial pool would store a
    * wrong total). */
   function pools(): Record<string, string[]> {
+    return Object.fromEntries(Object.entries(poolRows()).map(([sub, qs]) => [sub, countingPool(qs)]));
+  }
+  function poolRows(): Record<string, { id: string; ord?: number | null; group?: string }[]> {
     if (!ppLoaded || ppFailed) return {};
     const by: Record<string, { id: string; ord?: number | null; group?: string }[]> = {};
     for (const q of ppAll) if (isPoolSub(q.sub)) (by[q.sub] ??= []).push(q as { id: string; ord?: number | null; group?: string });
-    return Object.fromEntries(Object.entries(by).map(([sub, qs]) => [sub, countingPool(qs)]));
+    return by;
+  }
+  /** For finishQuiz: sub -> {id: passage group} over each section's counting pool, for the passages-done display field. */
+  function poolGroups(): Record<string, Record<string, string>> {
+    const out: Record<string, Record<string, string>> = {};
+    for (const [sub, qs] of Object.entries(poolRows())) {
+      const counted = new Set(countingPool(qs));
+      const g = Object.fromEntries(qs.filter((q) => q.group && counted.has(q.id)).map((q) => [q.id, q.group!]));
+      if (Object.keys(g).length) out[sub] = g;
+    }
+    return out;
   }
   // ---- Grammar / Comprehension Cloze answered whole (owner, 24 Nov 2026): every blank of the passage typed in place, one
   // Submit marks them all (each blank still its own question: score, retests); the Grammar Cloze word box is a grid whose
@@ -1077,7 +1091,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       mode, sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' && !POOL ? tier : undefined,
       topics: mode === 'paper' ? paperTopics : undefined,
       score, total: quiz.length, ms, tags: wrongs.map((w) => w.tag),
-    }, rewardFor, Date.now(), tierIds(), undefined, { eco, retests: retestsPassed, pools: pools() });
+    }, rewardFor, Date.now(), tierIds(), undefined, { eco, retests: retestsPassed, pools: pools(), poolGroups: poolGroups() });
     if (mode === 'tier') s.last = { sub: subId, tier: POOL ? 'b' : tier };
     save(s);
     results(s, res, timeUp ? `<p>Time's up! ${unanswered.length} question${unanswered.length === 1 ? '' : 's'} not answered.</p>` : '');
@@ -1109,6 +1123,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const res = finishQuiz(s, {
       mode, topics: paperTopics, score, total: quiz.length, ms: paperUsed, tags: wrongs.map((w) => w.tag),
     }, rewardFor, now, {}, startedAt, { eco, retests, paperTopics: quiz.map((id) => byId.get(id)!.topic ?? '').filter(Boolean) }); // {}: papers never clear tiers (byId holds only paperOk items); startedAt = its open record's ts
+    mergeRetests(s, Object.fromEntries(quiz.map((id) => [id, byId.get(id)!.sub])), quiz); // papers never get the pool: only their retests reach the section's rq
     closeStalePapers(s, now);
     save(s);
     const b = blanks(picks);
@@ -1132,8 +1147,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (head && head.textContent !== 'Shop') head.textContent = `Shop · ${balanceOf(s)} Crumbs`;
     let html = `<div class="cheer-row">${cheerHtml(s)}${gain}</div>` + note;
     if (mode === 'tier' && POOL) {
-      const pp = poolProgress(s, subId), hit = res.newlyCleared.filter((x) => x.sub === subId).map((x) => x.tier === 'c' ? 'Exam-ready' : `${MILESTONE_NAME[x.tier]} reached`);
-      html += `<p class="verdict${hit.length || score >= 0.8 * quiz.length ? ' good' : ''}">${hit.length ? `${hit.join(' and ')}! ` : ''}${pp.counted} of ${pp.total || sub.pool} past-paper questions counted. Missed ones come back the next day.</p>`;
+      const pp = poolProgress(s, subId), hit = res.newlyCleared.filter((x) => x.sub === subId).map((x) => stopLine(x.tier, x.reward, x.reward ? meta.cards[x.reward.slug]?.name : '')); // worded by what was given: a card, a star, or nothing (the slot was paid before)
+      html += `<p class="verdict${hit.length || score >= 0.8 * quiz.length ? ' good' : ''}">${hit.length ? `${hit.join(' and ')}! ` : ''}${poolRightText(pp.counted, pp.total || sub.pool, CLOZE.has(subId))}. Missed ones come back the next day.</p>`;
     } else if (mode === 'tier') {
       const st = tierState(s, subId, tier);
       html += res.autoPromoted ? `<p class="verdict good">Perfect first try! ${{ b: 'Basic', i: 'Intermediate', c: 'Competent' }[tier] ?? 'Tier'} cleared, and the next tier is open.</p>`
@@ -1165,7 +1180,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     for (const cl of res.newlyCleared) {
       if (!cl.reward) continue;
       const pool = !!meta.subs[cl.sub]?.pool;
-      html += won(cl.reward, pool ? `<em>${cl.tier === 'c' ? 'Exam-ready' : MILESTONE_NAME[cl.tier] + ' reached'}: ${esc(meta.subs[cl.sub].name)}!</em>` : '');
+      html += won(cl.reward, pool ? `<em>${MILESTONE_NAME[cl.tier]} ${stopWord(cl.reward)}: ${esc(meta.subs[cl.sub].name)}!</em>` : '');
     }
     for (const ac of res.achieved ?? []) {
       html += won(ac.reward, ac.kind === 'legendary' ? (ac.subject ? '<em>Subject mastered: every topic cleared at Competent!</em>' : '<em>Top paper result (AL1 or AL2)!</em>')

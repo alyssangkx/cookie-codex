@@ -1,0 +1,152 @@
+{
+  "subject": "english",
+  "paper": "Paper 2 Language Use and Comprehension",
+  "totalMarks": 90,
+  "minutes": 110,
+  "source": "site/src/data/syllabus/english.json paperFormat (SEAB 2026; 2027 not confirmed)",
+  "startingMarks": 60,
+  "sections": [
+    {
+      "id": "eng-m-grammar",
+      "booklet": "A",
+      "subTopics": [
+        "eng-grammar-mcq"
+      ],
+      "title": "Grammar",
+      "instruction": "For each question, choose the word or phrase that best completes the sentence.",
+      "questions": 10,
+      "marksPerQuestion": 1,
+      "wholeSets": false,
+      "answerKind": "mcq",
+      "available": true
+    },
+    {
+      "id": "eng-m-vocab",
+      "booklet": "A",
+      "subTopics": [
+        "eng-vocab-mcq"
+      ],
+      "title": "Vocabulary",
+      "instruction": "For each question, choose the word or phrase closest in meaning to the underlined word, or that best fits the sentence.",
+      "questions": 5,
+      "marksPerQuestion": 1,
+      "wholeSets": false,
+      "answerKind": "mcq",
+      "available": true
+    },
+    {
+      "id": "eng-m-vocab-cloze",
+      "booklet": "A",
+      "subTopics": [
+        "eng-vocab-cloze"
+      ],
+      "title": "Vocabulary Cloze",
+      "instruction": "Read the passage. For each numbered blank, choose the word that best fits.",
+      "questions": 5,
+      "marksPerQuestion": 1,
+      "wholeSets": true,
+      "blanksPerSet": 5,
+      "answerKind": "mcq",
+      "available": true,
+      "note": "Thin supply (11 sets in the data): a child will meet repeats sooner. Draw it, but fall back to any set already seen."
+    },
+    {
+      "id": "eng-m-visual",
+      "booklet": "A",
+      "subTopics": [
+        "eng-visual-text"
+      ],
+      "title": "Visual Text Comprehension",
+      "instruction": "Study the notice, poster or message, then answer the questions.",
+      "questions": 5,
+      "marksPerQuestion": 1,
+      "wholeSets": true,
+      "blanksPerSet": 5,
+      "answerKind": "mcq",
+      "available": true
+    },
+    {
+      "id": "eng-m-grammar-cloze",
+      "booklet": "B",
+      "subTopics": [
+        "eng-grammar-cloze"
+      ],
+      "title": "Grammar Cloze",
+      "instruction": "Fill in every blank in the passage with one word. Write each answer in its box.",
+      "questions": 10,
+      "marksPerQuestion": 1,
+      "wholeSets": true,
+      "blanksPerSet": 10,
+      "answerKind": "cloze-whole-passage",
+      "available": true
+    },
+    {
+      "id": "eng-m-editing",
+      "booklet": "B",
+      "subTopics": [
+        "eng-editing"
+      ],
+      "title": "Editing for Spelling and Grammar",
+      "instruction": "Find the mistakes in the passage and write the correction for each.",
+      "questions": 10,
+      "marksPerQuestion": 1,
+      "wholeSets": true,
+      "answerKind": "typed",
+      "available": false,
+      "reason": "No Editing questions are in the bank yet; the section is open-answer and waits for the Editing pipeline."
+    },
+    {
+      "id": "eng-m-comp-cloze",
+      "booklet": "B",
+      "subTopics": [
+        "eng-comp-cloze"
+      ],
+      "title": "Comprehension Cloze",
+      "instruction": "Fill in every blank in the passage with one word. Write each answer in its box.",
+      "questions": 15,
+      "marksPerQuestion": 1,
+      "wholeSets": true,
+      "blanksPerSet": 15,
+      "answerKind": "cloze-whole-passage",
+      "available": true
+    },
+    {
+      "id": "eng-m-synthesis",
+      "booklet": "B",
+      "subTopics": [
+        "eng-synthesis"
+      ],
+      "title": "Synthesis and Transformation",
+      "instruction": "Rewrite each sentence as instructed. Keep the meaning the same.",
+      "questions": 5,
+      "marksPerQuestion": 2,
+      "wholeSets": false,
+      "answerKind": "typed",
+      "available": true,
+      "note": "Typed whole-sentence answers; marks per question 2 (all or nothing in the first build; partial marks are a later question)."
+    },
+    {
+      "id": "eng-m-comp-oe",
+      "booklet": "B",
+      "subTopics": [
+        "eng-comp-oe"
+      ],
+      "title": "Comprehension (Open-ended)",
+      "instruction": "Read the passage and answer each question in complete sentences.",
+      "questions": 10,
+      "marksPerQuestion": 2,
+      "wholeSets": true,
+      "answerKind": "open-ended",
+      "available": false,
+      "reason": "Open-ended answers need a marker (a teacher or a checked model); the site cannot mark them yet."
+    }
+  ],
+  "_unverified": [
+    "2027 paper format: the numbers are SEAB 2026 as recorded in the syllabus file.",
+    "blanksPerSet for Vocabulary Cloze (5), Visual Text (5), Grammar Cloze (10) and Comprehension Cloze (15) follow the paper format; the real sets in the bank were not counted, so a set may have fewer or more blanks. Step 2 must count them.",
+    "Wording of the instruction lines is written for children and is not copied from a paper.",
+    "Vocabulary Cloze supply is 11 sets (Phase 1 report); not re-counted.",
+    "Synthesis partial marks (1 of 2) are not decided; the first build marks all or nothing.",
+    "Comprehension OE: 10 questions of 2 marks each is from the syllabus file; marks per question vary in real papers."
+  ]
+}

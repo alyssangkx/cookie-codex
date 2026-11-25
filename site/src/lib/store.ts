@@ -16,7 +16,11 @@ export const TIER_NAME: Record<Tier, string> = { b: 'Basic', i: 'Intermediate', 
 // mastered/total are the last count seen when a quiz ended; hash is tierHash() of the ids they were counted against
 // (optional, added 20 Nov 2026 with no schema bump; older states lack it and fall back to the size check).
 export type TierState = { passes: string[]; scores: number[]; best: number; cleared: boolean; mastered?: number; total?: number; hash?: string;
-  pool?: true; ms?: true }; // one-pool slots (ADR 0011): pool = counts are past-paper counts; ms = milestone reached on the pool
+  pool?: true; ms?: true; // one-pool slots (ADR 0011): pool = counts are past-paper counts; ms = milestone reached on the pool
+  // Display fields for the section and school pages, written at quiz end on the section's Basic slot only (the pages never
+  // fetch a pool list): tried = ids of the pool with a question state; rq = ids in retest (s > 0), at most RQ_MAX; pd/pt =
+  // passages done / in the pool (sections whose ids have groups). Optional, no schema bump: older saves lack them.
+  tried?: number; rq?: string[]; pd?: number; pt?: number };
 // s: 0 retired, 1-3 retest step (due in 1, 3, 7 days); w: times answered wrong
 // a: the option text picked on the latest wrong answer, '' when it was not answered because time ran out, LEFT_BLANK
 // when it was left blank on purpose (a paper submitted with blanks, 20 Nov 2026); optional,
@@ -587,7 +591,7 @@ export function finishQuiz(
     { test, note: a.mode === 'tier' ? `${a.sub}|${a.tier ?? 'pool'}` : a.mode === 'paper' ? (a.topics ?? []).join(',').slice(0, 120) : undefined });
   earn(s, (opts.retests ?? 0) * RETEST_CRUMBS, 'retest', now, { test });
   const newlyCleared = [...early, ...syncTiers(s, tierIds, rewardFor, now, opts.eco, test),
-    ...syncMilestones(s, opts.pools ?? {}, rewardFor, now, opts.eco, test)];
+    ...syncMilestones(s, opts.pools ?? {}, rewardFor, now, opts.eco, test, opts.poolGroups)];
   const mine = newlyCleared.filter((x) => x.sub === a.sub && (a.tier ? x.tier === a.tier : !!opts.pools?.[x.sub])).reverse();
   const own = mine.find((x) => !x.again); // a pool milestone on a slot paid before is announced, but is not this quiz's clear
   if (own) { cleared = true; reward = own.reward; }
@@ -686,7 +690,8 @@ export function syncTiers(
 /** Milestones of a one-pool sub-topic with n past-paper questions (ADR 0011, owner 21 Nov 2026): a sixth, a third, and a
  *  majority (over half) = competency, the "Exam-ready" badge. Milestone k uses the sub-topic's k-th card slot (b, i, c). */
 export const milestoneAt = (n: number): [number, number, number] => [Math.ceil(n / 6), Math.ceil(n / 3), Math.floor(n / 2) + 1];
-export const MILESTONE_NAME: Record<Tier, string> = { b: 'Milestone 1', i: 'Milestone 2', c: 'Exam-ready' };
+// display names only (owner, 24 Nov 2026: "1st card", "2nd card", "Exam-ready"); nothing stores them, the slots stay b, i, c
+export const MILESTONE_NAME: Record<Tier, string> = { b: '1st card', i: '2nd card', c: 'Exam-ready' };
 
 /**
  * One-pool sub-topics ("sub" -> its past-paper question ids, never generated ones): count the retired (counted) ones,
@@ -695,6 +700,7 @@ export const MILESTONE_NAME: Record<Tier, string> = { b: 'Milestone 1', i: 'Mile
  */
 export function syncMilestones(
   s: SaveV1, pools: Record<string, string[]>, rewardFor: RewardFor, now = Date.now(), eco?: Economy, test = false,
+  groups: Record<string, Record<string, string>> = {},
 ): QuizResult['newlyCleared'] {
   const out: QuizResult['newlyCleared'] = [];
   for (const [sub, ids] of Object.entries(pools)) {
@@ -715,6 +721,51 @@ export function syncMilestones(
         out.push(st.cleared ? { sub, tier: t, reward: null, again: true } : { sub, tier: t, reward: award(s, sub, t, rewardFor, now, eco, test) });
       }
     });
+    const slot = (s.progress[sub] ??= {}).b!; // after the loop: the slot is stored now
+    Object.assign(slot, poolDisplay(s, ids, groups[sub]));
+    if (!groups[sub] || !Object.keys(groups[sub]).length) { delete slot.pd; delete slot.pt; } // no groups now: an older passage count is stale
+  }
+  return out;
+}
+
+export const RQ_MAX = 60;
+/** The RQ_MAX retest ids that fall due first (ties keep input order), so later-but-due ids are never crowded out. */
+const earliestDue = (s: SaveV1, ids: string[]) => [...ids].sort((a, b) => s.questions[a].due - s.questions[b].due).slice(0, RQ_MAX);
+/**
+ * Quiz end in any mode when the full pool was not loaded (a paper): merge the asked ids now in retest into the stored `rq`
+ * of each pool section whose display slot exists. Stored ids no longer in retest are dropped. tried/pd/pt stay as they were.
+ */
+export function mergeRetests(s: SaveV1, subOf: Record<string, string>, asked: string[]): void {
+  const by = new Map<string, string[]>();
+  // only past-paper ids: a pool quiz never asks a generated question, so one in `rq` would be a retest that never comes
+  for (const id of asked) { const sub = subOf[id]; if (sub && id.startsWith('pp-') && s.questions[id]?.s > 0) (by.get(sub) ?? by.set(sub, []).get(sub)!).push(id); }
+  for (const [sub, ids] of by) {
+    const slot = s.progress[sub]?.b;
+    if (!slot?.pool) continue;
+    const keep = (slot.rq ?? []).filter((id) => s.questions[id]?.s > 0);
+    slot.rq = earliestDue(s, [...new Set([...keep, ...ids])]);
+  }
+}
+/**
+ * The display fields of a pool section (see TierState): `tried`, `rq` (ids currently in retest, at most RQ_MAX) and, when
+ * the ids have groups, `pd` / `pt` (a passage is done when every blank of it is retired). Pure; syncMilestones stores it.
+ */
+export function poolDisplay(s: SaveV1, ids: string[], groups?: Record<string, string>): Pick<TierState, 'tried' | 'rq' | 'pd' | 'pt'> {
+  let tried = 0;
+  const due: string[] = [];
+  for (const id of new Set(ids)) {
+    const q = s.questions[id];
+    if (!q) continue;
+    tried++;
+    if (q.s > 0) due.push(id);
+  }
+  const rq = earliestDue(s, due);
+  const out: Pick<TierState, 'tried' | 'rq' | 'pd' | 'pt'> = { tried, rq };
+  const by = new Map<string, string[]>();
+  for (const id of ids) { const g = groups?.[id]; if (g) (by.get(g) ?? by.set(g, []).get(g)!).push(id); }
+  if (by.size) {
+    out.pt = by.size;
+    out.pd = [...by.values()].filter((m) => m.every((id) => isRetired(s, id))).length;
   }
   return out;
 }
@@ -735,7 +786,7 @@ type RewardFor = (sub: string, t: Tier) => { slug: string; dup: boolean } | unde
  * the economy. retests: retest steps passed in this quiz (answer() returned true). test: the unlimited test account
  * (defaults to isUnlimited()); its Crumbs are flagged. paperTopics: a paper's question topics, one per question asked
  * (the Legendary counts distinct ones; the topics the child picked may not all have been drawn). */
-export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean; paperTopics?: string[]; pools?: Record<string, string[]> };
+export type FinishOpts = { eco?: Economy; retests?: number; test?: boolean; paperTopics?: string[]; pools?: Record<string, string[]>; poolGroups?: Record<string, Record<string, string>> };
 export const RETEST_CRUMBS = 1, GOAL_CRUMBS = 3, WEEK_CRUMBS = 10;
 
 /**
