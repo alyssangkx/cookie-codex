@@ -43,7 +43,7 @@
 Ids: pp-<sha1(source question id)[:10]>. The sub-topic is NOT part of the id, so a re-tag keeps saves and retests.
 Nothing here prints question text, options or answers: counts and ids only.
 """
-import argparse, collections, hashlib, json, os, re, sys
+import argparse, collections, difflib, hashlib, json, os, re, sys, tempfile
 from pathlib import Path
 
 import cropcheck  # fig_ok, pack_stamp: the per-figure pass rule and pack identity are shared
@@ -380,6 +380,7 @@ def select(a):
         # still the one the verdict was made on (key_old).
         consensus = {c["id"]: c for c in jl(Path(a.blind) / "consensus" / f"{a.subject}-{y}.jsonl")}
         merged = jl(base / "merged.jsonl")
+        ocrt = ocr_texts(base / "questions.jsonl") if a.subject in ("science", "maths") else {}
         # repair.py (server re-read, checked against the first read): a Chinese stem with its underlined word marked 「」
         merged, stemfix = apply_stemfix(merged, jl(base / "stemfix.jsonl"))
         ocrk = ocr_keys(base) if a.ocr_keys else {}
@@ -458,7 +459,7 @@ def select(a):
                 reason = "quarantined"
             elif pp_id(q["id"]) in hold:
                 reason = "held-by-review"
-                held_keys.add(held_key(row_stem(a, q, qn, opts), [tex_to_text(o) for o in strip_opts(opts)]))
+                held_keys.add(held_key(row_stem(a, q, qn, opts, ocrt.get(q["id"])), [tex_to_text(o) for o in strip_opts(opts)]))
             elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and cv["kind"] == "confirm" and cv.get("unsure")):
                 reason = "grid-uncertain"  # lifted when outside models unanimously confirm the printed key (imgpack -unsure packs)
             elif conflict:
@@ -532,7 +533,7 @@ def select(a):
                 "id": pp_id(q["id"]), "src_id": q["id"], "subject": a.subject, "subtopic": t["st"],
                 "level": tier(t["difficulty"], q.get("qno"), last[(q.get("paper"), q.get("part"))], a.tier_rule),
                 "difficulty": t["difficulty"], "pattern": t.get("pat"),
-                "stem": row_stem(a, q, qn, opts),
+                "stem": row_stem(a, q, qn, opts, ocrt.get(q["id"])),
                 "options": [tex_to_text(o) for o in strip_opts(opts)], "answer": int(k) - 1,
                 **({"grp": set_id(q, pk["suffix"]), "seq": qn, "pages": q["pages"], "pages_dir": str(base / "pages")} if vt else {}),
                 "answer_src": src, "crops": q["_crops"], "year": y, "school": q.get("school"), "paper": q.get("paper"),
@@ -549,6 +550,9 @@ def select(a):
             (r["stem"], *r["options"]), left = unwrap_dollars([r["stem"], *r["options"]])
             if left:
                 print(f"WARN dollar marks left in {r['id']}: {left}")
+    pq = picture_no_question(rows)
+    if pq:
+        print(f"WARN {len(pq)} picture questions have no question sentence in the stem: {', '.join(pq[:8])}")
     for r, why in held_copies(rows, held_keys):
         rejects.append({"id": r["src_id"], "reason": why})
         R[why] += 1
@@ -1058,8 +1062,205 @@ def vc_judge_ok(src_id, k):
     return k is not None and str(_VCJ.get(src_id)) == str(k)
 
 
-def row_stem(a, q, qn, opts):
-    """The stem a selected row stores (also the held-copy key, so a held question and its copies compare alike)."""
+# ---- the question sentence the page reader dropped (picture questions) -------------------------------------------------
+# The page reader (vlm_read.py) returns only the text above a figure; the sentence printed after the figure is lost, but
+# the step-A OCR text of the same question (questions.jsonl `text`) still has it. row_stem (the one place the stored stem
+# is made) appends it when the stem holds no question sentence. Guards: see restore_question.
+PS_Q = r"(?:Which|What|How|Why|Where|When|Who|Whose|Based on|According to|Name|State)"
+PS_QWORD = re.compile(r"\b" + PS_Q + r"\b|\bwhich\b|\bwhat\b", re.I)
+PS_QRE = re.compile(r"(?:^|(?<=[\s.?!:|\-]))(" + PS_Q + r"\b[^?]{2,300}?\?)")  # a question starting with a question word
+PS_IMPRE = re.compile(r"(?:^|(?<=[\s.?!:|]))((?:Name|State|Based on)\b[^?.]{6,200}?[.:])(?=\s|$)")  # "Name two ..." with no "?"
+PS_FOOT = re.compile(r"(Preliminary|Examination|Assessment|Page \d+|Go on to|Turn over|\bP6\b|\bP\.6|Primary 6|Booklet|Paper [12]|"
+                     r"\bScore\b|Total:)", re.I)
+PS_NEXTQ = re.compile(r"^\s*\d{1,2}\s*[.)]\s+\S")  # "14. Tom bought", "8. 3 apples cost": the next question starts (stops early rather than late)
+PS_NOQ = re.compile(r"\?|_{2,}|\b(which|what|how|who|whom|whose|why|where|when|find|express|round|write|simplify|calculate|arrange|"
+                    r"identify|state|name|complete|give|choose|select|circle|determine|estimate|compare|list|order|work out|solve|"
+                    r"convert|evaluate|fill|tick|match|explain|describe|suggest|predict|decide|show that|subtract|add|multiply|"
+                    r"divide|use|using|form|measure|draw|study|look|read|observe|is/are)\b|statement\(s\)|[=÷×+\-]\s*$",
+                    re.I)  # the same words as the lost-text audit's rule j1
+
+
+def ocr_texts(path) -> dict:
+    """id -> step-A OCR text from questions.jsonl; a missing file, a bad line or a row without an id is skipped (the OCR
+    text only adds a lost question sentence: it must never stop a select)."""
+    out = {}
+    try:
+        lines = open(path, encoding="utf-8").read().splitlines()
+    except OSError:
+        return out
+    for x in lines:
+        try:
+            r = json.loads(x)
+        except ValueError:
+            continue
+        if isinstance(r, dict) and r.get("id"):
+            out[r["id"]] = r.get("text") or ""
+    return out
+
+
+def no_question(stem: str) -> bool:
+    """True when a stem is a finished statement with no question, blank or instruction (the question sentence was lost:
+    the audit's rule j1). Pure (selftest)."""
+    s = (stem or "").strip()
+    return bool(s) and not PS_NOQ.search(s) and bool(re.search(r"[.:!]\s*$|[.!]\s*[\"”’]$", s))
+
+
+def picture_no_question(rows) -> list:
+    """Ids of maths/science rows with a picture whose stem holds no question sentence (the fault class restore_question
+    mends; a WARN at every upload, not a FAIL: some of these ask their question inside the picture). Pure (selftest)."""
+    return [r["id"] for r in rows if r.get("subject") in ("science", "maths") and r.get("crops") and no_question(r["stem"])]
+
+
+def _pn(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
+
+
+PS_OPT = re.compile(r"^\s*[\(\{\[]\s*[1-4lI]\s*[\)\}\]]|^\s*[1-4]\s*[\).]\s+\S|^\s*[\(\{\[]?[A-D][\)\}\]]\s")
+
+
+def _ps_is_opt(line: str, opts) -> bool:
+    """An option marker ("(1)", "{1)", "1)", "A)") or the first option's own words start this OCR line."""
+    o0 = _pn(opts[0])[:14] if opts else ""
+    return bool(PS_OPT.match(line) or (len(o0) >= 6 and _pn(line).startswith(o0)))
+
+
+def _ps_locate(stem: str, lines: list):
+    """Index of the OCR line where the stem ends (its last 6 words, fuzzily: OCR misreads a letter or two), else None."""
+    words = _pn(stem).split()
+    if len(words) < 4:
+        return None
+    key = " ".join(words[-6:])
+    acc, near = "", []
+    for i, l in enumerate(lines):
+        acc = (acc + " " + _pn(l)).strip()
+        if key in acc:
+            return i
+        r = difflib.SequenceMatcher(None, acc[-len(key):], key).ratio()
+        if r >= 0.88:
+            near.append((r, i, acc[-len(key):]))
+    if not near:
+        return None
+    best = max(near, key=lambda x: (x[0], -x[1]))
+    # two different places nearly as close: the stem's end is ambiguous (a repeated phrase), so no guess
+    return None if any(t != best[2] and r >= best[0] - 0.03 for r, _, t in near) else best[1]
+
+
+def _ps_sentence_like(s: str, n: int) -> bool:
+    s = s.strip()
+    return (len(s.split()) >= n and sum(c.isalpha() or c == " " for c in s) / max(1, len(s)) > 0.85
+            and s[:1].isalpha() and s[:1].isupper())
+
+
+# a sentence ending in one of these goes on into its options, whatever they start with ("... the same state at" + "35 °C")
+PS_CONT = {"that", "because", "if", "when", "at", "in", "on", "by", "to", "of", "from", "for", "is", "are", "was", "were", "be",
+           "about", "than", "after", "before", "until", "with", "between", "into"}
+OCR_PAIRS = {("l", "i"), ("i", "l"), ("1", "l"), ("l", "1"), ("0", "o"), ("o", "0"), ("c", "e"), ("e", "c")}  # letters OCR swaps
+
+
+def _ps_root(w: str) -> str:
+    return re.sub(r"(ing|ed|es|est|er|ly|s|d)$", "", w)
+
+
+def _ps_typos(sent: str, stem: str) -> str:
+    """An OCR misreading in the new sentence is mended only when the reader's own text spells the word: "moming" -> "morning"."""
+    known = {w.lower(): w for w in re.findall(r"[A-Za-z]{4,}", stem)}
+    def fix(m):
+        w = m.group(0)
+        if w.lower() in known:
+            return w
+        lw, cands = w.lower(), []
+        for k, v in known.items():
+            if _ps_root(k) == _ps_root(lw):
+                continue  # a word form, not a misreading ("changes" in the question, "changed" in the stem)
+            diff = [(x, y) for x, y in zip(lw, k) if x != y]
+            r = difflib.SequenceMatcher(None, lw, k).ratio()
+            if len(k) == len(w) and (r >= 0.85 or (len(diff) == 1 and diff[0] in OCR_PAIRS)):
+                cands.append((r, v))
+            elif k.replace("rn", "m") == lw.replace("rn", "m"):
+                cands.append((r, v))
+        if not cands:
+            return w
+        v = max(cands, key=lambda c: c[0])[1]  # the closest, not the first in the stem
+        return v if w[:1].islower() else v[:1].upper() + v[1:]
+    return re.sub(r"[A-Za-z]{4,}", fix, sent)
+
+
+def restore_question(stem: str, ocr: str, opts) -> tuple:
+    """(new stem, status): the stem plus the question sentence the page reader dropped, taken from the OCR text of the same
+    question (the text between where the reader's stem ends and the first option marker). The sentence must be a question
+    (a question word and "?", or "Name/State/Based on ..."), at most one statement before it, not already in the stem (case
+    and punctuation aside). Status: "added", "present" (already there), "none" (no such sentence), "mismatch" (the OCR text
+    does not hold the stem's last six words: another question, so the stem stays). Pure (selftest)."""
+    lines = (ocr or "").split("\n")
+    i = _ps_locate(stem, lines)
+    if i is None:
+        return stem, "mismatch"
+    tail = []
+    m0 = re.match(r"\s*(\d{1,2})\s*[.)]?\s", lines[0])
+    # the next question whose number lost its "." ("8 Tom had ..."): only this question's number + 1, since a bare number
+    # and a word is also a graph or table label ("20 Temperature")
+    nextq = re.compile(rf"^\s*{int(m0.group(1)) + 1}\s+[A-Z][a-z]") if m0 else None
+    for l in lines[i + 1:]:
+        if PS_NEXTQ.match(l) or (nextq and nextq.match(l)) or _ps_is_opt(l, opts):
+            break  # the options, or the next question
+        l = re.sub(r"^[\s|:'\u2018\u2019]+", "", l).strip()
+        if l and not PS_FOOT.search(l):
+            tail.append(l)
+    # OCR reads the closing "?" of a question line as a 7 ("... is true 7")
+    tail = [re.sub(r"(?<=[a-z])\s+7$", "?", l) if _ps_sentence_like(l, 6) and PS_QWORD.search(l) else l for l in tail]
+    txt = " ".join(tail)
+    m = PS_QRE.search(txt) or PS_IMPRE.search(txt)
+    gen = None
+    if not m:
+        j = next((k for k, l in enumerate(tail) if "?" in l), None)
+        if j is not None:  # a question that does not start with a question word ("In which ...?", "From the table, ...?")
+            k = j
+            while k > 0 and not tail[k][:1].isupper():
+                k -= 1  # a wrapped line continues the sentence above it
+            cand = " ".join(tail[k:j + 1])
+            cand = cand[:cand.index("?") + 1]
+            mq = re.search(r"(?<![A-Za-z])" + PS_Q + r"\b", cand)
+            if mq and mq.start():
+                cand = cand[mq.start():]  # OCR noise before the question word ("PALI RTR, -Which ...")
+            if _ps_sentence_like(cand, 3) and "|" not in cand and "." not in cand.rstrip("?"):
+                gen = (cand, " ".join(tail[:k]))
+        if not gen:
+            # a sentence to complete: the last line, no end mark, directly before options that continue it (not capitalised)
+            last = tail[-1] if tail else ""
+            if (_ps_sentence_like(last, 3) and last[-1].isalnum() and not re.search(r"[|()=%\d]", last)
+                    and any(w.islower() and len(w) >= 3 for w in last.split()[1:])
+                    and (sum(o[:1].islower() for o in opts) >= 3 or last.split()[-1].lower() in PS_CONT)
+                    and _pn(last) not in _pn(stem)):
+                return f"{stem}\n{tex_to_text(_ps_typos(last, stem))} ________", "added"
+            return stem, "none"
+    q, pre = (m.group(1).strip(), txt[:m.start(1)].strip()) if m else gen
+    if pre.endswith("."):  # one statement just before the question, only if it starts a line (not a table's cells)
+        last = re.split(r"(?<=[.?!])\s+", pre.split("|")[-1].strip())[-1]
+        starts = [" ".join(tail[k:]) for k in range(len(tail))]
+        if _ps_sentence_like(last, 6) and any(s.startswith(last) for s in starts):
+            q = last + " " + q
+    q = _ps_typos(q, stem)
+    ns = _pn(stem)
+    if _pn(q) in ns or any(difflib.SequenceMatcher(None, _pn(s), _pn(q)).ratio() >= 0.9
+                           for s in re.split(r"(?<=[.?!])\s+", stem) if s.strip()):
+        return stem, "present"
+    sent = tex_to_text(re.sub(r"\s+", " ", q))
+    if re.search(r"\bS\d\b", sent):
+        sent = re.sub(r"\$(?=\d\b)", "S", sent)  # "systems $1, S2 and $3": S read as a dollar sign beside a label that kept its S
+    sent = unwrap_dollars([sent])[0][0]  # TeX marks around a number ("$1 1/5$")
+    if "$" in sent and not ("$" in stem or re.fullmatch(r"[^$]*\bin \$[^$]*", sent)):
+        return stem, "none"  # a dollar mark in a question with no money is a misread ("$1" for S1): left for the audit
+    if re.search(r"\w:\s", sent[:-1]) or re.search(r"\b(and|or|the|a|an|of)\s*\?$", sent):
+        return stem, "none"  # a garbled read ("which of the: following: ...", "animals X and?"): left for the audit
+    if len(re.split(r"(?<=[.?!])\s+", sent)) > 2:
+        return stem, "none"  # never more than two sentences
+    return f"{stem}\n{sent}", "added"
+
+
+def row_stem(a, q, qn, opts, ocr=None):
+    """The stem a selected row stores (also the held-copy key, so a held question and its copies compare alike). `ocr` is
+    the step-A OCR text of the same question: a maths/science stem with no question sentence takes the one the page reader
+    dropped from it (restore_question)."""
     t = (q.get("text") or "").strip()
     if a.passage == "chinese-cloze":
         return cloze_stem(q.get("text"), qn, opts)
@@ -1067,7 +1268,9 @@ def row_stem(a, q, qn, opts):
         text = passage_text(q["id"], qn)
         return f"{text}\n\n{VC_STEM.format(n=qn)}" if text else VC_STEM.format(n=qn)  # unread: held by the caller
     if a.subject in ("science", "maths"):
-        return tex_to_text(scanner_marks(speaker_lines(t) if a.subject == "science" else t))
+        stem = tex_to_text(scanner_marks(speaker_lines(t) if a.subject == "science" else t))
+        # picture questions only: the page reader dropped the text printed after a figure (a text-only stem is left alone)
+        return restore_question(stem, ocr, strip_opts(opts))[0] if ocr and q.get("figures") and no_question(stem) else stem
     return t
 
 
@@ -1452,6 +1655,51 @@ def selftest():
     assert dialogue_opts(["5个人一起去", "(6) 我们走吧", "7. 好的"]) == ["5个人一起去", "我们走吧", "好的"]
     assert dialogue_stem("根据上下文的意思，从表中选出适当的短语或短句。", 27) == "对话中的（27）应填入哪一句？"
     assert dialogue_stem("XH: Q27， 这 样 也 太 不 方便 了 !", 27) == "对话中的（27）应填入哪一句？"
+    # restore_question: the sentence the page reader dropped (made-up text)
+    st1 = "Ann walked from home to the park.\nThe table shows her speed on each leg."
+    oc1 = "7. Ann walked from home to the park. The table shows her speed on each\nleg.\nLeg Speed\nA 4 B 6\nWhich leg was the fastest?\n(1) A\n(2) B\n(3) C\n(4) D\n8. Tom had 5 pens. How many were left?\n(1) 1"
+    assert restore_question(st1, oc1, ["A", "B", "C", "D"]) == (st1 + "\nWhich leg was the fastest?", "added")  # question after the table
+    assert restore_question(st1 + "\nWhich leg was the fastest?", oc1, ["A", "B", "C", "D"])[0] == st1 + "\nWhich leg was the fastest?"  # already there
+    assert restore_question("Tom had five red marbles in a jar.", oc1, ["A"])[1] == "mismatch"  # another question: stem stays
+    assert restore_question(st1, oc1.replace("Which leg was the fastest?", ""), ["A", "B", "C", "D"])[1] == "none"  # never the next question
+    oc3 = "7. Ann walked from home to the park.\n8. 3 apples cost $2. What is the cost of 6?\n(1) a"
+    assert restore_question("Ann walked from home to the park.", oc3, ["x"])[1] == "none"  # a next question starting with a digit
+    _qtd = tempfile.TemporaryDirectory(dir=tmpd); _qp = Path(_qtd.name) / "questions.jsonl"
+    _qp.write_text('{"id": "q1", "text": "T"}\n\n{"no": "id"}\n{broken\n', encoding="utf-8")
+    assert ocr_texts(_qp) == {"q1": "T"} and ocr_texts(_qp.with_name("absent.jsonl")) == {}  # bad lines never stop a select
+    _qtd.cleanup()
+    # code review 25 Nov 2026: each finding is a check
+    assert _ps_typos("Which graph shows how it changes?", "The mass of the plant changed over time.") == "Which graph shows how it changes?"  # word form, not a typo
+    assert _ps_typos("The moming air is cool.", "In the morning it rains.") == "The morning air is cool."  # a real misreading still mended
+    assert _ps_typos("Which is liahter?", "tighter or lighter") == "Which is lighter?"  # the closest word, not the first
+    assert restore_question("Ann walked from home to the park.", "7. Ann walked from home to the park.\n8 Tom had 5 pens. How many were left?\n(1) 1", ["1"])[1] == "none"  # next question, no "."
+    assert restore_question("Mia bought 3 pens and a book.", "2. Mia bought 3 pens and a book.\nHow much, in $, did she pay?\n(1) 5", ["5"])[0].endswith("\nHow much, in $, did she pay?")  # money
+    assert restore_question("Two systems are set up as shown.", "2. Two systems are set up as shown.\nWhich of systems $1 and $2 is lit?\n(1) 5", ["5"])[1] == "none"  # "$1" for S1
+    assert _ps_locate("Tom sees a red bird on a tall tree.", ["1. Tom sees a red bird on a tal tree.", "Tom sees a red bird on a tali tree."]) is None  # two near places: no guess
+    assert restore_question("The table shows the melting points of P and Q.", "19 The table shows the melting points of P and Q.\nP 45\nBoth substances are solid at\n(1) 35 °C\n(2) 60 °C", ["35 °C", "60 °C"])[0].endswith("\nBoth substances are solid at ________")
+    assert PS_NOQ.search("Look at statement(s) x") and PS_NOQ.search("statement(s) x")
+    oc5 = "4. The figure is made up of identical squares.\nEach square has the same area\n(1) 12 cm\n(2) 16 cm\n(3) 20 cm\n(4) 24 cm"
+    assert restore_question("The figure is made up of identical squares.", oc5, ["12 cm", "16 cm", "20 cm", "24 cm"])[1] != "added"  # digit options are not lowercase words
+    _a = argparse.Namespace(passage=None, subject="maths")
+    _t = "The ratio of boys to girls is 3 : 4."
+    assert row_stem(_a, {"text": _t}, 1, ["9"], ocr="1. " + _t + "\nIf there are 12 girls, how many boys are there?\n(1) 9") == _t  # text-only: left alone
+    oc2 = "3. Ben put a bean seed in a pot of wet soil and watered it every day for\nthree weeks.\nThe chart shows its height.\nIn which week did the seed grow most?\n1) Week 1\n2) Week 2"
+    assert restore_question("Ben put a bean seed in a pot of wet soil and watered it every day for three weeks.", oc2, ["Week 1"])[0].endswith("\nIn which week did the seed grow most?")  # no question word to start with
+    oc3 = "4. A lamp is put near a mirror as shown in the sketch below.\nThe mirror bends the beam so the light\n(1) goes up\n(2) goes down\n(3) stops\n(4) fades"
+    assert restore_question("A lamp is put near a mirror as shown in the sketch below.", oc3, ["goes up", "goes down", "stops", "fades"]) == (
+        "A lamp is put near a mirror as shown in the sketch below.\nThe mirror bends the beam so the light ________", "added")  # a sentence to complete
+    oc4 = "5. A jug holds juice, as shown below. Mia drinks some of it.\nHow much juice is left in the jug?\n(1) 1 l\n(2) 2 l"
+    assert restore_question("A jug holds juice, as shown below.", oc4, ["1 l", "2 l"])[0] == "A jug holds juice, as shown below.\nHow much juice is left in the jug?"
+    oc6 = "6. A pond has three kinds of fish, as shown in the chart below.\nBased on the chart abov, which of the: following: is true?\n(1) X"
+    assert restore_question("A pond has three kinds of fish, as shown in the chart below.", oc6, ["X"])[1] == "none"  # garbled read: left alone
+    oc7 = "9. The morning sun warms a pond, as shown in the chart below.\nThe moming air is quite cool. Which fish ate the most?\n(1) X"
+    assert restore_question("The morning sun warms a pond, as shown in the chart below.", oc7, ["X"])[0].endswith("\nThe morning air is quite cool. Which fish ate the most?")  # OCR typo mended from the stem, one statement + the question
+    assert restore_question("Pam lost the ring and later died of sorrow.", "1. Pam lost the ring and later died of sorrow.\nWhy dled Pam?\n(1) a", ["a"])[0].endswith("\nWhy died Pam?")  # an OCR l for i is mended to the stem's spelling
+    assert no_question("The table shows the number of pens.") and not no_question("Which leg was the fastest?")
+    assert not no_question("The sum is 8 + ") and not no_question("Study the diagram.")
+    assert picture_no_question([{"id": "pp-x", "subject": "science", "crops": ["c.png"], "stem": "The graph shows heights."},
+                                {"id": "pp-y", "subject": "science", "crops": [], "stem": "The graph shows heights."},
+                                {"id": "pp-z", "subject": "maths", "crops": ["c.png"], "stem": "Which is more?"}]) == ["pp-x"]
     print("selftest ok")
 
 
@@ -2106,6 +2354,10 @@ def upload(a):
         print(f"WARN {len(dwarn)} rows have a $...$ pair around a variable (may be money): {', '.join(dwarn[:8])}")
     if dfail:
         sys.exit(f"FAIL {len(dfail)} rows show raw TeX dollar marks around a number: {', '.join(dfail[:8])}: re-run select")
+    pq = picture_no_question(rows)
+    if pq:
+        print(f"WARN {len(pq)} picture questions have no question sentence in the stem (the page reader dropped it and the OCR "
+              f"text had none): {', '.join(pq[:8])}")
     ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
