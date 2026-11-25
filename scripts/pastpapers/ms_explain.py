@@ -240,13 +240,13 @@ def lint_ms(subject, r, rec):
         return "a wrong option has no note"
     if any(len(s) > se.WRONG_MAX for s in e["wrong"] if s):
         return f"a wrong note longer than {se.WRONG_MAX}"
-    for t in [e["right"], *[s for s in e["wrong"] if s]]:
+    for j, t in [(k, e["right"]), *[(j, s) for j, s in enumerate(e["wrong"]) if s]]:
         if se.style(t):
             return se.style(t)
         if se.numbered(t):
             return "names an option by letter or number"
-        if subject == "science" and OUT_OF_SYLLABUS.search(t):
-            return "uses action-reaction, mass or acceleration (outside the P6 syllabus)"
+        if subject == "science" and OUT_OF_SYLLABUS.search(t.replace(str(o[j]), " ")):  # a printed option's own words are not the writer's
+            return "uses action-reaction or acceleration (outside the P6 syllabus)"
     if subject == "maths":
         if not has_value(o[k], e["right"]):
             return "right does not contain the answer value"
@@ -423,7 +423,12 @@ def selftest():
           "wrong": ["The leaf makes food; it does not take water from the soil.", None, "The flower makes seeds, not water intake.", "The stem carries water up but does not take it in."]}
     assert lint_ms("science", s, sg) == "", lint_ms("science", s, sg)
     assert lint_ms("science", s, dict(sg, right="Plants drink through their underground part, which is long.")) == "does not name the answer"
-    oos = "uses action-reaction, mass or acceleration (outside the P6 syllabus)"
+    oos = "uses action-reaction or acceleration (outside the P6 syllabus)"
+    s2 = dict(s, options=["Leaf", "Root", "The ball accelerates", "Stem"])  # a printed distractor's own wording is allowed
+    assert lint_ms("science", s2, dict(sg, wrong=[sg["wrong"][0], None, "\"The ball accelerates\" is not about plants taking in water.", sg["wrong"][3]])) == ""
+    import time
+    t0 = time.time(); has_value("x", "y " * 5 + " ".join(["word"] * 60) + " z"); has_value(" ".join(["unit"] * 60) + ".", "z")
+    assert time.time() - t0 < 1, "has_value must not backtrack on a long run of words"
     assert lint_ms("science", s, dict(sg, right="The root takes in water; by action-reaction the soil pushes back.")) == oos
     assert lint_ms("science", s, dict(sg, wrong=[sg["wrong"][0], None, "The flower accelerates seed growth, not water intake.", sg["wrong"][3]])) == oos
     assert lint_ms("science", s, dict(sg, right="The root takes in water; a squashed spring pushes back and matter has mass.")) == "", "spring force and mass are taught"

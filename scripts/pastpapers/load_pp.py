@@ -365,8 +365,11 @@ def select(a):
     subs = syllabus_subs(a.subject)
     quar = {r["id"] for r in jl(Path(a.pp) / "quarantine.jsonl")}
     hold = read_hold(out)
+    # a picture that shows its answer is a fault of that crop only: its twin in another paper (own crop) is not held
+    pic_only = parse_hold(open(out / "answer_pictures_held.txt").read()) if (out / "answer_pictures_held.txt").exists() else set()
     rows, rejects = [], []
     held_keys = set()  # a held question's wording + options: its copies in other papers are held too (held_copy)
+    owner_stale = []  # owner key rows whose key_old no longer matches: said at the end, never silently dropped
     R = collections.Counter()
     per_year = collections.defaultdict(collections.Counter)
     if a.passage and PASSAGE[a.passage]["subject"] != a.subject:
@@ -445,7 +448,11 @@ def select(a):
                     conflict = True
                 else:
                     k, src = str(cv["key_new"]), "model-key"
-            cv_ok = bool(cv and len(opts) == 4 and k and (cv["key_old"] == k or (src == "model-key" and cv["key_new"] == k)))
+            if not k and len(opts) == 4 and cv and cv.get("kind") == "owner":  # the owner set the key of a question with none
+                k, src = str(cv["key_new"]), "owner"
+            cv_ok = bool(cv and len(opts) == 4 and k and (cv["key_old"] == k or (src in ("model-key", "owner") and cv["key_new"] == k)))
+            if cv and cv.get("kind") == "owner" and len(opts) == 4 and not cv_ok:
+                owner_stale.append(f"{pp_id(q['id'])} (key now {k}, owner row says {cv['key_old']} -> {cv['key_new']})")
             if cv_ok and cv["kind"] == "owner":  # the owner overrules the PRINTED key (three outside models and two blind
                 k, src = cv["key_new"], "owner"   # answerers agree against it, 25 Nov 2026): the printed key no longer holds it
                 conflict = False
@@ -464,8 +471,9 @@ def select(a):
                 reason = "quarantined"
             elif pp_id(q["id"]) in hold:
                 reason = "held-by-review"
-                held_keys.add(held_key(row_stem(a, q, qn, opts, ocrt.get(q["id"])), [tex_to_text(o) for o in strip_opts(opts)]))
-            elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and cv["kind"] == "confirm" and cv.get("unsure")):
+                if pp_id(q["id"]) not in pic_only:
+                    held_keys.add(held_key(row_stem(a, q, qn, opts, ocrt.get(q["id"])), [tex_to_text(o) for o in strip_opts(opts)]))
+            elif q.get("answer_flag") == "grid-uncertain" and not (cv_ok and (cv["kind"] == "owner" or (cv["kind"] == "confirm" and cv.get("unsure")))):
                 reason = "grid-uncertain"  # lifted when outside models unanimously confirm the printed key (imgpack -unsure packs)
             elif conflict:
                 reason = "ocr-key-conflict"
@@ -582,6 +590,8 @@ def select(a):
               "with_figure": sum(bool(r["crops"]) for r in rows), "crops": sum(len(r["crops"]) for r in rows)}
     (out / "report.json").write_text(json.dumps(report, indent=1))
     print(f"selected {len(rows)}; with figure {report['with_figure']} ({report['crops']} crops); rejected", dict(R.most_common()))
+    if owner_stale:
+        print(f"WARN: {len(owner_stale)} owner key decision(s) not applied, the key changed since: {', '.join(owner_stale[:10])}")
 
 
 DLG_GENERIC = "对话中的（{n}）应填入哪一句？"
@@ -1718,6 +1728,18 @@ def selftest():
     assert picture_no_question([{"id": "pp-x", "subject": "science", "crops": ["c.png"], "stem": "The graph shows heights."},
                                 {"id": "pp-y", "subject": "science", "crops": [], "stem": "The graph shows heights."},
                                 {"id": "pp-z", "subject": "maths", "crops": ["c.png"], "stem": "Which is more?"}]) == ["pp-x"]
+    # the picture record is per project + bucket (another project never inherits it), merges, and survives damage
+    with tempfile.TemporaryDirectory(dir=TMP if TMP.exists() else None) as td:
+        p = Path(td) / "new" / "rec.json"  # the folder does not exist yet
+        live, other = f"https://{LIVE_REF}.supabase.co", "https://other.supabase.co"
+        write_fig_record(p, f"{live}|{BUCKET}", {"a.webp": "1"}, live)
+        write_fig_record(p, f"{other}|{BUCKET}", {"b.webp": "2"}, other)
+        r = read_fig_record(p, live)
+        assert r[f"{live}|{BUCKET}"] == {"a.webp": "1"} and r[f"{other}|{BUCKET}"] == {"b.webp": "2"}, r
+        p.write_text(json.dumps({"a.webp": "1"}))  # the first, flat format: the live project's only
+        assert read_fig_record(p, live) == {f"{live}|{BUCKET}": {"a.webp": "1"}} and read_fig_record(p, other) == {}
+        p.write_text("{damaged")
+        assert read_fig_record(p, live) == {}
     print("selftest ok")
 
 
@@ -2362,6 +2384,43 @@ def tex_to_text(t: str) -> str:
 SUBTOPIC_DB = re.compile(r"^[a-z0-9-]{3,120}$")  # pp_items_subtopic_check (migration 009; 004 allowed 80)
 
 
+LIVE_REF = "kxxnipzejmyctnziojzd"  # the only project uploaded to before the record was keyed by project (25 Nov 2026)
+
+
+def read_fig_record(p: Path, url: str) -> dict:
+    """{"<url>|<bucket>": {storage path: sha1}}. A damaged record counts as empty (everything is sent again); the first,
+    flat record (path -> sha1) was written for the live project only, so it is kept for that project and nothing else."""
+    try:
+        d = json.loads(p.read_text()) if p.exists() else {}
+    except (OSError, ValueError):
+        return {}
+    if not isinstance(d, dict):
+        return {}
+    if d and all(isinstance(v, str) for v in d.values()):  # the first, flat format
+        return {k: d for k in [f"{url}|{BUCKET}"] if LIVE_REF in url}
+    return {k: v for k, v in d.items() if isinstance(v, dict)}
+
+
+def write_fig_record(p: Path, target: str, done: dict, url: str):
+    """Merge this run's sent pictures into the record under a lock (two uploads at once keep both); a failure to write
+    it is only a warning: the pictures are up, the next run just sends them again."""
+    if not done:
+        return
+    try:
+        import fcntl
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(str(p) + ".lock", "w") as lk:
+            fcntl.flock(lk, fcntl.LOCK_EX)
+            rec = read_fig_record(p, url)
+            rec[target] = {**rec.get(target, {}), **done}
+            fd, tmp = tempfile.mkstemp(dir=p.parent, prefix=p.name, suffix=".tmp")
+            with os.fdopen(fd, "w") as f:
+                f.write(json.dumps(rec, sort_keys=True))
+            os.replace(tmp, p)
+    except OSError as e:
+        print(f"WARN: picture record not written ({e}); the next upload sends these pictures again")
+
+
 def upload(a):
     rows, usubs, out = selection(a)
     bad = sorted({r["subtopic"] for r in rows if not SUBTOPIC_DB.fullmatch(r["subtopic"])})
@@ -2446,16 +2505,15 @@ def upload(a):
         print("dry run: nothing sent (add --apply after the owner's go-ahead)")
         return
     fdir = out / "figures"
-    # incremental pictures (owner, 25 Nov 2026: an upload re-sent ~2,700 pictures one request each): ONE record for the
-    # bucket (storage path -> sha1 of the bytes last sent from this machine, whichever folder sent them; folders share
-    # paths, so a per-folder record could let an old picture win), written as each one succeeds; a picture whose bytes
-    # match is skipped. --all-figures sends all again (pictures removed or changed in the bucket some other way).
+    # incremental pictures (owner, 25 Nov 2026: an upload re-sent ~2,700 pictures one request each): ONE record per
+    # project and bucket (storage path -> sha1 of the bytes last sent from this machine, whichever folder sent them;
+    # folders share paths, so a per-folder record could let an old picture win); a picture whose bytes match is skipped.
+    # Written at the end of the picture loop (also when it fails), merged under a lock so two uploads at once keep both.
+    # --all-figures sends all again (pictures removed or changed in the bucket some other way).
     man_p = Path(os.environ.get("PP_FIG_SENT", "/data/alvin/tmp/cookie-codex/ppimport/figures.sent.json"))
-    try:
-        man = {} if getattr(a, "all_figures", False) or not man_p.exists() else dict(json.loads(man_p.read_text()))
-    except (ValueError, TypeError):
-        man = {}  # a damaged record: send everything again rather than stop
-    sent, nsent, nskip = set(), 0, 0  # a passage set's pages are shared by its questions: send each file once
+    target = f"{url}|{BUCKET}"
+    man = {} if getattr(a, "all_figures", False) else dict(read_fig_record(man_p, url).get(target, {}))
+    sent, nsent, nskip, done = set(), 0, 0, {}  # a passage set's pages are shared by its questions: send each file once
     try:
         for d in db:
             for f in d["figures"]:
@@ -2471,12 +2529,10 @@ def upload(a):
                            headers={"content-type": "image/webp", "x-upsert": "true", "cache-control": "3600"}, timeout=60)
                 if r.status_code >= 300:
                     sys.exit(f"figure upload failed for {d['id']}: HTTP {r.status_code}")
-                man[f["path"]] = h
+                man[f["path"]] = done[f["path"]] = h
                 nsent += 1
-    finally:  # what went up stays recorded even when a later picture fails; written whole, then swapped in
-        tmp = man_p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(man, sort_keys=True))
-        os.replace(tmp, man_p)
+    finally:  # what went up stays recorded even when a later picture fails
+        write_fig_record(man_p, target, done, url)
     print(f"pictures: {nsent} sent, {nskip} unchanged (skipped; if pictures were removed or changed in the bucket some "
           f"other way, run again with --all-figures)")
     for i in range(0, len(db), 200):
