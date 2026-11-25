@@ -544,6 +544,11 @@ def select(a):
         for r, why in set_pages(rows, out, a.passage):  # a dropped set is held with its reason, like any other question
             rejects.append({"id": r["src_id"], "reason": why})
             R[why] += 1
+    for r in rows:  # TeX dollars around numbers ("$1 1/5$"): row-wide, so a money row keeps its variables' marks
+        if r["subject"] in ("maths", "science"):
+            (r["stem"], *r["options"]), left = unwrap_dollars([r["stem"], *r["options"]])
+            if left:
+                print(f"WARN dollar marks left in {r['id']}: {left}")
     for r, why in held_copies(rows, held_keys):
         rejects.append({"id": r["src_id"], "reason": why})
         R[why] += 1
@@ -1196,6 +1201,18 @@ def selftest():
     assert tex_to_text(r"Express \(4\frac{4}{5}\) as a decimal.") == "Express 4 4/5 as a decimal."
     assert tex_to_text("$(50-23z)$") == "(50-23z)" and tex_to_text("$(2x - 14)") == "$(2x - 14)" and tex_to_text("$12$") == "$12$"
     assert "\\" in tex_to_text(r"\(\overline{AB}\)")  # an unknown command keeps its backslash: select holds it (tex-left)
+    assert unwrap_dollars(["Express $9 3/25$ as a decimal."])[0] == ["Express 9 3/25 as a decimal."]
+    assert unwrap_dollars(["It costs $45.", "$3.50 and $2", "$38"]) == (["It costs $45.", "$3.50 and $2", "$38"], [])
+    assert unwrap_dollars(["Ali has $3 and Ben has $12 more, $5 in all."])[0] == ["Ali has $3 and Ben has $12 more, $5 in all."]
+    assert unwrap_dollars(["Ratio $2:3$ of $45", "$1:2$", "$54°$"])[0] == ["Ratio 2:3 of $45", "1:2", "54°"]  # numbers unwrap even in a money row
+    assert unwrap_dollars(["Simplify $20m + 15 - 7m$.", "$13m - 5$"])[0] == ["Simplify 20m + 15 - 7m.", "13m - 5"]  # no money: variables unwrap
+    t_ = ["Pay $(m + 1)$ and $21.", "$2d$"]
+    assert unwrap_dollars(t_) == (t_, ["$(m + 1)$", "$2d$"])  # money row: a variable's pair is left (and warned)
+    assert unwrap_dollars(["4/3, $1 1/5$, 5/4", "$5 \\times 3$"])[0] == ["4/3, 1 1/5, 5/4", "$5 \\times 3$"]  # tex_to_text runs first in select
+    assert tex_to_text(r"$5 \times 3$") == "$5 × 3$" and unwrap_dollars([tex_to_text(r"$5 \times 3$")])[0] == ["5 × 3"]
+    assert unwrap_dollars([tex_to_text(r"$\frac{3}{4}$ of it")])[0] == ["3/4 of it"]
+    assert dollar_leftover([{"id": "a", "stem": "x $3:2$", "options": ["$y$"]}, {"id": "b", "stem": "$45 and $3", "options": ["$(2x - 14)"]}]) == (["a"], ["a"])
+    assert dollar_leftover([{"id": "c", "stem": "Cost $2d$ and $30", "options": []}]) == ([], ["c"])
     assert chi_incomplete("班长是我们学习的好____样。", ["旁", "傍", "膀", "榜"]) is None
     assert chi_incomplete("他们在行业里很有名。", ["（1）xíng yè", "（2）xíng yà", "（3）háng yè", "（4）háng yà"]) is None
     assert chi_incomplete("老师说的话。", ["a", "b", "c", "d"]) == "chi-no-blank-underline-lost"
@@ -1993,6 +2010,55 @@ def set_pages(rows, out, kind="english-visual"):
     return dropped
 
 
+DOLLAR_PAIR = re.compile(r"(?<![\w$])\$(?=\S)([^$\n]*?\S)\$(?![\d$])")  # "$1 1/5$": no space inside the marks, no digit right after
+DOLLAR_NUM = re.compile(r"[\d\s/:.,°%π×÷+\-−=()]+")
+DOLLAR_ALG = re.compile(r"[A-Za-z\d\s/:.,°%π×÷+\-−=()^]+")
+
+
+def dollar_kind(c: str):
+    """'num' (digits, fractions, ratios, degrees: never money), 'alg' (a variable in it: "$2d$" may be money "$2d"), or None."""
+    if DOLLAR_NUM.fullmatch(c) and re.search(r"\d", c):
+        return "num"
+    if DOLLAR_ALG.fullmatch(c) and not re.search(r"[A-Za-z]{3}", c):
+        return "alg"
+    return None
+
+
+def unwrap_dollars(texts):
+    """TeX dollar marks left around a number in OCR'd maths ("$1 1/5$", "$3:2$", "$54°$"), which the site shows raw (it escapes
+    text and renders no maths; 25 Nov 2026: 14 live Maths questions). Removes a PAIR of "$" wrapping a number, fraction, ratio or
+    degree; one that wraps a variable ("$2d$", "$(m + 1)$") only in a row with no money sign at all, because there "$2d" can be
+    money with a stray closing mark. A money "$" ("$45", "$3.50 and $2", "$y") is never touched. (texts) -> (texts, left), the
+    pairs left alone. Pure (selftest)."""
+    money_row = any("$" in DOLLAR_PAIR.sub("", t) for t in texts)
+    left = []
+
+    def one(m):
+        k = dollar_kind(m.group(1))
+        if k == "num" or (k == "alg" and not money_row):
+            return m.group(1).strip()
+        left.append(m.group(0))
+        return m.group(0)
+    return [DOLLAR_PAIR.sub(one, t) for t in texts], left
+
+
+def dollar_leftover(rows):
+    """(fails, warns) of ids with a TeX dollar pair still in a stem or option: a number pair is a FAIL (never money); a pair
+    around a variable is a WARN (it may be money). Pure (selftest)."""
+    fails, warns = [], []
+    for r in rows:
+        if r.get("kind") == "typed":
+            continue
+        for t in [r.get("stem") or "", *[o for o in r.get("options") or [] if isinstance(o, str)]]:
+            for m in DOLLAR_PAIR.finditer(t):
+                k = dollar_kind(m.group(1))
+                if k == "num":
+                    fails.append(r["id"])
+                elif k == "alg":
+                    warns.append(r["id"])
+    return sorted(set(fails)), sorted(set(warns))
+
+
 def tex_to_text(t: str) -> str:
     """LaTeX in an OCR'd stem or option as plain text, the way the site writes Maths ("3/5", "2 1/3", "×", "°"): the owner's
     report of 21 Nov 2026 ("\\frac{3}{4}" shown raw; 359 Maths items). Money "$" is left alone. Anything it cannot turn into
@@ -2035,6 +2101,11 @@ def upload(a):
     bad = sorted({r["subtopic"] for r in rows if not SUBTOPIC_DB.fullmatch(r["subtopic"])})
     if bad:  # the database refuses the whole batch: say so before sending anything
         sys.exit(f"sub-topic ids the database would refuse (pp_items_subtopic_check): {bad}")
+    dfail, dwarn = dollar_leftover(rows)  # a "$1 1/5$" the site would show raw (selected rows are normalised by select)
+    if dwarn:
+        print(f"WARN {len(dwarn)} rows have a $...$ pair around a variable (may be money): {', '.join(dwarn[:8])}")
+    if dfail:
+        sys.exit(f"FAIL {len(dfail)} rows show raw TeX dollar marks around a number: {', '.join(dfail[:8])}: re-run select")
     ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
