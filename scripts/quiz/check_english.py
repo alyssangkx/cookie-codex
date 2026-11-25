@@ -33,6 +33,15 @@ PATTERNS = {p["id"] for p in json.loads((HERE / "english" / "patterns.json").rea
 LEVELS = {"basic", "intermediate", "competent"}
 BLANK = "____"
 errors = []
+# `editing: true` (Editing): a typed past-paper passage section answered whole, with the printed wrong words underlined and a box
+# beside each (site/src/lib/editing.ts). It must be an open-answer passage section (no generated items, not a cloze) and must be
+# switched to 'pool' in PP_SWITCH, or the quiz page would never open it.
+PP_SRC = (ROOT / "site" / "src" / "lib" / "pastpaper.ts").read_text()
+for _id, _sb in SUB_OF.items():
+    if _sb.get("editing"):
+        if _id not in OPEN_SECTIONS: errors.append(f"syllabus {_id}: editing sections are open-answer (mcqTestable false), generated items never go there")
+        if not _sb.get("passage") or _sb.get("cloze"): errors.append(f"syllabus {_id}: editing needs passage: true and no cloze flag")
+        if not re.search(rf"'{re.escape(_id)}':\s*'pool'", PP_SRC): errors.append(f"syllabus {_id}: editing section is not 'pool' in PP_SWITCH (site/src/lib/pastpaper.ts)")
 VISUAL_KINDS = {"poster", "notice", "brochure", "timetable", "email"}
 
 

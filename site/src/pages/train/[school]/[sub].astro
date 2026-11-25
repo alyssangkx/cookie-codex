@@ -1,6 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL, listGroup, clozeSubs } from '../../../lib/train';
+import { SCHOOLS, subs, subSlug, slots, cookieBySlug, MIN_POOL, listGroup, wholeSubs } from '../../../lib/train';
 import { TIER_NAME, MILESTONE_NAME, triesPerDay, milestoneAt } from '../../../lib/store';
 import { rarityLabel, TICK_SVG } from '../../../lib/section';
 
@@ -13,7 +13,7 @@ const school = SCHOOLS.find((x) => x.id === sub.school)!;
 // a one-pool sub-topic (ADR 0011): one pool of past-paper questions, the three card slots are milestones ("stops")
 const pool = sub.pool ?? 0;
 const at = milestoneAt(pool);
-const cloze = clozeSubs.includes(sub.id);
+const cloze = wholeSubs.includes(sub.id);
 const units = cloze ? 'blanks' : 'questions';
 const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   const slot = slots[`${sub.id}|${k}`];

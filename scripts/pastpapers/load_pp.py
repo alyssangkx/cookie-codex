@@ -1105,6 +1105,17 @@ def no_question(stem: str) -> bool:
     return bool(s) and not PS_NOQ.search(s) and bool(re.search(r"[.:!]\s*$|[.!]\s*[\"”’]$", s))
 
 
+def editing_case_only(rows) -> list:
+    """Ids of Editing rows whose accepted answer is the printed word in another case ("london" -> "London"): the site marks
+    typed answers ignoring case (typed.ts norm), so such a row could never be failed (Editing review, 25 Nov 2026). Pure."""
+    out = []
+    for r in rows:
+        m = r.get("subtopic") == "eng-editing" and re.search(r"\{\{" + str(r.get("seq")) + r"\|([^}]*)\}\}", r.get("stem") or "")
+        if m and any(str(a).strip().lower() == m.group(1).strip().lower() for a in r.get("accept") or []):
+            out.append(r["id"])
+    return out
+
+
 def picture_no_question(rows) -> list:
     """Ids of maths/science rows with a picture whose stem holds no question sentence (the fault class restore_question
     mends; a WARN at every upload, not a FAIL: some of these ask their question inside the picture). Pure (selftest)."""
@@ -1668,6 +1679,8 @@ def selftest():
     _qp.write_text('{"id": "q1", "text": "T"}\n\n{"no": "id"}\n{broken\n', encoding="utf-8")
     assert ocr_texts(_qp) == {"q1": "T"} and ocr_texts(_qp.with_name("absent.jsonl")) == {}  # bad lines never stop a select
     _qtd.cleanup()
+    _er = {"id": "e1", "subtopic": "eng-editing", "seq": 3, "stem": "We went to {{3|london}} by train.", "accept": ["London"]}
+    assert editing_case_only([_er]) == ["e1"] and editing_case_only([dict(_er, accept=["Paris"])]) == []
     # code review 25 Nov 2026: each finding is a check
     assert _ps_typos("Which graph shows how it changes?", "The mass of the plant changed over time.") == "Which graph shows how it changes?"  # word form, not a typo
     assert _ps_typos("The moming air is cool.", "In the morning it rains.") == "The morning air is cool."  # a real misreading still mended
@@ -2354,6 +2367,9 @@ def upload(a):
         print(f"WARN {len(dwarn)} rows have a $...$ pair around a variable (may be money): {', '.join(dwarn[:8])}")
     if dfail:
         sys.exit(f"FAIL {len(dfail)} rows show raw TeX dollar marks around a number: {', '.join(dfail[:8])}: re-run select")
+    co = editing_case_only(rows)
+    if co:
+        sys.exit(f"FAIL {len(co)} Editing rows only change the printed word's case, which the site cannot mark: {', '.join(co[:8])}")
     pq = picture_no_question(rows)
     if pq:
         print(f"WARN {len(pq)} picture questions have no question sentence in the stem (the page reader dropped it and the OCR "

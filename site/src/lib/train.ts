@@ -10,7 +10,7 @@ import { MIN_POOL, tierHash, type School, type Tier } from './store';
 import { paperOk } from './paper';
 import { unitName } from './suggest';
 import { competencyGroups } from './crumbs';
-import { ppMode, ppTierCount, POOL_CAP, PP_SWITCH } from './pastpaper';
+import { ppMode, ppTierCount, poolSizeOk, POOL_CAP, PP_SWITCH, AWAITING_UPLOAD } from './pastpaper';
 import ppCounts from '../data/pp_counts.json'; // numbers only: {"<sub>|<b|i|c>": n}; no past-paper ids or content
 
 export { MIN_POOL };
@@ -85,7 +85,7 @@ export const subs: Sub[] = (Object.entries(rewards.order) as [School, any[]][]).
     const count = { b: v.b.count, i: v.i.count, c: v.c.count };
     const hash = { b: v.b.usesPp ? undefined : hashOf(`${s.id}|b`), i: v.i.usesPp ? undefined : hashOf(`${s.id}|i`),
       c: v.c.usesPp ? undefined : hashOf(`${s.id}|c`) };
-    if (ppMode(s.id) === 'pool' && ppTotal(s.id) < MIN_POOL) // mergePool drops a pool sub-topic's generated questions
+    if (ppMode(s.id) === 'pool' && !poolSizeOk(ppTotal(s.id), s.id, MIN_POOL)) // mergePool drops a pool sub-topic's generated questions
       throw new Error(`train.ts: ${s.id} is 'pool' in PP_SWITCH with ${ppTotal(s.id)} past-paper questions (needs ${MIN_POOL}); use 'merge'`);
     if (ppMode(s.id) === 'merge' && ppTotal(s.id) >= MIN_POOL && !OWNER_MERGE.has(s.id)) // ADR 0011: one pool at 20
       console.warn(`train.ts: ${s.id} has ${ppTotal(s.id)} past-paper questions: switch it to 'pool' in PP_SWITCH`);
@@ -132,6 +132,12 @@ export { unitName }; // lives in suggest.ts so client scripts can use it without
 export const clozeSubs = [mathSyllabus, chineseSyllabus, englishSyllabus, scienceSyllabus].flatMap((syl) =>
   syl.strands.flatMap((st) => st.topics.flatMap((t) =>
     (t.subtopics as { id: string; cloze?: boolean }[]).filter((sb) => sb.cloze).map((sb) => sb.id))));
+/** Sub-topics answered as ONE passage whose asked words are printed wrong (`editing: true` in the syllabus JSON: Editing): the
+ *  quiz page shows each with a correction box beside it (lib/editing.ts). Typed past-paper rows only, like the typed cloze. */
+export const editingSubs = englishSyllabus.strands.flatMap((st) => st.topics.flatMap((t) =>
+  (t.subtopics as { id: string; editing?: boolean }[]).filter((sb) => sb.editing).map((sb) => sb.id)));
+/** Every sub-topic whose quiz is one whole passage with one Submit: the typed cloze sections and Editing. */
+export const wholeSubs = [...clozeSubs, ...editingSubs];
 export const subSlug = (id: string) => id.replace(/^(math|sci|eng|chi)-/, '');
 export const hasContent = (s: Sub) => !!s.pool || s.playable.b || s.playable.i || s.playable.c;
 

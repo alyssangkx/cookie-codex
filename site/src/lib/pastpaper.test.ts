@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  PP_ENABLED, PP_SWITCH, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub, underlineMarks, correctionHtml, type CxMark } from './pastpaper.ts';
+  PP_ENABLED, PP_SWITCH, AWAITING_UPLOAD, poolSizeOk, ppMode, ppSubjectOf, countingPool, POOL_CAP, pageStep, ppSubsFor, poolModeFor, isPpId, ppBadge, validRow, safeSignedUrl, toQ, mergePool, ppFigureHtml, optionLabel, ppTierCount, tierPoolIds, PP_MIN_TIER, type PpRow, stubOf, isStub, easierFirst, isPoolSub, underlineMarks, correctionHtml, type CxMark } from './pastpaper.ts';
 import { syncTiers, tierHash, liveMastered, fresh, answer, MIN_POOL } from './store.ts';
 
 const SB = 'https://abcdefgh.supabase.co';
@@ -304,8 +304,17 @@ test('every pool sub-topic has at least MIN_POOL past-paper questions (pp_counts
   const pp = JSON.parse(readFileSync(new URL('../data/pp_counts.json', import.meta.url), 'utf8')) as Record<string, number>;
   const short = Object.keys(PP_SWITCH).filter((s) => ppMode(s) === 'pool')
     .map((s) => [s, ['b', 'i', 'c'].reduce((n, t) => n + (pp[`${s}|${t}`] ?? 0), 0)] as const)
-    .filter(([, n]) => n < MIN_POOL); // the rule train.ts builds with
+    .filter(([sub, n]) => !poolSizeOk(n, sub, MIN_POOL)); // the rule train.ts builds with (a section awaiting its upload may hold 0)
   assert.deepEqual(short, [], 'pool sub-topics under the minimum: switch them back to merge or add questions');
+});
+
+test('poolSizeOk: zero is allowed only for a section awaiting its upload; 1-19 never', () => {
+  const wait = new Set(['eng-editing']);
+  assert.ok(poolSizeOk(0, 'eng-editing', 20, wait));
+  assert.ok(!poolSizeOk(0, 'eng-other', 20, wait));
+  assert.ok(!poolSizeOk(7, 'eng-editing', 20, wait));
+  assert.ok(poolSizeOk(20, 'eng-other', 20, wait));
+  assert.ok(AWAITING_UPLOAD.has('eng-editing') && PP_SWITCH['eng-editing'] === 'pool');
 });
 
 test('PP_MIN_TIER is the playable minimum MIN_POOL', () => assert.equal(PP_MIN_TIER, MIN_POOL));

@@ -1,6 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import { SCHOOLS, subsOf, subSlug, listGroup, unitName, banksHash, clozeSubs } from '../../../lib/train';
+import { SCHOOLS, subsOf, subSlug, listGroup, unitName, banksHash, wholeSubs } from '../../../lib/train';
 import { groupByTopic, type SubInfo } from '../../../lib/suggest';
 import { TIERS, type School } from '../../../lib/store';
 
@@ -12,7 +12,7 @@ const list = subsOf(school.id as School);
 const infos: (SubInfo & { file: string | null; home: number; cloze?: true })[] = list.map((s) => ({
   id: s.id, ...listGroup(s), name: s.name, slug: subSlug(s.id),
   playable: s.playable, count: s.count, hash: s.hash, file: s.file, home: s.home, ...(s.pool ? { pool: s.pool } : {}),
-  ...(clozeSubs.includes(s.id) ? { cloze: true } : {}),
+  ...(wholeSubs.includes(s.id) ? { cloze: true } : {}),
 }));
 const groups = groupByTopic(infos) as { topic: string; name: string; subs: typeof infos }[];
 const clientData = JSON.stringify(infos).replace(/</g, '\\u003c');

@@ -63,6 +63,9 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   // passages read as text by two models (passage.py, 24 Nov 2026): Vocabulary Cloze 141 MCQs; Grammar and Comprehension Cloze
   // 770 + 752 typed blanks, each key confirmed by Claude's blind answer
   'eng-vocab-cloze': 'pool', 'eng-grammar-cloze': 'pool', 'eng-comp-cloze': 'pool',
+  // Editing, answered whole (25 Nov 2026): 31 passages, 338 typed corrections. Switched on ahead of the upload: the section
+  // stays "Coming soon" while pp_counts.json has no eng-editing counts (AWAITING_UPLOAD) and opens when they land.
+  'eng-editing': 'pool',
   // Chinese upload (owner OK, 21 Nov 2026): single-item MCQs (a blank or pinyin options); keys confirmed by the blind check
   // or owner-approved outside-model consensus. Cloze, reading and dialogue wait for the passage phase.
   'chi-ciyu-choose': 'pool',
@@ -111,6 +114,13 @@ export const PP_SWITCH: Readonly<Record<string, PpMode>> = {
   'math-geometry-rectangle-and-square': 'merge',
   'math-geometry-triangles-parallelogram-rhombus-and-trapezium': 'pool', // with the three-model / Claude+Perplexity verdicts (22 Nov 2026)
 };
+
+/** Sub-topics switched to 'pool' before their questions are uploaded: with 0 counted they simply stay "Coming soon" (train.ts
+ *  would otherwise stop the build); with 1 to 19 they still fail it. Remove an id once its upload is live. */
+export const AWAITING_UPLOAD: ReadonlySet<string> = new Set(['eng-editing']);
+/** A 'pool' sub-topic's past-paper count is usable: MIN_POOL or more, or none yet for one awaiting its upload. */
+export const poolSizeOk = (total: number, sub: string, minPool = PP_MIN_TIER, awaiting: ReadonlySet<string> = AWAITING_UPLOAD) =>
+  total >= minPool || (total === 0 && awaiting.has(sub));
 
 /** pp_items.subject of a sub-topic, from its id prefix (pp_pool lists one subject per call). */
 const SUBJECT_OF: Readonly<Record<string, string>> = { sci: 'science', eng: 'english', chi: 'chinese', math: 'maths' };

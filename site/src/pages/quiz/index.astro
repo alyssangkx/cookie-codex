@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { triesPerDay } from '../../lib/store';
-import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs, rarityOrder, competencyTopics, competencySubjects, banksHash } from '../../lib/train';
+import { subs, hasContent, slots, cardInfo, banks, subSlug, paperTopics, clozeSubs, editingSubs, rarityOrder, competencyTopics, competencySubjects, banksHash } from '../../lib/train';
 
 // Everything the runner needs, small enough to inline; question banks are fetched on demand.
 const meta = {
@@ -12,6 +12,7 @@ const meta = {
   files: banks.map((b) => b.topic),
   banks: banksHash, // the bank set Daily Review parks against (store.ts syncParked)
   cloze: clozeSubs,
+  editing: editingSubs, // Editing: one passage, the printed wrong words underlined with a correction box each (lib/editing.ts)
   slots,
   cards: cardInfo,
   order: rarityOrder, // replacement order per rarity (crumbs.ts)
@@ -104,6 +105,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, underlineMarks, correctionHtml, type CxMark, type PpFig } from '../../lib/pastpaper';
   import { typedOk, compose, scaffoldHtml } from '../../lib/typed';
   import { wordBox, strikes, passageEnd } from '../../lib/cloze';
+  import { editingHtml, editWord, editAsk, editCorrections } from '../../lib/editing';
   import { esc, boldAns } from '../../lib/boldans';
   import { glossOption, type Gloss, type GlossLine } from '../../lib/zhgloss';
   import { toEconomy, balanceOf } from '../../lib/crumbs';
@@ -122,6 +124,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     cards: Record<string, { name: string; image: string; rarity: string }>;
     topicNames: Record<string, string>;
     cloze: string[];
+    editing: string[];
     order: Record<string, string[]>; topics: Record<string, string[]>; subjects: Record<string, string[]>;
   };
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -196,6 +199,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // cloze sub-topics come from the syllabus JSON (`cloze: true` on the sub-topic), so a renamed or new cloze
   // section keeps its blank filling
   const CLOZE = new Set(meta.cloze);
+  const EDIT = new Set(meta.editing); // Editing sections: marked words {{n|printed word}} in the passage
+  const WHOLE = new Set([...meta.cloze, ...meta.editing]); // sections whose quiz is one whole passage with one Submit
   const clozeStem = (q: Q, reveal: boolean) => {
     if (q.sub === 'eng-vocab-cloze') return underlineMarks(fmt(q.stem), q.seq ?? null); // a read passage: underlines
     const zh = q.sub === 'chi-cloze-mcq';
@@ -231,7 +236,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     q.ppFigs?.length ? `<span class="qfig-wrap${q.group ? ' qfig-set' : ''}">${ppFigureHtml(q.ppFigs, again)}</span>` : '';
   const stemHtml = (q: Q, reveal = false, figs = true) => {
     const many = q.sub === 'chi-dialogue-mcq';
-    const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal) : fmt(q.stem);
+    const t = many ? dialogueStem(q) : CLOZE.has(q.sub) && q.group ? clozeStem(q, reveal)
+      : EDIT.has(q.sub) ? editingHtml(fmt(q.stem), editWord) : fmt(q.stem);
     return ppBadge(q) + t + (q.figure ? `<span class="qfig-wrap">${figureHtml(q.figure)}</span>` : '')
       // a dialogue cannot be answered without its page: shown with every blank, never folded away
       + (figs ? ppFigsHtml(q, !reveal && laterInSet(q) && q.sub !== 'chi-dialogue-mcq') : '');
@@ -307,7 +313,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    * dropping them, as the next save would lose their answers. A due paper drops them and is handed in with the rest. */
   async function hydrate(topUp = true, keep: () => boolean = () => false): Promise<string> {
     // a cloze passage's blanks outside the quiz come too: shown with their answers, so nothing looks skipped
-    const gs = new Set(quiz.map((id) => byId.get(id)).filter((q) => q?.group && CLOZE.has(q.sub)).map((q) => q!.group!));
+    const gs = new Set(quiz.map((id) => byId.get(id)).filter((q) => q?.group && WHOLE.has(q.sub)).map((q) => q!.group!));
     const mates = [...byId.values()].filter((q) => q.group && gs.has(q.group) && !quiz.includes(q.id)).map((q) => q.id);
     const want = [...quiz, ...mates].filter((id) => isStub(byId.get(id)));
     if (!want.length) return '';
@@ -397,9 +403,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
         const pool = easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]);
         // a cloze section: one whole passage per quiz, every blank (owner, 24 Nov 2026); else the usual 10 questions
-        quiz = CLOZE.has(subId) && pool.some((id) => passage(id)) ? pickPassage(pool, cur.questions, Date.now(), passage)
+        quiz = WHOLE.has(subId) && pool.some((id) => passage(id)) ? pickPassage(pool, cur.questions, Date.now(), passage)
           : pickPool(pool, cur.questions, QUIZ_SIZE, Date.now(), passage);
-        if (quiz.length < (CLOZE.has(subId) ? 2 : QUIZ_SIZE)) return stop('This topic does not have enough questions yet.');
+        if (quiz.length < (WHOLE.has(subId) ? 2 : QUIZ_SIZE)) return stop('This topic does not have enough questions yet.');
       } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
@@ -850,7 +856,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // ---- Grammar / Comprehension Cloze answered whole (owner, 24 Nov 2026): every blank of the passage typed in place, one
   // Submit marks them all (each blank still its own question: score, retests); the Grammar Cloze word box is a grid whose
   // words strike through as the child ticks them (a note for a word not in the box or already used, never refused)
-  const isWhole = (q: Q) => !PAPER && !!q.typed && !q.typed.scaffold && !!q.group && q.seq != null && CLOZE.has(q.sub);
+  const isWhole = (q: Q) => !PAPER && !!q.typed && !q.typed.scaffold && !!q.group && q.seq != null && WHOLE.has(q.sub);
   const wholeGroup = (id: string) => { const o = byId.get(id); return o && isWhole(o) ? o.group! : null; };
   let runEnd = 0, czWarned = false, czTicks = 0;
   /** A passage's blanks not in this quiz -> their answers (a blank never fetched has none: it stays a blank). */
@@ -871,7 +877,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       typed: w.chose >= 0 ? w.q.options[w.chose] : w.typed ?? '', answer: w.q.typed ? w.q.typed.accept[0] : w.q.options[w.q.answer] });
     const q0 = (members.get(g) ?? []).find((o) => o.stem) ?? mine[0].q;
     const { words, rest } = wordBox(q0.stem);
-    const { html, placed } = correctionHtml(fmt(rest).replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1'), marks, esc);
+    const { html, placed } = EDIT.has(q0.sub) ? editCorrections(fmt(rest), marks, esc) // Editing: each printed word struck, then the fix
+      : correctionHtml(fmt(rest).replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1'), marks, esc);
     const lost = mine.filter((w) => w.q.seq == null || !placed.has(w.q.seq)) // never dropped: listed under the passage
       .map((w) => `<p>(${w.q.seq ?? '?'}) ${w.typed ? `You wrote: ${esc(w.typed)}. ` : ''}Answer: ${answerText(w.q)}.</p>`).join('');
     const why = mine.map((w) => { const st = stepsHtml(w.q);
@@ -899,7 +906,18 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const tick = words.length ? '<button type="button" class="cz-tick" aria-label="Use this word from the box">✓</button>' : '';
     const box = (o: Q) => { boxed.add(o.id);
       return `<span class="ask-inline"><b>(${o.seq})</b> <input type="text" class="typed-box inline cz" data-id="${esc(o.id)}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer for blank ${o.seq}">${tick}<span class="cz-note" aria-live="polite"></span></span>`; };
-    let html = fmt(rest).replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1').replace(/\((\d{1,3})\) ?_{4,}/g, (all, n: string) => {
+    // Editing: the printed wrong word, underlined and numbered, with its correction box beside it
+    const edBox = (o: Q) => { boxed.add(o.id);
+      return `<input type="text" class="typed-box inline cz" data-id="${esc(o.id)}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Correction for number ${o.seq}">`; };
+    const edFix = (n: number, word: string) => {
+      const o = bySeq.get(n), f = filledBlanks.get(g)?.get(n), gv = given.get(n);
+      if (o && !boxed.has(o.id)) return editAsk(n, word, edBox(o));
+      if (f || gv) return editCorrections(`{{${n}|${word}}}`, new Map([[n, f ? { kind: f.ok ? 'right' as const : 'wrong' as const, typed: null, answer: f.t }
+        : { kind: 'given' as const, answer: gv! }]]), esc).html;
+      return editWord(n, word);
+    };
+    let html = EDIT.has(q.sub) ? editingHtml(fmt(rest), edFix)
+      : fmt(rest).replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1').replace(/\((\d{1,3})\) ?_{4,}/g, (all, n: string) => {
       const o = bySeq.get(Number(n)), f = filledBlanks.get(g)?.get(Number(n)), gv = given.get(Number(n));
       if (o && !boxed.has(o.id)) return box(o);
       if (f) return `(${n}) <span class="filled${f.ok ? '' : ' fixed'}">${esc(f.t)}</span>`;
@@ -1371,6 +1389,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz mark.cx-fix { background: color-mix(in srgb, var(--berry, #a52a45) 14%, transparent); color: inherit; padding: 0 0.15em; border-radius: 0.3em; }
   .quiz mark.cx-fix del { opacity: 0.75; }
   .quiz .cx-none { font-style: italic; opacity: 0.75; }
+  /* Editing: the printed wrong word (underlined, numbered) with its correction box right beside it; the pair stays together and wraps with the text */
+  .quiz .ed-ask .vc-u { white-space: nowrap; font-weight: 600; }
+  .quiz .ed-ask .vc-u u { text-decoration-color: var(--berry, #a52a45); text-decoration-thickness: 2px; }
+  .quiz .ed-arrow { margin: 0 0.1rem 0 0.25rem; opacity: 0.6; }
+  .quiz .ed-ask .typed-box.inline { width: 11ch; }
+  .quiz del.ed-was, .quiz del.cx-typed { opacity: 0.7; }
+  .quiz .ed-fix { white-space: nowrap; }
   .quiz .typed-box.inline { display: inline-block; width: 9ch; min-width: 7ch; padding: 0.05rem 0.35rem; margin: 0 0.15rem;
     vertical-align: baseline; font-size: 1rem; }
   .quiz .typed-box.long { display: block; width: 100%; box-sizing: border-box; min-height: 3.2em; margin: 0.35rem 0; resize: vertical;
