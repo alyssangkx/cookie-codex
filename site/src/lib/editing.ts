@@ -20,9 +20,11 @@ export const editingHtml = (html: string, render: (n: number, word: string) => s
 /** The printed word, underlined, with its number: also how an item outside this quiz reads before marking. */
 export const editWord = (n: number, word: string) => `<span class="vc-u"><b>(${n})</b> <u>${word}</u></span>`;
 
-/** One asked word with its correction box beside it (the box sits straight after the arrow so the pair wraps as one). */
+/** One asked word with its correction box beside it. The number stays with its word and the arrow with its box, but the
+ *  line may break between the word and the box (<wbr>), so the paragraph wraps like text instead of jumping a whole
+ *  word-and-box group to the next line (owner, 25 Nov 2026). */
 export const editAsk = (n: number, word: string, boxHtml: string) =>
-  `<span class="ask-inline ed-ask">${editWord(n, word)}<span class="ed-arrow" aria-hidden="true">→</span>${boxHtml}<span class="cz-note" aria-live="polite"></span></span>`;
+  `<span class="ask-inline ed-ask">${editWord(n, word)}<wbr><span class="ed-pair"><span class="ed-arrow" aria-hidden="true">→</span>${boxHtml}</span><span class="cz-note" aria-live="polite"></span></span>`;
 
 /**
  * The passage after marking, every mistake in place: the printed word struck, then what the child typed (struck, only when it

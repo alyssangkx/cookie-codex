@@ -706,9 +706,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   // ------------------------------------------------------------ feedback pieces shared by the quiz, paper review and results list
 
-  // a past-paper question's one-line reason (migration 014) reads "Why (1) is right"; generated questions keep their steps
-  const stepsHtml = (q: Q) => !q.solution.length ? '' : (isPpId(q.id) // nothing written yet: no empty "Why?" (owner's report)
-    ? `<p class="why-right"><strong>${q.typed ? 'Why this works' : `Why ${optionLabel(q, q.answer)} is right`}:</strong> ${fmt(q.solution[0])}</p>` // no answer-bolding: "has" would light up everywhere
+  /** The right answer, bold: a passage blank "(15) **word**", an MCQ "(2) **option**", a typed question "**model answer**". */
+  const boldAnswer = (q: Q, seq?: number | null) => q.typed
+    ? `${seq != null ? `(${seq}) ` : ''}<strong>${fmt(q.typed.accept[0])}</strong>`
+    : `${optionLabel(q, q.answer)} <strong>${fmt(q.options[q.answer])}</strong>`;
+  // a past-paper question's one-line reason (migration 014), shown open as "(15) **answer** why" (owner, 25 Nov 2026: no
+  // "Why?" fold, the answer bold with its explanation, every section); generated questions keep their numbered steps
+  /** The reason line itself states the answer (past-paper reasons only; generated steps may never say it). */
+  const reasonSaysAnswer = (q: Q) => isPpId(q.id) && q.solution.length > 0;
+  const stepsHtml = (q: Q, seq?: number | null) => !q.solution.length ? '' : (isPpId(q.id) // nothing written yet: nothing shown
+    ? `<p class="why-right">${boldAnswer(q, seq)} ${fmt(q.solution[0])}</p>` // no answer-bolding inside the reason: "has" would light up everywhere
     : `<ol class="steps">${q.solution.map((st) => `<li>${fmt(st, q.options[q.answer])}</li>`).join('')}</ol>`);
   /** The answer as the results list writes it: the option with its label, or a typed question's model answer. */
   const answerText = (q: Q) => (q.typed ? fmt(q.typed.accept[0]) : `${optionLabel(q, q.answer)} (${fmt(q.options[q.answer])})`);
@@ -881,9 +888,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       : correctionHtml(fmt(rest).replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1'), marks, esc);
     const lost = mine.filter((w) => w.q.seq == null || !placed.has(w.q.seq)) // never dropped: listed under the passage
       .map((w) => `<p>(${w.q.seq ?? '?'}) ${w.typed ? `You wrote: ${esc(w.typed)}. ` : ''}Answer: ${answerText(w.q)}.</p>`).join('');
-    const why = mine.map((w) => { const st = stepsHtml(w.q);
+    const why = mine.map((w) => { const seq = w.q.seq ?? null;
       const rp = report ? reportHtml(w.q) : ''; // the report button lives in the quiz feedback, not the results list
-      return st || rp ? `<details class="rev-why"><summary>(${w.q.seq ?? '?'}) ${st ? 'Why?' : 'Something wrong with this blank?'}</summary>${st}${rp}</details>` : ''; }).join('');
+      return (stepsHtml(w.q, seq) || `<p class="why-right">${boldAnswer(w.q, seq)}</p>`) + rp; }).join('');
     return { html: wordGrid(words) + html + ppFigsHtml(q0, false), lost, why, wrong: mine.length };
   }
   function renderPassage() {
@@ -941,12 +948,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   function czStrikes() {
     const ws = [...$('stem').querySelectorAll<HTMLElement>('.wb-w')];
     const boxes = [...$('stem').querySelectorAll<HTMLInputElement>('input.cz')];
-    boxes.forEach((b) => { b.parentElement!.querySelector('.cz-note')!.textContent = ''; });
+    const noteOf = (b: HTMLElement) => b.closest('.ask-inline')?.querySelector('.cz-note'); // an Editing box sits inside .ed-pair
+    boxes.forEach((b) => { const n = noteOf(b); if (n) n.textContent = ''; });
     if (!ws.length) return;
     const ticked = boxes.filter((b) => b.dataset.ticked && b.value.trim()).sort((a, b) => Number(a.dataset.ticked) - Number(b.dataset.ticked)); // tick order
     const { struck, notes } = strikes(ws.map((w) => w.textContent ?? ''), ticked.map((b) => b.value));
     ws.forEach((w, k) => w.classList.toggle('used', struck.has(k)));
-    ticked.forEach((b, k) => { b.parentElement!.querySelector('.cz-note')!.textContent = notes[k] === 'not-in-box' ? 'not in the box' : notes[k] === 'used' ? 'already used' : ''; });
+    ticked.forEach((b, k) => { const n = noteOf(b); if (n) n.textContent = notes[k] === 'not-in-box' ? 'not in the box' : notes[k] === 'used' ? 'already used' : ''; });
   }
   /** Tick (or Enter): the word strikes in the box; then on to the next empty blank. */
   function czTick(box: HTMLInputElement) {
@@ -1070,7 +1078,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const also = q.typed.accept.length > 1 ? `<p class="typed-also">Also accepted: ${q.typed.accept.slice(1, 4).map(fmt).join(' · ')}</p>` : '';
     $('feedback').innerHTML = (ok ? '<p class="verdict good">Correct!</p>'
       : `<p class="verdict bad">Not yet.</p><p class="typed-mine"><strong>You wrote:</strong> ${esc(mine)}</p>`)
-      + `<p class="typed-model"><strong>${ok ? 'Model answer' : 'Answer'}:</strong> ${fmt(q.typed.accept[0])}</p>${also}` + stepsHtml(q) + reportHtml(q);
+      + (reasonSaysAnswer(q) ? '' : `<p class="typed-model"><strong>${ok ? 'Model answer' : 'Answer'}:</strong> ${fmt(q.typed.accept[0])}</p>`) + stepsHtml(q) + also + reportHtml(q);
     $('feedback').hidden = false;
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
@@ -1225,10 +1233,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const showVis = q.visual && !(q.group && seenVis.has(q.group));
       const setAgain = !!q.group && seenVis.has(q.group); // a set's pages in full with its first wrong question only
       if (q.group) seenVis.add(q.group);
-      return `<details class="rev"><summary>${stemHtml(q, true, false)}</summary>${ppFigsHtml(q, setAgain && q.sub !== 'chi-dialogue-mcq')}
+      return `<div class="rev"><div class="rev-q">${stemHtml(q, true, false)}</div>${ppFigsHtml(q, setAgain && q.sub !== 'chi-dialogue-mcq')}
        ${showVis ? `<details class="rev-vis"><summary>Show the ${esc(q.visual!.kind)}: ${vfmt(q.visual!.title)}</summary>${visualCard(q.visual!)}</details>` : ''}
-       <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : typed ? `You wrote: ${esc(typed)} ` : PAPER ? 'Left blank. ' : 'Not answered. '}Answer: ${answerText(q)}.</p>
-       ${stepsHtml(q)}</details>`;
+       <p>${chose >= 0 ? `You chose ${optionLabel(q, chose)} (${fmt(q.options[chose])}). ` : typed ? `You wrote: ${esc(typed)} ` : PAPER ? 'Left blank. ' : 'Not answered. '}${reasonSaysAnswer(q) ? '' : `Answer: ${answerText(q)}.`}</p>
+       ${stepsHtml(q)}</div>`;
     }).join('');
     // a paper steps through these one by one (Review button); the list stays for scanning, folded away
     $('review').innerHTML = !wrongs.length ? '' : PAPER
@@ -1393,9 +1401,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .ed-ask .vc-u { white-space: nowrap; font-weight: 600; }
   .quiz .ed-ask .vc-u u { text-decoration-color: var(--berry, #a52a45); text-decoration-thickness: 2px; }
   .quiz .ed-arrow { margin: 0 0.1rem 0 0.25rem; opacity: 0.6; }
-  .quiz .ed-ask .typed-box.inline { width: 11ch; }
+  .quiz .ed-ask { white-space: normal; } /* the shared .ask-inline nowrap made each word + box one unbreakable block */
+  .quiz .ed-pair { white-space: nowrap; } /* the arrow never ends a line without its box */
+  .quiz .ed-ask .typed-box.inline { width: 9ch; }
   .quiz del.ed-was, .quiz del.cx-typed { opacity: 0.7; }
-  .quiz .ed-fix { white-space: nowrap; }
+  .quiz .ed-fix { white-space: normal; } /* after marking: "(n) printed answer" may break at its spaces */
+  .quiz .ed-fix > b, .quiz .ed-fix > del, .quiz .ed-fix > .filled { white-space: nowrap; }
   .quiz .typed-box.inline { display: inline-block; width: 9ch; min-width: 7ch; padding: 0.05rem 0.35rem; margin: 0 0.15rem;
     vertical-align: baseline; font-size: 1rem; }
   .quiz .typed-box.long { display: block; width: 100%; box-sizing: border-box; min-height: 3.2em; margin: 0.35rem 0; resize: vertical;
@@ -1475,7 +1486,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .vt-timetable tr:first-child td { font-weight: 700; background: color-mix(in srgb, var(--berry) 10%, transparent); }
   .quiz .vt-email { border-radius: 10px; }
   .quiz .vt-mail { border-bottom: 1.5px solid var(--crust); padding-bottom: 0.45rem; }
-  .quiz .rev summary { white-space: pre-line; }
+  .quiz .rev .rev-q { white-space: pre-line; margin: 0 0 0.3rem; }
   .quiz .options { display: grid; gap: 0.6rem; }
   .quiz .opt {
     display: flex; gap: 0.75rem; align-items: center; text-align: left; min-height: 48px; padding: 0.6rem 0.9rem;

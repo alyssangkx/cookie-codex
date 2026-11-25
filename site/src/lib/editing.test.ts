@@ -23,6 +23,8 @@ test('editAsk puts the number, the printed word and the box together', () => {
   assert.match(h, /<b>\(5\)<\/b> <u>wrod<\/u>/);
   assert.ok(h.indexOf('<u>wrod</u>') < h.indexOf('<input class="cz">'));
   assert.ok(h.includes('class="cz-note"')); // the page writes its "already used" notes beside the box
+  // the line may break between the word and its box (the paragraph wraps like text), never inside "(5) wrod" or "→ box"
+  assert.match(h, /<\/u><\/span><wbr><span class="ed-pair"><span class="ed-arrow"[^>]*>→<\/span><input[^>]*><\/span>/);
 });
 
 test('editCorrections: wrong, empty, right, given and untouched marks', () => {
