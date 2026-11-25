@@ -600,6 +600,7 @@ def merge(old_lines, new_by_id, cur_fp, drop=frozenset(), doubted=frozenset()):
             st["other sections kept"] += 1
         elif x.get("fp") != cur_fp[i]:
             st["stale dropped"] += 1
+            continue  # not "seen": a new line for this id must still be added below (25 Nov 2026: it took a second run)
         elif i in doubted:
             st["dropped: now doubted"] += 1
         elif i in new_by_id:
@@ -775,6 +776,9 @@ def selftest():
     assert merge(old, {}, {})[0] == old, "a section with no questions leaves the file as it is"
     out3, s3 = merge(old, new, cur, doubted={"a", "z", "e"})  # a current line now doubted goes; other sections and new lines do not
     assert "a" not in {x["id"] for x in out3} and s3["dropped: now doubted"] == 1 and {"z", "e"} <= {x["id"] for x in out3}, s3
+    # a stale line whose question this run re-checked: the new line is added in the SAME run (25 Nov 2026: it took two)
+    out4, s4 = merge(old, {"b": {"id": "b", "fp": "2", "explain": {"right": "B2"}}}, cur)
+    assert {x["id"]: x["explain"]["right"] for x in out4}.get("b") == "B2" and s4["stale dropped"] == 1 and s4["added"] == 1, s4
     # verdict ties and synthesis rewrites, on files under WORK/_selftest (never /tmp)
     global SECTIONS
     saved = SECTIONS

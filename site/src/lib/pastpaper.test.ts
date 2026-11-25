@@ -314,7 +314,7 @@ test('poolSizeOk: zero is allowed only for a section awaiting its upload; 1-19 n
   assert.ok(!poolSizeOk(0, 'eng-other', 20, wait));
   assert.ok(!poolSizeOk(7, 'eng-editing', 20, wait));
   assert.ok(poolSizeOk(20, 'eng-other', 20, wait));
-  assert.ok(AWAITING_UPLOAD.has('eng-editing') && PP_SWITCH['eng-editing'] === 'pool');
+  assert.ok(!AWAITING_UPLOAD.has('eng-editing') && PP_SWITCH['eng-editing'] === 'pool');  // live since 25 Nov 2026
 });
 
 test('PP_MIN_TIER is the playable minimum MIN_POOL', () => assert.equal(PP_MIN_TIER, MIN_POOL));
