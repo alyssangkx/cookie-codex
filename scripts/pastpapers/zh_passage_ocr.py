@@ -7,7 +7,8 @@ and dialogue, every stored blank sentence is found around its blank.
   zh_passage_ocr.py read ITEMS.jsonl   server (GPU; PP_ROOT, PP_VLM, PP_TP; PP_TAG names the read, e.g. 72b / 32b)
   zh_passage_ocr.py selftest
 ITEMS rows: {grp, kind: cloze|dialogue|reading, pages: [paths under PP_ROOT], blanks: {n: stem}}. Writes
-PP_ROOT/zhcloze41/<PP_TAG>/<grp>.json {grp, raw}. The dev side is `check()` / `blank_ok()` here."""
+PP_ROOT/<PP_ZOUT, default zhcloze41>/<PP_TAG>/<grp>.json {grp, raw}; PP_MAXPIX sets the picture resolution (queue 43:
+zhcloze43 at 6,000,000). The dev side is `check()` / `blank_ok()` / `clean_read()` / `to_stem()` here."""
 import json
 import os
 import re
@@ -49,11 +50,14 @@ def blank_ok(text, n, stem):
     m = re.search(rf"[（(]\s*{n}\s*[）)]", text)
     if not m:
         return False
+    if not re.search(rf"[（(]\s*{n}\s*[）)]", stem):
+        return False  # the stored stem does not hold this blank's number
     parts = re.split(rf"[（(]\s*{n}\s*[）)]\s*[＿_]*", stem, maxsplit=1)  # around blank n itself (a stem may hold two)
     left, right = (parts + [""])[:2]
     left, right = (re.sub(r"[（(]\s*\d{1,2}\s*[）)]\s*[＿_]*", "", x) for x in (left, right))  # other blanks: no text
     left, right = norm(left)[-12:], norm(right)[:12]
-    ctx_l, ctx_r = norm(text[max(0, m.start() - 60):m.start()]), norm(text[m.end():m.end() + 60])
+    strip = lambda x: re.sub(r"[（(]\s*\d{1,2}\s*[）)]\s*[＿_]*", "", x)  # other blanks in the read: no text, as in the stem
+    ctx_l, ctx_r = norm(strip(text[max(0, m.start() - 60):m.start()])), norm(strip(text[m.end():m.end() + 60]))
     ok_l = not left or SequenceMatcher(None, left, ctx_l, autojunk=False).find_longest_match(0, len(left), 0, len(ctx_l)).size >= 0.7 * len(left)
     ok_r = not right or SequenceMatcher(None, right, ctx_r, autojunk=False).find_longest_match(0, len(right), 0, len(ctx_r)).size >= 0.7 * len(right)
     return ok_l and ok_r
@@ -99,7 +103,8 @@ def main(items_file):
         return
     from vllm import LLM, SamplingParams
     llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
-              gpu_memory_utilization=0.9, max_model_len=12288, max_num_seqs=8, limit_mm_per_prompt={"image": 2},
+              # two pages at PP_MAXPIX (about one token per 784 pixels) plus the reply must fit
+              gpu_memory_utilization=0.9, max_model_len=max(12288, 2 * int(os.environ.get("PP_MAXPIX", "3000000")) // 784 + 3000), max_num_seqs=8, limit_mm_per_prompt={"image": 2},
               mm_processor_kwargs={"max_pixels": int(os.environ.get("PP_MAXPIX", "3000000"))}, allowed_local_media_path=str(PP), enforce_eager=bool(os.environ.get("PP_EAGER")))
     sp = SamplingParams(temperature=0, max_tokens=2500)
     for i in range(0, len(todo), 8):
@@ -113,7 +118,7 @@ def main(items_file):
 
 def clean_read(text):
     """A read as passage text: the paper's printed question marker before a blank ("Q（18）", "Q18（18）") dropped."""
-    return re.sub(r"Q\s*\d{0,2}\s*(?=[（(]\s*\d{1,2}\s*[）)])", "", text or "")
+    return re.sub(r"[QＱ]\s*[\d０-９]{0,2}\s*(?=[（(]\s*\d{1,2}\s*[）)])", "", text or "")
 
 
 def to_stem(text, blanks):
@@ -154,6 +159,9 @@ def selftest():
     assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "cloze")[1].startswith("stored blank sentences")
     two = "老管理员要新管理员（16）＿＿他所说的去做，并在笼子的各个（17）＿＿＿＿里，放满了食物。"
     rd = "老管理员要新管理员Q（16）他所说的去做，并在笼子的各个Q17（17）里，放满了食物。"
+    assert clean_read("各个Ｑ17（17）里") == "各个（17）里"
+    assert check("要（16）（17）他所说的去做，并在笼子的各个角落里放满了食物。", "要（16）（17）他所说的去做，并在笼子的各个角落里放满了食物。",
+                 {16: "要（16）＿＿（17）＿＿他所说的去做", 17: "要（16）＿＿（17）＿＿他所说的去做"})[0]
     assert clean_read(rd) == "老管理员要新管理员（16）他所说的去做，并在笼子的各个（17）里，放满了食物。"
     assert check(rd, rd, {"16": two, "17": two}) == (True, None), check(rd, rd, {"16": two, "17": two})
     print("zh_passage_ocr selftest ok")

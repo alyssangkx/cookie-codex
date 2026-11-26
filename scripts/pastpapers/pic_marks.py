@@ -7,7 +7,8 @@ all of them, plus pictures that carry text from another question.
   pic_marks.py ITEMS.jsonl    (PP_ROOT = folder holding the copied pictures; PP_VLM / PP_TP pick the model)
   pic_marks.py selftest
 ITEMS rows: {id (pp id), subject, file (path under PP_ROOT), gate: true for a known answer-marked picture}.
-Writes PP_ROOT/marks39/<id>.json {id, raw, read}; read = {marks, marks_what, foreign_text, foreign_what}. Prints counts.
+Writes PP_ROOT/<PP_MOUT, default marks39>/<id>.json {id, raw, read}; read = {marks, marks_what, foreign_text, foreign_what}.
+PP_PROMPT=b asks the plain handwriting question (PROMPT_B); PP_MAXPIX sets the resolution (queue 45 pilot: marks45/<way>).
 On dev, `flags(read)` decides; the gate (the 22 pictures held on 25 Nov) must be found before any hold is applied."""
 import json
 import os
