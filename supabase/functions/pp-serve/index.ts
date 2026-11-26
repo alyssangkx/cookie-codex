@@ -91,8 +91,10 @@ Deno.serve(async (req) => {
     // (a text figure is a string `text` and no `path`; anything else is a picture and must have been signed)
     const isText = (f: { path?: unknown; text?: unknown }) => typeof f.text === 'string' && f.text.trim() !== '' && f.path === undefined;
     const out = items
-      .map((i) => ({ ...i, figures: (i.figures ?? []).map((f) => (isText(f) ? { text: f.text as string } : { path: f.path, w: f.w, h: f.h, url: typeof f.path === 'string' ? signed.get(f.path) : undefined })) }))
-      .filter((i) => i.figures.every((f) => ('text' in f && !('path' in f)) || typeof (f as { url?: string }).url === 'string'));
+      .map((i) => ({ ...i, figures_raw: i.figures ?? [], figures: (i.figures ?? []).map((f) => (isText(f) ? { text: f.text as string } : { path: f.path, w: f.w, h: f.h, url: typeof f.path === 'string' ? signed.get(f.path) : undefined })) }))
+      .filter((i) => (i.figures_raw ?? []).every((f) => !(f.text !== undefined && f.path !== undefined)) // both: ambiguous, drop
+        && i.figures.every((f) => ('text' in f && !('path' in f)) || typeof (f as { url?: string }).url === 'string'))
+      .map(({ figures_raw: _raw, ...i }) => i);
     return json({ items: out });
   } catch (e) {
     console.error('pp-serve:', e instanceof Error ? e.message : e);

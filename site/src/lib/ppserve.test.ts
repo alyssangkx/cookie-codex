@@ -17,7 +17,8 @@ test('pp-serve keeps text figures and signed pictures, drops unsigned or malform
   const keep = run([{ id: 1, figures: [{ text: 'passage' }] }, { id: 2, figures: [{ path: 'a.webp', w: 1, h: 1 }] }, { id: 3, figures: [] }], signed);
   assert.deepEqual(keep.map((i) => i.id), [1, 2, 3]);
   assert.deepEqual(keep[0].figures, [{ text: 'passage' }]);
+  assert.equal('figures_raw' in keep[0], false);
   const drop = run([{ id: 4, figures: [{ path: 'b.webp', w: 1, h: 1, text: 'x' }] }, { id: 5, figures: [{ text: null }] },
-    { id: 6, figures: [{ path: 'missing.webp' }] }, { id: 7, figures: [{ text: '  ' }] }], signed);
+    { id: 6, figures: [{ path: 'missing.webp' }] }, { id: 7, figures: [{ text: '  ' }] }, { id: 8, figures: [{ path: 'a.webp', w: 1, h: 1, text: 'x' }] }], signed);
   assert.deepEqual(drop.map((i) => i.id), []);
 });

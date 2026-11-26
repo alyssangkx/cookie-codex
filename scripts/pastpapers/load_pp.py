@@ -1759,7 +1759,8 @@ def review(a):
         sys.exit("--subtopics is required (or 'all' with --sample)")
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
-        figs[m["pp_id"]].append(m["path"])
+        if "path" in m:  # same reading as upload: only picture lines (a passage's text lives on its row)
+            figs[m["pp_id"]].append(m["path"])
     held = read_hold(out)
     rows = [r for r in jl(out / "selected.jsonl") if (keep == {"all"} or r["subtopic"] in keep) and r["id"] not in held]
     if a.sample:  # owner's spot-check: a seeded random few per sub-topic (same draw every run)
@@ -2213,12 +2214,15 @@ def cloze_stem(t, n, opts=()):
     return t2
 
 
+TEXT_FIG_MAX = 20000  # = site/src/lib/pastpaper.ts TEXT_FIG_MAX
+
+
 def no_passage(rows, figs):
     """Set questions (grp) shown with no passage at all: no picture, no text passage, and a stem that is not itself the
     passage (a cloze, dialogue, vocabulary-cloze or editing row carries the whole passage, its own number marked in it).
     Such a question would be asked blind. A short stem such as "对话中的（26）应填入哪一句？" is not a passage."""
-    own = lambda r: len(r.get("stem") or "") >= 120 and re.search(rf"[（(]\s*{r.get('seq')}\s*[）)]|\{{\{{{r.get('seq')}\|", r.get("stem") or "")  # editing: {{n|word
-    return [r["id"] for r in rows if r.get("grp") and not figs.get(r["id"]) and not r.get("set_pages") and not own(r)]
+    own = lambda r: len(r.get("stem") or "") >= 120 and re.search(rf"[（(]\s*{r.get('seq')}\s*[）)]|\{{\{{\s*{r.get('seq')}\s*\|", r.get("stem") or "")  # editing: {{n|word
+    return [r["id"] for r in rows if r.get("grp") and not figs.get(r["id"]) and not r.get("set_pages") and not r.get("crops") and not own(r)]
 
 
 def set_pages(rows, out, kind="english-visual"):
@@ -2468,11 +2472,14 @@ def upload(a):
     pics = lambda i: [f for f in figs[i] if "path" in f]
     missing = [r["id"] for r in rows if (r["crops"] and len(pics(r["id"])) != len(r["crops"]))
                or (r.get("set_pages") and len(pics(r["id"])) != len(r["set_pages"]))]  # a set row without its pages too
+    if missing:
+        sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
+    long = [r["id"] for r in rows if len(r.get("passage_text") or "") > TEXT_FIG_MAX]
+    if long:  # the site's validRow drops a row whose text figure is longer (pastpaper.ts TEXT_FIG_MAX)
+        sys.exit(f"{len(long)} text passages exceed {TEXT_FIG_MAX} characters: {', '.join(long[:6])}")
     bare = no_passage(rows, figs)
     if bare:  # 26 Nov 2026 review: a set question that lost its pages and has no text passage would be asked blind
         sys.exit(f"{len(bare)} set questions have no passage (no page, no text, no blank of their own): {', '.join(bare[:6])}")
-    if missing:
-        sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
     # explanations (migration 014): explain.py apply writes <out>/<subject>/explain.jsonl for the ones the second model passed
     from explain import fp as explain_fp  # an explanation is used only for the question version it was written for
     expl = {x["id"]: x for x in jl(out / "explain.jsonl")}
