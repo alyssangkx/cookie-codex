@@ -105,6 +105,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, underlineMarks, correctionHtml, type CxMark, type PpFig } from '../../lib/pastpaper';
   import { typedOk, compose, scaffoldHtml } from '../../lib/typed';
   import { wordBox, strikes, passageEnd } from '../../lib/cloze';
+  import { replaceBlanks, hasOwnBlank, dropAskedLine, textFigureHtml, choose as pickBlank, place, unplace, usedPhrases, emptyBlanks, nextEmpty, optionIndex, setCorrections, type SetMark } from '../../lib/passageset';
   import { editingHtml, editWord, editAsk, editCorrections } from '../../lib/editing';
   import { esc, boldAns } from '../../lib/boldans';
   import { glossOption, type Gloss, type GlossLine } from '../../lib/zhgloss';
@@ -117,7 +118,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   type Q = { id: string; sub: string; level: string; figure?: Figure; topic?: string; stem: string; options: string[]; answer: number;
     explain: ({ tag: string; why: string } | null)[]; solution: string[]; group?: string; seq?: number; visual?: Visual; calc?: false;
-    numbered?: true; ppFigs?: PpFig[]; ppYear?: number | null; typed?: { accept: string[]; scaffold: string | null } }; // past-paper items only (pastpaper.ts; off while PP_ENABLED is false)
+    numbered?: true; ppFigs?: PpFig[]; ppText?: string[]; ppYear?: number | null; typed?: { accept: string[]; scaffold: string | null } }; // past-paper items only (pastpaper.ts; off while PP_ENABLED is false)
   type Meta = {
     subs: Record<string, { tries: number; name: string; topicName: string; school: string; file: string | null; slug: string; count: Record<Tier, number>; pool: number }>;
     files: string[]; banks: string; slots: Record<string, { slug: string; dup: boolean }>;
@@ -201,6 +202,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const CLOZE = new Set(meta.cloze);
   const EDIT = new Set(meta.editing); // Editing sections: marked words {{n|printed word}} in the passage
   const WHOLE = new Set([...meta.cloze, ...meta.editing]); // sections whose quiz is one whole passage with one Submit
+  const MATES = new Set([...WHOLE, 'chi-dialogue-mcq']); // sets drawn as one passage: the blanks outside the quiz are fetched to show their answers
   const clozeStem = (q: Q, reveal: boolean) => {
     if (q.sub === 'eng-vocab-cloze') return underlineMarks(fmt(q.stem), q.seq ?? null); // a read passage: underlines
     const zh = q.sub === 'chi-cloze-mcq';
@@ -313,7 +315,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
    * dropping them, as the next save would lose their answers. A due paper drops them and is handed in with the rest. */
   async function hydrate(topUp = true, keep: () => boolean = () => false): Promise<string> {
     // a cloze passage's blanks outside the quiz come too: shown with their answers, so nothing looks skipped
-    const gs = new Set(quiz.map((id) => byId.get(id)).filter((q) => q?.group && WHOLE.has(q.sub)).map((q) => q!.group!));
+    const gs = new Set(quiz.map((id) => byId.get(id)).filter((q) => q?.group && MATES.has(q.sub)).map((q) => q!.group!));
     const mates = [...byId.values()].filter((q) => q.group && gs.has(q.group) && !quiz.includes(q.id)).map((q) => q.id);
     const want = [...quiz, ...mates].filter((id) => isStub(byId.get(id)));
     if (!want.length) return '';
@@ -385,7 +387,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       $('title').textContent = 'Daily Review';
     }
     const blocked = dayBlock(s, mode);
-    if (blocked) return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
+    if (blocked) return stop(blockMessage(blocked, s), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>');
     const playable = { b: sub?.count.b >= MIN_POOL, i: sub?.count.i >= MIN_POOL, c: sub?.count.c >= MIN_POOL };
     if (POOL && triesUsedUp(s, subId)) return stop(`You have had ${sub.tries} tries at this topic today. Try again tomorrow.`);
     if (mode === 'tier' && !POOL && !playable[tier]) return stop('This tier has no questions yet.');
@@ -454,9 +456,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       closeStalePapers(s0, now); // open paper records over 2 days old (abandoned, draft lost): no paper runs that long
     }
     const blocked = beginQuiz(s0, mode, { sub: mode === 'tier' ? subId : undefined, tier: mode === 'tier' && !POOL ? tier : undefined, total: quiz.length }, now);
-    if (blocked) { quiz = []; return stop(blockMessage(blocked), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>'); }
+    if (blocked) { quiz = []; return stop(blockMessage(blocked, s), '<a href="/collection/">See your cards</a> · <a href="/">Browse the Codex</a>'); }
     save(s0);
-    i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear();
+    i = 0; score = 0; wrongs = []; over = false; pausedAt = 0; usedRight.clear(); filledBlanks.clear(); setCards.clear(); setUi = null;
     inQuiz = new Set(quiz);
     startedAt = now;
     if (PAPER) {
@@ -495,6 +497,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // (Science): the image path is limited to /science/ and every text and the alt go through esc()
   const figureHtml = (f: Figure) => {
     if (typeof f === 'string') return f;
+    if ('text' in f) return textFigureHtml(f.text, esc); // a passage as text: escaped, paragraphs on blank lines
     if (!/^\/science\/[\w.-]+\.webp$/.test(f.img)) return '';
     const pct = (n: number) => Math.min(100, Math.max(0, Number(n) || 0));
     const tags = (f.labels ?? []).map((l) =>
@@ -808,7 +811,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     const q = byId.get(quiz[i])!;
     if (pausedAt) { deadline += Date.now() - pausedAt; pausedAt = 0; $('timer').classList.remove('paused'); clock(); }
     answered = false;
+    setUi = null;
+    $('options').classList.remove('set');
     if (isWhole(q)) return renderPassage();
+    if (isSetQ(q)) return renderSet();
     $('count').textContent = `Question ${i + 1} of ${quiz.length}`;
     $('nocalc').hidden = q.calc !== false;
     // figures are SVG generated by our own build scripts (scripts/quiz/math/figures.py)
@@ -864,7 +870,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // Submit marks them all (each blank still its own question: score, retests); the Grammar Cloze word box is a grid whose
   // words strike through as the child ticks them (a note for a word not in the box or already used, never refused)
   const isWhole = (q: Q) => !PAPER && !!q.typed && !q.typed.scaffold && !!q.group && q.seq != null && WHOLE.has(q.sub);
-  const wholeGroup = (id: string) => { const o = byId.get(id); return o && isWhole(o) ? o.group! : null; };
+  /** An MCQ question of a passage set (any subject): its set is one screen with one Submit (renderSet). */
+  const isSetQ = (q: Q) => !PAPER && !q.typed && !!q.group && q.seq != null;
+  const wholeGroup = (id: string) => { const o = byId.get(id); return o && (isWhole(o) || isSetQ(o)) ? o.group! : null; };
   let runEnd = 0, czWarned = false, czTicks = 0;
   /** A passage's blanks not in this quiz -> their answers (a blank never fetched has none: it stays a blank). */
   const givenFor = (g: string) => {
@@ -1008,6 +1016,229 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('stem').scrollIntoView({ block: 'start' });
   }
 
+  // ---- Passage sets answered whole (owner, 26 Nov 2026, docs/passage-sets-ui.md): one screen per set, every question
+  // answered, ONE Submit marks them all. Each question stays its own question (answer(): score, retests). Three screens:
+  // cloze chips (the passage is text, a blank's 4 options sit inline), dialogue (a phrase bank, drag or tap-tap) and a
+  // list (passage on top, questions below; also the fallback for a set whose stem is one sentence under a page image).
+  type SetUi = { kind: 'chips' | 'dialogue' | 'list'; run: string[]; picks: Map<number, number>; phrases: string[]; sel: number | null; warned: boolean };
+  let setUi: SetUi | null = null;
+  const setCards = new Map<string, string>(); // group -> the finished set's card for the results list (wrong ones only)
+  const clip = (s: string) => (s.length > PICK_MAX ? `${s.slice(0, PICK_MAX - 1)}…` : s);
+  const sameAll = (run: Q[], f: (o: Q) => unknown) => run.every((o) => JSON.stringify(f(o)) === JSON.stringify(f(run[0])));
+  const figsTop = (o: Q) => (o.figure ? `<span class="qfig-wrap">${figureHtml(o.figure)}</span>` : '')
+    + (o.ppText ?? []).map((t) => textFigureHtml(t, esc)).join('');
+  /** The passage's own text for a set read as a list (a vocabulary cloze keeps its underlined words). */
+  const listText = (o: Q, asked: number | null) => (o.sub === 'eng-vocab-cloze' ? underlineMarks(fmt(o.stem), asked) : fmt(o.stem));
+  const unmark = (h: string) => h.replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1');
+
+  /** The passage with a blank swapped for `fn`'s html; blanks of the set not in this quiz show their answer in grey. */
+  function setPassage(run: Q[], kind: 'chips' | 'dialogue', fn: (o: Q) => string, marks?: Map<number, SetMark>) {
+    const q = run[0];
+    const bySeq = new Map(run.map((o) => [o.seq!, o]));
+    const given = givenFor(q.group!);
+    const stem = kind === 'dialogue' ? dropAskedLine(q.stem) : q.stem;
+    const base = unmark(fmt(stem));
+    if (marks) {
+      for (const [n, a] of given) if (!marks.has(n)) marks.set(n, { kind: 'given', answer: a });
+      return setCorrections(base, marks, esc).html;
+    }
+    return replaceBlanks(base, (n, zh) => {
+      const o = bySeq.get(n);
+      if (o) return fn(o);
+      const gv = given.get(n);
+      const lead = zh ? `（${n}）` : `(${n}) `;
+      return gv ? `${lead}<span class="filled given" title="not in this quiz">${esc(gv)}</span>` : zh ? `（${n}）＿＿＿＿` : `(${n}) ____`;
+    }).html;
+  }
+  const chipHtml = (o: Q) => `<span class="chips" role="group" aria-label="Blank ${o.seq}"><b>${o.seq}</b>`
+    + o.options.map((t, k) => `<button type="button" class="chip" data-seq="${o.seq}" data-k="${k}" aria-pressed="false" aria-label="Blank ${o.seq}: ${esc(t)}">${fmt(t)}</button>`).join('') + '</span>';
+  const blankBtn = (o: Q) => `<button type="button" class="dblank" data-seq="${o.seq}"></button>`;
+
+  function renderSet() {
+    const q = byId.get(quiz[i])!, g = q.group!;
+    const later = quiz.slice(i + 1), same = later.filter((id) => wholeGroup(id) === g);
+    quiz = [...quiz.slice(0, i + 1), ...same, ...later.filter((id) => wholeGroup(id) !== g)];
+    runEnd = passageEnd(quiz, i, wholeGroup);
+    const run = quiz.slice(i, runEnd).map((id) => byId.get(id)!).sort((a, b) => (a.seq ?? 0) - (b.seq ?? 0)); // passage order on screen
+    const inline = run.every((o) => hasOwnBlank(o.stem, o.seq));
+    const kind = inline ? (q.sub === 'chi-dialogue-mcq' ? 'dialogue' : 'chips') : 'list';
+    const ui: SetUi = { kind, run: run.map((o) => o.id), picks: new Map(), phrases: kind === 'dialogue' ? [...run[0].options] : [], sel: null, warned: false };
+    setUi = ui;
+    $('count').textContent = run.length > 1 ? `Questions ${i + 1}–${runEnd} of ${quiz.length}` : `Question ${i + 1} of ${quiz.length}`;
+    $('nocalc').hidden = q.calc !== false;
+    if (/^chi-/.test(q.sub) || /[㐀-鿿]/.test(q.stem)) { (window as unknown as { ccxZh?: () => void }).ccxZh?.(); loadGloss(); }
+    const sharedVis = !!q.visual && sameAll(run, (o) => o.visual);
+    $('visual').hidden = !sharedVis;
+    $('visual').innerHTML = sharedVis ? visualCard(q.visual!) : '';
+    $('feedback').hidden = true;
+    $('next').hidden = true;
+    const submit = `<p class="set-hint" aria-live="polite"></p><button type="button" class="primary set-submit">Submit all ${run.length} answer${run.length === 1 ? '' : 's'}</button>`;
+    const opts = $('options');
+    opts.classList.remove('many', 'typed');
+    opts.classList.add('set');
+    if (kind === 'chips') {
+      $('stem').innerHTML = ppBadge(q) + setPassage(run, 'chips', chipHtml) + ppFigsHtml(q, false);
+      opts.innerHTML = submit;
+      $('stem').querySelector<HTMLElement>('.chip')?.focus({ preventScroll: true });
+    } else if (kind === 'dialogue') {
+      const bank = `<div class="phrase-bank" role="group" aria-label="Phrases: drag one onto a blank, or tap a phrase and then a blank">`
+        + ui.phrases.map((t, p) => `<button type="button" class="phrase" draggable="true" data-p="${p}" aria-pressed="false">${fmt(t)}</button>`).join('') + '</div>';
+      $('stem').innerHTML = bank + ppBadge(q) + `<div class="dlg">${setPassage(run, 'dialogue', blankBtn)}</div>` + ppFigsHtml(q, false);
+      opts.innerHTML = submit;
+      dlgPaint();
+      $('stem').querySelector<HTMLElement>('.phrase')?.focus({ preventScroll: true });
+    } else {
+      const shared = run.length > 1 && sameAll(run, (o) => o.stem);
+      const sharedFig = sameAll(run, (o) => [o.figure, o.ppText]);
+      $('stem').innerHTML = ppBadge(q) + (sharedFig ? figsTop(q) : '') + (shared ? `<div class="set-text">${listText(q, null)}</div>` : '') + ppFigsHtml(q, false);
+      const many = run.some((o) => o.options.length > 4);
+      opts.innerHTML = run.map((o) => `<div class="set-q" role="group" aria-labelledby="sq-${o.seq}"><p class="set-qstem" id="sq-${o.seq}"><b>${o.seq}.</b> `
+        + (shared ? '' : `${listText(o, o.seq ?? null)}${!sharedFig ? figsTop(o) : ''}`) + '</p>'
+        + (!sharedVis && o.visual ? `<details class="rev-vis" open><summary>The ${esc(o.visual.kind)}</summary>${visualCard(o.visual)}</details>` : '')
+        + `<div class="set-opts${many ? ' many' : ''}">${o.options.map((t, k) => `<button type="button" class="opt" data-sk="${o.seq}" data-k="${k}" aria-pressed="false"><span class="letter">${optionLabel(o, k)}</span> <span>${fmt(t)}</span></button>`).join('')}</div></div>`).join('') + submit;
+      opts.querySelector<HTMLElement>('.opt')?.focus({ preventScroll: true });
+    }
+    $('stem').scrollIntoView({ block: 'start' });
+  }
+
+  /** Paint the dialogue: the bank (a placed phrase greys out, the tapped one is pressed) and each blank (its phrase, or empty). */
+  function dlgPaint() {
+    const ui = setUi;
+    if (!ui || ui.kind !== 'dialogue') return;
+    const used = usedPhrases(ui.picks);
+    $('stem').querySelectorAll<HTMLButtonElement>('.phrase').forEach((b) => {
+      const p = Number(b.dataset.p);
+      b.disabled = used.has(p);
+      b.draggable = !used.has(p);
+      b.setAttribute('aria-pressed', String(ui.sel === p));
+    });
+    $('stem').querySelectorAll<HTMLButtonElement>('.dblank').forEach((b) => {
+      const n = Number(b.dataset.seq), p = ui.picks.get(n);
+      b.classList.toggle('filled', p != null);
+      b.innerHTML = p != null ? fmt(ui.phrases[p]) : `（${n}）＿＿＿＿`;
+      b.setAttribute('aria-label', p != null ? `Blank ${n}: ${ui.phrases[p]}. Press to send this phrase back.`
+        : `Blank ${n}, empty.${ui.sel != null ? ` Press to put "${ui.phrases[ui.sel]}" here.` : ' Choose a phrase first, or drag one here.'}`);
+    });
+  }
+  function dlgPlace(phrase: number, seq: number) {
+    const ui = setUi;
+    if (!ui || ui.kind !== 'dialogue' || answered) return;
+    ui.picks = place(ui.picks, phrase, seq);
+    ui.sel = null;
+    ui.warned = false;
+    dlgPaint();
+    const nx = nextEmpty(ui.run.map((id) => byId.get(id)!.seq!), ui.picks, seq);
+    ($('stem').querySelector<HTMLElement>(nx != null ? `.dblank[data-seq="${nx}"]` : '.dblank:last-of-type') ?? $('stem')).focus({ preventScroll: true });
+    if (nx == null) $('options').querySelector<HTMLElement>('.set-submit')?.focus({ preventScroll: true });
+  }
+  function dlgTapPhrase(p: number) {
+    const ui = setUi;
+    if (!ui || answered || ui.picks && usedPhrases(ui.picks).has(p)) return;
+    ui.sel = ui.sel === p ? null : p;
+    dlgPaint();
+  }
+  function dlgTapBlank(seq: number) {
+    const ui = setUi;
+    if (!ui || answered) return;
+    if (ui.sel != null) return dlgPlace(ui.sel, seq);
+    if (ui.picks.has(seq)) { ui.picks = unplace(ui.picks, seq); ui.warned = false; dlgPaint(); } // a filled blank sends its phrase back
+  }
+  /** A chip (cloze) or an option button (list): this blank or question now holds that option. */
+  function setPickOption(seq: number, k: number, from: HTMLElement) {
+    const ui = setUi;
+    if (!ui || answered) return;
+    ui.picks = pickBlank(ui.picks, seq, k);
+    ui.warned = false;
+    const scope = from.closest<HTMLElement>('.chips, .set-opts')!;
+    scope.querySelectorAll<HTMLButtonElement>('button').forEach((b) => {
+      const on = Number(b.dataset.k) === k;
+      b.setAttribute('aria-pressed', String(on));
+      b.classList.toggle('sel', on);
+      b.classList.toggle('off', !on && ui.kind === 'chips'); // a cloze blank greys out its other options (tap one to change)
+    });
+  }
+
+  /** Submit: every question marked at once (an empty one after one warning; all of them when the time runs out). */
+  function setSubmit(timeUp = false) {
+    const ui = setUi;
+    if (answered || !ui) return;
+    const run = ui.run.map((id) => byId.get(id)!);
+    const empty = emptyBlanks(run.map((o) => o.seq!), ui.picks);
+    if (empty.length && !timeUp && !ui.warned) {
+      ui.warned = true;
+      $('options').querySelector('.set-hint')!.textContent = `${empty.length} ${ui.kind === 'list' ? `question${empty.length === 1 ? ' is' : 's are'}` : `blank${empty.length === 1 ? ' is' : 's are'}`} still empty. Press Submit again to hand it in as it is.`;
+      const first = ui.kind === 'list' ? $('options').querySelector<HTMLElement>(`[data-sk="${empty[0]}"]`)
+        : ui.kind === 'chips' ? $('stem').querySelector<HTMLElement>(`.chip[data-seq="${empty[0]}"]`) : $('stem').querySelector<HTMLElement>(`.dblank[data-seq="${empty[0]}"]`);
+      first?.focus({ preventScroll: true });
+      first?.scrollIntoView({ block: 'center' });
+      return;
+    }
+    answered = true;
+    pausedAt = Date.now();
+    $('timer').classList.add('paused');
+    $('timer').textContent += ' paused';
+    const g = run[0].group!, sv = load(), now = Date.now(); // one load and save for the whole set
+    const marks = new Map<number, SetMark>(), got = new Map<string, { k: number; text: string | null }>();
+    let right = 0;
+    for (const o of run) {
+      const p = ui.picks.get(o.seq!);
+      const k = p == null ? -1 : ui.kind === 'dialogue' ? optionIndex(o.options, ui.phrases[p]) : p;
+      const text = k >= 0 ? o.options[k] : p != null ? ui.phrases[p] : null; // a phrase not among this row's options is still shown
+      const ok = k === o.answer;
+      if (answer(sv, o.id, ok, now, true, ok ? undefined : text != null ? clip(text) : timeUp ? undefined : LEFT_BLANK, shortRetest(o.id))) retestsPassed++;
+      if (ok) { score++; right++; } else wrongs.push({ q: o, chose: k, tag: k >= 0 ? o.explain[k]?.tag ?? 'wrong' : p != null ? 'wrong' : timeUp ? 'ran_out_of_time' : 'blank' });
+      got.set(o.id, { k, text });
+      marks.set(o.seq!, ok ? { kind: 'right', answer: o.options[o.answer] } : { kind: 'wrong', picked: text, answer: o.options[o.answer] });
+      if (!filledBlanks.has(g)) filledBlanks.set(g, new Map());
+      filledBlanks.get(g)!.set(o.seq!, { t: o.options[o.answer], ok });
+    }
+    save(sv);
+    i = runEnd - 1; // Next goes past the whole set
+    const n = run.length, bad = run.filter((o) => !marks.get(o.seq!) || marks.get(o.seq!)!.kind !== 'right');
+    // the answers in place: a cloze or dialogue passage shows each blank, a list shows each question's options marked
+    const why = run.map((o) => setWhy(o, got.get(o.id)!.k, marks.get(o.seq!)!.kind === 'right')).join('');
+    let body: string, card: string;
+    const q0 = run[0];
+    if (ui.kind === 'list') {
+      const shared = run.length > 1 && sameAll(run, (o) => o.stem), sharedFig = sameAll(run, (o) => [o.figure, o.ppText]);
+      const top = ppBadge(q0) + (sharedFig ? figsTop(q0) : '') + (shared ? `<div class="set-text">${listText(q0, null)}</div>` : '') + ppFigsHtml(q0, false);
+      const block = (o: Q) => { const r = got.get(o.id)!;
+        return `<div class="set-q"><p class="set-qstem"><b>${o.seq}.</b> ${shared ? '' : listText(o, o.seq ?? null)}</p><div class="set-opts${o.options.length > 4 ? ' many' : ''}">`
+          + o.options.map((t, k) => `<div class="opt${k === o.answer ? ' right' : k === r.k ? ' wrong' : ''}"><span class="letter">${optionLabel(o, k)}</span> <span>${fmt(t)}</span></div>`).join('') + '</div></div>'; };
+      $('stem').innerHTML = top;
+      $('options').innerHTML = run.map(block).join('');
+      card = `<div class="rev rev-passage"><p class="rev-ph">${bad.length} to look at again in this set.</p>${top}${bad.map(block).join('')}`
+        + bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('') + '</div>';
+    } else {
+      const html = setPassage(run, ui.kind, () => '', new Map(marks));
+      body = ppBadge(q0) + (ui.kind === 'dialogue' ? `<div class="dlg">${html}</div>` : html) + ppFigsHtml(q0, false);
+      $('stem').innerHTML = body;
+      $('options').innerHTML = '';
+      card = `<div class="rev rev-passage"><p class="rev-ph">${ppBadge(q0)}${bad.length} to fix in this passage: what you chose is crossed out, the answer is in bold.</p>`
+        + `<p class="stem">${ui.kind === 'dialogue' ? `<span class="dlg">${html}</span>` : html}</p>${bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('')}</div>`;
+    }
+    if (bad.length) setCards.set(g, card);
+    $('feedback').innerHTML = `<p class="verdict ${right === n ? 'good' : 'bad'}">${right} of ${n} right${right === n ? '!' : '.'}</p>`
+      + (ui.kind !== 'list' && bad.length ? '<p>In the passage, what you chose is crossed out and the answer is in bold.</p>' : '') + why
+      + (bad.length ? bad.map(reportHtml).join('') : reportHtml(q0));
+    $('feedback').hidden = false;
+    $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
+    $('next').hidden = false;
+    $('next').focus({ preventScroll: true });
+    $('stem').scrollIntoView({ block: 'start' });
+  }
+  /** "(n) **answer** reason" for one question of a set (the past-paper line; a generated question keeps its numbered steps),
+   *  then why a wrong pick was tempting. */
+  function setWhy(o: Q, k: number, ok: boolean) {
+    const lead = `(${o.seq}) <strong>${fmt(o.options[o.answer])}</strong>`;
+    const line = isPpId(o.id) && o.solution.length ? `<p class="why-right">${lead} ${fmt(o.solution[0])}</p>`
+      : `<p class="why-right">${lead}</p>${o.solution.length && !isPpId(o.id) ? `<ol class="steps">${o.solution.map((st) => `<li>${fmt(st, o.options[o.answer])}</li>`).join('')}</ol>` : ''}`;
+    if (ok || k < 0) return line;
+    const why = o.explain[k]?.why;
+    const mine = why ? `<p class="mistake"><strong>Why “${fmt(o.options[k])}” ${isPpId(o.id) ? "doesn't fit" : 'is tempting'}:</strong> ${fmt(why, isPpId(o.id) ? undefined : o.options[o.answer])}</p>` : '';
+    return line + mine + glossHtml(o, k);
+  }
+
   function record(id: string, ok: boolean, picked?: string) {
     const s = load();
     if (answer(s, id, ok, Date.now(), true, picked, shortRetest(id))) retestsPassed++; // tier quizzes and Daily Review only: papers record in submitPaper()
@@ -1108,6 +1339,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     for (const d of ['leave-dlg', 'submit-dlg']) { const dlg = $(d) as HTMLDialogElement; if (dlg.open) dlg.close(); }
     if (PAPER) return submitPaper(timeUp);
     if (!answered && $('stem').querySelector('input.cz')) czSubmit(true); // a passage on screen: its typed answers count
+    else if (!answered && setUi) setSubmit(true); // a passage set on screen: its picks count, the empty ones as ran out of time
     // unanswered questions count as wrong when time runs out (design section 3)
     const unanswered = quiz.slice(i + (answered ? 1 : 0));
     for (const id of unanswered) { record(id, false); wrongs.push({ q: byId.get(id)!, chose: -1, tag: 'ran_out_of_time' }); }
@@ -1213,7 +1445,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         : `<em>Topic mastered: every Competent tier cleared!</em>`);
     }
     if (res.goalJustMet) html += '<p class="verdict good">Daily goal met! Your streak grows.</p>';
-    { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b)}</p>`; }
+    { const b = dayBlock(s, mode); if (b) html += `<p>${blockMessage(b, s)}</p>`; }
     $('verdict').innerHTML = html;
     const seenVis = new Set<string>(); // a visual card shows once per set, with the first missed question of that group
     // a typed cloze passage: ONE passage per set with every mistake highlighted (owner, 24 Nov 2026), not a card per blank
@@ -1224,7 +1456,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       return `<div class="rev rev-passage"><p class="rev-ph">${ppBadge(q0)}${fx.wrong} to fix in this passage: what you wrote is crossed out, the answer is in bold.</p>`
         + `<p class="stem">${fx.html}</p>${fx.lost}${fx.why}</div>`;
     };
+    const cardDone = new Set<string>();
     const items = wrongs.map(({ q, chose, typed }) => {
+      if (q.group && setCards.has(q.group)) { // a passage set answered whole: one card for all its mistakes
+        if (cardDone.has(q.group)) return '';
+        cardDone.add(q.group);
+        return setCards.get(q.group)!;
+      }
       if (q.group && passages.has(q.group)) { // every mistake of that passage in one card
         if (passageDone.has(q.group)) return '';
         passageDone.add(q.group);
@@ -1251,6 +1489,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   $('options').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest('button');
     if (b?.classList.contains('cz-submit')) czSubmit();
+    else if (b?.classList.contains('set-submit')) setSubmit();
+    else if (b?.dataset.sk != null) setPickOption(Number(b.dataset.sk), Number(b.dataset.k), b); // a list set: an option of that question
     else if (b?.classList.contains('typed-check')) chooseTyped();
     else if (b?.dataset.k != null) (PAPER ? choosePaper : choose)(Number(b.dataset.k)); // only an option button picks
   });
@@ -1322,6 +1562,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   });
   // tapping an open blank of the passage asks that blank now; the current question moves to just after it
   $('stem').addEventListener('click', (e) => {
+    const t0 = e.target as HTMLElement;
+    const chip = t0.closest<HTMLButtonElement>('.chip');
+    if (chip) { setPickOption(Number(chip.dataset.seq), Number(chip.dataset.k), chip); return; } // a cloze chip
+    const ph = t0.closest<HTMLButtonElement>('.phrase');
+    if (ph) { dlgTapPhrase(Number(ph.dataset.p)); return; } // a dialogue phrase: tap it, then tap a blank
+    const bl = t0.closest<HTMLButtonElement>('.dblank');
+    if (bl) { dlgTapBlank(Number(bl.dataset.seq)); return; }
     const tk = (e.target as HTMLElement).closest('.cz-tick');
     if (tk) { czTick(tk.previousElementSibling as HTMLInputElement); return; } // a passage blank ticked
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.blank-jump');
@@ -1330,6 +1577,21 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (j < 0) return;
     quiz.splice(i, 0, ...quiz.splice(j, 1));
     render();
+  });
+  // dialogue: drag a phrase onto a blank (the tap-then-tap path above does the same without dragging)
+  $('stem').addEventListener('dragstart', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.phrase');
+    if (!b || b.disabled || answered) return e.preventDefault();
+    e.dataTransfer?.setData('text/plain', b.dataset.p ?? '');
+    if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+  });
+  $('stem').addEventListener('dragover', (e) => { if ((e.target as HTMLElement).closest('.dblank') && !answered) e.preventDefault(); });
+  $('stem').addEventListener('drop', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.dblank');
+    const p = Number(e.dataTransfer?.getData('text/plain'));
+    if (!b || answered || !Number.isInteger(p) || !setUi || p < 0 || p >= setUi.phrases.length) return;
+    e.preventDefault();
+    dlgPlace(p, Number(b.dataset.seq));
   });
   $('start-btn').addEventListener('click', begin);
 
@@ -1397,6 +1659,36 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz mark.cx-fix { background: color-mix(in srgb, var(--berry, #a52a45) 14%, transparent); color: inherit; padding: 0 0.15em; border-radius: 0.3em; }
   .quiz mark.cx-fix del { opacity: 0.75; }
   .quiz .cx-none { font-style: italic; opacity: 0.75; }
+  /* passage sets answered whole (lib/passageset.ts): cloze chips, dialogue phrase bank, question list */
+  .quiz .options.set { display: block; }
+  .quiz .qfig-text { margin: 0.6rem 0; padding: 0.75rem 1rem; border: 1.5px solid var(--crust, #e3d6c6); border-radius: var(--radius-card, 12px); background: var(--cream, #fffaf2);
+    font-size: 1.05rem; line-height: 1.55; overflow-wrap: anywhere; }
+  .quiz .qfig-text p { margin: 0 0 0.7rem; }
+  .quiz .qfig-text p:last-child { margin-bottom: 0; }
+  .quiz .set-text { margin: 0.6rem 0; font-size: 1.1rem; line-height: 1.6; overflow-wrap: anywhere; }
+  .quiz .stem .chips { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; max-width: 100%; margin: 0.2rem 0.15rem; vertical-align: middle; white-space: normal; }
+  .quiz .chips > b { font-size: 0.85rem; color: var(--cocoa-soft, #8a6a52); }
+  .quiz .chip, .quiz .phrase, .quiz .dblank { font: inherit; font-size: 1rem; line-height: 1.3; color: inherit; min-height: 44px; padding: 0.3rem 0.7rem; max-width: 100%;
+    border: 2px solid var(--cocoa-soft, #8a6a52); border-radius: 0.6rem; background: var(--paper, #fff); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
+  .quiz .chip.sel, .quiz .phrase[aria-pressed="true"] { background: color-mix(in srgb, #2e9e5b 22%, var(--paper, #fff)); border-color: #2e9e5b; font-weight: 700; }
+  .quiz .chip.off { opacity: 0.4; background: color-mix(in srgb, currentColor 8%, transparent); border-style: dashed; }
+  .quiz .chip:focus-visible, .quiz .phrase:focus-visible, .quiz .dblank:focus-visible, .quiz .set-q .opt:focus-visible { outline: 3px solid var(--berry, #a52a45); outline-offset: 2px; }
+  .quiz .phrase-bank { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); gap: 0.35rem;
+    margin: 0 0 0.8rem; padding: 0.5rem; border: 2px solid var(--ink, #3b2a1f); border-radius: 0.6rem; background: var(--card, #fffaf2); }
+  .quiz .phrase { font-size: 0.95rem; touch-action: manipulation; }
+  .quiz .phrase:disabled { opacity: 0.4; text-decoration: line-through; cursor: default; background: color-mix(in srgb, currentColor 8%, transparent); }
+  .quiz .phrase[draggable="true"] { cursor: grab; }
+  .quiz .dlg { line-height: 2.2; }
+  .quiz .dblank { display: inline-block; min-width: 6.5rem; margin: 0.1rem 0.15rem; border-style: dashed; vertical-align: middle; white-space: normal; }
+  .quiz .dblank.filled { border-style: solid; background: color-mix(in srgb, #2e9e5b 20%, var(--paper, #fff)); text-decoration: none; padding: 0.3rem 0.7rem; }
+  .quiz .dblank:hover { background: color-mix(in srgb, currentColor 8%, var(--paper, #fff)); }
+  .quiz .set-q { margin: 0 0 1.1rem; }
+  .quiz .set-qstem { margin: 0 0 0.4rem; font-size: 1.1rem; white-space: pre-line; }
+  .quiz .set-opts { display: grid; gap: 0.4rem; }
+  .quiz .set-opts.many { grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); }
+  .quiz .set-q .opt { text-align: left; max-width: 100%; overflow-wrap: anywhere; }
+  .quiz .set-q button.opt.sel { border-color: #2e9e5b; background: color-mix(in srgb, #2e9e5b 20%, var(--paper, #fff)); font-weight: 700; }
+  .quiz .set-hint { min-height: 1.2em; margin: 0.4rem 0; color: var(--berry, #a52a45); }
   /* Editing: the printed wrong word (underlined, numbered) with its correction box right beside it; the pair stays together and wraps with the text */
   .quiz .ed-ask .vc-u { white-space: nowrap; font-weight: 600; }
   .quiz .ed-ask .vc-u u { text-decoration-color: var(--berry, #a52a45); text-decoration-thickness: 2px; }

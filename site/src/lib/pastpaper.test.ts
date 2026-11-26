@@ -344,3 +344,15 @@ test('correctionHtml: one passage, every mistake highlighted, right and given bl
   assert.deepEqual([...placed].sort(), [1, 2, 3, 5, 6], 'blank 9 is not in the passage: the caller lists it');
   assert.ok(correctionHtml('x (5) ____', new Map([[5, { kind: 'wrong' as const, typed: '<b>', answer: 'a' }]]), esc).html.includes('&lt;b>'), 'typed text is escaped');
 });
+
+test('a text figure (passage as text) is valid, carried as ppText, never needs a signed picture', () => {
+  const r = row({ figures: [{ text: 'Para one.\n\nPara two.' }, { path: 'science/pp-0123456789-1.webp', w: 900, h: 400 }] }) as PpRow;
+  assert.ok(validRow(r));
+  const q = toQ(r, new Map([['science/pp-0123456789-1.webp', signedFor('science/pp-0123456789-1.webp')]]))!;
+  assert.deepEqual(q.ppText, ['Para one.\n\nPara two.']);
+  assert.equal(q.ppFigs.length, 1);
+  assert.equal(toQ(row({ figures: [{ text: 'x' }] }) as PpRow, new Map())!.ppFigs.length, 0, 'text only: no picture to sign');
+  assert.equal(toQ(row({ figures: [] }), new Map())!.ppText, undefined);
+  assert.equal(validRow(row({ figures: [{ text: '   ' }] })), false);
+  assert.equal(validRow(row({ figures: [{ text: 'x'.repeat(20001) }] })), false);
+});

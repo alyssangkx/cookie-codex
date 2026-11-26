@@ -24,7 +24,7 @@ export interface BankQ {
   calc?: false; // Math only: false = no calculator (PSLE Paper 1 style); absent = a calculator is allowed or n/a
 }
 /** Inline SVG (code-made, currentColor) or Science line art with HTML labels placed at x/y percent of the image. */
-export type Figure = string | { img: string; alt: string; labels?: { x: number; y: number; text: string }[] };
+export type Figure = string | { img: string; alt: string; labels?: { x: number; y: number; text: string }[] } | { text: string };
 export interface Visual {
   kind: 'poster' | 'notice' | 'brochure' | 'timetable' | 'email'; title: string; subtitle?: string;
   blocks: { heading?: string; lines: string[] }[]; footer?: string;

@@ -69,8 +69,8 @@ export async function fetchItems(ids: string[], topicOf: (sub: string) => string
       for (const row of r.body.items) {
         if (!validRow(row)) return { error: 'failed' };
         const signed = new Map<string, string>();
-        for (const f of (row as { figures: { path: string; url?: unknown }[] }).figures) {
-          if (typeof f.url === 'string' && safeSignedUrl(f.url, SUPABASE_URL)) signed.set(f.path, f.url);
+        for (const f of (row as { figures: { path?: string; url?: unknown }[] }).figures) {
+          if (typeof f.path === 'string' && typeof f.url === 'string' && safeSignedUrl(f.url, SUPABASE_URL)) signed.set(f.path, f.url);
         }
         const q = toQ(row, signed, topicOf(row.subtopic));
         if (!q) return { error: 'failed' };

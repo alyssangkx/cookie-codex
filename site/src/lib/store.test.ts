@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { DAILY_QUIZ_CAP, QUIZ_CAP_ON, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones, poolProgress, milestoneReached, PICK_MAX } from './store.ts';
+import { DAILY_QUIZ_CAP, quizCapOf, DEFAULT_CAP_MIN, quizzesToday, quizCapReached, capReached, dayBlock, triesUsedUp, isUnlimited, resetUnlimitedCache, beginQuiz, tierOpen, setProgression, fresh, answer, finishQuiz, dayKey, liveStreak, power, openAttempt, attemptsToday, attemptsLeft, triesPerDay, migrate, syncTiers, SCHEMA, liveMastered, tierHash, syncParked, isDue, load, importCode, exportCode, reviewDueCount, milestoneAt, syncMilestones, poolProgress, milestoneReached, PICK_MAX } from './store.ts';
 
 const DAY = 86_400_000;
 const t0 = new Date(2026, 10, 16, 10).getTime(); // Mon 16 Nov 2026, 10:00 local
@@ -370,26 +370,34 @@ test('quiz cap (when switched on): the 11th tier quiz is blocked; Daily Review a
   mockStorage({});
   const s = fresh();
   finish(s, 'tier', 9);
-  assert.equal(dayBlock(s, 'tier', true), null);
+  assert.equal(dayBlock(s, 'tier', DAILY_QUIZ_CAP), null);
   finish(s, 'paper', 1); // papers count too: 10 now
   assert.equal(quizzesToday(s), DAILY_QUIZ_CAP);
-  assert.equal(quizCapReached(s, true), true);
-  assert.equal(dayBlock(s, 'tier', true), 'quizzes');
-  assert.equal(dayBlock(s, 'paper', true), 'quizzes');
-  assert.equal(dayBlock(s, 'review', true), null);
+  assert.equal(quizCapReached(s, DAILY_QUIZ_CAP), true);
+  assert.equal(dayBlock(s, 'tier', DAILY_QUIZ_CAP), 'quizzes');
+  assert.equal(dayBlock(s, 'paper', DAILY_QUIZ_CAP), 'quizzes');
+  assert.equal(dayBlock(s, 'review', DAILY_QUIZ_CAP), null);
   finish(s, 'review', 3);
   assert.equal(quizzesToday(s), DAILY_QUIZ_CAP); // reviews never count
-  assert.equal(dayBlock(s, 'review', true), null);
+  assert.equal(dayBlock(s, 'review', DAILY_QUIZ_CAP), null);
 });
 
-test('quiz cap is off for now (owner, 19 Nov 2026): 10+ quizzes do not block; the time cap still does', () => {
+test('quiz cap is a per-child parent setting (owner, 26 Nov 2026): none by default; the time cap still applies', () => {
   mockStorage({});
   const s = fresh();
-  assert.equal(QUIZ_CAP_ON, false);
+  assert.equal(quizCapOf(s), 0);
   finish(s, 'tier', 12, 60_000);
   assert.equal(quizCapReached(s), false);
   assert.equal(dayBlock(s, 'tier'), null);
-  assert.equal(beginQuiz(s, 'paper', { total: 10 }), null);
+  s.settings.dailyQuizCap = 10; // the parent sets 10 for this child
+  assert.equal(quizCapReached(s), true);
+  assert.equal(dayBlock(s, 'tier'), 'quizzes');
+  assert.equal(dayBlock(s, 'review'), null);
+  assert.equal(beginQuiz(s, 'paper', { total: 10 }), 'quizzes');
+  s.settings.dailyQuizCap = 13;
+  assert.equal(dayBlock(s, 'tier'), null);
+  for (const [v, n] of [[0, 0], [-3, 0], [99, 30], ['x', 0], [7.6, 7]] as const) { s.settings.dailyQuizCap = v as number; assert.equal(quizCapOf(s), n); }
+  delete s.settings.dailyQuizCap;
   finish(s, 'tier', 1, 120 * 60_000);
   assert.equal(dayBlock(s, 'tier'), 'time');
 });
@@ -459,7 +467,7 @@ test('a started paper counts toward the 10; an abandoned one still counts; finis
   assert.equal(quizzesToday(s), 10);
   finish(s, 'paper', 1); // finishing replaces one open record
   assert.equal(quizzesToday(s), 10);
-  assert.equal(dayBlock(s, 'paper', true), 'quizzes');
+  assert.equal(dayBlock(s, 'paper', DAILY_QUIZ_CAP), 'quizzes');
 });
 
 test('migration 3 -> 4: a cap of exactly 45 becomes 120; other values stay', () => {

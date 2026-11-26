@@ -65,7 +65,7 @@ const schools = SCHOOLS.map((s) => {
   const doneEl = document.getElementById('done')!;
   const reason = dayBlock(s, 'tier');
   doneEl.hidden = !reason;
-  if (reason) doneEl.textContent = reason === 'time' ? `${blockMessage(reason)} You can still browse the Codex and your cards.` : blockMessage(reason);
+  if (reason) doneEl.textContent = reason === 'time' ? `${blockMessage(reason, s)} You can still browse the Codex and your cards.` : blockMessage(reason, s);
   document.querySelectorAll<HTMLElement>('.school-progress').forEach((el) => {
     const subs: string[] = JSON.parse(el.dataset.subs!);
     const cleared = subs.reduce((n, id) => n + TIERS.filter((k) => s.progress[id]?.[k]?.cleared).length, 0);

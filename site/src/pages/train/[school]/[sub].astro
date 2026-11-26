@@ -249,7 +249,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     nextLine();
     paintCards();
 
-    const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this section today. Come back tomorrow.` : reason ? blockMessage(reason) : '';
+    const block = triesUsedUp(s, sub) ? `You have trained ${tries} times on this section today. Come back tomorrow.` : reason ? blockMessage(reason, s) : '';
     if (block) disable(block);
     else { triesText = triesNote(attemptsLeft(s, sub), tries); setNote(); }
 
@@ -308,7 +308,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
         if (act) { act.textContent = `Start ${TIER_NAME[t]}`; act.hidden = false; }
       }
       // a Start / Practise link is dead while the day's limit or this tier's tries are used up, with the reason in the row
-      const stop = triesUsedUp(s, sub, t) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason) : '';
+      const stop = triesUsedUp(s, sub, t) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason, s) : '';
       if (stop && act && !act.hidden) { act.setAttribute('aria-disabled', 'true'); act.removeAttribute('href'); state.textContent = stop; }
     }
     // the hero: the tier to train next, its mastery, Start and its card
@@ -335,7 +335,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
       // the hero card is the card of the tier to train; it moves with the tier (the reward map is keyed by tier)
       heroReward.dataset.tier = heroTier;
       heroReward.hidden = allDone; // its label is painted by paintCards (and again once the economy data arrives)
-      const block = triesUsedUp(s, sub, heroTier) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason) : '';
+      const block = triesUsedUp(s, sub, heroTier) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason, s) : '';
       if (block) disable(block);
       else {
         triesText = [triesNote(attemptsLeft(s, sub, heroTier), tries), `About ${minutesFor(s, heroTier)} minutes.`].filter(Boolean).join(' ');

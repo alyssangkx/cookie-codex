@@ -47,6 +47,7 @@ export interface SaveV1 {
   settings: {
     dailyCapMin: number; dailyGoalQuizzes: number;
     extraTime: boolean; psleDate: string; playerName: string;
+    dailyQuizCap?: number; // quizzes per day (parent setting, owner 26 Nov 2026); missing or 0 = no limit. Optional: no schema bump
   };
   progress: Record<string, Partial<Record<Tier, TierState>>>;
   questions: Record<string, QState>;
@@ -87,9 +88,13 @@ export const PASS = 0.8;
 export const QUIZ_SIZE = 10; // a pass needs a full 10-question quiz
 export const WEEK_GOAL_DAYS = 4; // a streak week needs 4 goal days; rest days never break it
 export const DEFAULT_CAP_MIN = 120; // default daily training time, in minutes (parent range 45-180)
-export const DAILY_QUIZ_CAP = 10; // tier quizzes + WA/SA papers per day; Daily Review does not count
-// Owner, 19 Nov 2026: the quiz-count limit is off for now; set this to true to bring it back (time cap unaffected).
-export const QUIZ_CAP_ON = false;
+export const DAILY_QUIZ_CAP = 10; // the parent page's suggested quiz limit (tier quizzes + WA/SA papers; Daily Review does not count)
+export const QUIZ_CAP_MAX = 30;
+// Owner, 19 Nov 2026: no quiz-count limit by default. 26 Nov 2026: a per-child parent setting (settings.dailyQuizCap).
+export const quizCapOf = (s: SaveV1) => {
+  const n = Math.floor(Number(s.settings?.dailyQuizCap) || 0);
+  return Math.min(QUIZ_CAP_MAX, Math.max(0, n));
+};
 export const ATTEMPTS_PER_DAY = 3; // tries per tier per day for P6 sub-topics (and any sub-topic with no listed P-level)
 export const ATTEMPTS_PER_DAY_LOW = 5; // P1-P5 sub-topics
 
@@ -324,17 +329,17 @@ export const capReached = (s: SaveV1) => !isUnlimited() && today(s).min >= s.set
  *  Daily Review never counts, and retests inside a tier quiz do not change the count. */
 export const quizzesToday = (s: SaveV1) =>
   s.attempts.filter((a) => (a.mode === 'tier' || a.mode === 'paper') && dayKey(a.ts) === dayKey()).length;
-export const quizCapReached = (s: SaveV1, on = QUIZ_CAP_ON) => on && !isUnlimited() && quizzesToday(s) >= DAILY_QUIZ_CAP;
+export const quizCapReached = (s: SaveV1, cap = quizCapOf(s)) => cap > 0 && !isUnlimited() && quizzesToday(s) >= cap;
 
 /** Why a quiz of this mode cannot start now, or null. Review is exempt from the quiz cap only. */
-export function dayBlock(s: SaveV1, mode: Attempt['mode'], quizCap = QUIZ_CAP_ON): 'time' | 'quizzes' | null {
+export function dayBlock(s: SaveV1, mode: Attempt['mode'], quizCap = quizCapOf(s)): 'time' | 'quizzes' | null {
   if (capReached(s)) return 'time';
   if (mode !== 'review' && quizCapReached(s, quizCap)) return 'quizzes';
   return null;
 }
-export const blockMessage = (r: 'time' | 'quizzes') =>
+export const blockMessage = (r: 'time' | 'quizzes', s?: SaveV1) =>
   r === 'time' ? "Done for today! You have reached today's training time. Come back tomorrow."
-    : `${DAILY_QUIZ_CAP} quizzes done today. Daily Review is still open.`;
+    : `${s ? quizCapOf(s) : 'All your'} quizzes done today. Daily Review is still open.`;
 export const goalMet = (s: SaveV1) => today(s).quizzes >= s.settings.dailyGoalQuizzes;
 
 /** Goal-met days (YYYY-MM-DD), judged against the current daily goal. */

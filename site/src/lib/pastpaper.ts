@@ -130,7 +130,12 @@ const SUBTOPIC_ID = /^[a-z0-9-]{3,120}$/;
 export const PP_MIN_TIER = 20; // = store.ts MIN_POOL (tested; this module stays import-free): a smaller pool is merged in
 const LEVELS = ['basic', 'intermediate', 'competent'] as const;
 
-export interface PpFigure { path: string; w: number; h: number }
+export interface PpPicture { path: string; w: number; h: number }
+/** A passage as text (docs/passage-sets-ui.md): paragraphs separated by blank lines, shown above the set's questions. */
+export interface PpTextFigure { text: string }
+export type PpFigure = PpPicture | PpTextFigure;
+export const isTextFig = (f: unknown): f is PpTextFigure => !!f && typeof f === 'object' && typeof (f as PpTextFigure).text === 'string';
+const TEXT_FIG_MAX = 20000;
 /** A row as pp_items_for returns it. */
 export interface PpRow {
   id: string; subtopic: string; level: (typeof LEVELS)[number]; pattern: string | null; stem: string;
@@ -159,6 +164,7 @@ export interface PpQ {
   explain: ({ tag: string; why: string } | null)[]; solution: string[];
   numbered: true; // label options (1)-(4) as the paper and its pictures do, not A-D
   ppFigs: PpFig[];
+  ppText?: string[]; // text passages (a text figure, docs/passage-sets-ui.md), shown above the set's questions
   ppYear: number | null;
   typed?: { accept: string[]; scaffold: string | null }; // migration 015: typed into the scaffold's blanks, no options
   ppSeen?: number; // migration 016: past papers holding it (the label says "also seen in N other past papers")
@@ -271,8 +277,8 @@ export function validRow(r: unknown): r is PpRow {
     && LEVELS.includes(x.level as PpRow['level'])
     && typeof x.stem === 'string' && x.stem.trim().length > 0
     && (x.kind === 'typed' ? typedShape(x) : mcqShape(x))
-    && Array.isArray(x.figures) && x.figures.every((f) => f && typeof f.path === 'string' && FIG_PATH.test(f.path)
-      && Number.isFinite(f.w) && Number.isFinite(f.h))
+    && Array.isArray(x.figures) && x.figures.every((f) => isTextFig(f) ? f.text.trim().length > 0 && f.text.length <= TEXT_FIG_MAX
+      : f && typeof f.path === 'string' && FIG_PATH.test(f.path) && Number.isFinite(f.w) && Number.isFinite(f.h))
     && (x.year === null || x.year === undefined || Number.isInteger(x.year))
     && (x.seen === null || x.seen === undefined || (Number.isInteger(x.seen) && (x.seen as number) >= 1 && (x.seen as number) <= 99));
 }
@@ -292,9 +298,10 @@ export function safeSignedUrl(u: string, supabaseUrl: string): boolean {
  * may depend on it). Wrong options carry a note (empty without an explanation) so the quiz can log a tag; with one
  * (migration 014), the key's reason becomes the solution and each wrong option's reason its note. */
 export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: string): PpQ | null {
-  const figs: PpFig[] = [];
+  const figs: PpFig[] = [], texts: string[] = [];
   const ex = cleanExplain(r.explain, r.options.length);
   for (const f of r.figures) {
+    if (isTextFig(f)) { texts.push(f.text); continue; }
     const src = signed.get(f.path);
     if (!src) return null;
     figs.push({ src, w: Math.round(f.w), h: Math.round(f.h) });
@@ -303,6 +310,7 @@ export function toQ(r: PpRow, signed: ReadonlyMap<string, string>, topic?: strin
     id: r.id, sub: r.subtopic, level: r.level, topic, stem: r.stem, options: [...r.options], answer: r.answer,
     explain: r.options.map((_, k) => (k === r.answer ? null : { tag: 'past-paper', why: ex?.wrong[k] ?? '' })),
     solution: ex ? [ex.right] : [], numbered: true, ppFigs: figs,
+    ...(texts.length ? { ppText: texts } : {}),
     ...(r.kind === 'typed' && r.accept ? { typed: { accept: [...r.accept], scaffold: r.scaffold ?? null } } : {}),
     ...(Number.isInteger(r.seen) && (r.seen as number) > 1 ? { ppSeen: r.seen } : {}),
     ppYear: Number.isInteger(r.year) && (r.year as number) >= 2000 && (r.year as number) <= 2100 ? r.year : null,

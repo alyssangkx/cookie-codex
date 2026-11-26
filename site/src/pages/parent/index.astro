@@ -98,6 +98,8 @@ const data = {
         <div class="fields">
           <label for="cap">Daily training time: <output id="cap-out"></output></label>
           <input id="cap" type="range" min="45" max="180" step="15" />
+          <label for="qcap">Quizzes per day (leave empty for no limit)</label>
+          <input id="qcap" type="number" min="1" max="30" step="1" inputmode="numeric" placeholder="No limit" />
           <p class="note" id="cap-note"></p>
           <label for="goal">Daily goal (quizzes)</label>
           <input id="goal" type="number" min="1" max="5" step="1" inputmode="numeric" />
@@ -225,7 +227,7 @@ const data = {
 </style>
 
 <script>
-  import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_ON, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
+  import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_MAX, quizCapOf, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
   import { ppMode, isPpId, ppSubjectOf, cleanExplain, typedShape, underlineMarks, type PpExplain } from '../../lib/pastpaper';
@@ -262,7 +264,7 @@ const data = {
     const t = today(s), st = s.streak;
     const items: [string, string][] = [
       [`${t.min} / ${s.settings.dailyCapMin} min`, 'Today vs time limit'],
-      QUIZ_CAP_ON ? [`${quizzesToday(s)} / ${DAILY_QUIZ_CAP} quizzes`, 'Today vs quiz limit (Daily Review not counted)']
+      quizCapOf(s) ? [`${quizzesToday(s)} / ${quizCapOf(s)} quizzes`, 'Today vs quiz limit (Daily Review not counted)']
         : [`${quizzesToday(s)} quizzes`, 'Today (no quiz limit for now; Daily Review not counted)'],
       [`${t.quizzes} / ${s.settings.dailyGoalQuizzes} quizzes`, 'Today vs daily goal'],
       [`${liveStreak(s)} week${liveStreak(s) === 1 ? '' : 's'}`, 'Streak (weeks with 4+ goal days)'],
@@ -653,15 +655,17 @@ const data = {
     $('weeks').textContent = w > 0 ? `About ${w} week${w === 1 ? '' : 's'} left.` : 'That date has passed.';
   }
   function initSettings() {
-            const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle');
+            const cap = $<HTMLInputElement>('cap'), goal = $<HTMLInputElement>('goal'), extra = $<HTMLInputElement>('extra'), psle = $<HTMLInputElement>('psle'), qcap = $<HTMLInputElement>('qcap');
     const showCap = () => {
       $('cap-out').textContent = `${cap.value} minutes`;
-      $('cap-note').textContent = QUIZ_CAP_ON
-        ? `The day ends when ${cap.value} minutes of training or ${DAILY_QUIZ_CAP} quizzes are reached, whichever comes first. Tier quizzes and practice papers count; Daily Review does not count as a quiz, but stops at the time limit.`
-        : `The day ends after ${cap.value} minutes of training. There is no limit on the number of quizzes for now; Daily Review also stops at the time limit.`;
+      const q = Number(qcap.value) || 0;
+      $('cap-note').textContent = q
+        ? `The day ends when ${cap.value} minutes of training or ${q} quizzes are reached, whichever comes first. Tier quizzes and practice papers count; Daily Review does not count as a quiz, but stops at the time limit.`
+        : `The day ends after ${cap.value} minutes of training. There is no limit on the number of quizzes; Daily Review also stops at the time limit.`;
     };
-    cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); showCap();
-    cap.addEventListener('input', showCap);
+    const qcapText = () => (quizCapOf(s) ? String(quizCapOf(s)) : '');
+    cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); qcap.value = qcapText(); showCap();
+    cap.addEventListener('input', showCap); qcap.addEventListener('input', showCap);
     extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; weeksText();
     const clamp = (v: string, lo: number, hi: number, step: number, fb: number) => {
       const n = Math.round(Number(v) / step) * step;
@@ -670,6 +674,7 @@ const data = {
     const apply = (x: SaveV1) => {
       x.settings.dailyCapMin = clamp(cap.value, 45, 180, 15, x.settings.dailyCapMin);
       x.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, x.settings.dailyGoalQuizzes);
+      x.settings.dailyQuizCap = qcap.value.trim() === '' ? 0 : clamp(qcap.value, 1, QUIZ_CAP_MAX, 1, quizCapOf(x) || DAILY_QUIZ_CAP);
       x.settings.extraTime = extra.checked;
       if (psle.value) x.settings.psleDate = psle.value;
     };
@@ -681,8 +686,8 @@ const data = {
       } else { s = load(); apply(s); save(s); s = cleanSave(s); }
       weeksText(); renderSummary(); flashSaved();
     };
-    fillSettings = () => { cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; showCap(); weeksText(); };
-    for (const el of [cap, goal, extra, psle]) el.addEventListener('change', async () => { await commit(); fillSettings(); });
+    fillSettings = () => { qcap.value = qcapText(); cap.value = String(s.settings.dailyCapMin); goal.value = String(s.settings.dailyGoalQuizzes); extra.checked = s.settings.extraTime; psle.value = s.settings.psleDate; showCap(); weeksText(); };
+    for (const el of [cap, goal, qcap, extra, psle]) el.addEventListener('change', async () => { await commit(); fillSettings(); });
   }
 
   // backup
