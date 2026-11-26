@@ -102,8 +102,16 @@ test('cleanSave keeps every settings field the save declares', async () => {
   const { readFileSync } = await import('node:fs');
   const store = readFileSync(new URL('./store.ts', import.meta.url), 'utf8');
   const clean = readFileSync(new URL('./cleansave.ts', import.meta.url), 'utf8');
-  const body = store.slice(store.indexOf('settings: {', store.indexOf('export interface SaveV1')), store.indexOf('};', store.indexOf('export interface SaveV1')));
-  const fields = [...body.replace(/\/\/.*$/gm, '').matchAll(/(\w+)\??:/g)].map((m) => m[1]).filter((n) => n !== 'settings');
+  // the settings block's own fields: comments removed, read to its matching brace, nested object types skipped
+  const src = store.replace(/\/\/.*$/gm, '');
+  const open = src.indexOf('{', src.indexOf('settings: {', src.indexOf('export interface SaveV1')));
+  const fields: string[] = [];
+  for (let i = open + 1, depth = 1, word = ''; depth > 0 && i < src.length; i++) {
+    const c = src[i];
+    if (c === '{') depth++; else if (c === '}') depth--;
+    else if (/\w/.test(c)) word += c;
+    else { if (depth === 1 && word && /^\s*\??:/.test(src.slice(i))) fields.push(word); word = ''; }
+  }
   assert.ok(fields.length >= 6, 'parsed the settings fields');
   assert.deepEqual(fields.filter((n) => !clean.includes(`st.${n}`)), []);
   const s = fresh(); s.settings.dailyQuizCap = 10;

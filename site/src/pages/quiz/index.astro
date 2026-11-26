@@ -1029,7 +1029,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     + (o.ppText ?? []).map((t) => textFigureHtml(t, esc)).join('');
   /** A cloze or dialogue set's pictures, text passages and (when not shared by the whole set) visual cards, each once. */
   const setExtras = (run: Q[], sharedVis: boolean) =>
-    [...new Map(run.map((o) => [JSON.stringify([o.figure ?? null, o.ppText ?? null]), o])).values()].map(figsTop).join('')
+    [...new Map(run.filter((o) => o.figure).map((o) => [JSON.stringify(o.figure), o.figure!])).values()].map((f) => `<span class="qfig-wrap">${figureHtml(f)}</span>`).join('')
+    + [...new Set(run.flatMap((o) => o.ppText ?? []))].map((x) => textFigureHtml(x, esc)).join('')
     + (sharedVis ? '' : [...new Map(run.filter((o) => o.visual).map((o) => [JSON.stringify(o.visual), o.visual!])).values()]
       .map((v) => `<details class="rev-vis" open><summary>The ${esc(v.kind)}</summary>${visualCard(v)}</details>`).join(''));
   /** The passage's own text for a set read as a list (a vocabulary cloze keeps its underlined words). */
@@ -1219,11 +1220,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         + bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('') + '</div>';
     } else {
       const html = setPassage(run, ui.kind, () => '', new Map(marks));
-      const extras = setExtras(run, !!q0.visual && sameAll(run, (o) => o.visual));
+      const extras = setExtras(run, !!q0.visual && sameAll(run, (o) => o.visual)), cardExtras = setExtras(run, false); // the results card has no #visual
       body = ppBadge(q0) + extras + (ui.kind === 'dialogue' ? `<div class="dlg">${html}</div>` : html) + ppFigsHtml(q0, false);
       $('stem').innerHTML = body;
       $('options').innerHTML = '';
-      card = `<div class="rev rev-passage"><p class="rev-ph">${ppBadge(q0)}${bad.length} to fix in this passage: what you chose is crossed out, the answer is in bold.</p>${extras}`
+      card = `<div class="rev rev-passage"><p class="rev-ph">${ppBadge(q0)}${bad.length} to fix in this passage: what you chose is crossed out, the answer is in bold.</p>${cardExtras}`
         + `<p class="stem">${ui.kind === 'dialogue' ? `<span class="dlg">${html}</span>` : html}</p>${bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('')}</div>`;
     }
     if (bad.length) setCards.set(g, card);

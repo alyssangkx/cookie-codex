@@ -41,8 +41,16 @@ test('the check catches a shadowed import', () => {
 // 26 Nov 2026 review: a text figure {text} has no path, so every place that signs picture paths must skip it.
 test('every page or module that signs figure paths skips text figures', () => {
   const files = [...walk(new URL('../', import.meta.url))].filter((f) => /\.(ts|astro)$/.test(f) && !f.endsWith('.test.ts'));
-  const bad = files.filter((f) => { const s = readFileSync(f, 'utf8'); return s.includes('createSignedUrl') && /figures/.test(s) && !/isTextFig|\.path\s*\?|typeof f\.path|'path' in/.test(s); });
-  assert.deepEqual(bad.map((f) => f.split('/src/')[1]), []);
+  const bad: string[] = [];
+  for (const f of files) {
+    const s = readFileSync(f, 'utf8');
+    if (!s.includes('createSignedUrls(')) continue;
+    // the statement that collects the paths handed to createSignedUrls must itself skip text figures
+    const v = s.match(/createSignedUrls\(\s*(\w+)/)?.[1]; // the variable handed to createSignedUrls
+    const decl = v ? s.match(new RegExp(`const ${v}\\s*=[^;]*;`))?.[0] ?? '' : '';
+    if (!decl.includes('isTextFig')) bad.push(f.split('/src/')[1]);
+  }
+  assert.deepEqual(bad, []);
 });
 
 // 26 Nov 2026 review: a letter key answered one question of a passage set on its own; the shortcut must stand down for a set.

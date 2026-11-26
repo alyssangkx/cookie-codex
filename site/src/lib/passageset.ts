@@ -1,8 +1,8 @@
 // Passage sets answered whole (owner, 26 Nov 2026, docs/passage-sets-ui.md): one screen per set, every question answered,
 // one Submit. Pure helpers for the MCQ cloze chips, the dialogue phrase bank and the text passage; the quiz page draws them.
 
-/** A blank in a passage: Chinese "（3）＿＿＿＿" or English "(3) ____" ("(3) ________" when asked). */
-const BLANK_SRC = '（(\\d{1,3})）＿{2,}|\\((\\d{1,3})\\) ?_{4,}';
+/** A blank in a passage: Chinese "（3）＿＿＿＿" (a blank not asked may have fewer ＿) or English "(3) ____" ("(3) ________" when asked). */
+const BLANK_SRC = '（(\\d{1,3})）＿+|\\((\\d{1,3})\\) ?_{4,}';
 
 /** Replace every blank in already-escaped HTML. `fn` gets the blank's number and whether it is the Chinese form; the
  *  blanks found come back so the caller can list a question the passage does not show. */
