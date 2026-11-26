@@ -78,7 +78,8 @@ Deno.serve(async (req) => {
       }
       return json({ error: 'daily_limit' }, 429);
     }
-    const items: Array<Record<string, unknown> & { figures?: Array<{ path: string; w: number; h: number }> }> = Array.isArray(data?.items) ? data.items : [];
+    // a figure is a picture {path, w, h} or, for a passage turned into text (26 Nov 2026), a text figure {text}
+    const items: Array<Record<string, unknown> & { figures?: Array<{ path?: string; w?: number; h?: number; text?: string }> }> = Array.isArray(data?.items) ? data.items : [];
     const paths = [...new Set(items.flatMap((i) => (i.figures ?? []).map((f) => f.path)).filter((p) => typeof p === 'string'))];
     const signed = new Map<string, string>();
     if (paths.length) {
@@ -86,10 +87,11 @@ Deno.serve(async (req) => {
       if (e) throw new Error('sign: ' + e.message);
       for (const x of s ?? []) if (x.path && x.signedUrl) signed.set(x.path, x.signedUrl);
     }
-    // a question whose picture could not be signed is left out rather than shown without it
+    // a question whose picture could not be signed is left out rather than shown without it; a text figure needs no URL
+    const isText = (f: { path?: string; text?: string }) => typeof f.text === 'string' && typeof f.path !== 'string';
     const out = items
-      .map((i) => ({ ...i, figures: (i.figures ?? []).map((f) => ({ ...f, url: signed.get(f.path) })) }))
-      .filter((i) => i.figures.every((f) => typeof f.url === 'string'));
+      .map((i) => ({ ...i, figures: (i.figures ?? []).map((f) => (isText(f) ? { text: f.text } : { ...f, url: signed.get(f.path ?? '') })) }))
+      .filter((i) => i.figures.every((f) => 'text' in f || typeof (f as { url?: string }).url === 'string'));
     return json({ items: out });
   } catch (e) {
     console.error('pp-serve:', e instanceof Error ? e.message : e);

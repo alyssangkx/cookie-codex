@@ -1753,7 +1753,8 @@ def review(a):
         sys.exit("--subtopics is required (or 'all' with --sample)")
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
-        figs[m["pp_id"]].append(m["path"])
+        if "path" in m:  # a text passage ({pp_id, text}) has no picture to show here
+            figs[m["pp_id"]].append(m["path"])
     held = read_hold(out)
     rows = [r for r in jl(out / "selected.jsonl") if (keep == {"all"} or r["subtopic"] in keep) and r["id"] not in held]
     if a.sample:  # owner's spot-check: a seeded random few per sub-topic (same draw every run)
@@ -2441,9 +2442,12 @@ def upload(a):
     ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
-        figs[m["pp_id"]].append({"path": m["path"], "w": m["w"], "h": m["h"]})
-    missing = [r["id"] for r in rows if (r["crops"] and len(figs[r["id"]]) != len(r["crops"]))
-               or (r.get("set_pages") and len(figs[r["id"]]) != len(r["set_pages"]))]  # a set row without its pages too
+        # a passage turned into text (owner, 26 Nov 2026: OCR'd text-only pages, docs/passage-sets-ui.md) is {pp_id, text}:
+        # it travels as a text figure {text} and needs no picture
+        figs[m["pp_id"]].append({"text": m["text"]} if "text" in m else {"path": m["path"], "w": m["w"], "h": m["h"]})
+    pics = lambda i: [f for f in figs[i] if "path" in f]
+    missing = [r["id"] for r in rows if (r["crops"] and len(pics(r["id"])) != len(r["crops"]))
+               or (r.get("set_pages") and len(pics(r["id"])) != len(r["set_pages"]))]  # a set row without its pages too
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
     # explanations (migration 014): explain.py apply writes <out>/<subject>/explain.jsonl for the ones the second model passed
@@ -2467,7 +2471,7 @@ def upload(a):
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
         sys.exit(f"nothing selected under {a.out}/{a.subject} for those sub-topics: wrong --out? "
                  "(the 2025-26 import lives in /data/alvin/tmp/cookie-codex/ppimport/final2526)")
-    big = sorted({f["path"] for d in db for f in d["figures"] if (out / "figures" / Path(f["path"]).name).stat().st_size > FIG_MAX})
+    big = sorted({f["path"] for d in db for f in d["figures"] if "path" in f and (out / "figures" / Path(f["path"]).name).stat().st_size > FIG_MAX})
     if big:  # checked before anything is sent, dry run included: a half-sent upload leaves pictures without rows
         sys.exit(f"{len(big)} pictures exceed the bucket's {FIG_MAX // 1024} KB limit (e.g. {big[0]}): re-run `figures`")
     url, k = os.environ.get("SUPABASE_URL", "").rstrip("/"), os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
@@ -2517,7 +2521,7 @@ def upload(a):
     try:
         for d in db:
             for f in d["figures"]:
-                if f["path"] in sent:
+                if "path" not in f or f["path"] in sent:  # a text figure has no file
                     continue
                 sent.add(f["path"])
                 body = (fdir / Path(f["path"]).name).read_bytes()

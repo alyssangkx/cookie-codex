@@ -41,6 +41,9 @@ def sim(a, b):
     return SequenceMatcher(None, a, b, autojunk=False).ratio() if a and b else 0.0
 
 
+TEMPLATE = re.compile(r"对话中的[（(]\s*\d{1,2}\s*[）)]应填入哪一句[？?]")
+
+
 def blank_ok(text, n, stem):
     """The stored sentence for blank n (its stem, with the blank) is found in the passage around （n）."""
     m = re.search(rf"[（(]\s*{n}\s*[）)]", text)
@@ -73,7 +76,9 @@ def check(a, b, blanks, kind="cloze"):
     s = sim(a, b)
     if s < 0.95:
         return False, f"the two reads disagree ({s:.2f})"
-    bad = [n for n, st in blanks.items() if not blank_ok(a, n, st)]
+    # a dialogue's stored stem is often only the question "对话中的（26）应填入哪一句？": no passage text to compare, so the
+    # two agreeing reads and the blank numbers are the test
+    bad = [n for n, st in blanks.items() if not TEMPLATE.fullmatch(str(st).strip()) and not blank_ok(a, n, st)]
     if bad:
         return False, f"stored blank sentences not found in the read ({bad})"
     return True, None
@@ -132,6 +137,9 @@ def selftest():
     assert to_stem("他（17）听到，（18）＿妈妈，(19)看，（ 20 ）___走（1）首先", {"17": 0, "18": 0, 19: 0, 20: 0}) \
         == "他（17）＿＿＿＿听到，（18）＿＿＿＿妈妈，（19）＿＿＿＿看，（20）＿＿＿＿走（1）首先"
     assert to_stem("他（17）\n\n一回到家里（1）首先（1）", {1: 0, 17: 0}) == "他（17）＿＿＿＿\n\n一回到家里（1）＿＿＿＿首先（1）"
+    d = "志伟：你不是上个月刚刚去过，（26）？\n明强：我叔叔病重。（27）。"
+    assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "dialogue") == (True, None)
+    assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "29": "对话中的（29）应填入哪一句？"}, "dialogue")[1].startswith("blank numbers missing")
     print("zh_passage_ocr selftest ok")
 
 
