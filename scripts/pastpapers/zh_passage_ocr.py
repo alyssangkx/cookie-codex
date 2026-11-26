@@ -73,12 +73,15 @@ def check(a, b, blanks, kind="cloze"):
         found = [int(x) for x in BLANK.findall(t or "")]
         if sorted(set(found) & set(blanks)) != sorted(blanks):
             return False, f"blank numbers missing ({sorted(set(blanks) - set(found))})"
+        twice = sorted(n for n in blanks if found.count(n) > 1)
+        if twice:  # a blank number read twice: which place is the blank cannot be told
+            return False, f"blank numbers read more than once ({twice})"
     s = sim(a, b)
     if s < 0.95:
         return False, f"the two reads disagree ({s:.2f})"
     # a dialogue's stored stem is often only the question "对话中的（26）应填入哪一句？": no passage text to compare, so the
     # two agreeing reads and the blank numbers are the test
-    bad = [n for n, st in blanks.items() if not TEMPLATE.fullmatch(str(st).strip()) and not blank_ok(a, n, st)]
+    bad = [n for n, st in blanks.items() if not (kind == "dialogue" and TEMPLATE.fullmatch(str(st).strip())) and not blank_ok(a, n, st)]
     if bad:
         return False, f"stored blank sentences not found in the read ({bad})"
     return True, None
@@ -140,6 +143,8 @@ def selftest():
     d = "志伟：你不是上个月刚刚去过，（26）？\n明强：我叔叔病重。（27）。"
     assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "dialogue") == (True, None)
     assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "29": "对话中的（29）应填入哪一句？"}, "dialogue")[1].startswith("blank numbers missing")
+    assert check(d + "（26）", d + "（26）", {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "dialogue")[1].startswith("blank numbers read more")
+    assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "cloze")[1].startswith("stored blank sentences")
     print("zh_passage_ocr selftest ok")
 
 

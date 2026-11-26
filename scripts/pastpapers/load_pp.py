@@ -1740,6 +1740,12 @@ def selftest():
         assert read_fig_record(p, live) == {f"{live}|{BUCKET}": {"a.webp": "1"}} and read_fig_record(p, other) == {}
         p.write_text("{damaged")
         assert read_fig_record(p, live) == {}
+    # 26 Nov 2026 review: a set question with no passage (no page, no text, no own blank) is caught before upload
+    sp = [{"id": "a", "grp": "g", "seq": 26, "stem": "明华：国强，看你笑眯眯的，有什么开心的事啊？" * 6 + "这次（26）＿＿＿＿。"},
+          {"id": "f", "grp": "g", "seq": 27, "stem": "对话中的（27）应填入哪一句？"}, {"id": "b", "grp": "g", "seq": 21, "stem": "为什么？"},
+          {"id": "c", "grp": "g", "seq": 22, "stem": "为什么？", "set_pages": ["p.png"]}, {"id": "d", "seq": 1, "stem": "x"},
+          {"id": "e", "grp": "g", "seq": 23, "stem": "为什么？"}]
+    assert no_passage(sp, {"e": [{"text": "passage"}]}) == ["f", "b"], no_passage(sp, {"e": [{"text": "passage"}]})
     print("selftest ok")
 
 
@@ -1753,8 +1759,7 @@ def review(a):
         sys.exit("--subtopics is required (or 'all' with --sample)")
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
-        if "path" in m:  # a text passage ({pp_id, text}) has no picture to show here
-            figs[m["pp_id"]].append(m["path"])
+        figs[m["pp_id"]].append(m["path"])
     held = read_hold(out)
     rows = [r for r in jl(out / "selected.jsonl") if (keep == {"all"} or r["subtopic"] in keep) and r["id"] not in held]
     if a.sample:  # owner's spot-check: a seeded random few per sub-topic (same draw every run)
@@ -1773,6 +1778,8 @@ def review(a):
     for n, r in enumerate(sorted(rows, key=lambda r: (r["subtopic"], r["level"], r["id"])), 1):
         imgs = "".join(f'<img src="data:image/webp;base64,{base64.b64encode((out / "figures" / Path(p).name).read_bytes()).decode()}">'
                        for p in figs[r["id"]])
+        if r.get("passage_text"):  # a passage turned into text is shown as text, where its page picture was
+            imgs = f'<div style="white-space:pre-wrap;border:1px solid #ccc;padding:8px">{html.escape(r["passage_text"])}</div>' + imgs
         opts = "".join(f'<li class="{"k" if i == r["answer"] else ""}">({i + 1}) {html.escape(o)}</li>' for i, o in enumerate(r["options"]))
         parts.append(f'<section><div class=m>#{n} {r["id"]} · {html.escape(r["subtopic"])} · {r["level"]} · Past paper {r["year"]} · blind: {html.escape(r["blind_src"])}</div>'
                      f'<p>{html.escape(r["stem"])}</p>{imgs}<ol style="list-style:none;padding:0">{opts}</ol></section>')
@@ -2206,6 +2213,14 @@ def cloze_stem(t, n, opts=()):
     return t2
 
 
+def no_passage(rows, figs):
+    """Set questions (grp) shown with no passage at all: no picture, no text passage, and a stem that is not itself the
+    passage (a cloze, dialogue, vocabulary-cloze or editing row carries the whole passage, its own number marked in it).
+    Such a question would be asked blind. A short stem such as "对话中的（26）应填入哪一句？" is not a passage."""
+    own = lambda r: len(r.get("stem") or "") >= 120 and re.search(rf"[（(]\s*{r.get('seq')}\s*[）)]|\{{\{{{r.get('seq')}\|", r.get("stem") or "")  # editing: {{n|word
+    return [r["id"] for r in rows if r.get("grp") and not figs.get(r["id"]) and not r.get("set_pages") and not own(r)]
+
+
 def set_pages(rows, out, kind="english-visual"):
     """Every question of a set shows the same pages: from up to three pages before the set's first question page (the poster or
     passage, which may run over two pages) to its first question page. Sets of one question, and sets whose questions spread
@@ -2442,12 +2457,20 @@ def upload(a):
     ord_ = easier_first(rows)  # needs migration 006 (pp_items.ord) on the live project
     figs = collections.defaultdict(list)
     for m in jl(out / "figures.jsonl"):
-        # a passage turned into text (owner, 26 Nov 2026: OCR'd text-only pages, docs/passage-sets-ui.md) is {pp_id, text}:
-        # it travels as a text figure {text} and needs no picture
-        figs[m["pp_id"]].append({"text": m["text"]} if "text" in m else {"path": m["path"], "w": m["w"], "h": m["h"]})
+        if "path" in m:
+            figs[m["pp_id"]].append({"path": m["path"], "w": m["w"], "h": m["h"]})
+    for r in rows:
+        # a passage turned into text (owner, 26 Nov 2026: OCR'd text-only pages, docs/passage-sets-ui.md) is kept on the
+        # row itself (`passage_text`, written by zhpassage/totext.py), so re-running `figures` cannot lose it; it travels
+        # as a text figure {text} and needs no picture
+        if isinstance(r.get("passage_text"), str) and r["passage_text"].strip():
+            figs[r["id"]].insert(0, {"text": r["passage_text"].strip()})
     pics = lambda i: [f for f in figs[i] if "path" in f]
     missing = [r["id"] for r in rows if (r["crops"] and len(pics(r["id"])) != len(r["crops"]))
                or (r.get("set_pages") and len(pics(r["id"])) != len(r["set_pages"]))]  # a set row without its pages too
+    bare = no_passage(rows, figs)
+    if bare:  # 26 Nov 2026 review: a set question that lost its pages and has no text passage would be asked blind
+        sys.exit(f"{len(bare)} set questions have no passage (no page, no text, no blank of their own): {', '.join(bare[:6])}")
     if missing:
         sys.exit(f"{len(missing)} rows lack their WebP figures: run `figures` first")
     # explanations (migration 014): explain.py apply writes <out>/<subject>/explain.jsonl for the ones the second model passed
@@ -2466,8 +2489,9 @@ def upload(a):
            # migration 015: a typed answer (S&T): no options, answer 0, the accepted answers and the answer line
            "kind": r.get("kind", "mcq"), "accept": r.get("accept") if r.get("kind") == "typed" else None,
            "scaffold": r.get("scaffold") if r.get("kind") == "typed" else None, **({"explain": (expl[r["id"]]["explain"] if r["id"] in expl and expl[r["id"]].get("fp") == explain_fp(r) else None)} if has_expl else {})} for r in rows]
-    nfig = sum(len(d["figures"]) for d in db)
-    print(f"{len(db)} rows, {nfig} figures, sub-topics {len({d['subtopic'] for d in db})}, explanations {sum(bool(d.get('explain')) for d in db) if has_expl else 'unchanged (no explain.jsonl)'}")
+    nfig = sum(1 for d in db for f in d["figures"] if "path" in f)
+    ntext = sum(1 for d in db for f in d["figures"] if "text" in f)
+    print(f"{len(db)} rows, {nfig} pictures, {ntext} text passages, sub-topics {len({d['subtopic'] for d in db})}, explanations {sum(bool(d.get('explain')) for d in db) if has_expl else 'unchanged (no explain.jsonl)'}")
     if not db:  # ponytail: an empty selection is almost always a wrong --out; stop before touching the table or pp_counts
         sys.exit(f"nothing selected under {a.out}/{a.subject} for those sub-topics: wrong --out? "
                  "(the 2025-26 import lives in /data/alvin/tmp/cookie-codex/ppimport/final2526)")

@@ -88,10 +88,11 @@ Deno.serve(async (req) => {
       for (const x of s ?? []) if (x.path && x.signedUrl) signed.set(x.path, x.signedUrl);
     }
     // a question whose picture could not be signed is left out rather than shown without it; a text figure needs no URL
-    const isText = (f: { path?: string; text?: string }) => typeof f.text === 'string' && typeof f.path !== 'string';
+    // (a text figure is a string `text` and no `path`; anything else is a picture and must have been signed)
+    const isText = (f: { path?: unknown; text?: unknown }) => typeof f.text === 'string' && f.text.trim() !== '' && f.path === undefined;
     const out = items
-      .map((i) => ({ ...i, figures: (i.figures ?? []).map((f) => (isText(f) ? { text: f.text } : { ...f, url: signed.get(f.path ?? '') })) }))
-      .filter((i) => i.figures.every((f) => 'text' in f || typeof (f as { url?: string }).url === 'string'));
+      .map((i) => ({ ...i, figures: (i.figures ?? []).map((f) => (isText(f) ? { text: f.text as string } : { path: f.path, w: f.w, h: f.h, url: typeof f.path === 'string' ? signed.get(f.path) : undefined })) }))
+      .filter((i) => i.figures.every((f) => ('text' in f && !('path' in f)) || typeof (f as { url?: string }).url === 'string'));
     return json({ items: out });
   } catch (e) {
     console.error('pp-serve:', e instanceof Error ? e.message : e);
