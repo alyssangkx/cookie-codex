@@ -105,7 +105,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   import { PP_ENABLED, ppSubsFor, poolModeFor, mergePool, tierPoolIds, ppMode, ppFigureHtml, ppBadge, optionLabel, isPoolSub, isStub, isPpId, easierFirst, countingPool, underlineMarks, correctionHtml, type CxMark, type PpFig } from '../../lib/pastpaper';
   import { typedOk, compose, scaffoldHtml } from '../../lib/typed';
   import { wordBox, strikes, passageEnd } from '../../lib/cloze';
-  import { replaceBlanks, hasOwnBlank, dropAskedLine, textFigureHtml, choose as pickBlank, place, unplace, usedPhrases, emptyBlanks, nextEmpty, optionIndex, setCorrections, type SetMark } from '../../lib/passageset';
+  import { replaceBlanks, hasOwnBlank, dropAskedLine, textFigureHtml, blanksIn, choose as pickBlank, place, unplace, usedPhrases, emptyBlanks, nextEmpty, optionIndex, setCorrections, type SetMark } from '../../lib/passageset';
   import { editingHtml, editWord, editAsk, editCorrections } from '../../lib/editing';
   import { esc, boldAns } from '../../lib/boldans';
   import { glossOption, type Gloss, type GlossLine } from '../../lib/zhgloss';
@@ -1027,6 +1027,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   const sameAll = (run: Q[], f: (o: Q) => unknown) => run.every((o) => JSON.stringify(f(o)) === JSON.stringify(f(run[0])));
   const figsTop = (o: Q) => (o.figure ? `<span class="qfig-wrap">${figureHtml(o.figure)}</span>` : '')
     + (o.ppText ?? []).map((t) => textFigureHtml(t, esc)).join('');
+  /** A cloze or dialogue set's pictures, text passages and (when not shared by the whole set) visual cards, each once. */
+  const setExtras = (run: Q[], sharedVis: boolean) =>
+    [...new Map(run.map((o) => [JSON.stringify([o.figure ?? null, o.ppText ?? null]), o])).values()].map(figsTop).join('')
+    + (sharedVis ? '' : [...new Map(run.filter((o) => o.visual).map((o) => [JSON.stringify(o.visual), o.visual!])).values()]
+      .map((v) => `<details class="rev-vis" open><summary>The ${esc(v.kind)}</summary>${visualCard(v)}</details>`).join(''));
   /** The passage's own text for a set read as a list (a vocabulary cloze keeps its underlined words). */
   const listText = (o: Q, asked: number | null) => (o.sub === 'eng-vocab-cloze' ? underlineMarks(fmt(o.stem), asked) : fmt(o.stem));
   const unmark = (h: string) => h.replace(/<mark class="ask">([^<]*)<\/mark>/g, '$1');
@@ -1060,8 +1065,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     quiz = [...quiz.slice(0, i + 1), ...same, ...later.filter((id) => wholeGroup(id) !== g)];
     runEnd = passageEnd(quiz, i, wholeGroup);
     const run = quiz.slice(i, runEnd).map((id) => byId.get(id)!).sort((a, b) => (a.seq ?? 0) - (b.seq ?? 0)); // passage order on screen
-    const inline = run.every((o) => hasOwnBlank(o.stem, o.seq));
-    const kind = inline ? (q.sub === 'chi-dialogue-mcq' ? 'dialogue' : 'chips') : 'list';
+    // inline only when the passage drawn (the first row's stem) shows every question's blank: else a blank would get no control
+    const dlg = q.sub === 'chi-dialogue-mcq';
+    const shown = blanksIn(unmark(fmt(dlg ? dropAskedLine(run[0].stem) : run[0].stem)));
+    const inline = run.every((o) => hasOwnBlank(o.stem, o.seq) && shown.has(o.seq!));
+    const kind = inline ? (dlg ? 'dialogue' : 'chips') : 'list';
     const ui: SetUi = { kind, run: run.map((o) => o.id), picks: new Map(), phrases: kind === 'dialogue' ? [...run[0].options] : [], sel: null, warned: false };
     setUi = ui;
     $('count').textContent = run.length > 1 ? `Questions ${i + 1}–${runEnd} of ${quiz.length}` : `Question ${i + 1} of ${quiz.length}`;
@@ -1077,13 +1085,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     opts.classList.remove('many', 'typed');
     opts.classList.add('set');
     if (kind === 'chips') {
-      $('stem').innerHTML = ppBadge(q) + setPassage(run, 'chips', chipHtml) + ppFigsHtml(q, false);
+      $('stem').innerHTML = ppBadge(q) + setExtras(run, sharedVis) + setPassage(run, 'chips', chipHtml) + ppFigsHtml(q, false);
       opts.innerHTML = submit;
       $('stem').querySelector<HTMLElement>('.chip')?.focus({ preventScroll: true });
     } else if (kind === 'dialogue') {
       const bank = `<div class="phrase-bank" role="group" aria-label="Phrases: drag one onto a blank, or tap a phrase and then a blank">`
         + ui.phrases.map((t, p) => `<button type="button" class="phrase" draggable="true" data-p="${p}" aria-pressed="false">${fmt(t)}</button>`).join('') + '</div>';
-      $('stem').innerHTML = bank + ppBadge(q) + `<div class="dlg">${setPassage(run, 'dialogue', blankBtn)}</div>` + ppFigsHtml(q, false);
+      $('stem').innerHTML = bank + ppBadge(q) + setExtras(run, sharedVis) + `<div class="dlg">${setPassage(run, 'dialogue', blankBtn)}</div>` + ppFigsHtml(q, false);
       opts.innerHTML = submit;
       dlgPaint();
       $('stem').querySelector<HTMLElement>('.phrase')?.focus({ preventScroll: true });
@@ -1211,10 +1219,11 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         + bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('') + '</div>';
     } else {
       const html = setPassage(run, ui.kind, () => '', new Map(marks));
-      body = ppBadge(q0) + (ui.kind === 'dialogue' ? `<div class="dlg">${html}</div>` : html) + ppFigsHtml(q0, false);
+      const extras = setExtras(run, !!q0.visual && sameAll(run, (o) => o.visual));
+      body = ppBadge(q0) + extras + (ui.kind === 'dialogue' ? `<div class="dlg">${html}</div>` : html) + ppFigsHtml(q0, false);
       $('stem').innerHTML = body;
       $('options').innerHTML = '';
-      card = `<div class="rev rev-passage"><p class="rev-ph">${ppBadge(q0)}${bad.length} to fix in this passage: what you chose is crossed out, the answer is in bold.</p>`
+      card = `<div class="rev rev-passage"><p class="rev-ph">${ppBadge(q0)}${bad.length} to fix in this passage: what you chose is crossed out, the answer is in bold.</p>${extras}`
         + `<p class="stem">${ui.kind === 'dialogue' ? `<span class="dlg">${html}</span>` : html}</p>${bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('')}</div>`;
     }
     if (bad.length) setCards.set(g, card);
@@ -1513,7 +1522,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   // a held Enter: its repeats must not press Next (focused after Check) and skip the feedback unseen
   $('next').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.repeat) e.preventDefault(); });
   document.addEventListener('keydown', (e) => {
-    if ($('play').hidden || answered || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, textarea')) return;
+    // a passage set is answered whole and submitted once: a letter key must never answer one of its questions alone
+    if ($('play').hidden || answered || setUi || e.altKey || e.ctrlKey || e.metaKey || (e.target as HTMLElement).closest('input, textarea')) return;
     const k = 'abcdefgh'.indexOf(e.key.toLowerCase()), n = '12345678'.indexOf(e.key);
     const pick = k >= 0 ? k : n;
     const btn = $('options').querySelectorAll<HTMLButtonElement>('button[data-k]')[pick]; // options only, never a typed Check

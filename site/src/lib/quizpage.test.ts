@@ -1,6 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+function* walk(dir: URL | string): Generator<string> {
+  const d = typeof dir === 'string' ? dir : fileURLToPath(dir);
+  for (const n of readdirSync(d)) { const p = `${d.replace(/\/$/, '')}/${n}`; if (statSync(p).isDirectory()) yield* walk(p); else yield p; }
+}
 
 // The build does not type-check, so an imported name that the page also declares as its own function is shadowed without
 // any error (26 Nov 2026: `choose` from lib/passageset was hidden by the page's `function choose(k)`, and a set's options
@@ -30,4 +36,18 @@ test('no imported name is redeclared in a page script', () => {
 test('the check catches a shadowed import', () => {
   assert.deepEqual(clashes("import { choose, place } from '../lib/x';\nfunction choose(k) {}\n"), ['choose']);
   assert.deepEqual(clashes("import { choose as pick } from '../lib/x';\nfunction choose(k) {}\n"), []);
+});
+
+// 26 Nov 2026 review: a text figure {text} has no path, so every place that signs picture paths must skip it.
+test('every page or module that signs figure paths skips text figures', () => {
+  const files = [...walk(new URL('../', import.meta.url))].filter((f) => /\.(ts|astro)$/.test(f) && !f.endsWith('.test.ts'));
+  const bad = files.filter((f) => { const s = readFileSync(f, 'utf8'); return s.includes('createSignedUrl') && /figures/.test(s) && !/isTextFig|\.path\s*\?|typeof f\.path|'path' in/.test(s); });
+  assert.deepEqual(bad.map((f) => f.split('/src/')[1]), []);
+});
+
+// 26 Nov 2026 review: a letter key answered one question of a passage set on its own; the shortcut must stand down for a set.
+test('the quiz keyboard shortcut ignores passage sets', () => {
+  const src = readFileSync(new URL('../pages/quiz/index.astro', import.meta.url), 'utf8');
+  const h = src.slice(src.indexOf("document.addEventListener('keydown'"));
+  assert.match(h.slice(0, h.indexOf('\n  });')), /setUi/);
 });

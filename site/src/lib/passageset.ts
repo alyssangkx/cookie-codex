@@ -19,9 +19,12 @@ export function replaceBlanks(html: string, fn: (n: number, zh: boolean) => stri
 /** Does the stem hold this question's own blank? Then the passage is text and the options go inline; else the stem is one
  *  sentence under a page image and the question keeps its option list. */
 export function hasOwnBlank(stem: string, seq: number | null | undefined): boolean {
-  if (seq == null) return false;
-  return new RegExp(`（${seq}）＿|\\(${seq}\\) ?_{2}`).test(stem);
+  return seq != null && blanksIn(stem).has(seq);
 }
+
+/** Every blank number a passage shows, by the same pattern replaceBlanks draws (26 Nov 2026 review: a looser test let a
+ *  set go inline with a blank that got no chip, so the child could not answer it). */
+export const blanksIn = (stem: string): Set<number> => replaceBlanks(stem, () => '').found;
 
 /** An old dialogue stem ends with a line "第（K）空…" naming the asked blank: the phrase bank makes it redundant. */
 export const dropAskedLine = (stem: string): string => stem.replace(/\n*第（\d+）空[^\n]*$/, '');

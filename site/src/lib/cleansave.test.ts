@@ -95,3 +95,18 @@ test('one-pool markers (pool, ms) survive the server round trip; anything but tr
   assert.equal(c.progress.sci.i?.pool, undefined);
   assert.equal(c.progress.sci.i?.ms, undefined);
 });
+
+// 26 Nov 2026 review: cleanSave rebuilt settings from a fixed list and dropped the new dailyQuizCap, so the parent page
+// showed no limit and wrote 0 back. Every field of SaveV1.settings must be named in cleansave.ts.
+test('cleanSave keeps every settings field the save declares', async () => {
+  const { readFileSync } = await import('node:fs');
+  const store = readFileSync(new URL('./store.ts', import.meta.url), 'utf8');
+  const clean = readFileSync(new URL('./cleansave.ts', import.meta.url), 'utf8');
+  const body = store.slice(store.indexOf('settings: {', store.indexOf('export interface SaveV1')), store.indexOf('};', store.indexOf('export interface SaveV1')));
+  const fields = [...body.replace(/\/\/.*$/gm, '').matchAll(/(\w+)\??:/g)].map((m) => m[1]).filter((n) => n !== 'settings');
+  assert.ok(fields.length >= 6, 'parsed the settings fields');
+  assert.deepEqual(fields.filter((n) => !clean.includes(`st.${n}`)), []);
+  const s = fresh(); s.settings.dailyQuizCap = 10;
+  assert.equal(cleanSave(s).settings.dailyQuizCap, 10);
+  assert.equal('dailyQuizCap' in cleanSave(fresh()).settings, false);
+});

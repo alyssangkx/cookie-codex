@@ -175,6 +175,7 @@ const data = {
   .parent-page .tq-n { color: var(--cocoa-soft); font-size: 0.9rem; }
   .parent-page { --ok: #1f6b3a; }
   .parent-page[data-tab='prog'] #family, .parent-page[data-tab='fam'] #content, .parent-page[data-tab='fam'] #fam-deleted { display: none; }
+  .parent-page .wq-fig .qfig-text { text-align: left; line-height: 1.6; margin-bottom: 0.6rem; }
   .parent-page .pp-tabs { display: flex; gap: 0.4rem; border-bottom: 1.5px solid var(--crust); margin-top: 0.8rem; flex-wrap: wrap; }
   .parent-page .pp-tabs button, .parent-page .pp-tab-link { min-height: 44px; padding: 0 1rem; border: 1.5px solid var(--crust); border-bottom: 0;
     border-radius: 10px 10px 0 0; background: var(--cream); color: var(--cocoa); font: 600 1rem var(--font-display); display: inline-flex; align-items: center; text-decoration: none; }
@@ -230,7 +231,8 @@ const data = {
   import { load, save, migrate, SCHEMA, REVISION_MAX, ASSIGN_MAX, assignedPending, finishedOn, backupLocal, liveStreak, today, dayKey, quizzesToday, DAILY_QUIZ_CAP, QUIZ_CAP_MAX, quizCapOf, exportCode, importCode, LEFT_BLANK, inReview } from '../../lib/store';
   import type { SaveV1, Tier } from '../../lib/store';
   import { cleanSave } from '../../lib/cleansave';
-  import { ppMode, isPpId, ppSubjectOf, cleanExplain, typedShape, underlineMarks, type PpExplain } from '../../lib/pastpaper';
+  import { ppMode, isPpId, ppSubjectOf, cleanExplain, typedShape, underlineMarks, isTextFig, type PpExplain } from '../../lib/pastpaper';
+  import { textFigureHtml } from '../../lib/passageset';
     import { grownup as supabase, supabase as player, callFunction, callParentApi, roleOf } from '../../lib/supabase';
 
   interface PSub { id: string; name: string; school: string; topic: string; file: string | null; content: boolean; avail: number; href: string;
@@ -332,7 +334,7 @@ const data = {
   type QState = SaveV1['questions'][string];
   type BQ = { id: string; sub: string; stem: string; options: string[]; answer: number; group?: string; seq?: number;
     figure?: string | { img: string; alt: string; labels?: { text: string }[] }; visual?: { kind: string; title: string };
-    pp?: string[]; ex?: PpExplain | null; typed?: { accept: string[]; scaffold: string | null } }; // pp: exam-page pictures (signed URLs); ex: why (014); typed: a typed answer (015)
+    pp?: string[]; ppText?: string[]; ex?: PpExplain | null; typed?: { accept: string[]; scaffold: string | null } }; // pp: exam-page pictures (signed URLs); ex: why (014); typed: a typed answer (015)
   type PpRow = { id: string; subtopic: string; stem: string; options: string[]; answer: number; figures: { path: string }[] | null; grp: string | null; seq: number | null; explain?: unknown;
     kind?: string; accept?: unknown; scaffold?: string | null };
   let bankLoad: Promise<Map<string, BQ>> | null = null;
@@ -367,7 +369,7 @@ const data = {
         const r = await supabase.rpc('pp_seen', { p_child: childId });
         if (r.error) throw r.error;
         const rows = (r.data ?? []) as PpRow[];
-        const paths = [...new Set(rows.flatMap((x) => (x.figures ?? []).map((f) => f.path)))];
+        const paths = [...new Set(rows.flatMap((x) => (x.figures ?? []).flatMap((f) => (isTextFig(f) ? [] : [f.path]))))]; // a text passage has no picture to sign
         const urls = new Map<string, string>();
         for (let i = 0; i < paths.length; i += 100) {
           const u = await supabase.storage.from('pp-figures').createSignedUrls(paths.slice(i, i + 100), 3600);
@@ -377,7 +379,8 @@ const data = {
           const typed = x.kind === 'typed';
           if (typed && !typedShape(x as unknown as Record<string, unknown>)) continue; // a malformed typed row is not shown at all
           qs.set(x.id, { id: x.id, sub: x.subtopic, stem: x.stem, options: x.options, answer: x.answer,
-          group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (urls.has(f.path) ? [urls.get(f.path)!] : [])),
+          group: x.grp ?? undefined, seq: x.seq ?? undefined, pp: (x.figures ?? []).flatMap((f) => (!isTextFig(f) && urls.has(f.path) ? [urls.get(f.path)!] : [])),
+          ppText: (x.figures ?? []).flatMap((f) => (isTextFig(f) ? [f.text] : [])),
           ex: cleanExplain(x.explain, x.options.length),
           ...(typed ? { typed: { accept: x.accept as string[], scaffold: x.scaffold ?? null } } : {}) });
         }
@@ -394,7 +397,8 @@ const data = {
   // figures: Math SVG strings come from our own build scripts (as on the quiz page); Science line art is shown as the
   // image with its labels listed underneath; a past-paper question shows its exam-page pictures; a visual text is named
   const figHtml = (q: BQ) => {
-    if (q.pp?.length) return `<div class="wq-fig">${q.pp.map((u) => `<img src="${esc(u)}" alt="Exam page for this question" loading="lazy">`).join('')}</div>`;
+    const texts = (q.ppText ?? []).map((x) => textFigureHtml(x, esc)).join('');
+    if (q.pp?.length || texts) return `<div class="wq-fig">${texts}${(q.pp ?? []).map((u) => `<img src="${esc(u)}" alt="Exam page for this question" loading="lazy">`).join('')}</div>`;
     const f = q.figure;
     if (typeof f === 'string') return `<div class="wq-fig">${f}</div>`;
     if (f && /^\/science\/[\w.-]+\.webp$/.test(f.img)) return `<div class="wq-fig"><img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy">`
@@ -674,7 +678,7 @@ const data = {
     const apply = (x: SaveV1) => {
       x.settings.dailyCapMin = clamp(cap.value, 45, 180, 15, x.settings.dailyCapMin);
       x.settings.dailyGoalQuizzes = clamp(goal.value, 1, 5, 1, x.settings.dailyGoalQuizzes);
-      x.settings.dailyQuizCap = qcap.value.trim() === '' ? 0 : clamp(qcap.value, 1, QUIZ_CAP_MAX, 1, quizCapOf(x) || DAILY_QUIZ_CAP);
+      x.settings.dailyQuizCap = !(Number(qcap.value) > 0) ? 0 : clamp(qcap.value, 1, QUIZ_CAP_MAX, 1, quizCapOf(x) || DAILY_QUIZ_CAP);
       x.settings.extraTime = extra.checked;
       if (psle.value) x.settings.psleDate = psle.value;
     };

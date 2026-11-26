@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { replaceBlanks, hasOwnBlank, dropAskedLine, textFigureHtml, choose, place, unplace, usedPhrases, emptyBlanks, nextEmpty, optionIndex, setCorrections } from './passageset.ts';
+import { blanksIn, replaceBlanks, hasOwnBlank, dropAskedLine, textFigureHtml, choose, place, unplace, usedPhrases, emptyBlanks, nextEmpty, optionIndex, setCorrections } from './passageset.ts';
 
 const esc = (x: string) => x.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 
@@ -87,4 +87,11 @@ test('setCorrections: right green, wrong struck with the answer, given grey, unm
   assert.ok(r.html.includes('(4) <span class="filled given"'));
   assert.ok(r.html.endsWith('（5）＿＿＿＿'));
   assert.deepEqual([...r.placed].sort(), [1, 2, 3, 4]);
+});
+
+// 26 Nov 2026 review: hasOwnBlank accepted a blank the passage drawing does not (one ＿, or "(3) ___"), so a set went
+// inline with a question that had no chip. Both now use the same pattern.
+test('hasOwnBlank and blanksIn agree with the blanks replaceBlanks draws', () => {
+  for (const s of ['他（3）＿听到', '(3) ___ here', '(3)__']) { assert.equal(hasOwnBlank(s, 3), false, s); assert.equal(blanksIn(s).size, 0, s); }
+  for (const s of ['他（3）＿＿＿＿听到', '(3) ____ here', '(3) ________']) { assert.equal(hasOwnBlank(s, 3), true, s); assert.deepEqual([...blanksIn(s)], [3], s); }
 });

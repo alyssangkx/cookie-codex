@@ -2,7 +2,7 @@
 // this device) must not trust its shape. cleanSave() returns a well-formed SaveV1 for display: every number is a finite
 // number in range, every string a string, malformed entries dropped. It never writes storage and changes no save rules;
 // store.ts load()/migrations stay as they are. Use it before rendering a save into HTML.
-import { fresh, TIERS, PICK_MAX, RQ_MAX, ASSIGN_HREF, ASSIGN_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
+import { fresh, TIERS, QUIZ_CAP_MAX, PICK_MAX, RQ_MAX, ASSIGN_HREF, ASSIGN_MAX, type SaveV1, type Tier, type TierState, type Attempt } from './store.ts';
 import { CRUMB_WHYS, LEDGER_MAX, type Crumbs, type CrumbWhy, type LedgerEntry, type Purchase } from './crumbs.ts';
 
 type Obj = Record<string, unknown>;
@@ -94,6 +94,7 @@ export function cleanSave(raw: unknown): SaveV1 {
     dailyCapMin: typeof st.dailyCapMin === 'number' ? num(st.dailyCapMin, 0, 1440) : f.settings.dailyCapMin,
     dailyGoalQuizzes: typeof st.dailyGoalQuizzes === 'number' ? num(st.dailyGoalQuizzes, 0, 1000) : f.settings.dailyGoalQuizzes,
     extraTime: st.extraTime === true, psleDate: str(st.psleDate, 20) || f.settings.psleDate, playerName: str(st.playerName, 40),
+    ...(typeof st.dailyQuizCap === 'number' ? { dailyQuizCap: num(st.dailyQuizCap, 0, QUIZ_CAP_MAX) } : {}),
   };
 
   for (const [sub, tiers] of entries(r.progress)) {

@@ -58,6 +58,7 @@ def blank_ok(text, n, stem):
 def check(a, b, blanks, kind="cloze"):
     """(ok, why) for two independent reads a, b of one passage and its stored blanks {n: stem} (none for reading).
     Owner (26 Nov 2026): only text-only passages become text; a page with a picture, chart or table keeps its scan."""
+    blanks = {int(k): v for k, v in (blanks or {}).items()}  # JSON object keys arrive as strings
     if any(str(x or "").strip().upper().startswith("PICTURE") for x in (a, b)):
         return False, "page has a picture: keep the scan"
     if kind == "reading":
@@ -100,6 +101,12 @@ def main(items_file):
         print(f"{min(i + 8, len(todo))}/{len(todo)} read", flush=True)
 
 
+def to_stem(text):
+    """An agreed read as a site stem: each bare blank （n） becomes （n）＿＿＿＿, the form the quiz page draws as a blank
+    (lib/passageset.ts BLANK_SRC); a blank that already has its line is left alone."""
+    return re.sub(r"（(\d{1,3})）(?!＿)", r"（\1）＿＿＿＿", text)
+
+
 def selftest():
     a = "小男孩大声喊道。可是，他（17）听到对方说一样的话。\n\n一回到家里，小男孩马上（18）妈妈的怀里，告诉妈妈山上有鬼。"
     blanks = {17: "可是，他（17）＿＿＿＿听到对方说一样的话", 18: "一回到家里，小男孩马上（18）＿＿＿＿妈妈的怀里，告诉妈妈"}
@@ -111,6 +118,8 @@ def selftest():
     assert check(r, r, {}, "reading") == (True, None) and check(r, "完全不同" * 40, {}, "reading")[1].startswith("the two reads")
     assert check("短", "短", {}, "reading")[1] == "read too short"
     assert check("PICTURE", a, blanks)[1].startswith("page has a picture") and check(r, "PICTURE", {}, "reading")[1].startswith("page has")
+    assert check(a, a, {str(k): v for k, v in blanks.items()}) == (True, None), "string keys from JSON"
+    assert to_stem("他（17）听到，（18）＿＿＿＿妈妈") == "他（17）＿＿＿＿听到，（18）＿＿＿＿妈妈"
     print("zh_passage_ocr selftest ok")
 
 
