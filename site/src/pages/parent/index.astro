@@ -571,8 +571,7 @@ const data = {
     dashMsg = !ok ? "Couldn't save that. Reload the page and try again."
       : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.`
       : `Done: ${ids.length === 1 ? 'it comes' : `${ids.length} questions come`} up in the next Daily Review.`;
-    const msg = document.getElementById('dash-msg');
-    if (msg) msg.textContent = dashMsg;
+    for (const el of ['dash-msg', 'ret-msg']) { const m = document.getElementById(el); if (m) m.textContent = dashMsg; }
   }
   // the exam-page pictures are signed for an hour: redraw the dashboard (and this device's mistakes list) before they lapse
   setInterval(() => { viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
@@ -637,14 +636,36 @@ const data = {
     const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
     if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; return; }
     const step = [0, '1-day', '3-day', '7-day'];
-    $('retest').innerHTML = missingNote() + `<p class="note">${due.length} question${due.length > 1 ? 's' : ''} waiting.</p><ol class="list">` + due.map(([id, q]) => {
+    const item = ([id, q]: [string, QState]) => {
       const late = q.due <= now;
       const dueTxt = late
         ? (dayKey(q.due) === dayKey(now) ? 'due today' : '<span class="due-late">overdue</span>')
         : `due ${esc(fmtDate(q.due))}`;
       return `<li>${bold(stems.get(id)!.stem)}<span class="meta">${step[q.s]} step · ${dueTxt} · wrong ${q.w} time${q.w === 1 ? '' : 's'}</span></li>`;
-    }).join('') + '</ol>';
+    };
+    // owner, 26 Nov 2026: one fold per subject; its Retest button sends that subject's waiting questions to the child now
+    const subOf = new Map(P.subs.map((x) => [x.id, x]));
+    const schoolName = new Map(P.schools.map((x) => [x.id, x.name]));
+    const bySubject = new Map<string, [string, QState][]>();
+    for (const e of due) {
+      const sub = subOf.get(stems.get(e[0])!.sub);
+      const name = sub ? schoolName.get(sub.school) ?? sub.school : 'Other';
+      (bySubject.get(name) ?? bySubject.set(name, []).get(name)!).push(e);
+    }
+    const can = !!child?.writable;
+    $('retest').innerHTML = missingNote() + `<p class="note">${plural(due.length, 'question')} waiting.${can ? ' Retest sends a subject\'s questions to the child now: they come up in the next Daily Review.' : ''}</p>`
+      + [...bySubject].map(([name, list]) => `<details class="wq-subject"><summary><b>${esc(name)}</b> (${list.length})`
+        + (can ? ` <button type="button" class="btn small" data-act="retest-subject" data-ids="${esc(list.map(([id]) => id).join(' '))}" data-name="${esc(name)}">Retest ${list.length}</button>` : '')
+        + `</summary><ol class="list">${list.map(item).join('')}</ol></details>`).join('')
+      + '<p class="saved" id="ret-msg" role="status" aria-live="polite"></p>';
   }
+  $('retest').addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act="retest-subject"]');
+    if (!b) return;
+    e.preventDefault(); // a button inside <summary> must not also open or close the fold
+    const ids = b.dataset.ids!.split(' ');
+    if (confirm(`Send the ${plural(ids.length, 'waiting question')} in ${b.dataset.name} to the child now? They come up in the next Daily Review.`)) void makeDue(ids, false);
+  });
 
   // settings
   let savedTimer: number | undefined;
