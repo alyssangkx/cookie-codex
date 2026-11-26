@@ -477,6 +477,7 @@ const data = {
     renderDetail();
   }
   let dashMsg = ''; // the last Retest / revision status, kept across the re-render a save causes
+  let retMsg = ''; // the same for the retest queue panel (each panel shows only its own message)
   // assignments (owner, 23 Nov 2026): a parent assigns a sub-topic; the child sees it as a priority until a quiz on it is done
   function assignBtn(sub: PSub) {
     const a = (s.assigned ?? []).find((x) => x.sub === sub.id);
@@ -561,17 +562,18 @@ const data = {
   }
   /** Make questions due now in the child's save (a mastered one comes back as a retest); `revision` also marks them as the
    *  revision test. Written through pushChild (rev check; never the admin's view). */
-  async function makeDue(ids: string[], revision: boolean) {
+  async function makeDue(ids: string[], revision: boolean, panel: 'dash' | 'ret' = 'dash') {
     const now = Date.now();
     const ok = await pushChild((x) => {
       // a mastered question comes back at the last retest step, so one right answer masters it again
       for (const id of ids) { const q = x.questions[id]; if (!q) continue; q.s = q.s > 0 ? q.s : 3; q.due = now; delete q.parked; }
       if (revision) x.revision = { ids: ids.filter((id) => x.questions[id]), ts: now };
     });
-    dashMsg = !ok ? "Couldn't save that. Reload the page and try again."
+    const msg = !ok ? "Couldn't save that. Reload the page and try again."
       : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.`
       : `Done: ${ids.length === 1 ? 'it comes' : `${ids.length} questions come`} up in the next Daily Review.`;
-    for (const el of ['dash-msg', 'ret-msg']) { const m = document.getElementById(el); if (m) m.textContent = dashMsg; }
+    if (panel === 'dash') dashMsg = msg; else retMsg = msg;
+    const m = document.getElementById(`${panel}-msg`); if (m) m.textContent = msg; // renderRetest also restores retMsg after its re-render
   }
   // the exam-page pictures are signed for an hour: redraw the dashboard (and this device's mistakes list) before they lapse
   setInterval(() => { viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
@@ -655,16 +657,16 @@ const data = {
     const can = !!child?.writable;
     $('retest').innerHTML = missingNote() + `<p class="note">${plural(due.length, 'question')} waiting.${can ? ' Retest sends a subject\'s questions to the child now: they come up in the next Daily Review.' : ''}</p>`
       + [...bySubject].map(([name, list]) => `<details class="wq-subject"><summary><b>${esc(name)}</b> (${list.length})`
-        + (can ? ` <button type="button" class="btn small" data-act="retest-subject" data-ids="${esc(list.map(([id]) => id).join(' '))}" data-name="${esc(name)}">Retest ${list.length}</button>` : '')
+        + (can && list.some(([id]) => askable(stems.get(id)!)) ? ` <button type="button" class="btn small" data-act="retest-subject" data-ids="${esc(list.filter(([id]) => askable(stems.get(id)!)).map(([id]) => id).join(' '))}" data-name="${esc(name)}">Retest ${list.filter(([id]) => askable(stems.get(id)!)).length}</button>` : '')
         + `</summary><ol class="list">${list.map(item).join('')}</ol></details>`).join('')
-      + '<p class="saved" id="ret-msg" role="status" aria-live="polite"></p>';
+      + `<p class="saved" id="ret-msg" role="status" aria-live="polite">${esc(retMsg)}</p>`;
   }
   $('retest').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act="retest-subject"]');
     if (!b) return;
     e.preventDefault(); // a button inside <summary> must not also open or close the fold
     const ids = b.dataset.ids!.split(' ');
-    if (confirm(`Send the ${plural(ids.length, 'waiting question')} in ${b.dataset.name} to the child now? They come up in the next Daily Review.`)) void makeDue(ids, false);
+    if (confirm(`Send the ${plural(ids.length, 'waiting question')} in ${b.dataset.name} to the child now? They come up in the next Daily Review.`)) void makeDue(ids, false, 'ret');
   });
 
   // settings
@@ -892,7 +894,7 @@ const data = {
     if (my !== pick) return;
     if (r.error) throw r.error;
     child = { id, rev: r.data ? Number(r.data.rev) : null, raw: asSave(r.data?.data), writable };
-    s = cleanSave(child.raw); viewId = id;
+    s = cleanSave(child.raw); viewId = id; retMsg = ''; // a new child: no message about the last one
     $('content').hidden = false; // a pick that failed before may have hidden it
     renderAll();
   }
@@ -1032,7 +1034,7 @@ const data = {
       const note = $('who-note').textContent ?? '';
       sel.addEventListener('change', async () => {
         const opt = sel.selectedOptions[0];
-        const device = () => { pick++; child = null; s = cleanSave(load()); viewId = deviceId; $('bak-panel').hidden = false; renderAll(); }; // pick++: a pick still loading is dropped
+        const device = () => { pick++; child = null; s = cleanSave(load()); viewId = deviceId; retMsg = ''; $('bak-panel').hidden = false; renderAll(); }; // pick++: a pick still loading is dropped
         if (!sel.value) { $('who-note').textContent = note; return device(); }
         const test = opt?.dataset.test === 'true';
         $('who-note').textContent = `Signed in as the admin. Showing ${opt?.dataset.name || 'this child'}'s save from the server${test ? ' (the Test Player)' : ', read only'}.`;

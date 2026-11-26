@@ -103,7 +103,7 @@ test('cleanSave keeps every settings field the save declares', async () => {
   const store = readFileSync(new URL('./store.ts', import.meta.url), 'utf8');
   const clean = readFileSync(new URL('./cleansave.ts', import.meta.url), 'utf8');
   // the settings block's own fields: comments removed, read to its matching brace, nested object types skipped
-  const src = store.replace(/\/\/.*$/gm, '');
+  const src = store.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
   const open = src.indexOf('{', src.indexOf('settings: {', src.indexOf('export interface SaveV1')));
   const fields: string[] = [];
   for (let i = open + 1, depth = 1, word = ''; depth > 0 && i < src.length; i++) {

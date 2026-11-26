@@ -104,10 +104,17 @@ def main(items_file):
 def to_stem(text, blanks):
     """An agreed read as a site stem: each of the passage's own blanks (the numbers in `blanks`), however the read wrote
     it (（17） or (17), spaces, any ＿ after it), becomes （17）＿＿＿＿, the form the quiz page draws (lib/passageset.ts
-    BLANK_SRC). Other numbering in the text, such as a list's （1）, is left alone."""
-    want = {int(k) for k in blanks}
-    return re.sub(r"[（(]\s*(\d{1,2})\s*[）)]\s*[＿_]*",
-                  lambda m: f"（{int(m.group(1))}）＿＿＿＿" if int(m.group(1)) in want else m.group(0), text)
+    BLANK_SRC). Only the first copy of each number is a blank (a list's （1） elsewhere, or a repeat, is left alone), and
+    line breaks after a blank stay (paragraphs are split on blank lines)."""
+    want, done = {int(k) for k in blanks}, set()
+
+    def sub(m):
+        n = int(m.group(1))
+        if n not in want or n in done:
+            return m.group(0)
+        done.add(n)
+        return f"（{n}）＿＿＿＿"
+    return re.sub(r"[（(][ \t\u3000]*(\d{1,2})[ \t\u3000]*[）)][ \t\u3000]*[＿_]*", sub, text)
 
 
 def selftest():
@@ -124,6 +131,7 @@ def selftest():
     assert check(a, a, {str(k): v for k, v in blanks.items()}) == (True, None), "string keys from JSON"
     assert to_stem("他（17）听到，（18）＿妈妈，(19)看，（ 20 ）___走（1）首先", {"17": 0, "18": 0, 19: 0, 20: 0}) \
         == "他（17）＿＿＿＿听到，（18）＿＿＿＿妈妈，（19）＿＿＿＿看，（20）＿＿＿＿走（1）首先"
+    assert to_stem("他（17）\n\n一回到家里（1）首先（1）", {1: 0, 17: 0}) == "他（17）＿＿＿＿\n\n一回到家里（1）＿＿＿＿首先（1）"
     print("zh_passage_ocr selftest ok")
 
 

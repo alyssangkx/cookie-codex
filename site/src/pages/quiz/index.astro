@@ -1216,7 +1216,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
           + o.options.map((t, k) => `<div class="opt${k === o.answer ? ' right' : k === r.k ? ' wrong' : ''}"><span class="letter">${optionLabel(o, k)}</span> <span>${fmt(t)}</span></div>`).join('') + '</div></div>'; };
       $('stem').innerHTML = top;
       $('options').innerHTML = run.map(block).join('');
-      card = `<div class="rev rev-passage"><p class="rev-ph">${bad.length} to look at again in this set.</p>${top}${bad.map(block).join('')}`
+      const vis = !!q0.visual && sameAll(run, (o) => o.visual) ? `<details class="rev-vis" open><summary>The ${esc(q0.visual!.kind)}</summary>${visualCard(q0.visual!)}</details>` : '';
+      card = `<div class="rev rev-passage"><p class="rev-ph">${bad.length} to look at again in this set.</p>${vis}${top}${bad.map(block).join('')}`
         + bad.map((o) => setWhy(o, got.get(o.id)!.k, false)).join('') + '</div>';
     } else {
       const html = setPassage(run, ui.kind, () => '', new Map(marks));

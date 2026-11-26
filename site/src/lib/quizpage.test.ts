@@ -44,11 +44,13 @@ test('every page or module that signs figure paths skips text figures', () => {
   const bad: string[] = [];
   for (const f of files) {
     const s = readFileSync(f, 'utf8');
-    if (!s.includes('createSignedUrls(')) continue;
-    // the statement that collects the paths handed to createSignedUrls must itself skip text figures
-    const v = s.match(/createSignedUrls\(\s*(\w+)/)?.[1]; // the variable handed to createSignedUrls
-    const decl = v ? s.match(new RegExp(`const ${v}\\s*=[^;]*;`))?.[0] ?? '' : '';
-    if (!decl.includes('isTextFig')) bad.push(f.split('/src/')[1]);
+    // every signing call (createSignedUrl or createSignedUrls): the line declaring the variable it signs must skip text
+    // figures with isTextFig
+    for (const m of s.matchAll(/createSignedUrls?\(\s*([\w.]+)/g)) {
+      const v = m[1].split('.')[0];
+      const decl = s.match(new RegExp(`(?:const|let|var)\\s+${v}\\s*=[^\\n]*`))?.[0] ?? '';
+      if (!decl.includes('isTextFig')) bad.push(`${f.split('/src/')[1]}: ${m[0]}`);
+    }
   }
   assert.deepEqual(bad, []);
 });
