@@ -16,7 +16,14 @@ import sys
 from pathlib import Path
 
 PP = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
-OUT = PP / "marks39"
+OUT = PP / os.environ.get("PP_MOUT", "marks39")  # queue 45 pilot: marks45/<tag>
+# queue 45 pilot (26 Nov 2026): queue 39 found only 6 of the 22 known answer-marked pictures (it missed a handwritten
+# "same" over a printed word, and lines drawn between circuit points). PROMPT_B asks one plain question about handwriting.
+PROMPT_B = ("Look closely at this picture from a printed exam paper. Is ANY part of it handwritten in pen or pencil: a word "
+            "or number written in, a tick, a cross, a circle, an underline, a line or arrow drawn by hand (for example joining "
+            "two points), shading, or something crossed out? Printed text and printed drawings do not count. Reply with JSON "
+            "only: {{\"marks\": <true or false>, \"marks_what\": \"<what is handwritten and where; empty if nothing>\", "
+            "\"foreign_text\": false, \"foreign_what\": \"\"}}")
 PROMPT = ("This picture comes from a printed Primary 6 {subject} exam question. Look only for things a student or "
           "teacher ADDED by hand, not printed parts of the question (printed ticks, crosses or circles in a table, "
           "printed arrows and labels are part of the question). Reply with JSON only: "
@@ -52,14 +59,14 @@ def main(items_file):
     from vllm import LLM, SamplingParams
     llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
               gpu_memory_utilization=0.9, max_model_len=8192, max_num_seqs=16, limit_mm_per_prompt={"image": 1},
-              mm_processor_kwargs={"max_pixels": 1_600_000}, allowed_local_media_path=str(PP), enforce_eager=bool(os.environ.get("PP_EAGER")))
+              mm_processor_kwargs={"max_pixels": int(os.environ.get("PP_MAXPIX", "1600000"))}, allowed_local_media_path=str(PP), enforce_eager=bool(os.environ.get("PP_EAGER")))
     sp = SamplingParams(temperature=0, max_tokens=300)
     nm = nf = 0
     subj = {"science": "Science", "maths": "Mathematics", "chinese": "Chinese"}
     for i in range(0, len(todo), 32):
         ch = todo[i:i + 32]
         msgs = [[{"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"file://{PP / r['file']}"}},
-                                              {"type": "text", "text": PROMPT.format(subject=subj.get(r["subject"], r["subject"]))}]}] for r in ch]
+                                              {"type": "text", "text": (PROMPT_B if os.environ.get("PP_PROMPT") == "b" else PROMPT).format(subject=subj.get(r["subject"], r["subject"]))}]}] for r in ch]
         for r, out in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
             raw = out.outputs[0].text
             read = parse(raw)

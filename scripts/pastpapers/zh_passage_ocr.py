@@ -49,8 +49,9 @@ def blank_ok(text, n, stem):
     m = re.search(rf"[（(]\s*{n}\s*[）)]", text)
     if not m:
         return False
-    parts = re.split(r"[（(]\s*\d{1,2}\s*[）)]\s*[＿_]*", stem, maxsplit=1)
+    parts = re.split(rf"[（(]\s*{n}\s*[）)]\s*[＿_]*", stem, maxsplit=1)  # around blank n itself (a stem may hold two)
     left, right = (parts + [""])[:2]
+    left, right = (re.sub(r"[（(]\s*\d{1,2}\s*[）)]\s*[＿_]*", "", x) for x in (left, right))  # other blanks: no text
     left, right = norm(left)[-12:], norm(right)[:12]
     ctx_l, ctx_r = norm(text[max(0, m.start() - 60):m.start()]), norm(text[m.end():m.end() + 60])
     ok_l = not left or SequenceMatcher(None, left, ctx_l, autojunk=False).find_longest_match(0, len(left), 0, len(ctx_l)).size >= 0.7 * len(left)
@@ -62,6 +63,7 @@ def check(a, b, blanks, kind="cloze"):
     """(ok, why) for two independent reads a, b of one passage and its stored blanks {n: stem} (none for reading).
     Owner (26 Nov 2026): only text-only passages become text; a page with a picture, chart or table keeps its scan."""
     blanks = {int(k): v for k, v in (blanks or {}).items()}  # JSON object keys arrive as strings
+    a, b = clean_read(a), clean_read(b)
     if any(str(x or "").strip().upper().startswith("PICTURE") for x in (a, b)):
         return False, "page has a picture: keep the scan"
     if kind == "reading":
@@ -89,7 +91,7 @@ def check(a, b, blanks, kind="cloze"):
 
 def main(items_file):
     rows = [json.loads(l) for l in open(items_file) if l.strip()]
-    out = PP / "zhcloze41" / os.environ.get("PP_TAG", "72b")
+    out = PP / os.environ.get("PP_ZOUT", "zhcloze41") / os.environ.get("PP_TAG", "72b")  # queue 43 writes zhcloze43
     out.mkdir(parents=True, exist_ok=True)
     todo = [r for r in rows if all((PP / p).exists() for p in r["pages"]) and not (out / f"{r['grp']}.json").exists()]
     print(len(todo), "passages to read", flush=True)
@@ -98,7 +100,7 @@ def main(items_file):
     from vllm import LLM, SamplingParams
     llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
               gpu_memory_utilization=0.9, max_model_len=12288, max_num_seqs=8, limit_mm_per_prompt={"image": 2},
-              mm_processor_kwargs={"max_pixels": 3_000_000}, allowed_local_media_path=str(PP), enforce_eager=bool(os.environ.get("PP_EAGER")))
+              mm_processor_kwargs={"max_pixels": int(os.environ.get("PP_MAXPIX", "3000000"))}, allowed_local_media_path=str(PP), enforce_eager=bool(os.environ.get("PP_EAGER")))
     sp = SamplingParams(temperature=0, max_tokens=2500)
     for i in range(0, len(todo), 8):
         ch = todo[i:i + 8]
@@ -107,6 +109,11 @@ def main(items_file):
         for r, o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
             (out / f"{r['grp']}.json").write_text(json.dumps({"grp": r["grp"], "raw": o.outputs[0].text}, ensure_ascii=False))
         print(f"{min(i + 8, len(todo))}/{len(todo)} read", flush=True)
+
+
+def clean_read(text):
+    """A read as passage text: the paper's printed question marker before a blank ("Q（18）", "Q18（18）") dropped."""
+    return re.sub(r"Q\s*\d{0,2}\s*(?=[（(]\s*\d{1,2}\s*[）)])", "", text or "")
 
 
 def to_stem(text, blanks):
@@ -145,6 +152,10 @@ def selftest():
     assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "29": "对话中的（29）应填入哪一句？"}, "dialogue")[1].startswith("blank numbers missing")
     assert check(d + "（26）", d + "（26）", {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "dialogue")[1].startswith("blank numbers read more")
     assert check(d, d, {"26": "对话中的（26）应填入哪一句？", "27": "对话中的（27）应填入哪一句？"}, "cloze")[1].startswith("stored blank sentences")
+    two = "老管理员要新管理员（16）＿＿他所说的去做，并在笼子的各个（17）＿＿＿＿里，放满了食物。"
+    rd = "老管理员要新管理员Q（16）他所说的去做，并在笼子的各个Q17（17）里，放满了食物。"
+    assert clean_read(rd) == "老管理员要新管理员（16）他所说的去做，并在笼子的各个（17）里，放满了食物。"
+    assert check(rd, rd, {"16": two, "17": two}) == (True, None), check(rd, rd, {"16": two, "17": two})
     print("zh_passage_ocr selftest ok")
 
 
