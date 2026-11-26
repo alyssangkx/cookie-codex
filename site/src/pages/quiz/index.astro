@@ -1685,9 +1685,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .chip.sel, .quiz .phrase[aria-pressed="true"] { background: color-mix(in srgb, #2e9e5b 22%, var(--paper, #fff)); border-color: #2e9e5b; font-weight: 700; }
   .quiz .chip.off { opacity: 0.4; background: color-mix(in srgb, currentColor 8%, transparent); border-style: dashed; }
   .quiz .chip:focus-visible, .quiz .phrase:focus-visible, .quiz .dblank:focus-visible, .quiz .set-q .opt:focus-visible { outline: 3px solid var(--berry, #a52a45); outline-offset: 2px; }
-  .quiz .phrase-bank { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); gap: 0.35rem;
-    margin: 0 0 0.8rem; padding: 0.5rem; border: 2px solid var(--ink, #3b2a1f); border-radius: 0.6rem; background: var(--card, #fffaf2); }
-  .quiz .phrase { font-size: 0.95rem; touch-action: manipulation; }
+  /* two columns even on a phone (8.5rem), compact buttons: the pinned bank must not hide the dialogue it is placed into */
+  .quiz .phrase-bank { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr)); gap: 0.3rem;
+    margin: 0 0 0.8rem; padding: 0.4rem; border: 2px solid var(--ink, #3b2a1f); border-radius: 0.6rem; background: var(--card, #fffaf2); }
+  .quiz .phrase { font-size: 0.9rem; line-height: 1.25; padding: 0.35rem 0.5rem; min-height: 2.75rem; touch-action: manipulation; }
   .quiz .phrase:disabled { opacity: 0.4; text-decoration: line-through; cursor: default; background: color-mix(in srgb, currentColor 8%, transparent); }
   .quiz .phrase[draggable="true"] { cursor: grab; }
   .quiz .dlg { line-height: 2.2; }
