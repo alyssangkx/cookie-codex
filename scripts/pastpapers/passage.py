@@ -115,7 +115,10 @@ def run(items_file):
     pp = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
     out = items_file.with_name(os.environ.get("PP_OUT", "read.jsonl"))
     done = {r["sec"] for r in jl(out)}
-    img = items_file.with_name("img")
+    # queue 46 (27 Nov 2026): a re-read at higher resolution uses its own image folder (PP_IMGDIR) and size (PP_IMGPX, long edge)
+    px = int(os.environ.get("PP_IMGPX", "1960"))
+    # a page already saved is reused, so another size gets its own folder by default (never the 1960 px pages)
+    img = items_file.with_name(os.environ.get("PP_IMGDIR", "img" if px == 1960 else f"img{px}"))
     img.mkdir(exist_ok=True)
     todo = []
     for r in jl(items_file):
@@ -128,7 +131,7 @@ def run(items_file):
                 break
             if not dst.exists():
                 im = Image.open(src).convert("L")
-                im.thumbnail((1400, 1960))
+                im.thumbnail((px * 1400 // 1960, px))
                 im.save(dst, quality=88)
             files.append(dst)
         if len(files) == len(r["pages"]):
@@ -139,7 +142,9 @@ def run(items_file):
     from vllm import LLM, SamplingParams
     model = os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ")
     llm = LLM(model=model, tensor_parallel_size=int(os.environ.get("PP_TP", "4")), gpu_memory_utilization=0.9,
-              max_model_len=16384, max_num_seqs=8, limit_mm_per_prompt={"image": 4}, mm_processor_kwargs={"max_pixels": 1_600_000},
+              # four pages at PP_MAXPIX (about one token per 784 pixels) plus the reply must fit
+              max_model_len=max(16384, 4 * int(os.environ.get("PP_MAXPIX", "1600000")) // 784 + 3000), max_num_seqs=8,
+              limit_mm_per_prompt={"image": 4}, mm_processor_kwargs={"max_pixels": int(os.environ.get("PP_MAXPIX", "1600000"))},
               allowed_local_media_path=str(img.parent), enforce_eager=bool(os.environ.get("PP_EAGER")))
     sp = SamplingParams(temperature=0, max_tokens=2500)
     with open(out, "a", encoding="utf-8") as f:

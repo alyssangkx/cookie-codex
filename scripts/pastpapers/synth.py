@@ -21,6 +21,8 @@ from pathlib import Path
 TMP = Path("/data/alvin/tmp/cookie-codex")
 DEV_PP = TMP / "pastpapers"
 WORK = Path(os.environ.get("PP_WORK", str(TMP / "synth")))
+# queue 47 (27 Nov 2026): the question numbers of the first read are sometimes wrong, so a re-read finds the question by its
+# given sentence(s) alone (PP_BYSENT=1: the prompt does not name a number)
 PROMPT = ("This is a page from a Singapore Primary 6 English exam paper (Synthesis and Transformation). Find question {qno}. "
           "Its given sentence(s) begin: \"{start}\". Below the given sentence(s) there is a line for the answer that already "
           "prints some word(s) (for example \"However\" at the start, or \"unless\" in the middle) with blank lines to fill. "
@@ -118,11 +120,21 @@ def pack():
     print(f"{len(out)} questions -> {WORK / 'items.jsonl'}")
 
 
+def prompt_for(r, bysent=False):
+    """The read prompt; by sentence: "Find the question whose given sentence(s) begin ..." with no question number."""
+    p = PROMPT.format(qno=r["qno"], start=r["start"].replace('"', "'"))
+    if bysent:
+        p = p.replace(f"Find question {r['qno']}. Its given sentence(s) begin:", "Find the question whose given sentence(s) begin:")
+        p = p.replace(f"If question {r['qno']} is not on this page", "If that question is not on this page")
+    return p
+
+
 def run(items_file):
     from PIL import Image
     items_file = Path(items_file).resolve()
     pp = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
-    out = items_file.with_name("read.jsonl")
+    out = items_file.with_name(os.environ.get("PP_OUT", "read.jsonl"))
+    bysent = bool(os.environ.get("PP_BYSENT"))
     done = {(r["id"], r["page"]) for r in jl(out)}
     tmp = items_file.with_name("img")
     tmp.mkdir(exist_ok=True)
@@ -145,12 +157,12 @@ def run(items_file):
     llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
               gpu_memory_utilization=0.9, max_model_len=8192, max_num_seqs=16, limit_mm_per_prompt={"image": 1},
               mm_processor_kwargs={"max_pixels": 2_000_000}, allowed_local_media_path=str(tmp.parent), enforce_eager=bool(os.environ.get("PP_EAGER")))
-    sp = SamplingParams(temperature=0, max_tokens=500)
+    sp = SamplingParams(temperature=0, max_tokens=int(os.environ.get("PP_MAXTOK", "500")))
     with open(out, "a", encoding="utf-8") as f:
         for i in range(0, len(todo), 32):
             ch = todo[i:i + 32]
             msgs = [[{"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"file://{dst}"}},
-                     {"type": "text", "text": PROMPT.format(qno=r["qno"], start=r["start"].replace('"', "'"))}]}] for r, _, dst in ch]
+                     {"type": "text", "text": prompt_for(r, bysent)}]}] for r, _, dst in ch]
             for (r, p, _), o in zip(ch, llm.chat(msgs, sp, use_tqdm=False)):
                 f.write(json.dumps({"id": r["id"], "page": p, "raw": o.outputs[0].text}, ensure_ascii=False) + "\n")
             f.flush()
@@ -459,6 +471,11 @@ def export():
     print(f"{len(rows)} shipping, {len(keep)} after duplicates ({sum(x['repeat'] > 1 for x in keep)} in 2+ papers); levels {dict(lv)} -> {out}")
 
 
+def selftest_prompt():
+    r = {"qno": 41, "start": 'Tom ran "fast".'}
+    assert "question 41" in prompt_for(r) and "41" not in prompt_for(r, True) and "Find the question whose" in prompt_for(r, True)
+
+
 def selftest():
     assert fits("However hard Julia tried to persuade me, I still did not go to the party.", "However ____, I still did not go to the party.")
     assert fits("Unless everyone drinks as little as possible, we will run out of water.", "Unless ____.")
@@ -500,6 +517,7 @@ def selftest():
     assert junk["scaffold"] == "However ____, I still went." and not junk.get("cut"), "a whole reply is never treated as cut"
     assert parse('{"sentences": "x", "scaffold": "____ ____ ____') is None, "cut before any printed word: unusable"
     assert not fits_key("However hard I tried, I still did not go to the party because I was sick.", "However ____, I still did not go to the party.")
+    selftest_prompt()
     print("synth selftest ok")
 
 

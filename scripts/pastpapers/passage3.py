@@ -54,6 +54,7 @@ rename rule of passage.export_cloze (-2, -3, ... when the id is already used by 
 import collections
 import glob
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -61,7 +62,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import passage as P  # noqa: E402
 
-OUT = P.TMP / "passage3"
+DEFAULT_OUT = P.TMP / "passage3"
+OUT = Path(os.environ.get("PP3_WORK", str(DEFAULT_OUT)))  # another batch (e.g. queue 46) works in its own folder
 KINDS = ("eng-grammar-cloze", "eng-comp-cloze", "eng-vocab-cloze")
 READS = (("1", "read.jsonl"), ("2", "read2.jsonl"), ("3", "read3.jsonl"))
 PAIRS = (("1", "3"), ("2", "3"))  # reads 1 and 2 already failed: `check` has seen them disagree
@@ -139,6 +141,13 @@ def _used():
                     ids.add(r["id"])
     for p in jl(P.WORK / "passages.jsonl"):
         sigs.add(" ".join(P.plain(p["passage"]).split()))
+    if OUT != DEFAULT_OUT:  # a later batch: the first passage3 batch's passages and shipped sets count as used too
+        for p in jl(DEFAULT_OUT / "passages3.jsonl"):
+            sigs.add(" ".join(P.plain(p["passage"]).split()))
+        for f in glob.glob(str(DEFAULT_OUT / "ship*" / "english" / "*.jsonl")):
+            for r in jl(f):
+                grps.add(r["grp"]) if r.get("grp") else None
+                ids.add(r["id"]) if r.get("id") else None
     return grps, ids, sigs
 
 
