@@ -29,6 +29,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { childPassword, hashPin } from '../_shared/pin.ts';
 import { weakPin } from '../_shared/weakpin.ts';
+const ALLOW_WEAK_PIN = true; // TEMPORARY (owner, 27 Nov 2026: testing). Revert to false before real families sign up.
 
 const NAME_RE = /^[A-Za-z][A-Za-z0-9 -]{0,19}$/; // the username; unique across the site (migration 003)
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -102,7 +103,9 @@ Deno.serve(async (req) => {
     };
     const goodPin = (v: unknown) => {
       if (typeof v !== 'string' || !/^\d{4}$/.test(v)) throw new Refuse(400, 'bad_request');
-      if (weakPin(v)) throw new Refuse(400, 'weak_pin');
+      // ponytail: owner 27 Nov 2026 allows easy PINs (1111, 1234) for testing "for the moment". Set ALLOW_WEAK_PIN back to
+      // false to restore the check (the login limits still apply either way). Still 4 digits.
+      if (!ALLOW_WEAK_PIN && weakPin(v)) throw new Refuse(400, 'weak_pin');
       return v;
     };
     type Kid = { id: string; name: string; role: 'child'; deleted_at: string | null };
