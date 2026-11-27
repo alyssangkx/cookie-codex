@@ -65,6 +65,21 @@ def to_full(box, small, full, pad=PAD):
     return [max(0, int(x1 * sx) - pad), max(0, int(y1 * sy) - pad), min(full[0], int(x2 * sx) + pad), min(full[1], int(y2 * sy) + pad)]
 
 
+def needs_old_parts(row) -> str:
+    """Why a re-crop may cut away something the question needs ('' when nothing): the stem refers to a table or statements
+    printed beside the picture, or an option reads like a table row (its headings were only in the old picture).
+    27 Nov 2026: 7 of 41 installed re-crops lost a results table, statements A-D or option-table headings."""
+    stem = " ".join(row.get("stem", "").split()).lower()
+    if re.search(r"\btable\b|statements?\b", stem):
+        return "the question refers to a table or statements"
+    for o in row.get("options", []):
+        if ":" in o:  # a labelled row ("Gravitational potential energy: decreases") carries its own heading
+            continue
+        if o.count("?") >= 2 or re.search(r"\w,\s*\w", o) or len(o.split()) >= 4 and all(len(w) <= 7 for w in o.split()):
+            return "an option reads like a table row without its headings"
+    return ""
+
+
 def page_path(subject, crop):
     from cropcheck import page_of_crop
     pg = page_of_crop(crop)
@@ -149,6 +164,13 @@ def apply(a):
 def install(a):
     ids = [l.split()[0] for l in Path(a.ids).read_text().splitlines() if l.strip()]
     items = {x["id"]: x for x in jl(WORK / "pack" / "items.jsonl")}
+    # a question that may need what the old picture held is refused unless a person has looked (--checked FILE of ids)
+    checked = {l.split()[0] for l in Path(a.checked).read_text().splitlines() if l.strip()} if a.checked else set()
+    rows = {r["id"]: r for s in {items[p]["subject"] for p in ids} for r in jl(sel_dir(a, s) / s / "selected.jsonl")}
+    risky = {p: needs_old_parts(rows[p]) for p in ids if needs_old_parts(rows[p]) and p not in checked}
+    if risky:
+        sys.exit("refused (look at each, then list the good ones in --checked): "
+                 + "; ".join(f"{p}: {w}" for p, w in sorted(risky.items())))
     bak = WORK / "backup"
     bak.mkdir(parents=True, exist_ok=True)
     from PIL import Image
@@ -180,6 +202,10 @@ def selftest():
     assert parse_box('{"bbox_2d": [300, 20, 10, 400]}') is None and parse_box("no box") is None
     assert to_full([100, 100, 200, 200], (1000, 1000), (2000, 2000), pad=10) == [190, 190, 410, 410]
     assert to_full([0, 0, 1000, 1000], (1000, 1000), (2000, 2000), pad=10) == [0, 0, 2000, 2000]
+    assert needs_old_parts({"stem": "He recorded the results in the table below. Which surface?", "options": ["A", "B"]})
+    assert needs_old_parts({"stem": "Which is correct?", "options": ["closed closed yes no yes yes", "x", "y", "z"]})
+    assert needs_old_parts({"stem": "What colour?", "options": ["remained green, turned blue", "a", "b", "c"]})
+    assert not needs_old_parts({"stem": "Which energy?", "options": ["Gravitational potential energy: decreases; Kinetic: increases", "240°", "Point P", "Shark"]})
     print("recrop selftest ok")
 
 
@@ -188,6 +214,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("cmd", choices=["pack", "run", "apply", "install", "selftest"])
     p.add_argument("list", nargs="?")
+    p.add_argument("--checked", default=None)  # install: ids a person has looked at (allowed though needs_old_parts flags them)
     p.add_argument("--out", default=None)  # else the live selection of each subject (SEL)
     a = p.parse_args()
     a.ids = a.list
