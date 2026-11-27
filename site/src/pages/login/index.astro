@@ -62,7 +62,11 @@ import Base from '../../layouts/Base.astro';
   // a trusted device (a device token valid for this child) is never asked. A new device shows the CAPTCHA at once;
   // on a device whose token does not fit (a sibling, or a PIN the parent changed) it appears when the server asks.
   let captcha: Captcha | null = null, mounting: Promise<void> | null = null;
-  const showCaptcha = () => (mounting ??= mountCaptcha($('captcha')).then((c) => { captcha = c; }).catch(() => { mounting = null; }));
+  // a PIN typed before the check has finished is held, not refused: when the check passes it is sent once by itself
+  // (owner, 27 Nov 2026: the child had to type the PIN twice)
+  let waitingForCheck = false;
+  const onSolved = () => { if (waitingForCheck && pin.length === 4 && !busy) { waitingForCheck = false; void submit(); } };
+  const showCaptcha = () => (mounting ??= mountCaptcha($('captcha'), onSolved).then((c) => { captcha = c; }).catch(() => { mounting = null; }));
   if (!kv.get('device-token')) void showCaptcha();
   const dots = [...$('dots').querySelectorAll('i')];
   let pin = '', busy = false;
@@ -82,6 +86,13 @@ import Base from '../../layouts/Base.astro';
     if (!who.value.trim()) { say('Type your username first.'); who.focus(); return; }
     // the 4th digit already submitted: a Go tap after the reply (dots cleared) must not hide "Not quite" / "Too many tries"
     if (pin.length < 4) { if (pin || !replied) say('Your PIN has 4 digits.'); return; }
+    if (mounting) await mounting; // the check is loading: its token decides what we send
+    if (captcha?.shown && !captcha.token()) { // not finished yet: hold the PIN and send it when the check passes
+      waitingForCheck = true;
+      say('Checking you are not a robot… If a box appears, tick it.');
+      return;
+    }
+    waitingForCheck = false;
     say(''); setBusy(true);
     const tryPin = pin;
     try {
@@ -109,6 +120,13 @@ import Base from '../../layouts/Base.astro';
         location.href = '/';
         return;
       }
+      if (status === 400 && body?.error === 'captcha_failed') { // the server wants the check: keep the PIN, send it after
+        await showCaptcha();
+        if (captcha?.shown) { waitingForCheck = true; say('Checking you are not a robot… If a box appears, tick it.'); return; }
+        pin = ''; paint();
+        say('The "I am human" check could not load. Check the internet connection and reload the page.');
+        return;
+      }
       pin = ''; paint();
       if (status === 401) {
         const n = Number(body?.attemptsLeft);
@@ -118,10 +136,6 @@ import Base from '../../layouts/Base.astro';
         say(Number.isFinite(sec) && sec > 0
           ? `Too many tries, please wait ${Math.ceil(sec / 60)} ${Math.ceil(sec / 60) === 1 ? 'minute' : 'minutes'}`
           : 'Too many tries, please wait a while or ask a grown-up', true);
-      } else if (status === 400 && body?.error === 'captcha_failed') {
-        await showCaptcha();
-        say(captcha?.shown ? 'Tick the "I am human" box, then type your PIN again.'
-          : 'The "I am human" check could not load. Check the internet connection and reload the page.');
       } else if (status === 400) {
         say('Check your username (letters and numbers) and your 4-digit PIN.');
       } else {
@@ -135,7 +149,7 @@ import Base from '../../layouts/Base.astro';
 
   function press(k: string) {
     if (busy) return;
-    if (k === 'back') pin = pin.slice(0, -1);
+    if (k === 'back') { pin = pin.slice(0, -1); waitingForCheck = false; }
     else if (pin.length < 4) pin += k;
     paint();
     if (pin.length === 4 && who.value.trim()) void submit();
