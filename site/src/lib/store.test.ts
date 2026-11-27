@@ -728,3 +728,15 @@ test('answer: a wrong passage-set answer is held (done, not a retest)', () => {
   answer(s, 'q1', false, 1000, true, 'x');
   assert.equal(s.questions.q1.s, 1, 'outside a passage a wrong answer is still a retest');
 });
+
+test('a held passage question finishes a tier for clearing but is never counted as mastered (ADR 0015)', () => {
+  const s = fresh();
+  const ids = Array.from({ length: 20 }, (_, i) => `q${i}`);
+  for (const id of ids.slice(1)) answer(s, id, true, 1000);
+  answer(s, 'q0', false, 1000, true, 'x', false, true); // held
+  const r = syncTiers(s, { 'x|b': ids }, (sub: string, t: string) => ({ slug: `${sub}-${t}`, dup: false }), 1000);
+  assert.equal(s.progress.x.b!.mastered, 19, 'the held one is not counted as right');
+  assert.deepEqual(r.map((o) => o.tier), ['b'], 'but the tier clears, so the next one opens');
+  answer(s, 'q1', false, 2000, true, 'y', false, true);
+  assert.equal(s.questions.q1.s, 0, 'a question already right is never turned into a held wrong one');
+});

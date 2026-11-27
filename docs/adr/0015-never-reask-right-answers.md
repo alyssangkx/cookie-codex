@@ -18,8 +18,10 @@ paper fell back to answered questions.
   counts it as due (`isDue`, `inReview`, `pickTier`, `pickReview`, the parent's revision test and Retest buttons).
   Pending passage retests from before this change are held when a quiz page loads their bank (`holdPassageRetests`).
 
-**Consequences.** "Clearing is mastery" is unchanged, so a tier holding a held passage question cannot clear until
-passage retests come back. Retests come back on by deleting `h` (no other data is lost). Until a Daily Review has loaded
+**Consequences.** For clearing, a held question counts as finished (`isFinished` in store.ts), so a tier and the next one
+never lock while passage retests are off; it is never counted as mastered, right or toward a milestone. A question
+already right is never turned into a held one. Retests come back on by deleting `h` (no other data is lost). An old tab
+(an earlier build) ignores `h` and may ask a held question and drop the flag; the next load of its bank holds it again. Until a Daily Review has loaded
 every bank, an old pending passage retest still shows in the Daily Review count; that review then holds it and may say
 "Nothing to review today" once. A question answered right in a practice paper still does not retire (papers never do), so
 it can come up later in a tier quiz: open question for the owner.

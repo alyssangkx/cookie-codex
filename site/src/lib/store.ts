@@ -381,6 +381,7 @@ export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), ret
   if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
   const a = ok ? q?.a : (picked ?? '').slice(0, PICK_MAX);
   const keep = a != null ? { a } : {};
+  if (inPassage && q?.s === 0) return false; // already right: an older tab or revision test asking it again changes nothing
   if (inPassage && (!ok || (q && q.s > 0))) { // a passage-set question is not retested for now (QState.h)
     s.questions[id] = { s: q && q.s > 0 ? q.s : 1, due: q && q.s > 0 ? q.due : now + DAY, w: (q?.w ?? 0) + (ok ? 0 : 1), h: 1, ...keep };
     return false;
@@ -468,6 +469,8 @@ export function syncParkedStored(ids: Iterable<string>, complete: boolean, banks
   return s;
 }
 export const isRetired = (s: SaveV1, id: string) => s.questions[id]?.s === 0;
+/** Never asked again: retired, or a held passage question (ADR 0015). Clears a tier and finishes a passage, but is not "right". */
+const isFinished = (s: SaveV1, id: string) => isRetired(s, id) || !!s.questions[id]?.h;
 
 // ---------------------------------------------------------------- tiers
 
@@ -702,7 +705,9 @@ export function syncTiers(
     st.hash = tierHash(ids);
     delete st.pool; // these are tier counts now (a sub-topic back in tiers): never read them as past-paper counts
     (s.progress[sub] ??= {})[tier] = st;
-    if (!st.cleared && st.mastered === st.total && tierOpen(s, sub, tier, playable(sub)))
+    // a held passage question counts as finished for clearing (else the tier, and the next one, stay locked while
+    // passage retests are off: ADR 0015), but never as mastered, so the page still shows it as not right
+    if (!st.cleared && ids.every((id) => isFinished(s, id)) && tierOpen(s, sub, tier, playable(sub)))
       out.push({ sub, tier, reward: award(s, sub, tier, rewardFor, now, eco, test) });
   }
   return out;
@@ -786,7 +791,7 @@ export function poolDisplay(s: SaveV1, ids: string[], groups?: Record<string, st
   for (const id of ids) { const g = groups?.[id]; if (g) (by.get(g) ?? by.set(g, []).get(g)!).push(id); }
   if (by.size) {
     out.pt = by.size;
-    out.pd = [...by.values()].filter((m) => m.every((id) => isRetired(s, id))).length;
+    out.pd = [...by.values()].filter((m) => m.every((id) => isFinished(s, id))).length;
   }
   return out;
 }

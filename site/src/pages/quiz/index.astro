@@ -307,6 +307,13 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   }
   /** Passage groups from the questions loaded (again after a fallback adds generated questions). */
   const passage = (id: string) => { const q = byId.get(id); return q?.group ? { group: q.group, seq: q.seq ?? 0 } : undefined; };
+  /** The stop text when a quiz has nothing left to ask (ADR 0015: a question answered right is never asked again). */
+  const allDone = () => {
+    const q = load().questions, here = [...byId.keys()].filter((id) => byId.get(id)!.sub === subId);
+    return here.some((id) => q[id]?.h)
+      ? 'You have done every question here. The passage questions you got wrong are paused for now; any others you got wrong come back in Daily Review.'
+      : 'You have answered every question here. Any you got wrong come back in Daily Review.';
+  };
   const ppReason = (limit: boolean) => (limit ? 'Past-paper questions are resting until tomorrow' : 'Past-paper questions could not load');
   const ppNote = (limit: boolean, what: string) => `<p class="note">${ppReason(limit)}, so this ${what} uses the other questions.</p>`;
   const KEPT = 'Your answers are kept: open the paper again later.';
@@ -349,7 +356,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       indexMembers();
       quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
       notice += ppNote(limit, 'quiz');
-      return quiz.length ? '' : 'You have answered every question here. Any you got wrong come back in Daily Review.';
+      return quiz.length ? '' : allDone();
     }
     if (mode === 'paper' && keep()) return `${ppReason(limit)}. ${KEPT}`; // asked now: the paper may have come due meanwhile
     if (mode === 'tier') {
@@ -420,12 +427,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         // a cloze section: one whole passage per quiz, every blank (owner, 24 Nov 2026); else the usual 10 questions
         quiz = WHOLE.has(subId) && pool.some((id) => passage(id)) ? pickPassage(pool, cur.questions, Date.now(), passage)
           : pickPool(pool, cur.questions, QUIZ_SIZE, Date.now(), passage);
-        if (!quiz.length) return stop('You have answered every question here. Any you got wrong come back in Daily Review.');
+        if (!quiz.length) return stop(allDone());
       } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
         quiz = pickTier(ids, cur.questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
-        if (!quiz.length) return stop('You have answered every question here. Any you got wrong come back in Daily Review.');
+        if (!quiz.length) return stop(allDone());
       } else if (mode === 'paper') {
         quiz = pickPaper(all as any, cur.questions, paperN, paperMix.mix);
         if (!quiz.length) return stop('You have answered every question in these topics. Any you got wrong come back in Daily Review.', '<a href="/paper/">Build another paper</a>');
@@ -444,7 +451,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     }
     const x = s.settings.extraTime ? 1.5 : 1;
     // a whole passage may be longer or shorter than 10 questions: its minutes scale with its blanks (at least 5)
-    mins = POOL ? Math.max(5, Math.ceil(minutesFor(s, 'c') * quiz.length / QUIZ_SIZE)) : mode === 'tier' ? minutesFor(s, tier)
+    mins = POOL ? Math.max(5, Math.ceil(minutesFor(s, 'c') * quiz.length / QUIZ_SIZE)) : mode === 'tier' ? Math.max(2, Math.ceil(minutesFor(s, tier) * Math.min(1, quiz.length / QUIZ_SIZE)))
       : mode === 'paper' ? Math.ceil(quiz.reduce((m, id) => m + PER_Q[byId.get(id)!.level], 0) * x)
       : Math.ceil(quiz.length * 1.5 * x);
     deadline = mins * 60_000;
