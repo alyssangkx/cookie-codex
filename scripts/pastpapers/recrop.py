@@ -151,12 +151,27 @@ def install(a):
     items = {x["id"]: x for x in jl(WORK / "pack" / "items.jsonl")}
     bak = WORK / "backup"
     bak.mkdir(parents=True, exist_ok=True)
+    from PIL import Image
+    meta = {}  # figures.jsonl carries each picture's w, h and bytes (the site sizes the picture from them): update them too
     for pid in ids:
-        dst = sel_dir(a, items[pid]["subject"]) / items[pid]["subject"] / "figures" / f"{pid}-1.webp"
+        subj = items[pid]["subject"]
+        dst = sel_dir(a, subj) / subj / "figures" / f"{pid}-1.webp"
         if not (bak / dst.name).exists():
             shutil.copy2(dst, bak / dst.name)
         shutil.copy2(WORK / "new" / f"{pid}-1.webp", dst)
-    print(f"installed {len(ids)} crops (old ones in {bak})")
+        with Image.open(dst) as im:
+            meta[f"{subj}/{pid}-1.webp"] = (subj, im.width, im.height, dst.stat().st_size)
+    for subj in {m[0] for m in meta.values()}:
+        fj = sel_dir(a, subj) / subj / "figures.jsonl"
+        if not (bak / f"figures.{subj}.jsonl").exists():
+            shutil.copy2(fj, bak / f"figures.{subj}.jsonl")
+        rows = jl(fj)
+        for r in rows:
+            if r["path"] in meta:
+                _, r["w"], r["h"], r["bytes"] = meta[r["path"]]
+        fj.write_text("".join(json.dumps(r) + "\n" for r in rows))
+    hit = sum(1 for subj in {m[0] for m in meta.values()} for r in jl(sel_dir(a, subj) / subj / "figures.jsonl") if r["path"] in meta)
+    print(f"installed {len(ids)} crops, {hit} figures.jsonl entries updated (old files in {bak})")
 
 
 def selftest():
