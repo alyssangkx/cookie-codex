@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 TMP = Path("/data/alvin/tmp/cookie-codex")
 WORK = Path(os.environ.get("PP_RECROP", str(TMP / "recrop48")))
-SERVER_WORK = "/data/alvin/cookie/recrop48"
+SERVER_WORK = "/data/alvin/cookie/" + WORK.name  # the work folder of the same name on the server
 PAGE_MAX = 1568  # long side sent to the model; 56 * 28, so the model sees the page at exactly this size
 PAD = 14         # pixels of the full page added around the box
 SEL = {"science": TMP / "ppimport" / "sci1826g", "maths": TMP / "ppimport" / "math1826h"}  # the live selections
@@ -36,6 +36,13 @@ PROMPT = ("This is a page from a Singapore PSLE {subject} exam paper. Find quest
           "picture, diagram, graph or table that belongs to question {qno} only: include its labels, axes and caption, and "
           "leave out the question text, the answer options and anything that belongs to another question. Reply with JSON "
           "only: {{\"bbox_2d\": [x1, y1, x2, y2]}} in pixel coordinates of this image.")
+# PP_RECROP_KEEP=1 (27 Nov 2026): the box also takes in what the question needs beside its picture: a results table, lettered
+# statements, or the options set out as a table (8 re-crops had lost one of these)
+PROMPT_KEEP = ("This is a page from a Singapore PSLE {subject} exam paper. Find question {qno}. Give one bounding box that covers "
+               "everything printed for question {qno} that a pupil needs besides its question sentence: its picture, diagram, graph "
+               "or table, any results table, any lettered statements (A, B, C, D) and, if the answer options are set out as a "
+               "table, that whole options table with its headings. Leave out anything that belongs to another question. Reply "
+               "with JSON only: {{\"bbox_2d\": [x1, y1, x2, y2]}} in pixel coordinates of this image.")
 
 
 def jl(p):
@@ -62,20 +69,23 @@ def to_full(box, small, full, pad=PAD):
     """A box on the resized page -> the full page, padded and kept inside it."""
     sx, sy = full[0] / small[0], full[1] / small[1]
     x1, y1, x2, y2 = box
-    return [max(0, int(x1 * sx) - pad), max(0, int(y1 * sy) - pad), min(full[0], int(x2 * sx) + pad), min(full[1], int(y2 * sy) + pad)]
+    fb = [min(full[0], max(0, int(x1 * sx) - pad)), min(full[1], max(0, int(y1 * sy) - pad)),
+          min(full[0], max(0, int(x2 * sx) + pad)), min(full[1], max(0, int(y2 * sy) + pad))]
+    return fb if fb[2] > fb[0] and fb[3] > fb[1] else None  # a box off the page
 
 
 def needs_old_parts(row) -> str:
     """Why a re-crop may cut away something the question needs ('' when nothing): the stem refers to a table or statements
     printed beside the picture, or an option reads like a table row (its headings were only in the old picture).
-    27 Nov 2026: 7 of 41 installed re-crops lost a results table, statements A-D or option-table headings."""
+    27 Nov 2026: 8 of 41 installed re-crops lost a results table, statements A-D, a picture or option-table headings."""
     stem = " ".join(row.get("stem", "").split()).lower()
     if re.search(r"\btable\b|statements?\b", stem):
         return "the question refers to a table or statements"
     for o in row.get("options", []):
         if ":" in o:  # a labelled row ("Gravitational potential energy: decreases") carries its own heading
             continue
-        if o.count("?") >= 2 or re.search(r"\w,\s*\w", o) or len(o.split()) >= 4 and all(len(w) <= 7 for w in o.split()):
+        ws = o.split()
+        if o.count("?") >= 2 or re.search(r"[A-Za-z],\s*[A-Za-z]", o) or len(ws) >= 5 and all(len(w) <= 6 for w in ws) and not o.rstrip().endswith("."):
             return "an option reads like a table row without its headings"
     return ""
 
@@ -114,15 +124,18 @@ def pack(a):
 
 def run(a):
     from vllm import LLM, SamplingParams
+    model = os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ")
+    if "Qwen2.5-VL" not in model:  # its boxes are pixels of the image given; other models use other scales
+        sys.exit(f"recrop needs a Qwen2.5-VL model, not {model}")
     P = Path(SERVER_WORK) / "pack"
     items = jl(P / "items.jsonl")
-    llm = LLM(model=os.environ.get("PP_VLM", "Qwen/Qwen2.5-VL-72B-Instruct-AWQ"), tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
+    llm = LLM(model=model, tensor_parallel_size=int(os.environ.get("PP_TP", "4")),
               gpu_memory_utilization=0.92, max_model_len=8192, max_num_seqs=8, limit_mm_per_prompt={"image": 1},
               mm_processor_kwargs={"max_pixels": PAGE_MAX * PAGE_MAX}, allowed_local_media_path=str(P),
               enforce_eager=bool(os.environ.get("PP_EAGER")))
     sp = SamplingParams(temperature=0, max_tokens=120)
     msgs = [[{"role": "user", "content": [{"type": "image_url", "image_url": {"url": f"file://{P / it['page']}"}},
-                                          {"type": "text", "text": PROMPT.format(subject=it["subject"].capitalize(), qno=it["qno"])}]}]
+                                          {"type": "text", "text": (PROMPT_KEEP if os.environ.get("PP_RECROP_KEEP") else PROMPT).format(subject=it["subject"].capitalize(), qno=it["qno"])}]}]
             for it in items]
     outs = llm.chat(msgs, sp, use_tqdm=False)
     with open(P / "boxes.jsonl", "w") as f:
@@ -145,12 +158,16 @@ def apply(a):
             bad.append(b["id"])
             continue
         fb = to_full(box, it["small"], it["full"])
+        if not fb:
+            bad.append(b["id"])
+            continue
         tmp = WORK / "new" / f"{b['id']}-1.png"
         with Image.open(it["src"]) as im:
             im.crop(fb).save(tmp)
         compress(tmp, WORK / "new" / f"{b['id']}-1.webp", 900, 60 * 1024)
         tmp.unlink()
-        old = sel_dir(a, it["subject"]) / it["subject"] / "figures" / f"{b['id']}-1.webp"
+        old = WORK / "backup" / f"{b['id']}-1.webp"  # install keeps the original here; else the live file is the original
+        old = old if old.exists() else sel_dir(a, it["subject"]) / it["subject"] / "figures" / f"{b['id']}-1.webp"
         with Image.open(old) as o, Image.open(WORK / "new" / f"{b['id']}-1.webp") as n:
             h = max(o.height, n.height)
             sheet = Image.new("RGB", (o.width + n.width + 30, h + 30), "white")
@@ -171,6 +188,9 @@ def install(a):
     if risky:
         sys.exit("refused (look at each, then list the good ones in --checked): "
                  + "; ".join(f"{p}: {w}" for p, w in sorted(risky.items())))
+    missing = [p for p in ids if p not in items or not (WORK / "new" / f"{p}-1.webp").exists()]
+    if missing:  # checked before any file is touched, so a stop never leaves files and figures.jsonl out of step
+        sys.exit(f"no new crop for {missing}: nothing installed")
     bak = WORK / "backup"
     bak.mkdir(parents=True, exist_ok=True)
     from PIL import Image
@@ -202,6 +222,8 @@ def selftest():
     assert parse_box('{"bbox_2d": [300, 20, 10, 400]}') is None and parse_box("no box") is None
     assert to_full([100, 100, 200, 200], (1000, 1000), (2000, 2000), pad=10) == [190, 190, 410, 410]
     assert to_full([0, 0, 1000, 1000], (1000, 1000), (2000, 2000), pad=10) == [0, 0, 2000, 2000]
+    assert to_full([1200, 100, 1300, 300], (1120, 1568), (2480, 3508)) is None  # off the page
+    assert not needs_old_parts({"stem": "Which is true?", "options": ["It has no leaves.", "1,200 g", "It has roots", "x"]})
     assert needs_old_parts({"stem": "He recorded the results in the table below. Which surface?", "options": ["A", "B"]})
     assert needs_old_parts({"stem": "Which is correct?", "options": ["closed closed yes no yes yes", "x", "y", "z"]})
     assert needs_old_parts({"stem": "What colour?", "options": ["remained green, turned blue", "a", "b", "c"]})

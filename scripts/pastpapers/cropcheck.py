@@ -170,8 +170,12 @@ def pack(a):
             f.write(json.dumps(it) + "\n")
     gate = []
     # WORK/gate_extra.jsonl {id, expect}: more known cases, taken from the --out selection (queue 48, 27 Nov 2026)
-    extra = [(x["id"], [Path(a.out).name], "webp", x["expect"]) for x in jl(WORK / "gate_extra.jsonl")] if (WORK / "gate_extra.jsonl").exists() else []
-    for gid, dirs, kind, expect in GATE + extra:
+    # each extra image is frozen in WORK/gate_frozen the first time (from x["src"] when given): a later re-crop of the live file
+    # must not change a case labelled from the old picture; ids already in GATE are skipped (one row per name)
+    known = {g[0] for g in GATE}
+    extra = [(x["id"], [Path(a.out).name], "extra", x["expect"], x.get("src")) for x in jl(WORK / "gate_extra.jsonl")
+             if x["id"] not in known] if (WORK / "gate_extra.jsonl").exists() else []
+    for gid, dirs, kind, expect, *src in [g + (None,) for g in GATE] + extra:
         row = None
         for d in dirs:
             row = next((r for r in jl(Path(a.out).parent / d / a.subject / "selected.jsonl") if r["id"] == gid), None)
@@ -182,7 +186,14 @@ def pack(a):
             sys.exit(f"gate item {gid} not found in {dirs}")
         for n, c in enumerate(row["crops"], 1):
             pg = page_of_crop(c)
-            if kind == "orig":
+            if kind == "extra":
+                frozen = WORK / "gate_frozen" / f"{gid}-{n}.webp"
+                if not frozen.exists():
+                    frozen.parent.mkdir(parents=True, exist_ok=True)
+                    frozen.write_bytes(Path(src[0] or src_dir / "figures" / f"{gid}-{n}.webp").read_bytes())
+                img = f"gate/{gid}-{n}-extra.webp"
+                (PACK / img).write_bytes(frozen.read_bytes())
+            elif kind == "orig":
                 img = f"gate/{gid}-{n}-orig.png"
                 (PACK / img).write_bytes(Path(c).read_bytes())
             else:
@@ -266,7 +277,8 @@ def gate_passed(cases, res) -> bool:
     exp = {c["name"]: c["expect"] for c in cases}
     bad = [v for k, v in res.items() if exp[k] == "fail"]
     good = [v for k, v in res.items() if exp[k] == "pass"]
-    recall, false_fail = sum(bad) / max(1, len(bad)), (len(good) - sum(good)) / max(1, len(good))
+    recall = sum(bad) / len(bad) if bad else 1.0
+    false_fail = (len(good) - sum(good)) / len(good) if good else 0.0
     print(f"gate: caught {sum(bad)}/{len(bad)} bad ({recall:.0%}), wrongly failed {len(good) - sum(good)}/{len(good)} good "
           f"({false_fail:.0%})", flush=True)
     return recall >= 0.9 and false_fail <= 0.05
