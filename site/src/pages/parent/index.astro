@@ -21,12 +21,14 @@ const data = {
 <Base title="Parent view: Cookie Codex" description="Progress, mistakes, retests and settings for the PSLE training.">
   <section class="wrap parent-page" id="pp-root" data-tab="prog">
     <h1>Parent view</h1>
-    <div class="pp-tabs" role="tablist" aria-label="Parent view">
-      <button type="button" role="tab" id="tab-prog" aria-selected="true" aria-controls="content">Child progress</button>
-      <button type="button" role="tab" id="tab-fam" aria-selected="false" aria-controls="family">Family and accounts</button>
+    <div class="pp-tabs" role="group" aria-label="Parent view">
+      <button type="button" id="tab-prog" aria-pressed="true" aria-controls="content">Child progress</button>
+      <button type="button" id="tab-fam" aria-pressed="false" aria-controls="family">Family and accounts</button>
       <a id="tab-admin" class="pp-tab-link" href="/admin/" hidden>Admin functions</a>
     </div>
 
+    <p class="sr-only" id="pp-live" role="status" aria-live="polite"></p>
+    <p class="sr-only" id="pp-msg-live" role="status" aria-live="polite"></p>
     <p class="note" id="who-note">Signed in as the grown-up. This page shows the progress saved on this device (the mistakes list can show another child's).</p>
 
     <div id="fam-deleted" class="panel" hidden>
@@ -166,7 +168,7 @@ const data = {
   .parent-page .sub.off { opacity: 0.55; }
   .parent-page .sub .nm { font-weight: 600; }
   .parent-page ol.list { padding-left: 1.2rem; margin: 0; }
-  .parent-page ol.list li { margin-bottom: 0.7rem; }
+  .parent-page ol.list li { margin-bottom: 0.7rem; content-visibility: auto; contain-intrinsic-size: auto 120px; }
   .parent-page .meta { display: block; color: var(--cocoa-soft); font-size: 0.88rem; }
   .parent-page .due-late { color: var(--berry); font-weight: 600; }
   .parent-page .wq-subject { border-top: 1px solid var(--crust); padding: 0.4rem 0; }
@@ -179,7 +181,7 @@ const data = {
   .parent-page .pp-tabs { display: flex; gap: 0.4rem; border-bottom: 1.5px solid var(--crust); margin-top: 0.8rem; flex-wrap: wrap; }
   .parent-page .pp-tabs button, .parent-page .pp-tab-link { min-height: 44px; padding: 0 1rem; border: 1.5px solid var(--crust); border-bottom: 0;
     border-radius: 10px 10px 0 0; background: var(--cream); color: var(--cocoa); font: 600 1rem var(--font-display); display: inline-flex; align-items: center; text-decoration: none; }
-  .parent-page .pp-tabs button[aria-selected='true'] { background: var(--paper); color: var(--berry); }
+  .parent-page .pp-tabs button[aria-pressed='true'] { background: var(--paper); color: var(--berry); }
   .parent-page .dash { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.7rem; }
   .parent-page .dcard { background: var(--cream); border: 1.5px solid var(--crust); border-radius: var(--radius-card); padding: 0.7rem 0.8rem; }
   .parent-page .dname { background: none; border: 0; padding: 0; min-height: 44px; font: 600 1.25rem var(--font-display); color: var(--berry); cursor: pointer; }
@@ -217,6 +219,10 @@ const data = {
   .parent-page .wq-stem { white-space: pre-line; }
   .parent-page .wq-fig { margin: 0.4rem 0; max-width: 32rem; }
   .parent-page .wq-fig svg, .parent-page .wq-fig img { max-width: 100%; height: auto; }
+  .parent-page .wq-fig img { min-height: 6rem; object-fit: contain; } /* no known size: reserve room so the list does not jump as pictures load */
+  .parent-page .wq-row { display: flex; align-items: flex-start; gap: 0.5rem; border-top: 1px solid var(--crust); }
+  .parent-page .wq-row > .wq-subject { flex: 1; min-width: 0; border-top: 0; }
+  .parent-page .wq-row > .btn { margin-top: 0.4rem; flex: none; }
   .parent-page .btn.danger { background: #fff; color: var(--berry); border: 1.5px solid var(--berry); }
   .parent-page .kid { border-top: 1px dashed var(--crust); padding: 0.7rem 0; }
   .parent-page .kid .row { align-items: center; margin-top: 0.3rem; }
@@ -433,6 +439,35 @@ const data = {
     }).join('') + '</ol>';
   }
 
+  // after a re-render (renderAll rebuilds the panels): keep open folds open and focus on the same control; screen-reader status
+  const PANELS = ['mastery', 'wrong', 'retest'];
+  let ui: { open: Set<string>; focus: string | null } = { open: new Set(), focus: null };
+  function snapUi() {
+    const a = document.activeElement as HTMLElement | null;
+    const q = (k: string) => (a?.dataset[k] != null ? `[data-${k}="${a!.dataset[k]!.replace(/["\\]/g, '\\$&')}"]` : '');
+    ui = {
+      open: new Set([...document.querySelectorAll<HTMLElement>('details[data-fold][open]')].map((d) => d.dataset.fold!)),
+      focus: a?.dataset?.act && PANELS.some((p) => $(p).contains(a)) ? `[data-act="${a.dataset.act}"]` + q('id') + q('ids') + q('sub') + q('school') : null,
+    };
+  }
+  const busyIds = new Set<string>();
+  function busy(id: string, on: boolean) {
+    $(id).setAttribute('aria-busy', String(on)); on ? busyIds.add(id) : busyIds.delete(id);
+    $('pp-live').textContent = busyIds.size ? 'Loading questions…' : '';
+  }
+  /** A panel has its final markup: re-open its folds, put focus back (only if it fell to the page), end its busy state. */
+  function doneUi(id: string) {
+    const box = $(id);
+    box.querySelectorAll<HTMLDetailsElement>('details[data-fold]').forEach((d) => { if (ui.open.has(d.dataset.fold!)) d.open = true; });
+    if (ui.focus && (!document.activeElement || document.activeElement === document.body)) box.querySelector<HTMLElement>(ui.focus)?.focus({ preventScroll: true });
+    busy(id, false);
+  }
+  const announce = (msg: string) => { $('pp-msg-live').textContent = ''; $('pp-msg-live').textContent = msg; };
+  /** Disable a button and show a short label while its request runs; restore it after (also on error). */
+  async function working(btn: HTMLElement, label: string, fn: () => Promise<void>) {
+    const old = btn.textContent; (btn as HTMLButtonElement).disabled = true; btn.textContent = label;
+    try { await fn(); } finally { if (btn.isConnected) { (btn as HTMLButtonElement).disabled = false; btn.textContent = old; } }
+  }
   const plural = (n: number, w: string) => `${n.toLocaleString()} ${w}${n === 1 ? '' : 's'}`;
   // ------------------------------------------------------------ the subject dashboard
   // One card per subject: questions on the site, how many were tried (a pie of how they stand), and the wrong count.
@@ -446,7 +481,7 @@ const data = {
   const askable = (bq: BQ) => !isPpId(bq.id) || ppMode(bq.sub) !== null;
   const subjectTried = (school: string) => P.subs.filter((x) => x.school === school).flatMap((x) => dash?.tried.get(x.id) ?? []);
   async function renderTopics(my = viewSeq) {
-    $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
+    busy('mastery', true); $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
     const qs = await lookup(viewId);
     if (my !== viewSeq) return;
     const tried = new Map<string, [BQ, QState][]>();
@@ -475,6 +510,7 @@ const data = {
     }
     $('mastery').innerHTML = html + '</div><div id="dash-detail"></div>';
     renderDetail();
+    doneUi('mastery');
   }
   let dashMsg = ''; // the last Retest / revision status, kept across the re-render a save causes
   let retMsg = ''; // the same for the retest queue panel (each panel shows only its own message)
@@ -500,6 +536,7 @@ const data = {
       : full ? `At most ${ASSIGN_MAX} assignments at a time: clear a done one first.`
       : on ? `Assigned a 10-question quiz on ${sub.name}. It pops up the next time they open the game.` : `Cleared: ${sub.name}.`;
     const m = document.getElementById('dash-msg'); if (m) m.textContent = dashMsg;
+    announce(dashMsg);
   }
   function renderDetail(scroll = false) {
     const box = document.getElementById('dash-detail');
@@ -513,7 +550,7 @@ const data = {
       let html = `<div class="dhead"><h3>${esc(school.name)}: topics</h3>${close}</div>`
         + `<p class="legend"><span>Each bar is all of the sub-topic's questions:</span> <span class="k ok"></span>right first time <span class="k mid"></span>right after retest <span class="k bad"></span>still to retest <span class="k all"></span>not tried yet</p>`
         + (can ? '<p class="note">Assign asks the child to do one 10-question quiz on that sub-topic first: it pops up on their account and stays at the top of their Schools page until it is done.</p>' : '')
-        + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>';
+        + '<p class="saved" id="dash-msg"></p>';
       // each topic once, its sub-topics together (P.subs is in reward order, which splits a topic up)
       const byTopic = new Map<string, PSub[]>();
       for (const x of P.subs.filter((y) => y.school === school.id)) (byTopic.get(x.topic) ?? byTopic.set(x.topic, []).get(x.topic)!).push(x);
@@ -553,8 +590,8 @@ const data = {
       box.innerHTML = `<div class="dhead"><h3>${esc(school.name)}: ${plural(wrong.length, 'question')} answered wrong</h3>${close}</div>`
         + (can && pick.length > 1 ? `<p><button type="button" class="btn" data-act="revise" data-ids="${esc(pick.join(' '))}">Send ${pick.length} as a revision test now</button></p>
           <p class="note">The questions go to the top of the child's next Daily Review, asked together as a revision test.${sent.length ? ` ${sent.length} from the last one sent are in this list.` : ''}</p>` : '')
-        + '<p class="saved" id="dash-msg" role="status" aria-live="polite"></p>'
-        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && askable(bq) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}">Retest now</button>` : ''));
+        + '<p class="saved" id="dash-msg"></p>'
+        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && askable(bq) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}" aria-label="Retest this question now: ${esc(bq.stem.slice(0, 60))}">Retest now</button>` : ''));
     }
     const m = document.getElementById('dash-msg');
     if (m) m.textContent = dashMsg;
@@ -573,10 +610,10 @@ const data = {
       : revision ? `Sent. ${plural(ids.length, 'question')} wait at the top of the next Daily Review.`
       : `Done: ${ids.length === 1 ? 'it comes' : `${ids.length} questions come`} up in the next Daily Review.`;
     if (panel === 'dash') dashMsg = msg; else retMsg = msg;
-    const m = document.getElementById(`${panel}-msg`); if (m) m.textContent = msg; // renderRetest also restores retMsg after its re-render
+    announce(msg); const m = document.getElementById(`${panel}-msg`); if (m) m.textContent = msg; // renderRetest also restores retMsg after its re-render
   }
   // the exam-page pictures are signed for an hour: redraw the dashboard (and this device's mistakes list) before they lapse
-  setInterval(() => { viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
+  setInterval(() => { snapUi(); viewSeq++; void renderTopics(); if (!$<HTMLSelectElement>('wrong-who').value) { wrongSeq++; void renderWrong(); } }, 50 * 60_000);
   $('mastery').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act]');
     if (!b) return;
@@ -600,13 +637,13 @@ const data = {
   let viewSeq = 0; // the dashboard and the retest queue (a new child or save re-renders them)
   async function renderWrong(questions: SaveV1['questions'] = s.questions, my = wrongSeq, who: string | null = viewId) {
     const recorded = Object.entries(questions).filter(([, q]) => q.w > 0);
-    if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; return; }
-    $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
+    if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; busy('wrong', false); return; }
+    busy('wrong', true); $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
     const bank = await lookup(who);
     if (my !== wrongSeq) return; // the picker changed while the questions loaded
     // owner, 20 Nov 2026: questions no longer in any bank (the pilot banks were redesigned) are left out entirely
     const wrong = recorded.filter(([id]) => bank.has(id));
-    if (!wrong.length) { $('wrong').innerHTML = (missingNote() || '<p class="note">No wrong answers on the current questions yet.</p>'); return; }
+    if (!wrong.length) { $('wrong').innerHTML = (missingNote() || '<p class="note">No wrong answers on the current questions yet.</p>'); busy('wrong', false); return; }
     const subOf = new Map(P.subs.map((x) => [x.id, x]));
     const schoolName = new Map(P.schools.map((x) => [x.id, x.name]));
     // subject -> sub-topic -> [question, state]
@@ -621,9 +658,10 @@ const data = {
     const now = Date.now();
     $('wrong').innerHTML = missingNote() + `<p class="note">${plural(wrong.length, 'question')} in all.</p>` + [...tree].map(([subject, bySub]) => {
       const n = [...bySub.values()].reduce((k, l) => k + l.length, 0);
-      return `<details class="wq-subject"><summary><b>${esc(subject)}</b> (${n})</summary>` + [...bySub].sort((a, b) => a[0].localeCompare(b[0])).map(([name, list]) =>
+      return `<details class="wq-subject" data-fold="wrong:${esc(subject)}"><summary><b>${esc(subject)}</b> (${n})</summary>` + [...bySub].sort((a, b) => a[0].localeCompare(b[0])).map(([name, list]) =>
         `<h3 class="wq-sub">${esc(name)} (${list.length})</h3>${qList(list, now)}`).join('') + '</details>';
     }).join('');
+    doneUi('wrong');
   }
 
   async function renderRetest(my = viewSeq) {
@@ -631,12 +669,12 @@ const data = {
     // the child's rule (inReview): states parked by these banks are left out (and out of the count); one parked by an
     // older tab may be live, so it stays until a Daily Review re-checks it
     const waiting = Object.entries(s.questions).filter(([, q]) => inReview(q, P.banks)).sort((a, b) => a[1].due - b[1].due);
-    if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; return; }
-    $('retest').innerHTML = '<p class="note">Loading questions…</p>';
+    if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; busy('retest', false); return; }
+    busy('retest', true); $('retest').innerHTML = '<p class="note">Loading questions…</p>';
     const stems = await lookup(viewId);
     if (my !== viewSeq) return;
     const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
-    if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; return; }
+    if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; busy('retest', false); return; }
     const step = [0, '1-day', '3-day', '7-day'];
     const item = ([id, q]: [string, QState]) => {
       const late = q.due <= now;
@@ -656,15 +694,20 @@ const data = {
     }
     const can = !!child?.writable;
     $('retest').innerHTML = missingNote() + `<p class="note">${plural(due.length, 'question')} waiting.${can ? ' Retest sends a subject\'s questions to the child now: they come up in the next Daily Review.' : ''}</p>`
-      + [...bySubject].map(([name, list]) => `<details class="wq-subject"><summary><b>${esc(name)}</b> (${list.length})`
-        + (can && list.some(([id]) => askable(stems.get(id)!)) ? ` <button type="button" class="btn small" data-act="retest-subject" data-ids="${esc(list.filter(([id]) => askable(stems.get(id)!)).map(([id]) => id).join(' '))}" data-name="${esc(name)}">Retest ${list.filter(([id]) => askable(stems.get(id)!)).length}</button>` : '')
-        + `</summary><ol class="list">${list.map(item).join('')}</ol></details>`).join('')
-      + `<p class="saved" id="ret-msg" role="status" aria-live="polite">${esc(retMsg)}</p>`;
+      + [...bySubject].map(([name, list]) => {
+        const ask = list.filter(([id]) => askable(stems.get(id)!)).map(([id]) => id);
+        const fold = `<details class="wq-subject" data-fold="retest:${esc(name)}"><summary><b>${esc(name)}</b> (${list.length})</summary><ol class="list">${list.map(item).join('')}</ol></details>`;
+        // the button sits beside the fold, not inside <summary> (interactive content in a summary is invalid)
+        return can && ask.length
+          ? `<div class="wq-row">${fold}<button type="button" class="btn small" data-act="retest-subject" data-ids="${esc(ask.join(' '))}" data-name="${esc(name)}" aria-label="Retest ${ask.length} waiting question${ask.length === 1 ? '' : 's'} in ${esc(name)}">Retest ${ask.length}</button></div>`
+          : fold;
+      }).join('')
+      + `<p class="saved" id="ret-msg">${esc(retMsg)}</p>`;
+    doneUi('retest');
   }
   $('retest').addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act="retest-subject"]');
     if (!b) return;
-    e.preventDefault(); // a button inside <summary> must not also open or close the fold
     const ids = b.dataset.ids!.split(' ');
     if (confirm(`Send the ${plural(ids.length, 'waiting question')} in ${b.dataset.name} to the child now? They come up in the next Daily Review.`)) void makeDue(ids, false, 'ret');
   });
@@ -764,11 +807,16 @@ const data = {
     bad_request: 'Check the username (starts with a letter; letters, numbers, spaces or hyphens, up to 20) and the 4-digit PIN.',
     not_found: 'That child was not found.', deleted: 'This account is being deleted.',
   };
-  const famSay = (ok: string, err = '') => { $('fam-msg').textContent = ok; $('fam-err').textContent = err; };
-  const famFail = (e: unknown) => {
+  const famSay = (ok: string, err = '', field = '') => {
+    $('fam-msg').textContent = ok; $('fam-err').textContent = err;
+    document.querySelectorAll('#family [aria-invalid]').forEach((el) => { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); });
+    const f = field ? document.getElementById(field) : null; // a wrong field gets focus and is tied to the error text
+    if (err && f) { f.setAttribute('aria-invalid', 'true'); f.setAttribute('aria-describedby', 'fam-err'); f.focus(); }
+  };
+  const famFail = (e: unknown, field = '') => {
     const code = e instanceof Error ? e.message : '';
     if (code === 'mfa_required' || code === 'unauthorized') { location.href = '/grownups/'; return; }
-    famSay('', ERR[code] ?? "Can't reach the server, try again.");
+    famSay('', ERR[code] ?? "Can't reach the server, try again.", field);
   };
   const purgeDay = (iso: string) => fmtDate(new Date(iso).getTime() + 7 * DAY);
   const goodPin = (a: string, b: string) => (!/^\d{4}$/.test(a) ? 'The PIN has 4 digits.' : a !== b ? 'The two PINs are different.' : '');
@@ -807,27 +855,31 @@ const data = {
       e.preventDefault();
       const name = $<HTMLInputElement>('add-name').value.trim(), a = $<HTMLInputElement>('add-pin').value, b = $<HTMLInputElement>('add-pin2').value;
       const bad = !name ? 'Type a name.' : goodPin(a, b);
-      if (bad) { famSay('', bad); return; }
-      try {
-        await callParentApi({ action: 'create_child', name, pin: a });
-        for (const id of ['add-name', 'add-pin', 'add-pin2']) $<HTMLInputElement>(id).value = '';
-        await refreshFamily(); famSay(`${name} added. They sign in on any device with the username ${name} and the PIN.`);
-      } catch (err) { famFail(err); }
+      if (bad) { famSay('', bad, !name ? 'add-name' : !/^\d{4}$/.test(a) ? 'add-pin' : 'add-pin2'); return; }
+      await working($('fam-add').querySelector<HTMLElement>('button[type="submit"]')!, 'Adding…', async () => {
+        try {
+          await callParentApi({ action: 'create_child', name, pin: a });
+          for (const id of ['add-name', 'add-pin', 'add-pin2']) $<HTMLInputElement>(id).value = '';
+          await refreshFamily(); famSay(`${name} added. They sign in on any device with the username ${name} and the PIN.`);
+        } catch (err) { famFail(err, 'add-name'); }
+      });
     });
     $('fam-kids').addEventListener('click', async (e) => {
       const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-act]');
       if (!btn) return;
       const id = btn.dataset.id!, act = btn.dataset.act!;
+      const field = act === 'pin' ? `pin-${id}` : act === 'rename' ? `nm-${id}` : '';
+      await working(btn, act === 'pin' ? 'Setting…' : act === 'delete' ? 'Deleting…' : '…', async () => {
       try {
         if (act === 'pin') {
           const pin = $<HTMLInputElement>(`pin-${id}`).value;
-          if (!/^\d{4}$/.test(pin)) { famSay('', 'The PIN has 4 digits.'); return; }
+          if (!/^\d{4}$/.test(pin)) { famSay('', 'The PIN has 4 digits.', field); return; }
           await callParentApi({ action: 'set_pin', child_id: id, pin }); famSay('PIN changed. Their other devices need the new PIN.');
         } else if (act === 'unlock') {
           await callParentApi({ action: 'clear_name_lock', child_id: id }); famSay('Lock cleared.');
         } else if (act === 'rename') {
           const name = $<HTMLInputElement>(`nm-${id}`).value.trim();
-          if (!name) { famSay('', 'Type the new name.'); return; }
+          if (!name) { famSay('', 'Type the new name.', field); return; }
           await callParentApi({ action: 'rename_child', child_id: id, name }); famSay('Renamed.');
         } else if (act === 'delete') {
           const typed = prompt(`Type ${btn.dataset.name} to delete this child. They cannot sign in from now on; their progress is erased after 7 days unless you restore them.`);
@@ -838,7 +890,8 @@ const data = {
           await callParentApi({ action: 'restore_child', child_id: id }); famSay('Restored.');
         }
         await refreshFamily();
-      } catch (err) { famFail(err); }
+      } catch (err) { famFail(err, field); }
+      });
     });
     $('del-account').addEventListener('click', async () => {
       const email = $<HTMLInputElement>('del-email').value;
@@ -867,11 +920,13 @@ const data = {
       $('mfa-secret').textContent = en.data.totp.secret;
       $('mfa-box').hidden = false; $('mfa-start').hidden = true; $('mfa-code').focus();
     });
-    $('mfa-verify').addEventListener('click', async () => {
+    $('mfa-verify').addEventListener('click', async (e) => {
       const input = $<HTMLInputElement>('mfa-code'), code = input.value.trim(); input.value = '';
-      const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: mfaFactor, code });
-      if (error) { famSay('', 'That code did not work. Wait for the next code and try again.'); return; }
-      $('mfa-box').hidden = true; $('mfa-note').textContent = 'An authenticator app is on for this account.'; famSay('Authenticator app turned on.');
+      await working(e.currentTarget as HTMLElement, 'Checking…', async () => {
+        const { error } = await supabase.auth.mfa.challengeAndVerify({ factorId: mfaFactor, code });
+        if (error) { famSay('', 'That code did not work. Wait for the next code and try again.', 'mfa-code'); return; }
+        $('mfa-box').hidden = true; $('mfa-note').textContent = 'An authenticator app is on for this account.'; famSay('Authenticator app turned on.');
+      });
     });
   }
 
@@ -884,7 +939,7 @@ const data = {
   let child: { id: string; rev: number | null; raw: SaveV1; writable: boolean } | null = null;
   let pick = 0, isParentView = false, pickerReady = false;
   let fillSettings = () => {};
-  const renderAll = () => { wrongSeq++; viewSeq++; renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
+  const renderAll = () => { snapUi(); wrongSeq++; viewSeq++; renderSummary(); renderCrumbs(); renderTopics(); renderDays(); renderMistakes(); renderWrong(); renderRetest(); fillSettings(); };
   const asSave = (d: unknown) => (d ? (migrate(d) as SaveV1) : (cleanSave(null) as SaveV1));
   async function showChild(id: string, writable = isParentView) {
     const my = ++pick;
@@ -935,7 +990,7 @@ const data = {
   // link to the admin console (the admin). CSS hides the other panel by data-tab, so the panels' own hidden flags stay theirs.
   const tab = (t: 'prog' | 'fam') => {
     $('pp-root').dataset.tab = t;
-    $('tab-prog').setAttribute('aria-selected', String(t === 'prog')); $('tab-fam').setAttribute('aria-selected', String(t === 'fam'));
+    $('tab-prog').setAttribute('aria-pressed', String(t === 'prog')); $('tab-fam').setAttribute('aria-pressed', String(t === 'fam'));
   };
   $('tab-prog').addEventListener('click', () => tab('prog'));
   $('tab-fam').addEventListener('click', () => tab('fam'));

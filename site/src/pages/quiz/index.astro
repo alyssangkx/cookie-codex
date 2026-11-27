@@ -53,7 +53,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         <p id="stem" class="stem"></p>
         <div id="options" class="options" role="group" aria-label="Answer options"></div>
       </div>
-      <div id="feedback" class="feedback" aria-live="polite" hidden></div>
+      <div id="feedback" class="feedback" hidden></div>
+      <span id="fb-live" class="sr-only" aria-live="polite"></span>
       <button id="next" class="primary" type="button" hidden>Next question</button>
       <div id="pnav" class="pnav" hidden>
         <button id="p-prev" type="button">Back</button>
@@ -234,6 +235,16 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   };
   /** figs: past-paper pictures in the stem; the result list puts them in the row's body instead (a link or a folded
    * block inside a <summary> would open a tab, or is not valid). Reviewed one at a time, a set's pages show in full. */
+  /** Soft-keyboard guard: only a mouse or trackpad user gets focus moved on render. */
+  const mouseUser = () => matchMedia('(pointer: fine)').matches;
+  /** The pinned word box or phrase bank's height, so a focused blank scrolls clear of it (CSS --pin-h). */
+  const pinHeight = () => {
+    const pin = document.querySelector<HTMLElement>('.quiz .wbox, .quiz .phrase-bank');
+    document.documentElement.style.setProperty('--pin-h', pin ? `${Math.ceil(pin.getBoundingClientRect().height)}px` : '0px');
+  };
+  window.addEventListener('resize', () => pinHeight());
+  /** Short text for the always-rendered live region (#feedback is hidden until filled, so screen readers can miss it). */
+  const announce = (t: string) => { $('fb-live').textContent = ''; setTimeout(() => { $('fb-live').textContent = t; }, 50); };
   const ppFigsHtml = (q: Q, again: boolean) =>
     q.ppFigs?.length ? `<span class="qfig-wrap${q.group ? ' qfig-set' : ''}">${ppFigureHtml(q.ppFigs, again)}</span>` : '';
   const stemHtml = (q: Q, reveal = false, figs = true) => {
@@ -831,7 +842,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       $('next').hidden = true;
       $('options').innerHTML = `<p class="typed-line">${q.seq != null && !q.typed.scaffold && CLOZE.has(q.sub) ? `<b>(${q.seq})</b> ` : ''}${scaffoldHtml(q.typed.scaffold, esc)}</p>`
         + '<p class="typed-hint" aria-live="polite"></p><button type="button" class="primary typed-check">Check my answer</button>';
-      $('options').querySelector<HTMLInputElement>('.typed-box')?.focus();
+      if (mouseUser()) $('options').querySelector<HTMLInputElement>('.typed-box')?.focus();
       return;
     }
     $('options').innerHTML = q.options
@@ -839,7 +850,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       .join('');
     $('feedback').hidden = true;
     $('next').hidden = true;
-    $('options').querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();
+    if (mouseUser()) $('options').querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();
   }
 
   /** A past-paper question of a one-pool sub-topic: wrong comes back after 1 day and counts once right then (ADR 0011). */
@@ -948,9 +959,12 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     $('options').innerHTML = `<p class="typed-hint" aria-live="polite"></p><button type="button" class="primary cz-submit">Submit all ${run.length} answer${run.length === 1 ? '' : 's'}</button>`;
     $('feedback').hidden = true;
     $('next').hidden = true;
+    pinHeight();
     const first = $('stem').querySelector<HTMLInputElement>('input.cz');
-    first?.focus({ preventScroll: true });
-    first?.scrollIntoView({ block: 'center' });
+    if (mouseUser()) { // on a phone, focusing a blank opens the keyboard before the passage is read (web guidelines audit M2)
+      first?.focus({ preventScroll: true });
+      first?.scrollIntoView({ block: 'center' });
+    }
   }
   /** Strike the box words the ticked answers use; a note beside an answer not in the box, or whose word is used up. */
   function czStrikes() {
@@ -1010,6 +1024,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       + (fx.wrong ? '<p>In the passage, what you wrote is crossed out and the answer is in bold.</p>' : '') + fx.lost + fx.why
       + (fx.wrong ? '' : reportHtml(q0));
     $('feedback').hidden = false;
+    announce(`${right} of ${n} right${right === n ? '!' : '.'}`);
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
     $('next').focus({ preventScroll: true });
@@ -1088,14 +1103,14 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     if (kind === 'chips') {
       $('stem').innerHTML = ppBadge(q) + setExtras(run, sharedVis) + setPassage(run, 'chips', chipHtml) + ppFigsHtml(q, false);
       opts.innerHTML = submit;
-      $('stem').querySelector<HTMLElement>('.chip')?.focus({ preventScroll: true });
+      if (mouseUser()) $('stem').querySelector<HTMLElement>('.chip')?.focus({ preventScroll: true });
     } else if (kind === 'dialogue') {
       const bank = `<div class="phrase-bank" role="group" aria-label="Phrases: drag one onto a blank, or tap a phrase and then a blank">`
         + ui.phrases.map((t, p) => `<button type="button" class="phrase" draggable="true" data-p="${p}" aria-pressed="false">${fmt(t)}</button>`).join('') + '</div>';
       $('stem').innerHTML = bank + ppBadge(q) + setExtras(run, sharedVis) + `<div class="dlg">${setPassage(run, 'dialogue', blankBtn)}</div>` + ppFigsHtml(q, false);
       opts.innerHTML = submit;
       dlgPaint();
-      $('stem').querySelector<HTMLElement>('.phrase')?.focus({ preventScroll: true });
+      if (mouseUser()) $('stem').querySelector<HTMLElement>('.phrase')?.focus({ preventScroll: true });
     } else {
       const shared = run.length > 1 && sameAll(run, (o) => o.stem);
       const sharedFig = sameAll(run, (o) => [o.figure, o.ppText]);
@@ -1105,8 +1120,9 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         + (shared ? '' : `${listText(o, o.seq ?? null)}${!sharedFig ? figsTop(o) : ''}`) + '</p>'
         + (!sharedVis && o.visual ? `<details class="rev-vis" open><summary>The ${esc(o.visual.kind)}</summary>${visualCard(o.visual)}</details>` : '')
         + `<div class="set-opts${many ? ' many' : ''}">${o.options.map((t, k) => `<button type="button" class="opt" data-sk="${o.seq}" data-k="${k}" aria-pressed="false"><span class="letter">${optionLabel(o, k)}</span> <span>${fmt(t)}</span></button>`).join('')}</div></div>`).join('') + submit;
-      opts.querySelector<HTMLElement>('.opt')?.focus({ preventScroll: true });
+      if (mouseUser()) opts.querySelector<HTMLElement>('.opt')?.focus({ preventScroll: true });
     }
+    pinHeight();
     $('stem').scrollIntoView({ block: 'start' });
   }
 
@@ -1233,6 +1249,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       + (ui.kind !== 'list' && bad.length ? '<p>In the passage, what you chose is crossed out and the answer is in bold.</p>' : '') + why
       + (bad.length ? bad.map(reportHtml).join('') : reportHtml(q0));
     $('feedback').hidden = false;
+    announce(`${right} of ${n} right${right === n ? '!' : '.'}`);
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
     $('next').focus({ preventScroll: true });
@@ -1285,6 +1302,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       (ok ? '<p class="verdict good">Correct!</p>'
           : `<p class="verdict bad">Not yet. The answer is ${optionLabel(q, q.answer)}.</p>${temptingHtml(q, k)}`) + stepsHtml(q) + reportHtml(q);
     $('feedback').hidden = false;
+    announce(ok ? 'Correct.' : 'Not quite.');
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
     $('next').focus();
@@ -1322,6 +1340,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       : `<p class="verdict bad">Not yet.</p><p class="typed-mine"><strong>You wrote:</strong> ${esc(mine)}</p>`)
       + (reasonSaysAnswer(q) ? '' : `<p class="typed-model"><strong>${ok ? 'Model answer' : 'Answer'}:</strong> ${fmt(q.typed.accept[0])}</p>`) + stepsHtml(q) + also + reportHtml(q);
     $('feedback').hidden = false;
+    announce(ok ? 'Correct.' : 'Not quite.');
     $('next').textContent = i + 1 < quiz.length ? 'Next question' : 'See results';
     $('next').hidden = false;
     $('next').focus(); // scrolls Next (and the verdict above it) into view: no scrolling by hand after a long passage
@@ -1658,6 +1677,10 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   .quiz .typed-box { font: inherit; line-height: 1.4; min-width: 9ch; width: min(100%, 26ch); padding: 0.25rem 0.5rem; border: 2px solid var(--cocoa-soft, #8a6a52);
     border-radius: 0.5rem; background: var(--paper, #fff); color: inherit; }
   .quiz .ask-inline { white-space: nowrap; }
+  /* keep a focused answer control clear of the sticky word box / phrase bank / paper status bar above it */
+  /* clear the pinned word box / phrase bank: --pin-h is their measured height (set when the screen is drawn), 9rem until then */
+  .quiz .typed-box, .quiz input.cz, .quiz .chip, .quiz .dblank { scroll-margin-top: calc(var(--pin-h, 9rem) + 1rem); }
+  .quiz .opt { scroll-margin-top: 4rem; }
   .quiz .wbox { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
     gap: 0.3rem; margin: 0 0 0.8rem; padding: 0.5rem; border: 2px solid var(--ink, #3b2a1f); border-radius: 0.6rem;
     background: var(--card, #fffaf2); font-size: 0.95rem; line-height: 1.3; }

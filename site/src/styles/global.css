@@ -42,7 +42,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { color-scheme: light; }
+html { color-scheme: light; scroll-padding-bottom: 8rem; } /* the fixed sync banner must not cover a focused control */
 
 body {
   margin: 0;
@@ -150,3 +150,18 @@ button:disabled { cursor: not-allowed; }
 .gu.privacy h2 { margin-top: 1.4rem; }
 .gu.privacy ul { padding-left: 1.2rem; }
 .gu.privacy li { margin-bottom: 0.4rem; }
+
+/* Touch: no double-tap zoom delay on controls, and a soft berry tap flash. */
+:where(a, button, summary, label, [role='button']) { touch-action: manipulation; }
+html { -webkit-tap-highlight-color: rgb(168 48 74 / 0.15); }
+
+/* Shared hover / pressed feel for buttons and button-like links. Zero specificity (:where), so any page rule
+   that already styles its own hover or active state (quiz .opt, .dblank ...) wins. Disabled controls are left alone. */
+@media (hover: hover) {
+  :where(button, .btn, .go, .t-act, .primary, .chip, .phrase, .nav a, .logout, .btn-review):not(:disabled, [aria-disabled='true']):hover {
+    filter: brightness(0.96);
+  }
+}
+:where(button, .btn, .go, .t-act, .primary, .chip, .phrase, .nav a, .logout, .btn-review):not(:disabled, [aria-disabled='true']):active {
+  transform: translateY(1px); filter: brightness(0.92);
+}

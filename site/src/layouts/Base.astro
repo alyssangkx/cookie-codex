@@ -233,6 +233,8 @@ const hidden = path === '' || new RegExp(GAME).test(path) || /^\/(parent|login|a
     font-family: var(--font-display); font-weight: 600; color: var(--berry);
     min-height: 44px; display: inline-flex; align-items: center;
   }
+  /* the balance is written into the link after load (here, in the shop and the quiz page): reserve its width so the header does not jump */
+  .nav a.crumb-bal { min-width: 12ch; font-variant-numeric: tabular-nums; }
   .logout {
     font-family: var(--font-display); font-weight: 600; color: var(--berry); background: none; cursor: pointer;
     border: 1.5px solid var(--berry); border-radius: 10px; padding: 0 14px; min-height: 44px; align-self: center;

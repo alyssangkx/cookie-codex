@@ -99,13 +99,13 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
     {layouts.map((L) => (
       <div class={`scene scene-${L.k}`}>
         <img class="map" src={L.img} width={L.size[0]} height={L.size[1]}
-          alt="A cartoon cookie kingdom: the Math, Science, English and Chinese schools, the Library, the Shop, My House and a tall tower." />
+          alt="A cartoon cookie kingdom: the Math, Science, English and Chinese schools, the Library, the Shop, My House and a tall tower." loading="lazy" decoding="async" />
         {L.art.map((a) => (
           <img class={`sprite sprite-${a.id}`} src={a.src} width={a.size[0]} height={a.size[1]} alt="" loading="lazy" decoding="async"
             style={`left:${a.box[0]}%;top:${a.box[1]}%;width:${a.box[2]}%;height:${a.box[3]}%`} />
         ))}
         <div class="banner">
-          <p class="welcome">Welcome back<span class="player-sep"></span>!</p>
+          <h1 class="welcome">Welcome back<span class="player-sep"></span>!</h1>
           <p class="hint">Tap a building to begin.</p>
         </div>
         {L.items.map((b) =>
@@ -115,11 +115,11 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
               <span class="pill" lang={b.lang}>{b.label}{b.sub && <small>{b.sub}</small>}{SCHOOL_IDS.has(b.id) && <em class="badge">Open</em>}</span>
             </a>
           ) : (
-            <span class={`spot spot-${b.id} soon`} role="link" aria-disabled="true" tabindex="0"
+            <button type="button" class={`spot spot-${b.id} soon`} aria-disabled="true" aria-describedby={`ribbon-${L.k}-${b.id}`}
               aria-label={`${b.sub ?? b.label}: coming soon`}
               style={`left:${b.box[0]}%;top:${b.box[1]}%;width:${b.box[2]}%;height:${b.box[3]}%`}>
-              <span class="pill" lang={b.lang}>{b.label}{b.sub && <small>{b.sub}</small>}<em class="ribbon">Coming soon</em></span>
-            </span>
+              <span class="pill" lang={b.lang}>{b.label}{b.sub && <small>{b.sub}</small>}<em class="ribbon" id={`ribbon-${L.k}-${b.id}`}>Coming soon</em></span>
+            </button>
           ))}
         {L.companions.map(([x, y], i) => (
           <a class="buddy" data-i={i} href="/codex/" style={`left:${x}%;top:${y}%;--d:${i * 0.45}s`} aria-label="A cookie friend">
@@ -175,6 +175,7 @@ const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
     text-shadow: 0 2px 0 var(--paper), 0 0 18px var(--paper);
   }
   .home .hint { margin: 0.2rem 0 0; font: 600 clamp(0.9rem, 1.6vw, 1.15rem) var(--font-display); color: var(--cocoa-soft); text-shadow: 0 0 10px var(--paper); }
+  .home button.spot { padding: 0; border: 0; background: none; font: inherit; }
   .home .spot { position: absolute; display: flex; align-items: flex-end; justify-content: center; border-radius: 18px; text-decoration: none; color: var(--cocoa); cursor: pointer; }
   .home .spot:focus-visible { outline: 3px solid var(--berry); outline-offset: 2px; }
   .home .pill {

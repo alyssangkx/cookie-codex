@@ -33,7 +33,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
         <div class="panel hero">
           <div>
             <p class="big"><span class="big-n" id="pool-n">0</span><span class="big-of">of <span id="pool-total">{pool}</span> {units} right</span></p>
-            <p class="next" id="next-line"></p>
+            <p class="next" id="next-line" aria-live="polite"></p>
             <a class="go" id="go" href={`/quiz/?sub=${encodeURIComponent(sub.id)}`}>{cloze ? 'Fill a passage' : 'Start training'}</a>
             <p class="go-note" id="go-note"></p>
             <p class="cap" id="cap" role="status" hidden></p>
@@ -83,7 +83,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
             <p class="next-tier" id="c-name">Basic</p>
             <div class="mastery" id="c-mastery">
               <div class="mbar" role="img" id="c-bar"><span style="width:0%"></span></div>
-              <p id="c-mtext"></p>
+              <p id="c-mtext" aria-live="polite"></p>
             </div>
             <a class="go" id="go">Start quiz</a>
             <p class="go-note" id="go-note"></p>
@@ -137,6 +137,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
   const go = $<HTMLAnchorElement>('go');
   const disable = (msg: string) => {
     go.setAttribute('aria-disabled', 'true'); go.removeAttribute('href');
+    go.setAttribute('role', 'link'); go.tabIndex = 0; go.setAttribute('aria-describedby', 'cap'); // stays focusable; the reason is read with it
     $('go-note').hidden = true;
     const cap = $('cap'); cap.textContent = msg; cap.hidden = false;
   };
@@ -214,6 +215,7 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
     const poolAll = Number(root.dataset.poolAll) || 0;
     $('pool-n').textContent = String(n);
     $('pool-total').textContent = String(total);
+    root.querySelector('.big')!.setAttribute('role', 'group');
     root.querySelector('.big')!.setAttribute('aria-label', `${n} of ${total} ${units} right`);
     // the stops reached: the 1st and 2nd count an old generated-tier clear, Exam-ready only the pool's own milestone
     const reached = goalFlags(s, sub);
@@ -309,7 +311,10 @@ const tiers = (['b', 'i', 'c'] as const).map((k, n) => {
       }
       // a Start / Practise link is dead while the day's limit or this tier's tries are used up, with the reason in the row
       const stop = triesUsedUp(s, sub, t) ? `You have had ${tries} tries at this tier today. Try again tomorrow.` : reason ? blockMessage(reason, s) : '';
-      if (stop && act && !act.hidden) { act.setAttribute('aria-disabled', 'true'); act.removeAttribute('href'); state.textContent = stop; }
+      if (stop && act && !act.hidden) {
+        act.setAttribute('aria-disabled', 'true'); act.removeAttribute('href'); state.textContent = stop;
+        state.id = `t-state-${t}`; act.setAttribute('role', 'link'); act.tabIndex = 0; act.setAttribute('aria-describedby', state.id);
+      }
     }
     // the hero: the tier to train next, its mastery, Start and its card
     const heroReward = $('c-reward');
