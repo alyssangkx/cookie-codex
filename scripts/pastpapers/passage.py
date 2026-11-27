@@ -210,8 +210,9 @@ CLOZE_OUT = TMP / "ppimport" / "engcloze"
 
 def box_ok(box):
     """A Grammar Cloze word box the letters can be trusted against: 10+ entries, each a word (or two), none repeated."""
+    # a box read as its letters only (A, B, C ...: 27 Nov 2026, eng-2020-008) is no box: at most 2 one-letter words (a, I)
     return bool(box) and len(box) >= 10 and len({b.lower() for b in box}) == len(box) \
-        and all(re.fullmatch(r"[A-Za-z'’-]+(?: [A-Za-z'’-]+)?", b) for b in box)
+        and all(re.fullmatch(r"[A-Za-z'’-]+(?: [A-Za-z'’-]+)?", b) for b in box) and sum(len(b) == 1 for b in box) <= 2
 
 
 def read_answers(path):
@@ -650,6 +651,8 @@ def pack_cloze(per=20):
 
 
 def selftest():
+    assert not box_ok(list("ABCDEFGHJKLMNPQ")), "a box of letters only is refused"
+    assert box_ok(["a", "the", "which", "however", "although", "since", "their", "by", "with", "until"])
     p = "Benedict read {{17|widely}} to find out more. They made a {{18| detailed plan  for their trip }}."
     assert markers(p, "under") == {17: "widely", 18: "detailed plan for their trip"}
     assert markers("A [[31]] and b[[32]].", "blank") == {31: "", 32: ""}
