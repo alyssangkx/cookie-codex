@@ -168,7 +168,8 @@ const data = {
   .parent-page .sub.off { opacity: 0.55; }
   .parent-page .sub .nm { font-weight: 600; }
   .parent-page ol.list { padding-left: 1.2rem; margin: 0; }
-  .parent-page ol.list li { margin-bottom: 0.7rem; content-visibility: auto; contain-intrinsic-size: auto 120px; }
+  /* content-visibility clips what is drawn outside the item, so the list number sits inside it */
+  .parent-page ol.list li { margin-bottom: 0.7rem; content-visibility: auto; contain-intrinsic-size: auto 120px; list-style-position: inside; }
   .parent-page .meta { display: block; color: var(--cocoa-soft); font-size: 0.88rem; }
   .parent-page .due-late { color: var(--berry); font-weight: 600; }
   .parent-page .wq-subject { border-top: 1px solid var(--crust); padding: 0.4rem 0; }
@@ -458,11 +459,13 @@ const data = {
   /** A panel has its final markup: re-open its folds, put focus back (only if it fell to the page), end its busy state. */
   function doneUi(id: string) {
     const box = $(id);
-    box.querySelectorAll<HTMLDetailsElement>('details[data-fold]').forEach((d) => { if (ui.open.has(d.dataset.fold!)) d.open = true; });
-    if (ui.focus && (!document.activeElement || document.activeElement === document.body)) box.querySelector<HTMLElement>(ui.focus)?.focus({ preventScroll: true });
+    // the snapshot is used once per panel: a fold the parent closes later, or a re-render by the child picker, is not reopened
+    box.querySelectorAll<HTMLDetailsElement>('details[data-fold]').forEach((d) => { if (ui.open.delete(d.dataset.fold!)) d.open = true; });
+    const f = ui.focus && box.querySelector<HTMLElement>(ui.focus);
+    if (f) { ui.focus = null; if (!document.activeElement || document.activeElement === document.body) f.focus({ preventScroll: true }); }
     busy(id, false);
   }
-  const announce = (msg: string) => { $('pp-msg-live').textContent = ''; $('pp-msg-live').textContent = msg; };
+  const announce = (msg: string) => { $('pp-msg-live').textContent = ''; setTimeout(() => { $('pp-msg-live').textContent = msg; }, 50); }; // same text twice is read again
   /** Disable a button and show a short label while its request runs; restore it after (also on error). */
   async function working(btn: HTMLElement, label: string, fn: () => Promise<void>) {
     const old = btn.textContent; (btn as HTMLButtonElement).disabled = true; btn.textContent = label;
@@ -482,7 +485,8 @@ const data = {
   const subjectTried = (school: string) => P.subs.filter((x) => x.school === school).flatMap((x) => dash?.tried.get(x.id) ?? []);
   async function renderTopics(my = viewSeq) {
     busy('mastery', true); $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
-    const qs = await lookup(viewId);
+    const qs = await lookup(viewId).catch(() => null);
+    if (!qs) { busy('mastery', false); $('mastery').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
     if (my !== viewSeq) return;
     const tried = new Map<string, [BQ, QState][]>();
     for (const [id, st] of Object.entries(s.questions)) {
@@ -639,7 +643,8 @@ const data = {
     const recorded = Object.entries(questions).filter(([, q]) => q.w > 0);
     if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; busy('wrong', false); return; }
     busy('wrong', true); $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
-    const bank = await lookup(who);
+    const bank = await lookup(who).catch(() => null);
+    if (!bank) { busy('wrong', false); $('wrong').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
     if (my !== wrongSeq) return; // the picker changed while the questions loaded
     // owner, 20 Nov 2026: questions no longer in any bank (the pilot banks were redesigned) are left out entirely
     const wrong = recorded.filter(([id]) => bank.has(id));
@@ -671,7 +676,8 @@ const data = {
     const waiting = Object.entries(s.questions).filter(([, q]) => inReview(q, P.banks)).sort((a, b) => a[1].due - b[1].due);
     if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; busy('retest', false); return; }
     busy('retest', true); $('retest').innerHTML = '<p class="note">Loading questions…</p>';
-    const stems = await lookup(viewId);
+    const stems = await lookup(viewId).catch(() => null);
+    if (!stems) { busy('retest', false); $('retest').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
     if (my !== viewSeq) return;
     const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
     if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; busy('retest', false); return; }
@@ -813,10 +819,12 @@ const data = {
     const f = field ? document.getElementById(field) : null; // a wrong field gets focus and is tied to the error text
     if (err && f) { f.setAttribute('aria-invalid', 'true'); f.setAttribute('aria-describedby', 'fam-err'); f.focus(); }
   };
-  const famFail = (e: unknown, field = '') => {
+  const NAME_ERR = new Set(['name_taken', 'name_deleted', 'name_reserved', 'bad_request']), PIN_ERR = new Set(['weak_pin', 'bad_request']);
+  /** `fields`: the name and PIN inputs of the form that failed; only the one the error is about is marked and focused. */
+  const famFail = (e: unknown, fields: { name?: string; pin?: string } = {}) => {
     const code = e instanceof Error ? e.message : '';
     if (code === 'mfa_required' || code === 'unauthorized') { location.href = '/grownups/'; return; }
-    famSay('', ERR[code] ?? "Can't reach the server, try again.", field);
+    famSay('', ERR[code] ?? "Can't reach the server, try again.", NAME_ERR.has(code) && fields.name ? fields.name : PIN_ERR.has(code) && fields.pin ? fields.pin : '');
   };
   const purgeDay = (iso: string) => fmtDate(new Date(iso).getTime() + 7 * DAY);
   const goodPin = (a: string, b: string) => (!/^\d{4}$/.test(a) ? 'The PIN has 4 digits.' : a !== b ? 'The two PINs are different.' : '');
@@ -861,7 +869,7 @@ const data = {
           await callParentApi({ action: 'create_child', name, pin: a });
           for (const id of ['add-name', 'add-pin', 'add-pin2']) $<HTMLInputElement>(id).value = '';
           await refreshFamily(); famSay(`${name} added. They sign in on any device with the username ${name} and the PIN.`);
-        } catch (err) { famFail(err, 'add-name'); }
+        } catch (err) { famFail(err, { name: 'add-name', pin: 'add-pin' }); }
       });
     });
     $('fam-kids').addEventListener('click', async (e) => {
@@ -890,7 +898,7 @@ const data = {
           await callParentApi({ action: 'restore_child', child_id: id }); famSay('Restored.');
         }
         await refreshFamily();
-      } catch (err) { famFail(err, field); }
+      } catch (err) { famFail(err, field.startsWith('nm-') ? { name: field } : field.startsWith('pin-') ? { pin: field } : {}); }
       });
     });
     $('del-account').addEventListener('click', async () => {

@@ -842,6 +842,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       $('next').hidden = true;
       $('options').innerHTML = `<p class="typed-line">${q.seq != null && !q.typed.scaffold && CLOZE.has(q.sub) ? `<b>(${q.seq})</b> ` : ''}${scaffoldHtml(q.typed.scaffold, esc)}</p>`
         + '<p class="typed-hint" aria-live="polite"></p><button type="button" class="primary typed-check">Check my answer</button>';
+      pinHeight(); // nothing pinned on a single question: a cloze word box's height must not linger in --pin-h
       if (mouseUser()) $('options').querySelector<HTMLInputElement>('.typed-box')?.focus();
       return;
     }

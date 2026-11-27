@@ -93,13 +93,18 @@ const layouts = LAYOUTS.map((k) => {
 const commons = cookies.filter((c) => c.rarity === 'common').map((c) => ({ slug: c.slug, name: c.name, image: c.image }));
 const cards = Object.fromEntries(cookies.map((c) => [c.slug, { name: c.name, image: c.image }]));
 const data = JSON.stringify({ commons, cards }).replace(/</g, '\\u003c');
+const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='; // 1x1 transparent
 ---
 <Base title="Home · Cookie Codex" description="Your cookie kingdom home base: train in the Schools of Mastery, visit the Library of cards and see your collection.">
   <section class="home">
     {layouts.map((L) => (
       <div class={`scene scene-${L.k}`}>
-        <img class="map" src={L.img} width={L.size[0]} height={L.size[1]}
-          alt="A cartoon cookie kingdom: the Math, Science, English and Chinese schools, the Library, the Shop, My House and a tall tower." loading="lazy" decoding="async" />
+        {/* the scene hidden at this width gets a 1px blank instead (its map is never downloaded); the shown one loads at once */}
+        <picture>
+          <source media={L.k === 'wide' ? '(max-width: 699px)' : '(min-width: 700px)'} srcset={BLANK} />
+          <img class="map" src={L.img} width={L.size[0]} height={L.size[1]} fetchpriority="high" decoding="async"
+            alt="A cartoon cookie kingdom: the Math, Science, English and Chinese schools, the Library, the Shop, My House and a tall tower." />
+        </picture>
         {L.art.map((a) => (
           <img class={`sprite sprite-${a.id}`} src={a.src} width={a.size[0]} height={a.size[1]} alt="" loading="lazy" decoding="async"
             style={`left:${a.box[0]}%;top:${a.box[1]}%;width:${a.box[2]}%;height:${a.box[3]}%`} />
