@@ -486,7 +486,7 @@ const data = {
   async function renderTopics(my = viewSeq) {
     busy('mastery', true); $('mastery').innerHTML = '<p class="note">Loading questions…</p>';
     const qs = await lookup(viewId).catch(() => null);
-    if (!qs) { busy('mastery', false); $('mastery').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
+    if (!qs) { if (my !== viewSeq) return; busy('mastery', false);  /* a newer render owns the panel */ $('mastery').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
     if (my !== viewSeq) return;
     const tried = new Map<string, [BQ, QState][]>();
     for (const [id, st] of Object.entries(s.questions)) {
@@ -644,7 +644,7 @@ const data = {
     if (!recorded.length) { $('wrong').innerHTML = '<p class="note">No wrong answers recorded yet.</p>'; busy('wrong', false); return; }
     busy('wrong', true); $('wrong').innerHTML = '<p class="note">Loading questions…</p>';
     const bank = await lookup(who).catch(() => null);
-    if (!bank) { busy('wrong', false); $('wrong').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
+    if (!bank) { if (my !== wrongSeq) return; busy('wrong', false);  /* a newer render owns the panel */ $('wrong').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
     if (my !== wrongSeq) return; // the picker changed while the questions loaded
     // owner, 20 Nov 2026: questions no longer in any bank (the pilot banks were redesigned) are left out entirely
     const wrong = recorded.filter(([id]) => bank.has(id));
@@ -677,7 +677,7 @@ const data = {
     if (!waiting.length) { $('retest').innerHTML = '<p class="note">Nothing waiting for a retest.</p>'; busy('retest', false); return; }
     busy('retest', true); $('retest').innerHTML = '<p class="note">Loading questions…</p>';
     const stems = await lookup(viewId).catch(() => null);
-    if (!stems) { busy('retest', false); $('retest').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
+    if (!stems) { if (my !== viewSeq) return; busy('retest', false);  /* a newer render owns the panel */ $('retest').innerHTML = '<p class="note">Couldn\'t load the questions. Reload the page to try again.</p>'; return; }
     if (my !== viewSeq) return;
     const due = waiting.filter(([id]) => stems.has(id)); // questions no longer in any bank are never asked again
     if (!due.length) { $('retest').innerHTML = missingNote() || '<p class="note">Nothing waiting for a retest.</p>'; busy('retest', false); return; }
