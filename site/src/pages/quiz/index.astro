@@ -428,6 +428,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
         if (!quiz.length) return stop('You have answered every question here. Any you got wrong come back in Daily Review.');
       } else if (mode === 'paper') {
         quiz = pickPaper(all as any, cur.questions, paperN, paperMix.mix);
+        if (!quiz.length) return stop('You have answered every question in these topics. Any you got wrong come back in Daily Review.', '<a href="/paper/">Build another paper</a>');
       } else {
         // a passage's due blanks are asked together in passage order; its other blanks show their answer (clozeStem)
         // a revision test the parent sent is asked on its own first, while any of it is still due

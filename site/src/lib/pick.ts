@@ -3,6 +3,7 @@ import { isPpId } from './pastpaper.ts';
 //   node --test site/src/lib/*.test.ts
 export interface Seen {
   s: number; // 0 retired, 1-3 retest step
+  h?: 1; // a held passage-set retest: never asked (store.ts QState.h)
   due: number;
 }
 
@@ -30,8 +31,9 @@ export function pickTier(
   ordered = false, // ids are easier-first (a one-pool sub-topic, ADR 0011): new questions keep that order, no shuffle
 ): string[] {
   const byDue = (a: string, b: string) => seen[a]!.due - seen[b]!.due;
-  const retest = ids.filter((id) => (seen[id]?.s ?? 0) > 0).sort(byDue);
-  const due = [...retest, ...sideRetests.filter((id) => (seen[id]?.s ?? 0) > 0)]
+  const live = (id: string) => (seen[id]?.s ?? 0) > 0 && !seen[id]!.h; // a retest that may be asked
+  const retest = ids.filter(live).sort(byDue);
+  const due = [...retest, ...sideRetests.filter(live)]
     .filter((id) => seen[id]!.due <= now).sort(byDue);
   const notDue = retest.filter((id) => seen[id]!.due > now);
   // owner, 24 Nov 2026: a generated question only when no past-paper one is left. In a merged tier the new past-paper
@@ -66,7 +68,7 @@ export function pickPassage(all: string[], seen: Record<string, Seen | undefined
 }
 
 /** A one-pool sub-topic's quiz (ADR 0011): `ids` are its past-paper questions easier-first (pp_pool order). Due retests
- *  first (at most 3), then new questions in that order, then not-due retests, then counted ones again. */
+ *  first (at most 3), then new questions in that order, then not-due retests; never one answered right (27 Nov 2026). */
 export const pickPool = (ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now(),
   passage?: (id: string) => { group: string; seq: number } | undefined) =>
   pickTier(ids, seen, size, now, Math.random, [], passage, true); // a passage set is asked whole and in order
@@ -145,7 +147,7 @@ export function wholePassages(
 export const reviewSize = (due: number) => Math.min(due, 15, Math.max(5, Math.ceil(due / 2)));
 
 export function pickReview(ids: string[], seen: Record<string, Seen | undefined>, size?: number, now = Date.now()) {
-  const due = ids.filter((id) => (seen[id]?.s ?? 0) > 0 && seen[id]!.due <= now).sort((a, b) => seen[a]!.due - seen[b]!.due);
+  const due = ids.filter((id) => (seen[id]?.s ?? 0) > 0 && !seen[id]!.h && seen[id]!.due <= now).sort((a, b) => seen[a]!.due - seen[b]!.due);
   return due.slice(0, size ?? reviewSize(due.length));
 }
 
@@ -181,7 +183,7 @@ export function pickPaper(
   qs: { id: string; topic: string; level: keyof Mix }[], seen: Record<string, Seen | undefined>,
   n: number, mix: Mix, now = Date.now(), rand = Math.random,
 ): string[] {
-  qs = qs.filter((q) => seen[q.id]?.s !== 0); // answered right (or a held passage question): never asked again (27 Nov 2026)
+  qs = qs.filter((q) => seen[q.id]?.s !== 0 && !seen[q.id]?.h); // answered right, or a held passage retest: never asked (27 Nov 2026)
   const topics = shuffle([...new Set(qs.map((q) => q.topic))], rand); // random start, so every topic gets a turn
   const rank = (id: string) => (!seen[id] ? 0 : (seen[id]!.s > 0 && seen[id]!.due <= now) ? 1 : 2);
   const levels = Object.keys(mix) as (keyof Mix)[];

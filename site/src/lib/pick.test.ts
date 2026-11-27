@@ -220,5 +220,8 @@ test('pickPassage: never a passage with a blank already answered; [] when all ar
   const ids = ['a1', 'a2', 'b1', 'b2'];
   const passage = (id: string) => ({ group: id[0], seq: Number(id[1]) });
   assert.deepEqual(pickPassage(ids, { a2: { s: 0, due: 0 } }, Date.now(), passage), ['b1', 'b2']);
+  const held: Record<string, Seen> = { z: { s: 1, due: 0, h: 1 } };
+  assert.deepEqual(pickTier(['z', 'y'], held, 10, Date.now()), ['y'], 'a held passage retest is never asked');
+  assert.deepEqual(pickReview(['z'], held), []);
   assert.deepEqual(pickPassage(ids, { a2: { s: 1, due: 0 }, b1: { s: 0, due: 0 } }, Date.now(), passage), []);
 });

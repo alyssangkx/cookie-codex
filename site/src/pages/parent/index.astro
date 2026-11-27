@@ -415,8 +415,8 @@ const data = {
   /** One question as tried: stem, picture (or "same page" when the question above showed the same one), the right answer,
    *  the answer picked on the last wrong try, and where it stands now. */
   function qItem(bq: BQ, q: QState, now: number, samePage = false, extra = '') {
-    const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
-      : q.h ? 'in a passage set: not retested for now' : q.w > 0 ? 'answered right since (mastered)' : 'right first time (mastered)';
+    const status = q.h ? 'in a passage set: not retested for now' : q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
+      : q.w > 0 ? 'answered right since (mastered)' : 'right first time (mastered)';
     const right = `Right answer: <b>${bold(bq.typed ? bq.typed.accept[0] : bq.options[bq.answer] ?? '')}</b>`;
     const theirs = q.w === 0 ? '' : q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
       : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
@@ -499,7 +499,7 @@ const data = {
       const list = P.subs.filter((x) => x.school === school.id);
       if (!list.length) continue;
       const all = subjectTried(school.id), avail = list.reduce((n, x) => n + (x.content ? x.avail : 0), 0);
-      const first = all.filter(([, x]) => x.s === 0 && x.w === 0).length, later = all.filter(([, x]) => x.s === 0 && x.w > 0 && !x.h).length;
+      const first = all.filter(([, x]) => x.s === 0 && x.w === 0).length, later = all.filter(([, x]) => x.s === 0 && x.w > 0).length;
       const learning = all.length - first - later, wrong = all.filter(([, x]) => x.w > 0).length;
       const pc = (n: number) => (all.length ? (100 * n) / all.length : 0);
       const pie = all.length ? `conic-gradient(var(--ok) 0 ${pc(first)}%, var(--r-ancient) 0 ${pc(first + later)}%, var(--berry) 0 100%)` : 'var(--crust)';
@@ -563,7 +563,7 @@ const data = {
         if (sub.topic !== topic) { if (open) html += '</div>'; topic = sub.topic; html += `<h3 class="wq-sub">${esc(topic)}</h3><div class="tq-grid">`; open = true; }
         const l = dash.tried.get(sub.id) ?? [], wrong = l.filter(([, q]) => q.w > 0), after = l.filter(([, q]) => q.s === 0 && q.w > 0).length;
         // still wrong (s > 0) and not already due; a question mastered since is not un-mastered by this button
-        const queue = can ? wrong.filter(([bq, q]) => askable(bq) && q.s > 0 && q.due > now).map(([bq]) => bq.id) : [];
+        const queue = can ? wrong.filter(([bq, q]) => askable(bq) && q.s > 0 && !q.h && q.due > now).map(([bq]) => bq.id) : [];
         const scale = Math.max(sub.avail, l.length, 1); // a pool sub-topic's generated retests can outnumber its pool
         // one bar in proportion (owner, 23 Nov 2026): the whole bar is every question; a non-zero part is at least 2 px wide
         const first = l.filter(([, q]) => q.s === 0 && q.w === 0).length, still = l.length - first - after;
@@ -587,7 +587,7 @@ const data = {
       const wrong = subjectTried(school.id).filter(([, x]) => x.w > 0);
       // the revision test: still-wrong questions first, the most often wrong first, at most REVISION_MAX
       // (past-paper questions only while the child's quiz can load them)
-      const pick = [...wrong].filter(([bq]) => askable(bq))
+      const pick = [...wrong].filter(([bq, x]) => askable(bq) && !x.h) // a held passage question is not retested
         .sort((a, b) => (b[1].s > 0 ? 1 : 0) - (a[1].s > 0 ? 1 : 0) || b[1].w - a[1].w).slice(0, REVISION_MAX).map(([bq]) => bq.id);
       const can = !!child?.writable; // a parent's own child, or the admin's Test Player (the database allows no other admin write)
       const sent = (s.revision?.ids ?? []).filter((id) => wrong.some(([bq]) => bq.id === id));
@@ -595,7 +595,7 @@ const data = {
         + (can && pick.length > 1 ? `<p><button type="button" class="btn" data-act="revise" data-ids="${esc(pick.join(' '))}">Send ${pick.length} as a revision test now</button></p>
           <p class="note">The questions go to the top of the child's next Daily Review, asked together as a revision test.${sent.length ? ` ${sent.length} from the last one sent are in this list.` : ''}</p>` : '')
         + '<p class="saved" id="dash-msg"></p>'
-        + qList(wrong, now, (bq, q) => (can && !(q.s > 0 && q.due <= now) && askable(bq) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}" aria-label="Retest this question now: ${esc(bq.stem.slice(0, 60))}">Retest now</button>` : ''));
+        + qList(wrong, now, (bq, q) => (can && !q.h && !(q.s > 0 && q.due <= now) && askable(bq) ? `<button type="button" class="btn small" data-act="recycle" data-id="${esc(bq.id)}" aria-label="Retest this question now: ${esc(bq.stem.slice(0, 60))}">Retest now</button>` : ''));
     }
     const m = document.getElementById('dash-msg');
     if (m) m.textContent = dashMsg;

@@ -720,7 +720,11 @@ test('assignedPending: an assignment is done once a quiz on it finishes after it
 test('answer: a wrong passage-set answer is held (done, not a retest)', () => {
   const s = fresh();
   answer(s, 'p1', false, 1000, true, 'went', false, true);
-  assert.deepEqual(s.questions.p1, { s: 0, due: 0, w: 1, h: 1, a: 'went' });
+  assert.deepEqual(s.questions.p1, { s: 1, due: 1000 + 86400000, w: 1, h: 1, a: 'went' }, 'still wrong (never counted as right)');
+  assert.equal(isDue(s, 'p1', 1e15), false, 'but never due');
+  assert.equal(reviewDueCount(s, 1e15), 0);
+  answer(s, 'p1', true, 1e15, true, undefined, false, true);
+  assert.equal(s.questions.p1.s, 1, 'a right answer to a held one (a revision test, an older tab) leaves it held');
   answer(s, 'q1', false, 1000, true, 'x');
   assert.equal(s.questions.q1.s, 1, 'outside a passage a wrong answer is still a retest');
 });

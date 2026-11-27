@@ -33,8 +33,8 @@ export type TierState = { passes: string[]; scores: number[]; best: number; clea
 // a state parked by any other bank set (an older tab writes true) still counts toward reviewDueCount, so it cannot hide
 // Daily Review until this build has re-checked it. Older code treats any truthy value as parked.
 // h: a passage-set question answered wrong is held, not retested (owner, 27 Nov 2026: "excluded for the time being").
-// It is stored done (s 0) so it is never asked or counted as due; h keeps it apart from a real pass, so retests can be
-// switched back on later (s 0, w > 0, h 1 -> s 1). Optional: no schema bump.
+// It stays a wrong answer (s > 0: never counted as right, mastered or toward a milestone or a cleared tier) but is never
+// asked or counted as due (isDue, inReview, pick.ts). Retests come back on by deleting h. Optional: no schema bump.
 export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true | string; h?: 1 };
 export const PICK_MAX = 120; // characters of a picked option (or of a typed sentence, cut with … by the quiz) kept in the save (512 KB cap)
 export const LEFT_BLANK = '\u2205'; // "∅": a paper question left blank on purpose (never an option's text)
@@ -381,8 +381,8 @@ export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), ret
   if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
   const a = ok ? q?.a : (picked ?? '').slice(0, PICK_MAX);
   const keep = a != null ? { a } : {};
-  if (!ok && inPassage) { // a passage-set question is not retested for now (QState.h)
-    s.questions[id] = { s: 0, due: 0, w: (q?.w ?? 0) + 1, h: 1, ...keep };
+  if (inPassage && (!ok || (q && q.s > 0))) { // a passage-set question is not retested for now (QState.h)
+    s.questions[id] = { s: q && q.s > 0 ? q.s : 1, due: q && q.s > 0 ? q.due : now + DAY, w: (q?.w ?? 0) + (ok ? 0 : 1), h: 1, ...keep };
     return false;
   }
   if (!ok) {
@@ -406,7 +406,7 @@ export const isNew = (s: SaveV1, id: string) => !s.questions[id];
 export function holdPassageRetests(ids: Iterable<string>): SaveV1 {
   const s = load();
   let n = 0;
-  for (const id of ids) { const q = s.questions[id]; if (q && q.s > 0) { s.questions[id] = { s: 0, due: 0, w: q.w, h: 1, ...(q.a != null ? { a: q.a } : {}) }; n++; } }
+  for (const id of ids) { const q = s.questions[id]; if (q && q.s > 0 && !q.h) { q.h = 1; n++; } }
   if (n) save(s);
   return s;
 }
@@ -414,7 +414,7 @@ export function holdPassageRetests(ids: Iterable<string>): SaveV1 {
  *  already knows the id is in a bank (`ignoreParked`). */
 export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = false) => {
   const q = s.questions[id];
-  return !!q && (ignoreParked || !q.parked) && q.s > 0 && q.due <= now;
+  return !!q && (ignoreParked || !q.parked) && q.s > 0 && !q.h && q.due <= now;
 };
 /** The questions of the parent's revision test not yet answered since it was sent: sending sets due to the send time and
  *  any answer moves due later, so an answered question leaves the test for good (its later retests are ordinary ones). */
@@ -455,7 +455,7 @@ export const reviewDueCount = (s: SaveV1, now = Date.now(), banks?: string) =>
   Object.values(s.questions).filter((q) => inReview(q, banks) && q.due <= now).length;
 /** A retest state that belongs in review lists (the child's gates, the parent's retest queue): not retired, and not
  * parked by this very bank set. */
-export const inReview = (q: QState, banks?: string) => q.s > 0 && (!q.parked || q.parked !== banks);
+export const inReview = (q: QState, banks?: string) => q.s > 0 && !q.h && (!q.parked || q.parked !== banks);
 
 /**
  * syncParked against the save as stored NOW, then save. Pages call this after awaiting bank files instead of saving the
@@ -763,7 +763,7 @@ export function mergeRetests(s: SaveV1, subOf: Record<string, string>, asked: st
   for (const [sub, ids] of by) {
     const slot = s.progress[sub]?.b;
     if (!slot?.pool) continue;
-    const keep = (slot.rq ?? []).filter((id) => s.questions[id]?.s > 0);
+    const keep = (slot.rq ?? []).filter((id) => s.questions[id]?.s > 0 && !s.questions[id]?.h);
     slot.rq = earliestDue(s, [...new Set([...keep, ...ids])]);
   }
 }
@@ -778,7 +778,7 @@ export function poolDisplay(s: SaveV1, ids: string[], groups?: Record<string, st
     const q = s.questions[id];
     if (!q) continue;
     tried++;
-    if (q.s > 0) due.push(id);
+    if (q.s > 0 && !q.h) due.push(id); // a held passage retest is not "to retest"
   }
   const rq = earliestDue(s, due);
   const out: Pick<TierState, 'tried' | 'rq' | 'pd' | 'pt'> = { tried, rq };
