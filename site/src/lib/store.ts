@@ -377,7 +377,7 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
  *  answer at that due retest retires it (counts toward the milestones); no 3- and 7-day steps. */
 export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string, short = false, inPassage = false): boolean {
   const q = s.questions[id];
-  if (ok && !q && !retireNew) return false; // practice papers never drain tier pools
+  if (ok && !q && !retireNew) return false; // a caller that must not retire new questions (papers retire since 27 Nov 2026)
   if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
   const a = ok ? q?.a : (picked ?? '').slice(0, PICK_MAX);
   const keep = a != null ? { a } : {};

@@ -4,6 +4,7 @@ import { isPpId } from './pastpaper.ts';
 export interface Seen {
   s: number; // 0 retired, 1-3 retest step
   h?: 1; // a held passage-set retest: never asked (store.ts QState.h)
+  w?: number; // times wrong (store.ts QState.w)
   due: number;
 }
 
@@ -176,14 +177,16 @@ export const MIXES: Record<string, { label: string; mix: Mix }> = {
 
 /**
  * WA/SA practice paper across chosen topics: questions are spread evenly over the topics and
- * split by level per the mix. Unseen questions first, then due retests, then retests not due yet; never a question
- * answered right (owner, 27 Nov 2026), so a paper can come out shorter once the topics are nearly done.
+ * split by level per the mix. Unseen questions first, then due retests, then retests not due yet and questions corrected
+ * after a mistake; never one right the first time (owner, 27 Nov 2026), so a paper can come out shorter.
  */
 export function pickPaper(
   qs: { id: string; topic: string; level: keyof Mix }[], seen: Record<string, Seen | undefined>,
   n: number, mix: Mix, now = Date.now(), rand = Math.random,
 ): string[] {
-  qs = qs.filter((q) => seen[q.id]?.s !== 0 && !seen[q.id]?.h); // answered right, or a held passage retest: never asked (27 Nov 2026)
+  // owner, 27 Nov 2026: a paper may reuse a question that was wrong and later corrected (s 0, w > 0), never one right the
+  // first time (s 0, w 0) nor a held passage retest
+  qs = qs.filter((q) => { const x = seen[q.id]; return !x || (!x.h && (x.s > 0 || (x.w ?? 0) > 0)); });
   const topics = shuffle([...new Set(qs.map((q) => q.topic))], rand); // random start, so every topic gets a turn
   const rank = (id: string) => (!seen[id] ? 0 : (seen[id]!.s > 0 && seen[id]!.due <= now) ? 1 : 2);
   const levels = Object.keys(mix) as (keyof Mix)[];

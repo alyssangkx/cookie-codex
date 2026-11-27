@@ -1397,8 +1397,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
   }
 
   /**
-   * Submit a paper: every answer goes through the same answer() as a tier quiz, with retireNew = false (papers never
-   * retire new questions), so wrong and blank answers are due again in 1, 3 and 7 days exactly as before.
+   * Submit a paper: every answer goes through the same answer() as a tier quiz (owner, 27 Nov 2026: a question right the
+   * first time retires here too), so wrong and blank answers are due again in 1, 3 and 7 days exactly as before.
    */
   function submitPaper(timeUp: boolean) {
     if (!draft || !draftCurrent(draft)) {
@@ -1412,8 +1412,8 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     quiz.forEach((id, k) => {
       const q = byId.get(id)!, p = picks[k];
       const ok = p === q.answer;
-      // retireNew = false: papers never retire new questions. A blank is LEFT_BLANK, or '' (time ran out) when handed in at zero
-      if (answer(s, id, ok, now, false, ok ? undefined : p == null ? (timeUp ? undefined : LEFT_BLANK) : q.options[p], shortRetest(id))) retests++;
+      // right the first time retires it (27 Nov 2026). A blank is LEFT_BLANK, or '' (time ran out) when handed in at zero
+      if (answer(s, id, ok, now, true, ok ? undefined : p == null ? (timeUp ? undefined : LEFT_BLANK) : q.options[p], shortRetest(id))) retests++;
       if (ok) score++;
       else wrongs.push({ q, chose: p ?? -1, tag: p == null ? (timeUp ? 'ran_out_of_time' : 'blank') : q.explain[p]?.tag ?? 'wrong' });
     });

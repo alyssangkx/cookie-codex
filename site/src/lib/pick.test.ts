@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pickTier, pickReview, wholePassages, reviewPassages, type Seen, pickPool, pickPassage } from './pick.ts';
+import { pickTier, pickReview, wholePassages, reviewPassages, type Seen, pickPool, pickPassage, pickPaper } from './pick.ts';
 
 const ids = Array.from({ length: 30 }, (_, i) => `q${i}`);
 const NOW = 1_000_000;
@@ -224,4 +224,10 @@ test('pickPassage: never a passage with a blank already answered; [] when all ar
   assert.deepEqual(pickTier(['z', 'y'], held, 10, Date.now()), ['y'], 'a held passage retest is never asked');
   assert.deepEqual(pickReview(['z'], held), []);
   assert.deepEqual(pickPassage(ids, { a2: { s: 1, due: 0 }, b1: { s: 0, due: 0 } }, Date.now(), passage), []);
+});
+
+test('pickPaper: reuses questions corrected after a mistake, never ones right the first time (owner, 27 Nov 2026)', () => {
+  const qs = ['new', 'first', 'fixed', 'held'].map((id) => ({ id, topic: 't', level: 'basic' as const }));
+  const seen = { first: { s: 0, due: 0, w: 0 }, fixed: { s: 0, due: 0, w: 2 }, held: { s: 1, due: 0, w: 1, h: 1 as const } } as Record<string, Seen>;
+  assert.deepEqual(pickPaper(qs, seen, 10, { basic: 1, intermediate: 0, competent: 0 }, Date.now(), () => 0.5), ['new', 'fixed']);
 });

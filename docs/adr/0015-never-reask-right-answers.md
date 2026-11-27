@@ -23,5 +23,6 @@ never lock while passage retests are off; it is never counted as mastered, right
 already right is never turned into a held one. Retests come back on by deleting `h` (no other data is lost). An old tab
 (an earlier build) ignores `h` and may ask a held question and drop the flag; the next load of its bank holds it again. Until a Daily Review has loaded
 every bank, an old pending passage retest still shows in the Daily Review count; that review then holds it and may say
-"Nothing to review today" once. A question answered right in a practice paper still does not retire (papers never do), so
-it can come up later in a tier quiz: open question for the owner.
+"Nothing to review today" once. Practice papers (owner, 27 Nov 2026): a question right the first time in a paper
+retires, as in a tier quiz; a paper reuses questions corrected after a mistake (`s 0, w > 0`) but never one right the
+first time. Papers still never clear tiers (they pass no tier ids).
