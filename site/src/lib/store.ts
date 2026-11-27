@@ -32,7 +32,10 @@ export type TierState = { passes: string[]; scores: number[]; best: number; clea
 // Since 20 Nov 2026 a newer build stores the bank-set hash it parked against (`banksHash` in train.ts) instead of true;
 // a state parked by any other bank set (an older tab writes true) still counts toward reviewDueCount, so it cannot hide
 // Daily Review until this build has re-checked it. Older code treats any truthy value as parked.
-export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true | string };
+// h: a passage-set question answered wrong is held, not retested (owner, 27 Nov 2026: "excluded for the time being").
+// It is stored done (s 0) so it is never asked or counted as due; h keeps it apart from a real pass, so retests can be
+// switched back on later (s 0, w > 0, h 1 -> s 1). Optional: no schema bump.
+export type QState = { s: 0 | 1 | 2 | 3; due: number; w: number; a?: string; parked?: true | string; h?: 1 };
 export const PICK_MAX = 120; // characters of a picked option (or of a typed sentence, cut with … by the quiz) kept in the save (512 KB cap)
 export const LEFT_BLANK = '\u2205'; // "∅": a paper question left blank on purpose (never an option's text)
 export interface Attempt {
@@ -372,12 +375,16 @@ export function liveStreak(s: SaveV1, now = Date.now()) {
  *  passed (1 Crumb each at the finish). */
 /** `short` (ADR 0011, a past-paper question of a one-pool sub-topic): a wrong answer comes back after 1 day, and a correct
  *  answer at that due retest retires it (counts toward the milestones); no 3- and 7-day steps. */
-export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string, short = false): boolean {
+export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), retireNew = true, picked?: string, short = false, inPassage = false): boolean {
   const q = s.questions[id];
   if (ok && !q && !retireNew) return false; // practice papers never drain tier pools
   if (q?.parked) delete q.parked; // the question exists after all: answering always unparks
   const a = ok ? q?.a : (picked ?? '').slice(0, PICK_MAX);
   const keep = a != null ? { a } : {};
+  if (!ok && inPassage) { // a passage-set question is not retested for now (QState.h)
+    s.questions[id] = { s: 0, due: 0, w: (q?.w ?? 0) + 1, h: 1, ...keep };
+    return false;
+  }
   if (!ok) {
     s.questions[id] = { s: 1, due: now + DAY, w: (q?.w ?? 0) + 1, ...keep };
   } else if (!q) {
@@ -394,6 +401,15 @@ export function answer(s: SaveV1, id: string, ok: boolean, now = Date.now(), ret
 }
 
 export const isNew = (s: SaveV1, id: string) => !s.questions[id];
+/** Hold the retests of these passage-set questions (QState.h): pending ones from before 27 Nov 2026. Re-reads the stored
+ *  save and saves only when something changed (like syncParkedStored). Returns the stored save. */
+export function holdPassageRetests(ids: Iterable<string>): SaveV1 {
+  const s = load();
+  let n = 0;
+  for (const id of ids) { const q = s.questions[id]; if (q && q.s > 0) { s.questions[id] = { s: 0, due: 0, w: q.w, h: 1, ...(q.a != null ? { a: q.a } : {}) }; n++; } }
+  if (n) save(s);
+  return s;
+}
 /** A retest that is due now. Parked states (id in no bank at the last Daily Review) are skipped unless the caller
  *  already knows the id is in a bank (`ignoreParked`). */
 export const isDue = (s: SaveV1, id: string, now = Date.now(), ignoreParked = false) => {

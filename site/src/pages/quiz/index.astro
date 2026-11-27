@@ -97,7 +97,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 <script>
   import { MIN_POOL,
     load, save, answer, finishQuiz, mergeRetests, beginQuiz, dayBlock, blockMessage, triesUsedUp, tierOpen, minutesFor,
-    QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, revisionDue, type Tier, type SaveV1, type QuizResult,
+    QUIZ_SIZE, tierState, poolProgress, TIER_NAME, MILESTONE_NAME, LEFT_BLANK, closeStalePapers, syncParkedStored, holdPassageRetests, revisionDue, type Tier, type SaveV1, type QuizResult,
   PICK_MAX,
   } from '../../lib/store';
   import { stopLine, stopWord, poolRightText } from '../../lib/section';
@@ -349,7 +349,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       indexMembers();
       quiz = pickTier(gen, load().questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
       notice += ppNote(limit, 'quiz');
-      return quiz.length >= QUIZ_SIZE ? '' : 'This tier does not have enough questions right now. Try again later.';
+      return quiz.length ? '' : 'You have answered every question here. Any you got wrong come back in Daily Review.';
     }
     if (mode === 'paper' && keep()) return `${ppReason(limit)}. ${KEPT}`; // asked now: the paper may have come due meanwhile
     if (mode === 'tier') {
@@ -411,19 +411,21 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       // only Daily Review loads every bank, so only it parks retests whose question is gone; any page unparks the ids it
       // loaded (an older tab missing newer bank files may have parked them). Nothing is deleted (ADR 0002).
       // the save as stored now, not `s` from before the await: another tab may have bought or earned meanwhile
-      const cur = syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
+      syncParkedStored(all.map((q) => q.id), mode === 'review' && !ppFailed, meta.banks);
+      // retests of passage-set questions pending from before 27 Nov 2026 are held too (store.ts QState.h)
+      const cur = holdPassageRetests(all.filter((q) => passage(q.id)).map((q) => q.id));
       if (POOL) {
         if (ppFailed) return stop('Past-paper questions could not load. Check your connection and try again.');
         const pool = easierFirst(all.filter((q) => q.sub === subId) as { id: string; ord?: number | null }[]);
         // a cloze section: one whole passage per quiz, every blank (owner, 24 Nov 2026); else the usual 10 questions
         quiz = WHOLE.has(subId) && pool.some((id) => passage(id)) ? pickPassage(pool, cur.questions, Date.now(), passage)
           : pickPool(pool, cur.questions, QUIZ_SIZE, Date.now(), passage);
-        if (quiz.length < (WHOLE.has(subId) ? 2 : QUIZ_SIZE)) return stop('This topic does not have enough questions yet.');
+        if (!quiz.length) return stop('You have answered every question here. Any you got wrong come back in Daily Review.');
       } else if (mode === 'tier') {
         const ids = all.filter((q) => q.sub === subId && q.level === LEVEL[tier]).map((q) => q.id);
         const side = all.filter((q) => q.sub === subId && q.level !== LEVEL[tier]).map((q) => q.id);
         quiz = pickTier(ids, cur.questions, QUIZ_SIZE, Date.now(), Math.random, side, passage);
-        if (quiz.length < QUIZ_SIZE) return stop('This tier does not have enough questions yet. Try another tier.');
+        if (!quiz.length) return stop('You have answered every question here. Any you got wrong come back in Daily Review.');
       } else if (mode === 'paper') {
         quiz = pickPaper(all as any, cur.questions, paperN, paperMix.mix);
       } else {
@@ -1010,7 +1012,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
     for (const b of boxes) {
       const q = byId.get(b.dataset.id!)!, v = b.value.trim();
       const ok = !!v && typedOk(null, [v], q.typed!.accept);
-      if (answer(sv, q.id, ok, now, true, ok ? undefined : v ? (v.length > PICK_MAX ? `${v.slice(0, PICK_MAX - 1)}…` : v) : timeUp ? undefined : LEFT_BLANK, shortRetest(q.id))) retestsPassed++;
+      if (answer(sv, q.id, ok, now, true, ok ? undefined : v ? (v.length > PICK_MAX ? `${v.slice(0, PICK_MAX - 1)}…` : v) : timeUp ? undefined : LEFT_BLANK, shortRetest(q.id), !!passage(q.id))) retestsPassed++;
       if (ok) { score++; right++; } else wrongs.push({ q, chose: -1, tag: v ? 'typed' : timeUp ? 'ran_out_of_time' : 'blank', typed: v });
       if (!filledBlanks.has(g)) filledBlanks.set(g, new Map());
       filledBlanks.get(g)!.set(q.seq!, { t: ok ? v : q.typed!.accept[0], ok });
@@ -1211,7 +1213,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
       const k = p == null ? -1 : ui.kind === 'dialogue' ? optionIndex(o.options, ui.phrases[p]) : p;
       const text = k >= 0 ? o.options[k] : p != null ? ui.phrases[p] : null; // a phrase not among this row's options is still shown
       const ok = k === o.answer;
-      if (answer(sv, o.id, ok, now, true, ok ? undefined : text != null ? clip(text) : timeUp ? undefined : LEFT_BLANK, shortRetest(o.id))) retestsPassed++;
+      if (answer(sv, o.id, ok, now, true, ok ? undefined : text != null ? clip(text) : timeUp ? undefined : LEFT_BLANK, shortRetest(o.id), !!passage(o.id))) retestsPassed++;
       if (ok) { score++; right++; } else wrongs.push({ q: o, chose: k, tag: k >= 0 ? o.explain[k]?.tag ?? 'wrong' : p != null ? 'wrong' : timeUp ? 'ran_out_of_time' : 'blank' });
       got.set(o.id, { k, text });
       marks.set(o.seq!, ok ? { kind: 'right', answer: o.options[o.answer] } : { kind: 'wrong', picked: text, answer: o.options[o.answer] });
@@ -1270,7 +1272,7 @@ const data = JSON.stringify(meta).replace(/</g, '\\u003c');
 
   function record(id: string, ok: boolean, picked?: string) {
     const s = load();
-    if (answer(s, id, ok, Date.now(), true, picked, shortRetest(id))) retestsPassed++; // tier quizzes and Daily Review only: papers record in submitPaper()
+    if (answer(s, id, ok, Date.now(), true, picked, shortRetest(id), !!passage(id))) retestsPassed++; // tier quizzes and Daily Review only: papers record in submitPaper()
     save(s);
   }
 

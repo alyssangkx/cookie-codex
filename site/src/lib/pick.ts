@@ -19,8 +19,9 @@ const shuffle = <T>(xs: T[], rand: () => number) => {
  * 1. up to 3 due retests (never more than 30%), from this tier or, via `sideRetests`, from other
  *    tiers of the same sub-topic, so the retest backlog drains;
  * 2. new questions from this tier;
- * 3. if new ones run short: retests from this tier that are not due yet;
- * 4. then retired questions again, so a pass is always earned on a full quiz.
+ * 3. if new ones run short: retests from this tier that are not due yet.
+ * A question answered right is never asked again (owner, 27 Nov 2026: only wrong answers come back), so a quiz near the
+ * end of a tier is shorter than `size`; nor is an answered question of a passage set (its wrong ones are held, QState.h).
  */
 export function pickTier(
   ids: string[], seen: Record<string, Seen | undefined>, size = 10, now = Date.now(), rand = Math.random,
@@ -37,29 +38,28 @@ export function pickTier(
   // questions come first (each kind shuffled on its own); generated ones only fill the quiz
   const unseen = ids.filter((id) => !seen[id]);
   const fresh = ordered ? unseen : [...shuffle(unseen.filter(isPpId), rand), ...shuffle(unseen.filter((id) => !isPpId(id)), rand)];
-  const retired = shuffle(ids.filter((id) => seen[id]?.s === 0), rand);
   const take = due.slice(0, Math.min(3, Math.floor(size * 0.3)));
   const out = [...take, ...fresh.slice(0, size - take.length)];
-  const spare = [...due.slice(take.length).filter((id) => ids.includes(id)), ...notDue, ...retired];
+  const spare = [...due.slice(take.length).filter((id) => ids.includes(id)), ...notDue];
   while (out.length < size && spare.length) {
     const id = spare.shift()!;
     if (!out.includes(id)) out.push(id);
   }
-  if (passage && out.some((id) => passage(id))) return wholePassages(out, ids, passage, size, new Set(take), (id) => !!seen[id]);
+  if (passage && out.some((id) => passage(id)))
+    return wholePassages(out, ids.filter((id) => !(seen[id] && passage(id))), passage, size, new Set(take), (id) => !!seen[id]);
   return ordered ? out : shuffle(out, rand);
 }
 
 /** A cloze section's quiz (owner, 24 Nov 2026: "if there are 15 blanks, then the quiz needs 15 questions"): ONE passage,
- *  whole, every blank in passage order. The passage holding the most overdue retest first; else the first passage (in
- *  `ids` order, easier-first) with a blank never answered; else the passage with the earliest retest; else the first. */
-export function pickPassage(all: string[], seen: Record<string, Seen | undefined>, now = Date.now(),
-  passage: (id: string) => { group: string; seq: number } | undefined = () => undefined, rand = Math.random): string[] {
+ *  whole, every blank in passage order: the first passage (in `ids` order, easier-first) with no blank answered yet.
+ *  An answered passage is never asked again (owner, 27 Nov 2026: right answers retire, wrong ones in a passage are held);
+ *  [] when every passage has been done. */
+export function pickPassage(all: string[], seen: Record<string, Seen | undefined>, _now = Date.now(),
+  passage: (id: string) => { group: string; seq: number } | undefined = () => undefined): string[] {
   const ids = all.filter((id) => passage(id)); // a question outside any passage is never a "passage of one"
   const group = (id: string) => passage(id)!.group;
-  const due = ids.filter((id) => (seen[id]?.s ?? 0) > 0 && seen[id]!.due <= now).sort((a, b) => seen[a]!.due - seen[b]!.due);
-  const later = ids.filter((id) => (seen[id]?.s ?? 0) > 0).sort((a, b) => seen[a]!.due - seen[b]!.due);
-  // every passage done and nothing pending: any passage, at random (never the same first one for ever)
-  const pickId = due[0] ?? ids.find((id) => !seen[id]) ?? later[0] ?? ids[Math.floor(rand() * ids.length)];
+  const done = new Set(ids.filter((id) => seen[id]).map(group));
+  const pickId = ids.find((id) => !done.has(group(id)));
   if (pickId == null) return [];
   const g = group(pickId);
   return ids.filter((id) => group(id) === g).sort((a, b) => (passage(a)?.seq ?? 0) - (passage(b)?.seq ?? 0));
@@ -174,13 +174,14 @@ export const MIXES: Record<string, { label: string; mix: Mix }> = {
 
 /**
  * WA/SA practice paper across chosen topics: questions are spread evenly over the topics and
- * split by level per the mix. Unseen questions first, then due retests, then anything else,
- * so a paper never runs dry even after a topic is mastered.
+ * split by level per the mix. Unseen questions first, then due retests, then retests not due yet; never a question
+ * answered right (owner, 27 Nov 2026), so a paper can come out shorter once the topics are nearly done.
  */
 export function pickPaper(
   qs: { id: string; topic: string; level: keyof Mix }[], seen: Record<string, Seen | undefined>,
   n: number, mix: Mix, now = Date.now(), rand = Math.random,
 ): string[] {
+  qs = qs.filter((q) => seen[q.id]?.s !== 0); // answered right (or a held passage question): never asked again (27 Nov 2026)
   const topics = shuffle([...new Set(qs.map((q) => q.topic))], rand); // random start, so every topic gets a turn
   const rank = (id: string) => (!seen[id] ? 0 : (seen[id]!.s > 0 && seen[id]!.due <= now) ? 1 : 2);
   const levels = Object.keys(mix) as (keyof Mix)[];

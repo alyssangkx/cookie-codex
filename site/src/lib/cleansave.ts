@@ -107,7 +107,7 @@ export function cleanSave(raw: unknown): SaveV1 {
     const q = obj(v);
     if (!Object.keys(q).length) continue;
     const step = [0, 1, 2, 3].includes(q.s as number) ? (q.s as 0 | 1 | 2 | 3) : 0;
-    s.questions[id.slice(0, 120)] = { s: step, due: num(q.due), w: num(q.w, 0, 100000), ...(typeof q.a === 'string' ? { a: q.a.slice(0, PICK_MAX) } : {}), ...(q.parked === true ? { parked: true as const } : typeof q.parked === 'string' && /^[a-z0-9]{1,16}$/.test(q.parked) ? { parked: q.parked } : {}) };
+    s.questions[id.slice(0, 120)] = { s: step, due: num(q.due), w: num(q.w, 0, 100000), ...(typeof q.a === 'string' ? { a: q.a.slice(0, PICK_MAX) } : {}), ...(q.parked === true ? { parked: true as const } : typeof q.parked === 'string' && /^[a-z0-9]{1,16}$/.test(q.parked) ? { parked: q.parked } : {}), ...(q.h === 1 ? { h: 1 as const } : {}) };
   }
 
   for (const [slug, v] of entries(r.cards)) {

@@ -416,7 +416,7 @@ const data = {
    *  the answer picked on the last wrong try, and where it stands now. */
   function qItem(bq: BQ, q: QState, now: number, samePage = false, extra = '') {
     const status = q.s > 0 ? (q.due <= now ? '<span class="due-late">retest due now</span>' : `retest due ${esc(fmtDate(q.due))}`)
-      : q.w > 0 ? 'answered right since (mastered)' : 'right first time (mastered)';
+      : q.h ? 'in a passage set: not retested for now' : q.w > 0 ? 'answered right since (mastered)' : 'right first time (mastered)';
     const right = `Right answer: <b>${bold(bq.typed ? bq.typed.accept[0] : bq.options[bq.answer] ?? '')}</b>`;
     const theirs = q.w === 0 ? '' : q.a == null ? 'Their answer: not recorded (before 19 Nov 2026)'
       : q.a === '' ? 'Their answer: none (time ran out)' : q.a === LEFT_BLANK ? 'Their answer: left blank' : `Their answer: ${bold(q.a)}`;
@@ -499,7 +499,7 @@ const data = {
       const list = P.subs.filter((x) => x.school === school.id);
       if (!list.length) continue;
       const all = subjectTried(school.id), avail = list.reduce((n, x) => n + (x.content ? x.avail : 0), 0);
-      const first = all.filter(([, x]) => x.s === 0 && x.w === 0).length, later = all.filter(([, x]) => x.s === 0 && x.w > 0).length;
+      const first = all.filter(([, x]) => x.s === 0 && x.w === 0).length, later = all.filter(([, x]) => x.s === 0 && x.w > 0 && !x.h).length;
       const learning = all.length - first - later, wrong = all.filter(([, x]) => x.w > 0).length;
       const pc = (n: number) => (all.length ? (100 * n) / all.length : 0);
       const pie = all.length ? `conic-gradient(var(--ok) 0 ${pc(first)}%, var(--r-ancient) 0 ${pc(first + later)}%, var(--berry) 0 100%)` : 'var(--crust)';

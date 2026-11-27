@@ -716,3 +716,11 @@ test('assignedPending: an assignment is done once a quiz on it finishes after it
   const c = cleanSave({ ...s, assigned: [...s.assigned, { sub: 'x', name: 'X', href: 'javascript:alert(1)', ts: 1 }, { sub: 'y', href: '//evil.example/', ts: 1 }] });
   assert.deepEqual(c.assigned!.map((a) => a.sub), ['math-a', 'math-b']); // only sub-topic page links survive
 });
+
+test('answer: a wrong passage-set answer is held (done, not a retest)', () => {
+  const s = fresh();
+  answer(s, 'p1', false, 1000, true, 'went', false, true);
+  assert.deepEqual(s.questions.p1, { s: 0, due: 0, w: 1, h: 1, a: 'went' });
+  answer(s, 'q1', false, 1000, true, 'x');
+  assert.equal(s.questions.q1.s, 1, 'outside a passage a wrong answer is still a retest');
+});

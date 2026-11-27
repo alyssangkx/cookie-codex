@@ -16,14 +16,12 @@ test('tier quiz: no retired questions, at most 3 due retests, rest new', () => {
   assert.equal(quiz.filter((id) => seen[id]).length, 3);
 });
 
-test('tier quiz: always full; not-due retests, then retired questions, fill a shortage', () => {
+test('tier quiz: not-due retests fill a shortage; questions answered right never do (owner, 27 Nov 2026)', () => {
   const seen: Record<string, Seen> = {};
   ids.forEach((id, i) => (seen[id] = i < 26 ? { s: 0, due: 0 } : { s: 2, due: NOW + 1000 })); // 4 not due
   delete seen.q0; // 1 new
   const quiz = pickTier(ids, seen, 10, NOW);
-  assert.equal(quiz.length, 10);
-  assert.equal(new Set(quiz).size, 10);
-  assert.ok(quiz.includes('q0') && ['q26', 'q27', 'q28', 'q29'].every((id) => quiz.includes(id)));
+  assert.deepEqual([...quiz].sort(), ['q0', 'q26', 'q27', 'q28', 'q29'], 'the new one and the 4 not-due retests, nothing retired');
 });
 
 test('tier quiz: due retests from other tiers of the sub-topic count toward the 3', () => {
@@ -182,8 +180,7 @@ test('a passage longer than the quiz starts at its first blank not answered yet 
   assert.deepEqual(out.map((id) => passage(id)!.seq), [51, 52, 53, 54, 55, 56, 57, 58, 59, 60], 'a new child starts at blank 51');
   const seen: Record<string, Seen> = Object.fromEntries(set.slice(0, 10).map((id) => [id, { s: 0, due: 0 } as Seen]));
   const next = pickPool(easierFirst, seen, 10, NOW, passage);
-  assert.equal(passage(next[0])!.seq, 56, 'the next quiz reads on (the last 10 blanks, from 56, ending at 65)');
-  assert.ok(next.some((id) => passage(id)!.seq === 61), 'and includes the blanks not done yet');
+  assert.deepEqual(next.map((id) => passage(id)!.seq), [61, 62, 63, 64, 65], 'the next quiz reads on: only the blanks not done yet');
 });
 
 test('pickPassage: a cloze quiz is one whole passage, every blank in order (owner: 15 blanks, 15 questions)', () => {
@@ -194,9 +191,34 @@ test('pickPassage: a cloze quiz is one whole passage, every blank in order (owne
   const doneB: Record<string, Seen> = Object.fromEntries(B.map((id) => [id, { s: 0, due: 0 } as Seen]));
   assert.deepEqual(pickPassage(ids, doneB, NOW, passage), A, 'then the next passage with blanks never answered: all 15');
   const dueA = { ...doneB, a3: { s: 1, due: NOW - 1 } as Seen };
-  assert.deepEqual(pickPassage(ids, dueA, NOW, passage), A, 'a due retest brings its whole passage back');
+  assert.deepEqual(pickPassage(ids, dueA, NOW, passage), [], 'a passage with an answered blank is not asked again (27 Nov 2026)');
   assert.deepEqual(pickPassage([], {}, NOW, passage), []);
-  const all = Object.fromEntries([...A, ...B].map((id) => [id, { s: 0, due: 0 } as Seen]));
-  assert.deepEqual(pickPassage(ids, all, NOW, passage, () => 0.99), B.slice().sort((a, b) => passage(a).seq - passage(b).seq).length === 5 && passage(ids[ids.length - 1]).group === 'b' ? B : A, 'all done: a random passage (the draw picks the last id)');
   assert.deepEqual(pickPassage(['lone', ...B], {}, NOW, (id) => (id === 'lone' ? undefined : passage(id))), B, 'an ungrouped question is skipped');
+});
+
+// owner, 27 Nov 2026: a question answered right is never asked again; only wrong answers come back. A wrong answer in a
+// passage set is held (stored done with h: 1), so its passage is never asked again either.
+test('pickTier never refills with questions answered right: the quiz gets shorter', () => {
+  const ids = Array.from({ length: 12 }, (_, i) => `q${i}`);
+  const seen: Record<string, Seen> = {};
+  for (let i = 0; i < 9; i++) seen[`q${i}`] = { s: 0, due: 0 };
+  const q = pickTier(ids, seen, 10, Date.now(), () => 0.5);
+  assert.deepEqual([...q].sort(), ['q10', 'q11', 'q9']);
+  assert.deepEqual(pickTier(ids, Object.fromEntries(ids.map((id) => [id, { s: 0, due: 0 }])), 10), []);
+});
+
+test('pickTier with passages: answered blanks are not asked again; the passage carries on from its first new blank', () => {
+  const ids = ['a1', 'a2', 'a3', 'a4', 'b1', 'b2'];
+  const passage = (id: string) => ({ group: id[0], seq: Number(id[1]) });
+  const seen: Record<string, Seen> = { a1: { s: 0, due: 0 }, a2: { s: 0, due: 0 } };
+  const q = pickTier(ids, seen, 10, Date.now(), () => 0.5, [], passage);
+  assert.ok(!q.includes('a1') && !q.includes('a2'), String(q));
+  assert.deepEqual([...q].sort(), ['a3', 'a4', 'b1', 'b2']);
+});
+
+test('pickPassage: never a passage with a blank already answered; [] when all are done', () => {
+  const ids = ['a1', 'a2', 'b1', 'b2'];
+  const passage = (id: string) => ({ group: id[0], seq: Number(id[1]) });
+  assert.deepEqual(pickPassage(ids, { a2: { s: 0, due: 0 } }, Date.now(), passage), ['b1', 'b2']);
+  assert.deepEqual(pickPassage(ids, { a2: { s: 1, due: 0 }, b1: { s: 0, due: 0 } }, Date.now(), passage), []);
 });
