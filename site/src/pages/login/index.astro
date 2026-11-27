@@ -68,8 +68,9 @@ import Base from '../../layouts/Base.astro';
   // asks for the check the PIN is held and resent ONCE when the check passes (a second refusal clears it: no loop).
   let waitingForCheck = false, resent = false, broken = false;
   const NO_CHECK = 'The "I am human" check could not load. Check the internet connection and reload the page.';
-  const onSolved = () => { if (waitingForCheck && pin.length === 4 && !busy) { waitingForCheck = false; void submit(); } };
-  const onError = () => { broken = true; if (waitingForCheck) { waitingForCheck = false; pin = ''; paint(); say(NO_CHECK); } };
+  const onSolved = () => { broken = false; if (waitingForCheck && pin.length === 4 && !busy) { waitingForCheck = false; void submit(); } };
+  // Turnstile also reports passing errors and often retries by itself: keep a held PIN (sent if it then passes), only warn
+  const onError = () => { broken = true; if (waitingForCheck) say('The "I am human" check is having trouble. If it does not pass in a moment, reload the page.'); };
   const showCaptcha = () => (mounting ??= mountCaptcha($('captcha'), onSolved, onError).then((c) => { captcha = c; }).catch(() => { mounting = null; }));
   if (!kv.get('device-token')) void showCaptcha();
   const dots = [...$('dots').querySelectorAll('i')];
