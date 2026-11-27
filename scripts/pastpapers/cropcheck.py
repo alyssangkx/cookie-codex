@@ -169,7 +169,9 @@ def pack(a):
         for it in items:
             f.write(json.dumps(it) + "\n")
     gate = []
-    for gid, dirs, kind, expect in GATE:
+    # WORK/gate_extra.jsonl {id, expect}: more known cases, taken from the --out selection (queue 48, 27 Nov 2026)
+    extra = [(x["id"], [Path(a.out).name], "webp", x["expect"]) for x in jl(WORK / "gate_extra.jsonl")] if (WORK / "gate_extra.jsonl").exists() else []
+    for gid, dirs, kind, expect in GATE + extra:
         row = None
         for d in dirs:
             row = next((r for r in jl(Path(a.out).parent / d / a.subject / "selected.jsonl") if r["id"] == gid), None)
@@ -233,7 +235,7 @@ def ask(llm, sp, cases, prompt_idx):
             {"type": "image_url", "image_url": {"url": "file://" + c["img"]}},
             {"type": "image_url", "image_url": {"url": "file://" + c["page"]}},
             {"type": "text", "text": txt}]}])
-    outs = llm.chat(msgs, sp, use_tqdm=False)
+    outs = llm.chat(msgs, sp, use_tqdm=False, **({"chat_template_kwargs": {"enable_thinking": False}} if os.environ.get("PP_NO_THINK") else {}))
     return [parse_answer(o.outputs[0].text) for o in outs]
 
 
@@ -256,6 +258,20 @@ def gate_verdict(cases, answers):
     return res
 
 
+def gate_passed(cases, res) -> bool:
+    """Up to 20 gate items: every one right. More (queue 48): catches >= 90% of the known-bad and wrongly fails <= 5% of the
+    known-good, because a strict all-right rule over 70 crops would reject a model for one borderline call."""
+    if len(res) <= 20:
+        return all(res.values())
+    exp = {c["name"]: c["expect"] for c in cases}
+    bad = [v for k, v in res.items() if exp[k] == "fail"]
+    good = [v for k, v in res.items() if exp[k] == "pass"]
+    recall, false_fail = sum(bad) / max(1, len(bad)), (len(good) - sum(good)) / max(1, len(good))
+    print(f"gate: caught {sum(bad)}/{len(bad)} bad ({recall:.0%}), wrongly failed {len(good) - sum(good)}/{len(good)} good "
+          f"({false_fail:.0%})", flush=True)
+    return recall >= 0.9 and false_fail <= 0.05
+
+
 def gate(a):
     cases = gate_cases()
     llm, sp = run_model()
@@ -267,7 +283,7 @@ def gate(a):
         print(f"gate prompt {i}: " + ", ".join(f"{k}={'ok' if v else 'WRONG'}" for k, v in res.items()), flush=True)
         for c, x in zip(cases, ans):
             print("  ", c["key"], "expect", c["expect"], json.dumps(x), flush=True)
-        if all(res.values()):
+        if gate_passed(cases, res):
             Path(SERVER_BASE).mkdir(parents=True, exist_ok=True)
             (Path(SERVER_BASE) / "prompt.txt").write_text(str(i))
             print(f"GATE PASSED prompt {i}")
