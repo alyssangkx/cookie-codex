@@ -113,7 +113,8 @@ def run(items_file):
     from PIL import Image
     items_file = Path(items_file).resolve()
     pp = Path(os.environ.get("PP_ROOT", "/data/alvin/cookie/pastpapers_full"))
-    out = items_file.with_name(os.environ.get("PP_OUT", "read.jsonl"))
+    _px = int(os.environ.get("PP_IMGPX", "1960"))  # another size writes its own reads unless PP_OUT says otherwise
+    out = items_file.with_name(os.environ.get("PP_OUT", "read.jsonl" if _px == 1960 else f"read{_px}.jsonl"))
     done = {r["sec"] for r in jl(out)}
     # queue 46 (27 Nov 2026): a re-read at higher resolution uses its own image folder (PP_IMGDIR) and size (PP_IMGPX, long edge)
     px = int(os.environ.get("PP_IMGPX", "1960"))

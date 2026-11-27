@@ -141,10 +141,12 @@ def _used():
                     ids.add(r["id"])
     for p in jl(P.WORK / "passages.jsonl"):
         sigs.add(" ".join(P.plain(p["passage"]).split()))
-    if OUT != DEFAULT_OUT:  # a later batch: the first passage3 batch's passages and shipped sets count as used too
-        for p in jl(DEFAULT_OUT / "passages3.jsonl"):
+    # every OTHER batch (the first passage3 folder and any PP3_WORK batch, e.g. passage46/p3): its passages and shipped
+    # sets count as used, so no batch ships a passage or set id another batch already has
+    for d in {Path(x).resolve() for x in [str(DEFAULT_OUT), *glob.glob(str(P.TMP / "passage*" / "p3"))]} - {OUT.resolve()}:
+        for p in jl(d / "passages3.jsonl"):
             sigs.add(" ".join(P.plain(p["passage"]).split()))
-        for f in glob.glob(str(DEFAULT_OUT / "ship*" / "english" / "*.jsonl")):
+        for f in glob.glob(str(d / "ship*" / "english" / "*.jsonl")):
             for r in jl(f):
                 grps.add(r["grp"]) if r.get("grp") else None
                 ids.add(r["id"]) if r.get("id") else None
