@@ -19,13 +19,13 @@ export type Captcha = { shown: boolean; token(): string | undefined; reset(): vo
 /** Show the widget in `el` (once). token() is undefined until it is solved; reset() after every server try.
  *  onSolved runs each time a fresh token arrives (the login page then sends the PIN it is holding, so the child never
  *  types the PIN twice: owner, 27 Nov 2026). */
-export async function mountCaptcha(el: HTMLElement, onSolved?: () => void): Promise<Captcha> {
+export async function mountCaptcha(el: HTMLElement, onSolved?: () => void, onError?: () => void): Promise<Captcha> {
   let tok: string | undefined, id = '';
   const t = SITE_KEY ? await load() : null;
   if (t) {
     id = t.render(el, {
       sitekey: SITE_KEY, theme: 'light', size: 'flexible',
-      callback: (v: string) => { tok = v; onSolved?.(); }, 'expired-callback': () => { tok = undefined; }, 'error-callback': () => { tok = undefined; },
+      callback: (v: string) => { tok = v; onSolved?.(); }, 'expired-callback': () => { tok = undefined; }, 'error-callback': () => { tok = undefined; onError?.(); }, // e.g. a domain not on the site key's list
     });
   }
   return { shown: !!(t && id), token: () => tok, reset: () => { tok = undefined; if (t && id) t.reset(id); } };

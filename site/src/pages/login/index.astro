@@ -64,9 +64,13 @@ import Base from '../../layouts/Base.astro';
   let captcha: Captcha | null = null, mounting: Promise<void> | null = null;
   // a PIN typed before the check has finished is held, not refused: when the check passes it is sent once by itself
   // (owner, 27 Nov 2026: the child had to type the PIN twice)
-  let waitingForCheck = false;
+  // Only a new device (no device token) waits for the check before sending; elsewhere the server decides, and when it
+  // asks for the check the PIN is held and resent ONCE when the check passes (a second refusal clears it: no loop).
+  let waitingForCheck = false, resent = false, broken = false;
+  const NO_CHECK = 'The "I am human" check could not load. Check the internet connection and reload the page.';
   const onSolved = () => { if (waitingForCheck && pin.length === 4 && !busy) { waitingForCheck = false; void submit(); } };
-  const showCaptcha = () => (mounting ??= mountCaptcha($('captcha'), onSolved).then((c) => { captcha = c; }).catch(() => { mounting = null; }));
+  const onError = () => { broken = true; if (waitingForCheck) { waitingForCheck = false; pin = ''; paint(); say(NO_CHECK); } };
+  const showCaptcha = () => (mounting ??= mountCaptcha($('captcha'), onSolved, onError).then((c) => { captcha = c; }).catch(() => { mounting = null; }));
   if (!kv.get('device-token')) void showCaptcha();
   const dots = [...$('dots').querySelectorAll('i')];
   let pin = '', busy = false;
@@ -86,8 +90,8 @@ import Base from '../../layouts/Base.astro';
     if (!who.value.trim()) { say('Type your username first.'); who.focus(); return; }
     // the 4th digit already submitted: a Go tap after the reply (dots cleared) must not hide "Not quite" / "Too many tries"
     if (pin.length < 4) { if (pin || !replied) say('Your PIN has 4 digits.'); return; }
-    if (mounting) await mounting; // the check is loading: its token decides what we send
-    if (captcha?.shown && !captcha.token()) { // not finished yet: hold the PIN and send it when the check passes
+    if (!kv.get('device-token') && mounting) await mounting; // a new device: the check is loading
+    if (!kv.get('device-token') && captcha?.shown && !broken && !captcha.token()) { // not finished: hold, send when it passes
       waitingForCheck = true;
       say('Checking you are not a robot… If a box appears, tick it.');
       return;
@@ -120,13 +124,14 @@ import Base from '../../layouts/Base.astro';
         location.href = '/';
         return;
       }
-      if (status === 400 && body?.error === 'captcha_failed') { // the server wants the check: keep the PIN, send it after
+      if (status === 400 && body?.error === 'captcha_failed') { // the server wants the check: keep the PIN, resend it once
         await showCaptcha();
-        if (captcha?.shown) { waitingForCheck = true; say('Checking you are not a robot… If a box appears, tick it.'); return; }
-        pin = ''; paint();
-        say('The "I am human" check could not load. Check the internet connection and reload the page.');
+        if (captcha?.shown && !broken && !resent) { resent = true; waitingForCheck = true; say('Checking you are not a robot… If a box appears, tick it.'); return; }
+        resent = false; pin = ''; paint();
+        say(broken || !captcha?.shown ? NO_CHECK : 'The check did not go through. Tick the box again, then type your PIN.');
         return;
       }
+      resent = false;
       pin = ''; paint();
       if (status === 401) {
         const n = Number(body?.attemptsLeft);
@@ -149,7 +154,7 @@ import Base from '../../layouts/Base.astro';
 
   function press(k: string) {
     if (busy) return;
-    if (k === 'back') { pin = pin.slice(0, -1); waitingForCheck = false; }
+    if (k === 'back') { pin = pin.slice(0, -1); waitingForCheck = false; resent = false; }
     else if (pin.length < 4) pin += k;
     paint();
     if (pin.length === 4 && who.value.trim()) void submit();
@@ -157,6 +162,8 @@ import Base from '../../layouts/Base.astro';
 
   document.querySelectorAll<HTMLButtonElement>('.login-page .key[data-k]').forEach((b) => b.addEventListener('click', () => press(b.dataset.k!)));
   $('login-form').addEventListener('submit', (e) => { e.preventDefault(); void submit(); });
+  // a held PIN belongs to the name it was typed for: a new name cancels it
+  who.addEventListener('input', () => { if (waitingForCheck) { waitingForCheck = false; resent = false; pin = ''; paint(); say(''); } });
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     const inName = e.target === who;
