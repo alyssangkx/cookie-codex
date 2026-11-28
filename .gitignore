@@ -29,3 +29,6 @@ PastPapers/
 
 # Node compile cache created by test runs
 node-compile-cache/
+
+# Bun unpacks native modules into the working directory
+.bun-*.node
