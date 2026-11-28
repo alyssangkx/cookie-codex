@@ -25,11 +25,13 @@ from pathlib import Path
 
 TMP = Path("/data/alvin/tmp/cookie-codex")
 WORK = TMP / "cropcheck"
-PACK = WORK / "pack"
+PACK_NAME = os.environ.get("PP_CROP_PACK", "pack")  # another subject (pack-maths, 28 Nov 2026) keeps its own pack and results
+PACK = WORK / PACK_NAME
 DEF_OUT = TMP / "ppimport" / "sci1826b"  # the Science set live since 21 Nov 2026
 SERVER = "alvin@192.168.1.170"
 SERVER_BASE = "/data/alvin/cookie/cropcheck"
-SERVER_PACK = SERVER_BASE + "/pack"
+SERVER_PACK = SERVER_BASE + "/" + PACK_NAME
+OUT_NAME = "out" if PACK_NAME == "pack" else "out-" + PACK_NAME  # results never mix across packs
 PAGE_MAX = 1800  # longest side of the page image sent to the model
 
 # Gate: (pp id, source selection dirs to find its row, figure source, expectation). "orig" = the raw cut-off PNG crop.
@@ -46,7 +48,8 @@ GATE = [
     ("pp-87af45c055", ["sci1826b"], "webp", "pass"),
 ]
 
-BASE = ("You are checking a crop taken from a Singapore PSLE Science exam page. Image 1 is the crop. Image 2 is the full "
+SUBJECT_NAME = os.environ.get("PP_CROP_SUBJECT", "Science")  # Maths flagger run: "Mathematics"
+BASE = ("You are checking a crop taken from a Singapore PSLE " + SUBJECT_NAME + " exam page. Image 1 is the crop. Image 2 is the full "
         "page it was cut from. The crop is meant for question number {qno}. It should show the WHOLE figure, table or "
         "graph that question {qno} uses, and nothing from any other question. The wording and the answer options of "
         "question {qno} itself may appear in the crop; that is fine.\n")
@@ -169,13 +172,14 @@ def pack(a):
         for it in items:
             f.write(json.dumps(it) + "\n")
     gate = []
+    GATE_USE = [] if a.no_gate else GATE  # a flagger-only run on another subject: the gate cases are Science
     # WORK/gate_extra.jsonl {id, expect}: more known cases, taken from the --out selection (queue 48, 27 Nov 2026)
     # each extra image is frozen in WORK/gate_frozen the first time (from x["src"] when given): a later re-crop of the live file
     # must not change a case labelled from the old picture; ids already in GATE are skipped (one row per name)
     known = {g[0] for g in GATE}
     extra = [(x["id"], [Path(a.out).name], "extra", x["expect"], x.get("src")) for x in jl(WORK / "gate_extra.jsonl")
-             if x["id"] not in known] if (WORK / "gate_extra.jsonl").exists() else []
-    for gid, dirs, kind, expect, *src in [g + (None,) for g in GATE] + extra:
+             if x["id"] not in known] if (WORK / "gate_extra.jsonl").exists() and not a.no_gate else []
+    for gid, dirs, kind, expect, *src in [g + (None,) for g in GATE_USE] + extra:
         row = None
         for d in dirs:
             row = next((r for r in jl(Path(a.out).parent / d / a.subject / "selected.jsonl") if r["id"] == gid), None)
@@ -220,7 +224,7 @@ def pickup(a):
     if "QUEUE EMPTY" not in r.stdout:
         sys.exit(f"{a.tag} not finished: " + r.stdout.strip()[-120:])
     WORK.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/out/results.jsonl", str(PACK / "results.jsonl")], check=True)
+    subprocess.run(["scp", "-q", f"{SERVER}:{SERVER_BASE}/{OUT_NAME}/results.jsonl", str(PACK / "results.jsonl")], check=True)
     subprocess.run(["scp", "-q", f"{SERVER}:{done}", str(WORK / f"{a.tag}-done.txt")], check=True)
     rows = stamped(jl(PACK / "results.jsonl"), pack_stamp(PACK))
     print(f"{len(rows)} items (current pack stamp), {sum(not r['ok'] for r in rows)} failed -> {PACK / 'results.jsonl'}")
@@ -308,7 +312,7 @@ def run(a):
     P = Path(SERVER_PACK)
     pf = Path(SERVER_BASE) / "prompt.txt"
     idx = a.prompt if a.prompt is not None else int(pf.read_text()) if pf.exists() else 0
-    out = Path(SERVER_BASE) / "out" / f"results-{a.k}.jsonl"
+    out = Path(SERVER_BASE) / OUT_NAME / f"results-{a.k}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
     stamp = pack_stamp(P)
     done = {r["id"] for r in stamped(jl(out), stamp)}
@@ -341,11 +345,11 @@ def run(a):
 def merge(a):
     rows = {}
     stamp = pack_stamp(Path(SERVER_PACK))
-    for f in sorted((Path(SERVER_BASE) / "out").glob("results-*.jsonl")):
+    for f in sorted((Path(SERVER_BASE) / OUT_NAME).glob("results-*.jsonl")):
         for r in stamped(jl(f), stamp):
             rows[r["id"]] = r
     order = [it["id"] for it in jl(Path(SERVER_PACK) / "items.jsonl")]
-    with open(Path(SERVER_BASE) / "out" / "results.jsonl", "w") as f:
+    with open(Path(SERVER_BASE) / OUT_NAME / "results.jsonl", "w") as f:
         for i in order:
             if i in rows:
                 f.write(json.dumps(rows[i]) + "\n")
@@ -389,6 +393,7 @@ def main():
     p.add_argument("--out", default=str(DEF_OUT))
     p.add_argument("--subject", default="science")
     p.add_argument("--push", action="store_true")
+    p.add_argument("--no-gate", action="store_true", help="pack: no gate cases (flagger-only run on another subject)")
     p.add_argument("--prompt", type=int, default=None)
     p.add_argument("--tag", default="tag21", help="pickup: the server queue whose done file to wait for (tag11 was the first run)")
     a = p.parse_args()
