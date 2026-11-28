@@ -933,7 +933,9 @@ def decide_v(r, pq, v, own, tri=None, passed=None):
             seen = {" ".join(rd) for rd in [[w["w"] for w in ws]]} | \
                 {" ".join(w["reads"].get(lb, "") for w in ws) for lb in READERS if all(lb in w.get("reads", {}) for w in ws)} | \
                 {" ".join(a) for a in zip(*[(w.get("alts") or []) for w in ws])}
-            if pr not in seen:
+            # a second, independent page read (OCRia-1, 28 Nov 2026: "printed2") that reads the same spelling at the same
+            # word settles it, as two readers would
+            if pr not in seen and nw(c.get("printed2")) != nw(pr):
                 held[n] = "spelling_unsure (the page read matches no reader: a second page read)"
                 continue
             wrong = pr
