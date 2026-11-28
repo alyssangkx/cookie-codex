@@ -1137,6 +1137,26 @@ def picture_no_question(rows) -> list:
     return [r["id"] for r in rows if r.get("subject") in ("science", "maths") and r.get("crops") and no_question(r["stem"])]
 
 
+FIG_REF = re.compile(r"\b(the (figure|diagram|graph|chart|table|picture|grid|set-?up|pie chart|bar graph|line graph)\b"
+                     r"|shown (below|above|in)\b|as shown\b|(figure|diagram|graph|chart|picture|table) (below|above)\b)", re.I)
+
+
+def figure_missing(rows) -> list:
+    """Ids of maths/science rows with no picture and no text passage whose stem points to a figure ("the graph", "shown
+    below") or asks for "the missing number in the box" without a single digit: the picture or the numbers were lost, so
+    the question cannot be answered (28 Nov 2026: pp-4d9da93de4, pp-5bb6e388ff were live like this). Pure (selftest)."""
+    out = []
+    for r in rows:
+        if r.get("subject") not in ("science", "maths") or r.get("crops") or (r.get("passage_text") or "").strip():
+            continue
+        s = r.get("stem") or ""
+        if "<table" in s or "|" in s:
+            continue
+        if FIG_REF.search(s) or (re.search(r"in the box", s, re.I) and not re.search(r"\d", s)):
+            out.append(r["id"])
+    return out
+
+
 def _pn(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
@@ -1725,6 +1745,12 @@ def selftest():
     assert restore_question("Pam lost the ring and later died of sorrow.", "1. Pam lost the ring and later died of sorrow.\nWhy dled Pam?\n(1) a", ["a"])[0].endswith("\nWhy died Pam?")  # an OCR l for i is mended to the stem's spelling
     assert no_question("The table shows the number of pens.") and not no_question("Which leg was the fastest?")
     assert not no_question("The sum is 8 + ") and not no_question("Study the diagram.")
+    fmr = [{"id": "a", "subject": "maths", "crops": [], "stem": "What is the missing number in the box?"},
+           {"id": "b", "subject": "maths", "crops": [], "stem": "20 : 24 = □ : 42 What is the missing number in the box?"},
+           {"id": "c", "subject": "science", "crops": [], "stem": "The graph below shows the height of a plant."},
+           {"id": "d", "subject": "science", "crops": ["c.png"], "stem": "The graph below shows the height of a plant."},
+           {"id": "e", "subject": "maths", "crops": [], "stem": "There are 80 oranges in a box. How many are rotten?"}]
+    assert figure_missing(fmr) == ["a", "c"], figure_missing(fmr)
     assert picture_no_question([{"id": "pp-x", "subject": "science", "crops": ["c.png"], "stem": "The graph shows heights."},
                                 {"id": "pp-y", "subject": "science", "crops": [], "stem": "The graph shows heights."},
                                 {"id": "pp-z", "subject": "maths", "crops": ["c.png"], "stem": "Which is more?"}]) == ["pp-x"]
@@ -2454,6 +2480,10 @@ def upload(a):
     co = editing_case_only(rows)
     if co:
         sys.exit(f"FAIL {len(co)} Editing rows only change the printed word's case, which the site cannot mark: {', '.join(co[:8])}")
+    fm = figure_missing(rows)
+    if fm:
+        sys.exit(f"FAIL {len(fm)} rows point to a figure or a box of numbers but have no picture (cannot be answered): "
+                 f"{', '.join(fm[:8])}: hold them")
     pq = picture_no_question(rows)
     if pq:
         print(f"WARN {len(pq)} picture questions have no question sentence in the stem (the page reader dropped it and the OCR "
